@@ -1,0 +1,540 @@
+{
+  "module_id": "mechanical_step_c",
+  "declarations": [
+    {
+      "id": "policy.common_external_step_signature_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "one_exact_bound_external_primitive_has_one_registered_producer"
+      ],
+      "applicability": [
+        "common_step_dispatch"
+      ],
+      "invariants": [
+        "no_inferred_mode",
+        "no_second_tick_or_reaction",
+        "no_endpoint_reconstruction",
+        "no_action_release"
+      ],
+      "falsifiers": [
+        "signature_or_identity_mismatch",
+        "incomplete_event_closure"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "common.step.guarded_transport",
+        "common.step.queued_alignment_cascade",
+        "common.step.rigid_edit_profile_d",
+        "common.step.unsupported"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.common_step.rigid_edit_profile_d",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "common.step.rigid_edit_profile_d"},
+            {"field": "operation_ref", "operator": "equals", "expected": "mechanics.editable_configuration_graph.rigid_edit_external_primitive"},
+            {"field": "mode", "operator": "equals", "expected": "STEP"},
+            {"field": "expected_return_type", "operator": "equals", "expected": "yf_arc3_v5.d_mechanical_result.v1"},
+            {"field": "d_profile_present", "operator": "equals", "expected": true},
+            {"field": "d_rigid_projection_bound", "operator": "equals", "expected": true},
+            {"field": "provider_identity_equal", "operator": "equals", "expected": true},
+            {"field": "parent_provenance_equal", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {"applicable": true, "case_ref": "common.step.rigid_edit_profile_d"}
+        },
+        {
+          "id": "projection.policy.common_external_step_signature_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "common.step.guarded_transport"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "equals",
+              "expected": "mechanics.guarded_transport"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.guarded_transport.external_primitive"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "STEP"
+            },
+            {
+              "field": "expected_return_type",
+              "operator": "equals",
+              "expected": "MechanicalResultB"
+            },
+            {
+              "field": "provider_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "provider_identity_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_provenance_equal",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "common.step.guarded_transport"
+          }
+        },
+        {
+          "id": "projection.policy.common_external_step_signature_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "common.step.queued_alignment_cascade"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "equals",
+              "expected": "mechanics.queued_alignment_cascade"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.queued_alignment_cascade.external_primitive"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "STEP"
+            },
+            {
+              "field": "expected_return_type",
+              "operator": "equals",
+              "expected": "MechanicalResultB"
+            },
+            {
+              "field": "provider_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "provider_identity_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_provenance_equal",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "common.step.queued_alignment_cascade"
+          }
+        },
+        {
+          "id": "projection.policy.common_external_step_signature_c.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "common.step.unsupported"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "common.step.unsupported"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.common_step.rigid_edit_profile_d",
+          "all_conditions": [{"field": "case_ref", "operator": "equals", "expected": "common.step.rigid_edit_profile_d"}],
+          "reason_ref": "reason.exact_step_identity_and_ownership"
+        },
+        {
+          "id": "tier.policy.common_external_step_signature_c.0",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "common.step.guarded_transport"
+            }
+          ],
+          "reason_ref": "reason.exact_step_identity_and_ownership"
+        },
+        {
+          "id": "tier.policy.common_external_step_signature_c.1",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "common.step.queued_alignment_cascade"
+            }
+          ],
+          "reason_ref": "reason.exact_step_identity_and_ownership"
+        },
+        {
+          "id": "tier.policy.common_external_step_signature_c.2",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "common.step.unsupported"
+            }
+          ],
+          "reason_ref": "reason.exact_step_identity_and_ownership"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.common_step_equivalence_is_not_producer_authority",
+      "reason_refs": [
+        "reason.exact_step_identity_and_ownership"
+      ]
+    },
+    {
+      "id": "policy.common_external_step_return_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "one_exact_bound_external_primitive_has_one_registered_producer"
+      ],
+      "applicability": [
+        "common_step_dispatch"
+      ],
+      "invariants": [
+        "no_inferred_mode",
+        "no_second_tick_or_reaction",
+        "no_endpoint_reconstruction",
+        "no_action_release"
+      ],
+      "falsifiers": [
+        "signature_or_identity_mismatch",
+        "incomplete_event_closure"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "step.return.signature",
+        "step.return.identity",
+        "step.return.contradiction",
+        "step.return.budget",
+        "step.return.unsupported",
+        "step.return.incomplete",
+        "step.return.found",
+        "step.return.needs_model"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.common_external_step_return_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "step.return.signature"
+            },
+            {
+              "field": "unsupported_signature",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "step.return.signature"
+          }
+        },
+        {
+          "id": "projection.policy.common_external_step_return_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "step.return.identity"
+            },
+            {
+              "field": "identity_equal",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "step.return.identity"
+          }
+        },
+        {
+          "id": "projection.policy.common_external_step_return_c.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "step.return.contradiction"
+            },
+            {
+              "field": "native_status",
+              "operator": "equals",
+              "expected": "MODEL_CONTRADICTION"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "step.return.contradiction"
+          }
+        },
+        {
+          "id": "projection.policy.common_external_step_return_c.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "step.return.budget"
+            },
+            {
+              "field": "native_status",
+              "operator": "equals",
+              "expected": "BUDGET_REACHED"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "step.return.budget"
+          }
+        },
+        {
+          "id": "projection.policy.common_external_step_return_c.4",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "step.return.unsupported"
+            },
+            {
+              "field": "native_status",
+              "operator": "equals",
+              "expected": "NOT_APPLICABLE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "step.return.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.common_external_step_return_c.5",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "step.return.incomplete"
+            },
+            {
+              "field": "native_status",
+              "operator": "equals",
+              "expected": "FOUND"
+            },
+            {
+              "field": "closure_complete",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "step.return.incomplete"
+          }
+        },
+        {
+          "id": "projection.policy.common_external_step_return_c.6",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "step.return.found"
+            },
+            {
+              "field": "identity_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_status",
+              "operator": "equals",
+              "expected": "FOUND"
+            },
+            {
+              "field": "closure_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "packet_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "step.return.found"
+          }
+        },
+        {
+          "id": "projection.policy.common_external_step_return_c.7",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "step.return.needs_model"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "step.return.needs_model"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.common_external_step_return_c.0",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "step.return.signature"
+            }
+          ],
+          "reason_ref": "reason.exact_step_identity_and_ownership"
+        },
+        {
+          "id": "tier.policy.common_external_step_return_c.1",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "step.return.identity"
+            }
+          ],
+          "reason_ref": "reason.exact_step_identity_and_ownership"
+        },
+        {
+          "id": "tier.policy.common_external_step_return_c.2",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "step.return.contradiction"
+            }
+          ],
+          "reason_ref": "reason.exact_step_identity_and_ownership"
+        },
+        {
+          "id": "tier.policy.common_external_step_return_c.3",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "step.return.budget"
+            }
+          ],
+          "reason_ref": "reason.exact_step_identity_and_ownership"
+        },
+        {
+          "id": "tier.policy.common_external_step_return_c.4",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "step.return.unsupported"
+            }
+          ],
+          "reason_ref": "reason.exact_step_identity_and_ownership"
+        },
+        {
+          "id": "tier.policy.common_external_step_return_c.5",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "step.return.incomplete"
+            }
+          ],
+          "reason_ref": "reason.exact_step_identity_and_ownership"
+        },
+        {
+          "id": "tier.policy.common_external_step_return_c.6",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "step.return.found"
+            }
+          ],
+          "reason_ref": "reason.exact_step_identity_and_ownership"
+        },
+        {
+          "id": "tier.policy.common_external_step_return_c.7",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "step.return.needs_model"
+            }
+          ],
+          "reason_ref": "reason.exact_step_identity_and_ownership"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.common_step_equivalence_is_not_producer_authority",
+      "reason_refs": [
+        "reason.exact_step_identity_and_ownership"
+      ]
+    }
+  ]
+}

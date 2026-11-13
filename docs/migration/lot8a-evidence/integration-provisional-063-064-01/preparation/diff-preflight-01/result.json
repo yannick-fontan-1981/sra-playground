@@ -1,0 +1,15 @@
+{
+  "schema": "lot8a.composition-diff-preflight.v1",
+  "observedAt": "2026-11-11T19:23:37.611934+00:00",
+  "command": [
+    "git",
+    "diff",
+    "--check",
+    "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+    "--"
+  ],
+  "exitCode": 2,
+  "stdout": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/contract/motif-delta-on-prepared6b.patch:714: trailing whitespace.\n+ \ndocs/migration/lot8a-evidence/integration-provisional-063-064-01/contract/motif-delta-on-prepared6b.patch:740: trailing whitespace.\n+ \n",
+  "stderr": "",
+  "qualification": "Preparatory full candidate delta check against immutableprepared6B; no final acceptance claimed"
+}

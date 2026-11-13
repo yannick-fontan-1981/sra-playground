@@ -1,0 +1,115 @@
+
+/** Validate emitted records; exhaustive graph traversal belongs to the pinned qualifier. */
+export function validateCommonValueAttribution(attribution, receipts, fixture) {
+  const comparison = 'exact_except_attributed_trace_envelope_created';
+  const sources = ['src/logos-engine/v6-reasoning-memory.ts', 'src/logos-engine/v6-native-authority.ts'];
+  const roles = ['baseline', 'candidate'];
+  const keys = (value, expected) => {
+    assert.ok(value && typeof value === 'object' && !Array.isArray(value), 'Expected an attribution object');
+    assert.deepEqual(Object.keys(value).sort(), [...expected].sort());
+  };
+  const integer = (value, minimum = 0) => Number.isSafeInteger(value) && value >= minimum;
+  const millis = value => {
+    assert.equal(typeof value, 'string');
+    const result = Date.parse(value);
+    assert.ok(integer(result)); assert.equal(new Date(result).toISOString(), value);
+    return result;
+  };
+  const fingerprint = record => {
+    keys(record, ['path', 'bytes', 'sha256']); assert.equal(typeof record.path, 'string'); assert.ok(record.path.length > 0);
+    assert.ok(integer(record.bytes)); assert.equal(typeof record.sha256, 'string'); assert.match(record.sha256, /^[0-9a-f]{64}$/);
+  };
+  const same = (a, b) => { try { assert.deepEqual(a, b); return true; } catch { return false; } };
+  assert.equal(attribution.schema, 'logos-engine.lot6b-owner-cost-structural-attribution.v1');
+  assert.equal(attribution.status, 'qualified_functional_structure'); assert.deepEqual(attribution.failures, []);
+  keys(receipts, roles); keys(fixture.captures, roles); assert.deepEqual(attribution.nativeDigests, fixture.nativeDigests);
+  const policy = attribution.commonValuePolicy;
+  keys(policy, ['comparison', 'permittedMetadataDifference', 'identityValueAttributions',
+    'unattributedDifferencesAllowed', 'traceCreatedAttribution']);
+  const { traceCreatedAttribution: temporal, ...fixedPolicy } = policy;
+  assert.deepEqual(fixedPolicy, { comparison, permittedMetadataDifference: 'origin.source_digest',
+    identityValueAttributions: [], unattributedDifferencesAllowed: 0 });
+  keys(temporal, ['nodeComponent', 'path', 'sourceClock', 'sourceFiles', 'captureWindows', 'stabilityKey', 'records', 'allOtherFieldsExact']);
+  const { captureWindows, records, ...fixedTemporal } = temporal;
+  assert.deepEqual(fixedTemporal, { nodeComponent: 'native_reasoning_trace', path: '/value/root/members/created/bits',
+    sourceClock: 'Date.now() / 1000', sourceFiles: sources, stabilityKey: ['role', 'sessionId', 'nodeId'], allOtherFieldsExact: true });
+  assert.ok(Array.isArray(attribution.inputs)); attribution.inputs.forEach(fingerprint);
+  assert.equal(new Set(attribution.inputs.map(record => record.path)).size, attribution.inputs.length);
+  fingerprint(attribution.generator);
+  assert.equal(attribution.generator.path, 'docs/migration/lot6b-evidence/qualify-cost-owner-graphs.mjs');
+  assert.ok(attribution.inputs.some(record => same(record, attribution.generator)), 'Qualifier input is unbound');
+  const forms = fixture.forms;
+  assert.deepEqual(forms.map(form => [form.case, form.form]), [['STCK', 'warmup'], ['STCK', 'measured'], ['SMLP', 'warmup'], ['SMLP', 'measured']]);
+  const windows = {}, sessions = {}; let expectedPoints = null;
+  for (const role of roles) {
+    const receipt = receipts[role];
+    assert.equal(receipt.schema, 'logos-engine.lot6b-owner-cost-functional-capture-receipt.v1');
+    assert.equal(receipt.status, 'captured_functional_structure'); assert.equal(receipt.role, role);
+    assert.equal(receipt.nativeDigest, attribution.nativeDigests[role]); assert.deepEqual(receipt.report, fixture.captures[role].report);
+    assert.deepEqual(receipt.generator, fixture.captureTool); assert.deepEqual(receipt.nativeInventoryBefore, receipt.nativeInventoryAfter);
+    assert.equal(receipt.nativeInventoryBefore.digest, receipt.nativeDigest);
+    assert.deepEqual(receipt.inputsBefore, receipt.inputsAfter); assert.deepEqual(receipt.generator, receipt.generatorAfter);
+    for (const key of ['nativeSourceUnchanged', 'inputsUnchanged', 'generatorUnchanged']) assert.equal(receipt[key], true);
+    assert.deepEqual(receipt.failures, []);
+    for (const record of Object.values(fixture.captures[role])) {
+      fingerprint(record); assert.ok(attribution.inputs.some(item => same(record, item)), 'Capture receipt/report is unbound');
+    }
+    for (const path of sources) {
+      const source = attribution.inputs.filter(record => record.path === path);
+      assert.equal(source.length, 1); assert.equal(source[0].sha256, receipt.nativeInventoryBefore.files[path], 'Clock source is unbound');
+    }
+    const startMs = millis(receipt.startedAt), finishMs = millis(receipt.finishedAt);
+    assert.ok(startMs <= finishMs); windows[role] = { startedAt: receipt.startedAt, finishedAt: receipt.finishedAt, startMs, finishMs };
+    assert.ok(integer(receipt.sessionCount, 1)); assert.equal(receipt.sessionCount, receipt.sessions.length);
+    assert.equal(receipt.sessions.length, forms.length);
+    const sessionMap = new Map(), pointKeys = [];
+    receipt.sessions.forEach((session, index) => {
+      const form = forms[index], sid = 'lot6b-owner-cost-' + form.case.toLowerCase() + '-' + form.form;
+      assert.deepEqual([session.case, session.form, session.sessionId], [form.case, form.form, sid]);
+      assert.equal(session.status, 'captured_functional_structure'); assert.ok(!sessionMap.has(sid));
+      assert.ok(integer(session.captures, 1) && integer(session.terminalInspections));
+      assert.equal(session.captures, session.shape.requests.length); assert.equal(session.terminalInspections, session.shape.inspection.length);
+      assert.deepEqual(session.shape, form[role]); sessionMap.set(sid, session);
+      for (let pointIndex = 0; pointIndex < session.captures + session.terminalInspections; pointIndex++)
+        pointKeys.push([form.case, form.form, pointIndex]);
+    });
+    sessions[role] = sessionMap; if (expectedPoints === null) expectedPoints = pointKeys;
+    assert.deepEqual(pointKeys, expectedPoints);
+  }
+  assert.deepEqual(captureWindows, windows, 'Policy windows must match bound capture receipts');
+  assert.ok(Array.isArray(attribution.points) && attribution.points.length > 0);
+  assert.deepEqual(attribution.points.map(point => [point.case, point.form, point.pointIndex]), expectedPoints);
+  assert.deepEqual(attribution.commonValueCoverage, attribution.points.map(point => {
+    assert.ok(integer(point.pointIndex) && integer(point.baselineNodeCount, 1) && integer(point.baselineDeltaCount));
+    return { case: point.case, form: point.form, pointIndex: point.pointIndex, commonNodesCompared: point.baselineNodeCount,
+      commonDeltasCompared: point.baselineDeltaCount, comparison, unattributedDifferences: 0 };
+  }));
+  assert.ok(Array.isArray(records) && records.length > 0);
+  const seen = new Set(), pairs = new Map(), represented = new Set();
+  for (const record of records) {
+    keys(record, ['role', 'sessionId', 'nodeId', 'bits', 'seconds', 'milliseconds', 'createdAt', 'captureStartedAt', 'captureFinishedAt']);
+    const { role, sessionId, nodeId, bits, seconds, milliseconds } = record;
+    assert.ok(roles.includes(role) && typeof sessionId === 'string' && sessions[role].has(sessionId));
+    assert.equal(typeof nodeId, 'string'); const match = /^reasoning:trace:([1-9][0-9]*)$/.exec(nodeId);
+    assert.ok(match && integer(Number(match[1]), 1));
+    const key = JSON.stringify([role, sessionId, nodeId]), pair = JSON.stringify([sessionId, nodeId]);
+    assert.ok(!seen.has(key), 'Duplicate or unstable role/session/trace'); seen.add(key);
+    represented.add(JSON.stringify([role, sessionId]));
+    if (!pairs.has(pair)) pairs.set(pair, new Set()); pairs.get(pair).add(role);
+    assert.equal(typeof bits, 'string'); assert.match(bits, /^[0-9a-f]{16}$/);
+    const decoded = Buffer.from(bits, 'hex').readDoubleBE(0);
+    assert.ok(typeof seconds === 'number' && Number.isFinite(decoded) && integer(milliseconds));
+    assert.equal(seconds, decoded); assert.equal(seconds, milliseconds / 1000); assert.equal(Math.round(seconds * 1000), milliseconds);
+    const window = windows[role];
+    assert.ok(milliseconds >= window.startMs && milliseconds <= window.finishMs);
+    assert.equal(millis(record.createdAt), milliseconds);
+    assert.equal(record.captureStartedAt, window.startedAt); assert.equal(record.captureFinishedAt, window.finishedAt);
+  }
+  for (const pair of pairs.values()) assert.deepEqual([...pair].sort(), roles);
+  assert.deepEqual([...represented].sort(), roles.flatMap(role => [...sessions[role].keys()].map(sid => JSON.stringify([role, sid]))).sort());
+  // No derived trace-count rule. The pinned qualifier establishes exhaustive
+  // common-node/delta traversal, exact other values and role-bound graph origins,
+  // chains and tickets; this local validator neither reopens nor normalizes them.
+  return true;
+}
+

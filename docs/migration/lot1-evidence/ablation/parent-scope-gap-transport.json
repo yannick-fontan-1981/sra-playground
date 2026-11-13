@@ -1,0 +1,15 @@
+{
+  "schema": "logos-engine.lossless-json-gzip.v1",
+  "original": {
+    "path": "docs/migration/lot1-evidence/ablation/parent-scope-gap.json",
+    "bytes": 1086955,
+    "sha256": "31c8a3f10eb8300ecb617bc6210615296c3850c6a440740f9ac1a3dcd5a1e7c9"
+  },
+  "compressed": {
+    "path": "docs/migration/lot1-evidence/ablation/parent-scope-gap.json.gz",
+    "bytes": 60757,
+    "sha256": "bc112e2b23ff5554f1026a47d9c936cecf43dfc8faa94a4453244382d9c11c75"
+  },
+  "byteIdenticalAfterDecompression": true,
+  "qualification": "Exact gzip transport of the completed immutable component receipt. No proof is regenerated or reinterpreted."
+}

@@ -1,0 +1,292 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "declaredAt": "2026-11-11T17:09:18.776679+00:00",
+  "cases": [
+    {
+      "id": "catr-051",
+      "game": "CATR",
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+        "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6"
+      },
+      "trace": {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+        "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816"
+      }
+    },
+    {
+      "id": "rswp-051",
+      "game": "RSWP",
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+        "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba"
+      },
+      "trace": {
+        "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+        "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755"
+      }
+    },
+    {
+      "id": "fogw-051",
+      "game": "FOGW",
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+        "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c"
+      },
+      "trace": {
+        "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+        "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46"
+      }
+    },
+    {
+      "id": "vois-051",
+      "game": "VOIS",
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+        "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d"
+      },
+      "trace": {
+        "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+        "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d"
+      }
+    },
+    {
+      "id": "conn-050",
+      "game": "CONN",
+      "baseline": {
+        "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+        "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750"
+      },
+      "trace": {
+        "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+        "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102"
+      }
+    },
+    {
+      "id": "mind-051",
+      "game": "MIND",
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+        "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a"
+      },
+      "trace": {
+        "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+        "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c"
+      }
+    },
+    {
+      "id": "weav-051",
+      "game": "WEAV",
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+        "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3"
+      },
+      "trace": {
+        "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+        "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2"
+      }
+    },
+    {
+      "id": "tria-development-4b",
+      "game": "TRIA",
+      "baseline": {
+        "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+        "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe"
+      },
+      "trace": {
+        "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+        "sha256": "916d0f1cb1dcbfd9b7ba7624e7d3d4648a91ae7ef64583288af4711d2a955ac3"
+      }
+    },
+    {
+      "id": "craf-055",
+      "game": "CRAF",
+      "baseline": {
+        "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+        "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2"
+      },
+      "trace": {
+        "path": "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+        "sha256": "cf69ad941e80e17f8d6cd66edc0419a0c6ff7aa8d9bbdaf503cb56a49e8c3f98"
+      }
+    },
+    {
+      "id": "isos-development-4c",
+      "game": "ISOS",
+      "baseline": {
+        "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+        "sha256": "93e59ab1146d4eef7c944a0e1fc0ab7b0d539cc90a074abe424742be011eec37"
+      },
+      "trace": {
+        "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-public-trace.json.gz",
+        "sha256": "5b302279efb140d1c549d9650d434efb38fde0b8bc5809ab072de66159c8c329"
+      }
+    },
+    {
+      "id": "kata-060-self-consistency",
+      "game": "KATA",
+      "baseline": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz",
+        "sha256": "a3318ed5f7d742f63b5923f3e1e46b0d9cfff1d18e767b45c522d61aa354e455"
+      },
+      "trace": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-public-trace.json.gz",
+        "sha256": "c236c95ec0bdcb892a6940940098e4310eb35a6ae11acaf6b74545d09aa22daa"
+      },
+      "comparisonBasis": "fresh_current_native_self_consistency"
+    }
+  ],
+  "passiveOwnerRequirements": [],
+  "inheritedCaseManifest": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/contract/regression-cases-final.json",
+    "bytes": 9035,
+    "sha256": "612786e95a3cd6c98c7a0ccd4bd5e616ff5b54d1de18f7962aae79d50faf4f36"
+  },
+  "publishedProvenance": {
+    "siteVersion": 102,
+    "nativeVersion": "0.62.0",
+    "commit": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464",
+    "nativeDigest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+    "publication": {
+      "path": "docs/migration/lot5c-evidence/recovery/integration-published-10b/site102-publication-readback.json",
+      "bytes": 1389,
+      "sha256": "4fe34cd930c422a4037bbdf6aef77b42a305167cf44059954bef5f20408822a8"
+    },
+    "qualification": "Actual published integration and cost predecessor identity. Historical case baseline and trace pins remain unchanged and are not relabeled as new 0.62 captures."
+  },
+  "strictComparator": {
+    "path": "scripts/compare-v54-regressions.py",
+    "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "bytes": 18166
+  },
+  "strictComparisonCheckNames": [
+    "both runs passed with the same declared game and target",
+    "same production budgets, source reference and opaque game asset provenance",
+    "same complete initial public packet hash and public state",
+    "every archived public packet independently hashes to the v53 baseline",
+    "every archived host-only command equals its prior baseline command",
+    "same commands, complete returned packet hashes, animation lengths and primitive boundaries",
+    "same selected family/group/kind/subquestion, acquired prefix lengths and retained solver scalars",
+    "same retained coordination source/preferred entries and current guard scope",
+    "same historical epoch anchors with session namespace normalized",
+    "same inherited source-series event counts on every sealed prefix",
+    "same common request outcomes and retained caller acquisition counters",
+    "same natural level boundaries and retained-session caller counters",
+    "same final public result and retained-session operation counts",
+    "same retained mechanical-domain assessments",
+    "both source runs remained unchanged and imported no Python agent module",
+    "current replay used the declared complete frozen native source",
+    "current replay identifies the exact host-only baseline and public trace"
+  ],
+  "expectedChecksPerCase": 17,
+  "expectedComparisonChecks": 187,
+  "qualification": "Ten historical rows retain exact baseline and public-trace pins; none is rebased to a newer replay output. KATA remains the eleventh inherited row with its original 0.60 fresh-current-native-self-consistency provenance label, serving as a fixed inherited baseline for 5C. This does not claim that the 10B ten-case fresh campaign included KATA or that a new self-comparison or live contribution was performed. The 187 checks are planned checks, not executed successes.",
+  "supersedesProspectiveScope": {
+    "path": "docs/migration/lot5c-evidence/recovery/coordination/initial-regression-cases.json",
+    "bytes": 8488,
+    "sha256": "92cfe606da9a6d718773d0aa7c94bfa01b617b8a042aee454fe4a5e033943dd4"
+  },
+  "lot5cDeclaredAt": "2026-11-11T17:09:18.776679+00:00",
+  "lot5cSourceScope": {
+    "path": "docs/migration/lot5c-evidence/recovery/integration-published-10b/final-scope-reconciliation.json",
+    "bytes": 25572,
+    "sha256": "d59fefa24a468ac17aa512507a6e4a04b40b6fa2a41f9e3f9fd8d24c9c7e274d"
+  },
+  "historicalInheritedManifestMetadata": {
+    "qualification": "The exact elevencase rows from the freshly source-stable6A declaration are inherited before any follow-up replay or cost: ten unchanged Site95 historical baselines/traces plusKATA actual0.60publicreturns. The inheritedKATArow retains its originalself-consistency label as provenance; for0.61 it is a comparison against the prepared predecessor, whose actualpublication and bytes must be reconciled beforecost. NoLKEYcase or newliveaction. All17originalscopedcomparisons percase retained without exemption; no completeoriginalcallerparity or freshWorkshopgamecontribution claimed.",
+    "manifest": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/contract/regression-cases-final.json",
+      "bytes": 9035,
+      "sha256": "612786e95a3cd6c98c7a0ccd4bd5e616ff5b54d1de18f7962aae79d50faf4f36"
+    },
+    "publishedSite": 101,
+    "publishedSourceCommit": "d75a36f0a99bf6c301034523a3138a64d2f6e744",
+    "schema": "logos-engine.recorded-public-regression-cases.v1",
+    "declaredAt": "2026-11-11T12:29:49.101980+00:00",
+    "inheritedCaseManifest": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/prepared-6a-regression-cases.json",
+      "sha256": "dc84ecc83902ecb71865710220b593df351dc0ca7ae6885561e986a509df7ea1",
+      "bytes": 8422
+    },
+    "inheritedRegressionSummary": {
+      "path": "docs/migration/lot5b-evidence/integrated-final/regressions/regression-summary.json",
+      "sha256": "e1656a5ada566f7ecfaac76c044f7ccd12dad1104a984a91f1fef673c81d74b9"
+    },
+    "publishedProvenance": {
+      "siteVersion": 95,
+      "nativeVersion": "0.58.0",
+      "commit": "3a70463039768f7114edae7d94d7dd33b7f36aa8",
+      "publication": {
+        "path": "docs/migration/lot6a-evidence/publication/published-baseline-site95.json",
+        "sha256": "9cbd902227685d8679d5876cd9ce66fc333044d56d10123c15d9ff011c05a0cb"
+      }
+    },
+    "supersedesProspectiveScope": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/contract/regression-cases.json",
+      "sha256": "71011abbb49ebab20275e8f78e05575b0f417d5a0189df9f32b9e7fe691a3ef4"
+    },
+    "preparedPredecessorSource": {
+      "nativeVersion": "0.60.0",
+      "nativeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+      "publicationVerified": false,
+      "mustReconcileBeforeCost": true
+    },
+    "metadataScope": "Unchanged source metadata retained as history; no prepared or unverified predecessor status is asserted for current 5C."
+  },
+  "declarationOwner": "lot5c",
+  "candidateVersion": "0.63.0",
+  "actualPublishedPredecessor": {
+    "nativeSite": 102,
+    "nativeVersion": "0.62.0",
+    "nativeCommit": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464",
+    "documentarySite": 103,
+    "documentaryCommit": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+    "baselineCheckout": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout",
+    "baselineNativeDigest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+    "publicationVerified": true,
+    "nativePublicationReceipt": {
+      "path": "docs/migration/lot5c-evidence/recovery/integration-published-10b/site102-publication-readback.json",
+      "bytes": 1389,
+      "sha256": "4fe34cd930c422a4037bbdf6aef77b42a305167cf44059954bef5f20408822a8"
+    },
+    "qualification": "Actual native Site 102 is the publication/source predecessor. Documentary Site 103 identity is retained from the current validation contract; no current prepared-0.60 status is implied."
+  },
+  "passiveOwnerRequirementQualification": "The generic passive-owner list is intentionally empty. The released replay harness does not retain a dedicated Binding prefix owner object, and its generic checker requires prefixProperty/stateNode/sourceState/nativeCheckpoint/transitions. Empty generic requirements do not establish Binding acquisition or owner presence on these eleven replays. Adding a Binding requirement without an explicit recorder and compatible checker would fail ownerPresent, not verify real acquisitions. Binding acquisition is a separate required fresh common proof under the declared 5C validation contract.",
+  "bindingAcquisitionProofRequirement": {
+    "status": "required_before_delivery_not_executed_by_this_manifest",
+    "contractPath": "docs/migration/lot5c-evidence/recovery/integrated-final-01/validation-contract.json",
+    "testModule": "tests/v6-object-binding-common.test.ts",
+    "commonEvidenceDirectory": "docs/migration/lot5c-evidence/recovery/common/common-final-01",
+    "nativeTests": 7,
+    "declaredScenarios": 8,
+    "originalExportAndReviewCases": [
+      "positive",
+      "refutation",
+      "ambiguity",
+      "boundary"
+    ],
+    "qualification": "Fresh common selected/passive acquisition and bounded-acquisition evidence, with the independent original comparisons, remains required. The eleven recorded replays retain the unchanged seventeen historical comparisons and do not by themselves prove per-return Binding ownership. Any future replay-specific Binding recorder/checker requirement must be declared and frozen before execution."
+  },
+  "metadataReconciliation": {
+    "reviewedAt": "2026-11-11T17:13:37.387152+00:00",
+    "priorDraft": {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/recorded-regression-cases.json",
+      "bytes": 9222,
+      "sha256": "b68b06b850e257b2dd63a2fc4fc3a30cd7a161a3d312b7540f39455435c57dea"
+    },
+    "changes": [
+      "Set top-level declaredAt to the actual 5C draft declaration time while preserving the published lot 7 time as historical metadata.",
+      "Point inheritedCaseManifest to the exact published lot 7 eleven-case declaration; retain its older upstream metadata only as history.",
+      "Replace misleading current Site95/prepared0.60 metadata with the actual native Site102/source1019d2e predecessor; retain Site103 documentary identity from the declared contract.",
+      "Point supersedesProspectiveScope to the initial 5C recovery declaration.",
+      "Preserve the empty generic passive-owner list with an explicit limitation and the separately required fresh Binding common proof."
+    ],
+    "caseRowsChanged": false,
+    "baselineOrTracePinsChanged": false,
+    "strictComparatorChanged": false,
+    "historicalChecksChanged": false,
+    "expectedChecksPerCase": 17,
+    "expectedComparisonChecks": 187,
+    "executionPerformed": false
+  }
+}

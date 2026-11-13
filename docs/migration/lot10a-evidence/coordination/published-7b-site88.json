@@ -1,0 +1,58 @@
+{
+  "schema": "logos-engine.published-predecessor-observation.v1",
+  "recordedAt": "2026-11-10T23:59:15.066Z",
+  "status": "publication_verified",
+  "lot": "7B",
+  "version": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_f28e4f7179d08191bed4395ca79b6366",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "version_number": 88,
+    "source": {
+      "commit_sha": "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000000e68820eb734f0e08fd0016b",
+      "content_hash": "sha256:edabfe0902bbbe8457cfaa6cef49877c1b0c9400e6f945f053971d69bc7232a8",
+      "size_bytes": 29859840,
+      "file_count": 75
+    },
+    "deployment_id": "appgdep_6af3aeff18f08191963da329ba10b5a2"
+  },
+  "deployment": {
+    "id": "appgdep_6af3aeff18f08191963da329ba10b5a2",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "title": "SRA Playground",
+    "version_id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_f28e4f7179d08191bed4395ca79b6366",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6adbc388d79081918581b93b919d7258",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-10T23:56:02.578047+00:00"
+  },
+  "access": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "latest_version_number": 88,
+    "current_live_url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "current_user_role": "owner",
+    "access_mode": "custom",
+    "access_policy": {
+      "access_mode": "custom",
+      "revision": 3,
+      "updated_at": "2026-11-02T14:06:30.480596+00:00",
+      "allowed_user_count": 1,
+      "allowed_roles": [
+        "owner"
+      ],
+      "allowed_editor_count": 0,
+      "editor_roles": [],
+      "allowed_group_count": 0,
+      "external_visitor_count": 0
+    }
+  },
+  "qualification": "Direct Sites version, deployment and access reads identify the actually published predecessor. Native, source/test, build and execution-input identity is reconciled separately against the retained prepared source; this receipt alone does not reuse the 10A functional evidence."
+}

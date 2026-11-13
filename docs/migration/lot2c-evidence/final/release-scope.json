@@ -1,0 +1,23 @@
+{
+  "schema": "logos-engine.native-delta-test-scope.v1",
+  "scope": "Lot2C method and adapter acquisition/continuation, managed projection/search, entry guards and old-state restoration; affected morphology, control, target, inventory, caller, authority and service contracts. Explicit delta, not full historical suite.",
+  "testFiles": [
+    "tests/v6-morphology-entry.test.ts",
+    "tests/v6-morphology-managed.test.ts",
+    "tests/v6-morphology-methods-reference.test.ts",
+    "tests/v6-morphology-measurements.test.ts",
+    "tests/v6-morphology-family.test.ts",
+    "tests/v6-contextual-translation.test.ts",
+    "tests/v6-control-attention-reference.test.ts",
+    "tests/v6-control-attention-kernel.test.ts",
+    "tests/v6-drm-projector.test.ts",
+    "tests/v6-motion-contrast.test.ts",
+    "tests/v6-target-binding.test.ts",
+    "tests/v6-inventory-kernel.test.ts",
+    "tests/v6-inventory-helpers-reference.test.ts",
+    "tests/v6-native-caller.test.ts",
+    "tests/v6-native-authority.test.ts",
+    "tests/v6-caller-integration.test.ts",
+    "tests/v6-agent.test.ts"
+  ]
+}

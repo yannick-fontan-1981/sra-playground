@@ -1,0 +1,10 @@
+{
+  "schema": "logos-engine.lot1.campaign-selection.v1",
+  "selectedAt": "2026-11-09T16:41:18.402941+00:00",
+  "blockedGameDeadline": "2026-11-09T17:21:18.402941+00:00",
+  "game": "LIFE",
+  "targetLevels": 3,
+  "baseCommit": "f7b9a56af5488c8d4cebd5d912262a541f4fe403",
+  "reason": "The existing public material trajectory contains selected pose dependencies, real return acquisition, conditional continuation and a natural boundary. This lot requires one relevant integrated campaign, not a newly solved game per entry.",
+  "qualification": "The clock is immutable across retries of this selected game. Existing successful archived packets are used in separate contract tests, never supplied to the live agent."
+}

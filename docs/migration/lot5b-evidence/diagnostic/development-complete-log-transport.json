@@ -1,0 +1,356 @@
+{
+  "schema": "logos-engine.development-log-transport.v1",
+  "recordedAt": "2026-11-11T01:01:09.013302+00:00",
+  "status": "passed",
+  "files": [
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/source-oracle-export-attempt-04.log",
+        "bytes": 319,
+        "sha256": "accf46efa94a86ed84b655918ed69cf51a976e131c964958f2c2c97adb283dfb"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/source-oracle-export-attempt-04.log.gz",
+        "bytes": 240,
+        "sha256": "805d037e58765285259faa3667123e1b256e9350d29b29a7070102a6771c44fb"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/common-positive-01.log",
+        "bytes": 1733,
+        "sha256": "9fb978be7e30b59a07ba4c504bc3a01f6e3a8e8af81e356e59ca5b9ee63e3d17"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/common-positive-01.log.gz",
+        "bytes": 483,
+        "sha256": "9cdc096f758de8391673c6de5e120c6d2738247ebb4492289f629081bcf37ed6"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/typecheck-02.log",
+        "bytes": 149,
+        "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/typecheck-02.log.gz",
+        "bytes": 141,
+        "sha256": "0d2cbbee31ca5839df68f3a5ae10b6102ed35a65bd129facd4509c36a18a564d"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/post-site91-typecheck.log",
+        "bytes": 149,
+        "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/post-site91-typecheck.log.gz",
+        "bytes": 141,
+        "sha256": "0d2cbbee31ca5839df68f3a5ae10b6102ed35a65bd129facd4509c36a18a564d"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/kernel-tests-01.log",
+        "bytes": 571,
+        "sha256": "d839c395bc3b2dcc4f54a0d0c2235cd29a07591a218fe29b649b8127ca3a2b21"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/kernel-tests-01.log.gz",
+        "bytes": 359,
+        "sha256": "409b412a861edd0812ca8ab51769ec4e590f151787a8e0de77dad945c05332cf"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/source-oracle-export-attempt-01.log",
+        "bytes": 1126,
+        "sha256": "da8445dbe3bde0d8a1ec9d122d9753861c1ad480ed419dde90b7f56bbe825db2"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/source-oracle-export-attempt-01.log.gz",
+        "bytes": 361,
+        "sha256": "4d4a268b78ec250b644c2ab20aceff706a04105fac62ebf5d46c3d74a06b970e"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/typecheck-01.log",
+        "bytes": 1472,
+        "sha256": "d943bd849b015134c4cc82bde531fdf4a431eee457acc9c7c0f86657e879af09"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/typecheck-01.log.gz",
+        "bytes": 440,
+        "sha256": "2895da6a24b0d2e7271f924801b9c2a090a6fd39ade18d8e2a7992d409137e58"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/native-extension-long-path-01.log",
+        "bytes": 215,
+        "sha256": "fe95a9b17e8d2e83a4e98730b04c79ea2760de85eb077c50ea2ef21ffd238fdd"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/native-extension-long-path-01.log.gz",
+        "bytes": 173,
+        "sha256": "1fa212c5686dbf79dbcefdb298b3dec8396fa818dde3f2d8316b076051dda32a"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/source-oracle-export-attempt-02.log",
+        "bytes": 1251,
+        "sha256": "a25406ad69d9a8c46e5393751afc01a8e15a5213285e8917514fdad7d9b85289"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/source-oracle-export-attempt-02.log.gz",
+        "bytes": 436,
+        "sha256": "c31efa7fc4dea6d4ae1d3f284473112fae53954d4a0430ea61793e49263b67f6"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/native-extension-tests-01.log",
+        "bytes": 53048,
+        "sha256": "e85db0749a916b452de93b8efe5345cd91d9fd6b524602af0c4e6604e9c8a47a"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/native-extension-tests-01.log.gz",
+        "bytes": 3307,
+        "sha256": "03b68b71ad1574049c9bd8c50eed9d04d316686b4a25ef905893f9252ca741a6"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/source-oracle-export-attempt-03.log",
+        "bytes": 319,
+        "sha256": "d8fb29fd2febd9d23ecda95276f8f1a3ebcebd09e036da5d348b165f1fa056c9"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/source-oracle-export-attempt-03.log.gz",
+        "bytes": 239,
+        "sha256": "dae8140d6c38146a48b5ed772613f9c2fdcf0a7aa8f2e12fc7d0757c422ae0a6"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/common-positive-02.log",
+        "bytes": 2023,
+        "sha256": "575a8071ae459683d79ba6cc240286a702f56022017202f04474c155fb5ddb5b"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/common-positive-02.log.gz",
+        "bytes": 284,
+        "sha256": "8c92cf950174d682edc08745f8b48b60f245b38f9ee6069e69e99303b4ff474c"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/native-extension-tests-02.log",
+        "bytes": 2758,
+        "sha256": "d6273e914d8bb5b05e8694202641d84b26472facf5baad2a01cd90a0d97f84ba"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/native-extension-tests-02.log.gz",
+        "bytes": 963,
+        "sha256": "397d6272a4fbaeacd803319bc6a421341a8eb4b7cd76a9d753953190be09ea2f"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/common-stock-01.log",
+        "bytes": 2652,
+        "sha256": "3d2845bb8453e4ad37fc1b0a5ddb4ddea1ea7802c134b15784f47d01194e84c4"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/common-stock-01.log.gz",
+        "bytes": 505,
+        "sha256": "3b7641ad7004a6025d6c141e3a861edb0059adc74de9acde304905fa418ae9f1"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/common-negative-01.log",
+        "bytes": 1886,
+        "sha256": "f711f48ee47ae4c09c5aa064cfe47e88cad43c81c8c2703b7a7bd2dd6e12d807"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/common-negative-01.log.gz",
+        "bytes": 274,
+        "sha256": "eae0ba49256a8c902e7f3407314ff2f9a85f7ff9d372b7acba82f7678148af39"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/entry-audit-01.log",
+        "bytes": 293,
+        "sha256": "0ffce586a3ae9be82bb9e388104e111e91ba41cd372a656dfc53d20d0c9925dd"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/entry-audit-01.log.gz",
+        "bytes": 179,
+        "sha256": "341279a70156f9cad4cd6e564a5b6e2322ecfe4934f3b5b296cb733a24a41720"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/common-stock-03.log",
+        "bytes": 2652,
+        "sha256": "093848feb5b1b20ce26f74ccd70c96347788f122288ea973e810c69244a8809b"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/common-stock-03.log.gz",
+        "bytes": 505,
+        "sha256": "01d62dab3c8b82a1b186b62e6e978c1a9cc887cef1d924209a32e8ef5fc1854a"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/native-extension-tests-03.log",
+        "bytes": 1233,
+        "sha256": "f27a4344de03c6ccdc9fc26deb1e09e835e257517b0ef81044c2a8de3be1d48a"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/native-extension-tests-03.log.gz",
+        "bytes": 700,
+        "sha256": "0b081b62bca7ef4e033480844ecaa58bb592e69459600fc8b56467cbe2c442ab"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/addressed-reference-tests-attempt-02.log",
+        "bytes": 3657,
+        "sha256": "d042286ba39aa9075afd05296a4b684367c76d0d4cb1bb0ae006fef2a440c601"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/addressed-reference-tests-attempt-02.log.gz",
+        "bytes": 1010,
+        "sha256": "090c0aa9e4ae01235e607146cc5b1618bf7b6589a1d365c967ff23c6599ee17c"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/addressed-reference-tests-attempt-01.log",
+        "bytes": 20038,
+        "sha256": "afe05ec9a7402d25149977c808518b7329897fa828b6c18e65b7fc7e505ac2ae"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/addressed-reference-tests-attempt-01.log.gz",
+        "bytes": 1680,
+        "sha256": "e34e20cde94498e5fae31087c56756e32cd93acf1abab9dada3108a1f2d9e0d0"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/common-stock-02.log",
+        "bytes": 404,
+        "sha256": "7cd0d3c509f9c92c06cd56e34850e9ba5f427a4c772c0c77fe1d82fe467dab6a"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/diagnostic/common-stock-02.log.gz",
+        "bytes": 265,
+        "sha256": "98d52d3b6f67a68184eef2df6fd4ff94c588cd750798b469cc76d632a29fd95e"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/development/common-positive-02/original-export.log",
+        "bytes": 343,
+        "sha256": "77c7f6d3cfff113db4e4ca4d6ee721ab15e7096ba8d9b9b0f069b87e65c2bb89"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/development/common-positive-02/original-export.log.gz",
+        "bytes": 262,
+        "sha256": "754158aab9ed7cab60e2c5e32dc2d390f547cec4abe622fa0e9fae4efa7be695"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/development/common-positive-02/original-comparison.log",
+        "bytes": 130,
+        "sha256": "366a2f7cf95ab665d25ebd4742516f33aeec6edf8a2e1413aa4007f048abe8f3"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/development/common-positive-02/original-comparison.log.gz",
+        "bytes": 119,
+        "sha256": "b329da3546399784fb55fd54e71c04f04c5ee256506fd92ae01b8c6f577222f4"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/development/common-stock-03/original-preservation-diagnostic.log",
+        "bytes": 276,
+        "sha256": "eed3e3a911703de48f07e4344abbe435b82f768da0be8b1201fe55410dd4795d"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/development/common-stock-03/original-preservation-diagnostic.log.gz",
+        "bytes": 212,
+        "sha256": "362ddf4bd2391d1ac85c1201662f1a8a752f6ecdbf731fcc74614c6223971d18"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/development/common-negative-01/original-export.log",
+        "bytes": 343,
+        "sha256": "e9871fa156862bfdd2166c0911f309a66e1196ec8968bdb8acce5cd81ee58da7"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/development/common-negative-01/original-export.log.gz",
+        "bytes": 261,
+        "sha256": "ba426cda8f5f887e35ddda7810913bd33bba05e017569def7f1e21b8b9688296"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/development/common-negative-01/original-comparison.log",
+        "bytes": 130,
+        "sha256": "50fc79499dbdcda832974a6d5d218ec68289ac6f629fe642c61af29bcd34c320"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/development/common-negative-01/original-comparison.log.gz",
+        "bytes": 117,
+        "sha256": "45eaee78341338c41731dd2c36ef32a95e0c0703e19126c5363ababba440924f"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/development/common-stock-01/original-export.log",
+        "bytes": 341,
+        "sha256": "85a477a1a81eec5eaec435092d66a53463c3f1ddef94463a8d3b4408665dcfe5"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/development/common-stock-01/original-export.log.gz",
+        "bytes": 261,
+        "sha256": "1a452dc4100c6458bb6e72f1153632ac8a9053e7a2f70c783a95bdea68d97519"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/development/common-stock-01/partial-original-comparison.log",
+        "bytes": 195,
+        "sha256": "0b2294e31e79f18c8e8009d1bb0dec99f906a3b8fff088888b64bbb23d6859bb"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/development/common-stock-01/partial-original-comparison.log.gz",
+        "bytes": 162,
+        "sha256": "57d290a7e74e4326f05c0effe275ac3090e27ad4f4054e18063616ff6881473a"
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot5b-evidence/development/field-stock-contract-review/field-stock-tests-initial.log",
+        "bytes": 1461,
+        "sha256": "75c7efecae0ab7b02c8c5071c55e5cf102e49d20b3bc0ff04230080016189580"
+      },
+      "gzip": {
+        "path": "docs/migration/lot5b-evidence/development/field-stock-contract-review/field-stock-tests-initial.log.gz",
+        "bytes": 767,
+        "sha256": "3b7b5fed2fcc6fb089797dfec946744da73454c67d3446039ed0eeb3b921183b"
+      }
+    }
+  ],
+  "qualification": "All completed5B development logs preserved byte-for-byte in gzip. No process is writing these logs; no output regenerated."
+}

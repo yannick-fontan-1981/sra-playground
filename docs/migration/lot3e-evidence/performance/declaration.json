@@ -1,0 +1,106 @@
+{
+  "schema": "logos-engine.native-cost-protocol-declaration.v2",
+  "recordedAt": "2026-11-10T12:40:45.295029+00:00",
+  "status": "declared_before_official_window",
+  "protocol": {
+    "path": "docs/migration/lot3e-evidence/performance/protocol.md",
+    "sha256": "e9525d29ff41ae5105d456ce69d589168f4c6e5befcf2b2215be95361fd67b39",
+    "bytes": 9795
+  },
+  "cases": {
+    "path": "docs/migration/lot3e-evidence/performance/cases.json",
+    "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+    "bytes": 1451
+  },
+  "diagnosticComparisonPolicy": {
+    "path": "docs/migration/lot3e-evidence/performance/comparison-policy.json",
+    "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+    "bytes": 991
+  },
+  "globalBudgetPolicy": {
+    "path": "docs/migration/lot3e-evidence/performance/global-budget-policy.json",
+    "sha256": "2b29897c49907e30ff57fd359f1c4600180cf23c68177d873b73eaf701de7550",
+    "bytes": 2009
+  },
+  "baselineManifest": {
+    "path": "docs/migration/lot3e-evidence/baseline/source-manifest.json",
+    "sha256": "d7c139d6b4da64e6070f044ab49d0a6646b3dbf69bfedaa1434b853df5a5ebb6",
+    "bytes": 30270
+  },
+  "candidateManifest": {
+    "path": "docs/migration/lot3e-evidence/final/source-manifest.json",
+    "sha256": "02ce173c4784af4e4f6bba3c2f7d3f72a2c2dc17cfe5c5ef46c0a2cf35c47238",
+    "bytes": 30770
+  },
+  "candidateArchiveManifest": {
+    "path": "docs/migration/lot3e-evidence/final/source-archive.json",
+    "sha256": "c1439516b386ea31a5c92eb598b12cf4f4f591b55eb22c460cddf1655441dc55",
+    "bytes": 32401
+  },
+  "nativeDigests": {
+    "baseline": "5b5e59e14e4d417d92cacd6e79d21b6e8e833d715c8d05df2b74806bb09b40f3",
+    "candidate": "5adf58cb9bd0802dd083812e7591c53cb786410ad23c14a29814d870ef67276c"
+  },
+  "officialTools": [
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613",
+      "bytes": 8933
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+      "bytes": 9861
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4",
+      "bytes": 17810
+    }
+  ],
+  "plannedOrder": [
+    "A1",
+    "B1",
+    "B2",
+    "A2"
+  ],
+  "cohorts": 2,
+  "sessionsPerCaseVersionCohort": 4,
+  "measuredSessions": 32,
+  "measuredActions": 400,
+  "excludedWarmupSessions": 8,
+  "excludedWarmupActions": 24,
+  "globalBudgetCases": 2,
+  "diagnosticMetrics": 16,
+  "relativeGlobalBudget": 0.1,
+  "globalComparison": "strictly_less_than",
+  "phaseOverrunsBlockAcceptance": false,
+  "allCasesMustPass": true,
+  "crossCaseCompensation": false,
+  "inputsByteIdenticalToHistorical": true,
+  "officialToolsByteIdenticalToHistorical": true,
+  "noOfficialWindowAtDeclaration": true,
+  "functionalReadinessNotAnticipated": true,
+  "finalizedAt": "2026-11-10T12:40:45.295029+00:00",
+  "globalDecisionTool": {
+    "path": "scripts/review-native-global-cost-window.py",
+    "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940",
+    "bytes": 22204
+  },
+  "globalCalculationTool": {
+    "path": "scripts/review-native-global-cost-budget.py",
+    "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341",
+    "bytes": 8476
+  },
+  "qualification": "Policy for native0.46 declared before its official window against freshly measured published0.45 from Site73. All measured sessions, phase overruns and available p95 remain. Preparation/finalization executed no benchmark. Actual functional evidence and isolation are separate prerequisites, not asserted by this declaration."
+}

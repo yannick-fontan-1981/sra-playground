@@ -1,0 +1,50 @@
+{
+  "schema": "logos-engine.lot9a.final-build-archive-verification.v1",
+  "startedAt": "2026-11-12T15:43:51.132676+00:00",
+  "status": "passed",
+  "mode": "build",
+  "nativeExecutionPerformed": false,
+  "buildRepeated": false,
+  "lockAcquired": false,
+  "publicationPerformed": false,
+  "generator": {
+    "path": "docs/migration/lot9a-evidence/tools/verify-final-build-and-archive.py",
+    "bytes": 6378,
+    "sha256": "8e83f4147b323a2b1be760ad28251279fffdd569d8c6a915b7554aa31364b154"
+  },
+  "buildManifest": {
+    "path": "docs/migration/lot9a-evidence/delivery-final-068-01/build-manifest.json",
+    "bytes": 11802,
+    "sha256": "f11d98880eb82086035a23453e388a3dfcff8443531a3e0e793cd4a0c0bc4225"
+  },
+  "buildFiles": 74,
+  "buildBytes": 30149887,
+  "allBuildHashesMatch": true,
+  "sourceCommitAtBuild": "dcd6b5b7027615ae37eb5afd02d704987f12702f",
+  "qualifiedInputFingerprintsChecked": 373,
+  "allQualifiedInputsMatch": true,
+  "nativeFilesVerified": 334,
+  "nativeDigest": "e7a94fbc7cdcb19d8704b5d4120f27a858cbcd07e455084711510ee147f4e653",
+  "trackedChangesOutsideMigrationDocumentation": [],
+  "trackedComparisonCommand": [
+    "git",
+    "diff",
+    "--name-only",
+    "dcd6b5b7027615ae37eb5afd02d704987f12702f",
+    "--",
+    ".",
+    ":(exclude)docs/migration"
+  ],
+  "hostingManifest": {
+    "path": ".openai/hosting.json",
+    "bytes": 106,
+    "sha256": "15296ade4f5629e260fc2d338c4cb64efe4bbf356e4be2158458cf9541791705"
+  },
+  "buildReceipt": {
+    "path": "docs/migration/lot9a-evidence/delivery-final-068-01/build-01/receipt.json",
+    "bytes": 2199,
+    "sha256": "620b36463c5dfdbe5f9b7432b90db627c62bd1b6b206eed9f3fd5b5bc9bc6a40"
+  },
+  "finishedAt": "2026-11-12T15:43:51.309108+00:00",
+  "elapsedSeconds": 0.17644828599986795
+}

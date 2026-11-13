@@ -1,0 +1,301 @@
+{
+  "module_id": "piercing_command_effect",
+  "declarations": [
+    {
+      "id": "policy.declared_piercing_command_effect",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "source_root_axis_and_sealed_before_after_command_evidence"
+      ],
+      "applicability": [
+        "current_scope_command_shape_correspondence"
+      ],
+      "invariants": [
+        "morphology_assigns_a_revisable_hypothesis_only",
+        "ambiguous_orientations_are_preserved",
+        "no_bbox_or_frame_boundary_implies_whole_tool_or_world_domain"
+      ],
+      "falsifiers": [
+        "observed_command_breaks_the_declared_root_and_axis_geometry"
+      ],
+      "configuration": {
+        "measurement_contract": {
+          "model_predicate": "piercing_command_effect_revision"
+        },
+        "existing_extent_command_policy_ref": "policy.remember_observed_scoped_extent_command"
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.piercing_command.current_shape_effect",
+          "all_conditions": [],
+          "reason_ref": "reason.exact_root_and_axial_shape_change_qualifies_revisable_command"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "command_effect_count",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.exact_command_effect_correspondence",
+          "reason_ref": "reason.exact_root_and_axial_shape_change_qualifies_revisable_command"
+        }
+      ],
+      "reason_refs": [
+        "reason.exact_root_and_axial_shape_change_qualifies_revisable_command"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.piercing_command_effect_revision"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.piercing_command.unknown",
+          "all_conditions": [],
+          "static_facts": {
+            "applicable": true,
+            "command_effect_class_ref": "command.root_axis_or_viewport_unknown",
+            "command_effect_needs_commit": false,
+            "typedcommand_effects": [],
+            "measured_command_effects": [],
+            "whole_influence_prediction_complete": false,
+            "command_effect_truth": "unknown",
+            "command_effect_world_motion_known": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "retained_parent_goal_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "command_missing_premise_refs": "command_missing_premise_refs"
+          }
+        },
+        {
+          "id": "projection.piercing_command.measured",
+          "all_conditions": [
+            {
+              "field": "command_observation_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "command_scope_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "command_observation_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "command_before_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "command_source_root_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "command_effect_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "coordinate_scope_ref",
+              "operator": "equals",
+              "expected": "coordinate.world"
+            }
+          ],
+          "static_facts": {
+            "command_effect_class_ref": "command.observed_scoped_root_and_extent_change",
+            "command_effect_needs_commit": true,
+            "command_effect_truth": "proposed_from_exact_geometry",
+            "command_falsifier_refs": [
+              "falsifier.command_breaks_rooted_axis_geometry",
+              "falsifier.viewport_correction_invalidates_command_geometry"
+            ]
+          },
+          "bound_facts": {
+            "typedcommand_effects": "raw_typedcommand_effects",
+            "measured_command_effects": "raw_typedcommand_effects",
+            "command_effect_revision_ref": "command_effect_revision_ref",
+            "current_frame_ref": "current_frame_ref",
+            "before_frame_ref": "before_frame_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "coordinate_scope_ref": "coordinate_scope_ref"
+          }
+        },
+        {
+          "id": "projection.piercing_command.scene_conditioned",
+          "all_conditions": [
+            {
+              "field": "command_observation_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "command_scope_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "command_observation_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "command_before_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "command_source_root_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "command_effect_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "coordinate_scope_ref",
+              "operator": "equals",
+              "expected": "coordinate.scene_conditioned"
+            }
+          ],
+          "static_facts": {
+            "command_effect_class_ref": "command.observed_scene_conditioned_root_and_extent_change",
+            "command_effect_needs_commit": true,
+            "command_effect_truth": "proposed_under_future_same_scene_dynamics",
+            "command_falsifier_refs": [
+              "falsifier.command_breaks_rooted_axis_geometry",
+              "falsifier.scene_dynamics_or_camera_change_rejects_predicted_geometry"
+            ],
+            "command_condition_ref": "condition.future_same_scene_dynamics",
+            "command_effect_world_motion_known": false
+          },
+          "bound_facts": {
+            "typedcommand_effects": "raw_typedcommand_effects",
+            "measured_command_effects": "raw_typedcommand_effects",
+            "command_effect_revision_ref": "command_effect_revision_ref",
+            "current_frame_ref": "current_frame_ref",
+            "before_frame_ref": "before_frame_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "coordinate_scope_ref": "coordinate_scope_ref"
+          }
+        },
+        {
+          "id": "projection.piercing_command.already_present",
+          "all_conditions": [
+            {
+              "field": "command_revision_already_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "command_effect_needs_commit": false
+          },
+          "bound_facts": {}
+        }
+      ]
+    },
+    {
+      "id": "rule.piercing_command_effect_revision",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "premises": [
+        "source_root_axis_and_sealed_before_after_command_evidence"
+      ],
+      "applicability": [
+        "current_scope_command_shape_correspondence"
+      ],
+      "invariants": [
+        "morphology_assigns_a_revisable_hypothesis_only",
+        "ambiguous_orientations_are_preserved",
+        "no_bbox_or_frame_boundary_implies_whole_tool_or_world_domain"
+      ],
+      "falsifiers": [
+        "observed_command_breaks_the_declared_root_and_axis_geometry"
+      ],
+      "reason_refs": [
+        "reason.exact_root_and_axial_shape_change_qualifies_revisable_command"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{command_effect_revision_ref}",
+          "kind": "schema",
+          "label": "revisable scoped command shape effect",
+          "required_fields": [
+            "command_effect_revision_ref"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "action_authorization": false
+          },
+          "attribute_bindings": {
+            "measured_command_effects": "measured_command_effects"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{command_effect_revision_ref}",
+          "predicate": "piercing_command_effect_revision",
+          "family": "control",
+          "argument_patterns": [
+            "{command_effect_revision_ref}"
+          ],
+          "epistemic_status": "proposed",
+          "required_fields": [
+            "command_effect_revision_ref",
+            "typedcommand_effects"
+          ],
+          "static_attributes": {
+            "whole_influence_prediction_complete": false
+          },
+          "attribute_bindings": {
+            "typedcommand_effects": "typedcommand_effects",
+            "measured_command_effects": "measured_command_effects",
+            "command_falsifier_refs": "command_falsifier_refs",
+            "command_effect_truth": "command_effect_truth",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "current_frame_ref": "current_frame_ref",
+            "before_frame_ref": "before_frame_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "retained_parent_goal_ref": "retained_parent_goal_ref",
+            "coordinate_scope_ref": "coordinate_scope_ref",
+            "command_condition_ref": "command_condition_ref",
+            "command_effect_world_motion_known": "command_effect_world_motion_known"
+          }
+        }
+      ]
+    }
+  ]
+}

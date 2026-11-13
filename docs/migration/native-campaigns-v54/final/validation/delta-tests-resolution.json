@@ -1,0 +1,40 @@
+{
+  "schema": "logos-engine.v54.test-inventory-resolution.v1",
+  "status": "passed",
+  "firstRun": {
+    "path": "docs/migration/native-campaigns-v54/final/validation/delta-tests-run.json",
+    "sha256": "f90d37e9093b7edfa69954d120f27e222e07f1b1e05632ff1b51efad9e73849b",
+    "bytes": 83395
+  },
+  "correctedInventoryRun": {
+    "path": "docs/migration/native-campaigns-v54/final/inventory-correction/validation/delta-tests-run.json",
+    "sha256": "4c2b22be6343adc892305fe3cbcc2a00d736c94991fe45151b7ccd27b331aa2d",
+    "bytes": 80997
+  },
+  "nativeSourceManifestDigest": "059d6204097fae6749138b9afc650ccc54867886bda3887ef6f978f6afdf393a",
+  "nativeSourceUnchanged": true,
+  "sourceAndTestChanges": [
+    {
+      "path": "tests/v6-src-program.test.ts",
+      "beforeSha256": "75b942da9390981c36c9a85308b2da9bf051e8e439c3ec2c79d7e6176497344f",
+      "afterSha256": "3ec78a7618be15ff2f4daa7f7db71a5833b700c73090ad5d9d01719b3b1ae5ad"
+    }
+  ],
+  "priorProgramsUnchangedByValue": 33,
+  "addedPrograms": [
+    "v6.source81.continue_target",
+    "v6.source81.prepare",
+    "v6.source81.project",
+    "v6.source81.revise_target"
+  ],
+  "resolution": "The inventory assertion still expected 33 programs. The four original Source81 workflows make the correct inventory 37. Only that literal and its explanatory comment changed; no native code or other test changed. The same complete per-program source, semantic, transitive and callback-admission checks then passed.",
+  "counts": {
+    "firstRunTests": 1125,
+    "firstRunPassed": 1124,
+    "firstRunFailed": 1,
+    "correctedFileTests": 2,
+    "correctedFilePassed": 2,
+    "uniqueChecksResolved": 1125
+  },
+  "qualification": "The initial full delta run remains failed in its immutable receipt. A targeted rerun resolves its single stale-inventory assertion; this is not represented as a second complete 1125-test execution. The successful native campaign and production build use the same unchanged native source."
+}

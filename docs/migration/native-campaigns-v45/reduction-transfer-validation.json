@@ -1,0 +1,111 @@
+{
+  "schema": "logos-engine.v45.reduction-transfer-validation.v1",
+  "createdAt": "2026-11-08T19:32:24.522037+00:00",
+  "sourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceFilesVerified": 6,
+  "productionSource": "src/logos-engine/v6-reduction-transport.ts",
+  "productionSourceSha256": "192c0f4510b0c436d29237ff359220285e76128902121841b7cfb62735e4ae7f",
+  "entry": "supported_ternary_reduction",
+  "nativeFamily": "reduction_transport",
+  "publicDiscovery": {
+    "screens": 90,
+    "dispatchedActions": 0,
+    "matches": {
+      "reduction_transport": [
+        "LF52"
+      ],
+      "trace_field": [
+        "ZIPP"
+      ]
+    },
+    "scope": "Only public initial observations. No game definitions or solutions read."
+  },
+  "negativeInitialProbes": [
+    {
+      "game": "HPDL",
+      "actions": 0,
+      "reason": "reduction_component_abstained"
+    },
+    {
+      "game": "DAME",
+      "actions": 0,
+      "reason": "reduction_component_abstained"
+    }
+  ],
+  "sourceComponentCampaign": {
+    "game": "LF52",
+    "targetLevels": 3,
+    "levelsCompleted": 3,
+    "actions": 102,
+    "prefixes": 69,
+    "publicPackets": 103,
+    "levelActions": [
+      8,
+      40,
+      54
+    ],
+    "sessionCount": 1,
+    "manualPrimingActions": 0,
+    "scope": "Unchanged isolated original source component. Not a full original common-caller claim."
+  },
+  "parity": {
+    "status": "passed",
+    "tests": 106,
+    "passed": 106,
+    "failed": 0,
+    "completeProposals": 69,
+    "publicReturnsAndStates": 102,
+    "geometryCases": 10,
+    "mechanicalCases": 10,
+    "beforeGuardCases": 6,
+    "afterOutcomeCases": 5,
+    "durationMs": 6905.998578
+  },
+  "commands": [
+    {
+      "command": "python scripts/probe-v6-public-initial-morphology.py",
+      "exitCode": 0
+    },
+    {
+      "command": "python scripts/probe-v6-reduction-transport-original.py",
+      "exitCode": 0,
+      "scope": "HPDL initial refusal"
+    },
+    {
+      "command": "python scripts/probe-v6-reduction-transport-original.py --game DAME --levels 3 --output tests/fixtures/v6-reduction-transport-dame-original-public.json.gz",
+      "exitCode": 0
+    },
+    {
+      "command": "python scripts/probe-v6-reduction-transport-original.py --game LF52 --levels 3 --output tests/fixtures/v6-reduction-transport-lf52-original-public.json.gz",
+      "exitCode": 0
+    },
+    {
+      "command": "python scripts/export-v6-reduction-transport-reference.py",
+      "exitCode": 0
+    },
+    {
+      "command": "node --test tests/v6-reduction-transport-parity.test.ts",
+      "exitCode": 0
+    }
+  ],
+  "limitations": [
+    "Source family uses a revisable ternary-reduction goal hypothesis, not a proven universal game law.",
+    "Admission requires source repeated-cell, population and support geometry; unknown morphologies abstain.",
+    "Control vectors require unique actual public-response fits. Ambiguous camera registration retires the hypothesis.",
+    "Route search preserves the original primitive horizon and heap tie breaks; it has no additional native state or wall-time bound.",
+    "Native full common-caller live campaign is a separate root-owned proof, not established by this isolated source trace."
+  ],
+  "artifacts": {
+    "docs/migration/native-campaigns-v45/logs/reduction-source-probe.log.gz": "9adb4d5f866609242d0f02059a16f975ad227a9af8023c5cf039c50a8fc7bf68",
+    "docs/migration/native-campaigns-v45/logs/reduction-initial-morphology.log.gz": "54a1a2487206001024371676d9563422ad50a088a1c7114805beb6cb64ed2b2f",
+    "docs/migration/native-campaigns-v45/logs/reduction-reference-export.log.gz": "65ff424bfe5fb9922ec0022d43a24e5e3ae50e017869d305317355bb91490eca",
+    "docs/migration/native-campaigns-v45/logs/reduction-parity.log.gz": "061adb74213d7d46b7d93c71a6bec4f693f895adb19dbda2dbef76723d72f1ae",
+    "docs/migration/native-campaigns-v45/logs/reduction-hpdl-refusal.log.gz": "f09455389e1f136a6a94b26fcda4f262dbff97c0115d7e6aeb9e5efcbadcc518",
+    "docs/migration/native-campaigns-v45/logs/reduction-dame-refusal.log.gz": "c4f6910194c810e1e5afa45c0e3015ff25fc829d8ea1b9cbdfd4b7a5bdcda4ee",
+    "tests/fixtures/v6-reduction-transport-lf52-original-public.json.gz": "e407a3067e902effd0fb1dcca56d0651bafc0ede06e8b88b06c8d736c50cbe30",
+    "tests/fixtures/v6-reduction-transport-original-public.json.gz": "1adefab6a52984093f2f4cb49e4b0be5b9c82f06513ef5e4a72774d8748ea593",
+    "tests/fixtures/v6-reduction-transport-dame-original-public.json.gz": "b644b3322170c3c3e14723f6ced36c82d44d7d9341282a0da35ff885cff68cac",
+    "tests/fixtures/v6-reduction-transport-reference.json.gz": "b26680cff657d2faed103f549fa8b62ff7b977ebb6c1b44e349e60f6755482a7",
+    "tests/fixtures/v6-next-transfer-initial-public.json.gz": "2211864cc60a00037ca138927ab75b9b791c7f905636c66cad0fa1ed5b5ced87"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "schema": "sra.selected-rigid-comparison-command.v1",
+  "status": "passed",
+  "command": [
+    "node",
+    "--experimental-strip-types",
+    "scripts/compare-v6-selected-rigid-reference.ts",
+    "--fixture",
+    "tests/fixtures/v6-selected-rigid/reference.json.gz",
+    "--out",
+    "docs/migration/lot6b-evidence/oracle/attempt-03/native-comparison.json"
+  ],
+  "startedAt": "2026-11-11T14:46:32.304734+00:00",
+  "finishedAt": "2026-11-11T14:46:35.283048+00:00",
+  "elapsedSeconds": 2.9783250170003157,
+  "exitCode": 0,
+  "inputs": [
+    {
+      "path": "scripts/compare-v6-selected-rigid-reference.ts",
+      "bytes": 19118,
+      "sha256": "34a16b97f5809aa0947ff0432ca3256b4ba57ed8cb6b9d8897cfc7b0d7fc2ff0"
+    },
+    {
+      "path": "tests/fixtures/v6-selected-rigid/reference.json.gz",
+      "bytes": 1727762,
+      "sha256": "0bbb3017d111fa27e2928d0e7c07246b1bd28d7b1e2d4776db69522ac14dccfe"
+    },
+    {
+      "path": "src/logos-engine/v6-selected-rigid.ts",
+      "bytes": 29696,
+      "sha256": "117e6191517b2126a6df4cb8dbc0f77acb7fa5da7f1c3bcbbcc838cd1545437b"
+    },
+    {
+      "path": "src/logos-engine/v6-selected-rigid-types.ts",
+      "bytes": 4586,
+      "sha256": "dace249fcb41ed2e54b87cd65e733d23bfbbb76ac65bd5f1562aaa19736710a5"
+    },
+    {
+      "path": "src/logos-engine/v6-selected-rigid-geometry.ts",
+      "bytes": 8625,
+      "sha256": "c381780144d2c159f52767b5b9b4f3731023bf37379e000b8e95c8dbb59fce66"
+    },
+    {
+      "path": "src/logos-engine/v6-selected-rigid-search.ts",
+      "bytes": 8844,
+      "sha256": "fc4777ad7d2d6c6a97ab3df2e6032bda8bb296eddfa0f89e051287f40313fd91"
+    }
+  ],
+  "inputsUnchanged": true,
+  "log": {
+    "path": "docs/migration/lot6b-evidence/oracle/attempt-03/native-comparison.log",
+    "bytes": 2929,
+    "sha256": "335e136b2ee4c1c45305f1efb7976f9668d09b5cbf2a3964711b9b628f379653"
+  },
+  "output": {
+    "path": "docs/migration/lot6b-evidence/oracle/attempt-03/native-comparison.json",
+    "bytes": 2929,
+    "sha256": "335e136b2ee4c1c45305f1efb7976f9668d09b5cbf2a3964711b9b628f379653"
+  },
+  "error": null,
+  "qualification": "Bounded component comparison; these inputs are recorded, not a final delivery source freeze."
+}

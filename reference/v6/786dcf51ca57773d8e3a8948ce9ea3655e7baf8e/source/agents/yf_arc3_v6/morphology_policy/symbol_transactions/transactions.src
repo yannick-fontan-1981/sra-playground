@@ -1,0 +1,11 @@
+MODULE v6.symbol_transactions
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        measured: Any
+        answer: Any
+    STEP measure
+        CALL symbols.measure(request=request) -> measured
+        NEXT choose
+    STEP choose
+        CALL symbols.select(measured=measured) -> answer
+        STOP answer

@@ -1,0 +1,40 @@
+{
+  "schema": "logos-engine.lot8b.recorded-process.v1",
+  "name": "comparison",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/run-released-public-regressions.py",
+    "--compare-case",
+    "{\"baseline\":\"docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz\",\"trace\":\"docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz\",\"report\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/replay.json.gz\",\"sourceManifest\":\"docs/migration/lot8b-evidence/delivery-qualification-01/candidate-native.json\",\"caseManifest\":\"docs/migration/lot8b-evidence/tools/delivery/regressions/cases.json\",\"comparison\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/comparison.json\",\"presence\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/passive-owner-presence.json\",\"requirements\":[]}"
+  ],
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T05:07:40.665347+00:00",
+  "phaseTimeoutSeconds": 180,
+  "effectiveTimeoutSeconds": 180,
+  "environment": {
+    "NODE_OPTIONS": "--max-old-space-size=1536",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONHASHSEED": "0"
+  },
+  "status": "passed",
+  "pid": 97,
+  "processGroup": 97,
+  "exitCode": 0,
+  "timedOut": false,
+  "interrupted": false,
+  "automaticRetry": false,
+  "processGroupStopped": true,
+  "finishedAt": "2026-11-12T05:07:49.881580+00:00",
+  "elapsedSeconds": 9.21625595900332,
+  "stdout": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/comparison.stdout.log",
+    "bytes": 2678,
+    "sha256": "7be160ffb3f76f7ab565a75334d75fd70c7b95958d1e6c253ecb851330974b44"
+  },
+  "stderr": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/comparison.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

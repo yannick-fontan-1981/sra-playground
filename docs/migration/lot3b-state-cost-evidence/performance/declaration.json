@@ -1,0 +1,109 @@
+{
+  "schema": "logos-engine.native-cost-protocol-declaration.v1",
+  "recordedAt": "2026-11-10T04:22:29.574793+00:00",
+  "status": "declared_before_official_window",
+  "protocol": {
+    "path": "docs/migration/lot3b-state-cost-evidence/performance/protocol.md",
+    "sha256": "5cb3e2547319f0f66b228f38d0b8b54677fb89dfaff652f253f4078d1d1accdd",
+    "bytes": 10456
+  },
+  "cases": {
+    "path": "docs/migration/lot3b-state-cost-evidence/performance/cases.json",
+    "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+    "bytes": 1451
+  },
+  "comparisonPolicy": {
+    "path": "docs/migration/lot3b-state-cost-evidence/performance/comparison-policy.json",
+    "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+    "bytes": 991
+  },
+  "baselineManifest": {
+    "path": "docs/migration/lot3b-state-cost-evidence/base/source-manifest.json",
+    "sha256": "0024028577107a7dbcc65ea0cc3ffa929a0ce5a6e7f11bf4515a169fc5cb1146",
+    "bytes": 28936
+  },
+  "publishedFunctionalManifest": {
+    "path": "docs/migration/lot3b-state-cost-evidence/published/source-manifest.json",
+    "sha256": "12b765bcd7348af0f7e3e4325862cae570c2b81470475839fdfe9df79fa2078b",
+    "bytes": 29431
+  },
+  "correctionManifest": {
+    "path": "docs/migration/lot3b-state-cost-evidence/final/source-manifest.json",
+    "sha256": "03d74f1cbb023f041a306565c42c48b727674089479e54a5e147219f309cb26c",
+    "bytes": 29431
+  },
+  "correctionArchiveManifest": {
+    "path": "docs/migration/lot3b-state-cost-evidence/final/source-archive.json",
+    "sha256": "d9149fbdc159dcc869d5a6c6cef4b3e54d2c882906891a972a2a8f012887c8db",
+    "bytes": 31073
+  },
+  "releaseScope": {
+    "path": "docs/migration/lot3b-state-cost-evidence/final/release-scope.json",
+    "sha256": "b5254431709ef58b213bf6b8851bee61f293f78c713723adc29143cd41795660",
+    "bytes": 2312
+  },
+  "recordedRegressionCases": {
+    "path": "docs/migration/lot3b-state-cost-evidence/recorded-regression-cases.json",
+    "sha256": "97c8feaa09e9a363f4492bd1225d93e8e239b65225d87baacb847279742836a9",
+    "bytes": 1981
+  },
+  "codeReview": {
+    "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/code-review.json",
+    "sha256": "990162fe2296ed2fa6dbb87c2fc8c52764489eeb3fa115b92b2a4f71df4d8747",
+    "bytes": 6473
+  },
+  "changedNativeFiles": [
+    "src/logos-engine/canonical.ts",
+    "src/logos-engine/v6-inventory-caller-context.ts",
+    "src/logos-engine/v6-inventory-project.ts",
+    "src/logos-engine/v6-native-owned.ts",
+    "src/logos-engine/v6-native-runtime.ts",
+    "src/logos-engine/v6-native-state-graph.ts",
+    "src/logos-engine/v6-observed-inventory.ts"
+  ],
+  "officialTools": [
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613",
+      "bytes": 8933
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+      "bytes": 9861
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4",
+      "bytes": 17810
+    }
+  ],
+  "plannedOrder": [
+    "A1",
+    "B1",
+    "B2",
+    "A2"
+  ],
+  "cohorts": 2,
+  "sessionsPerCaseVersionCohort": 4,
+  "measuredSessions": 32,
+  "measuredActions": 400,
+  "excludedWarmupSessions": 8,
+  "excludedWarmupActions": 24,
+  "budgetMetrics": 16,
+  "relativeBudget": 0.1,
+  "inputsByteIdenticalToHistorical": true,
+  "officialToolsByteIdenticalToHistorical": true,
+  "noOfficialWindowAtDeclaration": true,
+  "qualification": "Declared before any official timing of native 0.42 digest 2de70025ae08845efd491929416e091e9dc9e8e4b473440b9c6a86838e0b3d19. Functional reference is Site69/native0.41; official timing reference is Site66/native0.38 freshly measured. Historical 0.40 prose in byte-identical cases/policy is explicitly qualified by the new protocol. No measurement, replay, profile, test or build was executed to create this declaration."
+}

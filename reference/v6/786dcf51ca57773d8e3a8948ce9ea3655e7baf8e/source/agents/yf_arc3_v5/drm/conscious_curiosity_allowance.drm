@@ -1,0 +1,162 @@
+{
+  "module_id": "conscious_curiosity_allowance",
+  "declarations": [
+    {
+      "id": "policy.conscious_curiosity_allowance",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.allocate_the_exact_conditional_trial_cost_without_inventing_a_budget"
+      ],
+      "invariants": [
+        "source_selected_information_opportunity_required",
+        "missing_costs_are_not_zero",
+        "all_retained_models_are_preserved",
+        "ceiling_is_not_resource_reservation_or_action_permission",
+        "a_scoped_restoration_ceiling_is_not_a_zero_loss_statement_about_unmodeled_quantities",
+        "unknown_utility_does_not_disqualify_a_justified_information_goal"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.curiosity_allowance.unassigned",
+          "all_conditions": [],
+          "static_facts": {
+            "eligible": true,
+            "assign_trial_cost_ceiling": false,
+            "allowance_status": "unassigned_current_funding_not_qualified",
+            "question_ref": "question.what_current_cost_and_resource_evidence_bound_this_trial",
+            "assigned_trial_cost_ceiling": null,
+            "assigned_cost_scope_ref": null,
+            "assigned_cost_scope_digest": null
+          }
+        },
+        {
+          "id": "projection.curiosity_allowance.source_opportunity_absent",
+          "all_conditions": [
+            {
+              "field": "understanding_timing",
+              "operator": "not_equals",
+              "expected": "selected_information_opportunity"
+            }
+          ],
+          "static_facts": {
+            "allowance_status": "unassigned_source_information_opportunity_not_selected",
+            "question_ref": "question.which_information_opportunity_survives_current_continuation_review"
+          }
+        },
+        {
+          "id": "projection.curiosity_allowance.exact_funded_trial",
+          "all_conditions": [
+            {
+              "field": "understanding_timing",
+              "operator": "equals",
+              "expected": "selected_information_opportunity"
+            },
+            {
+              "field": "conditional_cost_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cost_scope_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_bounds_known",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cost_fits_both_bounds",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "actual_costs_declared",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "assign_trial_cost_ceiling": true,
+            "allowance_status": "assigned_for_current_trial_under_retained_conditions",
+            "question_ref": "question.do_the_remaining_execution_and_preservation_guards_allow_this_trial"
+          },
+          "bound_facts": {
+            "assigned_trial_cost_ceiling": "conditional_cost_upper",
+            "assigned_cost_scope_ref": "cost_scope_ref",
+            "assigned_cost_scope_digest": "cost_scope_digest"
+          }
+        },
+        {
+          "id": "projection.curiosity_allowance.complete_current_cost_trial",
+          "all_conditions": [
+            {
+              "field": "understanding_timing",
+              "operator": "equals",
+              "expected": "selected_information_opportunity"
+            },
+            {
+              "field": "actual_costs_declared",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "actual_cost_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "actual_prepared_cost_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "actual_non_destructive",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "actual_losses_zero",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_bounds_known",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "actual_cost_fits_both_bounds",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "assign_trial_cost_ceiling": true,
+            "allowance_status": "assigned_for_current_trial_under_complete_current_costs",
+            "assigned_cost_scope_ref": "experiment.cost_scope.current_declared_components",
+            "question_ref": "question.do_the_remaining_execution_and_preservation_guards_allow_this_trial"
+          },
+          "bound_facts": {
+            "assigned_trial_cost_ceiling": "actual_cost_total",
+            "assigned_cost_scope_digest": "actual_cost_scope_digest"
+          }
+        }
+      ]
+    }
+  ]
+}

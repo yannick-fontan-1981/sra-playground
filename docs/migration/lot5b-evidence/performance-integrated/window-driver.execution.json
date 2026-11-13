@@ -1,0 +1,19 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "scripts/run-native-cost-window.py",
+    "/workspace/sites/sra-lot5b-reference-057",
+    "docs/migration/lot5b-evidence/performance-integrated",
+    "docs/migration/lot5b-evidence/baseline-published-057/source-manifest.json",
+    "docs/migration/lot5b-evidence/integrated-final/source-manifest.json"
+  ],
+  "startedAt": "2026-11-11T02:18:39.880757+00:00",
+  "finishedAt": "2026-11-11T02:27:33.369470+00:00",
+  "exitCode": 0,
+  "log": {
+    "path": "docs/migration/lot5b-evidence/performance-integrated/window-driver.log",
+    "sha256": "e4eb33ef7a2ca9bde72978426a440700761601d97635679f0ceea08f18e6eb25",
+    "bytes": 6844
+  }
+}

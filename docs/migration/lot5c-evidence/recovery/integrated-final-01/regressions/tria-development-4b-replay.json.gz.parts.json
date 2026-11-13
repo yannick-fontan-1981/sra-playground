@@ -1,0 +1,36 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "tria-development-4b-replay.json.gz",
+    "sha256": "1d10a9687a8c6dd822c5d9e0f6bb6104377d392da3ba465442dc1b995281910d",
+    "bytes": 3963618
+  },
+  "parts": [
+    {
+      "file": "tria-development-4b-replay.json.gz.part000",
+      "sha256": "f8237fd3b70a5035c5d514f4792bfb1c94475435a78a6ec7867f5b72deab5cac",
+      "bytes": 900000
+    },
+    {
+      "file": "tria-development-4b-replay.json.gz.part001",
+      "sha256": "632381b2f25ccb02395e2c504d7350aa982c5ddb49678893a2f854d43d17a70c",
+      "bytes": 900000
+    },
+    {
+      "file": "tria-development-4b-replay.json.gz.part002",
+      "sha256": "c70b5188d111b41d0f7791b529b6fcde103be8c82ba9e9dbd97160b02da2b3a8",
+      "bytes": 900000
+    },
+    {
+      "file": "tria-development-4b-replay.json.gz.part003",
+      "sha256": "cf66f0d204c21764feca16819f7e9ec6e9f5165950d900baa40698bb8e482175",
+      "bytes": 900000
+    },
+    {
+      "file": "tria-development-4b-replay.json.gz.part004",
+      "sha256": "8ac49af8ebbd883dcbcaa835a7edcd6898c1e6516e07c68377c2f68e18cd4b4e",
+      "bytes": 363618
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

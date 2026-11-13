@@ -1,0 +1,12 @@
+{
+  "from": "lot5c replacement conversation",
+  "for": "lot10b",
+  "status": "text_review_material_defect",
+  "scope": "src/logos-engine/v6-native-runtime.ts currentExecution",
+  "finding": "currentExecution replaces execution.now with runtime this.now while min-comparing raw execution.deadlineMs. Different clock origins cause early expiry or excessive caller budget. Existing seal acquisitionExecution already converts caller remaining time. Example runtimeNow1000, callerNow10, callerDeadline60 should yield runtime deadline1050, currently60.",
+  "proposed_fix": "Convert callerRemainingMs = max(0, deadline-(execution.now ?? performance.now)()) then min with remaining active-level allowance in runtime clock; retain signal/yieldControl. One focused different-clock regression for planning/current guard.",
+  "ownership_request": "This originated in prepared10B runtime. Please adopt as narrow10B fix before freeze if feasible and notify5C, or let replacement5C root own after quiet release. Do not duplicate. No file edited or test run here.",
+  "coordination": "Respect active6A quiet; source text only.",
+  "source_text_test_draft": "/workspace/scratch/8a0681e98bf4/clock_regression_draft.txt",
+  "draft_execution": "not run, no project source edited; requires v6FrameHash import in existing runtime test"
+}

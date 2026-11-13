@@ -1,0 +1,37 @@
+{
+  "schema": "logos-engine.lot8a.binding-common-capture.v1",
+  "status": "passed",
+  "mode": "boundary",
+  "synthetic": true,
+  "returned": 23,
+  "ownReturns": 22,
+  "sourceStages": 23,
+  "declaredStages": 23,
+  "sourceDeclarationsModified": false,
+  "executionInputsUnchangedDuringRun": true,
+  "checks": {
+    "passed": 8,
+    "names": [
+      "cold_unique_owner_and_original_material_subquestion_order",
+      "natural_boundary_discards_local_geometry_but_retains_conditional_methods",
+      "one_selected_or_passive_acquisition_per_actual_return",
+      "authoritative_checkpoint_and_fresh_owner_restoration",
+      "source_selected_null_retained_and_passive_null_not_retained",
+      "caller_attention_restoration_has_one_shared_owner",
+      "ordinary_why_act_authorizes_every_released_step",
+      "public_response_never_depends_on_owner_or_expected_native_result"
+    ],
+    "failures": []
+  },
+  "actualJournal": {
+    "path": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-boundary-01/boundary/actual-operations.json",
+    "bytes": 3834331,
+    "sha256": "993337bab2b311f9b773c5f915d272be96524c31951fae1246ae62b9c62a087a"
+  },
+  "fullReport": {
+    "path": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-boundary-01/boundary/common-loop.json.gz",
+    "bytes": 28908,
+    "sha256": "3e73184eb189f87a0ce9478f41072af160cc3d79dd33024cbd7d20935bfc3a34"
+  },
+  "qualification": "Fresh synthetic Binding common capture on the unchanged prepared5C/6B/Motif composition. Original comparison is a separate declared stage. No live game, official cost or publication."
+}

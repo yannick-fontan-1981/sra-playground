@@ -1,0 +1,139 @@
+{
+  "schema": "logos-engine.lot3h.projection-integration-targeted.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T13:15:19.227136-03:00",
+  "displayTimeZone": "UTC-03:00",
+  "finalProjectionTests": 81,
+  "finalIntegrationTests": 24,
+  "executions": [
+    {
+      "log": {
+        "path": "docs/migration/lot3h-evidence/diagnostic/projection-targeted.log",
+        "bytes": 7271,
+        "sha256": "cc104528ea7e023294680346baff512935d263f59e268077d705fb6988166d46"
+      },
+      "gzip": {
+        "path": "docs/migration/lot3h-evidence/diagnostic/projection-targeted.log.gz",
+        "bytes": 1890,
+        "sha256": "b0c3d75bb48224694d2ae1247d8e6db5463faaa71cb6b7f17718fe963594a94a"
+      },
+      "counts": {
+        "tests": 79,
+        "pass": 78,
+        "fail": 1,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "exitCode": 1
+    },
+    {
+      "log": {
+        "path": "docs/migration/lot3h-evidence/diagnostic/projection-targeted-final.log",
+        "bytes": 14859,
+        "sha256": "58758168a526a2167ebc812ba1d2c2dc35318ac1dbb6675c8cce50ddaf3980de"
+      },
+      "gzip": {
+        "path": "docs/migration/lot3h-evidence/diagnostic/projection-targeted-final.log.gz",
+        "bytes": 2181,
+        "sha256": "081afb360947e1a5fff11df5b13197ffdd58c7929336e0b2f5a77bc3bd77518f"
+      },
+      "counts": {
+        "tests": 79,
+        "pass": 79,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "exitCode": 0
+    },
+    {
+      "log": {
+        "path": "docs/migration/lot3h-evidence/diagnostic/projection-targeted-oracle-final.log",
+        "bytes": 15226,
+        "sha256": "c676c437967cc442e6128ef29302da72a0d344d8b3f0e79e487d13f1b7b7edf6"
+      },
+      "gzip": {
+        "path": "docs/migration/lot3h-evidence/diagnostic/projection-targeted-oracle-final.log.gz",
+        "bytes": 2242,
+        "sha256": "ce4a1d15be84b6fe33635b51b71b03c11107d90611ccbd27d15062efa222d1c8"
+      },
+      "counts": {
+        "tests": 81,
+        "pass": 81,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "exitCode": 0
+    },
+    {
+      "log": {
+        "path": "docs/migration/lot3h-evidence/diagnostic/integration-targeted.log",
+        "bytes": 5370,
+        "sha256": "8a8006d9dd85bb7238380724510746f63abedc8feb1ae12dcd4bb1a5bc9e6038"
+      },
+      "gzip": {
+        "path": "docs/migration/lot3h-evidence/diagnostic/integration-targeted.log.gz",
+        "bytes": 1113,
+        "sha256": "10e2c59cecafa48053ec50c46096f1fa743b95c51fab1b433fcea267927f688d"
+      },
+      "counts": {
+        "tests": 24,
+        "pass": 24,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "exitCode": 0
+    }
+  ],
+  "inputsAtReceiptCreation": [
+    {
+      "path": "src/logos-engine/v6-crossed-prefix-observation.ts",
+      "bytes": 12478,
+      "sha256": "b1a8808d123b66f27ea4a0b9d06eeff4e91319d91f445582c01245beb7895fbd"
+    },
+    {
+      "path": "tests/v6-crossed-prefix-observation.test.ts",
+      "bytes": 9903,
+      "sha256": "6564abd19642f2bcfb66357509d796d37e17d82bfc64297d79c1532d9eeb7484"
+    },
+    {
+      "path": "tests/v6-crossed-prefix-integration.test.ts",
+      "bytes": 15924,
+      "sha256": "b40a6a1458c564ddf860134ba675a99f835cc9a5b8c2c583ceedcedff13ad9ac"
+    },
+    {
+      "path": "scripts/export-v6-crossed-prefix-legacy-checkpoints.mjs",
+      "bytes": 8009,
+      "sha256": "71771ef8dfd0cd4f61a120361f8d2fd69cfba9752427adc461bf029e798abf3b"
+    },
+    {
+      "path": "tests/fixtures/v6-crossed-prefix-reference.json.gz",
+      "bytes": 350899,
+      "sha256": "ca2b1e6c4ccdd41d35a45e11f989f4ea168e7959011d658c0f54e887c9b79af4"
+    },
+    {
+      "path": "tests/fixtures/v6-crossed-prefix-legacy-checkpoints.json.gz",
+      "bytes": 4108,
+      "sha256": "ea2ef8d201dc350c41cab447982e6a15dab5b5b187066ca56a79782144aef811"
+    }
+  ],
+  "legacySource": {
+    "commit": "fbbc3fb6b796c0ba359654da7234008767090e1f",
+    "siteVersion": 76,
+    "nativeVersion": "0.48.0",
+    "nativeDigest": "fce8dfc3e6861742649203161b3bf55b6480462e44c77d8015453ce55b724a26",
+    "fileCount": 266,
+    "manifestSha256": "3830e87db836b6df95b34550dec845f3d8c95abe2e69bb05d0814b12bef6bfad",
+    "unchanged": true
+  },
+  "legacyCheckpoints": 11,
+  "legacyQualification": "Eleven checkpoints produced and reloaded by the published native 0.48 source from Site 76, commit fbbc3fb6b796c0ba359654da7234008767090e1f. Ten old-layer checkpoint categories include FramedWindow; an additional legacy CrossedPrefix journal preserves the exact pre-existing occurrence fixture events, including a sparse pair without inputs/evidence. Synthetic/event contracts only; no new game result or future native source supplies the expected digests.",
+  "preparationFailure": "First projection run retained 78/79: the test initially treated original geometry([[]]) == None as native-domain parity. Native rectangular positive-width domain already rejects this input. The test now explicitly checks the original result and native TypeError; production projection was unchanged. Final independent oracle adds two real Counter tie cases, raising the projection test count from 79 to 81.",
+  "qualification": "Targeted development evidence only, before the root final native freeze and complete declared-scope validation. Current hashes are captured at receipt creation, not claimed as full run-before/run-after manifests. All projection valid-domain source comparisons pass; exception classes and empty-width domain remain qualified. Shared-family integration and synthetic source chains are not a full controller game resolution. No game host, benchmark or full project build was run."
+}

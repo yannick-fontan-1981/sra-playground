@@ -1,0 +1,450 @@
+{
+  "schema": "logos-engine.native-campaign-candidate-audit.v1",
+  "scope": "Non-product candidate selection only. No actions were proposed or executed and no game engine was run for this audit.",
+  "selected_game": "ELAS",
+  "campaign_status_at_selection": "not_started",
+  "baseline_site_commit": "f55f3b514658c5228f118bb5891f0bebf52c8832",
+  "provenance": {
+    "manifest": "content/game-gallery-assets.json",
+    "manifest_sha256": "5b11e1b6c86ecf736529b7372f3610dd32dbfdf6ec45c6cdfecedd6e143fbe7c",
+    "gallery_source_commit": "212d8d426f07eea2b6797c2bb647545767488a96",
+    "decode": "Read the publicly published gallery atlases with the publicly declared default palette. Verify each atlas SHA256 and each decoded 64x64 palette-index raster SHA256 against its manifest entry.",
+    "measurements": "Apply only existing pure scene-measurement functions to the verified rasters, with no learned controls, no family proposals, no trajectories, no action selection and no physical game actions.",
+    "data_boundary": "No hidden engine state, authored level source, solution, oracle path, replay or fixed input sequence was read or supplied to a live agent."
+  },
+  "coverage": {
+    "decoded_verified_frames": 231,
+    "decoded_games": 77,
+    "skipped_frames": 69,
+    "skipped_reason": "A different palette prevents this exact default-palette decoding. A skipped frame is not evidence that its game is unsupported.",
+    "tested_measurements": [
+      "metric_composition",
+      "oriented_coupling",
+      "fixed_origin",
+      "periodic_sums",
+      "reflected_cover",
+      "configured_arrivals",
+      "rigid_port_assembly",
+      "controlled_constellation_cover"
+    ]
+  },
+  "ranked_candidates": [
+    {
+      "rank": 1,
+      "game": "ELAS",
+      "name": "Elastic Grid",
+      "selected_for_fresh_campaign": true,
+      "family": "metric_composition",
+      "measurement": "measuredMetricScene",
+      "measurement_source": "src/logos-engine/v6-metric-composition.ts",
+      "bootstrap": "The existing source proposal reconciles the visible partition, selects a tile through ACTION6 and proposes a conditional transfer. It needs no preloaded motion facts. The first unmeasured transfer seals the prefix.",
+      "premises": [
+        "A unique irregular rectangular partition with at least two foreground colors.",
+        "A separate homologous target raster at a possible uniform scale.",
+        "ACTION6 and sufficient public remaining-action budget at runtime.",
+        "A target whose currently visible inventory is sufficient for a bounded conditional search."
+      ],
+      "limits": [
+        "Geometry recognition does not establish target admissibility or a solution.",
+        "Hidden underlayers are unknown and are learned only when exposed by actual physical actions.",
+        "Initial policy direction vectors are explicitly conditional hypotheses, never observed game controls.",
+        "Original search budget is4096 states; successful search and common-router ownership remain to be observed."
+      ],
+      "prior_proof": "Original family parity fixture includes13 steps for target selection, transfer fit, exact guards and an official boundary; this is a synthetic contract, not an ELAS common-agent campaign.",
+      "first_three_public_previews": [
+        {
+          "game": "ELAS",
+          "level": 1,
+          "frameSha256": "abecda07210fcf6406e49cf49307285959af454cbd4de95b6a742407a63618a6",
+          "atlasSha256": "761462d1686d3080ff4814d41bf6e6f00471a2a6bcd041717d4193182d96a16e",
+          "matches": {
+            "metric": {
+              "keys": [
+                "cells",
+                "xs",
+                "ys",
+                "fills",
+                "selected",
+                "background",
+                "target",
+                "legend",
+                "grid_ref",
+                "target_ref"
+              ],
+              "summary": {
+                "xs": [
+                  7,
+                  14,
+                  22,
+                  26,
+                  32,
+                  43,
+                  52,
+                  57
+                ],
+                "ys": [
+                  1,
+                  10,
+                  18,
+                  22,
+                  29,
+                  39,
+                  45
+                ],
+                "background": [
+                  4,
+                  5
+                ],
+                "grid_ref": "dd515aad9e866d30660b9543db87d921c85d2c9740d96d907bfc7f4bc18c4362",
+                "target_ref": "55c1f80d486bea58d5490b54cd5462e8351d685469ab0fb37af7340539e56f70"
+              }
+            }
+          }
+        },
+        {
+          "game": "ELAS",
+          "level": 2,
+          "frameSha256": "d8719e5ad04d0de9443e7184740ad511d01cb6957ed7b0711540941e87790f72",
+          "atlasSha256": "761462d1686d3080ff4814d41bf6e6f00471a2a6bcd041717d4193182d96a16e",
+          "matches": {
+            "metric": {
+              "keys": [
+                "cells",
+                "xs",
+                "ys",
+                "fills",
+                "selected",
+                "background",
+                "target",
+                "legend",
+                "grid_ref",
+                "target_ref"
+              ],
+              "summary": {
+                "xs": [
+                  3,
+                  8,
+                  17,
+                  23,
+                  35,
+                  42,
+                  52,
+                  60
+                ],
+                "ys": [
+                  1,
+                  6,
+                  12,
+                  21,
+                  25,
+                  33,
+                  43
+                ],
+                "background": [
+                  4,
+                  5
+                ],
+                "grid_ref": "f000c415327e2ead9f55c499001ed577cd2e236aa71847e4c74e3270dcaa2d04",
+                "target_ref": "70b2047411e1ab5bd78fc8bc30194548631db894c4ac78c2b9af5b97db7d52f1"
+              }
+            }
+          }
+        },
+        {
+          "game": "ELAS",
+          "level": 3,
+          "frameSha256": "3484fb68455577bc69683bd273fdce2a29aba4eab6750a35c53b852ee90d1f2b",
+          "atlasSha256": "761462d1686d3080ff4814d41bf6e6f00471a2a6bcd041717d4193182d96a16e",
+          "matches": {
+            "metric": {
+              "keys": [
+                "cells",
+                "xs",
+                "ys",
+                "fills",
+                "selected",
+                "background",
+                "target",
+                "legend",
+                "grid_ref",
+                "target_ref"
+              ],
+              "summary": {
+                "xs": [
+                  7,
+                  12,
+                  22,
+                  26,
+                  34,
+                  40,
+                  49,
+                  56
+                ],
+                "ys": [
+                  1,
+                  8,
+                  14,
+                  24,
+                  28,
+                  36,
+                  45
+                ],
+                "background": [
+                  4,
+                  5
+                ],
+                "grid_ref": "8902e59c9922abfa537b7ab3e904bbfd83ce2e87579ab42d08323f77ea03d6d8",
+                "target_ref": "f1443610b624fad852e2e962a60d3e02c20a3d27ccd7fdac6755b1d05c1a1d79"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "game": "CN04",
+      "family": "rigid_port_assembly",
+      "measurement": "measurePortLayout",
+      "measurement_source": "src/logos-engine/v6-port-assembly.ts",
+      "bootstrap": "The existing source proposal initializes from public layout, calibrates actual axial inputs, learns the active rigid material, then selects materials and attempts joint port matching.",
+      "premises": [
+        "A uniquely measurable repeated marker lattice with disjoint material ownership.",
+        "At least two plain input commands and an addressed input in the common input domain.",
+        "Observable motion sufficient to identify the active material and its translations."
+      ],
+      "limits": [
+        "Motion, port ownership after selection, rotation and editing overlap require observed responses.",
+        "An initial layout match does not establish that common priority routing reaches the family or that three levels can be solved."
+      ],
+      "prior_proof": "Synthetic source contracts cover26 steps of calibration and joint matching,4 rotation/ambiguity steps and9 selection/overlay steps; no fresh common-agent CN04 campaign established here.",
+      "first_three_public_previews": [
+        {
+          "game": "CN04",
+          "level": 1,
+          "frameSha256": "0ccad6a075659c25d756122f5b9aa60553c23bd9fc5101b8a7b1c70146f1e02d",
+          "atlasSha256": "01136766dd4d43e0c500b486ec2a984db37d757d8e543de4fe321ce3ed41a294",
+          "matches": {
+            "port": {
+              "keys": [
+                "background",
+                "marker",
+                "unit",
+                "phase",
+                "bodies",
+                "poses",
+                "width",
+                "height"
+              ],
+              "summary": {
+                "background": 10,
+                "marker": 8,
+                "unit": 3,
+                "phase": [
+                  2,
+                  2
+                ],
+                "width": 64,
+                "height": 64
+              }
+            }
+          }
+        },
+        {
+          "game": "CN04",
+          "level": 2,
+          "frameSha256": "9853612afc8a55290b97b311c12ecaf31b33dcc28316e6dfae61a0fedea8de27",
+          "atlasSha256": "01136766dd4d43e0c500b486ec2a984db37d757d8e543de4fe321ce3ed41a294",
+          "matches": {
+            "port": {
+              "keys": [
+                "background",
+                "marker",
+                "unit",
+                "phase",
+                "bodies",
+                "poses",
+                "width",
+                "height"
+              ],
+              "summary": {
+                "background": 12,
+                "marker": 8,
+                "unit": 3,
+                "phase": [
+                  2,
+                  2
+                ],
+                "width": 64,
+                "height": 64
+              }
+            }
+          }
+        },
+        {
+          "game": "CN04",
+          "level": 3,
+          "frameSha256": "c6071d1cde43275698b473c3ee02c3e445bd011d368c7668182da8ec7c407986",
+          "atlasSha256": "01136766dd4d43e0c500b486ec2a984db37d757d8e543de4fe321ce3ed41a294",
+          "matches": {
+            "port": {
+              "keys": [
+                "background",
+                "marker",
+                "unit",
+                "phase",
+                "bodies",
+                "poses",
+                "width",
+                "height"
+              ],
+              "summary": {
+                "background": 12,
+                "marker": 8,
+                "unit": 3,
+                "phase": [
+                  2,
+                  2
+                ],
+                "width": 64,
+                "height": 64
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "game": "WA30",
+      "family": "oriented_coupling",
+      "measurement": "orientedCouplingInitial",
+      "measurement_source": "src/logos-engine/v6-oriented-coupling.ts",
+      "bootstrap": "The family requires ordinary common exploration to observe an actor translation and a frontal contour invitation before it becomes ready. It subsequently learns co-translation and release through observed effects.",
+      "premises": [
+        "Repeated hollow square objects with a unique shared pitch and phase.",
+        "A homologous goal enclosure with sufficient measured slots.",
+        "Actual observed controller translation and a new frontal contour."
+      ],
+      "limits": [
+        "Pure initial geometry is insufficient to activate the proposal.",
+        "The source interaction candidate and initial direction mappings remain hypotheses.",
+        "Common exploration may not establish the required invitation within the campaign budget."
+      ],
+      "prior_proof": "A 21 step synthetic source contract covers public invitation, rigid-coupling proof, route and release; this is not a WA30 success result.",
+      "first_three_public_previews": [
+        {
+          "game": "WA30",
+          "level": 1,
+          "frameSha256": "69b13ff6c4d0da677c20056a19148ecfe4883d3936c6ee27739a326b9c53bc67",
+          "atlasSha256": "01136766dd4d43e0c500b486ec2a984db37d757d8e543de4fe321ce3ed41a294",
+          "matches": {
+            "oriented": {
+              "keys": [
+                "pitch",
+                "phase",
+                "core",
+                "rest_shell",
+                "targets",
+                "initial_boxes",
+                "background"
+              ],
+              "summary": {
+                "pitch": 4,
+                "phase": [
+                  0,
+                  0
+                ],
+                "core": 9,
+                "rest_shell": 4,
+                "background": 1
+              }
+            }
+          }
+        },
+        {
+          "game": "WA30",
+          "level": 2,
+          "frameSha256": "abc12e3c4ae942c28e41830da24b0678b757ffd05c090bec187764a8010c1fb0",
+          "atlasSha256": "01136766dd4d43e0c500b486ec2a984db37d757d8e543de4fe321ce3ed41a294",
+          "matches": {
+            "oriented": {
+              "keys": [
+                "pitch",
+                "phase",
+                "core",
+                "rest_shell",
+                "targets",
+                "initial_boxes",
+                "background"
+              ],
+              "summary": {
+                "pitch": 4,
+                "phase": [
+                  0,
+                  0
+                ],
+                "core": 9,
+                "rest_shell": 4,
+                "background": 1
+              }
+            }
+          }
+        },
+        {
+          "game": "WA30",
+          "level": 3,
+          "frameSha256": "2377b72a520dbc93cecdfafa8f6cd1b3f7be189aff287633f289b0f9b2efa79a",
+          "atlasSha256": "01136766dd4d43e0c500b486ec2a984db37d757d8e543de4fe321ce3ed41a294",
+          "matches": {
+            "oriented": {
+              "keys": [
+                "pitch",
+                "phase",
+                "core",
+                "rest_shell",
+                "targets",
+                "initial_boxes",
+                "background"
+              ],
+              "summary": {
+                "pitch": 4,
+                "phase": [
+                  0,
+                  0
+                ],
+                "core": 9,
+                "rest_shell": 4,
+                "background": 1
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "not_counted_as_new": [
+    "HANO",
+    "SYME",
+    "DNOI",
+    "ONDE",
+    "DICO",
+    "M0R0",
+    "SKBN",
+    "DAME",
+    "TU93"
+  ],
+  "other_evidence_limits": {
+    "AS66": "Existing 3 level standalone evidence includes 16 externally imposed public probes; it does not prove unprimed common-agent success.",
+    "GLOB": "Existing standalone evidence is 1 level with 4 externally imposed probes.",
+    "MEMO": "Standalone 3 level proof coexists with 0 level common-agent evidence; do not claim it as a solved common campaign.",
+    "RE86": "First three public previews match constellation geometry, but acquisition is longer and not selected before ELAS/CN04/WA30."
+  },
+  "actual_campaign_requirements": [
+    "Start at level1 with fresh native common-agent memory.",
+    "Every physical action, including calibration, must come from the ordinary common caller.",
+    "Do not prime from the preview scan or parity fixtures, preload controls, branch on game IDs, jump levels or inject resets.",
+    "Freeze implementation and policy before replay.",
+    "Only observed official level progression or WIN authorizes a resolution claim."
+  ]
+}

@@ -1,0 +1,46 @@
+TAP version 13
+# Subtest: Axial has one cold owner and its exact source entry after Recolor with a shared stored workflow
+ok 1 - Axial has one cold owner and its exact source entry after Recolor with a shared stored workflow
+  ---
+  duration_ms: 1190.829665
+  type: 'test'
+  ...
+# Subtest: cold common caller learns a foreign selection, runs axial.select, acquires one rotation and recalls it at its next decision
+ok 2 - cold common caller learns a foreign selection, runs axial.select, acquires one rotation and recalls it at its next decision
+  ---
+  duration_ms: 1793.425705
+  type: 'test'
+  ...
+# Subtest: two real sealed no-effect inputs exhaust the source context attempts without blind rotation repetition
+ok 3 - two real sealed no-effect inputs exhaust the source context attempts without blind rotation repetition
+  ---
+  duration_ms: 1909.78261
+  type: 'test'
+  ...
+# Subtest: an old-scene intermediate frame supports rotation at a natural boundary and only methods survive restoration
+ok 4 - an old-scene intermediate frame supports rotation at a natural boundary and only methods survive restoration
+  ---
+  duration_ms: 1782.321538
+  type: 'test'
+  ...
+# Subtest: a new level with identical attribution anchors never becomes evidence for the preceding rotation
+ok 5 - a new level with identical attribution anchors never becomes evidence for the preceding rotation
+  ---
+  duration_ms: 1473.81358
+  type: 'test'
+  ...
+# Subtest: a transported rotation becomes useful only after the common caller reacquires selection in the new epoch
+ok 6 - a transported rotation becomes useful only after the common caller reacquires selection in the new epoch
+  ---
+  duration_ms: 2164.132612
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 10963.236396

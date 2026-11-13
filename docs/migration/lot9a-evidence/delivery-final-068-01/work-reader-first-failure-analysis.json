@@ -1,0 +1,14 @@
+{
+  "schema": "logos-engine.lot9a.work-reader-first-failure-analysis.v1",
+  "recordedAt": "2026-11-12T14:57:09.369020+00:00",
+  "retainedFirstReaderStatus": "failed",
+  "differences": 28279,
+  "unattributedDifferences": 58,
+  "unattributedPaths": {
+    "/whyAct/decision/total_ms": 58
+  },
+  "rawDifferencesSha256": "dd76a98e456c2a0cddfa3944b79a301562360112e72453883ef6feae6ca4de4c",
+  "captureReplacementPerformed": false,
+  "nativeSourceChanged": false,
+  "nextAction": "Independent source-bound timing attribution review for this one leaf, then a prospective reader amendment preserving the original failure and all captured values. A corrective reader is not yet executed or passed."
+}

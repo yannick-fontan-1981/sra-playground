@@ -1,0 +1,195 @@
+{
+  "module_id": "series_motion",
+  "declarations": [{
+    "id":"rule.captured_series_cursor_supposition", "kind":"rule",
+    "evaluation":"project_requested_conclusions", "supported_operators":["DERIVE"],
+    "input_contract":"yf_arc3_v5.authority_input.derivation.v1", "output_contract":"yf_arc3_v5.authority_output.derivation.v1",
+    "relation_family":"dynamic",
+    "premises":["source_bound_provisional_footprint", "unique_exact_captured_motion_correspondence", "current_terminal_descriptor", "existing_control_binding_is_preserved_without_duplicate_role"],
+    "invariants":["other_control_candidates_remain_unknown", "role_remains_revisable", "each_primitive_keeps_its_own_motion_evidence", "no_universal_control_law_from_one_series"],
+    "falsifiers":["later_motion_breaks_footprint_covariation", "terminal_descriptor_is_ambiguous"],
+    "term_templates":[{
+      "id_pattern":"supposition.cursor.captured_series.{terminal_entity_ref}", "kind":"schema",
+      "label":"revisable cursor corroborated by a captured conditional series",
+      "required_fields":["terminal_entity_ref", "terminal_observed_value", "terminal_height", "terminal_width"],
+      "all_conditions":[{"field":"canonical_control_count","operator":"equals","expected":0}],
+      "static_attributes":{"role":"cursor_supposition", "morphology_mode":"captured_conditional_series_footprint", "shape_preservation_required":true, "commitment":"revisable", "priority":"before_remaining_directional_calibration"},
+      "attribute_bindings":{"entity_ref":"terminal_entity_ref", "component_ref":"terminal_component_ref", "area":"terminal_area", "observed_value":"terminal_observed_value", "bbox_height":"terminal_height", "bbox_width":"terminal_width", "shape_digest":"terminal_shape_digest", "transition_ref":"series_ref"}
+    }],
+    "claim_templates":[{
+      "id_pattern":"claim.role.candidate.cursor.captured_series.{terminal_entity_ref}",
+      "predicate":"proposes_role_candidate", "family":"structural", "epistemic_status":"proposed",
+      "argument_patterns":["{terminal_entity_ref}","supposition.cursor.captured_series.{terminal_entity_ref}"],
+      "required_fields":["terminal_entity_ref","series_ref"],
+      "all_conditions":[{"field":"canonical_control_count","operator":"equals","expected":0}],
+      "attribute_bindings":{"transition_ref":"series_ref", "action_ref":"terminal_action_ref", "captured_action_refs":"action_refs", "captured_translation_rows":"translation_rows"},
+      "static_attributes":{"commitment":"revisable", "falsifier":"later_motion_breaks_footprint_covariation"}
+    },{
+      "id_pattern":"claim.effect.captured_series_translation.{sample_token}",
+      "predicate":"action_conditions_translation", "family":"dynamic", "epistemic_status":"supported",
+      "argument_patterns":["{sample_action_ref}","{sample_after_frame_ref}","{terminal_entity_ref}"],
+      "required_fields":["sample_token","sample_action_ref","sample_after_frame_ref","terminal_entity_ref","sample_delta_row","sample_delta_col"],
+      "attribute_bindings":{"action_ref":"sample_action_ref", "context_epoch":"context_epoch", "moving_entity_ref":"terminal_entity_ref", "delta_row":"sample_delta_row", "delta_col":"sample_delta_col", "before_frame_ref":"sample_before_frame_ref", "after_frame_ref":"sample_after_frame_ref"},
+      "static_attributes":{"measurement_basis":"exact_captured_series_footprint", "commitment":"revisable", "translation_count":1, "distinct_translation_delta_count":1, "global_transition_meaning_preserved":true},
+      "iteration":{"source_field":"moved_translation_rows", "max_items":128, "item_bindings":{"sample_token":"sample_token", "sample_action_ref":"action_ref", "sample_delta_row":"delta_row", "sample_delta_col":"delta_col", "sample_before_frame_ref":"before_frame_ref", "sample_after_frame_ref":"after_frame_ref"}}
+    }],
+    "reason_refs":["reason.captured_series_samples_test_the_selected_control_model"]
+  },{
+    "id":"policy.capture_captured_series_cursor_appearance", "kind":"selection_policy",
+    "evaluation":"declared_eligibility_single", "supported_operators":["SELECT"],
+    "input_contract":"yf_arc3_v5.authority_input.selection.v1", "output_contract":"yf_arc3_v5.authority_output.selection.v1",
+    "declared_alternative_refs":["memory_capture.captured_series_cursor"],
+    "selection_eligibility_conditions":[{"field":"learning_rows","operator":"is_present"}],
+    "fact_projections":[{"id":"projection.memory_capture.captured_series_cursor","all_conditions":[],"static_facts":{
+      "canonical_learning_projection":{
+        "term_attributes":{"role":"cursor_supposition","morphology_mode":"captured_conditional_series_footprint"},
+        "link_predicate":"proposes_role_candidate", "proof_rule":"rule.captured_series_cursor_supposition",
+        "allowed_link_statuses":["proposed","supported","established"], "link_disposition":"active", "link_polarity":"positive",
+        "entity_attribute":"entity_ref", "transition_attribute":"transition_ref", "component_attribute":"component_ref", "claim_entity_argument_index":0, "action_attribute":"action_ref",
+        "dedup_entry_id_pattern":"supposition.memory.association.{association_token}",
+        "static_learning_facts":{"causal_role_ref":"role.cursor_supposition", "mechanism_schema_refs":["rule.captured_series_cursor_supposition"], "disables_source_entity_role_projection":false, "archives_source_role_fact_projection":true, "falsifier_refs":["falsifier.later_motion_breaks_footprint_covariation"], "action_conditioned_role_evidence_present":true}
+      }
+    }}],
+    "meaning_template_ref_by_alternative":{"memory_capture.captured_series_cursor":"rule.captured_canonical_role_appearances"},
+    "premises":["source_role_claim_has_exact_captured_action_evidence", "current_terminal_tracking_matches_selected_footprint"],
+    "invariants":["no_coordinate_in_portable_appearance", "identical_signature_deduplicates", "other_roles_remain_unknown"],
+    "falsifiers":["source_role_claim_is_falsified"],
+    "reason_refs":["reason.remember_causally_learned_role_appearance"]
+  },{
+    "id": "policy.reconcile_declared_series_motion", "kind": "selection_policy",
+    "evaluation": "declared_eligibility_single", "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "declared_alternative_refs": ["series_motion.observed", "series_motion.stationary_existing_control", "series_motion.unresolved"],
+    "meaning_template_ref_by_alternative":{"series_motion.observed":"rule.captured_series_cursor_supposition"},
+    "selection_eligibility_conditions": [{"field":"eligible","operator":"equals","expected":true}],
+    "premises": ["source_bound_footprint_and_exact_captured_action_lineage"],
+    "invariants": ["one_terminal_reconciliation", "no_per_action_cognitive_replay", "no_universal_control_law_from_one_series", "ambiguity_preserves_unknown_control", "old_level_model_cannot_bind_new_level"],
+    "falsifiers": ["footprint_correspondence_is_ambiguous", "actual_motion_contradicts_the_declared_model", "current_scope_changes"],
+    "reason_refs": ["reason.captured_series_samples_test_the_selected_control_model"],
+    "fact_projections": [
+      {"id":"projection.series_motion.defaults","all_conditions":[],"static_facts":{"eligible":false,"series_motion_response_qualified":false,"series_stationary_control_preserved":false,"retain_current_series_control":false,"retain_quantum_square_binding":false,"commit_series_cursor_supposition":false,"control_identity_rebinding_required":true,"plan_reconciliation_kind":"series_motion_unresolved"}},
+      {
+  "id": "projection.series_motion.stationary_existing_identity",
+  "all_conditions": [
+    {
+      "field": "origin_count",
+      "operator": "equals",
+      "expected": 1
+    },
+    {
+      "field": "unique_samples",
+      "operator": "equals",
+      "expected": true
+    },
+    {
+      "field": "all_samples_match_declared_motion_or_stationarity",
+      "operator": "equals",
+      "expected": true
+    },
+    {
+      "field": "moved_sample_count",
+      "operator": "equals",
+      "expected": 0
+    },
+    {
+      "field": "sample_count",
+      "operator": "greater_than",
+      "expected": 0
+    },
+    {
+      "field": "terminal_descriptor_count",
+      "operator": "equals",
+      "expected": 1
+    },
+    {
+      "field": "terminal_existing_control_count",
+      "operator": "equals",
+      "expected": 1
+    },
+    {
+      "field": "official_boundary_observed",
+      "operator": "equals",
+      "expected": false
+    },
+    {
+      "field": "all_declared_preserved_patches_match",
+      "operator": "equals",
+      "expected": true
+    }
+  ],
+  "static_facts": {
+    "series_stationary_control_preserved": true
+  }
+},
+      {"id":"projection.series_motion.stationary_existing_control","all_conditions":[
+        {"field":"alternative_ref","operator":"equals","expected":"series_motion.stationary_existing_control"},
+        {"field":"series_stationary_control_preserved","operator":"equals","expected":true}
+      ],"static_facts":{"eligible":true,"retain_current_series_control":true,"control_identity_rebinding_required":false,"plan_reconciliation_kind":"series_stationary_existing_control"}},
+      {
+  "id": "projection.series_motion.exact_response",
+  "all_conditions": [
+    {
+      "field": "origin_count",
+      "operator": "equals",
+      "expected": 1
+    },
+    {
+      "field": "unique_samples",
+      "operator": "equals",
+      "expected": true
+    },
+    {
+      "field": "all_samples_match_declared_motion_or_stationarity",
+      "operator": "equals",
+      "expected": true
+    },
+    {
+      "field": "moved_sample_count",
+      "operator": "greater_than",
+      "expected": 0
+    },
+    {
+      "field": "official_boundary_observed",
+      "operator": "equals",
+      "expected": false
+    },
+    {
+      "field": "all_declared_preserved_patches_match",
+      "operator": "equals",
+      "expected": true
+    }
+  ],
+  "static_facts": {
+    "series_motion_response_qualified": true
+  }
+},
+      {"id":"projection.series_motion.current_quantum_square","all_conditions":[
+        {"field":"series_motion_response_qualified","operator":"equals","expected":true},
+        {"field":"terminal_footprint_is_quantum_square","operator":"equals","expected":true}
+      ],"static_facts":{"retain_quantum_square_binding":true}},
+      {"id":"projection.series_motion.bind_current_cursor","all_conditions":[
+        {"field":"series_motion_response_qualified","operator":"equals","expected":true},
+        {"field":"terminal_descriptor_count","operator":"equals","expected":1}
+      ],"static_facts":{"commit_series_cursor_supposition":true}},
+      {"id":"projection.series_motion.observed","all_conditions":[
+        {"field":"alternative_ref","operator":"equals","expected":"series_motion.observed"},
+        {"field":"series_motion_response_qualified","operator":"equals","expected":true}
+      ],"static_facts":{"eligible":true,"retain_current_series_control":true,"control_identity_rebinding_required":false,"plan_reconciliation_kind":"series_motion_observed"}},
+      {"id":"projection.series_motion.completed_declared_bfs_endpoint","all_conditions":[
+        {"field":"series_motion_response_qualified","operator":"equals","expected":true},
+        {"field":"retain_current_series_control","operator":"equals","expected":true},
+        {"field":"declared_standard_bfs_endpoint_expected","operator":"equals","expected":true},
+        {"field":"declared_series_action_count","operator":"equals_reference_field","reference_field":"captured_series_action_count"},
+        {"field":"moved_sample_count","operator":"equals_reference_field","reference_field":"captured_series_action_count"},
+        {"field":"captured_series_action_count","operator":"greater_than","expected":1},
+        {"field":"official_boundary_observed","operator":"equals","expected":false}
+      ],"static_facts":{"record_completed_standard_bfs_endpoint":true}},
+      {"id":"projection.series_motion.unresolved","all_conditions":[
+        {"field":"alternative_ref","operator":"equals","expected":"series_motion.unresolved"},
+        {"field":"series_stationary_control_preserved","operator":"equals","expected":false},
+        {"field":"series_motion_response_qualified","operator":"equals","expected":false}
+      ],"static_facts":{"eligible":true}}
+    ]
+  }]
+}

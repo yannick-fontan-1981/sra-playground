@@ -1,0 +1,120 @@
+{
+  "schema": "logos-engine.followup-clean-repeat-independent-review.v1",
+  "recordedAt": "2026-11-11T15:13:51.730110+00:00",
+  "status": "passed_source_review_only",
+  "reviewer": "/root/audit_caller_contract",
+  "generatorUnderReview": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/tools/repeat-evidence.py",
+    "sha256": "6dbf91bfad102dcd5b576fa00a8f36972ebfeed2d29fcf33aefdfae9fef4f517",
+    "bytes": 41745
+  },
+  "declaration": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/repeat-declaration.json",
+    "sha256": "5dbecd1f377dd9d5e5eb64e8338510c2d48b3996b17d53b1fb4b41c3c2d90f7d",
+    "bytes": 20270
+  },
+  "reviewKind": "source_review_only",
+  "scope": "Prospective clean repeat of the complete fixed ABBA cost window, after withdrawal of the first window for confirmed isolation deviations. The new helper alone was reviewed; unchanged original helpers were read only where necessary to verify their APIs and evidence contracts.",
+  "syntaxCheck": {
+    "method": "Python ast.parse on the exact helper source; standard-library-only review command under a shared performance lock",
+    "passed": true,
+    "projectModulesImported": false,
+    "helperExecuted": false,
+    "bytecodeWritten": false
+  },
+  "chronology": {
+    "declarationRecordedAt": "2026-11-11T15:12:40.938964+00:00",
+    "reviewFollowsActualDeclaration": true,
+    "noRepeatReadinessAtReview": true,
+    "noRepeatWindowAtReview": true,
+    "finalQuietRequestId": "lot7-followup-clean-repeat-f8d5097-final",
+    "finalQuietAnnouncedAt": "2026-11-11T15:07:59.348713+00:00",
+    "freshAggregateQuietAndReadinessStillRequired": true
+  },
+  "nativeDigests": {
+    "baseline": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+    "candidate": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279"
+  },
+  "population": {
+    "measuredSessions": 32,
+    "measuredActions": 400,
+    "excludedWarmupSessions": 8,
+    "excludedWarmupActions": 24
+  },
+  "reviewedContracts": [
+    {
+      "id": "first-window-retention",
+      "finding": "The complete first window remains ineligible for isolated-cost acceptance regardless of its numerical result. The declaration pins the original window, readiness, functional forms, publication inputs, both incident records and exact membership plus fingerprints of the named original performance/tools/contract trees. All later modes recheck these protected bytes; old and repeat timing samples cannot be selected or pooled.",
+      "protectedOriginalFileCountDeclared": 62
+    },
+    {
+      "id": "functional-form-reuse",
+      "finding": "The original strict forms are copied byte-for-byte, retain their original capture timestamps and internal identities, and are explicitly relocated to byte-identical cases. Readiness rechecks the unchanged native pair, full source/test/build/archive inputs, 133-file/5042-test evidence, 11-case/187-check regression evidence, actual published baseline and narrowly closed migration audit. No fresh functional session is claimed.",
+      "originalForms": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance/strict-work-forms.json",
+        "sha256": "825546ffc4f061a1063fbeea4c52c89c2d7a79dbc3dee02e11ab6c1de0ca6637",
+        "bytes": 255907
+      },
+      "reusedForms": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/strict-work-forms.json",
+        "sha256": "825546ffc4f061a1063fbeea4c52c89c2d7a79dbc3dee02e11ab6c1de0ca6637",
+        "bytes": 255907
+      },
+      "functionalCaptureRepeated": false,
+      "newFunctionalSessions": 0
+    },
+    {
+      "id": "fresh-final-quiet",
+      "finding": "Only actual lot6b, lot10b and lot5c acknowledgments for the final request are accepted. Each acknowledgment must follow the final request cutoff and match the exact live status timestamp. Aggregate quiet must follow this review and static preparation, attest all agents idle, no active or queued commands and a stopped preview. Stale 6A or earlier preparation acknowledgments cannot substitute.",
+      "requiredLanes": [
+        "lot6b",
+        "lot10b",
+        "lot5c"
+      ],
+      "cutoff": "2026-11-11T15:07:59.348713+00:00"
+    },
+    {
+      "id": "bounded-status-guard-and-lock",
+      "finding": "run-window acquires the established exclusive performance lock nonblockingly and holds it across the unchanged official driver and strict verifier. It retains start/end snapshots of exactly three named status files, capped at 65536 bytes each, validates the fresh exact acknowledgments and rejects activity, changed payloads or new recorded exceptions. An additional acceptance snapshot requires continued quiet; peers must not be released before accept. Historical 5C contamination and the exact retained 6B startup observation are explicitly distinguished from new deviations.",
+      "lockPath": "/workspace/shared/sra-coordination/performance.lock",
+      "statusReadLimitBytesPerLane": 65536,
+      "statusComparisonException": "updated_at only",
+      "automaticFurtherRepeat": false
+    },
+    {
+      "id": "complete-strict-trial-population",
+      "finding": "All four fixed A1/B1/B2/A2 reports must pass the unchanged strict work verifier. Acceptance binds its exact window, declaration, readiness, forms and all four raw reports, compares all 40 check rows with the complete raw-trial ledger, and requires exactly 32 measured sessions/400 actions plus 8 warmups/24 actions. No measured session, cohort or outlier can be excluded.",
+      "checkedTrials": 40,
+      "structuralExemptions": []
+    },
+    {
+      "id": "original-global-rule-and-diagnostics",
+      "finding": "The unchanged prospective protocol, consolidator, independent arithmetic review and original global reviewer remain pinned. Acceptance independently reconstructs eight measured sessions per version for each case, recomputes pooled medians, and applies the original strict decimal comparison separately to STCK and SMLP. Each global increase must be below 10 percent; phase overruns may pass while every phase/P95 diagnostic and the original unresolved count remain retained. No cross-case compensation, extra noise allowance, selected cohort or old-window timing is admitted."
+    },
+    {
+      "id": "prospective-commit-and-final-recheck",
+      "finding": "Candidate B commits must contain the exact helper, declaration, independent review, readiness, forms, protocol, incident evidence and tool pins; their timestamps must precede the window. Native Git blob membership and content are checked against the frozen source pair. Recheck requires the accepted receipt committed byte-exact in final HEAD, verifies ancestry from its original source commit, rechecks every original input/external input, and compares all acceptance fields other than the explicitly refreshed bookkeeping fields."
+    },
+    {
+      "id": "render-and-acceptance-order",
+      "finding": "The strict verification must finish before the unchanged renderer. The successful exclusive-lock receipt encloses the entire official window and strict verification. Failed driver, strict work, status guard, or global acceptance cannot produce a passed repeat acceptance receipt; partial attempts remain retained without automatic retry."
+    }
+  ],
+  "reviewFindingsClosed": [
+    "Explicitly bind strict-verifier inputs to this repeat window, declaration, readiness and relocated forms, in addition to all four raw reports.",
+    "Require the unchanged prospective cohort consolidator fingerprint and workMetadataExactAcrossAllSessions=true.",
+    "Extend final recheck to all original receipt inputs, external inputs, source-commit ancestry and complete stable acceptance fields.",
+    "Replace the earlier request with the exact final request/cutoff and bound start/end/accept status snapshots of actual 6B/10B/5C."
+  ],
+  "notExecutedByThisReview": [
+    "declare, ready, run-window, accept or recheck modes",
+    "functional capture, test suite, build, game replay or cost measurements",
+    "project module imports, Git native inventory checks or archive verification",
+    "LKEY execution, fixture decoding, oracle, replay or payload analysis"
+  ],
+  "limitations": [
+    "This receipt is a prospective source and syntax review. It is not a passed measurement, a fresh functional test result, or authorization to skip readiness or quiet gates.",
+    "The exclusive lock and explicit all-agent quiet agreement require cooperating actors. Bounded status snapshots detect recorded state changes; they are not continuous operating-system surveillance of every possible unreported command.",
+    "Only a later complete, successful clean repeat and its strict/global/isolation receipts can restore eligible cost evidence. The first published window remains withdrawn for isolation."
+  ]
+}

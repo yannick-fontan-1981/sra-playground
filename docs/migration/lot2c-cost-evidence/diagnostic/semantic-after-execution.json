@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.native-semantic-capture-execution.v1",
+  "startedAt": "2026-11-09T21:18:51.323431+00:00",
+  "finishedAt": "2026-11-09T21:19:06.678438+00:00",
+  "command": [
+    "node",
+    "scripts/capture-native-loop-semantics.mjs",
+    "docs/migration/lot2c-evidence/performance/stck-followup/cases.json",
+    "STCK",
+    "docs/migration/lot2c-cost-evidence/diagnostic/semantic-after.json.gz",
+    "ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b"
+  ],
+  "checkout": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout",
+  "exitCode": 0,
+  "performanceMeasurement": false,
+  "log": {
+    "path": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-after-attempt-01.log.gz",
+    "bytes": 353,
+    "sha256": "2d094a0ecba43c063caeed58e651e1f61756127157f9e2c6440745e58ba80f6e"
+  }
+}

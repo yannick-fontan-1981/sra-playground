@@ -1,0 +1,176 @@
+{
+  "module_id": "acquisition_return",
+  "declarations": [
+    {
+      "id": "policy.appearance_acquisition_return",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "acquisition.tracking_missing",
+        "acquisition.no_candidates",
+        "acquisition.proof_missing",
+        "acquisition.already_stored",
+        "acquisition.products_stored"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "reason_refs": [
+        "reason.acquired_association_requires_current_revalidation"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.acquisition_return.default",
+          "all_conditions": [],
+          "static_facts": {
+            "eligible": false
+          }
+        },
+        {
+          "id": "projection.acquisition_return.tracking_missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "acquisition.tracking_missing"
+            },
+            {
+              "field": "tracking_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "disposition_ref": "acquisition.tracking_missing",
+            "requires_current_revalidation": false
+          }
+        },
+        {
+          "id": "projection.acquisition_return.no_candidates",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "acquisition.no_candidates"
+            },
+            {
+              "field": "tracking_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "disposition_ref": "acquisition.no_candidates",
+            "requires_current_revalidation": false
+          }
+        },
+        {
+          "id": "projection.acquisition_return.proof_missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "acquisition.proof_missing"
+            },
+            {
+              "field": "tracking_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "new_product_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "existing_product_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "disposition_ref": "acquisition.proof_missing",
+            "requires_current_revalidation": false
+          }
+        },
+        {
+          "id": "projection.acquisition_return.already_stored",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "acquisition.already_stored"
+            },
+            {
+              "field": "tracking_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "new_product_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "existing_product_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "disposition_ref": "acquisition.already_stored",
+            "requires_current_revalidation": true
+          }
+        },
+        {
+          "id": "projection.acquisition_return.products_stored",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "acquisition.products_stored"
+            },
+            {
+              "field": "tracking_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "new_product_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "disposition_ref": "acquisition.products_stored",
+            "requires_current_revalidation": true
+          }
+        }
+      ]
+    }
+  ]
+}

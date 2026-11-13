@@ -1,0 +1,159 @@
+{
+  "schema": "logos-engine.retained-regression-input-integrity.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T00:37:17.006295+00:00",
+  "recordsVerified": 20,
+  "restored": [
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+      "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2",
+      "bytes": 12767727,
+      "manifest": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz.parts.json",
+      "parts": 15,
+      "restored": true
+    }
+  ],
+  "inputs": [
+    {
+      "case": "catr-051",
+      "role": "baseline",
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+      "bytes": 1649205,
+      "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6"
+    },
+    {
+      "case": "catr-051",
+      "role": "trace",
+      "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+      "bytes": 24340,
+      "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816"
+    },
+    {
+      "case": "rswp-051",
+      "role": "baseline",
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+      "bytes": 2585868,
+      "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba"
+    },
+    {
+      "case": "rswp-051",
+      "role": "trace",
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+      "bytes": 41445,
+      "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755"
+    },
+    {
+      "case": "fogw-051",
+      "role": "baseline",
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+      "bytes": 8174480,
+      "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c"
+    },
+    {
+      "case": "fogw-051",
+      "role": "trace",
+      "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+      "bytes": 39060,
+      "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46"
+    },
+    {
+      "case": "vois-051",
+      "role": "baseline",
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+      "bytes": 10678168,
+      "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d"
+    },
+    {
+      "case": "vois-051",
+      "role": "trace",
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+      "bytes": 19976,
+      "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d"
+    },
+    {
+      "case": "conn-050",
+      "role": "baseline",
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+      "bytes": 2630905,
+      "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750"
+    },
+    {
+      "case": "conn-050",
+      "role": "trace",
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+      "bytes": 56466,
+      "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102"
+    },
+    {
+      "case": "mind-051",
+      "role": "baseline",
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+      "bytes": 4349054,
+      "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a"
+    },
+    {
+      "case": "mind-051",
+      "role": "trace",
+      "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+      "bytes": 17256,
+      "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c"
+    },
+    {
+      "case": "weav-051",
+      "role": "baseline",
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+      "bytes": 13577757,
+      "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3"
+    },
+    {
+      "case": "weav-051",
+      "role": "trace",
+      "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+      "bytes": 26568,
+      "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2"
+    },
+    {
+      "case": "tria-development-4b",
+      "role": "baseline",
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+      "bytes": 3161161,
+      "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe"
+    },
+    {
+      "case": "tria-development-4b",
+      "role": "trace",
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+      "bytes": 13286,
+      "sha256": "916d0f1cb1dcbfd9b7ba7624e7d3d4648a91ae7ef64583288af4711d2a955ac3"
+    },
+    {
+      "case": "craf-055",
+      "role": "baseline",
+      "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+      "bytes": 12767727,
+      "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2"
+    },
+    {
+      "case": "craf-055",
+      "role": "trace",
+      "path": "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+      "bytes": 40777,
+      "sha256": "cf69ad941e80e17f8d6cd66edc0419a0c6ff7aa8d9bbdaf503cb56a49e8c3f98"
+    },
+    {
+      "case": "isos-development-4c",
+      "role": "baseline",
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+      "bytes": 3027289,
+      "sha256": "93e59ab1146d4eef7c944a0e1fc0ab7b0d539cc90a074abe424742be011eec37"
+    },
+    {
+      "case": "isos-development-4c",
+      "role": "trace",
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-public-trace.json.gz",
+      "bytes": 11183,
+      "sha256": "5b302279efb140d1c549d9650d434efb38fde0b8bc5809ab072de66159c8c329"
+    }
+  ],
+  "replaysExecuted": 0
+}

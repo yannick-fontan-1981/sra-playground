@@ -1,0 +1,333 @@
+{
+  "module_id": "b_parent_source_record",
+  "declarations": [
+    {
+      "id": "policy.b_parent_source_record",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_current_canonical_method_and_bindings_precede_measurement_need"
+      ],
+      "premises": [
+        "named_current_evidence",
+        "source_declared_record_contract"
+      ],
+      "invariants": [
+        "no_world_law_or_goal_confirmation",
+        "no_act_authority",
+        "preserve_parent_and_other_records"
+      ],
+      "falsifiers": [
+        "stale_evidence",
+        "record_reference_collision",
+        "different_current_scope"
+      ],
+      "declared_alternative_refs": [
+        "parent_source.method",
+        "parent_source.bindings",
+        "parent_source.current",
+        "parent_source.blocked"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.parent_source.method",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "parent_source.method"
+            },
+            {
+              "field": "record_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_record_equal",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "projection_contract_ref",
+              "operator": "equals",
+              "expected": "parent.measurement_method.b.v1"
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.parent_source.bindings",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "parent_source.bindings"
+            },
+            {
+              "field": "record_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_record_equal",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "projection_contract_ref",
+              "operator": "equals",
+              "expected": "parent.measurement_bindings.b.v1"
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.parent_source.current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "parent_source.current"
+            },
+            {
+              "field": "record_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_record_equal",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.parent_source.blocked",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "parent_source.blocked"
+            },
+            {
+              "field": "record_bindings_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "parent_source.method": "rule.b_parent_method_record",
+        "parent_source.bindings": "rule.b_parent_bindings_record"
+      }
+    },
+    {
+      "id": "rule.b_parent_method_record",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "source_selected_current_record"
+      ],
+      "applicability": [
+        "current_source_record_declaration"
+      ],
+      "invariants": [
+        "descriptor_is_not_causal_law_confirmation",
+        "no_action_authority"
+      ],
+      "falsifiers": [
+        "changed_current_record_or_scope"
+      ],
+      "reason_refs": [
+        "reason_current_canonical_method_and_bindings_precede_measurement_need"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{record_ref}",
+          "kind": "value",
+          "label": "Source parent measurement method record",
+          "required_fields": [
+            "record_ref",
+            "request_template",
+            "request_slot_specs",
+            "parent_goal_kind_path",
+            "parent_goal_future_path",
+            "support_claim_ref"
+          ],
+          "attribute_bindings": {
+            "request_template": "request_template",
+            "solving_question_template": "solving_question_template",
+            "operation_binding": "operation_binding",
+            "request_slot_specs": "request_slot_specs",
+            "parent_goal_kind_path": "parent_goal_kind_path",
+            "parent_goal_future_path": "parent_goal_future_path",
+            "support_claim_ref": "support_claim_ref"
+          },
+          "static_attributes": {
+            "projection_contract_ref": "parent.measurement_method.b.v1",
+            "projection_contract": "parent.measurement_method.b.v1"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{support_claim_ref}",
+          "predicate": "records_portable_parent_measurement_method",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{record_ref}"
+          ],
+          "required_term_patterns": [
+            "{record_ref}"
+          ],
+          "required_fields": [
+            "record_ref",
+            "support_claim_ref",
+            "payload_digest"
+          ],
+          "scope_bindings": {},
+          "attribute_bindings": {
+            "payload_digest": "payload_digest"
+          },
+          "static_attributes": {
+            "no_world_law_confirmation": true,
+            "no_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_parent_bindings_record",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "source_selected_current_record"
+      ],
+      "applicability": [
+        "current_source_record_declaration"
+      ],
+      "invariants": [
+        "descriptor_is_not_causal_law_confirmation",
+        "no_action_authority"
+      ],
+      "falsifiers": [
+        "changed_current_record_or_scope"
+      ],
+      "reason_refs": [
+        "reason_current_canonical_method_and_bindings_precede_measurement_need"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{record_ref}",
+          "kind": "value",
+          "label": "Source parent measurement bindings record",
+          "required_fields": [
+            "record_ref",
+            "method_ref",
+            "parent_goal_ref",
+            "question_ref",
+            "consumer_ref",
+            "scope_ref",
+            "epoch",
+            "input_revision_ref",
+            "episode_ref",
+            "level_scope_ref",
+            "current_frame_ref",
+            "slot_bindings",
+            "support_claim_ref"
+          ],
+          "attribute_bindings": {
+            "method_ref": "method_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "question_ref": "question_ref",
+            "consumer_ref": "consumer_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "current_frame_ref": "current_frame_ref",
+            "slot_bindings": "slot_bindings",
+            "support_claim_ref": "support_claim_ref"
+          },
+          "static_attributes": {
+            "projection_contract_ref": "parent.measurement_bindings.b.v1",
+            "projection_contract": "parent.measurement_bindings.b.v1"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{support_claim_ref}",
+          "predicate": "supports_current_parent_measurement_bindings",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{record_ref}",
+            "{parent_goal_ref}"
+          ],
+          "required_term_patterns": [
+            "{record_ref}",
+            "{parent_goal_ref}"
+          ],
+          "required_fields": [
+            "record_ref",
+            "support_claim_ref",
+            "payload_digest"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref"
+          },
+          "attribute_bindings": {
+            "payload_digest": "payload_digest"
+          },
+          "static_attributes": {
+            "no_world_law_confirmation": true,
+            "no_action_authority": true
+          }
+        }
+      ]
+    }
+  ]
+}

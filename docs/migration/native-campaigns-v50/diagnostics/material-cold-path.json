@@ -1,0 +1,456 @@
+{
+  "schema": "logos-engine.v50.material-cold-path-diagnostic.v1",
+  "status": "passed",
+  "inputs": {
+    "publicTrace": {
+      "path": "docs/migration/native-campaigns-v50/life-public-trace.json.gz",
+      "sha256": "a015b0fe1bc9c7b7bcc4e8d7ec38bbc005fb8ba72f91f5f2156fc6576cd4a5ab",
+      "bytes": 1351
+    },
+    "nativeSourceManifest": {
+      "path": "docs/migration/native-campaigns-v50/source-manifest.json",
+      "sha256": "46c2ae1eafd582c396f6c2a977fdd1401f8919f8381b5324b57cc35df816013c",
+      "bytes": 19598
+    }
+  },
+  "sourceBefore": {
+    "fileCount": 168,
+    "digest": "e156fdd0bcf7b1aa81233be74a6c78b1dd0ac819f6a46bcd103e1622bf2d40f0"
+  },
+  "sourceAfter": {
+    "fileCount": 168,
+    "digest": "e156fdd0bcf7b1aa81233be74a6c78b1dd0ac819f6a46bcd103e1622bf2d40f0"
+  },
+  "sessions": 1,
+  "realRecordedReturnsReplayed": 1,
+  "newGameHostRuns": 0,
+  "dispatchedActions": 0,
+  "initial": {
+    "kind": "action",
+    "reason": null,
+    "command": {
+      "action_ref": "ACTION6",
+      "data": {
+        "x": 24,
+        "y": 7
+      }
+    },
+    "selected": "animated_contact",
+    "actions": 0,
+    "levelsCompleted": 0,
+    "callerAcquiredTransitions": 0,
+    "selection": "goal_access"
+  },
+  "boundary": {
+    "kind": "boundary",
+    "reason": null,
+    "command": null,
+    "selected": "animated_contact",
+    "actions": 1,
+    "levelsCompleted": 0,
+    "callerAcquiredTransitions": 1,
+    "selection": "goal_access"
+  },
+  "stopped": {
+    "kind": "stopped",
+    "reason": "frontier_unknown",
+    "command": null,
+    "selected": "animated_contact",
+    "actions": 1,
+    "levelsCompleted": 0,
+    "callerAcquiredTransitions": 1,
+    "selection": null
+  },
+  "beforeStopReason": null,
+  "afterStopReason": null,
+  "ownStateUnchangedOnResume": true,
+  "finalRasterRestored": true,
+  "publicProtocolUnchanged": true,
+  "frameChanges": [
+    {
+      "index": 0,
+      "changedPixels": 0,
+      "bbox": null,
+      "changes": []
+    },
+    {
+      "index": 1,
+      "changedPixels": 12,
+      "bbox": [
+        30,
+        15,
+        32,
+        43
+      ],
+      "changes": [
+        [
+          30,
+          15,
+          1,
+          8
+        ],
+        [
+          31,
+          15,
+          1,
+          8
+        ],
+        [
+          32,
+          15,
+          1,
+          8
+        ],
+        [
+          31,
+          16,
+          1,
+          8
+        ],
+        [
+          30,
+          29,
+          1,
+          8
+        ],
+        [
+          31,
+          29,
+          1,
+          8
+        ],
+        [
+          32,
+          29,
+          1,
+          8
+        ],
+        [
+          31,
+          30,
+          1,
+          8
+        ],
+        [
+          30,
+          42,
+          1,
+          8
+        ],
+        [
+          31,
+          42,
+          1,
+          8
+        ],
+        [
+          32,
+          42,
+          1,
+          8
+        ],
+        [
+          31,
+          43,
+          1,
+          8
+        ]
+      ]
+    },
+    {
+      "index": 2,
+      "changedPixels": 0,
+      "bbox": null,
+      "changes": []
+    },
+    {
+      "index": 3,
+      "changedPixels": 0,
+      "bbox": null,
+      "changes": []
+    }
+  ],
+  "contactScope": {
+    "available_action_refs": [
+      "ACTION6"
+    ],
+    "command": {
+      "action_ref": "ACTION6",
+      "data": {
+        "x": 24,
+        "y": 7
+      }
+    },
+    "epoch": 1,
+    "evidence": [
+      "anonymous-material-cold-path-diagnostic:epoch:1:revision:1:frame:9cf0321c97cd4ec7",
+      "anonymous-material-cold-path-diagnostic:epoch:1:revision:2:frame:9cf0321c97cd4ec7"
+    ],
+    "frame_digest": "9cf0321c97cd4ec754393e834b157de7e7cde599fe0974595ae4ffdba7d8ab3c",
+    "public_state": "NOT_FINISHED",
+    "qualification": "Only the returned public images and protocol fields were unchanged; no hidden-state equivalence is inferred.",
+    "returned_frame_count": 4,
+    "score": 0,
+    "status": "outside_stationary_invitation_scope",
+    "transition_ref": "reasoning:transition:1"
+  },
+  "contactState": {
+    "format": "animated_contact.v1",
+    "events": [
+      {
+        "after_rows_digest": "9cf0321c97cd4ec754393e834b157de7e7cde599fe0974595ae4ffdba7d8ab3c",
+        "boundary": false,
+        "command": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 24,
+            "y": 7
+          }
+        },
+        "epoch": 1,
+        "evidence": [
+          "anonymous-material-cold-path-diagnostic:epoch:1:revision:1:frame:9cf0321c97cd4ec7",
+          "anonymous-material-cold-path-diagnostic:epoch:1:revision:2:frame:9cf0321c97cd4ec7"
+        ],
+        "kind": "measured_animated_contact",
+        "measurement": {
+          "ballistic_contact_solution_present": false,
+          "ballistic_curve_disclosure_present": false,
+          "moving_transient_component_path_count": 0,
+          "ordered_transient_component_packet_frame_count": 5,
+          "point_intersects_unique_transient_source_morphology_peer": false,
+          "transient_component_absent_from_settled_frame": false,
+          "transient_component_path_frame_bound_reached": false,
+          "transient_component_path_seed_bound_reached": false,
+          "transient_component_path_seed_count": 0,
+          "transient_terminal_before_source_peer_along_horizontal_direction": false,
+          "transient_terminal_beyond_source_peer_along_horizontal_direction": false,
+          "transient_terminal_restored_component_differs_from_source_peer": false,
+          "transient_terminal_restored_persistent_contact_present": false,
+          "transient_terminal_unique_restored_persistent_component_present": false,
+          "unique_moving_transient_component_path_present": false,
+          "unique_transient_path_area_span_within_maximum_extent": false,
+          "unique_transient_path_consistent_noncolinear_turn": false,
+          "unique_transient_path_curved": false,
+          "unique_transient_path_distinct_position_count": 0,
+          "unique_transient_path_frame_count": 0,
+          "unique_transient_path_horizontal_direction_consistent": false,
+          "unique_transient_path_orientation_moment_signature_changes": false,
+          "unique_transient_path_palette_value_preserved": false,
+          "unique_transient_path_single_rise_to_fall_reversal": false,
+          "unique_transient_path_source_candidate_count": 0,
+          "unique_transient_path_source_candidate_present": false,
+          "unique_transient_path_source_morphology_peer_count": 0,
+          "unique_transient_path_source_morphology_peer_present": false,
+          "unique_transient_path_source_morphology_peer_value_unique": false,
+          "unique_transient_path_unique_nearest_continuation_present": false,
+          "unique_transient_path_vertical_velocity_changes": false
+        },
+        "mode": "invitation",
+        "model": null,
+        "packet_frames": 4,
+        "scalar_after": {
+          "scalar_fill_count": 0,
+          "scalar_fill_display_present": false,
+          "scalar_fill_end": -1,
+          "scalar_fill_index": -1,
+          "scalar_fill_orientation": "",
+          "scalar_fill_prefix_value": -1,
+          "scalar_fill_span": 0,
+          "scalar_fill_start": -1,
+          "scalar_fill_suffix_value": -1
+        },
+        "scalar_before": {
+          "scalar_fill_count": 0,
+          "scalar_fill_display_present": false,
+          "scalar_fill_end": -1,
+          "scalar_fill_index": -1,
+          "scalar_fill_orientation": "",
+          "scalar_fill_prefix_value": -1,
+          "scalar_fill_span": 0,
+          "scalar_fill_start": -1,
+          "scalar_fill_suffix_value": -1
+        },
+        "scalar_change": null,
+        "scope": "Ordered public raster measurement and provisional contact/disclosure calculus; no complete or universal physics asserted."
+      }
+    ],
+    "authorized": {}
+  },
+  "contactRefusal": {
+    "status": "unknown",
+    "block_unrelated_probe": true,
+    "reason": "measured_contact_continuation_requires_current_evidence"
+  },
+  "material": {
+    "beforeOffer": {
+      "proposalKind": "typed_carrier_experiment",
+      "reason": "test_current_marked_carrier",
+      "actions": [
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 6,
+            "y": 48
+          }
+        }
+      ],
+      "guard": {
+        "admitted": true,
+        "reason": "current_carrier_and_exact_point"
+      },
+      "pointGuard": true,
+      "requestedStopReason": null,
+      "retainedOwnState": {
+        "carrier_events": [],
+        "carrier_context": null,
+        "carrier_calibration": [],
+        "flow_epoch": null,
+        "flow_children": [],
+        "flow_context": null,
+        "flow_models": {},
+        "flow_filled": [],
+        "flow_events": [],
+        "pose_epoch": null,
+        "pose_initial_parts": [],
+        "pose_controls": [],
+        "pose_models": {},
+        "pose_context": null,
+        "pose_rule": null,
+        "pose_events": [],
+        "requested_stop_reason": null
+      },
+      "retainedOwnStateUnchangedByProposal": true,
+      "fullStateDigestUnchangedByProposal": true,
+      "scope": "Proposal reconstructed from the actually acquired common-owner journal, after supplying the current source configuration. Never submitted to the runtime or game."
+    },
+    "afterOffer": {
+      "proposalKind": "typed_carrier_experiment",
+      "reason": "test_current_marked_carrier",
+      "actions": [
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 6,
+            "y": 48
+          }
+        }
+      ],
+      "guard": {
+        "admitted": true,
+        "reason": "current_carrier_and_exact_point"
+      },
+      "pointGuard": true,
+      "requestedStopReason": null,
+      "retainedOwnState": {
+        "carrier_events": [],
+        "carrier_context": null,
+        "carrier_calibration": [],
+        "flow_epoch": null,
+        "flow_children": [],
+        "flow_context": null,
+        "flow_models": {},
+        "flow_filled": [],
+        "flow_events": [],
+        "pose_epoch": null,
+        "pose_initial_parts": [],
+        "pose_controls": [],
+        "pose_models": {},
+        "pose_context": null,
+        "pose_rule": null,
+        "pose_events": [],
+        "requested_stop_reason": null
+      },
+      "retainedOwnStateUnchangedByProposal": true,
+      "fullStateDigestUnchangedByProposal": true,
+      "scope": "Proposal reconstructed from the actually acquired common-owner journal, after supplying the current source configuration. Never submitted to the runtime or game."
+    }
+  },
+  "windowGroup": {
+    "id": "window_constraints",
+    "families": [
+      "public_occurrence_recall",
+      "public_occurrence_recall",
+      "public_occurrence_recall",
+      "public_occurrence_recall",
+      "public_occurrence_recall",
+      "public_occurrence_recall",
+      "public_occurrence_recall",
+      "public_occurrence_recall",
+      "public_occurrence_recall",
+      "public_occurrence_recall",
+      "public_occurrence_recall",
+      "public_occurrence_recall",
+      "window_constraints",
+      "periodic_sums",
+      "reflected_cover",
+      "regular_field_correspondence"
+    ],
+    "entryPoints": [
+      "occluded_catalogue_composition",
+      "queued_field_composition",
+      "product_panel_composition",
+      "labeled_sequence_composition",
+      "linked_packet_composition",
+      "trace_field_composition",
+      "cell_patch_composition",
+      "observed_occurrence_recall",
+      "observed_program_composition",
+      "typed_material_flow",
+      "radial_port_composition",
+      "rooted_quota_composition",
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "observedSelectionTrace": [
+    {
+      "kind": "proposal",
+      "family": "animated_contact",
+      "revision": 1,
+      "actions": [
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 24,
+            "y": 7
+          }
+        }
+      ],
+      "question": {
+        "reason": "Does addressing the unique current symmetric cross reveal a transient relation useful for official completion? Its physical role remains unknown.",
+        "hypothesis_refs": [
+          "anonymous-material-cold-path-diagnostic:epoch:1:revision:1:frame:9cf0321c97cd4ec7"
+        ]
+      }
+    },
+    {
+      "kind": "before_guard",
+      "family": "animated_contact",
+      "index": 0,
+      "admitted": true,
+      "reason": "current_animation_question_bound",
+      "point_bound": true
+    },
+    {
+      "kind": "why_act_release",
+      "admitted": true,
+      "decision_revision": 1,
+      "native_gate": true,
+      "graph_chain": "4821044d7aaa9456b12998257b55c7cf158fd1302e4e73355692465843537761"
+    },
+    {
+      "kind": "stop",
+      "reason": "frontier_unknown"
+    }
+  ],
+  "conclusion": "The selected animated-contact invitation acquired a transient public response and no contact model. Its following source refusal blocks unrelated probes. The current stationary-refusal scope rejects this trace because one intermediate frame differs, even though the final raster and protocol are restored. The material inquiry is still available with current guards from the real common-owner memory; it has not acquired any carrier/flow/pose event. No selection or game action was overridden.",
+  "qualification": "The final displayed raster is restored; this does not assert equality of hidden game state. The diagnostic does not establish that choosing another question will complete a level.",
+  "generator": {
+    "path": "scripts/diagnose-v50-material-cold-path.mjs",
+    "sha256": "1b1484e2cd60d2625716c092ff4eee2c596cb0cb7e234c9c9d82bd6a8b22a479",
+    "bytes": 8597
+  }
+}

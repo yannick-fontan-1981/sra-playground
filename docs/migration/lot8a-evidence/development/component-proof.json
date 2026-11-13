@@ -1,0 +1,122 @@
+{
+  "schema": "logos-engine.v6.motif-access-development-component-proof.v1",
+  "status": "passed_bounded_component_and_common_runtime_development",
+  "recordedAt": "2026-11-11T17:33:11.387482+00:00",
+  "qualification": "Development on actual published Site103/native0.62. Not final0.65 qualification, official game success, cost acceptance or publication.",
+  "nativeSource": {
+    "fileCount": 312,
+    "digest": "a6ea3e5e8140b14aa260485ebd4192429a86c4d3ec02075f14043f215cc798e1"
+  },
+  "nativeFiles": [
+    {
+      "path": "src/logos-engine/v6-motif-access.ts",
+      "sha256": "2302d521959133b39560792d01ae4c2403a3b4b4a333ae10e089359a403394e0",
+      "bytes": 32665
+    },
+    {
+      "path": "src/logos-engine/v6-motif-access-geometry.ts",
+      "sha256": "36d5e1d51a1ebef5c82dea7951c18fe115af2067624447d39e37100c4a9de9b3",
+      "bytes": 15261
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "sha256": "26a7c34c97e76c0c4d73fac965314736cf887417b40e8a17a4a47806ce210e2a",
+      "bytes": 163567
+    },
+    {
+      "path": "src/logos-engine/v6-field-constraints.ts",
+      "sha256": "0d75ae535fb4e37c7e4ee28474e17e341afd5f436d717356a8f9b5617f1ae619",
+      "bytes": 35731
+    }
+  ],
+  "freshDeclaredTests": {
+    "path": "docs/migration/lot8a-evidence/development-site103-01/tests-run.json",
+    "sha256": "18458c942c457edb2e9796e9247279e5e975c1b7e210f2aa40b8afc3c2e96b7d",
+    "bytes": 1221815
+  },
+  "freshCounts": {
+    "tests": 5422,
+    "pass": 5422,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "freshTestFiles": 138,
+  "motifTestFilesIncluded": [
+    {
+      "path": "tests/v6-motif-access-reference.test.ts",
+      "sha256": "57989c648156c9545bc43f43392886ad01c07d16893ae5bd0e20d061fea0c715",
+      "bytes": 12297
+    },
+    {
+      "path": "tests/v6-motif-access-contract.test.ts",
+      "sha256": "06898e719de4c9291bbdf2fa0ac99e6062c90d391764c6f77d52dddb7d011c98",
+      "bytes": 19736
+    },
+    {
+      "path": "tests/v6-motif-access-kernel.test.ts",
+      "sha256": "a6f21fbdf6305cec8d23a59076c45ef78bbcb5163434ae9151734287dcefee5b",
+      "bytes": 9890
+    }
+  ],
+  "sourceOracle": {
+    "path": "docs/migration/lot8a-evidence/contract/reference-oracle.json",
+    "sha256": "398c868302d0612978dba2ecefef181a28e93d0ebd19c0a5f0fb4dc0714cb098",
+    "bytes": 2061
+  },
+  "initialNativeReference": {
+    "path": "docs/migration/lot8a-evidence/contract/reference-parity.json",
+    "sha256": "32fc45e9233d028690ca327a49041b8cb92786dd3f73ae6ae358fc1af74dc3b1",
+    "bytes": 4990
+  },
+  "historicalQualification": "The initial182/182 comparison remains historical. The same original expectations are freshly exercised by the passing138-file suite on the hardened merged native source.",
+  "oracleScope": {
+    "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "geometryCases": 33,
+    "scenarios": 17,
+    "operations": 100,
+    "sourceFilesVerifiedBeforeAndAfter": [
+      1786,
+      1786
+    ],
+    "sourceModified": false,
+    "qualification": "Unmodified pinned component and independent synthetic geometry only; no game data, live dispatch, original caller integration or solved-level claim."
+  },
+  "fixture": {
+    "path": "tests/fixtures/v6-motif-access-reference.json",
+    "sha256": "627137ede2b5397eddf3d77455a8a7d70cdd88fcec872af8a84236b85a3f985c",
+    "bytes": 433673
+  },
+  "sourceReview": {
+    "path": "docs/migration/lot8a-evidence/contract/site103-integration-review.json",
+    "sha256": "f17676f4fd533da8d3ea797191e620d08dec17304733db047b1a2e1f6c7c2732",
+    "bytes": 11963
+  },
+  "currentColdKernel": {
+    "path": "docs/migration/lot8a-evidence/development/kernel-post-site103.json",
+    "sha256": "34beb5c7266ea1cb628b42544af3846a4a6be222b01ae64de417a7ef95448987",
+    "bytes": 1256
+  },
+  "contracts": [
+    "Source proposal, bind/before/after/record, geometry, ordering and detached state restoration in the declared synthetic domain.",
+    "One selected-return acquisition through the real common factory, WHY/ACT and common knowledge store; subsequent restored decision uses acquired motion.",
+    "A contrary effect changes the next action; removing only Motif acquisition prevents the learned transition.",
+    "The source symmetry exclusion affects only the final fallback, preserving earlier entries and later groups.",
+    "Bounded native search propagates current deadline/abort and reports incomplete without returning a partial route or unqualified fallback."
+  ],
+  "limits": {
+    "newLiveGames": 0,
+    "officialLevelsClaimed": 0,
+    "fullCallerParity": false,
+    "finalIntegratedQualification": false,
+    "costAcceptance": false,
+    "sitePublication": false,
+    "search": "8192 states/16384 frontier entries. Stored paths may consume O(S^2) space; these are not byte-memory or universal latency bounds.",
+    "requiredPublishedPredecessors": [
+      "0.63",
+      "0.64"
+    ],
+    "LKEY": "Permanently closed; four loading test modules excluded and no payload/oracle/replay/game activity."
+  }
+}

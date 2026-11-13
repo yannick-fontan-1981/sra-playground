@@ -1,0 +1,33 @@
+{
+  "name": "generate-content",
+  "command": [
+    "node",
+    "scripts/generate-content-pages.mjs"
+  ],
+  "startedAt": "2026-11-11T19:19:57.459428+00:00",
+  "finishedAt": "2026-11-11T19:19:57.628702+00:00",
+  "elapsedSeconds": 0.1692894179977884,
+  "exitCode": 0,
+  "predeclaredTimeoutSeconds": 180,
+  "stoppedReason": null,
+  "stdout": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/generate-content/generate-content-stdout.log",
+    "sha256": "8473e798446f07ef264c58ad2ea8e8f4ef5c88a29e88fa5ea54b437457dea316",
+    "bytes": 152
+  },
+  "stderr": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/generate-content/generate-content-stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "activity": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/generate-content/generate-content-activity.jsonl",
+    "sha256": "9fe4cfb1484b19016fc43986bb6a3efa6d9e785455720ef5eab92c62b96677bc",
+    "bytes": 107
+  },
+  "logTransport": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/generate-content/generate-content-log-transport.json",
+    "sha256": "1005d02806cc56f47aa2d9a4cd33319d8e1f5ffb9fe953a9f0d9d4ef6f761b83",
+    "bytes": 2069
+  }
+}

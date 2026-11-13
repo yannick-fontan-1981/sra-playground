@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.source-checkpoint-receipt.v1",
+  "observedAt": "2026-11-11T17:57:47.161620+00:00",
+  "commit": "17bba57ab1ed3c29dfe695e72e333a13796362eb",
+  "branch": "lot6b-selected-rigid-checkpoint-20261111",
+  "previousRemoteCommit": "4d1af37632cc40323171ddb3d05dab4c8389aa34",
+  "pushExitCode": 0,
+  "exactLsRemoteVerified": true,
+  "publication": "none; private source checkpoint only",
+  "credentialPublishOnPushAccepted": false,
+  "advertisedPredecessorSourceFetched": {
+    "main": "2981a62d456802d39dcde316734793e905fb0ebf",
+    "lot5c-recovery-checkpoint-20261111": "6eef29d17137d6c81d4c0b0ab6c389060a8d5045"
+  },
+  "qualification": "Preserves published0.62 integration, provisional805b integration, firstbatch failure and test-only correction. Does not claim finalvalidation or actual0.63publication."
+}

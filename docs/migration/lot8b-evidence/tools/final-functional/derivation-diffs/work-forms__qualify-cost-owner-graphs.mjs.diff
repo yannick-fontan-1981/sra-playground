@@ -1,0 +1,138 @@
+--- docs/migration/lot8b-evidence/tools/delivery/work-forms/qualify-cost-owner-graphs.mjs
++++ docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs.mjs
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env node
+-/** Review published 0.66 / candidate 8B work forms, five-owner observations and each complete graph.
++/** Review retained published 0.66 / final 0.67 candidate 8B work forms, five-owner observations and each complete graph.
+  * CLI: node SCRIPT INVENTORY.json BASELINE.gz BASELINE.receipt.json CANDIDATE.gz CANDIDATE.receipt.json REVIEW.json FORMS.json
+  * Reads functional captures only. No runtime, replay, game or timing report runs.
+  */
+@@ -22,11 +22,12 @@
+ 
+ const SCRIPT = fileURLToPath(import.meta.url), ROOT = resolve(dirname(SCRIPT), '../../../../../..');
+ const BASE = resolve(ROOT, 'docs/migration/lot8b-evidence');
+-const TOOL_DIRECTORY = resolve(BASE, 'tools/delivery/work-forms');
++const FINAL = resolve(ROOT, 'docs/migration/lot8b-evidence/final-version-067-01');
++const TOOL_DIRECTORY = resolve(BASE, 'tools/final-functional/work-forms');
+ const CAPTURE_TOOL = resolve(TOOL_DIRECTORY, 'capture-cost-owner-graphs.mjs');
+ const INVENTORY_TOOL = resolve(TOOL_DIRECTORY, 'record-owner-source-inventory.mjs');
+-const DERIVED_FROM = resolve(ROOT, 'docs/migration/lot8a-evidence/tools/work-forms/qualify-cost-owner-graphs.mjs');
+-const CAPTURE_DERIVATION = resolve(ROOT, 'docs/migration/lot8a-evidence/tools/work-forms/capture-cost-owner-graphs.mjs');
++const DERIVED_FROM = resolve(ROOT, 'docs/migration/lot8b-evidence/tools/delivery/work-forms/qualify-cost-owner-graphs.mjs');
++const CAPTURE_DERIVATION = resolve(ROOT, 'docs/migration/lot8b-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs');
+ const POLICY_PATH = 'reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm';
+ const OWNER = 'branch_routing';
+ const OWNERS = { binding: 'public_observed_binding', selectedRigid: 'selected_rigid', motif: 'motif_access',
+@@ -35,8 +36,43 @@
+ const PUBLISHED_BASELINE = '4ff7bf45286a8a19d34401988adca587253ae41e';
+ const EXPECTED = {
+   baseline: { fileCount: 329, digest: 'ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316' },
+-  candidate: { fileCount: 331, digest: '3ff1d9ad56e22aedc0fee3a0da6a3af50a1da0bc14a0ba01cb38272ba85234be' },
++  candidate: { fileCount: 331, digest: 'c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a' },
+ };
++// Reuse exactly the historically captured published A. Only candidate B may use
++// this final generator; no arbitrary old-generator capture is accepted.
++const RETAINED_BASELINE = {
++  "report": {
++    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.json.gz",
++    "bytes": 7212928,
++    "sha256": "384a5f5bb3e00174e8113e35387132284e90a6d5a1af5303ecfe9ed0db3df893"
++  },
++  "receipt": {
++    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.receipt.json",
++    "bytes": 127765,
++    "sha256": "5aebb7ab6f603f305b28bb3ffd262fc4103f433ea4ac7b0e0db051d75036d084"
++  },
++  "generator": {
++    "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs",
++    "bytes": 31412,
++    "sha256": "def20965d488ff15cf225961f407853b29cee0eb22e9119cfe9f1611dcc73a3a"
++  },
++  "derivedFrom": {
++    "path": "docs/migration/lot8a-evidence/tools/work-forms/capture-cost-owner-graphs.mjs",
++    "bytes": 29563,
++    "sha256": "fa7c225349ad2652ff0b45cd53b7f8de7ac94d4131363e5f3c1568340d0a600f"
++  },
++  "cases": {
++    "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/cases.json",
++    "bytes": 1498,
++    "sha256": "65e27dbcc2f5871ab259358cc46576b2671058630be0b37c643eadad66593173"
++  },
++  "nativeSourceBefore": {
++    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/baseline-native.json",
++    "bytes": 39098,
++    "sha256": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7"
++  }
++};
++const VERSIONS = { baseline: '0.66.0', candidate: '0.67.0' };
+ const IDS = [`family_state:${OWNER}`, `family_activation:${OWNER}`];
+ const IDSET = new Set(IDS);
+ const SOURCE_PROOFS = ['src/logos-engine/v6-native-runtime.ts', 'src/logos-engine/v6-motif-access.ts',
+@@ -213,6 +249,10 @@
+     this.result.derivedFrom = await this.input(DERIVED_FROM);
+     this.captureTool = await this.input(CAPTURE_TOOL);
+     this.captureDerivation = await this.input(CAPTURE_DERIVATION);
++    for (const record of Object.values(RETAINED_BASELINE)) await this.recorded(record);
++    assert.equal(this.paths.baseline, resolve(ROOT, RETAINED_BASELINE.report.path));
++    assert.equal(this.paths.baselineReceipt, resolve(ROOT, RETAINED_BASELINE.receipt.path));
++    this.result.retainedBaseline = RETAINED_BASELINE;
+     for (const role of ['baseline', 'candidate']) {
+       const receiptPath = this.paths[role + 'Receipt']; await this.input(receiptPath);
+       const receipt = await read(receiptPath); this.receipts[role] = receipt;
+@@ -224,12 +264,18 @@
+       assert.deepEqual({ fileCount: receipt.nativeInventoryBefore.fileCount, digest: receipt.nativeDigest }, EXPECTED[role]);
+       if (role === 'baseline') assert.equal(receipt.sourceCommit, PUBLISHED_BASELINE);
+       assert.equal(receipt.nativeDigest, receipt.nativeInventoryBefore.digest);
+-      assert.equal(receipt.nativeVersion, '0.66.0');
++      assert.equal(receipt.nativeVersion, VERSIONS[role]);
+       assert.deepEqual(receipt.nativeInventoryBefore, receipt.nativeInventoryAfter);
+       assert.deepEqual(receipt.nativeSourceBefore, receipt.nativeSourceAfter);
+       assert.deepEqual(receipt.inputsBefore, receipt.inputsAfter); assert.deepEqual(receipt.generator, receipt.generatorAfter);
+-      assert.deepEqual(receipt.generator, this.captureTool); assert.deepEqual(receipt.failures, []);
+-      assert.deepEqual(receipt.derivedFrom, this.captureDerivation);
++      assert.deepEqual(receipt.generator, role === 'baseline' ? RETAINED_BASELINE.generator : this.captureTool);
++      assert.deepEqual(receipt.failures, []);
++      assert.deepEqual(receipt.derivedFrom, role === 'baseline' ? RETAINED_BASELINE.derivedFrom : this.captureDerivation);
++      if (role === 'baseline') {
++        assert.deepEqual(receipt.report, RETAINED_BASELINE.report);
++        assert.deepEqual(receipt.cases, RETAINED_BASELINE.cases);
++        assert.deepEqual(receipt.nativeSourceBefore, RETAINED_BASELINE.nativeSourceBefore);
++      }
+       for (const key of ['nativeSourceUnchanged', 'inputsUnchanged', 'generatorUnchanged']) assert.equal(receipt[key], true);
+       for (const key of ['measuredCostSessions', 'timingReportsRead', 'timingMetricsProduced']) assert.equal(receipt[key], 0);
+       assert.equal(receipt.sessionCount, 4); assert.equal(receipt.actions, 31);
+@@ -345,6 +391,7 @@
+       state.kernel = new Store(state.runtimeDigest, row.sessionId).kernel;
+     }
+     assert.equal(snapshot.sourceDigest, state.runtimeDigest); assert.equal(snapshot.sourceCommit, V6_NATIVE_PROGRAM_REFERENCE);
++    assert.equal(snapshot.implementation, `logos-engine.typescript.v6.native-migration/${VERSIONS[state.role]}`);
+     assert.equal(graph.fromRevision, state.revision); assert.equal(graph.toRevision, state.revision + graph.deltasAdded.length);
+     for (const delta of graph.deltasAdded) {
+       assert.deepEqual(Object.keys(delta).sort(), ['cause', 'digest', 'node', 'previous', 'sequence', 'source_digest']);
+@@ -642,7 +689,7 @@
+   const [inventory, baseline, baselineReceipt, candidate, candidateReceipt, attribution, fixture] = args.map(path => resolve(ROOT, path));
+   const differencesPath = attribution.replace(/\.json$/, '.differences.jsonl.gz');
+   for (const path of [attribution, fixture, differencesPath]) {
+-    assert.ok(path.startsWith(BASE + sep)); await absent(path); await mkdir(dirname(path), { recursive: true });
++    assert.ok(path.startsWith(FINAL + sep)); await absent(path); await mkdir(dirname(path), { recursive: true });
+   }
+   assert.ok(attribution.endsWith('.json') && fixture.endsWith('.json'));
+   let streamFailure = null;
+@@ -669,14 +716,15 @@
+   audit.result.recordedAt = new Date().toISOString(); audit.result.inputs = [...audit.inputs.values()];
+   audit.result.checkedCount = audit.result.checks.length; audit.result.formsSha256 = canonicalHash(audit.forms);
+   audit.result.differences = await fingerprint(differencesPath);
+-  audit.result.qualification = 'Functional preparation against exact Site 107 published source 4ff7bf45286a8a19d34401988adca587253ae41e. Every role graph is reconstructed and validated from its own frozen Kernel/store; all fragment identities and changed roots are checked. Binding, SelectedRigid, Motif and OrderedRecruitment exist in both roles; only BranchRouting is added. Motif and BranchRouting use their actual registered wrappers, and Recruitment passive calls use its real acquisition instance. Exact work shapes exclude only independently bound implementation identity and declared structural counts. All raw common node values and common delta identities/causes/order are compared; differences remain without removing node.value or replacing clocks. Only exact reasoning:trace created scalar/float64 leaves with unmodified source clock code and actual service.handle wall-clock bounds receive clock attribution. Other private differences remain unqualified. State presence, negative proposals, graph nodes, acquiredRecords and acquiredTransitions do not establish successful BranchRouting acquisition, positive game contribution or official success. The separate cold synthetic contribution corpus and official game results retain their own scopes. This artifact grants no official timing readiness, full source/caller parity or publication.';
++  audit.result.qualification = 'Final 0.67 identity renewal using the exact retained baseline capture, separately bound original and current generators, and fresh candidate graphs. Functional preparation against exact Site 107 published source 4ff7bf45286a8a19d34401988adca587253ae41e. Every role graph is reconstructed and validated from its own frozen Kernel/store; all fragment identities and changed roots are checked. Binding, SelectedRigid, Motif and OrderedRecruitment exist in both roles; only BranchRouting is added. Motif and BranchRouting use their actual registered wrappers, and Recruitment passive calls use its real acquisition instance. Exact work shapes exclude only independently bound implementation identity and declared structural counts. All raw common node values and common delta identities/causes/order are compared; differences remain without removing node.value or replacing clocks. Only exact reasoning:trace created scalar/float64 leaves with unmodified source clock code and actual service.handle wall-clock bounds receive clock attribution. Other private differences remain unqualified. State presence, negative proposals, graph nodes, acquiredRecords and acquiredTransitions do not establish successful BranchRouting acquisition, positive game contribution or official success. The separate cold synthetic contribution corpus and official game results retain their own scopes. This artifact grants no official timing readiness, full source/caller parity or publication.';
+   await writeFile(attribution, JSON.stringify(audit.result, null, 2) + '\n', { flag: 'wx' });
+   if (audit.result.status === 'qualified_functional_work_forms_and_individual_graphs') {
+     const value = { schema: 'logos-engine.lot8b-delivery-work-forms.v1', status: audit.result.status,
+       preparedOnly: true, officialPerformanceEligible: false, strictCommonGraphParity: false,
+       publishedBaseline: audit.result.publishedBaseline, candidatePublished: false,
+       recordedAt: new Date().toISOString(), nativeDigests: audit.result.nativeDigests, cases: audit.casesRecord,
+-      captureTool: audit.captureTool, captures: {
++      captureTool: audit.captureTool, captureTools: { baseline: RETAINED_BASELINE.generator, candidate: audit.captureTool },
++      retainedBaseline: RETAINED_BASELINE, captures: {
+         baseline: { report: await fingerprint(baseline), receipt: await fingerprint(baselineReceipt) },
+         candidate: { report: await fingerprint(candidate), receipt: await fingerprint(candidateReceipt) },
+       }, review: await fingerprint(attribution), differences: audit.result.differences, forms: audit.forms };

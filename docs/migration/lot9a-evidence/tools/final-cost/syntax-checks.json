@@ -1,0 +1,52 @@
+{
+  "schema": "logos-engine.lot9a.final-cost-tools-syntax.v1",
+  "recordedAt": "2026-11-12T15:30:59.759467+00:00",
+  "status": "passed",
+  "nativeExecutionPerformed": false,
+  "officialPerformanceMeasurement": false,
+  "checks": [
+    {
+      "file": {
+        "path": "docs/migration/lot9a-evidence/tools/final-cost/prepare.py",
+        "bytes": 30228,
+        "sha256": "34a35bc110961d93102f17fdac1a6c853f22dbade58676c2c0c06c141db4def9"
+      },
+      "check": "Python ast.parse; no import or execution",
+      "status": "passed"
+    },
+    {
+      "file": {
+        "path": "docs/migration/lot9a-evidence/tools/final-cost/postprocess.py",
+        "bytes": 5810,
+        "sha256": "747c5509bfe491ed51607cd27b0cd86b94c69aa64a6167051c12ad3dadb18ead"
+      },
+      "check": "Python ast.parse; no import or execution",
+      "status": "passed"
+    },
+    {
+      "file": {
+        "path": "docs/migration/lot9a-evidence/tools/final-cost/review.py",
+        "bytes": 21232,
+        "sha256": "c86a789b0acc8a746ec97098133816ce225f479e306db088c872bb88106ab221"
+      },
+      "check": "Python ast.parse; no import or execution",
+      "status": "passed"
+    },
+    {
+      "file": {
+        "path": "docs/migration/lot9a-evidence/tools/final-cost/analyze.mjs",
+        "bytes": 19756,
+        "sha256": "aea39b1d10babd9e8c7dafd01c0626ec3fce81b2ded910b2bfb3712324f77840"
+      },
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot9a-evidence/tools/final-cost/analyze.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "status": "passed"
+    }
+  ]
+}

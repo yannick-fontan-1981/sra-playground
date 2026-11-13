@@ -1,0 +1,25 @@
+{
+  "module_id":"device_checkpoint_strategy_c",
+  "declarations":[{
+    "id":"policy.device_checkpoint_strategy_c","kind":"selection_policy","evaluation":"declared_eligibility_single",
+    "supported_operators":["SELECT"],"input_contract":"yf_arc3_v5.authority_input.selection.v1","output_contract":"yf_arc3_v5.authority_output.selection.v1",
+    "declared_alternative_refs":["device.strategy.conditional"],"selection_required_fact_fields":["alternative_ref"],
+    "selection_eligibility_conditions":[{"field":"eligible","operator":"equals","expected":true}],
+    "fact_projections":[{"id":"projection.device.strategy.conditional","all_conditions":[
+      {"field":"alternative_ref","operator":"equals","expected":"device.strategy.conditional"}],"static_facts":{"eligible":true}}],
+    "meaning_template_ref_by_alternative":{"device.strategy.conditional":"rule.device_checkpoint_strategy_c"},
+    "premises":["actual_saved_preparatory_state","current_two_program_question","independent_edit_preservation","exact_next_domain_return"],
+    "invariants":["incomplete_is_not_impossible","no_free_wait_or_move","full_program_validation","no_ACT"],
+    "falsifiers":["changed_saved_state_or_capacity","stale_next_return","unfunded_next_program"],"reason_refs":["reason.checkpoint_serves_parent_only_with_feasible_next_program"]
+  },{
+    "id":"rule.device_checkpoint_strategy_c","kind":"rule","evaluation":"project_requested_conclusions",
+    "supported_operators":["DERIVE"],"input_contract":"yf_arc3_v5.authority_input.derivation.v1","output_contract":"yf_arc3_v5.authority_output.derivation.v1",
+    "relation_family":"epistemic","term_templates":[{"id_pattern":"goal.device.strategy.{projection_ref}","kind":"goal","label":"Conditional two-program checkpoint contribution",
+      "required_fields":["projection_ref","parent_goal_ref","preparatory_state","next_programs","frozen_why"],
+      "attribute_bindings":{"parent_goal_ref":"parent_goal_ref","preparatory_state":"preparatory_state","next_programs":"next_programs",
+        "next_domain_complete":"next_domain_complete","target_compatible_next_program_exists":"target_compatible_next_program_exists","frozen_why":"frozen_why"},
+      "static_attributes":{"status":"proposed","no_action_authority":true}}],"claim_templates":[],
+    "premises":["conditional_calculation_not_actual_execution"],"invariants":["principal_goal_unchanged","physical_release_requires_existing_guards"],
+    "falsifiers":["new_causal_contradiction"],"reason_refs":["reason.exact_next_program_feasibility_retained_with_checkpoint"]
+  }]
+}

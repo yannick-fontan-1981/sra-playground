@@ -1,0 +1,23 @@
+--- docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c-v2.py
++++ docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c-v3.py
+@@ -26,16 +26,16 @@
+ ROOT = Path(__file__).resolve().parents[5]
+ SHARED = Path('/workspace/shared/sra-coordination')
+ LANES = ('lot6b', 'lot8a', 'lot10c')
+-REQUEST = 'lot5c-cost-a33a5f88-recovery-02'
+-PERF = ROOT / 'docs/migration/lot5c-evidence/recovery/performance-integrated-03'
+-COORD = ROOT / 'docs/migration/lot5c-evidence/recovery/coordination/cost-final-02'
++REQUEST = 'lot5c-cost-a33a5f88-available-03'
++PERF = ROOT / 'docs/migration/lot5c-evidence/recovery/performance-integrated-04'
++COORD = ROOT / 'docs/migration/lot5c-evidence/recovery/coordination/cost-final-03'
+ BASELINE = Path('/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout')
+ BASE_MANIFEST = ROOT / 'docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json'
+ CAND_MANIFEST = ROOT / 'docs/migration/lot5c-evidence/recovery/integrated-final-01/source-manifest.json'
+ 
+ 
+ HELPER = Path(__file__).with_name('cost-process-control-v2.py')
+-REGISTRY_PATH = SHARED / 'lot5c-recovery-02-active-children.json'
++REGISTRY_PATH = SHARED / 'lot5c-available-03-active-children.json'
+ EXPECTED_LOCK_IDENTITY = (27, 1971854)
+ 
+ 

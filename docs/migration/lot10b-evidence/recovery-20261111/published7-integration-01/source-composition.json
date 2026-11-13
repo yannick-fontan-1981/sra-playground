@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.lot10b.published-predecessor-composition.v1",
+  "recordedAt": "2026-11-11T14:45:46.218983+00:00",
+  "publishedPredecessor": {
+    "siteVersion": 98,
+    "nativeVersion": "0.61.0",
+    "commit": "653e40a4f45df8ec8c6bda005004c7cdb8df074a"
+  },
+  "candidateNativeDigest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+  "candidateNativeFiles": 310,
+  "frozenExecutionInputsVerified": 768,
+  "frozenInputsChanged": [],
+  "nativeMembershipUnchanged": true,
+  "formalValidation": {
+    "files": 44,
+    "tests": 1205,
+    "passed": 1205,
+    "failed": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "deliveryGatesPassed": 5,
+    "migrationAuditFailures": []
+  },
+  "resolution": "Candidate source/runtime/types/harness/registry/map remain byte-identical to the full tested freeze; actual published predecessor evidence and history imported; roadmap preserves both lanes; exact ignore patterns are combined. Source-only independent review is separate.",
+  "qualification": "This source reconciliation does not establish HPDL completion, browser QA, cost acceptance or10B publication."
+}

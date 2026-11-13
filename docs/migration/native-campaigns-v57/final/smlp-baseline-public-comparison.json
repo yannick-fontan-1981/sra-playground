@@ -1,0 +1,529 @@
+{
+  "schema": "logos-engine.v57.baseline-final-complete-public-comparison.v1",
+  "status": "passed",
+  "game": "SMLP",
+  "generatedAt": "2026-11-09T15:19:50.488447+00:00",
+  "generator": {
+    "path": "scripts/compare-v57-baseline-public.py",
+    "sha256": "4cac744b49e8458f33494d5d22a8328da87c89cb02e05fbcc2ac342b0435c005",
+    "bytes": 6154
+  },
+  "sharedEvidenceContracts": {
+    "path": "scripts/compare-v54-reactive-public-evidence.py",
+    "sha256": "3274acc5ed28a40f91ad0ee2e34c247ab160919ea43855cf514b4fbc22ef6a69",
+    "bytes": 18850
+  },
+  "inputs": {
+    "baseline": {
+      "campaign": {
+        "path": "docs/migration/native-campaigns-v57/baseline-smlp/smlp-campaign.json.gz",
+        "sha256": "8f2cb01c7159354a7e433c3d2a892906abb169fc628534097105455d37398783",
+        "bytes": 1252238
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v57/baseline-smlp/smlp-public-trace.json.gz",
+        "sha256": "7eb70ab823d95837235a49350aa0fb26e306c2b477af9be4880fd93371b3440b",
+        "bytes": 111624
+      },
+      "execution": {
+        "path": "docs/migration/native-campaigns-v57/baseline-smlp/execution-smlp.json",
+        "sha256": "9f7d9e034dc6441ceed0bff14f8562200b328ec7b7425ce94adca92d14c0e1b4",
+        "bytes": 58914
+      }
+    },
+    "final": {
+      "campaign": {
+        "path": "docs/migration/native-campaigns-v57/final/smlp-campaign.json.gz",
+        "sha256": "62c06ceee46337429c0cce2a660c1b6dbefe66b602c6fa44791ac1af0f144a39",
+        "bytes": 1276655
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+        "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+        "bytes": 111624
+      },
+      "execution": {
+        "path": "docs/migration/native-campaigns-v57/final/execution-smlp.json",
+        "sha256": "10e625a7cb3a47bda3dabbb7146d4094f2f146c76ab68d43b828de965de7d0bc",
+        "bytes": 59897
+      }
+    }
+  },
+  "nativeSourceDigests": {
+    "baseline": "bade8fd58991e6a127abc84f373d539edeaa70d45ab0da94a84a6751fdc92de5",
+    "final": "f2ec2ff8658290c510a58642612b4f9d4b07a04d8fa6434c91aadda997e6c23e"
+  },
+  "nativeImplementations": {
+    "baseline": "logos-engine.typescript.v6.native-migration/0.30.0",
+    "final": "logos-engine.typescript.v6.native-migration/0.31.0"
+  },
+  "completePublicJournalsMatchedRespectiveReceipts": true,
+  "completePublicTrajectoryExactlyEqual": true,
+  "prefixSelectionsExactlyEqual": true,
+  "publicPackets": 16,
+  "animationFramesIncludingInitial": 579,
+  "physicalActions": 15,
+  "prefixes": 9,
+  "packetChecks": [
+    {
+      "index": 0,
+      "completePacketSha256": "7669e026ad9602230279703bc27a84c3615bccc25c5c8562f7be7106e44bfb88",
+      "frameSha256": "63772d1746311d0c37da6dcd30cff4ba62157a79f1e16ec4aa08459daebc1b8c",
+      "animationSha256": "b62161ad9739b563b9212bcd9a5d52ca45ab5fa5130a91a7df8c9c0b126ef5e3",
+      "animationFrames": 1,
+      "command": null,
+      "level": 1,
+      "levelsCompleted": 0,
+      "state": "NOT_FINISHED"
+    },
+    {
+      "index": 1,
+      "completePacketSha256": "a6eddc16c07723e80d22f4f1de5af9b241a30812cb2c1b4b1090518cbbc28c84",
+      "frameSha256": "a69e9c93c4ca398815c6f33a07ec515024a5752f53fbd274f816040c5d60ab0e",
+      "animationSha256": "224ff68c509f0dd62114256c995af7abc79190abd5e1f5832494f1647d195919",
+      "animationFrames": 75,
+      "command": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "level": 1,
+      "levelsCompleted": 0,
+      "state": "NOT_FINISHED"
+    },
+    {
+      "index": 2,
+      "completePacketSha256": "11732b0d04cb954b2bbcea12ec38dcd0d153df088576247ea09928001232ebc1",
+      "frameSha256": "bce8c883896b59f426d88f21d3cbdbdcb11cc076bd0080f6d372aec045924270",
+      "animationSha256": "e490e3c1f5a31dd660a23fdc43fa52ad992a88029762601675f163187e33e18f",
+      "animationFrames": 2,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 32,
+          "y": 26
+        }
+      },
+      "level": 1,
+      "levelsCompleted": 0,
+      "state": "NOT_FINISHED"
+    },
+    {
+      "index": 3,
+      "completePacketSha256": "ab7db2e37b4dd64c88efade1f41186014f889add6883e78578f306c15a50ba5a",
+      "frameSha256": "e5988dd7f87420f6d2ac36c3bd65369ca488326cc1e310d6c8037e6c5b20ba42",
+      "animationSha256": "298d66af7a292fe0074cb4a3361901536abd8a33d0be993e985359a62f1da4df",
+      "animationFrames": 77,
+      "command": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "level": 2,
+      "levelsCompleted": 1,
+      "state": "NOT_FINISHED"
+    },
+    {
+      "index": 4,
+      "completePacketSha256": "5874ebedff52add6f0a09674ea555665cf2fb529dc88304470202489329b359f",
+      "frameSha256": "25d648e87fb8f86a64668b2d58ae843ac5a2dec3f1b5eae69d85d01abe64a9b3",
+      "animationSha256": "9123f8c2422907bb6f0071e2f2bb516dc94223ae81903c98419c6b0a0511826f",
+      "animationFrames": 155,
+      "command": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "level": 2,
+      "levelsCompleted": 1,
+      "state": "NOT_FINISHED"
+    },
+    {
+      "index": 5,
+      "completePacketSha256": "a6e313462c3d73dbc1587c487b081d33e973925b78fd086fa33c926530c7063f",
+      "frameSha256": "0dca5d2e5479375dd69f761cf9aba9922a8cb04b0d70db9860d8dc581151e1a8",
+      "animationSha256": "d5626360b8e3885f526fbe4852363fdeea41779c3976c2a0b03513a864d8d9ae",
+      "animationFrames": 2,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 44,
+          "y": 38
+        }
+      },
+      "level": 2,
+      "levelsCompleted": 1,
+      "state": "NOT_FINISHED"
+    },
+    {
+      "index": 6,
+      "completePacketSha256": "43520a5d8e57df18664fdba7ed428bebab2cb11c765822dd7796ac656f0c8b4b",
+      "frameSha256": "1fc6ca9809b6202376fb9b2eb1b8b360d736bde66ec9e879f51bdb328fab3ebe",
+      "animationSha256": "084eefd6da50d2ea9dd44fba7f6e5edd1b6f14180d516906e6bc499c98cac3b8",
+      "animationFrames": 2,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 52,
+          "y": 30
+        }
+      },
+      "level": 2,
+      "levelsCompleted": 1,
+      "state": "NOT_FINISHED"
+    },
+    {
+      "index": 7,
+      "completePacketSha256": "1b3da9fc4898a8e7192445039e7328558dee8a0281bcde4ac656ef62c6f58f9d",
+      "frameSha256": "fface9e1e28549fdbbc52b4ad6798d206dde5592513ad802f5dcc4b5429af739",
+      "animationSha256": "0488f38012a3aed095d478bde7ddfdcd9f51d86c9fb5a0d5a9f0737636009ccd",
+      "animationFrames": 77,
+      "command": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "level": 3,
+      "levelsCompleted": 2,
+      "state": "NOT_FINISHED"
+    },
+    {
+      "index": 8,
+      "completePacketSha256": "3866db0530d662db1a8f9620fba65d51ed4b0779a26fbfef3aab34cf52079a51",
+      "frameSha256": "fface9e1e28549fdbbc52b4ad6798d206dde5592513ad802f5dcc4b5429af739",
+      "animationSha256": "b71a97e475a315142ed2d377bbc47d0d572941556cf008852364310441baf698",
+      "animationFrames": 1,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 31,
+          "y": 3
+        }
+      },
+      "level": 3,
+      "levelsCompleted": 2,
+      "state": "NOT_FINISHED"
+    },
+    {
+      "index": 9,
+      "completePacketSha256": "cdd33da5715ddc32af056429e3b26bf899d653828348bbf961461270a7dbc78d",
+      "frameSha256": "b45bcd1c39abbb3dd27489d8b03c080d2e485d6c7ad99b56c49d3cb5f60c1068",
+      "animationSha256": "5fb59ed36d92b8c1ada47184491f5e4eae416683345283be431f9eb22104e7b6",
+      "animationFrames": 55,
+      "command": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "level": 3,
+      "levelsCompleted": 2,
+      "state": "NOT_FINISHED"
+    },
+    {
+      "index": 10,
+      "completePacketSha256": "cd26696dc524765d0b6b7184da279ca5ab323aeff5a7ec87c9fca3743bdd34d4",
+      "frameSha256": "f083fc5522910a7f618c7a4c97a76ef8eb1763b233cf5d448efd4cf0bd275b82",
+      "animationSha256": "56a9d267d9eab709726f0bf29d9be37627ac7dc032270f12627e1a0b0d8b92d8",
+      "animationFrames": 2,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 22,
+          "y": 21
+        }
+      },
+      "level": 3,
+      "levelsCompleted": 2,
+      "state": "NOT_FINISHED"
+    },
+    {
+      "index": 11,
+      "completePacketSha256": "b5c6d3d3a264c41de6512c7c5f5a7a705d8c1d9a1c9eb9454e120de5c1e6d8bf",
+      "frameSha256": "28db2c137ebdfa55414a00d08213306ecf1c1fa6d02fcaefaccb2c5f31f34fcf",
+      "animationSha256": "e09435921fd4dfbf56ffb2294254c318baf4ee0255d09db14ee7ebfbcd6fc0a6",
+      "animationFrames": 61,
+      "command": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "level": 3,
+      "levelsCompleted": 2,
+      "state": "NOT_FINISHED"
+    },
+    {
+      "index": 12,
+      "completePacketSha256": "16959d9d7949d822ac6cdfa0d9375967f8a2b624f631ba6e043f15631e4ea614",
+      "frameSha256": "469241896a568989e7da0c4d58a5351c279d568949922e20ff41e7dbd75e35fe",
+      "animationSha256": "132b7b71340ade474b6319be22e276518aa169a407f15659da67893150e10e70",
+      "animationFrames": 2,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 34,
+          "y": 45
+        }
+      },
+      "level": 3,
+      "levelsCompleted": 2,
+      "state": "NOT_FINISHED"
+    },
+    {
+      "index": 13,
+      "completePacketSha256": "a759255a39bc37b8d91c26be99dac6fa9fa45e4780ff680c5b5ac23a967c84ce",
+      "frameSha256": "4a45026c6e1f7c143f147c01875366f3a24fc35158dbff0ba7dc36b0507c2e4c",
+      "animationSha256": "2be3c964e1397ef7328f5753f5fc3f63cca646c1877f93f3a4e53662fd77d357",
+      "animationFrames": 2,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 43,
+          "y": 24
+        }
+      },
+      "level": 3,
+      "levelsCompleted": 2,
+      "state": "NOT_FINISHED"
+    },
+    {
+      "index": 14,
+      "completePacketSha256": "de6adf60143b94fbb09b73ca199fb97a571f9ae90fcc9b060084864995805079",
+      "frameSha256": "f8b1fede3bd259762de45af4c890d3accb0dacafee19738cb5d3e5dcd4172416",
+      "animationSha256": "7f03882b51c4f2f8663529350726dbb6e99ef44e9f29c35eff7d3a42360c4625",
+      "animationFrames": 2,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 49,
+          "y": 18
+        }
+      },
+      "level": 3,
+      "levelsCompleted": 2,
+      "state": "NOT_FINISHED"
+    },
+    {
+      "index": 15,
+      "completePacketSha256": "6d2b2bdda7149ca34a43fd154c902e9b6d192ce45d6637078cefc693c74c99c1",
+      "frameSha256": "6d43ed5dd243fea33ce0ac6595946f5a4122dc67d0377efa4043755f8a652ee6",
+      "animationSha256": "cd54d8be593d610c3db5a1e86db4bcca2fedb7268f257d014489acde15f8fb9e",
+      "animationFrames": 63,
+      "command": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "level": 4,
+      "levelsCompleted": 3,
+      "state": "NOT_FINISHED"
+    }
+  ],
+  "levelActions": [
+    3,
+    4,
+    8
+  ],
+  "actionFamilies": {
+    "observed_frontier": 1,
+    "configured_arrivals": 13,
+    "public_occurrence_recall": 1
+  },
+  "prefixSelections": [
+    {
+      "decisionRevision": 1,
+      "acquiredActions": 1,
+      "family": "observed_frontier",
+      "proposalKind": "experiment",
+      "selectionGroup": "observed_frontier",
+      "materialSubquestion": null
+    },
+    {
+      "decisionRevision": 2,
+      "acquiredActions": 1,
+      "family": "configured_arrivals",
+      "proposalKind": "configured_first_arrival_composition",
+      "selectionGroup": "surface",
+      "materialSubquestion": null
+    },
+    {
+      "decisionRevision": 3,
+      "acquiredActions": 1,
+      "family": "configured_arrivals",
+      "proposalKind": "configured_first_arrival_composition",
+      "selectionGroup": "surface",
+      "materialSubquestion": null
+    },
+    {
+      "decisionRevision": 4,
+      "acquiredActions": 1,
+      "family": "configured_arrivals",
+      "proposalKind": "configured_first_arrival_composition",
+      "selectionGroup": "surface",
+      "materialSubquestion": null
+    },
+    {
+      "decisionRevision": 5,
+      "acquiredActions": 3,
+      "family": "configured_arrivals",
+      "proposalKind": "configured_first_arrival_composition",
+      "selectionGroup": "surface",
+      "materialSubquestion": null
+    },
+    {
+      "decisionRevision": 8,
+      "acquiredActions": 1,
+      "family": "public_occurrence_recall",
+      "proposalKind": "public_occurrence_recall",
+      "selectionGroup": "window_constraints",
+      "materialSubquestion": null
+    },
+    {
+      "decisionRevision": 9,
+      "acquiredActions": 1,
+      "family": "configured_arrivals",
+      "proposalKind": "configured_first_arrival_composition",
+      "selectionGroup": "surface",
+      "materialSubquestion": null
+    },
+    {
+      "decisionRevision": 10,
+      "acquiredActions": 2,
+      "family": "configured_arrivals",
+      "proposalKind": "configured_first_arrival_composition",
+      "selectionGroup": "surface",
+      "materialSubquestion": null
+    },
+    {
+      "decisionRevision": 12,
+      "acquiredActions": 4,
+      "family": "configured_arrivals",
+      "proposalKind": "configured_first_arrival_composition",
+      "selectionGroup": "surface",
+      "materialSubquestion": null
+    }
+  ],
+  "baselineFinal": {
+    "actions": 15,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 29.470419900999982,
+    "prefixes": 9,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 15,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 32,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 10
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 11
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 10
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 6
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 2
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 3
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 11
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology",
+        "attention_parent_return",
+        "acquire_control_for_target"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 15,
+      "resume": 8
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.30.0"
+  },
+  "frozenV57Final": {
+    "actions": 15,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 29.028979934000002,
+    "prefixes": 9,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 15,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 32,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 10
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 11
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 10
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 6
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 2
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 3
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 11
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology",
+        "attention_parent_return",
+        "acquire_control_for_target"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 15,
+      "resume": 8
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.31.0"
+  },
+  "qualification": "Two independently executed cold common sessions have byte-equivalent canonical public values for every dispatched command, returned pixel, animation frame, level count and state. Actual receipts and complete passive journals are checked independently. Time, session namespace, graph identities and native implementation metadata are not equated. The final first-three-level success already existed on unchanged V56; it is not evidence that newly added V57 entries caused that success. No action or public packet from the baseline was supplied to the final live campaign."
+}

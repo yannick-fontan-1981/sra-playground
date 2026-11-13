@@ -1,0 +1,150 @@
+{
+  "schema": "logos-engine.published-predecessor-input-reconciliation.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T00:11:05.629472+00:00",
+  "integratedCommit": "367a6ecb742ef114b419b5003ef2bb70965e22a8",
+  "publishedPredecessors": [
+    {
+      "siteVersion": 88,
+      "commit": "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7",
+      "observation": {
+        "path": "docs/migration/lot10a-evidence/coordination/published-7b-site88.json",
+        "sha256": "e502cde67a552604312672ef04dde3a9e1fc07f271300be7e1b3c63dd26e97b3",
+        "bytes": 2323
+      }
+    },
+    {
+      "siteVersion": 89,
+      "commit": "4cea66731c0809f08288ea6f7287ef3dd7a392bd",
+      "observation": {
+        "path": "docs/migration/lot10a-evidence/coordination/published-7b-site89.json",
+        "sha256": "deae49cbafc2ddca364586aacb3a5d569705c42a5fba11a57fedc114759755c5",
+        "bytes": 2347
+      }
+    }
+  ],
+  "predecessorComparisons": [
+    {
+      "fromCommit": "28f3f388e18bad21a186795f965102a83e6b53d7",
+      "toCommit": "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7",
+      "command": [
+        "git",
+        "diff",
+        "--name-only",
+        "28f3f388e18bad21a186795f965102a83e6b53d7",
+        "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7",
+        "--",
+        "src",
+        "tests",
+        "scripts",
+        "public",
+        "content",
+        "package.json",
+        "package-lock.json",
+        "vite.config.ts",
+        "tsconfig.json",
+        "index.html",
+        ".openai/hosting.json"
+      ],
+      "executionInputDifferences": []
+    },
+    {
+      "fromCommit": "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7",
+      "toCommit": "4cea66731c0809f08288ea6f7287ef3dd7a392bd",
+      "command": [
+        "git",
+        "diff",
+        "--name-only",
+        "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7",
+        "4cea66731c0809f08288ea6f7287ef3dd7a392bd",
+        "--",
+        "src",
+        "tests",
+        "scripts",
+        "public",
+        "content",
+        "package.json",
+        "package-lock.json",
+        "vite.config.ts",
+        "tsconfig.json",
+        "index.html",
+        ".openai/hosting.json"
+      ],
+      "executionInputDifferences": []
+    }
+  ],
+  "nativeBaseline": {
+    "version": "0.55.0",
+    "fileCount": 291,
+    "digest": "ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b"
+  },
+  "nativeCandidate": {
+    "version": "0.56.0",
+    "fileCount": 294,
+    "digest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a"
+  },
+  "preservedBaselineNativeFiles": 290,
+  "changedNativeFiles": [
+    "src/logos-engine/v6-native-runtime.ts"
+  ],
+  "addedNativeFiles": [
+    "src/logos-engine/v6-axial-question-geometry.ts",
+    "src/logos-engine/v6-axial-question-policy.ts",
+    "src/logos-engine/v6-axial-question.ts"
+  ],
+  "frozenInputChecks": [
+    {
+      "receipt": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/source-manifest.json",
+        "sha256": "55b78bacc97745a6b8b1bde35156ec0f7184a6ad1cf4a637d35a81b82abec42f",
+        "bytes": 34908
+      },
+      "kind": "files",
+      "count": 294,
+      "differences": []
+    },
+    {
+      "receipt": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/validation/delta-tests-run.json",
+        "sha256": "dfefab4e7e2cb7daf9a999c1ef13a030e87af96ecfd15f3081eccdebdba8db00",
+        "bytes": 166994
+      },
+      "kind": "sourceAndTestInputs",
+      "count": 676,
+      "differences": []
+    },
+    {
+      "receipt": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/validation/checks-run.json",
+        "sha256": "ec5329c447294fc8353a8d1262c7b86bb7b642645574e3313d34a10d71366977",
+        "bytes": 200994
+      },
+      "kind": "buildInputs",
+      "count": 359,
+      "differences": []
+    },
+    {
+      "receipt": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regression-launch.json",
+        "sha256": "430bfd50c1a5fb37d33fe77bfc060062d76ce8397e3011e4f0d9e32a53a64941",
+        "bytes": 14309
+      },
+      "kind": "executionInputs",
+      "count": 11,
+      "differences": []
+    }
+  ],
+  "nativeAgentWorker": {
+    "path": "dist/assets/v6-agent-worker-D6eTlBhU.js",
+    "sha256": "36a72e7def02971acd46043f2f3ebca24f517b9a5ef5c335c521de00f7eadd7a",
+    "bytes": 6712949
+  },
+  "commonIntegrity": {
+    "path": "docs/migration/lot10a-evidence/integrated-final/delivery-integrity.json",
+    "sha256": "cc509231643297bd139bfe3d72e24b84263628293c416816bbaaccdf0f5fa115",
+    "bytes": 8312
+  },
+  "costBaselineSiteVersion": 88,
+  "costBaselineCommit": "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7",
+  "qualification": "Functional tests, replay and browser QA were executed before the actual 7B publications. Their exact native/source/test/build/execution inputs and compiled worker are unchanged after integrating actual Sites 88 and 89. No test, replay or browser run is relabeled as post-publication. Site 88 remains the actual published cost baseline; Site 89 is its documentation closure with identical executable inputs."
+}

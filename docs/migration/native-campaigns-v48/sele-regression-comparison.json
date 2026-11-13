@@ -1,0 +1,87 @@
+{
+  "schema": "logos-engine.v48.public-regression-comparison.v1",
+  "passed": true,
+  "checks": [
+    {
+      "name": "same declared game/target and both results passed",
+      "passed": true
+    },
+    {
+      "name": "same production budgets and original game asset provenance",
+      "passed": true
+    },
+    {
+      "name": "same complete initial public packet",
+      "passed": true
+    },
+    {
+      "name": "same commands, full returned animation packet hashes and primitive boundaries",
+      "passed": true
+    },
+    {
+      "name": "same selected source entries, acquired prefix lengths and observed solver projections",
+      "passed": true
+    },
+    {
+      "name": "same retained source-layer projections and labeled public submission receipts",
+      "passed": true
+    },
+    {
+      "name": "same bounded native predicate composition counts, survivors and reuse",
+      "passed": true
+    },
+    {
+      "name": "same source and preferred entry coordination with current guards",
+      "passed": true
+    },
+    {
+      "name": "same reduction geometry plan and step modes",
+      "passed": true
+    },
+    {
+      "name": "new Trace layer remains empty and never selects these legacy prefixes",
+      "passed": true
+    },
+    {
+      "name": "same acquired linked packet counts, complete latest payloads and complete plans",
+      "passed": true
+    },
+    {
+      "name": "new Queued Field layer remains empty and never selects these retained trajectories",
+      "passed": true
+    },
+    {
+      "name": "same request outcomes and common caller counters",
+      "passed": true
+    },
+    {
+      "name": "same final public result and retained-session counters",
+      "passed": true
+    },
+    {
+      "name": "source frozen during both runs and no Python agent modules",
+      "passed": true
+    },
+    {
+      "name": "same retained mechanical-domain assessments",
+      "passed": true
+    }
+  ],
+  "before": {
+    "path": "docs/migration/native-campaigns-v47/sele-three-levels.json",
+    "sha256": "36f06711eea87e103312501b6b524ff30b3a773a0a0d598d1ce4027a78d6a430",
+    "sourceDigest": "2f8f5d8660716e44e81fa987d08264324f61838c81ba9e96b2e64f69c136d100"
+  },
+  "after": {
+    "path": "docs/migration/native-campaigns-v48/sele-recorded-public-replay.json",
+    "sha256": "2dc856741f9533a42da4a224d7189a871376be5363ac165d322f9a9a1628d9de",
+    "sourceDigest": "30f078d458bf7771e203f3af194ff0bd89fb8fa233d3d0c14cee32282551ea24",
+    "mode": "recorded-public-replay"
+  },
+  "compared": {
+    "commands": 44,
+    "completePublicPackets": 45,
+    "prefixes": 44
+  },
+  "qualification": "Exact public commands, complete packet hashes, source selection, prefix/acquisition counts and listed retained projections are compared. Observation session prefixes are normalized. Native graph chain/revision, inherited digest, session-derived model IDs, full labeled cache, five session-derived predicate proof references (including the elimination witness digest of training receipt refs) and complete reduction state are outside this projection. Reduction geometry/step modes, labeled public receipts, composition counts/survivors/reuse and selected coordination entries remain checked. Trace and Queued Field state must remain empty on these five retained trajectories. Linked Packet plans and latest acquired payloads are compared completely with observation-session normalization only, including all numerical fields and cache identities. Recorded-public replay recalculates commands before supplying prior actual returns; it is not a new live game, full internal-state parity or a speed comparison."
+}

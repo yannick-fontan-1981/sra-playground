@@ -1,0 +1,374 @@
+{
+  "schema": "logos-engine.lot8a.released-preparation-fixture-check.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T21:55:18.857Z",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/check-released-streaming-preparation-v2.mjs",
+    "--output",
+    "/workspace/scratch/239ea1997293/lot8a-released-preparation-v2-check.json"
+  ],
+  "synthetic": true,
+  "nativeExecution": false,
+  "originalAgentExecution": false,
+  "gameExecution": false,
+  "maximumFixtureBytes": 262144,
+  "cases": [
+    {
+      "name": "gzip_baseline",
+      "passed": true,
+      "commonFieldsCompared": 16,
+      "expectedActions": 2,
+      "completePublicPackets": 3,
+      "baselineRootCollectedBeforeHarnessImport": true,
+      "otherCollectedRoots": {
+        "baselineCompressedBuffer": true,
+        "baselineDecodedBuffer": true,
+        "traceCompressedBuffer": true,
+        "traceDecodedBuffer": true,
+        "traceRoot": true,
+        "copiedExpectationRoot": true
+      },
+      "baselineDecodedBytes": 66909,
+      "exactExpectationSha256": "2771c7fca410330908005679c1635184ca55cffeaf349042f3bca4b21f4869a3",
+      "packetStreamSha256": "4f3f8f01a5290b3fc533cfe545f3c1b8d29821035f8b98bee650176870aecb71",
+      "inputsUnchanged": true,
+      "noCampaignReportCreated": true
+    },
+    {
+      "name": "plain_baseline",
+      "passed": true,
+      "commonFieldsCompared": 16,
+      "expectedActions": 2,
+      "completePublicPackets": 3,
+      "baselineRootCollectedBeforeHarnessImport": true,
+      "otherCollectedRoots": {
+        "baselineCompressedBuffer": true,
+        "baselineDecodedBuffer": true,
+        "traceCompressedBuffer": true,
+        "traceDecodedBuffer": true,
+        "traceRoot": true,
+        "copiedExpectationRoot": true
+      },
+      "baselineDecodedBytes": 66909,
+      "exactExpectationSha256": "2771c7fca410330908005679c1635184ca55cffeaf349042f3bca4b21f4869a3",
+      "packetStreamSha256": "4f3f8f01a5290b3fc533cfe545f3c1b8d29821035f8b98bee650176870aecb71",
+      "inputsUnchanged": true,
+      "noCampaignReportCreated": true
+    }
+  ],
+  "rejectedCases": [
+    {
+      "name": "wrong_command",
+      "passed": true,
+      "originalAndV2Reject": true,
+      "noPreparationOrCampaignReportCreated": true
+    },
+    {
+      "name": "wrong_complete_packet",
+      "passed": true,
+      "originalAndV2Reject": true,
+      "noPreparationOrCampaignReportCreated": true
+    },
+    {
+      "name": "wrong_game",
+      "passed": true,
+      "originalAndV2Reject": true,
+      "noPreparationOrCampaignReportCreated": true
+    },
+    {
+      "name": "wrong_packet_count",
+      "passed": true,
+      "originalAndV2Reject": true,
+      "noPreparationOrCampaignReportCreated": true
+    },
+    {
+      "name": "explicit_gc_required",
+      "passed": true,
+      "originalAndV2Reject": true,
+      "noPreparationOrCampaignReportCreated": true
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--expose-gc",
+        "--max-old-space-size=1536",
+        "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/scripts/replay-public-regression-released-baseline.mjs",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/gzip_baseline.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/trace.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/gzip_baseline-original-report.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/gzip_baseline-original-preparation.json",
+        "--prepare-only"
+      ],
+      "exitCode": 0,
+      "stdout": "{\"phase\":\"baseline-released\",\"preparation\":\"/tmp/lot8a-released-preparation-v2-PMoAbf/gzip_baseline-original-preparation.json\",\"expectedActions\":2,\"completePublicPackets\":3,\"exactExpectationSha256\":\"2771c7fca410330908005679c1635184ca55cffeaf349042f3bca4b21f4869a3\",\"baselineRootCollectedBeforeHarnessImport\":true}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--expose-gc",
+        "--max-old-space-size=1536",
+        "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/gzip_baseline.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/trace.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/gzip_baseline-v2-report.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/gzip_baseline-v2-preparation.json",
+        "--prepare-only"
+      ],
+      "exitCode": 0,
+      "stdout": "{\"phase\":\"baseline-released\",\"preparation\":\"/tmp/lot8a-released-preparation-v2-PMoAbf/gzip_baseline-v2-preparation.json\",\"expectedActions\":2,\"completePublicPackets\":3,\"exactExpectationSha256\":\"2771c7fca410330908005679c1635184ca55cffeaf349042f3bca4b21f4869a3\",\"baselineRootCollectedBeforeHarnessImport\":true}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--expose-gc",
+        "--max-old-space-size=1536",
+        "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/scripts/replay-public-regression-released-baseline.mjs",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/plain_baseline.json",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/trace.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/plain_baseline-original-report.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/plain_baseline-original-preparation.json",
+        "--prepare-only"
+      ],
+      "exitCode": 0,
+      "stdout": "{\"phase\":\"baseline-released\",\"preparation\":\"/tmp/lot8a-released-preparation-v2-PMoAbf/plain_baseline-original-preparation.json\",\"expectedActions\":2,\"completePublicPackets\":3,\"exactExpectationSha256\":\"2771c7fca410330908005679c1635184ca55cffeaf349042f3bca4b21f4869a3\",\"baselineRootCollectedBeforeHarnessImport\":true}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--expose-gc",
+        "--max-old-space-size=1536",
+        "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/plain_baseline.json",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/trace.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/plain_baseline-v2-report.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/plain_baseline-v2-preparation.json",
+        "--prepare-only"
+      ],
+      "exitCode": 0,
+      "stdout": "{\"phase\":\"baseline-released\",\"preparation\":\"/tmp/lot8a-released-preparation-v2-PMoAbf/plain_baseline-v2-preparation.json\",\"expectedActions\":2,\"completePublicPackets\":3,\"exactExpectationSha256\":\"2771c7fca410330908005679c1635184ca55cffeaf349042f3bca4b21f4869a3\",\"baselineRootCollectedBeforeHarnessImport\":true}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--expose-gc",
+        "--max-old-space-size=1536",
+        "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/scripts/replay-public-regression-released-baseline.mjs",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/gzip_baseline.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_command.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_command-original-report.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_command-original-preparation.json",
+        "--prepare-only"
+      ],
+      "exitCode": 1,
+      "stdout": "",
+      "stderr": "node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   action_ref: 'ACTION1'\n-   action_ref: 'ACTION6',\n-   data: {\n-     x: 1,\n-     y: 0\n-   }\n  }\n\n    at prepare (file:///workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/scripts/replay-public-regression-released-baseline.mjs:42:12)\n    at async file:///workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/scripts/replay-public-regression-released-baseline.mjs:60:18 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: { action_ref: 'ACTION1' },\n  expected: { action_ref: 'ACTION6', data: { x: 1, y: 0 } },\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v24.22.1\n"
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--expose-gc",
+        "--max-old-space-size=1536",
+        "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/gzip_baseline.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_command.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_command-v2-report.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_command-v2-preparation.json",
+        "--prepare-only"
+      ],
+      "exitCode": 1,
+      "stdout": "",
+      "stderr": "node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   action_ref: 'ACTION1'\n-   action_ref: 'ACTION6',\n-   data: {\n-     x: 1,\n-     y: 0\n-   }\n  }\n\n    at prepare (file:///workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs:47:12)\n    at async file:///workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs:73:18 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: { action_ref: 'ACTION1' },\n  expected: { action_ref: 'ACTION6', data: { x: 1, y: 0 } },\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v24.22.1\n"
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--expose-gc",
+        "--max-old-space-size=1536",
+        "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/scripts/replay-public-regression-released-baseline.mjs",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/gzip_baseline.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_complete_packet.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_complete_packet-original-report.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_complete_packet-original-preparation.json",
+        "--prepare-only"
+      ],
+      "exitCode": 1,
+      "stdout": "",
+      "stderr": "node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ '0388fca8f73c3fec644ee65c4a01b4f7d9dede88f6bd83501a3385ba38282928'\n- 'a18f4e1c0759695aafee422d2d1d9882eceb769444620f992f22e1aa461adfcb'\n\n    at prepare (file:///workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/scripts/replay-public-regression-released-baseline.mjs:44:12)\n    at async file:///workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/scripts/replay-public-regression-released-baseline.mjs:60:18 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: '0388fca8f73c3fec644ee65c4a01b4f7d9dede88f6bd83501a3385ba38282928',\n  expected: 'a18f4e1c0759695aafee422d2d1d9882eceb769444620f992f22e1aa461adfcb',\n  operator: 'strictEqual',\n  diff: 'simple'\n}\n\nNode.js v24.22.1\n"
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--expose-gc",
+        "--max-old-space-size=1536",
+        "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/gzip_baseline.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_complete_packet.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_complete_packet-v2-report.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_complete_packet-v2-preparation.json",
+        "--prepare-only"
+      ],
+      "exitCode": 1,
+      "stdout": "",
+      "stderr": "node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ '0388fca8f73c3fec644ee65c4a01b4f7d9dede88f6bd83501a3385ba38282928'\n- 'a18f4e1c0759695aafee422d2d1d9882eceb769444620f992f22e1aa461adfcb'\n\n    at prepare (file:///workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs:49:12)\n    at async file:///workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs:73:18 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: '0388fca8f73c3fec644ee65c4a01b4f7d9dede88f6bd83501a3385ba38282928',\n  expected: 'a18f4e1c0759695aafee422d2d1d9882eceb769444620f992f22e1aa461adfcb',\n  operator: 'strictEqual',\n  diff: 'simple'\n}\n\nNode.js v24.22.1\n"
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--expose-gc",
+        "--max-old-space-size=1536",
+        "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/scripts/replay-public-regression-released-baseline.mjs",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/gzip_baseline.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_game.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_game-original-report.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_game-original-preparation.json",
+        "--prepare-only"
+      ],
+      "exitCode": 1,
+      "stdout": "",
+      "stderr": "node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'OTHER_SYNTHETIC_FIXTURE'\n- 'SYNTHETIC_PREPARATION_ONLY'\n\n    at prepare (file:///workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/scripts/replay-public-regression-released-baseline.mjs:32:10)\n    at async file:///workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/scripts/replay-public-regression-released-baseline.mjs:60:18 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: 'OTHER_SYNTHETIC_FIXTURE',\n  expected: 'SYNTHETIC_PREPARATION_ONLY',\n  operator: 'strictEqual',\n  diff: 'simple'\n}\n\nNode.js v24.22.1\n"
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--expose-gc",
+        "--max-old-space-size=1536",
+        "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/gzip_baseline.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_game.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_game-v2-report.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_game-v2-preparation.json",
+        "--prepare-only"
+      ],
+      "exitCode": 1,
+      "stdout": "",
+      "stderr": "node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'OTHER_SYNTHETIC_FIXTURE'\n- 'SYNTHETIC_PREPARATION_ONLY'\n\n    at prepare (file:///workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs:37:10)\n    at async file:///workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs:73:18 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: 'OTHER_SYNTHETIC_FIXTURE',\n  expected: 'SYNTHETIC_PREPARATION_ONLY',\n  operator: 'strictEqual',\n  diff: 'simple'\n}\n\nNode.js v24.22.1\n"
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--expose-gc",
+        "--max-old-space-size=1536",
+        "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/scripts/replay-public-regression-released-baseline.mjs",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/gzip_baseline.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_packet_count.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_packet_count-original-report.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_packet_count-original-preparation.json",
+        "--prepare-only"
+      ],
+      "exitCode": 1,
+      "stdout": "",
+      "stderr": "node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n2 !== 3\n\n    at prepare (file:///workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/scripts/replay-public-regression-released-baseline.mjs:38:10)\n    at async file:///workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/scripts/replay-public-regression-released-baseline.mjs:60:18 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: 2,\n  expected: 3,\n  operator: 'strictEqual',\n  diff: 'simple'\n}\n\nNode.js v24.22.1\n"
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--expose-gc",
+        "--max-old-space-size=1536",
+        "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/gzip_baseline.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_packet_count.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_packet_count-v2-report.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/wrong_packet_count-v2-preparation.json",
+        "--prepare-only"
+      ],
+      "exitCode": 1,
+      "stdout": "",
+      "stderr": "node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n2 !== 3\n\n    at prepare (file:///workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs:43:10)\n    at async file:///workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs:73:18 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: 2,\n  expected: 3,\n  operator: 'strictEqual',\n  diff: 'simple'\n}\n\nNode.js v24.22.1\n"
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--max-old-space-size=1536",
+        "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/scripts/replay-public-regression-released-baseline.mjs",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/gzip_baseline.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/trace.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/without_gc-original-report.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/without_gc-original-preparation.json",
+        "--prepare-only"
+      ],
+      "exitCode": 1,
+      "stdout": "",
+      "stderr": "node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Use --expose-gc to verify release before starting the unchanged harness\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n\n    at file:///workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/scripts/replay-public-regression-released-baseline.mjs:16:8\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\n    at async node:internal/modules/esm/loader:647:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\n  generatedMessage: false,\n  code: 'ERR_ASSERTION',\n  actual: 'undefined',\n  expected: 'function',\n  operator: 'strictEqual',\n  diff: 'simple'\n}\n\nNode.js v24.22.1\n"
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--max-old-space-size=1536",
+        "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/gzip_baseline.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/trace.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/without_gc-v2-report.json.gz",
+        "/tmp/lot8a-released-preparation-v2-PMoAbf/without_gc-v2-preparation.json",
+        "--prepare-only"
+      ],
+      "exitCode": 1,
+      "stdout": "",
+      "stderr": "node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Use --expose-gc to verify release before starting the unchanged harness\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n\n    at file:///workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs:20:8\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\n    at async node:internal/modules/esm/loader:647:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\n  generatedMessage: false,\n  code: 'ERR_ASSERTION',\n  actual: 'undefined',\n  expected: 'function',\n  operator: 'strictEqual',\n  diff: 'simple'\n}\n\nNode.js v24.22.1\n"
+    }
+  ],
+  "inputsBefore": [
+    {
+      "path": "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/check-released-streaming-preparation-v2.mjs",
+      "bytes": 9120,
+      "sha256": "eb8ffd24672062e32fc75b1d5e44841a70092011bd775c0a077956c959f139e4"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/scripts/replay-public-regression-released-baseline.mjs",
+      "bytes": 6355,
+      "sha256": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs",
+      "bytes": 7733,
+      "sha256": "49c423ac48149b92da9028aa7cb024558ad5dcdc54225ad63296e6ecb2c459cd"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/write-streamed-evidence-gzip.mjs",
+      "bytes": 3300,
+      "sha256": "bd07e39ee109fd3c714a755fa68799012f25187ee441f72f5fc4544c1742da12"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot10b-evidence/stream-evidence-json.mjs",
+      "bytes": 6601,
+      "sha256": "96ac2ddbaac8cc62126f6674301b2362301895f44ce90e5dbd1dec9fb6fc87ca"
+    }
+  ],
+  "qualification": "Small preparation-only equivalence and host-root collection checks. The native harness is not imported. This proves neither WEAV completion, total runtime memory bounds, production correctness nor performance.",
+  "inputsAfter": [
+    {
+      "path": "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/check-released-streaming-preparation-v2.mjs",
+      "bytes": 9120,
+      "sha256": "eb8ffd24672062e32fc75b1d5e44841a70092011bd775c0a077956c959f139e4"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/scripts/replay-public-regression-released-baseline.mjs",
+      "bytes": 6355,
+      "sha256": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs",
+      "bytes": 7733,
+      "sha256": "49c423ac48149b92da9028aa7cb024558ad5dcdc54225ad63296e6ecb2c459cd"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/write-streamed-evidence-gzip.mjs",
+      "bytes": 3300,
+      "sha256": "bd07e39ee109fd3c714a755fa68799012f25187ee441f72f5fc4544c1742da12"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot10b-evidence/stream-evidence-json.mjs",
+      "bytes": 6601,
+      "sha256": "96ac2ddbaac8cc62126f6674301b2362301895f44ce90e5dbd1dec9fb6fc87ca"
+    }
+  ],
+  "passedCases": 2,
+  "passedRejections": 5,
+  "finishedAt": "2026-11-11T21:55:20.475Z"
+}

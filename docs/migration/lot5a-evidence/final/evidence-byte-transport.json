@@ -1,0 +1,93 @@
+{
+  "schema": "logos-engine.lot5a-evidence-byte-transport.v1",
+  "recordedAt": "2026-11-10T21:43:46.642218+00:00",
+  "status": "passed",
+  "command": [
+    "python",
+    "-B",
+    "scripts/evidence-byte-parts.py",
+    "verify",
+    "docs/migration/lot5a-evidence"
+  ],
+  "generator": {
+    "path": "scripts/evidence-byte-parts.py",
+    "bytes": 7210,
+    "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350"
+  },
+  "verified": [
+    {
+      "path": "docs/migration/lot5a-evidence/final/regressions/catr-052-replay.json.gz",
+      "sha256": "062ab0f8b25b238daaa523f7a71ad65dbf8b0eb59c4a87ff70b48c3f4408b1e3",
+      "bytes": 1924691,
+      "manifest": "docs/migration/lot5a-evidence/final/regressions/catr-052-replay.json.gz.parts.json",
+      "parts": 3,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz",
+      "sha256": "79667d01122aaa65c89125cf0c24719815b3d467d2555c9d637cfa478b0ddfd1",
+      "bytes": 3732748,
+      "manifest": "docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz.parts.json",
+      "parts": 5,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz",
+      "sha256": "a21d8ca5954cb5728343ad49fcd0bf7443cc019f21f6da8d4b66dfec6de4985c",
+      "bytes": 9452737,
+      "manifest": "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.parts.json",
+      "parts": 11,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz",
+      "sha256": "9764a7176ffadb62a135af34231d698e5cd073cfdd3f26478951260c98a3aefb",
+      "bytes": 4978068,
+      "manifest": "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz.parts.json",
+      "parts": 6,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/regressions/rswp-052-replay.json.gz",
+      "sha256": "8d50734e7e7986dc53cee40ae275d636db68f766ed70cfb459a685d8497b7e1c",
+      "bytes": 2990968,
+      "manifest": "docs/migration/lot5a-evidence/final/regressions/rswp-052-replay.json.gz.parts.json",
+      "parts": 4,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz",
+      "sha256": "218ac564a1993d9f73803cdbb379cb0f8c8780baf6087f2e41b4cbde48a609da",
+      "bytes": 12325547,
+      "manifest": "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.parts.json",
+      "parts": 14,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz",
+      "sha256": "672c1cd56d3d5ba47e515b1c2e33d2b16429657d20a9ae5d56f21cdaa410809f",
+      "bytes": 15388053,
+      "manifest": "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.parts.json",
+      "parts": 18,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz",
+      "sha256": "2938b69b5b02028e197ab2eadb1352918459def94ad38a0c17de2e0e6268e8f3",
+      "bytes": 4755121,
+      "manifest": "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.parts.json",
+      "parts": 6,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz",
+      "sha256": "dfcd0141da2ae230efbee9efedb8177c91d3cb1d3ddb17c0bcd22eac66eefa37",
+      "bytes": 6820472,
+      "manifest": "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.parts.json",
+      "parts": 8,
+      "restored": false
+    }
+  ],
+  "partBytes": 900000,
+  "qualification": "Exact byte transport only; no agent result is regenerated or reinterpreted."
+}

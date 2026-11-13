@@ -1,0 +1,18 @@
+{
+  "schema": "logos-engine.documentary-closure-scope.v1",
+  "recordedAt": "2026-11-11T02:57:13.954835+00:00",
+  "nativePublicationSite": 94,
+  "nativePublicationCommit": "fbd968f7c194575777965219f64fa78d3460b08e",
+  "nativeVersion": "0.58.0",
+  "frozenInputsRechecked": 755,
+  "applicationMembersRechecked": 75,
+  "allBytesMatchValidatedPreparation": true,
+  "nativeSourceDigest": "099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4",
+  "sourceVerification": "docs/migration/lot5b-evidence/publication/final-source-build-verification-02.json",
+  "inputReference": "docs/migration/lot5b-evidence/publication/worktree-preparation.json",
+  "scope": "Record actual terminal native publication, update current reports and roadmap, retain source transport receipts and exact lossless raw logs. Native, tests, execution inputs and compiled application bytes remain unchanged. A subsequent source-diff check must confirm only README and migration documentation change.",
+  "costVerdictChanged": false,
+  "newGameExecution": false,
+  "buildExecuted": false,
+  "closurePublicationStatus": "pending_actual_publication"
+}

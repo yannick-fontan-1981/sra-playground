@@ -1,0 +1,28 @@
+{
+  "schema": "logos-engine.lot6b-time-attribution-static-readback.v1",
+  "status": "source_only_no_execution",
+  "protectedSections": [
+    {
+      "section": "command",
+      "textUnchanged": true
+    },
+    {
+      "section": "graph",
+      "textUnchanged": true
+    },
+    {
+      "section": "point",
+      "textUnchanged": true
+    },
+    {
+      "section": "end_and_captures",
+      "textUnchanged": true
+    }
+  ],
+  "checksAreTextComparisonsNotRuntimeTests": true,
+  "cliArgumentsUnchanged": true,
+  "directExecutionGuardPresent": true,
+  "testsExecuted": false,
+  "qualificationExecuted": false,
+  "terminalAt": "2026-11-11T18:34:11.086Z"
+}

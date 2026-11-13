@@ -1,0 +1,94 @@
+{
+  "schema": "logos-engine.native-public-trace-comparison.v1",
+  "game": "LS20",
+  "before": {
+    "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/ls20-public-trace.json.gz",
+    "bytes": 44543,
+    "sha256": "123127c1e7b79383c8e0619931d4cb8dc965e7c376bf1b06445eac4b593649c0"
+  },
+  "after": {
+    "path": "docs/migration/lot2c-cost-evidence/final/ls20-regression/ls20-public-trace.json.gz",
+    "bytes": 44542,
+    "sha256": "d3dc4caa52d873fdbfcf0f392dc5ee866a2f46a237e807eee72a4b3e339a2b29"
+  },
+  "method": "Parse both complete JSON traces; recursively compare all keys, array entries, value types and values. Object key order is not semantic; no fields or differing sourceDigest are removed or normalized. List every unequal leaf and retain its exact values.",
+  "strictTraceEqual": false,
+  "equalScalarLeaves": 1357209,
+  "differenceCount": 1,
+  "differences": [
+    {
+      "path": "/sourceDigest",
+      "before": "3cd17565b114a40ed71870bf8d7875a1b91102440b92d14a9258bfa98d4f7779",
+      "after": "ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b",
+      "kind": "value"
+    }
+  ],
+  "topLevelFields": {
+    "game": {
+      "equal": true
+    },
+    "packets": {
+      "equal": true
+    },
+    "schema": {
+      "equal": true
+    },
+    "sourceDigest": {
+      "equal": false
+    },
+    "status": {
+      "equal": true
+    }
+  },
+  "beforePacketCount": 143,
+  "afterPacketCount": 143,
+  "packetEntriesEqual": true,
+  "publicPacketsEqual": true,
+  "commandsEqual": true,
+  "commandsComparedIncludingInitialNull": 143,
+  "actionCommandsCompared": 142,
+  "differentCommandIndexes": [],
+  "publicPacketFields": {
+    "available_action_refs": {
+      "comparedEntries": 143,
+      "equalEntries": 143,
+      "differentOrMissingIndexes": []
+    },
+    "frame_hash": {
+      "comparedEntries": 143,
+      "equalEntries": 143,
+      "differentOrMissingIndexes": []
+    },
+    "frame_packet": {
+      "comparedEntries": 143,
+      "equalEntries": 143,
+      "differentOrMissingIndexes": []
+    },
+    "frame_rows": {
+      "comparedEntries": 143,
+      "equalEntries": 143,
+      "differentOrMissingIndexes": []
+    },
+    "level": {
+      "comparedEntries": 143,
+      "equalEntries": 143,
+      "differentOrMissingIndexes": []
+    },
+    "levels_completed": {
+      "comparedEntries": 143,
+      "equalEntries": 143,
+      "differentOrMissingIndexes": []
+    },
+    "state": {
+      "comparedEntries": 143,
+      "equalEntries": 143,
+      "differentOrMissingIndexes": []
+    },
+    "step_index": {
+      "comparedEntries": 143,
+      "equalEntries": 143,
+      "differentOrMissingIndexes": []
+    }
+  },
+  "qualification": "Exact public observations and commands are compared independently of the native manifest identity. Strict trace equality remains false whenever any field differs. This is no claim that private graphs, clocks, complete V6 semantics or performance budgets are equal."
+}

@@ -1,0 +1,381 @@
+{
+  "module_id": "joystick_step_c",
+  "declarations": [
+    {
+      "id": "policy.joystick_step_signature_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "source_bound_single_native_external_primitive"
+      ],
+      "applicability": [
+        "native_bounded_joystick_step"
+      ],
+      "invariants": [
+        "one_native_call_and_debit",
+        "all_native_receipts_retained",
+        "single_prebound_event_owner",
+        "no_act_or_second_automatic_pass",
+        "source_bound_current_lifecycle_meaning"
+      ],
+      "falsifiers": [
+        "wrong_scope_or_model",
+        "partial_native_closure",
+        "uncertain_joystick_transaction"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "joystick_step.supported",
+        "joystick_step.unsupported"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.joystick_step_signature_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "joystick_step.supported"
+            },
+            {
+              "field": "exact_native_signature",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_native_scope_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "exact_single_model_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_inputs_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "exact_native_bounds",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_provenance_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_ownership_and_phase_contract",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "complete_adapter_prebound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "goal_contract_bound_or_absent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_lifecycle_contract_bound",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "joystick_step.supported"
+          }
+        },
+        {
+          "id": "projection.policy.joystick_step_signature_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "joystick_step.unsupported"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "exact_native_signature",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_native_scope_equal",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "exact_single_model_bound",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "native_inputs_bound",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "exact_native_bounds",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "parent_provenance_equal",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_ownership_and_phase_contract",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "complete_adapter_prebound",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "goal_contract_bound_or_absent",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "source_lifecycle_contract_bound",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "joystick_step.unsupported"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.joystick_step_signature_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "joystick_step.supported"
+            }
+          ],
+          "reason_ref": "reason.exact_native_joystick_primitive_identity_and_owner"
+        },
+        {
+          "id": "tier.policy.joystick_step_signature_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "joystick_step.unsupported"
+            }
+          ],
+          "reason_ref": "reason.exact_native_joystick_primitive_identity_and_owner"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.joystick_packet_not_live_action_release",
+      "reason_refs": [
+        "reason.exact_native_joystick_primitive_identity_and_owner"
+      ]
+    },
+    {
+      "id": "policy.joystick_step_result_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "source_bound_single_native_external_primitive"
+      ],
+      "applicability": [
+        "native_bounded_joystick_step"
+      ],
+      "invariants": [
+        "one_native_call_and_debit",
+        "all_native_receipts_retained",
+        "single_prebound_event_owner",
+        "no_act_or_second_automatic_pass"
+      ],
+      "falsifiers": [
+        "wrong_scope_or_model",
+        "partial_native_closure",
+        "uncertain_joystick_transaction"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "joystick_step.complete",
+        "joystick_step.bound",
+        "joystick_step.missing"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.joystick_step_result_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "joystick_step.complete"
+            },
+            {
+              "field": "packet_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "joystick_step.complete"
+          }
+        },
+        {
+          "id": "projection.policy.joystick_step_result_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "joystick_step.bound"
+            },
+            {
+              "field": "packet_complete",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "joystick_step.bound"
+          },
+          "any_conditions": [
+            {
+              "field": "native_bound_reached",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "packet_transport_bound_reached",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "projection.policy.joystick_step_result_c.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "joystick_step.missing"
+            },
+            {
+              "field": "packet_complete",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "native_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "packet_transport_bound_reached",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "joystick_step.missing"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.joystick_step_result_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "joystick_step.complete"
+            }
+          ],
+          "reason_ref": "reason.native_joystick_compound_transaction_debit_and_unknown_boundary"
+        },
+        {
+          "id": "tier.policy.joystick_step_result_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "joystick_step.bound"
+            }
+          ],
+          "reason_ref": "reason.native_joystick_compound_transaction_debit_and_unknown_boundary"
+        },
+        {
+          "id": "tier.policy.joystick_step_result_c.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "joystick_step.missing"
+            }
+          ],
+          "reason_ref": "reason.native_joystick_compound_transaction_debit_and_unknown_boundary"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.joystick_packet_not_live_action_release",
+      "reason_refs": [
+        "reason.native_joystick_compound_transaction_debit_and_unknown_boundary"
+      ]
+    }
+  ]
+}

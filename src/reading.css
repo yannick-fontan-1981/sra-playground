@@ -19,6 +19,94 @@
 .reading-breadcrumb a:hover{color:var(--accent-hover)}
 .reading-header h1,.video-index-header h1{font-size:43px;font-weight:550;letter-spacing:-1.3px;line-height:1.15;margin:0;max-width:800px;overflow-wrap:break-word}
 .reading-deck{font-size:20px;line-height:1.8;color:var(--muted);margin:17px 0 0;max-width:730px}
+.motivation-sidebar nav{gap:1px}
+.motivation-sidebar nav>a{font-size:14px;padding-block:6px}
+.motivation-sidebar nav>.motivation-nav-part{font-size:12px;line-height:1.6;color:var(--accent-hover);margin-top:13px;padding-top:9px;border-top:1px solid var(--line)}
+.motivation-sidebar nav>.motivation-nav-part:first-child{margin-top:0}
+.reading-article .motivation-byline{font-family:var(--mono);font-size:13px;color:var(--subtle);margin:18px 0 0}
+.reading-article .motivation-pitch{font-size:28px;line-height:1.5;letter-spacing:-.4px;color:var(--ink);margin:29px 0 25px;max-width:31ch}
+.motivation-route{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:29px 0 44px;border-block:1px solid var(--line)}
+.motivation-route>a{display:grid;grid-template-columns:1fr 17px;gap:8px 10px;padding:19px 18px;align-content:start;border-right:1px solid var(--line)}
+.motivation-route>a:first-child{padding-left:0}
+.motivation-route>a:last-child{border-right:0;padding-right:0}
+.motivation-route>a>span{grid-column:1/-1;font-family:var(--mono);font-size:12px;color:var(--accent-hover)}
+.motivation-route strong{font-size:16px;line-height:1.5;font-weight:500}
+.motivation-route .icon{width:17px;height:17px;margin-top:4px;color:var(--accent-hover)}
+.motivation-route a:hover strong{color:var(--accent-hover)}
+.motivation-part{margin-top:48px;scroll-margin-top:28px}
+.motivation-part-heading{padding-bottom:22px;border-bottom:1px solid var(--line);margin-bottom:27px}
+.reading-article .motivation-part-heading>p:first-child{font-family:var(--mono);font-size:13px;letter-spacing:.7px;text-transform:uppercase;color:var(--accent-hover);margin-bottom:9px}
+.motivation-part-heading h2{font-size:30px;line-height:1.3;font-weight:500;letter-spacing:-.6px;margin:0 0 11px}
+.reading-article .motivation-part-heading>p:last-child{font-size:17px;line-height:1.7;margin-bottom:0}
+.motivation-step{padding-bottom:31px;margin-bottom:31px;border-bottom:1px solid var(--line);scroll-margin-top:28px}
+.motivation-step:last-child{border-bottom:0;padding-bottom:0;margin-bottom:0}
+.motivation-step-heading{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;align-items:baseline;margin-bottom:16px}
+.motivation-step-number{font-family:var(--mono);font-size:19px;color:var(--accent-hover);line-height:1.6}
+.motivation-step-heading h3{font-size:24px;line-height:1.4;font-weight:500;letter-spacing:-.25px;margin:0}
+.motivation-step-body{padding-left:56px}
+.motivation-consequence{margin-top:22px;padding:13px 19px 15px;border-left:2px solid var(--accent);background:#101a27}
+.reading-article .motivation-consequence-label{font-family:var(--mono);font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--accent-hover);margin-bottom:6px;line-height:1.6}
+.reading-article .motivation-consequence>p:last-child{font-size:17px;color:var(--ink);line-height:1.7;margin:0}
+.motivation-closing{margin-top:49px;padding-top:29px;border-top:1px solid var(--accent)}
+.motivation-closing h2{font-size:28px;line-height:1.35;font-weight:500;letter-spacing:-.4px;margin:0 0 18px}
+.motivation-next{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:27px;padding-block:22px;border-block:1px solid var(--line)}
+.motivation-next a{display:flex;flex-direction:column;gap:8px}
+.motivation-next small{font-size:13px;line-height:1.6;color:var(--subtle)}
+.motivation-next a>span{display:flex;align-items:center;gap:10px;font-size:17px;line-height:1.5;color:var(--accent-hover)}
+.motivation-next .icon{width:16px;height:16px;flex-shrink:0}
+.motivation-next a:hover>span{text-decoration:underline;text-underline-offset:4px}
+.motivation-back{display:inline-block;margin-top:22px;font-size:14px;color:var(--subtle)}
+.motivation-back:hover{color:var(--accent-hover)}
+.motivation-commitments{margin:26px 0;max-width:100%}
+.motivation-commitments table{width:100%;border-collapse:collapse;text-align:left;table-layout:fixed;font-size:16px;line-height:1.75}
+.motivation-commitments caption{text-align:left;font-family:var(--mono);font-size:13px;line-height:1.7;color:var(--accent-hover);padding-bottom:13px}
+.motivation-commitments th,.motivation-commitments td{padding:16px 13px;vertical-align:top;border-bottom:1px solid var(--line);overflow-wrap:break-word}
+.motivation-commitments thead th{font-size:13px;font-weight:400;line-height:1.7;color:var(--subtle);background:var(--surface-muted);border-top:1px solid var(--line)}
+.motivation-commitments thead th:first-child{width:25%}
+.motivation-commitments thead th:nth-child(2){width:32%}
+.motivation-commitments tbody th{font-weight:500;color:var(--ink)}
+.motivation-commitments td{color:var(--muted)}
+.motivation-cell-label{display:none}
+.reading-article .motivation-path{list-style:none;margin:29px 0 31px;padding:0}
+.reading-article .motivation-path>li{display:grid;grid-template-columns:38px minmax(0,1fr);gap:19px;margin:0;padding:0 0 29px;position:relative}
+.motivation-path>li:not(:last-child):before{content:"";position:absolute;top:39px;bottom:10px;left:18px;border-left:1px solid #675b3c}
+.motivation-path-number{display:grid;place-items:center;align-self:start;height:38px;border:1px solid #8f7b4c;color:#e5cc8e;font-family:var(--mono);font-size:14px}
+.reading-article .motivation-path-status{font-family:var(--mono);font-size:12px;line-height:1.6;color:#e5cc8e;margin:0 0 7px;padding-top:1px}
+.motivation-path h4{font-size:22px;font-weight:500;letter-spacing:-.2px;line-height:1.45;margin:0 0 12px;color:var(--ink)}
+.reading-article .motivation-path-evidence{font-size:16px;line-height:1.75;margin-bottom:0;padding-left:14px;border-left:2px solid #675b3c}
+.motivation-path-evidence strong{display:block;font-family:var(--mono);font-size:12px;font-weight:400;line-height:1.7;color:#e5cc8e;margin-bottom:4px}
+.motivation-path .reading-sources{margin-top:11px}
+@media(max-width:760px){
+  .motivation-sidebar{display:none}
+  .reading-article .motivation-pitch{font-size:25px;line-height:1.5;margin-top:25px;max-width:100%}
+  .motivation-route{grid-template-columns:1fr;margin-bottom:32px}
+  .motivation-route>a,.motivation-route>a:first-child,.motivation-route>a:last-child{padding:13px 0;gap:5px 15px;border-right:0;border-bottom:1px solid var(--line)}
+  .motivation-route>a:last-child{border-bottom:0}
+  .motivation-route>a>span{grid-column:1}
+  .motivation-route .icon{grid-column:2;grid-row:1/3;align-self:center;margin-top:0}
+  .motivation-route strong{font-size:17px}
+  .motivation-part{margin-top:35px}
+  .motivation-part-heading h2{font-size:26px}
+  .motivation-step-heading{grid-template-columns:30px minmax(0,1fr);gap:12px}
+  .motivation-step-heading h3{font-size:23px}
+  .motivation-step-number{font-size:17px}
+  .motivation-step-body{padding-left:0}
+  .motivation-consequence{padding-inline:15px}
+  .motivation-closing h2{font-size:26px}
+  .motivation-next{grid-template-columns:1fr;gap:21px}
+  .motivation-commitments table,.motivation-commitments caption,.motivation-commitments tbody,.motivation-commitments tr,.motivation-commitments th,.motivation-commitments td{display:block;width:100%}
+  .motivation-commitments thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  .motivation-commitments tbody>tr{padding:18px 0;border-top:1px solid var(--line)}
+  .motivation-commitments tbody>tr:last-child{border-bottom:1px solid var(--line)}
+  .motivation-commitments th,.motivation-commitments td{padding:0;border:0}
+  .motivation-commitments tbody th{font-size:18px;line-height:1.6;margin-bottom:13px}
+  .motivation-commitments td+td{margin-top:13px}
+  .motivation-cell-label{display:block;font-family:var(--mono);font-size:12px;line-height:1.7;color:var(--accent-hover);margin-bottom:4px}
+  .reading-article .motivation-path>li{grid-template-columns:32px minmax(0,1fr);gap:13px}
+  .motivation-path-number{height:32px;font-size:13px}
+  .motivation-path>li:not(:last-child):before{top:34px;left:15px}
+  .motivation-path h4{font-size:21px}
+}
 .reading-intro:empty{display:none}
 .reading-article p{font-size:18px;line-height:1.8;color:var(--muted);margin:0 0 16px}
 .reading-article .reading-breadcrumb{font-size:14px;line-height:1.8;margin-bottom:18px;color:var(--subtle)}
@@ -222,3 +310,197 @@
  .reading-pager a{font-size:15px}
 }
 @media(prefers-reduced-motion:reduce){.video-thumb img{transition:none}}
+
+/* Contact shares the reading typography and the site's restrained blue accents. */
+.contact-page {
+  padding-top: 43px;
+  padding-bottom: 56px;
+}
+
+.contact-header {
+  margin-bottom: 34px;
+}
+
+.contact-header .reading-deck {
+  max-width: 760px;
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+  align-items: start;
+  gap: 40px;
+}
+
+.contact-about {
+  padding-top: 7px;
+}
+
+.contact-about > p,
+.contact-card > p {
+  margin: 0 0 19px;
+  font-size: 19px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.contact-page .contact-kicker {
+  margin: 0 0 12px;
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.7;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  color: #9fcaff;
+}
+
+.contact-about h2 {
+  margin: 0 0 10px;
+  font-size: 34px;
+  font-weight: 550;
+  line-height: 1.25;
+  letter-spacing: -.7px;
+  color: var(--ink);
+}
+
+.contact-about .contact-role {
+  margin-bottom: 25px;
+  font-size: 19px;
+  line-height: 1.65;
+  color: #b8d7ff;
+}
+
+.contact-about > p:last-child {
+  margin-bottom: 0;
+}
+
+.contact-card {
+  padding: 27px;
+  border: 1px solid #324b6b;
+  border-radius: 3px;
+  background: #111b29;
+}
+
+.contact-card h2 {
+  margin: 0 0 13px;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -.35px;
+  color: var(--ink);
+}
+
+.contact-card > p:not(.contact-kicker) {
+  margin-bottom: 22px;
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.contact-email {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) 18px;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 12px;
+  border: 1px solid #628fc5;
+  border-radius: 3px;
+  background: #183454;
+  color: #e3efff;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.contact-email > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.contact-email > svg {
+  width: 20px;
+  height: 20px;
+}
+
+.contact-email > svg:last-child {
+  width: 18px;
+  height: 18px;
+}
+
+.contact-email:hover {
+  border-color: #a0c7f5;
+  background: #20446c;
+  color: #fff;
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin-top: 22px;
+  padding-top: 17px;
+  border-top: 1px solid #32445c;
+}
+
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #b8d7ff;
+}
+
+.contact-links a:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.contact-links .icon {
+  width: 14px;
+  height: 14px;
+}
+
+@media (max-width: 900px) {
+  .contact-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+  }
+  .contact-about {
+    padding-top: 0;
+    max-width: 760px;
+  }
+}
+
+@media (max-width: 760px) {
+  .contact-page {
+    padding-top: 30px;
+    padding-bottom: 38px;
+  }
+  .contact-header {
+    margin-bottom: 27px;
+  }
+  .contact-about h2 {
+    font-size: 30px;
+  }
+  .contact-about > p,
+  .contact-about .contact-role {
+    font-size: 18px;
+  }
+  .contact-card {
+    padding: 22px;
+  }
+}
+
+@media (max-width: 400px) {
+  .contact-card {
+    padding: 18px 15px;
+  }
+  .contact-email {
+    gap: 8px;
+    padding: 12px 10px;
+  }
+}

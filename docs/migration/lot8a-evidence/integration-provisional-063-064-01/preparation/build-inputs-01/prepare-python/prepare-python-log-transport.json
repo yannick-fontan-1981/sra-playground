@@ -1,0 +1,44 @@
+{
+  "schema": "logos-engine.v6.development-log-transport.v1",
+  "recordedAt": "2026-11-11T19:19:57.458005+00:00",
+  "status": "verified_byte_exact",
+  "entries": [
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/prepare-python/prepare-python-stdout.log",
+        "sha256": "1d629391569bc80fb8c1c3bfd0a82e916fef6c1e2a7d1d97a5622aae32a29983",
+        "bytes": 49
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/prepare-python/prepare-python-stdout.log.gz",
+        "sha256": "a5ab016a49add1b0e747192dc8036c32657373513c5cabd47aa3931e715c36e4",
+        "bytes": 69
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/prepare-python/prepare-python-stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/prepare-python/prepare-python-stderr.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+        "bytes": 20
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/prepare-python/prepare-python-activity.jsonl",
+        "sha256": "6e9fe159c7f29b50fb68027d33f8418a0be29b2bbd89529f993a08f9245a3205",
+        "bytes": 104
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/prepare-python/prepare-python-activity.jsonl.gz",
+        "sha256": "0feadb72b702f98abef6a5149bfd7ad6447313453988753b5dd7a2f151d339ee",
+        "bytes": 113
+      }
+    }
+  ],
+  "qualification": "Complete stdout, stderr and activity, including failures; no filtering or newline normalization."
+}

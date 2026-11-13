@@ -1,0 +1,175 @@
+{
+  "schema": "logos-engine.lot5c-structural-repeat-equivalence.v1",
+  "status": "equivalent_fresh_qualification",
+  "recordedAt": "2026-11-11T17:45:22.569235+00:00",
+  "priorAttempt": "docs/migration/lot5c-evidence/recovery/performance-integrated-01",
+  "newAttempt": "docs/migration/lot5c-evidence/recovery/performance-integrated-02",
+  "inputs": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-structural-fixture.json",
+      "bytes": 60104,
+      "sha256": "67d2afc5d54b8203c636aa8868c7b5967760dc7b44b0329eeb8b67ef98253296"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-graph-attribution.json",
+      "bytes": 107007,
+      "sha256": "c0528cf494f17f156086e8d0c540fa0421c8bcf7b1c656454d96767b0916f74c"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-source-inventory.json",
+      "bytes": 123426,
+      "sha256": "936188c0d9368737e1b797e205fc3de099585a1cacc8bbc308b13a6c2ba0ba53"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/global-budget-policy.json",
+      "bytes": 2348,
+      "sha256": "ac3d2c33fb990b851c1dd96efb0e7f38ceb40c5f7efbd72ae227a654c3c18de0"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-structural-fixture.json",
+      "bytes": 60104,
+      "sha256": "6f8d45dc8d68e8d3a67c45a66ac1045d12d123c43c02ab66e4ac1a09b63191d5"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-graph-attribution.json",
+      "bytes": 107007,
+      "sha256": "b33228947598d563935cee9b1d2bac70ba3b4c55b11018d306ea96c2933a8534"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-source-inventory.json",
+      "bytes": 123426,
+      "sha256": "b8fcb70f1fa56f0f5218698bf08d9764698590c7fbeaa2024179a3999501dac0"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/global-budget-policy.json",
+      "bytes": 2348,
+      "sha256": "ad6878f3065ec5fca67f4fda7ed3cfac936795c3ee11a37fec4a42fe1a5ca53b"
+    }
+  ],
+  "checks": [
+    {
+      "name": "fresh_qualification_passed",
+      "passed": true
+    },
+    {
+      "name": "complete_forms_exactly_equal_to_retained01",
+      "passed": true
+    },
+    {
+      "name": "forms_canonical_hash_unchanged",
+      "passed": true
+    },
+    {
+      "name": "native_digests_unchanged",
+      "passed": true
+    },
+    {
+      "name": "domainReview_unchanged",
+      "passed": true
+    },
+    {
+      "name": "acquisitionMode_unchanged",
+      "passed": true
+    },
+    {
+      "name": "acceptedBoundaryReturn_unchanged",
+      "passed": true
+    },
+    {
+      "name": "sourceFactCoverage_unchanged",
+      "passed": true
+    },
+    {
+      "name": "only_binding_owner_and_program",
+      "passed": true
+    },
+    {
+      "name": "all58_point_counts_equal",
+      "passed": true
+    },
+    {
+      "name": "all40_delta_categories_equal",
+      "passed": true
+    },
+    {
+      "name": "policy_globalStage_unchanged",
+      "passed": true
+    },
+    {
+      "name": "policy_statistic_unchanged",
+      "passed": true
+    },
+    {
+      "name": "policy_caseIds_unchanged",
+      "passed": true
+    },
+    {
+      "name": "policy_relativeIncreaseLimit_unchanged",
+      "passed": true
+    },
+    {
+      "name": "policy_comparison_unchanged",
+      "passed": true
+    },
+    {
+      "name": "policy_allCasesMustPass_unchanged",
+      "passed": true
+    },
+    {
+      "name": "policy_crossCaseCompensation_unchanged",
+      "passed": true
+    },
+    {
+      "name": "policy_phaseOverrunsMayBeAccepted_unchanged",
+      "passed": true
+    },
+    {
+      "name": "policy_phasesAndP95RemainVisible_unchanged",
+      "passed": true
+    },
+    {
+      "name": "policy_plannedOrder_unchanged",
+      "passed": true
+    },
+    {
+      "name": "policy_cohorts_unchanged",
+      "passed": true
+    },
+    {
+      "name": "policy_sessionsPerCaseVersionCohort_unchanged",
+      "passed": true
+    },
+    {
+      "name": "policy_measuredSessions_unchanged",
+      "passed": true
+    },
+    {
+      "name": "policy_measuredActions_unchanged",
+      "passed": true
+    },
+    {
+      "name": "policy_excludedWarmupSessions_unchanged",
+      "passed": true
+    },
+    {
+      "name": "policy_excludedWarmupActions_unchanged",
+      "passed": true
+    },
+    {
+      "name": "policy_excludedMeasuredSessions_unchanged",
+      "passed": true
+    },
+    {
+      "name": "policy_excludedOutliers_unchanged",
+      "passed": true
+    }
+  ],
+  "checkedCount": 29,
+  "formsSha256": "89d4bb89f1e22ef73409d5e7b0497a745631b7f71fab50f51355dc1f2a20f183",
+  "freshQualificationChecks": 64,
+  "attributedDeltas": 40,
+  "points": 58,
+  "qualification": "Exact forms, source domain, owner/program inventories and declared global rules are unchanged. Both02 captures are fresh, independently qualified by the unchanged tool; their complete raw reports are retained. No equality of raw capture bytes or old receipt relabelling is claimed.",
+  "measurementExecuted": false,
+  "readinessAsserted": false
+}

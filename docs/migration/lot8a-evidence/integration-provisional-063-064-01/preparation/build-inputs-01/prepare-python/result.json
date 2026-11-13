@@ -1,0 +1,33 @@
+{
+  "name": "prepare-python",
+  "command": [
+    "node",
+    "scripts/prepare-python.mjs"
+  ],
+  "startedAt": "2026-11-11T19:19:57.240661+00:00",
+  "finishedAt": "2026-11-11T19:19:57.456621+00:00",
+  "elapsedSeconds": 0.21597594700142508,
+  "exitCode": 0,
+  "predeclaredTimeoutSeconds": 180,
+  "stoppedReason": null,
+  "stdout": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/prepare-python/prepare-python-stdout.log",
+    "sha256": "1d629391569bc80fb8c1c3bfd0a82e916fef6c1e2a7d1d97a5622aae32a29983",
+    "bytes": 49
+  },
+  "stderr": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/prepare-python/prepare-python-stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "activity": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/prepare-python/prepare-python-activity.jsonl",
+    "sha256": "6e9fe159c7f29b50fb68027d33f8418a0be29b2bbd89529f993a08f9245a3205",
+    "bytes": 104
+  },
+  "logTransport": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/prepare-python/prepare-python-log-transport.json",
+    "sha256": "71bf0a10f741eeb4c65ec08af7f5b46bfe686ee5a83bb54edc33a94c3160d96d",
+    "bytes": 2043
+  }
+}

@@ -1,0 +1,470 @@
+{
+  "schema": "logos-engine.lot2a.performance-evidence-integrity.v1",
+  "status": "verified",
+  "recordedAt": "2026-11-09T18:19:26.233005+00:00",
+  "method": "Read and SHA-256 validation of completed evidence and its recorded inputs; exact decompression comparison with retained originals. No benchmark rerun.",
+  "nativeDigest": "cc4bcea77e0099dc035afa5d6ae03e0d5a7a00082633b8e2332691f34b769ad3",
+  "nativeFiles": 239,
+  "counts": [
+    {
+      "label": "baseline",
+      "measuredActions": 222,
+      "warmupActions": 9,
+      "nativeFiles": 237,
+      "nativeDigest": "8a67b57947364dab988c7081e35eb6a923beee2305eb4b8a8a89c2fc86ebea57"
+    },
+    {
+      "label": "after",
+      "measuredActions": 222,
+      "warmupActions": 9,
+      "nativeFiles": 239,
+      "nativeDigest": "cc4bcea77e0099dc035afa5d6ae03e0d5a7a00082633b8e2332691f34b769ad3"
+    }
+  ],
+  "comparison": {
+    "status": "passed",
+    "budget": 0.1,
+    "budgetedMetrics": 16,
+    "maxObservedMedianIncrease": 0.0390270795387464,
+    "unresolved": []
+  },
+  "producerCases": 5,
+  "checkedInputFiles": 71,
+  "checkedInputs": [
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "docs/migration/lot2a-evidence/performance/cases.json",
+      "sha256": "7ca2508da22332eafaea53c1508d7363cec63cb0832cc6ea21713dbe331bace6",
+      "bytes": 1631
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f",
+      "bytes": 48531
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+      "bytes": 46966
+    },
+    {
+      "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+      "bytes": 53583
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+      "bytes": 111624
+    },
+    {
+      "path": "docs/migration/native-campaigns-v50/life-public-trace-final.json.gz",
+      "sha256": "8c2e1b67af1c827d2a132c211d71b6e25158a5db1e9b236e4d0d92e912fe7c84",
+      "bytes": 39361
+    },
+    {
+      "path": "docs/migration/lot2a-evidence/performance/comparison-policy.json",
+      "sha256": "161ccebe0858f956f4e046fdab2f97c17866535fb54da93848e0fb295e49109f",
+      "bytes": 779
+    },
+    {
+      "path": "docs/migration/lot2a-evidence/performance/baseline.json.gz",
+      "sha256": "3e75cff62dde18bc6212bfe3c9c15f5808972f6831187e6af926de0e33e2d3d6",
+      "bytes": 81278
+    },
+    {
+      "path": "docs/migration/lot2a-evidence/performance/after.json.gz",
+      "sha256": "3b903f5dcfc88d5a83e9dc8eb723a587149ce81e1958db516c602fa6568f2de1",
+      "bytes": 81410
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+      "bytes": 9861
+    },
+    {
+      "path": "scripts/measure-native-morphology-costs.mjs",
+      "sha256": "44cd24aed8740ab411a895f264c4f9f71b63935b8291c26bb712bf958dcec6a0",
+      "bytes": 9536
+    },
+    {
+      "path": "tests/fixtures/v6-morphology-measurements-reference.json.gz",
+      "sha256": "240ab70440bd2efe7588b1ab5d673e61210842987801f9fdeb44bafc87185757",
+      "bytes": 278370
+    },
+    {
+      "path": "scripts/export-v6-morphology-measurements-reference.py",
+      "sha256": "e0ef6881325999a21a556be1e96110962f5a2dd77b71760a6fe51d352f86ad78",
+      "bytes": 23996
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6",
+      "bytes": 424024
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/capabilities/complementary_contours.py",
+      "sha256": "95c4356a7266727a30383d0638c952e2ddb509b8c9c8e7668f23d1e1220c3c29",
+      "bytes": 19704
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/capabilities/components.py",
+      "sha256": "60563b31d90e878eb4c5828818725b9c91252638e6e343aa31d236b1ac590a0f",
+      "bytes": 6364
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/capabilities/contracts.py",
+      "sha256": "7597c2d1fc88993dafea3514c5adaf8210cf5cd65b1823f408810467d2791172",
+      "bytes": 381887
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/drm/fact_conditions.py",
+      "sha256": "7d4220d8dfc334117e54857786b00f4a5c78ae1a8d83ca6826e03632ba859aac",
+      "bytes": 3143
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/drm/fact_contracts.py",
+      "sha256": "a85766fde628aecfa31459c87f602f7b38fbfab9704e1377d92b248fd005b8bd",
+      "bytes": 5082
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/drm/loader.py",
+      "sha256": "b7c8bb1cfa370d32a72257ea34235ff1bf628245ef3cff8499437472577706ac",
+      "bytes": 15969
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/drm/meaning.py",
+      "sha256": "d0e5e9583240cc74b8cc70fefb25700464b5e588c7009ca277b5615378557c40",
+      "bytes": 50789
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/drm/morphology.drm",
+      "sha256": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+      "bytes": 124926
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/drm/registry.py",
+      "sha256": "99f3cf0efea0d9b4467fc6ad2018a0aec8884f9f97719c61fece6554b2403d43",
+      "bytes": 19546
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/drm/runtime.py",
+      "sha256": "432ff6f16b906b92af50516a6ace08987994cd07a89b5e313da7c89cacaebeea",
+      "bytes": 32765
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/logos/field_metadata.py",
+      "sha256": "40c51d2cfc66953f6b102193d4d8e4444881d92a649b20e38d06a4cf9dbe2a2f",
+      "bytes": 3774
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/logos/operational_reasoning.py",
+      "sha256": "54b5b6baa005ee1c86f5c3cf6eb46a6cc08a9b8b54c22b456fbedfcd17f48000",
+      "bytes": 12050
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/logos/operations.py",
+      "sha256": "e901497533edecf24c18cdcc6be088a28ec2492cc80883823238a57bea01b0fe",
+      "bytes": 125156
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/logos/types.py",
+      "sha256": "92703a65cda3d92844688ad37242db030ba7709a494bd7cc1b61b885fa88a9d9",
+      "bytes": 55942
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/observability/decision_capture.py",
+      "sha256": "316c3ef4004b18dae309fd31ea8f407a42c11365edc32975b80c1c5bb2cc5ac2",
+      "bytes": 1423
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/operators/authority.py",
+      "sha256": "75d3bc84844fb30e231b9d37919021e5636a129df3ca433db035a409d46dab48",
+      "bytes": 10122
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/operators/runtime.py",
+      "sha256": "40ab0174648568f01d2e95907098d1d1e97cdc2ef96a016902d991ade5e129c7",
+      "bytes": 56606
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/performance.py",
+      "sha256": "749dced0c87373dcf68b32cf921c09e84e4a4ccba23f78572da36925373061b2",
+      "bytes": 5963
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/scheduler/contracts.py",
+      "sha256": "ed6c345ca073d94e8ba4116f588059440bed5b4c29c00899417f2e650eb7b0fa",
+      "bytes": 53696
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/scheduler/evaluator.py",
+      "sha256": "519834fb3eb5a74da1cd9a9f38c8da842cad9f93222fab9664ea3845844009d6",
+      "bytes": 20047
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/scheduler/registry.py",
+      "sha256": "3f6519c7eccc5458965920090ed8570833f758206a02e5a5da45b171d195555a",
+      "bytes": 11657
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/scheduler/runtime.py",
+      "sha256": "dc8540bde3be0e1e6c60cb27d8bc5720f3bd5081560aa7cbf40ccc16a8e89d64",
+      "bytes": 139290
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/scheduler/source_return.py",
+      "sha256": "75847d57fa346c40af50f547b39c266770b9568148424c1a3fa09704ad25d854",
+      "bytes": 42837
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/src/ast.py",
+      "sha256": "d5da74b4490df0ead38a82286b3b745a075730f80accf69187d7a3ed88ba8612",
+      "bytes": 9660
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/src/compiler.py",
+      "sha256": "d23775af2ea83f85edcfddeba9c7ca1b1e4024cd9546883f3e1dd88fde4e718d",
+      "bytes": 22799
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/src/lexer.py",
+      "sha256": "b1ce61c0ccb94b89fc7ed4e78dade9c31488fe8245b4501262c270097ebe7cf9",
+      "bytes": 11641
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/src/parser.py",
+      "sha256": "0b04d758592866acef42c4a9a90792927a6a3a07d08d11166ea007aace6f5d96",
+      "bytes": 34885
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/src/registry.py",
+      "sha256": "b60319de87217a9ba51887993a313be919f3d212bccca8a1f8ff2153f1f86e8e",
+      "bytes": 9134
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/src/symbols.py",
+      "sha256": "d1a99c0aed0d832bcf4876019d66b077829437f18c8ac2025f5f62c7377f2ead",
+      "bytes": 10827
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/src/validation.py",
+      "sha256": "108b6f0cb2a9515eee0bd43a4ae84875f656afbb9db03156f705dded22c1bddb",
+      "bytes": 46623
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/state/conscious_experiment_feedback.py",
+      "sha256": "322c0c6133b4ac840fa48202978678ffee920ac348a78ec4e850d916ccf40c02",
+      "bytes": 6780
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/state/conscious_symbolic_memory.py",
+      "sha256": "b58fa04098541058d47a6d3e8cd217e22c597f3e2be7f20d3be6e13d39fb4bf1",
+      "bytes": 2762
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/state/event_store.py",
+      "sha256": "8ede70a172c670e869a57a3185864882168e257827faa9be59c75fbb8bb9f4f2",
+      "bytes": 47630
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/state/events.py",
+      "sha256": "66da4b5267883c789f45e46112d01c0f3eb1025d43de535f26f758619999362b",
+      "bytes": 11843
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/state/operational_consciousness.py",
+      "sha256": "bef82f7743d923de76a283de978b5bd70b29a5ba2417f7f3719f5096e85ff112",
+      "bytes": 71547
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/state/reasoning_context_publication.py",
+      "sha256": "96122758420788ae1f0b2df9257ea109258ccf3840badc9315da1ac7aa996c82",
+      "bytes": 7387
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/state/reducer.py",
+      "sha256": "cf244fe62ead62c45fddc95dcdb54982ddb264f60bdb4ea653bbe72e01dc69a1",
+      "bytes": 17895
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/state/snapshot.py",
+      "sha256": "2ae7ca6e7d987d571228ef220bca3f4446680bb4ba50daff984414a6b1f89ef7",
+      "bytes": 18108
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/state/transaction_index_overlay.py",
+      "sha256": "8afb64dfd8cbc71ddaafac526ae81a87a6f4780e2eb258c808c8bcb0de209f03",
+      "bytes": 3652
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/geometric_observer.py",
+      "sha256": "1017b130cb91f799ab5bdb2f26789c2645078d9b9d226469b3915d4a7262eaac",
+      "bytes": 9562
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/target_tree.py",
+      "sha256": "4b45a51ab91b00b932f3c68acdb8a97af7ce3f0bfb6cdbd1092afe7dd23ef96d",
+      "bytes": 16754
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/terminal_composition.py",
+      "sha256": "10ab6ba513d3cc0b4dbf96868d8c716eee449068dba3f2fcdf06d5b35566609e",
+      "bytes": 31558
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/adapter.py",
+      "sha256": "c3eba838c18e336f7128bc38cd46a3bbc7b7a694830bd27c0bd3b2b840ee30c0",
+      "bytes": 12784
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/collection_evidence.py",
+      "sha256": "944f1f3707730e061f1a0a6ec09aeb4d222bb24f681b7f1a25ec767fdfd49218",
+      "bytes": 8648
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/continuation.py",
+      "sha256": "ea5e187e4b320e148cff27824c28668a0e0bcab4fd47bbe80fc70c0b3252262c",
+      "bytes": 2894
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/derive.py",
+      "sha256": "b46dd41546dcfab80e02ae49bbe2ab54007cc6320402f9fc1442630b360ad020",
+      "bytes": 11507
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/feature_occurrences.py",
+      "sha256": "c4ee096756b7b4ba595baf4d462c9fdee40e5affd1db9fdf8727918341bf6e32",
+      "bytes": 2527
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/geometry.py",
+      "sha256": "592e97aec23e6ce319348ee665821c1e90d553aee7698fe773b1a33a2109bb02",
+      "bytes": 27586
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/morphology_policy.drm",
+      "sha256": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+      "bytes": 21718
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/observed_derivations.py",
+      "sha256": "2eda2e6a1ab7a9c658a335d2906fa04a6d3dff3b35f387f9cee8c31faed1c4f6",
+      "bytes": 17738
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/observed_meter.py",
+      "sha256": "34c676bdf93a881693232c64b41b76f118007361386c4e159eaf47bca70a3e47",
+      "bytes": 6792
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/orthogonal_features.py",
+      "sha256": "29dfb7873646f78601cdebfc051d6579a98aa7dd1f73c3dcdca46f221af3c997",
+      "bytes": 3194
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/partial_correspondence.py",
+      "sha256": "16a19b2038ca5e866f4652b1363a2efc9c7ec2b83442d081342e0dbd7197cbd0",
+      "bytes": 4988
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/policy.py",
+      "sha256": "0f630d43f67054b8b3a82ae32cf2f2e522de6679fa726b64ed4fc853a278a39e",
+      "bytes": 5975
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/rearm_evidence.py",
+      "sha256": "dd0431d91a79474f9ec147975723bfda09d36416d8643bb07e00e4ae6a07db14",
+      "bytes": 4416
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/src_runtime.py",
+      "sha256": "1e2cb3dcefe2fbee13301fda99cd8ec9cf8ef13c8c2ace6562c6fa6540385558",
+      "bytes": 3862
+    }
+  ],
+  "transport": [
+    {
+      "label": "baseline",
+      "decompressedByteIdentical": true,
+      "originalBytes": 976192,
+      "receipt": {
+        "path": "docs/migration/lot2a-evidence/performance/baseline-relocation.json",
+        "sha256": "40715281ef0047893fba53c7865df29c0de7713cbb70fc4380245bd61248e51d",
+        "bytes": 895
+      }
+    },
+    {
+      "label": "after",
+      "decompressedByteIdentical": true,
+      "originalBytes": 976551,
+      "receipt": {
+        "path": "docs/migration/lot2a-evidence/performance/after-relocation.json",
+        "sha256": "6ac83b0bc95fb633d280a4b687cd47743c34f3f5a121c64d99ac3ebda018136a",
+        "bytes": 767
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/migration/lot2a-evidence/performance/README.md",
+      "sha256": "b857bdc07d578a4d834e9e58a5753d2fef17b1b1e59ac519689b2504880c7a35",
+      "bytes": 7232
+    },
+    {
+      "path": "docs/migration/lot2a-evidence/performance/after-relocation.json",
+      "sha256": "6ac83b0bc95fb633d280a4b687cd47743c34f3f5a121c64d99ac3ebda018136a",
+      "bytes": 767
+    },
+    {
+      "path": "docs/migration/lot2a-evidence/performance/after.json.gz",
+      "sha256": "3b903f5dcfc88d5a83e9dc8eb723a587149ce81e1958db516c602fa6568f2de1",
+      "bytes": 81410
+    },
+    {
+      "path": "docs/migration/lot2a-evidence/performance/baseline-relocation.json",
+      "sha256": "40715281ef0047893fba53c7865df29c0de7713cbb70fc4380245bd61248e51d",
+      "bytes": 895
+    },
+    {
+      "path": "docs/migration/lot2a-evidence/performance/baseline.json.gz",
+      "sha256": "3e75cff62dde18bc6212bfe3c9c15f5808972f6831187e6af926de0e33e2d3d6",
+      "bytes": 81278
+    },
+    {
+      "path": "docs/migration/lot2a-evidence/performance/cases.json",
+      "sha256": "7ca2508da22332eafaea53c1508d7363cec63cb0832cc6ea21713dbe331bace6",
+      "bytes": 1631
+    },
+    {
+      "path": "docs/migration/lot2a-evidence/performance/comparison-policy.json",
+      "sha256": "161ccebe0858f956f4e046fdab2f97c17866535fb54da93848e0fb295e49109f",
+      "bytes": 779
+    },
+    {
+      "path": "docs/migration/lot2a-evidence/performance/comparison.json",
+      "sha256": "2a8385ab39327b09786a769734ddabeb3ca0c6c6590c1aa03e938777758f52ae",
+      "bytes": 37959
+    },
+    {
+      "path": "docs/migration/lot2a-evidence/performance/producer-costs.json",
+      "sha256": "948627950b17a2cec12890230d2ce7a88fb158831a71a1709a5f413e493fc65b",
+      "bytes": 73536
+    },
+    {
+      "path": "docs/migration/lot2a-evidence/performance/results.md",
+      "sha256": "f4ca3c1a694d5489559a0a6d12470039f32e2f55939687d47c85086c26ae6433",
+      "bytes": 12928
+    }
+  ],
+  "qualifications": [
+    "The comparison budget applies to the 16 predeclared median metrics, not every tail sample or p95.",
+    "Shared-host scheduling and observed round spread limit causal interpretation of reductions.",
+    "New-producer diagnostic has five warm synthetic component cases and does not establish cold whole-game performance.",
+    "This index checks recorded statuses and inputs; the original benchmark scripts and reports retain their own execution proof."
+  ]
+}

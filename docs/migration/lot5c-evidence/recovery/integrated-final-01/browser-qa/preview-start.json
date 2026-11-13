@@ -1,0 +1,11 @@
+{
+  "recordedAt": "2026-11-11T17:44:37.280140+00:00",
+  "command": [
+    "sites-preview",
+    "start",
+    "/workspace/sites/sra-lot5c-production-qa-20261111"
+  ],
+  "exitCode": 0,
+  "stdout": "Sites preview running at http://127.0.0.1:4173/\n",
+  "stderr": ""
+}

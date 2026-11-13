@@ -1,0 +1,36 @@
+{
+  "schema": "logos-engine.v57.immutable-candidate-resolution.v1",
+  "game": "SMLP",
+  "selectedAt": "2026-11-09T15:05:58.388528+00:00",
+  "blockedDeadline": "2026-11-09T15:45:58.388528+00:00",
+  "resolvedAt": "2026-11-09T15:19:50.599278+00:00",
+  "finalCampaignCompletedAt": "2026-11-09T15:17:36.810764+00:00",
+  "selectionToFinalSuccessSeconds": 698.422236,
+  "secondsBeforeDeadline": 1701.577764,
+  "finalStatus": "passed_three_official_levels",
+  "officialLevelsCompleted": 3,
+  "actions": 15,
+  "prefixes": 9,
+  "nativeSourceDigest": "f2ec2ff8658290c510a58642612b4f9d4b07a04d8fa6434c91aadda997e6c23e",
+  "selection": {
+    "path": "docs/migration/native-campaigns-v57/candidates/001-smlp-selection.json",
+    "bytes": 1030,
+    "sha256": "2080e664e32badaf6ad0ee2c38e825fe26320348e8eeaf6100cd745b23ca39c5"
+  },
+  "finalExecution": {
+    "path": "docs/migration/native-campaigns-v57/final/execution-smlp.json",
+    "bytes": 59897,
+    "sha256": "10e625a7cb3a47bda3dabbb7146d4094f2f146c76ab68d43b828de965de7d0bc"
+  },
+  "sourceComparison": {
+    "path": "docs/migration/native-campaigns-v57/final/smlp-v57-original-comparison.json.gz",
+    "bytes": 39003,
+    "sha256": "b06ea78561eb620b8e2906914da660ebec6cd0dad6c3545e957ea9268c884544"
+  },
+  "baselineComparison": {
+    "path": "docs/migration/native-campaigns-v57/final/smlp-baseline-public-comparison.json",
+    "bytes": 17033,
+    "sha256": "95b64893d5acc629de54d7dcaa7df7e5a5b64c5107559f51b037d746bc92def9"
+  },
+  "qualification": "Single selected game. Both unchanged V56 baseline and independently executed frozen V57 completed the three-level target before the immutable 40-minute deadline. No switch was needed, no further game campaign was launched by the baseline worker. Completion stops at entry level 4 / NOT_FINISHED and does not claim full game victory. New Recolor and Motion entries abstained on their actual evaluated initial calls; successful public trajectory is exactly the V56 baseline."
+}

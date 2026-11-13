@@ -1,0 +1,232 @@
+{
+  "schema": "logos-engine.lot9a.work-forms-tool-provenance.v1",
+  "status": "prepared_static_only_awaiting_root_declaration_and_independent_review",
+  "recordedAt": "2026-11-12T14:50:02.210316+00:00",
+  "files": [
+    {
+      "source": {
+        "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/capture-cost-owner-graphs.mjs",
+        "bytes": 31537,
+        "sha256": "9323017b311100aea4a6be6baf9400ca245ee729291253c2181de67e4680b417"
+      },
+      "derived": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs",
+        "bytes": 34460,
+        "sha256": "0d810cf771e03a0910ffad6bd937e90f8a7cad147f48014c7bdfddc154487c68"
+      },
+      "diff": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/derivation-diffs/capture-cost-owner-graphs.mjs.diff",
+        "bytes": 22545,
+        "sha256": "9393dea0da741ed28ee73a70a44610cec0a532e8c33800ebfcfa4d690f16eb0b"
+      }
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/record-owner-source-inventory.mjs",
+        "bytes": 15277,
+        "sha256": "af762f71256ce372a3b760f32b3c1687d700e6b1378012e0a1517fe61d1bedc2"
+      },
+      "derived": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/record-owner-source-inventory.mjs",
+        "bytes": 16924,
+        "sha256": "1bffb880b5949caf64c6e04e3cf2e5219d56c55805e3c8d539ef22bddb250e36"
+      },
+      "diff": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/derivation-diffs/record-owner-source-inventory.mjs.diff",
+        "bytes": 14060,
+        "sha256": "933e38e1b4691993bce2636e4762a6b37c89e2e0274d41db0b7945f749f2c508"
+      }
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs-v2.mjs",
+        "bytes": 55746,
+        "sha256": "98c635bb4869009babc69c37a2b9d8aa9b43bb8393d2dfaa50a0765d7c67bafb"
+      },
+      "derived": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/qualify-cost-owner-graphs.mjs",
+        "bytes": 68603,
+        "sha256": "324af70cfb75c29aec57cbf647f3d21be9848def151ff2357add8a8dc85c31a7"
+      },
+      "diff": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/derivation-diffs/qualify-cost-owner-graphs.mjs.diff",
+        "bytes": 46218,
+        "sha256": "1e99ac3332e9a261fe3499262e69bb60d6f1e8e7bcb4420f02355160aa05b168"
+      }
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/cases.json",
+        "bytes": 1498,
+        "sha256": "65e27dbcc2f5871ab259358cc46576b2671058630be0b37c643eadad66593173"
+      },
+      "derived": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/cases.json",
+        "bytes": 1368,
+        "sha256": "8bb390fb0b9fd2c84202c1eac55d599558b29336d410b92d76618048a2fd1124"
+      },
+      "diff": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/derivation-diffs/cases.json.diff",
+        "bytes": 2073,
+        "sha256": "7820a7d39c811c4a164604fc188ab0547d5a8bd2506f2db3f8b9f0c69cdce9ed"
+      }
+    }
+  ],
+  "protocol": {
+    "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/README.md",
+    "bytes": 9940,
+    "sha256": "473ca6248d20f5df70c217c2f8ab55402db222e7e1bcecd2e219baa892c772c2"
+  },
+  "syntaxChecks": {
+    "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/syntax-checks.json",
+    "bytes": 1787,
+    "sha256": "3421757e7ce3dad7ab8a0a4aa11fd10760e4fa751342ddfd134277f9be00f474"
+  },
+  "nativeRuntimeExecutions": 0,
+  "nativeTestExecutions": 0,
+  "originalOracleExecutions": 0,
+  "gameExecutions": 0,
+  "capturesExecuted": 0,
+  "functionalReadersExecuted": 0,
+  "publicationPerformed": false,
+  "globalLockAcquired": false,
+  "officialPerformanceEligible": false,
+  "publishedBaseline": {
+    "site": 108,
+    "sourceCommit": "8462204043aa368faa7df280d796bb706eb53b38",
+    "nativeVersion": "0.67.0",
+    "manifest": {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/baseline-native.json",
+      "bytes": 39333,
+      "sha256": "18fcc15c6e57f1bf6aab33cc62498e6a5a76836d85b890378be957a0e6da1c57"
+    },
+    "nativeDigest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a"
+  },
+  "candidate": {
+    "nativeVersion": "0.68.0",
+    "manifest": {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/candidate-native.json",
+      "bytes": 39694,
+      "sha256": "10ef61a1b937cbfca47332f7138a4bd1872323434eee2c3b41c0d0fea81f5379"
+    },
+    "nativeDigest": "e7a94fbc7cdcb19d8704b5d4120f27a858cbcd07e455084711510ee147f4e653",
+    "sourceCommitPolicy": "Root freezes execution HEAD before commands; both captures and factory inventory retain and verify it."
+  },
+  "historicalCaseRowsExact": true,
+  "expectedChanges": {
+    "ownersAdded": [
+      "public_chart_navigation"
+    ],
+    "ownersRemoved": [],
+    "programsAdded": [
+      "v6.chart_navigation.choose"
+    ],
+    "programsRemoved": [],
+    "rootsAdded": [
+      "family_state:public_chart_navigation",
+      "family_activation:public_chart_navigation",
+      "program:v6.chart_navigation.choose"
+    ],
+    "existingOwnersCompared": [
+      "public_observed_binding",
+      "selected_rigid",
+      "motif_access",
+      "public_ordered_recruitment",
+      "branch_routing"
+    ]
+  },
+  "newControls": [
+    "Full snapshots and exact JSON hashes of complete proposal/srcDecision/whyAct are retained.",
+    "Full snapshot leaves are compared, not only the historical structural projection.",
+    "The three Chart roots are proved by actual checkpoints, source family.install activation, and family-installed program value/definition.",
+    "Role sourceDigest equals independently inventoried factorySourceDigest.",
+    "Only exact source/graph identity, validated Chart coverage, known-role trace chains and independently bounded real source clock fields receive attribution.",
+    "Any unexplained difference blocks qualification.",
+    "sessionStarts, initializedSessions and physicalReturns preserve partial consumption separately from completed shapes."
+  ],
+  "commands": {
+    "inventory": {
+      "argv": [
+        "node",
+        "docs/migration/lot9a-evidence/tools/delivery/work-forms/record-owner-source-inventory.mjs",
+        "/workspace/sites/sra-lot9a-baseline067-20261112",
+        "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout",
+        "{attempt}/owner-source-inventory.json"
+      ],
+      "timeoutSeconds": 120,
+      "environment": {
+        "NODE_OPTIONS": "--max-old-space-size=1536"
+      },
+      "maximumAttempts": 2,
+      "automaticRetry": false
+    },
+    "baseline-capture": {
+      "argv": [
+        "node",
+        "docs/migration/lot9a-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs",
+        "baseline",
+        "/workspace/sites/sra-lot9a-baseline067-20261112",
+        "docs/migration/lot9a-evidence/tools/delivery/work-forms/cases.json",
+        "docs/migration/lot9a-evidence/delivery-final-068-01/baseline-native.json",
+        "{attempt}/baseline.json.gz"
+      ],
+      "timeoutSeconds": 300,
+      "environment": {
+        "NODE_OPTIONS": "--max-old-space-size=1536"
+      },
+      "maximumAttempts": 2,
+      "automaticRetry": false
+    },
+    "candidate-capture": {
+      "argv": [
+        "node",
+        "docs/migration/lot9a-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs",
+        "candidate",
+        "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout",
+        "docs/migration/lot9a-evidence/tools/delivery/work-forms/cases.json",
+        "docs/migration/lot9a-evidence/delivery-final-068-01/candidate-native.json",
+        "{attempt}/candidate.json.gz"
+      ],
+      "timeoutSeconds": 300,
+      "environment": {
+        "NODE_OPTIONS": "--max-old-space-size=1536"
+      },
+      "maximumAttempts": 2,
+      "automaticRetry": false
+    },
+    "paired-reader": {
+      "argv": [
+        "node",
+        "docs/migration/lot9a-evidence/tools/delivery/work-forms/qualify-cost-owner-graphs.mjs",
+        "docs/migration/lot9a-evidence/delivery-final-068-01/work-inventory-01/owner-source-inventory.json",
+        "docs/migration/lot9a-evidence/delivery-final-068-01/work-baseline-01/baseline.json.gz",
+        "docs/migration/lot9a-evidence/delivery-final-068-01/work-baseline-01/baseline.receipt.json",
+        "docs/migration/lot9a-evidence/delivery-final-068-01/work-candidate-01/candidate.json.gz",
+        "docs/migration/lot9a-evidence/delivery-final-068-01/work-candidate-01/candidate.receipt.json",
+        "{attempt}/graph-review.json",
+        "{attempt}/work-forms.json"
+      ],
+      "timeoutSeconds": 300,
+      "environment": {
+        "NODE_OPTIONS": "--max-old-space-size=1536"
+      },
+      "maximumAttempts": 2,
+      "automaticRetry": false
+    }
+  },
+  "bounds": {
+    "expectedSessions": 8,
+    "expectedPhysicalReturns": 62,
+    "maximumCaptureAttemptsPerRole": 2,
+    "maximumSessions": 16,
+    "maximumPhysicalReturns": 124,
+    "expectedCommandTimeoutSumSeconds": 1020,
+    "maximumCumulativeCommandSeconds": 2040,
+    "maximumConcurrentProcessGroups": 1,
+    "oldSpaceMiB": 1536,
+    "oldSpaceIsAbsoluteRssBound": false,
+    "automaticRetry": false,
+    "failedAttemptsRetained": true
+  },
+  "scope": "Work-forms only; the root ledger separately counts Chart common and historical consumption without resets. No runtime or functional reader execution is authorized by preparing these tools."
+}

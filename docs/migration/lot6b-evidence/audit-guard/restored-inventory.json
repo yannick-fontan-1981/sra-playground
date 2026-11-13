@@ -1,0 +1,23 @@
+{
+  "schema": "sra.migration-audit-reference-guard.v1",
+  "startedAt": "2026-11-11T16:03:26.241826+00:00",
+  "finishedAt": "2026-11-11T16:03:33.810119+00:00",
+  "exitCode": 0,
+  "semanticPassed": true,
+  "failures": [],
+  "summary": {
+    "pythonModules": 1369,
+    "pythonLines": 320375,
+    "declaredClassesAndFunctions": 12857,
+    "dataFiles": 417,
+    "verifiedModules": 0,
+    "componentVerifiedModules": 198,
+    "partiallyTransferredModules": 148,
+    "transferredUnverifiedModules": 0,
+    "pendingModules": 1023,
+    "strategyFamilies": 16
+  },
+  "auditScriptSha256": "7dbd8f0acae87e7418ecbb350364393fa10f3e82f3808528130204da197f5753",
+  "recovery": "docs/migration/lot6b-evidence/fixture-restoration/attempt-01/recovery.json",
+  "qualification": "Exact restored inherited fixtures and all declared mapping targets/proofs exist. Native code and validated build inputs unchanged; full V6 completion remains false."
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "hpdl-checkpoint-000039.inprogress.json.gz",
+    "sha256": "ee35f5f9acaa7f9fc1799e96538d35ea29c3c01fd68d73b654a6190045900f37",
+    "bytes": 1460138
+  },
+  "parts": [
+    {
+      "file": "hpdl-checkpoint-000039.inprogress.json.gz.part000",
+      "sha256": "ca5336acb868cff6718509c1a9d358ecc4f2b3714fcc801cf37790b7643c9b8d",
+      "bytes": 900000
+    },
+    {
+      "file": "hpdl-checkpoint-000039.inprogress.json.gz.part001",
+      "sha256": "22553551d400db16bfc0261d0cb996a805ac877d28ec76bf248c35bc0c96f18c",
+      "bytes": 560138
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

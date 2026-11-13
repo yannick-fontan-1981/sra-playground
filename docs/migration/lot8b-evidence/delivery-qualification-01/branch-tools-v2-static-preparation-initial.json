@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.lot8b.branch-tools-static-preparation.v2",
+  "recordedAt": "2026-11-12 05:20:45 UTC",
+  "status": "syntax_checks_passed",
+  "checks": [
+    {
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 0.004809415,
+      "stdoutAndStderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 0.006797941,
+      "stdoutAndStderr": ""
+    }
+  ],
+  "qualification": "Only JavaScript syntax was checked. No module import, runtime, game, oracle, capture, reader or test executed by these checks.",
+  "sourceCheckpoint": "10ebead6c94114c4c6a8804bf3e22d80cc4f3583",
+  "nativeProductionModified": false,
+  "officialPerformanceMeasurement": false
+}

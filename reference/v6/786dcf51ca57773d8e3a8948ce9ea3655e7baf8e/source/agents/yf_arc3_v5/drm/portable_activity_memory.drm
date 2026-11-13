@@ -1,0 +1,836 @@
+{
+  "module_id": "arc3.portable_activity_memory",
+  "declarations": [
+    {
+      "id": "policy.portable_activity_memory",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "portable_activity.import",
+        "portable_activity.current",
+        "portable_activity.none"
+      ],
+      "reason_refs": [
+        "reason.historical_activity_requires_current_relation_support"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.portable_activity.alternatives",
+          "static_facts": {
+            "eligible": true,
+            "local_repair_activity_refs": [
+              "activity.correct_next_revalidated_periodic_exception",
+              "activity.correct_next_revalidated_reflection_exception"
+            ]
+          }
+        }
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.portable_activity.import",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "portable_activity.import"
+            },
+            {
+              "field": "phase",
+              "operator": "equals",
+              "expected": "import"
+            },
+            {
+              "field": "measurement_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_exact",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.historical_activity_requires_current_relation_support"
+        },
+        {
+          "id": "tier.portable_activity.current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "portable_activity.current"
+            },
+            {
+              "field": "phase",
+              "operator": "equals",
+              "expected": "current"
+            },
+            {
+              "field": "source_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "measurement_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.historical_activity_requires_current_relation_support"
+        },
+        {
+          "id": "tier.portable_activity.none",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "portable_activity.none"
+            }
+          ],
+          "reason_ref": "reason.historical_activity_requires_current_relation_support"
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "portable_activity.import": "rule.recalled_portable_activity",
+        "portable_activity.current": "rule.current_portable_activity"
+      },
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.portable_activity.undeclared_equivalent_history_order",
+      "configuration": {
+        "archive_projection": {
+          "schema_predicate": "declares_revalidatable_workflow_activity_schema",
+          "activity_field": "ordered_activity_refs",
+          "recalled_predicate": "reports_recalled_portable_local_repair_schema",
+          "current_predicate": "current_relation_supports_recalled_local_repair",
+          "maximum_owned_schema_count": 8
+        },
+        "local_repair_activity_refs": [
+          "activity.correct_next_revalidated_periodic_exception",
+          "activity.correct_next_revalidated_reflection_exception"
+        ]
+      }
+    },
+    {
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "invariants": [
+        "loading_history_does_not_establish_current_effects",
+        "donor_coordinates_and_scene_bindings_are_not_transported",
+        "all_current_action_guards_and_alternatives_remain"
+      ],
+      "falsifiers": [
+        "current_relation_or_effect_contradicts_the_recalled_method"
+      ],
+      "id": "rule.recalled_portable_activity",
+      "premises": [
+        "source_declared_observed_activity_schema_with_no_instance_bindings"
+      ],
+      "reason_refs": [
+        "reason.historical_activity_requires_current_relation_support"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{inspection_ref}",
+          "kind": "event",
+          "label": "Bounded inspection of historical activity or current applicability",
+          "required_fields": [
+            "inspection_ref",
+            "inspection_claim_ref",
+            "input_item_count",
+            "observation_ref",
+            "phase"
+          ],
+          "static_attributes": {
+            "authorizes_action": false
+          },
+          "attribute_bindings": {
+            "phase": "phase",
+            "observation_ref": "observation_ref",
+            "input_item_count": "input_item_count"
+          }
+        },
+        {
+          "id_pattern": "{memory_ref}",
+          "kind": "schema",
+          "required_fields": [
+            "memory_ref",
+            "memory_claim_ref",
+            "schema_digest",
+            "origin_claim_ref",
+            "origin_claim_digest",
+            "origin_workflow_ref",
+            "observed_activity_refs",
+            "observed_activity_count",
+            "observed_activity_ref",
+            "origin_proof_rule",
+            "origin_ground_refs",
+            "origin_epistemic_status",
+            "origin_disposition",
+            "origin_polarity",
+            "origin_has_contradictions",
+            "drop_scene_local_bindings",
+            "instance_binding_forbidden",
+            "schema_status",
+            "origin_game_id",
+            "origin_run_id",
+            "origin_source_manifest"
+          ],
+          "all_conditions": [
+            {
+              "field": "observed_activity_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "observed_activity_ref",
+              "operator": "member_of_reference_field",
+              "reference_field": "local_repair_activity_refs"
+            },
+            {
+              "field": "origin_disposition",
+              "operator": "equals",
+              "expected": "active"
+            },
+            {
+              "field": "origin_polarity",
+              "operator": "equals",
+              "expected": "positive"
+            },
+            {
+              "field": "origin_has_contradictions",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "drop_scene_local_bindings",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "instance_binding_forbidden",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "schema_status",
+              "operator": "equals",
+              "expected": "provisional_until_current_scene_revalidation"
+            }
+          ],
+          "iteration": {
+            "source_field": "schema_rows",
+            "max_items": 8,
+            "item_bindings": {
+              "memory_ref": "memory_ref",
+              "memory_claim_ref": "memory_claim_ref",
+              "schema_digest": "schema_digest",
+              "origin_claim_ref": "origin_claim_ref",
+              "origin_claim_digest": "origin_claim_digest",
+              "origin_workflow_ref": "origin_workflow_ref",
+              "observed_activity_refs": "observed_activity_refs",
+              "observed_activity_count": "observed_activity_count",
+              "observed_activity_ref": "observed_activity_ref",
+              "origin_proof_rule": "origin_proof_rule",
+              "origin_ground_refs": "origin_ground_refs",
+              "origin_epistemic_status": "origin_epistemic_status",
+              "origin_disposition": "origin_disposition",
+              "origin_polarity": "origin_polarity",
+              "origin_has_contradictions": "origin_has_contradictions",
+              "drop_scene_local_bindings": "drop_scene_local_bindings",
+              "instance_binding_forbidden": "instance_binding_forbidden",
+              "schema_status": "schema_status",
+              "origin_game_id": "origin_game_id",
+              "origin_run_id": "origin_run_id",
+              "origin_source_manifest": "origin_source_manifest"
+            }
+          },
+          "static_attributes": {
+            "knowledge_family": "workflow_activity_schema",
+            "instance_binding_forbidden": true,
+            "schema_class_ref": "method.local_relation_exception_repair"
+          },
+          "attribute_bindings": {
+            "observed_activity_refs": "observed_activity_refs",
+            "origin_game_id": "origin_game_id",
+            "origin_run_id": "origin_run_id",
+            "origin_claim_ref": "origin_claim_ref",
+            "origin_claim_digest": "origin_claim_digest",
+            "origin_source_manifest": "origin_source_manifest"
+          },
+          "any_conditions": [
+            {
+              "field": "origin_epistemic_status",
+              "operator": "equals",
+              "expected": "supported"
+            },
+            {
+              "field": "origin_epistemic_status",
+              "operator": "equals",
+              "expected": "established"
+            }
+          ],
+          "label": "Observed activity schema recalled without scene bindings"
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{inspection_claim_ref}",
+          "predicate": "records_portable_activity_memory_inspection",
+          "family": "epistemic",
+          "argument_patterns": [
+            "{inspection_ref}"
+          ],
+          "epistemic_status": "supported",
+          "required_fields": [
+            "inspection_ref",
+            "inspection_claim_ref",
+            "input_item_count",
+            "observation_ref",
+            "phase",
+            "measurement_complete"
+          ],
+          "required_term_patterns": [
+            "{inspection_ref}"
+          ],
+          "static_attributes": {
+            "inspection_only": true,
+            "does_not_establish_method_applicability": true,
+            "authorizes_action": false
+          },
+          "attribute_bindings": {
+            "phase": "phase",
+            "observation_ref": "observation_ref",
+            "input_item_count": "input_item_count",
+            "measurement_complete": "measurement_complete"
+          }
+        },
+        {
+          "id_pattern": "{memory_claim_ref}",
+          "predicate": "reports_recalled_portable_local_repair_schema",
+          "family": "epistemic",
+          "argument_patterns": [
+            "{memory_ref}"
+          ],
+          "epistemic_status": "supported",
+          "required_fields": [
+            "memory_ref",
+            "memory_claim_ref",
+            "schema_digest",
+            "origin_claim_ref",
+            "origin_claim_digest",
+            "origin_workflow_ref",
+            "observed_activity_refs",
+            "observed_activity_count",
+            "observed_activity_ref",
+            "origin_proof_rule",
+            "origin_ground_refs",
+            "origin_epistemic_status",
+            "origin_disposition",
+            "origin_polarity",
+            "origin_has_contradictions",
+            "drop_scene_local_bindings",
+            "instance_binding_forbidden",
+            "schema_status",
+            "origin_game_id",
+            "origin_run_id",
+            "origin_source_manifest"
+          ],
+          "required_term_patterns": [
+            "{memory_ref}"
+          ],
+          "all_conditions": [
+            {
+              "field": "observed_activity_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "observed_activity_ref",
+              "operator": "member_of_reference_field",
+              "reference_field": "local_repair_activity_refs"
+            },
+            {
+              "field": "origin_disposition",
+              "operator": "equals",
+              "expected": "active"
+            },
+            {
+              "field": "origin_polarity",
+              "operator": "equals",
+              "expected": "positive"
+            },
+            {
+              "field": "origin_has_contradictions",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "drop_scene_local_bindings",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "instance_binding_forbidden",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "schema_status",
+              "operator": "equals",
+              "expected": "provisional_until_current_scene_revalidation"
+            }
+          ],
+          "iteration": {
+            "source_field": "schema_rows",
+            "max_items": 8,
+            "item_bindings": {
+              "memory_ref": "memory_ref",
+              "memory_claim_ref": "memory_claim_ref",
+              "schema_digest": "schema_digest",
+              "origin_claim_ref": "origin_claim_ref",
+              "origin_claim_digest": "origin_claim_digest",
+              "origin_workflow_ref": "origin_workflow_ref",
+              "observed_activity_refs": "observed_activity_refs",
+              "observed_activity_count": "observed_activity_count",
+              "observed_activity_ref": "observed_activity_ref",
+              "origin_proof_rule": "origin_proof_rule",
+              "origin_ground_refs": "origin_ground_refs",
+              "origin_epistemic_status": "origin_epistemic_status",
+              "origin_disposition": "origin_disposition",
+              "origin_polarity": "origin_polarity",
+              "origin_has_contradictions": "origin_has_contradictions",
+              "drop_scene_local_bindings": "drop_scene_local_bindings",
+              "instance_binding_forbidden": "instance_binding_forbidden",
+              "schema_status": "schema_status",
+              "origin_game_id": "origin_game_id",
+              "origin_run_id": "origin_run_id",
+              "origin_source_manifest": "origin_source_manifest"
+            }
+          },
+          "static_attributes": {
+            "historical_report_only": true,
+            "authorizes_action": false,
+            "schema_class_ref": "method.local_relation_exception_repair",
+            "knowledge_family": "workflow_activity_schema",
+            "drop_scene_local_bindings": true,
+            "instance_binding_forbidden": true,
+            "schema_status": "provisional_until_current_scene_revalidation"
+          },
+          "attribute_bindings": {
+            "origin_game_id": "origin_game_id",
+            "origin_run_id": "origin_run_id",
+            "origin_claim_ref": "origin_claim_ref",
+            "origin_claim_digest": "origin_claim_digest",
+            "origin_source_manifest": "origin_source_manifest",
+            "observed_activity_refs": "observed_activity_refs"
+          },
+          "any_conditions": [
+            {
+              "field": "origin_epistemic_status",
+              "operator": "equals",
+              "expected": "supported"
+            },
+            {
+              "field": "origin_epistemic_status",
+              "operator": "equals",
+              "expected": "established"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "invariants": [
+        "loading_history_does_not_establish_current_effects",
+        "donor_coordinates_and_scene_bindings_are_not_transported",
+        "all_current_action_guards_and_alternatives_remain"
+      ],
+      "falsifiers": [
+        "current_relation_or_effect_contradicts_the_recalled_method"
+      ],
+      "id": "rule.current_portable_activity",
+      "premises": [
+        "one_recalled_local_repair_schema",
+        "current_production_DRM_measures_a_supported_local_repair"
+      ],
+      "reason_refs": [
+        "reason.historical_activity_requires_current_relation_support"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{inspection_ref}",
+          "kind": "event",
+          "label": "Bounded inspection of historical activity or current applicability",
+          "required_fields": [
+            "inspection_ref",
+            "inspection_claim_ref",
+            "input_item_count",
+            "observation_ref",
+            "phase"
+          ],
+          "static_attributes": {
+            "authorizes_action": false
+          },
+          "attribute_bindings": {
+            "phase": "phase",
+            "observation_ref": "observation_ref",
+            "input_item_count": "input_item_count"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{inspection_claim_ref}",
+          "predicate": "records_portable_activity_memory_inspection",
+          "family": "epistemic",
+          "argument_patterns": [
+            "{inspection_ref}"
+          ],
+          "epistemic_status": "supported",
+          "required_fields": [
+            "inspection_ref",
+            "inspection_claim_ref",
+            "input_item_count",
+            "observation_ref",
+            "phase",
+            "measurement_complete"
+          ],
+          "required_term_patterns": [
+            "{inspection_ref}"
+          ],
+          "static_attributes": {
+            "inspection_only": true,
+            "does_not_establish_method_applicability": true,
+            "authorizes_action": false
+          },
+          "attribute_bindings": {
+            "phase": "phase",
+            "observation_ref": "observation_ref",
+            "input_item_count": "input_item_count",
+            "measurement_complete": "measurement_complete"
+          }
+        },
+        {
+          "id_pattern": "claim.memory.portable_activity.current.{binding_token}",
+          "predicate": "current_relation_supports_recalled_local_repair",
+          "family": "control",
+          "argument_patterns": [
+            "{memory_ref}",
+            "{candidate_ref}"
+          ],
+          "epistemic_status": "supported",
+          "required_fields": [
+            "candidate_ref",
+            "binding_token",
+            "memory_ref",
+            "memory_claim_ref",
+            "source_schema_class_ref",
+            "recalled_schema_count",
+            "observation_ref",
+            "row_evidence_refs",
+            "projection_digest"
+          ],
+          "required_term_patterns": [
+            "{memory_ref}"
+          ],
+          "all_conditions": [
+            {
+              "field": "recalled_schema_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "source_schema_class_ref",
+              "operator": "equals",
+              "expected": "method.local_relation_exception_repair"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "reflection_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "periodic_status",
+              "operator": "equals",
+              "expected": "supported_by_observed_local_repair"
+            }
+          ],
+          "iteration": {
+            "source_field": "candidate_rows",
+            "max_items": 256,
+            "item_bindings": {
+              "candidate_ref": "candidate_ref",
+              "binding_token": "binding_token",
+              "memory_ref": "memory_ref",
+              "memory_claim_ref": "memory_claim_ref",
+              "source_schema_class_ref": "source_schema_class_ref",
+              "recalled_schema_count": "recalled_schema_count",
+              "reflection_supported": "reflection_supported",
+              "periodic_status": "periodic_status",
+              "observation_ref": "observation_ref",
+              "row_evidence_refs": "row_evidence_refs",
+              "projection_digest": "projection_digest"
+            }
+          },
+          "derivation_premise_refs_field": "row_evidence_refs",
+          "static_attributes": {
+            "commitment": "revisable",
+            "authorizes_action": false
+          },
+          "attribute_bindings": {
+            "memory_revalidation_observation_ref": "observation_ref",
+            "candidate_ref": "candidate_ref",
+            "memory_claim_ref": "memory_claim_ref",
+            "projection_digest": "projection_digest"
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.portable_activity_measurement_scope",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "portable_scope.query",
+        "portable_scope.revalidated",
+        "portable_scope.general"
+      ],
+      "reason_refs": [
+        "reason.acquired_method_guides_a_current_query_not_an_unchecked_action"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.portable_scope.eligible",
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.portable_scope.query",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "portable_scope.query"
+            },
+            {
+              "field": "phase",
+              "operator": "equals",
+              "expected": "query"
+            },
+            {
+              "field": "historical_schema_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "point_interface_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "other_interface_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "prior_point_delta_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_scope_ref",
+              "operator": "equals",
+              "expected": "measurement_scope.full_interaction_frontier"
+            },
+            {
+              "field": "requested_context_contract_ref",
+              "operator": "equals",
+              "expected": "interaction_context.method_revalidation_or_general"
+            },
+            {
+              "field": "point_loci_reopen_requested",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "committed_plan_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "incoming_route_engagement_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "existing_composition_inventory_row_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "reason_ref": "reason.acquired_method_guides_a_current_query_not_an_unchecked_action"
+        },
+        {
+          "id": "tier.portable_scope.revalidated",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "portable_scope.revalidated"
+            },
+            {
+              "field": "phase",
+              "operator": "equals",
+              "expected": "assess"
+            },
+            {
+              "field": "current_repair_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "reason_ref": "reason.acquired_method_guides_a_current_query_not_an_unchecked_action"
+        },
+        {
+          "id": "tier.portable_scope.general",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "portable_scope.general"
+            }
+          ],
+          "reason_ref": "reason.acquired_method_guides_a_current_query_not_an_unchecked_action"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.portable_method_query_equivalent_measurement_scopes"
+    },
+    {
+      "id": "policy.interaction_context_consumer_scope",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "context_consumer.focused_relation",
+        "context_consumer.general"
+      ],
+      "reason_refs": [
+        "reason.revalidated_method_uses_only_its_declared_measurement_dependencies"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.interaction_context_consumer.eligible",
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.interaction_context_consumer.focused_relation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "context_consumer.focused_relation"
+            },
+            {
+              "field": "provided_interaction_context_contract_ref",
+              "operator": "equals",
+              "expected": "interaction_context.local_relation_measurements"
+            },
+            {
+              "field": "portable_current_relation_candidate_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "reason_ref": "reason.revalidated_method_uses_only_its_declared_measurement_dependencies"
+        },
+        {
+          "id": "tier.interaction_context_consumer.general",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "context_consumer.general"
+            }
+          ],
+          "reason_ref": "reason.revalidated_method_uses_only_its_declared_measurement_dependencies"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.current_interaction_context_consumer_equivalence"
+    }
+  ]
+}

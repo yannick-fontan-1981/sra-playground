@@ -1,0 +1,48 @@
+{
+  "schema": "logos-engine.lot8b.final-cost-analysis-execution.v1",
+  "label": "review",
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot8b-evidence/tools/final-cost/review.py",
+    "docs/migration/lot8b-evidence/final-performance-067-01/contract.json",
+    "docs/migration/lot8b-evidence/final-performance-067-01/analysis.json",
+    "docs/migration/lot8b-evidence/final-performance-067-01/independent-review.json"
+  ],
+  "startedAt": "2026-11-12T12:41:34.507097+00:00",
+  "finishedAt": "2026-11-12T12:41:35.082759+00:00",
+  "durationSeconds": 0.5756395250000423,
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "passed",
+  "maximumSeconds": 120,
+  "sourceHead": "05dcb0fbfbddeb6c3963452dc6191b2bf1b9a441",
+  "generator": {
+    "path": "docs/migration/lot8b-evidence/tools/final-cost/review.py",
+    "bytes": 21232,
+    "sha256": "3074e351ac7337040b6cb6b53f6d9c512e6876323540953d4521e81abbd68149"
+  },
+  "logs": {
+    "stdout": {
+      "compressed": {
+        "path": "docs/migration/lot8b-evidence/final-performance-067-01/review.stdout.log.gz",
+        "bytes": 145,
+        "sha256": "36bf9b587591cf75b54cbb4615c13745748c3199aa1a3489ea7dd3a53eef4fe9"
+      },
+      "uncompressedBytes": 150,
+      "uncompressedSha256": "2da5bcfcadd232108953bcd7be9bc82350c85dc1b4eb84d117b10d640ac39379"
+    },
+    "stderr": {
+      "compressed": {
+        "path": "docs/migration/lot8b-evidence/final-performance-067-01/review.stderr.log.gz",
+        "bytes": 20,
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+      },
+      "uncompressedBytes": 0,
+      "uncompressedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "nativeExecution": false,
+  "globalLockAcquired": false,
+  "automaticRetry": false
+}

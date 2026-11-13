@@ -1,0 +1,7182 @@
+{
+  "schema": "logos-engine.lot8b.public-branch-qualification.v2",
+  "status": "passed_in_revised_positive_scope",
+  "capture": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture",
+  "reader": "docs/migration/lot8b-evidence/tools/public-boundary/qualify-v2.mjs",
+  "startedAt": "2026-11-12T13:29:34.994Z",
+  "inputs": {
+    "presentation": {
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/presentation.json",
+      "bytes": 5670701,
+      "sha256": "5f65f727f5094a610390915b8820253ee87160e4c4d19984f4de014598da0559"
+    },
+    "events": {
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/events.jsonl.gz",
+      "bytes": 3792558,
+      "sha256": "40400ef5c60fbd5ac96c1f68eef9a5b289dc6c67a51b13e32a3cdb87ffd2e819"
+    },
+    "receipt": {
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/receipt.json",
+      "bytes": 628485,
+      "sha256": "e7ea3d4514f53ccca3b27ba86c6c451ea3489257eb1a0e10a3be60f7cd837cfb"
+    },
+    "fixture": {
+      "path": "tests/fixtures/v6-branch-routing-reference.json",
+      "bytes": 542660,
+      "sha256": "e6ae197b7b982bd41f561b9df8e458436d7ce0797f39bbf86d972e55472b6769"
+    },
+    "reader": {
+      "path": "docs/migration/lot8b-evidence/tools/public-boundary/qualify-v2.mjs",
+      "bytes": 75842,
+      "sha256": "ea00321ca3f27500ce4405f908329c8bf205cb52193be3b054e9dcefba3da3a5"
+    }
+  },
+  "assertions": [
+    {
+      "name": "retained_original_scope_failure",
+      "passed": true
+    },
+    {
+      "name": "unchanged_published_native_inventory",
+      "passed": true
+    },
+    {
+      "name": "source_and_public_presentation_contract",
+      "passed": true
+    },
+    {
+      "name": "capture_receipt_integrity",
+      "passed": true
+    },
+    {
+      "name": "capture.header",
+      "ordinal": 0,
+      "caseId": null,
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.session_start",
+      "ordinal": 1,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 2,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 3,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 4,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 5,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 6,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 7,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 8,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 9,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 10,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 11,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 12,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 13,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 14,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 15,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 16,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 17,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 18,
+      "caseId": "single-positive",
+      "label": "single-positive/initial_authorization",
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 19,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 20,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 21,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 22,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 23,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 24,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 25,
+      "caseId": "single-positive",
+      "label": "single-positive/initial_pause_reused",
+      "passed": true
+    },
+    {
+      "name": "capture.pause_check",
+      "ordinal": 26,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 27,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 28,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 29,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 30,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 31,
+      "caseId": "single-positive",
+      "label": "single-positive/protocol_wrong_ticket_before",
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 32,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 33,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 34,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 35,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 36,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 37,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 38,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 39,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 40,
+      "caseId": "single-positive",
+      "label": "single-positive/protocol_wrong_ticket_after",
+      "passed": true
+    },
+    {
+      "name": "capture.protocol_check",
+      "ordinal": 41,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 42,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 43,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 44,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 45,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 46,
+      "caseId": "single-positive",
+      "label": "single-positive/protocol_wrong_session_before",
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 47,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 48,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 49,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 50,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 51,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 52,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 53,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 54,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 55,
+      "caseId": "single-positive",
+      "label": "single-positive/protocol_wrong_session_after",
+      "passed": true
+    },
+    {
+      "name": "capture.protocol_check",
+      "ordinal": 56,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 57,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 58,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 59,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 60,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 61,
+      "caseId": "single-positive",
+      "label": "single-positive/protocol_wrong_sequence_before",
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 62,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 63,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 64,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 65,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 66,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 67,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 68,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 69,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 70,
+      "caseId": "single-positive",
+      "label": "single-positive/protocol_wrong_sequence_after",
+      "passed": true
+    },
+    {
+      "name": "capture.protocol_check",
+      "ordinal": 71,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 72,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 73,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 74,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 75,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 76,
+      "caseId": "single-positive",
+      "label": "single-positive/protocol_step_index_mismatch_before",
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 77,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 78,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 79,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 80,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 81,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 82,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 83,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 84,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 85,
+      "caseId": "single-positive",
+      "label": "single-positive/protocol_step_index_mismatch_after",
+      "passed": true
+    },
+    {
+      "name": "capture.protocol_check",
+      "ordinal": 86,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 87,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 88,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 89,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 90,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 91,
+      "caseId": "single-positive",
+      "label": "single-positive/protocol_inconsistent_animation_before",
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 92,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 93,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 94,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 95,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 96,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 97,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 98,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 99,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 100,
+      "caseId": "single-positive",
+      "label": "single-positive/protocol_inconsistent_animation_after",
+      "passed": true
+    },
+    {
+      "name": "capture.protocol_check",
+      "ordinal": 101,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 102,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 103,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 104,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 105,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 106,
+      "caseId": "single-positive",
+      "label": "single-positive/protocol_negative_execution_duration_before",
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 107,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 108,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 109,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 110,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 111,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 112,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 113,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 114,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 115,
+      "caseId": "single-positive",
+      "label": "single-positive/protocol_negative_execution_duration_after",
+      "passed": true
+    },
+    {
+      "name": "capture.protocol_check",
+      "ordinal": 116,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 117,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 118,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 119,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 120,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 121,
+      "caseId": "single-positive",
+      "label": "single-positive/before_return_1",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 122,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 123,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.host_dispatch",
+      "ordinal": 124,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 125,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 126,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 127,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 128,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 129,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 130,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 131,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 132,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 133,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 134,
+      "caseId": "single-positive",
+      "label": "single-positive/after_return_1",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 135,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 136,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 137,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 138,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 139,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 140,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 141,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 142,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 143,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 144,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 145,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 146,
+      "caseId": "single-positive",
+      "label": "single-positive/before_return_2",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 147,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 148,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 149,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 150,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 151,
+      "caseId": "single-positive",
+      "label": "single-positive/protocol_consumed_ticket_before",
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 152,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 153,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 154,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 155,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 156,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 157,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 158,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 159,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 160,
+      "caseId": "single-positive",
+      "label": "single-positive/protocol_consumed_ticket_after",
+      "passed": true
+    },
+    {
+      "name": "capture.protocol_check",
+      "ordinal": 161,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 162,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 163,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.host_dispatch",
+      "ordinal": 164,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 165,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 166,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 167,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 168,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 169,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 170,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 171,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 172,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 173,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 174,
+      "caseId": "single-positive",
+      "label": "single-positive/after_return_2",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 175,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 176,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 177,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 178,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 179,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 180,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 181,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 182,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 183,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 184,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 185,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 186,
+      "caseId": "single-positive",
+      "label": "single-positive/before_return_3",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 187,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 188,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.host_dispatch",
+      "ordinal": 189,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 190,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 191,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 192,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 193,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 194,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 195,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 196,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 197,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 198,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 199,
+      "caseId": "single-positive",
+      "label": "single-positive/after_return_3",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 200,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 201,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 202,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 203,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 204,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 205,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 206,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 207,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 208,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 209,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 210,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 211,
+      "caseId": "single-positive",
+      "label": "single-positive/before_return_4",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 212,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 213,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.host_dispatch",
+      "ordinal": 214,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 215,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 216,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 217,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 218,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 219,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 220,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 221,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 222,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 223,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 224,
+      "caseId": "single-positive",
+      "label": "single-positive/after_return_4",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 225,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 226,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 227,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 228,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 229,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 230,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 231,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 232,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 233,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 234,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 235,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 236,
+      "caseId": "single-positive",
+      "label": "single-positive/before_return_5",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 237,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 238,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.host_dispatch",
+      "ordinal": 239,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 240,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 241,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 242,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 243,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 244,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 245,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 246,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 247,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 248,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 249,
+      "caseId": "single-positive",
+      "label": "single-positive/after_return_5",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 250,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 251,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 252,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 253,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 254,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 255,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 256,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 257,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 258,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 259,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 260,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 261,
+      "caseId": "single-positive",
+      "label": "single-positive/before_return_6",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 262,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 263,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.host_dispatch",
+      "ordinal": 264,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 265,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 266,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 267,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 268,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 269,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 270,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 271,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 272,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 273,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 274,
+      "caseId": "single-positive",
+      "label": "single-positive/after_return_6",
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 275,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 276,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 277,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 278,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 279,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 280,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 281,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.session_end",
+      "ordinal": 282,
+      "caseId": "single-positive",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.session_start",
+      "ordinal": 283,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 284,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 285,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 286,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 287,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 288,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 289,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 290,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 291,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 292,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 293,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 294,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 295,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 296,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 297,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 298,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 299,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 300,
+      "caseId": "triple-prefix",
+      "label": "triple-prefix/initial_authorization",
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 301,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 302,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 303,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 304,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 305,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 306,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 307,
+      "caseId": "triple-prefix",
+      "label": "triple-prefix/initial_pause_reused",
+      "passed": true
+    },
+    {
+      "name": "capture.pause_check",
+      "ordinal": 308,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 309,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 310,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 311,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 312,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 313,
+      "caseId": "triple-prefix",
+      "label": "triple-prefix/before_return_1",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 314,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 315,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.host_dispatch",
+      "ordinal": 316,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 317,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 318,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 319,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 320,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 321,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 322,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 323,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 324,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 325,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 326,
+      "caseId": "triple-prefix",
+      "label": "triple-prefix/after_return_1",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 327,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 328,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 329,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 330,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 331,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 332,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 333,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 334,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 335,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 336,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 337,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 338,
+      "caseId": "triple-prefix",
+      "label": "triple-prefix/before_return_2",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 339,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 340,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.host_dispatch",
+      "ordinal": 341,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 342,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 343,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 344,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 345,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 346,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 347,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 348,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 349,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 350,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 351,
+      "caseId": "triple-prefix",
+      "label": "triple-prefix/after_return_2",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 352,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 353,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 354,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 355,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 356,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 357,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 358,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 359,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 360,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 361,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 362,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 363,
+      "caseId": "triple-prefix",
+      "label": "triple-prefix/before_return_3",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 364,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 365,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.host_dispatch",
+      "ordinal": 366,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 367,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 368,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 369,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 370,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 371,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 372,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 373,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 374,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 375,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 376,
+      "caseId": "triple-prefix",
+      "label": "triple-prefix/after_return_3",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 377,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 378,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 379,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 380,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 381,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 382,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 383,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 384,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 385,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 386,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 387,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 388,
+      "caseId": "triple-prefix",
+      "label": "triple-prefix/before_return_4",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 389,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 390,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.host_dispatch",
+      "ordinal": 391,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 392,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 393,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 394,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 395,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 396,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 397,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 398,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 399,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 400,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 401,
+      "caseId": "triple-prefix",
+      "label": "triple-prefix/after_return_4",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 402,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 403,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 404,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 405,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 406,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 407,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 408,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 409,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 410,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 411,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 412,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 413,
+      "caseId": "triple-prefix",
+      "label": "triple-prefix/before_return_5",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 414,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 415,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.host_dispatch",
+      "ordinal": 416,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 417,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 418,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 419,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 420,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 421,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 422,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 423,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 424,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 425,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 426,
+      "caseId": "triple-prefix",
+      "label": "triple-prefix/after_return_5",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 427,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 428,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 429,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 430,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 431,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 432,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 433,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 434,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 435,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 436,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 437,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 438,
+      "caseId": "triple-prefix",
+      "label": "triple-prefix/before_return_6",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 439,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 440,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 441,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.host_dispatch",
+      "ordinal": 442,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 443,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 444,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 445,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 446,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 447,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 448,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 449,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 450,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 451,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 452,
+      "caseId": "triple-prefix",
+      "label": "triple-prefix/after_return_6",
+      "passed": true
+    },
+    {
+      "name": "capture.pause_check",
+      "ordinal": 453,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 454,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 455,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 456,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 457,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 458,
+      "caseId": "triple-prefix",
+      "label": "triple-prefix/before_return_7",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 459,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 460,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.host_dispatch",
+      "ordinal": 461,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 462,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 463,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 464,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 465,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 466,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 467,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 468,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 469,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 470,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 471,
+      "caseId": "triple-prefix",
+      "label": "triple-prefix/after_return_7",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 472,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 473,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 474,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 475,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 476,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 477,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 478,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 479,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 480,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 481,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 482,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 483,
+      "caseId": "triple-prefix",
+      "label": "triple-prefix/final_question",
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 484,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 485,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 486,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 487,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 488,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 489,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 490,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.session_end",
+      "ordinal": 491,
+      "caseId": "triple-prefix",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.session_start",
+      "ordinal": 492,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 493,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 494,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 495,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 496,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 497,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 498,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 499,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 500,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 501,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 502,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 503,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 504,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 505,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 506,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 507,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 508,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 509,
+      "caseId": "contrary-return",
+      "label": "contrary-return/initial_authorization",
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 510,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 511,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 512,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 513,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 514,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 515,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 516,
+      "caseId": "contrary-return",
+      "label": "contrary-return/initial_pause_reused",
+      "passed": true
+    },
+    {
+      "name": "capture.pause_check",
+      "ordinal": 517,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 518,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 519,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 520,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 521,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 522,
+      "caseId": "contrary-return",
+      "label": "contrary-return/before_return_1",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 523,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 524,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.host_dispatch",
+      "ordinal": 525,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 526,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 527,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 528,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 529,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 530,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 531,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 532,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 533,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 534,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 535,
+      "caseId": "contrary-return",
+      "label": "contrary-return/after_return_1",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 536,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 537,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 538,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 539,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 540,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 541,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 542,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 543,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 544,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 545,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 546,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 547,
+      "caseId": "contrary-return",
+      "label": "contrary-return/before_return_2",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 548,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 549,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.host_dispatch",
+      "ordinal": 550,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 551,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 552,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 553,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 554,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 555,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 556,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 557,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 558,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 559,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 560,
+      "caseId": "contrary-return",
+      "label": "contrary-return/after_return_2",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 561,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 562,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 563,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 564,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 565,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 566,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 567,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 568,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 569,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 570,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 571,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 572,
+      "caseId": "contrary-return",
+      "label": "contrary-return/before_return_3",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 573,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 574,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.host_dispatch",
+      "ordinal": 575,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 576,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 577,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 578,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 579,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 580,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 581,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 582,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 583,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 584,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 585,
+      "caseId": "contrary-return",
+      "label": "contrary-return/after_return_3",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 586,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 587,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 588,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 589,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 590,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 591,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 592,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 593,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 594,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 595,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 596,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 597,
+      "caseId": "contrary-return",
+      "label": "contrary-return/before_return_4",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 598,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 599,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.host_dispatch",
+      "ordinal": 600,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 601,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 602,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 603,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 604,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 605,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 606,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 607,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 608,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 609,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 610,
+      "caseId": "contrary-return",
+      "label": "contrary-return/after_return_4",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 611,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 612,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 613,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 614,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 615,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 616,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 617,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 618,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 619,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 620,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 621,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 622,
+      "caseId": "contrary-return",
+      "label": "contrary-return/before_return_5",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 623,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 624,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.host_dispatch",
+      "ordinal": 625,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 626,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 627,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 628,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 629,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 630,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 631,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 632,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 633,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 634,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 635,
+      "caseId": "contrary-return",
+      "label": "contrary-return/after_return_5",
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 636,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 637,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 638,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 639,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 640,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 641,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 642,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 643,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 644,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 645,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 646,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.inspection",
+      "ordinal": 647,
+      "caseId": "contrary-return",
+      "label": "contrary-return/final_question",
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 648,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 649,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 650,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.controller_state",
+      "ordinal": 651,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 652,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 653,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.transport",
+      "ordinal": 654,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "capture.session_end",
+      "ordinal": 655,
+      "caseId": "contrary-return",
+      "label": null,
+      "passed": true
+    },
+    {
+      "name": "complete_three_session_population",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "summaries": [
+    {
+      "caseId": "single-positive",
+      "sessionId": "sra-v6-4c3ecc42-55c1-4c43-b8b5-4a6f63875cbc",
+      "physicalReturns": 6,
+      "successfulAdvances": 6,
+      "initializations": 1,
+      "workers": [
+        "single-positive:1"
+      ],
+      "inspections": 28,
+      "graphDeltas": 883,
+      "finalGraphChain": "cb3f5b9b5b061ef12155543bed8cdc799ac81bf743a25d7c39ff87005bc11d5b",
+      "finalGraphNodes": 289,
+      "consumedTickets": 6,
+      "issuedTicketsObserved": 6,
+      "acquiredBranchReturns": 6,
+      "retainedOwnerEvents": 6,
+      "finalQuestion": null,
+      "finalQuestionExecuted": false,
+      "protocolChecks": [
+        {
+          "name": "wrong_ticket",
+          "sequence": 0,
+          "code": "stale",
+          "operation": "advance",
+          "preserved": true
+        },
+        {
+          "name": "wrong_session",
+          "sequence": 0,
+          "code": "stale",
+          "operation": "advance",
+          "preserved": true
+        },
+        {
+          "name": "wrong_sequence",
+          "sequence": 0,
+          "code": "stale",
+          "operation": "advance",
+          "preserved": true
+        },
+        {
+          "name": "step_index_mismatch",
+          "sequence": 0,
+          "code": "stale",
+          "operation": "advance",
+          "preserved": true
+        },
+        {
+          "name": "inconsistent_animation",
+          "sequence": 0,
+          "code": "invalid",
+          "operation": "advance",
+          "preserved": true
+        },
+        {
+          "name": "negative_execution_duration",
+          "sequence": 0,
+          "code": "invalid",
+          "operation": "advance",
+          "preserved": true
+        },
+        {
+          "name": "consumed_ticket",
+          "sequence": 1,
+          "code": "stale",
+          "operation": "advance",
+          "preserved": true
+        }
+      ],
+      "pauseChecks": [
+        {
+          "ordinal": 26,
+          "type": "pause_check",
+          "caseId": "single-positive",
+          "name": "before_first_dispatch",
+          "sequence": 0,
+          "beforeLabel": "single-positive/initial_authorization",
+          "afterLabel": "single-positive/initial_pause_reused",
+          "ticketBefore": {
+            "id": "sra-v6-4c3ecc42-55c1-4c43-b8b5-4a6f63875cbc:native:1",
+            "sessionId": "sra-v6-4c3ecc42-55c1-4c43-b8b5-4a6f63875cbc",
+            "sourceDigest": "ab7dd02237a477465ee2274a3468db43a0ff89d8864eda6852e750814eab5587",
+            "observationRef": "sra-v6-4c3ecc42-55c1-4c43-b8b5-4a6f63875cbc:epoch:1:revision:1:frame:2b0ba030ef377889",
+            "graphChain": "7e8b664b67133775a56b4a282bdb8a66b2afaf80b804c1ad7d925d646287c2df",
+            "nativeExecutionDigest": "6fa05b13972cb0dc88b793d8e9715742af3a453bd95855e71b57c75a0eb47854",
+            "frameHash": "2b0ba030ef377889",
+            "level": 1,
+            "levelsCompleted": 0,
+            "decisionRevision": 1,
+            "actionIndex": 0,
+            "actionRef": "ACTION1",
+            "data": {}
+          },
+          "ticketAfter": {
+            "id": "sra-v6-4c3ecc42-55c1-4c43-b8b5-4a6f63875cbc:native:1",
+            "sessionId": "sra-v6-4c3ecc42-55c1-4c43-b8b5-4a6f63875cbc",
+            "sourceDigest": "ab7dd02237a477465ee2274a3468db43a0ff89d8864eda6852e750814eab5587",
+            "observationRef": "sra-v6-4c3ecc42-55c1-4c43-b8b5-4a6f63875cbc:epoch:1:revision:1:frame:2b0ba030ef377889",
+            "graphChain": "7e8b664b67133775a56b4a282bdb8a66b2afaf80b804c1ad7d925d646287c2df",
+            "nativeExecutionDigest": "6fa05b13972cb0dc88b793d8e9715742af3a453bd95855e71b57c75a0eb47854",
+            "frameHash": "2b0ba030ef377889",
+            "level": 1,
+            "levelsCompleted": 0,
+            "decisionRevision": 1,
+            "actionIndex": 0,
+            "actionRef": "ACTION1",
+            "data": {}
+          },
+          "countsBefore": {
+            "dispatches": 0,
+            "advances": 0,
+            "inits": 1,
+            "resets": 0
+          },
+          "countsAfter": {
+            "dispatches": 0,
+            "advances": 0,
+            "inits": 1,
+            "resets": 0
+          },
+          "preserved": true
+        }
+      ],
+      "forms": [
+        {
+          "label": "single-positive/initial_authorization",
+          "sequence": 0,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 0,
+          "graphTo": 215,
+          "nodeCount": 191,
+          "acquired": 0,
+          "ownerEventCount": 0,
+          "ownerRevision": 2,
+          "motion": {},
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/initial_pause_reused",
+          "sequence": 0,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 215,
+          "graphTo": 215,
+          "nodeCount": 191,
+          "acquired": 0,
+          "ownerEventCount": 0,
+          "ownerRevision": 2,
+          "motion": {},
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/protocol_wrong_ticket_before",
+          "sequence": 0,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 215,
+          "graphTo": 215,
+          "nodeCount": 191,
+          "acquired": 0,
+          "ownerEventCount": 0,
+          "ownerRevision": 2,
+          "motion": {},
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/protocol_wrong_ticket_after",
+          "sequence": 0,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 215,
+          "graphTo": 215,
+          "nodeCount": 191,
+          "acquired": 0,
+          "ownerEventCount": 0,
+          "ownerRevision": 2,
+          "motion": {},
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/protocol_wrong_session_before",
+          "sequence": 0,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 215,
+          "graphTo": 215,
+          "nodeCount": 191,
+          "acquired": 0,
+          "ownerEventCount": 0,
+          "ownerRevision": 2,
+          "motion": {},
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/protocol_wrong_session_after",
+          "sequence": 0,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 215,
+          "graphTo": 215,
+          "nodeCount": 191,
+          "acquired": 0,
+          "ownerEventCount": 0,
+          "ownerRevision": 2,
+          "motion": {},
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/protocol_wrong_sequence_before",
+          "sequence": 0,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 215,
+          "graphTo": 215,
+          "nodeCount": 191,
+          "acquired": 0,
+          "ownerEventCount": 0,
+          "ownerRevision": 2,
+          "motion": {},
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/protocol_wrong_sequence_after",
+          "sequence": 0,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 215,
+          "graphTo": 215,
+          "nodeCount": 191,
+          "acquired": 0,
+          "ownerEventCount": 0,
+          "ownerRevision": 2,
+          "motion": {},
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/protocol_step_index_mismatch_before",
+          "sequence": 0,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 215,
+          "graphTo": 215,
+          "nodeCount": 191,
+          "acquired": 0,
+          "ownerEventCount": 0,
+          "ownerRevision": 2,
+          "motion": {},
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/protocol_step_index_mismatch_after",
+          "sequence": 0,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 215,
+          "graphTo": 215,
+          "nodeCount": 191,
+          "acquired": 0,
+          "ownerEventCount": 0,
+          "ownerRevision": 2,
+          "motion": {},
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/protocol_inconsistent_animation_before",
+          "sequence": 0,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 215,
+          "graphTo": 215,
+          "nodeCount": 191,
+          "acquired": 0,
+          "ownerEventCount": 0,
+          "ownerRevision": 2,
+          "motion": {},
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/protocol_inconsistent_animation_after",
+          "sequence": 0,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 215,
+          "graphTo": 215,
+          "nodeCount": 191,
+          "acquired": 0,
+          "ownerEventCount": 0,
+          "ownerRevision": 2,
+          "motion": {},
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/protocol_negative_execution_duration_before",
+          "sequence": 0,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 215,
+          "graphTo": 215,
+          "nodeCount": 191,
+          "acquired": 0,
+          "ownerEventCount": 0,
+          "ownerRevision": 2,
+          "motion": {},
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/protocol_negative_execution_duration_after",
+          "sequence": 0,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 215,
+          "graphTo": 215,
+          "nodeCount": 191,
+          "acquired": 0,
+          "ownerEventCount": 0,
+          "ownerRevision": 2,
+          "motion": {},
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/before_return_1",
+          "sequence": 0,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 215,
+          "graphTo": 215,
+          "nodeCount": 191,
+          "acquired": 0,
+          "ownerEventCount": 0,
+          "ownerRevision": 2,
+          "motion": {},
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/after_return_1",
+          "sequence": 1,
+          "kind": "boundary",
+          "family": "branch_routing",
+          "mode": null,
+          "graphFrom": 215,
+          "graphTo": 326,
+          "nodeCount": 216,
+          "acquired": 1,
+          "ownerEventCount": 1,
+          "ownerRevision": 3,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ]
+          },
+          "current": [
+            [
+              8,
+              4
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/before_return_2",
+          "sequence": 1,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 326,
+          "graphTo": 336,
+          "nodeCount": 218,
+          "acquired": 1,
+          "ownerEventCount": 1,
+          "ownerRevision": 3,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ]
+          },
+          "current": [
+            [
+              8,
+              4
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/protocol_consumed_ticket_before",
+          "sequence": 1,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 336,
+          "graphTo": 336,
+          "nodeCount": 218,
+          "acquired": 1,
+          "ownerEventCount": 1,
+          "ownerRevision": 3,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ]
+          },
+          "current": [
+            [
+              8,
+              4
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/protocol_consumed_ticket_after",
+          "sequence": 1,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 336,
+          "graphTo": 336,
+          "nodeCount": 218,
+          "acquired": 1,
+          "ownerEventCount": 1,
+          "ownerRevision": 3,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ]
+          },
+          "current": [
+            [
+              8,
+              4
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/after_return_2",
+          "sequence": 2,
+          "kind": "boundary",
+          "family": "branch_routing",
+          "mode": null,
+          "graphFrom": 336,
+          "graphTo": 436,
+          "nodeCount": 229,
+          "acquired": 2,
+          "ownerEventCount": 2,
+          "ownerRevision": 4,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ]
+          },
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/before_return_3",
+          "sequence": 2,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 436,
+          "graphTo": 446,
+          "nodeCount": 231,
+          "acquired": 2,
+          "ownerEventCount": 2,
+          "ownerRevision": 4,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ]
+          },
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/after_return_3",
+          "sequence": 3,
+          "kind": "boundary",
+          "family": "branch_routing",
+          "mode": null,
+          "graphFrom": 446,
+          "graphTo": 550,
+          "nodeCount": 246,
+          "acquired": 3,
+          "ownerEventCount": 3,
+          "ownerRevision": 5,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ]
+          },
+          "current": [
+            [
+              6,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/before_return_4",
+          "sequence": 3,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 550,
+          "graphTo": 560,
+          "nodeCount": 248,
+          "acquired": 3,
+          "ownerEventCount": 3,
+          "ownerRevision": 5,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ]
+          },
+          "current": [
+            [
+              6,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/after_return_4",
+          "sequence": 4,
+          "kind": "boundary",
+          "family": "branch_routing",
+          "mode": null,
+          "graphFrom": 560,
+          "graphTo": 661,
+          "nodeCount": 260,
+          "acquired": 4,
+          "ownerEventCount": 4,
+          "ownerRevision": 6,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ],
+            "ACTION4": [
+              2,
+              0
+            ]
+          },
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/before_return_5",
+          "sequence": 4,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "move",
+          "graphFrom": 661,
+          "graphTo": 671,
+          "nodeCount": 262,
+          "acquired": 4,
+          "ownerEventCount": 4,
+          "ownerRevision": 6,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ],
+            "ACTION4": [
+              2,
+              0
+            ]
+          },
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/after_return_5",
+          "sequence": 5,
+          "kind": "boundary",
+          "family": "branch_routing",
+          "mode": null,
+          "graphFrom": 671,
+          "graphTo": 772,
+          "nodeCount": 274,
+          "acquired": 5,
+          "ownerEventCount": 5,
+          "ownerRevision": 7,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ],
+            "ACTION4": [
+              2,
+              0
+            ]
+          },
+          "current": [
+            [
+              8,
+              4
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/before_return_6",
+          "sequence": 5,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "propagate",
+          "graphFrom": 772,
+          "graphTo": 782,
+          "nodeCount": 276,
+          "acquired": 5,
+          "ownerEventCount": 5,
+          "ownerRevision": 7,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ],
+            "ACTION4": [
+              2,
+              0
+            ]
+          },
+          "current": [
+            [
+              8,
+              4
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "single-positive/after_return_6",
+          "sequence": 6,
+          "kind": "boundary",
+          "family": "branch_routing",
+          "mode": null,
+          "graphFrom": 782,
+          "graphTo": 883,
+          "nodeCount": 289,
+          "acquired": 6,
+          "ownerEventCount": 6,
+          "ownerRevision": 8,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ],
+            "ACTION4": [
+              2,
+              0
+            ]
+          },
+          "current": [
+            [
+              8,
+              4
+            ]
+          ],
+          "finished": true,
+          "publicModelLimit": 32
+        }
+      ]
+    },
+    {
+      "caseId": "triple-prefix",
+      "sessionId": "sra-v6-fc1aa86d-1f4d-4b2c-be72-2c935e2b622c",
+      "physicalReturns": 7,
+      "successfulAdvances": 7,
+      "initializations": 1,
+      "workers": [
+        "triple-prefix:1"
+      ],
+      "inspections": 17,
+      "graphDeltas": 912,
+      "finalGraphChain": "042cac90a210c72a7632f8f4ae0601028c9b68875566d92b617d0e61018ae913",
+      "finalGraphNodes": 304,
+      "consumedTickets": 7,
+      "issuedTicketsObserved": 8,
+      "acquiredBranchReturns": 7,
+      "retainedOwnerEvents": 7,
+      "finalQuestion": {
+        "actionRef": "ACTION5",
+        "data": {}
+      },
+      "finalQuestionExecuted": false,
+      "protocolChecks": [],
+      "pauseChecks": [
+        {
+          "ordinal": 308,
+          "type": "pause_check",
+          "caseId": "triple-prefix",
+          "name": "before_first_dispatch",
+          "sequence": 0,
+          "beforeLabel": "triple-prefix/initial_authorization",
+          "afterLabel": "triple-prefix/initial_pause_reused",
+          "ticketBefore": {
+            "id": "sra-v6-fc1aa86d-1f4d-4b2c-be72-2c935e2b622c:native:1",
+            "sessionId": "sra-v6-fc1aa86d-1f4d-4b2c-be72-2c935e2b622c",
+            "sourceDigest": "ab7dd02237a477465ee2274a3468db43a0ff89d8864eda6852e750814eab5587",
+            "observationRef": "sra-v6-fc1aa86d-1f4d-4b2c-be72-2c935e2b622c:epoch:1:revision:1:frame:203cd1e960aafff3",
+            "graphChain": "c7f2ea49a82b99ac5c52cbba73e67bad0e1324f6e554e1fdd9ac865ad00327b6",
+            "nativeExecutionDigest": "6fa05b13972cb0dc88b793d8e9715742af3a453bd95855e71b57c75a0eb47854",
+            "frameHash": "203cd1e960aafff3",
+            "level": 1,
+            "levelsCompleted": 0,
+            "decisionRevision": 1,
+            "actionIndex": 0,
+            "actionRef": "ACTION1",
+            "data": {}
+          },
+          "ticketAfter": {
+            "id": "sra-v6-fc1aa86d-1f4d-4b2c-be72-2c935e2b622c:native:1",
+            "sessionId": "sra-v6-fc1aa86d-1f4d-4b2c-be72-2c935e2b622c",
+            "sourceDigest": "ab7dd02237a477465ee2274a3468db43a0ff89d8864eda6852e750814eab5587",
+            "observationRef": "sra-v6-fc1aa86d-1f4d-4b2c-be72-2c935e2b622c:epoch:1:revision:1:frame:203cd1e960aafff3",
+            "graphChain": "c7f2ea49a82b99ac5c52cbba73e67bad0e1324f6e554e1fdd9ac865ad00327b6",
+            "nativeExecutionDigest": "6fa05b13972cb0dc88b793d8e9715742af3a453bd95855e71b57c75a0eb47854",
+            "frameHash": "203cd1e960aafff3",
+            "level": 1,
+            "levelsCompleted": 0,
+            "decisionRevision": 1,
+            "actionIndex": 0,
+            "actionRef": "ACTION1",
+            "data": {}
+          },
+          "countsBefore": {
+            "dispatches": 0,
+            "advances": 0,
+            "inits": 1,
+            "resets": 0
+          },
+          "countsAfter": {
+            "dispatches": 0,
+            "advances": 0,
+            "inits": 1,
+            "resets": 0
+          },
+          "preserved": true
+        },
+        {
+          "ordinal": 453,
+          "type": "pause_check",
+          "caseId": "triple-prefix",
+          "name": "during_dispatch",
+          "sequence": 6,
+          "beforeLabel": "triple-prefix/before_return_6",
+          "afterLabel": "triple-prefix/after_return_6",
+          "ticketBefore": {
+            "id": "sra-v6-fc1aa86d-1f4d-4b2c-be72-2c935e2b622c:native:6",
+            "sessionId": "sra-v6-fc1aa86d-1f4d-4b2c-be72-2c935e2b622c",
+            "sourceDigest": "ab7dd02237a477465ee2274a3468db43a0ff89d8864eda6852e750814eab5587",
+            "observationRef": "sra-v6-fc1aa86d-1f4d-4b2c-be72-2c935e2b622c:epoch:1:revision:6:frame:4d352c5d7e2551a3",
+            "graphChain": "99099cf6e4aacc12cbeed7a9a38fb280631031d9a8b74918522374868f7d4c51",
+            "nativeExecutionDigest": "6fa05b13972cb0dc88b793d8e9715742af3a453bd95855e71b57c75a0eb47854",
+            "frameHash": "4d352c5d7e2551a3",
+            "level": 1,
+            "levelsCompleted": 0,
+            "decisionRevision": 6,
+            "actionIndex": 0,
+            "actionRef": "ACTION1",
+            "data": {}
+          },
+          "ticketAfter": {
+            "id": "sra-v6-fc1aa86d-1f4d-4b2c-be72-2c935e2b622c:native:7",
+            "sessionId": "sra-v6-fc1aa86d-1f4d-4b2c-be72-2c935e2b622c",
+            "sourceDigest": "ab7dd02237a477465ee2274a3468db43a0ff89d8864eda6852e750814eab5587",
+            "observationRef": "sra-v6-fc1aa86d-1f4d-4b2c-be72-2c935e2b622c:epoch:1:revision:7:frame:82c5f2d0fdfa62f3",
+            "graphChain": "99099cf6e4aacc12cbeed7a9a38fb280631031d9a8b74918522374868f7d4c51",
+            "nativeExecutionDigest": "6fa05b13972cb0dc88b793d8e9715742af3a453bd95855e71b57c75a0eb47854",
+            "frameHash": "82c5f2d0fdfa62f3",
+            "level": 1,
+            "levelsCompleted": 0,
+            "decisionRevision": 6,
+            "actionIndex": 1,
+            "actionRef": "ACTION1",
+            "data": {}
+          },
+          "countsBefore": {
+            "dispatches": 5,
+            "advances": 5,
+            "inits": 1,
+            "resets": 0
+          },
+          "countsAfter": {
+            "dispatches": 6,
+            "advances": 6,
+            "inits": 1,
+            "resets": 0
+          },
+          "preserved": true
+        }
+      ],
+      "forms": [
+        {
+          "label": "triple-prefix/initial_authorization",
+          "sequence": 0,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 0,
+          "graphTo": 217,
+          "nodeCount": 191,
+          "acquired": 0,
+          "ownerEventCount": 0,
+          "ownerRevision": 2,
+          "motion": {},
+          "current": [
+            [
+              10,
+              0
+            ],
+            [
+              6,
+              12
+            ],
+            [
+              14,
+              14
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "triple-prefix/initial_pause_reused",
+          "sequence": 0,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 217,
+          "graphTo": 217,
+          "nodeCount": 191,
+          "acquired": 0,
+          "ownerEventCount": 0,
+          "ownerRevision": 2,
+          "motion": {},
+          "current": [
+            [
+              10,
+              0
+            ],
+            [
+              6,
+              12
+            ],
+            [
+              14,
+              14
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "triple-prefix/before_return_1",
+          "sequence": 0,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 217,
+          "graphTo": 217,
+          "nodeCount": 191,
+          "acquired": 0,
+          "ownerEventCount": 0,
+          "ownerRevision": 2,
+          "motion": {},
+          "current": [
+            [
+              10,
+              0
+            ],
+            [
+              6,
+              12
+            ],
+            [
+              14,
+              14
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "triple-prefix/after_return_1",
+          "sequence": 1,
+          "kind": "boundary",
+          "family": "branch_routing",
+          "mode": null,
+          "graphFrom": 217,
+          "graphTo": 328,
+          "nodeCount": 216,
+          "acquired": 1,
+          "ownerEventCount": 1,
+          "ownerRevision": 3,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ]
+          },
+          "current": [
+            [
+              10,
+              0
+            ],
+            [
+              6,
+              12
+            ],
+            [
+              14,
+              12
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "triple-prefix/before_return_2",
+          "sequence": 1,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 328,
+          "graphTo": 338,
+          "nodeCount": 218,
+          "acquired": 1,
+          "ownerEventCount": 1,
+          "ownerRevision": 3,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ]
+          },
+          "current": [
+            [
+              10,
+              0
+            ],
+            [
+              6,
+              12
+            ],
+            [
+              14,
+              12
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "triple-prefix/after_return_2",
+          "sequence": 2,
+          "kind": "boundary",
+          "family": "branch_routing",
+          "mode": null,
+          "graphFrom": 338,
+          "graphTo": 438,
+          "nodeCount": 229,
+          "acquired": 2,
+          "ownerEventCount": 2,
+          "ownerRevision": 4,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ]
+          },
+          "current": [
+            [
+              10,
+              0
+            ],
+            [
+              6,
+              12
+            ],
+            [
+              14,
+              14
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "triple-prefix/before_return_3",
+          "sequence": 2,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 438,
+          "graphTo": 448,
+          "nodeCount": 231,
+          "acquired": 2,
+          "ownerEventCount": 2,
+          "ownerRevision": 4,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ]
+          },
+          "current": [
+            [
+              10,
+              0
+            ],
+            [
+              6,
+              12
+            ],
+            [
+              14,
+              14
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "triple-prefix/after_return_3",
+          "sequence": 3,
+          "kind": "boundary",
+          "family": "branch_routing",
+          "mode": null,
+          "graphFrom": 448,
+          "graphTo": 552,
+          "nodeCount": 246,
+          "acquired": 3,
+          "ownerEventCount": 3,
+          "ownerRevision": 5,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ]
+          },
+          "current": [
+            [
+              10,
+              0
+            ],
+            [
+              6,
+              12
+            ],
+            [
+              12,
+              14
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "triple-prefix/before_return_4",
+          "sequence": 3,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 552,
+          "graphTo": 562,
+          "nodeCount": 248,
+          "acquired": 3,
+          "ownerEventCount": 3,
+          "ownerRevision": 5,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ]
+          },
+          "current": [
+            [
+              10,
+              0
+            ],
+            [
+              6,
+              12
+            ],
+            [
+              12,
+              14
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "triple-prefix/after_return_4",
+          "sequence": 4,
+          "kind": "boundary",
+          "family": "branch_routing",
+          "mode": null,
+          "graphFrom": 562,
+          "graphTo": 663,
+          "nodeCount": 260,
+          "acquired": 4,
+          "ownerEventCount": 4,
+          "ownerRevision": 6,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ],
+            "ACTION4": [
+              2,
+              0
+            ]
+          },
+          "current": [
+            [
+              10,
+              0
+            ],
+            [
+              6,
+              12
+            ],
+            [
+              14,
+              14
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "triple-prefix/before_return_5",
+          "sequence": 4,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "select",
+          "graphFrom": 663,
+          "graphTo": 673,
+          "nodeCount": 262,
+          "acquired": 4,
+          "ownerEventCount": 4,
+          "ownerRevision": 6,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ],
+            "ACTION4": [
+              2,
+              0
+            ]
+          },
+          "current": [
+            [
+              10,
+              0
+            ],
+            [
+              6,
+              12
+            ],
+            [
+              14,
+              14
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "triple-prefix/after_return_5",
+          "sequence": 5,
+          "kind": "boundary",
+          "family": "branch_routing",
+          "mode": null,
+          "graphFrom": 673,
+          "graphTo": 778,
+          "nodeCount": 276,
+          "acquired": 5,
+          "ownerEventCount": 5,
+          "ownerRevision": 7,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ],
+            "ACTION4": [
+              2,
+              0
+            ]
+          },
+          "current": [
+            [
+              10,
+              0
+            ],
+            [
+              6,
+              12
+            ],
+            [
+              14,
+              14
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "triple-prefix/before_return_6",
+          "sequence": 5,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "move",
+          "graphFrom": 778,
+          "graphTo": 788,
+          "nodeCount": 278,
+          "acquired": 5,
+          "ownerEventCount": 5,
+          "ownerRevision": 7,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ],
+            "ACTION4": [
+              2,
+              0
+            ]
+          },
+          "current": [
+            [
+              10,
+              0
+            ],
+            [
+              6,
+              12
+            ],
+            [
+              14,
+              14
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "triple-prefix/after_return_6",
+          "sequence": 6,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "move",
+          "graphFrom": 788,
+          "graphTo": 788,
+          "nodeCount": 278,
+          "acquired": 5,
+          "ownerEventCount": 5,
+          "ownerRevision": 7,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ],
+            "ACTION4": [
+              2,
+              0
+            ]
+          },
+          "current": [
+            [
+              10,
+              0
+            ],
+            [
+              6,
+              12
+            ],
+            [
+              14,
+              14
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "triple-prefix/before_return_7",
+          "sequence": 6,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "move",
+          "graphFrom": 788,
+          "graphTo": 788,
+          "nodeCount": 278,
+          "acquired": 5,
+          "ownerEventCount": 5,
+          "ownerRevision": 7,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ],
+            "ACTION4": [
+              2,
+              0
+            ]
+          },
+          "current": [
+            [
+              10,
+              0
+            ],
+            [
+              6,
+              12
+            ],
+            [
+              14,
+              14
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "triple-prefix/after_return_7",
+          "sequence": 7,
+          "kind": "boundary",
+          "family": "branch_routing",
+          "mode": null,
+          "graphFrom": 788,
+          "graphTo": 902,
+          "nodeCount": 302,
+          "acquired": 7,
+          "ownerEventCount": 7,
+          "ownerRevision": 8,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ],
+            "ACTION4": [
+              2,
+              0
+            ]
+          },
+          "current": [
+            [
+              10,
+              0
+            ],
+            [
+              6,
+              8
+            ],
+            [
+              14,
+              14
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "triple-prefix/final_question",
+          "sequence": 7,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "propagate",
+          "graphFrom": 902,
+          "graphTo": 912,
+          "nodeCount": 304,
+          "acquired": 7,
+          "ownerEventCount": 7,
+          "ownerRevision": 8,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ],
+            "ACTION4": [
+              2,
+              0
+            ]
+          },
+          "current": [
+            [
+              10,
+              0
+            ],
+            [
+              6,
+              8
+            ],
+            [
+              14,
+              14
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        }
+      ]
+    },
+    {
+      "caseId": "contrary-return",
+      "sessionId": "sra-v6-71344ad0-77fd-4315-9f2f-aef15c8ec9cb",
+      "physicalReturns": 5,
+      "successfulAdvances": 5,
+      "initializations": 1,
+      "workers": [
+        "contrary-return:1"
+      ],
+      "inspections": 13,
+      "graphDeltas": 783,
+      "finalGraphChain": "d44083f03aea469588c6a8585d75d3ce66edb1db33fe57c068657f6a7186d428",
+      "finalGraphNodes": 278,
+      "consumedTickets": 5,
+      "issuedTicketsObserved": 6,
+      "acquiredBranchReturns": 5,
+      "retainedOwnerEvents": 5,
+      "finalQuestion": {
+        "actionRef": "ACTION5",
+        "data": {}
+      },
+      "finalQuestionExecuted": false,
+      "protocolChecks": [],
+      "pauseChecks": [
+        {
+          "ordinal": 517,
+          "type": "pause_check",
+          "caseId": "contrary-return",
+          "name": "before_first_dispatch",
+          "sequence": 0,
+          "beforeLabel": "contrary-return/initial_authorization",
+          "afterLabel": "contrary-return/initial_pause_reused",
+          "ticketBefore": {
+            "id": "sra-v6-71344ad0-77fd-4315-9f2f-aef15c8ec9cb:native:1",
+            "sessionId": "sra-v6-71344ad0-77fd-4315-9f2f-aef15c8ec9cb",
+            "sourceDigest": "ab7dd02237a477465ee2274a3468db43a0ff89d8864eda6852e750814eab5587",
+            "observationRef": "sra-v6-71344ad0-77fd-4315-9f2f-aef15c8ec9cb:epoch:1:revision:1:frame:2b0ba030ef377889",
+            "graphChain": "584c03110061364fecff9f8a0b25559fe793f927a521f20f732b9203afbb1fd7",
+            "nativeExecutionDigest": "6fa05b13972cb0dc88b793d8e9715742af3a453bd95855e71b57c75a0eb47854",
+            "frameHash": "2b0ba030ef377889",
+            "level": 1,
+            "levelsCompleted": 0,
+            "decisionRevision": 1,
+            "actionIndex": 0,
+            "actionRef": "ACTION1",
+            "data": {}
+          },
+          "ticketAfter": {
+            "id": "sra-v6-71344ad0-77fd-4315-9f2f-aef15c8ec9cb:native:1",
+            "sessionId": "sra-v6-71344ad0-77fd-4315-9f2f-aef15c8ec9cb",
+            "sourceDigest": "ab7dd02237a477465ee2274a3468db43a0ff89d8864eda6852e750814eab5587",
+            "observationRef": "sra-v6-71344ad0-77fd-4315-9f2f-aef15c8ec9cb:epoch:1:revision:1:frame:2b0ba030ef377889",
+            "graphChain": "584c03110061364fecff9f8a0b25559fe793f927a521f20f732b9203afbb1fd7",
+            "nativeExecutionDigest": "6fa05b13972cb0dc88b793d8e9715742af3a453bd95855e71b57c75a0eb47854",
+            "frameHash": "2b0ba030ef377889",
+            "level": 1,
+            "levelsCompleted": 0,
+            "decisionRevision": 1,
+            "actionIndex": 0,
+            "actionRef": "ACTION1",
+            "data": {}
+          },
+          "countsBefore": {
+            "dispatches": 0,
+            "advances": 0,
+            "inits": 1,
+            "resets": 0
+          },
+          "countsAfter": {
+            "dispatches": 0,
+            "advances": 0,
+            "inits": 1,
+            "resets": 0
+          },
+          "preserved": true
+        }
+      ],
+      "forms": [
+        {
+          "label": "contrary-return/initial_authorization",
+          "sequence": 0,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 0,
+          "graphTo": 215,
+          "nodeCount": 191,
+          "acquired": 0,
+          "ownerEventCount": 0,
+          "ownerRevision": 2,
+          "motion": {},
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "contrary-return/initial_pause_reused",
+          "sequence": 0,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 215,
+          "graphTo": 215,
+          "nodeCount": 191,
+          "acquired": 0,
+          "ownerEventCount": 0,
+          "ownerRevision": 2,
+          "motion": {},
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "contrary-return/before_return_1",
+          "sequence": 0,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 215,
+          "graphTo": 215,
+          "nodeCount": 191,
+          "acquired": 0,
+          "ownerEventCount": 0,
+          "ownerRevision": 2,
+          "motion": {},
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "contrary-return/after_return_1",
+          "sequence": 1,
+          "kind": "boundary",
+          "family": "branch_routing",
+          "mode": null,
+          "graphFrom": 215,
+          "graphTo": 326,
+          "nodeCount": 216,
+          "acquired": 1,
+          "ownerEventCount": 1,
+          "ownerRevision": 3,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ]
+          },
+          "current": [
+            [
+              8,
+              4
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "contrary-return/before_return_2",
+          "sequence": 1,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 326,
+          "graphTo": 336,
+          "nodeCount": 218,
+          "acquired": 1,
+          "ownerEventCount": 1,
+          "ownerRevision": 3,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ]
+          },
+          "current": [
+            [
+              8,
+              4
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "contrary-return/after_return_2",
+          "sequence": 2,
+          "kind": "boundary",
+          "family": "branch_routing",
+          "mode": null,
+          "graphFrom": 336,
+          "graphTo": 436,
+          "nodeCount": 229,
+          "acquired": 2,
+          "ownerEventCount": 2,
+          "ownerRevision": 4,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ]
+          },
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "contrary-return/before_return_3",
+          "sequence": 2,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 436,
+          "graphTo": 446,
+          "nodeCount": 231,
+          "acquired": 2,
+          "ownerEventCount": 2,
+          "ownerRevision": 4,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ]
+          },
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "contrary-return/after_return_3",
+          "sequence": 3,
+          "kind": "boundary",
+          "family": "branch_routing",
+          "mode": null,
+          "graphFrom": 446,
+          "graphTo": 550,
+          "nodeCount": 246,
+          "acquired": 3,
+          "ownerEventCount": 3,
+          "ownerRevision": 5,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ]
+          },
+          "current": [
+            [
+              6,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "contrary-return/before_return_4",
+          "sequence": 3,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 550,
+          "graphTo": 560,
+          "nodeCount": 248,
+          "acquired": 3,
+          "ownerEventCount": 3,
+          "ownerRevision": 5,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ]
+          },
+          "current": [
+            [
+              6,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "contrary-return/after_return_4",
+          "sequence": 4,
+          "kind": "boundary",
+          "family": "branch_routing",
+          "mode": null,
+          "graphFrom": 560,
+          "graphTo": 661,
+          "nodeCount": 260,
+          "acquired": 4,
+          "ownerEventCount": 4,
+          "ownerRevision": 6,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ],
+            "ACTION4": [
+              2,
+              0
+            ]
+          },
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "contrary-return/before_return_5",
+          "sequence": 4,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "move",
+          "graphFrom": 661,
+          "graphTo": 671,
+          "nodeCount": 262,
+          "acquired": 4,
+          "ownerEventCount": 4,
+          "ownerRevision": 6,
+          "motion": {
+            "ACTION1": [
+              0,
+              -2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ],
+            "ACTION4": [
+              2,
+              0
+            ]
+          },
+          "current": [
+            [
+              8,
+              6
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "contrary-return/after_return_5",
+          "sequence": 5,
+          "kind": "boundary",
+          "family": "branch_routing",
+          "mode": null,
+          "graphFrom": 671,
+          "graphTo": 773,
+          "nodeCount": 276,
+          "acquired": 5,
+          "ownerEventCount": 5,
+          "ownerRevision": 7,
+          "motion": {
+            "ACTION1": [
+              0,
+              2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ],
+            "ACTION4": [
+              2,
+              0
+            ]
+          },
+          "current": [
+            [
+              8,
+              8
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        },
+        {
+          "label": "contrary-return/final_question",
+          "sequence": 5,
+          "kind": "action",
+          "family": "branch_routing",
+          "mode": "calibrate",
+          "graphFrom": 773,
+          "graphTo": 783,
+          "nodeCount": 278,
+          "acquired": 5,
+          "ownerEventCount": 5,
+          "ownerRevision": 7,
+          "motion": {
+            "ACTION1": [
+              0,
+              2
+            ],
+            "ACTION2": [
+              0,
+              2
+            ],
+            "ACTION3": [
+              -2,
+              0
+            ],
+            "ACTION4": [
+              2,
+              0
+            ]
+          },
+          "current": [
+            [
+              8,
+              8
+            ]
+          ],
+          "finished": false,
+          "publicModelLimit": 32
+        }
+      ]
+    }
+  ],
+  "revisedScope": {
+    "originalScopePassed": false,
+    "originalFailureReclassifiedAsPassed": false,
+    "expectedPositiveSessions": [
+      "single-positive",
+      "triple-prefix",
+      "contrary-return"
+    ],
+    "expectedPhysicalReturns": 18,
+    "recoverableChecks": [
+      "wrong_ticket",
+      "wrong_session",
+      "wrong_sequence",
+      "step_index_mismatch",
+      "inconsistent_animation",
+      "negative_execution_duration",
+      "consumed_ticket"
+    ],
+    "excludedRecoverableChecks": [
+      "invalid_frame_dimensions",
+      "invalid_palette"
+    ],
+    "structuralRecoveryQualified": false,
+    "reason": "Published 0.67 treats TypeError from main-frame structural validation as terminal; positive qualification retains that counterexample.",
+    "declaration": {
+      "id": "public-positive-scope-v2",
+      "previousCaptureReceipt": {
+        "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-01/capture/receipt.json",
+        "bytes": 160331,
+        "sha256": "b65d2c045add7bcf4823e0841c6e55c3ab86cb23bff161236a60fa398ec3fd62"
+      },
+      "previousEvents": {
+        "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-01/capture/events.jsonl.gz",
+        "bytes": 22330445,
+        "sha256": "27337f073a7963a0bb315e23f342cc130d8ee005898245ad4111ac18c557d3ca"
+      },
+      "excludedRecoverableChecks": [
+        "invalid_frame_dimensions",
+        "invalid_palette"
+      ],
+      "originalScopePassed": false,
+      "reason": "structural_frame_errors_are_terminal_in_published_067"
+    }
+  },
+  "derivation": {
+    "previousReader": {
+      "path": "docs/migration/lot8b-evidence/tools/public-boundary/qualify.mjs",
+      "sha256": "55884b11a2c8a8bdfc38dc75084240a45ac7cdedd0139a1cb648914bf4988b47"
+    },
+    "changes": [
+      "Explicit revised positive scope retains the initial failed structural-input capture.",
+      "Only the two declared nonrecoverable main-frame checks are excluded from the seven recoverable cases.",
+      "Authenticated graph blobs are hydrated before the unchanged ticket, graph, acquisition and physical-return assertions."
+    ],
+    "previousReaderModified": false,
+    "productionModified": false
+  },
+  "claims": {
+    "actualPublicService": true,
+    "actualPublishedWorker": true,
+    "actualProductionClientController": true,
+    "public64x64Packets": true,
+    "realServiceTickets": true,
+    "realGraphAcquisitions": true,
+    "observedOwnerRestoreCalls": false,
+    "wholeModelIdentity14versus32": false,
+    "fullV6Parity": false,
+    "officialPerformanceEligible": false,
+    "browserDomOrCsp": false,
+    "liveGameEngine": false,
+    "solvedLevel": false,
+    "fullOriginalScopePassed": false,
+    "recoverableMainFrameDimensionsOrPalette": false
+  },
+  "limitations": [
+    "Retained public presentations use zero padding from the original small component corpus to 64x64; the model limit changes from 14 to 32.",
+    "The reader validates actual recorded public RPCs and authoritative graph deltas. It never starts a runtime, worker, game or oracle.",
+    "Retained graph state and the ensuing questions are checked; internal restore method calls are not observed by this capture.",
+    "The final authorized question is inspected and closed without dispatch. A finished BranchRouting owner does not constrain every other native owner.",
+    "Node interthread environment adaptation is not a browser DOM, HTTP/CSP, real-game, complete-parity or performance qualification.",
+    "Previously instrumented native incomplete-acquisition evidence is not reclassified as an ordinary public-worker run.",
+    "The initial nine-recoverable-error scope failed on a 63-row main frame. It stays failed; v2 qualifies only seven recoverable refusals and the three positive sessions.",
+    "Malformed main-frame dimensions and palette are excluded from recovery qualification. The production exception policy is unchanged.",
+    "Repeated KnowledgeMemory values are stored once by SHA256 in gzip blobs. Compressed/raw bytes and lengths are verified before the original full graph is validated."
+  ],
+  "structuralReservation": {
+    "status": "failed_retained_as_counterexample",
+    "originalScopePassed": false,
+    "previousReader": {
+      "path": "docs/migration/lot8b-evidence/tools/public-boundary/qualify.mjs",
+      "bytes": 62029,
+      "sha256": "55884b11a2c8a8bdfc38dc75084240a45ac7cdedd0139a1cb648914bf4988b47"
+    },
+    "captureReceipt": {
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-01/capture/receipt.json",
+      "bytes": 160331,
+      "sha256": "b65d2c045add7bcf4823e0841c6e55c3ab86cb23bff161236a60fa398ec3fd62"
+    },
+    "events": {
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-01/capture/events.jsonl.gz",
+      "bytes": 22330445,
+      "sha256": "27337f073a7963a0bb315e23f342cc130d8ee005898245ad4111ac18c557d3ca"
+    },
+    "failedSession": "sra-v6-d20bf51a-b9fe-465a-b11d-13b441483737",
+    "preservedChecksBeforeFailure": [
+      "wrong_ticket",
+      "wrong_session",
+      "wrong_sequence",
+      "step_index_mismatch"
+    ],
+    "observedStructuralFailure": {
+      "name": "invalid_frame_dimensions",
+      "ordinal": 96,
+      "requestOrdinal": 92,
+      "rejectionOrdinal": 93,
+      "error": {
+        "code": "internal",
+        "message": "The public game frame must be 64 × 64."
+      },
+      "recoveryError": {
+        "code": "stale",
+        "message": "The native solver session is no longer current."
+      },
+      "physicalReturns": 0,
+      "recoverable": false,
+      "sessionRemainedUsable": false
+    },
+    "codeBasis": [
+      {
+        "path": "src/runtime/v6-agent-protocol.ts",
+        "rule": "validateV6PublicObservation calls toV6PublicObservation; toAgentObservation runs before publicFrame."
+      },
+      {
+        "path": "src/runtime/contracts.ts",
+        "rule": "A wrong main-frame shape or palette throws TypeError in toAgentObservation."
+      },
+      {
+        "path": "src/runtime/v6-agent-service.ts",
+        "rule": "The catch closes the pending authority for non-V6AgentError exceptions, including pre-backend TypeError."
+      },
+      {
+        "path": "src/runtime/v6-agent-worker.ts",
+        "rule": "Non-V6AgentError exceptions are reported as internal; subsequent resume is stale."
+      },
+      {
+        "path": "tests/v6-native-runtime.test.ts",
+        "rule": "Existing recoverable-packet cases cover ticket/session/sequence/timing/animation/extra-field errors, not main-frame shape or palette."
+      }
+    ],
+    "paletteEvidenceInThisReader": "same_source_exception_path_only; any separately observed terminal probe has its own receipt",
+    "recoveryQualifiedForStructuralMainFrameErrors": false
+  },
+  "transport": {
+    "records": 257,
+    "workers": 3,
+    "pins": {
+      "single-positive": {
+        "nativeDigest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+        "manifest": {
+          "path": "docs/migration/lot8b-evidence/final-version-067-01/build-manifest.json",
+          "bytes": 14948,
+          "sha256": "39065225503db229e2597ae2aa70822e72e05b93735aac2d6e33d70a07cd6d6b"
+        },
+        "bundle": {
+          "path": "dist/assets/v6-agent-worker-XfSw5eyq.js",
+          "bytes": 7016605,
+          "sha256": "9c114f84e769879507618de08c9872020e8c65d33dc317dfe7ee959b6495a38f"
+        },
+        "assets": [
+          {
+            "url": "https://branch-public.invalid/assets/common_frontier_policy.drm-Dl1WBFy2.json",
+            "path": "dist/assets/common_frontier_policy.drm-Dl1WBFy2.json",
+            "bytes": 48531,
+            "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+          },
+          {
+            "url": "https://branch-public.invalid/assets/strategy-g4UuL-Tb.drm",
+            "path": "dist/assets/strategy-g4UuL-Tb.drm",
+            "bytes": 46966,
+            "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+          }
+        ],
+        "transport": {
+          "path": "docs/migration/lot8b-evidence/tools/public-boundary/worker-transport.mjs",
+          "bytes": 13131,
+          "sha256": "0db239232e1403a6eb9f9b0e7ef7395f90621bcd63764ebe8d611ba9b5f1e82b"
+        },
+        "bootstrap": {
+          "path": "docs/migration/lot8b-evidence/tools/public-boundary/worker-bootstrap.mjs",
+          "bytes": 5107,
+          "sha256": "a9b61490c8904b97366a88210344c24b9822dc84ec969a5fb46c9c745dd0aef9"
+        }
+      },
+      "triple-prefix": {
+        "nativeDigest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+        "manifest": {
+          "path": "docs/migration/lot8b-evidence/final-version-067-01/build-manifest.json",
+          "bytes": 14948,
+          "sha256": "39065225503db229e2597ae2aa70822e72e05b93735aac2d6e33d70a07cd6d6b"
+        },
+        "bundle": {
+          "path": "dist/assets/v6-agent-worker-XfSw5eyq.js",
+          "bytes": 7016605,
+          "sha256": "9c114f84e769879507618de08c9872020e8c65d33dc317dfe7ee959b6495a38f"
+        },
+        "assets": [
+          {
+            "url": "https://branch-public.invalid/assets/common_frontier_policy.drm-Dl1WBFy2.json",
+            "path": "dist/assets/common_frontier_policy.drm-Dl1WBFy2.json",
+            "bytes": 48531,
+            "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+          },
+          {
+            "url": "https://branch-public.invalid/assets/strategy-g4UuL-Tb.drm",
+            "path": "dist/assets/strategy-g4UuL-Tb.drm",
+            "bytes": 46966,
+            "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+          }
+        ],
+        "transport": {
+          "path": "docs/migration/lot8b-evidence/tools/public-boundary/worker-transport.mjs",
+          "bytes": 13131,
+          "sha256": "0db239232e1403a6eb9f9b0e7ef7395f90621bcd63764ebe8d611ba9b5f1e82b"
+        },
+        "bootstrap": {
+          "path": "docs/migration/lot8b-evidence/tools/public-boundary/worker-bootstrap.mjs",
+          "bytes": 5107,
+          "sha256": "a9b61490c8904b97366a88210344c24b9822dc84ec969a5fb46c9c745dd0aef9"
+        }
+      },
+      "contrary-return": {
+        "nativeDigest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+        "manifest": {
+          "path": "docs/migration/lot8b-evidence/final-version-067-01/build-manifest.json",
+          "bytes": 14948,
+          "sha256": "39065225503db229e2597ae2aa70822e72e05b93735aac2d6e33d70a07cd6d6b"
+        },
+        "bundle": {
+          "path": "dist/assets/v6-agent-worker-XfSw5eyq.js",
+          "bytes": 7016605,
+          "sha256": "9c114f84e769879507618de08c9872020e8c65d33dc317dfe7ee959b6495a38f"
+        },
+        "assets": [
+          {
+            "url": "https://branch-public.invalid/assets/common_frontier_policy.drm-Dl1WBFy2.json",
+            "path": "dist/assets/common_frontier_policy.drm-Dl1WBFy2.json",
+            "bytes": 48531,
+            "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+          },
+          {
+            "url": "https://branch-public.invalid/assets/strategy-g4UuL-Tb.drm",
+            "path": "dist/assets/strategy-g4UuL-Tb.drm",
+            "bytes": 46966,
+            "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+          }
+        ],
+        "transport": {
+          "path": "docs/migration/lot8b-evidence/tools/public-boundary/worker-transport.mjs",
+          "bytes": 13131,
+          "sha256": "0db239232e1403a6eb9f9b0e7ef7395f90621bcd63764ebe8d611ba9b5f1e82b"
+        },
+        "bootstrap": {
+          "path": "docs/migration/lot8b-evidence/tools/public-boundary/worker-bootstrap.mjs",
+          "bytes": 5107,
+          "sha256": "a9b61490c8904b97366a88210344c24b9822dc84ec969a5fb46c9c745dd0aef9"
+        }
+      }
+    },
+    "requests": 115,
+    "responses": 115,
+    "successes": 108,
+    "errors": 7
+  },
+  "knowledgeBlobEvidence": {
+    "uniqueGraphs": 36,
+    "references": 116,
+    "rawBytes": 402675854,
+    "gzipBytes": 43830137,
+    "lossless": true,
+    "graphDigests": [
+      "0818a11ac57de23a97f085b5453ae2aaf747ea65e14ee3b0f1b76a3356ee9e7a",
+      "0b2ba1f587d6adf01edd0b046c7b2b1765dd4e62d2094439a2626f922b01eda5",
+      "0d6895ebc89f8ac65e125ab1c5b58824eca64608745c4fd13a63e9133787af80",
+      "1a92c70497191884ee11b57349e4a1e66ec754beb92b7d73e92c340a6707550b",
+      "1f1b447714dc0a23a2a83bc788053f4dc7dfc24b352044d1500c12033adee4f1",
+      "238e497f3b9c6681f299d28ca030b814279f1b05cc36775f3cd32cff2730e71e",
+      "2aa80ceedf5ac5851d99870f117ac852ee0b761e13db2657d4f6c00c76c68c9f",
+      "2f935dc93886abb690904c645f2ac9394d1bf9770cb81449b264779fe1f781b2",
+      "33ae0f244600c7926fd69c1321a35e19ec208ac21df8f08516e6ae2b55cb7141",
+      "386ba778c2442f7a5d8d26503869cb314ea10576e0f49a7299fbc311ef31bbd6",
+      "3ab6615b427e045d575d8a51dc14ebbee73da416d390dc846100fc7e3d5736c4",
+      "4548a02935add5fa5b498adcad8f2c1a79c843cdd414356a6908625d99ec5288",
+      "465489c570555129e06f90b89965e29c52dde36b9783d80ce0ff921155c4c2d6",
+      "5586f077aa46bb49238292b8823236a3c92895af6597193fd98c12e8015a4b25",
+      "597d405174a1e4103ca4c05b79d2c0935f0f76dec592502b63038580801be08f",
+      "6b71a73860346f1a26eb8b2d62cd74748e37247db68fbecd0b54273fe29961a3",
+      "75f4503e6482be649b0e76f82c1dc42cca590174a7dc597c1580af918726f443",
+      "7ec2f97000158827a46026aa2a2c96be1475bda9bf484b4a7b2e22243c2fb9a1",
+      "83a1fe2495bf95d10873a0b05a50e687757e10e69065d4ccbf3658dc87a22f17",
+      "85684d60b7042979fef2dd62cf54c59ee763b4695e75d152eaff303e633ed7fa",
+      "85da76417336fe8e8cedfc055d71e7b887c323661c5c2ef3adbf0afba7f9d3f2",
+      "8de5f5662795a6aa8f6feae7b92fb6ad9909ab17b785cef22b0709d22de010fc",
+      "8fbd3cfc8e8a1479bdd731e16236f29809f81370060da6931da220741fae8510",
+      "92415af36e6419bf6099cb2d2b168ba5a0f40fc1580180334e461e99ff2ab257",
+      "9c7181ee67e8e9012b631772895d36999a05976f0ad4a1ff2792e704af712f3c",
+      "a6274d1a9b8b79e9a295c81a10470b21aa356cc60dc6688eb6918edb4a0fa29f",
+      "b67594ae77c4ca4bdcdda5f4e88c2ca4019016d2638b3975748fc2af832595d3",
+      "c2c24a16715b6c3257ae3042ad30384c7b2bae9b98606fad74c0c89e61c52971",
+      "d16815c85157751e9eb081b3fea497b85b5efd32a3fcd5e26232feac0abd7a9a",
+      "d384d8ea046a3db5663540a74f2623476a8555496de4c2289c92bce8ae4b215b",
+      "d58f2b2863439ac87471fefa7f74ea06f80e367ed5f883e04a106b9a52e1cae1",
+      "d697975cc4ef6af8e2fedf36d6b879a6585e91bb1585c4b1731143bdbb70ca33",
+      "e1015ce1a3c577edf5cb1a3e693286d96c128c8ad2bcf73f7753172dfc769b85",
+      "e58d1a84bb32653de292b71ea23b15452158db99c50268c81850dcd46375e38d",
+      "e5eba0af9459b37882a3a215d27f33ddb0d49e56fcddb67d97d1cdbfa6371459",
+      "fcbe67615477ef753f19657cd4a0cb40a5dadc1928c90a6ef0e544e18d5b55c2"
+    ]
+  },
+  "finishedAt": "2026-11-12T13:30:41.041Z"
+}

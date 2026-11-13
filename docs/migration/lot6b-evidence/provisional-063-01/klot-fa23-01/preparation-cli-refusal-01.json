@@ -1,0 +1,9 @@
+{
+  "status": "argument_parser_refused_before_case_clock_and_payload",
+  "exitCode": 2,
+  "error": "the following arguments are required: --watch-manifest",
+  "omittedArgument": "--watch-manifest",
+  "sourceOrGameWorkExecuted": false,
+  "caseClockStarted": false,
+  "correctiveAction": "Retry preparation with the existing functional-watch-attempt02.json, without reclassifying this orchestration refusal."
+}

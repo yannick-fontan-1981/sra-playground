@@ -1,0 +1,50 @@
+{
+  "schema": "logos-engine.browser-qa-interrupted-attempt.v1",
+  "status": "interrupted_by_operator_navigation",
+  "recordedAt": "2026-11-10T14:02:55.792328+00:00",
+  "game": "VOIS",
+  "attempt": 1,
+  "method": "Visible CUA controls and accessibility observations only.",
+  "observedSteps": [
+    {
+      "action": "Cold game selection and Agent",
+      "actions": 0,
+      "levelsSolved": 0,
+      "completedPlans": 0
+    },
+    {
+      "action": "Run then Pause",
+      "actions": 4,
+      "levelsSolved": 0,
+      "completedPlans": 4
+    },
+    {
+      "action": "One action completed",
+      "actions": 5,
+      "levelsSolved": 0,
+      "completedPlans": 5
+    },
+    {
+      "action": "First level completed",
+      "actions": 14,
+      "levelsSolved": 1,
+      "completedPlans": 9
+    },
+    {
+      "action": "Second level completed",
+      "actions": 36,
+      "levelsSolved": 2,
+      "completedPlans": 21
+    },
+    {
+      "action": "Run third level",
+      "state": "running",
+      "countersAfterStartNotCaptured": true
+    },
+    {
+      "action": "Playground navigation link clicked to frame screenshot",
+      "state": "Page reinitialized in Manual at URL level3; continuous agent session lost"
+    }
+  ],
+  "qualification": "This attempt is not claimed as a three-level browser success. The operator clicked a page navigation link while attempting to frame the result. A second visible Restart from level1 begins a fresh complete control session. No manual game action, solution or level-jump control was used. Both attempts remain charged to the same cumulative VOIS clock; instrumented campaign evidence is unchanged."
+}

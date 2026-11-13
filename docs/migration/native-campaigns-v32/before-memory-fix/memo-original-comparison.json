@@ -1,0 +1,701 @@
+{
+  "schema": "logos-engine.memo-source-preemption-comparison.v1",
+  "qualification": "Original unchanged complete Python caller and native V7 runtime receive the same public pixel packets. No source plans or state are loaded into native memory. This is a failing game diagnostic, not a game success or performance benchmark.",
+  "sourceOracle": "/workspace/scratch/656587eca20f/v6-validation/memo-preemption-original/oracle.json",
+  "sourceOracleSha256": "f16b1213270dd360dae400df6002067ce8b792b65c6d26ab5b3f22a8b2893aa2",
+  "sourceMethod": {
+    "astTransformed": false,
+    "capture": "Python trace/profile observers copy existing caller locals and returned values",
+    "catalog": "facts/traces included; immutable catalogue identified by hashes and row counts",
+    "decisionInterception": false,
+    "eventsStart": "after the initial frontier observation is persisted; its complete state is captured separately",
+    "normalization": [],
+    "objects": "content-addressed JSON copies; resolve $object to the objects map",
+    "snapshotLocals": "raw caller locals at the named phase; earlier-loop locals can remain present and are not fresh events",
+    "sourceModified": false,
+    "stop": "external diagnostic exception only after completed original post_analysis"
+  },
+  "representationMapping": {
+    "command": "Browser actionRef maps to the source action_ref; coordinates and action values unchanged.",
+    "strategyReceipt": "The seven shared semantic receipt fields are compared; native V7 execution tracing, IR hashes and source DRM hash are different representation metadata and are not claimed identical."
+  },
+  "checks": [
+    {
+      "name": "physical command 1",
+      "passed": true
+    },
+    {
+      "name": "physical command 2",
+      "passed": true
+    },
+    {
+      "name": "physical command 3",
+      "passed": true
+    },
+    {
+      "name": "physical command 4",
+      "passed": true
+    },
+    {
+      "name": "physical command 5",
+      "passed": true
+    },
+    {
+      "name": "physical command 6",
+      "passed": true
+    },
+    {
+      "name": "physical command 7",
+      "passed": true
+    },
+    {
+      "name": "animation proposal status",
+      "passed": true
+    },
+    {
+      "name": "animation proposal kind",
+      "passed": true
+    },
+    {
+      "name": "animation proposal proposal_id",
+      "passed": true
+    },
+    {
+      "name": "animation proposal animated_contact_plan",
+      "passed": true
+    },
+    {
+      "name": "animation proposal actions",
+      "passed": true
+    },
+    {
+      "name": "animation proposal facts",
+      "passed": true
+    },
+    {
+      "name": "animation proposal compositions",
+      "passed": true
+    },
+    {
+      "name": "animation proposal question",
+      "passed": true
+    },
+    {
+      "name": "animation proposal route_refs",
+      "passed": true
+    },
+    {
+      "name": "animation proposal binding",
+      "passed": true
+    },
+    {
+      "name": "animation proposal bundle_template",
+      "passed": true
+    },
+    {
+      "name": "animation proposal steps",
+      "passed": true
+    },
+    {
+      "name": "animation proposal support_plan",
+      "passed": true
+    },
+    {
+      "name": "animation proposal composition_target_tree",
+      "passed": true
+    },
+    {
+      "name": "animation strategy workflow",
+      "passed": true
+    },
+    {
+      "name": "animation strategy src_hash",
+      "passed": true
+    },
+    {
+      "name": "animation strategy src_status",
+      "passed": true
+    },
+    {
+      "name": "animation strategy executed_statements",
+      "passed": true
+    },
+    {
+      "name": "animation strategy selected",
+      "passed": true
+    },
+    {
+      "name": "animation strategy visited",
+      "passed": true
+    },
+    {
+      "name": "animation strategy deferred_curiosity",
+      "passed": true
+    },
+    {
+      "name": "animation retained authorization",
+      "passed": true
+    },
+    {
+      "name": "animation selected acquisition event",
+      "passed": true
+    },
+    {
+      "name": "animation retained event and cleared authorization",
+      "passed": true
+    }
+  ],
+  "states": [
+    {
+      "revision": 1,
+      "animation": {
+        "authorized": {},
+        "events": [],
+        "format": "animated_contact.v1"
+      }
+    },
+    {
+      "revision": 2,
+      "animation": {
+        "authorized": {},
+        "events": [],
+        "format": "animated_contact.v1"
+      }
+    },
+    {
+      "revision": 3,
+      "animation": {
+        "authorized": {},
+        "events": [],
+        "format": "animated_contact.v1"
+      }
+    },
+    {
+      "revision": 4,
+      "animation": {
+        "authorized": {},
+        "events": [],
+        "format": "animated_contact.v1"
+      }
+    },
+    {
+      "revision": 5,
+      "animation": {
+        "authorized": {},
+        "events": [],
+        "format": "animated_contact.v1"
+      }
+    },
+    {
+      "revision": 6,
+      "animation": {
+        "authorized": {},
+        "events": [],
+        "format": "animated_contact.v1"
+      }
+    },
+    {
+      "revision": 7,
+      "animation": {
+        "authorized": {},
+        "events": [
+          {
+            "after_rows_digest": "2a3d4526501f6a7f7e99795b9e35cd9098e6bfe82689b1b927524e8642bb7544",
+            "boundary": false,
+            "command": {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 37,
+                "y": 13
+              }
+            },
+            "epoch": 1,
+            "evidence": [
+              "run:epoch:1:revision:7:frame:ed6639d6b8ac62c7",
+              "run:epoch:1:revision:8:frame:2a3d4526501f6a7f"
+            ],
+            "kind": "measured_animated_contact",
+            "measurement": {
+              "ballistic_contact_solution_present": false,
+              "ballistic_curve_disclosure_present": false,
+              "moving_transient_component_path_count": 0,
+              "ordered_transient_component_packet_frame_count": 6,
+              "point_intersects_unique_transient_source_morphology_peer": false,
+              "transient_component_absent_from_settled_frame": false,
+              "transient_component_path_frame_bound_reached": false,
+              "transient_component_path_seed_bound_reached": false,
+              "transient_component_path_seed_count": 1,
+              "transient_terminal_before_source_peer_along_horizontal_direction": false,
+              "transient_terminal_beyond_source_peer_along_horizontal_direction": false,
+              "transient_terminal_restored_component_differs_from_source_peer": false,
+              "transient_terminal_restored_persistent_contact_present": false,
+              "transient_terminal_unique_restored_persistent_component_present": false,
+              "unique_moving_transient_component_path_present": false,
+              "unique_transient_path_area_span_within_maximum_extent": false,
+              "unique_transient_path_consistent_noncolinear_turn": false,
+              "unique_transient_path_curved": false,
+              "unique_transient_path_distinct_position_count": 0,
+              "unique_transient_path_frame_count": 0,
+              "unique_transient_path_horizontal_direction_consistent": false,
+              "unique_transient_path_orientation_moment_signature_changes": false,
+              "unique_transient_path_palette_value_preserved": false,
+              "unique_transient_path_single_rise_to_fall_reversal": false,
+              "unique_transient_path_source_candidate_count": 0,
+              "unique_transient_path_source_candidate_present": false,
+              "unique_transient_path_source_morphology_peer_count": 0,
+              "unique_transient_path_source_morphology_peer_present": false,
+              "unique_transient_path_source_morphology_peer_value_unique": false,
+              "unique_transient_path_unique_nearest_continuation_present": false,
+              "unique_transient_path_vertical_velocity_changes": false
+            },
+            "mode": "invitation",
+            "model": null,
+            "packet_frames": 5,
+            "scalar_after": {
+              "scalar_fill_count": 8,
+              "scalar_fill_display_present": true,
+              "scalar_fill_end": 15,
+              "scalar_fill_index": 60,
+              "scalar_fill_orientation": "horizontal",
+              "scalar_fill_prefix_value": 1,
+              "scalar_fill_span": 15,
+              "scalar_fill_start": 1,
+              "scalar_fill_suffix_value": 2
+            },
+            "scalar_before": {
+              "scalar_fill_count": 9,
+              "scalar_fill_display_present": true,
+              "scalar_fill_end": 15,
+              "scalar_fill_index": 60,
+              "scalar_fill_orientation": "horizontal",
+              "scalar_fill_prefix_value": 1,
+              "scalar_fill_span": 15,
+              "scalar_fill_start": 1,
+              "scalar_fill_suffix_value": 2
+            },
+            "scalar_change": null,
+            "scope": "Ordered public raster measurement and provisional contact/disclosure calculus; no complete or universal physics asserted."
+          }
+        ],
+        "format": "animated_contact.v1"
+      }
+    }
+  ],
+  "animationEvent": {
+    "after_rows_digest": "2a3d4526501f6a7f7e99795b9e35cd9098e6bfe82689b1b927524e8642bb7544",
+    "boundary": false,
+    "command": {
+      "action_ref": "ACTION6",
+      "data": {
+        "x": 37,
+        "y": 13
+      }
+    },
+    "epoch": 1,
+    "evidence": [
+      "run:epoch:1:revision:7:frame:ed6639d6b8ac62c7",
+      "run:epoch:1:revision:8:frame:2a3d4526501f6a7f"
+    ],
+    "kind": "measured_animated_contact",
+    "measurement": {
+      "ballistic_contact_solution_present": false,
+      "ballistic_curve_disclosure_present": false,
+      "moving_transient_component_path_count": 0,
+      "ordered_transient_component_packet_frame_count": 6,
+      "point_intersects_unique_transient_source_morphology_peer": false,
+      "transient_component_absent_from_settled_frame": false,
+      "transient_component_path_frame_bound_reached": false,
+      "transient_component_path_seed_bound_reached": false,
+      "transient_component_path_seed_count": 1,
+      "transient_terminal_before_source_peer_along_horizontal_direction": false,
+      "transient_terminal_beyond_source_peer_along_horizontal_direction": false,
+      "transient_terminal_restored_component_differs_from_source_peer": false,
+      "transient_terminal_restored_persistent_contact_present": false,
+      "transient_terminal_unique_restored_persistent_component_present": false,
+      "unique_moving_transient_component_path_present": false,
+      "unique_transient_path_area_span_within_maximum_extent": false,
+      "unique_transient_path_consistent_noncolinear_turn": false,
+      "unique_transient_path_curved": false,
+      "unique_transient_path_distinct_position_count": 0,
+      "unique_transient_path_frame_count": 0,
+      "unique_transient_path_horizontal_direction_consistent": false,
+      "unique_transient_path_orientation_moment_signature_changes": false,
+      "unique_transient_path_palette_value_preserved": false,
+      "unique_transient_path_single_rise_to_fall_reversal": false,
+      "unique_transient_path_source_candidate_count": 0,
+      "unique_transient_path_source_candidate_present": false,
+      "unique_transient_path_source_morphology_peer_count": 0,
+      "unique_transient_path_source_morphology_peer_present": false,
+      "unique_transient_path_source_morphology_peer_value_unique": false,
+      "unique_transient_path_unique_nearest_continuation_present": false,
+      "unique_transient_path_vertical_velocity_changes": false
+    },
+    "mode": "invitation",
+    "model": null,
+    "packet_frames": 5,
+    "scalar_after": {
+      "scalar_fill_count": 8,
+      "scalar_fill_display_present": true,
+      "scalar_fill_end": 15,
+      "scalar_fill_index": 60,
+      "scalar_fill_orientation": "horizontal",
+      "scalar_fill_prefix_value": 1,
+      "scalar_fill_span": 15,
+      "scalar_fill_start": 1,
+      "scalar_fill_suffix_value": 2
+    },
+    "scalar_before": {
+      "scalar_fill_count": 9,
+      "scalar_fill_display_present": true,
+      "scalar_fill_end": 15,
+      "scalar_fill_index": 60,
+      "scalar_fill_orientation": "horizontal",
+      "scalar_fill_prefix_value": 1,
+      "scalar_fill_span": 15,
+      "scalar_fill_start": 1,
+      "scalar_fill_suffix_value": 2
+    },
+    "scalar_change": null,
+    "scope": "Ordered public raster measurement and provisional contact/disclosure calculus; no complete or universal physics asserted."
+  },
+  "nativeFinal": {
+    "kind": "stopped",
+    "reason": "frontier_unknown",
+    "actions": 7,
+    "levelsCompleted": 0
+  },
+  "sourceFailure": {
+    "completed_level_seconds": {},
+    "attention": null,
+    "status": "unresolved",
+    "reason": "frontier_unknown",
+    "actions": 7,
+    "level_actions": {
+      "1": 7
+    },
+    "initial": {
+      "backend": "browser_public_bridge",
+      "game_id": "browser-public",
+      "level": 1,
+      "levels_completed": 0,
+      "state": "NOT_FINISHED",
+      "step_index": 0,
+      "available_action_refs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "frame_hash": "27ba4cd855a64b3d"
+    },
+    "final": {
+      "backend": "browser_public_bridge",
+      "game_id": "browser-public",
+      "level": 1,
+      "levels_completed": 0,
+      "state": "NOT_FINISHED",
+      "step_index": 7,
+      "available_action_refs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "frame_hash": "2a3d4526501f6a7f"
+    },
+    "target_levels_completed": 3,
+    "main_objective": {
+      "id": "G_official_completion",
+      "things": [
+        "official_progress"
+      ],
+      "properties": {
+        "definition": "reach_requested_official_levels_completed",
+        "target_levels_completed": 3,
+        "visual_terminal_composition": "unknown"
+      },
+      "relations": [],
+      "role": "objective",
+      "knowledge_status": "explicit_user_objective_not_inferred_visual_role"
+    },
+    "visual_terminal_role": "unknown",
+    "decisions": [
+      {
+        "revision": 1,
+        "level": 1,
+        "actions": 1,
+        "released_actions": 1,
+        "operation": "OP18",
+        "first_action_ms": 6019.7065560023475,
+        "full_set_ms": 10605.540649001341,
+        "model_calls": 0,
+        "interruption": null,
+        "prediction_file_sha256": "158cf34699ab123f13958c08c88b0dec7757d700322291d0170a4c209796858d",
+        "route_refs": [
+          "run:epoch:1:revision:1:frame:27ba4cd855a64b3d"
+        ],
+        "step_expectation_statuses": [
+          "unknown"
+        ]
+      },
+      {
+        "revision": 2,
+        "level": 1,
+        "actions": 1,
+        "released_actions": 1,
+        "operation": "OP18",
+        "first_action_ms": 3963.117034993047,
+        "full_set_ms": 8565.722566992918,
+        "model_calls": 0,
+        "interruption": null,
+        "prediction_file_sha256": "a767cc5903869e1de82b5f0fa35b2b36f6e72554df328e43405638e842c832a8",
+        "route_refs": [
+          "run:epoch:1:revision:2:frame:f48aeb384f365c2a",
+          "run:epoch:1:revision:1:frame:27ba4cd855a64b3d"
+        ],
+        "step_expectation_statuses": [
+          "unknown"
+        ]
+      },
+      {
+        "revision": 3,
+        "level": 1,
+        "actions": 1,
+        "released_actions": 1,
+        "operation": "OP18",
+        "first_action_ms": 4770.183518001431,
+        "full_set_ms": 9612.811170998611,
+        "model_calls": 0,
+        "interruption": null,
+        "prediction_file_sha256": "ce0be0970d1dd50b187330b9773398ce1f8b72d23f522e288a43e31fb17386a7",
+        "route_refs": [
+          "run:epoch:1:revision:3:frame:786843d467525a9e",
+          "run:epoch:1:revision:2:frame:f48aeb384f365c2a"
+        ],
+        "step_expectation_statuses": [
+          "unknown"
+        ]
+      },
+      {
+        "revision": 4,
+        "level": 1,
+        "actions": 1,
+        "released_actions": 1,
+        "operation": "OP18",
+        "first_action_ms": 4673.620768000546,
+        "full_set_ms": 10145.07104400036,
+        "model_calls": 0,
+        "interruption": null,
+        "prediction_file_sha256": "1610b1fbb7e675149881641c8ceeda3d325b4662a8a63aa95ab508beb77469cf",
+        "route_refs": [
+          "run:epoch:1:revision:4:frame:a9883a56e9c80766",
+          "run:epoch:1:revision:3:frame:786843d467525a9e"
+        ],
+        "step_expectation_statuses": [
+          "unknown"
+        ]
+      },
+      {
+        "revision": 5,
+        "level": 1,
+        "actions": 1,
+        "released_actions": 1,
+        "operation": "OP18",
+        "first_action_ms": 6786.275770999055,
+        "full_set_ms": 17929.89687299996,
+        "model_calls": 0,
+        "interruption": null,
+        "prediction_file_sha256": "6410639ad57a0800cd121ba080580b875ed98062911aa3e647372982a7d38502",
+        "route_refs": [
+          "run:epoch:1:revision:5:frame:2bf57aeaf6d81911",
+          "run:epoch:1:revision:4:frame:a9883a56e9c80766"
+        ],
+        "step_expectation_statuses": [
+          "unknown"
+        ]
+      },
+      {
+        "revision": 6,
+        "level": 1,
+        "actions": 1,
+        "released_actions": 1,
+        "operation": "OP18",
+        "first_action_ms": 5919.7904679967905,
+        "full_set_ms": 12131.3117949976,
+        "model_calls": 0,
+        "interruption": null,
+        "prediction_file_sha256": "67aa52c11fec7a02bb2e14b03536b76049791a88c419c00f0a6923bc8bc48ee5",
+        "route_refs": [
+          "run:epoch:1:revision:6:frame:0454a8cfe43f777b",
+          "run:epoch:1:revision:5:frame:2bf57aeaf6d81911"
+        ],
+        "step_expectation_statuses": [
+          "unknown"
+        ]
+      },
+      {
+        "revision": 7,
+        "level": 1,
+        "actions": 1,
+        "released_actions": 1,
+        "operation": "OP18",
+        "first_action_ms": 5706.86263099924,
+        "full_set_ms": 13549.455432999821,
+        "model_calls": 0,
+        "interruption": null,
+        "prediction_file_sha256": "ef2dab51a26060c2b18bdfa45c1253d6fe7231aa73e77bcfa268ecc436eb6327",
+        "route_refs": [
+          "run:epoch:1:revision:7:frame:ed6639d6b8ac62c7"
+        ],
+        "step_expectation_statuses": [
+          "unknown"
+        ]
+      }
+    ],
+    "boundary_witnesses": [],
+    "goal_and_evidence_transfers": [],
+    "retained_rule_statuses": {
+      "candidate": 7
+    },
+    "usage_counts": {
+      "ObservedFrontier.__init__": 1,
+      "neutral_observer.measure": 8,
+      "ObservedFrontier.observe": 1,
+      "ObservedFrontier.drain_deltas": 8,
+      "Memory.get.main_objective": 8,
+      "GoalAccessAdapter.propose": 8,
+      "ObservedCompositionConstraint.propose.selected": 6,
+      "ObservedCompositionConstraint.before": 12,
+      "predict_candidate_rule": 21,
+      "SrcBridge.run.physical": 7,
+      "ObservedCompositionConstraint.after": 6,
+      "ViewFrontier.record": 7,
+      "ObservedCompositionConstraint.record": 6,
+      "DiscreteNetwork.observe": 7,
+      "GoalAccessMemory.record": 7,
+      "PointExperimentMemory.observe.point": 7,
+      "neutral_observer.delta": 7,
+      "validate_empirical_rule": 21,
+      "assess_transition": 7,
+      "assess_property_transition": 7,
+      "ObservedFrontier.record_transition": 7,
+      "SrcBridge.run.analysis": 21,
+      "Memory.get.empirical_registry": 7,
+      "SupportNavigation.propose.selected": 1,
+      "SupportNavigation.before": 2,
+      "SupportNavigation.after": 1,
+      "SupportNavigation.record": 1,
+      "SupportedLineConstraint.observe": 1,
+      "unknown_geometry.propose.selected": 1
+    },
+    "frontier_deltas_persisted": 15,
+    "frontier_delta_kinds": {
+      "observation": 8,
+      "transition": 7
+    },
+    "full_frontier_snapshots_during_actions": 0,
+    "common_property_rewrites": {
+      "invocations": 7,
+      "status": "assessed_same_epoch_pointed_transitions",
+      "retained_statuses": {}
+    },
+    "goal_access_sets": 0,
+    "goal_abstentions": {},
+    "goal_events": 0,
+    "support_navigation": {
+      "scored_witnesses": [],
+      "directions": {},
+      "control_introductions": [],
+      "service_edges": []
+    },
+    "addressed_material": {
+      "scored_witnesses": [],
+      "retained_hypotheses": null
+    },
+    "linked_preparation": {
+      "scored_witnesses": [],
+      "observed_effects": []
+    },
+    "constellation_cover": {
+      "scored_witnesses": [],
+      "observed_effects": []
+    },
+    "port_assembly": {
+      "scored_witnesses": [],
+      "observed_effects": []
+    },
+    "reduction_transport": {
+      "scored_witnesses": [],
+      "observed_effects": []
+    },
+    "band_transfer": {
+      "scored_witnesses": [],
+      "observed_effects": []
+    },
+    "slot_substitution": {
+      "scored_witnesses": [],
+      "observed_effects": []
+    },
+    "word_interface": {
+      "scored_witnesses": [],
+      "observed_effects": []
+    },
+    "branch_routing": {
+      "scored_witnesses": [],
+      "observed_effects": []
+    },
+    "code_program": {
+      "scored_witnesses": [],
+      "observed_effects": []
+    },
+    "motif_access": {
+      "scored_witnesses": [],
+      "observed_effects": []
+    },
+    "surface_program": {
+      "scored_witnesses": [],
+      "observed_effects": []
+    },
+    "containment": {
+      "scored_witnesses": [],
+      "observed_effects": []
+    },
+    "orbit_constraints": {
+      "scored_witnesses": [],
+      "observed_effects": []
+    },
+    "window_constraints": {
+      "scored_rule_witnesses": [],
+      "current_fit": null
+    },
+    "information_goal": "accessible_view_frontier",
+    "view_frontier": {
+      "enabled": true,
+      "current_epoch_reveals": [],
+      "current_epoch_modification_trials": 0
+    },
+    "retained_goal_model_count": 0,
+    "terminal_prior_models_loaded": 0,
+    "evidence_format": {
+      "manifest_schema": "v6.symbolic.evidence.v1",
+      "required_companion_database": "evidence-blobs.sqlite3",
+      "manifests": [
+        "predictions-before",
+        "transition"
+      ]
+    },
+    "continuous_src_store": true,
+    "model_loaded": false,
+    "oracle_read_at_runtime": false,
+    "production_v5_modified": false,
+    "elapsed_s": 96.5697457599963,
+    "latency_to_first_action": {
+      "n": 7,
+      "p50_ms": 5706.86263099924,
+      "p95_ms": 6786.275770999055,
+      "max_ms": 6786.275770999055
+    },
+    "qualification": "No neural selection. A reported victory requires official progression; unresolved visual goal and missing mechanism construction remain explicit. Admission and exact cap must be frozen before launch.",
+    "scope_limits": [
+      "Samples do not cover every pixel. Inside-component locations may have distinct unknown effects. Coordinates and occurrences are not interchangeable; if there are more than 250 visible occurrences some are unrepresented. ACTION7 and RESET have no admitted common contract.",
+      "unknown visual terminal role",
+      "multi-primitive prefixes are provisional observed paths, not complete-world safety certificates"
+    ]
+  }
+}

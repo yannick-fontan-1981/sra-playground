@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "weav-public-source-parity.json.gz",
+    "sha256": "3921646bf216aa12ed0f7d8c18b28442a33d48d98ad0ec1ac3811942a25dc8dd",
+    "bytes": 3153578
+  },
+  "parts": [
+    {
+      "file": "weav-public-source-parity.json.gz.part000",
+      "sha256": "fad2f0aa2ee0a810e389d166603a686ee861bcbd50a581fcf9780c7f2fa3b58f",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-public-source-parity.json.gz.part001",
+      "sha256": "0f04b46093c69770a08ad8b1f9378ec3b8ca0b91e1a72f6696fa7367460b30c1",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-public-source-parity.json.gz.part002",
+      "sha256": "4762331af8e9413f98a7dd72089d19fb82ddb8f637a9812dfdeaa36cd78d7944",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-public-source-parity.json.gz.part003",
+      "sha256": "bb238b3d46e1efb96bf98d3f1fa094effc02256745bf9a71f9227d4113bd69bb",
+      "bytes": 453578
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "logos-engine.native-campaign-selection.v1",
+  "game": "WEAV",
+  "targetLevels": 3,
+  "selectedAt": "2026-11-09T19:29:59.290607+00:00",
+  "switchDeadline": "2026-11-09T20:09:59.290607+00:00",
+  "maximumBlockedSeconds": 2400,
+  "previousResolution": "docs/migration/lot2b-evidence/final/moto-resolution.json",
+  "sourceManifestDigest": "17252e294212a1563b75037a0b0dd782c2ecbc8cc4e1997a4f2bb2103bdf4e8b",
+  "selectionBasis": "Public catalogue describes weaving horizontal and vertical threads to match a visible target. Test the existing generic native pattern/program providers on a distinct public interface; no game engine or solution is inspected.",
+  "clockPolicy": "Preserve this selection identity across diagnosis and retries; switch after 40 minutes blocked.",
+  "nextCandidate": "LS19"
+}

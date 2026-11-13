@@ -1,0 +1,27 @@
+{
+  "schema": "logos-engine.native.interrupted-campaign.v1",
+  "status": "interrupted",
+  "exitCode": 130,
+  "recordedAt": "2026-11-09T07:38:41.807954+00:00",
+  "sourceManifestDigest": "2b1337fb3c6d716e0c2ade77edfc320ee5a80336600acfb1fa446afa203a7924",
+  "reason": "Independent integration test found that native initial access preempted the already witnessed current obstructing-inset operator question. Stopped this attempt before editing; no success qualification is claimed.",
+  "actualPublicActions": 22,
+  "lastPublicState": {
+    "level": 1,
+    "levels_completed": 0,
+    "state": "NOT_FINISHED",
+    "step_index": 22
+  },
+  "evidence": {
+    "esct-output.log.gz": {
+      "path": "docs/migration/native-campaigns-v53/attempt4/esct-output.log.gz",
+      "sha256": "30da09155fbea7cbdbd443ebb17714bf5c472232442e32a6f8e641e3e35ce757",
+      "bytes": 2784
+    },
+    "esct-actual-public-journal.jsonl.gz": {
+      "path": "docs/migration/native-campaigns-v53/attempt4/esct-actual-public-journal.jsonl.gz",
+      "sha256": "421eb9cdc1849d8041504699818c764124ad693a584ef0e73b9e73a0cddc0ad5",
+      "bytes": 15300
+    }
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "schema": "logos-engine.lot9a.integration-declaration.v1",
+  "declaredAt": "2026-11-12T13:52:11.907266+00:00",
+  "purpose": "Bounded source-fidelity component and common-caller qualification, before any 9A publication or official performance claim",
+  "baseline": {
+    "publishedSiteVersion": 108,
+    "publishedNativeVersion": "0.67.0",
+    "sourceCommit": "8462204043aa368faa7df280d796bb706eb53b38"
+  },
+  "inputOrigin": "Independently constructed 64x64 original-source chart observations; no learned state injected in cold common scenarios",
+  "referenceExecution": "Separate original-source declaration managed by chart_reference, maximum300s including declared corrective attempts. No unannounced original rerun.",
+  "commonScenarios": [
+    "one exact registered owner and source ordering",
+    "cold source primary gain/loss/intermediate frame/local grant/next decision",
+    "cold contrary anchor withdrawal",
+    "active acquisition once and source/native restoration observed",
+    "passive foreign same and changed scene preserve source meaning",
+    "acquisition ablation does not manufacture learned continuation"
+  ],
+  "commonBounds": {
+    "maximumSessions": 8,
+    "maximumPhysicalReturns": 24,
+    "maximumActionsPerSession": 8,
+    "maximumTargetLevels": 3,
+    "syntheticOfficialSolvedLevelsClaimed": 0,
+    "fullProductionFactory": true,
+    "selectionGroupsFilteredForPositiveContribution": false
+  },
+  "commands": {
+    "typecheck": {
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "timeoutSeconds": 60,
+      "maximumAttempts": 3
+    },
+    "chart-native-contract": {
+      "command": [
+        "node",
+        "--test",
+        "tests/v6-chart-navigation-native-contract.test.ts"
+      ],
+      "timeoutSeconds": 45,
+      "maximumAttempts": 2
+    },
+    "chart-common": {
+      "command": [
+        "node",
+        "--test",
+        "tests/v6-chart-navigation-kernel.test.ts"
+      ],
+      "timeoutSeconds": 120,
+      "maximumAttempts": 2
+    },
+    "affected-regressions": {
+      "command": [
+        "node",
+        "--test",
+        "--test-concurrency=1",
+        "tests/v6-source-entry-routing.test.ts",
+        "tests/v6-native-checkpoint-integration.test.ts",
+        "tests/v6-native-runtime.test.ts",
+        "tests/v6-topological-recolor-kernel.test.ts",
+        "tests/v6-ordered-reaction-kernel.test.ts"
+      ],
+      "timeoutSeconds": 120,
+      "maximumAttempts": 2
+    },
+    "entry-audit": {
+      "command": [
+        "node",
+        "scripts/audit-v6-entry-points.ts"
+      ],
+      "timeoutSeconds": 20,
+      "maximumAttempts": 2
+    },
+    "migration-audit": {
+      "command": [
+        "python",
+        "scripts/audit-v6-migration.py"
+      ],
+      "timeoutSeconds": 45,
+      "maximumAttempts": 2
+    },
+    "build": {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "timeoutSeconds": 120,
+      "maximumAttempts": 2
+    }
+  },
+  "inputCapture": [
+    "src/**/*",
+    "tests/v6-chart-navigation*.test.ts",
+    "tests/v6-source-entry-routing.test.ts",
+    "tests/v6-native-checkpoint-integration.test.ts",
+    "tests/v6-native-runtime.test.ts",
+    "tests/v6-topological-recolor-kernel.test.ts",
+    "tests/v6-ordered-reaction-kernel.test.ts",
+    "docs/migration/lot9a-evidence/reference-01/reference.json.gz",
+    "scripts/audit-v6-entry-points.ts",
+    "scripts/audit-v6-migration.py",
+    "package.json",
+    "package-lock.json",
+    "tsconfig.json",
+    "migration/v6-transfer-map.json"
+  ],
+  "failures": "All attempts, raw logs, inputs before/after and cumulative durations retained. Corrective reruns only for observed defects. No sample removal.",
+  "globalLockRequired": false,
+  "officialPerformanceMeasurement": false,
+  "sitePublicationAuthorizedButNotPerformedByThisPlan": true,
+  "costAcceptance": {
+    "eachGlobalIncreaseStrictlyLessThanPercent": 10,
+    "phaseOverrunsAllowedWhenEachGlobalPasses": true,
+    "noCrossGameCompensation": true
+  },
+  "LKEY": "permanently_closed"
+}

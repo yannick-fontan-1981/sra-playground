@@ -1,0 +1,146 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "description": "Previous ten successful v54 recorded-public replays plus the actual v54 RE86 campaign. These files are replay-host inputs only; native decisions receive no expected command, learned state or baseline plan.",
+  "passiveOwnerRequirements": [
+    {
+      "prefixProperty": "reactionAcquisition",
+      "stateNode": "family_state:public_ordered_reaction",
+      "sourceStateKeys": ["epoch", "control", "packets", "attempts", "progress", "history"],
+      "checkpointFormat": "native.public_ordered_reaction.v1"
+    }
+  ],
+  "cases": [
+    {
+      "id": "stck",
+      "game": "STCK",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v54/final/regressions/stck-replay.json.gz",
+        "sha256": "0201079dbf89e804401da673de52202ea87c70297b85b5ee33b8a1415a84b63f"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+        "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+      }
+    },
+    {
+      "id": "catl",
+      "game": "CATL",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v54/final/regressions/catl-replay.json.gz",
+        "sha256": "e3ef339b5f830f3833278c26c1bf2decd2a9387ff8373be0aa545969c544d4e8"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v45/catl-public-trace.json.gz",
+        "sha256": "da5c6c585b0369f25c8aabd9a0ce05bacbccbf315059682e29d5d8fb7693e63e"
+      }
+    },
+    {
+      "id": "sele",
+      "game": "SELE",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v54/final/regressions/sele-replay.json.gz",
+        "sha256": "3c3422fd91c7d0f5ce13777f814424b5ee499c3c38e3101482d63931058aecc1"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v47/sele-public-trace.json.gz",
+        "sha256": "f62033bd4cc0d829ba9ffe36c9c3efd6b77a63bf1e5896f7a9b0a2694d49e3a2"
+      }
+    },
+    {
+      "id": "colm",
+      "game": "COLM",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v54/final/regressions/colm-replay.json.gz",
+        "sha256": "6de81e94b93cafa1a905ef94a1ba1bc70dbff2459e2cda55bf6cb4a2ac2d92b7"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v48/colm-public-trace.json.gz",
+        "sha256": "d3508414f956c35f58ef5364d14f91ea99a93c1b144ee476f4815b35a356bae7"
+      }
+    },
+    {
+      "id": "zipp",
+      "game": "ZIPP",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v54/final/regressions/zipp-replay.json.gz",
+        "sha256": "989c7f54528dfd9ed61ab3c026f3315bbc0496896768a1cf091ce133c515263e"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v48/zipp-public-trace.json.gz",
+        "sha256": "dca930510e267cdb3ae5098606da3441eecf14d362215f99197fc77023ab1917"
+      }
+    },
+    {
+      "id": "gril",
+      "game": "GRIL",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v54/final/regressions/gril-replay.json.gz",
+        "sha256": "c9a651607bb3d2d6f9b42c6d4869fc1c9e7d4474b9e1180b68c75c64f260da5a"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v49/gril-public-trace.json.gz",
+        "sha256": "dd72621fb8f650ee95ba907f61e9cb4675a7de75e3dd537a9dec7c3d5c47b6ae"
+      }
+    },
+    {
+      "id": "life",
+      "game": "LIFE",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v54/final/regressions/life-replay.json.gz",
+        "sha256": "2474e67c28363f0ad39544a9c1fca09855347d7901ef27a7f5542f65a18cbae8"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v50/life-public-trace-final.json.gz",
+        "sha256": "8c2e1b67af1c827d2a132c211d71b6e25158a5db1e9b236e4d0d92e912fe7c84"
+      }
+    },
+    {
+      "id": "valv",
+      "game": "VALV",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v54/final/regressions/valv-replay.json.gz",
+        "sha256": "9b2964251ba85a106e2ed9aa9f6414088d185b2fcd655c2ca025b2d815763916"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v51/valv-public-trace.json.gz",
+        "sha256": "63adf3bf04c0678699af265ba1808fd2eca96b4f255473ee9bb43ba8a078a87d"
+      }
+    },
+    {
+      "id": "gare",
+      "game": "GARE",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v54/final/regressions/gare-replay.json.gz",
+        "sha256": "dedf8a7bef4c3e09f62b53f82a95c7b6a585ba5417daf4e18cae69b8d03f3a12"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/gare-public-trace.json.gz",
+        "sha256": "f903e2211a211e203b18356ddc12b29a1e63e0b8ab25cedfe3f7b42e6cd2a7f5"
+      }
+    },
+    {
+      "id": "cn04",
+      "game": "CN04",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v54/final/regressions/cn04-replay.json.gz",
+        "sha256": "f0b73f0555cf3dbd2ad8cd68d695e47cf67b292b42e68415ac5256b22c9e1b1f"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/cn04-public-trace.json.gz",
+        "sha256": "f156b22facec2c20cbfe0886b9b51253a1bea9fff2c57f2281708fc9897cc03d"
+      }
+    },
+    {
+      "id": "re86",
+      "game": "RE86",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v54/final/re86-campaign.json.gz",
+        "sha256": "7413ae1125cd4353a7f68359ca4413523f4df485f1215a368c18329702b55f51"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v54/final/re86-public-trace.json.gz",
+        "sha256": "374bac54e821aa70304747f4cbd12626cab72d804ff690fe94914460dada6453"
+      }
+    }
+  ]
+}

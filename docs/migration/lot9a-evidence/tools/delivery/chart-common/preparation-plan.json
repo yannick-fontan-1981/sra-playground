@@ -1,0 +1,60 @@
+{
+  "schema": "logos-engine.lot9a.chart-common-preparation-plan.v1",
+  "runtimeExecutedDuringPreparation": false,
+  "rootDeclarationPath": "docs/migration/lot9a-evidence/delivery-final-068-01/common-declaration.json",
+  "captureCommand": ["node", "docs/migration/lot9a-evidence/tools/delivery/chart-common/capture.mjs", "--declaration", "{declaration}", "--output", "{stage}/common-capture-01/capture"],
+  "qualificationCommand": ["node", "docs/migration/lot9a-evidence/tools/delivery/chart-common/qualify.mjs", "--capture", "{capture}", "--output", "{stage}/common-qualify-01/review"],
+  "declarationTemplate": {
+    "schema": "logos-engine.lot9a.chart-common-declaration.v1",
+    "allowExecution": false,
+    "stageRoot": "docs/migration/lot9a-evidence/delivery-final-068-01",
+    "candidateNativePath": "docs/migration/lot9a-evidence/delivery-final-068-01/candidate-native.json",
+    "expectedNative": {"fileCount": 334, "digest": "e7a94fbc7cdcb19d8704b5d4120f27a858cbcd07e455084711510ee147f4e653"},
+    "expectedImplementation": "logos-engine.typescript.v6.native-migration/0.68.0",
+    "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "fixturePath": "docs/migration/lot9a-evidence/reference-01/reference.json.gz",
+    "fixtureSha256": "0770706db16249ac4ab1c7c8b9533d571f2fc2cdaeaf5dae2d990806e412cfe8",
+    "caseIds": ["primary", "contrary", "selected-acquisition-ablation", "passive-scene-equal", "passive-scene-changed"],
+    "sessionId": "chart:synthetic",
+    "budgets": {"targetLevels": 3, "levelActionCaps": [8, 8, 8], "maxActions": 8},
+    "limits": {
+      "expectedSessionsPerAttempt": 5,
+      "expectedPhysicalReturnsPerAttempt": 9,
+      "maximumAttempts": 2,
+      "maximumSessionStartsCumulative": 10,
+      "maximumPhysicalReturnsCumulative": 18,
+      "expectedCapturePointsPerAttempt": 52,
+      "maximumCapturePointsPerAttempt": 64,
+      "maximumRawBytesPerAttempt": 1073741824,
+      "timeoutSecondsPerCapture": 300,
+      "abortAfterSecondsPerCapture": 285,
+      "maximumCaptureSecondsCumulative": 600,
+      "timeoutSecondsPerQualification": 240,
+      "maximumQualificationAttempts": 2,
+      "maximumQualificationSecondsCumulative": 480
+    },
+    "inheritedFunctionalAccounting": {"initializedSessions": 10, "physicalReturns": 14},
+    "inputPins": [],
+    "correctiveAttemptRecordPath": null
+  },
+  "rootMustSet": [
+    "allowExecution=true only in the frozen execution declaration",
+    "inputPins: complete path/bytes/sha256 fingerprints for all files under this tool directory, candidate-native.json, fixture, common kernel test and original common/strategy declarations",
+    "correctiveAttemptRecordPath: null for attempt01; retained observed-defect correction record for attempt02"
+  ],
+  "cases": [
+    {"id":"primary","initializedSessions":1,"physicalReturns":3,"activeChartAcquisitions":3,"passiveChartAcquisitions":0,"suppressedChartAcquisitions":0,"controlledColdResets":2},
+    {"id":"contrary","initializedSessions":1,"physicalReturns":1,"activeChartAcquisitions":1,"passiveChartAcquisitions":0,"suppressedChartAcquisitions":0,"controlledColdResets":0},
+    {"id":"selected-acquisition-ablation","initializedSessions":1,"physicalReturns":1,"activeChartAcquisitions":0,"passiveChartAcquisitions":0,"suppressedChartAcquisitions":1,"controlledColdResets":0},
+    {"id":"passive-scene-equal","initializedSessions":1,"physicalReturns":2,"activeChartAcquisitions":1,"passiveChartAcquisitions":1,"suppressedChartAcquisitions":0,"controlledColdResets":0},
+    {"id":"passive-scene-changed","initializedSessions":1,"physicalReturns":2,"activeChartAcquisitions":1,"passiveChartAcquisitions":1,"suppressedChartAcquisitions":0,"controlledColdResets":0}
+  ],
+  "plannedAccounting": {"thisCapture":{"sessions":5,"physicalReturns":9},"thisToolMaximumAcrossTwoCaptures":{"sessions":10,"physicalReturns":18},"includingInheritedAtMaximum":{"sessions":20,"physicalReturns":32}},
+  "externalWorkFormsAccounting": {"ownedByThisTool":false,"plannedSessions":8,"plannedPhysicalReturns":62,"newStageCombinedPlanned":{"sessions":13,"physicalReturns":71},"combinedPlannedIncludingInherited":{"sessions":23,"physicalReturns":85}},
+  "runtimeBoundary": "NativeV6Runtime, complete unfiltered production factory; separate instance per case, same declared chart:synthetic observation identity for exact source comparison",
+  "sourceInputs": "Unchanged 64x64 fixture rasters and full returned frame packets; no padding, resizing, palette adaptation, reference rebinding, oracle or game execution",
+  "observability": "Complete native API arguments/results/snapshots/authorizations, current public packets, complete actual graph nodes+deltas and owner method calls before/after are retained. Graphs are compact-JSON SHA-addressed lossless gzip blobs, never selected subgraphs.",
+  "restoreProof": "Observe original restoreNative calls against the contemporaneous hydrated family_state root. Observe original source restore calls against their exact input and the chart_navigation_state fact committed by the same acquired return. Two explicit cold resets are classified separately from source-fact restorations.",
+  "interventions": ["primary: two declared cold resets between acquired returns, restored by the actual common graph on resume", "ablation: selected recordSource returns null without invoking the original, only for that declared case", "passive cases: supported set_family_enabled=false graph edit after a real cold gain; actual foreign return remains passively acquired"],
+  "scopeLimits": {"publicWorkerQualified":false,"publicServiceQualified":false,"publicTicketsQualified":false,"officialSolvedLevels":0,"officialPerformanceMeasurement":false,"globalLockRequired":false,"LKEY":"closed"}
+}

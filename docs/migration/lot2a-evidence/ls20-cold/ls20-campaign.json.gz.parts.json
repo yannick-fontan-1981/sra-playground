@@ -1,0 +1,136 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "ls20-campaign.json.gz",
+    "sha256": "200b3b4f9729891f43540047fb61241402ed40862530bec52b701ca383c25bb6",
+    "bytes": 22350769
+  },
+  "parts": [
+    {
+      "file": "ls20-campaign.json.gz.part000",
+      "sha256": "866fe6f2cb839434199d66ec068324426a748dd1cd30b7f7fde42cbf5836daaf",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part001",
+      "sha256": "eebb44d194885f1345a0c918a1a2a94ddf9dc7700888f6ba4d22305d2fe7c9b0",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part002",
+      "sha256": "07e3af6f509b3503c4ae8e82385d78494e59cba7fe90c8df73b38f82d10d4de1",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part003",
+      "sha256": "d1938cd35056e0ffe83f94d863c0f38352b94e5ddcbdd64089669073b1c4ba7e",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part004",
+      "sha256": "7604419ce7a6e8da859e49919cd14055232877400404b22a2f6f55d140a15e13",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part005",
+      "sha256": "968ddf11edb9c83bcd5a4aeeeb85f30e136296df63d88baab019a26e70946faf",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part006",
+      "sha256": "cd7e76b959ae52ffbb7a2120d3328a5cb2f152ef4e3324195b63246d581642cd",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part007",
+      "sha256": "8213f7314805a78d254ced9ca7183ad58a6e7258b7d87337a9c30331ddcf7172",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part008",
+      "sha256": "ec91702554e841121436da42209a3775898d5d36e3d69413e346535c73d9a877",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part009",
+      "sha256": "7d7f80d528cee8c5c083f616d76d15c11b89361fa3a6996034d3f6f4db6a8def",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part010",
+      "sha256": "3043fff545d240c6fd95a7a8a1abc4efed079f3a5a87d29b51853e3e95e6a218",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part011",
+      "sha256": "9291ce83e067ebd9eb3802c6b4e8b095a7c44659c8a06bdc70d7c84336b53f45",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part012",
+      "sha256": "5f540a24bc319792fff90b40f7d4066ad3cc2e2e6dda05743cd0160f4fa5d660",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part013",
+      "sha256": "65c9a6ee09a1da0313a17a0336a6f4b95230edb725c8faca3ca0d0adefcfb3f7",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part014",
+      "sha256": "fdb9bfbf2e82155d5fd8fc5d2b7516900c41da87f41f95ef3dbe9c9dd3f296ce",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part015",
+      "sha256": "e59df840bce2b9dc62b52b2659279c508be5106466e24b63c87e597df9bc9f1b",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part016",
+      "sha256": "c1e96ccad1a6314211d9c525d64a937ec4fa7d6ea1c41d781081880e4b5379cc",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part017",
+      "sha256": "6cc1e0ef83942fda491b24e88ce4aa1cf2f1953cc945e7abf343c7335b0fd7b8",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part018",
+      "sha256": "e98649578d232802a6372429d526b97fb3cb8bfdfae20b5135a5df559a8ecc19",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part019",
+      "sha256": "be0c0032268e3e296034add82d98f9b2cc3f97ed417703093cfc4ba7c012e179",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part020",
+      "sha256": "4382b4f83943b24e2c62a2372aab7b323eabd16c550499cccdb57c32258c088c",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part021",
+      "sha256": "fc27ded0d5c4e2221ed6b670629fcc4bd8bc26ba5503cd68875df1755888a36c",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part022",
+      "sha256": "9f4ca5835bc5efec8c46ce41775a9206f408079306f9888636df3f2fbada6f18",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part023",
+      "sha256": "ceabd91bdc93a4902ac572306b9031f4de28de6294896eed3a49f19576a2c211",
+      "bytes": 900000
+    },
+    {
+      "file": "ls20-campaign.json.gz.part024",
+      "sha256": "dd6916ce6b2ffb5d97d379bc8e9ec865319a81c5b27877aeae3fab03a7926601",
+      "bytes": 750769
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

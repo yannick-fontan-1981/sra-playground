@@ -1,0 +1,496 @@
+{
+  "module_id": "transport_supposition_c",
+  "declarations": [
+    {
+      "id": "policy.reactive_graph_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_independent_transport_premises"
+      ],
+      "applicability": [
+        "revisable_transport_question"
+      ],
+      "invariants": [
+        "no_act_or_confirmed_law",
+        "empty_before_not_safe_after",
+        "quantity_and_identity_transport_separate",
+        "front_outline_not_attachment",
+        "actual_receiver_not_handle_by_default",
+        "partial_geometry_not_total_order",
+        "all_examples_and_unknowns_retained"
+      ],
+      "falsifiers": [
+        "foreign_scope",
+        "unqualified_roles_or_identity",
+        "incomplete_inventory",
+        "work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "reactive_graph.retain_graph_step_and_reaction_question",
+        "reactive_graph.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.reactive_graph_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.retain_graph_step_and_reaction_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "landing_connector_graph_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.retain_graph_step_and_reaction_question"
+          }
+        },
+        {
+          "id": "projection.policy.reactive_graph_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.reactive_graph_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.retain_graph_step_and_reaction_question"
+            }
+          ],
+          "reason_ref": "reason.retain_graph_step_and_reaction_question"
+        },
+        {
+          "id": "tier.policy.reactive_graph_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_graph_step_and_reaction_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.transport_question_not_action_or_terminal_selection",
+      "reason_refs": [
+        "reason.retain_graph_step_and_reaction_question"
+      ]
+    },
+    {
+      "id": "policy.quantity_identity_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_independent_transport_premises"
+      ],
+      "applicability": [
+        "revisable_transport_question"
+      ],
+      "invariants": [
+        "no_act_or_confirmed_law",
+        "empty_before_not_safe_after",
+        "quantity_and_identity_transport_separate",
+        "front_outline_not_attachment",
+        "actual_receiver_not_handle_by_default",
+        "partial_geometry_not_total_order",
+        "all_examples_and_unknowns_retained"
+      ],
+      "falsifiers": [
+        "foreign_scope",
+        "unqualified_roles_or_identity",
+        "incomplete_inventory",
+        "work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "quantity_identity.retain_quantity_alignment_and_identity_transport_question",
+        "quantity_identity.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.quantity_identity_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "quantity_identity.retain_quantity_alignment_and_identity_transport_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tag_material_marker_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "distinct_actuator_passage_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "quantity_identity.retain_quantity_alignment_and_identity_transport_question"
+          }
+        },
+        {
+          "id": "projection.policy.quantity_identity_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "quantity_identity.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "quantity_identity.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.quantity_identity_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "quantity_identity.retain_quantity_alignment_and_identity_transport_question"
+            }
+          ],
+          "reason_ref": "reason.retain_quantity_alignment_and_identity_transport_question"
+        },
+        {
+          "id": "tier.policy.quantity_identity_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "quantity_identity.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_quantity_alignment_and_identity_transport_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.transport_question_not_action_or_terminal_selection",
+      "reason_refs": [
+        "reason.retain_quantity_alignment_and_identity_transport_question"
+      ]
+    },
+    {
+      "id": "policy.oriented_cargo_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_independent_transport_premises"
+      ],
+      "applicability": [
+        "revisable_transport_question"
+      ],
+      "invariants": [
+        "no_act_or_confirmed_law",
+        "empty_before_not_safe_after",
+        "quantity_and_identity_transport_separate",
+        "front_outline_not_attachment",
+        "actual_receiver_not_handle_by_default",
+        "partial_geometry_not_total_order",
+        "all_examples_and_unknowns_retained"
+      ],
+      "falsifiers": [
+        "foreign_scope",
+        "unqualified_roles_or_identity",
+        "incomplete_inventory",
+        "work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "oriented_cargo.retain_orientation_attachment_and_delivery_question",
+        "oriented_cargo.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.oriented_cargo_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "oriented_cargo.retain_orientation_attachment_and_delivery_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "repeated_cargo_compatible_receptacle_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "face_outline_roles_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "oriented_cargo.retain_orientation_attachment_and_delivery_question"
+          }
+        },
+        {
+          "id": "projection.policy.oriented_cargo_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "oriented_cargo.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "oriented_cargo.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.oriented_cargo_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "oriented_cargo.retain_orientation_attachment_and_delivery_question"
+            }
+          ],
+          "reason_ref": "reason.retain_orientation_attachment_and_delivery_question"
+        },
+        {
+          "id": "tier.policy.oriented_cargo_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "oriented_cargo.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_orientation_attachment_and_delivery_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.transport_question_not_action_or_terminal_selection",
+      "reason_refs": [
+        "reason.retain_orientation_attachment_and_delivery_question"
+      ]
+    },
+    {
+      "id": "policy.piercing_order_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_independent_transport_premises"
+      ],
+      "applicability": [
+        "revisable_transport_question"
+      ],
+      "invariants": [
+        "no_act_or_confirmed_law",
+        "empty_before_not_safe_after",
+        "quantity_and_identity_transport_separate",
+        "front_outline_not_attachment",
+        "actual_receiver_not_handle_by_default",
+        "partial_geometry_not_total_order",
+        "all_examples_and_unknowns_retained"
+      ],
+      "falsifiers": [
+        "foreign_scope",
+        "unqualified_roles_or_identity",
+        "incomplete_inventory",
+        "work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "piercing_order.retain_rooted_order_and_actual_receiver_question",
+        "piercing_order.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.piercing_order_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "piercing_order.retain_rooted_order_and_actual_receiver_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "rail_rod_pieces_rooted_reference_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "desired_support_scope_qualified",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "piercing_order.retain_rooted_order_and_actual_receiver_question"
+          }
+        },
+        {
+          "id": "projection.policy.piercing_order_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "piercing_order.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "piercing_order.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.piercing_order_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "piercing_order.retain_rooted_order_and_actual_receiver_question"
+            }
+          ],
+          "reason_ref": "reason.retain_rooted_order_and_actual_receiver_question"
+        },
+        {
+          "id": "tier.policy.piercing_order_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "piercing_order.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_rooted_order_and_actual_receiver_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.transport_question_not_action_or_terminal_selection",
+      "reason_refs": [
+        "reason.retain_rooted_order_and_actual_receiver_question"
+      ]
+    }
+  ]
+}

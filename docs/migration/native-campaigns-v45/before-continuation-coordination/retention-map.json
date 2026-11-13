@@ -1,0 +1,51 @@
+{
+  "schema": "logos-engine.v45.evidence-retention.v1",
+  "reason": "Retain the actual first frozen campaign, its failure and CATL victory before the explicit native selection correction. Original execution receipt paths identify their original capture locations; the bytes are preserved at the mapped paths.",
+  "files": [
+    {
+      "recordedPath": "docs/migration/native-campaigns-v45/source-manifest.json",
+      "retainedPath": "docs/migration/native-campaigns-v45/before-continuation-coordination/source-manifest.json",
+      "sha256": "bf76705ba7e9ff06411a94e6b1cf287b9a2f627df7ff0f04e700cab03658ae4c"
+    },
+    {
+      "recordedPath": "docs/migration/native-campaigns-v45/catl-six-levels.json",
+      "retainedPath": "docs/migration/native-campaigns-v45/before-continuation-coordination/catl-six-levels.json",
+      "sha256": "c7a27d0deb3aac51bd8e91dbc95484818587a8a4621d0750d30037887186c1ba"
+    },
+    {
+      "recordedPath": "docs/migration/native-campaigns-v45/catl-public-trace.json.gz",
+      "retainedPath": "docs/migration/native-campaigns-v45/before-continuation-coordination/catl-public-trace.json.gz",
+      "sha256": "eecb89d962afd69dbc884ef00cd77c9cf53a5d8cafe4998e1c2e9d06f507cd2a"
+    },
+    {
+      "recordedPath": "docs/migration/native-campaigns-v45/lf52-three-levels.json",
+      "retainedPath": "docs/migration/native-campaigns-v45/before-continuation-coordination/lf52-three-levels.json",
+      "sha256": "f9892b2364b5407c633a6bca20d71e6736587d34c9c7a1535cba232764e196c4"
+    },
+    {
+      "recordedPath": "docs/migration/native-campaigns-v45/lf52-public-trace.json.gz",
+      "retainedPath": "docs/migration/native-campaigns-v45/before-continuation-coordination/lf52-public-trace.json.gz",
+      "sha256": "90551f9277b3ad428933e93bf0b50aff2a33d92a2fc12250690d3814667f8626"
+    },
+    {
+      "recordedPath": "docs/migration/native-campaigns-v45/logs/execution-catl.json",
+      "retainedPath": "docs/migration/native-campaigns-v45/before-continuation-coordination/logs/execution-catl.json",
+      "sha256": "69f6ff12d212bfa60ddc130ba010cc8f9f0f5865a32f79e0bca1d2ce091104e9"
+    },
+    {
+      "recordedPath": "docs/migration/native-campaigns-v45/logs/campaign-catl.log.gz",
+      "retainedPath": "docs/migration/native-campaigns-v45/before-continuation-coordination/logs/campaign-catl.log.gz",
+      "sha256": "7a4fc2946af623107746946d22b6c227aa7bd996863b2d30c0742fd2619e42fc"
+    },
+    {
+      "recordedPath": "docs/migration/native-campaigns-v45/logs/execution-lf52.json",
+      "retainedPath": "docs/migration/native-campaigns-v45/before-continuation-coordination/logs/execution-lf52.json",
+      "sha256": "d0282ea5f8db334e1cdb29a6cf669d9f882a27aa90d4dad4eb4f1cc8c6d441ae"
+    },
+    {
+      "recordedPath": "docs/migration/native-campaigns-v45/logs/lf52-output.log.gz",
+      "retainedPath": "docs/migration/native-campaigns-v45/before-continuation-coordination/logs/lf52-output.log.gz",
+      "sha256": "3e03b01371fc299c44420c2f2e5bbfefbd58f16cb933959622f69147cda28b43"
+    }
+  ]
+}

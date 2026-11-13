@@ -1,0 +1,193 @@
+{
+  "module_id": "arc3.cargo_governing_query_b",
+  "declarations": [
+    {
+      "id": "policy.b_cargo_governing_query",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_current_terminal_goal_licenses_only_a_distinct_uncommitted_query_delta_preserving_original_authority"
+      ],
+      "configuration": {
+        "permitted_delta_fields": [
+          "desired_future",
+          "acceptance_predicates",
+          "parent_why",
+          "unbound_profile_desired_future",
+          "cargo_parent_binding",
+          "unbound_allowed_poses_by_cargo"
+        ]
+      },
+      "declared_alternative_refs": [
+        "cargo_query.bound",
+        "cargo_query.missing"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "cargo_query.bound": "rule.b_distinct_cargo_governing_query"
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_query.bound",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_query.bound"
+            },
+            {
+              "field": "governing_query_binding_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_current_terminal_goal_licenses_only_a_distinct_uncommitted_query_delta_preserving_original_authority",
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_query.missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_query.missing"
+            },
+            {
+              "field": "governing_query_binding_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_current_terminal_goal_licenses_only_a_distinct_uncommitted_query_delta_preserving_original_authority",
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_distinct_cargo_governing_query",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "current_canonical_terminal_future",
+        "explicit_current_uncommitted_original_draft",
+        "no_conflicting_qualified_semantic_fields"
+      ],
+      "applicability": [
+        "cargo_query_delta"
+      ],
+      "invariants": [
+        "retain_original_query_and_models",
+        "retain_original_role_and_goal_epistemic_status",
+        "no_replacement_of_an_executed_continuation"
+      ],
+      "falsifiers": [
+        "changed_draft_or_goal_support",
+        "conflicting_why_or_terminal_clause",
+        "source_scope_changed"
+      ],
+      "reason_refs": [
+        "reason_current_terminal_goal_licenses_only_a_distinct_uncommitted_query_delta_preserving_original_authority"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Distinct Source governing cargo query",
+          "required_fields": [
+            "output_term_ref",
+            "parent_payload"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "cargo.governing_query.b.v1",
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "parent_digest": "parent_digest",
+            "original_parent_digest": "original_parent_digest",
+            "original_parent": "original_parent",
+            "original_query_ref": "original_query_ref",
+            "new_query_ref": "new_query_ref",
+            "draft_digest": "draft_digest",
+            "draft_claim_digest": "draft_claim_digest",
+            "future_term_digest": "future_term_digest",
+            "future_claim_digest": "future_claim_digest",
+            "licensed_delta_fields": "licensed_delta_fields",
+            "original_goal_epistemic_status": "original_goal_epistemic_status",
+            "frame_ref": "frame_ref",
+            "value": "parent_payload"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_support_claim_ref}",
+          "predicate": "current_distinct_cargo_governing_query_bound",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{draft_ref}",
+            "{future_term_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}",
+            "{draft_ref}",
+            "{future_term_ref}"
+          ],
+          "required_fields": [
+            "output_support_claim_ref",
+            "parent_payload"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "level_scope_ref": "level_scope_ref",
+            "frame_ref": "frame_ref"
+          },
+          "attribute_bindings": {
+            "parent_digest": "parent_digest",
+            "original_parent_digest": "original_parent_digest",
+            "original_parent": "original_parent",
+            "original_query_ref": "original_query_ref",
+            "new_query_ref": "new_query_ref",
+            "draft_digest": "draft_digest",
+            "draft_claim_digest": "draft_claim_digest",
+            "future_term_digest": "future_term_digest",
+            "future_claim_digest": "future_claim_digest",
+            "licensed_delta_fields": "licensed_delta_fields",
+            "original_goal_epistemic_status": "original_goal_epistemic_status",
+            "frame_ref": "frame_ref"
+          },
+          "static_attributes": {
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    }
+  ]
+}

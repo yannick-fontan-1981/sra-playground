@@ -1,0 +1,41 @@
+{
+  "schema": "logos-engine.lot8b.final-identity-source-impact-review.v1",
+  "recordedAt": "2026-11-12T12:10:05.014193+00:00",
+  "status": "single_implementation_literal_delta_verified",
+  "historicalCheckpoint": "8918de66cee81b8d20a75a5780ea9aab075aba68",
+  "currentCheckpoint": "0f45ad517b9df98563bc03b79ee73dd3be10e362",
+  "nativeFiles": 331,
+  "oldNativeDigest": "3ff1d9ad56e22aedc0fee3a0da6a3af50a1da0bc14a0ba01cb38272ba85234be",
+  "newNativeDigest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+  "changedNativeFiles": [
+    "src/logos-engine/v6-native-runtime.ts"
+  ],
+  "oldRuntimeSha256": "cfa07cd87b939e528696c07486777ef597ca3e5033f80d5333e78ab6b1e0868e",
+  "newRuntimeSha256": "e68adc608d73ac8d19e41a01cb7f9834a014b17f7f71b26480a14c36b4025446",
+  "inverseDeclaredLiteralReplacementEqualsHistoricalBytes": true,
+  "algorithmicSourceDelta": false,
+  "runtimeIdentityImpact": [
+    "public snapshot implementation",
+    "runtime factory declaration-manifest sourceDigest",
+    "Kernel node origins and delta hashes and graph chain",
+    "nativeExecutionDigest",
+    "service authorization ticket sourceDigest and graph/execution binding"
+  ],
+  "historicalResultsNotRelabelled": [
+    "524tests_and_subtests_23modules",
+    "11recorded_regressions_187projections",
+    "oldcandidate_workform_graphs",
+    "oldsynthetic_branch_graphs"
+  ],
+  "finalRenewalsPlanned": [
+    "actual_factory_owner_inventory",
+    "candidate4STCK_SMLPforms_with_retained_exact_published_baseline_reader",
+    "5BranchRuntimechains_26returns_with_full_graph_reader",
+    "finalbuild_and_affected_audits"
+  ],
+  "newRuntimeExecutionsByReviewer": 0,
+  "newTestExecutionsByReviewer": 0,
+  "newGameExecutionsByReviewer": 0,
+  "newOracleExecutionsByReviewer": 0,
+  "independentToolReview": "Separate reviewer required; this author prepared derivatives and reviewed the production identity delta."
+}

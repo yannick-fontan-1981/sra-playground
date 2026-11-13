@@ -1,0 +1,37 @@
+{
+  "schema": "logos-engine.lot8b.final-publication-build-reconciliation.v1",
+  "recordedAt": "2026-11-12T12:45:24.850135+00:00",
+  "status": "unchanged_successful_build_eligible_for_packaging",
+  "headBeforePublication": "05dcb0fbfbddeb6c3963452dc6191b2bf1b9a441",
+  "sourceHeadAtBuild": "022cf5daa7adc88cbe1a64c83322b883cb6814cf",
+  "nativeSourceCommit": "0f45ad517b9df98563bc03b79ee73dd3be10e362",
+  "nativeDigest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+  "declaredBuildInputs": {
+    "path": "docs/migration/lot8b-evidence/final-version-067-01/build-01/inputs-before.json",
+    "bytes": 660182,
+    "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+  },
+  "verifiedInputCount": 2886,
+  "changedInputs": [],
+  "buildManifest": {
+    "path": "docs/migration/lot8b-evidence/final-version-067-01/build-manifest.json",
+    "bytes": 14948,
+    "sha256": "39065225503db229e2597ae2aa70822e72e05b93735aac2d6e33d70a07cd6d6b"
+  },
+  "verifiedBuildFileCount": 74,
+  "verifiedBuildBytes": 30121789,
+  "changedBuildFiles": [],
+  "undeclaredBuildFiles": [],
+  "sourceBuildDomainGitDiff": [],
+  "hostingManifest": {
+    "path": ".openai/hosting.json",
+    "bytes": 106,
+    "sha256": "15296ade4f5629e260fc2d338c4cb64efe4bbf356e4be2158458cf9541791705"
+  },
+  "siteHelperCommands": [],
+  "reasonForReusingBuild": "All 2886 previously declared build inputs and all74 output files remain byte-identical; only documentary evidence was added after the successful TypeScript/build command.",
+  "nativeExecution": false,
+  "gameExecution": false,
+  "globalLockAcquired": false,
+  "LKEY": "permanently_closed_no_individual_case_input_accessed"
+}

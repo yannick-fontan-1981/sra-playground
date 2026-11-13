@@ -1,0 +1,38 @@
+{
+  "schema": "logos-engine.lot8b.common-functional-command.v1",
+  "status": "failed",
+  "kind": "migration-audit",
+  "command": [
+    "python",
+    "-B",
+    "scripts/audit-v6-migration.py"
+  ],
+  "timeoutSeconds": 120,
+  "startedAt": "2026-11-12T04:30:08.767389+00:00",
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "headBefore": "2583d81d856c13295040db88f5df8b3a99906bdc",
+  "inputCount": 2443,
+  "globalLockAcquired": false,
+  "officialPerformanceMeasurement": false,
+  "gameExecution": false,
+  "gameReplay": false,
+  "published": false,
+  "finishedAt": "2026-11-12T04:30:14.381615+00:00",
+  "elapsedSeconds": 5.611957753000752,
+  "exitCode": 1,
+  "inputsUnchanged": true,
+  "changedInputPaths": [],
+  "log": {
+    "path": "docs/migration/lot8b-evidence/common-integration-01/migration-audit-01/output.log.gz",
+    "bytes": 342,
+    "sha256": "0c6bf25ad97258479e197bce2b1e0b5fbf6b5e0f6cf4a95255b6e073cbeec91d"
+  },
+  "testCounts": {},
+  "outputs": [
+    {
+      "path": "docs/migration/v6-coverage.json",
+      "bytes": 2577355,
+      "sha256": "f10ecef12c438539b34cb0f328dd5767244c3eae08efb56238771f3a8023b79c"
+    }
+  ]
+}

@@ -1,0 +1,1867 @@
+{
+  "schema": "logos-engine.v48.queued-public-component-comparison.v1",
+  "status": "passed",
+  "comparisonConclusion": "exact_complete_public_trajectory_through_third_boundary_and_complete_conditional_queue_evidence",
+  "recordedPublicTrajectoryEquivalent": true,
+  "originalFullCommonCallerParity": false,
+  "inputs": {
+    "sourceComponent": {
+      "path": "tests/fixtures/v6-queued-field-original-public.json.gz",
+      "sha256": "263131035dd831a77797ef467a0b45c177093afdc72e84000c9f87d798ab338b",
+      "bytes": 744670
+    },
+    "sourceCommonReference": {
+      "path": "tests/fixtures/v6-queued-field-reference.json.gz",
+      "sha256": "a8a75bcb34ec1dfc4a7d4e1a98c1a44264ffba6459766f40fd84802344380e3e",
+      "bytes": 419417
+    },
+    "nativeCampaign": {
+      "path": "docs/migration/native-campaigns-v48/colm-three-levels.json",
+      "sha256": "c323ea3cdf75927b544b190b9be8cf7e38c171e32ebb5d716f693dc1a3b303a0",
+      "bytes": 1523022
+    },
+    "nativeTrace": {
+      "path": "docs/migration/native-campaigns-v48/colm-public-trace.json.gz",
+      "sha256": "d3508414f956c35f58ef5364d14f91ea99a93c1b144ee476f4815b35a356bae7",
+      "bytes": 27249
+    },
+    "nativeExecution": {
+      "path": "docs/migration/native-campaigns-v48/logs/execution-colm.json",
+      "sha256": "044b643a9475909c17033cfafad2bf87806150340a360372f65d160ce175225e",
+      "bytes": 40125
+    },
+    "nativeSourceManifest": {
+      "path": "docs/migration/native-campaigns-v48/source-manifest.json",
+      "sha256": "8345a1c131a392da9febe7f561cf7d2cde6896694579a02825583989f637e3ba",
+      "bytes": 18973
+    }
+  },
+  "generator": {
+    "path": "scripts/compare-v48-queued-public-evidence.py",
+    "sha256": "a42f5f5aba6d685376f130e68853cf8c6ceb7e9a456670869cd1062dde9955a2",
+    "bytes": 22775
+  },
+  "nativeSourceDigest": "30f078d458bf7771e203f3af194ff0bd89fb8fa233d3d0c14cee32282551ea24",
+  "summary": {
+    "levelsCompleted": 3,
+    "sourceCommands": 45,
+    "nativeCommands": 45,
+    "rawExactCommands": 0,
+    "normalizedPublicCommands": 45,
+    "exactActionReferencesAndEffectParameters": 45,
+    "rawExactCompletePublicPackets": 46,
+    "animationFramesIncludingInitial": 125,
+    "sourcePrefixes": 21,
+    "nativePrefixes": 21,
+    "officialBoundaries": 3,
+    "sourceTargetLevels": 3,
+    "nativeTargetLevels": 3,
+    "sourceTargetReached": true,
+    "nativeTargetReached": true,
+    "officialState": "NOT_FINISHED",
+    "enteredLevel": 4,
+    "completeComparedPlans": 21,
+    "completeComparedAcquiredQueueEvents": 39,
+    "transitionsWithoutOwnQueueEvent": 6,
+    "sourceMutableAliasMutations": 0,
+    "callerAcquiredTransitions": 45,
+    "callerBoundaryReplays": 2,
+    "sessionCountPerCampaign": 1,
+    "comparedNumbers": 12372,
+    "exactIntegerValues": 12370,
+    "exactFractionalValues": 2,
+    "normalizedObservationRefs": 6862,
+    "normalizedDerivedReferences": 111
+  },
+  "sourceVerification": {
+    "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "sourceComponentImportedFiles": 773,
+    "sourceReferenceImportedFiles": 825,
+    "completePinnedManifestFilesVerified": 1786,
+    "sourceUnchanged": true,
+    "sourceAndNativeAssetHashesExact": true,
+    "generatorsVerified": true,
+    "originalParentProjectionDiagnosticRetained": true
+  },
+  "nativeVerification": {
+    "fileCount": 163,
+    "completeCurrentInventoryExact": true,
+    "beforeAndAfterExecutionManifestsExact": true,
+    "executionExitCode": 0,
+    "reportTraceAndExecutionLogHashesVerified": true,
+    "pythonAgentModules": [],
+    "sourceUnchangedDuringRun": true
+  },
+  "publicComparison": {
+    "fields": [
+      "frame_rows",
+      "frame_packet",
+      "level",
+      "levels_completed",
+      "state",
+      "step_index",
+      "available_action_refs",
+      "frame_hash"
+    ],
+    "packetNormalizations": [],
+    "commandNormalizations": [
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 1,
+        "source": {
+          "action_ref": "ACTION1"
+        },
+        "native": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 2,
+        "source": {
+          "action_ref": "ACTION1"
+        },
+        "native": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 3,
+        "source": {
+          "action_ref": "ACTION2"
+        },
+        "native": {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 4,
+        "source": {
+          "action_ref": "ACTION3"
+        },
+        "native": {
+          "action_ref": "ACTION3",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 5,
+        "source": {
+          "action_ref": "ACTION4"
+        },
+        "native": {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 6,
+        "source": {
+          "action_ref": "ACTION3"
+        },
+        "native": {
+          "action_ref": "ACTION3",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 7,
+        "source": {
+          "action_ref": "ACTION2"
+        },
+        "native": {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 8,
+        "source": {
+          "action_ref": "ACTION1"
+        },
+        "native": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 9,
+        "source": {
+          "action_ref": "ACTION2"
+        },
+        "native": {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 10,
+        "source": {
+          "action_ref": "ACTION2"
+        },
+        "native": {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 11,
+        "source": {
+          "action_ref": "ACTION1"
+        },
+        "native": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 12,
+        "source": {
+          "action_ref": "ACTION1"
+        },
+        "native": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 13,
+        "source": {
+          "action_ref": "ACTION3"
+        },
+        "native": {
+          "action_ref": "ACTION3",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 14,
+        "source": {
+          "action_ref": "ACTION2"
+        },
+        "native": {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 15,
+        "source": {
+          "action_ref": "ACTION3"
+        },
+        "native": {
+          "action_ref": "ACTION3",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 16,
+        "source": {
+          "action_ref": "ACTION3"
+        },
+        "native": {
+          "action_ref": "ACTION3",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 17,
+        "source": {
+          "action_ref": "ACTION2"
+        },
+        "native": {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 18,
+        "source": {
+          "action_ref": "ACTION1"
+        },
+        "native": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 19,
+        "source": {
+          "action_ref": "ACTION3"
+        },
+        "native": {
+          "action_ref": "ACTION3",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 20,
+        "source": {
+          "action_ref": "ACTION2"
+        },
+        "native": {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 21,
+        "source": {
+          "action_ref": "ACTION2"
+        },
+        "native": {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 22,
+        "source": {
+          "action_ref": "ACTION1"
+        },
+        "native": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 23,
+        "source": {
+          "action_ref": "ACTION1"
+        },
+        "native": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 24,
+        "source": {
+          "action_ref": "ACTION3"
+        },
+        "native": {
+          "action_ref": "ACTION3",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 25,
+        "source": {
+          "action_ref": "ACTION2"
+        },
+        "native": {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 26,
+        "source": {
+          "action_ref": "ACTION3"
+        },
+        "native": {
+          "action_ref": "ACTION3",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 27,
+        "source": {
+          "action_ref": "ACTION2"
+        },
+        "native": {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 28,
+        "source": {
+          "action_ref": "ACTION1"
+        },
+        "native": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 29,
+        "source": {
+          "action_ref": "ACTION1"
+        },
+        "native": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 30,
+        "source": {
+          "action_ref": "ACTION4"
+        },
+        "native": {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 31,
+        "source": {
+          "action_ref": "ACTION2"
+        },
+        "native": {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 32,
+        "source": {
+          "action_ref": "ACTION1"
+        },
+        "native": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 33,
+        "source": {
+          "action_ref": "ACTION1"
+        },
+        "native": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 34,
+        "source": {
+          "action_ref": "ACTION2"
+        },
+        "native": {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 35,
+        "source": {
+          "action_ref": "ACTION1"
+        },
+        "native": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 36,
+        "source": {
+          "action_ref": "ACTION3"
+        },
+        "native": {
+          "action_ref": "ACTION3",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 37,
+        "source": {
+          "action_ref": "ACTION2"
+        },
+        "native": {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 38,
+        "source": {
+          "action_ref": "ACTION3"
+        },
+        "native": {
+          "action_ref": "ACTION3",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 39,
+        "source": {
+          "action_ref": "ACTION3"
+        },
+        "native": {
+          "action_ref": "ACTION3",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 40,
+        "source": {
+          "action_ref": "ACTION2"
+        },
+        "native": {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 41,
+        "source": {
+          "action_ref": "ACTION4"
+        },
+        "native": {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 42,
+        "source": {
+          "action_ref": "ACTION2"
+        },
+        "native": {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 43,
+        "source": {
+          "action_ref": "ACTION2"
+        },
+        "native": {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 44,
+        "source": {
+          "action_ref": "ACTION3"
+        },
+        "native": {
+          "action_ref": "ACTION3",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      },
+      {
+        "kind": "empty_scalar_transport_payload",
+        "packetIndex": 45,
+        "source": {
+          "action_ref": "ACTION2"
+        },
+        "native": {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        "scope": "The source scalar command omits data and its host request carries null. Native public transport supplies an empty object; the acquired program still retains its exact raw scalar command. No coordinate or effect parameter changes."
+      }
+    ],
+    "checkpoints": [
+      {
+        "index": 0,
+        "commandRawExact": true,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "8493f9bb0c363b4ef2ac259a7d0f203da7873576eb2cea2dedbb6e9c1901935a",
+        "animationFrames": 1
+      },
+      {
+        "index": 1,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "1ab6e7e831514f24855ce8e2c592aa5e75ba6f0df0abd6a255e8ecc86d8f3fd5",
+        "animationFrames": 1
+      },
+      {
+        "index": 2,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "b05431b9f62eb4ca52e12ad91c03d6cd414f42a35f3853a6d83f10c0d98f2030",
+        "animationFrames": 1
+      },
+      {
+        "index": 3,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "46c171ce813523ffdf65a341074cc8521df5f9ac2ac73e7a2b2567bc9b404cf9",
+        "animationFrames": 9
+      },
+      {
+        "index": 4,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "9a4306cb87c0d204173108480649461571b08cddec49720f870204a07a27b1a9",
+        "animationFrames": 1
+      },
+      {
+        "index": 5,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "bee9a24f8a87ba517b80ada552fb3ac7e288ddbaa2306d61900c8ece305e9ebf",
+        "animationFrames": 1
+      },
+      {
+        "index": 6,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "de62754f2c8e100cdc74138c03cf5f2f6a1162ea3de8a5e7b709569aea228d22",
+        "animationFrames": 1
+      },
+      {
+        "index": 7,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "6d55165e3a885268f8e0c0a86aaf1888b9ae5c146a1df355a7233030f942985c",
+        "animationFrames": 7
+      },
+      {
+        "index": 8,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "fc3dad38a414954f73e786f2248c0f4a570e5a2f5bb27a1f6f5d5cae06060fab",
+        "animationFrames": 1
+      },
+      {
+        "index": 9,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "3a5c665de3d56a02a6c5b1b5af567948087ed3806dc9da39ed7d4f6535100165",
+        "animationFrames": 3
+      },
+      {
+        "index": 10,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "c9d90ca5d9d3090164aa628cb9b7bb254c4142c69aa7116281c79955afce9760",
+        "animationFrames": 5
+      },
+      {
+        "index": 11,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "6543f678abb96368d2fbc3e454ec6605945bff5158c0d7751833b5f88a17b22e",
+        "animationFrames": 1
+      },
+      {
+        "index": 12,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "55770fac612ff3c93c21f67f090c7e936ca156af4666c3527ac69a503180a966",
+        "animationFrames": 1
+      },
+      {
+        "index": 13,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "97a3f1d1f40ce92c28c533f34133025bf5f375fa7dd94c54cb39bd1f09c9090d",
+        "animationFrames": 1
+      },
+      {
+        "index": 14,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "bda9bdf3c5f911f871baa5bb2aa817231765969267f2f84604cf79717ceca3df",
+        "animationFrames": 3
+      },
+      {
+        "index": 15,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "01e95e9ed331ac62abb798402c4768cd478798c1a5a29132455ce8edf5a9c8fc",
+        "animationFrames": 1
+      },
+      {
+        "index": 16,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "670fbb17c9ce21e727f2d1664172994f5b13611d31329edc6e57feb4ad50df99",
+        "animationFrames": 1
+      },
+      {
+        "index": 17,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "ce667057bf355725952799fba422347a55d68e11983df6914197cc617d7dfcef",
+        "animationFrames": 8
+      },
+      {
+        "index": 18,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "cc4c079650dc4dfe3a0a6a8ece7916ebcbe539dc0de299e85775bc5348e991f3",
+        "animationFrames": 1
+      },
+      {
+        "index": 19,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "c568b33233c9aed33c9191a1fdb4b79300974e5663f42ebfad00d9531a8b56eb",
+        "animationFrames": 1
+      },
+      {
+        "index": 20,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "5e780fec55ae6237293e86f61228ea8b9d096ecba8342fb4df22c3791a31a537",
+        "animationFrames": 5
+      },
+      {
+        "index": 21,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "b5da06422b71d964aed33f4363da8ed12674ad1d8529ecfcb61d1544abbd2dac",
+        "animationFrames": 5
+      },
+      {
+        "index": 22,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "fe8a572f5cab5f2e8ccac415831d86843c431bd05ca788bd23e1ec6b207966ee",
+        "animationFrames": 1
+      },
+      {
+        "index": 23,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "e41bcd59544ebaf2ba2b9d3e24eb0817239733c735ec4c9cb67726cde06f7bbb",
+        "animationFrames": 1
+      },
+      {
+        "index": 24,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "d329d444596f480ea643a69dbc08d1362b17c4034b19669f44d0ac342148a85a",
+        "animationFrames": 1
+      },
+      {
+        "index": 25,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "edfad58a2a94c28999a960ea891a0c764a9255b374741f559d7011c7abad62b1",
+        "animationFrames": 7
+      },
+      {
+        "index": 26,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "e9b5275d1da4d9f6487a6736628081295976bb3a8074a627c96593405f541463",
+        "animationFrames": 1
+      },
+      {
+        "index": 27,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "8ddd27aefed5450a7c683ecd0ebaa7eb9a4e501a8ecd38d4828b8c404f0631a3",
+        "animationFrames": 3
+      },
+      {
+        "index": 28,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "53546fa986e645af99a97df4d963f3fb41bb9691537008ee2ef6885b0d53fa27",
+        "animationFrames": 1
+      },
+      {
+        "index": 29,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "39495f6fe8af38fac737b4d26bc5c6df61387d3b616ce84d31e8b3f4e27c6b55",
+        "animationFrames": 1
+      },
+      {
+        "index": 30,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "5a0ded6864396e771e221edf00b45e82cf19dedf58c9bc896a8ce30de5a4727f",
+        "animationFrames": 1
+      },
+      {
+        "index": 31,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "d2909eec816b67e677d2ba74ce4482d5c772aaf7c05ed58460c44f5793c6b352",
+        "animationFrames": 3
+      },
+      {
+        "index": 32,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "894cb2c68b02e76fd7ada2c65fb0bb59249a08d024d37e2f3ded7c19a9012911",
+        "animationFrames": 1
+      },
+      {
+        "index": 33,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "9f94ac1fd0fde0b2dbd198dbf1542e9ad7b6478d809615b4430101347ae4e316",
+        "animationFrames": 1
+      },
+      {
+        "index": 34,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "c3378adefd7539cedf00969444e538f18f57bf4e3d8a2b113e0651de9a60bd3c",
+        "animationFrames": 10
+      },
+      {
+        "index": 35,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "22b9de0033c13396ad5fc64ff0d34cefabb7008cf19856284b59a222564e136b",
+        "animationFrames": 1
+      },
+      {
+        "index": 36,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "91adaae78f3f124e434bfd5f1f5ebe55f3d92f661c4f8e364a599e5ecd080b87",
+        "animationFrames": 1
+      },
+      {
+        "index": 37,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "de5de9959f75b4ca22c3a84fbcddffd2e909a9c93dab0ff10a68ba41bfdae388",
+        "animationFrames": 5
+      },
+      {
+        "index": 38,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "39b2549e4c55151bdb3e20082c2b49c4674d00f06bc07ccb8821eeef9cc75d4e",
+        "animationFrames": 1
+      },
+      {
+        "index": 39,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "2adc421a1cb494452334568156a0ec4487305e872a62b45cefb4c72fdeca1f9e",
+        "animationFrames": 1
+      },
+      {
+        "index": 40,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "c4b7c5efb21c0985966bf6e398ca684cc41503a8b6b7850e3f9bb5091f95c4d8",
+        "animationFrames": 3
+      },
+      {
+        "index": 41,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "1745f46a8268b104a81b7209273c5c3ca1aedec793919dda707f1c8ed6532051",
+        "animationFrames": 1
+      },
+      {
+        "index": 42,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "d8573ba3b546510f28f054bf8cbfa113356cc34c41a614fa0f8232ecf53c5901",
+        "animationFrames": 3
+      },
+      {
+        "index": 43,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "05c070a72f32ce5381fb7d1d0be0133df6c3a0526089c4ae8373246c42e6da96",
+        "animationFrames": 7
+      },
+      {
+        "index": 44,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "5e353502d71dcec80a9291891bd223e2b23a7a0e8a5eb3517f096b40ce4f4807",
+        "animationFrames": 1
+      },
+      {
+        "index": 45,
+        "commandRawExact": false,
+        "commandEffectParametersExact": true,
+        "allPublicFieldsExact": true,
+        "canonicalPublicPacketSha256": "084445ad860fc851ee546892430cb4c3927ae5d939a7acab80a77fe6778fae42",
+        "animationFrames": 10
+      }
+    ],
+    "boundaryActions": [
+      17,
+      34,
+      45
+    ],
+    "perLevelActions": [
+      17,
+      17,
+      11
+    ]
+  },
+  "internalProjectionComparison": {
+    "absoluteNumericTolerance": 0,
+    "normalizations": [
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 0,
+        "source": "queued-field-reference:epoch:1:revision:1:frame:9d4a426749776752",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:1:revision:1:frame:9d4a426749776752"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 1,
+        "source": "queued-field-reference:epoch:1:revision:2:frame:c4261bf20122834f",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:1:revision:2:frame:c4261bf20122834f"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 2,
+        "source": "queued-field-reference:epoch:1:revision:3:frame:b66b7cf1c0d4dd39",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:1:revision:3:frame:b66b7cf1c0d4dd39"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 3,
+        "source": "queued-field-reference:epoch:1:revision:4:frame:f9ef56a0ac0c267c",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:1:revision:4:frame:f9ef56a0ac0c267c"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 4,
+        "source": "queued-field-reference:epoch:1:revision:5:frame:d895fc71512e2170",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:1:revision:5:frame:d895fc71512e2170"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 5,
+        "source": "queued-field-reference:epoch:1:revision:6:frame:f9ef56a0ac0c267c",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:1:revision:6:frame:f9ef56a0ac0c267c"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 6,
+        "source": "queued-field-reference:epoch:1:revision:7:frame:d895fc71512e2170",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:1:revision:7:frame:d895fc71512e2170"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 7,
+        "source": "queued-field-reference:epoch:1:revision:8:frame:6de747f8464d42d7",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:1:revision:8:frame:6de747f8464d42d7"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 8,
+        "source": "queued-field-reference:epoch:1:revision:9:frame:1be3436c2fa20bdc",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:1:revision:9:frame:1be3436c2fa20bdc"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 9,
+        "source": "queued-field-reference:epoch:1:revision:10:frame:8aa70e42587cdba1",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:1:revision:10:frame:8aa70e42587cdba1"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 10,
+        "source": "queued-field-reference:epoch:1:revision:11:frame:51402f75c5fd620e",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:1:revision:11:frame:51402f75c5fd620e"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 11,
+        "source": "queued-field-reference:epoch:1:revision:12:frame:a9656cea36426075",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:1:revision:12:frame:a9656cea36426075"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 12,
+        "source": "queued-field-reference:epoch:1:revision:13:frame:4a62460e98ad21c4",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:1:revision:13:frame:4a62460e98ad21c4"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 13,
+        "source": "queued-field-reference:epoch:1:revision:14:frame:87cbcb7d5a8bae1b",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:1:revision:14:frame:87cbcb7d5a8bae1b"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 14,
+        "source": "queued-field-reference:epoch:1:revision:15:frame:8d5de7256182110e",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:1:revision:15:frame:8d5de7256182110e"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 15,
+        "source": "queued-field-reference:epoch:1:revision:16:frame:71182f89eb985ce8",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:1:revision:16:frame:71182f89eb985ce8"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 16,
+        "source": "queued-field-reference:epoch:1:revision:17:frame:c477bcba16bcabe9",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:1:revision:17:frame:c477bcba16bcabe9"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 17,
+        "source": "queued-field-reference:epoch:2:revision:18:frame:9d0a05fb3ccfd371",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:2:revision:18:frame:9d0a05fb3ccfd371"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 18,
+        "source": "queued-field-reference:epoch:2:revision:19:frame:7cbbb491bd087919",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:2:revision:19:frame:7cbbb491bd087919"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 19,
+        "source": "queued-field-reference:epoch:2:revision:20:frame:6a7a97fe357a6926",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:2:revision:20:frame:6a7a97fe357a6926"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 20,
+        "source": "queued-field-reference:epoch:2:revision:21:frame:80b340319855d2e3",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:2:revision:21:frame:80b340319855d2e3"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 21,
+        "source": "queued-field-reference:epoch:2:revision:22:frame:8fe20e73f162f232",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:2:revision:22:frame:8fe20e73f162f232"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 22,
+        "source": "queued-field-reference:epoch:2:revision:23:frame:b24dc9002732968b",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:2:revision:23:frame:b24dc9002732968b"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 23,
+        "source": "queued-field-reference:epoch:2:revision:24:frame:29c56c01acd76fba",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:2:revision:24:frame:29c56c01acd76fba"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 24,
+        "source": "queued-field-reference:epoch:2:revision:25:frame:f60659b7558052ae",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:2:revision:25:frame:f60659b7558052ae"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 25,
+        "source": "queued-field-reference:epoch:2:revision:26:frame:6b68055942badc8f",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:2:revision:26:frame:6b68055942badc8f"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 26,
+        "source": "queued-field-reference:epoch:2:revision:27:frame:7b1670b6a66e1514",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:2:revision:27:frame:7b1670b6a66e1514"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 27,
+        "source": "queued-field-reference:epoch:2:revision:28:frame:d23a1709c47441bf",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:2:revision:28:frame:d23a1709c47441bf"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 28,
+        "source": "queued-field-reference:epoch:2:revision:29:frame:a414610067cdd900",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:2:revision:29:frame:a414610067cdd900"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 29,
+        "source": "queued-field-reference:epoch:2:revision:30:frame:90d339cbc4450e5e",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:2:revision:30:frame:90d339cbc4450e5e"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 30,
+        "source": "queued-field-reference:epoch:2:revision:31:frame:8a4de6f58356c8ef",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:2:revision:31:frame:8a4de6f58356c8ef"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 31,
+        "source": "queued-field-reference:epoch:2:revision:32:frame:d10210fc22cd9aef",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:2:revision:32:frame:d10210fc22cd9aef"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 32,
+        "source": "queued-field-reference:epoch:2:revision:33:frame:62ae76f5277e45fb",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:2:revision:33:frame:62ae76f5277e45fb"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 33,
+        "source": "queued-field-reference:epoch:2:revision:34:frame:d6a76aa48903c3d2",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:2:revision:34:frame:d6a76aa48903c3d2"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 34,
+        "source": "queued-field-reference:epoch:3:revision:35:frame:ec4ae69e7df5413b",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:3:revision:35:frame:ec4ae69e7df5413b"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 35,
+        "source": "queued-field-reference:epoch:3:revision:36:frame:c54f167f557b58b4",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:3:revision:36:frame:c54f167f557b58b4"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 36,
+        "source": "queued-field-reference:epoch:3:revision:37:frame:bbf4adf3baf850c5",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:3:revision:37:frame:bbf4adf3baf850c5"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 37,
+        "source": "queued-field-reference:epoch:3:revision:38:frame:39c8a91c79b9464e",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:3:revision:38:frame:39c8a91c79b9464e"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 38,
+        "source": "queued-field-reference:epoch:3:revision:39:frame:7918bbe691066ae1",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:3:revision:39:frame:7918bbe691066ae1"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 39,
+        "source": "queued-field-reference:epoch:3:revision:40:frame:b8bfad2a0dae3bd8",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:3:revision:40:frame:b8bfad2a0dae3bd8"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 40,
+        "source": "queued-field-reference:epoch:3:revision:41:frame:f4e2d58abba16ebd",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:3:revision:41:frame:f4e2d58abba16ebd"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 41,
+        "source": "queued-field-reference:epoch:3:revision:42:frame:815e9341e63ad3c3",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:3:revision:42:frame:815e9341e63ad3c3"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 42,
+        "source": "queued-field-reference:epoch:3:revision:43:frame:d8ed51c6f895aed9",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:3:revision:43:frame:d8ed51c6f895aed9"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 43,
+        "source": "queued-field-reference:epoch:3:revision:44:frame:9765756fe94338b2",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:3:revision:44:frame:9765756fe94338b2"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 44,
+        "source": "queued-field-reference:epoch:3:revision:45:frame:542485391da63c16",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:3:revision:45:frame:542485391da63c16"
+      },
+      {
+        "kind": "actual_observation_session_namespace",
+        "packetIndex": 45,
+        "source": "queued-field-reference:epoch:4:revision:46:frame:fb11e48abd05574b",
+        "native": "sra-v6-fdb6810b-8306-4946-be0e-9b1c4f730a3d:epoch:4:revision:46:frame:fb11e48abd05574b"
+      },
+      {
+        "kind": "independently_recomputed_model_digest",
+        "prefixIndex": 0,
+        "source": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "native": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_model_digest",
+        "prefixIndex": 1,
+        "source": "c953d7f510bc45c5f477c57e14c68fa0f420069ed31ddb51e58691bb411ed7bf",
+        "native": "6e5f1df3f0b6569657f702eb1bc3c3dfb535011c11aafbbc9a5a636befc4676c",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_model_digest",
+        "prefixIndex": 2,
+        "source": "60a8b21e012ad3df12179e314c7cc205cd308a5c31730e86b2a88cf3944ba02b",
+        "native": "eacadaf0fb6e866a8b7e90e7dc353813c2c725fc1a230758e26aebe7fc920a0d",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_model_digest",
+        "prefixIndex": 3,
+        "source": "02fff469f828321eab6ea0eb19550dd44d4317ffd9d40111ea0d682c9153a3a7",
+        "native": "6efaaf35486bb0d0c3908beac8f7064bfe138a5be2e55ca1546679af1de2ebba",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_model_digest",
+        "prefixIndex": 4,
+        "source": "5d7afd5acbfb4adb7267c61d5f3e44c2e2fe3b5d90b5c725bc1b8464cfa14674",
+        "native": "92eefc5495f790b48376c5959d2049a845ef51667f9d564c862314390d27bc2f",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_model_digest",
+        "prefixIndex": 5,
+        "source": "296838c570a950e08994653a30da86fb0ef44bb34d36ff7f19efd957c4226f6f",
+        "native": "d3e8065ab9aef0f80b2c350fc98cc99d195aed5582944d511398cf77e3d895bb",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_request_ref",
+        "prefixIndex": 5,
+        "source": "queue:99a13f3c6fd99a545e58c75f52bbb9df6e82dfdd406a16f2d3c725eaf4aa3df7",
+        "native": "queue:c15ec87ac822052d651a6e22870c5f7560dd93a50b8e3810f62e6e6a251797a1",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_model_digest",
+        "prefixIndex": 6,
+        "source": "7add002c127918947e9e593817d36abb04131065b6fa14d674afd29b22876c47",
+        "native": "8cb6157cfacf43815fd5565b563a76b1c45460ba8b4d040e85dc6f25f693c323",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_request_ref",
+        "prefixIndex": 6,
+        "source": "queue:3a15539f4b0fca1fd804214877c0b1edb2eee3dfd6bb2deb0316a4fef2041e05",
+        "native": "queue:4f3098d9d91cad0a697e0bdaa35f8b590811924e5fc5df3c001804a8e46bfd4f",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_model_digest",
+        "prefixIndex": 7,
+        "source": "8fc4b5954e8fd2438d8a5d238cd5f31e26ae7df7d6b8fd53d4211f86a0dd1f94",
+        "native": "bdf070fa133c4631bd623559fac81915f2b02f0da708b02fae8f16333a388b56",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_request_ref",
+        "prefixIndex": 7,
+        "source": "queue:7063c67f9580928017568426a5cc30f95b92df6dd0867fc2fe7e4ed007c52508",
+        "native": "queue:7683f876542b8b35e2e00def51095970034c70dcab1ad5e965b4bb1a0f42efa7",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_model_digest",
+        "prefixIndex": 8,
+        "source": "f66053f1c12e1936e62fbda203efea6202788f15678b1920167fca53fa913a04",
+        "native": "287ccd22bcb129a811f1752f258163539718da425b558e7c98c4161f7a940539",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_request_ref",
+        "prefixIndex": 8,
+        "source": "queue:50ad2f46e3b7bb124b9c6e1177f6040bee3cb7721fef1a38913c36a5b8eeab09",
+        "native": "queue:6317198d123acaed0af0714113d249dd85e65ead2cf29e6340f1521df83bb43b",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_model_digest",
+        "prefixIndex": 9,
+        "source": "fc5e31d57bf0070c48b72021f161c10c49ee589856855deaf7b2c635141c40d2",
+        "native": "c65073895647172b683feb6eff795fe7f23f01fc738a17bfa478946b40104699",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_request_ref",
+        "prefixIndex": 9,
+        "source": "queue:b1844a7d61b4a9a5d34f7a71ed9904800acc0cad3da1ea17606c96d7d7e1f14c",
+        "native": "queue:7d4e81d1da3ff91f17f20e6501cc5f771488b6c136adcd99a4bd40bbc6f5767a",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_model_digest",
+        "prefixIndex": 10,
+        "source": "75963f57f6ecb3408f6eb7c4333d4df8161e663740664ef52c8cd28490861ef5",
+        "native": "dda18688c99046138214e1f45f7951f264db77908945b6b976fea9e1ccbe9a7b",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_source_relation_digest",
+        "prefixIndex": 10,
+        "source": "f983e7e51e1002b168fbae62cceee14a54fdcd2ccf949204ed3fec709cfedffa",
+        "native": "75dca84a7e024ff2f8202ae4c1fa5e3b49b026bf653994230feeeb8ff9f34fa6",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_request_ref",
+        "prefixIndex": 10,
+        "source": "queue:d65945b7b68627842c07c31ae4e0390a8852e609d546575378a5f4028c5a40e4",
+        "native": "queue:8ae94d75ba9d7c9ad84dd737939c83d15f188ba2ff9fe65a5f37d91768f5733d",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_model_digest",
+        "prefixIndex": 11,
+        "source": "9bddc3d0243286c7d2153a7979d53ce5f80f85b8771c55a75cc5b371217970aa",
+        "native": "b3842d71c8748b2cff867f0260a481e0a65bc00f216d2ae693138e01e598c18e",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_request_ref",
+        "prefixIndex": 11,
+        "source": "queue:f46556aac8033a5f76052eddeddebf14318099024a5d1e0f3d5269e01fd4cffe",
+        "native": "queue:ac021f64b97795f43f0b22e45e0b5969a0ef755f4a2b7c5d2513577151de31f1",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_model_digest",
+        "prefixIndex": 12,
+        "source": "4edc04fc074b9f5718926e980b677158d2a175031f0e59b2a329d88a6a32be25",
+        "native": "3fd13b55a1b9caf2a18caab7acb00e81f1c0bc2bf0bcef412acf65b6b2feb94f",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_request_ref",
+        "prefixIndex": 12,
+        "source": "queue:9b46f34c63a744c384034919444c227f20e144d52bffca3ddaed99e38e90e0e6",
+        "native": "queue:ed3052b56c84a489cc2c4660819da92fda5604d83ed768aea3cacefb4e44b13a",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_model_digest",
+        "prefixIndex": 13,
+        "source": "787ac82b572113a234e9e00c26dab8b07c611bef927131f46e913dc758d9742e",
+        "native": "fab86dc48540f402e5337d63bb773b2eea13ca0bf93176417a2b438e364cd2bc",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_request_ref",
+        "prefixIndex": 13,
+        "source": "queue:0315fc82e4c9801900670981e9834431896c0d61299b4939e051dbb7ea00ebe8",
+        "native": "queue:4b315fc26f36c15b486e390e970313f0aeb63e23180dea1a7533d51d33e0c07e",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_model_digest",
+        "prefixIndex": 14,
+        "source": "cffd5a2fd8128a49049da03f4900f4b9e9b9aefbb9b2ad8653175b5656d4010c",
+        "native": "866b3959665280120dae2c6be87213443109b171de500d87054d14da932dc8cc",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_request_ref",
+        "prefixIndex": 14,
+        "source": "queue:67c9e037f527fadfcfc0a6d4b165f62d1ee4e6eab867ddc28d8db0dbf964d9bf",
+        "native": "queue:63074660db24f411c5f14e8c85ff8d7d862dcf3ab965936c97b74b67a9240615",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_model_digest",
+        "prefixIndex": 15,
+        "source": "06b64e9c2300e1de7260e46e4a6ba3d3633d888de4127d6ffbf7d5abfa0801db",
+        "native": "a8afa13ae47e4ba1fbb827853bafe08503090ba1fb2da983d60a8803c2165565",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_request_ref",
+        "prefixIndex": 15,
+        "source": "queue:2fe5b24262a084bee2f93681dc9f4ada4ad43c21097a7d8319860a3b0e80af7f",
+        "native": "queue:a1a55af431672a20943ef78e334ee76eb900693a63f51e60561a95442e0e1dec",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_model_digest",
+        "prefixIndex": 16,
+        "source": "4c721db4cd8ae6839b3388fadb12e03538a106492fb27d358ce7cef7e0ce0d1f",
+        "native": "2595f34f39ae1b0beb181f21fc3598e42e2a18fd91a18ff6b3810c246ab22c62",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_source_relation_digest",
+        "prefixIndex": 16,
+        "source": "0fb299cf793629cb6ef0aaeb7ccc9a2355bc20d141ff54f453575f29c0cee48f",
+        "native": "f2e2bf679c65f410d43ad7f6cf7525a6574a7bf026f8b6b53e63eac138beaaea",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_request_ref",
+        "prefixIndex": 16,
+        "source": "queue:066f54f3760bac38b7888ea298e06867421d80371a8a3e5771bef08587140f86",
+        "native": "queue:0bea838161484fcf5786faf1d72758585c8740812b0a74aada0985bfb4e31b23",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_model_digest",
+        "prefixIndex": 17,
+        "source": "9f79b4e1f0528269de8cc0f52f9306315e36872565d63910fe6a35112c187b42",
+        "native": "e00d16369ade8b13862e680a3ef9c868ef527b666fe08e5bb623183106b8ebc9",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_request_ref",
+        "prefixIndex": 17,
+        "source": "queue:1460f7383b7dff3b122a6e87fe699dbdc6b6f040f373832dc64e158b066b566f",
+        "native": "queue:1bbf70e64b07c03c404a4215885e16db414a45e07d7b3fe4a1eaf8c4b194d27d",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_model_digest",
+        "prefixIndex": 18,
+        "source": "8c64476cad73c806023cb288c4f453d2d0b10f66613dd8f5aba89a2662c92c94",
+        "native": "3fef20ca9c49fe4a733060038427f698c45b984b174ac8abf14dfaf4b43e6f17",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_request_ref",
+        "prefixIndex": 18,
+        "source": "queue:d07d5f361e17f7e30512fd77df97a536ecf949773fa32be0bb6314a9811c6a7b",
+        "native": "queue:1055852af16484639ec570cc7a83dff8106e9b08b80715f968623ab71f2a9379",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_model_digest",
+        "prefixIndex": 19,
+        "source": "9e213f66c3dc74a86a91b868e110e73b7c15cace173c97770cb759cb86cffde4",
+        "native": "98ac877205c7821dacef172661acfce1568cd1cc488905d45b1b6d27a941dac9",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_request_ref",
+        "prefixIndex": 19,
+        "source": "queue:fe85d385d2ecb5e176206abea12887676d016443c25025366e492fb23dafecf0",
+        "native": "queue:6cc69046ca67a3bf744705da585adf95d9d8e9764182cc0b82ab07612dd432d0",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_model_digest",
+        "prefixIndex": 20,
+        "source": "3b8715da2bda48c92026f61fb23cea2de3439d0b9cf3c543b6ebd4265ec5c163",
+        "native": "766102c2162adac52e27e3bd7e826170753c145033fa776b643d79b88ec2ee3a",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      },
+      {
+        "kind": "independently_recomputed_request_ref",
+        "prefixIndex": 20,
+        "source": "queue:9cb5467592a7f5661690c40ded195f2b31ed23cac005ddf7f9cdebe1a82c5906",
+        "native": "queue:6ad7395d761c1b7370c13b847fb0d160b19aa9030579745414f841d1b69cffdd",
+        "scope": "Both identifiers are independently recomputed from their complete retained payload. Payload equality is checked with the explicit observation namespace mapping; no state, command, rank or conditional alternative is omitted."
+      }
+    ],
+    "prefixes": [
+      {
+        "prefixIndex": 0,
+        "firstAction": 1,
+        "acquiredActions": 1,
+        "rawSceneExact": true,
+        "rawPlannedCommandsExact": true,
+        "completePlanEquivalent": true,
+        "everyAcquiredOwnEventEquivalent": true,
+        "ownEventsAcquired": 1,
+        "ownEventsRetained": 1,
+        "nativePlanSha256": "ac144b11eb11cd87e813e6f7d30c288f73f753b97056301e2087e7530ef6659c",
+        "nativeAcquiredEventsSha256": "e84d2d415d25d1fab052f5796741b300d4c97650812aa881b36a8221398897dc"
+      },
+      {
+        "prefixIndex": 1,
+        "firstAction": 2,
+        "acquiredActions": 1,
+        "rawSceneExact": true,
+        "rawPlannedCommandsExact": true,
+        "completePlanEquivalent": true,
+        "everyAcquiredOwnEventEquivalent": true,
+        "ownEventsAcquired": 1,
+        "ownEventsRetained": 2,
+        "nativePlanSha256": "c24ccd9b1bc1add565b3a57cfd37eb2cb1947697f7bf7c7c21b2974df7f25bbb",
+        "nativeAcquiredEventsSha256": "50ac5b1643b7ff03813ce204f67a6994c06073512ded48ba73ab11583ee3ff98"
+      },
+      {
+        "prefixIndex": 2,
+        "firstAction": 3,
+        "acquiredActions": 1,
+        "rawSceneExact": true,
+        "rawPlannedCommandsExact": true,
+        "completePlanEquivalent": true,
+        "everyAcquiredOwnEventEquivalent": true,
+        "ownEventsAcquired": 1,
+        "ownEventsRetained": 3,
+        "nativePlanSha256": "a475b60db9b1d8e31f193efe55b7f61abf01c3525cf7727dee0dd672803701f9",
+        "nativeAcquiredEventsSha256": "ff5b5870a3ae72f0bd976ca1e9ebd0673053db74d4f345c7348a5876a8f0256c"
+      },
+      {
+        "prefixIndex": 3,
+        "firstAction": 4,
+        "acquiredActions": 1,
+        "rawSceneExact": true,
+        "rawPlannedCommandsExact": true,
+        "completePlanEquivalent": true,
+        "everyAcquiredOwnEventEquivalent": true,
+        "ownEventsAcquired": 1,
+        "ownEventsRetained": 4,
+        "nativePlanSha256": "b1ef48b11ccd7d4a2be21a8caf0a0ea913e8450ee13cde171c1b315038bcb4c1",
+        "nativeAcquiredEventsSha256": "d7aa248aaf7f84e6de0b6666ef39315190fd0698948f30e6a12649c78c4f43a1"
+      },
+      {
+        "prefixIndex": 4,
+        "firstAction": 5,
+        "acquiredActions": 1,
+        "rawSceneExact": true,
+        "rawPlannedCommandsExact": true,
+        "completePlanEquivalent": true,
+        "everyAcquiredOwnEventEquivalent": true,
+        "ownEventsAcquired": 1,
+        "ownEventsRetained": 5,
+        "nativePlanSha256": "90d01f1487b8f5c0378a75ea9093e9adf6386fb8d065dc37d4fdd9a6acb1a303",
+        "nativeAcquiredEventsSha256": "a9b22d1f0f2e2994589feb27cbc322d3c372cf8ded6ac3f83256d4f68417a993"
+      },
+      {
+        "prefixIndex": 5,
+        "firstAction": 6,
+        "acquiredActions": 2,
+        "rawSceneExact": true,
+        "rawPlannedCommandsExact": true,
+        "completePlanEquivalent": true,
+        "everyAcquiredOwnEventEquivalent": true,
+        "ownEventsAcquired": 2,
+        "ownEventsRetained": 7,
+        "nativePlanSha256": "7a97c3a3ac9e8bef0d3b31b4291f3c3a80e4848987ad15654c1c2298c64c4197",
+        "nativeAcquiredEventsSha256": "5f0191bdf63bc836f8ae04b7ff5bda7eaed795bebdbf20be637582f406ebbb27"
+      },
+      {
+        "prefixIndex": 6,
+        "firstAction": 8,
+        "acquiredActions": 2,
+        "rawSceneExact": true,
+        "rawPlannedCommandsExact": true,
+        "completePlanEquivalent": true,
+        "everyAcquiredOwnEventEquivalent": true,
+        "ownEventsAcquired": 2,
+        "ownEventsRetained": 9,
+        "nativePlanSha256": "6c47cd864340ebd47efe7ecd83048c415cb6b5d8bce828e1d1847d378374844a",
+        "nativeAcquiredEventsSha256": "0084681b7e86c649c48d56ca987d9651dea16d03958fbfd73b649975523cc524"
+      },
+      {
+        "prefixIndex": 7,
+        "firstAction": 10,
+        "acquiredActions": 1,
+        "rawSceneExact": true,
+        "rawPlannedCommandsExact": true,
+        "completePlanEquivalent": true,
+        "everyAcquiredOwnEventEquivalent": true,
+        "ownEventsAcquired": 1,
+        "ownEventsRetained": 10,
+        "nativePlanSha256": "8b3426e009f4358bd0b73056ce46015b3da3d2099719faa5ac0e8c43e04184db",
+        "nativeAcquiredEventsSha256": "e1e2fe03cdf56d78c824c4af4c34e398ffd4cff2462ff7765f72c7d2a397bb0c"
+      },
+      {
+        "prefixIndex": 8,
+        "firstAction": 11,
+        "acquiredActions": 4,
+        "rawSceneExact": true,
+        "rawPlannedCommandsExact": true,
+        "completePlanEquivalent": true,
+        "everyAcquiredOwnEventEquivalent": true,
+        "ownEventsAcquired": 4,
+        "ownEventsRetained": 14,
+        "nativePlanSha256": "d3050aa6a92eca68b441bbe48a46bbf5a83c1d026dcf8565d8bef70e55c15a3e",
+        "nativeAcquiredEventsSha256": "4c32ef0fcde60bb4458631b3f273a13745a34ad750e2d607a6f0d1a614f096f9"
+      },
+      {
+        "prefixIndex": 9,
+        "firstAction": 15,
+        "acquiredActions": 3,
+        "rawSceneExact": true,
+        "rawPlannedCommandsExact": true,
+        "completePlanEquivalent": true,
+        "everyAcquiredOwnEventEquivalent": true,
+        "ownEventsAcquired": 0,
+        "ownEventsRetained": 14,
+        "nativePlanSha256": "b5007a5fbf7e6f222f21d27b8af95978ba756eb555cae0ea49aaccfb64b8cedd",
+        "nativeAcquiredEventsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "prefixIndex": 10,
+        "firstAction": 18,
+        "acquiredActions": 3,
+        "rawSceneExact": true,
+        "rawPlannedCommandsExact": true,
+        "completePlanEquivalent": true,
+        "everyAcquiredOwnEventEquivalent": true,
+        "ownEventsAcquired": 3,
+        "ownEventsRetained": 17,
+        "nativePlanSha256": "7a734a524228e05646f8c7b783d928f7db52b2812ee0f38b98f1dd3558689244",
+        "nativeAcquiredEventsSha256": "71799dd820f217de96c1e7df4b7de714b0f3bbc2d6cf963f84382a8d5ff18a44"
+      },
+      {
+        "prefixIndex": 11,
+        "firstAction": 21,
+        "acquiredActions": 1,
+        "rawSceneExact": true,
+        "rawPlannedCommandsExact": true,
+        "completePlanEquivalent": true,
+        "everyAcquiredOwnEventEquivalent": true,
+        "ownEventsAcquired": 1,
+        "ownEventsRetained": 18,
+        "nativePlanSha256": "509694edee80257d6587bd519fac5ecb031a14089f7363c7181645371a25daf4",
+        "nativeAcquiredEventsSha256": "f1a335e262c8d8e2791fa8aeba5721cbeb62d20fd0112326d006258cf0c83ed8"
+      },
+      {
+        "prefixIndex": 12,
+        "firstAction": 22,
+        "acquiredActions": 4,
+        "rawSceneExact": true,
+        "rawPlannedCommandsExact": true,
+        "completePlanEquivalent": true,
+        "everyAcquiredOwnEventEquivalent": true,
+        "ownEventsAcquired": 4,
+        "ownEventsRetained": 22,
+        "nativePlanSha256": "2d873ab5a5414f2b00ee183463a7a9881546d82349de7aeeb1ef15449200fe81",
+        "nativeAcquiredEventsSha256": "3aa786dd1410ac7499e7b17ff0042815849c91314a51c7a14ba1f4b1a953b63e"
+      },
+      {
+        "prefixIndex": 13,
+        "firstAction": 26,
+        "acquiredActions": 2,
+        "rawSceneExact": true,
+        "rawPlannedCommandsExact": true,
+        "completePlanEquivalent": true,
+        "everyAcquiredOwnEventEquivalent": true,
+        "ownEventsAcquired": 2,
+        "ownEventsRetained": 24,
+        "nativePlanSha256": "8b0b33c121d25afa16cc1d04ee0ad2b9eb74d3c8a7a34d20e968df665195177f",
+        "nativeAcquiredEventsSha256": "2c487968749793009b2aa68f67f3c89550404f1ee3c5ab9726e5cd54d680cccf"
+      },
+      {
+        "prefixIndex": 14,
+        "firstAction": 28,
+        "acquiredActions": 4,
+        "rawSceneExact": true,
+        "rawPlannedCommandsExact": true,
+        "completePlanEquivalent": true,
+        "everyAcquiredOwnEventEquivalent": true,
+        "ownEventsAcquired": 4,
+        "ownEventsRetained": 28,
+        "nativePlanSha256": "1eb985a819a8589c7fc6606c28b262d50f5c688d5e257b3122e42f75b38ec0eb",
+        "nativeAcquiredEventsSha256": "c4e7748bbe90e644b6498fac22aa5a6b542e8e6c13b68ed76a124dea6a87a7cf"
+      },
+      {
+        "prefixIndex": 15,
+        "firstAction": 32,
+        "acquiredActions": 3,
+        "rawSceneExact": true,
+        "rawPlannedCommandsExact": true,
+        "completePlanEquivalent": true,
+        "everyAcquiredOwnEventEquivalent": true,
+        "ownEventsAcquired": 0,
+        "ownEventsRetained": 28,
+        "nativePlanSha256": "611dd2909cd8a92be6c7750c6ecf5b34da045ac5a6051606847e3d55232bc6e9",
+        "nativeAcquiredEventsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "prefixIndex": 16,
+        "firstAction": 35,
+        "acquiredActions": 3,
+        "rawSceneExact": true,
+        "rawPlannedCommandsExact": true,
+        "completePlanEquivalent": true,
+        "everyAcquiredOwnEventEquivalent": true,
+        "ownEventsAcquired": 3,
+        "ownEventsRetained": 31,
+        "nativePlanSha256": "2e47cff765724e140ce0c66c3958317c28acf7939facb2cb16785150278efffc",
+        "nativeAcquiredEventsSha256": "688b8ba7f9a2754c3ad0e9af6f930143f890e81131d0c6af5cb0138ceac5c57d"
+      },
+      {
+        "prefixIndex": 17,
+        "firstAction": 38,
+        "acquiredActions": 3,
+        "rawSceneExact": true,
+        "rawPlannedCommandsExact": true,
+        "completePlanEquivalent": true,
+        "everyAcquiredOwnEventEquivalent": true,
+        "ownEventsAcquired": 3,
+        "ownEventsRetained": 34,
+        "nativePlanSha256": "426f7acd63bbe31cbfae9eac8d2334658570c312d7e52535ae01840bc8b2b249",
+        "nativeAcquiredEventsSha256": "d0ba6cdd0b17160a385ac07eff663388636917c01f0ae0f5235294bf6552a579"
+      },
+      {
+        "prefixIndex": 18,
+        "firstAction": 41,
+        "acquiredActions": 2,
+        "rawSceneExact": true,
+        "rawPlannedCommandsExact": true,
+        "completePlanEquivalent": true,
+        "everyAcquiredOwnEventEquivalent": true,
+        "ownEventsAcquired": 2,
+        "ownEventsRetained": 36,
+        "nativePlanSha256": "765a0d901be99099d463c07e6cbb252d5e910e7c3ebc0b07ff233a5d85f73a6a",
+        "nativeAcquiredEventsSha256": "44bd91c7bf4e14a842f2d0b5b143eeed8b78912db2889bc3497437dd1ebcd2be"
+      },
+      {
+        "prefixIndex": 19,
+        "firstAction": 43,
+        "acquiredActions": 1,
+        "rawSceneExact": true,
+        "rawPlannedCommandsExact": true,
+        "completePlanEquivalent": true,
+        "everyAcquiredOwnEventEquivalent": true,
+        "ownEventsAcquired": 1,
+        "ownEventsRetained": 37,
+        "nativePlanSha256": "8a199de72b1bfa8654bbd445d2df05efc692bb5c0615bb02db40bd590d0cb524",
+        "nativeAcquiredEventsSha256": "c7706638f791a8d9df0c4b61807fe5868568d25d980b25c202c281e60f35e28f"
+      },
+      {
+        "prefixIndex": 20,
+        "firstAction": 44,
+        "acquiredActions": 2,
+        "rawSceneExact": true,
+        "rawPlannedCommandsExact": true,
+        "completePlanEquivalent": true,
+        "everyAcquiredOwnEventEquivalent": true,
+        "ownEventsAcquired": 2,
+        "ownEventsRetained": 39,
+        "nativePlanSha256": "da79cadb8ce144733823851a82425d25796f59671ba0d2f5c6bc2160dca9a058",
+        "nativeAcquiredEventsSha256": "c005d7eebc723054db4ac18ede907d15d82677431a82cc3aae9262b4dcba0218"
+      }
+    ],
+    "scope": "Every field of all 21 conditional plans and all 39 own acquired queue events is compared. The six transitions without a queue-model receipt remain explicit. Observation namespaces retain exact epoch/revision/frame suffix. Model digests, portable relation digests and mechanical request references are independently recomputed from complete contents. All field cells, controls, alternative line models, exact search ranks, node counts, queue previews, refutations, wave traces and physical occurrence identities remain compared.",
+    "notCompared": [
+      "original full common-caller selection",
+      "complete graph identity and shared-family inherited digest",
+      "equal budgets or elapsed performance",
+      "full-game completion beyond the declared three-level target"
+    ]
+  },
+  "qualification": "The unchanged isolated original component and native common caller each complete three levels in one cold continuous session. All 45 action references and effect parameters agree; native public scalar commands add only the explicitly accounted empty transport data object. All 46 complete public packets and 125 animation images agree without normalization. Internal numeric values agree exactly. Finite contribution estimates remain conditional; no observed removal count is promoted to official terminal quota. This is not original full caller parity or a complete-game WIN."
+}

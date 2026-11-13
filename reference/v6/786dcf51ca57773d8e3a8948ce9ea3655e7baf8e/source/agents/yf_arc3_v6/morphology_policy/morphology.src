@@ -1,0 +1,20 @@
+MODULE v6.morphology
+
+WORKFLOW evaluate(facts: Any) -> Any
+    STATE
+        initial: Any
+        role: Any
+        composition: Any
+        returned: Any
+    STEP measure
+        CALL morph.project(policy="policy.morph.initial", facts=facts) -> initial
+        NEXT infer_role
+    STEP infer_role
+        CALL morph.project(policy="policy.morph.role", facts=initial) -> role
+        NEXT hypothesize_composition
+    STEP hypothesize_composition
+        CALL morph.project(policy="policy.morph.composition", facts=role) -> composition
+        NEXT qualify_access
+    STEP qualify_access
+        CALL morph.project(policy="policy.morph.access", facts=composition) -> returned
+        STOP returned

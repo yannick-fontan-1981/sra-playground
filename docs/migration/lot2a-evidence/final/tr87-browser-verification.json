@@ -1,0 +1,79 @@
+{
+  "schema": "logos-engine.browser-verification.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-09T18:05:22.217508+00:00",
+  "method": "Ordinary browser controls via managed Sites preview; visible accessibility state and screenshot. No page runtime-state injection or imported command sequence.",
+  "preview": {
+    "url": "http://127.0.0.1:4173/",
+    "checkout": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout",
+    "command": "sites-preview start /workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout"
+  },
+  "nativeSourceManifest": {
+    "path": "docs/migration/lot2a-evidence/final/source-manifest.json",
+    "sha256": "926d2a91ed0fb72761f9982746743c00688f7b2fccb10e9a39b83d0ef56bc48d",
+    "nativeDigest": "cc4bcea77e0099dc035afa5d6ae03e0d5a7a00082633b8e2332691f34b769ad3",
+    "fileCount": 239
+  },
+  "game": "TR87",
+  "entry": {
+    "level": 1,
+    "mode": "SRA Agent Native TS",
+    "actions": 0,
+    "levelsSolved": 0,
+    "completedPlans": 0
+  },
+  "steps": [
+    {
+      "control": "Run to next level",
+      "visibleStatus": "Level completed.",
+      "url": "http://127.0.0.1:4173/?game=TR87&level=2",
+      "actions": 22,
+      "levelsSolved": 1,
+      "completedPlans": 10
+    },
+    {
+      "control": "Run to next level",
+      "visibleStatus": "Level completed.",
+      "url": "http://127.0.0.1:4173/?game=TR87&level=3",
+      "actions": 59,
+      "levelsSolved": 2,
+      "completedPlans": 20
+    },
+    {
+      "control": "Run to next level",
+      "visibleStatus": "Level completed.",
+      "url": "http://127.0.0.1:4173/?game=TR87&level=4",
+      "actions": 105,
+      "levelsSolved": 3,
+      "completedPlans": 30
+    }
+  ],
+  "continuity": {
+    "oneGameSelection": true,
+    "sameAgentSession": true,
+    "levelJumpUsed": false,
+    "resetUsed": false,
+    "newReasoningSessionUsed": false,
+    "inspectorOpen": false
+  },
+  "final": {
+    "url": "http://127.0.0.1:4173/?game=TR87&level=4",
+    "actions": 105,
+    "levelsSolved": 3,
+    "completedPlans": 30,
+    "status": "Level completed.",
+    "runEnabled": true,
+    "pauseEnabled": false
+  },
+  "screenshot": {
+    "path": "docs/migration/lot2a-evidence/final/tr87-browser.png",
+    "bytes": 87649,
+    "sha256": "539a6f5a9329488c36dce5ce78b3db889d5441d3a6ced75b5dbd0040de0a9be0"
+  },
+  "qualifications": [
+    "Three completed levels, not complete victory over TR87.",
+    "Browser counters agree with the separate cold campaign; source-call attribution comes from campaign receipts, not from screenshot.",
+    "This browser check covers ordinary control flow and rendering. It is not a browser performance benchmark or proof of full V5/V6 parity.",
+    "No Pause timing or arbitrary-computation preemption is claimed from this browser run."
+  ]
+}

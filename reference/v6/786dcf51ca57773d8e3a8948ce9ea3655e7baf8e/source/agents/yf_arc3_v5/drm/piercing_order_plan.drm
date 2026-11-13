@@ -1,0 +1,922 @@
+{
+  "module_id": "piercing_order_plan",
+  "declarations": [
+    {
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "id": "policy.declared_piercing_order_plan",
+      "premises": [
+        "source_supplied_conditional_mechanics_and_owned_parent"
+      ],
+      "applicability": [
+        "whole_configuration_plan_before_action_release"
+      ],
+      "invariants": [
+        "whole_tool_load_and_free_members_share_each_simulated_state",
+        "finite_model_domain_is_not_whole_physics_truth",
+        "every_plan_version_retains_its_original_parent_why"
+      ],
+      "falsifiers": [
+        "sealed_observation_refutes_a_predicted_configuration"
+      ],
+      "configuration": {
+        "search_bounds": {
+          "max_microsteps": 4096,
+          "max_depth": 96,
+          "max_nodes": 20000,
+          "max_plans": 3,
+          "max_support_assignments": 16,
+          "staged_search_profiles": [
+            {
+              "profile_ref": "profile.source_direct_rooted_order",
+              "max_stage_depth": 96,
+              "max_stage_nodes": 20000,
+              "max_stage_successors": 16,
+              "max_compositions": 256,
+              "preserve_initial_matching_prefix": true,
+              "falsifier_refs": [
+                "falsifier.predicted_rooted_order_not_observed"
+              ],
+              "stage_templates": [
+                {
+                  "stage_ref_prefix": "dependency.terminal_rooted_order",
+                  "measurement_kind": "terminal_rooted_order",
+                  "member_binding": "all_target_members",
+                  "order_binding": "full_requested_order",
+                  "root_binding": "requested_root",
+                  "axis_binding": "root_axis",
+                  "falsifier_refs": [
+                    "falsifier.predicted_rooted_order_not_observed"
+                  ]
+                }
+              ]
+            },
+            {
+              "profile_ref": "profile.source_separate_then_extend_rooted_prefix",
+              "frontier_schedule": "advance_dependency",
+              "max_stage_depth": 96,
+              "max_stage_nodes": 20000,
+              "max_stage_successors": 16,
+              "max_compositions": 256,
+              "preserve_initial_matching_prefix": true,
+              "falsifier_refs": [
+                "falsifier.separation_does_not_preserve_required_access",
+                "falsifier.rooted_prefix_extension_loses_required_support"
+              ],
+              "stage_templates": [
+                {
+                  "stage_ref_prefix": "dependency.independent_access_lanes",
+                  "measurement_kind": "independent_orthogonal_lanes",
+                  "member_binding": "all_target_members",
+                  "order_binding": "none",
+                  "root_binding": "requested_root",
+                  "axis_binding": "root_axis",
+                  "falsifier_refs": [
+                    "falsifier.separation_does_not_preserve_required_access"
+                  ]
+                },
+                {
+                  "stage_ref_prefix": "dependency.extend_rooted_prefix",
+                  "measurement_kind": "rooted_order_prefixes",
+                  "member_binding": "all_target_members",
+                  "order_binding": "each_nonempty_requested_prefix",
+                  "root_binding": "requested_root",
+                  "axis_binding": "root_axis",
+                  "falsifier_refs": [
+                    "falsifier.rooted_prefix_extension_loses_required_support"
+                  ]
+                },
+                {
+                  "stage_ref_prefix": "dependency.terminal_rooted_order",
+                  "measurement_kind": "terminal_rooted_order",
+                  "member_binding": "all_target_members",
+                  "order_binding": "full_requested_order",
+                  "root_binding": "requested_root",
+                  "axis_binding": "root_axis",
+                  "falsifier_refs": [
+                    "falsifier.predicted_rooted_order_not_observed"
+                  ]
+                }
+              ]
+            },
+            {
+              "max_stage_depth": 96,
+              "max_stage_nodes": 20000,
+              "max_stage_successors": 16,
+              "max_compositions": 256,
+              "preserve_initial_matching_prefix": true,
+              "falsifier_refs": [
+                "falsifier.separation_does_not_preserve_required_access",
+                "falsifier.rooted_prefix_extension_loses_required_support"
+              ],
+              "profile_ref": "profile.source_prepare_each_entry_then_extend_rooted_prefix",
+              "frontier_schedule": "advance_dependency",
+              "stage_templates": [
+                {
+                  "stage_ref_prefix": "dependency.independent_access_lanes",
+                  "measurement_kind": "independent_orthogonal_lanes",
+                  "member_binding": "all_target_members",
+                  "order_binding": "none",
+                  "root_binding": "requested_root",
+                  "axis_binding": "root_axis",
+                  "falsifier_refs": [
+                    "falsifier.separation_does_not_preserve_required_access"
+                  ]
+                }
+              ],
+              "unit_stage_templates": [
+                {
+                  "member_binding": "all_target_members",
+                  "order_binding": "current_requested_prefix",
+                  "root_binding": "requested_root",
+                  "axis_binding": "root_axis",
+                  "stage_ref_prefix": "dependency.tool_load_tip_clearance",
+                  "measurement_kind": "tool_load_tip_clearance",
+                  "falsifier_refs": [
+                    "falsifier.tip_clearance_does_not_preserve_loaded_or_free_access"
+                  ]
+                },
+                {
+                  "member_binding": "all_target_members",
+                  "order_binding": "current_requested_prefix",
+                  "root_binding": "requested_root",
+                  "axis_binding": "root_axis",
+                  "stage_ref_prefix": "dependency.entry_configuration",
+                  "measurement_kind": "entry_configuration",
+                  "falsifier_refs": [
+                    "falsifier.entry_configuration_does_not_enable_required_member_entry"
+                  ]
+                },
+                {
+                  "member_binding": "all_target_members",
+                  "order_binding": "current_requested_prefix",
+                  "root_binding": "requested_root",
+                  "axis_binding": "root_axis",
+                  "stage_ref_prefix": "dependency.extend_rooted_prefix",
+                  "measurement_kind": "rooted_order_prefixes",
+                  "falsifier_refs": [
+                    "falsifier.rooted_prefix_extension_loses_required_support"
+                  ]
+                }
+              ],
+              "terminal_stage_templates": [
+                {
+                  "stage_ref_prefix": "dependency.terminal_rooted_order",
+                  "measurement_kind": "terminal_rooted_order",
+                  "member_binding": "all_target_members",
+                  "order_binding": "full_requested_order",
+                  "root_binding": "requested_root",
+                  "axis_binding": "root_axis",
+                  "falsifier_refs": [
+                    "falsifier.predicted_rooted_order_not_observed"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "measurement_contract": {
+          "model_predicate": "declared_piercing_order_plan_version"
+        }
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.piercing_plan.current",
+          "all_conditions": [],
+          "reason_ref": "reason.whole_conditional_plan_preserves_parent_and_members"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "piercing_plan_admission_rank",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.source_complete_conditional_plan",
+          "reason_ref": "reason.whole_conditional_plan_preserves_parent_and_members"
+        },
+        {
+          "field": "effect_count",
+          "preferred_order": "minimize",
+          "criterion_ref": "criterion.fewer_necessary_mechanical_effects",
+          "reason_ref": "reason.shorter_complete_plan_uses_fewer_effects"
+        }
+      ],
+      "reason_refs": [
+        "reason.whole_conditional_plan_preserves_parent_and_members"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.declared_piercing_order_plan_version"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.piercing_plan.default_unknown",
+          "all_conditions": [],
+          "static_facts": {
+            "piercing_plan_admissible": false,
+            "piercing_plan_goal_complete": false,
+            "piercing_plan_admission_rank": 0,
+            "qualification_releases_action": false,
+            "whole_influence_prediction_complete": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "qualified_parent_goal_ref",
+            "plan_ref": "measurement_ref"
+          }
+        },
+        {
+          "id": "projection.piercing_plan.proposed_mechanism_whole_plan_safe_first_step",
+          "all_conditions": [
+            {
+              "field": "plan_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "plan_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "selected_model_goal_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "first_step_all_models_completed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "first_step_unresolved_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "first_step_known_supports_preserved",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "mandatory_member_geometry_gap_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "rollout_matching_prefix_loss_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "rollout_truncated",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "source_parent_continuity_allows_candidate",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_parent_continuity_requires_revalidation",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "qualified_parent_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "retained_parent_goal_why_contract",
+              "operator": "is_present"
+            }
+          ],
+          "static_facts": {
+            "piercing_plan_admissible": true,
+            "piercing_plan_goal_complete": true,
+            "piercing_plan_admission_rank": 1,
+            "mandatory_members_preserved": true,
+            "piercing_plan_condition_ref": "condition.first_step_conservative_under_retained_mechanisms_then_observe_and_revise",
+            "qualification_releases_action": false,
+            "whole_influence_prediction_complete": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "qualified_parent_goal_ref",
+            "retained_parent_goal_why_contract": "retained_parent_goal_why_contract",
+            "plan_ref": "measurement_ref",
+            "piercing_plan_ref": "measurement_ref",
+            "proposed_goal_model_ref": "proposed_goal_model_ref"
+          }
+        },
+        {
+          "id": "projection.piercing_plan.finite_conditional_complete",
+          "all_conditions": [
+            {
+              "field": "plan_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "plan_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_model_rollouts_completed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_model_goals_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "first_step_all_models_completed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "first_step_unresolved_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "first_step_known_supports_preserved",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "rollout_truncated",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "rollout_unresolved_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "mandatory_member_geometry_gap_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "rollout_matching_prefix_loss_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "source_parent_continuity_allows_candidate",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_parent_continuity_requires_revalidation",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "qualified_parent_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "retained_parent_goal_why_contract",
+              "operator": "is_present"
+            }
+          ],
+          "static_facts": {
+            "piercing_plan_admissible": true,
+            "piercing_plan_goal_complete": true,
+            "piercing_plan_admission_rank": 2,
+            "mandatory_members_preserved": true,
+            "qualification_releases_action": false,
+            "whole_influence_prediction_complete": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "qualified_parent_goal_ref",
+            "retained_parent_goal_why_contract": "retained_parent_goal_why_contract",
+            "plan_ref": "measurement_ref",
+            "piercing_plan_ref": "measurement_ref"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "id": "rule.declared_piercing_order_plan_version",
+      "premises": [
+        "source_selected_complete_conditional_plan"
+      ],
+      "applicability": [
+        "source_plan_admissible_under_supplied_finite_models"
+      ],
+      "invariants": [
+        "predictions_remain_revisable",
+        "action_release_requires_the_common_gate"
+      ],
+      "falsifiers": [
+        "sealed_observation_refutes_a_plan_prediction"
+      ],
+      "reason_refs": [
+        "reason.whole_conditional_plan_preserves_parent_and_members"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{plan_ref}",
+          "kind": "entity",
+          "label": "revisable complete conditional piercing plan",
+          "required_fields": [
+            "plan_ref"
+          ],
+          "static_attributes": {
+            "projection_contract": "projection.piercing_order_plan.v1",
+            "whole_influence_prediction_complete": false
+          },
+          "attribute_bindings": {
+            "plan_ref": "plan_ref",
+            "requested_root_ref": "requested_root_ref",
+            "requested_type_order": "requested_type_order",
+            "mandatory_part_refs": "mandatory_part_refs",
+            "model_refs": "model_refs",
+            "action_refs": "action_refs",
+            "effects": "effects",
+            "initial_configuration": "initial_configuration",
+            "predictions": "predictions",
+            "scope": "scope",
+            "frame_ref": "frame_ref",
+            "qualified_parent_goal_ref": "qualified_parent_goal_ref",
+            "retained_parent_goal_why_contract": "retained_parent_goal_why_contract",
+            "scene_support_claim_refs": "scene_support_claim_refs",
+            "search_truncated": "search_truncated",
+            "open_frontier_count": "open_frontier_count",
+            "resource_cost_lower_bound": "resource_cost_lower_bound",
+            "resource_cost_upper_bound": "resource_cost_upper_bound",
+            "piercing_plan_admissible": "piercing_plan_admissible",
+            "piercing_plan_goal_complete": "piercing_plan_goal_complete",
+            "source_parent_continuity_class_ref": "source_parent_continuity_class_ref",
+            "piercing_plan_ref": "piercing_plan_ref",
+            "retained_parent_goal_ref": "retained_parent_goal_ref",
+            "proposed_goal_model_ref": "proposed_goal_model_ref",
+            "piercing_plan_condition_ref": "piercing_plan_condition_ref",
+            "first_step_all_models_completed": "first_step_all_models_completed",
+            "first_step_unresolved_count": "first_step_unresolved_count",
+            "first_step_known_supports_preserved": "first_step_known_supports_preserved",
+            "matching_prefix_piece_refs": "matching_prefix_piece_refs",
+            "search_profile_ref": "search_profile_ref",
+            "search_profile_refs": "search_profile_refs",
+            "goal_witness_model_refs": "goal_witness_model_refs",
+            "profile_witness_rows": "profile_witness_rows",
+            "stage_witnesses": "stage_witnesses",
+            "falsifier_refs": "falsifier_refs",
+            "first_step_effect_refs": "first_step_effect_refs",
+            "rollout_matching_prefix_loss_count": "rollout_matching_prefix_loss_count",
+            "mandatory_member_geometry_gap_refs": "mandatory_member_geometry_gap_refs",
+            "mandatory_identities_retained": "mandatory_identities_retained",
+            "source_parent_continuity_allows_candidate": "source_parent_continuity_allows_candidate",
+            "source_parent_continuity_requires_revalidation": "source_parent_continuity_requires_revalidation"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{plan_ref}",
+          "predicate": "declared_piercing_order_plan_version",
+          "family": "control",
+          "argument_patterns": [
+            "{plan_ref}",
+            "{qualified_parent_goal_ref}"
+          ],
+          "epistemic_status": "proposed",
+          "required_fields": [
+            "plan_ref",
+            "qualified_parent_goal_ref"
+          ],
+          "static_attributes": {
+            "projection_contract": "projection.piercing_order_plan.v1",
+            "whole_influence_prediction_complete": false
+          },
+          "attribute_bindings": {
+            "plan_ref": "plan_ref",
+            "requested_root_ref": "requested_root_ref",
+            "requested_type_order": "requested_type_order",
+            "mandatory_part_refs": "mandatory_part_refs",
+            "model_refs": "model_refs",
+            "action_refs": "action_refs",
+            "effects": "effects",
+            "initial_configuration": "initial_configuration",
+            "predictions": "predictions",
+            "scope": "scope",
+            "frame_ref": "frame_ref",
+            "qualified_parent_goal_ref": "qualified_parent_goal_ref",
+            "retained_parent_goal_why_contract": "retained_parent_goal_why_contract",
+            "scene_support_claim_refs": "scene_support_claim_refs",
+            "search_truncated": "search_truncated",
+            "open_frontier_count": "open_frontier_count",
+            "resource_cost_lower_bound": "resource_cost_lower_bound",
+            "resource_cost_upper_bound": "resource_cost_upper_bound",
+            "piercing_plan_admissible": "piercing_plan_admissible",
+            "piercing_plan_goal_complete": "piercing_plan_goal_complete",
+            "source_parent_continuity_class_ref": "source_parent_continuity_class_ref",
+            "piercing_plan_ref": "piercing_plan_ref",
+            "retained_parent_goal_ref": "retained_parent_goal_ref",
+            "proposed_goal_model_ref": "proposed_goal_model_ref",
+            "piercing_plan_condition_ref": "piercing_plan_condition_ref",
+            "first_step_all_models_completed": "first_step_all_models_completed",
+            "first_step_unresolved_count": "first_step_unresolved_count",
+            "first_step_known_supports_preserved": "first_step_known_supports_preserved",
+            "matching_prefix_piece_refs": "matching_prefix_piece_refs",
+            "search_profile_ref": "search_profile_ref",
+            "search_profile_refs": "search_profile_refs",
+            "goal_witness_model_refs": "goal_witness_model_refs",
+            "profile_witness_rows": "profile_witness_rows",
+            "stage_witnesses": "stage_witnesses",
+            "falsifier_refs": "falsifier_refs",
+            "first_step_effect_refs": "first_step_effect_refs",
+            "rollout_matching_prefix_loss_count": "rollout_matching_prefix_loss_count",
+            "mandatory_member_geometry_gap_refs": "mandatory_member_geometry_gap_refs",
+            "mandatory_identities_retained": "mandatory_identities_retained",
+            "source_parent_continuity_allows_candidate": "source_parent_continuity_allows_candidate",
+            "source_parent_continuity_requires_revalidation": "source_parent_continuity_requires_revalidation"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "source_supplied_conditional_mechanics_and_owned_parent"
+      ],
+      "applicability": [
+        "whole_configuration_plan_before_action_release"
+      ],
+      "invariants": [
+        "whole_tool_load_and_free_members_share_each_simulated_state",
+        "finite_model_domain_is_not_whole_physics_truth",
+        "every_plan_version_retains_its_original_parent_why"
+      ],
+      "falsifiers": [
+        "sealed_observation_refutes_a_predicted_configuration"
+      ],
+      "id": "policy.declared_piercing_plan_step",
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break",
+      "configuration": {},
+      "selection_eligibility_conditions": [
+        {
+          "field": "plan_step_source_eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.piercing_step.complete_plan",
+          "all_conditions": [],
+          "reason_ref": "reason.next_step_belongs_to_complete_owned_conditional_plan"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize",
+          "criterion_ref": "criterion.exact_current_plan_step_ref",
+          "reason_ref": "reason.next_step_belongs_to_complete_owned_conditional_plan"
+        }
+      ],
+      "reason_refs": [
+        "reason.next_step_belongs_to_complete_owned_conditional_plan"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.piercing_step.default",
+          "all_conditions": [],
+          "static_facts": {
+            "plan_step_source_eligible": false
+          }
+        },
+        {
+          "id": "projection.piercing_step.current",
+          "all_conditions": [
+            {
+              "field": "piercing_plan_source_admissible",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "piercing_plan_source_goal_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "plan_step_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "piercing_plan_source_parent_allows_candidate",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "piercing_plan_source_parent_requires_revalidation",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "plan_step_source_eligible": true,
+            "plan_kind": "conditional_piercing_order_plan",
+            "candidate_local_goal_context_declared": false,
+            "qualification_releases_action": false,
+            "instrumental_principle_ref": "principle.whole_loaded_configuration_plan_preserves_ordered_parent",
+            "advances_active_goal_chain": true,
+            "release_subgoal_ref": "subgoal.execute_next_revisable_order_plan_step",
+            "goal_graph_edge_refs": ["edge.ordered_parent_requires_next_source_plan_step"],
+            "release_selection_principle_ref": "principle.whole_loaded_configuration_plan_preserves_ordered_parent",
+            "release_expected_effect_class": "effectful_novel",
+            "source_step_falsifier_refs": ["falsifier.sealed_current_configuration_differs_from_plan_step_prediction"],
+            "release_remaining_action_bound": 1,
+            "release_reconciliation_checkpoint_ref": "checkpoint.piercing_plan.after_single_source_action"
+          },
+          "bound_facts": {
+            "active_goal_ref": "source_parent_goal_ref",
+            "release_active_goal_ref": "source_parent_goal_ref",
+            "active_terminal_goal_ref": "source_parent_goal_ref",
+            "release_terminal_goal_ref": "source_parent_goal_ref",
+            "parent_goal_why_contract": "source_parent_goal_why_contract",
+            "guiding_principle_ref": "source_parent_guiding_principle_ref",
+            "release_guiding_principle_ref": "source_parent_guiding_principle_ref",
+            "release_premise_claim_refs": "source_plan_scene_support_claim_refs",
+            "committed_plan_ref": "piercing_plan_source_ref"
+          },
+          "templated_facts": {
+            "release_goal_dependency_chain_refs": ["{source_parent_goal_ref}", "subgoal.execute_next_revisable_order_plan_step"],
+            "release_expected_configuration_or_goal_delta_ref": "{piercing_plan_source_ref}:prediction:0"
+          },
+          "sequence_compositions": [{
+            "output_field": "release_falsifier_refs",
+            "source_fields": ["source_step_falsifier_refs", "source_plan_falsifier_refs"],
+            "max_items": 256,
+            "unique_items": true
+          }]
+        }
+      ]
+    },
+    {
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "id": "policy.declared_piercing_search_continuation",
+      "premises": [
+        "source_measured_unfinished_conditional_search"
+      ],
+      "applicability": [
+        "scope_bound_revisable_simulation_continuation"
+      ],
+      "invariants": [
+        "retention_is_not_action_authority",
+        "global_expansion_count_never_resets_on_resume",
+        "original_parent_why_and_falsifiers_are_preserved"
+      ],
+      "falsifiers": [
+        "source_scope_or_observation_invalidates_the_search_request"
+      ],
+      "configuration": {
+        "measurement_contract": {
+          "model_predicate": "piercing_search_frontier_revision"
+        }
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.piercing_search_frontier.current",
+          "all_conditions": [],
+          "reason_ref": "reason.scoped_unfinished_search_frontier_is_revisable_not_action_authority"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "open_frontier_count",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.scoped_frontier_measurement_domain",
+          "reason_ref": "reason.scoped_unfinished_search_frontier_is_revisable_not_action_authority"
+        }
+      ],
+      "reason_refs": [
+        "reason.scoped_unfinished_search_frontier_is_revisable_not_action_authority"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.declared_piercing_search_frontier_revision"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.piercing_search_frontier.unknown",
+          "all_conditions": [],
+          "static_facts": {
+            "frontier_retention_admissible": false,
+            "piercing_plan_admissible": false,
+            "whole_influence_prediction_complete": false,
+            "action_authority": false
+          },
+          "bound_facts": {}
+        },
+        {
+          "id": "projection.piercing_search_frontier.scoped",
+          "all_conditions": [
+            {
+              "field": "frontier_records_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "continuation_request_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "continuation_expanded_nodes_within_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "continuation_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "continuation_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "continuation_parent_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "continuation_parent_why_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_origin_refs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "frontier_retention_admissible": true,
+            "piercing_plan_admissible": false,
+            "whole_influence_prediction_complete": false,
+            "action_authority": false
+          },
+          "bound_facts": {
+            "frontier_revision_ref": "measurement_ref",
+            "retained_parent_goal_ref": "qualified_parent_goal_ref"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "id": "rule.declared_piercing_search_frontier_revision",
+      "premises": [
+        "source_qualified_scope_bound_frontier"
+      ],
+      "applicability": [
+        "unfinished_conditional_simulation"
+      ],
+      "invariants": [
+        "revision_preserves_consumed_budget_and_parent_why",
+        "hypothetical_states_do_not_become_observed_states"
+      ],
+      "falsifiers": [
+        "source_scope_or_observation_invalidates_the_search_request"
+      ],
+      "reason_refs": [
+        "reason.scoped_unfinished_search_frontier_is_revisable_not_action_authority"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{frontier_revision_ref}",
+          "kind": "entity",
+          "label": "revisable scoped conditional search frontier",
+          "required_fields": [
+            "frontier_revision_ref",
+            "request_fingerprint"
+          ],
+          "static_attributes": {
+            "projection_contract": "projection.piercing_search_frontier.v1",
+            "whole_influence_prediction_complete": false,
+            "action_authority": false
+          },
+          "attribute_bindings": {
+            "request_fingerprint": "request_fingerprint",
+            "search_continuation": "search_continuation",
+            "scope": "scope",
+            "frame_ref": "frame_ref",
+            "qualified_parent_goal_ref": "qualified_parent_goal_ref",
+            "retained_parent_goal_why_contract": "retained_parent_goal_why_contract",
+            "source_parent_why_fingerprint": "source_parent_why_fingerprint",
+            "source_origin_refs": "source_origin_refs",
+            "scene_support_claim_refs": "scene_support_claim_refs",
+            "expanded_node_count": "expanded_node_count",
+            "slice_expanded_node_count": "slice_expanded_node_count",
+            "search_truncated": "search_truncated",
+            "open_frontier_count": "open_frontier_count",
+            "exhausted_bound_refs": "exhausted_bound_refs",
+            "missing_premise_refs": "missing_premise_refs",
+            "stage_frontiers": "stage_frontiers",
+            "search_profile_refs": "search_profile_refs",
+            "model_refs": "model_refs",
+            "falsifier_refs": "falsifier_refs",
+            "revision_family_ref": "request_fingerprint"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{frontier_revision_ref}",
+          "predicate": "piercing_search_frontier_revision",
+          "family": "control",
+          "argument_patterns": [
+            "{request_fingerprint}",
+            "{qualified_parent_goal_ref}"
+          ],
+          "epistemic_status": "proposed",
+          "required_fields": [
+            "frontier_revision_ref",
+            "request_fingerprint",
+            "qualified_parent_goal_ref"
+          ],
+          "static_attributes": {
+            "projection_contract": "projection.piercing_search_frontier.v1",
+            "whole_influence_prediction_complete": false,
+            "action_authority": false
+          },
+          "attribute_bindings": {
+            "request_fingerprint": "request_fingerprint",
+            "search_continuation": "search_continuation",
+            "scope": "scope",
+            "frame_ref": "frame_ref",
+            "qualified_parent_goal_ref": "qualified_parent_goal_ref",
+            "retained_parent_goal_why_contract": "retained_parent_goal_why_contract",
+            "source_parent_why_fingerprint": "source_parent_why_fingerprint",
+            "source_origin_refs": "source_origin_refs",
+            "scene_support_claim_refs": "scene_support_claim_refs",
+            "expanded_node_count": "expanded_node_count",
+            "slice_expanded_node_count": "slice_expanded_node_count",
+            "search_truncated": "search_truncated",
+            "open_frontier_count": "open_frontier_count",
+            "exhausted_bound_refs": "exhausted_bound_refs",
+            "missing_premise_refs": "missing_premise_refs",
+            "stage_frontiers": "stage_frontiers",
+            "search_profile_refs": "search_profile_refs",
+            "model_refs": "model_refs",
+            "falsifier_refs": "falsifier_refs",
+            "revision_family_ref": "request_fingerprint"
+          }
+        }
+      ]
+    }
+  ]
+}

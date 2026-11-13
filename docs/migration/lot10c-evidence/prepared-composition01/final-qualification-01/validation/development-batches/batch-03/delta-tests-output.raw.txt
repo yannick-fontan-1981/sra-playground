@@ -1,0 +1,1862 @@
+TAP version 13
+# Subtest: production common factory connects one Feedback owner in source order, acquires each selected primitive once, and restores a method without a layout
+ok 1 - production common factory connects one Feedback owner in source order, acquires each selected primitive once, and restores a method without a layout
+  ---
+  duration_ms: 9459.238961
+  type: 'test'
+  ...
+# Subtest: information_goal consults VisualSequences before the same Feedback owner and obeys feedback_sequences_first
+ok 2 - information_goal consults VisualSequences before the same Feedback owner and obeys feedback_sequences_first
+  ---
+  duration_ms: 2106.775011
+  type: 'test'
+  ...
+# Subtest: source palette compaction rebinds each actual point while preserving the conditional ordered prefix
+ok 3 - source palette compaction rebinds each actual point while preserving the conditional ordered prefix
+  ---
+  duration_ms: 8890.392141
+  type: 'test'
+  ...
+# Subtest: real frontier actions acquire passive Feedback once and the acquired entry immediately changes actual strategy selection
+ok 4 - real frontier actions acquire passive Feedback once and the acquired entry immediately changes actual strategy selection
+  ---
+  duration_ms: 8040.718494
+  type: 'test'
+  ...
+# Subtest: different source-observed feedback rows cause different subsequently released ordered action suites
+ok 5 - different source-observed feedback rows cause different subsequently released ordered action suites
+  ---
+  duration_ms: 11215.40383
+  type: 'test'
+  ...
+# Subtest: a contradictory public entry return seals the unfinished prefix, acquires only the real primitive, and prevents stale Feedback continuation
+ok 6 - a contradictory public entry return seals the unfinished prefix, acquires only the real primitive, and prevents stale Feedback continuation
+  ---
+  duration_ms: 9254.476809
+  type: 'test'
+  ...
+# Subtest: cooperative Feedback enumeration yields and preserves cancellation or deadline exhaustion as incomplete without a recommendation
+ok 7 - cooperative Feedback enumeration yields and preserves cancellation or deadline exhaustion as incomplete without a recommendation
+  ---
+  duration_ms: 0.56261
+  type: 'test'
+  ...
+# Subtest: FeedbackSequences oracle pins the unchanged V6 family and consumed V5 sources
+ok 8 - FeedbackSequences oracle pins the unchanged V6 family and consumed V5 sources
+  ---
+  duration_ms: 7.71509
+  type: 'test'
+  ...
+# Subtest: V5 ordered feedback discrimination matches the original: unobserved-mark-renaming-symmetry
+ok 9 - V5 ordered feedback discrimination matches the original: unobserved-mark-renaming-symmetry
+  ---
+  duration_ms: 2.277139
+  type: 'test'
+  ...
+# Subtest: V5 ordered feedback discrimination matches the original: palette-removal-is-not-secret-uniqueness
+ok 10 - V5 ordered feedback discrimination matches the original: palette-removal-is-not-secret-uniqueness
+  ---
+  duration_ms: 0.358872
+  type: 'test'
+  ...
+# Subtest: V5 ordered feedback discrimination matches the original: discriminating-public-return-1
+ok 11 - V5 ordered feedback discrimination matches the original: discriminating-public-return-1
+  ---
+  duration_ms: 0.452854
+  type: 'test'
+  ...
+# Subtest: V5 ordered feedback discrimination matches the original: discriminating-public-return-2
+ok 12 - V5 ordered feedback discrimination matches the original: discriminating-public-return-2
+  ---
+  duration_ms: 0.312072
+  type: 'test'
+  ...
+# Subtest: V5 ordered feedback discrimination matches the original: candidate-domain-bound
+ok 13 - V5 ordered feedback discrimination matches the original: candidate-domain-bound
+  ---
+  duration_ms: 0.075625
+  type: 'test'
+  ...
+# Subtest: V5 ordered feedback discrimination matches the original: trial-domain-bound
+ok 14 - V5 ordered feedback discrimination matches the original: trial-domain-bound
+  ---
+  duration_ms: 0.124428
+  type: 'test'
+  ...
+# Subtest: V5 ordered feedback discrimination matches the original: candidate-evaluation-bound
+ok 15 - V5 ordered feedback discrimination matches the original: candidate-evaluation-bound
+  ---
+  duration_ms: 0.085149
+  type: 'test'
+  ...
+# Subtest: V5 ordered feedback discrimination matches the original: partition-evaluation-bound
+ok 16 - V5 ordered feedback discrimination matches the original: partition-evaluation-bound
+  ---
+  duration_ms: 0.231509
+  type: 'test'
+  ...
+# Subtest: V5 ordered feedback discrimination matches the original: input-budget-refusal
+ok 17 - V5 ordered feedback discrimination matches the original: input-budget-refusal
+  ---
+  duration_ms: 2.023396
+  type: 'test'
+  ...
+# Subtest: V5 ordered feedback discrimination matches the original: preserved-prefix-no-legal-removal-trial
+ok 18 - V5 ordered feedback discrimination matches the original: preserved-prefix-no-legal-removal-trial
+  ---
+  duration_ms: 0.12568
+  type: 'test'
+  ...
+# Subtest: V5 ordered feedback discrimination matches the original: unsupported-four-feedback-classes
+ok 19 - V5 ordered feedback discrimination matches the original: unsupported-four-feedback-classes
+  ---
+  duration_ms: 0.08604
+  type: 'test'
+  ...
+# Subtest: V5 ordered feedback discrimination matches the original: same-trial-incompatible-public-returns
+ok 20 - V5 ordered feedback discrimination matches the original: same-trial-incompatible-public-returns
+  ---
+  duration_ms: 0.3711
+  type: 'test'
+  ...
+# Subtest: V5 ordered feedback discrimination matches the original: duplicate-allocation-alternatives
+ok 21 - V5 ordered feedback discrimination matches the original: duplicate-allocation-alternatives
+  ---
+  duration_ms: 0.431241
+  type: 'test'
+  ...
+# Subtest: two source-observed discriminating returns produce different justified next trials
+ok 22 - two source-observed discriminating returns produce different justified next trials
+  ---
+  duration_ms: 0.427366
+  type: 'test'
+  ...
+# Subtest: original public interface recognition and acquisition: no-distinctive-entry-without-method
+ok 23 - original public interface recognition and acquisition: no-distinctive-entry-without-method
+  ---
+  duration_ms: 25.475781
+  type: 'test'
+  ...
+# Subtest: original public interface recognition and acquisition: initial-entry
+ok 24 - original public interface recognition and acquisition: initial-entry
+  ---
+  duration_ms: 17.777656
+  type: 'test'
+  ...
+# Subtest: source acquisition, conditional prefix and response history: repeatable
+ok 25 - source acquisition, conditional prefix and response history: repeatable
+  ---
+  duration_ms: 44.057241
+  type: 'test'
+  ...
+# Subtest: source acquisition, conditional prefix and response history: compacting
+ok 26 - source acquisition, conditional prefix and response history: compacting
+  ---
+  duration_ms: 287.733907
+  type: 'test'
+  ...
+# Subtest: source acquisition, conditional prefix and response history: passive-unmarked-append
+ok 27 - source acquisition, conditional prefix and response history: passive-unmarked-append
+  ---
+  duration_ms: 18.89924
+  type: 'test'
+  ...
+# Subtest: source acquisition, conditional prefix and response history: discriminant-a
+ok 28 - source acquisition, conditional prefix and response history: discriminant-a
+  ---
+  duration_ms: 37.347128
+  type: 'test'
+  ...
+# Subtest: source acquisition, conditional prefix and response history: discriminant-b
+ok 29 - source acquisition, conditional prefix and response history: discriminant-b
+  ---
+  duration_ms: 34.230592
+  type: 'test'
+  ...
+# Subtest: source feedback refusal, scope and evidence restoration: observed-suffix-clear
+ok 30 - source feedback refusal, scope and evidence restoration: observed-suffix-clear
+  ---
+  duration_ms: 10.598194
+  type: 'test'
+  ...
+# Subtest: source feedback refusal, scope and evidence restoration: entry-protocol-refuted
+ok 31 - source feedback refusal, scope and evidence restoration: entry-protocol-refuted
+  ---
+  duration_ms: 0.8412
+  type: 'test'
+  ...
+# Subtest: source feedback refusal, scope and evidence restoration: ambiguous-feedback-not-acquired
+ok 32 - source feedback refusal, scope and evidence restoration: ambiguous-feedback-not-acquired
+  ---
+  duration_ms: 5.448758
+  type: 'test'
+  ...
+# Subtest: source feedback refusal, scope and evidence restoration: no-bound-sequence-effect
+ok 33 - source feedback refusal, scope and evidence restoration: no-bound-sequence-effect
+  ---
+  duration_ms: 4.570171
+  type: 'test'
+  ...
+# Subtest: source feedback refusal, scope and evidence restoration: official-boundary-method-only
+ok 34 - source feedback refusal, scope and evidence restoration: official-boundary-method-only
+  ---
+  duration_ms: 0.643241
+  type: 'test'
+  ...
+# Subtest: source feedback refusal, scope and evidence restoration: recalled-method-confirmed
+ok 35 - source feedback refusal, scope and evidence restoration: recalled-method-confirmed
+  ---
+  duration_ms: 7.744325
+  type: 'test'
+  ...
+# Subtest: source feedback refusal, scope and evidence restoration: recalled-row-role-refuted
+ok 36 - source feedback refusal, scope and evidence restoration: recalled-row-role-refuted
+  ---
+  duration_ms: 7.196287
+  type: 'test'
+  ...
+# Subtest: source feedback refusal, scope and evidence restoration: recalled-method-no-effect-refuted
+ok 37 - source feedback refusal, scope and evidence restoration: recalled-method-no-effect-refuted
+  ---
+  duration_ms: 10.1315
+  type: 'test'
+  ...
+# Subtest: original current-interface guard: current
+ok 38 - original current-interface guard: current
+  ---
+  duration_ms: 2.474327
+  type: 'test'
+  ...
+# Subtest: original current-interface guard: palette-value-changed
+ok 39 - original current-interface guard: palette-value-changed
+  ---
+  duration_ms: 1.406814
+  type: 'test'
+  ...
+# Subtest: original current-interface guard: palette-locus-moved
+ok 40 - original current-interface guard: palette-locus-moved
+  ---
+  duration_ms: 1.743222
+  type: 'test'
+  ...
+# Subtest: original current-interface guard: prefix-changed
+ok 41 - original current-interface guard: prefix-changed
+  ---
+  duration_ms: 5.026761
+  type: 'test'
+  ...
+# Subtest: original current-interface guard: action-unavailable
+ok 42 - original current-interface guard: action-unavailable
+  ---
+  duration_ms: 1.751465
+  type: 'test'
+  ...
+# Subtest: original current-interface guard: epoch-changed
+ok 43 - original current-interface guard: epoch-changed
+  ---
+  duration_ms: 1.427115
+  type: 'test'
+  ...
+# Subtest: source memory excludes caches and rejects unknown persisted owner fields
+ok 44 - source memory excludes caches and rejects unknown persisted owner fields
+  ---
+  duration_ms: 0.771996
+  type: 'test'
+  ...
+# Subtest: passive capture keeps synchronous return and argument identities, with detached evidence
+ok 45 - passive capture keeps synchronous return and argument identities, with detached evidence
+  ---
+  duration_ms: 1.667277
+  type: 'test'
+  ...
+# Subtest: proposal observer excludes execution capabilities and preserves the original promise
+ok 46 - proposal observer excludes execution capabilities and preserves the original promise
+  ---
+  duration_ms: 0.472483
+  type: 'test'
+  ...
+# Subtest: synchronous exceptions retain their identity and are observed once
+ok 47 - synchronous exceptions retain their identity and are observed once
+  ---
+  duration_ms: 0.53647
+  type: 'test'
+  ...
+# Subtest: asynchronous rejection retains the original promise and reason
+ok 48 - asynchronous rejection retains the original promise and reason
+  ---
+  duration_ms: 0.33077
+  type: 'test'
+  ...
+# Subtest: real nested restorations retain invocation order, depths and input identity
+ok 49 - real nested restorations retain invocation order, depths and input identity
+  ---
+  duration_ms: 0.420175
+  type: 'test'
+  ...
+# Subtest: failed state inspection is retained without changing a successful source call
+ok 50 - failed state inspection is retained without changing a successful source call
+  ---
+  duration_ms: 0.515378
+  type: 'test'
+  ...
+# Subtest: captured source arities exclude native-only arguments without altering actual calls
+ok 51 - captured source arities exclude native-only arguments without altering actual calls
+  ---
+  duration_ms: 0.414155
+  type: 'test'
+  ...
+# Subtest: an uncloneable evidence argument does not prevent or duplicate the actual invocation
+ok 52 - an uncloneable evidence argument does not prevent or duplicate the actual invocation
+  ---
+  duration_ms: 0.25142
+  type: 'test'
+  ...
+# Subtest: production factory installs one Preview owner at its declared goal entry without a new SRC program
+ok 53 - production factory installs one Preview owner at its declared goal entry without a new SRC program
+  ---
+  duration_ms: 116.345785
+  type: 'test'
+  ...
+# Subtest: real common caller selects, learns once, keeps a multi-action prefix and restores the original state through a natural boundary
+ok 54 - real common caller selects, learns once, keeps a multi-action prefix and restores the original state through a natural boundary
+  ---
+  duration_ms: 2171.086694
+  type: 'test'
+  ...
+# Subtest: foreign Word return does not invoke Preview acquisition and still restores its installed owner
+ok 55 - foreign Word return does not invoke Preview acquisition and still restores its installed owner
+  ---
+  duration_ms: 1442.122415
+  type: 'test'
+  ...
+# Subtest: a Preview blocking unknown closes the entire selection before a later group is consulted
+ok 56 - a Preview blocking unknown closes the entire selection before a later group is consulted
+  ---
+  duration_ms: 17.221647
+  type: 'test'
+  ...
+# Subtest: native checkpoint owns exactly the four source fields inside the explicit schema
+ok 57 - native checkpoint owns exactly the four source fields inside the explicit schema
+  ---
+  duration_ms: 3.064658
+  type: 'test'
+  ...
+# Subtest: cached abstention is retained for its epoch without inventing a new observation
+ok 58 - cached abstention is retained for its epoch without inventing a new observation
+  ---
+  duration_ms: 4.144759
+  type: 'test'
+  ...
+# Subtest: CPython dictionary construction preserves the source five-cell pop order
+ok 59 - CPython dictionary construction preserves the source five-cell pop order
+  ---
+  duration_ms: 0.683422
+  type: 'test'
+  ...
+# Subtest: native checkpoint restoration preserves a learned multi-action source decision
+ok 60 - native checkpoint restoration preserves a learned multi-action source decision
+  ---
+  duration_ms: 18.795809
+  type: 'test'
+  ...
+# Subtest: foreign mutable state and exported state are detached from the authoritative owner
+ok 61 - foreign mutable state and exported state are detached from the authoritative owner
+  ---
+  duration_ms: 10.743053
+  type: 'test'
+  ...
+# Subtest: identity and value restore fast paths preserve source fields and immutable ownership
+ok 62 - identity and value restore fast paths preserve source fields and immutable ownership
+  ---
+  duration_ms: 5.421537
+  type: 'test'
+  ...
+# Subtest: restoring an empty checkpoint actually removes a previous acquired model
+ok 63 - restoring an empty checkpoint actually removes a previous acquired model
+  ---
+  duration_ms: 3.402418
+  type: 'test'
+  ...
+# Subtest: source restoration recreates only present source fields and normalizes decimal cache keys
+ok 64 - source restoration recreates only present source fields and normalizes decimal cache keys
+  ---
+  duration_ms: 3.115976
+  type: 'test'
+  ...
+# Subtest: native restore rejects schema atomically
+ok 65 - native restore rejects schema atomically
+  ---
+  duration_ms: 5.145419
+  type: 'test'
+  ...
+# Subtest: native restore rejects missing source field atomically
+ok 66 - native restore rejects missing source field atomically
+  ---
+  duration_ms: 5.347846
+  type: 'test'
+  ...
+# Subtest: native restore rejects unexpected envelope field atomically
+ok 67 - native restore rejects unexpected envelope field atomically
+  ---
+  duration_ms: 3.83376
+  type: 'test'
+  ...
+# Subtest: native restore rejects noninteger epoch atomically
+ok 68 - native restore rejects noninteger epoch atomically
+  ---
+  duration_ms: 3.927781
+  type: 'test'
+  ...
+# Subtest: native restore rejects duplicate piece identity atomically
+ok 69 - native restore rejects duplicate piece identity atomically
+  ---
+  duration_ms: 6.941823
+  type: 'test'
+  ...
+# Subtest: native restore rejects duplicate full-mask cell atomically
+ok 70 - native restore rejects duplicate full-mask cell atomically
+  ---
+  duration_ms: 3.814171
+  type: 'test'
+  ...
+# Subtest: native restore rejects unnormalized full mask atomically
+ok 71 - native restore rejects unnormalized full mask atomically
+  ---
+  duration_ms: 3.240153
+  type: 'test'
+  ...
+# Subtest: native restore rejects unknown selected owner atomically
+ok 72 - native restore rejects unknown selected owner atomically
+  ---
+  duration_ms: 2.97311
+  type: 'test'
+  ...
+# Subtest: native restore rejects board outside current world atomically
+ok 73 - native restore rejects board outside current world atomically
+  ---
+  duration_ms: 4.50327
+  type: 'test'
+  ...
+# Subtest: native restore rejects unsupported learned transform atomically
+ok 74 - native restore rejects unsupported learned transform atomically
+  ---
+  duration_ms: 4.715121
+  type: 'test'
+  ...
+# Subtest: native restore rejects nonunit learned translation atomically
+ok 75 - native restore rejects nonunit learned translation atomically
+  ---
+  duration_ms: 5.800801
+  type: 'test'
+  ...
+# Subtest: native restore rejects cache epoch spelling atomically
+ok 76 - native restore rejects cache epoch spelling atomically
+  ---
+  duration_ms: 3.301005
+  type: 'test'
+  ...
+# Subtest: native restore rejects event owner kind atomically
+ok 77 - native restore rejects event owner kind atomically
+  ---
+  duration_ms: 2.493065
+  type: 'test'
+  ...
+# Subtest: native restore rejects source trial mask shape atomically
+ok 78 - native restore rejects source trial mask shape atomically
+  ---
+  duration_ms: 2.895293
+  type: 'test'
+  ...
+# Subtest: native restore rejects palette outside public domain atomically
+ok 79 - native restore rejects palette outside public domain atomically
+  ---
+  duration_ms: 2.791906
+  type: 'test'
+  ...
+# Subtest: native restore rejects nonfinite retained value atomically
+ok 80 - native restore rejects nonfinite retained value atomically
+  ---
+  duration_ms: 2.404962
+  type: 'test'
+  ...
+# Subtest: native restore does not execute foreign getters or admit cyclic state
+ok 81 - native restore does not execute foreign getters or admit cyclic state
+  ---
+  duration_ms: 6.298141
+  type: 'test'
+  ...
+# Subtest: selected acquisition creates a new checkpoint while all earlier snapshots remain unchanged
+ok 82 - selected acquisition creates a new checkpoint while all earlier snapshots remain unchanged
+  ---
+  duration_ms: 4.071759
+  type: 'test'
+  ...
+# Subtest: a foreign return cannot acquire a Preview event or change its current checkpoint
+ok 83 - a foreign return cannot acquire a Preview event or change its current checkpoint
+  ---
+  duration_ms: 2.233353
+  type: 'test'
+  ...
+# Subtest: an epoch boundary returns the source empty event without resetting learned controls
+ok 84 - an epoch boundary returns the source empty event without resetting learned controls
+  ---
+  duration_ms: 2.171709
+  type: 'test'
+  ...
+# Subtest: known source transport respects remaining actions and exact paired projections
+ok 85 - known source transport respects remaining actions and exact paired projections
+  ---
+  duration_ms: 3.24453
+  type: 'test'
+  ...
+# Subtest: exhausted nodeBound returns an explicit blocked unknown without a partial plan
+ok 86 - exhausted nodeBound returns an explicit blocked unknown without a partial plan
+  ---
+  duration_ms: 2.674909
+  type: 'test'
+  ...
+# Subtest: exhausted domainBound returns an explicit blocked unknown without a partial plan
+ok 87 - exhausted domainBound returns an explicit blocked unknown without a partial plan
+  ---
+  duration_ms: 1.846178
+  type: 'test'
+  ...
+# Subtest: exhausted depthBound returns an explicit blocked unknown without a partial plan
+ok 88 - exhausted depthBound returns an explicit blocked unknown without a partial plan
+  ---
+  duration_ms: 1.817655
+  type: 'test'
+  ...
+# Subtest: exhausted timeBoundMs returns an explicit blocked unknown without a partial plan
+ok 89 - exhausted timeBoundMs returns an explicit blocked unknown without a partial plan
+  ---
+  duration_ms: 1.40427
+  type: 'test'
+  ...
+# Subtest: transport-state exhaustion blocks without releasing an unfinished path or fallback probe
+ok 90 - transport-state exhaustion blocks without releasing an unfinished path or fallback probe
+  ---
+  duration_ms: 2.428236
+  type: 'test'
+  ...
+# Subtest: an already-aborted request leaves source memory untouched and blocks unrelated routing
+ok 91 - an already-aborted request leaves source memory untouched and blocks unrelated routing
+  ---
+  duration_ms: 0.255176
+  type: 'test'
+  ...
+# Subtest: the active request deadline is checked before any source measurement
+ok 92 - the active request deadline is checked before any source measurement
+  ---
+  duration_ms: 0.202827
+  type: 'test'
+  ...
+# Subtest: finite-domain construction yields and observes cancellation before publishing assignments
+ok 93 - finite-domain construction yields and observes cancellation before publishing assignments
+  ---
+  duration_ms: 1.035233
+  type: 'test'
+  ...
+# Subtest: a host cannot enlarge the source domainBound budget
+ok 94 - a host cannot enlarge the source domainBound budget
+  ---
+  duration_ms: 0.409128
+  type: 'test'
+  ...
+# Subtest: a host cannot enlarge the source depthBound budget
+ok 95 - a host cannot enlarge the source depthBound budget
+  ---
+  duration_ms: 0.171349
+  type: 'test'
+  ...
+# Subtest: a host cannot enlarge the source nodeBound budget
+ok 96 - a host cannot enlarge the source nodeBound budget
+  ---
+  duration_ms: 0.067422
+  type: 'test'
+  ...
+# Subtest: a host cannot enlarge the source timeBoundMs budget
+ok 97 - a host cannot enlarge the source timeBoundMs budget
+  ---
+  duration_ms: 0.049926
+  type: 'test'
+  ...
+# Subtest: a host cannot enlarge the source transportStates budget
+ok 98 - a host cannot enlarge the source transportStates budget
+  ---
+  duration_ms: 0.053971
+  type: 'test'
+  ...
+# Subtest: the checked search limits cannot be enlarged while a cooperative request is in flight
+ok 99 - the checked search limits cannot be enlarged while a cooperative request is in flight
+  ---
+  duration_ms: 1.194063
+  type: 'test'
+  ...
+# Subtest: learned command identifiers are dictionary keys, including a JavaScript prototype spelling
+ok 100 - learned command identifiers are dictionary keys, including a JavaScript prototype spelling
+  ---
+  duration_ms: 4.048614
+  type: 'test'
+  ...
+# Subtest: before-action binding rejects an invalid action index without consuming a return
+ok 101 - before-action binding rejects an invalid action index without consuming a return
+  ---
+  duration_ms: 2.556781
+  type: 'test'
+  ...
+# Subtest: PreviewPacking matches the independent pinned Python oracle, including complete proposals, acquisition and restored next decisions
+ok 102 - PreviewPacking matches the independent pinned Python oracle, including complete proposals, acquisition and restored next decisions
+  ---
+  duration_ms: 691.581302
+  type: 'test'
+  ...
+# Subtest: current control discovery is explicit, uses a real public row and confers no learned-effect priority
+ok 103 - current control discovery is explicit, uses a real public row and confers no learned-effect priority
+  ---
+  duration_ms: 481.403372
+  type: 'test'
+  ...
+# Subtest: the shared guard revalidates the actual retained model, current input, glyph and point payload
+ok 104 - the shared guard revalidates the actual retained model, current input, glyph and point payload
+  ---
+  duration_ms: 223.641287
+  type: 'test'
+  ...
+# Subtest: a stationary unknown-input return is a scoped trial, not a refutation of the old operator model
+ok 105 - a stationary unknown-input return is a scoped trial, not a refutation of the old operator model
+  ---
+  duration_ms: 239.417901
+  type: 'test'
+  ...
+# Subtest: an acquired insertion survives shared checkpoint restoration and its unknown label cannot disappear from planning
+ok 106 - an acquired insertion survives shared checkpoint restoration and its unknown label cannot disappear from planning
+  ---
+  duration_ms: 357.286143
+  type: 'test'
+  ...
+# Subtest: unknown execution evidence is retained without promoting semantics or poisoning a previously learned model
+ok 107 - unknown execution evidence is retained without promoting semantics or poisoning a previously learned model
+  ---
+  duration_ms: 431.18384
+  type: 'test'
+  ...
+# Subtest: a newly acquired but unmodeled member blocks an otherwise available incomplete-palette projection
+ok 108 - a newly acquired but unmodeled member blocks an otherwise available incomplete-palette projection
+  ---
+  duration_ms: 276.862894
+  type: 'test'
+  ...
+# Subtest: contact scope acquisition checks every returned image and the public protocol boundary
+    # Subtest: unchanged public return
+    ok 1 - unchanged public return
+      ---
+      duration_ms: 2430.177536
+      type: 'test'
+      ...
+    # Subtest: different intermediate image despite an unchanged final image
+    ok 2 - different intermediate image despite an unchanged final image
+      ---
+      duration_ms: 2251.908446
+      type: 'test'
+      ...
+    # Subtest: changed public action domain
+    ok 3 - changed public action domain
+      ---
+      duration_ms: 2047.2847
+      type: 'test'
+      ...
+    # Subtest: official level progress
+    ok 4 - official level progress
+      ---
+      duration_ms: 1433.384837
+      type: 'test'
+      ...
+    # Subtest: official terminal state
+    ok 5 - official terminal state
+      ---
+      duration_ms: 1706.426722
+      type: 'test'
+      ...
+    1..5
+ok 109 - contact scope acquisition checks every returned image and the public protocol boundary
+  ---
+  duration_ms: 9871.36767
+  type: 'test'
+  ...
+# Subtest: cold common acquisition scopes a contact refusal and measures a conditional return preparation
+    # Subtest: missing or unobserved scope does not suppress the original refusal
+    ok 1 - missing or unobserved scope does not suppress the original refusal
+      ---
+      duration_ms: 1.372552
+      type: 'test'
+      ...
+    # Subtest: local refusal scope rejects old epoch
+    ok 2 - local refusal scope rejects old epoch
+      ---
+      duration_ms: 0.165259
+      type: 'test'
+      ...
+    # Subtest: local refusal scope rejects other score
+    ok 3 - local refusal scope rejects other score
+      ---
+      duration_ms: 0.151579
+      type: 'test'
+      ...
+    # Subtest: local refusal scope rejects other public state
+    ok 4 - local refusal scope rejects other public state
+      ---
+      duration_ms: 0.158118
+      type: 'test'
+      ...
+    # Subtest: local refusal scope rejects other input domain
+    ok 5 - local refusal scope rejects other input domain
+      ---
+      duration_ms: 0.173032
+      type: 'test'
+      ...
+    # Subtest: local refusal scope rejects changed image during the invitation
+    ok 6 - local refusal scope rejects changed image during the invitation
+      ---
+      duration_ms: 0.132881
+      type: 'test'
+      ...
+    # Subtest: local refusal scope rejects another contact response
+    ok 7 - local refusal scope rejects another contact response
+      ---
+      duration_ms: 0.212341
+      type: 'test'
+      ...
+    # Subtest: local refusal scope rejects another contact command
+    ok 8 - local refusal scope rejects another contact command
+      ---
+      duration_ms: 0.225471
+      type: 'test'
+      ...
+    # Subtest: local refusal scope rejects another contact image
+    ok 9 - local refusal scope rejects another contact image
+      ---
+      duration_ms: 0.147012
+      type: 'test'
+      ...
+    # Subtest: source contact models and later contact events preserve the original refusal
+    ok 10 - source contact models and later contact events preserve the original refusal
+      ---
+      duration_ms: 0.320914
+      type: 'test'
+      ...
+    # Subtest: a current guard veto prevents the independently grounded unknown question
+    ok 11 - a current guard veto prevents the independently grounded unknown question
+      ---
+      duration_ms: 44.542893
+      type: 'test'
+      ...
+    # Subtest: an earlier unsupported window question cannot borrow a later acquired editor context
+    ok 12 - an earlier unsupported window question cannot borrow a later acquired editor context
+      ---
+      duration_ms: 19.602963
+      type: 'test'
+      ...
+    1..12
+ok 110 - cold common acquisition scopes a contact refusal and measures a conditional return preparation
+  ---
+  duration_ms: 72398.883662
+  type: 'test'
+  ...
+# Subtest: independent public mode acquisition grounds the exact source continuation, whose input differs from the mode input
+ok 111 - independent public mode acquisition grounds the exact source continuation, whose input differs from the mode input
+  ---
+  duration_ms: 103.962219
+  type: 'test'
+  ...
+# Subtest: portable revalidation requires both public contrasts and remains conditional in a restored new scope
+ok 112 - portable revalidation requires both public contrasts and remains conditional in a restored new scope
+  ---
+  duration_ms: 113.110414
+  type: 'test'
+  ...
+# Subtest: source seals permit caller routing only and reject mutation of every source-produced proposal field
+ok 113 - source seals permit caller routing only and reject mutation of every source-produced proposal field
+  ---
+  duration_ms: 56.645944
+  type: 'test'
+  ...
+# Subtest: all restore paths and each new proposal consultation clear the transient source selection
+ok 114 - all restore paths and each new proposal consultation clear the transient source selection
+  ---
+  duration_ms: 55.352241
+  type: 'test'
+  ...
+# Subtest: current continuation rejects lost contrast, wrong epoch, changed method and scoped rejection
+ok 115 - current continuation rejects lost contrast, wrong epoch, changed method and scoped rejection
+  ---
+  duration_ms: 215.303086
+  type: 'test'
+  ...
+# Subtest: portable evidence cannot reuse one public contrast as both directions or survive a current refutation
+ok 116 - portable evidence cannot reuse one public contrast as both directions or survive a current refutation
+  ---
+  duration_ms: 242.986169
+  type: 'test'
+  ...
+# Subtest: pre-panel native checkpoints retain their exact digest and can replace later panel evidence
+ok 117 - pre-panel native checkpoints retain their exact digest and can replace later panel evidence
+  ---
+  duration_ms: 27.875372
+  type: 'test'
+  ...
+# Subtest: the shared immutable panel checkpoint replays once from Kernel and then retains its certificate
+ok 118 - the shared immutable panel checkpoint replays once from Kernel and then retains its certificate
+  ---
+  duration_ms: 25.362448
+  type: 'test'
+  ...
+# Subtest: direct panel reduction, layer replacement and container edits invalidate the shared certificate
+ok 119 - direct panel reduction, layer replacement and container edits invalidate the shared certificate
+  ---
+  duration_ms: 36.248542
+  type: 'test'
+  ...
+# Subtest: invalid panel restoration is atomic for all shared layers and keeps the previous certificate
+ok 120 - invalid panel restoration is atomic for all shared layers and keeps the previous certificate
+  ---
+  duration_ms: 17.226356
+  type: 'test'
+  ...
+# Subtest: panel reduction outside the common journal cannot certify a fresh native checkpoint
+ok 121 - panel reduction outside the common journal cannot certify a fresh native checkpoint
+  ---
+  duration_ms: 11.613691
+  type: 'test'
+  ...
+# Subtest: shared observed wrapper and point binding match original public_initial
+ok 122 - shared observed wrapper and point binding match original public_initial
+  ---
+  duration_ms: 120.9869
+  type: 'test'
+  ...
+# Subtest: shared observed wrapper and point binding match original batch_after_observed_selection
+ok 123 - shared observed wrapper and point binding match original batch_after_observed_selection
+  ---
+  duration_ms: 178.628788
+  type: 'test'
+  ...
+# Subtest: shared observed wrapper and point binding match original remaining_one
+ok 124 - shared observed wrapper and point binding match original remaining_one
+  ---
+  duration_ms: 104.192001
+  type: 'test'
+  ...
+# Subtest: shared observed wrapper and point binding match original remaining_zero
+ok 125 - shared observed wrapper and point binding match original remaining_zero
+  ---
+  duration_ms: 2.419943
+  type: 'test'
+  ...
+# Subtest: shared observed wrapper and point binding match original remaining_negative
+ok 126 - shared observed wrapper and point binding match original remaining_negative
+  ---
+  duration_ms: 2.150066
+  type: 'test'
+  ...
+# Subtest: shared observed wrapper and point binding match original deadline_missing
+ok 127 - shared observed wrapper and point binding match original deadline_missing
+  ---
+  duration_ms: 2.138639
+  type: 'test'
+  ...
+# Subtest: shared observed wrapper and point binding match original configured_application
+ok 128 - shared observed wrapper and point binding match original configured_application
+  ---
+  duration_ms: 32.265449
+  type: 'test'
+  ...
+# Subtest: panel guards retain priority over every older plan in mixed envelopes
+ok 129 - panel guards retain priority over every older plan in mixed envelopes
+  ---
+  duration_ms: 94.27525
+  type: 'test'
+  ...
+# Subtest: an empty panel plan delegates inherited before and after guards by Python truthiness
+ok 130 - an empty panel plan delegates inherited before and after guards by Python truthiness
+  ---
+  duration_ms: 5.460513
+  type: 'test'
+  ...
+# Subtest: all three source adapters preserve a blocking panel refusal from their one shared planner
+ok 131 - all three source adapters preserve a blocking panel refusal from their one shared planner
+  ---
+  duration_ms: 53.021222
+  type: 'test'
+  ...
+# Subtest: shared acquisition calls inherited and panel records once and certifies their one journal
+ok 132 - shared acquisition calls inherited and panel records once and certifies their one journal
+  ---
+  duration_ms: 145.071252
+  type: 'test'
+  ...
+# Subtest: unchanged actual V7 hydration skips replay but public restore still validates every event
+ok 133 - unchanged actual V7 hydration skips replay but public restore still validates every event
+  ---
+  duration_ms: 14.223423
+  type: 'test'
+  ...
+# Subtest: native retained-fact roundtrip shares old immutable entries and performs no journal replay
+ok 134 - native retained-fact roundtrip shares old immutable entries and performs no journal replay
+  ---
+  duration_ms: 16.834223
+  type: 'test'
+  ...
+# Subtest: public snapshots remain independently mutable despite internal journal and model sharing
+ok 135 - public snapshots remain independently mutable despite internal journal and model sharing
+  ---
+  duration_ms: 10.258476
+  type: 'test'
+  ...
+# Subtest: the same old authoritative object rolls back after a new local acquisition
+ok 136 - the same old authoritative object rolls back after a new local acquisition
+  ---
+  duration_ms: 35.821617
+  type: 'test'
+  ...
+# Subtest: mutable and shallow-frozen input identities never bypass later corruption validation
+ok 137 - mutable and shallow-frozen input identities never bypass later corruption validation
+  ---
+  duration_ms: 17.782225
+  type: 'test'
+  ...
+# Subtest: a rejected native restore leaves the accepted checkpoint and all working layers intact
+ok 138 - a rejected native restore leaves the accepted checkpoint and all working layers intact
+  ---
+  duration_ms: 14.442092
+  type: 'test'
+  ...
+# Subtest: direct public reducers and mutable containers invalidate reuse of an accepted immutable state
+ok 139 - direct public reducers and mutable containers invalidate reuse of an accepted immutable state
+  ---
+  duration_ms: 56.449167
+  type: 'test'
+  ...
+# Subtest: an inconsistent direct reducer change cannot certify its own freshly generated checkpoint
+ok 140 - an inconsistent direct reducer change cannot certify its own freshly generated checkpoint
+  ---
+  duration_ms: 7.581615
+  type: 'test'
+  ...
+# Subtest: partial record failure invalidates reuse before any recovery restoration
+ok 141 - partial record failure invalidates reuse before any recovery restoration
+  ---
+  duration_ms: 17.900513
+  type: 'test'
+  ...
+# Subtest: auxiliary selection/model/return journals retain source projections through native checkpoints
+ok 142 - auxiliary selection/model/return journals retain source projections through native checkpoints
+  ---
+  duration_ms: 45.974845
+  type: 'test'
+  ...
+# Subtest: same root with a revised fragment revalidates hydration, and corrupted fragment content is rejected
+ok 143 - same root with a revised fragment revalidates hydration, and corrupted fragment content is rejected
+  ---
+  duration_ms: 261.762815
+  type: 'test'
+  ...
+# Subtest: the native shared factory exposes both internal hooks while preserving public copies
+ok 144 - the native shared factory exposes both internal hooks while preserving public copies
+  ---
+  duration_ms: 6.263335
+  type: 'test'
+  ...
+# Subtest: stationary refusal follows declared groups and caches named and unnamed null consultations
+ok 145 - stationary refusal follows declared groups and caches named and unnamed null consultations
+  ---
+  duration_ms: 59.231364
+  type: 'test'
+  ...
+# Subtest: same-group remainder owns the first question before later groups
+ok 146 - same-group remainder owns the first question before later groups
+  ---
+  duration_ms: 15.688523
+  type: 'test'
+  ...
+# Subtest: first earlier missing witness retains the contact refusal without consulting a later provider
+ok 147 - first earlier missing witness retains the contact refusal without consulting a later provider
+  ---
+  duration_ms: 16.666599
+  type: 'test'
+  ...
+# Subtest: first earlier stale witness retains the contact refusal without consulting a later provider
+ok 148 - first earlier stale witness retains the contact refusal without consulting a later provider
+  ---
+  duration_ms: 28.805983
+  type: 'test'
+  ...
+# Subtest: first earlier current guard veto retains the contact refusal without consulting a later provider
+ok 149 - first earlier current guard veto retains the contact refusal without consulting a later provider
+  ---
+  duration_ms: 15.942707
+  type: 'test'
+  ...
+# Subtest: first earlier unknown proposal retains the contact refusal without consulting a later provider
+ok 150 - first earlier unknown proposal retains the contact refusal without consulting a later provider
+  ---
+  duration_ms: 21.986961
+  type: 'test'
+  ...
+# Subtest: first earlier empty action prefix retains the contact refusal without consulting a later provider
+ok 151 - first earlier empty action prefix retains the contact refusal without consulting a later provider
+  ---
+  duration_ms: 12.943659
+  type: 'test'
+  ...
+# Subtest: first earlier required current service retains the contact refusal without consulting a later provider
+ok 152 - first earlier required current service retains the contact refusal without consulting a later provider
+  ---
+  duration_ms: 18.677335
+  type: 'test'
+  ...
+# Subtest: first earlier global refusal after null retains the contact refusal without consulting a later provider
+ok 153 - first earlier global refusal after null retains the contact refusal without consulting a later provider
+  ---
+  duration_ms: 17.381628
+  type: 'test'
+  ...
+# Subtest: sourceGroupStop closes its remaining group and leaves the next declared group available
+ok 154 - sourceGroupStop closes its remaining group and leaves the next declared group available
+  ---
+  duration_ms: 18.579276
+  type: 'test'
+  ...
+# Subtest: a coordination witness never bypasses the actual execution guard
+ok 155 - a coordination witness never bypasses the actual execution guard
+  ---
+  duration_ms: 13.188108
+  type: 'test'
+  ...
+# Subtest: recolor has one cold owner at its declared material position and uses the existing source program
+ok 156 - recolor has one cold owner at its declared material position and uses the existing source program
+  ---
+  duration_ms: 1438.459644
+  type: 'test'
+  ...
+# Subtest: foreign public returns never become recolor records or selected recolor events
+ok 157 - foreign public returns never become recolor records or selected recolor events
+  ---
+  duration_ms: 3849.745919
+  type: 'test'
+  ...
+# Subtest: four synthetic source selections and paints pass common WHY/ACT, acquire once and restore complete evidence
+ok 158 - four synthetic source selections and paints pass common WHY/ACT, acquire once and restore complete evidence
+  ---
+  duration_ms: 2571.973131
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: unique_public_palette_legend_field
+ok 159 - recolor original geometry: unique_public_palette_legend_field
+  ---
+  duration_ms: 13.729271
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: source_component_order
+ok 160 - recolor original geometry: source_component_order
+  ---
+  duration_ms: 4.007811
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: source_cropped_components
+ok 161 - recolor original geometry: source_cropped_components
+  ---
+  duration_ms: 1.383499
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: selection_support_signature
+ok 162 - recolor original geometry: selection_support_signature
+  ---
+  duration_ms: 0.316668
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: horizontal_mirror
+ok 163 - recolor original geometry: horizontal_mirror
+  ---
+  duration_ms: 15.680968
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: vertical_mirror
+ok 164 - recolor original geometry: vertical_mirror
+  ---
+  duration_ms: 5.289367
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: palette_bijection
+ok 165 - recolor original geometry: palette_bijection
+  ---
+  duration_ms: 5.266483
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: no_palette
+ok 166 - recolor original geometry: no_palette
+  ---
+  duration_ms: 1.515058
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: empty
+ok 167 - recolor original geometry: empty
+  ---
+  duration_ms: 0.610592
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: empty_row
+ok 168 - recolor original geometry: empty_row
+  ---
+  duration_ms: 0.528718
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: fewer_than_three_wells
+ok 169 - recolor original geometry: fewer_than_three_wells
+  ---
+  duration_ms: 3.166752
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: nonunique_well_pigments
+ok 170 - recolor original geometry: nonunique_well_pigments
+  ---
+  duration_ms: 1.758515
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: conflicting_legend_class
+ok 171 - recolor original geometry: conflicting_legend_class
+  ---
+  duration_ms: 3.025278
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: complete_pocket_0
+ok 172 - recolor original geometry: complete_pocket_0
+  ---
+  duration_ms: 0.495688
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: complete_pocket_1
+ok 173 - recolor original geometry: complete_pocket_1
+  ---
+  duration_ms: 0.328456
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: clipped_closed_visible_pocket
+ok 174 - recolor original geometry: clipped_closed_visible_pocket
+  ---
+  duration_ms: 0.342727
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: open_visible_pocket
+ok 175 - recolor original geometry: open_visible_pocket
+  ---
+  duration_ms: 0.17248
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: completed_symmetric_partitions_need_actual_write
+ok 176 - recolor original geometry: completed_symmetric_partitions_need_actual_write
+  ---
+  duration_ms: 7.108884
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: actual_local_write_disambiguates_partition
+ok 177 - recolor original geometry: actual_local_write_disambiguates_partition
+  ---
+  duration_ms: 4.385352
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: partition_receipt_foreign_epoch
+ok 178 - recolor original geometry: partition_receipt_foreign_epoch
+  ---
+  duration_ms: 3.862202
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: partition_receipt_outside_write
+ok 179 - recolor original geometry: partition_receipt_outside_write
+  ---
+  duration_ms: 4.912859
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: partition_receipt_missing_evidence
+ok 180 - recolor original geometry: partition_receipt_missing_evidence
+  ---
+  duration_ms: 5.768661
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: partition_receipt_wrong_pigment
+ok 181 - recolor original geometry: partition_receipt_wrong_pigment
+  ---
+  duration_ms: 4.193061
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: partition_receipt_outside_mask
+ok 182 - recolor original geometry: partition_receipt_outside_mask
+  ---
+  duration_ms: 5.31133
+  type: 'test'
+  ...
+# Subtest: recolor original geometry: partition_receipt_foreign_binding
+ok 183 - recolor original geometry: partition_receipt_foreign_binding
+  ---
+  duration_ms: 6.465392
+  type: 'test'
+  ...
+# Subtest: recolor original family: horizontal_mirror_proposal
+ok 184 - recolor original family: horizontal_mirror_proposal
+  ---
+  duration_ms: 28.779488
+  type: 'test'
+  ...
+# Subtest: recolor original family: vertical_mirror_proposal
+ok 185 - recolor original family: vertical_mirror_proposal
+  ---
+  duration_ms: 5.035443
+  type: 'test'
+  ...
+# Subtest: recolor original family: palette_bijection_proposal
+ok 186 - recolor original family: palette_bijection_proposal
+  ---
+  duration_ms: 6.645795
+  type: 'test'
+  ...
+# Subtest: recolor original family: no_budget_still_scopes
+ok 187 - recolor original family: no_budget_still_scopes
+  ---
+  duration_ms: 2.997647
+  type: 'test'
+  ...
+# Subtest: recolor original family: missing_point_interface
+ok 188 - recolor original family: missing_point_interface
+  ---
+  duration_ms: 1.738866
+  type: 'test'
+  ...
+# Subtest: recolor original family: unrelated_picture_abstains
+ok 189 - recolor original family: unrelated_picture_abstains
+  ---
+  duration_ms: 3.520315
+  type: 'test'
+  ...
+# Subtest: recolor original family: caller_inputs_do_not_supply_geometry
+ok 190 - recolor original family: caller_inputs_do_not_supply_geometry
+  ---
+  duration_ms: 4.062575
+  type: 'test'
+  ...
+# Subtest: recolor original family: step_1_proposal
+ok 191 - recolor original family: step_1_proposal
+  ---
+  duration_ms: 7.289618
+  type: 'test'
+  ...
+# Subtest: recolor original family: step_1_offers
+ok 192 - recolor original family: step_1_offers
+  ---
+  duration_ms: 4.521007
+  type: 'test'
+  ...
+# Subtest: recolor original family: step_1_before
+ok 193 - recolor original family: step_1_before
+  ---
+  duration_ms: 4.144518
+  type: 'test'
+  ...
+# Subtest: recolor original family: step_1_after
+ok 194 - recolor original family: step_1_after
+  ---
+  duration_ms: 9.135674
+  type: 'test'
+  ...
+# Subtest: recolor original family: step_1_record
+ok 195 - recolor original family: step_1_record
+  ---
+  duration_ms: 4.921872
+  type: 'test'
+  ...
+# Subtest: recolor original family: step_2_proposal
+ok 196 - recolor original family: step_2_proposal
+  ---
+  duration_ms: 6.550121
+  type: 'test'
+  ...
+# Subtest: recolor original family: step_2_offers
+ok 197 - recolor original family: step_2_offers
+  ---
+  duration_ms: 4.19861
+  type: 'test'
+  ...
+# Subtest: recolor original family: step_2_before
+ok 198 - recolor original family: step_2_before
+  ---
+  duration_ms: 4.472153
+  type: 'test'
+  ...
+# Subtest: recolor original family: step_2_after
+ok 199 - recolor original family: step_2_after
+  ---
+  duration_ms: 1.887099
+  type: 'test'
+  ...
+# Subtest: recolor original family: step_2_record
+ok 200 - recolor original family: step_2_record
+  ---
+  duration_ms: 4.012118
+  type: 'test'
+  ...
+# Subtest: recolor original family: step_3_proposal
+ok 201 - recolor original family: step_3_proposal
+  ---
+  duration_ms: 4.812396
+  type: 'test'
+  ...
+# Subtest: recolor original family: step_3_offers
+ok 202 - recolor original family: step_3_offers
+  ---
+  duration_ms: 4.15911
+  type: 'test'
+  ...
+# Subtest: recolor original family: step_3_before
+ok 203 - recolor original family: step_3_before
+  ---
+  duration_ms: 4.465773
+  type: 'test'
+  ...
+# Subtest: recolor original family: step_3_after
+ok 204 - recolor original family: step_3_after
+  ---
+  duration_ms: 3.84116
+  type: 'test'
+  ...
+# Subtest: recolor original family: step_3_record
+ok 205 - recolor original family: step_3_record
+  ---
+  duration_ms: 4.052018
+  type: 'test'
+  ...
+# Subtest: recolor original family: step_4_proposal
+ok 206 - recolor original family: step_4_proposal
+  ---
+  duration_ms: 5.062995
+  type: 'test'
+  ...
+# Subtest: recolor original family: step_4_offers
+ok 207 - recolor original family: step_4_offers
+  ---
+  duration_ms: 4.280864
+  type: 'test'
+  ...
+# Subtest: recolor original family: step_4_before
+ok 208 - recolor original family: step_4_before
+  ---
+  duration_ms: 4.287915
+  type: 'test'
+  ...
+# Subtest: recolor original family: step_4_after
+ok 209 - recolor original family: step_4_after
+  ---
+  duration_ms: 2.757814
+  type: 'test'
+  ...
+# Subtest: recolor original family: step_4_record
+ok 210 - recolor original family: step_4_record
+  ---
+  duration_ms: 5.346112
+  type: 'test'
+  ...
+# Subtest: recolor original family: all_shell_targets_match
+ok 211 - recolor original family: all_shell_targets_match
+  ---
+  duration_ms: 4.675861
+  type: 'test'
+  ...
+# Subtest: recolor original family: exact_bind
+ok 212 - recolor original family: exact_bind
+  ---
+  duration_ms: 1.458803
+  type: 'test'
+  ...
+# Subtest: recolor original family: changed_action_step_mismatch
+ok 213 - recolor original family: changed_action_step_mismatch
+  ---
+  duration_ms: 1.491222
+  type: 'test'
+  ...
+# Subtest: recolor original family: consistent_but_wrong_point_refused
+ok 214 - recolor original family: consistent_but_wrong_point_refused
+  ---
+  duration_ms: 4.140942
+  type: 'test'
+  ...
+# Subtest: recolor original family: stale_observation_ref
+ok 215 - recolor original family: stale_observation_ref
+  ---
+  duration_ms: 2.624463
+  type: 'test'
+  ...
+# Subtest: recolor original family: stale_level_epoch
+ok 216 - recolor original family: stale_level_epoch
+  ---
+  duration_ms: 1.41073
+  type: 'test'
+  ...
+# Subtest: recolor original family: stale_frame_hash
+ok 217 - recolor original family: stale_frame_hash
+  ---
+  duration_ms: 1.499384
+  type: 'test'
+  ...
+# Subtest: recolor original family: wrong_prefix_index
+ok 218 - recolor original family: wrong_prefix_index
+  ---
+  duration_ms: 1.760248
+  type: 'test'
+  ...
+# Subtest: recolor original family: missing_action_at_guard
+ok 219 - recolor original family: missing_action_at_guard
+  ---
+  duration_ms: 5.121654
+  type: 'test'
+  ...
+# Subtest: recolor original family: changed_topology_at_guard
+ok 220 - recolor original family: changed_topology_at_guard
+  ---
+  duration_ms: 2.425332
+  type: 'test'
+  ...
+# Subtest: recolor original family: no_effect_is_only_attempt
+ok 221 - recolor original family: no_effect_is_only_attempt
+  ---
+  duration_ms: 5.148715
+  type: 'test'
+  ...
+# Subtest: recolor original family: selection_with_foreign_effect_not_acquired
+ok 222 - recolor original family: selection_with_foreign_effect_not_acquired
+  ---
+  duration_ms: 3.490861
+  type: 'test'
+  ...
+# Subtest: recolor original family: foreign_proposal_not_acquired
+ok 223 - recolor original family: foreign_proposal_not_acquired
+  ---
+  duration_ms: 1.410349
+  type: 'test'
+  ...
+# Subtest: recolor original family: write_outside_support_retains_refutation
+ok 224 - recolor original family: write_outside_support_retains_refutation
+  ---
+  duration_ms: 3.652596
+  type: 'test'
+  ...
+# Subtest: recolor original family: official_boundary_retains_hypotheses_only
+ok 225 - recolor original family: official_boundary_retains_hypotheses_only
+  ---
+  duration_ms: 9.852206
+  type: 'test'
+  ...
+# Subtest: recolor original family: portable_current_method_is_revalidated
+ok 226 - recolor original family: portable_current_method_is_revalidated
+  ---
+  duration_ms: 4.292071
+  type: 'test'
+  ...
+# Subtest: recolor original family: partial_restore_preserves_other_fields
+ok 227 - recolor original family: partial_restore_preserves_other_fields
+  ---
+  duration_ms: 1.689671
+  type: 'test'
+  ...
+# Subtest: recolor original family: same_scope_keeps_current_evidence
+ok 228 - recolor original family: same_scope_keeps_current_evidence
+  ---
+  duration_ms: 1.393194
+  type: 'test'
+  ...
+# Subtest: recolor original family: scope_without_effect_does_not_fabricate_portable
+ok 229 - recolor original family: scope_without_effect_does_not_fabricate_portable
+  ---
+  duration_ms: 7.635841
+  type: 'test'
+  ...
+# Subtest: recolor original family: selection_wrong_method_signature
+ok 230 - recolor original family: selection_wrong_method_signature
+  ---
+  duration_ms: 2.473826
+  type: 'test'
+  ...
+# Subtest: recolor original family: selection_missing_two_observations
+ok 231 - recolor original family: selection_missing_two_observations
+  ---
+  duration_ms: 1.303158
+  type: 'test'
+  ...
+# Subtest: recolor original family: selection_other_action
+ok 232 - recolor original family: selection_other_action
+  ---
+  duration_ms: 1.782251
+  type: 'test'
+  ...
+# Subtest: recolor original local DRM/SRC: shell:False:False
+ok 233 - recolor original local DRM/SRC: shell:False:False
+  ---
+  duration_ms: 1.848592
+  type: 'test'
+  ...
+# Subtest: recolor original local DRM/SRC: shell:False:True
+ok 234 - recolor original local DRM/SRC: shell:False:True
+  ---
+  duration_ms: 1.117247
+  type: 'test'
+  ...
+# Subtest: recolor original local DRM/SRC: shell:True:False
+ok 235 - recolor original local DRM/SRC: shell:True:False
+  ---
+  duration_ms: 1.399714
+  type: 'test'
+  ...
+# Subtest: recolor original local DRM/SRC: shell:True:True
+ok 236 - recolor original local DRM/SRC: shell:True:True
+  ---
+  duration_ms: 1.335186
+  type: 'test'
+  ...
+# Subtest: recolor original local DRM/SRC: surround:False:False
+ok 237 - recolor original local DRM/SRC: surround:False:False
+  ---
+  duration_ms: 2.324159
+  type: 'test'
+  ...
+# Subtest: recolor original local DRM/SRC: surround:False:True
+ok 238 - recolor original local DRM/SRC: surround:False:True
+  ---
+  duration_ms: 1.154393
+  type: 'test'
+  ...
+# Subtest: recolor original local DRM/SRC: surround:True:False
+ok 239 - recolor original local DRM/SRC: surround:True:False
+  ---
+  duration_ms: 1.100932
+  type: 'test'
+  ...
+# Subtest: recolor original local DRM/SRC: surround:True:True
+ok 240 - recolor original local DRM/SRC: surround:True:True
+  ---
+  duration_ms: 1.1055
+  type: 'test'
+  ...
+# Subtest: recolor original local DRM/SRC: unknown:False:False
+ok 241 - recolor original local DRM/SRC: unknown:False:False
+  ---
+  duration_ms: 1.082946
+  type: 'test'
+  ...
+# Subtest: recolor original local DRM/SRC: unknown:False:True
+ok 242 - recolor original local DRM/SRC: unknown:False:True
+  ---
+  duration_ms: 1.171239
+  type: 'test'
+  ...
+# Subtest: recolor original local DRM/SRC: unknown:True:False
+ok 243 - recolor original local DRM/SRC: unknown:True:False
+  ---
+  duration_ms: 1.07294
+  type: 'test'
+  ...
+# Subtest: recolor original local DRM/SRC: unknown:True:True
+ok 244 - recolor original local DRM/SRC: unknown:True:True
+  ---
+  duration_ms: 0.998207
+  type: 'test'
+  ...
+# Subtest: recolor original local DRM/SRC: empty
+ok 245 - recolor original local DRM/SRC: empty
+  ---
+  duration_ms: 0.964526
+  type: 'test'
+  ...
+# Subtest: recolor consumed V5 budget: normal
+ok 246 - recolor consumed V5 budget: normal
+  ---
+  duration_ms: 0.434937
+  type: 'test'
+  ...
+# Subtest: recolor consumed V5 budget: node_interrupt
+ok 247 - recolor consumed V5 budget: node_interrupt
+  ---
+  duration_ms: 0.470511
+  type: 'test'
+  ...
+# Subtest: recolor consumed V5 budget: domain_interrupt
+ok 248 - recolor consumed V5 budget: domain_interrupt
+  ---
+  duration_ms: 0.089355
+  type: 'test'
+  ...
+# Subtest: recolor consumed V5 budget: time_interrupt
+ok 249 - recolor consumed V5 budget: time_interrupt
+  ---
+  duration_ms: 0.10644
+  type: 'test'
+  ...
+# Subtest: recolor consumed V5 budget: digital_connectivity_4
+ok 250 - recolor consumed V5 budget: digital_connectivity_4
+  ---
+  duration_ms: 0.082054
+  type: 'test'
+  ...
+# Subtest: recolor consumed V5 budget: digital_connectivity_8
+ok 251 - recolor consumed V5 budget: digital_connectivity_8
+  ---
+  duration_ms: 0.05944
+  type: 'test'
+  ...
+# Subtest: recolor reference is anchored to unchanged original source, including consumed V5 helpers
+ok 252 - recolor reference is anchored to unchanged original source, including consumed V5 helpers
+  ---
+  duration_ms: 25.432784
+  type: 'test'
+  ...
+# Subtest: four controlled source steps preserve unknown goal status and fall back to a real shell pixel
+ok 253 - four controlled source steps preserve unknown goal status and fall back to a real shell pixel
+  ---
+  duration_ms: 40.966169
+  type: 'test'
+  ...
+# Subtest: recolor entry preserves source proposal and refuses unrelated source entries
+ok 254 - recolor entry preserves source proposal and refuses unrelated source entries
+  ---
+  duration_ms: 7.399123
+  type: 'test'
+  ...
+# Subtest: recolor source inputs do not replace current observation or expand the geometric domain
+ok 255 - recolor source inputs do not replace current observation or expand the geometric domain
+  ---
+  duration_ms: 3.472263
+  type: 'test'
+  ...
+# Subtest: recolor checkpoints are detached, immutable, atomic and retain exactly six source fields
+ok 256 - recolor checkpoints are detached, immutable, atomic and retain exactly six source fields
+  ---
+  duration_ms: 9.12633
+  type: 'test'
+  ...
+# Subtest: V5 pocket failure never becomes a complete topology receipt
+ok 257 - V5 pocket failure never becomes a complete topology receipt
+  ---
+  duration_ms: 0.517041
+  type: 'test'
+  ...
+# Subtest: cold production caller acquires a public mode contrast, scopes a stationary contact and releases only the exact Workshop continuation
+ok 258 - cold production caller acquires a public mode contrast, scopes a stationary contact and releases only the exact Workshop continuation
+  ---
+  duration_ms: 3151.446505
+  type: 'test'
+  ...
+# Subtest: fresh independent Workshop oracle pins unchanged original source and excludes game inputs and native caller parity
+ok 259 - fresh independent Workshop oracle pins unchanged original source and excludes game inputs and native caller parity
+  ---
+  duration_ms: 212.360727
+  type: 'test'
+  ...
+# Subtest: independent Workshop raster and complete public measurement match Python: free
+ok 260 - independent Workshop raster and complete public measurement match Python: free
+  ---
+  duration_ms: 12.967265
+  type: 'test'
+  ...
+# Subtest: independent Workshop raster and complete public measurement match Python: held
+ok 261 - independent Workshop raster and complete public measurement match Python: held
+  ---
+  duration_ms: 13.140897
+  type: 'test'
+  ...
+# Subtest: independent Workshop raster and complete public measurement match Python: held_no_effect
+ok 262 - independent Workshop raster and complete public measurement match Python: held_no_effect
+  ---
+  duration_ms: 5.99542
+  type: 'test'
+  ...
+# Subtest: independent Workshop raster and complete public measurement match Python: returned
+ok 263 - independent Workshop raster and complete public measurement match Python: returned
+  ---
+  duration_ms: 4.185198
+  type: 'test'
+  ...
+# Subtest: independent Workshop raster and complete public measurement match Python: next_epoch
+ok 264 - independent Workshop raster and complete public measurement match Python: next_epoch
+  ---
+  duration_ms: 5.319821
+  type: 'test'
+  ...
+# Subtest: independent Workshop raster and complete public measurement match Python: failed_revalidation
+ok 265 - independent Workshop raster and complete public measurement match Python: failed_revalidation
+  ---
+  duration_ms: 4.04763
+  type: 'test'
+  ...
+# Subtest: original acquired Workshop chain: cold_current_continuation
+    # Subtest: 1 propose
+    ok 1 - 1 propose
+      ---
+      duration_ms: 18.279724
+      type: 'test'
+      ...
+    # Subtest: 2 record
+    ok 2 - 2 record
+      ---
+      duration_ms: 13.76523
+      type: 'test'
+      ...
+    # Subtest: 3 propose
+    ok 3 - 3 propose
+      ---
+      duration_ms: 11.932122
+      type: 'test'
+      ...
+    # Subtest: 4 bind
+    ok 4 - 4 bind
+      ---
+      duration_ms: 0.453544
+      type: 'test'
+      ...
+    # Subtest: 5 before
+    ok 5 - 5 before
+      ---
+      duration_ms: 12.18878
+      type: 'test'
+      ...
+    # Subtest: 6 before
+    ok 6 - 6 before
+      ---
+      duration_ms: 0.784264
+      type: 'test'
+      ...
+    # Subtest: 7 after
+    ok 7 - 7 after
+      ---
+      duration_ms: 1.052178
+      type: 'test'
+      ...
+    # Subtest: 8 restore
+    ok 8 - 8 restore
+      ---
+      duration_ms: 0.559885
+      type: 'test'
+      ...
+    # Subtest: 9 propose
+    ok 9 - 9 propose
+      ---
+      duration_ms: 14.333307
+      type: 'test'
+      ...
+    # Subtest: 10 record
+    ok 10 - 10 record
+      ---
+      duration_ms: 8.741326
+      type: 'test'
+      ...
+    # Subtest: 11 restore
+    ok 11 - 11 restore
+      ---
+      duration_ms: 0.505824
+      type: 'test'
+      ...
+    # Subtest: 12 propose
+    ok 12 - 12 propose
+      ---
+      duration_ms: 10.556286
+      type: 'test'
+      ...
+    1..12
+ok 266 - original acquired Workshop chain: cold_current_continuation
+  ---
+  duration_ms: 103.144173
+  type: 'test'
+  ...
+# Subtest: original acquired Workshop chain: portable_both_contrasts_and_new_scope_refutation
+    # Subtest: 1 record
+    ok 1 - 1 record
+      ---
+      duration_ms: 16.474249
+      type: 'test'
+      ...
+    # Subtest: 2 record
+    ok 2 - 2 record
+      ---
+      duration_ms: 7.358809
+      type: 'test'
+      ...
+    # Subtest: 3 record
+    ok 3 - 3 record
+      ---
+      duration_ms: 1.015393
+      type: 'test'
+      ...
+    # Subtest: 4 restore
+    ok 4 - 4 restore
+      ---
+      duration_ms: 0.314975
+      type: 'test'
+      ...
+    # Subtest: 5 propose
+    ok 5 - 5 propose
+      ---
+      duration_ms: 10.687303
+      type: 'test'
+      ...
+    # Subtest: 6 bind
+    ok 6 - 6 bind
+      ---
+      duration_ms: 0.212561
+      type: 'test'
+      ...
+    # Subtest: 7 before
+    ok 7 - 7 before
+      ---
+      duration_ms: 6.361683
+      type: 'test'
+      ...
+    # Subtest: 8 before
+    ok 8 - 8 before
+      ---
+      duration_ms: 0.680517
+      type: 'test'
+      ...
+    # Subtest: 9 after
+    ok 9 - 9 after
+      ---
+      duration_ms: 0.997336
+      type: 'test'
+      ...
+    # Subtest: 10 record
+    ok 10 - 10 record
+      ---
+      duration_ms: 6.217395
+      type: 'test'
+      ...
+    # Subtest: 11 restore
+    ok 11 - 11 restore
+      ---
+      duration_ms: 0.524301
+      type: 'test'
+      ...
+    # Subtest: 12 propose
+    ok 12 - 12 propose
+      ---
+      duration_ms: 6.428824
+      type: 'test'
+      ...
+    1..12
+ok 267 - original acquired Workshop chain: portable_both_contrasts_and_new_scope_refutation
+  ---
+  duration_ms: 65.503592
+  type: 'test'
+  ...
+1..267
+# tests 308
+# suites 0
+# pass 308
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 159753.878334

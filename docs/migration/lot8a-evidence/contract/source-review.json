@@ -1,0 +1,351 @@
+{
+  "schema": "logos-engine.v6.motif-access-independent-source-review.v1",
+  "recordedAt": "2026-11-11T17:03:06.234574+00:00",
+  "status": "passed_source_review_only",
+  "reviewer": "/root/audit_caller_contract",
+  "sourceBasis": {
+    "checkout": "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout",
+    "baselineSiteVersion": 101,
+    "baselineNativeVersion": "0.61.0",
+    "baselineCommitPrefix": "d75a36f",
+    "qualification": "This immutable review covers the isolated Site101 source plus the exact 8A files below. The newly published Site103/native0.62 predecessor has not been integrated into this reviewed snapshot. A later integration requires its own review and fresh validation; this receipt must not be relabeled."
+  },
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "nativeSources": [
+    {
+      "path": "src/logos-engine/v6-motif-access.ts",
+      "sha256": "2302d521959133b39560792d01ae4c2403a3b4b4a333ae10e089359a403394e0",
+      "bytes": 32665
+    },
+    {
+      "path": "src/logos-engine/v6-motif-access-geometry.ts",
+      "sha256": "36d5e1d51a1ebef5c82dea7951c18fe115af2067624447d39e37100c4a9de9b3",
+      "bytes": 15261
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "sha256": "cdad467a35c9e9cbd9c5c4640deef7b5a1b3e66ff6b750a22052417b93eda800",
+      "bytes": 160825
+    },
+    {
+      "path": "src/logos-engine/v6-field-constraints.ts",
+      "sha256": "0d75ae535fb4e37c7e4ee28474e17e341afd5f436d717356a8f9b5617f1ae619",
+      "bytes": 35731
+    },
+    {
+      "path": "scripts/audit-v6-entry-points.ts",
+      "sha256": "ff990dea63410dbcbb0207cbe7208a3309653fa60be6b47db5e2658061226804",
+      "bytes": 7318
+    }
+  ],
+  "testSources": [
+    {
+      "path": "tests/v6-motif-access-reference.test.ts",
+      "sha256": "57989c648156c9545bc43f43392886ad01c07d16893ae5bd0e20d061fea0c715",
+      "bytes": 12297
+    },
+    {
+      "path": "tests/v6-motif-access-kernel.test.ts",
+      "sha256": "a6f21fbdf6305cec8d23a59076c45ef78bbcb5163434ae9151734287dcefee5b",
+      "bytes": 9890
+    }
+  ],
+  "oracleGenerator": {
+    "path": "scripts/check-v6-motif-access-reference.py",
+    "sha256": "abb0e2d1d73f8e1fe8281954c3d48814464ea711b17176b158990ce57016e9b8",
+    "bytes": 29368
+  },
+  "retainedEvidence": [
+    {
+      "path": "docs/migration/lot8a-evidence/contract/reference-oracle.json",
+      "sha256": "398c868302d0612978dba2ecefef181a28e93d0ebd19c0a5f0fb4dc0714cb098",
+      "bytes": 2061
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/contract/oracle-attempt-01.json",
+      "sha256": "176681a906dba51fb5765880d4ab5592ac0a533ac479c6ab976f5fac9382bb4c",
+      "bytes": 2350
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/contract/native-reference-attempt-01.json",
+      "sha256": "d59a683b93734a387b68fc685487c01620454aba459de64decc10ffb836c46c2",
+      "bytes": 1268
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development/kernel-attempt-01.json",
+      "sha256": "a2b2fdf386839ecdc2aee1886bbf3cc4f28ad4154614639339b6e412a8c56473",
+      "bytes": 1196
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development/kernel-attempt-01.log",
+      "sha256": "f7618420ccbdf0955a0dde4b1f430bcb66b6da5db325309cdca6e27408087520",
+      "bytes": 610
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development/caller-probe-01.json",
+      "sha256": "0212900a263d3a0bbe5fc4e322856a82a7bf221392b39368e2a018897a114e8f",
+      "bytes": 337348
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development/caller-probe-01.log",
+      "sha256": "4f1dba0c3a27c79724bad3817a6a7ddfd586ea6a9d4dbb12dc7f9a4c9766b82c",
+      "bytes": 1903
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development/caller-probe-02.json",
+      "sha256": "3847f364de540191811b252cc29cec422d962dc7f7d83909dc614ae6e9dc3227",
+      "bytes": 338482
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development/caller-probe-02.log",
+      "sha256": "0ac12208efdb0f12bd0a4cf6e2faaf921398b8596905c9231697f9b4303cd395",
+      "bytes": 1343
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/tools/probe-caller.mjs",
+      "sha256": "9e54b0f105358aac17729da0c25020cb5061b5280473b6fb93008a7792921dca",
+      "bytes": 4255
+    }
+  ],
+  "activities": {
+    "sourceReading": true,
+    "developmentReceiptReading": true,
+    "namedFileSha256": true,
+    "reviewerRanTests": false,
+    "reviewerExecutedOracle": false,
+    "reviewerImportedProjectModules": false,
+    "reviewerRanTypecheckOrBuild": false,
+    "reviewerRanGit": false,
+    "reviewerMeasuredPerformance": false,
+    "reviewerDispatchedGameActions": false,
+    "reviewerReadLkeyPayload": false,
+    "onlyWrittenFile": "docs/migration/lot8a-evidence/contract/source-review.json",
+    "coordination": "Small named lot10b/lot5c/lot6b statuses checked before each filesystem command; all reads, fingerprints and this write held the shared performance lock."
+  },
+  "sourceContractReviewed": {
+    "owner": "agents/yf_arc3_v6/laya_proto/common_motif_access.py",
+    "callerFiles": [
+      "agents/yf_arc3_v6/morphology_policy/strategy.py",
+      "agents/yf_arc3_v6/laya_proto/common_frontier_runtime.py"
+    ],
+    "ownerScope": "motif_conditioned_access belongs to factored_material_return, not goal_access.",
+    "persistentAcrossEpoch": [
+      "learned",
+      "motion",
+      "passed",
+      "events"
+    ],
+    "currentEpochRebuilt": [
+      "grid",
+      "tried",
+      "seen",
+      "verified",
+      "selected",
+      "retired",
+      "refs",
+      "ink",
+      "ray",
+      "facing",
+      "blocked",
+      "tracked",
+      "colors"
+    ],
+    "epochQualification": "start remaps the lattice and current body. ui_top and first may remain historical if a new epoch has no grid; the port does not reject that generated state.",
+    "planning": "Acquired translations toward a current homologous target precede ray aiming, then unknown data-free calibration, then untried cards ordered by learned membership, mask length and numeric tuple order. Prefixes preserve the source maximum of sixteen and stop after the first unverified transition or invocation.",
+    "guards": "before rechecks epoch, official progress, available action, first observation, current body and current bits. bind preserves the current observed point address and projection digest. Unknown effects seal the prefix; official boundaries are kept distinct.",
+    "acquisition": "record alone learns. Axis-aligned translation is acquired only from its observed return; no-motion walk records a projection-scoped obstruction; contrary toggle retires the owner; invoke retains the card/pose result and clears verified continuation.",
+    "causalLimit": "learned[mask].body_change is new != old, including true when the body becomes unmeasurable. learned ranks cards; the next route uses current geometry and acquired motion. Neither field proves an access law or official completion."
+  },
+  "integrationReviewed": {
+    "singleOwner": "motif_access",
+    "adapter": "originalEventFamily with subquestionFamily(material_access_subquestion, motif_conditioned_access)",
+    "materialEntryPoint": null,
+    "selectedOnlyAcquisition": true,
+    "passiveMotifAcquisitionAdded": false,
+    "sourceEventNamespace": "common-observation-frontier",
+    "sourceEventKey": "motif:{before.revision}",
+    "publicFramesForwardedToRecord": true,
+    "executionAndCurrentProposalRefusalForwarded": true,
+    "symmetryFallback": "The exact source exclusion is local to the final SymmetricField fallback: policy enabled, unique measured motif lattice and unambiguous composite body. It neither suppresses earlier offers nor creates a global refusal.",
+    "ordinaryAuthority": "The three source facts are observed_regular_input_field, measured_card_instances and composite_body_observed. The composition remains information_question with observed=false. Existing current guard, point guard, target binding and OP18 WHY/ACT remain required; no extra action authority or terminal fact was introduced.",
+    "registry": "The entry audit alias maps motif_conditioned_access to motif_access. On this isolated 63/76 Site101 baseline it adds one material entry; counters must be regenerated after actual predecessor integration."
+  },
+  "geometryAndBoundsReviewed": {
+    "orderedState": "Breadth-first state is (pose,lastAction), preserving original insertion order and tie breaks.",
+    "bodyMeasurement": "The predicted balanced two-color footprint remains measurable when connected regions merge.",
+    "ambiguousGeometry": "Lattice, body, target and ray helpers preserve source uniqueness refusals.",
+    "projectionScope": "Blocked motion is conditional on the current destination projection digest.",
+    "emptyPath": "An empty route or already-aligned aim remains falsy for planning and can fall back to calibration/cards; it is not official success.",
+    "nativeExtension": true,
+    "maximumStates": 8192,
+    "maximumFrontier": 16384,
+    "incompleteSearch": "A resource bound returns no partial paths, no impossibility claim and a current observation/epoch/frame/revision/owner-state-bound refusal. No unrelated fallback is released from the incomplete search.",
+    "deadline": "Search polls abort/deadline and yields cooperatively. The refusal is transient and recomputed after restoration.",
+    "complexityLimit": "Each retained state contains its full path. Retained path storage can be O(S^2) in the number of retained states; maximumStates is not a direct byte-memory limit. With frontier=16384 and states=8192, the production state cap binds first. Search deadlines are not an established wall-clock bound for lattice/body/target geometry or long sessions."
+  },
+  "restoreReview": {
+    "detachedValidationBeforeAssignment": true,
+    "malformedRestoreDoesNotPartiallyMutateOwner": true,
+    "findingsClosed": [
+      "selected must be null or exactly a card from the current grid; empty/out-of-grid/non-card masks cannot fabricate a clearing motif.",
+      "The current ray.card must match a current grid card, while learned and historical event rays remain valid across epochs.",
+      "An acquired ray requires nonempty linked_blockers and at least two distinct sampled trajectory positions, exactly as infer_ray requires."
+    ],
+    "validStatesPreserved": [
+      "Historical learned, motion, passed and events survive an epoch change.",
+      "Historical event ray cards are not constrained to the current grid.",
+      "ui_top/first may survive a start without a grid.",
+      "ray.evidence may differ from a later refs.invoke after an aligned_test_ref update.",
+      "An unmeasurable post-invocation body is permitted and retains the source body_change result."
+    ]
+  },
+  "observedDevelopmentEvidence": {
+    "qualification": "These results were executed and retained by other agents. This reviewer read their code and receipts and did not rerun them.",
+    "originalOracle": {
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/contract/reference-oracle.json",
+        "sha256": "398c868302d0612978dba2ecefef181a28e93d0ebd19c0a5f0fb4dc0714cb098",
+        "bytes": 2061
+      },
+      "status": "passed_original_source_export",
+      "geometryCases": 33,
+      "scenarios": 17,
+      "operations": 100,
+      "sourceFilesVerifiedBeforeAndAfterAsRecorded": [
+        1786,
+        1786
+      ],
+      "sourceModifiedAsRecorded": false,
+      "inputOrigin": {
+        "kind": "independently_constructed_contract_geometry",
+        "gamePayloadsInterpreted": 0,
+        "gameActionsDispatched": 0,
+        "nativeOracleAnswersInProduction": false,
+        "opaqueOriginalManifestIntegrityOnly": true
+      },
+      "stateRestoreQualification": "The Python class has no state/restore API. Its oracle snapshot and restoration functions are explicit laboratory normalization adapters, not claimed source APIs."
+    },
+    "nativeReferenceReceipt": {
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/contract/native-reference-attempt-01.json",
+        "sha256": "d59a683b93734a387b68fc685487c01620454aba459de64decc10ffb836c46c2",
+        "bytes": 1268
+      },
+      "recordedMetadata": {
+        "schema": "logos-engine.v6.motif-access-native-reference-attempt.v1",
+        "startedAt": "2026-11-11T16:48:11.548506+00:00",
+        "finishedAt": "2026-11-11T16:48:12.185670+00:00",
+        "command": [
+          "node",
+          "--test",
+          "tests/v6-motif-access-reference.test.ts"
+        ],
+        "exitCode": 0,
+        "inputsUnchanged": true
+      },
+      "qualification": "Receipt retained as development evidence; no assertion that this isolated test substitutes for the later predecessor-integrated suite."
+    },
+    "kernel": {
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/development/kernel-attempt-01.json",
+        "sha256": "a2b2fdf386839ecdc2aee1886bbf3cc4f28ad4154614639339b6e412a8c56473",
+        "bytes": 1196
+      },
+      "command": [
+        "node",
+        "--test",
+        "tests/v6-motif-access-kernel.test.ts"
+      ],
+      "startedAt": "2026-11-11T16:55:44.447176+00:00",
+      "finishedAt": "2026-11-11T16:55:53.447276+00:00",
+      "elapsedSeconds": 8.997488693999912,
+      "exitCode": 0,
+      "inputsUnchangedDuringRecordedRun": true,
+      "logCountsRead": {
+        "tests": 4,
+        "pass": 4,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "coverage": [
+        "Cold production factory: selection/current guard/WHY-ACT, calibrate-toggle-invoke-walk and one selected acquisition per return.",
+        "Owner cleared, then learned/motion/events/passed recovered from the authoritative common store before the next walk; no reacquisition.",
+        "Matched contrary invocation changes the next current decision from walk to another toggle.",
+        "Explicit diagnostic acquisition ablation leaves motion unlearned and causes another calibration; production sources are unchanged by the test.",
+        "Instrumented source-local symmetry exclusion requires enabled policy and unique motif body."
+      ]
+    },
+    "probe02": {
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/development/caller-probe-02.json",
+        "sha256": "3847f364de540191811b252cc29cec422d962dc7f7d83909dc614ae6e9dc3227",
+        "bytes": 338482
+      },
+      "status": "completed_declared_synthetic_steps",
+      "startedAt": "2026-11-11T16:55:41.177Z",
+      "finishedAt": "2026-11-11T16:55:44.390Z",
+      "records": 4,
+      "modes": [
+        "calibrate",
+        "toggle",
+        "invoke",
+        "walk"
+      ],
+      "retainedEventRevisions": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "allFourOffersWhyActReleased": true,
+      "returnsAnalyzedBy": [
+        "OP29",
+        "OP30",
+        "OP31"
+      ],
+      "restoredFieldsEqual": [
+        "learned",
+        "motion",
+        "events",
+        "passed"
+      ],
+      "officialLevelsCompleted": 0
+    },
+    "probe01Preserved": {
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/development/caller-probe-01.json",
+        "sha256": "0212900a263d3a0bbe5fc4e322856a82a7bf221392b39368e2a018897a114e8f",
+        "bytes": 337348
+      },
+      "status": "error",
+      "error": "Unknown reasoning fact: episode/motif:0",
+      "recordsBeforeExtractorError": 4,
+      "qualification": "The first probe is not relabeled passed. Its four production returns and restoration are retained; its final diagnostic extractor used the wrong episode namespace and nonexistent revision zero. Probe02 corrects the extractor and retains the successful source event reads."
+    }
+  },
+  "typeOnlyCorrectionAfterKernelRun": {
+    "currentCore": {
+      "path": "src/logos-engine/v6-motif-access.ts",
+      "sha256": "2302d521959133b39560792d01ae4c2403a3b4b4a333ae10e089359a403394e0",
+      "bytes": 32665
+    },
+    "kernelInputCoreSha256": "dc87c171776c06b18514faa908ccab237c719f2ae5ecce527fe0b737c7be8817",
+    "change": "Two TypeScript non-null assertions on points[1] and points[0] after n>=2, length=n*n and valid-point guards.",
+    "currentLine": "const pitch = value.points[1]![0] - value.points[0]![0];",
+    "priorLine": "const pitch = value.points[1][0] - value.points[0][0];",
+    "removingOnlyThoseAssertionsReproducesRecordedKernelCoreSha256": true,
+    "otherRecordedKernelSourceAndTestInputsMatchCurrentBytes": true,
+    "qualification": "The final source bytes are fingerprinted separately from the recorded development run. This is not a claim that the final post-integration suite has run."
+  },
+  "limitations": [
+    "No live game, dispatch campaign, game win, browser success or three-level-per-entry proof is claimed.",
+    "No final delivery acceptance, official performance measurement or complete caller parity is claimed.",
+    "Only the pinned source component and named caller/routing integration were reviewed; pending source families remain outside this claim.",
+    "The synthetic coordinates, colors and frames are independently constructed laboratory inputs, not prepared game keys or level answers.",
+    "LKEY is permanently closed. No LKEY payload, oracle, replay, fixture decoding or gameplay was used.",
+    "Final integration is still required against the actually published predecessors after 10B, 5C and 6B. Final cost must retain separate strict complete-session median increases below +10% for STCK and SMLP, with phase diagnostics visible.",
+    "The newly published Site103/native0.62 merge is outside this initial receipt and requires a separate delta review."
+  ]
+}

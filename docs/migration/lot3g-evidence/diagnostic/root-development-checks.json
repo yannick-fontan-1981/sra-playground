@@ -1,0 +1,39 @@
+{
+  "schema": "logos-engine.framed-window-development-checks.v1",
+  "checks": [
+    {
+      "label": "integration-initial",
+      "passed": 15,
+      "failed": 1,
+      "cause": "Test harness called browser fetch(file:) under Node without injecting the unchanged source declarations; no native production error was shown."
+    },
+    {
+      "label": "integration-corrected",
+      "passed": 16,
+      "failed": 0,
+      "correction": "Read source common/strategy declarations using fs and inject them into the runtime as in existing Node tests."
+    },
+    {
+      "label": "typescript-preliminary",
+      "exitCode": 0
+    }
+  ],
+  "logs": [
+    {
+      "path": "docs/migration/lot3g-evidence/diagnostic/framed-integration-targeted-1.log.gz",
+      "sha256": "52fa3fa25e32dc52883971b4265ed05b19c9efbe9d511025b963e82236aa4d69",
+      "bytes": 973
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/diagnostic/framed-integration-targeted-2.log.gz",
+      "sha256": "218d38e4fd65cae80b7e6147e43b6cfb8ae79aa13618bc48191b8c2082f6a1d7",
+      "bytes": 630
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/diagnostic/framed-typecheck-1.log.gz",
+      "sha256": "0d2cbbee31ca5839df68f3a5ae10b6102ed35a65bd129facd4509c36a18a564d",
+      "bytes": 141
+    }
+  ],
+  "qualification": "Development diagnostics before final freeze and formal verification. The initial test harness failure remains archived; it is not removed from the record or counted as a final pass."
+}

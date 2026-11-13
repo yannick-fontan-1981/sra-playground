@@ -1,0 +1,488 @@
+{
+  "schema": "logos-engine.lot3a-cost.delivery-evidence-index.v1",
+  "status": "functional_and_declared_cost_passed",
+  "recordedAt": "2026-11-10T00:02:10.990822+00:00",
+  "implementation": "logos-engine.typescript.v6.native-migration/0.38.0",
+  "nativeSourceManifestDigest": "f0d8b2b0a746f19036076010025fffa1ad532d5751caa176f7efcccff7bc4aff",
+  "nativeFileCount": 245,
+  "functionalBaseline": {
+    "implementation": "0.37.0",
+    "publication": 65,
+    "commitSha": "24c15cc5c147a8e2d639a6e0e3fe25bc632537f0"
+  },
+  "actualResult": {
+    "game": "RSWP",
+    "levelsCompleted": 3,
+    "actions": 19,
+    "prefixes": 11,
+    "sessions": 1,
+    "fullGameWin": false,
+    "naturalCurrentLevel": 4,
+    "state": "NOT_FINISHED",
+    "actionsPerLevel": [
+      3,
+      8,
+      8
+    ],
+    "prefixesPerLevel": [
+      3,
+      4,
+      4
+    ]
+  },
+  "publicComparison": {
+    "receipt": "docs/migration/lot3a-cost-evidence/final/rswp-regression/public-comparison-v2.json",
+    "status": "passed",
+    "completePublicTrajectoryExactlyEqual": true,
+    "commands": 19,
+    "packets": 20,
+    "animationInclusiveImages": 221,
+    "strictTraceEquality": false,
+    "strictRetainedProposalEquality": false,
+    "privateMemoryEquivalenceClaimed": false,
+    "completeSourceParityClaimed": false,
+    "previousReceiptRetained": "docs/migration/lot3a-cost-evidence/final/rswp-regression/public-comparison.json",
+    "previousGeneratorRelocation": "docs/migration/lot3a-cost-evidence/diagnostic/comparator-revision/relocation.json"
+  },
+  "cost": {
+    "status": "passed",
+    "referenceImplementation": "0.36.0",
+    "correctedImplementation": "0.38.0",
+    "sourceDigests": {
+      "baseline": {
+        "digest": "ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b",
+        "fileCount": 242
+      },
+      "after": {
+        "digest": "f0d8b2b0a746f19036076010025fffa1ad532d5751caa176f7efcccff7bc4aff",
+        "fileCount": 245
+      }
+    },
+    "relativeBudget": 0.1,
+    "withinObservedBudget": 16,
+    "totalBudgetMetrics": 16,
+    "unresolved": [],
+    "measuredSessionsPerCaseAndVersion": 8,
+    "totalMeasuredSessions": 32,
+    "measuredActionsPerVersion": 200,
+    "plannedAndExecutedOrder": [
+      "A1",
+      "B1",
+      "B2",
+      "A2"
+    ],
+    "allDeclaredMeasuredSessionsRetained": true,
+    "selectedCohort": null,
+    "thresholdRaised": false,
+    "cohorts": [
+      {
+        "cohort": 1,
+        "status": "passed",
+        "withinObservedBudget": 16,
+        "unresolved": []
+      },
+      {
+        "cohort": 2,
+        "status": "budget_review_required",
+        "withinObservedBudget": 14,
+        "unresolved": [
+          {
+            "case": "STCK",
+            "stage": "acquisition_and_persistence",
+            "result": "over_budget_with_noise_unresolved",
+            "medianRelativeIncrease": 0.11027602771279787
+          },
+          {
+            "case": "STCK",
+            "stage": "persistence",
+            "result": "over_budget_with_noise_unresolved",
+            "medianRelativeIncrease": 0.13233777029549287
+          }
+        ]
+      }
+    ],
+    "historical037FailuresRetained": true,
+    "longSessionStabilityClaimed": false
+  },
+  "validation": {
+    "status": "passed",
+    "tests": {
+      "tests": 964,
+      "pass": 964,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "testFiles": 26,
+    "scope": "Explicit affected contracts and integrations, not the entire historical suite.",
+    "nativeAgentWorker": {
+      "path": "dist/assets/v6-agent-worker-CdZbslPW.js",
+      "sha256": "548f759a43c194e8db3ffa5809f9d1c4d73f020d289d4111f51e8da42e798065",
+      "bytes": 6334908
+    },
+    "checks": [
+      {
+        "name": "typecheck",
+        "exitCode": 0
+      },
+      {
+        "name": "entry-audit",
+        "exitCode": 0
+      },
+      {
+        "name": "migration-audit",
+        "exitCode": 0
+      },
+      {
+        "name": "diff-check",
+        "exitCode": 0
+      },
+      {
+        "name": "build",
+        "exitCode": 0
+      }
+    ]
+  },
+  "migrationScope": {
+    "lot3A": "closed_within_declared_functional_and_cost_scope",
+    "lot3": "open",
+    "next": "3B chamber_relation_plan",
+    "registryConnected": 50,
+    "registryTotal": 76,
+    "observedCompositionBranchesTransferred": 1,
+    "observedCompositionBranchesTotal": 6,
+    "compiledWorkflows": 37,
+    "completeMigrationClaimed": false,
+    "catrCumulativeBlockedSecondsRetained": 107.399326,
+    "blockedGameLimitSeconds": 2400
+  },
+  "artifacts": [
+    {
+      "path": "docs/migration/lot3a-cost-correction.md",
+      "sha256": "99dfc8ab4ceab1d94c69e7b931df31a7e5d381f151337a8ab9c4f8fd9418c279",
+      "bytes": 9693
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/diagnostic/comparator-revision/compare-native-public-campaigns-v1.mjs",
+      "sha256": "f79f6295f4a63bca70ca77743de2536291e289f3845f8e46d4faf3bd8d589563",
+      "bytes": 22396
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/diagnostic/comparator-revision/relocation.json",
+      "sha256": "4568b5b988dc65c2f147394a11f812e308d255157756c4fd427128c5dd49c63d",
+      "bytes": 1723
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/diagnostic/cpu-summary.json",
+      "sha256": "5ac1509ce6581a7a2f4f52c28861a86970573a02c70147b0337e7476aea39132",
+      "bytes": 264560
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/diagnostic/protocol.md",
+      "sha256": "bc1d61b6bd6cc49423bcec5084504043d92d4e48aeb39171618f583198c3b188",
+      "bytes": 2906
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/diagnostic/results.md",
+      "sha256": "0edd63ca2508344e9a31d6ccd961f645bee2c6ad0b4cca1050d219f21d5ad793",
+      "bytes": 2537
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/diagnostic/scoped-behavior.json",
+      "sha256": "99aa7bdd8675f2b566aee7468d3ff60a3abe3528d80f6495b2cbe8176b6bfac3",
+      "bytes": 2116
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile.gz",
+      "sha256": "ca1f8514ec02325f4673bfeda5a5f6debe9f14890e8724ede26e2c20b6828a50",
+      "bytes": 209060
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.json.gz",
+      "sha256": "9ecaaf6a1f7c81d4a84299c413946ad9b95c38cebb1ae7fa3b4212f458940664",
+      "bytes": 159006
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/diagnostic/smlp-before.cpuprofile.gz",
+      "sha256": "1d127a30da847a54d058504d00a651b061a3621e780761091c5a530c688e739c",
+      "bytes": 234073
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/diagnostic/smlp-before.json.gz",
+      "sha256": "aa0d3e497c305d919b05b902e14192ba5e3f21295728df0e0f519f6c576c2719",
+      "bytes": 160039
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/browser/rswp-browser.png",
+      "sha256": "2d3df94fd73f5e6b6ec41cef82e558f5311e07ba8a4a39e80ae33b3c329fbbf8",
+      "bytes": 83575
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/browser/rswp-verification.json",
+      "sha256": "51d2062d76388e26ffe0e04aea96b8869b3a35f4a14b31505be6052abb8dcaaf",
+      "bytes": 1956
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/release-scope.json",
+      "sha256": "6f156e6770e90387787c520d7f98e21be23344067cbfbba46ab8351c8f2cd485",
+      "bytes": 1576
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/execution-rswp.json",
+      "sha256": "0a2ac59e9ad906f5f19756c0b0ac4d441d8b4572d2a0438244cc33abc0d5e779",
+      "bytes": 62206
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/public-comparison-v2.json",
+      "sha256": "4b186d7ffac247db511d8e27ff24559c25423fc1c81e4462eb94bca67523ba80",
+      "bytes": 99501
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/public-comparison.json",
+      "sha256": "a810c4f861ec15a7a8924576e4d465443d337ae3e66e76853b78df3b2ddf9165",
+      "bytes": 99494
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-actual-public-journal.jsonl.gz",
+      "sha256": "c7faebc73b810ffce139247b84456b6bf0088dbaca0c3360e11a29bf6e18330d",
+      "bytes": 28107
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-campaign.json.gz.part000",
+      "sha256": "f39ff4bb689cc12ecdc2d7c4f5961bbbea796f83be04e3e75be2051deaa92378",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-campaign.json.gz.part001",
+      "sha256": "4c7f81bd7a78f3073a16be2ed3c0f025ebd00e6a1b083fbee8c1f3da14ca09a3",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-campaign.json.gz.part002",
+      "sha256": "3c3c34e4f8be55e1d17aeda8129199fb6b9c116627f037237fc00d0c5a631d88",
+      "bytes": 375375
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-campaign.json.gz.parts.json",
+      "sha256": "171ca57647689e96d123f783c44fa426f72a006d01e3a9c5abb46ecfe94036bd",
+      "bytes": 839
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-output.log.gz",
+      "sha256": "70b352667550baa005b2866de8bcb801c3faf3513a60c8deee588db88b943d36",
+      "bytes": 3188
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+      "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755",
+      "bytes": 41445
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/source-manifest.json",
+      "sha256": "0024028577107a7dbcc65ea0cc3ffa929a0ce5a6e7f11bf4515a169fc5cb1146",
+      "bytes": 28936
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/source-archive-parts.json",
+      "sha256": "3274c3821ef3ca830b82c634a77635ba91ed762fc1eed19689f2152522d97a02",
+      "bytes": 806
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/source-archive.json",
+      "sha256": "7c1df4349e3b5b0dd7aebde95c897aaa966987bba39fcb34033e5d1a1b617e00",
+      "bytes": 30572
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/source-archive.tar.gz.part000",
+      "sha256": "bd4f60d071ae276f3d2d432aac690f3ffb6f94cbb185fbe7583499b8ee7e66a1",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/source-archive.tar.gz.part001",
+      "sha256": "b9adcaf9dd632b85fb52c686d33804a20b51d643f01f1d987c3a41bb1686ce14",
+      "bytes": 714943
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/source-manifest.json",
+      "sha256": "0024028577107a7dbcc65ea0cc3ffa929a0ce5a6e7f11bf4515a169fc5cb1146",
+      "bytes": 28936
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/validation/build-output.log.gz",
+      "sha256": "1ecc13db4325ac08c610f1c27600ae437e8cae7c0dccab14928bd1103415bdeb",
+      "bytes": 1592
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/validation/checks-run.json",
+      "sha256": "7414fc9ea3e5a39b9a8981074416f00bfad55d018b8cf67e451bddf92f55cae9",
+      "bytes": 68393
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/validation/delta-tests-output.log.gz",
+      "sha256": "1399b576430974dc73fa183b5b5321d39954207b2f14197b19019aaef3601efe",
+      "bytes": 25680
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/validation/delta-tests-run.json",
+      "sha256": "c358ab3dde51de691d20798a345deb67b8c2d2e106cbbfa956b5018a5b5ff0bb",
+      "bytes": 96799
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/validation/diff-check-output.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "bytes": 20
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/validation/entry-audit-output.log.gz",
+      "sha256": "204b6870bdf12b63de658e3a61d4dc5be9e64c13e1c1e7ccc8d2126beed57d2d",
+      "bytes": 177
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/validation/migration-audit-output.log.gz",
+      "sha256": "5b9b037a583870856733d9680ea1efcafe7d56e0ee5f1d7c8124d369de573dac",
+      "bytes": 205
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/validation/typecheck-output.log.gz",
+      "sha256": "0d2cbbee31ca5839df68f3a5ae10b6102ed35a65bd129facd4509c36a18a564d",
+      "bytes": 141
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/cases.json",
+      "sha256": "f052a04b8a1d07a93cff8ee9c19f4694c1c61a6db3f0660bc382a95dcef32a88",
+      "bytes": 1339
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/cohort1/after.json",
+      "sha256": "c69c9ad6dbb4df2cc61482c0f7901bbcff2af1d73fe1d19648ee09fe127858c1",
+      "bytes": 425379
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/cohort1/after.log",
+      "sha256": "3b6149b988691759866820d96cf5ae50ac7440e070255ed207a8a3ba3275d045",
+      "bytes": 1578
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/cohort1/baseline.json",
+      "sha256": "713094e5b4850b06c2d10a12fd7f7a2f9b2ccd83afb3f536ffb842406e46d0cf",
+      "bytes": 425018
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/cohort1/baseline.log",
+      "sha256": "c6915c57afb091cf978327a4f71b14ffe16dd59d2216580043cc370488f94280",
+      "bytes": 1581
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/cohort1/comparison.json",
+      "sha256": "d75efce1f395eeddcd5b6ff86d1102e7573bc2a8bc9f7664d3dd7bf7001c0eb7",
+      "bytes": 25201
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/cohort2/after.json",
+      "sha256": "fb273aebd6f65a0fafed18438309720cc7ee2a6d445a3705524bb0077e4f71d8",
+      "bytes": 425407
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/cohort2/after.log",
+      "sha256": "96a690701bc7c126339aa372ce331f78af6199e4e82c2306d6893574110c3ee7",
+      "bytes": 1564
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/cohort2/baseline.json",
+      "sha256": "bb5e67cdf80bdb1b3c27f6f2585bbccdffe5e255b201e73071c307ecb7adae60",
+      "bytes": 424963
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/cohort2/baseline.log",
+      "sha256": "e5f883e529bce06f0edcdc3bb38413ba6a3272cead3ab0489b3c89dadab33704",
+      "bytes": 1572
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/cohort2/comparison.json",
+      "sha256": "8081b85640e5f6e002db1357c673ba14846ca5f54cdb2dff2be68fba52654b98",
+      "bytes": 25557
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/combined-comparison.json",
+      "sha256": "41718ae66ee3aa9864767dd0cae16058b475e5d450f6f1d32941107806c3a488",
+      "bytes": 28903
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/comparison-policy.json",
+      "sha256": "76575315636670329de12e4ae4542d6d11290411b7cdb799e7d7af0ec1c83ca9",
+      "bytes": 898
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/consolidation-review.json",
+      "sha256": "13e10c1b7f564258c1331d5ea1a50965576159ef6f4c2bd2dbb84cf2f699147a",
+      "bytes": 26630
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/protocol.md",
+      "sha256": "90ad27c1b152768868cf16cc76d3a94f31f70cb92567197f20c2f47d98dc0521",
+      "bytes": 8454
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/results.md",
+      "sha256": "0489043da083b535ef8a0b2a465b2101840c1f90a7d90a17b4175156bd3ae02b",
+      "bytes": 11762
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/window.json",
+      "sha256": "8f86aa21ed362d832629edd1bf69af84b6d0171ecfaba582bc4e6168aac96b5b",
+      "bytes": 10778
+    },
+    {
+      "path": "docs/migration/lot3a-cost-lineage.md",
+      "sha256": "55f9ee4a368af691d49ef6943197fd7d22a1b41d7397b3d1aac44852ad61b0b7",
+      "bytes": 14744
+    },
+    {
+      "path": "docs/migration/v6-delivery-roadmap.md",
+      "sha256": "42c5cc05b75741b50b1e078caf746dd02a2dc4ece66f9d799500bf6e39ab1a50",
+      "bytes": 57590
+    },
+    {
+      "path": "docs/migration/v6-entry-point-progress.json",
+      "sha256": "3ebbd48f7320bc36d402ef6291a60e4d1fa8ed481f3f51144623112a63146983",
+      "bytes": 17682
+    },
+    {
+      "path": "docs/migration/v6-native-transfer.md",
+      "sha256": "55687cdfbb573b9ad6c788383e6ab64afdd9b4ee6a3811a8379953c506956173",
+      "bytes": 91431
+    },
+    {
+      "path": "scripts/compare-native-profile-behavior.mjs",
+      "sha256": "83fdfb93a53ccdf82680936efe87da2899223f5c34520063986aa2b2a0d1d91c",
+      "bytes": 3978
+    },
+    {
+      "path": "scripts/compare-native-public-campaigns.mjs",
+      "sha256": "d7af5df6252c57e19a0c69af44bd4a18832ae94cbd30ba586485d284bb12d24c",
+      "bytes": 22417
+    },
+    {
+      "path": "scripts/export-v6-periodic-pattern-reference.py",
+      "sha256": "cf668a75ac15314a4322ae392e0ae71061cd2ea40347476efe47b30ef2b9fd1d",
+      "bytes": 3612
+    },
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613",
+      "bytes": 8933
+    },
+    {
+      "path": "scripts/summarize-native-cpu-profiles.mjs",
+      "sha256": "ef440869b9a69e4b42d3daf930fe283fd87cf367113d69b3156897a8dab51e59",
+      "bytes": 4068
+    },
+    {
+      "path": "tests/fixtures/v6-periodic-pattern-reference.json.gz",
+      "sha256": "3b8742b5d78ce0022f1de1e7622063839a67e4e12e77579622845479c543fef9",
+      "bytes": 2509
+    }
+  ],
+  "qualification": "The index binds retained evidence by file fingerprints. The separate final delivery-integrity receipt verifies frozen native, source/test/build inputs, pinned originals and lossless archive/campaign transport. Cost closure follows the predeclared pooled eight-session rule; both cohort results, including the second-cohort overruns, remain retained. RSWP establishes three completed levels and scoped public trajectory equality, not a full-game win, strict private graph/proposal identity, new causal game capability, complete V5/V6 parity or long-session stability. Large source and campaign originals are preserved as checked ordered byte parts; raw CPU profiles also remain as lossless gzip."
+}

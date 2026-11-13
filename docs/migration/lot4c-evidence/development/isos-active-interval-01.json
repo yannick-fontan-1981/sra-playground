@@ -1,0 +1,33 @@
+{
+  "schema": "logos-engine.game-case-active-interval.v1",
+  "game": "ISOS",
+  "startedAt": "2026-11-11T00:31:05.070411+00:00",
+  "status": "closed",
+  "priorChargedSeconds": 5.134041409008205,
+  "maximumSeconds": 2400,
+  "finishedAt": "2026-11-11T00:35:43.404599+00:00",
+  "chargedSeconds": 278.334188,
+  "evidence": [
+    {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/execution-isos.json",
+      "bytes": 74632,
+      "sha256": "e0c7cc5b6d72407de63d55d26530751694c4cae17f853046972768019033c8cd"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-attempt-01-execution.json",
+      "bytes": 2858,
+      "sha256": "29f40924cf9ce9e4024dceaf7b0f756f489a8108c0d1a2dcab536567fa5fa621"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-attempt-02-execution.json",
+      "bytes": 3108,
+      "sha256": "7017c0228c64f0ada9b0c046f1ad971deeef2f2d3089475bd4604715bd9e358a"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-snapshot-correction.json",
+      "bytes": 3364,
+      "sha256": "74b823650389b74852ea6d46d463ea5697c3bf206b68649cf8b6c8cfce97c4c4"
+    }
+  ],
+  "qualification": "All elapsed time from opening the cold development case through its source-comparison diagnosis is charged, including the failed comparator attempt. The game itself was run once; its three-level target passed. No budget reset."
+}

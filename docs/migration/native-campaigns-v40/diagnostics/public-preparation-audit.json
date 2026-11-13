@@ -1,0 +1,685 @@
+{
+  "schema": "logos-engine.v40.public-preparation-audit.v1",
+  "qualification": {
+    "inputScope": "Existing public observation traces, unchanged Python agent fixtures and agent implementation only.",
+    "execution": "Offline diagnosis and deterministic replay tests.",
+    "physicalActionsIssued": 0,
+    "gameEngineRead": false,
+    "gameSourceRead": false,
+    "privateGameStateRead": false,
+    "referenceSourceModified": false,
+    "newGameSuccessClaim": false
+  },
+  "inputs": {
+    "stckDiagnosis": {
+      "path": "docs/migration/native-campaigns-v39/diagnostics/stck-level-four-program-diagnosis.json",
+      "sha256": "605a96d99548c5c441f77530a15ce34f0607574ad190e98fda671e355a121dbb"
+    },
+    "stckPublic": {
+      "path": "docs/migration/native-campaigns-v39/diagnostics/stck-six-level-attempt-public.json.gz",
+      "sha256": "c29ebda9a1716313957ca578f1fd2a0c0367932d2d5c3cbf1e4642d6efd2578c"
+    },
+    "recallOracle": {
+      "path": "tests/fixtures/v6-occurrence-reference.json",
+      "sha256": "3e6b161eeba7539dc3829d3657928b544328c79dfae2c5e594c03d814c755bb9"
+    },
+    "memoOriginalComparison": {
+      "path": "docs/migration/native-campaigns-v32/memo-original-comparison.json",
+      "sha256": "9e9828f90a3b3bf7c4c6f9a7659e19c11c8edba75837fb3abf31c147b4ae66c1"
+    },
+    "candidateInventory": {
+      "path": "docs/migration/native-campaigns-v37/candidate-selection.json",
+      "sha256": "998856baf5cb7f818ad3da6a15b0126d2941540852863229d104dc700648929e"
+    }
+  },
+  "stck": {
+    "publicPrefixActions": 35,
+    "officialLevelsCompleted": 3,
+    "currentLevel": 4,
+    "originalRefusal": "The complete learned-control editor guard cannot find the old label 8 control, so it declines before binding or search.",
+    "retainedModelId": "program-model:b87b8d49104728366a30",
+    "retainedModelControlLabels": [
+      10,
+      9,
+      14,
+      11,
+      8
+    ],
+    "currentAccess": {
+      "status": "bound",
+      "insertableLabels": [
+        9,
+        10,
+        11,
+        14
+      ],
+      "unavailableLabels": [
+        8
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "ownCollection": [],
+      "unknownControls": [
+        {
+          "bbox": [
+            52,
+            54,
+            60,
+            58
+          ],
+          "patch": [
+            [
+              7,
+              7,
+              7,
+              7,
+              0,
+              7,
+              7,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              0,
+              7,
+              3,
+              7,
+              0,
+              7,
+              7
+            ],
+            [
+              0,
+              3,
+              7,
+              3,
+              7,
+              3,
+              7,
+              3,
+              0
+            ],
+            [
+              7,
+              7,
+              0,
+              7,
+              3,
+              7,
+              0,
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7,
+              7,
+              0,
+              7,
+              7,
+              7,
+              7
+            ]
+          ],
+          "patch_digest": "1b0887658792d992eae20c062f152e52a1120d1758e3b04e51c8e9e6a09480e7",
+          "palette": [
+            0,
+            3,
+            7
+          ],
+          "status": "unattributed_current_row_appearance"
+        }
+      ]
+    },
+    "missingOperator": {
+      "label": 8,
+      "status": "candidate_single_member_reduction_or_whole_object_removal",
+      "observedReduction": 1,
+      "observedOffset": [
+        8,
+        0
+      ],
+      "vectors": [
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          -4
+        ],
+        [
+          -4,
+          -2
+        ],
+        [
+          4,
+          -2
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          -8,
+          0
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          4,
+          2
+        ]
+      ],
+      "qualification": "One originally observed single-member disappearance associated with official progression; a conditional reduction model, not a universal terminal role."
+    },
+    "decodedWorld": [
+      {
+        "anchor": [
+          38,
+          19
+        ],
+        "word": [
+          8,
+          8,
+          8
+        ],
+        "base": [
+          38,
+          22
+        ],
+        "binding": "measured_extruded_public_color_word"
+      }
+    ],
+    "nextOfflineQuestion": {
+      "kind": "public_program_composition",
+      "mode": "bind_single_member",
+      "actions": [
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 16,
+            "y": 56
+          }
+        }
+      ],
+      "qualification": "Unexecuted current binding experiment only; no new physical outcome is supplied."
+    },
+    "newAppearance": {
+      "bbox": [
+        52,
+        54,
+        60,
+        58
+      ],
+      "palette": [
+        0,
+        3,
+        7
+      ],
+      "monochromeComponents": [
+        {
+          "bbox": [
+            52,
+            54,
+            55,
+            55
+          ],
+          "area": 7
+        },
+        {
+          "bbox": [
+            57,
+            54,
+            60,
+            55
+          ],
+          "area": 7
+        },
+        {
+          "bbox": [
+            54,
+            56,
+            54,
+            56
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            56,
+            56,
+            56,
+            56
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            58,
+            56,
+            58,
+            56
+          ],
+          "area": 1
+        },
+        {
+          "bbox": [
+            52,
+            57,
+            55,
+            58
+          ],
+          "area": 7
+        },
+        {
+          "bbox": [
+            57,
+            57,
+            60,
+            58
+          ],
+          "area": 7
+        }
+      ],
+      "oldAndNewInkPositionsEqual": true,
+      "learnedInk": 0,
+      "inkPositions": [
+        [
+          4,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "additionalValue3Pixels": [
+        [
+          4,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          4,
+          3
+        ]
+      ],
+      "exactRenameOfOldControl": false,
+      "qualification": "The eight learned ink positions coincide, but six additional pixels of value 3 change the support and split it into seven components. Geometry resemblance can motivate an effect question; it does not identify the new effect."
+    },
+    "remainingLimits": [
+      "Current access validates only present controls. It does not erase the old interaction from the complete model or from existing decoded words.",
+      "With an empty own word and no insertable interaction label, translation-only edits cannot reduce a stationary target under the current simulator. This is a model bound, not an impossibility result about the game.",
+      "The empty own collection has no decoded nonempty bearer yet. The first permitted question inserts one previously phase-observed label to bind it.",
+      "The new fragmented row appearance has no acquired operator effect and is excluded from insertable labels.",
+      "Glyph extrapolation outside three observed translations.",
+      "Unknown interior supports are excluded, never assumed walkable.",
+      "Outside the measured lattice extent, blocking is a boundary hypothesis.",
+      "Larger-word reduction and stationary identical-label respondents are hypotheses; no universal terminal role."
+    ],
+    "nextUsefulWork": "Acquire the input/collection effect and subsequent phase evidence for an unattributed current control, preserving alternative explanations; extend or refute the learned effect model only from its public return."
+  },
+  "memo": {
+    "sourceTrajectoryQualification": "The old isolated original recall fixture reaches three official levels in 30 commands. The v32 unchanged common caller instead makes an unlearned invitation after six recall commands and stalls. Neither historical result is a new v40 common-caller victory.",
+    "priorIsolatedLevels": 3,
+    "sourceFirstSixActions": [
+      {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 31,
+          "y": 30
+        }
+      },
+      {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 47,
+          "y": 22
+        }
+      },
+      {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 48,
+          "y": 37
+        }
+      },
+      {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 17,
+          "y": 40
+        }
+      },
+      {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 15,
+          "y": 23
+        }
+      },
+      {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 34,
+          "y": 12
+        }
+      }
+    ],
+    "seventhRecall": {
+      "selectionReason": "test_retained_occurrence_correspondence",
+      "currentSelected": {
+        "bbox": [
+          13,
+          33,
+          17,
+          37
+        ],
+        "mask": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            4
+          ]
+        ],
+        "shape": "8a4799d8a6f17b340c932cfdf3731b82eeb9c278708f8ee0fcf41e10b6a584ee",
+        "color": 9,
+        "point": [
+          15,
+          35
+        ],
+        "marked": false,
+        "id": "occurrence:50cb18424629dd604176db42"
+      },
+      "activeContextEvidenceRef": "occurrence-reference:epoch:1:revision:6:frame:0454a8cfe43f777b",
+      "sourceGuard": {
+        "admitted": true,
+        "reason": "public_occurrence_bound"
+      },
+      "contextScope": "plural_antecedent",
+      "minimumUniqueObservations": 2,
+      "supportingModels": [
+        {
+          "key": "plural_antecedent:previous_all:exact_mask_and_color",
+          "unique_support": 4,
+          "evidence": [
+            [
+              "occurrence-reference:epoch:1:revision:3:frame:786843d467525a9e",
+              "occurrence-reference:epoch:1:revision:4:frame:a9883a56e9c80766"
+            ],
+            [
+              "occurrence-reference:epoch:1:revision:4:frame:a9883a56e9c80766",
+              "occurrence-reference:epoch:1:revision:5:frame:2bf57aeaf6d81911"
+            ],
+            [
+              "occurrence-reference:epoch:1:revision:5:frame:2bf57aeaf6d81911",
+              "occurrence-reference:epoch:1:revision:6:frame:0454a8cfe43f777b"
+            ],
+            [
+              "occurrence-reference:epoch:1:revision:6:frame:0454a8cfe43f777b",
+              "occurrence-reference:epoch:1:revision:7:frame:ed6639d6b8ac62c7"
+            ]
+          ],
+          "counterexamples": []
+        },
+        {
+          "key": "plural_antecedent:previous_all:exact_mask",
+          "unique_support": 4,
+          "evidence": [
+            [
+              "occurrence-reference:epoch:1:revision:3:frame:786843d467525a9e",
+              "occurrence-reference:epoch:1:revision:4:frame:a9883a56e9c80766"
+            ],
+            [
+              "occurrence-reference:epoch:1:revision:4:frame:a9883a56e9c80766",
+              "occurrence-reference:epoch:1:revision:5:frame:2bf57aeaf6d81911"
+            ],
+            [
+              "occurrence-reference:epoch:1:revision:5:frame:2bf57aeaf6d81911",
+              "occurrence-reference:epoch:1:revision:6:frame:0454a8cfe43f777b"
+            ],
+            [
+              "occurrence-reference:epoch:1:revision:6:frame:0454a8cfe43f777b",
+              "occurrence-reference:epoch:1:revision:7:frame:ed6639d6b8ac62c7"
+            ]
+          ],
+          "counterexamples": []
+        },
+        {
+          "key": "plural_antecedent:previous_unchosen:exact_mask_and_color",
+          "unique_support": 4,
+          "evidence": [
+            [
+              "occurrence-reference:epoch:1:revision:3:frame:786843d467525a9e",
+              "occurrence-reference:epoch:1:revision:4:frame:a9883a56e9c80766"
+            ],
+            [
+              "occurrence-reference:epoch:1:revision:4:frame:a9883a56e9c80766",
+              "occurrence-reference:epoch:1:revision:5:frame:2bf57aeaf6d81911"
+            ],
+            [
+              "occurrence-reference:epoch:1:revision:5:frame:2bf57aeaf6d81911",
+              "occurrence-reference:epoch:1:revision:6:frame:0454a8cfe43f777b"
+            ],
+            [
+              "occurrence-reference:epoch:1:revision:6:frame:0454a8cfe43f777b",
+              "occurrence-reference:epoch:1:revision:7:frame:ed6639d6b8ac62c7"
+            ]
+          ],
+          "counterexamples": []
+        },
+        {
+          "key": "plural_antecedent:previous_unchosen:exact_mask",
+          "unique_support": 4,
+          "evidence": [
+            [
+              "occurrence-reference:epoch:1:revision:3:frame:786843d467525a9e",
+              "occurrence-reference:epoch:1:revision:4:frame:a9883a56e9c80766"
+            ],
+            [
+              "occurrence-reference:epoch:1:revision:4:frame:a9883a56e9c80766",
+              "occurrence-reference:epoch:1:revision:5:frame:2bf57aeaf6d81911"
+            ],
+            [
+              "occurrence-reference:epoch:1:revision:5:frame:2bf57aeaf6d81911",
+              "occurrence-reference:epoch:1:revision:6:frame:0454a8cfe43f777b"
+            ],
+            [
+              "occurrence-reference:epoch:1:revision:6:frame:0454a8cfe43f777b",
+              "occurrence-reference:epoch:1:revision:7:frame:ed6639d6b8ac62c7"
+            ]
+          ],
+          "counterexamples": []
+        }
+      ],
+      "deduplicatedEvidenceRefs": [
+        "occurrence-reference:epoch:1:revision:3:frame:786843d467525a9e",
+        "occurrence-reference:epoch:1:revision:4:frame:a9883a56e9c80766",
+        "occurrence-reference:epoch:1:revision:5:frame:2bf57aeaf6d81911",
+        "occurrence-reference:epoch:1:revision:6:frame:0454a8cfe43f777b",
+        "occurrence-reference:epoch:1:revision:7:frame:ed6639d6b8ac62c7"
+      ],
+      "currentSourceObservationRef": "occurrence-reference:epoch:1:revision:7:frame:ed6639d6b8ac62c7",
+      "qualification": "Four qualifying hypotheses share four observed transitions and five distinct endpoints. They are four hypotheses, not sixteen independent observations."
+    },
+    "rejectedRivals": [
+      {
+        "key": "plural_antecedent:previous_chosen:exact_mask_and_color",
+        "counterexamples": 4
+      },
+      {
+        "key": "plural_antecedent:previous_chosen:exact_mask",
+        "counterexamples": 4
+      }
+    ],
+    "coordinationAssessment": "The first ordinary window proposal may defer only an unlearned invitation if its own authoritative retained evidence qualifies and its current before guard admits. Later proposals cannot lend their evidence to an earlier unqualified choice. Learned contact_solution keeps priority.",
+    "historicalWrongInvitation": {
+      "action": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 37,
+          "y": 13
+        }
+      },
+      "mode": "invitation",
+      "acquiredModel": null,
+      "pixelsChanged": true,
+      "officialProgress": false
+    },
+    "offlineColdReplay": {
+      "actionsAcquired": 6,
+      "nextChoice": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 15,
+          "y": 35
+        }
+      },
+      "modelWitnesses": 4,
+      "distinctEvidenceRefs": 5,
+      "sourceStateRevision": 7,
+      "guardReason": "public_occurrence_bound",
+      "physicalActionsIssued": 0,
+      "levelsCompletedAtCheckpoint": 0
+    },
+    "nextCandidateAssessment": "Highest-priority next common-caller candidate: existing source recall evidence already covers three levels, and the current failure is independently reproduced selection preemption. A new normal common-caller campaign must still establish success."
+  },
+  "fallback": {
+    "candidate": "CN04",
+    "capability": "rigid_port_assembly",
+    "basis": "The v37 public preview survey matched all first three published initial frames; the capability is already connected and has source differential calibration coverage.",
+    "qualification": "No fresh common-caller success or guaranteed three-level completion is inferred. Requires normal cold bootstrap and observed effects."
+  },
+  "verification": {
+    "testPath": "tests/v6-learned-preparation-priority.test.ts",
+    "testSha256": "e5d55f89fc6ab16f1d0f308e309c4204ec7148904ebea872bab33845d53fbee1",
+    "casesWritten": 20,
+    "localResults": [
+      {
+        "command": "node --test tests/v6-learned-preparation-priority.test.ts",
+        "passed": 19,
+        "failed": 0,
+        "qualification": "Run before the final requested order case was added."
+      },
+      {
+        "command": "node --test --test-name-pattern='an earlier unlearned window proposal' tests/v6-learned-preparation-priority.test.ts",
+        "passed": 1,
+        "failed": 0
+      }
+    ],
+    "typecheck": "npm run typecheck passed before the final order-only test addition.",
+    "invariants": [
+      "cold acquisition only; no imported learned checkpoint",
+      "normal SRC and window ordering",
+      "no duplicate acquisition during lookahead",
+      "current WHY/ACT and before guard remain mandatory",
+      "source threshold, acquired evidence and convergent recomputed candidates",
+      "refuted rival hypotheses do not veto qualified supporting models",
+      "missing evidence, conflicting hypotheses and stale context refuse priority",
+      "palette permutation, horizontal reflection and unrelated session identity",
+      "earlier unsupported window proposal cannot borrow later learned evidence"
+    ]
+  }
+}

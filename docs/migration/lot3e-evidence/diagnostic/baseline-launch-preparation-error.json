@@ -1,0 +1,10 @@
+{
+  "status": "setup_failed_before_game",
+  "attempts": 2,
+  "reasons": [
+    "Initial preparation used baseline checkout as main; new admission receipt and case source manifest were absent there.",
+    "A timestamp lookup used declaredAt instead of the actual recordedAt field."
+  ],
+  "correction": "Explicit main path; verified recordedAt schema; prepared baseline directory before launch.",
+  "clock": "Charged conservatively from preceding protocol declaration; no reset."
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.lot8a-prepared-baseline.v1",
+  "recordedAt": "2026-11-11T21:44:09.234476+00:00",
+  "status": "source_manifest_verified",
+  "purpose": "untimed functional preparation only; not an official published cost baseline",
+  "checkout": "/workspace/sites/sra-lot8a-prepared6b-20261111",
+  "commit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+  "nativeSource": {
+    "fileCount": 322,
+    "digest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886"
+  },
+  "manifest": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/contract/prepared6b-source-manifest.json",
+    "sha256": "6f23c135107ae67789602850d63f6366407d6b4aabfcaea7af388130ae26728d"
+  },
+  "nativeFilesAllVerified": true,
+  "publicationClaim": false,
+  "officialCostSessions": 0,
+  "globalLockAcquired": false,
+  "sparseCheckout": true
+}

@@ -1,0 +1,7 @@
+MODULE v6.axial_question
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        decision: Any
+    STEP select
+        CALL axial.select(request=request) -> decision
+        STOP decision

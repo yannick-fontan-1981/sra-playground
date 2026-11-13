@@ -1,0 +1,25 @@
+{
+  "schema": "logos-engine.v6.outline-policy-subset.v1",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "scope": "Only the three V5 route configuration fields read by OutlineService geometry. Not the full V5 production registry. The contact-overlay closure has current_box_support=true, one support size, current control boxes, and no point or prior sprites, exactly as called by the source route helper.",
+  "sourceHashes": {
+    "agents/yf_arc3_v6/morphology_policy/outline_service/family.py": "69e32670fdeb791c99308f4b7c508a249861113049c2a2db1ab076719c4480aa",
+    "agents/yf_arc3_v6/morphology_policy/outline_service/policy.py": "49a62edb9fadd3dd1a10d571975bd821747d87f5cfd51a89d94544daa87fd30f",
+    "agents/yf_arc3_v6/morphology_policy/outline_service/outline.drm": "c7db79df2d5ec84a19e2b7508a302b2e1678682f7ddb16e816f11363b241d943",
+    "agents/yf_arc3_v6/morphology_policy/outline_service/outline.src": "788480727b8b941754d543ee866140e30063fe2f6e2ab6f657dad21bd68fde31",
+    "agents/yf_arc3_v5/capabilities/interaction.py": "9d1be8be43c6d743cde6518076e18da7e8d4c9ae07183580c5409d9e468b4f71",
+    "agents/yf_arc3_v5/capabilities/entity_identity.py": "27a9b92a8eedf83ab2fb2f1b92b86db766b12097fb5954f7bf57f0a592762ea3",
+    "agents/yf_arc3_v5/capabilities/enclosure_family.py": "7a7185de527a04f6b802efb3f6c6f30cf78ab6b50f80d956df70fbea9bd69e5c",
+    "agents/yf_arc3_v5/capabilities/components.py": "60563b31d90e878eb4c5828818725b9c91252638e6e343aa31d236b1ac590a0f",
+    "agents/yf_arc3_v5/drm/interaction.drm": "12ce3fd97fb267c893f2241fb71a596c5b3b688324ce04211c52932e9e7b8e94"
+  },
+  "routeFields": [
+    "observed_control_underlay_recurrence_grounds_confirmed_floor_graph",
+    "control_zone_cell_swept_route",
+    "measure_contact_overlay_from_current_canonical_box"
+  ],
+  "document": {
+    "text": "{\"module_id\":\"native.v6.outline_service.consumed_v5_subset\",\"declarations\":[{\"id\":\"policy.declared_transferred_quantized_plan\",\"kind\":\"selection_policy\",\"configuration\":{\"observed_control_underlay_recurrence_grounds_confirmed_floor_graph\":true,\"control_zone_cell_swept_route\":{\"target_mask\":\"exact_assigned_enclosing_support_overlay\",\"traversal_order\":\"candidate_ref_ascending\",\"maximum_depth\":24,\"maximum_states\":256},\"measure_contact_overlay_from_current_canonical_box\":true}}]}",
+    "sha256": "3ec2f26c0bc83657cf8e1d0dbee17cd56e74f3c2768c35ee5cea2d8b4fac2c78"
+  }
+}

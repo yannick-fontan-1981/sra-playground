@@ -1,0 +1,44 @@
+{
+  "schema": "logos-engine.v6.development-log-transport.v1",
+  "recordedAt": "2026-11-11T17:33:34.153547+00:00",
+  "status": "verified_byte_exact",
+  "entries": [
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/development-site103-01/typecheck-stdout.log",
+        "sha256": "7c10b60a29f7baa63e0e264f7ddcb45830e743c1b1392f8954a77efb9531681d",
+        "bytes": 50
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/development-site103-01/typecheck-stdout.log.gz",
+        "sha256": "5da9dcc80386aac121186848b6907701dca00eb475920c9a50350a5af1aa8bf9",
+        "bytes": 70
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/development-site103-01/typecheck-stderr.log",
+        "sha256": "7125f194612fcff2f454c05d848e7cb71facc1967b4d5017e25b34fdee3ba74f",
+        "bytes": 99
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/development-site103-01/typecheck-stderr.log.gz",
+        "sha256": "934a9d56e1b77b540f21becd97102d1b7088e8e2eba852118cfc29df5c6f4bb7",
+        "bytes": 101
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/development-site103-01/typecheck-activity.jsonl",
+        "sha256": "bf27aba13d149f04d0b5752f08a0e08b0c4616695ea5f07023c4ed525cc7d269",
+        "bytes": 1302
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/development-site103-01/typecheck-activity.jsonl.gz",
+        "sha256": "77ef4893749366ac80b763e55501c84cad32b9405abe4101ff80d8ea26ec8c75",
+        "bytes": 251
+      }
+    }
+  ],
+  "qualification": "Complete stdout, stderr and activity, including failures; no filtering or newline normalization."
+}

@@ -1,0 +1,461 @@
+{
+  "schema": "logos-engine.v53.original-caller-first-outline-preemption.v1",
+  "qualification": "Selection analysis of the unchanged full original caller on already witnessed returns; no host action, no native execution, no alternate proposal evaluated inside the caller, no live success claim.",
+  "evidence": {
+    "decisions": {
+      "path": "docs/migration/native-campaigns-v53/diagnostics/original-caller-lean1/decisions.jsonl.gz",
+      "sha256": "e83255ab409180082ebcd50e6a44e3a7a752dbef8a25ac96e5bee3448686f514",
+      "bytes": 18653
+    },
+    "replay": {
+      "path": "docs/migration/native-campaigns-v53/diagnostics/original-caller-lean1/execution.json",
+      "sha256": "5b2ab3a483cd0f7dc7ae40bb3047bf88e9b560f54cfe4aeb2c1bda78bcec9e1d",
+      "bytes": 2633
+    },
+    "nativeAttempt1": {
+      "path": "docs/migration/native-campaigns-v53/attempt1/esct-campaign.json.gz",
+      "sha256": "ac2e434d20774d13679b79c79983e3387d1a33f75d8c852e1177b88a48622cad",
+      "bytes": 349301
+    },
+    "sourceFiles": [
+      {
+        "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_runtime.py",
+        "sha256": "bcc9bc79d04287c830efedce48b4cc2ab89b5600b8a77fe09782c35d1c05c064",
+        "bytes": 97217
+      },
+      {
+        "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.py",
+        "sha256": "425aca6c30e7abb38a537dfcef38f92c418bc4dfa35201ae52dc42ba4390fa55",
+        "bytes": 34610
+      },
+      {
+        "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+        "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+        "bytes": 46966
+      },
+      {
+        "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/outline_service/family.py",
+        "sha256": "69e32670fdeb791c99308f4b7c508a249861113049c2a2db1ab076719c4480aa",
+        "bytes": 15009
+      }
+    ]
+  },
+  "matchedPublicCommands": 16,
+  "sourceFilesVerifiedBeforeAndAfter": 1786,
+  "stop": {
+    "kind": "recorded_trace_exhausted",
+    "proposedCommand": {
+      "actionRef": "ACTION4",
+      "data": {}
+    },
+    "returnedOutcome": false
+  },
+  "commandDivergenceObserved": false,
+  "selectionComparisons": [
+    {
+      "actionOrdinal": 1,
+      "command": {
+        "actionRef": "ACTION1",
+        "data": {}
+      },
+      "exactPublicCommandMatch": true,
+      "sourceSelectedGroup": "observed_frontier",
+      "sourceMaterialSubquestion": null,
+      "sourceProposalKind": "experiment",
+      "nativeSelectedGroup": "observed_frontier",
+      "nativeFamily": "observed_frontier",
+      "nativeMaterialSubquestion": null,
+      "sameSelectionGroupAndKind": true
+    },
+    {
+      "actionOrdinal": 2,
+      "command": {
+        "actionRef": "ACTION1",
+        "data": {}
+      },
+      "exactPublicCommandMatch": true,
+      "sourceSelectedGroup": "observed_frontier",
+      "sourceMaterialSubquestion": null,
+      "sourceProposalKind": "experiment",
+      "nativeSelectedGroup": "observed_frontier",
+      "nativeFamily": "observed_frontier",
+      "nativeMaterialSubquestion": null,
+      "sameSelectionGroupAndKind": true
+    },
+    {
+      "actionOrdinal": 3,
+      "command": {
+        "actionRef": "ACTION1",
+        "data": {}
+      },
+      "exactPublicCommandMatch": true,
+      "sourceSelectedGroup": "view",
+      "sourceMaterialSubquestion": null,
+      "sourceProposalKind": "public_view_frontier",
+      "nativeSelectedGroup": "view",
+      "nativeFamily": "view",
+      "nativeMaterialSubquestion": null,
+      "sameSelectionGroupAndKind": true
+    },
+    {
+      "actionOrdinal": 4,
+      "command": {
+        "actionRef": "ACTION3",
+        "data": {}
+      },
+      "exactPublicCommandMatch": true,
+      "sourceSelectedGroup": "factored_material_return",
+      "sourceMaterialSubquestion": "observed_outline_service",
+      "sourceProposalKind": "public_outline_service",
+      "nativeSelectedGroup": "factored_material_return",
+      "nativeFamily": "public_outline_service",
+      "nativeMaterialSubquestion": "observed_outline_service",
+      "sameSelectionGroupAndKind": true
+    },
+    {
+      "actionOrdinal": 5,
+      "command": {
+        "actionRef": "ACTION3",
+        "data": {}
+      },
+      "exactPublicCommandMatch": true,
+      "sourceSelectedGroup": "observed_frontier",
+      "sourceMaterialSubquestion": null,
+      "sourceProposalKind": "experiment",
+      "nativeSelectedGroup": "observed_frontier",
+      "nativeFamily": "observed_frontier",
+      "nativeMaterialSubquestion": null,
+      "sameSelectionGroupAndKind": true
+    },
+    {
+      "actionOrdinal": 6,
+      "command": {
+        "actionRef": "ACTION5",
+        "data": {}
+      },
+      "exactPublicCommandMatch": true,
+      "sourceSelectedGroup": "factored_material_return",
+      "sourceMaterialSubquestion": "observed_outline_service",
+      "sourceProposalKind": "public_outline_service",
+      "nativeSelectedGroup": "factored_material_return",
+      "nativeFamily": "public_outline_service",
+      "nativeMaterialSubquestion": "observed_outline_service",
+      "sameSelectionGroupAndKind": true
+    },
+    {
+      "actionOrdinal": 7,
+      "command": {
+        "actionRef": "ACTION4",
+        "data": {}
+      },
+      "exactPublicCommandMatch": true,
+      "sourceSelectedGroup": "factored_material_return",
+      "sourceMaterialSubquestion": "observed_outline_service",
+      "sourceProposalKind": "public_outline_service",
+      "nativeSelectedGroup": "factored_material_return",
+      "nativeFamily": "public_outline_service",
+      "nativeMaterialSubquestion": "observed_outline_service",
+      "sameSelectionGroupAndKind": true
+    },
+    {
+      "actionOrdinal": 8,
+      "command": {
+        "actionRef": "ACTION4",
+        "data": {}
+      },
+      "exactPublicCommandMatch": true,
+      "sourceSelectedGroup": "factored_material_return",
+      "sourceMaterialSubquestion": "observed_outline_service",
+      "sourceProposalKind": "public_outline_service",
+      "nativeSelectedGroup": "factored_material_return",
+      "nativeFamily": "public_outline_service",
+      "nativeMaterialSubquestion": "observed_outline_service",
+      "sameSelectionGroupAndKind": true
+    },
+    {
+      "actionOrdinal": 9,
+      "command": {
+        "actionRef": "ACTION1",
+        "data": {}
+      },
+      "exactPublicCommandMatch": true,
+      "sourceSelectedGroup": "pre_score_contact",
+      "sourceMaterialSubquestion": null,
+      "sourceProposalKind": "observed_effect_access",
+      "nativeSelectedGroup": "pre_score_contact",
+      "nativeFamily": "pre_score_contact",
+      "nativeMaterialSubquestion": null,
+      "sameSelectionGroupAndKind": true
+    },
+    {
+      "actionOrdinal": 10,
+      "command": {
+        "actionRef": "ACTION1",
+        "data": {}
+      },
+      "exactPublicCommandMatch": true,
+      "sourceSelectedGroup": "pre_score_contact",
+      "sourceMaterialSubquestion": null,
+      "sourceProposalKind": "observed_effect_access",
+      "nativeSelectedGroup": "pre_score_contact",
+      "nativeFamily": "pre_score_contact",
+      "nativeMaterialSubquestion": null,
+      "sameSelectionGroupAndKind": true
+    },
+    {
+      "actionOrdinal": 11,
+      "command": {
+        "actionRef": "ACTION1",
+        "data": {}
+      },
+      "exactPublicCommandMatch": true,
+      "sourceSelectedGroup": "pre_score_contact",
+      "sourceMaterialSubquestion": null,
+      "sourceProposalKind": "observed_effect_access",
+      "nativeSelectedGroup": "pre_score_contact",
+      "nativeFamily": "pre_score_contact",
+      "nativeMaterialSubquestion": null,
+      "sameSelectionGroupAndKind": true
+    },
+    {
+      "actionOrdinal": 12,
+      "command": {
+        "actionRef": "ACTION4",
+        "data": {}
+      },
+      "exactPublicCommandMatch": true,
+      "sourceSelectedGroup": "pre_score_contact",
+      "sourceMaterialSubquestion": null,
+      "sourceProposalKind": "observed_effect_access",
+      "nativeSelectedGroup": "pre_score_contact",
+      "nativeFamily": "pre_score_contact",
+      "nativeMaterialSubquestion": null,
+      "sameSelectionGroupAndKind": true
+    },
+    {
+      "actionOrdinal": 13,
+      "command": {
+        "actionRef": "ACTION1",
+        "data": {}
+      },
+      "exactPublicCommandMatch": true,
+      "sourceSelectedGroup": "pre_score_contact",
+      "sourceMaterialSubquestion": null,
+      "sourceProposalKind": "observed_effect_access",
+      "nativeSelectedGroup": "pre_score_contact",
+      "nativeFamily": "pre_score_contact",
+      "nativeMaterialSubquestion": null,
+      "sameSelectionGroupAndKind": true
+    },
+    {
+      "actionOrdinal": 14,
+      "command": {
+        "actionRef": "ACTION4",
+        "data": {}
+      },
+      "exactPublicCommandMatch": true,
+      "sourceSelectedGroup": "pre_score_contact",
+      "sourceMaterialSubquestion": null,
+      "sourceProposalKind": "observed_effect_access",
+      "nativeSelectedGroup": "pre_score_contact",
+      "nativeFamily": "pre_score_contact",
+      "nativeMaterialSubquestion": null,
+      "sameSelectionGroupAndKind": true
+    },
+    {
+      "actionOrdinal": 15,
+      "command": {
+        "actionRef": "ACTION1",
+        "data": {}
+      },
+      "exactPublicCommandMatch": true,
+      "sourceSelectedGroup": "pre_score_contact",
+      "sourceMaterialSubquestion": null,
+      "sourceProposalKind": "observed_effect_access",
+      "nativeSelectedGroup": "pre_score_contact",
+      "nativeFamily": "pre_score_contact",
+      "nativeMaterialSubquestion": null,
+      "sameSelectionGroupAndKind": true
+    },
+    {
+      "actionOrdinal": 16,
+      "command": {
+        "actionRef": "ACTION4",
+        "data": {}
+      },
+      "exactPublicCommandMatch": true,
+      "sourceSelectedGroup": "pre_score_contact",
+      "sourceMaterialSubquestion": null,
+      "sourceProposalKind": "observed_effect_access",
+      "nativeSelectedGroup": "pre_score_contact",
+      "nativeFamily": "pre_score_contact",
+      "nativeMaterialSubquestion": null,
+      "sameSelectionGroupAndKind": true
+    }
+  ],
+  "firstPreemptionAfterSelectedOutline": {
+    "actionOrdinal": 9,
+    "publicReturnsAlreadyAcquired": 8,
+    "observation": {
+      "available_action_refs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION7"
+      ],
+      "frame_hash": "3f83de8893ace202",
+      "level_epoch": 1,
+      "levels_completed": 0,
+      "observation_ref": "run:epoch:1:revision:9:frame:3f83de8893ace202",
+      "revision": 9
+    },
+    "selectedGroup": "pre_score_contact",
+    "visitedGroups": [
+      "goal_access",
+      "window_constraints",
+      "orbit_constraints",
+      "scored_local_rewrite",
+      "containment",
+      "surface",
+      "pre_score_contact"
+    ],
+    "outlineGroupConsultedInThisSelection": false,
+    "command": {
+      "actionRef": "ACTION1",
+      "data": {}
+    },
+    "proposalKind": "observed_effect_access",
+    "question": {
+      "hypothesis_refs": [],
+      "reason": "acquire_visible_contact_response"
+    },
+    "currentContactQuestion": {
+      "initial_contact_acquisition": true,
+      "observed_nonlocal_contact_count": 0,
+      "contact_evidence": [],
+      "known_controls": {
+        "ACTION1": [
+          0,
+          -4
+        ],
+        "ACTION4": [
+          4,
+          0
+        ]
+      },
+      "control_surface_evidence": [
+        "run:epoch:1:revision:1:frame:cb790f27dc27d7dc",
+        "run:epoch:1:revision:2:frame:4442285228720401",
+        "run:epoch:1:revision:3:frame:769f3c24d5a051fe",
+        "run:epoch:1:revision:4:frame:28cedccd5a644839",
+        "run:epoch:1:revision:7:frame:202ce04655682153",
+        "run:epoch:1:revision:8:frame:c7ead5b3c65fc151",
+        "run:epoch:1:revision:9:frame:3f83de8893ace202"
+      ],
+      "reachable_contact_alternatives": [
+        {
+          "action_ref": "ACTION1",
+          "site": [
+            26,
+            12
+          ]
+        },
+        {
+          "action_ref": "ACTION4",
+          "site": [
+            30,
+            16
+          ]
+        }
+      ],
+      "scope": "current measured motion and visible contact question; outcome and terminal role unknown"
+    },
+    "expectedAfter": null,
+    "outlineOwnMethodCount": 1,
+    "outlineOwnMethods": [
+      {
+        "action": {
+          "action_ref": "ACTION5"
+        },
+        "evidence": [
+          "run:epoch:1:revision:6:frame:942bbc769ea92f94",
+          "run:epoch:1:revision:7:frame:202ce04655682153"
+        ],
+        "local_count": 4,
+        "local_delta_sha256": "771967c3d060321d2033da7fc1628af980d7dd50c0f56c331edceac45f36ea73",
+        "remote_change_count": 62,
+        "scope": 1,
+        "status": "observed_local_change",
+        "unknown": [
+          "effect_cause",
+          "delayed_effect",
+          "autonomous_policy",
+          "terminal_rule"
+        ]
+      }
+    ],
+    "finding": "The unchanged original caller selects its current unknown contact question before consulting factored_material_return. Its Outline local observation is present. This same priority is reproduced natively on the retained prefix, not explained by a missing original provider here."
+  },
+  "recordParityDiscrepancy": {
+    "actionOrdinal": 6,
+    "sourceEvent": {
+      "action": {
+        "action_ref": "ACTION5"
+      },
+      "evidence": [
+        "run:epoch:1:revision:6:frame:942bbc769ea92f94",
+        "run:epoch:1:revision:7:frame:202ce04655682153"
+      ],
+      "local_count": 4,
+      "local_delta_sha256": "771967c3d060321d2033da7fc1628af980d7dd50c0f56c331edceac45f36ea73",
+      "remote_change_count": 62,
+      "scope": 1,
+      "status": "observed_local_change",
+      "unknown": [
+        "effect_cause",
+        "delayed_effect",
+        "autonomous_policy",
+        "terminal_rule"
+      ]
+    },
+    "nativeEvent": {
+      "action": {
+        "action_ref": "ACTION5"
+      },
+      "evidence": [
+        "sra-v6-9cbeb785-ae32-4c5b-8ffd-98136b7e718a:epoch:1:revision:6:frame:942bbc769ea92f94",
+        "sra-v6-9cbeb785-ae32-4c5b-8ffd-98136b7e718a:epoch:1:revision:7:frame:202ce04655682153"
+      ],
+      "local_count": 4,
+      "local_delta_sha256": "771967c3d060321d2033da7fc1628af980d7dd50c0f56c331edceac45f36ea73",
+      "remote_change_count": 58,
+      "scope": 1,
+      "status": "observed_local_change",
+      "unknown": [
+        "effect_cause",
+        "delayed_effect",
+        "autonomous_policy",
+        "terminal_rule"
+      ]
+    },
+    "localDeltaHashEqual": true,
+    "sourceLocation": "agents/yf_arc3_v6/morphology_policy/outline_service/family.py:135",
+    "nativeLocation": "src/logos-engine/v6-outline-service.ts:231",
+    "cause": "In the original generator expression, the second pixel variable b shadows the lower bounding-box bound b, so t <= y <= b uses the after-pixel value. The native loop uses the geometric lower bound instead.",
+    "sourceRemoteChangeCount": 62,
+    "nativeRemoteChangeCount": 58,
+    "impact": "The recorded counter and strict checkpoint parity differ; the actual local-change status and first 16 commands/selections are identical. This is not evidence that either caller solved the game."
+  },
+  "existingNativeCoordinationDomain": {
+    "preferAcquiredContinuation": "Requires a prior official success witness, current score, matching acquired contribution and current guard; this pre-score inquiry does not meet that contract.",
+    "deferUnlearnedInvitation": "Limited to an animated-contact invitation and a learned window preparation; does not cover this pre-score contact against Outline.",
+    "implication": "Any broader arbitration for an ongoing acquired inquiry requires a separately declared native contract with current witness and guard. It must not be described as unchanged original selection."
+  },
+  "limitations": [
+    "Only 16 already witnessed outcomes were replayed. The 17th request received no outcome because the bounded trace ended.",
+    "No alternate Outline proposal was evaluated by this replay. An isolated current-proposal measurement is separate evidence.",
+    "This diagnostic does not establish whole-agent parity or future game progress."
+  ]
+}

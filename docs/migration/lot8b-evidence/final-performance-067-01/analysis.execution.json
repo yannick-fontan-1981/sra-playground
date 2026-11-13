@@ -1,0 +1,47 @@
+{
+  "schema": "logos-engine.lot8b.final-cost-analysis-execution.v1",
+  "label": "analysis",
+  "command": [
+    "node",
+    "docs/migration/lot8b-evidence/tools/final-cost/analyze.mjs",
+    "docs/migration/lot8b-evidence/final-performance-067-01/contract.json",
+    "docs/migration/lot8b-evidence/final-performance-067-01/strict.execution.json",
+    "docs/migration/lot8b-evidence/final-performance-067-01/analysis.json"
+  ],
+  "startedAt": "2026-11-12T12:41:33.739283+00:00",
+  "finishedAt": "2026-11-12T12:41:34.503221+00:00",
+  "durationSeconds": 0.7639430770000217,
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "passed",
+  "maximumSeconds": 120,
+  "sourceHead": "05dcb0fbfbddeb6c3963452dc6191b2bf1b9a441",
+  "generator": {
+    "path": "docs/migration/lot8b-evidence/tools/final-cost/analyze.mjs",
+    "bytes": 19756,
+    "sha256": "23b522ef4504fdfd7f883a0920b66ed9826f65396c4e7927faecece776670739"
+  },
+  "logs": {
+    "stdout": {
+      "compressed": {
+        "path": "docs/migration/lot8b-evidence/final-performance-067-01/analysis.stdout.log.gz",
+        "bytes": 313,
+        "sha256": "a80840293ae3b4c6f091f9ea10066f8a6b12a466f7ea4c61535a9df90b110b36"
+      },
+      "uncompressedBytes": 510,
+      "uncompressedSha256": "bcbfe25d3811958ec430abb5ade7934c69ea2c671602a93ee1eb4b63f7065bf5"
+    },
+    "stderr": {
+      "compressed": {
+        "path": "docs/migration/lot8b-evidence/final-performance-067-01/analysis.stderr.log.gz",
+        "bytes": 20,
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+      },
+      "uncompressedBytes": 0,
+      "uncompressedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "nativeExecution": false,
+  "globalLockAcquired": false,
+  "automaticRetry": false
+}

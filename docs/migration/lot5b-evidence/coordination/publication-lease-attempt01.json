@@ -1,0 +1,9 @@
+{
+  "schema": "logos-engine.retained-tool-failure.v1",
+  "status": "failed",
+  "exitCode": 1,
+  "action": "Acquire publication lease through heredoc script and read /dev/tty",
+  "error": "OSError [Errno 6] No such device or address /dev/tty",
+  "effect": "The descriptor closed when the process exited; no publication action occurred. The subsequent functions store of absent session_id also failed, so no clone was started in that invocation.",
+  "resolution": "A direct python -c process reads its provided stdin; exclusive publication lease retained in a live tool session."
+}

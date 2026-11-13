@@ -1,0 +1,42 @@
+{
+  "schema": "logos-engine.lot3h.source-oracle-export.v1",
+  "recordedAt": "2026-11-10T13:14:00.838490-03:00",
+  "status": "passed",
+  "sourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceFiles": {
+    "agents/yf_arc3_v6/laya_proto/common_crossed_prefix.py": "f5fc76010a642de99452efe409a85f968839b54bfc37adeefff66fed4e243a4f",
+    "agents/yf_arc3_v6/laya_proto/common_supported_lines.py": "bc1e5599ea5be873f16dd37570fa2e998ec29bcc670dc55433c50c45f8a60fcd",
+    "agents/yf_arc3_v6/laya_proto/common_repeated_lines.py": "fb91aa26449a1633a4fa23e7089d8e775645c2775b5c3be295e7c4bcf1ceaaca",
+    "agents/yf_arc3_v6/laya_proto/geometric_observer.py": "1017b130cb91f799ab5bdb2f26789c2645078d9b9d226469b3915d4a7262eaac",
+    "agents/yf_arc3_v6/laya_proto/terminal_composition.py": "10ab6ba513d3cc0b4dbf96868d8c716eee449068dba3f2fcdf06d5b35566609e",
+    "agents/yf_arc3_v6/laya_proto/neutral_observer.py": "9b09085eb708c084d82682b13848666ef1ca5f3fc6c10861d96e139228af927a"
+  },
+  "generator": {
+    "path": "scripts/export-v6-crossed-prefix-reference.py",
+    "bytes": 32870,
+    "sha256": "3c1b1dae8d5279b3d5597d92543c6c588a21972788200aab93008635d0448315"
+  },
+  "fixture": {
+    "path": "tests/fixtures/v6-crossed-prefix-reference.json.gz",
+    "bytes": 350899,
+    "sha256": "ca2b1e6c4ccdd41d35a45e11f989f4ea168e7959011d658c0f54e887c9b79af4"
+  },
+  "counts": {
+    "geometryCases": 28,
+    "controlCases": 7,
+    "helperCases": 35,
+    "accessCases": 38,
+    "guardCases": 34,
+    "recordCases": 17,
+    "eventCases": 7,
+    "restoreCases": 6,
+    "chains": 3
+  },
+  "sourceErrors": 12,
+  "originalFilesVerifiedBefore": 1786,
+  "originalFilesVerifiedAfter": 1786,
+  "gameExecutions": 0,
+  "gameEngineOrSpecificationReads": 0,
+  "nativeModuleExecutions": 0,
+  "qualification": "Source expectations exported without modification. Counts describe separate case collections, not one summed test suite. Source exceptions remain cases, not exporter failures."
+}

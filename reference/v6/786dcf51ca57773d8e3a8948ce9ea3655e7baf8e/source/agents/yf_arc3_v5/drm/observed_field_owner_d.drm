@@ -1,0 +1,58 @@
+{
+  "module_id": "arc3.observed_field_owner_d",
+  "declarations": [
+    {
+      "id": "policy.observed_field_owner_d", "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order", "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason.acquired_field_exact_current_owner", "reason.acquired_field_owner_missing"],
+      "declared_alternative_refs": ["field_owner.publish_complete", "field_owner.unknown"],
+      "selection_tie_breakers": [{"field": "alternative_ref", "preferred_order": "minimize"}],
+      "canonical_equivalence_tie_break_debt_ref": "debt.field_owner_equivalent_join",
+      "selection_tiers": [
+        {"id": "tier.field_owner.complete", "reason_ref": "reason.acquired_field_exact_current_owner",
+         "all_conditions": [
+           {"field": "alternative_ref", "operator": "equals", "expected": "field_owner.publish_complete"},
+           {"field": "owner_join_complete", "operator": "equals", "expected": true}
+         ]},
+        {"id": "tier.field_owner.unknown", "reason_ref": "reason.acquired_field_owner_missing",
+         "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "field_owner.unknown"}]}
+      ],
+      "meaning_template_ref_by_alternative": {"field_owner.publish_complete": "rule.acquired_field_current_owner_d"},
+      "configuration": {"support_predicate_ref": "qualifies_acquired_field_current_owner"}
+    },
+    {
+      "id": "rule.acquired_field_current_owner_d", "kind": "rule",
+      "evaluation": "project_requested_conclusions", "supported_operators": ["DERIVE"],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic", "reason_refs": ["reason.acquired_field_exact_current_owner"],
+      "invariants": ["contradictory_owner_keys_never_aliased", "canonical_agenda_and_field_revalidated",
+                     "scope_join_not_role_or_physical_licence", "no_action_authority"],
+      "claim_templates": [{
+        "id_pattern": "{owner_claim_ref}", "predicate": "qualifies_acquired_field_current_owner",
+        "family": "epistemic", "epistemic_status": "supported",
+        "argument_patterns": ["{field_term_ref}", "{field_support_claim_ref}", "{observation_record_ref}", "{parent_goal_ref}"],
+        "required_term_patterns": ["{field_term_ref}", "{parent_agenda_ref}"],
+        "required_fields": ["owner_claim_ref", "field_term_ref", "field_support_claim_ref", "parent_goal_ref",
+                            "field_binding_digest", "field_scope_digest", "field_value_digest", "parent_demand_signature_ref"],
+        "attribute_bindings": {
+          "field_binding_digest": "field_binding_digest", "field_scope_digest": "field_scope_digest",
+          "field_value_digest": "field_value_digest", "parent_demand_signature_ref": "parent_demand_signature_ref",
+          "parent_agenda_ref": "parent_agenda_ref", "parent_agenda_claim_ref": "parent_agenda_claim_ref",
+          "parent_request_ref": "parent_request_ref", "owner_consumer_ref": "owner_consumer_ref"
+        },
+        "static_attributes": {"role_truth_promoted": false, "no_action_authority": true},
+        "scope_bindings": {
+          "frame_ref": "frame_ref", "raw_input_ref": "raw_input_ref", "timeline_ref": "timeline_ref",
+          "observation_record_ref": "observation_record_ref", "parent_goal_ref": "parent_goal_ref",
+          "parent_contribution_ref": "parent_contribution_ref", "consumer_ref": "consumer_ref", "caller_ref": "caller_ref",
+          "scope_ref": "scope_ref", "episode_ref": "episode_ref", "level_scope_ref": "level_scope_ref", "epoch": "epoch",
+          "input_revision_ref": "input_revision_ref", "evidence_revision_ref": "evidence_revision_ref",
+          "model_revision_ref": "model_revision_ref", "event_owner_ref": "event_owner_ref"
+        }
+      }]
+    }
+  ]
+}

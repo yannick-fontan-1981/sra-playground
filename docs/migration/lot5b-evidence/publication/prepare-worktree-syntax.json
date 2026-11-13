@@ -1,0 +1,12 @@
+{
+  "schema": "logos-engine.source-only-syntax-receipt.v1",
+  "status": "passed",
+  "generator": {
+    "path": "/workspace/sites/sra-lot5b-publication-artifacts-20261111/prepare-worktree.py",
+    "bytes": 25126,
+    "sha256": "73999107bd305eaf79b864c7fa5c9535a9baa859985db7b97d3e98e34d50d256"
+  },
+  "validation": "Python AST syntax only; preparation not yet executed",
+  "checkoutMutationExecuted": false,
+  "publicationExecuted": false
+}

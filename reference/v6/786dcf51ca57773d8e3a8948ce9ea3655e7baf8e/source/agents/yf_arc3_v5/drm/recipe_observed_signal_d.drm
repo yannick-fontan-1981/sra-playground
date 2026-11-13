@@ -1,0 +1,632 @@
+{
+  "module_id": "recipe_observed_signal_d",
+  "declarations": [
+    {
+      "id": "policy.recipe_observed_signal_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.recipe_exact_acquired_signal",
+        "reason.recipe_signal_still_unknown"
+      ],
+      "declared_alternative_refs": [
+        "recipe_signal.publish_exact",
+        "recipe_signal.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.recipe_observed_signal_equivalent_support",
+      "selection_tiers": [
+        {
+          "id": "tier.recipe_signal.exact",
+          "reason_ref": "reason.recipe_exact_acquired_signal",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recipe_signal.publish_exact"
+            },
+            {
+              "field": "acquisition_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "matching_alternative_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "unknown_positions_empty",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.recipe_signal.unknown",
+          "reason_ref": "reason.recipe_signal_still_unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recipe_signal.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "recipe_signal.publish_exact": "rule.recipe_acquired_signal_value_d"
+      },
+      "configuration": {
+        "support_predicate_ref": "qualifies_acquired_recipe_signal",
+        "acquired_source_kind_ref": "recipe.acquired_scalar_signal.v1"
+      }
+    },
+    {
+      "id": "rule.recipe_acquired_signal_value_d",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.recipe_exact_acquired_signal"
+      ],
+      "invariants": [
+        "actual_acquisition_not_supplied_native_state",
+        "source_declared_scalar_relation_only",
+        "no_collision_or_action_authority"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{field_ref}",
+          "kind": "value",
+          "label": "Acquired recipe display signal",
+          "required_fields": [
+            "field_ref",
+            "frame_ref",
+            "observation_record_ref",
+            "signal_digest",
+            "unique_alternative_ref"
+          ],
+          "static_attributes": {
+            "projection_contract_ref": "recipe.acquired_scalar_signal.v1",
+            "source_kind_ref": "recipe.acquired_scalar_signal.v1"
+          },
+          "attribute_bindings": {
+            "value": "unique_value",
+            "frame_ref": "frame_ref",
+            "raw_input_ref": "raw_input_ref",
+            "observation_record_ref": "observation_record_ref",
+            "signal_ref": "signal_ref",
+            "source_schema_ref": "source_schema_ref",
+            "signal_digest": "signal_digest",
+            "raster_digest": "raster_digest",
+            "alternative_ref": "unique_alternative_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{support_claim_ref}",
+          "predicate": "qualifies_acquired_recipe_signal",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{field_ref}",
+            "{observation_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{field_ref}"
+          ],
+          "required_fields": [
+            "support_claim_ref",
+            "field_ref",
+            "observation_record_ref",
+            "signal_digest",
+            "frame_ref"
+          ],
+          "attribute_bindings": {
+            "signal_digest": "signal_digest",
+            "raster_digest": "raster_digest"
+          },
+          "scope_bindings": {
+            "frame_ref": "frame_ref",
+            "raw_input_ref": "raw_input_ref",
+            "timeline_ref": "timeline_ref",
+            "observation_record_ref": "observation_record_ref"
+          },
+          "static_attributes": {
+            "no_native_state_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.recipe_observed_state_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.recipe_actual_complete_joint_state",
+        "reason.recipe_state_evidence_missing"
+      ],
+      "declared_alternative_refs": [
+        "recipe_state.publish_complete",
+        "recipe_state.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.recipe_observed_state_equivalent_support",
+      "selection_tiers": [
+        {
+          "id": "tier.recipe_state.complete",
+          "reason_ref": "reason.recipe_actual_complete_joint_state",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recipe_state.publish_complete"
+            },
+            {
+              "field": "observed_state_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.recipe_state.unknown",
+          "reason_ref": "reason.recipe_state_evidence_missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recipe_state.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "recipe_state.publish_complete": "rule.recipe_acquired_joint_state_d"
+      },
+      "configuration": {
+        "support_predicate_ref": "qualifies_acquired_recipe_joint_state",
+        "acquired_source_kind_ref": "recipe.acquired_joint_state.v1"
+      }
+    },
+    {
+      "id": "rule.recipe_acquired_joint_state_d",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.recipe_actual_complete_joint_state"
+      ],
+      "invariants": [
+        "actual_field_acquisition_only",
+        "missing_fields_not_known_absence",
+        "no_model_successor_or_action_authority"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{state_term_ref}",
+          "kind": "value",
+          "label": "Acquired recipe joint state",
+          "required_fields": [
+            "state_term_ref",
+            "state",
+            "state_digest",
+            "projection_contract_ref",
+            "frame_ref",
+            "observation_record_ref"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "recipe.acquired_joint_state.v1"
+          },
+          "attribute_bindings": {
+            "state": "state",
+            "state_digest": "state_digest",
+            "field_provenance": "field_provenance",
+            "field_provenance_digest": "field_provenance_digest",
+            "projection_contract_ref": "projection_contract_ref",
+            "frame_ref": "frame_ref",
+            "raw_input_ref": "raw_input_ref",
+            "observation_record_ref": "observation_record_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{state_support_claim_ref}",
+          "predicate": "qualifies_acquired_recipe_joint_state",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{state_term_ref}",
+            "{observation_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{state_term_ref}"
+          ],
+          "required_fields": [
+            "state_support_claim_ref",
+            "state_term_ref",
+            "state_digest",
+            "observation_record_ref",
+            "frame_ref"
+          ],
+          "attribute_bindings": {
+            "state_digest": "state_digest",
+            "field_provenance": "field_provenance",
+            "field_provenance_digest": "field_provenance_digest"
+          },
+          "scope_bindings": {
+            "frame_ref": "frame_ref",
+            "raw_input_ref": "raw_input_ref",
+            "timeline_ref": "timeline_ref",
+            "observation_record_ref": "observation_record_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "parent_contribution_ref": "parent_contribution_ref",
+            "consumer_ref": "consumer_ref", "caller_ref": "caller_ref",
+            "scope_ref": "scope_ref", "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref", "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref", "event_owner_ref": "event_owner_ref"
+          },
+          "static_attributes": {
+            "no_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.recipe_observed_body_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.recipe_actual_complete_body",
+        "reason.recipe_body_evidence_missing"
+      ],
+      "declared_alternative_refs": [
+        "recipe_body.publish_complete",
+        "recipe_body.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.recipe_observed_state_equivalent_support",
+      "selection_tiers": [
+        {
+          "id": "tier.recipe_body.complete",
+          "reason_ref": "reason.recipe_actual_complete_body",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recipe_body.publish_complete"
+            },
+            {
+              "field": "observed_body_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.recipe_body.unknown",
+          "reason_ref": "reason.recipe_body_evidence_missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recipe_body.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "recipe_body.publish_complete": "rule.recipe_acquired_body_d"
+      },
+      "configuration": {
+        "support_predicate_ref": "qualifies_acquired_recipe_body",
+        "acquired_source_kind_ref": "recipe.acquired_body.v1"
+      }
+    },
+    {
+      "id": "rule.recipe_acquired_body_d",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.recipe_actual_complete_body"
+      ],
+      "invariants": [
+        "actual_field_acquisition_only",
+        "missing_fields_not_known_absence",
+        "no_model_successor_or_action_authority"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{body_term_ref}",
+          "kind": "value",
+          "label": "Acquired recipe body",
+          "required_fields": [
+            "body_term_ref",
+            "value",
+            "body_digest",
+            "frame_ref",
+            "observation_record_ref"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "recipe.acquired_body.v1",
+            "projection_contract_ref": "recipe.acquired_body.v1",
+            "role_truth_promoted": false
+          },
+          "attribute_bindings": {
+            "body_digest": "body_digest",
+            "field_owner_provenance": "field_owner_provenance",
+            "field_owner_provenance_digest": "field_owner_provenance_digest",
+            "body_field_provenance": "body_field_provenance",
+            "body_field_provenance_digest": "body_field_provenance_digest",
+            "frame_ref": "frame_ref",
+            "raw_input_ref": "raw_input_ref",
+            "observation_record_ref": "observation_record_ref",
+            "value": "value",
+            "original_role_epistemic_status": "original_role_epistemic_status",
+            "coordinate_axis_order": "coordinate_axis_order"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{body_support_claim_ref}",
+          "predicate": "qualifies_acquired_recipe_body",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{body_term_ref}",
+            "{observation_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{body_term_ref}"
+          ],
+          "required_fields": [
+            "body_support_claim_ref",
+            "body_term_ref",
+            "body_digest",
+            "observation_record_ref",
+            "frame_ref"
+          ],
+          "attribute_bindings": {
+            "body_digest": "body_digest",
+            "original_role_epistemic_status": "original_role_epistemic_status",
+            "coordinate_axis_order": "coordinate_axis_order",
+            "field_owner_provenance": "field_owner_provenance",
+            "field_owner_provenance_digest": "field_owner_provenance_digest",
+            "body_field_provenance": "body_field_provenance",
+            "body_field_provenance_digest": "body_field_provenance_digest"
+          },
+          "scope_bindings": {
+            "frame_ref": "frame_ref",
+            "raw_input_ref": "raw_input_ref",
+            "timeline_ref": "timeline_ref",
+            "observation_record_ref": "observation_record_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "parent_contribution_ref": "parent_contribution_ref",
+            "consumer_ref": "consumer_ref",
+            "caller_ref": "caller_ref",
+            "scope_ref": "scope_ref",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "event_owner_ref": "event_owner_ref"
+          },
+          "static_attributes": {
+            "no_action_authority": true,
+            "role_truth_promoted": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.recipe_pose_correspondence_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.recipe_actual_pose_query_correspondence",
+        "reason.recipe_pose_query_evidence_missing"
+      ],
+      "declared_alternative_refs": [
+        "recipe_pose_query.publish_complete",
+        "recipe_pose_query.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.recipe_pose_query_equivalent_correspondence",
+      "selection_tiers": [
+        {
+          "id": "tier.recipe_pose_query.complete",
+          "reason_ref": "reason.recipe_actual_pose_query_correspondence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recipe_pose_query.publish_complete"
+            },
+            {
+              "field": "current_render_correspondence",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.recipe_pose_query.unknown",
+          "reason_ref": "reason.recipe_pose_query_evidence_missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recipe_pose_query.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "recipe_pose_query.publish_complete": "rule.recipe_acquired_pose_query_d"
+      },
+      "configuration": {
+        "support_predicate_ref": "qualifies_acquired_recipe_pose_query",
+        "acquired_source_kind_ref": "recipe.acquired_pose_query.v1"
+      }
+    },
+    {
+      "id": "rule.recipe_acquired_pose_query_d",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.recipe_actual_pose_query_correspondence"
+      ],
+      "invariants": [
+        "proposed_role_status_preserved",
+        "raster_correspondence_not_control_or_physics",
+        "actual_acquisition_not_request_pixels"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{role_field_ref}",
+          "kind": "value",
+          "label": "Current acquired Source pose query",
+          "required_fields": [
+            "role_field_ref",
+            "value",
+            "binding_digest",
+            "frame_ref",
+            "observation_record_ref"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "recipe.acquired_pose_query.v1",
+            "projection_contract_ref": "recipe.acquired_pose_query.v1",
+            "role_truth_promoted": false,
+            "physical_reference_confirmed": false
+          },
+          "attribute_bindings": {
+            "value": "value",
+            "binding_digest": "binding_digest",
+            "frame_ref": "frame_ref",
+            "raw_input_ref": "raw_input_ref",
+            "observation_record_ref": "observation_record_ref",
+            "pose_term_ref": "pose_term_ref",
+            "original_pose_epistemic_status": "original_pose_epistemic_status"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{role_support_claim_ref}",
+          "predicate": "qualifies_acquired_recipe_pose_query",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{role_field_ref}",
+            "{observation_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{role_field_ref}"
+          ],
+          "required_fields": [
+            "role_support_claim_ref",
+            "role_field_ref",
+            "binding_digest",
+            "observation_record_ref"
+          ],
+          "attribute_bindings": {
+            "binding_digest": "binding_digest",
+            "original_pose_epistemic_status": "original_pose_epistemic_status"
+          },
+          "scope_bindings": {
+            "frame_ref": "frame_ref",
+            "raw_input_ref": "raw_input_ref",
+            "timeline_ref": "timeline_ref",
+            "observation_record_ref": "observation_record_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "parent_contribution_ref": "parent_contribution_ref",
+            "consumer_ref": "consumer_ref",
+            "caller_ref": "caller_ref",
+            "scope_ref": "scope_ref",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "event_owner_ref": "event_owner_ref"
+          },
+          "static_attributes": {
+            "role_truth_promoted": false,
+            "no_control_or_physical_law_authority": true
+          }
+        }
+      ]
+    }
+  ]
+}

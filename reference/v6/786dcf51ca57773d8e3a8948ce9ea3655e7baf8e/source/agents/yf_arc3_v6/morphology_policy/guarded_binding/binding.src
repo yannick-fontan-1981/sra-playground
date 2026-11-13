@@ -1,0 +1,11 @@
+MODULE v6.observed_binding
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        measured: Any
+        answer: Any
+    STEP measure
+        CALL binding.measure(request=request) -> measured
+        NEXT choose
+    STEP choose
+        CALL binding.bind(measured=measured) -> answer
+        STOP answer

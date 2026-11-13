@@ -1,0 +1,377 @@
+{
+  "schema": "logos-engine.lot4a.delivery-planning.v1",
+  "status": "planning_only_no_checks_or_measurements_executed",
+  "base": {
+    "siteVersion": 78,
+    "commit": "8fa6b261b8b23ac8d232e60c9c179e2f3407d82f",
+    "nativeVersion": "0.49.0",
+    "nativeDigest": "d6cb9abdf48a9062936d4647dbd809dc4cee1d1528f85e973fda83c7af8e6054",
+    "nativeFiles": 268,
+    "candidateVersion": "resolve_after_concurrent_fetch"
+  },
+  "baselinePreparation": {
+    "checkoutSuggestion": "/workspace/sites/sra-lot4a-base78",
+    "commands": [
+      {
+        "cwd": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+        "argv": [
+          "git",
+          "worktree",
+          "add",
+          "--detach",
+          "/workspace/sites/sra-lot4a-base78",
+          "8fa6b261b8b23ac8d232e60c9c179e2f3407d82f"
+        ]
+      },
+      {
+        "cwd": "/workspace/sites/sra-lot4a-base78",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ]
+      },
+      {
+        "cwd": "/workspace/sites/sra-lot4a-base78",
+        "argv": [
+          "node",
+          "/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.5/scripts/install-dependencies.mjs"
+        ]
+      },
+      {
+        "cwd": "/workspace/sites/sra-lot4a-base78",
+        "argv": [
+          "python",
+          "-B",
+          "scripts/freeze-v53-native-source.py",
+          "freeze",
+          "docs/migration/lot4a-evidence/baseline-freeze"
+        ]
+      }
+    ],
+    "afterExtraction": "Verify HEAD, 268-file native inventory and d6cb9ab... digest against published Site78; copy exact manifest bytes into candidate docs/migration/lot4a-evidence/baseline/source-manifest.json and retain provenance. No old timing is a new baseline sample.",
+    "adaptWhenRemoteMoves": "Retain this starting identity. If a later published native version becomes the integration/performance baseline, declare its actual commit and fresh inventory separately before the window."
+  },
+  "reuseUnchanged": [
+    "scripts/freeze-v53-native-source.py",
+    "scripts/verify-native-delta.py",
+    "scripts/run-recorded-public-regressions.py",
+    "scripts/replay-v53-public-regression.mjs",
+    "scripts/compare-v54-regressions.py",
+    "scripts/verify-native-delivery.py",
+    "scripts/evidence-byte-parts.py",
+    "scripts/restore-v53-evidence.py",
+    "scripts/run-native-cost-window.py",
+    "scripts/measure-native-loop-costs.mjs",
+    "scripts/compare-native-loop-costs.mjs",
+    "scripts/compare-native-cost-cohorts.mjs",
+    "scripts/review-native-cost-consolidation.py",
+    "scripts/review-native-global-cost-window.py",
+    "scripts/review-native-global-cost-budget.py"
+  ],
+  "adaptOrPrepareOwnFiles": [
+    {
+      "source": "docs/migration/lot3h-evidence/prepare-cost-protocol.py",
+      "destination": "docs/migration/lot4a-evidence/prepare-cost-protocol.py",
+      "changes": [
+        "BASELINE checkout; BASELINE_COMMIT; BASELINE_DIGEST; native file count 268; baseline Site78/native0.49; candidate version resolved after integration; OUT lot4a; HISTORICAL lot3h; names of actual Feedback scope and receipts. Preserve historical tools/cases/phase policy bytes."
+      ]
+    },
+    {
+      "source": "docs/migration/lot3h-evidence/check-cost-static-inputs.py",
+      "destination": "docs/migration/lot4a-evidence/check-cost-static-inputs.py",
+      "changes": [
+        "Optional dedicated preparatory checker; many CrossedPrefix/WEAV proof paths and qualification text are specific and need explicit adaptation. The reusable --check-protocol gate already validates immutable policy/fingerprint contract."
+      ]
+    },
+    {
+      "source": "docs/migration/lot3h-evidence/write-cost-results.py",
+      "destination": "docs/migration/lot4a-evidence/write-cost-results.py",
+      "changes": [
+        "Use completed lot4a raw reports and actual identity, qualification, isolation evidence and receipt paths. Do not copy old numeric claims or game results."
+      ]
+    },
+    {
+      "source": "docs/migration/lot3h-evidence/recorded-regression-cases.json",
+      "destination": "docs/migration/lot4a-evidence/recorded-regression-cases.json",
+      "changes": [
+        "Pin actual native0.49 successful baseline replays, not native0.48 baseline reports. Keep source public traces unchanged. Four lot3h final regression reports are available for CATR/RSWP/FOGW/VOIS. Feedback passive coverage requires own explicit proof; empty passiveOwnerRequirements proves none."
+      ]
+    },
+    {
+      "source": "docs/migration/lot3h-evidence/run-weav-case-phase.py",
+      "destination": "optional lot4a case deadline wrapper",
+      "changes": [
+        "MIND and actual preserved prior clock; source manifest directories; reference cap if used; candidate target three natural levels. Base wrapper enforces an outer wall-clock cumulative deadline; run-v53-campaign-proof.py alone does not."
+      ]
+    },
+    {
+      "source": "docs/migration/lot3h-evidence/verify-publication-inputs.py and build-evidence-index.py",
+      "destination": "lot4a-specific receipt index, only if useful",
+      "changes": [
+        "These are heavily CrossedPrefix/WEAV-specific. Prefer generic verify-native-delivery.py plus honest own-scope receipts; do not blindly rename or claim existing effect counts."
+      ]
+    }
+  ],
+  "freeze": {
+    "argv": [
+      "python",
+      "-B",
+      "scripts/freeze-v53-native-source.py",
+      "freeze",
+      "docs/migration/lot4a-evidence/final"
+    ],
+    "contract": "One immutable freeze after source/test changes settle. It inventories all native .ts/.json/.drm under src/logos-engine and src/runtime, archives native files plus eleven harness/build inputs, preserves exact gzip bytes in <=900000-byte ordered parts, and records HEAD. It does not run the agent. All receipts must bind the candidate actually integrated."
+  },
+  "formalTests": {
+    "existingAffectedScope": {
+      "selection_information_priority": [
+        "tests/v6-native-family-registration.test.ts",
+        "tests/v6-native-runtime.test.ts",
+        "tests/v6-native-caller.test.ts",
+        "tests/v6-caller-integration.test.ts",
+        "tests/v6-goal-attention.test.ts",
+        "tests/v6-control-attention-reference.test.ts",
+        "tests/v6-motion-contrast.test.ts",
+        "tests/v6-motion-caller-integration.test.ts"
+      ],
+      "neighboring_interfaces": [
+        "tests/v6-visual-sequences.test.ts",
+        "tests/v6-interface-families.test.ts",
+        "tests/v6-native-interface-families.test.ts",
+        "tests/v6-point-set.test.ts",
+        "tests/v6-point-display.test.ts"
+      ],
+      "authorization_point_bindings": [
+        "tests/v6-native-authority.test.ts",
+        "tests/v6-native-transition-domain.test.ts",
+        "tests/v6-native-transition-domain-integration.test.ts",
+        "tests/v6-native-working-witness.test.ts"
+      ],
+      "shared_persistence": [
+        "tests/v6-native-persistence.test.ts",
+        "tests/v6-native-checkpoint-integration.test.ts",
+        "tests/v6-native-state-graph.test.ts",
+        "tests/v6-native-hydration-cache.test.ts",
+        "tests/v6-native-snapshot-identity.test.ts",
+        "tests/v6-native-copy.test.ts",
+        "tests/v6-knowledge-store.test.ts",
+        "tests/v6-incremental-memory.test.ts"
+      ],
+      "controller_pause": [
+        "tests/v6-agent.test.ts"
+      ]
+    },
+    "newScope": [
+      "Original-source differential Feedback suite",
+      "Common-caller two-path/same-memory integration suite",
+      "Selected/passive exactly-once and epoch/method-only restoration",
+      "Two actual acquired discriminating outcomes changing subsequent decisions",
+      "Palette mutation, locus move, ambiguous feedback, contradiction, prefix interruption, suffix clearing and bounded-search incomplete status"
+    ],
+    "runner": [
+      "python",
+      "-B",
+      "scripts/verify-native-delta.py",
+      "docs/migration/lot4a-evidence/final",
+      "--tests",
+      "<explicit existing and completed new test filenames>"
+    ],
+    "qualification": "Proposed affected scope, adjustable to actual changed contracts. Do not automatically retain the unrelated 71-file lot3H list or invent a test count. Registry/persistence changes justify these neighboring checks."
+  },
+  "fiveGates": {
+    "argv": [
+      "python",
+      "-B",
+      "scripts/verify-native-delta.py",
+      "docs/migration/lot4a-evidence/final",
+      "--build-script",
+      "/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.5/scripts/build-site.mjs"
+    ],
+    "ordered": [
+      "npm run typecheck",
+      "node scripts/audit-v6-entry-points.ts",
+      "python scripts/audit-v6-migration.py",
+      "git diff --check",
+      "current Sites build-site.mjs"
+    ],
+    "notes": [
+      "Entry and migration audits update generated docs; transfer map must reference completed implementation/tests honestly.",
+      "Build and tests receipts verify unchanged native freeze and all source/test or build inputs. New source or tests after validation invalidate old receipt identity."
+    ]
+  },
+  "regressions": {
+    "preflight": [
+      "python",
+      "-B",
+      "scripts/run-recorded-public-regressions.py",
+      "docs/migration/lot4a-evidence/recorded-regression-cases.json",
+      "--preflight"
+    ],
+    "run": [
+      "python",
+      "-B",
+      "scripts/run-recorded-public-regressions.py",
+      "docs/migration/lot4a-evidence/recorded-regression-cases.json",
+      "docs/migration/lot4a-evidence/final",
+      "--workers",
+      "1"
+    ],
+    "games": [
+      "CATR",
+      "RSWP",
+      "FOGW",
+      "VOIS"
+    ],
+    "checks": "Same 17 retained comparison checks per case. Four cases yield 68 expected only if actually run; no new live success claim.",
+    "additionalDecision": "Consider one direct visual-sequence recorded regression if source path can now be preempted; narrow tests already cover visual priority. Do not add nine historical campaigns without a concrete remaining risk."
+  },
+  "campaign": {
+    "game": "MIND",
+    "targetNaturalLevels": 3,
+    "maximumCumulativeSeconds": 2400,
+    "runner": [
+      "python",
+      "-B",
+      "scripts/run-v53-campaign-proof.py",
+      "MIND",
+      "3",
+      "docs/migration/lot4a-evidence/final/mind-feedback-session"
+    ],
+    "boundedReference": [
+      "python",
+      "-B",
+      "scripts/run-bounded-native-campaign-proof.py",
+      "MIND",
+      "3",
+      "<predeclared action cap>",
+      "docs/migration/lot4a-evidence/baseline/mind-native049"
+    ],
+    "prerequisites": [
+      "Put actual candidate/baseline source-manifest.json in each session directory before run.",
+      "Record selection time, historical charged seconds and immutable deadline BEFORE any attempt; enforce remaining deadline externally.",
+      "The journaled runner alone is not a 40-minute guard; all debugging on this chosen case consumes the same clock.",
+      "Read original game only as validation host; never feed hidden state, expected solution or game identifiers to production rules."
+    ],
+    "knownPriorEvidence": "Search found MIND only in historical candidate scans v49-v55, no MIND live resolution/clock among matching report names; this limited search does not prove no historical attempt anywhere.",
+    "publicRisk": "Archived MIND initial public available actions are ACTION5/ACTION6/ACTION7. Feedback source test_complete_proposal requires exactly one non-pointed candidate when no submit method is acquired. Inspect actual current input domain and document any resulting ambiguity; do not assign a submit semantic to an action ID."
+  },
+  "cost": {
+    "sameBytesInputs": [
+      "docs/migration/lot3h-evidence/performance/cases.json",
+      "docs/migration/lot3h-evidence/performance/comparison-policy.json"
+    ],
+    "preflight": [
+      "python",
+      "-B",
+      "scripts/review-native-global-cost-window.py",
+      "--check-protocol",
+      "docs/migration/lot4a-evidence/performance/declaration.json"
+    ],
+    "window": [
+      "python",
+      "-B",
+      "scripts/run-native-cost-window.py",
+      "/workspace/sites/sra-lot4a-base78",
+      "docs/migration/lot4a-evidence/performance",
+      "docs/migration/lot4a-evidence/baseline/source-manifest.json",
+      "docs/migration/lot4a-evidence/final/source-manifest.json"
+    ],
+    "cohort1": [
+      "node",
+      "scripts/compare-native-loop-costs.mjs",
+      "docs/migration/lot4a-evidence/performance/comparison-policy.json",
+      "docs/migration/lot4a-evidence/performance/cohort1/baseline.json",
+      "docs/migration/lot4a-evidence/performance/cohort1/after.json",
+      "docs/migration/lot4a-evidence/performance/cohort1/comparison.json"
+    ],
+    "cohort2": [
+      "node",
+      "scripts/compare-native-loop-costs.mjs",
+      "docs/migration/lot4a-evidence/performance/comparison-policy.json",
+      "docs/migration/lot4a-evidence/performance/cohort2/baseline.json",
+      "docs/migration/lot4a-evidence/performance/cohort2/after.json",
+      "docs/migration/lot4a-evidence/performance/cohort2/comparison.json"
+    ],
+    "aggregate": [
+      "node",
+      "scripts/compare-native-cost-cohorts.mjs",
+      "docs/migration/lot4a-evidence/performance/comparison-policy.json",
+      "docs/migration/lot4a-evidence/performance/cohort1/baseline.json",
+      "docs/migration/lot4a-evidence/performance/cohort1/after.json",
+      "docs/migration/lot4a-evidence/performance/cohort1/comparison.json",
+      "docs/migration/lot4a-evidence/performance/cohort2/baseline.json",
+      "docs/migration/lot4a-evidence/performance/cohort2/after.json",
+      "docs/migration/lot4a-evidence/performance/cohort2/comparison.json",
+      "docs/migration/lot4a-evidence/performance/combined-comparison.json"
+    ],
+    "arithmetic": [
+      "python",
+      "-B",
+      "scripts/review-native-cost-consolidation.py",
+      "docs/migration/lot4a-evidence/performance"
+    ],
+    "globalDecision": [
+      "python",
+      "-B",
+      "scripts/review-native-global-cost-window.py",
+      "docs/migration/lot4a-evidence/performance/combined-comparison.json",
+      "docs/migration/lot4a-evidence/performance/declaration.json",
+      "docs/migration/lot4a-evidence/performance/global-budget-decision.json",
+      "--lot",
+      "4A",
+      "--native-version",
+      "<actual frozen native version>"
+    ],
+    "contract": {
+      "order": [
+        "A1",
+        "B1",
+        "B2",
+        "A2"
+      ],
+      "games": [
+        "STCK",
+        "SMLP"
+      ],
+      "sessionsPerGameVersion": 8,
+      "measuredSessions": 32,
+      "measuredActions": 400,
+      "excludedWarmups": 8,
+      "excludedWarmupActions": 24,
+      "acceptance": "pooled median complete session increase strictly below 0.10 independently for each game",
+      "phaseOverruns": "visible diagnostics allowed when both global criteria pass",
+      "p95": "empirical nearest rank only for n>=20",
+      "review231": "Existing STCK/SMLP consolidation reviewer produced 231 checks previously; report actual count from new run."
+    },
+    "isolation": {
+      "existingMachineLockFound": false,
+      "existingWrapperUses": "exclusive output creation only, no flock/mutex",
+      "rootProposedLock": "/workspace/shared/sra-coordination/performance.lock",
+      "qualification": "A cooperative lock excludes only cooperating participants. No proof of inter-thread exclusivity follows from absence of owned processes in a PID namespace or from output exclusivity. Finish agents/tests/builds/campaigns/browser preview and explicitly qualify observed coordination evidence."
+    }
+  },
+  "finalIntegrity": {
+    "argv": [
+      "python",
+      "-B",
+      "scripts/verify-native-delivery.py",
+      "docs/migration/lot4a-evidence/final",
+      "--require-regressions",
+      "--receipt",
+      "<own completed scope or campaign receipt inside final>"
+    ],
+    "contract": "After packing large gzip JSON reports, checks native archive, native/tests/build identities, passed retained regressions and all1786 original source files, restores evidence bytes in fresh temporary root. Additional receipts are fingerprints, not reproof. Cost files outside final need separate index identity."
+  },
+  "integrationRisks": [
+    "One Feedback instance must populate both goal_access and information_goal, and be registered once as knowledge owner; group duplication must not duplicate state/hydration/acquisition.",
+    "Source records selected constraint before passive families; feedback passive is after network/cargo and before morphology.observe_departures/GoalAccess. In currently transferred runtime put Feedback immediately before morphology departures, after earlier available passive owners.",
+    "Selected Feedback event gets feedback_sequence_event:<revision>; passive Feedback return is deliberately not retained as a second selected event in Python. Call record without unrelated proposal/index attribution.",
+    "Persist feedback_sequence_state if layout OR entry_method exists. A boundary clears layout while preserving a conditional method; a layout-only guard loses this state.",
+    "The runtime already persists family_state checkpoints; episode mirror must share the same instance and not become a second learning owner or call record twice.",
+    "Selection proposals may mutate layout/last even when another family wins; compare source behavior and preserve intended passive learning order.",
+    "Current point guards and projected compaction palette binding must survive controller authorization, not just component before().",
+    "Legacy checkpoints lack Feedback family node. Restore should establish empty new owner without discarding existing owners; prove old native0.49 checkpoints remain usable.",
+    "If runtime changes while cost or official proofs run, rebase/reconcile and generate proofs for final merged candidate. Keep failed/noisy prior evidence."
+  ]
+}

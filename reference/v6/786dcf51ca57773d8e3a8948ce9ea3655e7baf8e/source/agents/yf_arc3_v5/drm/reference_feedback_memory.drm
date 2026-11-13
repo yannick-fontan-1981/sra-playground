@@ -1,0 +1,107 @@
+{
+  "module_id": "reference_feedback_memory",
+  "declarations": [
+    {
+      "id": "policy.remember_completed_reference_feedback", "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order", "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": ["reference_feedback.remember", "reference_feedback.absent"],
+      "configuration": {"measurement_contract": {}},
+      "fact_projections": [
+        {
+          "id": "projection.reference_feedback.remember",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "reference_feedback.remember"},
+            {"field": "official_boundary_present", "operator": "equals", "expected": true},
+            {"field": "feedback_history_index_complete", "operator": "equals", "expected": true},
+            {"field": "feedback_executed_terminal_goal_ref", "operator": "equals", "expected": "goal.construct_reference_guided_ordered_accretion"},
+            {"field": "feedback_code_candidate_count", "operator": "equals", "expected": 1},
+            {"field": "feedback_family_member_count", "operator": "greater_than", "expected": 0},
+            {"field": "feedback_observed_change_count", "operator": "greater_than", "expected": 0},
+            {"field": "feedback_all_changes_beneficiary_match", "operator": "equals", "expected": true},
+            {"field": "feedback_winning_action_matches", "operator": "equals", "expected": true},
+            {"field": "feedback_current_before_variant_count", "operator": "equals", "expected": 1},
+            {"field": "feedback_current_other_variant_count", "operator": "equals", "expected": 0},
+            {"field": "feedback_reverse_code_observed", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {"reference_feedback_memory_kind": "remember"}
+        },
+        {
+          "id": "projection.reference_feedback.absent",
+          "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "reference_feedback.absent"}],
+          "static_facts": {"reference_feedback_memory_kind": "absent"}
+        }
+      ],
+      "selection_tiers": [
+        {"id": "tier.reference_feedback.remember", "all_conditions": [{"field": "reference_feedback_memory_kind", "operator": "equals", "expected": "remember"}], "reason_ref": "reason.controlled_reference_code_changes_and_last_member_boundary_support_revisable_completion"},
+        {"id": "tier.reference_feedback.absent", "all_conditions": [{"field": "reference_feedback_memory_kind", "operator": "equals", "expected": "absent"}], "reason_ref": "reason.reference_feedback_causal_evidence_is_missing_or_ambiguous"}
+      ],
+      "selection_tie_breakers": [{"field": "reference_feedback_memory_kind", "preferred_order": "minimize"}],
+      "reason_refs": ["reason.controlled_reference_code_changes_and_last_member_boundary_support_revisable_completion", "reason.reference_feedback_causal_evidence_is_missing_or_ambiguous"],
+      "meaning_template_ref_by_alternative": {"reference_feedback.remember": "rule.completed_reference_feedback_memory"},
+      "invariants": ["unknown_code_does_not_block_an_official_boundary", "no_action_is_released_by_memory_qualification", "a_next_scene_is_not_an_observed_terminal_configuration"]
+    },
+    {
+      "id": "rule.completed_reference_feedback_memory", "kind": "rule",
+      "evaluation": "project_requested_conclusions", "supported_operators": ["DERIVE"],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "term_templates": [
+        {
+          "id_pattern": "memory.reference_feedback.{feedback_code_ref}", "kind": "schema",
+          "label": "revisable terminal reference feedback code",
+          "required_fields": ["feedback_code_ref", "feedback_code_height", "feedback_code_width", "feedback_before_variant", "feedback_after_variant", "feedback_transition_ref"],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.reference_feedback_code.v1",
+            "canonical_fact_projection_enabled": true, "active": true,
+            "memory_scope": "same_game", "commitment": "revisable",
+            "terminal_relation_ref": "relation.all_revalidated_reference_members_have_completion_code",
+            "measure_ref": "measure.reference_feedback_inactive_member_count",
+            "comparator": "equals", "target_value": 0,
+            "requires_current_reference_family_revalidation": true,
+            "instance_binding_forbidden": true,
+            "observed_final_support_is_available": false,
+            "falsifier_refs": ["falsifier.reference_code_change_does_not_mark_member_contribution", "falsifier.all_completion_codes_do_not_explain_terminal_goal", "falsifier.source_code_does_not_match_relocated_reference_family"]
+          },
+          "attribute_bindings": {
+            "code_height": "feedback_code_height", "code_width": "feedback_code_width",
+            "inactive_variant": "feedback_before_variant", "completion_variant": "feedback_after_variant",
+            "last_completion_transition_ref": "feedback_transition_ref",
+            "observed_prefix_member_count": "feedback_current_after_variant_count",
+            "boundary_completion_variant_count": "feedback_boundary_after_variant_count",
+            "boundary_other_variant_count": "feedback_boundary_other_variant_count"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.reference_feedback.code.{observation_evidence_digest}",
+          "predicate": "remembers_revisable_reference_feedback_code", "family": "control",
+          "epistemic_status": "supported",
+          "argument_patterns": ["memory.reference_feedback.{feedback_code_ref}"],
+          "required_fields": ["feedback_code_ref", "observation_evidence_digest", "feedback_transition_ref"],
+          "static_attributes": {"memory_scope": "same_game", "commitment": "revisable"},
+          "attribute_bindings": {"transition_ref": "feedback_transition_ref"}
+        },
+        {
+          "id_pattern": "claim.reference_feedback.terminal.{observation_evidence_digest}",
+          "predicate": "declares_revalidatable_terminal_objective_contract", "family": "control",
+          "epistemic_status": "supported",
+          "argument_patterns": ["memory.reference_feedback.{feedback_code_ref}"],
+          "required_fields": ["feedback_code_ref", "observation_evidence_digest", "feedback_transition_ref"],
+          "static_attributes": {
+            "knowledge_family": "terminal_objective_contract",
+            "measure_ref": "measure.reference_feedback_inactive_member_count", "comparator": "equals", "target_value": 0,
+            "contract_status": "provisional_until_current_scene_revalidation",
+            "attestation_kind": "official_boundary_after_observed_prefix_code_changes_and_last_member_action",
+            "observed_final_support_is_available": false,
+            "drop_scene_local_bindings": true, "instance_binding_forbidden": true
+          },
+          "attribute_bindings": {"transition_ref": "feedback_transition_ref"}
+        }
+      ],
+      "reason_refs": ["reason.controlled_reference_code_changes_and_last_member_boundary_support_revisable_completion"]
+    }
+  ]
+}

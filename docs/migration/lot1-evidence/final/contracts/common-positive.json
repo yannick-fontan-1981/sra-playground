@@ -1,0 +1,4980 @@
+{
+  "schema": "logos-engine.lot1.contract-evidence.v1",
+  "status": "passed",
+  "source": "Cold common runtime; real retained public returns checked only after native choice",
+  "actions": 49,
+  "levelsCompleted": 3,
+  "parents": [
+    "composition_attention:c9ea476c15d95600f6b9",
+    "composition_attention:5264164c5749d011ead5"
+  ],
+  "restoredFromGraph": true,
+  "nextDecisions": [
+    {
+      "afterActions": 37,
+      "decision": "resume_pose",
+      "parent": "composition_attention:c9ea476c15d95600f6b9",
+      "returnedTransition": "reasoning:transition:37",
+      "nextCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 32,
+          "y": 40
+        }
+      }
+    },
+    {
+      "afterActions": 38,
+      "decision": "deliver",
+      "parent": "composition_attention:c9ea476c15d95600f6b9",
+      "returnedTransition": "reasoning:transition:38",
+      "nextCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 57,
+          "y": 7
+        }
+      }
+    },
+    {
+      "afterActions": 45,
+      "decision": "resume_pose",
+      "parent": "composition_attention:5264164c5749d011ead5",
+      "returnedTransition": "reasoning:transition:45",
+      "nextCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 32,
+          "y": 40
+        }
+      }
+    },
+    {
+      "afterActions": 46,
+      "decision": "resume_pose",
+      "parent": "composition_attention:5264164c5749d011ead5",
+      "returnedTransition": "reasoning:transition:45",
+      "nextCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 32,
+          "y": 40
+        }
+      }
+    },
+    {
+      "afterActions": 47,
+      "decision": "resume_pose",
+      "parent": "composition_attention:5264164c5749d011ead5",
+      "returnedTransition": "reasoning:transition:45",
+      "nextCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 32,
+          "y": 40
+        }
+      }
+    },
+    {
+      "afterActions": 48,
+      "decision": "deliver",
+      "parent": "composition_attention:5264164c5749d011ead5",
+      "returnedTransition": "reasoning:transition:48",
+      "nextCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 39,
+          "y": 7
+        }
+      }
+    }
+  ],
+  "timeline": [
+    {
+      "actions": 1,
+      "levelsCompleted": 0,
+      "proposalKind": "measured_animated_contact",
+      "poseMode": null,
+      "flowMode": null,
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 1,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:1:revision:1:frame:9cf0321c97cd4ec7",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "animated-contact:1c413bdb350ab35ec075e93bf91fd3780a69ee92b56c22e8f2fda020ca75d4cc"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 1,
+      "materialEventCount": 0
+    },
+    {
+      "actions": 2,
+      "levelsCompleted": 0,
+      "proposalKind": "typed_carrier_experiment",
+      "poseMode": null,
+      "flowMode": null,
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 1,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:1:revision:2:frame:9cf0321c97cd4ec7",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_carrier_ae63138bac4932912a12"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 2,
+      "materialEventCount": 2
+    },
+    {
+      "actions": 3,
+      "levelsCompleted": 0,
+      "proposalKind": "typed_carrier_experiment",
+      "poseMode": null,
+      "flowMode": null,
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 1,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:1:revision:3:frame:56245e0145509046",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_carrier_e985a90428d754d79df5"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 3,
+      "materialEventCount": 3
+    },
+    {
+      "actions": 4,
+      "levelsCompleted": 0,
+      "proposalKind": "typed_carrier_experiment",
+      "poseMode": null,
+      "flowMode": null,
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 1,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:1:revision:4:frame:fac29c0c53137b37",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_carrier_d0190ea8c9d04ac92cdd"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 4,
+      "materialEventCount": 5
+    },
+    {
+      "actions": 5,
+      "levelsCompleted": 0,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "select",
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 1,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:1:revision:5:frame:688f1dc8e8401919",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_5188517ff31028700df4"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 5,
+      "materialEventCount": 6
+    },
+    {
+      "actions": 6,
+      "levelsCompleted": 0,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "deliver",
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 1,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:1:revision:6:frame:13a34cbb674ceb63",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_03ac3d44138ca8208d50"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 6,
+      "materialEventCount": 8
+    },
+    {
+      "actions": 7,
+      "levelsCompleted": 0,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "select",
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 1,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:1:revision:7:frame:14048333521ab8dd",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_be2ff00e83a0d491ddec"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 7,
+      "materialEventCount": 9
+    },
+    {
+      "actions": 8,
+      "levelsCompleted": 0,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "deliver",
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 1,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:1:revision:8:frame:2e9d9f2241532207",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_8b4652af0df18e7f2ee3"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 8,
+      "materialEventCount": 11
+    },
+    {
+      "actions": 9,
+      "levelsCompleted": 0,
+      "proposalKind": "typed_carrier_experiment",
+      "poseMode": null,
+      "flowMode": null,
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 1,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:1:revision:9:frame:e39e08b3441b4a9c",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_carrier_f0427dad3f670f7dbba8"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 9,
+      "materialEventCount": 12
+    },
+    {
+      "actions": 10,
+      "levelsCompleted": 0,
+      "proposalKind": "typed_carrier_experiment",
+      "poseMode": null,
+      "flowMode": null,
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 1,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:1:revision:10:frame:637458ce545806d4",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_carrier_b430fa0bd10dbd9fa1fe"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 10,
+      "materialEventCount": 13
+    },
+    {
+      "actions": 11,
+      "levelsCompleted": 0,
+      "proposalKind": "typed_carrier_experiment",
+      "poseMode": null,
+      "flowMode": null,
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 1,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:1:revision:11:frame:d99cb2656e7e25a6",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_carrier_9f40acc13a638c8631b2"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 11,
+      "materialEventCount": 15
+    },
+    {
+      "actions": 12,
+      "levelsCompleted": 0,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "select",
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 1,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:1:revision:12:frame:74c0c78d531d3b38",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_6cd2b17ce3a21535bdd1"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 12,
+      "materialEventCount": 16
+    },
+    {
+      "actions": 13,
+      "levelsCompleted": 0,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "deliver",
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 1,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:1:revision:13:frame:5c6e6f32b8c72a1c",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_6b639e8808c457953644"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 13,
+      "materialEventCount": 18
+    },
+    {
+      "actions": 14,
+      "levelsCompleted": 0,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "select",
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 1,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:1:revision:14:frame:5ea8fd0bde0792e4",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_6a86c30c9e7e2479fe8a"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 14,
+      "materialEventCount": 19
+    },
+    {
+      "actions": 15,
+      "levelsCompleted": 1,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "deliver",
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 1,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:1:revision:15:frame:ae4db12bb1a06764",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_cd4e7165b38798fa3418"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 15,
+      "materialEventCount": 22
+    },
+    {
+      "actions": 16,
+      "levelsCompleted": 1,
+      "proposalKind": "measured_animated_contact",
+      "poseMode": null,
+      "flowMode": null,
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 2,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:2:revision:16:frame:6503700ce136a4ae",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "animated-contact:17204f061b762a8e5a4b78e9f06c2d31259397c4d7218adf84fd585a782926f8"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 16,
+      "materialEventCount": 22
+    },
+    {
+      "actions": 17,
+      "levelsCompleted": 1,
+      "proposalKind": "typed_carrier_experiment",
+      "poseMode": null,
+      "flowMode": null,
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 2,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:2:revision:17:frame:6503700ce136a4ae",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_carrier_3af92b3657d249ec74dd"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 17,
+      "materialEventCount": 23
+    },
+    {
+      "actions": 18,
+      "levelsCompleted": 1,
+      "proposalKind": "typed_carrier_experiment",
+      "poseMode": null,
+      "flowMode": null,
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 2,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:2:revision:18:frame:06a7719fa5f56ff2",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_carrier_0c376b116af32653b810"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 18,
+      "materialEventCount": 24
+    },
+    {
+      "actions": 19,
+      "levelsCompleted": 1,
+      "proposalKind": "typed_carrier_experiment",
+      "poseMode": null,
+      "flowMode": null,
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 2,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:2:revision:19:frame:9867cb552f5725d5",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_carrier_80daad96175da3c3d3d9"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 19,
+      "materialEventCount": 26
+    },
+    {
+      "actions": 20,
+      "levelsCompleted": 1,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "select",
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 2,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:2:revision:20:frame:fbdb1aba2e8ab343",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_69e9efb9e4b840cdee57"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 20,
+      "materialEventCount": 27
+    },
+    {
+      "actions": 21,
+      "levelsCompleted": 1,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "deliver",
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 2,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:2:revision:21:frame:c4d26cd223b4b73a",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_8a42ca2af951a468cc81"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 21,
+      "materialEventCount": 29
+    },
+    {
+      "actions": 22,
+      "levelsCompleted": 1,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "select",
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 2,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:2:revision:22:frame:dd61abeb389388da",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_cf9a405c613fa66a40ed"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 22,
+      "materialEventCount": 30
+    },
+    {
+      "actions": 23,
+      "levelsCompleted": 1,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "deliver",
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 2,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:2:revision:23:frame:4e30bc8e7c1ed146",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_49671ed848ab6ef9f3c5"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 23,
+      "materialEventCount": 32
+    },
+    {
+      "actions": 24,
+      "levelsCompleted": 1,
+      "proposalKind": "typed_carrier_experiment",
+      "poseMode": null,
+      "flowMode": null,
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 2,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:2:revision:24:frame:38c44a172a8a8cb5",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_carrier_976724343c1864711a78"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 24,
+      "materialEventCount": 33
+    },
+    {
+      "actions": 25,
+      "levelsCompleted": 1,
+      "proposalKind": "typed_carrier_experiment",
+      "poseMode": null,
+      "flowMode": null,
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 2,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:2:revision:25:frame:1229d6fe3442606d",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_carrier_b4f1319b35e4832e569a"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 25,
+      "materialEventCount": 34
+    },
+    {
+      "actions": 26,
+      "levelsCompleted": 1,
+      "proposalKind": "typed_carrier_experiment",
+      "poseMode": null,
+      "flowMode": null,
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 2,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:2:revision:26:frame:114dd06ed3779bb4",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_carrier_5ad09aceb2a11f89b2b4"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 26,
+      "materialEventCount": 36
+    },
+    {
+      "actions": 27,
+      "levelsCompleted": 1,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "select",
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 2,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:2:revision:27:frame:81efceafb3cd4316",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_e9973d802e203d6e382d"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 27,
+      "materialEventCount": 37
+    },
+    {
+      "actions": 28,
+      "levelsCompleted": 1,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "deliver",
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 2,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:2:revision:28:frame:97ebe4b6c997c917",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_a67c1cd2053b6fe8bf6a"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 28,
+      "materialEventCount": 39
+    },
+    {
+      "actions": 29,
+      "levelsCompleted": 1,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "select",
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 2,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:2:revision:29:frame:307f3787470c7c66",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_052f409fd39b3b5542bc"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 29,
+      "materialEventCount": 40
+    },
+    {
+      "actions": 30,
+      "levelsCompleted": 2,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "deliver",
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 2,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:2:revision:30:frame:bd3a1c3d8ba1527b",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_4c8b6cb892d498bd4737"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 30,
+      "materialEventCount": 43
+    },
+    {
+      "actions": 31,
+      "levelsCompleted": 2,
+      "proposalKind": "measured_animated_contact",
+      "poseMode": null,
+      "flowMode": null,
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 3,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "animated-contact:52a85b0927759307b96e0d1cdedf6ad28f2d3cd2f0ab463b8e76cc3f0bb48db6"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 31,
+      "materialEventCount": 43
+    },
+    {
+      "actions": 32,
+      "levelsCompleted": 2,
+      "proposalKind": "typed_carrier_experiment",
+      "poseMode": null,
+      "flowMode": null,
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 3,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:32:frame:7978b68385a22d49",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_carrier_2f96a899da6053d2cb5b"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 32,
+      "materialEventCount": 44
+    },
+    {
+      "actions": 33,
+      "levelsCompleted": 2,
+      "proposalKind": "typed_carrier_experiment",
+      "poseMode": null,
+      "flowMode": null,
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 3,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:33:frame:e0e17f4b0c30494f",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_carrier_fdcf4cab090ac11bcc35"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 33,
+      "materialEventCount": 45
+    },
+    {
+      "actions": 34,
+      "levelsCompleted": 2,
+      "proposalKind": "typed_carrier_experiment",
+      "poseMode": null,
+      "flowMode": null,
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 3,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:34:frame:d86ad79a3b93d210",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_carrier_e55139ab5e7dd55f85e5"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 34,
+      "materialEventCount": 47
+    },
+    {
+      "actions": 35,
+      "levelsCompleted": 2,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "select",
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 3,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:35:frame:af5454cac73bd5bd",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_5b0abea57a2aeba94a21"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 35,
+      "materialEventCount": 48
+    },
+    {
+      "actions": 36,
+      "levelsCompleted": 2,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "deliver",
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 3,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:36:frame:a45b39c38e487907",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_7ba0864d6eff0800b0d7"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": null,
+      "callerAcquisitions": 36,
+      "materialEventCount": 50
+    },
+    {
+      "actions": 37,
+      "levelsCompleted": 2,
+      "proposalKind": "typed_pose_dependency",
+      "poseMode": "select",
+      "flowMode": null,
+      "dependency": {
+        "native_extension": "retained_typed_material_request_parent",
+        "parent_ref": "composition_attention:c9ea476c15d95600f6b9",
+        "target_ref": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6",
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+        "level_epoch": 3,
+        "decision": "select",
+        "reason": "current_child_question_bound",
+        "condition": "selected_pose_matches_retained_request",
+        "child_ref": "d542e010f5349933d32c04b115132fdb14cfb61e5c5f460b06470952feb823b8",
+        "returned_transition_ref": null,
+        "release_authority": false,
+        "admitted": true,
+        "proposal_ref": "C_typed_pose_65a114e50fad7fc2ee8a",
+        "consumed_return_ref": null,
+        "returned_event_ref": null,
+        "return_status": null,
+        "parent_status": "pending",
+        "evidence_refs": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7"
+        ]
+      },
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 3,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_pose_65a114e50fad7fc2ee8a"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": {
+        "binding": {
+          "active_question": {
+            "kind": "typed_pose_dependency",
+            "mode": "select",
+            "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+            "proposal_ref": "C_typed_pose_65a114e50fad7fc2ee8a"
+          },
+          "child": {
+            "bbox": [
+              11,
+              20,
+              13,
+              22
+            ],
+            "body_palette": 2,
+            "center": [
+              12,
+              21
+            ],
+            "id": "d542e010f5349933d32c04b115132fdb14cfb61e5c5f460b06470952feb823b8",
+            "point": [
+              11,
+              21
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:35:frame:af5454cac73bd5bd"
+          },
+          "child_marks_digest": "2577e42a01e6f8eb19e9a323e291c4698d35e89feba29720fb4680761d12e5b4",
+          "child_ref": "d542e010f5349933d32c04b115132fdb14cfb61e5c5f460b06470952feb823b8",
+          "condition": "selected_pose_matches_retained_request",
+          "consumed_at": "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+          "consumed_return_ref": null,
+          "control": {
+            "bbox": [
+              29,
+              38,
+              35,
+              43
+            ],
+            "epoch": 3,
+            "point": [
+              32,
+              40
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49"
+          },
+          "control_projection_digest": "1027ae1ebc6fb3124abb82eddf1305127e911bd853c9d06515a5390e536c3eaf",
+          "family_id": "public_occurrence_recall",
+          "last_return": {
+            "event_ref": "typed-material-event:6964ff6c10634c4503e266b3ad95963ac06115869949bc46b8156024c61c0df9",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+              "lot1-cold-common-parent-loop:epoch:3:revision:38:frame:f216bc8af2019d79"
+            ],
+            "index": 0,
+            "proposal_ref": "C_typed_pose_65a114e50fad7fc2ee8a",
+            "status": "pose_still_required_for_retained_request",
+            "transition_ref": "reasoning:transition:37"
+          },
+          "model_digest": "c292a49e50005053f3a2f01f16e1dba621940d77bad04fc46cdc6369a82969e9",
+          "model_ref": "f01fb444b02b5d01694dee73167fc851010b6fd96446b4cd08e13390ff7a58c9",
+          "native_extension": "retained_typed_material_request_parent",
+          "phase": "needs_pose",
+          "request": {
+            "bbox": [
+              53,
+              3,
+              61,
+              11
+            ],
+            "descriptor": {
+              "height": 3,
+              "mask": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ]
+              ],
+              "palette": 10,
+              "width": 3
+            },
+            "id": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6",
+            "point": [
+              57,
+              7
+            ]
+          },
+          "selection_witness": {
+            "event_ref": "typed-material-event:6964ff6c10634c4503e266b3ad95963ac06115869949bc46b8156024c61c0df9",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+              "lot1-cold-common-parent-loop:epoch:3:revision:38:frame:f216bc8af2019d79"
+            ],
+            "pixels": [
+              [
+                8,
+                17,
+                0
+              ],
+              [
+                9,
+                17,
+                0
+              ],
+              [
+                10,
+                17,
+                0
+              ],
+              [
+                11,
+                17,
+                0
+              ],
+              [
+                12,
+                17,
+                0
+              ],
+              [
+                13,
+                17,
+                0
+              ],
+              [
+                14,
+                17,
+                0
+              ],
+              [
+                15,
+                17,
+                0
+              ],
+              [
+                16,
+                17,
+                0
+              ],
+              [
+                8,
+                18,
+                0
+              ],
+              [
+                16,
+                18,
+                0
+              ],
+              [
+                8,
+                19,
+                0
+              ],
+              [
+                16,
+                19,
+                0
+              ],
+              [
+                8,
+                20,
+                0
+              ],
+              [
+                16,
+                20,
+                0
+              ],
+              [
+                8,
+                21,
+                0
+              ],
+              [
+                16,
+                21,
+                0
+              ],
+              [
+                8,
+                22,
+                0
+              ],
+              [
+                16,
+                22,
+                0
+              ],
+              [
+                8,
+                23,
+                0
+              ],
+              [
+                16,
+                23,
+                0
+              ],
+              [
+                8,
+                24,
+                0
+              ],
+              [
+                16,
+                24,
+                0
+              ],
+              [
+                8,
+                25,
+                0
+              ],
+              [
+                9,
+                25,
+                0
+              ],
+              [
+                10,
+                25,
+                0
+              ],
+              [
+                11,
+                25,
+                0
+              ],
+              [
+                12,
+                25,
+                0
+              ],
+              [
+                13,
+                25,
+                0
+              ],
+              [
+                14,
+                25,
+                0
+              ],
+              [
+                15,
+                25,
+                0
+              ],
+              [
+                16,
+                25,
+                0
+              ]
+            ]
+          },
+          "source_entry": "typed_material_flow",
+          "suspension_reason": null
+        },
+        "current_revalidation_required": true,
+        "evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+          "lot1-cold-common-parent-loop:epoch:3:revision:35:frame:af5454cac73bd5bd",
+          "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49",
+          "lot1-cold-common-parent-loop:epoch:1:revision:6:frame:13a34cbb674ceb63"
+        ],
+        "id": "composition_attention:c9ea476c15d95600f6b9",
+        "level_epoch": 3,
+        "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+        "owner": "native:typed_material_flow",
+        "question": "Deliver the selected typed material to this measured request; first resolve its current pose.",
+        "release_authority": false,
+        "revised_at": "lot1-cold-common-parent-loop:epoch:3:revision:38:frame:f216bc8af2019d79",
+        "revision_evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:38:frame:f216bc8af2019d79",
+          "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7"
+        ],
+        "status": "pending",
+        "target_ref": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6"
+      },
+      "callerAcquisitions": 37,
+      "materialEventCount": 51
+    },
+    {
+      "actions": 38,
+      "levelsCompleted": 2,
+      "proposalKind": "typed_pose_dependency",
+      "poseMode": "control",
+      "flowMode": null,
+      "dependency": {
+        "native_extension": "retained_typed_material_request_parent",
+        "parent_ref": "composition_attention:c9ea476c15d95600f6b9",
+        "target_ref": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6",
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:38:frame:f216bc8af2019d79",
+        "level_epoch": 3,
+        "decision": "resume_pose",
+        "reason": "actual_child_return_consumed",
+        "condition": "selected_pose_matches_retained_request",
+        "child_ref": "d542e010f5349933d32c04b115132fdb14cfb61e5c5f460b06470952feb823b8",
+        "returned_transition_ref": "reasoning:transition:37",
+        "release_authority": false,
+        "admitted": true,
+        "proposal_ref": "C_typed_pose_f774d9bc472f8ac2eead",
+        "consumed_return_ref": "reasoning:transition:37",
+        "returned_event_ref": "typed-material-event:6964ff6c10634c4503e266b3ad95963ac06115869949bc46b8156024c61c0df9",
+        "return_status": "pose_still_required_for_retained_request",
+        "parent_status": "pending",
+        "evidence_refs": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:38:frame:f216bc8af2019d79",
+          "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7"
+        ]
+      },
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 3,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:38:frame:f216bc8af2019d79",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_pose_f774d9bc472f8ac2eead"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": {
+        "binding": {
+          "active_question": {
+            "kind": "typed_pose_dependency",
+            "mode": "control",
+            "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:38:frame:f216bc8af2019d79",
+            "proposal_ref": "C_typed_pose_f774d9bc472f8ac2eead"
+          },
+          "child": {
+            "bbox": [
+              11,
+              20,
+              13,
+              22
+            ],
+            "body_palette": 2,
+            "center": [
+              12,
+              21
+            ],
+            "id": "d542e010f5349933d32c04b115132fdb14cfb61e5c5f460b06470952feb823b8",
+            "point": [
+              11,
+              21
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:35:frame:af5454cac73bd5bd"
+          },
+          "child_marks_digest": "4c53814e3bac9cfb740d060013dbc88ee56da256790ad3678140d57309a24212",
+          "child_ref": "d542e010f5349933d32c04b115132fdb14cfb61e5c5f460b06470952feb823b8",
+          "condition": "selected_pose_matches_retained_request",
+          "consumed_at": "lot1-cold-common-parent-loop:epoch:3:revision:38:frame:f216bc8af2019d79",
+          "consumed_return_ref": "reasoning:transition:37",
+          "control": {
+            "bbox": [
+              29,
+              38,
+              35,
+              43
+            ],
+            "epoch": 3,
+            "point": [
+              32,
+              40
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49"
+          },
+          "control_projection_digest": "1027ae1ebc6fb3124abb82eddf1305127e911bd853c9d06515a5390e536c3eaf",
+          "family_id": "public_occurrence_recall",
+          "last_return": {
+            "event_ref": "typed-material-event:31587bbd97e24093b23549e3b0889a4c991ba0343def75db388b8fc2e798a18a",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:38:frame:f216bc8af2019d79",
+              "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71"
+            ],
+            "index": 0,
+            "proposal_ref": "C_typed_pose_f774d9bc472f8ac2eead",
+            "status": "pose_resolved_for_retained_request",
+            "transition_ref": "reasoning:transition:38"
+          },
+          "model_digest": "c292a49e50005053f3a2f01f16e1dba621940d77bad04fc46cdc6369a82969e9",
+          "model_ref": "f01fb444b02b5d01694dee73167fc851010b6fd96446b4cd08e13390ff7a58c9",
+          "native_extension": "retained_typed_material_request_parent",
+          "phase": "ready_for_delivery",
+          "request": {
+            "bbox": [
+              53,
+              3,
+              61,
+              11
+            ],
+            "descriptor": {
+              "height": 3,
+              "mask": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ]
+              ],
+              "palette": 10,
+              "width": 3
+            },
+            "id": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6",
+            "point": [
+              57,
+              7
+            ]
+          },
+          "selection_witness": {
+            "event_ref": "typed-material-event:6964ff6c10634c4503e266b3ad95963ac06115869949bc46b8156024c61c0df9",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+              "lot1-cold-common-parent-loop:epoch:3:revision:38:frame:f216bc8af2019d79"
+            ],
+            "pixels": [
+              [
+                8,
+                17,
+                0
+              ],
+              [
+                9,
+                17,
+                0
+              ],
+              [
+                10,
+                17,
+                0
+              ],
+              [
+                11,
+                17,
+                0
+              ],
+              [
+                12,
+                17,
+                0
+              ],
+              [
+                13,
+                17,
+                0
+              ],
+              [
+                14,
+                17,
+                0
+              ],
+              [
+                15,
+                17,
+                0
+              ],
+              [
+                16,
+                17,
+                0
+              ],
+              [
+                8,
+                18,
+                0
+              ],
+              [
+                16,
+                18,
+                0
+              ],
+              [
+                8,
+                19,
+                0
+              ],
+              [
+                16,
+                19,
+                0
+              ],
+              [
+                8,
+                20,
+                0
+              ],
+              [
+                16,
+                20,
+                0
+              ],
+              [
+                8,
+                21,
+                0
+              ],
+              [
+                16,
+                21,
+                0
+              ],
+              [
+                8,
+                22,
+                0
+              ],
+              [
+                16,
+                22,
+                0
+              ],
+              [
+                8,
+                23,
+                0
+              ],
+              [
+                16,
+                23,
+                0
+              ],
+              [
+                8,
+                24,
+                0
+              ],
+              [
+                16,
+                24,
+                0
+              ],
+              [
+                8,
+                25,
+                0
+              ],
+              [
+                9,
+                25,
+                0
+              ],
+              [
+                10,
+                25,
+                0
+              ],
+              [
+                11,
+                25,
+                0
+              ],
+              [
+                12,
+                25,
+                0
+              ],
+              [
+                13,
+                25,
+                0
+              ],
+              [
+                14,
+                25,
+                0
+              ],
+              [
+                15,
+                25,
+                0
+              ],
+              [
+                16,
+                25,
+                0
+              ]
+            ]
+          },
+          "source_entry": "typed_material_flow",
+          "suspension_reason": null
+        },
+        "current_revalidation_required": true,
+        "evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+          "lot1-cold-common-parent-loop:epoch:3:revision:35:frame:af5454cac73bd5bd",
+          "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49",
+          "lot1-cold-common-parent-loop:epoch:1:revision:6:frame:13a34cbb674ceb63"
+        ],
+        "id": "composition_attention:c9ea476c15d95600f6b9",
+        "level_epoch": 3,
+        "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+        "owner": "native:typed_material_flow",
+        "question": "Deliver the selected typed material to this measured request; first resolve its current pose.",
+        "release_authority": false,
+        "revised_at": "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+        "revision_evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+          "lot1-cold-common-parent-loop:epoch:3:revision:38:frame:f216bc8af2019d79"
+        ],
+        "status": "pending",
+        "target_ref": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6"
+      },
+      "callerAcquisitions": 38,
+      "materialEventCount": 52
+    },
+    {
+      "actions": 39,
+      "levelsCompleted": 2,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "deliver",
+      "dependency": {
+        "native_extension": "retained_typed_material_request_parent",
+        "parent_ref": "composition_attention:c9ea476c15d95600f6b9",
+        "target_ref": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6",
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+        "level_epoch": 3,
+        "decision": "deliver",
+        "reason": "actual_child_return_consumed",
+        "condition": "selected_pose_matches_retained_request",
+        "child_ref": "d542e010f5349933d32c04b115132fdb14cfb61e5c5f460b06470952feb823b8",
+        "returned_transition_ref": "reasoning:transition:38",
+        "release_authority": false,
+        "admitted": true,
+        "proposal_ref": "C_material_flow_e51b31b59d150e60371b",
+        "consumed_return_ref": "reasoning:transition:38",
+        "returned_event_ref": "typed-material-event:31587bbd97e24093b23549e3b0889a4c991ba0343def75db388b8fc2e798a18a",
+        "return_status": "pose_resolved_for_retained_request",
+        "parent_status": "pending",
+        "evidence_refs": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+          "lot1-cold-common-parent-loop:epoch:3:revision:38:frame:f216bc8af2019d79"
+        ]
+      },
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 3,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_e51b31b59d150e60371b"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": {
+        "binding": {
+          "active_question": {
+            "kind": "typed_material_flow",
+            "mode": "deliver",
+            "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+            "proposal_ref": "C_material_flow_e51b31b59d150e60371b"
+          },
+          "child": {
+            "bbox": [
+              11,
+              20,
+              13,
+              22
+            ],
+            "body_palette": 2,
+            "center": [
+              12,
+              21
+            ],
+            "id": "d542e010f5349933d32c04b115132fdb14cfb61e5c5f460b06470952feb823b8",
+            "point": [
+              11,
+              21
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:35:frame:af5454cac73bd5bd"
+          },
+          "child_marks_digest": "4c53814e3bac9cfb740d060013dbc88ee56da256790ad3678140d57309a24212",
+          "child_ref": "d542e010f5349933d32c04b115132fdb14cfb61e5c5f460b06470952feb823b8",
+          "condition": "selected_pose_matches_retained_request",
+          "consumed_at": "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+          "consumed_return_ref": "reasoning:transition:38",
+          "control": {
+            "bbox": [
+              29,
+              38,
+              35,
+              43
+            ],
+            "epoch": 3,
+            "point": [
+              32,
+              40
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49"
+          },
+          "control_projection_digest": "1027ae1ebc6fb3124abb82eddf1305127e911bd853c9d06515a5390e536c3eaf",
+          "family_id": "public_occurrence_recall",
+          "last_return": {
+            "event_ref": "typed-material-event:3b981a1cfe47bfde60f6b61f9c5ebdbd0523072ca53991d2b4040207282247d4",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+              "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb"
+            ],
+            "index": 0,
+            "proposal_ref": "C_material_flow_e51b31b59d150e60371b",
+            "status": "request_delivered",
+            "transition_ref": "reasoning:transition:39"
+          },
+          "model_digest": "c292a49e50005053f3a2f01f16e1dba621940d77bad04fc46cdc6369a82969e9",
+          "model_ref": "f01fb444b02b5d01694dee73167fc851010b6fd96446b4cd08e13390ff7a58c9",
+          "native_extension": "retained_typed_material_request_parent",
+          "phase": "achieved",
+          "request": {
+            "bbox": [
+              53,
+              3,
+              61,
+              11
+            ],
+            "descriptor": {
+              "height": 3,
+              "mask": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ]
+              ],
+              "palette": 10,
+              "width": 3
+            },
+            "id": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6",
+            "point": [
+              57,
+              7
+            ]
+          },
+          "selection_witness": {
+            "event_ref": "typed-material-event:6964ff6c10634c4503e266b3ad95963ac06115869949bc46b8156024c61c0df9",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+              "lot1-cold-common-parent-loop:epoch:3:revision:38:frame:f216bc8af2019d79"
+            ],
+            "pixels": [
+              [
+                8,
+                17,
+                0
+              ],
+              [
+                9,
+                17,
+                0
+              ],
+              [
+                10,
+                17,
+                0
+              ],
+              [
+                11,
+                17,
+                0
+              ],
+              [
+                12,
+                17,
+                0
+              ],
+              [
+                13,
+                17,
+                0
+              ],
+              [
+                14,
+                17,
+                0
+              ],
+              [
+                15,
+                17,
+                0
+              ],
+              [
+                16,
+                17,
+                0
+              ],
+              [
+                8,
+                18,
+                0
+              ],
+              [
+                16,
+                18,
+                0
+              ],
+              [
+                8,
+                19,
+                0
+              ],
+              [
+                16,
+                19,
+                0
+              ],
+              [
+                8,
+                20,
+                0
+              ],
+              [
+                16,
+                20,
+                0
+              ],
+              [
+                8,
+                21,
+                0
+              ],
+              [
+                16,
+                21,
+                0
+              ],
+              [
+                8,
+                22,
+                0
+              ],
+              [
+                16,
+                22,
+                0
+              ],
+              [
+                8,
+                23,
+                0
+              ],
+              [
+                16,
+                23,
+                0
+              ],
+              [
+                8,
+                24,
+                0
+              ],
+              [
+                16,
+                24,
+                0
+              ],
+              [
+                8,
+                25,
+                0
+              ],
+              [
+                9,
+                25,
+                0
+              ],
+              [
+                10,
+                25,
+                0
+              ],
+              [
+                11,
+                25,
+                0
+              ],
+              [
+                12,
+                25,
+                0
+              ],
+              [
+                13,
+                25,
+                0
+              ],
+              [
+                14,
+                25,
+                0
+              ],
+              [
+                15,
+                25,
+                0
+              ],
+              [
+                16,
+                25,
+                0
+              ]
+            ]
+          },
+          "source_entry": "typed_material_flow",
+          "suspension_reason": null
+        },
+        "current_revalidation_required": true,
+        "evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+          "lot1-cold-common-parent-loop:epoch:3:revision:35:frame:af5454cac73bd5bd",
+          "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49",
+          "lot1-cold-common-parent-loop:epoch:1:revision:6:frame:13a34cbb674ceb63"
+        ],
+        "id": "composition_attention:c9ea476c15d95600f6b9",
+        "level_epoch": 3,
+        "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+        "owner": "native:typed_material_flow",
+        "question": "Deliver the selected typed material to this measured request; first resolve its current pose.",
+        "release_authority": false,
+        "return_evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+          "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb"
+        ],
+        "returned_at": "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb",
+        "revised_at": "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb",
+        "revision_evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb",
+          "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71"
+        ],
+        "status": "achieved",
+        "target_ref": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6"
+      },
+      "callerAcquisitions": 39,
+      "materialEventCount": 54
+    },
+    {
+      "actions": 40,
+      "levelsCompleted": 2,
+      "proposalKind": "typed_carrier_experiment",
+      "poseMode": null,
+      "flowMode": null,
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 3,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_carrier_0a0bded6b827cf3eee63"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": {
+        "binding": {
+          "active_question": {
+            "kind": "typed_material_flow",
+            "mode": "deliver",
+            "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+            "proposal_ref": "C_material_flow_e51b31b59d150e60371b"
+          },
+          "child": {
+            "bbox": [
+              11,
+              20,
+              13,
+              22
+            ],
+            "body_palette": 2,
+            "center": [
+              12,
+              21
+            ],
+            "id": "d542e010f5349933d32c04b115132fdb14cfb61e5c5f460b06470952feb823b8",
+            "point": [
+              11,
+              21
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:35:frame:af5454cac73bd5bd"
+          },
+          "child_marks_digest": "4c53814e3bac9cfb740d060013dbc88ee56da256790ad3678140d57309a24212",
+          "child_ref": "d542e010f5349933d32c04b115132fdb14cfb61e5c5f460b06470952feb823b8",
+          "condition": "selected_pose_matches_retained_request",
+          "consumed_at": "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+          "consumed_return_ref": "reasoning:transition:38",
+          "control": {
+            "bbox": [
+              29,
+              38,
+              35,
+              43
+            ],
+            "epoch": 3,
+            "point": [
+              32,
+              40
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49"
+          },
+          "control_projection_digest": "1027ae1ebc6fb3124abb82eddf1305127e911bd853c9d06515a5390e536c3eaf",
+          "family_id": "public_occurrence_recall",
+          "last_return": {
+            "event_ref": "typed-material-event:3b981a1cfe47bfde60f6b61f9c5ebdbd0523072ca53991d2b4040207282247d4",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+              "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb"
+            ],
+            "index": 0,
+            "proposal_ref": "C_material_flow_e51b31b59d150e60371b",
+            "status": "request_delivered",
+            "transition_ref": "reasoning:transition:39"
+          },
+          "model_digest": "c292a49e50005053f3a2f01f16e1dba621940d77bad04fc46cdc6369a82969e9",
+          "model_ref": "f01fb444b02b5d01694dee73167fc851010b6fd96446b4cd08e13390ff7a58c9",
+          "native_extension": "retained_typed_material_request_parent",
+          "phase": "achieved",
+          "request": {
+            "bbox": [
+              53,
+              3,
+              61,
+              11
+            ],
+            "descriptor": {
+              "height": 3,
+              "mask": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ]
+              ],
+              "palette": 10,
+              "width": 3
+            },
+            "id": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6",
+            "point": [
+              57,
+              7
+            ]
+          },
+          "selection_witness": {
+            "event_ref": "typed-material-event:6964ff6c10634c4503e266b3ad95963ac06115869949bc46b8156024c61c0df9",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+              "lot1-cold-common-parent-loop:epoch:3:revision:38:frame:f216bc8af2019d79"
+            ],
+            "pixels": [
+              [
+                8,
+                17,
+                0
+              ],
+              [
+                9,
+                17,
+                0
+              ],
+              [
+                10,
+                17,
+                0
+              ],
+              [
+                11,
+                17,
+                0
+              ],
+              [
+                12,
+                17,
+                0
+              ],
+              [
+                13,
+                17,
+                0
+              ],
+              [
+                14,
+                17,
+                0
+              ],
+              [
+                15,
+                17,
+                0
+              ],
+              [
+                16,
+                17,
+                0
+              ],
+              [
+                8,
+                18,
+                0
+              ],
+              [
+                16,
+                18,
+                0
+              ],
+              [
+                8,
+                19,
+                0
+              ],
+              [
+                16,
+                19,
+                0
+              ],
+              [
+                8,
+                20,
+                0
+              ],
+              [
+                16,
+                20,
+                0
+              ],
+              [
+                8,
+                21,
+                0
+              ],
+              [
+                16,
+                21,
+                0
+              ],
+              [
+                8,
+                22,
+                0
+              ],
+              [
+                16,
+                22,
+                0
+              ],
+              [
+                8,
+                23,
+                0
+              ],
+              [
+                16,
+                23,
+                0
+              ],
+              [
+                8,
+                24,
+                0
+              ],
+              [
+                16,
+                24,
+                0
+              ],
+              [
+                8,
+                25,
+                0
+              ],
+              [
+                9,
+                25,
+                0
+              ],
+              [
+                10,
+                25,
+                0
+              ],
+              [
+                11,
+                25,
+                0
+              ],
+              [
+                12,
+                25,
+                0
+              ],
+              [
+                13,
+                25,
+                0
+              ],
+              [
+                14,
+                25,
+                0
+              ],
+              [
+                15,
+                25,
+                0
+              ],
+              [
+                16,
+                25,
+                0
+              ]
+            ]
+          },
+          "source_entry": "typed_material_flow",
+          "suspension_reason": null
+        },
+        "current_revalidation_required": true,
+        "evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+          "lot1-cold-common-parent-loop:epoch:3:revision:35:frame:af5454cac73bd5bd",
+          "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49",
+          "lot1-cold-common-parent-loop:epoch:1:revision:6:frame:13a34cbb674ceb63"
+        ],
+        "id": "composition_attention:c9ea476c15d95600f6b9",
+        "level_epoch": 3,
+        "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+        "owner": "native:typed_material_flow",
+        "question": "Deliver the selected typed material to this measured request; first resolve its current pose.",
+        "release_authority": false,
+        "return_evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+          "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb"
+        ],
+        "returned_at": "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb",
+        "revised_at": "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb",
+        "revision_evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb",
+          "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71"
+        ],
+        "status": "achieved",
+        "target_ref": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6"
+      },
+      "callerAcquisitions": 40,
+      "materialEventCount": 55
+    },
+    {
+      "actions": 41,
+      "levelsCompleted": 2,
+      "proposalKind": "typed_carrier_experiment",
+      "poseMode": null,
+      "flowMode": null,
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 3,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:41:frame:b124867ba33d5f80",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_carrier_4ab98656fb0aa94c24b9"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": {
+        "binding": {
+          "active_question": {
+            "kind": "typed_material_flow",
+            "mode": "deliver",
+            "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+            "proposal_ref": "C_material_flow_e51b31b59d150e60371b"
+          },
+          "child": {
+            "bbox": [
+              11,
+              20,
+              13,
+              22
+            ],
+            "body_palette": 2,
+            "center": [
+              12,
+              21
+            ],
+            "id": "d542e010f5349933d32c04b115132fdb14cfb61e5c5f460b06470952feb823b8",
+            "point": [
+              11,
+              21
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:35:frame:af5454cac73bd5bd"
+          },
+          "child_marks_digest": "4c53814e3bac9cfb740d060013dbc88ee56da256790ad3678140d57309a24212",
+          "child_ref": "d542e010f5349933d32c04b115132fdb14cfb61e5c5f460b06470952feb823b8",
+          "condition": "selected_pose_matches_retained_request",
+          "consumed_at": "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+          "consumed_return_ref": "reasoning:transition:38",
+          "control": {
+            "bbox": [
+              29,
+              38,
+              35,
+              43
+            ],
+            "epoch": 3,
+            "point": [
+              32,
+              40
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49"
+          },
+          "control_projection_digest": "1027ae1ebc6fb3124abb82eddf1305127e911bd853c9d06515a5390e536c3eaf",
+          "family_id": "public_occurrence_recall",
+          "last_return": {
+            "event_ref": "typed-material-event:3b981a1cfe47bfde60f6b61f9c5ebdbd0523072ca53991d2b4040207282247d4",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+              "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb"
+            ],
+            "index": 0,
+            "proposal_ref": "C_material_flow_e51b31b59d150e60371b",
+            "status": "request_delivered",
+            "transition_ref": "reasoning:transition:39"
+          },
+          "model_digest": "c292a49e50005053f3a2f01f16e1dba621940d77bad04fc46cdc6369a82969e9",
+          "model_ref": "f01fb444b02b5d01694dee73167fc851010b6fd96446b4cd08e13390ff7a58c9",
+          "native_extension": "retained_typed_material_request_parent",
+          "phase": "achieved",
+          "request": {
+            "bbox": [
+              53,
+              3,
+              61,
+              11
+            ],
+            "descriptor": {
+              "height": 3,
+              "mask": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ]
+              ],
+              "palette": 10,
+              "width": 3
+            },
+            "id": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6",
+            "point": [
+              57,
+              7
+            ]
+          },
+          "selection_witness": {
+            "event_ref": "typed-material-event:6964ff6c10634c4503e266b3ad95963ac06115869949bc46b8156024c61c0df9",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+              "lot1-cold-common-parent-loop:epoch:3:revision:38:frame:f216bc8af2019d79"
+            ],
+            "pixels": [
+              [
+                8,
+                17,
+                0
+              ],
+              [
+                9,
+                17,
+                0
+              ],
+              [
+                10,
+                17,
+                0
+              ],
+              [
+                11,
+                17,
+                0
+              ],
+              [
+                12,
+                17,
+                0
+              ],
+              [
+                13,
+                17,
+                0
+              ],
+              [
+                14,
+                17,
+                0
+              ],
+              [
+                15,
+                17,
+                0
+              ],
+              [
+                16,
+                17,
+                0
+              ],
+              [
+                8,
+                18,
+                0
+              ],
+              [
+                16,
+                18,
+                0
+              ],
+              [
+                8,
+                19,
+                0
+              ],
+              [
+                16,
+                19,
+                0
+              ],
+              [
+                8,
+                20,
+                0
+              ],
+              [
+                16,
+                20,
+                0
+              ],
+              [
+                8,
+                21,
+                0
+              ],
+              [
+                16,
+                21,
+                0
+              ],
+              [
+                8,
+                22,
+                0
+              ],
+              [
+                16,
+                22,
+                0
+              ],
+              [
+                8,
+                23,
+                0
+              ],
+              [
+                16,
+                23,
+                0
+              ],
+              [
+                8,
+                24,
+                0
+              ],
+              [
+                16,
+                24,
+                0
+              ],
+              [
+                8,
+                25,
+                0
+              ],
+              [
+                9,
+                25,
+                0
+              ],
+              [
+                10,
+                25,
+                0
+              ],
+              [
+                11,
+                25,
+                0
+              ],
+              [
+                12,
+                25,
+                0
+              ],
+              [
+                13,
+                25,
+                0
+              ],
+              [
+                14,
+                25,
+                0
+              ],
+              [
+                15,
+                25,
+                0
+              ],
+              [
+                16,
+                25,
+                0
+              ]
+            ]
+          },
+          "source_entry": "typed_material_flow",
+          "suspension_reason": null
+        },
+        "current_revalidation_required": true,
+        "evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+          "lot1-cold-common-parent-loop:epoch:3:revision:35:frame:af5454cac73bd5bd",
+          "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49",
+          "lot1-cold-common-parent-loop:epoch:1:revision:6:frame:13a34cbb674ceb63"
+        ],
+        "id": "composition_attention:c9ea476c15d95600f6b9",
+        "level_epoch": 3,
+        "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+        "owner": "native:typed_material_flow",
+        "question": "Deliver the selected typed material to this measured request; first resolve its current pose.",
+        "release_authority": false,
+        "return_evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+          "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb"
+        ],
+        "returned_at": "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb",
+        "revised_at": "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb",
+        "revision_evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb",
+          "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71"
+        ],
+        "status": "achieved",
+        "target_ref": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6"
+      },
+      "callerAcquisitions": 41,
+      "materialEventCount": 56
+    },
+    {
+      "actions": 42,
+      "levelsCompleted": 2,
+      "proposalKind": "typed_carrier_experiment",
+      "poseMode": null,
+      "flowMode": null,
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 3,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:42:frame:8de6cb72e43c3b78",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_carrier_84fa44251f415e983bcf"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": {
+        "binding": {
+          "active_question": {
+            "kind": "typed_material_flow",
+            "mode": "deliver",
+            "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+            "proposal_ref": "C_material_flow_e51b31b59d150e60371b"
+          },
+          "child": {
+            "bbox": [
+              11,
+              20,
+              13,
+              22
+            ],
+            "body_palette": 2,
+            "center": [
+              12,
+              21
+            ],
+            "id": "d542e010f5349933d32c04b115132fdb14cfb61e5c5f460b06470952feb823b8",
+            "point": [
+              11,
+              21
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:35:frame:af5454cac73bd5bd"
+          },
+          "child_marks_digest": "4c53814e3bac9cfb740d060013dbc88ee56da256790ad3678140d57309a24212",
+          "child_ref": "d542e010f5349933d32c04b115132fdb14cfb61e5c5f460b06470952feb823b8",
+          "condition": "selected_pose_matches_retained_request",
+          "consumed_at": "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+          "consumed_return_ref": "reasoning:transition:38",
+          "control": {
+            "bbox": [
+              29,
+              38,
+              35,
+              43
+            ],
+            "epoch": 3,
+            "point": [
+              32,
+              40
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49"
+          },
+          "control_projection_digest": "1027ae1ebc6fb3124abb82eddf1305127e911bd853c9d06515a5390e536c3eaf",
+          "family_id": "public_occurrence_recall",
+          "last_return": {
+            "event_ref": "typed-material-event:3b981a1cfe47bfde60f6b61f9c5ebdbd0523072ca53991d2b4040207282247d4",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+              "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb"
+            ],
+            "index": 0,
+            "proposal_ref": "C_material_flow_e51b31b59d150e60371b",
+            "status": "request_delivered",
+            "transition_ref": "reasoning:transition:39"
+          },
+          "model_digest": "c292a49e50005053f3a2f01f16e1dba621940d77bad04fc46cdc6369a82969e9",
+          "model_ref": "f01fb444b02b5d01694dee73167fc851010b6fd96446b4cd08e13390ff7a58c9",
+          "native_extension": "retained_typed_material_request_parent",
+          "phase": "achieved",
+          "request": {
+            "bbox": [
+              53,
+              3,
+              61,
+              11
+            ],
+            "descriptor": {
+              "height": 3,
+              "mask": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ]
+              ],
+              "palette": 10,
+              "width": 3
+            },
+            "id": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6",
+            "point": [
+              57,
+              7
+            ]
+          },
+          "selection_witness": {
+            "event_ref": "typed-material-event:6964ff6c10634c4503e266b3ad95963ac06115869949bc46b8156024c61c0df9",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+              "lot1-cold-common-parent-loop:epoch:3:revision:38:frame:f216bc8af2019d79"
+            ],
+            "pixels": [
+              [
+                8,
+                17,
+                0
+              ],
+              [
+                9,
+                17,
+                0
+              ],
+              [
+                10,
+                17,
+                0
+              ],
+              [
+                11,
+                17,
+                0
+              ],
+              [
+                12,
+                17,
+                0
+              ],
+              [
+                13,
+                17,
+                0
+              ],
+              [
+                14,
+                17,
+                0
+              ],
+              [
+                15,
+                17,
+                0
+              ],
+              [
+                16,
+                17,
+                0
+              ],
+              [
+                8,
+                18,
+                0
+              ],
+              [
+                16,
+                18,
+                0
+              ],
+              [
+                8,
+                19,
+                0
+              ],
+              [
+                16,
+                19,
+                0
+              ],
+              [
+                8,
+                20,
+                0
+              ],
+              [
+                16,
+                20,
+                0
+              ],
+              [
+                8,
+                21,
+                0
+              ],
+              [
+                16,
+                21,
+                0
+              ],
+              [
+                8,
+                22,
+                0
+              ],
+              [
+                16,
+                22,
+                0
+              ],
+              [
+                8,
+                23,
+                0
+              ],
+              [
+                16,
+                23,
+                0
+              ],
+              [
+                8,
+                24,
+                0
+              ],
+              [
+                16,
+                24,
+                0
+              ],
+              [
+                8,
+                25,
+                0
+              ],
+              [
+                9,
+                25,
+                0
+              ],
+              [
+                10,
+                25,
+                0
+              ],
+              [
+                11,
+                25,
+                0
+              ],
+              [
+                12,
+                25,
+                0
+              ],
+              [
+                13,
+                25,
+                0
+              ],
+              [
+                14,
+                25,
+                0
+              ],
+              [
+                15,
+                25,
+                0
+              ],
+              [
+                16,
+                25,
+                0
+              ]
+            ]
+          },
+          "source_entry": "typed_material_flow",
+          "suspension_reason": null
+        },
+        "current_revalidation_required": true,
+        "evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+          "lot1-cold-common-parent-loop:epoch:3:revision:35:frame:af5454cac73bd5bd",
+          "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49",
+          "lot1-cold-common-parent-loop:epoch:1:revision:6:frame:13a34cbb674ceb63"
+        ],
+        "id": "composition_attention:c9ea476c15d95600f6b9",
+        "level_epoch": 3,
+        "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+        "owner": "native:typed_material_flow",
+        "question": "Deliver the selected typed material to this measured request; first resolve its current pose.",
+        "release_authority": false,
+        "return_evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+          "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb"
+        ],
+        "returned_at": "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb",
+        "revised_at": "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb",
+        "revision_evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb",
+          "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71"
+        ],
+        "status": "achieved",
+        "target_ref": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6"
+      },
+      "callerAcquisitions": 42,
+      "materialEventCount": 58
+    },
+    {
+      "actions": 43,
+      "levelsCompleted": 2,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "select",
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 3,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:43:frame:21e8ebc99e2e0e60",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_4fe8e56d605b455d9223"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": {
+        "binding": {
+          "active_question": {
+            "kind": "typed_material_flow",
+            "mode": "deliver",
+            "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+            "proposal_ref": "C_material_flow_e51b31b59d150e60371b"
+          },
+          "child": {
+            "bbox": [
+              11,
+              20,
+              13,
+              22
+            ],
+            "body_palette": 2,
+            "center": [
+              12,
+              21
+            ],
+            "id": "d542e010f5349933d32c04b115132fdb14cfb61e5c5f460b06470952feb823b8",
+            "point": [
+              11,
+              21
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:35:frame:af5454cac73bd5bd"
+          },
+          "child_marks_digest": "4c53814e3bac9cfb740d060013dbc88ee56da256790ad3678140d57309a24212",
+          "child_ref": "d542e010f5349933d32c04b115132fdb14cfb61e5c5f460b06470952feb823b8",
+          "condition": "selected_pose_matches_retained_request",
+          "consumed_at": "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+          "consumed_return_ref": "reasoning:transition:38",
+          "control": {
+            "bbox": [
+              29,
+              38,
+              35,
+              43
+            ],
+            "epoch": 3,
+            "point": [
+              32,
+              40
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49"
+          },
+          "control_projection_digest": "1027ae1ebc6fb3124abb82eddf1305127e911bd853c9d06515a5390e536c3eaf",
+          "family_id": "public_occurrence_recall",
+          "last_return": {
+            "event_ref": "typed-material-event:3b981a1cfe47bfde60f6b61f9c5ebdbd0523072ca53991d2b4040207282247d4",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+              "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb"
+            ],
+            "index": 0,
+            "proposal_ref": "C_material_flow_e51b31b59d150e60371b",
+            "status": "request_delivered",
+            "transition_ref": "reasoning:transition:39"
+          },
+          "model_digest": "c292a49e50005053f3a2f01f16e1dba621940d77bad04fc46cdc6369a82969e9",
+          "model_ref": "f01fb444b02b5d01694dee73167fc851010b6fd96446b4cd08e13390ff7a58c9",
+          "native_extension": "retained_typed_material_request_parent",
+          "phase": "achieved",
+          "request": {
+            "bbox": [
+              53,
+              3,
+              61,
+              11
+            ],
+            "descriptor": {
+              "height": 3,
+              "mask": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ]
+              ],
+              "palette": 10,
+              "width": 3
+            },
+            "id": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6",
+            "point": [
+              57,
+              7
+            ]
+          },
+          "selection_witness": {
+            "event_ref": "typed-material-event:6964ff6c10634c4503e266b3ad95963ac06115869949bc46b8156024c61c0df9",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+              "lot1-cold-common-parent-loop:epoch:3:revision:38:frame:f216bc8af2019d79"
+            ],
+            "pixels": [
+              [
+                8,
+                17,
+                0
+              ],
+              [
+                9,
+                17,
+                0
+              ],
+              [
+                10,
+                17,
+                0
+              ],
+              [
+                11,
+                17,
+                0
+              ],
+              [
+                12,
+                17,
+                0
+              ],
+              [
+                13,
+                17,
+                0
+              ],
+              [
+                14,
+                17,
+                0
+              ],
+              [
+                15,
+                17,
+                0
+              ],
+              [
+                16,
+                17,
+                0
+              ],
+              [
+                8,
+                18,
+                0
+              ],
+              [
+                16,
+                18,
+                0
+              ],
+              [
+                8,
+                19,
+                0
+              ],
+              [
+                16,
+                19,
+                0
+              ],
+              [
+                8,
+                20,
+                0
+              ],
+              [
+                16,
+                20,
+                0
+              ],
+              [
+                8,
+                21,
+                0
+              ],
+              [
+                16,
+                21,
+                0
+              ],
+              [
+                8,
+                22,
+                0
+              ],
+              [
+                16,
+                22,
+                0
+              ],
+              [
+                8,
+                23,
+                0
+              ],
+              [
+                16,
+                23,
+                0
+              ],
+              [
+                8,
+                24,
+                0
+              ],
+              [
+                16,
+                24,
+                0
+              ],
+              [
+                8,
+                25,
+                0
+              ],
+              [
+                9,
+                25,
+                0
+              ],
+              [
+                10,
+                25,
+                0
+              ],
+              [
+                11,
+                25,
+                0
+              ],
+              [
+                12,
+                25,
+                0
+              ],
+              [
+                13,
+                25,
+                0
+              ],
+              [
+                14,
+                25,
+                0
+              ],
+              [
+                15,
+                25,
+                0
+              ],
+              [
+                16,
+                25,
+                0
+              ]
+            ]
+          },
+          "source_entry": "typed_material_flow",
+          "suspension_reason": null
+        },
+        "current_revalidation_required": true,
+        "evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+          "lot1-cold-common-parent-loop:epoch:3:revision:35:frame:af5454cac73bd5bd",
+          "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49",
+          "lot1-cold-common-parent-loop:epoch:1:revision:6:frame:13a34cbb674ceb63"
+        ],
+        "id": "composition_attention:c9ea476c15d95600f6b9",
+        "level_epoch": 3,
+        "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+        "owner": "native:typed_material_flow",
+        "question": "Deliver the selected typed material to this measured request; first resolve its current pose.",
+        "release_authority": false,
+        "return_evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+          "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb"
+        ],
+        "returned_at": "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb",
+        "revised_at": "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb",
+        "revision_evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb",
+          "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71"
+        ],
+        "status": "achieved",
+        "target_ref": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6"
+      },
+      "callerAcquisitions": 43,
+      "materialEventCount": 59
+    },
+    {
+      "actions": 44,
+      "levelsCompleted": 2,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "deliver",
+      "dependency": null,
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 3,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:44:frame:70dcc5fc54886a30",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_f8676c76287ffecb3e48"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": {
+        "binding": {
+          "active_question": {
+            "kind": "typed_material_flow",
+            "mode": "deliver",
+            "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+            "proposal_ref": "C_material_flow_e51b31b59d150e60371b"
+          },
+          "child": {
+            "bbox": [
+              11,
+              20,
+              13,
+              22
+            ],
+            "body_palette": 2,
+            "center": [
+              12,
+              21
+            ],
+            "id": "d542e010f5349933d32c04b115132fdb14cfb61e5c5f460b06470952feb823b8",
+            "point": [
+              11,
+              21
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:35:frame:af5454cac73bd5bd"
+          },
+          "child_marks_digest": "4c53814e3bac9cfb740d060013dbc88ee56da256790ad3678140d57309a24212",
+          "child_ref": "d542e010f5349933d32c04b115132fdb14cfb61e5c5f460b06470952feb823b8",
+          "condition": "selected_pose_matches_retained_request",
+          "consumed_at": "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+          "consumed_return_ref": "reasoning:transition:38",
+          "control": {
+            "bbox": [
+              29,
+              38,
+              35,
+              43
+            ],
+            "epoch": 3,
+            "point": [
+              32,
+              40
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49"
+          },
+          "control_projection_digest": "1027ae1ebc6fb3124abb82eddf1305127e911bd853c9d06515a5390e536c3eaf",
+          "family_id": "public_occurrence_recall",
+          "last_return": {
+            "event_ref": "typed-material-event:3b981a1cfe47bfde60f6b61f9c5ebdbd0523072ca53991d2b4040207282247d4",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+              "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb"
+            ],
+            "index": 0,
+            "proposal_ref": "C_material_flow_e51b31b59d150e60371b",
+            "status": "request_delivered",
+            "transition_ref": "reasoning:transition:39"
+          },
+          "model_digest": "c292a49e50005053f3a2f01f16e1dba621940d77bad04fc46cdc6369a82969e9",
+          "model_ref": "f01fb444b02b5d01694dee73167fc851010b6fd96446b4cd08e13390ff7a58c9",
+          "native_extension": "retained_typed_material_request_parent",
+          "phase": "achieved",
+          "request": {
+            "bbox": [
+              53,
+              3,
+              61,
+              11
+            ],
+            "descriptor": {
+              "height": 3,
+              "mask": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ]
+              ],
+              "palette": 10,
+              "width": 3
+            },
+            "id": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6",
+            "point": [
+              57,
+              7
+            ]
+          },
+          "selection_witness": {
+            "event_ref": "typed-material-event:6964ff6c10634c4503e266b3ad95963ac06115869949bc46b8156024c61c0df9",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+              "lot1-cold-common-parent-loop:epoch:3:revision:38:frame:f216bc8af2019d79"
+            ],
+            "pixels": [
+              [
+                8,
+                17,
+                0
+              ],
+              [
+                9,
+                17,
+                0
+              ],
+              [
+                10,
+                17,
+                0
+              ],
+              [
+                11,
+                17,
+                0
+              ],
+              [
+                12,
+                17,
+                0
+              ],
+              [
+                13,
+                17,
+                0
+              ],
+              [
+                14,
+                17,
+                0
+              ],
+              [
+                15,
+                17,
+                0
+              ],
+              [
+                16,
+                17,
+                0
+              ],
+              [
+                8,
+                18,
+                0
+              ],
+              [
+                16,
+                18,
+                0
+              ],
+              [
+                8,
+                19,
+                0
+              ],
+              [
+                16,
+                19,
+                0
+              ],
+              [
+                8,
+                20,
+                0
+              ],
+              [
+                16,
+                20,
+                0
+              ],
+              [
+                8,
+                21,
+                0
+              ],
+              [
+                16,
+                21,
+                0
+              ],
+              [
+                8,
+                22,
+                0
+              ],
+              [
+                16,
+                22,
+                0
+              ],
+              [
+                8,
+                23,
+                0
+              ],
+              [
+                16,
+                23,
+                0
+              ],
+              [
+                8,
+                24,
+                0
+              ],
+              [
+                16,
+                24,
+                0
+              ],
+              [
+                8,
+                25,
+                0
+              ],
+              [
+                9,
+                25,
+                0
+              ],
+              [
+                10,
+                25,
+                0
+              ],
+              [
+                11,
+                25,
+                0
+              ],
+              [
+                12,
+                25,
+                0
+              ],
+              [
+                13,
+                25,
+                0
+              ],
+              [
+                14,
+                25,
+                0
+              ],
+              [
+                15,
+                25,
+                0
+              ],
+              [
+                16,
+                25,
+                0
+              ]
+            ]
+          },
+          "source_entry": "typed_material_flow",
+          "suspension_reason": null
+        },
+        "current_revalidation_required": true,
+        "evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+          "lot1-cold-common-parent-loop:epoch:3:revision:35:frame:af5454cac73bd5bd",
+          "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49",
+          "lot1-cold-common-parent-loop:epoch:1:revision:6:frame:13a34cbb674ceb63"
+        ],
+        "id": "composition_attention:c9ea476c15d95600f6b9",
+        "level_epoch": 3,
+        "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:37:frame:fdde58a4801f71e7",
+        "owner": "native:typed_material_flow",
+        "question": "Deliver the selected typed material to this measured request; first resolve its current pose.",
+        "release_authority": false,
+        "return_evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71",
+          "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb"
+        ],
+        "returned_at": "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb",
+        "revised_at": "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb",
+        "revision_evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:40:frame:f96028143c04ecbb",
+          "lot1-cold-common-parent-loop:epoch:3:revision:39:frame:e537d9350bccbc71"
+        ],
+        "status": "achieved",
+        "target_ref": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6"
+      },
+      "callerAcquisitions": 44,
+      "materialEventCount": 61
+    },
+    {
+      "actions": 45,
+      "levelsCompleted": 2,
+      "proposalKind": "typed_pose_dependency",
+      "poseMode": "select",
+      "flowMode": null,
+      "dependency": {
+        "native_extension": "retained_typed_material_request_parent",
+        "parent_ref": "composition_attention:5264164c5749d011ead5",
+        "target_ref": "8118f60dea8a8642defdc1556229c12770b194c397779e70c872119318be5783",
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:45:frame:ba19485200744b50",
+        "level_epoch": 3,
+        "decision": "select",
+        "reason": "current_child_question_bound",
+        "condition": "selected_pose_matches_retained_request",
+        "child_ref": "1c19f54bf108613434df9275e4c268a2e830a663a227267264fc140dd6c6123c",
+        "returned_transition_ref": null,
+        "release_authority": false,
+        "admitted": true,
+        "proposal_ref": "C_typed_pose_9de72f9922f2060d1b1b",
+        "consumed_return_ref": null,
+        "returned_event_ref": null,
+        "return_status": null,
+        "parent_status": "pending",
+        "evidence_refs": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:45:frame:ba19485200744b50"
+        ]
+      },
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 3,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:45:frame:ba19485200744b50",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_pose_9de72f9922f2060d1b1b"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": {
+        "binding": {
+          "active_question": {
+            "kind": "typed_pose_dependency",
+            "mode": "select",
+            "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:45:frame:ba19485200744b50",
+            "proposal_ref": "C_typed_pose_9de72f9922f2060d1b1b"
+          },
+          "child": {
+            "bbox": [
+              51,
+              20,
+              53,
+              22
+            ],
+            "body_palette": 2,
+            "center": [
+              52,
+              21
+            ],
+            "id": "1c19f54bf108613434df9275e4c268a2e830a663a227267264fc140dd6c6123c",
+            "point": [
+              51,
+              21
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:43:frame:21e8ebc99e2e0e60"
+          },
+          "child_marks_digest": "6ffbe12dad97c84ac5aed8311563af34647c92d6c8321580bd2ec71c737aeb59",
+          "child_ref": "1c19f54bf108613434df9275e4c268a2e830a663a227267264fc140dd6c6123c",
+          "condition": "selected_pose_matches_retained_request",
+          "consumed_at": "lot1-cold-common-parent-loop:epoch:3:revision:45:frame:ba19485200744b50",
+          "consumed_return_ref": null,
+          "control": {
+            "bbox": [
+              29,
+              38,
+              35,
+              43
+            ],
+            "epoch": 3,
+            "point": [
+              32,
+              40
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49"
+          },
+          "control_projection_digest": "1027ae1ebc6fb3124abb82eddf1305127e911bd853c9d06515a5390e536c3eaf",
+          "family_id": "public_occurrence_recall",
+          "last_return": {
+            "event_ref": "typed-material-event:e93dc2cfc927e9d1a81ff133693ee1316cb057d8c78d76b76bb06b51cb4f8e84",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:45:frame:ba19485200744b50",
+              "lot1-cold-common-parent-loop:epoch:3:revision:46:frame:a505e123a5d8ad7a"
+            ],
+            "index": 0,
+            "proposal_ref": "C_typed_pose_9de72f9922f2060d1b1b",
+            "status": "pose_still_required_for_retained_request",
+            "transition_ref": "reasoning:transition:45"
+          },
+          "model_digest": "1f065ba64a92fe32549da4c4cd8cc0a68feb83a2863850462be91a96db7f92a2",
+          "model_ref": "3a3f118e80a5acefc15c93186612b86c14b26a4b63b89cccbf1268c7ea4129a9",
+          "native_extension": "retained_typed_material_request_parent",
+          "phase": "needs_pose",
+          "request": {
+            "bbox": [
+              36,
+              3,
+              44,
+              11
+            ],
+            "descriptor": {
+              "height": 3,
+              "mask": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  2
+                ]
+              ],
+              "palette": 14,
+              "width": 3
+            },
+            "id": "8118f60dea8a8642defdc1556229c12770b194c397779e70c872119318be5783",
+            "point": [
+              39,
+              7
+            ]
+          },
+          "selection_witness": {
+            "event_ref": "typed-material-event:e93dc2cfc927e9d1a81ff133693ee1316cb057d8c78d76b76bb06b51cb4f8e84",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:45:frame:ba19485200744b50",
+              "lot1-cold-common-parent-loop:epoch:3:revision:46:frame:a505e123a5d8ad7a"
+            ],
+            "pixels": [
+              [
+                48,
+                17,
+                0
+              ],
+              [
+                49,
+                17,
+                0
+              ],
+              [
+                50,
+                17,
+                0
+              ],
+              [
+                51,
+                17,
+                0
+              ],
+              [
+                52,
+                17,
+                0
+              ],
+              [
+                53,
+                17,
+                0
+              ],
+              [
+                54,
+                17,
+                0
+              ],
+              [
+                55,
+                17,
+                0
+              ],
+              [
+                56,
+                17,
+                0
+              ],
+              [
+                48,
+                18,
+                0
+              ],
+              [
+                56,
+                18,
+                0
+              ],
+              [
+                48,
+                19,
+                0
+              ],
+              [
+                56,
+                19,
+                0
+              ],
+              [
+                48,
+                20,
+                0
+              ],
+              [
+                56,
+                20,
+                0
+              ],
+              [
+                48,
+                21,
+                0
+              ],
+              [
+                56,
+                21,
+                0
+              ],
+              [
+                48,
+                22,
+                0
+              ],
+              [
+                56,
+                22,
+                0
+              ],
+              [
+                48,
+                23,
+                0
+              ],
+              [
+                56,
+                23,
+                0
+              ],
+              [
+                48,
+                24,
+                0
+              ],
+              [
+                56,
+                24,
+                0
+              ],
+              [
+                48,
+                25,
+                0
+              ],
+              [
+                49,
+                25,
+                0
+              ],
+              [
+                50,
+                25,
+                0
+              ],
+              [
+                51,
+                25,
+                0
+              ],
+              [
+                52,
+                25,
+                0
+              ],
+              [
+                53,
+                25,
+                0
+              ],
+              [
+                54,
+                25,
+                0
+              ],
+              [
+                55,
+                25,
+                0
+              ],
+              [
+                56,
+                25,
+                0
+              ]
+            ]
+          },
+          "source_entry": "typed_material_flow",
+          "suspension_reason": null
+        },
+        "current_revalidation_required": true,
+        "evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:45:frame:ba19485200744b50",
+          "lot1-cold-common-parent-loop:epoch:3:revision:43:frame:21e8ebc99e2e0e60",
+          "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49",
+          "lot1-cold-common-parent-loop:epoch:1:revision:15:frame:ae4db12bb1a06764"
+        ],
+        "id": "composition_attention:5264164c5749d011ead5",
+        "level_epoch": 3,
+        "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:45:frame:ba19485200744b50",
+        "owner": "native:typed_material_flow",
+        "question": "Deliver the selected typed material to this measured request; first resolve its current pose.",
+        "release_authority": false,
+        "revised_at": "lot1-cold-common-parent-loop:epoch:3:revision:46:frame:a505e123a5d8ad7a",
+        "revision_evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:46:frame:a505e123a5d8ad7a",
+          "lot1-cold-common-parent-loop:epoch:3:revision:45:frame:ba19485200744b50"
+        ],
+        "status": "pending",
+        "target_ref": "8118f60dea8a8642defdc1556229c12770b194c397779e70c872119318be5783"
+      },
+      "callerAcquisitions": 45,
+      "materialEventCount": 62
+    },
+    {
+      "actions": 48,
+      "levelsCompleted": 2,
+      "proposalKind": "typed_pose_dependency",
+      "poseMode": "control",
+      "flowMode": null,
+      "dependency": {
+        "native_extension": "retained_typed_material_request_parent",
+        "parent_ref": "composition_attention:5264164c5749d011ead5",
+        "target_ref": "8118f60dea8a8642defdc1556229c12770b194c397779e70c872119318be5783",
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:46:frame:a505e123a5d8ad7a",
+        "level_epoch": 3,
+        "decision": "resume_pose",
+        "reason": "actual_child_return_consumed",
+        "condition": "selected_pose_matches_retained_request",
+        "child_ref": "1c19f54bf108613434df9275e4c268a2e830a663a227267264fc140dd6c6123c",
+        "returned_transition_ref": "reasoning:transition:45",
+        "release_authority": false,
+        "admitted": true,
+        "proposal_ref": "C_typed_pose_494a6688c88c413f6f3f",
+        "consumed_return_ref": "reasoning:transition:45",
+        "returned_event_ref": "typed-material-event:e93dc2cfc927e9d1a81ff133693ee1316cb057d8c78d76b76bb06b51cb4f8e84",
+        "return_status": "pose_still_required_for_retained_request",
+        "parent_status": "pending",
+        "evidence_refs": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:46:frame:a505e123a5d8ad7a",
+          "lot1-cold-common-parent-loop:epoch:3:revision:45:frame:ba19485200744b50"
+        ]
+      },
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 3,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:46:frame:a505e123a5d8ad7a",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_typed_pose_494a6688c88c413f6f3f"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": {
+        "binding": {
+          "active_question": {
+            "kind": "typed_pose_dependency",
+            "mode": "control",
+            "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:46:frame:a505e123a5d8ad7a",
+            "proposal_ref": "C_typed_pose_494a6688c88c413f6f3f"
+          },
+          "child": {
+            "bbox": [
+              51,
+              20,
+              53,
+              22
+            ],
+            "body_palette": 2,
+            "center": [
+              52,
+              21
+            ],
+            "id": "1c19f54bf108613434df9275e4c268a2e830a663a227267264fc140dd6c6123c",
+            "point": [
+              51,
+              21
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:43:frame:21e8ebc99e2e0e60"
+          },
+          "child_marks_digest": "c2ade2dd556358d659036adb46c3b64f87c83ca0344a91b634f70cc8eebf8581",
+          "child_ref": "1c19f54bf108613434df9275e4c268a2e830a663a227267264fc140dd6c6123c",
+          "condition": "selected_pose_matches_retained_request",
+          "consumed_at": "lot1-cold-common-parent-loop:epoch:3:revision:46:frame:a505e123a5d8ad7a",
+          "consumed_return_ref": "reasoning:transition:45",
+          "control": {
+            "bbox": [
+              29,
+              38,
+              35,
+              43
+            ],
+            "epoch": 3,
+            "point": [
+              32,
+              40
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49"
+          },
+          "control_projection_digest": "1027ae1ebc6fb3124abb82eddf1305127e911bd853c9d06515a5390e536c3eaf",
+          "family_id": "public_occurrence_recall",
+          "last_return": {
+            "event_ref": "typed-material-event:2d0936b73534d7d9e9be0825dce22d35d2be1cf1c296ee72d10f858b20558c8d",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:48:frame:a9661e8f10c09b03",
+              "lot1-cold-common-parent-loop:epoch:3:revision:49:frame:1a08689dc719cfce"
+            ],
+            "index": 2,
+            "proposal_ref": "C_typed_pose_494a6688c88c413f6f3f",
+            "status": "pose_resolved_for_retained_request",
+            "transition_ref": "reasoning:transition:48"
+          },
+          "model_digest": "1f065ba64a92fe32549da4c4cd8cc0a68feb83a2863850462be91a96db7f92a2",
+          "model_ref": "3a3f118e80a5acefc15c93186612b86c14b26a4b63b89cccbf1268c7ea4129a9",
+          "native_extension": "retained_typed_material_request_parent",
+          "phase": "ready_for_delivery",
+          "request": {
+            "bbox": [
+              36,
+              3,
+              44,
+              11
+            ],
+            "descriptor": {
+              "height": 3,
+              "mask": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  2
+                ]
+              ],
+              "palette": 14,
+              "width": 3
+            },
+            "id": "8118f60dea8a8642defdc1556229c12770b194c397779e70c872119318be5783",
+            "point": [
+              39,
+              7
+            ]
+          },
+          "selection_witness": {
+            "event_ref": "typed-material-event:e93dc2cfc927e9d1a81ff133693ee1316cb057d8c78d76b76bb06b51cb4f8e84",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:45:frame:ba19485200744b50",
+              "lot1-cold-common-parent-loop:epoch:3:revision:46:frame:a505e123a5d8ad7a"
+            ],
+            "pixels": [
+              [
+                48,
+                17,
+                0
+              ],
+              [
+                49,
+                17,
+                0
+              ],
+              [
+                50,
+                17,
+                0
+              ],
+              [
+                51,
+                17,
+                0
+              ],
+              [
+                52,
+                17,
+                0
+              ],
+              [
+                53,
+                17,
+                0
+              ],
+              [
+                54,
+                17,
+                0
+              ],
+              [
+                55,
+                17,
+                0
+              ],
+              [
+                56,
+                17,
+                0
+              ],
+              [
+                48,
+                18,
+                0
+              ],
+              [
+                56,
+                18,
+                0
+              ],
+              [
+                48,
+                19,
+                0
+              ],
+              [
+                56,
+                19,
+                0
+              ],
+              [
+                48,
+                20,
+                0
+              ],
+              [
+                56,
+                20,
+                0
+              ],
+              [
+                48,
+                21,
+                0
+              ],
+              [
+                56,
+                21,
+                0
+              ],
+              [
+                48,
+                22,
+                0
+              ],
+              [
+                56,
+                22,
+                0
+              ],
+              [
+                48,
+                23,
+                0
+              ],
+              [
+                56,
+                23,
+                0
+              ],
+              [
+                48,
+                24,
+                0
+              ],
+              [
+                56,
+                24,
+                0
+              ],
+              [
+                48,
+                25,
+                0
+              ],
+              [
+                49,
+                25,
+                0
+              ],
+              [
+                50,
+                25,
+                0
+              ],
+              [
+                51,
+                25,
+                0
+              ],
+              [
+                52,
+                25,
+                0
+              ],
+              [
+                53,
+                25,
+                0
+              ],
+              [
+                54,
+                25,
+                0
+              ],
+              [
+                55,
+                25,
+                0
+              ],
+              [
+                56,
+                25,
+                0
+              ]
+            ]
+          },
+          "source_entry": "typed_material_flow",
+          "suspension_reason": null
+        },
+        "current_revalidation_required": true,
+        "evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:45:frame:ba19485200744b50",
+          "lot1-cold-common-parent-loop:epoch:3:revision:43:frame:21e8ebc99e2e0e60",
+          "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49",
+          "lot1-cold-common-parent-loop:epoch:1:revision:15:frame:ae4db12bb1a06764"
+        ],
+        "id": "composition_attention:5264164c5749d011ead5",
+        "level_epoch": 3,
+        "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:45:frame:ba19485200744b50",
+        "owner": "native:typed_material_flow",
+        "question": "Deliver the selected typed material to this measured request; first resolve its current pose.",
+        "release_authority": false,
+        "revised_at": "lot1-cold-common-parent-loop:epoch:3:revision:49:frame:1a08689dc719cfce",
+        "revision_evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:49:frame:1a08689dc719cfce",
+          "lot1-cold-common-parent-loop:epoch:3:revision:48:frame:a9661e8f10c09b03"
+        ],
+        "status": "pending",
+        "target_ref": "8118f60dea8a8642defdc1556229c12770b194c397779e70c872119318be5783"
+      },
+      "callerAcquisitions": 48,
+      "materialEventCount": 65
+    },
+    {
+      "actions": 49,
+      "levelsCompleted": 3,
+      "proposalKind": "typed_material_flow",
+      "poseMode": null,
+      "flowMode": "deliver",
+      "dependency": {
+        "native_extension": "retained_typed_material_request_parent",
+        "parent_ref": "composition_attention:5264164c5749d011ead5",
+        "target_ref": "8118f60dea8a8642defdc1556229c12770b194c397779e70c872119318be5783",
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:49:frame:1a08689dc719cfce",
+        "level_epoch": 3,
+        "decision": "deliver",
+        "reason": "actual_child_return_consumed",
+        "condition": "selected_pose_matches_retained_request",
+        "child_ref": "1c19f54bf108613434df9275e4c268a2e830a663a227267264fc140dd6c6123c",
+        "returned_transition_ref": "reasoning:transition:48",
+        "release_authority": false,
+        "admitted": true,
+        "proposal_ref": "C_material_flow_f9fa1c83bb91b6530702",
+        "consumed_return_ref": "reasoning:transition:48",
+        "returned_event_ref": "typed-material-event:2d0936b73534d7d9e9be0825dce22d35d2be1cf1c296ee72d10f858b20558c8d",
+        "return_status": "pose_resolved_for_retained_request",
+        "parent_status": "pending",
+        "evidence_refs": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:49:frame:1a08689dc719cfce",
+          "lot1-cold-common-parent-loop:epoch:3:revision:48:frame:a9661e8f10c09b03"
+        ]
+      },
+      "target": {
+        "root": "G_official_completion",
+        "level_epoch": 3,
+        "observation_ref": "lot1-cold-common-parent-loop:epoch:3:revision:49:frame:1a08689dc719cfce",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_material_flow_f9fa1c83bb91b6530702"
+        ],
+        "reason": "independent_current_contribution"
+      },
+      "attention": {
+        "binding": {
+          "active_question": {
+            "kind": "typed_material_flow",
+            "mode": "deliver",
+            "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:49:frame:1a08689dc719cfce",
+            "proposal_ref": "C_material_flow_f9fa1c83bb91b6530702"
+          },
+          "child": {
+            "bbox": [
+              51,
+              20,
+              53,
+              22
+            ],
+            "body_palette": 2,
+            "center": [
+              52,
+              21
+            ],
+            "id": "1c19f54bf108613434df9275e4c268a2e830a663a227267264fc140dd6c6123c",
+            "point": [
+              51,
+              21
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:43:frame:21e8ebc99e2e0e60"
+          },
+          "child_marks_digest": "c2ade2dd556358d659036adb46c3b64f87c83ca0344a91b634f70cc8eebf8581",
+          "child_ref": "1c19f54bf108613434df9275e4c268a2e830a663a227267264fc140dd6c6123c",
+          "condition": "selected_pose_matches_retained_request",
+          "consumed_at": "lot1-cold-common-parent-loop:epoch:3:revision:49:frame:1a08689dc719cfce",
+          "consumed_return_ref": "reasoning:transition:48",
+          "control": {
+            "bbox": [
+              29,
+              38,
+              35,
+              43
+            ],
+            "epoch": 3,
+            "point": [
+              32,
+              40
+            ],
+            "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49"
+          },
+          "control_projection_digest": "1027ae1ebc6fb3124abb82eddf1305127e911bd853c9d06515a5390e536c3eaf",
+          "family_id": "public_occurrence_recall",
+          "last_return": {
+            "event_ref": "typed-material-event:2d0936b73534d7d9e9be0825dce22d35d2be1cf1c296ee72d10f858b20558c8d",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:48:frame:a9661e8f10c09b03",
+              "lot1-cold-common-parent-loop:epoch:3:revision:49:frame:1a08689dc719cfce"
+            ],
+            "index": 2,
+            "proposal_ref": "C_typed_pose_494a6688c88c413f6f3f",
+            "status": "pose_resolved_for_retained_request",
+            "transition_ref": "reasoning:transition:48"
+          },
+          "model_digest": "1f065ba64a92fe32549da4c4cd8cc0a68feb83a2863850462be91a96db7f92a2",
+          "model_ref": "3a3f118e80a5acefc15c93186612b86c14b26a4b63b89cccbf1268c7ea4129a9",
+          "native_extension": "retained_typed_material_request_parent",
+          "phase": "ready_for_delivery",
+          "request": {
+            "bbox": [
+              36,
+              3,
+              44,
+              11
+            ],
+            "descriptor": {
+              "height": 3,
+              "mask": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  2
+                ]
+              ],
+              "palette": 14,
+              "width": 3
+            },
+            "id": "8118f60dea8a8642defdc1556229c12770b194c397779e70c872119318be5783",
+            "point": [
+              39,
+              7
+            ]
+          },
+          "selection_witness": {
+            "event_ref": "typed-material-event:e93dc2cfc927e9d1a81ff133693ee1316cb057d8c78d76b76bb06b51cb4f8e84",
+            "evidence": [
+              "lot1-cold-common-parent-loop:epoch:3:revision:45:frame:ba19485200744b50",
+              "lot1-cold-common-parent-loop:epoch:3:revision:46:frame:a505e123a5d8ad7a"
+            ],
+            "pixels": [
+              [
+                48,
+                17,
+                0
+              ],
+              [
+                49,
+                17,
+                0
+              ],
+              [
+                50,
+                17,
+                0
+              ],
+              [
+                51,
+                17,
+                0
+              ],
+              [
+                52,
+                17,
+                0
+              ],
+              [
+                53,
+                17,
+                0
+              ],
+              [
+                54,
+                17,
+                0
+              ],
+              [
+                55,
+                17,
+                0
+              ],
+              [
+                56,
+                17,
+                0
+              ],
+              [
+                48,
+                18,
+                0
+              ],
+              [
+                56,
+                18,
+                0
+              ],
+              [
+                48,
+                19,
+                0
+              ],
+              [
+                56,
+                19,
+                0
+              ],
+              [
+                48,
+                20,
+                0
+              ],
+              [
+                56,
+                20,
+                0
+              ],
+              [
+                48,
+                21,
+                0
+              ],
+              [
+                56,
+                21,
+                0
+              ],
+              [
+                48,
+                22,
+                0
+              ],
+              [
+                56,
+                22,
+                0
+              ],
+              [
+                48,
+                23,
+                0
+              ],
+              [
+                56,
+                23,
+                0
+              ],
+              [
+                48,
+                24,
+                0
+              ],
+              [
+                56,
+                24,
+                0
+              ],
+              [
+                48,
+                25,
+                0
+              ],
+              [
+                49,
+                25,
+                0
+              ],
+              [
+                50,
+                25,
+                0
+              ],
+              [
+                51,
+                25,
+                0
+              ],
+              [
+                52,
+                25,
+                0
+              ],
+              [
+                53,
+                25,
+                0
+              ],
+              [
+                54,
+                25,
+                0
+              ],
+              [
+                55,
+                25,
+                0
+              ],
+              [
+                56,
+                25,
+                0
+              ]
+            ]
+          },
+          "source_entry": "typed_material_flow",
+          "suspension_reason": null
+        },
+        "current_revalidation_required": true,
+        "evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:45:frame:ba19485200744b50",
+          "lot1-cold-common-parent-loop:epoch:3:revision:43:frame:21e8ebc99e2e0e60",
+          "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49",
+          "lot1-cold-common-parent-loop:epoch:1:revision:15:frame:ae4db12bb1a06764"
+        ],
+        "id": "composition_attention:5264164c5749d011ead5",
+        "level_epoch": 3,
+        "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:45:frame:ba19485200744b50",
+        "owner": "native:typed_material_flow",
+        "question": "Deliver the selected typed material to this measured request; first resolve its current pose.",
+        "release_authority": false,
+        "return_evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:49:frame:1a08689dc719cfce",
+          "lot1-cold-common-parent-loop:epoch:4:revision:50:frame:e9cedd4e5d73dd27"
+        ],
+        "returned_at": "lot1-cold-common-parent-loop:epoch:4:revision:50:frame:e9cedd4e5d73dd27",
+        "revised_at": "lot1-cold-common-parent-loop:epoch:3:revision:49:frame:1a08689dc719cfce",
+        "revision_evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:49:frame:1a08689dc719cfce",
+          "lot1-cold-common-parent-loop:epoch:3:revision:48:frame:a9661e8f10c09b03"
+        ],
+        "status": "boundary",
+        "target_ref": "8118f60dea8a8642defdc1556229c12770b194c397779e70c872119318be5783"
+      },
+      "callerAcquisitions": 49,
+      "materialEventCount": 68
+    }
+  ],
+  "finalAttention": {
+    "binding": {
+      "active_question": {
+        "kind": "typed_material_flow",
+        "mode": "deliver",
+        "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:49:frame:1a08689dc719cfce",
+        "proposal_ref": "C_material_flow_f9fa1c83bb91b6530702"
+      },
+      "child": {
+        "bbox": [
+          51,
+          20,
+          53,
+          22
+        ],
+        "body_palette": 2,
+        "center": [
+          52,
+          21
+        ],
+        "id": "1c19f54bf108613434df9275e4c268a2e830a663a227267264fc140dd6c6123c",
+        "point": [
+          51,
+          21
+        ],
+        "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:43:frame:21e8ebc99e2e0e60"
+      },
+      "child_marks_digest": "c2ade2dd556358d659036adb46c3b64f87c83ca0344a91b634f70cc8eebf8581",
+      "child_ref": "1c19f54bf108613434df9275e4c268a2e830a663a227267264fc140dd6c6123c",
+      "condition": "selected_pose_matches_retained_request",
+      "consumed_at": "lot1-cold-common-parent-loop:epoch:3:revision:49:frame:1a08689dc719cfce",
+      "consumed_return_ref": "reasoning:transition:48",
+      "control": {
+        "bbox": [
+          29,
+          38,
+          35,
+          43
+        ],
+        "epoch": 3,
+        "point": [
+          32,
+          40
+        ],
+        "source_ref": "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49"
+      },
+      "control_projection_digest": "1027ae1ebc6fb3124abb82eddf1305127e911bd853c9d06515a5390e536c3eaf",
+      "family_id": "public_occurrence_recall",
+      "last_return": {
+        "event_ref": "typed-material-event:2d0936b73534d7d9e9be0825dce22d35d2be1cf1c296ee72d10f858b20558c8d",
+        "evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:48:frame:a9661e8f10c09b03",
+          "lot1-cold-common-parent-loop:epoch:3:revision:49:frame:1a08689dc719cfce"
+        ],
+        "index": 2,
+        "proposal_ref": "C_typed_pose_494a6688c88c413f6f3f",
+        "status": "pose_resolved_for_retained_request",
+        "transition_ref": "reasoning:transition:48"
+      },
+      "model_digest": "1f065ba64a92fe32549da4c4cd8cc0a68feb83a2863850462be91a96db7f92a2",
+      "model_ref": "3a3f118e80a5acefc15c93186612b86c14b26a4b63b89cccbf1268c7ea4129a9",
+      "native_extension": "retained_typed_material_request_parent",
+      "phase": "ready_for_delivery",
+      "request": {
+        "bbox": [
+          36,
+          3,
+          44,
+          11
+        ],
+        "descriptor": {
+          "height": 3,
+          "mask": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              2
+            ]
+          ],
+          "palette": 14,
+          "width": 3
+        },
+        "id": "8118f60dea8a8642defdc1556229c12770b194c397779e70c872119318be5783",
+        "point": [
+          39,
+          7
+        ]
+      },
+      "selection_witness": {
+        "event_ref": "typed-material-event:e93dc2cfc927e9d1a81ff133693ee1316cb057d8c78d76b76bb06b51cb4f8e84",
+        "evidence": [
+          "lot1-cold-common-parent-loop:epoch:3:revision:45:frame:ba19485200744b50",
+          "lot1-cold-common-parent-loop:epoch:3:revision:46:frame:a505e123a5d8ad7a"
+        ],
+        "pixels": [
+          [
+            48,
+            17,
+            0
+          ],
+          [
+            49,
+            17,
+            0
+          ],
+          [
+            50,
+            17,
+            0
+          ],
+          [
+            51,
+            17,
+            0
+          ],
+          [
+            52,
+            17,
+            0
+          ],
+          [
+            53,
+            17,
+            0
+          ],
+          [
+            54,
+            17,
+            0
+          ],
+          [
+            55,
+            17,
+            0
+          ],
+          [
+            56,
+            17,
+            0
+          ],
+          [
+            48,
+            18,
+            0
+          ],
+          [
+            56,
+            18,
+            0
+          ],
+          [
+            48,
+            19,
+            0
+          ],
+          [
+            56,
+            19,
+            0
+          ],
+          [
+            48,
+            20,
+            0
+          ],
+          [
+            56,
+            20,
+            0
+          ],
+          [
+            48,
+            21,
+            0
+          ],
+          [
+            56,
+            21,
+            0
+          ],
+          [
+            48,
+            22,
+            0
+          ],
+          [
+            56,
+            22,
+            0
+          ],
+          [
+            48,
+            23,
+            0
+          ],
+          [
+            56,
+            23,
+            0
+          ],
+          [
+            48,
+            24,
+            0
+          ],
+          [
+            56,
+            24,
+            0
+          ],
+          [
+            48,
+            25,
+            0
+          ],
+          [
+            49,
+            25,
+            0
+          ],
+          [
+            50,
+            25,
+            0
+          ],
+          [
+            51,
+            25,
+            0
+          ],
+          [
+            52,
+            25,
+            0
+          ],
+          [
+            53,
+            25,
+            0
+          ],
+          [
+            54,
+            25,
+            0
+          ],
+          [
+            55,
+            25,
+            0
+          ],
+          [
+            56,
+            25,
+            0
+          ]
+        ]
+      },
+      "source_entry": "typed_material_flow",
+      "suspension_reason": null
+    },
+    "current_revalidation_required": true,
+    "evidence": [
+      "lot1-cold-common-parent-loop:epoch:3:revision:45:frame:ba19485200744b50",
+      "lot1-cold-common-parent-loop:epoch:3:revision:43:frame:21e8ebc99e2e0e60",
+      "lot1-cold-common-parent-loop:epoch:3:revision:31:frame:7978b68385a22d49",
+      "lot1-cold-common-parent-loop:epoch:1:revision:15:frame:ae4db12bb1a06764"
+    ],
+    "id": "composition_attention:5264164c5749d011ead5",
+    "level_epoch": 3,
+    "opened_at": "lot1-cold-common-parent-loop:epoch:3:revision:45:frame:ba19485200744b50",
+    "owner": "native:typed_material_flow",
+    "question": "Deliver the selected typed material to this measured request; first resolve its current pose.",
+    "release_authority": false,
+    "return_evidence": [
+      "lot1-cold-common-parent-loop:epoch:3:revision:49:frame:1a08689dc719cfce",
+      "lot1-cold-common-parent-loop:epoch:4:revision:50:frame:e9cedd4e5d73dd27"
+    ],
+    "returned_at": "lot1-cold-common-parent-loop:epoch:4:revision:50:frame:e9cedd4e5d73dd27",
+    "revised_at": "lot1-cold-common-parent-loop:epoch:3:revision:49:frame:1a08689dc719cfce",
+    "revision_evidence": [
+      "lot1-cold-common-parent-loop:epoch:3:revision:49:frame:1a08689dc719cfce",
+      "lot1-cold-common-parent-loop:epoch:3:revision:48:frame:a9661e8f10c09b03"
+    ],
+    "status": "boundary",
+    "target_ref": "8118f60dea8a8642defdc1556229c12770b194c397779e70c872119318be5783"
+  },
+  "finalCaller": {
+    "enabled": true,
+    "acquiredTransitions": 49,
+    "boundaryReplays": 2,
+    "goalEvents": 3,
+    "frontierDeltas": 99,
+    "components": {
+      "goal": {
+        "id": "caller:goal",
+        "revision": 48
+      },
+      "frontier": {
+        "id": "caller:frontier",
+        "revision": 48
+      },
+      "view": {
+        "id": "caller:view",
+        "revision": 46
+      },
+      "attention": {
+        "id": "caller:attention",
+        "revision": 13
+      },
+      "points": {
+        "id": "caller:points",
+        "revision": 45
+      },
+      "displays": {
+        "id": "caller:displays",
+        "revision": 1
+      },
+      "controls": {
+        "id": "caller:controls",
+        "revision": 31
+      },
+      "counters": {
+        "id": "caller:counters",
+        "revision": 49
+      }
+    },
+    "pendingSourceProviders": [
+      "morphology",
+      "attention_parent_return",
+      "acquire_control_for_target"
+    ],
+    "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+  }
+}

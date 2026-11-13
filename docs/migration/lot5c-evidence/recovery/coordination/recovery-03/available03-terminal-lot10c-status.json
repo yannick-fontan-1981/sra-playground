@@ -1,0 +1,89 @@
+{
+  "schema": "sra.shared-lane-status.v1",
+  "lane": "10C",
+  "updated_at": "2026-11-11T21:58:15.222076+00:00",
+  "phase": "functional_milestone_saved_10d_preparation_ready",
+  "stage": "Composed329 functional qualification and integrity passed; all proofs and roadmap saved by nine ordinary commits/pushes. No official10C cost or publication.",
+  "checkout": "/workspace/sites/sra-lot10c-20261111/.sites-checkout",
+  "branch": "lot10c-ordered-recruitment-20261111",
+  "source_checkpoint": "547025a637ffbfeae23c15d54c96100ad8d3df5f",
+  "source_checkpoint_remote_verified": true,
+  "working_tree_clean": true,
+  "source_opening": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot10c-20261111/.sites-checkout",
+    "commit_sha": "3df0fc780f479e51f51aaceb2a32ec287b67671d"
+  },
+  "active_command": null,
+  "active_execution_handles": [],
+  "heavy_execution_active": false,
+  "performance_started": false,
+  "publication_started": false,
+  "quiet_requested": false,
+  "quiet_acknowledged": false,
+  "quiet_request_id": null,
+  "all_own_subagents_idle": true,
+  "all_own_subagents_compute_idle": true,
+  "parallel_worker_activity": "Both audit delegates terminal; all owned commands terminal.",
+  "preview_stopped": true,
+  "no_queued_commands": true,
+  "performance_lock": "/workspace/shared/sra-coordination/performance.lock",
+  "publication_lock": "/workspace/shared/sra-coordination/publication.lock",
+  "published_predecessor": {
+    "version": 103,
+    "nativeVersion": "0.62.0",
+    "publishedSource": "4afcbfe6a25bd3a88223be543e443bc53b9c8814"
+  },
+  "prepared_candidate": {
+    "nativeVersion": "0.66.0",
+    "nativeFiles": 329,
+    "digest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+    "entriesConnected": 68,
+    "entriesDeclared": 76,
+    "published": false
+  },
+  "publication_order": [
+    "5C/0.63",
+    "6B/0.64",
+    "8A/0.65",
+    "10C/0.66"
+  ],
+  "prior_quiet_release_observed": {
+    "requestId": "lot5c-cost-a33a5f88-recovery-02",
+    "releasedAt": "2026-11-11T20:30:25.610691+00:00"
+  },
+  "request_to_lot5c": "Latest direct user policy: ordinary development, functional tests, commits and source pushes require no global lock, peer quiet or peer publication. All legacy native workers are terminal and their own locks closed normally. Only actual official performance and publication retain short exclusive windows. No held lock file was deleted. No quiet ACK is asserted while ordinary work is active.",
+  "request_to_lot6b": "Latest direct user policy: ordinary development, functional tests, commits and source pushes require no global lock, peer quiet or peer publication. All legacy native workers are terminal and their own locks closed normally. Only actual official performance and publication retain short exclusive windows. No held lock file was deleted. No quiet ACK is asserted while ordinary work is active.",
+  "request_to_lot8a": "Latest direct user policy: ordinary development, functional tests, commits and source pushes require no global lock, peer quiet or peer publication. All legacy native workers are terminal and their own locks closed normally. Only actual official performance and publication retain short exclusive windows. No held lock file was deleted. No quiet ACK is asserted while ordinary work is active.",
+  "recovery_lock_availability": "/workspace/shared/sra-coordination/lot10c-recovery-lock-available-20261111.json",
+  "history_snapshot": "/workspace/sites/sra-lot10c-20261111/.sites-checkout/docs/migration/lot10c-evidence/recovery-20261111/coordination/status-before-cleanup.json",
+  "next_step": "Port the consumed primitives, temporal geometry and selection against the initial independent corpus; complete remaining response/family references before common-owner integration.",
+  "functional_progress": {
+    "mainRecordedCasesPassed": 10,
+    "mainRecordedCasesExpected": 10,
+    "mainComparisonsCompleted": 170,
+    "kataSupplement": "separate17of17passed",
+    "formalTests": "passed1767of1767in56files",
+    "projectChecks": "5of5passed",
+    "fullQualificationAccepted": false,
+    "deliveryIntegrity": "passed",
+    "distinctRecordedCases": 11,
+    "comparisonChecksAcrossTwoExecutions": 187
+  },
+  "ordinary_work_requires_global_lock": false,
+  "ordinary_work_waits_for_peer_publication": false,
+  "ordinary_work_waits_for_peer_quiet": false,
+  "performance_requires_short_exclusive_lock": true,
+  "publication_requires_short_exclusive_lock": true,
+  "source_checkpoint_ref": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+  "source_checkpoint_receipt": "/workspace/shared/sra-coordination/lot10c-final-checkpoint-547025a6.json",
+  "ordinary_successor": {
+    "lane": "10D",
+    "status_path": "/workspace/shared/sra-coordination/lot10d-status.json",
+    "checkout": "/workspace/sites/sra-lot10d-20261111/.sites-checkout",
+    "branch": "lot10d-temporal-selection-20261111",
+    "source_checkpoint": "043eb2f14b6da97ff4547424b2b894e35c18cf82",
+    "heavy_execution_active": false,
+    "native_port_implemented": false
+  }
+}

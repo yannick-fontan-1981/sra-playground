@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "rswp-campaign.json.gz",
+    "sha256": "9bd2d30f23afb4a4b53e14f37922b019acbeffca11128a7bcf78ac4c505ef59e",
+    "bytes": 2175445
+  },
+  "parts": [
+    {
+      "file": "rswp-campaign.json.gz.part000",
+      "sha256": "5a9b77ec97687b3fadf2de478fff2bf382e59c238fa169fdecbb4a0e6230939c",
+      "bytes": 900000
+    },
+    {
+      "file": "rswp-campaign.json.gz.part001",
+      "sha256": "03b9bfa94305c573c5ab5797ac537d02487a3e73935458890fd13a8284938df9",
+      "bytes": 900000
+    },
+    {
+      "file": "rswp-campaign.json.gz.part002",
+      "sha256": "52a4ed213e0b2dd6322b5b8dbbd396331a234a4db72eccfac3c4a29b6dca3f52",
+      "bytes": 375445
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

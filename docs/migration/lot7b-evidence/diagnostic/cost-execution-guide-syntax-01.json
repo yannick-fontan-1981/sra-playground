@@ -1,0 +1,44 @@
+{
+  "schema": "logos-engine.lot7b-cost-guide-syntax.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T21:55:50.254842+00:00",
+  "source": {
+    "path": "docs/migration/lot7b-evidence/cost-execution-guide.md",
+    "bytes": 21340,
+    "sha256": "9ba35f500aeacdb63b3ce48377665829847ac41835b8dc5fa2b04df95d6af3f0"
+  },
+  "checkedCount": 5,
+  "checks": [
+    {
+      "name": "python-heredoc-1",
+      "method": "ast.parse only",
+      "passed": true
+    },
+    {
+      "name": "python-heredoc-2",
+      "method": "ast.parse only",
+      "passed": true
+    },
+    {
+      "name": "python-heredoc-3",
+      "method": "ast.parse only",
+      "passed": true
+    },
+    {
+      "name": "python-heredoc-4",
+      "method": "ast.parse only",
+      "passed": true
+    },
+    {
+      "name": "all-bash-blocks-in-order",
+      "method": "bash -n only; no commands executed",
+      "passed": true,
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "commandsExecuted": false,
+  "sourceUnchanged": true,
+  "qualification": "Syntax-only parsing of the exact documented shell blocks and four embedded Python programs. No contract, capture, readiness, window, cost result or publication input receipt was generated."
+}

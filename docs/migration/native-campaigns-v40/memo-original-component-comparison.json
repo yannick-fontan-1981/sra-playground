@@ -1,0 +1,1885 @@
+{
+  "checkpoints": [
+    {
+      "animationFrameCount": 1,
+      "animationPacketCanonicalSha256": "00c69c39b63ff82f624a91e56c8604d77cc3ff492c156842290ffd6e15f0bfda",
+      "command": null,
+      "commandMatches": null,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "27ba4cd855a64b3d",
+      "fullFrameRowsSha256": "27ba4cd855a64b3d790f42ff92a5a4edce4d661801613b2583acd119432c7211",
+      "index": 0,
+      "level": 1,
+      "levelsCompleted": 0,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "d37ff8eb7b83e6c739e0773a2cc9eb8898151a6f6398138cb20330b93572508f",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "d37ff8eb7b83e6c739e0773a2cc9eb8898151a6f6398138cb20330b93572508f",
+      "sourceScene": "memo:0",
+      "state": "NOT_FINISHED",
+      "stepIndex": 0,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "8af91ae72ba2b445a0add4cb947dbfdf5cb91dd15b54585902adebdb8dfa5e5d",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 31,
+          "y": 30
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "f48aeb384f365c2a",
+      "fullFrameRowsSha256": "f48aeb384f365c2a8f6da7a0668556195a57c8d843810a5c1f97aadd2414900e",
+      "index": 1,
+      "level": 1,
+      "levelsCompleted": 0,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "190a8d6992b467f077b963ddcfd1a2b4fef8fe5ed4bae6261545584ec75ad270",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "190a8d6992b467f077b963ddcfd1a2b4fef8fe5ed4bae6261545584ec75ad270",
+      "sourceScene": "memo:1",
+      "state": "NOT_FINISHED",
+      "stepIndex": 1,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "68b2ffbef405a85fad33dbd1f2a2fe0ee9428284cb44ee6c925e662938e47924",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 47,
+          "y": 22
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "786843d467525a9e",
+      "fullFrameRowsSha256": "786843d467525a9e3f7530885aa0fe6645ccf704a1f09925fdb21dd9480ae725",
+      "index": 2,
+      "level": 1,
+      "levelsCompleted": 0,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "0c14ad975cd44d53795a0ca58d97578f747b9f5039a480619d8f15be2e955d8d",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "0c14ad975cd44d53795a0ca58d97578f747b9f5039a480619d8f15be2e955d8d",
+      "sourceScene": "memo:2",
+      "state": "NOT_FINISHED",
+      "stepIndex": 2,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "f22ca37e79acf3be45c1d86f7952e0568849a5cfe229e989e450822263a0663c",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 48,
+          "y": 37
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "a9883a56e9c80766",
+      "fullFrameRowsSha256": "a9883a56e9c8076632ef4b756b7fad6c2d49d358c5710712c2aeed0a37c46a5b",
+      "index": 3,
+      "level": 1,
+      "levelsCompleted": 0,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "611d667d9faaae37c443decc8db1980c3551452b5b0038896faa7c1ca3b5e2ab",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "611d667d9faaae37c443decc8db1980c3551452b5b0038896faa7c1ca3b5e2ab",
+      "sourceScene": "memo:3",
+      "state": "NOT_FINISHED",
+      "stepIndex": 3,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "2bff37a3a03931ae70c28c4942d88628843512b7d638ff4e96d7d88ae2ad7f0f",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 17,
+          "y": 40
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "2bf57aeaf6d81911",
+      "fullFrameRowsSha256": "2bf57aeaf6d819115f99b2b3b03cf52e86571fa489696abd94ce98cff8ab9f2d",
+      "index": 4,
+      "level": 1,
+      "levelsCompleted": 0,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "3d097408f9d8bc0d5d54ddd038764dba30c91b493d50e8789d5e9ab604fd09cd",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "3d097408f9d8bc0d5d54ddd038764dba30c91b493d50e8789d5e9ab604fd09cd",
+      "sourceScene": "memo:4",
+      "state": "NOT_FINISHED",
+      "stepIndex": 4,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "436383cc1dcfe4dbbc6b849b9bff396e9b9eeb815ffa75edb5fb3e5473d492e2",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 15,
+          "y": 23
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "0454a8cfe43f777b",
+      "fullFrameRowsSha256": "0454a8cfe43f777ba8a5a65f284b22270044ebc9420aaae938d1ba19408480ed",
+      "index": 5,
+      "level": 1,
+      "levelsCompleted": 0,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "7aab538e881094ed6827bc911e6fc2744258c773f04725d471b3980613799a99",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "7aab538e881094ed6827bc911e6fc2744258c773f04725d471b3980613799a99",
+      "sourceScene": "memo:5",
+      "state": "NOT_FINISHED",
+      "stepIndex": 5,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "ef335bc716a9b50185a2161ef223cc90e142b1998dd610623743d0c8b1074f39",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 34,
+          "y": 12
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "ed6639d6b8ac62c7",
+      "fullFrameRowsSha256": "ed6639d6b8ac62c727c60e7ce46e557a5b190c63801f8ac58724772a72195781",
+      "index": 6,
+      "level": 1,
+      "levelsCompleted": 0,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "a0dccc94279ff344bd0b5dcc368f62a9d192ee9c4d4a572e6e0a68e241263c9b",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "a0dccc94279ff344bd0b5dcc368f62a9d192ee9c4d4a572e6e0a68e241263c9b",
+      "sourceScene": "memo:6",
+      "state": "NOT_FINISHED",
+      "stepIndex": 6,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "eb24f110d3ef1f418036297f46eabf3ea73be8793b3ae83dfb644484f521e1c9",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 15,
+          "y": 35
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "75107716fb15f9d4",
+      "fullFrameRowsSha256": "75107716fb15f9d4a3d8e8b3200a5a407f6153f0377cf5b152f2dae259d2545e",
+      "index": 7,
+      "level": 1,
+      "levelsCompleted": 0,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "55d5353f1f8a3a75b0d42a447deb52b682007217a116f61c225bab865dced837",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "55d5353f1f8a3a75b0d42a447deb52b682007217a116f61c225bab865dced837",
+      "sourceScene": "memo:7",
+      "state": "NOT_FINISHED",
+      "stepIndex": 7,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "4ae2b3a7cd0626ceab9136cff62c9fff73f930040fcda4f5732b466ac5d5b945",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 14,
+          "y": 28
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "bec04e5c250e8217",
+      "fullFrameRowsSha256": "bec04e5c250e82175437b6e18a6d08f268cdf74aaab1b0b6fb39a5d6b10c75bc",
+      "index": 8,
+      "level": 1,
+      "levelsCompleted": 0,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "b1a75710db89ca60e40ef2b8006032db5d931845c561d0af3d1719551c0d2b3d",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "b1a75710db89ca60e40ef2b8006032db5d931845c561d0af3d1719551c0d2b3d",
+      "sourceScene": "memo:8",
+      "state": "NOT_FINISHED",
+      "stepIndex": 8,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "a46becb296b59dbde42a98d502c37426e25129052bf0c7f11e11200013cb861b",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 23,
+          "y": 46
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "70a86d4f7133ece7",
+      "fullFrameRowsSha256": "70a86d4f7133ece7076634483c6fdb32c1b4eabf24a17c750adc4aaa932a36c2",
+      "index": 9,
+      "level": 1,
+      "levelsCompleted": 0,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "ede72bb89bcf16d04787b3764f54e205f5963b3a079109ad6ddd76894b1ae026",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "ede72bb89bcf16d04787b3764f54e205f5963b3a079109ad6ddd76894b1ae026",
+      "sourceScene": "memo:9",
+      "state": "NOT_FINISHED",
+      "stepIndex": 9,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 12,
+      "animationPacketCanonicalSha256": "40b3b2cad6096017e8cbb2a47c26bba9cc331d4815fdbef0416a790e7ba264eb",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 16,
+          "y": 39
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "e8da1a7ab4fdc419",
+      "fullFrameRowsSha256": "e8da1a7ab4fdc4194ca00a744c092c9bcd09d2f588db00871b3043ef894a0c1f",
+      "index": 10,
+      "level": 2,
+      "levelsCompleted": 1,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "f777c5a11660d19fc7b50e2d137bebb0db95687a71cd00bae405c90dbeb4b359",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "f777c5a11660d19fc7b50e2d137bebb0db95687a71cd00bae405c90dbeb4b359",
+      "sourceScene": "memo:10",
+      "state": "NOT_FINISHED",
+      "stepIndex": 10,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "254a7dc8896c94dff8ca5ae26cf37a40d2d2658c8f1b0455808db0b8710ba193",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 32,
+          "y": 30
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "3b19c230dcbb516b",
+      "fullFrameRowsSha256": "3b19c230dcbb516b6ac3af7430c173c27ab4885be81ab671111643e93bd84b50",
+      "index": 11,
+      "level": 2,
+      "levelsCompleted": 1,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "d609cd5f1f51c22504e9fb6e8b8ce1a93f0853106f9c583bda8126661962d6e6",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "d609cd5f1f51c22504e9fb6e8b8ce1a93f0853106f9c583bda8126661962d6e6",
+      "sourceScene": "memo:11",
+      "state": "NOT_FINISHED",
+      "stepIndex": 11,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "2b0f8ec032af96168e3b5fe847e2bdb892f37bfedf661dc50f08e692aa900265",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 34,
+          "y": 48
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "552c56f5bd5dd913",
+      "fullFrameRowsSha256": "552c56f5bd5dd91308647e5e6f5c880f97668424580fd43ec3fecf6fe650d129",
+      "index": 12,
+      "level": 2,
+      "levelsCompleted": 1,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "ef300edc31a7c5d481c301b0ee7f7bc8b7b5a81c45c4cc51a592144e92564831",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "ef300edc31a7c5d481c301b0ee7f7bc8b7b5a81c45c4cc51a592144e92564831",
+      "sourceScene": "memo:12",
+      "state": "NOT_FINISHED",
+      "stepIndex": 12,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "18f113f2b134e58a6c7c42b534ea54f1ef808c6491fe78cb5b21ad30d1237129",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 33,
+          "y": 48
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "18ae74d960530bac",
+      "fullFrameRowsSha256": "18ae74d960530bacb34b37f52f4889a6c1169c8533b157cb9b45e820bd2b190c",
+      "index": 13,
+      "level": 2,
+      "levelsCompleted": 1,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "5f2ce25a328dc2bd40ec0fdd5a8fad23c07ce94893b7338b21698b4a0a1b362f",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "5f2ce25a328dc2bd40ec0fdd5a8fad23c07ce94893b7338b21698b4a0a1b362f",
+      "sourceScene": "memo:13",
+      "state": "NOT_FINISHED",
+      "stepIndex": 13,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "f2bf9521200b40b9fca8c6de2136e3062e3ba232a6fb3f3311c9bf03bc516fee",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 15,
+          "y": 36
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "62707655a08915d6",
+      "fullFrameRowsSha256": "62707655a08915d67d14c751f560462d68c0ab5ff317fb298e36789a4dd6bd98",
+      "index": 14,
+      "level": 2,
+      "levelsCompleted": 1,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "5c9ac1ae63bd78ea11280c52f89995245b465a14f88a4f53f6e78d938d19d897",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "5c9ac1ae63bd78ea11280c52f89995245b465a14f88a4f53f6e78d938d19d897",
+      "sourceScene": "memo:14",
+      "state": "NOT_FINISHED",
+      "stepIndex": 14,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "758dddd892c3b668b5034856cb40da8bafca35b793e73f2e9c3c2e519536ce58",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 27,
+          "y": 11
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "0f3fe5b1dd859ebb",
+      "fullFrameRowsSha256": "0f3fe5b1dd859ebbd812c26c19ddfe8507275ff5b407e364ae5f9414795d79a2",
+      "index": 15,
+      "level": 2,
+      "levelsCompleted": 1,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "c4cc97811398c09f8f6d206150f213cdbf71b928cbba7662164b8c11f302df33",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "c4cc97811398c09f8f6d206150f213cdbf71b928cbba7662164b8c11f302df33",
+      "sourceScene": "memo:15",
+      "state": "NOT_FINISHED",
+      "stepIndex": 15,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "0124a1ac9714386705b6774861e20bd95f29678ad162eb1ce2949e89fcdc2198",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 32,
+          "y": 48
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "380853c579d35dfb",
+      "fullFrameRowsSha256": "380853c579d35dfbeb8fe1b8c4fe7986f27ea5daf8576bfde9461ef31ba1bdc2",
+      "index": 16,
+      "level": 2,
+      "levelsCompleted": 1,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "cf5bf6cb174bff8ae74ea309f1757e096ef3349ec0f806860047bbef00ef8fdc",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "cf5bf6cb174bff8ae74ea309f1757e096ef3349ec0f806860047bbef00ef8fdc",
+      "sourceScene": "memo:16",
+      "state": "NOT_FINISHED",
+      "stepIndex": 16,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "177cde1f4381d9f7b8ae61bf3ee3f413b2b43c05d4348a04ea57910eda7d7ece",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 23,
+          "y": 46
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "8ed4fd0eb36ac443",
+      "fullFrameRowsSha256": "8ed4fd0eb36ac443223a7d325f37f23225a3c6439b5f719d5adcd6cfab8c49eb",
+      "index": 17,
+      "level": 2,
+      "levelsCompleted": 1,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "8524ef9e96d5d4877f1a0ebe2841e27b2f97e1da91688594de2e76446d5e19a9",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "8524ef9e96d5d4877f1a0ebe2841e27b2f97e1da91688594de2e76446d5e19a9",
+      "sourceScene": "memo:17",
+      "state": "NOT_FINISHED",
+      "stepIndex": 17,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "a1d873304b0ae0a9ed553119d63d1533592f510e0682016a91c914486703d769",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 25,
+          "y": 14
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "59280db8f860ad7b",
+      "fullFrameRowsSha256": "59280db8f860ad7b278e5726b33e1bfd696af23ede3380f5c637e4b99086c501",
+      "index": 18,
+      "level": 2,
+      "levelsCompleted": 1,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "8e34e130515529efdf0b88e6933a0c8781237eb1c12dd832ff1b117e68f74e9e",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "8e34e130515529efdf0b88e6933a0c8781237eb1c12dd832ff1b117e68f74e9e",
+      "sourceScene": "memo:18",
+      "state": "NOT_FINISHED",
+      "stepIndex": 18,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "3f6f955ab27d2915cf5765895c3a2b554c32b1fe1a48150f8b074898101d1380",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 50,
+          "y": 32
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "952ee8baa34b865a",
+      "fullFrameRowsSha256": "952ee8baa34b865ad7692a27857f35da3a0824fd98b7350315eaca5fdb271287",
+      "index": 19,
+      "level": 2,
+      "levelsCompleted": 1,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "260b689eb6dd9c210f87bbef58f3937bf66ddf8bd79980f9963f2f8645458c5d",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "260b689eb6dd9c210f87bbef58f3937bf66ddf8bd79980f9963f2f8645458c5d",
+      "sourceScene": "memo:19",
+      "state": "NOT_FINISHED",
+      "stepIndex": 19,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 12,
+      "animationPacketCanonicalSha256": "8f972500648c8be06431e225c9eda8a7962d07303d9b3d868e7d760927238ccf",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 50,
+          "y": 34
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "d943ee73b2ab3dc7",
+      "fullFrameRowsSha256": "d943ee73b2ab3dc714e438ec6d2aa0c1269f1fa25bd8f18ca0eb0f4a5116be35",
+      "index": 20,
+      "level": 3,
+      "levelsCompleted": 2,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "31a78f1c627799923c5f2798a22b563d55c9b417eceff989ed252f793b27175d",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "31a78f1c627799923c5f2798a22b563d55c9b417eceff989ed252f793b27175d",
+      "sourceScene": "memo:20",
+      "state": "NOT_FINISHED",
+      "stepIndex": 20,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "a2826dd49997fa1f69772c31f186d05df93ef08136524e2ef1b254aa0ae5137f",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 32,
+          "y": 30
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "3f1b8153bd0d4218",
+      "fullFrameRowsSha256": "3f1b8153bd0d4218a8b05a5ffc4e3308f85c8f41be40f3dddd5c456ecb27cd6a",
+      "index": 21,
+      "level": 3,
+      "levelsCompleted": 2,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "c88e8919ccc2eb9d6e7fd1fff93f4f670e3d347197e5264fdb7fef434d15705a",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "c88e8919ccc2eb9d6e7fd1fff93f4f670e3d347197e5264fdb7fef434d15705a",
+      "sourceScene": "memo:21",
+      "state": "NOT_FINISHED",
+      "stepIndex": 21,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "09371c04d5c018561da0ca35c3daaa8518c44727a50b0f8a2dd5b8074b29d177",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 48,
+          "y": 38
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "f7c42cd597e17e63",
+      "fullFrameRowsSha256": "f7c42cd597e17e636fc7e2ee6ad705cc6ed56b237f01311369958df8c88c6eb6",
+      "index": 22,
+      "level": 3,
+      "levelsCompleted": 2,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "66fccf6b984aa228375df6c27cff5ed09bb6603346991fab77af41a6b86cb8ad",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "66fccf6b984aa228375df6c27cff5ed09bb6603346991fab77af41a6b86cb8ad",
+      "sourceScene": "memo:22",
+      "state": "NOT_FINISHED",
+      "stepIndex": 22,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "1127ba936723e15151ec28b3b1ff84bb3436d2e2f4d2f6b729e6b2f30b1d0ff7",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 25,
+          "y": 47
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "0e536d0aab5e541a",
+      "fullFrameRowsSha256": "0e536d0aab5e541aae4870ee50aa084e52b9644487e4bd6ccce249eb8c3cf881",
+      "index": 23,
+      "level": 3,
+      "levelsCompleted": 2,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "4a77fded00b15b05e10dcb4c8a501fbc17cf1d65cbd2950b068260751c95f857",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "4a77fded00b15b05e10dcb4c8a501fbc17cf1d65cbd2950b068260751c95f857",
+      "sourceScene": "memo:23",
+      "state": "NOT_FINISHED",
+      "stepIndex": 23,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "58b7ec7e18f73ff0694db85ed811013a5f9291db9b4e0928bd2d5f52743df993",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 45,
+          "y": 42
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "e322893a31799ac9",
+      "fullFrameRowsSha256": "e322893a31799ac92b7cba587178e1c6376d3b0e5c6bb659bcc8185244a6e2ec",
+      "index": 24,
+      "level": 3,
+      "levelsCompleted": 2,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "8f6f5216de98488ef99985178633517bbcefe725b14785184237414631f8c3a9",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "8f6f5216de98488ef99985178633517bbcefe725b14785184237414631f8c3a9",
+      "sourceScene": "memo:24",
+      "state": "NOT_FINISHED",
+      "stepIndex": 24,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "b14c93c790518fe056ed09cce567e615a4cf81fc4000e4b701c8bde89e151aa5",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 48,
+          "y": 24
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "e67bc667a2455536",
+      "fullFrameRowsSha256": "e67bc667a2455536127f9725097732fdcd8ccfbd3be21175ae416f9e1fae38b9",
+      "index": 25,
+      "level": 3,
+      "levelsCompleted": 2,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "3a37c5c8ec5f76629870e807dd656a31f0278109327012aa8f89b86311a335d5",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "3a37c5c8ec5f76629870e807dd656a31f0278109327012aa8f89b86311a335d5",
+      "sourceScene": "memo:25",
+      "state": "NOT_FINISHED",
+      "stepIndex": 25,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "5a2c76a07b1071901f341257c2243c2b4aab6199c7c08b5e6485791ec19dad67",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 44,
+          "y": 44
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "aaa9f58d040debca",
+      "fullFrameRowsSha256": "aaa9f58d040debca6dcbef622f0caefdeb27a705d125a1fdb377a881534178c5",
+      "index": 26,
+      "level": 3,
+      "levelsCompleted": 2,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "33e6ee3cf65528367164e06ff45b5c256eb80aeabace236d4e4fa5c3ae9a4b14",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "33e6ee3cf65528367164e06ff45b5c256eb80aeabace236d4e4fa5c3ae9a4b14",
+      "sourceScene": "memo:26",
+      "state": "NOT_FINISHED",
+      "stepIndex": 26,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "b333cc4dc7093c7622d099c7340ce2364ef1d974224444aa9553fcc1dd156918",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 46,
+          "y": 21
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "0a84140777376c4b",
+      "fullFrameRowsSha256": "0a84140777376c4b9cd2cb464516902df9c9d542ef85eee6678514b85d524a33",
+      "index": 27,
+      "level": 3,
+      "levelsCompleted": 2,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "80d291aefb0656ad9e983e728ad7b19d6d3ff8981560095d044783db7f5166e5",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "80d291aefb0656ad9e983e728ad7b19d6d3ff8981560095d044783db7f5166e5",
+      "sourceScene": "memo:27",
+      "state": "NOT_FINISHED",
+      "stepIndex": 27,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "b90a640cc4b5c5a2744778806c676c9356b648004b8781b3a14872e540a382d3",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 46,
+          "y": 42
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "b9e9116ca4b43243",
+      "fullFrameRowsSha256": "b9e9116ca4b4324373ae35003decc7190799da2dfc648c4bb2a0759b5443b978",
+      "index": 28,
+      "level": 3,
+      "levelsCompleted": 2,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "6c926c0b76f80edc922352a197bee0e7580ad91eff90bd79ecb64a93b6942046",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "6c926c0b76f80edc922352a197bee0e7580ad91eff90bd79ecb64a93b6942046",
+      "sourceScene": "memo:28",
+      "state": "NOT_FINISHED",
+      "stepIndex": 28,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 3,
+      "animationPacketCanonicalSha256": "9cd67a570a727b34ee555ace2d6d25885e4cc910970b9ced8c79f647fa471594",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 39,
+          "y": 14
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "cee870d444ac8808",
+      "fullFrameRowsSha256": "cee870d444ac8808541fae0cc347b42a123e8bfdff3013656883dccd9ae149a4",
+      "index": 29,
+      "level": 3,
+      "levelsCompleted": 2,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "d929aa85d304b74734d6912a989716941eafc4a552cd07e827f0048a4a5eb62f",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "d929aa85d304b74734d6912a989716941eafc4a552cd07e827f0048a4a5eb62f",
+      "sourceScene": "memo:29",
+      "state": "NOT_FINISHED",
+      "stepIndex": 29,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    },
+    {
+      "animationFrameCount": 12,
+      "animationPacketCanonicalSha256": "89f7f8e7a21467ed26394aef58a1db9b2d965d32b193959b46639bd6f47b6d56",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 27,
+          "y": 47
+        }
+      },
+      "commandMatches": true,
+      "exactFieldsMatched": [
+        "frame_rows",
+        "frame_packet",
+        "level",
+        "levels_completed",
+        "state",
+        "step_index",
+        "frame_hash"
+      ],
+      "frameHash": "d4f062fd1ddc9227",
+      "fullFrameRowsSha256": "d4f062fd1ddc9227846dbcf8520cd36a90586765bb30e0e47c39ff64bb8732d2",
+      "index": 30,
+      "level": 4,
+      "levelsCompleted": 3,
+      "nativeAvailableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeSourceDomainProjectionCanonicalSha256": "c12907a792344d3e93325579293d1f72ed2a33b9c7c24affd17f70edfcaf8de9",
+      "sourceAvailableActionRefs": [
+        "ACTION6"
+      ],
+      "sourceDomainProjectionMatched": true,
+      "sourcePublicCanonicalSha256": "c12907a792344d3e93325579293d1f72ed2a33b9c7c24affd17f70edfcaf8de9",
+      "sourceScene": "memo:30",
+      "state": "NOT_FINISHED",
+      "stepIndex": 30,
+      "strictDifferingFields": [
+        "available_action_refs"
+      ],
+      "strictPacketMatched": false
+    }
+  ],
+  "comparisonMethod": {
+    "commands": "Exact JSON structure equality for action_ref and data, also cross-checked against native campaign action records. No action substitution or data normalization.",
+    "exactPublicFields": [
+      "frame_rows",
+      "frame_packet",
+      "level",
+      "levels_completed",
+      "state",
+      "step_index",
+      "frame_hash"
+    ],
+    "excludedSourceSuffix": {
+      "additionalOriginalFixtureActions": 2,
+      "reason": "The current campaign stops at its requested three-level target; the old fixture continues into later-level exploration. Only the common three-level prefix is compared."
+    },
+    "limitedDomainProjection": {
+      "addedActionSemanticsInferred": false,
+      "field": "available_action_refs",
+      "native": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "rawDomainEqualityClaimed": false,
+      "reason": "The historical fixture exposes a narrower public input domain than the fresh native campaign. The added ACTION7 is never issued in either compared trajectory.",
+      "rule": "For the projected comparison only, retain native references also declared in the original fixture packet, preserving order. Keep both raw domains and the strict mismatch at every checkpoint.",
+      "source": [
+        "ACTION6"
+      ]
+    },
+    "objectKeyOrder": "JSON object member ordering is semantically ignored; array ordering is retained. Stored structural hashes use sorted keys and compact JSON.",
+    "pixelAndAnimationPolicy": "All pixel values, image dimensions, animation frame counts and frame ordering must match exactly. No raster, timing-frame or score normalization."
+  },
+  "inputs": {
+    "historicalOriginalCallerComparison": {
+      "bytes": 22968,
+      "path": "docs/migration/native-campaigns-v32/memo-original-comparison.json",
+      "sha256": "9e9828f90a3b3bf7c4c6f9a7659e19c11c8edba75837fb3abf31c147b4ae66c1"
+    },
+    "nativeCampaign": {
+      "bytes": 231563,
+      "path": "docs/migration/native-campaigns-v40/memo-three-levels.json",
+      "sha256": "adfeca42d42a0da6e3865e4994537bb775098a369b797c6ee904762d15a9e4a2"
+    },
+    "nativePublicTrace": {
+      "bytes": 23419,
+      "path": "docs/migration/native-campaigns-v40/memo-public-trace.json.gz",
+      "sha256": "c483459214c726a4c0faae04f5732637a054e39f37b412e91eb52dd4831a3fde"
+    },
+    "originalFixture": {
+      "bytes": 6525592,
+      "path": "tests/fixtures/v6-occurrence-reference.json",
+      "sha256": "3e6b161eeba7539dc3829d3657928b544328c79dfae2c5e594c03d814c755bb9"
+    }
+  },
+  "nativeCoordinationReceipts": [
+    {
+      "decisionRevision": 7,
+      "entries": [
+        {
+          "deferred_proposal_id": "animated-contact:c21b15fa74fb163b7bb87ba09c2dc4a9a7e83e169f3dff2c985ee6d30e1a483c",
+          "guard_reason": "public_occurrence_bound",
+          "learned_preparation": {
+            "evidence_refs": [
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:3:frame:786843d467525a9e",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:4:frame:a9883a56e9c80766",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:5:frame:2bf57aeaf6d81911",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:6:frame:0454a8cfe43f777b",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:7:frame:ed6639d6b8ac62c7"
+            ],
+            "kind": "occurrence_correspondence",
+            "model_ids": [
+              "occurrence-model:ffb92454af27d0c745eb",
+              "occurrence-model:64216792697ebcc03027",
+              "occurrence-model:28085dd7fdac3d730cc6",
+              "occurrence-model:c7519c2b0afe7d95839e"
+            ],
+            "observation_ref": "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:7:frame:ed6639d6b8ac62c7",
+            "qualification": "Unique convergent current occurrence prediction from retained source-threshold evidence without counterexamples; current point, WHY/ACT and official outcome remain separate requirements.",
+            "status": "conditional_acquired_preparation"
+          },
+          "model_id": "occurrence-model:ffb92454af27d0c745eb",
+          "observation_ref": "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:7:frame:ed6639d6b8ac62c7",
+          "preferred_proposal_id": "C_occurrence_recall_418ffb4e41b1a39d9994",
+          "rule": "retained_learned_preparation_before_unlearned_invitation",
+          "scope": "Native coordination extension; conditional learned preparation, not an original Python selection rule.",
+          "source_state_ref": "family_state:public_occurrence_recall",
+          "source_state_revision": 7
+        }
+      ],
+      "prefixId": "prefix_evidence:7"
+    },
+    {
+      "decisionRevision": 10,
+      "entries": [
+        {
+          "deferred_proposal_id": "animated-contact:ee3dfe7047e00100b1ce52c827cfdd320c83866ab9e12a5c9098c382bd31e1f7",
+          "guard_reason": "public_occurrence_bound",
+          "learned_preparation": {
+            "evidence_refs": [
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:3:frame:786843d467525a9e",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:4:frame:a9883a56e9c80766",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:5:frame:2bf57aeaf6d81911",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:6:frame:0454a8cfe43f777b",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:7:frame:ed6639d6b8ac62c7",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:8:frame:75107716fb15f9d4",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:9:frame:bec04e5c250e8217",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:10:frame:70a86d4f7133ece7"
+            ],
+            "kind": "occurrence_correspondence",
+            "model_ids": [
+              "occurrence-model:d40f66644093d1e7150c",
+              "occurrence-model:020910fa43569a0dcc67",
+              "occurrence-model:71aa6ade80084c9b03fe",
+              "occurrence-model:5e75f5d6f49af9b8ee5c"
+            ],
+            "observation_ref": "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:10:frame:70a86d4f7133ece7",
+            "qualification": "Unique convergent current occurrence prediction from retained source-threshold evidence without counterexamples; current point, WHY/ACT and official outcome remain separate requirements.",
+            "status": "conditional_acquired_preparation"
+          },
+          "model_id": "occurrence-model:d40f66644093d1e7150c",
+          "observation_ref": "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:10:frame:70a86d4f7133ece7",
+          "preferred_proposal_id": "C_occurrence_recall_6c7ff410ce5095d69203",
+          "rule": "retained_learned_preparation_before_unlearned_invitation",
+          "scope": "Native coordination extension; conditional learned preparation, not an original Python selection rule.",
+          "source_state_ref": "family_state:public_occurrence_recall",
+          "source_state_revision": 10
+        }
+      ],
+      "prefixId": "prefix_evidence:10"
+    },
+    {
+      "decisionRevision": 14,
+      "entries": [
+        {
+          "deferred_proposal_id": "animated-contact:b6803c3465be74cec7b75a2c16726b2782274c1a18c3cd18a0f9fc42b852982b",
+          "guard_reason": "public_occurrence_bound",
+          "learned_preparation": {
+            "evidence_refs": [
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:3:frame:786843d467525a9e",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:4:frame:a9883a56e9c80766",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:5:frame:2bf57aeaf6d81911",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:6:frame:0454a8cfe43f777b",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:7:frame:ed6639d6b8ac62c7",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:8:frame:75107716fb15f9d4",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:9:frame:bec04e5c250e8217",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:10:frame:70a86d4f7133ece7",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:11:frame:e8da1a7ab4fdc419",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:13:frame:552c56f5bd5dd913",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:14:frame:18ae74d960530bac"
+            ],
+            "kind": "occurrence_correspondence",
+            "model_ids": [
+              "occurrence-model:f7652f46dc0614e4b5be",
+              "occurrence-model:36fd8f2014f388d98242",
+              "occurrence-model:c9d2d9381e0bb782ea3a",
+              "occurrence-model:c6e655fd8054294b5f35",
+              "occurrence-model:c588c3134451e28d0031",
+              "occurrence-model:9d85c61ecb071bd7bad4"
+            ],
+            "observation_ref": "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:14:frame:18ae74d960530bac",
+            "qualification": "Unique convergent current occurrence prediction from retained source-threshold evidence without counterexamples; current point, WHY/ACT and official outcome remain separate requirements.",
+            "status": "conditional_acquired_preparation"
+          },
+          "model_id": "occurrence-model:f7652f46dc0614e4b5be",
+          "observation_ref": "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:14:frame:18ae74d960530bac",
+          "preferred_proposal_id": "C_occurrence_recall_3075161caa96062ead77",
+          "rule": "retained_learned_preparation_before_unlearned_invitation",
+          "scope": "Native coordination extension; conditional learned preparation, not an original Python selection rule.",
+          "source_state_ref": "family_state:public_occurrence_recall",
+          "source_state_revision": 14
+        }
+      ],
+      "prefixId": "prefix_evidence:14"
+    },
+    {
+      "decisionRevision": 15,
+      "entries": [
+        {
+          "deferred_proposal_id": "animated-contact:7905ee4975264990b4ac9699426b6c5fe262f2f51e729fd59007309b4c6115d3",
+          "guard_reason": "public_occurrence_bound",
+          "learned_preparation": {
+            "evidence_refs": [
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:3:frame:786843d467525a9e",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:4:frame:a9883a56e9c80766",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:5:frame:2bf57aeaf6d81911",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:6:frame:0454a8cfe43f777b",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:7:frame:ed6639d6b8ac62c7",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:8:frame:75107716fb15f9d4",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:9:frame:bec04e5c250e8217",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:10:frame:70a86d4f7133ece7",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:11:frame:e8da1a7ab4fdc419",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:13:frame:552c56f5bd5dd913",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:14:frame:18ae74d960530bac",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:15:frame:62707655a08915d6"
+            ],
+            "kind": "occurrence_correspondence",
+            "model_ids": [
+              "occurrence-model:e2b92e2f2d9da30ad16c",
+              "occurrence-model:596277f3d3dcda1caa71",
+              "occurrence-model:ac4a95efa02aecf60faf",
+              "occurrence-model:bf7e78ad6087249c8cfb"
+            ],
+            "observation_ref": "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:15:frame:62707655a08915d6",
+            "qualification": "Unique convergent current occurrence prediction from retained source-threshold evidence without counterexamples; current point, WHY/ACT and official outcome remain separate requirements.",
+            "status": "conditional_acquired_preparation"
+          },
+          "model_id": "occurrence-model:e2b92e2f2d9da30ad16c",
+          "observation_ref": "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:15:frame:62707655a08915d6",
+          "preferred_proposal_id": "C_occurrence_recall_64839ee0ad4e51f7c543",
+          "rule": "retained_learned_preparation_before_unlearned_invitation",
+          "scope": "Native coordination extension; conditional learned preparation, not an original Python selection rule.",
+          "source_state_ref": "family_state:public_occurrence_recall",
+          "source_state_revision": 15
+        }
+      ],
+      "prefixId": "prefix_evidence:15"
+    },
+    {
+      "decisionRevision": 20,
+      "entries": [
+        {
+          "deferred_proposal_id": "animated-contact:d770ba1907c6e24028ef2d45492e4c511217e4f8ac750bcc37aef666bb48e844",
+          "guard_reason": "public_occurrence_bound",
+          "learned_preparation": {
+            "evidence_refs": [
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:3:frame:786843d467525a9e",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:4:frame:a9883a56e9c80766",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:5:frame:2bf57aeaf6d81911",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:6:frame:0454a8cfe43f777b",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:7:frame:ed6639d6b8ac62c7",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:8:frame:75107716fb15f9d4",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:9:frame:bec04e5c250e8217",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:10:frame:70a86d4f7133ece7",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:11:frame:e8da1a7ab4fdc419",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:13:frame:552c56f5bd5dd913",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:14:frame:18ae74d960530bac",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:15:frame:62707655a08915d6",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:16:frame:0f3fe5b1dd859ebb",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:17:frame:380853c579d35dfb",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:18:frame:8ed4fd0eb36ac443",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:19:frame:59280db8f860ad7b",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:20:frame:952ee8baa34b865a"
+            ],
+            "kind": "occurrence_correspondence",
+            "model_ids": [
+              "occurrence-model:a16d7da22d26e7a7b97a",
+              "occurrence-model:8039504458095e665df4",
+              "occurrence-model:207edffeba8a2dbc53e1",
+              "occurrence-model:b1114dbdfd43da4a05c7"
+            ],
+            "observation_ref": "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:20:frame:952ee8baa34b865a",
+            "qualification": "Unique convergent current occurrence prediction from retained source-threshold evidence without counterexamples; current point, WHY/ACT and official outcome remain separate requirements.",
+            "status": "conditional_acquired_preparation"
+          },
+          "model_id": "occurrence-model:a16d7da22d26e7a7b97a",
+          "observation_ref": "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:20:frame:952ee8baa34b865a",
+          "preferred_proposal_id": "C_occurrence_recall_4cf649280ea45a473511",
+          "rule": "retained_learned_preparation_before_unlearned_invitation",
+          "scope": "Native coordination extension; conditional learned preparation, not an original Python selection rule.",
+          "source_state_ref": "family_state:public_occurrence_recall",
+          "source_state_revision": 20
+        }
+      ],
+      "prefixId": "prefix_evidence:20"
+    },
+    {
+      "decisionRevision": 27,
+      "entries": [
+        {
+          "deferred_proposal_id": "animated-contact:4b8442c87bee2a64987a42bf608e99003bfa438ef003ba47a618805d7f821243",
+          "guard_reason": "public_occurrence_bound",
+          "learned_preparation": {
+            "evidence_refs": [
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:3:frame:786843d467525a9e",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:4:frame:a9883a56e9c80766",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:5:frame:2bf57aeaf6d81911",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:6:frame:0454a8cfe43f777b",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:7:frame:ed6639d6b8ac62c7",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:8:frame:75107716fb15f9d4",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:9:frame:bec04e5c250e8217",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:10:frame:70a86d4f7133ece7",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:11:frame:e8da1a7ab4fdc419",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:13:frame:552c56f5bd5dd913",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:14:frame:18ae74d960530bac",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:15:frame:62707655a08915d6",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:16:frame:0f3fe5b1dd859ebb",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:17:frame:380853c579d35dfb",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:18:frame:8ed4fd0eb36ac443",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:19:frame:59280db8f860ad7b",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:20:frame:952ee8baa34b865a",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:3:revision:21:frame:d943ee73b2ab3dc7",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:3:revision:23:frame:f7c42cd597e17e63",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:3:revision:24:frame:0e536d0aab5e541a",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:3:revision:25:frame:e322893a31799ac9",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:3:revision:26:frame:e67bc667a2455536",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:3:revision:27:frame:aaa9f58d040debca"
+            ],
+            "kind": "occurrence_correspondence",
+            "model_ids": [
+              "occurrence-model:f77127d28d0f5cc0724c",
+              "occurrence-model:f4b2159ec74d37e86876",
+              "occurrence-model:20efdaf9373adbcd5bac",
+              "occurrence-model:ff118df5b691ef6bab6a"
+            ],
+            "observation_ref": "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:3:revision:27:frame:aaa9f58d040debca",
+            "qualification": "Unique convergent current occurrence prediction from retained source-threshold evidence without counterexamples; current point, WHY/ACT and official outcome remain separate requirements.",
+            "status": "conditional_acquired_preparation"
+          },
+          "model_id": "occurrence-model:f77127d28d0f5cc0724c",
+          "observation_ref": "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:3:revision:27:frame:aaa9f58d040debca",
+          "preferred_proposal_id": "C_occurrence_recall_ff6f6ad0e105fca5fdfc",
+          "rule": "retained_learned_preparation_before_unlearned_invitation",
+          "scope": "Native coordination extension; conditional learned preparation, not an original Python selection rule.",
+          "source_state_ref": "family_state:public_occurrence_recall",
+          "source_state_revision": 27
+        }
+      ],
+      "prefixId": "prefix_evidence:27"
+    },
+    {
+      "decisionRevision": 30,
+      "entries": [
+        {
+          "deferred_proposal_id": "animated-contact:7f698c8ed6c579a747f4d9b79fb225d0374e837a86f140549575fdb2142fa74c",
+          "guard_reason": "public_occurrence_bound",
+          "learned_preparation": {
+            "evidence_refs": [
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:3:frame:786843d467525a9e",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:4:frame:a9883a56e9c80766",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:5:frame:2bf57aeaf6d81911",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:6:frame:0454a8cfe43f777b",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:7:frame:ed6639d6b8ac62c7",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:8:frame:75107716fb15f9d4",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:9:frame:bec04e5c250e8217",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:1:revision:10:frame:70a86d4f7133ece7",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:11:frame:e8da1a7ab4fdc419",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:13:frame:552c56f5bd5dd913",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:14:frame:18ae74d960530bac",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:15:frame:62707655a08915d6",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:16:frame:0f3fe5b1dd859ebb",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:17:frame:380853c579d35dfb",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:18:frame:8ed4fd0eb36ac443",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:19:frame:59280db8f860ad7b",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:2:revision:20:frame:952ee8baa34b865a",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:3:revision:21:frame:d943ee73b2ab3dc7",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:3:revision:23:frame:f7c42cd597e17e63",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:3:revision:24:frame:0e536d0aab5e541a",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:3:revision:25:frame:e322893a31799ac9",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:3:revision:26:frame:e67bc667a2455536",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:3:revision:27:frame:aaa9f58d040debca",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:3:revision:28:frame:0a84140777376c4b",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:3:revision:29:frame:b9e9116ca4b43243",
+              "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:3:revision:30:frame:cee870d444ac8808"
+            ],
+            "kind": "occurrence_correspondence",
+            "model_ids": [
+              "occurrence-model:8b9d96533d47e6661651",
+              "occurrence-model:ddb57909b7bcc586f98e",
+              "occurrence-model:0fa9b307a813f7453e99",
+              "occurrence-model:b25b588ffa0e09165100"
+            ],
+            "observation_ref": "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:3:revision:30:frame:cee870d444ac8808",
+            "qualification": "Unique convergent current occurrence prediction from retained source-threshold evidence without counterexamples; current point, WHY/ACT and official outcome remain separate requirements.",
+            "status": "conditional_acquired_preparation"
+          },
+          "model_id": "occurrence-model:8b9d96533d47e6661651",
+          "observation_ref": "sra-v6-be1952a6-79e1-4fee-8db3-350fe4b4934d:epoch:3:revision:30:frame:cee870d444ac8808",
+          "preferred_proposal_id": "C_occurrence_recall_0e4ab4e39c58218a4c59",
+          "rule": "retained_learned_preparation_before_unlearned_invitation",
+          "scope": "Native coordination extension; conditional learned preparation, not an original Python selection rule.",
+          "source_state_ref": "family_state:public_occurrence_recall",
+          "source_state_revision": 30
+        }
+      ],
+      "prefixId": "prefix_evidence:30"
+    }
+  ],
+  "qualification": {
+    "comparison": "Fresh native common-caller campaign compared with the existing unchanged-original isolated recall-component fixture through the third official level boundary.",
+    "execution": "Offline structural comparison only; no game execution and no new physical action.",
+    "fullOriginalCallerParity": false,
+    "fullV6Parity": false,
+    "gameEngineRead": false,
+    "gameSourceRead": false,
+    "inputScope": "Previously recorded public commands, canonical frames, complete public animation packets, official metadata, source agent provenance and campaign receipts.",
+    "originalFixtureRegenerated": false,
+    "originalPythonExecutedForThisComparison": false,
+    "physicalActionsIssued": 0,
+    "privateGameStateRead": false,
+    "referenceSourceModified": false,
+    "scopeLimit": "Preservation of the original recall component mechanism on this 30-action public trajectory. The unchanged original full caller historically selected an unlearned invitation at action 7 and failed. The v40 caller uses an explicitly declared native priority extension."
+  },
+  "schema": "logos-engine.v40.original-recall-component-comparison.v1",
+  "sourceVerification": {
+    "allFixtureSourcesMatchManifestAndBytes": true,
+    "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "files": [
+      {
+        "actualSha256": "90e98ecc8aee0c6081992d2af8809eac11ef5ae546f8976d62c822685047fb67",
+        "fixtureExpectedSha256": "90e98ecc8aee0c6081992d2af8809eac11ef5ae546f8976d62c822685047fb67",
+        "manifestExpectedSha256": "90e98ecc8aee0c6081992d2af8809eac11ef5ae546f8976d62c822685047fb67",
+        "matched": true,
+        "path": "agents/yf_arc3_v6/laya_proto/occurrence_scene.py"
+      },
+      {
+        "actualSha256": "ec9af71e6b2109cf0d2782c2502b4edad70ae46339762268ac43b62df9211acc",
+        "fixtureExpectedSha256": "ec9af71e6b2109cf0d2782c2502b4edad70ae46339762268ac43b62df9211acc",
+        "manifestExpectedSha256": "ec9af71e6b2109cf0d2782c2502b4edad70ae46339762268ac43b62df9211acc",
+        "matched": true,
+        "path": "agents/yf_arc3_v6/laya_proto/common_occurrence_recall.py"
+      },
+      {
+        "actualSha256": "16a8af8e5a4742e4f99cd2c4ddbe4d630720c8f26741a1f27f770bd3e5fb3162",
+        "fixtureExpectedSha256": "16a8af8e5a4742e4f99cd2c4ddbe4d630720c8f26741a1f27f770bd3e5fb3162",
+        "manifestExpectedSha256": "16a8af8e5a4742e4f99cd2c4ddbe4d630720c8f26741a1f27f770bd3e5fb3162",
+        "matched": true,
+        "path": "agents/yf_arc3_v6/laya_proto/occurrence_recall_access.py"
+      },
+      {
+        "actualSha256": "27c5d4a3a7e728dbd5ed0cd72dd65ab3babc5f5bf37ae0f30f24d26c64faac3b",
+        "fixtureExpectedSha256": "27c5d4a3a7e728dbd5ed0cd72dd65ab3babc5f5bf37ae0f30f24d26c64faac3b",
+        "manifestExpectedSha256": "27c5d4a3a7e728dbd5ed0cd72dd65ab3babc5f5bf37ae0f30f24d26c64faac3b",
+        "matched": true,
+        "path": "agents/yf_arc3_v6/laya_proto/common_program_composition.py"
+      },
+      {
+        "actualSha256": "bdbe7c6777dc68f0da0018335d7cc45f5b03b7d2c122c103c56080189f9e3c35",
+        "fixtureExpectedSha256": "bdbe7c6777dc68f0da0018335d7cc45f5b03b7d2c122c103c56080189f9e3c35",
+        "manifestExpectedSha256": "bdbe7c6777dc68f0da0018335d7cc45f5b03b7d2c122c103c56080189f9e3c35",
+        "matched": true,
+        "path": "agents/yf_arc3_v6/laya_proto/program_respondent_access.py"
+      },
+      {
+        "actualSha256": "cbe5b77563dfb01d947cbbe1e1b27212de29cc4eadda60016b0ff0a1e6b5eb91",
+        "fixtureExpectedSha256": "cbe5b77563dfb01d947cbbe1e1b27212de29cc4eadda60016b0ff0a1e6b5eb91",
+        "manifestExpectedSha256": "cbe5b77563dfb01d947cbbe1e1b27212de29cc4eadda60016b0ff0a1e6b5eb91",
+        "matched": true,
+        "path": "agents/yf_arc3_v6/laya_proto/program_composition_access.py"
+      },
+      {
+        "actualSha256": "cd17047cb274db95c33e23e12402289b9b1ac0d3ce4f19adb789e976ee3a4900",
+        "fixtureExpectedSha256": "cd17047cb274db95c33e23e12402289b9b1ac0d3ce4f19adb789e976ee3a4900",
+        "manifestExpectedSha256": "cd17047cb274db95c33e23e12402289b9b1ac0d3ce4f19adb789e976ee3a4900",
+        "matched": true,
+        "path": "agents/yf_arc3_v6/laya_proto/marked_collection_access.py"
+      },
+      {
+        "actualSha256": "c4d2dc0c55850f96e2b774950842a1595c4226c7830b00e82e31b031aee81003",
+        "fixtureExpectedSha256": "c4d2dc0c55850f96e2b774950842a1595c4226c7830b00e82e31b031aee81003",
+        "manifestExpectedSha256": "c4d2dc0c55850f96e2b774950842a1595c4226c7830b00e82e31b031aee81003",
+        "matched": true,
+        "path": "agents/yf_arc3_v6/laya_proto/observed_program_effects.py"
+      },
+      {
+        "actualSha256": "f5fc76010a642de99452efe409a85f968839b54bfc37adeefff66fed4e243a4f",
+        "fixtureExpectedSha256": "f5fc76010a642de99452efe409a85f968839b54bfc37adeefff66fed4e243a4f",
+        "manifestExpectedSha256": "f5fc76010a642de99452efe409a85f968839b54bfc37adeefff66fed4e243a4f",
+        "matched": true,
+        "path": "agents/yf_arc3_v6/laya_proto/common_crossed_prefix.py"
+      },
+      {
+        "actualSha256": "bc1e5599ea5be873f16dd37570fa2e998ec29bcc670dc55433c50c45f8a60fcd",
+        "fixtureExpectedSha256": "bc1e5599ea5be873f16dd37570fa2e998ec29bcc670dc55433c50c45f8a60fcd",
+        "manifestExpectedSha256": "bc1e5599ea5be873f16dd37570fa2e998ec29bcc670dc55433c50c45f8a60fcd",
+        "matched": true,
+        "path": "agents/yf_arc3_v6/laya_proto/common_supported_lines.py"
+      },
+      {
+        "actualSha256": "fb91aa26449a1633a4fa23e7089d8e775645c2775b5c3be295e7c4bcf1ceaaca",
+        "fixtureExpectedSha256": "fb91aa26449a1633a4fa23e7089d8e775645c2775b5c3be295e7c4bcf1ceaaca",
+        "manifestExpectedSha256": "fb91aa26449a1633a4fa23e7089d8e775645c2775b5c3be295e7c4bcf1ceaaca",
+        "matched": true,
+        "path": "agents/yf_arc3_v6/laya_proto/common_repeated_lines.py"
+      },
+      {
+        "actualSha256": "10ab6ba513d3cc0b4dbf96868d8c716eee449068dba3f2fcdf06d5b35566609e",
+        "fixtureExpectedSha256": "10ab6ba513d3cc0b4dbf96868d8c716eee449068dba3f2fcdf06d5b35566609e",
+        "manifestExpectedSha256": "10ab6ba513d3cc0b4dbf96868d8c716eee449068dba3f2fcdf06d5b35566609e",
+        "matched": true,
+        "path": "agents/yf_arc3_v6/laya_proto/terminal_composition.py"
+      },
+      {
+        "actualSha256": "1017b130cb91f799ab5bdb2f26789c2645078d9b9d226469b3915d4a7262eaac",
+        "fixtureExpectedSha256": "1017b130cb91f799ab5bdb2f26789c2645078d9b9d226469b3915d4a7262eaac",
+        "manifestExpectedSha256": "1017b130cb91f799ab5bdb2f26789c2645078d9b9d226469b3915d4a7262eaac",
+        "matched": true,
+        "path": "agents/yf_arc3_v6/laya_proto/geometric_observer.py"
+      },
+      {
+        "actualSha256": "9b09085eb708c084d82682b13848666ef1ca5f3fc6c10861d96e139228af927a",
+        "fixtureExpectedSha256": "9b09085eb708c084d82682b13848666ef1ca5f3fc6c10861d96e139228af927a",
+        "manifestExpectedSha256": "9b09085eb708c084d82682b13848666ef1ca5f3fc6c10861d96e139228af927a",
+        "matched": true,
+        "path": "agents/yf_arc3_v6/laya_proto/neutral_observer.py"
+      },
+      {
+        "actualSha256": "5b8f2f84af9e946e939a53e4f4c70c1eea49e5e2f8017bac547537380e2a7785",
+        "fixtureExpectedSha256": "5b8f2f84af9e946e939a53e4f4c70c1eea49e5e2f8017bac547537380e2a7785",
+        "manifestExpectedSha256": "5b8f2f84af9e946e939a53e4f4c70c1eea49e5e2f8017bac547537380e2a7785",
+        "matched": true,
+        "path": "agents/yf_arc3_v6/laya_proto/observed_input_domain.py"
+      }
+    ],
+    "fixtureDeclaredSourceCount": 15,
+    "fixtureScope": "Public-occurrence entry point, real MEMO family trajectory through its L4 refusal and controlled inherited observation/digest cases; not all other ObservedCompositionConstraint questions",
+    "manifestPath": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+    "manifestSha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+  },
+  "status": "passed_with_explicit_public_action_domain_extension",
+  "summary": {
+    "actionsPerCompletedLevel": [
+      10,
+      10,
+      10
+    ],
+    "canonicalFramesMatched": 31,
+    "completeAnimationPacketsMatched": 31,
+    "exactCommandsMatched": 30,
+    "individualAnimationFramesMatched": 118,
+    "interpretation": "The 30 choices and every displayed return preserve the original isolated recall trajectory. Their selection by the complete caller is a native coordinator improvement, not a claim that the unchanged original caller followed this trajectory.",
+    "nativeAllActionsFromRecallFamily": true,
+    "nativeDeclaredInvitationDeferrals": 7,
+    "nativeFinal": {
+      "actions": 30,
+      "level": 4,
+      "levelsCompleted": 3,
+      "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.10.0",
+      "reason": "target_levels_completed",
+      "sessions": 1,
+      "state": "NOT_FINISHED"
+    },
+    "nativeSourceDigest": "964d11fd1f5d571e32120beca763bd1db4c46618a08ede217ebfb19ea758cb01",
+    "nativeSourceUnchangedDuringRun": true,
+    "officialBoundariesMatched": [
+      {
+        "afterAction": 10,
+        "completedLevels": 1,
+        "state": "NOT_FINISHED"
+      },
+      {
+        "afterAction": 20,
+        "completedLevels": 2,
+        "state": "NOT_FINISHED"
+      },
+      {
+        "afterAction": 30,
+        "completedLevels": 3,
+        "state": "NOT_FINISHED"
+      }
+    ],
+    "rawPacketsDifferingOnlyByAvailableActionRefs": 31,
+    "rawPacketsIdentical": 0,
+    "sourceDomainProjectedPacketsMatched": 31
+  }
+}

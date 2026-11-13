@@ -1,0 +1,49 @@
+{
+  "schema": "logos-engine.synthetic-witness-diagnostic.v1",
+  "qualification": "One controlled synthetic diagnostic of matcher overhead, four alternating batches of 100 calls per implementation for each data shape, preceded by 20 warmup calls each. All measured batches retained. No official loop, game, budget threshold, profile or source oracle. Not evidence that the release budget is closed.",
+  "originalScratchResult": {
+    "path": "/workspace/scratch/c4dd29871d33/witness-reflect-diagnostic.json",
+    "sha256": "d7cad91574febb22355704830f6006fadfd04dfe97a1e6e053bde017a39edb11",
+    "bytes": 2584
+  },
+  "rawResult": {
+    "path": "docs/migration/lot3b-cost-evidence/diagnostic/witness-reflect-synthetic-raw.json",
+    "sha256": "d7cad91574febb22355704830f6006fadfd04dfe97a1e6e053bde017a39edb11",
+    "bytes": 2584
+  },
+  "rawCopyByteExact": true,
+  "originalSource": {
+    "manifest": "docs/migration/lot3b-cost-evidence/final-v2/source-manifest.json",
+    "digest": "f0ba85e80fbe7543f2e2360c6b6e846ae76839cb6ede0e9c022d31b56f46cece",
+    "fileCount": 249
+  },
+  "replayScript": {
+    "path": "docs/migration/lot3b-cost-evidence/diagnostic/witness-reflect-synthetic-replay.mjs",
+    "sha256": "45bbb33b7fe5859f26f30bc68cba301f5d0f968e0c77a8440688955c7995b0c1",
+    "bytes": 4408
+  },
+  "replayProvenance": "Reconstructed from the original executed stdin tool call. Matcher, fixtures, warmups, rounds and timed loops retained; only file locations are parameterized and original helper/native-owned hashes checked. The reconstruction has not been executed.",
+  "reexecutedDuringPersistence": false,
+  "summaries": [
+    {
+      "case": "grid64",
+      "callsPerBatch": 100,
+      "retainedBatchesPerImplementation": 4,
+      "medianBatchMs": {
+        "current": 88.466646,
+        "alternative": 65.41788949999997
+      },
+      "relativeChange": -0.26053611775900287
+    },
+    {
+      "case": "records",
+      "callsPerBatch": 100,
+      "retainedBatchesPerImplementation": 4,
+      "medianBatchMs": {
+        "current": 56.82022100000006,
+        "alternative": 21.859529500000008
+      },
+      "relativeChange": -0.6152860880284154
+    }
+  ]
+}

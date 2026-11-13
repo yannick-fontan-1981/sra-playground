@@ -1,0 +1,14 @@
+{
+  "schema": "logos-engine.retained-publication-verifier-failure.v1",
+  "status": "failed",
+  "exitCode": 1,
+  "receipt": {
+    "path": "docs/migration/lot5b-evidence/publication/final-source-build-verification.json",
+    "sha256": "3802dda3bd391f9108d12245a6dffc2627dbfe00915b69bd1c9b870908eb568f",
+    "bytes": 9837
+  },
+  "reason": "The ignored raw aggregation-failure.log was absent from the publication checkout.",
+  "resolutionReceipt": "docs/migration/lot5b-evidence/publication/ignored-proof-restoration.json",
+  "successfulSubsequentReceipt": "docs/migration/lot5b-evidence/publication/final-source-build-verification-02.json",
+  "qualification": "Retains actual first exit1. Only a byte-identical ignored diagnostic log was restored; no native/test/build/timing input changed."
+}

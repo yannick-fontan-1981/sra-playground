@@ -1,0 +1,67 @@
+{
+  "schema": "logos-engine.native-browser-verification.v1",
+  "recordedAt": "2026-11-09T20:28:34.790315+00:00",
+  "game": "LS20",
+  "mode": "SRA Agent Native TS",
+  "transport": "actual managed-preview browser UI",
+  "sourceManifest": {
+    "path": "docs/migration/lot2c-evidence/final/source-manifest.json",
+    "bytes": 28569,
+    "sha256": "63ee61cba9093c5b0f96cfdf7491e62decf3b932ff2a20cfbe5be983acbdafc0"
+  },
+  "nativeSourceManifestDigest": "3cd17565b114a40ed71870bf8d7875a1b91102440b92d14a9258bfa98d4f7779",
+  "initial": {
+    "level": 1,
+    "actions": 0,
+    "levelsSolved": 0,
+    "completedPlans": 0
+  },
+  "procedure": [
+    "Select LS20 using the game selector, without a level jump.",
+    "Select SRA Agent Native TS; initial counters all zero.",
+    "Use Run to next level three times in the same session; wait for each natural boundary.",
+    "Do not supply manual game actions, prepared state or replayed returns; leave the inspector closed."
+  ],
+  "observedBoundaries": [
+    {
+      "levelEntered": 2,
+      "actions": 17,
+      "levelsSolved": 1,
+      "completedPlans": 11
+    },
+    {
+      "levelEntered": 3,
+      "actions": 84,
+      "levelsSolved": 2,
+      "completedPlans": 39
+    },
+    {
+      "levelEntered": 4,
+      "actions": 142,
+      "levelsSolved": 3,
+      "completedPlans": 58
+    }
+  ],
+  "final": {
+    "level": 4,
+    "actions": 142,
+    "levelsSolved": 3,
+    "completedPlans": 58,
+    "statusText": "Level completed.",
+    "runButtonEnabled": true,
+    "pauseDisabled": true,
+    "inspectorExpanded": false
+  },
+  "url": "http://127.0.0.1:4173/?game=LS20&level=4",
+  "screenshot": {
+    "path": "docs/migration/lot2c-evidence/final/browser/lot2c-ls20-three-levels.jpg",
+    "bytes": 72138,
+    "sha256": "441efb15dc56d9c42c010786cfbe5d79096a0540892dc54a450a525ed360dd45"
+  },
+  "accessibility": {
+    "path": "docs/migration/lot2c-evidence/final/browser/lot2c-ls20-three-levels-ax.txt",
+    "bytes": 1073,
+    "sha256": "d505d3a1a25be1632caf6e2def4148d81228229aa80c18f6d64eab4f29fb6b65"
+  },
+  "qualification": "Independent live managed-preview UI verification of the same native source. Counts are observed at each natural level boundary, with no session reset. This is not a new opaque-host campaign report, a full-game WIN claim, a per-command byte comparison or a controlled browser performance measurement. Screenshot bytes are copied unchanged from the browser."
+}

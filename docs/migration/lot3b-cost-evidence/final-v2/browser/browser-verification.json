@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "observedAtUtc": "2026-11-10T01:23:01.500689+00:00",
+  "status": "passed",
+  "surface": "managed Vite development preview using the frozen native TypeScript source; not a test of the built dist worker asset",
+  "url": "http://127.0.0.1:4173/?game=CATR&level=4",
+  "nativeVersion": "0.40.0",
+  "nativeSourceSha256": "f0ba85e80fbe7543f2e2360c6b6e846ae76839cb6ede0e9c022d31b56f46cece",
+  "game": "CATR",
+  "initial": {
+    "level": 1,
+    "actions": 0,
+    "levelsSolved": 0,
+    "completedPlans": 0
+  },
+  "final": {
+    "level": 4,
+    "actions": 12,
+    "levelsSolved": 3,
+    "completedPlans": 8,
+    "statusText": "Level completed."
+  },
+  "checkpoints": [
+    {
+      "level": 2,
+      "actions": 3,
+      "levelsSolved": 1,
+      "completedPlans": 2
+    },
+    {
+      "level": 3,
+      "actions": 7,
+      "levelsSolved": 2,
+      "completedPlans": 5
+    },
+    {
+      "level": 4,
+      "actions": 12,
+      "levelsSolved": 3,
+      "completedPlans": 8
+    }
+  ],
+  "pauseChecks": [
+    {
+      "actions": 0,
+      "statusText": "Paused."
+    },
+    {
+      "actions": 5,
+      "levelsSolved": 1,
+      "completedPlans": 3,
+      "statusText": "Paused."
+    }
+  ],
+  "partialPrefixCheck": {
+    "actions": 2,
+    "completedPlans": 1,
+    "level": 1,
+    "resumedToNextNaturalLevel": true
+  },
+  "sameSession": true,
+  "manualGameActions": 0,
+  "resets": 0,
+  "levelJumps": 0,
+  "reasoningInspectorExpanded": false,
+  "screenshot": {
+    "path": "docs/migration/lot3b-cost-evidence/final-v2/browser/catr-browser.png",
+    "bytes": 82146,
+    "sha256": "e2e23114458af8f1980fb9f7a364cef9c44c9ac3a8d3fdfecebfe4a47296aac4"
+  },
+  "limitations": [
+    "Three completed levels, not a complete game victory.",
+    "UI source verification is separate from the production build receipt and from isolated performance measurement."
+  ]
+}

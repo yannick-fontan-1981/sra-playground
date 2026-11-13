@@ -1,0 +1,55 @@
+{
+  "schema": "logos-engine.v54.browser-verification.v1",
+  "mode": "managed-preview-actual-ui",
+  "sourceManifestDigest": "059d6204097fae6749138b9afc650ccc54867886bda3887ef6f978f6afdf393a",
+  "game": "RE86",
+  "sequence": [
+    {
+      "phase": "initial",
+      "observedAt": "2026-11-09T12:25:41.559Z",
+      "actions": 0,
+      "levelsSolved": 0,
+      "completedPlans": 0
+    },
+    {
+      "phase": "level1",
+      "observedAt": "2026-11-09T12:26:39.885Z",
+      "actions": 26,
+      "levelsSolved": 1,
+      "completedPlans": 12
+    },
+    {
+      "phase": "level2",
+      "observedAt": "2026-11-09T12:28:27.487Z",
+      "actions": 73,
+      "levelsSolved": 2,
+      "completedPlans": 28
+    },
+    {
+      "phase": "level3",
+      "observedAt": "2026-11-09T12:31:15.191Z",
+      "actions": 134,
+      "levelsSolved": 3,
+      "completedPlans": 46
+    }
+  ],
+  "observedFinal": {
+    "canvas": {
+      "height": 384,
+      "width": 384
+    },
+    "inspectionOpen": false,
+    "panel": "Solve with SRA.\n\nLevel completed.\n\nRun to next level\nRun 16 actions\nOne action\nPause\n134\nactions\n3\nlevels solved\n46\ncompleted plans\nNew reasoning session\nReturn to Manual",
+    "url": "http://127.0.0.1:4173/?game=RE86&level=4",
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    }
+  },
+  "qualification": "Three real Run to next level clicks from level 1 in one retained browser session, without level jump or state injection. This is a bounded three-level result, not a full-game victory, layout campaign or performance comparison.",
+  "screenshot": {
+    "path": "docs/migration/native-campaigns-v54/final/re86-browser-final.png",
+    "bytes": 71901,
+    "sha256": "2363f75910c2ecb6754b1b6399cf3230ac27e15ac60edc6fc3b16a007bc38f08"
+  }
+}

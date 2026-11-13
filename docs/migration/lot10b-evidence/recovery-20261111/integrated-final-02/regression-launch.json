@@ -1,0 +1,245 @@
+{
+  "schema": "logos-engine.lot10b.regression-launch.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T15:34:09.163994+00:00",
+  "generator": {
+    "path": "docs/migration/lot10b-evidence/run-regressions.py",
+    "sha256": "937723459e728682a849a4bddb855d423c9b9c8e70d1627e8590b5be81709ab3",
+    "bytes": 10992
+  },
+  "caseManifest": {
+    "path": "docs/migration/lot10b-evidence/recorded-regression-cases.json",
+    "sha256": "a16f67724f53def79fe476716c12a61e8064df871911772731983fa2505da3a9",
+    "bytes": 8305
+  },
+  "sourceManifest": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json",
+    "sha256": "846e38686406140e8f0c975836faadf646e4c20b0bcbc833fe4e228912535e93",
+    "bytes": 36806
+  },
+  "nativeSourceDigest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "scripts/run-released-public-regressions-streamlog.py",
+    "docs/migration/lot10b-evidence/recorded-regression-cases.json",
+    "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02",
+    "--source-manifest",
+    "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json",
+    "--node-old-space-mib",
+    "1536",
+    "--timeout-seconds",
+    "2400"
+  ],
+  "executionInputs": {
+    "docs/migration/lot10b-evidence/run-regressions.py": "937723459e728682a849a4bddb855d423c9b9c8e70d1627e8590b5be81709ab3",
+    "docs/migration/lot10b-evidence/recorded-regression-cases.json": "a16f67724f53def79fe476716c12a61e8064df871911772731983fa2505da3a9",
+    "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json": "846e38686406140e8f0c975836faadf646e4c20b0bcbc833fe4e228912535e93",
+    "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9",
+    "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+    "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+    "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+    "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+    "tests/helpers/v6-live-game-campaign.ts": "5f82ca1f3c80a39983c5c14ee30a2ac6239822815a6641b1402bc29c2e1d32d4"
+  },
+  "exitCode": 0,
+  "coordination": {
+    "lock": "/workspace/shared/sra-coordination/performance.lock",
+    "mode": "shared_nonblocking",
+    "timingClaim": false
+  },
+  "qualification": "The ten case IDs, games, historical baseline pins and public traces are copied exactly from the actual Site92 4C declaration and verified against its completed executions. Site92/native0.57 is integration/publication provenance, not a relabelling of historical baselines. No 4C final replay is substituted as a new baseline. The same 17 scoped comparisons apply; no new live success, speed result, complete original-caller parity or new-family state equality is claimed. WEAV cumulative budget is unchanged.",
+  "comparison": "Unchanged comparator and 17 original checks per case. Full reports and public packets remain retained.",
+  "caseInputs": [
+    {
+      "game": "CATR",
+      "role": "baseline",
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+      "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6",
+      "bytes": 1649205
+    },
+    {
+      "game": "CATR",
+      "role": "trace",
+      "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+      "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816",
+      "bytes": 24340
+    },
+    {
+      "game": "RSWP",
+      "role": "baseline",
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+      "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba",
+      "bytes": 2585868
+    },
+    {
+      "game": "RSWP",
+      "role": "trace",
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+      "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755",
+      "bytes": 41445
+    },
+    {
+      "game": "FOGW",
+      "role": "baseline",
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+      "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c",
+      "bytes": 8174480
+    },
+    {
+      "game": "FOGW",
+      "role": "trace",
+      "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+      "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46",
+      "bytes": 39060
+    },
+    {
+      "game": "VOIS",
+      "role": "baseline",
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+      "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d",
+      "bytes": 10678168
+    },
+    {
+      "game": "VOIS",
+      "role": "trace",
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+      "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d",
+      "bytes": 19976
+    },
+    {
+      "game": "CONN",
+      "role": "baseline",
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+      "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750",
+      "bytes": 2630905
+    },
+    {
+      "game": "CONN",
+      "role": "trace",
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+      "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102",
+      "bytes": 56466
+    },
+    {
+      "game": "MIND",
+      "role": "baseline",
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+      "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a",
+      "bytes": 4349054
+    },
+    {
+      "game": "MIND",
+      "role": "trace",
+      "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+      "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c",
+      "bytes": 17256
+    },
+    {
+      "game": "WEAV",
+      "role": "baseline",
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+      "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3",
+      "bytes": 13577757
+    },
+    {
+      "game": "WEAV",
+      "role": "trace",
+      "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+      "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2",
+      "bytes": 26568
+    },
+    {
+      "game": "TRIA",
+      "role": "baseline",
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+      "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe",
+      "bytes": 3161161
+    },
+    {
+      "game": "TRIA",
+      "role": "trace",
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+      "sha256": "916d0f1cb1dcbfd9b7ba7624e7d3d4648a91ae7ef64583288af4711d2a955ac3",
+      "bytes": 13286
+    },
+    {
+      "game": "CRAF",
+      "role": "baseline",
+      "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+      "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2",
+      "bytes": 12767727
+    },
+    {
+      "game": "CRAF",
+      "role": "trace",
+      "path": "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+      "sha256": "cf69ad941e80e17f8d6cd66edc0419a0c6ff7aa8d9bbdaf503cb56a49e8c3f98",
+      "bytes": 40777
+    },
+    {
+      "game": "ISOS",
+      "role": "baseline",
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+      "sha256": "93e59ab1146d4eef7c944a0e1fc0ab7b0d539cc90a074abe424742be011eec37",
+      "bytes": 3027289
+    },
+    {
+      "game": "ISOS",
+      "role": "trace",
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-public-trace.json.gz",
+      "sha256": "5b302279efb140d1c549d9650d434efb38fde0b8bc5809ab072de66159c8c329",
+      "bytes": 11183
+    }
+  ],
+  "baselineCommitMembership": [],
+  "regressionSummary": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/regression-summary.json",
+    "sha256": "37abf373e1d22055b43897e4a4b2bb5f93d3bd11ba17b43ad4c766b22038b77e",
+    "bytes": 212373
+  },
+  "summary": {
+    "status": "passed",
+    "passed": 10,
+    "total": 10,
+    "comparisonChecksPassed": 170,
+    "comparisonChecksExpected": 170,
+    "prevalidatedTotals": {
+      "commands": 357,
+      "completePublicPackets": 367,
+      "animationFrames": 1676,
+      "prefixes": 275,
+      "requests": 632,
+      "naturalLevelBoundaries": 30
+    }
+  },
+  "rawOutput": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regression-driver-output.raw.txt",
+    "sha256": "d92a6f12684f7439335242d699acad21a1f1350355d5b247feab369752ed890c",
+    "bytes": 19672
+  },
+  "output": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regression-driver-output.log.gz",
+    "sha256": "34d015146661b64ea5fa822ee7298eb2118b05f9f61b90626aa863b2e09c5b33",
+    "bytes": 2209
+  },
+  "executionInputsAfter": {
+    "docs/migration/lot10b-evidence/run-regressions.py": "937723459e728682a849a4bddb855d423c9b9c8e70d1627e8590b5be81709ab3",
+    "docs/migration/lot10b-evidence/recorded-regression-cases.json": "a16f67724f53def79fe476716c12a61e8064df871911772731983fa2505da3a9",
+    "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json": "846e38686406140e8f0c975836faadf646e4c20b0bcbc833fe4e228912535e93",
+    "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9",
+    "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+    "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+    "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+    "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+    "tests/helpers/v6-live-game-campaign.ts": "5f82ca1f3c80a39983c5c14ee30a2ac6239822815a6641b1402bc29c2e1d32d4"
+  },
+  "executionInputsUnchanged": true,
+  "nativeSourceUnchanged": true,
+  "finishedAt": "2026-11-11T15:49:54.642749+00:00",
+  "elapsedSeconds": 945.478369552
+}

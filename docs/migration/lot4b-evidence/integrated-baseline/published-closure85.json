@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.lot4b.published-documentation-closure-integration.v1",
+  "verifiedAt": "2026-11-10T22:26:48.133078+00:00",
+  "status": "passed",
+  "siteVersion": 85,
+  "publishedCommit": "a009e1f138bb18251d697f49647bacc615ee514f",
+  "priorPublication": {
+    "siteVersion": 84,
+    "commit": "51e2813dedb2d71001290f94f100605e0327ead3"
+  },
+  "baselineCheckout": "/workspace/sites/sra-lot4b-baseline-5a-20261110",
+  "baselineNativeDigest": "d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f",
+  "candidateNativeDigest": "f25d56d1c63dc929b01bb31b3898b84cecc69e6e412d535c0d122170ea401ce9",
+  "nativeTestBuildAndScriptDiffFrom84": [],
+  "candidateFrozenNativeFilesUnchanged": 286,
+  "baselineNativeFilesVerified": 283,
+  "candidateMergeHead": "ca84d93929b53ab652cfe789c35ef41fbb8c4ca3",
+  "qualification": "Actual terminal Site85 documentation closure integrated. Runtime sources, tests, build inputs and scripts are identical to Site84. Original freeze, build, public replays and browser source identity remain exact; the separately declared exhaustive-list test correction is the only current test edit. Costbaseline will use this actual Site85 HEAD."
+}

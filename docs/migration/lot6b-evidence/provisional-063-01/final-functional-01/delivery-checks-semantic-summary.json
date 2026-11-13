@@ -1,0 +1,97 @@
+{
+  "schema": "logos-engine.lot6b-final-delivery-semantic-review.v1",
+  "status": "passed",
+  "reviewedAt": "2026-11-11T19:41:27.736650+00:00",
+  "command": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/delivery-checks-command.json",
+    "bytes": 666064,
+    "sha256": "5faac44db496e92208b9c632dbc531d4b560ba31e80b33b3c4b82b4e6d2d4f5e"
+  },
+  "checks": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/validation/checks-run.json",
+    "bytes": 85777,
+    "sha256": "bf9b18134ffaa24977f674069e3f87336a4822e23d5c71b68978c7acc49db1c7"
+  },
+  "entryAudit": {
+    "path": "docs/migration/v6-entry-point-progress.json",
+    "bytes": 19627,
+    "sha256": "4fbae4b3c7f1ac7b0d6ea8cf65ef90cf3d33388d37560ceb2a9374358c9947ba"
+  },
+  "migrationAudit": {
+    "path": "docs/migration/v6-coverage.json",
+    "bytes": 2570345,
+    "sha256": "a75b8b8c95897cd6aa892261ce5aca0de67a253dacc80bc0b64171bd599d6999"
+  },
+  "watch": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/build-watch-attempt03.json",
+    "bytes": 487940,
+    "sha256": "ae35b96135007d53ac1f3ffba521e56130b5dc9704fc301e6b273154375de5c2"
+  },
+  "watchedRecords": 2991,
+  "elapsedSeconds": 32.24329789799958,
+  "inputsUnchanged": true,
+  "nativeSourceDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+  "nativeFiles": 322,
+  "nativeSourceUnchanged": true,
+  "worker": {
+    "path": "dist/assets/v6-agent-worker-Cpjjo6tG.js",
+    "bytes": 6927288,
+    "sha256": "a4f366ad2103b7413a111099827bfa2ba8cf0930b9c8f1e4ebb561aada7daa84"
+  },
+  "semantics": {
+    "entry": {
+      "counts": {
+        "connected": 66,
+        "declared": 76,
+        "percent": 86.8,
+        "fullV6Parity": false
+      },
+      "groups": [
+        {
+          "id": "goal_access",
+          "connected": 12,
+          "declared": 12
+        },
+        {
+          "id": "window_constraints",
+          "connected": 21,
+          "declared": 21
+        },
+        {
+          "id": "surface",
+          "connected": 10,
+          "declared": 10
+        },
+        {
+          "id": "factored_material_return",
+          "connected": 23,
+          "declared": 33
+        }
+      ],
+      "failuresFieldPresent": false,
+      "failures": null,
+      "expectedConnectionCount": 66
+    },
+    "migration": {
+      "complete": false,
+      "summary": {
+        "pythonModules": 1369,
+        "pythonLines": 320375,
+        "declaredClassesAndFunctions": 12857,
+        "dataFiles": 417,
+        "verifiedModules": 0,
+        "componentVerifiedModules": 208,
+        "partiallyTransferredModules": 147,
+        "transferredUnverifiedModules": 0,
+        "pendingModules": 1014,
+        "strategyFamilies": 16
+      },
+      "failures": []
+    }
+  },
+  "fullV6Parity": false,
+  "gameExecuted": false,
+  "browserExecuted": false,
+  "costExecuted": false,
+  "qualification": "Five delivery gates and semantic audit output checked on the frozen fa23 candidate. Entry audit does not emit a failures field; its real counts and false full-parity flag are retained explicitly. Migration failures must be empty. This is a built development candidate, not a game proof, cost qualification or publication."
+}

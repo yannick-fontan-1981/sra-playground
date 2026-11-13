@@ -1,0 +1,70 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "declaredAt": "2026-11-11T19:39:09.332458+00:00",
+  "declarationOwner": "lot6b",
+  "status": "prospective_not_executed",
+  "cases": [
+    {
+      "id": "vois-051",
+      "game": "VOIS",
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+        "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d"
+      },
+      "trace": {
+        "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+        "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d"
+      }
+    }
+  ],
+  "passiveOwnerRequirements": [],
+  "strictComparator": {
+    "path": "scripts/compare-v54-regressions.py",
+    "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "bytes": 18166
+  },
+  "strictComparisonCheckNames": [
+    "both runs passed with the same declared game and target",
+    "same production budgets, source reference and opaque game asset provenance",
+    "same complete initial public packet hash and public state",
+    "every archived public packet independently hashes to the v53 baseline",
+    "every archived host-only command equals its prior baseline command",
+    "same commands, complete returned packet hashes, animation lengths and primitive boundaries",
+    "same selected family/group/kind/subquestion, acquired prefix lengths and retained solver scalars",
+    "same retained coordination source/preferred entries and current guard scope",
+    "same historical epoch anchors with session namespace normalized",
+    "same inherited source-series event counts on every sealed prefix",
+    "same common request outcomes and retained caller acquisition counters",
+    "same natural level boundaries and retained-session caller counters",
+    "same final public result and retained-session operation counts",
+    "same retained mechanical-domain assessments",
+    "both source runs remained unchanged and imported no Python agent module",
+    "current replay used the declared complete frozen native source",
+    "current replay identifies the exact host-only baseline and public trace"
+  ],
+  "expectedChecksPerCase": 17,
+  "expectedComparisonChecks": 17,
+  "inheritedSource": {
+    "commit": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+    "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/recorded-regression-cases.json",
+    "bytes": 15556,
+    "sha256": "18684d23bf7122a9f88f85d8bdb6f557144f892e7f09f2ef7630cbb5a7e6bc33"
+  },
+  "originalElevenCaseSource": {
+    "readAtCommit": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+    "path": "docs/migration/lot7b-evidence/followup-recovery/contract/regression-cases-final.json",
+    "bytes": 9035,
+    "sha256": "612786e95a3cd6c98c7a0ccd4bd5e616ff5b54d1de18f7962aae79d50faf4f36"
+  },
+  "frozenNativeSource": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/source-manifest.json",
+    "fileCount": 322,
+    "digest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886"
+  },
+  "provisionalPredecessor": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+  "actualPublished063Reconciliation": "pending",
+  "qualification": "Same original row, baseline/trace pins and seventeen comparisons; new released-baseline host, same6B capture helper andfa23 native. No previous result relabeled.",
+  "attempt": "released-baseline-01",
+  "replayHarness": "released_baseline_streamlog",
+  "previousFailedAttempt": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/vois-051"
+}

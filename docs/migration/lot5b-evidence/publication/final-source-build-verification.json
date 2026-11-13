@@ -1,0 +1,182 @@
+{
+  "schema": "logos-engine.lot5b-final-source-build-verification.v1",
+  "status": "failed",
+  "startedAt": "2026-11-11T02:50:37.786480+00:00",
+  "generator": {
+    "path": "/workspace/sites/sra-lot5b-20261110/.sites-checkout/docs/migration/lot5b-evidence/publication/verify-final-source-build.py",
+    "bytes": 33181,
+    "sha256": "cdd3526cbf0a222ded9770fdbded2b626b71af6204cc2b72d4566235ffb33036"
+  },
+  "output": "/workspace/sites/sra-lot5b-publication-artifacts-20261111/final-source-build-verification.json",
+  "validatedCheckout": "/workspace/sites/sra-lot5b-20261110/.sites-checkout",
+  "publicationWorktree": "/workspace/sites/sra-lot5b-publication-20261111/.sites-checkout",
+  "qualification": "Read-only verification of all completed source-workflow receipts in the pinned actual plan, every regular application member of each saved archive, final source ancestry/tree and current frozen inputs. Counts, version and commits are derived from actual receipts, not future constants. Package gzip bytes may differ; all application bytes must match the already validated build. The actual global cost verdict and historical strict refusal remain explicit and distinct from byte integrity. A passed result is not a deployment result or publication authorization. No Site result is inferred. No rebuild, test, timing campaign, game, source push, ignored-file restoration or Git mutation is performed.",
+  "plan": {
+    "path": "/workspace/sites/sra-lot5b-publication-artifacts-20261111/lot5b-source-push-plan.json",
+    "bytes": 301874,
+    "sha256": "eca4adc3e93aba189854511a15b3f96f7132f1042b2dd790056ee6ea1695492f"
+  },
+  "preparation": {
+    "path": "/workspace/sites/sra-lot5b-publication-artifacts-20261111/worktree-preparation.json",
+    "bytes": 213420,
+    "sha256": "1fdf316ee992aa1dcbb7693a308c79138895070da2142654f8ce60297ba653bd"
+  },
+  "retainedTransportFailures": [],
+  "worktreesBefore": {
+    "validatedCheckout": {
+      "head": "beef9b72297fea8fdf754b2ad1984697525eee1f",
+      "tree": "d2b08efdaa3847c68812fbc06623d70887f99d66",
+      "parents": [
+        "61fd6dda12feb6de9597ac9b91be874a62649e79"
+      ],
+      "statusBytes": 0,
+      "statusSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "publicationWorktree": {
+      "head": "fbd968f7c194575777965219f64fa78d3460b08e",
+      "tree": "d2b08efdaa3847c68812fbc06623d70887f99d66",
+      "parents": [
+        "d01475d6d0962508e9695ed086c91676a2b7a079",
+        "beef9b72297fea8fdf754b2ad1984697525eee1f"
+      ],
+      "statusBytes": 0,
+      "statusSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "error": "ValueError: Missing regular input: /workspace/sites/sra-lot5b-publication-20261111/.sites-checkout/docs/migration/lot5b-evidence/performance-integrated/aggregation-failure.log",
+  "sourceBuildByteIntegrityPassed": false,
+  "finishedAt": "2026-11-11T02:50:37.928647+00:00",
+  "inputs": [
+    {
+      "path": "/workspace/sites/sra-lot5b-20261110/.sites-checkout/docs/migration/lot5b-evidence/publication/verify-final-source-build.py",
+      "bytes": 33181,
+      "sha256": "cdd3526cbf0a222ded9770fdbded2b626b71af6204cc2b72d4566235ffb33036"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-publication-artifacts-20261111/lot5b-source-push-plan.json",
+      "bytes": 301874,
+      "sha256": "eca4adc3e93aba189854511a15b3f96f7132f1042b2dd790056ee6ea1695492f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-publication-artifacts-20261111/worktree-preparation.json",
+      "bytes": 213420,
+      "sha256": "1fdf316ee992aa1dcbb7693a308c79138895070da2142654f8ce60297ba653bd"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-20261110/.sites-checkout/docs/migration/lot5b-evidence/integrated-final/publication-inputs.json",
+      "bytes": 455381,
+      "sha256": "e945c30b23d02d1a704e15997c0f4fe0a538ef774b80ee3d2a021f09e6b42f04"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-publication-20261111/.sites-checkout/docs/migration/lot5b-evidence/integrated-final/publication-inputs.json",
+      "bytes": 455381,
+      "sha256": "e945c30b23d02d1a704e15997c0f4fe0a538ef774b80ee3d2a021f09e6b42f04"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-20261110/.sites-checkout/docs/migration/lot5b-evidence/integrated-final/source-manifest.json",
+      "bytes": 35852,
+      "sha256": "2a0101b7cf56ce98a82e27e36d5ab78b53c297ca54b82c638a168be4560643bd"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-publication-20261111/.sites-checkout/docs/migration/lot5b-evidence/integrated-final/source-manifest.json",
+      "bytes": 35852,
+      "sha256": "2a0101b7cf56ce98a82e27e36d5ab78b53c297ca54b82c638a168be4560643bd"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-20261110/.sites-checkout/docs/migration/lot5b-evidence/integrated-final/source-archive.json",
+      "bytes": 37494,
+      "sha256": "3a6a17dcde5a785ede5b0fa4d9c0a721231627cb48b5ff730d9dd5e276c40cc0"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-publication-20261111/.sites-checkout/docs/migration/lot5b-evidence/integrated-final/source-archive.json",
+      "bytes": 37494,
+      "sha256": "3a6a17dcde5a785ede5b0fa4d9c0a721231627cb48b5ff730d9dd5e276c40cc0"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-20261110/.sites-checkout/docs/migration/lot5b-evidence/integrated-final/validation/delta-tests-run.json",
+      "bytes": 132464,
+      "sha256": "fee43cc4d12454c987fafd04bdf67215eb4a975f46674204f2573251cd6396ce"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-publication-20261111/.sites-checkout/docs/migration/lot5b-evidence/integrated-final/validation/delta-tests-run.json",
+      "bytes": 132464,
+      "sha256": "fee43cc4d12454c987fafd04bdf67215eb4a975f46674204f2573251cd6396ce"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-20261110/.sites-checkout/docs/migration/lot5b-evidence/integrated-final/validation/checks-run.json",
+      "bytes": 82367,
+      "sha256": "4522487cc4350aaf23631a1a5c7069feb5c9d0923572d852526edd9777ec34c5"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-publication-20261111/.sites-checkout/docs/migration/lot5b-evidence/integrated-final/validation/checks-run.json",
+      "bytes": 82367,
+      "sha256": "4522487cc4350aaf23631a1a5c7069feb5c9d0923572d852526edd9777ec34c5"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-20261110/.sites-checkout/docs/migration/lot5b-evidence/integrated-final/regressions/regression-summary.json",
+      "bytes": 206536,
+      "sha256": "e1656a5ada566f7ecfaac76c044f7ccd12dad1104a984a91f1fef673c81d74b9"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-publication-20261111/.sites-checkout/docs/migration/lot5b-evidence/integrated-final/regressions/regression-summary.json",
+      "bytes": 206536,
+      "sha256": "e1656a5ada566f7ecfaac76c044f7ccd12dad1104a984a91f1fef673c81d74b9"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-20261110/.sites-checkout/docs/migration/lot5b-evidence/integrated-final/delivery-integrity.json",
+      "bytes": 10672,
+      "sha256": "c19ee00573bbe22dcb093628410ac0200c903364116c88627d8dcfd461237bee"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-publication-20261111/.sites-checkout/docs/migration/lot5b-evidence/integrated-final/delivery-integrity.json",
+      "bytes": 10672,
+      "sha256": "c19ee00573bbe22dcb093628410ac0200c903364116c88627d8dcfd461237bee"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-20261110/.sites-checkout/docs/migration/lot5b-evidence/performance-integrated/readiness.json",
+      "bytes": 464568,
+      "sha256": "8e8c37674bf85ab95541fb75d3c0251657aaf30d36743218db00607ed8ff7568"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-publication-20261111/.sites-checkout/docs/migration/lot5b-evidence/performance-integrated/readiness.json",
+      "bytes": 464568,
+      "sha256": "8e8c37674bf85ab95541fb75d3c0251657aaf30d36743218db00607ed8ff7568"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-20261110/.sites-checkout/docs/migration/lot5b-evidence/performance-integrated/owner-growth-review.json",
+      "bytes": 2141966,
+      "sha256": "4954a1cd25f5bc6df54d2a317cf1b49d3669769773b2d964d8b7d5aa500bab96"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-publication-20261111/.sites-checkout/docs/migration/lot5b-evidence/performance-integrated/owner-growth-review.json",
+      "bytes": 2141966,
+      "sha256": "4954a1cd25f5bc6df54d2a317cf1b49d3669769773b2d964d8b7d5aa500bab96"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-20261110/.sites-checkout/docs/migration/lot5b-evidence/performance-integrated/owner-growth-comparison.json",
+      "bytes": 247032,
+      "sha256": "3ad759ab4ced920a844165853a7dc621586878dcc83151bef3d3f2b299bd7243"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-publication-20261111/.sites-checkout/docs/migration/lot5b-evidence/performance-integrated/owner-growth-comparison.json",
+      "bytes": 247032,
+      "sha256": "3ad759ab4ced920a844165853a7dc621586878dcc83151bef3d3f2b299bd7243"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-20261110/.sites-checkout/docs/migration/lot5b-evidence/performance-integrated/aggregation-failure.json",
+      "bytes": 2838,
+      "sha256": "f7571847c546191ebf0f404cb22adc82483620b95af45171f2c7891472ccc0a4"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-publication-20261111/.sites-checkout/docs/migration/lot5b-evidence/performance-integrated/aggregation-failure.json",
+      "bytes": 2838,
+      "sha256": "f7571847c546191ebf0f404cb22adc82483620b95af45171f2c7891472ccc0a4"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5b-20261110/.sites-checkout/docs/migration/lot5b-evidence/performance-integrated/aggregation-failure.log",
+      "bytes": 204711,
+      "sha256": "4c85f9d40eaa4fee7e239abf0073540b14f58988be6994a1d9d758020090dd54"
+    }
+  ],
+  "inputCount": 26
+}

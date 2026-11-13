@@ -1,0 +1,254 @@
+{
+  "module_id": "v6.reactive_contact",
+  "declarations": [
+    {
+      "id": "policy.reactive_contact",
+      "kind": "schema",
+      "premises": [
+        "Input-compatible unique compact body across observed transitions; distinguish every other moving occurrence."
+      ],
+      "applicability": [
+        "Persistent parent question from measured counteracted approach; current subject and retreat revalidated."
+      ],
+      "invariants": [
+        "No claimed complete escape domain or capture physics; full measured masks retained."
+      ],
+      "falsifiers": [
+        "Current control, subject, support or scope contradicted",
+        "Interaction or followup fails to show common motion"
+      ],
+      "reason_refs": [
+        "0.3.3.10-2",
+        "0.1.1-5,5"
+      ],
+      "configuration": {
+        "direction_prior": {
+          "ACTION1": [
+            0,
+            -1
+          ],
+          "ACTION2": [
+            0,
+            1
+          ],
+          "ACTION3": [
+            -1,
+            0
+          ],
+          "ACTION4": [
+            1,
+            0
+          ]
+        },
+        "operator_prior": "ACTION5",
+        "priority": [
+          "source81_composition",
+          "parent_capture_contact_question",
+          "parent_escape_configuration_access",
+          "binding_followup",
+          "contact_probe",
+          "contact_access"
+        ],
+        "selection_order": [
+          "cost_of_missing_manipulation_information",
+          "peer_distance",
+          "current_geometric_order"
+        ],
+        "hypotheses": [
+          "The input-compatible observed body is the controlled actor, not every simultaneous mover",
+          "Capture by contact is the parent hypothesis, not an acquired success law",
+          "Existing dead-end guiding and modifying escape options remain competing strategies",
+          "Current matching support class may admit access; destination occupancy is revalidated",
+          "ACTION5 at current contact is a revisable local binding/state intervention prior",
+          "Changed appearance alone is not attachment; nonpushing common translation is the next discriminant",
+          "A revalidated common translation may move a current obstacle to alter a partial geometric escape domain; no complete flee law or capture proved",
+          "Peer motion invalidates the static access suffix but does not erase independently observed transport",
+          "Current adjacent directed contact may complete capture; only an official boundary confirms it; retain both masks and every other obstacle."
+        ],
+        "conditions": [
+          {
+            "field": "current_control_bound",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "counteracted_approach_observed",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "current_scope_and_input",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "subject_current_unique",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "retreat_exists",
+            "operator": "equals",
+            "expected": true
+          }
+        ],
+        "control_conditions": [
+          {
+            "field": "unique_input_compatible_motion",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "current_exact_shape",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "positive_axial_displacement",
+            "operator": "equals",
+            "expected": true
+          }
+        ],
+        "contact_projections": [
+          "projection.exploration.current_contact_opens_local_mechanism_question",
+          "projection.exploration.reactive_escape_opens_contact_manipulation_question"
+        ],
+        "parent_conditions": [
+          {
+            "field": "parent_dependency_satisfied",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "geometric_exit_change_predicted",
+            "operator": "equals",
+            "expected": true
+          }
+        ],
+        "common_translation_claim": {
+          "id": "v6.reactive_contact.observed_nonpushing_common_translation",
+          "status": "observed_nonpushing_common_translation",
+          "scope": "current observed method, not a universal transport law",
+          "conditions": [
+            {
+              "field": "same_current_scope",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_and_part_distinct",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_unique_shapes",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_nonzero_translation",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "nonpushing_translation",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "other_declared_subjects_preserved",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "actual_operator_receipt_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "required_receipt_fields": [
+            "epoch",
+            "body_signature",
+            "subject_mask_digest",
+            "subject_area",
+            "operator_action_ref",
+            "operator_observation_refs",
+            "transition_refs",
+            "body_delta_xy",
+            "part_delta_xy"
+          ],
+          "falsifiers": [
+            "current_identity_or_scope_unresolved",
+            "later_common_motion_not_observed",
+            "declared_preservation_contradicted"
+          ]
+        },
+        "source81_entry": {
+          "id": "v6.reactive_contact.prospective_composition_entry",
+          "conditions": [
+            {
+              "field": "current_control_binding",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "retained_parent_question",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_observed_support",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_geometry_binding",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "operator_candidate_ref": "policy.reactive_contact.configuration.operator_prior",
+          "unknown_operator_meaning": "declared local intervention hypothesis; not uniquely unknown input and not acquired effect",
+          "claim_scope": "current Source-validated control and measured support for conditional geometric calculation; not release authority"
+        },
+        "source81_ready_operator_conditions": [
+          {
+            "field": "selected_current_grasp_ready",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "current_parent_peer_bound",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "current_subject_unique",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "current_operator_candidate_available",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "current_preservation_bound",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "current_context_untried",
+            "operator": "equals",
+            "expected": true
+          }
+        ],
+        "source81_ready_operator_meaning": {
+          "id": "v6.adaptation.source81_ready_grasp_operator",
+          "status": "experimental_unknown",
+          "meaning": "Test the declared local intervention at the currently selected grasp contact; neither unique unknown input nor attachment is asserted."
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,1975 @@
+{
+  "module_id": "latent_evidence_c",
+  "declarations": [
+    {
+      "id": "policy.latent_evidence_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "latent.evidence.field_measurement",
+        "latent.evidence.homology_domains",
+        "latent.evidence.reference_consensus",
+        "latent.evidence.indicator_contract",
+        "latent.evidence.joint_reference_filter",
+        "latent.evidence.local_edit_law",
+        "latent.evidence.fixed_reference_step",
+        "latent.evidence.repair_composition",
+        "latent.evidence.completion_and_revision",
+        "latent.evidence.correction",
+        "latent.evidence.experiment",
+        "latent.evidence.information"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.latent.evidence.field_measurement",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.evidence.field_measurement"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "field_measurement"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.latent.evidence.homology_domains",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.evidence.homology_domains"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "homology_domains"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.latent.evidence.reference_consensus",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.evidence.reference_consensus"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "reference_consensus"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.latent.evidence.indicator_contract",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.evidence.indicator_contract"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "indicator_contract"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.latent.evidence.joint_reference_filter",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.evidence.joint_reference_filter"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "joint_reference_filter"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.latent.evidence.local_edit_law",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.evidence.local_edit_law"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "local_edit_law"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.latent.evidence.fixed_reference_step",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.evidence.fixed_reference_step"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "fixed_reference_step"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.latent.evidence.repair_composition",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.evidence.repair_composition"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "repair_composition"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.latent.evidence.completion_and_revision",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.evidence.completion_and_revision"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "completion_and_revision"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.latent.evidence.repair",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.evidence.correction"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "repair_candidates"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "input_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "input_financed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "identical_context_already_attempted",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "robust_correction_coverage",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.latent.evidence.experiment",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.evidence.experiment"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "repair_candidates"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "input_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "input_financed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "identical_context_already_attempted",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "robust_correction_coverage",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "informative_test",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.latent.evidence.hold.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.evidence.information"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "repair_candidates"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "input_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.latent.evidence.hold.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.evidence.information"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "repair_candidates"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "input_financed",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.latent.evidence.hold.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.evidence.information"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "repair_candidates"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "identical_context_already_attempted",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.latent.evidence.hold.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.evidence.information"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "repair_candidates"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "robust_correction_coverage",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "informative_test",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "latent.evidence.field_measurement": "rule.latent_evidence_c.field_measurement",
+        "latent.evidence.homology_domains": "rule.latent_evidence_c.homology_domains",
+        "latent.evidence.reference_consensus": "rule.latent_evidence_c.reference_consensus",
+        "latent.evidence.indicator_contract": "rule.latent_evidence_c.indicator_contract",
+        "latent.evidence.joint_reference_filter": "rule.latent_evidence_c.joint_reference_filter",
+        "latent.evidence.local_edit_law": "rule.latent_evidence_c.local_edit_law",
+        "latent.evidence.fixed_reference_step": "rule.latent_evidence_c.fixed_reference_step",
+        "latent.evidence.repair_composition": "rule.latent_evidence_c.repair_composition",
+        "latent.evidence.completion_and_revision": "rule.latent_evidence_c.completion_and_revision",
+        "latent.evidence.correction": "rule.latent_evidence_c.repair",
+        "latent.evidence.experiment": "rule.latent_evidence_c.experiment",
+        "latent.evidence.information": "rule.latent_evidence_c.hold"
+      },
+      "premises": [
+        "actual_complete_K41_result",
+        "exact_current_parent_scope"
+      ],
+      "invariants": [
+        "fixed_reference_not_reestimated_after_edit",
+        "retain_all_admissible_models",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_receipt",
+        "unqualified_domain",
+        "unknown_law"
+      ],
+      "reason_refs": [
+        "reason.correspondence_and_same_reference_justify_each_local_correction"
+      ]
+    },
+    {
+      "id": "rule.latent_evidence_c.field_measurement",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.latent.evidence.{projection_ref}",
+          "kind": "goal",
+          "label": "Retain addressable field and overlays separately",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          },
+          "static_attributes": {
+            "status": "proposed",
+            "principal_goal_changed": false,
+            "no_action_authority": true
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.latent.evidence.{projection_ref}",
+          "predicate": "proposes_latent_field_measurement_contribution",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          }
+        }
+      ],
+      "premises": [
+        "actual_complete_K41_result",
+        "exact_current_parent_scope"
+      ],
+      "invariants": [
+        "fixed_reference_not_reestimated_after_edit",
+        "retain_all_admissible_models",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_receipt",
+        "unqualified_domain",
+        "unknown_law"
+      ],
+      "reason_refs": [
+        "reason.correspondence_and_same_reference_justify_each_local_correction"
+      ]
+    },
+    {
+      "id": "rule.latent_evidence_c.homology_domains",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.latent.evidence.{projection_ref}",
+          "kind": "goal",
+          "label": "Retain licensed correspondence classes without global uniformity",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          },
+          "static_attributes": {
+            "status": "proposed",
+            "principal_goal_changed": false,
+            "no_action_authority": true
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.latent.evidence.{projection_ref}",
+          "predicate": "proposes_latent_homology_domains_contribution",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          }
+        }
+      ],
+      "premises": [
+        "actual_complete_K41_result",
+        "exact_current_parent_scope"
+      ],
+      "invariants": [
+        "fixed_reference_not_reestimated_after_edit",
+        "retain_all_admissible_models",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_receipt",
+        "unqualified_domain",
+        "unknown_law"
+      ],
+      "reason_refs": [
+        "reason.correspondence_and_same_reference_justify_each_local_correction"
+      ]
+    },
+    {
+      "id": "rule.latent_evidence_c.reference_consensus",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.latent.evidence.{projection_ref}",
+          "kind": "goal",
+          "label": "Retain complete reference candidates and intentional variations",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          },
+          "static_attributes": {
+            "status": "proposed",
+            "principal_goal_changed": false,
+            "no_action_authority": true
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.latent.evidence.{projection_ref}",
+          "predicate": "proposes_latent_reference_consensus_contribution",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          }
+        }
+      ],
+      "premises": [
+        "actual_complete_K41_result",
+        "exact_current_parent_scope"
+      ],
+      "invariants": [
+        "fixed_reference_not_reestimated_after_edit",
+        "retain_all_admissible_models",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_receipt",
+        "unqualified_domain",
+        "unknown_law"
+      ],
+      "reason_refs": [
+        "reason.correspondence_and_same_reference_justify_each_local_correction"
+      ]
+    },
+    {
+      "id": "rule.latent_evidence_c.indicator_contract",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.latent.evidence.{projection_ref}",
+          "kind": "goal",
+          "label": "Retain calibrated or provisional count intervals and saturation",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          },
+          "static_attributes": {
+            "status": "proposed",
+            "principal_goal_changed": false,
+            "no_action_authority": true
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.latent.evidence.{projection_ref}",
+          "predicate": "proposes_latent_indicator_contract_contribution",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          }
+        }
+      ],
+      "premises": [
+        "actual_complete_K41_result",
+        "exact_current_parent_scope"
+      ],
+      "invariants": [
+        "fixed_reference_not_reestimated_after_edit",
+        "retain_all_admissible_models",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_receipt",
+        "unqualified_domain",
+        "unknown_law"
+      ],
+      "reason_refs": [
+        "reason.correspondence_and_same_reference_justify_each_local_correction"
+      ]
+    },
+    {
+      "id": "rule.latent_evidence_c.joint_reference_filter",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.latent.evidence.{projection_ref}",
+          "kind": "goal",
+          "label": "Preserve the fixed reference domain and cellwise agreement",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          },
+          "static_attributes": {
+            "status": "proposed",
+            "principal_goal_changed": false,
+            "no_action_authority": true
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.latent.evidence.{projection_ref}",
+          "predicate": "proposes_latent_joint_reference_filter_contribution",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          }
+        }
+      ],
+      "premises": [
+        "actual_complete_K41_result",
+        "exact_current_parent_scope"
+      ],
+      "invariants": [
+        "fixed_reference_not_reestimated_after_edit",
+        "retain_all_admissible_models",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_receipt",
+        "unqualified_domain",
+        "unknown_law"
+      ],
+      "reason_refs": [
+        "reason.correspondence_and_same_reference_justify_each_local_correction"
+      ]
+    },
+    {
+      "id": "rule.latent_evidence_c.local_edit_law",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.latent.evidence.{projection_ref}",
+          "kind": "goal",
+          "label": "Retain compatible edit-law hypotheses and their refutations",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          },
+          "static_attributes": {
+            "status": "proposed",
+            "principal_goal_changed": false,
+            "no_action_authority": true
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.latent.evidence.{projection_ref}",
+          "predicate": "proposes_latent_local_edit_law_contribution",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          }
+        }
+      ],
+      "premises": [
+        "actual_complete_K41_result",
+        "exact_current_parent_scope"
+      ],
+      "invariants": [
+        "fixed_reference_not_reestimated_after_edit",
+        "retain_all_admissible_models",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_receipt",
+        "unqualified_domain",
+        "unknown_law"
+      ],
+      "reason_refs": [
+        "reason.correspondence_and_same_reference_justify_each_local_correction"
+      ]
+    },
+    {
+      "id": "rule.latent_evidence_c.fixed_reference_step",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.latent.evidence.{projection_ref}",
+          "kind": "goal",
+          "label": "Retain conditional step prediction against the same fixed reference",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          },
+          "static_attributes": {
+            "status": "proposed",
+            "principal_goal_changed": false,
+            "no_action_authority": true
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.latent.evidence.{projection_ref}",
+          "predicate": "proposes_latent_fixed_reference_step_contribution",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          }
+        }
+      ],
+      "premises": [
+        "actual_complete_K41_result",
+        "exact_current_parent_scope"
+      ],
+      "invariants": [
+        "fixed_reference_not_reestimated_after_edit",
+        "retain_all_admissible_models",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_receipt",
+        "unqualified_domain",
+        "unknown_law"
+      ],
+      "reason_refs": [
+        "reason.correspondence_and_same_reference_justify_each_local_correction"
+      ]
+    },
+    {
+      "id": "rule.latent_evidence_c.repair_composition",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.latent.evidence.{projection_ref}",
+          "kind": "goal",
+          "label": "Retain bounded complete repair composition without action release",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          },
+          "static_attributes": {
+            "status": "proposed",
+            "principal_goal_changed": false,
+            "no_action_authority": true
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.latent.evidence.{projection_ref}",
+          "predicate": "proposes_latent_repair_composition_contribution",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          }
+        }
+      ],
+      "premises": [
+        "actual_complete_K41_result",
+        "exact_current_parent_scope"
+      ],
+      "invariants": [
+        "fixed_reference_not_reestimated_after_edit",
+        "retain_all_admissible_models",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_receipt",
+        "unqualified_domain",
+        "unknown_law"
+      ],
+      "reason_refs": [
+        "reason.correspondence_and_same_reference_justify_each_local_correction"
+      ]
+    },
+    {
+      "id": "rule.latent_evidence_c.completion_and_revision",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.latent.evidence.{projection_ref}",
+          "kind": "goal",
+          "label": "Keep exact reference and official completion predicates distinct",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          },
+          "static_attributes": {
+            "status": "proposed",
+            "principal_goal_changed": false,
+            "no_action_authority": true
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.latent.evidence.{projection_ref}",
+          "predicate": "proposes_latent_completion_and_revision_contribution",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          }
+        }
+      ],
+      "premises": [
+        "actual_complete_K41_result",
+        "exact_current_parent_scope"
+      ],
+      "invariants": [
+        "fixed_reference_not_reestimated_after_edit",
+        "retain_all_admissible_models",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_receipt",
+        "unqualified_domain",
+        "unknown_law"
+      ],
+      "reason_refs": [
+        "reason.correspondence_and_same_reference_justify_each_local_correction"
+      ]
+    },
+    {
+      "id": "rule.latent_evidence_c.repair",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.latent.evidence.{projection_ref}",
+          "kind": "goal",
+          "label": "Correct a cell agreed by the complete admissible reference/law domain",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          },
+          "static_attributes": {
+            "status": "proposed",
+            "principal_goal_changed": false,
+            "no_action_authority": true
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.latent.evidence.{projection_ref}",
+          "predicate": "proposes_latent_repair_contribution",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          }
+        }
+      ],
+      "premises": [
+        "actual_complete_K41_result",
+        "exact_current_parent_scope"
+      ],
+      "invariants": [
+        "fixed_reference_not_reestimated_after_edit",
+        "retain_all_admissible_models",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_receipt",
+        "unqualified_domain",
+        "unknown_law"
+      ],
+      "reason_refs": [
+        "reason.correspondence_and_same_reference_justify_each_local_correction"
+      ]
+    },
+    {
+      "id": "rule.latent_evidence_c.experiment",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.latent.evidence.{projection_ref}",
+          "kind": "goal",
+          "label": "Test a particularity with distinct retained outcomes and a bounded payload",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          },
+          "static_attributes": {
+            "status": "proposed",
+            "principal_goal_changed": false,
+            "no_action_authority": true
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.latent.evidence.{projection_ref}",
+          "predicate": "proposes_latent_experiment_contribution",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          }
+        }
+      ],
+      "premises": [
+        "actual_complete_K41_result",
+        "exact_current_parent_scope"
+      ],
+      "invariants": [
+        "fixed_reference_not_reestimated_after_edit",
+        "retain_all_admissible_models",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_receipt",
+        "unqualified_domain",
+        "unknown_law"
+      ],
+      "reason_refs": [
+        "reason.correspondence_and_same_reference_justify_each_local_correction"
+      ]
+    },
+    {
+      "id": "rule.latent_evidence_c.hold",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.latent.evidence.{projection_ref}",
+          "kind": "goal",
+          "label": "Retain ambiguity or missing control information without an arbitrary action",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          },
+          "static_attributes": {
+            "status": "proposed",
+            "principal_goal_changed": false,
+            "no_action_authority": true
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.latent.evidence.{projection_ref}",
+          "predicate": "proposes_latent_hold_contribution",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.evidence.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "reference_refs": "reference_refs",
+            "preserved_established_references": "preserved_established_references",
+            "reference_support_refs": "reference_support_refs",
+            "input_ref": "input_ref",
+            "action_payload": "action_payload",
+            "input_financed": "input_financed",
+            "input_current": "input_current",
+            "exact_reference_match": "exact_reference_match",
+        "official_success": "official_success",
+        "wanted_field_from_correspondences": "wanted_field_from_correspondences",
+        "intact_homologue_witnesses": "intact_homologue_witnesses",
+        "correction_desired_future": "correction_desired_future",
+        "possible_local_outcomes": "possible_local_outcomes",
+        "fixed_reference_error_before": "fixed_reference_error_before",
+        "fixed_reference_error_after": "fixed_reference_error_after",
+        "structural_disagreement_classes": "structural_disagreement_classes",
+        "structural_measurement_missing_refs": "structural_measurement_missing_refs",
+        "external_command_count": "external_command_count",
+        "indicator_contract_candidates": "indicator_contract_candidates",
+        "licensed_indicator_predictions": "licensed_indicator_predictions",
+        "official_acceptance_is_independent": "official_acceptance_is_independent"
+          }
+        }
+      ],
+      "premises": [
+        "actual_complete_K41_result",
+        "exact_current_parent_scope"
+      ],
+      "invariants": [
+        "fixed_reference_not_reestimated_after_edit",
+        "retain_all_admissible_models",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_receipt",
+        "unqualified_domain",
+        "unknown_law"
+      ],
+      "reason_refs": [
+        "reason.correspondence_and_same_reference_justify_each_local_correction"
+      ]
+    }
+  ]
+}

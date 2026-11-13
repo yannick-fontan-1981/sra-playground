@@ -1,0 +1,897 @@
+{
+  "module_id": "registered_adapter_c",
+  "declarations": [
+    {
+      "id": "policy.registered_external_adapter_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "one_current_source_adapter_binding"
+      ],
+      "applicability": [
+        "bound_external_primitive"
+      ],
+      "invariants": [
+        "one_typed_adapter_not_ordered_passes",
+        "no_second_physics_or_debit",
+        "all_cross_domain_checks_remain_inside_owning_adapter",
+        "ready_phases_pending_current_k03_receipt"
+      ],
+      "falsifiers": [
+        "multiple_ports_or_scope_mismatch",
+        "unknown_operation_or_missing_source_binding",
+        "current_child_packet_rejected"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "registered.wrap_slide",
+        "registered.guarded_transport",
+        "registered.queued_alignment_cascade",
+        "registered.cyclic_configuration_coverage",
+        "registered.metric_stack_image",
+        "registered.oriented_passage",
+        "registered.reactive_capture",
+        "registered.station_gated_cargo",
+        "registered.cadenced_rail_transfer",
+        "registered.fixed_program_origin",
+        "registered.charted_room_navigation",
+        "registered.gravity_adhesion",
+        "registered.topological_region_recolor",
+        "registered.visible_voxel_construction",
+        "registered.preview_piece_packing",
+        "registered.station_profile_workbench",
+        "registered.axial_field_configuration",
+        "registered.temporal_fragment_match",
+        "registered.discrete_relay_optics",
+        "registered.visual_sequence",
+        "registered.supported_construction",
+        "registered.finite_alignment_game",
+        "registered.bounded_joystick",
+        "registered.neighborhood_pattern_construction",
+        "registered.layered_prefix_construction",
+        "registered.inherited_k03",
+        "registered.unsupported"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.registered.wrap_slide",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.wrap_slide"
+            },
+            {
+              "field": "exact_port_wrap_slide",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.wrap_slide"
+          }
+        },
+        {
+          "id": "projection.registered.guarded_transport",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.guarded_transport"
+            },
+            {
+              "field": "exact_port_guarded_transport",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.guarded_transport"
+          }
+        },
+        {
+          "id": "projection.registered.queued_alignment_cascade",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.queued_alignment_cascade"
+            },
+            {
+              "field": "exact_port_queued_alignment_cascade",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.queued_alignment_cascade"
+          }
+        },
+        {
+          "id": "projection.registered.cyclic_configuration_coverage",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.cyclic_configuration_coverage"
+            },
+            {
+              "field": "exact_port_cyclic_configuration_coverage",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.cyclic_configuration_coverage"
+          }
+        },
+        {
+          "id": "projection.registered.metric_stack_image",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.metric_stack_image"
+            },
+            {
+              "field": "exact_port_metric_stack_image",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.metric_stack_image"
+          }
+        },
+        {
+          "id": "projection.registered.oriented_passage",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.oriented_passage"
+            },
+            {
+              "field": "exact_port_oriented_passage",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.oriented_passage"
+          }
+        },
+        {
+          "id": "projection.registered.reactive_capture",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.reactive_capture"
+            },
+            {
+              "field": "exact_port_reactive_capture",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.reactive_capture"
+          }
+        },
+        {
+          "id": "projection.registered.station_gated_cargo",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.station_gated_cargo"
+            },
+            {
+              "field": "exact_port_station_gated_cargo",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.station_gated_cargo"
+          }
+        },
+        {
+          "id": "projection.registered.cadenced_rail_transfer",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.cadenced_rail_transfer"
+            },
+            {
+              "field": "exact_port_cadenced_rail_transfer",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.cadenced_rail_transfer"
+          }
+        },
+        {
+          "id": "projection.registered.fixed_program_origin",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.fixed_program_origin"
+            },
+            {
+              "field": "exact_port_fixed_program_origin",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.fixed_program_origin"
+          }
+        },
+        {
+          "id": "projection.registered.charted_room_navigation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.charted_room_navigation"
+            },
+            {
+              "field": "exact_port_charted_room_navigation",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.charted_room_navigation"
+          }
+        },
+        {
+          "id": "projection.registered.gravity_adhesion",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.gravity_adhesion"
+            },
+            {
+              "field": "exact_port_gravity_adhesion",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.gravity_adhesion"
+          }
+        },
+        {
+          "id": "projection.registered.topological_region_recolor",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.topological_region_recolor"
+            },
+            {
+              "field": "exact_port_topological_region_recolor",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.topological_region_recolor"
+          }
+        },
+        {
+          "id": "projection.registered.visible_voxel_construction",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.visible_voxel_construction"
+            },
+            {
+              "field": "exact_port_visible_voxel_construction",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.visible_voxel_construction"
+          }
+        },
+        {
+          "id": "projection.registered.preview_piece_packing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.preview_piece_packing"
+            },
+            {
+              "field": "exact_port_preview_piece_packing",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.preview_piece_packing"
+          }
+        },
+        {
+          "id": "projection.registered.station_profile_workbench",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.station_profile_workbench"
+            },
+            {
+              "field": "exact_port_station_profile_workbench",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.station_profile_workbench"
+          }
+        },
+        {
+          "id": "projection.registered.axial_field_configuration",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.axial_field_configuration"
+            },
+            {
+              "field": "exact_port_axial_field_configuration",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.axial_field_configuration"
+          }
+        },
+        {
+          "id": "projection.registered.temporal_fragment_match",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.temporal_fragment_match"
+            },
+            {
+              "field": "exact_port_temporal_fragment_match",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.temporal_fragment_match"
+          }
+        },
+        {
+          "id": "projection.registered.discrete_relay_optics",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.discrete_relay_optics"
+            },
+            {
+              "field": "exact_port_discrete_relay_optics",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.discrete_relay_optics"
+          }
+        },
+        {
+          "id": "projection.registered.visual_sequence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.visual_sequence"
+            },
+            {
+              "field": "exact_port_visual_sequence",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.visual_sequence"
+          }
+        },
+        {
+          "id": "projection.registered.supported_construction",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.supported_construction"
+            },
+            {
+              "field": "exact_port_supported_construction",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.supported_construction"
+          }
+        },
+        {
+          "id": "projection.registered.finite_alignment_game",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.finite_alignment_game"
+            },
+            {
+              "field": "exact_port_finite_alignment_game",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.finite_alignment_game"
+          }
+        },
+        {
+          "id": "projection.registered.bounded_joystick",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.bounded_joystick"
+            },
+            {
+              "field": "exact_port_bounded_joystick",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.bounded_joystick"
+          }
+        },
+        {
+          "id": "projection.registered.neighborhood_pattern_construction",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.neighborhood_pattern_construction"
+            },
+            {
+              "field": "exact_port_neighborhood_pattern_construction",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.neighborhood_pattern_construction"
+          }
+        },
+        {
+          "id": "projection.registered.layered_prefix_construction",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.layered_prefix_construction"
+            },
+            {
+              "field": "exact_port_layered_prefix_construction",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.layered_prefix_construction"
+          }
+        },
+        {
+          "id": "projection.registered.inherited_k03",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.inherited_k03"
+            },
+            {
+              "field": "exact_inherited_k03",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.inherited_k03"
+          }
+        },
+        {
+          "id": "projection.registered.unsupported",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "registered.unsupported"
+            },
+            {
+              "field": "no_exact_registered_port",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "registered.unsupported"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.registered_external_adapter_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.wrap_slide"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.guarded_transport"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.queued_alignment_cascade"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.3",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.cyclic_configuration_coverage"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.4",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.metric_stack_image"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.5",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.oriented_passage"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.6",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.reactive_capture"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.7",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.station_gated_cargo"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.8",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.cadenced_rail_transfer"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.9",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.fixed_program_origin"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.10",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.charted_room_navigation"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.11",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.gravity_adhesion"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.12",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.topological_region_recolor"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.13",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.visible_voxel_construction"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.14",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.preview_piece_packing"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.15",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.station_profile_workbench"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.16",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.axial_field_configuration"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.17",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.temporal_fragment_match"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.18",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.discrete_relay_optics"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.19",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.visual_sequence"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.20",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.supported_construction"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.21",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.finite_alignment_game"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.22",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.bounded_joystick"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.23",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.neighborhood_pattern_construction"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.24",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.layered_prefix_construction"
+            }
+          ],
+          "reason_ref": "reason.exact_source_operation_and_single_current_typed_port"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.25",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.inherited_k03"
+            }
+          ],
+          "reason_ref": "reason.source_declares_inherited_k03_without_extension"
+        },
+        {
+          "id": "tier.policy.registered_external_adapter_c.26",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "registered.unsupported"
+            }
+          ],
+          "reason_ref": "reason.missing_ambiguous_or_stale_adapter_binding"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.registered_adapter_actual_use_not_attested",
+      "reason_refs": [
+        "reason.exact_source_operation_and_single_current_typed_port",
+        "reason.source_declares_inherited_k03_without_extension",
+        "reason.missing_ambiguous_or_stale_adapter_binding"
+      ]
+    }
+  ]
+}

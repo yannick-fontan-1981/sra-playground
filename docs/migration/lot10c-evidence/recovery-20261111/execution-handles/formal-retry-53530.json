@@ -1,0 +1,11 @@
+{
+  "schema": "logos-engine.executor-command-handle.v1",
+  "sessionId": 53530,
+  "startedAt": "2026-11-11T20:58:57.524075+00:00",
+  "kind": "same56file_formal_retry",
+  "timeoutSeconds": 1800,
+  "ownedTTY": true,
+  "receipt": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/validation/delta-tests-run.json",
+  "reason": "Prior600second bound incomplete; same tests and inputs unchanged. No aggregation or relabelling of former development batches.",
+  "noAutomaticFollowup": true
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "logos-engine.lot3h.loop-log-transport.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T13:21:48.278412-03:00",
+  "displayTimeZone": "UTC-03:00",
+  "source": {
+    "path": "docs/migration/lot3h-evidence/final/crossed-prefix-common-loop.log",
+    "bytes": 1121,
+    "sha256": "fdd40380b84261b66d56d09eb1baab5c9a7dfaf74b71996bff132855c1682ce7"
+  },
+  "transport": {
+    "path": "docs/migration/lot3h-evidence/final/crossed-prefix-common-loop.log.gz",
+    "bytes": 622,
+    "sha256": "e18b73e7b6837704c7b8940e455548a92e98a59f547d1e76c212c36ab695f720"
+  },
+  "restoredIdentical": true,
+  "qualification": "Deterministic gzip preserves the exact completed common-loop stdout/stderr; the local original remains present. This is transport verification, not another execution."
+}

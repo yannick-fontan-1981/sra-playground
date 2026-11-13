@@ -1,0 +1,60 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "declaredAt": "2026-11-11T21:58:56.454064+00:00",
+  "declarationOwner": "Lot8A recorded regression host recovery03",
+  "status": "prospective_not_executed",
+  "cases": [
+    {
+      "id": "weav-051",
+      "game": "WEAV",
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+        "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3"
+      },
+      "trace": {
+        "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+        "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2"
+      }
+    }
+  ],
+  "passiveOwnerRequirements": [],
+  "strictComparator": {
+    "path": "scripts/compare-v54-regressions.py",
+    "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "bytes": 18166
+  },
+  "strictComparisonCheckNames": [
+    "both runs passed with the same declared game and target",
+    "same production budgets, source reference and opaque game asset provenance",
+    "same complete initial public packet hash and public state",
+    "every archived public packet independently hashes to the v53 baseline",
+    "every archived host-only command equals its prior baseline command",
+    "same commands, complete returned packet hashes, animation lengths and primitive boundaries",
+    "same selected family/group/kind/subquestion, acquired prefix lengths and retained solver scalars",
+    "same retained coordination source/preferred entries and current guard scope",
+    "same historical epoch anchors with session namespace normalized",
+    "same inherited source-series event counts on every sealed prefix",
+    "same common request outcomes and retained caller acquisition counters",
+    "same natural level boundaries and retained-session caller counters",
+    "same final public result and retained-session operation counts",
+    "same retained mechanical-domain assessments",
+    "both source runs remained unchanged and imported no Python agent module",
+    "current replay used the declared complete frozen native source",
+    "current replay identifies the exact host-only baseline and public trace"
+  ],
+  "expectedChecksPerCase": 17,
+  "expectedComparisonChecks": 17,
+  "inheritedCaseManifest": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/recorded-regression-cases.json",
+    "sha256": "2f2ead27c4a0b4e149baefd7a991ca0e8faf3cbab331f2aad498f9b295b12946",
+    "bytes": 8214
+  },
+  "frozenNativeSource": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/source-manifest.json",
+    "fileCount": 324,
+    "digest": "936fa2bf81965272b1ddbab4a5c01f98aeb6a48188c1f7a8c91de226598c5e43"
+  },
+  "qualification": "Only the WEAV case that failed from host heap exhaustion in attempt02 is retried, with identical native source, baseline and complete public trace. Prior ten passing cases and the failed attempt remain immutable; this is no cost/game success claim.",
+  "liveGameExecution": false,
+  "LKEY": "Closed and excluded"
+}

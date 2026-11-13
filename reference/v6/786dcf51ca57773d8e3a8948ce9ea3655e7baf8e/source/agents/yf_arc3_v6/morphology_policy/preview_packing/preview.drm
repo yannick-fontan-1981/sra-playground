@@ -1,0 +1,38 @@
+{
+  "module_id": "preview_packing",
+  "declarations": [
+    {
+      "id": "policy.preview_packing.current_inventory",
+      "kind": "schema",
+      "premises": [
+        "available_public_observation_and_current_scope"
+      ],
+      "applicability": [
+        "select_a_composition_proposal"
+      ],
+      "invariants": [
+        "preserve_a_validated_goal_continuation",
+        "a_family_cannot_release_physical_actions"
+      ],
+      "falsifiers": [
+        "missing_or_changed_current_evidence"
+      ],
+      "reason_refs": [
+        "reason.validated_continuity_then_measured_hypotheses_then_observed_frontier"
+      ],
+      "configuration": {
+        "preview_packing_question": {
+          "roles": [
+            "measured framed lattice",
+            "observed filled cell occurrence",
+            "residual cell domain",
+            "selected preview hypothesis"
+          ],
+          "selection": "Test a currently occupied point of an external cell shape whose area contributes to the framed residual. Selection and strict packing are library hypotheses, not palette roles or an acquired terminal law. Preserve existing interior material provisionally.",
+          "control": "Measure an available input on the currently selected full shape to acquire translation or normalized orientation. No direction or rotation mapping is supplied. Seal the unknown response and retain alternatives.",
+          "transport": "Use observed input effects and the existing finite residual partition calculus to prepare the current piece contribution. Preserve complete occurrence masks and interior material; preview overlap and repeated effects remain falsifiable hypotheses. Compare each projected support and seal on divergence or official boundary. Geometric completion is not an invented score."
+        }
+      }
+    }
+  ]
+}

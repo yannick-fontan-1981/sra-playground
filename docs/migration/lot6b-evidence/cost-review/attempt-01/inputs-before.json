@@ -1,0 +1,504 @@
+{
+  "schema": "logos-engine.lot6b-cost-tools-review-inputs.v1",
+  "recordedAt": "2026-11-11T14:44:59.488863+00:00",
+  "sourcePin": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "status": "review_started",
+  "files": [
+    {
+      "file": "capture-cost-owner-graphs.mjs",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/capture-cost-owner-graphs.mjs",
+        "bytes": 23229,
+        "sha256": "bdeb730acce872041354d30085c7703e111bf52056bdad07e6f7d52ea0a2be64"
+      },
+      "retained6A": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6a-evidence/capture-cost-owner-graphs.mjs",
+        "bytes": 23229,
+        "sha256": "bdeb730acce872041354d30085c7703e111bf52056bdad07e6f7d52ea0a2be64"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/capture-cost-owner-graphs.mjs",
+        "bytes": 23192,
+        "sha256": "bb285d2fe6ae03300c1f50a78dae71bfb096aafc8d93ba7f3400d389e417b217"
+      },
+      "originalAndRetainedIdentical": true,
+      "diffLines": 136
+    },
+    {
+      "file": "record-owner-source-inventory.mjs",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/record-owner-source-inventory.mjs",
+        "bytes": 12847,
+        "sha256": "060686d8390807d6000caadae0f89bff9240bc3f4d7be094045ff8ff15c9a509"
+      },
+      "retained6A": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6a-evidence/record-owner-source-inventory.mjs",
+        "bytes": 12847,
+        "sha256": "060686d8390807d6000caadae0f89bff9240bc3f4d7be094045ff8ff15c9a509"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/record-owner-source-inventory.mjs",
+        "bytes": 12842,
+        "sha256": "d2608ea5a6b38a503e9fab6a72ebcdf68c4059f3ffb095974dd4a86e4980f7df"
+      },
+      "originalAndRetainedIdentical": true,
+      "diffLines": 46
+    },
+    {
+      "file": "qualify-cost-owner-graphs.mjs",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/qualify-cost-owner-graphs.mjs",
+        "bytes": 40668,
+        "sha256": "284e3fc3fa0ea2cb0513e6ecaf920598a5a1baa546723b0a69e0de124f0035d5"
+      },
+      "retained6A": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6a-evidence/qualify-cost-owner-graphs.mjs",
+        "bytes": 40668,
+        "sha256": "284e3fc3fa0ea2cb0513e6ecaf920598a5a1baa546723b0a69e0de124f0035d5"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/qualify-cost-owner-graphs.mjs",
+        "bytes": 40340,
+        "sha256": "4515e538c42ab86eb23d56d8ea7dd2e8bb76c7510d69d5c33e2c022c817a0441"
+      },
+      "originalAndRetainedIdentical": true,
+      "diffLines": 245
+    },
+    {
+      "file": "finalize-owner-cost-contract.py",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/finalize-owner-cost-contract.py",
+        "bytes": 15735,
+        "sha256": "2036fcca3c380dae7b8e55d1c71cedbd41cf78b980c6b50768ee820776335dc0"
+      },
+      "retained6A": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6a-evidence/finalize-owner-cost-contract.py",
+        "bytes": 15735,
+        "sha256": "2036fcca3c380dae7b8e55d1c71cedbd41cf78b980c6b50768ee820776335dc0"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/finalize-owner-cost-contract.py",
+        "bytes": 15727,
+        "sha256": "74f719543cd6c40ec70b8fc9bba5c7d0a1ea68aab8ba11947c352f6c5eceedcf"
+      },
+      "originalAndRetainedIdentical": true,
+      "diffLines": 111
+    },
+    {
+      "file": "prepare-cost-protocol.py",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/prepare-cost-protocol.py",
+        "bytes": 30307,
+        "sha256": "48229486f8c41b9c74393de8d5ed006862ee6854a18271edf7be015d8fd6cadc"
+      },
+      "retained6A": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6a-evidence/prepare-cost-protocol.py",
+        "bytes": 30307,
+        "sha256": "48229486f8c41b9c74393de8d5ed006862ee6854a18271edf7be015d8fd6cadc"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/prepare-cost-protocol.py",
+        "bytes": 30301,
+        "sha256": "dcfc49c4731305d3e27d4fb08de5e96b7f4887ef7c54f107c279910ceac3c304"
+      },
+      "originalAndRetainedIdentical": true,
+      "diffLines": 133
+    },
+    {
+      "file": "check-cost-static-inputs.py",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/check-cost-static-inputs.py",
+        "bytes": 27608,
+        "sha256": "28eb3b63af5ab9e145e877b0a2eb882f5e89eb326fc5517347d2b76918dca47a"
+      },
+      "retained6A": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6a-evidence/check-cost-static-inputs.py",
+        "bytes": 27608,
+        "sha256": "28eb3b63af5ab9e145e877b0a2eb882f5e89eb326fc5517347d2b76918dca47a"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/check-cost-static-inputs.py",
+        "bytes": 27598,
+        "sha256": "2cc65d51dce90466ab478a42daaeb4bf22c53307d5059cc828f66d5e1746bf9d"
+      },
+      "originalAndRetainedIdentical": true,
+      "diffLines": 108
+    },
+    {
+      "file": "consolidate-owner-costs.mjs",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/consolidate-owner-costs.mjs",
+        "bytes": 52958,
+        "sha256": "6ef8481b3187edb8d6e14d2ea2a3ea40673106dcad180025deec975446a9597f"
+      },
+      "retained6A": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6a-evidence/consolidate-owner-costs.mjs",
+        "bytes": 52958,
+        "sha256": "6ef8481b3187edb8d6e14d2ea2a3ea40673106dcad180025deec975446a9597f"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/consolidate-owner-costs.mjs",
+        "bytes": 52949,
+        "sha256": "e9992b42deff28d7d5dff04272eea4a65c17a1c056db2afa94a0b432e1776ceb"
+      },
+      "originalAndRetainedIdentical": true,
+      "diffLines": 125
+    },
+    {
+      "file": "review-owner-costs.py",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/review-owner-costs.py",
+        "bytes": 70329,
+        "sha256": "13b6585d87fc2306e9652d70e64fdefc7a8499f141216dc65ba67295c235bc20"
+      },
+      "retained6A": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6a-evidence/review-owner-costs.py",
+        "bytes": 70329,
+        "sha256": "13b6585d87fc2306e9652d70e64fdefc7a8499f141216dc65ba67295c235bc20"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/review-owner-costs.py",
+        "bytes": 70322,
+        "sha256": "f913ab3c9a06ded40443cf8111221de33d3dc23b954c99e3141171213b721c3e"
+      },
+      "originalAndRetainedIdentical": true,
+      "diffLines": 126
+    },
+    {
+      "file": "record-cost-log-transport.py",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/record-cost-log-transport.py",
+        "bytes": 3889,
+        "sha256": "80309f5db053e850ea410dd1d855a4627deb6edca97758587deecf76ad173f52"
+      },
+      "retained6A": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6a-evidence/record-cost-log-transport.py",
+        "bytes": 3889,
+        "sha256": "80309f5db053e850ea410dd1d855a4627deb6edca97758587deecf76ad173f52"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/record-cost-log-transport.py",
+        "bytes": 3889,
+        "sha256": "40ced75679068cf2c52c3ff27cc33afb6a6db03c8cbb24190cfca46e562300da"
+      },
+      "originalAndRetainedIdentical": true,
+      "diffLines": 27
+    },
+    {
+      "file": "write-cost-results.py",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/write-cost-results.py",
+        "bytes": 41898,
+        "sha256": "810de6a13a0288488f12f370a98b9ff61443aa988f17535d352388d18cda4b96"
+      },
+      "retained6A": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6a-evidence/write-cost-results.py",
+        "bytes": 41898,
+        "sha256": "810de6a13a0288488f12f370a98b9ff61443aa988f17535d352388d18cda4b96"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/write-cost-results.py",
+        "bytes": 41895,
+        "sha256": "ad2143c2f963191bbd074d2ec72cadc0f0eba7a571f37c7b764c1af9b1f306d1"
+      },
+      "originalAndRetainedIdentical": true,
+      "diffLines": 132
+    },
+    {
+      "file": "finalize-measured-cost.py",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/finalize-measured-cost.py",
+        "bytes": 16709,
+        "sha256": "7bb153c1967572826fdf1fc1771090023b2da42e56b816f511baca7773a48c53"
+      },
+      "retained6A": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6a-evidence/finalize-measured-cost.py",
+        "bytes": 16709,
+        "sha256": "7bb153c1967572826fdf1fc1771090023b2da42e56b816f511baca7773a48c53"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/finalize-measured-cost.py",
+        "bytes": 16709,
+        "sha256": "eb48dba03603ebd9a72e4598646ea54cdeac6322b7d5cefad9fe4f5a37dee4d3"
+      },
+      "originalAndRetainedIdentical": true,
+      "diffLines": 61
+    }
+  ],
+  "coordination": {
+    "lot7-followup-status.json": {
+      "lot": "7 follow-up: Workshop stationary continuation",
+      "updated_at": "2026-11-11T14:42:51.275234+00:00",
+      "phase": "native_published_documentation_closure_in_progress",
+      "checkout": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout",
+      "stage": "Eleven-case187comparison amendment andindependentreviewv2 recordedbeforefirstownreplay. Frozen306candidatef8d5097 unchanged. Allcaseinputs verified; KATA usesprepared6Aactualpublicreturns, noLKEY. Functionalwalltimes are notperformance data.",
+      "heavy_work_started": false,
+      "heavy_execution_active": false,
+      "performance_started": false,
+      "publication_started": true,
+      "active_command": "Native0.61 Site98 succeeded; preserving exactbuild while recording terminalreceipt and updating roadmap/docs. Documentationclosure next, publicationlockstillheld.",
+      "preview_stopped": true,
+      "case_clock_state": "closed",
+      "case_clock_cumulative_seconds": 2390.347106991,
+      "case_clock_remaining_seconds": 9.652893008999854,
+      "reserved_native_version": "0.61.0 previously agreed, subject to recovery and actual source verification",
+      "publication_order": "6A0.60 completed Sites96/97 ->7followup0.61 ->10B0.62 ->5C0.63",
+      "request_to_other_lanes": "NativeSite98/0.61 succeeded on653e40a, digestf8d5097. Documentationclosure remains in progress; wait its actual finalcommit before owncost/publication. Native code will stay identical.",
+      "request_to_lot6a": "ActualSite97 integrated and all40officialtrials matched exactwork forms. Our performance window complete and quiet released; native0.61 publication pending globaldecision and transport.",
+      "request_to_lot10b": "Explicit functional quiet RELEASE after completeABBA and strict40/40pass. Shared-lock work may resume; your own official cost/publication still follows actual0.61 publication. Publicationlock remains held through our native+doc closure.",
+      "request_to_lot5c": "Explicit functional quiet RELEASE after completeABBA and strict40/40pass. Shared-lock work may resume; your own official cost/publication still follows actual0.61 publication. Publicationlock remains held through our native+doc closure.",
+      "branch": "lot7-followup-recovered-site95",
+      "source_checkpoint": {
+        "commit": "900febf8b165136be07663ee106de1747a1f1181",
+        "ref": "refs/heads/lot7-followup-recovery-checkpoint-20261111",
+        "pushedAndVerified": true,
+        "nativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+        "nativeFileCount": 306,
+        "publication": false
+      },
+      "source_docs_checkpoint": "5780228",
+      "provisional_validation": {
+        "newSyntheticTestsPassed": 51,
+        "affectedTestsPassed": 196,
+        "typecheck": "passed",
+        "originalPythonSyntheticOperations": 24,
+        "originalSourceFilesVerified": 1786,
+        "finalIntegratedValidation": "pending6Astableintegration"
+      },
+      "formal_first_attempt": {
+        "tests": 5042,
+        "passed": 5040,
+        "failed": 2,
+        "retained": true
+      },
+      "prepared6ACheckpoint": "c263271442b8e8a8084c39c2f9301fd3163e7d29",
+      "testCorrectionCheckpoint": "900febf8b165136be07663ee106de1747a1f1181",
+      "buildGate": "5/5 passed on unchanged frozen source",
+      "quiet_request_id": "lot7-followup-f8d5097-strict-window",
+      "quiet_request_observed_at": "2026-11-11T12:48:42.886940+00:00",
+      "quiet_acknowledged": false,
+      "recorded_regressions_completed": {
+        "cases": 11,
+        "comparisons": 187,
+        "status": "passed",
+        "exitCode": 0,
+        "session": 72585
+      },
+      "quiet_acknowledged_at": "2026-11-11T12:59:07.412337+00:00",
+      "quiet_scope": "6A terminal publication handoff and explicit10B/5C request-specific quiet held; own3agents idle; no preview. Exclusive performance lock held through readiness and ABBA.",
+      "all_own_subagents_compute_idle": true,
+      "formal_retry": {
+        "status": "passed",
+        "tests": 5042,
+        "passed": 5042,
+        "failed": 0,
+        "skipped": 0,
+        "cancelled": 0,
+        "todo": 0,
+        "session": 8462,
+        "receipt": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/verification-attempt-02/validation/delta-tests-run.json"
+      },
+      "next_requested_quiet_window": {
+        "requestId": "lot7-followup-f8d5097-strict-window",
+        "requestedAt": "2026-11-11T13:10:51.159060+00:00",
+        "startsAfter": "6A explicit release and actually published source reconciliation; not before",
+        "candidateNativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+        "preparedBaselineDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+        "functionalStatus": "5042/5042 tests,5/5 delivery checks,187/187 recorded comparisons passed",
+        "remainingBeforeMeasurement": "Actual6A merge/reconciliation, completed evidence packaging/integrity, strict functional forms and final readiness",
+        "measurementStarted": false
+      },
+      "quiet_release_observed_at": "2026-11-11T13:34:07.312970+00:00",
+      "quiet_requested": false,
+      "quiet_requested_at": "2026-11-11T13:50:57.714422+00:00",
+      "actualPublishedPredecessor": {
+        "siteVersion": 97,
+        "nativeVersion": "0.60.0",
+        "commit": "98336fba4e696a51c90ff7f7b37b8bdf95f34847",
+        "nativeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+        "reconciled": true
+      },
+      "performance_lock_held": false,
+      "candidateWindowCommit": "78220117e6cbd315098c98effd647a07825cc4da",
+      "performance_completed": true,
+      "quiet_released_at": "2026-11-11T14:27:24.161342+00:00",
+      "source_transport": {
+        "steps": 5,
+        "finalCommit": "653e40a4f45df8ec8c6bda005004c7cdb8df074a",
+        "applicationComparisons": 375,
+        "recheck": "passed"
+      },
+      "cost_result": {
+        "status": "accepted",
+        "STCK_relativeIncrease": 0.05918584935329077,
+        "SMLP_relativeIncrease": 0.013044211943558062,
+        "measuredSessions": 32,
+        "measuredActions": 400,
+        "strictTrialsMatched": 40
+      },
+      "published_native": {
+        "siteVersion": 98,
+        "nativeVersion": "0.61.0",
+        "commit": "653e40a4f45df8ec8c6bda005004c7cdb8df074a",
+        "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_b6a726c7545c819190323d5ac24110e6",
+        "deploymentId": "appgdep_6af47df68da08191bc9cd0290615b53d",
+        "status": "succeeded",
+        "url": "https://sra-playground.yannick-fontan.chatgpt.site"
+      }
+    },
+    "lot10b-status.json": {
+      "schema": "sra.shared-lane-status.v1",
+      "lane": "10B",
+      "updated_at": "2026-11-11T14:44:11.114625+00:00",
+      "stage": "Actual Site98/native0.61 deployment succeeded14:39:04UTC observed; integrating653e40a while retaining frozen74143a candidate.",
+      "heavy_work_started": false,
+      "performance_started": false,
+      "publication_started": false,
+      "quiet_acknowledged": false,
+      "active_command": "Actual published0.61 source integration; all768frozen inputs unchanged, only roadmap merge remains. Formal1205/1205 and five delivery gates passed.",
+      "request_to_other_lanes": "Bounded historical HPDL diagnostic closed. Writer passed; independent source comparison exceeded declared activity limit and was reaped, no game run. All149.720413432s charged. Native unchanged; text diagnosis before next bounded step.",
+      "historicalHPDLClock": {
+        "chargedSeconds": 159.45478678199166,
+        "remainingSeconds": 2240.5452132180085,
+        "actions": 40,
+        "qualification": "Historical recorded gameplay; no new HPDL action in this recovery."
+      },
+      "checkout": "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout",
+      "branch": "lot10b-window-recovery-20261111",
+      "publication_order": "Previously agreed6A0.60 ->7followup0.61 ->10B0.62 ->5C0.63, subject to actual recovered/rebuilt source and terminal publications.",
+      "request_to_lot6a": "Actual published97 source scripts/review imported exactly; own1205/1205 tests and five gates pass. Observed actual Site98/native0.61. Next after recorded regressions and7closure is a bounded300s HPDL functional interval under lot10b-hpdl02-74143a-functional, followed later by separately requested officialcost. Your completed/idle terminal status is retained; advise any resumed compute.",
+      "request_to_lot7_followup": "Actual Site98 deployment succeeded observed directly at14:39:04UTC; source653e40a fetched and merging. Our1205/1205 tests and five gates passed. No cost or HPDL yet. Next:10recorded regressions, then request lot10b-hpdl02-74143a-functional for300s activity plus capture after your documentation closure. Please expose terminal source commit and explicit idle/quiet when publication work ends.",
+      "request_to_lot5c": "Actual Site98/native0.61 succeeded14:39:04UTC observed; our1205/1205 tests and five gates passed. After ten recorded regressions and7documentation closure, request lot10b-hpdl02-74143a-functional: one coldHPDL attempt300s activity plus charged capture, then release. Please acknowledge all workers stopped for this exact functional request when your narrow Git integration closes. No officialcost starts here yet.",
+      "candidate_native_version": "0.62.0 development label on published95 base; final predecessor integration pending",
+      "heavy_execution_active": true,
+      "preview_stopped": true,
+      "source_checkpoint": "e77a2ea289c6e875bb0d5793e6c24cd0b0ebde08",
+      "hpdl_active_attempt": null,
+      "preview": "Managed preview stopped and preparation tab closed; no HPDL browser interval has begun.",
+      "hpdl_current_clock": {
+        "chargedSeconds": 1075.8581646789917,
+        "remainingSeconds": 1324.1418353210083,
+        "state": "closed"
+      },
+      "quiet_acknowledged_at": "2026-11-11T13:55:39.564397+00:00",
+      "quiet_request_id": "lot7-followup-f8d5097-strict-window",
+      "quiet_scope": "All runtime/Python/Git work has completed. No tests, imports, hashes, archives, Git, builds, preview, games or queued commands until explicit lot7 follow-up release; text and coordination only.",
+      "hpdl_pending_case_work_debit": null,
+      "latest_remote_observation": {
+        "observedAt": "2026-11-11T13:42:33.125977+00:00",
+        "siteVersion": 96,
+        "commit": "cdaceea1c8918430a70b95fa427b31fcd22d290c",
+        "deploymentId": "appgdep_6af470b6d1948191b31946e4190a17a6",
+        "status": "succeeded",
+        "qualification": "Actual6A publication observed through Sites; local byte reconciliation pending."
+      },
+      "all_own_subagents_idle": true,
+      "clock_fix_commit": "4e7e4742b997128346e84f62b7a4fb8b5d4e47c5",
+      "native_digest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+      "native_files": 310,
+      "hpdl_charged_seconds": 1263.3446460859916,
+      "hpdl_remaining_seconds": 1136.6553539140084,
+      "all_own_subagents_compute_idle": true,
+      "quiet_release_observed_at": "2026-11-11T14:27:41.794124+00:00",
+      "formal_tests": {
+        "files": 44,
+        "tests": 1205,
+        "passed": 1205,
+        "failed": 0,
+        "skipped": 0,
+        "cancelled": 0,
+        "nativeDigest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12"
+      }
+    },
+    "lot5c-status.json": {
+      "schema": "sra.parallel-lane-status.v1",
+      "lane": "lot5c",
+      "checkout": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+      "updated_at": "2026-11-11T14:41:49.827455+00:00",
+      "phase": "bounded_clock_and_acquisition_validation_running",
+      "active_command": "Declared source freeze, runtime/Window tests, three selectedBinding acquisition-bound cases, typecheck and audits underSHlock. No fullLIFEreplay/game/build/cost.",
+      "heavy_work_started": true,
+      "heavy_execution_active": true,
+      "performance_started": false,
+      "publication_started": false,
+      "quiet_acknowledged": false,
+      "reserved_native_version": "0.63.0",
+      "base_site": 95,
+      "performance_lock": "/workspace/shared/sra-coordination/performance.lock",
+      "publication_lock": "/workspace/shared/sra-coordination/publication.lock",
+      "no_live_games": true,
+      "notes": "Native owner/runtime and independent proofs reconstructed from original; old receipts unavailable. Inform lot5c before performance window or publication.",
+      "publication_queue_acknowledged": [
+        "6A0.60",
+        "7followup0.61",
+        "10B0.62",
+        "5C0.63"
+      ],
+      "requires_actual_published_predecessor": true,
+      "checkpoint_push_target": "lot5c-recovery-checkpoint-20261111",
+      "checkpoint_commit": "403cf3ad9cdaa8a0a17f8780ce2668c32909d3ce",
+      "checkpoint_publication": "none, source branch only",
+      "checkpoint_pushed_and_verified": true,
+      "prospective_integration_request": "/workspace/shared/sra-coordination/lot5c-integration-request.json",
+      "quiet_request_id": "lot7-followup-f8d5097-strict-window",
+      "quiet_scope": "All native/Python proof and source checkpoint operations have completed. No tests, imports, hashes, archives, Git, builds, preview, games or queued commands until explicit lot7-followup release; text and coordination only.",
+      "native_deadline_test": "passed1/1; no next action after acquisition deadline",
+      "all_own_subagents_idle": true,
+      "quiet_request_withdrawn_by_peer_at": "2026-11-11T12:37:00.902589+00:00",
+      "prepared_integrated_commit": "d090c60aa07fb1ef7cb6e9a5b068840a3b81baec",
+      "prepared_peer_commit": "dd4a43288c51c68365ff1c5224f0576209a1dc67",
+      "latest_validation": "Common02 PASS: seven native tests/eight scenarios; four cold original comparisons6818/6818;412operations,80returns(76selected/4passive);318frozen native files and1074unique inputs verified unchanged. Retained common01failure and aggregate scope failure. Original sources1786 verified before/after in each export.",
+      "resumed_conversation_cwd": "/workspace/scratch/8a0681e98bf4",
+      "request_to_lot6a": "Own bounded common02 slot and source checkpoint closure complete. No source publication from5C; actual predecessor order6A ->followup7 ->10B still required. Holding fresh lot7 strict quiet. Own checkpoint403cf3ad9cdaa8a0a17f8780ce2668c32909d3ce is an ordinary source branch only.",
+      "request_to_lot10b": "Published6ASite97 merged6f4a746; your exactclockfix4e7e474 cherry-picked72397e4 withall12files/provenance. Announcing bounded shared-lock verification next: fullnative-runtime tests, existingWindow4tests, threeBinding acquisition-bound cases only, typecheck+audits. No foreign-parentLIFE longreplay, fullsuite, livegame, officialcost orbuild; targetshortbatch. Your44filefunctionalrunmaycontinue; willdeferifHPDLisolatedintervalannounced.",
+      "next_bounded_step": "Integrate published6A Site97 and tested10B clock-origin fix when shared execution released; derive final scope from actualpublished7/10B, with all4closedLKEY modules excluded and qualifiedKATA/HPDL retained. Official5Ccost waits actual10Bpredecessor.",
+      "request_to_lot7_followup": "CRITICAL: observed private_native_deployment_starting14:38, but noacknowledgmentof contaminationdisclosed14:21andreminded14:28. FirstABBA overlapped two175MB+ recursiveI/Oscans14:19:51-14:22:52 from5Creviewers. It must not countasfullyisolated. Please preserveandqualifythiswindow; scheduleanentirecleanABBArepeat. Ownincident iscommittedin6f4a746 atdocs/migration/lot5c-evidence/recovery/coordination/lot7-quiet-io-deviation-20261111.json andsharedpath /workspace/shared/sra-coordination/lot5c-quiet-deviation-20261111T1420.json. Native sourcepublication canstillbeidentified,butthecostqualificationreservemustremainexplicit. PleaseACK.",
+      "text_preparation": "Roadmap and lineage updated with exact common02 totals, retained failures, recorded LIFE foreign-parent case vs synthetic source cases, source integrity, global per-game cost criterion and pending final integration. No native code changes in this closure.",
+      "quiet_acknowledged_at": "2026-11-11T14:22:52.050157+00:00",
+      "common_02": {
+        "summary": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/common/common-02/summary.json",
+        "checksPassed": 6818,
+        "checksTotal": 6818,
+        "nativeTests": 7,
+        "declaredScenarios": 8,
+        "operations": 412,
+        "actualReturns": 80,
+        "nativeDigest": "35e03bc9df42bb01762cc025d1e5faa838845637944f560a499fd8800df4e0ed",
+        "nativeFiles": 318,
+        "uniqueInputsVerified": 1074,
+        "liveGamesLaunched": 0
+      },
+      "quiet_interval_contaminated": true,
+      "quiet_deviation": "/workspace/shared/sra-coordination/lot5c-quiet-deviation-20261111T1420.json"
+    },
+    "lot6b-status.json": {
+      "schema": "sra.parallel-lane-status.v1",
+      "lane": "lot6b",
+      "phase": "source_implementation_on_actual_site97",
+      "checkout": "/workspace/sites/sra-lot6b-20261111/.sites-checkout",
+      "branch": "lot6b-selected-rigid-064",
+      "base_checkout": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout",
+      "base_published_commit": "98336fba4e696a51c90ff7f7b37b8bdf95f34847",
+      "base_published_site_version": 97,
+      "next_capability": "selected_rigid",
+      "heavy_execution_active": false,
+      "performance_started": false,
+      "publication_started": false,
+      "active_command": "Isolated Sites checkout opened exactly on Site97. Native component, oracle and capture implementation under shared functional lock; no live game or official cost.",
+      "quiet_acknowledged": false,
+      "quiet_request_id": "lot7-followup-f8d5097-strict-window",
+      "quiet_acknowledged_at": "2026-11-11 14:21:27 UTC",
+      "quiet_scope": "From this acknowledgment: source text reads and coordination only; no Git, hashes, archives, tests, Python proofs, builds, preview or games until explicit lot7 release.",
+      "startup_observation": "A new user turn requested6B. Before observing the current quiet request, startup performed one file-name search and git rev-parse HEAD, git status --short, git log -4 --oneline on the completed6Acheckout (recorded tool command walltime0.020982s). It also read lane status files. No tests, builds, games, hashes, archives or native/Python proofs ran. This is a real in-window Git-read exception, not a claim of uninterrupted quiet; lot7 must preserve it when reviewing isolation.",
+      "request_to_lot7_followup": "Explicit14:27:24 functional release observed. Isolated6B source implementation and bounded component/oracle/capture validation under SH; no live game or cost yet. Please acknowledge startup Git-read exception above alongside5C disclosed I/O before accepting isolation. Can close bounded jobs for fresh quiet; all samples must remain and isolation qualifications must be accurate. Also notified through prior6Astatusrequest.",
+      "request_to_lot10b": "6B selected_rigid now developing under SH on actualSite97; reserved publication after your0.62 then5C0.63. I will honor the planned300sHPDL isolated functional slot once explicitly announced. No6Blivegame/coststarted. Use lot6b-status.json for successor coordination;6A lane is closed.",
+      "request_to_lot5c": "6B selected_rigid developing on actualSite97, planned0.64 after actual0.63 publication. Own3agents use shared bounded functional work; no livegame/cost. I reiterated your disclosed isolation incident to7through6Astatus. Please read successor lot6b-status.json for future quiet windows and publication coordination.",
+      "quiet_release_observed_at": "2026-11-11 14:29:39 UTC",
+      "publication_order": "7followup0.61 ->10B0.62 ->5C0.63 ->6B proposed0.64, using actual published predecessor before finalfreeze/cost.",
+      "user_rule": "Complete-session median strictly below+10% for each game; diagnostic phase overruns allowed when the global per-game threshold passes."
+    }
+  },
+  "measurementExecuted": false,
+  "runtimeImported": false,
+  "originalsUnchanged": true
+}

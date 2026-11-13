@@ -1,0 +1,51 @@
+{
+  "schema": "logos-engine.lot8b.cost-preparation-attempt.v1",
+  "recordedAt": "2026-11-12T12:27:43.040558+00:00",
+  "attempt": 1,
+  "status": "failed_before_contract_directory_creation",
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot8b-evidence/tools/final-cost/prepare.py",
+    "--baseline-checkout",
+    "/workspace/sites/sra-lot8b-baseline066-20261112",
+    "--baseline-manifest",
+    "docs/migration/lot8b-evidence/final-version-067-01/baseline-native.json",
+    "--candidate-manifest",
+    "docs/migration/lot8b-evidence/final-version-067-01/candidate-native.json",
+    "--reconciliation",
+    "docs/migration/lot8b-evidence/final-version-067-01/validation-summary.json",
+    "--work-forms",
+    "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/work-forms.json",
+    "--graph-review",
+    "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/graph-review.json",
+    "--owner-inventory",
+    "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/owner-source-inventory.json",
+    "--functional-review",
+    "docs/migration/lot8b-evidence/final-version-067-01/final-functional-independent-review.json",
+    "--output-directory",
+    "docs/migration/lot8b-evidence/final-performance-067-01"
+  ],
+  "exitCode": 1,
+  "observedError": {
+    "type": "ValueError",
+    "message": "Declared bytes changed: src/logos-engine/v6-native-runtime.ts",
+    "location": "prepare.py:199 proof_fingerprints(owners) / verify / fp"
+  },
+  "captureMethod": "Executor returned complete traceback; this receipt records the observed error and state. No original stdout/stderr file was redirected for this nonexecuting preparation.",
+  "generator": {
+    "path": "docs/migration/lot8b-evidence/tools/final-cost/prepare.py",
+    "bytes": 19424,
+    "sha256": "22680bf1833f2fc41ce5ff058ad6ec707138d3b27bc791c1907e93babda325d9"
+  },
+  "sourceHead": "2cd4e7e557cb15034849da8c2794fa612cdbff18",
+  "nativeDigestAfter": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+  "nativeMatchesFrozenManifestAfter": true,
+  "contractDirectoryCreated": false,
+  "nativeSessionsExecuted": 0,
+  "measurementStarted": false,
+  "globalLockAcquired": false,
+  "publicationPerformed": false,
+  "automaticRetry": false,
+  "diagnosis": "Baseline factory sourceInputs are relative to their own checkout. The generic recursion interpreted them relative to candidate ROOT; distinct nativeversion bytes were correctly unequal but the lookup role was wrong. Preserve fingerprints and add explicit role-root interpretation in a new preparation helper."
+}

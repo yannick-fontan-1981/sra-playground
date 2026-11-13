@@ -1,0 +1,68 @@
+{
+  "schema": "logos-engine.lot6b-ordinary-work-source-review.v1",
+  "observedAt": "2026-11-11T21:27:36.902906+00:00",
+  "authority": "Latest explicit user instruction removes global locks for ordinary work",
+  "checkout": "/workspace/sites/sra-lot6b-20261111/.sites-checkout",
+  "localBranch": "lot6b-selected-rigid-064",
+  "remoteBranch": "lot6b-selected-rigid-checkpoint-20261111",
+  "baseCommit": "1372d2df336f9919d7b5892160936d928720c24c",
+  "historicalLaunchersRetained": [
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/commit-bin.py",
+      "bytes": 18580,
+      "sha256": "748a370648f5df0e24c01bd2f5f4f1358283c4b764385f34788fbf96d8216705"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/close-checkpoint.py",
+      "bytes": 6921,
+      "sha256": "f0c7d2d786fd04d73e5ae18dcb8285a14d90e57f22714cc55d4509da24b4715c"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/checkpoint-transport.mjs",
+      "bytes": 19844,
+      "sha256": "0b1ec1bf251287395f0520eac80ff82a6a947faa89728b64fa85c211880990fa"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/transport-plan.json",
+      "bytes": 264535,
+      "sha256": "39a6b0c8024fc7869acd4aeacc1438a1d68199fc4d9769bacac3a3bde66ed2d4"
+    }
+  ],
+  "lockFileMetadataBeforeProspectivePush": [
+    {
+      "path": "/workspace/shared/sra-coordination/performance.lock",
+      "device": 27,
+      "inode": 1971854,
+      "bytes": 0,
+      "openedOrAcquiredByThisCheck": false
+    },
+    {
+      "path": "/workspace/shared/sra-coordination/publication.lock",
+      "device": 27,
+      "inode": 1971855,
+      "bytes": 0,
+      "openedOrAcquiredByThisCheck": false
+    }
+  ],
+  "ordinaryWorkRequiresGlobalLock": false,
+  "ordinaryWorkWaitsForPeerPublication": false,
+  "preparatoryQuietIsAGate": false,
+  "exclusiveOfficialWindowsPreserved": true,
+  "transportReview": {
+    "directNodeDetachedWorker": true,
+    "workerIsProcessGroupLeader": true,
+    "noFlockLaunch": true,
+    "boundedGroupCleanupPreserved": true,
+    "originalAuthAndGitScopesPreserved": true,
+    "gitHooksPreserved": true,
+    "forcePushAllowed": false,
+    "remoteVerificationRequired": true,
+    "rootDeclaresActivityBeforeLaunch": true
+  },
+  "nativeCodeChanged": false,
+  "runtimeTestLogicChanged": false,
+  "caseWrapperChange": "Docstring only; cumulative budget, supervision and retained outcomes logic unchanged",
+  "officialMeasurementPerformed": false,
+  "sitePublicationPerformed": false,
+  "historicalArtifactsRewritten": false
+}

@@ -1,0 +1,14 @@
+{
+  "schema": "logos-engine.lot6b.prospective-test-environment-addendum.v1",
+  "declaredAt": "2026-11-11T18:05:53.092856+00:00",
+  "batch": "batch-03",
+  "testFilesChanged": false,
+  "nativeSourceChanged": false,
+  "runnerChanged": false,
+  "environment": {
+    "LOGOS_LOT5C_COMMON_EVIDENCE_DIR": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01"
+  },
+  "purpose": "Retain the eight actual Binding/common scenarios during the already declared whole-module test run, allowing the independent original-source comparison without rerunning the seven tests.",
+  "commandRecording": "The outer actual-command receipt will include env and the exact value before timeout and the unchanged batch command.",
+  "qualification": "Prospective evidence sink only. Original142-file scope/order and all four same-input aggregation requirements remain unchanged; no extra test or result is credited."
+}

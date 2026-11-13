@@ -1,0 +1,191 @@
+{
+  "schema": "logos-engine.native-diagnostic-evidence-index.v1",
+  "recordedAt": "2026-11-09T21:49:00.710475+00:00",
+  "nativeSourceDigest": "ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b",
+  "baselineNativeSourceDigest": "3cd17565b114a40ed71870bf8d7875a1b91102440b92d14a9258bfa98d4f7779",
+  "profileStrictComparison": {
+    "status": "strict_identity_failed",
+    "finalDifferences": 44,
+    "outsideInitialQualifications": 42,
+    "traceBodiesCollected": false
+  },
+  "semanticControl": {
+    "status": "qualified_semantic_equivalence",
+    "scope": "Separate full public STCK10 replay, one cold session per version",
+    "strictComparisonStatus": "strict_identity_failed",
+    "differingLeaves": 3834,
+    "unqualifiedBusinessDifferences": 0,
+    "commands": 10,
+    "ownerStates": 4,
+    "nodes": 344,
+    "deltasPerVersion": 842,
+    "decodedTraces": 24,
+    "binaryGraphIdentityClaimed": false
+  },
+  "observerDiagnostic": {
+    "casePackets": 4,
+    "sourceReferenceCases": 4,
+    "measuredCalls": 560,
+    "scope": "Private closed-record serializer measured against the unchanged V63 observer; exact canonical bytes, hashes, observations and scalar refusals checked. Not a full-session budget result."
+  },
+  "receipts": [
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/README.md",
+      "bytes": 4158,
+      "sha256": "bcceb6942e48c4754995d269f48b142c91ea572962e138de5ae84c9c2aa5d0f2"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/after-attempt-01.log.gz",
+      "bytes": 348,
+      "sha256": "7ede56593632609c416cbb0acf9407f9cc91a08e4564dfc9b7673b320076b323"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/after-execution.json",
+      "bytes": 806,
+      "sha256": "d324d2187d38ab82a122cec686323c30decc5c6c92ad619011289aa958211214"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/after.json.gz",
+      "bytes": 121902,
+      "sha256": "26cdd988efdda613e9cfe6f89c0d21a7a931d8a1420bede6d22d6bd2ae60b181"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/baseline-attempt-01.log.gz",
+      "bytes": 353,
+      "sha256": "04e55c78482e91009dd5796fbc1991aa99a1ba4186cd1d0d3f71a51df73d2054"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/baseline-environment-qualification.json",
+      "bytes": 1500,
+      "sha256": "e6a443a069861a3531b620abfa316d307df0732c2096570b658c7134c7b66ac8"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/baseline-execution.json",
+      "bytes": 795,
+      "sha256": "a9cd73cc646067d8c2c3ba96e124b6f641a262b3cf860a06a06f0ce687852a68"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/baseline-preparation.json",
+      "bytes": 782,
+      "sha256": "2553ff8f7765e898d89618b4854fbae649fd175ed26d9bc6e52b161321014d99"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/baseline.json.gz",
+      "bytes": 121381,
+      "sha256": "d8bd2f3b4b85270ab5c9e82807f369b5ffb0fce407bfe5e0642098d5dd7b71fa"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/comparison.json",
+      "bytes": 50649,
+      "sha256": "558cb9c6da47ea4c7a3030352e9f7662a787650c6050d78b3eaefb0c47b07022"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/observer-attempt-01.json.gz",
+      "bytes": 9553,
+      "sha256": "ed358100e04d7ca9e1d2fad1e0cf3298d0f2efcab9f6833a88bf9f200e92eb89"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/observer-protocol.md",
+      "bytes": 3927,
+      "sha256": "5826e8003ee5fba42ec98151c04ef8442ae6672866df00d4d22ab9e318af2624"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/observer-results.md",
+      "bytes": 5153,
+      "sha256": "e9fa7e17044b9f654d2291a0e71be65fbb2ffa76f42ca05f85029cf077d4abab"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/results.md",
+      "bytes": 3917,
+      "sha256": "10caec2697a78d0f2b2b061a16ef5d61854c630d2ccb2d1cf18d152a84706d14"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-after-attempt-01.log.gz",
+      "bytes": 353,
+      "sha256": "2d094a0ecba43c063caeed58e651e1f61756127157f9e2c6440745e58ba80f6e"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-after-execution.json",
+      "bytes": 832,
+      "sha256": "e23fba9aaa22b9330631e45d27b27f109141bd1f2c7f1d78959052f17b32d8dd"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-after.json.gz",
+      "bytes": 3157883,
+      "sha256": "633c966ba61276c84bd847066551b17c0033f28b30ada60b86386f8e14fe2bef"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-after.json.gz.parts.json",
+      "bytes": 1010,
+      "sha256": "cf94945e2acfc3d9e2c935cabc68228abf8f8c68e55a86fb8537e6579ac1f855"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-baseline-attempt-01.log.gz",
+      "bytes": 353,
+      "sha256": "c13ed538cc8d3ca2e810fbacfd795861dc1dbcf148498a4c3d504a6c91215396"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-baseline-execution.json",
+      "bytes": 821,
+      "sha256": "9a602d1e763fa44a8d636d1410fd611d4c889706cc4ea8e7709a3f6f7e40811a"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-baseline.json.gz",
+      "bytes": 3158146,
+      "sha256": "9edb49481488a10f79cf5ba8d60edd10995be1bdcd4b89167b9482bccbcf2d8c"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-baseline.json.gz.parts.json",
+      "bytes": 1025,
+      "sha256": "e426a8c21b2d248ee9cd191b17d908d470f5278949e52c4c7b23cefca9d2e8d6"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-comparison.json.gz",
+      "bytes": 88056,
+      "sha256": "d877f80c13499c7e04976a58f4e96a1bcb33b5367e351e6fe0ae5571300996b0"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-control-protocol.md",
+      "bytes": 3741,
+      "sha256": "d04fb7d3f351ac5423fb9bc679981df12897bb65d09d606858269fea809a80ea"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-preparation.json",
+      "bytes": 597,
+      "sha256": "fb70498a043c9cc2ba3df1d469bc29484944e90e1b13e1bdd4869a5451432219"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-qualification.json",
+      "bytes": 24723,
+      "sha256": "aee25438425e7900cbbe5fe0bf565776f1487aba755b2d1068a9a96e2503fdf9"
+    }
+  ],
+  "losslessTransport": {
+    "path": "docs/migration/lot2c-cost-evidence/final/diagnostic-byte-transport.json",
+    "bytes": 1847,
+    "sha256": "e22cea58b80b69d1ca8aa7b9052ce579cdddbb737dec235e537d440c54d67b71"
+  },
+  "generators": [
+    {
+      "path": "scripts/profile-native-loop-costs.mjs",
+      "bytes": 15138,
+      "sha256": "454094f98edb345a9169e2ce61f23ea753ce9158a5f797bb93ddd8bc5d8791b9"
+    },
+    {
+      "path": "scripts/profile-native-observer-costs.mjs",
+      "bytes": 12122,
+      "sha256": "59b4697263a58c959aa9fba896174e0dea237bf0996801dc827015538406d8e6"
+    },
+    {
+      "path": "scripts/capture-native-loop-semantics.mjs",
+      "bytes": 9292,
+      "sha256": "f5d42c69fbebdb41d7b1e9d65dc523f7e7e969535f60ca214d23ddc2c7af03aa"
+    },
+    {
+      "path": "scripts/compare-native-loop-diagnostics.mjs",
+      "bytes": 23639,
+      "sha256": "fb98618b982a98b6c6cb43f8a08e55167ed33a9368146a0bc4695c67e5ab8e91"
+    }
+  ],
+  "qualification": "Original instrumented profile failure and collection limit are retained. Separate semantic capture explains only observed version, clock and duration differences with closed paths and recomputed identities; no subtree is erased. Neither profile timings nor observer microbenchmarks replace the separate official V62 budget comparison."
+}

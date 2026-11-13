@@ -1,0 +1,5392 @@
+{
+  "module_id": "oriented_cargo_solving_b",
+  "declarations": [
+    {
+      "id": "policy.b_cargo_primitive_binding",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_one_owned_joint_transaction_preserves_all_autonomous_responses"
+      ],
+      "configuration": {
+        "kernel_ref": "mechanics.oriented_cargo_handoffs",
+        "joint_operation_ref": "mechanics.oriented_cargo_handoffs.joint_successor",
+        "joint_mode_ref": "STEP"
+      },
+      "invariants": [
+        "no_second_debit_or_autonomous_pass",
+        "one_response_is_not_all_responses",
+        "internal_successor_is_not_a_complete_primitive"
+      ],
+      "declared_alternative_refs": [
+        "cargo_primitive.bound",
+        "cargo_primitive.unresolved"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_primitive.bound",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_primitive.bound"
+            },
+            {
+              "field": "bindings_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_exact_current_native_binding_before_joint_calculation"
+          }
+        },
+        {
+          "id": "projection.cargo_primitive.unresolved",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_primitive.unresolved"
+            },
+            {
+              "field": "bindings_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_missing_joint_binding_is_an_evidence_dependency_not_a_plan"
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_oriented_cargo_goal",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_delivery_requires_all_named_cargo_released_in_allowed_poses"
+      ],
+      "configuration": {
+        "beneficiary_quantifier_ref": "ALL_DECLARED_BENEFICIARIES",
+        "require_current_source_manifest_identity": true,
+        "search_mode_refs": [
+          "POLICY",
+          "BELIEF"
+        ],
+        "belief_mode_ref": "BELIEF",
+        "response_quantifier_ref": "FORALL",
+        "control_quantifier_ref": "EXISTS",
+        "kernel_ref": "mechanics.oriented_cargo_handoffs",
+        "joint_operation_ref": "mechanics.oriented_cargo_handoffs.joint_successor",
+        "joint_mode_ref": "STEP",
+        "packet_return_type": "ExternalPrimitivePacketC",
+        "step_request_pattern": "cargo_step.{parent}.{model}.{state}.{command}",
+        "closure_metadata_refs": [
+          "named_finite_domain_size",
+          "declared_domain_not_closed"
+        ]
+      },
+      "declared_alternative_refs": [
+        "cargo_goal.current",
+        "cargo_goal.unresolved"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_goal.current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_goal.current"
+            },
+            {
+              "field": "goal_bindings_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "FOUND",
+            "reason_ref": "reason_actual_parent_beneficiary_quantifier_and_released_pose_clauses_are_bound"
+          }
+        },
+        {
+          "id": "projection.cargo_goal.unresolved",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_goal.unresolved"
+            },
+            {
+              "field": "goal_bindings_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE",
+            "reason_ref": "reason_missing_model_goal_or_current_binding_is_a_named_dependency"
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_oriented_cargo_search_phase",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_complete_response_domains_and_current_parent_why_govern_search_continuation"
+      ],
+      "declared_alternative_refs": [
+        "cargo_search.expand",
+        "cargo_search.seal",
+        "cargo_search.found",
+        "cargo_search.empty",
+        "cargo_search.unresolved"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_search.expand",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_search.expand"
+            },
+            {
+              "field": "native_step_blocked",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "computation_unbounded",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "model_consistent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pending_steps_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_call_budget_available",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE",
+            "reason_ref": "reason_K09_requested_exact_owned_native_successors",
+            "continue_search": true
+          }
+        },
+        {
+          "id": "projection.cargo_search.seal",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_search.seal"
+            },
+            {
+              "field": "native_step_blocked",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "computation_unbounded",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "model_consistent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pending_steps_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "metadata_only_missing",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "query_sealed",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE",
+            "reason_ref": "reason_all_reachable_response_domains_are_complete_before_sealing",
+            "continue_search": true
+          }
+        },
+        {
+          "id": "projection.cargo_search.found",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_search.found"
+            },
+            {
+              "field": "native_step_blocked",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "computation_unbounded",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "model_consistent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pending_steps_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "search_status_ref",
+              "operator": "equals",
+              "expected": "FOUND"
+            },
+            {
+              "field": "known_witness_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "FOUND",
+            "reason_ref": "reason_K09_returned_a_supported_policy_over_all_responses"
+          }
+        },
+        {
+          "id": "projection.cargo_search.empty",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_search.empty"
+            },
+            {
+              "field": "native_step_blocked",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "computation_unbounded",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "model_consistent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pending_steps_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "search_status_ref",
+              "operator": "equals",
+              "expected": "EMPTY_DECLARED_DOMAIN"
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "EMPTY_DECLARED_DOMAIN",
+            "reason_ref": "reason_only_this_closed_cargo_domain_has_no_supported_delivery"
+          }
+        },
+        {
+          "id": "projection.cargo_search.unresolved.native_blocked",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_search.unresolved"
+            },
+            {
+              "field": "native_step_blocked",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE",
+            "reason_ref": "reason_preserve_the_exact_cargo_dependency_or_bound_without_releasing_an_action"
+          }
+        },
+        {
+          "id": "projection.cargo_search.unresolved.bounded",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_search.unresolved"
+            },
+            {
+              "field": "computation_unbounded",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE",
+            "reason_ref": "reason_preserve_the_exact_cargo_dependency_or_bound_without_releasing_an_action"
+          }
+        },
+        {
+          "id": "projection.cargo_search.unresolved.contradictory",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_search.unresolved"
+            },
+            {
+              "field": "model_consistent",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE",
+            "reason_ref": "reason_preserve_the_exact_cargo_dependency_or_bound_without_releasing_an_action"
+          }
+        },
+        {
+          "id": "projection.cargo_search.unresolved.native_budget",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_search.unresolved"
+            },
+            {
+              "field": "pending_steps_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_call_budget_available",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE",
+            "reason_ref": "reason_preserve_the_exact_cargo_dependency_or_bound_without_releasing_an_action"
+          }
+        },
+        {
+          "id": "projection.cargo_search.unresolved.other_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_search.unresolved"
+            },
+            {
+              "field": "pending_steps_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "metadata_only_missing",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "search_status_ref",
+              "operator": "equals",
+              "expected": "NEEDS_EVIDENCE"
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE",
+            "reason_ref": "reason_preserve_the_exact_cargo_dependency_or_bound_without_releasing_an_action"
+          }
+        },
+        {
+          "id": "projection.cargo_search.unresolved.sealed_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_search.unresolved"
+            },
+            {
+              "field": "pending_steps_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "metadata_only_missing",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "query_sealed",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE",
+            "reason_ref": "reason_preserve_the_exact_cargo_dependency_or_bound_without_releasing_an_action"
+          }
+        },
+        {
+          "id": "projection.cargo_search.unresolved.unsupported",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_search.unresolved"
+            },
+            {
+              "field": "search_status_ref",
+              "operator": "equals",
+              "expected": "NOT_APPLICABLE"
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE",
+            "reason_ref": "reason_preserve_the_exact_cargo_dependency_or_bound_without_releasing_an_action"
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_oriented_cargo_replay",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_all_native_policy_branches_require_K03_reconciliation"
+      ],
+      "configuration": {
+        "path_kernel_ref": "mechanics.bounded_simulation",
+        "path_operation_ref": "mechanics.bounded_simulation",
+        "path_mode_ref": "PATH",
+        "path_return_type": "EventCompositionResultC",
+        "path_request_pattern": "cargo_path.{branch}"
+      },
+      "declared_alternative_refs": [
+        "cargo_replay.current",
+        "cargo_replay.unresolved"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_replay.current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_replay.current"
+            },
+            {
+              "field": "replay_scope_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "replay_qualified": true,
+            "source_status": "FOUND",
+            "reason_ref": "reason_all_response_paths_preserve_trace_and_meet_the_released_delivery_goal"
+          }
+        },
+        {
+          "id": "projection.cargo_replay.unresolved",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_replay.unresolved"
+            },
+            {
+              "field": "replay_scope_complete",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "replay_qualified": false,
+            "source_status": "NEEDS_EVIDENCE",
+            "reason_ref": "reason_an_unreconciled_policy_branch_remains_a_dependency"
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_oriented_cargo_why",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_explain_native_phase_effect_by_current_parent_delivery"
+      ],
+      "configuration": {
+        "case_refs": [
+          "front",
+          "coupling",
+          "delivery",
+          "attachment",
+          "deposit",
+          "relay",
+          "unstable",
+          "owner_removed",
+          "blocked_front",
+          "pair_masks"
+        ]
+      },
+      "declared_alternative_refs": [
+        "cargo_why.present",
+        "cargo_why.absent"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_why.front.present",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_why.present"
+            },
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "front"
+            },
+            {
+              "field": "before_front_contact",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_front_of_current_carrier_is_the_interaction_locus",
+            "principle_ref": "principle_front_of_current_carrier_is_the_interaction_locus",
+            "desired_predicate": "all_declared_cargo_released_acquired_in_allowed_poses",
+            "falsifier_ref": "contact_or_face_changed",
+            "preservation_refs": [
+              "parent_why",
+              "cargo_identity",
+              "native_phase_snapshot",
+              "model_revision",
+              "all_response_population",
+              "no_exclusive_necessity_from_one_witness"
+            ]
+          }
+        },
+        {
+          "id": "projection.cargo_why.front.absent",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_why.absent"
+            },
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "front"
+            },
+            {
+              "field": "before_front_contact",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_no_current_phase_support_for_this_cargo_dependency",
+            "principle_ref": "principle_front_of_current_carrier_is_the_interaction_locus",
+            "desired_predicate": "all_declared_cargo_released_acquired_in_allowed_poses",
+            "falsifier_ref": "contact_or_face_changed",
+            "preservation_refs": [
+              "parent_why",
+              "cargo_identity",
+              "native_phase_snapshot",
+              "model_revision",
+              "all_response_population",
+              "no_exclusive_necessity_from_one_witness"
+            ]
+          }
+        },
+        {
+          "id": "projection.cargo_why.coupling.present",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_why.present"
+            },
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "coupling"
+            },
+            {
+              "field": "rigid_relation_unchanged",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_rigid_attachment_preserves_the_measured_relative_offset",
+            "principle_ref": "principle_rigid_attachment_preserves_the_measured_relative_offset",
+            "desired_predicate": "all_declared_cargo_released_acquired_in_allowed_poses",
+            "falsifier_ref": "relative_offset_or_face_changed",
+            "preservation_refs": [
+              "parent_why",
+              "cargo_identity",
+              "native_phase_snapshot",
+              "model_revision",
+              "all_response_population",
+              "no_exclusive_necessity_from_one_witness"
+            ]
+          }
+        },
+        {
+          "id": "projection.cargo_why.coupling.absent",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_why.absent"
+            },
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "coupling"
+            },
+            {
+              "field": "rigid_relation_unchanged",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_no_current_phase_support_for_this_cargo_dependency",
+            "principle_ref": "principle_rigid_attachment_preserves_the_measured_relative_offset",
+            "desired_predicate": "all_declared_cargo_released_acquired_in_allowed_poses",
+            "falsifier_ref": "relative_offset_or_face_changed",
+            "preservation_refs": [
+              "parent_why",
+              "cargo_identity",
+              "native_phase_snapshot",
+              "model_revision",
+              "all_response_population",
+              "no_exclusive_necessity_from_one_witness"
+            ]
+          }
+        },
+        {
+          "id": "projection.cargo_why.delivery.present",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_why.present"
+            },
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "delivery"
+            },
+            {
+              "field": "released_allowed_delivery",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_released_acquired_cargo_in_an_allowed_pose_satisfies_its_declared_beneficiary",
+            "principle_ref": "principle_released_acquired_cargo_in_an_allowed_pose_satisfies_its_declared_beneficiary",
+            "desired_predicate": "all_declared_cargo_released_acquired_in_allowed_poses",
+            "falsifier_ref": "cargo_reclaimed_or_required_pose_not_satisfied",
+            "preservation_refs": [
+              "parent_why",
+              "cargo_identity",
+              "native_phase_snapshot",
+              "model_revision",
+              "all_response_population",
+              "no_exclusive_necessity_from_one_witness"
+            ]
+          }
+        },
+        {
+          "id": "projection.cargo_why.delivery.absent",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_why.absent"
+            },
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "delivery"
+            },
+            {
+              "field": "released_allowed_delivery",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_no_current_phase_support_for_this_cargo_dependency",
+            "principle_ref": "principle_released_acquired_cargo_in_an_allowed_pose_satisfies_its_declared_beneficiary",
+            "desired_predicate": "all_declared_cargo_released_acquired_in_allowed_poses",
+            "falsifier_ref": "cargo_reclaimed_or_required_pose_not_satisfied",
+            "preservation_refs": [
+              "parent_why",
+              "cargo_identity",
+              "native_phase_snapshot",
+              "model_revision",
+              "all_response_population",
+              "no_exclusive_necessity_from_one_witness"
+            ]
+          }
+        },
+        {
+          "id": "projection.cargo_why.attachment.present",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_why.present"
+            },
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "attachment"
+            },
+            {
+              "field": "attached",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_attachment_changes_the_available_means_for_the_same_parent_delivery",
+            "principle_ref": "principle_attachment_changes_the_available_means_for_the_same_parent_delivery",
+            "desired_predicate": "all_declared_cargo_released_acquired_in_allowed_poses",
+            "falsifier_ref": "attachment_not_observed_or_carrier_incompatible",
+            "preservation_refs": [
+              "parent_why",
+              "cargo_identity",
+              "native_phase_snapshot",
+              "model_revision",
+              "all_response_population",
+              "no_exclusive_necessity_from_one_witness"
+            ]
+          }
+        },
+        {
+          "id": "projection.cargo_why.attachment.absent",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_why.absent"
+            },
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "attachment"
+            },
+            {
+              "field": "attached",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_no_current_phase_support_for_this_cargo_dependency",
+            "principle_ref": "principle_attachment_changes_the_available_means_for_the_same_parent_delivery",
+            "desired_predicate": "all_declared_cargo_released_acquired_in_allowed_poses",
+            "falsifier_ref": "attachment_not_observed_or_carrier_incompatible",
+            "preservation_refs": [
+              "parent_why",
+              "cargo_identity",
+              "native_phase_snapshot",
+              "model_revision",
+              "all_response_population",
+              "no_exclusive_necessity_from_one_witness"
+            ]
+          }
+        },
+        {
+          "id": "projection.cargo_why.deposit.present",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_why.present"
+            },
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "deposit"
+            },
+            {
+              "field": "released",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_deposit_reopens_carrier_motion_and_requires_current_cargo_identity_to_be_preserved",
+            "principle_ref": "principle_deposit_reopens_carrier_motion_and_requires_current_cargo_identity_to_be_preserved",
+            "desired_predicate": "all_declared_cargo_released_acquired_in_allowed_poses",
+            "falsifier_ref": "cargo_missing_or_next_grasp_unreachable",
+            "preservation_refs": [
+              "parent_why",
+              "cargo_identity",
+              "native_phase_snapshot",
+              "model_revision",
+              "all_response_population",
+              "no_exclusive_necessity_from_one_witness"
+            ]
+          }
+        },
+        {
+          "id": "projection.cargo_why.deposit.absent",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_why.absent"
+            },
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "deposit"
+            },
+            {
+              "field": "released",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_no_current_phase_support_for_this_cargo_dependency",
+            "principle_ref": "principle_deposit_reopens_carrier_motion_and_requires_current_cargo_identity_to_be_preserved",
+            "desired_predicate": "all_declared_cargo_released_acquired_in_allowed_poses",
+            "falsifier_ref": "cargo_missing_or_next_grasp_unreachable",
+            "preservation_refs": [
+              "parent_why",
+              "cargo_identity",
+              "native_phase_snapshot",
+              "model_revision",
+              "all_response_population",
+              "no_exclusive_necessity_from_one_witness"
+            ]
+          }
+        },
+        {
+          "id": "projection.cargo_why.relay.present",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_why.present"
+            },
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "relay"
+            },
+            {
+              "field": "ownership_transferred",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_an_observed_handoff_changes_the_carrier_without_changing_the_cargo_beneficiary",
+            "principle_ref": "principle_an_observed_handoff_changes_the_carrier_without_changing_the_cargo_beneficiary",
+            "desired_predicate": "all_declared_cargo_released_acquired_in_allowed_poses",
+            "falsifier_ref": "receiver_grasp_or_delivery_continuation_unsupported",
+            "preservation_refs": [
+              "parent_why",
+              "cargo_identity",
+              "native_phase_snapshot",
+              "model_revision",
+              "all_response_population",
+              "no_exclusive_necessity_from_one_witness"
+            ]
+          }
+        },
+        {
+          "id": "projection.cargo_why.relay.absent",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_why.absent"
+            },
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "relay"
+            },
+            {
+              "field": "ownership_transferred",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_no_current_phase_support_for_this_cargo_dependency",
+            "principle_ref": "principle_an_observed_handoff_changes_the_carrier_without_changing_the_cargo_beneficiary",
+            "desired_predicate": "all_declared_cargo_released_acquired_in_allowed_poses",
+            "falsifier_ref": "receiver_grasp_or_delivery_continuation_unsupported",
+            "preservation_refs": [
+              "parent_why",
+              "cargo_identity",
+              "native_phase_snapshot",
+              "model_revision",
+              "all_response_population",
+              "no_exclusive_necessity_from_one_witness"
+            ]
+          }
+        },
+        {
+          "id": "projection.cargo_why.unstable.present",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_why.present"
+            },
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "unstable"
+            },
+            {
+              "field": "delivered_reclaimed",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_a_reclaimed_delivery_requires_protection_or_restoration_before_parent_completion",
+            "unresolved_dependency_refs": [
+              "cargo.current_protection_restoration_or_interference_stop_means"
+            ],
+            "principle_ref": "principle_a_reclaimed_delivery_requires_protection_or_restoration_before_parent_completion",
+            "desired_predicate": "all_declared_cargo_released_acquired_in_allowed_poses",
+            "falsifier_ref": "all_relevant_policies_preserve_released_delivery",
+            "preservation_refs": [
+              "parent_why",
+              "cargo_identity",
+              "native_phase_snapshot",
+              "model_revision",
+              "all_response_population",
+              "no_exclusive_necessity_from_one_witness"
+            ]
+          }
+        },
+        {
+          "id": "projection.cargo_why.unstable.absent",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_why.absent"
+            },
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "unstable"
+            },
+            {
+              "field": "delivered_reclaimed",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_no_current_phase_support_for_this_cargo_dependency",
+            "principle_ref": "principle_a_reclaimed_delivery_requires_protection_or_restoration_before_parent_completion",
+            "desired_predicate": "all_declared_cargo_released_acquired_in_allowed_poses",
+            "falsifier_ref": "all_relevant_policies_preserve_released_delivery",
+            "preservation_refs": [
+              "parent_why",
+              "cargo_identity",
+              "native_phase_snapshot",
+              "model_revision",
+              "all_response_population",
+              "no_exclusive_necessity_from_one_witness"
+            ]
+          }
+        },
+        {
+          "id": "projection.cargo_why.owner_removed.present",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_why.present"
+            },
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "owner_removed"
+            },
+            {
+              "field": "holder_actor_removed",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_carrier_loss_does_not_erase_the_cargo_identity_or_parent_delivery_obligation",
+            "principle_ref": "principle_carrier_loss_does_not_erase_the_cargo_identity_or_parent_delivery_obligation",
+            "desired_predicate": "all_declared_cargo_released_acquired_in_allowed_poses",
+            "falsifier_ref": "cargo_identity_cannot_be_reconciled",
+            "preservation_refs": [
+              "parent_why",
+              "cargo_identity",
+              "native_phase_snapshot",
+              "model_revision",
+              "all_response_population",
+              "no_exclusive_necessity_from_one_witness"
+            ]
+          }
+        },
+        {
+          "id": "projection.cargo_why.owner_removed.absent",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_why.absent"
+            },
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "owner_removed"
+            },
+            {
+              "field": "holder_actor_removed",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_no_current_phase_support_for_this_cargo_dependency",
+            "principle_ref": "principle_carrier_loss_does_not_erase_the_cargo_identity_or_parent_delivery_obligation",
+            "desired_predicate": "all_declared_cargo_released_acquired_in_allowed_poses",
+            "falsifier_ref": "cargo_identity_cannot_be_reconciled",
+            "preservation_refs": [
+              "parent_why",
+              "cargo_identity",
+              "native_phase_snapshot",
+              "model_revision",
+              "all_response_population",
+              "no_exclusive_necessity_from_one_witness"
+            ]
+          }
+        },
+        {
+          "id": "projection.cargo_why.blocked_front.present",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_why.present"
+            },
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "blocked_front"
+            },
+            {
+              "field": "orientation_established_front",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_blocked_translation_can_establish_the_current_interaction_front",
+            "principle_ref": "principle_blocked_translation_can_establish_the_current_interaction_front",
+            "desired_predicate": "all_declared_cargo_released_acquired_in_allowed_poses",
+            "falsifier_ref": "orientation_or_frontal_relation_not_observed",
+            "preservation_refs": [
+              "parent_why",
+              "cargo_identity",
+              "native_phase_snapshot",
+              "model_revision",
+              "all_response_population",
+              "no_exclusive_necessity_from_one_witness"
+            ]
+          }
+        },
+        {
+          "id": "projection.cargo_why.blocked_front.absent",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_why.absent"
+            },
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "blocked_front"
+            },
+            {
+              "field": "orientation_established_front",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_no_current_phase_support_for_this_cargo_dependency",
+            "principle_ref": "principle_blocked_translation_can_establish_the_current_interaction_front",
+            "desired_predicate": "all_declared_cargo_released_acquired_in_allowed_poses",
+            "falsifier_ref": "orientation_or_frontal_relation_not_observed",
+            "preservation_refs": [
+              "parent_why",
+              "cargo_identity",
+              "native_phase_snapshot",
+              "model_revision",
+              "all_response_population",
+              "no_exclusive_necessity_from_one_witness"
+            ]
+          }
+        },
+        {
+          "id": "projection.cargo_why.pair_masks.present",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_why.present"
+            },
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "pair_masks"
+            },
+            {
+              "field": "whole_pair_masks_bound",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_rigid_transport_requires_the_whole_carrier_and_cargo_masks_under_native_type_support",
+            "principle_ref": "principle_rigid_transport_requires_the_whole_carrier_and_cargo_masks_under_native_type_support",
+            "desired_predicate": "all_declared_cargo_released_acquired_in_allowed_poses",
+            "falsifier_ref": "any_destination_mask_or_type_support_is_unresolved",
+            "preservation_refs": [
+              "parent_why",
+              "cargo_identity",
+              "native_phase_snapshot",
+              "model_revision",
+              "all_response_population",
+              "no_exclusive_necessity_from_one_witness"
+            ]
+          }
+        },
+        {
+          "id": "projection.cargo_why.pair_masks.absent",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_why.absent"
+            },
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "pair_masks"
+            },
+            {
+              "field": "whole_pair_masks_bound",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_no_current_phase_support_for_this_cargo_dependency",
+            "principle_ref": "principle_rigid_transport_requires_the_whole_carrier_and_cargo_masks_under_native_type_support",
+            "desired_predicate": "all_declared_cargo_released_acquired_in_allowed_poses",
+            "falsifier_ref": "any_destination_mask_or_type_support_is_unresolved",
+            "preservation_refs": [
+              "parent_why",
+              "cargo_identity",
+              "native_phase_snapshot",
+              "model_revision",
+              "all_response_population",
+              "no_exclusive_necessity_from_one_witness"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_oriented_cargo_inverse",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_inverse_means_require_the_current_released_cargo_beneficiary"
+      ],
+      "configuration": {
+        "kernel_ref": "mechanics.oriented_cargo_handoffs",
+        "inverse_operation_refs": [
+          "mechanics.oriented_cargo_handoffs.grasp_domains",
+          "mechanics.oriented_cargo_handoffs.regrasp_domains",
+          "mechanics.oriented_cargo_handoffs.handoff_domains",
+          "mechanics.oriented_cargo_handoffs.front_domains",
+          "mechanics.oriented_cargo_handoffs.predicate_domains",
+          "mechanics.oriented_cargo_handoffs.wait_domains"
+        ],
+        "require_current_source_manifest_identity": true,
+        "inverse_mode_ref": "INVERSE_DOMAIN",
+        "grasp_operation_ref": "mechanics.oriented_cargo_handoffs.grasp_domains",
+        "front_operation_ref": "mechanics.oriented_cargo_handoffs.front_domains",
+        "predicate_operation_ref": "mechanics.oriented_cargo_handoffs.predicate_domains",
+        "predicate_usefulness_field": "predicate_usefulness",
+        "wait_operation_ref": "mechanics.oriented_cargo_handoffs.wait_domains",
+        "binding_stage_ref": "inverse_binding",
+        "return_stage_ref": "inverse_return",
+        "supported_complete_status_refs": [
+          "FOUND",
+          "EMPTY_DECLARED_DOMAIN"
+        ],
+        "candidate_row_status_refs": [
+          "FOUND",
+          "EMPTY_DECLARED_DOMAIN",
+          "NEEDS_EVIDENCE",
+          "BUDGET_REACHED"
+        ]
+      },
+      "declared_alternative_refs": [
+        "cargo_inverse.bound",
+        "cargo_inverse.unbound",
+        "cargo_inverse.complete",
+        "cargo_inverse.unresolved"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_inverse.bound",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_inverse.bound"
+            },
+            {
+              "field": "stage_ref",
+              "operator": "equals",
+              "expected": "inverse_binding"
+            },
+            {
+              "field": "inverse_binding_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "BOUND",
+            "reason_ref": "reason_the_inverse_question_is_owned_by_the_current_delivery_parent",
+            "preserve_validated_continuation": true,
+            "no_action_authority": true,
+            "endpoint_fit_is_not_delivery_reachability": true
+          }
+        },
+        {
+          "id": "projection.cargo_inverse.unbound",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_inverse.unbound"
+            },
+            {
+              "field": "stage_ref",
+              "operator": "equals",
+              "expected": "inverse_binding"
+            },
+            {
+              "field": "inverse_binding_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE",
+            "reason_ref": "reason_a_missing_inverse_premise_requires_evidence_before_calculation",
+            "preserve_validated_continuation": true,
+            "no_action_authority": true,
+            "endpoint_fit_is_not_delivery_reachability": true
+          }
+        },
+        {
+          "id": "projection.cargo_inverse.complete",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_inverse.complete"
+            },
+            {
+              "field": "stage_ref",
+              "operator": "equals",
+              "expected": "inverse_return"
+            },
+            {
+              "field": "inverse_domain_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "FOUND",
+            "reason_ref": "reason_a_complete_inverse_domain_supplies_conditional_means_without_proving_global_necessity",
+            "retain_current_candidate_rows": true,
+            "preserve_validated_continuation": true,
+            "no_action_authority": true,
+            "endpoint_fit_is_not_delivery_reachability": true
+          }
+        },
+        {
+          "id": "projection.cargo_inverse.unresolved",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_inverse.unresolved"
+            },
+            {
+              "field": "stage_ref",
+              "operator": "equals",
+              "expected": "inverse_return"
+            },
+            {
+              "field": "inverse_domain_complete",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "inverse_candidate_rows_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE",
+            "reason_ref": "reason_an_incomplete_inverse_domain_preserves_its_named_dependency_and_frontier",
+            "retain_current_candidate_rows": false,
+            "preserve_validated_continuation": true,
+            "no_action_authority": true,
+            "endpoint_fit_is_not_delivery_reachability": true
+          }
+        },
+        {
+          "id": "projection.cargo_inverse.partial_current_rows",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_inverse.unresolved"
+            },
+            {
+              "field": "stage_ref",
+              "operator": "equals",
+              "expected": "inverse_return"
+            },
+            {
+              "field": "inverse_domain_complete",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "inverse_candidate_rows_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE",
+            "retain_current_candidate_rows": true,
+            "reason_ref": "reason_current_inverse_rows_remain_conditional_while_the_domain_or_frontier_is_incomplete",
+            "preserve_validated_continuation": true,
+            "no_action_authority": true,
+            "endpoint_fit_is_not_delivery_reachability": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_oriented_cargo_join_binding",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_correlated_family_domains_preserve_the_same_cargo_parent"
+      ],
+      "configuration": {
+        "cargo_kernel_ref": "mechanics.oriented_cargo_handoffs",
+        "supported_cargo_return_status_refs": [
+          "FOUND"
+        ]
+      },
+      "declared_alternative_refs": [
+        "cargo_join.absent",
+        "cargo_join.bound",
+        "cargo_join.unresolved"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_join.absent",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_join.absent"
+            },
+            {
+              "field": "join_requested",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NOT_REQUESTED",
+            "reason_ref": "reason_no_additional_family_composition_was_requested",
+            "retain_cargo_proposals": true,
+            "no_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_join.bound",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_join.bound"
+            },
+            {
+              "field": "join_requested",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "join_binding_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "BOUND",
+            "reason_ref": "reason_only_exact_current_cargo_results_can_enter_the_requested_join",
+            "retain_cargo_proposals": true,
+            "no_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_join.unresolved",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_join.unresolved"
+            },
+            {
+              "field": "join_requested",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "join_binding_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE",
+            "reason_ref": "reason_the_requested_join_preserves_the_missing_current_dependency",
+            "retain_cargo_proposals": false,
+            "no_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_oriented_cargo_join_return",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_correlated_family_domains_preserve_the_same_cargo_parent"
+      ],
+      "configuration": {
+        "cargo_kernel_ref": "mechanics.oriented_cargo_handoffs"
+      },
+      "declared_alternative_refs": [
+        "cargo_join.found",
+        "cargo_join.empty",
+        "cargo_join.partial"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_join.found",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_join.found"
+            },
+            {
+              "field": "join_domain_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "joint_candidate_exists",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "FOUND",
+            "reason_ref": "reason_the_complete_correlated_join_retains_a_common_parent_delivery_proposal",
+            "retain_cargo_proposals": true,
+            "no_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_join.empty",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_join.empty"
+            },
+            {
+              "field": "join_domain_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "joint_candidate_exists",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "EMPTY_DECLARED_DOMAIN",
+            "reason_ref": "reason_the_complete_requested_join_has_no_compatible_joint_candidate",
+            "retain_cargo_proposals": false,
+            "no_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_join.partial",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_join.partial"
+            },
+            {
+              "field": "join_domain_complete",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE",
+            "reason_ref": "reason_a_partial_correlated_join_is_not_proof_of_impossibility",
+            "retain_cargo_proposals": false,
+            "no_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_oriented_cargo_parent",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_current_parent_profile_provenance_precedes_cargo_solving"
+      ],
+      "configuration": {
+        "profile_ref": "solving.oriented_cargo_handoffs",
+        "kernel_ref": "mechanics.oriented_cargo_handoffs",
+        "front_precondition_operation_ref": "mechanics.oriented_cargo_handoffs.interaction_precondition",
+        "front_precondition_mode_ref": "PRECONDITION",
+        "front_precondition_supported_status_refs": [
+          "FOUND",
+          "EMPTY_DECLARED_DOMAIN"
+        ]
+      },
+      "declared_alternative_refs": [
+        "cargo_parent.bound",
+        "cargo_parent.unresolved"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_parent.bound",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_parent.bound"
+            },
+            {
+              "field": "parent_binding_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "BOUND",
+            "reason_ref": "reason_each_current_profile_supplies_the_same_parent_delivery_and_why",
+            "preserve_parent_goal": true,
+            "no_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_parent.unresolved",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_parent.unresolved"
+            },
+            {
+              "field": "parent_binding_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE",
+            "reason_ref": "reason_missing_profile_or_parent_provenance_remains_a_named_dependency",
+            "preserve_parent_goal": true,
+            "no_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_oriented_cargo_inverse_means",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_inverse_domains_must_serve_the_current_parent_delivery"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.b_oriented_cargo_conditional_parent_means"
+      },
+      "configuration": {
+        "wait_operation_ref": "mechanics.oriented_cargo_handoffs.wait_domains",
+        "wait_usefulness_field": "wait_usefulness",
+        "regrasp_usefulness_field": "regrasp_usefulness",
+        "handoff_usefulness_field": "handoff_usefulness",
+        "predicate_usefulness_field": "predicate_usefulness",
+        "predicate_operation_ref": "mechanics.oriented_cargo_handoffs.predicate_domains",
+        "handoff_operation_ref": "mechanics.oriented_cargo_handoffs.handoff_domains",
+        "postroute_receipt_fields": [
+          "endpoint_predicates_satisfied",
+          "postroute_verified",
+          "postroute_horizon",
+          "postroute_input_word",
+          "postroute_response_domain",
+          "verification_allresponses_complete",
+          "protection_horizon_checked"
+        ],
+        "front_operation_ref": "mechanics.oriented_cargo_handoffs.front_domains",
+        "regrasp_operation_ref": "mechanics.oriented_cargo_handoffs.regrasp_domains",
+        "wait_predicate_refs_field": "predicate_refs",
+        "wait_useful_state_field_refs": [
+          "cargo_by_ref",
+          "actors_by_ref",
+          "receivers_by_ref",
+          "cargo_pose_by_ref"
+        ]
+      },
+      "declared_alternative_refs": [
+        "cargo_means.endpoint",
+        "cargo_means.endpoint_route",
+        "cargo_means.repair",
+        "cargo_means.observe",
+        "cargo_means.route",
+        "cargo_means.partial_response",
+        "cargo_means.partial_endpoint",
+        "cargo_means.no_useful_effect",
+        "cargo_means.unbound",
+        "cargo_means.incomplete_regrasp"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_means.endpoint",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_means.endpoint"
+            },
+            {
+              "field": "parent_context_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "detachment_assumption_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "endpoint_fit_measured",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "endpoint_support_unknown",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "endpoint_feasible",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "route_proven",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "derive_requested": true,
+            "reason_ref": "reason_usable_carrier_endpoint_requires_a_route_before_delivery",
+            "causal_reason_ref": "reason_usable_carrier_endpoint_requires_a_route_before_delivery",
+            "intermediate_kind": "endpoint",
+            "unresolved_dependency_refs": [
+              "dependency.carrier_route",
+              "dependency.released_delivery"
+            ],
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_means.endpoint_route",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_means.endpoint_route"
+            },
+            {
+              "field": "parent_context_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "detachment_assumption_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "endpoint_fit_measured",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "endpoint_support_unknown",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "endpoint_feasible",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "route_proven",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "derive_requested": true,
+            "reason_ref": "reason_a_supported_carrier_route_remains_conditional_on_released_delivery",
+            "causal_reason_ref": "reason_a_supported_carrier_route_remains_conditional_on_released_delivery",
+            "intermediate_kind": "endpoint_route",
+            "unresolved_dependency_refs": [
+              "dependency.released_delivery"
+            ],
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_means.repair",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_means.repair"
+            },
+            {
+              "field": "parent_context_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "detachment_assumption_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "endpoint_fit_measured",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "endpoint_support_unknown",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "endpoint_feasible",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "derive_requested": true,
+            "reason_ref": "reason_the_measured_grip_cannot_realize_this_target_carrier_pose",
+            "causal_reason_ref": "reason_the_measured_grip_cannot_realize_this_target_carrier_pose",
+            "intermediate_kind": "repair",
+            "unresolved_dependency_refs": [
+              "dependency.alternative_target_or_grip",
+              "dependency.released_delivery"
+            ],
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_means.observe",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_means.observe"
+            },
+            {
+              "field": "parent_context_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "detachment_assumption_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "endpoint_fit_measured",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "endpoint_support_unknown",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "derive_requested": true,
+            "reason_ref": "reason_unknown_joint_support_requires_evidence_before_route_commitment",
+            "causal_reason_ref": "reason_unknown_joint_support_requires_evidence_before_route_commitment",
+            "intermediate_kind": "observe",
+            "unresolved_dependency_refs": [
+              "dependency.joint_carrier_cargo_support"
+            ],
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_means.route",
+          "all_conditions": [
+            {
+              "field": "predicate_domain_measured",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_means.route"
+            },
+            {
+              "field": "parent_context_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "detachment_assumption_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "future_usefulness_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "route_population_measured",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_native_responses_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "endpoint_only",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "derive_requested": true,
+            "reason_ref": "reason_a_native_inverse_route_supplies_conditional_means_for_its_named_consumer",
+            "causal_reason_ref": "reason_a_native_inverse_route_supplies_conditional_means_for_its_named_consumer",
+            "intermediate_kind": "route",
+            "unresolved_dependency_refs": [
+              "dependency.next_parent_continuation",
+              "dependency.released_delivery"
+            ],
+            "no_dispatch_or_action_authority": true
+          },
+          "any_conditions": [
+            {
+              "field": "native_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.oriented_cargo_handoffs.regrasp_domains"
+            },
+            {
+              "field": "regrasp_sequence_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "projection.cargo_means.predicate_restore",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_means.route"
+            },
+            {
+              "field": "parent_context_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "predicate_domain_measured",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "future_usefulness_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "initial_conditions_any_unsatisfied",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "endpoint_conditions_all_satisfied",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_native_responses_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "endpoint_only",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "derive_requested": true,
+            "reason_ref": "reason_restore_the_current_consumers_unmet_conditions",
+            "causal_reason_ref": "reason_restore_the_current_consumers_unmet_conditions",
+            "intermediate_kind": "restoration",
+            "unresolved_dependency_refs": [
+              "dependency.next_parent_continuation",
+              "dependency.physical_restoration_reconciliation"
+            ],
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_means.predicate_maintain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_means.route"
+            },
+            {
+              "field": "parent_context_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "predicate_domain_measured",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "future_usefulness_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "initial_conditions_all_satisfied",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "endpoint_conditions_all_satisfied",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "postroute_horizon_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_native_responses_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "endpoint_only",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "derive_requested": true,
+            "reason_ref": "reason_preserve_the_current_consumers_conditions_over_the_declared_horizon",
+            "causal_reason_ref": "reason_preserve_the_current_consumers_conditions_over_the_declared_horizon",
+            "intermediate_kind": "bounded_protection",
+            "unresolved_dependency_refs": [
+              "dependency.next_parent_continuation",
+              "dependency.physical_protection_reconciliation"
+            ],
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_means.partial_response",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_means.partial_response"
+            },
+            {
+              "field": "parent_context_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "detachment_assumption_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "route_population_measured",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_native_responses_supported",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "derive_requested": true,
+            "reason_ref": "reason_an_inverse_candidate_without_all_responses_is_not_a_usable_route",
+            "causal_reason_ref": "reason_an_inverse_candidate_without_all_responses_is_not_a_usable_route",
+            "intermediate_kind": "partial_response",
+            "unresolved_dependency_refs": [
+              "dependency.complete_inverse_response_support"
+            ],
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_means.partial_endpoint",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_means.partial_endpoint"
+            },
+            {
+              "field": "parent_context_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "route_population_measured",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_native_responses_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "endpoint_only",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "derive_requested": true,
+            "reason_ref": "reason_an_endpoint_only_candidate_still_requires_route_evidence",
+            "causal_reason_ref": "reason_an_endpoint_only_candidate_still_requires_route_evidence",
+            "intermediate_kind": "partial_endpoint",
+            "unresolved_dependency_refs": [
+              "dependency.inverse_route_support"
+            ],
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_means.no_useful_effect",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_means.no_useful_effect"
+            },
+            {
+              "field": "parent_context_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "detachment_assumption_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "future_usefulness_bound",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "all_native_responses_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "endpoint_only",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "derive_requested": false,
+            "reason_ref": "reason_an_inverse_route_must_supply_its_declared_useful_transformation",
+            "unresolved_dependency_refs": [
+              "dependency.current_inverse_useful_transformation"
+            ],
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_means.unbound",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_means.unbound"
+            },
+            {
+              "field": "parent_context_bound",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "derive_requested": false,
+            "reason_ref": "reason_parent_canonical_context_is_required_for_inverse_means",
+            "unresolved_dependency_refs": [
+              "dependency.current_parent_goal_and_question_terms"
+            ],
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_means.detachment_unbound",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_means.unbound"
+            },
+            {
+              "field": "parent_context_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "detachment_assumption_bound",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "derive_requested": false,
+            "reason_ref": "reason_counterfactual_grasp_requires_its_exact_current_source_assumption",
+            "unresolved_dependency_refs": [
+              "dependency.current_source_grasp_detachment_assumption"
+            ],
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_means.incomplete_regrasp",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_means.incomplete_regrasp"
+            },
+            {
+              "field": "native_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.oriented_cargo_handoffs.regrasp_domains"
+            },
+            {
+              "field": "parent_context_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "future_usefulness_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_native_responses_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "endpoint_only",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "regrasp_sequence_complete",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "derive_requested": false,
+            "reason_ref": "reason_regrasp_requires_explicit_deposit_free_detour_and_reattachment_in_every_response",
+            "unresolved_dependency_refs": [
+              "dependency.current_regrasp_phase_sequence"
+            ],
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_oriented_cargo_conditional_parent_means",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "source_selected_native_inverse_candidate_and_current_parent_context"
+      ],
+      "applicability": [
+        "released_cargo_delivery_question"
+      ],
+      "invariants": [
+        "modeled_means_do_not_satisfy_actual_delivery",
+        "no_route_or_action_is_released_by_derivation",
+        "endpoint_fit_is_distinct_from_route_proof",
+        "counterfactual_detachment_is_not_an_observed_release_or_proved_route"
+      ],
+      "falsifiers": [
+        "changed_model_or_refuted_parent_continuation"
+      ],
+      "reason_refs": [
+        "reason_inverse_domains_must_serve_the_current_parent_delivery"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{reason_candidate_ref}",
+          "kind": "value",
+          "label": "Conditional inverse means for released cargo delivery",
+          "required_fields": [
+            "reason_candidate_ref",
+            "candidate"
+          ],
+          "static_attributes": {
+            "conditional_model_only": true,
+            "regrasp_carrier_pose_relation": "TARGET_MINUS_OFFSET",
+            "regrasp_target_support_and_route_proved": false,
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "candidate": "candidate",
+            "intermediate_kind": "intermediate_kind",
+            "future_usefulness_predicates": "future_usefulness_predicates",
+            "initial_rigid_grip": "initial_rigid_grip",
+            "response_rigid_grips": "response_rigid_grips",
+            "regrasp_target_pose_requirements": "regrasp_target_pose_requirements",
+            "front_preparation_responses": "front_preparation_responses",
+            "initial_conditions_all_satisfied": "initial_conditions_all_satisfied",
+            "initial_conditions_any_unsatisfied": "initial_conditions_any_unsatisfied",
+            "endpoint_conditions_all_satisfied": "endpoint_conditions_all_satisfied",
+            "postroute_receipt": "postroute_receipt",
+            "postroute_horizon_bound": "postroute_horizon_bound",
+            "source_restoration_scope": "source_restoration_scope",
+            "counterfactual_detachment": "counterfactual_detachment",
+            "source_detachment_assumption_ref": "source_detachment_assumption_ref",
+            "detachment_assumption_bound": "detachment_assumption_bound",
+            "detachment_route_proven": "detachment_route_proven",
+            "physical_release_observed": "physical_release_observed",
+            "inverse_domain_complete": "inverse_domain_complete",
+            "inverse_domain_missing_refs": "inverse_domain_missing_refs",
+            "future_usefulness_before_values": "future_usefulness_before_values",
+            "future_usefulness_response_values": "future_usefulness_response_values",
+            "causal_reason_ref": "causal_reason_ref",
+            "unresolved_dependency_refs": "unresolved_dependency_refs",
+            "utility_reason_ref": "utility_reason_ref",
+            "desired_future": "desired_future",
+            "goal_contract": "goal_contract",
+            "consumer_refs": "consumer_refs",
+            "dependency_ref": "dependency_ref",
+            "preservation_refs": "preservation_refs",
+            "model_ref": "model_ref",
+            "model_revision_ref": "model_revision_ref",
+            "model_status_ref": "model_status_ref",
+            "native_response_ref": "native_response_ref",
+            "next_item_ref": "next_item_ref",
+            "parent_why": "parent_why",
+            "regrasp_sequence_complete": "regrasp_sequence_complete",
+            "regrasp_sequence_receipts": "regrasp_sequence_receipts"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{reason_candidate_ref}",
+          "predicate": "proposes_conditional_means_for_parent_demand",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{reason_candidate_ref}",
+            "{parent_goal_ref}",
+            "{question_ref}"
+          ],
+          "required_term_patterns": [
+            "{reason_candidate_ref}",
+            "{parent_goal_ref}",
+            "{question_ref}"
+          ],
+          "required_fields": [
+            "reason_candidate_ref",
+            "parent_goal_ref",
+            "question_ref",
+            "causal_reason_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "scope_ref": "scope_ref"
+          },
+          "attribute_bindings": {
+            "candidate": "candidate",
+            "intermediate_kind": "intermediate_kind",
+            "future_usefulness_predicates": "future_usefulness_predicates",
+            "initial_rigid_grip": "initial_rigid_grip",
+            "response_rigid_grips": "response_rigid_grips",
+            "regrasp_target_pose_requirements": "regrasp_target_pose_requirements",
+            "front_preparation_responses": "front_preparation_responses",
+            "initial_conditions_all_satisfied": "initial_conditions_all_satisfied",
+            "initial_conditions_any_unsatisfied": "initial_conditions_any_unsatisfied",
+            "endpoint_conditions_all_satisfied": "endpoint_conditions_all_satisfied",
+            "postroute_receipt": "postroute_receipt",
+            "postroute_horizon_bound": "postroute_horizon_bound",
+            "source_restoration_scope": "source_restoration_scope",
+            "counterfactual_detachment": "counterfactual_detachment",
+            "source_detachment_assumption_ref": "source_detachment_assumption_ref",
+            "detachment_assumption_bound": "detachment_assumption_bound",
+            "detachment_route_proven": "detachment_route_proven",
+            "physical_release_observed": "physical_release_observed",
+            "inverse_domain_complete": "inverse_domain_complete",
+            "inverse_domain_missing_refs": "inverse_domain_missing_refs",
+            "future_usefulness_before_values": "future_usefulness_before_values",
+            "future_usefulness_response_values": "future_usefulness_response_values",
+            "causal_reason_ref": "causal_reason_ref",
+            "unresolved_dependency_refs": "unresolved_dependency_refs",
+            "utility_reason_ref": "utility_reason_ref",
+            "desired_future": "desired_future",
+            "goal_contract": "goal_contract",
+            "consumer_refs": "consumer_refs",
+            "dependency_ref": "dependency_ref",
+            "preservation_refs": "preservation_refs",
+            "model_ref": "model_ref",
+            "model_revision_ref": "model_revision_ref",
+            "model_status_ref": "model_status_ref",
+            "native_response_ref": "native_response_ref",
+            "next_item_ref": "next_item_ref",
+            "parent_why": "parent_why"
+          },
+          "static_attributes": {
+            "conditional_model_only": true,
+            "regrasp_carrier_pose_relation": "TARGET_MINUS_OFFSET",
+            "regrasp_target_support_and_route_proved": false,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_oriented_cargo_allocation_row",
+      "configuration": {
+        "observed_service_predicate_ref": "supported_observed_delivery_service"
+      },
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_delivery_allocation_must_preserve_capacity_and_every_beneficiary"
+      ],
+      "declared_alternative_refs": [
+        "cargo_allocation.supported",
+        "cargo_allocation.unresolved"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_allocation.supported",
+          "all_conditions": [
+            {
+              "field": "allocation_kind_ref",
+              "operator": "equals",
+              "expected": "policy_replay"
+            },
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_allocation.supported"
+            },
+            {
+              "field": "native_trace_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "replay_scope_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_event_capacities_respected",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "service_evidence_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "delivery_provenance_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "final_released_acquired_in_allowed_pose",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "allocation_supported": true,
+            "reason_ref": "reason_each_supported_service_delivers_its_beneficiary_within_receiver_capacity",
+            "actual_goal_satisfied": false,
+            "delegated_goal_remains_open_until_actual_evidence": true,
+            "no_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_allocation.proposed",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_allocation.supported"
+            },
+            {
+              "field": "allocation_kind_ref",
+              "operator": "equals",
+              "expected": "source_proposal"
+            },
+            {
+              "field": "proposal_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "allocation_supported": true,
+            "reason_ref": "reason_current_observed_service_and_sector_capacity_support_a_conditional_assignment",
+            "actual_delivery_proved": false,
+            "delegated_goals_open": true,
+            "missing_dependency_refs": []
+          }
+        },
+        {
+          "id": "projection.cargo_allocation.proposal_unresolved",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_allocation.unresolved"
+            },
+            {
+              "field": "allocation_kind_ref",
+              "operator": "equals",
+              "expected": "source_proposal"
+            },
+            {
+              "field": "proposal_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "allocation_supported": false,
+            "reason_ref": "reason_a_proposed_assignment_requires_current_service_and_capacity_evidence",
+            "actual_delivery_proved": false,
+            "delegated_goals_open": true,
+            "missing_dependency_refs": [
+              "cargo.current_observed_service_allocation"
+            ]
+          }
+        },
+        {
+          "id": "projection.cargo_allocation.unresolved.native_trace_current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_allocation.unresolved"
+            },
+            {
+              "field": "native_trace_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "allocation_supported": false,
+            "reason_ref": "reason_missing_service_capacity_or_delivery_support_preserves_the_beneficiary",
+            "actual_goal_satisfied": false,
+            "delegated_goal_remains_open_until_actual_evidence": true,
+            "no_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_allocation.unresolved.replay_scope_complete",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_allocation.unresolved"
+            },
+            {
+              "field": "replay_scope_complete",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "allocation_supported": false,
+            "reason_ref": "reason_missing_service_capacity_or_delivery_support_preserves_the_beneficiary",
+            "actual_goal_satisfied": false,
+            "delegated_goal_remains_open_until_actual_evidence": true,
+            "no_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_allocation.unresolved.all_event_capacities_respected",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_allocation.unresolved"
+            },
+            {
+              "field": "all_event_capacities_respected",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "allocation_supported": false,
+            "reason_ref": "reason_missing_service_capacity_or_delivery_support_preserves_the_beneficiary",
+            "actual_goal_satisfied": false,
+            "delegated_goal_remains_open_until_actual_evidence": true,
+            "no_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_allocation.unresolved.service_evidence_current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_allocation.unresolved"
+            },
+            {
+              "field": "service_evidence_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "allocation_supported": false,
+            "reason_ref": "reason_missing_service_capacity_or_delivery_support_preserves_the_beneficiary",
+            "actual_goal_satisfied": false,
+            "delegated_goal_remains_open_until_actual_evidence": true,
+            "no_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_allocation.unresolved.delivery_provenance_present",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_allocation.unresolved"
+            },
+            {
+              "field": "delivery_provenance_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "allocation_supported": false,
+            "reason_ref": "reason_missing_service_capacity_or_delivery_support_preserves_the_beneficiary",
+            "actual_goal_satisfied": false,
+            "delegated_goal_remains_open_until_actual_evidence": true,
+            "no_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_allocation.unresolved.final_released_acquired_in_allowed_pose",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_allocation.unresolved"
+            },
+            {
+              "field": "final_released_acquired_in_allowed_pose",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "allocation_supported": false,
+            "reason_ref": "reason_missing_service_capacity_or_delivery_support_preserves_the_beneficiary",
+            "actual_goal_satisfied": false,
+            "delegated_goal_remains_open_until_actual_evidence": true,
+            "no_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_oriented_cargo_allocation_population",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_delivery_allocation_must_preserve_capacity_and_every_beneficiary"
+      ],
+      "declared_alternative_refs": [
+        "cargo_allocation_population.supported",
+        "cargo_allocation_population.unresolved"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_allocation_population.supported",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_allocation_population.supported"
+            },
+            {
+              "field": "allocation_population_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "FOUND",
+            "reason_ref": "reason_complete_policy_allocation_is_a_model_conditioned_proposal",
+            "actual_goal_satisfied": false,
+            "delegated_goals_remain_open": true,
+            "missing_dependency_refs": [],
+            "no_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_allocation_population.unresolved",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_allocation_population.unresolved"
+            },
+            {
+              "field": "allocation_population_complete",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE",
+            "reason_ref": "reason_unqualified_allocation_population_requires_current_evidence",
+            "actual_goal_satisfied": false,
+            "delegated_goals_remain_open": true,
+            "missing_dependency_refs": [
+              "dependency.all_models_services_capacity_and_released_delivery"
+            ],
+            "no_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_observed_cargo_reconciliation",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_actual_owned_delivery_evidence_is_distinct_from_prediction"
+      ],
+      "declared_alternative_refs": [
+        "cargo_observed.missing",
+        "cargo_observed.open",
+        "cargo_observed.unstable",
+        "cargo_observed.current",
+        "cargo_observed.terminal"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_observed.missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_observed.missing"
+            },
+            {
+              "field": "actual_interval_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE",
+            "reason_ref": "reason_actual_state_projection_or_owned_transaction_is_missing",
+            "current_delivery_observed": false,
+            "permanent_acquisition_claimed": false,
+            "preserve_parent_goal": true,
+            "do_not_infer_reclamation_reachability": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_observed.open",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_observed.open"
+            },
+            {
+              "field": "actual_interval_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_declared_beneficiaries_observed_delivered",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "GOAL_OPEN",
+            "reason_ref": "reason_an_observed_beneficiary_is_not_yet_released_and_delivered",
+            "current_delivery_observed": false,
+            "permanent_acquisition_claimed": false,
+            "preserve_parent_goal": true,
+            "do_not_infer_reclamation_reachability": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_observed.unstable",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_observed.unstable"
+            },
+            {
+              "field": "actual_interval_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_declared_beneficiaries_observed_delivered",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "supported_reclaim_possibility_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_terminal_observed",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "OBSERVED_DELIVERY_REVISABLE",
+            "reason_ref": "reason_observed_delivery_keeps_a_supported_reclamation_possibility_open",
+            "current_delivery_observed": true,
+            "permanent_acquisition_claimed": false,
+            "preserve_parent_goal": true,
+            "do_not_infer_reclamation_reachability": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_observed.current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_observed.current"
+            },
+            {
+              "field": "actual_interval_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_declared_beneficiaries_observed_delivered",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "supported_reclaim_possibility_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "OBSERVED_DELIVERY_CURRENT",
+            "reason_ref": "reason_all_current_beneficiaries_have_actual_released_delivery_evidence",
+            "current_delivery_observed": true,
+            "permanent_acquisition_claimed": false,
+            "preserve_parent_goal": true,
+            "do_not_infer_reclamation_reachability": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_observed.terminal",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_observed.terminal"
+            },
+            {
+              "field": "actual_interval_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_declared_beneficiaries_observed_delivered",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "supported_reclaim_possibility_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_terminal_observed",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "OBSERVED_DELIVERY_CURRENT",
+            "reason_ref": "reason_actual_terminal_delivery_is_current_despite_a_preterminal_reclaim_model",
+            "current_delivery_observed": true,
+            "permanent_acquisition_claimed": false,
+            "preserve_parent_goal": true,
+            "do_not_infer_reclamation_reachability": true,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_cargo_observed_state_acquisition",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_actual_state_requires_acquisition_backed_canonical_field_support"
+      ],
+      "configuration": {
+        "field_support_predicate": "observed_native_state_field_supported",
+        "accepted_evidence_status_refs": [
+          "supported",
+          "established"
+        ],
+        "acquired_source_kind_ref": "acquired_observation"
+      },
+      "meaning_template_ref_by_alternative": {
+        "cargo_state.publish": "rule.b_acquired_cargo_state_projection"
+      },
+      "declared_alternative_refs": [
+        "cargo_state.publish",
+        "cargo_state.current",
+        "cargo_state.missing"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_state.publish",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_state.publish"
+            },
+            {
+              "field": "observed_state_fields_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_published_equal",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "CURRENT_OBSERVED_STATE",
+            "reason_ref": "reason_every_observed_state_field_is_current_and_acquisition_backed",
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_state.current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_state.current"
+            },
+            {
+              "field": "observed_state_fields_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_published_equal",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "CURRENT_OBSERVED_STATE",
+            "reason_ref": "reason_the_same_acquired_state_is_already_published",
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_state.missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_state.missing"
+            },
+            {
+              "field": "observed_state_fields_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE",
+            "reason_ref": "reason_missing_observed_fields_cannot_be_replaced_by_model_predictions",
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_acquired_cargo_state_projection",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "current_acquired_record_and_complete_canonical_field_support"
+      ],
+      "applicability": [
+        "observed_cargo_state_projection"
+      ],
+      "invariants": [
+        "no_predicted_state_becomes_observation",
+        "missing_role_or_acceptance_remains_explicit"
+      ],
+      "falsifiers": [
+        "field_evidence_stale_or_acquisition_mismatched"
+      ],
+      "reason_refs": [
+        "reason_actual_state_requires_acquisition_backed_canonical_field_support"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Acquired observed cargo state",
+          "required_fields": [
+            "output_term_ref",
+            "state"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "acquired_observation",
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "projection_contract_ref": "state_projection_contract_ref",
+            "state": "state",
+            "state_digest": "state_digest",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "level_scope_ref": "level_scope_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{output_term_ref}",
+          "predicate": "observed_cargo_state_projection_current",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{parent_goal_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}",
+            "{parent_goal_ref}"
+          ],
+          "required_fields": [
+            "output_term_ref",
+            "parent_goal_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref"
+          },
+          "attribute_bindings": {
+            "state_digest": "state_digest",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "level_scope_ref": "level_scope_ref"
+          },
+          "static_attributes": {
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_cargo_visible_geometry_acquisition",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_actual_visible_geometry_is_not_role_anchor_or_collision_law"
+      ],
+      "configuration": {},
+      "meaning_template_ref_by_alternative": {
+        "cargo_geometry.publish": "rule.b_acquired_cargo_visible_geometry"
+      },
+      "declared_alternative_refs": [
+        "cargo_geometry.publish",
+        "cargo_geometry.current",
+        "cargo_geometry.missing"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_geometry.publish",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_geometry.publish"
+            },
+            {
+              "field": "acquired_geometry_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_published_equal",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "CURRENT_VISIBLE_GEOMETRY",
+            "reason_ref": "reason_actual_visible_geometry_is_not_role_anchor_or_collision_law",
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_geometry.current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_geometry.current"
+            },
+            {
+              "field": "acquired_geometry_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_published_equal",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "CURRENT_VISIBLE_GEOMETRY",
+            "reason_ref": "reason_actual_visible_geometry_is_not_role_anchor_or_collision_law",
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_geometry.missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_geometry.missing"
+            },
+            {
+              "field": "acquired_geometry_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE",
+            "reason_ref": "reason_actual_visible_geometry_is_not_role_anchor_or_collision_law",
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_acquired_cargo_visible_geometry",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "actual_acquisition_and_closed_visible_cell_support"
+      ],
+      "applicability": [
+        "observed_visible_geometry"
+      ],
+      "invariants": [
+        "no_visible_support_becomes_collision_law",
+        "no_geometry_assigns_role_or_physical_identity"
+      ],
+      "falsifiers": [
+        "clipping_occlusion_stale_frame_or_destination_collision"
+      ],
+      "reason_refs": [
+        "reason_actual_visible_geometry_is_not_role_anchor_or_collision_law"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Acquired visible cell geometry",
+          "required_fields": [
+            "output_term_ref",
+            "geometry"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "cargo.observed_visible_geometry.b.v1",
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "geometry": "geometry",
+            "geometry_digest": "geometry_digest",
+            "entity_ref": "entity_ref",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "level_scope_ref": "level_scope_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{output_term_ref}",
+          "predicate": "observed_visible_cell_geometry_supported",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{observation_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}",
+            "{entity_ref}"
+          ],
+          "required_fields": [
+            "output_term_ref",
+            "observation_record_ref",
+            "entity_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "level_scope_ref": "level_scope_ref",
+            "current_frame_ref": "frame_ref"
+          },
+          "attribute_bindings": {
+            "geometry_digest": "geometry_digest",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "level_scope_ref": "level_scope_ref"
+          },
+          "static_attributes": {
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_observed_cargo_translation",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_acquired_pair_motion_supports_revisable_transport_not_ownership"
+      ],
+      "configuration": {
+        "geometry_support_predicate": "observed_visible_cell_geometry_supported",
+        "geometry_source_kind_ref": "cargo.observed_visible_geometry.b.v1",
+        "measurement_source_kind_ref": "cargo.observed_pair_translation.b.v1"
+      },
+      "meaning_template_ref_by_alternative": {
+        "cargo_translation.shared": "rule.b_observed_pair_and_rigid_transport_supposition",
+        "cargo_translation.measured": "rule.b_observed_cargo_pair_translation"
+      },
+      "declared_alternative_refs": [
+        "cargo_translation.shared",
+        "cargo_translation.measured",
+        "cargo_translation.missing"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_translation.shared",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_translation.shared"
+            },
+            {
+              "field": "actual_pair_acquired",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_nonzero_translation",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "REVISABLE_TRANSPORT_SUPPOSITION",
+            "reason_ref": "reason_acquired_pair_motion_supports_revisable_transport_not_ownership",
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_translation.measured",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_translation.measured"
+            },
+            {
+              "field": "actual_pair_acquired",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_nonzero_translation",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "ACTUAL_PAIR_MEASUREMENT",
+            "reason_ref": "reason_acquired_pair_motion_supports_revisable_transport_not_ownership",
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_translation.missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_translation.missing"
+            },
+            {
+              "field": "actual_pair_acquired",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE",
+            "reason_ref": "reason_acquired_pair_motion_supports_revisable_transport_not_ownership",
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_observed_cargo_pair_translation",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "actual_dispatched_input_and_acquired_geometry_pair"
+      ],
+      "applicability": [
+        "cargo_pair_observation"
+      ],
+      "invariants": [
+        "co_translation_does_not_establish_ownership",
+        "visible_minimum_is_not_a_physical_anchor",
+        "no_delivery_or_face_lock_from_pair_motion"
+      ],
+      "falsifiers": [
+        "dispatch_acquisition_mismatch",
+        "stale_geometry_or_changed_visible_shape"
+      ],
+      "reason_refs": [
+        "reason_acquired_pair_motion_supports_revisable_transport_not_ownership"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Actual acquired pair translation",
+          "required_fields": [
+            "output_term_ref",
+            "measurement_digest"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "cargo.observed_pair_translation.b.v1",
+            "physical_identity_established": false,
+            "ownership_established": false,
+            "delivery_established": false,
+            "face_lock_established": false,
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "measurement_digest": "measurement_digest",
+            "actor_ref": "actor_ref",
+            "cargo_ref": "cargo_ref",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "action_ref": "action_ref",
+            "before_frame_ref": "before_frame_ref",
+            "frame_ref": "frame_ref",
+            "before_observation_record_ref": "before_observation_record_ref",
+            "after_observation_record_ref": "after_observation_record_ref",
+            "translation_deltas_row_column": "translation_deltas_row_column",
+            "relative_visible_offsets_row_column": "relative_visible_offsets_row_column",
+            "shape_preserved": "shape_preserved",
+            "same_nonzero_translation": "same_nonzero_translation",
+            "addressed_control_ref": "addressed_control_ref",
+            "control_receiver_refs": "control_receiver_refs",
+            "control_proof_ref": "control_proof_ref",
+            "timeline_ref": "timeline_ref",
+            "level_scope_ref": "level_scope_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_measurement_claim_ref}",
+          "predicate": "observed_cargo_pair_translation",
+          "family": "dynamic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{after_observation_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "output_measurement_claim_ref",
+            "output_term_ref",
+            "after_observation_record_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "level_scope_ref": "level_scope_ref",
+            "current_frame_ref": "frame_ref"
+          },
+          "attribute_bindings": {
+            "measurement_digest": "measurement_digest",
+            "actor_ref": "actor_ref",
+            "cargo_ref": "cargo_ref",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "action_ref": "action_ref",
+            "before_frame_ref": "before_frame_ref",
+            "frame_ref": "frame_ref",
+            "before_observation_record_ref": "before_observation_record_ref",
+            "after_observation_record_ref": "after_observation_record_ref",
+            "translation_deltas_row_column": "translation_deltas_row_column",
+            "relative_visible_offsets_row_column": "relative_visible_offsets_row_column",
+            "shape_preserved": "shape_preserved",
+            "same_nonzero_translation": "same_nonzero_translation",
+            "addressed_control_ref": "addressed_control_ref",
+            "control_receiver_refs": "control_receiver_refs",
+            "control_proof_ref": "control_proof_ref",
+            "timeline_ref": "timeline_ref",
+            "level_scope_ref": "level_scope_ref"
+          },
+          "static_attributes": {
+            "ownership_established": false,
+            "physical_identity_established": false,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_observed_pair_and_rigid_transport_supposition",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "actual_dispatched_input_and_acquired_geometry_pair",
+        "nonzero_common_translation_and_unchanged_visible_shapes"
+      ],
+      "applicability": [
+        "cargo_pair_observation"
+      ],
+      "invariants": [
+        "co_translation_does_not_establish_ownership",
+        "visible_minimum_is_not_a_physical_anchor",
+        "no_delivery_or_face_lock_from_pair_motion"
+      ],
+      "falsifiers": [
+        "dispatch_acquisition_mismatch",
+        "stale_geometry_or_changed_visible_shape"
+      ],
+      "reason_refs": [
+        "reason_acquired_pair_motion_supports_revisable_transport_not_ownership"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Actual acquired pair translation",
+          "required_fields": [
+            "output_term_ref",
+            "measurement_digest"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "cargo.observed_pair_translation.b.v1",
+            "physical_identity_established": false,
+            "ownership_established": false,
+            "delivery_established": false,
+            "face_lock_established": false,
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "measurement_digest": "measurement_digest",
+            "actor_ref": "actor_ref",
+            "cargo_ref": "cargo_ref",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "action_ref": "action_ref",
+            "before_frame_ref": "before_frame_ref",
+            "frame_ref": "frame_ref",
+            "before_observation_record_ref": "before_observation_record_ref",
+            "after_observation_record_ref": "after_observation_record_ref",
+            "translation_deltas_row_column": "translation_deltas_row_column",
+            "relative_visible_offsets_row_column": "relative_visible_offsets_row_column",
+            "shape_preserved": "shape_preserved",
+            "same_nonzero_translation": "same_nonzero_translation",
+            "addressed_control_ref": "addressed_control_ref",
+            "control_receiver_refs": "control_receiver_refs",
+            "control_proof_ref": "control_proof_ref",
+            "timeline_ref": "timeline_ref",
+            "level_scope_ref": "level_scope_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_measurement_claim_ref}",
+          "predicate": "observed_cargo_pair_translation",
+          "family": "dynamic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{after_observation_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "output_measurement_claim_ref",
+            "output_term_ref",
+            "after_observation_record_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "level_scope_ref": "level_scope_ref",
+            "current_frame_ref": "frame_ref"
+          },
+          "attribute_bindings": {
+            "measurement_digest": "measurement_digest",
+            "actor_ref": "actor_ref",
+            "cargo_ref": "cargo_ref",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "action_ref": "action_ref",
+            "before_frame_ref": "before_frame_ref",
+            "frame_ref": "frame_ref",
+            "before_observation_record_ref": "before_observation_record_ref",
+            "after_observation_record_ref": "after_observation_record_ref",
+            "translation_deltas_row_column": "translation_deltas_row_column",
+            "relative_visible_offsets_row_column": "relative_visible_offsets_row_column",
+            "shape_preserved": "shape_preserved",
+            "same_nonzero_translation": "same_nonzero_translation",
+            "addressed_control_ref": "addressed_control_ref",
+            "control_receiver_refs": "control_receiver_refs",
+            "control_proof_ref": "control_proof_ref",
+            "timeline_ref": "timeline_ref",
+            "level_scope_ref": "level_scope_ref"
+          },
+          "static_attributes": {
+            "ownership_established": false,
+            "physical_identity_established": false,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id_pattern": "{output_supposition_claim_ref}",
+          "predicate": "rigid_transport_hypothesis",
+          "family": "structural",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{actor_ref}",
+            "{cargo_ref}",
+            "{output_term_ref}"
+          ],
+          "required_term_patterns": [
+            "{actor_ref}",
+            "{cargo_ref}",
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "output_supposition_claim_ref",
+            "actor_ref",
+            "cargo_ref",
+            "output_term_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "level_scope_ref": "level_scope_ref",
+            "current_frame_ref": "frame_ref"
+          },
+          "attribute_bindings": {
+            "measurement_digest": "measurement_digest",
+            "actor_ref": "actor_ref",
+            "cargo_ref": "cargo_ref",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "action_ref": "action_ref",
+            "before_frame_ref": "before_frame_ref",
+            "frame_ref": "frame_ref",
+            "before_observation_record_ref": "before_observation_record_ref",
+            "after_observation_record_ref": "after_observation_record_ref",
+            "translation_deltas_row_column": "translation_deltas_row_column",
+            "relative_visible_offsets_row_column": "relative_visible_offsets_row_column",
+            "shape_preserved": "shape_preserved",
+            "same_nonzero_translation": "same_nonzero_translation",
+            "addressed_control_ref": "addressed_control_ref",
+            "control_receiver_refs": "control_receiver_refs",
+            "control_proof_ref": "control_proof_ref",
+            "timeline_ref": "timeline_ref",
+            "level_scope_ref": "level_scope_ref"
+          },
+          "static_attributes": {
+            "ownership_established": false,
+            "physical_identity_established": false,
+            "face_lock_established": false,
+            "delivery_established": false,
+            "no_dispatch_or_action_authority": true,
+            "competing_explanations": [
+              "shared_control_without_attachment",
+              "independent_same_delta_motion",
+              "identity_correspondence_ambiguity"
+            ],
+            "falsifiers": [
+              "relative_offset_changes_under_another_translation",
+              "independent_motion_without_release",
+              "different_geometry_correspondence"
+            ],
+            "required_next_evidence": [
+              "discriminating_interaction_or_control_contrast",
+              "current_identity_and_physical_anchor_support"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_cargo_current_front_return",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_front_is_qualified_at_the_current_interaction_entry"
+      ],
+      "declared_alternative_refs": [
+        "cargo_front.ready",
+        "cargo_front.prepare",
+        "cargo_front.unknown"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.b_cargo_front.ready",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_front.ready"
+            },
+            {
+              "field": "front_measurement_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "front_precondition_satisfied",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "FRONT_READY",
+            "unresolved_dependency_refs": [],
+            "full_interaction_readiness_proven": false,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_cargo_front.prepare",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_front.prepare"
+            },
+            {
+              "field": "front_measurement_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "front_precondition_satisfied",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "FRONT_PREPARATION_REQUIRED",
+            "unresolved_dependency_refs": [
+              "cargo.precondition.front_preparation_before_interaction"
+            ],
+            "full_interaction_readiness_proven": false,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_cargo_front.unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_front.unknown"
+            },
+            {
+              "field": "front_measurement_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_CURRENT_FRONT_EVIDENCE",
+            "unresolved_dependency_refs": [
+              "cargo.precondition.current_front_measurement"
+            ],
+            "full_interaction_readiness_proven": false,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_observed_delivery_service",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "actual_acquired_delivery_and_current_compatible_model_attribution"
+      ],
+      "applicability": [
+        "current_parent_service_question"
+      ],
+      "invariants": [
+        "one_observed_service_does_not_prove_universal_service_or_delivery_of_another_cargo"
+      ],
+      "falsifiers": [
+        "changed_model_type_scope_or_competing_attribution"
+      ],
+      "reason_refs": [
+        "reason_actual_receiving_effect_and_current_causal_model_support_a_scoped_service"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Observed scoped delivery service",
+          "required_fields": [
+            "output_term_ref",
+            "service_ref"
+          ],
+          "attribute_bindings": {
+            "actor_ref": "actor_ref",
+            "receiver_ref": "receiver_ref",
+            "service_ref": "service_ref",
+            "model_ref": "model_ref",
+            "model_digest": "model_digest",
+            "observed_cargo_type_ref": "observed_cargo_type_ref",
+            "law_evidence_refs": "law_evidence_refs",
+            "interval_digest": "interval_digest",
+            "state_pair_digest": "state_pair_digest",
+            "current_frame_ref": "current_frame_ref"
+          },
+          "static_attributes": {
+            "service_generalization_proven": false,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_support_claim_ref}",
+          "predicate": "supported_observed_delivery_service",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{service_ref}",
+            "{actor_ref}",
+            "{receiver_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "output_support_claim_ref",
+            "service_ref",
+            "actor_ref",
+            "receiver_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "model_ref": "model_ref",
+            "current_frame_ref": "current_frame_ref"
+          },
+          "attribute_bindings": {
+            "service_term_ref": "output_term_ref",
+            "actor_ref": "actor_ref",
+            "receiver_ref": "receiver_ref",
+            "service_ref": "service_ref",
+            "model_ref": "model_ref",
+            "model_digest": "model_digest",
+            "observed_cargo_type_ref": "observed_cargo_type_ref",
+            "law_evidence_refs": "law_evidence_refs",
+            "interval_digest": "interval_digest",
+            "state_pair_digest": "state_pair_digest",
+            "current_frame_ref": "current_frame_ref"
+          },
+          "static_attributes": {
+            "service_generalization_proven": false,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_observed_service_attribution",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_observed_receiving_effect_requires_qualified_current_causal_attribution"
+      ],
+      "declared_alternative_refs": [
+        "cargo_service_attribution.bound",
+        "cargo_service_attribution.missing"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.b_service_attribution.bound",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_service_attribution.bound"
+            },
+            {
+              "field": "observed_service_interval_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_attribution_request_bound",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "invoke_attribution": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_service_attribution.missing_interval",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_service_attribution.missing"
+            },
+            {
+              "field": "observed_service_interval_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "invoke_attribution": false,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_service_attribution.missing_request",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_service_attribution.missing"
+            },
+            {
+              "field": "observed_service_interval_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_attribution_request_bound",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "invoke_attribution": false,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_observed_delivery_service",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_actual_receiving_effect_and_current_causal_model_support_a_scoped_service"
+      ],
+      "declared_alternative_refs": [
+        "cargo_service.publish",
+        "cargo_service.missing"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "cargo_service.publish": "rule.b_observed_delivery_service"
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.b_service.publish",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_service.publish"
+            },
+            {
+              "field": "observed_service_interval_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cargo_released_acquired_after",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cargo_received_after",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiver_capacity_respected",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "matching_responses_delivery_actor_receiver_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "law_evidence_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_service.missing.observed_service_interval_current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_service.missing"
+            },
+            {
+              "field": "observed_service_interval_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_service.missing.cargo_released_acquired_after",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_service.missing"
+            },
+            {
+              "field": "cargo_released_acquired_after",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_service.missing.cargo_received_after",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_service.missing"
+            },
+            {
+              "field": "cargo_received_after",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_service.missing.receiver_capacity_respected",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_service.missing"
+            },
+            {
+              "field": "receiver_capacity_respected",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_service.missing.matching_responses_delivery_actor_receiver_equal",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_service.missing"
+            },
+            {
+              "field": "matching_responses_delivery_actor_receiver_equal",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_service.missing.law_evidence_current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_service.missing"
+            },
+            {
+              "field": "law_evidence_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_service.absent.observed_service_interval_current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_service.missing"
+            },
+            {
+              "field": "observed_service_interval_current",
+              "operator": "is_absent"
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_service.absent.cargo_released_acquired_after",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_service.missing"
+            },
+            {
+              "field": "cargo_released_acquired_after",
+              "operator": "is_absent"
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_service.absent.cargo_received_after",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_service.missing"
+            },
+            {
+              "field": "cargo_received_after",
+              "operator": "is_absent"
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_service.absent.receiver_capacity_respected",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_service.missing"
+            },
+            {
+              "field": "receiver_capacity_respected",
+              "operator": "is_absent"
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_service.absent.matching_responses_delivery_actor_receiver_equal",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_service.missing"
+            },
+            {
+              "field": "matching_responses_delivery_actor_receiver_equal",
+              "operator": "is_absent"
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_service.absent.law_evidence_current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_service.missing"
+            },
+            {
+              "field": "law_evidence_current",
+              "operator": "is_absent"
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_cargo_parent_service_selection",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "current_canonical_parent_nomination_and_exact_admitted_relation"
+      ],
+      "applicability": [
+        "explicit_parent_selected_service_relation"
+      ],
+      "invariants": [
+        "no_selection_or_ACT_created_by_receipt_transport"
+      ],
+      "falsifiers": [
+        "changed_nomination_scope_model_relation_or_why"
+      ],
+      "reason_refs": [
+        "reason_only_the_canonical_parent_nomination_can_authorize_a_service_selection_receipt"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Current parent selected conditional allocation",
+          "required_fields": [
+            "output_term_ref",
+            "allocation_ref"
+          ],
+          "attribute_bindings": {
+            "allocation": "allocation",
+            "relation": "relation",
+            "relation_digest": "relation_digest",
+            "parent_why": "parent_why",
+            "current_frame_ref": "current_frame_ref"
+          },
+          "static_attributes": {
+            "actual_delivery_proved": false,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_support_claim_ref}",
+          "predicate": "records_current_cargo_service_allocation_selection",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{parent_goal_ref}",
+            "{allocation_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "output_support_claim_ref",
+            "allocation_ref",
+            "parent_goal_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref"
+          },
+          "attribute_bindings": {
+            "allocation_term_ref": "output_term_ref",
+            "relation_digest": "relation_digest",
+            "current_frame_ref": "current_frame_ref"
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_cargo_service_policy_join",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_a_conditional_assignment_must_match_every_native_branch_of_its_exact_word"
+      ],
+      "declared_alternative_refs": [
+        "cargo_service_policy.compatible",
+        "cargo_service_policy.unresolved"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.b_service_policy.compatible",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_service_policy.compatible"
+            },
+            {
+              "field": "all_compatible_native_branches_match_assignment",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "conditional_assignment_word_admitted": true,
+            "actual_delivery_proved": false,
+            "delegated_goals_open": true
+          }
+        },
+        {
+          "id": "projection.b_service_policy.unresolved",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_service_policy.unresolved"
+            },
+            {
+              "field": "all_compatible_native_branches_match_assignment",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "conditional_assignment_word_admitted": false,
+            "actual_delivery_proved": false,
+            "delegated_goals_open": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_cargo_parent_service_selection",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_only_the_canonical_parent_nomination_can_authorize_a_service_selection_receipt"
+      ],
+      "declared_alternative_refs": [
+        "cargo_selection.current",
+        "cargo_selection.missing"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "cargo_selection.current": "rule.b_cargo_parent_service_selection"
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.b_selection.current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_selection.current"
+            },
+            {
+              "field": "parent_selected_service_relation_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_selection.missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_selection.missing"
+            },
+            {
+              "field": "parent_selected_service_relation_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_cargo_service_domain_acquisition",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_current_scoped_service_evidence_and_explicit_preparations_support_conditional_choices"
+      ],
+      "declared_alternative_refs": [
+        "cargo_service_domain.current",
+        "cargo_service_domain.missing"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.b_service_domain.current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_service_domain.current"
+            },
+            {
+              "field": "source_domain_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "domain_admitted": true,
+            "delegated_goals_open": true,
+            "actual_delivery_proved": false
+          }
+        },
+        {
+          "id": "projection.b_service_domain.missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_service_domain.missing"
+            },
+            {
+              "field": "source_domain_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "domain_admitted": false,
+            "delegated_goals_open": true,
+            "actual_delivery_proved": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_actual_selected_cargo_service",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_selected_delivery_closes_only_after_current_receiving_and_actual_actor_attribution"
+      ],
+      "declared_alternative_refs": [
+        "cargo_actual_service.delivered",
+        "cargo_actual_service.open"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.b_actual_service.delivered",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_actual_service.delivered"
+            },
+            {
+              "field": "selected_allocation_delivery_attributed",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "actual_selected_service_delivered": true,
+            "delegated_goals_open": false,
+            "principal_goal_completion_claimed": false,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_actual_service.open",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_actual_service.open"
+            },
+            {
+              "field": "selected_allocation_delivery_attributed",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "actual_selected_service_delivered": false,
+            "delegated_goals_open": true,
+            "principal_goal_completion_claimed": false,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_actual_cargo_ownership_change",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_actual_ownership_change_updates_parent_means_without_erasing_cargo_identity_or_principal_goal"
+      ],
+      "declared_alternative_refs": [
+        "cargo_ownership.changed",
+        "cargo_ownership.unresolved"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.b_ownership.changed",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_ownership.changed"
+            },
+            {
+              "field": "actual_ownership_pair_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cargo_identity_and_mask_preserved",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "parent_means_revalidation_required": true,
+            "cargo_identity_preserved": true,
+            "principal_goal_unchanged": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_ownership.unresolved_pair",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_ownership.unresolved"
+            },
+            {
+              "field": "actual_ownership_pair_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "parent_means_revalidation_required": true,
+            "cargo_identity_preserved": false,
+            "principal_goal_unchanged": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_ownership.unresolved_identity",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_ownership.unresolved"
+            },
+            {
+              "field": "actual_ownership_pair_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cargo_identity_and_mask_preserved",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "parent_means_revalidation_required": true,
+            "cargo_identity_preserved": false,
+            "principal_goal_unchanged": true,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_current_cargo_means_demand",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_current_parent_dependency_binds_an_existing_inverse_question_without_releasing_an_action"
+      ],
+      "declared_alternative_refs": [
+        "cargo_means.delivery_pose",
+        "cargo_means.regrasp",
+        "cargo_means.bounded_wait",
+        "cargo_means.missing"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.b_means.delivery_pose",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_means.delivery_pose"
+            },
+            {
+              "field": "kind_ref",
+              "operator": "equals",
+              "expected": "delivery_pose"
+            },
+            {
+              "field": "demand_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "allowed_cargo_poses_supplied",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "detachment_assumption_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "question_production_admitted": true,
+            "operation_ref": "mechanics.oriented_cargo_handoffs.grasp_domains",
+            "mode_ref": "INVERSE_DOMAIN",
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_means.regrasp",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_means.regrasp"
+            },
+            {
+              "field": "kind_ref",
+              "operator": "equals",
+              "expected": "regrasp"
+            },
+            {
+              "field": "demand_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "manual_actor_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_owned_coupling",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "necessity_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "future_predicates_supplied",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "initial_future_condition_unmet",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_depth_positive",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "actual_input_domain_supplied",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "question_production_admitted": true,
+            "operation_ref": "mechanics.oriented_cargo_handoffs.regrasp_domains",
+            "mode_ref": "INVERSE_DOMAIN",
+            "usefulness_field": "regrasp_usefulness",
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_means.wait",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_means.bounded_wait"
+            },
+            {
+              "field": "kind_ref",
+              "operator": "equals",
+              "expected": "bounded_wait"
+            },
+            {
+              "field": "demand_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "manual_actor_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "future_predicates_supplied",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "initial_future_condition_unmet",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_depth_positive",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "actual_input_domain_supplied",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "autonomous_policy_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "expected_actor_in_autonomous_domain",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "supported_horizon_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_wait_event_named",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "purpose_ref",
+              "operator": "equals",
+              "expected": "delivery"
+            },
+            {
+              "field": "purpose_ref",
+              "operator": "equals",
+              "expected": "clearance"
+            },
+            {
+              "field": "purpose_ref",
+              "operator": "equals",
+              "expected": "rendezvous"
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "question_production_admitted": true,
+            "operation_ref": "mechanics.oriented_cargo_handoffs.wait_domains",
+            "mode_ref": "INVERSE_DOMAIN",
+            "usefulness_field": "wait_usefulness",
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.b_means.missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_means.missing"
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "question_production_admitted": false,
+            "missing_refs": [
+              "cargo.means.current_named_dependency_evidence"
+            ],
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.b_means.pose",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_means.delivery_pose"
+            }
+          ],
+          "reason_ref": "reason_explicit_delivery_pose_need_binds_the_current_grasp_domain"
+        },
+        {
+          "id": "tier.b_means.regrasp",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_means.regrasp"
+            }
+          ],
+          "reason_ref": "reason_current_blocked_grip_and_named_future_effect_require_a_complete_deposit_detour_reattachment_domain"
+        },
+        {
+          "id": "tier.b_means.wait",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_means.bounded_wait"
+            }
+          ],
+          "reason_ref": "reason_named_autonomous_benefit_requires_an_available_input_under_a_supported_horizon"
+        },
+        {
+          "id": "tier.b_means.missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_means.missing"
+            }
+          ],
+          "reason_ref": "reason_missing_current_dependency_evidence_remains_open"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.b_means_signature_not_strategy_selection"
+    }
+  ]
+}

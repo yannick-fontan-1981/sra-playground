@@ -1,0 +1,62 @@
+{
+  "module_id": "escape_topology",
+  "declarations": [{
+    "id": "policy.escape_topology_meaning",
+    "kind": "selection_policy",
+    "evaluation": "declared_eligibility_single",
+    "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "selection_eligibility_conditions": [{"field": "actor_ref", "operator": "is_present"}],
+    "invariants": [
+      "actor_configuration_graph_includes_whole_footprint_and_admitted_transition_kinds",
+      "unknown_successors_prevent_a_closed_escape_claim",
+      "staying_put_is_not_an_escape",
+      "one_egress_is_not_zero_egress",
+      "zero_egress_from_a_region_is_not_zero_motion_inside_it",
+      "confinement_in_one_model_is_not_unconditional_capture",
+      "preserve_all_model_alternatives_and_revalidate_after_occupancy_changes"
+    ],
+    "fact_projections": [
+      {"id": "projection.escape_topology.defaults", "static_facts": {
+        "local_escape_status_ref": "escape.unqualified_response_domain",
+        "region_status_ref": "escape.unqualified_region_boundary",
+        "capture_status_ref": "capture.requires_separate_contact_and_terminal_evidence",
+        "primitive_release_authorized": false,
+        "preservation_requirement_refs": ["preserve_actor_model_scope", "revalidate_occupancy_before_closure_claim"]
+      }},
+      {"id": "projection.escape_topology.available_relocation",
+       "all_conditions": [{"field": "current_free_relocation_count", "operator": "greater_than", "expected": 0}],
+       "static_facts": {"local_escape_status_ref": "escape.at_least_one_legal_relocation_in_model"}},
+      {"id": "projection.escape_topology.no_legal_relocation",
+       "all_conditions": [
+         {"field": "current_free_relocation_count", "operator": "equals", "expected": 0},
+         {"field": "current_successor_domain_complete", "operator": "equals", "expected": true}],
+       "static_facts": {"local_escape_status_ref": "escape.trapped_in_current_model",
+         "preservation_requirement_refs": ["preserve_closed_response_domain_until_contact", "revalidate_occupancy_before_closure_claim", "require_pursuer_access_without_reopening_escape"]}},
+      {"id": "projection.escape_topology.possible_single_exit",
+       "all_conditions": [{"field": "egress_gateway_count", "operator": "equals", "expected": 1}],
+       "static_facts": {"region_status_ref": "escape.single_observed_egress_hypothesis"}},
+      {"id": "projection.escape_topology.geometric_dead_end",
+       "all_conditions": [
+         {"field": "egress_gateway_count", "operator": "equals", "expected": 1},
+         {"field": "reachable_region_domain_complete", "operator": "equals", "expected": true},
+         {"field": "occupancy_scope", "operator": "equals", "expected": "terrain_only"}],
+       "static_facts": {"region_status_ref": "escape.geometric_dead_end_in_model",
+         "strategy_question_ref": "question.can_observed_response_guide_actor_into_region_and_keep_its_exit_closed"}},
+      {"id": "projection.escape_topology.one_exit_under_occupancy",
+       "all_conditions": [
+         {"field": "egress_gateway_count", "operator": "equals", "expected": 1},
+         {"field": "reachable_region_domain_complete", "operator": "equals", "expected": true},
+         {"field": "occupancy_scope", "operator": "equals", "expected": "current_occupancy"}],
+       "static_facts": {"region_status_ref": "escape.one_remaining_exit_under_current_occupancy",
+         "strategy_question_ref": "question.can_last_exit_be_closed_without_losing_pursuer_access"}},
+      {"id": "projection.escape_topology.sealed_region",
+       "all_conditions": [
+         {"field": "egress_gateway_count", "operator": "equals", "expected": 0},
+         {"field": "reachable_region_domain_complete", "operator": "equals", "expected": true}],
+       "static_facts": {"region_status_ref": "escape.sealed_region_in_model"}}
+    ],
+    "reason_refs": ["reason.escape_domain_closure_requires_complete_current_transition_evidence"]
+  }]
+}

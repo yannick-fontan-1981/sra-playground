@@ -1,0 +1,13 @@
+{
+  "title": "Contact",
+  "description": "Contact Yannick Fontan, software developer and independent researcher behind the Symbolic Reasoning Agent (SRA).",
+  "deck": "Get in touch about SRA, symbolic reasoning, or the games.",
+  "name": "Yannick Fontan",
+  "role": "Software developer · Independent researcher",
+  "email": "yannickfontan@gmail.com",
+  "bio": [
+    "I build software and explore the foundations of reasoning. My research focuses on making the concepts, goals, and decisions of an intelligent system explicit and understandable.",
+    "I’m the creator of SRA (Symbolic Reasoning Agent). Using ARC-AGI-3 and the games in this playground, I investigate how an agent can discover mechanisms, compose reasoning, and reuse knowledge."
+  ],
+  "invitation": "Have a question, an idea, or feedback on the project? I’d be glad to hear from you."
+}

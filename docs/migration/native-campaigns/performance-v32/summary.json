@@ -1,0 +1,147 @@
+{
+  "schema": "logos-engine.v6.delta-performance.v1",
+  "baselineCommit": "7b7ffa5b75b0101fc0e34ec782841312eb4298ce",
+  "qualification": "Isolated v31 checkout with only the named performance changes, separate from subsequent new-family integration. Real games, real active clock, production budgets, no agent Python. Timings describe this machine with CPU profiling for all two-level comparisons; they are not user-hardware guarantees.",
+  "changedNativeFiles": [
+    "src/logos-engine/v6-native-authority.ts",
+    "src/logos-engine/v6-native-caller.ts",
+    "src/logos-engine/v6-native-owned.ts",
+    "src/logos-engine/v6-native-state-graph.ts",
+    "src/logos-engine/v6-reasoning-memory.ts",
+    "src/logos-engine/v6-transition-learning.ts"
+  ],
+  "stageMeasurements": [
+    {
+      "stage": "baseline-hano2",
+      "game": "HANO",
+      "levels": 2,
+      "actions": 16,
+      "prefixes": 8,
+      "activeSeconds": 85.287851326,
+      "activeSecondsByLevel": [
+        17.563809824000003,
+        67.72404150199999
+      ],
+      "sourceDigest": "22300eccafb584692324b29a2b6d7a763d8748d591eb5facba95bdb68d20d7c7",
+      "profiler": true,
+      "passed": true
+    },
+    {
+      "stage": "projection-hano2",
+      "game": "HANO",
+      "levels": 2,
+      "actions": 16,
+      "prefixes": 8,
+      "activeSeconds": 44.97834551,
+      "activeSecondsByLevel": [
+        8.75453864,
+        36.22380687
+      ],
+      "sourceDigest": "2c3f107adbd81bef5cbf4fda26ed556e60d31de7b4f1268e486b972301a2137d",
+      "profiler": true,
+      "passed": true
+    },
+    {
+      "stage": "fragment-hano2",
+      "game": "HANO",
+      "levels": 2,
+      "actions": 16,
+      "prefixes": 8,
+      "activeSeconds": 25.804525888999997,
+      "activeSecondsByLevel": [
+        5.656119573999996,
+        20.148406315000003
+      ],
+      "sourceDigest": "1d5d27706c70df5bf5cb8a89c72cc6acb3b67385f6fa813e85e4d20b6ad08c46",
+      "profiler": true,
+      "passed": true
+    },
+    {
+      "stage": "delta-hano2",
+      "game": "HANO",
+      "levels": 2,
+      "actions": 16,
+      "prefixes": 8,
+      "activeSeconds": 9.799656111000012,
+      "activeSecondsByLevel": [
+        4.344397887,
+        5.455258224000011
+      ],
+      "sourceDigest": "37fbb623a4ddea355b12bbd91782eb218bbda78af98770d5f05b6151446dc165",
+      "profiler": true,
+      "passed": true
+    },
+    {
+      "stage": "delta-hano3",
+      "game": "HANO",
+      "levels": 3,
+      "actions": 30,
+      "prefixes": 15,
+      "activeSeconds": 20.316236221000004,
+      "activeSecondsByLevel": [
+        4.027584118999999,
+        6.839702036000001,
+        9.448950066000004
+      ],
+      "sourceDigest": "37fbb623a4ddea355b12bbd91782eb218bbda78af98770d5f05b6151446dc165",
+      "profiler": false,
+      "passed": true
+    }
+  ],
+  "controlledComparison": {
+    "beforeActiveSeconds": 85.287851326,
+    "afterActiveSeconds": 9.799656111000012,
+    "factor": 8.703147371698613,
+    "reductionPercent": 88.5099038624595,
+    "commandsIdentical": true,
+    "publicPacketsIdentical": true,
+    "commandsCompared": 16,
+    "publicPacketsCompared": 17,
+    "retainedNodeCountBefore": 304,
+    "retainedNodeCountAfter": 304,
+    "graphRevisionsBefore": 783,
+    "graphRevisionsAfter": 783
+  },
+  "profileFindings": [
+    "About 31 seconds of baseline CPU sampling were spent repeatedly canonicalizing the same observed entities while checking retained rules.",
+    "About 19 seconds were spent serializing validated internal state envelopes through the generic canonicalizer.",
+    "Remaining repeated work was cloning and encoding unchanged rule conditions/effects and historical subtrees. Native ownership and structural sharing now retain these subtrees; acquired checks and evidence are still recorded."
+  ],
+  "invariants": [
+    "All actual rule validations, hypotheses, counterexamples, episodes, acquisition events, post-analyses and boundary replays remain present.",
+    "Public state/get APIs return independent mutable copies. Native internal reads are deeply immutable and validated.",
+    "New native writes share immutable previous branches and own mutable input branches.",
+    "Cached state encodings retain exact canonical fragment hashes, depth bounds and complete dependency exports.",
+    "Actual graph node revisions and fragment identities still guard reads, stale edits and rollback."
+  ],
+  "verification": {
+    "existingRegressionTests": 304,
+    "newIncrementalTests": 27,
+    "newIncrementalTestFile": "tests/v6-incremental-memory.test.ts",
+    "isolatedTypecheck": "passed",
+    "realGameConfirmations": [
+      "baseline-hano2.json",
+      "delta-hano2.json",
+      "delta-hano3.json"
+    ]
+  },
+  "commands": {
+    "baseline": "node --cpu-prof --cpu-prof-dir=<output> --cpu-prof-name=baseline-hano2.cpuprofile tests/v6-agent-native.smoke.ts HANO 2 <output>/baseline-hano2.json",
+    "optimized": "node --cpu-prof --cpu-prof-dir=<output> --cpu-prof-name=delta-hano2.cpuprofile tests/v6-agent-native.smoke.ts HANO 2 <output>/delta-hano2.json",
+    "threeLevelConfirmation": "node tests/v6-agent-native.smoke.ts HANO 3 <output>/delta-hano3.json"
+  },
+  "reports": {
+    "baseline-hano2.json": {
+      "sha256": "44da41f11a6f6330aca04aaf8bea503b5bb2851d59b6a6357698291b1b4a004b",
+      "bytes": 65402
+    },
+    "delta-hano2.json": {
+      "sha256": "c1498531d1a0d986bb2bb01e3259d410b41dcd87b213899efd9b4c74594cd2fe",
+      "bytes": 65515
+    },
+    "delta-hano3.json": {
+      "sha256": "01a1cbca9c22ef6acd3168862447b5691e68abce4bac03353239be55a263381a",
+      "bytes": 111418
+    }
+  }
+}

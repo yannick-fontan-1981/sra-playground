@@ -1,0 +1,12 @@
+{
+  "schema": "logos-engine.post-merge-typecheck.v1",
+  "recordedAt": "2026-11-11T00:45:47.499247+00:00",
+  "status": "passed",
+  "output": {
+    "path": "docs/migration/lot5b-evidence/diagnostic/post-site91-typecheck.log.gz",
+    "bytes": 141,
+    "sha256": "0d2cbbee31ca5839df68f3a5ae10b6102ed35a65bd129facd4509c36a18a564d"
+  },
+  "partialCapture": null,
+  "qualification": "Development post-Site91 compile check; not the final integrated release gate."
+}

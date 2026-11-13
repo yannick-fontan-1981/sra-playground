@@ -1,0 +1,144 @@
+{
+  "schema": "logos-engine.lot8b.branch-tools-independent-static-review.v1",
+  "reviewDate": "2026-11-12",
+  "stage": "prospective_static_review_before_branch_capture_or_reader_execution",
+  "status": "no_blocking_objection_after_two_explicit_data_links_added",
+  "reviewer": {
+    "agent": "/root/branch_routing_source",
+    "toolAuthor": "/root/branch_routing_contract",
+    "qualification": "Internal review by a different agent from the capture/reader author; not an external audit. The reviewer previously authored the original-reference exporter and generic fixture, and discloses that prior contribution."
+  },
+  "reviewMethod": {
+    "staticSourceAndDiffReading": true,
+    "opaqueToolFingerprintVerification": true,
+    "toolsExecutedAtThisStage": false,
+    "captureExecutedByReviewer": false,
+    "readerExecutedByReviewer": false,
+    "syntaxCheckExecutedByReviewer": false,
+    "testsExecutedByReviewer": false,
+    "nativeRuntimeExecutedByReviewer": false,
+    "originalOracleExecutedByReviewer": false,
+    "gameOrReplayExecutedByReviewer": false,
+    "officialPerformanceMeasurement": false,
+    "lockAcquiredOrRemoved": false,
+    "sourceOrToolModifiedByReviewerDuringThisReview": false,
+    "onlyWrittenArtifact": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-tools-independent-review.json",
+    "executionScope": "The separate eleven-case regression campaign is in progress under the parent agent. This static review supplies no execution result for that campaign or for the BranchRouting capture and reader."
+  },
+  "frozenTools": [
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture.mjs",
+      "sha256": "aa9dc3e0ecaefea6f90f7be2d2e2ab88324cc5c655677514fee7cb6bdb1923eb",
+      "fingerprintVerifiedByReviewer": true
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify.mjs",
+      "sha256": "8e22c4b444b6e2e7d93d37dbb54dbbfa147218fb421d18fb40e81ba98444610a",
+      "fingerprintVerifiedByReviewer": true
+    }
+  ],
+  "independentExpectationSource": {
+    "path": "tests/fixtures/v6-branch-routing-reference.json",
+    "sha256RequiredByBothTools": "e6ae197b7b982bd41f561b9df8e458436d7ce0797f39bbf86d972e55472b6769",
+    "originalReferenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "origin": "independently_constructed_contract_geometry",
+    "oracleRegenerated": false,
+    "nativeOutputInjectedIntoOriginalOracle": false,
+    "acquiredStateInjectedIntoCapturedColdSessions": false,
+    "expectationScope": "Complete acquired event/state expectations are read from the fixed corpus03. The tools fingerprint the original-source manifest and three generic source dependencies; they do not execute the original oracle. The two principal cold corpus chains supply the physical observations for five declared common-service sessions."
+  },
+  "twoReviewComplements": [
+    {
+      "id": "current_before_guard_packet_and_observation",
+      "initialReservation": "The reader initially required an admitted before guard and found it by observation reference and prefix index, without explicitly comparing its full packet and observation arguments to the current public data.",
+      "authorCorrection": "Reader.action now compares guard.arguments.publicPacket to state.currentPacket and guard.arguments.observation to row.actualObservation.",
+      "reviewDisposition": "Correction read in the frozen reader; the data link is explicit, including the second prefix action and inspection of a still-authorized question. No execution outcome is claimed."
+    },
+    {
+      "id": "selected_record_raster_arguments",
+      "initialReservation": "The reader initially matched record observations, command and frame packet, but did not explicitly compare record.firstRows and record.secondRows to the retained transition rasters.",
+      "authorCorrection": "Reader.operation now compares operation.arguments.firstRows and secondRows to actual.firstPacket.frame_rows and actual.secondPacket.frame_rows for record, as already done for after.",
+      "reviewDisposition": "Correction read in the frozen reader; selected acquisition is explicitly attached to the two retained public rasters. No execution outcome is claimed."
+    }
+  ],
+  "additionalFrozenChangesReviewed": [
+    "Both tools require the exact corpus03 SHA-256 instead of accepting an arbitrary current fixture with matching self-description.",
+    "The reader caches only the latest hydrated revision per node and rehydrates an older requested root when needed. Complete raw deltas and content-addressed fragments remain available; no historical graph evidence is discarded.",
+    "The reader reports a forms output path only after successful qualification; a failed read does not advertise a nonexistent forms artifact."
+  ],
+  "staticFindings": [
+    {
+      "id": "actual_command_before_public_return",
+      "finding": "The capture creates a real V6AgentService over the production factory, verifies the unique registered BranchRouting owner and its source-order neighbors, and checks actual command, ticket, mode and selected family before supplying each independent corpus raster. No acquired model or motion state is installed to manufacture a cold acquisition."
+    },
+    {
+      "id": "real_acquisition_and_common_store",
+      "finding": "Instrumentation calls the actual registered owner methods except for the explicitly labelled record ablation. The reader checks complete source acquisition results and states, retained branches:<revision> facts, observed checkpoints, common-store restore arguments, authority releases, prefix relations and public transitions."
+    },
+    {
+      "id": "independent_complete_graph_reader",
+      "finding": "The reader reconstructs every retained graph delta, validates nodes with the pinned NativeKnowledgeStore/Kernel, checks content-addressed fragments and chain digests, hydrates modified roots, and compares the actual inspection digests. It does not create a runtime session or invoke BranchRouting to manufacture expected results."
+    },
+    {
+      "id": "contrary_and_ablation",
+      "finding": "The positive and contrary chains share four initial acquisitions and the tested movement command. The contrary public return changes acquired ACTION1 motion and the next proposal mode. The ablation shares the first command and public return with the positive chain, omits only the selected record effect, retains the selected-null fact, and requires the control to remain unlearned."
+    },
+    {
+      "id": "incomplete_prefix_retention",
+      "finding": "The controlled scheduling case expires only the runtime level clock after the unchanged second move guard. The reader requires two complete unacquired public transitions, the first typed refusal and the later acquisition barrier, no branches facts for either incomplete return, no record call for the suffix, and terminal resume without another ticket or acquisition."
+    }
+  ],
+  "prospectiveExpectedCounts": {
+    "qualification": "These are requirements encoded in the unexecuted reader, not results established by this static review.",
+    "sessions": 5,
+    "physicalReturns": 26,
+    "completedSourceAcquisitions": 23,
+    "ablatedReturns": 1,
+    "incompleteReturns": 2,
+    "wrapperRecordCalls": 25,
+    "nativeAdapterRecordInvocations": 24,
+    "nativeAdapterInvocationQualification": "Includes the first incomplete acquisition attempt; invoking the real adapter is not equivalent to completing an acquisition.",
+    "bySession": [
+      { "id": "single-positive", "physicalReturns": 6, "completedSourceAcquisitions": 6, "ablatedReturns": 0, "incompleteReturns": 0 },
+      { "id": "triple-prefix", "physicalReturns": 7, "completedSourceAcquisitions": 7, "ablatedReturns": 0, "incompleteReturns": 0 },
+      { "id": "contrary-return", "physicalReturns": 5, "completedSourceAcquisitions": 5, "ablatedReturns": 0, "incompleteReturns": 0 },
+      { "id": "selected-acquisition-ablation", "physicalReturns": 1, "completedSourceAcquisitions": 0, "ablatedReturns": 1, "incompleteReturns": 0 },
+      { "id": "incomplete-prefix", "physicalReturns": 7, "completedSourceAcquisitions": 5, "ablatedReturns": 0, "incompleteReturns": 2 }
+    ],
+    "executedModes": { "calibrate": 17, "move": 6, "propagate": 1, "select": 2 },
+    "unexecutedAuthorizedQuestions": 3,
+    "officialSolvedLevels": 0,
+    "commonCounterQualification": "caller.acquiredTransitions and common acquiredRecords count reconciled public returns, including ablated or incomplete owner effects. They do not establish 26 successful BranchRouting acquisitions."
+  },
+  "retainedLimits": [
+    {
+      "id": "point_domain",
+      "limit": "The component fixture manually places (7,13) first; the actual common domain selects centroid (6,13) within the same bar [6,12,7,15]. This declared change is not exact identity of the original caller input list. The common point binding and current raster guard are checked separately."
+    },
+    {
+      "id": "observation_reference_transport",
+      "limit": "Original synthetic observation references are explicitly mapped to actually witnessed common references, one source reference to one common reference within each session. The state/event comparison therefore includes declared transport, not byte identity of session namespaces or complete Python-caller parity."
+    },
+    {
+      "id": "derived_unknown_after_guard",
+      "limit": "Some calibration after calls are absent from the corpus. Their expected matched:null and sealed result is deduced from the pinned source rule for expected_after:null, rather than measured by a new original invocation. Complete event and acquired-state expectations still come from corpus03."
+    },
+    {
+      "id": "normal_common_restoration",
+      "limit": "This capture verifies restore calls made by the ordinary common path against actual persisted owner roots. It does not repeat the deliberate owner-state erasure already covered by tests/v6-branch-routing-kernel.test.ts and does not establish long-session or adversarial snapshot provenance."
+    },
+    {
+      "id": "authorized_but_unexecuted_questions",
+      "limit": "The triple chain ends with propagation authorized but not executed; the contrary and ablation chains end with authorized calibration questions. Their three pending tickets are not counted as physical returns or source acquisitions."
+    },
+    {
+      "id": "finished_and_official_success",
+      "limit": "The single positive chain may end with finished:true after propagation without a score increase. All five chains remain synthetic with zero officially solved levels. A detected model, acquired motion, completed geometric obligation or fixture score is not an official game success."
+    },
+    {
+      "id": "parity_and_delivery",
+      "limit": "The artifacts may qualify the five declared common work forms and individual complete graphs. They do not establish complete original-caller parity, cross-version graph equality, an attributed real-game campaign, official performance acceptance or publication."
+    }
+  ],
+  "conclusion": "No concrete blocking contradiction remains in the two frozen tools after the reviewed data-link corrections. This is a static review of prospective requirements only. The BranchRouting capture and reader have not been executed at this stage; the parent agent retains responsibility for their separately declared bounded executions and for preserving any failed attempt."
+}

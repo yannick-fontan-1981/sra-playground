@@ -1,0 +1,152 @@
+{
+  "schema": "logos-engine.lot4b.partial-workshop-projection-static-review.v2",
+  "status": "static_review_no_blocking_finding",
+  "reviewer": "/root/feedback_source_audit",
+  "reviewedAt": "2026-11-10T21:22:57Z",
+  "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "scope": "Source/text review of correction03 and read-only inspection of the 25 command envelopes already extracted by root. No runner, validation main, native module, original source, replay or game was executed.",
+  "previousRunner": {
+    "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-02/runner-before-fix.mjs",
+    "bytes": 41724,
+    "sha256": "b1618a2cf7867c0a783de131ed3cb8d24baffb77c858f04927fe85843c7688bf"
+  },
+  "correctedRunner": {
+    "path": "scripts/replay-native-partial-public-regression.mjs",
+    "bytes": 41906,
+    "sha256": "abd6a49fb509323fd24aa40451d6681a4ac8f5aebc9ede666511f5c2e63d1ae0"
+  },
+  "contracts": {
+    "previous": {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/contract-02.json",
+      "bytes": 4339,
+      "sha256": "3da0449b6a864c0c5cfe587e3b1b0cf6200bfe7920587a0839a9a2151dddeca9"
+    },
+    "corrected": {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/contract-03.json",
+      "bytes": 4339,
+      "sha256": "36e8f4f9910f0553c18f3a891a432365e08258f97345f8584c8154a01f50e13e"
+    },
+    "onlyDifferences": [
+      "declaredAt",
+      "executionInputs.runner"
+    ]
+  },
+  "previousReview": {
+    "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/workshop-projection-review.json",
+    "sha256": "2c1d792c8e58981a546c000cbcae45d1c98a57548078a5b5b166d1c8760b84bd",
+    "unchanged": true,
+    "limitation": "That static review established preservation of public comparisons and raw source rows, but accepted the unverified assumption that all scalar source commands on the retained trajectory omit data. It had not inspected the 25 actual envelopes. The subsequent preflight counterexample disproved that assumption; the earlier no-blocking-finding status was insufficient to establish executable preflight compatibility.",
+    "counterexample": {
+      "sourceCallIndex": 35,
+      "publicActionSequence": 18,
+      "selected": true,
+      "sourceCommand": {
+        "action_ref": "ACTION3",
+        "data": {}
+      }
+    },
+    "disposition": "The earlier receipt and both failed attempts remain unchanged. This receipt records the correction and limitation; it does not rewrite historical outcomes."
+  },
+  "retainedFailures": [
+    {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-01/qualification.json",
+      "sha256": "706aad124c99d9c360727d070bb28121432754d4eb0e4f54c95093a104522fef",
+      "status": "failed",
+      "cause": "Public data field was incorrectly required on every source scalar envelope.",
+      "rawCampaignStatus": null,
+      "commandsCheckedBeforeReturn": 0,
+      "publicPacketsObserved": 0,
+      "requestsObserved": 0
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-02/qualification.json",
+      "sha256": "087c0cada91a7dd2c69ca7dbff87bdf6889785dc11ed3cd6e54fb7ad69dc5e7f",
+      "status": "failed",
+      "cause": "Source scalar data field was incorrectly forbidden, although one retained selected command contains data:{}.",
+      "rawCampaignStatus": null,
+      "commandsCheckedBeforeReturn": 0,
+      "publicPacketsObserved": 0,
+      "requestsObserved": 0
+    }
+  ],
+  "inventory": {
+    "receipt": {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/source-command-envelope-inventory.json",
+      "sha256": "f1939a828fb68c4a06f19e0416afb121ca8b5840af53e7d75a18ee46c1e65f78"
+    },
+    "extractionOwner": "/root",
+    "extractionRepeatedByReviewer": false,
+    "publishedReport": {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz",
+      "sha256": "11aa4589a7d294cc5c7aed2e0e3946541cf48a208b891b0c7229a190e290aff4",
+      "bytes": 5445629
+    },
+    "publishedInputUnchangedReportedByExtractor": true,
+    "rowsIndependentlyReadAndJoined": 25,
+    "points": 5,
+    "scalarsWithoutData": 19,
+    "scalarsWithEmptyData": 1,
+    "selectedRecords": 14,
+    "passiveRecords": 11,
+    "joins": "All 25 source action references equal their joined public references. All five point payloads equal the public x/y payloads. All scalar public commands retain explicit empty data. Public sequences are exactly1..25 and source call indices remain strictly increasing.",
+    "qualification": "The reviewer inspected the retained JSON extraction, not a second decompression of the published campaign. The report fingerprint and extraction provenance are retained explicitly."
+  },
+  "checks": [
+    {
+      "name": "correction_limited_to_workshop_projection",
+      "passed": true,
+      "finding": "Exact text before workshopProjection and after it is unchanged from the retained attempt02 runner. Within the function only its scalar-shape comment and optional-data validation change."
+    },
+    {
+      "name": "both_source_scalar_forms_accepted_without_identification",
+      "passed": true,
+      "finding": "Object.hasOwn selects the exact envelope keys. If data is present, sameKeys(data,[]) requires a non-null, non-array object with no fields. Omitted data and explicit data:{} remain different raw row.command values."
+    },
+    {
+      "name": "point_and_public_validators_preserved",
+      "passed": true,
+      "finding": "ACTION6 source keys and x/y remain exact; their payload equals the strict public payload. Public command() is unchanged and still requires action_ref/data, safe integer point coordinates, or empty scalar data."
+    },
+    {
+      "name": "observed_inventory_categories_covered",
+      "passed": true,
+      "finding": "Static branch review covers the five pointed commands, nineteen scalars without data and one scalar with empty data in the retained inventory; no call index, game name or sequence is special-cased in code."
+    },
+    {
+      "name": "raw_source_rows_and_public_values_unchanged",
+      "passed": true,
+      "finding": "row.command still clones args[2] without completion or stripping. Public commands/packets are never normalized. Existing indices, selected/passive counts, before/after frame joins, unique transitions and publicActionSequence are retained."
+    },
+    {
+      "name": "contract_scope_and_historical_failure_unchanged",
+      "passed": true,
+      "finding": "Contract03 differs from contract02 only by declaration time and runner fingerprint. Expected two-level/25-action unresolved LKEY outcome and all comparison scope limits remain unchanged."
+    }
+  ],
+  "sourceContract": {
+    "source": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/ranked_workshop/family.py",
+    "sha256": "d5e597658994d23659fc086ae9fd66d031501d1fd8a319ce95f38579bd8bb95d",
+    "native": "src/logos-engine/v6-ranked-workshop.ts",
+    "nativeSha256": "002ea017828e0dc1304c3f0a8eeb6ff4acb66c70ff1d8ff269a917d132a18cf2",
+    "finding": "Legacy select offers omit data; extension selection rejects truthy option.action.data, which permits both absence and an empty dictionary. record retains the command received and compares selected commands exactly. The two scalar envelopes must therefore be admitted as distinct shapes, not canonicalized into one."
+  },
+  "execution": {
+    "textAndJsonReadOnly": true,
+    "lightweightFingerprints": true,
+    "pythonOrNodeProcesses": 0,
+    "campaignDecompressions": 0,
+    "imports": 0,
+    "tests": 0,
+    "builds": 0,
+    "replays": 0,
+    "games": 0,
+    "benchmarks": 0
+  },
+  "outcome": "No blocking issue found in the corrected representation guard by this static review. Executable success remains unverified; attempt03 must wait for root's explicit release of the renewed 5A quiet interval.",
+  "preservedLimits": [
+    "Partial trajectory preservation cannot establish a third completed level.",
+    "Whole original-caller parity and complete provider-state equality remain outside the declared scope.",
+    "No performance or live-game claim is made.",
+    "No historical failed attempt is reclassified."
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "logos-engine.v6.campaign-evidence-relocation.v1",
+  "qualification": "Original evidence from the frozen product before the canonical and immutable JSON memory correction. Postmortem log.path fields are historical paths; archivedPath in this manifest identifies the preserved corresponding bytes. Neither campaign reached its normal final attestations.",
+  "files": [
+    {
+      "game": "SYME",
+      "kind": "aborted_campaign_postmortem",
+      "originalPath": "/workspace/scratch/656587eca20f/playground-site/.sites-checkout/docs/migration/native-campaigns-v32/syme-abort.json",
+      "archivedPath": "/workspace/scratch/656587eca20f/playground-site/.sites-checkout/docs/migration/native-campaigns-v32/before-memory-fix/syme-abort.json",
+      "sha256": "abb288bf8b4297c75bb5f3c12f39be26acd5c10405e4d58319574fc65273be00",
+      "bytes": 8011,
+      "bytesUnchanged": true
+    },
+    {
+      "game": "SYME",
+      "kind": "campaign_progress_log",
+      "originalPath": "/workspace/scratch/656587eca20f/v6-validation/syme-v32.log",
+      "archivedPath": "/workspace/scratch/656587eca20f/v6-validation/before-memory-fix/syme-v32.log",
+      "sha256": "2165e61c85a88aa6726be67f330657eb508de7fa2d2f7825bb4f466c87cc6687",
+      "bytes": 148044,
+      "bytesUnchanged": true
+    },
+    {
+      "game": "DNOI",
+      "kind": "aborted_campaign_postmortem",
+      "originalPath": "/workspace/scratch/656587eca20f/playground-site/.sites-checkout/docs/migration/native-campaigns-v32/dnoi-abort.json",
+      "archivedPath": "/workspace/scratch/656587eca20f/playground-site/.sites-checkout/docs/migration/native-campaigns-v32/before-memory-fix/dnoi-abort.json",
+      "sha256": "a5231b375a8dd3f7c7ca042dccf8685b3b64a1fa4a4493046fddbac814ca0b3d",
+      "bytes": 7921,
+      "bytesUnchanged": true
+    },
+    {
+      "game": "DNOI",
+      "kind": "campaign_progress_log",
+      "originalPath": "/workspace/scratch/656587eca20f/v6-validation/dnoi-v32.log",
+      "archivedPath": "/workspace/scratch/656587eca20f/v6-validation/before-memory-fix/dnoi-v32.log",
+      "sha256": "3079f1804be055efcafd3779fa9dd99f1ec216e4b6a1179f74bc49f26e475c29",
+      "bytes": 154001,
+      "bytesUnchanged": true
+    }
+  ]
+}

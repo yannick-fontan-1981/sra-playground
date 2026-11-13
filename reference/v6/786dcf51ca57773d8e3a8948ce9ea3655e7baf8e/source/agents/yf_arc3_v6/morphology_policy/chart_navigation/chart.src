@@ -1,0 +1,7 @@
+MODULE v6.chart_navigation
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        decision: Any
+    STEP select
+        CALL chart.select(request=request) -> decision
+        STOP decision

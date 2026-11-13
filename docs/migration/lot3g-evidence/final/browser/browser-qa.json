@@ -1,0 +1,63 @@
+{
+  "schema": "logos-engine.browser-qa-observation.v1",
+  "status": "controls_and_three_levels_verified",
+  "recordedAt": "2026-11-10T12:05:51.026378-03:00",
+  "game": "CATR",
+  "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.48.0",
+  "nativeSourceDigest": "fce8dfc3e6861742649203161b3bf55b6480462e44c77d8015453ce55b724a26",
+  "managedPreview": "http://127.0.0.1:4173/",
+  "finalObservedUrl": "http://127.0.0.1:4173/?game=CATR&level=4#playground",
+  "method": "CUA visible controls and returned accessibility observations. No game internals, browser hidden state or prepared actions inspected. Frozen checkout and successful build receipt establish source identity. A textual AX observation record is retained; no screenshot was captured in this QA session.",
+  "steps": [
+    {
+      "action": "Cold browser level1",
+      "actions": 0,
+      "levelsSolved": 0,
+      "completedPlans": 0,
+      "level": 1
+    },
+    {
+      "action": "Run16 followed by Pause completed the first level before a paused state was observed",
+      "actions": 3,
+      "levelsSolved": 1,
+      "completedPlans": 2,
+      "level": 2
+    },
+    {
+      "action": "One action completed",
+      "actions": 4,
+      "levelsSolved": 1,
+      "completedPlans": 2,
+      "level": 2
+    },
+    {
+      "action": "Run16 then Pause; Paused observed after engaged outcome",
+      "actions": 5,
+      "levelsSolved": 1,
+      "completedPlans": 3,
+      "level": 2
+    },
+    {
+      "action": "Resume Run to next level; Level completed",
+      "actions": 7,
+      "levelsSolved": 2,
+      "completedPlans": 5,
+      "level": 3
+    },
+    {
+      "action": "Run to next level; Level completed",
+      "actions": 12,
+      "levelsSolved": 3,
+      "completedPlans": 8,
+      "level": 4
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "docs/migration/lot3g-evidence/final/browser/catr-observed-ax.txt",
+      "bytes": 909,
+      "sha256": "acebdbf1cea76b55787d6101dcb2594dc005a3a9b114c628c255e59abb283b40"
+    }
+  ],
+  "qualification": "One continuous cold browser regression session. No manual game command, level jump or injected memory. This verifies retained CATR behavior and Pause/step/resume, not a FramedWindow game contribution. CWSE/SK48/FOGW/VOIS clocks are unchanged."
+}

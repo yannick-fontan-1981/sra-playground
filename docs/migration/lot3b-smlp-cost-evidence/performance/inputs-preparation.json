@@ -1,0 +1,35 @@
+{
+  "schema": "logos-engine.native-cost-policy-preparation.v1",
+  "recordedAt": "2026-11-10T03:17:32.749337+00:00",
+  "status": "inputs_copied_window_not_declared",
+  "copies": [
+    {
+      "source": {
+        "path": "docs/migration/lot3b-cost-evidence/performance-v2/cases.json",
+        "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+        "bytes": 1451
+      },
+      "copy": {
+        "path": "docs/migration/lot3b-smlp-cost-evidence/performance/cases.json",
+        "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+        "bytes": 1451
+      },
+      "byteIdentical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot3b-cost-evidence/performance-v2/comparison-policy.json",
+        "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+        "bytes": 991
+      },
+      "copy": {
+        "path": "docs/migration/lot3b-smlp-cost-evidence/performance/comparison-policy.json",
+        "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+        "bytes": 991
+      },
+      "byteIdentical": true
+    }
+  ],
+  "parametersChanged": false,
+  "qualification": "Exact historical case and policy bytes retained before the final native0.41 freeze. Their free-text qualification still names native0.40 and must be explicitly identified as historical prose by the future definitive protocol. Actions, cases, traces, rounds, warmups, stage definitions and +10% threshold are unchanged. No protocol.md or official measurement is created or executed by this preparation."
+}

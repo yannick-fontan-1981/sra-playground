@@ -1,0 +1,29 @@
+{
+  "schema": "logos-engine.lot6b.single-bin-verified-push.v1",
+  "status": "verified",
+  "recordedAt": "2026-11-11T20:47:39.883197+00:00",
+  "bin": "bin-03",
+  "commit": "9c87ec460406fd3723b8781e6fc5f01db978a899",
+  "parent": "d93e56d33ced20c19cd90e17f1e52520d77ecfef",
+  "branch": "lot6b-selected-rigid-checkpoint-20261111",
+  "remoteVerified": true,
+  "remoteHead": "9c87ec460406fd3723b8781e6fc5f01db978a899",
+  "commitReceipt": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-03-commit.json",
+    "sha256": "bb0787544761337e056c0eb719fd075638a87d7ba895325b39b1e89a5c1e44af",
+    "bytes": 33809
+  },
+  "transport": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-03-transport.json",
+    "sha256": "3b04fdad8db940a9c097c498dc4ea88c3e56374b6379ef1b3c3238b25e7ebd5d",
+    "bytes": 30331
+  },
+  "rawBytes": 25165804,
+  "fileCount": 5,
+  "commitChildGroupsReaped": true,
+  "transportGroupAbsent": true,
+  "signals": [],
+  "forcePush": false,
+  "mainPushed": false,
+  "publicationRequested": false
+}

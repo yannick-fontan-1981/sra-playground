@@ -1,0 +1,15 @@
+{
+  "schema": "logos-engine.native-campaign-selection.v1",
+  "game": "LS20",
+  "targetLevels": 3,
+  "selectedAt": "2026-11-09T19:11:39.373248+00:00",
+  "maximumBlockedSeconds": 2400,
+  "carriedBlockedSeconds": 475.600811,
+  "priorResolution": "docs/migration/lot2a-evidence/ls20-cold/selection-resolution.json",
+  "remainingBlockedSeconds": 1924.399189,
+  "switchDeadline": "2026-11-09T19:43:43.772437+00:00",
+  "nextCandidate": "CATR",
+  "sourceManifestDigest": "17252e294212a1563b75037a0b0dd782c2ecbc8cc4e1997a4f2bb2103bdf4e8b",
+  "selectionBasis": "Re-evaluate the known public LS20 morphology/control failure after the verified source control consumers were connected. No game source, solution, prepared action or prior acquired agent state is supplied.",
+  "clockPolicy": "Keep the earlier resolved attempt time; continuously count this new attempt, diagnosis and any retry against the remaining allowance. Time after the earlier explicit switch to another game is not charged as LS20 blocking. Do not reset this identity during fixes."
+}

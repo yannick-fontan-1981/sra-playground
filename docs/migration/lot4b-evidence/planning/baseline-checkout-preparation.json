@@ -1,0 +1,22 @@
+{
+  "schema": "logos-engine.lot4b.baseline-checkout-preparation.v1",
+  "createdAt": "2026-11-10T21:55:42.654450+00:00",
+  "status": "prepared_not_yet_published",
+  "checkout": "/workspace/sites/sra-lot4b-baseline-5a-20261110",
+  "head": "33d91ef1b8a6343c554b5c18beacd051816e11b9",
+  "traceInputs": [
+    {
+      "game": "STCK",
+      "path": "/workspace/sites/sra-lot4b-baseline-5a-20261110/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "game": "SMLP",
+      "path": "/workspace/sites/sra-lot4b-baseline-5a-20261110/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    }
+  ],
+  "qualification": "Detached checkout of final local5A target, pending actual Sites publication. No officialbaseline declaration, benchmark or native import. HEAD must be advanced to the actualpublishedcommit before finalprotocol."
+}

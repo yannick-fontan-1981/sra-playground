@@ -1,0 +1,79 @@
+{
+  "schema": "logos-engine.lossless-log-transport.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T15:44:00.253991-03:00",
+  "generator": {
+    "path": "docs/migration/lot3i-evidence/record-log-transport.py",
+    "bytes": 2604,
+    "sha256": "424d35446c4a20768923880c81bc4a4cf532057217b4daf00f2218d38dc372aa"
+  },
+  "mode": "pre-window",
+  "logs": [
+    {
+      "original": {
+        "path": "docs/migration/lot3i-evidence/baseline-case-phase.log",
+        "bytes": 2326,
+        "sha256": "8fecaa6b331c18d97264c6423ac48708ea4bbf4ff76666142dfc33408c5a6c91"
+      },
+      "transport": {
+        "path": "docs/migration/lot3i-evidence/baseline-case-phase.log.gz",
+        "bytes": 1047,
+        "sha256": "25943d9719cb8837fbbd6d309aff7906cbfebc3d4c9136724064f115dbc6a654"
+      },
+      "byteIdentical": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot3i-evidence/candidate-case-phase.log",
+        "bytes": 1906,
+        "sha256": "e3955262b52614ac9e8d0030aad5b0aa5f63de16cd9e607f9e3171d6b5f3df43"
+      },
+      "transport": {
+        "path": "docs/migration/lot3i-evidence/candidate-case-phase.log.gz",
+        "bytes": 837,
+        "sha256": "333eaf30a4e4e788330aecddd162ffd6a3543f358e0b469ab3ab7aae86778135"
+      },
+      "byteIdentical": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot3i-evidence/diagnostic/recurrent-series-common-loop-attempt1.log",
+        "bytes": 1566,
+        "sha256": "24656507f7d83dc0a86b062f7edc16d4390edfd20e67dcccbe8295916a4bafb2"
+      },
+      "transport": {
+        "path": "docs/migration/lot3i-evidence/diagnostic/recurrent-series-common-loop-attempt1.log.gz",
+        "bytes": 636,
+        "sha256": "6302b41c83d905820ffdd044e5d1511ec6a2571c9fdef27895e3ec0c6aa314fb"
+      },
+      "byteIdentical": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot3i-evidence/diagnostic/shared-development-tests.log",
+        "bytes": 12410,
+        "sha256": "aaff249d545a5415ca756275a4b0da24cf9c5e14e7faff3db475f7d0c3164224"
+      },
+      "transport": {
+        "path": "docs/migration/lot3i-evidence/diagnostic/shared-development-tests.log.gz",
+        "bytes": 3957,
+        "sha256": "4ff2de732dabc2022e4e5911bbbb8bb8da0d67b1acb1ba3f62006918a8934a4f"
+      },
+      "byteIdentical": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-output.raw.log",
+        "bytes": 268633,
+        "sha256": "1648a43eee4675b1808a0f5cb9072e463b4ae72ad324db90b775cf8359130145"
+      },
+      "transport": {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-output.raw.log.gz",
+        "bytes": 10252,
+        "sha256": "c267ccc137656dbe0e5bd551f5d4e6afe8e461d7713c51242cad9f4656c1c1e3"
+      },
+      "byteIdentical": true
+    }
+  ],
+  "qualification": "Completed original logs remain available and unchanged. Deterministic gzip transport is decompressed and compared byte for byte; no log is truncated or filtered."
+}

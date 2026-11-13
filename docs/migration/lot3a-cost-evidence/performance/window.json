@@ -1,0 +1,192 @@
+{
+  "schema": "logos-engine.native-cost-window.v1",
+  "status": "passed",
+  "startedAt": "2026-11-09T23:43:49.902401+00:00",
+  "plannedOrder": [
+    "A1",
+    "B1",
+    "B2",
+    "A2"
+  ],
+  "baselineCheckout": "/workspace/scratch/c4dd29871d33/lot3a-baseline",
+  "correctionCheckout": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout",
+  "executions": [
+    {
+      "label": "A1",
+      "checkout": "/workspace/scratch/c4dd29871d33/lot3a-baseline",
+      "command": [
+        "node",
+        "scripts/measure-native-loop-costs.mjs",
+        "docs/migration/lot3a-cost-evidence/performance/cases.json",
+        "docs/migration/lot3a-cost-evidence/performance/cohort1/baseline.json"
+      ],
+      "nativeDigest": "ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b",
+      "startedAt": "2026-11-09T23:43:49.990814+00:00",
+      "status": "passed",
+      "output": "/workspace/scratch/c4dd29871d33/lot3a-baseline/docs/migration/lot3a-cost-evidence/performance/cohort1/baseline.json",
+      "log": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/lot3a-cost-evidence/performance/cohort1/baseline.log",
+      "finishedAt": "2026-11-09T23:46:38.139112+00:00",
+      "elapsedMs": 168147.89113600273,
+      "exitCode": 0,
+      "logSha256": "c6915c57afb091cf978327a4f71b14ffe16dd59d2216580043cc370488f94280",
+      "reportSha256": "713094e5b4850b06c2d10a12fd7f7a2f9b2ccd83afb3f536ffb842406e46d0cf",
+      "copiedOutput": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/lot3a-cost-evidence/performance/cohort1/baseline.json",
+      "copiedReportSha256": "713094e5b4850b06c2d10a12fd7f7a2f9b2ccd83afb3f536ffb842406e46d0cf"
+    },
+    {
+      "label": "B1",
+      "checkout": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout",
+      "command": [
+        "node",
+        "scripts/measure-native-loop-costs.mjs",
+        "docs/migration/lot3a-cost-evidence/performance/cases.json",
+        "docs/migration/lot3a-cost-evidence/performance/cohort1/after.json"
+      ],
+      "nativeDigest": "f0d8b2b0a746f19036076010025fffa1ad532d5751caa176f7efcccff7bc4aff",
+      "startedAt": "2026-11-09T23:46:38.214424+00:00",
+      "status": "passed",
+      "output": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/lot3a-cost-evidence/performance/cohort1/after.json",
+      "log": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/lot3a-cost-evidence/performance/cohort1/after.log",
+      "finishedAt": "2026-11-09T23:48:53.661694+00:00",
+      "elapsedMs": 135447.00403199386,
+      "exitCode": 0,
+      "logSha256": "3b6149b988691759866820d96cf5ae50ac7440e070255ed207a8a3ba3275d045",
+      "reportSha256": "c69c9ad6dbb4df2cc61482c0f7901bbcff2af1d73fe1d19648ee09fe127858c1"
+    },
+    {
+      "label": "B2",
+      "checkout": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout",
+      "command": [
+        "node",
+        "scripts/measure-native-loop-costs.mjs",
+        "docs/migration/lot3a-cost-evidence/performance/cases.json",
+        "docs/migration/lot3a-cost-evidence/performance/cohort2/after.json"
+      ],
+      "nativeDigest": "f0d8b2b0a746f19036076010025fffa1ad532d5751caa176f7efcccff7bc4aff",
+      "startedAt": "2026-11-09T23:48:53.734486+00:00",
+      "status": "passed",
+      "output": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/lot3a-cost-evidence/performance/cohort2/after.json",
+      "log": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/lot3a-cost-evidence/performance/cohort2/after.log",
+      "finishedAt": "2026-11-09T23:51:04.498384+00:00",
+      "elapsedMs": 130763.60791999468,
+      "exitCode": 0,
+      "logSha256": "96a690701bc7c126339aa372ce331f78af6199e4e82c2306d6893574110c3ee7",
+      "reportSha256": "fb273aebd6f65a0fafed18438309720cc7ee2a6d445a3705524bb0077e4f71d8"
+    },
+    {
+      "label": "A2",
+      "checkout": "/workspace/scratch/c4dd29871d33/lot3a-baseline",
+      "command": [
+        "node",
+        "scripts/measure-native-loop-costs.mjs",
+        "docs/migration/lot3a-cost-evidence/performance/cases.json",
+        "docs/migration/lot3a-cost-evidence/performance/cohort2/baseline.json"
+      ],
+      "nativeDigest": "ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b",
+      "startedAt": "2026-11-09T23:51:04.583986+00:00",
+      "status": "passed",
+      "output": "/workspace/scratch/c4dd29871d33/lot3a-baseline/docs/migration/lot3a-cost-evidence/performance/cohort2/baseline.json",
+      "log": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/lot3a-cost-evidence/performance/cohort2/baseline.log",
+      "finishedAt": "2026-11-09T23:53:47.534795+00:00",
+      "elapsedMs": 162950.5156150044,
+      "exitCode": 0,
+      "logSha256": "e5f883e529bce06f0edcdc3bb38413ba6a3272cead3ab0489b3c89dadab33704",
+      "reportSha256": "bb5e67cdf80bdb1b3c27f6f2585bbccdffe5e255b201e73071c307ecb7adae60",
+      "copiedOutput": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/lot3a-cost-evidence/performance/cohort2/baseline.json",
+      "copiedReportSha256": "bb5e67cdf80bdb1b3c27f6f2585bbccdffe5e255b201e73071c307ecb7adae60"
+    }
+  ],
+  "nativeDigests": {
+    "baseline": "ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b",
+    "correction": "f0d8b2b0a746f19036076010025fffa1ad532d5751caa176f7efcccff7bc4aff"
+  },
+  "runnerSha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+  "inputs": [
+    {
+      "path": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/lot3a-evidence/baseline/source-manifest.json",
+      "sha256": "c668d40bfe2e8dbc563d4d7ca5051c48416d3cc1282b19ed9931664bb8a0602a"
+    },
+    {
+      "path": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/lot3a-cost-evidence/final/source-manifest.json",
+      "sha256": "0024028577107a7dbcc65ea0cc3ffa929a0ce5a6e7f11bf4515a169fc5cb1146"
+    },
+    {
+      "path": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "/workspace/scratch/c4dd29871d33/lot3a-baseline/scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb"
+    },
+    {
+      "path": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34"
+    },
+    {
+      "path": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/scripts/run-native-cost-window.py",
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613"
+    },
+    {
+      "path": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "/workspace/scratch/c4dd29871d33/lot3a-baseline/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "/workspace/scratch/c4dd29871d33/lot3a-baseline/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/lot3a-cost-evidence/performance/cases.json",
+      "sha256": "f052a04b8a1d07a93cff8ee9c19f4694c1c61a6db3f0660bc382a95dcef32a88"
+    },
+    {
+      "path": "/workspace/scratch/c4dd29871d33/lot3a-baseline/docs/migration/lot3a-cost-evidence/performance/cases.json",
+      "sha256": "f052a04b8a1d07a93cff8ee9c19f4694c1c61a6db3f0660bc382a95dcef32a88"
+    },
+    {
+      "path": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/lot3a-cost-evidence/performance/comparison-policy.json",
+      "sha256": "76575315636670329de12e4ae4542d6d11290411b7cdb799e7d7af0ec1c83ca9"
+    },
+    {
+      "path": "/workspace/scratch/c4dd29871d33/lot3a-baseline/docs/migration/lot3a-cost-evidence/performance/comparison-policy.json",
+      "sha256": "76575315636670329de12e4ae4542d6d11290411b7cdb799e7d7af0ec1c83ca9"
+    },
+    {
+      "path": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/lot3a-cost-evidence/performance/protocol.md",
+      "sha256": "90ad27c1b152768868cf16cc76d3a94f31f70cb92567197f20c2f47d98dc0521"
+    },
+    {
+      "path": "/workspace/scratch/c4dd29871d33/lot3a-baseline/docs/migration/lot3a-cost-evidence/performance/protocol.md",
+      "sha256": "90ad27c1b152768868cf16cc76d3a94f31f70cb92567197f20c2f47d98dc0521"
+    },
+    {
+      "path": "/workspace/scratch/c4dd29871d33/lot3a-baseline/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "/workspace/scratch/c4dd29871d33/lot3a-baseline/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    }
+  ],
+  "finalIntegrity": "passed",
+  "finishedAt": "2026-11-09T23:53:47.644248+00:00"
+}

@@ -1,0 +1,152 @@
+{
+  "schema": "sra.shared-lane-status.v1",
+  "lane": "10C",
+  "updated_at": "2026-11-11T20:47:11.343931+00:00",
+  "stage": "Prepared composition 329/ab674682, 68/76, 1767 development tests and 5 project checks; formal final gates pending actual predecessors.",
+  "checkout": "/workspace/sites/sra-lot10c-20261111/.sites-checkout",
+  "branch": "lot10c-ordered-recruitment-20261111",
+  "source_checkpoint": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+  "active_command": "Formal56-file suite still active. Independent5project checks/build now runs after materializing exact pinned assets. Two bounded root-owned commands, no replay/game/browser/cost. Both must be terminal before any quiet ACK.",
+  "heavy_execution_active": true,
+  "performance_started": false,
+  "publication_started": false,
+  "quiet_requested": false,
+  "all_own_subagents_idle": true,
+  "published_predecessor": {
+    "version": 103,
+    "nativeVersion": "0.62.0",
+    "publishedSource": "4afcbfe6a25bd3a88223be543e443bc53b9c8814"
+  },
+  "publication_order": "10C proposes0.66 after agreed5C0.63 ->6B0.64 ->8A0.65; integrate actual published predecessors before final qualification. No future version claimed.",
+  "request_to_other_lanes": "10C development terminal and source-only checkpoint3ea5e39b verified. All tests/replays/browser/source operations stopped, no queued or automatic work. Exact fresh quiet ACK to5C officialcost request lot5c-cost-a33a5f88-final-01. Actual integration order unchanged:0.63,0.64,0.65,then proposed10C0.66.",
+  "source_opening": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot10c-20261111/.sites-checkout",
+    "commit_sha": "3df0fc780f479e51f51aaceb2a32ec287b67671d"
+  },
+  "prospective_case": {
+    "code": "RECR",
+    "selectionBasis": "Public title and description only; no engine or game-state inspection",
+    "cumulativeClockAdmitted": true,
+    "chargedSeconds": 642.600846598,
+    "remainingSeconds": 1757.399153402,
+    "liveGameStarted": true,
+    "clockPath": "/workspace/sites/sra-lot10c-20261111/.sites-checkout/docs/migration/lot10c-evidence/case-clock.json"
+  },
+  "next_functional_window": {
+    "requestId": "lot10c-recr01-bb7d62-functional",
+    "status": "closed_released",
+    "game": "RECR",
+    "targetLevels": 3,
+    "activityCeilingSeconds": 300,
+    "retentionCeilingSeconds": 30,
+    "timingClaim": false,
+    "nativeSource": "development0.62base plus10C, finalpredecessors notyetintegrated",
+    "policy": "Please finish currently declared sequential functional suites; do not cancel them for this request. Request fresh full-tool idle only after explicit start coordination.5C officialcost retains priority ifready.",
+    "nativeDigest": "bb7d62b5823d76ae7a5ecd452cb622ebb04f2b85b20fb0d2f9a5c35a1535b361",
+    "sourceManifest": "docs/migration/lot10c-evidence/development/recr01-source/source-manifest.json",
+    "startedAt": "2026-11-11T17:51:33.369133+00:00",
+    "finishedAt": "2026-11-11T17:53:53.132648+00:00"
+  },
+  "request_to_lot5c": "The unchanged performance.lock was successfully acquired EX nonblocking and immediately released on this recovery. See lot10c-recovery-lock-available-20261111.json. Your recovery02 RELEASE is observed; no old ACK is reused. 10C will finish finite SH qualification work and can acknowledge a NEW precise request only at actual terminal worker closure. No cost or publication queued.",
+  "request_to_lot6b": "10C recovery confirms original performance.lock EX available now; bounded SH functional qualification proceeds. No preview held, no new game, no cost. Please keep actual publication order 5C,6B,8A,10C.",
+  "request_to_lot8a": "10C recovery confirms original performance.lock EX available now; bounded SH functional qualification proceeds. Prepared Motif remains composed with Binding/SelectedRigid; actual publications still required.",
+  "quiet_request_id": "lot5c-cost-a33a5f88-final-01",
+  "quiet_requested_at": "2026-11-11T17:45:47.557963+00:00",
+  "source_checkpoint_remote_verified": true,
+  "quiet_released_at": "2026-11-11T17:53:53.132648+00:00",
+  "development_game_result": {
+    "nativeDigest": "bb7d62b5823d76ae7a5ecd452cb622ebb04f2b85b20fb0d2f9a5c35a1535b361",
+    "levels": 3,
+    "actions": 17,
+    "campaignPassedEstablished": true,
+    "finalIntegrated": false,
+    "executionReceipt": "docs/migration/lot10c-evidence/development/recr01/execution-recruitment.json",
+    "sourceComparedCalls": 50,
+    "sourceDifferences": 0,
+    "activeRecords": 16,
+    "nativeRestorationsCompared": 34,
+    "ablations": 102,
+    "ablationsChangingActionOrRefusal": 41,
+    "componentExactOriginalParity": true,
+    "fullOriginalCommonCallerParity": false,
+    "sourceParityReceipt": "docs/migration/lot10c-evidence/development/recr01-parity02/original-parity.json.gz"
+  },
+  "parallel_worker_activity": "No delegated workers active; root owns formaltestsession67259 and bounded5checksession.",
+  "preview_stopped": true,
+  "development_regressions": {
+    "directory": "docs/migration/lot10c-evidence/development/regressions01",
+    "cases": 10,
+    "checksExpected": 170,
+    "sourceDigest": "bb7d62b5823d76ae7a5ecd452cb622ebb04f2b85b20fb0d2f9a5c35a1535b361",
+    "perCaseTimeoutSeconds": 600,
+    "status": "passed",
+    "newGame": false,
+    "timingClaim": false,
+    "checksPassed": 170,
+    "casesPassed": 10,
+    "finishedAt": "2026-11-11T18:25:42.352529+00:00"
+  },
+  "current_activity": "All prepared5C/6B/8Asources merged with10C, proposed0.66; actualSite103/native0.62 remains published.",
+  "source_checkpoint_verified_at": "2026-11-11T18:33:49.901Z",
+  "source_checkpoint_working_tree_clean": true,
+  "source_checkpoint_handoff": "/workspace/shared/sra-coordination/lot10c-checkpoint-3ea5e39b-handoff.json",
+  "quiet_acknowledged": false,
+  "quiet_acknowledged_at": "2026-11-11T19:05:59.348551+00:00",
+  "quiet_scope": "Exact fresh ACK for lot5c-cost-a33a5f88-final-01. Root and all workers fully tool-idle. No source/Git/hash/archive/test/replay/game/browser/preview or cost work and no queued work until explicit5C release. Only tiny named coordination metadata permitted.",
+  "next_step": "Fresh archived non-regressions on composed source, formal affected tests and proof binding; preserve real predecessor publication gates and exact global cost criterion.",
+  "no_queued_commands": true,
+  "all_own_subagents_compute_idle": true,
+  "metadata_clarification": {
+    "at": "2026-11-11T18:53:47.412449+00:00",
+    "before": {
+      "active_command": "All10recorded regressions terminalPASS170/170,357commands/30levelboundaries; all workers idle. Final bounded documentary/source checkpoint closure planned <=120s after exact proof-summary binding; no further test/game/browser/replay/cost is queued.",
+      "no_queued_commands": null
+    },
+    "after": {
+      "active_command": null,
+      "no_queued_commands": true
+    },
+    "officialMeasurementNotStartedAtObservation": true,
+    "priorRawStatus": "/workspace/shared/sra-coordination/lot10c-status-before-metadata-clarification-20261111T1853.json",
+    "actualActivityChanged": false
+  },
+  "lock_diagnosis": {
+    "schema": "lot10c.own-lock-holder-diagnosis.v1",
+    "observedAt": "2026-11-11T19:01:03.435020+00:00",
+    "requestedBy": "lot5c-cost-a33a5f88-final-01",
+    "lockPath": "/workspace/shared/sra-coordination/performance.lock",
+    "lockDevice": 27,
+    "lockInode": 1971854,
+    "matchingProcLocks": 0,
+    "matchingVisibleProcDescriptors": 0,
+    "lslocksVisibleRecords": 0,
+    "scanSeconds": 0.024,
+    "processesTerminated": 0,
+    "sourceOrGamePayloadRead": false,
+    "scope": "Visible process namespace only; no open descriptor for the exact performance.lock or its deleted form was found. No foreign process was signaled."
+  },
+  "lock_probe": {
+    "schema": "lot10c.instantaneous-lock-probe.v1",
+    "observedAt": "2026-11-11T19:03:31.585388+00:00",
+    "exclusiveNonblockingAcquisitionSucceeded": false,
+    "releasedImmediately": false,
+    "probeSeconds": 0.0001139029991463758,
+    "sourceOrRuntimeWorkPerformed": false,
+    "error": {
+      "errno": 11,
+      "message": "[Errno 11] Resource temporarily unavailable"
+    },
+    "qualification": "Instantaneous lock availability only; no claim about performance isolation or other namespaces."
+  },
+  "bounded_source_release_request": {
+    "requestedAt": "2026-11-11T19:07:45.846159+00:00",
+    "requestId": "lot5c-cost-a33a5f88-final-01",
+    "maxSeconds": 180,
+    "scope": "After explicit temporary release only: source checkpoint closure and prospective dependency inventory; no tests, game, browser, archive or cost.",
+    "status": "awaiting_explicit_release_no_command_queued"
+  },
+  "quiet_release_observed_at": "2026-11-11T19:09:23.198866+00:00",
+  "phase": "composed_formal_tests_and_build",
+  "recovery_lock_availability": "/workspace/shared/sra-coordination/lot10c-recovery-lock-available-20261111.json"
+}

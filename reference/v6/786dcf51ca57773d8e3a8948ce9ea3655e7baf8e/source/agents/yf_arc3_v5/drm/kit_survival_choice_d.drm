@@ -1,0 +1,243 @@
+{
+  "module_id": "kit_survival_choice_d",
+  "declarations": [
+    {
+      "id": "policy.kit_survival_cost_first_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_complete_conditional_horizon_witness_metrics"
+      ],
+      "applicability": [
+        "explicit_source_cost_life_priority"
+      ],
+      "invariants": [
+        "finite_horizon_not_enemy_elimination",
+        "command_cost_and_final_life_are_distinct",
+        "no_global_minimum_or_robust_policy_inferred",
+        "current_capability_after_reconciliation_before_next_action",
+        "no_action_release_by_metric_comparison"
+      ],
+      "falsifiers": [
+        "foreign_scope",
+        "incomplete_horizon",
+        "dead_controlled_actor",
+        "unbound_witness_bank"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.kit_survival_cost.complete",
+          "all_conditions": [
+            {
+              "field": "need_row",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "whole_witness_survives",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.kit_survival_cost.need",
+          "all_conditions": [
+            {
+              "field": "need_row",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.kit_survival_cost.complete",
+          "all_conditions": [
+            {
+              "field": "whole_witness_survives",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.declared_horizon_survival_cost_and_life_priority"
+        },
+        {
+          "id": "tier.kit_survival_cost.need",
+          "all_conditions": [
+            {
+              "field": "need_row",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.retain_missing_survival_or_scope_evidence"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "command_cost",
+          "preferred_order": "minimize"
+        },
+        {
+          "field": "final_life",
+          "preferred_order": "maximize"
+        },
+        {
+          "field": "external_command_count",
+          "preferred_order": "minimize"
+        },
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.equal_survival_witness_reference_is_not_stronger_physics",
+      "reason_refs": [
+        "reason.declared_horizon_survival_cost_and_life_priority",
+        "reason.retain_missing_survival_or_scope_evidence"
+      ]
+    },
+    {
+      "id": "policy.kit_survival_life_first_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_complete_conditional_horizon_witness_metrics"
+      ],
+      "applicability": [
+        "explicit_source_cost_life_priority"
+      ],
+      "invariants": [
+        "finite_horizon_not_enemy_elimination",
+        "command_cost_and_final_life_are_distinct",
+        "no_global_minimum_or_robust_policy_inferred",
+        "current_capability_after_reconciliation_before_next_action",
+        "no_action_release_by_metric_comparison"
+      ],
+      "falsifiers": [
+        "foreign_scope",
+        "incomplete_horizon",
+        "dead_controlled_actor",
+        "unbound_witness_bank"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.kit_survival_life.complete",
+          "all_conditions": [
+            {
+              "field": "need_row",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "whole_witness_survives",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.kit_survival_life.need",
+          "all_conditions": [
+            {
+              "field": "need_row",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.kit_survival_life.complete",
+          "all_conditions": [
+            {
+              "field": "whole_witness_survives",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.declared_horizon_survival_cost_and_life_priority"
+        },
+        {
+          "id": "tier.kit_survival_life.need",
+          "all_conditions": [
+            {
+              "field": "need_row",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.retain_missing_survival_or_scope_evidence"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "final_life",
+          "preferred_order": "maximize"
+        },
+        {
+          "field": "command_cost",
+          "preferred_order": "minimize"
+        },
+        {
+          "field": "external_command_count",
+          "preferred_order": "minimize"
+        },
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.equal_survival_witness_reference_is_not_stronger_physics",
+      "reason_refs": [
+        "reason.declared_horizon_survival_cost_and_life_priority",
+        "reason.retain_missing_survival_or_scope_evidence"
+      ]
+    }
+  ]
+}

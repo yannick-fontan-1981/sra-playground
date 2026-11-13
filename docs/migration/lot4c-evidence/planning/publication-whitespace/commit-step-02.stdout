@@ -1,0 +1,13 @@
+docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-snapshot-correction.patch:26: trailing whitespace.
++ 
+docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-snapshot-correction.patch:61: trailing whitespace.
++ 
+docs/migration/lot4c-evidence/integrated-final/browser/01-native-panel.txt:181: trailing whitespace.
++							224 AXListMarker ▸ 
+docs/migration/lot4c-evidence/integrated-final/browser/01-native-panel.txt:194: trailing whitespace.
++					189 text The 100 games on this page run locally in your browser. The ongoing SRA Agent migration transfers V6 capabilities into native TypeScript and the common V7 reasoning architecture. Coordinate inputs, guarded action sequences and memory across levels are connected. The original Python game engines remain isolated from the agent. Explore the shared reasoning syntax in the 
+docs/migration/lot4c-evidence/publication-preflight/record-publication-inputs-compatibility.patch:4: trailing whitespace.
++ 
+docs/migration/lot4c-evidence/publication-preflight/record-publication-inputs-compatibility.patch:14: trailing whitespace.
++ 
+docs/migration/lot4c-evidence/review-owner-costs.py:939: new blank line at EOF.

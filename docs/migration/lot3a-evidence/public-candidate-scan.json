@@ -1,0 +1,4438 @@
+{
+  "schema": "logos-engine.lot3a.public-candidate-scan.v1",
+  "sourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "generator": "scripts/select-lot3a-public-candidate.py",
+  "generatorSha256": "a8ba4b75a69be47b4e8f738a74aa7acb27449bb204b798e44e21b4b3cfd5e720",
+  "pinnedSourceFilesVerifiedBeforeImport": 1786,
+  "pinnedSourceFilesVerifiedAfterRun": 1786,
+  "corpus": {
+    "path": "tests/fixtures/v6-linked-packet-initial-public.json.gz",
+    "sha256": "3f82fb0b60a104095623216023054ef438ca4cc516941c671c385ebcbf1e54f2",
+    "views": 100,
+    "recordedActions": 0,
+    "recordedLevelJumps": 0
+  },
+  "executionScope": {
+    "gameHostsLoaded": 0,
+    "gameExecutions": 0,
+    "agentProposals": 0,
+    "acquisitionCalls": 0,
+    "dispatchedActions": 0,
+    "privateStatesRead": 0,
+    "gameSourcesRead": 0,
+    "solutionsOrOraclesRead": 0,
+    "scope": "Only unchanged pure source scene measurements over retained public rows."
+  },
+  "results": [
+    {
+      "planKey": "exposed_reception_plan",
+      "function": "exposed_reception_access.scene",
+      "sourceFile": "agents/yf_arc3_v6/laya_proto/exposed_reception_access.py",
+      "sourceSha256": "60bfa0fbaf2e4e49acd06a9481f999f5cc541a2162713e909e3cc31292d55d15",
+      "viewsMeasured": 100,
+      "acceptedCount": 1,
+      "matches": [
+        {
+          "game": "CWSE",
+          "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:14b234e86cb071c9",
+          "frameHash": "14b234e86cb071c9",
+          "measuredCounts": {
+            "origin": 2,
+            "size": 2,
+            "actor": 2,
+            "bodies": 2,
+            "slots": 2,
+            "walls": 28,
+            "dial": 8,
+            "orientation": 2
+          },
+          "measurement": {
+            "origin": [
+              9,
+              7
+            ],
+            "pitch": 5,
+            "size": [
+              9,
+              7
+            ],
+            "actor": [
+              1,
+              2
+            ],
+            "actor_color": 0,
+            "bodies": [
+              {
+                "pos": [
+                  2,
+                  2
+                ],
+                "color": 9
+              },
+              {
+                "pos": [
+                  4,
+                  4
+                ],
+                "color": 9
+              }
+            ],
+            "slots": [
+              {
+                "pos": [
+                  4,
+                  2
+                ],
+                "color": 9
+              },
+              {
+                "pos": [
+                  6,
+                  4
+                ],
+                "color": 9
+              }
+            ],
+            "walls": [
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                3,
+                0
+              ],
+              [
+                4,
+                0
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                6,
+                0
+              ],
+              [
+                7,
+                0
+              ],
+              [
+                8,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                8,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                8,
+                2
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                8,
+                3
+              ],
+              [
+                0,
+                4
+              ],
+              [
+                8,
+                4
+              ],
+              [
+                0,
+                5
+              ],
+              [
+                8,
+                5
+              ],
+              [
+                0,
+                6
+              ],
+              [
+                1,
+                6
+              ],
+              [
+                2,
+                6
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                4,
+                6
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                6,
+                6
+              ],
+              [
+                7,
+                6
+              ],
+              [
+                8,
+                6
+              ]
+            ],
+            "dial": [
+              {
+                "point": [
+                  55,
+                  49
+                ],
+                "vector": [
+                  0.0,
+                  -6.0
+                ],
+                "active": true
+              },
+              {
+                "point": [
+                  51,
+                  51
+                ],
+                "vector": [
+                  -4.0,
+                  -4.0
+                ],
+                "active": false
+              },
+              {
+                "point": [
+                  59,
+                  51
+                ],
+                "vector": [
+                  4.0,
+                  -4.0
+                ],
+                "active": false
+              },
+              {
+                "point": [
+                  49,
+                  55
+                ],
+                "vector": [
+                  -6.0,
+                  0.0
+                ],
+                "active": false
+              },
+              {
+                "point": [
+                  61,
+                  55
+                ],
+                "vector": [
+                  6.0,
+                  0.0
+                ],
+                "active": false
+              },
+              {
+                "point": [
+                  51,
+                  59
+                ],
+                "vector": [
+                  -4.0,
+                  4.0
+                ],
+                "active": false
+              },
+              {
+                "point": [
+                  59,
+                  59
+                ],
+                "vector": [
+                  4.0,
+                  4.0
+                ],
+                "active": false
+              },
+              {
+                "point": [
+                  55,
+                  61
+                ],
+                "vector": [
+                  0.0,
+                  6.0
+                ],
+                "active": false
+              }
+            ],
+            "orientation": [
+              0.0,
+              -6.0
+            ],
+            "layout": "9abc9239d70c5d741b7789b431371baeed3f7fdc174dbfec10c1e42560fef4df"
+          }
+        }
+      ]
+    },
+    {
+      "planKey": "chamber_relation_plan",
+      "function": "relational_chamber_projection.scene",
+      "sourceFile": "agents/yf_arc3_v6/laya_proto/relational_chamber_projection.py",
+      "sourceSha256": "51fc31d3994bad51b2a5eca7271adcb9cad7bcf9456813a6a31bad9e216e6448",
+      "viewsMeasured": 100,
+      "acceptedCount": 1,
+      "matches": [
+        {
+          "game": "CATR",
+          "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:8c49c0659af32834",
+          "frameHash": "8c49c0659af32834",
+          "measuredCounts": {
+            "main": 4,
+            "rooms": 4,
+            "controls": 4,
+            "axes": 8,
+            "panels": 1
+          },
+          "measurement": {
+            "main": [
+              19,
+              8,
+              43,
+              32
+            ],
+            "pitch": 12,
+            "unit": 3,
+            "quantum": 3.0,
+            "rooms": [
+              {
+                "id": "room:0:0",
+                "cell": [
+                  0,
+                  0
+                ],
+                "box": [
+                  19,
+                  8,
+                  31,
+                  20
+                ],
+                "center": [
+                  25.0,
+                  14.0
+                ],
+                "body": [
+                  22.0,
+                  11.0
+                ],
+                "color": 12,
+                "target": [
+                  28.0,
+                  17.0
+                ],
+                "overlap_hypothesis": false
+              },
+              {
+                "id": "room:1:0",
+                "cell": [
+                  1,
+                  0
+                ],
+                "box": [
+                  31,
+                  8,
+                  43,
+                  20
+                ],
+                "center": [
+                  37.0,
+                  14.0
+                ],
+                "body": [
+                  40.0,
+                  17.0
+                ],
+                "color": 11,
+                "target": [
+                  34.0,
+                  17.0
+                ],
+                "overlap_hypothesis": false
+              },
+              {
+                "id": "room:0:1",
+                "cell": [
+                  0,
+                  1
+                ],
+                "box": [
+                  19,
+                  20,
+                  31,
+                  32
+                ],
+                "center": [
+                  25.0,
+                  26.0
+                ],
+                "body": [
+                  22.0,
+                  29.0
+                ],
+                "color": 9,
+                "target": null,
+                "overlap_hypothesis": false
+              },
+              {
+                "id": "room:1:1",
+                "cell": [
+                  1,
+                  1
+                ],
+                "box": [
+                  31,
+                  20,
+                  43,
+                  32
+                ],
+                "center": [
+                  37.0,
+                  26.0
+                ],
+                "body": [
+                  40.0,
+                  23.0
+                ],
+                "color": 6,
+                "target": [
+                  34.0,
+                  23.0
+                ],
+                "overlap_hypothesis": false
+              }
+            ],
+            "controls": [
+              {
+                "id": "relation:9:12",
+                "pair": [
+                  9,
+                  12
+                ],
+                "value": "12",
+                "point": [
+                  31,
+                  47
+                ],
+                "support": [
+                  [
+                    31,
+                    45
+                  ],
+                  [
+                    31,
+                    46
+                  ],
+                  [
+                    31,
+                    47
+                  ],
+                  [
+                    31,
+                    48
+                  ],
+                  [
+                    31,
+                    49
+                  ]
+                ]
+              },
+              {
+                "id": "relation:6:9",
+                "pair": [
+                  6,
+                  9
+                ],
+                "value": "12",
+                "point": [
+                  27,
+                  51
+                ],
+                "support": [
+                  [
+                    25,
+                    51
+                  ],
+                  [
+                    26,
+                    51
+                  ],
+                  [
+                    27,
+                    51
+                  ],
+                  [
+                    28,
+                    51
+                  ],
+                  [
+                    29,
+                    51
+                  ]
+                ]
+              },
+              {
+                "id": "relation:11:12",
+                "pair": [
+                  11,
+                  12
+                ],
+                "value": "12",
+                "point": [
+                  35,
+                  51
+                ],
+                "support": [
+                  [
+                    33,
+                    51
+                  ],
+                  [
+                    34,
+                    51
+                  ],
+                  [
+                    35,
+                    51
+                  ],
+                  [
+                    36,
+                    51
+                  ],
+                  [
+                    37,
+                    51
+                  ]
+                ]
+              },
+              {
+                "id": "relation:6:11",
+                "pair": [
+                  6,
+                  11
+                ],
+                "value": "10",
+                "point": [
+                  31,
+                  55
+                ],
+                "support": [
+                  [
+                    31,
+                    53
+                  ],
+                  [
+                    31,
+                    54
+                  ],
+                  [
+                    31,
+                    55
+                  ],
+                  [
+                    31,
+                    56
+                  ],
+                  [
+                    31,
+                    57
+                  ]
+                ]
+              }
+            ],
+            "axes": [
+              {
+                "id": "room:0:0:0",
+                "room": "room:0:0",
+                "axis": 0,
+                "context": "single_toward",
+                "inputs": [
+                  "relation:11:12"
+                ],
+                "value": "-1",
+                "target": "1",
+                "direction": 1
+              },
+              {
+                "id": "room:0:0:1",
+                "room": "room:0:0",
+                "axis": 1,
+                "context": "single_toward",
+                "inputs": [
+                  "relation:9:12"
+                ],
+                "value": "-1",
+                "target": "1",
+                "direction": 1
+              },
+              {
+                "id": "room:1:0:0",
+                "room": "room:1:0",
+                "axis": 0,
+                "context": "single_toward",
+                "inputs": [
+                  "relation:11:12"
+                ],
+                "value": "-1",
+                "target": "1",
+                "direction": -1
+              },
+              {
+                "id": "room:1:0:1",
+                "room": "room:1:0",
+                "axis": 1,
+                "context": "single_toward",
+                "inputs": [
+                  "relation:6:11"
+                ],
+                "value": "1",
+                "target": "1",
+                "direction": 1
+              },
+              {
+                "id": "room:0:1:0",
+                "room": "room:0:1",
+                "axis": 0,
+                "context": "single_toward",
+                "inputs": [
+                  "relation:6:9"
+                ],
+                "value": "-1",
+                "target": null,
+                "direction": 1
+              },
+              {
+                "id": "room:0:1:1",
+                "room": "room:0:1",
+                "axis": 1,
+                "context": "single_toward",
+                "inputs": [
+                  "relation:9:12"
+                ],
+                "value": "-1",
+                "target": null,
+                "direction": -1
+              },
+              {
+                "id": "room:1:1:0",
+                "room": "room:1:1",
+                "axis": 0,
+                "context": "single_toward",
+                "inputs": [
+                  "relation:6:9"
+                ],
+                "value": "-1",
+                "target": "1",
+                "direction": -1
+              },
+              {
+                "id": "room:1:1:1",
+                "room": "room:1:1",
+                "axis": 1,
+                "context": "single_toward",
+                "inputs": [
+                  "relation:6:11"
+                ],
+                "value": "1",
+                "target": "1",
+                "direction": -1
+              }
+            ],
+            "panels": [
+              [
+                23,
+                43,
+                39,
+                59
+              ]
+            ],
+            "layout": "c7a3cdd6657c90b3bc1ee30824ddfd82cf419a8cbf7d2742f32036c3372fee7c"
+          }
+        }
+      ]
+    },
+    {
+      "planKey": "panel_service_plan",
+      "function": "panel_service_projection.scene",
+      "sourceFile": "agents/yf_arc3_v6/laya_proto/panel_service_projection.py",
+      "sourceSha256": "a47d56983cba1ee04033526bd695aaa79481d254da5ac35324368c5ae0cf6caf",
+      "viewsMeasured": 100,
+      "acceptedCount": 1,
+      "matches": [
+        {
+          "game": "RSWP",
+          "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:3e364c99f049645b",
+          "frameHash": "3e364c99f049645b",
+          "measuredCounts": {
+            "panels": 3,
+            "layout": 3
+          },
+          "measurement": {
+            "panels": [
+              {
+                "id": "74d650d45ec1f6c0c6e535e949745c36177ed40da738566f5d9cebeacf53ff91",
+                "bbox": [
+                  37,
+                  9,
+                  63,
+                  25
+                ],
+                "color": 9,
+                "room": [
+                  1,
+                  8,
+                  33,
+                  25
+                ],
+                "room_marker": 10,
+                "material": 13,
+                "selection_color": 0,
+                "cells": [
+                  {
+                    "row": 0,
+                    "col": 1,
+                    "point": [
+                      45,
+                      12
+                    ],
+                    "bbox": [
+                      44,
+                      11,
+                      46,
+                      13
+                    ],
+                    "pattern": [
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "color": 1,
+                    "solid": false,
+                    "outline": null
+                  },
+                  {
+                    "row": 0,
+                    "col": 2,
+                    "point": [
+                      50,
+                      12
+                    ],
+                    "bbox": [
+                      49,
+                      11,
+                      51,
+                      13
+                    ],
+                    "pattern": [
+                      [
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        2,
+                        0
+                      ]
+                    ],
+                    "color": 12,
+                    "solid": false,
+                    "outline": 3
+                  },
+                  {
+                    "row": 2,
+                    "col": 0,
+                    "point": [
+                      40,
+                      22
+                    ],
+                    "bbox": [
+                      39,
+                      21,
+                      41,
+                      23
+                    ],
+                    "pattern": [
+                      [
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        2,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        2,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "color": 13,
+                    "solid": true,
+                    "outline": 0
+                  },
+                  {
+                    "row": 2,
+                    "col": 1,
+                    "point": [
+                      45,
+                      22
+                    ],
+                    "bbox": [
+                      44,
+                      21,
+                      46,
+                      23
+                    ],
+                    "pattern": [
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        2,
+                        1
+                      ],
+                      [
+                        1,
+                        2
+                      ]
+                    ],
+                    "color": 1,
+                    "solid": false,
+                    "outline": null
+                  },
+                  {
+                    "row": 2,
+                    "col": 3,
+                    "point": [
+                      55,
+                      22
+                    ],
+                    "bbox": [
+                      54,
+                      21,
+                      56,
+                      23
+                    ],
+                    "pattern": [
+                      [
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        2,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        2,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "color": 11,
+                    "solid": true,
+                    "outline": null
+                  },
+                  {
+                    "row": 2,
+                    "col": 4,
+                    "point": [
+                      60,
+                      22
+                    ],
+                    "bbox": [
+                      59,
+                      21,
+                      61,
+                      23
+                    ],
+                    "pattern": [
+                      [
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        2,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        2,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "color": 6,
+                    "solid": true,
+                    "outline": null
+                  }
+                ],
+                "operators": [
+                  {
+                    "control": {
+                      "row": 0,
+                      "col": 1,
+                      "point": [
+                        45,
+                        12
+                      ],
+                      "bbox": [
+                        44,
+                        11,
+                        46,
+                        13
+                      ],
+                      "pattern": [
+                        [
+                          1,
+                          0
+                        ],
+                        [
+                          0,
+                          1
+                        ],
+                        [
+                          1,
+                          1
+                        ],
+                        [
+                          0,
+                          2
+                        ],
+                        [
+                          1,
+                          2
+                        ],
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "color": 1,
+                      "solid": false,
+                      "outline": null
+                    },
+                    "symbol": [
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "observed_site": [
+                      28,
+                      16
+                    ],
+                    "selected": false,
+                    "kind": "displayed_receiver",
+                    "input": 13
+                  }
+                ],
+                "services": [
+                  {
+                    "control": {
+                      "row": 0,
+                      "col": 1,
+                      "point": [
+                        45,
+                        12
+                      ],
+                      "bbox": [
+                        44,
+                        11,
+                        46,
+                        13
+                      ],
+                      "pattern": [
+                        [
+                          1,
+                          0
+                        ],
+                        [
+                          0,
+                          1
+                        ],
+                        [
+                          1,
+                          1
+                        ],
+                        [
+                          0,
+                          2
+                        ],
+                        [
+                          1,
+                          2
+                        ],
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "color": 1,
+                      "solid": false,
+                      "outline": null
+                    },
+                    "symbol": [
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "observed_site": [
+                      28,
+                      16
+                    ],
+                    "selected": false,
+                    "kind": "displayed_receiver",
+                    "input": 13
+                  }
+                ],
+                "activity_controls": [
+                  {
+                    "row": 0,
+                    "col": 1,
+                    "point": [
+                      45,
+                      12
+                    ],
+                    "bbox": [
+                      44,
+                      11,
+                      46,
+                      13
+                    ],
+                    "pattern": [
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "color": 1,
+                    "solid": false,
+                    "outline": null
+                  },
+                  {
+                    "row": 2,
+                    "col": 1,
+                    "point": [
+                      45,
+                      22
+                    ],
+                    "bbox": [
+                      44,
+                      21,
+                      46,
+                      23
+                    ],
+                    "pattern": [
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        2,
+                        1
+                      ],
+                      [
+                        1,
+                        2
+                      ]
+                    ],
+                    "color": 1,
+                    "solid": false,
+                    "outline": null
+                  }
+                ]
+              },
+              {
+                "id": "06ae3bad4b5c4e15bc398fd2feb073ab775bc45dbd6121431e969fae5b33e2b0",
+                "bbox": [
+                  37,
+                  27,
+                  63,
+                  43
+                ],
+                "color": 8,
+                "room": [
+                  1,
+                  26,
+                  33,
+                  43
+                ],
+                "room_marker": 11,
+                "material": 13,
+                "selection_color": 0,
+                "cells": [
+                  {
+                    "row": 0,
+                    "col": 1,
+                    "point": [
+                      45,
+                      30
+                    ],
+                    "bbox": [
+                      44,
+                      29,
+                      46,
+                      31
+                    ],
+                    "pattern": [
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "color": 1,
+                    "solid": false,
+                    "outline": 0
+                  },
+                  {
+                    "row": 0,
+                    "col": 3,
+                    "point": [
+                      55,
+                      30
+                    ],
+                    "bbox": [
+                      54,
+                      29,
+                      56,
+                      31
+                    ],
+                    "pattern": [
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        2,
+                        1
+                      ]
+                    ],
+                    "color": 12,
+                    "solid": false,
+                    "outline": 0
+                  },
+                  {
+                    "row": 2,
+                    "col": 0,
+                    "point": [
+                      40,
+                      40
+                    ],
+                    "bbox": [
+                      39,
+                      39,
+                      41,
+                      41
+                    ],
+                    "pattern": [
+                      [
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        2,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        2,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "color": 13,
+                    "solid": true,
+                    "outline": 0
+                  },
+                  {
+                    "row": 2,
+                    "col": 1,
+                    "point": [
+                      45,
+                      40
+                    ],
+                    "bbox": [
+                      44,
+                      39,
+                      46,
+                      41
+                    ],
+                    "pattern": [
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        2,
+                        1
+                      ],
+                      [
+                        1,
+                        2
+                      ]
+                    ],
+                    "color": 1,
+                    "solid": false,
+                    "outline": null
+                  },
+                  {
+                    "row": 2,
+                    "col": 2,
+                    "point": [
+                      50,
+                      40
+                    ],
+                    "bbox": [
+                      49,
+                      39,
+                      51,
+                      41
+                    ],
+                    "pattern": [
+                      [
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        2,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        2,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "color": 10,
+                    "solid": true,
+                    "outline": null
+                  },
+                  {
+                    "row": 2,
+                    "col": 4,
+                    "point": [
+                      60,
+                      40
+                    ],
+                    "bbox": [
+                      59,
+                      39,
+                      61,
+                      41
+                    ],
+                    "pattern": [
+                      [
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        2,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        2,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "color": 6,
+                    "solid": true,
+                    "outline": null
+                  }
+                ],
+                "operators": [
+                  {
+                    "control": {
+                      "row": 0,
+                      "col": 1,
+                      "point": [
+                        45,
+                        30
+                      ],
+                      "bbox": [
+                        44,
+                        29,
+                        46,
+                        31
+                      ],
+                      "pattern": [
+                        [
+                          1,
+                          0
+                        ],
+                        [
+                          0,
+                          1
+                        ],
+                        [
+                          1,
+                          1
+                        ],
+                        [
+                          0,
+                          2
+                        ],
+                        [
+                          1,
+                          2
+                        ],
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "color": 1,
+                      "solid": false,
+                      "outline": 0
+                    },
+                    "symbol": [
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "observed_site": [
+                      28,
+                      31
+                    ],
+                    "selected": true,
+                    "kind": "displayed_receiver",
+                    "input": 13
+                  }
+                ],
+                "services": [
+                  {
+                    "control": {
+                      "row": 0,
+                      "col": 1,
+                      "point": [
+                        45,
+                        30
+                      ],
+                      "bbox": [
+                        44,
+                        29,
+                        46,
+                        31
+                      ],
+                      "pattern": [
+                        [
+                          1,
+                          0
+                        ],
+                        [
+                          0,
+                          1
+                        ],
+                        [
+                          1,
+                          1
+                        ],
+                        [
+                          0,
+                          2
+                        ],
+                        [
+                          1,
+                          2
+                        ],
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "color": 1,
+                      "solid": false,
+                      "outline": 0
+                    },
+                    "symbol": [
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "observed_site": [
+                      28,
+                      31
+                    ],
+                    "selected": true,
+                    "kind": "displayed_receiver",
+                    "input": 13
+                  }
+                ],
+                "activity_controls": [
+                  {
+                    "row": 0,
+                    "col": 1,
+                    "point": [
+                      45,
+                      30
+                    ],
+                    "bbox": [
+                      44,
+                      29,
+                      46,
+                      31
+                    ],
+                    "pattern": [
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "color": 1,
+                    "solid": false,
+                    "outline": 0
+                  },
+                  {
+                    "row": 2,
+                    "col": 1,
+                    "point": [
+                      45,
+                      40
+                    ],
+                    "bbox": [
+                      44,
+                      39,
+                      46,
+                      41
+                    ],
+                    "pattern": [
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        2,
+                        1
+                      ],
+                      [
+                        1,
+                        2
+                      ]
+                    ],
+                    "color": 1,
+                    "solid": false,
+                    "outline": null
+                  }
+                ]
+              },
+              {
+                "id": "edab1dc0275d316381de327a8a9e3bbced6c2854935c917b52465f65c4319c27",
+                "bbox": [
+                  37,
+                  45,
+                  63,
+                  61
+                ],
+                "color": 14,
+                "room": [
+                  1,
+                  44,
+                  33,
+                  58
+                ],
+                "room_marker": 6,
+                "material": 13,
+                "selection_color": 0,
+                "cells": [
+                  {
+                    "row": 0,
+                    "col": 1,
+                    "point": [
+                      45,
+                      48
+                    ],
+                    "bbox": [
+                      44,
+                      47,
+                      46,
+                      49
+                    ],
+                    "pattern": [
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "color": 1,
+                    "solid": false,
+                    "outline": null
+                  },
+                  {
+                    "row": 0,
+                    "col": 4,
+                    "point": [
+                      60,
+                      48
+                    ],
+                    "bbox": [
+                      59,
+                      47,
+                      61,
+                      49
+                    ],
+                    "pattern": [
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "color": 12,
+                    "solid": false,
+                    "outline": 3
+                  },
+                  {
+                    "row": 1,
+                    "col": 1,
+                    "point": [
+                      45,
+                      53
+                    ],
+                    "bbox": [
+                      44,
+                      52,
+                      46,
+                      54
+                    ],
+                    "pattern": [
+                      [
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        2,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ]
+                    ],
+                    "color": 1,
+                    "solid": false,
+                    "outline": null
+                  },
+                  {
+                    "row": 1,
+                    "col": 2,
+                    "point": [
+                      50,
+                      53
+                    ],
+                    "bbox": [
+                      49,
+                      52,
+                      51,
+                      54
+                    ],
+                    "pattern": [
+                      [
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        2,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        2,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "color": 15,
+                    "solid": true,
+                    "outline": 3
+                  },
+                  {
+                    "row": 2,
+                    "col": 0,
+                    "point": [
+                      40,
+                      58
+                    ],
+                    "bbox": [
+                      39,
+                      57,
+                      41,
+                      59
+                    ],
+                    "pattern": [
+                      [
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        2,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        2,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "color": 13,
+                    "solid": true,
+                    "outline": 0
+                  },
+                  {
+                    "row": 2,
+                    "col": 1,
+                    "point": [
+                      45,
+                      58
+                    ],
+                    "bbox": [
+                      44,
+                      57,
+                      46,
+                      59
+                    ],
+                    "pattern": [
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        2,
+                        1
+                      ],
+                      [
+                        1,
+                        2
+                      ]
+                    ],
+                    "color": 1,
+                    "solid": false,
+                    "outline": null
+                  },
+                  {
+                    "row": 2,
+                    "col": 2,
+                    "point": [
+                      50,
+                      58
+                    ],
+                    "bbox": [
+                      49,
+                      57,
+                      51,
+                      59
+                    ],
+                    "pattern": [
+                      [
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        2,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        2,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "color": 10,
+                    "solid": true,
+                    "outline": null
+                  },
+                  {
+                    "row": 2,
+                    "col": 3,
+                    "point": [
+                      55,
+                      58
+                    ],
+                    "bbox": [
+                      54,
+                      57,
+                      56,
+                      59
+                    ],
+                    "pattern": [
+                      [
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        2,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        2,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "color": 11,
+                    "solid": true,
+                    "outline": null
+                  }
+                ],
+                "operators": [
+                  {
+                    "control": {
+                      "row": 1,
+                      "col": 1,
+                      "point": [
+                        45,
+                        53
+                      ],
+                      "bbox": [
+                        44,
+                        52,
+                        46,
+                        54
+                      ],
+                      "pattern": [
+                        [
+                          0,
+                          0
+                        ],
+                        [
+                          1,
+                          1
+                        ],
+                        [
+                          2,
+                          1
+                        ],
+                        [
+                          0,
+                          2
+                        ]
+                      ],
+                      "color": 1,
+                      "solid": false,
+                      "outline": null
+                    },
+                    "symbol": [
+                      [
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        2,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ]
+                    ],
+                    "observed_site": [
+                      8,
+                      44
+                    ],
+                    "selected": false,
+                    "kind": "displayed_rewrite",
+                    "input": 13,
+                    "output": 15
+                  },
+                  {
+                    "control": {
+                      "row": 0,
+                      "col": 1,
+                      "point": [
+                        45,
+                        48
+                      ],
+                      "bbox": [
+                        44,
+                        47,
+                        46,
+                        49
+                      ],
+                      "pattern": [
+                        [
+                          1,
+                          0
+                        ],
+                        [
+                          0,
+                          1
+                        ],
+                        [
+                          1,
+                          1
+                        ],
+                        [
+                          0,
+                          2
+                        ],
+                        [
+                          1,
+                          2
+                        ],
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "color": 1,
+                      "solid": false,
+                      "outline": null
+                    },
+                    "symbol": [
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "observed_site": [
+                      28,
+                      49
+                    ],
+                    "selected": false,
+                    "kind": "displayed_receiver",
+                    "input": 13
+                  }
+                ],
+                "services": [
+                  {
+                    "control": {
+                      "row": 1,
+                      "col": 1,
+                      "point": [
+                        45,
+                        53
+                      ],
+                      "bbox": [
+                        44,
+                        52,
+                        46,
+                        54
+                      ],
+                      "pattern": [
+                        [
+                          0,
+                          0
+                        ],
+                        [
+                          1,
+                          1
+                        ],
+                        [
+                          2,
+                          1
+                        ],
+                        [
+                          0,
+                          2
+                        ]
+                      ],
+                      "color": 1,
+                      "solid": false,
+                      "outline": null
+                    },
+                    "symbol": [
+                      [
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        2,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ]
+                    ],
+                    "observed_site": [
+                      8,
+                      44
+                    ],
+                    "selected": false,
+                    "kind": "displayed_rewrite",
+                    "input": 13,
+                    "output": 15
+                  },
+                  {
+                    "control": {
+                      "row": 0,
+                      "col": 1,
+                      "point": [
+                        45,
+                        48
+                      ],
+                      "bbox": [
+                        44,
+                        47,
+                        46,
+                        49
+                      ],
+                      "pattern": [
+                        [
+                          1,
+                          0
+                        ],
+                        [
+                          0,
+                          1
+                        ],
+                        [
+                          1,
+                          1
+                        ],
+                        [
+                          0,
+                          2
+                        ],
+                        [
+                          1,
+                          2
+                        ],
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "color": 1,
+                      "solid": false,
+                      "outline": null
+                    },
+                    "symbol": [
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "observed_site": [
+                      28,
+                      49
+                    ],
+                    "selected": false,
+                    "kind": "displayed_receiver",
+                    "input": 13
+                  }
+                ],
+                "activity_controls": [
+                  {
+                    "row": 0,
+                    "col": 1,
+                    "point": [
+                      45,
+                      48
+                    ],
+                    "bbox": [
+                      44,
+                      47,
+                      46,
+                      49
+                    ],
+                    "pattern": [
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ],
+                      [
+                        1,
+                        2
+                      ],
+                      [
+                        2,
+                        2
+                      ]
+                    ],
+                    "color": 1,
+                    "solid": false,
+                    "outline": null
+                  },
+                  {
+                    "row": 1,
+                    "col": 1,
+                    "point": [
+                      45,
+                      53
+                    ],
+                    "bbox": [
+                      44,
+                      52,
+                      46,
+                      54
+                    ],
+                    "pattern": [
+                      [
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        2,
+                        1
+                      ],
+                      [
+                        0,
+                        2
+                      ]
+                    ],
+                    "color": 1,
+                    "solid": false,
+                    "outline": null
+                  },
+                  {
+                    "row": 2,
+                    "col": 1,
+                    "point": [
+                      45,
+                      58
+                    ],
+                    "bbox": [
+                      44,
+                      57,
+                      46,
+                      59
+                    ],
+                    "pattern": [
+                      [
+                        1,
+                        0
+                      ],
+                      [
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1
+                      ],
+                      [
+                        2,
+                        1
+                      ],
+                      [
+                        1,
+                        2
+                      ]
+                    ],
+                    "color": 1,
+                    "solid": false,
+                    "outline": null
+                  }
+                ]
+              }
+            ],
+            "layout": [
+              [
+                [
+                  37,
+                  9,
+                  63,
+                  25
+                ],
+                9
+              ],
+              [
+                [
+                  37,
+                  27,
+                  63,
+                  43
+                ],
+                8
+              ],
+              [
+                [
+                  37,
+                  45,
+                  63,
+                  61
+                ],
+                14
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "planKey": "rooted_line_plan",
+      "function": "rooted_line_projection.scene",
+      "sourceFile": "agents/yf_arc3_v6/laya_proto/rooted_line_projection.py",
+      "sourceSha256": "901941b0023f174b3267eef68c686c1b2037d6bd5d5d1f718dedeb6735b10cb1",
+      "viewsMeasured": 100,
+      "acceptedCount": 1,
+      "matches": [
+        {
+          "game": "SK48",
+          "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:e4bbd31c5eaa4d7b",
+          "frameHash": "e4bbd31c5eaa4d7b",
+          "measuredCounts": {
+            "root": 4,
+            "reference_root": 4,
+            "field": 4,
+            "line_rows": 2,
+            "pieces": 3,
+            "order": 3
+          },
+          "measurement": {
+            "root": [
+              11,
+              36,
+              16,
+              41
+            ],
+            "reference_root": [
+              20,
+              56,
+              25,
+              61
+            ],
+            "root_signature": "9b6f15049bc96b1bf7093778a95c88ac8aeb3b78d5b439e101e3784ea806ff11",
+            "field": [
+              17,
+              12,
+              46,
+              41
+            ],
+            "background": 4,
+            "line_rows": [
+              38,
+              39
+            ],
+            "start": 16,
+            "tip": 22,
+            "pieces": [
+              {
+                "id": "material:8",
+                "type": "8",
+                "bbox": [
+                  42,
+                  19,
+                  45,
+                  22
+                ]
+              },
+              {
+                "id": "material:9",
+                "type": "9",
+                "bbox": [
+                  42,
+                  25,
+                  45,
+                  28
+                ]
+              },
+              {
+                "id": "material:14",
+                "type": "14",
+                "bbox": [
+                  42,
+                  31,
+                  45,
+                  34
+                ]
+              }
+            ],
+            "order": [
+              "8",
+              "14",
+              "9"
+            ],
+            "unit": 4,
+            "layout": "f0c92eea1e4d2055d5a36ae1e7f10cbdfafda2f79b110c0d2766a8505eef1cbf"
+          }
+        }
+      ]
+    },
+    {
+      "planKey": "reception_service_plan",
+      "function": "reception_service_projection.scene",
+      "sourceFile": "agents/yf_arc3_v6/laya_proto/reception_service_projection.py",
+      "sourceSha256": "a0f88ac17512319130aa525d08a3744de874f1624a3e700ca6e74eecb32c4f84",
+      "viewsMeasured": 100,
+      "acceptedCount": 1,
+      "matches": [
+        {
+          "game": "FOGW",
+          "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:68605777340ade0d",
+          "frameHash": "68605777340ade0d",
+          "measuredCounts": {
+            "box": 4,
+            "cells": 121,
+            "target": 4,
+            "support_candidates": 8,
+            "counterparts": 1
+          },
+          "measurement": {
+            "box": [
+              7,
+              3,
+              56,
+              52
+            ],
+            "pitch": 4,
+            "cells": [
+              [
+                10,
+                6
+              ],
+              [
+                14,
+                6
+              ],
+              [
+                18,
+                6
+              ],
+              [
+                22,
+                6
+              ],
+              [
+                26,
+                6
+              ],
+              [
+                30,
+                6
+              ],
+              [
+                34,
+                6
+              ],
+              [
+                38,
+                6
+              ],
+              [
+                42,
+                6
+              ],
+              [
+                46,
+                6
+              ],
+              [
+                50,
+                6
+              ],
+              [
+                10,
+                10
+              ],
+              [
+                14,
+                10
+              ],
+              [
+                18,
+                10
+              ],
+              [
+                22,
+                10
+              ],
+              [
+                26,
+                10
+              ],
+              [
+                30,
+                10
+              ],
+              [
+                34,
+                10
+              ],
+              [
+                38,
+                10
+              ],
+              [
+                42,
+                10
+              ],
+              [
+                46,
+                10
+              ],
+              [
+                50,
+                10
+              ],
+              [
+                10,
+                14
+              ],
+              [
+                14,
+                14
+              ],
+              [
+                18,
+                14
+              ],
+              [
+                22,
+                14
+              ],
+              [
+                26,
+                14
+              ],
+              [
+                30,
+                14
+              ],
+              [
+                34,
+                14
+              ],
+              [
+                38,
+                14
+              ],
+              [
+                42,
+                14
+              ],
+              [
+                46,
+                14
+              ],
+              [
+                50,
+                14
+              ],
+              [
+                10,
+                18
+              ],
+              [
+                14,
+                18
+              ],
+              [
+                18,
+                18
+              ],
+              [
+                22,
+                18
+              ],
+              [
+                26,
+                18
+              ],
+              [
+                30,
+                18
+              ],
+              [
+                34,
+                18
+              ],
+              [
+                38,
+                18
+              ],
+              [
+                42,
+                18
+              ],
+              [
+                46,
+                18
+              ],
+              [
+                50,
+                18
+              ],
+              [
+                10,
+                22
+              ],
+              [
+                14,
+                22
+              ],
+              [
+                18,
+                22
+              ],
+              [
+                22,
+                22
+              ],
+              [
+                26,
+                22
+              ],
+              [
+                30,
+                22
+              ],
+              [
+                34,
+                22
+              ],
+              [
+                38,
+                22
+              ],
+              [
+                42,
+                22
+              ],
+              [
+                46,
+                22
+              ],
+              [
+                50,
+                22
+              ],
+              [
+                10,
+                26
+              ],
+              [
+                14,
+                26
+              ],
+              [
+                18,
+                26
+              ],
+              [
+                22,
+                26
+              ],
+              [
+                26,
+                26
+              ],
+              [
+                30,
+                26
+              ],
+              [
+                34,
+                26
+              ],
+              [
+                38,
+                26
+              ],
+              [
+                42,
+                26
+              ],
+              [
+                46,
+                26
+              ],
+              [
+                50,
+                26
+              ],
+              [
+                10,
+                30
+              ],
+              [
+                14,
+                30
+              ],
+              [
+                18,
+                30
+              ],
+              [
+                22,
+                30
+              ],
+              [
+                26,
+                30
+              ],
+              [
+                30,
+                30
+              ],
+              [
+                34,
+                30
+              ],
+              [
+                38,
+                30
+              ],
+              [
+                42,
+                30
+              ],
+              [
+                46,
+                30
+              ],
+              [
+                50,
+                30
+              ],
+              [
+                10,
+                34
+              ],
+              [
+                14,
+                34
+              ],
+              [
+                18,
+                34
+              ],
+              [
+                22,
+                34
+              ],
+              [
+                26,
+                34
+              ],
+              [
+                30,
+                34
+              ],
+              [
+                34,
+                34
+              ],
+              [
+                38,
+                34
+              ],
+              [
+                42,
+                34
+              ],
+              [
+                46,
+                34
+              ],
+              [
+                50,
+                34
+              ],
+              [
+                10,
+                38
+              ],
+              [
+                14,
+                38
+              ],
+              [
+                18,
+                38
+              ],
+              [
+                22,
+                38
+              ],
+              [
+                26,
+                38
+              ],
+              [
+                30,
+                38
+              ],
+              [
+                34,
+                38
+              ],
+              [
+                38,
+                38
+              ],
+              [
+                42,
+                38
+              ],
+              [
+                46,
+                38
+              ],
+              [
+                50,
+                38
+              ],
+              [
+                10,
+                42
+              ],
+              [
+                14,
+                42
+              ],
+              [
+                18,
+                42
+              ],
+              [
+                22,
+                42
+              ],
+              [
+                26,
+                42
+              ],
+              [
+                30,
+                42
+              ],
+              [
+                34,
+                42
+              ],
+              [
+                38,
+                42
+              ],
+              [
+                42,
+                42
+              ],
+              [
+                46,
+                42
+              ],
+              [
+                50,
+                42
+              ],
+              [
+                10,
+                46
+              ],
+              [
+                14,
+                46
+              ],
+              [
+                18,
+                46
+              ],
+              [
+                22,
+                46
+              ],
+              [
+                26,
+                46
+              ],
+              [
+                30,
+                46
+              ],
+              [
+                34,
+                46
+              ],
+              [
+                38,
+                46
+              ],
+              [
+                42,
+                46
+              ],
+              [
+                46,
+                46
+              ],
+              [
+                50,
+                46
+              ]
+            ],
+            "background": 5,
+            "target": {
+              "bbox": [
+                51,
+                26,
+                53,
+                29
+              ],
+              "anchor": [
+                50,
+                26
+              ],
+              "color": 9,
+              "mask": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ]
+              ]
+            },
+            "support_candidates": [
+              {
+                "bbox": [
+                  10,
+                  10,
+                  12,
+                  13
+                ],
+                "anchor": [
+                  10,
+                  10
+                ],
+                "color": 8,
+                "mask": [
+                  [
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    0,
+                    2
+                  ],
+                  [
+                    0,
+                    3
+                  ],
+                  [
+                    1,
+                    0
+                  ],
+                  [
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    3
+                  ],
+                  [
+                    2,
+                    0
+                  ],
+                  [
+                    2,
+                    3
+                  ]
+                ]
+              },
+              {
+                "bbox": [
+                  51,
+                  10,
+                  53,
+                  13
+                ],
+                "anchor": [
+                  50,
+                  10
+                ],
+                "color": 8,
+                "mask": [
+                  [
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    3
+                  ],
+                  [
+                    1,
+                    0
+                  ],
+                  [
+                    1,
+                    3
+                  ],
+                  [
+                    2,
+                    0
+                  ],
+                  [
+                    2,
+                    1
+                  ],
+                  [
+                    2,
+                    2
+                  ],
+                  [
+                    2,
+                    3
+                  ]
+                ]
+              },
+              {
+                "bbox": [
+                  10,
+                  18,
+                  12,
+                  21
+                ],
+                "anchor": [
+                  10,
+                  18
+                ],
+                "color": 8,
+                "mask": [
+                  [
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    0,
+                    2
+                  ],
+                  [
+                    0,
+                    3
+                  ],
+                  [
+                    1,
+                    0
+                  ],
+                  [
+                    1,
+                    3
+                  ],
+                  [
+                    2,
+                    0
+                  ],
+                  [
+                    2,
+                    3
+                  ]
+                ]
+              },
+              {
+                "bbox": [
+                  51,
+                  18,
+                  53,
+                  21
+                ],
+                "anchor": [
+                  50,
+                  18
+                ],
+                "color": 8,
+                "mask": [
+                  [
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    3
+                  ],
+                  [
+                    1,
+                    0
+                  ],
+                  [
+                    1,
+                    3
+                  ],
+                  [
+                    2,
+                    0
+                  ],
+                  [
+                    2,
+                    1
+                  ],
+                  [
+                    2,
+                    2
+                  ],
+                  [
+                    2,
+                    3
+                  ]
+                ]
+              },
+              {
+                "bbox": [
+                  10,
+                  26,
+                  12,
+                  29
+                ],
+                "anchor": [
+                  10,
+                  26
+                ],
+                "color": 8,
+                "mask": [
+                  [
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    0,
+                    2
+                  ],
+                  [
+                    0,
+                    3
+                  ],
+                  [
+                    1,
+                    0
+                  ],
+                  [
+                    1,
+                    3
+                  ],
+                  [
+                    2,
+                    0
+                  ],
+                  [
+                    2,
+                    3
+                  ]
+                ]
+              },
+              {
+                "bbox": [
+                  51,
+                  26,
+                  53,
+                  29
+                ],
+                "anchor": [
+                  50,
+                  26
+                ],
+                "color": 9,
+                "mask": [
+                  [
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    3
+                  ],
+                  [
+                    1,
+                    0
+                  ],
+                  [
+                    1,
+                    3
+                  ],
+                  [
+                    2,
+                    0
+                  ],
+                  [
+                    2,
+                    1
+                  ],
+                  [
+                    2,
+                    2
+                  ],
+                  [
+                    2,
+                    3
+                  ]
+                ]
+              },
+              {
+                "bbox": [
+                  10,
+                  34,
+                  12,
+                  37
+                ],
+                "anchor": [
+                  10,
+                  34
+                ],
+                "color": 8,
+                "mask": [
+                  [
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    0,
+                    2
+                  ],
+                  [
+                    0,
+                    3
+                  ],
+                  [
+                    1,
+                    0
+                  ],
+                  [
+                    1,
+                    3
+                  ],
+                  [
+                    2,
+                    0
+                  ],
+                  [
+                    2,
+                    3
+                  ]
+                ]
+              },
+              {
+                "bbox": [
+                  51,
+                  34,
+                  53,
+                  37
+                ],
+                "anchor": [
+                  50,
+                  34
+                ],
+                "color": 8,
+                "mask": [
+                  [
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    3
+                  ],
+                  [
+                    1,
+                    0
+                  ],
+                  [
+                    1,
+                    3
+                  ],
+                  [
+                    2,
+                    0
+                  ],
+                  [
+                    2,
+                    1
+                  ],
+                  [
+                    2,
+                    2
+                  ],
+                  [
+                    2,
+                    3
+                  ]
+                ]
+              }
+            ],
+            "counterparts": [
+              {
+                "request_shape": "8081538d1e0e8aa003d8a2bc35d49b899e71e80b872ed77efa61a1298bdb26d5",
+                "request_bbox": [
+                  24,
+                  57,
+                  26,
+                  59
+                ],
+                "body_bbox": [
+                  14,
+                  26,
+                  16,
+                  28
+                ]
+              }
+            ],
+            "layout": "37ffa18c40fd30ea5b2b4233fec7e4ab081f3dcc02915cdab09594f39d7c97be"
+          }
+        }
+      ]
+    },
+    {
+      "planKey": "reference_population_plan",
+      "function": "reference_population_access.scene",
+      "sourceFile": "agents/yf_arc3_v6/laya_proto/reference_population_access.py",
+      "sourceSha256": "a11bddcadf9bc8c0e59060c59b4c98d62c11e418588f531a307dcc9406df76b2",
+      "viewsMeasured": 100,
+      "acceptedCount": 1,
+      "matches": [
+        {
+          "game": "VOIS",
+          "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:d1bacc3cc20afcc8",
+          "frameHash": "d1bacc3cc20afcc8",
+          "measuredCounts": {
+            "offset": 2,
+            "floor": 165,
+            "zone_box": 4,
+            "reference_box": 4,
+            "target": 2,
+            "bodies": 2
+          },
+          "measurement": {
+            "q": 4,
+            "offset": [
+              2,
+              2
+            ],
+            "floor": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                4
+              ],
+              [
+                0,
+                5
+              ],
+              [
+                0,
+                6
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                0,
+                8
+              ],
+              [
+                0,
+                9
+              ],
+              [
+                0,
+                10
+              ],
+              [
+                0,
+                11
+              ],
+              [
+                0,
+                12
+              ],
+              [
+                0,
+                13
+              ],
+              [
+                0,
+                14
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                1,
+                4
+              ],
+              [
+                1,
+                5
+              ],
+              [
+                1,
+                6
+              ],
+              [
+                1,
+                7
+              ],
+              [
+                1,
+                8
+              ],
+              [
+                1,
+                9
+              ],
+              [
+                1,
+                10
+              ],
+              [
+                1,
+                11
+              ],
+              [
+                1,
+                12
+              ],
+              [
+                1,
+                13
+              ],
+              [
+                1,
+                14
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                2,
+                2
+              ],
+              [
+                2,
+                3
+              ],
+              [
+                2,
+                4
+              ],
+              [
+                2,
+                5
+              ],
+              [
+                2,
+                6
+              ],
+              [
+                2,
+                7
+              ],
+              [
+                2,
+                8
+              ],
+              [
+                2,
+                9
+              ],
+              [
+                2,
+                10
+              ],
+              [
+                2,
+                11
+              ],
+              [
+                2,
+                12
+              ],
+              [
+                2,
+                13
+              ],
+              [
+                2,
+                14
+              ],
+              [
+                3,
+                0
+              ],
+              [
+                3,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                3,
+                7
+              ],
+              [
+                3,
+                8
+              ],
+              [
+                3,
+                9
+              ],
+              [
+                3,
+                10
+              ],
+              [
+                3,
+                11
+              ],
+              [
+                3,
+                12
+              ],
+              [
+                3,
+                13
+              ],
+              [
+                3,
+                14
+              ],
+              [
+                4,
+                0
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                4,
+                2
+              ],
+              [
+                4,
+                3
+              ],
+              [
+                4,
+                4
+              ],
+              [
+                4,
+                5
+              ],
+              [
+                4,
+                6
+              ],
+              [
+                4,
+                7
+              ],
+              [
+                4,
+                8
+              ],
+              [
+                4,
+                9
+              ],
+              [
+                4,
+                10
+              ],
+              [
+                4,
+                11
+              ],
+              [
+                4,
+                12
+              ],
+              [
+                4,
+                13
+              ],
+              [
+                4,
+                14
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                5,
+                2
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                11
+              ],
+              [
+                5,
+                12
+              ],
+              [
+                5,
+                13
+              ],
+              [
+                5,
+                14
+              ],
+              [
+                6,
+                0
+              ],
+              [
+                6,
+                1
+              ],
+              [
+                6,
+                2
+              ],
+              [
+                6,
+                3
+              ],
+              [
+                6,
+                4
+              ],
+              [
+                6,
+                5
+              ],
+              [
+                6,
+                6
+              ],
+              [
+                6,
+                7
+              ],
+              [
+                6,
+                8
+              ],
+              [
+                6,
+                9
+              ],
+              [
+                6,
+                10
+              ],
+              [
+                6,
+                11
+              ],
+              [
+                6,
+                12
+              ],
+              [
+                6,
+                13
+              ],
+              [
+                6,
+                14
+              ],
+              [
+                7,
+                0
+              ],
+              [
+                7,
+                1
+              ],
+              [
+                7,
+                2
+              ],
+              [
+                7,
+                3
+              ],
+              [
+                7,
+                4
+              ],
+              [
+                7,
+                5
+              ],
+              [
+                7,
+                6
+              ],
+              [
+                7,
+                7
+              ],
+              [
+                7,
+                8
+              ],
+              [
+                7,
+                9
+              ],
+              [
+                7,
+                10
+              ],
+              [
+                7,
+                11
+              ],
+              [
+                7,
+                12
+              ],
+              [
+                7,
+                13
+              ],
+              [
+                7,
+                14
+              ],
+              [
+                8,
+                0
+              ],
+              [
+                8,
+                1
+              ],
+              [
+                8,
+                2
+              ],
+              [
+                8,
+                3
+              ],
+              [
+                8,
+                4
+              ],
+              [
+                8,
+                5
+              ],
+              [
+                8,
+                6
+              ],
+              [
+                8,
+                7
+              ],
+              [
+                8,
+                8
+              ],
+              [
+                8,
+                9
+              ],
+              [
+                8,
+                10
+              ],
+              [
+                8,
+                11
+              ],
+              [
+                8,
+                12
+              ],
+              [
+                8,
+                13
+              ],
+              [
+                8,
+                14
+              ],
+              [
+                9,
+                0
+              ],
+              [
+                9,
+                1
+              ],
+              [
+                9,
+                2
+              ],
+              [
+                9,
+                3
+              ],
+              [
+                9,
+                4
+              ],
+              [
+                9,
+                5
+              ],
+              [
+                9,
+                6
+              ],
+              [
+                9,
+                7
+              ],
+              [
+                9,
+                8
+              ],
+              [
+                9,
+                9
+              ],
+              [
+                9,
+                10
+              ],
+              [
+                9,
+                11
+              ],
+              [
+                9,
+                12
+              ],
+              [
+                9,
+                13
+              ],
+              [
+                9,
+                14
+              ],
+              [
+                10,
+                0
+              ],
+              [
+                10,
+                1
+              ],
+              [
+                10,
+                2
+              ],
+              [
+                10,
+                3
+              ],
+              [
+                10,
+                4
+              ],
+              [
+                10,
+                5
+              ],
+              [
+                10,
+                6
+              ],
+              [
+                10,
+                7
+              ],
+              [
+                10,
+                8
+              ],
+              [
+                10,
+                9
+              ],
+              [
+                10,
+                10
+              ],
+              [
+                10,
+                11
+              ],
+              [
+                10,
+                12
+              ],
+              [
+                10,
+                13
+              ],
+              [
+                10,
+                14
+              ]
+            ],
+            "zone_box": [
+              25,
+              21,
+              33,
+              29
+            ],
+            "reference_box": [
+              54,
+              54,
+              63,
+              63
+            ],
+            "reference_digest": "af70f1942cac40c6859bc459bb81cf501ee89890b833b644a8df41e87375a0b6",
+            "target": [
+              [
+                5,
+                6,
+                8
+              ],
+              [
+                5,
+                7,
+                14
+              ]
+            ],
+            "background": 5,
+            "empty": 4,
+            "border": 2,
+            "population": 2,
+            "bodies": [
+              {
+                "cell": [
+                  5,
+                  3
+                ],
+                "appearance": 13
+              },
+              {
+                "cell": [
+                  5,
+                  10
+                ],
+                "appearance": 13
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "clockEvidence": {
+    "CATR": {
+      "priorResolution": "docs/migration/lot2b-evidence/final/catr-resolution.json",
+      "sha256": "1281bd182e2976c7dde75b151a664bead41bbbe6139444d8238d5149f8b08d0c",
+      "carriedBlockedSeconds": 107.399326
+    },
+    "RSWP": {
+      "carriedBlockedSeconds": 0,
+      "basis": "No prior selected RSWP game found in the archived docs/migration selection and resolution receipts before this selection."
+    }
+  },
+  "selection": {
+    "entry": "observed_composition_services",
+    "subscope": "panel_service_plan",
+    "evaluationGame": "RSWP",
+    "candidateOnly": true,
+    "basis": "The only initial public raster admitted by the unchanged panel observer; all three panels have a unique direct current material/receiver correspondence. No new V5 numerical kernel is required for this first branch.",
+    "qualification": "Admission and displayed correspondence are hypotheses for a bounded cold campaign, not observed execution semantics or completed levels."
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schema": "logos-engine.recorded-source-prefix-comparison-extract.v1",
+  "recordedAt": "2026-11-09T19:54:29.049074+00:00",
+  "nativeSourceDigest": "17252e294212a1563b75037a0b0dd782c2ecbc8cc4e1997a4f2bb2103bdf4e8b",
+  "campaignReport": {
+    "path": "docs/migration/lot2b-evidence/final/syme-control-attention/syme-campaign.json.gz",
+    "sha256": "f05b862eef194a7faa5043cd0fc6b699687c4188f57b4bb3810b5c964168d1cb",
+    "bytes": 3051058
+  },
+  "reference": {
+    "path": "tests/fixtures/v6-field-reference.json",
+    "sha256": "0bceb91dc54c053e41f7ecfe1b03bb53a8d5a0c1712407a9b96e06715f425aba",
+    "bytes": 6280880
+  },
+  "recordedComparison": {
+    "path": "tests/fixtures/v6-field-reference.json",
+    "sha256": "0bceb91dc54c053e41f7ecfe1b03bb53a8d5a0c1712407a9b96e06715f425aba",
+    "qualification": "Available reference prefix only: public commands and all animation packets previously matched the unchanged complete original caller. Further levels are live tests, not differential claims.",
+    "referenceCommands": 36,
+    "packetsCompared": 37,
+    "commandsCompared": 36,
+    "passed": true
+  },
+  "qualification": "Read-only extraction of the comparison already executed by the unmodified campaign harness. The available archived source prefix contains 36 commands; all 36 native commands and 37 actual complete public packets matched it during the cold campaign. No source solver or expected action was provided to the production runtime. This extraction does not rerun a game or establish unobserved-level parity."
+}

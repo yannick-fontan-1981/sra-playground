@@ -1,0 +1,126 @@
+{
+  "schema": "logos-engine.lot4c-retained-source-transport-evidence.v1",
+  "status": "byte_identical_copies",
+  "recordedAt": "2026-11-11T01:47:19.759225+00:00",
+  "files": [
+    {
+      "source": "/workspace/sites/lot4c-publication-20261111/lot4c-source-push-plan.json",
+      "retained": "docs/migration/lot4c-evidence/publication/lot4c-source-push-plan.json",
+      "bytes": 286611,
+      "sha256": "dc963368f29f3868004883cf6160b3157876dc33cdf4df3775c02f0a3cb9e346"
+    },
+    {
+      "source": "/workspace/sites/lot4c-publication-20261111/source-plan-execution.json",
+      "retained": "docs/migration/lot4c-evidence/publication/source-plan-execution.json",
+      "bytes": 421,
+      "sha256": "dad6bfabab80d27439da36be0c73782de4d2de7ceca8108cc4098ac2bf7834a7"
+    },
+    {
+      "source": "/workspace/sites/lot4c-publication-20261111/worktree-preparation.json",
+      "retained": "docs/migration/lot4c-evidence/publication/worktree-preparation.json",
+      "bytes": 10075,
+      "sha256": "7b62dfa9b3209cb745996f0260afd1f0c4806605829dc63359dcc71d094de8f5"
+    },
+    {
+      "source": "/workspace/sites/lot4c-publication-20261111/verify-final-source-build.py",
+      "retained": "docs/migration/lot4c-evidence/publication/verify-final-source-build.py",
+      "bytes": 22907,
+      "sha256": "b66a3bd933ea765e9551e759d5bdb2087c0e357a6216b6df02c30d1a8df6c2f3"
+    },
+    {
+      "source": "/workspace/sites/lot4c-publication-20261111/final-source-build-verification.json",
+      "retained": "docs/migration/lot4c-evidence/publication/final-source-build-verification.json",
+      "bytes": 388086,
+      "sha256": "fa9102bbde5d4ef10c44ed9b096a4101cd56e5791f6a83fffda735c2d29ede19"
+    },
+    {
+      "source": "/workspace/sites/lot4c-publication-20261111/final-source-build-verification-execution.json",
+      "retained": "docs/migration/lot4c-evidence/publication/final-source-build-verification-execution.json",
+      "bytes": 4245,
+      "sha256": "a19131284d556bd6c3bc0f7222652bc09be48a9ac242a9339c54162b75651adc"
+    },
+    {
+      "source": "/workspace/sites/lot4c-publication-20261111/archive-step-1-verification-attempt01.json",
+      "retained": "docs/migration/lot4c-evidence/publication/archive-step-1-verification-attempt01.json",
+      "bytes": 536,
+      "sha256": "113c4d9f3b606df8f21ef8d239ed0ced1ce33ea6a24cf90fc32ba191691b823a"
+    },
+    {
+      "source": "/workspace/sites/lot4c-publication-20261111/source-push-step-1.json",
+      "retained": "docs/migration/lot4c-evidence/publication/source-push-step-1.json",
+      "bytes": 795,
+      "sha256": "e83f32dd3ac22c44345f45e60fd506dc6a94d593e77cfb200951a86d3b988377"
+    },
+    {
+      "source": "/workspace/sites/lot4c-publication-20261111/source-push-step-2.json",
+      "retained": "docs/migration/lot4c-evidence/publication/source-push-step-2.json",
+      "bytes": 795,
+      "sha256": "d900f9e67baedfb5703181ee1d2f4b2597398db5f3d1e3d571eab34c7586670d"
+    },
+    {
+      "source": "/workspace/sites/lot4c-publication-20261111/source-push-step-3.json",
+      "retained": "docs/migration/lot4c-evidence/publication/source-push-step-3.json",
+      "bytes": 795,
+      "sha256": "782c6b0886166d14b03194a4c16f85842706c69e28235342e241c22b267b9ea6"
+    },
+    {
+      "source": "/workspace/sites/lot4c-publication-20261111/source-push-step-4.json",
+      "retained": "docs/migration/lot4c-evidence/publication/source-push-step-4.json",
+      "bytes": 795,
+      "sha256": "765e41ae1c031c087d55c9f624e279498e031dd1639e52eb8d495aa7d8ee6b74"
+    },
+    {
+      "source": "/workspace/sites/lot4c-publication-20261111/source-push-step-5.json",
+      "retained": "docs/migration/lot4c-evidence/publication/source-push-step-5.json",
+      "bytes": 795,
+      "sha256": "671a095422fb491b82c8859eb5fe7f5b98a13989d674051d8f8e9ac7e41f83ef"
+    },
+    {
+      "source": "/workspace/sites/lot4c-publication-20261111/archive-step-1-verification.json",
+      "retained": "docs/migration/lot4c-evidence/publication/archive-step-1-verification.json",
+      "bytes": 735,
+      "sha256": "c56cc47f2931fce1802db47a3f41da7bac025115795b95ae43669197cd3c1917"
+    },
+    {
+      "source": "/workspace/sites/lot4c-publication-20261111/archive-step-2-verification.json",
+      "retained": "docs/migration/lot4c-evidence/publication/archive-step-2-verification.json",
+      "bytes": 509,
+      "sha256": "f693bcf01a0031c239fa15acee565974db9aa0a285ded5153bfc4c086bc4bddd"
+    },
+    {
+      "source": "/workspace/sites/lot4c-publication-20261111/archive-step-3-verification.json",
+      "retained": "docs/migration/lot4c-evidence/publication/archive-step-3-verification.json",
+      "bytes": 509,
+      "sha256": "ae5024fc0f3c3239f882b36d24ba65d373eac7e38b88d8d8b959231531afe4fb"
+    },
+    {
+      "source": "/workspace/sites/lot4c-publication-20261111/archive-step-4-verification.json",
+      "retained": "docs/migration/lot4c-evidence/publication/archive-step-4-verification.json",
+      "bytes": 509,
+      "sha256": "b09604826c9690e27a5a3cf4a66148dac036a0886319e2f7d3f69f983678a30b"
+    },
+    {
+      "source": "/workspace/sites/lot4c-publication-20261111/source-plan.stdout",
+      "rawBytes": 231,
+      "rawSha256": "57d43811877f1a7f38853bd65e53807990425e74e9332a6f941836798583200c",
+      "retainedGzip": "docs/migration/lot4c-evidence/publication/source-plan.stdout.log.gz",
+      "gzipSha256": "3dde5496bda607fe555f63bdf13420287163d938fa7334d027c87ef67dbb6c0d"
+    },
+    {
+      "source": "/workspace/sites/lot4c-publication-20261111/source-plan.stderr",
+      "rawBytes": 0,
+      "rawSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retainedGzip": "docs/migration/lot4c-evidence/publication/source-plan.stderr.log.gz",
+      "gzipSha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    }
+  ],
+  "sourcePushes": 5,
+  "forcePush": false,
+  "intermediateSiteVersionsSaved": 0,
+  "intermediateDeployments": 0,
+  "lastObservedSiteVersionBeforeDeploy": 91,
+  "finalSourceCommit": "d06620d1e4ca2c9758cc693b1ced9eeeddccb7e6",
+  "retainedTargetCommit": "ffaa49af6a0cbb37c355dd63be9c2bf0a88e3b28",
+  "finalTree": "8c063a438a88d11e94115a87255b7c54ad8f1547",
+  "qualification": "All five standard workflow pushes completed before first private save/deploy. Final source tree equals the original delivery tree and preserves its commit as a direct parent. Local gzip archive bytes may differ while all75 application members remain exact. Source transport and deployment receipts have distinct scopes."
+}

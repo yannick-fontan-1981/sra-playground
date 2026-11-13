@@ -1,0 +1,1017 @@
+{
+  "module_id": "cell_support_growth",
+  "declarations": [
+    {
+      "id": "policy.cell_support_growth",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "sealed_action_conditioned_cell_support_growth"
+      ],
+      "applicability": [
+        "current_measured_support_growth"
+      ],
+      "invariants": [
+        "no_instance_palette_or_geometry",
+        "support_growth_is_revisable",
+        "gauge_is_optional_corroboration",
+        "no_unique_visit_or_terminal_endpoint_inferred",
+        "old_unrefuted_hypotheses_preserved"
+      ],
+      "falsifiers": [
+        "current_geometry_or_support_growth_is_contradicted"
+      ],
+      "declared_alternative_refs": [
+        "cell_supports.propose_growth",
+        "cell_supports.retain_unknown"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cell_supports.propose",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cell_supports.propose_growth"
+            },
+            {
+              "field": "cell_support_growth_count",
+              "operator": "equals",
+              "expected": 1
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.cell_supports.unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cell_supports.retain_unknown"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.cell_supports.propose",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cell_supports.propose_growth"
+            }
+          ],
+          "reason_ref": "reason.current_cell_support_grows_without_gauge_requirement"
+        },
+        {
+          "id": "tier.cell_supports.unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cell_supports.retain_unknown"
+            }
+          ],
+          "reason_ref": "reason.incomplete_or_ambiguous_growth_preserves_unknowns"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "cell_supports.propose_growth": "rule.cell_support_growth"
+      },
+      "reason_refs": [
+        "reason.current_cell_support_grows_without_gauge_requirement"
+      ]
+    },
+    {
+      "id": "rule.cell_support_growth",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "premises": [
+        "sealed_action_conditioned_cell_support_growth"
+      ],
+      "applicability": [
+        "source_admitted_unique_measured_correspondence"
+      ],
+      "invariants": [
+        "no_instance_palette_or_geometry",
+        "support_growth_is_revisable",
+        "gauge_is_optional_corroboration",
+        "no_unique_visit_or_terminal_endpoint_inferred",
+        "old_unrefuted_hypotheses_preserved",
+        "zero_to_one_is_appearance_only_until_previous_support_is_retained"
+      ],
+      "falsifiers": [
+        "current_geometry_or_support_growth_is_contradicted"
+      ],
+      "reason_refs": [
+        "reason.current_cell_support_grows_without_gauge_requirement"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "supposition.cell_support_growth.{geometry_digest}",
+          "kind": "schema",
+          "label": "observed increasing cell support",
+          "required_fields": [
+            "geometry_digest",
+            "cell_count",
+            "support_values",
+            "previous_cell_count",
+            "current_cell_indices"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.cell_support_growth.v1",
+            "commitment": "revisable",
+            "canonical_fact_projection_enabled": true
+          },
+          "attribute_bindings": {
+            "geometry_digest": "geometry_digest",
+            "top": "top",
+            "left": "left",
+            "bottom": "bottom",
+            "right": "right",
+            "pitch": "pitch",
+            "cell_count": "cell_count",
+            "row_count": "row_count",
+            "column_count": "column_count",
+            "support_values": "support_values",
+            "previous_cell_indices": "previous_cell_indices",
+            "previous_cell_count": "previous_cell_count",
+            "current_cell_count": "current_cell_count",
+            "current_cell_indices": "current_cell_indices",
+            "measurement_frame_ref": "measurement_frame_ref"
+          },
+          "iteration": {
+            "source_field": "cell_support_growth_rows",
+            "item_bindings": {
+              "geometry_digest": "geometry_digest",
+              "top": "top",
+              "left": "left",
+              "bottom": "bottom",
+              "right": "right",
+              "pitch": "pitch",
+              "cell_count": "cell_count",
+              "row_count": "row_count",
+              "column_count": "column_count",
+              "support_values": "support_values",
+              "previous_cell_indices": "previous_cell_indices",
+              "previous_cell_count": "previous_cell_count",
+              "current_cell_count": "current_cell_count",
+              "current_cell_indices": "current_cell_indices"
+            },
+            "max_items": 3
+          },
+          "all_conditions": [
+            {
+              "field": "previous_cell_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id_pattern": "goal.full_support_coverage_from_growth.{geometry_digest}",
+          "kind": "goal",
+          "label": "test full coverage of the observed support domain",
+          "required_fields": [
+            "geometry_digest",
+            "cell_count"
+          ],
+          "static_attributes": {
+            "goal_kind": "full_support_coverage_growth",
+            "status": "proposed",
+            "commitment": "revisable",
+            "falsifier": "support_growth_or_terminal_feedback_contradicts_coverage_goal",
+            "does_not_require_exact_actions": true
+          },
+          "attribute_bindings": {
+            "domain_ref": "geometry_digest",
+            "quantified_support_count": "cell_count"
+          },
+          "iteration": {
+            "source_field": "cell_support_growth_rows",
+            "item_bindings": {
+              "geometry_digest": "geometry_digest",
+              "cell_count": "cell_count",
+              "previous_cell_count": "previous_cell_count"
+            },
+            "max_items": 3
+          },
+          "all_conditions": [
+            {
+              "field": "previous_cell_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id_pattern": "observation.cell_support_appearance.{geometry_digest}.{scope_ref}",
+          "kind": "schema",
+          "label": "observed first cell support appearance",
+          "required_fields": [
+            "geometry_digest",
+            "cell_count",
+            "support_values",
+            "previous_cell_count",
+            "current_cell_indices",
+            "scope_ref"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.cell_support_appearance.v1",
+            "commitment": "revisable",
+            "canonical_fact_projection_enabled": true,
+            "does_not_establish_retained_growth": true
+          },
+          "attribute_bindings": {
+            "geometry_digest": "geometry_digest",
+            "top": "top",
+            "left": "left",
+            "bottom": "bottom",
+            "right": "right",
+            "pitch": "pitch",
+            "cell_count": "cell_count",
+            "row_count": "row_count",
+            "column_count": "column_count",
+            "support_values": "support_values",
+            "previous_cell_indices": "previous_cell_indices",
+            "previous_cell_count": "previous_cell_count",
+            "current_cell_count": "current_cell_count",
+            "current_cell_indices": "current_cell_indices",
+            "measurement_frame_ref": "measurement_frame_ref",
+            "scope_ref": "scope_ref"
+          },
+          "iteration": {
+            "source_field": "cell_support_growth_rows",
+            "item_bindings": {
+              "geometry_digest": "geometry_digest",
+              "top": "top",
+              "left": "left",
+              "bottom": "bottom",
+              "right": "right",
+              "pitch": "pitch",
+              "cell_count": "cell_count",
+              "row_count": "row_count",
+              "column_count": "column_count",
+              "support_values": "support_values",
+              "previous_cell_indices": "previous_cell_indices",
+              "previous_cell_count": "previous_cell_count",
+              "current_cell_count": "current_cell_count",
+              "current_cell_indices": "current_cell_indices",
+              "scope_ref": "scope_ref"
+            },
+            "max_items": 3
+          },
+          "all_conditions": [
+            {
+              "field": "previous_cell_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ]
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.cell_support_growth.{geometry_digest}",
+          "predicate": "proposes_open_goal_kind",
+          "family": "control",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "goal.full_support_coverage_from_growth.{geometry_digest}",
+            "supposition.cell_support_growth.{geometry_digest}"
+          ],
+          "required_fields": [
+            "geometry_digest"
+          ],
+          "static_attributes": {
+            "goal_kind": "full_support_coverage_growth",
+            "commitment": "revisable",
+            "falsifier": "current_support_growth_hypothesis_is_contradicted"
+          },
+          "iteration": {
+            "source_field": "cell_support_growth_rows",
+            "item_bindings": {
+              "geometry_digest": "geometry_digest",
+              "previous_cell_count": "previous_cell_count"
+            },
+            "max_items": 3
+          },
+          "all_conditions": [
+            {
+              "field": "previous_cell_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id_pattern": "claim.cell_support_appearance.{geometry_digest}.{scope_ref}",
+          "predicate": "records_first_cell_support_appearance_without_retention_evidence",
+          "family": "control",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "observation.cell_support_appearance.{geometry_digest}.{scope_ref}"
+          ],
+          "required_fields": [
+            "geometry_digest",
+            "scope_ref"
+          ],
+          "all_conditions": [
+            {
+              "field": "previous_cell_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_attributes": {
+            "complete_retained_growth_law": false,
+            "goal_inference_from_zero_alone": false
+          },
+          "iteration": {
+            "source_field": "cell_support_growth_rows",
+            "item_bindings": {
+              "geometry_digest": "geometry_digest",
+              "scope_ref": "scope_ref",
+              "previous_cell_count": "previous_cell_count"
+            },
+            "max_items": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.parallel_banded_column_quantity_question",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_exact_column_extents_and_transverse_masks"
+      ],
+      "applicability": [
+        "current_action_conditioned_parallel_banded_columns"
+      ],
+      "invariants": [
+        "no_instance_palette_or_geometry",
+        "quantities_are_revisable_interpretations_of_lengths",
+        "no_glyph_law_lifetime_or_phase_inferred",
+        "stocks_and_phase_are_unmeasured_not_empty",
+        "no_act_or_terminal_permission"
+      ],
+      "falsifiers": [
+        "measured_columns_or_transverse_marks_do_not_recur"
+      ],
+      "declared_alternative_refs": [
+        "banded_columns.propose_quantity_question",
+        "banded_columns.retain_unknown"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.banded_columns.measured",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "banded_columns.propose_quantity_question"
+            },
+            {
+              "field": "parallel_banded_column_group_count",
+              "operator": "equals",
+              "expected": 1
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.banded_columns.unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "banded_columns.retain_unknown"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.banded_columns.question",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "banded_columns.propose_quantity_question"
+            }
+          ],
+          "reason_ref": "reason.measured_lengths_and_marks_open_quantity_band_question"
+        },
+        {
+          "id": "tier.banded_columns.unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "banded_columns.retain_unknown"
+            }
+          ],
+          "reason_ref": "reason.incomplete_banded_columns_remain_unknown"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "banded_columns.propose_quantity_question": "rule.parallel_banded_column_quantity_question"
+      },
+      "reason_refs": [
+        "reason.measured_lengths_and_marks_open_quantity_band_question"
+      ]
+    },
+    {
+      "id": "rule.parallel_banded_column_quantity_question",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "premises": [
+        "current_exact_column_extents_and_transverse_masks"
+      ],
+      "applicability": [
+        "source_selected_current_parallel_banded_column_measurements"
+      ],
+      "invariants": [
+        "no_instance_palette_or_geometry",
+        "quantities_are_revisable_interpretations_of_lengths",
+        "no_glyph_law_lifetime_or_phase_inferred",
+        "stocks_and_phase_are_unmeasured_not_empty",
+        "no_act_or_terminal_permission"
+      ],
+      "falsifiers": [
+        "measured_columns_or_transverse_marks_do_not_recur"
+      ],
+      "reason_refs": [
+        "reason.measured_lengths_and_marks_open_quantity_band_question"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "supposition.banded_column_quantities.{geometry_digest}",
+          "kind": "schema",
+          "label": "revisable quantities and transverse-band question",
+          "required_fields": [
+            "geometry_digest",
+            "transition_ref",
+            "column_count",
+            "column_values",
+            "before_component_refs",
+            "after_component_refs",
+            "filled_lengths_before",
+            "filled_lengths_after",
+            "filled_length_deltas",
+            "transverse_offsets",
+            "frame_height",
+            "glyph_inventory_measured",
+            "operator_lifetimes_measured",
+            "turn_phase_measured",
+            "layout_digest",
+            "measurement_frame_ref",
+            "context_epoch",
+            "action_ref",
+            "chart_before",
+            "chart_after"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.banded_column_measurement.v1",
+            "commitment": "revisable",
+            "canonical_fact_projection_enabled": true
+          },
+          "attribute_bindings": {
+            "geometry_digest": "geometry_digest",
+            "transition_ref": "transition_ref",
+            "column_count": "column_count",
+            "column_values": "column_values",
+            "before_component_refs": "before_component_refs",
+            "after_component_refs": "after_component_refs",
+            "filled_lengths_before": "filled_lengths_before",
+            "filled_lengths_after": "filled_lengths_after",
+            "filled_length_deltas": "filled_length_deltas",
+            "transverse_offsets": "transverse_offsets",
+            "frame_height": "frame_height",
+            "glyph_inventory_measured": "glyph_inventory_measured",
+            "operator_lifetimes_measured": "operator_lifetimes_measured",
+            "turn_phase_measured": "turn_phase_measured",
+            "layout_digest": "layout_digest",
+            "measurement_frame_ref": "measurement_frame_ref",
+            "context_epoch": "context_epoch",
+            "action_ref": "action_ref",
+            "chart_before": "chart_before",
+            "chart_after": "chart_after"
+          },
+          "iteration": {
+            "source_field": "parallel_banded_column_rows",
+            "item_bindings": {
+              "geometry_digest": "geometry_digest",
+              "transition_ref": "transition_ref",
+              "column_count": "column_count",
+              "column_values": "column_values",
+              "before_component_refs": "before_component_refs",
+              "after_component_refs": "after_component_refs",
+              "filled_lengths_before": "filled_lengths_before",
+              "filled_lengths_after": "filled_lengths_after",
+              "filled_length_deltas": "filled_length_deltas",
+              "transverse_offsets": "transverse_offsets",
+              "frame_height": "frame_height",
+              "glyph_inventory_measured": "glyph_inventory_measured",
+              "operator_lifetimes_measured": "operator_lifetimes_measured",
+              "turn_phase_measured": "turn_phase_measured",
+              "layout_digest": "layout_digest",
+              "chart_before": "chart_before",
+              "chart_after": "chart_after"
+            },
+            "max_items": 3
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.banded_column_quantity_question.{geometry_digest}",
+          "predicate": "proposes_open_goal_kind",
+          "family": "control",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "goal.banded_quantity_boundary_viability.epoch.{context_epoch}.layout.{layout_digest}",
+            "supposition.banded_column_quantities.{geometry_digest}"
+          ],
+          "required_fields": [
+            "geometry_digest",
+            "layout_digest",
+            "measurement_frame_ref",
+            "context_epoch",
+            "action_ref"
+          ],
+          "static_attributes": {
+            "goal_kind": "banded_quantity_boundary_viability",
+            "commitment": "revisable",
+            "effect_laws_established": false,
+            "operator_stock_known": false,
+            "validation_phase_known": false,
+            "falsifier": "banded_lengths_do_not_have_observed_control_consequences"
+          },
+          "iteration": {
+            "source_field": "parallel_banded_column_rows",
+            "item_bindings": {
+              "geometry_digest": "geometry_digest",
+              "transition_ref": "transition_ref",
+              "column_count": "column_count",
+              "column_values": "column_values",
+              "before_component_refs": "before_component_refs",
+              "after_component_refs": "after_component_refs",
+              "filled_lengths_before": "filled_lengths_before",
+              "filled_lengths_after": "filled_lengths_after",
+              "filled_length_deltas": "filled_length_deltas",
+              "transverse_offsets": "transverse_offsets",
+              "frame_height": "frame_height",
+              "glyph_inventory_measured": "glyph_inventory_measured",
+              "operator_lifetimes_measured": "operator_lifetimes_measured",
+              "turn_phase_measured": "turn_phase_measured",
+              "layout_digest": "layout_digest"
+            },
+            "max_items": 3
+          },
+          "attribute_bindings": {
+            "geometry_digest": "geometry_digest",
+            "layout_digest": "layout_digest",
+            "measurement_frame_ref": "measurement_frame_ref",
+            "context_epoch": "context_epoch",
+            "action_ref": "action_ref"
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.banded_quantity_conditional_stock_profile",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_canonical_quantity_question_and_same_epoch_measured_chart_observations"
+      ],
+      "applicability": [
+        "source_selected_revisable_additive_stock_extension"
+      ],
+      "invariants": [
+        "conditional_model_only",
+        "preserve_unknown_multicolor_alternatives",
+        "same_epoch_and_current_frame",
+        "no_native_completion_from_model",
+        "no_micro_phase_or_palette_claim"
+      ],
+      "falsifiers": [
+        "next_settled_quantities_or_retained_stock_disagree"
+      ],
+      "declared_alternative_refs": [
+        "banded_quantity.fit_declared_stock_profile",
+        "banded_quantity.fit_declared_stock_profile.retain_unknown"
+      ],
+      "fact_projections": [
+        {
+          "id": "policy.banded_quantity_conditional_stock_profile.available",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "banded_quantity.fit_declared_stock_profile"
+            },
+            {
+              "field": "banded_quantity_fit_input_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "policy.banded_quantity_conditional_stock_profile.unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "banded_quantity.fit_declared_stock_profile.retain_unknown"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "policy.banded_quantity_conditional_stock_profile.use",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "banded_quantity.fit_declared_stock_profile"
+            }
+          ],
+          "reason_ref": "reason.retain_measured_stock_and_test_additive_recurrence"
+        },
+        {
+          "id": "policy.banded_quantity_conditional_stock_profile.unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "banded_quantity.fit_declared_stock_profile.retain_unknown"
+            }
+          ],
+          "reason_ref": "reason.banded_conditional_model_remains_unknown"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "meaning_template_ref_by_alternative": {},
+      "reason_refs": [
+        "reason.retain_measured_stock_and_test_additive_recurrence"
+      ],
+      "configuration": {
+        "single_value_kind": "ADDITIVE",
+        "coefficient_multipliers": [
+          -1,
+          1
+        ],
+        "coefficient_scale": "GCD_NONZERO_OBSERVED_DELTAS",
+        "lifetime_domain": [
+          "ONE_SHOT",
+          "PERMANENT"
+        ],
+        "cadence": 1,
+        "validation": "SETTLED_TURN",
+        "installation": "ONE_SHOT_IMMEDIATE",
+        "newly_installed_recurring_due": true,
+        "recurring_order": "OLD_THEN_NEW",
+        "insufficient_transfer": "UNKNOWN",
+        "failure": "LOCAL_STOP",
+        "completion_before_exhaustion": true,
+        "exhaustion": "LOCAL_STOP",
+        "choice_cost": 1,
+        "minimum_accepted_observations": 2,
+        "maximum_glyph_kinds": 6,
+        "maximum_parameter_assignments": 4096,
+        "maximum_witnesses": 3,
+        "model_status_ref": "supposition.current_additive_stock_recurrence",
+        "assumption_refs": [
+          "supposition.same_observed_value_links_token_and_column",
+          "supposition.retained_template_matched_carriers_are_active_occurrences",
+          "supposition.boundary_only_additive_stock_profile",
+          "supposition.observed_delta_gcd_is_current_effect_scale",
+          "supposition.unmatched_ui_components_have_no_quantity_effect"
+        ],
+        "retained_alternative_refs": [
+          "supposition.multicolor_transfer_unmodeled",
+          "supposition.micro_phase_unobserved",
+          "supposition.other_coefficient_scales_unmodeled",
+          "supposition.fixed_or_contextual_lifetimes_unmodeled"
+        ],
+        "maximum_evaluations": 65536,
+        "maximum_states": 4096,
+        "maximum_depth": 256,
+        "maximum_words": 128
+      }
+    },
+    {
+      "id": "policy.banded_quantity_fitted_suffix",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_canonical_quantity_question_and_same_epoch_measured_chart_observations"
+      ],
+      "applicability": [
+        "source_selected_revisable_additive_stock_extension"
+      ],
+      "invariants": [
+        "conditional_model_only",
+        "preserve_unknown_multicolor_alternatives",
+        "same_epoch_and_current_frame",
+        "no_native_completion_from_model",
+        "no_micro_phase_or_palette_claim"
+      ],
+      "falsifiers": [
+        "next_settled_quantities_or_retained_stock_disagree"
+      ],
+      "declared_alternative_refs": [
+        "banded_quantity.retain_conditional_suffix",
+        "banded_quantity.retain_conditional_suffix.retain_unknown"
+      ],
+      "fact_projections": [
+        {
+          "id": "policy.banded_quantity_fitted_suffix.available",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "banded_quantity.retain_conditional_suffix"
+            },
+            {
+              "field": "banded_quantity_conditional_suffix_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "policy.banded_quantity_fitted_suffix.unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "banded_quantity.retain_conditional_suffix.retain_unknown"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "policy.banded_quantity_fitted_suffix.use",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "banded_quantity.retain_conditional_suffix"
+            }
+          ],
+          "reason_ref": "reason.current_fitted_stock_model_has_complete_viable_suffix"
+        },
+        {
+          "id": "policy.banded_quantity_fitted_suffix.unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "banded_quantity.retain_conditional_suffix.retain_unknown"
+            }
+          ],
+          "reason_ref": "reason.banded_conditional_model_remains_unknown"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "banded_quantity.retain_conditional_suffix": "rule.banded_quantity_fitted_suffix"
+      },
+      "reason_refs": [
+        "reason.current_fitted_stock_model_has_complete_viable_suffix"
+      ]
+    },
+    {
+      "id": "rule.banded_quantity_fitted_suffix",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "premises": [
+        "source_selected_conditional_stock_profile",
+        "current_observations_support_all_fitted_effects_and_lifetimes",
+        "existing_quantity_calculator_returned_full_viable_suffix"
+      ],
+      "applicability": [
+        "current_banded_quantity_question"
+      ],
+      "invariants": [
+        "hypothesis_class_uniqueness_only",
+        "no_impossible_or_unique_world_claim",
+        "unmodeled_alternatives_retained",
+        "no_native_completion_or_action_permission"
+      ],
+      "falsifiers": [
+        "next_settled_quantities_stock_or_queue_tail_disagree"
+      ],
+      "reason_refs": [
+        "reason.current_fitted_stock_model_has_complete_viable_suffix"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "supposition.banded_quantity_fitted_suffix.{calculation_digest}",
+          "kind": "schema",
+          "label": "conditional recurring quantities with a full viable suffix",
+          "required_fields": [
+            "calculation_digest",
+            "measurement_frame_ref",
+            "context_epoch",
+            "parent_goal_ref",
+            "conditional_model_count",
+            "accepted_observation_count",
+            "unmodeled_choice_count",
+            "viable_suffix_count",
+            "witness_first_action_refs",
+            "parameter_table",
+            "model_receipt_digest",
+            "source_observation_refs"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.banded_quantity_fitted_suffix.v1",
+            "commitment": "revisable",
+            "canonical_fact_projection_enabled": true
+          },
+          "attribute_bindings": {
+            "calculation_digest": "calculation_digest",
+            "measurement_frame_ref": "measurement_frame_ref",
+            "context_epoch": "context_epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "conditional_model_count": "conditional_model_count",
+            "accepted_observation_count": "accepted_observation_count",
+            "unmodeled_choice_count": "unmodeled_choice_count",
+            "viable_suffix_count": "viable_suffix_count",
+            "witness_first_action_refs": "witness_first_action_refs",
+            "parameter_table": "parameter_table",
+            "model_receipt_digest": "model_receipt_digest",
+            "source_observation_refs": "source_observation_refs"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.banded_quantity_fitted_suffix.{calculation_digest}",
+          "predicate": "current_conditional_quantity_suffix_supported",
+          "family": "control",
+          "epistemic_status": "proposed",
+          "required_fields": [
+            "calculation_digest",
+            "measurement_frame_ref",
+            "context_epoch",
+            "parent_goal_ref",
+            "conditional_model_count",
+            "accepted_observation_count",
+            "unmodeled_choice_count",
+            "viable_suffix_count",
+            "witness_first_action_refs",
+            "parameter_table",
+            "model_receipt_digest",
+            "source_observation_refs"
+          ],
+          "static_attributes": {
+            "canonical_fact_projection_enabled": true,
+            "conditional_model_only": true
+          },
+          "attribute_bindings": {
+            "calculation_digest": "calculation_digest",
+            "measurement_frame_ref": "measurement_frame_ref",
+            "context_epoch": "context_epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "conditional_model_count": "conditional_model_count",
+            "accepted_observation_count": "accepted_observation_count",
+            "unmodeled_choice_count": "unmodeled_choice_count",
+            "viable_suffix_count": "viable_suffix_count",
+            "witness_first_action_refs": "witness_first_action_refs",
+            "parameter_table": "parameter_table",
+            "model_receipt_digest": "model_receipt_digest",
+            "source_observation_refs": "source_observation_refs"
+          },
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "supposition.banded_quantity_fitted_suffix.{calculation_digest}"
+          ]
+        }
+      ]
+    }
+  ]
+}

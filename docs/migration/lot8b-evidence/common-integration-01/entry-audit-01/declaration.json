@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.lot8b.common-functional-command.v1",
+  "status": "running",
+  "kind": "entry-audit",
+  "command": [
+    "node",
+    "scripts/audit-v6-entry-points.ts"
+  ],
+  "timeoutSeconds": 120,
+  "startedAt": "2026-11-12T04:30:08.781181+00:00",
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "headBefore": "2583d81d856c13295040db88f5df8b3a99906bdc",
+  "inputCount": 2443,
+  "globalLockAcquired": false,
+  "officialPerformanceMeasurement": false,
+  "gameExecution": false,
+  "gameReplay": false,
+  "published": false
+}

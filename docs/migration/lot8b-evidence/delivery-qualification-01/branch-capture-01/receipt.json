@@ -1,0 +1,49 @@
+{
+  "schema": "logos-engine.lot8b.functional-command.v1",
+  "key": "branch-capture",
+  "attempt": "branch-capture-01",
+  "plan": {
+    "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/branch-execution-plan.json",
+    "bytes": 66064,
+    "sha256": "cefd65a1a79daa6d48a33dd93aa48087e6a46b7e4f0811056baaf86f885af56f"
+  },
+  "command": [
+    "node",
+    "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture.mjs",
+    "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/candidate-native.json",
+    "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/capture.jsonl.gz"
+  ],
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T05:13:32.925878+00:00",
+  "timeoutSeconds": 300,
+  "headBefore": "451ad7cf4766fc2127be2f5fe2d50921dac0e75f",
+  "globalLockAcquired": false,
+  "officialPerformanceMeasurement": false,
+  "gameEngineExecuted": false,
+  "published": false,
+  "status": "failed",
+  "exitCode": 1,
+  "finishedAt": "2026-11-12T05:13:33.961322+00:00",
+  "elapsedSeconds": 1.0332434869997087,
+  "inputsUnchanged": true,
+  "changedInputPaths": [],
+  "log": {
+    "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/output.log.gz",
+    "bytes": 239,
+    "sha256": "c162ff4d499dfc41e307ea5a499e97eb55bdf76ea52866b6493576ad34686ada"
+  },
+  "childProcessReaped": true,
+  "outputs": [
+    {
+      "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/capture.jsonl.gz",
+      "bytes": 18204,
+      "sha256": "2ad3cd4f0a589c67c33b0f5251370162b75c0d20b6084b7808c8789b4bb15f81"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/capture.receipt.json",
+      "bytes": 90621,
+      "sha256": "30b8fe8dc5ca2369981d9e271834913e94f5da1ffc395eb5494993fa732d90a5"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+MODULE v6.source81
+WORKFLOW prepare(request: Any) -> Any
+    STATE
+        measured: Any
+        assessed: Any
+        decision: Any
+    STEP declared_composition_selection
+        CALL source81.project_candidates(request=request) -> measured
+        IF measured.has_eligible
+            SELECT assessed
+                FOR measured.goal_ref
+                FROM measured.alternative_refs
+                UNDER policy.prepare_observed_peer_composition_access
+                REQUIRE ["requirement.current_observed_peer_and_joint_body_access"]
+                PRESERVE measured.alternative_refs
+                FACTS measured.alternative_facts
+            CALL source81.finish_selection(request=request, measured=measured, assessment=assessed) -> decision
+            STOP decision
+        ELSE
+            CALL source81.abstain(measured=measured) -> decision
+            STOP decision
+WORKFLOW project(request: Any) -> Any
+    STATE
+        decision: Any
+    STEP publish_declared_experiment
+        CALL source81.publish(request=request) -> decision
+        STOP decision
+WORKFLOW continue_target(request: Any) -> Any
+    STATE
+        decision: Any
+    STEP retain_only_currently_revalidated_target
+        CALL source81.publish_continuation(request=request) -> decision
+        STOP decision
+
+WORKFLOW revise_target(request: Any) -> Any
+    STATE
+        decision: Any
+    STEP revise
+        CALL source81.publish_target_revision(request=request) -> decision
+        STOP decision

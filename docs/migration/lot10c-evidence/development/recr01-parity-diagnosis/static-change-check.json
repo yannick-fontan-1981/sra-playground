@@ -1,0 +1,10 @@
+{
+  "syntaxPassed": true,
+  "changedFunctions": [
+    "start_diagnostics",
+    "stop_diagnostics"
+  ],
+  "allOtherFunctionASTsUnchanged": true,
+  "originalSourceOrNativeEdited": false,
+  "afterSha256": "27bddc6a5e7163230bec12c48bd8395c30cd6726403ccf49d3157b9fdd4b1549"
+}

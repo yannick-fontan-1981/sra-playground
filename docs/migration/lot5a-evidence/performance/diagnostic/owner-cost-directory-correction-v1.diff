@@ -1,0 +1,251 @@
+--- docs/migration/lot5a-evidence/consolidate-owner-costs.mjs
++++ docs/migration/lot5a-evidence/consolidate-owner-costs-directory-v1.mjs
+@@ -1,7 +1,9 @@
+ #!/usr/bin/env node
+ /**
+- * Predeclared lot 5A owner-cost consolidation. No runtime or benchmark executes.
+- * CLI: node docs/migration/lot5a-evidence/consolidate-owner-costs.mjs CONTRACT OUTPUT
++ * Explicit post-measurement directory-only variant of the frozen lot 5A tool.
++ * CLI: node SCRIPT CONTRACT IO_CORRECTION OUTPUT
++ * Only the exact directory already bound by the original contract is admitted.
++ * Declared and executed generators remain distinct. No benchmark executes.
+  * Arithmetic, workSignature and report checks are identified adaptations of
+  * scripts/compare-native-cost-cohorts.mjs and compare-native-loop-costs.mjs.
+  * Historical tools, failures and raw inputs remain unchanged. This schema never
+@@ -19,6 +21,9 @@
+ const EVIDENCE = 'docs/migration/lot5a-evidence/';
+ const SELF = EVIDENCE + 'consolidate-owner-costs.mjs';
+ const REVIEWER = EVIDENCE + 'review-owner-costs.py';
++const EXECUTED_SELF = EVIDENCE + 'consolidate-owner-costs-directory-v1.mjs';
++const EXECUTED_REVIEWER = EVIDENCE + 'review-owner-costs-directory-v1.py';
++const EXACT_PERFORMANCE_DIRECTORY = EVIDENCE + 'performance';
+ const HISTORICAL = 'scripts/compare-native-cost-cohorts.mjs';
+ const PAIR = 'scripts/compare-native-loop-costs.mjs';
+ const STAGES = ['session_elapsed', 'new_decision', 'known_prefix_service', 'known_prefix_request',
+@@ -71,6 +76,37 @@
+     assert.deepEqual(current, omit(record, ['path']), 'Frozen capture input changed: ' + record.path);
+     retainFingerprint(absolute, current);
+   } else await verify(record);
++}
++async function loadDirectoryCorrection(path, contractFile, contract, names) {
++  const correction = await readEvidence(path), value = correction.value;
++  assert.equal(value.schema, 'logos-engine.lot5a-owner-cost-io-correction.v1');
++  assert.equal(value.status, 'declared_post_measurement_io_correction');
++  assert.equal(value.postMeasurement, true);
++  assert.equal(value.scope, 'exact_predeclared_performance_directory_only');
++  assert.equal(value.allowedPerformanceDirectory, EXACT_PERFORMANCE_DIRECTORY);
++  assert.equal(contract.performanceDirectory, value.allowedPerformanceDirectory);
++  for (const key of ['rulesChanged', 'calculationsChanged', 'rawInputsRewritten']) assert.equal(value[key], false);
++  assert.deepEqual(value.contract, contractFile.fingerprint); assert.deepEqual(value.declaration, contract.declaration);
++  assert.deepEqual(value.declaredTools, contract.tools);
++  assert.deepEqual(Object.keys(value.executedTools).sort(), ['consolidator', 'reviewer']);
++  assert.equal(value.executedTools.consolidator.path, EXECUTED_SELF);
++  assert.equal(value.executedTools.reviewer.path, EXECUTED_REVIEWER);
++  for (const record of Object.values(value.executedTools)) await verify(record);
++  const windowFile = await readEvidence(names('window.json'));
++  assert.deepEqual(value.window, windowFile.fingerprint);
++  assert.equal(windowFile.value.status, 'passed'); assert.equal(windowFile.value.finalIntegrity, 'passed');
++  await verify(value.originalFailure);
++  const failure = (await readEvidence(value.originalFailure.path)).value;
++  assert.equal(failure.status, 'retained_actual_analysis_failure'); assert.equal(failure.exitCode, 1);
++  assert.deepEqual(failure.generator, contract.tools.consolidator);
++  assert.deepEqual(failure.contract, contractFile.fingerprint); assert.deepEqual(failure.window, value.window);
++  assert.equal(failure.outputExists, false); await verify(failure.log);
++  assert.equal(failure.reportedError.error, 'A new lot 5A window directory is required');
++  assert.ok(instant(windowFile.value.finishedAt) <= instant(failure.recordedAt)
++    && instant(failure.recordedAt) <= instant(value.recordedAt), 'Correction must remain explicitly after measurement and failure');
++  assert.ok(value.sourceChecks.length > 0 && value.sourceChecks.every(item => item.passed === true));
++  for (const record of value.boundInputs) await verify(record);
++  return correction;
+ }
+ function instant(value) {
+   assert.equal(typeof value, 'string');
+@@ -356,15 +392,15 @@
+ 
+ 
+ async function main() {
+-  const [contractArg, outputArg, ...extra] = process.argv.slice(2);
+-  assert.ok(contractArg && outputArg && !extra.length, 'Usage: consolidate-owner-costs.mjs CONTRACT OUTPUT');
++  const [contractArg, correctionArg, outputArg, ...extra] = process.argv.slice(2);
++  assert.ok(contractArg && correctionArg && outputArg && !extra.length, 'Usage: consolidate-owner-costs-directory-v1.mjs CONTRACT IO_CORRECTION OUTPUT');
+   const output = inside(outputArg), contractFile = await readEvidence(contractArg), contract = contractFile.value;
+   assert.ok(contractFile.fingerprint.path.startsWith(EVIDENCE));
+   try { await access(output); throw new Error('Output already exists'); } catch (error) { if (error.code !== 'ENOENT') throw error; }
+   assert.equal(contract.schema, 'logos-engine.lot5a-owner-cost-contract.v2'); assert.equal(contract.lot, '5A');
+   assert.deepEqual(contract.structuralExpectation, EXPECTATION);
+   const perf = relative(ROOT, inside(contract.performanceDirectory));
+-  assert.ok(perf.startsWith(EVIDENCE) && perf !== EVIDENCE + 'performance', 'A new lot 5A window directory is required');
++  assert.equal(perf, EXACT_PERFORMANCE_DIRECTORY, 'Only the exact already-declared lot 5A directory is admitted');
+   assert.equal(dirname(output), inside(perf), 'Write the qualified aggregate beside its own window');
+   const names = suffix => perf + '/' + suffix;
+   assert.equal(contract.declaration.path, names('declaration.json'));
+@@ -379,6 +415,7 @@
+   assert.deepEqual(Object.keys(contract.tools).sort(), ['consolidator', 'reviewer']);
+   assert.equal(contract.tools.consolidator.path, SELF); assert.equal(contract.tools.reviewer.path, REVIEWER);
+   for (const record of Object.values(contract.tools)) await verify(record);
++  const ioCorrection = await loadDirectoryCorrection(correctionArg, contractFile, contract, names);
+   const history = (await readEvidence('docs/migration/lot3h-evidence/performance/declaration.json')).value;
+   const historical = [...declaration.officialTools, declaration.globalDecisionTool, declaration.globalCalculationTool];
+   assert.deepEqual(historical, [...history.officialTools, history.globalDecisionTool, history.globalCalculationTool]);
+@@ -592,7 +629,9 @@
+   const derivedFrom = [await fingerprint(HISTORICAL), await fingerprint(PAIR)];
+   const report = {
+     schema: 'logos-engine.lot5a-owner-cost-consolidation.v2', status: 'qualified_consolidation_complete', recordedAt: new Date().toISOString(),
+-    generator: await fingerprint(SELF), derivedFrom, contract: contractFile.fingerprint, declaration: contract.declaration,
++    generator: await fingerprint(EXECUTED_SELF), declaredGenerator: contract.tools.consolidator,
++    ioCorrection: ioCorrection.fingerprint, postMeasurementIoCorrection: true,
++    derivedFrom, contract: contractFile.fingerprint, declaration: contract.declaration,
+     inputs: { policy: policyFile.fingerprint, window: windowFile.fingerprint, readiness: readinessFile.fingerprint,
+       staticPreflight: staticFile.fingerprint, sourceInventory: contract.ownerInventory, sourceEvidence: contract.sourceEvidence,
+       structuralFixture: contract.structuralFixture, structuralAttribution: structuralFixture.attribution,
+@@ -611,9 +650,10 @@
+     includedMeasuredSessions, excludedWarmups, structuralDifferences, globalCases, globalAccepted,
+     globalStatus: globalAccepted ? 'accepted_under_predeclared_owner_cost_rule' : 'global_budget_review_required',
+     measuredSessions: 32, measuredActions: 400, excludedWarmupSessions: 8, excludedWarmupActions: 24,
+-    qualification: 'Supplemental predeclared owner-cost analysis only. The historical strict comparison remains failed. Every trial matches the exact functional shape captured and causally qualified before the contract and window. Every qualified structural position is retained, including warmups. Matching measured shapes does not prove uncaptured private graph leaves. Raw reports and timings are unchanged. All measured sessions and both cohorts are retained. Phase overruns remain visible. An independent Python review must reproduce these calculations before this supplemental global result is used.',
++    qualification: 'This executed tool is an explicitly post-measurement directory-only variant; declaredGenerator identifies the unchanged pre-window tool. It accepts only the exact directory already bound by the original contract. Supplemental predeclared owner-cost analysis only. The historical strict comparison remains failed. Every trial matches the exact functional shape captured and causally qualified before the contract and window. Every qualified structural position is retained, including warmups. Matching measured shapes does not prove uncaptured private graph leaves. Raw reports and timings are unchanged. All measured sessions and both cohorts are retained. Phase overruns remain visible. An independent Python review must reproduce these calculations before this supplemental global result is used.',
+   };
+   assert.ok(instant(strict.finishedAt) <= instant(report.recordedAt));
++  assert.ok(instant(ioCorrection.value.recordedAt) <= instant(report.recordedAt));
+   for (const [path, digest] of touched) assert.equal((await hashFile(path)).sha256, digest, 'Input changed before output: ' + path);
+   assert.ok(!touched.has(output), 'Output must not replace an input');
+   await mkdir(dirname(output), { recursive: true });
+@@ -627,6 +667,7 @@
+   catch (error) {
+     console.error(JSON.stringify({ schema: 'logos-engine.lot5a-owner-cost-analysis-failure.v1', status: 'owner_cost_analysis_blocked',
+       structuralProof: false, historicalStrictPassed: false, outputWritten: false,
++      executedTool: EXECUTED_SELF, declaredTool: SELF, postMeasurementIoCorrection: true,
+       error: error instanceof Error ? error.message : String(error) }));
+     process.exitCode = 1;
+   }
+--- docs/migration/lot5a-evidence/review-owner-costs.py
++++ docs/migration/lot5a-evidence/review-owner-costs-directory-v1.py
+@@ -1,7 +1,11 @@
+ #!/usr/bin/env python3
+-"""Independently review the predeclared lot 5A owner-qualified cost evidence.
+-
+-Usage: python -B docs/migration/lot5a-evidence/review-owner-costs.py CONTRACT AGGREGATE OUTPUT
++"""Post-measurement provenance variant of the independent lot 5A cost reviewer.
++
++Usage: python -B SCRIPT CONTRACT IO_CORRECTION AGGREGATE OUTPUT
++
++Only the exact already-declared performance directory is admitted by the paired
++JavaScript variant. This Python copy adds the explicit executed/declared tool
++provenance and correction binding; its independent arithmetic remains unchanged.
+ 
+ This standard-library implementation reads retained evidence only. It never
+ imports the JavaScript consolidator or another review helper, starts a process,
+@@ -237,7 +241,50 @@
+         encoded = json.dumps(dict(sorted(files.items())), separators=(",", ":"), ensure_ascii=False).encode()
+         self.equal(role + "/manifest_digest", hashlib.sha256(encoded).hexdigest(), value["digest"])
+ 
+-    def load_protocol(self, contract_path, aggregate_path):
++    def load_directory_correction(self, correction_path, contract, contract_record, directory):
++        correction, correction_record = self.read(correction_path)
++        self.check("post_measurement_directory_correction",
++                   correction["schema"] == "logos-engine.lot5a-owner-cost-io-correction.v1"
++                   and correction["status"] == "declared_post_measurement_io_correction"
++                   and correction["postMeasurement"] is True
++                   and correction["scope"] == "exact_predeclared_performance_directory_only"
++                   and correction["rulesChanged"] is False and correction["calculationsChanged"] is False
++                   and correction["rawInputsRewritten"] is False)
++        self.equal("only_exact_predeclared_directory", correction["allowedPerformanceDirectory"],
++                   "docs/migration/lot5a-evidence/performance")
++        self.equal("directory_correction_location", contract["performanceDirectory"], correction["allowedPerformanceDirectory"])
++        self.equal("directory_correction_contract", correction["contract"], contract_record)
++        self.equal("directory_correction_declaration", correction["declaration"], contract["declaration"])
++        self.equal("directory_correction_declared_tools", correction["declaredTools"], contract["tools"])
++        self.equal("directory_correction_executed_roles", sorted(correction["executedTools"]), ["consolidator", "reviewer"])
++        for role, record in correction["executedTools"].items():
++            self.verify(record)
++            self.check("directory_variant_distinct_path/" + role, record["path"] != contract["tools"][role]["path"])
++        self.equal("executed_reviewer_identity", correction["executedTools"]["reviewer"], self.fingerprint(__file__))
++        self.equal("executed_consolidator_path", correction["executedTools"]["consolidator"]["path"],
++                   "docs/migration/lot5a-evidence/consolidate-owner-costs-directory-v1.mjs")
++        self.verify(correction["window"])
++        self.equal("directory_correction_window", correction["window"], self.fingerprint(directory / "window.json"))
++        window, _ = self.read(correction["window"]["path"])
++        self.check("directory_correction_complete_window", window["status"] == window["finalIntegrity"] == "passed")
++        self.verify(correction["originalFailure"])
++        failure, _ = self.read(correction["originalFailure"]["path"])
++        self.check("actual_original_directory_failure", failure["status"] == "retained_actual_analysis_failure"
++                   and failure["exitCode"] == 1 and failure["outputExists"] is False
++                   and failure["reportedError"]["error"] == "A new lot 5A window directory is required")
++        self.equal("directory_failure_declared_generator", failure["generator"], contract["tools"]["consolidator"])
++        self.equal("directory_failure_contract", failure["contract"], contract_record)
++        self.equal("directory_failure_window", failure["window"], correction["window"])
++        self.verify(failure["log"])
++        self.check("directory_correction_after_measurement", instant(window["finishedAt"])
++                   <= instant(failure["recordedAt"]) <= instant(correction["recordedAt"]))
++        self.check("directory_source_checks", bool(correction["sourceChecks"])
++                   and all(item["passed"] is True for item in correction["sourceChecks"]))
++        for record in correction["boundInputs"]:
++            self.verify(record)
++        return correction, correction_record
++
++    def load_protocol(self, contract_path, correction_path, aggregate_path):
+         contract, contract_record = self.read(contract_path)
+         self.check("contract_schema", contract["schema"] == "logos-engine.lot5a-owner-cost-contract.v2" and contract["lot"] == "5A")
+         self.equal("four_structural_paths_and_functional_fixture", contract["structuralExpectation"], STRUCTURAL_EXPECTATION)
+@@ -253,7 +300,9 @@
+         self.equal("owner_tool_roles", sorted(contract["tools"]), ["consolidator", "reviewer"])
+         for record in contract["tools"].values():
+             self.verify(record)
+-        self.equal("independent_reviewer_identity", contract["tools"]["reviewer"], self.fingerprint(__file__))
++        self.equal("declared_reviewer_path", contract["tools"]["reviewer"]["path"], "docs/migration/lot5a-evidence/review-owner-costs.py")
++        self.equal("independent_reviewer_identity", contract["tools"]["reviewer"], self.fingerprint(contract["tools"]["reviewer"]["path"]))
++        correction, correction_record = self.load_directory_correction(correction_path, contract, contract_record, directory)
+         historical, _ = self.read("docs/migration/lot3h-evidence/performance/declaration.json")
+         for key in ("officialTools", "globalDecisionTool", "globalCalculationTool"):
+             self.equal("unchanged_historical_tools/" + key, declaration[key], historical[key])
+@@ -346,7 +395,11 @@
+         aggregate, aggregate_record = self.read(aggregate_path)
+         self.check("qualified_aggregate_schema", aggregate["schema"] == "logos-engine.lot5a-owner-cost-consolidation.v2"
+                    and aggregate["status"] == "qualified_consolidation_complete")
+-        self.equal("aggregate_generator", aggregate["generator"], contract["tools"]["consolidator"])
++        self.equal("aggregate_generator", aggregate["generator"], correction["executedTools"]["consolidator"])
++        self.equal("aggregate_declared_generator", aggregate["declaredGenerator"], contract["tools"]["consolidator"])
++        self.equal("aggregate_directory_correction", aggregate["ioCorrection"], correction_record)
++        self.check("aggregate_explicitly_post_measurement", aggregate["postMeasurementIoCorrection"] is True
++                   and instant(correction["recordedAt"]) <= instant(aggregate["recordedAt"]))
+         self.equal("aggregate_contract", aggregate["contract"], contract_record)
+         self.equal("aggregate_declaration", aggregate["declaration"], declaration_record)
+         old_tools = {record["path"]: record for record in tools}
+@@ -363,7 +416,8 @@
+                 "declaration": declaration, "declarationRecord": declaration_record, "policy": policy,
+                 "cases": cases, "baseline": baseline, "candidate": candidate, "window": window,
+                 "windowRecord": window_record, "aggregate": aggregate, "aggregateRecord": aggregate_record,
+-                "historicalTools": old_tools, "structuralFixture": fixture}
++                "historicalTools": old_tools, "structuralFixture": fixture,
++                "ioCorrection": correction, "ioCorrectionRecord": correction_record}
+ 
+     def load_structural_fixture(self, contract, declaration, manifests):
+         self.verify(contract["structuralFixture"])
+@@ -845,7 +899,10 @@
+         return {"schema": "logos-engine.lot5a-owner-cost-review.v2", "status": "qualified_owner_cost_review_passed",
+                 "recordedAt": datetime.now(timezone.utc).isoformat(), "lot": "5A",
+                 "nativeVersion": context["policy"]["candidate"]["nativeVersion"],
+-                "generator": context["contract"]["tools"]["reviewer"], "derivedFrom": DERIVED_FROM,
++                "generator": context["ioCorrection"]["executedTools"]["reviewer"],
++                "declaredGenerator": context["contract"]["tools"]["reviewer"],
++                "ioCorrection": context["ioCorrectionRecord"], "postMeasurementIoCorrection": True,
++                "derivedFrom": DERIVED_FROM,
+                 "contract": context["contractRecord"], "aggregate": context["aggregateRecord"],
+                 "declaration": context["declarationRecord"], "inputs": inputs, "watchedExternalInputs": external,
+                 "structuralFixture": context["contract"]["structuralFixture"], "structuralAttribution": context["structuralFixture"]["attribution"],
+@@ -868,13 +925,14 @@
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument("contract")
++    parser.add_argument("correction")
+     parser.add_argument("aggregate")
+     parser.add_argument("output")
+     args = parser.parse_args()
+     review = Review()
+     output = review.local(args.output)
+     review.check("exclusive_new_output", not output.exists())
+-    context = review.load_protocol(args.contract, args.aggregate)
++    context = review.load_protocol(args.contract, args.correction, args.aggregate)
+     review.load_window(context)
+     review.verify_structure_and_ledgers(context)
+     review.verify_historical_failure(context)

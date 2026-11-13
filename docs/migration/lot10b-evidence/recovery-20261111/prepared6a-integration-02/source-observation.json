@@ -1,0 +1,229 @@
+{
+  "schema": "logos-engine.lot10b.prepared-source-integration.v1",
+  "recordedAt": "2026-11-11T12:28:34.678644+00:00",
+  "baseCommit": "3a70463039768f7114edae7d94d7dd33b7f36aa8",
+  "preparedNativeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+  "preparedNativeFileCount": 306,
+  "preparedSourceManifest": {
+    "path": "docs/migration/lot6a-evidence/integrated-final/source-manifest.json",
+    "sha256": "52f3624d419cb8209e6545274b3867b5f150d8630a0daa05369fd7613ed435fe",
+    "bytes": 36332
+  },
+  "preparedSourceArchiveReceipt": {
+    "path": "docs/migration/lot6a-evidence/integrated-final/source-archive.json",
+    "sha256": "5f11ce197e29b442e93ce17258b1e912d0e25a4220dbd0b7c9a9f4ed3688d33f",
+    "bytes": 38743
+  },
+  "preparedSourceArchive": {
+    "path": "docs/migration/lot6a-evidence/integrated-final/source-archive.tar.gz",
+    "sha256": "75b18dc6770b8609b966fbac535d588761ee39c2f9fe55d7a85b7d95c2c3c8b4",
+    "bytes": 1880163
+  },
+  "files": [
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "preparedSha256": "6a6a52060c9202f8cf64b252bb849b6bf569a78b50a2e17adc4bd495471fecbd",
+      "bytes": 157861,
+      "archivedAtPreparedFreeze": true,
+      "preparedWorkingSha256AtImport": "6a6a52060c9202f8cf64b252bb849b6bf569a78b50a2e17adc4bd495471fecbd",
+      "preparedWorkingMatchesImportedSource": true,
+      "mode": "three_way_merge",
+      "baseSha256": "cb4a2aa588ada8684d6211504fd810984b16f0a2b52a8c78abeec0a4a73fea31",
+      "currentBeforeSha256": "9ea6a86ff3bf496fe815b5003d1925b6392c5de0c779d44022c1cb8b93090388",
+      "mergeExitCode": 8,
+      "copiedOrMergedSha256": "bec59371bc9bca17dabb842f09d3fef18c522fe64f61562375f48f341e018a22"
+    },
+    {
+      "path": "src/logos-engine/v6-preview-packing-calculus.ts",
+      "preparedSha256": "ca48f8b5622fe65ea71c54fe0d31e9171280a85154cad3719d10da3523cc2b75",
+      "bytes": 13276,
+      "archivedAtPreparedFreeze": true,
+      "preparedWorkingSha256AtImport": "ca48f8b5622fe65ea71c54fe0d31e9171280a85154cad3719d10da3523cc2b75",
+      "preparedWorkingMatchesImportedSource": true,
+      "mode": "exact_copy",
+      "copiedOrMergedSha256": "ca48f8b5622fe65ea71c54fe0d31e9171280a85154cad3719d10da3523cc2b75"
+    },
+    {
+      "path": "src/logos-engine/v6-preview-packing-geometry.ts",
+      "preparedSha256": "bd2dbde5a5975b611e627171e46b9f4a7c418d0341b4c6ef653eb11bb707adc2",
+      "bytes": 8121,
+      "archivedAtPreparedFreeze": true,
+      "preparedWorkingSha256AtImport": "bd2dbde5a5975b611e627171e46b9f4a7c418d0341b4c6ef653eb11bb707adc2",
+      "preparedWorkingMatchesImportedSource": true,
+      "mode": "exact_copy",
+      "copiedOrMergedSha256": "bd2dbde5a5975b611e627171e46b9f4a7c418d0341b4c6ef653eb11bb707adc2"
+    },
+    {
+      "path": "src/logos-engine/v6-preview-packing-types.ts",
+      "preparedSha256": "93ef62ff8da9990f6a25ede4ed29b16ccd2fafa94771c06db93887d2cd324e10",
+      "bytes": 4879,
+      "archivedAtPreparedFreeze": true,
+      "preparedWorkingSha256AtImport": "93ef62ff8da9990f6a25ede4ed29b16ccd2fafa94771c06db93887d2cd324e10",
+      "preparedWorkingMatchesImportedSource": true,
+      "mode": "exact_copy",
+      "copiedOrMergedSha256": "93ef62ff8da9990f6a25ede4ed29b16ccd2fafa94771c06db93887d2cd324e10"
+    },
+    {
+      "path": "src/logos-engine/v6-preview-packing.ts",
+      "preparedSha256": "f4ca39b35d6cd8acf14f9efbab6f1de0f7f4694906e4383d53cbec1d6dc9b450",
+      "bytes": 27050,
+      "archivedAtPreparedFreeze": true,
+      "preparedWorkingSha256AtImport": "f4ca39b35d6cd8acf14f9efbab6f1de0f7f4694906e4383d53cbec1d6dc9b450",
+      "preparedWorkingMatchesImportedSource": true,
+      "mode": "exact_copy",
+      "copiedOrMergedSha256": "f4ca39b35d6cd8acf14f9efbab6f1de0f7f4694906e4383d53cbec1d6dc9b450"
+    },
+    {
+      "path": "tests/helpers/v6-live-game-campaign.ts",
+      "preparedSha256": "0c9c32e03b6ef130f95eaa881b937cdeab79d9067103a18cb4895e3f4e1df76a",
+      "bytes": 86909,
+      "archivedAtPreparedFreeze": true,
+      "preparedWorkingSha256AtImport": "62a29629b68b316dafd2a5a0868fc16409b5805591ad4849888107d94ce0e50a",
+      "preparedWorkingMatchesImportedSource": false,
+      "mode": "three_way_merge",
+      "baseSha256": "c020a1346db8660f477dee9b40e86698914ab43be020a8ea826a9aac3038f6de",
+      "currentBeforeSha256": "629dec27ffedfe0091b2d0ec052c441e309952f224edf04af90c8e552b0a0653",
+      "mergeExitCode": 2,
+      "copiedOrMergedSha256": "e3da733dfc0383f2066c43dcd692f7e2c3d73c1d2b3083a74e5bc44541466f65"
+    },
+    {
+      "path": "tests/helpers/capture-preview-packing.ts",
+      "preparedSha256": "5c5e9cba61c5157c761dadf0d4385fbe342210419305c023760edf0c0154b835",
+      "bytes": 2645,
+      "archivedAtPreparedFreeze": true,
+      "preparedWorkingSha256AtImport": "5c5e9cba61c5157c761dadf0d4385fbe342210419305c023760edf0c0154b835",
+      "preparedWorkingMatchesImportedSource": true,
+      "mode": "exact_copy",
+      "copiedOrMergedSha256": "5c5e9cba61c5157c761dadf0d4385fbe342210419305c023760edf0c0154b835"
+    },
+    {
+      "path": "scripts/audit-v6-entry-points.ts",
+      "preparedSha256": "f8bab69fda507cddb2f4b5b5521a65ae09d16b988e7fa1442bc4eef532307dbf",
+      "bytes": 7274,
+      "archivedAtPreparedFreeze": false,
+      "preparedWorkingSha256AtImport": "f8bab69fda507cddb2f4b5b5521a65ae09d16b988e7fa1442bc4eef532307dbf",
+      "preparedWorkingMatchesImportedSource": true,
+      "mode": "three_way_merge",
+      "baseSha256": "075867c478045a3130f820d6178cf4ff2cdc13b6939ec9d3014836d8c1462d4b",
+      "currentBeforeSha256": "2c3e2146483f46428d0533330a0884fbdb0bc01e09c885992d0d35c4162be1aa",
+      "mergeExitCode": 1,
+      "copiedOrMergedSha256": "0992b39140eaed3ab1e05a237555c3f585aa13985e5c8cb850c172791cb84657"
+    },
+    {
+      "path": "tests/v6-preview-packing-native.test.ts",
+      "preparedSha256": "aa0653c551322bb88f98b2c11ae308923fa609ad624ac684d70209bd51e47947",
+      "bytes": 15853,
+      "archivedAtPreparedFreeze": false,
+      "preparedWorkingSha256AtImport": "aa0653c551322bb88f98b2c11ae308923fa609ad624ac684d70209bd51e47947",
+      "preparedWorkingMatchesImportedSource": true,
+      "mode": "exact_copy",
+      "copiedOrMergedSha256": "aa0653c551322bb88f98b2c11ae308923fa609ad624ac684d70209bd51e47947"
+    },
+    {
+      "path": "tests/v6-preview-packing-reference.test.ts",
+      "preparedSha256": "eb5f392ed9c0cf518c558900399876fee0e6cea210482f8525868f82be3038c0",
+      "bytes": 589,
+      "archivedAtPreparedFreeze": false,
+      "preparedWorkingSha256AtImport": "eb5f392ed9c0cf518c558900399876fee0e6cea210482f8525868f82be3038c0",
+      "preparedWorkingMatchesImportedSource": true,
+      "mode": "exact_copy",
+      "copiedOrMergedSha256": "eb5f392ed9c0cf518c558900399876fee0e6cea210482f8525868f82be3038c0"
+    },
+    {
+      "path": "tests/v6-preview-packing-integration.test.ts",
+      "preparedSha256": "cc53204d05704cdfb1cf6f17043103ee1133952ddcf2137a8fd86810e49b4a9a",
+      "bytes": 10515,
+      "archivedAtPreparedFreeze": false,
+      "preparedWorkingSha256AtImport": "cc53204d05704cdfb1cf6f17043103ee1133952ddcf2137a8fd86810e49b4a9a",
+      "preparedWorkingMatchesImportedSource": true,
+      "mode": "exact_copy",
+      "copiedOrMergedSha256": "cc53204d05704cdfb1cf6f17043103ee1133952ddcf2137a8fd86810e49b4a9a"
+    },
+    {
+      "path": "tests/v6-preview-capture.test.ts",
+      "preparedSha256": "0310091777271e9e220d16e7b3a58066a868902196cd43fd14cd70c8949a3463",
+      "bytes": 5994,
+      "archivedAtPreparedFreeze": false,
+      "preparedWorkingSha256AtImport": "0310091777271e9e220d16e7b3a58066a868902196cd43fd14cd70c8949a3463",
+      "preparedWorkingMatchesImportedSource": true,
+      "mode": "exact_copy",
+      "copiedOrMergedSha256": "0310091777271e9e220d16e7b3a58066a868902196cd43fd14cd70c8949a3463"
+    },
+    {
+      "path": "tests/fixtures/v6-preview-packing/reference.json.gz",
+      "preparedSha256": "28753606394946cf26d9f6a44c5ce13aa9978f26e198fb52c80f716e71846795",
+      "bytes": 127971,
+      "archivedAtPreparedFreeze": false,
+      "preparedWorkingSha256AtImport": "28753606394946cf26d9f6a44c5ce13aa9978f26e198fb52c80f716e71846795",
+      "preparedWorkingMatchesImportedSource": true,
+      "mode": "exact_copy",
+      "copiedOrMergedSha256": "28753606394946cf26d9f6a44c5ce13aa9978f26e198fb52c80f716e71846795"
+    },
+    {
+      "path": "scripts/compare-v6-preview-packing-reference.ts",
+      "preparedSha256": "413df36916c95308b1c1bc62e43a5bc4e968f4b84b43a5216b94f0a84ef20fff",
+      "bytes": 11455,
+      "archivedAtPreparedFreeze": false,
+      "preparedWorkingSha256AtImport": "413df36916c95308b1c1bc62e43a5bc4e968f4b84b43a5216b94f0a84ef20fff",
+      "preparedWorkingMatchesImportedSource": true,
+      "mode": "exact_copy",
+      "copiedOrMergedSha256": "413df36916c95308b1c1bc62e43a5bc4e968f4b84b43a5216b94f0a84ef20fff"
+    },
+    {
+      "path": "scripts/export-v6-preview-packing-reference.py",
+      "preparedSha256": "dced3e4702fef4b319a409f25ec8a1e0a15798d38fb169e5bc8329e203c47de4",
+      "bytes": 31295,
+      "archivedAtPreparedFreeze": false,
+      "preparedWorkingSha256AtImport": "dced3e4702fef4b319a409f25ec8a1e0a15798d38fb169e5bc8329e203c47de4",
+      "preparedWorkingMatchesImportedSource": true,
+      "mode": "exact_copy",
+      "copiedOrMergedSha256": "dced3e4702fef4b319a409f25ec8a1e0a15798d38fb169e5bc8329e203c47de4"
+    },
+    {
+      "path": "scripts/compare-preview-packing-public-parity.py",
+      "preparedSha256": "06c684ddf63a1a99f7b905266d8205421101530beab10783bb691a6c373018fd",
+      "bytes": 30645,
+      "archivedAtPreparedFreeze": false,
+      "preparedWorkingSha256AtImport": "06c684ddf63a1a99f7b905266d8205421101530beab10783bb691a6c373018fd",
+      "preparedWorkingMatchesImportedSource": true,
+      "mode": "exact_copy",
+      "copiedOrMergedSha256": "06c684ddf63a1a99f7b905266d8205421101530beab10783bb691a6c373018fd"
+    },
+    {
+      "path": "docs/migration/lot6a-preview-packing-lineage.md",
+      "preparedSha256": "7f1a1cad1453c14c2325fb8a2447f57f83c37e1c3698ad010566f6b1a97c4e06",
+      "bytes": 28893,
+      "archivedAtPreparedFreeze": false,
+      "preparedWorkingSha256AtImport": "7f1a1cad1453c14c2325fb8a2447f57f83c37e1c3698ad010566f6b1a97c4e06",
+      "preparedWorkingMatchesImportedSource": true,
+      "mode": "exact_copy",
+      "copiedOrMergedSha256": "7f1a1cad1453c14c2325fb8a2447f57f83c37e1c3698ad010566f6b1a97c4e06"
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/recovery/native-source-review.json",
+      "preparedSha256": "66233d1a4b346b751725e68fb4f2b8ad70d7c45bf822eb9c659eb8b428d39fa6",
+      "bytes": 10203,
+      "archivedAtPreparedFreeze": false,
+      "preparedWorkingSha256AtImport": "66233d1a4b346b751725e68fb4f2b8ad70d7c45bf822eb9c659eb8b428d39fa6",
+      "preparedWorkingMatchesImportedSource": true,
+      "mode": "exact_copy",
+      "copiedOrMergedSha256": "66233d1a4b346b751725e68fb4f2b8ad70d7c45bf822eb9c659eb8b428d39fa6"
+    }
+  ],
+  "newMappings": [
+    [
+      "agents/yf_arc3_v6/morphology_policy/preview_packing/family.py",
+      "agents/yf_arc3_v6/morphology_policy/preview_packing/donor.py",
+      "agents/yf_arc3_v6/morphology_policy/preview_packing/base.py"
+    ],
+    [
+      "agents/yf_arc3_v5/capabilities/preview_piece_packing.py"
+    ]
+  ],
+  "unresolvedMergeFiles": [
+    "src/logos-engine/v6-native-runtime.ts",
+    "tests/helpers/v6-live-game-campaign.ts",
+    "scripts/audit-v6-entry-points.ts"
+  ],
+  "qualification": "Exact actual prepared PreviewPacking source, not a publication. Five native inputs and both capture inputs were checked against the existing frozen tar archive; supplemental tests/exporters are fingerprinted actual prepared bytes. Common files use explicit three-way merges from actual Site95. The imported common harness comes from the actual freeze; its later working copy is separately fingerprinted and not silently substituted. Final source reconciliation against the actual published predecessor remains required. No game, test, replay or clock was run by this import."
+}

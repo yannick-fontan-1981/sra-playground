@@ -1,0 +1,118 @@
+{
+  "schema": "logos-engine.lot10c.priority066-build-preparation.v1",
+  "recordedAt": "2026-11-12T01:26:24.369390+00:00",
+  "sourceCheckout": "/workspace/sites/sra-lot8a-publish065-20261111/.sites-checkout",
+  "dependencyInputsMatched": [
+    {
+      "path": "package.json",
+      "sha256": "c0da9e013fd85bd7f279f1b496acd034536747fc88abab34b109067766b73154"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "93bc180b1ecf92e7976bb54bcb3a0aef1d3e96d65c41ee300676207832cd274e"
+    },
+    {
+      "path": "scripts/python-runtime-assets.json",
+      "sha256": "e702a914cf88345d486d7d8a36c95f2076287d8935e02cc428b7a66749500d43"
+    }
+  ],
+  "nodeModulesIndependentCopy": true,
+  "internalLinksVerified": [
+    ".bin/rolldown",
+    ".bin/vite",
+    ".bin/tsc",
+    ".bin/nanoid",
+    ".bin/tsserver"
+  ],
+  "assetsVerified": [
+    {
+      "path": "public/vendor/pyodide/pyodide.mjs",
+      "bytes": 17931,
+      "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109"
+    },
+    {
+      "path": "public/vendor/pyodide/pyodide.asm.mjs",
+      "bytes": 1250344,
+      "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635"
+    },
+    {
+      "path": "public/vendor/pyodide/pyodide.asm.wasm",
+      "bytes": 9598218,
+      "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6"
+    },
+    {
+      "path": "public/vendor/pyodide/python_stdlib.zip",
+      "bytes": 2545637,
+      "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a"
+    },
+    {
+      "path": "public/vendor/pyodide/pyodide-lock.json",
+      "bytes": 119077,
+      "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010"
+    },
+    {
+      "path": "public/vendor/pyodide/package.json",
+      "bytes": 2999,
+      "sha256": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b"
+    },
+    {
+      "path": "public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+      "bytes": 2960568,
+      "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf"
+    },
+    {
+      "path": "public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+      "bytes": 463578,
+      "sha256": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7"
+    },
+    {
+      "path": "public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+      "bytes": 44613,
+      "sha256": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29"
+    },
+    {
+      "path": "public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+      "bytes": 1310164,
+      "sha256": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da"
+    },
+    {
+      "path": "public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+      "bytes": 11963,
+      "sha256": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51"
+    },
+    {
+      "path": "public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+      "bytes": 14610,
+      "sha256": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051"
+    }
+  ],
+  "assetCount": 12,
+  "assetBytes": 18339702,
+  "fixturesCopied": [
+    {
+      "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz",
+      "bytes": 1032946,
+      "sha256": "d1bf31b8fbf899aa9d85baa5fdaf9549b7c6f6a786fab43d7ac9f88af3231b6d"
+    },
+    {
+      "path": "tests/fixtures/v6-outline-service-reference.json.gz",
+      "bytes": 1211188,
+      "sha256": "50ce0fdf885f79c66a168b25e4327e3f97b538d49924170da6a49ede7af1685b"
+    },
+    {
+      "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz",
+      "bytes": 1099570,
+      "sha256": "fa52436d34ee32e7fcf4e30f67122c5bede6823d0ff2cb34980cdc4885c3f933"
+    }
+  ],
+  "downloadUsed": false,
+  "globalLockAcquired": false,
+  "additionalIgnoredFixtureExcludedFromTestTree": {
+    "originalPath": "tests/fixtures/v6-outline-service-reference.json.gz",
+    "retainedPath": ".sites-runtime/retained-extra-fixtures/v6-outline-service-reference.json.gz",
+    "bytes": 1211188,
+    "sha256": "50ce0fdf885f79c66a168b25e4327e3f97b538d49924170da6a49ede7af1685b",
+    "reason": "Additional ignored fixture copied from0.65; absent from the 753-file10C qualification freeze. Retained outside the tested source/test tree.",
+    "recordedAt": "2026-11-12T01:27:40.409503+00:00"
+  }
+}

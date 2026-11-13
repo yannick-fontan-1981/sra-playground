@@ -1,0 +1,44 @@
+{
+  "schema": "logos-engine.lot8b.functional-command.v1",
+  "key": "inventory",
+  "attempt": "work-inventory-01",
+  "plan": {
+    "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/work-forms-execution-plan.json",
+    "bytes": 143646,
+    "sha256": "11b072a46926116d1bb65cbf9848bf3e5e4a3567c914d1fbe98530c85b1cb193"
+  },
+  "command": [
+    "node",
+    "docs/migration/lot8b-evidence/tools/delivery/work-forms/record-owner-source-inventory.mjs",
+    "/workspace/sites/sra-lot8b-baseline066-20261112",
+    "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+    "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/work-inventory-01/owner-source-inventory.json"
+  ],
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T04:52:04.050799+00:00",
+  "timeoutSeconds": 120,
+  "headBefore": "0830ca822e2e4330fa3ffb68d333167b3389fc26",
+  "globalLockAcquired": false,
+  "officialPerformanceMeasurement": false,
+  "gameEngineExecuted": false,
+  "published": false,
+  "status": "passed",
+  "exitCode": 0,
+  "finishedAt": "2026-11-12T04:52:06.511552+00:00",
+  "elapsedSeconds": 2.458205758997792,
+  "inputsUnchanged": true,
+  "changedInputPaths": [],
+  "log": {
+    "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/work-inventory-01/output.log.gz",
+    "bytes": 349,
+    "sha256": "9ac2e408980a25117768498a455155070cab93bffe45b57181765df21018c4a1"
+  },
+  "childProcessReaped": true,
+  "outputs": [
+    {
+      "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/work-inventory-01/owner-source-inventory.json",
+      "bytes": 130688,
+      "sha256": "5c742dbad9abe0b7564a1e04df20975f13a5880e1f59214b48d1305f39ea175a"
+    }
+  ]
+}

@@ -1,0 +1,233 @@
+{
+  "module_id": "b_queued_receipt_meaning",
+  "declarations": [
+    {
+      "id": "policy.b_queued_receipt_meaning",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_future_projected_configuration_must_serve_current_parent"
+      ],
+      "premises": [
+        "complete_current_correlated_receipt",
+        "explicit_parent_quota_and_preservation"
+      ],
+      "invariants": [
+        "conditional_model_scope_only",
+        "no_world_success_confirmation",
+        "no_act_authority",
+        "unbound_later_consumer_stays_open"
+      ],
+      "falsifiers": [
+        "changed_scope_or_occurrence_identity",
+        "missing_later_consumer"
+      ],
+      "declared_alternative_refs": [
+        "queued_receipt.derive",
+        "queued_receipt.open"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.queued_receipt.matching_line",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "queued_receipt.derive"
+            },
+            {
+              "field": "receipt_kind",
+              "operator": "equals",
+              "expected": "matching_line"
+            },
+            {
+              "field": "receipt_bindings_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "causal_reason_ref": "reason_projected_line_serves_parent_quota"
+          }
+        },
+        {
+          "id": "projection.queued_receipt.zero_credit_staging",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "queued_receipt.derive"
+            },
+            {
+              "field": "receipt_kind",
+              "operator": "equals",
+              "expected": "zero_credit_staging"
+            },
+            {
+              "field": "receipt_bindings_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "causal_reason_ref": "reason_staged_occurrences_serve_named_later_line"
+          }
+        },
+        {
+          "id": "projection.queued_receipt.zero_credit_queue_access",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "queued_receipt.derive"},
+            {"field": "receipt_kind", "operator": "equals", "expected": "zero_credit_queue_access"},
+            {"field": "receipt_bindings_current", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "eligible": true,
+            "causal_reason_ref": "reason_zero_credit_lock_opens_named_later_queue_line"
+          }
+        },
+        {
+          "id": "projection.queued_receipt.open",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "queued_receipt.open"
+            },
+            {
+              "field": "receipt_bindings_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "queued_receipt.derive": "rule.b_queued_receipt_meaning"
+      }
+    },
+    {
+      "id": "rule.b_queued_receipt_meaning",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "source_selected_current_future_receipt"
+      ],
+      "applicability": [
+        "conditional_model_means_for_parent"
+      ],
+      "invariants": [
+        "not_an_exclusive_necessity_proof",
+        "not_an_observed_world_effect"
+      ],
+      "falsifiers": [
+        "future_model_or_scope_refuted"
+      ],
+      "reason_refs": [
+        "reason_future_projected_configuration_must_serve_current_parent"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{reason_candidate_ref}",
+          "kind": "value",
+          "label": "Conditional future line or staged consumer for parent",
+          "required_fields": [
+            "reason_candidate_ref",
+            "candidate"
+          ],
+          "static_attributes": {
+            "projection_contract": "mechanical.queued_parent_reason.b.v1",
+            "conditional_model_only": true,
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "candidate": "candidate",
+            "receipt_kind": "receipt_kind",
+            "causal_reason_ref": "causal_reason_ref",
+            "utility_reason_ref": "utility_reason_ref",
+            "desired_future": "desired_future",
+            "goal_contract": "goal_contract",
+            "consumer_refs": "consumer_refs",
+            "preservation_refs": "preservation_refs",
+            "model_refs": "model_refs",
+            "source_return_ref": "source_return_ref",
+            "group_ref": "group_ref",
+            "job_ref": "job_ref",
+            "next_item_ref": "next_item_ref",
+            "sibling_item_refs": "sibling_item_refs"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{reason_candidate_ref}",
+          "predicate": "proposes_projected_line_or_staging_means_for_parent",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{reason_candidate_ref}",
+            "{parent_goal_ref}"
+          ],
+          "required_term_patterns": [
+            "{reason_candidate_ref}",
+            "{parent_goal_ref}"
+          ],
+          "required_fields": [
+            "reason_candidate_ref",
+            "parent_goal_ref",
+            "causal_reason_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref"
+          },
+          "attribute_bindings": {
+            "candidate": "candidate",
+            "receipt_kind": "receipt_kind",
+            "causal_reason_ref": "causal_reason_ref",
+            "utility_reason_ref": "utility_reason_ref",
+            "desired_future": "desired_future",
+            "goal_contract": "goal_contract",
+            "consumer_refs": "consumer_refs",
+            "preservation_refs": "preservation_refs",
+            "model_refs": "model_refs",
+            "source_return_ref": "source_return_ref",
+            "group_ref": "group_ref",
+            "job_ref": "job_ref",
+            "next_item_ref": "next_item_ref",
+            "sibling_item_refs": "sibling_item_refs"
+          },
+          "static_attributes": {
+            "conditional_model_only": true,
+            "no_world_success_confirmation": true,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    }
+  ]
+}

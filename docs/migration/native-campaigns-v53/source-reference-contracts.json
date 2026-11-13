@@ -1,0 +1,44 @@
+{
+  "schema": "logos-engine.v53.outline-source-contracts.v1",
+  "status": "passed",
+  "sourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceUnchanged": true,
+  "sourceFilesVerifiedBeforeImport": 1786,
+  "sourceFilesVerifiedAfterExport": 1786,
+  "counts": {
+    "geometryCases": 79,
+    "policyCases": 277,
+    "memoryCases": 83,
+    "publicInitialViews": 100,
+    "qualifiedIdentityRecipes": 1268
+  },
+  "fixture": {
+    "path": "tests/fixtures/v6-outline-service-reference.json.gz",
+    "sha256": "50ce0fdf885f79c66a168b25e4327e3f97b538d49924170da6a49ede7af1685b",
+    "bytes": 1211188
+  },
+  "generator": {
+    "path": "scripts/export-v6-outline-service-reference.py",
+    "sha256": "cae521791d2a9072e2f511083d22f9b19e4a39f2f0b07f694f75a50e15e396d0",
+    "bytes": 44492
+  },
+  "probe": {
+    "path": "scripts/probe-v6-outline-service-original.py",
+    "sha256": "a2aa2fc231e12fc3f65e13ca061b5be60d2bcf277697f1030f1307cbcda4829c",
+    "bytes": 12002
+  },
+  "importedSourceModuleCount": 719,
+  "actuallyAccessedSourceFiles": 1071,
+  "accessedDrmFiles": 351,
+  "sourceBytecodeCachesRead": false,
+  "sourceBytecodeCachesWritten": false,
+  "scope": {
+    "hostSessions": 0,
+    "dispatchedActions": 0,
+    "completedLevels": 0,
+    "nativeExecution": false,
+    "sourceFunctionsReplaced": false,
+    "referenceGeneratedFromNativeOutput": false
+  },
+  "qualification": "Expected values come from unchanged original Python, its actual V5 geometry and original DRM/SRC. Synthetic transitions are bounded component contracts, never successful game evidence or a cold memory seed. Direct V5 helper contracts may exercise public fields not supplied by OutlineService.measure; that broader helper domain is not a claim that the family uses those branches."
+}

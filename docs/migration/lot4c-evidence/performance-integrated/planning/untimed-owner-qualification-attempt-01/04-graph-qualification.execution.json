@@ -1,0 +1,34 @@
+{
+  "name": "04-graph-qualification",
+  "command": [
+    "node",
+    "docs/migration/lot4c-evidence/qualify-cost-owner-graphs.mjs",
+    "docs/migration/lot4c-evidence/performance-integrated/owner-graphs-baseline.json.gz",
+    "docs/migration/lot4c-evidence/performance-integrated/owner-graphs-baseline.receipt.json",
+    "docs/migration/lot4c-evidence/performance-integrated/owner-graphs-candidate.json.gz",
+    "docs/migration/lot4c-evidence/performance-integrated/owner-graphs-candidate.receipt.json",
+    "docs/migration/lot4c-evidence/performance-integrated/owner-graph-attribution.json",
+    "docs/migration/lot4c-evidence/performance-integrated/owner-structural-fixture.json"
+  ],
+  "startedAt": "2026-11-11T01:08:41.611782+00:00",
+  "pid": 44,
+  "exitCode": 0,
+  "executionElapsedSeconds": 15.427003898992552,
+  "finishedAt": "2026-11-11T01:08:57.038811+00:00",
+  "stdout": {
+    "path": "docs/migration/lot4c-evidence/performance-integrated/planning/untimed-owner-qualification-attempt-01/04-graph-qualification.stdout.log",
+    "bytes": 295,
+    "sha256": "f67da0384cb035393c96c7affd065a91b1e66050f92e00396ec72afde3c5c364"
+  },
+  "stdoutArchive": {
+    "gzip": {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/planning/untimed-owner-qualification-attempt-01/04-graph-qualification.stdout.log.gz",
+      "bytes": 182,
+      "sha256": "7d9747293dfe0f71389ee1416b04a4746cece2e1ded6923d71a26a37d940fe85"
+    },
+    "uncompressedBytes": 295,
+    "uncompressedSha256": "f67da0384cb035393c96c7affd065a91b1e66050f92e00396ec72afde3c5c364",
+    "exactRoundTrip": true
+  },
+  "scope": "Execution audit only; elapsed process duration is not a cost sample or performance comparison."
+}

@@ -1,0 +1,70 @@
+{
+  "schema": "logos-engine.v38.public-regression-comparison.v1",
+  "passed": true,
+  "checks": [
+    {
+      "name": "same game and target, both campaigns passed",
+      "passed": true
+    },
+    {
+      "name": "same production budgets and exact game assets",
+      "passed": true
+    },
+    {
+      "name": "same complete initial public packet hash",
+      "passed": true
+    },
+    {
+      "name": "same physical commands, full animation packet hashes and primitive boundaries",
+      "passed": true
+    },
+    {
+      "name": "same selected source prefix kinds and acquired action counts",
+      "passed": true
+    },
+    {
+      "name": "same previously reported series projection with observation-scope normalization",
+      "passed": true
+    },
+    {
+      "name": "no new cell event, model or refusal in these regression prefixes",
+      "passed": true
+    },
+    {
+      "name": "same request outcomes and common caller revisions",
+      "passed": true
+    },
+    {
+      "name": "same final public result and retained-session counters",
+      "passed": true
+    },
+    {
+      "name": "source frozen during both campaigns and no Python agent modules",
+      "passed": true
+    },
+    {
+      "name": "same retained mechanical-domain assessments",
+      "passed": true
+    }
+  ],
+  "before": {
+    "path": "docs/migration/native-campaigns-v37/tu93-three-levels.json",
+    "sha256": "6e3911d76ea8f34f503deab1fbc39474c54ea0008f9e6c60b745e0ec52d70bef",
+    "implementation": "logos-engine.typescript.v6.native-migration/0.7.1",
+    "sourceDigest": "ce6dc999f3723d67970cbed433f40289f9f3b62fa785bc1dba9e1e3fd1a23607",
+    "sharedDigestScope": "native_recall_ancestors_alternating_graph_and_coupled_support_v4"
+  },
+  "after": {
+    "path": "docs/migration/native-campaigns-v38/tu93-three-levels.json",
+    "sha256": "2d19bf4a0868efd8b380b8159ebcc7537dc5bf6f2dfa760a6cebd25c28259f8c",
+    "implementation": "logos-engine.typescript.v6.native-migration/0.8.0",
+    "sourceDigest": "9cc53ae5b79cdbd6a751ecea4d25698c6eca46a0f84d44ae79a6b325635483d5",
+    "sharedDigestScope": "native_recall_ancestors_cell_placement_alternating_graph_and_coupled_support_v5"
+  },
+  "compared": {
+    "commands": 67,
+    "completePublicPackets": 68,
+    "prefixes": 25
+  },
+  "qualification": "Explicitly compares public behavior, source prefix descriptions, acquisition counters and reported ancestral projections. Native graph chains/revisions and the shared inherited digest/scope change with the new implementation and are not compared. New cell projections are independently checked empty for these regression games. Timings are excluded; this is not a speed comparison or full internal-state parity."
+}

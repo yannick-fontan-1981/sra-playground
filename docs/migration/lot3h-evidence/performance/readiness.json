@@ -1,0 +1,127 @@
+{
+  "schema": "logos-engine.native-cost-window-readiness.v1",
+  "recordedAt": "2026-11-10T13:33:41.263116-03:00",
+  "finalizedAt": "2026-11-10T13:33:41.263116-03:00",
+  "status": "ready_for_predeclared_official_window",
+  "preview": "sites-preview stop completed; subsequent status confirmed stopped. WEAV browser progression and screenshot are finished.",
+  "isolation": "All owned tests, builds, source exports, comparisons, regressions, campaigns, synthetic proof, browser actions, packing and delivery integrity are finished. All three delegated agents are completed; process inventory shows no owned test, campaign, cost or preview job. During sequential A1/B1/B2/A2 only light reading and documentation continue; no test/build/replay/game/preview/profile/archive or large calculation runs concurrently.",
+  "functionalQualification": "Frozen native0.49 passes2782/2782 tests in71 files and5/5 checks/build. CATR/RSWP/FOGW/VOIS recorded regressions pass68/68. Synthetic common loop passes23groups with17acquisitions across3cold sessions. Actual cold WEAV succeeds3levels in81actions/81prefixes; source/native selected-own replay passes3596checks and324componentablations,191action/refusal changes,133negative/unchanged. Browser confirms81actions/3levels/81plans after Pause/step/resume. WEAV cumulativeclock closed at1277.782615seconds including prior474.037204. Full inherited caller parity and full-caller ablation remain outside proven scope.",
+  "costPolicy": "Strict complete-session pooled median increase below10% separately for STCK and SMLP. Phase overruns may be accepted if both globals pass. All32measured sessions/400actions and all phase/p95/cohort diagnostics retained, without measured exclusions, nested-phase sum or cross-game compensation.",
+  "authorization": "User requested continuation and explicitly permits phase overruns if global increase remains below10%.",
+  "measurementAuthorized": true,
+  "pendingRequirements": [],
+  "retainedOpenValidation": [
+    "Full inherited original-caller parity",
+    "Full-caller counterfactual attribution",
+    "Deadline preemption of the structural geometric prefilter",
+    "Prior FramedWindow own game contribution reserve"
+  ],
+  "inputs": [
+    {
+      "path": "docs/migration/lot3h-evidence/final/source-manifest.json",
+      "bytes": 31765,
+      "sha256": "5ab90c3cbd2f8356ba27025052a1c40cd16e7cb38326a89a48ac6e53cb9b3a24"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/source-archive.json",
+      "bytes": 33396,
+      "sha256": "ecd25dc9ea658bc08bc7361a1455fc3ef040208ae857613857dbce1df17d36f5"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/validation/delta-tests-run.json",
+      "bytes": 112930,
+      "sha256": "3bd20a39d02c3dc431547a64552f58f91975664871941aa0c532dd50ecae82fe"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/validation/checks-run.json",
+      "bytes": 74075,
+      "sha256": "4d7a2b112a3a6c5b92306c5d60b00ff3e54f40be77af5714005cfffa6c18779e"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/regressions/regression-summary.json",
+      "bytes": 91125,
+      "sha256": "858f3d74c91784bd9387e74e1aaaf4e32ba834a6a3ce2c7817193e093c276bd4"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/diagnostic/source-oracle-export.json",
+      "bytes": 1966,
+      "sha256": "ad63cbaf063000cfbf92164edb76207a2ca756df7b16cd0a1d8715844727c4fd"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/diagnostic/shared-integration-review.json",
+      "bytes": 15004,
+      "sha256": "636c1393a457327dbbe24c2944981aadcd92083783b41bbd37e9af8187ef290a"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/diagnostic/crossed-prefix-public-admission.json",
+      "bytes": 30472,
+      "sha256": "07fab84d4fd564618c1a5e48fb1b85fa0993afb9d9225053686d6a30b7c832eb"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/diagnostic/weav-public-parity.json",
+      "bytes": 818824,
+      "sha256": "0f48bdd4589a0d8356d53fd65eee1a598151d7cd449732e743915806f855a9ca"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/diagnostic/weav-public-source-parity.json.gz",
+      "bytes": 3153578,
+      "sha256": "3921646bf216aa12ed0f7d8c18b28442a33d48d98ad0ec1ac3811942a25dc8dd"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/crossed-prefix-common-loop.json.gz",
+      "bytes": 1610258,
+      "sha256": "e46a4025d074fa6bf7dabf94f690bf4bcc8e15c6da5c64995f5d224fb5f25d18"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/crossed-prefix-validation-scope.json",
+      "bytes": 6678,
+      "sha256": "8b9f1ae0986cc8a9572c7d8c5352533702d961b3651d13cae612b77fa8c89233"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/weav-resolution.json",
+      "bytes": 9841,
+      "sha256": "520468fb7872f163713f288cc6c3d1f62137e4bc662bcebe7207fed2435bf0ab"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/browser/browser-qa.json",
+      "bytes": 2519,
+      "sha256": "77e9458de5e0a67f1dc8dec13ea62104207fe7b34e0cee51d8c076ee90730879"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/delivery-integrity.json",
+      "bytes": 8408,
+      "sha256": "34dd7a0ccc42ea35d4790695960fa82ae5f486e65a82f83519970a404569259b"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/declaration.json",
+      "bytes": 4105,
+      "sha256": "ca371fbf437d2434932c74238a75ab0eb6cd6ef27e8db5aa329c2d179c8c667d"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/protocol.md",
+      "bytes": 10074,
+      "sha256": "7bd6b7d0368828378805eaecbf6be8b6f4ad89af58014175b95542ee52b19d1f"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/global-budget-policy.json",
+      "bytes": 2011,
+      "sha256": "cd36bc36abde70765edbb6dc0c78165c889a7c5fed1c88f8b7c72d650a4652f7"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/protocol-check.json",
+      "bytes": 406,
+      "sha256": "5f6d71eb15309ef73ce871699b3902731c2dedb8c9849cfc37c0524beb061c0b"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/static-preflight.json",
+      "bytes": 12142,
+      "sha256": "f7893e2f3514be9f36455b6a11b9f714cf6ec3291a05d0208156d85969a34871"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/pre-window-log-transport.json",
+      "bytes": 4136,
+      "sha256": "b8eb1cf8e8502c61e8a36a01fe960713cbdce36210e748aa33ba1ff838912725"
+    }
+  ],
+  "qualification": "Readiness binds completed functional and integrity evidence; it authorizes only the predeclared window and does not anticipate cost acceptance."
+}

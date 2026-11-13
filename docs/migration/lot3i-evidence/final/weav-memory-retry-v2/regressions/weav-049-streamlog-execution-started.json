@@ -1,0 +1,58 @@
+{
+  "case": "weav-049-streamlog",
+  "game": "WEAV",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "--expose-gc",
+    "--max-old-space-size=1536",
+    "scripts/replay-public-regression-released-baseline.mjs",
+    "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-campaign.json.gz",
+    "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+    "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz",
+    "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-host-preparation.json"
+  ],
+  "startedAt": "2026-11-10T18:39:26.824480+00:00",
+  "timeoutSeconds": 2400,
+  "baseline": {
+    "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-campaign.json.gz",
+    "sha256": "74b5890967f4675e9005549692d744cb803acbc6c8dc627f4f23585582e4caa5",
+    "bytes": 10800755
+  },
+  "trace": {
+    "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+    "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2",
+    "bytes": 26568
+  },
+  "expectedActions": 81,
+  "nodeOldSpaceMiB": 1536,
+  "preflight": {
+    "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/preflight.json",
+    "sha256": "79f7b18e0547b2fe89993f61fddb70033fe81f74585b5ac2bf8dc4bb191f3f50",
+    "bytes": 1386
+  },
+  "historicalReportProcessExitedBeforeNode": true,
+  "nativeSourceBeforeDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+  "executionInputsBefore": {
+    "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+    "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+    "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+    "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+    "tests/helpers/v6-live-game-campaign.ts": "b0acd3a5a3a7e1293745c3a5843231eda7929589a7ce0c5fe402fc30d390d257",
+    "docs/migration/lot3i-evidence/weav-streamlog-recovery-cases.json": "bf8c6275205154b0b277150af667c52597dfd7a3d7e045fa4d7f606565fc32d6",
+    "docs/migration/lot3i-evidence/final/source-manifest.json": "6345dc2902336aaf6f680b798b3c312281dcb66bbd7994b349b1734e5a42c1bd",
+    "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+  },
+  "phase": "started",
+  "finishedAt": null,
+  "exitCode": null,
+  "timedOut": false,
+  "passed": false,
+  "nodeExitObserved": false,
+  "rawOutputPath": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-output.raw.log",
+  "driverPid": 6,
+  "nodePid": null,
+  "memorySamples": []
+}

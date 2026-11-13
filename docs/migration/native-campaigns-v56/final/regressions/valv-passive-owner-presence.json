@@ -1,0 +1,988 @@
+{
+  "schema": "logos-engine.passive-owner-evidence-presence.v1",
+  "report": {
+    "path": "docs/migration/native-campaigns-v56/final/regressions/valv-replay.json.gz",
+    "sha256": "73a23689a3df55d8697447c278ac138e41c815bbce1de353a3a85480f0869810",
+    "bytes": 2701932
+  },
+  "caseManifest": {
+    "path": "docs/migration/native-campaigns-v56/regression-cases.json",
+    "sha256": "caa36d2c04bed933ddae287705f39f3c67b9edafcb545e49f08a70cdf8fd3c5a",
+    "bytes": 6676
+  },
+  "owners": [
+    {
+      "requirement": {
+        "prefixProperty": "reactionAcquisition",
+        "stateNode": "family_state:public_ordered_reaction",
+        "sourceStateKeys": [
+          "epoch",
+          "control",
+          "packets",
+          "attempts",
+          "progress",
+          "history"
+        ],
+        "checkpointFormat": "native.public_ordered_reaction.v1"
+      },
+      "prefixesChecked": 28,
+      "prefixesPassed": 28,
+      "transitionsRetained": 28,
+      "passed": true,
+      "prefixes": [
+        {
+          "index": 0,
+          "prefixId": "prefix_evidence:1",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 1,
+          "prefixId": "prefix_evidence:2",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 2,
+          "prefixId": "prefix_evidence:3",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 3,
+          "prefixId": "prefix_evidence:4",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 4,
+          "prefixId": "prefix_evidence:5",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 5,
+          "prefixId": "prefix_evidence:6",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 6,
+          "prefixId": "prefix_evidence:7",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 7,
+          "prefixId": "prefix_evidence:8",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 8,
+          "prefixId": "prefix_evidence:9",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 9,
+          "prefixId": "prefix_evidence:10",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 10,
+          "prefixId": "prefix_evidence:11",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 11,
+          "prefixId": "prefix_evidence:12",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 12,
+          "prefixId": "prefix_evidence:13",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 13,
+          "prefixId": "prefix_evidence:14",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 14,
+          "prefixId": "prefix_evidence:15",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 15,
+          "prefixId": "prefix_evidence:16",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 16,
+          "prefixId": "prefix_evidence:17",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 17,
+          "prefixId": "prefix_evidence:18",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 18,
+          "prefixId": "prefix_evidence:19",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 19,
+          "prefixId": "prefix_evidence:20",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 20,
+          "prefixId": "prefix_evidence:21",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 21,
+          "prefixId": "prefix_evidence:22",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 22,
+          "prefixId": "prefix_evidence:23",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 23,
+          "prefixId": "prefix_evidence:24",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 24,
+          "prefixId": "prefix_evidence:25",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 25,
+          "prefixId": "prefix_evidence:26",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 26,
+          "prefixId": "prefix_evidence:27",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        },
+        {
+          "index": 27,
+          "prefixId": "prefix_evidence:28",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true
+          },
+          "passed": true
+        }
+      ]
+    },
+    {
+      "requirement": {
+        "prefixProperty": "inventoryAcquisition",
+        "stateNode": "family_state:public_observed_inventory",
+        "sourceStateKeys": [
+          "tracker",
+          "seen_pairs",
+          "failed",
+          "access_returns",
+          "endpoint_memory",
+          "boundary_memory",
+          "pending_access",
+          "retained_effect_scope"
+        ],
+        "checkpointFormat": "native.public_observed_inventory.v1",
+        "checkpointAnnexFields": {
+          "caller_context": "callerContext"
+        }
+      },
+      "prefixesChecked": 28,
+      "prefixesPassed": 28,
+      "transitionsRetained": 28,
+      "passed": true,
+      "prefixes": [
+        {
+          "index": 0,
+          "prefixId": "prefix_evidence:1",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 1,
+          "prefixId": "prefix_evidence:2",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 2,
+          "prefixId": "prefix_evidence:3",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 3,
+          "prefixId": "prefix_evidence:4",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 4,
+          "prefixId": "prefix_evidence:5",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 5,
+          "prefixId": "prefix_evidence:6",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 6,
+          "prefixId": "prefix_evidence:7",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 7,
+          "prefixId": "prefix_evidence:8",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 8,
+          "prefixId": "prefix_evidence:9",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 9,
+          "prefixId": "prefix_evidence:10",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 10,
+          "prefixId": "prefix_evidence:11",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 11,
+          "prefixId": "prefix_evidence:12",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 12,
+          "prefixId": "prefix_evidence:13",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 13,
+          "prefixId": "prefix_evidence:14",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 14,
+          "prefixId": "prefix_evidence:15",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 15,
+          "prefixId": "prefix_evidence:16",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 16,
+          "prefixId": "prefix_evidence:17",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 17,
+          "prefixId": "prefix_evidence:18",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 18,
+          "prefixId": "prefix_evidence:19",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 19,
+          "prefixId": "prefix_evidence:20",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 20,
+          "prefixId": "prefix_evidence:21",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 21,
+          "prefixId": "prefix_evidence:22",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 22,
+          "prefixId": "prefix_evidence:23",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 23,
+          "prefixId": "prefix_evidence:24",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 24,
+          "prefixId": "prefix_evidence:25",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 25,
+          "prefixId": "prefix_evidence:26",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 26,
+          "prefixId": "prefix_evidence:27",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        },
+        {
+          "index": 27,
+          "prefixId": "prefix_evidence:28",
+          "acquiredActions": 1,
+          "retainedTransitionCount": 1,
+          "checks": {
+            "ownerPresent": true,
+            "stateNode": true,
+            "exactSourceFields": true,
+            "checkpointShape": true,
+            "checkpointFormat": true,
+            "checkpointMatchesRetainedState": true,
+            "transitionCountEqualsAcquiredActions": true,
+            "checkpointAnnexesMatchRetainedValues": true
+          },
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "passed": true,
+  "qualification": "Post-run evidence-presence checks on every completed current replay prefix. The manifest declares retained owner identity, exact source-field names, checkpoint format and optional context annex bindings. Each retained checkpoint is checked against its own current source projection, and its transition count against that prefix acquiredActions. These checks neither initialize native state nor assert equality with an older baseline, complete caller parity or a live game success. They are separate from the 17 historical regression comparisons."
+}

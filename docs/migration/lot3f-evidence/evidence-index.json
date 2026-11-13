@@ -1,0 +1,804 @@
+{
+  "schema": "logos-engine.lot3f-reference-population.delivery-index.v1",
+  "recordedAt": "2026-11-10T14:20:15.890847+00:00",
+  "nativeVersion": "0.47.0",
+  "nativeSourceDigest": "54d8742300a04dcdf0cb1b038bc62b947d4a1c60f70da4ee80e6971b0f021165",
+  "baselineSourceCommit": "a6edbb838670785733155262ae95f69892a236fc",
+  "globalCostStatus": "accepted_under_user_global_rule",
+  "globalCostAccepted": true,
+  "functionalQualification": "ReferencePopulation own transfer and consumed V5 finite-cell matching/cardinal move verified. 6/6 observed branches, 51/76 complete declared entries, 37 compiled workflows; full inherited caller parity remains partial. Cold VOIS meets the first-three-level target in 78 actions / 42 prefixes; exact own original-source replay and acquired-knowledge contribution remain separately qualified. Prior CWSE/SK48/FOGW clocks unchanged. Cost acceptance remains a distinct receipt.",
+  "fileCount": 158,
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 15233,
+      "sha256": "a6f94ba192e8ff6d7a528ac75bf012bcc2237fb48c558e393c351789825153f0"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/README.md",
+      "bytes": 6943,
+      "sha256": "ea16b1c2dc51e0f8bba0e8697082306cf01d671d03ad817ce923e2db02dbc313"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/baseline/provenance.json",
+      "bytes": 435,
+      "sha256": "28b3f809f8dba8dae28f9e5b3b309a2ad443c8e2f6bfacbdbe3af729df5e5697"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/baseline/source-manifest.json",
+      "bytes": 30770,
+      "sha256": "02ce173c4784af4e4f6bba3c2f7d3f72a2c2dc17cfe5c5ef46c0a2cf35c47238"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/baseline/vois-bounded-reference/execution-vois.json",
+      "bytes": 65945,
+      "sha256": "5ec81386735b26b1ce23c41bcb0d51f71e829e9b6ef433f3f14e8f1a70c84361"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/baseline/vois-bounded-reference/source-manifest.json",
+      "bytes": 30770,
+      "sha256": "02ce173c4784af4e4f6bba3c2f7d3f72a2c2dc17cfe5c5ef46c0a2cf35c47238"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/baseline/vois-bounded-reference/vois-actual-public-journal.jsonl.gz",
+      "bytes": 628,
+      "sha256": "a764cee4529a7d5dd62cb144d13608a030b3d8d7867784c14ea9b7392a87c1d8"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/baseline/vois-bounded-reference/vois-campaign.json.gz",
+      "bytes": 121615,
+      "sha256": "1a3671bb03dd8e3afeb0aaac2cf1987b87e5d2f4c573e9260fc2ae3797ab28ca"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/baseline/vois-bounded-reference/vois-output.log.gz",
+      "bytes": 1111,
+      "sha256": "a35e4d311372d26a9a5cdde14c44985e8276ee9f4cd3e58ada96ff7800b560c4"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/baseline/vois-bounded-reference/vois-public-trace.json.gz",
+      "bytes": 833,
+      "sha256": "255335ab130f09a647cbaa744f38e087881ca6d58ddb4349b51fb32e6c1aaa0b"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/baseline/vois-transfer.json",
+      "bytes": 1597,
+      "sha256": "d4628e4982e4dca1d32baeca3882ffa73fb4b53dc46ecee1b3010862e01565e6"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/build-evidence-index.py",
+      "bytes": 4782,
+      "sha256": "6469147e8f604f0db291bff425c1f78533c5198572ffb9d9d78a95f2e35b9554"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/check-cost-static-inputs.py",
+      "bytes": 13108,
+      "sha256": "22dcf3ca46a2a405ba1c5656c779312090ea3f851dc90aa36ceed31851908dbc"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/contribution-transport.json",
+      "bytes": 685,
+      "sha256": "1723b48d71b64186cb2a2cca5bf1db4db053b8fd47c23394dd8c070cf0e586e7"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/baseline-launch-preparation-error.json",
+      "bytes": 655,
+      "sha256": "7a9d8db8b4bed4f359052934b8246846238480dc73c71b6dcd9056e83d50887a"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/check-cost-static-inputs-initial-path-shadow.py",
+      "bytes": 13108,
+      "sha256": "8013b004abf900e041929edab2c739ea3a6bb9c05a9b0923e1c36191c99ce608"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/check-reference-population-public-parity.mjs",
+      "bytes": 17502,
+      "sha256": "8b686eb5676f10636bc95908c51f109747f667c694da1a35595797441be00f79"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/cost-review-preparation.json",
+      "bytes": 11360,
+      "sha256": "36522ffb06667c44066cdbe514296474fec60b9937d778cd4b23249c5fd6cce5"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/population-access-tests.tap.gz",
+      "bytes": 1678,
+      "sha256": "c240b8b04f0d658980ae4cc01252563957f7403e62828a72d401bfd3d8bdc879"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/population-development-targeted.tap.gz",
+      "bytes": 6054,
+      "sha256": "f67ec56c361b81881d7b9b0899023613e3f7561ecae501dbd13bb4bbf001454b"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/population-integration-final.tap.gz",
+      "bytes": 624,
+      "sha256": "ae4ce8e9038769ea2ab8657726779bbb32a3a00180b3b66aca2783e1024fb877"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/population-integration.tap.gz",
+      "bytes": 1330,
+      "sha256": "ba357cc0dc82771864022ae75ce14089b6bd74fdbb23ac9a44f4c2cfe40043f3"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/population-projection-tests.tap.gz",
+      "bytes": 1989,
+      "sha256": "a2ce15928f24c7bc0f6f9b2bee5bb0d533979c7d64d9d94f5e470451cee60367"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/reference-population-public-admission.json",
+      "bytes": 24743,
+      "sha256": "4e4cc5a99328c20c649acba614855d60bdf4dab30571e1ff6509cdb2eab5ac49"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/replay-reference-population-public.py",
+      "bytes": 25779,
+      "sha256": "a670588f943dc1e746a450cf41133c1a2ed3d0edf4c474d4be21f3cb0e8436c2"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/shared-integration-review.json",
+      "bytes": 10628,
+      "sha256": "323f3db1095fd51abd9ba91ccaa8073ac95764f8bcb7ebc367f548c3aa952311"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/source-oracle-export.json",
+      "bytes": 1289,
+      "sha256": "9332dcc2dee0ee8e96ac562e1ab47001854c5c24c68b739d86b5b3bd499d53d0"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/static-preflight-generation-incident.json",
+      "bytes": 1252,
+      "sha256": "603d79388e81746f38593366c61269c590c999661ac122985ee072a1a8231a01"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/vois-clock-start.json",
+      "bytes": 1620,
+      "sha256": "c73df0debc13d3adcad579dfc6713dfd4543c08b60bfb32f7ae79b32087e9557"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/vois-public-parity.json",
+      "bytes": 214774,
+      "sha256": "efe91899f50702823537eefb06041455d1f29761056c80523baf886f639597f1"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/vois-public-replay-execution.json",
+      "bytes": 3445,
+      "sha256": "4bcaf2972c71ac473dc33cb73ceba6f824c919eabfc38a3423f3833c6b551b30"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/vois-public-source-replay.json.gz",
+      "bytes": 103723,
+      "sha256": "18093ea707a630131180c8139b1e902f47a70099194f5a398ffcf154dee0b909"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/browser/attempt1-navigation-interruption.json",
+      "bytes": 1641,
+      "sha256": "5f1584bdea06a8434c6240f52fdbbb7204c4e7349bf92a3285074d1a59e974ff"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/browser/browser-qa.json",
+      "bytes": 2815,
+      "sha256": "36e24c00efc45271daf7662795580d074879e1e5330ae4249ec11d801936de09"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/browser/vois-final-ax.txt",
+      "bytes": 1105,
+      "sha256": "b3f8f53885f0b30808d7b3bac6dc074b7b60d5bba82fc7a4c7d8c83260266f8e"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/browser/vois-final.png",
+      "bytes": 68229,
+      "sha256": "159474e516ee13c0ce4a4dff9b1076faec16c452e0337782a52879555c858f5d"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/delivery-integrity.json",
+      "bytes": 7629,
+      "sha256": "b0d1fea6100538f10d6b57d76751340129834a76a5e997f4134f1d1aa7fa9c5c"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/catr-046-comparison.json",
+      "bytes": 10624,
+      "sha256": "68f1ef90245ce65313ffa633314148704336f763e69f441ba2f7848426dd7e98"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/catr-046-execution.json",
+      "bytes": 4875,
+      "sha256": "5cdc892e2ba242644edf9af0abc07eb1823b2d268a3a189470bdfd268a602427"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/catr-046-output.log.gz",
+      "bytes": 2476,
+      "sha256": "4b86d33687468b6ec5188959aa87eef1587feb5c21685e6615417809e53e38f5"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/catr-046-passive-owner-presence.json",
+      "bytes": 1078,
+      "sha256": "6f4b4b7447e88e846da24be88dbbf008ec74dc3c8d8ab2a368e39f6c56600d91"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/catr-046-replay.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "8d0698c3a925d0581a1531a9728b4e8d2b4c8234d37ff67d514f0ebbab091913"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/catr-046-replay.json.gz.part001",
+      "bytes": 472857,
+      "sha256": "2f25054734485e201ee97dc89313d1db8fb87005afa644569d980ef5657ce0ff"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/catr-046-replay.json.gz.parts.json",
+      "bytes": 679,
+      "sha256": "6f03e9cac46947188e3f356a2e98ed0e194409e0a912f40ebea734eb99e45ba6"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/fogw-046-comparison.json",
+      "bytes": 10622,
+      "sha256": "ccd50ddfd7308783dbaebf9b61a6028bd36648a2bf71b6837e4064372604c3fb"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/fogw-046-execution.json",
+      "bytes": 4877,
+      "sha256": "33b1e563e0ac3cb96dc9b4a58313277fe0bb27e25efdae2000e77a02dd61ed37"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/fogw-046-output.log.gz",
+      "bytes": 5328,
+      "sha256": "a7f09ce969f80a7f9ca8a86388db6ab793ff4fbdd8113b656c097dc63b5a9c01"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/fogw-046-passive-owner-presence.json",
+      "bytes": 1078,
+      "sha256": "af2bc40f45114e47ecb5fb5c849b3ad8edfaaea38bfe7ec501c274cb0161db39"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/fogw-046-replay.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "57ec811d886ce3d6980f81b5e50a93bdb9bd49be324e93df29ec091076d846d9"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/fogw-046-replay.json.gz.part001",
+      "bytes": 900000,
+      "sha256": "919bcdd00489014747b5fc2a7e1b6d2aed214a45eede86754f78a54406b4de4d"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/fogw-046-replay.json.gz.part002",
+      "bytes": 900000,
+      "sha256": "d1d3a9f838e026aee07e05e6ee9635333077eb51960d84a4f229a94965bbef92"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/fogw-046-replay.json.gz.part003",
+      "bytes": 900000,
+      "sha256": "b002988134223f7f5f20077bec276080a909aadbf92ea5c549425b773174d133"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/fogw-046-replay.json.gz.part004",
+      "bytes": 900000,
+      "sha256": "a31a063210e7a263c1af31bccf0eee7fbf5f21a7ec766dc0cea7143b77ed3652"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/fogw-046-replay.json.gz.part005",
+      "bytes": 900000,
+      "sha256": "e9699d02f2e16335f7a7c0bc87b1b1d15c0481333ed9c6242e6aba6015cf0028"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/fogw-046-replay.json.gz.part006",
+      "bytes": 900000,
+      "sha256": "36bee42f9a89b4fe6614928512ea05c44d740907babe08d9ba6ca49607466b5d"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/fogw-046-replay.json.gz.part007",
+      "bytes": 592494,
+      "sha256": "9468f1d9062b5edc59ab7b1e3ed1b89212d5f01fbcb3fba389498eb34c4806b3"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/fogw-046-replay.json.gz.parts.json",
+      "bytes": 1687,
+      "sha256": "0afa2526b31565f1199f2405444192f17897084f10e427ee1ed20e78391026c0"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/regression-summary.json",
+      "bytes": 84229,
+      "sha256": "36e6e53fc78a7f240c9d9a161efd42562ab172549877e1e44175f03d7eea353f"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/rswp-046-comparison.json",
+      "bytes": 10611,
+      "sha256": "809ca87945caa0c217319de93a96f54b238fe70d23a92be66208c85114947afe"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/rswp-046-execution.json",
+      "bytes": 4856,
+      "sha256": "9fa193166a9ae01dd00afdfb698c66dc46e9750d5ffae86340a31bf539ab2ae8"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/rswp-046-output.log.gz",
+      "bytes": 2947,
+      "sha256": "d5f6225c955e2244118c0d418974f5369b1f1dbcbe4dd70705e79543b44979b8"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/rswp-046-passive-owner-presence.json",
+      "bytes": 1078,
+      "sha256": "de5efa66355e0c96655f6948535d75b31343ced7cc22a12e1152eee68d485b2d"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/rswp-046-replay.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "fb54970b34508d6e5d6a0ea4bc1d66af48857536898c720e528a982f8ef9aa03"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/rswp-046-replay.json.gz.part001",
+      "bytes": 900000,
+      "sha256": "06893e798d162cb016c7ed39687d00e671644a12cfcc902e9d722ac6ab64188e"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/rswp-046-replay.json.gz.part002",
+      "bytes": 378155,
+      "sha256": "c6a25f6bac52ad834e5a42ef168ae887ec77363cda107c6ef7b7d322408c7a25"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/rswp-046-replay.json.gz.parts.json",
+      "bytes": 847,
+      "sha256": "a7ca1a264184701d8db2d40e994e0ce6f341f3523fff04f6924b98162f5c61ad"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/source-archive-parts.json",
+      "bytes": 791,
+      "sha256": "21fda79d1a5d215978616731e6feb943d59ea7b9f7509a88aec86ffe2389dd7a"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/source-archive.json",
+      "bytes": 32786,
+      "sha256": "1007ef87a4f3c87de4e2fbfe55f3b0a1ec31c9727629ddad89c72d48c9e08592"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/source-archive.tar.gz.part000",
+      "bytes": 900000,
+      "sha256": "ff11142f1f6caf142f4ea560e76632ea3f2bdde9f3228b53b6d85b78e77fcdd6"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/source-archive.tar.gz.part001",
+      "bytes": 778941,
+      "sha256": "144bac04ec3122a0cfedfcfcf890b70102d5c98e3d08c3c9a0a0fac6556271fb"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/source-manifest.json",
+      "bytes": 31155,
+      "sha256": "62e0566b67f867107aa06d64852e6c2051b9636df3844e8bf79ac3885bff7966"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/validation/build-output.log.gz",
+      "bytes": 1592,
+      "sha256": "b54cbf78afd87da1b690fb2c95b4f69f992c8151b954947a412139ac9afeb9d1"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/validation/checks-run.json",
+      "bytes": 72845,
+      "sha256": "e9dfbcbfff0184bf831bca0327e18bcc5ce2db4b8f3b39fd7bd0e212c7522964"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/validation/delta-tests-output.log.gz",
+      "bytes": 58396,
+      "sha256": "9575f5fa5f37b9609d0c30aea32f9004b25e6c59f697c0e7b6db8527f7369e5b"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/validation/delta-tests-run.json",
+      "bytes": 109242,
+      "sha256": "04e955b740d3f506ccd30c61f95ee18a50cb2c81beba1c80a72de1ccd5f7f682"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/validation/diff-check-output.log.gz",
+      "bytes": 20,
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/validation/entry-audit-output.log.gz",
+      "bytes": 179,
+      "sha256": "1a6ae91549f01cd67384b1f53123ae1c6d97bad0fa22ba298c4bc86fb9af2532"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/validation/migration-audit-output.log.gz",
+      "bytes": 206,
+      "sha256": "308eb7c4dc441ffef4c6736263d9d0dd75079323829007746ded93e6bac4f5ab"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/validation/typecheck-output.log.gz",
+      "bytes": 141,
+      "sha256": "0d2cbbee31ca5839df68f3a5ae10b6102ed35a65bd129facd4509c36a18a564d"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/execution-vois.json",
+      "bytes": 66686,
+      "sha256": "6ef4d35cd12cbdff0f40e04b6ea512652d9cf7b42eb47c3f862dee79d00e02e8"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/reference-population-contribution.json.gz",
+      "bytes": 45249,
+      "sha256": "9d1c44047bda29284024f0c0486300b7a9007877bded7c2318f27f12b31c5311"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/source-manifest.json",
+      "bytes": 31155,
+      "sha256": "62e0566b67f867107aa06d64852e6c2051b9636df3844e8bf79ac3885bff7966"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-actual-public-journal.jsonl.gz",
+      "bytes": 13385,
+      "sha256": "ef18d0a9a880e9852d2465c66c028db68295b07d11223fa92c859c2b211bb63c"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-campaign.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "deb45ede961ab52665e429138f1f063874ddbef03bf2effa60566161004900da"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-campaign.json.gz.part001",
+      "bytes": 900000,
+      "sha256": "29aaa6a66d1cbc9450c9108e69d7191ef997dfecd452ea73cc73d5439a19f7cc"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-campaign.json.gz.part002",
+      "bytes": 900000,
+      "sha256": "419e6563442fb3c3347d3a0daf53aba3d7d7843146c52ccd6ec3ff84abf17f8a"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-campaign.json.gz.part003",
+      "bytes": 900000,
+      "sha256": "da28d2fc0a6a2dd56864d7fb0919e7feac1f76c1b982b0f40e1c9f2e4666ab0e"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-campaign.json.gz.part004",
+      "bytes": 900000,
+      "sha256": "cf4fa0685c25b60d7b0a44b8d684f53de5118b9868d650de855965823704facb"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-campaign.json.gz.part005",
+      "bytes": 900000,
+      "sha256": "084436052519d54c9f0a07cd2405848879fee5f3c34d81909210ea978744ac52"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-campaign.json.gz.part006",
+      "bytes": 900000,
+      "sha256": "b7985ebfd017df800d4bba2c4b02bf110937dc2ace9ef303f9117302117345b0"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-campaign.json.gz.part007",
+      "bytes": 900000,
+      "sha256": "018718d46f4a949e8417aa21b48f4f8f36c0c5270ac7843b3d37bb5f91c81bda"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-campaign.json.gz.part008",
+      "bytes": 900000,
+      "sha256": "eecce785382323e4049292bcaf004d44ac53df7def2b2509cf15e50aba7c94b0"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-campaign.json.gz.part009",
+      "bytes": 900000,
+      "sha256": "e6b6cf6f7d1c8588105b5611e6c38cae2d85bd0db04df1bb4f7472cefd4e66c1"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-campaign.json.gz.part010",
+      "bytes": 22006,
+      "sha256": "65f127e12a67dc67117d0760d76d9af9b3578324231253ac38fa195cadb7274d"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-campaign.json.gz.parts.json",
+      "bytes": 2166,
+      "sha256": "21d1147506fc78a168b9c6411c18f72f3ee47c4befeb6dea642f3de80dbd77e3"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-output.log.gz",
+      "bytes": 7761,
+      "sha256": "cc04c9919882a924dc8296b4463dc9e0e1c7dec8e51cebf3097968639e07671a"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+      "bytes": 19976,
+      "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-resolution.json",
+      "bytes": 5162,
+      "sha256": "d3104de3d08221ac9e1663945a46c951df4e4c4d9f43ab914e41552138ee69fa"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/cohort1/after.json",
+      "bytes": 427669,
+      "sha256": "eb294b43cb7f528e7e214ded9804003b0cf62aa2c988093706276be90991e64e"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/cohort1/after.log.gz",
+      "bytes": 436,
+      "sha256": "8fff99794e0b86320a03026dba767cc2052227b69c864ba588d126249d64dc15"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/cohort1/baseline.json",
+      "bytes": 427302,
+      "sha256": "18e7630bd1f994bcc55a42a3b483a49551ebf5f096f8fbe68a370b16999468ac"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/cohort1/baseline.log.gz",
+      "bytes": 439,
+      "sha256": "d1fdc0a1b264a2dc3c958419e2d0bbd83da02b83a52ab213c6ab569178b19f24"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/cohort1/comparison.json",
+      "bytes": 25168,
+      "sha256": "a627d7a472457ba07db6f275afb5a98e5b24caa805a02586773c8d06022b9c4e"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/cohort2/after.json",
+      "bytes": 427759,
+      "sha256": "9eb7b68eac3f766116372771227d2202a2558a519972ea9a25648ab3959138d7"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/cohort2/after.log.gz",
+      "bytes": 432,
+      "sha256": "df6a0152090096d9b289e4a4ede1271877db143f287f4c839811b850847a67ce"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/cohort2/baseline.json",
+      "bytes": 427254,
+      "sha256": "b6ca7c0d86e7caed9f76b1a8d675b08bfc55f39fd9e0c4d008dc7e743d91e588"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/cohort2/baseline.log.gz",
+      "bytes": 429,
+      "sha256": "2c07cd91cdef3341ce6b3f89287083b9be0afe1bf7b05b0ebe55ed8bc70984e6"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/cohort2/comparison.json",
+      "bytes": 25542,
+      "sha256": "ddf1614fa327942eb633f0eb7c4ad24710fc5ff82755832fc724add4ae9c856b"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/combined-comparison.json",
+      "bytes": 28842,
+      "sha256": "32bcceb895b4a4678c7f19733e888a27f817957651c143aeadd20b5e0ce24ab7"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/consolidation-review.json",
+      "bytes": 43682,
+      "sha256": "185c32ae0eeeb906489534aa38ed6f9cb37b2a5e0bf6ffb527501696fd7da3e4"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/declaration.json",
+      "bytes": 4102,
+      "sha256": "84200cc1bdae6bb378924df5994b8cfd4baf63c0dd302a123653027837b0becf"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/global-budget-decision.json",
+      "bytes": 29199,
+      "sha256": "a4b5da6d18acb8fc8ce61e388d5b518cc50d79cc7bc6d2ebf5f03b737129570e"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/global-budget-policy.json",
+      "bytes": 2009,
+      "sha256": "89fced9e1b7c83f0071ddfd6335c54797e62a99585230aa9c65133f8856febb9"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/log-transport.json",
+      "bytes": 2960,
+      "sha256": "bea36a33fcb13d877fe9cbabc77320912064334cba9c05b036d625ce619a1789"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/preparation.json",
+      "bytes": 3401,
+      "sha256": "08654ad490c43cb166d9fd0745a5ba7d8175f65e0f6b4cf774e3152b07df4b37"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/protocol-check.json",
+      "bytes": 406,
+      "sha256": "9592c20c459b1f5fab2ff32a5ff55046db01efee0ea15679ed578c010da4f203"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/protocol.md",
+      "bytes": 9801,
+      "sha256": "3f7b8bedf32771942e842230e6f34e89bef7929300bc59279a0b6e0e2dd97450"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/readiness-template.json",
+      "bytes": 1129,
+      "sha256": "0b58f5bcd802aba8f5925760e864fde4f376e85d727e0f4bd321c6a584e8a26a"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/readiness.json",
+      "bytes": 5964,
+      "sha256": "0fd41cc3e3b76914207809bd5912d518081fbdaab2f1b8ee9919c60664b49793"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/results-render.json",
+      "bytes": 6417,
+      "sha256": "ecc4430892c2566fa66d8b8c803abcc08fb55c51d8a2342a9012efb212cd06c6"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/results.md",
+      "bytes": 29925,
+      "sha256": "3747ab7a933c3a1e73ef57a6d58b0c97dc9bba5773708cf66750a599c04344af"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/static-preflight.json",
+      "bytes": 11613,
+      "sha256": "97e96642c50ae6cb1f554a6cd8fc52664be48fd1aff33c7ea6ab8cbee0da9066"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/window.json",
+      "bytes": 10162,
+      "sha256": "873d420443bfe9a5d69fc3ea70bd29541243226b68227fd5d25400c0dd168ff9"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/prepare-cost-protocol.py",
+      "bytes": 22504,
+      "sha256": "3c7e2dc9a0f961f76a61c66f2d0e4478a05188de3e71e245ba2ecc18ae31a609"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/publication-preflight.json",
+      "bytes": 3372,
+      "sha256": "a7b97cb923c619761439103e382534ec7f2692abe30fb6e6cd39cfb417d74567"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/recorded-regression-cases.json",
+      "bytes": 2202,
+      "sha256": "9f9f638c4fac6942d3758459a2a12fda6106462a4c4a7166dfafabec1dc7ba42"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/release-test-files.json",
+      "bytes": 2653,
+      "sha256": "6760aa39afa706cf8d529113bc85cb0e0bf873c557eed977e35f440e52276a7d"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/restore-contribution.py",
+      "bytes": 4721,
+      "sha256": "bba2aee87eb3fe97b7f86d150b1cba5e21019502a414a20f5a5c8f3cfc9cb9ee"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/verify-publication-inputs.py",
+      "bytes": 4029,
+      "sha256": "4bddad0c99cebddbb234bc40ae7019f38c2fab6058aa9deba082808e5441a126"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/write-cost-results.py",
+      "bytes": 27635,
+      "sha256": "c817928e2d43d4443c8d8cbe29f6eda8896ed284662b90d38ebf337cbf62aa8b"
+    },
+    {
+      "path": "docs/migration/lot3f-reference-population-lineage.md",
+      "bytes": 21522,
+      "sha256": "54b3e964022fba7f14134232055c978ea4968c3cb89c9998e21cea792671ea0f"
+    },
+    {
+      "path": "docs/migration/lot3f-reference-population.md",
+      "bytes": 31580,
+      "sha256": "c62ac078cc0436a64e1032235d596c6d836cedde939a365fa0b8e588de324d61"
+    },
+    {
+      "path": "docs/migration/v6-coverage.json",
+      "bytes": 2527551,
+      "sha256": "fd96ae2ee6ebe337ebbed49840643d53f3f74c17e5ee644ee0c8e7e62070b1c3"
+    },
+    {
+      "path": "docs/migration/v6-delivery-roadmap.md",
+      "bytes": 97647,
+      "sha256": "82146989e7d75ddce0de72e8ca693ea23f4a6b836b807f33002403d492519e49"
+    },
+    {
+      "path": "docs/migration/v6-entry-point-progress.json",
+      "bytes": 18063,
+      "sha256": "ead958f4e858a4b45ee2b68398673787b6c904d84dce11764a1a12b31cf78afa"
+    },
+    {
+      "path": "docs/migration/v6-native-transfer.md",
+      "bytes": 147146,
+      "sha256": "b204ec11504b94e176188b8d091ba035b99456d430278e53c8b185a1708d6664"
+    },
+    {
+      "path": "migration/v6-transfer-map.json",
+      "bytes": 365440,
+      "sha256": "f6b05729ada5df603eb8e16f9c048aecb68c3deed68f10cefdf3d28f6d1c54d2"
+    },
+    {
+      "path": "scripts/audit-v6-entry-points.ts",
+      "bytes": 6467,
+      "sha256": "a92940baccbb96b4fdb0a960591c6129ca42467985542fec90d31a0b28411471"
+    },
+    {
+      "path": "scripts/export-v6-reference-population-legacy-checkpoints.mjs",
+      "bytes": 5427,
+      "sha256": "389f2c5ad44c9261a85f0f56d0dfa2c9a9b836086929b40e3fc04d87fae4143c"
+    },
+    {
+      "path": "scripts/export-v6-reference-population-reference.py",
+      "bytes": 33898,
+      "sha256": "9835bf728969433c553f3a885c75a2f9c45d86825899669007dd103fcd4a488c"
+    },
+    {
+      "path": "scripts/prove-observed-reference-population-contribution.mjs",
+      "bytes": 29687,
+      "sha256": "267cd96753a9f9465de634798fba3e8a3672706b216a77d1d7d915693c9821d6"
+    },
+    {
+      "path": "src/logos-engine/v5-reference-population-calculus.ts",
+      "bytes": 11355,
+      "sha256": "c6c502de79f48ba7e693283fa308317b07ba148bbd9a3fc93b56f611415e4996"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 133532,
+      "sha256": "0d56913bf8ade432cfc734140a61d823f0ffacadfc2691a6daf97f9599ac0458"
+    },
+    {
+      "path": "src/logos-engine/v6-reference-population-access.ts",
+      "bytes": 18240,
+      "sha256": "5806047c7db43fd0d179c5319932e63271b793148ac4477e352abef9c0d458bc"
+    },
+    {
+      "path": "src/logos-engine/v6-reference-population-observation.ts",
+      "bytes": 10028,
+      "sha256": "eff2ab1863edbfcd074300e180508156d0732b586f63169e9bbedc07d3af2308"
+    },
+    {
+      "path": "src/logos-engine/v6-shared-series.ts",
+      "bytes": 78281,
+      "sha256": "9ec1e16b09290e2f256bea57bc837a2ff5c645d39af9337a90687650541fd240"
+    },
+    {
+      "path": "tests/fixtures/v6-reference-population-legacy-checkpoints.json.gz",
+      "bytes": 2490,
+      "sha256": "4ae9c591820e5b1ce49eeae2b1110f8caec3f1f3da4489d70d9e05d1acf266d5"
+    },
+    {
+      "path": "tests/fixtures/v6-reference-population-reference.json.gz",
+      "bytes": 676234,
+      "sha256": "4a8f656ab4aa5708647916bd3fe52a1a09b2c78a64376c2c0cc0552214d86b97"
+    },
+    {
+      "path": "tests/helpers/v6-live-game-campaign.ts",
+      "bytes": 63495,
+      "sha256": "d12ba624cbf9b399da3deb44c156802c46d47b0812c43df554dd4223ebecd8cf"
+    },
+    {
+      "path": "tests/v5-reference-population-calculus.test.ts",
+      "bytes": 8148,
+      "sha256": "e5d6f2d4ca542bfbbe46e681f3e1bbd062b975f6aca3ce8f9cc80a8df90d8075"
+    },
+    {
+      "path": "tests/v6-coupled-pair-planning.test.ts",
+      "bytes": 15719,
+      "sha256": "a3abdcd79e3c3407f0f185129e9884fa8ceb82b9148fce47db54967b1d29192e"
+    },
+    {
+      "path": "tests/v6-radial-port-integration.test.ts",
+      "bytes": 27631,
+      "sha256": "fbe623b8ad704ee5ab008b725b224644b8a09589e5710264529efd1943db36d3"
+    },
+    {
+      "path": "tests/v6-reference-population-access.test.ts",
+      "bytes": 10351,
+      "sha256": "0eca09dd7618ef5f50231c665d8b7636e23289f33c9adc62a3b8f4d38d99cda5"
+    },
+    {
+      "path": "tests/v6-reference-population-integration.test.ts",
+      "bytes": 14812,
+      "sha256": "0aa8f82c4bf9939c1b99d683f0dc20c7ba057a5d339f63f74eee70d8dff205c3"
+    },
+    {
+      "path": "tests/v6-reference-population-observation.test.ts",
+      "bytes": 8385,
+      "sha256": "14c16d06c787d7bfac25849251977fc7cbfb6494d0751853d64d090ddd60059c"
+    },
+    {
+      "path": "tests/v6-support-caller-integration.test.ts",
+      "bytes": 11315,
+      "sha256": "56e02b0ef9729bb42e309616130fb975a1603770a1f687b04f80560654e71f30"
+    }
+  ],
+  "qualification": "Retained delivery files plus named related source and roadmap files. Ignored originals are retained byte-identically as indexed parts or deterministic gzip with reconstruction receipts. This index excludes itself and does not rerun or reinterpret tests, game evidence or cost. The published commit also contains the complete prior evidence history."
+}

@@ -1,0 +1,192 @@
+{
+  "schema": "logos-engine.cpu-self-time-summary.v1",
+  "profile": {
+    "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/before-smlp.cpuprofile.gz",
+    "sha256": "513221595596fae20b74e2578f7e40084dce4f855fe5fbba65d8bc3ad79f6e57",
+    "bytes": 205311
+  },
+  "sampleIntervalMicros": 1000,
+  "topSelfTime": [
+    {
+      "name": "(garbage collector)",
+      "url": "",
+      "lineNumber": -1,
+      "selfMs": 1081.042
+    },
+    {
+      "name": "(idle)",
+      "url": "",
+      "lineNumber": -1,
+      "selfMs": 622.773
+    },
+    {
+      "name": "jsonEntries",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/canonical.ts",
+      "lineNumber": 27,
+      "selfMs": 588.205
+    },
+    {
+      "name": "jsonEntries",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/canonical.ts",
+      "lineNumber": 27,
+      "selfMs": 317.694
+    },
+    {
+      "name": "jsonEntries",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/canonical.ts",
+      "lineNumber": 27,
+      "selfMs": 307.851
+    },
+    {
+      "name": "structuredClone",
+      "url": "node:internal/worker/js_transferable",
+      "lineNumber": 112,
+      "selfMs": 230.818
+    },
+    {
+      "name": "jsonEntries",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/canonical.ts",
+      "lineNumber": 27,
+      "selfMs": 230.244
+    },
+    {
+      "name": "",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/scripts/profile-native-state-costs.mjs",
+      "lineNumber": 0,
+      "selfMs": 195.55
+    },
+    {
+      "name": "visit",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/canonical.ts",
+      "lineNumber": 125,
+      "selfMs": 192.19
+    },
+    {
+      "name": "encode",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/canonical.ts",
+      "lineNumber": 160,
+      "selfMs": 168.379
+    },
+    {
+      "name": "encode",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/canonical.ts",
+      "lineNumber": 160,
+      "selfMs": 152.66
+    },
+    {
+      "name": "detectV5Components",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/v6-native-observer.ts",
+      "lineNumber": 254,
+      "selfMs": 140.702
+    },
+    {
+      "name": "jsonEntries",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/canonical.ts",
+      "lineNumber": 27,
+      "selfMs": 135.874
+    },
+    {
+      "name": "visitRaw",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/v6-native-state-graph.ts",
+      "lineNumber": 105,
+      "selfMs": 130.678
+    },
+    {
+      "name": "visit",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/canonical.ts",
+      "lineNumber": 125,
+      "selfMs": 127.017
+    },
+    {
+      "name": "jsonEntries",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/canonical.ts",
+      "lineNumber": 27,
+      "selfMs": 109.093
+    },
+    {
+      "name": "(program)",
+      "url": "",
+      "lineNumber": -1,
+      "selfMs": 105.218
+    },
+    {
+      "name": "visit",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/canonical.ts",
+      "lineNumber": 125,
+      "selfMs": 100.461
+    },
+    {
+      "name": "visit",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/v6-native-owned.ts",
+      "lineNumber": 18,
+      "selfMs": 98.228
+    },
+    {
+      "name": "jsonEntries",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/canonical.ts",
+      "lineNumber": 27,
+      "selfMs": 98.168
+    },
+    {
+      "name": "configuredRoute",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/v6-configured-arrivals.ts",
+      "lineNumber": 33,
+      "selfMs": 93.385
+    },
+    {
+      "name": "jsonEntries",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/canonical.ts",
+      "lineNumber": 27,
+      "selfMs": 92.547
+    },
+    {
+      "name": "jsonEntries",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/canonical.ts",
+      "lineNumber": 27,
+      "selfMs": 90.872
+    },
+    {
+      "name": "jobPromise",
+      "url": "node:internal/crypto/util",
+      "lineNumber": 872,
+      "selfMs": 84.929
+    },
+    {
+      "name": "",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/v6-transition-learning.ts",
+      "lineNumber": 283,
+      "selfMs": 80.708
+    },
+    {
+      "name": "encodedPatternCounts",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/v6-periodic-cell-grids.ts",
+      "lineNumber": 82,
+      "selfMs": 79.992
+    },
+    {
+      "name": "",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/scripts/profile-native-state-costs.mjs",
+      "lineNumber": 213,
+      "selfMs": 78.289
+    },
+    {
+      "name": "visitRaw",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/v6-native-state-graph.ts",
+      "lineNumber": 105,
+      "selfMs": 78.186
+    },
+    {
+      "name": "visit",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/v6-native-owned.ts",
+      "lineNumber": 18,
+      "selfMs": 74.501
+    },
+    {
+      "name": "encode",
+      "url": "file:///workspace/scratch/c4dd29871d33/lot3b-published-040/src/logos-engine/canonical.ts",
+      "lineNumber": 160,
+      "selfMs": 72.118
+    }
+  ],
+  "qualification": "Sampled self CPU time, not wall time; timing includes the declared diagnostic instrumentation and cannot decide the budget."
+}

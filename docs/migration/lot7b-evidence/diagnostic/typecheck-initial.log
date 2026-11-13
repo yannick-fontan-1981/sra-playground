@@ -1,0 +1,14 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> sra-playground@0.1.0 typecheck
+> tsc --noEmit
+
+src/logos-engine/v6-symbol-interface.ts(68,45): error TS2345: Argument of type '(pair: R[]) => { point: any[]; value: number | undefined; outer: any; width: number; height: number; }[]' is not assignable to parameter of type '(value: EqualRowPair, index: number, array: readonly EqualRowPair[]) => { point: any[]; value: number | undefined; outer: any; width: number; height: number; }[]'.
+  Types of parameters 'pair' and 'value' are incompatible.
+    The type 'EqualRowPair' is 'readonly' and cannot be assigned to the mutable type 'R[]'.
+src/logos-engine/v6-symbol-transactions.ts(120,49): error TS2345: Argument of type '(conditions: readonly DrmCondition[], facts: R) => boolean' is not assignable to parameter of type 'InterfaceHolds'.
+  Types of parameters 'conditions' and 'conditions' are incompatible.
+    Type 'R[]' is not assignable to type 'readonly DrmCondition[]'.
+      Type 'R' is missing the following properties from type 'DrmCondition': field, operator
+src/logos-engine/v6-symbol-transactions.ts(220,57): error TS2345: Argument of type 'readonly NativeCommand[]' is not assignable to parameter of type 'R[]'.
+  The type 'readonly NativeCommand[]' is 'readonly' and cannot be assigned to the mutable type 'R[]'.

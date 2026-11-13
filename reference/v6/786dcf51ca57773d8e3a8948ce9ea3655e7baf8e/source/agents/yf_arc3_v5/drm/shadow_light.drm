@@ -1,0 +1,83 @@
+{
+  "module_id": "drm.shadow_light",
+  "declarations": [
+    {
+      "id": "principle.lower_luminance_shared_surface_opens_shadow_supposition",
+      "kind": "principle",
+      "family_ref": "family.interaction_configuration",
+      "abstraction_level": "morphological_variant",
+      "premises": ["a_declared_render_palette_supplies_RGB_not_an_order_of_color_indices", "a_unique_shared_surface_surrounds_the_body_candidate_and_its_similar_peer", "broader_achromatic_regions_have_strictly_higher_relative_luminance"],
+      "applicability": ["supposition.shadow_region_on_the_lower_luminance_shared_surface"],
+      "invariants": ["shadow_is_a_revisable_role_not_a_fixed_palette_value", "a_dark_wall_is_not_floor_merely_because_it_is_dark", "the_occluded_surface_under_a_glyph_is_inferred_not_directly_seen"],
+      "falsifiers": ["surface_is_wall_or_an_unrelated_material", "render_palette_or_current_surface_evidence_changes"]
+    },
+    {
+      "id": "principle.brighter_gray_region_opens_light_supposition",
+      "kind": "principle",
+      "family_ref": "family.interaction_configuration",
+      "abstraction_level": "morphological_variant",
+      "premises": ["a_broad_achromatic_region_is_brighter_than_the_shared_surface", "it_is_not_the_body_or_target_glyph_or_a_thin_HUD_or_wall_trim"],
+      "applicability": ["supposition.light_region"],
+      "invariants": ["light_gray_is_brighter_than_gray_under_the_declared_RGB_palette", "white_glyphs_do_not_become_light_fields_by_brightness_alone", "illumination_terrain_material_goal_and_interface_meanings_remain_distinct_alternatives"]
+    },
+    {
+      "id": "principle.changing_bright_support_opens_mobile_light_supposition",
+      "kind": "principle",
+      "family_ref": "family.interaction_configuration",
+      "abstraction_level": "causal_variant",
+      "premises": ["several_ordered_observations_exchange_the_lower_surface_and_higher_region_at_the_same_positions", "moving_glyph_footprints_and_post_disappearance_restoration_are_excluded_from_the_measurement"],
+      "applicability": ["supposition.mobile_light_region"],
+      "invariants": ["observed_motion_is_separate_from_a_morphological_light_candidate", "a_phase_period_or_lethality_is_not_deduced_from_brightness_or_change_alone", "actuated_repainting_remains_a_competing_explanation"]
+    },
+    {
+      "id": "principle.shadow_start_and_similar_peer_open_light_avoiding_goal",
+      "kind": "principle",
+      "family_ref": "family.interaction_configuration",
+      "abstraction_level": "causal_variant",
+      "general_principle_refs": ["principle.lower_luminance_shared_surface_opens_shadow_supposition", "principle.brighter_gray_region_opens_light_supposition", "principle.changing_bright_support_opens_mobile_light_supposition", "principle.informative_shadow_neighbor_before_unquestioned_wait", "principle.full_footprint_light_exposure_requires_complete_command_checks"],
+      "premises": ["the_body_candidate_begins_surrounded_by_the_supposed_shadow_surface", "a_similar_peer_is_measured_without_assuming_which_one_is_controlled", "an_adjacent_whole_extent_of_that_surface_is_accessible_as_a_bounded_control_question"],
+      "applicability": ["goal.reach_similar_peer_while_avoiding_mobile_light_under_revisable_roles"],
+      "invariants": ["the_goal_is_a_supposition_not_official_completion", "confirmed_control_and_the_current_parent_are_preserved_when_available", "unknown_light_mobility_is_not_declared_observed", "no_game_identifier_color_role_coordinate_or_witness_route_defines_the_goal"],
+      "falsifiers": ["the_peer_is_not_a_target", "the_different_body_moves", "the_bright_field_is_not_illumination_or_is_not_hazardous", "the_whole_body_is_exposed_during_the_attempt"]
+    },
+    {
+      "id": "principle.informative_shadow_neighbor_before_unquestioned_wait",
+      "kind": "principle",
+      "family_ref": "family.interaction_configuration",
+      "abstraction_level": "causal_variant",
+      "premises": ["a_local_point_question_can_measure_control_and_scene_evolution_together", "no_validated_continuation_or_specific_temporal_discrimination_requires_waiting"],
+      "applicability": ["prefer_the_informative_local_movement_without_a_universal_order"],
+      "invariants": ["wait_remains_available_for_a_precise_clock_or_synchronization_question", "a_control_candidate_is_not_confirmed_before_action_conditioned_translation", "do_not_create_a_concentration_parent_for_a_direct_goal"]
+    },
+    {
+      "id": "principle.measured_surface_route_guides_shadow_prefix_question",
+      "kind": "principle",
+      "family_ref": "family.interaction_configuration",
+      "abstraction_level": "causal_variant",
+      "general_principle_refs": ["principle.shadow_start_and_similar_peer_open_light_avoiding_goal", "principle.arrived_point_destination_is_not_a_fresh_control_fragment"],
+      "premises": ["the_same_patch_pair_and_goal_survive_a_unique_ordered_translation", "a_complete_measured_surface_route_is_returned_by_the_existing_route_service_under_a_declared_provisional_graph", "its_first_straight_segment_fits_the_current_whole_shadow_extent"],
+      "applicability": ["question.the_first_straight_destination_under_the_same_goal_even_when_a_detour_increases_geometric_gap"],
+      "invariants": ["light_is_not_a_permanent_physical_wall", "unknown_pixels_and_dynamic_occlusions_are_not_claimed_static_obstacles", "the_raster_order_is_a_planning_witness_not_the_native_click_tie_order", "a_straight_manhattan_segment_has_no_competing_shortest_spatial_route", "the_whole_route_guides_the_question_but_only_one_exact_point_is_released", "no_temporal_safety_certificate_is_inferred_from_current_shadow", "recompute_current_physical_premises_without_replacing_the_principal_goal"],
+      "falsifiers": ["surface_or_lattice_or_destination_control_is_contradicted", "intra_command_exposure_or_contact_occurs", "the_route_is_unavailable_under_current_geometry"]
+    },
+    {
+      "id": "principle.arrived_point_destination_is_not_a_fresh_control_fragment",
+      "kind": "principle",
+      "family_ref": "family.interaction_configuration",
+      "abstraction_level": "causal_variant",
+      "premises": ["a_unique_whole_body_translates_under_the_last_point_input", "it_arrives_exactly_at_that_point_under_the_measured_anchor_convention", "the_next_whole_surface_route_point_is_outside_the_current_body", "the_pair_epoch_goal_and_current_geometry_are_revalidated"],
+      "applicability": ["the_next_payload_is_a_revisable_destination_question_not_selection_of_another_fragment_of_the_same_control"],
+      "invariants": ["do_not_reject_a_destination_merely_because_it_shares_a_large_surface_component_with_a_previous_click", "retain_all_other_eligibility_checks_current_supports_and_action_permits", "this_does_not_reopen_untested_piece_selections_or_ambiguous_no_translation_clicks", "a_single_arrival_is_not_a_universal_click_law"],
+      "falsifiers": ["the_body_is_not_unique", "the_prior_point_was_not_reached", "the_new_point_selects_an_independent_control_instead_of_moving_the_same_body"]
+    },
+    {
+      "id": "principle.full_footprint_light_exposure_requires_complete_command_checks",
+      "kind": "principle",
+      "family_ref": "family.interaction_configuration",
+      "abstraction_level": "causal_variant",
+      "premises": ["a_light_avoidance_goal_is_active"],
+      "applicability": ["preserve_the_whole_body_against_the_mobile_light_field"],
+      "invariants": ["include_dark_and_bright_parts_of_the_same_body", "safe_center_or_safe_destination_does_not_prove_a_safe_command", "when_predicting_a_command_check_every_internal_position_and_compatible_phase", "an_unknown_model_allows_an_explicit_bounded_experiment_not_a_false_safety_certificate", "keep_detection_before_goal_if_current_evidence_supports_that_order"]
+    }
+  ]
+}

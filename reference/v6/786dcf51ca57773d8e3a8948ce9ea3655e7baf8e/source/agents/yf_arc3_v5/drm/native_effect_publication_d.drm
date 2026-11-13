@@ -1,0 +1,1937 @@
+{
+  "module_id": "native_effect_publication_d",
+  "declarations": [
+    {
+      "id": "policy.d_native_effect_interpretation",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.d_source_qualifies_only_exact_current_descriptive_native_return"
+      ],
+      "declared_alternative_refs": [
+        "d_native_interpretation.cyclic_configuration_coverage",
+        "d_native_interpretation.gravity_adhesion",
+        "d_native_interpretation.reactive_capture",
+        "d_native_interpretation.fixed_program_origin",
+        "d_native_interpretation.temporal_fragment_match",
+        "d_native_interpretation.bounded_joystick",
+        "d_native_interpretation.neighborhood_pattern_construction",
+        "d_native_interpretation.visual_sequence",
+        "d_native_interpretation.topological_region_recolor",
+        "d_native_interpretation.layered_prefix_construction",
+        "d_native_interpretation.preview_piece_packing",
+        "d_native_interpretation.station_profile_workbench",
+        "d_native_interpretation.axial_field_configuration",
+        "d_native_interpretation.supported_construction",
+        "d_native_interpretation.finite_alignment",
+        "d_native_interpretation.visible_voxel_construction",
+        "d_native_interpretation.discrete_relay_optics",
+        "d_native_interpretation.cadenced_rail_transfer",
+        "d_native_interpretation.blocked"
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.d_native_interpretation_equivalent_alternative_order",
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.d_native_interpretation.cyclic_configuration_coverage",
+          "reason_ref": "reason.d_source_qualifies_only_exact_current_descriptive_native_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_native_interpretation.cyclic_configuration_coverage"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.cyclic_configuration_coverage"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.cyclic_configuration_coverage"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "CyclicCoverageRequest"
+            },
+            {
+              "field": "scope_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.cyclic_configuration_coverage"
+            },
+            {
+              "field": "query_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_request.descriptive_return"
+            },
+            {
+              "field": "publication_inputs_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "guard_contract_ref",
+              "operator": "equals",
+              "expected": "guard.native_effect.cyclic_configuration_coverage"
+            },
+            {
+              "field": "guard_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "coverage_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "trace_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "tier.d_native_interpretation.gravity_adhesion",
+          "reason_ref": "reason.d_source_qualifies_only_exact_current_descriptive_native_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_native_interpretation.gravity_adhesion"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.gravity_adhesion"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.gravity_adhesion"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "CoupledMemberRequest"
+            },
+            {
+              "field": "scope_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.gravity_adhesion"
+            },
+            {
+              "field": "query_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_request.descriptive_return"
+            },
+            {
+              "field": "publication_inputs_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "guard_contract_ref",
+              "operator": "equals",
+              "expected": "guard.native_effect.gravity_adhesion"
+            },
+            {
+              "field": "guard_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "coverage_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "trace_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "tier.d_native_interpretation.reactive_capture",
+          "reason_ref": "reason.d_source_qualifies_only_exact_current_descriptive_native_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_native_interpretation.reactive_capture"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.reactive_capture"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.reactive_capture"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "ReactiveCaptureRequest"
+            },
+            {
+              "field": "scope_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.reactive_capture"
+            },
+            {
+              "field": "query_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_request.descriptive_return"
+            },
+            {
+              "field": "publication_inputs_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "guard_contract_ref",
+              "operator": "equals",
+              "expected": "guard.native_effect.reactive_capture"
+            },
+            {
+              "field": "guard_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "coverage_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "trace_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "tier.d_native_interpretation.fixed_program_origin",
+          "reason_ref": "reason.d_source_qualifies_only_exact_current_descriptive_native_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_native_interpretation.fixed_program_origin"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.fixed_program_origin"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.fixed_program_origin"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "FixedProgramRequest"
+            },
+            {
+              "field": "scope_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.fixed_program_origin"
+            },
+            {
+              "field": "query_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_request.descriptive_return"
+            },
+            {
+              "field": "publication_inputs_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "guard_contract_ref",
+              "operator": "equals",
+              "expected": "guard.native_effect.fixed_program_origin"
+            },
+            {
+              "field": "guard_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "coverage_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "trace_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "tier.d_native_interpretation.temporal_fragment_match",
+          "reason_ref": "reason.d_source_qualifies_only_exact_current_descriptive_native_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_native_interpretation.temporal_fragment_match"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.temporal_fragment_match"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.temporal_fragment_match"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "TemporalFragmentRequest"
+            },
+            {
+              "field": "scope_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.temporal_fragment_match"
+            },
+            {
+              "field": "query_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_request.descriptive_return"
+            },
+            {
+              "field": "publication_inputs_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "guard_contract_ref",
+              "operator": "equals",
+              "expected": "guard.native_effect.temporal_fragment_match"
+            },
+            {
+              "field": "guard_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "coverage_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "trace_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "tier.d_native_interpretation.bounded_joystick",
+          "reason_ref": "reason.d_source_qualifies_only_exact_current_descriptive_native_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_native_interpretation.bounded_joystick"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.bounded_joystick"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.bounded_joystick"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "BoundedJoystickRequest"
+            },
+            {
+              "field": "scope_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.bounded_joystick"
+            },
+            {
+              "field": "query_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_request.descriptive_return"
+            },
+            {
+              "field": "publication_inputs_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "guard_contract_ref",
+              "operator": "equals",
+              "expected": "guard.native_effect.bounded_joystick"
+            },
+            {
+              "field": "joystick_relation_bundle_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "joystick_modular_certificate_violation_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "guard_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "coverage_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "trace_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "tier.d_native_interpretation.neighborhood_pattern_construction",
+          "reason_ref": "reason.d_source_qualifies_only_exact_current_descriptive_native_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_native_interpretation.neighborhood_pattern_construction"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.neighborhood_pattern_construction"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.neighborhood_pattern_construction"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "NeighborhoodPatternRequest"
+            },
+            {
+              "field": "scope_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.neighborhood_pattern_construction"
+            },
+            {
+              "field": "query_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_request.descriptive_return"
+            },
+            {
+              "field": "publication_inputs_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "guard_contract_ref",
+              "operator": "equals",
+              "expected": "guard.native_effect.neighborhood_pattern_construction"
+            },
+            {
+              "field": "guard_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "coverage_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "trace_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "tier.d_native_interpretation.visual_sequence",
+          "reason_ref": "reason.d_source_qualifies_only_exact_current_descriptive_native_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_native_interpretation.visual_sequence"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.visual_sequence"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.visual_sequence"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "VisualSequenceRequest"
+            },
+            {
+              "field": "scope_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.visual_sequence"
+            },
+            {
+              "field": "query_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_request.descriptive_return"
+            },
+            {
+              "field": "publication_inputs_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "guard_contract_ref",
+              "operator": "equals",
+              "expected": "guard.native_effect.visual_sequence"
+            },
+            {
+              "field": "guard_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "coverage_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "trace_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "tier.d_native_interpretation.topological_region_recolor",
+          "reason_ref": "reason.d_source_qualifies_only_exact_current_descriptive_native_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_native_interpretation.topological_region_recolor"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.topological_region_recolor"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.topological_region_recolor"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "TopologicalRecolorRequest"
+            },
+            {
+              "field": "scope_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.topological_region_recolor"
+            },
+            {
+              "field": "query_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_request.descriptive_return"
+            },
+            {
+              "field": "publication_inputs_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "guard_contract_ref",
+              "operator": "equals",
+              "expected": "guard.native_effect.topological_region_recolor"
+            },
+            {
+              "field": "guard_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "coverage_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "trace_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "tier.d_native_interpretation.layered_prefix_construction",
+          "reason_ref": "reason.d_source_qualifies_only_exact_current_descriptive_native_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_native_interpretation.layered_prefix_construction"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.layered_prefix_construction"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.layered_prefix_construction"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "LayeredPrefixRequest"
+            },
+            {
+              "field": "scope_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.layered_prefix_construction"
+            },
+            {
+              "field": "query_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_request.descriptive_return"
+            },
+            {
+              "field": "publication_inputs_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "guard_contract_ref",
+              "operator": "equals",
+              "expected": "guard.native_effect.layered_prefix_construction"
+            },
+            {
+              "field": "guard_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "coverage_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "trace_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "tier.d_native_interpretation.preview_piece_packing",
+          "reason_ref": "reason.d_source_qualifies_only_exact_current_descriptive_native_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_native_interpretation.preview_piece_packing"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.preview_piece_packing"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.preview_piece_packing"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "PreviewPackingRequest"
+            },
+            {
+              "field": "scope_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.preview_piece_packing"
+            },
+            {
+              "field": "query_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_request.descriptive_return"
+            },
+            {
+              "field": "publication_inputs_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "guard_contract_ref",
+              "operator": "equals",
+              "expected": "guard.native_effect.preview_piece_packing"
+            },
+            {
+              "field": "guard_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "coverage_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "trace_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "tier.d_native_interpretation.station_profile_workbench",
+          "reason_ref": "reason.d_source_qualifies_only_exact_current_descriptive_native_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_native_interpretation.station_profile_workbench"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.station_profile_workbench"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.station_profile_workbench"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "StationWorkbenchRequest"
+            },
+            {
+              "field": "scope_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.station_profile_workbench"
+            },
+            {
+              "field": "query_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_request.descriptive_return"
+            },
+            {
+              "field": "publication_inputs_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "guard_contract_ref",
+              "operator": "equals",
+              "expected": "guard.native_effect.station_profile_workbench"
+            },
+            {
+              "field": "guard_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "coverage_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "trace_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "tier.d_native_interpretation.axial_field_configuration",
+          "reason_ref": "reason.d_source_qualifies_only_exact_current_descriptive_native_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_native_interpretation.axial_field_configuration"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.axial_field_configuration"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.axial_field_configuration"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "AxialFieldRequest"
+            },
+            {
+              "field": "scope_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.axial_field_configuration"
+            },
+            {
+              "field": "query_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_request.descriptive_return"
+            },
+            {
+              "field": "publication_inputs_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "guard_contract_ref",
+              "operator": "equals",
+              "expected": "guard.native_effect.axial_field_configuration"
+            },
+            {
+              "field": "axial_relation_bundle_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "guard_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "coverage_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "trace_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "tier.d_native_interpretation.supported_construction",
+          "reason_ref": "reason.d_source_qualifies_only_exact_current_descriptive_native_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_native_interpretation.supported_construction"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.supported_construction"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.supported_construction"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "SupportedConstructionRequest"
+            },
+            {
+              "field": "scope_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.supported_construction"
+            },
+            {
+              "field": "query_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_request.descriptive_return"
+            },
+            {
+              "field": "publication_inputs_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "guard_contract_ref",
+              "operator": "equals",
+              "expected": "guard.native_effect.supported_construction"
+            },
+            {
+              "field": "construction_graph_partition_transport_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "guard_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "coverage_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "trace_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "tier.d_native_interpretation.finite_alignment",
+          "reason_ref": "reason.d_source_qualifies_only_exact_current_descriptive_native_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_native_interpretation.finite_alignment"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.finite_alignment_game"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.finite_alignment_game"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "FiniteAlignmentRequest"
+            },
+            {
+              "field": "scope_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.finite_alignment"
+            },
+            {
+              "field": "query_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_request.descriptive_return"
+            },
+            {
+              "field": "publication_inputs_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "guard_contract_ref",
+              "operator": "equals",
+              "expected": "guard.native_effect.finite_alignment_game"
+            },
+            {
+              "field": "guard_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "coverage_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "trace_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "tier.d_native_interpretation.visible_voxel_construction",
+          "reason_ref": "reason.d_source_qualifies_only_exact_current_descriptive_native_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_native_interpretation.visible_voxel_construction"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.visible_voxel_construction"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.visible_voxel_construction"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "VisibleVoxelRequest"
+            },
+            {
+              "field": "scope_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.visible_voxel_construction"
+            },
+            {
+              "field": "query_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_request.descriptive_return"
+            },
+            {
+              "field": "publication_inputs_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "guard_contract_ref",
+              "operator": "equals",
+              "expected": "guard.native_effect.visible_voxel_construction"
+            },
+            {
+              "field": "guard_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "coverage_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "trace_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "tier.d_native_interpretation.discrete_relay_optics",
+          "reason_ref": "reason.d_source_qualifies_only_exact_current_descriptive_native_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_native_interpretation.discrete_relay_optics"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.discrete_relay_optics"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.discrete_relay_optics"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "DiscreteOpticsRequest"
+            },
+            {
+              "field": "scope_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.discrete_relay_optics"
+            },
+            {
+              "field": "query_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_request.descriptive_return"
+            },
+            {
+              "field": "publication_inputs_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "guard_contract_ref",
+              "operator": "equals",
+              "expected": "guard.native_effect.discrete_relay_optics"
+            },
+            {
+              "field": "guard_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "coverage_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "trace_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "tier.d_native_interpretation.cadenced_rail_transfer",
+          "reason_ref": "reason.d_source_qualifies_only_exact_current_descriptive_native_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_native_interpretation.cadenced_rail_transfer"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.cadenced_rail_transfer"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.cadenced_rail_transfer"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "CadencedRailRequest"
+            },
+            {
+              "field": "scope_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.cadenced_rail_transfer"
+            },
+            {
+              "field": "query_disposition_ref",
+              "operator": "equals",
+              "expected": "d_effect_request.descriptive_return"
+            },
+            {
+              "field": "publication_inputs_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "guard_contract_ref",
+              "operator": "equals",
+              "expected": "guard.native_effect.cadenced_rail_transfer"
+            },
+            {
+              "field": "rail_relation_bundle_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "guard_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "coverage_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "trace_relation_violation_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "tier.d_native_interpretation.blocked",
+          "reason_ref": "reason.d_source_qualifies_only_exact_current_descriptive_native_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_native_interpretation.blocked"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "d_native_interpretation.gravity_adhesion": "rule.d_native_descriptive_qualification",
+        "d_native_interpretation.cyclic_configuration_coverage": "rule.d_native_descriptive_qualification",
+        "d_native_interpretation.reactive_capture": "rule.d_native_descriptive_qualification",
+        "d_native_interpretation.fixed_program_origin": "rule.d_native_descriptive_qualification",
+        "d_native_interpretation.temporal_fragment_match": "rule.d_native_descriptive_qualification",
+        "d_native_interpretation.bounded_joystick": "rule.d_native_descriptive_qualification",
+        "d_native_interpretation.neighborhood_pattern_construction": "rule.d_native_descriptive_qualification",
+        "d_native_interpretation.visual_sequence": "rule.d_native_descriptive_qualification",
+        "d_native_interpretation.topological_region_recolor": "rule.d_native_descriptive_qualification",
+        "d_native_interpretation.layered_prefix_construction": "rule.d_native_descriptive_qualification",
+        "d_native_interpretation.preview_piece_packing": "rule.d_native_descriptive_qualification",
+        "d_native_interpretation.station_profile_workbench": "rule.d_native_descriptive_qualification",
+        "d_native_interpretation.axial_field_configuration": "rule.d_native_descriptive_qualification",
+        "d_native_interpretation.supported_construction": "rule.d_native_descriptive_qualification",
+        "d_native_interpretation.finite_alignment": "rule.d_native_descriptive_qualification",
+        "d_native_interpretation.visible_voxel_construction": "rule.d_native_descriptive_qualification",
+        "d_native_interpretation.discrete_relay_optics": "rule.d_native_descriptive_qualification",
+        "d_native_interpretation.cadenced_rail_transfer": "rule.d_native_descriptive_qualification"
+      },
+      "configuration": {
+        "payload_field_bindings": {
+          "result": "normalized_result_payload",
+          "native_result": "native_result_payload",
+          "retained_model_alternatives": "retained_models_payload",
+          "observed_interval_digest": "sealed_packet_digest",
+          "causal_aspect_evidence": "guard_relations_payload",
+          "native_input": "native_input_payload"
+        },
+        "payload_static_fields": {
+          "model_projection_scope_ref": "native_result_scope",
+          "no_model_set_confirmation": true,
+          "no_dispatch_or_action_authority": true,
+          "no_equivalence_or_success_from_partial_projection": true
+        },
+        "guard_specs_by_profile": {
+          "solving.axial_field_configuration": {
+            "guard_contract_ref": "guard.native_effect.axial_field_configuration",
+            "axial_transaction_relations": true,
+            "maximum_guard_visits": 100000,
+            "aspect_projections": [
+              {
+                "aspect_ref": "aspect.axial_field_configuration.selection",
+                "paths": [
+                  [
+                    "active_body_ref"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.axial_field_configuration.all_body_states",
+                "paths": [
+                  [
+                    "bodies"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.axial_field_configuration.resource",
+                "paths": [
+                  [
+                    "reserve"
+                  ],
+                  [
+                    "terminated"
+                  ]
+                ]
+              }
+            ]
+          },
+          "solving.bounded_joystick": {
+            "guard_contract_ref": "guard.native_effect.bounded_joystick",
+            "joystick_transaction_relations": true,
+            "maximum_guard_visits": 100000,
+            "aspect_projections": [
+              {
+                "aspect_ref": "aspect.bounded_joystick.positions",
+                "paths": [
+                  [
+                    "occurrences",
+                    "*",
+                    "row"
+                  ],
+                  [
+                    "occurrences",
+                    "*",
+                    "column"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.bounded_joystick.knob_settings",
+                "paths": [
+                  [
+                    "pads"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.bounded_joystick.selection",
+                "paths": [
+                  [
+                    "active_occurrence_ref"
+                  ],
+                  [
+                    "active_pad_ref"
+                  ],
+                  [
+                    "draw_order"
+                  ]
+                ]
+              }
+            ]
+          },
+          "solving.cadenced_rail_transfer": {
+            "guard_contract_ref": "guard.native_effect.cadenced_rail_transfer",
+            "rail_transaction_relations": true,
+            "maximum_guard_visits": 100000,
+            "aspect_projections": [
+              {
+                "aspect_ref": "aspect.cadenced_rail_transfer.visible_rail_pose",
+                "paths": [
+                  [
+                    "poses"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.cadenced_rail_transfer.load_ownership",
+                "paths": [
+                  [
+                    "loads"
+                  ],
+                  [
+                    "unattached_box_refs"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.cadenced_rail_transfer.actuator_state",
+                "paths": [
+                  [
+                    "arms"
+                  ]
+                ]
+              }
+            ]
+          },
+          "solving.cyclic_configuration_coverage": {
+            "guard_contract_ref": "guard.native_effect.cyclic_configuration_coverage",
+            "maximum_guard_visits": 100000,
+            "aspect_projections": [
+              {
+                "aspect_ref": "aspect.cyclic_configuration_coverage.tuple",
+                "paths": [
+                  [
+                    "current"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.cyclic_configuration_coverage.history",
+                "paths": [
+                  [
+                    "visited"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.cyclic_configuration_coverage.resource",
+                "paths": [
+                  [
+                    "reserve"
+                  ]
+                ]
+              }
+            ]
+          },
+          "solving.discrete_relay_optics": {
+            "guard_contract_ref": "guard.native_effect.discrete_relay_optics",
+            "maximum_guard_visits": 100000,
+            "aspect_projections": [
+              {
+                "aspect_ref": "aspect.discrete_relay_optics.physical_settings",
+                "paths": [
+                  [
+                    "settings"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.discrete_relay_optics.activation",
+                "paths": [
+                  [
+                    "shot_count"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.discrete_relay_optics.recorded_acceptance",
+                "paths": [
+                  [
+                    "acquired_terminal_refs"
+                  ],
+                  [
+                    "terminated"
+                  ]
+                ]
+              }
+            ]
+          },
+          "solving.finite_alignment_game": {
+            "guard_contract_ref": "guard.native_effect.finite_alignment_game",
+            "maximum_guard_visits": 100000,
+            "aspect_projections": [
+              {
+                "aspect_ref": "aspect.finite_alignment_game.board_projection",
+                "paths": [
+                  [
+                    "boards"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.finite_alignment_game.selection",
+                "paths": [
+                  [
+                    "active_board_ref"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.finite_alignment_game.win_resource_state",
+                "paths": [
+                  [
+                    "wins"
+                  ],
+                  [
+                    "reserve"
+                  ],
+                  [
+                    "disqualified"
+                  ]
+                ]
+              }
+            ]
+          },
+          "solving.fixed_program_origin": {
+            "guard_contract_ref": "guard.native_effect.fixed_program_origin",
+            "maximum_guard_visits": 100000,
+            "aspect_projections": [
+              {
+                "aspect_ref": "aspect.fixed_program_origin.position",
+                "paths": [
+                  [
+                    "node_ref"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.fixed_program_origin.memory",
+                "paths": [
+                  [
+                    "memory_ref"
+                  ],
+                  [
+                    "consumed_closure_refs"
+                  ]
+                ]
+              }
+            ]
+          },
+          "solving.layered_prefix_construction": {
+            "guard_contract_ref": "guard.native_effect.layered_prefix_construction",
+            "maximum_guard_visits": 100000,
+            "aspect_projections": [
+              {
+                "aspect_ref": "aspect.layered_prefix_construction.visible_color",
+                "paths": [
+                  [
+                    "threads",
+                    "*",
+                    "color"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.layered_prefix_construction.full_material_prefix",
+                "paths": [
+                  [
+                    "threads",
+                    "*",
+                    "layers"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.layered_prefix_construction.selection",
+                "paths": [
+                  [
+                    "active_thread_ref"
+                  ]
+                ]
+              }
+            ]
+          },
+          "solving.neighborhood_pattern_construction": {
+            "guard_contract_ref": "guard.native_effect.neighborhood_pattern_construction",
+            "maximum_guard_visits": 100000,
+            "aspect_projections": [
+              {
+                "aspect_ref": "aspect.neighborhood_pattern_construction.geometric_population",
+                "paths": [
+                  [
+                    "occurrences"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.neighborhood_pattern_construction.selection",
+                "paths": [
+                  [
+                    "active_occurrence_ref"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.neighborhood_pattern_construction.resource",
+                "paths": [
+                  [
+                    "reserve"
+                  ],
+                  [
+                    "terminated"
+                  ]
+                ]
+              }
+            ]
+          },
+          "solving.preview_piece_packing": {
+            "guard_contract_ref": "guard.native_effect.preview_piece_packing",
+            "maximum_guard_visits": 100000,
+            "aspect_projections": [
+              {
+                "aspect_ref": "aspect.preview_piece_packing.preview_material_pose",
+                "paths": [
+                  [
+                    "poses"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.preview_piece_packing.held_state",
+                "paths": [
+                  [
+                    "held_piece_ref"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.preview_piece_packing.rollback_state",
+                "paths": [
+                  [
+                    "pickup_pose"
+                  ]
+                ]
+              }
+            ]
+          },
+          "solving.reactive_capture": {
+            "guard_contract_ref": "guard.native_effect.reactive_capture",
+            "maximum_guard_visits": 100000,
+            "aspect_projections": [
+              {
+                "aspect_ref": "aspect.reactive_capture.contact_position",
+                "paths": [
+                  [
+                    "hunter"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.reactive_capture.actual_captures",
+                "paths": [
+                  [
+                    "captured_refs"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.reactive_capture.binding",
+                "paths": [
+                  [
+                    "coupled_stone_ref"
+                  ],
+                  [
+                    "tether_offset"
+                  ]
+                ]
+              }
+            ]
+          },
+          "solving.station_profile_workbench": {
+            "guard_contract_ref": "guard.native_effect.station_profile_workbench",
+            "maximum_guard_visits": 100000,
+            "aspect_projections": [
+              {
+                "aspect_ref": "aspect.station_profile_workbench.focus",
+                "paths": [
+                  [
+                    "focus_slot_ref"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.station_profile_workbench.grasp",
+                "paths": [
+                  [
+                    "held_key_ref"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.station_profile_workbench.actual_receipts",
+                "paths": [
+                  [
+                    "receipts"
+                  ],
+                  [
+                    "trial"
+                  ]
+                ]
+              }
+            ]
+          },
+          "solving.supported_construction": {
+            "guard_contract_ref": "guard.native_effect.supported_construction",
+            "construction_graph_partitions": true,
+            "maximum_guard_visits": 100000,
+            "aspect_projections": [
+              {
+                "aspect_ref": "aspect.supported_construction.landing_preview",
+                "paths": [
+                  [
+                    "ghost"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.supported_construction.full_material",
+                "paths": [
+                  [
+                    "beams"
+                  ],
+                  [
+                    "stock"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.supported_construction.actual_ready_state",
+                "paths": [
+                  [
+                    "ready"
+                  ]
+                ]
+              }
+            ]
+          },
+          "solving.temporal_fragment_match": {
+            "guard_contract_ref": "guard.native_effect.temporal_fragment_match",
+            "maximum_guard_visits": 100000,
+            "aspect_projections": [
+              {
+                "aspect_ref": "aspect.temporal_fragment_match.public_index",
+                "paths": [
+                  [
+                    "current_index"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.temporal_fragment_match.channel_revision",
+                "paths": [
+                  [
+                    "film_revision_ref"
+                  ],
+                  [
+                    "reference_revision_ref"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.temporal_fragment_match.acceptance",
+                "paths": [
+                  [
+                    "accepted_count"
+                  ],
+                  [
+                    "attempt_count"
+                  ]
+                ]
+              }
+            ]
+          },
+          "solving.topological_region_recolor": {
+            "guard_contract_ref": "guard.native_effect.topological_region_recolor",
+            "maximum_guard_visits": 100000,
+            "aspect_projections": [
+              {
+                "aspect_ref": "aspect.topological_region_recolor.painted_raster",
+                "paths": [
+                  [
+                    "field"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.topological_region_recolor.pigment_selection",
+                "paths": [
+                  [
+                    "active_pigment"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.topological_region_recolor.acceptance",
+                "paths": [
+                  [
+                    "accepted"
+                  ],
+                  [
+                    "terminated"
+                  ]
+                ]
+              }
+            ]
+          },
+          "solving.visible_voxel_construction": {
+            "guard_contract_ref": "guard.native_effect.visible_voxel_construction",
+            "maximum_guard_visits": 100000,
+            "aspect_projections": [
+              {
+                "aspect_ref": "aspect.visible_voxel_construction.material_population",
+                "paths": [
+                  [
+                    "occurrences"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.visible_voxel_construction.visible_tool",
+                "paths": [
+                  [
+                    "tool_ref"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.visible_voxel_construction.resource",
+                "paths": [
+                  [
+                    "reserve"
+                  ],
+                  [
+                    "terminated"
+                  ]
+                ]
+              }
+            ]
+          },
+          "solving.visual_sequence": {
+            "guard_contract_ref": "guard.native_effect.visual_sequence",
+            "maximum_guard_visits": 100000,
+            "aspect_projections": [
+              {
+                "aspect_ref": "aspect.visual_sequence.navigation",
+                "paths": [
+                  [
+                    "active_question_ref"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.visual_sequence.proposal_focus",
+                "paths": [
+                  [
+                    "focused_proposal_ref"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.visual_sequence.answer_history",
+                "paths": [
+                  [
+                    "accepted_question_refs"
+                  ],
+                  [
+                    "attempt_count"
+                  ]
+                ]
+              }
+            ]
+          },
+          "solving.gravity_adhesion": {
+            "guard_contract_ref": "guard.native_effect.gravity_adhesion",
+            "maximum_guard_visits": 100000,
+            "aspect_projections": [
+              {
+                "aspect_ref": "aspect.gravity_adhesion.full_member_poses_and_latches",
+                "paths": [
+                  [
+                    "poses"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.gravity_adhesion.persistent_global_mode",
+                "paths": [
+                  [
+                    "gravity"
+                  ],
+                  [
+                    "adhesion_on"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.gravity_adhesion.external_input_resource",
+                "paths": [
+                  [
+                    "reserve"
+                  ],
+                  [
+                    "terminated"
+                  ]
+                ]
+              },
+              {
+                "aspect_ref": "aspect.gravity_adhesion.acquired_memory",
+                "paths": [
+                  [
+                    "memory"
+                  ]
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "invariants": [
+        "observed_interval_is_distinct_from_conditional_model_projection",
+        "all_models_refusals_bounds_and_unknowns_retained",
+        "no_law_or_terminal_confirmation",
+        "no_physical_packet_production",
+        "parent_and_siblings_preserved"
+      ],
+      "falsifiers": [
+        "changed_packet_or_owner",
+        "different_native_result",
+        "stale_evidence",
+        "omitted_model_alternative",
+        "publication_reference_collision"
+      ]
+    },
+    {
+      "id": "rule.d_native_descriptive_qualification",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "current_real_scoped_packet_and_exact_original_native_return"
+      ],
+      "applicability": [
+        "source_selected_current_native_descriptive_interpretation"
+      ],
+      "reason_refs": [
+        "reason.d_source_qualifies_only_exact_current_descriptive_native_return"
+      ],
+      "invariants": [
+        "observed_interval_is_distinct_from_conditional_model_projection",
+        "all_models_refusals_bounds_and_unknowns_retained",
+        "no_law_or_terminal_confirmation",
+        "no_physical_packet_production",
+        "parent_and_siblings_preserved"
+      ],
+      "falsifiers": [
+        "changed_packet_or_owner",
+        "different_native_result",
+        "stale_evidence",
+        "omitted_model_alternative",
+        "publication_reference_collision"
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{qualification_claim_ref}",
+          "predicate": "qualifies_native_family_sealed_interpretation",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "{packet_term_ref}",
+            "{facet_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "{packet_term_ref}",
+            "{facet_ref}"
+          ],
+          "required_fields": [
+            "publication_ref",
+            "qualification_claim_ref",
+            "parent_goal_ref",
+            "scope_ref",
+            "epoch",
+            "input_revision_ref",
+            "episode_ref",
+            "level_scope_ref",
+            "frame_ref",
+            "facet_ref",
+            "packet_term_ref",
+            "packet_projection_contract_ref",
+            "packet_digest",
+            "exact_request_signature_ref",
+            "payload_digest",
+            "affected_dependency_refs"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref"
+          },
+          "attribute_bindings": {
+            "publication_ref": "publication_ref",
+            "packet_digest": "packet_digest",
+            "packet_projection_contract_ref": "packet_projection_contract_ref",
+            "frame_ref": "frame_ref",
+            "exact_request_signature_ref": "exact_request_signature_ref",
+            "affected_dependency_refs": "affected_dependency_refs",
+            "interpretation_digest": "payload_digest"
+          },
+          "static_attributes": {
+            "no_dispatch_or_action_authority": true,
+            "no_model_set_confirmation": true
+          }
+        }
+      ]
+    }
+  ]
+}

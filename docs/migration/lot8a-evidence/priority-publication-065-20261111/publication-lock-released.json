@@ -1,0 +1,30 @@
+{
+  "schema": "logos-engine.lot8a.priority065-publication-lock.v1",
+  "owner": "lot8a",
+  "lease": "lot8a-priority065-2",
+  "startedAt": "2026-11-12T01:10:11.315711+00:00",
+  "maximumSeconds": 300,
+  "path": "/workspace/shared/sra-coordination/publication.lock",
+  "blocking": false,
+  "publicationOnly": true,
+  "peerAvailabilityWait": false,
+  "performanceLockAcquired": false,
+  "lockFileRemoved": false,
+  "holderPid": 2,
+  "identity": {
+    "device": 27,
+    "inode": 792599,
+    "bytes": 0
+  },
+  "status": "released",
+  "acquiredAt": "2026-11-12T01:10:11.315879+00:00",
+  "releasedBy": "explicit_owner_release",
+  "releasedAt": "2026-11-12T01:11:13.388160+00:00",
+  "finalIdentity": {
+    "device": 27,
+    "inode": 792599,
+    "bytes": 0
+  },
+  "sameLockFile": true,
+  "descriptorClosed": true
+}

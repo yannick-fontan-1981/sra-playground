@@ -1,0 +1,36 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "life-campaign.json.gz",
+    "sha256": "bb69e0807b43b72707ea1976aa56b6ec56bdb4a1d4d6be22fbe0d1eb58778f1e",
+    "bytes": 4482141
+  },
+  "parts": [
+    {
+      "file": "life-campaign.json.gz.part000",
+      "sha256": "bdabbc4a1e287c313ed40857e9d58c4de994aadef61108470a6e25afe4773c01",
+      "bytes": 900000
+    },
+    {
+      "file": "life-campaign.json.gz.part001",
+      "sha256": "03ef438705040057df29a3f4b9f1e06b18313abadd7bd20a78a3cff7b032acd2",
+      "bytes": 900000
+    },
+    {
+      "file": "life-campaign.json.gz.part002",
+      "sha256": "2b750e1b281f76692480561c495c0a806b898066ca6c1e46f1018ba1102830b1",
+      "bytes": 900000
+    },
+    {
+      "file": "life-campaign.json.gz.part003",
+      "sha256": "82fd70e95431b7225e5d679d86cf771a1337fdc9c19ceba9b2f1993e221bb7b2",
+      "bytes": 900000
+    },
+    {
+      "file": "life-campaign.json.gz.part004",
+      "sha256": "4986e32e45decc4ac6c3969cb005f65bce6566f7b54322ca4a4f528c93643129",
+      "bytes": 882141
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

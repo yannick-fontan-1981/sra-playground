@@ -1,0 +1,353 @@
+{
+  "schema": "logos-engine.v44.regression-summary.v1",
+  "passed": true,
+  "games": 9,
+  "nativeSourceManifestDigest": "1b30d1f0a80275a1204b44198b5fd62f43439d16b5eccdd768a4357b78986093",
+  "nativeSourceFiles": 146,
+  "totals": {
+    "commands": 433,
+    "completePublicPackets": 442,
+    "prefixes": 237,
+    "checks": 117
+  },
+  "runs": [
+    {
+      "game": "MEMO",
+      "report": {
+        "path": "docs/migration/native-campaigns-v44/memo-three-levels.json",
+        "sha256": "341485d78db051e76d71bbd2cf5792059797742f435c7989d372ca17db3ed28d",
+        "bytes": 258764
+      },
+      "comparison": {
+        "command": [
+          "node",
+          "scripts/compare-v44-regressions.mjs",
+          "docs/migration/native-campaigns-v43/memo-three-levels.json",
+          "docs/migration/native-campaigns-v44/memo-three-levels.json",
+          "docs/migration/native-campaigns-v44/memo-comparison.json"
+        ],
+        "exitCode": 0,
+        "output": {
+          "path": "docs/migration/native-campaigns-v44/logs/comparison-memo.log.gz",
+          "sha256": "12405435e3fd4fca45c79c06faac088059bcdf55673ea703b80a66f3eff02713",
+          "bytes": 110
+        },
+        "path": "docs/migration/native-campaigns-v44/memo-comparison.json",
+        "sha256": "d6caf3e75f8fa0335d686fa4cd09009c586652328b637ff9ab73080e32497b8e",
+        "bytes": 3480,
+        "passed": true,
+        "checks": 13,
+        "compared": {
+          "commands": 30,
+          "completePublicPackets": 31,
+          "prefixes": 30
+        },
+        "failedChecks": []
+      },
+      "actions": 30,
+      "levelsCompleted": 3,
+      "state": "NOT_FINISHED"
+    },
+    {
+      "game": "TICT",
+      "report": {
+        "path": "docs/migration/native-campaigns-v44/tict-six-levels.json",
+        "sha256": "f09653cdd1bcb82314d7684f7b5509135bb00351074aba39f5bef4404d4998b6",
+        "bytes": 808492
+      },
+      "comparison": {
+        "command": [
+          "node",
+          "scripts/compare-v44-regressions.mjs",
+          "docs/migration/native-campaigns-v43/tict-six-levels.json",
+          "docs/migration/native-campaigns-v44/tict-six-levels.json",
+          "docs/migration/native-campaigns-v44/tict-comparison.json"
+        ],
+        "exitCode": 0,
+        "output": {
+          "path": "docs/migration/native-campaigns-v44/logs/comparison-tict.log.gz",
+          "sha256": "6f3bbf339c4692f4897102f2c8fac78c3b8eb40ff2349bbf0f8c51bc58d42126",
+          "bytes": 110
+        },
+        "path": "docs/migration/native-campaigns-v44/tict-comparison.json",
+        "sha256": "987fc30e502a4d6a59b7037c211fc4f691dcbf9ad7807a055faaf2f1eb9c16f9",
+        "bytes": 3476,
+        "passed": true,
+        "checks": 13,
+        "compared": {
+          "commands": 55,
+          "completePublicPackets": 56,
+          "prefixes": 55
+        },
+        "failedChecks": []
+      },
+      "actions": 55,
+      "levelsCompleted": 6,
+      "state": "WIN"
+    },
+    {
+      "game": "HANO",
+      "report": {
+        "path": "docs/migration/native-campaigns-v44/hano-four-levels.json",
+        "sha256": "f7239fe3b866589dbb287e3a4ecd1b896b567428b9cbbbaa296ba6463b3cac86",
+        "bytes": 318694
+      },
+      "comparison": {
+        "command": [
+          "node",
+          "scripts/compare-v44-regressions.mjs",
+          "docs/migration/native-campaigns-v43/hano-four-levels.json",
+          "docs/migration/native-campaigns-v44/hano-four-levels.json",
+          "docs/migration/native-campaigns-v44/hano-comparison.json"
+        ],
+        "exitCode": 0,
+        "output": {
+          "path": "docs/migration/native-campaigns-v44/logs/comparison-hano.log.gz",
+          "sha256": "35f282c03fe431f5686a2b2b3385be96c9be0adb426809c22258bd274dbc8aff",
+          "bytes": 112
+        },
+        "path": "docs/migration/native-campaigns-v44/hano-comparison.json",
+        "sha256": "711dafe20b687455fccb96172933beff8d84c28d6279fcdbdc8db45e0b7ce709",
+        "bytes": 3478,
+        "passed": true,
+        "checks": 13,
+        "compared": {
+          "commands": 60,
+          "completePublicPackets": 61,
+          "prefixes": 30
+        },
+        "failedChecks": []
+      },
+      "actions": 60,
+      "levelsCompleted": 4,
+      "state": "WIN"
+    },
+    {
+      "game": "ELAS",
+      "report": {
+        "path": "docs/migration/native-campaigns-v44/elas-three-levels.json",
+        "sha256": "e8655e29d9407a139aa64a2a019133b67e7ecab6aaf3b58fa403ba7ffee094ef",
+        "bytes": 139623
+      },
+      "comparison": {
+        "command": [
+          "node",
+          "scripts/compare-v44-regressions.mjs",
+          "docs/migration/native-campaigns-v43/elas-three-levels.json",
+          "docs/migration/native-campaigns-v44/elas-three-levels.json",
+          "docs/migration/native-campaigns-v44/elas-comparison.json"
+        ],
+        "exitCode": 0,
+        "output": {
+          "path": "docs/migration/native-campaigns-v44/logs/comparison-elas.log.gz",
+          "sha256": "d2687c97f1bda18a9ca775fc469225c51ff49b35912d972e5c093487186eb188",
+          "bytes": 110
+        },
+        "path": "docs/migration/native-campaigns-v44/elas-comparison.json",
+        "sha256": "552b48bcb3356c936ba54881768aff128d91298236f9795d37267f15dd750e2f",
+        "bytes": 3479,
+        "passed": true,
+        "checks": 13,
+        "compared": {
+          "commands": 33,
+          "completePublicPackets": 34,
+          "prefixes": 9
+        },
+        "failedChecks": []
+      },
+      "actions": 33,
+      "levelsCompleted": 3,
+      "state": "NOT_FINISHED"
+    },
+    {
+      "game": "TU93",
+      "report": {
+        "path": "docs/migration/native-campaigns-v44/tu93-three-levels.json",
+        "sha256": "edc7e63b10364934ee3837c7f26338fc15c14aa7d0d1815e189b459c4a9168de",
+        "bytes": 285099
+      },
+      "comparison": {
+        "command": [
+          "node",
+          "scripts/compare-v44-regressions.mjs",
+          "docs/migration/native-campaigns-v43/tu93-three-levels.json",
+          "docs/migration/native-campaigns-v44/tu93-three-levels.json",
+          "docs/migration/native-campaigns-v44/tu93-comparison.json"
+        ],
+        "exitCode": 0,
+        "output": {
+          "path": "docs/migration/native-campaigns-v44/logs/comparison-tu93.log.gz",
+          "sha256": "809cbeaeeb95e9a8c2afce158b59b5b60f288a2e37f22d9748a6235315605df2",
+          "bytes": 112
+        },
+        "path": "docs/migration/native-campaigns-v44/tu93-comparison.json",
+        "sha256": "b7da59e622194d930a7cb69d38976884e0978aa8de10840d1e9affd18982cf0a",
+        "bytes": 3480,
+        "passed": true,
+        "checks": 13,
+        "compared": {
+          "commands": 67,
+          "completePublicPackets": 68,
+          "prefixes": 25
+        },
+        "failedChecks": []
+      },
+      "actions": 67,
+      "levelsCompleted": 3,
+      "state": "NOT_FINISHED"
+    },
+    {
+      "game": "STCK",
+      "report": {
+        "path": "docs/migration/native-campaigns-v44/stck-three-levels.json",
+        "sha256": "e0bb1671149768c74e9dcdfb7dd7d5af9074f2d6fcfe25625e352e3a7a033a9a",
+        "bytes": 187951
+      },
+      "comparison": {
+        "command": [
+          "node",
+          "scripts/compare-v44-regressions.mjs",
+          "docs/migration/native-campaigns-v43/stck-three-levels.json",
+          "docs/migration/native-campaigns-v44/stck-three-levels.json",
+          "docs/migration/native-campaigns-v44/stck-comparison.json"
+        ],
+        "exitCode": 0,
+        "output": {
+          "path": "docs/migration/native-campaigns-v44/logs/comparison-stck.log.gz",
+          "sha256": "e13a5f0c543ce3ce28ff34a0e277ed302d9de457fbcf4590311a9fa58545719c",
+          "bytes": 111
+        },
+        "path": "docs/migration/native-campaigns-v44/stck-comparison.json",
+        "sha256": "9c615acb4935754d0e290456fd561f62161106f7e15d20429f5ae6f6279adf05",
+        "bytes": 3480,
+        "passed": true,
+        "checks": 13,
+        "compared": {
+          "commands": 35,
+          "completePublicPackets": 36,
+          "prefixes": 15
+        },
+        "failedChecks": []
+      },
+      "actions": 35,
+      "levelsCompleted": 3,
+      "state": "NOT_FINISHED"
+    },
+    {
+      "game": "PIPE",
+      "report": {
+        "path": "docs/migration/native-campaigns-v44/pipe-three-levels.json",
+        "sha256": "47d8c6be646319b85fa03b5240af2ddec4a68f5e3fa7586ddb822dd59904862f",
+        "bytes": 200367
+      },
+      "comparison": {
+        "command": [
+          "node",
+          "scripts/compare-v44-regressions.mjs",
+          "docs/migration/native-campaigns-v43/pipe-three-levels.json",
+          "docs/migration/native-campaigns-v44/pipe-three-levels.json",
+          "docs/migration/native-campaigns-v44/pipe-comparison.json"
+        ],
+        "exitCode": 0,
+        "output": {
+          "path": "docs/migration/native-campaigns-v44/logs/comparison-pipe.log.gz",
+          "sha256": "d6c48afb167ecb54c7b6dea753699ad6e057de108097558a0cf70bc3e380e0a4",
+          "bytes": 110
+        },
+        "path": "docs/migration/native-campaigns-v44/pipe-comparison.json",
+        "sha256": "b8d1160fcccc115605a218750cf65b5b54054b1ebbd6eed9a209812b735d2d94",
+        "bytes": 3480,
+        "passed": true,
+        "checks": 13,
+        "compared": {
+          "commands": 23,
+          "completePublicPackets": 24,
+          "prefixes": 20
+        },
+        "failedChecks": []
+      },
+      "actions": 23,
+      "levelsCompleted": 3,
+      "state": "NOT_FINISHED"
+    },
+    {
+      "game": "COMB",
+      "report": {
+        "path": "docs/migration/native-campaigns-v44/comb-six-levels.json",
+        "sha256": "215d597e8dcf18fbffdb021473f11cb57da5e6dc4894d748cd8f8a04dcf9838d",
+        "bytes": 833292
+      },
+      "comparison": {
+        "command": [
+          "node",
+          "scripts/compare-v44-regressions.mjs",
+          "docs/migration/native-campaigns-v43/comb-six-levels.json",
+          "docs/migration/native-campaigns-v44/comb-six-levels.json",
+          "docs/migration/native-campaigns-v44/comb-comparison.json"
+        ],
+        "exitCode": 0,
+        "output": {
+          "path": "docs/migration/native-campaigns-v44/logs/comparison-comb.log.gz",
+          "sha256": "8a784b5d48fb3fd853c47e9d70895ae3e33fe5056352f8e6d35a661ed1fe3c0f",
+          "bytes": 112
+        },
+        "path": "docs/migration/native-campaigns-v44/comb-comparison.json",
+        "sha256": "d90f94b62cbcb4eed1b35e8c9f9d109c1f250d5d75306f42dd46f08316d69be0",
+        "bytes": 3478,
+        "passed": true,
+        "checks": 13,
+        "compared": {
+          "commands": 104,
+          "completePublicPackets": 105,
+          "prefixes": 45
+        },
+        "failedChecks": []
+      },
+      "actions": 104,
+      "levelsCompleted": 6,
+      "state": "WIN"
+    },
+    {
+      "game": "THER",
+      "report": {
+        "path": "docs/migration/native-campaigns-v44/ther-six-levels.json",
+        "sha256": "e0e0b6fa3e57d23db864f2918ded874246d51f1f9bf43e39eb081c056f42f332",
+        "bytes": 251676
+      },
+      "comparison": {
+        "command": [
+          "node",
+          "scripts/compare-v44-regressions.mjs",
+          "docs/migration/native-campaigns-v43/ther-six-levels.json",
+          "docs/migration/native-campaigns-v44/ther-six-levels.json",
+          "docs/migration/native-campaigns-v44/ther-comparison.json"
+        ],
+        "exitCode": 0,
+        "output": {
+          "path": "docs/migration/native-campaigns-v44/logs/comparison-ther.log.gz",
+          "sha256": "4f567f2dc1a625ac34dcd6285802abd245c9b3a99c32fe3ca2561d5a62393a2e",
+          "bytes": 111
+        },
+        "path": "docs/migration/native-campaigns-v44/ther-comparison.json",
+        "sha256": "4f07ecf60a96e18b9d4534dd8c6eb05a33a23cd8a73b40ad76081dfb9176bbd9",
+        "bytes": 3475,
+        "passed": true,
+        "checks": 13,
+        "compared": {
+          "commands": 26,
+          "completePublicPackets": 27,
+          "prefixes": 8
+        },
+        "failedChecks": []
+      },
+      "actions": 26,
+      "levelsCompleted": 6,
+      "state": "WIN"
+    }
+  ],
+  "verification": {
+    "path": "docs/migration/native-campaigns-v44/regression-verification.json",
+    "sha256": "0bceffe9cdcfd274339b49b760ea4fa9e34d6f877374ded9e72f84057b322f53",
+    "bytes": 36040
+  }
+}

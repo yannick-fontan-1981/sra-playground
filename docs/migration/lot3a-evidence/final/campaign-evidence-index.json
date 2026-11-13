@@ -1,0 +1,133 @@
+{
+  "schema": "logos-engine.lot3a.delivery-evidence-index.v1",
+  "status": "functional_passed_cost_open",
+  "nativeSourceManifestDigest": "f3f795a3c813b72803e3f26bd207eed032853ae03d60582a33392f52a1bf8e7d",
+  "actualResult": {
+    "game": "RSWP",
+    "levelsCompleted": 3,
+    "actions": 19,
+    "prefixes": 11,
+    "sessions": 1,
+    "fullGameWin": false
+  },
+  "cost": {
+    "status": "budget_review_required",
+    "withinObservedBudget": 12,
+    "totalBudgetMetrics": 16,
+    "unresolvedCount": 4,
+    "allSessionsRetained": true
+  },
+  "artifacts": [
+    {
+      "path": "docs/migration/lot3a-evidence/public-candidate-scan.json",
+      "sha256": "cba88bbca4263d8f195a6d26a7290b29a49c2f0383bdf5c7938ac7bcd8a44d37",
+      "bytes": 104485
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/rswp-selection.json",
+      "sha256": "fcf826879a8cfbf3c907bbabc5c4ca41e956a3f251a92d387a7cafcefa254072",
+      "bytes": 950
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/baseline/execution-rswp.json",
+      "sha256": "98f973ddbe2ede5c6a01679421a5f2fd2dd259df4d171f038530366db237f3ca",
+      "bytes": 60862
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/baseline/summary.json",
+      "sha256": "8182c1e91e0195636e4faf312273f77cd440e026943812a44d097717e7eca95f",
+      "bytes": 7253
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/final/execution-rswp.json",
+      "sha256": "19a3d50dbfd5b8f91d8393311e302a6e2cf56300c2e3c8caba6d3ec65822d635",
+      "bytes": 62070
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/final/rswp-resolution.json",
+      "sha256": "bac12dab43e0d332001c74e73a1b72b95d88e6377652d36f913d4706e69ee314",
+      "bytes": 941
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/final/panel-contribution.json",
+      "sha256": "58fd8f77e017876aaa29186db3f521fcf2a13731b2bd5798f7b5829314021227",
+      "bytes": 33523
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/final/browser/rswp-verification.json",
+      "sha256": "5309c87b48e62170333f53eaa1dfea54d8831a83a9ba18ed952e495608496e1e",
+      "bytes": 2201
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/performance/comparison.json",
+      "sha256": "21c0f037ca661c68d63859fd8eca5dac8bcd144f64f21375c9cc9957420c26c4",
+      "bytes": 26109
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/performance/followup/comparison.json",
+      "sha256": "f842fd391348d9f3017f6645fd6709a09303d50703aba56c6c21dded403620cd",
+      "bytes": 25694
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/performance/combined-comparison.json",
+      "sha256": "b03fe0fb98f7fe6b959a62974a8381ab57f8a597bf69f12c66e95e9fb299ef6d",
+      "bytes": 30986
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/performance/panel.json",
+      "sha256": "e4e45c50ef6e9c5a4a94ca7012221ced886d01d77eab7816b31a566362bfa76b",
+      "bytes": 242340
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/performance/window.json",
+      "sha256": "c8a257fd7df067a7f784ffe2b329b6dd3c55779feca6283d4b819285d34ba6d4",
+      "bytes": 2409
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/performance/followup/window.json",
+      "sha256": "2c553fb8a5092521a1b4e352626f462db2d13c7a5f07abd05586b6892d4dd170",
+      "bytes": 1671
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/performance/followup/protocol.json",
+      "sha256": "4ec11d54715129d0c6dfaba45a2a6f51950e270eac76d8ec7fa27b22da950a1c",
+      "bytes": 1762
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/diagnostics/panel-measurement-cost.json",
+      "sha256": "241be0bf21a06cbc6d0dfe3ebb9ae321ac577100c15a7ccf6aa72e0f6c40ef55",
+      "bytes": 13402
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/diagnostics/panel-measurement-cost-relocation.json",
+      "sha256": "87843bd979da509b1f46ae0d4591fac4ff9294650f073bc67acf72853fc7003e",
+      "bytes": 852
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/diagnostics/cost-position-audit.json",
+      "sha256": "acce76fadc22e14a72e7ab3d67f2967a43bbc5fd787497c3cb99ea001086f43d",
+      "bytes": 230301
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/diagnostics/cost-position-reproduction.json",
+      "sha256": "fc8cf719c065c3195ada2471595bd8bc62b3e710d5cf0762d0b01fdb23eff5be",
+      "bytes": 219158
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/diagnostic/panel-entry-stck-receipt.json.gz",
+      "sha256": "45a590b9515ce9add01de87fc658af945b14a7ec5ced1b0def9550dea90a7ffe",
+      "bytes": 122185
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/diagnostic/panel-entry-stck-calls.json.gz",
+      "sha256": "f08b2fcf1dc1ef487767fd0b250eb95c8dbd78a4c20b56c5899354eecbbb57d6",
+      "bytes": 5750
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/diagnostic/panel-entry-stck-relocation.json",
+      "sha256": "7f65a95e90645e37a1c550cc3f8c281093ac2f7d81dc1fe1356807f462a39636",
+      "bytes": 1784
+    }
+  ],
+  "qualification": "File fingerprints preserve the successful functional campaign, incomplete baseline, browser evidence, source diagnostics and all cost cohorts. The integrity check does not turn unresolved performance criteria into successes."
+}

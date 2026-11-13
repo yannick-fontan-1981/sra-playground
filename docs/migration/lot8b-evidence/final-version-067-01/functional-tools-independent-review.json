@@ -1,0 +1,315 @@
+{
+  "schema": "logos-engine.lot8b.final-functional-tools-independent-review.v1",
+  "recordedAt": "2026-11-12T12:12:46.285963+00:00",
+  "reviewer": "final_tools_review",
+  "independentOfToolAuthor": true,
+  "status": "passed_for_prospectively_declared_functional_execution",
+  "blockingObjections": [],
+  "reviewMethod": "Static source and complete-diff review; independent opaque fingerprint verification; no tool import, runtime, game, test, replay or oracle execution.",
+  "nativeDigests": {
+    "baseline": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+    "candidate": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a"
+  },
+  "publishedBaselineCommit": "4ff7bf45286a8a19d34401988adca587253ae41e",
+  "reviewedInputs": [
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/record-owner-source-inventory.mjs",
+      "bytes": 15250,
+      "sha256": "073cec941143449697c06d979c07675d177d53fafd0d7d82abfeb6c446c41eb9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/record-owner-source-inventory.mjs",
+      "bytes": 15277,
+      "sha256": "af762f71256ce372a3b760f32b3c1687d700e6b1378012e0a1517fe61d1bedc2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/derivation-diffs/work-forms__record-owner-source-inventory.mjs.diff",
+      "bytes": 6380,
+      "sha256": "ce28631b90b66514c86fa9cdfee10f2d35e949c85fcf4ca89c7e270bafba2cc9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs",
+      "bytes": 31412,
+      "sha256": "def20965d488ff15cf225961f407853b29cee0eb22e9119cfe9f1611dcc73a3a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/capture-cost-owner-graphs.mjs",
+      "bytes": 31537,
+      "sha256": "9323017b311100aea4a6be6baf9400ca245ee729291253c2181de67e4680b417"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/derivation-diffs/work-forms__capture-cost-owner-graphs.mjs.diff",
+      "bytes": 4997,
+      "sha256": "acc1639b9d432838bcd7ccf54e3595b85eda16cb18ad7434007df3f48f83d7f6"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/qualify-cost-owner-graphs.mjs",
+      "bytes": 52939,
+      "sha256": "56c73ed40f8b88ce9c7f02300cf4acede74eb37bacfdc94b9542c4a2a21bb662"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs.mjs",
+      "bytes": 55737,
+      "sha256": "e53153482728e5eca466564d078a459db07871b06d80120cc05ad825ac572f2d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/derivation-diffs/work-forms__qualify-cost-owner-graphs.mjs.diff",
+      "bytes": 12418,
+      "sha256": "d01a327c8cb7444e77016bb007534b4c45e20de6c37a221f79418b4159bcafc9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs",
+      "bytes": 32210,
+      "sha256": "98c4a0af05e929807723669baefd27bc5b7ae30acb60e07c84625a8b420e4eb5"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/branch-common-capture-v2.mjs",
+      "bytes": 32919,
+      "sha256": "2005fd55c998dea8409dc72b462031a605bd673a04727c513b7f0826e6d43120"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/derivation-diffs/branch-common-capture-v2.mjs.diff",
+      "bytes": 2720,
+      "sha256": "d31580f76c51f5c14cec47b0bd4b730f45cdff29e3c81fef66354b620c2fa037"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs",
+      "bytes": 58745,
+      "sha256": "dce80476cad9bcb0db4e838f944692565ae652ed1b7874a6abb153dc9893a457"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/branch-common-qualify-v2.mjs",
+      "bytes": 59211,
+      "sha256": "c896643777572d4628fbeab0c9819fd22fe0f02111008c5958204a632b4b428b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/derivation-diffs/branch-common-qualify-v2.mjs.diff",
+      "bytes": 3220,
+      "sha256": "872cf035d16c9ce329c39253429d2a01add35f7056b71e790a5d68d7a667adf4"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/run-functional-command.py",
+      "bytes": 7291,
+      "sha256": "7d1c35fb1a9fe30f1eb0be80f4c60a0f547f6257dd24ac68e88f0ade0a2514f9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/run-functional-command.py",
+      "bytes": 7698,
+      "sha256": "a49a62551f757750a9598b2ea3a36d0c214ded79f150e3c65bddc74a83103fe9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/derivation-diffs/run-functional-command.py.diff",
+      "bytes": 2742,
+      "sha256": "a38cc6e42ec58e75773620c8d0f0fb5f51b4693ec54e1c0c943eeca725653933"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/derivation.json",
+      "bytes": 8136,
+      "sha256": "18aa86d0d2df6d01ac249d06fc6f1b24c4146185c9a6121f9215d4b742664cd3"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/source-impact-review.json",
+      "bytes": 1902,
+      "sha256": "794f3fefeceb81869d5ee2e0f4c3b165c9d201f28c274421bf59a330d6b84d2a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/syntax-checks.json",
+      "bytes": 2346,
+      "sha256": "47dd72beeb2002f5a498e9141c8de339e7a199387e09f296aaac4f4d01b40a50"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/runner-syntax-check.json",
+      "bytes": 453,
+      "sha256": "5447ceed1a2fc8ae9921377520cf9fb05e2cb8396091d1260831680d3a3d4a30"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/README.md",
+      "bytes": 8067,
+      "sha256": "4a5bba4e671f81c92422e0d6a461117001ea18b28ca0a6e75a695463814d9095"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-freeze/reconcile-historical-inputs.py",
+      "bytes": 8372,
+      "sha256": "67a0087e2002c2f8d23229a04ee5379d0ad67f5a4d16e87dd53d52eb3e6f7446"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/historical-input-reconciliation.json",
+      "bytes": 916069,
+      "sha256": "0ed6fe4aad163b8c307602812dd1c09c4ca015ff87bd418122f5b1b2ef4dbb9d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/source-reconciliation.json",
+      "bytes": 2169,
+      "sha256": "efb4b9f11a768ed0ca6a8a8b77ada59b980b244b96c6abba0a589554a421ef70"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/candidate-native.json",
+      "bytes": 39333,
+      "sha256": "18fcc15c6e57f1bf6aab33cc62498e6a5a76836d85b890378be957a0e6da1c57"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/baseline-native.json",
+      "bytes": 39098,
+      "sha256": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/prior-candidate-native.json",
+      "bytes": 39333,
+      "sha256": "56e7533fca83f222b866ce73478a1f925bddb8c7b7c79718e9b99d0c888dc095"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/common-integration-01/validation-summary.json",
+      "bytes": 59036,
+      "sha256": "3425d5caf68e37e27b2a8f64167c62221ef55a552d7b819ebb2727f564c332d0"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.json.gz",
+      "bytes": 7212928,
+      "sha256": "384a5f5bb3e00174e8113e35387132284e90a6d5a1af5303ecfe9ed0db3df893"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.receipt.json",
+      "bytes": 127765,
+      "sha256": "5aebb7ab6f603f305b28bb3ffd262fc4103f433ea4ac7b0e0db051d75036d084"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs",
+      "bytes": 31412,
+      "sha256": "def20965d488ff15cf225961f407853b29cee0eb22e9119cfe9f1611dcc73a3a"
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/tools/work-forms/capture-cost-owner-graphs.mjs",
+      "bytes": 29563,
+      "sha256": "fa7c225349ad2652ff0b45cd53b7f8de7ac94d4131363e5f3c1568340d0a600f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/cases.json",
+      "bytes": 1498,
+      "sha256": "65e27dbcc2f5871ab259358cc46576b2671058630be0b37c643eadad66593173"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/baseline-native.json",
+      "bytes": 39098,
+      "sha256": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/common-integration-01/branch-01/receipt.json",
+      "bytes": 1317,
+      "sha256": "2647e837f4915eeceb42e49fb9d4dc2e668e95bfe1f3383e24836d12775eac98"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/common-integration-01/runtime-regression-01/receipt.json",
+      "bytes": 1824,
+      "sha256": "7fdcc5fd1b7456a738c3697b9e58572c87c60da194f2147179723e42e6e47810"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/common-integration-01/neighbor-regression-01/receipt.json",
+      "bytes": 1325,
+      "sha256": "ffb12f7ad7e59d0e0fbb22331220763dfdd9f22f521c34ee9bbd941a95babb60"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/common-integration-01/typecheck-01/receipt.json",
+      "bytes": 986,
+      "sha256": "36924d5de99e6f3fa301759be4a9e12c97e0b3cca0cd586db3ba05b9c87b403a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/common-integration-01/entry-audit-01/receipt.json",
+      "bytes": 1158,
+      "sha256": "1c644b34069ae18f48b04dbf4f60f3a6aa29ed5d668285b6568ff645c202b362"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/common-integration-01/migration-audit-02/receipt.json",
+      "bytes": 1164,
+      "sha256": "7ef4ebcf51fb628da27a2a9d98021fcf2a44ae7d48f93ad8bce07edaf0f06f42"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/common-integration-01/build-01/receipt.json",
+      "bytes": 13529,
+      "sha256": "c49a19bb0257b1fbfb86b09e015e125b42879b20e3f13b1c6bc0e9da66a12a7d"
+    }
+  ],
+  "checks": [
+    {
+      "name": "six_derivatives_match_complete_declared_diffs_and_fingerprints",
+      "passed": true,
+      "count": 6
+    },
+    {
+      "name": "historical_tools_baseline_capture_and_prior_qualification_artifacts_unchanged",
+      "passed": true
+    },
+    {
+      "name": "native_identity_version_only_and_inverse_literal_recovers_original_bytes",
+      "passed": true,
+      "candidateFiles": 331,
+      "unchangedNativeFiles": 330
+    },
+    {
+      "name": "published_baseline_exact_commit_digest_capture_receipt_and_twelve_inputs",
+      "passed": true,
+      "retainedCaptureInputCount": 12
+    },
+    {
+      "name": "paired_reader_accepts_historical_generator_only_for_exact_pinned_A",
+      "passed": true,
+      "candidateRequiresCurrentGeneratorAnd067": true
+    },
+    {
+      "name": "graph_node_delta_chain_fragment_execution_authority_guard_restore_clock_checks_preserved",
+      "passed": true
+    },
+    {
+      "name": "final_outputs_confined_by_resolved_paths_and_exclusive_file_creation",
+      "passed": true,
+      "scope": "Trusted owned checkout; no claim that lexical path checks form a general adversarial symlink sandbox."
+    },
+    {
+      "name": "same_functional_cases_and_branch_interventions_with_stricter_final_identity_assertions",
+      "passed": true
+    },
+    {
+      "name": "supervisor_declared_inputs_pre_post_raw_log_retention_and_direct_child_reaping_preserved",
+      "passed": true,
+      "maximumCommandSeconds": 300,
+      "automaticRetry": false,
+      "globalLock": false
+    },
+    {
+      "name": "historical_input_reconciliation_independently_rehashed_without_runtime",
+      "passed": true,
+      "commonInputCount": 2468,
+      "commonInputRowsVerified": 2467,
+      "unchangedRows": 2466,
+      "declaredVersionOnlyRow": 1,
+      "closedCaseIndividualAccessExclusions": 1,
+      "recordedRegressionInputRowsVerified": 42,
+      "opaquePartArchiveRowsVerified": 11
+    },
+    {
+      "name": "historical524tests_and11cases187projections_remain_historical_not_new_executions",
+      "passed": true
+    },
+    {
+      "name": "functional_metadata_does_not_grant_official_cost_readiness_or_publication",
+      "passed": true
+    }
+  ],
+  "limits": [
+    "Execution plan, exact command arguments and frozen input list must still be declared before running. This review is not a completed functional result.",
+    "The supervisor records direct-child reaping; it is not a universal descendant-process census or an RSS hard bound. The declared native capture and reader commands are bounded by the retained supervisor.",
+    "Old 0.66 development candidate graphs are not final-byte graphs; the final candidate captures and graph readers must complete successfully before final qualification.",
+    "The inherited eleven replay results qualify the prior identity; only unchanged algorithms/data and explicitly normalized version source are reused.",
+    "No positive BranchRouting claim for public64x64 service, worker transport or public tickets is established by the synthetic NativeV6Runtime chains.",
+    "No official measured cost, global threshold acceptance, new game success or publication is established."
+  ],
+  "executions": {
+    "nativeSessions": 0,
+    "functionalTests": 0,
+    "gameSessions": 0,
+    "gameReplays": 0,
+    "oracleCalls": 0,
+    "performanceSamples": 0
+  },
+  "globalLockAcquired": false,
+  "LKEY": "permanently_closed_no_individual_payload_access_no_budget_reset"
+}

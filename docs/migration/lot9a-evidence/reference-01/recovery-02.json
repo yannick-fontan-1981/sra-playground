@@ -1,0 +1,72 @@
+{
+  "schema": "logos-engine.v6.chart-navigation-reference-metadata-recovery.v1",
+  "status": "completed_fixture_verified_after_metadata_failure",
+  "originalExecutionStatuses": [
+    "failed",
+    "failed"
+  ],
+  "sourceOracleRerun": false,
+  "sourceCallsDuringRecovery": 0,
+  "nativeImports": false,
+  "sourceModified": false,
+  "fixtureModified": false,
+  "generatorModified": false,
+  "allCasesEqualRaw": true,
+  "allSequencesDerivedFromRaw": true,
+  "registeredFramesAll64x64": true,
+  "firstAndSecondRawIdentical": true,
+  "sourceHashesVerified": 723,
+  "sourceVerifiedBeforeEachImport": 721,
+  "lateVerifiedImports": [
+    "agents/yf_arc3_v5/state/conscious_experiment_feedback.py",
+    "agents/yf_arc3_v5/state/conscious_symbolic_memory.py"
+  ],
+  "counts": {
+    "frame": 29,
+    "geometry": 30,
+    "owner": 80,
+    "policy": 15
+  },
+  "sourceManifest": {
+    "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+    "bytes": 424024,
+    "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+  },
+  "fixture": {
+    "path": "docs/migration/lot9a-evidence/reference-01/reference.json.gz",
+    "bytes": 2053926,
+    "sha256": "0770706db16249ac4ab1c7c8b9533d571f2fc2cdaeaf5dae2d990806e412cfe8"
+  },
+  "raw": {
+    "path": "docs/migration/lot9a-evidence/reference-01/attempt-02-raw.jsonl",
+    "bytes": 8920490,
+    "sha256": "82c1cd6cf05d6644ed6583db2bb12c0f65e74783b54530aaf6fc6bbe86cecd5c"
+  },
+  "generator": {
+    "path": "docs/migration/lot9a-evidence/tools/export-reference.py",
+    "bytes": 34872,
+    "sha256": "30bc414e1ab6c7be209d0c726f7a3df47f8208ea1c708f2cf2804fc9677182ef"
+  },
+  "declaration": {
+    "path": "docs/migration/lot9a-evidence/reference-01/declaration.json",
+    "bytes": 4922,
+    "sha256": "35d495721efa864acfceaf7abd26e1588038a1babd12b59364d9022e861f0339"
+  },
+  "retainedFailures": [
+    {
+      "path": "docs/migration/lot9a-evidence/reference-01/attempt-01.json",
+      "bytes": 190845,
+      "sha256": "1f18475ea728ffa5f6ca1847b654d357f8af29e7c258566b2f40aa1620b94f9c"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/reference-01/attempt-02.json",
+      "bytes": 354858,
+      "sha256": "162a36d170cef9c1dc832de79b6b477999d3f4e8a796a84d70c06ec56f7d4cc4"
+    }
+  ],
+  "oracleCumulativeSeconds": 90.42334993900022,
+  "cause": "The completed gzip was written and all original source checks passed; only final metadata fp(relative output path) failed. Both failed execution receipts remain unchanged.",
+  "qualification": "Synthetic component parity only. Cold common integration must use unchanged public rasters and actual returned frames, never an injected component state. An independently supplied synthetic official boundary is not a solved live level.",
+  "verifiedAt": "2026-11-12T13:58:20.231440+00:00",
+  "elapsedSeconds": 1.1209002730001885
+}

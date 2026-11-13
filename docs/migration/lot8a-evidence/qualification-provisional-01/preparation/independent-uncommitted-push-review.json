@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.lot8a.source-push-option-review.v1",
+  "recordedAt": "2026-11-11T21:27:28.755543+00:00",
+  "reviewer": "/root/audit_recovery_release",
+  "status": "passed_static_review",
+  "tool": {
+    "path": "docs/migration/lot8a-evidence/tools/push-source-checkpoint.py",
+    "sha256": "85aa654d1467f69b450513a2510ef3e5078da31fd6129e36b12c987020d5efa0",
+    "bytes": 20314
+  },
+  "findings": [
+    "Default still requires a clean worktree; --allow-uncommitted-work is explicit opt-in.",
+    "Every checkpoint still requires HEAD equal to the exact committed expected SHA.",
+    "Only that immutable commit is pushed; no staging, commit, force or inclusion of uncommitted content.",
+    "Observed clean-before/after values remain factual and unknown observations remain null.",
+    "Hidden credential, bounded child cleanup, remote identity,40MiB missing-object limit and exact remote verification retained."
+  ],
+  "executedGitOrNetworkByReviewer": false
+}

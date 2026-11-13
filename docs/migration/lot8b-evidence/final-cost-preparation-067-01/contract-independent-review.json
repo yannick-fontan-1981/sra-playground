@@ -1,0 +1,188 @@
+{
+  "schema": "logos-engine.lot8b-final-cost-contract-independent-review.v1",
+  "status": "passed_contract_review",
+  "recordedAt": "2026-11-12T12:31:35.528997+00:00",
+  "reviewer": "/root/final_proof_reconciliation",
+  "contract": {
+    "path": "docs/migration/lot8b-evidence/final-performance-067-01/contract.json",
+    "bytes": 161021,
+    "sha256": "5c4560add21a3e14b0f570ed72466d1f28bcd603b7e7f596a4ac3e59f9f18ab4"
+  },
+  "reviewType": "Targeted read-only review of the actual produced prospective contract and named links; no preparation rerun or measurement.",
+  "sourceIdentities": {
+    "baseline": {
+      "checkout": "/workspace/sites/sra-lot8b-baseline066-20261112",
+      "nativeVersion": "0.66.0",
+      "nativeDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+      "nativeFiles": 329,
+      "sourceCommit": "4ff7bf45286a8a19d34401988adca587253ae41e",
+      "manifest": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/baseline-native.json",
+        "bytes": 39098,
+        "sha256": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7"
+      },
+      "siteVersion": 107
+    },
+    "candidate": {
+      "checkout": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+      "nativeVersion": "0.67.0",
+      "nativeDigest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+      "nativeFiles": 331,
+      "sourceCommit": "2cd4e7e557cb15034849da8c2794fa612cdbff18",
+      "manifest": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/candidate-native.json",
+        "bytes": 39333,
+        "sha256": "18fcc15c6e57f1bf6aab33cc62498e6a5a76836d85b890378be957a0e6da1c57"
+      },
+      "siteVersion": null
+    }
+  },
+  "verifiedDirectLinks": {
+    "cases": {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    "comparisonPolicy": {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    "expectedForms": {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/expected-forms.json",
+      "bytes": 58685,
+      "sha256": "ea71cd481bbe724dfe1df038d2176644880b18a55a734b71953d9b3c642a1459"
+    },
+    "protocol": {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/protocol.md",
+      "bytes": 3504,
+      "sha256": "c9f37243aa75ab2e68996342570a6dcd6b542ac9a86b72b43f38069f2778aaef"
+    },
+    "functionalForms": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/work-forms.json",
+      "bytes": 62525,
+      "sha256": "27602bf28ed8bf7d29049d01edb9a0dad41a570142ca8ec7b2dcd5ef99918925"
+    },
+    "graphReview": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/graph-review.json",
+      "bytes": 316284,
+      "sha256": "2ce3d78213d7fe4212c7396b00b1dd2444497c8186641d4cc43fac94ddcc884f"
+    },
+    "ownerInventory": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/owner-source-inventory.json",
+      "bytes": 130694,
+      "sha256": "36e8d72ac6ccd8ec2385b1263e3dda9aa85e88d71e595f476dd5011f479795e9"
+    },
+    "functionalReview": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/final-functional-independent-review.json",
+      "bytes": 61988,
+      "sha256": "ca7a8b58e77d97210bd984122db621d7ea7cd18c05ceebd9adaa64e17d008712"
+    },
+    "reconciliation": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/validation-summary.json",
+      "bytes": 11481,
+      "sha256": "e039d0cc64ef2aad673a8068ca608bf370fb6a583ab6d0040f6b1c4502964f4e"
+    },
+    "baselineManifest": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/baseline-native.json",
+      "bytes": 39098,
+      "sha256": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7"
+    },
+    "candidateManifest": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/candidate-native.json",
+      "bytes": 39333,
+      "sha256": "18fcc15c6e57f1bf6aab33cc62498e6a5a76836d85b890378be957a0e6da1c57"
+    },
+    "preparation.generator": {
+      "path": "docs/migration/lot8b-evidence/tools/final-cost/prepare-v2.py",
+      "bytes": 22196,
+      "sha256": "e5465ba2614d26fc2efba1a5b33616c18840e2fa3184032f1773477831263423"
+    },
+    "preparation.derivedFrom": {
+      "path": "docs/migration/lot8b-evidence/tools/final-cost/prepare.py",
+      "bytes": 19424,
+      "sha256": "22680bf1833f2fc41ce5ff058ad6ec707138d3b27bc791c1907e93babda325d9"
+    },
+    "preparation.diff": {
+      "path": "docs/migration/lot8b-evidence/tools/final-cost/preparation-v2/prepare-v2.diff",
+      "bytes": 6663,
+      "sha256": "a38ad20a74cd42913c22ef9531946eeb0f2f9c279178988f79274fae3dea1a6f"
+    },
+    "preparation.diagnosis": {
+      "path": "docs/migration/lot8b-evidence/tools/final-cost/preparation-v2/diagnosis.json",
+      "bytes": 6797,
+      "sha256": "316e43abd079d2a22c0b33a2d299c64dd6164090e439a2da46b4f6171e974cb3"
+    }
+  },
+  "checks": [
+    {
+      "id": "actual_contract_identity",
+      "result": "passed",
+      "detail": "The produced contract exactly matches 161021 bytes and SHA256 5c4560add21a3e14b0f570ed72466d1f28bcd603b7e7f596a4ac3e59f9f18ab4. Its schema and declared_before_official_window status remain prospective."
+    },
+    {
+      "id": "distinct_final_native_sources",
+      "result": "passed",
+      "detail": "A is Site107/native0.66.0 at 4ff7bf45286a8a19d34401988adca587253ae41e, 329 files, digest ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316. B is unpublished native0.67.0 at preparation HEAD 2cd4e7e557cb15034849da8c2794fa612cdbff18, 331 files, digest c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a. Both manifest bytes and canonical manifest-map digests match; every native source entry is in the contract input freeze."
+    },
+    {
+      "id": "actual_functional_links_and_four_forms",
+      "result": "passed",
+      "detail": "The expected-forms file is exactly equal to the four captured functional forms, with the source fingerprint and native digest mapping preserved. STCK/SMLP warmups use 3 actions; measured forms use 10/15. All baseline and candidate final implementation strings name their correct versions. The bound graph review has 64 successful checks, no failures and zero unattributed differences; the bound independent functional review is passed and names these exact forms and graph."
+    },
+    {
+      "id": "prospective_40_trial_population",
+      "result": "passed",
+      "detail": "A1/B1/B2/A2, four measured rounds per game/series plus one warmup, produce the declared prospective population of 40 trials: 32 measured sessions/400 actions and 8 warmups/24 actions. There are four semantic forms with baseline/candidate shapes; the 40 future trials must each match the relevant form. This contract does not claim those performance trials have already executed."
+    },
+    {
+      "id": "strict_global_rule_and_structural_limit",
+      "result": "passed",
+      "detail": "The contract and protocol require the median of eight complete session_elapsed durations per game/version to be strictly below +10% for both STCK and SMLP, with no cross-game compensation and no measured-session or outlier exclusions. Phase overruns may be accepted only under that global condition and remain visible. Only four predeclared exact structural count paths may differ; no added program or unattributed difference is admitted."
+    },
+    {
+      "id": "unchanged_historical_inputs_and_tools",
+      "result": "passed",
+      "detail": "Cases and comparison policy are byte-identical copies of the declared historical files. All seven historical tool fingerprints match the prior independent review and current named files. The pinned analyzer and Python reviewer match their reviewed bytes. The fixed measurement command, 1800-second proposed active bound and separate controller cleanup reserves are preserved."
+    },
+    {
+      "id": "v2_provenance_and_role_mapping",
+      "result": "passed",
+      "detail": "The actual contract pins reviewed prepare-v2.py e5465ba2614d26fc2efba1a5b33616c18840e2fa3184032f1773477831263423, preserved prepare.py 22680bf1833f2fc41ce5ff058ad6ec707138d3b27bc791c1907e93babda325d9, full diff and diagnosis. Its ten declared/resolved source fingerprint pairs match the owner artifact and correct role roots. All resolved pairs and provenance files appear unchanged in the watched input set."
+    },
+    {
+      "id": "prospective_scope_not_promoted",
+      "result": "passed",
+      "detail": "The original functional flags remain preparedOnly=true, officialPerformanceEligible=false and strictCommonGraphParity=false. Contract controls keep readinessEstablished=false, isolationEstablished=false and publicationAuthorizedByThisContract=false. Successful preparation is not a cost acceptance, an isolation observation or a publication result."
+    }
+  ],
+  "immutableInputs": {
+    "declaredCount": 718,
+    "uniquePaths": 718,
+    "nativeManifestEntriesCovered": 660,
+    "roleScopedMappingsCovered": 10,
+    "all718FilesRehashedByThisReview": false,
+    "fullCurrentByteVerificationDelegatedTo": "The already reviewed official controller preflight, under-lock verification and final integrity checks."
+  },
+  "blockingObjections": [],
+  "nextStep": "Close preparation workers, finish the already planned fresh readiness and frozen controller plan, save the checkpoint, then use the existing official controller. No additional gate is introduced by this review.",
+  "scope": {
+    "preparationExecuted": false,
+    "nativeExecution": false,
+    "performanceExecution": false,
+    "lockAcquisition": false,
+    "sourceMutation": false,
+    "toolMutation": false,
+    "broadFixtureInspection": false,
+    "closedCaseInspection": false
+  },
+  "limitations": [
+    "This review validates the actual contract structure and its named links; the official controller will verify all frozen file bytes before measurement.",
+    "The four forms apply prospectively to all 40 trials. No performance sample, global budget result or historical strict-comparator result is asserted by this receipt.",
+    "session_elapsed retains the historical controller scope; fresh native sessions do not establish cold-process/cold-JIT, browser, network or live-game-engine timing.",
+    "Readiness and limited isolation must be evidenced separately by actual observations; this review does not require peer acknowledgment or availability."
+  ],
+  "officialCostAcceptedByThisReview": false,
+  "isolationEstablishedByThisReview": false,
+  "publicationAuthorizedByThisReview": false
+}

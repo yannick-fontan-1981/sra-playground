@@ -1,0 +1,31 @@
+{
+  "name": "06-static-preflight",
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot4c-evidence/check-cost-static-inputs.py",
+    "--performance-directory",
+    "docs/migration/lot4c-evidence/performance-integrated"
+  ],
+  "startedAt": "2026-11-11T01:08:57.140897+00:00",
+  "pid": 57,
+  "exitCode": 0,
+  "executionElapsedSeconds": 0.2957961750071263,
+  "finishedAt": "2026-11-11T01:08:57.436733+00:00",
+  "stdout": {
+    "path": "docs/migration/lot4c-evidence/performance-integrated/planning/untimed-owner-qualification-attempt-01/06-static-preflight.stdout.log",
+    "bytes": 325,
+    "sha256": "bce50a610bebdb69c65bea52eb98676a951c19b801c2aa0a3fc4000da588bcff"
+  },
+  "stdoutArchive": {
+    "gzip": {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/planning/untimed-owner-qualification-attempt-01/06-static-preflight.stdout.log.gz",
+      "bytes": 249,
+      "sha256": "cd4cfc82373186ae43dd3bced06ff59a6ea9704f5ecf84189cadd7ad66193003"
+    },
+    "uncompressedBytes": 325,
+    "uncompressedSha256": "bce50a610bebdb69c65bea52eb98676a951c19b801c2aa0a3fc4000da588bcff",
+    "exactRoundTrip": true
+  },
+  "scope": "Execution audit only; elapsed process duration is not a cost sample or performance comparison."
+}

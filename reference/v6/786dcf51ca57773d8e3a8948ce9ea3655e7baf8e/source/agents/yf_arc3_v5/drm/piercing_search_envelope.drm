@@ -1,0 +1,294 @@
+{
+  "module_id": "piercing_search_envelope",
+  "declarations": [
+    {
+      "id": "policy.declared_piercing_search_envelope",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "exact_current_source_tool_and_target_packets"
+      ],
+      "applicability": [
+        "bounded_conditional_search_of_observed_raster_coordinates"
+      ],
+      "invariants": [
+        "raster_edges_are_not_physical_walls",
+        "envelope_is_proposed_not_established",
+        "escaping_the_envelope_is_unknown_never_a_stop_or_entry_proof",
+        "envelope_qualification_never_releases_an_action"
+      ],
+      "falsifiers": [
+        "falsifier.tool_or_load_escapes_current_viewport_search_envelope"
+      ],
+      "configuration": {
+        "maximum_enumerated_cells": 16384,
+        "measurement_contract": {
+          "model_predicate": "piercing_search_envelope_revision"
+        }
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.piercing_envelope.current_source_scope",
+          "all_conditions": [],
+          "reason_ref": "reason.source_scoped_raster_coordinates_bound_conditional_search_only"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "envelope_admission_rank",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.scoped_source_conditional_envelope",
+          "reason_ref": "reason.source_scoped_raster_coordinates_bound_conditional_search_only"
+        }
+      ],
+      "reason_refs": [
+        "reason.source_scoped_raster_coordinates_bound_conditional_search_only"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.piercing_search_envelope_revision"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.piercing_envelope.unknown",
+          "all_conditions": [],
+          "static_facts": {
+            "applicable": true,
+            "envelope_admission_rank": 0,
+            "search_envelope_qualified": false,
+            "search_envelope_needs_commit": false,
+            "search_envelope_class_ref": "envelope.source_provenance_or_raster_bound_unknown",
+            "domain_positions": null,
+            "root_admissible_positions": [],
+            "obstacles": [],
+            "domain_boundary_is_known": false,
+            "domain_is_physical": false,
+            "search_envelope_releases_action": false,
+            "whole_influence_prediction_complete": false,
+            "envelope_falsifier_refs": [
+              "falsifier.tool_or_load_escapes_current_viewport_search_envelope"
+            ]
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "retained_parent_goal_ref",
+            "current_frame_ref": "current_frame_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref"
+          }
+        },
+        {
+          "id": "projection.piercing_envelope.proposed_search_bound",
+          "all_conditions": [
+            {
+              "field": "raster_shape_valid",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "raster_within_declared_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tool_root_ref_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_tool_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_target_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "envelope_request_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "envelope_request_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_tool_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_target_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_tool_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_target_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_target_fact_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "source_target_order_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "source_tool_geometry_class_ref",
+              "operator": "equals",
+              "expected": "geometry.provisional_rooted_cardinal_tool"
+            },
+            {
+              "field": "source_tool_geometry_class_ref",
+              "operator": "equals",
+              "expected": "geometry.provisional_root_with_external_cardinal_band"
+            }
+          ],
+          "static_facts": {
+            "envelope_admission_rank": 1,
+            "search_envelope_qualified": true,
+            "search_envelope_needs_commit": true,
+            "search_envelope_class_ref": "envelope.proposed_conditional_raster_search"
+          },
+          "bound_facts": {
+            "domain_positions": "raw_domain_positions",
+            "root_admissible_positions": "raw_root_admissible_positions",
+            "envelope_revision_ref": "envelope_revision_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs"
+          }
+        },
+        {
+          "id": "projection.piercing_envelope.exact_revision_present",
+          "all_conditions": [
+            {
+              "field": "envelope_revision_already_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "search_envelope_needs_commit": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.piercing_search_envelope_revision",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "premises": [
+        "source_observation_origin_refs",
+        "current_frame_ref"
+      ],
+      "applicability": [
+        "source_selected_conditional_envelope"
+      ],
+      "invariants": [
+        "raster_edges_are_not_physical_walls",
+        "envelope_is_proposed_not_established",
+        "escaping_the_envelope_is_unknown_never_a_stop_or_entry_proof",
+        "envelope_qualification_never_releases_an_action"
+      ],
+      "falsifiers": [
+        "falsifier.tool_or_load_escapes_current_viewport_search_envelope"
+      ],
+      "reason_refs": [
+        "reason.source_scoped_raster_coordinates_bound_conditional_search_only"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{envelope_revision_ref}",
+          "kind": "entity",
+          "label": "proposed conditional raster search envelope",
+          "required_fields": [
+            "envelope_revision_ref"
+          ],
+          "attribute_bindings": {
+            "envelope_revision_ref": "envelope_revision_ref",
+            "raster_shape": "raster_shape",
+            "domain_positions": "domain_positions",
+            "root_admissible_positions": "root_admissible_positions",
+            "obstacles": "obstacles",
+            "domain_boundary_is_known": "domain_boundary_is_known",
+            "domain_is_physical": "domain_is_physical",
+            "search_envelope_class_ref": "search_envelope_class_ref",
+            "whole_influence_prediction_complete": "whole_influence_prediction_complete",
+            "current_frame_ref": "current_frame_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "retained_parent_goal_ref": "retained_parent_goal_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "envelope_falsifier_refs": "envelope_falsifier_refs"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{envelope_revision_ref}",
+          "predicate": "piercing_search_envelope_revision",
+          "family": "control",
+          "argument_patterns": [
+            "{envelope_revision_ref}"
+          ],
+          "epistemic_status": "proposed",
+          "required_fields": [
+            "envelope_revision_ref"
+          ],
+          "static_attributes": {
+            "search_envelope_releases_action": false
+          },
+          "attribute_bindings": {
+            "envelope_revision_ref": "envelope_revision_ref",
+            "raster_shape": "raster_shape",
+            "domain_positions": "domain_positions",
+            "root_admissible_positions": "root_admissible_positions",
+            "obstacles": "obstacles",
+            "domain_boundary_is_known": "domain_boundary_is_known",
+            "domain_is_physical": "domain_is_physical",
+            "search_envelope_class_ref": "search_envelope_class_ref",
+            "whole_influence_prediction_complete": "whole_influence_prediction_complete",
+            "current_frame_ref": "current_frame_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "retained_parent_goal_ref": "retained_parent_goal_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "envelope_falsifier_refs": "envelope_falsifier_refs"
+          }
+        }
+      ]
+    }
+  ]
+}

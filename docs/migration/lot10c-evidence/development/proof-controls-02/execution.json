@@ -1,0 +1,108 @@
+{
+  "schema": "logos-engine.lot10c.proof-controls-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T17:22:55.122698+00:00",
+  "finishedAt": "2026-11-11T17:22:56.100269+00:00",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "/workspace/sites/sra-lot10c-20261111/.sites-checkout/docs/migration/lot10c-evidence/test-proof-controls.py"
+  ],
+  "declaredTimeoutSeconds": 55,
+  "elapsedSeconds": 0.9768249179978739,
+  "exitCode": 0,
+  "timedOut": false,
+  "inputsBefore": [
+    {
+      "path": "docs/migration/lot10c-evidence/test-proof-controls.py",
+      "sha256": "ef19004a339385aae01b646b7d534371ad1db5cdd90f50c5f7afb18026bede2d",
+      "bytes": 20258
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/run-clocked-proof.py",
+      "sha256": "da8fc65a8be4ea375cf90f0aabf3b354407ba287a4b302d51186a2821c0c655a",
+      "bytes": 42292
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/case-activity.py",
+      "sha256": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+      "bytes": 8126
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/run-ordered-recruitment-campaign.mjs",
+      "sha256": "2bf91f553494206356abff91fd9ec58c7c281ea73cf045d1bb2e8b9527d80c3d",
+      "bytes": 10496
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "docs/migration/lot10c-evidence/test-proof-controls.py",
+      "sha256": "ef19004a339385aae01b646b7d534371ad1db5cdd90f50c5f7afb18026bede2d",
+      "bytes": 20258
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/run-clocked-proof.py",
+      "sha256": "da8fc65a8be4ea375cf90f0aabf3b354407ba287a4b302d51186a2821c0c655a",
+      "bytes": 42292
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/case-activity.py",
+      "sha256": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+      "bytes": 8126
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/run-ordered-recruitment-campaign.mjs",
+      "sha256": "2bf91f553494206356abff91fd9ec58c7c281ea73cf045d1bb2e8b9527d80c3d",
+      "bytes": 10496
+    }
+  ],
+  "inputsUnchanged": true,
+  "rawOutput": {
+    "path": "docs/migration/lot10c-evidence/development/proof-controls-02/raw.txt",
+    "sha256": "0a5d601eada22959fb5d93a9ad7c0294945d5c066b32f10898abebde6cc26b31",
+    "bytes": 2714
+  },
+  "summary": {
+    "actualCaseLedgerReadOrWritten": false,
+    "errors": 0,
+    "failures": 0,
+    "observations": [
+      {
+        "excludedNonNodeImports": 2,
+        "nativeHarnessCalled": false,
+        "nativeHarnessImported": false,
+        "rejected": [
+          "missing_admission",
+          "stale_parent",
+          "terminal_entry",
+          "wrong_contract"
+        ],
+        "test": "actual_js_admission_prefix",
+        "validControlPassed": true
+      },
+      {
+        "allowanceSeconds": 0.1,
+        "elapsedSeconds": 0.10126585000034538,
+        "exitCode": -9,
+        "partialResult": true,
+        "rawBytesPreserved": true,
+        "reaped": true,
+        "test": "actual_sleeping_retention"
+      }
+    ],
+    "qualification": "Synthetic proof-control regressions only, including one supervised sleeping process and an AST-isolated admission prefix. No case, gameplay, source parity, cost or release outcome is established.",
+    "realGames": 0,
+    "schema": "logos-engine.lot10c.synthetic-proof-controls.v1",
+    "sourceInputsUnchanged": true,
+    "sourceSha256": {
+      "case-activity.py": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+      "run-clocked-proof.py": "da8fc65a8be4ea375cf90f0aabf3b354407ba287a4b302d51186a2821c0c655a",
+      "run-ordered-recruitment-campaign.mjs": "2bf91f553494206356abff91fd9ec58c7c281ea73cf045d1bb2e8b9527d80c3d"
+    },
+    "status": "passed",
+    "testsRun": 6
+  },
+  "realGames": 0,
+  "actualCaseLedgerReadOrWritten": false,
+  "qualification": "Same six bounded synthetic proof-control tests rerun after owner fix, under shared performance lock. Python helpers imported only from isolated temporary copies; JS admission prefix excludes all non-node dependencies. No native harness, game, cost, actual case data, Git or publication. Previous failure retained unchanged."
+}

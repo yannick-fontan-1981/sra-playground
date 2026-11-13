@@ -1,0 +1,672 @@
+{
+  "module_id": "homologous_interface",
+  "declarations": [
+    {
+      "id": "principle.homologous_panels_can_hold_joint_actor_instructions",
+      "kind": "principle",
+      "family_ref": "family.interaction_configuration",
+      "abstraction_level": "causal_variant",
+      "general_principle_refs": [
+        "principle.action_conditioned_multiframe_transition_opens_process_supposition",
+        "principle.homologous_composition_requires_its_current_common_input"
+      ],
+      "premises": [
+        "repeated_framed_fields_can_motivate_a_revisable_instruction_hypothesis"
+      ],
+      "invariants": [
+        "test_edit_then_common_input",
+        "evaluate_joint_effects_conflicts_and_unknowns",
+        "never_infer_actor_identity_from_frame_similarity_alone",
+        "retain_alternative_goal_hypotheses"
+      ],
+      "falsifiers": [
+        "observed_effects_refute_configuration_or_common_transaction_hypothesis"
+      ],
+      "reason_refs": [
+        "reason.current_homologous_fields_support_a_revisable_configuration_experiment"
+      ]
+    },
+    {
+      "id": "principle.homologous_composition_requires_its_current_common_input",
+      "kind": "principle",
+      "family_ref": "family.interaction_configuration",
+      "abstraction_level": "causal_variant",
+      "general_principle_refs": [
+        "principle.action_conditioned_multiframe_transition_opens_process_supposition"
+      ],
+      "premises": [
+        "current_available_input_vocabulary_measured",
+        "this_composition_requires_a_separate_common_input"
+      ],
+      "invariants": [
+        "admit_only_with_a_unique_current_binding_for_the_implemented_common_input_family",
+        "availability_is_not_proof_of_the_joint_effect",
+        "missing_common_input_defers_only_this_composition_not_other_current_questions",
+        "no_actor_assignment_from_frame_similarity"
+      ],
+      "falsifiers": [
+        "current_available_inputs_no_longer_bind_the_proposed_common_input"
+      ],
+      "reason_refs": [
+        "reason.current_homologous_fields_support_a_revisable_configuration_experiment"
+      ]
+    },
+    {
+      "id": "policy.homologous_interface_question",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.interface.trial_value_default",
+          "all_conditions": [],
+          "static_facts": {
+            "trial_pattern": null,
+            "trial_is_revisable_question_not_world_goal": true,
+            "trial_pattern_present": false
+          }
+        },
+        {
+          "id": "projection.interface.unknown",
+          "all_conditions": [
+            {
+              "field": "interface_unknown",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.interface.initial_edit",
+          "all_conditions": [
+            {
+              "field": "interface_geometry_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "interface_unique_greatest_family",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "interface_point_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "committed_plan_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "incoming_declared_route_engagement_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_response_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "transaction_observed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "response_after_bound_transaction",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "kind",
+              "operator": "equals",
+              "expected": "edit"
+            },
+            {
+              "field": "source_trial_pattern_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "observed_response_pattern_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "edit_unobserved",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "interface_available_common_input_count",
+              "operator": "equals",
+              "expected": 1
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "interface_description_admitted": true,
+            "interface_question_ref": "question.test_homologous_fields_before_joint_input",
+            "interface_expected_relation_ref": "expectation.selected_pane_changes_without_assuming_actor_control",
+            "interface_falsifier_refs": [
+              "falsifier.response_not_local_to_selected_pane",
+              "falsifier.current_field_does_not_reach_or_preserve_the_experimental_trial_state",
+              "falsifier.common_input_does_not_combine_the_observed_settings",
+              "falsifier.shared_conflict_or_cost_invalidates_the_joint_hypothesis"
+            ]
+          },
+          "templated_facts": {
+            "interface_witness_claim_ref": "claim.homologous_interface.{witness_token}"
+          }
+        },
+        {
+          "id": "projection.interface.edit_toward_observed_trial",
+          "all_conditions": [
+            {
+              "field": "interface_geometry_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "interface_unique_greatest_family",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "interface_point_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "committed_plan_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "incoming_declared_route_engagement_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_response_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "transaction_observed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "response_after_bound_transaction",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "kind",
+              "operator": "equals",
+              "expected": "edit"
+            },
+            {
+              "field": "source_trial_pattern_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "observed_response_pattern_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_pattern_equals_observed_response",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "interface_available_common_input_count",
+              "operator": "equals",
+              "expected": 1
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "interface_description_admitted": true,
+            "interface_question_ref": "question.test_homologous_fields_before_joint_input",
+            "interface_expected_relation_ref": "expectation.selected_pane_changes_without_assuming_actor_control",
+            "interface_falsifier_refs": [
+              "falsifier.response_not_local_to_selected_pane",
+              "falsifier.current_field_does_not_reach_or_preserve_the_experimental_trial_state",
+              "falsifier.common_input_does_not_combine_the_observed_settings",
+              "falsifier.shared_conflict_or_cost_invalidates_the_joint_hypothesis"
+            ],
+            "trial_pattern_present": true
+          },
+          "templated_facts": {
+            "interface_witness_claim_ref": "claim.homologous_interface.{witness_token}"
+          },
+          "bound_facts": {
+            "trial_pattern": "observed_response_pattern"
+          }
+        },
+        {
+          "id": "projection.interface.edit_toward_retained_trial",
+          "all_conditions": [
+            {
+              "field": "interface_geometry_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "interface_unique_greatest_family",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "interface_point_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "committed_plan_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "incoming_declared_route_engagement_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_response_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "transaction_observed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "response_after_bound_transaction",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "kind",
+              "operator": "equals",
+              "expected": "edit"
+            },
+            {
+              "field": "source_trial_pattern_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_pattern_equals_source_trial",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "interface_available_common_input_count",
+              "operator": "equals",
+              "expected": 1
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "interface_description_admitted": true,
+            "interface_question_ref": "question.test_homologous_fields_before_joint_input",
+            "interface_expected_relation_ref": "expectation.selected_pane_changes_without_assuming_actor_control",
+            "interface_falsifier_refs": [
+              "falsifier.response_not_local_to_selected_pane",
+              "falsifier.current_field_does_not_reach_or_preserve_the_experimental_trial_state",
+              "falsifier.common_input_does_not_combine_the_observed_settings",
+              "falsifier.shared_conflict_or_cost_invalidates_the_joint_hypothesis"
+            ],
+            "trial_pattern_present": true
+          },
+          "templated_facts": {
+            "interface_witness_claim_ref": "claim.homologous_interface.{witness_token}"
+          },
+          "bound_facts": {
+            "trial_pattern": "prior_source_trial_pattern"
+          }
+        },
+        {
+          "id": "projection.interface.common_input_after_observed_trial",
+          "all_conditions": [
+            {
+              "field": "interface_geometry_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "interface_unique_greatest_family",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "interface_point_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "committed_plan_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "incoming_declared_route_engagement_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_response_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "transaction_observed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "response_after_bound_transaction",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "kind",
+              "operator": "equals",
+              "expected": "transaction"
+            },
+            {
+              "field": "source_trial_pattern_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "observed_response_pattern_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_patterns_equal_observed_response",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "interface_available_common_input_count",
+              "operator": "equals",
+              "expected": 1
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "interface_description_admitted": true,
+            "interface_question_ref": "question.test_homologous_fields_before_joint_input",
+            "interface_expected_relation_ref": "expectation.observe_joint_effect_and_cost_of_common_input",
+            "interface_falsifier_refs": [
+              "falsifier.response_not_local_to_selected_pane",
+              "falsifier.current_field_does_not_reach_or_preserve_the_experimental_trial_state",
+              "falsifier.common_input_does_not_combine_the_observed_settings",
+              "falsifier.shared_conflict_or_cost_invalidates_the_joint_hypothesis"
+            ],
+            "trial_pattern_present": true
+          },
+          "templated_facts": {
+            "interface_witness_claim_ref": "claim.homologous_interface.{witness_token}"
+          },
+          "bound_facts": {
+            "trial_pattern": "observed_response_pattern"
+          }
+        },
+        {
+          "id": "projection.interface.common_input_after_retained_trial",
+          "all_conditions": [
+            {
+              "field": "interface_geometry_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "interface_unique_greatest_family",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "interface_point_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "committed_plan_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "incoming_declared_route_engagement_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_response_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "transaction_observed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "response_after_bound_transaction",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "kind",
+              "operator": "equals",
+              "expected": "transaction"
+            },
+            {
+              "field": "source_trial_pattern_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_patterns_equal_source_trial",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "interface_available_common_input_count",
+              "operator": "equals",
+              "expected": 1
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "interface_description_admitted": true,
+            "interface_question_ref": "question.test_homologous_fields_before_joint_input",
+            "interface_expected_relation_ref": "expectation.observe_joint_effect_and_cost_of_common_input",
+            "interface_falsifier_refs": [
+              "falsifier.response_not_local_to_selected_pane",
+              "falsifier.current_field_does_not_reach_or_preserve_the_experimental_trial_state",
+              "falsifier.common_input_does_not_combine_the_observed_settings",
+              "falsifier.shared_conflict_or_cost_invalidates_the_joint_hypothesis"
+            ],
+            "trial_pattern_present": true
+          },
+          "templated_facts": {
+            "interface_witness_claim_ref": "claim.homologous_interface.{witness_token}"
+          },
+          "bound_facts": {
+            "trial_pattern": "prior_source_trial_pattern"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.interface.current_field_or_joint_question",
+          "all_conditions": [
+            {
+              "field": "interface_description_admitted",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.current_homologous_fields_support_a_revisable_configuration_experiment"
+        },
+        {
+          "id": "tier.interface.unknown",
+          "all_conditions": [
+            {
+              "field": "interface_unknown",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.preserve_unresolved_interface_hypotheses"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "field_top",
+          "preferred_order": "minimize"
+        },
+        {
+          "field": "field_left",
+          "preferred_order": "minimize"
+        },
+        {
+          "field": "pane_order",
+          "preferred_order": "minimize"
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.homologous_interface_witness"
+      },
+      "invariants": [
+        "one_primitive_then_reconcile_current_response",
+        "actor_assignment_and_joint_resource_laws_remain_unknown",
+        "no_committed_route_or_goal_preemption",
+        "all_alternatives_preserved",
+        "a_trial_predicate_already_true_needs_no_edit_dependency",
+        "matching_the_trial_does_not_establish_a_terminal_goal",
+        "homogeneous_settings_are_only_one_experiment_not_a_universal_recipe"
+      ],
+      "reason_refs": [
+        "reason.current_homologous_fields_support_a_revisable_configuration_experiment",
+        "reason.preserve_unresolved_interface_hypotheses"
+      ]
+    },
+    {
+      "id": "rule.homologous_interface_witness",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "relation_family": "structural",
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "premises": [
+        "complete_current_homologous_frames_and_field_correspondence",
+        "source_selected_one_conditional_edit_or_shared_input_question"
+      ],
+      "invariants": [
+        "geometry_does_not_assign_actors_or_activity_meanings",
+        "local_edit_observed_before_homologous_edit_question",
+        "joint_laws_cost_and_conflicts_remain_unknown",
+        "no_action_authorization_in_memory"
+      ],
+      "falsifiers": [
+        "sealed_current_response_contradicts_the_question"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "witness.homologous_interface.{witness_token}",
+          "kind": "schema",
+          "label": "current revisable homologous interface experiment",
+          "required_fields": [
+            "snapshot",
+            "frame_ref",
+            "interface_witness_claim_ref",
+            "interface_question_ref",
+            "interface_available_common_input_count"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.homologous_interface_witness.v1",
+            "commitment": "revisable",
+            "action_authorization": false,
+            "canonical_fact_projection_enabled": true,
+            "actor_assignment_unknown": true,
+            "independent_resources_unknown": true,
+            "shared_transaction_laws_unknown": true,
+            "trial_is_not_an_established_world_goal": true
+          },
+          "attribute_bindings": {
+            "snapshot": "snapshot",
+            "operational_scene_ref": "frame_ref",
+            "scope_counter": "scope_counter",
+            "question_ref": "interface_question_ref",
+            "expected_relation_ref": "interface_expected_relation_ref",
+            "witness_claim_ref": "interface_witness_claim_ref",
+            "trial_pattern": "trial_pattern",
+            "available_common_input_count": "interface_available_common_input_count"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.homologous_interface.{witness_token}",
+          "predicate": "current_homologous_fields_support_conditional_interface_question",
+          "family": "structural",
+          "epistemic_status": "supported",
+          "required_fields": [
+            "snapshot",
+            "frame_ref",
+            "interface_question_ref"
+          ],
+          "required_term_patterns": [
+            "witness.homologous_interface.{witness_token}"
+          ],
+          "argument_patterns": [
+            "witness.homologous_interface.{witness_token}",
+            "{frame_ref}"
+          ],
+          "static_attributes": {
+            "authorizes_action": false,
+            "universal_world_law": false,
+            "requires_current_revalidation": true
+          },
+          "attribute_bindings": {
+            "operational_scene_ref": "frame_ref",
+            "question_ref": "interface_question_ref"
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.current_homologous_fields_support_a_revisable_configuration_experiment"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "schema": "logos-engine.lot4c-publication-inputs-execution.v1",
+  "status": "failed",
+  "startedAt": "2026-11-11T01:23:41.179044+00:00",
+  "finishedAt": "2026-11-11T01:23:42.848318+00:00",
+  "elapsedSeconds": 1.669284453993896,
+  "cwd": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "command": [
+    "flock",
+    "-s",
+    "/workspace/shared/sra-coordination/performance.lock",
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "docs/migration/lot4c-evidence/record-publication-inputs.py",
+    "/workspace/sites/sra-lot4c-reference-056",
+    "docs/migration/lot4c-evidence/integrated-final",
+    "docs/migration/lot4c-evidence/performance-integrated",
+    "docs/migration/lot4c-evidence/integrated-final/validation",
+    "--browser-evidence",
+    "docs/migration/lot4c-evidence/integrated-final/browser/browser-qa.json",
+    "--game-evidence",
+    "docs/migration/lot4c-evidence/integrated-final/isos-facet-source-parity-execution.json",
+    "--game-evidence",
+    "docs/migration/lot4c-evidence/case-clock.json"
+  ],
+  "lock": {
+    "path": "/workspace/shared/sra-coordination/performance.lock",
+    "mode": "shared",
+    "invocation": "flock -s",
+    "processFinishedBeforeReceipt": true
+  },
+  "exitCode": 1,
+  "exception": null,
+  "helperBefore": {
+    "path": "docs/migration/lot4c-evidence/record-publication-inputs.py",
+    "bytes": 17876,
+    "sha256": "bd8070cc153351d59914ef3a3d9f72b9f5040ac5f23380dc5b95fb196de64c91"
+  },
+  "helperAfter": {
+    "path": "docs/migration/lot4c-evidence/record-publication-inputs.py",
+    "bytes": 17876,
+    "sha256": "bd8070cc153351d59914ef3a3d9f72b9f5040ac5f23380dc5b95fb196de64c91"
+  },
+  "helperUnchanged": true,
+  "stdout": {
+    "path": "docs/migration/lot4c-evidence/publication-preflight/record-publication-inputs.stdout.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stderr": {
+    "path": "docs/migration/lot4c-evidence/publication-preflight/record-publication-inputs.stderr.log",
+    "bytes": 93,
+    "sha256": "b053080d02eaa5c3257c36c206af0eba2cce802b57995e20eb1e9e65af354d86"
+  },
+  "exit": {
+    "path": "docs/migration/lot4c-evidence/publication-preflight/record-publication-inputs.exit",
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "publicationInputs": null,
+  "resultSummary": null,
+  "qualification": "Executed only the unchanged publication input recorder under the shared performance flock. This wrapper retained stdout, stderr, exit and this execution receipt outside the final/performance input directories. No new measurement, test, build, game, Git operation, transport or publication was performed. The recorder retains its release-input-integrity scope; optional browser/game files are fingerprinted without promoting their results."
+}

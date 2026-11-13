@@ -1,0 +1,9 @@
+{"status": "failed", "attempt": 1, "elapsedSeconds": 45.87184218699986, "frameCount": null, "geometryCount": null, "ownerOperationCount": null, "policyCaseCount": null}
+Traceback (most recent call last):
+  File "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/tools/export-reference.py", line 440, in <module>
+    if __name__ == '__main__': main()
+                               ^^^^^^
+  File "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/tools/export-reference.py", line 414, in main
+    assert hashes_before == hashes_after, 'No undeclared source import during corpus evaluation'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: No undeclared source import during corpus evaluation

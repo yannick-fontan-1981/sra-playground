@@ -1,0 +1,1544 @@
+{
+  "module_id": "goal_parent_continuity",
+  "declarations": [
+    {
+      "id": "policy.parent_child_effect_consumption",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": ["parent.child_effect_consumption"],
+      "selection_eligibility_conditions": [{"field": "applicable", "operator": "equals", "expected": true}],
+      "invariants": ["an_answer_is_not_automatically_a_satisfied_condition", "consumption_never_grants_act", "unrelated_dependencies_remain_unchanged"],
+      "fact_projections": [
+        {
+          "id": "projection.parent_child_effect.not_required",
+          "all_conditions": [],
+          "static_facts": {"applicable": true, "child_effect_consumption_required": false,
+            "child_effect_consumption_accepted": false, "child_effect_consumption_grants_act": false,
+            "child_effect_applied_dependency_refs": [], "child_effect_enabled_continuation_refs": [],
+            "child_effect_repair_requirement_refs": []}
+        },
+        {
+          "id": "projection.parent_child_effect.require_current_receipt",
+          "all_conditions": [
+            {"field": "child_return_present", "operator": "equals", "expected": true},
+            {"field": "parent_scope_matches", "operator": "equals", "expected": true},
+            {"field": "parent_continuity_allows_candidate", "operator": "equals", "expected": true},
+            {"field": "child_return_matches_required_dependency", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {"child_effect_consumption_required": true,
+            "child_effect_consumption_disposition_ref": "child_effect.refused_current_dependency_unproved",
+            "child_effect_continuation_allowed": false,
+            "child_effect_requires_revalidation": true,
+            "child_effect_repair_requirement_refs": ["requirement.revalidate_exact_child_effect_and_remaining_dependencies"]}
+        },
+        {
+          "id": "projection.parent_child_effect.accept_current_dependency_effect",
+          "all_conditions": [
+            {"field": "child_effect_consumption_required", "operator": "equals", "expected": true},
+            {"field": "child_return_canonical", "operator": "equals", "expected": true},
+            {"field": "child_return_scope_matches", "operator": "equals", "expected": true},
+            {"field": "child_return_parent_matches", "operator": "equals", "expected": true},
+            {"field": "child_return_effect_claim_count", "operator": "greater_than", "expected": 0},
+            {"field": "child_return_current_effect_claim_count", "operator": "equals_reference_field", "reference_field": "child_return_effect_claim_count"},
+            {"field": "child_return_prerequisite_count", "operator": "equals_reference_field", "reference_field": "child_return_completed_prerequisite_count"},
+            {"field": "parent_continuity_allows_candidate", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {"child_effect_consumption_accepted": true,
+            "child_effect_consumption_disposition_ref": "child_effect.consumed_for_current_parent_continuation",
+            "child_effect_continuation_allowed": true, "child_effect_requires_revalidation": false,
+            "child_effect_repair_requirement_refs": []},
+          "bound_facts": {"child_effect_applied_dependency_refs": "child_return_dependency_refs",
+            "child_effect_enabled_continuation_refs": "child_return_candidate_refs"}
+        }
+      ],
+      "reason_refs": ["reason.consume_current_child_effect_without_replanning_parent"]
+    },
+    {
+      "id": "policy.parent_goal_why_measurement",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": ["a_root_definition_owns_a_falsifier_for_the_root_it_defines"],
+      "applicability": ["scoped_frontier_declarations_supply_parent_why_evidence"],
+      "invariants": [
+        "a_question_attached_to_a_terminal_does_not_define_its_root_why",
+        "focus_variants_of_one_exact_contract_retain_every_origin_and_scope_proof",
+        "distinct_owned_contracts_remain_ambiguous",
+        "an_explicit_source_candidate_identity_qualifies_only_its_current_owned_contract",
+        "an_action_goal_refinement_does_not_inherit_a_sibling_activation_identity",
+        "candidate_identity_never_replaces_an_engaged_parent_why",
+        "why_measurement_grants_no_action_authority"
+      ],
+      "falsifiers": ["a_child_only_falsifier_is_borrowed_from_the_root_graph", "conflicting_why_fields_are_coalesced"],
+      "declared_alternative_refs": ["measurement.parent_goal_why_contract"],
+      "selection_eligibility_conditions": [{"field": "applicable", "operator": "equals", "expected": true}],
+      "fact_projections": [{
+        "id": "projection.parent_goal_why.owned_exact_contract",
+        "all_conditions": [],
+        "static_facts": {
+          "applicable": true,
+          "definition_goal_falsifier_min_count": 1,
+          "candidate_activation_identity_binding_field": "activation_ref",
+          "candidate_activation_identity_terminal_binding_field": "terminal_goal_refs",
+          "coalesced_reference_fields": ["canonical_origin_refs", "canonical_scope_proof_refs"],
+          "equivalence_fields": [
+            "parent_goal_ref", "source_activation_ref", "guiding_principle_ref", "premise_claim_refs",
+            "support_claim_refs", "activation_reason_refs", "falsifier_refs", "access_condition_refs",
+            "expected_goal_delta_refs", "expected_effect_signature_refs", "parent_goal_refs",
+            "prerequisite_goal_refs", "declared_parent_goal_pairs", "declared_goal_falsifier_pairs",
+            "operational_goal_hypotheses"
+          ]
+        }
+      }],
+      "reason_refs": ["reason.parent_why_requires_owned_definition_and_exact_equivalence"]
+    },
+    {
+      "id": "policy.reasoning_context_stack_transition",
+      "configuration": {
+        "child_effect_contract": {
+          "lifecycle_predicate_ref": "goal_lifecycle_status",
+          "lifecycle_status_attribute_ref": "lifecycle_status",
+          "completion_status_refs": ["locally_satisfied", "achieved"],
+          "epistemic_status_refs": ["supported", "established"],
+          "active_disposition_ref": "active",
+          "positive_polarity_ref": "positive",
+          "successful_operation_status_ref": "completed"
+        }
+      },
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "context_stack.current_transition"
+      ],
+      "premises": [
+        "the_canonical_goal_graph_owns_dependencies_and_source_declares_the_active_path"
+      ],
+      "applicability": [
+        "a_source_context_entry_or_native_return_requires_reconciliation"
+      ],
+      "invariants": [
+        "a_context_stack_never_grants_act",
+        "a_child_return_never_closes_its_parent",
+        "a_prepared_sibling_never_replaces_the_dispatched_context",
+        "ambiguous_native_alternatives_remain_addressable_in_the_original_checkpoint"
+      ],
+      "falsifiers": [
+        "a_foreign_return_mutates_the_stack",
+        "a_local_lease_lacks_its_declared_context",
+        "the_parent_why_is_rewritten_by_a_child"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.context_stack.default_preservation",
+          "all_conditions": [],
+          "static_facts": {
+            "applicable": true,
+            "stack_update_allowed": false,
+            "stack_transition_ref": "context_stack.preserve",
+            "stack_grants_act": false,
+            "parent_goal_closed": false
+          }
+        },
+        {
+          "id": "projection.context_stack.enter_declared_local_execution",
+          "all_conditions": [
+            {
+              "field": "event_ref",
+              "operator": "equals",
+              "expected": "context_stack.enter_local_execution"
+            },
+            {
+              "field": "scope_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "intent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_qualification_allows_candidate",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "entered_path_nonempty",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "entered_path_within_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "entered_intent_refs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "stack_update_allowed": true,
+            "stack_transition_ref": "context_stack.enter_declared_path"
+          },
+          "bound_facts": {
+            "result_frames": "entered_frames",
+            "result_parent_goal_ref": "entered_parent_goal_ref",
+            "result_execution_context_ref": "entered_context_ref",
+            "result_execution_intent_refs": "entered_intent_refs",
+            "result_local_execution_intent_refs": "entered_intent_refs"
+          }
+        },
+        {
+          "id": "projection.context_stack.return_reconciled_local_execution",
+          "all_conditions": [
+            {
+              "field": "event_ref",
+              "operator": "equals",
+              "expected": "context_stack.return_local_execution"
+            },
+            {
+              "field": "scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "execution_return_matches",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "stack_update_allowed": true,
+            "stack_transition_ref": "context_stack.reconcile_local_execution",
+            "result_execution_context_ref": null,
+            "result_execution_intent_refs": []
+          },
+          "bound_facts": {
+            "result_frames": "preserved_frames",
+            "result_parent_goal_ref": "preserved_parent_goal_ref",
+            "returned_context_ref": "returned_context_ref",
+            "result_local_execution_intent_refs": "preserved_local_execution_intent_refs"
+          }
+        },
+        {
+          "id": "projection.context_stack.return_observed_child_effect",
+          "all_conditions": [
+            {"field": "event_ref", "operator": "equals", "expected": "context_stack.return_local_execution"},
+            {"field": "scope_matches", "operator": "equals", "expected": true},
+            {"field": "execution_return_matches", "operator": "equals", "expected": true},
+            {"field": "effect_child_goal_ref", "operator": "is_present"},
+            {"field": "effect_parent_context_ref", "operator": "is_present"},
+            {"field": "child_effect_observation_matches", "operator": "equals", "expected": true},
+            {"field": "child_lifecycle_claim_count", "operator": "greater_than", "expected": 0},
+            {"field": "child_completion_claim_count", "operator": "equals_reference_field", "reference_field": "child_lifecycle_claim_count"},
+            {"field": "child_current_effect_proof_count", "operator": "equals_reference_field", "reference_field": "child_lifecycle_claim_count"}
+          ],
+          "static_facts": {
+            "stack_update_allowed": true,
+            "stack_transition_ref": "context_stack.return_reconciled_child"
+          },
+          "bound_facts": {
+            "result_frames": "returned_frames",
+            "completed_child_goal_ref": "effect_child_goal_ref",
+            "completed_child_effect_claim_refs": "child_effect_claim_refs",
+            "parent_resume_context_ref": "effect_parent_context_ref",
+            "child_effect_observation_ref": "child_effect_observation_ref"
+          }
+        },
+        {
+          "id": "projection.context_stack.retain_native_question_return",
+          "all_conditions": [
+            {
+              "field": "event_ref",
+              "operator": "equals",
+              "expected": "context_stack.return_native_question"
+            },
+            {
+              "field": "scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_parent_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_return_parent_domain_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_question_source_matches",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "stack_update_allowed": true,
+            "stack_transition_ref": "context_stack.retain_native_return_domain"
+          },
+          "bound_facts": {
+            "result_frames": "preserved_frames",
+            "result_parent_goal_ref": "preserved_parent_goal_ref",
+            "result_execution_context_ref": "preserved_execution_context_ref",
+            "result_execution_intent_refs": "preserved_execution_intent_refs",
+            "result_local_execution_intent_refs": "preserved_local_execution_intent_refs",
+            "native_return_checkpoint_ref": "native_return_checkpoint_ref",
+            "native_return_alternative_refs": "native_return_alternative_refs",
+            "native_return_disposition_ref": "native_return_disposition_ref"
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.reasoning_contexts_survive_the_local_execution_lease_and_native_child_returns"
+      ]
+    },
+
+    {
+      "id": "policy.parent_goal_continuity",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "parent_is_carried_by_the_last_actually_dispatched_action",
+        "lifecycle_and_parent_edges_are_current_canonical_goal_graph_measurements"
+      ],
+      "applicability": [
+        "one_prepared_candidate_requires_parent_concentration_qualification"
+      ],
+      "invariants": [
+        "qualification_never_releases_an_action",
+        "candidate_preparation_never_replaces_the_dispatched_parent",
+        "scope_change_or_absent_parent_preserves_legacy_compatibility",
+        "unknown_effect_or_missing_goal_node_never_closes_a_parent",
+        "suspension_preserves_parent_ownership_until_declared_revalidation_or_handoff",
+        "satisfied_axis_is_not_fulfilled_terminal_parent",
+        "a_dependent_child_keeps_the_parent_ref_in_the_existing_concentration_lease"
+      ],
+      "falsifiers": [
+        "dispatch_lease_does_not_name_the_supplied_prior_action_intent",
+        "closure_has_no_canonical_lifecycle_history_or_support",
+        "candidate_has_no_parent_dependency_or_declared_handoff"
+      ],
+      "declared_alternative_refs": [
+        "continuity.parent_goal_candidate"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.parent_goal_continuity.default_requires_parent_revalidation",
+          "all_conditions": [],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.foreign_or_unresolved_parent",
+            "parent_continuity_allows_candidate": false,
+            "parent_continuity_requires_revalidation": true,
+            "qualification_releases_action": false,
+            "context_transport_valid": true
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "parent_goal_ref",
+            "retained_parent_goal_why_contract": "parent_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.legacy_without_dispatched_parent",
+          "all_conditions": [
+            {
+              "field": "prior_intent_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.legacy_without_parent",
+            "parent_continuity_allows_candidate": true,
+            "parent_continuity_requires_revalidation": false,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "candidate_terminal_goal_ref",
+            "retained_parent_goal_why_contract": "candidate_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.legacy_without_parent_ref",
+          "all_conditions": [
+            {
+              "field": "parent_goal_ref",
+              "operator": "is_absent"
+            },
+            {
+              "field": "parent_graph_relation_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.legacy_without_parent",
+            "parent_continuity_allows_candidate": true,
+            "parent_continuity_requires_revalidation": false,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "candidate_terminal_goal_ref",
+            "retained_parent_goal_why_contract": "candidate_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.legacy_new_scope",
+          "all_conditions": [
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.legacy_without_parent",
+            "parent_continuity_allows_candidate": true,
+            "parent_continuity_requires_revalidation": false,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "candidate_terminal_goal_ref",
+            "retained_parent_goal_why_contract": "candidate_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.same_terminal_parent",
+          "all_conditions": [
+            {
+              "field": "parent_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_intent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_terminal_equals_parent",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.same_parent",
+            "parent_continuity_allows_candidate": true,
+            "parent_continuity_requires_revalidation": false,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "parent_goal_ref",
+            "retained_parent_goal_why_contract": "parent_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.same_parent_goal",
+          "all_conditions": [
+            {
+              "field": "parent_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_intent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_goal_equals_parent",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.same_parent",
+            "parent_continuity_allows_candidate": true,
+            "parent_continuity_requires_revalidation": false,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "parent_goal_ref",
+            "retained_parent_goal_why_contract": "parent_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.declared_dependent_child",
+          "all_conditions": [
+            {
+              "field": "parent_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_intent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_dependency_chain_contains_parent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_terminal_equals_parent",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "candidate_goal_equals_parent",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.dependent_child",
+            "parent_continuity_allows_candidate": true,
+            "parent_continuity_requires_revalidation": false,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "parent_goal_ref",
+            "retained_parent_goal_why_contract": "parent_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.canonical_dependent_child",
+          "all_conditions": [
+            {
+              "field": "parent_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_intent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_ancestry_contains_parent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_terminal_equals_parent",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "candidate_goal_equals_parent",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.dependent_child",
+            "parent_continuity_allows_candidate": true,
+            "parent_continuity_requires_revalidation": false,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "parent_goal_ref",
+            "retained_parent_goal_why_contract": "parent_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.suspended_disabled_with_reason",
+          "all_conditions": [
+            {
+              "field": "parent_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_intent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_lifecycle_status",
+              "operator": "equals",
+              "expected": "disabled_with_reason"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.suspended_parent_requires_revalidation",
+            "parent_continuity_allows_candidate": false,
+            "parent_continuity_requires_revalidation": true,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "parent_goal_ref",
+            "retained_parent_goal_why_contract": "parent_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.suspended_falsified",
+          "all_conditions": [
+            {
+              "field": "parent_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_intent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_lifecycle_status",
+              "operator": "equals",
+              "expected": "falsified"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.suspended_parent_requires_revalidation",
+            "parent_continuity_allows_candidate": false,
+            "parent_continuity_requires_revalidation": true,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "parent_goal_ref",
+            "retained_parent_goal_why_contract": "parent_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.suspended_abandoned_exact_variant",
+          "all_conditions": [
+            {
+              "field": "parent_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_intent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_lifecycle_status",
+              "operator": "equals",
+              "expected": "abandoned_exact_variant"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.suspended_parent_requires_revalidation",
+            "parent_continuity_allows_candidate": false,
+            "parent_continuity_requires_revalidation": true,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "parent_goal_ref",
+            "retained_parent_goal_why_contract": "parent_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.parent_related_revalidation_terminal",
+          "all_conditions": [
+            {
+              "field": "parent_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_intent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_terminal_equals_parent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_discriminating_experiment_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "candidate_premise_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.revalidation",
+            "parent_continuity_allows_candidate": true,
+            "parent_continuity_requires_revalidation": false,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "parent_goal_ref",
+            "retained_parent_goal_why_contract": "parent_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.parent_related_revalidation_goal",
+          "all_conditions": [
+            {
+              "field": "parent_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_intent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_goal_equals_parent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_discriminating_experiment_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "candidate_premise_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.revalidation",
+            "parent_continuity_allows_candidate": true,
+            "parent_continuity_requires_revalidation": false,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "parent_goal_ref",
+            "retained_parent_goal_why_contract": "parent_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.parent_related_revalidation_chain",
+          "all_conditions": [
+            {
+              "field": "parent_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_intent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_dependency_chain_contains_parent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_discriminating_experiment_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "candidate_premise_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.revalidation",
+            "parent_continuity_allows_candidate": true,
+            "parent_continuity_requires_revalidation": false,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "parent_goal_ref",
+            "retained_parent_goal_why_contract": "parent_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.parent_related_revalidation_ancestry",
+          "all_conditions": [
+            {
+              "field": "parent_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_intent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_ancestry_contains_parent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_discriminating_experiment_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "candidate_premise_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.revalidation",
+            "parent_continuity_allows_candidate": true,
+            "parent_continuity_requires_revalidation": false,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "parent_goal_ref",
+            "retained_parent_goal_why_contract": "parent_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.explicit_foreign_candidate_preserves_valid_parent",
+          "all_conditions": [
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_parent_binding_authoritative",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_lease_canonical_state",
+              "operator": "equals",
+              "expected": "reconciled"
+            },
+            {
+              "field": "parent_goal_node_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_goal_why_contract",
+              "operator": "is_present"
+            },
+            {
+              "field": "parent_support_claim_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "parent_disable_reason_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "parent_dependency_question_open_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "candidate_intent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_terminal_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "candidate_goal_equals_parent",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "candidate_terminal_equals_parent",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "candidate_ancestry_contains_parent",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "candidate_dependency_chain_contains_parent",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "parent_lifecycle_status",
+              "operator": "equals",
+              "expected": "enabled"
+            },
+            {
+              "field": "parent_lifecycle_status",
+              "operator": "equals",
+              "expected": "pursuing"
+            }
+          ],
+          "static_facts": {
+            "parent_continuity_class_ref": "continuity.foreign_candidate_preserves_parent",
+            "parent_continuity_allows_candidate": false,
+            "parent_continuity_requires_revalidation": false,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "parent_goal_ref",
+            "retained_parent_goal_why_contract": "parent_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.open_question_requires_causal_contribution",
+          "all_conditions": [
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_dependency_question_open_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "candidate_parent_question_distinct_prediction_pair_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.parent_question_requires_contribution",
+            "parent_continuity_allows_candidate": false,
+            "parent_continuity_requires_revalidation": true,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "parent_goal_ref",
+            "retained_parent_goal_why_contract": "parent_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.prospective_probe_candidate_dependency_chain_contains_parent",
+          "all_conditions": [
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_dependency_question_open_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "candidate_parent_question_distinct_prediction_pair_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "candidate_dependency_chain_contains_parent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_discriminating_experiment_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "candidate_premise_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "parent_continuity_class_ref": "continuity.parent_dependency_discriminating_probe",
+            "parent_continuity_allows_candidate": true,
+            "parent_continuity_requires_revalidation": false,
+            "parent_probe_reconciliation_required": true,
+            "parent_probe_answers_are_predictions": true
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "parent_goal_ref",
+            "retained_parent_goal_why_contract": "parent_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.prospective_probe_candidate_ancestry_contains_parent",
+          "all_conditions": [
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_dependency_question_open_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "candidate_parent_question_distinct_prediction_pair_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "candidate_ancestry_contains_parent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_discriminating_experiment_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "candidate_premise_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "parent_continuity_class_ref": "continuity.parent_dependency_discriminating_probe",
+            "parent_continuity_allows_candidate": true,
+            "parent_continuity_requires_revalidation": false,
+            "parent_probe_reconciliation_required": true,
+            "parent_probe_answers_are_predictions": true
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "parent_goal_ref",
+            "retained_parent_goal_why_contract": "parent_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.explicit_closure_locally_satisfied",
+          "all_conditions": [
+            {
+              "field": "parent_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_intent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_lifecycle_status",
+              "operator": "equals",
+              "expected": "locally_satisfied"
+            },
+            {
+              "field": "parent_status_history_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "parent_support_claim_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "parent_achieved_claim_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.explicit_closure_handoff",
+            "parent_continuity_allows_candidate": true,
+            "parent_continuity_requires_revalidation": false,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "candidate_terminal_goal_ref",
+            "retained_parent_goal_why_contract": "candidate_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.explicit_closure_level_achieved",
+          "all_conditions": [
+            {
+              "field": "parent_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_intent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_lifecycle_status",
+              "operator": "equals",
+              "expected": "level_achieved"
+            },
+            {
+              "field": "parent_status_history_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "parent_support_claim_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "parent_achieved_claim_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.explicit_closure_handoff",
+            "parent_continuity_allows_candidate": true,
+            "parent_continuity_requires_revalidation": false,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "candidate_terminal_goal_ref",
+            "retained_parent_goal_why_contract": "candidate_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.declared_suspended_successor_disabled_with_reason",
+          "all_conditions": [
+            {
+              "field": "parent_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_intent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_lifecycle_status",
+              "operator": "equals",
+              "expected": "disabled_with_reason"
+            },
+            {
+              "field": "parent_status_history_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "parent_disable_reason_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "candidate_is_parent_declared_successor",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.explicit_closure_handoff",
+            "parent_continuity_allows_candidate": true,
+            "parent_continuity_requires_revalidation": false,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "candidate_terminal_goal_ref",
+            "retained_parent_goal_why_contract": "candidate_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.declared_suspended_successor_falsified",
+          "all_conditions": [
+            {
+              "field": "parent_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_intent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_lifecycle_status",
+              "operator": "equals",
+              "expected": "falsified"
+            },
+            {
+              "field": "parent_status_history_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "parent_disable_reason_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "candidate_is_parent_declared_successor",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.explicit_closure_handoff",
+            "parent_continuity_allows_candidate": true,
+            "parent_continuity_requires_revalidation": false,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "candidate_terminal_goal_ref",
+            "retained_parent_goal_why_contract": "candidate_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.declared_suspended_successor_abandoned_exact_variant",
+          "all_conditions": [
+            {
+              "field": "parent_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_intent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_lifecycle_status",
+              "operator": "equals",
+              "expected": "abandoned_exact_variant"
+            },
+            {
+              "field": "parent_status_history_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "parent_disable_reason_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "candidate_is_parent_declared_successor",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.explicit_closure_handoff",
+            "parent_continuity_allows_candidate": true,
+            "parent_continuity_requires_revalidation": false,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "candidate_terminal_goal_ref",
+            "retained_parent_goal_why_contract": "candidate_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.reconciled_parentless_information_step",
+          "all_conditions": [
+            {
+              "field": "prior_information_step_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "prior_lease_canonical_state",
+              "operator": "equals",
+              "expected": "reconciled"
+            },
+            {
+              "field": "prior_lease_intent_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_graph_relation_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "parent_goal_node_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "parent_goal_why_contract",
+              "operator": "is_absent"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.reconciled_parentless_information_step",
+            "parent_continuity_allows_candidate": true,
+            "parent_continuity_requires_revalidation": false,
+            "qualification_releases_action": false,
+            "retained_parent_goal_ref": null,
+            "retained_parent_goal_why_contract": null
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.source_qualified_parentless_action",
+          "all_conditions": [
+            {
+              "field": "prior_parent_binding_authoritative",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_goal_ref",
+              "operator": "is_absent"
+            },
+            {
+              "field": "prior_lease_canonical_state",
+              "operator": "equals",
+              "expected": "reconciled"
+            },
+            {
+              "field": "prior_lease_intent_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_scope_matches",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.legacy_without_parent",
+            "parent_continuity_allows_candidate": true,
+            "parent_continuity_requires_revalidation": false,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "candidate_terminal_goal_ref",
+            "retained_parent_goal_why_contract": "candidate_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.legacy_hint_is_not_a_parent_contract",
+          "all_conditions": [
+            {
+              "field": "parent_continuity_class_ref",
+              "operator": "equals",
+              "expected": "continuity.legacy_without_parent"
+            },
+            {
+              "field": "candidate_goal_why_contract",
+              "operator": "is_absent"
+            }
+          ],
+          "static_facts": {
+            "retained_parent_goal_ref": null,
+            "retained_parent_goal_why_contract": null
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.mismatched_dispatch_lease",
+          "all_conditions": [
+            {
+              "field": "prior_lease_intent_matches",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.invalid_dispatch_parent_lineage",
+            "parent_continuity_allows_candidate": false,
+            "parent_continuity_requires_revalidation": true,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "parent_goal_ref",
+            "retained_parent_goal_why_contract": "parent_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.declared_frontier_requires_current_origin",
+          "all_conditions": [
+            {
+              "field": "candidate_declared_frontier_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_goal_why_contract",
+              "operator": "is_absent"
+            },
+            {
+              "field": "candidate_goal_why_contract",
+              "operator": "is_absent"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_continuity_class_ref": "continuity.foreign_or_unresolved_parent",
+            "parent_continuity_allows_candidate": false,
+            "parent_continuity_requires_revalidation": true,
+            "qualification_releases_action": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "candidate_terminal_goal_ref",
+            "retained_parent_goal_why_contract": "candidate_goal_why_contract"
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.context_transport_mismatch",
+          "all_conditions": [
+            {"field": "parent_scope_matches", "operator": "equals", "expected": true},
+            {"field": "prior_context_binding_present", "operator": "equals", "expected": true},
+            {"field": "prior_context_binding_matches", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {
+            "parent_continuity_allows_candidate": false,
+            "parent_continuity_requires_revalidation": true,
+            "context_transport_valid": false
+          }
+        },
+        {
+          "id": "projection.parent_goal_continuity.observed_condition_refuted",
+          "all_conditions": [
+            {"field": "parent_scope_matches", "operator": "equals", "expected": true},
+            {"field": "parent_condition_refutation_count", "operator": "greater_than", "expected": 0},
+            {"field": "candidate_parent_question_distinct_prediction_pair_count", "operator": "equals", "expected": 0}
+          ],
+          "static_facts": {"parent_continuity_class_ref": "continuity.observed_condition_refuted",
+            "parent_continuity_allows_candidate": false, "parent_continuity_requires_revalidation": true,
+            "qualification_releases_action": false}
+        },
+        {
+          "id": "projection.parent_goal_continuity.observed_condition_conflicting",
+          "all_conditions": [
+            {"field": "parent_scope_matches", "operator": "equals", "expected": true},
+            {"field": "parent_condition_conflict_count", "operator": "greater_than", "expected": 0},
+            {"field": "candidate_parent_question_distinct_prediction_pair_count", "operator": "equals", "expected": 0}
+          ],
+          "static_facts": {"parent_continuity_class_ref": "continuity.observed_condition_conflicting",
+            "parent_continuity_allows_candidate": false, "parent_continuity_requires_revalidation": true,
+            "qualification_releases_action": false}
+        }
+      ],
+      "reason_refs": [
+        "reason.dispatched_parent_concentration_must_be_preserved_or_explicitly_closed"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1972 @@
+{
+  "schema": "logos-engine.lot4b-final-regression-input-preparation.v1",
+  "status": "prepared_inputs_verified",
+  "startedAt": "2026-11-10T21:46:06.153754+00:00",
+  "finishedAt": "2026-11-10T21:46:07.022477+00:00",
+  "generator": {
+    "kind": "inline_python_stdlib_with_existing_byte_transport_verifier",
+    "bodySha256": "f8a789e411ab547755f131c6c42ea82add93eb515ce52d56b69526dc180f0b2d",
+    "sourceBody": "import hashlib, importlib.util, json, re, subprocess, sys\nfrom datetime import datetime, timezone\nfrom pathlib import Path\nsys.dont_write_bytecode = True\nROOT = Path.cwd()\nBASE = ROOT / 'docs/migration/lot4b-evidence'\nPLAN = BASE / 'planning/regression-plan.json'\nBINDING = BASE / 'planning/published-predecessor83.json'\nOUT = BASE / 'recorded-regression-cases-final.json'\nRECEIPT = BASE / 'planning/recorded-regression-cases-final-preparation.json'\nassert not OUT.exists() and not RECEIPT.exists(), 'Outputs are exclusive'\nstarted = datetime.now(timezone.utc).isoformat()\nrecords, git_blobs = {}, {}\nobject_format = subprocess.check_output(['git', 'rev-parse', '--show-object-format'], text=True).strip()\nassert object_format in ('sha1', 'sha256')\n\ndef local(name):\n    path = ROOT / name\n    assert path.resolve() == path and path.is_relative_to(ROOT) and path != ROOT\n    return path\n\ndef fingerprint(path):\n    path = local(path)\n    assert path.is_file()\n    size = path.stat().st_size\n    sha = hashlib.sha256()\n    git = hashlib.new(object_format)\n    git.update(('blob ' + str(size) + '\\0').encode())\n    seen = 0\n    with path.open('rb') as stream:\n        for chunk in iter(lambda: stream.read(1024 * 1024), b''):\n            seen += len(chunk); sha.update(chunk); git.update(chunk)\n    assert seen == size == path.stat().st_size\n    return {'path': path.relative_to(ROOT).as_posix(), 'bytes': size, 'sha256': sha.hexdigest()}, git.hexdigest()\n\ndef keep(path, expected=None):\n    record, oid = fingerprint(path)\n    if expected:\n        assert record['path'] == expected['path']\n        assert all(record[key] == expected[key] for key in ('sha256', 'bytes') if key in expected)\n    assert records.setdefault(record['path'], record) == record, 'Input changed'\n    git_blobs[record['path']] = oid\n    return record\n\ndef read(path, expected=None):\n    record = keep(path, expected)\n    data = local(path).read_bytes()\n    assert hashlib.sha256(data).hexdigest() == record['sha256']\n    return json.loads(data)\n\nplan = read(PLAN)\nbinding = read(BINDING)\nassert plan['schema'] == 'logos-engine.lot4b.regression-plan.v1'\nassert binding['schema'] == 'logos-engine.lot4b.published-predecessor.v1'\nassert binding['deployment']['status'] == 'succeeded'\ncommit = binding['source']['commit_sha']\nassert re.fullmatch('[0-9a-f]{40}', commit)\nassert subprocess.check_output(['git', 'rev-parse', '--verify', commit + '^{commit}'], text=True).strip() == commit\ntree_oid = subprocess.check_output(['git', 'rev-parse', commit + '^{tree}'], text=True).strip()\nsuite = plan['successfulTrajectorySuite']\ninherited = read(suite['inheritedManifest']['path'], suite['inheritedManifest'])\nassert inherited['schema'] == 'logos-engine.recorded-public-regression-cases.v1'\nassert inherited['cases'] == suite['cases']\nassert inherited.get('passiveOwnerRequirements', []) == suite['passiveOwnerRequirements'] == []\ncases = suite['cases'] + suite['additionalCases']\nassert [(r['id'], r['game']) for r in cases] == [\n    ('catr-051', 'CATR'), ('rswp-051', 'RSWP'), ('fogw-051', 'FOGW'), ('vois-051', 'VOIS'),\n    ('conn-050', 'CONN'), ('mind-051', 'MIND'), ('weav-051', 'WEAV'), ('tria-development-4b', 'TRIA')]\nassert len({r['id'] for r in cases}) == 8\nhistorical_record = suite['historical7AResults']['summary']\nhistorical = read(historical_record['path'], historical_record)\nassert historical['status'] == 'passed'\nassert historical['passed'] == historical['total'] == len(historical['results']) == 7\nassert historical['comparisonChecksPassed'] == historical['comparisonChecksExpected'] == 119\nassert historical['caseManifest'] == suite['inheritedManifest']\npublished_source_name = 'docs/migration/lot7a-evidence/integrated-final/source-manifest.json'\npublished_source = read(published_source_name)\nassert published_source == historical['nativeSource'] == historical['nativeSourceAfter']\nassert published_source['digest'] == suite['historical7AResults']['nativeDigest']\nassert published_source['fileCount'] == len(published_source['files'])\nassert hashlib.sha256(json.dumps(dict(sorted(published_source['files'].items())), separators=(',', ':')).encode()).hexdigest() == published_source['digest']\ntria = suite['triaDevelopmentBaseline']\ntria_execution = read(tria['execution']['path'], tria['execution'])\ntria_source = read(tria['sourceManifest']['path'], tria['sourceManifest'])\nassert tria_execution['exitCode'] == 0 and tria_execution['nativeSourceUnchanged'] is True\nassert tria_execution['executionCodeUnchanged'] is True\nassert tria_execution['nativeSource'] == tria_execution['nativeSourceAfter'] == tria_source\nassert tria_source['digest'] == tria['nativeDigest'] == tria_execution['nativeSourceManifestDigest']\nassert tria_execution['report'] == tria['report'] and tria_execution['trace'] == tria['trace']\n\nhelper_name = 'scripts/evidence-byte-parts.py'\noriginal_helper_name = 'scripts/restore-v53-evidence.py'\nhelper_records = [keep(helper_name), keep(original_helper_name)]\ntransports, initially_missing, probes = {}, [], set()\nfor case in cases:\n    assert set(case) == {'id', 'game', 'baseline', 'trace'}\n    for role in ('baseline', 'trace'):\n        pin = case[role]\n        assert set(pin) == {'path', 'sha256'}\n        path = local(pin['path'])\n        probes.add(pin['path'])\n        if not path.is_file():\n            initially_missing.append(pin['path'])\n        parts_path = path.with_name(path.name + '.parts.json')\n        if parts_path.exists():\n            manifest = read(parts_path)\n            assert manifest['schema'] == 'logos-engine.evidence-byte-parts.v1'\n            assert manifest['original']['file'] == path.name and manifest['original']['sha256'] == pin['sha256']\n            part_records = []\n            for item in manifest['parts']:\n                part_path = parts_path.parent / item['file']\n                assert part_path.parent == parts_path.parent and part_path.name == item['file']\n                part_records.append(keep(part_path, {'path': part_path.relative_to(ROOT).as_posix(), 'bytes': item['bytes'], 'sha256': item['sha256']}))\n            transports[pin['path']] = {'manifest': keep(parts_path), 'parts': part_records, 'original': manifest['original']}\n            probes.add(parts_path.relative_to(ROOT).as_posix())\n            probes.update(row['path'] for row in part_records)\n        else:\n            assert path.is_file(), 'Missing original has no byte-parts transport'\nfor name in [suite['inheritedManifest']['path'], historical_record['path'], published_source_name]:\n    probes.add(name)\nraw_tree = subprocess.check_output(['git', 'ls-tree', '-r', '-z', commit, '--', *sorted(probes)])\nmembers = {}\nfor raw in raw_tree.split(b'\\0'):\n    if raw:\n        header, name = raw.decode().split('\\t', 1)\n        mode, kind, oid = header.split()\n        assert kind == 'blob' and mode in ('100644', '100755')\n        members[name] = {'path': name, 'mode': mode, 'type': kind, 'gitObjectId': oid}\n\ndef member(name):\n    assert name in members, 'Input is absent from published commit: ' + name\n    record = keep(name)\n    assert git_blobs[name] == members[name]['gitObjectId'], 'Current bytes differ from published Git blob: ' + name\n    return {**record, **{key: members[name][key] for key in ('mode', 'type', 'gitObjectId')}}\n\npublished_documents = [member(name) for name in [suite['inheritedManifest']['path'], historical_record['path'], published_source_name]]\nmembership = []\nfor case in cases[:7]:\n    for role in ('baseline', 'trace'):\n        pin = case[role]\n        transport = transports.get(pin['path'])\n        transport_members = []\n        if transport:\n            transport_members = [member(transport['manifest']['path']), *[member(row['path']) for row in transport['parts']]]\n        direct = member(pin['path']) if pin['path'] in members else None\n        assert direct is not None or transport_members, 'Published original must exist directly or through exact published byte parts'\n        membership.append({'case': case['id'], 'role': role, 'original': pin,\n            'mode': 'direct_blob' if direct else 'exact_published_byte_parts',\n            'direct': direct, 'transportMembers': transport_members,\n            'publishedCommit': commit, 'originalItselfTracked': direct is not None})\n\nspec = importlib.util.spec_from_file_location('lot4b_regression_transport_only', ROOT / helper_name)\ntransport_helper = importlib.util.module_from_spec(spec); spec.loader.exec_module(transport_helper)\nrestored, verified_transports = [], []\nfor name, transport in transports.items():\n    path = local(name)\n    missing = not path.exists()\n    result = transport_helper.verify(local(transport['manifest']['path']), restore=missing, directory=path.parent)\n    assert result['path'] == name and result['sha256'] == transport['original']['sha256']\n    assert result['bytes'] == transport['original']['bytes'] and result['restored'] is missing\n    verified_transports.append(result)\n    if result['restored']:\n        restored.append({'original': keep(name), 'transport': transport['manifest'],\n                         'operation': 'verify(..., restore=True, directory=original.parent)',\n                         'originalAbsentBefore': True, 'existingInputsOverwritten': False})\nactual_cases = []\nfor index, case in enumerate(cases):\n    baseline, trace = (keep(case[key]['path'], case[key]) for key in ('baseline', 'trace'))\n    if index < 7:\n        row = historical['results'][index]\n        assert row['case'] == case['id'] and row['game'] == case['game']\n        assert row['baseline'] == baseline and row['trace'] == trace\n        assert row['status'] == 'passed' and row['passed'] is True and row['comparisonChecks'] == 17\n        historical_origin = {'kind': 'published_7a_regression_input', 'publishedCommit': commit,\n                             'summary': keep(historical_record['path']), 'historicalRowStatus': row['status']}\n    else:\n        assert baseline == tria_execution['report'] and trace == tria_execution['trace']\n        historical_origin = {'kind': 'retained_4b_development_live_input', 'execution': keep(tria['execution']['path']),\n            'sourceManifest': keep(tria['sourceManifest']['path']), 'nativeSourceDigest': tria_source['digest'],\n            'exitCode': tria_execution['exitCode'], 'published7AMembershipClaim': False}\n    actual_cases.append({'id': case['id'], 'game': case['game'], 'baseline': baseline,\n                         'trace': trace, 'historicalOrigin': historical_origin})\nassert sorted(initially_missing) == sorted(row['original']['path'] for row in restored)\nmanifest = {'schema': 'logos-engine.recorded-public-regression-cases.v1',\n    'cases': cases, 'passiveOwnerRequirements': inherited.get('passiveOwnerRequirements', []),\n    'qualification': 'Declared final 4B regression inputs only: the seven inherited cases, order, paths and hashes are unchanged from the published 7A manifest, followed by the retained TRIA development case. Historical passing evidence is not a new replay result. LKEY partial preservation is separate. The actual final candidate is supplied later through the runner --source-manifest; no future native digest or version is assumed.'}\nbefore = [records[name] for name in sorted(records)]\nafter = [fingerprint(row['path'])[0] for row in before]\nassert after == before, 'Preparation input changed'\nwith OUT.open('x') as stream:\n    json.dump(manifest, stream, indent=2, ensure_ascii=False); stream.write('\\n')\nmanifest_record = fingerprint(OUT)[0]\nafter = [fingerprint(row['path'])[0] for row in before]\nassert after == before\nreceipt = {'schema': 'logos-engine.lot4b-final-regression-input-preparation.v1', 'status': 'prepared_inputs_verified',\n    'startedAt': started, 'finishedAt': datetime.now(timezone.utc).isoformat(),\n    'generator': {'kind': 'inline_python_stdlib_with_existing_byte_transport_verifier',\n                  'bodySha256': hashlib.sha256(PREPARATION_SCRIPT_SOURCE.encode()).hexdigest(),\n                  'sourceBody': PREPARATION_SCRIPT_SOURCE,\n                  'transportHelpers': helper_records},\n    'plan': keep(PLAN), 'manifest': manifest_record, 'caseCount': 8,\n    'caseOrder': [row['id'] for row in cases], 'inheritedCaseCount': 7, 'additionalDevelopmentCaseCount': 1,\n    'exactPlanCasesPreserved': manifest['cases'] == suite['cases'] + suite['additionalCases'],\n    'published7A': {'binding': keep(BINDING), 'siteVersion': binding['siteVersion'], 'commit': commit,\n        'treeObjectId': tree_oid, 'gitObjectFormat': object_format, 'deploymentStatus': binding['deployment']['status'],\n        'documents': published_documents, 'inputMembership': membership,\n        'qualification': 'Git blob membership is verified against the exact published commit named by the retained root-observed Sites binding. Large ignored originals are proven through every published part and their published immutable manifest.'},\n    'cases': actual_cases, 'initiallyMissing': initially_missing, 'restoredOriginals': restored,\n    'verifiedByteTransports': verified_transports,\n    'inputsBefore': before, 'inputsAfter': after, 'inputsUnchanged': True,\n    'inputVerificationScope': 'Before and after manifest construction, after only authorized missing-original restoration; files absent at entry are listed separately.',\n    'candidateSourceBinding': 'Provided later by --source-manifest after actual 5A publication and final 4B freeze.',\n    'nativeEngineExecuted': False, 'originalAgentImported': False, 'campaignExecuted': False,\n    'testExecuted': False, 'buildExecuted': False, 'measurementExecuted': False,\n    'campaignReportsDecompressed': False, 'fullRunnerPreflightExecuted': False,\n    'qualification': 'Executable input manifest and immutable provenance preparation only. Seven published historical regressions and one retained development live case remain historical evidence. The unchanged runner must still perform its full public-command/packet preflight and actual cold replays against the future supplied candidate freeze. No 8/136 passing result, new game success, final candidate version or cost result is claimed. No source, cost tool, existing report, trace, part or historical receipt was modified.'}\nwith RECEIPT.open('x') as stream:\n    json.dump(receipt, stream, indent=2, ensure_ascii=False); stream.write('\\n')\nprint(json.dumps({'status': receipt['status'], 'manifest': manifest_record,\n    'preparation': fingerprint(RECEIPT)[0], 'caseOrder': receipt['caseOrder'],\n    'publishedCommit': commit, 'publishedInputRoles': len(membership),\n    'publishedTransportMembers': sum(len(row['transportMembers']) for row in membership),\n    'restoredOriginals': [row['original'] for row in restored],\n    'verifiedByteTransports': len(verified_transports), 'nativeEngineExecuted': False}, indent=2))\n",
+    "transportHelpers": [
+      {
+        "path": "scripts/evidence-byte-parts.py",
+        "bytes": 7210,
+        "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350"
+      },
+      {
+        "path": "scripts/restore-v53-evidence.py",
+        "bytes": 3361,
+        "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d"
+      }
+    ]
+  },
+  "plan": {
+    "path": "docs/migration/lot4b-evidence/planning/regression-plan.json",
+    "bytes": 36146,
+    "sha256": "c195a79f5ac03e477fa903c30128c02bc362c5af768e4e15a527cdbdf7930422"
+  },
+  "manifest": {
+    "path": "docs/migration/lot4b-evidence/recorded-regression-cases-final.json",
+    "bytes": 4490,
+    "sha256": "92039b4892be0ee05faa1e66001ec6d9f92403d7143ed0bf61462b78ba50eecc"
+  },
+  "caseCount": 8,
+  "caseOrder": [
+    "catr-051",
+    "rswp-051",
+    "fogw-051",
+    "vois-051",
+    "conn-050",
+    "mind-051",
+    "weav-051",
+    "tria-development-4b"
+  ],
+  "inheritedCaseCount": 7,
+  "additionalDevelopmentCaseCount": 1,
+  "exactPlanCasesPreserved": true,
+  "published7A": {
+    "binding": {
+      "path": "docs/migration/lot4b-evidence/planning/published-predecessor83.json",
+      "bytes": 1016,
+      "sha256": "0b15832f05f841c09affb9960940ad02455feead273629eadb6cd68090ff82d7"
+    },
+    "siteVersion": 83,
+    "commit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+    "treeObjectId": "6bfafd018931ac6d9aa0e084a8ca42bed4404bca",
+    "gitObjectFormat": "sha1",
+    "deploymentStatus": "succeeded",
+    "documents": [
+      {
+        "path": "docs/migration/lot7a-evidence/recorded-regression-cases-integrated.json",
+        "bytes": 4280,
+        "sha256": "9dc1302d8289118e38a3c8b54112fbdfba35d5b3d7ae29b1d93bb49fa0b14474",
+        "mode": "100644",
+        "type": "blob",
+        "gitObjectId": "0adb4edc68c1b9ffd2788626228a84a140ff214f"
+      },
+      {
+        "path": "docs/migration/lot7a-evidence/integrated-final/regressions/regression-summary.json",
+        "bytes": 165701,
+        "sha256": "e575a6aa95e532c6e9b6275502d1cd16b69a438976a0d75a615108465bc6b5e6",
+        "mode": "100644",
+        "type": "blob",
+        "gitObjectId": "698755e3b0f2394bc7b9f6ad7197226bdfa60465"
+      },
+      {
+        "path": "docs/migration/lot7a-evidence/integrated-final/source-manifest.json",
+        "bytes": 33095,
+        "sha256": "75e1dbe4002f737c2d5248a08531c6b60002c3114692b55df3a5c7255c79d6cc",
+        "mode": "100644",
+        "type": "blob",
+        "gitObjectId": "d6b37113b4b291d170e70ccf10ac69d495ccc9cd"
+      }
+    ],
+    "inputMembership": [
+      {
+        "case": "catr-051",
+        "role": "baseline",
+        "original": {
+          "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+          "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6"
+        },
+        "mode": "exact_published_byte_parts",
+        "direct": null,
+        "transportMembers": [
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz.parts.json",
+            "bytes": 679,
+            "sha256": "7cc5fec7e15b449020f7d10e48e3a8dd5f630740d3f3ba0ca35da92ff9a28561",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "5a88c6be2c68342a6bc79876b2832c4c78ff104f"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz.part000",
+            "bytes": 900000,
+            "sha256": "769f31b9eb653118acd83d8688cc1edc9cab94be39215b7b2e4f9971c9bc654b",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "620147dced268d2f5d8761dd352bfa1d654add58"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz.part001",
+            "bytes": 749205,
+            "sha256": "721f2b6c4fece52d3bb6caa8c684d6f18a9c813c7e811969108464cacadfcf0b",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "ab48c989444ee4c468779426da2dd0867f4d435a"
+          }
+        ],
+        "publishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "originalItselfTracked": false
+      },
+      {
+        "case": "catr-051",
+        "role": "trace",
+        "original": {
+          "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+          "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816"
+        },
+        "mode": "direct_blob",
+        "direct": {
+          "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+          "bytes": 24340,
+          "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816",
+          "mode": "100644",
+          "type": "blob",
+          "gitObjectId": "a54c02f65ccf9fbbc324283d6dad097dc700319e"
+        },
+        "transportMembers": [],
+        "publishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "originalItselfTracked": true
+      },
+      {
+        "case": "rswp-051",
+        "role": "baseline",
+        "original": {
+          "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+          "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba"
+        },
+        "mode": "exact_published_byte_parts",
+        "direct": null,
+        "transportMembers": [
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz.parts.json",
+            "bytes": 847,
+            "sha256": "87181e47366a34d79a9ad64d37a7d1782cdb12f5dda40a6b69523146101a4329",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "1b86ed6b963a11e37f97fd7290368fd4ee43ae53"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz.part000",
+            "bytes": 900000,
+            "sha256": "f057052133c1209cf57421aba85f973dacbf7a275d84de45b54e714f20d540f2",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "6b29518d4a5c4de2d82bfef3fc385c9a78eb4b2b"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz.part001",
+            "bytes": 900000,
+            "sha256": "ab5ea277344938fef0fee3585e4b73d618ab57cf1ac2ab89763f88276391917c",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "4a83b708509a4aef92a356d0143cb0c6c309891a"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz.part002",
+            "bytes": 785868,
+            "sha256": "baa96e3aa7ea0812a0ef1722ae09792e57f5d4b088a83522b8e0ab7e7673a7ff",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "be51967223145d308fef13db61b6250c7372d404"
+          }
+        ],
+        "publishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "originalItselfTracked": false
+      },
+      {
+        "case": "rswp-051",
+        "role": "trace",
+        "original": {
+          "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+          "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755"
+        },
+        "mode": "direct_blob",
+        "direct": {
+          "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+          "bytes": 41445,
+          "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755",
+          "mode": "100644",
+          "type": "blob",
+          "gitObjectId": "6fe15d7dd35b01213bedb991b555ccc708017d4d"
+        },
+        "transportMembers": [],
+        "publishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "originalItselfTracked": true
+      },
+      {
+        "case": "fogw-051",
+        "role": "baseline",
+        "original": {
+          "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+          "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c"
+        },
+        "mode": "exact_published_byte_parts",
+        "direct": null,
+        "transportMembers": [
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.parts.json",
+            "bytes": 2022,
+            "sha256": "bda4418eea2c8ad1dc5490fe0295a533cb763e6cffb18d5aa492da695638930c",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "2b8fc0f931728649e911a006a67a24fa3f759c78"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part000",
+            "bytes": 900000,
+            "sha256": "6b1981bf1ee3a2b35fdc0723d5dd2e6c0ea7110463dc98f567b8ed0ad822e673",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "6f2429d1bcde1d1ddd6be39ba56dcc4477deb965"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part001",
+            "bytes": 900000,
+            "sha256": "cba104870f253ad44211bcc7ab5c5c79727579b0e23a32901a4d3a5fc0a8b0e9",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "00792577196a49722b224e8bf47689bdd83597a1"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part002",
+            "bytes": 900000,
+            "sha256": "2c615d31b296f4c32f8eb57dc7d33cfeb19bbc4a4ec8dad3b6f4c17d73db453d",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "30eb64e3efd8dd937c60852a58fbeeed23b067cb"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part003",
+            "bytes": 900000,
+            "sha256": "ccf29b8a819fa7b5a85334431543755595da6dd5241f75c087e2834779900be4",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "5296da0a8774d1f7d6ed8611dd6c43a7ec276089"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part004",
+            "bytes": 900000,
+            "sha256": "4360b2b13b54a6913e10c5fdf8dc4a3d1a72654835d4ed7ede6ca8de70727764",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "929d81db85049674c54a0b630277bd72575855af"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part005",
+            "bytes": 900000,
+            "sha256": "762aea94aceeb29cd45ad7d69103809d48e4b1951a1770fd9844639e0ebfa65c",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "eefe4601c95d2ca706480b7e4cc43225940eb75e"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part006",
+            "bytes": 900000,
+            "sha256": "9be0d1df2fac6e1b603a4b56efe2488faed2b6d4fbfdfca39eaaebc610200998",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "a0f50e5137e924ee04f5c035ddc2150ded8c9f56"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part007",
+            "bytes": 900000,
+            "sha256": "4599ef6a0507a345d2867869178f12f5515da3dc4ff3f13a1fb290838a743fbc",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "8ec8a1e4bd6c028abb30a6b027f790adccf0f825"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part008",
+            "bytes": 900000,
+            "sha256": "f2823cbe0fcbf99a0e85c069e991f26c7b956876b8b3f2ead8ec646edf4e5cbf",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "7fc34ba76ebeb28345f0d3b546a69ed9c16e0a81"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part009",
+            "bytes": 74480,
+            "sha256": "ef7de99255241e4a1a392547b153d2cc5aa54a8b0f0e37036b37e19d98a3c021",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "cb282fbe430922239b163e1a2159ed44c85f14a3"
+          }
+        ],
+        "publishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "originalItselfTracked": false
+      },
+      {
+        "case": "fogw-051",
+        "role": "trace",
+        "original": {
+          "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+          "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46"
+        },
+        "mode": "direct_blob",
+        "direct": {
+          "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+          "bytes": 39060,
+          "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46",
+          "mode": "100644",
+          "type": "blob",
+          "gitObjectId": "4d538223e04834d4d9bd8bd419f87415d76d9ef3"
+        },
+        "transportMembers": [],
+        "publishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "originalItselfTracked": true
+      },
+      {
+        "case": "vois-051",
+        "role": "baseline",
+        "original": {
+          "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+          "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d"
+        },
+        "mode": "exact_published_byte_parts",
+        "direct": null,
+        "transportMembers": [
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.parts.json",
+            "bytes": 2360,
+            "sha256": "4f2b80576b429686a2370f1d9a79f9a271221479193e475e1b1958bf58870614",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "38e34566e188746f1ef9781ffe3e3d917e19756b"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part000",
+            "bytes": 900000,
+            "sha256": "e0d98773bada07af7120bfbe479df1df80aeebc4fa977131bc171c843f167a66",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "3eef7b9d08b250b603ff5c6b373d8fdf028acf12"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part001",
+            "bytes": 900000,
+            "sha256": "7823affc89af1903ae9f53d553b5e9ca4a36e59fd4ed61f58360dc19982e704c",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "7a39e826dbf5542e5b82ac9c201cca75271fbb46"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part002",
+            "bytes": 900000,
+            "sha256": "07b716392585107469d6b3983f4b4caacbbaf58b6b7bd43d69afb7dd21b2a1ad",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "9c676ad37d198b22ad5fbf154456e4b0855ce471"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part003",
+            "bytes": 900000,
+            "sha256": "99f228958261db1f98918fd2efeb69ce93e8aba55e4774198e1fd4c93419b437",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "44f78efdfd65e3f264fca1cf01805c22c830375d"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part004",
+            "bytes": 900000,
+            "sha256": "5a7ef92b0f235f43bea27d299730ee0f9830f2225e174b99fae7adf74e5606e9",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "03ecfbaad527ff03e225506cd7e7c830f07216e7"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part005",
+            "bytes": 900000,
+            "sha256": "8cb3be0d5d7d161509fb6ee8eea37c15f8045440403aea27f4f29400cdbb4678",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "250c5cdd009f2edd97639cc9036d449f44ac5594"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part006",
+            "bytes": 900000,
+            "sha256": "5a4b6e8e1a43f32a1afab018bca7345e863bf161c45e77a4eab93d94e3d3e4ee",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "53675ed0776eb5bcc2458bf06f8a1742b5b8b537"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part007",
+            "bytes": 900000,
+            "sha256": "04f5d870536d04021678594a0f268cceb69cb778e59c1d81dea5f25ad91a058d",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "303e0a466a9a62866020b542295ae9e56178de70"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part008",
+            "bytes": 900000,
+            "sha256": "6feaa9631d84ca62606b0097a811388feba99b989975b3cdf16aef4a8815eb6d",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "45654aa453c4dbb90d33bce02c5e9ec207e27ebb"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part009",
+            "bytes": 900000,
+            "sha256": "76fd6cd131fa5c413cf2619ca1fbf2439505c072a14f0ca6a42a7c8d7ad38107",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "0c4c2abaedd2f538d91b4624b91aefc7eea06396"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part010",
+            "bytes": 900000,
+            "sha256": "2b1f3221012b871dc7f99a09f02653299ea4dbfbed99c2ba4ba63affef040f4f",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "6dcdd90f38baa857780816101cc01521fdb6c675"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part011",
+            "bytes": 778168,
+            "sha256": "a95b0856ed9e6eed8e1d29d203252eec01bd9ec305171ef78961e3641bb2e5c7",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "9a9ef0c94ba01c575361a960579e344313c85dc9"
+          }
+        ],
+        "publishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "originalItselfTracked": false
+      },
+      {
+        "case": "vois-051",
+        "role": "trace",
+        "original": {
+          "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+          "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d"
+        },
+        "mode": "direct_blob",
+        "direct": {
+          "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+          "bytes": 19976,
+          "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d",
+          "mode": "100644",
+          "type": "blob",
+          "gitObjectId": "957ca7f6dd7cdce9a89cf537e103166844c7f71a"
+        },
+        "transportMembers": [],
+        "publishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "originalItselfTracked": true
+      },
+      {
+        "case": "conn-050",
+        "role": "baseline",
+        "original": {
+          "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+          "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750"
+        },
+        "mode": "exact_published_byte_parts",
+        "direct": null,
+        "transportMembers": [
+          {
+            "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz.parts.json",
+            "bytes": 839,
+            "sha256": "5f89c539994ef5df9e440d4043fc5e6cb788b448a58b7536bbfb8735514f6e22",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "c1632cfa2a871747a0c3073fbf6835b135ade1ec"
+          },
+          {
+            "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz.part000",
+            "bytes": 900000,
+            "sha256": "c4f142f1c20367a0ae799940bfe2b7339ff393455bdff010382c97d21472d56f",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "01ab9d15da3a20fcc7237f596e4d2f45a50743af"
+          },
+          {
+            "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz.part001",
+            "bytes": 900000,
+            "sha256": "53bc770d6baea4fca6c616e7dc0d489592f379268d7159d63fe93db0822c434f",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "70234b6979447676eab52acd69034c3e710d6755"
+          },
+          {
+            "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz.part002",
+            "bytes": 830905,
+            "sha256": "04c43217dab726ab8c45ac77f8a35d1c15c98ca4c6905bfcddedb38d266c6919",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "937d62a99b60bc67e7eee88b3f55f924894027c4"
+          }
+        ],
+        "publishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "originalItselfTracked": false
+      },
+      {
+        "case": "conn-050",
+        "role": "trace",
+        "original": {
+          "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+          "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102"
+        },
+        "mode": "direct_blob",
+        "direct": {
+          "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+          "bytes": 56466,
+          "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102",
+          "mode": "100644",
+          "type": "blob",
+          "gitObjectId": "cf8b9d8b3e95650f8218472e532de27ec60520a7"
+        },
+        "transportMembers": [],
+        "publishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "originalItselfTracked": true
+      },
+      {
+        "case": "mind-051",
+        "role": "baseline",
+        "original": {
+          "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+          "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a"
+        },
+        "mode": "exact_published_byte_parts",
+        "direct": null,
+        "transportMembers": [
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.parts.json",
+            "bytes": 1171,
+            "sha256": "c9df9de0c3f4b2cf1528e274f65f62c65a1a5eff7588ed818053faa457ea3bb3",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "cc6f6b4e26610aa5c363afa88e4cf8bea1f0a22d"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.part000",
+            "bytes": 900000,
+            "sha256": "9124413f3b3506467c7da4d490620371f905dcfe2e2d89ac46359d7aa5cb1757",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "d089465f73d1c43903442e57e908ba4cb57a373d"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.part001",
+            "bytes": 900000,
+            "sha256": "75c4fac91ffda88cb84c9876193f459314d7717cff1e95b7e2cc0288596a702f",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "328aff0b6fe3ac910c73e13d757a99fcc22b5041"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.part002",
+            "bytes": 900000,
+            "sha256": "f1ed9189ba67ef8b32145c8f084006be942d05e7cdca36422f886dcd80ece4eb",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "ab6f904a1d6f09d16b1d5dee0a05cdb1a2b0ef45"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.part003",
+            "bytes": 900000,
+            "sha256": "e5d419ceaae3a549af5c25b906c200f3a9ed7eb5c8e2bfb853ea409877dbda06",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "e67055900a27ce70e93bd7e1342f43dd562f1553"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.part004",
+            "bytes": 749054,
+            "sha256": "c82e340ecf79d155151679e19cc9227df6a89c5fc9360cefe061005dce01dd09",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "6430d576aa16f97345b6f8e5edfdebf81b856274"
+          }
+        ],
+        "publishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "originalItselfTracked": false
+      },
+      {
+        "case": "mind-051",
+        "role": "trace",
+        "original": {
+          "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+          "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c"
+        },
+        "mode": "direct_blob",
+        "direct": {
+          "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+          "bytes": 17256,
+          "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c",
+          "mode": "100644",
+          "type": "blob",
+          "gitObjectId": "139d108f09f86ad73295e178233d7995f78ce345"
+        },
+        "transportMembers": [],
+        "publishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "originalItselfTracked": true
+      },
+      {
+        "case": "weav-051",
+        "role": "baseline",
+        "original": {
+          "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+          "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3"
+        },
+        "mode": "exact_published_byte_parts",
+        "direct": null,
+        "transportMembers": [
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.parts.json",
+            "bytes": 3201,
+            "sha256": "e6e91d2a10861df50b55c496ba74bcca5046bb5cf6826024b8ed716487c40204",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "ab0528d7df65042e46ec97fb426806f2b401bc35"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part000",
+            "bytes": 900000,
+            "sha256": "a67fc54aaa92b851ddd50df4da140b46aec73e9ad4454e5e30ccb991d1f827f6",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "89691109c4a223bef5d607a210b2f3cd42d68c64"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part001",
+            "bytes": 900000,
+            "sha256": "a05ba0d362fad29482a3347bc0250aad67cbbb294d56e61780a6cc521a4af3bc",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "3ae27dc096b1869a28ef8c36213744300ef7bb62"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part002",
+            "bytes": 900000,
+            "sha256": "e9f5fe4ad6742d2c52dde9901d798c8f03147ee9dd11c385e5f39f920ad08df3",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "91cb4c27352313da156f6115384c7f5c3bfd74d0"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part003",
+            "bytes": 900000,
+            "sha256": "50bc68c4569f8991de80759af91b34f254e238390461224eaed093ca974ac7b2",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "37af84f1a5eb84c7cd96ca92622206358c5bf3d1"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part004",
+            "bytes": 900000,
+            "sha256": "69481d0ecbdfac80780a693ea331227b1c1aa41022105746555292f31bf7dba7",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "2f0ed79eb64e8d5c25bd591f2a7ffe10f3ecc12e"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part005",
+            "bytes": 900000,
+            "sha256": "703b2db288d941f5644627875d619cebd406dd816ab74990368349749aab58f9",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "1d9027815f0f62a26b565727f23147bf203b4eef"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part006",
+            "bytes": 900000,
+            "sha256": "c5d6dd353b871d38d75905625df50c543964843c0e124b787e34cb50a1968b52",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "83a9bf5c913051111ae7d7888771ac1d195847d4"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part007",
+            "bytes": 900000,
+            "sha256": "057c8ffa260deea31218edbf47674e08722704f8251f8e3f26ed587cf1ae6339",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "288d897ccb02c7b790b616a8d6681467ca0e5da3"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part008",
+            "bytes": 900000,
+            "sha256": "f1699497c430ba81c425f1a36d1ff41d11817eef03f7f4eca9aeb9cae67beb58",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "2de98c4b8c879642d3c1e4d41d698bc0a7c9ee16"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part009",
+            "bytes": 900000,
+            "sha256": "0e417a78980134a77b8fb7db246acb9c5a80868fc7d2361f51925956f7eeb5a5",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "6276321733f00e7f2c9c3737109e2654f43ccc12"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part010",
+            "bytes": 900000,
+            "sha256": "d9225a6b9bed68740038cd99f386e2b60697e674a2167ba33fb4ae34877d4fd8",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "d53646eb926dd9acea79aef91736d0090c4cb64b"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part011",
+            "bytes": 900000,
+            "sha256": "4ee07ea24f1049a2108c647e2223fe82cc36f561d61b0ec3de88237b2363b879",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "7007d9287e9e0c4694fbd428a3252eaef57daf86"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part012",
+            "bytes": 900000,
+            "sha256": "a5ba1c0c3ff5aba429da2d909ccd36a96607c9135a0baefc736afa5cf584066a",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "5fc5ca51159c752346037d45164fe886763c7efa"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part013",
+            "bytes": 900000,
+            "sha256": "23df0464de547897d5d8acc63cde21cae41068465670e44b687aff68709e966e",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "d8d0e2dd4ee729f43f1d9f280c36a52f62a182c4"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part014",
+            "bytes": 900000,
+            "sha256": "e3fb25915ae9271a193d57584f97d06aceed3ce5cba56b10062a07afd93df4a2",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "343cae66deaf1f2a60d4040a5f8a4e01c3972190"
+          },
+          {
+            "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part015",
+            "bytes": 77757,
+            "sha256": "0b9a7f64e080866b16a92fe4d454d21a17d60765795221a0297b028af27bea86",
+            "mode": "100644",
+            "type": "blob",
+            "gitObjectId": "3c899375412c16f19bff2f7f3d543b5ed2bc102a"
+          }
+        ],
+        "publishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "originalItselfTracked": false
+      },
+      {
+        "case": "weav-051",
+        "role": "trace",
+        "original": {
+          "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+          "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2"
+        },
+        "mode": "direct_blob",
+        "direct": {
+          "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+          "bytes": 26568,
+          "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2",
+          "mode": "100644",
+          "type": "blob",
+          "gitObjectId": "c989fe28117de2b3e42a3c40d571eb604ef86381"
+        },
+        "transportMembers": [],
+        "publishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "originalItselfTracked": true
+      }
+    ],
+    "qualification": "Git blob membership is verified against the exact published commit named by the retained root-observed Sites binding. Large ignored originals are proven through every published part and their published immutable manifest."
+  },
+  "cases": [
+    {
+      "id": "catr-051",
+      "game": "CATR",
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+        "bytes": 1649205,
+        "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6"
+      },
+      "trace": {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+        "bytes": 24340,
+        "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816"
+      },
+      "historicalOrigin": {
+        "kind": "published_7a_regression_input",
+        "publishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "summary": {
+          "path": "docs/migration/lot7a-evidence/integrated-final/regressions/regression-summary.json",
+          "bytes": 165701,
+          "sha256": "e575a6aa95e532c6e9b6275502d1cd16b69a438976a0d75a615108465bc6b5e6"
+        },
+        "historicalRowStatus": "passed"
+      }
+    },
+    {
+      "id": "rswp-051",
+      "game": "RSWP",
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+        "bytes": 2585868,
+        "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba"
+      },
+      "trace": {
+        "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+        "bytes": 41445,
+        "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755"
+      },
+      "historicalOrigin": {
+        "kind": "published_7a_regression_input",
+        "publishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "summary": {
+          "path": "docs/migration/lot7a-evidence/integrated-final/regressions/regression-summary.json",
+          "bytes": 165701,
+          "sha256": "e575a6aa95e532c6e9b6275502d1cd16b69a438976a0d75a615108465bc6b5e6"
+        },
+        "historicalRowStatus": "passed"
+      }
+    },
+    {
+      "id": "fogw-051",
+      "game": "FOGW",
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+        "bytes": 8174480,
+        "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c"
+      },
+      "trace": {
+        "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+        "bytes": 39060,
+        "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46"
+      },
+      "historicalOrigin": {
+        "kind": "published_7a_regression_input",
+        "publishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "summary": {
+          "path": "docs/migration/lot7a-evidence/integrated-final/regressions/regression-summary.json",
+          "bytes": 165701,
+          "sha256": "e575a6aa95e532c6e9b6275502d1cd16b69a438976a0d75a615108465bc6b5e6"
+        },
+        "historicalRowStatus": "passed"
+      }
+    },
+    {
+      "id": "vois-051",
+      "game": "VOIS",
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+        "bytes": 10678168,
+        "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d"
+      },
+      "trace": {
+        "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+        "bytes": 19976,
+        "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d"
+      },
+      "historicalOrigin": {
+        "kind": "published_7a_regression_input",
+        "publishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "summary": {
+          "path": "docs/migration/lot7a-evidence/integrated-final/regressions/regression-summary.json",
+          "bytes": 165701,
+          "sha256": "e575a6aa95e532c6e9b6275502d1cd16b69a438976a0d75a615108465bc6b5e6"
+        },
+        "historicalRowStatus": "passed"
+      }
+    },
+    {
+      "id": "conn-050",
+      "game": "CONN",
+      "baseline": {
+        "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+        "bytes": 2630905,
+        "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750"
+      },
+      "trace": {
+        "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+        "bytes": 56466,
+        "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102"
+      },
+      "historicalOrigin": {
+        "kind": "published_7a_regression_input",
+        "publishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "summary": {
+          "path": "docs/migration/lot7a-evidence/integrated-final/regressions/regression-summary.json",
+          "bytes": 165701,
+          "sha256": "e575a6aa95e532c6e9b6275502d1cd16b69a438976a0d75a615108465bc6b5e6"
+        },
+        "historicalRowStatus": "passed"
+      }
+    },
+    {
+      "id": "mind-051",
+      "game": "MIND",
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+        "bytes": 4349054,
+        "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a"
+      },
+      "trace": {
+        "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+        "bytes": 17256,
+        "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c"
+      },
+      "historicalOrigin": {
+        "kind": "published_7a_regression_input",
+        "publishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "summary": {
+          "path": "docs/migration/lot7a-evidence/integrated-final/regressions/regression-summary.json",
+          "bytes": 165701,
+          "sha256": "e575a6aa95e532c6e9b6275502d1cd16b69a438976a0d75a615108465bc6b5e6"
+        },
+        "historicalRowStatus": "passed"
+      }
+    },
+    {
+      "id": "weav-051",
+      "game": "WEAV",
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+        "bytes": 13577757,
+        "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3"
+      },
+      "trace": {
+        "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+        "bytes": 26568,
+        "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2"
+      },
+      "historicalOrigin": {
+        "kind": "published_7a_regression_input",
+        "publishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "summary": {
+          "path": "docs/migration/lot7a-evidence/integrated-final/regressions/regression-summary.json",
+          "bytes": 165701,
+          "sha256": "e575a6aa95e532c6e9b6275502d1cd16b69a438976a0d75a615108465bc6b5e6"
+        },
+        "historicalRowStatus": "passed"
+      }
+    },
+    {
+      "id": "tria-development-4b",
+      "game": "TRIA",
+      "baseline": {
+        "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+        "bytes": 3161161,
+        "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe"
+      },
+      "trace": {
+        "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+        "bytes": 13286,
+        "sha256": "916d0f1cb1dcbfd9b7ba7624e7d3d4648a91ae7ef64583288af4711d2a955ac3"
+      },
+      "historicalOrigin": {
+        "kind": "retained_4b_development_live_input",
+        "execution": {
+          "path": "docs/migration/lot4b-evidence/development/tria-live-01/execution-tria.json",
+          "bytes": 70005,
+          "sha256": "efaaa2b4b358f6577cc506a0f8abc5ddc6049a0782e4451591ad16fe39e46ae5"
+        },
+        "sourceManifest": {
+          "path": "docs/migration/lot4b-evidence/development/tria-live-01/source-manifest.json",
+          "bytes": 32756,
+          "sha256": "0d8527fe8f19b92fed78b38a5e6947b2952ef9dd21d79e00286b6cae0e7bf419"
+        },
+        "nativeSourceDigest": "852d5ff7cdaa15534d22fcd610043cd348bb8aa241e290ae67d75adcaeaf8f9f",
+        "exitCode": 0,
+        "published7AMembershipClaim": false
+      }
+    }
+  ],
+  "initiallyMissing": [
+    "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz"
+  ],
+  "restoredOriginals": [
+    {
+      "original": {
+        "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+        "bytes": 2630905,
+        "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750"
+      },
+      "transport": {
+        "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz.parts.json",
+        "bytes": 839,
+        "sha256": "5f89c539994ef5df9e440d4043fc5e6cb788b448a58b7536bbfb8735514f6e22"
+      },
+      "operation": "verify(..., restore=True, directory=original.parent)",
+      "originalAbsentBefore": true,
+      "existingInputsOverwritten": false
+    }
+  ],
+  "verifiedByteTransports": [
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+      "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6",
+      "bytes": 1649205,
+      "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz.parts.json",
+      "parts": 2,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+      "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba",
+      "bytes": 2585868,
+      "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz.parts.json",
+      "parts": 3,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+      "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c",
+      "bytes": 8174480,
+      "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.parts.json",
+      "parts": 10,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+      "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d",
+      "bytes": 10678168,
+      "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.parts.json",
+      "parts": 12,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+      "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750",
+      "bytes": 2630905,
+      "manifest": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz.parts.json",
+      "parts": 3,
+      "restored": true
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+      "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a",
+      "bytes": 4349054,
+      "manifest": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.parts.json",
+      "parts": 5,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+      "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3",
+      "bytes": 13577757,
+      "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.parts.json",
+      "parts": 16,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+      "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe",
+      "bytes": 3161161,
+      "manifest": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz.parts.json",
+      "parts": 4,
+      "restored": false
+    }
+  ],
+  "inputsBefore": [
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+      "bytes": 41445,
+      "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+      "bytes": 24340,
+      "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+      "bytes": 39060,
+      "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+      "bytes": 19976,
+      "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+      "bytes": 26568,
+      "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+      "bytes": 2630905,
+      "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "c4f142f1c20367a0ae799940bfe2b7339ff393455bdff010382c97d21472d56f"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz.part001",
+      "bytes": 900000,
+      "sha256": "53bc770d6baea4fca6c616e7dc0d489592f379268d7159d63fe93db0822c434f"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz.part002",
+      "bytes": 830905,
+      "sha256": "04c43217dab726ab8c45ac77f8a35d1c15c98ca4c6905bfcddedb38d266c6919"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz.parts.json",
+      "bytes": 839,
+      "sha256": "5f89c539994ef5df9e440d4043fc5e6cb788b448a58b7536bbfb8735514f6e22"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+      "bytes": 56466,
+      "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+      "bytes": 4349054,
+      "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "9124413f3b3506467c7da4d490620371f905dcfe2e2d89ac46359d7aa5cb1757"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.part001",
+      "bytes": 900000,
+      "sha256": "75c4fac91ffda88cb84c9876193f459314d7717cff1e95b7e2cc0288596a702f"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.part002",
+      "bytes": 900000,
+      "sha256": "f1ed9189ba67ef8b32145c8f084006be942d05e7cdca36422f886dcd80ece4eb"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.part003",
+      "bytes": 900000,
+      "sha256": "e5d419ceaae3a549af5c25b906c200f3a9ed7eb5c8e2bfb853ea409877dbda06"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.part004",
+      "bytes": 749054,
+      "sha256": "c82e340ecf79d155151679e19cc9227df6a89c5fc9360cefe061005dce01dd09"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.parts.json",
+      "bytes": 1171,
+      "sha256": "c9df9de0c3f4b2cf1528e274f65f62c65a1a5eff7588ed818053faa457ea3bb3"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+      "bytes": 1649205,
+      "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "769f31b9eb653118acd83d8688cc1edc9cab94be39215b7b2e4f9971c9bc654b"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz.part001",
+      "bytes": 749205,
+      "sha256": "721f2b6c4fece52d3bb6caa8c684d6f18a9c813c7e811969108464cacadfcf0b"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz.parts.json",
+      "bytes": 679,
+      "sha256": "7cc5fec7e15b449020f7d10e48e3a8dd5f630740d3f3ba0ca35da92ff9a28561"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+      "bytes": 8174480,
+      "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "6b1981bf1ee3a2b35fdc0723d5dd2e6c0ea7110463dc98f567b8ed0ad822e673"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part001",
+      "bytes": 900000,
+      "sha256": "cba104870f253ad44211bcc7ab5c5c79727579b0e23a32901a4d3a5fc0a8b0e9"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part002",
+      "bytes": 900000,
+      "sha256": "2c615d31b296f4c32f8eb57dc7d33cfeb19bbc4a4ec8dad3b6f4c17d73db453d"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part003",
+      "bytes": 900000,
+      "sha256": "ccf29b8a819fa7b5a85334431543755595da6dd5241f75c087e2834779900be4"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part004",
+      "bytes": 900000,
+      "sha256": "4360b2b13b54a6913e10c5fdf8dc4a3d1a72654835d4ed7ede6ca8de70727764"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part005",
+      "bytes": 900000,
+      "sha256": "762aea94aceeb29cd45ad7d69103809d48e4b1951a1770fd9844639e0ebfa65c"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part006",
+      "bytes": 900000,
+      "sha256": "9be0d1df2fac6e1b603a4b56efe2488faed2b6d4fbfdfca39eaaebc610200998"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part007",
+      "bytes": 900000,
+      "sha256": "4599ef6a0507a345d2867869178f12f5515da3dc4ff3f13a1fb290838a743fbc"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part008",
+      "bytes": 900000,
+      "sha256": "f2823cbe0fcbf99a0e85c069e991f26c7b956876b8b3f2ead8ec646edf4e5cbf"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part009",
+      "bytes": 74480,
+      "sha256": "ef7de99255241e4a1a392547b153d2cc5aa54a8b0f0e37036b37e19d98a3c021"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.parts.json",
+      "bytes": 2022,
+      "sha256": "bda4418eea2c8ad1dc5490fe0295a533cb763e6cffb18d5aa492da695638930c"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+      "bytes": 2585868,
+      "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "f057052133c1209cf57421aba85f973dacbf7a275d84de45b54e714f20d540f2"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz.part001",
+      "bytes": 900000,
+      "sha256": "ab5ea277344938fef0fee3585e4b73d618ab57cf1ac2ab89763f88276391917c"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz.part002",
+      "bytes": 785868,
+      "sha256": "baa96e3aa7ea0812a0ef1722ae09792e57f5d4b088a83522b8e0ab7e7673a7ff"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz.parts.json",
+      "bytes": 847,
+      "sha256": "87181e47366a34d79a9ad64d37a7d1782cdb12f5dda40a6b69523146101a4329"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+      "bytes": 10678168,
+      "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "e0d98773bada07af7120bfbe479df1df80aeebc4fa977131bc171c843f167a66"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part001",
+      "bytes": 900000,
+      "sha256": "7823affc89af1903ae9f53d553b5e9ca4a36e59fd4ed61f58360dc19982e704c"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part002",
+      "bytes": 900000,
+      "sha256": "07b716392585107469d6b3983f4b4caacbbaf58b6b7bd43d69afb7dd21b2a1ad"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part003",
+      "bytes": 900000,
+      "sha256": "99f228958261db1f98918fd2efeb69ce93e8aba55e4774198e1fd4c93419b437"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part004",
+      "bytes": 900000,
+      "sha256": "5a7ef92b0f235f43bea27d299730ee0f9830f2225e174b99fae7adf74e5606e9"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part005",
+      "bytes": 900000,
+      "sha256": "8cb3be0d5d7d161509fb6ee8eea37c15f8045440403aea27f4f29400cdbb4678"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part006",
+      "bytes": 900000,
+      "sha256": "5a4b6e8e1a43f32a1afab018bca7345e863bf161c45e77a4eab93d94e3d3e4ee"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part007",
+      "bytes": 900000,
+      "sha256": "04f5d870536d04021678594a0f268cceb69cb778e59c1d81dea5f25ad91a058d"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part008",
+      "bytes": 900000,
+      "sha256": "6feaa9631d84ca62606b0097a811388feba99b989975b3cdf16aef4a8815eb6d"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part009",
+      "bytes": 900000,
+      "sha256": "76fd6cd131fa5c413cf2619ca1fbf2439505c072a14f0ca6a42a7c8d7ad38107"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part010",
+      "bytes": 900000,
+      "sha256": "2b1f3221012b871dc7f99a09f02653299ea4dbfbed99c2ba4ba63affef040f4f"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part011",
+      "bytes": 778168,
+      "sha256": "a95b0856ed9e6eed8e1d29d203252eec01bd9ec305171ef78961e3641bb2e5c7"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.parts.json",
+      "bytes": 2360,
+      "sha256": "4f2b80576b429686a2370f1d9a79f9a271221479193e475e1b1958bf58870614"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+      "bytes": 13577757,
+      "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "a67fc54aaa92b851ddd50df4da140b46aec73e9ad4454e5e30ccb991d1f827f6"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part001",
+      "bytes": 900000,
+      "sha256": "a05ba0d362fad29482a3347bc0250aad67cbbb294d56e61780a6cc521a4af3bc"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part002",
+      "bytes": 900000,
+      "sha256": "e9f5fe4ad6742d2c52dde9901d798c8f03147ee9dd11c385e5f39f920ad08df3"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part003",
+      "bytes": 900000,
+      "sha256": "50bc68c4569f8991de80759af91b34f254e238390461224eaed093ca974ac7b2"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part004",
+      "bytes": 900000,
+      "sha256": "69481d0ecbdfac80780a693ea331227b1c1aa41022105746555292f31bf7dba7"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part005",
+      "bytes": 900000,
+      "sha256": "703b2db288d941f5644627875d619cebd406dd816ab74990368349749aab58f9"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part006",
+      "bytes": 900000,
+      "sha256": "c5d6dd353b871d38d75905625df50c543964843c0e124b787e34cb50a1968b52"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part007",
+      "bytes": 900000,
+      "sha256": "057c8ffa260deea31218edbf47674e08722704f8251f8e3f26ed587cf1ae6339"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part008",
+      "bytes": 900000,
+      "sha256": "f1699497c430ba81c425f1a36d1ff41d11817eef03f7f4eca9aeb9cae67beb58"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part009",
+      "bytes": 900000,
+      "sha256": "0e417a78980134a77b8fb7db246acb9c5a80868fc7d2361f51925956f7eeb5a5"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part010",
+      "bytes": 900000,
+      "sha256": "d9225a6b9bed68740038cd99f386e2b60697e674a2167ba33fb4ae34877d4fd8"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part011",
+      "bytes": 900000,
+      "sha256": "4ee07ea24f1049a2108c647e2223fe82cc36f561d61b0ec3de88237b2363b879"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part012",
+      "bytes": 900000,
+      "sha256": "a5ba1c0c3ff5aba429da2d909ccd36a96607c9135a0baefc736afa5cf584066a"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part013",
+      "bytes": 900000,
+      "sha256": "23df0464de547897d5d8acc63cde21cae41068465670e44b687aff68709e966e"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part014",
+      "bytes": 900000,
+      "sha256": "e3fb25915ae9271a193d57584f97d06aceed3ce5cba56b10062a07afd93df4a2"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part015",
+      "bytes": 77757,
+      "sha256": "0b9a7f64e080866b16a92fe4d454d21a17d60765795221a0297b028af27bea86"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.parts.json",
+      "bytes": 3201,
+      "sha256": "e6e91d2a10861df50b55c496ba74bcca5046bb5cf6826024b8ed716487c40204"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/execution-tria.json",
+      "bytes": 70005,
+      "sha256": "efaaa2b4b358f6577cc506a0f8abc5ddc6049a0782e4451591ad16fe39e46ae5"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/source-manifest.json",
+      "bytes": 32756,
+      "sha256": "0d8527fe8f19b92fed78b38a5e6947b2952ef9dd21d79e00286b6cae0e7bf419"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+      "bytes": 3161161,
+      "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "acba82128fcac597bbd2a3dd98a2de2f06dc56ba2c552620ad6b722af4b6c41c"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz.part001",
+      "bytes": 900000,
+      "sha256": "dca8b0a39014b9906bcdf282930962313020964405701ecf87d8c5e687d383cc"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz.part002",
+      "bytes": 900000,
+      "sha256": "d611b3ac408a2fbe567e41f608ac58e15420335170a20af44617f61b6afe8af0"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz.part003",
+      "bytes": 461161,
+      "sha256": "f0593426d48713976072406bc577c9272aec1d0e160be2e89102d24643890ce7"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz.parts.json",
+      "bytes": 1005,
+      "sha256": "aa149690d1e34f489ec2c21c54ac172dfb450b44ec85f2461f028b6096c36dce"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+      "bytes": 13286,
+      "sha256": "916d0f1cb1dcbfd9b7ba7624e7d3d4648a91ae7ef64583288af4711d2a955ac3"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/planning/published-predecessor83.json",
+      "bytes": 1016,
+      "sha256": "0b15832f05f841c09affb9960940ad02455feead273629eadb6cd68090ff82d7"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/planning/regression-plan.json",
+      "bytes": 36146,
+      "sha256": "c195a79f5ac03e477fa903c30128c02bc362c5af768e4e15a527cdbdf7930422"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+      "bytes": 17256,
+      "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/regressions/regression-summary.json",
+      "bytes": 165701,
+      "sha256": "e575a6aa95e532c6e9b6275502d1cd16b69a438976a0d75a615108465bc6b5e6"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/source-manifest.json",
+      "bytes": 33095,
+      "sha256": "75e1dbe4002f737c2d5248a08531c6b60002c3114692b55df3a5c7255c79d6cc"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/recorded-regression-cases-integrated.json",
+      "bytes": 4280,
+      "sha256": "9dc1302d8289118e38a3c8b54112fbdfba35d5b3d7ae29b1d93bb49fa0b14474"
+    },
+    {
+      "path": "scripts/evidence-byte-parts.py",
+      "bytes": 7210,
+      "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350"
+    },
+    {
+      "path": "scripts/restore-v53-evidence.py",
+      "bytes": 3361,
+      "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d"
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+      "bytes": 41445,
+      "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+      "bytes": 24340,
+      "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+      "bytes": 39060,
+      "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+      "bytes": 19976,
+      "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+      "bytes": 26568,
+      "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+      "bytes": 2630905,
+      "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "c4f142f1c20367a0ae799940bfe2b7339ff393455bdff010382c97d21472d56f"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz.part001",
+      "bytes": 900000,
+      "sha256": "53bc770d6baea4fca6c616e7dc0d489592f379268d7159d63fe93db0822c434f"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz.part002",
+      "bytes": 830905,
+      "sha256": "04c43217dab726ab8c45ac77f8a35d1c15c98ca4c6905bfcddedb38d266c6919"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz.parts.json",
+      "bytes": 839,
+      "sha256": "5f89c539994ef5df9e440d4043fc5e6cb788b448a58b7536bbfb8735514f6e22"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+      "bytes": 56466,
+      "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+      "bytes": 4349054,
+      "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "9124413f3b3506467c7da4d490620371f905dcfe2e2d89ac46359d7aa5cb1757"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.part001",
+      "bytes": 900000,
+      "sha256": "75c4fac91ffda88cb84c9876193f459314d7717cff1e95b7e2cc0288596a702f"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.part002",
+      "bytes": 900000,
+      "sha256": "f1ed9189ba67ef8b32145c8f084006be942d05e7cdca36422f886dcd80ece4eb"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.part003",
+      "bytes": 900000,
+      "sha256": "e5d419ceaae3a549af5c25b906c200f3a9ed7eb5c8e2bfb853ea409877dbda06"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.part004",
+      "bytes": 749054,
+      "sha256": "c82e340ecf79d155151679e19cc9227df6a89c5fc9360cefe061005dce01dd09"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.parts.json",
+      "bytes": 1171,
+      "sha256": "c9df9de0c3f4b2cf1528e274f65f62c65a1a5eff7588ed818053faa457ea3bb3"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+      "bytes": 1649205,
+      "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "769f31b9eb653118acd83d8688cc1edc9cab94be39215b7b2e4f9971c9bc654b"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz.part001",
+      "bytes": 749205,
+      "sha256": "721f2b6c4fece52d3bb6caa8c684d6f18a9c813c7e811969108464cacadfcf0b"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz.parts.json",
+      "bytes": 679,
+      "sha256": "7cc5fec7e15b449020f7d10e48e3a8dd5f630740d3f3ba0ca35da92ff9a28561"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+      "bytes": 8174480,
+      "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "6b1981bf1ee3a2b35fdc0723d5dd2e6c0ea7110463dc98f567b8ed0ad822e673"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part001",
+      "bytes": 900000,
+      "sha256": "cba104870f253ad44211bcc7ab5c5c79727579b0e23a32901a4d3a5fc0a8b0e9"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part002",
+      "bytes": 900000,
+      "sha256": "2c615d31b296f4c32f8eb57dc7d33cfeb19bbc4a4ec8dad3b6f4c17d73db453d"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part003",
+      "bytes": 900000,
+      "sha256": "ccf29b8a819fa7b5a85334431543755595da6dd5241f75c087e2834779900be4"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part004",
+      "bytes": 900000,
+      "sha256": "4360b2b13b54a6913e10c5fdf8dc4a3d1a72654835d4ed7ede6ca8de70727764"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part005",
+      "bytes": 900000,
+      "sha256": "762aea94aceeb29cd45ad7d69103809d48e4b1951a1770fd9844639e0ebfa65c"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part006",
+      "bytes": 900000,
+      "sha256": "9be0d1df2fac6e1b603a4b56efe2488faed2b6d4fbfdfca39eaaebc610200998"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part007",
+      "bytes": 900000,
+      "sha256": "4599ef6a0507a345d2867869178f12f5515da3dc4ff3f13a1fb290838a743fbc"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part008",
+      "bytes": 900000,
+      "sha256": "f2823cbe0fcbf99a0e85c069e991f26c7b956876b8b3f2ead8ec646edf4e5cbf"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.part009",
+      "bytes": 74480,
+      "sha256": "ef7de99255241e4a1a392547b153d2cc5aa54a8b0f0e37036b37e19d98a3c021"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.parts.json",
+      "bytes": 2022,
+      "sha256": "bda4418eea2c8ad1dc5490fe0295a533cb763e6cffb18d5aa492da695638930c"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+      "bytes": 2585868,
+      "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "f057052133c1209cf57421aba85f973dacbf7a275d84de45b54e714f20d540f2"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz.part001",
+      "bytes": 900000,
+      "sha256": "ab5ea277344938fef0fee3585e4b73d618ab57cf1ac2ab89763f88276391917c"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz.part002",
+      "bytes": 785868,
+      "sha256": "baa96e3aa7ea0812a0ef1722ae09792e57f5d4b088a83522b8e0ab7e7673a7ff"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz.parts.json",
+      "bytes": 847,
+      "sha256": "87181e47366a34d79a9ad64d37a7d1782cdb12f5dda40a6b69523146101a4329"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+      "bytes": 10678168,
+      "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "e0d98773bada07af7120bfbe479df1df80aeebc4fa977131bc171c843f167a66"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part001",
+      "bytes": 900000,
+      "sha256": "7823affc89af1903ae9f53d553b5e9ca4a36e59fd4ed61f58360dc19982e704c"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part002",
+      "bytes": 900000,
+      "sha256": "07b716392585107469d6b3983f4b4caacbbaf58b6b7bd43d69afb7dd21b2a1ad"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part003",
+      "bytes": 900000,
+      "sha256": "99f228958261db1f98918fd2efeb69ce93e8aba55e4774198e1fd4c93419b437"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part004",
+      "bytes": 900000,
+      "sha256": "5a7ef92b0f235f43bea27d299730ee0f9830f2225e174b99fae7adf74e5606e9"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part005",
+      "bytes": 900000,
+      "sha256": "8cb3be0d5d7d161509fb6ee8eea37c15f8045440403aea27f4f29400cdbb4678"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part006",
+      "bytes": 900000,
+      "sha256": "5a4b6e8e1a43f32a1afab018bca7345e863bf161c45e77a4eab93d94e3d3e4ee"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part007",
+      "bytes": 900000,
+      "sha256": "04f5d870536d04021678594a0f268cceb69cb778e59c1d81dea5f25ad91a058d"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part008",
+      "bytes": 900000,
+      "sha256": "6feaa9631d84ca62606b0097a811388feba99b989975b3cdf16aef4a8815eb6d"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part009",
+      "bytes": 900000,
+      "sha256": "76fd6cd131fa5c413cf2619ca1fbf2439505c072a14f0ca6a42a7c8d7ad38107"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part010",
+      "bytes": 900000,
+      "sha256": "2b1f3221012b871dc7f99a09f02653299ea4dbfbed99c2ba4ba63affef040f4f"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.part011",
+      "bytes": 778168,
+      "sha256": "a95b0856ed9e6eed8e1d29d203252eec01bd9ec305171ef78961e3641bb2e5c7"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.parts.json",
+      "bytes": 2360,
+      "sha256": "4f2b80576b429686a2370f1d9a79f9a271221479193e475e1b1958bf58870614"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+      "bytes": 13577757,
+      "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "a67fc54aaa92b851ddd50df4da140b46aec73e9ad4454e5e30ccb991d1f827f6"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part001",
+      "bytes": 900000,
+      "sha256": "a05ba0d362fad29482a3347bc0250aad67cbbb294d56e61780a6cc521a4af3bc"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part002",
+      "bytes": 900000,
+      "sha256": "e9f5fe4ad6742d2c52dde9901d798c8f03147ee9dd11c385e5f39f920ad08df3"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part003",
+      "bytes": 900000,
+      "sha256": "50bc68c4569f8991de80759af91b34f254e238390461224eaed093ca974ac7b2"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part004",
+      "bytes": 900000,
+      "sha256": "69481d0ecbdfac80780a693ea331227b1c1aa41022105746555292f31bf7dba7"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part005",
+      "bytes": 900000,
+      "sha256": "703b2db288d941f5644627875d619cebd406dd816ab74990368349749aab58f9"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part006",
+      "bytes": 900000,
+      "sha256": "c5d6dd353b871d38d75905625df50c543964843c0e124b787e34cb50a1968b52"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part007",
+      "bytes": 900000,
+      "sha256": "057c8ffa260deea31218edbf47674e08722704f8251f8e3f26ed587cf1ae6339"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part008",
+      "bytes": 900000,
+      "sha256": "f1699497c430ba81c425f1a36d1ff41d11817eef03f7f4eca9aeb9cae67beb58"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part009",
+      "bytes": 900000,
+      "sha256": "0e417a78980134a77b8fb7db246acb9c5a80868fc7d2361f51925956f7eeb5a5"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part010",
+      "bytes": 900000,
+      "sha256": "d9225a6b9bed68740038cd99f386e2b60697e674a2167ba33fb4ae34877d4fd8"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part011",
+      "bytes": 900000,
+      "sha256": "4ee07ea24f1049a2108c647e2223fe82cc36f561d61b0ec3de88237b2363b879"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part012",
+      "bytes": 900000,
+      "sha256": "a5ba1c0c3ff5aba429da2d909ccd36a96607c9135a0baefc736afa5cf584066a"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part013",
+      "bytes": 900000,
+      "sha256": "23df0464de547897d5d8acc63cde21cae41068465670e44b687aff68709e966e"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part014",
+      "bytes": 900000,
+      "sha256": "e3fb25915ae9271a193d57584f97d06aceed3ce5cba56b10062a07afd93df4a2"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.part015",
+      "bytes": 77757,
+      "sha256": "0b9a7f64e080866b16a92fe4d454d21a17d60765795221a0297b028af27bea86"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.parts.json",
+      "bytes": 3201,
+      "sha256": "e6e91d2a10861df50b55c496ba74bcca5046bb5cf6826024b8ed716487c40204"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/execution-tria.json",
+      "bytes": 70005,
+      "sha256": "efaaa2b4b358f6577cc506a0f8abc5ddc6049a0782e4451591ad16fe39e46ae5"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/source-manifest.json",
+      "bytes": 32756,
+      "sha256": "0d8527fe8f19b92fed78b38a5e6947b2952ef9dd21d79e00286b6cae0e7bf419"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+      "bytes": 3161161,
+      "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "acba82128fcac597bbd2a3dd98a2de2f06dc56ba2c552620ad6b722af4b6c41c"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz.part001",
+      "bytes": 900000,
+      "sha256": "dca8b0a39014b9906bcdf282930962313020964405701ecf87d8c5e687d383cc"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz.part002",
+      "bytes": 900000,
+      "sha256": "d611b3ac408a2fbe567e41f608ac58e15420335170a20af44617f61b6afe8af0"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz.part003",
+      "bytes": 461161,
+      "sha256": "f0593426d48713976072406bc577c9272aec1d0e160be2e89102d24643890ce7"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz.parts.json",
+      "bytes": 1005,
+      "sha256": "aa149690d1e34f489ec2c21c54ac172dfb450b44ec85f2461f028b6096c36dce"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+      "bytes": 13286,
+      "sha256": "916d0f1cb1dcbfd9b7ba7624e7d3d4648a91ae7ef64583288af4711d2a955ac3"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/planning/published-predecessor83.json",
+      "bytes": 1016,
+      "sha256": "0b15832f05f841c09affb9960940ad02455feead273629eadb6cd68090ff82d7"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/planning/regression-plan.json",
+      "bytes": 36146,
+      "sha256": "c195a79f5ac03e477fa903c30128c02bc362c5af768e4e15a527cdbdf7930422"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+      "bytes": 17256,
+      "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/regressions/regression-summary.json",
+      "bytes": 165701,
+      "sha256": "e575a6aa95e532c6e9b6275502d1cd16b69a438976a0d75a615108465bc6b5e6"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/source-manifest.json",
+      "bytes": 33095,
+      "sha256": "75e1dbe4002f737c2d5248a08531c6b60002c3114692b55df3a5c7255c79d6cc"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/recorded-regression-cases-integrated.json",
+      "bytes": 4280,
+      "sha256": "9dc1302d8289118e38a3c8b54112fbdfba35d5b3d7ae29b1d93bb49fa0b14474"
+    },
+    {
+      "path": "scripts/evidence-byte-parts.py",
+      "bytes": 7210,
+      "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350"
+    },
+    {
+      "path": "scripts/restore-v53-evidence.py",
+      "bytes": 3361,
+      "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d"
+    }
+  ],
+  "inputsUnchanged": true,
+  "inputVerificationScope": "Before and after manifest construction, after only authorized missing-original restoration; files absent at entry are listed separately.",
+  "candidateSourceBinding": "Provided later by --source-manifest after actual 5A publication and final 4B freeze.",
+  "nativeEngineExecuted": false,
+  "originalAgentImported": false,
+  "campaignExecuted": false,
+  "testExecuted": false,
+  "buildExecuted": false,
+  "measurementExecuted": false,
+  "campaignReportsDecompressed": false,
+  "fullRunnerPreflightExecuted": false,
+  "qualification": "Executable input manifest and immutable provenance preparation only. Seven published historical regressions and one retained development live case remain historical evidence. The unchanged runner must still perform its full public-command/packet preflight and actual cold replays against the future supplied candidate freeze. No 8/136 passing result, new game success, final candidate version or cost result is claimed. No source, cost tool, existing report, trace, part or historical receipt was modified."
+}

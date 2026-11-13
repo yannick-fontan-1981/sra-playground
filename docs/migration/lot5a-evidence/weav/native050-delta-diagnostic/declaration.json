@@ -1,0 +1,17 @@
+{
+  "schema": "sra.weav.delta-diagnostic.v1",
+  "recordedAt": "2026-11-10T20:07:56.901315+00:00",
+  "baseCommit": "6d03c2adda9f60b1c97304f5491a428cfbec7a6c",
+  "nativeSourceDigest": "3dc517c04c03e2d07ef410f03c766fe7d8209f34bf2c6dfd844865302e8bc52d",
+  "targetLevels": 6,
+  "outerActionCap": 400,
+  "levelActiveTimeBudgetMs": 360000,
+  "modifiedProductionFiles": [
+    "src/logos-engine/kernel.ts",
+    "src/logos-engine/v6-knowledge-store.ts",
+    "src/logos-engine/v6-crossed-prefix-access.ts",
+    "src/logos-engine/v6-native-runtime.ts"
+  ],
+  "qualification": "Isolated functional diagnostic on published native0.50 plus the generic batch/zero-cost/dead-retention patch, distinct from the final integrated lot5 release. The original common harness and opaque engine own decisions. Concurrent7A functional work may affect elapsed times, so this is not an exclusive comparative speed benchmark.",
+  "absoluteCaseCutoff": "2026-11-10T20:15:17.217385+00:00"
+}

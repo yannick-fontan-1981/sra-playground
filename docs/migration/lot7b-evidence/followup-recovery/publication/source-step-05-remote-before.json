@@ -1,0 +1,10 @@
+{
+  "schema": "logos-engine.followup-remote-head-check.v1",
+  "recordedAt": "2026-11-11T14:37:29.844208+00:00",
+  "status": "passed",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "ref": "refs/heads/main",
+  "expectedCommit": "7b97e67d07c93d6ad499a6b9c2ecda773d030d0c",
+  "actualCommit": "7b97e67d07c93d6ad499a6b9c2ecda773d030d0c",
+  "qualification": "Read-only ls-remote before the standard Sites source helper; no fetch, push, merge or publication."
+}

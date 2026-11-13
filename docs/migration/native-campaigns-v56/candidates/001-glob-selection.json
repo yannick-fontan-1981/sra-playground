@@ -1,0 +1,13 @@
+{
+  "schema": "logos-engine.v56.candidate-selection.v1",
+  "game": "GLOB",
+  "selectedAt": "2026-11-09T13:59:36.727704+00:00",
+  "blockedDeadline": "2026-11-09T14:39:36.727704+00:00",
+  "maximumBlockedSeconds": 2400,
+  "baseCommit": "4e581c40bfed1d238515f6327758a8e9877ba837",
+  "implementation": "logos-engine.typescript.v6.native-migration/0.29.0",
+  "rationale": "Prior isolated FixedOrigin public fixture covers one level with four imposed probes; no prior qualifying cold common three-level success was found. The live run starts empty and receives none of those imposed inputs.",
+  "historicalEvidence": "docs/migration/v32-support-recall-delta.md",
+  "directory": "docs/migration/native-campaigns-v56/baseline-glob",
+  "qualification": "Timestamp anchors this candidate across any source change or retry; no game implementation, solution or level hints are inspected. Existing providers choose every live action."
+}

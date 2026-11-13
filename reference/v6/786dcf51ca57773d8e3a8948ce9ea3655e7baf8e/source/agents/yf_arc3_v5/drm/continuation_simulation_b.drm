@@ -1,0 +1,224 @@
+{
+  "module_id": "continuation_simulation_b",
+  "declarations": [
+    {
+      "id": "policy.b_continuation_simulation_input",
+      "configuration": {"genuine_information_dependency_kind_refs": [
+        "missing_acquisition", "unbound_future_payload", "missing_handoff_destination",
+        "unresolved_collision_law", "unresolved_program_outcome", "causal_contradiction"
+      ]},
+      "kind": "selection_policy", "evaluation": "declared_eligibility_single",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason_current_canonical_closure_and_unknown_cut_precede_simulation"],
+      "invariants": ["no_new_physics", "no_implicit_completion_boundary", "unknown_suffix_is_withheld",
+        "untested_surface_or_pivot_alone_does_not_cut_a_complete_conditional_series"],
+      "declared_alternative_refs": ["continuation_simulation_input.current", "continuation_simulation_input.open"],
+      "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+      "fact_projections": [
+        {"id": "projection.continuation_simulation_input.current", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "continuation_simulation_input.current"},
+          {"field": "input_current", "operator": "equals", "expected": true}], "static_facts": {"eligible": true}},
+        {"id": "projection.continuation_simulation_input.open", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "continuation_simulation_input.open"},
+          {"field": "input_current", "operator": "equals", "expected": false}], "static_facts": {"eligible": true}}
+      ]
+    },
+    {
+      "id": "policy.b_continuation_simulation_return",
+      "kind": "selection_policy", "evaluation": "declared_eligibility_single",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason_complete_compound_event_graph_supports_only_its_known_prefix"],
+      "invariants": ["actual_k03_return_identity", "clock_and_write_ownership_are_checked_by_k03",
+        "completion_policies_keep_their_exact_event_scope", "later_useful_effect_remains_predicted_until_sealed"],
+      "falsifiers": ["incomplete_prefix", "failed_predicate", "unknown_response_used_by_suffix", "changed_completion_scope"],
+      "declared_alternative_refs": ["continuation_simulation.full", "continuation_simulation.information_prefix", "continuation_simulation.open"],
+      "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+      "fact_projections": [
+        {"id": "projection.continuation_simulation.full", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "continuation_simulation.full"},
+          {"field": "simulation_complete", "operator": "equals", "expected": true},
+          {"field": "information_prefix", "operator": "equals", "expected": false}],
+          "static_facts": {"eligible": true, "prediction_status_ref": "predicted_until_sealed"}},
+        {"id": "projection.continuation_simulation.information_prefix", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "continuation_simulation.information_prefix"},
+          {"field": "simulation_complete", "operator": "equals", "expected": true},
+          {"field": "information_prefix", "operator": "equals", "expected": true}],
+          "static_facts": {"eligible": true, "prediction_status_ref": "predicted_until_sealed",
+            "completion_requirement_ref": "answer_the_declared_measurement_question", "unknown_suffix_release": false}},
+        {"id": "projection.continuation_simulation.open", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "continuation_simulation.open"},
+          {"field": "simulation_complete", "operator": "equals", "expected": false}], "static_facts": {"eligible": true}}
+      ]
+    },
+    {
+      "id": "policy.b_continuation_execution_window",
+      "kind": "selection_policy", "evaluation": "declared_eligibility_single",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason_actual_prepared_word_and_information_why_must_match_simulated_prefix"],
+      "invariants": ["absent_contract_preserves_inherited_preparation", "parent_goal_unchanged",
+        "informative_action_has_alternatives_not_deterministic_terminal_improvement", "no_released_unknown_suffix"],
+      "declared_alternative_refs": ["continuation_window.absent", "continuation_window.full", "continuation_window.information_prefix", "continuation_window.open"],
+      "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+      "fact_projections": [
+        {"id": "projection.continuation_window.absent", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "continuation_window.absent"},
+          {"field": "simulation_present", "operator": "equals", "expected": false}], "static_facts": {"eligible": true}},
+        {"id": "projection.continuation_window.full", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "continuation_window.full"},
+          {"field": "simulation_present", "operator": "equals", "expected": true},
+          {"field": "prepared_window_current", "operator": "equals", "expected": true},
+          {"field": "simulation_source_disposition_ref", "operator": "equals", "expected": "continuation_simulation.full"}], "static_facts": {"eligible": true}},
+        {"id": "projection.continuation_window.information_prefix", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "continuation_window.information_prefix"},
+          {"field": "simulation_present", "operator": "equals", "expected": true},
+          {"field": "prepared_window_current", "operator": "equals", "expected": true},
+          {"field": "simulation_source_disposition_ref", "operator": "equals", "expected": "continuation_simulation.information_prefix"}], "static_facts": {"eligible": true}},
+        {"id": "projection.continuation_window.open", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "continuation_window.open"},
+          {"field": "simulation_present", "operator": "equals", "expected": true},
+          {"field": "prepared_window_current", "operator": "equals", "expected": false}], "static_facts": {"eligible": true}}
+      ]
+    },
+    {
+      "id": "policy.conscious_simulation_consequences",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_predicted_application_keeps_goal_preservation_and_unknowns_distinct"
+      ],
+      "invariants": [
+        "prediction_never_establishes_world_success",
+        "preserve_exact_native_scope",
+        "consume_the_existing_simulation_without_reexecuting_steps",
+        "no_new_action_authority"
+      ],
+      "declared_alternative_refs": [
+        "conscious_simulation.preservation_falsified",
+        "conscious_simulation.unresolved",
+        "conscious_simulation.completion",
+        "conscious_simulation.continuation"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.conscious_simulation.preservation_falsified",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "conscious_simulation.preservation_falsified"
+            },
+            {
+              "field": "preservation_falsified",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "prediction_status_ref": "predicted_constraint_violation"
+          }
+        },
+        {
+          "id": "projection.conscious_simulation.unresolved",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "conscious_simulation.unresolved"
+            },
+            {
+              "field": "preservation_falsified",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_complete_prediction",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "prediction_status_ref": "prediction_requires_evidence"
+          }
+        },
+        {
+          "id": "projection.conscious_simulation.completion",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "conscious_simulation.completion"
+            },
+            {
+              "field": "preservation_falsified",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_complete_prediction",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_declared_completions_predicted",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "prediction_status_ref": "declared_completion_predicted_not_observed"
+          }
+        },
+        {
+          "id": "projection.conscious_simulation.continuation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "conscious_simulation.continuation"
+            },
+            {
+              "field": "preservation_falsified",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_complete_prediction",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_declared_completions_predicted",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "prediction_status_ref": "known_prefix_without_established_completion"
+          }
+        }
+      ]
+    }
+  ]
+}

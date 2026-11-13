@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.native-loop-cost-cases.v1",
+  "rounds": 1,
+  "cases": [
+    {
+      "id": "SMLP",
+      "trace": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "traceSha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+      "actions": 15,
+      "targetLevels": 3,
+      "warmupActions": 0,
+      "purpose": "One cold normal-path attribution diagnostic over fifteen retained public actions, with no warmup and no official budget decision."
+    }
+  ],
+  "qualification": "Diagnostic only: one cold SMLP15 session from the published native 0.40 source, followed by one cold SMLP15 session from a materially corrected frozen native 0.41 source. Zero warmup. The normal-path profiler executes this selected case once and does not implement the official cost-window rounds. CPU sampling and method attribution are retained, never substituted for the unchanged sixteen-median official budget."
+}

@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "logs": [
+    {
+      "source": {
+        "path": "/workspace/sites/lot4c-publication-20261111/final-source-build-verification.stdout.log",
+        "bytes": 303,
+        "sha256": "c05e06d1c70ae0ac5ad157fb04541db4305de31df980d5652c7b71ce5fffabe0"
+      },
+      "transport": {
+        "path": "docs/migration/lot4c-evidence/publication/final-source-build-verification.stdout.log.gz",
+        "bytes": 243,
+        "sha256": "8fda232e703b71a295d1a6c41af76819b25a2dca57a9b0e0e0df09cd9a9c3d30"
+      },
+      "byteIdentical": true
+    },
+    {
+      "source": {
+        "path": "/workspace/sites/lot4c-publication-20261111/final-source-build-verification.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "transport": {
+        "path": "docs/migration/lot4c-evidence/publication/final-source-build-verification.stderr.log.gz",
+        "bytes": 20,
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+      },
+      "byteIdentical": true
+    }
+  ]
+}

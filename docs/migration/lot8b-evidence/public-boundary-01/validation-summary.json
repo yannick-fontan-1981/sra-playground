@@ -1,0 +1,178 @@
+{
+  "schema": "logos-engine.lot8b.public-boundary-summary.v1",
+  "recordedAt": "2026-11-12T13:34:03.133759+00:00",
+  "status": "qualified_positive_public_scope_with_structural_recovery_reservation",
+  "publishedSiteVersion": 108,
+  "nativeVersion": "0.67.0",
+  "publishedSourceCommit": "8462204043aa368faa7df280d796bb706eb53b38",
+  "productionFilesChanged": false,
+  "officialPerformanceMeasuredThisStep": false,
+  "publicationPerformedThisStep": false,
+  "globalLockAcquired": false,
+  "scope": "Published bundle in real Node threads; production service, client, controller, tickets and real graph acquisitions; synthetic64x64 returns only",
+  "results": {
+    "positiveSessions": 3,
+    "physicalReturns": 18,
+    "successfulAdvances": 18,
+    "consumedTickets": 18,
+    "acquiredBranchReturns": 18,
+    "inspectionPoints": 58,
+    "graphDeltas": 2578,
+    "uniqueGraphs": 36,
+    "graphReferences": 116,
+    "readerCheckGroups": 661,
+    "readerFailures": 0,
+    "recoverableProtocolChecks": 7,
+    "pauseChecks": 4,
+    "cases": [
+      {
+        "caseId": "single-positive",
+        "physicalReturns": 6,
+        "successfulAdvances": 6,
+        "initializations": 1,
+        "inspections": 28,
+        "graphDeltas": 883,
+        "consumedTickets": 6,
+        "issuedTicketsObserved": 6,
+        "acquiredBranchReturns": 6,
+        "retainedOwnerEvents": 6,
+        "finalQuestionExecuted": false
+      },
+      {
+        "caseId": "triple-prefix",
+        "physicalReturns": 7,
+        "successfulAdvances": 7,
+        "initializations": 1,
+        "inspections": 17,
+        "graphDeltas": 912,
+        "consumedTickets": 7,
+        "issuedTicketsObserved": 8,
+        "acquiredBranchReturns": 7,
+        "retainedOwnerEvents": 7,
+        "finalQuestionExecuted": false
+      },
+      {
+        "caseId": "contrary-return",
+        "physicalReturns": 5,
+        "successfulAdvances": 5,
+        "initializations": 1,
+        "inspections": 13,
+        "graphDeltas": 783,
+        "consumedTickets": 5,
+        "issuedTicketsObserved": 6,
+        "acquiredBranchReturns": 5,
+        "retainedOwnerEvents": 5,
+        "finalQuestionExecuted": false
+      }
+    ],
+    "positiveWorkerThreadsClosed": 3,
+    "allCreatedWorkerThreadsClosed": 5
+  },
+  "sourceIntegrity": {
+    "nativeFiles": 331,
+    "nativeDigest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+    "buildFiles": 74,
+    "runtimeInputsBoundToPublishedCommit": 6,
+    "captureInputsUnchanged": true,
+    "terminalProbeInputsUnchanged": true,
+    "sourceFixtureUnchanged": true
+  },
+  "structuralReservation": {
+    "status": "open",
+    "originalScopePassed": false,
+    "originalCapture": {
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-01/capture/receipt.json",
+      "bytes": 160331,
+      "sha256": "b65d2c045add7bcf4823e0841c6e55c3ab86cb23bff161236a60fa398ec3fd62"
+    },
+    "mainFrameDimensions": {
+      "observedError": "internal",
+      "message": "The public game frame must be 64 × 64.",
+      "resumeError": "stale",
+      "validPhysicalReturns": 0
+    },
+    "mainFramePalette": {
+      "observedError": {
+        "code": "internal",
+        "message": "A public pixel is not a palette index."
+      },
+      "resumeError": {
+        "code": "stale",
+        "message": "The native solver session is no longer current."
+      },
+      "closeError": {
+        "code": "stale",
+        "message": "The native solver session is no longer current."
+      },
+      "validPhysicalReturns": 0
+    },
+    "packetIsolationQualification": "Both malformed main-frame probes also differ from their last animation frame. Exact error messages identify the prioritized dimension/palette validation path; no single-defect isolation is claimed.",
+    "recoveryQualified": false,
+    "productionFixApplied": false
+  },
+  "claims": {
+    "actualPublicService": true,
+    "actualPublishedWorker": true,
+    "actualProductionClientController": true,
+    "public64x64Packets": true,
+    "realServiceTickets": true,
+    "realGraphAcquisitions": true,
+    "observedOwnerRestoreCalls": false,
+    "wholeModelIdentity14versus32": false,
+    "fullV6Parity": false,
+    "officialPerformanceEligible": false,
+    "browserDomOrCsp": false,
+    "liveGameEngine": false,
+    "solvedLevel": false,
+    "fullOriginalScopePassed": false,
+    "recoverableMainFrameDimensionsOrPalette": false
+  },
+  "limitations": [
+    "Retained public presentations use zero padding from the original small component corpus to 64x64; the model limit changes from 14 to 32.",
+    "The reader validates actual recorded public RPCs and authoritative graph deltas. It never starts a runtime, worker, game or oracle.",
+    "Retained graph state and the ensuing questions are checked; internal restore method calls are not observed by this capture.",
+    "The final authorized question is inspected and closed without dispatch. A finished BranchRouting owner does not constrain every other native owner.",
+    "Node interthread environment adaptation is not a browser DOM, HTTP/CSP, real-game, complete-parity or performance qualification.",
+    "Previously instrumented native incomplete-acquisition evidence is not reclassified as an ordinary public-worker run.",
+    "The initial nine-recoverable-error scope failed on a 63-row main frame. It stays failed; v2 qualifies only seven recoverable refusals and the three positive sessions.",
+    "Malformed main-frame dimensions and palette are excluded from recovery qualification. The production exception policy is unchanged.",
+    "Repeated KnowledgeMemory values are stored once by SHA256 in gzip blobs. Compressed/raw bytes and lengths are verified before the original full graph is validated."
+  ],
+  "evidence": {
+    "capture": {
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/receipt.json",
+      "bytes": 628485,
+      "sha256": "e7ea3d4514f53ccca3b27ba86c6c451ea3489257eb1a0e10a3be60f7cd837cfb"
+    },
+    "qualification": {
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/qualify-02/review/qualification.json",
+      "bytes": 171784,
+      "sha256": "a29d611fb688bbe97fd4b69685e72e83d152b3c28772c5c30f4af0738c286abc"
+    },
+    "terminalPaletteProbe": {
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/terminal-probe-01/probe/receipt.json",
+      "bytes": 297452,
+      "sha256": "6466b051040f9d5487b261c25cb657826950c1e6b604fa9d50812237704e9be2"
+    },
+    "siteObservation": {
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/site-observation.json",
+      "bytes": 814,
+      "sha256": "99adac04a42014d0115127fa966270392579519dd757ed9e453e587b7977a29e"
+    },
+    "independentReview": {
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/final-independent-review.json",
+      "bytes": 9303,
+      "sha256": "cd3728fc90973f14c48becd481eca0339e1a25cfb70de94ec8c9fc6e7e260ec7"
+    }
+  },
+  "roadmap": {
+    "publishedConnectedEntries": 69,
+    "declaredEntries": 76,
+    "remainingEntries": 7,
+    "lot7": "7A/7B and Workshop0.61 followup delivered in declared scopes; LKEY closed",
+    "lot9": "chart_navigation, region_intervention, joint_channels pending; discrete_network outside76",
+    "lot11": "global consolidation open; six full-migration gates false",
+    "nextStep": "9A chart_navigation: freeze consumed source and independent cases, port owner/callback/acquisition/persistence/restoration using existing workflow."
+  },
+  "LKEY": "permanently_closed"
+}

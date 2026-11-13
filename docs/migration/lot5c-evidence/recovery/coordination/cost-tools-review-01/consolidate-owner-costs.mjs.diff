@@ -1,0 +1,189 @@
+--- before/consolidate-owner-costs.mjs
++++ after/consolidate-owner-costs.mjs
+@@ -20,6 +20,19 @@
+ const EVIDENCE = 'docs/migration/lot5c-evidence/';
+ const SELF = EVIDENCE + 'consolidate-owner-costs.mjs';
+ const REVIEWER = EVIDENCE + 'review-owner-costs.py';
++const DIRECT_SOURCE = 'docs/migration/lot5b-evidence/consolidate-owner-costs.mjs';
++const DOMAIN_REVIEW = EVIDENCE + 'recovery/coordination/cost-domain-source-review.json';
++const SOURCE_PATH_LIST = EVIDENCE + 'recovery/coordination/cost-source-evidence-paths.json';
++const ACQUISITION_DOMAIN = {
++  acquisitionMode: 'passive_nonadmitted_source_binding', contextAdmission: false,
++  core: null, methods: [], attentionMutation: false, nativeAcquisitionIncomplete: false,
++  recordOutsideOfficialBoundary: null,
++  recordAtOfficialBoundary: { status: 'scope_changed_preserving_conditional_methods',
++    evidence: ['before.observation_ref', 'after.observation_ref'] },
++  recordPayloadKeys: ['status', 'evidence'],
++  officialBoundaryPredicate: 'before.level_epoch != after.level_epoch or after.levels_completed > before.levels_completed',
++  factCoverage: 'One exact passive source fact for each actually captured nonnull boundary return; no fact for a null return. sourceCallIndices covers every acquired return; sourceEventCallIndices is exactly the ordered nonnull subset.',
++};
+ const HISTORICAL = 'scripts/compare-native-cost-cohorts.mjs';
+ const PAIR = 'scripts/compare-native-loop-costs.mjs';
+ const STAGES = ['session_elapsed', 'new_decision', 'known_prefix_service', 'known_prefix_request',
+@@ -139,6 +152,39 @@
+   return { actions: trial.actions, cycles: trial.cycles, levelsCompleted: trial.levelsCompleted,
+     requests: trial.requests.map(row => ({ type: row.type, sequence: row.sequence, kind: row.kind, actions: row.actions })),
+     observations: trial.observations, inspection: trial.inspection.map(row => ({ graphNodes: row.graphNodes })), final: trial.final };
++}
++function validateSourceCoverage(fixture, attribution) {
++  const expected = fixture.forms.flatMap(form => Array.from({ length: form.candidate.requests.length + form.candidate.inspection.length },
++    (_, index) => [form.case, form.form, index]));
++  for (const rows of [attribution.sourceFactCoverage, attribution.points]) {
++    assert.ok(Array.isArray(rows)); assert.deepEqual(rows.map(row => [row.case, row.form, row.pointIndex]), expected,
++      'Every captured request/inspection must have exactly one ordered coverage row');
++  }
++  for (const form of fixture.forms) {
++    const matches = row => row.case === form.case && row.form === form.form;
++    const rows = attribution.sourceFactCoverage.filter(matches), points = attribution.points.filter(matches), events = [];
++    const sequences = [...form.candidate.requests.map(row => row.sequence), ...form.candidate.inspection.map(() => form.candidate.actions)];
++    for (let index = 0; index < rows.length; index++) {
++      const row = rows[index], point = points[index], sequence = sequences[index];
++      assert.deepEqual(Object.keys(row).sort(), ['case', 'form', 'pointIndex', 'acquiredReturns', 'persistedSourceFacts', 'sourceCallIndices', 'sourceEventCallIndices'].sort());
++      assert.ok([row.pointIndex, point.pointIndex, sequence, point.sequence, row.acquiredReturns, row.persistedSourceFacts].every(value => Number.isSafeInteger(value) && value >= 0));
++      assert.equal(row.pointIndex, index); assert.equal(point.pointIndex, index);
++      assert.equal(row.acquiredReturns, sequence); assert.equal(point.sequence, sequence);
++      assert.deepEqual(row.sourceCallIndices, Array.from({ length: row.acquiredReturns }, (_, i) => i));
++      const current = point.officialBoundarySourceCalls;
++      assert.ok(Array.isArray(current) && current.every(value => Number.isSafeInteger(value) && value >= 0 && value < row.acquiredReturns));
++      assert.deepEqual(current, [...new Set(current)].sort((a, b) => a - b));
++      assert.ok(current.every(value => !events.includes(value)), 'Repeated boundary acquisition'); events.push(...current);
++      assert.deepEqual(events, [...new Set(events)].sort((a, b) => a - b));
++      assert.deepEqual(row.sourceEventCallIndices, events); assert.equal(row.persistedSourceFacts, events.length);
++      const facts = attribution.nodeAttributions.filter(item => matches(item) && item.pointIndex === index && item.category === 'observedBinding_source_event_fact');
++      assert.ok(facts.every(item => Number.isSafeInteger(item.sourceCallIndex) && item.sourceEventCount === 1 && item.officialBoundary === true
++        && item.sourceStatus === ACQUISITION_DOMAIN.recordAtOfficialBoundary.status));
++      assert.deepEqual(facts.map(item => item.sourceCallIndex).sort((a, b) => a - b), current,
++        'Coverage must equal the exact source event facts attributed at the same point');
++    }
++    assert.equal(rows.at(-1).acquiredReturns, form.candidate.actions);
++  }
+ }
+ function structuralExpectations(form) {
+   const before = form.baseline, after = form.candidate;
+@@ -230,7 +276,8 @@
+     compareQualifiedStructure({ ...form.baseline, final: omit(form.baseline.final, ['implementation']) },
+       { ...form.candidate, final: omit(form.candidate.final, ['implementation']) }, form, {});
+   }
+-  const requiredInputs = [fixture.captureTool, fixture.cases, ...contract.sourceEvidence], captureFinishes = [];
++  const requiredInputs = [fixture.captureTool, fixture.cases, contract.domainReview, contract.sourceEvidencePaths, ...contract.sourceEvidence], captureFinishes = [];
++  const domain = (await readEvidence(contract.domainReview.path)).value;
+   for (const role of ['baseline', 'candidate']) {
+     const capture = fixture.captures[role];
+     assert.deepEqual(Object.keys(capture).sort(), ['receipt', 'report']);
+@@ -240,6 +287,9 @@
+     const receipt = (await readEvidence(capture.receipt.path)).value;
+     assert.equal(receipt.schema, 'logos-engine.lot5c-owner-cost-functional-capture-receipt.v1');
+     assert.equal(receipt.status, 'captured_functional_structure'); assert.equal(receipt.role, role);
++    assert.equal(receipt.ownerId, EXPECTATION.ownerId); assert.equal(receipt.acquisitionMode, ACQUISITION_DOMAIN.acquisitionMode);
++    assert.deepEqual(receipt.domainReview, contract.domainReview);
++    for (const key of ['measuredCostSessions', 'timingReportsRead', 'timingMetricsProduced']) assert.equal(receipt[key], 0);
+     assert.equal(receipt.nativeDigest, fixture.nativeDigests[role]);
+     await verifyCaptureInput(receipt.nativeSourceBefore); await verifyCaptureInput(receipt.nativeSourceAfter);
+     assert.deepEqual(receipt.nativeSourceBefore, receipt.nativeSourceAfter);
+@@ -253,7 +303,7 @@
+     assert.ok(Array.isArray(receipt.inputsBefore) && receipt.inputsBefore.length > 0);
+     assert.equal(new Set(receipt.inputsBefore.map(record => record.path)).size, receipt.inputsBefore.length);
+     for (const record of receipt.inputsBefore) await verifyCaptureInput(record);
+-    for (const required of [receipt.cases, receipt.nativeSourceBefore]) {
++    for (const required of [receipt.cases, receipt.nativeSourceBefore, contract.domainReview, contract.sourceEvidencePaths]) {
+       assert.ok(receipt.inputsBefore.some(record => record.path === required.path && record.sha256 === required.sha256 && record.bytes === required.bytes),
+         'Functional capture must bind ' + required.path);
+     }
+@@ -261,7 +311,7 @@
+     assert.deepEqual(receipt.sessions.map(row => [row.case, row.form]), fixture.forms.map(row => [row.case, row.form]));
+     for (let i = 0; i < 4; i++) assert.deepEqual(receipt.sessions[i].shape, fixture.forms[i][role], 'Fixture must reproduce captured functional shape');
+     assert.equal(receipt.sessions.reduce((total, row) => total + row.shape.actions, 0), 31);
+-    assert.ok(instant(receipt.startedAt) <= instant(receipt.finishedAt) && instant(receipt.finishedAt) <= instant(fixture.recordedAt));
++    assert.ok(instant(domain.recordedAt) <= instant(receipt.startedAt) && instant(receipt.startedAt) <= instant(receipt.finishedAt) && instant(receipt.finishedAt) <= instant(fixture.recordedAt));
+     if (role === 'baseline') await pinBaselineAttributionInputs(receipt);
+     captureFinishes.push(instant(receipt.finishedAt)); requiredInputs.push(capture.report, capture.receipt);
+   }
+@@ -269,10 +319,13 @@
+   const attribution = (await readEvidence(fixture.attribution.path)).value;
+   assert.equal(attribution.schema, 'logos-engine.lot5c-owner-cost-structural-attribution.v1');
+   assert.equal(attribution.status, 'qualified_functional_structure'); assert.deepEqual(attribution.nativeDigests, declaration.nativeDigests);
++  assert.deepEqual(attribution.domainReview, contract.domainReview); assert.equal(attribution.acquisitionMode, ACQUISITION_DOMAIN.acquisitionMode);
++  assert.deepEqual(attribution.acceptedBoundaryReturn, ACQUISITION_DOMAIN.recordAtOfficialBoundary);
+   await verify(attribution.generator);
+   assert.ok(Number.isSafeInteger(attribution.checkedCount) && attribution.checkedCount > 0);
+   assert.equal(attribution.checkedCount, attribution.checks.length); assert.ok(attribution.checks.every(row => row.passed === true));
+   assert.ok(Array.isArray(attribution.nodeAttributions) && attribution.nodeAttributions.length > 0, 'A detailed causal node register is required');
++  validateSourceCoverage(fixture, attribution);
+   assert.ok(Array.isArray(attribution.inputs)); assert.equal(new Set(attribution.inputs.map(record => record.path)).size, attribution.inputs.length);
+   for (const record of attribution.inputs) await verifyAttributionInput(record);
+   for (const required of requiredInputs) {
+@@ -390,6 +443,20 @@
+   try { await access(output); throw new Error('Output already exists'); } catch (error) { if (error.code !== 'ENOENT') throw error; }
+   assert.equal(contract.schema, 'logos-engine.lot5c-owner-cost-contract.v2'); assert.equal(contract.lot, '5C');
+   assert.deepEqual(contract.structuralExpectation, EXPECTATION);
++  const directDerivation = await fingerprint(DIRECT_SOURCE);
++  assert.equal(directDerivation.sha256, 'cccc02b44a500292ac64a62379270e4003d3430f8ac0b68c81eb89609fffef95');
++  assert.equal(contract.generator.path, EVIDENCE + 'finalize-owner-cost-contract.py'); await verify(contract.generator);
++  assert.equal(contract.derivedFrom.path, 'docs/migration/lot5b-evidence/finalize-owner-cost-contract.py');
++  assert.equal(contract.derivedFrom.sha256, '58fd6f433ee6043c3cd24f3c763f4ede265c4b2e60374a9916807bccc68c2997'); await verify(contract.derivedFrom);
++  assert.equal(contract.domainReview.path, DOMAIN_REVIEW); await verify(contract.domainReview);
++  assert.equal(contract.sourceEvidencePaths.path, SOURCE_PATH_LIST); await verify(contract.sourceEvidencePaths);
++  assert.deepEqual(contract.acquisitionDomain, ACQUISITION_DOMAIN);
++  const domain = (await readEvidence(DOMAIN_REVIEW)).value, sourcePaths = (await readEvidence(SOURCE_PATH_LIST)).value;
++  assert.equal(domain.schema, 'logos-engine.lot5c.cost-domain-source-review.v1'); assert.equal(domain.status, 'superseded_before_capture');
++  for (const key of ['functionalCapturesStarted', 'costMeasurementsStarted', 'executionFailureClaimed']) assert.equal(domain[key], false);
++  assert.deepEqual(domain.revisedDomain, ACQUISITION_DOMAIN); assert.deepEqual(domain.sourceEvidencePaths, SOURCE_PATHS); assert.deepEqual(sourcePaths, SOURCE_PATHS);
++  assert.ok(domain.evidenceInputs.some(record => record.path === SOURCE_PATH_LIST && record.sha256 === contract.sourceEvidencePaths.sha256 && record.bytes === contract.sourceEvidencePaths.bytes));
++  for (const record of domain.evidenceInputs) await verify(record);
+   const perf = relative(ROOT, inside(contract.performanceDirectory));
+   // The chosen directory is bound by the declaration/contract and exclusive
+   // outputs below. The old 7A isolated-window name is not a 5C restriction.
+@@ -402,6 +469,7 @@
+   assert.equal(declaration.schema, 'logos-engine.native-cost-protocol-declaration.v2');
+   assert.equal(declaration.status, 'declared_before_official_window');
+   assert.equal(declaration.noOfficialWindowAtDeclaration, true);
++  assert.ok(instant(domain.recordedAt) <= instant(declaration.finalizedAt));
+   assert.deepEqual(declaration.ownerCostQualification, {
+     schema: 'logos-engine.lot5c-owner-cost-qualification.v1', contractPath: contractFile.fingerprint.path, tools: contract.tools,
+   });
+@@ -449,7 +517,7 @@
+   assert.notEqual(baseline.digest, candidate.digest);
+   assert.equal(archive.nativeSourceManifestDigest, candidate.digest); assert.equal(archive.baseCommit, declaration.candidate.sourceBaseCommit);
+   for (const [path, digest] of Object.entries(candidate.files)) assert.equal(archive.files[path], digest);
+-  sameMembers(contract.sourceEvidence.map(record => record.path), SOURCE_PATHS, 'Source expectation evidence');
++  assert.deepEqual(contract.sourceEvidence.map(record => record.path), SOURCE_PATHS, 'Canonical source expectation evidence');
+   for (const record of contract.sourceEvidence) { await verify(record); assert.equal(record.sha256, candidate.files[record.path]); }
+   await verify(contract.ownerInventory);
+   const inventory = (await readEvidence(contract.ownerInventory.path)).value;
+@@ -464,6 +532,10 @@
+     if (addition !== null) assert.ok(!before.includes(addition));
+     sameMembers(after, addition === null ? before : [...before, addition], 'Only the declared ' + key + ' addition is allowed');
+   }
++  assert.deepEqual(inventory.owners.candidate.filter(owner => owner !== EXPECTATION.ownerId), inventory.owners.baseline);
++  assert.deepEqual(inventory.sourceInventory.candidate.installations.filter(row => row.owner !== EXPECTATION.ownerId), inventory.sourceInventory.baseline.installations);
++  assert.deepEqual(inventory.sourceInventory.candidate.installations.filter(row => row.owner === EXPECTATION.ownerId),
++    [{ owner: EXPECTATION.ownerId, workflowId: EXPECTATION.programId, nodeId: 'program:' + EXPECTATION.programId }]);
+   const structuralFixture = await loadStructuralFixture(contract, declaration, { baseline, candidate });
+   const staticFile = await readEvidence(names('static-preflight.json')), staticReceipt = staticFile.value;
+   assert.equal(staticReceipt.status, 'static_inputs_checked');
+@@ -471,11 +543,12 @@
+   assert.equal(staticReceipt.checkedCount, staticReceipt.checks.length);
+   assert.deepEqual(staticReceipt.declaration, contract.declaration);
+   assert.deepEqual(staticReceipt.ownerCostContract, contractFile.fingerprint); assert.deepEqual(staticReceipt.ownerCostTools, contract.tools);
++  assert.deepEqual(staticReceipt.ownerSourceDomain, { domainReview: contract.domainReview, sourceEvidencePaths: contract.sourceEvidencePaths });
+   const readinessFile = await readEvidence(names('readiness.json')), readiness = readinessFile.value;
+   assert.equal(readiness.measurementAuthorized, true); assert.deepEqual(readiness.pendingRequirements, []);
+   assert.equal(readiness.nativeSourceDigest, candidate.digest);
+   for (const record of readiness.inputs) await verify(record);
+-  for (const record of [contractFile.fingerprint, staticFile.fingerprint, contract.declaration, ...Object.values(contract.tools)]) {
++  for (const record of [contractFile.fingerprint, staticFile.fingerprint, contract.declaration, contract.domainReview, contract.sourceEvidencePaths, ...Object.values(contract.tools)]) {
+     assert.ok(readiness.inputs.some(input => input.path === record.path && input.sha256 === record.sha256 && input.bytes === record.bytes), 'Readiness must bind ' + record.path);
+   }
+   const windowFile = await readEvidence(names('window.json')), window = windowFile.value;
+@@ -623,9 +696,10 @@
+   const derivedFrom = [await fingerprint(HISTORICAL), await fingerprint(PAIR)];
+   const report = {
+     schema: 'logos-engine.lot5c-owner-cost-consolidation.v2', status: 'qualified_consolidation_complete', recordedAt: new Date().toISOString(),
+-    generator: await fingerprint(SELF), derivedFrom, contract: contractFile.fingerprint, declaration: contract.declaration,
++    generator: await fingerprint(SELF), derivedFrom, directlyAdaptedFrom: directDerivation, contract: contractFile.fingerprint, declaration: contract.declaration,
+     inputs: { policy: policyFile.fingerprint, window: windowFile.fingerprint, readiness: readinessFile.fingerprint,
+       staticPreflight: staticFile.fingerprint, sourceInventory: contract.ownerInventory, sourceEvidence: contract.sourceEvidence,
++      domainReview: contract.domainReview, sourceEvidencePaths: contract.sourceEvidencePaths,
+       structuralFixture: contract.structuralFixture, structuralAttribution: structuralFixture.attribution,
+       cohorts: cohorts.map(c => ({ id: c.id, baseline: c.baseline.fingerprint, after: c.after.fingerprint, originalComparison: c.comparison.fingerprint })) },
+     historicalStrict: { passed: false, status: 'failed_work_metadata', failureReceipt: strictFile.fingerprint, failureLog: strict.log, tool: strictTool },

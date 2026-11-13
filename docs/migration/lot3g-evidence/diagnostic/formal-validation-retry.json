@@ -1,0 +1,37 @@
+{
+  "schema": "logos-engine.framed-window-formal-validation-retry.v1",
+  "recordedAt": "2026-11-10T12:07:25.597021-03:00",
+  "initial": {
+    "path": "docs/migration/lot3g-evidence/final/validation/delta-tests-run.json",
+    "bytes": 111515,
+    "sha256": "23f83e764f9701b62cf0de2a718feaa4b8505d15b29944b1a125d6b105e87fd9"
+  },
+  "retainedInitialLog": {
+    "path": "docs/migration/lot3g-evidence/final/validation/delta-tests-output.log.gz",
+    "bytes": 71849,
+    "sha256": "e246e220e0fd07e16ae3636b923c813e463be015e8d63007adf31d150a2c8f93"
+  },
+  "initialCounts": {
+    "tests": 2566,
+    "pass": 2564,
+    "fail": 2,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "cause": "Two expected registry counts/lists remained at0.47: window shared owner count13 and51/76 entries. The new source entry legitimately adds one shared window owner alias and one connected entry. No native behavior, test case, threshold or oracle was removed.",
+  "changedTests": [
+    "tests/v6-coupled-pair-planning.test.ts",
+    "tests/v6-radial-port-integration.test.ts"
+  ],
+  "corrections": "Expect14 shared window aliases; append FramedWindow in exact source order; map its alias; expect18/21 windows and52/76 total.",
+  "nativeSourceUnchanged": true,
+  "nativeDigest": "fce8dfc3e6861742649203161b3bf55b6480462e44c77d8015453ce55b724a26",
+  "retryDirectory": "docs/migration/lot3g-evidence/final/revalidated",
+  "reusedBuildReceipt": {
+    "path": "docs/migration/lot3g-evidence/final/validation/checks-run.json",
+    "bytes": 73581,
+    "sha256": "d0d50ff43fa606579f9c0fc1c6941b8632512a3c0d5ac25678ff2a74302365e4"
+  },
+  "qualification": "The original failed receipt and output remain at their original paths. Revalidation re-runs all68 declared test files with corrected registry expectations. The existing successful build/check receipt is copied byte-identically because no build input changed; no second build is claimed."
+}

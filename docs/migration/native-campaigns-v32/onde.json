@@ -1,0 +1,5071 @@
+{
+  "schema": "logos-engine.v6.integrated-game-campaign.v1",
+  "game": "ONDE",
+  "targetLevels": 6,
+  "status": "passed",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "budget": {
+    "levelActionCaps": [
+      600,
+      600,
+      600,
+      600,
+      600,
+      600
+    ],
+    "activeSecondsPerLevel": 360,
+    "clock": "real active compute and native execution"
+  },
+  "source": {
+    "digest": "b72de816a5c707ef0b41515a22fcd52f1ffd797ab006d9f5daa39f15ae2e6710",
+    "fileCount": 107,
+    "files": {
+      "src/logos-engine/bounded-weak-cache.ts": "b04ce3e0a2c51044840ee45778d5e73f4cf445c90524ed5977865fe24b84d39a",
+      "src/logos-engine/bundle.ts": "e632ee85571bc3e4ab226bb3e8ebe4f67b178400fe16faedd2eb26bcff332a85",
+      "src/logos-engine/canonical.ts": "ad2dcb4b6da29e28b0d139aee32aaf2849a396e6d11514a236324f54c9fb6d65",
+      "src/logos-engine/create-runtime.ts": "56c62442bb09bdcda9fd388b5ee2555ff56b7771335208c1b930c304dc901a77",
+      "src/logos-engine/interpreter.ts": "2cbbdebec1e2c0c281eaa1ce3353ce33e970d90274f5fa8d4301b3684d87718e",
+      "src/logos-engine/ir.ts": "136370dd6c5ecd957d1a48261033a8945375e13b2eb0070e7922c997e04cc9d5",
+      "src/logos-engine/kernel.ts": "9c7fb668e85bf101f88de439ff43b42bba9566917a2c2b8fb8f13e2ee00e247b",
+      "src/logos-engine/lab-protocol.ts": "d2cc13ebc9c0b9027ca4d279e7f0fdb193714a5d7023473cbb1a2cdfdcbdced1",
+      "src/logos-engine/lab-worker.ts": "28912219793e9d3f5183a30c0ff5c1430682a8e527bba7f45c351222b3e8c433",
+      "src/logos-engine/public-observer.ts": "be263a0f75b2b34d73d9e11a38d2a71ec4c2b443bcca4595496335b5f8103851",
+      "src/logos-engine/v6-animated-contact.ts": "20cc29f5300ca1cfcbe791cb12cbf46d97e6028eb2101578216d8da1b77bf600",
+      "src/logos-engine/v6-arrival-mechanics.ts": "b5199c91625a8b5e72de4965292e4adfcf3e9108a9afbf22fc7c47ab605c753e",
+      "src/logos-engine/v6-attention-memory.ts": "c687af1934bea6ad573783bd2a6fbd88d1c669051a715d412d7c3346098589ad",
+      "src/logos-engine/v6-band-transfer.ts": "9a418ef2fe0563f34845e02fd182ad0414afde093bb1fcc971641a578fb800f8",
+      "src/logos-engine/v6-cavity-clock.ts": "b3da03b69e1655e98094ecef39f12e59bac353bd15a7aa49affcb31f0ca539e2",
+      "src/logos-engine/v6-cavity-kinematics.ts": "a72afe56c453515572478bd86952403391299e0f63b0ee942dec4e2157f2345e",
+      "src/logos-engine/v6-cavity-measurements.ts": "671feab5e9eda5dba9be4ead65345d6f43f5b6b8dc01b9d5d73dd4aef06302a9",
+      "src/logos-engine/v6-code-program.ts": "dd2de515b02a331b812608b9cbf69b5ba55856e83773a070e471d7452490f70e",
+      "src/logos-engine/v6-component-matches.ts": "41d4674f343e5a1ba3d4f9e368e238ffd40c67ef5e41e74f9def8ffd6e2a739c",
+      "src/logos-engine/v6-composition-engine.ts": "c259548ad4b74b6aa9eaa589da3856469b73c4e1e1104ccfac55f00e8e1ead56",
+      "src/logos-engine/v6-composition-memory.ts": "567e69aaf134217c15101c3fc4b732df57fabeb3f51156193a82acba8d9a4cc5",
+      "src/logos-engine/v6-configured-arrivals.ts": "85228ebf0f5aaa914be9864bc08de4d7064c020f9beb2388e5aa1571a92b11d7",
+      "src/logos-engine/v6-constellation-cover.ts": "a7c1ac659e38ced3628a614e90c452c82b62b02cc9b6208aa651a7ffa6ab7e95",
+      "src/logos-engine/v6-containment.ts": "db66da09eecc18636440007b9f54ee49266e5aa018082389bcab2834376be21a",
+      "src/logos-engine/v6-contextual-compartments.ts": "07f4e9a56a8c51a75aba8d487916e6fe1a7b350872f3138223f9f1629a047687",
+      "src/logos-engine/v6-coupled-displays.ts": "c29561fab41c12481e41e3b2e51543b920f3ab87139840ed07a677aab053de72",
+      "src/logos-engine/v6-derive.ts": "4aee722385293266f34f95bca0ab57717df1aceb1b093cce1646fc56610a4189",
+      "src/logos-engine/v6-drm-projector.ts": "d33803653b1c39ff3c38169e0a27a0d5f385e08d1e035845483b4a5b53fa598b",
+      "src/logos-engine/v6-effect-access.ts": "7972704e27c074c8bfbc4a6db1f5f43cf04a08e2dde9da50b092ffbf41e61ec0",
+      "src/logos-engine/v6-factored-return.ts": "a21a0c1adf82768fa31ef3758ec8dbedc509f4b4f9798fa05d6d5a8885b4143b",
+      "src/logos-engine/v6-field-constraints.ts": "b7f5d309a44001ff8cfc9c292f04229f7532daa41da2cd63340fdfd57edb4fa4",
+      "src/logos-engine/v6-fixed-origin.ts": "c0ed190865b69436da80ba005775467917e826bb1f910c23c2a33f2c2fb547a6",
+      "src/logos-engine/v6-fixed-program-calculation.ts": "21e6cfeb51f1ebc8eab82dad568fc2f65c702d398279a5629118fd3fd83b5c82",
+      "src/logos-engine/v6-geometric-scene.ts": "2c2876afbbf615ab4b1119fcfbb484cfab22f95951ec774b1596c1562da68aba",
+      "src/logos-engine/v6-goal-access.ts": "1a52b96bf2ed27170c1c74090a814e9d955329d6e65d48d89bf53f08c532820e",
+      "src/logos-engine/v6-hash.ts": "6b86db7b533d55da900a3c65a06ec1e18547180245b3e3a2eaa837be09c669f5",
+      "src/logos-engine/v6-information-goals.ts": "7ad4f42e977c1e8b997c23d01340ec51a5b58cafb3494853de1b5987a59031b8",
+      "src/logos-engine/v6-invited-reduction.ts": "a3433583cbd83d668e736e781c8730f27cc7c337aca4ef87dd3bc22d501115c9",
+      "src/logos-engine/v6-joint-transport.ts": "8cfc3ec9ad1185d9ab2ee43e00baebcdd5f8bb4ff699f7ecd423d7cf4b7dd710",
+      "src/logos-engine/v6-knowledge-store.ts": "e0c6ad4b251719f30668e572cf72a6253fce247ad8de3dae3afd824ef7ca4ffe",
+      "src/logos-engine/v6-metric-composition.ts": "1fcfcfe780ef6599756785392159040cc7f2acfa6356376275778a58e086018d",
+      "src/logos-engine/v6-metric-stack-mechanics.ts": "a114e116a7c401f7ddfde803521990468c825684888b491c61d697c9712bb121",
+      "src/logos-engine/v6-morphology-policy.ts": "a370efb8581356c2dbdb5f322df29ba9fa7a656429ecdb7d629f57b693c97be6",
+      "src/logos-engine/v6-native-authority.ts": "d57fdde978070cf021037fb5aa73755b172b4c5c915e6dd104ad8fd202b24897",
+      "src/logos-engine/v6-native-caller.ts": "107e7cd8d8aad7ccb7205be98d3f28abc9efe3f279861f10b8387e3b5bc992db",
+      "src/logos-engine/v6-native-interface-families.ts": "1434f49f81f5b6c8707db2dafe4f97a2dff7b54cb1b2505064d085d8bb309fe0",
+      "src/logos-engine/v6-native-observer.ts": "87dffa7cf8d7f5b8f645d29ba2996844a604fb846286378503fd16a911c54882",
+      "src/logos-engine/v6-native-owned.ts": "0ea8f174f0af66b3a37cf3bacf47ef8a9e2f7b26f43b645e955b0a5a23130ada",
+      "src/logos-engine/v6-native-runtime.ts": "c16ad89afa8a336936aa00aefac9305aa35403f5ce30dfc12cad8b01c23d5ceb",
+      "src/logos-engine/v6-native-state-graph.ts": "ffeb654334e1c809785ca8c1920fb1e39a4b848265abcaade97406120bc93d5d",
+      "src/logos-engine/v6-native-types.ts": "8581f225f15dec76c577edf7d1f22716b36224b1c59a31c2bd2ddee49eb6f9ff",
+      "src/logos-engine/v6-observed-derivations.ts": "c48b5601f0895c8cad913690a9216138ec08985aee4e7c7b1e7d0189964f05d6",
+      "src/logos-engine/v6-observed-frontier.ts": "1812e3b6209271420a776d3ff823090488cef4ab19b08f173d2b3a80a2e2c5e0",
+      "src/logos-engine/v6-occurrence-program-observer.ts": "9a33f3378541c94b92e41d6de274d1a14d4c00d9334e6b6617ab81b3ab92f0e5",
+      "src/logos-engine/v6-occurrence-recall.ts": "3c11392907c3143ca4621e025dc7eec66adb1716e349a8ae809c54e284f1399d",
+      "src/logos-engine/v6-occurrence-scene.ts": "ea76d01aa56f560c0ae4831ca8901ed5ee0a7d064dbc1590b547aaaebfc5447f",
+      "src/logos-engine/v6-operations.ts": "4aad959893595a1844721b93ec8897479536f95ccfa890be045656fa1e96fa06",
+      "src/logos-engine/v6-orbit-constraints.ts": "408a175132ab9869db4150dcecabb20d6eafeccfd301f12294eb6de1df57cc5f",
+      "src/logos-engine/v6-ordered-support.ts": "899d3784ac80ad83e113c8e0ad44a1b380bec5d5c6b552b66a1b7c3543b03c79",
+      "src/logos-engine/v6-oriented-coupling.ts": "87b682dab1406d4bcef59095bd3422509f3d13338f81ffc9c1972db6c0e682b8",
+      "src/logos-engine/v6-oriented-handoff-mechanics.ts": "1e0e1392560f7afca9a7988e994da2e321e2ea2dfb8a0fcda2c67095b616b0ca",
+      "src/logos-engine/v6-passage-options.ts": "bf4691d0447e39263bc7f793f5b8577a63e41574a48a6a426fd5e6f3449e8d36",
+      "src/logos-engine/v6-periodic-cell-grids.ts": "20c1b31854eb82118777f213fe4f7478ed3a373a2b20e82d4caef54a7ddb4d70",
+      "src/logos-engine/v6-periodic-sums.ts": "51e3932eb2f0fc141311f8d2bd31d9a49e34c95cc12085e24a37966305bff48f",
+      "src/logos-engine/v6-point-contrasts.ts": "3984da390831630edcc8dcb78e5178d92d8d78df2941d63cd6d8409e0fd2ae90",
+      "src/logos-engine/v6-point-set.ts": "93ed8442779a022e5fd6534ea6eb140c81f08c2f010e2ad1f22a270a70af4268",
+      "src/logos-engine/v6-port-assembly.ts": "fd41bf045465287af77c5bb68497e79c97357250501bd75cfe62e166f5b5694d",
+      "src/logos-engine/v6-prospective-contact.ts": "6e9028332c46b3baf43a3cc78c961845df6f38b010a6dc68bbe0ece9878076fb",
+      "src/logos-engine/v6-ray-capture-domain.ts": "7996e8baf69eaa1748af50c45489f5cd66de7a12a3739731bfd19679267debb5",
+      "src/logos-engine/v6-reasoning-memory.ts": "b55c186c99636f28c9e6e9c657b9bb50892eac06a3306be197503188069d901a",
+      "src/logos-engine/v6-reflected-cover.ts": "55977d7424fff5e27a4ab70da4afc97992c169fda199030856c0f63111d07a8e",
+      "src/logos-engine/v6-reflection-audit.ts": "3be81a699abc466413d479aaf92afc536f7f34612b4efa3f3bec1a40cc51e43f",
+      "src/logos-engine/v6-rigid-marker-pose.ts": "8c1f67959c4f17f51333a0eec267697332257906649e74f5dfed11a9c1371daf",
+      "src/logos-engine/v6-scored-rewrite.ts": "55969fca1910b4db246392bc80262f12de1328c50938ed31aa1ee5a2b48895ac",
+      "src/logos-engine/v6-sliding-cavity.ts": "93d614ecb1e058cba26739be9d44c2f115a51ad134055c851351a8929d6134e2",
+      "src/logos-engine/v6-slot-substitution.ts": "d9cbf60eab3d9e8672ddb5dd47b3eb8d02faccbb671b011de72a569959550424",
+      "src/logos-engine/v6-src-program.ts": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77",
+      "src/logos-engine/v6-subset-diagnosis.ts": "ba72f80a8ba613cc3590d8c47881555b12a048ba2379d5d5bbaa569f83af0e25",
+      "src/logos-engine/v6-support-measurements.ts": "553f8f62503385bb7364b87923962fa8dd3776c8eab71d2352f765667a33012e",
+      "src/logos-engine/v6-support-navigation-domain.ts": "5229223b7c4a30609d933fe90d379529192599c59a915eb47e279cd0eebde324",
+      "src/logos-engine/v6-support-navigation.ts": "13c9baea9395c4b82d7512e79b57e15aa59d2d04460e16ba3087a57c611c769a",
+      "src/logos-engine/v6-surface-program.ts": "705aae0acc4e85ab52e8255fe0b0705a3258a2dfa03dfd2f89d00af9351821e1",
+      "src/logos-engine/v6-target-binding.ts": "c3767ea64e21422a55b5b80ed3830171805f6bfda7db5b3a81d094d344b6eb00",
+      "src/logos-engine/v6-target-method.ts": "bbee49ae3ad55ecc07148ffbb131e7f9ac8ce0847a0b1bbd6747805a992de7dd",
+      "src/logos-engine/v6-transient-contact-memory.ts": "b824a89828e2601888f266e711a03becd7694ad2eacb7198535a27f0e0d6239f",
+      "src/logos-engine/v6-transient-measurements.ts": "6c363563d1e588504dffa3eb6667ea1bbbb69d91ef0177ab52b1c09fcf5ef0d0",
+      "src/logos-engine/v6-transition-learning.ts": "182c8db11fd7259395d23e1fd5fb87fbfb92f61f0baf5835183849a45ce6914f",
+      "src/logos-engine/v6-view-frontier.ts": "b2024b93cf43f5426c3d75e90ba452205ece31c86f3bda55960627e5f00d7be3",
+      "src/logos-engine/v6-visual-sequences.ts": "64927ccf8622b5c863bec64bd603f99ae096b12f6687d7548df4c19073186196",
+      "src/logos-engine/v6-word-interface.ts": "039a0a2984a9c036c29f5865b5e8dc9281d836873b064f700965485b21e6ab1a",
+      "src/logos-engine/v6/animated-contact-rules.json": "5bca3105873cd5617d017d29dc775d6ffe3b8ba9386f681b712cf16131e7bc06",
+      "src/logos-engine/v6/catalog.json": "fce784714987c370c604a09d4622ef39665948b2365c656cde80295c6c94c939",
+      "src/logos-engine/v6/frontier-policy.json": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f",
+      "src/logos-engine/v6/programs.json": "2accc1e89dda42d662fa4a2051345bc8ce7e146c93be307479538c68ab364a28",
+      "src/logos-engine/v7-runtime.ts": "fc87928c00a6cda1e3bb7d22d5411135314f2c7f4676e4495cc5e8929624729b",
+      "src/runtime/browser-games.ts": "4127cafea3717e627885f318eac9650452b7cea8dfd267f945a2af56c6e895da",
+      "src/runtime/contracts.ts": "7e3bbd9e7951b1249622961bc801bdf789fb3538a85a7fb4fdc4befccf0e48bc",
+      "src/runtime/game-worker.ts": "52f62b68c23b2c70c2b18461da042bf08f7fe44f7be068d5fc0e3e2942ac7159",
+      "src/runtime/sra-agent-protocol.ts": "0c755574e90b79202147e98c150c7167386c121b16ac8b554d98ed372e3cd131",
+      "src/runtime/sra-agent-service.ts": "e2c65fd373784b1757f04ba7439041e9f49e85e52bfeb0da80787bddaa1c8e60",
+      "src/runtime/sra-agent-worker.ts": "fa3efa5f1ff5d82dd0ad7b599961e15c68c36512e6085d7e5d7f4ea1734156a8",
+      "src/runtime/sra-agent.ts": "1127bad3109f1450e9a5b0939f2fa7d204989361229892c72e05831ecb56d64f",
+      "src/runtime/v6-agent-client.ts": "6907afe159d13966a77fe1e017bca093e8dda6a9108ace8d9f2a9a3fd356b9dd",
+      "src/runtime/v6-agent-protocol.ts": "597b4d4ab19882a37048e1fa9caeaebea2112b66e25f6294f428bb7916818aa4",
+      "src/runtime/v6-agent-service.ts": "9a2ab7498f0c7ddeb9d3372dd14cf951e817fef42701373f377e3e7263d66780",
+      "src/runtime/v6-agent-worker.ts": "dc46fd485102080ee0fa41b559760769f2f707c7adaf8768a0b7306f308407fc",
+      "src/runtime/v6-agent.ts": "cb01061771a29a2ad59b02560431be8adc8dae0ba3933a81358ba29dcb7789af"
+    }
+  },
+  "gameAssets": {
+    "custom-games.zip": "44d108fe4feed3ce0c9587e90f071876b13730af8136cd54cbfa5c1562d87822",
+    "official-games.zip": "90b5aeaee21ec11285799287445b33d3c19f4ea4894a8a60964117f7757f59ed",
+    "game_bridge.py": "cc9df3ea6eae0057898fa01fd949322c6af0b481030f4c271b9a719f0a07983e",
+    "official_adapter.py": "efead273b89ffe8cf595e41b9f4b25a6106e6cb6e5a7d1013ebc887cfc646837",
+    "custom_level_navigation.py": "8cc1716619aff08915135ebfa093fc305b211e28fabdff2c027d994d84f82c9b"
+  },
+  "actions": [
+    {
+      "sequence": 1,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 1,
+      "completedBefore": 0,
+      "levelAfter": 1,
+      "completedAfter": 0,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "01bc99d8490de8c1e58719229b11b3c054033c3ee95cb3cca77a4deabaa24e2f",
+      "frameHash": "b973a4d40f5ff5c0",
+      "animationFrames": 3,
+      "decisionRevision": 1,
+      "actionIndex": 0,
+      "family": "periodic_sums",
+      "executionMs": 9.02455000000009
+    },
+    {
+      "sequence": 2,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 1,
+      "completedBefore": 0,
+      "levelAfter": 2,
+      "completedAfter": 1,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "72fd74cebdbc33a44748da932fe55d36ad9d4f4ea14b3a18267d573deaae199e",
+      "frameHash": "70b7b529acdd9700",
+      "animationFrames": 28,
+      "decisionRevision": 2,
+      "actionIndex": 0,
+      "family": "periodic_sums",
+      "executionMs": 52.91125899999861
+    },
+    {
+      "sequence": 3,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 2,
+      "completedBefore": 1,
+      "levelAfter": 2,
+      "completedAfter": 1,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "8efe832820a0d6d94e915ece4d43a3df71317a44bb514569af1428936902f8b0",
+      "frameHash": "1efcb9610b69568f",
+      "animationFrames": 3,
+      "decisionRevision": 3,
+      "actionIndex": 0,
+      "family": "periodic_sums",
+      "executionMs": 10.812518999999156
+    },
+    {
+      "sequence": 4,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 4,
+          "y": 32
+        }
+      },
+      "levelBefore": 2,
+      "completedBefore": 1,
+      "levelAfter": 2,
+      "completedAfter": 1,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "ea96a1769ea077a03c666928931a998c753e3cc635cfd6909a99d8876dad9f0b",
+      "frameHash": "f77051e0553196a5",
+      "animationFrames": 1,
+      "decisionRevision": 3,
+      "actionIndex": 1,
+      "family": "periodic_sums",
+      "executionMs": 4.926402999999482
+    },
+    {
+      "sequence": 5,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 2,
+      "completedBefore": 1,
+      "levelAfter": 2,
+      "completedAfter": 1,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "4a5b586a071bf84efc2b1ba2541f49dcf32a5398be9e61bb1af085ef8eafb78e",
+      "frameHash": "5984eee031c8290d",
+      "animationFrames": 3,
+      "decisionRevision": 5,
+      "actionIndex": 0,
+      "family": "periodic_sums",
+      "executionMs": 10.375761999999668
+    },
+    {
+      "sequence": 6,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 2,
+      "completedBefore": 1,
+      "levelAfter": 3,
+      "completedAfter": 2,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "54ebf2c24ac9fae6564f5d4a8e7050d73b6d855bc35b35c5208c5cc8e6dd2d8b",
+      "frameHash": "a77f36419054576e",
+      "animationFrames": 28,
+      "decisionRevision": 5,
+      "actionIndex": 1,
+      "family": "periodic_sums",
+      "executionMs": 48.3194739999999
+    },
+    {
+      "sequence": 7,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 3,
+      "completedBefore": 2,
+      "levelAfter": 3,
+      "completedAfter": 2,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "54ab433c1882f279e61c366b5643f54b24fff58906db1f231180052c31d6298d",
+      "frameHash": "51b37679e8c10c4b",
+      "animationFrames": 3,
+      "decisionRevision": 7,
+      "actionIndex": 0,
+      "family": "periodic_sums",
+      "executionMs": 5.8461739999984275
+    },
+    {
+      "sequence": 8,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 3,
+      "completedBefore": 2,
+      "levelAfter": 3,
+      "completedAfter": 2,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "465e328de3895f16215ec84f1605dccc7843bf851b7a220b831eb4c44aeccc02",
+      "frameHash": "cdb5931d3fc343cd",
+      "animationFrames": 3,
+      "decisionRevision": 7,
+      "actionIndex": 1,
+      "family": "periodic_sums",
+      "executionMs": 6.721772000000783
+    },
+    {
+      "sequence": 9,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 6,
+          "y": 32
+        }
+      },
+      "levelBefore": 3,
+      "completedBefore": 2,
+      "levelAfter": 3,
+      "completedAfter": 2,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "47c098e8b86203624f373011d4d393a0f8fddef858d235f5beb348b4e4588dd6",
+      "frameHash": "8e813354e8e3f972",
+      "animationFrames": 1,
+      "decisionRevision": 7,
+      "actionIndex": 2,
+      "family": "periodic_sums",
+      "executionMs": 4.3761669999985315
+    },
+    {
+      "sequence": 10,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 3,
+      "completedBefore": 2,
+      "levelAfter": 3,
+      "completedAfter": 2,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "3a70a23c022928833302ac236043468aa2f2ca9840bdadf731153552782f9d70",
+      "frameHash": "f7edff814d26fb85",
+      "animationFrames": 3,
+      "decisionRevision": 7,
+      "actionIndex": 3,
+      "family": "periodic_sums",
+      "executionMs": 5.628399000001082
+    },
+    {
+      "sequence": 11,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 3,
+      "completedBefore": 2,
+      "levelAfter": 3,
+      "completedAfter": 2,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "c64e5a52b11331000d723198d1b3e27637b3e955fa1963d4ca5098cdf9b294c3",
+      "frameHash": "c018aba4def47b6d",
+      "animationFrames": 3,
+      "decisionRevision": 7,
+      "actionIndex": 4,
+      "family": "periodic_sums",
+      "executionMs": 7.50923899999907
+    },
+    {
+      "sequence": 12,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 3,
+      "completedBefore": 2,
+      "levelAfter": 3,
+      "completedAfter": 2,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "165c8eb63296b7fe2bc777667d96a9667cfe0b809a1b19379d9c4043ce48c33a",
+      "frameHash": "763b9e18f3319eb7",
+      "animationFrames": 3,
+      "decisionRevision": 7,
+      "actionIndex": 5,
+      "family": "periodic_sums",
+      "executionMs": 5.809078999998746
+    },
+    {
+      "sequence": 13,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 3,
+      "completedBefore": 2,
+      "levelAfter": 3,
+      "completedAfter": 2,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "eb9fce30488866c6c71178aa5f28132d054b3c588930c0feebfeddfd595900fc",
+      "frameHash": "7a48275fbe1fbff1",
+      "animationFrames": 3,
+      "decisionRevision": 7,
+      "actionIndex": 6,
+      "family": "periodic_sums",
+      "executionMs": 7.354103000001487
+    },
+    {
+      "sequence": 14,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 3,
+      "completedBefore": 2,
+      "levelAfter": 3,
+      "completedAfter": 2,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "d2e08656c8b50b25c999f6dd71ac117c8cb6a876a835cdb83b222fb7294f293d",
+      "frameHash": "4314cb4746103b2c",
+      "animationFrames": 3,
+      "decisionRevision": 7,
+      "actionIndex": 7,
+      "family": "periodic_sums",
+      "executionMs": 5.442596000000776
+    },
+    {
+      "sequence": 15,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 3,
+      "completedBefore": 2,
+      "levelAfter": 3,
+      "completedAfter": 2,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "21fa421747cccef01d14f984f52b080830be4b5a00e3265247cb3e52988d1a81",
+      "frameHash": "b9fd8199a78dae7e",
+      "animationFrames": 3,
+      "decisionRevision": 7,
+      "actionIndex": 8,
+      "family": "periodic_sums",
+      "executionMs": 5.410529000000679
+    },
+    {
+      "sequence": 16,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 3,
+      "completedBefore": 2,
+      "levelAfter": 3,
+      "completedAfter": 2,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "981a0f724e9870978c49ba720be927a892a7579c4c51ff27eb185e9594b4d6b3",
+      "frameHash": "caa482e284699d56",
+      "animationFrames": 3,
+      "decisionRevision": 7,
+      "actionIndex": 9,
+      "family": "periodic_sums",
+      "executionMs": 6.678604000000632
+    },
+    {
+      "sequence": 17,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 3,
+      "completedBefore": 2,
+      "levelAfter": 3,
+      "completedAfter": 2,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "77f37ed4dddb297188be39253f3ebfa1be7f5da89037feb93b2b19aefc04bcde",
+      "frameHash": "924f2cc1491bb98d",
+      "animationFrames": 3,
+      "decisionRevision": 7,
+      "actionIndex": 10,
+      "family": "periodic_sums",
+      "executionMs": 6.658909000001586
+    },
+    {
+      "sequence": 18,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 3,
+      "completedBefore": 2,
+      "levelAfter": 4,
+      "completedAfter": 3,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "31b67da65047a902b702b30e87da5f3d173045b74728eba17704739c4843dfd4",
+      "frameHash": "20af907d4c710e45",
+      "animationFrames": 28,
+      "decisionRevision": 7,
+      "actionIndex": 11,
+      "family": "periodic_sums",
+      "executionMs": 37.05759300000136
+    },
+    {
+      "sequence": 19,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 4,
+      "completedBefore": 3,
+      "levelAfter": 4,
+      "completedAfter": 3,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "d91ed43b2af384fc3fb24d12d06cf24bd7a9fc80e992b432d79718a407f30a57",
+      "frameHash": "8cf46824d3adb99b",
+      "animationFrames": 3,
+      "decisionRevision": 19,
+      "actionIndex": 0,
+      "family": "periodic_sums",
+      "executionMs": 10.394006000002264
+    },
+    {
+      "sequence": 20,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 4,
+      "completedBefore": 3,
+      "levelAfter": 4,
+      "completedAfter": 3,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "a5f30622baa37ff3644dc926c87871c8ef028a4a39a18ea3032208fc670ffc8e",
+      "frameHash": "ee22c675b9b1a128",
+      "animationFrames": 3,
+      "decisionRevision": 19,
+      "actionIndex": 1,
+      "family": "periodic_sums",
+      "executionMs": 7.341091999998753
+    },
+    {
+      "sequence": 21,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 4,
+          "y": 34
+        }
+      },
+      "levelBefore": 4,
+      "completedBefore": 3,
+      "levelAfter": 4,
+      "completedAfter": 3,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "3594163a837ad3a78ae62cd8a9d7586162f8c7dd4747a1e3caff75f2994c191e",
+      "frameHash": "59a1a16fd36dd610",
+      "animationFrames": 1,
+      "decisionRevision": 19,
+      "actionIndex": 2,
+      "family": "periodic_sums",
+      "executionMs": 3.809026000002632
+    },
+    {
+      "sequence": 22,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 4,
+      "completedBefore": 3,
+      "levelAfter": 4,
+      "completedAfter": 3,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "acaaba74f202af9b0bc5eff5190f3bd8465817bdf4c5ac62b81f3fe1844f81e1",
+      "frameHash": "a584bf2e2a19b7d0",
+      "animationFrames": 3,
+      "decisionRevision": 19,
+      "actionIndex": 3,
+      "family": "periodic_sums",
+      "executionMs": 6.11113800000021
+    },
+    {
+      "sequence": 23,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 4,
+      "completedBefore": 3,
+      "levelAfter": 4,
+      "completedAfter": 3,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "717989730e4f8a0d1e84f81f6c86f8e3f768927ebfd227e98e43f9f1ff3361e2",
+      "frameHash": "47e1e0e054f7252f",
+      "animationFrames": 3,
+      "decisionRevision": 19,
+      "actionIndex": 4,
+      "family": "periodic_sums",
+      "executionMs": 9.253576000002795
+    },
+    {
+      "sequence": 24,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 4,
+      "completedBefore": 3,
+      "levelAfter": 5,
+      "completedAfter": 4,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "d3bac50ff284caf153aef777bc65670d0993042de3d3bcb289cfaefe899469bd",
+      "frameHash": "7afeb8e3c4fa8aed",
+      "animationFrames": 28,
+      "decisionRevision": 19,
+      "actionIndex": 5,
+      "family": "periodic_sums",
+      "executionMs": 60.234495000004245
+    },
+    {
+      "sequence": 25,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 5,
+      "completedBefore": 4,
+      "levelAfter": 5,
+      "completedAfter": 4,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "5a8d300cd7e4e4afa2975bc57e00fb31939df7fe5587b4a0e749358658241c51",
+      "frameHash": "4d8d3d75f6351575",
+      "animationFrames": 3,
+      "decisionRevision": 25,
+      "actionIndex": 0,
+      "family": "periodic_sums",
+      "executionMs": 24.644374999996217
+    },
+    {
+      "sequence": 26,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 5,
+      "completedBefore": 4,
+      "levelAfter": 5,
+      "completedAfter": 4,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "4e8bc3d651c50a01e95d9a76dfa70562e8b8501693829be39eb933993de660f8",
+      "frameHash": "a8b42bae81226f61",
+      "animationFrames": 3,
+      "decisionRevision": 25,
+      "actionIndex": 1,
+      "family": "periodic_sums",
+      "executionMs": 11.813348000003316
+    },
+    {
+      "sequence": 27,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 5,
+      "completedBefore": 4,
+      "levelAfter": 5,
+      "completedAfter": 4,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "4dcb999f432641e5d9ae597a061c5cc34559b8e16c20cbc40ea49eb06b824d0e",
+      "frameHash": "0883d4b77cb04531",
+      "animationFrames": 3,
+      "decisionRevision": 25,
+      "actionIndex": 2,
+      "family": "periodic_sums",
+      "executionMs": 12.062700000002224
+    },
+    {
+      "sequence": 28,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 6,
+          "y": 24
+        }
+      },
+      "levelBefore": 5,
+      "completedBefore": 4,
+      "levelAfter": 5,
+      "completedAfter": 4,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "0922425ed2798f9f8101ea3d281cfa9bd7877a60a9eb96b719c4ea96f0928536",
+      "frameHash": "4d98c3b8bfa88ffc",
+      "animationFrames": 1,
+      "decisionRevision": 25,
+      "actionIndex": 3,
+      "family": "periodic_sums",
+      "executionMs": 17.81944199999998
+    },
+    {
+      "sequence": 29,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 5,
+      "completedBefore": 4,
+      "levelAfter": 5,
+      "completedAfter": 4,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "76abb3735c93743316174008b2585463a56626f929cb0a753502dd40882c2824",
+      "frameHash": "ee8c35849d94cb4d",
+      "animationFrames": 3,
+      "decisionRevision": 25,
+      "actionIndex": 4,
+      "family": "periodic_sums",
+      "executionMs": 17.7932690000016
+    },
+    {
+      "sequence": 30,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 5,
+      "completedBefore": 4,
+      "levelAfter": 5,
+      "completedAfter": 4,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "db843d22cf980e021de74e5d9bee3a78dcec480e8c4f60450f399349667c51e3",
+      "frameHash": "a865722740076f4c",
+      "animationFrames": 3,
+      "decisionRevision": 25,
+      "actionIndex": 5,
+      "family": "periodic_sums",
+      "executionMs": 17.374578000002657
+    },
+    {
+      "sequence": 31,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 5,
+      "completedBefore": 4,
+      "levelAfter": 6,
+      "completedAfter": 5,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "e352e93513525fbd2e061f822d87b418039db99ad4643f736240d03ae6508876",
+      "frameHash": "22aa838de4cf8f44",
+      "animationFrames": 28,
+      "decisionRevision": 25,
+      "actionIndex": 6,
+      "family": "periodic_sums",
+      "executionMs": 83.78661999999895
+    },
+    {
+      "sequence": 32,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 6,
+      "completedBefore": 5,
+      "levelAfter": 6,
+      "completedAfter": 5,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "36d2a03d4df0649c9cb6645aa22430845795a90ed999a03ca539585b6cdd143a",
+      "frameHash": "93391d10cf56d301",
+      "animationFrames": 3,
+      "decisionRevision": 32,
+      "actionIndex": 0,
+      "family": "periodic_sums",
+      "executionMs": 19.08377900000778
+    },
+    {
+      "sequence": 33,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 6,
+      "completedBefore": 5,
+      "levelAfter": 6,
+      "completedAfter": 5,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "8f4df622d8b52f9d3b150f41a4986886e0e4c32d68d74cc4111e532aebb9214c",
+      "frameHash": "e06c1097443048a6",
+      "animationFrames": 3,
+      "decisionRevision": 32,
+      "actionIndex": 1,
+      "family": "periodic_sums",
+      "executionMs": 15.015579999992042
+    },
+    {
+      "sequence": 34,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 6,
+      "completedBefore": 5,
+      "levelAfter": 6,
+      "completedAfter": 5,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "fccd0dc186b1b3c280f3d8bfb8f2106a7b81863f0b8d9f22250745acc6633e9e",
+      "frameHash": "3f676772e1c4a0b3",
+      "animationFrames": 3,
+      "decisionRevision": 32,
+      "actionIndex": 2,
+      "family": "periodic_sums",
+      "executionMs": 13.427768999987165
+    },
+    {
+      "sequence": 35,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 6,
+      "completedBefore": 5,
+      "levelAfter": 6,
+      "completedAfter": 5,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "a7ce7f499ac25d2715a3df4b3a97141507e06aab68bf7f5ee89a362c4a99901a",
+      "frameHash": "696bf93e3001bc47",
+      "animationFrames": 3,
+      "decisionRevision": 32,
+      "actionIndex": 3,
+      "family": "periodic_sums",
+      "executionMs": 12.037100000001374
+    },
+    {
+      "sequence": 36,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 6,
+      "completedBefore": 5,
+      "levelAfter": 6,
+      "completedAfter": 5,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "060d2b8e935436ee019443314ad07f0c466edd6181ced2cbf422a97812be31e1",
+      "frameHash": "74b213ef22bf7d94",
+      "animationFrames": 3,
+      "decisionRevision": 32,
+      "actionIndex": 4,
+      "family": "periodic_sums",
+      "executionMs": 10.791252999988501
+    },
+    {
+      "sequence": 37,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 6,
+      "completedBefore": 5,
+      "levelAfter": 6,
+      "completedAfter": 5,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "d80a206fa30ed780acaac5b0c40088d8ab36cddd9f333f9645c28c17e93ef532",
+      "frameHash": "b586cd4055151e06",
+      "animationFrames": 3,
+      "decisionRevision": 32,
+      "actionIndex": 5,
+      "family": "periodic_sums",
+      "executionMs": 12.363486000002013
+    },
+    {
+      "sequence": 38,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 6,
+      "completedBefore": 5,
+      "levelAfter": 6,
+      "completedAfter": 5,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "3a328adc65c8b40eab479c5e7714a709cf0b74c6420c975657e2dbd33bd8792f",
+      "frameHash": "8666a5b058867fad",
+      "animationFrames": 3,
+      "decisionRevision": 32,
+      "actionIndex": 6,
+      "family": "periodic_sums",
+      "executionMs": 30.678181999988738
+    },
+    {
+      "sequence": 39,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 6,
+      "completedBefore": 5,
+      "levelAfter": 6,
+      "completedAfter": 5,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "3550572a16f47c99d059661ad1bac2ae516fd761b8a771d5aa142eb800065db7",
+      "frameHash": "f18a135580e8bb6e",
+      "animationFrames": 3,
+      "decisionRevision": 32,
+      "actionIndex": 7,
+      "family": "periodic_sums",
+      "executionMs": 13.424587999994401
+    },
+    {
+      "sequence": 40,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 6,
+      "completedBefore": 5,
+      "levelAfter": 6,
+      "completedAfter": 5,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "b483732f7fe6e24d1ae647a6849d74efda00281297c2c38b3678360e1898906b",
+      "frameHash": "652e100f15adad67",
+      "animationFrames": 3,
+      "decisionRevision": 32,
+      "actionIndex": 8,
+      "family": "periodic_sums",
+      "executionMs": 9.60484900001029
+    },
+    {
+      "sequence": 41,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 6,
+      "completedBefore": 5,
+      "levelAfter": 6,
+      "completedAfter": 5,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "3e18be944bf79b120da98657f58bbd46d157cce944b67c503e47d2bbb041cacf",
+      "frameHash": "c18d94af52663f86",
+      "animationFrames": 3,
+      "decisionRevision": 32,
+      "actionIndex": 9,
+      "family": "periodic_sums",
+      "executionMs": 13.630690000005416
+    },
+    {
+      "sequence": 42,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 5,
+          "y": 24
+        }
+      },
+      "levelBefore": 6,
+      "completedBefore": 5,
+      "levelAfter": 6,
+      "completedAfter": 5,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "b4e740380ab79ce7163aa09a9215d7a94e42fdc726b871e6c4171b5d53b4b6b4",
+      "frameHash": "7086a26f50988360",
+      "animationFrames": 1,
+      "decisionRevision": 32,
+      "actionIndex": 10,
+      "family": "periodic_sums",
+      "executionMs": 5.407595000011497
+    },
+    {
+      "sequence": 43,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 6,
+      "completedBefore": 5,
+      "levelAfter": 6,
+      "completedAfter": 5,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "6f4f64e4ef5ca9946b8ec5b014fcb24fb095c98e4ba1e13a15756ae055cf7564",
+      "frameHash": "3935f3778a0feb87",
+      "animationFrames": 3,
+      "decisionRevision": 32,
+      "actionIndex": 11,
+      "family": "periodic_sums",
+      "executionMs": 9.59266999999818
+    },
+    {
+      "sequence": 44,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 6,
+      "completedBefore": 5,
+      "levelAfter": 6,
+      "completedAfter": 5,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "5b41568f8c00a4f4c83cef7b0f63c7fd2dab48d8dd699b06e28269c341957a00",
+      "frameHash": "ca171286bc2bc361",
+      "animationFrames": 3,
+      "decisionRevision": 32,
+      "actionIndex": 12,
+      "family": "periodic_sums",
+      "executionMs": 13.707042000009096
+    },
+    {
+      "sequence": 45,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 6,
+          "y": 34
+        }
+      },
+      "levelBefore": 6,
+      "completedBefore": 5,
+      "levelAfter": 6,
+      "completedAfter": 5,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "67f4fbabd37c6d65411b424b152b68e7e5e04a58eaf4e6e0a9382756c3701cbd",
+      "frameHash": "0a61bc1d53235376",
+      "animationFrames": 1,
+      "decisionRevision": 32,
+      "actionIndex": 13,
+      "family": "periodic_sums",
+      "executionMs": 8.03767799999332
+    },
+    {
+      "sequence": 46,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 6,
+      "completedBefore": 5,
+      "levelAfter": 6,
+      "completedAfter": 5,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "b52d7e4969cc3d1797291004dc1accc7dc902c78d2fb695d49974106562788d4",
+      "frameHash": "5f3556fad6969c5b",
+      "animationFrames": 3,
+      "decisionRevision": 32,
+      "actionIndex": 14,
+      "family": "periodic_sums",
+      "executionMs": 13.530618000004324
+    },
+    {
+      "sequence": 47,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 6,
+      "completedBefore": 5,
+      "levelAfter": 6,
+      "completedAfter": 5,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "70c0bdfb2c4d7cefe739134ab830f1f4ecb44ce4f0a55f2abdb5c7f49447488a",
+      "frameHash": "119d90c30e1a33a9",
+      "animationFrames": 3,
+      "decisionRevision": 32,
+      "actionIndex": 15,
+      "family": "periodic_sums",
+      "executionMs": 10.483975000010105
+    },
+    {
+      "sequence": 48,
+      "command": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "levelBefore": 6,
+      "completedBefore": 5,
+      "levelAfter": 6,
+      "completedAfter": 6,
+      "state": "WIN",
+      "publicPacketSha256": "410b70497db589e939457af7c161727db2644194e3cb4f34336b9cdf4164dc8d",
+      "frameHash": "20b3291ec7c9709e",
+      "animationFrames": 28,
+      "decisionRevision": 48,
+      "actionIndex": 0,
+      "family": "periodic_sums",
+      "executionMs": 54.37688399999752
+    }
+  ],
+  "boundaries": [
+    {
+      "completedLevel": 1,
+      "nativeLevel": 2,
+      "levelsCompleted": 1,
+      "levelActions": 2,
+      "totalActions": 2,
+      "levelActiveSeconds": 4.171766154999998,
+      "activeSeconds": 4.171766154999998,
+      "prefixCount": 2,
+      "graphChain": "37b99b651f8c5c4d82779bd441abb2bcde33ce173f91f818bee96e452dcb95e9",
+      "graphRevision": 295,
+      "nodeCount": 154,
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 2,
+        "boundaryReplays": 1,
+        "goalEvents": 1,
+        "frontierDeltas": 5,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 3
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 3
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 3
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 1
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 1
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 4
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      },
+      "phase": "sealed_prefix",
+      "sessionRetained": true
+    },
+    {
+      "completedLevel": 2,
+      "nativeLevel": 3,
+      "levelsCompleted": 2,
+      "levelActions": 4,
+      "totalActions": 6,
+      "levelActiveSeconds": 5.272341750000003,
+      "activeSeconds": 9.444107905000001,
+      "prefixCount": 4,
+      "graphChain": "d8c6cfd08e123796d126b37839d2f10c74076a963a2edc1798c07f1ed128a436",
+      "graphRevision": 508,
+      "nodeCount": 216,
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 6,
+        "boundaryReplays": 2,
+        "goalEvents": 2,
+        "frontierDeltas": 13,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 5
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 5
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 2
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 6
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      },
+      "phase": "sealed_prefix",
+      "sessionRetained": true
+    },
+    {
+      "completedLevel": 3,
+      "nativeLevel": 4,
+      "levelsCompleted": 3,
+      "levelActions": 12,
+      "totalActions": 18,
+      "levelActiveSeconds": 9.148772201000002,
+      "activeSeconds": 18.592880106000003,
+      "prefixCount": 5,
+      "graphChain": "39166d6a8ab3af925e5bd7f426ca1c579b0e4c3c6c39a72f226572c986c0278b",
+      "graphRevision": 718,
+      "nodeCount": 350,
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 18,
+        "boundaryReplays": 3,
+        "goalEvents": 3,
+        "frontierDeltas": 37,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 6
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 6
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 3
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 7
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      },
+      "phase": "sealed_prefix",
+      "sessionRetained": true
+    },
+    {
+      "completedLevel": 4,
+      "nativeLevel": 5,
+      "levelsCompleted": 4,
+      "levelActions": 6,
+      "totalActions": 24,
+      "levelActiveSeconds": 11.123273184000006,
+      "activeSeconds": 29.71615329000001,
+      "prefixCount": 6,
+      "graphChain": "46e572a6c6a516378ba4e669badee5a6b8a2b2587525d97ec51256f5f8a92da4",
+      "graphRevision": 872,
+      "nodeCount": 428,
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 24,
+        "boundaryReplays": 4,
+        "goalEvents": 4,
+        "frontierDeltas": 49,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 7
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 7
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 4
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 8
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      },
+      "phase": "sealed_prefix",
+      "sessionRetained": true
+    },
+    {
+      "completedLevel": 5,
+      "nativeLevel": 6,
+      "levelsCompleted": 5,
+      "levelActions": 7,
+      "totalActions": 31,
+      "levelActiveSeconds": 13.867954933000021,
+      "activeSeconds": 43.58410822300003,
+      "prefixCount": 7,
+      "graphChain": "4020a8bb00f4bb6fd81564a909a3ce39bb72bfa7fc239df6b5ff6d3faf2a5713",
+      "graphRevision": 1023,
+      "nodeCount": 503,
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 31,
+        "boundaryReplays": 5,
+        "goalEvents": 5,
+        "frontierDeltas": 63,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 8
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 8
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 5
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 9
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      },
+      "phase": "sealed_prefix",
+      "sessionRetained": true
+    },
+    {
+      "completedLevel": 6,
+      "nativeLevel": 6,
+      "levelsCompleted": 6,
+      "levelActions": 17,
+      "totalActions": 48,
+      "levelActiveSeconds": 33.304802221,
+      "activeSeconds": 76.88891044400003,
+      "prefixCount": 9,
+      "graphChain": "c39289850c3dbb6428f97303115054db7c81ed8fffc016c18eb43542e62ccbe6",
+      "graphRevision": 1362,
+      "nodeCount": 694,
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 48,
+        "boundaryReplays": 5,
+        "goalEvents": 6,
+        "frontierDeltas": 97,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 7
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 10
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 9
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 7
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 11
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      },
+      "phase": "stopped",
+      "sessionRetained": true
+    }
+  ],
+  "prefixes": [
+    {
+      "id": "prefix_evidence:1",
+      "decisionRevision": 1,
+      "acquiredActions": 1,
+      "family": "periodic_sums",
+      "operations": [
+        "OP29",
+        "OP30",
+        "OP31"
+      ],
+      "graphChain": "3f93616cc2770d9578ddc4f8bcc3119aee92153dd66e92074003023b4012fee9",
+      "graphRevision": 210,
+      "callerAcquiredTransitions": 1
+    },
+    {
+      "id": "prefix_evidence:2",
+      "decisionRevision": 2,
+      "acquiredActions": 1,
+      "family": "periodic_sums",
+      "operations": [
+        "OP29",
+        "OP30",
+        "OP31"
+      ],
+      "graphChain": "37b99b651f8c5c4d82779bd441abb2bcde33ce173f91f818bee96e452dcb95e9",
+      "graphRevision": 295,
+      "callerAcquiredTransitions": 2
+    },
+    {
+      "id": "prefix_evidence:3",
+      "decisionRevision": 3,
+      "acquiredActions": 2,
+      "family": "periodic_sums",
+      "operations": [
+        "OP29",
+        "OP30",
+        "OP31"
+      ],
+      "graphChain": "e426618ecd1a700ea95b6cfe73392dcd171c1a0543f344b166a4293a372b1edc",
+      "graphRevision": 409,
+      "callerAcquiredTransitions": 4
+    },
+    {
+      "id": "prefix_evidence:5",
+      "decisionRevision": 5,
+      "acquiredActions": 2,
+      "family": "periodic_sums",
+      "operations": [
+        "OP29",
+        "OP30",
+        "OP31"
+      ],
+      "graphChain": "d8c6cfd08e123796d126b37839d2f10c74076a963a2edc1798c07f1ed128a436",
+      "graphRevision": 508,
+      "callerAcquiredTransitions": 6
+    },
+    {
+      "id": "prefix_evidence:7",
+      "decisionRevision": 7,
+      "acquiredActions": 12,
+      "family": "periodic_sums",
+      "operations": [
+        "OP29",
+        "OP30",
+        "OP31"
+      ],
+      "graphChain": "39166d6a8ab3af925e5bd7f426ca1c579b0e4c3c6c39a72f226572c986c0278b",
+      "graphRevision": 718,
+      "callerAcquiredTransitions": 18
+    },
+    {
+      "id": "prefix_evidence:19",
+      "decisionRevision": 19,
+      "acquiredActions": 6,
+      "family": "periodic_sums",
+      "operations": [
+        "OP29",
+        "OP30",
+        "OP31"
+      ],
+      "graphChain": "46e572a6c6a516378ba4e669badee5a6b8a2b2587525d97ec51256f5f8a92da4",
+      "graphRevision": 872,
+      "callerAcquiredTransitions": 24
+    },
+    {
+      "id": "prefix_evidence:25",
+      "decisionRevision": 25,
+      "acquiredActions": 7,
+      "family": "periodic_sums",
+      "operations": [
+        "OP29",
+        "OP30",
+        "OP31"
+      ],
+      "graphChain": "4020a8bb00f4bb6fd81564a909a3ce39bb72bfa7fc239df6b5ff6d3faf2a5713",
+      "graphRevision": 1023,
+      "callerAcquiredTransitions": 31
+    },
+    {
+      "id": "prefix_evidence:32",
+      "decisionRevision": 32,
+      "acquiredActions": 16,
+      "family": "periodic_sums",
+      "operations": [
+        "OP29",
+        "OP30",
+        "OP31"
+      ],
+      "graphChain": "c1497af68b911ad9e71904c93b50f48a0867f25caf8447ca066d57ba70feed0b",
+      "graphRevision": 1274,
+      "callerAcquiredTransitions": 47
+    },
+    {
+      "id": "prefix_evidence:48",
+      "decisionRevision": 48,
+      "acquiredActions": 1,
+      "family": "periodic_sums",
+      "operations": [
+        "OP29",
+        "OP30",
+        "OP31"
+      ],
+      "graphChain": "c39289850c3dbb6428f97303115054db7c81ed8fffc016c18eb43542e62ccbe6",
+      "graphRevision": 1362,
+      "callerAcquiredTransitions": 48
+    }
+  ],
+  "requests": [
+    {
+      "operation": "init",
+      "sequence": 0,
+      "kind": "action",
+      "reason": null,
+      "level": 1,
+      "levelsCompleted": 0,
+      "actions": 0,
+      "cycles": 0,
+      "activeSeconds": 2.1417573760000006,
+      "elapsedMs": 2184.952687,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 0,
+        "boundaryReplays": 0,
+        "goalEvents": 0,
+        "frontierDeltas": 1,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 1
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 1
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 1
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 1
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 1
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 2
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 1,
+      "kind": "boundary",
+      "reason": null,
+      "level": 1,
+      "levelsCompleted": 0,
+      "actions": 1,
+      "cycles": 1,
+      "activeSeconds": 3.2573553250000002,
+      "elapsedMs": 1110.8649530000002,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 1,
+        "boundaryReplays": 0,
+        "goalEvents": 0,
+        "frontierDeltas": 3,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 2
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 2
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 2
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 1
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 1
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 3
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "resume",
+      "sequence": 1,
+      "kind": "action",
+      "reason": null,
+      "level": 1,
+      "levelsCompleted": 0,
+      "actions": 1,
+      "cycles": 1,
+      "activeSeconds": 3.5064736780000003,
+      "elapsedMs": 250.1012210000008,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 1,
+        "boundaryReplays": 0,
+        "goalEvents": 0,
+        "frontierDeltas": 3,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 2
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 2
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 2
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 1
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 1
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 3
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 2,
+      "kind": "boundary",
+      "reason": null,
+      "level": 2,
+      "levelsCompleted": 1,
+      "actions": 2,
+      "cycles": 2,
+      "activeSeconds": 4.171766154999998,
+      "elapsedMs": 633.1893049999999,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 2,
+        "boundaryReplays": 1,
+        "goalEvents": 1,
+        "frontierDeltas": 5,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 3
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 3
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 3
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 1
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 1
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 4
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "resume",
+      "sequence": 2,
+      "kind": "action",
+      "reason": null,
+      "level": 2,
+      "levelsCompleted": 1,
+      "actions": 2,
+      "cycles": 2,
+      "activeSeconds": 4.521364682999998,
+      "elapsedMs": 350.53702499999963,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 2,
+        "boundaryReplays": 1,
+        "goalEvents": 1,
+        "frontierDeltas": 5,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 3
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 3
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 3
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 1
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 1
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 4
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 3,
+      "kind": "action",
+      "reason": null,
+      "level": 2,
+      "levelsCompleted": 1,
+      "actions": 3,
+      "cycles": 2,
+      "activeSeconds": 4.617601431999998,
+      "elapsedMs": 91.5823539999983,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 2,
+        "boundaryReplays": 1,
+        "goalEvents": 1,
+        "frontierDeltas": 5,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 3
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 3
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 3
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 1
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 1
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 4
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 4,
+      "kind": "boundary",
+      "reason": null,
+      "level": 2,
+      "levelsCompleted": 1,
+      "actions": 4,
+      "cycles": 3,
+      "activeSeconds": 7.0965532809999985,
+      "elapsedMs": 2476.927722999999,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 4,
+        "boundaryReplays": 1,
+        "goalEvents": 1,
+        "frontierDeltas": 9,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 4
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 4
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 4
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 2
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 2
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 5
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "resume",
+      "sequence": 4,
+      "kind": "action",
+      "reason": null,
+      "level": 2,
+      "levelsCompleted": 1,
+      "actions": 4,
+      "cycles": 3,
+      "activeSeconds": 7.976678780999999,
+      "elapsedMs": 881.2699190000003,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 4,
+        "boundaryReplays": 1,
+        "goalEvents": 1,
+        "frontierDeltas": 9,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 4
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 4
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 4
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 2
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 2
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 5
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 5,
+      "kind": "action",
+      "reason": null,
+      "level": 2,
+      "levelsCompleted": 1,
+      "actions": 5,
+      "cycles": 3,
+      "activeSeconds": 8.034646358,
+      "elapsedMs": 51.99105299999974,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 4,
+        "boundaryReplays": 1,
+        "goalEvents": 1,
+        "frontierDeltas": 9,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 4
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 4
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 4
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 2
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 2
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 5
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 6,
+      "kind": "boundary",
+      "reason": null,
+      "level": 3,
+      "levelsCompleted": 2,
+      "actions": 6,
+      "cycles": 4,
+      "activeSeconds": 9.444107905000001,
+      "elapsedMs": 1378.2230899999995,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 6,
+        "boundaryReplays": 2,
+        "goalEvents": 2,
+        "frontierDeltas": 13,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 5
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 5
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 2
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 6
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "resume",
+      "sequence": 6,
+      "kind": "action",
+      "reason": null,
+      "level": 3,
+      "levelsCompleted": 2,
+      "actions": 6,
+      "cycles": 4,
+      "activeSeconds": 9.730084725000001,
+      "elapsedMs": 286.9518220000009,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 6,
+        "boundaryReplays": 2,
+        "goalEvents": 2,
+        "frontierDeltas": 13,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 5
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 5
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 2
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 6
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 7,
+      "kind": "action",
+      "reason": null,
+      "level": 3,
+      "levelsCompleted": 2,
+      "actions": 7,
+      "cycles": 4,
+      "activeSeconds": 9.793407243999997,
+      "elapsedMs": 61.50449899999876,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 6,
+        "boundaryReplays": 2,
+        "goalEvents": 2,
+        "frontierDeltas": 13,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 5
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 5
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 2
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 6
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 8,
+      "kind": "action",
+      "reason": null,
+      "level": 3,
+      "levelsCompleted": 2,
+      "actions": 8,
+      "cycles": 4,
+      "activeSeconds": 9.848029047,
+      "elapsedMs": 51.78899799999999,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 6,
+        "boundaryReplays": 2,
+        "goalEvents": 2,
+        "frontierDeltas": 13,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 5
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 5
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 2
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 6
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 9,
+      "kind": "action",
+      "reason": null,
+      "level": 3,
+      "levelsCompleted": 2,
+      "actions": 9,
+      "cycles": 4,
+      "activeSeconds": 9.902181337999998,
+      "elapsedMs": 53.09811300000001,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 6,
+        "boundaryReplays": 2,
+        "goalEvents": 2,
+        "frontierDeltas": 13,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 5
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 5
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 2
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 6
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 10,
+      "kind": "action",
+      "reason": null,
+      "level": 3,
+      "levelsCompleted": 2,
+      "actions": 10,
+      "cycles": 4,
+      "activeSeconds": 9.972469147,
+      "elapsedMs": 68.66844599999968,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 6,
+        "boundaryReplays": 2,
+        "goalEvents": 2,
+        "frontierDeltas": 13,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 5
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 5
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 2
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 6
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 11,
+      "kind": "action",
+      "reason": null,
+      "level": 3,
+      "levelsCompleted": 2,
+      "actions": 11,
+      "cycles": 4,
+      "activeSeconds": 10.059871784999999,
+      "elapsedMs": 86.8736370000006,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 6,
+        "boundaryReplays": 2,
+        "goalEvents": 2,
+        "frontierDeltas": 13,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 5
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 5
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 2
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 6
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 12,
+      "kind": "action",
+      "reason": null,
+      "level": 3,
+      "levelsCompleted": 2,
+      "actions": 12,
+      "cycles": 4,
+      "activeSeconds": 10.115291633999998,
+      "elapsedMs": 53.38996099999713,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 6,
+        "boundaryReplays": 2,
+        "goalEvents": 2,
+        "frontierDeltas": 13,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 5
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 5
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 2
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 6
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 13,
+      "kind": "action",
+      "reason": null,
+      "level": 3,
+      "levelsCompleted": 2,
+      "actions": 13,
+      "cycles": 4,
+      "activeSeconds": 10.169840628999998,
+      "elapsedMs": 51.01971799999956,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 6,
+        "boundaryReplays": 2,
+        "goalEvents": 2,
+        "frontierDeltas": 13,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 5
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 5
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 2
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 6
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 14,
+      "kind": "action",
+      "reason": null,
+      "level": 3,
+      "levelsCompleted": 2,
+      "actions": 14,
+      "cycles": 4,
+      "activeSeconds": 10.227565602999999,
+      "elapsedMs": 56.418235999997705,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 6,
+        "boundaryReplays": 2,
+        "goalEvents": 2,
+        "frontierDeltas": 13,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 5
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 5
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 2
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 6
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 15,
+      "kind": "action",
+      "reason": null,
+      "level": 3,
+      "levelsCompleted": 2,
+      "actions": 15,
+      "cycles": 4,
+      "activeSeconds": 10.283455888,
+      "elapsedMs": 54.32901000000129,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 6,
+        "boundaryReplays": 2,
+        "goalEvents": 2,
+        "frontierDeltas": 13,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 5
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 5
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 2
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 6
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 16,
+      "kind": "action",
+      "reason": null,
+      "level": 3,
+      "levelsCompleted": 2,
+      "actions": 16,
+      "cycles": 4,
+      "activeSeconds": 10.336712042000002,
+      "elapsedMs": 50.80890999999974,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 6,
+        "boundaryReplays": 2,
+        "goalEvents": 2,
+        "frontierDeltas": 13,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 5
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 5
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 2
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 6
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 17,
+      "kind": "action",
+      "reason": null,
+      "level": 3,
+      "levelsCompleted": 2,
+      "actions": 17,
+      "cycles": 4,
+      "activeSeconds": 10.396823688000005,
+      "elapsedMs": 57.47279100000014,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 6,
+        "boundaryReplays": 2,
+        "goalEvents": 2,
+        "frontierDeltas": 13,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 5
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 5
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 2
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 6
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 18,
+      "kind": "boundary",
+      "reason": null,
+      "level": 4,
+      "levelsCompleted": 3,
+      "actions": 18,
+      "cycles": 5,
+      "activeSeconds": 18.592880106000003,
+      "elapsedMs": 8179.950566000003,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 18,
+        "boundaryReplays": 3,
+        "goalEvents": 3,
+        "frontierDeltas": 37,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 6
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 6
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 3
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 7
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "resume",
+      "sequence": 18,
+      "kind": "action",
+      "reason": null,
+      "level": 4,
+      "levelsCompleted": 3,
+      "actions": 18,
+      "cycles": 5,
+      "activeSeconds": 19.120359782000005,
+      "elapsedMs": 528.8221049999993,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 18,
+        "boundaryReplays": 3,
+        "goalEvents": 3,
+        "frontierDeltas": 37,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 6
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 6
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 3
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 7
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 19,
+      "kind": "action",
+      "reason": null,
+      "level": 4,
+      "levelsCompleted": 3,
+      "actions": 19,
+      "cycles": 5,
+      "activeSeconds": 19.195371158000004,
+      "elapsedMs": 69.76319100000183,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 18,
+        "boundaryReplays": 3,
+        "goalEvents": 3,
+        "frontierDeltas": 37,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 6
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 6
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 3
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 7
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 20,
+      "kind": "action",
+      "reason": null,
+      "level": 4,
+      "levelsCompleted": 3,
+      "actions": 20,
+      "cycles": 5,
+      "activeSeconds": 19.260499445000008,
+      "elapsedMs": 62.47523100000399,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 18,
+        "boundaryReplays": 3,
+        "goalEvents": 3,
+        "frontierDeltas": 37,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 6
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 6
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 3
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 7
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 21,
+      "kind": "action",
+      "reason": null,
+      "level": 4,
+      "levelsCompleted": 3,
+      "actions": 21,
+      "cycles": 5,
+      "activeSeconds": 19.32404525000001,
+      "elapsedMs": 63.321898000001966,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 18,
+        "boundaryReplays": 3,
+        "goalEvents": 3,
+        "frontierDeltas": 37,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 6
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 6
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 3
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 7
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 22,
+      "kind": "action",
+      "reason": null,
+      "level": 4,
+      "levelsCompleted": 3,
+      "actions": 22,
+      "cycles": 5,
+      "activeSeconds": 19.46839105600001,
+      "elapsedMs": 157.44217700000445,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 18,
+        "boundaryReplays": 3,
+        "goalEvents": 3,
+        "frontierDeltas": 37,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 6
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 6
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 3
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 7
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 23,
+      "kind": "action",
+      "reason": null,
+      "level": 4,
+      "levelsCompleted": 3,
+      "actions": 23,
+      "cycles": 5,
+      "activeSeconds": 19.532219391000005,
+      "elapsedMs": 62.41567999999825,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 18,
+        "boundaryReplays": 3,
+        "goalEvents": 3,
+        "frontierDeltas": 37,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 6
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 6
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 3
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 7
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 24,
+      "kind": "boundary",
+      "reason": null,
+      "level": 5,
+      "levelsCompleted": 4,
+      "actions": 24,
+      "cycles": 6,
+      "activeSeconds": 29.71615329000001,
+      "elapsedMs": 10164.311565999997,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 24,
+        "boundaryReplays": 4,
+        "goalEvents": 4,
+        "frontierDeltas": 49,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 7
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 7
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 4
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 8
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "resume",
+      "sequence": 24,
+      "kind": "action",
+      "reason": null,
+      "level": 5,
+      "levelsCompleted": 4,
+      "actions": 24,
+      "cycles": 6,
+      "activeSeconds": 30.624610997000012,
+      "elapsedMs": 910.4481749999977,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 24,
+        "boundaryReplays": 4,
+        "goalEvents": 4,
+        "frontierDeltas": 49,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 7
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 7
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 4
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 8
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 25,
+      "kind": "action",
+      "reason": null,
+      "level": 5,
+      "levelsCompleted": 4,
+      "actions": 25,
+      "cycles": 6,
+      "activeSeconds": 30.73929817400001,
+      "elapsedMs": 98.82326900000044,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 24,
+        "boundaryReplays": 4,
+        "goalEvents": 4,
+        "frontierDeltas": 49,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 7
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 7
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 4
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 8
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 26,
+      "kind": "action",
+      "reason": null,
+      "level": 5,
+      "levelsCompleted": 4,
+      "actions": 26,
+      "cycles": 6,
+      "activeSeconds": 30.92100644400002,
+      "elapsedMs": 180.48789899999974,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 24,
+        "boundaryReplays": 4,
+        "goalEvents": 4,
+        "frontierDeltas": 49,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 7
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 7
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 4
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 8
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 27,
+      "kind": "action",
+      "reason": null,
+      "level": 5,
+      "levelsCompleted": 4,
+      "actions": 27,
+      "cycles": 6,
+      "activeSeconds": 31.024981831000026,
+      "elapsedMs": 105.3142200000002,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 24,
+        "boundaryReplays": 4,
+        "goalEvents": 4,
+        "frontierDeltas": 49,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 7
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 7
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 4
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 8
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 28,
+      "kind": "action",
+      "reason": null,
+      "level": 5,
+      "levelsCompleted": 4,
+      "actions": 28,
+      "cycles": 6,
+      "activeSeconds": 31.160038565000026,
+      "elapsedMs": 130.79711400000087,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 24,
+        "boundaryReplays": 4,
+        "goalEvents": 4,
+        "frontierDeltas": 49,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 7
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 7
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 4
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 8
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 29,
+      "kind": "action",
+      "reason": null,
+      "level": 5,
+      "levelsCompleted": 4,
+      "actions": 29,
+      "cycles": 6,
+      "activeSeconds": 31.265917052000027,
+      "elapsedMs": 96.968120000005,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 24,
+        "boundaryReplays": 4,
+        "goalEvents": 4,
+        "frontierDeltas": 49,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 7
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 7
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 4
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 8
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 30,
+      "kind": "action",
+      "reason": null,
+      "level": 5,
+      "levelsCompleted": 4,
+      "actions": 30,
+      "cycles": 6,
+      "activeSeconds": 31.433986163000032,
+      "elapsedMs": 159.60009999999602,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 24,
+        "boundaryReplays": 4,
+        "goalEvents": 4,
+        "frontierDeltas": 49,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 7
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 7
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 4
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 8
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 31,
+      "kind": "boundary",
+      "reason": null,
+      "level": 6,
+      "levelsCompleted": 5,
+      "actions": 31,
+      "cycles": 7,
+      "activeSeconds": 43.58410822300003,
+      "elapsedMs": 12099.034614999997,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 31,
+        "boundaryReplays": 5,
+        "goalEvents": 5,
+        "frontierDeltas": 63,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 8
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 8
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 5
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 9
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "resume",
+      "sequence": 31,
+      "kind": "action",
+      "reason": null,
+      "level": 6,
+      "levelsCompleted": 5,
+      "actions": 31,
+      "cycles": 7,
+      "activeSeconds": 44.684021793000035,
+      "elapsedMs": 1102.8634029999957,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 31,
+        "boundaryReplays": 5,
+        "goalEvents": 5,
+        "frontierDeltas": 63,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 8
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 8
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 5
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 9
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 32,
+      "kind": "action",
+      "reason": null,
+      "level": 6,
+      "levelsCompleted": 5,
+      "actions": 32,
+      "cycles": 7,
+      "activeSeconds": 44.79770678600004,
+      "elapsedMs": 103.42540100000042,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 31,
+        "boundaryReplays": 5,
+        "goalEvents": 5,
+        "frontierDeltas": 63,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 8
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 8
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 5
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 9
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 33,
+      "kind": "action",
+      "reason": null,
+      "level": 6,
+      "levelsCompleted": 5,
+      "actions": 33,
+      "cycles": 7,
+      "activeSeconds": 44.90115967900003,
+      "elapsedMs": 96.32114100000763,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 31,
+        "boundaryReplays": 5,
+        "goalEvents": 5,
+        "frontierDeltas": 63,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 8
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 8
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 5
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 9
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 34,
+      "kind": "action",
+      "reason": null,
+      "level": 6,
+      "levelsCompleted": 5,
+      "actions": 34,
+      "cycles": 7,
+      "activeSeconds": 45.00714447300001,
+      "elapsedMs": 100.28953300000285,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 31,
+        "boundaryReplays": 5,
+        "goalEvents": 5,
+        "frontierDeltas": 63,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 8
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 8
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 5
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 9
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 35,
+      "kind": "action",
+      "reason": null,
+      "level": 6,
+      "levelsCompleted": 5,
+      "actions": 35,
+      "cycles": 7,
+      "activeSeconds": 45.10097412500001,
+      "elapsedMs": 90.21690200000012,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 31,
+        "boundaryReplays": 5,
+        "goalEvents": 5,
+        "frontierDeltas": 63,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 8
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 8
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 5
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 9
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 36,
+      "kind": "action",
+      "reason": null,
+      "level": 6,
+      "levelsCompleted": 5,
+      "actions": 36,
+      "cycles": 7,
+      "activeSeconds": 45.200044391000006,
+      "elapsedMs": 97.78998000000138,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 31,
+        "boundaryReplays": 5,
+        "goalEvents": 5,
+        "frontierDeltas": 63,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 8
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 8
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 5
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 9
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 37,
+      "kind": "action",
+      "reason": null,
+      "level": 6,
+      "levelsCompleted": 5,
+      "actions": 37,
+      "cycles": 7,
+      "activeSeconds": 45.311941357,
+      "elapsedMs": 113.31896699999925,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 31,
+        "boundaryReplays": 5,
+        "goalEvents": 5,
+        "frontierDeltas": 63,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 8
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 8
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 5
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 9
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 38,
+      "kind": "action",
+      "reason": null,
+      "level": 6,
+      "levelsCompleted": 5,
+      "actions": 38,
+      "cycles": 7,
+      "activeSeconds": 45.461372317999995,
+      "elapsedMs": 152.46551100000215,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 31,
+        "boundaryReplays": 5,
+        "goalEvents": 5,
+        "frontierDeltas": 63,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 8
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 8
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 5
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 9
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 39,
+      "kind": "action",
+      "reason": null,
+      "level": 6,
+      "levelsCompleted": 5,
+      "actions": 39,
+      "cycles": 7,
+      "activeSeconds": 45.62325692599999,
+      "elapsedMs": 156.18202799999563,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 31,
+        "boundaryReplays": 5,
+        "goalEvents": 5,
+        "frontierDeltas": 63,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 8
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 8
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 5
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 9
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 40,
+      "kind": "action",
+      "reason": null,
+      "level": 6,
+      "levelsCompleted": 5,
+      "actions": 40,
+      "cycles": 7,
+      "activeSeconds": 45.793483861999995,
+      "elapsedMs": 168.06742300000042,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 31,
+        "boundaryReplays": 5,
+        "goalEvents": 5,
+        "frontierDeltas": 63,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 8
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 8
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 5
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 9
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 41,
+      "kind": "action",
+      "reason": null,
+      "level": 6,
+      "levelsCompleted": 5,
+      "actions": 41,
+      "cycles": 7,
+      "activeSeconds": 45.89294420099999,
+      "elapsedMs": 93.20315400000254,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 31,
+        "boundaryReplays": 5,
+        "goalEvents": 5,
+        "frontierDeltas": 63,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 8
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 8
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 5
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 9
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 42,
+      "kind": "action",
+      "reason": null,
+      "level": 6,
+      "levelsCompleted": 5,
+      "actions": 42,
+      "cycles": 7,
+      "activeSeconds": 45.991259496,
+      "elapsedMs": 98.28359000000637,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 31,
+        "boundaryReplays": 5,
+        "goalEvents": 5,
+        "frontierDeltas": 63,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 8
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 8
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 5
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 9
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 43,
+      "kind": "action",
+      "reason": null,
+      "level": 6,
+      "levelsCompleted": 5,
+      "actions": 43,
+      "cycles": 7,
+      "activeSeconds": 46.084510723,
+      "elapsedMs": 93.77137499999662,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 31,
+        "boundaryReplays": 5,
+        "goalEvents": 5,
+        "frontierDeltas": 63,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 8
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 8
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 5
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 9
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 44,
+      "kind": "action",
+      "reason": null,
+      "level": 6,
+      "levelsCompleted": 5,
+      "actions": 44,
+      "cycles": 7,
+      "activeSeconds": 46.182653124000005,
+      "elapsedMs": 92.41706599999452,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 31,
+        "boundaryReplays": 5,
+        "goalEvents": 5,
+        "frontierDeltas": 63,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 8
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 8
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 5
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 9
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 45,
+      "kind": "action",
+      "reason": null,
+      "level": 6,
+      "levelsCompleted": 5,
+      "actions": 45,
+      "cycles": 7,
+      "activeSeconds": 46.273063221,
+      "elapsedMs": 88.10711399999855,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 31,
+        "boundaryReplays": 5,
+        "goalEvents": 5,
+        "frontierDeltas": 63,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 8
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 8
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 5
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 9
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 46,
+      "kind": "action",
+      "reason": null,
+      "level": 6,
+      "levelsCompleted": 5,
+      "actions": 46,
+      "cycles": 7,
+      "activeSeconds": 46.37613432200001,
+      "elapsedMs": 98.947199000002,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 31,
+        "boundaryReplays": 5,
+        "goalEvents": 5,
+        "frontierDeltas": 63,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 8
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 8
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 5
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 9
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 47,
+      "kind": "boundary",
+      "reason": null,
+      "level": 6,
+      "levelsCompleted": 5,
+      "actions": 47,
+      "cycles": 8,
+      "activeSeconds": 74.90407142400002,
+      "elapsedMs": 28526.508165000007,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 47,
+        "boundaryReplays": 5,
+        "goalEvents": 5,
+        "frontierDeltas": 95,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 6
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 9
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 9
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 6
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 10
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "resume",
+      "sequence": 47,
+      "kind": "action",
+      "reason": null,
+      "level": 6,
+      "levelsCompleted": 5,
+      "actions": 47,
+      "cycles": 8,
+      "activeSeconds": 75.98116284700004,
+      "elapsedMs": 1078.9159199999995,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 47,
+        "boundaryReplays": 5,
+        "goalEvents": 5,
+        "frontierDeltas": 95,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 6
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 9
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 9
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 6
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 10
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 48,
+      "kind": "stopped",
+      "reason": "target_levels_completed",
+      "level": 6,
+      "levelsCompleted": 6,
+      "actions": 48,
+      "cycles": 9,
+      "activeSeconds": 76.88891044400003,
+      "elapsedMs": 875.8559489999898,
+      "family": "periodic_sums",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 48,
+        "boundaryReplays": 5,
+        "goalEvents": 6,
+        "frontierDeltas": 97,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 7
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 10
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 9
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 7
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 11
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    }
+  ],
+  "baseline": null,
+  "pythonAgentModules": [],
+  "failure": null,
+  "initial": {
+    "publicPacketSha256": "87281761bbbf199a2867a6d9607f13cd0957cfa38431e19e27d167e502a324a5",
+    "state": "NOT_FINISHED",
+    "level": 1,
+    "levelsCompleted": 0
+  },
+  "sourceUnchangedDuringRun": true,
+  "final": {
+    "actions": 48,
+    "levelsCompleted": 6,
+    "level": 6,
+    "state": "WIN",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 76.88891044400003,
+    "prefixes": 9,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 48,
+      "boundaryReplays": 5,
+      "goalEvents": 6,
+      "frontierDeltas": 97,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 7
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 10
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 9
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 7
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 3
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 11
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology",
+        "attention_parent_return",
+        "acquire_control_for_target"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 48,
+      "resume": 8
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.5.0"
+  },
+  "elapsedSeconds": 158.076204525
+}

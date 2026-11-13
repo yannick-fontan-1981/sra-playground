@@ -1,0 +1,48 @@
+{
+  "schema": "logos-engine.lot8b.final-version-source-reconciliation.v1",
+  "recordedAt": "2026-11-12T12:07:26.276985+00:00",
+  "status": "version_only_source_delta_verified_graph_renewal_pending",
+  "priorCheckpoint": "8918de66cee81b8d20a75a5780ea9aab075aba68",
+  "qualifiedCodeCommit": "2583d81d856c13295040db88f5df8b3a99906bdc",
+  "priorNativeDigest": "3ff1d9ad56e22aedc0fee3a0da6a3af50a1da0bc14a0ba01cb38272ba85234be",
+  "finalNativeDigest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+  "fileCount": 331,
+  "changedFiles": [
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "beforeSha256": "cfa07cd87b939e528696c07486777ef597ca3e5033f80d5333e78ab6b1e0868e",
+      "afterSha256": "e68adc608d73ac8d19e41a01cb7f9834a014b17f7f71b26480a14c36b4025446",
+      "oldLiteral": "export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.66.0';",
+      "newLiteral": "export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.67.0';",
+      "normalizedByteEquality": true
+    }
+  ],
+  "unchangedNativeFiles": 330,
+  "algorithmsAndDeclarationsUnchanged": true,
+  "runtimeIdentityChanged": true,
+  "identityImpact": [
+    "factory manifest sourceDigest",
+    "graph origins, deltas and chain digests",
+    "native execution identity and authorization",
+    "public service sourceDigest tickets",
+    "compiled worker bytes"
+  ],
+  "oldGraphProofsAreFinalByteIdentical": false,
+  "historicalTestsRerun": false,
+  "recordedRegressionsRerun": false,
+  "renewalRequired": [
+    "Actual factory inventory",
+    "Candidate STCK/SMLP functional graph forms and pair-reader against unchanged published baseline",
+    "Five BranchRouting native graph chains and reader",
+    "Final typecheck/build and entry/migration audits"
+  ],
+  "retainedLimitations": [
+    "No public64x64-service-positive BranchRouting claim",
+    "No full original caller parity",
+    "No official performance evidence from functional command durations",
+    "No new game campaign or official solved levels"
+  ],
+  "LKEY": "permanently_closed",
+  "officialCostMeasured": false,
+  "officialCostAccepted": false
+}

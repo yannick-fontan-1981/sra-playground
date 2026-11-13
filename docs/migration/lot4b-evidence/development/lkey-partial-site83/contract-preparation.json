@@ -1,0 +1,200 @@
+{
+  "schema": "logos-engine.lot4b.partial-regression-contract-preparation.v1",
+  "status": "development_contract_prepared_inputs_verified",
+  "recordedAt": "2026-11-10T21:15:39.514647+00:00",
+  "contract": {
+    "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/contract.json",
+    "sha256": "d3d6cc003ca9414d5937449e671f7905e63c19d48399607e912fce6ead8e72a5",
+    "bytes": 4339
+  },
+  "scope": "Development candidate 4B + published Site83 only, before5A. Data verification and byte restoration only; no replay, native import, test, oracle or live game executed.",
+  "publication": {
+    "receipt": {
+      "path": "docs/migration/lot4b-evidence/planning/published-predecessor83.json",
+      "sha256": "0b15832f05f841c09affb9960940ad02455feead273629eadb6cd68090ff82d7",
+      "bytes": 1016
+    },
+    "siteVersion": 83,
+    "commit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+    "deploymentStatus": "succeeded"
+  },
+  "historicalMembership": [
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz.parts.json",
+      "sha256": "3e073a11f6c5d901344cbe1ffd5bf6c993fdf1854b96edae2980054e25c3c826",
+      "bytes": 1502,
+      "workingBytesIdentical": true
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz.part000",
+      "sha256": "695447bccd4b6515ec264bf302df4544b52a821384d229f83f1879d4baaac493",
+      "bytes": 900000,
+      "workingBytesIdentical": true
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz.part001",
+      "sha256": "e88038c13f1495b169741494b928bc1e5fae9aa6ef2766df538a0bcbd53ae0b2",
+      "bytes": 900000,
+      "workingBytesIdentical": true
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz.part002",
+      "sha256": "f62711c23e96f75aae6aed069e8b0ade9577223e7233247a614012805cba414f",
+      "bytes": 900000,
+      "workingBytesIdentical": true
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz.part003",
+      "sha256": "6ad7ffceef08723072e9add855111b305fcac7edf74a3719ba2ffd25de916f95",
+      "bytes": 900000,
+      "workingBytesIdentical": true
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz.part004",
+      "sha256": "a5cbd029abe74f290512556c492505929b74a2376c7ba72e1456710c37088b26",
+      "bytes": 900000,
+      "workingBytesIdentical": true
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz.part005",
+      "sha256": "0eb42630cf102d845621b25e68adca81b76420bab38110880cf61155c27e917c",
+      "bytes": 900000,
+      "workingBytesIdentical": true
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz.part006",
+      "sha256": "1cc7b7c46d43a4287aef0b49efb206ece3298e393d119eff2dbe548c914d3d03",
+      "bytes": 45629,
+      "workingBytesIdentical": true
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/execution-lkey.json",
+      "sha256": "ac35fbe45492ee87b02e472455d828408b33d261ed1873f6044f1419c611dfec",
+      "bytes": 70533,
+      "workingBytesIdentical": true
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-public-trace.json.gz",
+      "sha256": "de96446d655f3c5165f4eeebfbd0aa1ed074c2b65ee35288d84c6d4112a2a763",
+      "bytes": 10983,
+      "workingBytesIdentical": true
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-actual-public-journal.jsonl.gz",
+      "sha256": "d00fd30f4c5579137e603e53faf9ab29d51c82c4b0dfb1c28ef31a0fcab67450",
+      "bytes": 8081,
+      "workingBytesIdentical": true
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/source-manifest.json",
+      "sha256": "75e1dbe4002f737c2d5248a08531c6b60002c3114692b55df3a5c7255c79d6cc",
+      "bytes": 33095,
+      "workingBytesIdentical": true
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/publication-inputs.json",
+      "sha256": "4bf853a81437fccce3f8415d5cc29d521839dfbcb3e79826d0eff07d8522f1f4",
+      "bytes": 5105,
+      "workingBytesIdentical": true
+    }
+  ],
+  "historicalExecutionFiles": [
+    {
+      "role": "runner",
+      "path": "scripts/run-v53-journaled-campaign.mjs",
+      "sha256": "fea5ea30777475f21ee6ffc3cfa221f652e0e5deccc606c16f9b51d6bd47f646",
+      "bytes": 1961,
+      "publishedBytesMatchHistoricalExecution": true
+    },
+    {
+      "role": "harness",
+      "path": "tests/helpers/v6-live-game-campaign.ts",
+      "sha256": "a33b59fc84bb2007a6c80842e9cc395836270bc3ddd90eece606f1dcce04261a",
+      "bytes": 70789,
+      "publishedBytesMatchHistoricalExecution": true
+    },
+    {
+      "role": "generator",
+      "path": "scripts/run-v53-campaign-proof.py",
+      "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+      "bytes": 5421,
+      "publishedBytesMatchHistoricalExecution": true
+    }
+  ],
+  "restoration": {
+    "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz",
+    "sha256": "11aa4589a7d294cc5c7aed2e0e3946541cf48a208b891b0c7229a190e290aff4",
+    "bytes": 5445629,
+    "manifest": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz.parts.json",
+    "parts": 7,
+    "restored": true
+  },
+  "baselineRawStatus": "failed",
+  "baselineExecutionExitCode": 1,
+  "baselineSourceDigest": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb",
+  "observedHistoricalCounts": {
+    "actions": 25,
+    "publicPackets": 26,
+    "prefixes": 25,
+    "requests": 51,
+    "levelsCompleted": 2,
+    "boundaryActions": [
+      16,
+      24
+    ],
+    "workshop": {
+      "calls": 49,
+      "records": 25,
+      "selectedRecords": 14,
+      "passiveRecords": 11
+    }
+  },
+  "developmentNativeSource": {
+    "manifest": {
+      "path": "docs/migration/lot4b-evidence/development/merged-site82/source-manifest.json",
+      "sha256": "655a60d587dced4c4b1b3b234b6ec28271e8676894581776802e9bd747c27bb7",
+      "bytes": 33472
+    },
+    "digest": "31850e3a309e51da61980025d333d4936e8ddbba44ed262ebe0330d944e589fe",
+    "fileCount": 282,
+    "currentFilesMatchManifest": true
+  },
+  "executionInputs": {
+    "runner": {
+      "path": "scripts/replay-native-partial-public-regression.mjs",
+      "sha256": "2ad1bc5cb7763efbf8d1905d184dbb33c873c70416dd5ce125ea2f85f45ace69",
+      "bytes": 40628
+    },
+    "harness": {
+      "path": "tests/helpers/v6-live-game-campaign.ts",
+      "sha256": "93b824b078ccf259827be897e8143dc59fc0479d6f765f3a437cc95b2f4472c1",
+      "bytes": 73454
+    },
+    "service": {
+      "path": "src/runtime/v6-agent-service.ts",
+      "sha256": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96",
+      "bytes": 18195
+    },
+    "protocol": {
+      "path": "src/runtime/v6-agent-protocol.ts",
+      "sha256": "597b4d4ab19882a37048e1fa9caeaebea2112b66e25f6294f428bb7916818aa4",
+      "bytes": 9389
+    },
+    "commonDeclaration": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f",
+      "bytes": 48531
+    },
+    "strategyDeclaration": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+      "bytes": 46966
+    }
+  },
+  "runnerExecuted": false,
+  "nativeExecutions": 0,
+  "liveGames": 0,
+  "caseClockModified": false,
+  "qualification": "All required7A report parts, manifests, trace, passive journal and execution receipt match exact blobs in the published Site83 commit. Its historical runner/harness/generator bytes match the execution receipt. The report remains failed at2/3levels. No partial-trajectory preservation result is created by this preparation.",
+  "suggestedOutputDirectory": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-01"
+}

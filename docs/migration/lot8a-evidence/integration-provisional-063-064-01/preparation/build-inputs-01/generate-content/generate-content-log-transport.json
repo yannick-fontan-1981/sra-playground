@@ -1,0 +1,44 @@
+{
+  "schema": "logos-engine.v6.development-log-transport.v1",
+  "recordedAt": "2026-11-11T19:19:57.630413+00:00",
+  "status": "verified_byte_exact",
+  "entries": [
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/generate-content/generate-content-stdout.log",
+        "sha256": "8473e798446f07ef264c58ad2ea8e8f4ef5c88a29e88fa5ea54b437457dea316",
+        "bytes": 152
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/generate-content/generate-content-stdout.log.gz",
+        "sha256": "b2076ecb00dd7fca92302b6361f3d9a449e516057c128307dbd67691d0fb5fad",
+        "bytes": 138
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/generate-content/generate-content-stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/generate-content/generate-content-stderr.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+        "bytes": 20
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/generate-content/generate-content-activity.jsonl",
+        "sha256": "9fe4cfb1484b19016fc43986bb6a3efa6d9e785455720ef5eab92c62b96677bc",
+        "bytes": 107
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/generate-content/generate-content-activity.jsonl.gz",
+        "sha256": "18505401ec0279354a2c2e4be3f27a992ca8e953881e4b62f95a78ec2829d9f7",
+        "bytes": 113
+      }
+    }
+  ],
+  "qualification": "Complete stdout, stderr and activity, including failures; no filtering or newline normalization."
+}

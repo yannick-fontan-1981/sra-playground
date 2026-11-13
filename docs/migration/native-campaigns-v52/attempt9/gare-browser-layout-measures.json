@@ -1,0 +1,310 @@
+[
+  {
+    "actions": 0,
+    "inspectionOpen": false,
+    "levels": 0,
+    "prefixes": 0,
+    "rects": {
+      "#agent-message": {
+        "height": 98,
+        "width": 265,
+        "x": 986,
+        "y": 948.671875
+      },
+      "#agent-run": {
+        "height": 44,
+        "width": 265,
+        "x": 986,
+        "y": 1062.671875
+      },
+      "#canvas-stage": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      "#game-canvas": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      ".board-column": {
+        "height": 442,
+        "width": 888,
+        "x": 75,
+        "y": 878.671875
+      }
+    },
+    "status": "Ready to run from level 1.",
+    "url": "http://127.0.0.1:4173/?game=GARE&level=1",
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    }
+  },
+  {
+    "actions": 0,
+    "inspectionOpen": false,
+    "levels": 0,
+    "prefixes": 0,
+    "rects": {
+      "#agent-message": {
+        "height": 98,
+        "width": 265,
+        "x": 986,
+        "y": 948.671875
+      },
+      "#agent-run": {
+        "height": 44,
+        "width": 265,
+        "x": 986,
+        "y": 1062.671875
+      },
+      "#canvas-stage": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      "#game-canvas": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      ".board-column": {
+        "height": 442,
+        "width": 888,
+        "x": 75,
+        "y": 878.671875
+      }
+    },
+    "status": "Preparing the agent…",
+    "url": "http://127.0.0.1:4173/?game=GARE&level=1",
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    }
+  },
+  {
+    "actions": 7,
+    "inspectionOpen": false,
+    "levels": 1,
+    "prefixes": 7,
+    "rects": {
+      "#agent-message": {
+        "height": 98,
+        "width": 265,
+        "x": 986,
+        "y": 948.671875
+      },
+      "#agent-run": {
+        "height": 44,
+        "width": 265,
+        "x": 986,
+        "y": 1062.671875
+      },
+      "#canvas-stage": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      "#game-canvas": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      ".board-column": {
+        "height": 442,
+        "width": 888,
+        "x": 75,
+        "y": 878.671875
+      }
+    },
+    "status": "Level completed.",
+    "url": "http://127.0.0.1:4173/?game=GARE&level=2",
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    }
+  },
+  {
+    "actions": 7,
+    "inspectionOpen": false,
+    "levels": 1,
+    "prefixes": 7,
+    "rects": {
+      "#agent-message": {
+        "height": 98,
+        "width": 265,
+        "x": 986,
+        "y": 948.671875
+      },
+      "#agent-run": {
+        "height": 44,
+        "width": 265,
+        "x": 986,
+        "y": 1062.671875
+      },
+      "#canvas-stage": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      "#game-canvas": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      ".board-column": {
+        "height": 442,
+        "width": 888,
+        "x": 75,
+        "y": 878.671875
+      }
+    },
+    "status": "Reading the board and planning…",
+    "url": "http://127.0.0.1:4173/?game=GARE&level=2",
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    }
+  },
+  {
+    "actions": 16,
+    "inspectionOpen": false,
+    "levels": 2,
+    "prefixes": 16,
+    "rects": {
+      "#agent-message": {
+        "height": 98,
+        "width": 265,
+        "x": 986,
+        "y": 948.671875
+      },
+      "#agent-run": {
+        "height": 44,
+        "width": 265,
+        "x": 986,
+        "y": 1062.671875
+      },
+      "#canvas-stage": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      "#game-canvas": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      ".board-column": {
+        "height": 442,
+        "width": 888,
+        "x": 75,
+        "y": 878.671875
+      }
+    },
+    "status": "Level completed.",
+    "url": "http://127.0.0.1:4173/?game=GARE&level=3",
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    }
+  },
+  {
+    "actions": 16,
+    "inspectionOpen": false,
+    "levels": 2,
+    "prefixes": 16,
+    "rects": {
+      "#agent-message": {
+        "height": 98,
+        "width": 265,
+        "x": 986,
+        "y": 948.671875
+      },
+      "#agent-run": {
+        "height": 44,
+        "width": 265,
+        "x": 986,
+        "y": 1062.671875
+      },
+      "#canvas-stage": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      "#game-canvas": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      ".board-column": {
+        "height": 442,
+        "width": 888,
+        "x": 75,
+        "y": 878.671875
+      }
+    },
+    "status": "Reading the board and planning…",
+    "url": "http://127.0.0.1:4173/?game=GARE&level=3",
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    }
+  },
+  {
+    "actions": 53,
+    "inspectionOpen": false,
+    "levels": 3,
+    "prefixes": 53,
+    "rects": {
+      "#agent-message": {
+        "height": 98,
+        "width": 265,
+        "x": 986,
+        "y": 948.671875
+      },
+      "#agent-run": {
+        "height": 44,
+        "width": 265,
+        "x": 986,
+        "y": 1062.671875
+      },
+      "#canvas-stage": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      "#game-canvas": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      ".board-column": {
+        "height": 442,
+        "width": 888,
+        "x": 75,
+        "y": 878.671875
+      }
+    },
+    "status": "Level completed.",
+    "url": "http://127.0.0.1:4173/?game=GARE&level=4",
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    }
+  }
+]

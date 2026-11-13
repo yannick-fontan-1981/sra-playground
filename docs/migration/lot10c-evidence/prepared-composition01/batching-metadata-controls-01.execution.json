@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.lot10c.metadata-controls-execution.v1",
+  "recordedAt": "2026-11-11T19:25:33.423915+00:00",
+  "command": [
+    "python3",
+    "-B",
+    "docs/migration/lot10c-evidence/test-development-batch-metadata.py",
+    "--output",
+    "docs/migration/lot10c-evidence/prepared-composition01/batching-metadata-controls-01.json"
+  ],
+  "exitCode": 0,
+  "nativeTestsExecuted": false,
+  "gameExecuted": false,
+  "raw": {
+    "path": "docs/migration/lot10c-evidence/prepared-composition01/batching-metadata-controls-01.raw.txt",
+    "bytes": 2651,
+    "sha256": "1366b250bd4229b5ee0dad6ba6b4aa1264e5721b37a190d6ceb46412c9012cca"
+  }
+}

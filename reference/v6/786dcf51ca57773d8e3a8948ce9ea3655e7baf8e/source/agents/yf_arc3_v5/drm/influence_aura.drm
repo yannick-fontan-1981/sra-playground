@@ -1,0 +1,266 @@
+{
+  "module_id": "influence_aura",
+  "declarations": [
+    {
+      "id": "principle.delimited_influence_is_distinct_from_body",
+      "reason_refs": ["reason.observed_influence_domain_must_not_replace_body_support"],
+      "kind": "principle",
+      "premises": [
+        "observed_closed_contour_and_current_enclosed_supports"
+      ],
+      "applicability": [
+        "body_field_separation",
+        "spatial_influence_revalidation"
+      ],
+      "invariants": [
+        "aura_is_a_revisable_influence_zone_not_a_collision_body",
+        "circle_rectangle_and_irregular_contours_use_their_actual_domain",
+        "co_motion_proposes_attachment_but_does_not_establish_an_effect",
+        "structural_frame_remains_an_alternative",
+        "centre_full_support_and_overlap_are_distinct_effect_predicates",
+        "boundary_inclusion_requires_evidence",
+        "no_palette_or_game_identity_establishes_influence",
+        "a_domain_must_be_relocated_and_revalidated_before_use"
+      ],
+      "falsifiers": [
+        "contour_opens_or_is_clipped",
+        "relative_motion_breaks_attachment",
+        "observed_effect_contradicts_proposed_membership"
+      ]
+    },
+    {
+      "id": "policy.record_cotranslated_aura_candidate",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "aura.circle_candidate",
+        "aura.rectangle_candidate",
+        "aura.irregular_candidate"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "contour_is_exact_domain_boundary",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "aura_geometry_kind",
+          "operator": "is_present"
+        },
+        {
+          "field": "closed_contour_present",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "enclosed_member_count",
+          "operator": "greater_than",
+          "expected": 0
+        },
+        {
+          "field": "same_relative_domain_after_translation",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.aura.circle",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "aura.circle_candidate"
+            },
+            {
+              "field": "exact_circular_domain",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "exact_rectangular_domain",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "aura_geometry_kind": "circle",
+            "influence_effect_established": false,
+            "structural_frame_alternative_preserved": true
+          }
+        },
+        {
+          "id": "projection.aura.rectangle",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "aura.rectangle_candidate"
+            },
+            {
+              "field": "exact_circular_domain",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "exact_rectangular_domain",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "aura_geometry_kind": "rectangle",
+            "influence_effect_established": false,
+            "structural_frame_alternative_preserved": true
+          }
+        },
+        {
+          "id": "projection.aura.irregular",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "aura.irregular_candidate"
+            },
+            {
+              "field": "exact_circular_domain",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "exact_rectangular_domain",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "aura_geometry_kind": "irregular",
+            "influence_effect_established": false,
+            "structural_frame_alternative_preserved": true
+          }
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "aura.circle_candidate": "rule.cotranslated_aura_candidate",
+        "aura.rectangle_candidate": "rule.cotranslated_aura_candidate",
+        "aura.irregular_candidate": "rule.cotranslated_aura_candidate"
+      },
+      "premises": [
+        "closed_contour_has_enclosed_exactly_cotranslated_supports"
+      ],
+      "invariants": [
+        "record_all_owner_support_candidates_without_arbitrary_selection",
+        "geometry_does_not_authorize_protection_or_motion"
+      ],
+      "falsifiers": [
+        "enclosure_or_rigid_covariation_fails"
+      ],
+      "reason_refs": [
+        "reason.cotranslated_enclosure_supports_revisable_aura_distinct_from_body"
+      ]
+    },
+    {
+      "id": "rule.cotranslated_aura_candidate",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "dynamic",
+      "premises": [
+        "source_selected_current_closed_cotranslated_enclosure"
+      ],
+      "invariants": [
+        "influence_effect_is_unknown_until_action_conditioned_evidence",
+        "candidate_is_not_a_control_binding_or_collision_mask",
+        "retain_original_contour_and_owner_supports",
+        "historical_geometry_is_not_current_action_authority"
+      ],
+      "falsifiers": [
+        "current_contour_or_relative_attachment_changes"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "supposition.aura.{enclosure_token}",
+          "kind": "schema",
+          "label": "revisable delimited aura distinct from body",
+          "required_fields": [
+            "enclosure_token",
+            "contour_entity_ref",
+            "enclosed_member_refs",
+            "aura_geometry_kind",
+            "relative_domain",
+            "context_epoch"
+          ],
+          "static_attributes": {
+            "role": "aura_supposition",
+            "commitment": "revisable",
+            "influence_effect_established": false,
+            "structural_frame_alternative_preserved": true,
+            "canonical_fact_projection_enabled": false,
+            "boundary_inclusion": "unknown",
+            "membership_predicate": "unknown",
+            "current_revalidation_required": true
+          },
+          "attribute_bindings": {
+            "contour_entity_ref": "contour_entity_ref",
+            "observed_value": "observed_value",
+            "acquired_scene_ref": "frame_ref",
+            "contour_component_ref": "contour_component_ref",
+            "enclosed_member_refs": "enclosed_member_refs",
+            "aura_geometry_kind": "aura_geometry_kind",
+            "relative_boundary": "relative_boundary",
+            "relative_interior": "relative_interior",
+            "relative_domain": "relative_domain",
+            "domain_digest": "domain_digest",
+            "origin_row": "origin_row",
+            "origin_col": "origin_col",
+            "action_ref": "action_ref",
+            "transition_ref": "transition_ref",
+            "context_epoch": "context_epoch",
+            "delta_row": "delta_row",
+            "delta_col": "delta_col"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.aura.candidate.{enclosure_token}.{transition_ref}",
+          "predicate": "proposes_role_candidate",
+          "family": "dynamic",
+          "epistemic_status": "proposed",
+          "required_fields": [
+            "enclosure_token",
+            "transition_ref"
+          ],
+          "argument_patterns": [
+            "supposition.aura.{enclosure_token}",
+            "role.aura_supposition"
+          ],
+          "required_term_patterns": [
+            "supposition.aura.{enclosure_token}"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "is_frozen_action_contract": false
+          },
+          "attribute_bindings": {
+            "action_ref": "action_ref",
+            "transition_ref": "transition_ref",
+            "context_epoch": "context_epoch"
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.cotranslated_enclosure_supports_revisable_aura_distinct_from_body"
+      ]
+    }
+  ]
+}

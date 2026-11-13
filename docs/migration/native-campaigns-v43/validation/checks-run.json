@@ -1,0 +1,84 @@
+{
+  "schema": "logos-engine.v43.actual-check-execution.v1",
+  "checks": [
+    {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-11-08T18:21:57.117372+00:00",
+      "finishedAt": "2026-11-08T18:22:03.154135+00:00",
+      "output": {
+        "path": "docs/migration/native-campaigns-v43/typecheck-output.log.gz",
+        "sha256": "0d2cbbee31ca5839df68f3a5ae10b6102ed35a65bd129facd4509c36a18a564d",
+        "bytes": 141
+      }
+    },
+    {
+      "name": "entry-audit",
+      "command": [
+        "node",
+        "scripts/audit-v6-entry-points.ts"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-11-08T18:22:03.154394+00:00",
+      "finishedAt": "2026-11-08T18:22:03.571745+00:00",
+      "output": {
+        "path": "docs/migration/native-campaigns-v43/entry-audit-output.log.gz",
+        "sha256": "b3b118ac124672380ff562335b3ab5361ff1afbf2e19f4f7040bea83f20d3dee",
+        "bytes": 176
+      }
+    },
+    {
+      "name": "migration-audit",
+      "command": [
+        "python",
+        "scripts/audit-v6-migration.py"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-11-08T18:22:03.571951+00:00",
+      "finishedAt": "2026-11-08T18:22:09.681522+00:00",
+      "output": {
+        "path": "docs/migration/native-campaigns-v43/migration-audit-output.log.gz",
+        "sha256": "4eca28a0c6f384a8bc4a654751be6287ff028118d693ac07ed42edcc4d1c5bf4",
+        "bytes": 206
+      }
+    },
+    {
+      "name": "diff-check",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-11-08T18:22:09.681899+00:00",
+      "finishedAt": "2026-11-08T18:22:09.720560+00:00",
+      "output": {
+        "path": "docs/migration/native-campaigns-v43/diff-check-output.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+        "bytes": 20
+      }
+    },
+    {
+      "name": "build",
+      "command": [
+        "node",
+        "/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.4/scripts/build-site.mjs"
+      ],
+      "exitCode": 0,
+      "startedAt": "2026-11-08T18:22:09.720722+00:00",
+      "finishedAt": "2026-11-08T18:22:16.857670+00:00",
+      "output": {
+        "path": "docs/migration/native-campaigns-v43/build-output.log.gz",
+        "sha256": "a6b6e92d3513b232f37ae68e994696d146e14ca86285746d7242982acb9702aa",
+        "bytes": 1565
+      }
+    }
+  ],
+  "nativeSourceManifestDigest": "702fd71e5c234d1942dab9685306aa252b68eaa1280def89d9665a3fcbe2a3fb",
+  "nativeSourceUnchanged": true
+}

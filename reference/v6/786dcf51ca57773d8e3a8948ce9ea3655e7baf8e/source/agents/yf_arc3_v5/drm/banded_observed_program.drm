@@ -1,0 +1,175 @@
+{
+  "module_id": "banded_observed_program",
+  "declarations": [
+    {
+      "id": "policy.banded_observed_program_hypothesis",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "complete_observed_trace_and_explicit_revisable_assumptions",
+        "principle.wired_regions_oriented_glyph_tracks"
+      ],
+      "applicability": [
+        "ordered_frame_activation_and_small_marker_track"
+      ],
+      "invariants": [
+        "no_game_or_palette_or_solution_order",
+        "hypothesis_not_confirmed_world_model",
+        "arrow_taper_axis_interpretation_declared_here",
+        "observed_track_pigment_priority_may_transfer_to_peer_links",
+        "observed_horizontal_wrap_may_transfer_to_peer_bands",
+        "distinguished_support_is_provisional_destination",
+        "preserve_unknown_forced_events_as_falsifiable_assumption",
+        "source_calls_existing_fixed_program_inverse",
+        "no_new_action_authority"
+      ],
+      "falsifiers": [
+        "ambiguous_or_incomplete_measurement",
+        "observed_step_contradicts_model",
+        "placement_changes_word",
+        "unseen_forced_event",
+        "program_does_not_reach_predicted_endpoint"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "banded_program.admit_observed_trace_hypothesis",
+        "banded_program.retain_unknown_geometry"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.banded_program_hypothesis_needs_actual_prediction_validation",
+      "reason_refs": [
+        "reason.observed_program_trace_supports_bounded_origin_hypothesis"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.banded_program.admit_observed_trace_hypothesis",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "banded_program.admit_observed_trace_hypothesis"
+            },
+            {
+              "field": "complete_trace_compatible_geometry_hypotheses",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "oriented_taper_and_track_axis_binding_measured",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "banded_program.admit_observed_trace_hypothesis",
+            "glyph_track_binding_ref": "principle.wired_regions_oriented_glyph_tracks",
+            "horizontal_relation_ref": "relation.same_band_wired_successor",
+            "vertical_relation_ref": "relation.adjacent_band_wired_port",
+            "goal_ref": "goal.qualify_observed_fixed_program_origins",
+            "model_status_ref": "hypothesis.current_observed_trace_compatible",
+            "assumption_refs": [
+              "hypothesis.taper_denotes_axis",
+              "hypothesis.observed_track_class_priority_transfers",
+              "hypothesis.observed_wrap_transfers_to_peer_bands",
+              "hypothesis.distinguished_support_is_destination",
+              "hypothesis.no_unseen_forced_event"
+            ]
+          }
+        },
+        {
+          "id": "projection.banded_program.retain_unknown_geometry",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "banded_program.retain_unknown_geometry"
+            },
+            {
+              "field": "complete_trace_compatible_geometry_hypotheses",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "banded_program.retain_unknown_geometry"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.banded_program.admit_observed_trace_hypothesis",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "banded_program.admit_observed_trace_hypothesis"
+            }
+          ],
+          "reason_ref": "reason.observed_program_trace_supports_bounded_origin_hypothesis"
+        },
+        {
+          "id": "tier.banded_program.retain_unknown_geometry",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "banded_program.retain_unknown_geometry"
+            }
+          ],
+          "reason_ref": "reason.observed_program_trace_supports_bounded_origin_hypothesis"
+        }
+      ]
+    },
+    {
+      "id": "principle.wired_regions_oriented_glyph_tracks",
+      "kind": "principle",
+      "premises": [
+        "bounded_regions_and_two_endpoint_filament_components_are_measured",
+        "tapered_glyph_axes_and_actual_step_endpoints_are_measured",
+        "the_same_band_steps_follow_one_measured_link_class",
+        "cross_band_steps_fit_one_explicit_priority_of_other_link_classes"
+      ],
+      "invariants": [
+        "regions_are_graph_nodes_not_necessarily_grid_cells",
+        "glyph_horizontal_axis_binds_same_band_successor_relation",
+        "glyph_vertical_axis_binds_adjacent_band_port_relation",
+        "scene_colours_are_measured_class_labels_not_runtime_palette_conventions",
+        "visual_crossing_is_not_a_junction_without_endpoint_evidence",
+        "wrapped_peer_bands_and_distinguished_goal_remain_revisable_hypotheses",
+        "input_order_is_measured_from_activation_not_copied_from_oracle",
+        "failed_execution_is_information_not_itself_a_reset_justification"
+      ],
+      "falsifiers": [
+        "ambiguous_filament_endpoints",
+        "glyph_effect_disagrees_with_axis",
+        "current_step_disagrees_with_predicted_port",
+        "unexpected_automatic_effect"
+      ],
+      "reason_refs": [
+        "reason.observed_program_trace_supports_bounded_origin_hypothesis",
+        "reason.place_origin_under_observed_whole_program"
+      ]
+    }
+  ]
+}

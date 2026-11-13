@@ -1,0 +1,20 @@
+{
+  "schema": "logos-engine.lot5c.source-tools-syntax.v1",
+  "recordedAt": "2026-11-11T12:30:34.049652+00:00",
+  "status": "passed",
+  "scope": "Python AST parsing only; no tool execution or original/native implementation import.",
+  "files": [
+    {
+      "path": "scripts/export-observed-binding-reference.py",
+      "bytes": 36597,
+      "sha256": "fd41e4449f2824a5ad4db63ffc0ab5469f7c742e1730578c6bfe3411dfa37c9c",
+      "syntax": "passed"
+    },
+    {
+      "path": "scripts/review-observed-binding-common-replay.py",
+      "bytes": 26266,
+      "sha256": "5703fae25c0ca3101d01d847a14bd57c0dfe5af33ec77f6265fb6ecac67c62d2",
+      "syntax": "passed"
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{
+  "schema": "logos-engine.lot8b-final-cost-tools-independent-review.v1",
+  "status": "passed_static_review",
+  "recordedAt": "2026-11-12T12:22:20.175554+00:00",
+  "reviewer": "/root/final_proof_reconciliation",
+  "author": "/root/final_cost_protocol",
+  "reviewIndependence": "Reviewer did not author or modify these five cost tools. Static source and named dependency inspection only.",
+  "scope": {
+    "nativeExecution": false,
+    "performanceExecution": false,
+    "functionalExecution": false,
+    "lockAcquisition": false,
+    "broadFixtureInspection": false,
+    "closedCaseInspection": false,
+    "toolExecution": false,
+    "reviewedFiles": [
+      {
+        "path": "docs/migration/lot8b-evidence/tools/final-cost/prepare.py",
+        "bytes": 19424,
+        "sha256": "22680bf1833f2fc41ce5ff058ad6ec707138d3b27bc791c1907e93babda325d9"
+      },
+      {
+        "path": "docs/migration/lot8b-evidence/tools/final-cost/postprocess.py",
+        "bytes": 5810,
+        "sha256": "8621250325ba1bcd9f3b1f08c7bb96966b5c7eae78a174a92b8c91707c73fd98"
+      },
+      {
+        "path": "docs/migration/lot8b-evidence/tools/final-cost/analyze.mjs",
+        "bytes": 19756,
+        "sha256": "23b522ef4504fdfd7f883a0920b66ed9826f65396c4e7927faecece776670739"
+      },
+      {
+        "path": "docs/migration/lot8b-evidence/tools/final-cost/review.py",
+        "bytes": 21232,
+        "sha256": "3074e351ac7337040b6cb6b53f6d9c512e6876323540953d4521e81abbd68149"
+      },
+      {
+        "path": "docs/migration/lot8b-evidence/tools/final-cost/README.md",
+        "bytes": 9246,
+        "sha256": "0653239a7cdddbb771579c470722607431dc41367b15f843099c85109a950288"
+      }
+    ]
+  },
+  "historicalDeclaration": {
+    "path": "docs/migration/lot3h-evidence/performance/declaration.json",
+    "bytes": 4105,
+    "sha256": "ca371fbf437d2434932c74238a75ab0eb6cd6ef27e8db5aa329c2d179c8c667d"
+  },
+  "historicalToolChecks": [
+    {
+      "declared": {
+        "path": "scripts/run-native-cost-window.py",
+        "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613",
+        "bytes": 8933
+      },
+      "candidate": {
+        "path": "scripts/run-native-cost-window.py",
+        "bytes": 8933,
+        "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613"
+      },
+      "baseline": {
+        "path": "/workspace/sites/sra-lot8b-baseline066-20261112/scripts/run-native-cost-window.py",
+        "bytes": 8933,
+        "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613"
+      },
+      "identical": true
+    },
+    {
+      "declared": {
+        "path": "scripts/measure-native-loop-costs.mjs",
+        "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+        "bytes": 20670
+      },
+      "candidate": {
+        "path": "scripts/measure-native-loop-costs.mjs",
+        "bytes": 20670,
+        "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+      },
+      "baseline": {
+        "path": "/workspace/sites/sra-lot8b-baseline066-20261112/scripts/measure-native-loop-costs.mjs",
+        "bytes": 20670,
+        "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+      },
+      "identical": true
+    },
+    {
+      "declared": {
+        "path": "scripts/compare-native-loop-costs.mjs",
+        "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+        "bytes": 9861
+      },
+      "candidate": {
+        "path": "scripts/compare-native-loop-costs.mjs",
+        "bytes": 9861,
+        "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb"
+      },
+      "baseline": {
+        "path": "/workspace/sites/sra-lot8b-baseline066-20261112/scripts/compare-native-loop-costs.mjs",
+        "bytes": 9861,
+        "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb"
+      },
+      "identical": true
+    },
+    {
+      "declared": {
+        "path": "scripts/compare-native-cost-cohorts.mjs",
+        "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+        "bytes": 19460
+      },
+      "candidate": {
+        "path": "scripts/compare-native-cost-cohorts.mjs",
+        "bytes": 19460,
+        "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34"
+      },
+      "baseline": {
+        "path": "/workspace/sites/sra-lot8b-baseline066-20261112/scripts/compare-native-cost-cohorts.mjs",
+        "bytes": 19460,
+        "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34"
+      },
+      "identical": true
+    },
+    {
+      "declared": {
+        "path": "scripts/review-native-cost-consolidation.py",
+        "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4",
+        "bytes": 17810
+      },
+      "candidate": {
+        "path": "scripts/review-native-cost-consolidation.py",
+        "bytes": 17810,
+        "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4"
+      },
+      "baseline": {
+        "path": "/workspace/sites/sra-lot8b-baseline066-20261112/scripts/review-native-cost-consolidation.py",
+        "bytes": 17810,
+        "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4"
+      },
+      "identical": true
+    },
+    {
+      "declared": {
+        "path": "scripts/review-native-global-cost-window.py",
+        "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940",
+        "bytes": 22204
+      },
+      "candidate": {
+        "path": "scripts/review-native-global-cost-window.py",
+        "bytes": 22204,
+        "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940"
+      },
+      "baseline": {
+        "path": "/workspace/sites/sra-lot8b-baseline066-20261112/scripts/review-native-global-cost-window.py",
+        "bytes": 22204,
+        "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940"
+      },
+      "identical": true
+    },
+    {
+      "declared": {
+        "path": "scripts/review-native-global-cost-budget.py",
+        "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341",
+        "bytes": 8476
+      },
+      "candidate": {
+        "path": "scripts/review-native-global-cost-budget.py",
+        "bytes": 8476,
+        "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341"
+      },
+      "baseline": {
+        "path": "/workspace/sites/sra-lot8b-baseline066-20261112/scripts/review-native-global-cost-budget.py",
+        "bytes": 8476,
+        "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341"
+      },
+      "identical": true
+    }
+  ],
+  "checks": [
+    {
+      "id": "final_source_and_proof_binding",
+      "result": "passed",
+      "detail": "Preparation verifies committed baseline 4ff7bf45286a8a19d34401988adca587253ae41e / native0.66.0 / 329 files / ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316 and candidate native0.67.0 / 331 files / c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a. Recursive proof fingerprints, real capture receipts, actual four forms, owner inventory, final graph review, reconciliation and separate functional review are bound."
+    },
+    {
+      "id": "functional_scope_preserved",
+      "result": "passed",
+      "detail": "The original forms are copied unchanged. preparedOnly=true, officialPerformanceEligible=false and strictCommonGraphParity=false are required, not relabeled. The new prospective cost contract separately admits four exact predeclared structural count paths with zero unattributed differences and no added programs."
+    },
+    {
+      "id": "unchanged_historical_harness",
+      "result": "passed",
+      "detail": "Seven historical tool files are byte-identical in both checkouts and match the historical declaration. The ABBA measurement command and actual strict comparator remain unchanged. The JavaScript supplement imports guarded arithmetic exports only; the Python reviewer independently reconstructs arithmetic from raw reports."
+    },
+    {
+      "id": "all_trials_and_signatures",
+      "result": "passed",
+      "detail": "A1/B1/B2/A2 each contain STCK10 and SMLP15, one 3-action warmup and four measured sessions per game: 40 total trials, 32 measured sessions/400 actions, 8 warmups/24 actions. Every trial must match its own final-source form, full work signature, version, pause positions and input identity. Slot identities and physical timestamp pairs must both be unique. No measured session or outlier may be omitted."
+    },
+    {
+      "id": "strict_global_per_game",
+      "result": "passed",
+      "detail": "Eight complete session_elapsed durations per version/game are pooled before medians. JavaScript decimal-rational comparison and independent Python Decimal comparison require B median strictly below 1.1 times A separately for STCK and SMLP. There is no epsilon allowance, cross-game compensation or phase-based replacement of the global criterion. Phase overruns remain visible and may be accepted only when both globals pass."
+    },
+    {
+      "id": "retained_actual_strict_failure",
+      "result": "passed",
+      "detail": "The historical strict comparison is actually invoked after the completed window. Only exit 1 with no output and the specified work-metadata AssertionError is accepted as the retained refusal. Logs and before/after inputs are preserved. The supplement keeps historicalStrictComparisonPassed=false; an unexpected success or other failure is not relabeled."
+    },
+    {
+      "id": "independent_arithmetic_and_no_promotion",
+      "result": "passed",
+      "detail": "The Python reviewer independently reproduces all 40 shapes/signatures, original pair diagnostics, pooled metrics, strict global decisions and structural differences. analysis_passed/review_passed describe validation, while globalBudgetAccepted remains separate. Neither reader grants isolation, official qualification or publication."
+    }
+  ],
+  "resolvedFindings": [
+    {
+      "id": "historical_declaration_not_previously_watched",
+      "resolution": "prepare.py now fingerprints the historical declaration before reading it and includes it in final input reverification."
+    },
+    {
+      "id": "cleanup_reserve_prose_mismatch",
+      "resolution": "Generated protocol now delegates exact cleanup and retention reserves to the prospective controller plan; no contradictory 30-second total remains."
+    },
+    {
+      "id": "physical_trial_duplicate_guard",
+      "resolution": "Both analyze.mjs and review.py now require 40 unique (startedAt, finishedAt) pairs in addition to complete unique slot identities."
+    }
+  ],
+  "blockingObjections": [],
+  "recommendedForProspectiveUse": true,
+  "requiredAtExecution": [
+    "Fresh final-source functional forms and successful independent functional review must exist and remain exact before contract preparation.",
+    "The declared official controller must actually complete and release its owned lock, with intact sources, logs and all four reports.",
+    "Retain the actual strict refusal, run both supplementary readers, and use globalBudgetAccepted for both games independently."
+  ],
+  "limitations": [
+    "Static source review only; no cost, controller, comparator, native or functional execution was performed by this review.",
+    "The measured global is the historical controller session_elapsed scope, including pauses/resumes through the last acquired return; worker startup, begin, terminal inspection/close, browser rendering, network and live game engine cost are outside it.",
+    "New native sessions share a case worker within a series; this does not establish cold-process or cold-JIT timing.",
+    "Only the four exact declared structural count paths are admissible; this does not claim full strict historical work parity.",
+    "Official isolation and publication require separate actual evidence."
+  ],
+  "officialPerformanceEligibilityGranted": false,
+  "publicationAuthorizedByThisReview": false
+}

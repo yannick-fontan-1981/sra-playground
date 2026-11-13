@@ -1,0 +1,215 @@
+{
+  "schema": "logos-engine.lot8b.public-graph-corpus-checkpoint.v1",
+  "recordedAt": "2026-11-12T13:31:53.665989+00:00",
+  "publishedSourceCommit": "8462204043aa368faa7df280d796bb706eb53b38",
+  "cases": [
+    "single-positive",
+    "triple-prefix"
+  ],
+  "graphs": [
+    {
+      "sha256": "0818a11ac57de23a97f085b5453ae2aaf747ea65e14ee3b0f1b76a3356ee9e7a",
+      "bytes": 13789021,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/0818a11ac57de23a97f085b5453ae2aaf747ea65e14ee3b0f1b76a3356ee9e7a.json.gz",
+      "gzipSha256": "88e4e806e39d4b5cc5f352936690cde10481b4f8f6bf3bc1b394f8f52e27b97d",
+      "gzipBytes": 1439124,
+      "caseId": "triple-prefix"
+    },
+    {
+      "sha256": "0b2ba1f587d6adf01edd0b046c7b2b1765dd4e62d2094439a2626f922b01eda5",
+      "bytes": 9951042,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/0b2ba1f587d6adf01edd0b046c7b2b1765dd4e62d2094439a2626f922b01eda5.json.gz",
+      "gzipSha256": "f6145bb0a5ae8e93c942d90b15b1ef7bf5f2ec4738c797f8e88771af675d7233",
+      "gzipBytes": 1118510,
+      "caseId": "triple-prefix"
+    },
+    {
+      "sha256": "2f935dc93886abb690904c645f2ac9394d1bf9770cb81449b264779fe1f781b2",
+      "bytes": 10430754,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/2f935dc93886abb690904c645f2ac9394d1bf9770cb81449b264779fe1f781b2.json.gz",
+      "gzipSha256": "4337b31ac02eff8168bc45ba505f4396ef344c83484c7f1b4b7ea42304830dc2",
+      "gzipBytes": 1157625,
+      "caseId": "triple-prefix"
+    },
+    {
+      "sha256": "33ae0f244600c7926fd69c1321a35e19ec208ac21df8f08516e6ae2b55cb7141",
+      "bytes": 11200499,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/33ae0f244600c7926fd69c1321a35e19ec208ac21df8f08516e6ae2b55cb7141.json.gz",
+      "gzipSha256": "99459761d2508eaff2b0b10a96af24067ccee8722875a8fb42f4e4f179f98676",
+      "gzipBytes": 1221379,
+      "caseId": "single-positive"
+    },
+    {
+      "sha256": "386ba778c2442f7a5d8d26503869cb314ea10576e0f49a7299fbc311ef31bbd6",
+      "bytes": 11915771,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/386ba778c2442f7a5d8d26503869cb314ea10576e0f49a7299fbc311ef31bbd6.json.gz",
+      "gzipSha256": "0b036906806b7486bb1d08396d56eba437389c1e2ff39aa5261a4a8c04c9a81d",
+      "gzipBytes": 1282412,
+      "caseId": "triple-prefix"
+    },
+    {
+      "sha256": "5586f077aa46bb49238292b8823236a3c92895af6597193fd98c12e8015a4b25",
+      "bytes": 11128934,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/5586f077aa46bb49238292b8823236a3c92895af6597193fd98c12e8015a4b25.json.gz",
+      "gzipSha256": "f463667ac047f10bd6fa9ffe70aea209e59cb80206963916eba9510b57fa35bd",
+      "gzipBytes": 1213638,
+      "caseId": "single-positive"
+    },
+    {
+      "sha256": "6b71a73860346f1a26eb8b2d62cd74748e37247db68fbecd0b54273fe29961a3",
+      "bytes": 11174412,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/6b71a73860346f1a26eb8b2d62cd74748e37247db68fbecd0b54273fe29961a3.json.gz",
+      "gzipSha256": "f4dcf8f446a27c834e0459fcb1b0058526aa9e369643e4d4e64218736ad7e1fe",
+      "gzipBytes": 1221459,
+      "caseId": "triple-prefix"
+    },
+    {
+      "sha256": "75f4503e6482be649b0e76f82c1dc42cca590174a7dc597c1580af918726f443",
+      "bytes": 8753827,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/75f4503e6482be649b0e76f82c1dc42cca590174a7dc597c1580af918726f443.json.gz",
+      "gzipSha256": "aa1e6c0caec393229db0eddd9495e0aeab0a1381065d37ceacb724cacf58fade",
+      "gzipBytes": 995778,
+      "caseId": "triple-prefix"
+    },
+    {
+      "sha256": "7ec2f97000158827a46026aa2a2c96be1475bda9bf484b4a7b2e22243c2fb9a1",
+      "bytes": 12493236,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/7ec2f97000158827a46026aa2a2c96be1475bda9bf484b4a7b2e22243c2fb9a1.json.gz",
+      "gzipSha256": "62ca4b2286f7a3e25518f773d935516ab49450b39f3fe1c0c21a6327c3e4fbd3",
+      "gzipBytes": 1325652,
+      "caseId": "single-positive"
+    },
+    {
+      "sha256": "85da76417336fe8e8cedfc055d71e7b887c323661c5c2ef3adbf0afba7f9d3f2",
+      "bytes": 10400703,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/85da76417336fe8e8cedfc055d71e7b887c323661c5c2ef3adbf0afba7f9d3f2.json.gz",
+      "gzipSha256": "a136e5698452186cf5ae0d31a21d81bfe31d95f623af3fa4f77bcdc72bff966a",
+      "gzipBytes": 1153193,
+      "caseId": "single-positive"
+    },
+    {
+      "sha256": "8de5f5662795a6aa8f6feae7b92fb6ad9909ab17b785cef22b0709d22de010fc",
+      "bytes": 11764423,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/8de5f5662795a6aa8f6feae7b92fb6ad9909ab17b785cef22b0709d22de010fc.json.gz",
+      "gzipSha256": "cb78ed739f4f259ec043f417a331884777f75d0ad39af35ab891a7b500dfbd58",
+      "gzipBytes": 1264198,
+      "caseId": "single-positive"
+    },
+    {
+      "sha256": "8fbd3cfc8e8a1479bdd731e16236f29809f81370060da6931da220741fae8510",
+      "bytes": 9881076,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/8fbd3cfc8e8a1479bdd731e16236f29809f81370060da6931da220741fae8510.json.gz",
+      "gzipSha256": "c61565b331234e1ce867d298c22c6af24f4edd82e2e8ef02677c4ef9453336d7",
+      "gzipBytes": 1107898,
+      "caseId": "single-positive"
+    },
+    {
+      "sha256": "92415af36e6419bf6099cb2d2b168ba5a0f40fc1580180334e461e99ff2ab257",
+      "bytes": 13895169,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/92415af36e6419bf6099cb2d2b168ba5a0f40fc1580180334e461e99ff2ab257.json.gz",
+      "gzipSha256": "4131ae3c3f171faa7c3953c963f0da1d3b3b084f8b24a2ba986fd1a562925d4d",
+      "gzipBytes": 1453964,
+      "caseId": "triple-prefix"
+    },
+    {
+      "sha256": "9c7181ee67e8e9012b631772895d36999a05976f0ad4a1ff2792e704af712f3c",
+      "bytes": 12573669,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/9c7181ee67e8e9012b631772895d36999a05976f0ad4a1ff2792e704af712f3c.json.gz",
+      "gzipSha256": "f0d46b581aa6fa85292b8cabdd61b722aa1e5045bcdec1f9c20b03e10e2d69c4",
+      "gzipBytes": 1338046,
+      "caseId": "triple-prefix"
+    },
+    {
+      "sha256": "a6274d1a9b8b79e9a295c81a10470b21aa356cc60dc6688eb6918edb4a0fa29f",
+      "bytes": 11246239,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/a6274d1a9b8b79e9a295c81a10470b21aa356cc60dc6688eb6918edb4a0fa29f.json.gz",
+      "gzipSha256": "a7e339ebce50878c3d0d7353b109cc0cb9ee455f7144ddb6a419ac867522c2cc",
+      "gzipBytes": 1228942,
+      "caseId": "triple-prefix"
+    },
+    {
+      "sha256": "b67594ae77c4ca4bdcdda5f4e88c2ca4019016d2638b3975748fc2af832595d3",
+      "bytes": 13222473,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/b67594ae77c4ca4bdcdda5f4e88c2ca4019016d2638b3975748fc2af832595d3.json.gz",
+      "gzipSha256": "94444759825e568a080791a7b66f79e4efbb1cfd8a02925e6a5f31b81d9dc60f",
+      "gzipBytes": 1377528,
+      "caseId": "single-positive"
+    },
+    {
+      "sha256": "c2c24a16715b6c3257ae3042ad30384c7b2bae9b98606fad74c0c89e61c52971",
+      "bytes": 12684067,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/c2c24a16715b6c3257ae3042ad30384c7b2bae9b98606fad74c0c89e61c52971.json.gz",
+      "gzipSha256": "112b8cba821f8d9e286580894ecb8fe137ff8b098aced9be6cc6d93cc2995d9f",
+      "gzipBytes": 1350133,
+      "caseId": "triple-prefix"
+    },
+    {
+      "sha256": "d16815c85157751e9eb081b3fea497b85b5efd32a3fcd5e26232feac0abd7a9a",
+      "bytes": 12406686,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/d16815c85157751e9eb081b3fea497b85b5efd32a3fcd5e26232feac0abd7a9a.json.gz",
+      "gzipSha256": "e7b7d58d6644fec8a171c0bc21f885781be951c8b68d68841e8f69e66d085d7d",
+      "gzipBytes": 1317753,
+      "caseId": "single-positive"
+    },
+    {
+      "sha256": "d384d8ea046a3db5663540a74f2623476a8555496de4c2289c92bce8ae4b215b",
+      "bytes": 9899971,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/d384d8ea046a3db5663540a74f2623476a8555496de4c2289c92bce8ae4b215b.json.gz",
+      "gzipSha256": "059860d80a976cd0213fe329f24c263a81fee0942d8fecaa052db399f63eb0eb",
+      "gzipBytes": 1112586,
+      "caseId": "triple-prefix"
+    },
+    {
+      "sha256": "d58f2b2863439ac87471fefa7f74ea06f80e367ed5f883e04a106b9a52e1cae1",
+      "bytes": 10491641,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/d58f2b2863439ac87471fefa7f74ea06f80e367ed5f883e04a106b9a52e1cae1.json.gz",
+      "gzipSha256": "7c70f8fc2610753ce7f6eb423a359b6cb71601f908ee55a2efbe379bb4311e61",
+      "gzipBytes": 1163057,
+      "caseId": "triple-prefix"
+    },
+    {
+      "sha256": "d697975cc4ef6af8e2fedf36d6b879a6585e91bb1585c4b1731143bdbb70ca33",
+      "bytes": 9931973,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/d697975cc4ef6af8e2fedf36d6b879a6585e91bb1585c4b1731143bdbb70ca33.json.gz",
+      "gzipSha256": "8926eb345f2f53de18c6dde09c303f8498609692338c3ccdf0fcd5147c2d5a68",
+      "gzipBytes": 1115462,
+      "caseId": "single-positive"
+    },
+    {
+      "sha256": "e1015ce1a3c577edf5cb1a3e693286d96c128c8ad2bcf73f7753172dfc769b85",
+      "bytes": 8745929,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/e1015ce1a3c577edf5cb1a3e693286d96c128c8ad2bcf73f7753172dfc769b85.json.gz",
+      "gzipSha256": "d5d2889e9ab60f307a4838712bb33e19b7daf7b95c73aa9e1b0f0d0d03fc27ca",
+      "gzipBytes": 994249,
+      "caseId": "single-positive"
+    },
+    {
+      "sha256": "e58d1a84bb32653de292b71ea23b15452158db99c50268c81850dcd46375e38d",
+      "bytes": 11855615,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/e58d1a84bb32653de292b71ea23b15452158db99c50268c81850dcd46375e38d.json.gz",
+      "gzipSha256": "bd9ac708b969b19512b927e044d58d2bfc40e5f209d6bb0adf0b5d98b25a8611",
+      "gzipBytes": 1273192,
+      "caseId": "single-positive"
+    },
+    {
+      "sha256": "e5eba0af9459b37882a3a215d27f33ddb0d49e56fcddb67d97d1cdbfa6371459",
+      "bytes": 11824209,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/e5eba0af9459b37882a3a215d27f33ddb0d49e56fcddb67d97d1cdbfa6371459.json.gz",
+      "gzipSha256": "81efb66ac9018ad767775b486c11e208f4ee4026368d23cd38c4f13eafeba1f7",
+      "gzipBytes": 1274172,
+      "caseId": "triple-prefix"
+    },
+    {
+      "sha256": "fcbe67615477ef753f19657cd4a0cb40a5dadc1928c90a6ef0e544e18d5b55c2",
+      "bytes": 10461372,
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/graphs/fcbe67615477ef753f19657cd4a0cb40a5dadc1928c90a6ef0e544e18d5b55c2.json.gz",
+      "gzipSha256": "0edfaa9f974bc51e66b8614a85615a2d89c6dfc76d36facd90819bcbf3912d7e",
+      "gzipBytes": 1157757,
+      "caseId": "single-positive"
+    }
+  ],
+  "gzipBytes": 30657707,
+  "kind": "coherent_partial_source_backup",
+  "completeCaptureArchiveSavedByThisCheckpoint": false,
+  "remainingForNextCheckpoint": "Contrary-return graphs, RPC journal, capture/probe receipts, independent qualification and final roadmap."
+}

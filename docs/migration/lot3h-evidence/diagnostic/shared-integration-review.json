@@ -1,0 +1,291 @@
+{
+  "schema": "logos-engine.lot3h.shared-integration-review.v1",
+  "recordedAt": "2026-11-10T13:19:31.254959-03:00",
+  "displayTimeZone": "UTC-03:00",
+  "status": "passed",
+  "reviewKind": "independent_static_source_and_native_integration_review",
+  "scope": "Current CrossedPrefix owner hooks, shared acquisition/guard/binding order, historical digest slot, working-state certificates, atomic restore, runtime entry and bounds. No runtime, game, test or build execution.",
+  "baseline": {
+    "siteVersion": 76,
+    "nativeVersion": "0.48.0",
+    "commit": "fbbc3fb6b796c0ba359654da7234008767090e1f"
+  },
+  "sourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "originalFilesVerified": 1786,
+  "checks": [
+    {
+      "name": "source_ancestry_is_distinct_from_framed",
+      "passed": true,
+      "basis": "static source and native-code inspection",
+      "detail": "CrossedPrefixAccess inherits SupportedLineAccess and RepeatedLinePatterns; FramedWindow adjacency is DRM selection order, not a parent relation."
+    },
+    {
+      "name": "historical_digest_slot_reused",
+      "passed": true,
+      "basis": "static source and native-code inspection",
+      "detail": "SeriesEventMemory retains the existing CrossedPrefix digest position after SupportedLine and before Marked/Program; SharedOccurrenceMemory delegates this slot to the one CrossedPrefix owner."
+    },
+    {
+      "name": "standalone_recall_reducers_preserved",
+      "passed": true,
+      "basis": "static source and native-code inspection",
+      "detail": "The protected hook default retains the old standalone reductions and digest formula. The shared subclass overrides dispatch, so old empty shadow fields never acquire a second copy."
+    },
+    {
+      "name": "single_common_owner",
+      "passed": true,
+      "basis": "static source and native-code inspection",
+      "detail": "SharedSeries.crossedPrefix is a getter of memory.crossedPrefix. Restoration creates that nested owner once through new SharedOccurrenceMemory; it does not separately restore or append another Crossed layer."
+    },
+    {
+      "name": "source_record_order",
+      "passed": true,
+      "basis": "static source and native-code inspection",
+      "detail": "SharedSeries records Crossed once before recordObservedProgram and occurrence acquisition, matching super.record order in MarkedCollection, ProgramComposition and OccurrenceRecall."
+    },
+    {
+      "name": "rooted_quota_cutoff_preserved",
+      "passed": true,
+      "basis": "static source and native-code inspection",
+      "detail": "A truthy rooted_quota_plan skips older Crossed/Program/Occurrence/material/radial/service acquisition, matching RootedQuotaAccess.record returning its own event without super. FramedWindow and later layers still run."
+    },
+    {
+      "name": "catalogue_view_parent_envelope_preserved",
+      "passed": true,
+      "basis": "static source and native-code inspection",
+      "detail": "A scalar catalogue view removes only its catalogue plan for older ancestor acquisition; Crossed receives that same parentProposal, while later layers retain the original proposal."
+    },
+    {
+      "name": "dynamic_after_dispatch",
+      "passed": true,
+      "basis": "static source and native-code inspection",
+      "detail": "CrossedPrefixMemory.record receives SharedSeries.after as an explicit callback, preserving source self.after dispatch for mixed envelopes instead of forcing the isolated Crossed outcome."
+    },
+    {
+      "name": "mixed_guard_priority",
+      "passed": true,
+      "basis": "static source and native-code inspection",
+      "detail": "Higher source plans retain their preexisting before/after precedence. A truthy occurrence plan prevents the lower Crossed branch from bypassing Occurrence guards; Program/Marked also precede Crossed."
+    },
+    {
+      "name": "mixed_binding_priority",
+      "passed": true,
+      "basis": "static source and native-code inspection",
+      "detail": "Bind dispatch checks higher plan keys before crossed_prefix_plan. Crossed point bind requires one action and current domain; its nonpoint source limitation remains explicit."
+    },
+    {
+      "name": "single_journal_append",
+      "passed": true,
+      "basis": "static source and native-code inspection",
+      "detail": "Crossed record mutates its own reducer once, returns detached events and SharedSeries appends them once to its retained journal. No second memory.applyEvent loop replays these newly acquired Crossed events."
+    },
+    {
+      "name": "working_state_reuse_certificates",
+      "passed": true,
+      "basis": "static source and native-code inspection",
+      "detail": "Working stamps include nested owner identity, revision and structural witness. Direct owner replacement, private state/set/journal mutation or direct acquisition invalidates certified reuse."
+    },
+    {
+      "name": "atomic_restore_publication",
+      "passed": true,
+      "basis": "static source and native-code inspection",
+      "detail": "restoreOwned builds every reducer locally, replays each journal event, verifies the complete composed digest and only then publishes all owner identities. Invalid journals or digest mismatches do not replace the prior owners."
+    },
+    {
+      "name": "immutable_state_authority",
+      "passed": true,
+      "basis": "static source and native-code inspection",
+      "detail": "Fast restore is limited to the same accepted or certified checkpoint identity and a still-matching working stamp. New authoritative values require reconstruction; immutable identity alone is insufficient."
+    },
+    {
+      "name": "legacy_sparse_projection_scope",
+      "passed": true,
+      "basis": "static source and native-code inspection",
+      "detail": "Opaque old pair records such as {kind,owner} and minimal states such as {epoch} remain retained without fabricated planning fields. Restoration success is not a claim that an incomplete legacy state can produce a proposal."
+    },
+    {
+      "name": "runtime_registration_source_order",
+      "passed": true,
+      "basis": "static source and native-code inspection",
+      "detail": "Runtime registers coupled_prefix_reference to the existing shared recall provider and filters the original ordered_subquestions; it follows framed_window_composition without duplicating a provider or modifying the source DRM."
+    },
+    {
+      "name": "bounded_assignment_is_unknown",
+      "passed": true,
+      "basis": "static source and native-code inspection",
+      "detail": "The common wrapper enables one request-wide assignment count, 128-controller and 65536-assignment limits and the current execution deadline. Incomplete search returns unknown with block_unrelated_probe, no action and no acquired event."
+    },
+    {
+      "name": "remaining_action_gate",
+      "passed": true,
+      "basis": "static source and native-code inspection",
+      "detail": "The common Crossed wrapper refuses remaining<1 before planning. The component own method separately preserves the source behavior that does not inspect max_prefix."
+    },
+    {
+      "name": "refusal_cannot_release_a_primitive",
+      "passed": true,
+      "basis": "static source and native-code inspection",
+      "detail": "Runtime checks selected proposal status before primitive release; non-proposed selections are persisted as refusals and stop at a frontier. An unknown assignment result is not an admitted action."
+    },
+    {
+      "name": "named_native_extensions",
+      "passed": true,
+      "basis": "static source and native-code inspection",
+      "detail": "The 0.49 runtime reports native_crossed_prefix_assignment_bounds and native_atomic_crossed_prefix_event_validation explicitly, preserving fullV6Parity false and inherited closure qualifications."
+    }
+  ],
+  "checkedCount": 20,
+  "blockingIssues": [],
+  "qualifications": [
+    {
+      "id": "legacy_string_order_scope",
+      "severity": "scope_limit",
+      "detail": "The historical standalone reducer sorts input strings by JavaScript UTF-16 order; the new own memory uses Unicode code-point order matching Python. Protocol-produced ACTIONn strings and the eleven published checkpoints retain their digest. An artificial legacy input journal containing non-BMP and BMP strings can differ. Universal compatibility for arbitrary action strings is not claimed; the parent accepted this scope qualification before source freeze."
+    },
+    {
+      "id": "source_parent_not_fully_transferred",
+      "severity": "scope_limit",
+      "detail": "RepeatedLine and SupportedLine planning/acquisition remain partly transferred. The present hook preserves their stored digest slots but does not establish full inherited-caller parity."
+    },
+    {
+      "id": "bounds_do_not_cover_every_geometry_pixel",
+      "severity": "scope_limit",
+      "detail": "Assignment bounds begin after geometric observation and measured candidate collection. The wrapper does not guarantee per-pixel preemption of geometry; a product cutoff is an unknown, not physical impossibility."
+    },
+    {
+      "id": "atomicity_scope",
+      "severity": "scope_limit",
+      "detail": "Crossed own event validation is atomic before its event batch is applied; complete restore publishes atomically after digest validation. This reading does not claim an arbitrary exception in a later shared acquisition layer rolls back every earlier layer."
+    },
+    {
+      "id": "public_game_contribution_not_inferred",
+      "severity": "scope_limit",
+      "detail": "The initial archived WEAV admission is not a live result. No game has been executed or selected by this reviewer. Any later campaign retains its separately declared cumulative case clock, including historical time."
+    },
+    {
+      "id": "static_review_not_test_receipt",
+      "severity": "scope_limit",
+      "detail": "The checks are static review conclusions. Existing tests and eleven legacy checkpoint cases were read for scope only; their execution counts belong to their separate receipts and were not rerun here."
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src/logos-engine/v6-occurrence-recall.ts",
+      "bytes": 20657,
+      "sha256": "f4d206d83b6c0d28b442e19fb030c206d175d91407afa6266f90e2f8c7d6a1d8"
+    },
+    {
+      "path": "src/logos-engine/v6-shared-series.ts",
+      "bytes": 84783,
+      "sha256": "0cd713fdf5b728944fd6d361f7ae51e40e4f3dbb46e7e7edc73231276bd3eeb3"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 134032,
+      "sha256": "7c150fe8f2597ce0ff3910e3f8bfbd587076c9a1ea8da0ce6f9560030b20e3c2"
+    },
+    {
+      "path": "src/logos-engine/v6-crossed-prefix-access.ts",
+      "bytes": 26105,
+      "sha256": "db35f9ad5988b899bcdc98d52a4e1bd837a3b15e0346c93a6da09433ef056465"
+    },
+    {
+      "path": "src/logos-engine/v6-crossed-prefix-observation.ts",
+      "bytes": 12478,
+      "sha256": "b1a8808d123b66f27ea4a0b9d06eeff4e91319d91f445582c01245beb7895fbd"
+    },
+    {
+      "path": "src/logos-engine/v6-native-working-witness.ts",
+      "bytes": 5896,
+      "sha256": "08bca697678eb3a89960ff2ed1c49b9fc0c91082b86952be51edf0f34a1f38fb"
+    },
+    {
+      "path": "src/logos-engine/v6-native-owned.ts",
+      "bytes": 6626,
+      "sha256": "b4a1eeb1cf43bb04695bce8267903cd122fe778b4b938a98b1640a9ba6ee4839"
+    },
+    {
+      "path": "src/logos-engine/canonical.ts",
+      "bytes": 11291,
+      "sha256": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1"
+    },
+    {
+      "path": "scripts/audit-v6-entry-points.ts",
+      "bytes": 6580,
+      "sha256": "6e19915816d6784a97f0f9acf70f7b6bdf0b28a0ad83b3ceba6a80e1471d902e"
+    },
+    {
+      "path": "tests/v6-crossed-prefix-integration.test.ts",
+      "bytes": 15924,
+      "sha256": "b40a6a1458c564ddf860134ba675a99f835cc9a5b8c2c583ceedcedff13ad9ac"
+    },
+    {
+      "path": "tests/v6-crossed-prefix-access.test.ts",
+      "bytes": 16680,
+      "sha256": "d8543e71e9f65ab8c3b8e2c4f9294948564c124c514400995789e480319b7ba0"
+    },
+    {
+      "path": "tests/fixtures/v6-crossed-prefix-legacy-checkpoints.json.gz",
+      "bytes": 4108,
+      "sha256": "ea2ef8d201dc350c41cab447982e6a15dab5b5b187066ca56a79782144aef811"
+    },
+    {
+      "path": "tests/fixtures/v6-crossed-prefix-reference.json.gz",
+      "bytes": 350899,
+      "sha256": "ca2b1e6c4ccdd41d35a45e11f989f4ea168e7959011d658c0f54e887c9b79af4"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_crossed_prefix.py",
+      "bytes": 21507,
+      "sha256": "f5fc76010a642de99452efe409a85f968839b54bfc37adeefff66fed4e243a4f"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_supported_lines.py",
+      "bytes": 16769,
+      "sha256": "bc1e5599ea5be873f16dd37570fa2e998ec29bcc670dc55433c50c45f8a60fcd"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_repeated_lines.py",
+      "bytes": 14186,
+      "sha256": "fb91aa26449a1633a4fa23e7089d8e775645c2775b5c3be295e7c4bcf1ceaaca"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/marked_collection_access.py",
+      "bytes": 11101,
+      "sha256": "cd17047cb274db95c33e23e12402289b9b1ac0d3ce4f19adb789e976ee3a4900"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/program_composition_access.py",
+      "bytes": 22149,
+      "sha256": "cbe5b77563dfb01d947cbbe1e1b27212de29cc4eadda60016b0ff0a1e6b5eb91"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/occurrence_recall_access.py",
+      "bytes": 8829,
+      "sha256": "16a8af8e5a4742e4f99cd2c4ddbe4d630720c8f26741a1f27f770bd3e5fb3162"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/rooted_quota_access.py",
+      "bytes": 8150,
+      "sha256": "ac054685d7bc9b220cc8b6025d50c047b674897b698ad54843b90a8d69c9bb4a"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "src/logos-engine/v6-program-composition-access.ts",
+      "bytes": 47637,
+      "sha256": "0a7c7e5b9fc8123b0c9305ce83c635e9bcfddaeb519a90f8cb9fcc9d62cbfb3b"
+    }
+  ],
+  "codeModified": false,
+  "runtimeExecuted": false,
+  "gameExecuted": false,
+  "testExecuted": false,
+  "buildExecuted": false,
+  "benchmarkExecuted": false,
+  "conclusion": "No blocking issue in the reviewed declared integration scope. Exact legacy coverage remains limited to protocol-produced commands and the published checkpoints explicitly verified by the separate test evidence.",
+  "inputsUnchangedAtReviewCompletion": true
+}

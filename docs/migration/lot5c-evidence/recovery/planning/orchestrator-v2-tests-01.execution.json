@@ -1,0 +1,39 @@
+{
+  "schema": "logos-engine.lot5c-orchestration-temporary-tests.v1",
+  "status": "failed",
+  "startedAt": "2026-11-11T19:57:30.831058+00:00",
+  "finishedAt": "2026-11-11T19:57:39.547174+00:00",
+  "casesRun": 13,
+  "failures": 4,
+  "errors": 1,
+  "skipped": 0,
+  "sourceBefore": [
+    {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/planning/orchestrate-cost-recovery-02.py",
+      "bytes": 22791,
+      "sha256": "747b4ecf6d42b89ffc474b9a35ab87ec2c3e85898f1a824a309964df7318cf99"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/planning/cost-process-control-v2.py",
+      "bytes": 8499,
+      "sha256": "7e5fa20cdc5590cb28fdfbda24a9f493ec3e24534b9866fa366221a1a3a5a24c"
+    }
+  ],
+  "sourceAfter": [
+    {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/planning/orchestrate-cost-recovery-02.py",
+      "bytes": 22791,
+      "sha256": "747b4ecf6d42b89ffc474b9a35ab87ec2c3e85898f1a824a309964df7318cf99"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/planning/cost-process-control-v2.py",
+      "bytes": 8499,
+      "sha256": "7e5fa20cdc5590cb28fdfbda24a9f493ec3e24534b9866fa366221a1a3a5a24c"
+    }
+  ],
+  "inputsUnchanged": true,
+  "onlyTemporaryMutexAndStatuses": true,
+  "actualCostExecuted": false,
+  "nativeTestsExecuted": false,
+  "runnerOutput": "test_active_window_uses_its_separate_deadline (__main__.Cases.test_active_window_uses_its_separate_deadline) ... ok\ntest_child_timeout_cleans_descendant_and_shared_lock (__main__.Cases.test_child_timeout_cleans_descendant_and_shared_lock) ... ok\ntest_cleanup_error_still_checks_registry_and_never_claims_idle (__main__.Cases.test_cleanup_error_still_checks_registry_and_never_claims_idle) ... ok\ntest_foreign_controller_lease_refused (__main__.Cases.test_foreign_controller_lease_refused) ... ok\ntest_fresh_raw_acks_then_controller_refusal_release (__main__.Cases.test_fresh_raw_acks_then_controller_refusal_release) ... ERROR\ntest_malformed_review_counts_and_duplicate_subjects_refused (__main__.Cases.test_malformed_review_counts_and_duplicate_subjects_refused) ... ok\ntest_monotonic_expiry_when_wall_clock_stops (__main__.Cases.test_monotonic_expiry_when_wall_clock_stops) ... FAIL\ntest_old_incomplete_future_ack_refused (__main__.Cases.test_old_incomplete_future_ack_refused) ... ok\ntest_signal_between_spawn_and_assignment_is_cleaned (__main__.Cases.test_signal_between_spawn_and_assignment_is_cleaned) ... ok\ntest_signal_during_readiness_releases_and_closes (__main__.Cases.test_signal_during_readiness_releases_and_closes) ... FAIL\ntest_signal_during_readiness_releases_and_closes (__main__.Cases.test_signal_during_readiness_releases_and_closes) ... FAIL\ntest_started_receipt_write_error_still_cleans (__main__.Cases.test_started_receipt_write_error_still_cleans) ... ok\ntest_terminal_receipt_failure_cannot_keep_quiet (__main__.Cases.test_terminal_receipt_failure_cannot_keep_quiet) ... ok\ntest_timeout_releases_and_one_cycle_only (__main__.Cases.test_timeout_releases_and_one_cycle_only) ... FAIL\n\n======================================================================\nERROR: test_fresh_raw_acks_then_controller_refusal_release (__main__.Cases.test_fresh_raw_acks_then_controller_refusal_release)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/planning/test-orchestrate-cost-recovery-02.py\", line 93, in test_fresh_raw_acks_then_controller_refusal_release\n    iso=m.read(m.COORD/'isolation.json');self.assertEqual(len(iso['knownLanes']),3)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/planning/orchestrate-cost-recovery-02.py\", line 55, in read\n    return json.loads(Path(path).read_text())\n                      ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py\", line 1027, in read_text\n    with self.open(mode='r', encoding=encoding, errors=errors) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py\", line 1013, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/tmp/lot5c-orchestration-test-_xviyonz/proofs/coordination/isolation.json'\n\n======================================================================\nFAIL: test_monotonic_expiry_when_wall_clock_stops (__main__.Cases.test_monotonic_expiry_when_wall_clock_stops)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/planning/test-orchestrate-cost-recovery-02.py\", line 144, in test_monotonic_expiry_when_wall_clock_stops\n    self.assertEqual(self.call_main(),124);self.assertLess(time.monotonic()-start,1)\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 124\n\n======================================================================\nFAIL: test_signal_during_readiness_releases_and_closes (__main__.Cases.test_signal_during_readiness_releases_and_closes)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/planning/test-orchestrate-cost-recovery-02.py\", line 108, in test_signal_during_readiness_releases_and_closes\n    self.assertEqual(self.call_main(),130);self.assertFalse(m.read(m.OWN)['quiet_requested']);self.acquire_temp_ex()\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 130\n\n======================================================================\nFAIL: test_signal_during_readiness_releases_and_closes (__main__.Cases.test_signal_during_readiness_releases_and_closes)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/planning/test-orchestrate-cost-recovery-02.py\", line 47, in tearDown\n    self.assertFalse(thread.is_alive(), 'No synthetic writer thread may remain')\nAssertionError: True is not false : No synthetic writer thread may remain\n\n======================================================================\nFAIL: test_timeout_releases_and_one_cycle_only (__main__.Cases.test_timeout_releases_and_one_cycle_only)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/planning/test-orchestrate-cost-recovery-02.py\", line 86, in test_timeout_releases_and_one_cycle_only\n    m=self.m;self.assertEqual(self.call_main(),124);self.assertFalse(m.read(m.OWN)['quiet_requested'])\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 124\n\n----------------------------------------------------------------------\nRan 13 tests in 8.716s\n\nFAILED (failures=4, errors=1)\n"
+}

@@ -1,0 +1,25 @@
+{
+  "module_id": "arc3.recall_acquisition_d",
+  "declarations": [{
+    "id": "policy.recall_acquisition_d", "kind": "selection_policy",
+    "evaluation": "declared_lexicographic_order", "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "reason_refs": ["reason.actual_temporal_fields_preserve_question", "reason.temporal_field_evidence_missing"],
+    "declared_alternative_refs": ["recall_acquisition.current", "recall_acquisition.missing"],
+    "selection_tie_breakers": [{"field": "alternative_ref", "preferred_order": "minimize"}],
+    "canonical_equivalence_tie_break_debt_ref": "debt.recall_acquisition.equivalent_bindings",
+    "selection_tiers": [
+      {"id": "tier.recall_acquisition.current", "reason_ref": "reason.actual_temporal_fields_preserve_question",
+       "all_conditions": [
+         {"field": "alternative_ref", "operator": "equals", "expected": "recall_acquisition.current"},
+         {"field": "acquired_native_fields_current", "operator": "equals", "expected": true}
+       ]},
+      {"id": "tier.recall_acquisition.missing", "reason_ref": "reason.temporal_field_evidence_missing",
+       "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "recall_acquisition.missing"}]}
+    ],
+    "invariants": ["actual_canonical_acquisitions_and_owner_scopes", "all_supplied_native_fields_bound",
+      "no_private_identity_or_invariance_inferred", "no_historical_population_union",
+      "native_K50_signature_and_prerequisites_remain_authoritative", "native_A_result_not_D", "no_action_authority"]
+  }]
+}

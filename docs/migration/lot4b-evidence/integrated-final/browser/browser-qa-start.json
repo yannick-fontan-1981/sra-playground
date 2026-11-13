@@ -1,0 +1,6 @@
+{
+  "startedAt": "2026-11-10T22:16:42.221510+00:00",
+  "nativeVersion": "0.54.0",
+  "nativeSourceDigest": "f25d56d1c63dc929b01bb31b3898b84cecc69e6e412d535c0d122170ea401ce9",
+  "intent": "Open the exact managed preview URL; begin cold TRIA level1 only if browser route is available."
+}

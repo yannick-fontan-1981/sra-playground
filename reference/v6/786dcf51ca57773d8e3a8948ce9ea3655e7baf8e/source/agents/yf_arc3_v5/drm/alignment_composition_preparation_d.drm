@@ -1,0 +1,77 @@
+{
+  "module_id": "alignment_composition_preparation_d",
+  "declarations": [
+    {
+      "id": "policy.d_alignment_composition_origin",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason.d_actual_parent_question_owns_conditional_alignment_composition"],
+      "declared_alternative_refs": ["d_alignment_origin.external_root", "d_alignment_origin.blocked"],
+      "canonical_equivalence_tie_break_debt_ref": "debt.d_alignment_origin_equivalent_binding",
+      "selection_tie_breakers": [{"field": "alternative_ref", "preferred_order": "minimize"}],
+      "selection_tiers": [
+        {"id": "tier.d_alignment_origin.root_domain",
+         "reason_ref": "reason.d_actual_parent_question_owns_conditional_alignment_composition",
+         "all_conditions": [
+           {"field": "alternative_ref", "operator": "equals", "expected": "d_alignment_origin.external_root"},
+           {"field": "context_bindings_match", "operator": "equals", "expected": true},
+           {"field": "active_execution_context_present", "operator": "equals", "expected": false},
+           {"field": "active_execution_intent_count", "operator": "equals", "expected": 0},
+           {"field": "composition_origin_ref", "operator": "equals", "expected": "EXTERNAL_ROOT_QUESTION"},
+           {"field": "operation_ref", "operator": "equals", "expected": "mechanics.finite_alignment_game.sequential_objective"},
+           {"field": "mode_ref", "operator": "equals", "expected": "DOMAIN"}]},
+        {"id": "tier.d_alignment_origin.root_search",
+         "reason_ref": "reason.d_actual_parent_question_owns_conditional_alignment_composition",
+         "all_conditions": [
+           {"field": "alternative_ref", "operator": "equals", "expected": "d_alignment_origin.external_root"},
+           {"field": "context_bindings_match", "operator": "equals", "expected": true},
+           {"field": "active_execution_context_present", "operator": "equals", "expected": false},
+           {"field": "active_execution_intent_count", "operator": "equals", "expected": 0},
+           {"field": "composition_origin_ref", "operator": "equals", "expected": "EXTERNAL_ROOT_QUESTION"},
+           {"field": "operation_ref", "operator": "equals", "expected": "mechanics.finite_alignment_game.sequential_objective"},
+           {"field": "mode_ref", "operator": "equals", "expected": "SEARCH"}]},
+        {"id": "tier.d_alignment_origin.blocked",
+         "reason_ref": "reason.d_actual_parent_question_owns_conditional_alignment_composition",
+         "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "d_alignment_origin.blocked"}]}
+      ],
+      "meaning_template_ref_by_alternative": {"d_alignment_origin.external_root": "rule.d_alignment_current_composition_binding"},
+      "configuration": {
+        "composition_projection_contract_ref": "d.alignment_level_composition.v1",
+        "controllable_quantifier": "EXISTS", "response_quantifier": "FORALL",
+        "selection_binding_fields": {
+          "parent_goal_ref": "current_parent_goal_ref", "question_ref": "current_alignment_question_ref",
+          "context_ref": "current_reasoning_context_ref", "native_request_digest": "current_alignment_native_request_digest",
+          "composition_term_ref": "current_alignment_composition_term_ref", "composition_claim_ref": "current_alignment_composition_claim_ref"}
+      }
+    },
+    {
+      "id": "rule.d_alignment_current_composition_binding",
+      "kind": "rule", "evaluation": "project_requested_conclusions", "supported_operators": ["DERIVE"],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1", "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": ["current_actual_parent_question_and_source_owned_composition"],
+      "reason_refs": ["reason.d_actual_parent_question_owns_conditional_alignment_composition"],
+      "invariants": ["conditional_models_not_confirmed", "parent_unchanged", "no_action_or_physical_completion_authority"],
+      "term_templates": [{
+        "id_pattern": "{composition_term_ref}", "kind": "value", "label": "Current Source-bound alignment root composition",
+        "required_fields": ["composition_term_ref", "composition", "native_request_digest", "parent_goal_ref", "question_ref", "context_ref"],
+        "required_term_patterns": ["{parent_goal_ref}", "{question_ref}"],
+        "static_attributes": {"projection_contract_ref": "d.alignment_level_composition.v1", "no_dispatch_or_action_authority": true},
+        "attribute_bindings": {"composition": "composition", "native_request_digest": "native_request_digest", "parent_goal_ref": "parent_goal_ref", "question_ref": "question_ref", "context_ref": "context_ref"}
+      }],
+      "claim_templates": [{
+        "id_pattern": "{composition_claim_ref}", "predicate": "qualifies_current_alignment_root_composition_contract",
+        "family": "epistemic", "epistemic_status": "supported",
+        "argument_patterns": ["{parent_goal_ref}", "{question_ref}", "{composition_term_ref}"],
+        "required_term_patterns": ["{parent_goal_ref}", "{question_ref}", "{composition_term_ref}"],
+        "required_fields": ["composition_claim_ref", "parent_goal_ref", "question_ref", "composition_term_ref", "context_ref", "native_request_digest", "epoch", "evidence_revision_ref", "model_revision_ref"],
+        "scope_bindings": {"parent_goal_ref": "parent_goal_ref", "context_ref": "context_ref", "epoch": "epoch", "evidence_revision_ref": "evidence_revision_ref", "model_revision_ref": "model_revision_ref"},
+        "attribute_bindings": {"parent_goal_ref": "parent_goal_ref", "question_ref": "question_ref", "context_ref": "context_ref", "native_request_digest": "native_request_digest", "composition_term_ref": "composition_term_ref", "composition_claim_ref": "composition_claim_ref"},
+        "static_attributes": {"conditional_models_not_confirmed": true, "no_dispatch_or_action_authority": true}
+      }]
+    }
+  ]
+}

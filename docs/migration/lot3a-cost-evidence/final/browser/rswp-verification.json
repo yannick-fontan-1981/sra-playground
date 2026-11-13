@@ -1,0 +1,68 @@
+{
+  "schema": "logos-engine.native-browser-functional-verification.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-09T23:43:22.627457+00:00",
+  "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.38.0",
+  "nativeSourceDigest": "f0d8b2b0a746f19036076010025fffa1ad532d5751caa176f7efcccff7bc4aff",
+  "browser": "Chrome via cloud browser UI",
+  "observedUrl": "http://127.0.0.1:4173/?game=RSWP&level=4",
+  "game": "RSWP",
+  "sessions": 1,
+  "manualGameActions": 0,
+  "levelJumps": 0,
+  "resets": 0,
+  "newReasoningSessions": 0,
+  "initial": {
+    "level": 1,
+    "actions": 0,
+    "levelsCompleted": 0,
+    "plans": 0
+  },
+  "boundaries": [
+    {
+      "level": 2,
+      "actions": 3,
+      "levelsCompleted": 1,
+      "plans": 3
+    },
+    {
+      "level": 3,
+      "actions": 11,
+      "levelsCompleted": 2,
+      "plans": 7
+    },
+    {
+      "level": 4,
+      "actions": 19,
+      "levelsCompleted": 3,
+      "plans": 11
+    }
+  ],
+  "pauseChecks": [
+    {
+      "phase": "initial planning",
+      "requestedAtActions": 0,
+      "settledAtActions": 0,
+      "observedText": "Paused."
+    },
+    {
+      "phase": "engaged action and real return",
+      "requestedAfterActions": 5,
+      "settledAtActions": 6,
+      "completedPlans": 4,
+      "observedText": "Paused."
+    }
+  ],
+  "controlledSingleActions": [
+    4,
+    5
+  ],
+  "resumedInSameSession": true,
+  "finalObservedText": "Level completed.",
+  "screenshot": {
+    "path": "docs/migration/lot3a-cost-evidence/final/browser/rswp-browser.png",
+    "bytes": 83575,
+    "sha256": "2d3df94fd73f5e6b6ec41cef82e558f5311e07ba8a4a39e80ae33b3c329fbbf8"
+  },
+  "qualification": "Independent visible UI execution against the frozen native source. Natural progress from level1 to level4, three completed levels, not a full-game victory. Pause was observed at0 and6 acquired actions; no mid-prefix pause at5 is claimed. Inspector remained closed. This is not a performance benchmark."
+}

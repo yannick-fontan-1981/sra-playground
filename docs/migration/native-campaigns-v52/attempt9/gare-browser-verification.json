@@ -1,0 +1,398 @@
+{
+  "schema": "logos-engine.v52.browser-verification.v1",
+  "status": "passed",
+  "game": "GARE",
+  "nativeSourceManifestDigest": "e32656de6ab64b0f6bdf8188e7bdeac06b4b3063c0bfb6d5531484cefb900f60",
+  "uiFilesSha256": {
+    "src/main.ts": "ffd81c9b5a87a739f630cb6c5597cdd45ae077ad38e29cc4e4004ef40b455912",
+    "src/sra-agent.css": "2a467f97763162d472498a8034449e4e8595638f61f58c2746f03d6c00884930",
+    "src/styles.css": "33c173b3c79469eb94f4039ee76ca92b730c351b720ab0b3b30ee73023d8b4c2"
+  },
+  "uiUnchangedFromCommit": "9fb19f769f4920808ddaabf8ba73c07e5a125d0f",
+  "rawMeasurements": {
+    "path": "docs/migration/native-campaigns-v52/attempt9/gare-browser-layout-measures.json",
+    "sha256": "6e12a92ed32de914e25087d0dc9f4ff2c6f511c5326b1289d92159a3648bbee3",
+    "bytes": 6128
+  },
+  "measurements": [
+    {
+      "actions": 0,
+      "inspectionOpen": false,
+      "levels": 0,
+      "prefixes": 0,
+      "rects": {
+        "#agent-message": {
+          "height": 98,
+          "width": 265,
+          "x": 986,
+          "y": 948.671875
+        },
+        "#agent-run": {
+          "height": 44,
+          "width": 265,
+          "x": 986,
+          "y": 1062.671875
+        },
+        "#canvas-stage": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        "#game-canvas": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        ".board-column": {
+          "height": 442,
+          "width": 888,
+          "x": 75,
+          "y": 878.671875
+        }
+      },
+      "status": "Ready to run from level 1.",
+      "url": "http://127.0.0.1:4173/?game=GARE&level=1",
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      }
+    },
+    {
+      "actions": 0,
+      "inspectionOpen": false,
+      "levels": 0,
+      "prefixes": 0,
+      "rects": {
+        "#agent-message": {
+          "height": 98,
+          "width": 265,
+          "x": 986,
+          "y": 948.671875
+        },
+        "#agent-run": {
+          "height": 44,
+          "width": 265,
+          "x": 986,
+          "y": 1062.671875
+        },
+        "#canvas-stage": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        "#game-canvas": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        ".board-column": {
+          "height": 442,
+          "width": 888,
+          "x": 75,
+          "y": 878.671875
+        }
+      },
+      "status": "Preparing the agent\u2026",
+      "url": "http://127.0.0.1:4173/?game=GARE&level=1",
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      }
+    },
+    {
+      "actions": 7,
+      "inspectionOpen": false,
+      "levels": 1,
+      "prefixes": 7,
+      "rects": {
+        "#agent-message": {
+          "height": 98,
+          "width": 265,
+          "x": 986,
+          "y": 948.671875
+        },
+        "#agent-run": {
+          "height": 44,
+          "width": 265,
+          "x": 986,
+          "y": 1062.671875
+        },
+        "#canvas-stage": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        "#game-canvas": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        ".board-column": {
+          "height": 442,
+          "width": 888,
+          "x": 75,
+          "y": 878.671875
+        }
+      },
+      "status": "Level completed.",
+      "url": "http://127.0.0.1:4173/?game=GARE&level=2",
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      }
+    },
+    {
+      "actions": 7,
+      "inspectionOpen": false,
+      "levels": 1,
+      "prefixes": 7,
+      "rects": {
+        "#agent-message": {
+          "height": 98,
+          "width": 265,
+          "x": 986,
+          "y": 948.671875
+        },
+        "#agent-run": {
+          "height": 44,
+          "width": 265,
+          "x": 986,
+          "y": 1062.671875
+        },
+        "#canvas-stage": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        "#game-canvas": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        ".board-column": {
+          "height": 442,
+          "width": 888,
+          "x": 75,
+          "y": 878.671875
+        }
+      },
+      "status": "Reading the board and planning\u2026",
+      "url": "http://127.0.0.1:4173/?game=GARE&level=2",
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      }
+    },
+    {
+      "actions": 16,
+      "inspectionOpen": false,
+      "levels": 2,
+      "prefixes": 16,
+      "rects": {
+        "#agent-message": {
+          "height": 98,
+          "width": 265,
+          "x": 986,
+          "y": 948.671875
+        },
+        "#agent-run": {
+          "height": 44,
+          "width": 265,
+          "x": 986,
+          "y": 1062.671875
+        },
+        "#canvas-stage": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        "#game-canvas": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        ".board-column": {
+          "height": 442,
+          "width": 888,
+          "x": 75,
+          "y": 878.671875
+        }
+      },
+      "status": "Level completed.",
+      "url": "http://127.0.0.1:4173/?game=GARE&level=3",
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      }
+    },
+    {
+      "actions": 16,
+      "inspectionOpen": false,
+      "levels": 2,
+      "prefixes": 16,
+      "rects": {
+        "#agent-message": {
+          "height": 98,
+          "width": 265,
+          "x": 986,
+          "y": 948.671875
+        },
+        "#agent-run": {
+          "height": 44,
+          "width": 265,
+          "x": 986,
+          "y": 1062.671875
+        },
+        "#canvas-stage": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        "#game-canvas": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        ".board-column": {
+          "height": 442,
+          "width": 888,
+          "x": 75,
+          "y": 878.671875
+        }
+      },
+      "status": "Reading the board and planning\u2026",
+      "url": "http://127.0.0.1:4173/?game=GARE&level=3",
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      }
+    },
+    {
+      "actions": 53,
+      "inspectionOpen": false,
+      "levels": 3,
+      "prefixes": 53,
+      "rects": {
+        "#agent-message": {
+          "height": 98,
+          "width": 265,
+          "x": 986,
+          "y": 948.671875
+        },
+        "#agent-run": {
+          "height": 44,
+          "width": 265,
+          "x": 986,
+          "y": 1062.671875
+        },
+        "#canvas-stage": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        "#game-canvas": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        ".board-column": {
+          "height": 442,
+          "width": 888,
+          "x": 75,
+          "y": 878.671875
+        }
+      },
+      "status": "Level completed.",
+      "url": "http://127.0.0.1:4173/?game=GARE&level=4",
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      }
+    }
+  ],
+  "measurementCount": 7,
+  "layout": {
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    },
+    "boardColumnHeight": 442,
+    "canvasHeight": 384,
+    "canvasWidth": 384,
+    "statusHeight": 98,
+    "maxDocumentPositionDeltaPx": 0,
+    "maxDimensionDeltaPx": 0,
+    "selectors": [
+      ".board-column",
+      "#canvas-stage",
+      "#game-canvas",
+      "#agent-message",
+      "#agent-run"
+    ],
+    "inspectionClosedThroughout": true
+  },
+  "observedResult": {
+    "url": "http://127.0.0.1:4173/?game=GARE&level=4",
+    "completedLevels": 3,
+    "actions": 53,
+    "prefixes": 53,
+    "entryLevel": 4,
+    "normalStatus": "Level completed.",
+    "evidence": "Unmodified final accessibility tree and screenshot. Every raw rectangle sample also retains the displayed counters."
+  },
+  "browserCampaign": {
+    "sessions": 1,
+    "manualGameActions": 0,
+    "resets": 0,
+    "levelJumps": 0,
+    "runToNextLevelClicks": 3,
+    "uiActions": [
+      "reload GARE at level 1",
+      "select SRA Agent Native TS tab",
+      "Run to next level",
+      "Run to next level",
+      "Run to next level"
+    ]
+  },
+  "fullscreen": {
+    "status": "not_retested"
+  },
+  "mobile": {
+    "status": "not_measured"
+  },
+  "screenshot": {
+    "path": "docs/migration/native-campaigns-v52/attempt9/gare-browser-three-levels.jpg",
+    "sha256": "6151cfc62b69d37141f8d0e6c0c9affae6f476f6479dae12fda693d299e62aeb",
+    "bytes": 88821
+  },
+  "screenshotProperties": {
+    "format": "JPEG",
+    "width": 1348,
+    "height": 926
+  },
+  "accessibility": {
+    "path": "docs/migration/native-campaigns-v52/attempt9/gare-browser-three-levels-ax.txt",
+    "sha256": "9da05a4274ed281c41bc8ed0581dbb1f7362d287a4a28a59ef5d44a745018f20",
+    "bytes": 9969
+  },
+  "generator": {
+    "path": "scripts/record-v52-browser-verification.py",
+    "sha256": "0ff48ffffa77168d997c9ab88eca6d72dcc18e1225e40dc00febdac9d3c953fb",
+    "bytes": 5213
+  },
+  "qualification": "Local Sites preview, normal desktop viewport, seven sampled idle/active/completed states. Rectangles are document coordinates. This is not a per-frame, full-screen or mobile-size measurement. All raw DOM samples retain displayed counters; the final screenshot and accessibility capture confirm the retained action/prefix counters, three completed levels and entry to level 4. Source UI files are byte-identical to published v51. No screenshot editing."
+}

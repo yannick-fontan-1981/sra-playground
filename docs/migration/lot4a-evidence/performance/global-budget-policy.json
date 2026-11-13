@@ -1,0 +1,49 @@
+{
+  "schema": "logos-engine.native-global-cost-policy.v1",
+  "declaredAt": "2026-11-10T18:00:18.144087+00:00",
+  "authorization": {
+    "source": "Explicit user authorization retained for lot4A in the attached mission",
+    "date": "2026-11-10",
+    "verbatim": "si le global reste en dessous de 10% d'augmentation alors une phase qui dépasse 10% peut être accepté."
+  },
+  "globalStage": "session_elapsed",
+  "statistic": "pooled median of complete measured-session durations per tested case",
+  "caseIds": [
+    "STCK",
+    "SMLP"
+  ],
+  "relativeIncreaseLimit": 0.1,
+  "comparison": "strictly_less_than",
+  "allCasesMustPass": true,
+  "crossCaseCompensation": false,
+  "phaseOverrunsMayBeAccepted": true,
+  "phasesAndP95RemainVisible": true,
+  "diagnosticPhasePolicy": "docs/migration/lot4a-evidence/performance/comparison-policy.json",
+  "plannedOrder": [
+    "A1",
+    "B1",
+    "B2",
+    "A2"
+  ],
+  "cohorts": 2,
+  "sessionsPerCaseVersionCohort": 4,
+  "measuredSessions": 32,
+  "measuredActions": 400,
+  "excludedWarmupSessions": 8,
+  "excludedWarmupActions": 24,
+  "excludedMeasuredSessions": 0,
+  "excludedOutliers": 0,
+  "baseline": {
+    "nativeVersion": "0.49.0",
+    "siteVersion": 78,
+    "commit": "8fa6b261b8b23ac8d232e60c9c179e2f3407d82f",
+    "nativeDigest": "d6cb9abdf48a9062936d4647dbd809dc4cee1d1528f85e973fda83c7af8e6054",
+    "nativeFiles": 268
+  },
+  "candidate": {
+    "nativeVersion": "0.50.0",
+    "nativeDigest": "66be0948fdff5abe10b12d253bb4583db067aab2f5b7248632c9f9d443bc53fe",
+    "nativeFiles": 271
+  },
+  "qualification": "Fresh complete-session measurements for each game separately; all phases, tails, sessions and unfavorable results remain. Functional validation and machine isolation are separate evidence."
+}

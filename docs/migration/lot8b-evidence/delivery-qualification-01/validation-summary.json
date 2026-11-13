@@ -1,0 +1,280 @@
+{
+  "schema": "logos-engine.lot8b.delivery-functional-qualification-summary.v1",
+  "recordedAt": "2026-11-12T05:31:36.277180+00:00",
+  "status": "three_declared_functional_delivery_phases_qualified_with_explicit_runtime_boundary",
+  "parentCheckpoint": "9f2d946ba9651652377b80b8029263682b47802b",
+  "validatedProductionCodeCommit": "2583d81d856c13295040db88f5df8b3a99906bdc",
+  "sourceCheckpointDuringFinalNativeCapture": "4d84045a6e485c412c0114de75edd216c329a90b",
+  "ownCheckout": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "ownBranch": "lot8b-branch-routing-20261112",
+  "checkpointBranch": "lot8b-branch-routing-checkpoint-20261112",
+  "publishedBaseline": {
+    "siteVersion": 107,
+    "nativeVersion": "0.66.0",
+    "sourceCommit": "4ff7bf45286a8a19d34401988adca587253ae41e",
+    "registeredEntries": 68,
+    "manifest": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/baseline-native.json",
+      "bytes": 39098,
+      "sha256": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7"
+    },
+    "nativeFileCount": 329,
+    "nativeDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+    "freshClosureObservation": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/publication-observation-at-closure.json",
+      "bytes": 1248,
+      "sha256": "280ea0cf05d65a4ac98eba1f089346bdac8e66555922a646e957b4b5ddfb4849"
+    }
+  },
+  "candidate": {
+    "registeredEntries": 69,
+    "entryDenominator": 76,
+    "materialEntries": 26,
+    "materialDenominator": 33,
+    "remainingEntryCount": 7,
+    "remainingEntries": [
+      "observed_rigid_cargo",
+      "chart_navigation",
+      "region_intervention",
+      "temporal_selection",
+      "invited_endpoints",
+      "joint_channels",
+      "shared_settlement"
+    ],
+    "nativeFileCount": 331,
+    "nativeDigest": "3ff1d9ad56e22aedc0fee3a0da6a3af50a1da0bc14a0ba01cb38272ba85234be",
+    "manifest": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/candidate-native.json",
+      "bytes": 39333,
+      "sha256": "56e7533fca83f222b866ce73478a1f925bddb8c7b7c79718e9b99d0c888dc095"
+    },
+    "historicalSameFileMapDigest": "76a403016d2b28287194b7498f10e14727b7e3fb3f214d2f79cb0292390d54bf",
+    "digestReconciliation": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/source-digest-reconciliation.json",
+      "bytes": 1363,
+      "sha256": "b3193ed5b91fb2faf6c9e5d8622f2387b779adc9660e00d46096d68749df6874"
+    },
+    "developmentVersionLiteral": "0.66.0",
+    "newVersionReserved": false,
+    "published": false
+  },
+  "sourceIntegrity": {
+    "nativeFileMapEqualsPreviouslyQualifiedCode": true,
+    "nonDocumentationChangesSinceValidatedCode": [],
+    "fixture": {
+      "path": "tests/fixtures/v6-branch-routing-reference.json",
+      "bytes": 542660,
+      "sha256": "e6ae197b7b982bd41f561b9df8e458436d7ce0797f39bbf86d972e55472b6769"
+    },
+    "originalOracleRegenerated": false,
+    "allExecutedFrozenInputsUnchanged": true
+  },
+  "historicalTestQualification": {
+    "evidence": {
+      "path": "docs/migration/lot8b-evidence/common-integration-01/validation-summary.json",
+      "bytes": 59036,
+      "sha256": "3425d5caf68e37e27b2a8f64167c62221ef55a552d7b819ebb2727f564c332d0"
+    },
+    "testsAndSubtestsPassed": 524,
+    "modules": 23,
+    "successfulFinalControlGroups": 7,
+    "typecheck": "passed_in_previous_milestone",
+    "entryAudit": "passed_in_previous_milestone",
+    "migrationAudit": "passed_in_previous_milestone",
+    "build": "passed_in_previous_milestone",
+    "rerunInThisMilestone": false,
+    "fullSuiteClaimed": false,
+    "countsAddedToCurrentGraphOrRegressionChecks": false
+  },
+  "phases": {
+    "pairedPublishedWorkForms": {
+      "status": "qualified_functional_work_forms_and_individual_graphs",
+      "summary": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-forms-result-summary.json",
+        "bytes": 4593,
+        "sha256": "58d9d69b8faeac81b9fc879877ea331631fd2c0c18725e77773431dd169a208a"
+      },
+      "independentReview": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-forms-independent-review.json",
+        "bytes": 19212,
+        "sha256": "c234cb918fffab408af6305dc182b3e4d8860aeeeff003d98fa9b564c890ee65"
+      },
+      "sessionsPerRole": 4,
+      "archivedReturnsPerRole": 31,
+      "checksPassed": 64,
+      "pairedPoints": 58,
+      "ownerCheckpointCorrespondences": 522,
+      "rawDifferenceOccurrences": 22312,
+      "unattributedDifferences": 0,
+      "differenceClasses": {
+        "attributed_role_source_digest": 21249,
+        "attributed_exact_trace_created_wall_clock": 1055,
+        "attributed_branch_routing_owner_or_reachable_fragment": 8
+      },
+      "existingOwners": 61,
+      "candidateOwners": 62,
+      "installedFamilyProgramsPreserved": 28,
+      "positiveBranchRoutingAcquisitionsInTheseForms": 0,
+      "STCKFullForm": {
+        "actions": 10,
+        "levelsCompleted": 2,
+        "targetLevels": 3,
+        "reason": null
+      },
+      "SMLPFullForm": {
+        "actions": 15,
+        "levelsCompleted": 3,
+        "reason": "target_levels_completed"
+      },
+      "preparedOnly": true,
+      "officialPerformanceEligible": false,
+      "strictCommonGraphParity": false
+    },
+    "recordedPublicRegressions": {
+      "status": "passed",
+      "summary": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/regression-summary.json",
+        "bytes": 103935,
+        "sha256": "7938ecd3370f48db6b1d5e5e0ec1db8b56d448d8435c8381672b4296d1f3322f"
+      },
+      "independentReview": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-independent-review.json",
+        "bytes": 79205,
+        "sha256": "6f40da88e9e0078aafec490fc71ba7807fdf5d4e46c262d5ecb8eede3b0dbd84"
+      },
+      "casesPassed": 11,
+      "historicalProjectionsPassed": 187,
+      "projectionsPerCase": 17,
+      "population": {
+        "commands": 390,
+        "completePublicPackets": 401,
+        "animationFrames": 1755,
+        "prefixes": 289,
+        "requests": 679,
+        "naturalLevelBoundaries": 33
+      },
+      "allOriginalProjectionNamesPreserved": true,
+      "allChildGroupsStopped": true,
+      "automaticRetries": 0,
+      "failedCases": 0,
+      "passiveOwnerRequirements": [],
+      "passiveOwnerPresenceQualification": "No additional passive owner was requested; zero prefixes checked is not proof of BranchRouting contribution.",
+      "kataQualification": "Pinned historical self-consistency reference retained; no new self-comparison substituted.",
+      "weavQualification": "Pre-import collection of historical host roots is established for WEAV only. The generic inherited comparison wording does not establish it for other cases."
+    },
+    "branchCommonRuntimeGraphs": {
+      "status": "qualified_synthetic_common_runtime_work_forms_and_graphs",
+      "summary": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-runtime-result-summary.json",
+        "bytes": 8715,
+        "sha256": "e9e5779557b9300398f6e9924ad44781c1efe8099201ec13856ed6f096a66284"
+      },
+      "independentResultReview": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-runtime-results-independent-review.json",
+        "bytes": 25877,
+        "sha256": "5fe1055d858ce680b7a4063e778b32c5a99d43ba1474c1fe1faf2ae18f4b7de4"
+      },
+      "entryBoundary": "NativeV6Runtime",
+      "counts": {
+        "sessions": 5,
+        "physicalReturns": 26,
+        "completedSourceAcquisitions": 23,
+        "ablatedReturns": 1,
+        "incompleteReturns": 2,
+        "wrapperRecordCalls": 25,
+        "nativeAdapterRecordInvocations": 24,
+        "executedModes": {
+          "calibrate": 17,
+          "move": 6,
+          "propagate": 1,
+          "select": 2
+        },
+        "unexecutedAuthorizedQuestions": 3,
+        "officialSolvedLevels": 0
+      },
+      "controlPointsChecked": 64,
+      "retainedGraphDeltasAcrossFiveChains": 3772,
+      "observedRestoreCalls": 51,
+      "contribution": {
+        "positiveAndContraryShareFourAcquisitionsAndMoveCommand": true,
+        "contraryChangesMeasuredMotionAndNextQuestion": true,
+        "nextActionNameAloneDoesNotDistinguishCalibrateFromPropagate": true,
+        "ablationSharesFirstCommandAndPublicReturn": true,
+        "ablationLeavesControlUnlearnedAndRepeatsAction1": true,
+        "commonRestoreReadsActuallyPersistedOwner": true,
+        "incompletePrefixRetainsTwoUnacquiredPublicTransitions": true
+      },
+      "scopeAmendment": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-scope-amendment-02.json",
+        "bytes": 4684,
+        "sha256": "e735325038f7546fb097de00757b716a13c210e36b9ba1b0dac4f78ac4583e82"
+      },
+      "publicServiceQualified": false,
+      "publicWorkerQualified": false,
+      "publicTicketsQualified": false,
+      "originalOracleExecuted": false,
+      "readerExecutedRuntimeSessions": 0
+    }
+  },
+  "retainedNonSuccessfulAttempts": [
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/baseline-preparation-attempt-01.json",
+      "bytes": 493,
+      "sha256": "3eb404818589a97ab08f6653509c9eb76e2d42c1e14fc4aaed7580e782ec64c2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/baseline-preparation-attempt-02.json",
+      "bytes": 682,
+      "sha256": "d5d17656d6f09b92455a90806b1a097c7c8966a216d2c7cddaf3f6401b631d90"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/receipt.json",
+      "bytes": 2287,
+      "sha256": "e0de9145ba5cf54d4326cc1a87a44d479d1824e984fc7ec191d510379ecad731"
+    }
+  ],
+  "failureQualification": "Baseline preparation issues and first graph-tool public-boundary rejection are preserved. Capture01 failed before any native factory or return; capture02 and reader02 passed on the amended, explicit real-runtime boundary.",
+  "reviewMetadataReconciliation": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/static-preparation-review-pin-reconciliation.json",
+    "bytes": 2641,
+    "sha256": "e5905e2c70809c7ea631e0d3f2bd046d6b4628b280be2e8a10cd95f9c42761b2"
+  },
+  "completeMigration": {
+    "componentVerified": 215,
+    "partialTransfer": 147,
+    "pending": 1007,
+    "fullyVerified": 0,
+    "pythonModules": 1369,
+    "dataFiles": 417,
+    "allSixFullMigrationGates": false,
+    "fullOriginalCallerParity": false
+  },
+  "officialCost": {
+    "measured": false,
+    "accepted": false,
+    "metric": "complete-session median",
+    "strictMaximumIncreasePercent": 10,
+    "independentGames": [
+      "STCK",
+      "SMLP"
+    ],
+    "phaseAbove10PercentAllowedWhenBothGlobalsPass": true,
+    "crossGameCompensation": false,
+    "allSamplesRetained": true,
+    "functionalCommandDurationsAreOfficialSamples": false
+  },
+  "workPolicy": {
+    "ordinaryWorkRequiresGlobalLock": false,
+    "globalLockAcquired": false,
+    "waitedForOtherLotAvailabilityOrPublication": false,
+    "shortExclusivityOnlyForOfficialPerformanceAndPublication": true,
+    "heldLockFileDeleted": false,
+    "LKEY": "permanently_closed"
+  },
+  "newLiveGameCampaign": false,
+  "newOfficialSolvedLevels": 0,
+  "publicationPerformed": false,
+  "evidenceRetention": "evidence-retention.json",
+  "nextStep": "Reserve a distinct final native version, freeze and reconcile the exact candidate and relevant proofs; then declare and measure official complete-session cost against the actual published predecessor, followed by separately evidenced publication.",
+  "futureChangesQualification": "Current proofs are not automatically assigned to future source bytes. Reconcile changed inputs and renew affected controls before cost/publication."
+}

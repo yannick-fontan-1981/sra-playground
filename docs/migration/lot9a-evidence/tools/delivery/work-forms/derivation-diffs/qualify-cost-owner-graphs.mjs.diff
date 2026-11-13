@@ -1,0 +1,531 @@
+--- docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs-v2.mjs
++++ docs/migration/lot9a-evidence/tools/delivery/work-forms/qualify-cost-owner-graphs.mjs
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env node
+-/** Review retained published 0.66 / final 0.67 candidate 8B work forms, five-owner observations and each complete graph.
++/** Review fresh published 0.67 / final 0.68 Chart work forms, six owners, full snapshots and complete graphs.
+  * CLI: node SCRIPT INVENTORY.json BASELINE.gz BASELINE.receipt.json CANDIDATE.gz CANDIDATE.receipt.json REVIEW.json FORMS.json
+  * Reads functional captures only. No runtime, replay, game or timing report runs.
+  */
+@@ -21,59 +21,29 @@
+ import { V6_NATIVE_PROGRAM_REFERENCE } from '../../../../../../src/logos-engine/v6-src-program.ts';
+ 
+ const SCRIPT = fileURLToPath(import.meta.url), ROOT = resolve(dirname(SCRIPT), '../../../../../..');
+-const BASE = resolve(ROOT, 'docs/migration/lot8b-evidence');
+-const FINAL = resolve(ROOT, 'docs/migration/lot8b-evidence/final-version-067-01');
+-const TOOL_DIRECTORY = resolve(BASE, 'tools/final-functional/work-forms');
++const BASE = resolve(ROOT, 'docs/migration/lot9a-evidence');
++const FINAL = resolve(ROOT, 'docs/migration/lot9a-evidence/delivery-final-068-01');
++const TOOL_DIRECTORY = resolve(BASE, 'tools/delivery/work-forms');
+ const CAPTURE_TOOL = resolve(TOOL_DIRECTORY, 'capture-cost-owner-graphs.mjs');
+ const INVENTORY_TOOL = resolve(TOOL_DIRECTORY, 'record-owner-source-inventory.mjs');
+-const DERIVED_FROM = resolve(ROOT, 'docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs.mjs');
+-const CAPTURE_DERIVATION = resolve(ROOT, 'docs/migration/lot8b-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs');
++const DERIVED_FROM = resolve(ROOT, 'docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs-v2.mjs');
++const CAPTURE_DERIVATION = resolve(ROOT, 'docs/migration/lot8b-evidence/tools/final-functional/work-forms/capture-cost-owner-graphs.mjs');
+ const POLICY_PATH = 'reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm';
+-const OWNER = 'branch_routing';
++const OWNER = 'public_chart_navigation';
++const CHART_PROGRAM = 'program:v6.chart_navigation.choose';
++const CHART_EXTENSIONS = ['single_owner_chart_navigation_selected_and_passive_acquisition', 'validated_chart_navigation_checkpoint', 'current_execution_chart_navigation_refusal'];
+ const OWNERS = { binding: 'public_observed_binding', selectedRigid: 'selected_rigid', motif: 'motif_access',
+-  recruitment: 'public_ordered_recruitment', branchRouting: OWNER };
++  recruitment: 'public_ordered_recruitment', branchRouting: 'branch_routing', chart: OWNER };
+ const WRAPPED_OWNERS = new Set(['motif', 'branchRouting']);
+-const PUBLISHED_BASELINE = '4ff7bf45286a8a19d34401988adca587253ae41e';
++const PUBLISHED_BASELINE = '8462204043aa368faa7df280d796bb706eb53b38';
+ const EXPECTED = {
+-  baseline: { fileCount: 329, digest: 'ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316' },
+-  candidate: { fileCount: 331, digest: 'c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a' },
++  baseline: { fileCount: 331, digest: 'c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a' },
++  candidate: { fileCount: 334, digest: 'e7a94fbc7cdcb19d8704b5d4120f27a858cbcd07e455084711510ee147f4e653' },
+ };
+-// Reuse exactly the historically captured published A. Only candidate B may use
+-// this final generator; no arbitrary old-generator capture is accepted.
+-const RETAINED_BASELINE = {
+-  "report": {
+-    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.json.gz",
+-    "bytes": 7212928,
+-    "sha256": "384a5f5bb3e00174e8113e35387132284e90a6d5a1af5303ecfe9ed0db3df893"
+-  },
+-  "receipt": {
+-    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.receipt.json",
+-    "bytes": 127765,
+-    "sha256": "5aebb7ab6f603f305b28bb3ffd262fc4103f433ea4ac7b0e0db051d75036d084"
+-  },
+-  "generator": {
+-    "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs",
+-    "bytes": 31412,
+-    "sha256": "def20965d488ff15cf225961f407853b29cee0eb22e9119cfe9f1611dcc73a3a"
+-  },
+-  "derivedFrom": {
+-    "path": "docs/migration/lot8a-evidence/tools/work-forms/capture-cost-owner-graphs.mjs",
+-    "bytes": 29563,
+-    "sha256": "fa7c225349ad2652ff0b45cd53b7f8de7ac94d4131363e5f3c1568340d0a600f"
+-  },
+-  "cases": {
+-    "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/cases.json",
+-    "bytes": 1498,
+-    "sha256": "65e27dbcc2f5871ab259358cc46576b2671058630be0b37c643eadad66593173"
+-  },
+-  "nativeSourceBefore": {
+-    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/baseline-native.json",
+-    "bytes": 39098,
+-    "sha256": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7"
+-  }
+-};
+-const VERSIONS = { baseline: '0.66.0', candidate: '0.67.0' };
+-const IDS = [`family_state:${OWNER}`, `family_activation:${OWNER}`];
++// Both roles are newly captured by the same frozen generator; each preflight
++// remains bound to its own independently verified receipt.
++const VERSIONS = { baseline: '0.67.0', candidate: '0.68.0' };
++const IDS = [`family_state:${OWNER}`, `family_activation:${OWNER}`, CHART_PROGRAM];
+ const IDSET = new Set(IDS);
+ const SOURCE_PROOFS = ['src/logos-engine/v6-native-runtime.ts', 'src/logos-engine/v6-motif-access.ts',
+   'src/logos-engine/v6-motif-access-geometry.ts', 'src/logos-engine/v6-observed-binding.ts',
+@@ -81,6 +51,7 @@
+   'src/logos-engine/v6-ordered-recruitment.ts', 'src/logos-engine/v6-ordered-recruitment-geometry.ts',
+   'src/logos-engine/v6-ordered-recruitment-policy.ts', 'src/logos-engine/v6-ordered-recruitment-projection.ts',
+   'src/logos-engine/v6-branch-routing.ts', 'src/logos-engine/v6-branch-routing-geometry.ts',
++  'src/logos-engine/v6-chart-navigation.ts', 'src/logos-engine/v6-chart-navigation-policy.ts', 'src/logos-engine/v6-chart-navigation-geometry.ts',
+   'src/logos-engine/v6-native-authority.ts', 'src/logos-engine/v6-knowledge-store.ts', 'src/logos-engine/kernel.ts'];
+ const ROLE_VALIDATORS = ['src/logos-engine/kernel.ts', 'src/logos-engine/v6-knowledge-store.ts'];
+ const COMMON_VALIDATORS = ['src/logos-engine/canonical.ts',
+@@ -170,6 +141,24 @@
+   return { actions: s.actions, levelsCompleted: s.levelsCompleted, reason: s.reason, graphRevision: s.graphRevision,
+     nodeCount: s.nodeCount, acquiredTransitions: s.caller?.acquiredTransitions ?? null, implementation: s.implementation };
+ }
++function structuralProjection(snapshot) {
++  const names = ['sourceDigest', 'sourceCommit', 'sessionId', 'sequence', 'actions', 'cycles', 'levelsCompleted', 'level',
++    'reason', 'nodeCount', 'graphRevision', 'graphChain', 'nativeExecutionDigest', 'lastDecision', 'implementation'];
++  // Match only the separately retained old projection. The full snapshot itself
++  // is never pruned, normalized or substituted before leaf comparison.
++  return JSON.parse(JSON.stringify({ ...Object.fromEntries(names.map(name => [name, snapshot[name]])),
++    proposal: snapshot.proposal ? { kind: snapshot.proposal.kind,
++      ...(snapshot.proposal.material_pose_plan ? { material_pose_plan: { mode: snapshot.proposal.material_pose_plan.mode } } : {}) } : null,
++    whyAct: { enabled: snapshot.whyAct?.enabled }, caller: { enabled: snapshot.caller?.enabled,
++      acquiredTransitions: snapshot.caller?.acquiredTransitions ?? null, boundaryReplays: snapshot.caller?.boundaryReplays ?? null } }));
++}
++function assertForeignChartState(value) {
++  assert.ok(value && typeof value === 'object' && !Array.isArray(value));
++  assert.ok(value.epoch === null || Number.isSafeInteger(value.epoch) && value.epoch >= 0);
++  assert.deepEqual({ ...value, epoch: null }, { epoch: null, chart: null, position: null, positions: [], position_status: null,
++    visited: [], grants: [], gains: [], views: {}, blocked: [], evidence: [], portable: [], last: null, method_use: null },
++  'Foreign fixed forms must keep the exact cold Chart source state except its observed epoch');
++}
+ function assertSameWork(a, b) {
+   const withoutIdentityAndCounts = shape => ({ ...shape,
+     observations: shape.observations.map(({ nodeCount, ...rest }) => rest),
+@@ -219,13 +208,13 @@
+   constructor(paths, writeDifference) {
+     this.writeDifference = writeDifference;
+     this.paths = paths; this.inputs = new Map(); this.forms = []; this.traces = new Map(); this.receipts = {}; this.stores = {};
+-    this.result = { schema: 'logos-engine.lot8b-delivery-work-graph-review.v1',
++    this.result = { schema: 'logos-engine.lot9a-delivery-work-graph-review.v1',
+       status: 'functional_structure_qualification_failed', startedAt: new Date().toISOString(),
+       checks: [], nodeAttributions: [], points: [], failures: [], commandBoundaryProjections: [], sourceFactCoverage: [],
+       commonValueCoverage: [], commonValuePolicy: { comparison: 'exact', permittedMetadataDifference: 'origin.source_digest',
+         identityValueAttributions: [], unattributedDifferencesAllowed: 0 },
+       preparedOnly: true, officialPerformanceEligible: false, strictCommonGraphParity: false,
+-      publishedBaseline: { site: 107, sourceCommit: PUBLISHED_BASELINE, nativeVersion: '0.66.0' }, candidatePublished: false,
++      publishedBaseline: { site: 108, sourceCommit: PUBLISHED_BASELINE, nativeVersion: '0.67.0' }, candidatePublished: false,
+       differenceCount: 0, unattributedDifferenceCount: 0, differenceClasses: {}, differenceExamples: [],
+       traceClockBounds: [], ownerCheckpointCoverage: [], sourceFactCoverage: [] };
+   }
+@@ -249,16 +238,14 @@
+     this.result.derivedFrom = await this.input(DERIVED_FROM);
+     this.captureTool = await this.input(CAPTURE_TOOL);
+     this.captureDerivation = await this.input(CAPTURE_DERIVATION);
+-    for (const record of Object.values(RETAINED_BASELINE)) await this.recorded(record);
+-    assert.equal(this.paths.baseline, resolve(ROOT, RETAINED_BASELINE.report.path));
+-    assert.equal(this.paths.baselineReceipt, resolve(ROOT, RETAINED_BASELINE.receipt.path));
+-    this.result.retainedBaseline = RETAINED_BASELINE;
++    this.result.retainedBaseline = false;
++    assert.notEqual(this.paths.baseline, this.paths.candidate, 'A/B capture files must be distinct');
+     for (const role of ['baseline', 'candidate']) {
+       const receiptPath = this.paths[role + 'Receipt']; await this.input(receiptPath);
+       const receipt = await read(receiptPath); this.receipts[role] = receipt;
+-      assert.equal(receipt.schema, 'logos-engine.lot8b-delivery-owner-cost-functional-capture-receipt.v1');
++      assert.equal(receipt.schema, 'logos-engine.lot9a-delivery-owner-cost-functional-capture-receipt.v1');
+       assert.equal(receipt.status, 'captured_functional_structure'); assert.equal(receipt.role, role);
+-      assert.deepEqual(receipt.owners, OWNERS); assert.equal(receipt.acquisitionMode, 'observed_five_owner_composition');
++      assert.deepEqual(receipt.owners, OWNERS); assert.equal(receipt.acquisitionMode, 'observed_six_owner_composition');
+       assert.deepEqual(receipt.publishedBaseline, this.result.publishedBaseline); assert.equal(receipt.candidatePublished, false);
+       assert.equal(receipt.preparedOnly, true); assert.equal(receipt.globalLockUsed, false); assert.equal(receipt.officialPerformanceEligible, false);
+       assert.deepEqual({ fileCount: receipt.nativeInventoryBefore.fileCount, digest: receipt.nativeDigest }, EXPECTED[role]);
+@@ -268,17 +255,14 @@
+       assert.deepEqual(receipt.nativeInventoryBefore, receipt.nativeInventoryAfter);
+       assert.deepEqual(receipt.nativeSourceBefore, receipt.nativeSourceAfter);
+       assert.deepEqual(receipt.inputsBefore, receipt.inputsAfter); assert.deepEqual(receipt.generator, receipt.generatorAfter);
+-      assert.deepEqual(receipt.generator, role === 'baseline' ? RETAINED_BASELINE.generator : this.captureTool);
++      assert.deepEqual(receipt.generator, this.captureTool);
+       assert.deepEqual(receipt.failures, []);
+-      assert.deepEqual(receipt.derivedFrom, role === 'baseline' ? RETAINED_BASELINE.derivedFrom : this.captureDerivation);
+-      if (role === 'baseline') {
+-        assert.deepEqual(receipt.report, RETAINED_BASELINE.report);
+-        assert.deepEqual(receipt.cases, RETAINED_BASELINE.cases);
+-        assert.deepEqual(receipt.nativeSourceBefore, RETAINED_BASELINE.nativeSourceBefore);
+-      }
+-      for (const key of ['nativeSourceUnchanged', 'inputsUnchanged', 'generatorUnchanged']) assert.equal(receipt[key], true);
++      assert.deepEqual(receipt.derivedFrom, this.captureDerivation);
++      for (const key of ['nativeSourceUnchanged', 'inputsUnchanged', 'generatorUnchanged', 'sourceCommitUnchanged']) assert.equal(receipt[key], true);
++      assert.equal(receipt.sourceCommitAfter, receipt.sourceCommit);
+       for (const key of ['measuredCostSessions', 'timingReportsRead', 'timingMetricsProduced']) assert.equal(receipt[key], 0);
+       assert.equal(receipt.sessionCount, 4); assert.equal(receipt.actions, 31);
++      assert.deepEqual([receipt.sessionStarts, receipt.initializedSessions, receipt.physicalReturns], [4, 4, 31]);
+       assert.ok(Date.parse(receipt.finishedAt) >= Date.parse(receipt.startedAt));
+       assert.deepEqual(await read(await this.recorded(receipt.nativeSourceBefore)), receipt.nativeInventoryBefore);
+       await this.recorded(receipt.cases);
+@@ -297,11 +281,14 @@
+     }
+     await this.input(this.paths.inventory);
+     const inventory = await read(this.paths.inventory); this.result.ownerInventory = await fingerprint(this.paths.inventory);
+-    assert.equal(inventory.schema, 'logos-engine.lot8b-delivery-owner-cost-source-inventory.v1');
++    assert.equal(inventory.schema, 'logos-engine.lot9a-delivery-owner-cost-source-inventory.v1');
+     assert.equal(inventory.officialPerformanceEligible, false);
+     await this.recorded(inventory.generator); assert.deepEqual(inventory.generator, await this.input(INVENTORY_TOOL));
+     await this.recorded(inventory.derivedFrom);
+-    assert.deepEqual(inventory.changes, { ownersAdded: ['branch_routing'], ownersRemoved: [], programsAdded: [], programsRemoved: [] });
++    this.ownerInventory = inventory;
++    assert.deepEqual(inventory.changes, { ownersAdded: [OWNER], ownersRemoved: [], programsAdded: ['v6.chart_navigation.choose'], programsRemoved: [] });
++    assert.deepEqual(inventory.sourceDelta, { added: ['src/logos-engine/v6-chart-navigation-geometry.ts', 'src/logos-engine/v6-chart-navigation-policy.ts', 'src/logos-engine/v6-chart-navigation.ts'], removed: [], changed: ['src/logos-engine/v6-native-runtime.ts'] });
++    assert.deepEqual([inventory.owners.baseline.length, inventory.owners.candidate.length, inventory.programs.baseline.length, inventory.programs.candidate.length], [62, 63, 28, 29]);
+     assert.deepEqual(inventory.publishedBaseline, this.result.publishedBaseline);
+     for (const role of ['baseline', 'candidate']) {
+       assert.deepEqual(inventory.sourceInventory[role].native, this.receipts[role].nativeInventoryBefore);
+@@ -317,10 +304,34 @@
+     this.result.traceClockSource = { memory: await this.input('src/logos-engine/v6-reasoning-memory.ts'),
+       authority: await this.input('src/logos-engine/v6-native-authority.ts'),
+       derivation: 'Default NativeReasoningMemory clock is unmodified Date.now()/1000; authority constructs it without options. Each new reasoning:trace id must be bounded by its actual service.handle wall-clock interval.' };
++    const runtimeSources = {};
++    for (const role of ['baseline', 'candidate']) {
++      const path = resolve(this.receipts[role].checkout, 'src/logos-engine/v6-native-runtime.ts');
++      const record = await this.input(path), text = await readFile(path, 'utf8');
++      assert.equal(record.sha256, this.receipts[role].nativeInventoryBefore.files['src/logos-engine/v6-native-runtime.ts']);
++      assert.ok(text.includes('this.now = configuration.now ?? (() => performance.now())'));
++      assert.ok(text.includes('activeSeconds: (this.elapsedMs + this.runningMs()) / 1000'));
++      assert.ok(text.includes('this.elapsedMs += duration;') && text.includes('this.computeStart = null'));
++      assert.ok(text.includes('this.elapsedMs += outcome.executionMs'));
++      assert.ok(text.includes("kind: 'src_selection'") && text.includes("kind: 'why_act_release'"));
++      const extensions = text.match(/const NATIVE_CALLER_EXTENSIONS = \[([\s\S]*?)\] as const;/);
++      assert.ok(extensions, 'The exact source extension declaration is required');
++      runtimeSources[role] = { record, extensions: extensions[1] };
++    }
++    let originalExtensions = runtimeSources.candidate.extensions;
++    for (const value of CHART_EXTENSIONS) {
++      const line = `  '${value}',\n`;
++      assert.equal(originalExtensions.split(line).length, 2, 'Exactly one new source extension literal is allowed');
++      originalExtensions = originalExtensions.replace(line, '');
++    }
++    assert.equal(originalExtensions, runtimeSources.baseline.extensions, 'Other extension source bytes must remain exact');
++    this.result.activeClockSource = { baseline: runtimeSources.baseline.record, candidate: runtimeSources.candidate.record,
++      rule: 'Snapshot activeSeconds is bounded by actual runtime elapsedMs before/after the same service.handle and its unmodified performance.now interval. executionMs is zero. No clock replacement or numerical normalization.' };
++    this.result.coverageExtensionProof = { added: CHART_EXTENSIONS, inverseSourceLiteralRemovalExact: true };
+     assert.deepEqual(this.receipts.baseline.cases, this.receipts.candidate.cases);
+     this.casesRecord = this.receipts.candidate.cases; this.cases = await read(this.casesRecord.path);
+-    assert.equal(this.cases.schema, 'logos-engine.lot8b-functional-work-cases.v1');
+-    assert.equal(this.cases.qualificationStage, 'functional_preparation_against_published_066_not_official_cost');
++    assert.equal(this.cases.schema, 'logos-engine.lot9a-functional-work-cases.v1');
++    assert.equal(this.cases.qualificationStage, 'functional_preparation_against_published_067_not_official_cost');
+     assert.equal(this.cases.officialPerformanceEligible, false);
+     assert.equal(this.cases.plannedSessionsPerRole, 4); assert.equal(this.cases.plannedActionsPerRole, 31);
+     assert.equal(Object.hasOwn(this.cases, 'budget'), false); assert.equal(Object.hasOwn(this.cases, 'rounds'), false);
+@@ -359,16 +370,20 @@
+   }
+   start(role, row, ordinal) {
+     const item = this.cases.cases[Math.floor(ordinal / 2)], form = ordinal % 2 ? 'measured' : 'warmup';
+-    assert.deepEqual([row.case, row.form, row.sessionId], [item.id, form, `lot8b-delivery-owner-cost-${item.id.toLowerCase()}-${form}`]);
++    assert.deepEqual([row.case, row.form, row.sessionId], [item.id, form, `lot9a-delivery-owner-cost-${item.id.toLowerCase()}-${form}`]);
+     assert.equal(row.actionsLimit, form === 'warmup' ? item.warmupActions : item.actions);
+     assert.deepEqual(row.budgets, { targetLevels: item.targetLevels, levelActionCaps: Array(item.targetLevels).fill(600) });
+     assert.equal(row.nativeDigest, this.receipts[role].nativeDigest); assert.equal(row.coldKnowledge, true); assert.equal(row.checkpointSupplied, false);
+     assert.deepEqual([row.trace, row.traceSha256], [item.trace, item.traceSha256]);
+     const trace = this.traces.get(item.id); assert.deepEqual(row.initialPublicPacket, trace.packets[0].packet);
+-    return { role, start: row, trace, nodes: {}, revision: 0, chain: null, runtimeDigest: null,
++    const precedingReturns = this.cases.cases.flatMap(value => [value.warmupActions, value.actions]).slice(0, ordinal).reduce((a, b) => a + b, 0);
++    assert.deepEqual(row.consumption, { sessionStarts: ordinal + 1, initializedSessions: ordinal, physicalReturns: precedingReturns,
++      sessionInitialized: false, sessionPhysicalReturns: 0 });
++    return { role, start: row, trace, formOrdinal: ordinal, precedingReturns, nodes: {}, revision: 0, chain: null, runtimeDigest: null,
+       point: 0, commands: 0, pending: null, last: null,
+       ownerOperations: [], ownerCheckpoints: [], ownerCounts: Object.fromEntries(Object.keys(OWNERS).map(key => [key, { operations: 0, checkpoints: 0, proposals: 0, records: 0, restores: 0, refusals: 0 }])),
+-      traceClocks: new Map(), ownRoots: [], seenAdded: new Set(), seenRemoved: new Set(),
++      traceClocks: new Map(), ownRoots: [], seenAdded: new Set(), seenRemoved: new Set(), chains: new Set(),
++      lastActiveSeconds: 0, activeClock: null, fullSnapshot: null,
+       shape: { actions: 0, cycles: 0, levelsCompleted: 0, requests: [], observations: [], inspection: [], final: null } };
+   }
+   command(state, row) {
+@@ -387,6 +402,8 @@
+     const graph = row.knowledge, snapshot = row.snapshot;
+     if (state.runtimeDigest === null) {
+       state.runtimeDigest = snapshot.sourceDigest;
++      assert.equal(state.runtimeDigest, this.ownerInventory.sourceInventory[state.role].factorySourceDigest,
++        'Captured sourceDigest must be the independently inventoried real factory identity');
+       const Store = this.stores[state.role].NativeKnowledgeStore;
+       state.kernel = new Store(state.runtimeDigest, row.sessionId).kernel;
+     }
+@@ -408,13 +425,19 @@
+       }
+       assert.equal(await digest({ sequence: delta.sequence, previous: delta.previous, node: delta.node,
+         cause: delta.cause, source_digest: delta.source_digest }), delta.digest, 'Invalid Kernel delta hash');
+-      state.nodes[delta.node.id] = delta.node; state.chain = delta.digest;
++      state.nodes[delta.node.id] = delta.node; state.chain = delta.digest; state.chains.add(delta.digest);
+     }
+     for (const delta of graph.deltasAdded) if (isNativeStateGraph(delta.node.value)) nodeValue(delta.node, state.nodes);
+     assert.deepEqual([graph.chain, graph.toRevision, graph.nodeCount], [state.chain, state.revision, Object.keys(state.nodes).length]);
+     assert.deepEqual([snapshot.graphChain, snapshot.graphRevision, snapshot.nodeCount], [state.chain, state.revision, Object.keys(state.nodes).length]);
+     for (const delta of graph.deltasAdded) {
+       if (state.role === 'candidate' && IDSET.has(delta.node.id)) state.ownRoots.push(delta.node);
++      if (delta.node.id === `family_activation:${OWNER}`) {
++        assert.equal(state.role, 'candidate'); assert.equal(delta.node.revision, 1);
++        assert.equal(delta.node.kind, 'family_activation'); assert.equal(delta.node.family, OWNER);
++        assert.equal(delta.node.status, 'active'); assert.deepEqual(nodeValue(delta.node, state.nodes), { enabled: true });
++        assert.deepEqual(delta.cause, { workflow: 'v6.composition_strategy.choose', step: 'initialize', statement: 'family.install' });
++      }
+       if (delta.node.component === 'native_reasoning_trace') {
+         const value = nodeValue(delta.node, state.nodes), id = delta.node.id;
+         assert.deepEqual(Object.keys(value).sort(), ['body', 'created', 'episode', 'id', 'kind']);
+@@ -449,9 +472,11 @@
+   }
+   async point(state, row) {
+     const request = row.request, inspection = row.type === 'terminal_inspection';
++    assert.deepEqual(row.consumption, { sessionStarts: state.formOrdinal + 1, initializedSessions: state.formOrdinal + 1,
++      physicalReturns: state.precedingReturns + state.commands, sessionInitialized: true, sessionPhysicalReturns: state.commands });
+     assert.deepEqual(row.ownerBindings, this.receipts[state.role].sessions.find(session => session.sessionId === row.sessionId).ownerBindings);
+     for (const key of Object.keys(OWNERS)) {
+-      const expected = key === 'branchRouting' && state.role === 'baseline' ? 0 : 1;
++      const expected = key === 'chart' && state.role === 'baseline' ? 0 : 1;
+       assert.equal(row.ownerBindings[key].id, OWNERS[key]);
+       assert.equal(row.ownerBindings[key].registeredInstances, expected);
+       assert.equal(row.ownerBindings[key].actualRegisteredOwnerVerified, Boolean(expected));
+@@ -461,7 +486,8 @@
+     assert.deepEqual(row.ownerStates.selectedRigid, { format: 'selected_rigid_events.v1', events: [] },
+       'The declared foreign workloads must retain the exact empty SelectedRigid journal');
+     assert.equal(row.ownerStates.motif.format, 'native.motif_access.v1');
+-    if (state.role === 'candidate') assert.equal(row.ownerStates.branchRouting.format, 'native.branch_routing.v1');
++    assert.equal(row.ownerStates.branchRouting.format, 'native.branch_routing.v1');
++    if (state.role === 'candidate') assertForeignChartState(row.ownerStates.chart);
+     assert.equal(row.pointIndex, state.point++); assert.equal(request.sessionId, state.start.sessionId);
+     assert.equal(request.sequence, state.commands); assert.equal(row.snapshot.actions, state.commands);
+     assert.equal(row.snapshot.whyAct.enabled, true); assert.equal(row.snapshot.caller.enabled, true);
+@@ -498,7 +524,13 @@
+         assert.deepEqual(operation.sourceBefore, { format: 'selected_rigid_events.v1', events: [] });
+         assert.deepEqual(operation.sourceAfter, { format: 'selected_rigid_events.v1', events: [] });
+       }
+-      if (operation.owner === 'branchRouting') assert.equal(state.role, 'candidate');
++      if (operation.owner === 'chart') {
++        assert.equal(state.role, 'candidate'); assertForeignChartState(operation.sourceBefore); assertForeignChartState(operation.sourceAfter);
++        if (operation.method === 'propose' || operation.method === 'recordSource' || operation.method === 'currentProposalRefusal') {
++          assert.equal(operation.returnKind, 'null', 'Foreign fixed forms must not fabricate a Chart proposal, event or refusal');
++          assert.equal(operation.returnValue, null);
++        }
++      }
+       state.ownerOperations.push(operation);
+     }
+     for (const checkpoint of row.ownerCheckpoints) {
+@@ -508,9 +540,10 @@
+       state.ownerCheckpoints.push(checkpoint);
+     }
+     await this.graph(state, row);
++    this.fullSnapshot(state, row);
+     for (const [key, id] of Object.entries(OWNERS)) {
+       const node = state.nodes['family_state:' + id];
+-      if (key === 'branchRouting' && state.role === 'baseline') { assert.equal(node, undefined); continue; }
++      if (key === 'chart' && state.role === 'baseline') { assert.equal(node, undefined); continue; }
+       assert.ok(node && node.kind === 'family_state' && node.family === id);
+       const checkpointValue = nodeValue(node, state.nodes);
+       const matched = state.ownerCheckpoints.findLast(item => item.owner === key && isDeepStrictEqual(item.state, checkpointValue));
+@@ -538,6 +571,8 @@
+         incompleteSelectedAcquisitions: calls.length - acquiredCalls.length, persistedSourceFacts: sourceFacts.length,
+         positiveContributionClaim: false, officialSuccessClaim: false });
+     }
++    assert.equal(facts.filter(item => item.value.key === 'chart_navigation_state' || item.value.key.startsWith('chart_navigation_event')).length, 0,
++      'These foreign work forms must not acquire Chart source facts');
+     if (inspection) state.shape.inspection.push({ graphNodes: row.snapshot.nodeCount });
+     else {
+       state.shape.requests.push({ type: request.type, sequence: request.sequence, kind: row.result.kind, actions: row.snapshot.actions });
+@@ -546,6 +581,95 @@
+         levelsCompleted: row.snapshot.levelsCompleted, final: finalShape(row.snapshot) });
+     }
+     state.last = row;
++  }
++  fullSnapshot(state, row) {
++    const full = row.fullSnapshot, source = this.ownerInventory.sourceInventory[state.role];
++    assert.ok(full && typeof full === 'object' && !Array.isArray(full), 'A complete service snapshot is required');
++    assert.equal(hash(JSON.stringify(full)), row.fullSnapshotSha256, 'Full snapshot bytes do not match their capture hash');
++    assert.equal(hash(JSON.stringify({ proposal: full.proposal, srcDecision: full.srcDecision, whyAct: full.whyAct })), row.decisionSha256,
++      'Complete decision/proposal bytes do not match their capture hash');
++    assert.deepEqual(structuralProjection(full), row.snapshot, 'The projection must derive from the retained full snapshot');
++    assert.deepEqual(full.coverage.registeredFamilies, source.owners);
++    assert.deepEqual(full.coverage.sourceGroups, source.groups);
++    assert.deepEqual(full.familyStateRefs, Object.fromEntries(source.owners.map(id =>
++      [id, { id: `family_state:${id}`, revision: state.nodes[`family_state:${id}`]?.revision ?? null }])));
++    for (const name of ['proposal', 'srcDecision', 'whyAct', 'caller', 'trace', 'prefix', 'coverage']) {
++      assert.ok(own(full, name), 'Full snapshot field omitted: ' + name);
++    }
++    assert.ok(Array.isArray(full.trace));
++    for (const entry of full.trace) if (own(entry, 'graph_chain')) {
++      assert.ok(['src_selection', 'why_act_release'].includes(entry.kind), 'A trace chain requires a declared source note kind');
++      assert.ok(state.chains.has(entry.graph_chain), 'Snapshot trace references a chain absent from its complete role graph');
++    }
++    const clock = row.activeClock;
++    assert.equal(clock.source, 'unmodified_performance_now');
++    for (const name of ['handleStartedMonotonicMs', 'handleFinishedMonotonicMs', 'elapsedBeforeMs', 'elapsedAfterMs', 'externallySuppliedExecutionMs']) {
++      assert.ok(Number.isFinite(clock[name]) && clock[name] >= 0, 'Invalid active clock observation: ' + name);
++    }
++    assert.equal(clock.computeStartAfter, null, 'No active computation may escape a completed service.handle');
++    assert.equal(clock.externallySuppliedExecutionMs, 0);
++    assert.ok(clock.handleFinishedMonotonicMs >= clock.handleStartedMonotonicMs);
++    assert.ok(clock.elapsedAfterMs >= clock.elapsedBeforeMs);
++    assert.ok(clock.elapsedAfterMs - clock.elapsedBeforeMs <= clock.handleFinishedMonotonicMs - clock.handleStartedMonotonicMs,
++      'Source active time exceeds its containing unmodified monotonic interval');
++    assert.ok(Number.isFinite(full.activeSeconds) && full.activeSeconds >= state.lastActiveSeconds);
++    assert.ok(full.activeSeconds >= clock.elapsedBeforeMs / 1000 && full.activeSeconds <= clock.elapsedAfterMs / 1000,
++      'Full snapshot activeSeconds is outside its source-owned elapsed interval');
++    state.lastActiveSeconds = full.activeSeconds; state.activeClock = clock; state.fullSnapshot = full;
++    if (state.role === 'candidate') {
++      const node = state.nodes[CHART_PROGRAM];
++      const declared = source.programNodes.find(item => item.id === CHART_PROGRAM);
++      assert.ok(node && declared && node.kind === 'program'); assert.equal(node.revision, 1);
++      for (const name of ['kind', 'status', 'value', 'definition']) assert.deepEqual(node[name], declared[name], 'Installed Chart program changed: ' + name);
++    } else assert.equal(state.nodes[CHART_PROGRAM], undefined);
++  }
++  async compareFullSnapshots(left, right, a, b, context) {
++    const before = a.fullSnapshot, after = b.fullSnapshot;
++    assert.deepEqual(after.coverage.registeredFamilies.filter(id => id !== OWNER), before.coverage.registeredFamilies);
++    for (const value of CHART_EXTENSIONS) {
++      assert.equal(before.coverage.nativeCallerExtensions.includes(value), false);
++      assert.equal(after.coverage.nativeCallerExtensions.filter(item => item === value).length, 1);
++    }
++    assert.deepEqual(after.coverage.nativeCallerExtensions.filter(value => !CHART_EXTENSIONS.includes(value)), before.coverage.nativeCallerExtensions);
++    const insertion = after.coverage.nativeCallerExtensions.indexOf(CHART_EXTENSIONS[0]);
++    assert.deepEqual(after.coverage.nativeCallerExtensions.slice(insertion, insertion + CHART_EXTENSIONS.length), CHART_EXTENSIONS);
++    assert.equal(after.coverage.nativeCallerExtensions[insertion - 1], 'branch_routing_incomplete_public_return_and_suffix_retention');
++    const provedCoverage = ['/coverage/registeredFamilies', '/coverage/sourceGroups', '/coverage/nativeCallerExtensions'];
++    await differences(before, after, '', async (path, first, second) => {
++      let classification = 'unattributed_full_snapshot_difference', evidence = null;
++      if (['/sourceDigest', '/implementation', '/graphChain', '/graphRevision', '/nodeCount', '/nativeExecutionDigest'].includes(path)) {
++        classification = 'attributed_full_snapshot_validated_role_identity';
++        evidence = { baseline: { sourceDigest: left.runtimeDigest, chain: left.chain, revision: left.revision, nodes: Object.keys(left.nodes).length, executionDigest: left.executionDigest },
++          candidate: { sourceDigest: right.runtimeDigest, chain: right.chain, revision: right.revision, nodes: Object.keys(right.nodes).length, executionDigest: right.executionDigest },
++          independentlyValidatedFullGraphs: true };
++      } else if (path === '/activeSeconds') {
++        classification = 'attributed_full_snapshot_source_active_clock';
++        evidence = { baseline: left.activeClock, candidate: right.activeClock, source: this.result.activeClockSource };
++      } else if (provedCoverage.some(root => path === root || path.startsWith(root + '/'))) {
++        classification = 'attributed_full_snapshot_exact_chart_coverage';
++        evidence = { inventory: this.result.ownerInventory, sourceExtensionProof: this.result.coverageExtensionProof,
++          allOtherOwnersGroupsAndExtensionsUnchanged: true };
++      } else if (path === `/familyStateRefs/${OWNER}` || path.startsWith(`/familyStateRefs/${OWNER}/`)) {
++        classification = 'attributed_full_snapshot_chart_state_reference';
++        evidence = { id: `family_state:${OWNER}`, revision: right.nodes[`family_state:${OWNER}`].revision, actualCheckpointVerified: true };
++      } else {
++        const match = path.match(/^\/trace\/(\d+)\/graph_chain$/);
++        if (match) {
++          const index = Number(match[1]), leftTrace = before.trace[index], rightTrace = after.trace[index];
++          if (leftTrace?.kind === rightTrace?.kind && ['src_selection', 'why_act_release'].includes(leftTrace?.kind)
++            && left.chains.has(first.value) && right.chains.has(second.value)) {
++            classification = 'attributed_full_snapshot_known_role_trace_chain';
++            evidence = { kind: leftTrace.kind, baselineKnownChain: first.value, candidateKnownChain: second.value,
++              completeRoleDeltaChainsValidated: true };
++          }
++        }
++      }
++      await this.difference({ ...context, scope: 'full_snapshot' }, path, first, second, classification, evidence);
++    });
++    (this.result.fullSnapshotCoverage ??= []).push({ ...context, baselineSha256: canonicalHash(before), candidateSha256: canonicalHash(after),
++      completeSnapshotsRetained: true, allLeavesCompared: true, decisionAndProposalFieldsOmitted: false,
++      decisions: { baseline: canonicalHash({ proposal: before.proposal, srcDecision: before.srcDecision, whyAct: before.whyAct }),
++        candidate: canonicalHash({ proposal: after.proposal, srcDecision: after.srcDecision, whyAct: after.whyAct }) } });
+   }
+   async difference(context, path, a, b, classification = 'unattributed_difference', evidence = null) {
+     const record = { index: this.result.differenceCount++, ...context, path, baseline: a, candidate: b, classification,
+@@ -578,17 +702,17 @@
+     const context = { case: a.case, form: a.form, pointIndex: a.pointIndex };
+     const commonIds = Object.keys(left.nodes).filter(id => own(right.nodes, id)).sort(compareUnicode);
+     for (const id of commonIds) await this.compareNode(left, right, left.nodes[id], right.nodes[id], { ...context, scope: 'common_current_node' });
+-    const branchFragments = new Set();
+-    for (const node of right.ownRoots) for (const id of fragmentReferences(node.value, right.nodes)) branchFragments.add(id);
++    const chartFragments = new Set();
++    for (const node of right.ownRoots) for (const id of fragmentReferences(node.value, right.nodes)) chartFragments.add(id);
+     for (const [role, state, other, seen] of [['baseline', left, right, left.seenRemoved], ['candidate', right, left, right.seenAdded]]) {
+       for (const [id, node] of Object.entries(state.nodes)) if (!own(other.nodes, id) && !seen.has(id)) {
+         seen.add(id);
+-        const expectedBranch = role === 'candidate' && (IDSET.has(id) || node.kind === 'state_fragment' && branchFragments.has(id));
++        const expectedChart = role === 'candidate' && (IDSET.has(id) || node.kind === 'state_fragment' && chartFragments.has(id));
+         await this.difference({ ...context, scope: 'node_population', nodeId: id }, '/nodes/' + pointer(id),
+           role === 'baseline' ? { present: true, kind: node.kind, sha256: await digest(node) } : { present: false },
+           role === 'candidate' ? { present: true, kind: node.kind, sha256: await digest(node) } : { present: false },
+-          expectedBranch ? 'attributed_branch_routing_owner_or_reachable_fragment' : 'unattributed_node_population_difference',
+-          expectedBranch ? { persistedOwnerCheckpointValidated: true, fullNodeRetainedInCapture: true } : null);
++          expectedChart ? 'attributed_chart_owner_program_or_reachable_fragment' : 'unattributed_node_population_difference',
++          expectedChart ? { persistedOwnerCheckpointValidated: true, fullNodeRetainedInCapture: true } : null);
+       }
+     }
+     const commonA = a.knowledge.deltasAdded.filter(delta => own(right.nodes, delta.node.id));
+@@ -602,8 +726,9 @@
+       if (match) await this.compareNode(left, right, delta.node, match.node,
+         { ...context, scope: 'common_delta_node', baselineSequence: delta.sequence, candidateSequence: match.sequence });
+     }
+-    for (const key of ['binding', 'selectedRigid', 'motif', 'recruitment']) await differences(a.ownerStates[key], b.ownerStates[key], '',
++    for (const key of ['binding', 'selectedRigid', 'motif', 'recruitment', 'branchRouting']) await differences(a.ownerStates[key], b.ownerStates[key], '',
+       (path, first, second) => this.difference({ ...context, scope: 'common_owner_state', owner: OWNERS[key] }, path, first, second));
++    await this.compareFullSnapshots(left, right, a, b, context);
+     this.result.commonValueCoverage.push({ ...context, commonNodesCompared: commonIds.length,
+       commonBaselineDeltas: commonA.length, commonCandidateDeltas: commonB.length, rawValueLeavesNotRemoved: true });
+     this.result.points.push({ ...context, baselineNodeCount: a.snapshot.nodeCount, candidateNodeCount: b.snapshot.nodeCount,
+@@ -613,6 +738,10 @@
+     const receipt = this.receipts[state.role].sessions[ordinal];
+     assert.equal(state.pending, null); assert.equal(row.status, 'captured_functional_structure');
+     assert.equal(row.terminalResumePerformed, false); assert.equal(row.commands, state.commands);
++    assert.equal(row.initialized, true); assert.equal(row.physicalReturns, state.commands);
++    assert.deepEqual(row.consumption, { sessionStarts: ordinal + 1, initializedSessions: ordinal + 1,
++      physicalReturns: state.precedingReturns + state.commands, sessionInitialized: true, sessionPhysicalReturns: state.commands });
++    assert.equal(receipt.initialized, true); assert.equal(receipt.physicalReturns, state.commands);
+     assert.equal(state.shape.actions, state.start.actionsLimit); assert.equal(state.shape.final.acquiredTransitions, state.shape.actions);
+     assert.equal(state.shape.inspection.length, state.start.form === 'measured' ? 3 : 0);
+     assert.equal(row.terminalInspections, state.shape.inspection.length); assert.equal(row.captures, state.shape.requests.length);
+@@ -620,6 +749,7 @@
+     assert.equal(row.ownerCheckpointCount, state.ownerCheckpoints.length); assert.deepEqual(row.ownerCounts, state.ownerCounts);
+     assert.equal(state.ownerCounts.binding.records, state.start.actionsLimit, 'Binding must observe every fixed public return');
+     assert.equal(state.ownerCounts.recruitment.records, state.start.actionsLimit, 'Recruitment must observe every fixed public return exactly once');
++    assert.equal(state.ownerCounts.chart.records, state.role === 'candidate' ? state.start.actionsLimit : 0, 'Chart source must receive each foreign acquired return exactly once');
+     assert.deepEqual(row.shape, state.shape); assert.deepEqual(receipt.shape, state.shape);
+     for (const key of ['case', 'form', 'sessionId', 'status', 'commands', 'captures', 'terminalInspections',
+       'ownerCounts', 'ownerOperationCount', 'ownerCheckpointCount', 'ownerBindings']) assert.deepEqual(row[key], receipt[key]);
+@@ -636,7 +766,7 @@
+           for (const [role, row] of [['baseline', a.value], ['candidate', b.value]]) {
+             const receipt = this.receipts[role];
+             if (a.type === '$header') {
+-              assert.equal(row.schema, 'logos-engine.lot8b-delivery-owner-cost-functional-capture.v1');
++              assert.equal(row.schema, 'logos-engine.lot9a-delivery-owner-cost-functional-capture.v1');
+               assert.equal(row.role, role); assert.equal(row.checkout, receipt.checkout); assert.equal(row.startedAt, receipt.startedAt);
+             } else { assert.equal(row.status, receipt.status); assert.equal(row.finishedAt, receipt.finishedAt); }
+           }
+@@ -706,6 +836,7 @@
+       for (const record of audit.inputs.values()) assert.deepEqual(await fingerprint(record.path), record);
+       await absent(resolve(audit.performanceDirectory, 'window.json')); await absent(resolve(audit.performanceDirectory, 'readiness.json'));
+     });
++    assert.equal(audit.result.unattributedDifferenceCount, 0, 'Unattributed differences prevent functional delivery qualification');
+     audit.result.status = 'qualified_functional_work_forms_and_individual_graphs';
+     audit.result.privateComparison = audit.result.unattributedDifferenceCount === 0
+       ? 'all_observed_common_differences_attributed_functional_only_requires_final_review'
+@@ -716,15 +847,15 @@
+   audit.result.recordedAt = new Date().toISOString(); audit.result.inputs = [...audit.inputs.values()];
+   audit.result.checkedCount = audit.result.checks.length; audit.result.formsSha256 = canonicalHash(audit.forms);
+   audit.result.differences = await fingerprint(differencesPath);
+-  audit.result.qualification = 'Final 0.67 identity renewal using the exact retained baseline capture, separately bound original and current generators, and fresh candidate graphs. Functional preparation against exact Site 107 published source 4ff7bf45286a8a19d34401988adca587253ae41e. Every role graph is reconstructed and validated from its own frozen Kernel/store; all fragment identities and changed roots are checked. Binding, SelectedRigid, Motif and OrderedRecruitment exist in both roles; only BranchRouting is added. Motif and BranchRouting use their actual registered wrappers, and Recruitment passive calls use its real acquisition instance. Exact work shapes exclude only independently bound implementation identity and declared structural counts. All raw common node values and common delta identities/causes/order are compared; differences remain without removing node.value or replacing clocks. Only exact reasoning:trace created scalar/float64 leaves with unmodified source clock code and actual service.handle wall-clock bounds receive clock attribution. Other private differences remain unqualified. State presence, negative proposals, graph nodes, acquiredRecords and acquiredTransitions do not establish successful BranchRouting acquisition, positive game contribution or official success. The separate cold synthetic contribution corpus and official game results retain their own scopes. This artifact grants no official timing readiness, full source/caller parity or publication.';
++  audit.result.qualification = 'Fresh functional pair of exact Site 108 published 0.67 and frozen final Chart candidate 0.68. Every role graph, delta, fragment, executable digest and ticket binding is independently validated. Full snapshots, proposals, decisions, common owner states and all raw graph leaves are compared. Only the three declared Chart roots and their content-verified reachable fragments may extend population; BranchRouting is common and retains no exemption. Source identity and explicitly proved coverage additions are attributed narrowly. Exact trace creation clocks are bounded by real Date.now intervals; activeSeconds is bounded by observed real performance.now and source elapsed counters. No clock is replaced, no field is omitted, no arbitrary timing normalization is allowed, and any unexplained difference fails qualification. Chart registration/negative foreign probes are not positive acquisition or official success. No original oracle, game engine, timing readiness or publication is authorized by this artifact.';
+   await writeFile(attribution, JSON.stringify(audit.result, null, 2) + '\n', { flag: 'wx' });
+   if (audit.result.status === 'qualified_functional_work_forms_and_individual_graphs') {
+-    const value = { schema: 'logos-engine.lot8b-delivery-work-forms.v1', status: audit.result.status,
++    const value = { schema: 'logos-engine.lot9a-delivery-work-forms.v1', status: audit.result.status,
+       preparedOnly: true, officialPerformanceEligible: false, strictCommonGraphParity: false,
+       publishedBaseline: audit.result.publishedBaseline, candidatePublished: false,
+       recordedAt: new Date().toISOString(), nativeDigests: audit.result.nativeDigests, cases: audit.casesRecord,
+-      captureTool: audit.captureTool, captureTools: { baseline: RETAINED_BASELINE.generator, candidate: audit.captureTool },
+-      retainedBaseline: RETAINED_BASELINE, captures: {
++      captureTool: audit.captureTool, captureTools: { baseline: audit.captureTool, candidate: audit.captureTool },
++      retainedBaseline: false, captures: {
+         baseline: { report: await fingerprint(baseline), receipt: await fingerprint(baselineReceipt) },
+         candidate: { report: await fingerprint(candidate), receipt: await fingerprint(candidateReceipt) },
+       }, review: await fingerprint(attribution), differences: audit.result.differences, forms: audit.forms };

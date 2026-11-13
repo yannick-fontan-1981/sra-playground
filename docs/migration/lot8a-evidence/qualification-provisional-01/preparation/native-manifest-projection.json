@@ -1,0 +1,33 @@
+{
+  "schema": "logos-engine.lot8a.native-manifest-projection.v1",
+  "recordedAt": "2026-11-11T20:58:18.839805+00:00",
+  "inheritedDocument": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/preparation/inherited-source-manifest.json",
+    "sha256": "9737642215681078a374f6b9bed31c40bb72e143f38858e3a743654af221a397",
+    "bytes": 38589
+  },
+  "canonicalManifest": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/source-manifest.json",
+    "sha256": "325268f8cd80b67996ab2d4a05df5203247257bc603f1cf29f63f0d9165d7167",
+    "bytes": 38477
+  },
+  "replayManifest": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/recorded-regressions-01/source-manifest.json",
+    "sha256": "325268f8cd80b67996ab2d4a05df5203247257bc603f1cf29f63f0d9165d7167",
+    "bytes": 38477
+  },
+  "removedDocumentaryKeys": [
+    "schema",
+    "qualification"
+  ],
+  "fileMapChanged": false,
+  "nativeDigestChanged": false,
+  "matchesFrozenInventory": true,
+  "freeze": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/input-freeze.json",
+    "sha256": "072b5e52b1dc24a74c7bd2d19d0e6850191441b38005d884d3dc395e180225d4",
+    "bytes": 564572
+  },
+  "allExecutionInputsEqualPrevious145FileFiveGateValidation": true,
+  "qualification": "Prospective canonical shape required by existing PROOF.native_source() equality. Documentary source manifest retained byte-exact; no native file or prior proof changed and no failed execution is relabeled."
+}

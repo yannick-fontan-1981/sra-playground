@@ -1,0 +1,398 @@
+{
+  "schema": "logos-engine.v50.browser-verification.v1",
+  "status": "passed",
+  "game": "LIFE",
+  "nativeSourceManifestDigest": "66529083d89d420f9d198e99c8639ee174f1d829380d0d71eb86432ad184a94f",
+  "uiFilesSha256": {
+    "src/main.ts": "ffd81c9b5a87a739f630cb6c5597cdd45ae077ad38e29cc4e4004ef40b455912",
+    "src/sra-agent.css": "2a467f97763162d472498a8034449e4e8595638f61f58c2746f03d6c00884930",
+    "src/styles.css": "33c173b3c79469eb94f4039ee76ca92b730c351b720ab0b3b30ee73023d8b4c2"
+  },
+  "uiUnchangedFromCommit": "ac5015493dee4094c9f358f63aee6fb68c30d770",
+  "rawMeasurements": {
+    "path": "docs/migration/native-campaigns-v50/life-browser-layout-measures.json",
+    "sha256": "0acdce0f7b9b10b39a30d0f1222327d823771ab6cc787b23aa1cc55cc60326c4",
+    "bytes": 5975
+  },
+  "measurements": [
+    {
+      "label": "level-1-ready",
+      "inspectionOpen": false,
+      "rects": {
+        "#agent-message": {
+          "height": 98,
+          "width": 265,
+          "x": 986,
+          "y": 948.671875
+        },
+        "#agent-run": {
+          "height": 44,
+          "width": 265,
+          "x": 986,
+          "y": 1062.671875
+        },
+        "#canvas-stage": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        "#game-canvas": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        ".board-column": {
+          "height": 442,
+          "width": 888,
+          "x": 75,
+          "y": 878.671875
+        }
+      },
+      "status": "Ready to run from level 1.",
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      },
+      "actions": 0,
+      "levels": 0,
+      "prefixes": 0
+    },
+    {
+      "label": "level-1-running",
+      "inspectionOpen": false,
+      "rects": {
+        "#agent-message": {
+          "height": 98,
+          "width": 265,
+          "x": 986,
+          "y": 948.671875
+        },
+        "#agent-run": {
+          "height": 44,
+          "width": 265,
+          "x": 986,
+          "y": 1062.671875
+        },
+        "#canvas-stage": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        "#game-canvas": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        ".board-column": {
+          "height": 442,
+          "width": 888,
+          "x": 75,
+          "y": 878.671875
+        }
+      },
+      "status": "Preparing the agent\u2026",
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      },
+      "actions": 0,
+      "levels": 0,
+      "prefixes": 0
+    },
+    {
+      "label": "level-1-completed",
+      "inspectionOpen": false,
+      "rects": {
+        "#agent-message": {
+          "height": 98,
+          "width": 265,
+          "x": 986,
+          "y": 948.671875
+        },
+        "#agent-run": {
+          "height": 44,
+          "width": 265,
+          "x": 986,
+          "y": 1062.671875
+        },
+        "#canvas-stage": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        "#game-canvas": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        ".board-column": {
+          "height": 442,
+          "width": 888,
+          "x": 75,
+          "y": 878.671875
+        }
+      },
+      "status": "Level completed.",
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      },
+      "actions": 15,
+      "levels": 1,
+      "prefixes": 15
+    },
+    {
+      "label": "level-2-running",
+      "inspectionOpen": false,
+      "rects": {
+        "#agent-message": {
+          "height": 98,
+          "width": 265,
+          "x": 986,
+          "y": 948.671875
+        },
+        "#agent-run": {
+          "height": 44,
+          "width": 265,
+          "x": 986,
+          "y": 1062.671875
+        },
+        "#canvas-stage": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        "#game-canvas": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        ".board-column": {
+          "height": 442,
+          "width": 888,
+          "x": 75,
+          "y": 878.671875
+        }
+      },
+      "status": "Reading the board and planning\u2026",
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      },
+      "actions": 15,
+      "levels": 1,
+      "prefixes": 15
+    },
+    {
+      "label": "level-2-completed",
+      "inspectionOpen": false,
+      "rects": {
+        "#agent-message": {
+          "height": 98,
+          "width": 265,
+          "x": 986,
+          "y": 948.671875
+        },
+        "#agent-run": {
+          "height": 44,
+          "width": 265,
+          "x": 986,
+          "y": 1062.671875
+        },
+        "#canvas-stage": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        "#game-canvas": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        ".board-column": {
+          "height": 442,
+          "width": 888,
+          "x": 75,
+          "y": 878.671875
+        }
+      },
+      "status": "Level completed.",
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      },
+      "actions": 30,
+      "levels": 2,
+      "prefixes": 30
+    },
+    {
+      "label": "level-3-running",
+      "inspectionOpen": false,
+      "rects": {
+        "#agent-message": {
+          "height": 98,
+          "width": 265,
+          "x": 986,
+          "y": 948.671875
+        },
+        "#agent-run": {
+          "height": 44,
+          "width": 265,
+          "x": 986,
+          "y": 1062.671875
+        },
+        "#canvas-stage": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        "#game-canvas": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        ".board-column": {
+          "height": 442,
+          "width": 888,
+          "x": 75,
+          "y": 878.671875
+        }
+      },
+      "status": "Reading the board and planning\u2026",
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      },
+      "actions": 30,
+      "levels": 2,
+      "prefixes": 30
+    },
+    {
+      "label": "level-3-completed",
+      "inspectionOpen": false,
+      "rects": {
+        "#agent-message": {
+          "height": 98,
+          "width": 265,
+          "x": 986,
+          "y": 948.671875
+        },
+        "#agent-run": {
+          "height": 44,
+          "width": 265,
+          "x": 986,
+          "y": 1062.671875
+        },
+        "#canvas-stage": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        "#game-canvas": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        ".board-column": {
+          "height": 442,
+          "width": 888,
+          "x": 75,
+          "y": 878.671875
+        }
+      },
+      "status": "Level completed.",
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      },
+      "actions": 49,
+      "levels": 3,
+      "prefixes": 47
+    }
+  ],
+  "measurementCount": 7,
+  "layout": {
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    },
+    "boardColumnHeight": 442,
+    "canvasHeight": 384,
+    "canvasWidth": 384,
+    "statusHeight": 98,
+    "maxDocumentPositionDeltaPx": 0,
+    "maxDimensionDeltaPx": 0,
+    "selectors": [
+      ".board-column",
+      "#canvas-stage",
+      "#game-canvas",
+      "#agent-message",
+      "#agent-run"
+    ],
+    "inspectionClosedThroughout": true
+  },
+  "observedResult": {
+    "url": "http://127.0.0.1:4173/?game=LIFE&level=4",
+    "completedLevels": 3,
+    "actions": 49,
+    "prefixes": 47,
+    "entryLevel": 4,
+    "normalStatus": "Level completed.",
+    "evidence": "Unmodified final accessibility tree and screenshot. Every raw rectangle sample also retains the displayed counters."
+  },
+  "browserCampaign": {
+    "sessions": 1,
+    "manualGameActions": 0,
+    "resets": 0,
+    "levelJumps": 0,
+    "runToNextLevelClicks": 3,
+    "uiActions": [
+      "select LIFE from game selector",
+      "select SRA Agent tab",
+      "Run to next level",
+      "Run to next level",
+      "Run to next level"
+    ]
+  },
+  "fullscreen": {
+    "status": "not_retested"
+  },
+  "mobile": {
+    "status": "not_measured"
+  },
+  "screenshot": {
+    "path": "docs/migration/native-campaigns-v50/life-browser-three-levels.jpg",
+    "sha256": "d7cf8987071e13ca322e31089590d2930670ca1663cddb38383f3f27a8dbc9fb",
+    "bytes": 78012
+  },
+  "screenshotProperties": {
+    "format": "JPEG",
+    "width": 1348,
+    "height": 926
+  },
+  "accessibility": {
+    "path": "docs/migration/native-campaigns-v50/life-browser-three-levels-ax.txt",
+    "sha256": "20071c256625a9d21bbc3baf459d53a253e437e3922fad19842fb3c48445c3ca",
+    "bytes": 9979
+  },
+  "generator": {
+    "path": "scripts/record-v50-browser-verification.py",
+    "sha256": "dd2ba8273054612c0e5cf16d3c3335d86b52f73f9ba8bff7d7efdcff0a66bcd2",
+    "bytes": 5108
+  },
+  "qualification": "Local Sites preview, normal desktop viewport, seven sampled idle/active/completed states. Rectangles are document coordinates. This is not a per-frame, full-screen or mobile-size measurement. All raw DOM samples retain displayed counters; the final screenshot and accessibility capture confirm 49 actions, three completed levels, 47 plans and entry to level 4. Source UI files are byte-identical to published v49. No screenshot editing."
+}

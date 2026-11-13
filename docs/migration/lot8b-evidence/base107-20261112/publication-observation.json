@@ -1,0 +1,43 @@
+{
+  "schema": "logos-engine.lot8b.published107-observation.v1",
+  "observedAt": "2026-11-12T03:31:18.252Z",
+  "version": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_94f341f3a7188191b79c05be4f3820f1",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "version_number": 107,
+    "source": {
+      "commit_sha": "4ff7bf45286a8a19d34401988adca587253ae41e"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000a040820eab539d7e37345979",
+      "content_hash": "sha256:a33b3776a3f7504dfa76154f59e4be62c5323814c6806e9fd449ed475560021b",
+      "size_bytes": 30167040,
+      "file_count": 75
+    },
+    "deployment_id": "appgdep_6af5171c53b08191ad6f80c0e52b41b7"
+  },
+  "site": {
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "latestVersion": 107,
+    "role": "owner",
+    "accessMode": "custom",
+    "accessRevision": 3,
+    "allowedUserRoles": [
+      "owner"
+    ],
+    "externalVisitors": 0
+  },
+  "deploymentObserved": {
+    "id": "appgdep_6af5171c53b08191ad6f80c0e52b41b7",
+    "status": "succeeded",
+    "updatedAt": "2026-11-12T01:32:30.424008+00:00",
+    "source": "sites_get_deployment_status response observed in this turn"
+  },
+  "sourceOpening": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+    "commit_sha": "c87c132a0353a8c6138ad090495f98698ef7ca6f"
+  }
+}

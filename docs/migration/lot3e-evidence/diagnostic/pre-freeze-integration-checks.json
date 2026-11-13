@@ -1,0 +1,7 @@
+{
+  "qualification": "Development targeted tests before source freeze. Initial11checks and expanded14checks pass. Formal complete affected scope is a separate frozen receipt.",
+  "logs": [
+    "docs/migration/lot3e-evidence/diagnostic/reception-integration-initial.tap.gz",
+    "docs/migration/lot3e-evidence/diagnostic/reception-integration-expanded.tap.gz"
+  ]
+}

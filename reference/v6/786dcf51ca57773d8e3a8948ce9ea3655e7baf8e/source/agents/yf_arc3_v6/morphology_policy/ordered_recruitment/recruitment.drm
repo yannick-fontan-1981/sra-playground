@@ -1,0 +1,93 @@
+{
+  "module_id": "v6_ordered_recruitment",
+  "declarations": [
+    {
+      "id": "schema.ordered_recruitment",
+      "kind": "schema",
+      "premises": [
+        "current_typed_legend",
+        "front_marked_current_queues",
+        "actual_legend_interface_contrast"
+      ],
+      "applicability": [
+        "conditional_stage_survival_question"
+      ],
+      "invariants": [
+        "no_game_identity",
+        "no_private_queue_path",
+        "no_palette_table",
+        "no_ignored_future_rooms",
+        "current_binding_separate_from_hypothesis"
+      ],
+      "falsifiers": [
+        "queue_or_front_marker_incompatible",
+        "legend_relation_changed",
+        "append_or_consumption_differs",
+        "stage_context_changed"
+      ],
+      "reason_refs": [
+        "0.1.1-5,19"
+      ],
+      "configuration": {
+        "goal": "G_official_completion",
+        "point_action": "ACTION6",
+        "engage_prior": "ACTION5",
+        "queue_order_hypothesis": "front_spiral_inward",
+        "append_hypothesis": "tail",
+        "winner_hypothesis": "KEEP",
+        "tie_hypothesis": "REMOVE_BOTH",
+        "tie_alternatives": [
+          "KEEP_LEFT",
+          "KEEP_RIGHT",
+          "STOP"
+        ],
+        "quota_bound": 8,
+        "search_bound": 4096,
+        "priority": [
+          "continuation",
+          "composition_question"
+        ],
+        "tie_break": [
+          "cost",
+          "more_conditional_terminal_survivors",
+          "current_button_enumeration"
+        ],
+        "kind_meaning": {
+          "continuation": "continue_current_validated_suffix_toward_parent_survival",
+          "composition_question": "prepare_ordered_replenishment_for_all_visible_following_rooms_then_test"
+        },
+        "conditions": [
+          {
+            "field": "actual_interface_contrast",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "current_scene_revalidated",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "conditional_parent_survival",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "untried_context",
+            "operator": "equals",
+            "expected": true
+          }
+        ],
+        "hypotheses": [
+          "paired_legend_colors_may_be_camp_equivalent_types",
+          "calibrated_legend_direction_may_extend_to_other_rows",
+          "front_anchored_spiral_order_not_private_path",
+          "equal_types_may_remove_both_alternatives_retained",
+          "button_may_append_one_occurrence_and_exhaust_quota",
+          "engagement_may_reduce_heads_to_closure",
+          "all_visible_rooms_contribute_to_terminal_survival"
+        ]
+      }
+    }
+  ]
+}

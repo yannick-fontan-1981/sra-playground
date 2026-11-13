@@ -1,0 +1,2697 @@
+{
+  "module_id": "device_observed_c",
+  "declarations": [
+    {
+      "id": "policy.device_observed_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "device.observed.trait_edit",
+        "device.observed.demo_execute",
+        "device.observed.real_execute",
+        "device.observed.instruction_step",
+        "device.observed.checkpoint",
+        "device.observed.restore",
+        "device.observed.unclassified"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.device.observed.trait_edit",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "device.observed.trait_edit"
+            },
+            {
+              "field": "control_role",
+              "operator": "equals",
+              "expected": "TRAIT_EDIT"
+            },
+            {
+              "field": "actual_owned_interval",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.device.observed.demo_execute",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "device.observed.demo_execute"
+            },
+            {
+              "field": "control_role",
+              "operator": "equals",
+              "expected": "DEMO_EXECUTE"
+            },
+            {
+              "field": "actual_owned_interval",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.device.observed.real_execute",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "device.observed.real_execute"
+            },
+            {
+              "field": "control_role",
+              "operator": "equals",
+              "expected": "REAL_EXECUTE"
+            },
+            {
+              "field": "actual_owned_interval",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.device.observed.instruction_step",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "device.observed.instruction_step"
+            },
+            {
+              "field": "control_role",
+              "operator": "equals",
+              "expected": "INSTRUCTION_STEP"
+            },
+            {
+              "field": "actual_owned_interval",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.device.observed.checkpoint",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "device.observed.checkpoint"
+            },
+            {
+              "field": "control_role",
+              "operator": "equals",
+              "expected": "CHECKPOINT"
+            },
+            {
+              "field": "actual_owned_interval",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.device.observed.restore",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "device.observed.restore"
+            },
+            {
+              "field": "control_role",
+              "operator": "equals",
+              "expected": "RESTORE"
+            },
+            {
+              "field": "actual_owned_interval",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.device.observed.unclassified",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "device.observed.unclassified"
+            },
+            {
+              "field": "control_role_registered",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "device.observed.trait_edit": "rule.device_observed_c.trait_edit",
+        "device.observed.demo_execute": "rule.device_observed_c.demo_execute",
+        "device.observed.real_execute": "rule.device_observed_c.real_execute",
+        "device.observed.instruction_step": "rule.device_observed_c.instruction_step",
+        "device.observed.checkpoint": "rule.device_observed_c.checkpoint",
+        "device.observed.restore": "rule.device_observed_c.restore",
+        "device.observed.unclassified": "rule.device_observed_c.unclassified"
+      },
+      "premises": [
+        "actual_owned_sealed_interval",
+        "complete_acquired_device_states",
+        "current_causal_control_role"
+      ],
+      "invariants": [
+        "separate_real_demo_worlds",
+        "external_commands_not_captures_or_internal_clock",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_interval",
+        "control_payload_mismatch",
+        "transient_capture_mistaken_for_another_command"
+      ],
+      "reason_refs": [
+        "reason.current_device_control_response_is_interpreted_only_in_its_owned_scope"
+      ]
+    },
+    {
+      "id": "rule.device_observed_c.trait_edit",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "effect.device.{projection_ref}",
+          "kind": "value",
+          "label": "Observed device trait_edit control response",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "before_state",
+            "after_state"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_owner_ref": "event_owner_ref",
+            "transaction_index": "transaction_index",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "control_role": "control_role",
+            "world_is_demo": "world_is_demo",
+            "before_state": "before_state",
+            "after_state": "after_state",
+            "actor_changed": "actor_changed",
+            "program_changed": "program_changed",
+            "saved_actor_changed": "saved_actor_changed",
+            "saved_properties_changed": "saved_properties_changed",
+            "saved_program_changed": "saved_program_changed",
+            "observed_clock_delta": "observed_clock_delta",
+            "observed_resource_delta": "observed_resource_delta",
+            "external_command_count": "external_command_count",
+            "capture_count": "capture_count",
+            "prediction_compared": "prediction_compared",
+            "prediction_disagreements": "prediction_disagreements",
+            "first_divergence_field": "first_divergence_field",
+            "prediction_missing_refs": "prediction_missing_refs",
+            "prediction_assumption_refs": "prediction_assumption_refs",
+            "comparison_scope": "comparison_scope",
+            "internal_first_divergence_measured": "internal_first_divergence_measured",
+            "physical_goal_progress_inferred": "physical_goal_progress_inferred",
+            "world_role_model_status_ref": "world_role_model_status_ref",
+            "world_role_assumption_refs": "world_role_assumption_refs",
+            "frozen_why": "frozen_why",
+            "eligible_sibling_refs_preserved": "eligible_sibling_refs_preserved",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority",
+            "internal_phase_trace_measured": "internal_phase_trace_measured",
+            "actual_phase_events": "actual_phase_events",
+            "actual_internal_phase_count": "actual_internal_phase_count",
+            "phase_prediction_compared": "phase_prediction_compared",
+            "first_internal_divergence": "first_internal_divergence",
+            "phase_capture_count": "phase_capture_count",
+            "external_commands_created_by_phase_trace": "external_commands_created_by_phase_trace",
+            "primitive_prediction_coverage_complete": "primitive_prediction_coverage_complete",
+            "interval_packet_ref": "interval_packet_ref",
+            "incomplete_prediction_prefix": "incomplete_prediction_prefix",
+            "predicted_after_state": "predicted_after_state",
+            "measured_prediction_mismatch": "measured_prediction_mismatch"
+          },
+          "static_attributes": {
+            "interpretation_kind": "trait_edit",
+            "operator_law_confirmed": false,
+            "no_action_authority": true
+          }
+        },
+        {
+          "id_pattern": "need.device.clock.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device clock mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_clock",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "clock",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.resource.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device resource mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_resource",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "resource",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.code.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device code mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_code",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "code",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.collision.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device collision mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_collision_phase",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "collision",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.validation.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device validation mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_validation_phase",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "validation",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.hazard.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device hazard mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_hazard_phase",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "hazard",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.device.effect.{projection_ref}",
+          "predicate": "records_device_trait_edit_control_response",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "effect.device.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "effect.device.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_owner_ref": "event_owner_ref",
+            "transaction_index": "transaction_index",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "control_role": "control_role",
+            "world_is_demo": "world_is_demo",
+            "before_state": "before_state",
+            "after_state": "after_state",
+            "actor_changed": "actor_changed",
+            "program_changed": "program_changed",
+            "saved_actor_changed": "saved_actor_changed",
+            "saved_properties_changed": "saved_properties_changed",
+            "saved_program_changed": "saved_program_changed",
+            "observed_clock_delta": "observed_clock_delta",
+            "observed_resource_delta": "observed_resource_delta",
+            "external_command_count": "external_command_count",
+            "capture_count": "capture_count",
+            "prediction_compared": "prediction_compared",
+            "prediction_disagreements": "prediction_disagreements",
+            "first_divergence_field": "first_divergence_field",
+            "prediction_missing_refs": "prediction_missing_refs",
+            "prediction_assumption_refs": "prediction_assumption_refs",
+            "comparison_scope": "comparison_scope",
+            "internal_first_divergence_measured": "internal_first_divergence_measured",
+            "physical_goal_progress_inferred": "physical_goal_progress_inferred",
+            "world_role_model_status_ref": "world_role_model_status_ref",
+            "world_role_assumption_refs": "world_role_assumption_refs",
+            "frozen_why": "frozen_why",
+            "eligible_sibling_refs_preserved": "eligible_sibling_refs_preserved",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority",
+            "internal_phase_trace_measured": "internal_phase_trace_measured",
+            "actual_phase_events": "actual_phase_events",
+            "actual_internal_phase_count": "actual_internal_phase_count",
+            "phase_prediction_compared": "phase_prediction_compared",
+            "first_internal_divergence": "first_internal_divergence",
+            "phase_capture_count": "phase_capture_count",
+            "external_commands_created_by_phase_trace": "external_commands_created_by_phase_trace",
+            "primitive_prediction_coverage_complete": "primitive_prediction_coverage_complete",
+            "interval_packet_ref": "interval_packet_ref",
+            "incomplete_prediction_prefix": "incomplete_prediction_prefix",
+            "predicted_after_state": "predicted_after_state",
+            "measured_prediction_mismatch": "measured_prediction_mismatch"
+          }
+        }
+      ],
+      "premises": [
+        "actual_sealed_dispatch_and_response",
+        "current_frozen_parent_why"
+      ],
+      "invariants": [
+        "observed_endpoint_not_unmeasured_internal_phase",
+        "checkpoint_properties_kept_distinct",
+        "no_operator_law_or_official_win_inferred"
+      ],
+      "falsifiers": [
+        "control_role_not_supported",
+        "mixed_world_identity",
+        "different_model_or_prepath_prediction"
+      ],
+      "reason_refs": [
+        "reason.device_trait_edit_response_keeps_the_actual_changes_and_all_unknowns"
+      ]
+    },
+    {
+      "id": "rule.device_observed_c.demo_execute",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "effect.device.{projection_ref}",
+          "kind": "value",
+          "label": "Observed device demo_execute control response",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "before_state",
+            "after_state"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_owner_ref": "event_owner_ref",
+            "transaction_index": "transaction_index",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "control_role": "control_role",
+            "world_is_demo": "world_is_demo",
+            "before_state": "before_state",
+            "after_state": "after_state",
+            "actor_changed": "actor_changed",
+            "program_changed": "program_changed",
+            "saved_actor_changed": "saved_actor_changed",
+            "saved_properties_changed": "saved_properties_changed",
+            "saved_program_changed": "saved_program_changed",
+            "observed_clock_delta": "observed_clock_delta",
+            "observed_resource_delta": "observed_resource_delta",
+            "external_command_count": "external_command_count",
+            "capture_count": "capture_count",
+            "prediction_compared": "prediction_compared",
+            "prediction_disagreements": "prediction_disagreements",
+            "first_divergence_field": "first_divergence_field",
+            "prediction_missing_refs": "prediction_missing_refs",
+            "prediction_assumption_refs": "prediction_assumption_refs",
+            "comparison_scope": "comparison_scope",
+            "internal_first_divergence_measured": "internal_first_divergence_measured",
+            "physical_goal_progress_inferred": "physical_goal_progress_inferred",
+            "world_role_model_status_ref": "world_role_model_status_ref",
+            "world_role_assumption_refs": "world_role_assumption_refs",
+            "frozen_why": "frozen_why",
+            "eligible_sibling_refs_preserved": "eligible_sibling_refs_preserved",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority",
+            "internal_phase_trace_measured": "internal_phase_trace_measured",
+            "actual_phase_events": "actual_phase_events",
+            "actual_internal_phase_count": "actual_internal_phase_count",
+            "phase_prediction_compared": "phase_prediction_compared",
+            "first_internal_divergence": "first_internal_divergence",
+            "phase_capture_count": "phase_capture_count",
+            "external_commands_created_by_phase_trace": "external_commands_created_by_phase_trace",
+            "primitive_prediction_coverage_complete": "primitive_prediction_coverage_complete",
+            "interval_packet_ref": "interval_packet_ref",
+            "incomplete_prediction_prefix": "incomplete_prediction_prefix",
+            "predicted_after_state": "predicted_after_state",
+            "measured_prediction_mismatch": "measured_prediction_mismatch"
+          },
+          "static_attributes": {
+            "interpretation_kind": "demo_execute",
+            "operator_law_confirmed": false,
+            "no_action_authority": true
+          }
+        },
+        {
+          "id_pattern": "need.device.clock.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device clock mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_clock",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "clock",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.resource.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device resource mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_resource",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "resource",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.code.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device code mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_code",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "code",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.collision.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device collision mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_collision_phase",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "collision",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.validation.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device validation mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_validation_phase",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "validation",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.hazard.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device hazard mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_hazard_phase",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "hazard",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.device.effect.{projection_ref}",
+          "predicate": "records_device_demo_execute_control_response",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "effect.device.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "effect.device.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_owner_ref": "event_owner_ref",
+            "transaction_index": "transaction_index",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "control_role": "control_role",
+            "world_is_demo": "world_is_demo",
+            "before_state": "before_state",
+            "after_state": "after_state",
+            "actor_changed": "actor_changed",
+            "program_changed": "program_changed",
+            "saved_actor_changed": "saved_actor_changed",
+            "saved_properties_changed": "saved_properties_changed",
+            "saved_program_changed": "saved_program_changed",
+            "observed_clock_delta": "observed_clock_delta",
+            "observed_resource_delta": "observed_resource_delta",
+            "external_command_count": "external_command_count",
+            "capture_count": "capture_count",
+            "prediction_compared": "prediction_compared",
+            "prediction_disagreements": "prediction_disagreements",
+            "first_divergence_field": "first_divergence_field",
+            "prediction_missing_refs": "prediction_missing_refs",
+            "prediction_assumption_refs": "prediction_assumption_refs",
+            "comparison_scope": "comparison_scope",
+            "internal_first_divergence_measured": "internal_first_divergence_measured",
+            "physical_goal_progress_inferred": "physical_goal_progress_inferred",
+            "world_role_model_status_ref": "world_role_model_status_ref",
+            "world_role_assumption_refs": "world_role_assumption_refs",
+            "frozen_why": "frozen_why",
+            "eligible_sibling_refs_preserved": "eligible_sibling_refs_preserved",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority",
+            "internal_phase_trace_measured": "internal_phase_trace_measured",
+            "actual_phase_events": "actual_phase_events",
+            "actual_internal_phase_count": "actual_internal_phase_count",
+            "phase_prediction_compared": "phase_prediction_compared",
+            "first_internal_divergence": "first_internal_divergence",
+            "phase_capture_count": "phase_capture_count",
+            "external_commands_created_by_phase_trace": "external_commands_created_by_phase_trace",
+            "primitive_prediction_coverage_complete": "primitive_prediction_coverage_complete",
+            "interval_packet_ref": "interval_packet_ref",
+            "incomplete_prediction_prefix": "incomplete_prediction_prefix",
+            "predicted_after_state": "predicted_after_state",
+            "measured_prediction_mismatch": "measured_prediction_mismatch"
+          }
+        }
+      ],
+      "premises": [
+        "actual_sealed_dispatch_and_response",
+        "current_frozen_parent_why"
+      ],
+      "invariants": [
+        "observed_endpoint_not_unmeasured_internal_phase",
+        "checkpoint_properties_kept_distinct",
+        "no_operator_law_or_official_win_inferred"
+      ],
+      "falsifiers": [
+        "control_role_not_supported",
+        "mixed_world_identity",
+        "different_model_or_prepath_prediction"
+      ],
+      "reason_refs": [
+        "reason.device_demo_execute_response_keeps_the_actual_changes_and_all_unknowns"
+      ]
+    },
+    {
+      "id": "rule.device_observed_c.real_execute",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "effect.device.{projection_ref}",
+          "kind": "value",
+          "label": "Observed device real_execute control response",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "before_state",
+            "after_state"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_owner_ref": "event_owner_ref",
+            "transaction_index": "transaction_index",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "control_role": "control_role",
+            "world_is_demo": "world_is_demo",
+            "before_state": "before_state",
+            "after_state": "after_state",
+            "actor_changed": "actor_changed",
+            "program_changed": "program_changed",
+            "saved_actor_changed": "saved_actor_changed",
+            "saved_properties_changed": "saved_properties_changed",
+            "saved_program_changed": "saved_program_changed",
+            "observed_clock_delta": "observed_clock_delta",
+            "observed_resource_delta": "observed_resource_delta",
+            "external_command_count": "external_command_count",
+            "capture_count": "capture_count",
+            "prediction_compared": "prediction_compared",
+            "prediction_disagreements": "prediction_disagreements",
+            "first_divergence_field": "first_divergence_field",
+            "prediction_missing_refs": "prediction_missing_refs",
+            "prediction_assumption_refs": "prediction_assumption_refs",
+            "comparison_scope": "comparison_scope",
+            "internal_first_divergence_measured": "internal_first_divergence_measured",
+            "physical_goal_progress_inferred": "physical_goal_progress_inferred",
+            "world_role_model_status_ref": "world_role_model_status_ref",
+            "world_role_assumption_refs": "world_role_assumption_refs",
+            "frozen_why": "frozen_why",
+            "eligible_sibling_refs_preserved": "eligible_sibling_refs_preserved",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority",
+            "internal_phase_trace_measured": "internal_phase_trace_measured",
+            "actual_phase_events": "actual_phase_events",
+            "actual_internal_phase_count": "actual_internal_phase_count",
+            "phase_prediction_compared": "phase_prediction_compared",
+            "first_internal_divergence": "first_internal_divergence",
+            "phase_capture_count": "phase_capture_count",
+            "external_commands_created_by_phase_trace": "external_commands_created_by_phase_trace",
+            "primitive_prediction_coverage_complete": "primitive_prediction_coverage_complete",
+            "interval_packet_ref": "interval_packet_ref",
+            "incomplete_prediction_prefix": "incomplete_prediction_prefix",
+            "predicted_after_state": "predicted_after_state",
+            "measured_prediction_mismatch": "measured_prediction_mismatch"
+          },
+          "static_attributes": {
+            "interpretation_kind": "real_execute",
+            "operator_law_confirmed": false,
+            "no_action_authority": true
+          }
+        },
+        {
+          "id_pattern": "need.device.clock.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device clock mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_clock",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "clock",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.resource.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device resource mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_resource",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "resource",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.code.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device code mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_code",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "code",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.collision.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device collision mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_collision_phase",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "collision",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.validation.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device validation mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_validation_phase",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "validation",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.hazard.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device hazard mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_hazard_phase",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "hazard",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.device.effect.{projection_ref}",
+          "predicate": "records_device_real_execute_control_response",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "effect.device.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "effect.device.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_owner_ref": "event_owner_ref",
+            "transaction_index": "transaction_index",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "control_role": "control_role",
+            "world_is_demo": "world_is_demo",
+            "before_state": "before_state",
+            "after_state": "after_state",
+            "actor_changed": "actor_changed",
+            "program_changed": "program_changed",
+            "saved_actor_changed": "saved_actor_changed",
+            "saved_properties_changed": "saved_properties_changed",
+            "saved_program_changed": "saved_program_changed",
+            "observed_clock_delta": "observed_clock_delta",
+            "observed_resource_delta": "observed_resource_delta",
+            "external_command_count": "external_command_count",
+            "capture_count": "capture_count",
+            "prediction_compared": "prediction_compared",
+            "prediction_disagreements": "prediction_disagreements",
+            "first_divergence_field": "first_divergence_field",
+            "prediction_missing_refs": "prediction_missing_refs",
+            "prediction_assumption_refs": "prediction_assumption_refs",
+            "comparison_scope": "comparison_scope",
+            "internal_first_divergence_measured": "internal_first_divergence_measured",
+            "physical_goal_progress_inferred": "physical_goal_progress_inferred",
+            "world_role_model_status_ref": "world_role_model_status_ref",
+            "world_role_assumption_refs": "world_role_assumption_refs",
+            "frozen_why": "frozen_why",
+            "eligible_sibling_refs_preserved": "eligible_sibling_refs_preserved",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority",
+            "internal_phase_trace_measured": "internal_phase_trace_measured",
+            "actual_phase_events": "actual_phase_events",
+            "actual_internal_phase_count": "actual_internal_phase_count",
+            "phase_prediction_compared": "phase_prediction_compared",
+            "first_internal_divergence": "first_internal_divergence",
+            "phase_capture_count": "phase_capture_count",
+            "external_commands_created_by_phase_trace": "external_commands_created_by_phase_trace",
+            "primitive_prediction_coverage_complete": "primitive_prediction_coverage_complete",
+            "interval_packet_ref": "interval_packet_ref",
+            "incomplete_prediction_prefix": "incomplete_prediction_prefix",
+            "predicted_after_state": "predicted_after_state",
+            "measured_prediction_mismatch": "measured_prediction_mismatch"
+          }
+        }
+      ],
+      "premises": [
+        "actual_sealed_dispatch_and_response",
+        "current_frozen_parent_why"
+      ],
+      "invariants": [
+        "observed_endpoint_not_unmeasured_internal_phase",
+        "checkpoint_properties_kept_distinct",
+        "no_operator_law_or_official_win_inferred"
+      ],
+      "falsifiers": [
+        "control_role_not_supported",
+        "mixed_world_identity",
+        "different_model_or_prepath_prediction"
+      ],
+      "reason_refs": [
+        "reason.device_real_execute_response_keeps_the_actual_changes_and_all_unknowns"
+      ]
+    },
+    {
+      "id": "rule.device_observed_c.instruction_step",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "effect.device.{projection_ref}",
+          "kind": "value",
+          "label": "Observed device instruction_step control response",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "before_state",
+            "after_state"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_owner_ref": "event_owner_ref",
+            "transaction_index": "transaction_index",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "control_role": "control_role",
+            "world_is_demo": "world_is_demo",
+            "before_state": "before_state",
+            "after_state": "after_state",
+            "actor_changed": "actor_changed",
+            "program_changed": "program_changed",
+            "saved_actor_changed": "saved_actor_changed",
+            "saved_properties_changed": "saved_properties_changed",
+            "saved_program_changed": "saved_program_changed",
+            "observed_clock_delta": "observed_clock_delta",
+            "observed_resource_delta": "observed_resource_delta",
+            "external_command_count": "external_command_count",
+            "capture_count": "capture_count",
+            "prediction_compared": "prediction_compared",
+            "prediction_disagreements": "prediction_disagreements",
+            "first_divergence_field": "first_divergence_field",
+            "prediction_missing_refs": "prediction_missing_refs",
+            "prediction_assumption_refs": "prediction_assumption_refs",
+            "comparison_scope": "comparison_scope",
+            "internal_first_divergence_measured": "internal_first_divergence_measured",
+            "physical_goal_progress_inferred": "physical_goal_progress_inferred",
+            "world_role_model_status_ref": "world_role_model_status_ref",
+            "world_role_assumption_refs": "world_role_assumption_refs",
+            "frozen_why": "frozen_why",
+            "eligible_sibling_refs_preserved": "eligible_sibling_refs_preserved",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority",
+            "internal_phase_trace_measured": "internal_phase_trace_measured",
+            "actual_phase_events": "actual_phase_events",
+            "actual_internal_phase_count": "actual_internal_phase_count",
+            "phase_prediction_compared": "phase_prediction_compared",
+            "first_internal_divergence": "first_internal_divergence",
+            "phase_capture_count": "phase_capture_count",
+            "external_commands_created_by_phase_trace": "external_commands_created_by_phase_trace",
+            "primitive_prediction_coverage_complete": "primitive_prediction_coverage_complete",
+            "interval_packet_ref": "interval_packet_ref",
+            "incomplete_prediction_prefix": "incomplete_prediction_prefix",
+            "predicted_after_state": "predicted_after_state",
+            "measured_prediction_mismatch": "measured_prediction_mismatch"
+          },
+          "static_attributes": {
+            "interpretation_kind": "instruction_step",
+            "operator_law_confirmed": false,
+            "no_action_authority": true
+          }
+        },
+        {
+          "id_pattern": "need.device.clock.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device clock mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_clock",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "clock",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.resource.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device resource mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_resource",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "resource",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.code.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device code mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_code",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "code",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.collision.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device collision mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_collision_phase",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "collision",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.validation.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device validation mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_validation_phase",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "validation",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.hazard.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device hazard mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_hazard_phase",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "hazard",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.device.effect.{projection_ref}",
+          "predicate": "records_device_instruction_step_control_response",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "effect.device.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "effect.device.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_owner_ref": "event_owner_ref",
+            "transaction_index": "transaction_index",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "control_role": "control_role",
+            "world_is_demo": "world_is_demo",
+            "before_state": "before_state",
+            "after_state": "after_state",
+            "actor_changed": "actor_changed",
+            "program_changed": "program_changed",
+            "saved_actor_changed": "saved_actor_changed",
+            "saved_properties_changed": "saved_properties_changed",
+            "saved_program_changed": "saved_program_changed",
+            "observed_clock_delta": "observed_clock_delta",
+            "observed_resource_delta": "observed_resource_delta",
+            "external_command_count": "external_command_count",
+            "capture_count": "capture_count",
+            "prediction_compared": "prediction_compared",
+            "prediction_disagreements": "prediction_disagreements",
+            "first_divergence_field": "first_divergence_field",
+            "prediction_missing_refs": "prediction_missing_refs",
+            "prediction_assumption_refs": "prediction_assumption_refs",
+            "comparison_scope": "comparison_scope",
+            "internal_first_divergence_measured": "internal_first_divergence_measured",
+            "physical_goal_progress_inferred": "physical_goal_progress_inferred",
+            "world_role_model_status_ref": "world_role_model_status_ref",
+            "world_role_assumption_refs": "world_role_assumption_refs",
+            "frozen_why": "frozen_why",
+            "eligible_sibling_refs_preserved": "eligible_sibling_refs_preserved",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority",
+            "internal_phase_trace_measured": "internal_phase_trace_measured",
+            "actual_phase_events": "actual_phase_events",
+            "actual_internal_phase_count": "actual_internal_phase_count",
+            "phase_prediction_compared": "phase_prediction_compared",
+            "first_internal_divergence": "first_internal_divergence",
+            "phase_capture_count": "phase_capture_count",
+            "external_commands_created_by_phase_trace": "external_commands_created_by_phase_trace",
+            "primitive_prediction_coverage_complete": "primitive_prediction_coverage_complete",
+            "interval_packet_ref": "interval_packet_ref",
+            "incomplete_prediction_prefix": "incomplete_prediction_prefix",
+            "predicted_after_state": "predicted_after_state",
+            "measured_prediction_mismatch": "measured_prediction_mismatch"
+          }
+        }
+      ],
+      "premises": [
+        "actual_sealed_dispatch_and_response",
+        "current_frozen_parent_why"
+      ],
+      "invariants": [
+        "observed_endpoint_not_unmeasured_internal_phase",
+        "checkpoint_properties_kept_distinct",
+        "no_operator_law_or_official_win_inferred"
+      ],
+      "falsifiers": [
+        "control_role_not_supported",
+        "mixed_world_identity",
+        "different_model_or_prepath_prediction"
+      ],
+      "reason_refs": [
+        "reason.device_instruction_step_response_keeps_the_actual_changes_and_all_unknowns"
+      ]
+    },
+    {
+      "id": "rule.device_observed_c.checkpoint",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "effect.device.{projection_ref}",
+          "kind": "value",
+          "label": "Observed device checkpoint control response",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "before_state",
+            "after_state"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_owner_ref": "event_owner_ref",
+            "transaction_index": "transaction_index",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "control_role": "control_role",
+            "world_is_demo": "world_is_demo",
+            "before_state": "before_state",
+            "after_state": "after_state",
+            "actor_changed": "actor_changed",
+            "program_changed": "program_changed",
+            "saved_actor_changed": "saved_actor_changed",
+            "saved_properties_changed": "saved_properties_changed",
+            "saved_program_changed": "saved_program_changed",
+            "observed_clock_delta": "observed_clock_delta",
+            "observed_resource_delta": "observed_resource_delta",
+            "external_command_count": "external_command_count",
+            "capture_count": "capture_count",
+            "prediction_compared": "prediction_compared",
+            "prediction_disagreements": "prediction_disagreements",
+            "first_divergence_field": "first_divergence_field",
+            "prediction_missing_refs": "prediction_missing_refs",
+            "prediction_assumption_refs": "prediction_assumption_refs",
+            "comparison_scope": "comparison_scope",
+            "internal_first_divergence_measured": "internal_first_divergence_measured",
+            "physical_goal_progress_inferred": "physical_goal_progress_inferred",
+            "world_role_model_status_ref": "world_role_model_status_ref",
+            "world_role_assumption_refs": "world_role_assumption_refs",
+            "frozen_why": "frozen_why",
+            "eligible_sibling_refs_preserved": "eligible_sibling_refs_preserved",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority",
+            "internal_phase_trace_measured": "internal_phase_trace_measured",
+            "actual_phase_events": "actual_phase_events",
+            "actual_internal_phase_count": "actual_internal_phase_count",
+            "phase_prediction_compared": "phase_prediction_compared",
+            "first_internal_divergence": "first_internal_divergence",
+            "phase_capture_count": "phase_capture_count",
+            "external_commands_created_by_phase_trace": "external_commands_created_by_phase_trace",
+            "primitive_prediction_coverage_complete": "primitive_prediction_coverage_complete",
+            "interval_packet_ref": "interval_packet_ref",
+            "incomplete_prediction_prefix": "incomplete_prediction_prefix",
+            "predicted_after_state": "predicted_after_state",
+            "measured_prediction_mismatch": "measured_prediction_mismatch"
+          },
+          "static_attributes": {
+            "interpretation_kind": "checkpoint",
+            "operator_law_confirmed": false,
+            "no_action_authority": true
+          }
+        },
+        {
+          "id_pattern": "need.device.clock.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device clock mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_clock",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "clock",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.resource.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device resource mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_resource",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "resource",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.code.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device code mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_code",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "code",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.collision.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device collision mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_collision_phase",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "collision",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.validation.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device validation mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_validation_phase",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "validation",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.hazard.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device hazard mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_hazard_phase",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "hazard",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.device.effect.{projection_ref}",
+          "predicate": "records_device_checkpoint_control_response",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "effect.device.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "effect.device.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_owner_ref": "event_owner_ref",
+            "transaction_index": "transaction_index",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "control_role": "control_role",
+            "world_is_demo": "world_is_demo",
+            "before_state": "before_state",
+            "after_state": "after_state",
+            "actor_changed": "actor_changed",
+            "program_changed": "program_changed",
+            "saved_actor_changed": "saved_actor_changed",
+            "saved_properties_changed": "saved_properties_changed",
+            "saved_program_changed": "saved_program_changed",
+            "observed_clock_delta": "observed_clock_delta",
+            "observed_resource_delta": "observed_resource_delta",
+            "external_command_count": "external_command_count",
+            "capture_count": "capture_count",
+            "prediction_compared": "prediction_compared",
+            "prediction_disagreements": "prediction_disagreements",
+            "first_divergence_field": "first_divergence_field",
+            "prediction_missing_refs": "prediction_missing_refs",
+            "prediction_assumption_refs": "prediction_assumption_refs",
+            "comparison_scope": "comparison_scope",
+            "internal_first_divergence_measured": "internal_first_divergence_measured",
+            "physical_goal_progress_inferred": "physical_goal_progress_inferred",
+            "world_role_model_status_ref": "world_role_model_status_ref",
+            "world_role_assumption_refs": "world_role_assumption_refs",
+            "frozen_why": "frozen_why",
+            "eligible_sibling_refs_preserved": "eligible_sibling_refs_preserved",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority",
+            "internal_phase_trace_measured": "internal_phase_trace_measured",
+            "actual_phase_events": "actual_phase_events",
+            "actual_internal_phase_count": "actual_internal_phase_count",
+            "phase_prediction_compared": "phase_prediction_compared",
+            "first_internal_divergence": "first_internal_divergence",
+            "phase_capture_count": "phase_capture_count",
+            "external_commands_created_by_phase_trace": "external_commands_created_by_phase_trace",
+            "primitive_prediction_coverage_complete": "primitive_prediction_coverage_complete",
+            "interval_packet_ref": "interval_packet_ref",
+            "incomplete_prediction_prefix": "incomplete_prediction_prefix",
+            "predicted_after_state": "predicted_after_state",
+            "measured_prediction_mismatch": "measured_prediction_mismatch"
+          }
+        }
+      ],
+      "premises": [
+        "actual_sealed_dispatch_and_response",
+        "current_frozen_parent_why"
+      ],
+      "invariants": [
+        "observed_endpoint_not_unmeasured_internal_phase",
+        "checkpoint_properties_kept_distinct",
+        "no_operator_law_or_official_win_inferred"
+      ],
+      "falsifiers": [
+        "control_role_not_supported",
+        "mixed_world_identity",
+        "different_model_or_prepath_prediction"
+      ],
+      "reason_refs": [
+        "reason.device_checkpoint_response_keeps_the_actual_changes_and_all_unknowns"
+      ]
+    },
+    {
+      "id": "rule.device_observed_c.restore",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "effect.device.{projection_ref}",
+          "kind": "value",
+          "label": "Observed device restore control response",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "before_state",
+            "after_state"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_owner_ref": "event_owner_ref",
+            "transaction_index": "transaction_index",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "control_role": "control_role",
+            "world_is_demo": "world_is_demo",
+            "before_state": "before_state",
+            "after_state": "after_state",
+            "actor_changed": "actor_changed",
+            "program_changed": "program_changed",
+            "saved_actor_changed": "saved_actor_changed",
+            "saved_properties_changed": "saved_properties_changed",
+            "saved_program_changed": "saved_program_changed",
+            "observed_clock_delta": "observed_clock_delta",
+            "observed_resource_delta": "observed_resource_delta",
+            "external_command_count": "external_command_count",
+            "capture_count": "capture_count",
+            "prediction_compared": "prediction_compared",
+            "prediction_disagreements": "prediction_disagreements",
+            "first_divergence_field": "first_divergence_field",
+            "prediction_missing_refs": "prediction_missing_refs",
+            "prediction_assumption_refs": "prediction_assumption_refs",
+            "comparison_scope": "comparison_scope",
+            "internal_first_divergence_measured": "internal_first_divergence_measured",
+            "physical_goal_progress_inferred": "physical_goal_progress_inferred",
+            "world_role_model_status_ref": "world_role_model_status_ref",
+            "world_role_assumption_refs": "world_role_assumption_refs",
+            "frozen_why": "frozen_why",
+            "eligible_sibling_refs_preserved": "eligible_sibling_refs_preserved",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority",
+            "internal_phase_trace_measured": "internal_phase_trace_measured",
+            "actual_phase_events": "actual_phase_events",
+            "actual_internal_phase_count": "actual_internal_phase_count",
+            "phase_prediction_compared": "phase_prediction_compared",
+            "first_internal_divergence": "first_internal_divergence",
+            "phase_capture_count": "phase_capture_count",
+            "external_commands_created_by_phase_trace": "external_commands_created_by_phase_trace",
+            "primitive_prediction_coverage_complete": "primitive_prediction_coverage_complete",
+            "interval_packet_ref": "interval_packet_ref",
+            "incomplete_prediction_prefix": "incomplete_prediction_prefix",
+            "predicted_after_state": "predicted_after_state",
+            "measured_prediction_mismatch": "measured_prediction_mismatch"
+          },
+          "static_attributes": {
+            "interpretation_kind": "restore",
+            "operator_law_confirmed": false,
+            "no_action_authority": true
+          }
+        },
+        {
+          "id_pattern": "need.device.clock.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device clock mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_clock",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "clock",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.resource.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device resource mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_resource",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "resource",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.code.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device code mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_code",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "code",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.collision.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device collision mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_collision_phase",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "collision",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.validation.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device validation mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_validation_phase",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "validation",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.hazard.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device hazard mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_hazard_phase",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "hazard",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.device.effect.{projection_ref}",
+          "predicate": "records_device_restore_control_response",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "effect.device.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "effect.device.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_owner_ref": "event_owner_ref",
+            "transaction_index": "transaction_index",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "control_role": "control_role",
+            "world_is_demo": "world_is_demo",
+            "before_state": "before_state",
+            "after_state": "after_state",
+            "actor_changed": "actor_changed",
+            "program_changed": "program_changed",
+            "saved_actor_changed": "saved_actor_changed",
+            "saved_properties_changed": "saved_properties_changed",
+            "saved_program_changed": "saved_program_changed",
+            "observed_clock_delta": "observed_clock_delta",
+            "observed_resource_delta": "observed_resource_delta",
+            "external_command_count": "external_command_count",
+            "capture_count": "capture_count",
+            "prediction_compared": "prediction_compared",
+            "prediction_disagreements": "prediction_disagreements",
+            "first_divergence_field": "first_divergence_field",
+            "prediction_missing_refs": "prediction_missing_refs",
+            "prediction_assumption_refs": "prediction_assumption_refs",
+            "comparison_scope": "comparison_scope",
+            "internal_first_divergence_measured": "internal_first_divergence_measured",
+            "physical_goal_progress_inferred": "physical_goal_progress_inferred",
+            "world_role_model_status_ref": "world_role_model_status_ref",
+            "world_role_assumption_refs": "world_role_assumption_refs",
+            "frozen_why": "frozen_why",
+            "eligible_sibling_refs_preserved": "eligible_sibling_refs_preserved",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority",
+            "internal_phase_trace_measured": "internal_phase_trace_measured",
+            "actual_phase_events": "actual_phase_events",
+            "actual_internal_phase_count": "actual_internal_phase_count",
+            "phase_prediction_compared": "phase_prediction_compared",
+            "first_internal_divergence": "first_internal_divergence",
+            "phase_capture_count": "phase_capture_count",
+            "external_commands_created_by_phase_trace": "external_commands_created_by_phase_trace",
+            "primitive_prediction_coverage_complete": "primitive_prediction_coverage_complete",
+            "interval_packet_ref": "interval_packet_ref",
+            "incomplete_prediction_prefix": "incomplete_prediction_prefix",
+            "predicted_after_state": "predicted_after_state",
+            "measured_prediction_mismatch": "measured_prediction_mismatch"
+          }
+        }
+      ],
+      "premises": [
+        "actual_sealed_dispatch_and_response",
+        "current_frozen_parent_why"
+      ],
+      "invariants": [
+        "observed_endpoint_not_unmeasured_internal_phase",
+        "checkpoint_properties_kept_distinct",
+        "no_operator_law_or_official_win_inferred"
+      ],
+      "falsifiers": [
+        "control_role_not_supported",
+        "mixed_world_identity",
+        "different_model_or_prepath_prediction"
+      ],
+      "reason_refs": [
+        "reason.device_restore_response_keeps_the_actual_changes_and_all_unknowns"
+      ]
+    },
+    {
+      "id": "rule.device_observed_c.unclassified",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "effect.device.{projection_ref}",
+          "kind": "value",
+          "label": "Unclassified actual device response requiring role evidence",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "before_state",
+            "after_state"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_owner_ref": "event_owner_ref",
+            "transaction_index": "transaction_index",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "control_role": "control_role",
+            "world_is_demo": "world_is_demo",
+            "before_state": "before_state",
+            "after_state": "after_state",
+            "actor_changed": "actor_changed",
+            "program_changed": "program_changed",
+            "saved_actor_changed": "saved_actor_changed",
+            "saved_properties_changed": "saved_properties_changed",
+            "saved_program_changed": "saved_program_changed",
+            "observed_clock_delta": "observed_clock_delta",
+            "observed_resource_delta": "observed_resource_delta",
+            "external_command_count": "external_command_count",
+            "capture_count": "capture_count",
+            "prediction_compared": "prediction_compared",
+            "prediction_disagreements": "prediction_disagreements",
+            "first_divergence_field": "first_divergence_field",
+            "prediction_missing_refs": "prediction_missing_refs",
+            "prediction_assumption_refs": "prediction_assumption_refs",
+            "comparison_scope": "comparison_scope",
+            "internal_first_divergence_measured": "internal_first_divergence_measured",
+            "physical_goal_progress_inferred": "physical_goal_progress_inferred",
+            "world_role_model_status_ref": "world_role_model_status_ref",
+            "world_role_assumption_refs": "world_role_assumption_refs",
+            "frozen_why": "frozen_why",
+            "eligible_sibling_refs_preserved": "eligible_sibling_refs_preserved",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority",
+            "internal_phase_trace_measured": "internal_phase_trace_measured",
+            "actual_phase_events": "actual_phase_events",
+            "actual_internal_phase_count": "actual_internal_phase_count",
+            "phase_prediction_compared": "phase_prediction_compared",
+            "first_internal_divergence": "first_internal_divergence",
+            "phase_capture_count": "phase_capture_count",
+            "external_commands_created_by_phase_trace": "external_commands_created_by_phase_trace",
+            "primitive_prediction_coverage_complete": "primitive_prediction_coverage_complete",
+            "interval_packet_ref": "interval_packet_ref",
+            "incomplete_prediction_prefix": "incomplete_prediction_prefix",
+            "predicted_after_state": "predicted_after_state",
+            "measured_prediction_mismatch": "measured_prediction_mismatch"
+          },
+          "static_attributes": {
+            "interpretation_kind": "unclassified",
+            "operator_law_confirmed": false,
+            "no_action_authority": true
+          }
+        },
+        {
+          "id_pattern": "need.device.clock.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device clock mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_clock",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "clock",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.resource.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device resource mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_resource",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "resource",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.code.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device code mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_code",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "code",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.collision.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device collision mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_collision_phase",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "collision",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.validation.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device validation mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_validation_phase",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "validation",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "need.device.hazard.{projection_ref}",
+          "kind": "goal",
+          "label": "Revalidate observed device hazard mismatch",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "all_conditions": [
+            {
+              "field": "mismatch_hazard_phase",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "first_internal_divergence": "first_internal_divergence",
+            "predicted_after_state": "predicted_after_state",
+            "actual_after_state": "after_state",
+            "prediction_assumption_refs": "prediction_assumption_refs"
+          },
+          "static_attributes": {
+            "need_kind": "revalidate_current_prediction_premises",
+            "mismatch_axis": "hazard",
+            "status": "required",
+            "principal_goal_changed": false,
+            "causal_law_proved": false,
+            "execution_authority": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.device.effect.{projection_ref}",
+          "predicate": "requests_device_control_role_evidence",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "effect.device.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "effect.device.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_owner_ref": "event_owner_ref",
+            "transaction_index": "transaction_index",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "control_role": "control_role",
+            "world_is_demo": "world_is_demo",
+            "before_state": "before_state",
+            "after_state": "after_state",
+            "actor_changed": "actor_changed",
+            "program_changed": "program_changed",
+            "saved_actor_changed": "saved_actor_changed",
+            "saved_properties_changed": "saved_properties_changed",
+            "saved_program_changed": "saved_program_changed",
+            "observed_clock_delta": "observed_clock_delta",
+            "observed_resource_delta": "observed_resource_delta",
+            "external_command_count": "external_command_count",
+            "capture_count": "capture_count",
+            "prediction_compared": "prediction_compared",
+            "prediction_disagreements": "prediction_disagreements",
+            "first_divergence_field": "first_divergence_field",
+            "prediction_missing_refs": "prediction_missing_refs",
+            "prediction_assumption_refs": "prediction_assumption_refs",
+            "comparison_scope": "comparison_scope",
+            "internal_first_divergence_measured": "internal_first_divergence_measured",
+            "physical_goal_progress_inferred": "physical_goal_progress_inferred",
+            "world_role_model_status_ref": "world_role_model_status_ref",
+            "world_role_assumption_refs": "world_role_assumption_refs",
+            "frozen_why": "frozen_why",
+            "eligible_sibling_refs_preserved": "eligible_sibling_refs_preserved",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority",
+            "internal_phase_trace_measured": "internal_phase_trace_measured",
+            "actual_phase_events": "actual_phase_events",
+            "actual_internal_phase_count": "actual_internal_phase_count",
+            "phase_prediction_compared": "phase_prediction_compared",
+            "first_internal_divergence": "first_internal_divergence",
+            "phase_capture_count": "phase_capture_count",
+            "external_commands_created_by_phase_trace": "external_commands_created_by_phase_trace",
+            "primitive_prediction_coverage_complete": "primitive_prediction_coverage_complete",
+            "interval_packet_ref": "interval_packet_ref",
+            "incomplete_prediction_prefix": "incomplete_prediction_prefix",
+            "predicted_after_state": "predicted_after_state",
+            "measured_prediction_mismatch": "measured_prediction_mismatch"
+          }
+        }
+      ],
+      "premises": [
+        "actual_sealed_dispatch_and_response",
+        "current_frozen_parent_why"
+      ],
+      "invariants": [
+        "observed_endpoint_not_unmeasured_internal_phase",
+        "checkpoint_properties_kept_distinct",
+        "no_operator_law_or_official_win_inferred"
+      ],
+      "falsifiers": [
+        "control_role_not_supported",
+        "mixed_world_identity",
+        "different_model_or_prepath_prediction"
+      ],
+      "reason_refs": [
+        "reason.device_unclassified_response_keeps_the_actual_changes_and_all_unknowns"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,375 @@
+{
+  "schema": "logos-engine.lot9a.work-delivery-preparation-independent-review.v1",
+  "status": "favorable_static_work_preparation_with_explicit_descriptive_metadata_reservation",
+  "reviewer": "/root/chart_geometry",
+  "recordedAt": "2026-11-12T14:52:25.606831+00:00",
+  "scope": "Work-forms only: fresh exact published Site 108/native 0.67 baseline versus final native 0.68 Chart candidate. Static tool/protocol review and data fingerprints; no claim about capture outcomes.",
+  "method": {
+    "sourceReading": true,
+    "dataOnlyHashAndJsonChecks": true,
+    "nativeRuntimeExecutionsByReviewer": 0,
+    "nativeTestExecutionsByReviewer": 0,
+    "oracleExecutionsByReviewer": 0,
+    "functionalReadersExecutedByReviewer": 0,
+    "captureOutcomesReviewedHere": false,
+    "role": "Independent reader of delivery tools; geometry port authored earlier, delivery tools not authored by this reviewer."
+  },
+  "sourceIdentityAndBuild": {
+    "status": "literal_and_retained_build_artifacts_verified_without_execution",
+    "baselineHead": "8462204043aa368faa7df280d796bb706eb53b38",
+    "baselineCount": 331,
+    "baselineDigest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+    "priorCandidateDigest": "80173ed808e90e721939070f4d0087cba1d51fd396cc700dede3699333215bb7",
+    "candidateCount": 334,
+    "candidateDigest": "e7a94fbc7cdcb19d8704b5d4120f27a858cbcd07e455084711510ee147f4e653",
+    "candidateVersion": "0.68.0",
+    "inverseLiteralSubstitutionExact": true,
+    "addedNativeFiles": [
+      "src/logos-engine/v6-chart-navigation-geometry.ts",
+      "src/logos-engine/v6-chart-navigation-policy.ts",
+      "src/logos-engine/v6-chart-navigation.ts"
+    ],
+    "changedNativeFiles": [
+      "src/logos-engine/v6-native-runtime.ts"
+    ],
+    "removedNativeFiles": [],
+    "historicalTestsRetainedNotRerun": 175,
+    "build": {
+      "receiptStatus": "passed",
+      "elapsedSeconds": 11.36274305400002,
+      "inputsVerified": 373,
+      "sourceHead": "dcd6b5b7027615ae37eb5afd02d704987f12702f",
+      "nativeSessions": 0,
+      "physicalReturns": 0,
+      "typeScriptIncluded": true,
+      "fileCount": 74,
+      "totalBytes": 30149887,
+      "allFilesHashVerified": true,
+      "worker": {
+        "path": "dist/assets/v6-agent-worker-BQvVnNgs.js",
+        "bytes": 7044703,
+        "sha256": "fe31e2caff224557a8bd97bcdb541be7c0f61049317b8dee1e5b4ef3be2c0478"
+      },
+      "publicationPerformed": false
+    },
+    "fingerprints": {
+      "identity-reconciliation.json": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/identity-reconciliation.json",
+        "bytes": 1672,
+        "sha256": "9e04b6dca5af3abf5b4fc244e0c374a50959f02c9eeb8b9b186c847974ad17d8"
+      },
+      "version-reservation.json": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/version-reservation.json",
+        "bytes": 898,
+        "sha256": "83f3a8be9bdc4c5f16870e0ac0d2333aeafede481e66e81cc64fc132e1917161"
+      },
+      "baseline-native.json": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/baseline-native.json",
+        "bytes": 39333,
+        "sha256": "18fcc15c6e57f1bf6aab33cc62498e6a5a76836d85b890378be957a0e6da1c57"
+      },
+      "candidate-native.json": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/candidate-native.json",
+        "bytes": 39694,
+        "sha256": "10ef61a1b937cbfca47332f7138a4bd1872323434eee2c3b41c0d0fea81f5379"
+      },
+      "prior-candidate-native.json": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/prior-candidate-native.json",
+        "bytes": 39694,
+        "sha256": "32a4ea393991353e701a15b634fdf8e1bc5ef58252ec756b552861e49c7dce91"
+      },
+      "build-execution-plan.json": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/build-execution-plan.json",
+        "bytes": 66475,
+        "sha256": "3ab2480c94795d72fb1d2d9530ded5cc1d20c379fc07ad8db40f728fa1be8721"
+      },
+      "build-01/receipt.json": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/build-01/receipt.json",
+        "bytes": 2199,
+        "sha256": "620b36463c5dfdbe5f9b7432b90db627c62bd1b6b206eed9f3fd5b5bc9bc6a40"
+      },
+      "build-manifest.json": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/build-manifest.json",
+        "bytes": 11802,
+        "sha256": "f11d98880eb82086035a23453e388a3dfcff8443531a3e0e793cd4a0c0bc4225"
+      }
+    },
+    "engineExecutionsByReviewer": 0,
+    "sourceOracleExecutionsByReviewer": 0
+  },
+  "executionPlan": {
+    "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-execution-plan.json",
+    "bytes": 74970,
+    "sha256": "97cbaffa21c2cd4c33c866a681153e8bf1abbbffcd050b69c263e0e6f39c5527"
+  },
+  "executionPlanChecks": {
+    "status": "verified",
+    "pinnedInputs": 377,
+    "allFileBytesAndSha256Match": true,
+    "allWorkToolDirectoryFilesIncluded": true,
+    "workToolFiles": 11,
+    "mutableChartCommonDirectoryExcluded": true,
+    "commands": [
+      "work-inventory",
+      "work-baseline",
+      "work-candidate",
+      "work-qualify"
+    ],
+    "maximumAttemptsPerBudgetKey": 2,
+    "budgetKeysRemainStableAcrossProspectiveAmendments": true,
+    "correctivePlanRequiredBeforeAnyRetry": true,
+    "readerInputSelection": "Explicit attempt01 paths. Any correction must retain originals and prospectively bind exact replacement paths and hashes; no autodiscovery."
+  },
+  "reviewedToolAndProtocolFingerprints": [
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/cases.json",
+      "bytes": 1498,
+      "sha256": "65e27dbcc2f5871ab259358cc46576b2671058630be0b37c643eadad66593173"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/protocol.md",
+      "bytes": 6182,
+      "sha256": "16ad342679af2a4d15ddc4caa0c68cb006e2b64ad62b7263fc0bb02bcbf14be8"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/prepare-execution-plan.py",
+      "bytes": 8996,
+      "sha256": "a634ec0b321e8f59082de13b31aa34eee70d5a94cb8246bd72a05bbb9d24fee5"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/run-functional-command.py",
+      "bytes": 9355,
+      "sha256": "dcd3d8f56c75c44036a9ab7d14ef92aec367db7eb8c5b30fae59d63dd30a6045"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/README.md",
+      "bytes": 9940,
+      "sha256": "473ca6248d20f5df70c217c2f8ab55402db222e7e1bcecd2e219baa892c772c2"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs",
+      "bytes": 34460,
+      "sha256": "0d810cf771e03a0910ffad6bd937e90f8a7cad147f48014c7bdfddc154487c68"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/cases.json",
+      "bytes": 1368,
+      "sha256": "8bb390fb0b9fd2c84202c1eac55d599558b29336d410b92d76618048a2fd1124"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/derivation-diffs/capture-cost-owner-graphs.mjs.diff",
+      "bytes": 22545,
+      "sha256": "9393dea0da741ed28ee73a70a44610cec0a532e8c33800ebfcfa4d690f16eb0b"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/derivation-diffs/cases.json.diff",
+      "bytes": 2073,
+      "sha256": "7820a7d39c811c4a164604fc188ab0547d5a8bd2506f2db3f8b9f0c69cdce9ed"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/derivation-diffs/qualify-cost-owner-graphs.mjs.diff",
+      "bytes": 46218,
+      "sha256": "1e99ac3332e9a261fe3499262e69bb60d6f1e8e7bcb4420f02355160aa05b168"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/derivation-diffs/record-owner-source-inventory.mjs.diff",
+      "bytes": 14060,
+      "sha256": "933e38e1b4691993bce2636e4762a6b37c89e2e0274d41db0b7945f749f2c508"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/provenance.json",
+      "bytes": 9607,
+      "sha256": "5fadaaedff03558490d0c4211bb954683fdae86c5ec28241a09b02120e8adf3b"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/qualify-cost-owner-graphs.mjs",
+      "bytes": 68603,
+      "sha256": "324af70cfb75c29aec57cbf647f3d21be9848def151ff2357add8a8dc85c31a7"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/record-owner-source-inventory.mjs",
+      "bytes": 16924,
+      "sha256": "1bffb880b5949caf64c6e04e3cf2e5219d56c55805e3c8d539ef22bddb250e36"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/syntax-checks.json",
+      "bytes": 1787,
+      "sha256": "3421757e7ce3dad7ab8a0a4aa11fd10760e4fa751342ddfd134277f9be00f474"
+    }
+  ],
+  "provenanceVerification": {
+    "provenance": {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/provenance.json",
+      "bytes": 9607,
+      "sha256": "5fadaaedff03558490d0c4211bb954683fdae86c5ec28241a09b02120e8adf3b"
+    },
+    "retainedSourceAndDerivativeHashesChecked": true,
+    "fourUnifiedDiffsReconstructedExactly": true,
+    "syntaxReceipt": {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/syntax-checks.json",
+      "bytes": 1787,
+      "sha256": "3421757e7ce3dad7ab8a0a4aa11fd10760e4fa751342ddfd134277f9be00f474"
+    },
+    "retainedSyntaxChecks": 3,
+    "syntaxOnlyNotTestOrNativeExecution": true
+  },
+  "fixedFindings": [
+    {
+      "id": "partial_consumption",
+      "status": "fixed_before_capture",
+      "resolution": "sessionStarts, initializedSessions and physicalReturns are independent of completed shapes, retained in points/errors/sessions/receipt, and recomputed by the reader. Historical actions is not used to erase incomplete-session consumption."
+    },
+    {
+      "id": "factory_identity",
+      "status": "fixed_before_capture",
+      "resolution": "Each graph sourceDigest must equal the separately inventoried role factorySourceDigest. The native source-byte digest remains a different identity."
+    },
+    {
+      "id": "activation_root",
+      "status": "fixed_before_capture",
+      "resolution": "New Chart activation is checked as revision 1, active, enabled:true, and exact initialize/family.install cause; state and program roots have their own independent bindings."
+    },
+    {
+      "id": "corrective_reader_paths",
+      "status": "fixed_before_capture",
+      "resolution": "The initial plan selects attempt01 explicitly. A retained prospective amendment binds changed tools/capture paths and preserves budgetKey, maximumAttempts and cumulative active allowance."
+    }
+  ],
+  "remainingReservation": {
+    "blocking": false,
+    "field": "provenance.historicalCaseRowsExact",
+    "recordedValue": true,
+    "literalEntireRowsEqual": false,
+    "functionalInputsExactlyEqual": [
+      "id",
+      "trace",
+      "traceSha256",
+      "actions",
+      "targetLevels",
+      "warmupActions"
+    ],
+    "descriptiveDifference": "Only purpose text inside each case row changes BranchRouting to Chart; top-level scope/provenance metadata also changes explicitly. The true claim is exact functional case inputs, not byte-identical or fully equal case rows.",
+    "rootQualification": {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-case-metadata-qualification.json",
+      "bytes": 875,
+      "sha256": "116149773ec2a91c8dcfac3f0fc96a400718cfd5a51f351b7a0802318759feab"
+    }
+  },
+  "attributionContract": {
+    "soleAddedOwner": "public_chart_navigation",
+    "soleAddedFamilyProgram": "v6.chart_navigation.choose",
+    "ownerCounts": [
+      62,
+      63
+    ],
+    "familyInstalledProgramCounts": [
+      28,
+      29
+    ],
+    "newRoots": [
+      "family_state:public_chart_navigation",
+      "family_activation:public_chart_navigation",
+      "program:v6.chart_navigation.choose"
+    ],
+    "additionalFragments": "Only content-verified fragments actually reachable from these roots; no wildcard exemption.",
+    "commonOwners": [
+      "public_observed_binding",
+      "selected_rigid",
+      "motif_access",
+      "public_ordered_recruitment",
+      "branch_routing"
+    ],
+    "branchRoutingExempted": false,
+    "fullSnapshots": "Complete response snapshots, proposals, srcDecision and whyAct are retained and compared leaf-by-leaf; no decision field is removed.",
+    "roleGraphs": "Complete deltas, causes, revisions, chains, fragments, executable digests, tickets and node populations reconstructed with each role Kernel/store.",
+    "checkpoints": "Hydrated family_state values must match actual observed owner checkpoint calls.",
+    "clockAttribution": "Only exact source-created trace created scalars/float64 encodings with real Date.now interval proof, and source-owned activeSeconds with real performance.now and elapsed counters; no clock replacement or generic timestamp mask.",
+    "coverage": "Factory owners/groups, the three exact Chart extension literals and the added state reference are validated independently before attribution.",
+    "unattributedDifferencesAllowed": 0
+  },
+  "functionalForms": {
+    "eachRole": [
+      "STCK3",
+      "STCK10",
+      "SMLP3",
+      "SMLP15"
+    ],
+    "sessionsEachRole": 4,
+    "physicalReturnsEachRole": 31,
+    "terminalInspectionsEachFullForm": 3,
+    "targetLevels": 3,
+    "levelActionCaps": [
+      600,
+      600,
+      600
+    ],
+    "commandsBeforeReturns": true,
+    "coldSessions": true,
+    "learnedStateInjected": false,
+    "negativeChartWorkFormsDoNotProvePositiveContribution": true,
+    "labelsWarmupMeasuredAreStructuralNotCostSamples": true
+  },
+  "accounting": {
+    "plannedThisWorkPlan": {
+      "initializedSessions": 8,
+      "physicalReturns": 62
+    },
+    "maximumThisWorkPlan": {
+      "sessionStarts": 16,
+      "physicalReturns": 124
+    },
+    "priorConsumedCommon": {
+      "initializedSessions": 10,
+      "physicalReturns": 14,
+      "registrationOnlyFactories": 2,
+      "source": "integration-runs/chart-common-01 and chart-common-02; first failed attempt retained",
+      "reservation": "Historical maximumSessions8 lacked per-launch/cumulative scope; not retroactively repaired."
+    },
+    "plannedEntireNewDelivery": {
+      "initializedSessions": 13,
+      "physicalReturns": 71
+    },
+    "plannedEntireDeliveryIncludingPrior": {
+      "initializedSessions": 23,
+      "physicalReturns": 85
+    },
+    "maximumEntireDeliveryIncludingPrior": {
+      "initializedSessions": 36,
+      "physicalReturns": 156
+    },
+    "registrationFactoriesSeparate": true,
+    "failedAndPartialAttemptsRetained": true,
+    "noResetByPhaseSplit": true
+  },
+  "timeAndSupervision": {
+    "activeTimeoutSeconds": {
+      "inventory": 120,
+      "baselineCapture": 300,
+      "candidateCapture": 300,
+      "pairedReader": 300
+    },
+    "maximumAttemptsEach": 2,
+    "maximumDeclaredActiveCumulativeAllowanceSeconds": {
+      "inventory": 240,
+      "baselineCapture": 600,
+      "candidateCapture": 600,
+      "pairedReader": 600
+    },
+    "elapsedScope": "Actual receipts include cleanup, retention and hashing. These can exceed the activity timeout; the supervisor subtracts prior actual elapsed from the next active allowance. No strict equal wall-time ceiling is claimed.",
+    "sessionReturnBounds": "Fixed capture loops plus independent reader accounting enforce/recount these; supervisor records declarations rather than instrumenting native calls.",
+    "oldSpaceMiB": 1536,
+    "absoluteRssLimitClaim": false,
+    "concurrentCommandGroups": 1
+  },
+  "pendingSeparateScopes": [
+    "Chart common reader and declaration require their own independent preparation review.",
+    "Fresh functional results require separate reading after capture.",
+    "Public worker, positive public service, official cost and publication remain separate."
+  ],
+  "releaseAuthority": false,
+  "officialPerformanceEligible": false,
+  "publicWorkerQualified": false,
+  "universalParityClaim": false,
+  "globalLockRequired": false,
+  "LKEY": "closed"
+}

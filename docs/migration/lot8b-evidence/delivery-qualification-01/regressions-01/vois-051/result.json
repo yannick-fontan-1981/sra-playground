@@ -1,0 +1,210 @@
+{
+  "case": "vois-051",
+  "game": "VOIS",
+  "passed": true,
+  "baseline": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+    "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d"
+  },
+  "trace": {
+    "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+    "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d"
+  },
+  "replay": {
+    "schema": "logos-engine.lot8b.recorded-process.v1",
+    "name": "replay",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "docs/migration/lot8a-evidence/tools/replay-recorded-public-streaming.mjs",
+      "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+      "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+      "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/replay.json.gz"
+    ],
+    "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+    "startedAt": "2026-11-12T04:59:13.335388+00:00",
+    "phaseTimeoutSeconds": 600,
+    "effectiveTimeoutSeconds": 600,
+    "environment": {
+      "NODE_OPTIONS": "--max-old-space-size=1536",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0"
+    },
+    "status": "passed",
+    "pid": 46,
+    "processGroup": 46,
+    "exitCode": 0,
+    "timedOut": false,
+    "interrupted": false,
+    "automaticRetry": false,
+    "elapsedSeconds": 167.5793346600003,
+    "lastObservedAt": "2026-11-12T05:01:58.510634+00:00",
+    "stdoutBytes": 198583,
+    "stderrBytes": 0,
+    "processGroupStopped": true,
+    "finishedAt": "2026-11-12T05:02:00.914698+00:00",
+    "stdout": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/replay.stdout.log",
+      "bytes": 200881,
+      "sha256": "0eefa1b89f14f1806d4aeb2ce1ffcd9148e4f8b07cef4db9e8f0dc672b9f7903"
+    },
+    "stderr": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "hostPreparationPassed": true,
+  "comparisonProcess": {
+    "schema": "logos-engine.lot8b.recorded-process.v1",
+    "name": "comparison",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+      "-B",
+      "scripts/run-released-public-regressions.py",
+      "--compare-case",
+      "{\"baseline\":\"docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz\",\"trace\":\"docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz\",\"report\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/replay.json.gz\",\"sourceManifest\":\"docs/migration/lot8b-evidence/delivery-qualification-01/candidate-native.json\",\"caseManifest\":\"docs/migration/lot8b-evidence/tools/delivery/regressions/cases.json\",\"comparison\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/comparison.json\",\"presence\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/passive-owner-presence.json\",\"requirements\":[]}"
+    ],
+    "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+    "startedAt": "2026-11-12T05:02:00.916351+00:00",
+    "phaseTimeoutSeconds": 180,
+    "effectiveTimeoutSeconds": 180,
+    "environment": {
+      "NODE_OPTIONS": "--max-old-space-size=1536",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0"
+    },
+    "status": "passed",
+    "pid": 58,
+    "processGroup": 58,
+    "exitCode": 0,
+    "timedOut": false,
+    "interrupted": false,
+    "automaticRetry": false,
+    "processGroupStopped": true,
+    "finishedAt": "2026-11-12T05:02:07.534207+00:00",
+    "elapsedSeconds": 6.617877643999236,
+    "stdout": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/comparison.stdout.log",
+      "bytes": 2679,
+      "sha256": "f56d19233768bd53e4d99a7ccad6f07499212110d5dbb60998a872bf9b099943"
+    },
+    "stderr": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/comparison.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "comparisonResult": {
+    "report": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/replay.json.gz",
+      "sha256": "6422f3152130774f5dceee6105abbf5c19a0ed89b75de3c6495561a5ba30752d",
+      "bytes": 15739119
+    },
+    "status": "passed",
+    "actions": 78,
+    "prefixes": 42,
+    "final": {
+      "actions": 78,
+      "levelsCompleted": 3,
+      "level": 4,
+      "state": "NOT_FINISHED",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "activeSeconds": 129.66870373400008,
+      "prefixes": 42,
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 78,
+        "boundaryReplays": 2,
+        "goalEvents": 3,
+        "frontierDeltas": 157,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 43
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 43
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 34
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 30
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 27
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 43
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology"
+        ],
+        "morphologyProvider": {
+          "status": "partial_current_measurements_control_attention_and_methods",
+          "state_owner": "family_state:morphology",
+          "motion_owner": "caller:goal",
+          "forecast_owner": "family_state:public_observed_inventory",
+          "current_decision_scope": "one_source_selection_cycle",
+          "attention_owner": "caller:attention",
+          "method_owner": "caller:counters.targetMethod",
+          "entry_return_owner": "family_state:morphology.entry_access_return",
+          "connected_methods": [
+            "retained_station_method",
+            "entry_access_return",
+            "entry_rebind",
+            "entry_probe",
+            "managed_capacity",
+            "target_extension_continuation"
+          ],
+          "pending": [
+            "complete_original_caller_parity_and_domain_closure"
+          ]
+        },
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      },
+      "fullV6Parity": false,
+      "sessions": 1,
+      "operationCounts": {
+        "init": 1,
+        "advance": 78,
+        "resume": 41
+      },
+      "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.66.0"
+    },
+    "passiveOwnerPresence": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/passive-owner-presence.json",
+      "sha256": "759a5fc786c53d7be672e5fa4309df187b77db8bd34d9a2cfc6d409c6941f986",
+      "bytes": 1110
+    },
+    "passiveOwnerPresencePassed": true,
+    "passiveOwnerPrefixesChecked": 0,
+    "passiveOwnerPrefixesPassed": 0,
+    "passiveOwnerTransitionsRetained": 0,
+    "comparison": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/comparison.json",
+      "sha256": "0a955d9cc7a0b59029ca7db7f6adfcb18b384319c2fa69df4003b4d9d42cc917",
+      "bytes": 11018
+    },
+    "comparisonPassed": true,
+    "comparisonChecks": 17,
+    "failedChecks": []
+  },
+  "originalCheckNamesPreserved": true,
+  "inputsUnchanged": true
+}

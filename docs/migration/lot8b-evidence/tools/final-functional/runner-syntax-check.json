@@ -1,0 +1,11 @@
+{
+  "schema": "logos-engine.lot8b.final-functional-runner-syntax.v1",
+  "recordedAt": "2026-11-12T12:08:57.297229+00:00",
+  "status": "passed",
+  "check": "ast.parse only; no import, pycache, child, native runtime or oracle execution",
+  "generator": {
+    "path": "docs/migration/lot8b-evidence/tools/final-functional/run-functional-command.py",
+    "bytes": 7698,
+    "sha256": "a49a62551f757750a9598b2ea3a36d0c214ded79f150e3c65bddc74a83103fe9"
+  }
+}

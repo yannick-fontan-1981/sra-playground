@@ -1,0 +1,51 @@
+{
+  "schema": "logos-engine.diagnostic-evidence-transport.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-09T21:48:03.848187+00:00",
+  "generator": {
+    "path": "scripts/verify-native-delivery.py",
+    "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a",
+    "bytes": 26494
+  },
+  "helpers": [
+    {
+      "path": "scripts/evidence-byte-parts.py",
+      "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+      "bytes": 7210
+    },
+    {
+      "path": "scripts/restore-v53-evidence.py",
+      "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+      "bytes": 3361
+    }
+  ],
+  "byteStorage": {
+    "reports": 2,
+    "parts": 8,
+    "bytes": 6316029,
+    "originalsAbsentBeforeRestore": true,
+    "temporaryRootRemoved": true,
+    "originalsUnchanged": true,
+    "restoredByteIdentical": [
+      {
+        "path": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-after.json.gz",
+        "sha256": "633c966ba61276c84bd847066551b17c0033f28b30ada60b86386f8e14fe2bef",
+        "bytes": 3157883,
+        "manifest": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-after.json.gz.parts.json",
+        "parts": 4,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-baseline.json.gz",
+        "sha256": "9edb49481488a10f79cf5ba8d60edd10995be1bdcd4b89167b9482bccbcf2d8c",
+        "bytes": 3158146,
+        "manifest": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-baseline.json.gz.parts.json",
+        "parts": 4,
+        "restored": true,
+        "byteIdentical": true
+      }
+    ]
+  },
+  "qualification": "Exact restoration in an initially empty temporary root and byte comparison only; no diagnostic, semantic comparison, agent or benchmark rerun."
+}

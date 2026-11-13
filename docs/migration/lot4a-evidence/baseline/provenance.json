@@ -1,0 +1,8 @@
+{
+  "siteVersion": 78,
+  "commit": "8fa6b261b8b23ac8d232e60c9c179e2f3407d82f",
+  "nativeVersion": "0.49.0",
+  "checkout": "/workspace/sites/sra-lot4a-base78",
+  "nativeDigest": "d6cb9abdf48a9062936d4647dbd809dc4cee1d1528f85e973fda83c7af8e6054",
+  "qualification": "A separate detached worktree at the published source commit; no historical timing is reused."
+}

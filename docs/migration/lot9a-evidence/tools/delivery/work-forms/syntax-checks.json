@@ -1,0 +1,59 @@
+{
+  "schema": "logos-engine.lot9a.work-forms-static-syntax-check.v1",
+  "recordedAt": "2026-11-12T14:50:02.208998+00:00",
+  "moduleExecution": false,
+  "nativeImports": false,
+  "runtimeExecutions": 0,
+  "sourceOracleCalls": 0,
+  "testsExecuted": 0,
+  "checks": [
+    {
+      "argv": [
+        "node",
+        "--check",
+        "docs/migration/lot9a-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "wallSeconds": 0.018441231,
+      "source": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs",
+        "bytes": 34460,
+        "sha256": "0d810cf771e03a0910ffad6bd937e90f8a7cad147f48014c7bdfddc154487c68"
+      }
+    },
+    {
+      "argv": [
+        "node",
+        "--check",
+        "docs/migration/lot9a-evidence/tools/delivery/work-forms/record-owner-source-inventory.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "wallSeconds": 0.00448056,
+      "source": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/record-owner-source-inventory.mjs",
+        "bytes": 16924,
+        "sha256": "1bffb880b5949caf64c6e04e3cf2e5219d56c55805e3c8d539ef22bddb250e36"
+      }
+    },
+    {
+      "argv": [
+        "node",
+        "--check",
+        "docs/migration/lot9a-evidence/tools/delivery/work-forms/qualify-cost-owner-graphs.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "wallSeconds": 0.01063824,
+      "source": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/qualify-cost-owner-graphs.mjs",
+        "bytes": 68603,
+        "sha256": "324af70cfb75c29aec57cbf647f3d21be9848def151ff2357add8a8dc85c31a7"
+      }
+    }
+  ]
+}

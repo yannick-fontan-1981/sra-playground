@@ -1,0 +1,130 @@
+{
+  "schema": "logos-engine.lot9a.chart-common-declaration.v1",
+  "allowExecution": true,
+  "stageRoot": "docs/migration/lot9a-evidence/delivery-final-068-01",
+  "candidateNativePath": "docs/migration/lot9a-evidence/delivery-final-068-01/candidate-native.json",
+  "expectedNative": {
+    "fileCount": 334,
+    "digest": "e7a94fbc7cdcb19d8704b5d4120f27a858cbcd07e455084711510ee147f4e653"
+  },
+  "expectedImplementation": "logos-engine.typescript.v6.native-migration/0.68.0",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "fixturePath": "docs/migration/lot9a-evidence/reference-01/reference.json.gz",
+  "fixtureSha256": "0770706db16249ac4ab1c7c8b9533d571f2fc2cdaeaf5dae2d990806e412cfe8",
+  "caseIds": [
+    "primary",
+    "contrary",
+    "selected-acquisition-ablation",
+    "passive-scene-equal",
+    "passive-scene-changed"
+  ],
+  "sessionId": "chart:synthetic",
+  "budgets": {
+    "targetLevels": 3,
+    "levelActionCaps": [
+      8,
+      8,
+      8
+    ],
+    "maxActions": 8
+  },
+  "limits": {
+    "expectedSessionsPerAttempt": 5,
+    "expectedPhysicalReturnsPerAttempt": 9,
+    "maximumAttempts": 2,
+    "maximumSessionStartsCumulative": 10,
+    "maximumPhysicalReturnsCumulative": 18,
+    "expectedCapturePointsPerAttempt": 52,
+    "maximumCapturePointsPerAttempt": 64,
+    "maximumRawBytesPerAttempt": 1073741824,
+    "timeoutSecondsPerCapture": 300,
+    "abortAfterSecondsPerCapture": 285,
+    "maximumCaptureSecondsCumulative": 600,
+    "timeoutSecondsPerQualification": 240,
+    "maximumQualificationAttempts": 2,
+    "maximumQualificationSecondsCumulative": 480
+  },
+  "inheritedFunctionalAccounting": {
+    "initializedSessions": 10,
+    "physicalReturns": 14
+  },
+  "inputPins": [
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/candidate-native.json",
+      "bytes": 39694,
+      "sha256": "10ef61a1b937cbfca47332f7138a4bd1872323434eee2c3b41c0d0fea81f5379"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/reference-01/reference.json.gz",
+      "bytes": 2053926,
+      "sha256": "0770706db16249ac4ab1c7c8b9533d571f2fc2cdaeaf5dae2d990806e412cfe8"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/README.md",
+      "bytes": 10075,
+      "sha256": "62d87c395c59c0f77d2fb12820800038b9b136325fba7ab8bd1627f47b88f052"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/capture.mjs",
+      "bytes": 34753,
+      "sha256": "096311ef408c20f70061ca5d67ec97ccf779327091c5b8416e828521b6d2b9ac"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/derivation-diffs/capture-vs-branch-common-capture-v2.diff",
+      "bytes": 68011,
+      "sha256": "2887f39d2c376e4218b9d6a4007db20b0be71373070a853d0651dc56ace68cb3"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/derivation-diffs/capture-vs-public-boundary-capture-v2.diff",
+      "bytes": 72955,
+      "sha256": "2ebf260cddbae7df5d643e161bb6fa55a82e2c88078f44ed29838cacbf2171da"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/derivation-diffs/qualify-vs-branch-common-qualify-v2.diff",
+      "bytes": 99643,
+      "sha256": "1289fff2d417e3eca25d11500f0cd2da940b60065ec25029bf9d8351ca63c393"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/derivation-diffs/qualify-vs-public-boundary-qualify-v2.diff",
+      "bytes": 115937,
+      "sha256": "5a92771a30741475fc32fc8058c4519d3c2bec3b6209bc080b3da2b4e258da75"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/preparation-plan.json",
+      "bytes": 5738,
+      "sha256": "0129015a8a56c0000f69ac4cd10f270ab0e050e8bd143b3d0d08a0d66e3136d9"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/provenance.json",
+      "bytes": 7243,
+      "sha256": "8a0cfb34215d882bcf72ba6fe1f348bbc443a3e15eaff0a61fa32856edb6eed3"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/qualify.mjs",
+      "bytes": 39886,
+      "sha256": "edc24c0c2896cb0497606810ba06bb58fbf815c9690ae0f2834126359eb4b638"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/syntax-checks.json",
+      "bytes": 1221,
+      "sha256": "d7589ca5a17bb8e13a122d1541f6898ecc3a0becec935c236be3cb4e52614410"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "tests/v6-chart-navigation-kernel.test.ts",
+      "bytes": 15491,
+      "sha256": "f15c0d6f01ff9f565d5407628f2d27d5309d0e574cb7d26d7ff016e8dff91914"
+    }
+  ],
+  "correctiveAttemptRecordPath": null,
+  "declaredAt": "2026-11-12T14:57:52.177508+00:00"
+}

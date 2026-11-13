@@ -1,0 +1,443 @@
+{
+  "module_id": "local_predicate_observation",
+  "declarations": [
+    {
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "id": "policy.local_predicate_observation_acquisition",
+      "configuration": {
+        "predicate_ref": "predicate.endpoint_translation_equals_retained_input_law",
+        "horizon_ref": "one_observed_response_endpoints",
+        "acquisition_alternative_ref": "local_predicate.retain_partial_occurrence",
+        "lookup_alternative_ref": "local_predicate.current_prediction_requires_revalidation",
+        "observation_predicate_ref": "observes_partial_local_translation_predicate",
+        "maximum_occurrences_per_world": 128,
+        "maximum_scope_receipts": 128
+      },
+      "meaning_template_ref_by_alternative": {
+        "local_predicate.retain_partial_occurrence": "rule.local_predicate_observation"
+      },
+      "reason_refs": [
+        "reason.actual_response_supports_partial_predicate_observation"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.local_predicate_observation_acquisition",
+          "all_conditions": [
+            {
+              "field": "has_occurrence",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ]
+    },
+    {
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "id": "policy.local_predicate_current_revalidation",
+      "configuration": {},
+      "meaning_template_ref_by_alternative": {
+        "local_predicate.current_prediction_requires_revalidation": "rule.local_predicate_current_revalidation"
+      },
+      "reason_refs": [
+        "reason.partial_counterexample_requires_prediction_revalidation"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.local_predicate_current_revalidation",
+          "all_conditions": [
+            {
+              "field": "has_counterexample",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ]
+    },
+    {
+      "id": "rule.local_predicate_observation",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "term_templates": [
+        {
+          "id_pattern": "term.local_predicate_observation.{occurrence_token}",
+          "kind": "schema",
+          "label": "observed local endpoint predicate with explicit unknown conditions",
+          "required_fields": [
+            "occurrence_token",
+            "occurrence_frame_ref",
+            "occurrence"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.local_predicate_observation.v1",
+            "canonical_fact_projection_enabled": false,
+            "whole_action_ineffective": false,
+            "permanent_obstruction_proven": false,
+            "unknown_conditions_equivalent": false,
+            "missing_condition_refs": [
+              "unknown.local_translation.phase",
+              "unknown.local_translation.capacity",
+              "unknown.local_translation.other_conditions"
+            ],
+            "horizon_ref": "one_observed_response_endpoints",
+            "dispatch_prediction_established": false,
+            "question_kind": "retrospective_source_predicate_test"
+          },
+          "attribute_bindings": {
+            "operational_scene_ref": "occurrence_frame_ref",
+            "observation": "occurrence"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.local_predicate_observation.{occurrence_token}",
+          "predicate": "observes_partial_local_translation_predicate",
+          "family": "control",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "term.local_predicate_observation.{occurrence_token}"
+          ],
+          "required_fields": [
+            "occurrence_token",
+            "occurrence_frame_ref"
+          ],
+          "static_attributes": {
+            "whole_action_ineffective": false,
+            "permanent_obstruction_proven": false,
+            "unknown_conditions_equivalent": false,
+            "missing_condition_refs": [
+              "unknown.local_translation.phase",
+              "unknown.local_translation.capacity",
+              "unknown.local_translation.other_conditions"
+            ],
+            "horizon_ref": "one_observed_response_endpoints",
+            "dispatch_prediction_established": false,
+            "question_kind": "retrospective_source_predicate_test"
+          },
+          "attribute_bindings": {
+            "operational_scene_ref": "occurrence_frame_ref"
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.partial_predicate_result_does_not_close_unknown_conditions"
+      ]
+    },
+    {
+      "id": "rule.local_predicate_current_revalidation",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "term_templates": [
+        {
+          "id_pattern": "term.local_predicate_revalidation.{lookup_token}",
+          "kind": "schema",
+          "label": "current comparison with historical partial predicate observations",
+          "required_fields": [
+            "lookup_token",
+            "lookup_frame_ref",
+            "lookup_rows"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.local_predicate_revalidation.v1",
+            "canonical_fact_projection_enabled": false,
+            "whole_action_ineffective": false,
+            "permanent_obstruction_proven": false,
+            "unknown_conditions_equivalent": false,
+            "missing_condition_refs": [
+              "unknown.local_translation.phase",
+              "unknown.local_translation.capacity",
+              "unknown.local_translation.other_conditions"
+            ],
+            "horizon_ref": "one_observed_response_endpoints",
+            "dispatch_prediction_established": false,
+            "question_kind": "retrospective_source_predicate_test"
+          },
+          "attribute_bindings": {
+            "operational_scene_ref": "lookup_frame_ref",
+            "revalidated_rows": "lookup_rows"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.local_predicate_revalidation.{lookup_token}",
+          "predicate": "current_local_prediction_requires_revalidation",
+          "family": "control",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "term.local_predicate_revalidation.{lookup_token}"
+          ],
+          "required_fields": [
+            "lookup_token",
+            "lookup_frame_ref"
+          ],
+          "static_attributes": {
+            "whole_action_ineffective": false,
+            "permanent_obstruction_proven": false,
+            "unknown_conditions_equivalent": false,
+            "missing_condition_refs": [
+              "unknown.local_translation.phase",
+              "unknown.local_translation.capacity",
+              "unknown.local_translation.other_conditions"
+            ],
+            "horizon_ref": "one_observed_response_endpoints",
+            "dispatch_prediction_established": false,
+            "question_kind": "retrospective_source_predicate_test"
+          },
+          "attribute_bindings": {
+            "operational_scene_ref": "lookup_frame_ref"
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.partial_predicate_result_does_not_close_unknown_conditions"
+      ]
+    },
+    {
+      "id": "principle.partial_local_counterexample_requires_current_prediction_revalidation",
+      "kind": "principle",
+      "premises": [
+        "an_actual_response_has_a_canonical_partial_endpoint_predicate_observation",
+        "a_current_Source_receipt_revalidates_role_pose_input_model_content_and_known_local_support",
+        "the_same_positive_translation_prediction_has_an_observed_counterexample"
+      ],
+      "invariants": [
+        "preserve_the_occurrence_after_goal_wrapper_or_pose_changes",
+        "unknown_phase_is_not_known_equal_between_occurrences",
+        "do_not_promote_endpoints_to_a_complete_trajectory",
+        "reconsider_this_route_means_without_global_input_sterility_or_permanent_wall",
+        "preserve_distinct_effects_and_conditionally_reopen_on_changed_support_or_bounded_temporal_question"
+      ],
+      "falsifiers": [
+        "the_role_is_ambiguous_or_the_measurement_unknown",
+        "current_support_model_or_relevant_condition_differs",
+        "a_Source_admitted_bounded_temporal_condition_experiment_asks_a_distinct_question"
+      ],
+      "reason_refs": [
+        "reason.partial_counterexample_requires_prediction_revalidation"
+      ]
+    },
+    {
+      "kind": "principle",
+      "id": "principle.partial_counterexample_limits_provisional_word_to_observation_frontier",
+      "premises": [
+        "current_Source_revalidation_preserves_a_partial_counterexample_and_unbound_conditions",
+        "a_provisional_word_does_not_discharge_its_future_edge_support_obligations"
+      ],
+      "invariants": [
+        "retain_the_proposed_word_as_a_revisable_hypothesis",
+        "authorize_at_most_its_first_information_frontier_then_return_to_Source",
+        "do_not_repeat_a_currently_refuted_first_edge_without_a_distinct_bounded_condition_question",
+        "do_not_mark_the_goal_reached_when_the_truncated_prefix_ends"
+      ],
+      "falsifiers": [
+        "the_complete_word_has_an_independently_admitted_complete_transition_model",
+        "the_current_counterexample_receipt_or_role_support_is_not_current"
+      ],
+      "reason_refs": [
+        "reason.partial_route_suffix_requires_actual_support_before_release"
+      ]
+    },
+    {
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "id": "policy.revisable_navigation_acquisition",
+      "configuration": {
+        "predicate_ref": "predicate.endpoint_translation_equals_retained_input_law",
+        "horizon_ref": "one_observed_response_endpoints",
+        "acquisition_alternative_ref": "revisable_navigation.retain_current_map",
+        "lookup_alternative_ref": "local_predicate.current_prediction_requires_revalidation",
+        "observation_predicate_ref": "observes_revisable_navigation_snapshot",
+        "maximum_occurrences_per_world": 128,
+        "maximum_scope_receipts": 128,
+        "claim_id_prefix": "claim.revisable_navigation_observation.",
+        "maximum_cells": 256,
+        "maximum_route_depth": 256,
+        "barrier_projection": "NEW_UNIFORM_STOPPING_CONTACT_TEXTURE",
+        "unknown_terrain_admission": "OPTIMISTIC_EXPERIMENT_NOT_ESTABLISHED_FREE",
+        "goal_projection": "UNIQUE_STATIONARY_FRAMED_ENDPOINT_AFTER_MOVING_PEER_CONTRAST",
+        "disappearing_barrier_observation": "RETAIN_UNTIL_PHYSICAL_COUNTEREVIDENCE",
+        "mobile_obstacle_admission": "OBSERVE_ONE_NONCHECKPOINT_TICK_THEN_REPLAN",
+        "wait_on_observed_mobile_track": "PREFER_ALTERNATE_BFS"
+      },
+      "meaning_template_ref_by_alternative": {
+        "revisable_navigation.retain_current_map": "rule.revisable_navigation_observation"
+      },
+      "reason_refs": [
+        "reason.current_revisable_map_supports_bounded_optimistic_route"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.revisable_navigation_acquisition",
+          "all_conditions": [
+            {
+              "field": "has_occurrence",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ]
+    },
+    {
+      "id": "rule.revisable_navigation_observation",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "term_templates": [
+        {
+          "id_pattern": "term.revisable_navigation_observation.{occurrence_token}",
+          "kind": "schema",
+          "label": "observed local endpoint predicate with explicit unknown conditions",
+          "required_fields": [
+            "occurrence_token",
+            "occurrence_frame_ref",
+            "occurrence"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.revisable_navigation_observation.v1",
+            "canonical_fact_projection_enabled": false,
+            "whole_action_ineffective": false,
+            "permanent_obstruction_proven": false,
+            "unknown_conditions_equivalent": false,
+            "missing_condition_refs": [
+              "unknown.local_translation.phase",
+              "unknown.local_translation.capacity",
+              "unknown.local_translation.other_conditions"
+            ],
+            "horizon_ref": "one_observed_response_endpoints",
+            "dispatch_prediction_established": false,
+            "question_kind": "revisable_navigation_hypothesis",
+            "unknown_cells_established_traversable": false,
+            "post_reaction_route_safety_established": false,
+            "faded_observation_deletes_known_barrier": false,
+            "terminal_objective_established": false
+          },
+          "attribute_bindings": {
+            "operational_scene_ref": "occurrence_frame_ref",
+            "observation": "occurrence"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.revisable_navigation_observation.{occurrence_token}",
+          "predicate": "observes_revisable_navigation_snapshot",
+          "family": "control",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "term.revisable_navigation_observation.{occurrence_token}"
+          ],
+          "required_fields": [
+            "occurrence_token",
+            "occurrence_frame_ref"
+          ],
+          "static_attributes": {
+            "whole_action_ineffective": false,
+            "permanent_obstruction_proven": false,
+            "unknown_conditions_equivalent": false,
+            "missing_condition_refs": [
+              "unknown.local_translation.phase",
+              "unknown.local_translation.capacity",
+              "unknown.local_translation.other_conditions"
+            ],
+            "horizon_ref": "one_observed_response_endpoints",
+            "dispatch_prediction_established": false,
+            "question_kind": "revisable_navigation_hypothesis",
+            "unknown_cells_established_traversable": false,
+            "post_reaction_route_safety_established": false,
+            "faded_observation_deletes_known_barrier": false,
+            "terminal_objective_established": false
+          },
+          "attribute_bindings": {
+            "operational_scene_ref": "occurrence_frame_ref"
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.partial_predicate_result_does_not_close_unknown_conditions"
+      ]
+    },
+    {
+      "id": "principle.optimistic_replanning_preserves_hidden_barriers_and_temporal_unknowns",
+      "kind": "principle",
+      "premises": [
+        "a_current_canonical_control_occurrence_and_rectangular_domain_are_measured",
+        "a_stopped_attempt_exposes_a_new_uniform_contact_texture"
+      ],
+      "invariants": [
+        "Unknown cells may be admitted only as an exploration hypothesis. Retain revealed barriers when visibility fades; revise them after contradictory occupancy. A mobile occurrence is not a permanent wall. Each attempt or bounded wait returns to the same parent with a full observation. Never declare terminal success or complete reaction safety from this optimistic path."
+      ],
+      "falsifiers": [
+        "successful_control_occupancy_contradicts_a_blocking_cell",
+        "the_role_or_domain_is_ambiguous"
+      ],
+      "reason_refs": [
+        "reason.current_revisable_map_supports_bounded_optimistic_route"
+      ]
+    }
+  ]
+}

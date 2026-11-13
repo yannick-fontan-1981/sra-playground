@@ -1,0 +1,14 @@
+{
+  "schema": "logos-engine.cost-preparation-superseded.v1",
+  "status": "superseded_before_any_measurement",
+  "recordedAt": "2026-11-10T18:18:56.447454+00:00",
+  "reason": "Both delivery roots agreed that3I will publish native0.50 first.4A will integrate that actual published commit and use native0.51, then declare a fresh0.50-to0.51 comparison. This original0.49-to-isolated0.50 protocol remains immutable and unexecuted.",
+  "measuredSessions": 0,
+  "measuredActions": 0,
+  "retainedDeclaration": {
+    "path": "docs/migration/lot4a-evidence/performance/declaration.json",
+    "sha256": "3910f9d73a8f4bc5507725cf8167a6ad721fb39dd4a63ff62b2444f35b44c6e5"
+  },
+  "nextPerformanceDirectory": "docs/migration/lot4a-evidence/performance-integrated",
+  "quietAcknowledgement": "docs/migration/lot4a-evidence/coordination/lot4a-quiet-acknowledgement.json"
+}

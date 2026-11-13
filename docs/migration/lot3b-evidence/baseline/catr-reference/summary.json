@@ -1,0 +1,103 @@
+{
+  "schema": "logos-engine.native-bounded-reference-summary.v1",
+  "game": "CATR",
+  "sourceDigest": "f0d8b2b0a746f19036076010025fffa1ad532d5751caa176f7efcccff7bc4aff",
+  "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.38.0",
+  "status": "target_not_reached",
+  "targetLevels": 3,
+  "final": {
+    "actions": 1,
+    "levelsCompleted": 0,
+    "level": 1,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "frontier_unknown",
+    "activeSeconds": 2.206345367000001,
+    "prefixes": 1,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 1,
+      "boundaryReplays": 0,
+      "goalEvents": 0,
+      "frontierDeltas": 3,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 2
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 2
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 2
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 2
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 1
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 3
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 1,
+      "resume": 1
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.38.0"
+  },
+  "failure": "Did not complete CATR level 1: V6 stopped: frontier_unknown. Its acquired evidence is retained for inspection.",
+  "boundaries": [],
+  "startedAt": "2026-11-10T00:10:31.637318+00:00",
+  "finishedAt": "2026-11-10T00:10:37.920369+00:00",
+  "elapsedSeconds": 6.283059841996874,
+  "outerTimeout": false,
+  "actionCapReached": false,
+  "sourceUnchanged": true,
+  "passiveExecutionCodeUnchanged": true,
+  "pythonAgentModules": [],
+  "qualification": "The reference stopped naturally after one acquired action with frontier_unknown. Neither the action cap nor the wall watchdog was reached. This is a failed three-level target with a complete report, trace and independently retained public journal; no missing evidence is reconstructed."
+}

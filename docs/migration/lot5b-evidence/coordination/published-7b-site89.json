@@ -1,0 +1,206 @@
+{
+  "schema": "logos-engine.lot7b-final-private-publication.v1",
+  "status": "delivered",
+  "recordedAt": "2026-11-11T00:02:01.902393+00:00",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "siteVersion": 89,
+  "nativeVersion": "0.55.0",
+  "sourceCommit": "4cea66731c0809f08288ea6f7287ef3dd7a392bd",
+  "nativePublicationSiteVersion": 88,
+  "nativePublicationCommit": "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7",
+  "retainedValidatedTargetCommit": "93ec798a017febbeca8aec3f705bc04d9ebe26c4",
+  "nativeDigest": "ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b",
+  "nativeFileCount": 291,
+  "sourceArchiveFileCount": 302,
+  "documentationOnlyChanges": [
+    "README.md",
+    "docs/migration/lot7b-evidence/README.md",
+    "docs/migration/lot7b-evidence/publication/archive-representations.json",
+    "docs/migration/lot7b-evidence/publication/documentation-closure-plan.json",
+    "docs/migration/lot7b-evidence/publication/native-publication.json",
+    "docs/migration/lot7b-evidence/publication/post-publication-input-integrity.json",
+    "docs/migration/lot7b-evidence/publication/source-archive-equality.json",
+    "docs/migration/lot7b-evidence/publication/source-push-1.txt",
+    "docs/migration/lot7b-evidence/publication/source-push-2.txt",
+    "docs/migration/lot7b-evidence/publication/source-push-3.txt",
+    "docs/migration/lot7b-evidence/publication/source-push-4.txt",
+    "docs/migration/lot7b-evidence/publication/source-push-5.txt",
+    "docs/migration/lot7b-evidence/publication/source-push-plan.json",
+    "docs/migration/lot7b-evidence/publication/source-transport.json",
+    "docs/migration/lot7b-symbol-transactions-lineage.md",
+    "docs/migration/lot7b-symbol-transactions.md",
+    "docs/migration/v6-delivery-roadmap.md"
+  ],
+  "sourceAndBuildUnchanged": true,
+  "all902FrozenInputFingerprintsUnchanged": true,
+  "siteVersionReceipt": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_9152b674b7348191a581e326508ca5fe",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "version_number": 89,
+    "source": {
+      "commit_sha": "4cea66731c0809f08288ea6f7287ef3dd7a392bd"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_0000000011dc820e9ec8c98387972f35",
+      "content_hash": "sha256:edabfe0902bbbe8457cfaa6cef49877c1b0c9400e6f945f053971d69bc7232a8",
+      "size_bytes": 29859840,
+      "file_count": 75
+    },
+    "deployment_id": "appgdep_6af3b06c78448191a7f12b792f1f4ad1"
+  },
+  "deployment": {
+    "id": "appgdep_6af3b06c78448191a7f12b792f1f4ad1",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "title": "SRA Playground",
+    "version_id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_9152b674b7348191a581e326508ca5fe",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6adbc388d79081918581b93b919d7258",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-11T00:02:01.902393+00:00"
+  },
+  "access": {
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "currentUserRole": "owner",
+    "currentLiveUrl": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "latestVersionNumber": 89,
+    "accessMode": "custom",
+    "policyRevision": 3,
+    "allowedAccountCount": 1,
+    "allowedGroupCount": 0,
+    "externalVisitorCount": 0
+  },
+  "sourcePush": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot7b-20261110/.sites-checkout",
+    "commit_sha": "4cea66731c0809f08288ea6f7287ef3dd7a392bd",
+    "archive": "/workspace/sites/sra-lot7b-20261110/lot7b-documentation-closure.tar"
+  },
+  "documentationIntegrity": {
+    "schema": "logos-engine.lot7b-documentation-closure-integrity.v1",
+    "status": "passed",
+    "recordedAt": "2026-11-11T00:01:30.768597+00:00",
+    "nativePublicationSiteVersion": 88,
+    "nativePublicationCommit": "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7",
+    "documentationCommit": "4cea66731c0809f08288ea6f7287ef3dd7a392bd",
+    "documentationTree": "b97824371ca28dc587248e0550e7b03a240aea90",
+    "changedPaths": [
+      "README.md",
+      "docs/migration/lot7b-evidence/README.md",
+      "docs/migration/lot7b-evidence/publication/archive-representations.json",
+      "docs/migration/lot7b-evidence/publication/documentation-closure-plan.json",
+      "docs/migration/lot7b-evidence/publication/native-publication.json",
+      "docs/migration/lot7b-evidence/publication/post-publication-input-integrity.json",
+      "docs/migration/lot7b-evidence/publication/source-archive-equality.json",
+      "docs/migration/lot7b-evidence/publication/source-push-1.txt",
+      "docs/migration/lot7b-evidence/publication/source-push-2.txt",
+      "docs/migration/lot7b-evidence/publication/source-push-3.txt",
+      "docs/migration/lot7b-evidence/publication/source-push-4.txt",
+      "docs/migration/lot7b-evidence/publication/source-push-5.txt",
+      "docs/migration/lot7b-evidence/publication/source-push-plan.json",
+      "docs/migration/lot7b-evidence/publication/source-transport.json",
+      "docs/migration/lot7b-symbol-transactions-lineage.md",
+      "docs/migration/lot7b-symbol-transactions.md",
+      "docs/migration/v6-delivery-roadmap.md"
+    ],
+    "changedPathsCount": 17,
+    "documentationOnly": true,
+    "nativeTestsScriptsFixturesBuildUnchanged": true,
+    "worktreeClean": true,
+    "localArchive": {
+      "path": "/workspace/sites/sra-lot7b-20261110/lot7b-documentation-closure.tar",
+      "bytes": 14802224,
+      "sha256": "488f73747d3027d0a8e6caadd1b1e3b92004c8042929a732090be8dc2346d773",
+      "fileCount": 75,
+      "contentManifestSha256": "895c38134db6c5396e495016a8432f663d6e2350d0959eeb116f31ed5e772cf9"
+    },
+    "archiveFileContentsExactlyEqualToNativePublicationPackage": true,
+    "compiledWorker": {
+      "path": "dist/assets/v6-agent-worker-CyxEvdt1.js",
+      "bytes": 6695320,
+      "sha256": "42cd9d454f39d59657621271faa0cb82fc38eaeeb0353e1d4f0aee2a76111974"
+    },
+    "postPublicationInputIntegrity": "docs/migration/lot7b-evidence/publication/post-publication-input-integrity.json",
+    "testsOrMeasurementsRepeated": false
+  },
+  "sameServerArchiveAsNativePublication": true,
+  "serverArchiveHash": "sha256:edabfe0902bbbe8457cfaa6cef49877c1b0c9400e6f945f053971d69bc7232a8",
+  "serverArchiveBytes": 29859840,
+  "serverArchiveFileCount": 75,
+  "compiledWorker": {
+    "path": "dist/assets/v6-agent-worker-CyxEvdt1.js",
+    "bytes": 6695320,
+    "sha256": "42cd9d454f39d59657621271faa0cb82fc38eaeeb0353e1d4f0aee2a76111974"
+  },
+  "validation": {
+    "formalTests": 4327,
+    "formalTestFiles": 112,
+    "officialChecks": 5,
+    "strictRegressions": 8,
+    "strictRegressionChecks": 136,
+    "crafLevels": 3,
+    "crafActions": 36,
+    "originalCalls": 144,
+    "originalExactChecks": 432,
+    "restoredSelectedPrefixes": 36,
+    "restorationChecks": 252,
+    "partialLkeyQualificationChecks": 157
+  },
+  "cost": {
+    "status": "accepted_under_predeclared_owner_cost_rule",
+    "games": 2,
+    "passedChecks": 3927,
+    "measuredSessions": 32,
+    "measuredActions": 400,
+    "warmupsExcluded": 8,
+    "warmupActionsExcluded": 24,
+    "stckMedianDeltaPct": -2.227459469201371,
+    "smlpMedianDeltaPct": 0.7243944151620776
+  },
+  "limits": {
+    "lkeyLevels": 2,
+    "lkeyActions": 25,
+    "lkeyStop": "frontier_unknown at level 3",
+    "activeCrafSymbolsCostMeasured": false,
+    "completeOriginalCallerParity": false,
+    "sourceEntriesConnected": 59,
+    "sourceEntriesTotal": 76,
+    "sourceEntriesRemaining": 17,
+    "cohortPhaseDiagnostics": [
+      "15/16",
+      "15/16"
+    ],
+    "pooledPhaseDiagnostics": "16/16",
+    "adverseP95Retained": true
+  },
+  "caseClocks": {
+    "CRAF": {
+      "usedSeconds": 1646.100543,
+      "remainingSeconds": 753.899457,
+      "reset": false
+    },
+    "LKEY": {
+      "usedSeconds": 1341.622741991,
+      "remainingSeconds": 1058.377258009,
+      "reset": false
+    }
+  },
+  "evidence": {
+    "nativeReceipt": "/workspace/sites/sra-lot7b-20261110/.sites-checkout/docs/migration/lot7b-evidence/publication/native-publication.json",
+    "documentationIntegrity": "/workspace/sites/sra-lot7b-20261110/lot7b-documentation-closure-integrity.json",
+    "roadmap": "/workspace/sites/sra-lot7b-20261110/.sites-checkout/docs/migration/v6-delivery-roadmap.md",
+    "costReport": "/workspace/sites/sra-lot7b-20261110/.sites-checkout/docs/migration/lot7b-evidence/performance-integrated/results.md"
+  },
+  "publicationLock": {
+    "status": "released",
+    "releasedAt": "2026-11-11T00:02:46.021115+00:00",
+    "holderSessionExitCode": 0,
+    "heldThroughNativeAndDocumentationTerminalPublications": true
+  },
+  "coordinationComplete": true
+}

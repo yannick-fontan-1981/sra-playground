@@ -1,0 +1,45 @@
+{
+  "schema": "logos-engine.lot7b-prepared-history-preservation.v1",
+  "recordedAt": "2026-11-10T22:13:07.106458+00:00",
+  "status": "verified_relative_bundle_and_preserved_local_branch",
+  "preparedMergeCommit": "2c2da44f960fa01557b2d9e1fe01a62f068eb079",
+  "prerequisiteParents": [
+    "20f6a9fc3506ce5e2862fa72cbf37fcb452ba486",
+    "33d91ef1b8a6343c554b5c18beacd051816e11b9"
+  ],
+  "bundle": {
+    "path": "docs/migration/lot7b-evidence/coordination/prepared-5a-merge.bundle",
+    "sha256": "19017f07adfb1b7964942bfdd99d7efd9b50e96ddef63470a7148d7ec5590d64",
+    "bytes": 21559
+  },
+  "bundleVerified": true,
+  "verificationOutput": "/workspace/sites/sra-lot7b-20261110/lot7b-prepared-5a-merge.bundle is okay\nThe bundle contains this ref:\n2c2da44f960fa01557b2d9e1fe01a62f068eb079 refs/heads/lot7b-symbol-transactions\nThe bundle requires these 2 refs:\n33d91ef1b8a6343c554b5c18beacd051816e11b9 \n20f6a9fc3506ce5e2862fa72cbf37fcb452ba486 \nThe bundle uses this hash algorithm: sha1\n",
+  "listedHeads": "2c2da44f960fa01557b2d9e1fe01a62f068eb079 refs/heads/lot7b-symbol-transactions",
+  "preservedBranch": "lot7b-symbol-transactions",
+  "deliveryBranch": "lot7b-symbol-transactions-delivery",
+  "deliveryRestartCommit": "20f6a9fc3506ce5e2862fa72cbf37fcb452ba486",
+  "retainedPreparatoryReceipts": [
+    {
+      "path": "docs/migration/lot7b-evidence/coordination/prepared-5a-integration.json",
+      "sha256": "7c286a4ec221bc0c374c1bb9f2fe6e29d81df16f3511b6917b378d70e5d4eea1",
+      "bytes": 36279
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/diagnostic/prepared-5a-entry-audit.json",
+      "sha256": "c48b34a63e3a8471d2051902b6abcc49311fe6f07bf169fe0f63d3ac40ed021b",
+      "bytes": 293
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/diagnostic/prepared-5a-migration-audit.json",
+      "sha256": "2f68e55698d329ce36e9e0daba779cdf4b72214ae731a46bbeae7aa12c3266cc",
+      "bytes": 338
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/diagnostic/prepared-5a-typecheck.log.gz",
+      "sha256": "0d2cbbee31ca5839df68f3a5ae10b6102ed35a65bd129facd4509c36a18a564d",
+      "bytes": 141
+    }
+  ],
+  "reason": "The prepared5A ancestor33d91ef contains blobc8daeba7547de0e3f7ded9be7cd7594932fa9b59 of39,817,093bytes, rejected by the source repository individual32MiB limit. The provisional merge must not become a direct ancestor of the new delivery branch.",
+  "qualification": "The complete provisional merge remains on its local branch and in this verified incremental bundle. Restore its two prerequisite parents first:20f6a9f is normal7B source history;33d91ef must come from5A preserved original-history bundle. No published ref was changed or force-pushed. Actual corrected5A and4B publication binding and the final7B freeze remain pending."
+}

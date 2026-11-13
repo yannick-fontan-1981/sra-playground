@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.lot8a.current-publication-observation.v1",
+  "observedAt": "2026-11-11T22:03:41.620Z",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "latestVersionNumber": 103,
+  "status": "active",
+  "currentLiveUrl": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "accessMode": "custom",
+  "accessPolicyRevision": 3,
+  "ownerOnly": true,
+  "externalVisitorCount": 0,
+  "source": "sites_get_site",
+  "actualPublishedPredecessor": {
+    "version": 103,
+    "nativeVersion": "0.62.0",
+    "commit": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+    "sourceEvidence": "docs/migration/lot8a-evidence/coordination/published10b-site103.json"
+  },
+  "qualification": "Fresh Sites metadata still reports103. Exact source/deployment identity comes from the separately retained actual103 observation. No0.63/0.64/0.65 publication is inferred.",
+  "sitePublicationPerformed": false
+}

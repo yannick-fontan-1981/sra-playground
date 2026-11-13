@@ -1,0 +1,15 @@
+{
+  "schema": "logos-engine.browser-interaction-diagnostics.v1",
+  "recordedAt": "2026-11-11T02:03:04.907840+00:00",
+  "attempts": [
+    {
+      "kind": "runtime_reset_before_initialization",
+      "message": "Initial CUA invocation was not executed; reinitialized the same documented browser entry point."
+    },
+    {
+      "kind": "pause_click_deadline",
+      "message": "First run had already completed level1, leaving Pause disabled. The failed click is retained in observed states. A later run was actually paused at2actions, followed by one acquired action."
+    }
+  ],
+  "excludedFromCaseClock": false
+}

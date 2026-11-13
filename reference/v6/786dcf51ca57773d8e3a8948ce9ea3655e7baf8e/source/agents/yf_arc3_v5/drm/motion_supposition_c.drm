@@ -1,0 +1,625 @@
+{
+  "module_id": "motion_supposition_c",
+  "declarations": [
+    {
+      "id": "policy.autonomous_intervention_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_independent_motion_premises"
+      ],
+      "applicability": [
+        "revisable_motion_or_support_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_native_law",
+        "overlay_control_not_beneficiary_control",
+        "actual_contact_not_hostility_by_appearance",
+        "life_marks_not_action_quota",
+        "whole_context_not_shape_only",
+        "hidden_pose_not_observed",
+        "trajectory_geometry_not_flight_physics",
+        "aperture_not_target_by_resemblance",
+        "highlight_not_completed_transport",
+        "all_examples_and_unknowns_retained"
+      ],
+      "falsifiers": [
+        "foreign_scope_or_role",
+        "missing_actual_phase_observation",
+        "unqualified_identity_or_basis",
+        "incomplete_inventory",
+        "work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "autonomous_intervention.retain_indirect_terrain_intervention_question",
+        "autonomous_intervention.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.autonomous_intervention_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "autonomous_intervention.retain_indirect_terrain_intervention_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "overlay_beneficiary_destination_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "autonomous_intervention.retain_indirect_terrain_intervention_question"
+          }
+        },
+        {
+          "id": "projection.policy.autonomous_intervention_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "autonomous_intervention.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "autonomous_intervention.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.autonomous_intervention_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "autonomous_intervention.retain_indirect_terrain_intervention_question"
+            }
+          ],
+          "reason_ref": "reason.retain_indirect_terrain_intervention_question"
+        },
+        {
+          "id": "tier.policy.autonomous_intervention_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "autonomous_intervention.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_indirect_terrain_intervention_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.motion_question_not_execution_or_goal_selection",
+      "reason_refs": [
+        "reason.retain_indirect_terrain_intervention_question"
+      ]
+    },
+    {
+      "id": "policy.kit_survival_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_independent_motion_premises"
+      ],
+      "applicability": [
+        "revisable_motion_or_support_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_native_law",
+        "overlay_control_not_beneficiary_control",
+        "actual_contact_not_hostility_by_appearance",
+        "life_marks_not_action_quota",
+        "whole_context_not_shape_only",
+        "hidden_pose_not_observed",
+        "trajectory_geometry_not_flight_physics",
+        "aperture_not_target_by_resemblance",
+        "highlight_not_completed_transport",
+        "all_examples_and_unknowns_retained"
+      ],
+      "falsifiers": [
+        "foreign_scope_or_role",
+        "missing_actual_phase_observation",
+        "unqualified_identity_or_basis",
+        "incomplete_inventory",
+        "work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "kit_survival.retain_finite_survival_and_actor_relations_question",
+        "kit_survival.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.kit_survival_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "kit_survival.retain_finite_survival_and_actor_relations_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "finite_survival_question_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "kit_survival.retain_finite_survival_and_actor_relations_question"
+          }
+        },
+        {
+          "id": "projection.policy.kit_survival_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "kit_survival.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "kit_survival.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.kit_survival_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "kit_survival.retain_finite_survival_and_actor_relations_question"
+            }
+          ],
+          "reason_ref": "reason.retain_finite_survival_and_actor_relations_question"
+        },
+        {
+          "id": "tier.policy.kit_survival_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "kit_survival.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_finite_survival_and_actor_relations_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.motion_question_not_execution_or_goal_selection",
+      "reason_refs": [
+        "reason.retain_finite_survival_and_actor_relations_question"
+      ]
+    },
+    {
+      "id": "policy.hidden_reception_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_independent_motion_premises"
+      ],
+      "applicability": [
+        "revisable_motion_or_support_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_native_law",
+        "overlay_control_not_beneficiary_control",
+        "actual_contact_not_hostility_by_appearance",
+        "life_marks_not_action_quota",
+        "whole_context_not_shape_only",
+        "hidden_pose_not_observed",
+        "trajectory_geometry_not_flight_physics",
+        "aperture_not_target_by_resemblance",
+        "highlight_not_completed_transport",
+        "all_examples_and_unknowns_retained"
+      ],
+      "falsifiers": [
+        "foreign_scope_or_role",
+        "missing_actual_phase_observation",
+        "unqualified_identity_or_basis",
+        "incomplete_inventory",
+        "work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "hidden_reception.retain_contextual_hidden_reception_question",
+        "hidden_reception.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.hidden_reception_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "hidden_reception.retain_contextual_hidden_reception_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "contextual_reception_question_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "hidden_reception.retain_contextual_hidden_reception_question"
+          }
+        },
+        {
+          "id": "projection.policy.hidden_reception_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "hidden_reception.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "hidden_reception.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.hidden_reception_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "hidden_reception.retain_contextual_hidden_reception_question"
+            }
+          ],
+          "reason_ref": "reason.retain_contextual_hidden_reception_question"
+        },
+        {
+          "id": "tier.policy.hidden_reception_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "hidden_reception.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_contextual_hidden_reception_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.motion_question_not_execution_or_goal_selection",
+      "reason_refs": [
+        "reason.retain_contextual_hidden_reception_question"
+      ]
+    },
+    {
+      "id": "policy.ballistic_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_independent_motion_premises"
+      ],
+      "applicability": [
+        "revisable_motion_or_support_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_native_law",
+        "overlay_control_not_beneficiary_control",
+        "actual_contact_not_hostility_by_appearance",
+        "life_marks_not_action_quota",
+        "whole_context_not_shape_only",
+        "hidden_pose_not_observed",
+        "trajectory_geometry_not_flight_physics",
+        "aperture_not_target_by_resemblance",
+        "highlight_not_completed_transport",
+        "all_examples_and_unknowns_retained"
+      ],
+      "falsifiers": [
+        "foreign_scope_or_role",
+        "missing_actual_phase_observation",
+        "unqualified_identity_or_basis",
+        "incomplete_inventory",
+        "work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "ballistic.retain_aimed_flight_and_aperture_transport_question",
+        "ballistic.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.ballistic_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "ballistic.retain_aimed_flight_and_aperture_transport_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "aimed_flight_question_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "ballistic.retain_aimed_flight_and_aperture_transport_question"
+          }
+        },
+        {
+          "id": "projection.policy.ballistic_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "ballistic.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "ballistic.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.ballistic_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "ballistic.retain_aimed_flight_and_aperture_transport_question"
+            }
+          ],
+          "reason_ref": "reason.retain_aimed_flight_and_aperture_transport_question"
+        },
+        {
+          "id": "tier.policy.ballistic_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "ballistic.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_aimed_flight_and_aperture_transport_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.motion_question_not_execution_or_goal_selection",
+      "reason_refs": [
+        "reason.retain_aimed_flight_and_aperture_transport_question"
+      ]
+    },
+    {
+      "id": "policy.ordered_transfer_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_independent_motion_premises"
+      ],
+      "applicability": [
+        "revisable_motion_or_support_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_native_law",
+        "overlay_control_not_beneficiary_control",
+        "actual_contact_not_hostility_by_appearance",
+        "life_marks_not_action_quota",
+        "whole_context_not_shape_only",
+        "hidden_pose_not_observed",
+        "trajectory_geometry_not_flight_physics",
+        "aperture_not_target_by_resemblance",
+        "highlight_not_completed_transport",
+        "all_examples_and_unknowns_retained"
+      ],
+      "falsifiers": [
+        "foreign_scope_or_role",
+        "missing_actual_phase_observation",
+        "unqualified_identity_or_basis",
+        "incomplete_inventory",
+        "work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "ordered_transfer.retain_ordered_family_and_ghost_support_question",
+        "ordered_transfer.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.ordered_transfer_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "ordered_transfer.retain_ordered_family_and_ghost_support_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "ordered_family_ghost_question_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "ordered_transfer.retain_ordered_family_and_ghost_support_question"
+          }
+        },
+        {
+          "id": "projection.policy.ordered_transfer_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "ordered_transfer.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "ordered_transfer.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.ordered_transfer_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "ordered_transfer.retain_ordered_family_and_ghost_support_question"
+            }
+          ],
+          "reason_ref": "reason.retain_ordered_family_and_ghost_support_question"
+        },
+        {
+          "id": "tier.policy.ordered_transfer_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "ordered_transfer.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_ordered_family_and_ghost_support_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.motion_question_not_execution_or_goal_selection",
+      "reason_refs": [
+        "reason.retain_ordered_family_and_ghost_support_question"
+      ]
+    }
+  ]
+}

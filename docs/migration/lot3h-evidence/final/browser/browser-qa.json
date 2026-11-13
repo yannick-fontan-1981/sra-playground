@@ -1,0 +1,76 @@
+{
+  "schema": "logos-engine.browser-qa.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T13:32:44.247111-03:00",
+  "displayTimeZone": "UTC-03:00",
+  "nativeVersion": "0.49.0",
+  "nativeSourceDigest": "d6cb9abdf48a9062936d4647dbd809dc4cee1d1528f85e973fda83c7af8e6054",
+  "game": "WEAV",
+  "preview": "Managed Sites preview of the frozen build at http://127.0.0.1:4173/",
+  "continuousColdSession": true,
+  "manualGameActions": 0,
+  "levelJumps": 0,
+  "checks": [
+    {
+      "stage": "paused_after_initial_action",
+      "status": "Paused.",
+      "actions": 1,
+      "levelsCompleted": 0,
+      "plans": 1,
+      "currentLevel": 1
+    },
+    {
+      "stage": "one_action_completed",
+      "status": "One action completed.",
+      "actions": 2,
+      "levelsCompleted": 0,
+      "plans": 2,
+      "currentLevel": 1
+    },
+    {
+      "stage": "first_level_completed",
+      "status": "Level completed.",
+      "actions": 27,
+      "levelsCompleted": 1,
+      "plans": 27,
+      "currentLevel": 2
+    },
+    {
+      "stage": "second_level_completed",
+      "status": "Level completed.",
+      "actions": 54,
+      "levelsCompleted": 2,
+      "plans": 54,
+      "currentLevel": 3
+    },
+    {
+      "stage": "third_level_completed",
+      "status": "Level completed.",
+      "actions": 81,
+      "levelsCompleted": 3,
+      "plans": 81,
+      "currentLevel": 4
+    }
+  ],
+  "final": {
+    "stage": "third_level_completed",
+    "status": "Level completed.",
+    "actions": 81,
+    "levelsCompleted": 3,
+    "plans": 81,
+    "currentLevel": 4
+  },
+  "artifacts": [
+    {
+      "path": "docs/migration/lot3h-evidence/final/browser/weav-native049-browser-ax.json",
+      "bytes": 58032,
+      "sha256": "3344e8a15dc4a82aeb5e04499aa5bbc2c2ed112123cd2380715aa87b0c5c6041"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/browser/weav-native049-browser.png",
+      "bytes": 81097,
+      "sha256": "c00d19a6c09e057c18d74abba205cb0ce962d422d8ab654c4f5bab46a4cf06ec"
+    }
+  ],
+  "qualification": "AX snapshots establish Pause, single action, resumption and natural level progression in one cold session. After the final 81/3/81 snapshot, clicking the PLAYGROUND anchor to frame the screenshot returned the UI to its manual panel at the already reached level4. The saved screenshot shows that level4 board; the preceding unmodified AX snapshot is the evidence of agent counts. No manual game action, level selection, new reasoning session or replay was used to create these results. Preview was then stopped."
+}

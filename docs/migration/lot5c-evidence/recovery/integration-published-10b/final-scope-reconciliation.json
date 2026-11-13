@@ -1,0 +1,493 @@
+{
+  "schema": "logos-engine.lot5c.actual-published-final-scope-reconciliation.v1",
+  "recordedAt": "2026-11-11T17:06:46.847456+00:00",
+  "startedAt": "2026-11-11T17:04:03.916738+00:00",
+  "status": "scope_reconciled_actual_published_102_pending_candidate_freeze",
+  "scopeValidAgainstPublishedDeclarations": true,
+  "candidateFreezeBound": false,
+  "executedTests": false,
+  "executedReplays": false,
+  "qualification": "Read-only reconciliation of small exact declarations and their frozen-archive pins against a clean checkout of actual published Site 102. One new reconciliation JSON is written. This does not freeze or validate the composed 5C candidate, execute a suite or replay, or infer publication or cost acceptance for 5C. The historical prospective plan remains unchanged.",
+  "actualPublishedPredecessor": {
+    "siteVersion": 102,
+    "nativeVersion": "0.62.0",
+    "sourceCommit": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464",
+    "checkout": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout",
+    "checkoutCleanBeforeAndAfter": true,
+    "nativeFileCount": 310,
+    "nativeDigest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+    "providerReceipt": {
+      "checkout": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+      "path": "docs/migration/lot5c-evidence/recovery/integration-published-10b/site102-publication-readback.json",
+      "bytes": 1389,
+      "sha256": "4fe34cd930c422a4037bbdf6aef77b42a305167cf44059954bef5f20408822a8"
+    },
+    "nativeSourceObservation": {
+      "checkout": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+      "path": "docs/migration/lot5c-evidence/recovery/integration-published-10b/site102-native-source-observation.json",
+      "bytes": 2153,
+      "sha256": "a2b0fe6ec34d90d2d366a54c6b2a519c0065753551ea596a686998f4d28b0a3f"
+    },
+    "nativeManifest": {
+      "checkout": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout",
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json",
+      "bytes": 36806,
+      "sha256": "846e38686406140e8f0c975836faadf646e4c20b0bcbc833fe4e228912535e93"
+    },
+    "frozenArchiveManifest": {
+      "checkout": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout",
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-archive.json",
+      "bytes": 92042,
+      "sha256": "2311a3818e65f99874345f37889a81e740003a33c08c86b3deaa3d0c9dd10d4a"
+    }
+  },
+  "documentarySuccessorContext": {
+    "siteVersion": 103,
+    "sourceCommit": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+    "qualification": "Provider verification was supplied by the parent. This scope comparison uses the exact native Site 102 checkout; documentary source integration and candidate freeze binding remain parent responsibilities."
+  },
+  "historicalProspectivePlan": {
+    "checkout": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+    "path": "docs/migration/lot5c-evidence/recovery/planning/prospective-final-scope-site101.json",
+    "bytes": 20093,
+    "sha256": "1c161ba4b683f12163ce57ea587f6328f175eb11b19a95ee8fb444793ebf5e21"
+  },
+  "declarationSources": [
+    {
+      "checkout": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/initial-test-scope-plan-02.json",
+      "bytes": 7867,
+      "sha256": "55543c1ae5681b5e8e25de00e100f690d4013c4ef40e7a0a115b3023d35bd676"
+    },
+    {
+      "checkout": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout",
+      "path": "docs/migration/lot7b-evidence/followup-recovery/contract/test-scope-final.json",
+      "bytes": 24017,
+      "sha256": "edfd5f06e5c07271e5a480977a0f23dee07fc05be1d98e96187d71fd69b768c4"
+    },
+    {
+      "checkout": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout",
+      "path": "docs/migration/lot10b-evidence/validation-test-scope.json",
+      "bytes": 3216,
+      "sha256": "05e437fe756016aa5c816ab644cdd595c9464bc7c8866c46adab09e9ca98a471"
+    },
+    {
+      "checkout": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout",
+      "path": "docs/migration/lot10b-evidence/integrated-extra-test-scope.json",
+      "bytes": 1135,
+      "sha256": "67349b4b8190901fee44202a427d9a8e0350cc96c270263c141273c3e87ee144"
+    },
+    {
+      "checkout": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout",
+      "path": "docs/migration/lot7b-evidence/followup-recovery/contract/regression-cases-final.json",
+      "bytes": 9035,
+      "sha256": "612786e95a3cd6c98c7a0ccd4bd5e616ff5b54d1de18f7962aae79d50faf4f36"
+    },
+    {
+      "checkout": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout",
+      "path": "docs/migration/lot10b-evidence/recorded-regression-cases.json",
+      "bytes": 8305,
+      "sha256": "a16f67724f53def79fe476716c12a61e8064df871911772731983fa2505da3a9"
+    }
+  ],
+  "publishedArchivePinChecks": [
+    {
+      "path": "docs/migration/lot10b-evidence/validation-test-scope.json",
+      "declaredSha256": "05e437fe756016aa5c816ab644cdd595c9464bc7c8866c46adab09e9ca98a471",
+      "actualSha256": "05e437fe756016aa5c816ab644cdd595c9464bc7c8866c46adab09e9ca98a471",
+      "matched": true
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/integrated-extra-test-scope.json",
+      "declaredSha256": "67349b4b8190901fee44202a427d9a8e0350cc96c270263c141273c3e87ee144",
+      "actualSha256": "67349b4b8190901fee44202a427d9a8e0350cc96c270263c141273c3e87ee144",
+      "matched": true
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recorded-regression-cases.json",
+      "declaredSha256": "a16f67724f53def79fe476716c12a61e8064df871911772731983fa2505da3a9",
+      "actualSha256": "a16f67724f53def79fe476716c12a61e8064df871911772731983fa2505da3a9",
+      "matched": true
+    }
+  ],
+  "actualDifferences": {
+    "prepared10bSourceCommit": "9ef8eec3d899bfb12b9f0b5cbc42e83b6820b991",
+    "actualPublished10bSourceCommit": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464",
+    "sourceCommitChangedAsExpected": true,
+    "nativeDigestChanged": false,
+    "declarationByteChanges": [],
+    "testFilesAddedToProspective": [],
+    "testFilesRemovedFromProspective": [],
+    "testOrderingChanged": false,
+    "sharedRecordedReplayRowsChanged": [],
+    "inheritedElevenReplayRowsChanged": false,
+    "qualification": "The publication commit identity is now actual. Native digest, admitted declaration bytes, test membership and the eleven inherited replay rows remain equal to the prospective inputs."
+  },
+  "testScope": {
+    "status": "membership_valid_pending_final_candidate_freeze",
+    "inheritedSafe5cFiles": 125,
+    "publishedInherited7Files": 133,
+    "existingUnionFiles": 136,
+    "actualPublished10bAffectedFiles": 31,
+    "actualPublished10bExtraFiles": 13,
+    "actualPublished10bScopeFiles": 44,
+    "testFileCount": 138,
+    "testFiles": [
+      "tests/bounded-weak-cache.test.ts",
+      "tests/canonical-cache.test.ts",
+      "tests/kernel-batch.test.ts",
+      "tests/v5-finite-relation-domain.test.ts",
+      "tests/v5-piercing-native.test.ts",
+      "tests/v5-reception-wait-contracts.test.ts",
+      "tests/v5-reference-population-calculus.test.ts",
+      "tests/v5-temporal-fragment-match.test.ts",
+      "tests/v6-acquired-continuation-priority.test.ts",
+      "tests/v6-addressed-material-kernel.test.ts",
+      "tests/v6-addressed-material-reference.test.ts",
+      "tests/v6-addressed-material.test.ts",
+      "tests/v6-agent.test.ts",
+      "tests/v6-alternating-graph-access.test.ts",
+      "tests/v6-alternating-graph-integration.test.ts",
+      "tests/v6-animated-contact.test.ts",
+      "tests/v6-auxiliary-support.test.ts",
+      "tests/v6-axial-question-kernel.test.ts",
+      "tests/v6-axial-question-reference.test.ts",
+      "tests/v6-caller-integration.test.ts",
+      "tests/v6-cell-placement-integration.test.ts",
+      "tests/v6-cell-placement.test.ts",
+      "tests/v6-configured-arrivals.test.ts",
+      "tests/v6-control-attention-reference.test.ts",
+      "tests/v6-coupled-pair-planning.test.ts",
+      "tests/v6-crossed-prefix-access.test.ts",
+      "tests/v6-crossed-prefix-integration.test.ts",
+      "tests/v6-crossed-prefix-observation.test.ts",
+      "tests/v6-drm-projector.test.ts",
+      "tests/v6-exposed-current-evidence.test.ts",
+      "tests/v6-exposed-reception-integration.test.ts",
+      "tests/v6-exposed-reception-observation.test.ts",
+      "tests/v6-exposed-reception.test.ts",
+      "tests/v6-facet-examples-foreign-acquisition.test.ts",
+      "tests/v6-facet-examples-integration.test.ts",
+      "tests/v6-facet-examples.test.ts",
+      "tests/v6-feedback-sequences-integration.test.ts",
+      "tests/v6-feedback-sequences-reference.test.ts",
+      "tests/v6-field-stock.test.ts",
+      "tests/v6-framed-transfer-kernel.test.ts",
+      "tests/v6-framed-window-access.test.ts",
+      "tests/v6-framed-window-integration.test.ts",
+      "tests/v6-framed-window-observation.test.ts",
+      "tests/v6-frontier-native-snapshot.test.ts",
+      "tests/v6-goal-attention.test.ts",
+      "tests/v6-incremental-memory.test.ts",
+      "tests/v6-interface-families.test.ts",
+      "tests/v6-inventory-copy-cost.test.ts",
+      "tests/v6-inventory-family-reference.test.ts",
+      "tests/v6-inventory-kernel.test.ts",
+      "tests/v6-inventory-restoration-cache.test.ts",
+      "tests/v6-knowledge-store.test.ts",
+      "tests/v6-learned-preparation-priority.test.ts",
+      "tests/v6-linked-temporal-preparation.test.ts",
+      "tests/v6-linked-temporal-reference.test.ts",
+      "tests/v6-material-recovery-priority.test.ts",
+      "tests/v6-motion-caller-integration.test.ts",
+      "tests/v6-motion-contrast.test.ts",
+      "tests/v6-native-authority.test.ts",
+      "tests/v6-native-caller.test.ts",
+      "tests/v6-native-checkpoint-integration.test.ts",
+      "tests/v6-native-copy.test.ts",
+      "tests/v6-native-family-registration.test.ts",
+      "tests/v6-native-hydration-cache.test.ts",
+      "tests/v6-native-interface-families.test.ts",
+      "tests/v6-native-mixed-path.test.ts",
+      "tests/v6-native-observer.test.ts",
+      "tests/v6-native-persistence.test.ts",
+      "tests/v6-native-runtime.test.ts",
+      "tests/v6-native-snapshot-identity.test.ts",
+      "tests/v6-native-state-graph.test.ts",
+      "tests/v6-native-transition-domain-integration.test.ts",
+      "tests/v6-native-transition-domain.test.ts",
+      "tests/v6-native-working-witness.test.ts",
+      "tests/v6-object-binding-common.test.ts",
+      "tests/v6-observed-binding-reference.test.ts",
+      "tests/v6-observed-binding.test.ts",
+      "tests/v6-occluded-catalogue-kernel.test.ts",
+      "tests/v6-occluded-catalogue-reference.test.ts",
+      "tests/v6-ordered-reaction-kernel.test.ts",
+      "tests/v6-outline-arbitration.test.ts",
+      "tests/v6-outline-kernel.test.ts",
+      "tests/v6-panel-service.test.ts",
+      "tests/v6-periodic-pattern-counts.test.ts",
+      "tests/v6-point-display.test.ts",
+      "tests/v6-point-set.test.ts",
+      "tests/v6-preview-capture.test.ts",
+      "tests/v6-preview-packing-integration.test.ts",
+      "tests/v6-preview-packing-native.test.ts",
+      "tests/v6-preview-packing-reference.test.ts",
+      "tests/v6-program-control-discovery-integration.test.ts",
+      "tests/v6-radial-port-integration.test.ts",
+      "tests/v6-ranked-workshop-grounded-inquiry.test.ts",
+      "tests/v6-reactive-contact-kernel.test.ts",
+      "tests/v6-reception-residual-evidence.test.ts",
+      "tests/v6-reception-service-access.test.ts",
+      "tests/v6-reception-service-integration.test.ts",
+      "tests/v6-reception-service-native-contracts.test.ts",
+      "tests/v6-reception-service-observation.test.ts",
+      "tests/v6-recurrent-series-access.test.ts",
+      "tests/v6-recurrent-series-integration.test.ts",
+      "tests/v6-recurrent-series-native.test.ts",
+      "tests/v6-recurrent-series-observation.test.ts",
+      "tests/v6-reference-population-access.test.ts",
+      "tests/v6-reference-population-integration.test.ts",
+      "tests/v6-reference-population-observation.test.ts",
+      "tests/v6-relational-chamber-integration.test.ts",
+      "tests/v6-relational-chamber.test.ts",
+      "tests/v6-relative-arrangements-integration.test.ts",
+      "tests/v6-relative-arrangements-reference.test.ts",
+      "tests/v6-rooted-line-access.test.ts",
+      "tests/v6-rooted-line-integration.test.ts",
+      "tests/v6-rooted-line-observation.test.ts",
+      "tests/v6-rooted-quota-mark-support.test.ts",
+      "tests/v6-rooted-quota-parity.test.ts",
+      "tests/v6-select-reference.test.ts",
+      "tests/v6-service-snapshot-reuse.test.ts",
+      "tests/v6-shared-series-native.test.ts",
+      "tests/v6-shared-series.test.ts",
+      "tests/v6-source-entry-routing.test.ts",
+      "tests/v6-src-program.test.ts",
+      "tests/v6-stationary-contact-continuation.test.ts",
+      "tests/v6-support-caller-integration.test.ts",
+      "tests/v6-support-extensions.test.ts",
+      "tests/v6-support-navigation.test.ts",
+      "tests/v6-support-procedures.test.ts",
+      "tests/v6-symbol-geometry-reference.test.ts",
+      "tests/v6-symbol-interface-reference.test.ts",
+      "tests/v6-symbol-transactions-reference.test.ts",
+      "tests/v6-topological-recolor-kernel.test.ts",
+      "tests/v6-topological-recolor-reference.test.ts",
+      "tests/v6-typed-material-kernel.test.ts",
+      "tests/v6-visual-sequences.test.ts",
+      "tests/v6-window-question-kernel.test.ts",
+      "tests/v6-window-question-reference.test.ts",
+      "tests/v6-workshop-cold-caller-continuation.test.ts",
+      "tests/v6-workshop-followup-source.test.ts",
+      "tests/v7-kernel.test.ts"
+    ],
+    "addedBeyond136": [
+      "tests/v6-window-question-kernel.test.ts",
+      "tests/v6-window-question-reference.test.ts"
+    ],
+    "excludedWholeModules": [
+      "tests/v6-ranked-workshop-reference.test.ts",
+      "tests/v6-ranked-workshop-kernel.test.ts",
+      "tests/v6-symbol-transactions-kernel.test.ts",
+      "tests/v6-framed-transfer-reference.test.ts"
+    ],
+    "excludedModulesInScope": [],
+    "missingFromCurrentCandidateCheckout": [],
+    "scopeComposition": "Deduplicated union of the retained safe 5C scope, the actual published predecessor inherited 133-file scope, and the actual 31+13-file 10B scope, preserving all four closed LKEY whole-module exclusions."
+  },
+  "recordedReplayScope": {
+    "status": "membership_valid_pending_final_candidate_freeze_and_fresh_execution",
+    "caseCount": 11,
+    "cases": [
+      {
+        "id": "catr-051",
+        "game": "CATR",
+        "baseline": {
+          "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+          "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6"
+        },
+        "trace": {
+          "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+          "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816"
+        }
+      },
+      {
+        "id": "rswp-051",
+        "game": "RSWP",
+        "baseline": {
+          "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+          "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba"
+        },
+        "trace": {
+          "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+          "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755"
+        }
+      },
+      {
+        "id": "fogw-051",
+        "game": "FOGW",
+        "baseline": {
+          "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+          "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c"
+        },
+        "trace": {
+          "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+          "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46"
+        }
+      },
+      {
+        "id": "vois-051",
+        "game": "VOIS",
+        "baseline": {
+          "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+          "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d"
+        },
+        "trace": {
+          "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+          "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d"
+        }
+      },
+      {
+        "id": "conn-050",
+        "game": "CONN",
+        "baseline": {
+          "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+          "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750"
+        },
+        "trace": {
+          "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+          "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102"
+        }
+      },
+      {
+        "id": "mind-051",
+        "game": "MIND",
+        "baseline": {
+          "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+          "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a"
+        },
+        "trace": {
+          "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+          "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c"
+        }
+      },
+      {
+        "id": "weav-051",
+        "game": "WEAV",
+        "baseline": {
+          "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+          "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3"
+        },
+        "trace": {
+          "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+          "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2"
+        }
+      },
+      {
+        "id": "tria-development-4b",
+        "game": "TRIA",
+        "baseline": {
+          "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+          "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe"
+        },
+        "trace": {
+          "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+          "sha256": "916d0f1cb1dcbfd9b7ba7624e7d3d4648a91ae7ef64583288af4711d2a955ac3"
+        }
+      },
+      {
+        "id": "craf-055",
+        "game": "CRAF",
+        "baseline": {
+          "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+          "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2"
+        },
+        "trace": {
+          "path": "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+          "sha256": "cf69ad941e80e17f8d6cd66edc0419a0c6ff7aa8d9bbdaf503cb56a49e8c3f98"
+        }
+      },
+      {
+        "id": "isos-development-4c",
+        "game": "ISOS",
+        "baseline": {
+          "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+          "sha256": "93e59ab1146d4eef7c944a0e1fc0ab7b0d539cc90a074abe424742be011eec37"
+        },
+        "trace": {
+          "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-public-trace.json.gz",
+          "sha256": "5b302279efb140d1c549d9650d434efb38fde0b8bc5809ab072de66159c8c329"
+        }
+      },
+      {
+        "id": "kata-060-self-consistency",
+        "game": "KATA",
+        "baseline": {
+          "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz",
+          "sha256": "a3318ed5f7d742f63b5923f3e1e46b0d9cfff1d18e767b45c522d61aa354e455"
+        },
+        "trace": {
+          "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-public-trace.json.gz",
+          "sha256": "c236c95ec0bdcb892a6940940098e4310eb35a6ae11acaf6b74545d09aa22daa"
+        },
+        "comparisonBasis": "fresh_current_native_self_consistency"
+      }
+    ],
+    "expectedChecksPerCase": 17,
+    "expectedComparisonChecks": 187,
+    "strictComparator": {
+      "path": "scripts/compare-v54-regressions.py",
+      "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+      "bytes": 18166
+    },
+    "strictComparisonCheckNames": [
+      "both runs passed with the same declared game and target",
+      "same production budgets, source reference and opaque game asset provenance",
+      "same complete initial public packet hash and public state",
+      "every archived public packet independently hashes to the v53 baseline",
+      "every archived host-only command equals its prior baseline command",
+      "same commands, complete returned packet hashes, animation lengths and primitive boundaries",
+      "same selected family/group/kind/subquestion, acquired prefix lengths and retained solver scalars",
+      "same retained coordination source/preferred entries and current guard scope",
+      "same historical epoch anchors with session namespace normalized",
+      "same inherited source-series event counts on every sealed prefix",
+      "same common request outcomes and retained caller acquisition counters",
+      "same natural level boundaries and retained-session caller counters",
+      "same final public result and retained-session operation counts",
+      "same retained mechanical-domain assessments",
+      "both source runs remained unchanged and imported no Python agent module",
+      "current replay used the declared complete frozen native source",
+      "current replay identifies the exact host-only baseline and public trace"
+    ],
+    "actualPublished10bCaseCount": 10,
+    "tenSharedRowsExactlyEqual": true,
+    "qualification": "Ten historical rows retain exact baseline and public-trace pins; none is rebased to a newer replay output. KATA remains the eleventh inherited row with its original 0.60 fresh-current-native-self-consistency provenance label, serving as a fixed inherited baseline for 5C. This does not claim that the 10B ten-case fresh campaign included KATA or that a new self-comparison or live contribution was performed. The 187 checks are planned checks, not executed successes.",
+    "hpdlIncluded": false,
+    "noNewLiveGame": true
+  },
+  "hpdlQualification": {
+    "actualPublishedReview": {
+      "checkout": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout",
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-final-review-01/hpdl-case-budget-review.json",
+      "bytes": 123296,
+      "sha256": "586e22919bfaadfae5f22440284110537d75b691dfa668cacc7890d2bf009ba3"
+    },
+    "decision": "partial",
+    "targetLevels": 6,
+    "observedCompletedLevels": 3,
+    "sealedActions": 38,
+    "sealedPrefixes": 38,
+    "actualPublicActionReturns": 39,
+    "completeCampaign": false,
+    "lastPublicReturnAcquisitionReconstructed": false,
+    "originalComponentComparisonPassed": true,
+    "fullCallerParity": false,
+    "qualification": "HPDL remains a qualified partial live/source proof, absent from the actual published recorded-regression declaration. Preserve 38 sealed prefixes separately from 39 actual public action returns, with the final return explicitly unacquired in this proof. No terminal campaign, six-level success, completed recorded regression or new acquisition is invented.",
+    "conditionsBeforeAnyFutureReplayAddition": [
+      "Reconcile actual published 0.62 source identity and the exact retained declarations and evidence.",
+      "Require an explicit source-bound recorded replay row with exact baseline, complete initial public packet, commands, returns, animation boundaries and trace hashes, plus declared comparator criteria.",
+      "Keep the 38 sealed acquisitions distinct from the 39th complete public return. Do not invent an acquisition, terminal campaign, sixth-level success or completion by trimming the evidence.",
+      "A deliberately partial replay requires its own explicit partial contract and comparison endpoint; it cannot be silently counted as one of the seventeen-check completed historical regressions.",
+      "Retain browser QA and original-component parity as separate proofs; neither automatically declares a recorded regression.",
+      "Do not launch a new live HPDL campaign or reset/refund its closed cumulative clock for this scope preparation."
+    ]
+  },
+  "beforeFreshExecution": [
+    "Bind the resolved composed 5C native source, all actual test files, capture drivers, original-source reviewers and comparator inputs to the final candidate freeze.",
+    "Preserve LOGOS_LOT5C_COMMON_EVIDENCE_DIR under docs/migration/lot5c-evidence/recovery/common/<new-final-directory> for the common Binding suite, then retain its complete fresh seven-test/eight-scenario evidence for the declared independent per-case comparisons.",
+    "Materialize the exact eleven-case execution declaration from these inherited rows without silently adding HPDL or changing historical baseline pins.",
+    "Retain the four closed LKEY modules as whole-module exclusions; do not count them as executed or skipped tests.",
+    "A future admitted source or declaration change requires comparison against this receipt before execution."
+  ]
+}

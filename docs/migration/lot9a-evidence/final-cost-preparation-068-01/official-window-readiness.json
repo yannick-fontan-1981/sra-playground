@@ -1,0 +1,97 @@
+{
+  "schema": "logos-engine.lot9a.official-performance-readiness.v1",
+  "recordedAt": "2026-11-12T15:33:10.165171+00:00",
+  "measurementAuthorized": true,
+  "pendingRequirements": [],
+  "baselineCommit": "8462204043aa368faa7df280d796bb706eb53b38",
+  "candidateCommit": "6f98d0651a6692e9967627ff45ba5b2c7976ac58",
+  "contract": {
+    "role": "candidate",
+    "path": "docs/migration/lot9a-evidence/final-performance-068-01/contract.json",
+    "bytes": 182234,
+    "sha256": "53058883838c3ac9d3c384db528bb687b6ecadf605f514682ecd7f4932776e6b"
+  },
+  "ownWorkClosed": {
+    "allPreparationCommandsTerminal": true,
+    "activeExecutionSessions": [],
+    "activeCommands": [],
+    "activeWorkers": []
+  },
+  "isolation": {
+    "established": true,
+    "basis": "Dedicated owned candidate and published baseline checkouts, exact native and declared input bytes frozen; all own preparation workers and commands terminal; fresh process observation confirms no other work in either owned checkout. The controller acquires the current shared mutex once without blocking, rechecks the inputs and own work, serializes ABBA in one supervised process group and retains namespace observations every 30 seconds.",
+    "scope": "The owned official execution window and the currently shared performance mutex, within the visible execution namespace.",
+    "evidence": [
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/environment-before-declaration.json",
+        "bytes": 1268,
+        "sha256": "9d163662a78f0ced758f3ee8331221757197e34f0f3089958cdb7091fe2c1580"
+      },
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/own-work-closure.json",
+        "bytes": 774,
+        "sha256": "6c81759d80c17385a1642d77b3d00e10b89f63dbb46632a018bced28b467070e"
+      },
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/own-status-before-window.json",
+        "bytes": 4458,
+        "sha256": "ec3f5ce98590ff1f156f6c69f802ad10225d1150a9194bafc57f2eca1c5f0322"
+      },
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/publication-observation.json",
+        "bytes": 1312,
+        "sha256": "d36f509a27fcc86a70330dcc532eba49f9024a2f79a78e0fd4ec28c33db3f4ac"
+      },
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/contract-independent-review.json",
+        "bytes": 16590,
+        "sha256": "03af28e0994c1ac63e17077c60485b41efa8f223037af8142f9cd914feb3044d"
+      },
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/coordination-independent-review.json",
+        "bytes": 10559,
+        "sha256": "95f66a703038463efa64699ce8815ae099f31a7e08e30fbc95d52bd7b1d9d849"
+      }
+    ],
+    "limitations": [
+      "Ordinary concurrent work in other namespaces or elsewhere on the host is not observable here and is not asserted absent.",
+      "No peer availability or old context acknowledgment is required; the mutex only serializes holders of its current inode and does not suspend ordinary work.",
+      "CPU affinity and load are observed, not allocated as exclusive resources. Periodic controller observations are retained measurement instrumentation.",
+      "session_elapsed covers the native harness through the last acquired return including pauses and resumes; worker startup, begin, terminal inspection, close, live game engine, network and browser rendering are excluded."
+    ],
+    "flockAloneIsEvidence": false
+  },
+  "qualification": {
+    "functionalReview": {
+      "role": "candidate",
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/independent-delivery-review.json",
+      "bytes": 41738,
+      "sha256": "264db5ad57e16beab648d819a732f5c0a1df4cf262559160e79818a8fa59ffcb"
+    },
+    "finalReconciliation": {
+      "role": "candidate",
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/final-reconciliation.json",
+      "bytes": 659,
+      "sha256": "fdc95f05df1b29881d4e8e905584671a9b6a3187353881c5de42dcf559469f9f"
+    },
+    "userGlobalRule": {
+      "authorization": "si le global reste en dessous de 10% d'augmentation alors une phase qui dépasse 10% peut être accepté.",
+      "stage": "session_elapsed",
+      "relativeIncreaseLimit": 0.1,
+      "comparison": "strictly_less_than",
+      "allCasesMustPass": true,
+      "crossCaseCompensation": false,
+      "phaseOverrunsMayBeAccepted": true
+    },
+    "historicalPreparedOnlyEvidenceUnchanged": true,
+    "positiveChartPublicTransportRemainsOpen": true,
+    "historicalFailuresAndSessionBudgetReservationRetained": true,
+    "publicationAccepted": false
+  }
+}

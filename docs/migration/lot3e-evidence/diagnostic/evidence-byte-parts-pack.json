@@ -1,0 +1,46 @@
+{
+  "operation": "pack",
+  "directory": "docs/migration/lot3e-evidence",
+  "partBytes": 900000,
+  "verified": [
+    {
+      "path": "docs/migration/lot3e-evidence/baseline/fogw-bounded-reference/fogw-campaign.json.gz",
+      "sha256": "322330007f26d35cb5ff7113524ce534864649ffbe158e7f43123fc7edaf2db8",
+      "bytes": 3662523,
+      "manifest": "docs/migration/lot3e-evidence/baseline/fogw-bounded-reference/fogw-campaign.json.gz.parts.json",
+      "parts": 5,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-campaign.json.gz",
+      "sha256": "91403b91f4e3821056b46771be13efd7fdb33ea3b0280f62cd9bdcfcf1b30f46",
+      "bytes": 6892577,
+      "manifest": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-campaign.json.gz.parts.json",
+      "parts": 8,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/regressions/catr-045-replay.json.gz",
+      "sha256": "c308f55fafe12b5eccc7cdadfd70887f64811d88b87f2a4738045f0c8bbac282",
+      "bytes": 1372839,
+      "manifest": "docs/migration/lot3e-evidence/final/regressions/catr-045-replay.json.gz.parts.json",
+      "parts": 2,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/regressions/rswp-045-replay.json.gz",
+      "sha256": "15efd1086c7a07f1781eac359f7888daa6b75329630e9b54b08ac1798edd306b",
+      "bytes": 2177678,
+      "manifest": "docs/migration/lot3e-evidence/final/regressions/rswp-045-replay.json.gz.parts.json",
+      "parts": 3,
+      "restored": false
+    }
+  ],
+  "gitignoreEntriesAdded": [
+    "/docs/migration/lot3e-evidence/baseline/fogw-bounded-reference/fogw-campaign.json.gz",
+    "/docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-campaign.json.gz",
+    "/docs/migration/lot3e-evidence/final/regressions/catr-045-replay.json.gz",
+    "/docs/migration/lot3e-evidence/final/regressions/rswp-045-replay.json.gz"
+  ],
+  "qualification": "Exact byte transport only; no agent result is regenerated or reinterpreted."
+}

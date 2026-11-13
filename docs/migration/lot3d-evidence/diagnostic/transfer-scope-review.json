@@ -1,0 +1,49 @@
+{
+  "schema": "logos-engine.lot3d.transfer-scope-review.v1",
+  "mapSha256": "8d2215df0fd77734c9b3fc20c76aa2ef066cd24b6546d45493b5384a31cb489c",
+  "entries": [
+    {
+      "source": "agents/yf_arc3_v6/laya_proto/rooted_line_projection.py",
+      "status": "component_verified",
+      "unique": true,
+      "proofAndTargetPathsPresent": true
+    },
+    {
+      "source": "agents/yf_arc3_v6/laya_proto/rooted_line_mechanics.py",
+      "status": "component_verified",
+      "unique": true,
+      "proofAndTargetPathsPresent": true
+    },
+    {
+      "source": "agents/yf_arc3_v6/laya_proto/rooted_line_access.py",
+      "status": "partial_transfer",
+      "unique": true,
+      "proofAndTargetPathsPresent": true
+    },
+    {
+      "source": "agents/yf_arc3_v6/laya_proto/common_observed_compositions.py",
+      "status": "partial_transfer",
+      "unique": true,
+      "proofAndTargetPathsPresent": true
+    },
+    {
+      "source": "agents/yf_arc3_v5/capabilities/piercing_plan.py",
+      "status": "partial_transfer",
+      "unique": true,
+      "proofAndTargetPathsPresent": true
+    },
+    {
+      "source": "agents/yf_arc3_v5/capabilities/piercing_rooted_order.py",
+      "status": "partial_transfer",
+      "unique": true,
+      "proofAndTargetPathsPresent": true
+    },
+    {
+      "source": "agents/yf_arc3_v5/capabilities/contracts.py",
+      "status": "partial_transfer",
+      "unique": true,
+      "proofAndTargetPathsPresent": true
+    }
+  ],
+  "conclusion": "Conservative own-layer/component and consumed-kernel status; full inherited caller/digest, ReceptionService and ReferencePopulation remain pending. No game success or complete entry claimed."
+}

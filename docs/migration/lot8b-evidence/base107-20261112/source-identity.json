@@ -1,0 +1,30 @@
+{
+  "schema": "logos-engine.lot8b.base107-source-identity.v1",
+  "recordedAt": "2026-11-12T03:31:02.148673+00:00",
+  "publishedSource": "4ff7bf45286a8a19d34401988adca587253ae41e",
+  "reconciledCommit": "c87c132a0353a8c6138ad090495f98698ef7ca6f",
+  "profilesCompared": [
+    "src",
+    "tests",
+    "scripts",
+    "public",
+    "content",
+    "migration",
+    "reference",
+    ".openai",
+    "package.json",
+    "package-lock.json",
+    "vite.config.ts",
+    "tsconfig.json",
+    "index.html"
+  ],
+  "changedPaths": [],
+  "nativeVersion": "0.66.0",
+  "sourceIdentityExact": true,
+  "new8BComponentConnected": false,
+  "coverageConnected": 68,
+  "coverageDeclared": 76,
+  "copiedIndependentDependenciesFrom": "/workspace/sites/sra-lot8a-publish065-20261111/.sites-checkout",
+  "packageLockSha256": "93bc180b1ecf92e7976bb54bcb3a0aef1d3e96d65c41ee300676207832cd274e",
+  "globalLockAcquired": false
+}

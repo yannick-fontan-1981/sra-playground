@@ -1,0 +1,470 @@
+{
+  "schema": "logos-engine.lot10c.priority066-qualification-reuse-review.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-12T01:28:20.403671+00:00",
+  "reviewer": "publication_066_audit",
+  "scope": "Read-only source, retained receipts, archive and exact-byte part verification; only this review file is written. No test, build, replay, game, original oracle, benchmark, publication or lock operation.",
+  "qualifiedCheckpoint": "547025a637ffbfeae23c15d54c96100ad8d3df5f",
+  "publishedPredecessor": "b9555039d60d5d9f771dd96b763c40f389dc62dd",
+  "checkout": "/workspace/sites/sra-lot10c-priority066-20261112",
+  "nativeSource": {
+    "fileCount": 329,
+    "digest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+    "allCurrentHashesEqualQualifiedManifest": true
+  },
+  "gitProfileComparison": {
+    "profiles": [
+      "src",
+      "tests",
+      "scripts",
+      "public",
+      "content",
+      "reference",
+      ".openai",
+      "package.json",
+      "package-lock.json",
+      "tsconfig.json",
+      "vite.config.ts",
+      "index.html"
+    ],
+    "changedPaths": [],
+    "unresolvedConflicts": []
+  },
+  "sourceAndTestInputs": {
+    "entries": 753,
+    "missing": [],
+    "mismatches": [],
+    "passed": true,
+    "exactMembership": true
+  },
+  "buildInputs": {
+    "entries": 394,
+    "missing": [],
+    "mismatches": [],
+    "passed": true
+  },
+  "originalFilesVerified": 1786,
+  "retainedFormalSuite": {
+    "files": 56,
+    "counts": {
+      "tests": 1767,
+      "pass": 1767,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "rawTapReconstructedAndFingerprintVerified": true,
+    "countsReadFromRawTap": {
+      "tests": 1767,
+      "pass": 1767,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "firstIncompleteAttemptAccepted": false,
+    "developmentBatchesAdded": false,
+    "rerun": false
+  },
+  "retainedProjectChecks": {
+    "count": 5,
+    "allExitZero": true,
+    "compressedOutputFingerprintsVerified": true,
+    "rerun": false,
+    "newBuildHandledSeparatelyByRoot": true
+  },
+  "regressions": {
+    "mainCases": 10,
+    "mainComparisonChecks": 170,
+    "separateKataCases": 1,
+    "separateKataComparisonChecks": 17,
+    "distinctGames": 11,
+    "comparisonChecks": 187,
+    "singleElevenCaseRunClaimed": false,
+    "games": [
+      "CATR",
+      "RSWP",
+      "FOGW",
+      "VOIS",
+      "CONN",
+      "MIND",
+      "WEAV",
+      "TRIA",
+      "CRAF",
+      "ISOS",
+      "KATA"
+    ],
+    "currentDigestBindingsVerified": true,
+    "parts": 118,
+    "bytes": 101608633,
+    "reports": [
+      {
+        "game": "CATR",
+        "case": "catr-051",
+        "report": {
+          "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/catr-051-replay.json.gz",
+          "sha256": "b5020e0f4572cdfb4725ec9d9835101eaa9ed122b623be4cd947c2f578355971",
+          "bytes": 2540161
+        },
+        "parts": 3,
+        "exactBytesVerified": true,
+        "comparisonChecks": 17
+      },
+      {
+        "game": "RSWP",
+        "case": "rswp-051",
+        "report": {
+          "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/rswp-051-replay.json.gz",
+          "sha256": "1a7ca46ca7d14fc4e1d09575d1275dc94e753c8d961b9296467d7966304be748",
+          "bytes": 3917875
+        },
+        "parts": 5,
+        "exactBytesVerified": true,
+        "comparisonChecks": 17
+      },
+      {
+        "game": "FOGW",
+        "case": "fogw-051",
+        "report": {
+          "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/fogw-051-replay.json.gz",
+          "sha256": "74917d8862a3d473dba78dedfda53bc297b742b1a94239d8cce75ca40aa6d76e",
+          "bytes": 12186050
+        },
+        "parts": 14,
+        "exactBytesVerified": true,
+        "comparisonChecks": 17
+      },
+      {
+        "game": "VOIS",
+        "case": "vois-051",
+        "report": {
+          "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/vois-051-replay.json.gz",
+          "sha256": "5ae9eda888fe9633480e9ff3adb051956bf5c0ca4bd43533ce86639931816056",
+          "bytes": 15739880
+        },
+        "parts": 18,
+        "exactBytesVerified": true,
+        "comparisonChecks": 17
+      },
+      {
+        "game": "CONN",
+        "case": "conn-050",
+        "report": {
+          "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/conn-050-replay.json.gz",
+          "sha256": "7972a8c3bc38ac0075153b5e6fae185c339c63e79ac4059f719cffce5ea8db78",
+          "bytes": 5615289
+        },
+        "parts": 7,
+        "exactBytesVerified": true,
+        "comparisonChecks": 17
+      },
+      {
+        "game": "MIND",
+        "case": "mind-051",
+        "report": {
+          "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/mind-051-replay.json.gz",
+          "sha256": "3b6ec910138ea62dc93d858294b6aab76848d9e77c489221b536b8f3dd8efefc",
+          "bytes": 6769359
+        },
+        "parts": 8,
+        "exactBytesVerified": true,
+        "comparisonChecks": 17
+      },
+      {
+        "game": "WEAV",
+        "case": "weav-051",
+        "report": {
+          "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/weav-051-replay.json.gz",
+          "sha256": "e4b6c9e3b8c611ca5e42f9fd824f6d75bc16e8ecfe67a36a9bb69a031bc5aa95",
+          "bytes": 21260933
+        },
+        "parts": 24,
+        "exactBytesVerified": true,
+        "comparisonChecks": 17
+      },
+      {
+        "game": "TRIA",
+        "case": "tria-development-4b",
+        "report": {
+          "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/tria-development-4b-replay.json.gz",
+          "sha256": "086cd804ec4eac8c249fd37887089bd608a3d6d5f720e83dfb783c503de7cc39",
+          "bytes": 4482139
+        },
+        "parts": 5,
+        "exactBytesVerified": true,
+        "comparisonChecks": 17
+      },
+      {
+        "game": "CRAF",
+        "case": "craf-055",
+        "report": {
+          "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/craf-055-replay.json.gz",
+          "sha256": "685a690a2e92be2d30b2cf46a7e980144ef8d811a67b403c15a4db63a18cb4a3",
+          "bytes": 15473171
+        },
+        "parts": 18,
+        "exactBytesVerified": true,
+        "comparisonChecks": 17
+      },
+      {
+        "game": "ISOS",
+        "case": "isos-development-4c",
+        "report": {
+          "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/isos-development-4c-replay.json.gz",
+          "sha256": "5cd0e25c7557aca8d288697c4e0dc87267f9e1fc71e7bb6d823beb6c0294d981",
+          "bytes": 3849536
+        },
+        "parts": 5,
+        "exactBytesVerified": true,
+        "comparisonChecks": 17
+      },
+      {
+        "game": "KATA",
+        "case": "kata-060-self-consistency",
+        "report": {
+          "path": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/replay01/regressions/kata-060-self-consistency-replay.json.gz",
+          "sha256": "76f120865e3210ed160b41b9635e53323f16c6439d1890896485e9fa2f18e298",
+          "bytes": 9774240
+        },
+        "parts": 11,
+        "exactBytesVerified": true,
+        "comparisonChecks": 17
+      }
+    ],
+    "replayedNow": false,
+    "historicalBaselinesReinterpreted": false
+  },
+  "frozenSourceArchive": {
+    "parts": 6,
+    "bytes": 4597355,
+    "members": 816,
+    "memberHashesEqualRecordedManifest": true,
+    "restoredToFilesystem": false
+  },
+  "transferMapChange": {
+    "path": "migration/v6-transfer-map.json",
+    "changedJsonPaths": [
+      "/mappings/242/notes",
+      "/mappings/242/proof"
+    ],
+    "addedProof": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/component-proof.json",
+    "onlyDescriptiveProofAndNotes": true,
+    "runtimeOrSelectionContractChanged": false,
+    "doesNotRequireFormalSuiteRerun": true
+  },
+  "fingerprintedReceiptOccurrences": 42,
+  "evidenceFingerprints": [
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/source-manifest.json",
+      "bytes": 39098,
+      "sha256": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/source-archive.json",
+      "bytes": 97873,
+      "sha256": "3d7e28d89a88760d296128759dbd98a546b5851efc1138b31219f2fdea026ecf"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/source-archive-parts.json",
+      "bytes": 1843,
+      "sha256": "0348d978f03907a68504f53c6ec00a957efedc16a8ce1076fe88b75937387008"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/validation/delta-tests-run.json",
+      "bytes": 188221,
+      "sha256": "44ba7bf9b2ef3494f5d8870b744b19b64d882a9b7de4f791bc7a1c5424e0bc8c"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/validation/checks-run.json",
+      "bytes": 223253,
+      "sha256": "0e80441e35327795eed6c40458e598def32df0b6b63975650782100b69f2b4ce"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/regression-summary.json",
+      "bytes": 218171,
+      "sha256": "4e632558bdf6cf6a1a214f69fc640565ccd79e0c20014cfb120d217369b1389d"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/validation/formal-review.json",
+      "bytes": 1752,
+      "sha256": "560955b1f519eeff36d0949306bba7159c7f8f82a3e97e72a6aef8b97a6e4658"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/validation/reused-project-checks.json",
+      "bytes": 1481,
+      "sha256": "c4715aaa12bf2178d635d1e84dc3ec7f69fb78d1df309dd56daa1a6174a8c5b6"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regression-launch.json",
+      "bytes": 11606,
+      "sha256": "3220bcd08d779f732104a1edadc91dd656ac39ff36eab657b5225a9aee579e3e"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regression-review.json",
+      "bytes": 5600,
+      "sha256": "d54e7dc61c76b5ad213e6519104bb779e5a681d296be8e9b3e54fe4d015b09c0"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/kata-supplement-review.json",
+      "bytes": 1876,
+      "sha256": "5d5e1747dcec686e71cea058947faf4c4ad75c0aececec2ad3d99cb7e0bdb7ff"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/kata-supplement-link.json",
+      "bytes": 1084,
+      "sha256": "79591e7d776cd9c46c8844d6245edb42591e9a7e42afced649b718b05226b12b"
+    },
+    {
+      "path": "scripts/verify-native-delivery.py",
+      "bytes": 26494,
+      "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+      "bytes": 424024,
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+    },
+    {
+      "path": "scripts/run-v53-campaign-proof.py",
+      "bytes": 5421,
+      "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782"
+    },
+    {
+      "path": "scripts/compare-v54-reactive-public-evidence.py",
+      "bytes": 18850,
+      "sha256": "3274acc5ed28a40f91ad0ee2e34c247ab160919ea43855cf514b4fbc22ef6a69"
+    },
+    {
+      "path": "scripts/evidence-byte-parts.py",
+      "bytes": 7210,
+      "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350"
+    },
+    {
+      "path": "scripts/restore-v53-evidence.py",
+      "bytes": 3361,
+      "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/validation/delta-tests-output.log.gz",
+      "bytes": 53170,
+      "sha256": "f949363ceab12789612b77789aa52c620f63b64b38972c5588892fa769b0903b"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/validation/typecheck-output.log.gz",
+      "bytes": 141,
+      "sha256": "78290cf257517c2b6a4d9f165940126c31e87b7fb3a60f132304f01bf3c3bf9f"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/validation/entry-audit-output.log.gz",
+      "bytes": 181,
+      "sha256": "e31fe4bd1798361f0367310c04850e5777dfc4cb2e587a9074c70eb516e60bc5"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/validation/migration-audit-output.log.gz",
+      "bytes": 205,
+      "sha256": "f5962c054516f11756012a5683452c27f8dc0c9f7e804623c41525009bc78406"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/validation/diff-check-output.log.gz",
+      "bytes": 20,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/validation/build-output.log.gz",
+      "bytes": 1589,
+      "sha256": "c3006df56f169119a84b1fc19ece5123a0f806d0b27f256330ee10d63383aba5"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/review.json",
+      "bytes": 1876,
+      "sha256": "5d5e1747dcec686e71cea058947faf4c4ad75c0aececec2ad3d99cb7e0bdb7ff"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/replay01/regressions/regression-summary.json",
+      "bytes": 96787,
+      "sha256": "5168d645671333e1ac0de66c1c8fed3f8020a8796215a73ef1a196ccabea5960"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/recorded-regression-case-kata.json",
+      "bytes": 3477,
+      "sha256": "23ddc58b54e5ad3657ada016daa88466244dc951d1a6f57f90aeae9a38717f66"
+    },
+    {
+      "path": "scripts/compare-v54-regressions.py",
+      "bytes": 18166,
+      "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recorded-regression-cases.json",
+      "bytes": 8305,
+      "sha256": "a16f67724f53def79fe476716c12a61e8064df871911772731983fa2505da3a9"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/catr-051-comparison.json",
+      "bytes": 11038,
+      "sha256": "094e791126b8ad3e656d9d24f328b59f8cb6e290b5f9e94f14b92e1cd52b313c"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/rswp-051-comparison.json",
+      "bytes": 11025,
+      "sha256": "0165c10c04139e6316e7b4fda79339a2a50f625fc3518a97cb1f4ad18349ab73"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/fogw-051-comparison.json",
+      "bytes": 11028,
+      "sha256": "06ed41089ac591ac955137d0978b92cac8e00c026eb9981e888f60ced9ddc732"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/vois-051-comparison.json",
+      "bytes": 11030,
+      "sha256": "4a2308953f9eb1fe198ee091f36a430dc6e10f8efa18dddfb662d4edb51ec6f2"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/conn-050-comparison.json",
+      "bytes": 11041,
+      "sha256": "5fb84436d31a9310de134ea421d6f97043cdd6dcde22c506d9e60935d5284bde"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/mind-051-comparison.json",
+      "bytes": 11026,
+      "sha256": "d98c23b6bef017f3fe49fa6833acd22d315a1a4c48d99b625484b4507ad3f757"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/weav-051-comparison.json",
+      "bytes": 11045,
+      "sha256": "e9bc388e4fbe800cff0dc50b1082869ddbb3dac82b30c2a281a10de4feb01e99"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/tria-development-4b-comparison.json",
+      "bytes": 11029,
+      "sha256": "623ba4b3b2e72f0fb76732e82181c60b97cc497151d10f7d288f7fb737d8435c"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/craf-055-comparison.json",
+      "bytes": 11005,
+      "sha256": "1c95ef2d8bfb59a3ecf444168593854e39035efceb2bba69607971fc5a4968e5"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/isos-development-4c-comparison.json",
+      "bytes": 11029,
+      "sha256": "73dabd97e8ee3441e7cc64888307aa873b8608b93e7bc4121db8c6eb5cd19e28"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/replay01/regressions/kata-060-self-consistency-comparison.json",
+      "bytes": 11028,
+      "sha256": "bbddb38d6caa41aa55f575d18ba54283ae7ad4763931a904d6aacbfe415d8ca8"
+    }
+  ],
+  "limits": [
+    "Retained RECR proof remains attached to the earlier315/bb7 source freeze; this review does not transfer it to329 or claim a new game success.",
+    "Formal suite and archived regressions are retained historical executions on unchanged inputs, not new executions.",
+    "A fresh0.66 build and deployment archive are separate root-owned publication work.",
+    "Official STCK/SMLP costs remain unmeasured and unaccepted; this review supplies no performance verdict.",
+    "Full original-caller parity and all complete-migration gates remain open."
+  ],
+  "ordinaryWorkGlobalLockAcquired": false,
+  "performanceLockAcquired": false,
+  "publicationLockAcquired": false,
+  "heldLockFileDeleted": false
+}

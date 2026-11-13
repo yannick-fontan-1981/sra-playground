@@ -1,0 +1,289 @@
+{
+  "module_id": "alignment_whole_query_d",
+  "declarations": [
+    {
+      "id": "policy.d_alignment_whole_query_receipt",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.d_exact_whole_query_receipt_preserves_conditional_scope_and_parent"
+      ],
+      "declared_alternative_refs": [
+        "d_alignment_receipt.domain_complete",
+        "d_alignment_receipt.policy_complete",
+        "d_alignment_receipt.complete_without_policy",
+        "d_alignment_receipt.blocked"
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.d_alignment_whole_query_equivalent_receipt",
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.d_alignment_receipt.domain",
+          "reason_ref": "reason.d_exact_whole_query_receipt_preserves_conditional_scope_and_parent",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_alignment_receipt.domain_complete"
+            },
+            {
+              "field": "receipt_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "DOMAIN"
+            }
+          ]
+        },
+        {
+          "id": "tier.d_alignment_receipt.policy",
+          "reason_ref": "reason.d_exact_whole_query_receipt_preserves_conditional_scope_and_parent",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_alignment_receipt.policy_complete"
+            },
+            {
+              "field": "receipt_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "SEARCH"
+            },
+            {
+              "field": "witness_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "tier.d_alignment_receipt.no_policy",
+          "reason_ref": "reason.d_exact_whole_query_receipt_preserves_conditional_scope_and_parent",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_alignment_receipt.complete_without_policy"
+            },
+            {
+              "field": "receipt_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "SEARCH"
+            },
+            {
+              "field": "witness_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "tier.d_alignment_receipt.blocked",
+          "reason_ref": "reason.d_exact_whole_query_receipt_preserves_conditional_scope_and_parent",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_alignment_receipt.blocked"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "d_alignment_receipt.domain_complete": "rule.d_alignment_current_whole_query_receipt",
+        "d_alignment_receipt.policy_complete": "rule.d_alignment_current_whole_query_receipt",
+        "d_alignment_receipt.complete_without_policy": "rule.d_alignment_current_whole_query_receipt"
+      },
+      "configuration": {
+        "admitted_context_ref": "d_alignment_context.external_question",
+        "admitted_receipt_refs": ["d_alignment_receipt.domain_complete", "d_alignment_receipt.policy_complete", "d_alignment_receipt.complete_without_policy"],
+        "domain_mode_ref": "DOMAIN",
+        "search_mode_ref": "SEARCH",
+        "state_action_domain_digest_field": "state_action_domains_digest",
+        "receipt_projection_contract_ref": "d.alignment_whole_query_receipt.v1",
+        "receipt_predicate_ref": "qualifies_current_alignment_whole_query_receipt",
+        "qualification_status_refs": [
+          "supported",
+          "established"
+        ],
+        "receipt_binding_fields": [
+          "parent_goal_ref",
+          "question_ref",
+          "context_ref",
+          "composition_term_ref",
+          "native_request_digest",
+          "native_result_digest",
+          "query_digest",
+          "search_result_digest",
+          "mode_ref",
+          "witness_count",
+          "caller_next_item_ref",
+          "retained_model_refs"
+        ],
+        "receipt_scope_fields": [
+          "parent_goal_ref",
+          "context_ref",
+          "epoch",
+          "evidence_revision_ref",
+          "model_revision_ref"
+        ]
+      }
+    },
+    {
+      "id": "rule.d_alignment_current_whole_query_receipt",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "complete_exact_whole_query_under_current_source_root_contract"
+      ],
+      "reason_refs": [
+        "reason.d_exact_whole_query_receipt_preserves_conditional_scope_and_parent"
+      ],
+      "invariants": [
+        "not_a_per_primitive_c068_receipt",
+        "no_physical_completion_or_action_authority",
+        "conditional_models_not_confirmed",
+        "empty_policy_is_not_a_winning_policy",
+        "parent_and_next_item_preserved"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{receipt_term_ref}",
+          "kind": "value",
+          "label": "Current Source-bound whole alignment query receipt",
+          "required_fields": [
+            "receipt_term_ref",
+            "parent_goal_ref",
+            "question_ref",
+            "context_ref",
+            "composition_term_ref",
+            "native_request_digest",
+            "native_result_digest",
+            "query_digest",
+            "search_result_digest",
+            "mode_ref",
+            "witness_count",
+            "caller_next_item_ref",
+            "retained_model_refs"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "{composition_term_ref}"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "question_ref": "question_ref",
+            "context_ref": "context_ref",
+            "composition_term_ref": "composition_term_ref",
+            "native_request_digest": "native_request_digest",
+            "native_result_digest": "native_result_digest",
+            "query_digest": "query_digest",
+            "search_result_digest": "search_result_digest",
+            "mode_ref": "mode_ref",
+            "witness_count": "witness_count",
+            "caller_next_item_ref": "caller_next_item_ref",
+            "retained_model_refs": "retained_model_refs"
+          },
+          "static_attributes": {
+            "projection_contract_ref": "d.alignment_whole_query_receipt.v1",
+            "no_dispatch_or_action_authority": true,
+            "conditional_models_not_confirmed": true
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{receipt_claim_ref}",
+          "predicate": "qualifies_current_alignment_whole_query_receipt",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "{composition_term_ref}",
+            "{receipt_term_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "{composition_term_ref}",
+            "{receipt_term_ref}"
+          ],
+          "required_fields": [
+            "receipt_claim_ref",
+            "receipt_term_ref",
+            "parent_goal_ref",
+            "question_ref",
+            "context_ref",
+            "composition_term_ref",
+            "native_request_digest",
+            "native_result_digest",
+            "query_digest",
+            "search_result_digest",
+            "mode_ref",
+            "witness_count",
+            "caller_next_item_ref",
+            "retained_model_refs",
+            "parent_goal_ref",
+            "context_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "context_ref": "context_ref",
+            "epoch": "epoch",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "question_ref": "question_ref",
+            "context_ref": "context_ref",
+            "composition_term_ref": "composition_term_ref",
+            "native_request_digest": "native_request_digest",
+            "native_result_digest": "native_result_digest",
+            "query_digest": "query_digest",
+            "search_result_digest": "search_result_digest",
+            "mode_ref": "mode_ref",
+            "witness_count": "witness_count",
+            "caller_next_item_ref": "caller_next_item_ref",
+            "retained_model_refs": "retained_model_refs"
+          },
+          "static_attributes": {
+            "no_dispatch_or_action_authority": true,
+            "conditional_models_not_confirmed": true
+          }
+        }
+      ]
+    }
+  ]
+}

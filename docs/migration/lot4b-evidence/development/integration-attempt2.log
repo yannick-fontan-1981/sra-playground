@@ -1,0 +1,10 @@
+✔ native current-service look-ahead respects the earlier source arrangement barrier: already_arranged (776.127511ms)
+✔ native current-service look-ahead respects the earlier source arrangement barrier: unrecognized_no_model (773.850604ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2319.59173

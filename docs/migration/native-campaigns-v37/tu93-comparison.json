@@ -1,0 +1,171 @@
+{
+  "schema": "logos-engine.v6.native-campaign-comparison.v1",
+  "passed": true,
+  "checks": [
+    {
+      "name": "same completed game and target",
+      "passed": true
+    },
+    {
+      "name": "both campaigns passed",
+      "passed": true
+    },
+    {
+      "name": "same production budgets and game assets",
+      "passed": true
+    },
+    {
+      "name": "same initial public packet",
+      "passed": true
+    },
+    {
+      "name": "same commands, all public animation packets and primitive boundaries",
+      "passed": true
+    },
+    {
+      "name": "same selected prefixes and common acquisition counters",
+      "passed": true
+    },
+    {
+      "name": "same retained series projections after normalizing only observation scope",
+      "passed": true
+    },
+    {
+      "name": "same request results and caller revisions",
+      "passed": true
+    },
+    {
+      "name": "same final result and one retained session",
+      "passed": true
+    },
+    {
+      "name": "unchanged source during each run and no Python agent modules",
+      "passed": true
+    },
+    {
+      "name": "same domain assessments",
+      "passed": true
+    }
+  ],
+  "before": {
+    "path": "docs/migration/native-campaigns-v36/tu93-three-levels.json",
+    "sha256": "435394c4bc286424572587fdf91f534c3e42564dc63db4aa9fee790569809f2f",
+    "implementation": "logos-engine.typescript.v6.native-migration/0.7.0",
+    "sourceDigest": "96b52417818c38398f9f810ffda7da00add109bf870bb0ba4acfdb8e76b61771",
+    "timing": {
+      "activeSeconds": 47.53651044400001,
+      "elapsedSeconds": 67.82783528,
+      "byStage": {
+        "init": {
+          "count": 1,
+          "totalMs": 1177.8247229999997,
+          "medianMs": 1177.8247229999997,
+          "minMs": 1177.8247229999997,
+          "maxMs": 1177.8247229999997
+        },
+        "resume": {
+          "count": 24,
+          "totalMs": 10072.98518099999,
+          "medianMs": 360.30994599999985,
+          "minMs": 184.90793800000029,
+          "maxMs": 1007.696892999993
+        },
+        "sealed_acquisition": {
+          "count": 25,
+          "totalMs": 35059.633261000025,
+          "medianMs": 727.678651000002,
+          "minMs": 453.5941469999998,
+          "maxMs": 4257.158968000003
+        },
+        "unsealed_advance": {
+          "count": 42,
+          "totalMs": 877.5572109999994,
+          "medianMs": 20.78424499999892,
+          "minMs": 17.852563000000373,
+          "maxMs": 27.16236299999946
+        }
+      },
+      "levels": [
+        {
+          "level": 1,
+          "actions": 32,
+          "activeSeconds": 20.666572156999997
+        },
+        {
+          "level": 2,
+          "actions": 10,
+          "activeSeconds": 5.521018168000005
+        },
+        {
+          "level": 3,
+          "actions": 25,
+          "activeSeconds": 21.348920119000006
+        }
+      ]
+    }
+  },
+  "after": {
+    "path": "docs/migration/native-campaigns-v37/tu93-three-levels.json",
+    "sha256": "6e3911d76ea8f34f503deab1fbc39474c54ea0008f9e6c60b745e0ec52d70bef",
+    "implementation": "logos-engine.typescript.v6.native-migration/0.7.1",
+    "sourceDigest": "ce6dc999f3723d67970cbed433f40289f9f3b62fa785bc1dba9e1e3fd1a23607",
+    "timing": {
+      "activeSeconds": 41.41082121500002,
+      "elapsedSeconds": 54.77394189900001,
+      "byStage": {
+        "init": {
+          "count": 1,
+          "totalMs": 1010.9275909999997,
+          "medianMs": 1010.9275909999997,
+          "minMs": 1010.9275909999997,
+          "maxMs": 1010.9275909999997
+        },
+        "resume": {
+          "count": 24,
+          "totalMs": 8263.237800000003,
+          "medianMs": 303.3834565000002,
+          "minMs": 161.10719699999936,
+          "maxMs": 767.546967000002
+        },
+        "sealed_acquisition": {
+          "count": 25,
+          "totalMs": 30747.324069000002,
+          "medianMs": 633.981068000001,
+          "minMs": 400.1067869999997,
+          "maxMs": 3957.873137999999
+        },
+        "unsealed_advance": {
+          "count": 42,
+          "totalMs": 980.2081210000179,
+          "medianMs": 21.699744500001543,
+          "minMs": 19.033391999997548,
+          "maxMs": 39.360593000001245
+        }
+      },
+      "levels": [
+        {
+          "level": 1,
+          "actions": 32,
+          "activeSeconds": 17.50034158599999
+        },
+        {
+          "level": 2,
+          "actions": 10,
+          "activeSeconds": 4.95096246100001
+        },
+        {
+          "level": 3,
+          "actions": 25,
+          "activeSeconds": 18.95951716800002
+        }
+      ]
+    }
+  },
+  "compared": {
+    "commands": 67,
+    "fullPublicPackets": 68,
+    "prefixes": 25
+  },
+  "observedActiveTimeReductionPercent": 12.886282926081217,
+  "qualification": "Two real native campaigns. Compare source/budgets/instrumentation separately before attributing timings. This verifies the retained public trace and reported projections, not equality of complete graph-chain digests: session scopes and implementation identities differ. It is one before/after observation, not a repeated benchmark or a guarantee for other games or machines."
+}

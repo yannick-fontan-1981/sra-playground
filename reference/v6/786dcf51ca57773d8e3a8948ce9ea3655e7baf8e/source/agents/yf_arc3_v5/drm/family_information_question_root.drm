@@ -1,0 +1,90 @@
+{
+  "module_id": "family_information_question_root",
+  "declarations": [
+    {
+      "id": "policy.computation_information_question_root",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "computation_information.publish",
+        "computation_information.blocked"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "computation_information.publish": "rule.parent_dependency_revalidation_question_meaning"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.computation_information.publish",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "computation_information.publish"
+            },
+            {
+              "field": "question_input_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "question_condition_known": false,
+            "question_epistemic_status": "UNKNOWN",
+            "question_condition_truth": "unknown",
+            "question_allows_act": false
+          }
+        },
+        {
+          "id": "projection.computation_information.blocked",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "computation_information.blocked"
+            },
+            {
+              "field": "question_input_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "question_allows_act": false
+          }
+        }
+      ],
+      "invariants": [
+        "principal_goal_preserved",
+        "canonical_question_contract_reused",
+        "current_receipt_and_declared_need_required",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_receipt",
+        "foreign_parent_declaration",
+        "need_not_in_actual_return",
+        "unqualified_question"
+      ],
+      "reason_refs": [
+        "reason.current_computation_need_opens_declared_information_under_the_unchanged_parent"
+      ]
+    }
+  ]
+}

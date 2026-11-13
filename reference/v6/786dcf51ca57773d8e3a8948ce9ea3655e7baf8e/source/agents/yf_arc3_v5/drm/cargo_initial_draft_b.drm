@@ -1,0 +1,184 @@
+{
+  "module_id": "arc3.cargo_initial_draft_b",
+  "declarations": [
+    {
+      "id": "policy.b_cargo_initial_draft",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_current_acquired_source_fields_license_a_fresh_uncommitted_cargo_query_before_goal_binding"
+      ],
+      "configuration": {
+        "permitted_delta_fields": [
+          "desired_future",
+          "acceptance_predicates",
+          "parent_why",
+          "unbound_profile_desired_future",
+          "cargo_parent_binding",
+          "unbound_allowed_poses_by_cargo"
+        ]
+      },
+      "declared_alternative_refs": [
+        "cargo_draft.fresh",
+        "cargo_draft.missing"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "cargo_draft.fresh": "rule.b_fresh_initial_cargo_draft"
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_draft.fresh",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_draft.fresh"
+            },
+            {
+              "field": "initial_draft_fields_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_current_acquired_source_fields_license_a_fresh_uncommitted_cargo_query_before_goal_binding",
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_draft.missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_draft.missing"
+            },
+            {
+              "field": "initial_draft_fields_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_current_acquired_source_fields_license_a_fresh_uncommitted_cargo_query_before_goal_binding",
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_fresh_initial_cargo_draft",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "current_canonical_acquired_parent_fields",
+        "fresh_distinct_source_request_identity",
+        "no_executed_continuation_transported"
+      ],
+      "applicability": [
+        "initial_cargo_source_draft"
+      ],
+      "invariants": [
+        "original_parent_fields_retained",
+        "no_principal_goal_or_physical_role_promotion",
+        "no_parent_invocation_before_current_goal_binding"
+      ],
+      "falsifiers": [
+        "changed_field_proof_or_observation",
+        "already_used_request_identity",
+        "incompatible_goal_scope"
+      ],
+      "reason_refs": [
+        "reason_current_acquired_source_fields_license_a_fresh_uncommitted_cargo_query_before_goal_binding"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Fresh Source cargo draft",
+          "required_fields": [
+            "output_term_ref",
+            "draft_parent_payload"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "cargo.initial_source_draft.b.v1",
+            "query_commitment_state": "UNCOMMITTED",
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "draft_query_ref": "draft_query_ref",
+            "draft_parent_digest": "draft_parent_digest",
+            "original_parent_digest": "original_parent_digest",
+            "original_parent": "original_parent",
+            "field_provenance": "field_provenance",
+            "provenance_digest": "provenance_digest",
+            "declared_delta_fields": "declared_delta_fields",
+            "frame_ref": "frame_ref",
+            "parent_request": "draft_parent_payload"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_support_claim_ref}",
+          "predicate": "source_cargo_parent_draft_is_current",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{draft_parent_request_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "output_support_claim_ref",
+            "draft_parent_payload"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "level_scope_ref": "level_scope_ref",
+            "frame_ref": "frame_ref"
+          },
+          "attribute_bindings": {
+            "draft_query_ref": "draft_query_ref",
+            "draft_parent_digest": "draft_parent_digest",
+            "original_parent_digest": "original_parent_digest",
+            "original_parent": "original_parent",
+            "field_provenance": "field_provenance",
+            "provenance_digest": "provenance_digest",
+            "declared_delta_fields": "declared_delta_fields",
+            "frame_ref": "frame_ref"
+          },
+          "static_attributes": {
+            "query_commitment_state": "UNCOMMITTED",
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    }
+  ]
+}

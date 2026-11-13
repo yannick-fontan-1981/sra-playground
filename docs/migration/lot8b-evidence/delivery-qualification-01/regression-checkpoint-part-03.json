@@ -1,0 +1,222 @@
+{
+  "schema": "logos-engine.lot8b.recorded-evidence-checkpoint.v1",
+  "recordedAt": "2026-11-12T05:13:04.793468+00:00",
+  "part": 3,
+  "cases": [
+    "craf-055",
+    "isos-development-4c",
+    "kata-060-self-consistency"
+  ],
+  "completedCasesInThisCheckpoint": 3,
+  "passedComparisonProjectionsInThisCheckpoint": 51,
+  "campaignStatus": "passed",
+  "allCases": 11,
+  "allComparisonProjectionsPassed": 187,
+  "supervisorProcessExitCode": 0,
+  "inputsAndNativeUnchanged": true,
+  "allChildProcessGroupsStopped": true,
+  "files": [
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/comparison.json",
+      "bytes": 10993,
+      "sha256": "3e71fb509ca30f27b19d63edf02bc61cb28bb97da6329b0d931d7f9e1ea27f0c"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/comparison.receipt.json",
+      "bytes": 2072,
+      "sha256": "2df85b26c5ccae0d5ab3c61656990de0d955efdec0550ffa6382dfd053dc64fa"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/comparison.started.json",
+      "bytes": 1487,
+      "sha256": "2cfffb6898e354adf27a48422569564ad0ca28ea2fee9175abee9de89b995435"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/comparison.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/comparison.stdout.log",
+      "bytes": 2678,
+      "sha256": "8343d90e245351e6032c91bf4e1ab3d670ce150ec8a92e15edd2413070ec6ceb"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/passive-owner-presence.json",
+      "bytes": 1110,
+      "sha256": "dc0b6f0d54814b925eb89fb66ccdf0eb09e4b7f5b6e0616ca2932c843544473f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/replay.json.gz",
+      "bytes": 15471761,
+      "sha256": "5581f04c88344f4e34bf0f270a2bee7244dc500deab257858a03f6768629eae3"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/replay.receipt.json",
+      "bytes": 1674,
+      "sha256": "3c14f4469d8a5bbb260db1b4ab68c345bdfa9316fc163e6b28b8f6b7ab2792b6"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/replay.started.json",
+      "bytes": 993,
+      "sha256": "e5ccecfa847b99e62713fd633a3c3a207f82d4c36a0096fb93aa7cb34a027afd"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/replay.stdout.log",
+      "bytes": 123419,
+      "sha256": "f17181dd08c0f4121b27f8ded49056010fcab94bf617d27b1499285d6ca1ac47"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/result.json",
+      "bytes": 8123,
+      "sha256": "3be1c1053431ec8e334bf3c2df6591d0cf774ca87c631a516497bbeb371253a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/comparison.json",
+      "bytes": 11017,
+      "sha256": "d7c12104fb169ae456e30a928350d336b7fe7e61eebcc98bf7ddae9605ac1d0e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/comparison.receipt.json",
+      "bytes": 2144,
+      "sha256": "9bc0edbb650b976a5a60d3ae1f88fee846e6713bab093400c1b95f205ccda27b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/comparison.started.json",
+      "bytes": 1536,
+      "sha256": "93f1a9c57ff838df4a9fb4faf7df3dd73d3c7e2125adc2eaef9f36d19d1d2d6f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/comparison.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/comparison.stdout.log",
+      "bytes": 2704,
+      "sha256": "be297ea14dec375c81d835375bfefda91e57f71f173a167513ba06ba158b04d9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/passive-owner-presence.json",
+      "bytes": 1120,
+      "sha256": "9a5b1af0359d67d0b0fb2b0e4219706812aed309d67a7f6dcf8150a952708a36"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/replay.json.gz",
+      "bytes": 3849926,
+      "sha256": "133d5bdc7f1015bc33e72053bc955f13566dc14c1082d85bd2b71758c86af360"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/replay.receipt.json",
+      "bytes": 1721,
+      "sha256": "33d64221206bb83878f6f92243bba91075c54303d2ce44ab659a8e2397744335"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/replay.started.json",
+      "bytes": 1020,
+      "sha256": "501c6efec55998fd2bd338e4be873470f2801054a7880f50346e21d8999ef59b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/replay.stdout.log",
+      "bytes": 45484,
+      "sha256": "75c61cf3b4118d0bec418d538f6ae60b2f710369efa1b3e22d1392665bd6d361"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/result.json",
+      "bytes": 8295,
+      "sha256": "722b7e0fba122acc6fe2659a1e5d19c42780328468cd9305ab613ef554ca636e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/comparison.json",
+      "bytes": 11013,
+      "sha256": "cf64a153d7690a3d016aee25cc932dd3b55acd2d1522321260e5cfcf69984bcb"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/comparison.receipt.json",
+      "bytes": 2163,
+      "sha256": "aab40837c0bceec77de8bafd8029721520eb6b3cb6260db5dc08601c22b891ec"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/comparison.started.json",
+      "bytes": 1544,
+      "sha256": "9072b68884911496ef25ebfb250908529ad3c3dd2a9ef0bf9738e7da0760698a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/comparison.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/comparison.stdout.log",
+      "bytes": 2727,
+      "sha256": "6bc1bb54f559639565125c32523d8c5c5e6d224302f574923e9bdabde1ea080f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/passive-owner-presence.json",
+      "bytes": 1126,
+      "sha256": "25f922652e13e9f65edf1de3c6629342591f43545448e03cfa60b6fc1fb3cca9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/replay.json.gz",
+      "bytes": 9774469,
+      "sha256": "bcc066633c817bbadf006d3852fead49b72ff40795eed3942adb0d49a7de3bdb"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/replay.receipt.json",
+      "bytes": 1728,
+      "sha256": "ee7c313ff2993d37508a1faa0bc2156ab213e33e7a540224af3f48fa2458039b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/replay.started.json",
+      "bytes": 1016,
+      "sha256": "c33d39c56df2ca1064f920d16a21ea55157f4375ef6db0353449ddd5d2095f01"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/replay.stdout.log",
+      "bytes": 82520,
+      "sha256": "f6003f405e009b42200fedb6f6973b9fdfe6ff24155038e349a98a2edd51eaa9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/result.json",
+      "bytes": 8340,
+      "sha256": "6c3232ce41ccdfab5729aa226c069b97d7872043e423055cd473cc54ad25b811"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/inputs-after.json",
+      "bytes": 7796,
+      "sha256": "f2a0fbfba83fcdb737682d7f7dffe058b90090d71b0287e4de44b7a78cc1ed7f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/native-after.json",
+      "bytes": 39333,
+      "sha256": "56e7533fca83f222b866ce73478a1f925bddb8c7b7c79718e9b99d0c888dc095"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/regression-summary.json",
+      "bytes": 103935,
+      "sha256": "7938ecd3370f48db6b1d5e5e0ec1db8b56d448d8435c8381672b4296d1f3322f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/checkpoint-regressions-part2-push-12.json",
+      "bytes": 4257,
+      "sha256": "be5e1dd3dd8000c3d72855d87e882c69b9ce6c661ec3b2d70a7198338ffc626c"
+    }
+  ],
+  "retainedBytes": 29591244,
+  "ordinaryPushNoGlobalLock": true
+}

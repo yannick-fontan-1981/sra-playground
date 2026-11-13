@@ -1,0 +1,1311 @@
+{
+  "schema": "logos-engine.v53.recorded-public-regressions.v1",
+  "status": "failed",
+  "nativeSource": {
+    "fileCount": 195,
+    "digest": "d87f952e0db958cf2168c1af68ecdc85f4164e1dda7e75e2874733fa03359b70",
+    "files": {
+      "src/logos-engine/bounded-weak-cache.ts": "01b7df58a9425f8beb4b61ad77a994d37decf63645aa87d99f5877738b251804",
+      "src/logos-engine/bundle.ts": "e632ee85571bc3e4ab226bb3e8ebe4f67b178400fe16faedd2eb26bcff332a85",
+      "src/logos-engine/canonical.ts": "89a1db87d02a17110d256e95d64d8e80647eaee11f66f41ad098c8366f3fdc6c",
+      "src/logos-engine/create-runtime.ts": "56c62442bb09bdcda9fd388b5ee2555ff56b7771335208c1b930c304dc901a77",
+      "src/logos-engine/interpreter.ts": "2cbbdebec1e2c0c281eaa1ce3353ce33e970d90274f5fa8d4301b3684d87718e",
+      "src/logos-engine/ir.ts": "136370dd6c5ecd957d1a48261033a8945375e13b2eb0070e7922c997e04cc9d5",
+      "src/logos-engine/kernel.ts": "9c7fb668e85bf101f88de439ff43b42bba9566917a2c2b8fb8f13e2ee00e247b",
+      "src/logos-engine/lab-protocol.ts": "d2cc13ebc9c0b9027ca4d279e7f0fdb193714a5d7023473cbb1a2cdfdcbdced1",
+      "src/logos-engine/lab-worker.ts": "28912219793e9d3f5183a30c0ff5c1430682a8e527bba7f45c351222b3e8c433",
+      "src/logos-engine/public-observer.ts": "be263a0f75b2b34d73d9e11a38d2a71ec4c2b443bcca4595496335b5f8103851",
+      "src/logos-engine/v6-acquired-continuation.ts": "f076b5e04b3656470dd445d12b5a85d74f29c1f4f82880d83f26e7f0624dda97",
+      "src/logos-engine/v6-alternating-graph-access.ts": "22961c2d6f991e684daa02ff2ed3dae57ee5538b1c3820c4528afea84e221856",
+      "src/logos-engine/v6-alternating-graph-observation.ts": "3dd828b8093f2b3d5aa8164ee40c450f32f6a6ba9f001fe2e40e6aeed91de8ca",
+      "src/logos-engine/v6-alternating-graph-questions.ts": "7765ce9e630a3f96fe6eb53d8ea83f3768ba30bf5bff586895400716153aa31f",
+      "src/logos-engine/v6-animated-contact.ts": "345bea43b2537e98f18c3a598b5727425a34651e42aaedeb0b8d84a8ab4952d4",
+      "src/logos-engine/v6-arrival-mechanics.ts": "b5199c91625a8b5e72de4965292e4adfcf3e9108a9afbf22fc7c47ab605c753e",
+      "src/logos-engine/v6-attention-memory.ts": "c687af1934bea6ad573783bd2a6fbd88d1c669051a715d412d7c3346098589ad",
+      "src/logos-engine/v6-auxiliary-support-continuation.ts": "07ac7f7c29c4a13e5f8fbe8079f5669a6837e47d4f8826c983167ef5ea245780",
+      "src/logos-engine/v6-auxiliary-support-preparation.ts": "8a74ed9b47754e3e9bd0370a2d6cd7c33ffe7a59f4163070362aee7b893a7345",
+      "src/logos-engine/v6-auxiliary-support.ts": "6df9c42610bb7bd0e3e86333a659fbceb8780b0003696f92c3866ff033c25bef",
+      "src/logos-engine/v6-band-transfer.ts": "9a418ef2fe0563f34845e02fd182ad0414afde093bb1fcc971641a578fb800f8",
+      "src/logos-engine/v6-cavity-clock.ts": "b3da03b69e1655e98094ecef39f12e59bac353bd15a7aa49affcb31f0ca539e2",
+      "src/logos-engine/v6-cavity-kinematics.ts": "a72afe56c453515572478bd86952403391299e0f63b0ee942dec4e2157f2345e",
+      "src/logos-engine/v6-cavity-measurements.ts": "671feab5e9eda5dba9be4ead65345d6f43f5b6b8dc01b9d5d73dd4aef06302a9",
+      "src/logos-engine/v6-cell-patch-observation.ts": "c64981bb7cf091857f0ff1bea5fcc03e22c41e03d93cbde97c14ef0d34de4e12",
+      "src/logos-engine/v6-cell-placement.ts": "143086770cc753c74ef2354161c6fb1cc6e487798a56880312d70916ef7b5830",
+      "src/logos-engine/v6-code-program.ts": "dd2de515b02a331b812608b9cbf69b5ba55856e83773a070e471d7452490f70e",
+      "src/logos-engine/v6-component-matches.ts": "41d4674f343e5a1ba3d4f9e368e238ffd40c67ef5e41e74f9def8ffd6e2a739c",
+      "src/logos-engine/v6-composition-engine.ts": "c259548ad4b74b6aa9eaa589da3856469b73c4e1e1104ccfac55f00e8e1ead56",
+      "src/logos-engine/v6-composition-memory.ts": "567e69aaf134217c15101c3fc4b732df57fabeb3f51156193a82acba8d9a4cc5",
+      "src/logos-engine/v6-configured-arrivals.ts": "85228ebf0f5aaa914be9864bc08de4d7064c020f9beb2388e5aa1571a92b11d7",
+      "src/logos-engine/v6-constellation-cover.ts": "a7c1ac659e38ced3628a614e90c452c82b62b02cc9b6208aa651a7ffa6ab7e95",
+      "src/logos-engine/v6-containment.ts": "db66da09eecc18636440007b9f54ee49266e5aa018082389bcab2834376be21a",
+      "src/logos-engine/v6-contextual-compartments.ts": "07f4e9a56a8c51a75aba8d487916e6fe1a7b350872f3138223f9f1629a047687",
+      "src/logos-engine/v6-coupled-displays.ts": "c29561fab41c12481e41e3b2e51543b920f3ab87139840ed07a677aab053de72",
+      "src/logos-engine/v6-coupled-pair-epoch-anchor.ts": "dc7c2bb0cdf1e1ea6794339ceb209b110fc1b013e49671f8e11ac6bc4b26747f",
+      "src/logos-engine/v6-coupled-pair-evidence.ts": "eccadc2f8e0f24d98bf2bf6f2a0a879d862f6213bfbc02298d2fe28362ee5a17",
+      "src/logos-engine/v6-coupled-pair-observation.ts": "73635ee7efcc4084058a6cfa914a0db1d8c47c51abbc707056042eff76aa24ca",
+      "src/logos-engine/v6-coupled-pair-planning.ts": "6f02ece78e3ccbd28b795c29d607ea980154545ce014cf0a42f92d38dd905a5c",
+      "src/logos-engine/v6-coupled-pair-route.ts": "bf979bb8b33a798f21ffeb484579a5c9fc322be0fcbf67a16cce58fcbe7cfcd1",
+      "src/logos-engine/v6-derive.ts": "4aee722385293266f34f95bca0ab57717df1aceb1b093cce1646fc56610a4189",
+      "src/logos-engine/v6-drm-projector.ts": "d33803653b1c39ff3c38169e0a27a0d5f385e08d1e035845483b4a5b53fa598b",
+      "src/logos-engine/v6-effect-access.ts": "7972704e27c074c8bfbc4a6db1f5f43cf04a08e2dde9da50b092ffbf41e61ec0",
+      "src/logos-engine/v6-factored-return.ts": "a21a0c1adf82768fa31ef3758ec8dbedc509f4b4f9798fa05d6d5a8885b4143b",
+      "src/logos-engine/v6-field-constraints.ts": "b7f5d309a44001ff8cfc9c292f04229f7532daa41da2cd63340fdfd57edb4fa4",
+      "src/logos-engine/v6-field-service-access.ts": "0a4846ad10b1d1cacb3be947fc72e24e39a1ab1478e41e675d7e065544e95f1a",
+      "src/logos-engine/v6-field-service-observation.ts": "6f3e57e31bd3e821129b35d0a8cf924a2edae6f349dfe7d86fdb7f12a4420a4b",
+      "src/logos-engine/v6-fixed-origin.ts": "c0ed190865b69436da80ba005775467917e826bb1f910c23c2a33f2c2fb547a6",
+      "src/logos-engine/v6-fixed-program-calculation.ts": "21e6cfeb51f1ebc8eab82dad568fc2f65c702d398279a5629118fd3fd83b5c82",
+      "src/logos-engine/v6-framed-directed-composition.ts": "42c3f405624aeb2e7569eddb657233ef5567e76aeb99d248cb0fb341284b2ab4",
+      "src/logos-engine/v6-framed-transfer-mechanics.ts": "6650a99139a47837d97916dc83c17030d27c247227f1a828336ae609e8a0e9fc",
+      "src/logos-engine/v6-framed-transfer-observation.ts": "493ecc9807cce832cf2c18e39e147a206ef1bac01f1ad804b137c2e265fc1401",
+      "src/logos-engine/v6-framed-transfer-phased-receptions.ts": "70d0dce7e7e3030adee6ad4e3e027cc73a28f0c59a4c943f575fb741ac00b991",
+      "src/logos-engine/v6-framed-transfer-policy.ts": "5b3dd25696a10c235b185b42d03bac20bf42c0cf4fe4670f9b3b2b9715052ff2",
+      "src/logos-engine/v6-framed-transfer-public-receptions.ts": "b1bca057d555814afa56030e25548541a8c7079057d6650c1cead298e1095677",
+      "src/logos-engine/v6-framed-transfer.ts": "c0c383e8177e4b286e8c94aee0f0b0a4b37e4a6bd0fddcb9ef364b57e4d2a48b",
+      "src/logos-engine/v6-framed-uniform-questions.ts": "b1f08601aab85b5dd72bb3171f8cc633fc3a2efd94c9887b67be1a0bb52f6519",
+      "src/logos-engine/v6-geometric-scene.ts": "2c2876afbbf615ab4b1119fcfbb484cfab22f95951ec774b1596c1562da68aba",
+      "src/logos-engine/v6-goal-access.ts": "1a52b96bf2ed27170c1c74090a814e9d955329d6e65d48d89bf53f08c532820e",
+      "src/logos-engine/v6-hash.ts": "6b86db7b533d55da900a3c65a06ec1e18547180245b3e3a2eaa837be09c669f5",
+      "src/logos-engine/v6-information-goals.ts": "7ad4f42e977c1e8b997c23d01340ec51a5b58cafb3494853de1b5987a59031b8",
+      "src/logos-engine/v6-invited-reduction.ts": "a3433583cbd83d668e736e781c8730f27cc7c337aca4ef87dd3bc22d501115c9",
+      "src/logos-engine/v6-joint-transport.ts": "8cfc3ec9ad1185d9ab2ee43e00baebcdd5f8bb4ff699f7ecd423d7cf4b7dd710",
+      "src/logos-engine/v6-knowledge-store.ts": "e0c6ad4b251719f30668e572cf72a6253fce247ad8de3dae3afd824ef7ca4ffe",
+      "src/logos-engine/v6-labeled-sequence-access.ts": "04f478bc7ded6dbdde010a785016a82b69b742ca7313a99dcca25558ec694966",
+      "src/logos-engine/v6-labeled-sequence-composition.ts": "5a00dbb997c4aca3cea6377310afca63c5b218d5c7afe9450809bfe088f15b3c",
+      "src/logos-engine/v6-labeled-sequence-mechanics.ts": "7c8d4cd4c4569014ca41bf71c1b2bb9d9013bfc6e4489e38d6b758dafe019c41",
+      "src/logos-engine/v6-labeled-sequence-observation.ts": "7515112983485a7ede3ddde59eb072e25814b227aa2afc11d2c3fde984f7089d",
+      "src/logos-engine/v6-learned-preparation.ts": "e16351a022c6abc05f02edf5c3e2108ae7474b348ae4ae7f75dc2bcfb42d547a",
+      "src/logos-engine/v6-linked-packet-access.ts": "656caa4b9223d8af3bacd63beb7ed4ca025f74e7a4544f572a08dc1829190f6d",
+      "src/logos-engine/v6-linked-packet-numeric.ts": "5cb47676010580be49c87997a3f0f9bf2e6cb52baac9902ac59ca33d5480e820",
+      "src/logos-engine/v6-linked-packet-observation.ts": "62b264348db16ef18cc661bca78b66508ae7cfb6eb280b7a2ba1a26fc9315e41",
+      "src/logos-engine/v6-linked-packet-ray.ts": "b691ffc519104296798d65263020ad9f34390fadd7c65a8bad33c535ab9e101d",
+      "src/logos-engine/v6-metric-composition.ts": "1fcfcfe780ef6599756785392159040cc7f2acfa6356376275778a58e086018d",
+      "src/logos-engine/v6-metric-stack-mechanics.ts": "a114e116a7c401f7ddfde803521990468c825684888b491c61d697c9712bb121",
+      "src/logos-engine/v6-morphology-policy.ts": "a370efb8581356c2dbdb5f322df29ba9fa7a656429ecdb7d629f57b693c97be6",
+      "src/logos-engine/v6-native-authority.ts": "f5a54ecac86fb097ee739dc6e4f8b4729819d58c9992fee92188527a1544b3ff",
+      "src/logos-engine/v6-native-caller.ts": "964535cdde058e774419614ef5798094221b3059fdad2f9ecdd6abd2d913b5ba",
+      "src/logos-engine/v6-native-interface-families.ts": "1434f49f81f5b6c8707db2dafe4f97a2dff7b54cb1b2505064d085d8bb309fe0",
+      "src/logos-engine/v6-native-observer.ts": "87dffa7cf8d7f5b8f645d29ba2996844a604fb846286378503fd16a911c54882",
+      "src/logos-engine/v6-native-owned.ts": "0ea8f174f0af66b3a37cf3bacf47ef8a9e2f7b26f43b645e955b0a5a23130ada",
+      "src/logos-engine/v6-native-runtime.ts": "2c325439ad962cf9f5352d5763b2170039a1f8b5ca095573c1e8ce45bcbef418",
+      "src/logos-engine/v6-native-state-graph.ts": "ffeb654334e1c809785ca8c1920fb1e39a4b848265abcaade97406120bc93d5d",
+      "src/logos-engine/v6-native-transition-domain.ts": "e96f781bed5d88204cd347b61ee87b7dd3447b3f57b2ec6a4aba2e023fbe1621",
+      "src/logos-engine/v6-native-types.ts": "6ac3e0ab19217da30aef91ca505fce5f10a457c934ea3469d3022bde9d723870",
+      "src/logos-engine/v6-observed-derivations.ts": "c48b5601f0895c8cad913690a9216138ec08985aee4e7c7b1e7d0189964f05d6",
+      "src/logos-engine/v6-observed-frontier.ts": "1812e3b6209271420a776d3ff823090488cef4ab19b08f173d2b3a80a2e2c5e0",
+      "src/logos-engine/v6-occluded-catalogue-access.ts": "a9682d5822103f292873d316a183d6de96bcecc85f645d2b74a60ae056f38c16",
+      "src/logos-engine/v6-occluded-catalogue-mechanics.ts": "dcb9df5d17b48b334ca02ff69526bbb94d03988972d8ab6caa02ef4645c04e3b",
+      "src/logos-engine/v6-occluded-catalogue-observation.ts": "378094537a4416c7c24755dabbe577015049f3d8e93a1e0702e5b68322f8b21a",
+      "src/logos-engine/v6-occurrence-program-observer.ts": "559f7bf2ed94031304bd483efb8ee71015f9b9787345f2a4c193f40facc9cb47",
+      "src/logos-engine/v6-occurrence-recall.ts": "e89ccc130a4a6ad1a19a8c3092684364fb3f5222b8ccbac889d69a5302f85042",
+      "src/logos-engine/v6-occurrence-scene.ts": "ea76d01aa56f560c0ae4831ca8901ed5ee0a7d064dbc1590b547aaaebfc5447f",
+      "src/logos-engine/v6-operations.ts": "4aad959893595a1844721b93ec8897479536f95ccfa890be045656fa1e96fa06",
+      "src/logos-engine/v6-orbit-constraints.ts": "408a175132ab9869db4150dcecabb20d6eafeccfd301f12294eb6de1df57cc5f",
+      "src/logos-engine/v6-ordered-support.ts": "899d3784ac80ad83e113c8e0ad44a1b380bec5d5c6b552b66a1b7c3543b03c79",
+      "src/logos-engine/v6-oriented-coupling.ts": "87b682dab1406d4bcef59095bd3422509f3d13338f81ffc9c1972db6c0e682b8",
+      "src/logos-engine/v6-oriented-handoff-mechanics.ts": "1e0e1392560f7afca9a7988e994da2e321e2ea2dfb8a0fcda2c67095b616b0ca",
+      "src/logos-engine/v6-outline-access.ts": "b80b1a0f5ff4792eb33318db20932b33b11c6711e8a1675cc9d693309188b0df",
+      "src/logos-engine/v6-outline-arrival.ts": "1e0be453bf1ac4c044f64bd832de17cd66925e15424ec8dee2123e05cb64833f",
+      "src/logos-engine/v6-outline-continuation.ts": "dc0f79d5e76e60d41657fcb93f12a42b3c32722fcd6498ac2b2fb360fafabbef",
+      "src/logos-engine/v6-outline-geometry.ts": "286ccd39621da1870e755d917c134177a032c76a9d5202cf0aabf94264da2ab4",
+      "src/logos-engine/v6-outline-identity.ts": "2cb39535e79fd37081f7f65e8368237f2c92b895751259534461d23e78adccfb",
+      "src/logos-engine/v6-outline-policy.ts": "82d0abedf862248c86eda8fc84e6db49c1a53ea4825ca2db32cbfbc865532c89",
+      "src/logos-engine/v6-outline-public-context.ts": "4027918a071a23baebb2082f78b732fe40d3d4102d0a7842984cd1cf49e3d0a3",
+      "src/logos-engine/v6-outline-recovery-policy.ts": "85ba7bcaba6806e1b79056032af94620360a63180b6209cbdcaa84a4289fc413",
+      "src/logos-engine/v6-outline-rejoin.ts": "186a1b55303dede0ef7af4d2909467e8cbc7ac6f31646b4f45f58c1ac86a88e4",
+      "src/logos-engine/v6-outline-service.ts": "9cea513f9a0996b81f28e1e83b074cdf302e7458abbce3527b2c954050aee628",
+      "src/logos-engine/v6-passage-options.ts": "bf4691d0447e39263bc7f793f5b8577a63e41574a48a6a426fd5e6f3449e8d36",
+      "src/logos-engine/v6-periodic-cell-grids.ts": "20c1b31854eb82118777f213fe4f7478ed3a373a2b20e82d4caef54a7ddb4d70",
+      "src/logos-engine/v6-periodic-sums.ts": "51e3932eb2f0fc141311f8d2bd31d9a49e34c95cc12085e24a37966305bff48f",
+      "src/logos-engine/v6-point-contrasts.ts": "3984da390831630edcc8dcb78e5178d92d8d78df2941d63cd6d8409e0fd2ae90",
+      "src/logos-engine/v6-point-set.ts": "93ed8442779a022e5fd6534ea6eb140c81f08c2f010e2ad1f22a270a70af4268",
+      "src/logos-engine/v6-port-assembly.ts": "fd41bf045465287af77c5bb68497e79c97357250501bd75cfe62e166f5b5694d",
+      "src/logos-engine/v6-product-panel-access.ts": "b8a2042599366decbaabef48ef3191c8e39862cd872ed65550635c859dd81a6b",
+      "src/logos-engine/v6-product-panel-mechanics.ts": "f437f00d5af5437675dfe40e85cd2b2abe4a459b3216557237e0042b5eddc5a9",
+      "src/logos-engine/v6-product-panel-observation.ts": "197c7bcb4539a738bd18428a47342b472efc0f96ba0e886a5bcc892de67ec2e1",
+      "src/logos-engine/v6-program-composition-access.ts": "0a7c7e5b9fc8123b0c9305ce83c635e9bcfddaeb519a90f8cb9fcc9d62cbfb3b",
+      "src/logos-engine/v6-program-compositions.ts": "d204009c83c30ea52d8509334f8098cd4631efee8cd97564cdc8d474681226db",
+      "src/logos-engine/v6-program-control-discovery.ts": "bca59f32bc034fb7acc13a03f717a8f62fd5f7a88f3539e3b8980187d655599a",
+      "src/logos-engine/v6-program-current-access.ts": "5345e5b936ef3e06e0cae87f48ad6cf4e29620bd385183079032346538ce782d",
+      "src/logos-engine/v6-program-geometry.ts": "2d05fbc64dc83ef4440340193d19a08b5ee15fd40e9f39d0709f019d7fe7a0ed",
+      "src/logos-engine/v6-program-identity.ts": "28f5ef405f24d1994a55df6e7aac20b00a41ddb59f111605e104e5a55f802d35",
+      "src/logos-engine/v6-program-input-access.ts": "6d6020068c41aff129a224c37ce12267cfec968d9ccd31714a8bfa9315b4994b",
+      "src/logos-engine/v6-program-relations.ts": "f10b3831742b0b1ea245861ae662d6ab5f57886710a6c6a427b1f1788adbdb8d",
+      "src/logos-engine/v6-program-respondent-observations.ts": "6e336609e2aad6f5eb710408c5baf61a34abe4592ce1102d44fd5f22f6498def",
+      "src/logos-engine/v6-program-respondent-search.ts": "a02c8259a5092ba9052064d7301276b87544f57254d51860129dd0b56785d6ee",
+      "src/logos-engine/v6-prospective-contact.ts": "6e9028332c46b3baf43a3cc78c961845df6f38b010a6dc68bbe0ece9878076fb",
+      "src/logos-engine/v6-queued-field-access.ts": "d82677b16348f56574a523d6067686df5bfe75f2bbf1c6dc98e3d98936f65364",
+      "src/logos-engine/v6-queued-field-mechanics.ts": "ad60553bc1f54719e15a0970b543214c25e0dc98ca122dbf758ce19e46e72d2e",
+      "src/logos-engine/v6-queued-field-models.ts": "1df4892fc12d56065d551e96f1477680f3b532223d592aea8ccfdddc757dfb14",
+      "src/logos-engine/v6-queued-field-observation.ts": "9ee5d548d73fa2cf117a927af9154386b83faf172df88977b5ffb2fbbbf05ce9",
+      "src/logos-engine/v6-queued-field-search.ts": "48c541067445cdb69708ecae9f8620f30bc98e6242c153d42f59be514876e509",
+      "src/logos-engine/v6-radial-port-access.ts": "1f7805d567bd08309de6d900f2faeab35d45414e31fbd33ecb825789abcc2af2",
+      "src/logos-engine/v6-radial-port-observation.ts": "a3cc820db5b92b56c9b9858d877bad5650794b987a37795014d1c1cfdd8567d3",
+      "src/logos-engine/v6-ray-capture-domain.ts": "7996e8baf69eaa1748af50c45489f5cd66de7a12a3739731bfd19679267debb5",
+      "src/logos-engine/v6-reasoning-memory.ts": "b55c186c99636f28c9e6e9c657b9bb50892eac06a3306be197503188069d901a",
+      "src/logos-engine/v6-reduction-transport.ts": "da83dc004bf4fa81e079badfbb8793096429dea0159bb15c914ee921a15f4c6f",
+      "src/logos-engine/v6-reflected-cover.ts": "55977d7424fff5e27a4ab70da4afc97992c169fda199030856c0f63111d07a8e",
+      "src/logos-engine/v6-reflection-audit.ts": "3be81a699abc466413d479aaf92afc536f7f34612b4efa3f3bec1a40cc51e43f",
+      "src/logos-engine/v6-returned-probe-scope.ts": "d397ce6172d4abdf1505569ecb15b589959c4f7e086b213d1fff586fb43a5773",
+      "src/logos-engine/v6-rigid-marker-pose.ts": "8c1f67959c4f17f51333a0eec267697332257906649e74f5dfed11a9c1371daf",
+      "src/logos-engine/v6-rooted-quota-access.ts": "1ead15afeff3017b2c364a4d9e1993e38be22d205d920b251c68b8e2474e5670",
+      "src/logos-engine/v6-rooted-quota-mark-support.ts": "658f6c3679adaede14e23da0e84075925db4f4385180d8f6623b84f46b07473b",
+      "src/logos-engine/v6-rooted-quota-mechanics.ts": "75e82d04c126db12817a8a60477d8d73b8e6fda2402669551be27debe5b41667",
+      "src/logos-engine/v6-rooted-quota-observation.ts": "c2705354a7c1bf3ff2d29508f5b43d92f637b3d0e040c6433da18c9b376d34bb",
+      "src/logos-engine/v6-scored-rewrite.ts": "55969fca1910b4db246392bc80262f12de1328c50938ed31aa1ee5a2b48895ac",
+      "src/logos-engine/v6-shared-series.ts": "0f45e9955cd66be44ab7748279c97310b79da43362e4b3351d32e3c99fef531b",
+      "src/logos-engine/v6-sliding-cavity.ts": "93d614ecb1e058cba26739be9d44c2f115a51ad134055c851351a8929d6134e2",
+      "src/logos-engine/v6-slot-substitution.ts": "d9cbf60eab3d9e8672ddb5dd47b3eb8d02faccbb671b011de72a569959550424",
+      "src/logos-engine/v6-src-program.ts": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77",
+      "src/logos-engine/v6-subset-diagnosis.ts": "ba72f80a8ba613cc3590d8c47881555b12a048ba2379d5d5bbaa569f83af0e25",
+      "src/logos-engine/v6-support-measurements.ts": "553f8f62503385bb7364b87923962fa8dd3776c8eab71d2352f765667a33012e",
+      "src/logos-engine/v6-support-navigation-domain.ts": "5229223b7c4a30609d933fe90d379529192599c59a915eb47e279cd0eebde324",
+      "src/logos-engine/v6-support-navigation.ts": "13c9baea9395c4b82d7512e79b57e15aa59d2d04460e16ba3087a57c611c769a",
+      "src/logos-engine/v6-supported-lines.ts": "df989977538936a36c56ff059ae60c3185b4cc623c485fa57c53a85291c9f9b7",
+      "src/logos-engine/v6-surface-program.ts": "705aae0acc4e85ab52e8255fe0b0705a3258a2dfa03dfd2f89d00af9351821e1",
+      "src/logos-engine/v6-target-binding.ts": "c3767ea64e21422a55b5b80ed3830171805f6bfda7db5b3a81d094d344b6eb00",
+      "src/logos-engine/v6-target-method.ts": "bbee49ae3ad55ecc07148ffbb131e7f9ac8ce0847a0b1bbd6747805a992de7dd",
+      "src/logos-engine/v6-trace-field-access.ts": "8fd096550b370f7420f6fa0f88c64ae5176583d7d9847befb9f5a35ebbd85141",
+      "src/logos-engine/v6-trace-field-mechanics.ts": "630b54efc423bac1e0e5a144894dc0175faaa65db075c40dd35d394404140c72",
+      "src/logos-engine/v6-trace-field-observation.ts": "8594ed86df8b8f94d7bfb11c11abb973d871a7ba1a9cf65363eb192ebf89428d",
+      "src/logos-engine/v6-trace-field-support.ts": "1e60f1ebc9bb9d1c21f79d74019c1d16d53f199cf811407eaae56a3284fc968f",
+      "src/logos-engine/v6-transient-contact-memory.ts": "b824a89828e2601888f266e711a03becd7694ad2eacb7198535a27f0e0d6239f",
+      "src/logos-engine/v6-transient-measurements.ts": "6c363563d1e588504dffa3eb6667ea1bbbb69d91ef0177ab52b1c09fcf5ef0d0",
+      "src/logos-engine/v6-transition-learning.ts": "d086cfd9ad9601c8e6f8e627d8a34c1768f7408a0ea2c70fa1b2cc72a517e668",
+      "src/logos-engine/v6-typed-material-access.ts": "d55b27f559f2e19dcede5e4ca6f4a5604efdc5605b85daf97ff147d0443c6a5a",
+      "src/logos-engine/v6-typed-material-evidence.ts": "ad355976edee2a3a0bfd93c3b106d306e378aa610dace12c28f427dec19d79fd",
+      "src/logos-engine/v6-typed-material-observation.ts": "52f098e86d0103d19b246833792e9e81cb70e2bcea0179abd72e0cfda1baef3b",
+      "src/logos-engine/v6-view-frontier.ts": "b2024b93cf43f5426c3d75e90ba452205ece31c86f3bda55960627e5f00d7be3",
+      "src/logos-engine/v6-visible-box-ray.ts": "7243c2c9614fb9d5c3f6d269ef285d640e65b4f95b6a3765ef4ec60337028def",
+      "src/logos-engine/v6-visual-sequences.ts": "64927ccf8622b5c863bec64bd603f99ae096b12f6687d7548df4c19073186196",
+      "src/logos-engine/v6-word-interface.ts": "039a0a2984a9c036c29f5865b5e8dc9281d836873b064f700965485b21e6ab1a",
+      "src/logos-engine/v6/animated-contact-rules.json": "5bca3105873cd5617d017d29dc775d6ffe3b8ba9386f681b712cf16131e7bc06",
+      "src/logos-engine/v6/catalog.json": "fce784714987c370c604a09d4622ef39665948b2365c656cde80295c6c94c939",
+      "src/logos-engine/v6/framed-transfer-policy.json": "149c775c0ef5661e1d833cb61c97ff8fc179a054f1abb0b60f2676214b70c284",
+      "src/logos-engine/v6/frontier-policy.json": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f",
+      "src/logos-engine/v6/outline-continuation.json": "b2ac35526cf6fd60733250308823eac62107f33490655d562ea63542ed6efd4f",
+      "src/logos-engine/v6/outline-policy.json": "7844c15779e0cb984376f2ad0595430f8501565dcfe3786e73e2735a0c76bae9",
+      "src/logos-engine/v6/outline-public-context.json": "1ae9a2c82f22b1f07f5e4d22c0cc7195e6cbc4b3e43fe8b2abc830ccfd0ce270",
+      "src/logos-engine/v6/outline-recovery.json": "872b67f54d6555f8409c12a78faa3d20751444dcab22f39d7363cd29298910a0",
+      "src/logos-engine/v6/programs.json": "2accc1e89dda42d662fa4a2051345bc8ce7e146c93be307479538c68ab364a28",
+      "src/logos-engine/v7-runtime.ts": "fc87928c00a6cda1e3bb7d22d5411135314f2c7f4676e4495cc5e8929624729b",
+      "src/runtime/browser-games.ts": "4127cafea3717e627885f318eac9650452b7cea8dfd267f945a2af56c6e895da",
+      "src/runtime/contracts.ts": "7e3bbd9e7951b1249622961bc801bdf789fb3538a85a7fb4fdc4befccf0e48bc",
+      "src/runtime/game-worker.ts": "52f62b68c23b2c70c2b18461da042bf08f7fe44f7be068d5fc0e3e2942ac7159",
+      "src/runtime/sra-agent-protocol.ts": "0c755574e90b79202147e98c150c7167386c121b16ac8b554d98ed372e3cd131",
+      "src/runtime/sra-agent-service.ts": "e2c65fd373784b1757f04ba7439041e9f49e85e52bfeb0da80787bddaa1c8e60",
+      "src/runtime/sra-agent-worker.ts": "fa3efa5f1ff5d82dd0ad7b599961e15c68c36512e6085d7e5d7f4ea1734156a8",
+      "src/runtime/sra-agent.ts": "1127bad3109f1450e9a5b0939f2fa7d204989361229892c72e05831ecb56d64f",
+      "src/runtime/v6-agent-client.ts": "6907afe159d13966a77fe1e017bca093e8dda6a9108ace8d9f2a9a3fd356b9dd",
+      "src/runtime/v6-agent-protocol.ts": "597b4d4ab19882a37048e1fa9caeaebea2112b66e25f6294f428bb7916818aa4",
+      "src/runtime/v6-agent-service.ts": "9a2ab7498f0c7ddeb9d3372dd14cf951e817fef42701373f377e3e7263d66780",
+      "src/runtime/v6-agent-worker.ts": "dc46fd485102080ee0fa41b559760769f2f707c7adaf8768a0b7306f308407fc",
+      "src/runtime/v6-agent.ts": "cb01061771a29a2ad59b02560431be8adc8dae0ba3933a81358ba29dcb7789af"
+    }
+  },
+  "executionInputs": {
+    "scripts/run-v53-regression-checks.py": "074daa60df4dfa42b4facf0256ede6a1f376c0f37fbae81fcbaf63cfcfd95af0",
+    "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+    "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+    "scripts/compare-v52-regressions.mjs": "546187729a8b14653ba7e5916cfa35b74d15440b7bab5b5eda69a732614d8c51",
+    "scripts/compare-v52-material-projection.mjs": "a54b7b368687ec553e88dfe675bd88b2fc85014f30907d2b21f49af090a53895",
+    "tests/helpers/v6-live-game-campaign.ts": "d232725b5fff240a213062873c650111a6b14a02eea3c3546c92c2c4199ab375"
+  },
+  "executionInputsUnchanged": true,
+  "maximumConcurrentReplays": 2,
+  "results": [
+    {
+      "game": "STCK",
+      "mode": "recorded-public-replay",
+      "command": [
+        "node",
+        "scripts/replay-v53-public-regression.mjs",
+        "docs/migration/native-campaigns-v52/attempt9/stck-recorded-public-replay.json",
+        "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+        "docs/migration/native-campaigns-v53/attempt7/regressions/stck-replay.json.gz"
+      ],
+      "startedAt": "2026-11-09T08:10:13.271042+00:00",
+      "finishedAt": "2026-11-09T08:11:30.298084+00:00",
+      "elapsedSeconds": 77.02704818200436,
+      "exitCode": 0,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/stck-recorded-public-replay.json",
+        "sha256": "aec0c0bccb2efadd382b52cc251d22de8b93eeb0d847cc581e7680b9668ee858",
+        "bytes": 275349
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+        "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+        "bytes": 53583
+      },
+      "output": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/stck-output.log.gz",
+        "sha256": "84eb192f7b87f97fd1dd841af1f4c516a6eb96d6fb27df528114bc8e5b029463",
+        "bytes": 3452
+      },
+      "passed": true,
+      "report": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/stck-replay.json.gz",
+        "sha256": "51c0a9f1b4c2109afe209a747d20642dafcbbf7b315db544359c372f5345aa42",
+        "bytes": 27566
+      },
+      "status": "passed",
+      "actions": 35,
+      "prefixes": 15,
+      "final": {
+        "actions": 35,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 53.83700829,
+        "prefixes": 15,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 35,
+          "boundaryReplays": 2,
+          "goalEvents": 3,
+          "frontierDeltas": 71,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 16
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 16
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 16
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 12
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 3
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 17
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology",
+            "attention_parent_return",
+            "acquire_control_for_target"
+          ],
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 35,
+          "resume": 14
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.27.0"
+      },
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v52-regressions.mjs",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/artifacts/v53-regressions-33cz9k38/stck-baseline.json",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/artifacts/v53-regressions-33cz9k38/stck-current.json",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/docs/migration/native-campaigns-v53/attempt7/regressions/stck-comparison.json"
+      ],
+      "comparisonExitCode": 0,
+      "comparisonOutput": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/stck-comparison-output.log.gz",
+        "sha256": "69bf498c036047c7daac76879e71bf1526cd3917bfadd05d961976b07c6e598e",
+        "bytes": 111
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/stck-comparison.json",
+        "sha256": "9fb1d44174a8c2a0af01fbf4d3d3c78307adfe7dfafe9378f1b62a85ed18732d",
+        "bytes": 5413
+      }
+    },
+    {
+      "game": "CATL",
+      "mode": "recorded-public-replay",
+      "command": [
+        "node",
+        "scripts/replay-v53-public-regression.mjs",
+        "docs/migration/native-campaigns-v52/attempt9/catl-recorded-public-replay.json.gz",
+        "docs/migration/native-campaigns-v45/catl-public-trace.json.gz",
+        "docs/migration/native-campaigns-v53/attempt7/regressions/catl-replay.json.gz"
+      ],
+      "startedAt": "2026-11-09T08:10:13.271486+00:00",
+      "finishedAt": "2026-11-09T08:13:17.474401+00:00",
+      "elapsedSeconds": 184.2029274210072,
+      "exitCode": 0,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/catl-recorded-public-replay.json.gz",
+        "sha256": "b6469e8347231ed97dba0a529686c9ba21af73f64be38d12b4afc6e83b1cb7cb",
+        "bytes": 247576
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v45/catl-public-trace.json.gz",
+        "sha256": "da5c6c585b0369f25c8aabd9a0ce05bacbccbf315059682e29d5d8fb7693e63e",
+        "bytes": 38151
+      },
+      "output": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/catl-output.log.gz",
+        "sha256": "17c6792fdc1ce797c9c5a6c526e8addce2b9ea4b1fa793b1fd01aab78f45c287",
+        "bytes": 6171
+      },
+      "passed": true,
+      "report": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/catl-replay.json.gz",
+        "sha256": "c4d9aa435ed3b4d8170493325dcf94b4f07c81ad55d613a51dfa8479b16a7740",
+        "bytes": 241912
+      },
+      "status": "passed",
+      "actions": 48,
+      "prefixes": 48,
+      "final": {
+        "actions": 48,
+        "levelsCompleted": 6,
+        "level": 6,
+        "state": "WIN",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 137.15013248500006,
+        "prefixes": 48,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 48,
+          "boundaryReplays": 5,
+          "goalEvents": 6,
+          "frontierDeltas": 97,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 49
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 49
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 29
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 43
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 1
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 50
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology",
+            "attention_parent_return",
+            "acquire_control_for_target"
+          ],
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 48,
+          "resume": 47
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.27.0"
+      },
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v52-regressions.mjs",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/artifacts/v53-regressions-33cz9k38/catl-baseline.json",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/artifacts/v53-regressions-33cz9k38/catl-current.json",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/docs/migration/native-campaigns-v53/attempt7/regressions/catl-comparison.json"
+      ],
+      "comparisonExitCode": 0,
+      "comparisonOutput": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/catl-comparison-output.log.gz",
+        "sha256": "fc27f0f262503e6fc72d9bd8e8c5b607b7377f4c789ca854559c687d74063bdd",
+        "bytes": 109
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/catl-comparison.json",
+        "sha256": "0b9896ad6bd7d29fe866de16d5350fc7a89ac373dc50174fc20c336f7183ac66",
+        "bytes": 5413
+      }
+    },
+    {
+      "game": "SELE",
+      "mode": "recorded-public-replay",
+      "command": [
+        "node",
+        "scripts/replay-v53-public-regression.mjs",
+        "docs/migration/native-campaigns-v52/attempt9/sele-recorded-public-replay.json.gz",
+        "docs/migration/native-campaigns-v47/sele-public-trace.json.gz",
+        "docs/migration/native-campaigns-v53/attempt7/regressions/sele-replay.json.gz"
+      ],
+      "startedAt": "2026-11-09T08:11:30.389542+00:00",
+      "finishedAt": "2026-11-09T08:13:01.074541+00:00",
+      "elapsedSeconds": 90.6850015539967,
+      "exitCode": 0,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/sele-recorded-public-replay.json.gz",
+        "sha256": "518679db16fd6e6badb7b292ba60c6bcd94a267f2bb3c3c8f39e7f47768c6eea",
+        "bytes": 360570
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v47/sele-public-trace.json.gz",
+        "sha256": "f62033bd4cc0d829ba9ffe36c9c3efd6b77a63bf1e5896f7a9b0a2694d49e3a2",
+        "bytes": 36187
+      },
+      "output": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/sele-output.log.gz",
+        "sha256": "a38fda74af998ac652ac8468f8dc026387bad621bcd4c077519966c498d1f2a6",
+        "bytes": 5389
+      },
+      "passed": true,
+      "report": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/sele-replay.json.gz",
+        "sha256": "b9e8bdd43fb96bf36f3a5304a8081282dd360b0c08aeb018e1eace0eb45f30a3",
+        "bytes": 202500
+      },
+      "status": "passed",
+      "actions": 44,
+      "prefixes": 44,
+      "final": {
+        "actions": 44,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 71.91213943399997,
+        "prefixes": 44,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 44,
+          "boundaryReplays": 2,
+          "goalEvents": 3,
+          "frontierDeltas": 89,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 45
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 45
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 21
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 16
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 1
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 46
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology",
+            "attention_parent_return",
+            "acquire_control_for_target"
+          ],
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 44,
+          "resume": 43
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.27.0"
+      },
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v52-regressions.mjs",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/artifacts/v53-regressions-33cz9k38/sele-baseline.json",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/artifacts/v53-regressions-33cz9k38/sele-current.json",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/docs/migration/native-campaigns-v53/attempt7/regressions/sele-comparison.json"
+      ],
+      "comparisonExitCode": 0,
+      "comparisonOutput": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/sele-comparison-output.log.gz",
+        "sha256": "e70b8fcb7ea84594a44f0a11b0b37d271a0cf5ce42976af506bbddc0fcea1e7a",
+        "bytes": 110
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/sele-comparison.json",
+        "sha256": "b625d09562b5dfd29f75c2ad76b276ed27c3eb166af5bace344848791e051d3d",
+        "bytes": 5413
+      }
+    },
+    {
+      "game": "COLM",
+      "mode": "recorded-public-replay",
+      "command": [
+        "node",
+        "scripts/replay-v53-public-regression.mjs",
+        "docs/migration/native-campaigns-v52/attempt9/colm-recorded-public-replay.json.gz",
+        "docs/migration/native-campaigns-v48/colm-public-trace.json.gz",
+        "docs/migration/native-campaigns-v53/attempt7/regressions/colm-replay.json.gz"
+      ],
+      "startedAt": "2026-11-09T08:13:01.316981+00:00",
+      "finishedAt": "2026-11-09T08:13:52.809326+00:00",
+      "elapsedSeconds": 51.492348872998264,
+      "exitCode": 0,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/colm-recorded-public-replay.json.gz",
+        "sha256": "67d45923658397f5c3c26dd3f24e875a3bef18e32d15e98e2fa828c3b8735b5e",
+        "bytes": 123894
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v48/colm-public-trace.json.gz",
+        "sha256": "d3508414f956c35f58ef5364d14f91ea99a93c1b144ee476f4815b35a356bae7",
+        "bytes": 27249
+      },
+      "output": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/colm-output.log.gz",
+        "sha256": "bb6337a32adcb667a5cd5575c75c8e55c2abe77821da6c28cc328c0cca02fd04",
+        "bytes": 4122
+      },
+      "passed": true,
+      "report": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/colm-replay.json.gz",
+        "sha256": "ca0e93701ae0df7e05e1553cc2f977722806233e1e30d1f73e031438bff9f829",
+        "bytes": 89731
+      },
+      "status": "passed",
+      "actions": 45,
+      "prefixes": 21,
+      "final": {
+        "actions": 45,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 37.191898335999994,
+        "prefixes": 21,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 45,
+          "boundaryReplays": 2,
+          "goalEvents": 25,
+          "frontierDeltas": 91,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 22
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 22
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 21
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 8
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 1
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 23
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology",
+            "attention_parent_return",
+            "acquire_control_for_target"
+          ],
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 45,
+          "resume": 20
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.27.0"
+      },
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v52-regressions.mjs",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/artifacts/v53-regressions-33cz9k38/colm-baseline.json",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/artifacts/v53-regressions-33cz9k38/colm-current.json",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/docs/migration/native-campaigns-v53/attempt7/regressions/colm-comparison.json"
+      ],
+      "comparisonExitCode": 0,
+      "comparisonOutput": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/colm-comparison-output.log.gz",
+        "sha256": "a2d84dd57cab6bf79e4281beac54c01d6b72e587c0548de932a1e6c6b64945c3",
+        "bytes": 112
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/colm-comparison.json",
+        "sha256": "66ccca57e4ada4e0cc1c55bb4382ca007d9a02fd6cde0fe3a0e63fa4da297c73",
+        "bytes": 16408
+      }
+    },
+    {
+      "game": "ZIPP",
+      "mode": "recorded-public-replay",
+      "command": [
+        "node",
+        "scripts/replay-v53-public-regression.mjs",
+        "docs/migration/native-campaigns-v52/attempt9/zipp-recorded-public-replay.json.gz",
+        "docs/migration/native-campaigns-v48/zipp-public-trace.json.gz",
+        "docs/migration/native-campaigns-v53/attempt7/regressions/zipp-replay.json.gz"
+      ],
+      "startedAt": "2026-11-09T08:13:17.641898+00:00",
+      "finishedAt": "2026-11-09T08:16:59.211142+00:00",
+      "elapsedSeconds": 221.56925043900264,
+      "exitCode": 0,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/zipp-recorded-public-replay.json.gz",
+        "sha256": "c55801594ef6a8b707e10be01c3b05aed15e0c3a73ea9abec581b5bb66b85760",
+        "bytes": 253369
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v48/zipp-public-trace.json.gz",
+        "sha256": "dca930510e267cdb3ae5098606da3441eecf14d362215f99197fc77023ab1917",
+        "bytes": 36532
+      },
+      "output": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/zipp-output.log.gz",
+        "sha256": "ceb6c074712f64df43c9da68c37c39146088e73202fefcc702e874514f800b0a",
+        "bytes": 7894
+      },
+      "passed": true,
+      "report": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/zipp-replay.json.gz",
+        "sha256": "673ab90226ee847a8a29acb0c2e370cc7c78937baf56d3892d0ae1fe37fd6f04",
+        "bytes": 165210
+      },
+      "status": "passed",
+      "actions": 101,
+      "prefixes": 40,
+      "final": {
+        "actions": 101,
+        "levelsCompleted": 6,
+        "level": 6,
+        "state": "WIN",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 169.1326752409999,
+        "prefixes": 40,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 101,
+          "boundaryReplays": 5,
+          "goalEvents": 6,
+          "frontierDeltas": 203,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 41
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 41
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 41
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 40
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 41
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 42
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology",
+            "attention_parent_return",
+            "acquire_control_for_target"
+          ],
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 101,
+          "resume": 39
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.27.0"
+      },
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v52-regressions.mjs",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/artifacts/v53-regressions-33cz9k38/zipp-baseline.json",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/artifacts/v53-regressions-33cz9k38/zipp-current.json",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/docs/migration/native-campaigns-v53/attempt7/regressions/zipp-comparison.json"
+      ],
+      "comparisonExitCode": 0,
+      "comparisonOutput": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/zipp-comparison-output.log.gz",
+        "sha256": "af459b8a73cbd9ae8251c3ecc7a9604906f276e28f43bbb8d0751855ed9adecb",
+        "bytes": 112
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/zipp-comparison.json",
+        "sha256": "c8d957f0d0c020692c9f655e7a59e94aac54fc06d108e1f1285cba768e04e7c0",
+        "bytes": 17007
+      }
+    },
+    {
+      "game": "GRIL",
+      "mode": "recorded-public-replay",
+      "command": [
+        "node",
+        "scripts/replay-v53-public-regression.mjs",
+        "docs/migration/native-campaigns-v52/attempt9/gril-recorded-public-replay.json.gz",
+        "docs/migration/native-campaigns-v49/gril-public-trace.json.gz",
+        "docs/migration/native-campaigns-v53/attempt7/regressions/gril-replay.json.gz"
+      ],
+      "startedAt": "2026-11-09T08:13:53.053641+00:00",
+      "finishedAt": "2026-11-09T08:14:33.188089+00:00",
+      "elapsedSeconds": 40.134453659993596,
+      "exitCode": 0,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/gril-recorded-public-replay.json.gz",
+        "sha256": "1a8ae7b2d75c1be607070dd3df3fdd88e0cda48261e053e2d1baee4cfa6f2d87",
+        "bytes": 172996
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v49/gril-public-trace.json.gz",
+        "sha256": "dd72621fb8f650ee95ba907f61e9cb4675a7de75e3dd537a9dec7c3d5c47b6ae",
+        "bytes": 12713
+      },
+      "output": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/gril-output.log.gz",
+        "sha256": "1751e5c4542cce655d2f28b6d310ab29c6f77fb7fc0dde7e39fac3ce45470f8e",
+        "bytes": 3082
+      },
+      "passed": true,
+      "report": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/gril-replay.json.gz",
+        "sha256": "c3967f7141bdac3cd39dcfdff3513dc5435daa60c200a682f896694bf5bce79f",
+        "bytes": 146090
+      },
+      "status": "passed",
+      "actions": 19,
+      "prefixes": 19,
+      "final": {
+        "actions": 19,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 31.995176236,
+        "prefixes": 19,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 19,
+          "boundaryReplays": 2,
+          "goalEvents": 3,
+          "frontierDeltas": 41,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 20
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 22
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 20
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 12
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 3
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 1
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 22
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology",
+            "attention_parent_return",
+            "acquire_control_for_target"
+          ],
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 19,
+          "resume": 18
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.27.0"
+      },
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v52-regressions.mjs",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/artifacts/v53-regressions-33cz9k38/gril-baseline.json",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/artifacts/v53-regressions-33cz9k38/gril-current.json",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/docs/migration/native-campaigns-v53/attempt7/regressions/gril-comparison.json"
+      ],
+      "comparisonExitCode": 0,
+      "comparisonOutput": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/gril-comparison-output.log.gz",
+        "sha256": "6753b3532e09f4f36830774b45d809e752239cb12ae727fef2665b34116ffa2c",
+        "bytes": 107
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/gril-comparison.json",
+        "sha256": "f55a1c7bfb4c19ab8fcf609eae48fcf57a68a5c797315ab61d105c4e3fd4cbe3",
+        "bytes": 29437
+      }
+    },
+    {
+      "game": "LIFE",
+      "mode": "recorded-public-replay",
+      "command": [
+        "node",
+        "scripts/replay-v53-public-regression.mjs",
+        "docs/migration/native-campaigns-v52/attempt9/life-recorded-public-replay.json.gz",
+        "docs/migration/native-campaigns-v50/life-public-trace-final.json.gz",
+        "docs/migration/native-campaigns-v53/attempt7/regressions/life-replay.json.gz"
+      ],
+      "startedAt": "2026-11-09T08:14:33.436048+00:00",
+      "finishedAt": "2026-11-09T08:17:32.407600+00:00",
+      "elapsedSeconds": 178.9715536369913,
+      "exitCode": 0,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/life-recorded-public-replay.json.gz",
+        "sha256": "6c605911111588f1b6a437e23ec9fd4f6092b06e1bd8a8ea6483380380fdadc1",
+        "bytes": 347694
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v50/life-public-trace-final.json.gz",
+        "sha256": "8c2e1b67af1c827d2a132c211d71b6e25158a5db1e9b236e4d0d92e912fe7c84",
+        "bytes": 39361
+      },
+      "output": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/life-output.log.gz",
+        "sha256": "281980390a1894432886536049555add2b1e0babb533a02aa1e064f5ea5e90ca",
+        "bytes": 6061
+      },
+      "passed": false,
+      "report": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/life-replay.json.gz",
+        "sha256": "ebf4d1f109cc4c48bdba1fd1fd51073742cc3f34aba70f6b84c5b00232cd5599",
+        "bytes": 275577
+      },
+      "status": "passed",
+      "actions": 49,
+      "prefixes": 47,
+      "final": {
+        "actions": 49,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 124.20231397000013,
+        "prefixes": 47,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 49,
+          "boundaryReplays": 2,
+          "goalEvents": 3,
+          "frontierDeltas": 99,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 48
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 48
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 46
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 45
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 31
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 49
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology",
+            "attention_parent_return",
+            "acquire_control_for_target"
+          ],
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 49,
+          "resume": 46
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.27.0"
+      },
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v52-regressions.mjs",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/artifacts/v53-regressions-33cz9k38/life-baseline.json",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/artifacts/v53-regressions-33cz9k38/life-current.json",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/docs/migration/native-campaigns-v53/attempt7/regressions/life-comparison.json"
+      ],
+      "comparisonExitCode": -9,
+      "comparisonOutput": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/life-comparison-output.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+        "bytes": 20
+      }
+    },
+    {
+      "game": "VALV",
+      "mode": "recorded-public-replay",
+      "command": [
+        "node",
+        "scripts/replay-v53-public-regression.mjs",
+        "docs/migration/native-campaigns-v52/attempt9/valv-recorded-public-replay.json.gz",
+        "docs/migration/native-campaigns-v51/valv-public-trace.json.gz",
+        "docs/migration/native-campaigns-v53/attempt7/regressions/valv-replay.json.gz"
+      ],
+      "startedAt": "2026-11-09T08:16:59.423874+00:00",
+      "finishedAt": "2026-11-09T08:17:52.284995+00:00",
+      "elapsedSeconds": 52.86114612700476,
+      "exitCode": 0,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/valv-recorded-public-replay.json.gz",
+        "sha256": "be7413a4e04cd9254c12c0c48b540952bd163becf2402dc5b6e0979f4f013580",
+        "bytes": 228135
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v51/valv-public-trace.json.gz",
+        "sha256": "63adf3bf04c0678699af265ba1808fd2eca96b4f255473ee9bb43ba8a078a87d",
+        "bytes": 41686
+      },
+      "output": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/valv-output.log.gz",
+        "sha256": "185013ebf6bd75b6d8d6640ff70b34198fae50a2137b587dfc73d18db0402167",
+        "bytes": 3917
+      },
+      "passed": true,
+      "report": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/valv-replay.json.gz",
+        "sha256": "0a20a0d9f331ba54c6a05f2b30ebb298e95121ca3910035bddd431a784b051e4",
+        "bytes": 181392
+      },
+      "status": "passed",
+      "actions": 28,
+      "prefixes": 28,
+      "final": {
+        "actions": 28,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 42.81814725200003,
+        "prefixes": 28,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 28,
+          "boundaryReplays": 2,
+          "goalEvents": 3,
+          "frontierDeltas": 57,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 29
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 29
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 24
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 26
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 1
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 30
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology",
+            "attention_parent_return",
+            "acquire_control_for_target"
+          ],
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 28,
+          "resume": 27
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.27.0"
+      },
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v52-regressions.mjs",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/artifacts/v53-regressions-33cz9k38/valv-baseline.json",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/artifacts/v53-regressions-33cz9k38/valv-current.json",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/docs/migration/native-campaigns-v53/attempt7/regressions/valv-comparison.json"
+      ],
+      "comparisonExitCode": 0,
+      "comparisonOutput": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/valv-comparison-output.log.gz",
+        "sha256": "17c641f98345b2484ca158379fea884e5312c83c3155e53f44c5f43ab48f6115",
+        "bytes": 109
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/valv-comparison.json",
+        "sha256": "819ac7eb2c9e48550ced2ddd91ac23165f9801da1294cc225ad3c4ea6c179b9e",
+        "bytes": 5294
+      }
+    },
+    {
+      "game": "GARE",
+      "mode": "recorded-public-replay",
+      "command": [
+        "node",
+        "scripts/replay-v53-public-regression.mjs",
+        "docs/migration/native-campaigns-v52/attempt9/gare-three-levels.json.gz",
+        "docs/migration/native-campaigns-v52/attempt9/gare-public-trace.json.gz",
+        "docs/migration/native-campaigns-v53/attempt7/regressions/gare-replay.json.gz"
+      ],
+      "startedAt": "2026-11-09T08:17:37.344040+00:00",
+      "finishedAt": "2026-11-09T08:20:53.589529+00:00",
+      "elapsedSeconds": 196.24549425499572,
+      "exitCode": 0,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/gare-three-levels.json.gz",
+        "sha256": "ba5d0652e3f0d34fb18f5f9c804964feb38fc171899281c7c4a36bba73b28135",
+        "bytes": 3775917
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/gare-public-trace.json.gz",
+        "sha256": "f903e2211a211e203b18356ddc12b29a1e63e0b8ab25cedfe3f7b42e6cd2a7f5",
+        "bytes": 39254
+      },
+      "output": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/gare-output.log.gz",
+        "sha256": "161cd9446279c7f22a7e32e8ca1025baf3be0058294eef9acf5bee7b0716e23e",
+        "bytes": 6626
+      },
+      "passed": false,
+      "report": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/gare-replay.json.gz",
+        "sha256": "c5ce892c5dbbc9b2b706fbb4ab7a6cb0f94f99c300536acd22882310c0a57c65",
+        "bytes": 2845118
+      },
+      "status": "passed",
+      "actions": 53,
+      "prefixes": 53,
+      "final": {
+        "actions": 53,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 166.70478870400004,
+        "prefixes": 53,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 53,
+          "boundaryReplays": 2,
+          "goalEvents": 10,
+          "frontierDeltas": 107,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 54
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 54
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 36
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 51
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 53
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 55
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology",
+            "attention_parent_return",
+            "acquire_control_for_target"
+          ],
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 53,
+          "resume": 52
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.27.0"
+      },
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v52-regressions.mjs",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/artifacts/v53-regressions-33cz9k38/gare-baseline.json",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/artifacts/v53-regressions-33cz9k38/gare-current.json",
+        "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/docs/migration/native-campaigns-v53/attempt7/regressions/gare-comparison.json"
+      ],
+      "comparisonExitCode": 1,
+      "comparisonOutput": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/gare-comparison-output.log.gz",
+        "sha256": "40f03ca5124fb44d3b0ac2fa78a17453f7b1bf53805557070ea89696aed7ce40",
+        "bytes": 156
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/gare-comparison.json",
+        "sha256": "2f8cd7cef1b4b8e7553a39fafb7269585ad2ebb31d496dc1cbc42ac6008a81dc",
+        "bytes": 380553
+      }
+    }
+  ],
+  "qualification": "Nine cold native common-caller replays independently choose commands before consuming complete archived public returns. The existing retained comparison checks are reused unchanged. This is no new live game, no Python-agent execution and no speed comparison."
+}

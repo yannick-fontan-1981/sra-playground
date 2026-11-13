@@ -1,0 +1,127 @@
+{
+  "module_id": "screen_wrap",
+  "declarations": [
+    {
+      "id": "rule.observed_screen_wrap_edge_pair_meaning",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": ["DERIVE"],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "structural",
+      "premises": ["ordered_action_conditioned_edge_crossing", "current_qualified_playable_cell_bounds", "registered_stationary_scene", "same_member_correspondence"],
+      "applicability": ["screen_wrap_edge_pair_supported_by_selected_declaration"],
+      "invariants": [
+        "screen_wrap_means_opposite_playable_edges_are_adjacent_not_opposite_raster_pixels",
+        "padding_hud_and_decorative_border_are_not_playable_cells",
+        "playable_origin_and_extent_are_measured_never_assumed_zero_or_full_screen",
+        "under_a_supported_directed_seam_only_cell_successor_is_row_plus_delta_modulo_playable_row_count_and_column_plus_delta_modulo_playable_column_count",
+        "screen_anchor_is_playable_origin_plus_cell_index_times_qualified_pitch_padding_is_not_in_the_modulus",
+        "crossing_preserves_the_orthogonal_cell_coordinate_and_member_identity",
+        "only_the_observed_directed_edge_pair_is_supported_inverse_and_other_axis_remain_unknown",
+        "support_is_revisable_and_bound_to_current_boundary_geometry_and_topology_scope",
+        "endpoint_disappearance_or_large_translation_alone_does_not_establish_wrap",
+        "stationary_scene_registration_distinguishes_wrap_from_camera_scroll",
+        "portal_transport_reset_scene_replacement_and_occlusion_remain_alternatives_until_discriminated",
+        "screen_wrap_does_not_imply_slide_until_obstacle_or_restart_a_sliding_command",
+        "wrap_does_not_imply_safe_destination_or_ignore_occupancy_and_collision",
+        "member_specific_observed_seam_does_not_universalize_to_all_entities",
+        "no_padding_palette_pixel_coordinate_game_name_or_witness_route_is_runtime_knowledge"
+      ],
+      "falsifiers": ["current_boundary_is_incompatible", "stationary_scene_registration_fails", "orthogonal_coordinate_changes", "member_identity_is_unresolved", "same_qualified_edge_action_has_an_incompatible_successor"],
+      "term_templates": [{
+        "id_pattern": "schema.screen_wrap.{measurement_context_ref}.{directed_edge_pair_ref}",
+        "kind": "schema",
+        "label": "revisable adjacency of an observed pair of opposite playable edges",
+        "required_fields": ["measurement_context_ref", "directed_edge_pair_ref", "playable_boundary_ref", "member_correspondence_ref", "screen_wrap_status"],
+        "attribute_bindings": {
+          "directed_edge_pair_ref": "directed_edge_pair_ref",
+          "playable_boundary_ref": "playable_boundary_ref",
+          "member_correspondence_ref": "member_correspondence_ref",
+          "screen_wrap_status": "screen_wrap_status",
+          "playable_origin_row": "playable_origin_row",
+          "playable_origin_column": "playable_origin_column",
+          "playable_row_count": "playable_row_count",
+          "playable_column_count": "playable_column_count",
+          "cell_row_pitch": "cell_row_pitch",
+          "cell_column_pitch": "cell_column_pitch",
+          "padding_present": "padding_present"
+        }
+      }],
+      "claim_templates": [{
+        "id_pattern": "claim.screen_wrap.{measurement_context_ref}.{directed_edge_pair_ref}",
+        "predicate": "supports_directed_playable_edge_adjacency",
+        "family": "structural",
+        "argument_patterns": ["schema.screen_wrap.{measurement_context_ref}.{directed_edge_pair_ref}", "{playable_boundary_ref}", "{directed_edge_pair_ref}"],
+        "epistemic_status": "supported",
+        "required_fields": ["measurement_context_ref", "playable_boundary_ref", "directed_edge_pair_ref", "screen_wrap_status"],
+        "static_attributes": {"commitment": "revisable", "scope": "observed_member_and_directed_edge_pair", "memory_scope": "same_game", "falsifier": "incompatible_current_boundary_or_observed_crossing"},
+        "attribute_bindings": {
+          "directed_edge_pair_ref": "directed_edge_pair_ref",
+          "playable_origin_row": "playable_origin_row",
+          "playable_origin_column": "playable_origin_column",
+          "playable_row_count": "playable_row_count",
+          "playable_column_count": "playable_column_count",
+          "cell_row_pitch": "cell_row_pitch",
+          "cell_column_pitch": "cell_column_pitch"
+        }
+      }],
+      "reason_refs": ["reason.same_member_crosses_opposite_playable_edges_in_a_stationary_scene"]
+    },
+    {
+      "id": "policy.declared_screen_wrap_edge_pair_interpretation",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": ["bounded_ordered_crossing_measurements", "explicit_requested_directed_edge_pair"],
+      "applicability": ["a_boundary_crossing_question_is_open"],
+      "invariants": [
+        "padding_present_is_neither_a_support_condition_nor_a_falsifier",
+        "absence_of_padding_does_not_prove_the_raster_is_the_playable_domain",
+        "unknown_playable_bounds_forbid_a_modulo_prediction",
+        "a_directional_border_flash_does_not_establish_a_crossing",
+        "ambiguous_identity_camera_or_portal_evidence_preserves_alternatives",
+        "contradiction_retracts_only_the_scoped_edge_adjacency_not_unrelated_learned_mechanisms",
+        "geometry_confirmation_does_not_confirm_topology",
+        "this_interpretation_never_releases_an_action_without_its_current_grounded_contract"
+      ],
+      "falsifiers": ["measurement_question_or_scope_is_absent"],
+      "declared_alternative_refs": ["screen_wrap.contradicted", "screen_wrap.boundary_unqualified", "screen_wrap.ambiguous_transport", "screen_wrap.edge_pair_supported", "screen_wrap.insufficient_evidence"],
+      "fact_projections": [
+        {"id": "projection.screen_wrap.contradicted", "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "screen_wrap.contradicted"}], "static_facts": {"screen_wrap_status": "contradicted"}},
+        {"id": "projection.screen_wrap.boundary_unqualified", "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "screen_wrap.boundary_unqualified"}], "static_facts": {"screen_wrap_status": "boundary_unqualified"}},
+        {"id": "projection.screen_wrap.ambiguous_transport", "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "screen_wrap.ambiguous_transport"}], "static_facts": {"screen_wrap_status": "ambiguous_transport"}},
+        {"id": "projection.screen_wrap.edge_pair_supported", "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "screen_wrap.edge_pair_supported"}], "static_facts": {"screen_wrap_status": "revisable_directed_edge_adjacency"}},
+        {"id": "projection.screen_wrap.insufficient_evidence", "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "screen_wrap.insufficient_evidence"}], "static_facts": {"screen_wrap_status": "insufficient_evidence"}}
+      ],
+      "selection_tiers": [
+        {"id": "tier.screen_wrap.contradicted", "all_conditions": [{"field": "screen_wrap_status", "operator": "equals", "expected": "contradicted"}, {"field": "qualified_edge_pair_counterexample_count", "operator": "greater_than", "expected": 0}], "reason_ref": "reason.current_scoped_counterexample_retracts_edge_adjacency"},
+        {"id": "tier.screen_wrap.boundary_unqualified", "all_conditions": [{"field": "screen_wrap_status", "operator": "equals", "expected": "boundary_unqualified"}, {"field": "playable_cell_bounds_qualified", "operator": "equals", "expected": false}], "reason_ref": "reason.unknown_playable_bounds_prevent_modulo_prediction"},
+        {"id": "tier.screen_wrap.ambiguous_transport", "all_conditions": [{"field": "screen_wrap_status", "operator": "equals", "expected": "ambiguous_transport"}, {"field": "competing_transport_explanation_count", "operator": "greater_than", "expected": 0}], "reason_ref": "reason.edge_reappearance_has_undiscriminated_transport_alternatives"},
+        {
+          "id": "tier.screen_wrap.edge_pair_supported",
+          "all_conditions": [
+            {"field": "screen_wrap_status", "operator": "equals", "expected": "revisable_directed_edge_adjacency"},
+            {"field": "playable_cell_bounds_qualified", "operator": "equals", "expected": true},
+            {"field": "ordered_crossing_packet_complete", "operator": "equals", "expected": true},
+            {"field": "same_member_correspondence_unique", "operator": "equals", "expected": true},
+            {"field": "stationary_scene_registration_supported", "operator": "equals", "expected": true},
+            {"field": "requested_directed_edge_pair_crossing_observed", "operator": "equals", "expected": true},
+            {"field": "opposite_playable_edge_successor_matches", "operator": "equals", "expected": true},
+            {"field": "orthogonal_cell_coordinate_preserved", "operator": "equals", "expected": true},
+            {"field": "competing_transport_explanation_count", "operator": "equals", "expected": 0},
+            {"field": "qualified_edge_pair_counterexample_count", "operator": "equals", "expected": 0}
+          ],
+          "reason_ref": "reason.same_member_crosses_opposite_playable_edges_in_a_stationary_scene"
+        },
+        {"id": "tier.screen_wrap.insufficient_evidence", "all_conditions": [{"field": "screen_wrap_status", "operator": "equals", "expected": "insufficient_evidence"}], "reason_ref": "reason.no_qualified_opposite_playable_edge_crossing_is_yet_observed"}
+      ],
+      "selection_tie_breakers": [{"field": "alternative_ref", "preferred_order": "minimize"}],
+      "meaning_template_ref_by_alternative": {"screen_wrap.edge_pair_supported": "rule.observed_screen_wrap_edge_pair_meaning"},
+      "reason_refs": ["reason.playable_boundary_evidence_not_raster_extent_decides_screen_wrap"]
+    }
+  ]
+}

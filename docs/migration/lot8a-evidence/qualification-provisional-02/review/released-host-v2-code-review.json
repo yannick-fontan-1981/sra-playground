@@ -1,0 +1,36 @@
+{
+  "schema": "logos-engine.lot8a-released-host-code-review.v1",
+  "recordedAt": "2026-11-11T21:58:56.454064+00:00",
+  "reviewer": "independent read-only /root/proof_review",
+  "status": "passed",
+  "basis": "Code comparison and hash verification only; no native replay or prepare-only executed by reviewer",
+  "files": [
+    {
+      "path": "docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs",
+      "sha256": "49c423ac48149b92da9028aa7cb024558ad5dcdc54225ad63296e6ecb2c459cd",
+      "bytes": 7733
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/tools/run-recorded-public-released-streamlog-v2.py",
+      "sha256": "bdfa04b36534cd141a1091adfbd234659b2e99cbe3622efdc448d1a06f3bc11d",
+      "bytes": 18014
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/tools/check-released-streaming-preparation-v2.mjs",
+      "sha256": "eb8ffd24672062e32fc75b1d5e44841a70092011bd775c0a077956c959f139e4",
+      "bytes": 9120
+    }
+  ],
+  "preserved": [
+    "All baseline/trace admission checks and complete public packets",
+    "Identical runNativeGameCampaign arguments and native bytes",
+    "Original seventeen-check comparator in a process after Node exits",
+    "Complete new campaign report serialized by pinned streaming writer"
+  ],
+  "release": "Seven designated host roots verified collected before importing the harness; runtime input packets/assets remain intact.",
+  "limits": [
+    "No totalRSS/memory-external bound",
+    "Actual WEAV retry still needed to prove completion under1536MiB old space",
+    "Historic failed attempt02 retained"
+  ]
+}

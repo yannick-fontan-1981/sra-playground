@@ -1,0 +1,30 @@
+{
+  "name": "01-owner-source-inventory",
+  "command": [
+    "node",
+    "docs/migration/lot4c-evidence/record-cost-owner-source-inventory.mjs",
+    "/workspace/sites/sra-lot4c-reference-056",
+    "docs/migration/lot4c-evidence/performance-integrated/owner-source-inventory.json"
+  ],
+  "startedAt": "2026-11-11T01:07:19.502582+00:00",
+  "pid": 8,
+  "exitCode": 0,
+  "executionElapsedSeconds": 1.6701323360030074,
+  "finishedAt": "2026-11-11T01:07:21.172782+00:00",
+  "stdout": {
+    "path": "docs/migration/lot4c-evidence/performance-integrated/planning/untimed-owner-qualification-attempt-01/01-owner-source-inventory.stdout.log",
+    "bytes": 552,
+    "sha256": "804ff1678cd3c242716684787b81a0e39a2c250ad2870903d84c339e9c7ed880"
+  },
+  "stdoutArchive": {
+    "gzip": {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/planning/untimed-owner-qualification-attempt-01/01-owner-source-inventory.stdout.log.gz",
+      "bytes": 339,
+      "sha256": "27192554a19172e7fe376b922e31388b4a920af1349ec42d7a029e4f449f3a72"
+    },
+    "uncompressedBytes": 552,
+    "uncompressedSha256": "804ff1678cd3c242716684787b81a0e39a2c250ad2870903d84c339e9c7ed880",
+    "exactRoundTrip": true
+  },
+  "scope": "Execution audit only; elapsed process duration is not a cost sample or performance comparison."
+}

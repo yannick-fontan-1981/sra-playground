@@ -1,0 +1,85 @@
+{
+  "schema": "logos-engine.relative-arrangements-development-reference-test.v1",
+  "status": "passed",
+  "startedAt": "2026-11-10T20:39:18.119236+00:00",
+  "completedAt": "2026-11-10T20:39:19.411915+00:00",
+  "seconds": 1.292687067994848,
+  "command": [
+    "node",
+    "--test",
+    "tests/v6-relative-arrangements-reference.test.ts"
+  ],
+  "cwd": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "exitCode": 0,
+  "inputsBefore": [
+    {
+      "path": "tests/v6-relative-arrangements-reference.test.ts",
+      "bytes": 14199,
+      "sha256": "11f92e2aee67db509c7523a8b7ebba37ae47110f320a3dcc1e156e3f93f5ffa6"
+    },
+    {
+      "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz",
+      "bytes": 1099570,
+      "sha256": "fa52436d34ee32e7fcf4e30f67122c5bede6823d0ff2cb34980cdc4885c3f933"
+    },
+    {
+      "path": "tests/helpers/chunked-evidence.ts",
+      "bytes": 1495,
+      "sha256": "bde1969c36a5ddf47a24daf24d5240705da3bae4c39dbac74af15b1e053b9276"
+    },
+    {
+      "path": "src/logos-engine/v6-relative-arrangements.ts",
+      "bytes": 13576,
+      "sha256": "4e283c8a8cba9f48740ae59b83edf2821f6fa505591e4d699a8c9cce9fd3917c"
+    },
+    {
+      "path": "src/logos-engine/v6-relative-arrangements-geometry.ts",
+      "bytes": 14815,
+      "sha256": "77ef5e1b75a9b9ae683bb95fda3f667c9b6f5c849cb5d526808309ace62b84db"
+    },
+    {
+      "path": "src/logos-engine/v6-relative-arrangements-planner.ts",
+      "bytes": 10252,
+      "sha256": "95681a2cddd92628f830058a72b6e6afe4311a0666b2ccb50e1f6677ad105b30"
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "tests/v6-relative-arrangements-reference.test.ts",
+      "bytes": 14199,
+      "sha256": "11f92e2aee67db509c7523a8b7ebba37ae47110f320a3dcc1e156e3f93f5ffa6"
+    },
+    {
+      "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz",
+      "bytes": 1099570,
+      "sha256": "fa52436d34ee32e7fcf4e30f67122c5bede6823d0ff2cb34980cdc4885c3f933"
+    },
+    {
+      "path": "tests/helpers/chunked-evidence.ts",
+      "bytes": 1495,
+      "sha256": "bde1969c36a5ddf47a24daf24d5240705da3bae4c39dbac74af15b1e053b9276"
+    },
+    {
+      "path": "src/logos-engine/v6-relative-arrangements.ts",
+      "bytes": 13576,
+      "sha256": "4e283c8a8cba9f48740ae59b83edf2821f6fa505591e4d699a8c9cce9fd3917c"
+    },
+    {
+      "path": "src/logos-engine/v6-relative-arrangements-geometry.ts",
+      "bytes": 14815,
+      "sha256": "77ef5e1b75a9b9ae683bb95fda3f667c9b6f5c849cb5d526808309ace62b84db"
+    },
+    {
+      "path": "src/logos-engine/v6-relative-arrangements-planner.ts",
+      "bytes": 10252,
+      "sha256": "95681a2cddd92628f830058a72b6e6afe4311a0666b2ccb50e1f6677ad105b30"
+    }
+  ],
+  "inputsUnchanged": true,
+  "log": {
+    "path": "docs/migration/lot4b-evidence/development/relative-reference-test-01.log",
+    "bytes": 8960,
+    "sha256": "efc43290a329194429a97e7228f0d539d59217b3c167eda357dd49cac51dbde4"
+  },
+  "qualification": "One targeted differential component test file; no live game, full caller replay, build or performance measurement."
+}

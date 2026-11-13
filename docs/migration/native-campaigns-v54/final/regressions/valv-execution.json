@@ -1,0 +1,116 @@
+{
+  "game": "VALV",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "scripts/replay-v53-public-regression.mjs",
+    "docs/migration/native-campaigns-v53/attempt7/regressions/valv-replay.json.gz",
+    "docs/migration/native-campaigns-v51/valv-public-trace.json.gz",
+    "docs/migration/native-campaigns-v54/final/regressions/valv-replay.json.gz"
+  ],
+  "startedAt": "2026-11-09T12:31:53.221828+00:00",
+  "finishedAt": "2026-11-09T12:32:51.869519+00:00",
+  "elapsedSeconds": 58.64768601800097,
+  "exitCode": 0,
+  "timeoutSeconds": 2400,
+  "timedOut": false,
+  "baseline": {
+    "path": "docs/migration/native-campaigns-v53/attempt7/regressions/valv-replay.json.gz",
+    "sha256": "0a20a0d9f331ba54c6a05f2b30ebb298e95121ca3910035bddd431a784b051e4",
+    "bytes": 181392
+  },
+  "trace": {
+    "path": "docs/migration/native-campaigns-v51/valv-public-trace.json.gz",
+    "sha256": "63adf3bf04c0678699af265ba1808fd2eca96b4f255473ee9bb43ba8a078a87d",
+    "bytes": 41686
+  },
+  "output": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/valv-output.log.gz",
+    "sha256": "022ed2d868fb893987c4bfb186f1ac2c2a846cc178b2f2f192d0bf0225919d66",
+    "bytes": 3959
+  },
+  "passed": true,
+  "memory": {},
+  "report": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/valv-replay.json.gz",
+    "sha256": "9b2964251ba85a106e2ed9aa9f6414088d185b2fcd655c2ca025b2d815763916",
+    "bytes": 209022
+  },
+  "status": "passed",
+  "actions": 28,
+  "prefixes": 28,
+  "final": {
+    "actions": 28,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 47.789139186000014,
+    "prefixes": 28,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 28,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 57,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 29
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 29
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 24
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 26
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 1
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 30
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology",
+        "attention_parent_return",
+        "acquire_control_for_target"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 28,
+      "resume": 27
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.28.0"
+  },
+  "comparison": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/valv-comparison.json",
+    "sha256": "fe7dc0021cef04c89ca6142da8ffc7696d9af0b345091a62f9aa6a1fc21b5ca5",
+    "bytes": 9094
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "immutableInputsUnchanged": true
+}

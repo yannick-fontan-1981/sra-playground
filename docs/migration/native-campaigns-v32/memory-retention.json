@@ -1,0 +1,578 @@
+{
+  "schema": "logos-engine.v32.native-memory-retention.v1",
+  "qualification": "A controlled public-game diagnostic stopped before the next prefix at 65 actions. It proves retained-memory and trajectory properties at that boundary; it is not a six-level victory or a timing benchmark. Production game campaigns are reported separately.",
+  "scenario": {
+    "game": "SYME",
+    "targetLevels": 6,
+    "stopAfterActions": 65,
+    "levelActionCaps": [
+      600,
+      600,
+      600,
+      600,
+      600,
+      600
+    ],
+    "activeSecondsPerLevel": 360,
+    "clock": "real production clock; no heap limit override",
+    "agentInput": "public pixel packets only; no reference plans or retained states injected"
+  },
+  "measurement": {
+    "runtime": "Node --expose-gc --heap-prof --heap-prof-interval=262144",
+    "garbageCollection": "Explicit GC only between completed requests, to measure retained JavaScript heap. Runtime decision time budgets unchanged.",
+    "heapSampler": "Live allocation samples, not exact object ownership accounting. Allocation totals are statistical estimates.",
+    "timingQualification": "GC, sampling, and concurrent validation jobs affect these runs; recorded active times are diagnostic and no speed improvement is claimed from this comparison."
+  },
+  "stages": [
+    {
+      "id": "syme-memory-before",
+      "sourceDigest": "aba20e40256a364dde30662a759e029b2f51af92695f9c13ea55a61c45b6d5d0",
+      "sourceFileCount": 106,
+      "sourceUnchangedDuringRun": true,
+      "rawReportSha256": "d43e9116101df7fe70a32a2969be7096d3897c97a47a7dc59458849ac5bb1889",
+      "rawHeapProfileSha256": "bc129e421749e75840a7e39af76f4daa2595081e9a0b9493c49bf0020dc487cf",
+      "final": {
+        "actions": 65,
+        "prefixes": 43,
+        "levelsCompleted": 3,
+        "nodes": 1333,
+        "deltas": 4599,
+        "hydratedRoots": 602,
+        "heapUsedBytes": 1496810616,
+        "heapUsedMiB": 1427.469841003418,
+        "heapLimitBytes": 2348810240,
+        "diagnosticActiveSeconds": 131.07190573000003,
+        "nativePythonAgentModules": []
+      },
+      "checkpoints": [
+        {
+          "actions": 0,
+          "prefixes": 0,
+          "nodes": 113,
+          "deltas": 124,
+          "hydratedRoots": 70,
+          "heapUsedBytes": 106093376,
+          "heapUsedMiB": 101.17852783203125
+        },
+        {
+          "actions": 10,
+          "prefixes": 7,
+          "nodes": 293,
+          "deltas": 812,
+          "hydratedRoots": 153,
+          "heapUsedBytes": 247735160,
+          "heapUsedMiB": 236.25865936279297
+        },
+        {
+          "actions": 20,
+          "prefixes": 8,
+          "nodes": 315,
+          "deltas": 917,
+          "hydratedRoots": 163,
+          "heapUsedBytes": 270338768,
+          "heapUsedMiB": 257.8151397705078
+        },
+        {
+          "actions": 30,
+          "prefixes": 13,
+          "nodes": 519,
+          "deltas": 1495,
+          "hydratedRoots": 254,
+          "heapUsedBytes": 464072664,
+          "heapUsedMiB": 442.57418060302734
+        },
+        {
+          "actions": 40,
+          "prefixes": 18,
+          "nodes": 737,
+          "deltas": 2093,
+          "hydratedRoots": 377,
+          "heapUsedBytes": 703131264,
+          "heapUsedMiB": 670.5582275390625
+        },
+        {
+          "actions": 50,
+          "prefixes": 28,
+          "nodes": 976,
+          "deltas": 3101,
+          "hydratedRoots": 467,
+          "heapUsedBytes": 997178272,
+          "heapUsedMiB": 950.9833068847656
+        },
+        {
+          "actions": 60,
+          "prefixes": 38,
+          "nodes": 1202,
+          "deltas": 4088,
+          "hydratedRoots": 557,
+          "heapUsedBytes": 1362034104,
+          "heapUsedMiB": 1298.9369430541992
+        },
+        {
+          "actions": 65,
+          "prefixes": 43,
+          "nodes": 1333,
+          "deltas": 4599,
+          "hydratedRoots": 602,
+          "heapUsedBytes": 1496810616,
+          "heapUsedMiB": 1427.469841003418
+        }
+      ],
+      "allocationProfile": {
+        "sampledRetainedBytes": 1497296184,
+        "topAllocationSites": [
+          {
+            "location": "canonical.ts:147:encode -> join",
+            "sampledBytes": 751156056
+          },
+          {
+            "location": "canonical.ts:147:encode",
+            "sampledBytes": 181682072
+          },
+          {
+            "location": "canonical.ts:129: -> add",
+            "sampledBytes": 67108904
+          },
+          {
+            "location": "canonical.ts:147:encode -> set",
+            "sampledBytes": 67108904
+          },
+          {
+            "location": "v6-native-owned.ts:15:visit",
+            "sampledBytes": 40651576
+          },
+          {
+            "location": "canonical.ts:112:visit -> fromEntries",
+            "sampledBytes": 36181456
+          },
+          {
+            "location": "v6-native-state-graph.ts:37:encodedCanonical -> join",
+            "sampledBytes": 34328672
+          },
+          {
+            "location": "v6-hash.ts:38:symbolicDigest",
+            "sampledBytes": 32963464
+          },
+          {
+            "location": "canonical.ts:129: -> fromEntries",
+            "sampledBytes": 25957408
+          },
+          {
+            "location": "canonical.ts:112:visit",
+            "sampledBytes": 22554368
+          },
+          {
+            "location": "canonical.ts:193:equal",
+            "sampledBytes": 17162376
+          },
+          {
+            "location": "v6-native-state-graph.ts:98:visitRaw",
+            "sampledBytes": 17045832
+          },
+          {
+            "location": "v6-native-owned.ts:15:visit -> set",
+            "sampledBytes": 16777256
+          },
+          {
+            "location": "v6-native-state-graph.ts:37:encodedCanonical -> set",
+            "sampledBytes": 16777256
+          },
+          {
+            "location": "v6-native-state-graph.ts:198:decode -> map",
+            "sampledBytes": 16255200
+          },
+          {
+            "location": "canonical.ts:127: -> fromEntries",
+            "sampledBytes": 15206264
+          }
+        ]
+      }
+    },
+    {
+      "id": "syme-memory-bounded-cache",
+      "sourceDigest": "6e6cb2fb1173fdcf1754dd6731862fa2e52662bc6c091bfa149b8e203a00dcf1",
+      "sourceFileCount": 107,
+      "sourceUnchangedDuringRun": true,
+      "rawReportSha256": "3c57656798c35cdf75f314f0459f0e77661360166f3d8403c16d61a24eb56843",
+      "rawHeapProfileSha256": "39dd4c53c42c7b91bdedf5753ad7c6c096cded7eeb77a774ddc39684519b6412",
+      "final": {
+        "actions": 65,
+        "prefixes": 43,
+        "levelsCompleted": 3,
+        "nodes": 1333,
+        "deltas": 4599,
+        "hydratedRoots": 602,
+        "heapUsedBytes": 371616768,
+        "heapUsedMiB": 354.4013671875,
+        "heapLimitBytes": 2348810240,
+        "diagnosticActiveSeconds": 226.34622306099968,
+        "nativePythonAgentModules": []
+      },
+      "checkpoints": [
+        {
+          "actions": 0,
+          "prefixes": 0,
+          "nodes": 113,
+          "deltas": 124,
+          "hydratedRoots": 70,
+          "heapUsedBytes": 79902624,
+          "heapUsedMiB": 76.20108032226562
+        },
+        {
+          "actions": 10,
+          "prefixes": 7,
+          "nodes": 293,
+          "deltas": 812,
+          "hydratedRoots": 153,
+          "heapUsedBytes": 125968376,
+          "heapUsedMiB": 120.13280487060547
+        },
+        {
+          "actions": 20,
+          "prefixes": 8,
+          "nodes": 315,
+          "deltas": 917,
+          "hydratedRoots": 163,
+          "heapUsedBytes": 135084376,
+          "heapUsedMiB": 128.82649993896484
+        },
+        {
+          "actions": 30,
+          "prefixes": 13,
+          "nodes": 519,
+          "deltas": 1495,
+          "hydratedRoots": 254,
+          "heapUsedBytes": 185215576,
+          "heapUsedMiB": 176.63533782958984
+        },
+        {
+          "actions": 40,
+          "prefixes": 18,
+          "nodes": 737,
+          "deltas": 2093,
+          "hydratedRoots": 377,
+          "heapUsedBytes": 245323872,
+          "heapUsedMiB": 233.95907592773438
+        },
+        {
+          "actions": 50,
+          "prefixes": 28,
+          "nodes": 976,
+          "deltas": 3101,
+          "hydratedRoots": 467,
+          "heapUsedBytes": 293600960,
+          "heapUsedMiB": 279.99969482421875
+        },
+        {
+          "actions": 60,
+          "prefixes": 38,
+          "nodes": 1202,
+          "deltas": 4088,
+          "hydratedRoots": 557,
+          "heapUsedBytes": 381059768,
+          "heapUsedMiB": 363.4069137573242
+        },
+        {
+          "actions": 65,
+          "prefixes": 43,
+          "nodes": 1333,
+          "deltas": 4599,
+          "hydratedRoots": 602,
+          "heapUsedBytes": 371616768,
+          "heapUsedMiB": 354.4013671875
+        }
+      ],
+      "allocationProfile": {
+        "sampledRetainedBytes": 384574888,
+        "topAllocationSites": [
+          {
+            "location": "canonical.ts:134: -> add",
+            "sampledBytes": 67108904
+          },
+          {
+            "location": "canonical.ts:134: -> fromEntries",
+            "sampledBytes": 47455992
+          },
+          {
+            "location": "v6-native-state-graph.ts:99:visitRaw",
+            "sampledBytes": 27792560
+          },
+          {
+            "location": "v6-native-owned.ts:15:visit",
+            "sampledBytes": 22286760
+          },
+          {
+            "location": "v6-native-owned.ts:15:visit -> map",
+            "sampledBytes": 20726600
+          },
+          {
+            "location": "canonical.ts:134:",
+            "sampledBytes": 18620296
+          },
+          {
+            "location": "canonical.ts:132: -> fromEntries",
+            "sampledBytes": 18352288
+          },
+          {
+            "location": "v6-native-state-graph.ts:199:decode -> map",
+            "sampledBytes": 17828648
+          },
+          {
+            "location": "v6-native-owned.ts:15:visit -> set",
+            "sampledBytes": 16777256
+          },
+          {
+            "location": "canonical.ts:117:visit -> fromEntries",
+            "sampledBytes": 13633096
+          },
+          {
+            "location": "v6-reasoning-memory.ts:32:copy",
+            "sampledBytes": 10751272
+          },
+          {
+            "location": "v6-observed-frontier.ts:12:copy",
+            "sampledBytes": 10749208
+          },
+          {
+            "location": "canonical.ts:117:visit",
+            "sampledBytes": 8391648
+          },
+          {
+            "location": "js_transferable:113:structuredClone",
+            "sampledBytes": 7079008
+          },
+          {
+            "location": "v6-native-state-graph.ts:199:decode -> fromEntries",
+            "sampledBytes": 5768864
+          },
+          {
+            "location": "v6-support-measurements.ts:30:",
+            "sampledBytes": 4719200
+          }
+        ]
+      }
+    },
+    {
+      "id": "syme-memory-shared-ast",
+      "sourceDigest": "b72de816a5c707ef0b41515a22fcd52f1ffd797ab006d9f5daa39f15ae2e6710",
+      "sourceFileCount": 107,
+      "sourceUnchangedDuringRun": true,
+      "rawReportSha256": "051fe01687d4d4fcd2d0779e3020f15c3b666281bb54e169ea153bf10491feca",
+      "rawHeapProfileSha256": "0d7285aa347300ca01280e2238e2ce0a92c2bce644222a636652ff05d0040174",
+      "final": {
+        "actions": 65,
+        "prefixes": 43,
+        "levelsCompleted": 3,
+        "nodes": 1333,
+        "deltas": 4599,
+        "hydratedRoots": 602,
+        "heapUsedBytes": 331836512,
+        "heapUsedMiB": 316.4639587402344,
+        "heapLimitBytes": 2348810240,
+        "diagnosticActiveSeconds": 263.26057540800014,
+        "nativePythonAgentModules": []
+      },
+      "checkpoints": [
+        {
+          "actions": 0,
+          "prefixes": 0,
+          "nodes": 113,
+          "deltas": 124,
+          "hydratedRoots": 70,
+          "heapUsedBytes": 77549352,
+          "heapUsedMiB": 73.95682525634766
+        },
+        {
+          "actions": 10,
+          "prefixes": 7,
+          "nodes": 293,
+          "deltas": 812,
+          "hydratedRoots": 153,
+          "heapUsedBytes": 120822056,
+          "heapUsedMiB": 115.22489166259766
+        },
+        {
+          "actions": 20,
+          "prefixes": 8,
+          "nodes": 315,
+          "deltas": 917,
+          "hydratedRoots": 163,
+          "heapUsedBytes": 128760600,
+          "heapUsedMiB": 122.7956771850586
+        },
+        {
+          "actions": 30,
+          "prefixes": 13,
+          "nodes": 519,
+          "deltas": 1495,
+          "hydratedRoots": 254,
+          "heapUsedBytes": 170809736,
+          "heapUsedMiB": 162.89685821533203
+        },
+        {
+          "actions": 40,
+          "prefixes": 18,
+          "nodes": 737,
+          "deltas": 2093,
+          "hydratedRoots": 377,
+          "heapUsedBytes": 223852976,
+          "heapUsedMiB": 213.4828338623047
+        },
+        {
+          "actions": 50,
+          "prefixes": 28,
+          "nodes": 976,
+          "deltas": 3101,
+          "hydratedRoots": 467,
+          "heapUsedBytes": 264824136,
+          "heapUsedMiB": 252.55597686767578
+        },
+        {
+          "actions": 60,
+          "prefixes": 38,
+          "nodes": 1202,
+          "deltas": 4088,
+          "hydratedRoots": 557,
+          "heapUsedBytes": 345015352,
+          "heapUsedMiB": 329.0322799682617
+        },
+        {
+          "actions": 65,
+          "prefixes": 43,
+          "nodes": 1333,
+          "deltas": 4599,
+          "hydratedRoots": 602,
+          "heapUsedBytes": 331836512,
+          "heapUsedMiB": 316.4639587402344
+        }
+      ],
+      "allocationProfile": {
+        "sampledRetainedBytes": 340800800,
+        "topAllocationSites": [
+          {
+            "location": "canonical.ts:117:visit -> add",
+            "sampledBytes": 67108904
+          },
+          {
+            "location": "v6-native-state-graph.ts:34:ownedEncoded -> fromEntries",
+            "sampledBytes": 44307872
+          },
+          {
+            "location": "canonical.ts:117:visit -> fromEntries",
+            "sampledBytes": 31985992
+          },
+          {
+            "location": "canonical.ts:117:visit",
+            "sampledBytes": 30157480
+          },
+          {
+            "location": "v6-native-owned.ts:15:visit -> map",
+            "sampledBytes": 22032872
+          },
+          {
+            "location": "v6-native-owned.ts:15:visit",
+            "sampledBytes": 21499824
+          },
+          {
+            "location": "v6-native-owned.ts:15:visit -> set",
+            "sampledBytes": 16777256
+          },
+          {
+            "location": "v6-native-state-graph.ts:207:decode -> map",
+            "sampledBytes": 16266368
+          },
+          {
+            "location": "v6-reasoning-memory.ts:32:copy",
+            "sampledBytes": 11012208
+          },
+          {
+            "location": "v6-observed-frontier.ts:12:copy",
+            "sampledBytes": 10487152
+          },
+          {
+            "location": "js_transferable:113:structuredClone",
+            "sampledBytes": 6554752
+          },
+          {
+            "location": "v6-native-state-graph.ts:207:decode -> fromEntries",
+            "sampledBytes": 4194696
+          },
+          {
+            "location": "v6-support-measurements.ts:30:",
+            "sampledBytes": 3932672
+          },
+          {
+            "location": "translators:484:jsonStrategy",
+            "sampledBytes": 3174088
+          },
+          {
+            "location": "canonical.ts:117:visit -> map",
+            "sampledBytes": 3148552
+          },
+          {
+            "location": ":0:get",
+            "sampledBytes": 2884128
+          }
+        ]
+      }
+    }
+  ],
+  "trajectoryComparison": {
+    "physicalCommandsCompared": 65,
+    "fullAnimationPacketsCompared": 65,
+    "initialPacketCompared": true,
+    "allEqual": true,
+    "sourceUnchangedEveryStage": true,
+    "sharedFinalCounts": {
+      "actions": 65,
+      "prefixes": 43,
+      "levelsCompleted": 3,
+      "nodes": 1333,
+      "deltas": 4599,
+      "hydratedRoots": 602
+    },
+    "comparison": "Exact action refs/coordinates, full packet SHA-256 (all ordered animation frames and public protocol), level progression, and animation frame counts. No cross-run graph-chain equality claim: session identities and trace timestamps differ."
+  },
+  "retentionChange": {
+    "beforeBytes": 1496810616,
+    "afterBytes": 331836512,
+    "reductionPercent": 77.83042768050491,
+    "bytesAvoided": 1164974104
+  },
+  "changes": {
+    "disposableCaches": "Canonical encodings capped at 16 MiB accounting / 4096 entries, internal AST text at 4 MiB / 2048 entries. Ordering retains WeakRef keys and weights only. All cache values can be reconstructed.",
+    "ownedAst": "Each internally validated encoded node enters immutableJson when built; parents and later V7 revisions share these approved descendants. The complete canonical digest still guards each Kernel write.",
+    "retainedKnowledge": "No fact, learned rule, episode, historical revision, graph node, or budget removed or reduced."
+  },
+  "validation": {
+    "tests": 54,
+    "command": "node --test tests/bounded-weak-cache.test.ts tests/canonical-cache.test.ts tests/v7-kernel.test.ts tests/v6-incremental-memory.test.ts tests/v6-native-persistence.test.ts",
+    "typecheck": "passed",
+    "fixedCommitChainsBeforeAndAfter": [
+      "b41a96157b298fb37362c27044e29fa66440502865b498567ce8a0221a8915e2",
+      "86ad3dce38d20dd7f0812d97701191bfc8ab1ee953402a642688338fc9f21671"
+    ],
+    "specificRisksCovered": [
+      "byte/entry eviction and replacement",
+      "weak cache values not retained by ordering",
+      "warm structural size/depth checks",
+      "Unicode ordering and malformed JSON rejection",
+      "canonical hashes unchanged after eviction",
+      "actual shared AST identity across two retained revisions",
+      "unchanged historical chain hashes",
+      "old immutable state preserved",
+      "too-deep encoded state rejected atomically",
+      "fragment tampering invalidates hydration",
+      "rollback and explicit edits remain authoritative"
+    ]
+  },
+  "reproduction": {
+    "script": "scripts/profile-v6-native-retention.ts",
+    "command": "node --expose-gc --heap-prof --heap-prof-interval=262144 --heap-prof-dir=/tmp/sra-profile --heap-prof-name=syme.heapprofile scripts/profile-v6-native-retention.ts SYME 6 65 /tmp/sra-profile/syme",
+    "prepare": "Create /tmp/sra-profile first. The report intentionally carries a diagnostic-stop failure; the comparison uses its completed public prefixes.",
+    "baseline": "Apply memory-fix.patch in reverse in an isolated copy of the final product, using git apply --reverse; memory-fix-source-hashes.json verifies the exact profiled source baseline. Never modify a running campaign.",
+    "baselinePatch": "memory-fix.patch",
+    "sourceHashes": "memory-fix-source-hashes.json",
+    "rawArtifactsDirectory": "/workspace/scratch/656587eca20f/v6-validation"
+  }
+}

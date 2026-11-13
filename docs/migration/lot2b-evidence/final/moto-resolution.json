@@ -1,0 +1,88 @@
+{
+  "schema": "logos-engine.native-campaign-resolution.v1",
+  "game": "MOTO",
+  "selection": "docs/migration/lot2b-evidence/final/moto-selection.json",
+  "execution": "docs/migration/lot2b-evidence/final/moto-control-attention/execution-moto.json",
+  "resolvedAt": "2026-11-09T19:29:59.290607+00:00",
+  "secondsSinceSelection": 500.457096,
+  "maximumBlockedSeconds": 2400,
+  "status": "target_not_reached",
+  "lastObservedResponse": {
+    "game": "MOTO",
+    "phase": "response",
+    "operation": "advance",
+    "sequence": 109,
+    "kind": "stopped",
+    "reason": "level_active_time_budget",
+    "level": 1,
+    "levelsCompleted": 0,
+    "actions": 109,
+    "cycles": 109,
+    "activeSeconds": 363.58393019299996,
+    "elapsedMs": 4578.2537109999685,
+    "family": "observed_frontier",
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 109,
+      "boundaryReplays": 0,
+      "goalEvents": 0,
+      "frontierDeltas": 328,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 110
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 219
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 11
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 105
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 2
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 19
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 219
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_and_attention",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "pending": [
+          "retained_station_method_and_managed_capacity",
+          "entry_access_return_and_rebind",
+          "target_extension_continuation"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    }
+  },
+  "completeReportAvailable": false,
+  "exportFailure": "After the terminal runtime response and campaign failure event, the instrumented Node process exhausted its heap; no full report or trace JSON was written. The outer execution receipt, exact output and actual public journal remain available.",
+  "sourceUnchanged": true,
+  "nextCandidate": "WEAV",
+  "switchBasis": "Runtime stopped at its per-level active-time budget with 109 acquired actions and zero completed levels. Preserve the incomplete diagnostic export rather than rerun or extend the budget."
+}

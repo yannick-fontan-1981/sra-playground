@@ -1,0 +1,62 @@
+{
+  "projection.exploration.ballistic_curve_disclosure": {
+    "id": "projection.exploration.ballistic_curve_disclosure",
+    "all_conditions": [
+      {
+        "field": "candidate_is_ballistic_curve_disclosure",
+        "operator": "equals",
+        "expected": true
+      },
+      {
+        "field": "interaction_measurement_kind",
+        "operator": "equals",
+        "expected": "point"
+      },
+      {
+        "field": "attempted_without_effect_in_current_context",
+        "operator": "equals",
+        "expected": false
+      },
+      {
+        "field": "tested_before_without_resolution_plan",
+        "operator": "equals",
+        "expected": false
+      },
+      {
+        "field": "candidate_execution_count",
+        "operator": "equals",
+        "expected": 0
+      }
+    ]
+  },
+  "projection.exploration.ballistic_contact_solution": {
+    "id": "projection.exploration.ballistic_contact_solution",
+    "all_conditions": [
+      {
+        "field": "candidate_is_ballistic_contact_solution",
+        "operator": "equals",
+        "expected": true
+      },
+      {
+        "field": "interaction_measurement_kind",
+        "operator": "equals",
+        "expected": "point"
+      },
+      {
+        "field": "attempted_without_effect_in_current_context",
+        "operator": "equals",
+        "expected": false
+      },
+      {
+        "field": "tested_before_without_resolution_plan",
+        "operator": "equals",
+        "expected": false
+      },
+      {
+        "field": "candidate_execution_count",
+        "operator": "equals",
+        "expected": 0
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "module_id": "arc3.directed_flow_initial_agenda_d",
+  "declarations": [{
+    "id": "policy.directed_flow_initial_agenda_d", "kind": "selection_policy", "evaluation": "declared_eligibility_single",
+    "supported_operators": ["SELECT"], "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1", "reason_refs": ["reason_current_parent_why_requires_owned_flow_measurement"],
+    "declared_alternative_refs": ["flow_agenda.publish", "flow_agenda.unknown"],
+    "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+    "fact_projections": [
+      {"id": "projection.flow_agenda.publish", "all_conditions": [
+        {"field": "alternative_ref", "operator": "equals", "expected": "flow_agenda.publish"},
+        {"field": "initial_directed_agenda_current", "operator": "equals", "expected": true}
+      ], "static_facts": {"eligible": true}},
+      {"id": "projection.flow_agenda.unknown", "all_conditions": [
+        {"field": "alternative_ref", "operator": "equals", "expected": "flow_agenda.unknown"},
+        {"field": "initial_directed_agenda_current", "operator": "equals", "expected": false}
+      ], "static_facts": {"eligible": true}}
+    ], "invariants": ["source_explicit_initial_request", "current_frozen_parent_why", "same_exact_native_input_and_scope", "preserve_conflicting_request_identity", "shared_agenda_owns_dependency_update", "no_action_authority"]
+  }]
+}

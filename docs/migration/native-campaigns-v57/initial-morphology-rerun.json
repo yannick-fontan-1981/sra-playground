@@ -1,0 +1,1481 @@
+{
+  "schema": "logos-engine.v57.readonly-initial-morphology.v1",
+  "createdAt": "2026-11-09T15:06:43.049Z",
+  "baseline": "54b6057c5c53490a2dea5929003992551f442099",
+  "corpus": {
+    "path": "tests/fixtures/v6-linked-packet-initial-public.json.gz",
+    "sha256": "3f82fb0b60a104095623216023054ef438ca4cc516941c671c385ebcbf1e54f2",
+    "recordedActions": 0,
+    "recordedLevelJumps": 0
+  },
+  "scope": "Pure geometry only on recorded public initial rasters. No agent proposals, acquisition, dispatched actions, game hosts, private states, game engines or manual solutions. Measurements only select candidate; no state is supplied to live campaigns.",
+  "functions": [
+    "measureFixedScene",
+    "measurePeriodicSums",
+    "measureReflectedLattice",
+    "configuredScene",
+    "measuredMetricScene",
+    "orientedCouplingInitial",
+    "measureRootedQuota",
+    "measureTraceField",
+    "measureProductPanel",
+    "measureRadialPorts",
+    "measureLinkedScene",
+    "measureLabeledSequence",
+    "measureConstellationLayout",
+    "measurePortLayout"
+  ],
+  "excludedPreviouslyQualified": [
+    "HANO",
+    "SYME",
+    "DNOI",
+    "TU93",
+    "MEMO",
+    "PIPE",
+    "STCK",
+    "TICT",
+    "THER",
+    "COMB",
+    "CATL",
+    "LF52",
+    "ZIPP",
+    "SELE",
+    "COLM",
+    "GRIL",
+    "LIFE",
+    "VALV",
+    "GARE",
+    "CN04",
+    "RE86",
+    "ELAS",
+    "ONDE",
+    "DICO",
+    "M0R0",
+    "SKBN",
+    "DAME",
+    "AS66",
+    "GLOB"
+  ],
+  "results": [
+    {
+      "game": "AR25",
+      "frameHash": "dcb73927160522c2",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": true,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "BP35",
+      "frameHash": "73ed3968e48e2ac7",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "CD82",
+      "frameHash": "824ef203a4308533",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "DC22",
+      "frameHash": "3882264d7cb6462e",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "FT09",
+      "frameHash": "b537cde839031c14",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "G50T",
+      "frameHash": "f79ab0e9d856fdf8",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "KA59",
+      "frameHash": "a5391f47a4b5f63f",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "LP85",
+      "frameHash": "10d339c4ff95d67f",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "LS20",
+      "frameHash": "f530cf6adb4a6d0f",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "R11L",
+      "frameHash": "130ccc591dbbae50",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "S5I5",
+      "frameHash": "0de899ef426dee32",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "SB26",
+      "frameHash": "8cc17052ea2038b2",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "SC25",
+      "frameHash": "518653148c1631c7",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": true,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "SK48",
+      "frameHash": "e4bbd31c5eaa4d7b",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": true,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "SP80",
+      "frameHash": "0ba719661c41cd3d",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": true,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "SU15",
+      "frameHash": "e04c9e9cd2bdb080",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "TN36",
+      "frameHash": "3e8702e648bb9755",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "TR87",
+      "frameHash": "bf60e2953965adca",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": true,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "VC33",
+      "frameHash": "fdde551e3fd269f6",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "WA30",
+      "frameHash": "22f3ccd4739a85ce",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": true,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "CLRS",
+      "frameHash": "e2b4355c3cbb57a2",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "SWCH",
+      "frameHash": "2a01379c598b3d70",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "SEQN",
+      "frameHash": "90b98f0d2993a933",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "MIND",
+      "frameHash": "38a98b347eb0eff5",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "REGN",
+      "frameHash": "47aa13d6af55af3e",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "CONN",
+      "frameHash": "8582db3762417036",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "GORI",
+      "frameHash": "b7789fb9ae19a319",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "KEYD",
+      "frameHash": "1968dffaf6bef933",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": true,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "LOGI",
+      "frameHash": "93695febfcefd196",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "PORT",
+      "frameHash": "3e7e40321ad15433",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": true,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "FOGW",
+      "frameHash": "68605777340ade0d",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "SIGN",
+      "frameHash": "bbef948cb4925d82",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "CASC",
+      "frameHash": "8c751a15869573d1",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "CRAF",
+      "frameHash": "2731a599e06fc2a4",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "ESCT",
+      "frameHash": "cb790f27dc27d7dc",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "LS19",
+      "frameHash": "19e99dde912cee08",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": true
+      }
+    },
+    {
+      "game": "FITE",
+      "frameHash": "d87fbc49803097ac",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "GABA",
+      "frameHash": "dad2631650c92187",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "FUIT",
+      "frameHash": "17c5c4147e162332",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "ETAG",
+      "frameHash": "bf64cd6cbf5bc15a",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": true,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "KATA",
+      "frameHash": "6b968a6e6ad21fd1",
+      "matches": {
+        "measureFixedScene": true,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "HOLE",
+      "frameHash": "e4e1a575a19b1589",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": true,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "GRAV",
+      "frameHash": "864f1740139121cf",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "VOIS",
+      "frameHash": "d1bacc3cc20afcc8",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "POLA",
+      "frameHash": "c3a7becb1324bb0c",
+      "matches": {
+        "measureFixedScene": true,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "TRIA",
+      "frameHash": "a3db269ad73475b8",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "SERI",
+      "frameHash": "a3d9e5b6d56eb9f7",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "ISOS",
+      "frameHash": "2213b32effda75e6",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": true,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "REWI",
+      "frameHash": "470ca6d4cd27a31e",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "LKEY",
+      "frameHash": "8d0eaeb50c797a2a",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "TEQU",
+      "frameHash": "414f03727847c86e",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "GMAP",
+      "frameHash": "2bcae799f4729d87",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "CGWL",
+      "frameHash": "5b9f513c36c7067d",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": true,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "WEAV",
+      "frameHash": "af1b67ae6a394974",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "EVAS",
+      "frameHash": "ceac639fe38e32de",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "KLOT",
+      "frameHash": "b70f41cc40f08e72",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "UPST",
+      "frameHash": "97ddaef0e9538cf5",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "AMZE",
+      "frameHash": "0859ffa1372ea6ac",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "GIGO",
+      "frameHash": "7e07e56969825161",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "PRTL",
+      "frameHash": "6ef4fd56acd3239f",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "MOTO",
+      "frameHash": "507788fb1b628579",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "SNAR",
+      "frameHash": "23a18f323d2571f2",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "TRCP",
+      "frameHash": "03590df58a79831a",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "SPOR",
+      "frameHash": "ef7046fff5e68e4f",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "CWSE",
+      "frameHash": "14b234e86cb071c9",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "CAVA",
+      "frameHash": "3a81cada09d4393d",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "SMLP",
+      "frameHash": "63772d1746311d0c",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": true,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "HPDL",
+      "frameHash": "a736549b36c7d3a0",
+      "matches": {
+        "measureFixedScene": true,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": true,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "CATR",
+      "frameHash": "8c49c0659af32834",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": true,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "RECR",
+      "frameHash": "9c659d0462f191ba",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    },
+    {
+      "game": "RSWP",
+      "frameHash": "3e364c99f049645b",
+      "matches": {
+        "measureFixedScene": false,
+        "measurePeriodicSums": false,
+        "measureReflectedLattice": false,
+        "configuredScene": false,
+        "measuredMetricScene": false,
+        "orientedCouplingInitial": false,
+        "measureRootedQuota": false,
+        "measureTraceField": false,
+        "measureProductPanel": false,
+        "measureRadialPorts": false,
+        "measureLinkedScene": false,
+        "measureLabeledSequence": false,
+        "measureConstellationLayout": false,
+        "measurePortLayout": false
+      }
+    }
+  ]
+}

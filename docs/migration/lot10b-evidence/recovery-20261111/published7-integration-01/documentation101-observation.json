@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.lot10b.published-predecessor-final-documentation-observation.v1",
+  "recordedAt": "2026-11-11T15:48:29.122Z",
+  "status": "succeeded",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "siteVersion": 101,
+  "sourceCommit": "d75a36f0a99bf6c301034523a3138a64d2f6e744",
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_48ccb50314448191a19781a9c89eb830",
+  "deploymentId": "appgdep_6af48d2be4908191bfe5398512c01bcb",
+  "deploymentUpdatedAt": "2026-11-11T15:43:52.515923+00:00",
+  "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_000000002468820e9fe4411b13b99e20",
+    "content_hash": "sha256:13a7d25939ceb816f8a20db7d398cf6bf3b760785f076f3bc86b07218ad11dbc",
+    "size_bytes": 29992960,
+    "file_count": 75
+  },
+  "nativeBaseline": {
+    "siteVersion": 98,
+    "commit": "653e40a4f45df8ec8c6bda005004c7cdb8df074a",
+    "nativeVersion": "0.61.0",
+    "digest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279"
+  },
+  "qualification": "Actual terminal final documentation publication after predecessor clean-repeat acceptance. Baseline remains the immutable native publication Site98/653e40a declared before the candidate cost window. Full documentation source reconciliation is pending; no source identity is relabelled."
+}

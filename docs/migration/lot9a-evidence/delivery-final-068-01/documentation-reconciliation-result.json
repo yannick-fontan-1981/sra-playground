@@ -1,0 +1,17 @@
+{
+  "schema": "logos-engine.lot9a.documentation-reconciliation-result.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-12 15:16:22 UTC",
+  "command": [
+    "python",
+    "docs/migration/lot9a-evidence/tools/summarize-final-delivery.py"
+  ],
+  "exitCode": 0,
+  "executorWallTimeSeconds": 0.242525704,
+  "output": "{\"status\": \"qualified_final_identity_functional_delivery_scope\", \"nativeDigest\": \"e7a94fbc7cdcb19d8704b5d4120f27a858cbcd07e455084711510ee147f4e653\", \"commands\": 9, \"pairedChecks\": 64, \"unattributedDifferences\": 0, \"newSessions\": 13, \"newReturns\": 71}\n",
+  "nativeRuntimeExecutions": 0,
+  "workReaderExecutions": 0,
+  "initializedSessions": 0,
+  "physicalReturns": 0,
+  "previousFailureRetained": true
+}

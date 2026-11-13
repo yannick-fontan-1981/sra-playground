@@ -1,0 +1,131 @@
+{
+  "schema": "logos-engine.independent-python-oracle-export.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T00:30:00.294825+00:00",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceFilesVerifiedBefore": 1786,
+  "sourceFilesVerifiedAfter": 1786,
+  "sourceInventoryUnchanged": true,
+  "directModules": [
+    "common_addressed_material",
+    "common_addressed_field",
+    "common_field_stock",
+    "common_linked_preparation"
+  ],
+  "importedOriginalModules": {
+    "common_addressed_field": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_addressed_field.py",
+      "sha256": "4659d687838934212829b90a3f40f306716f0490034f24d280def1f9b52b7af0"
+    },
+    "common_addressed_material": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_addressed_material.py",
+      "sha256": "0f5de8d03d14fe978ff468810e7a8e4dea9215db90b0d6a51ba189660bb62f85"
+    },
+    "common_containment": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_containment.py",
+      "sha256": "c718640b16b000f2088f443aa4e5c68512c20e936878d2e63a46f45624014a4b"
+    },
+    "common_field_stock": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_field_stock.py",
+      "sha256": "d265b26743f112f8f9e18b18461a20f998fb4d16ba2efb9615a53d317ea0cc46"
+    },
+    "common_linked_contact": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_linked_contact.py",
+      "sha256": "bb2f258632fc71f280afaf2c988907fe7ee916e51da926389df44bb70f63f8b9"
+    },
+    "common_linked_preparation": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_linked_preparation.py",
+      "sha256": "90095faefe45772155a565b32fb12172f23569d317e890e814925b801c098012"
+    },
+    "common_multiscale_constraints": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_multiscale_constraints.py",
+      "sha256": "01da7c7f636ed2039a364188c7f4fedb2c4c0a0e8bb6b2ba7f22b1c259eaaf12"
+    },
+    "common_phase_relations": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_phase_relations.py",
+      "sha256": "8b43e2cf31d784af6efe7b1535520fcb3385f8d58893b7617d4e0360e07fea0f"
+    },
+    "common_visible_identity": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_visible_identity.py",
+      "sha256": "601e3a88a2535b669f6a294089931731b6b7b30f3bb8b6098337e9fafbc74326"
+    },
+    "geometric_observer": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/geometric_observer.py",
+      "sha256": "1017b130cb91f799ab5bdb2f26789c2645078d9b9d226469b3915d4a7262eaac"
+    },
+    "neutral_observer": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/neutral_observer.py",
+      "sha256": "9b09085eb708c084d82682b13848666ef1ca5f3fc6c10861d96e139228af927a"
+    },
+    "observed_input_domain": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/observed_input_domain.py",
+      "sha256": "5b8f2f84af9e946e939a53e4f4c70c1eea49e5e2f8017bac547537380e2a7785"
+    },
+    "terminal_composition": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/terminal_composition.py",
+      "sha256": "10ab6ba513d3cc0b4dbf96868d8c716eee449068dba3f2fcdf06d5b35566609e"
+    },
+    "typed_material_observations": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/typed_material_observations.py",
+      "sha256": "423d0c2f70192a914feae4ac99144c832b08373acf08a8c488510338197fb565"
+    }
+  },
+  "sourceManifest": {
+    "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+    "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+  },
+  "sourceInventorySha256Before": "2c06ba8133eddb500e1cfc9ef7620f978e13530dc690b7255f457a2b7cf441f2",
+  "sourceInventorySha256After": "2c06ba8133eddb500e1cfc9ef7620f978e13530dc690b7255f457a2b7cf441f2",
+  "directSourceBeforeAfter": {
+    "common_addressed_material": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_addressed_material.py",
+      "sha256Before": "0f5de8d03d14fe978ff468810e7a8e4dea9215db90b0d6a51ba189660bb62f85",
+      "sha256After": "0f5de8d03d14fe978ff468810e7a8e4dea9215db90b0d6a51ba189660bb62f85"
+    },
+    "common_addressed_field": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_addressed_field.py",
+      "sha256Before": "4659d687838934212829b90a3f40f306716f0490034f24d280def1f9b52b7af0",
+      "sha256After": "4659d687838934212829b90a3f40f306716f0490034f24d280def1f9b52b7af0"
+    },
+    "common_field_stock": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_field_stock.py",
+      "sha256Before": "d265b26743f112f8f9e18b18461a20f998fb4d16ba2efb9615a53d317ea0cc46",
+      "sha256After": "d265b26743f112f8f9e18b18461a20f998fb4d16ba2efb9615a53d317ea0cc46"
+    },
+    "common_linked_preparation": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_linked_preparation.py",
+      "sha256Before": "90095faefe45772155a565b32fb12172f23569d317e890e814925b801c098012",
+      "sha256After": "90095faefe45772155a565b32fb12172f23569d317e890e814925b801c098012"
+    }
+  },
+  "fixture": {
+    "path": "tests/fixtures/v6-addressed-material-reference.json.gz",
+    "bytes": 1074290,
+    "sha256": "063fa8d5114852fa0ffdd9e1a62fff79bf967ffcef8689186c2badcd0556b682",
+    "uncompressedBytes": 19544635
+  },
+  "exporter": {
+    "path": "scripts/export-v6-addressed-material-reference.py",
+    "bytes": 41167,
+    "sha256": "dea2f235885442441842c12fd42597c944e2e230e91ac34b5b27cd6347293834"
+  },
+  "counts": {
+    "helpers": 14,
+    "coldChains": 19,
+    "chainOperations": 522,
+    "sourceExceptions": 0
+  },
+  "qualifications": [
+    "All rasters and returned transitions are synthetic public observations, not game solutions or live success.",
+    "Every owner chain begins cold; forked branches include their entire acquired prefix in the exported operations.",
+    "Method inputs/results use JSON transport key semantics; sourceState separately preserves non-string-key mappings as ordered entries.",
+    "JSON object insertion order is preserved because original record iterates rival prediction mappings; alphabetical serialization would change consumed inputs.",
+    "Source current_observation absence is preserved until the wrapper actually creates the attribute.",
+    "Native repeated restoration is an extension contract; Python does not define a checkpoint API here.",
+    "Original exceptions and state after exceptions remain explicit; no TypeScript expectation supplies an original output.",
+    "Component helpers are separate from common-caller selection and independent game contribution.",
+    "Journal mode ignores all captured native results and never imports a native proposal as the original proposal."
+  ],
+  "mode": "declared-synthetic-public-returns",
+  "inputJournals": []
+}

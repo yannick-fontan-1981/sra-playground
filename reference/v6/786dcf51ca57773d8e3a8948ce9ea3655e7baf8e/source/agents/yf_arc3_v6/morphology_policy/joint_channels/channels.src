@@ -1,0 +1,7 @@
+MODULE v6.joint_channels
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        decision: Any
+    STEP select
+        CALL channels.select(request=request) -> decision
+        STOP decision

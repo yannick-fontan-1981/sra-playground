@@ -1,0 +1,22 @@
+{
+  "module_id": "latent_solving_c",
+  "declarations": [{
+    "id":"policy.latent_solving_c","kind":"selection_policy","evaluation":"declared_eligibility_single",
+    "supported_operators":["SELECT"],"input_contract":"yf_arc3_v5.authority_input.selection.v1",
+    "output_contract":"yf_arc3_v5.authority_output.selection.v1",
+    "declared_alternative_refs":["latent_solving.native","latent_solving.missing"],
+    "selection_required_fact_fields":["alternative_ref"],
+    "selection_eligibility_conditions":[{"field":"eligible","operator":"equals","expected":true}],
+    "fact_projections":[
+      {"id":"projection.latent_solving.native","all_conditions":[
+        {"field":"alternative_ref","operator":"equals","expected":"latent_solving.native"},
+        {"field":"current_latent_question","operator":"equals","expected":true}],"static_facts":{"eligible":true}},
+      {"id":"projection.latent_solving.missing","all_conditions":[
+        {"field":"alternative_ref","operator":"equals","expected":"latent_solving.missing"},
+        {"field":"current_latent_question","operator":"equals","expected":false}],"static_facts":{"eligible":true}}],
+    "premises":["current_goal_owned_agenda","exact_acquired_native_field_closure","causal_support_for_confirmed_laws"],
+    "invariants":["single_declared_K41_operation","hypotheses_remain_hypotheses","no_uniformity_goal","no_ACT"],
+    "falsifiers":["stale_acquisition","unqualified_supported_reference_or_edit_law","unconsumed_request_not_current"],
+    "reason_refs":["reason.fixed_reference_measurements_serve_the_preserved_parent_dependency"]
+  }]
+}

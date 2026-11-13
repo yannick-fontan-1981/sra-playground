@@ -1,0 +1,20 @@
+{
+  "schema": "logos-engine.lot8b.common-functional-command.v1",
+  "status": "running",
+  "kind": "typecheck",
+  "command": [
+    "node",
+    "node_modules/typescript/bin/tsc",
+    "--noEmit"
+  ],
+  "timeoutSeconds": 120,
+  "startedAt": "2026-11-12T04:27:12.933264+00:00",
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "headBefore": "b5d34121d6d1e79ae673372b5969d4883dcd9de8",
+  "inputCount": 2443,
+  "globalLockAcquired": false,
+  "officialPerformanceMeasurement": false,
+  "gameExecution": false,
+  "gameReplay": false,
+  "published": false
+}

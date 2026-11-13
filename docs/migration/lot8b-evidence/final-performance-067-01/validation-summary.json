@@ -1,0 +1,225 @@
+{
+  "schema": "logos-engine.lot8b.final-official-cost-qualification.v1",
+  "recordedAt": "2026-11-12T12:46:34.766655+00:00",
+  "status": "official_cost_accepted_in_declared_window",
+  "baseline": {
+    "checkout": "/workspace/sites/sra-lot8b-baseline066-20261112",
+    "nativeVersion": "0.66.0",
+    "nativeDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+    "nativeFiles": 329,
+    "sourceCommit": "4ff7bf45286a8a19d34401988adca587253ae41e",
+    "manifest": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/baseline-native.json",
+      "bytes": 39098,
+      "sha256": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7"
+    },
+    "siteVersion": 107
+  },
+  "candidate": {
+    "checkout": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+    "nativeVersion": "0.67.0",
+    "nativeDigest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+    "nativeFiles": 331,
+    "sourceCommit": "2cd4e7e557cb15034849da8c2794fa612cdbff18",
+    "manifest": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/candidate-native.json",
+      "bytes": 39333,
+      "sha256": "18fcc15c6e57f1bf6aab33cc62498e6a5a76836d85b890378be957a0e6da1c57"
+    },
+    "siteVersion": null
+  },
+  "executionHead": "05dcb0fbfbddeb6c3963452dc6191b2bf1b9a441",
+  "nativeDigests": {
+    "baseline": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+    "candidate": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a"
+  },
+  "globalRule": {
+    "authorization": "si le global reste en dessous de 10% d'augmentation alors une phase qui dépasse 10% peut être accepté.",
+    "stage": "session_elapsed",
+    "relativeIncreaseLimit": 0.1,
+    "comparison": "strictly_less_than",
+    "allCasesMustPass": true,
+    "crossCaseCompensation": false,
+    "phaseOverrunsMayBeAccepted": true
+  },
+  "globalBudgetAccepted": true,
+  "globalResults": [
+    {
+      "case": "STCK",
+      "sessionsPerVersion": 8,
+      "beforeMedianMs": 9921.971879499999,
+      "afterMedianMs": 9853.021749499996,
+      "medianRelativeIncrease": -0.006949236586979435,
+      "accepted": true,
+      "baselineRawMs": [
+        9866.005269000001,
+        10617.128491,
+        9922.564069999997,
+        9872.049641999998,
+        9950.226401,
+        10075.306036,
+        9846.708253999997,
+        9921.379689000001
+      ],
+      "candidateRawMs": [
+        10135.524977000001,
+        9932.569094,
+        9712.590781000003,
+        9773.474404999994,
+        9971.114653,
+        9696.208856999998,
+        9652.332346,
+        10036.716414000002
+      ]
+    },
+    {
+      "case": "SMLP",
+      "sessionsPerVersion": 8,
+      "beforeMedianMs": 15364.41813050001,
+      "afterMedianMs": 15087.339491000006,
+      "medianRelativeIncrease": -0.018033786710736077,
+      "accepted": true,
+      "baselineRawMs": [
+        15628.826429,
+        15162.981065,
+        15524.26365800001,
+        15204.572603000008,
+        15920.608233999992,
+        15909.351479000004,
+        15104.812650000007,
+        15079.528491000005
+      ],
+      "candidateRawMs": [
+        15087.219692000006,
+        15548.161573999998,
+        14589.304592999993,
+        14724.164300000004,
+        15087.459290000006,
+        14866.080705,
+        15820.614906000003,
+        15168.504069999995
+      ]
+    }
+  ],
+  "population": {
+    "order": [
+      "A1",
+      "B1",
+      "B2",
+      "A2"
+    ],
+    "measuredSessions": 32,
+    "measuredActions": 400,
+    "warmupSessions": 8,
+    "warmupActions": 24,
+    "sessionsPerCaseVersion": 8,
+    "excludedMeasuredSessions": 0,
+    "excludedOutliers": 0,
+    "exactFinalFormsChecked": 40,
+    "fullWorkSignaturesChecked": 40
+  },
+  "pooledPhaseOverruns": [],
+  "historicalPairPhaseOverruns": [
+    {
+      "cohort": "cohort1",
+      "case": "SMLP",
+      "stage": "restoration",
+      "result": "over_budget_with_noise_unresolved",
+      "medianRelativeIncrease": 0.30360493660373233
+    },
+    {
+      "cohort": "cohort2",
+      "case": "STCK",
+      "stage": "restoration",
+      "result": "over_budget_with_noise_unresolved",
+      "medianRelativeIncrease": 0.29977210318790104
+    }
+  ],
+  "pairPhaseTreatment": "Both original pairs retain budget_review_required. Their two restoration overruns are admitted by the user-authorized prospective global rule; no sample is removed and no noise allowance is added.",
+  "historicalStrictComparison": {
+    "passed": false,
+    "actualExitCode": 1,
+    "expectedError": "Within-cohort work metadata changed",
+    "combinedOutputExists": false,
+    "receivedDiagnosticBytes": 65536,
+    "diagnosticPrintEndsPartwayThroughObject": true,
+    "allBytesActuallyReceivedRetained": true,
+    "automaticRetry": false,
+    "supplementaryExactPredeclaredStructuralRuleApplied": true
+  },
+  "evidence": {
+    "contract": {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/contract.json",
+      "bytes": 161021,
+      "sha256": "5c4560add21a3e14b0f570ed72466d1f28bcd603b7e7f596a4ac3e59f9f18ab4"
+    },
+    "window": {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/window.json",
+      "bytes": 10958,
+      "sha256": "c82a2660608c7103821bd7d78929945656fc41ae2dd3e69bb9224e421509e5a2"
+    },
+    "analysis": {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/analysis.json",
+      "bytes": 275718,
+      "sha256": "0b893613b621eb140de18894b38a5124a029bfcf593ae1945d33c55de491315e"
+    },
+    "independentArithmetic": {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/independent-review.json",
+      "bytes": 152971,
+      "sha256": "a88da4f782af344e76868ff217a25da3713817bb7432facd547da9979ac8918c"
+    },
+    "independentDeliveryCost": {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/independent-delivery-cost-review.json",
+      "bytes": 14736,
+      "sha256": "0cb0ab3c1015b20e32622eeb4b6e73c56580b452019e75847edb652c4cb3efc0"
+    },
+    "controller": {
+      "path": "docs/migration/lot8b-evidence/final-performance-controller-067-01/controller.json",
+      "bytes": 6968,
+      "sha256": "f7443ba964ff60d72ae216f92ae24b838fec9bff9cf16093e588506316b0dd68"
+    },
+    "independentController": {
+      "path": "docs/migration/lot8b-evidence/final-performance-controller-067-01/independent-controller-review.json",
+      "bytes": 26950,
+      "sha256": "64c8ad8abd691f5c45016c92ac0155235d9716aa36b2d917865dd7dbc1a2724f"
+    },
+    "functionalQualification": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/validation-summary.json",
+      "bytes": 11481,
+      "sha256": "e039d0cc64ef2aad673a8068ca608bf370fb6a583ab6d0040f6b1c4502964f4e"
+    },
+    "functionalIndependentReview": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/final-functional-independent-review.json",
+      "bytes": 61988,
+      "sha256": "ca7a8b58e77d97210bd984122db621d7ea7cd18c05ceebd9adaa64e17d008712"
+    },
+    "buildReconciliation": {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/build-reconciliation.json",
+      "bytes": 1682,
+      "sha256": "53ef23ff36f970f9c4d68827fc24df33bb41fd9689743696f3a8bdd12d491494"
+    }
+  },
+  "coordination": {
+    "measurementExclusiveSeconds": 481.296865,
+    "singleNonblockingAcquisition": true,
+    "lockDescriptorClosed": true,
+    "sameLockFile": true,
+    "lockFileRemoved": false,
+    "lockFileReplaced": false,
+    "processGroupStopped": true,
+    "ordinaryDevelopmentRequiresGlobalLock": false,
+    "peerAvailabilityWait": false,
+    "ownWorkersClosedBeforeMeasurement": true,
+    "scope": "owned checkouts, current shared performance inode and visible execution namespace; outside ordinary work unknown; no global host quiet claim",
+    "monitoringQualification": "Three small root status-only reads of window.json from scratch during the window; no extra tests, builds, benchmarks or workers."
+  },
+  "scopeLimits": [
+    "Controller elapsed until final acquired return includes pauses/resumes but excludes worker startup, begin, terminal inspection, close, live game engine, network and browser rendering.",
+    "STCK10 has two acquired levels for target3; SMLP15 has three. No new official game success or selected BranchRouting acquisition is inferred from these forms.",
+    "Positive BranchRouting evidence covers the native runtime; public64x64 facade, tickets and worker positive qualification remain open.",
+    "Historical 0.65 and 0.66 cost reservations remain distinct. Six global migration gates remain false."
+  ],
+  "publicationPerformedAtThisMilestone": false,
+  "nextStep": "Publish exact qualified native0.67 source using the short publication lease and current owner-private audience.",
+  "LKEY": "permanently_closed"
+}

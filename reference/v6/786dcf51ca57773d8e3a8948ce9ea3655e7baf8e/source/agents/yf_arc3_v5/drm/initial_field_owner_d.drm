@@ -1,0 +1,53 @@
+{
+  "module_id": "arc3.initial_field_owner_d",
+  "declarations": [
+    {
+      "id": "policy.initial_field_owner_d", "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single", "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason.actual_current_question_goal_and_budget_bind_initial_field_owner"],
+      "configuration": {"owner_predicate_ref": "current_source_observation_owner_scope_bound"},
+      "declared_alternative_refs": ["initial_owner.publish", "initial_owner.unknown"],
+      "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+      "fact_projections": [
+        {"id": "projection.initial_owner.publish", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "initial_owner.publish"},
+          {"field": "initial_owner_basis_current", "operator": "equals", "expected": true}
+        ], "static_facts": {"eligible": true}},
+        {"id": "projection.initial_owner.unknown", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "initial_owner.unknown"},
+          {"field": "initial_owner_basis_current", "operator": "equals", "expected": false}
+        ], "static_facts": {"eligible": true}}
+      ],
+      "meaning_template_ref_by_alternative": {"initial_owner.publish": "rule.initial_field_owner_d"},
+      "invariants": ["actual_current_question_and_independent_principal_support", "scope_not_naked_map",
+        "no_native_agenda_initialization_cycle", "exact_actual_budget_and_acquisition",
+        "no_role_or_law_upgrade", "no_action_authority", "no_physical_goal_confirmation"]
+    },
+    {
+      "id": "rule.initial_field_owner_d", "kind": "rule", "evaluation": "project_requested_conclusions",
+      "supported_operators": ["DERIVE"], "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1", "relation_family": "epistemic",
+      "reason_refs": ["reason.actual_current_question_goal_and_budget_bind_initial_field_owner"],
+      "term_templates": [{"id_pattern": "{owner_term_ref}", "kind": "value", "label": "Current Source-bound initial observation owner",
+        "required_fields": ["owner_term_ref", "owner", "owner_digest", "scalar_request_digest"],
+        "attribute_bindings": {"value": "owner", "owner_digest": "owner_digest", "scalar_request_digest": "scalar_request_digest",
+          "principal_support_digest": "principal_support_digest", "question_digest": "question_digest"},
+        "static_attributes": {"source_kind_ref": "initial.source_observation_owner.v1", "no_action_authority": true}}],
+      "claim_templates": [{"id_pattern": "{owner_support_claim_ref}", "predicate": "current_source_observation_owner_scope_bound",
+        "family": "epistemic", "epistemic_status": "supported", "argument_patterns": ["{owner_term_ref}", "{parent_goal_ref}"],
+        "required_term_patterns": ["{owner_term_ref}", "{parent_goal_ref}"],
+        "required_fields": ["owner_support_claim_ref", "owner_term_ref", "owner_digest", "scalar_request_digest"],
+        "attribute_bindings": {"owner_digest": "owner_digest", "scalar_request_digest": "scalar_request_digest",
+          "principal_support_digest": "principal_support_digest", "question_digest": "question_digest"},
+        "scope_bindings": {"parent_goal_ref": "parent_goal_ref", "scope_ref": "scope_ref", "epoch": "epoch",
+          "input_revision_ref": "input_revision_ref", "level_scope_ref": "level_scope_ref", "current_frame_ref": "current_frame_ref",
+          "caller_ref": "caller_ref", "parent_consumer_ref": "parent_consumer_ref", "parent_contribution_ref": "parent_contribution_ref",
+          "caller_next_item_ref": "caller_next_item_ref", "evidence_revision_ref": "evidence_revision_ref",
+          "model_revision_ref": "model_revision_ref", "model_status_ref": "model_status_ref", "event_owner_ref": "event_owner_ref",
+          "input_domain_complete": "input_domain_complete", "assumption_refs": "assumption_refs", "episode_ref": "episode_ref"},
+        "static_attributes": {"no_role_truth_upgrade": true, "no_action_authority": true, "no_physical_goal_confirmation": true}}]
+    }
+  ]
+}

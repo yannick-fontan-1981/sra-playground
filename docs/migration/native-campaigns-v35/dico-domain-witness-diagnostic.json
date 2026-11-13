@@ -1,0 +1,639 @@
+{
+  "schema": "logos-engine.v6.public-neutral-domain-diagnostic.v1",
+  "qualification": "Only the recorded 32 game commands are replayed, with all 33 complete public packets compared. Python in the game interpreter hosts games only. A separate pure observer/check oracle consumes supplied public JSON and never runs the Python agent. No further action, private state, cap change or solution claim. The original and native complete neutral observations agree; the same limit rejects the final transition.",
+  "campaign": {
+    "file": "/workspace/scratch/656587eca20f/playground-site/.sites-checkout/docs/migration/native-campaigns-v35/dico-before-domain-handling.json",
+    "sha256": "6ed331606cd512252c71061a71dd9457231f522d649770aaab40192fe95614b8",
+    "sourceDigest": "bc40e13b6891257a92b378a9c5637baf5d6b2473cd8d0ead942038f0e3fd4f77",
+    "sourceFileCount": 116
+  },
+  "nativeSources": {
+    "src/logos-engine/v6-native-observer.ts": "87dffa7cf8d7f5b8f645d29ba2996844a604fb846286378503fd16a911c54882",
+    "src/logos-engine/v6-transition-learning.ts": "182c8db11fd7259395d23e1fd5fb87fbfb92f61f0baf5835183849a45ce6914f"
+  },
+  "referenceSources": {
+    "neutral_observer.py": "9b09085eb708c084d82682b13848666ef1ca5f3fc6c10861d96e139228af927a",
+    "geometric_observer.py": "1017b130cb91f799ab5bdb2f26789c2645078d9b9d226469b3915d4a7262eaac",
+    "common_mechanisms.py": "e70dad68ac6ce1c6f95224a8cb26994bba3c2e7a93430dc8d0244017ee0f0631"
+  },
+  "gameAssets": {
+    "custom-games.zip": "44d108fe4feed3ce0c9587e90f071876b13730af8136cd54cbfa5c1562d87822",
+    "official-games.zip": "90b5aeaee21ec11285799287445b33d3c19f4ea4894a8a60964117f7757f59ed",
+    "game_bridge.py": "cc9df3ea6eae0057898fa01fd949322c6af0b481030f4c271b9a719f0a07983e",
+    "official_adapter.py": "efead273b89ffe8cf595e41b9f4b25a6106e6cb6e5a7d1013ebc887cfc646837",
+    "custom_level_navigation.py": "8cc1716619aff08915135ebfa093fc305b211e28fabdff2c027d994d84f82c9b"
+  },
+  "replay": {
+    "commands": 32,
+    "checkedPackets": 33,
+    "pythonAgentModules": [],
+    "finalLevel": 5,
+    "completedLevels": 4,
+    "lastCommand": {
+      "action_ref": "ACTION6",
+      "data": {
+        "x": 6,
+        "y": 3
+      }
+    }
+  },
+  "measurements": [
+    {
+      "afterSequence": 0,
+      "level": 1,
+      "entities": 147
+    },
+    {
+      "afterSequence": 1,
+      "level": 1,
+      "entities": 148,
+      "animationEntities": [
+        148,
+        139,
+        137,
+        134,
+        132,
+        129,
+        129,
+        129,
+        129,
+        129,
+        129,
+        136,
+        144,
+        148
+      ]
+    },
+    {
+      "afterSequence": 2,
+      "level": 1,
+      "entities": 148,
+      "animationEntities": [
+        148,
+        139,
+        137,
+        134,
+        132,
+        129,
+        129,
+        129,
+        129,
+        129,
+        129,
+        136,
+        144,
+        148
+      ]
+    },
+    {
+      "afterSequence": 3,
+      "level": 1,
+      "entities": 145,
+      "animationEntities": [
+        145
+      ]
+    },
+    {
+      "afterSequence": 4,
+      "level": 1,
+      "entities": 146,
+      "animationEntities": [
+        146,
+        144,
+        144,
+        144,
+        144,
+        144,
+        144,
+        146,
+        146
+      ]
+    },
+    {
+      "afterSequence": 5,
+      "level": 1,
+      "entities": 137,
+      "animationEntities": [
+        137,
+        136,
+        136,
+        136,
+        136,
+        136,
+        136,
+        137
+      ]
+    },
+    {
+      "afterSequence": 6,
+      "level": 1,
+      "entities": 147,
+      "animationEntities": [
+        146,
+        145,
+        143,
+        140,
+        137,
+        136,
+        133,
+        130,
+        130,
+        130,
+        130,
+        130,
+        130,
+        134,
+        141,
+        146,
+        1,
+        1,
+        1,
+        147
+      ]
+    },
+    {
+      "afterSequence": 7,
+      "level": 2,
+      "entities": 228,
+      "animationEntities": [
+        144,
+        143,
+        138,
+        133,
+        129,
+        126,
+        126,
+        126,
+        126,
+        126,
+        126,
+        127,
+        127,
+        127,
+        126,
+        228
+      ]
+    },
+    {
+      "afterSequence": 8,
+      "level": 2,
+      "entities": 229,
+      "animationEntities": [
+        229,
+        207,
+        202,
+        196,
+        191,
+        185,
+        185,
+        185,
+        185,
+        185,
+        185,
+        202,
+        219,
+        229
+      ]
+    },
+    {
+      "afterSequence": 9,
+      "level": 2,
+      "entities": 215,
+      "animationEntities": [
+        215
+      ]
+    },
+    {
+      "afterSequence": 10,
+      "level": 2,
+      "entities": 216,
+      "animationEntities": [
+        216,
+        209,
+        209,
+        209,
+        209,
+        209,
+        209,
+        214,
+        216
+      ]
+    },
+    {
+      "afterSequence": 11,
+      "level": 2,
+      "entities": 178,
+      "animationEntities": [
+        178
+      ]
+    },
+    {
+      "afterSequence": 12,
+      "level": 2,
+      "entities": 179,
+      "animationEntities": [
+        179,
+        175,
+        167,
+        160,
+        151,
+        143,
+        137,
+        137,
+        137,
+        137,
+        137,
+        137,
+        153,
+        169,
+        179
+      ]
+    },
+    {
+      "afterSequence": 13,
+      "level": 3,
+      "entities": 235,
+      "animationEntities": [
+        161,
+        160,
+        152,
+        144,
+        136,
+        128,
+        119,
+        119,
+        119,
+        119,
+        119,
+        119,
+        119,
+        119,
+        119,
+        119,
+        235
+      ]
+    },
+    {
+      "afterSequence": 14,
+      "level": 3,
+      "entities": 236,
+      "animationEntities": [
+        236,
+        210,
+        210,
+        210,
+        210,
+        210,
+        210,
+        219,
+        230,
+        236
+      ]
+    },
+    {
+      "afterSequence": 15,
+      "level": 3,
+      "entities": 239,
+      "animationEntities": [
+        239
+      ]
+    },
+    {
+      "afterSequence": 16,
+      "level": 3,
+      "entities": 240,
+      "animationEntities": [
+        240,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        233,
+        237,
+        240
+      ]
+    },
+    {
+      "afterSequence": 17,
+      "level": 3,
+      "entities": 202,
+      "animationEntities": [
+        202
+      ]
+    },
+    {
+      "afterSequence": 18,
+      "level": 3,
+      "entities": 203,
+      "animationEntities": [
+        203,
+        199,
+        199,
+        199,
+        199,
+        199,
+        199,
+        201,
+        203
+      ]
+    },
+    {
+      "afterSequence": 19,
+      "level": 3,
+      "entities": 179,
+      "animationEntities": [
+        179
+      ]
+    },
+    {
+      "afterSequence": 20,
+      "level": 3,
+      "entities": 180,
+      "animationEntities": [
+        180,
+        180,
+        180,
+        180,
+        180,
+        180,
+        180,
+        181,
+        180
+      ]
+    },
+    {
+      "afterSequence": 21,
+      "level": 4,
+      "entities": 368,
+      "animationEntities": [
+        176,
+        176,
+        165,
+        155,
+        143,
+        133,
+        123,
+        122,
+        122,
+        122,
+        122,
+        122,
+        122,
+        121,
+        121,
+        121,
+        122,
+        368
+      ]
+    },
+    {
+      "afterSequence": 22,
+      "level": 4,
+      "entities": 369,
+      "animationEntities": [
+        369,
+        311,
+        311,
+        311,
+        311,
+        311,
+        311,
+        330,
+        352,
+        369
+      ]
+    },
+    {
+      "afterSequence": 23,
+      "level": 4,
+      "entities": 363,
+      "animationEntities": [
+        363
+      ]
+    },
+    {
+      "afterSequence": 24,
+      "level": 4,
+      "entities": 364,
+      "animationEntities": [
+        364,
+        332,
+        332,
+        332,
+        332,
+        332,
+        332,
+        342,
+        354,
+        364
+      ]
+    },
+    {
+      "afterSequence": 25,
+      "level": 4,
+      "entities": 323,
+      "animationEntities": [
+        323
+      ]
+    },
+    {
+      "afterSequence": 26,
+      "level": 4,
+      "entities": 324,
+      "animationEntities": [
+        324,
+        312,
+        295,
+        275,
+        257,
+        238,
+        221,
+        210,
+        210,
+        210,
+        210,
+        210,
+        210,
+        248,
+        290,
+        324
+      ]
+    },
+    {
+      "afterSequence": 27,
+      "level": 4,
+      "entities": 291,
+      "animationEntities": [
+        291
+      ]
+    },
+    {
+      "afterSequence": 28,
+      "level": 4,
+      "entities": 292,
+      "animationEntities": [
+        292,
+        285,
+        268,
+        248,
+        230,
+        213,
+        194,
+        176,
+        176,
+        176,
+        176,
+        176,
+        176,
+        217,
+        256,
+        292
+      ]
+    },
+    {
+      "afterSequence": 29,
+      "level": 4,
+      "entities": 271,
+      "animationEntities": [
+        271
+      ]
+    },
+    {
+      "afterSequence": 30,
+      "level": 4,
+      "entities": 272,
+      "animationEntities": [
+        272,
+        271,
+        271,
+        271,
+        271,
+        271,
+        271,
+        272,
+        272
+      ]
+    },
+    {
+      "afterSequence": 31,
+      "level": 5,
+      "entities": 530,
+      "animationEntities": [
+        269,
+        269,
+        250,
+        228,
+        208,
+        190,
+        170,
+        155,
+        155,
+        155,
+        155,
+        155,
+        155,
+        153,
+        153,
+        153,
+        155,
+        530
+      ]
+    },
+    {
+      "afterSequence": 32,
+      "level": 5,
+      "entities": 531,
+      "animationEntities": [
+        531,
+        470,
+        470,
+        470,
+        470,
+        470,
+        470,
+        492,
+        514,
+        531
+      ]
+    }
+  ],
+  "finalTransition": {
+    "before": {
+      "entities": 530,
+      "byPalette": {
+        "2": 123,
+        "4": 8,
+        "5": 30,
+        "10": 50,
+        "11": 137,
+        "12": 128,
+        "14": 4,
+        "15": 50
+      },
+      "byArea": {
+        "1": 350,
+        "2": 10,
+        "3": 132,
+        "4": 10,
+        "6": 2,
+        "10": 4,
+        "11": 1,
+        "22": 2,
+        "28": 3,
+        "29": 4,
+        "30": 9,
+        "36": 1,
+        "215": 1,
+        "2462": 1
+      },
+      "ambiguous": 521
+    },
+    "after": {
+      "entities": 531,
+      "byPalette": {
+        "0": 1,
+        "2": 124,
+        "4": 8,
+        "5": 30,
+        "10": 50,
+        "11": 136,
+        "12": 128,
+        "14": 4,
+        "15": 50
+      },
+      "byArea": {
+        "1": 350,
+        "2": 11,
+        "3": 132,
+        "4": 10,
+        "6": 2,
+        "10": 4,
+        "11": 1,
+        "22": 2,
+        "28": 4,
+        "29": 4,
+        "30": 8,
+        "36": 1,
+        "215": 1,
+        "2462": 1
+      },
+      "ambiguous": 520
+    },
+    "maxEntities": 512,
+    "fullNeutralObservationParity": true,
+    "nativeCheck": {
+      "accepted": false,
+      "type": "RangeError",
+      "message": "Neutral entity measurement domain exceeded",
+      "stack": "RangeError: Neutral entity measurement domain exceeded\n    at checkNeutralTransition (file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/v6-transition-learning.ts:89:59)\n    at assessTransitionState (file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/v6-transition-learning.ts:430:3)\n    at assessRetainedTransition (file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/v6-transition-learning.ts:426:33)\n    at file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/docs/migration/native-campaigns-v35/dico-domain-witness-diagnostic.mjs:65:13"
+    },
+    "originalCheck": {
+      "accepted": false,
+      "type": "ValueError",
+      "message": "Neutral entity measurement domain exceeded"
+    }
+  },
+  "witnessFile": "/workspace/scratch/656587eca20f/playground-site/.sites-checkout/docs/migration/native-campaigns-v35/dico-domain-public-witness.json.gz"
+}

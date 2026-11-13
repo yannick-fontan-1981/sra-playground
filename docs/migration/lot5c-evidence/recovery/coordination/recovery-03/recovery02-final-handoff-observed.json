@@ -1,0 +1,30 @@
+{
+  "schema": "logos-engine.lot5c-final-recovery-handoff.v1",
+  "recordedAt": "2026-11-11T20:39:04.511712+00:00",
+  "sourceCheckpoint": "37f3dabeaf8807045effb81cc3437da53f10ee97",
+  "branch": "lot5c-recovery-checkpoint-20261111",
+  "originalCheckpointPreserved": "501198d7638c7a56c3b85d357beb917469899402",
+  "remotelyVerified": true,
+  "allOwnCommandsTerminal": true,
+  "allOwnWorkersIdle": true,
+  "noQueuedCommands": true,
+  "quietRequested": false,
+  "quietReleasedAt": "2026-11-11T20:30:25.610691+00:00",
+  "performanceMutex": {
+    "device": 27,
+    "inode": 1971854,
+    "path": "/workspace/shared/sra-coordination/performance.lock",
+    "unchanged": true
+  },
+  "officialCostMeasured": false,
+  "candidate063Published": false,
+  "actuallyPublished": {
+    "site": 103,
+    "nativeVersion": "0.62.0",
+    "nativeSite": 102
+  },
+  "terminalReviewChecks": 19,
+  "roadmap": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/v6-delivery-roadmap.md",
+  "closure": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/coordination/recovery-02/recovery-closure.json",
+  "newQuietCycleQueued": false
+}

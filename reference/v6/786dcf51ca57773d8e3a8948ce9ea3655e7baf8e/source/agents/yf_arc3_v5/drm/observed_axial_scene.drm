@@ -1,0 +1,200 @@
+{
+  "module_id": "observed_axial_scene",
+  "declarations": [
+    {
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "id": "policy.observed_axial_scene_measurement",
+      "configuration": {
+        "measurement": {
+          "maximum_pitch": 32,
+          "maximum_components": 512,
+          "maximum_cells": 4096,
+          "maximum_fields": 64
+        },
+        "edge_thickness": 1,
+        "parent_consumer_ref": "consumer.current_oriented_pair_experiment",
+        "parent_goal_ref": "goal.reveal_action_conditioned_structure",
+        "caller_next_item_ref": "step.project_current_oriented_pair_experiment",
+        "model_status_ref": "current_partial_geometry_only",
+        "assumption_refs": [
+          "assumption.bordered_locus_may_receive_a_measured_member"
+        ],
+        "missing_support_refs": [
+          "unknown.axis_interaction_law",
+          "unknown.polarity_effect",
+          "unknown.force_distance_law",
+          "unknown.discrete_stability_rule"
+        ],
+        "operation_ref": "mechanics.axial_field_configuration.measure",
+        "mode_ref": "MEASURE",
+        "node_bound": 20000,
+        "domain_bound": 128,
+        "time_bound_ms": 500,
+        "measure_current_cardinal_turn": true
+      },
+      "fact_projections": [
+        {
+          "id": "projection.observed_axial_scene.complete_unique_pair_locus",
+          "all_conditions": [
+            {
+              "field": "pair_calibration_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "pole_cell_count",
+              "operator": "equals",
+              "expected": 2
+            },
+            {
+              "field": "locus_occurrence_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "singleton_bordered_pattern_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "locus_between_pair",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "shared_edge_palette_count",
+              "operator": "equals",
+              "expected": 1
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.current_bounded_edge_pair_and_locus_support_an_operator_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ]
+    },
+    {
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "id": "policy.observed_axial_scene_meaning",
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.observed_axial_scene_composition"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.observed_axial_scene.meaning",
+          "all_conditions": [
+            {
+              "field": "axial_geometry_currently_measured",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.pair_geometry_qualifies_an_experiment_not_a_force_law"
+      ]
+    },
+    {
+      "id": "rule.observed_axial_scene_composition",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "term_templates": [
+        {
+          "id_pattern": "term.observed_axial_scene.{axial_scene_token}",
+          "kind": "schema",
+          "label": "current measured oriented pair, intermediate locus and optional paired-input axis observations",
+          "required_fields": [
+            "axial_scene_token",
+            "axial_scene_frame_ref",
+            "axial_body_refs",
+            "axial_receiver_layer_refs",
+            "axial_field_bounds"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.observed_axial_scene.v1",
+            "canonical_fact_projection_enabled": false,
+            "force_law_established": false,
+            "control_binding_established": false
+          },
+          "attribute_bindings": {
+            "operational_scene_ref": "axial_scene_frame_ref",
+            "body_refs": "axial_body_refs",
+            "receiver_layer_refs": "axial_receiver_layer_refs",
+            "context_epoch": "axial_scene_epoch",
+            "source_return_ref": "axial_source_return_ref",
+            "field_bounds": "axial_field_bounds",
+            "observed_turn_complete": "axial_observed_turn_complete",
+            "observed_turn_point": "axial_observed_turn_point",
+            "observed_turn_body_ref": "axial_observed_turn_body_ref",
+            "observed_turn_quarter": "axial_observed_turn_quarter",
+            "observed_turn_before_axis": "axial_observed_turn_before_axis",
+            "observed_turn_after_axis": "axial_observed_turn_after_axis",
+            "observed_turn_repeated_axis": "axial_observed_turn_repeated_axis",
+            "observed_turn_other_axis": "axial_observed_turn_other_axis",
+            "observed_turn_before_frame_ref": "axial_observed_turn_before_frame_ref",
+            "observed_turn_action_ref": "axial_observed_turn_action_ref",
+            "observed_turn_source_receipt_ref": "axial_observed_turn_source_receipt_ref",
+            "repeated_turn_coorients": "axial_repeated_turn_coorients",
+            "locus_between_pair": "axial_locus_between_pair"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.observed_axial_scene.{axial_scene_token}",
+          "predicate": "observes_current_oriented_pair_and_intermediate_locus",
+          "family": "control",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "term.observed_axial_scene.{axial_scene_token}"
+          ],
+          "required_fields": [
+            "axial_scene_token"
+          ],
+          "static_attributes": {
+            "force_law_established": false
+          },
+          "attribute_bindings": {
+            "operational_scene_ref": "axial_scene_frame_ref",
+            "context_epoch": "axial_scene_epoch",
+            "observed_turn_complete": "axial_observed_turn_complete"
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.pair_geometry_qualifies_an_experiment_not_a_force_law"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "game": "TICT",
+  "targetLevels": 6,
+  "command": [
+    "node",
+    "scripts/run-v44-campaign.mjs",
+    "TICT",
+    "6",
+    "docs/migration/native-campaigns-v44/tict-six-levels.json"
+  ],
+  "startedAt": "2026-11-08T18:46:22.133568+00:00",
+  "finishedAt": "2026-11-08T18:48:41.209888+00:00",
+  "exitCode": 0,
+  "output": {
+    "path": "docs/migration/native-campaigns-v44/logs/regression-tict.log.gz",
+    "sha256": "721db7518631be4d0eb8c18f7a58f43a5681eb7d9cd6ab7ca33c1e41efb0dfe4",
+    "bytes": 7585
+  },
+  "report": {
+    "path": "docs/migration/native-campaigns-v44/tict-six-levels.json",
+    "sha256": "f09653cdd1bcb82314d7684f7b5509135bb00351074aba39f5bef4404d4998b6",
+    "bytes": 808492
+  },
+  "status": "passed",
+  "final": {
+    "actions": 55,
+    "levelsCompleted": 6,
+    "level": 6,
+    "state": "WIN",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 116.71675739299998,
+    "prefixes": 55,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 55,
+      "boundaryReplays": 5,
+      "goalEvents": 6,
+      "frontierDeltas": 111,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 56
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 56
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 15
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 50
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 56
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 57
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology",
+        "attention_parent_return",
+        "acquire_control_for_target"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 55,
+      "resume": 54
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.14.0"
+  },
+  "sourceDigest": "1b30d1f0a80275a1204b44198b5fd62f43439d16b5eccdd768a4357b78986093",
+  "nativeSourceFiles": 146,
+  "nativeSourceMatchesInitialFiles": true,
+  "sourceUnchangedDuringRun": true,
+  "pythonAgentModules": [],
+  "comparison": {
+    "command": [
+      "node",
+      "scripts/compare-v44-regressions.mjs",
+      "docs/migration/native-campaigns-v43/tict-six-levels.json",
+      "docs/migration/native-campaigns-v44/tict-six-levels.json",
+      "docs/migration/native-campaigns-v44/tict-comparison.json"
+    ],
+    "exitCode": 0,
+    "output": {
+      "path": "docs/migration/native-campaigns-v44/logs/comparison-tict.log.gz",
+      "sha256": "6f3bbf339c4692f4897102f2c8fac78c3b8eb40ff2349bbf0f8c51bc58d42126",
+      "bytes": 110
+    },
+    "path": "docs/migration/native-campaigns-v44/tict-comparison.json",
+    "sha256": "987fc30e502a4d6a59b7037c211fc4f691dcbf9ad7807a055faaf2f1eb9c16f9",
+    "bytes": 3476,
+    "passed": true,
+    "checks": 13,
+    "compared": {
+      "commands": 55,
+      "completePublicPackets": 56,
+      "prefixes": 55
+    },
+    "failedChecks": []
+  }
+}

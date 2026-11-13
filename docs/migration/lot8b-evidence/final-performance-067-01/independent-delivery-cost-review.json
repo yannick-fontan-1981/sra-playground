@@ -1,0 +1,335 @@
+{
+  "schema": "logos-engine.lot8b-final-cost-delivery-review.v1",
+  "status": "reviewed_cost_evidence_no_blocking_objections",
+  "reviewedAt": "2026-11-12T12:44:44.800581+00:00",
+  "reviewer": {
+    "agent": "/root/final_cost_protocol",
+    "role": "Targeted delivery evidence review separate from the actual measurement and calculator executions. This agent authored the final-cost tooling; author-independent static tool review is a separate retained artifact."
+  },
+  "scope": {
+    "contract": "final-performance-067-01/contract.json",
+    "actualWindowOrder": [
+      "A1",
+      "B1",
+      "B2",
+      "A2"
+    ],
+    "rawReports": 4,
+    "originalPairComparisons": 2,
+    "strictComparisonAttempt": 1,
+    "supplementaryAnalysis": 1,
+    "independentPythonArithmeticReview": 1,
+    "controllerIsolationAndClosure": "Reviewed separately by final_tools_review; not asserted by this review."
+  },
+  "sources": {
+    "baseline": {
+      "checkout": "/workspace/sites/sra-lot8b-baseline066-20261112",
+      "nativeVersion": "0.66.0",
+      "nativeDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+      "nativeFiles": 329,
+      "sourceCommit": "4ff7bf45286a8a19d34401988adca587253ae41e",
+      "manifest": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/baseline-native.json",
+        "bytes": 39098,
+        "sha256": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7"
+      },
+      "siteVersion": 107
+    },
+    "candidate": {
+      "checkout": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+      "nativeVersion": "0.67.0",
+      "nativeDigest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+      "nativeFiles": 331,
+      "sourceCommit": "2cd4e7e557cb15034849da8c2794fa612cdbff18",
+      "manifest": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/candidate-native.json",
+        "bytes": 39333,
+        "sha256": "18fcc15c6e57f1bf6aab33cc62498e6a5a76836d85b890378be957a0e6da1c57"
+      },
+      "siteVersion": null
+    },
+    "nativeDigests": {
+      "baseline": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+      "candidate": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a"
+    }
+  },
+  "checks": [
+    {
+      "id": "prospective_contract",
+      "passed": true,
+      "detail": "The real contract predates the actual A1 series."
+    },
+    {
+      "id": "actual_frozen_sources",
+      "passed": true,
+      "detail": "Site107 published A versus final0.67 B; source identities agree across all cost records."
+    },
+    {
+      "id": "abba_complete",
+      "passed": true,
+      "detail": "Four actually completed series, final frozen-input integrity passed."
+    },
+    {
+      "id": "all_referenced_input_bytes_retained",
+      "passed": true,
+      "detail": {
+        "uniquePhysicalFiles": 747,
+        "fingerprintOccurrences": 2235,
+        "method": "All contract/analysis/reviewer input fingerprints and comparison/analysis execution log fingerprints verified against current bytes. Large prior captures were hashed opaquely; not reinterpreted."
+      }
+    },
+    {
+      "id": "prospectively_pinned_tools_unchanged",
+      "passed": true,
+      "detail": "Seven unchanged historical tools plus actual supplementary JavaScript/Python generators retain their declared fingerprints."
+    },
+    {
+      "id": "all_trials_preserved",
+      "passed": true,
+      "detail": "All32measured trials and8warmups match the four raw reports and final-source shapes; all40physical timestamp pairs are distinct."
+    },
+    {
+      "id": "global_decisions_confirmed_from_raw",
+      "passed": true,
+      "detail": "Pooled complete-session medians recomputed directly from the four raw reports; both strict per-game decisions pass. Existing calculator scripts were not rerun."
+    },
+    {
+      "id": "original_pair_diagnostics_preserved",
+      "passed": true,
+      "detail": "Both actualpair comparisons retain budget_review_required and their restoration exceptions; no cohort was discarded."
+    },
+    {
+      "id": "actual_strict_refusal_retained",
+      "passed": true,
+      "detail": "Actual unchanged historical comparator refusal, exact expected message, exit1, no aggregate output; it remains failed."
+    },
+    {
+      "id": "strict_collected_stream_retention",
+      "passed": true,
+      "detail": {
+        "compressedFingerprint": {
+          "path": "docs/migration/lot8b-evidence/final-performance-067-01/strict.log.gz",
+          "bytes": 2371,
+          "sha256": "f9d0b3b33836f471c5e2fff913f3203ff4df0b305365c67e4699a22bfa7f7671"
+        },
+        "collectedUncompressedBytes": 65536,
+        "collectedUncompressedSha256": "5c876729a5fea1fd0173e5645895b856e5cddf3957ef01aec2ef5c113a743b85",
+        "sourceReviewed": {
+          "path": "docs/migration/lot8b-evidence/tools/final-cost/postprocess.py",
+          "bytes": 5810,
+          "sha256": "8621250325ba1bcd9f3b1f08c7bb96966b5c7eae78a174a92b8c91707c73fd98"
+        },
+        "method": "The pinned postprocessor uses communicate through child completion and compresses the entire raw value without a slice or size cap. The retained gzip verifies against its actual execution receipt.",
+        "qualification": "The collected stream is65536bytes and ends inside the printed metadata object. Allcollected bytes are retained; this does not establish that the child emitted its entire intended diagnostic rendering. The exact error message, exit1 and absent aggregate establish the declared refusal."
+      }
+    },
+    {
+      "id": "actual_analysis_and_independent_review_completed",
+      "passed": true,
+      "detail": "Both real bounded analysis executions exited0 after the window; their rawstdout/stderr compressed and uncompressed hashes are verified."
+    },
+    {
+      "id": "supplementary_structural_scope_retained",
+      "passed": true,
+      "detail": "The supplement preserves the historical refusal and verifies the exact four predeclared structural paths; it claims no fullstrictgraph identity."
+    },
+    {
+      "id": "pooled_phase_scope_correct",
+      "passed": true,
+      "detail": "All16pooled metrics are within the historical diagnostic budget; this does not erase the two individualcohort restoration overruns."
+    }
+  ],
+  "checkedCount": 13,
+  "globalBudgetAccepted": true,
+  "globalResults": [
+    {
+      "case": "STCK",
+      "samplesPerRole": 8,
+      "baselineMedianMs": 9921.971879499999,
+      "candidateMedianMs": 9853.021749499996,
+      "relativeChange": -0.006949236586979435,
+      "percentChange": -0.6949236586979435,
+      "accepted": true,
+      "strictDecimalComparison": "candidate_median < baseline_median * 1.1"
+    },
+    {
+      "case": "SMLP",
+      "samplesPerRole": 8,
+      "baselineMedianMs": 15364.41813050001,
+      "candidateMedianMs": 15087.339491000006,
+      "relativeChange": -0.018033786710736077,
+      "percentChange": -1.8033786710736077,
+      "accepted": true,
+      "strictDecimalComparison": "candidate_median < baseline_median * 1.1"
+    }
+  ],
+  "trialPopulation": {
+    "total": 40,
+    "measured": 32,
+    "measuredActions": 400,
+    "warmups": 8,
+    "warmupActions": 24,
+    "sessionsPerGameRole": 8,
+    "excludedMeasuredSessions": 0,
+    "excludedOutliers": 0
+  },
+  "phaseDiagnostics": {
+    "pooledMetricCount": 16,
+    "pooledOverruns": 0,
+    "originalPairExceptions": [
+      {
+        "cohort": 1,
+        "case": "SMLP",
+        "stage": "restoration",
+        "result": "over_budget_with_noise_unresolved",
+        "medianRelativeIncrease": 0.30360493660373233,
+        "percentChange": 30.360493660373233
+      },
+      {
+        "cohort": 2,
+        "case": "STCK",
+        "stage": "restoration",
+        "result": "over_budget_with_noise_unresolved",
+        "medianRelativeIncrease": 0.29977210318790104,
+        "percentChange": 29.977210318790103
+      }
+    ],
+    "qualification": "Two individualcohort restoration phases exceed10percent and remain budget_review_required. They do not block the declared global rule because both pooled complete-session medians pass. No cross-game compensation is used."
+  },
+  "strictComparison": {
+    "receipt": {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/strict.execution.json",
+      "bytes": 3097,
+      "sha256": "0f634524d15d07e704e925b2b0675556785b579e9ae79fda6fc79f7d5c8012da"
+    },
+    "status": "actual_strict_work_identity_refusal_retained",
+    "exitCode": 1,
+    "aggregateOutputExists": false,
+    "failureReclassifiedAsPass": false,
+    "collectedLogBytes": 65536,
+    "collectedLogSha256": "5c876729a5fea1fd0173e5645895b856e5cddf3957ef01aec2ef5c113a743b85",
+    "diagnosticRenderingCompleteClaimed": false,
+    "retentionQualification": "The entire communicate result was compressed unchanged by the prospectively pinned postprocessor. Its65536-byte content ends inside an object; no claim is made that the entire intended child diagnostic text was emitted."
+  },
+  "blockingObjections": [],
+  "limitations": [
+    "session_elapsed covers the complete recorded controller path through the final acquiredreturn, with pauses/resumes; workerstartup,begin,terminalinspection,close,livegame execution,network andbrowser rendering remain outside thatduration.",
+    "STCK10 records two completed levels; targetLevels3 does not make this a three-level STCKwin. SMLP15 records three completed levels.",
+    "These commonworkforms contain no selected BranchRouting acquisition. Positive syntheticnative evidence remains separate; timing differences do not prove BranchRouting-specific causalbenefit.",
+    "A finite8-samplepergame/role window does not establish populationconfidence, productionlatency, longterm memory behavior or universalcaller parity. No p95 is asserted for those8globaldurations.",
+    "Actual isolation, ownedprocess closure and lockrelease are separate controller evidence. This review acquires no lock and makes no publicationclaim.",
+    "Original strictgraph/workmetadata comparison remainsfailed; the separatelypredeclared supplement qualifies only the proven fourstructural paths."
+  ],
+  "newExecution": {
+    "existingCalculatorsRerun": false,
+    "nativeRuntimeExecuted": false,
+    "testsExecuted": false,
+    "replaysExecuted": false,
+    "measurementsExecuted": false,
+    "locksAcquired": false,
+    "publicationPerformed": false,
+    "method": "Read existingJSON/gzip data, verify fingerprints, directly recount all40trials and finalforms, and independently recalculate the two pooled medians/strictDecimal decisions."
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/contract.json",
+      "bytes": 161021,
+      "sha256": "5c4560add21a3e14b0f570ed72466d1f28bcd603b7e7f596a4ac3e59f9f18ab4"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/window.json",
+      "bytes": 10958,
+      "sha256": "c82a2660608c7103821bd7d78929945656fc41ae2dd3e69bb9224e421509e5a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/expected-forms.json",
+      "bytes": 58685,
+      "sha256": "ea71cd481bbe724dfe1df038d2176644880b18a55a734b71953d9b3c642a1459"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/protocol.md",
+      "bytes": 3504,
+      "sha256": "c9f37243aa75ab2e68996342570a6dcd6b542ac9a86b72b43f38069f2778aaef"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/analysis.json",
+      "bytes": 275718,
+      "sha256": "0b893613b621eb140de18894b38a5124a029bfcf593ae1945d33c55de491315e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/independent-review.json",
+      "bytes": 152971,
+      "sha256": "a88da4f782af344e76868ff217a25da3713817bb7432facd547da9979ac8918c"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/pair1.execution.json",
+      "bytes": 2115,
+      "sha256": "581bef8bcc56382b83294165a575cddcb4ab404d8a338e7a635837fdfe6f9b7b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/pair2.execution.json",
+      "bytes": 2116,
+      "sha256": "ea97787e6321dab41411c30cc1d07b523bcee8f1c2f0995cf933192056a3738b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/strict.execution.json",
+      "bytes": 3097,
+      "sha256": "0f634524d15d07e704e925b2b0675556785b579e9ae79fda6fc79f7d5c8012da"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/analysis.execution.json",
+      "bytes": 1781,
+      "sha256": "c1356151199a88502a7a3631a8d2203c8ea69d79c8523164551134433afd7322"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/review.execution.json",
+      "bytes": 1785,
+      "sha256": "792f7af66922105b02839ccfb71f38e042d3a079daa44a591b256f2f7d343c73"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort1/baseline.json",
+      "bytes": 435861,
+      "sha256": "cc17af265d67e5ac1a4de3c8417f7f018ecd9586dcdec28b23622385ee5a5fa2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort1/after.json",
+      "bytes": 436115,
+      "sha256": "ee8a0a9fbef370696bd1391ab4198964d066681a9edc44171c075cc3e7465258"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort2/after.json",
+      "bytes": 436141,
+      "sha256": "29c10dcf5ddc2c8ecb2277ae576ca0a548bafeca606f51043d00e3f354ef0f5a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort2/baseline.json",
+      "bytes": 435908,
+      "sha256": "371ff4eb940478041e97bf587f363a6c404146e00902e62b18fb10ac7d00a0e9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort1/comparison.json",
+      "bytes": 25404,
+      "sha256": "c75b36a30af33fb9af5aba9b7c21c6196f3a66cb2b3a84764440598ae4144192"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort2/comparison.json",
+      "bytes": 25378,
+      "sha256": "95d5491241dd73d77a66ccc1468ec29ad99054a2f252a6b0c2e4981964ae15b4"
+    }
+  ],
+  "referencedInputRetention": {
+    "uniquePhysicalFilesVerified": 747,
+    "fingerprintOccurrencesVerified": 2235,
+    "allMatched": true
+  }
+}

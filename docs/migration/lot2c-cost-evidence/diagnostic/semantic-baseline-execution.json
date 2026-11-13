@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.native-semantic-capture-execution.v1",
+  "startedAt": "2026-11-09T21:18:35.810322+00:00",
+  "finishedAt": "2026-11-09T21:18:51.318336+00:00",
+  "command": [
+    "node",
+    "scripts/capture-native-loop-semantics.mjs",
+    "docs/migration/lot2c-evidence/performance/stck-followup/cases.json",
+    "STCK",
+    "docs/migration/lot2c-cost-evidence/diagnostic/semantic-baseline.json.gz",
+    "3cd17565b114a40ed71870bf8d7875a1b91102440b92d14a9258bfa98d4f7779"
+  ],
+  "checkout": "/workspace/scratch/c4dd29871d33/lot2c-cost-baseline",
+  "exitCode": 0,
+  "performanceMeasurement": false,
+  "log": {
+    "path": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-baseline-attempt-01.log.gz",
+    "bytes": 353,
+    "sha256": "c13ed538cc8d3ca2e810fbacfd795861dc1dbcf148498a4c3d504a6c91215396"
+  }
+}

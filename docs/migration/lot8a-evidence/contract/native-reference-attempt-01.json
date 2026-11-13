@@ -1,0 +1,40 @@
+{
+  "schema": "logos-engine.v6.motif-access-native-reference-attempt.v1",
+  "startedAt": "2026-11-11T16:48:11.548506+00:00",
+  "finishedAt": "2026-11-11T16:48:12.185670+00:00",
+  "command": [
+    "node",
+    "--test",
+    "tests/v6-motif-access-reference.test.ts"
+  ],
+  "exitCode": 0,
+  "inputs": [
+    {
+      "path": "tests/v6-motif-access-reference.test.ts",
+      "sha256": "57989c648156c9545bc43f43392886ad01c07d16893ae5bd0e20d061fea0c715",
+      "bytes": 12297
+    },
+    {
+      "path": "tests/fixtures/v6-motif-access-reference.json",
+      "sha256": "627137ede2b5397eddf3d77455a8a7d70cdd88fcec872af8a84236b85a3f985c",
+      "bytes": 433673
+    },
+    {
+      "path": "src/logos-engine/v6-motif-access.ts",
+      "sha256": "8f3861a52399f84ea03b80b2a9fbd8c9be618401d64a30c20a062329f87a83ed",
+      "bytes": 32191
+    },
+    {
+      "path": "src/logos-engine/v6-motif-access-geometry.ts",
+      "sha256": "36d5e1d51a1ebef5c82dea7951c18fe115af2067624447d39e37100c4a9de9b3",
+      "bytes": 15261
+    }
+  ],
+  "inputsUnchanged": true,
+  "output": {
+    "path": "docs/migration/lot8a-evidence/contract/native-reference-attempt-01.log",
+    "sha256": "6e73aab853a6a82694e2dd76bd762290cce56ad369dacf7682bb1e02df023d5e",
+    "bytes": 10887
+  },
+  "summaryLines": []
+}

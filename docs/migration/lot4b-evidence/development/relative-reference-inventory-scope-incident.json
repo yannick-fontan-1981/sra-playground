@@ -1,0 +1,4431 @@
+{
+  "schema": "logos-engine.relative-arrangements-development-inventory-scope-incident.v1",
+  "recordedAt": "2026-11-10T20:40:30.017356+00:00",
+  "status": "manifest_scope_preserved_with_nonmanifest_cache_disclosed",
+  "failedAttempt": {
+    "operation": "Final read-only inventory initially required no nonmanifest files",
+    "exitCode": 1,
+    "error": "AssertionError: expected no extra files; found Python compiled caches",
+    "finalSourceIntegrityReceiptProduced": false,
+    "logAvailable": "tool output; long extra-file list was truncated by renderer",
+    "executedAt": null
+  },
+  "originalSourceFiles": 1786,
+  "nonmanifestFileCount": 735,
+  "allNonmanifestFilesArePythonCompiledCaches": true,
+  "allCacheCtimesBeforeFirstOracleStartedAt": true,
+  "firstOracleStartedAt": "2026-11-10T20:38:30.977203+00:00",
+  "files": [
+    {
+      "path": "agents/__pycache__/__init__.cpython-312.pyc",
+      "bytes": 1603,
+      "mtime": "2026-11-10T17:47:05.748929+00:00",
+      "ctime": "2026-11-10T17:47:05.748929+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/__pycache__/__init__.cpython-312.pyc",
+      "bytes": 847,
+      "mtime": "2026-11-10T17:47:05.751251+00:00",
+      "ctime": "2026-11-10T17:47:05.751251+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/__pycache__/performance.cpython-312.pyc",
+      "bytes": 9792,
+      "mtime": "2026-11-10T17:47:05.981456+00:00",
+      "ctime": "2026-11-10T17:47:05.981456+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/action_authority/__pycache__/__init__.cpython-312.pyc",
+      "bytes": 474,
+      "mtime": "2026-11-10T17:47:06.235526+00:00",
+      "ctime": "2026-11-10T17:47:06.235526+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/action_authority/__pycache__/contracts.cpython-312.pyc",
+      "bytes": 7451,
+      "mtime": "2026-11-10T17:47:06.237445+00:00",
+      "ctime": "2026-11-10T17:47:06.237445+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/__init__.cpython-312.pyc",
+      "bytes": 20076,
+      "mtime": "2026-11-10T17:47:06.141304+00:00",
+      "ctime": "2026-11-10T17:47:06.141304+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/a_packet_step_c.cpython-312.pyc",
+      "bytes": 14924,
+      "mtime": "2026-11-10T17:47:08.507472+00:00",
+      "ctime": "2026-11-10T17:47:08.507472+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/a_packet_step_contracts_c.cpython-312.pyc",
+      "bytes": 5412,
+      "mtime": "2026-11-10T17:47:08.503346+00:00",
+      "ctime": "2026-11-10T17:47:08.503346+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/a_packet_step_registry_c.cpython-312.pyc",
+      "bytes": 5534,
+      "mtime": "2026-11-10T17:47:08.502780+00:00",
+      "ctime": "2026-11-10T17:47:08.502780+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/abduction.cpython-312.pyc",
+      "bytes": 5676,
+      "mtime": "2026-11-10T17:47:08.804643+00:00",
+      "ctime": "2026-11-10T17:47:08.804643+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/actor_lattice_measurements.cpython-312.pyc",
+      "bytes": 1998,
+      "mtime": "2026-11-10T17:47:09.193384+00:00",
+      "ctime": "2026-11-10T17:47:09.193384+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/adversarial_drop_alignment.cpython-312.pyc",
+      "bytes": 77565,
+      "mtime": "2026-11-10T17:47:06.532895+00:00",
+      "ctime": "2026-11-10T17:47:06.532895+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/affine_glyphs.cpython-312.pyc",
+      "bytes": 47566,
+      "mtime": "2026-11-10T17:47:09.218459+00:00",
+      "ctime": "2026-11-10T17:47:09.218459+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/agenda_measurement_transport.cpython-312.pyc",
+      "bytes": 2270,
+      "mtime": "2026-11-10T17:47:08.005312+00:00",
+      "ctime": "2026-11-10T17:47:08.005312+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/alignment_step_c.cpython-312.pyc",
+      "bytes": 23673,
+      "mtime": "2026-11-10T17:47:08.474520+00:00",
+      "ctime": "2026-11-10T17:47:08.474520+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/alignment_step_contracts_c.cpython-312.pyc",
+      "bytes": 5680,
+      "mtime": "2026-11-10T17:47:08.470430+00:00",
+      "ctime": "2026-11-10T17:47:08.470430+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/alignment_step_registry_c.cpython-312.pyc",
+      "bytes": 3662,
+      "mtime": "2026-11-10T17:47:08.469715+00:00",
+      "ctime": "2026-11-10T17:47:08.469715+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/anchor_solving_c.cpython-312.pyc",
+      "bytes": 23077,
+      "mtime": "2026-11-10T17:47:08.756277+00:00",
+      "ctime": "2026-11-10T17:47:08.756277+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/anchor_solving_contracts_c.cpython-312.pyc",
+      "bytes": 12925,
+      "mtime": "2026-11-10T17:47:08.745723+00:00",
+      "ctime": "2026-11-10T17:47:08.745723+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/anchor_solving_registry_c.cpython-312.pyc",
+      "bytes": 5574,
+      "mtime": "2026-11-10T17:47:08.744472+00:00",
+      "ctime": "2026-11-10T17:47:08.744472+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/anchor_stock_c.cpython-312.pyc",
+      "bytes": 20481,
+      "mtime": "2026-11-10T17:47:08.758238+00:00",
+      "ctime": "2026-11-10T17:47:08.758238+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/announced_motion.cpython-312.pyc",
+      "bytes": 7248,
+      "mtime": "2026-11-10T17:47:08.803093+00:00",
+      "ctime": "2026-11-10T17:47:08.803093+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/answer_equivalence_contracts_d.cpython-312.pyc",
+      "bytes": 2239,
+      "mtime": "2026-11-10T17:47:08.034313+00:00",
+      "ctime": "2026-11-10T17:47:08.034313+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/answer_equivalence_d.cpython-312.pyc",
+      "bytes": 4954,
+      "mtime": "2026-11-10T17:47:08.035576+00:00",
+      "ctime": "2026-11-10T17:47:08.035576+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/appearance.cpython-312.pyc",
+      "bytes": 19820,
+      "mtime": "2026-11-10T17:47:08.298832+00:00",
+      "ctime": "2026-11-10T17:47:08.298832+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/articulated_channel_kinematics.cpython-312.pyc",
+      "bytes": 45724,
+      "mtime": "2026-11-10T17:47:06.888964+00:00",
+      "ctime": "2026-11-10T17:47:06.888964+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/articulated_dependency_measurement_c.cpython-312.pyc",
+      "bytes": 13361,
+      "mtime": "2026-11-10T17:47:09.883245+00:00",
+      "ctime": "2026-11-10T17:47:09.883245+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/articulated_route_contracts_c.cpython-312.pyc",
+      "bytes": 3310,
+      "mtime": "2026-11-10T17:47:09.887760+00:00",
+      "ctime": "2026-11-10T17:47:09.887760+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/articulated_solving_contracts_c.cpython-312.pyc",
+      "bytes": 29645,
+      "mtime": "2026-11-10T17:47:09.887059+00:00",
+      "ctime": "2026-11-10T17:47:09.887059+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/articulated_transition_domain_c.cpython-312.pyc",
+      "bytes": 9236,
+      "mtime": "2026-11-10T17:47:09.891033+00:00",
+      "ctime": "2026-11-10T17:47:09.891033+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/autonomous_consumption_d.cpython-312.pyc",
+      "bytes": 56690,
+      "mtime": "2026-11-10T17:47:07.735149+00:00",
+      "ctime": "2026-11-10T17:47:07.735149+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/autonomous_route_intervention.cpython-312.pyc",
+      "bytes": 81053,
+      "mtime": "2026-11-10T17:47:06.709780+00:00",
+      "ctime": "2026-11-10T17:47:06.709780+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/axial_field_configuration.cpython-312.pyc",
+      "bytes": 63187,
+      "mtime": "2026-11-10T17:47:07.263524+00:00",
+      "ctime": "2026-11-10T17:47:07.263524+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/axial_route_a.cpython-312.pyc",
+      "bytes": 29703,
+      "mtime": "2026-11-10T17:47:07.275841+00:00",
+      "ctime": "2026-11-10T17:47:07.275841+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/axial_route_registry_a.cpython-312.pyc",
+      "bytes": 3638,
+      "mtime": "2026-11-10T17:47:07.254497+00:00",
+      "ctime": "2026-11-10T17:47:07.254497+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/axial_scene_a.cpython-312.pyc",
+      "bytes": 15479,
+      "mtime": "2026-11-10T17:47:07.265534+00:00",
+      "ctime": "2026-11-10T17:47:07.265534+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/axial_solving_c.cpython-312.pyc",
+      "bytes": 19688,
+      "mtime": "2026-11-10T17:47:08.735451+00:00",
+      "ctime": "2026-11-10T17:47:08.735451+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/axial_solving_contracts_c.cpython-312.pyc",
+      "bytes": 4548,
+      "mtime": "2026-11-10T17:47:08.732238+00:00",
+      "ctime": "2026-11-10T17:47:08.732238+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/axial_solving_registry_c.cpython-312.pyc",
+      "bytes": 2392,
+      "mtime": "2026-11-10T17:47:08.731771+00:00",
+      "ctime": "2026-11-10T17:47:08.731771+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/axial_step_c.cpython-312.pyc",
+      "bytes": 24809,
+      "mtime": "2026-11-10T17:47:08.491021+00:00",
+      "ctime": "2026-11-10T17:47:08.491021+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/axial_step_contracts_c.cpython-312.pyc",
+      "bytes": 5661,
+      "mtime": "2026-11-10T17:47:07.271304+00:00",
+      "ctime": "2026-11-10T17:47:07.271304+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/axial_step_registry_c.cpython-312.pyc",
+      "bytes": 3492,
+      "mtime": "2026-11-10T17:47:08.489013+00:00",
+      "ctime": "2026-11-10T17:47:08.489013+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/b_extension_supposition_c.cpython-312.pyc",
+      "bytes": 7471,
+      "mtime": "2026-11-10T17:47:08.498600+00:00",
+      "ctime": "2026-11-10T17:47:08.498600+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/b_extension_supposition_contracts_c.cpython-312.pyc",
+      "bytes": 5266,
+      "mtime": "2026-11-10T17:47:08.496376+00:00",
+      "ctime": "2026-11-10T17:47:08.496376+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/b_extension_supposition_registry_c.cpython-312.pyc",
+      "bytes": 3321,
+      "mtime": "2026-11-10T17:47:08.495719+00:00",
+      "ctime": "2026-11-10T17:47:08.495719+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/ballistic_targeting.cpython-312.pyc",
+      "bytes": 55736,
+      "mtime": "2026-11-10T17:47:06.747027+00:00",
+      "ctime": "2026-11-10T17:47:06.747027+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/banded_column_measurements.cpython-312.pyc",
+      "bytes": 9013,
+      "mtime": "2026-11-10T17:47:09.220234+00:00",
+      "ctime": "2026-11-10T17:47:09.220234+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/banded_framed_measurements.cpython-312.pyc",
+      "bytes": 23654,
+      "mtime": "2026-11-10T17:47:08.014767+00:00",
+      "ctime": "2026-11-10T17:47:08.014767+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/banded_program_bridge.cpython-312.pyc",
+      "bytes": 20360,
+      "mtime": "2026-11-10T17:47:08.042582+00:00",
+      "ctime": "2026-11-10T17:47:08.042582+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/banded_program_registry.cpython-312.pyc",
+      "bytes": 3204,
+      "mtime": "2026-11-10T17:47:08.040295+00:00",
+      "ctime": "2026-11-10T17:47:08.040295+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/bearer_support.cpython-312.pyc",
+      "bytes": 21206,
+      "mtime": "2026-11-10T17:47:08.122626+00:00",
+      "ctime": "2026-11-10T17:47:08.122626+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/boundary_connectivity_d.cpython-312.pyc",
+      "bytes": 16814,
+      "mtime": "2026-11-10T17:47:07.753777+00:00",
+      "ctime": "2026-11-10T17:47:07.753777+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/bounded_joystick.cpython-312.pyc",
+      "bytes": 62882,
+      "mtime": "2026-11-10T17:47:07.340377+00:00",
+      "ctime": "2026-11-10T17:47:07.340377+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/cadenced_rail_transfer.cpython-312.pyc",
+      "bytes": 79677,
+      "mtime": "2026-11-10T17:47:07.518431+00:00",
+      "ctime": "2026-11-10T17:47:07.518431+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/capacity_supposition_c.cpython-312.pyc",
+      "bytes": 18434,
+      "mtime": "2026-11-10T17:47:08.329023+00:00",
+      "ctime": "2026-11-10T17:47:08.329023+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/capacity_supposition_contracts_c.cpython-312.pyc",
+      "bytes": 8954,
+      "mtime": "2026-11-10T17:47:08.322836+00:00",
+      "ctime": "2026-11-10T17:47:08.322836+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/capacity_supposition_registry_c.cpython-312.pyc",
+      "bytes": 3737,
+      "mtime": "2026-11-10T17:47:08.322124+00:00",
+      "ctime": "2026-11-10T17:47:08.322124+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/capture_external_primitive_d.cpython-312.pyc",
+      "bytes": 15840,
+      "mtime": "2026-11-10T17:47:07.749508+00:00",
+      "ctime": "2026-11-10T17:47:07.749508+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/capture_step_c.cpython-312.pyc",
+      "bytes": 24509,
+      "mtime": "2026-11-10T17:47:08.488498+00:00",
+      "ctime": "2026-11-10T17:47:08.488498+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/capture_step_contracts_c.cpython-312.pyc",
+      "bytes": 5755,
+      "mtime": "2026-11-10T17:47:08.484937+00:00",
+      "ctime": "2026-11-10T17:47:08.484937+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/capture_step_registry_c.cpython-312.pyc",
+      "bytes": 3553,
+      "mtime": "2026-11-10T17:47:08.484372+00:00",
+      "ctime": "2026-11-10T17:47:08.484372+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/catalogue_primitive_d.cpython-312.pyc",
+      "bytes": 13572,
+      "mtime": "2026-11-10T17:47:07.966287+00:00",
+      "ctime": "2026-11-10T17:47:07.966287+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/cell_coverage_relations.cpython-312.pyc",
+      "bytes": 29156,
+      "mtime": "2026-11-10T17:47:08.071250+00:00",
+      "ctime": "2026-11-10T17:47:08.071250+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/cell_coverage_relations_registry.cpython-312.pyc",
+      "bytes": 3579,
+      "mtime": "2026-11-10T17:47:08.068417+00:00",
+      "ctime": "2026-11-10T17:47:08.068417+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/cell_deltas.cpython-312.pyc",
+      "bytes": 5466,
+      "mtime": "2026-11-10T17:47:06.219212+00:00",
+      "ctime": "2026-11-10T17:47:06.219212+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/cell_objects.cpython-312.pyc",
+      "bytes": 8338,
+      "mtime": "2026-11-10T17:47:06.467017+00:00",
+      "ctime": "2026-11-10T17:47:06.467017+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/cell_reaction.cpython-312.pyc",
+      "bytes": 63214,
+      "mtime": "2026-11-10T17:47:09.256018+00:00",
+      "ctime": "2026-11-10T17:47:09.256018+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/cell_recount.cpython-312.pyc",
+      "bytes": 59664,
+      "mtime": "2026-11-10T17:47:08.818588+00:00",
+      "ctime": "2026-11-10T17:47:08.818588+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/checkpoint_supposition_c.cpython-312.pyc",
+      "bytes": 18124,
+      "mtime": "2026-11-10T17:47:08.342597+00:00",
+      "ctime": "2026-11-10T17:47:08.342597+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/checkpoint_supposition_contracts_c.cpython-312.pyc",
+      "bytes": 10068,
+      "mtime": "2026-11-10T17:47:08.337572+00:00",
+      "ctime": "2026-11-10T17:47:08.337572+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/checkpoint_supposition_registry_c.cpython-312.pyc",
+      "bytes": 3911,
+      "mtime": "2026-11-10T17:47:08.336594+00:00",
+      "ctime": "2026-11-10T17:47:08.336594+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/chromatic_window_composition.cpython-312.pyc",
+      "bytes": 97309,
+      "mtime": "2026-11-10T17:47:06.566760+00:00",
+      "ctime": "2026-11-10T17:47:06.566760+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/code_history_contracts_d.cpython-312.pyc",
+      "bytes": 1132,
+      "mtime": "2026-11-10T17:47:06.604811+00:00",
+      "ctime": "2026-11-10T17:47:06.604811+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/code_history_d.cpython-312.pyc",
+      "bytes": 6883,
+      "mtime": "2026-11-10T17:47:06.605985+00:00",
+      "ctime": "2026-11-10T17:47:06.605985+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/common_view_scope_contracts_a.cpython-312.pyc",
+      "bytes": 5573,
+      "mtime": "2026-11-10T17:47:08.344471+00:00",
+      "ctime": "2026-11-10T17:47:08.344471+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/compartment_frame_geometry.cpython-312.pyc",
+      "bytes": 11573,
+      "mtime": "2026-11-10T17:47:08.022295+00:00",
+      "ctime": "2026-11-10T17:47:08.022295+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/compatible_source_residual_d.cpython-312.pyc",
+      "bytes": 18654,
+      "mtime": "2026-11-10T17:47:07.925637+00:00",
+      "ctime": "2026-11-10T17:47:07.925637+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/complementary_contours.cpython-312.pyc",
+      "bytes": 43211,
+      "mtime": "2026-11-10T17:47:09.273918+00:00",
+      "ctime": "2026-11-10T17:47:09.273918+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/complete_owner_c.cpython-312.pyc",
+      "bytes": 10414,
+      "mtime": "2026-11-10T17:47:08.502035+00:00",
+      "ctime": "2026-11-10T17:47:08.502035+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/complete_owner_contracts_c.cpython-312.pyc",
+      "bytes": 4873,
+      "mtime": "2026-11-10T17:47:08.499535+00:00",
+      "ctime": "2026-11-10T17:47:08.499535+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/complete_owner_registry_c.cpython-312.pyc",
+      "bytes": 3578,
+      "mtime": "2026-11-10T17:47:08.499099+00:00",
+      "ctime": "2026-11-10T17:47:08.499099+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/complete_patch_replacement.cpython-312.pyc",
+      "bytes": 4676,
+      "mtime": "2026-11-10T17:47:08.062770+00:00",
+      "ctime": "2026-11-10T17:47:08.062770+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/completion_supposition_c.cpython-312.pyc",
+      "bytes": 21095,
+      "mtime": "2026-11-10T17:47:08.392973+00:00",
+      "ctime": "2026-11-10T17:47:08.392973+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/completion_supposition_contracts_c.cpython-312.pyc",
+      "bytes": 11740,
+      "mtime": "2026-11-10T17:47:08.387094+00:00",
+      "ctime": "2026-11-10T17:47:08.387094+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/completion_supposition_registry_c.cpython-312.pyc",
+      "bytes": 4319,
+      "mtime": "2026-11-10T17:47:08.385963+00:00",
+      "ctime": "2026-11-10T17:47:08.385963+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/component_network.cpython-312.pyc",
+      "bytes": 31466,
+      "mtime": "2026-11-10T17:47:08.062203+00:00",
+      "ctime": "2026-11-10T17:47:08.062203+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/component_network_mechanics.cpython-312.pyc",
+      "bytes": 30186,
+      "mtime": "2026-11-10T17:47:08.066622+00:00",
+      "ctime": "2026-11-10T17:47:08.066622+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/component_network_registry.cpython-312.pyc",
+      "bytes": 3796,
+      "mtime": "2026-11-10T17:47:08.059501+00:00",
+      "ctime": "2026-11-10T17:47:08.059501+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/components.cpython-312.pyc",
+      "bytes": 8425,
+      "mtime": "2026-11-10T17:47:06.142593+00:00",
+      "ctime": "2026-11-10T17:47:06.142593+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/concentric_frames.cpython-312.pyc",
+      "bytes": 25499,
+      "mtime": "2026-11-10T17:47:09.265784+00:00",
+      "ctime": "2026-11-10T17:47:09.265784+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/configured_transit_d.cpython-312.pyc",
+      "bytes": 15685,
+      "mtime": "2026-11-10T17:47:07.774171+00:00",
+      "ctime": "2026-11-10T17:47:07.774171+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/conscious_decision_basis.cpython-312.pyc",
+      "bytes": 6401,
+      "mtime": "2026-11-10T17:47:08.417997+00:00",
+      "ctime": "2026-11-10T17:47:08.417997+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/conscious_experiment_predictions.cpython-312.pyc",
+      "bytes": 7212,
+      "mtime": "2026-11-10T17:47:08.417315+00:00",
+      "ctime": "2026-11-10T17:47:08.417315+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/conscious_recovery_cost.cpython-312.pyc",
+      "bytes": 11981,
+      "mtime": "2026-11-10T17:47:08.419202+00:00",
+      "ctime": "2026-11-10T17:47:08.419202+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/conservative_quantity_identity.cpython-312.pyc",
+      "bytes": 59540,
+      "mtime": "2026-11-10T17:47:06.918768+00:00",
+      "ctime": "2026-11-10T17:47:06.918768+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/constraint_event_scope_d.cpython-312.pyc",
+      "bytes": 4703,
+      "mtime": "2026-11-10T17:47:06.649635+00:00",
+      "ctime": "2026-11-10T17:47:06.649635+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/constraints.cpython-312.pyc",
+      "bytes": 6348,
+      "mtime": "2026-11-10T17:47:06.465717+00:00",
+      "ctime": "2026-11-10T17:47:06.465717+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/construction_observation_contracts_a.cpython-312.pyc",
+      "bytes": 1995,
+      "mtime": "2026-11-10T17:47:07.287366+00:00",
+      "ctime": "2026-11-10T17:47:07.287366+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/construction_route_a.cpython-312.pyc",
+      "bytes": 28016,
+      "mtime": "2026-11-10T17:47:07.297580+00:00",
+      "ctime": "2026-11-10T17:47:07.297580+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/construction_route_registry_a.cpython-312.pyc",
+      "bytes": 3993,
+      "mtime": "2026-11-10T17:47:07.278657+00:00",
+      "ctime": "2026-11-10T17:47:07.278657+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/construction_step_c.cpython-312.pyc",
+      "bytes": 19803,
+      "mtime": "2026-11-10T17:47:08.464499+00:00",
+      "ctime": "2026-11-10T17:47:08.464499+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/construction_step_contracts_c.cpython-312.pyc",
+      "bytes": 5294,
+      "mtime": "2026-11-10T17:47:07.292985+00:00",
+      "ctime": "2026-11-10T17:47:07.292985+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/construction_step_registry_c.cpython-312.pyc",
+      "bytes": 3732,
+      "mtime": "2026-11-10T17:47:08.462659+00:00",
+      "ctime": "2026-11-10T17:47:08.462659+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/consumable_reaction_network.cpython-312.pyc",
+      "bytes": 103798,
+      "mtime": "2026-11-10T17:47:06.584527+00:00",
+      "ctime": "2026-11-10T17:47:06.584527+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/consumptive_dependency.cpython-312.pyc",
+      "bytes": 13153,
+      "mtime": "2026-11-10T17:47:09.362269+00:00",
+      "ctime": "2026-11-10T17:47:09.362269+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/contact_shape_repair.cpython-312.pyc",
+      "bytes": 57297,
+      "mtime": "2026-11-10T17:47:06.969963+00:00",
+      "ctime": "2026-11-10T17:47:06.969963+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/container_admission_d.cpython-312.pyc",
+      "bytes": 11979,
+      "mtime": "2026-11-10T17:47:07.944672+00:00",
+      "ctime": "2026-11-10T17:47:07.944672+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/contextual_compartment.cpython-312.pyc",
+      "bytes": 29899,
+      "mtime": "2026-11-10T17:47:08.020831+00:00",
+      "ctime": "2026-11-10T17:47:08.020831+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/contextual_compartment_registry.cpython-312.pyc",
+      "bytes": 3549,
+      "mtime": "2026-11-10T17:47:08.017914+00:00",
+      "ctime": "2026-11-10T17:47:08.017914+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/contracts.cpython-312.pyc",
+      "bytes": 491318,
+      "mtime": "2026-11-10T17:47:06.214984+00:00",
+      "ctime": "2026-11-10T17:47:06.214984+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/control_geometry_transport.cpython-312.pyc",
+      "bytes": 2582,
+      "mtime": "2026-11-10T17:47:09.183534+00:00",
+      "ctime": "2026-11-10T17:47:09.183534+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/counterfactual_audit_c.cpython-312.pyc",
+      "bytes": 2330,
+      "mtime": "2026-11-10T17:47:08.421810+00:00",
+      "ctime": "2026-11-10T17:47:08.421810+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/counterfactual_audit_contracts_c.cpython-312.pyc",
+      "bytes": 1734,
+      "mtime": "2026-11-10T17:47:08.421129+00:00",
+      "ctime": "2026-11-10T17:47:08.421129+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/counterfactual_audit_registry_c.cpython-312.pyc",
+      "bytes": 2506,
+      "mtime": "2026-11-10T17:47:08.420798+00:00",
+      "ctime": "2026-11-10T17:47:08.420798+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/counterfactual_scope_contracts_d.cpython-312.pyc",
+      "bytes": 2036,
+      "mtime": "2026-11-10T17:47:06.637626+00:00",
+      "ctime": "2026-11-10T17:47:06.637626+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/counterfactual_scope_d.cpython-312.pyc",
+      "bytes": 7720,
+      "mtime": "2026-11-10T17:47:08.026156+00:00",
+      "ctime": "2026-11-10T17:47:08.026156+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/coupled_member_control.cpython-312.pyc",
+      "bytes": 60257,
+      "mtime": "2026-11-10T17:47:07.410993+00:00",
+      "ctime": "2026-11-10T17:47:07.410993+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/coupled_permutation_d.cpython-312.pyc",
+      "bytes": 5128,
+      "mtime": "2026-11-10T17:47:08.558299+00:00",
+      "ctime": "2026-11-10T17:47:08.558299+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/coupled_solving_c.cpython-312.pyc",
+      "bytes": 37299,
+      "mtime": "2026-11-10T17:47:08.569566+00:00",
+      "ctime": "2026-11-10T17:47:08.569566+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/coupled_solving_contracts_c.cpython-312.pyc",
+      "bytes": 10343,
+      "mtime": "2026-11-10T17:47:08.562366+00:00",
+      "ctime": "2026-11-10T17:47:08.562366+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/coupled_solving_registry_c.cpython-312.pyc",
+      "bytes": 4347,
+      "mtime": "2026-11-10T17:47:08.561364+00:00",
+      "ctime": "2026-11-10T17:47:08.561364+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/coupled_value_c.cpython-312.pyc",
+      "bytes": 98200,
+      "mtime": "2026-11-10T17:47:08.557554+00:00",
+      "ctime": "2026-11-10T17:47:08.557554+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/coupled_value_contracts_c.cpython-312.pyc",
+      "bytes": 10763,
+      "mtime": "2026-11-10T17:47:08.543753+00:00",
+      "ctime": "2026-11-10T17:47:08.543753+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/coupled_value_registry_c.cpython-312.pyc",
+      "bytes": 4798,
+      "mtime": "2026-11-10T17:47:08.542633+00:00",
+      "ctime": "2026-11-10T17:47:08.542633+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/coverage_panel_contracts_d.cpython-312.pyc",
+      "bytes": 2444,
+      "mtime": "2026-11-10T17:47:07.311521+00:00",
+      "ctime": "2026-11-10T17:47:07.311521+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/coverage_panel_measurement_d.cpython-312.pyc",
+      "bytes": 11433,
+      "mtime": "2026-11-10T17:47:07.319083+00:00",
+      "ctime": "2026-11-10T17:47:07.319083+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/cursor_orientation.cpython-312.pyc",
+      "bytes": 19627,
+      "mtime": "2026-11-10T17:47:08.806353+00:00",
+      "ctime": "2026-11-10T17:47:08.806353+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/cycle_step_c.cpython-312.pyc",
+      "bytes": 19715,
+      "mtime": "2026-11-10T17:47:08.495213+00:00",
+      "ctime": "2026-11-10T17:47:08.495213+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/cycle_step_contracts_c.cpython-312.pyc",
+      "bytes": 5148,
+      "mtime": "2026-11-10T17:47:08.492076+00:00",
+      "ctime": "2026-11-10T17:47:08.492076+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/cycle_step_registry_c.cpython-312.pyc",
+      "bytes": 3491,
+      "mtime": "2026-11-10T17:47:08.491513+00:00",
+      "ctime": "2026-11-10T17:47:08.491513+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/cyclic_configuration_coverage.cpython-312.pyc",
+      "bytes": 42096,
+      "mtime": "2026-11-10T17:47:07.311083+00:00",
+      "ctime": "2026-11-10T17:47:07.311083+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/d_native_goal_domain_audit_d.cpython-312.pyc",
+      "bytes": 6479,
+      "mtime": "2026-11-10T17:47:07.553279+00:00",
+      "ctime": "2026-11-10T17:47:07.553279+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/destination_macro_d.cpython-312.pyc",
+      "bytes": 15682,
+      "mtime": "2026-11-10T17:47:07.723054+00:00",
+      "ctime": "2026-11-10T17:47:07.723054+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/digital_topology.cpython-312.pyc",
+      "bytes": 12026,
+      "mtime": "2026-11-10T17:47:06.971938+00:00",
+      "ctime": "2026-11-10T17:47:06.971938+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/directed_accretive_flow.cpython-312.pyc",
+      "bytes": 108622,
+      "mtime": "2026-11-10T17:47:06.903453+00:00",
+      "ctime": "2026-11-10T17:47:06.903453+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/discrete_relay_optics.cpython-312.pyc",
+      "bytes": 62679,
+      "mtime": "2026-11-10T17:47:07.236693+00:00",
+      "ctime": "2026-11-10T17:47:07.236693+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/discriminating_exposure_d.cpython-312.pyc",
+      "bytes": 15465,
+      "mtime": "2026-11-10T17:47:07.757303+00:00",
+      "ctime": "2026-11-10T17:47:07.757303+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/display_correspondence.cpython-312.pyc",
+      "bytes": 47131,
+      "mtime": "2026-11-10T17:47:08.811626+00:00",
+      "ctime": "2026-11-10T17:47:08.811626+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/editable_actor_programs.cpython-312.pyc",
+      "bytes": 72773,
+      "mtime": "2026-11-10T17:47:06.818463+00:00",
+      "ctime": "2026-11-10T17:47:06.818463+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/elimination.cpython-312.pyc",
+      "bytes": 16793,
+      "mtime": "2026-11-10T17:47:08.825137+00:00",
+      "ctime": "2026-11-10T17:47:08.825137+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/endpoint_navigation_d.cpython-312.pyc",
+      "bytes": 16862,
+      "mtime": "2026-11-10T17:47:07.533900+00:00",
+      "ctime": "2026-11-10T17:47:07.533900+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/endpoint_primitive_d.cpython-312.pyc",
+      "bytes": 20276,
+      "mtime": "2026-11-10T17:47:07.889534+00:00",
+      "ctime": "2026-11-10T17:47:07.889534+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/endpoint_supposition_c.cpython-312.pyc",
+      "bytes": 10018,
+      "mtime": "2026-11-10T17:47:08.251841+00:00",
+      "ctime": "2026-11-10T17:47:08.251841+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/endpoint_supposition_contracts_c.cpython-312.pyc",
+      "bytes": 4958,
+      "mtime": "2026-11-10T17:47:08.249636+00:00",
+      "ctime": "2026-11-10T17:47:08.249636+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/endpoint_supposition_registry_c.cpython-312.pyc",
+      "bytes": 3332,
+      "mtime": "2026-11-10T17:47:08.249204+00:00",
+      "ctime": "2026-11-10T17:47:08.249204+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/entity_identity.cpython-312.pyc",
+      "bytes": 12739,
+      "mtime": "2026-11-10T17:47:09.212488+00:00",
+      "ctime": "2026-11-10T17:47:09.212488+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/entry_memory_c.cpython-312.pyc",
+      "bytes": 13589,
+      "mtime": "2026-11-10T17:47:08.314012+00:00",
+      "ctime": "2026-11-10T17:47:08.314012+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/entry_memory_contracts_c.cpython-312.pyc",
+      "bytes": 8484,
+      "mtime": "2026-11-10T17:47:08.304935+00:00",
+      "ctime": "2026-11-10T17:47:08.304935+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/entry_memory_registry_c.cpython-312.pyc",
+      "bytes": 2536,
+      "mtime": "2026-11-10T17:47:08.393457+00:00",
+      "ctime": "2026-11-10T17:47:08.393457+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/escape_topology.cpython-312.pyc",
+      "bytes": 7509,
+      "mtime": "2026-11-10T17:47:07.427530+00:00",
+      "ctime": "2026-11-10T17:47:07.427530+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/experiment_frontier_c.cpython-312.pyc",
+      "bytes": 23282,
+      "mtime": "2026-11-10T17:47:08.416463+00:00",
+      "ctime": "2026-11-10T17:47:08.416463+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/experiment_frontier_contracts_c.cpython-312.pyc",
+      "bytes": 35517,
+      "mtime": "2026-11-10T17:47:08.408740+00:00",
+      "ctime": "2026-11-10T17:47:08.408740+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/experiment_frontier_registry_c.cpython-312.pyc",
+      "bytes": 2844,
+      "mtime": "2026-11-10T17:47:08.405568+00:00",
+      "ctime": "2026-11-10T17:47:08.405568+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/external_transport.cpython-312.pyc",
+      "bytes": 14904,
+      "mtime": "2026-11-10T17:47:09.412832+00:00",
+      "ctime": "2026-11-10T17:47:09.412832+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/family_agenda_projection.cpython-312.pyc",
+      "bytes": 13560,
+      "mtime": "2026-11-10T17:47:07.194581+00:00",
+      "ctime": "2026-11-10T17:47:07.194581+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/family_result_join.cpython-312.pyc",
+      "bytes": 10274,
+      "mtime": "2026-11-10T17:47:07.190954+00:00",
+      "ctime": "2026-11-10T17:47:07.190954+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/feedback_code_identification.cpython-312.pyc",
+      "bytes": 64652,
+      "mtime": "2026-11-10T17:47:06.600951+00:00",
+      "ctime": "2026-11-10T17:47:06.600951+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/feedback_trial_choice_d.cpython-312.pyc",
+      "bytes": 6047,
+      "mtime": "2026-11-10T17:47:08.037702+00:00",
+      "ctime": "2026-11-10T17:47:08.037702+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/feedback_trial_contracts_d.cpython-312.pyc",
+      "bytes": 3057,
+      "mtime": "2026-11-10T17:47:08.035980+00:00",
+      "ctime": "2026-11-10T17:47:08.035980+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/fill_cell_correspondence.cpython-312.pyc",
+      "bytes": 24431,
+      "mtime": "2026-11-10T17:47:08.073906+00:00",
+      "ctime": "2026-11-10T17:47:08.073906+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/finite_alignment_evidence_scope_d.cpython-312.pyc",
+      "bytes": 2282,
+      "mtime": "2026-11-10T17:47:07.543392+00:00",
+      "ctime": "2026-11-10T17:47:07.543392+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/finite_alignment_game.cpython-312.pyc",
+      "bytes": 89675,
+      "mtime": "2026-11-10T17:47:07.486907+00:00",
+      "ctime": "2026-11-10T17:47:07.486907+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/finite_flow_network.cpython-312.pyc",
+      "bytes": 107471,
+      "mtime": "2026-11-10T17:47:06.631312+00:00",
+      "ctime": "2026-11-10T17:47:06.631312+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/finite_instruction_device.cpython-312.pyc",
+      "bytes": 68203,
+      "mtime": "2026-11-10T17:47:06.934246+00:00",
+      "ctime": "2026-11-10T17:47:06.934246+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/finite_relation_network.cpython-312.pyc",
+      "bytes": 71627,
+      "mtime": "2026-11-10T17:47:06.616193+00:00",
+      "ctime": "2026-11-10T17:47:06.616193+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/finite_search_c.cpython-312.pyc",
+      "bytes": 14036,
+      "mtime": "2026-11-10T17:47:08.514140+00:00",
+      "ctime": "2026-11-10T17:47:08.514140+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/finite_search_contracts_c.cpython-312.pyc",
+      "bytes": 3874,
+      "mtime": "2026-11-10T17:47:08.138387+00:00",
+      "ctime": "2026-11-10T17:47:08.138387+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/finite_search_registry_c.cpython-312.pyc",
+      "bytes": 1993,
+      "mtime": "2026-11-10T17:47:08.512687+00:00",
+      "ctime": "2026-11-10T17:47:08.512687+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/fixed_program_origin.cpython-312.pyc",
+      "bytes": 40380,
+      "mtime": "2026-11-10T17:47:07.326801+00:00",
+      "ctime": "2026-11-10T17:47:07.326801+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/flow_goal_audit_d.cpython-312.pyc",
+      "bytes": 11732,
+      "mtime": "2026-11-10T17:47:07.618190+00:00",
+      "ctime": "2026-11-10T17:47:07.618190+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/fragment_step_c.cpython-312.pyc",
+      "bytes": 18320,
+      "mtime": "2026-11-10T17:47:08.452132+00:00",
+      "ctime": "2026-11-10T17:47:08.452132+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/fragment_step_contracts_c.cpython-312.pyc",
+      "bytes": 5195,
+      "mtime": "2026-11-10T17:47:08.449236+00:00",
+      "ctime": "2026-11-10T17:47:08.449236+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/fragment_step_registry_c.cpython-312.pyc",
+      "bytes": 3580,
+      "mtime": "2026-11-10T17:47:08.448747+00:00",
+      "ctime": "2026-11-10T17:47:08.448747+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/frame.cpython-312.pyc",
+      "bytes": 66551,
+      "mtime": "2026-11-10T17:47:06.679431+00:00",
+      "ctime": "2026-11-10T17:47:06.679431+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/framed_masks.cpython-312.pyc",
+      "bytes": 13873,
+      "mtime": "2026-11-10T17:47:08.009913+00:00",
+      "ctime": "2026-11-10T17:47:08.009913+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/framed_packet_regions.cpython-312.pyc",
+      "bytes": 22208,
+      "mtime": "2026-11-10T17:47:06.518280+00:00",
+      "ctime": "2026-11-10T17:47:06.518280+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/geometry.cpython-312.pyc",
+      "bytes": 26473,
+      "mtime": "2026-11-10T17:47:08.135361+00:00",
+      "ctime": "2026-11-10T17:47:08.135361+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/geometry_obligation_audit_d.cpython-312.pyc",
+      "bytes": 36812,
+      "mtime": "2026-11-10T17:47:07.659331+00:00",
+      "ctime": "2026-11-10T17:47:07.659331+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/goal_graph.cpython-312.pyc",
+      "bytes": 11468,
+      "mtime": "2026-11-10T17:47:08.827216+00:00",
+      "ctime": "2026-11-10T17:47:08.827216+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/goal_parent_continuity.cpython-312.pyc",
+      "bytes": 19580,
+      "mtime": "2026-11-10T17:47:07.991350+00:00",
+      "ctime": "2026-11-10T17:47:07.991350+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/goal_supposition_c.cpython-312.pyc",
+      "bytes": 20010,
+      "mtime": "2026-11-10T17:47:08.336100+00:00",
+      "ctime": "2026-11-10T17:47:08.336100+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/goal_supposition_contracts_c.cpython-312.pyc",
+      "bytes": 9893,
+      "mtime": "2026-11-10T17:47:08.331274+00:00",
+      "ctime": "2026-11-10T17:47:08.331274+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/goal_supposition_registry_c.cpython-312.pyc",
+      "bytes": 3843,
+      "mtime": "2026-11-10T17:47:08.330390+00:00",
+      "ctime": "2026-11-10T17:47:08.330390+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/goals.cpython-312.pyc",
+      "bytes": 2219,
+      "mtime": "2026-11-10T17:47:08.826034+00:00",
+      "ctime": "2026-11-10T17:47:08.826034+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/gravity_step_c.cpython-312.pyc",
+      "bytes": 20897,
+      "mtime": "2026-11-10T17:47:08.522184+00:00",
+      "ctime": "2026-11-10T17:47:08.522184+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/gravity_step_contracts_c.cpython-312.pyc",
+      "bytes": 5263,
+      "mtime": "2026-11-10T17:47:08.517846+00:00",
+      "ctime": "2026-11-10T17:47:08.517846+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/gravity_step_registry_c.cpython-312.pyc",
+      "bytes": 3609,
+      "mtime": "2026-11-10T17:47:08.517370+00:00",
+      "ctime": "2026-11-10T17:47:08.517370+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/guarded_search_c.cpython-312.pyc",
+      "bytes": 6528,
+      "mtime": "2026-11-10T17:47:08.516634+00:00",
+      "ctime": "2026-11-10T17:47:08.516634+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/guarded_search_contracts_c.cpython-312.pyc",
+      "bytes": 2705,
+      "mtime": "2026-11-10T17:47:08.515029+00:00",
+      "ctime": "2026-11-10T17:47:08.515029+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/guarded_search_registry_c.cpython-312.pyc",
+      "bytes": 3165,
+      "mtime": "2026-11-10T17:47:08.514690+00:00",
+      "ctime": "2026-11-10T17:47:08.514690+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/guarded_transport.cpython-312.pyc",
+      "bytes": 40716,
+      "mtime": "2026-11-10T17:47:08.153322+00:00",
+      "ctime": "2026-11-10T17:47:08.153322+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/guidance_relation_c.cpython-312.pyc",
+      "bytes": 11741,
+      "mtime": "2026-11-10T17:47:08.405085+00:00",
+      "ctime": "2026-11-10T17:47:08.405085+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/guidance_relation_contracts_c.cpython-312.pyc",
+      "bytes": 6418,
+      "mtime": "2026-11-10T17:47:08.400047+00:00",
+      "ctime": "2026-11-10T17:47:08.400047+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/guidance_relation_registry_c.cpython-312.pyc",
+      "bytes": 2645,
+      "mtime": "2026-11-10T17:47:08.399376+00:00",
+      "ctime": "2026-11-10T17:47:08.399376+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/hidden_motion_reception.cpython-312.pyc",
+      "bytes": 66723,
+      "mtime": "2026-11-10T17:47:06.735957+00:00",
+      "ctime": "2026-11-10T17:47:06.735957+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/hierarchical_probe_d.cpython-312.pyc",
+      "bytes": 14339,
+      "mtime": "2026-11-10T17:47:07.956805+00:00",
+      "ctime": "2026-11-10T17:47:07.956805+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/hollow_marker_occlusion.cpython-312.pyc",
+      "bytes": 6694,
+      "mtime": "2026-11-10T17:47:09.213534+00:00",
+      "ctime": "2026-11-10T17:47:09.213534+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/homologous_interface.cpython-312.pyc",
+      "bytes": 25952,
+      "mtime": "2026-11-10T17:47:08.008284+00:00",
+      "ctime": "2026-11-10T17:47:08.008284+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/homologous_interface_registry.cpython-312.pyc",
+      "bytes": 3922,
+      "mtime": "2026-11-10T17:47:08.016840+00:00",
+      "ctime": "2026-11-10T17:47:08.016840+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/identity_contact_authentication.cpython-312.pyc",
+      "bytes": 78103,
+      "mtime": "2026-11-10T17:47:06.540596+00:00",
+      "ctime": "2026-11-10T17:47:06.540596+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/identity_scoped_support_d.cpython-312.pyc",
+      "bytes": 10271,
+      "mtime": "2026-11-10T17:47:07.969706+00:00",
+      "ctime": "2026-11-10T17:47:07.969706+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/incremental_domain_budget_d.cpython-312.pyc",
+      "bytes": 9415,
+      "mtime": "2026-11-10T17:47:07.689528+00:00",
+      "ctime": "2026-11-10T17:47:07.689528+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/indexed_panel_measurement_d.cpython-312.pyc",
+      "bytes": 14953,
+      "mtime": "2026-11-10T17:47:07.313557+00:00",
+      "ctime": "2026-11-10T17:47:07.313557+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/indexed_prefix_primitive_d.cpython-312.pyc",
+      "bytes": 13203,
+      "mtime": "2026-11-10T17:47:06.512117+00:00",
+      "ctime": "2026-11-10T17:47:06.512117+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/indexed_sequence_c.cpython-312.pyc",
+      "bytes": 8779,
+      "mtime": "2026-11-10T17:47:08.281603+00:00",
+      "ctime": "2026-11-10T17:47:08.281603+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/indexed_sequence_contracts_c.cpython-312.pyc",
+      "bytes": 5100,
+      "mtime": "2026-11-10T17:47:08.272954+00:00",
+      "ctime": "2026-11-10T17:47:08.272954+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/indexed_sequence_registry_c.cpython-312.pyc",
+      "bytes": 2506,
+      "mtime": "2026-11-10T17:47:08.301816+00:00",
+      "ctime": "2026-11-10T17:47:08.301816+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/influence_conservation.cpython-312.pyc",
+      "bytes": 18420,
+      "mtime": "2026-11-10T17:47:08.796774+00:00",
+      "ctime": "2026-11-10T17:47:08.796774+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/influence_geometry.cpython-312.pyc",
+      "bytes": 3943,
+      "mtime": "2026-11-10T17:47:06.722147+00:00",
+      "ctime": "2026-11-10T17:47:06.722147+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/injective_matching.cpython-312.pyc",
+      "bytes": 2328,
+      "mtime": "2026-11-10T17:47:07.152197+00:00",
+      "ctime": "2026-11-10T17:47:07.152197+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/interaction.cpython-312.pyc",
+      "bytes": 2162963,
+      "mtime": "2026-11-10T17:47:09.172057+00:00",
+      "ctime": "2026-11-10T17:47:09.172057+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/interaction_supposition_c.cpython-312.pyc",
+      "bytes": 24562,
+      "mtime": "2026-11-10T17:47:08.321622+00:00",
+      "ctime": "2026-11-10T17:47:08.321622+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/interaction_supposition_contracts_c.cpython-312.pyc",
+      "bytes": 11661,
+      "mtime": "2026-11-10T17:47:08.315421+00:00",
+      "ctime": "2026-11-10T17:47:08.315421+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/interaction_supposition_registry_c.cpython-312.pyc",
+      "bytes": 4045,
+      "mtime": "2026-11-10T17:47:08.314506+00:00",
+      "ctime": "2026-11-10T17:47:08.314506+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/inventory_gated_navigation.cpython-312.pyc",
+      "bytes": 99640,
+      "mtime": "2026-11-10T17:47:07.116635+00:00",
+      "ctime": "2026-11-10T17:47:07.116635+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/inventory_release_domain_d.cpython-312.pyc",
+      "bytes": 16664,
+      "mtime": "2026-11-10T17:47:07.935894+00:00",
+      "ctime": "2026-11-10T17:47:07.935894+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/inverse_anchor.cpython-312.pyc",
+      "bytes": 5714,
+      "mtime": "2026-11-10T17:47:06.950571+00:00",
+      "ctime": "2026-11-10T17:47:06.950571+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/inverse_anchor_signature.cpython-312.pyc",
+      "bytes": 34552,
+      "mtime": "2026-11-10T17:47:06.949588+00:00",
+      "ctime": "2026-11-10T17:47:06.949588+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/inverse_anchor_signature_extensions.cpython-312.pyc",
+      "bytes": 6334,
+      "mtime": "2026-11-10T17:47:06.951527+00:00",
+      "ctime": "2026-11-10T17:47:06.951527+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/joystick_observation_contracts_a.cpython-312.pyc",
+      "bytes": 6319,
+      "mtime": "2026-11-10T17:47:07.341305+00:00",
+      "ctime": "2026-11-10T17:47:07.341305+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/joystick_source_a.cpython-312.pyc",
+      "bytes": 8042,
+      "mtime": "2026-11-10T17:47:07.981943+00:00",
+      "ctime": "2026-11-10T17:47:07.981943+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/joystick_source_registry_a.cpython-312.pyc",
+      "bytes": 2908,
+      "mtime": "2026-11-10T17:47:07.299999+00:00",
+      "ctime": "2026-11-10T17:47:07.299999+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/joystick_step_c.cpython-312.pyc",
+      "bytes": 20177,
+      "mtime": "2026-11-10T17:47:08.478948+00:00",
+      "ctime": "2026-11-10T17:47:08.478948+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/joystick_step_contracts_c.cpython-312.pyc",
+      "bytes": 5331,
+      "mtime": "2026-11-10T17:47:08.475531+00:00",
+      "ctime": "2026-11-10T17:47:08.475531+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/joystick_step_registry_c.cpython-312.pyc",
+      "bytes": 3580,
+      "mtime": "2026-11-10T17:47:08.475073+00:00",
+      "ctime": "2026-11-10T17:47:08.475073+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/kit_survival_choice_contracts_d.cpython-312.pyc",
+      "bytes": 2979,
+      "mtime": "2026-11-10T17:47:08.038133+00:00",
+      "ctime": "2026-11-10T17:47:08.038133+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/kit_survival_choice_d.cpython-312.pyc",
+      "bytes": 5521,
+      "mtime": "2026-11-10T17:47:08.039741+00:00",
+      "ctime": "2026-11-10T17:47:08.039741+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/knowledge_supposition_c.cpython-312.pyc",
+      "bytes": 26835,
+      "mtime": "2026-11-10T17:47:08.312903+00:00",
+      "ctime": "2026-11-10T17:47:08.312903+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/knowledge_supposition_contracts_c.cpython-312.pyc",
+      "bytes": 11153,
+      "mtime": "2026-11-10T17:47:08.304013+00:00",
+      "ctime": "2026-11-10T17:47:08.304013+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/knowledge_supposition_registry_c.cpython-312.pyc",
+      "bytes": 4057,
+      "mtime": "2026-11-10T17:47:08.302803+00:00",
+      "ctime": "2026-11-10T17:47:08.302803+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/labeled_predicate_induction_d.cpython-312.pyc",
+      "bytes": 16210,
+      "mtime": "2026-11-10T17:47:07.903059+00:00",
+      "ctime": "2026-11-10T17:47:07.903059+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/latent_reference_restoration.cpython-312.pyc",
+      "bytes": 92553,
+      "mtime": "2026-11-10T17:47:06.771503+00:00",
+      "ctime": "2026-11-10T17:47:06.771503+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/lattice_calibration_c.cpython-312.pyc",
+      "bytes": 12993,
+      "mtime": "2026-11-10T17:47:08.399005+00:00",
+      "ctime": "2026-11-10T17:47:08.399005+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/lattice_calibration_contracts_c.cpython-312.pyc",
+      "bytes": 7867,
+      "mtime": "2026-11-10T17:47:08.395087+00:00",
+      "ctime": "2026-11-10T17:47:08.395087+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/lattice_calibration_registry_c.cpython-312.pyc",
+      "bytes": 2839,
+      "mtime": "2026-11-10T17:47:08.394346+00:00",
+      "ctime": "2026-11-10T17:47:08.394346+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/layer_correspondence.cpython-312.pyc",
+      "bytes": 60044,
+      "mtime": "2026-11-10T17:47:09.236249+00:00",
+      "ctime": "2026-11-10T17:47:09.236249+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/layered_prefix_construction.cpython-312.pyc",
+      "bytes": 46607,
+      "mtime": "2026-11-10T17:47:07.441221+00:00",
+      "ctime": "2026-11-10T17:47:07.441221+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/layered_relief.cpython-312.pyc",
+      "bytes": 12988,
+      "mtime": "2026-11-10T17:47:06.456419+00:00",
+      "ctime": "2026-11-10T17:47:06.456419+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/lazy.cpython-312.pyc",
+      "bytes": 5268,
+      "mtime": "2026-11-10T17:47:06.467787+00:00",
+      "ctime": "2026-11-10T17:47:06.467787+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/lineage_production_delivery.cpython-312.pyc",
+      "bytes": 68742,
+      "mtime": "2026-11-10T17:47:06.782743+00:00",
+      "ctime": "2026-11-10T17:47:06.782743+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/local_field_delivery.cpython-312.pyc",
+      "bytes": 12233,
+      "mtime": "2026-11-10T17:47:09.358815+00:00",
+      "ctime": "2026-11-10T17:47:09.358815+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/local_field_inventory.cpython-312.pyc",
+      "bytes": 12347,
+      "mtime": "2026-11-10T17:47:09.350545+00:00",
+      "ctime": "2026-11-10T17:47:09.350545+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/local_field_pair_geometry.cpython-312.pyc",
+      "bytes": 9588,
+      "mtime": "2026-11-10T17:47:09.353173+00:00",
+      "ctime": "2026-11-10T17:47:09.353173+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/local_field_stock_change.cpython-312.pyc",
+      "bytes": 11695,
+      "mtime": "2026-11-10T17:47:09.355826+00:00",
+      "ctime": "2026-11-10T17:47:09.355826+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/local_field_type_production.cpython-312.pyc",
+      "bytes": 70794,
+      "mtime": "2026-11-10T17:47:06.879053+00:00",
+      "ctime": "2026-11-10T17:47:06.879053+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/macro_expansion_c.cpython-312.pyc",
+      "bytes": 23495,
+      "mtime": "2026-11-10T17:47:08.512339+00:00",
+      "ctime": "2026-11-10T17:47:08.512339+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/macro_expansion_contracts_c.cpython-312.pyc",
+      "bytes": 4757,
+      "mtime": "2026-11-10T17:47:08.508444+00:00",
+      "ctime": "2026-11-10T17:47:08.508444+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/macro_expansion_registry_c.cpython-312.pyc",
+      "bytes": 2863,
+      "mtime": "2026-11-10T17:47:08.507968+00:00",
+      "ctime": "2026-11-10T17:47:08.507968+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/material_supposition_c.cpython-312.pyc",
+      "bytes": 17514,
+      "mtime": "2026-11-10T17:47:08.264230+00:00",
+      "ctime": "2026-11-10T17:47:08.264230+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/material_supposition_contracts_c.cpython-312.pyc",
+      "bytes": 7769,
+      "mtime": "2026-11-10T17:47:08.260056+00:00",
+      "ctime": "2026-11-10T17:47:08.260056+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/material_supposition_registry_c.cpython-312.pyc",
+      "bytes": 3600,
+      "mtime": "2026-11-10T17:47:08.259211+00:00",
+      "ctime": "2026-11-10T17:47:08.259211+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/measurement_extension_c.cpython-312.pyc",
+      "bytes": 6075,
+      "mtime": "2026-11-10T17:47:08.232662+00:00",
+      "ctime": "2026-11-10T17:47:08.232662+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/measurement_extension_contracts_c.cpython-312.pyc",
+      "bytes": 3165,
+      "mtime": "2026-11-10T17:47:08.231205+00:00",
+      "ctime": "2026-11-10T17:47:08.231205+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/measurement_extension_registry_c.cpython-312.pyc",
+      "bytes": 2526,
+      "mtime": "2026-11-10T17:47:08.230811+00:00",
+      "ctime": "2026-11-10T17:47:08.230811+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/measurement_need_c.cpython-312.pyc",
+      "bytes": 14299,
+      "mtime": "2026-11-10T17:47:08.239540+00:00",
+      "ctime": "2026-11-10T17:47:08.239540+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/measurement_need_contracts_c.cpython-312.pyc",
+      "bytes": 7790,
+      "mtime": "2026-11-10T17:47:08.233802+00:00",
+      "ctime": "2026-11-10T17:47:08.233802+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/measurement_need_registry_c.cpython-312.pyc",
+      "bytes": 3728,
+      "mtime": "2026-11-10T17:47:08.233166+00:00",
+      "ctime": "2026-11-10T17:47:08.233166+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_c_runtime_bridge.cpython-312.pyc",
+      "bytes": 59388,
+      "mtime": "2026-11-10T17:47:07.996486+00:00",
+      "ctime": "2026-11-10T17:47:07.996486+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_common_contracts_c.cpython-312.pyc",
+      "bytes": 18696,
+      "mtime": "2026-11-10T17:47:06.633188+00:00",
+      "ctime": "2026-11-10T17:47:06.633188+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_common_projection_c.cpython-312.pyc",
+      "bytes": 4742,
+      "mtime": "2026-11-10T17:47:08.026761+00:00",
+      "ctime": "2026-11-10T17:47:08.026761+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_common_registry_c.cpython-312.pyc",
+      "bytes": 7383,
+      "mtime": "2026-11-10T17:47:08.024297+00:00",
+      "ctime": "2026-11-10T17:47:08.024297+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_contracts_b.cpython-312.pyc",
+      "bytes": 4812,
+      "mtime": "2026-11-10T17:47:07.187963+00:00",
+      "ctime": "2026-11-10T17:47:07.187963+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_event_composition_c.cpython-312.pyc",
+      "bytes": 23639,
+      "mtime": "2026-11-10T17:47:06.649141+00:00",
+      "ctime": "2026-11-10T17:47:06.649141+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_family_contracts_a.cpython-312.pyc",
+      "bytes": 5431,
+      "mtime": "2026-11-10T17:47:06.541432+00:00",
+      "ctime": "2026-11-10T17:47:06.541432+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_family_contracts_d.cpython-312.pyc",
+      "bytes": 16118,
+      "mtime": "2026-11-10T17:47:06.505922+00:00",
+      "ctime": "2026-11-10T17:47:06.505922+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_family_registry_a.cpython-312.pyc",
+      "bytes": 16250,
+      "mtime": "2026-11-10T17:47:06.524321+00:00",
+      "ctime": "2026-11-10T17:47:06.524321+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_family_registry_d.cpython-312.pyc",
+      "bytes": 54911,
+      "mtime": "2026-11-10T17:47:07.986454+00:00",
+      "ctime": "2026-11-10T17:47:07.986454+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_family_return_adapter_d.cpython-312.pyc",
+      "bytes": 25970,
+      "mtime": "2026-11-10T17:47:07.305763+00:00",
+      "ctime": "2026-11-10T17:47:07.305763+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_path_driver_c.cpython-312.pyc",
+      "bytes": 10330,
+      "mtime": "2026-11-10T17:47:08.191463+00:00",
+      "ctime": "2026-11-10T17:47:08.191463+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_path_driver_contracts_c.cpython-312.pyc",
+      "bytes": 3783,
+      "mtime": "2026-11-10T17:47:08.189315+00:00",
+      "ctime": "2026-11-10T17:47:08.189315+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_path_driver_registry_c.cpython-312.pyc",
+      "bytes": 4137,
+      "mtime": "2026-11-10T17:47:08.188944+00:00",
+      "ctime": "2026-11-10T17:47:08.188944+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_profile_a.cpython-312.pyc",
+      "bytes": 24456,
+      "mtime": "2026-11-10T17:47:07.183603+00:00",
+      "ctime": "2026-11-10T17:47:07.183603+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_profile_b.cpython-312.pyc",
+      "bytes": 27064,
+      "mtime": "2026-11-10T17:47:07.187110+00:00",
+      "ctime": "2026-11-10T17:47:07.187110+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_profile_d.cpython-312.pyc",
+      "bytes": 30265,
+      "mtime": "2026-11-10T17:47:07.304180+00:00",
+      "ctime": "2026-11-10T17:47:07.304180+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_profile_registry_a.cpython-312.pyc",
+      "bytes": 4685,
+      "mtime": "2026-11-10T17:47:07.180579+00:00",
+      "ctime": "2026-11-10T17:47:07.180579+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_profile_registry_d.cpython-312.pyc",
+      "bytes": 4444,
+      "mtime": "2026-11-10T17:47:07.989365+00:00",
+      "ctime": "2026-11-10T17:47:07.989365+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_request_contracts.cpython-312.pyc",
+      "bytes": 7648,
+      "mtime": "2026-11-10T17:47:06.633960+00:00",
+      "ctime": "2026-11-10T17:47:06.633960+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_request_shape_b.cpython-312.pyc",
+      "bytes": 5005,
+      "mtime": "2026-11-10T17:47:08.147397+00:00",
+      "ctime": "2026-11-10T17:47:08.147397+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_response.cpython-312.pyc",
+      "bytes": 3426,
+      "mtime": "2026-11-10T17:47:08.777249+00:00",
+      "ctime": "2026-11-10T17:47:08.777249+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_response_transport_b.cpython-312.pyc",
+      "bytes": 4367,
+      "mtime": "2026-11-10T17:47:08.146692+00:00",
+      "ctime": "2026-11-10T17:47:08.146692+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_return_a.cpython-312.pyc",
+      "bytes": 8292,
+      "mtime": "2026-11-10T17:47:07.179209+00:00",
+      "ctime": "2026-11-10T17:47:07.179209+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_search_c.cpython-312.pyc",
+      "bytes": 38989,
+      "mtime": "2026-11-10T17:47:07.251602+00:00",
+      "ctime": "2026-11-10T17:47:07.251602+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_search_driver_c.cpython-312.pyc",
+      "bytes": 17685,
+      "mtime": "2026-11-10T17:47:08.186911+00:00",
+      "ctime": "2026-11-10T17:47:08.186911+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_search_driver_contracts_c.cpython-312.pyc",
+      "bytes": 3957,
+      "mtime": "2026-11-10T17:47:08.161716+00:00",
+      "ctime": "2026-11-10T17:47:08.161716+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_search_driver_registry_c.cpython-312.pyc",
+      "bytes": 4164,
+      "mtime": "2026-11-10T17:47:08.192095+00:00",
+      "ctime": "2026-11-10T17:47:08.192095+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_simulation_c.cpython-312.pyc",
+      "bytes": 10105,
+      "mtime": "2026-11-10T17:47:08.025357+00:00",
+      "ctime": "2026-11-10T17:47:08.025357+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_step_c.cpython-312.pyc",
+      "bytes": 9204,
+      "mtime": "2026-11-10T17:47:08.146156+00:00",
+      "ctime": "2026-11-10T17:47:08.146156+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_step_contracts_c.cpython-312.pyc",
+      "bytes": 4736,
+      "mtime": "2026-11-10T17:47:08.142666+00:00",
+      "ctime": "2026-11-10T17:47:08.142666+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_step_registry_c.cpython-312.pyc",
+      "bytes": 4811,
+      "mtime": "2026-11-10T17:47:08.142228+00:00",
+      "ctime": "2026-11-10T17:47:08.142228+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_transport_b.cpython-312.pyc",
+      "bytes": 3315,
+      "mtime": "2026-11-10T17:47:07.191558+00:00",
+      "ctime": "2026-11-10T17:47:07.191558+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mechanical_transport_c.cpython-312.pyc",
+      "bytes": 11716,
+      "mtime": "2026-11-10T17:47:07.253105+00:00",
+      "ctime": "2026-11-10T17:47:07.253105+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/memorial_axis_step.cpython-312.pyc",
+      "bytes": 6603,
+      "mtime": "2026-11-10T17:47:09.181094+00:00",
+      "ctime": "2026-11-10T17:47:09.181094+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/memorial_control_switch.cpython-312.pyc",
+      "bytes": 17389,
+      "mtime": "2026-11-10T17:47:09.182990+00:00",
+      "ctime": "2026-11-10T17:47:09.182990+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/memorial_peer_step.cpython-312.pyc",
+      "bytes": 15132,
+      "mtime": "2026-11-10T17:47:09.188595+00:00",
+      "ctime": "2026-11-10T17:47:09.188595+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/memorial_source_step.cpython-312.pyc",
+      "bytes": 26676,
+      "mtime": "2026-11-10T17:47:09.186674+00:00",
+      "ctime": "2026-11-10T17:47:09.186674+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/metric_reference_residual.cpython-312.pyc",
+      "bytes": 10924,
+      "mtime": "2026-11-10T17:47:09.206681+00:00",
+      "ctime": "2026-11-10T17:47:09.206681+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/metric_schedule_c.cpython-312.pyc",
+      "bytes": 22225,
+      "mtime": "2026-11-10T17:47:08.242774+00:00",
+      "ctime": "2026-11-10T17:47:08.242774+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/metric_schedule_contracts_c.cpython-312.pyc",
+      "bytes": 980,
+      "mtime": "2026-11-10T17:47:08.240259+00:00",
+      "ctime": "2026-11-10T17:47:08.240259+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/metric_schedule_registry_c.cpython-312.pyc",
+      "bytes": 2639,
+      "mtime": "2026-11-10T17:47:08.240070+00:00",
+      "ctime": "2026-11-10T17:47:08.240070+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/metric_search_c.cpython-312.pyc",
+      "bytes": 21121,
+      "mtime": "2026-11-10T17:47:08.222212+00:00",
+      "ctime": "2026-11-10T17:47:08.222212+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/metric_search_contracts_c.cpython-312.pyc",
+      "bytes": 3971,
+      "mtime": "2026-11-10T17:47:08.219047+00:00",
+      "ctime": "2026-11-10T17:47:08.219047+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/metric_search_registry_c.cpython-312.pyc",
+      "bytes": 4384,
+      "mtime": "2026-11-10T17:47:08.218475+00:00",
+      "ctime": "2026-11-10T17:47:08.218475+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/metric_stack_contracts.cpython-312.pyc",
+      "bytes": 19642,
+      "mtime": "2026-11-10T17:47:07.558258+00:00",
+      "ctime": "2026-11-10T17:47:07.558258+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/metric_stack_image.cpython-312.pyc",
+      "bytes": 95895,
+      "mtime": "2026-11-10T17:47:07.577317+00:00",
+      "ctime": "2026-11-10T17:47:07.577317+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/metric_step_c.cpython-312.pyc",
+      "bytes": 18358,
+      "mtime": "2026-11-10T17:47:08.217848+00:00",
+      "ctime": "2026-11-10T17:47:08.217848+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/metric_step_contracts_c.cpython-312.pyc",
+      "bytes": 4367,
+      "mtime": "2026-11-10T17:47:08.213670+00:00",
+      "ctime": "2026-11-10T17:47:08.213670+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/metric_step_registry_c.cpython-312.pyc",
+      "bytes": 3996,
+      "mtime": "2026-11-10T17:47:08.213274+00:00",
+      "ctime": "2026-11-10T17:47:08.213274+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/modular_control_certificate_d.cpython-312.pyc",
+      "bytes": 4672,
+      "mtime": "2026-11-10T17:47:07.344641+00:00",
+      "ctime": "2026-11-10T17:47:07.344641+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/modular_phase_channels_d.cpython-312.pyc",
+      "bytes": 8888,
+      "mtime": "2026-11-10T17:47:07.954076+00:00",
+      "ctime": "2026-11-10T17:47:07.954076+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/monotone_excavation_d.cpython-312.pyc",
+      "bytes": 10639,
+      "mtime": "2026-11-10T17:47:07.942168+00:00",
+      "ctime": "2026-11-10T17:47:07.942168+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/motion_supposition_c.cpython-312.pyc",
+      "bytes": 25231,
+      "mtime": "2026-11-10T17:47:08.294636+00:00",
+      "ctime": "2026-11-10T17:47:08.294636+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/motion_supposition_contracts_c.cpython-312.pyc",
+      "bytes": 12004,
+      "mtime": "2026-11-10T17:47:08.283092+00:00",
+      "ctime": "2026-11-10T17:47:08.283092+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/motion_supposition_registry_c.cpython-312.pyc",
+      "bytes": 3851,
+      "mtime": "2026-11-10T17:47:08.282121+00:00",
+      "ctime": "2026-11-10T17:47:08.282121+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/multiscale.cpython-312.pyc",
+      "bytes": 63148,
+      "mtime": "2026-11-10T17:47:09.309535+00:00",
+      "ctime": "2026-11-10T17:47:09.309535+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/mutable_kit_survival.cpython-312.pyc",
+      "bytes": 72631,
+      "mtime": "2026-11-10T17:47:06.721549+00:00",
+      "ctime": "2026-11-10T17:47:06.721549+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/native_goal_domain_audit_d.cpython-312.pyc",
+      "bytes": 11918,
+      "mtime": "2026-11-10T17:47:07.544729+00:00",
+      "ctime": "2026-11-10T17:47:07.544729+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/native_solving_contributions_d.cpython-312.pyc",
+      "bytes": 29401,
+      "mtime": "2026-11-10T17:47:07.607274+00:00",
+      "ctime": "2026-11-10T17:47:07.607274+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/navigation_obligation_contracts_d.cpython-312.pyc",
+      "bytes": 2188,
+      "mtime": "2026-11-10T17:47:07.117283+00:00",
+      "ctime": "2026-11-10T17:47:07.117283+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/navigation_obligations_d.cpython-312.pyc",
+      "bytes": 10865,
+      "mtime": "2026-11-10T17:47:07.120142+00:00",
+      "ctime": "2026-11-10T17:47:07.120142+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/neighborhood_completion_a.cpython-312.pyc",
+      "bytes": 17259,
+      "mtime": "2026-11-10T17:47:07.213502+00:00",
+      "ctime": "2026-11-10T17:47:07.213502+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/neighborhood_completion_registry_a.cpython-312.pyc",
+      "bytes": 2962,
+      "mtime": "2026-11-10T17:47:07.201573+00:00",
+      "ctime": "2026-11-10T17:47:07.201573+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/neighborhood_pattern_construction.cpython-312.pyc",
+      "bytes": 53301,
+      "mtime": "2026-11-10T17:47:07.208598+00:00",
+      "ctime": "2026-11-10T17:47:07.208598+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/neighborhood_search_c.cpython-312.pyc",
+      "bytes": 17719,
+      "mtime": "2026-11-10T17:47:08.200844+00:00",
+      "ctime": "2026-11-10T17:47:08.200844+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/neighborhood_search_contracts_c.cpython-312.pyc",
+      "bytes": 3822,
+      "mtime": "2026-11-10T17:47:07.218231+00:00",
+      "ctime": "2026-11-10T17:47:07.218231+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/neighborhood_search_registry_c.cpython-312.pyc",
+      "bytes": 4669,
+      "mtime": "2026-11-10T17:47:08.199202+00:00",
+      "ctime": "2026-11-10T17:47:08.199202+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/neighborhood_step_c.cpython-312.pyc",
+      "bytes": 22268,
+      "mtime": "2026-11-10T17:47:08.198531+00:00",
+      "ctime": "2026-11-10T17:47:08.198531+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/neighborhood_step_contracts_c.cpython-312.pyc",
+      "bytes": 5007,
+      "mtime": "2026-11-10T17:47:07.218691+00:00",
+      "ctime": "2026-11-10T17:47:07.218691+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/neighborhood_step_registry_c.cpython-312.pyc",
+      "bytes": 4290,
+      "mtime": "2026-11-10T17:47:08.196603+00:00",
+      "ctime": "2026-11-10T17:47:08.196603+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/neighborhood_transport_a.cpython-312.pyc",
+      "bytes": 12831,
+      "mtime": "2026-11-10T17:47:07.222688+00:00",
+      "ctime": "2026-11-10T17:47:07.222688+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/object_contact_measurements.cpython-312.pyc",
+      "bytes": 8550,
+      "mtime": "2026-11-10T17:47:09.210557+00:00",
+      "ctime": "2026-11-10T17:47:09.210557+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/observation_bounds.cpython-312.pyc",
+      "bytes": 539,
+      "mtime": "2026-11-10T17:47:06.215487+00:00",
+      "ctime": "2026-11-10T17:47:06.215487+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/observation_packet_boundary.cpython-312.pyc",
+      "bytes": 10297,
+      "mtime": "2026-11-10T17:47:08.000437+00:00",
+      "ctime": "2026-11-10T17:47:08.000437+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/observation_packet_boundary_registry.cpython-312.pyc",
+      "bytes": 2394,
+      "mtime": "2026-11-10T17:47:07.999438+00:00",
+      "ctime": "2026-11-10T17:47:07.999438+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/observed_field_owner_contracts_d.cpython-312.pyc",
+      "bytes": 1844,
+      "mtime": "2026-11-10T17:47:09.894198+00:00",
+      "ctime": "2026-11-10T17:47:09.894198+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/observed_neighbor_color_geometry.cpython-312.pyc",
+      "bytes": 37785,
+      "mtime": "2026-11-10T17:47:08.052502+00:00",
+      "ctime": "2026-11-10T17:47:08.052502+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/observed_neighbor_pattern_bridge.cpython-312.pyc",
+      "bytes": 31451,
+      "mtime": "2026-11-10T17:47:08.047524+00:00",
+      "ctime": "2026-11-10T17:47:08.047524+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/observed_neighbor_pattern_registry.cpython-312.pyc",
+      "bytes": 3260,
+      "mtime": "2026-11-10T17:47:08.044253+00:00",
+      "ctime": "2026-11-10T17:47:08.044253+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/observed_topological_field.cpython-312.pyc",
+      "bytes": 28443,
+      "mtime": "2026-11-10T17:47:08.057968+00:00",
+      "ctime": "2026-11-10T17:47:08.057968+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/observed_topological_field_registry.cpython-312.pyc",
+      "bytes": 3655,
+      "mtime": "2026-11-10T17:47:08.055401+00:00",
+      "ctime": "2026-11-10T17:47:08.055401+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/occluded_catalogue_projection_d.cpython-312.pyc",
+      "bytes": 14358,
+      "mtime": "2026-11-10T17:47:07.758787+00:00",
+      "ctime": "2026-11-10T17:47:07.758787+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/occluding_cone_d.cpython-312.pyc",
+      "bytes": 18882,
+      "mtime": "2026-11-10T17:47:07.931896+00:00",
+      "ctime": "2026-11-10T17:47:07.931896+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/occupancy_deferred_permission_d.cpython-312.pyc",
+      "bytes": 6774,
+      "mtime": "2026-11-10T17:47:07.713481+00:00",
+      "ctime": "2026-11-10T17:47:07.713481+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/open_cavity.cpython-312.pyc",
+      "bytes": 19825,
+      "mtime": "2026-11-10T17:47:09.209439+00:00",
+      "ctime": "2026-11-10T17:47:09.209439+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/opposed_routes.cpython-312.pyc",
+      "bytes": 15512,
+      "mtime": "2026-11-10T17:47:09.313585+00:00",
+      "ctime": "2026-11-10T17:47:09.313585+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/optical_route_a.cpython-312.pyc",
+      "bytes": 32811,
+      "mtime": "2026-11-10T17:47:07.246439+00:00",
+      "ctime": "2026-11-10T17:47:07.246439+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/optical_route_contracts_a.cpython-312.pyc",
+      "bytes": 1497,
+      "mtime": "2026-11-10T17:47:07.238795+00:00",
+      "ctime": "2026-11-10T17:47:07.238795+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/optical_route_registry_a.cpython-312.pyc",
+      "bytes": 2702,
+      "mtime": "2026-11-10T17:47:07.227514+00:00",
+      "ctime": "2026-11-10T17:47:07.227514+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/optical_scene_a.cpython-312.pyc",
+      "bytes": 7119,
+      "mtime": "2026-11-10T17:47:07.237589+00:00",
+      "ctime": "2026-11-10T17:47:07.237589+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/optical_solving_c.cpython-312.pyc",
+      "bytes": 25300,
+      "mtime": "2026-11-10T17:47:08.725464+00:00",
+      "ctime": "2026-11-10T17:47:08.725464+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/optical_solving_contracts_c.cpython-312.pyc",
+      "bytes": 5018,
+      "mtime": "2026-11-10T17:47:08.720455+00:00",
+      "ctime": "2026-11-10T17:47:08.720455+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/optical_solving_registry_c.cpython-312.pyc",
+      "bytes": 2758,
+      "mtime": "2026-11-10T17:47:08.719903+00:00",
+      "ctime": "2026-11-10T17:47:08.719903+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/optical_step_c.cpython-312.pyc",
+      "bytes": 20986,
+      "mtime": "2026-11-10T17:47:08.429342+00:00",
+      "ctime": "2026-11-10T17:47:08.429342+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/optical_step_contracts_c.cpython-312.pyc",
+      "bytes": 5201,
+      "mtime": "2026-11-10T17:47:08.425728+00:00",
+      "ctime": "2026-11-10T17:47:08.425728+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/optical_step_registry_c.cpython-312.pyc",
+      "bytes": 3507,
+      "mtime": "2026-11-10T17:47:08.425249+00:00",
+      "ctime": "2026-11-10T17:47:08.425249+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/ordered_continuation_contracts_d.cpython-312.pyc",
+      "bytes": 1151,
+      "mtime": "2026-11-10T17:47:06.693272+00:00",
+      "ctime": "2026-11-10T17:47:06.693272+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/ordered_continuation_d.cpython-312.pyc",
+      "bytes": 3285,
+      "mtime": "2026-11-10T17:47:06.694016+00:00",
+      "ctime": "2026-11-10T17:47:06.694016+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/ordered_focus.cpython-312.pyc",
+      "bytes": 15307,
+      "mtime": "2026-11-10T17:47:08.136884+00:00",
+      "ctime": "2026-11-10T17:47:08.136884+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/ordered_front_reduction_d.cpython-312.pyc",
+      "bytes": 10959,
+      "mtime": "2026-11-10T17:47:07.744632+00:00",
+      "ctime": "2026-11-10T17:47:07.744632+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/ordered_path_primitive_d.cpython-312.pyc",
+      "bytes": 8788,
+      "mtime": "2026-11-10T17:47:07.541920+00:00",
+      "ctime": "2026-11-10T17:47:07.541920+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/ordered_predicate_features_d.cpython-312.pyc",
+      "bytes": 10642,
+      "mtime": "2026-11-10T17:47:07.906595+00:00",
+      "ctime": "2026-11-10T17:47:07.906595+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/ordered_relief_writing.cpython-312.pyc",
+      "bytes": 43103,
+      "mtime": "2026-11-10T17:47:06.998366+00:00",
+      "ctime": "2026-11-10T17:47:06.998366+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/ordered_row_closure.cpython-312.pyc",
+      "bytes": 5259,
+      "mtime": "2026-11-10T17:47:09.219251+00:00",
+      "ctime": "2026-11-10T17:47:09.219251+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/ordered_support_transfer.cpython-312.pyc",
+      "bytes": 65842,
+      "mtime": "2026-11-10T17:47:06.692902+00:00",
+      "ctime": "2026-11-10T17:47:06.692902+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/ordered_supports.cpython-312.pyc",
+      "bytes": 31489,
+      "mtime": "2026-11-10T17:47:06.697580+00:00",
+      "ctime": "2026-11-10T17:47:06.697580+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/ordered_tip_changes.cpython-312.pyc",
+      "bytes": 25982,
+      "mtime": "2026-11-10T17:47:09.229331+00:00",
+      "ctime": "2026-11-10T17:47:09.229331+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/ordered_traits.cpython-312.pyc",
+      "bytes": 23674,
+      "mtime": "2026-11-10T17:47:06.937262+00:00",
+      "ctime": "2026-11-10T17:47:06.937262+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/oriented_cargo_handoffs.cpython-312.pyc",
+      "bytes": 109815,
+      "mtime": "2026-11-10T17:47:06.847442+00:00",
+      "ctime": "2026-11-10T17:47:06.847442+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/oriented_contour_network.cpython-312.pyc",
+      "bytes": 21130,
+      "mtime": "2026-11-10T17:47:09.180101+00:00",
+      "ctime": "2026-11-10T17:47:09.180101+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/oriented_transport.cpython-312.pyc",
+      "bytes": 50123,
+      "mtime": "2026-11-10T17:47:09.226485+00:00",
+      "ctime": "2026-11-10T17:47:09.226485+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/original_source_equilibrium_d.cpython-312.pyc",
+      "bytes": 13345,
+      "mtime": "2026-11-10T17:47:07.927073+00:00",
+      "ctime": "2026-11-10T17:47:07.927073+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/packing_inventory_contracts_d.cpython-312.pyc",
+      "bytes": 3590,
+      "mtime": "2026-11-10T17:47:07.455390+00:00",
+      "ctime": "2026-11-10T17:47:07.455390+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/packing_inventory_measurement_d.cpython-312.pyc",
+      "bytes": 12462,
+      "mtime": "2026-11-10T17:47:07.458621+00:00",
+      "ctime": "2026-11-10T17:47:07.458621+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/packing_step_c.cpython-312.pyc",
+      "bytes": 20100,
+      "mtime": "2026-11-10T17:47:08.444005+00:00",
+      "ctime": "2026-11-10T17:47:08.444005+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/packing_step_contracts_c.cpython-312.pyc",
+      "bytes": 5201,
+      "mtime": "2026-11-10T17:47:08.440341+00:00",
+      "ctime": "2026-11-10T17:47:08.440341+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/packing_step_registry_c.cpython-312.pyc",
+      "bytes": 3530,
+      "mtime": "2026-11-10T17:47:08.439702+00:00",
+      "ctime": "2026-11-10T17:47:08.439702+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/pair_observation_history.cpython-312.pyc",
+      "bytes": 3846,
+      "mtime": "2026-11-10T17:47:08.125590+00:00",
+      "ctime": "2026-11-10T17:47:08.125590+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/parallel_cell_fields.cpython-312.pyc",
+      "bytes": 33498,
+      "mtime": "2026-11-10T17:47:09.247739+00:00",
+      "ctime": "2026-11-10T17:47:09.247739+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/parameterized_control.cpython-312.pyc",
+      "bytes": 32295,
+      "mtime": "2026-11-10T17:47:08.004972+00:00",
+      "ctime": "2026-11-10T17:47:08.004972+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/parameterized_control_geometry.cpython-312.pyc",
+      "bytes": 13996,
+      "mtime": "2026-11-10T17:47:08.012486+00:00",
+      "ctime": "2026-11-10T17:47:08.012486+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/parameterized_control_inverse.cpython-312.pyc",
+      "bytes": 13383,
+      "mtime": "2026-11-10T17:47:08.016344+00:00",
+      "ctime": "2026-11-10T17:47:08.016344+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/parameterized_control_registry.cpython-312.pyc",
+      "bytes": 3543,
+      "mtime": "2026-11-10T17:47:08.001412+00:00",
+      "ctime": "2026-11-10T17:47:08.001412+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/partial_layer_correspondence.cpython-312.pyc",
+      "bytes": 43333,
+      "mtime": "2026-11-10T17:47:09.240289+00:00",
+      "ctime": "2026-11-10T17:47:09.240289+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/patrol_body.cpython-312.pyc",
+      "bytes": 20020,
+      "mtime": "2026-11-10T17:47:07.135889+00:00",
+      "ctime": "2026-11-10T17:47:07.135889+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/periodic_correspondence.cpython-312.pyc",
+      "bytes": 24587,
+      "mtime": "2026-11-10T17:47:08.131299+00:00",
+      "ctime": "2026-11-10T17:47:08.131299+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/periodic_profile_preimages_d.cpython-312.pyc",
+      "bytes": 15268,
+      "mtime": "2026-11-10T17:47:07.951499+00:00",
+      "ctime": "2026-11-10T17:47:07.951499+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/perishable_compartment_d.cpython-312.pyc",
+      "bytes": 27664,
+      "mtime": "2026-11-10T17:47:07.910730+00:00",
+      "ctime": "2026-11-10T17:47:07.910730+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/persistent_body_primitive_d.cpython-312.pyc",
+      "bytes": 30378,
+      "mtime": "2026-11-10T17:47:07.701036+00:00",
+      "ctime": "2026-11-10T17:47:07.701036+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/photosensitive_transaction_d.cpython-312.pyc",
+      "bytes": 28873,
+      "mtime": "2026-11-10T17:47:07.785691+00:00",
+      "ctime": "2026-11-10T17:47:07.785691+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/physical_transition_contracts.cpython-312.pyc",
+      "bytes": 12230,
+      "mtime": "2026-11-10T17:47:06.216783+00:00",
+      "ctime": "2026-11-10T17:47:06.216783+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/piercing_plan.cpython-312.pyc",
+      "bytes": 113215,
+      "mtime": "2026-11-10T17:47:08.789675+00:00",
+      "ctime": "2026-11-10T17:47:08.789675+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/piercing_rooted_order.cpython-312.pyc",
+      "bytes": 46556,
+      "mtime": "2026-11-10T17:47:06.859518+00:00",
+      "ctime": "2026-11-10T17:47:06.859518+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/piercing_scene_projection.cpython-312.pyc",
+      "bytes": 43150,
+      "mtime": "2026-11-10T17:47:08.794910+00:00",
+      "ctime": "2026-11-10T17:47:08.794910+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/planning.cpython-312.pyc",
+      "bytes": 197996,
+      "mtime": "2026-11-10T17:47:09.346595+00:00",
+      "ctime": "2026-11-10T17:47:09.346595+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/policy_constrained_routing_d.cpython-312.pyc",
+      "bytes": 12666,
+      "mtime": "2026-11-10T17:47:07.724621+00:00",
+      "ctime": "2026-11-10T17:47:07.724621+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/portable_local_relation.cpython-312.pyc",
+      "bytes": 14639,
+      "mtime": "2026-11-10T17:47:07.998274+00:00",
+      "ctime": "2026-11-10T17:47:07.998274+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/portable_local_relation_registry.cpython-312.pyc",
+      "bytes": 2714,
+      "mtime": "2026-11-10T17:47:07.997014+00:00",
+      "ctime": "2026-11-10T17:47:07.997014+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/prefix_query_bridge_c.cpython-312.pyc",
+      "bytes": 9545,
+      "mtime": "2026-11-10T17:47:08.560790+00:00",
+      "ctime": "2026-11-10T17:47:08.560790+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/prefix_query_bridge_contracts_c.cpython-312.pyc",
+      "bytes": 2545,
+      "mtime": "2026-11-10T17:47:08.559175+00:00",
+      "ctime": "2026-11-10T17:47:08.559175+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/prefix_query_contracts_c.cpython-312.pyc",
+      "bytes": 3282,
+      "mtime": "2026-11-10T17:47:07.441832+00:00",
+      "ctime": "2026-11-10T17:47:07.441832+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/prefix_query_registry_c.cpython-312.pyc",
+      "bytes": 3136,
+      "mtime": "2026-11-10T17:47:08.558768+00:00",
+      "ctime": "2026-11-10T17:47:08.558768+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/prefix_solving_c.cpython-312.pyc",
+      "bytes": 39598,
+      "mtime": "2026-11-10T17:47:08.712893+00:00",
+      "ctime": "2026-11-10T17:47:08.712893+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/prefix_solving_contracts_c.cpython-312.pyc",
+      "bytes": 4551,
+      "mtime": "2026-11-10T17:47:08.570535+00:00",
+      "ctime": "2026-11-10T17:47:08.570535+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/prefix_solving_registry_c.cpython-312.pyc",
+      "bytes": 2775,
+      "mtime": "2026-11-10T17:47:08.570094+00:00",
+      "ctime": "2026-11-10T17:47:08.570094+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/prefix_step_c.cpython-312.pyc",
+      "bytes": 20499,
+      "mtime": "2026-11-10T17:47:08.483733+00:00",
+      "ctime": "2026-11-10T17:47:08.483733+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/prefix_step_contracts_c.cpython-312.pyc",
+      "bytes": 5190,
+      "mtime": "2026-11-10T17:47:08.480216+00:00",
+      "ctime": "2026-11-10T17:47:08.480216+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/prefix_step_registry_c.cpython-312.pyc",
+      "bytes": 3513,
+      "mtime": "2026-11-10T17:47:08.479590+00:00",
+      "ctime": "2026-11-10T17:47:08.479590+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/prescribed_transit_coincidence_d.cpython-312.pyc",
+      "bytes": 13484,
+      "mtime": "2026-11-10T17:47:07.775824+00:00",
+      "ctime": "2026-11-10T17:47:07.775824+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/preview_piece_packing.cpython-312.pyc",
+      "bytes": 52814,
+      "mtime": "2026-11-10T17:47:07.454745+00:00",
+      "ctime": "2026-11-10T17:47:07.454745+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/production_supposition_c.cpython-312.pyc",
+      "bytes": 28395,
+      "mtime": "2026-11-10T17:47:08.280747+00:00",
+      "ctime": "2026-11-10T17:47:08.280747+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/production_supposition_contracts_c.cpython-312.pyc",
+      "bytes": 10767,
+      "mtime": "2026-11-10T17:47:08.272425+00:00",
+      "ctime": "2026-11-10T17:47:08.272425+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/production_supposition_registry_c.cpython-312.pyc",
+      "bytes": 3961,
+      "mtime": "2026-11-10T17:47:08.271516+00:00",
+      "ctime": "2026-11-10T17:47:08.271516+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/program_layer_contracts_d.cpython-312.pyc",
+      "bytes": 2133,
+      "mtime": "2026-11-10T17:47:07.327550+00:00",
+      "ctime": "2026-11-10T17:47:07.327550+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/program_layer_measurement_d.cpython-312.pyc",
+      "bytes": 11483,
+      "mtime": "2026-11-10T17:47:07.330528+00:00",
+      "ctime": "2026-11-10T17:47:07.330528+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/program_recipe_goal_audit_d.cpython-312.pyc",
+      "bytes": 14718,
+      "mtime": "2026-11-10T17:47:07.547566+00:00",
+      "ctime": "2026-11-10T17:47:07.547566+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/program_step_c.cpython-312.pyc",
+      "bytes": 21803,
+      "mtime": "2026-11-10T17:47:08.457810+00:00",
+      "ctime": "2026-11-10T17:47:08.457810+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/program_step_contracts_c.cpython-312.pyc",
+      "bytes": 5171,
+      "mtime": "2026-11-10T17:47:08.453103+00:00",
+      "ctime": "2026-11-10T17:47:08.453103+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/program_step_registry_c.cpython-312.pyc",
+      "bytes": 3541,
+      "mtime": "2026-11-10T17:47:08.452616+00:00",
+      "ctime": "2026-11-10T17:47:08.452616+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/program_supposition_c.cpython-312.pyc",
+      "bytes": 10232,
+      "mtime": "2026-11-10T17:47:08.255946+00:00",
+      "ctime": "2026-11-10T17:47:08.255946+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/program_supposition_contracts_c.cpython-312.pyc",
+      "bytes": 6254,
+      "mtime": "2026-11-10T17:47:08.252901+00:00",
+      "ctime": "2026-11-10T17:47:08.252901+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/program_supposition_registry_c.cpython-312.pyc",
+      "bytes": 3432,
+      "mtime": "2026-11-10T17:47:08.252318+00:00",
+      "ctime": "2026-11-10T17:47:08.252318+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/push_only_logistics.cpython-312.pyc",
+      "bytes": 73754,
+      "mtime": "2026-11-10T17:47:06.672146+00:00",
+      "ctime": "2026-11-10T17:47:06.672146+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/quantity_capacity_geometry_d.cpython-312.pyc",
+      "bytes": 9255,
+      "mtime": "2026-11-10T17:47:06.919953+00:00",
+      "ctime": "2026-11-10T17:47:06.919953+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/quantity_planning_contracts_d.cpython-312.pyc",
+      "bytes": 4040,
+      "mtime": "2026-11-10T17:47:06.921163+00:00",
+      "ctime": "2026-11-10T17:47:06.921163+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/quantized_orbit_d.cpython-312.pyc",
+      "bytes": 47300,
+      "mtime": "2026-11-10T17:47:07.767590+00:00",
+      "ctime": "2026-11-10T17:47:07.767590+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/quantized_pair_equilibrium_d.cpython-312.pyc",
+      "bytes": 14147,
+      "mtime": "2026-11-10T17:47:07.948298+00:00",
+      "ctime": "2026-11-10T17:47:07.948298+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/queued_alignment_cascade.cpython-312.pyc",
+      "bytes": 40450,
+      "mtime": "2026-11-10T17:47:08.157458+00:00",
+      "ctime": "2026-11-10T17:47:08.157458+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rail_layer_contracts_d.cpython-312.pyc",
+      "bytes": 2864,
+      "mtime": "2026-11-10T17:47:07.519047+00:00",
+      "ctime": "2026-11-10T17:47:07.519047+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rail_layer_measurement_d.cpython-312.pyc",
+      "bytes": 14435,
+      "mtime": "2026-11-10T17:47:07.523356+00:00",
+      "ctime": "2026-11-10T17:47:07.523356+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rail_step_c.cpython-312.pyc",
+      "bytes": 22333,
+      "mtime": "2026-11-10T17:47:08.434026+00:00",
+      "ctime": "2026-11-10T17:47:08.434026+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rail_step_contracts_c.cpython-312.pyc",
+      "bytes": 5150,
+      "mtime": "2026-11-10T17:47:08.430435+00:00",
+      "ctime": "2026-11-10T17:47:08.430435+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rail_step_registry_c.cpython-312.pyc",
+      "bytes": 3423,
+      "mtime": "2026-11-10T17:47:08.429839+00:00",
+      "ctime": "2026-11-10T17:47:08.429839+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/ray_capture_domain_d.cpython-312.pyc",
+      "bytes": 12772,
+      "mtime": "2026-11-10T17:47:07.648234+00:00",
+      "ctime": "2026-11-10T17:47:07.648234+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/reactive_capture.cpython-312.pyc",
+      "bytes": 67931,
+      "mtime": "2026-11-10T17:47:07.426504+00:00",
+      "ctime": "2026-11-10T17:47:07.426504+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/reactive_graph_c.cpython-312.pyc",
+      "bytes": 70445,
+      "mtime": "2026-11-10T17:47:08.542027+00:00",
+      "ctime": "2026-11-10T17:47:08.542027+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/reactive_graph_contracts_c.cpython-312.pyc",
+      "bytes": 12454,
+      "mtime": "2026-11-10T17:47:08.527924+00:00",
+      "ctime": "2026-11-10T17:47:08.527924+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/reactive_graph_registry_c.cpython-312.pyc",
+      "bytes": 4583,
+      "mtime": "2026-11-10T17:47:08.526691+00:00",
+      "ctime": "2026-11-10T17:47:08.526691+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/reactive_packet_c.cpython-312.pyc",
+      "bytes": 9553,
+      "mtime": "2026-11-10T17:47:08.719405+00:00",
+      "ctime": "2026-11-10T17:47:08.719405+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/reactive_packet_contracts_c.cpython-312.pyc",
+      "bytes": 2594,
+      "mtime": "2026-11-10T17:47:08.714509+00:00",
+      "ctime": "2026-11-10T17:47:08.714509+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/reactive_pursuit_observation.cpython-312.pyc",
+      "bytes": 12719,
+      "mtime": "2026-11-10T17:47:09.177476+00:00",
+      "ctime": "2026-11-10T17:47:09.177476+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/reactive_solving_c.cpython-312.pyc",
+      "bytes": 21012,
+      "mtime": "2026-11-10T17:47:08.718382+00:00",
+      "ctime": "2026-11-10T17:47:08.718382+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/reactive_solving_contracts_c.cpython-312.pyc",
+      "bytes": 5035,
+      "mtime": "2026-11-10T17:47:08.714162+00:00",
+      "ctime": "2026-11-10T17:47:08.714162+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/reactive_solving_registry_c.cpython-312.pyc",
+      "bytes": 2846,
+      "mtime": "2026-11-10T17:47:08.713529+00:00",
+      "ctime": "2026-11-10T17:47:08.713529+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/reception_wait_contracts_d.cpython-312.pyc",
+      "bytes": 1196,
+      "mtime": "2026-11-10T17:47:06.739571+00:00",
+      "ctime": "2026-11-10T17:47:06.739571+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/recipe_composition_a.cpython-312.pyc",
+      "bytes": 20255,
+      "mtime": "2026-11-10T17:47:07.225979+00:00",
+      "ctime": "2026-11-10T17:47:07.225979+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/recipe_composition_registry_a.cpython-312.pyc",
+      "bytes": 2568,
+      "mtime": "2026-11-10T17:47:07.223897+00:00",
+      "ctime": "2026-11-10T17:47:07.223897+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/recipe_operator_compilation.cpython-312.pyc",
+      "bytes": 6254,
+      "mtime": "2026-11-10T17:47:06.958781+00:00",
+      "ctime": "2026-11-10T17:47:06.958781+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/recipe_operator_service_a.cpython-312.pyc",
+      "bytes": 26308,
+      "mtime": "2026-11-10T17:47:06.957914+00:00",
+      "ctime": "2026-11-10T17:47:06.957914+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/recipe_pattern_observation.cpython-312.pyc",
+      "bytes": 28063,
+      "mtime": "2026-11-10T17:47:08.128793+00:00",
+      "ctime": "2026-11-10T17:47:08.128793+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/reciprocal_port_graph_d.cpython-312.pyc",
+      "bytes": 10594,
+      "mtime": "2026-11-10T17:47:07.963583+00:00",
+      "ctime": "2026-11-10T17:47:07.963583+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/recognition_boundary_c.cpython-312.pyc",
+      "bytes": 9765,
+      "mtime": "2026-11-10T17:47:08.295561+00:00",
+      "ctime": "2026-11-10T17:47:08.295561+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/recognition_boundary_contracts_c.cpython-312.pyc",
+      "bytes": 4929,
+      "mtime": "2026-11-10T17:47:08.283558+00:00",
+      "ctime": "2026-11-10T17:47:08.283558+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/recognition_boundary_registry_c.cpython-312.pyc",
+      "bytes": 2722,
+      "mtime": "2026-11-10T17:47:08.302331+00:00",
+      "ctime": "2026-11-10T17:47:08.302331+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/recolor_step_c.cpython-312.pyc",
+      "bytes": 17663,
+      "mtime": "2026-11-10T17:47:08.462129+00:00",
+      "ctime": "2026-11-10T17:47:08.462129+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/recolor_step_contracts_c.cpython-312.pyc",
+      "bytes": 5183,
+      "mtime": "2026-11-10T17:47:08.459026+00:00",
+      "ctime": "2026-11-10T17:47:08.459026+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/recolor_step_registry_c.cpython-312.pyc",
+      "bytes": 3545,
+      "mtime": "2026-11-10T17:47:08.458424+00:00",
+      "ctime": "2026-11-10T17:47:08.458424+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/reconfigurable_support.cpython-312.pyc",
+      "bytes": 49428,
+      "mtime": "2026-11-10T17:47:06.986434+00:00",
+      "ctime": "2026-11-10T17:47:06.986434+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rectangular_commitment.cpython-312.pyc",
+      "bytes": 20372,
+      "mtime": "2026-11-10T17:47:06.521022+00:00",
+      "ctime": "2026-11-10T17:47:06.521022+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/recurring_quantity_control.cpython-312.pyc",
+      "bytes": 68838,
+      "mtime": "2026-11-10T17:47:06.806100+00:00",
+      "ctime": "2026-11-10T17:47:06.806100+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/reference_goal_admission.cpython-312.pyc",
+      "bytes": 4795,
+      "mtime": "2026-11-10T17:47:08.017464+00:00",
+      "ctime": "2026-11-10T17:47:08.017464+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/reference_write_binding.cpython-312.pyc",
+      "bytes": 8838,
+      "mtime": "2026-11-10T17:47:09.195806+00:00",
+      "ctime": "2026-11-10T17:47:09.195806+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/reflection_correspondence.cpython-312.pyc",
+      "bytes": 29567,
+      "mtime": "2026-11-10T17:47:09.262270+00:00",
+      "ctime": "2026-11-10T17:47:09.262270+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/reflection_structure.cpython-312.pyc",
+      "bytes": 136128,
+      "mtime": "2026-11-10T17:47:09.292999+00:00",
+      "ctime": "2026-11-10T17:47:09.292999+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/region_frontier_c.cpython-312.pyc",
+      "bytes": 8203,
+      "mtime": "2026-11-10T17:47:08.329908+00:00",
+      "ctime": "2026-11-10T17:47:08.329908+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/region_frontier_contracts_c.cpython-312.pyc",
+      "bytes": 4691,
+      "mtime": "2026-11-10T17:47:08.323328+00:00",
+      "ctime": "2026-11-10T17:47:08.323328+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/region_frontier_registry_c.cpython-312.pyc",
+      "bytes": 2539,
+      "mtime": "2026-11-10T17:47:08.393848+00:00",
+      "ctime": "2026-11-10T17:47:08.393848+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/registered_adapter_c.cpython-312.pyc",
+      "bytes": 13440,
+      "mtime": "2026-11-10T17:47:08.526078+00:00",
+      "ctime": "2026-11-10T17:47:08.526078+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/registered_adapter_contracts_c.cpython-312.pyc",
+      "bytes": 7556,
+      "mtime": "2026-11-10T17:47:08.524002+00:00",
+      "ctime": "2026-11-10T17:47:08.524002+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/registered_adapter_registry_c.cpython-312.pyc",
+      "bytes": 13107,
+      "mtime": "2026-11-10T17:47:08.523372+00:00",
+      "ctime": "2026-11-10T17:47:08.523372+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/registry.cpython-312.pyc",
+      "bytes": 97079,
+      "mtime": "2026-11-10T17:47:06.478255+00:00",
+      "ctime": "2026-11-10T17:47:06.478255+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/relations.cpython-312.pyc",
+      "bytes": 10698,
+      "mtime": "2026-11-10T17:47:09.366031+00:00",
+      "ctime": "2026-11-10T17:47:09.366031+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/relay_wave_arrivals_d.cpython-312.pyc",
+      "bytes": 16560,
+      "mtime": "2026-11-10T17:47:07.710521+00:00",
+      "ctime": "2026-11-10T17:47:07.710521+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/relevance_c.cpython-312.pyc",
+      "bytes": 7696,
+      "mtime": "2026-11-10T17:47:08.195899+00:00",
+      "ctime": "2026-11-10T17:47:08.195899+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/relevance_contracts_c.cpython-312.pyc",
+      "bytes": 4750,
+      "mtime": "2026-11-10T17:47:08.193499+00:00",
+      "ctime": "2026-11-10T17:47:08.193499+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/relevance_registry_c.cpython-312.pyc",
+      "bytes": 2113,
+      "mtime": "2026-11-10T17:47:08.192438+00:00",
+      "ctime": "2026-11-10T17:47:08.192438+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/relief_solving_c.cpython-312.pyc",
+      "bytes": 25999,
+      "mtime": "2026-11-10T17:47:08.731314+00:00",
+      "ctime": "2026-11-10T17:47:08.731314+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/relief_solving_contracts_c.cpython-312.pyc",
+      "bytes": 6280,
+      "mtime": "2026-11-10T17:47:08.727103+00:00",
+      "ctime": "2026-11-10T17:47:08.727103+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/relief_solving_registry_c.cpython-312.pyc",
+      "bytes": 5562,
+      "mtime": "2026-11-10T17:47:08.726497+00:00",
+      "ctime": "2026-11-10T17:47:08.726497+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/relief_supposition_c.cpython-312.pyc",
+      "bytes": 5370,
+      "mtime": "2026-11-10T17:47:08.244977+00:00",
+      "ctime": "2026-11-10T17:47:08.244977+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/relief_supposition_contracts_c.cpython-312.pyc",
+      "bytes": 2833,
+      "mtime": "2026-11-10T17:47:08.243503+00:00",
+      "ctime": "2026-11-10T17:47:08.243503+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/relief_supposition_registry_c.cpython-312.pyc",
+      "bytes": 2463,
+      "mtime": "2026-11-10T17:47:08.243203+00:00",
+      "ctime": "2026-11-10T17:47:08.243203+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/remaining_d_solving_d.cpython-312.pyc",
+      "bytes": 20478,
+      "mtime": "2026-11-10T17:47:07.582925+00:00",
+      "ctime": "2026-11-10T17:47:07.582925+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/remaining_native_solving_d.cpython-312.pyc",
+      "bytes": 19894,
+      "mtime": "2026-11-10T17:47:07.592025+00:00",
+      "ctime": "2026-11-10T17:47:07.592025+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/remaining_scope_metric_audit_d.cpython-312.pyc",
+      "bytes": 20898,
+      "mtime": "2026-11-10T17:47:07.556253+00:00",
+      "ctime": "2026-11-10T17:47:07.556253+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/repeated_pairs.cpython-312.pyc",
+      "bytes": 24977,
+      "mtime": "2026-11-10T17:47:06.462104+00:00",
+      "ctime": "2026-11-10T17:47:06.462104+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/resource_integer_intervals_d.cpython-312.pyc",
+      "bytes": 8387,
+      "mtime": "2026-11-10T17:47:08.028473+00:00",
+      "ctime": "2026-11-10T17:47:08.028473+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/resource_interval_contracts_d.cpython-312.pyc",
+      "bytes": 3755,
+      "mtime": "2026-11-10T17:47:06.233455+00:00",
+      "ctime": "2026-11-10T17:47:06.233455+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/resource_quantities.cpython-312.pyc",
+      "bytes": 19163,
+      "mtime": "2026-11-10T17:47:09.410931+00:00",
+      "ctime": "2026-11-10T17:47:09.410931+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/resource_transaction_contracts_d.cpython-312.pyc",
+      "bytes": 5922,
+      "mtime": "2026-11-10T17:47:08.029139+00:00",
+      "ctime": "2026-11-10T17:47:08.029139+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/resource_transactions_d.cpython-312.pyc",
+      "bytes": 13663,
+      "mtime": "2026-11-10T17:47:08.033979+00:00",
+      "ctime": "2026-11-10T17:47:08.033979+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/retrodiction.cpython-312.pyc",
+      "bytes": 6269,
+      "mtime": "2026-11-10T17:47:09.366986+00:00",
+      "ctime": "2026-11-10T17:47:09.366986+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/retrospection.cpython-312.pyc",
+      "bytes": 53318,
+      "mtime": "2026-11-10T17:47:09.374177+00:00",
+      "ctime": "2026-11-10T17:47:09.374177+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rewritable_endpoint_transport.cpython-312.pyc",
+      "bytes": 83088,
+      "mtime": "2026-11-10T17:47:07.169534+00:00",
+      "ctime": "2026-11-10T17:47:07.169534+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rigid_collision_classes_c.cpython-312.pyc",
+      "bytes": 10062,
+      "mtime": "2026-11-10T17:47:08.165605+00:00",
+      "ctime": "2026-11-10T17:47:08.165605+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rigid_edit_primitive_d.cpython-312.pyc",
+      "bytes": 19032,
+      "mtime": "2026-11-10T17:47:07.973225+00:00",
+      "ctime": "2026-11-10T17:47:07.973225+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rigid_edit_search_contracts_c.cpython-312.pyc",
+      "bytes": 6302,
+      "mtime": "2026-11-10T17:47:08.143307+00:00",
+      "ctime": "2026-11-10T17:47:08.143307+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rigid_edit_search_transport_c.cpython-312.pyc",
+      "bytes": 14588,
+      "mtime": "2026-11-10T17:47:08.148916+00:00",
+      "ctime": "2026-11-10T17:47:08.148916+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rigid_grasp_geometry.cpython-312.pyc",
+      "bytes": 15327,
+      "mtime": "2026-11-10T17:47:06.496655+00:00",
+      "ctime": "2026-11-10T17:47:06.496655+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rigid_indexed_search_c.cpython-312.pyc",
+      "bytes": 28163,
+      "mtime": "2026-11-10T17:47:08.182117+00:00",
+      "ctime": "2026-11-10T17:47:08.182117+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rigid_rearrangement_c.cpython-312.pyc",
+      "bytes": 33227,
+      "mtime": "2026-11-10T17:47:08.161105+00:00",
+      "ctime": "2026-11-10T17:47:08.161105+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rigid_rearrangement_registry_c.cpython-312.pyc",
+      "bytes": 6669,
+      "mtime": "2026-11-10T17:47:08.158246+00:00",
+      "ctime": "2026-11-10T17:47:08.158246+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rigid_scene_binding_c.cpython-312.pyc",
+      "bytes": 15237,
+      "mtime": "2026-11-10T17:47:08.174922+00:00",
+      "ctime": "2026-11-10T17:47:08.174922+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rigid_scene_geometry_c.cpython-312.pyc",
+      "bytes": 30523,
+      "mtime": "2026-11-10T17:47:08.171403+00:00",
+      "ctime": "2026-11-10T17:47:08.171403+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rigid_scene_route_c.cpython-312.pyc",
+      "bytes": 18408,
+      "mtime": "2026-11-10T17:47:08.176991+00:00",
+      "ctime": "2026-11-10T17:47:08.176991+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rigid_search_batch_c.cpython-312.pyc",
+      "bytes": 18956,
+      "mtime": "2026-11-10T17:47:08.185389+00:00",
+      "ctime": "2026-11-10T17:47:08.185389+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rigid_search_batch_registry_c.cpython-312.pyc",
+      "bytes": 3992,
+      "mtime": "2026-11-10T17:47:08.183779+00:00",
+      "ctime": "2026-11-10T17:47:08.183779+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rigid_selection_c.cpython-312.pyc",
+      "bytes": 17306,
+      "mtime": "2026-11-10T17:47:08.178767+00:00",
+      "ctime": "2026-11-10T17:47:08.178767+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rooted_prefix_extension.cpython-312.pyc",
+      "bytes": 10213,
+      "mtime": "2026-11-10T17:47:06.499935+00:00",
+      "ctime": "2026-11-10T17:47:06.499935+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rooted_prefix_marginals_d.cpython-312.pyc",
+      "bytes": 15799,
+      "mtime": "2026-11-10T17:47:06.510636+00:00",
+      "ctime": "2026-11-10T17:47:06.510636+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/rooted_prefix_observation.cpython-312.pyc",
+      "bytes": 26478,
+      "mtime": "2026-11-10T17:47:06.503819+00:00",
+      "ctime": "2026-11-10T17:47:06.503819+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/route_compatible_graphs.cpython-312.pyc",
+      "bytes": 81107,
+      "mtime": "2026-11-10T17:47:09.386310+00:00",
+      "ctime": "2026-11-10T17:47:09.386310+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/routing.cpython-312.pyc",
+      "bytes": 15081,
+      "mtime": "2026-11-10T17:47:08.053991+00:00",
+      "ctime": "2026-11-10T17:47:08.053991+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/scene_layer_measurement_d.cpython-312.pyc",
+      "bytes": 16386,
+      "mtime": "2026-11-10T17:47:07.210687+00:00",
+      "ctime": "2026-11-10T17:47:07.210687+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/search_objective_contracts_d.cpython-312.pyc",
+      "bytes": 1849,
+      "mtime": "2026-11-10T17:47:06.636673+00:00",
+      "ctime": "2026-11-10T17:47:06.636673+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/search_objective_d.cpython-312.pyc",
+      "bytes": 7020,
+      "mtime": "2026-11-10T17:47:08.027499+00:00",
+      "ctime": "2026-11-10T17:47:08.027499+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/search_witness_scope_c.cpython-312.pyc",
+      "bytes": 9060,
+      "mtime": "2026-11-10T17:47:08.424643+00:00",
+      "ctime": "2026-11-10T17:47:08.424643+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/search_witness_scope_contracts_c.cpython-312.pyc",
+      "bytes": 3307,
+      "mtime": "2026-11-10T17:47:08.422616+00:00",
+      "ctime": "2026-11-10T17:47:08.422616+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/search_witness_scope_registry_c.cpython-312.pyc",
+      "bytes": 2534,
+      "mtime": "2026-11-10T17:47:08.422213+00:00",
+      "ctime": "2026-11-10T17:47:08.422213+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/seeded_partial_push_d.cpython-312.pyc",
+      "bytes": 11524,
+      "mtime": "2026-11-10T17:47:07.792147+00:00",
+      "ctime": "2026-11-10T17:47:07.792147+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/sensing_transaction_d.cpython-312.pyc",
+      "bytes": 34064,
+      "mtime": "2026-11-10T17:47:07.708808+00:00",
+      "ctime": "2026-11-10T17:47:07.708808+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/sequence_step_c.cpython-312.pyc",
+      "bytes": 18995,
+      "mtime": "2026-11-10T17:47:08.469200+00:00",
+      "ctime": "2026-11-10T17:47:08.469200+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/sequence_step_contracts_c.cpython-312.pyc",
+      "bytes": 5185,
+      "mtime": "2026-11-10T17:47:08.465620+00:00",
+      "ctime": "2026-11-10T17:47:08.465620+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/sequence_step_registry_c.cpython-312.pyc",
+      "bytes": 3572,
+      "mtime": "2026-11-10T17:47:08.465048+00:00",
+      "ctime": "2026-11-10T17:47:08.465048+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/service_composition_audit_d.cpython-312.pyc",
+      "bytes": 36860,
+      "mtime": "2026-11-10T17:47:07.678434+00:00",
+      "ctime": "2026-11-10T17:47:07.678434+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/shape_contact_reasons_c.cpython-312.pyc",
+      "bytes": 12669,
+      "mtime": "2026-11-10T17:47:08.776547+00:00",
+      "ctime": "2026-11-10T17:47:08.776547+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/shape_observation_contracts_c.cpython-312.pyc",
+      "bytes": 6514,
+      "mtime": "2026-11-10T17:47:08.764444+00:00",
+      "ctime": "2026-11-10T17:47:08.764444+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/shape_solving_c.cpython-312.pyc",
+      "bytes": 30184,
+      "mtime": "2026-11-10T17:47:08.775372+00:00",
+      "ctime": "2026-11-10T17:47:08.775372+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/shape_solving_contracts_c.cpython-312.pyc",
+      "bytes": 15659,
+      "mtime": "2026-11-10T17:47:08.760242+00:00",
+      "ctime": "2026-11-10T17:47:08.760242+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/shape_solving_registry_c.cpython-312.pyc",
+      "bytes": 4021,
+      "mtime": "2026-11-10T17:47:08.758760+00:00",
+      "ctime": "2026-11-10T17:47:08.758760+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/shared_symbol_automata.cpython-312.pyc",
+      "bytes": 45549,
+      "mtime": "2026-11-10T17:47:06.660804+00:00",
+      "ctime": "2026-11-10T17:47:06.660804+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/shared_work_primitive_d.cpython-312.pyc",
+      "bytes": 17603,
+      "mtime": "2026-11-10T17:47:07.915619+00:00",
+      "ctime": "2026-11-10T17:47:07.915619+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/shared_work_snapshot_d.cpython-312.pyc",
+      "bytes": 27730,
+      "mtime": "2026-11-10T17:47:07.918489+00:00",
+      "ctime": "2026-11-10T17:47:07.918489+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/single_visit_residual_d.cpython-312.pyc",
+      "bytes": 21648,
+      "mtime": "2026-11-10T17:47:07.539698+00:00",
+      "ctime": "2026-11-10T17:47:07.539698+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/source_locked_pursuit_d.cpython-312.pyc",
+      "bytes": 12703,
+      "mtime": "2026-11-10T17:47:07.716009+00:00",
+      "ctime": "2026-11-10T17:47:07.716009+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/sprites.cpython-312.pyc",
+      "bytes": 19220,
+      "mtime": "2026-11-10T17:47:09.197726+00:00",
+      "ctime": "2026-11-10T17:47:09.197726+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/staged_replenishment_continuation_d.cpython-312.pyc",
+      "bytes": 12672,
+      "mtime": "2026-11-10T17:47:07.988055+00:00",
+      "ctime": "2026-11-10T17:47:07.988055+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/staged_replenishment_d.cpython-312.pyc",
+      "bytes": 13807,
+      "mtime": "2026-11-10T17:47:07.743407+00:00",
+      "ctime": "2026-11-10T17:47:07.743407+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/state_conditioned_attachment_d.cpython-312.pyc",
+      "bytes": 11714,
+      "mtime": "2026-11-10T17:47:07.939456+00:00",
+      "ctime": "2026-11-10T17:47:07.939456+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/stateful_photo_contact_d.cpython-312.pyc",
+      "bytes": 12693,
+      "mtime": "2026-11-10T17:47:07.787129+00:00",
+      "ctime": "2026-11-10T17:47:07.787129+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/station_gated_cargo.cpython-312.pyc",
+      "bytes": 75527,
+      "mtime": "2026-11-10T17:47:07.102138+00:00",
+      "ctime": "2026-11-10T17:47:07.102138+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/station_profile_scene.cpython-312.pyc",
+      "bytes": 32178,
+      "mtime": "2026-11-10T17:56:20.679782+00:00",
+      "ctime": "2026-11-10T17:56:20.679782+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/station_profile_workbench.cpython-312.pyc",
+      "bytes": 64038,
+      "mtime": "2026-11-10T17:47:07.469777+00:00",
+      "ctime": "2026-11-10T17:47:07.469777+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/stem_reliefs.cpython-312.pyc",
+      "bytes": 11775,
+      "mtime": "2026-11-10T17:47:07.471435+00:00",
+      "ctime": "2026-11-10T17:47:07.471435+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/structural_supposition_c.cpython-312.pyc",
+      "bytes": 26397,
+      "mtime": "2026-11-10T17:47:08.230452+00:00",
+      "ctime": "2026-11-10T17:47:08.230452+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/structural_supposition_contracts_c.cpython-312.pyc",
+      "bytes": 9925,
+      "mtime": "2026-11-10T17:47:08.223610+00:00",
+      "ctime": "2026-11-10T17:47:08.223610+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/structural_supposition_registry_c.cpython-312.pyc",
+      "bytes": 3430,
+      "mtime": "2026-11-10T17:47:08.222697+00:00",
+      "ctime": "2026-11-10T17:47:08.222697+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/subject_identity_binding.cpython-312.pyc",
+      "bytes": 3194,
+      "mtime": "2026-11-10T17:47:08.797397+00:00",
+      "ctime": "2026-11-10T17:47:08.797397+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/subset_observation_d.cpython-312.pyc",
+      "bytes": 17000,
+      "mtime": "2026-11-10T17:47:07.958714+00:00",
+      "ctime": "2026-11-10T17:47:07.958714+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/support_constrained_transport.cpython-312.pyc",
+      "bytes": 20546,
+      "mtime": "2026-11-10T17:47:09.295949+00:00",
+      "ctime": "2026-11-10T17:47:09.295949+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/support_navigation_domain.cpython-312.pyc",
+      "bytes": 39282,
+      "mtime": "2026-11-10T17:47:09.193022+00:00",
+      "ctime": "2026-11-10T17:47:09.193022+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/support_transport_appearance.cpython-312.pyc",
+      "bytes": 5654,
+      "mtime": "2026-11-10T17:47:09.194773+00:00",
+      "ctime": "2026-11-10T17:47:09.194773+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/support_value_supposition_c.cpython-312.pyc",
+      "bytes": 13210,
+      "mtime": "2026-11-10T17:47:08.248717+00:00",
+      "ctime": "2026-11-10T17:47:08.248717+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/support_value_supposition_contracts_c.cpython-312.pyc",
+      "bytes": 6151,
+      "mtime": "2026-11-10T17:47:08.246003+00:00",
+      "ctime": "2026-11-10T17:47:08.246003+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/support_value_supposition_registry_c.cpython-312.pyc",
+      "bytes": 3195,
+      "mtime": "2026-11-10T17:47:08.245406+00:00",
+      "ctime": "2026-11-10T17:47:08.245406+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/supported_construction.cpython-312.pyc",
+      "bytes": 68333,
+      "mtime": "2026-11-10T17:47:07.286592+00:00",
+      "ctime": "2026-11-10T17:47:07.286592+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/supposition_axes_c.cpython-312.pyc",
+      "bytes": 15269,
+      "mtime": "2026-11-10T17:47:08.212738+00:00",
+      "ctime": "2026-11-10T17:47:08.212738+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/supposition_axes_contracts_c.cpython-312.pyc",
+      "bytes": 7038,
+      "mtime": "2026-11-10T17:47:08.209128+00:00",
+      "ctime": "2026-11-10T17:47:08.209128+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/supposition_axes_registry_c.cpython-312.pyc",
+      "bytes": 2600,
+      "mtime": "2026-11-10T17:47:08.208409+00:00",
+      "ctime": "2026-11-10T17:47:08.208409+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/surface_write_geometry.cpython-312.pyc",
+      "bytes": 10172,
+      "mtime": "2026-11-10T17:47:09.205207+00:00",
+      "ctime": "2026-11-10T17:47:09.205207+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/symbol_coupling_support_audit_d.cpython-312.pyc",
+      "bytes": 34688,
+      "mtime": "2026-11-10T17:47:07.625055+00:00",
+      "ctime": "2026-11-10T17:47:07.625055+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/symbol_tiles.cpython-312.pyc",
+      "bytes": 58808,
+      "mtime": "2026-11-10T17:47:06.486987+00:00",
+      "ctime": "2026-11-10T17:47:06.486987+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/symbolic_diagrams.cpython-312.pyc",
+      "bytes": 24678,
+      "mtime": "2026-11-10T17:47:09.268764+00:00",
+      "ctime": "2026-11-10T17:47:09.268764+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/symbolic_navigation_extensions_a.cpython-312.pyc",
+      "bytes": 43307,
+      "mtime": "2026-11-10T17:47:07.012046+00:00",
+      "ctime": "2026-11-10T17:47:07.012046+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/temporal_fragment_match.cpython-312.pyc",
+      "bytes": 55538,
+      "mtime": "2026-11-10T17:47:07.356403+00:00",
+      "ctime": "2026-11-10T17:47:07.356403+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/temporal_reference_matching.cpython-312.pyc",
+      "bytes": 55039,
+      "mtime": "2026-11-10T17:47:06.794707+00:00",
+      "ctime": "2026-11-10T17:47:06.794707+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/temporal_routes.cpython-312.pyc",
+      "bytes": 13999,
+      "mtime": "2026-11-10T17:47:09.406117+00:00",
+      "ctime": "2026-11-10T17:47:09.406117+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/temporal_service_audit_d.cpython-312.pyc",
+      "bytes": 32760,
+      "mtime": "2026-11-10T17:47:07.638057+00:00",
+      "ctime": "2026-11-10T17:47:07.638057+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/terminal_evidence_audit_d.cpython-312.pyc",
+      "bytes": 19486,
+      "mtime": "2026-11-10T17:47:07.692805+00:00",
+      "ctime": "2026-11-10T17:47:07.692805+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/terrain_frontier_c.cpython-312.pyc",
+      "bytes": 9927,
+      "mtime": "2026-11-10T17:47:08.208056+00:00",
+      "ctime": "2026-11-10T17:47:08.208056+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/terrain_frontier_contracts_c.cpython-312.pyc",
+      "bytes": 4465,
+      "mtime": "2026-11-10T17:47:08.205883+00:00",
+      "ctime": "2026-11-10T17:47:08.205883+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/terrain_frontier_registry_c.cpython-312.pyc",
+      "bytes": 3092,
+      "mtime": "2026-11-10T17:47:08.205360+00:00",
+      "ctime": "2026-11-10T17:47:08.205360+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/tile_lattice.cpython-312.pyc",
+      "bytes": 17800,
+      "mtime": "2026-11-10T17:47:06.681371+00:00",
+      "ctime": "2026-11-10T17:47:06.681371+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/topological_region_recolor.cpython-312.pyc",
+      "bytes": 63436,
+      "mtime": "2026-11-10T17:47:07.396475+00:00",
+      "ctime": "2026-11-10T17:47:07.396475+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/tracking.cpython-312.pyc",
+      "bytes": 80393,
+      "mtime": "2026-11-10T17:47:09.403929+00:00",
+      "ctime": "2026-11-10T17:47:09.403929+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/transformation_pairs.cpython-312.pyc",
+      "bytes": 9517,
+      "mtime": "2026-11-10T17:47:08.125082+00:00",
+      "ctime": "2026-11-10T17:47:08.125082+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/transition.cpython-312.pyc",
+      "bytes": 417728,
+      "mtime": "2026-11-10T17:47:08.120498+00:00",
+      "ctime": "2026-11-10T17:47:08.120498+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/transport_supposition_c.cpython-312.pyc",
+      "bytes": 21702,
+      "mtime": "2026-11-10T17:47:08.270960+00:00",
+      "ctime": "2026-11-10T17:47:08.270960+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/transport_supposition_contracts_c.cpython-312.pyc",
+      "bytes": 9353,
+      "mtime": "2026-11-10T17:47:08.265567+00:00",
+      "ctime": "2026-11-10T17:47:08.265567+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/transport_supposition_registry_c.cpython-312.pyc",
+      "bytes": 3756,
+      "mtime": "2026-11-10T17:47:08.264767+00:00",
+      "ctime": "2026-11-10T17:47:08.264767+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/typed_mask_c.cpython-312.pyc",
+      "bytes": 7566,
+      "mtime": "2026-11-10T17:47:08.204932+00:00",
+      "ctime": "2026-11-10T17:47:08.204932+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/typed_mask_contracts_c.cpython-312.pyc",
+      "bytes": 4457,
+      "mtime": "2026-11-10T17:47:08.201980+00:00",
+      "ctime": "2026-11-10T17:47:08.201980+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/typed_mask_registry_c.cpython-312.pyc",
+      "bytes": 2454,
+      "mtime": "2026-11-10T17:47:08.201473+00:00",
+      "ctime": "2026-11-10T17:47:08.201473+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/typed_material_workbench.cpython-312.pyc",
+      "bytes": 74057,
+      "mtime": "2026-11-10T17:47:06.758731+00:00",
+      "ctime": "2026-11-10T17:47:06.758731+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/typed_recursive_program.cpython-312.pyc",
+      "bytes": 26919,
+      "mtime": "2026-11-10T17:47:08.258689+00:00",
+      "ctime": "2026-11-10T17:47:08.258689+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/typed_relation_domains_d.cpython-312.pyc",
+      "bytes": 3804,
+      "mtime": "2026-11-10T17:47:06.650119+00:00",
+      "ctime": "2026-11-10T17:47:06.650119+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/typed_transport_reduction_audit_d.cpython-312.pyc",
+      "bytes": 26452,
+      "mtime": "2026-11-10T17:47:07.646803+00:00",
+      "ctime": "2026-11-10T17:47:07.646803+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/typed_word_transduction.cpython-312.pyc",
+      "bytes": 66899,
+      "mtime": "2026-11-10T17:47:06.868560+00:00",
+      "ctime": "2026-11-10T17:47:06.868560+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/unassigned_support_query.cpython-312.pyc",
+      "bytes": 16709,
+      "mtime": "2026-11-10T17:47:09.243938+00:00",
+      "ctime": "2026-11-10T17:47:09.243938+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/valued_cell_sprites.cpython-312.pyc",
+      "bytes": 24707,
+      "mtime": "2026-11-10T17:47:09.175749+00:00",
+      "ctime": "2026-11-10T17:47:09.175749+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/valued_mask_pose_measurements.cpython-312.pyc",
+      "bytes": 6796,
+      "mtime": "2026-11-10T17:47:09.194122+00:00",
+      "ctime": "2026-11-10T17:47:09.194122+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/view_supposition_c.cpython-312.pyc",
+      "bytes": 18538,
+      "mtime": "2026-11-10T17:47:08.385324+00:00",
+      "ctime": "2026-11-10T17:47:08.385324+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/view_supposition_contracts_c.cpython-312.pyc",
+      "bytes": 8971,
+      "mtime": "2026-11-10T17:47:08.343924+00:00",
+      "ctime": "2026-11-10T17:47:08.343924+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/view_supposition_registry_c.cpython-312.pyc",
+      "bytes": 3887,
+      "mtime": "2026-11-10T17:47:08.343149+00:00",
+      "ctime": "2026-11-10T17:47:08.343149+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/views.cpython-312.pyc",
+      "bytes": 61428,
+      "mtime": "2026-11-10T17:47:09.203779+00:00",
+      "ctime": "2026-11-10T17:47:09.203779+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/visibility_capacity_navigation.cpython-312.pyc",
+      "bytes": 81791,
+      "mtime": "2026-11-10T17:47:06.830932+00:00",
+      "ctime": "2026-11-10T17:47:06.830932+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/visible_voxel_construction.cpython-312.pyc",
+      "bytes": 56097,
+      "mtime": "2026-11-10T17:47:07.499943+00:00",
+      "ctime": "2026-11-10T17:47:07.499943+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/visual_sequence.cpython-312.pyc",
+      "bytes": 87336,
+      "mtime": "2026-11-10T17:47:07.372299+00:00",
+      "ctime": "2026-11-10T17:47:07.372299+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/voxel_projection_contracts_d.cpython-312.pyc",
+      "bytes": 2963,
+      "mtime": "2026-11-10T17:47:07.500497+00:00",
+      "ctime": "2026-11-10T17:47:07.500497+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/voxel_projection_measurement_d.cpython-312.pyc",
+      "bytes": 19107,
+      "mtime": "2026-11-10T17:47:07.504179+00:00",
+      "ctime": "2026-11-10T17:47:07.504179+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/voxel_step_c.cpython-312.pyc",
+      "bytes": 19726,
+      "mtime": "2026-11-10T17:47:08.448189+00:00",
+      "ctime": "2026-11-10T17:47:08.448189+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/voxel_step_contracts_c.cpython-312.pyc",
+      "bytes": 5170,
+      "mtime": "2026-11-10T17:47:08.444988+00:00",
+      "ctime": "2026-11-10T17:47:08.444988+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/voxel_step_registry_c.cpython-312.pyc",
+      "bytes": 3453,
+      "mtime": "2026-11-10T17:47:08.444506+00:00",
+      "ctime": "2026-11-10T17:47:08.444506+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/window_processing_d.cpython-312.pyc",
+      "bytes": 18144,
+      "mtime": "2026-11-10T17:47:07.896420+00:00",
+      "ctime": "2026-11-10T17:47:07.896420+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/window_processing_primitive_d.cpython-312.pyc",
+      "bytes": 14976,
+      "mtime": "2026-11-10T17:47:07.894222+00:00",
+      "ctime": "2026-11-10T17:47:07.894222+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/word_solving_c.cpython-312.pyc",
+      "bytes": 33949,
+      "mtime": "2026-11-10T17:47:08.743757+00:00",
+      "ctime": "2026-11-10T17:47:08.743757+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/word_solving_contracts_c.cpython-312.pyc",
+      "bytes": 9900,
+      "mtime": "2026-11-10T17:47:08.737050+00:00",
+      "ctime": "2026-11-10T17:47:08.737050+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/word_solving_registry_c.cpython-312.pyc",
+      "bytes": 4057,
+      "mtime": "2026-11-10T17:47:08.736136+00:00",
+      "ctime": "2026-11-10T17:47:08.736136+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/workshop_step_c.cpython-312.pyc",
+      "bytes": 19318,
+      "mtime": "2026-11-10T17:47:08.438906+00:00",
+      "ctime": "2026-11-10T17:47:08.438906+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/workshop_step_contracts_c.cpython-312.pyc",
+      "bytes": 5224,
+      "mtime": "2026-11-10T17:47:08.435050+00:00",
+      "ctime": "2026-11-10T17:47:08.435050+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/workshop_step_registry_c.cpython-312.pyc",
+      "bytes": 3573,
+      "mtime": "2026-11-10T17:47:08.434542+00:00",
+      "ctime": "2026-11-10T17:47:08.434542+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/capabilities/__pycache__/wrap_slide.cpython-312.pyc",
+      "bytes": 91440,
+      "mtime": "2026-11-10T17:47:07.151465+00:00",
+      "ctime": "2026-11-10T17:47:07.151465+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/drm/__pycache__/__init__.cpython-312.pyc",
+      "bytes": 1944,
+      "mtime": "2026-11-10T17:47:06.120673+00:00",
+      "ctime": "2026-11-10T17:47:06.120673+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/drm/__pycache__/contracts.cpython-312.pyc",
+      "bytes": 40482,
+      "mtime": "2026-11-10T17:47:06.124350+00:00",
+      "ctime": "2026-11-10T17:47:06.124350+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/drm/__pycache__/fact_conditions.cpython-312.pyc",
+      "bytes": 4564,
+      "mtime": "2026-11-10T17:47:09.419432+00:00",
+      "ctime": "2026-11-10T17:47:09.419432+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/drm/__pycache__/fact_contracts.cpython-312.pyc",
+      "bytes": 8966,
+      "mtime": "2026-11-10T17:47:09.420748+00:00",
+      "ctime": "2026-11-10T17:47:09.420748+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/drm/__pycache__/knowledge.cpython-312.pyc",
+      "bytes": 5367,
+      "mtime": "2026-11-10T17:47:09.453288+00:00",
+      "ctime": "2026-11-10T17:47:09.453288+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/drm/__pycache__/loader.cpython-312.pyc",
+      "bytes": 13031,
+      "mtime": "2026-11-10T17:47:06.133985+00:00",
+      "ctime": "2026-11-10T17:47:06.133985+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/drm/__pycache__/meaning.cpython-312.pyc",
+      "bytes": 60219,
+      "mtime": "2026-11-10T17:47:06.140042+00:00",
+      "ctime": "2026-11-10T17:47:06.140042+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/drm/__pycache__/registry.cpython-312.pyc",
+      "bytes": 26914,
+      "mtime": "2026-11-10T17:47:09.418606+00:00",
+      "ctime": "2026-11-10T17:47:09.418606+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/drm/__pycache__/runtime.cpython-312.pyc",
+      "bytes": 40189,
+      "mtime": "2026-11-10T17:47:09.426805+00:00",
+      "ctime": "2026-11-10T17:47:09.426805+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/dynamic_workflow/__pycache__/__init__.cpython-312.pyc",
+      "bytes": 1662,
+      "mtime": "2026-11-10T17:47:05.985309+00:00",
+      "ctime": "2026-11-10T17:47:05.985309+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/dynamic_workflow/__pycache__/contracts.cpython-312.pyc",
+      "bytes": 34720,
+      "mtime": "2026-11-10T17:47:05.989491+00:00",
+      "ctime": "2026-11-10T17:47:05.989491+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/dynamic_workflow/__pycache__/declarations.cpython-312.pyc",
+      "bytes": 8224,
+      "mtime": "2026-11-10T17:47:09.499914+00:00",
+      "ctime": "2026-11-10T17:47:09.499914+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/dynamic_workflow/__pycache__/input_fingerprint.cpython-312.pyc",
+      "bytes": 1919,
+      "mtime": "2026-11-10T17:47:06.087607+00:00",
+      "ctime": "2026-11-10T17:47:06.087607+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/dynamic_workflow/__pycache__/loader.cpython-312.pyc",
+      "bytes": 10475,
+      "mtime": "2026-11-10T17:47:06.000229+00:00",
+      "ctime": "2026-11-10T17:47:06.000229+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/dynamic_workflow/__pycache__/registry.cpython-312.pyc",
+      "bytes": 5961,
+      "mtime": "2026-11-10T17:47:05.998765+00:00",
+      "ctime": "2026-11-10T17:47:05.998765+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/dynamic_workflow/__pycache__/runtime.cpython-312.pyc",
+      "bytes": 39581,
+      "mtime": "2026-11-10T17:47:06.093059+00:00",
+      "ctime": "2026-11-10T17:47:06.093059+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/dynamic_workflow/__pycache__/shadow.cpython-312.pyc",
+      "bytes": 8287,
+      "mtime": "2026-11-10T17:47:06.087301+00:00",
+      "ctime": "2026-11-10T17:47:06.087301+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/dynamic_workflow/__pycache__/synthesis.cpython-312.pyc",
+      "bytes": 22656,
+      "mtime": "2026-11-10T17:47:06.084020+00:00",
+      "ctime": "2026-11-10T17:47:06.084020+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/__init__.cpython-312.pyc",
+      "bytes": 2806,
+      "mtime": "2026-11-10T17:47:05.751943+00:00",
+      "ctime": "2026-11-10T17:47:05.751943+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/claims.cpython-312.pyc",
+      "bytes": 3146,
+      "mtime": "2026-11-10T17:47:05.752538+00:00",
+      "ctime": "2026-11-10T17:47:05.752538+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/contact_experiment.cpython-312.pyc",
+      "bytes": 3867,
+      "mtime": "2026-11-10T17:47:05.881653+00:00",
+      "ctime": "2026-11-10T17:47:05.881653+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/field_metadata.cpython-312.pyc",
+      "bytes": 6410,
+      "mtime": "2026-11-10T17:47:05.836276+00:00",
+      "ctime": "2026-11-10T17:47:05.836276+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/goal_frontier.cpython-312.pyc",
+      "bytes": 8820,
+      "mtime": "2026-11-10T17:47:05.905886+00:00",
+      "ctime": "2026-11-10T17:47:05.905886+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/observed_value_comparison.cpython-312.pyc",
+      "bytes": 3480,
+      "mtime": "2026-11-10T17:47:08.761346+00:00",
+      "ctime": "2026-11-10T17:47:08.761346+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/operational_acquisition.cpython-312.pyc",
+      "bytes": 8691,
+      "mtime": "2026-11-10T17:47:05.887303+00:00",
+      "ctime": "2026-11-10T17:47:05.887303+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/operational_branch.cpython-312.pyc",
+      "bytes": 3931,
+      "mtime": "2026-11-10T17:47:06.118044+00:00",
+      "ctime": "2026-11-10T17:47:06.118044+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/operational_engagement.cpython-312.pyc",
+      "bytes": 5069,
+      "mtime": "2026-11-10T17:47:05.890211+00:00",
+      "ctime": "2026-11-10T17:47:05.890211+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/operational_experiment_admission.cpython-312.pyc",
+      "bytes": 16026,
+      "mtime": "2026-11-10T17:47:05.886464+00:00",
+      "ctime": "2026-11-10T17:47:05.886464+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/operational_goal_hypothesis.cpython-312.pyc",
+      "bytes": 14580,
+      "mtime": "2026-11-10T17:47:05.883493+00:00",
+      "ctime": "2026-11-10T17:47:05.883493+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/operational_goal_intent.cpython-312.pyc",
+      "bytes": 2684,
+      "mtime": "2026-11-10T17:47:05.906260+00:00",
+      "ctime": "2026-11-10T17:47:05.906260+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/operational_information_opportunity.cpython-312.pyc",
+      "bytes": 4156,
+      "mtime": "2026-11-10T17:47:05.867403+00:00",
+      "ctime": "2026-11-10T17:47:05.867403+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/operational_observation.cpython-312.pyc",
+      "bytes": 13026,
+      "mtime": "2026-11-10T17:47:05.895979+00:00",
+      "ctime": "2026-11-10T17:47:05.895979+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/operational_propagation.cpython-312.pyc",
+      "bytes": 3668,
+      "mtime": "2026-11-10T17:47:05.879079+00:00",
+      "ctime": "2026-11-10T17:47:05.879079+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/operational_reasoning.cpython-312.pyc",
+      "bytes": 14407,
+      "mtime": "2026-11-10T17:47:05.874663+00:00",
+      "ctime": "2026-11-10T17:47:05.874663+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/operational_reevaluation.cpython-312.pyc",
+      "bytes": 12293,
+      "mtime": "2026-11-10T17:47:05.871311+00:00",
+      "ctime": "2026-11-10T17:47:05.871311+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/operational_responsibility.cpython-312.pyc",
+      "bytes": 28403,
+      "mtime": "2026-11-10T17:47:05.911698+00:00",
+      "ctime": "2026-11-10T17:47:05.911698+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/operations.cpython-312.pyc",
+      "bytes": 167737,
+      "mtime": "2026-11-10T17:47:05.865513+00:00",
+      "ctime": "2026-11-10T17:47:05.865513+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/operator_support.cpython-312.pyc",
+      "bytes": 3193,
+      "mtime": "2026-11-10T17:47:05.869176+00:00",
+      "ctime": "2026-11-10T17:47:05.869176+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/source_completion.cpython-312.pyc",
+      "bytes": 26561,
+      "mtime": "2026-11-10T17:47:05.900496+00:00",
+      "ctime": "2026-11-10T17:47:05.900496+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/terms.cpython-312.pyc",
+      "bytes": 1727,
+      "mtime": "2026-11-10T17:47:05.965911+00:00",
+      "ctime": "2026-11-10T17:47:05.965911+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/__pycache__/types.cpython-312.pyc",
+      "bytes": 76025,
+      "mtime": "2026-11-10T17:47:05.830416+00:00",
+      "ctime": "2026-11-10T17:47:05.830416+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/observability/__pycache__/__init__.cpython-312.pyc",
+      "bytes": 1923,
+      "mtime": "2026-11-10T17:47:09.427411+00:00",
+      "ctime": "2026-11-10T17:47:09.427411+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/observability/__pycache__/attestation.cpython-312.pyc",
+      "bytes": 15275,
+      "mtime": "2026-11-10T17:47:09.429641+00:00",
+      "ctime": "2026-11-10T17:47:09.429641+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/observability/__pycache__/decision_capture.cpython-312.pyc",
+      "bytes": 2510,
+      "mtime": "2026-11-10T17:47:09.450028+00:00",
+      "ctime": "2026-11-10T17:47:09.450028+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/observability/__pycache__/models.cpython-312.pyc",
+      "bytes": 12899,
+      "mtime": "2026-11-10T17:47:09.433188+00:00",
+      "ctime": "2026-11-10T17:47:09.433188+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/observability/__pycache__/projection.cpython-312.pyc",
+      "bytes": 42262,
+      "mtime": "2026-11-10T17:47:09.446761+00:00",
+      "ctime": "2026-11-10T17:47:09.446761+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/observability/__pycache__/reporting.cpython-312.pyc",
+      "bytes": 8843,
+      "mtime": "2026-11-10T17:47:09.448307+00:00",
+      "ctime": "2026-11-10T17:47:09.448307+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/observability/__pycache__/trace_diff.cpython-312.pyc",
+      "bytes": 5473,
+      "mtime": "2026-11-10T17:47:09.449252+00:00",
+      "ctime": "2026-11-10T17:47:09.449252+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/operational/__pycache__/__init__.cpython-312.pyc",
+      "bytes": 321,
+      "mtime": "2026-11-10T17:47:06.106179+00:00",
+      "ctime": "2026-11-10T17:47:06.106179+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/operational/__pycache__/continuity.cpython-312.pyc",
+      "bytes": 7493,
+      "mtime": "2026-11-10T17:47:06.106950+00:00",
+      "ctime": "2026-11-10T17:47:06.106950+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/operational/__pycache__/continuity_scope.cpython-312.pyc",
+      "bytes": 1642,
+      "mtime": "2026-11-10T17:47:06.107234+00:00",
+      "ctime": "2026-11-10T17:47:06.107234+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/operators/__pycache__/__init__.cpython-312.pyc",
+      "bytes": 2022,
+      "mtime": "2026-11-10T17:47:08.346694+00:00",
+      "ctime": "2026-11-10T17:47:08.346694+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/operators/__pycache__/authority.cpython-312.pyc",
+      "bytes": 13916,
+      "mtime": "2026-11-10T17:47:08.348015+00:00",
+      "ctime": "2026-11-10T17:47:08.348015+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/operators/__pycache__/contracts.cpython-312.pyc",
+      "bytes": 31085,
+      "mtime": "2026-11-10T17:47:08.351111+00:00",
+      "ctime": "2026-11-10T17:47:08.351111+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/operators/__pycache__/runtime.cpython-312.pyc",
+      "bytes": 59151,
+      "mtime": "2026-11-10T17:47:08.369983+00:00",
+      "ctime": "2026-11-10T17:47:08.369983+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/operators/__pycache__/selection_projection.cpython-312.pyc",
+      "bytes": 2201,
+      "mtime": "2026-11-10T17:47:08.370365+00:00",
+      "ctime": "2026-11-10T17:47:08.370365+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/runtime/__pycache__/__init__.cpython-312.pyc",
+      "bytes": 760,
+      "mtime": "2026-11-10T17:47:08.345488+00:00",
+      "ctime": "2026-11-10T17:47:08.345488+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/runtime/__pycache__/acquisition.cpython-312.pyc",
+      "bytes": 6608,
+      "mtime": "2026-11-10T17:47:08.346189+00:00",
+      "ctime": "2026-11-10T17:47:08.346189+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/runtime/__pycache__/contracts.cpython-312.pyc",
+      "bytes": 11629,
+      "mtime": "2026-11-10T17:47:08.372529+00:00",
+      "ctime": "2026-11-10T17:47:08.372529+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/scheduler/__pycache__/__init__.cpython-312.pyc",
+      "bytes": 1291,
+      "mtime": "2026-11-10T17:47:09.454667+00:00",
+      "ctime": "2026-11-10T17:47:09.454667+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/scheduler/__pycache__/call_refusal.cpython-312.pyc",
+      "bytes": 2963,
+      "mtime": "2026-11-10T17:47:09.506081+00:00",
+      "ctime": "2026-11-10T17:47:09.506081+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/scheduler/__pycache__/compiled_consciousness.cpython-312.pyc",
+      "bytes": 23719,
+      "mtime": "2026-11-10T17:47:09.505443+00:00",
+      "ctime": "2026-11-10T17:47:09.505443+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/scheduler/__pycache__/contracts.cpython-312.pyc",
+      "bytes": 50299,
+      "mtime": "2026-11-10T17:47:09.456982+00:00",
+      "ctime": "2026-11-10T17:47:09.456982+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/scheduler/__pycache__/dynamic_workflow_runtime.cpython-312.pyc",
+      "bytes": 27376,
+      "mtime": "2026-11-10T17:47:09.493247+00:00",
+      "ctime": "2026-11-10T17:47:09.493247+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/scheduler/__pycache__/dynamic_workflow_shadow.cpython-312.pyc",
+      "bytes": 7853,
+      "mtime": "2026-11-10T17:47:09.489297+00:00",
+      "ctime": "2026-11-10T17:47:09.489297+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/scheduler/__pycache__/evaluator.cpython-312.pyc",
+      "bytes": 25882,
+      "mtime": "2026-11-10T17:47:09.488172+00:00",
+      "ctime": "2026-11-10T17:47:09.488172+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/scheduler/__pycache__/propagation.cpython-312.pyc",
+      "bytes": 9644,
+      "mtime": "2026-11-10T17:47:09.460880+00:00",
+      "ctime": "2026-11-10T17:47:09.460880+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/scheduler/__pycache__/registry.cpython-312.pyc",
+      "bytes": 17011,
+      "mtime": "2026-11-10T17:47:09.464252+00:00",
+      "ctime": "2026-11-10T17:47:09.464252+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/scheduler/__pycache__/runtime.cpython-312.pyc",
+      "bytes": 144195,
+      "mtime": "2026-11-10T17:47:09.482816+00:00",
+      "ctime": "2026-11-10T17:47:09.482816+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/scheduler/__pycache__/source_return.cpython-312.pyc",
+      "bytes": 45082,
+      "mtime": "2026-11-10T17:47:09.498652+00:00",
+      "ctime": "2026-11-10T17:47:09.498652+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/src/__pycache__/__init__.cpython-312.pyc",
+      "bytes": 824,
+      "mtime": "2026-11-10T17:47:06.000883+00:00",
+      "ctime": "2026-11-10T17:47:06.000883+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/src/__pycache__/ast.cpython-312.pyc",
+      "bytes": 15396,
+      "mtime": "2026-11-10T17:47:06.006603+00:00",
+      "ctime": "2026-11-10T17:47:06.006603+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/src/__pycache__/compiler.cpython-312.pyc",
+      "bytes": 36968,
+      "mtime": "2026-11-10T17:47:06.004801+00:00",
+      "ctime": "2026-11-10T17:47:06.004801+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/src/__pycache__/errors.cpython-312.pyc",
+      "bytes": 1548,
+      "mtime": "2026-11-10T17:47:06.048218+00:00",
+      "ctime": "2026-11-10T17:47:06.048218+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/src/__pycache__/lexer.cpython-312.pyc",
+      "bytes": 8407,
+      "mtime": "2026-11-10T17:47:06.056772+00:00",
+      "ctime": "2026-11-10T17:47:06.056772+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/src/__pycache__/parser.cpython-312.pyc",
+      "bytes": 47571,
+      "mtime": "2026-11-10T17:47:06.055200+00:00",
+      "ctime": "2026-11-10T17:47:06.055200+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/src/__pycache__/registry.cpython-312.pyc",
+      "bytes": 14030,
+      "mtime": "2026-11-10T17:47:06.079738+00:00",
+      "ctime": "2026-11-10T17:47:06.079738+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/src/__pycache__/symbols.cpython-312.pyc",
+      "bytes": 12731,
+      "mtime": "2026-11-10T17:47:06.058553+00:00",
+      "ctime": "2026-11-10T17:47:06.058553+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/src/__pycache__/tokens.cpython-312.pyc",
+      "bytes": 2917,
+      "mtime": "2026-11-10T17:47:06.007183+00:00",
+      "ctime": "2026-11-10T17:47:06.007183+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/src/__pycache__/validation.cpython-312.pyc",
+      "bytes": 53832,
+      "mtime": "2026-11-10T17:47:06.068118+00:00",
+      "ctime": "2026-11-10T17:47:06.068118+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/__init__.cpython-312.pyc",
+      "bytes": 1204,
+      "mtime": "2026-11-10T17:47:05.966903+00:00",
+      "ctime": "2026-11-10T17:47:05.966903+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/action_observation.cpython-312.pyc",
+      "bytes": 8349,
+      "mtime": "2026-11-10T17:47:06.112351+00:00",
+      "ctime": "2026-11-10T17:47:06.112351+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/actual_observation_dispatch_reader_b.cpython-312.pyc",
+      "bytes": 5061,
+      "mtime": "2026-11-10T17:47:08.762655+00:00",
+      "ctime": "2026-11-10T17:47:08.762655+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/appearance_index.cpython-312.pyc",
+      "bytes": 9405,
+      "mtime": "2026-11-10T17:47:08.296988+00:00",
+      "ctime": "2026-11-10T17:47:08.296988+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/cargo_scalar_acquisition_b.cpython-312.pyc",
+      "bytes": 15728,
+      "mtime": "2026-11-10T17:47:09.896808+00:00",
+      "ctime": "2026-11-10T17:47:09.896808+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/conscious_contribution_consumption.cpython-312.pyc",
+      "bytes": 5472,
+      "mtime": "2026-11-10T17:47:06.115444+00:00",
+      "ctime": "2026-11-10T17:47:06.115444+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/conscious_dispatch_refusal.cpython-312.pyc",
+      "bytes": 11264,
+      "mtime": "2026-11-10T17:47:06.113533+00:00",
+      "ctime": "2026-11-10T17:47:06.113533+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/conscious_engagement.cpython-312.pyc",
+      "bytes": 10861,
+      "mtime": "2026-11-10T17:47:06.116917+00:00",
+      "ctime": "2026-11-10T17:47:06.116917+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/conscious_experiment_feedback.cpython-312.pyc",
+      "bytes": 9264,
+      "mtime": "2026-11-10T17:47:09.782135+00:00",
+      "ctime": "2026-11-10T17:47:09.782135+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/conscious_public_return.cpython-312.pyc",
+      "bytes": 3304,
+      "mtime": "2026-11-10T17:47:06.114926+00:00",
+      "ctime": "2026-11-10T17:47:06.114926+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/conscious_response_reconciliation.cpython-312.pyc",
+      "bytes": 12718,
+      "mtime": "2026-11-10T17:47:06.114522+00:00",
+      "ctime": "2026-11-10T17:47:06.114522+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/conscious_resume_refusal.cpython-312.pyc",
+      "bytes": 2683,
+      "mtime": "2026-11-10T17:47:06.112638+00:00",
+      "ctime": "2026-11-10T17:47:06.112638+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/conscious_symbolic_memory.cpython-312.pyc",
+      "bytes": 4689,
+      "mtime": "2026-11-10T17:47:09.783056+00:00",
+      "ctime": "2026-11-10T17:47:09.783056+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/continuation_review_publication.cpython-312.pyc",
+      "bytes": 3656,
+      "mtime": "2026-11-10T17:47:06.115871+00:00",
+      "ctime": "2026-11-10T17:47:06.115871+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/dependency.cpython-312.pyc",
+      "bytes": 5573,
+      "mtime": "2026-11-10T17:47:05.967638+00:00",
+      "ctime": "2026-11-10T17:47:05.967638+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/event_store.cpython-312.pyc",
+      "bytes": 61888,
+      "mtime": "2026-11-10T17:47:05.979733+00:00",
+      "ctime": "2026-11-10T17:47:05.979733+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/events.cpython-312.pyc",
+      "bytes": 11705,
+      "mtime": "2026-11-10T17:47:05.984997+00:00",
+      "ctime": "2026-11-10T17:47:05.984997+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/observed_canonical_field_reader_b.cpython-312.pyc",
+      "bytes": 4861,
+      "mtime": "2026-11-10T17:47:08.760809+00:00",
+      "ctime": "2026-11-10T17:47:08.760809+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/observed_scalar_pixel_reader_b.cpython-312.pyc",
+      "bytes": 7791,
+      "mtime": "2026-11-10T17:47:09.898100+00:00",
+      "ctime": "2026-11-10T17:47:09.898100+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/observed_scene_reader.cpython-312.pyc",
+      "bytes": 7860,
+      "mtime": "2026-11-10T17:47:08.345239+00:00",
+      "ctime": "2026-11-10T17:47:08.345239+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/operational_consciousness.cpython-312.pyc",
+      "bytes": 83189,
+      "mtime": "2026-11-10T17:47:06.105810+00:00",
+      "ctime": "2026-11-10T17:47:06.105810+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/parent_measurement_template_b.cpython-312.pyc",
+      "bytes": 12535,
+      "mtime": "2026-11-10T17:47:08.747346+00:00",
+      "ctime": "2026-11-10T17:47:08.747346+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/post_action_consumption.cpython-312.pyc",
+      "bytes": 12709,
+      "mtime": "2026-11-10T17:47:06.111623+00:00",
+      "ctime": "2026-11-10T17:47:06.111623+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/reasoning_context_publication.cpython-312.pyc",
+      "bytes": 9013,
+      "mtime": "2026-11-10T17:47:06.117606+00:00",
+      "ctime": "2026-11-10T17:47:06.117606+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/reducer.cpython-312.pyc",
+      "bytes": 21542,
+      "mtime": "2026-11-10T17:47:06.098397+00:00",
+      "ctime": "2026-11-10T17:47:06.098397+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/shared_binding_digest.cpython-312.pyc",
+      "bytes": 5698,
+      "mtime": "2026-11-10T17:47:09.484506+00:00",
+      "ctime": "2026-11-10T17:47:09.484506+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/snapshot.cpython-312.pyc",
+      "bytes": 25721,
+      "mtime": "2026-11-10T17:47:05.971166+00:00",
+      "ctime": "2026-11-10T17:47:05.971166+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/transaction_index_overlay.cpython-312.pyc",
+      "bytes": 6463,
+      "mtime": "2026-11-10T17:47:06.110486+00:00",
+      "ctime": "2026-11-10T17:47:06.110486+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/__pycache__/transactions.cpython-312.pyc",
+      "bytes": 2168,
+      "mtime": "2026-11-10T17:47:06.119534+00:00",
+      "ctime": "2026-11-10T17:47:06.119534+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v6/__pycache__/__init__.cpython-312.pyc",
+      "bytes": 347,
+      "mtime": "2026-11-10T17:47:05.749123+00:00",
+      "ctime": "2026-11-10T17:47:05.749123+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v6/laya_proto/__pycache__/common_multiscale_constraints.cpython-312.pyc",
+      "bytes": 32085,
+      "mtime": "2026-11-10T17:47:09.535796+00:00",
+      "ctime": "2026-11-10T17:47:09.535796+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v6/laya_proto/__pycache__/geometric_observer.cpython-312.pyc",
+      "bytes": 19606,
+      "mtime": "2026-11-10T17:47:05.747135+00:00",
+      "ctime": "2026-11-10T17:47:05.747135+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v6/laya_proto/__pycache__/neutral_observer.cpython-312.pyc",
+      "bytes": 4374,
+      "mtime": "2026-11-10T17:47:05.743333+00:00",
+      "ctime": "2026-11-10T17:47:05.743333+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v6/laya_proto/__pycache__/observed_input_domain.cpython-312.pyc",
+      "bytes": 8015,
+      "mtime": "2026-11-10T17:47:05.748358+00:00",
+      "ctime": "2026-11-10T17:47:05.748358+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v6/laya_proto/__pycache__/terminal_composition.cpython-312.pyc",
+      "bytes": 48208,
+      "mtime": "2026-11-10T17:47:09.529374+00:00",
+      "ctime": "2026-11-10T17:47:09.529374+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v6/morphology_policy/__pycache__/__init__.cpython-312.pyc",
+      "bytes": 335,
+      "mtime": "2026-11-10T17:47:05.749448+00:00",
+      "ctime": "2026-11-10T17:47:05.749448+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v6/morphology_policy/__pycache__/policy.cpython-312.pyc",
+      "bytes": 9216,
+      "mtime": "2026-11-10T17:47:05.750930+00:00",
+      "ctime": "2026-11-10T17:47:05.750930+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v6/morphology_policy/__pycache__/src_runtime.cpython-312.pyc",
+      "bytes": 6538,
+      "mtime": "2026-11-10T17:47:09.454307+00:00",
+      "ctime": "2026-11-10T17:47:09.454307+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v6/morphology_policy/feedback_sequences/__pycache__/family.cpython-312.pyc",
+      "bytes": 33110,
+      "mtime": "2026-11-10T17:47:09.522706+00:00",
+      "ctime": "2026-11-10T17:47:09.522706+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v6/morphology_policy/feedback_sequences/__pycache__/finite.cpython-312.pyc",
+      "bytes": 9097,
+      "mtime": "2026-11-10T17:47:09.532182+00:00",
+      "ctime": "2026-11-10T17:47:09.532182+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v6/morphology_policy/feedback_sequences/__pycache__/visual.cpython-312.pyc",
+      "bytes": 7461,
+      "mtime": "2026-11-10T17:47:09.531109+00:00",
+      "ctime": "2026-11-10T17:47:09.531109+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v6/morphology_policy/ranked_workshop/__pycache__/__init__.cpython-312.pyc",
+      "bytes": 358,
+      "mtime": "2026-11-10T17:56:20.671646+00:00",
+      "ctime": "2026-11-10T17:56:20.671646+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v6/morphology_policy/ranked_workshop/__pycache__/family.cpython-312.pyc",
+      "bytes": 28796,
+      "mtime": "2026-11-10T17:56:20.674954+00:00",
+      "ctime": "2026-11-10T17:56:20.674954+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v6/morphology_policy/ranked_workshop/__pycache__/geometry.cpython-312.pyc",
+      "bytes": 7300,
+      "mtime": "2026-11-10T17:56:20.675903+00:00",
+      "ctime": "2026-11-10T17:56:20.675903+00:00"
+    },
+    {
+      "path": "agents/yf_arc3_v6/morphology_policy/ranked_workshop/__pycache__/methods.cpython-312.pyc",
+      "bytes": 21576,
+      "mtime": "2026-11-10T17:56:20.682209+00:00",
+      "ctime": "2026-11-10T17:56:20.682209+00:00"
+    }
+  ],
+  "qualification": "No cache file was changed or removed. This incident does not assert cache content parity. The final integrity check covers exactly the 1786 pinned manifest source files, matching the official verifier scope."
+}

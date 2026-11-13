@@ -1,0 +1,199 @@
+{
+  "schema": "logos-engine.v49.regression-plan.v1",
+  "status": "prepared",
+  "preparedAt": "2026-11-08T22:31:37.062374+00:00",
+  "maxConcurrentRuns": 2,
+  "qualification": "Five cold native common-caller replays recalculate commands before consuming complete public returns from prior actual campaigns. These affected shared-owner regressions cover observed programs, composed predicates, dated linked packets, queued fields and the acquired trace continuation. They are not new live games or speed comparisons. Catalogue observation and view-event state must remain empty on these trajectories. The separate current GRIL campaign uses the opaque game host. No Python agent modules are authorized.",
+  "nativeSourceManifest": {
+    "path": "docs/migration/native-campaigns-v49/source-manifest.json",
+    "sha256": "b63640ec9c219e0f8a03edcf0f50a5f75a1aade9884ccd9f82ded9d10e23176c",
+    "bytes": 19353
+  },
+  "nativeSourceManifestDigest": "e5a7fc15461fd1ddbc9019b3749dad98a2235fc38df40898778d6c089cc13a5a",
+  "nativeSourceFiles": 166,
+  "harnessFileSha256": {
+    "scripts/run-v49-regression-checks.py": "04acb1263e84a0a6d153e47e719c6fc75d059ca086d3a24123447424307473cf",
+    "scripts/replay-v49-public-regression.mjs": "4554f4579cd197c0681cd970673e83f9031889a24c07ce6374315cefb5e915af",
+    "scripts/compare-v49-regressions.mjs": "8c6042e0b758bf9c98a9bd56bce9ef890ddb2d0afa18ec7190b15327fa671082",
+    "scripts/run-v49-campaign-proof.py": "f18c0af4dbeef7f7ff759acaa1e48f66423da32f9ff375cc87edb68fead9f94c",
+    "scripts/run-v44-campaign.mjs": "70743bb539013c1d387149b613944ba09d053e86fd2c0808d9f6d0632ba90de3",
+    "tests/helpers/v6-live-game-campaign.ts": "06f3047073048be519d4fb67ba04208b7e6c85c4587a42a52201860217e6b5ff"
+  },
+  "runs": [
+    {
+      "game": "STCK",
+      "mode": "recorded-public-replay",
+      "targetLevels": 3,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v45/stck-three-levels.json",
+        "sha256": "4dc473487b8d8d19bd08d6cc07313eb3b285b0ec7fb9a809b0785be3941ef558",
+        "bytes": 188279
+      },
+      "expectedCommands": 35,
+      "expectedCompletePublicPackets": 36,
+      "expectedPrefixes": 15,
+      "report": "docs/migration/native-campaigns-v49/stck-recorded-public-replay.json",
+      "comparison": "docs/migration/native-campaigns-v49/stck-regression-comparison.json",
+      "executionReceipt": "docs/migration/native-campaigns-v49/logs/regression-stck-receipt.json",
+      "recordedTrace": {
+        "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+        "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+        "bytes": 53583
+      },
+      "command": [
+        "node",
+        "scripts/replay-v49-public-regression.mjs",
+        "docs/migration/native-campaigns-v45/stck-three-levels.json",
+        "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+        "docs/migration/native-campaigns-v49/stck-recorded-public-replay.json"
+      ],
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v49-regressions.mjs",
+        "docs/migration/native-campaigns-v45/stck-three-levels.json",
+        "docs/migration/native-campaigns-v49/stck-recorded-public-replay.json",
+        "docs/migration/native-campaigns-v49/stck-regression-comparison.json"
+      ]
+    },
+    {
+      "game": "CATL",
+      "mode": "recorded-public-replay",
+      "targetLevels": 6,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v45/catl-six-levels.json",
+        "sha256": "4fae9c0c249a8f9a22ddfefad6b00ee6b8c74a4ab3e9e94e02c35f41e198839b",
+        "bytes": 3867378
+      },
+      "expectedCommands": 48,
+      "expectedCompletePublicPackets": 49,
+      "expectedPrefixes": 48,
+      "report": "docs/migration/native-campaigns-v49/catl-recorded-public-replay.json",
+      "comparison": "docs/migration/native-campaigns-v49/catl-regression-comparison.json",
+      "executionReceipt": "docs/migration/native-campaigns-v49/logs/regression-catl-receipt.json",
+      "recordedTrace": {
+        "path": "docs/migration/native-campaigns-v45/catl-public-trace.json.gz",
+        "sha256": "da5c6c585b0369f25c8aabd9a0ce05bacbccbf315059682e29d5d8fb7693e63e",
+        "bytes": 38151
+      },
+      "command": [
+        "node",
+        "scripts/replay-v49-public-regression.mjs",
+        "docs/migration/native-campaigns-v45/catl-six-levels.json",
+        "docs/migration/native-campaigns-v45/catl-public-trace.json.gz",
+        "docs/migration/native-campaigns-v49/catl-recorded-public-replay.json"
+      ],
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v49-regressions.mjs",
+        "docs/migration/native-campaigns-v45/catl-six-levels.json",
+        "docs/migration/native-campaigns-v49/catl-recorded-public-replay.json",
+        "docs/migration/native-campaigns-v49/catl-regression-comparison.json"
+      ]
+    },
+    {
+      "game": "SELE",
+      "mode": "recorded-public-replay",
+      "targetLevels": 3,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v47/sele-three-levels.json",
+        "sha256": "36f06711eea87e103312501b6b524ff30b3a773a0a0d598d1ce4027a78d6a430",
+        "bytes": 3958303
+      },
+      "expectedCommands": 44,
+      "expectedCompletePublicPackets": 45,
+      "expectedPrefixes": 44,
+      "report": "docs/migration/native-campaigns-v49/sele-recorded-public-replay.json",
+      "comparison": "docs/migration/native-campaigns-v49/sele-regression-comparison.json",
+      "executionReceipt": "docs/migration/native-campaigns-v49/logs/regression-sele-receipt.json",
+      "recordedTrace": {
+        "path": "docs/migration/native-campaigns-v47/sele-public-trace.json.gz",
+        "sha256": "f62033bd4cc0d829ba9ffe36c9c3efd6b77a63bf1e5896f7a9b0a2694d49e3a2",
+        "bytes": 36187
+      },
+      "command": [
+        "node",
+        "scripts/replay-v49-public-regression.mjs",
+        "docs/migration/native-campaigns-v47/sele-three-levels.json",
+        "docs/migration/native-campaigns-v47/sele-public-trace.json.gz",
+        "docs/migration/native-campaigns-v49/sele-recorded-public-replay.json"
+      ],
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v49-regressions.mjs",
+        "docs/migration/native-campaigns-v47/sele-three-levels.json",
+        "docs/migration/native-campaigns-v49/sele-recorded-public-replay.json",
+        "docs/migration/native-campaigns-v49/sele-regression-comparison.json"
+      ]
+    },
+    {
+      "game": "COLM",
+      "mode": "recorded-public-replay",
+      "targetLevels": 3,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v48/colm-three-levels.json",
+        "sha256": "c323ea3cdf75927b544b190b9be8cf7e38c171e32ebb5d716f693dc1a3b303a0",
+        "bytes": 1523022
+      },
+      "expectedCommands": 45,
+      "expectedCompletePublicPackets": 46,
+      "expectedPrefixes": 21,
+      "report": "docs/migration/native-campaigns-v49/colm-recorded-public-replay.json",
+      "comparison": "docs/migration/native-campaigns-v49/colm-regression-comparison.json",
+      "executionReceipt": "docs/migration/native-campaigns-v49/logs/regression-colm-receipt.json",
+      "recordedTrace": {
+        "path": "docs/migration/native-campaigns-v48/colm-public-trace.json.gz",
+        "sha256": "d3508414f956c35f58ef5364d14f91ea99a93c1b144ee476f4815b35a356bae7",
+        "bytes": 27249
+      },
+      "command": [
+        "node",
+        "scripts/replay-v49-public-regression.mjs",
+        "docs/migration/native-campaigns-v48/colm-three-levels.json",
+        "docs/migration/native-campaigns-v48/colm-public-trace.json.gz",
+        "docs/migration/native-campaigns-v49/colm-recorded-public-replay.json"
+      ],
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v49-regressions.mjs",
+        "docs/migration/native-campaigns-v48/colm-three-levels.json",
+        "docs/migration/native-campaigns-v49/colm-recorded-public-replay.json",
+        "docs/migration/native-campaigns-v49/colm-regression-comparison.json"
+      ]
+    },
+    {
+      "game": "ZIPP",
+      "mode": "recorded-public-replay",
+      "targetLevels": 6,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v48/zipp-six-levels.json",
+        "sha256": "98c4fb24013a13e93becf8fba6d3d4be51f2d94305b9bc0d21cc46fd366df5cb",
+        "bytes": 2568355
+      },
+      "expectedCommands": 101,
+      "expectedCompletePublicPackets": 102,
+      "expectedPrefixes": 40,
+      "report": "docs/migration/native-campaigns-v49/zipp-recorded-public-replay.json",
+      "comparison": "docs/migration/native-campaigns-v49/zipp-regression-comparison.json",
+      "executionReceipt": "docs/migration/native-campaigns-v49/logs/regression-zipp-receipt.json",
+      "recordedTrace": {
+        "path": "docs/migration/native-campaigns-v48/zipp-public-trace.json.gz",
+        "sha256": "dca930510e267cdb3ae5098606da3441eecf14d362215f99197fc77023ab1917",
+        "bytes": 36532
+      },
+      "command": [
+        "node",
+        "scripts/replay-v49-public-regression.mjs",
+        "docs/migration/native-campaigns-v48/zipp-six-levels.json",
+        "docs/migration/native-campaigns-v48/zipp-public-trace.json.gz",
+        "docs/migration/native-campaigns-v49/zipp-recorded-public-replay.json"
+      ],
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v49-regressions.mjs",
+        "docs/migration/native-campaigns-v48/zipp-six-levels.json",
+        "docs/migration/native-campaigns-v49/zipp-recorded-public-replay.json",
+        "docs/migration/native-campaigns-v49/zipp-regression-comparison.json"
+      ]
+    }
+  ]
+}

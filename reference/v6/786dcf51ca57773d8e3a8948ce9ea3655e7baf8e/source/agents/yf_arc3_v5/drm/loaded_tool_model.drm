@@ -1,0 +1,987 @@
+{
+  "module_id": "loaded_tool_model",
+  "declarations": [
+    {
+      "id": "policy.loaded_tool_instance_model_inventory",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "canonical_instance_membership_survives_instrumental_goal_changes"
+      ],
+      "applicability": [
+        "before_parent_step_and_path_influence_prediction"
+      ],
+      "invariants": [
+        "missing_current_mask_does_not_remove_membership",
+        "axis_overlap_is_possible_load_never_confirmed_attachment",
+        "inventory_completeness_is_not_whole_physics_completeness"
+      ],
+      "falsifiers": [
+        "retained_member_has_no_unique_current_footprint",
+        "attachment_or_release_event_contradicts_instance_membership"
+      ],
+      "configuration": {
+        "measurement_contract": {
+          "model_predicate": "loaded_tool_instance_model",
+          "pose_claim_predicate": "piercing_target_scene_hypothesis",
+          "control_query_attribute": "role",
+          "control_query_value": "cursor_supposition",
+          "support_model_predicate": "piercing_observed_model_revision"
+        }
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.loaded_tool.current_scoped_snapshot",
+          "all_conditions": [],
+          "reason_ref": "reason.current_instance_snapshot_preserves_members"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "snapshot_admission_rank",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.loaded_tool.admitted_snapshot_precedes_initial",
+          "reason_ref": "reason.current_instance_snapshot_preserves_members"
+        },
+        {
+          "field": "prior_model_revision",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.loaded_tool.latest_source_revision",
+          "reason_ref": "reason.newer_source_snapshot_retains_reconciled_members"
+        }
+      ],
+      "reason_refs": [
+        "reason.current_instance_snapshot_preserves_members"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.loaded_tool_instance_model_meaning"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.loaded_tool.default_unknown",
+          "all_conditions": [],
+          "static_facts": {
+            "applicable": false,
+            "loaded_tool_model_applicable": false,
+            "loaded_tool_inventory_complete": false,
+            "whole_influence_prediction_complete": false,
+            "snapshot_admission_rank": -1,
+            "loaded_tool_condition_known": false,
+            "loaded_tool_question_kind_ref": "mechanism_discrimination",
+            "loaded_tool_question_allows_act": false,
+            "loaded_tool_condition_ref": "condition.every_retained_member_has_a_current_footprint",
+            "loaded_tool_falsifier_refs": [
+              "falsifier.unrepresented_retained_member_changes_influence_envelope"
+            ],
+            "loaded_tool_response_refs": [
+              "response.member_moves_with_tool",
+              "response.member_remains_or_stops_independently"
+            ],
+            "loaded_tool_model_needs_commit": false,
+            "member_pose_bindings_admitted": false,
+            "current_member_pose_bindings": [],
+            "member_pose_binding_origin_refs": []
+          },
+          "bound_facts": {
+            "known_load_member_refs": "prior_known_load_member_refs",
+            "possible_load_member_refs": "membership_union_refs",
+            "mandatory_part_refs": "membership_union_refs",
+            "root_to_tip_positions": "observed_axis_ordered_positions",
+            "known_support_pairs": "prior_known_support_pairs",
+            "possible_support_pairs": "prior_possible_support_pairs",
+            "piece_type_ref_pairs": "prior_piece_type_ref_pairs"
+          }
+        },
+        {
+          "id": "projection.loaded_tool.initial",
+          "all_conditions": [
+            {
+              "field": "prior_model_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.loaded_tool.initial_observation",
+          "all_conditions": [
+            {
+              "field": "geometry_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "geometry_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tool_signature_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "scope_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "matching_prior_model_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "scene_support_claim_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "loaded_tool_model_applicable": true,
+            "snapshot_admission_rank": 0,
+            "loaded_tool_model_needs_commit": true
+          }
+        },
+        {
+          "id": "projection.loaded_tool.admitted_proposed",
+          "all_conditions": [
+            {
+              "field": "geometry_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "geometry_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tool_signature_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "scope_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_tool_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_disposition",
+              "operator": "equals",
+              "expected": "active"
+            },
+            {
+              "field": "prior_model_polarity",
+              "operator": "equals",
+              "expected": "positive"
+            },
+            {
+              "field": "prior_model_contradiction_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "prior_model_epistemic_status",
+              "operator": "equals",
+              "expected": "proposed"
+            },
+            {
+              "field": "scene_support_claim_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "loaded_tool_model_applicable": true,
+            "snapshot_admission_rank": 1,
+            "loaded_tool_model_needs_commit": true
+          }
+        },
+        {
+          "id": "projection.loaded_tool.admitted_supported",
+          "all_conditions": [
+            {
+              "field": "geometry_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "geometry_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tool_signature_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "scope_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_tool_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_disposition",
+              "operator": "equals",
+              "expected": "active"
+            },
+            {
+              "field": "prior_model_polarity",
+              "operator": "equals",
+              "expected": "positive"
+            },
+            {
+              "field": "prior_model_contradiction_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "prior_model_epistemic_status",
+              "operator": "equals",
+              "expected": "supported"
+            },
+            {
+              "field": "scene_support_claim_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "loaded_tool_model_applicable": true,
+            "snapshot_admission_rank": 1,
+            "loaded_tool_model_needs_commit": true
+          }
+        },
+        {
+          "id": "projection.loaded_tool.admitted_established",
+          "all_conditions": [
+            {
+              "field": "geometry_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "geometry_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tool_signature_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "scope_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_tool_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_disposition",
+              "operator": "equals",
+              "expected": "active"
+            },
+            {
+              "field": "prior_model_polarity",
+              "operator": "equals",
+              "expected": "positive"
+            },
+            {
+              "field": "prior_model_contradiction_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "prior_model_epistemic_status",
+              "operator": "equals",
+              "expected": "established"
+            },
+            {
+              "field": "scene_support_claim_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "loaded_tool_model_applicable": true,
+            "snapshot_admission_rank": 1,
+            "loaded_tool_model_needs_commit": true
+          }
+        },
+        {
+          "id": "projection.loaded_tool.complete_initial",
+          "all_conditions": [
+            {
+              "field": "geometry_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "geometry_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tool_signature_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "scope_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "matching_prior_model_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "missing_member_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "ambiguous_member_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "raster_enumeration_truncated",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "loaded_tool_inventory_complete": true
+          }
+        },
+        {
+          "id": "projection.loaded_tool.complete_proposed",
+          "all_conditions": [
+            {
+              "field": "geometry_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "geometry_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tool_signature_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "scope_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_tool_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_disposition",
+              "operator": "equals",
+              "expected": "active"
+            },
+            {
+              "field": "prior_model_polarity",
+              "operator": "equals",
+              "expected": "positive"
+            },
+            {
+              "field": "prior_model_contradiction_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "prior_model_epistemic_status",
+              "operator": "equals",
+              "expected": "proposed"
+            },
+            {
+              "field": "missing_member_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "ambiguous_member_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "raster_enumeration_truncated",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "loaded_tool_inventory_complete": true
+          }
+        },
+        {
+          "id": "projection.loaded_tool.complete_supported",
+          "all_conditions": [
+            {
+              "field": "geometry_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "geometry_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tool_signature_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "scope_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_tool_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_disposition",
+              "operator": "equals",
+              "expected": "active"
+            },
+            {
+              "field": "prior_model_polarity",
+              "operator": "equals",
+              "expected": "positive"
+            },
+            {
+              "field": "prior_model_contradiction_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "prior_model_epistemic_status",
+              "operator": "equals",
+              "expected": "supported"
+            },
+            {
+              "field": "missing_member_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "ambiguous_member_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "raster_enumeration_truncated",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "loaded_tool_inventory_complete": true
+          }
+        },
+        {
+          "id": "projection.loaded_tool.complete_established",
+          "all_conditions": [
+            {
+              "field": "geometry_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "geometry_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tool_signature_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "scope_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_tool_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_disposition",
+              "operator": "equals",
+              "expected": "active"
+            },
+            {
+              "field": "prior_model_polarity",
+              "operator": "equals",
+              "expected": "positive"
+            },
+            {
+              "field": "prior_model_contradiction_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "prior_model_epistemic_status",
+              "operator": "equals",
+              "expected": "established"
+            },
+            {
+              "field": "missing_member_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "ambiguous_member_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "raster_enumeration_truncated",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "loaded_tool_inventory_complete": true
+          }
+        },
+        {
+          "id": "projection.loaded_tool.reuse_exact_current_snapshot",
+          "all_conditions": [
+            {
+              "field": "prior_model_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "loaded_tool_model_applicable",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prior_model_state_digest_matches",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "loaded_tool_model_needs_commit": false,
+            "loaded_tool_model_reused": true
+          },
+          "bound_facts": {
+            "model_instance_ref": "prior_model_instance_ref",
+            "source_model_revision": "prior_model_revision"
+          }
+        },
+        {
+          "id": "projection.loaded_tool.canonical_source_support_preserved",
+          "all_conditions": [
+            {
+              "field": "loaded_tool_model_applicable",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_support_model_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_support_model_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_support_model_origin_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "source_support_model_tool_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_support_model_aggregate_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_support_model_aggregate_origin_matches",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "loaded_tool_inventory_complete": false,
+            "whole_influence_prediction_complete": false
+          },
+          "bound_facts": {
+            "known_load_member_refs": "source_known_load_member_union",
+            "possible_load_member_refs": "source_possible_load_member_union",
+            "mandatory_part_refs": "source_membership_union_refs",
+            "missing_member_refs": "source_missing_member_refs",
+            "observed_piece_states": "source_observed_piece_states",
+            "known_support_pairs": "source_known_support_pair_union",
+            "possible_support_pairs": "source_possible_support_pair_union",
+            "independent_support_pairs": "source_support_independent_pairs",
+            "free_piece_refs": "source_support_free_piece_refs",
+            "support_model_origin_refs": "source_support_model_observation_origin_refs",
+            "piece_type_ref_pairs": "source_piece_type_ref_pairs"
+          }
+        },
+        {
+          "id": "projection.loaded_tool.source_support_masks_complete",
+          "all_conditions": [
+            {
+              "field": "loaded_tool_model_applicable",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_support_model_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_support_model_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_support_model_origin_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "source_missing_member_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "ambiguous_member_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "geometry_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "raster_enumeration_truncated",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "source_piece_type_conflict_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "source_support_model_tool_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_support_model_aggregate_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_support_model_aggregate_origin_matches",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "loaded_tool_inventory_complete": true,
+            "whole_influence_prediction_complete": false
+          }
+        },
+        {
+          "id": "projection.loaded_tool.current_rendered_member_pose_binding",
+          "all_conditions": [
+            {"field": "loaded_tool_model_applicable", "operator": "equals", "expected": true},
+            {"field": "geometry_frame_matches", "operator": "equals", "expected": true},
+            {"field": "scope_complete", "operator": "equals", "expected": true},
+            {"field": "member_pose_source_claim_match_count", "operator": "equals", "expected": 1},
+            {"field": "member_pose_source_active_count", "operator": "equals", "expected": 1},
+            {"field": "member_pose_source_positive_count", "operator": "equals", "expected": 1},
+            {"field": "member_pose_source_contradiction_count", "operator": "equals", "expected": 0},
+            {"field": "member_pose_source_defeated_count", "operator": "equals", "expected": 0},
+            {"field": "member_pose_source_origin_count", "operator": "greater_than", "expected": 0},
+            {"field": "member_pose_binding_conflict_count", "operator": "equals", "expected": 0},
+            {"field": "ambiguous_member_count", "operator": "equals", "expected": 0}
+          ],
+          "static_facts": {
+            "member_pose_bindings_admitted": true,
+            "member_pose_binding_scope_ref": "binding.current_rendered_part_alias"
+          },
+          "bound_facts": {
+            "current_member_pose_bindings": "measured_member_pose_bindings",
+            "member_pose_binding_origin_refs": "measured_member_pose_binding_origin_refs",
+            "member_pose_bindings_frame_ref": "current_frame_ref"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.loaded_tool_instance_model_meaning",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "premises": [
+        "model_instance_ref",
+        "tool_signature_ref",
+        "mandatory_part_refs",
+        "model_observation_origin_refs"
+      ],
+      "applicability": [
+        "source_selected_current_scoped_instance_inventory"
+      ],
+      "invariants": [
+        "membership_proposal_does_not_confirm_attachment",
+        "missing_masks_remain_declared_members",
+        "subgoal_change_is_not_release_evidence"
+      ],
+      "falsifiers": [
+        "fresh_observation_or_causal_entry_withdrawal_event_refutes_model"
+      ],
+      "reason_refs": [
+        "reason.current_instance_snapshot_preserves_members"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{model_instance_ref}",
+          "kind": "entity",
+          "label": "conditional tool and load instance inventory",
+          "required_fields": [
+            "model_instance_ref",
+            "tool_signature_ref"
+          ],
+          "static_attributes": {
+            "projection_contract": "projection.loaded_tool_instance_model.v1",
+            "whole_influence_prediction_complete": false
+          },
+          "attribute_bindings": {
+            "member_pose_bindings_admitted": "member_pose_bindings_admitted",
+            "current_member_pose_bindings": "current_member_pose_bindings",
+            "member_pose_binding_origin_refs": "member_pose_binding_origin_refs",
+            "member_pose_binding_scope_ref": "member_pose_binding_scope_ref",
+            "member_pose_bindings_frame_ref": "member_pose_bindings_frame_ref",
+            "model_instance_ref": "model_instance_ref",
+            "tool_signature_ref": "tool_signature_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "current_frame_ref": "current_frame_ref",
+            "source_model_revision": "source_model_revision",
+            "model_state_digest": "model_state_digest",
+            "known_load_member_refs": "known_load_member_refs",
+            "possible_load_member_refs": "possible_load_member_refs",
+            "mandatory_part_refs": "mandatory_part_refs",
+            "missing_member_refs": "missing_member_refs",
+            "observed_piece_states": "observed_piece_states",
+            "root_to_tip_positions": "root_to_tip_positions",
+            "loaded_tool_inventory_complete": "loaded_tool_inventory_complete",
+            "model_observation_origin_refs": "model_observation_origin_refs",
+            "prior_model_claim_ref": "prior_model_claim_ref",
+            "loaded_tool_falsifier_refs": "loaded_tool_falsifier_refs",
+            "loaded_tool_response_refs": "loaded_tool_response_refs",
+            "loaded_tool_condition_ref": "loaded_tool_condition_ref",
+            "scene_support_claim_refs": "scene_support_claim_refs",
+            "known_support_pairs": "known_support_pairs",
+            "possible_support_pairs": "possible_support_pairs",
+            "independent_support_pairs": "independent_support_pairs",
+            "free_piece_refs": "free_piece_refs",
+            "support_model_origin_refs": "support_model_origin_refs",
+            "piece_type_ref_pairs": "piece_type_ref_pairs"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{model_instance_ref}",
+          "predicate": "loaded_tool_instance_model",
+          "family": "control",
+          "argument_patterns": [
+            "{model_instance_ref}",
+            "{tool_signature_ref}"
+          ],
+          "epistemic_status": "proposed",
+          "required_fields": [
+            "model_instance_ref",
+            "tool_signature_ref"
+          ],
+          "static_attributes": {
+            "projection_contract": "projection.loaded_tool_instance_model.v1",
+            "attachment_truth": "unknown",
+            "whole_influence_prediction_complete": false
+          },
+          "attribute_bindings": {
+            "member_pose_bindings_admitted": "member_pose_bindings_admitted",
+            "current_member_pose_bindings": "current_member_pose_bindings",
+            "member_pose_binding_origin_refs": "member_pose_binding_origin_refs",
+            "member_pose_binding_scope_ref": "member_pose_binding_scope_ref",
+            "member_pose_bindings_frame_ref": "member_pose_bindings_frame_ref",
+            "model_instance_ref": "model_instance_ref",
+            "tool_signature_ref": "tool_signature_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "current_frame_ref": "current_frame_ref",
+            "source_model_revision": "source_model_revision",
+            "model_state_digest": "model_state_digest",
+            "known_load_member_refs": "known_load_member_refs",
+            "possible_load_member_refs": "possible_load_member_refs",
+            "mandatory_part_refs": "mandatory_part_refs",
+            "missing_member_refs": "missing_member_refs",
+            "observed_piece_states": "observed_piece_states",
+            "root_to_tip_positions": "root_to_tip_positions",
+            "loaded_tool_inventory_complete": "loaded_tool_inventory_complete",
+            "model_observation_origin_refs": "model_observation_origin_refs",
+            "prior_model_claim_ref": "prior_model_claim_ref",
+            "loaded_tool_falsifier_refs": "loaded_tool_falsifier_refs",
+            "loaded_tool_response_refs": "loaded_tool_response_refs",
+            "loaded_tool_condition_ref": "loaded_tool_condition_ref",
+            "scene_support_claim_refs": "scene_support_claim_refs",
+            "known_support_pairs": "known_support_pairs",
+            "possible_support_pairs": "possible_support_pairs",
+            "independent_support_pairs": "independent_support_pairs",
+            "free_piece_refs": "free_piece_refs",
+            "support_model_origin_refs": "support_model_origin_refs",
+            "piece_type_ref_pairs": "piece_type_ref_pairs"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "logos-engine.lot8b.baseline-preparation-attempt.v1",
+  "recordedAt": "2026-11-12T04:47:07.083530+00:00",
+  "attempt": 2,
+  "status": "digest_encoding_mismatch_before_execution",
+  "observedFileCount": 329,
+  "pathComponentSortedDigest": "1f03e757f6713c33a53fec62804882c2de8b5c7bc1c4d32f8367aee5fb6ce20e",
+  "canonicalStringSortedDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+  "cause": "The initial Python Path ordering sorts path components, while the published native inventory sorts complete relative file names. File bytes match.",
+  "gameOrNativeExecution": false,
+  "candidateFilesChanged": false,
+  "globalLockAcquired": false
+}

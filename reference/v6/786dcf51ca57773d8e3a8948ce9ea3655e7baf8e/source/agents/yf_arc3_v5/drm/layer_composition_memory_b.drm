@@ -1,0 +1,722 @@
+{
+  "module_id": "arc3.layer_composition_memory_b",
+  "declarations": [
+    {
+      "id": "principle.layer_composition_memory_requires_current_binding",
+      "kind": "principle",
+      "family_ref": "family.interaction_configuration",
+      "abstraction_level": "causal_variant",
+      "reason_refs": [
+        "reason.observed_composition_survives_absent_pure_reference_values"
+      ],
+      "premises": [
+        "native_historical_composition_evidence"
+      ],
+      "invariants": [
+        "palette_is_not_an_intrinsic_role",
+        "current_masks_and_selection_are_revalidated",
+        "historical_positions_are_not_a_method"
+      ]
+    },
+    {
+      "id": "policy.acquire_layer_composition_memory",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "layer_memory.acquire"
+      ],
+      "reason_refs": [
+        "reason.official_boundary_history_preserves_supported_composition"
+      ],
+      "configuration": {
+        "measurement_contract": {
+          "evidence_contract": "yf_arc3_v5.terminal_outcome_evidence.v1",
+          "boundary_predicate": "level_completed",
+          "allowed_statuses": [
+            "supported",
+            "established"
+          ],
+          "maximum_capsules": 8,
+          "maximum_history_inputs": 64,
+          "game_scope_field": "game_id",
+          "action_field": "last_action",
+          "model_term_pattern": "memory.layer_composition.{model_token}",
+          "model_claim_pattern": "claim.memory.layer_composition.{model_token}",
+          "current_claim_pattern": "claim.memory.layer_composition.current.{binding_token}"
+        }
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "layer_memory.acquire": "rule.acquire_layer_composition_memory"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.layer_memory.acquire",
+          "all_conditions": [
+            {
+              "field": "has_measurements",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "description_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "intersection_observed_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "intersection_mismatch_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.acquire_layer_composition_memory",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "reason_refs": [
+        "reason.historical_effects_support_a_revisable_contribution_table"
+      ],
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "source_qualified_complete_native_boundary_history"
+      ],
+      "invariants": [
+        "acquisition_does_not_bind_current_scene",
+        "operators_retain_observed_scope"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "memory.layer_composition.{model_token}",
+          "kind": "schema",
+          "label": "supported portable two-support composition method",
+          "required_fields": [
+            "model_token",
+            "palette_description",
+            "historical_action_motions"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.layer_composition_model.v1",
+            "canonical_fact_projection_enabled": true,
+            "commitment": "revisable",
+            "memory_scope": "same_game",
+            "drop_scene_local_bindings": true,
+            "uniform_pose_query": {
+              "contract": "yf_arc3_v5.uniform_support_pose_query.v1",
+              "body_requirement": "unique_connected_support_exceeding_patch_area",
+              "rotation_anchor_assumption": "visible_body_minimum_corner",
+              "anchor_epistemic_status": "supposed",
+              "outline_occlusion_assumption": "opposite_support_pixels_across_current_frame_outline",
+              "presentation_overlay_requirement": "observed_current_selection_marker_only",
+              "translation_requirement": "observed_axis_quanta_with_revisable_inverse",
+              "maximum_translation_extent": 64,
+              "require_unclipped_body": true,
+              "require_unique_compatible_pose": true,
+              "result_mode": "all_minimum_primitive_count_compatible_poses"
+            },
+            "current_claim_pattern": "claim.memory.layer_composition.current.{binding_token}",
+            "canonical_role_link_constraints": {
+              "allowed_statuses": [
+                "supported",
+                "established"
+              ],
+              "disposition": "active",
+              "polarity": "positive",
+              "no_contradictions": true,
+              "no_defeaters": true
+            }
+          },
+          "attribute_bindings": {
+            "game_id": "game_id",
+            "palette_description": "palette_description",
+            "historical_action_motions": "historical_action_motions",
+            "model_claim_ref": "model_claim_ref",
+            "role_premise_claim_refs": "model_premise_claim_refs"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.memory.layer_composition.{model_token}",
+          "predicate": "supports_revisable_layer_composition_model",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "memory.layer_composition.{model_token}"
+          ],
+          "required_fields": [
+            "model_token",
+            "palette_description",
+            "historical_action_motions"
+          ],
+          "required_term_patterns": [
+            "memory.layer_composition.{model_token}"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "falsifier": "current_intersection_or_operator_contradicts_recalled_composition"
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.revalidate_layer_composition_memory",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "layer_memory.revalidate",
+        "layer_memory.partial_revalidate",
+        "layer_memory.pose_precondition_revalidate",
+        "layer_memory.unassigned_support_revalidate"
+      ],
+      "reason_refs": [
+        "reason.current_reference_may_omit_a_pure_contribution_value"
+      ],
+      "configuration": {
+        "measurement_contract": {
+          "evidence_contract": "yf_arc3_v5.terminal_outcome_evidence.v1",
+          "boundary_predicate": "level_completed",
+          "allowed_statuses": [
+            "supported",
+            "established"
+          ],
+          "maximum_capsules": 8,
+          "maximum_history_inputs": 64,
+          "game_scope_field": "game_id",
+          "action_field": "last_action",
+          "model_term_pattern": "memory.layer_composition.{model_token}",
+          "model_claim_pattern": "claim.memory.layer_composition.{model_token}",
+          "current_claim_pattern": "claim.memory.layer_composition.current.{binding_token}"
+        }
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "layer_memory.revalidate": "rule.revalidate_layer_composition_memory",
+        "layer_memory.partial_revalidate": "rule.revalidate_partial_layer_composition_memory",
+        "layer_memory.pose_precondition_revalidate": "rule.revalidate_layer_pose_query_precondition",
+        "layer_memory.unassigned_support_revalidate": "rule.revalidate_unassigned_support_pose_query"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.layer_memory.current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "layer_memory.revalidate"
+            },
+            {
+              "field": "has_measurements",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "layer_pair_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "layer_intersection_mismatch_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.layer_memory.current_partial",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "layer_memory.partial_revalidate"
+            },
+            {
+              "field": "has_measurements",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "layer_partial_pair_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "layer_partial_known_target_cell_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "layer_partial_unknown_target_cell_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "layer_partial_observed_pose_cell_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.layer_memory.current_pose_query_precondition",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "layer_memory.pose_precondition_revalidate"
+            },
+            {
+              "field": "has_measurements",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "layer_partial_pair_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "layer_partial_body_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "layer_partial_body_boundary_contact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "layer_partial_pose_query_requires_unclipped_body",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "layer_partial_observed_pose_cell_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "layer_partial_target_visible_material_cell_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "layer_partial_pose_query_contract_ref",
+              "operator": "equals",
+              "expected": "yf_arc3_v5.uniform_support_pose_query.v1"
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.layer_memory.unassigned_support_query",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "layer_memory.unassigned_support_revalidate"
+            },
+            {
+              "field": "has_measurements",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "layer_unassigned_support_query_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "layer_unassigned_query_pose_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "layer_unassigned_query_known_cell_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.revalidate_layer_composition_memory",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "reason_refs": [
+        "reason.native_method_and_current_field_correspondence_are_distinct_proofs"
+      ],
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "source_qualified_current_unique_field_correspondence"
+      ],
+      "invariants": [
+        "selection_is_not_inherited_from_a_prior_level"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "binding.layer_composition.{layer_current_binding_token}",
+          "kind": "schema",
+          "label": "current conditional layer field binding",
+          "required_fields": [
+            "layer_current_binding_token",
+            "layer_recalled_model_ref"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "canonical_fact_projection_enabled": true
+          },
+          "attribute_bindings": {
+            "operational_scene_ref": "layer_binding_frame_ref",
+            "model_ref": "layer_recalled_model_ref",
+            "field_boxes": "layer_current_field_boxes"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.memory.layer_composition.current.{layer_current_binding_token}",
+          "predicate": "current_layer_composition_model_has_compatible_field_correspondence",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "binding.layer_composition.{layer_current_binding_token}",
+            "{layer_recalled_model_ref}"
+          ],
+          "required_fields": [
+            "layer_current_binding_token",
+            "layer_recalled_model_ref"
+          ],
+          "required_term_patterns": [
+            "binding.layer_composition.{layer_current_binding_token}",
+            "{layer_recalled_model_ref}"
+          ],
+          "static_attributes": {
+            "commitment": "revisable"
+          },
+          "attribute_bindings": {
+            "memory_revalidation_observation_ref": "layer_binding_frame_ref",
+            "model_premise_claim_refs": "layer_recalled_premise_claim_refs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.revalidate_partial_layer_composition_memory",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "reason_refs": [
+        "reason.native_method_and_current_field_correspondence_are_distinct_proofs"
+      ],
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "source_qualified_partial_correspondence_preserving_unknown_cells"
+      ],
+      "invariants": [
+        "selection_is_not_inherited_from_a_prior_level",
+        "novel_values_are_not_assigned_material_membership",
+        "partial_correspondence_does_not_confirm_the_complete_field_model"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "binding.layer_composition.{layer_current_binding_token}",
+          "kind": "schema",
+          "label": "current partial layer field inquiry",
+          "required_fields": [
+            "layer_current_binding_token",
+            "layer_recalled_model_ref"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "canonical_fact_projection_enabled": true,
+            "partial_only": true
+          },
+          "attribute_bindings": {
+            "operational_scene_ref": "layer_binding_frame_ref",
+            "model_ref": "layer_recalled_model_ref",
+            "field_boxes": "layer_current_field_boxes",
+            "known_target_cell_count": "layer_partial_known_target_cell_count",
+            "unknown_target_cell_count": "layer_partial_unknown_target_cell_count",
+            "observed_pose_cell_count": "layer_partial_observed_pose_cell_count",
+            "material_value": "layer_partial_current_palette_value",
+            "clockwise_quarters": "layer_partial_current_pose_quarters",
+            "row_delta": "layer_partial_current_row_delta",
+            "col_delta": "layer_partial_current_col_delta",
+            "second_patch_stability_observed": "layer_partial_second_patch_stable_after_observed_point",
+            "operator_action_ref": "layer_partial_operator_action_ref",
+            "inverse_shift_hypotheses": "layer_partial_inverse_shift_candidates",
+            "current_operator_observations": "layer_partial_current_operator_observations",
+            "conditional_pose_query_used": "layer_partial_pose_query_used",
+            "conditional_pose_query_contract_ref": "layer_partial_pose_query_contract_ref",
+            "current_control_observation_start_index": "layer_partial_current_control_observation_start_index",
+            "inverse_motion_materials": "layer_partial_inverse_motion_materials"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.memory.layer_composition.current.{layer_current_binding_token}",
+          "predicate": "current_layer_composition_model_has_partial_field_correspondence",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "binding.layer_composition.{layer_current_binding_token}",
+            "{layer_recalled_model_ref}"
+          ],
+          "required_fields": [
+            "layer_current_binding_token",
+            "layer_recalled_model_ref"
+          ],
+          "required_term_patterns": [
+            "binding.layer_composition.{layer_current_binding_token}",
+            "{layer_recalled_model_ref}"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "partial_only": true,
+            "complete_model_applicability_not_established": true
+          },
+          "attribute_bindings": {
+            "memory_revalidation_observation_ref": "layer_binding_frame_ref",
+            "model_premise_claim_refs": "layer_recalled_premise_claim_refs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.revalidate_layer_pose_query_precondition",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "reason_refs": [
+        "reason.native_method_and_current_field_correspondence_are_distinct_proofs"
+      ],
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "current_visible_body_contacts_observation_boundary",
+        "retained_query_requires_a_completely_visible_body",
+        "current_material_and_reference_roles_are_revalidated"
+      ],
+      "invariants": [
+        "clipped_cells_are_not_completed",
+        "query_precondition_observation_is_not_a_supported_placement",
+        "composition_applicability_remains_unestablished"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "binding.layer_composition.{layer_current_binding_token}",
+          "kind": "schema",
+          "label": "current visibility prerequisite of a retained pose query",
+          "required_fields": [
+            "layer_current_binding_token",
+            "layer_recalled_model_ref"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "canonical_fact_projection_enabled": true,
+            "partial_only": true,
+            "pose_precondition_inquiry": true
+          },
+          "attribute_bindings": {
+            "operational_scene_ref": "layer_binding_frame_ref",
+            "model_ref": "layer_recalled_model_ref",
+            "field_boxes": "layer_current_field_boxes",
+            "known_target_cell_count": "layer_partial_known_target_cell_count",
+            "unknown_target_cell_count": "layer_partial_unknown_target_cell_count",
+            "material_value": "layer_partial_current_palette_value",
+            "operator_action_ref": "layer_partial_operator_action_ref",
+            "conditional_pose_query_used": "layer_partial_pose_query_used",
+            "conditional_pose_query_contract_ref": "layer_partial_pose_query_contract_ref",
+            "body_count": "layer_partial_body_count",
+            "visible_support_count": "layer_partial_body_support_count",
+            "body_boundary_contact": "layer_partial_body_boundary_contact",
+            "query_requires_unclipped_body": "layer_partial_pose_query_requires_unclipped_body",
+            "rotation_trial_count": "layer_partial_pose_query_rotation_trial_count"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.memory.layer_composition.current.{layer_current_binding_token}",
+          "predicate": "current_retained_pose_query_has_unmet_visible_body_prerequisite",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "binding.layer_composition.{layer_current_binding_token}",
+            "{layer_recalled_model_ref}"
+          ],
+          "required_fields": [
+            "layer_current_binding_token",
+            "layer_recalled_model_ref"
+          ],
+          "required_term_patterns": [
+            "binding.layer_composition.{layer_current_binding_token}",
+            "{layer_recalled_model_ref}"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "partial_only": true,
+            "complete_model_applicability_not_established": true,
+            "pose_precondition_inquiry": true
+          },
+          "attribute_bindings": {
+            "memory_revalidation_observation_ref": "layer_binding_frame_ref",
+            "model_premise_claim_refs": "layer_recalled_premise_claim_refs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.revalidate_unassigned_support_pose_query",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "reason_refs": [
+        "reason.native_method_and_current_field_correspondence_are_distinct_proofs"
+      ],
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "retained_pose_query_definition",
+        "current_unassigned_visible_support_and_conditional_pose"
+      ],
+      "invariants": [
+        "appearance_query_does_not_assign_composition_membership",
+        "unknown_target_values_remain_unknown",
+        "new_operator_application_is_tested_not_assumed"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "binding.layer_composition.{layer_current_binding_token}",
+          "kind": "schema",
+          "label": "current conditional query for unassigned support",
+          "required_fields": [
+            "layer_current_binding_token",
+            "layer_recalled_model_ref"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "canonical_fact_projection_enabled": true,
+            "partial_only": true,
+            "unassigned_support_inquiry": true,
+            "composition_membership_unestablished": true,
+            "conditional_query_only": true
+          },
+          "attribute_bindings": {
+            "operational_scene_ref": "layer_binding_frame_ref",
+            "model_ref": "layer_recalled_model_ref",
+            "field_boxes": "layer_current_field_boxes",
+            "query_contract_ref": "layer_unassigned_query_contract_ref",
+            "material_value": "layer_unassigned_query_material_value",
+            "clockwise_quarters": "layer_unassigned_query_quarters",
+            "row_delta": "layer_unassigned_query_row_delta",
+            "col_delta": "layer_unassigned_query_col_delta",
+            "known_target_cell_count": "layer_unassigned_query_known_cell_count",
+            "unknown_target_cell_count": "layer_unassigned_query_unknown_cell_count",
+            "visible_support_count": "layer_unassigned_query_body_support_count",
+            "operator_observations": "layer_unassigned_query_operator_observations",
+            "shift_hypotheses": "layer_unassigned_query_shift_vectors"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.memory.layer_composition.current.{layer_current_binding_token}",
+          "predicate": "current_unassigned_support_has_conditional_retained_pose_query",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "binding.layer_composition.{layer_current_binding_token}",
+            "{layer_recalled_model_ref}"
+          ],
+          "required_fields": [
+            "layer_current_binding_token",
+            "layer_recalled_model_ref"
+          ],
+          "required_term_patterns": [
+            "binding.layer_composition.{layer_current_binding_token}",
+            "{layer_recalled_model_ref}"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "partial_only": true,
+            "complete_model_applicability_not_established": true,
+            "unassigned_support_inquiry": true,
+            "composition_membership_unestablished": true,
+            "conditional_query_only": true
+          },
+          "attribute_bindings": {
+            "memory_revalidation_observation_ref": "layer_binding_frame_ref",
+            "model_premise_claim_refs": "layer_recalled_premise_claim_refs"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "schema": "logos-engine.framed-kernel-development-evidence.v1",
+  "recordedAt": "2026-11-10T12:03:17.975995-03:00",
+  "timezone": "UTC−03",
+  "status": "retained_logs_and_observations",
+  "officialMeasurementExecutedByRetention": false,
+  "runtimeExecutedByRetention": false,
+  "testsExecutedByRetention": false,
+  "buildExecutedByRetention": false,
+  "testedFiles": [
+    "tests/v5-temporal-fragment-match.test.ts",
+    "tests/v6-framed-window-observation.test.ts"
+  ],
+  "testLogs": [
+    {
+      "originalPathAtCapture": "/workspace/scratch/f6401b1a81c5/framed-kernel-targeted.tap",
+      "originalBytes": 8334,
+      "originalSha256": "1b37df8fc44ea850a61f7951f3bb1f74dc6bcb7f3b1efc485a0db287bbd61548",
+      "transport": {
+        "path": "docs/migration/lot3g-evidence/diagnostic/framed-kernel-development-targeted.log.gz",
+        "bytes": 2081,
+        "sha256": "9148258b2d7735f810e9f62ef6dc72ed21eb876c621bb519d7a1f973342387eb"
+      },
+      "compression": "gzip level 9, mtime 0",
+      "exactDecompressionVerified": true,
+      "logFormat": "Node test runner human-readable default output; original .tap suffix did not mean TAP syntax",
+      "summary": {
+        "tests": 95,
+        "pass": 95,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    },
+    {
+      "originalPathAtCapture": "/workspace/scratch/f6401b1a81c5/framed-kernel-targeted-final.tap",
+      "originalBytes": 8547,
+      "originalSha256": "63c043d20e93397b5bd2978e5f03726d65f137b32216f34980e56cd6f7a407d7",
+      "transport": {
+        "path": "docs/migration/lot3g-evidence/diagnostic/framed-kernel-development-targeted-final.log.gz",
+        "bytes": 2170,
+        "sha256": "4fc9bf873735ed7f32d0d37b36052e7ff6426de363885030a4d0119ee7c3f955"
+      },
+      "compression": "gzip level 9, mtime 0",
+      "exactDecompressionVerified": true,
+      "logFormat": "Node test runner human-readable default output; original .tap suffix did not mean TAP syntax",
+      "summary": {
+        "tests": 97,
+        "pass": 97,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    }
+  ],
+  "targetedFinalSummary": {
+    "tests": 97,
+    "pass": 97,
+    "kernelTests": 59,
+    "observationTests": 38,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "originalFixture": {
+    "path": "tests/fixtures/v6-framed-window-reference.json.gz",
+    "bytes": 60773,
+    "sha256": "c95c3e9bfaddd0746d3e4bc173995d89f0243dcab5eef2b2ddcec8fd7cac5b00"
+  },
+  "sourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "scope": "Consumed TemporalFragmentRequest / exact_candidates kernel and exact framed-window measurement/certification only; the other ten operations were not transferred.",
+  "sourceExceptions": {
+    "originalType": "AttributeError",
+    "originalMessage": "'dict' object has no attribute '_data'",
+    "nativeAdaptation": "native_temporal_fragment_interrupted_pixel_frontier",
+    "nativeResult": "Incomplete NEEDS_EVIDENCE with resumable frontier; no acquired event, action, completion or physical-impossibility claim.",
+    "qualification": "Four oracle cases interrupt inside pixels and expose the original FrozenMap.overlay failure. The native result is an explicit adaptation, not literal result parity with that source exception."
+  },
+  "scopedTypecheckObservation": {
+    "command": [
+      "node",
+      "node_modules/typescript/bin/tsc",
+      "--noEmit",
+      "--target",
+      "ES2022",
+      "--lib",
+      "ES2022,DOM,DOM.Iterable",
+      "--module",
+      "ESNext",
+      "--moduleResolution",
+      "Bundler",
+      "--allowImportingTsExtensions",
+      "--verbatimModuleSyntax",
+      "--isolatedModules",
+      "--strict",
+      "--noUncheckedIndexedAccess",
+      "--skipLibCheck",
+      "src/logos-engine/v5-temporal-fragment-match.ts",
+      "src/logos-engine/v6-framed-window-observation.ts"
+    ],
+    "exitCode": 0,
+    "sourceDigestAtExecution": null,
+    "separateOutputLogRetained": false,
+    "qualification": "Earlier development check observed in the tool receipt. Later source changes and the final frozen candidate require the owner’s separate full validation; this observation is not an exact-freeze release receipt."
+  },
+  "geometryDiagnostic": {
+    "path": "docs/migration/lot3g-evidence/diagnostic/framed-window-geometric-diagnostic.json",
+    "bytes": 7793,
+    "sha256": "d2519b3b2955ef6f6f5fd40b6dad9709189a52fd1e3848b9ca9fcf47787af6dc"
+  },
+  "qualification": "Only existing development logs were compressed and checked for exact decompression, and previously observed geometric stdout was preserved. No test, build, runtime or cost campaign was rerun by this retention step. The development tests predate final shared integration/source freeze and do not substitute for the owner’s final validation. Test-run durations and synthetic elapsed times are not official benchmark samples."
+}

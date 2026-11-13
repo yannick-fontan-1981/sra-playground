@@ -1,0 +1,191 @@
+{
+  "module_id": "v6_framed_transfer",
+  "declarations": [
+    {
+      "id": "schema.framed_transfer",
+      "kind": "schema",
+      "premises": [
+        "current_public_parallel_bands_and_exact_observed_returns"
+      ],
+      "applicability": [
+        "public_point_input_available"
+      ],
+      "invariants": [
+        "no_oracle",
+        "no_palette_roles",
+        "no_animation_frame_as_new_action",
+        "no_unobserved_cargo_or_terminal_rule"
+      ],
+      "falsifiers": [
+        "changed_band",
+        "ambiguous_span",
+        "unavailable_point",
+        "scope_changed"
+      ],
+      "reason_refs": [
+        "0.1.1-5,19"
+      ],
+      "configuration": {
+        "goal": "G_official_completion",
+        "priority": [
+          "projection.current_observed_entry_analogy",
+          "projection.exploration.current_matching_frame_reception",
+          "projection.exploration.current_uniform_frame_dependency",
+          "projection.exploration.revalidated_point_motion_span_question",
+          "projection.exploration.parallel_solid_band_interface_question"
+        ],
+        "tie_break": [
+          "point_x",
+          "point_y",
+          "candidate_ref"
+        ],
+        "point_action": "ACTION6",
+        "record_policies": [
+          "policy.record_observed_point_motion_span",
+          "policy.record_observed_framed_replacement"
+        ],
+        "maximum_records": 64,
+        "local_conditions": [
+          {
+            "field": "parallel_solid_band_mutually_unique",
+            "operator": "equals",
+            "expected": true
+          }
+        ],
+        "projection_scope_conditions": {
+          "projection.exploration.current_matching_frame_reception": [
+            {
+              "field": "framed_reception_analogy",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "projection.exploration.current_uniform_frame_dependency": [
+            {
+              "field": "framed_reception_analogy",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "projection.exploration.revalidated_point_motion_span_question": [
+            {
+              "field": "framed_reception_analogy",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "projection.exploration.parallel_solid_band_interface_question": [
+            {
+              "field": "framed_reception_analogy",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        "local_projections": {
+          "projection.current_observed_entry_analogy": {
+            "all_conditions": [
+              {
+                "field": "framed_reception_analogy",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "framed_reception_locus_complete",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "framed_reception_locus_binding_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "candidate_execution_count",
+                "operator": "equals",
+                "expected": 0
+              }
+            ],
+            "static_facts": {
+              "subgoal_ref": "subgoal.test_entry_at_current_shape_homologue",
+              "selection_principle_ref": "principle.test_reception_analogy_using_observed_entry_and_current_geometric_support",
+              "goal_ref": "goal.discriminate_current_framed_reception_analogy",
+              "falsifier_refs": [
+                "entry_does_not_reproduce",
+                "support_changed",
+                "current_homologue_ambiguous",
+                "changed_operator_value_does_not_obey_projected_offset"
+              ],
+              "expected_effect_status": "hypothesis_not_observed_law",
+              "operator_applicability_status": "Offset is a hypothesis when current operator value differs from the witnessed value; same support pair alone is not an acquired command law."
+            },
+            "bound_facts": {
+              "premise_claim_refs": "analogy_support_refs"
+            },
+            "templated_facts": {}
+          }
+        },
+        "early_continuation_conditions": [
+          {
+            "field": "framed_reception_analogy",
+            "operator": "equals",
+            "expected": true
+          }
+        ],
+        "early_continuation_by_projection": {
+          "projection.current_observed_entry_analogy": [
+            {
+              "field": "framed_reception_analogy",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "projection.exploration.current_matching_frame_reception": [
+            {
+              "field": "framed_reception_analogy",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "framed_reception_locus_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "framed_reception_locus_binding_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "operator_value_matches_observation",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "projection.exploration.current_uniform_frame_dependency": [
+            {
+              "field": "framed_reception_analogy",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "framed_reception_locus_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "framed_reception_locus_binding_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "operator_value_matches_observation",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

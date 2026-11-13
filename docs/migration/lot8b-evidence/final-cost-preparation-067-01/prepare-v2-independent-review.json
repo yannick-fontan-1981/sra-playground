@@ -1,0 +1,248 @@
+{
+  "schema": "logos-engine.lot8b-cost-preparation-v2-independent-review.v1",
+  "status": "passed_static_delta_review",
+  "recordedAt": "2026-11-12T12:29:46.666947+00:00",
+  "reviewer": "/root/final_proof_reconciliation",
+  "author": "/root/final_cost_protocol",
+  "reviewIndependence": "Reviewer did not author or modify prepare-v2.py. This is a static delta review against the previously reviewed and preserved prepare.py.",
+  "reviewedFiles": [
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-cost/prepare.py",
+      "bytes": 19424,
+      "sha256": "22680bf1833f2fc41ce5ff058ad6ec707138d3b27bc791c1907e93babda325d9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-cost/prepare-v2.py",
+      "bytes": 22196,
+      "sha256": "e5465ba2614d26fc2efba1a5b33616c18840e2fa3184032f1773477831263423"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-cost/preparation-v2/prepare-v2.diff",
+      "bytes": 6663,
+      "sha256": "a38ad20a74cd42913c22ef9531946eeb0f2f9c279178988f79274fae3dea1a6f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-cost/preparation-v2/diagnosis.json",
+      "bytes": 6797,
+      "sha256": "316e43abd079d2a22c0b33a2d299c64dd6164090e439a2da46b4f6171e974cb3"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-cost/postprocess.py",
+      "bytes": 5810,
+      "sha256": "8621250325ba1bcd9f3b1f08c7bb96966b5c7eae78a174a92b8c91707c73fd98"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-cost/analyze.mjs",
+      "bytes": 19756,
+      "sha256": "23b522ef4504fdfd7f883a0920b66ed9826f65396c4e7927faecece776670739"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-cost/review.py",
+      "bytes": 21232,
+      "sha256": "3074e351ac7337040b6cb6b53f6d9c512e6876323540953d4521e81abbd68149"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-cost/README.md",
+      "bytes": 9246,
+      "sha256": "0653239a7cdddbb771579c470722607431dc41367b15f843099c85109a950288"
+    }
+  ],
+  "retainedFailure": {
+    "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/attempt-01.json",
+    "bytes": 2590,
+    "sha256": "2b31858ee04fb89b56697ae524b3672b2c75233ad0fde1ed3d9ffe847aa0ceb4"
+  },
+  "ownerInventory": {
+    "path": "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/owner-source-inventory.json",
+    "bytes": 130694,
+    "sha256": "36e8d72ac6ccd8ec2385b1263e3dda9aa85e88d71e595f476dd5011f479795e9"
+  },
+  "scope": {
+    "newPreparationExecuted": false,
+    "nativeSessionsExecuted": 0,
+    "measurementExecuted": false,
+    "locksAcquired": false,
+    "sourceFilesModified": false,
+    "historicalFilesModified": false,
+    "broadFixturesInspected": false,
+    "closedCaseInspected": false
+  },
+  "checks": [
+    {
+      "id": "complete_diff_and_preserved_original",
+      "result": "passed",
+      "detail": "The supplied unified diff exactly equals a fresh whole-file diff of the original preparation and v2. The original remains SHA256 22680bf1833f2fc41ce5ff058ad6ec707138d3b27bc791c1907e93babda325d9. Postprocessor, analyzer, reviewer and README retain their previously reviewed hashes."
+    },
+    {
+      "id": "failure_diagnosis",
+      "result": "passed",
+      "detail": "The retained first attempt reports a source fingerprint mismatch before contract directory creation, with no native session, measurement or lock. The owner inventory actually contains role-relative paths naming different A and B runtime files; generic candidate-root interpretation caused the mismatch."
+    },
+    {
+      "id": "narrow_role_resolution",
+      "result": "passed",
+      "detail": "Only owner sourceInventory[baseline|candidate] subtrees receive role context. On this exact owner artifact, all and only ten sourceInputs fingerprint records occur there. Generic receipt, form, graph, owner-generator and derivation fingerprints preserve their previous resolution semantics."
+    },
+    {
+      "id": "role_identity_and_exact_bytes",
+      "result": "passed",
+      "detail": "Each role requires its exact selected checkout, final native version and full frozen native manifest. Role-aware verification confines canonical paths to that root and retains exact byte length and SHA256 equality. No source mismatch is waived or normalized away."
+    },
+    {
+      "id": "ten_actual_source_fingerprints",
+      "result": "passed",
+      "detail": "Opaque static byte hashing independently verified all five baseline and five candidate sourceInputs at their declared role roots. The baseline runtime is 175973 bytes / ccf30009dd69f4ca717ea14259cb844884972d3c6ae93c61f2a1702edff5c8c9; the candidate runtime is 180119 bytes / e68adc608d73ac8d19e41a01cb7f9834a014b17f7f71b26480a14c36b4025446."
+    },
+    {
+      "id": "watched_inputs_and_provenance",
+      "result": "passed",
+      "detail": "The watched input set stores resolved baseline paths absolutely and candidate paths relatively. Original fingerprint records remain unchanged in the owner artifact. Contract preparation provenance retains each declared/resolved pair, new generator, pinned original generator, full diff and diagnosis; all directly consumed preparation files are fingerprinted and reverified before contract output."
+    },
+    {
+      "id": "unchanged_contract_and_downstream_rules",
+      "result": "passed",
+      "detail": "The preparation provenance field is additive. The exact ABBA population, four final functional forms, seven historical tools, strict per-game global threshold, retained historical comparator refusal, output directory rules and all generic proof checks are unchanged. Existing analyzer, Python reviewer and coordination controller verify normalized contract.inputFingerprints, so retained relative declared paths in the explanatory provenance do not reintroduce the wrong-root lookup."
+    }
+  ],
+  "verifiedRoleSourceInputs": [
+    {
+      "role": "baseline",
+      "declaredFingerprint": {
+        "path": "src/logos-engine/v6-native-runtime.ts",
+        "bytes": 175973,
+        "sha256": "ccf30009dd69f4ca717ea14259cb844884972d3c6ae93c61f2a1702edff5c8c9"
+      },
+      "resolvedFingerprint": {
+        "path": "/workspace/sites/sra-lot8b-baseline066-20261112/src/logos-engine/v6-native-runtime.ts",
+        "bytes": 175973,
+        "sha256": "ccf30009dd69f4ca717ea14259cb844884972d3c6ae93c61f2a1702edff5c8c9"
+      }
+    },
+    {
+      "role": "baseline",
+      "declaredFingerprint": {
+        "path": "src/logos-engine/v6-knowledge-store.ts",
+        "bytes": 14849,
+        "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+      },
+      "resolvedFingerprint": {
+        "path": "/workspace/sites/sra-lot8b-baseline066-20261112/src/logos-engine/v6-knowledge-store.ts",
+        "bytes": 14849,
+        "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+      }
+    },
+    {
+      "role": "baseline",
+      "declaredFingerprint": {
+        "path": "src/logos-engine/v6-src-program.ts",
+        "bytes": 5903,
+        "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77"
+      },
+      "resolvedFingerprint": {
+        "path": "/workspace/sites/sra-lot8b-baseline066-20261112/src/logos-engine/v6-src-program.ts",
+        "bytes": 5903,
+        "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77"
+      }
+    },
+    {
+      "role": "baseline",
+      "declaredFingerprint": {
+        "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+        "bytes": 48531,
+        "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+      },
+      "resolvedFingerprint": {
+        "path": "/workspace/sites/sra-lot8b-baseline066-20261112/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+        "bytes": 48531,
+        "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+      }
+    },
+    {
+      "role": "baseline",
+      "declaredFingerprint": {
+        "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+        "bytes": 46966,
+        "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+      },
+      "resolvedFingerprint": {
+        "path": "/workspace/sites/sra-lot8b-baseline066-20261112/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+        "bytes": 46966,
+        "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+      }
+    },
+    {
+      "role": "candidate",
+      "declaredFingerprint": {
+        "path": "src/logos-engine/v6-native-runtime.ts",
+        "bytes": 180119,
+        "sha256": "e68adc608d73ac8d19e41a01cb7f9834a014b17f7f71b26480a14c36b4025446"
+      },
+      "resolvedFingerprint": {
+        "path": "src/logos-engine/v6-native-runtime.ts",
+        "bytes": 180119,
+        "sha256": "e68adc608d73ac8d19e41a01cb7f9834a014b17f7f71b26480a14c36b4025446"
+      }
+    },
+    {
+      "role": "candidate",
+      "declaredFingerprint": {
+        "path": "src/logos-engine/v6-knowledge-store.ts",
+        "bytes": 14849,
+        "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+      },
+      "resolvedFingerprint": {
+        "path": "src/logos-engine/v6-knowledge-store.ts",
+        "bytes": 14849,
+        "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+      }
+    },
+    {
+      "role": "candidate",
+      "declaredFingerprint": {
+        "path": "src/logos-engine/v6-src-program.ts",
+        "bytes": 5903,
+        "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77"
+      },
+      "resolvedFingerprint": {
+        "path": "src/logos-engine/v6-src-program.ts",
+        "bytes": 5903,
+        "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77"
+      }
+    },
+    {
+      "role": "candidate",
+      "declaredFingerprint": {
+        "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+        "bytes": 48531,
+        "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+      },
+      "resolvedFingerprint": {
+        "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+        "bytes": 48531,
+        "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+      }
+    },
+    {
+      "role": "candidate",
+      "declaredFingerprint": {
+        "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+        "bytes": 46966,
+        "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+      },
+      "resolvedFingerprint": {
+        "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+        "bytes": 46966,
+        "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+      }
+    }
+  ],
+  "blockingObjections": [],
+  "recommendedNextStep": "Owner may run the reviewed prepare-v2.py against the already declared exact inputs and retain the resulting attempt and contract. This review introduces no extra gate and grants no measurement or publication status.",
+  "limitations": [
+    "Static delta review only; prepare-v2.py was not imported or executed.",
+    "The first failure is preserved as the owner receipt of the observed executor traceback, with its documented lack of redirected raw stdout/stderr.",
+    "Successful preparation still supplies a prospective contract; it does not establish isolation, execute measurement, accept the global budget or publish the candidate."
+  ],
+  "officialPerformanceEligibilityGranted": false,
+  "publicationAuthorizedByThisReview": false
+}

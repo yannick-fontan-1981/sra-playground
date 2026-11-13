@@ -1,0 +1,372 @@
+{
+  "module_id": "alignment_recovery_use_d",
+  "declarations": [
+    {
+      "id": "policy.d_alignment_recovery_use",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.d_actual_canonical_recovery_evidence_and_current_model_binding"
+      ],
+      "declared_alternative_refs": [
+        "d_alignment_recovery.use",
+        "d_alignment_recovery.blocked"
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.d_alignment_recovery_equivalent_binding",
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "policy.d_alignment_recovery_use.tier.0",
+          "reason_ref": "reason.d_actual_canonical_recovery_evidence_and_current_model_binding",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_alignment_recovery.use"
+            },
+            {
+              "field": "current_owner_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.finite_alignment_game.recovery_memory"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "RETAIN"
+            }
+          ]
+        },
+        {
+          "id": "policy.d_alignment_recovery_use.tier.1",
+          "reason_ref": "reason.d_actual_canonical_recovery_evidence_and_current_model_binding",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_alignment_recovery.use"
+            },
+            {
+              "field": "current_owner_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.finite_alignment_game.recovery_memory"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "PROBE"
+            }
+          ]
+        },
+        {
+          "id": "policy.d_alignment_recovery_use.blocked",
+          "reason_ref": "reason.d_actual_canonical_recovery_evidence_and_current_model_binding",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_alignment_recovery.blocked"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "policy.d_alignment_recovery_revalidation",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.d_actual_canonical_recovery_evidence_and_current_model_binding"
+      ],
+      "declared_alternative_refs": [
+        "d_alignment_recovery.revalidate",
+        "d_alignment_recovery.blocked"
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.d_alignment_recovery_equivalent_binding",
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "policy.d_alignment_recovery_revalidation.tier.0",
+          "reason_ref": "reason.d_actual_canonical_recovery_evidence_and_current_model_binding",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_alignment_recovery.revalidate"
+            },
+            {
+              "field": "current_record_bindings_match",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "policy.d_alignment_recovery_revalidation.blocked",
+          "reason_ref": "reason.d_actual_canonical_recovery_evidence_and_current_model_binding",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_alignment_recovery.blocked"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "d_alignment_recovery.revalidate": "rule.d_alignment_recovery_current_record_binding"
+      },
+      "configuration": {
+        "recovery_memory_kind_ref": "RECOVERY_EVIDENCE",
+        "observation_operation_ref": "mechanics.finite_alignment_game.transaction_reconcile",
+        "revalidation_predicate_ref": "revalidates_acquired_alignment_record_under_current_model",
+        "qualification_status_refs": [
+          "supported",
+          "established"
+        ],
+        "revalidation_binding_fields": [
+          "model_ref",
+          "record_digest",
+          "model_digest",
+          "policy_digest",
+          "current_policy_receipt_matches"
+        ],
+        "revalidation_scope_fields": [
+          "parent_goal_ref",
+          "context_ref",
+          "epoch",
+          "evidence_revision_ref",
+          "model_revision_ref"
+        ]
+      }
+    },
+    {
+      "id": "rule.d_alignment_recovery_current_record_binding",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "actual_canonical_transaction_observation_and_equal_current_model_snapshot"
+      ],
+      "reason_refs": [
+        "reason.d_actual_canonical_recovery_evidence_and_current_model_binding"
+      ],
+      "invariants": [
+        "no_reset_simulation_or_dispatch",
+        "no_model_or_law_confirmation",
+        "policy_relevance_is_source_owned",
+        "all_current_models_preserved"
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{revalidation_claim_ref}",
+          "predicate": "revalidates_acquired_alignment_record_under_current_model",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "{memory_term_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "{memory_term_ref}"
+          ],
+          "required_fields": [
+            "revalidation_claim_ref",
+            "memory_term_ref",
+            "model_ref",
+            "record_digest",
+            "model_digest",
+            "policy_digest",
+            "current_policy_receipt_matches",
+            "parent_goal_ref",
+            "context_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "context_ref": "context_ref",
+            "epoch": "epoch",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "attribute_bindings": {
+            "model_ref": "model_ref",
+            "record_digest": "record_digest",
+            "model_digest": "model_digest",
+            "policy_digest": "policy_digest",
+            "current_policy_receipt_matches": "current_policy_receipt_matches"
+          },
+          "static_attributes": {
+            "no_dispatch_or_action_authority": true,
+            "no_model_or_law_confirmation": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.d_alignment_recovery_outcome",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.d_recovery_relevance_is_protocol_and_information_specific"
+      ],
+      "declared_alternative_refs": [
+        "d_alignment_recovery.retain_policy_evidence",
+        "d_alignment_recovery.deterministic_repeat",
+        "d_alignment_recovery.ignored_reset_protocol",
+        "d_alignment_recovery.unknown_information"
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.d_alignment_recovery_equivalent_protocol_evidence",
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.d_alignment_recovery.outcome.0",
+          "reason_ref": "reason.d_recovery_relevance_is_protocol_and_information_specific",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_alignment_recovery.retain_policy_evidence"
+            },
+            {
+              "field": "native_calculation_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "RETAIN"
+            },
+            {
+              "field": "universal_policy_evidence_candidate",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_alignment_recovery.outcome.1",
+          "reason_ref": "reason.d_recovery_relevance_is_protocol_and_information_specific",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_alignment_recovery.deterministic_repeat"
+            },
+            {
+              "field": "native_calculation_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_declared_deterministic_start_can_repeat",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_alignment_recovery.outcome.2",
+          "reason_ref": "reason.d_recovery_relevance_is_protocol_and_information_specific",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_alignment_recovery.ignored_reset_protocol"
+            },
+            {
+              "field": "native_calculation_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "actual_reset_input",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "reset_law_ref",
+              "operator": "equals",
+              "expected": "advertised_but_ignored"
+            },
+            {
+              "field": "observed_physical_state_unchanged",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "actual_reset_matches_supplied_contract",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_alignment_recovery.outcome.3",
+          "reason_ref": "reason.d_recovery_relevance_is_protocol_and_information_specific",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_alignment_recovery.unknown_information"
+            }
+          ]
+        }
+      ],
+      "configuration": {
+        "deterministic_repeat_expected_information": "no_new_response_sample_under_same_supplied_model",
+        "ignored_reset_is_protocol_evidence_not_restoration": true,
+        "different_state_is_not_information_gain_proof": true,
+        "actual_reset_or_action_release_authorized": false
+      }
+    }
+  ]
+}

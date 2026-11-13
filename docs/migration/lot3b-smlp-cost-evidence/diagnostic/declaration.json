@@ -1,0 +1,36 @@
+{
+  "schema": "logos-engine.native-state-cost-diagnostic-declaration.v1",
+  "recordedAt": "2026-11-10T03:12:37.729413+00:00",
+  "status": "declared_before_execution",
+  "generator": {
+    "path": "scripts/profile-native-state-costs.mjs",
+    "sha256": "d4ebd302163ea4d96c6d7699d29a036547f0e82fec35c93c7c3a0c4ee077de55",
+    "bytes": 18208
+  },
+  "protocol": {
+    "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/protocol.md",
+    "sha256": "356656c9bf904d4fd00028960b998948996816b4a7819fc6963507f62d381d47",
+    "bytes": 8338
+  },
+  "cases": {
+    "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/cases.json",
+    "sha256": "85cf4f2981b9c0e1e5e9dbbb53dcefd2314dae49172cae69124fe70ca9201dee",
+    "bytes": 956
+  },
+  "publishedNativeSourceManifest": {
+    "path": "docs/migration/lot3b-smlp-cost-evidence/published/source-manifest.json",
+    "sha256": "01342c154132a0b5f86c59c4be6e41d48800793ba04916c05b9ff94672c61531",
+    "bytes": 29431
+  },
+  "beforeNativeDigest": "391a2797414c0090fa632a2fc13736c7806c1f5fceceafa34e1583dd4ef9e3a9",
+  "afterNativeDigest": "required_as_generator_argument_and_recorded_in_frozen_after_manifest_before_execution",
+  "order": [
+    "published_040_SMLP15",
+    "frozen_corrected_041_SMLP15"
+  ],
+  "sessionsPerSource": 1,
+  "warmupSessions": 0,
+  "cpuSampleIntervalMicroseconds": 1000,
+  "budgetDecision": false,
+  "qualification": "Pre-execution declaration only. Exact generator/protocol/case inputs remain fixed between the two profiles; future correction identity is bound separately by its frozen manifest and the required expectedNativeDigest argument. No measured run, test, replay or build was launched by this declaration."
+}

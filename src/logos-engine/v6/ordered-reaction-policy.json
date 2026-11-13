@@ -1,0 +1,182 @@
+{
+  "schema": "logos-engine.v6.ordered-reaction-policy.v1",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "scope": "Exact three consumed V5 projection rows and complete local V6 ReactionPolicy; not the full V5 production DRM registry.",
+  "sourceHashes": {
+    "agents/yf_arc3_v6/morphology_policy/ordered_reaction/reaction.drm": "8ecd6264bc01cffaf6e1ca0ec940115dfc8bdcd5cf26b6f17a18136ade8d0d3d",
+    "agents/yf_arc3_v5/drm/interaction.drm": "12ce3fd97fb267c893f2241fb71a596c5b3b688324ce04211c52932e9e7b8e94"
+  },
+  "projections": {
+    "projection.exploration.ordered_tip_process_probe": {
+      "id": "projection.exploration.ordered_tip_process_probe",
+      "all_conditions": [
+        {
+          "field": "ordered_tip_square_count",
+          "operator": "greater_than",
+          "expected": 1
+        },
+        {
+          "field": "ordered_tip_unique_ring_present",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "last_action_known_to_produce_scene_effect",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "is_directional_interface_action",
+          "operator": "equals",
+          "expected": false
+        },
+        {
+          "field": "interaction_kind",
+          "operator": "equals",
+          "expected": "discrete"
+        },
+        {
+          "field": "action_execution_count",
+          "operator": "equals",
+          "expected": 0
+        }
+      ],
+      "static_facts": {
+        "dynamic_goal_binding_satisfied": true,
+        "active_goal_ref": "goal.discover_directed_activation",
+        "selection_principle_ref": "principle.ordered_activation_protects_consumable_passage"
+      },
+      "templated_facts": {
+        "premise_claim_refs": [
+          "claim.repeated_oriented_square_and_translated_ring.{candidate_ref}"
+        ],
+        "expected_configuration_or_goal_delta_ref": "expectation.ordered_activation_or_no_effect.{candidate_ref}",
+        "discriminating_experiment_ref": "experiment.discover_ordered_activation.{candidate_ref}",
+        "falsifier_refs": [
+          "falsifier.no_distributed_activation.{candidate_ref}"
+        ]
+      }
+    },
+    "projection.exploration.ordered_tip_intervention": {
+      "id": "projection.exploration.ordered_tip_intervention",
+      "all_conditions": [
+        {
+          "field": "ordered_tip_ring_on_earlier_chain",
+          "operator": "equals",
+          "expected": false
+        },
+        {
+          "field": "ordered_tip_temporal_incidence_count",
+          "operator": "greater_than",
+          "expected": 0
+        }
+      ],
+      "any_conditions": [
+        {
+          "field": "ordered_tip_first_shortest_route_edge",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "static_facts": {
+        "dynamic_goal_binding_satisfied": true,
+        "candidate_attempt_memory_eligible": true,
+        "active_goal_ref": "goal.preserve_later_activation_path",
+        "active_terminal_goal_ref": "goal.preserve_later_activation_path",
+        "subgoal_ref": "subgoal.cover_earlier_activation_chain",
+        "goal_dependency_chain_refs": [
+          "goal.preserve_later_activation_path",
+          "subgoal.cover_earlier_activation_chain"
+        ],
+        "goal_graph_edge_refs": [
+          "edge.later_activation_preservation_requires_early_chain_cover"
+        ],
+        "release_dependency_chain_refines_selected_goal": true,
+        "advances_active_goal_chain": true,
+        "inherited_priority_from_terminal_goal": true,
+        "selection_principle_ref": "principle.ordered_activation_protects_consumable_passage"
+      },
+      "templated_facts": {
+        "premise_claim_refs": [
+          "claim.observed_competing_arrival_order.{candidate_ref}"
+        ],
+        "expected_configuration_or_goal_delta_ref": "expectation.earlier_branch_suppressed_later_passage_preserved.{candidate_ref}",
+        "discriminating_experiment_ref": "experiment.protect_later_incidence.{candidate_ref}",
+        "falsifier_refs": [
+          "falsifier.cover_does_not_suppress_earlier_branch.{candidate_ref}",
+          "falsifier.later_passage_still_unusable.{candidate_ref}"
+        ]
+      }
+    },
+    "projection.exploration.ordered_tip_achieved_cover_activates_process_test": {
+      "id": "projection.exploration.ordered_tip_achieved_cover_activates_process_test",
+      "all_conditions": [
+        {
+          "field": "ordered_tip_temporal_incidence_count",
+          "operator": "greater_than",
+          "expected": 0
+        },
+        {
+          "field": "ordered_tip_ring_on_earlier_chain",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "ordered_tip_same_initial_value_count",
+          "operator": "greater_than",
+          "expected": 0
+        },
+        {
+          "field": "action_ref",
+          "operator": "equals_reference_field",
+          "reference_field": "ordered_tip_packet_action_ref"
+        },
+        {
+          "field": "interaction_measurement_kind",
+          "operator": "equals",
+          "expected": "discrete"
+        },
+        {
+          "field": "attempted_without_effect_in_current_context",
+          "operator": "equals",
+          "expected": false
+        }
+      ],
+      "static_facts": {
+        "parent_continuation_enabled_by_achieved_preparation": true,
+        "current_observed_composition_action_declared": true,
+        "current_targeted_experiment_contract_requested": true,
+        "dynamic_goal_binding_satisfied": true,
+        "candidate_attempt_memory_eligible": true,
+        "active_goal_ref": "goal.test_preserved_later_activation_path",
+        "active_terminal_goal_ref": "goal.preserve_later_activation_path",
+        "subgoal_ref": "goal.test_preserved_later_activation_path",
+        "candidate_goal_role": "instrumental_subgoal",
+        "advances_active_goal_chain": true,
+        "inherited_priority_from_terminal_goal": true,
+        "goal_graph_edge_refs": [
+          "edge.later_activation_preservation_requires_early_chain_cover",
+          "edge.achieved_cover_enables_protected_process_test"
+        ],
+        "goal_dependency_chain_refs": [
+          "goal.preserve_later_activation_path",
+          "subgoal.cover_earlier_activation_chain",
+          "goal.test_preserved_later_activation_path"
+        ],
+        "selection_principle_ref": "principle.ordered_activation_protects_consumable_passage"
+      },
+      "templated_facts": {
+        "premise_claim_refs": [
+          "claim.observed_competing_arrival_order.{candidate_ref}",
+          "claim.current_outline_covers_earlier_chain.{candidate_ref}"
+        ],
+        "expected_configuration_or_goal_delta_ref": "expectation.protected_later_activation_progress.{candidate_ref}",
+        "discriminating_experiment_ref": "experiment.test_current_protected_activation.{candidate_ref}",
+        "falsifier_refs": [
+          "falsifier.cover_does_not_suppress_earlier_branch.{candidate_ref}",
+          "falsifier.later_passage_still_unusable.{candidate_ref}"
+        ]
+      }
+    }
+  }
+}

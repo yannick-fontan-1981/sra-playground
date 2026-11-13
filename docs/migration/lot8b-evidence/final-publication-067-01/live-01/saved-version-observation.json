@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.lot8b.native-sites-saved-version-observation.v1",
+  "recordedAt": "2026-11-12T12:52:37.417Z",
+  "tool": "sites_get_site_version",
+  "result": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_3d6cb049e7d08191882f1d0a7fed8343",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "version_number": 108,
+    "source": {
+      "commit_sha": "8462204043aa368faa7df280d796bb706eb53b38"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000008940820eaea1471f0975f575",
+      "content_hash": "sha256:56eab1570b1cb343a4b40dbb6359a52bfbffcadb1a973a4601175678e5ed54a0",
+      "size_bytes": 30187520,
+      "file_count": 75
+    },
+    "deployment_id": "appgdep_6af5b61c537c8191b0a7252d3de9a4f9"
+  }
+}

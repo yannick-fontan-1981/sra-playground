@@ -1,0 +1,4427 @@
+{
+  "schema": "logos-engine.v50.readonly-candidate-selection.v1",
+  "sourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceFilesVerifiedBeforeAndAfter": 1786,
+  "generator": "scripts/select-v50-next-candidate.py",
+  "generatorSha256": "c51ee108f38c0b43e1e8f7e19836b3f5c49de3dc0947bfd28827c6af52b6e552",
+  "corpus": {
+    "path": "tests/fixtures/v6-linked-packet-initial-public.json.gz",
+    "sha256": "3f82fb0b60a104095623216023054ef438ca4cc516941c671c385ebcbf1e54f2",
+    "views": 100,
+    "recordedActions": 0,
+    "recordedLevelJumps": 0
+  },
+  "executionScope": {
+    "gameHostsLoaded": 0,
+    "gameExecutions": 0,
+    "agentProposals": 0,
+    "acquisitionCalls": 0,
+    "dispatchedActions": 0,
+    "privateStatesRead": 0,
+    "scope": "Retained initial public rows, pure source geometric measurements and the pinned policy admission predicate only."
+  },
+  "sourceFunctionsCalled": [
+    "geometric_observer.components",
+    "geometric_observer.framed_patterns",
+    "field_service_access.paired_controls"
+  ],
+  "transcribedPredicates": [
+    "NestedControlAccess.nested_question: initial compact-motif filter only",
+    "EnvelopeFillAccess.propose: same-extent contrast geometry only; no acquired context assumed"
+  ],
+  "sourceHashes": {
+    "agents/yf_arc3_v6/laya_proto/common_band_transfer.py": "c4f0d6b81520c41a85c2333686d157c21eb4eecc0ee0dad30f060e1af1e1f9ac",
+    "agents/yf_arc3_v6/laya_proto/common_crossed_prefix.py": "f5fc76010a642de99452efe409a85f968839b54bfc37adeefff66fed4e243a4f",
+    "agents/yf_arc3_v6/laya_proto/common_multiscale_constraints.py": "01da7c7f636ed2039a364188c7f4fedb2c4c0a0e8bb6b2ba7f22b1c259eaaf12",
+    "agents/yf_arc3_v6/laya_proto/common_port_assembly.py": "9991068062ff6c92dd702835c499afbd7402fd0f1c87a9a17a761d52d3b3b8fb",
+    "agents/yf_arc3_v6/laya_proto/common_repeated_lines.py": "fb91aa26449a1633a4fa23e7089d8e775645c2775b5c3be295e7c4bcf1ceaaca",
+    "agents/yf_arc3_v6/laya_proto/common_supported_lines.py": "bc1e5599ea5be873f16dd37570fa2e998ec29bcc670dc55433c50c45f8a60fcd",
+    "agents/yf_arc3_v6/laya_proto/envelope_fill_access.py": "99e6bd1fc595b3d6ae2365e5cfbc804432f92385a6c5afce63071f2aee1b37de",
+    "agents/yf_arc3_v6/laya_proto/envelope_fill_observation.py": "891dbb36adc0b44d4ed6dde6f34926271cb5d48fef1464df65960c3e6a812a02",
+    "agents/yf_arc3_v6/laya_proto/field_service_access.py": "cf62c7c8909c29452eb47b8735b50030a570d2c83dc645a0fe5568409e666840",
+    "agents/yf_arc3_v6/laya_proto/geometric_observer.py": "1017b130cb91f799ab5bdb2f26789c2645078d9b9d226469b3915d4a7262eaac",
+    "agents/yf_arc3_v6/laya_proto/marked_collection_access.py": "cd17047cb274db95c33e23e12402289b9b1ac0d3ce4f19adb789e976ee3a4900",
+    "agents/yf_arc3_v6/laya_proto/nested_control_access.py": "0dd84832e0b864bbd1614c86fbf32861288c922969051321b9741b202ff0e7e5",
+    "agents/yf_arc3_v6/laya_proto/observed_program_effects.py": "c4d2dc0c55850f96e2b774950842a1595c4226c7830b00e82e31b031aee81003",
+    "agents/yf_arc3_v6/laya_proto/occurrence_recall_access.py": "16a8af8e5a4742e4f99cd2c4ddbe4d630720c8f26741a1f27f770bd3e5fb3162",
+    "agents/yf_arc3_v6/laya_proto/occurrence_scene.py": "90e98ecc8aee0c6081992d2af8809eac11ef5ae546f8976d62c822685047fb67",
+    "agents/yf_arc3_v6/laya_proto/program_composition_access.py": "cbe5b77563dfb01d947cbbe1e1b27212de29cc4eadda60016b0ff0a1e6b5eb91",
+    "agents/yf_arc3_v6/laya_proto/program_compositions.py": "b09ec775d24e31bb358634c7878196d6fae81e546270801d5e1063ad2c0e20f3",
+    "agents/yf_arc3_v6/laya_proto/program_geometry.py": "a97f7c42f2287f38485edc58059e4c9d2eed1fd2381cc5174bb7fa74d3bf72a5",
+    "agents/yf_arc3_v6/laya_proto/program_input_access.py": "ce43a827e13bbc9697c01cef871be9a326e69b91a7824fdcc7faf8d201c2e735",
+    "agents/yf_arc3_v6/laya_proto/program_respondent_access.py": "bdbe7c6777dc68f0da0018335d7cc45f5b03b7d2c122c103c56080189f9e3c35",
+    "agents/yf_arc3_v6/laya_proto/program_respondent_observations.py": "a46a072364dc0f068c8a1e068f54eb82b5f3c261f0168c6a903e3313d5723e44",
+    "agents/yf_arc3_v6/laya_proto/program_respondent_search.py": "aa5810da9574169f03598af3b871cbc301888fd570597809848ea8a6b2ae2b78",
+    "agents/yf_arc3_v6/laya_proto/radial_ports_access.py": "371a58557394bb0a89dd69f8c5f3d3de79611635f0975a295a3c73410f578e61",
+    "agents/yf_arc3_v6/laya_proto/radial_ports_observation.py": "f670a8ca59689212a4b316f6ded392d76f9ee12153e32d0a34dfbbaf14564528",
+    "agents/yf_arc3_v6/laya_proto/terminal_composition.py": "10ab6ba513d3cc0b4dbf96868d8c716eee449068dba3f2fcdf06d5b35566609e",
+    "agents/yf_arc3_v6/laya_proto/typed_carrier_access.py": "b4d3057035c9c8630257fbc087e1bd1892666fb9d66e7850784fe6d01db9eb99",
+    "agents/yf_arc3_v6/laya_proto/typed_carrier_scene.py": "32d1cdbad550563f82a5567fdfa0e41902ba4cc105de730637fdaa8f941c8bcc",
+    "agents/yf_arc3_v6/laya_proto/typed_material_flow.py": "3c96cf96f10ad9a9a9595d4a43073da801d4523ce6fd2db9c4d0febc2eb15778",
+    "agents/yf_arc3_v6/laya_proto/typed_material_observations.py": "423d0c2f70192a914feae4ac99144c832b08373acf08a8c488510338197fb565",
+    "agents/yf_arc3_v6/laya_proto/typed_pose_access.py": "1be7fa2ef498a1d5952117e7d4a74a1763152340007a63f1e73a4ee93eb3fd92",
+    "agents/yf_arc3_v6/laya_proto/typed_pose_observations.py": "62c01915ded4d0bd5ed7ece56347011ec0e70a244a596564227b9504914d53f9"
+  },
+  "strategySha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+  "policy": {
+    "nested_control_question": {
+      "no_visible_effect_contract": {
+        "disposition": "local_no_visible_effect",
+        "meaning": "An exact point command with no visible pixel change and no official progress closes only this measured probe. Selection and impossibility remain unacquired; an invisible control remains unknown. Retain epoch, observation evidence, full frame, motif, point and payload. Reject the same offer while these premises remain unchanged. Re-examine other declared composition families; no unscoped input fallback is licensed by this return. A click-to-motion experiment needs its own explicit hypothesis, current binding and falsifier.",
+        "decline_unscoped_families": [
+          "returned_branch_contrast",
+          "observed_frontier"
+        ]
+      },
+      "roles": [
+        "current_compact_core",
+        "measured_closed_enclosure",
+        "unknown_control",
+        "local_effect",
+        "distant_effect"
+      ],
+      "selection_order": "unique_minimum_measured_enclosure_area",
+      "maximum_extent_fraction": 0.25,
+      "minimum_core_area": 2,
+      "question": "Test the unique smallest measured compact solid core within a measured closed two-value square enclosure. Its control role is hypothetical. Bind one exact point, preserve local and distant changes as separate observations, and close at the first unknown effect before inferring a resource, quantity, relay or terminal role."
+    },
+    "envelope_fill_question": {
+      "roles": [
+        "persistent_envelope",
+        "observed_content_band",
+        "conditional_control",
+        "alternative_framed_control",
+        "unknown_resource_service"
+      ],
+      "question": "Measure current pixel-band extents inside retained public supports. One repeat discriminates accumulation from a one-off effect; an independently framed control with different glyph tests another transformation. Opposed measured changes do not establish a universal inverse. Preserve unknown quantities, capacity, ordering, relay and release laws; seal each first unknown response and retain all evidence."
+    },
+    "field_service_question": {
+      "roles": [
+        "persistent_field",
+        "novel_content_replacement",
+        "correlated_field",
+        "spatially_linked_paired_control",
+        "conditional_service"
+      ],
+      "question": "After measured restoration, test isolation of a correlated field that did not produce the distinct replacement. Prefer the other observed replacement as an exploration target, not a terminal role. A paired mirror motif on its measured axis is only a control hypothesis. Reconcile its local response, then test the previously observed input under changed conditions; all quantities, capacities and passage laws remain unknown."
+    },
+    "field_service_transfer": {
+      "roles": [
+        "retained_shape",
+        "current_service_control",
+        "rebound_receiver",
+        "changed_appearance_hypothesis",
+        "protected_contribution",
+        "unrecognized_intermediate"
+      ],
+      "question": "Rebind the measured relay and receiver shapes from the successful public epoch to current occurrences. Revalidate the retained control orientation and conditional input through current returns. A receiver without its initial background is only a fullness hypothesis; protection is revisable. If receivers match but the intermediate does not, prepare each receiver control under its current measured envelope before testing the known input against the unknown dependency. Reconcile every new field response; do not infer capacity, release threshold, duration or terminal completion from appearance."
+    }
+  },
+  "entryAudit": {
+    "path": "docs/migration/v6-entry-point-progress.json",
+    "sha256": "52d1a003998f7d18e8c5119472bc3aaba27b9fc46c70abbb64a3ac243ccd3f32",
+    "implementation": "logos-engine.typescript.v6.native-migration/0.20.0",
+    "entry": {
+      "question": "field_service_composition",
+      "family": null,
+      "status": "pending"
+    }
+  },
+  "priorReadonlyAgreement": {
+    "path": "docs/migration/native-campaigns-v49/candidate-selection.json",
+    "sha256": "405546ae8c6863ff3bf75e8d9f0625a60e951a09b97f6dc427f3a32bfe08a39e",
+    "views": 100,
+    "fields": [
+      "nestedControlPlan.selected",
+      "pairedControls"
+    ],
+    "exact": true
+  },
+  "counts": {
+    "initial_compact_motif": 11,
+    "paired_motifs": 22,
+    "compact_motif_and_pairs": 2,
+    "compact_pairs_and_unique_contrast": 1
+  },
+  "results": [
+    {
+      "game": "AR25",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:dcb73927160522c2",
+      "frame_digest": "dcb73927160522c26e2655d31ead221e6da6aab818037d20388bbf46e9afa1b0",
+      "initial_compact_motif": null,
+      "compact_candidates": [
+        {
+          "frame_ref": "component-5",
+          "bbox": [
+            36,
+            15,
+            44,
+            23
+          ],
+          "point": [
+            40,
+            19
+          ],
+          "core_area": 36,
+          "core_scale": 6,
+          "core_palette": 9
+        },
+        {
+          "frame_ref": "component-11",
+          "bbox": [
+            51,
+            45,
+            59,
+            53
+          ],
+          "point": [
+            55,
+            49
+          ],
+          "core_area": 36,
+          "core_scale": 6,
+          "core_palette": 9
+        }
+      ],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "BP35",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:73ed3968e48e2ac7",
+      "frame_digest": "73ed3968e48e2ac7b6d4a41c2a408abeba6f9ce1c493ad03ce2dd512b0be55bd",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [
+        {
+          "bbox": [
+            13,
+            1,
+            23,
+            5
+          ],
+          "point": [
+            18,
+            3
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-5",
+            "component-8"
+          ]
+        },
+        {
+          "bbox": [
+            19,
+            1,
+            29,
+            5
+          ],
+          "point": [
+            24,
+            3
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-8",
+            "component-11"
+          ]
+        },
+        {
+          "bbox": [
+            31,
+            13,
+            41,
+            17
+          ],
+          "point": [
+            36,
+            15
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-54",
+            "component-57"
+          ]
+        },
+        {
+          "bbox": [
+            37,
+            13,
+            47,
+            17
+          ],
+          "point": [
+            42,
+            15
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-57",
+            "component-60"
+          ]
+        },
+        {
+          "bbox": [
+            43,
+            13,
+            53,
+            17
+          ],
+          "point": [
+            48,
+            15
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-60",
+            "component-63"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "CD82",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:824ef203a4308533",
+      "frame_digest": "824ef203a4308533d58fd0b7207d4bb4396f1ac1b6ed8bf4a5160259c94a6904",
+      "initial_compact_motif": null,
+      "compact_candidates": [
+        {
+          "frame_ref": "component-3",
+          "bbox": [
+            35,
+            2,
+            39,
+            6
+          ],
+          "point": [
+            37,
+            4
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 0
+        },
+        {
+          "frame_ref": "component-4",
+          "bbox": [
+            41,
+            2,
+            45,
+            6
+          ],
+          "point": [
+            43,
+            4
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 15
+        }
+      ],
+      "paired_motifs": [
+        {
+          "bbox": [
+            35,
+            2,
+            45,
+            6
+          ],
+          "point": [
+            40,
+            4
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-3",
+            "component-4"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "CN04",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:76e9c99bc22f6b77",
+      "frame_digest": "76e9c99bc22f6b778aa1edd6bf938de351aedb10016b72f95bb67d75490ba0e7",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "DC22",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:3882264d7cb6462e",
+      "frame_digest": "3882264d7cb6462eb124e8cfc3c3920d25a499167b2b0436cf62c1d753e12d4a",
+      "initial_compact_motif": null,
+      "compact_candidates": [
+        {
+          "frame_ref": "component-7",
+          "bbox": [
+            22,
+            18,
+            27,
+            23
+          ],
+          "point": [
+            24,
+            20
+          ],
+          "core_area": 4,
+          "core_scale": 2,
+          "core_palette": 11
+        },
+        {
+          "frame_ref": "component-32",
+          "bbox": [
+            8,
+            38,
+            13,
+            43
+          ],
+          "point": [
+            10,
+            40
+          ],
+          "core_area": 4,
+          "core_scale": 2,
+          "core_palette": 14
+        }
+      ],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "FT09",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:b537cde839031c14",
+      "frame_digest": "b537cde839031c143072b1b1fd7612179a55b4a8ff85a1c485e3be3fd3b33211",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "G50T",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:f79ab0e9d856fdf8",
+      "frame_digest": "f79ab0e9d856fdf82c39b63b513bc997ebe8313394732f8318bd2815d639e586",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "KA59",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:a5391f47a4b5f63f",
+      "frame_digest": "a5391f47a4b5f63feb8af396ab4b0bbdd2f80a18a0f19ffe6f128765e9d75e2c",
+      "initial_compact_motif": null,
+      "compact_candidates": [
+        {
+          "frame_ref": "component-4",
+          "bbox": [
+            44,
+            26,
+            48,
+            30
+          ],
+          "point": [
+            46,
+            28
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 1
+        },
+        {
+          "frame_ref": "component-11",
+          "bbox": [
+            11,
+            32,
+            15,
+            36
+          ],
+          "point": [
+            13,
+            34
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 1
+        }
+      ],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "LF52",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:8c3509a81bc0b33c",
+      "frame_digest": "8c3509a81bc0b33cdcadefd63b15f8d8259dcfc4f6f12c00a1ff598d849bc4ff",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "LP85",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:10d339c4ff95d67f",
+      "frame_digest": "10d339c4ff95d67f9c94ded838ab2080df929551e32ae1443ffa888cd580632a",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "LS20",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:f530cf6adb4a6d0f",
+      "frame_digest": "f530cf6adb4a6d0fe87baa072ecf62be621169f9ef3b0baf09539904c5f4220f",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "M0R0",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:bb1341069e852a7c",
+      "frame_digest": "bb1341069e852a7c58ff55efadf07481d91af3c13f11fd3d2e791b9c061074c9",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "R11L",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:130ccc591dbbae50",
+      "frame_digest": "130ccc591dbbae50cc3698a6746ac101dcfa7a83f87135ae411ed7e863358d1f",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "RE86",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:86e77cb5586f7c72",
+      "frame_digest": "86e77cb5586f7c726877e5b5e100f6a5e7904970a02d0be64f15550162ed399f",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "S5I5",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:0de899ef426dee32",
+      "frame_digest": "0de899ef426dee32a5ae69f04d75484537ada1c8a01db97fc25b240227139335",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [
+        {
+          "bbox": [
+            37,
+            19,
+            47,
+            23
+          ],
+          "point": [
+            42,
+            21
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-10",
+            "component-12"
+          ]
+        },
+        {
+          "bbox": [
+            22,
+            36,
+            26,
+            46
+          ],
+          "point": [
+            24,
+            41
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-19",
+            "component-22"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "SB26",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:8cc17052ea2038b2",
+      "frame_digest": "8cc17052ea2038b2a490b9e2c224d25ed1ec8a167f5f28bc0b0f2abe01ac3f01",
+      "initial_compact_motif": null,
+      "compact_candidates": [
+        {
+          "frame_ref": "component-2",
+          "bbox": [
+            18,
+            1,
+            23,
+            6
+          ],
+          "point": [
+            20,
+            3
+          ],
+          "core_area": 16,
+          "core_scale": 4,
+          "core_palette": 5
+        },
+        {
+          "frame_ref": "component-3",
+          "bbox": [
+            25,
+            1,
+            30,
+            6
+          ],
+          "point": [
+            27,
+            3
+          ],
+          "core_area": 16,
+          "core_scale": 4,
+          "core_palette": 5
+        },
+        {
+          "frame_ref": "component-4",
+          "bbox": [
+            32,
+            1,
+            37,
+            6
+          ],
+          "point": [
+            34,
+            3
+          ],
+          "core_area": 16,
+          "core_scale": 4,
+          "core_palette": 5
+        },
+        {
+          "frame_ref": "component-5",
+          "bbox": [
+            39,
+            1,
+            44,
+            6
+          ],
+          "point": [
+            41,
+            3
+          ],
+          "core_area": 16,
+          "core_scale": 4,
+          "core_palette": 5
+        }
+      ],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "SC25",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:518653148c1631c7",
+      "frame_digest": "518653148c1631c7757a723e0e9f144e62e09fce58cdd5648881c2a8b4c8211c",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "SK48",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:e4bbd31c5eaa4d7b",
+      "frame_digest": "e4bbd31c5eaa4d7b7639cb3467234f506ef19f6221b357062f7f70a79936c8f2",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "SP80",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:0ba719661c41cd3d",
+      "frame_digest": "0ba719661c41cd3db3499afa4ec373d1ae79386e50c866e2487946b59a255b1b",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "SU15",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:e04c9e9cd2bdb080",
+      "frame_digest": "e04c9e9cd2bdb08059068a08a978791e5772f5fa4433ac90d22453b8ce96c82e",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "TN36",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:3e8702e648bb9755",
+      "frame_digest": "3e8702e648bb97558ba2787491f62222b7148b397a9176f60c3ce18d38a62f8b",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "TR87",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:bf60e2953965adca",
+      "frame_digest": "bf60e2953965adca1444960d2bf267bab440c2d18234c0a245ce214ea0982174",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "TU93",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:23357766b7528ba5",
+      "frame_digest": "23357766b7528ba534149f7208fb60ca49ff5ef82d5df20d3d48a4f30f3c0ad0",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "VC33",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:fdde551e3fd269f6",
+      "frame_digest": "fdde551e3fd269f62e14eb380d2244aefb8f8230f3af72741a2d89acbf1fe414",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "WA30",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:22f3ccd4739a85ce",
+      "frame_digest": "22f3ccd4739a85cebbd807dc32cee300c3e43630d38a8422ccf48e81fba53e82",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "SKBN",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:397457b492afea44",
+      "frame_digest": "397457b492afea44a57c288c30be2deca0273bea7b0e1478c8a0050994c69316",
+      "initial_compact_motif": {
+        "frame_ref": "component-102",
+        "bbox": [
+          21,
+          18,
+          26,
+          23
+        ],
+        "point": [
+          23,
+          20
+        ],
+        "core_area": 4,
+        "core_scale": 2,
+        "core_palette": 12
+      },
+      "compact_candidates": [
+        {
+          "frame_ref": "component-102",
+          "bbox": [
+            21,
+            18,
+            26,
+            23
+          ],
+          "point": [
+            23,
+            20
+          ],
+          "core_area": 4,
+          "core_scale": 2,
+          "core_palette": 12
+        }
+      ],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "CLRS",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:e2b4355c3cbb57a2",
+      "frame_digest": "e2b4355c3cbb57a22e040fe0acfb5ae7a6f7b71c73584dac7a1b1b14efa03c88",
+      "initial_compact_motif": {
+        "frame_ref": "component-6",
+        "bbox": [
+          26,
+          17,
+          37,
+          28
+        ],
+        "point": [
+          31,
+          22
+        ],
+        "core_area": 100,
+        "core_scale": 10,
+        "core_palette": 5
+      },
+      "compact_candidates": [
+        {
+          "frame_ref": "component-6",
+          "bbox": [
+            26,
+            17,
+            37,
+            28
+          ],
+          "point": [
+            31,
+            22
+          ],
+          "core_area": 100,
+          "core_scale": 10,
+          "core_palette": 5
+        }
+      ],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "SWCH",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:2a01379c598b3d70",
+      "frame_digest": "2a01379c598b3d702d63422050272988fe3438f432111386b085561b5c32d65d",
+      "initial_compact_motif": {
+        "frame_ref": "component-7",
+        "bbox": [
+          39,
+          32,
+          43,
+          36
+        ],
+        "point": [
+          41,
+          34
+        ],
+        "core_area": 9,
+        "core_scale": 3,
+        "core_palette": 5
+      },
+      "compact_candidates": [
+        {
+          "frame_ref": "component-7",
+          "bbox": [
+            39,
+            32,
+            43,
+            36
+          ],
+          "point": [
+            41,
+            34
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 5
+        }
+      ],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "STCK",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:0aff2f0878f2054d",
+      "frame_digest": "0aff2f0878f2054d021b294f4972e1450ef08479ba80af7cca138998bc341521",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "HANO",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:b98de996d71bd158",
+      "frame_digest": "b98de996d71bd15851a87548cec2dfe58106d84aa35339aad5963407bdbaaf2e",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [
+        {
+          "bbox": [
+            43,
+            46,
+            55,
+            56
+          ],
+          "point": [
+            49,
+            51
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-7",
+            "component-9"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "SEQN",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:90b98f0d2993a933",
+      "frame_digest": "90b98f0d2993a9338e5446a775a38e880770aabbdf7f5ff297aed6f6c14252bc",
+      "initial_compact_motif": {
+        "frame_ref": "component-9",
+        "bbox": [
+          33,
+          27,
+          37,
+          31
+        ],
+        "point": [
+          35,
+          29
+        ],
+        "core_area": 9,
+        "core_scale": 3,
+        "core_palette": 5
+      },
+      "compact_candidates": [
+        {
+          "frame_ref": "component-9",
+          "bbox": [
+            33,
+            27,
+            37,
+            31
+          ],
+          "point": [
+            35,
+            29
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 5
+        }
+      ],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [
+        {
+          "frame_ref": "component-10",
+          "bbox": [
+            41,
+            27,
+            45,
+            31
+          ],
+          "point": [
+            43,
+            29
+          ],
+          "core_area": 12,
+          "core_scale": 1,
+          "core_palette": 5
+        }
+      ],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "MIND",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:38a98b347eb0eff5",
+      "frame_digest": "38a98b347eb0eff5c6715e6e34925f0a95bc1cb499c9865f1ddfb7fbc2011e19",
+      "initial_compact_motif": {
+        "frame_ref": "component-8",
+        "bbox": [
+          1,
+          51,
+          7,
+          57
+        ],
+        "point": [
+          4,
+          54
+        ],
+        "core_area": 25,
+        "core_scale": 5,
+        "core_palette": 8
+      },
+      "compact_candidates": [
+        {
+          "frame_ref": "component-8",
+          "bbox": [
+            1,
+            51,
+            7,
+            57
+          ],
+          "point": [
+            4,
+            54
+          ],
+          "core_area": 25,
+          "core_scale": 5,
+          "core_palette": 8
+        }
+      ],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "MEMO",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:27ba4cd855a64b3d",
+      "frame_digest": "27ba4cd855a64b3d790f42ff92a5a4edce4d661801613b2583acd119432c7211",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "REGN",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:47aa13d6af55af3e",
+      "frame_digest": "47aa13d6af55af3e0efd065ed7eacc0793512ef6c920614ef326caa1d92f6662",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [
+        {
+          "bbox": [
+            1,
+            60,
+            11,
+            62
+          ],
+          "point": [
+            6,
+            61
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-41",
+            "component-43"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "CONN",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:8582db3762417036",
+      "frame_digest": "8582db376241703619ffe1d10270b7cc526be874c62085c23b4f31e89979bee7",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "DNOI",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:fe8185baa681f8b6",
+      "frame_digest": "fe8185baa681f8b64efdc63295c621b807d85c690745d8d564aa59e0d6c192f1",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "SYME",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:a8e7722fbd6f8241",
+      "frame_digest": "a8e7722fbd6f8241e802a54867e6428e28e7f7178ce3a114ddc3c7302f7294ef",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "GORI",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:b7789fb9ae19a319",
+      "frame_digest": "b7789fb9ae19a319ec1ea7fc4a2b5d1c2032885c185218e4bdcb3f93bf61207c",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "KEYD",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:1968dffaf6bef933",
+      "frame_digest": "1968dffaf6bef93353bc2796ce9df0ebb70698d8baf58f7da9b0783c6aa7f5ee",
+      "initial_compact_motif": {
+        "frame_ref": "component-76",
+        "bbox": [
+          43,
+          58,
+          47,
+          62
+        ],
+        "point": [
+          45,
+          60
+        ],
+        "core_area": 9,
+        "core_scale": 3,
+        "core_palette": 4
+      },
+      "compact_candidates": [
+        {
+          "frame_ref": "component-76",
+          "bbox": [
+            43,
+            58,
+            47,
+            62
+          ],
+          "point": [
+            45,
+            60
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 4
+        }
+      ],
+      "paired_motifs": [
+        {
+          "bbox": [
+            19,
+            26,
+            20,
+            30
+          ],
+          "point": [
+            19,
+            28
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-33",
+            "component-42"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "LOGI",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:93695febfcefd196",
+      "frame_digest": "93695febfcefd196d6fbbcff9f117a5ce5de86d17055a4da802b798a61030999",
+      "initial_compact_motif": null,
+      "compact_candidates": [
+        {
+          "frame_ref": "component-38",
+          "bbox": [
+            3,
+            48,
+            7,
+            52
+          ],
+          "point": [
+            5,
+            50
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 3
+        },
+        {
+          "frame_ref": "component-39",
+          "bbox": [
+            25,
+            48,
+            29,
+            52
+          ],
+          "point": [
+            27,
+            50
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 3
+        },
+        {
+          "frame_ref": "component-40",
+          "bbox": [
+            47,
+            48,
+            51,
+            52
+          ],
+          "point": [
+            49,
+            50
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 3
+        }
+      ],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "PORT",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:3e7e40321ad15433",
+      "frame_digest": "3e7e40321ad15433fc75d6adecc02c58d7d5c16546c8f49f14c2883710f9f9e3",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "FOGW",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:68605777340ade0d",
+      "frame_digest": "68605777340ade0dfabc54e2d9f94160754d942647a210b6304c914a40521910",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "LIFE",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:9cf0321c97cd4ec7",
+      "frame_digest": "9cf0321c97cd4ec754393e834b157de7e7cde599fe0974595ae4ffdba7d8ab3c",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "VALV",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:cde1b5db276f7597",
+      "frame_digest": "cde1b5db276f7597a9cd17df4a7fd8b23aa162a91794fdd6d9b1d33233614cb4",
+      "initial_compact_motif": {
+        "frame_ref": "component-37",
+        "bbox": [
+          30,
+          48,
+          34,
+          52
+        ],
+        "point": [
+          32,
+          50
+        ],
+        "core_area": 9,
+        "core_scale": 3,
+        "core_palette": 0
+      },
+      "compact_candidates": [
+        {
+          "frame_ref": "component-11",
+          "bbox": [
+            10,
+            20,
+            18,
+            28
+          ],
+          "point": [
+            14,
+            24
+          ],
+          "core_area": 49,
+          "core_scale": 7,
+          "core_palette": 3
+        },
+        {
+          "frame_ref": "component-37",
+          "bbox": [
+            30,
+            48,
+            34,
+            52
+          ],
+          "point": [
+            32,
+            50
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 0
+        }
+      ],
+      "paired_motifs": [
+        {
+          "bbox": [
+            27,
+            2,
+            37,
+            11
+          ],
+          "point": [
+            32,
+            6
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-2",
+            "component-4"
+          ]
+        },
+        {
+          "bbox": [
+            13,
+            31,
+            15,
+            35
+          ],
+          "point": [
+            14,
+            33
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-20",
+            "component-32"
+          ]
+        },
+        {
+          "bbox": [
+            49,
+            31,
+            51,
+            35
+          ],
+          "point": [
+            50,
+            33
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-21",
+            "component-33"
+          ]
+        },
+        {
+          "bbox": [
+            1,
+            59,
+            11,
+            62
+          ],
+          "point": [
+            6,
+            60
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-44",
+            "component-45"
+          ]
+        },
+        {
+          "bbox": [
+            7,
+            59,
+            17,
+            62
+          ],
+          "point": [
+            12,
+            60
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-45",
+            "component-46"
+          ]
+        },
+        {
+          "bbox": [
+            13,
+            59,
+            23,
+            62
+          ],
+          "point": [
+            18,
+            60
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-46",
+            "component-47"
+          ]
+        },
+        {
+          "bbox": [
+            19,
+            59,
+            29,
+            62
+          ],
+          "point": [
+            24,
+            60
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-47",
+            "component-48"
+          ]
+        },
+        {
+          "bbox": [
+            25,
+            59,
+            35,
+            62
+          ],
+          "point": [
+            30,
+            60
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-48",
+            "component-49"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [
+        {
+          "frame_ref": "component-36",
+          "bbox": [
+            6,
+            48,
+            10,
+            52
+          ],
+          "point": [
+            8,
+            50
+          ],
+          "core_area": 5,
+          "core_scale": 1,
+          "core_palette": 0
+        }
+      ],
+      "eligible_initial_conjunction": true,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "SIGN",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:bbef948cb4925d82",
+      "frame_digest": "bbef948cb4925d829a7f5d95461d85ec055d1d78afa9ad728ad04f52ed3739b5",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "CASC",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:8c751a15869573d1",
+      "frame_digest": "8c751a15869573d10359498d60bf0d9b344fbdbb71ecf05056fa864ae313a0b1",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "CRAF",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:2731a599e06fc2a4",
+      "frame_digest": "2731a599e06fc2a4c77cbcabfd56c7435bb2460502797e671265a1197286578b",
+      "initial_compact_motif": null,
+      "compact_candidates": [
+        {
+          "frame_ref": "component-19",
+          "bbox": [
+            2,
+            9,
+            6,
+            13
+          ],
+          "point": [
+            4,
+            11
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 11
+        },
+        {
+          "frame_ref": "component-27",
+          "bbox": [
+            44,
+            12,
+            48,
+            16
+          ],
+          "point": [
+            46,
+            14
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 5
+        },
+        {
+          "frame_ref": "component-28",
+          "bbox": [
+            52,
+            12,
+            56,
+            16
+          ],
+          "point": [
+            54,
+            14
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 5
+        }
+      ],
+      "paired_motifs": [
+        {
+          "bbox": [
+            16,
+            6,
+            35,
+            22
+          ],
+          "point": [
+            25,
+            14
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-9",
+            "component-32"
+          ]
+        },
+        {
+          "bbox": [
+            47,
+            20,
+            53,
+            22
+          ],
+          "point": [
+            50,
+            21
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-41",
+            "component-42"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "ESCT",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:cb790f27dc27d7dc",
+      "frame_digest": "cb790f27dc27d7dcc8a3d1628c47b76477a44340e54c5639fb6dee4e7c8b7bee",
+      "initial_compact_motif": {
+        "frame_ref": "component-15",
+        "bbox": [
+          17,
+          15,
+          22,
+          20
+        ],
+        "point": [
+          19,
+          17
+        ],
+        "core_area": 16,
+        "core_scale": 4,
+        "core_palette": 3
+      },
+      "compact_candidates": [
+        {
+          "frame_ref": "component-15",
+          "bbox": [
+            17,
+            15,
+            22,
+            20
+          ],
+          "point": [
+            19,
+            17
+          ],
+          "core_area": 16,
+          "core_scale": 4,
+          "core_palette": 3
+        }
+      ],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "LS19",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:19e99dde912cee08",
+      "frame_digest": "19e99dde912cee08a4af4335e108a6e015c69930f09e3187badbee1cfce79df0",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "FITE",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:d87fbc49803097ac",
+      "frame_digest": "d87fbc49803097ac0ba44180e25bdb74e570f659e14320faedc958eaeb4385d1",
+      "initial_compact_motif": {
+        "frame_ref": "component-2",
+        "bbox": [
+          9,
+          25,
+          13,
+          29
+        ],
+        "point": [
+          11,
+          27
+        ],
+        "core_area": 9,
+        "core_scale": 3,
+        "core_palette": 8
+      },
+      "compact_candidates": [
+        {
+          "frame_ref": "component-2",
+          "bbox": [
+            9,
+            25,
+            13,
+            29
+          ],
+          "point": [
+            11,
+            27
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 8
+        }
+      ],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "AS66",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:39bddf2920c3e13f",
+      "frame_digest": "39bddf2920c3e13f28141733944f4c45ff9b67f56c82a0069b7ae8064eeb01c6",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "GARE",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:372d5629c8032c12",
+      "frame_digest": "372d5629c8032c12bb6be9150b40108818a3af65d203882cf571cd065376ee8c",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "COLM",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:9d4a426749776752",
+      "frame_digest": "9d4a4267497767523469da17ab2b360ec596e6586b14f76669f21a35ebc12ef6",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "GABA",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:dad2631650c92187",
+      "frame_digest": "dad2631650c921872de1c150ac09acb85d27679acb68414d4b8b77670559c0d6",
+      "initial_compact_motif": null,
+      "compact_candidates": [
+        {
+          "frame_ref": "component-4",
+          "bbox": [
+            47,
+            6,
+            51,
+            10
+          ],
+          "point": [
+            49,
+            8
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 15
+        },
+        {
+          "frame_ref": "component-20",
+          "bbox": [
+            12,
+            16,
+            16,
+            20
+          ],
+          "point": [
+            14,
+            18
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 14
+        },
+        {
+          "frame_ref": "component-78",
+          "bbox": [
+            12,
+            46,
+            16,
+            50
+          ],
+          "point": [
+            14,
+            48
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 13
+        }
+      ],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "FUIT",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:17c5c4147e162332",
+      "frame_digest": "17c5c4147e1623328f2b519b60befd3f96eb71e4902ae84a542f25b597f261ed",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "ETAG",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:bf64cd6cbf5bc15a",
+      "frame_digest": "bf64cd6cbf5bc15a9b00f0270ceb7ce53217119e180463a4307d97f0c9c9fc2a",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "TICT",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:a672cd7ff15e02d1",
+      "frame_digest": "a672cd7ff15e02d16aaaed5a5afaf7fe0e4c0e6577cda214e9edeb950d15a6ae",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "GLOB",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:ba5d996decc75763",
+      "frame_digest": "ba5d996decc75763ca4b613ce00433341e5d95f6a656a487341aacbdd92f23ae",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [
+        {
+          "bbox": [
+            2,
+            40,
+            20,
+            48
+          ],
+          "point": [
+            11,
+            44
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-278",
+            "component-279"
+          ]
+        },
+        {
+          "bbox": [
+            12,
+            40,
+            30,
+            48
+          ],
+          "point": [
+            21,
+            44
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-279",
+            "component-280"
+          ]
+        },
+        {
+          "bbox": [
+            22,
+            40,
+            40,
+            48
+          ],
+          "point": [
+            31,
+            44
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-280",
+            "component-281"
+          ]
+        },
+        {
+          "bbox": [
+            32,
+            40,
+            50,
+            48
+          ],
+          "point": [
+            41,
+            44
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-281",
+            "component-282"
+          ]
+        },
+        {
+          "bbox": [
+            42,
+            40,
+            60,
+            48
+          ],
+          "point": [
+            51,
+            44
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-282",
+            "component-283"
+          ]
+        },
+        {
+          "bbox": [
+            2,
+            52,
+            20,
+            60
+          ],
+          "point": [
+            11,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-302",
+            "component-303"
+          ]
+        },
+        {
+          "bbox": [
+            12,
+            52,
+            30,
+            60
+          ],
+          "point": [
+            21,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-303",
+            "component-304"
+          ]
+        },
+        {
+          "bbox": [
+            22,
+            52,
+            40,
+            60
+          ],
+          "point": [
+            31,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-304",
+            "component-305"
+          ]
+        },
+        {
+          "bbox": [
+            32,
+            52,
+            50,
+            60
+          ],
+          "point": [
+            41,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-305",
+            "component-306"
+          ]
+        },
+        {
+          "bbox": [
+            42,
+            52,
+            60,
+            60
+          ],
+          "point": [
+            51,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-306",
+            "component-307"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "KATA",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:6b968a6e6ad21fd1",
+      "frame_digest": "6b968a6e6ad21fd191e6e71b41ec2062fab66dd436551e5c7615bb8a262709de",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [
+        {
+          "bbox": [
+            1,
+            53,
+            19,
+            59
+          ],
+          "point": [
+            10,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-13",
+            "component-14"
+          ]
+        },
+        {
+          "bbox": [
+            22,
+            53,
+            40,
+            59
+          ],
+          "point": [
+            31,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-15",
+            "component-16"
+          ]
+        },
+        {
+          "bbox": [
+            32,
+            53,
+            50,
+            59
+          ],
+          "point": [
+            41,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-16",
+            "component-17"
+          ]
+        },
+        {
+          "bbox": [
+            42,
+            53,
+            60,
+            59
+          ],
+          "point": [
+            51,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-17",
+            "component-18"
+          ]
+        },
+        {
+          "bbox": [
+            23,
+            54,
+            29,
+            58
+          ],
+          "point": [
+            26,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-26",
+            "component-28"
+          ]
+        },
+        {
+          "bbox": [
+            33,
+            54,
+            39,
+            58
+          ],
+          "point": [
+            36,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-29",
+            "component-31"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "HOLE",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:e4e1a575a19b1589",
+      "frame_digest": "e4e1a575a19b1589791565ca108e306f748ddfaa2101cf6f0b8dd09d9c1f2577",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "GRAV",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:864f1740139121cf",
+      "frame_digest": "864f1740139121cfca5655e1c6162fb94eddf1032b314ff1e81a6b30606b8193",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "VOIS",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:d1bacc3cc20afcc8",
+      "frame_digest": "d1bacc3cc20afcc86908da990af89337b1f06efe6851c9a1d234ce54afbede01",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [
+        {
+          "bbox": [
+            8,
+            50,
+            12,
+            51
+          ],
+          "point": [
+            10,
+            50
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-11",
+            "component-13"
+          ]
+        },
+        {
+          "bbox": [
+            8,
+            50,
+            12,
+            60
+          ],
+          "point": [
+            10,
+            55
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-12",
+            "component-36"
+          ]
+        },
+        {
+          "bbox": [
+            2,
+            55,
+            3,
+            59
+          ],
+          "point": [
+            2,
+            57
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-26",
+            "component-41"
+          ]
+        },
+        {
+          "bbox": [
+            17,
+            55,
+            18,
+            59
+          ],
+          "point": [
+            17,
+            57
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-31",
+            "component-44"
+          ]
+        },
+        {
+          "bbox": [
+            8,
+            59,
+            12,
+            60
+          ],
+          "point": [
+            10,
+            59
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-45",
+            "component-46"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "POLA",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:c3a7becb1324bb0c",
+      "frame_digest": "c3a7becb1324bb0c32fd017492b17ca549984223997a3b0d9e9e90a4f81e9490",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "ELAS",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:56f3647e10bd9638",
+      "frame_digest": "56f3647e10bd9638197258bdfccd3a6050cd3f80c781e70c0f28bb80f9be0c81",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "TRIA",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:a3db269ad73475b8",
+      "frame_digest": "a3db269ad73475b813151f988b54a441394e6903a148f291a88f454d4a150be7",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "SERI",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:a3d9e5b6d56eb9f7",
+      "frame_digest": "a3d9e5b6d56eb9f748d1aeb08b87e47ac5df4ebabf02c279692ba2eebecaaefe",
+      "initial_compact_motif": null,
+      "compact_candidates": [
+        {
+          "frame_ref": "component-6",
+          "bbox": [
+            53,
+            1,
+            61,
+            9
+          ],
+          "point": [
+            57,
+            5
+          ],
+          "core_area": 49,
+          "core_scale": 7,
+          "core_palette": 5
+        },
+        {
+          "frame_ref": "component-7",
+          "bbox": [
+            4,
+            2,
+            10,
+            8
+          ],
+          "point": [
+            7,
+            5
+          ],
+          "core_area": 25,
+          "core_scale": 5,
+          "core_palette": 8
+        },
+        {
+          "frame_ref": "component-8",
+          "bbox": [
+            14,
+            2,
+            20,
+            8
+          ],
+          "point": [
+            17,
+            5
+          ],
+          "core_area": 25,
+          "core_scale": 5,
+          "core_palette": 9
+        },
+        {
+          "frame_ref": "component-9",
+          "bbox": [
+            24,
+            2,
+            30,
+            8
+          ],
+          "point": [
+            27,
+            5
+          ],
+          "core_area": 25,
+          "core_scale": 5,
+          "core_palette": 8
+        },
+        {
+          "frame_ref": "component-10",
+          "bbox": [
+            34,
+            2,
+            40,
+            8
+          ],
+          "point": [
+            37,
+            5
+          ],
+          "core_area": 25,
+          "core_scale": 5,
+          "core_palette": 9
+        },
+        {
+          "frame_ref": "component-11",
+          "bbox": [
+            44,
+            2,
+            50,
+            8
+          ],
+          "point": [
+            47,
+            5
+          ],
+          "core_area": 25,
+          "core_scale": 5,
+          "core_palette": 8
+        },
+        {
+          "frame_ref": "component-24",
+          "bbox": [
+            53,
+            12,
+            61,
+            20
+          ],
+          "point": [
+            57,
+            16
+          ],
+          "core_area": 49,
+          "core_scale": 7,
+          "core_palette": 5
+        },
+        {
+          "frame_ref": "component-42",
+          "bbox": [
+            53,
+            23,
+            61,
+            31
+          ],
+          "point": [
+            57,
+            27
+          ],
+          "core_area": 49,
+          "core_scale": 7,
+          "core_palette": 5
+        },
+        {
+          "frame_ref": "component-70",
+          "bbox": [
+            53,
+            34,
+            61,
+            42
+          ],
+          "point": [
+            57,
+            38
+          ],
+          "core_area": 49,
+          "core_scale": 7,
+          "core_palette": 5
+        },
+        {
+          "frame_ref": "component-87",
+          "bbox": [
+            18,
+            51,
+            24,
+            57
+          ],
+          "point": [
+            21,
+            54
+          ],
+          "core_area": 25,
+          "core_scale": 5,
+          "core_palette": 14
+        },
+        {
+          "frame_ref": "component-88",
+          "bbox": [
+            28,
+            51,
+            34,
+            57
+          ],
+          "point": [
+            31,
+            54
+          ],
+          "core_area": 25,
+          "core_scale": 5,
+          "core_palette": 8
+        },
+        {
+          "frame_ref": "component-89",
+          "bbox": [
+            38,
+            51,
+            44,
+            57
+          ],
+          "point": [
+            41,
+            54
+          ],
+          "core_area": 25,
+          "core_scale": 5,
+          "core_palette": 9
+        }
+      ],
+      "paired_motifs": [
+        {
+          "bbox": [
+            3,
+            1,
+            21,
+            9
+          ],
+          "point": [
+            12,
+            5
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-1",
+            "component-2"
+          ]
+        },
+        {
+          "bbox": [
+            13,
+            1,
+            31,
+            9
+          ],
+          "point": [
+            22,
+            5
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-2",
+            "component-3"
+          ]
+        },
+        {
+          "bbox": [
+            23,
+            1,
+            41,
+            9
+          ],
+          "point": [
+            32,
+            5
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-3",
+            "component-4"
+          ]
+        },
+        {
+          "bbox": [
+            33,
+            1,
+            51,
+            9
+          ],
+          "point": [
+            42,
+            5
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-4",
+            "component-5"
+          ]
+        },
+        {
+          "bbox": [
+            3,
+            12,
+            21,
+            20
+          ],
+          "point": [
+            12,
+            16
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-19",
+            "component-20"
+          ]
+        },
+        {
+          "bbox": [
+            13,
+            12,
+            31,
+            20
+          ],
+          "point": [
+            22,
+            16
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-20",
+            "component-21"
+          ]
+        },
+        {
+          "bbox": [
+            23,
+            12,
+            41,
+            20
+          ],
+          "point": [
+            32,
+            16
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-21",
+            "component-22"
+          ]
+        },
+        {
+          "bbox": [
+            33,
+            12,
+            51,
+            20
+          ],
+          "point": [
+            42,
+            16
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-22",
+            "component-23"
+          ]
+        },
+        {
+          "bbox": [
+            43,
+            12,
+            61,
+            20
+          ],
+          "point": [
+            52,
+            16
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-23",
+            "component-24"
+          ]
+        },
+        {
+          "bbox": [
+            3,
+            23,
+            21,
+            31
+          ],
+          "point": [
+            12,
+            27
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-37",
+            "component-38"
+          ]
+        },
+        {
+          "bbox": [
+            13,
+            23,
+            31,
+            31
+          ],
+          "point": [
+            22,
+            27
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-38",
+            "component-39"
+          ]
+        },
+        {
+          "bbox": [
+            23,
+            23,
+            41,
+            31
+          ],
+          "point": [
+            32,
+            27
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-39",
+            "component-40"
+          ]
+        },
+        {
+          "bbox": [
+            33,
+            23,
+            51,
+            31
+          ],
+          "point": [
+            42,
+            27
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-40",
+            "component-41"
+          ]
+        },
+        {
+          "bbox": [
+            43,
+            23,
+            61,
+            31
+          ],
+          "point": [
+            52,
+            27
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-41",
+            "component-42"
+          ]
+        },
+        {
+          "bbox": [
+            3,
+            34,
+            21,
+            42
+          ],
+          "point": [
+            12,
+            38
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-65",
+            "component-66"
+          ]
+        },
+        {
+          "bbox": [
+            13,
+            34,
+            31,
+            42
+          ],
+          "point": [
+            22,
+            38
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-66",
+            "component-67"
+          ]
+        },
+        {
+          "bbox": [
+            23,
+            34,
+            41,
+            42
+          ],
+          "point": [
+            32,
+            38
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-67",
+            "component-68"
+          ]
+        },
+        {
+          "bbox": [
+            33,
+            34,
+            51,
+            42
+          ],
+          "point": [
+            42,
+            38
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-68",
+            "component-69"
+          ]
+        },
+        {
+          "bbox": [
+            43,
+            34,
+            61,
+            42
+          ],
+          "point": [
+            52,
+            38
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-69",
+            "component-70"
+          ]
+        },
+        {
+          "bbox": [
+            27,
+            50,
+            45,
+            58
+          ],
+          "point": [
+            36,
+            54
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-85",
+            "component-86"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "COMB",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:a188f019a6b99b2b",
+      "frame_digest": "a188f019a6b99b2b0e8e6bdb65d91087423c62941d320a2b204edfcb1e1a17fa",
+      "initial_compact_motif": null,
+      "compact_candidates": [
+        {
+          "frame_ref": "component-8",
+          "bbox": [
+            19,
+            15,
+            29,
+            25
+          ],
+          "point": [
+            24,
+            20
+          ],
+          "core_area": 81,
+          "core_scale": 9,
+          "core_palette": 4
+        },
+        {
+          "frame_ref": "component-9",
+          "bbox": [
+            33,
+            15,
+            43,
+            25
+          ],
+          "point": [
+            38,
+            20
+          ],
+          "core_area": 81,
+          "core_scale": 9,
+          "core_palette": 4
+        }
+      ],
+      "paired_motifs": [
+        {
+          "bbox": [
+            22,
+            46,
+            40,
+            48
+          ],
+          "point": [
+            31,
+            47
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-20",
+            "component-21"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "ISOS",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:2213b32effda75e6",
+      "frame_digest": "2213b32effda75e66db7f38caf14b276feafbd547a28086089e6000a114ffabe",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [
+        {
+          "bbox": [
+            17,
+            7,
+            21,
+            21
+          ],
+          "point": [
+            19,
+            14
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-42",
+            "component-75"
+          ]
+        },
+        {
+          "bbox": [
+            29,
+            7,
+            33,
+            21
+          ],
+          "point": [
+            31,
+            14
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-45",
+            "component-77"
+          ]
+        },
+        {
+          "bbox": [
+            41,
+            7,
+            45,
+            21
+          ],
+          "point": [
+            43,
+            14
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-48",
+            "component-79"
+          ]
+        },
+        {
+          "bbox": [
+            11,
+            16,
+            15,
+            30
+          ],
+          "point": [
+            13,
+            23
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-82",
+            "component-118"
+          ]
+        },
+        {
+          "bbox": [
+            23,
+            16,
+            27,
+            30
+          ],
+          "point": [
+            25,
+            23
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-85",
+            "component-120"
+          ]
+        },
+        {
+          "bbox": [
+            35,
+            16,
+            39,
+            30
+          ],
+          "point": [
+            37,
+            23
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-88",
+            "component-122"
+          ]
+        },
+        {
+          "bbox": [
+            47,
+            16,
+            51,
+            30
+          ],
+          "point": [
+            49,
+            23
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-91",
+            "component-124"
+          ]
+        },
+        {
+          "bbox": [
+            17,
+            25,
+            21,
+            39
+          ],
+          "point": [
+            19,
+            32
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-128",
+            "component-161"
+          ]
+        },
+        {
+          "bbox": [
+            29,
+            25,
+            33,
+            39
+          ],
+          "point": [
+            31,
+            32
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-131",
+            "component-163"
+          ]
+        },
+        {
+          "bbox": [
+            41,
+            25,
+            45,
+            39
+          ],
+          "point": [
+            43,
+            32
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-134",
+            "component-165"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "SELE",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:e0cab414a9ad4004",
+      "frame_digest": "e0cab414a9ad4004ac9d3b63fd660f69e8e03d9d8e5112bb7c3be11dce00f1bf",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "REWI",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:470ca6d4cd27a31e",
+      "frame_digest": "470ca6d4cd27a31e2474b9d2c31e2a0b6acd5517dd84f3a80230e5a10f60a345",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [
+        {
+          "bbox": [
+            28,
+            22,
+            32,
+            23
+          ],
+          "point": [
+            30,
+            22
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-40",
+            "component-42"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "LKEY",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:8d0eaeb50c797a2a",
+      "frame_digest": "8d0eaeb50c797a2aa1e22d0a4ebbfc101b6b8c16ffce0d9a4fb1626689eebfc2",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "TEQU",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:414f03727847c86e",
+      "frame_digest": "414f03727847c86e0878f9f4b726d0594946230a299f3b138a4ae28629d874a1",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [
+        {
+          "bbox": [
+            40,
+            60,
+            54,
+            63
+          ],
+          "point": [
+            47,
+            61
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-226",
+            "component-227"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "GMAP",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:2bcae799f4729d87",
+      "frame_digest": "2bcae799f4729d870ad808e3c67aabf045f134537ae6f43086139088b9bbcef7",
+      "initial_compact_motif": null,
+      "compact_candidates": [
+        {
+          "frame_ref": "component-30",
+          "bbox": [
+            27,
+            20,
+            31,
+            24
+          ],
+          "point": [
+            29,
+            22
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 10
+        },
+        {
+          "frame_ref": "component-31",
+          "bbox": [
+            33,
+            20,
+            37,
+            24
+          ],
+          "point": [
+            35,
+            22
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 8
+        },
+        {
+          "frame_ref": "component-48",
+          "bbox": [
+            39,
+            26,
+            43,
+            30
+          ],
+          "point": [
+            41,
+            28
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 11
+        },
+        {
+          "frame_ref": "component-91",
+          "bbox": [
+            18,
+            53,
+            24,
+            59
+          ],
+          "point": [
+            21,
+            56
+          ],
+          "core_area": 25,
+          "core_scale": 5,
+          "core_palette": 4
+        },
+        {
+          "frame_ref": "component-92",
+          "bbox": [
+            26,
+            53,
+            32,
+            59
+          ],
+          "point": [
+            29,
+            56
+          ],
+          "core_area": 25,
+          "core_scale": 5,
+          "core_palette": 4
+        },
+        {
+          "frame_ref": "component-93",
+          "bbox": [
+            34,
+            53,
+            40,
+            59
+          ],
+          "point": [
+            37,
+            56
+          ],
+          "core_area": 25,
+          "core_scale": 5,
+          "core_palette": 4
+        }
+      ],
+      "paired_motifs": [
+        {
+          "bbox": [
+            27,
+            20,
+            37,
+            24
+          ],
+          "point": [
+            32,
+            22
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-30",
+            "component-31"
+          ]
+        },
+        {
+          "bbox": [
+            27,
+            20,
+            31,
+            30
+          ],
+          "point": [
+            29,
+            25
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-30",
+            "component-46"
+          ]
+        },
+        {
+          "bbox": [
+            33,
+            20,
+            37,
+            30
+          ],
+          "point": [
+            35,
+            25
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-31",
+            "component-47"
+          ]
+        },
+        {
+          "bbox": [
+            27,
+            26,
+            37,
+            30
+          ],
+          "point": [
+            32,
+            28
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-46",
+            "component-47"
+          ]
+        },
+        {
+          "bbox": [
+            33,
+            26,
+            43,
+            30
+          ],
+          "point": [
+            38,
+            28
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-47",
+            "component-48"
+          ]
+        },
+        {
+          "bbox": [
+            18,
+            53,
+            32,
+            59
+          ],
+          "point": [
+            25,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-91",
+            "component-92"
+          ]
+        },
+        {
+          "bbox": [
+            26,
+            53,
+            40,
+            59
+          ],
+          "point": [
+            33,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-92",
+            "component-93"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "CGWL",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:5b9f513c36c7067d",
+      "frame_digest": "5b9f513c36c7067d1ffb90e4c9771a8913b0d80a9fd8c47279f11f16b98b156a",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "WEAV",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:af1b67ae6a394974",
+      "frame_digest": "af1b67ae6a394974d223dc41ee8d488064f289215c74bcdb98b97163d42ae550",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "GRIL",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:586f549f81987020",
+      "frame_digest": "586f549f819870203dd5c0e39249781c696f013f174149462967d1aeefcd224a",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "DICO",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:4c66a07b55379fb4",
+      "frame_digest": "4c66a07b55379fb40871c5ebf6ed4908fe63b83c977c44d48c75cd73cc13bb55",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "EVAS",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:ceac639fe38e32de",
+      "frame_digest": "ceac639fe38e32deec9e52b3735a601e68b464736e3187d5644c2854fbfd3bc5",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "KLOT",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:b70f41cc40f08e72",
+      "frame_digest": "b70f41cc40f08e72bc7e6b23399bf2a34a507a21b01957f126d454e1c9ea4f4b",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "UPST",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:97ddaef0e9538cf5",
+      "frame_digest": "97ddaef0e9538cf50e870eac5cda28e075fdc130423b1690323931649dd648a4",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "THER",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:e4949964e4d02658",
+      "frame_digest": "e4949964e4d02658f8a3a275445fa1d2e2e46af5d370cf0269d20527e9215e54",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [
+        {
+          "bbox": [
+            15,
+            15,
+            41,
+            27
+          ],
+          "point": [
+            28,
+            21
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-6",
+            "component-7"
+          ]
+        },
+        {
+          "bbox": [
+            29,
+            15,
+            55,
+            27
+          ],
+          "point": [
+            42,
+            21
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-7",
+            "component-8"
+          ]
+        },
+        {
+          "bbox": [
+            15,
+            43,
+            41,
+            55
+          ],
+          "point": [
+            28,
+            49
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-24",
+            "component-25"
+          ]
+        },
+        {
+          "bbox": [
+            29,
+            43,
+            55,
+            55
+          ],
+          "point": [
+            42,
+            49
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-25",
+            "component-26"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "ZIPP",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:32f5e9dc5ce9d135",
+      "frame_digest": "32f5e9dc5ce9d135fc44aeecf95f6e6396bcb5d9a14350a3f8c13a1553c49c4d",
+      "initial_compact_motif": null,
+      "compact_candidates": [
+        {
+          "frame_ref": "component-8",
+          "bbox": [
+            13,
+            9,
+            19,
+            15
+          ],
+          "point": [
+            16,
+            12
+          ],
+          "core_area": 25,
+          "core_scale": 5,
+          "core_palette": 9
+        },
+        {
+          "frame_ref": "component-20",
+          "bbox": [
+            45,
+            41,
+            51,
+            47
+          ],
+          "point": [
+            48,
+            44
+          ],
+          "core_area": 25,
+          "core_scale": 5,
+          "core_palette": 5
+        }
+      ],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "AMZE",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:0859ffa1372ea6ac",
+      "frame_digest": "0859ffa1372ea6ac6d27ebb210802441bd8af406bafdba55073752f132375bb7",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [
+        {
+          "bbox": [
+            26,
+            26,
+            48,
+            36
+          ],
+          "point": [
+            37,
+            31
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-26",
+            "component-27"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "PIPE",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:cc2da57812c48d52",
+      "frame_digest": "cc2da57812c48d52f01a6a481ab614622744023eca0d9786e1f8294e63e9adfd",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "GIGO",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:7e07e56969825161",
+      "frame_digest": "7e07e5696982516142d1fbbac0829a30743c0c3d9ee5364c4f90ec25d5f21519",
+      "initial_compact_motif": {
+        "frame_ref": "component-6",
+        "bbox": [
+          24,
+          18,
+          29,
+          23
+        ],
+        "point": [
+          26,
+          20
+        ],
+        "core_area": 16,
+        "core_scale": 4,
+        "core_palette": 5
+      },
+      "compact_candidates": [
+        {
+          "frame_ref": "component-6",
+          "bbox": [
+            24,
+            18,
+            29,
+            23
+          ],
+          "point": [
+            26,
+            20
+          ],
+          "core_area": 16,
+          "core_scale": 4,
+          "core_palette": 5
+        }
+      ],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "CATL",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:645b3c0a4e06f244",
+      "frame_digest": "645b3c0a4e06f24412f2c54de3ba3c15269956e85b62fa87778d892afa269152",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "PRTL",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:6ef4fd56acd3239f",
+      "frame_digest": "6ef4fd56acd3239f2bda6ae13a7ce1bc6e1ef9359d3876cec7b8af69b53a3d87",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "MOTO",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:507788fb1b628579",
+      "frame_digest": "507788fb1b628579d36689d261d4816b083c40ce51b57a387e9fa6b1042ea817",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "ONDE",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:f5c3dcb0500da209",
+      "frame_digest": "f5c3dcb0500da2091d8daac7acd1cbb72aebb33c04c70c67581597b1fbbc90cd",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "SNAR",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:23a18f323d2571f2",
+      "frame_digest": "23a18f323d2571f2a275ba89cd389c2fb6218b9ab25972c6da613eeecbc5fac1",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "TRCP",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:03590df58a79831a",
+      "frame_digest": "03590df58a79831a29e72b892f3a529280a4eced2dd549b81c7710887a42bda2",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "SPOR",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:ef7046fff5e68e4f",
+      "frame_digest": "ef7046fff5e68e4fe5410037c13726829e2670eccd87b21574aa8de5d518cd1c",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [
+        {
+          "bbox": [
+            4,
+            4,
+            12,
+            7
+          ],
+          "point": [
+            8,
+            5
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-2",
+            "component-3"
+          ]
+        },
+        {
+          "bbox": [
+            4,
+            4,
+            7,
+            12
+          ],
+          "point": [
+            5,
+            8
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-2",
+            "component-13"
+          ]
+        },
+        {
+          "bbox": [
+            9,
+            4,
+            12,
+            12
+          ],
+          "point": [
+            10,
+            8
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-3",
+            "component-15"
+          ]
+        },
+        {
+          "bbox": [
+            3,
+            5,
+            4,
+            11
+          ],
+          "point": [
+            3,
+            8
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-4",
+            "component-12"
+          ]
+        },
+        {
+          "bbox": [
+            12,
+            5,
+            13,
+            11
+          ],
+          "point": [
+            12,
+            8
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-5",
+            "component-16"
+          ]
+        },
+        {
+          "bbox": [
+            4,
+            9,
+            12,
+            12
+          ],
+          "point": [
+            8,
+            10
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-13",
+            "component-15"
+          ]
+        },
+        {
+          "bbox": [
+            5,
+            12,
+            11,
+            13
+          ],
+          "point": [
+            8,
+            12
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-17",
+            "component-18"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "CWSE",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:14b234e86cb071c9",
+      "frame_digest": "14b234e86cb071c9873aa3c65eb8cc12680afca61839eb31eccd404d5671af8f",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [
+        {
+          "bbox": [
+            2,
+            51,
+            10,
+            54
+          ],
+          "point": [
+            6,
+            52
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-54",
+            "component-55"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "CAVA",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:3a81cada09d4393d",
+      "frame_digest": "3a81cada09d4393d3485a246ad461ef1d6166729c0ac6be0de0c61333c2891a0",
+      "initial_compact_motif": null,
+      "compact_candidates": [
+        {
+          "frame_ref": "component-9",
+          "bbox": [
+            12,
+            13,
+            16,
+            17
+          ],
+          "point": [
+            14,
+            15
+          ],
+          "core_area": 16,
+          "core_scale": 4,
+          "core_palette": 3
+        },
+        {
+          "frame_ref": "component-15",
+          "bbox": [
+            12,
+            20,
+            16,
+            24
+          ],
+          "point": [
+            14,
+            22
+          ],
+          "core_area": 16,
+          "core_scale": 4,
+          "core_palette": 3
+        },
+        {
+          "frame_ref": "component-16",
+          "bbox": [
+            26,
+            20,
+            30,
+            24
+          ],
+          "point": [
+            28,
+            22
+          ],
+          "core_area": 16,
+          "core_scale": 4,
+          "core_palette": 3
+        },
+        {
+          "frame_ref": "component-24",
+          "bbox": [
+            33,
+            27,
+            37,
+            31
+          ],
+          "point": [
+            35,
+            29
+          ],
+          "core_area": 16,
+          "core_scale": 4,
+          "core_palette": 3
+        },
+        {
+          "frame_ref": "component-25",
+          "bbox": [
+            40,
+            27,
+            44,
+            31
+          ],
+          "point": [
+            42,
+            29
+          ],
+          "core_area": 16,
+          "core_scale": 4,
+          "core_palette": 3
+        },
+        {
+          "frame_ref": "component-31",
+          "bbox": [
+            12,
+            34,
+            16,
+            38
+          ],
+          "point": [
+            14,
+            36
+          ],
+          "core_area": 16,
+          "core_scale": 4,
+          "core_palette": 3
+        },
+        {
+          "frame_ref": "component-32",
+          "bbox": [
+            40,
+            34,
+            44,
+            38
+          ],
+          "point": [
+            42,
+            36
+          ],
+          "core_area": 16,
+          "core_scale": 4,
+          "core_palette": 3
+        },
+        {
+          "frame_ref": "component-34",
+          "bbox": [
+            12,
+            41,
+            16,
+            45
+          ],
+          "point": [
+            14,
+            43
+          ],
+          "core_area": 16,
+          "core_scale": 4,
+          "core_palette": 3
+        },
+        {
+          "frame_ref": "component-35",
+          "bbox": [
+            19,
+            41,
+            23,
+            45
+          ],
+          "point": [
+            21,
+            43
+          ],
+          "core_area": 16,
+          "core_scale": 4,
+          "core_palette": 3
+        },
+        {
+          "frame_ref": "component-36",
+          "bbox": [
+            33,
+            41,
+            37,
+            45
+          ],
+          "point": [
+            35,
+            43
+          ],
+          "core_area": 16,
+          "core_scale": 4,
+          "core_palette": 3
+        },
+        {
+          "frame_ref": "component-37",
+          "bbox": [
+            40,
+            41,
+            44,
+            45
+          ],
+          "point": [
+            42,
+            43
+          ],
+          "core_area": 16,
+          "core_scale": 4,
+          "core_palette": 3
+        },
+        {
+          "frame_ref": "component-38",
+          "bbox": [
+            47,
+            41,
+            51,
+            45
+          ],
+          "point": [
+            49,
+            43
+          ],
+          "core_area": 16,
+          "core_scale": 4,
+          "core_palette": 3
+        },
+        {
+          "frame_ref": "component-45",
+          "bbox": [
+            47,
+            48,
+            51,
+            52
+          ],
+          "point": [
+            49,
+            50
+          ],
+          "core_area": 16,
+          "core_scale": 4,
+          "core_palette": 3
+        }
+      ],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "SMLP",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:63772d1746311d0c",
+      "frame_digest": "63772d1746311d0c37da6dcd30cff4ba62157a79f1e16ec4aa08459daebc1b8c",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "DAME",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:1f154e9b119b149c",
+      "frame_digest": "1f154e9b119b149c01a2b34fadeb0f48516193742535984798e748a1ac85e91e",
+      "initial_compact_motif": {
+        "frame_ref": "component-48",
+        "bbox": [
+          35,
+          37,
+          41,
+          43
+        ],
+        "point": [
+          38,
+          40
+        ],
+        "core_area": 36,
+        "core_scale": 6,
+        "core_palette": 3
+      },
+      "compact_candidates": [
+        {
+          "frame_ref": "component-48",
+          "bbox": [
+            35,
+            37,
+            41,
+            43
+          ],
+          "point": [
+            38,
+            40
+          ],
+          "core_area": 36,
+          "core_scale": 6,
+          "core_palette": 3
+        }
+      ],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "HPDL",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:a736549b36c7d3a0",
+      "frame_digest": "a736549b36c7d3a0374e9634ba3694317e060824f7863219344ea69c4a141586",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "CATR",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:8c49c0659af32834",
+      "frame_digest": "8c49c0659af32834cd35d79a00608588832424e35fc567bbd58a249652d28657",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [
+        {
+          "bbox": [
+            32,
+            9,
+            42,
+            31
+          ],
+          "point": [
+            37,
+            20
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-3",
+            "component-28"
+          ]
+        },
+        {
+          "bbox": [
+            26,
+            15,
+            36,
+            19
+          ],
+          "point": [
+            31,
+            17
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-16",
+            "component-17"
+          ]
+        },
+        {
+          "bbox": [
+            32,
+            15,
+            36,
+            25
+          ],
+          "point": [
+            34,
+            20
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-17",
+            "component-27"
+          ]
+        }
+      ],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "RECR",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:9c659d0462f191ba",
+      "frame_digest": "9c659d0462f191ba93ee6aa1bb8c433cdca6d890e4f69b81d28b7fa31325ff79",
+      "initial_compact_motif": null,
+      "compact_candidates": [],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    },
+    {
+      "game": "RSWP",
+      "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:3e364c99f049645b",
+      "frame_digest": "3e364c99f049645bdf11855e84a26fad61cb91abd02efe914b6bf78f17006256",
+      "initial_compact_motif": null,
+      "compact_candidates": [
+        {
+          "frame_ref": "component-41",
+          "bbox": [
+            38,
+            20,
+            42,
+            24
+          ],
+          "point": [
+            40,
+            22
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 13
+        },
+        {
+          "frame_ref": "component-91",
+          "bbox": [
+            38,
+            38,
+            42,
+            42
+          ],
+          "point": [
+            40,
+            40
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 13
+        },
+        {
+          "frame_ref": "component-134",
+          "bbox": [
+            48,
+            51,
+            52,
+            55
+          ],
+          "point": [
+            50,
+            53
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 15
+        },
+        {
+          "frame_ref": "component-141",
+          "bbox": [
+            38,
+            56,
+            42,
+            60
+          ],
+          "point": [
+            40,
+            58
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 13
+        }
+      ],
+      "paired_motifs": [],
+      "same_extent_distinct_enclosures": [],
+      "eligible_initial_conjunction": false,
+      "acquired_field_context": false,
+      "acquired_service_context": false
+    }
+  ],
+  "selection": {
+    "entry": "field_service_composition",
+    "evaluationGame": "VALV",
+    "criterion": "Unique retained initial view combining a unique smallest compact enclosure, paired reflected motifs, and exactly one same-extent distinct enclosure.",
+    "currentPairedMotifs": 8,
+    "status": "candidate_only_no_executed_action_or_level_completion",
+    "nextTarget": "Transfer the generic acquired field/service chain, then evaluate one cold continuous campaign targeting the first three levels.",
+    "requiredAcquisitions": [
+      "persistent public fields and repeatable pixel extent changes",
+      "actual prior-state restoration by a distinct current control",
+      "novel replacement and spatial control association after restoration",
+      "actual isolation and service responses before model retention",
+      "official boundary witness and current geometric rebinding for cross-epoch reuse"
+    ]
+  }
+}

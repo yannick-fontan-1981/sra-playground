@@ -1,0 +1,36 @@
+{
+  "schema": "logos-engine.lot10c.case-activity-execution.v1",
+  "attemptId": "docs/migration/lot10c-evidence/case-activities/recr01-parity-diagnosis",
+  "game": "RECR",
+  "purpose": "Diagnose original public-parity reader crash on retained RECR01 trace without rerunning the game",
+  "startedAt": "2026-11-11T17:56:21.290251+00:00",
+  "finishedAt": "2026-11-11T17:57:34.550292+00:00",
+  "status": "completed",
+  "elapsedSecondsThroughCapture": 73.259894713,
+  "activityCeilingSeconds": 300.0,
+  "ceilingExceeded": false,
+  "evidence": [
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-parity-diagnosis/diagnosis.json",
+      "sha256": "e5e9666e1d5b8f8f8fb5775ffe8709ab9d32382ef29f7d512bb84932ebabd35a",
+      "bytes": 1129
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-parity-diagnosis/reader-before.py.txt",
+      "sha256": "8593a0cb69148fecc5396608b2799d11348d124a6c45bf7e326a1c4362bda994",
+      "bytes": 72500
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-parity-diagnosis/static-change-check.json",
+      "sha256": "065780bd217b892131d10fb25914cccc27c5d28dde62833f481572fa27999159",
+      "bytes": 271
+    }
+  ],
+  "generator": {
+    "path": "docs/migration/lot10c-evidence/case-activity.py",
+    "sha256": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+    "bytes": 8126
+  },
+  "executionHelpersUnchanged": true,
+  "qualification": "The entire observed diagnostic/browser interval is charged, including any ceiling excess. No new campaign or success is inferred."
+}

@@ -1,0 +1,107 @@
+{
+  "schema": "logos-engine.lot4b-untimed-functional-execution.v1",
+  "phase": "owner_structural_qualification",
+  "status": "completed",
+  "command": [
+    "node",
+    "docs/migration/lot4b-evidence/qualify-cost-owner-graphs.mjs",
+    "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz",
+    "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.receipt.json",
+    "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz",
+    "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.receipt.json",
+    "docs/migration/lot4b-evidence/performance-integrated/owner-structural-attribution.json",
+    "docs/migration/lot4b-evidence/performance-integrated/owner-structural-fixture.json"
+  ],
+  "cwd": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "startedAt": "2026-11-10T22:34:32.206962+00:00",
+  "finishedAt": "2026-11-10T22:34:47.911625+00:00",
+  "exitCode": 0,
+  "inputsBefore": [
+    {
+      "path": "docs/migration/lot4b-evidence/qualify-cost-owner-graphs.mjs",
+      "sha256": "3b9f006424fa27080993271d57d086537665dc25a6926b2b2a9ec48e48220ad5",
+      "bytes": 47487
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/capture-cost-owner-graphs.mjs",
+      "sha256": "13cc2498b7e27e7b90fe7216e91c4a329e8e9a37c7d7671b655039daead6f65f",
+      "bytes": 23834
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.receipt.json",
+      "sha256": "022dcd292a0c41c8a2bdae0b0cd2d1196a3f3280890cdb62130caa87bcfb94cb",
+      "bytes": 105012
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.receipt.json",
+      "sha256": "94387fd2d0121106ea6623a7a03bee379efd1810fb128c4628fad5f5c48cffb0",
+      "bytes": 105296
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cases.json",
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+      "bytes": 1451
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/declaration.json",
+      "sha256": "2940ab2c1b5b303ea103fbf6f3a9f1edaa0b83ff2b40cfbf535bda54f477bd20",
+      "bytes": 5556
+    }
+  ],
+  "measuredCostSessions": 0,
+  "timingMetricsProduced": 0,
+  "automaticRetry": false,
+  "childPid": 6,
+  "inputsAfter": [
+    {
+      "path": "docs/migration/lot4b-evidence/qualify-cost-owner-graphs.mjs",
+      "sha256": "3b9f006424fa27080993271d57d086537665dc25a6926b2b2a9ec48e48220ad5",
+      "bytes": 47487
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/capture-cost-owner-graphs.mjs",
+      "sha256": "13cc2498b7e27e7b90fe7216e91c4a329e8e9a37c7d7671b655039daead6f65f",
+      "bytes": 23834
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.receipt.json",
+      "sha256": "022dcd292a0c41c8a2bdae0b0cd2d1196a3f3280890cdb62130caa87bcfb94cb",
+      "bytes": 105012
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.receipt.json",
+      "sha256": "94387fd2d0121106ea6623a7a03bee379efd1810fb128c4628fad5f5c48cffb0",
+      "bytes": 105296
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cases.json",
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+      "bytes": 1451
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/declaration.json",
+      "sha256": "2940ab2c1b5b303ea103fbf6f3a9f1edaa0b83ff2b40cfbf535bda54f477bd20",
+      "bytes": 5556
+    }
+  ],
+  "inputsUnchanged": true,
+  "log": {
+    "path": "docs/migration/lot4b-evidence/performance-integrated/owner-structural-qualification.log",
+    "sha256": "519cec0ba5637fad5bedadbb4031e1d9baff85d779285807e241c03650a65336",
+    "bytes": 300
+  },
+  "attribution": {
+    "path": "docs/migration/lot4b-evidence/performance-integrated/owner-structural-attribution.json",
+    "sha256": "390d7a6801c9191146f372d842404eaa6cc3922f92b452e613589652d205816c",
+    "bytes": 73280
+  },
+  "qualificationStatus": "qualified_functional_structure",
+  "checks": 64,
+  "attributedDeltas": 37,
+  "failures": [],
+  "fixture": {
+    "path": "docs/migration/lot4b-evidence/performance-integrated/owner-structural-fixture.json",
+    "sha256": "67d65dcaf4358af2237d3e3d6620141679890c89eafb5add264d1ea953c6b688",
+    "bytes": 60036
+  }
+}

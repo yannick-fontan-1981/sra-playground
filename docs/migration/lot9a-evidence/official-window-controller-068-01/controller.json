@@ -1,0 +1,166 @@
+{
+  "schema": "logos-engine.lot9a.official-performance-controller.v1",
+  "status": "completed_pending_independent_analysis",
+  "startedAt": "2026-11-12T15:33:35.208460+00:00",
+  "plan": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/official-window-plan.json",
+  "limits": {
+    "preflightSeconds": 180,
+    "measurementSeconds": 1800,
+    "terminationGraceSeconds": 10,
+    "killGraceSeconds": 10,
+    "retentionSeconds": 60,
+    "observationIntervalSeconds": 30
+  },
+  "lease": "lot9a-performance-2-d8be021cc710",
+  "automaticRetry": false,
+  "peerAvailabilityWait": false,
+  "peerAcknowledgmentsRequired": false,
+  "measurementStarted": true,
+  "officialCostAcceptedByController": false,
+  "globalQuietInferredFromLock": false,
+  "processArgumentsCollected": false,
+  "processEnvironmentsCollected": false,
+  "lock": {
+    "path": "/workspace/shared/sra-coordination/performance.lock",
+    "attempts": 1,
+    "blocking": false,
+    "lockFileRemoved": false,
+    "lockFileReplaced": false,
+    "descriptorClosed": true,
+    "pathExistedBeforeOpen": true,
+    "identity": {
+      "device": 27,
+      "inode": 2621834
+    },
+    "status": "released",
+    "acquiredAt": "2026-11-12T15:33:35.826260+00:00",
+    "finalIdentity": {
+      "device": 27,
+      "inode": 2621834
+    },
+    "sameLockFile": true,
+    "releasedAt": "2026-11-12T15:41:40.495812+00:00"
+  },
+  "cleanup": {
+    "group": {
+      "processGroup": 240,
+      "adoptedChildrenReaped": [],
+      "directChildReaped": true,
+      "processGroupStopped": true,
+      "remainingOwnedDescendants": [],
+      "exitCode": 0
+    }
+  },
+  "planFingerprint": {
+    "bytes": 177229,
+    "sha256": "4f33525a7290eb4ff3599cdf11b523751e1c32f642465c14e2a28b727235bbe3"
+  },
+  "executionHead": "95f76a959f5c8f195590f281f62914505a06be5a",
+  "ownWorkCheck": {
+    "passed": true,
+    "allowedControllerAncestors": [
+      1,
+      2
+    ],
+    "scope": "visible_process_cwd_plus_explicit_own_status_not_cross_namespace_proof"
+  },
+  "isolationDeclaration": {
+    "established": true,
+    "basis": "Dedicated owned candidate and published baseline checkouts, exact native and declared input bytes frozen; all own preparation workers and commands terminal; fresh process observation confirms no other work in either owned checkout. The controller acquires the current shared mutex once without blocking, rechecks the inputs and own work, serializes ABBA in one supervised process group and retains namespace observations every 30 seconds.",
+    "scope": "The owned official execution window and the currently shared performance mutex, within the visible execution namespace.",
+    "evidence": [
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/environment-before-declaration.json",
+        "bytes": 1268,
+        "sha256": "9d163662a78f0ced758f3ee8331221757197e34f0f3089958cdb7091fe2c1580"
+      },
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/own-work-closure.json",
+        "bytes": 774,
+        "sha256": "6c81759d80c17385a1642d77b3d00e10b89f63dbb46632a018bced28b467070e"
+      },
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/own-status-before-window.json",
+        "bytes": 4458,
+        "sha256": "ec3f5ce98590ff1f156f6c69f802ad10225d1150a9194bafc57f2eca1c5f0322"
+      },
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/publication-observation.json",
+        "bytes": 1312,
+        "sha256": "d36f509a27fcc86a70330dcc532eba49f9024a2f79a78e0fd4ec28c33db3f4ac"
+      },
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/contract-independent-review.json",
+        "bytes": 16590,
+        "sha256": "03af28e0994c1ac63e17077c60485b41efa8f223037af8142f9cd914feb3044d"
+      },
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/coordination-independent-review.json",
+        "bytes": 10559,
+        "sha256": "95f66a703038463efa64699ce8815ae099f31a7e08e30fbc95d52bd7b1d9d849"
+      }
+    ],
+    "limitations": [
+      "Ordinary concurrent work in other namespaces or elsewhere on the host is not observable here and is not asserted absent.",
+      "No peer availability or old context acknowledgment is required; the mutex only serializes holders of its current inode and does not suspend ordinary work.",
+      "CPU affinity and load are observed, not allocated as exclusive resources. Periodic controller observations are retained measurement instrumentation.",
+      "session_elapsed covers the native harness through the last acquired return including pauses and resumes; worker startup, begin, terminal inspection, close, live game engine, network and browser rendering are excluded."
+    ],
+    "flockAloneIsEvidence": false
+  },
+  "preflightFinishedAt": "2026-11-12T15:33:35.826047+00:00",
+  "measurementDeadlineSecondsFromAcquisition": 1800,
+  "maximumExclusiveSecondsIncludingCleanupAndRetention": 1880,
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/run-native-cost-window.py",
+    "/workspace/sites/sra-lot9a-baseline067-20261112",
+    "docs/migration/lot9a-evidence/final-performance-068-01",
+    "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/baseline-native.json",
+    "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/candidate-native.json"
+  ],
+  "childPid": 240,
+  "processGroup": 240,
+  "executionStartedAt": "2026-11-12T15:33:36.418098+00:00",
+  "lastObservedAt": "2026-11-12T15:41:37.263885+00:00",
+  "elapsedMeasurementSeconds": 481.435716678001,
+  "stdoutBytes": 6213,
+  "stderrBytes": 0,
+  "exitCode": 0,
+  "adoptedChildrenReaped": [],
+  "finalInputIntegrity": "passed",
+  "window": {
+    "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/final-performance-068-01/window.json",
+    "bytes": 11008,
+    "sha256": "0fc33d599eb8fb75e6d4986f7c4686f46979f9aa1415a1abde6d11d5a9c707d8"
+  },
+  "statusRelease": {
+    "updated": true,
+    "path": "/workspace/shared/sra-coordination/lot9a-status.json"
+  },
+  "subreaperRestored": true,
+  "retainedLogs": {
+    "runner.stdout.log": {
+      "bytes": 6845,
+      "sha256": "aa0d002444a14c1dd65b26982add8410cdd6ca6d4217e7048e6314d4cf293ba0"
+    },
+    "runner.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "environment-during.jsonl": {
+      "bytes": 24614,
+      "sha256": "6bbbf7415d44aae0aca433d3211e0ff732e8e32eefd5aff05f6a85259a43fa9d"
+    }
+  },
+  "finishedAt": "2026-11-12T15:41:40.499007+00:00",
+  "elapsedSeconds": 485.2905769989993,
+  "controllerExitCode": 0
+}

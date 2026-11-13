@@ -1,0 +1,187 @@
+{
+  "schema": "logos-engine.v6.framed-window-shared-integration-review.v1",
+  "status": "passed_with_explicit_scope",
+  "blockingFindings": 0,
+  "reviewScope": "Read-only review of root-owned SharedSeries/runtime integration and integration assertions by the own FramedWindow component author. No production or test file was edited by this review.",
+  "reviewedFiles": [
+    {
+      "path": "src/logos-engine/v6-shared-series.ts",
+      "bytes": 81504,
+      "sha256": "b03af303b0cf439cd7913de2232a5652af9ba2437378483d1307f5fbd2577794"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 133824,
+      "sha256": "b48a82ef8e51d247516b05e52fd8a7a98030447ea58ef37ea392d7a50e0877e2"
+    },
+    {
+      "path": "tests/v6-framed-window-integration.test.ts",
+      "bytes": 11773,
+      "sha256": "cbd4d0130e00be57085a30ae78a334c25174842d7959a1a14438faee0dad7926"
+    }
+  ],
+  "nativeFreeze": {
+    "manifest": {
+      "path": "docs/migration/lot3g-evidence/final/source-manifest.json",
+      "bytes": 31520,
+      "sha256": "3830e87db836b6df95b34550dec845f3d8c95abe2e69bb05d0814b12bef6bfad"
+    },
+    "digest": "fce8dfc3e6861742649203161b3bf55b6480462e44c77d8015453ce55b724a26",
+    "fileCount": 266
+  },
+  "referenceFixture": {
+    "path": "tests/fixtures/v6-framed-window-reference.json.gz",
+    "bytes": 60773,
+    "sha256": "c95c3e9bfaddd0746d3e4bc173995d89f0243dcab5eef2b2ddcec8fd7cac5b00"
+  },
+  "findings": [
+    {
+      "id": "declared-entry-order",
+      "status": "verified",
+      "finding": "The runtime filters the original ordered_subquestions without reordering. FramedWindow immediately follows RootedQuota and shares the single public_occurrence_recall owner. The appended factory parameter preserves earlier positional callers."
+    },
+    {
+      "id": "source-inheritance-guards-and-bind",
+      "status": "verified",
+      "finding": "Catalogue dispatch precedes FramedWindow; FramedWindow precedes RootedQuota. before/after retain source truth(plan), while bind retains source presence checking. The full current point guard and ordinary WHY/ACT provide additional common-controller authority."
+    },
+    {
+      "id": "single-acquisition-owner",
+      "status": "verified",
+      "finding": "The shared record path calls RootedQuota, then FramedWindow, then Catalogue once. A selected RootedQuota plan cuts the older inherited acquisition chain without suppressing the newer Framed/Catalogue layers. FramedWindow does not acquire ancestors a second time."
+    },
+    {
+      "id": "digest-order-and-legacy-checkpoints",
+      "status": "verified",
+      "finding": "Digest calculation and journal reconstruction insert the own Framed layer after RootedQuota and before Catalogue in the same order. Empty own history omits that layer explicitly, preserving genuine published 0.47 checkpoints; the nonempty layer retains its events and blocked trial keys."
+    },
+    {
+      "id": "restore-atomicity",
+      "status": "verified",
+      "finding": "restoreOwned reconstructs all owners locally and checks the complete digest before publishing any replacement owner. Invalid or malformed restored own events therefore cannot erase acquired state or replace existing owner identities."
+    },
+    {
+      "id": "certified-reuse-invalidation",
+      "status": "verified",
+      "finding": "The common working stamp includes FramedWindow owner identity, reducer revision and private-state witness. Owner replacement, reducer calls and direct private edits invalidate reuse of a previously certified checkpoint."
+    },
+    {
+      "id": "fixture-context-and-block-scope",
+      "status": "verified",
+      "finding": "The integration test obtains the proposal from common:fresh and uses matching actual record:no_progress arguments. The later refusal derives from the acquired trial key, not a mismatched plan or observation. The full-frame/epoch key survives restoration; score or observation-reference changes alone do not remove a negative trial."
+    },
+    {
+      "id": "source-authority-limits",
+      "status": "qualified",
+      "finding": "Source before guards do not authenticate proposal_id, complete receipt, plan.action or coherently rewritten points. The translated own contract retains those source oddities; current common binding and authority are tested separately. Complete inherited fallback closure and full original-caller parity are not claimed."
+    }
+  ],
+  "nonblockingObservationsResolvedBeforeFreeze": [
+    {
+      "id": "interrupted-pixel-adaptation-metadata",
+      "initialObservation": "The kernel declared native_temporal_fragment_interrupted_pixel_frontier but the runtime public extension list initially omitted it.",
+      "resolution": "The frozen runtime now publishes that adaptation and atomic_framed_window_response_validation; frozen integration assertions check both names."
+    },
+    {
+      "id": "entry-position-assertion",
+      "initialObservation": "The first position assertion checked only that Framed followed Rooted, although implementation already preserved source order.",
+      "resolution": "The frozen test and common-loop proof now assert immediate adjacency."
+    }
+  ],
+  "retainedQualifications": [
+    "An interrupted source pixel comparison can raise AttributeError; native returns an incomplete NEEDS_EVIDENCE frontier. This is a named adaptation, not literal exception parity.",
+    "Malformed own responses are rejected before mutation in native code; original Python can append before raising. Valid own response behavior remains source exact.",
+    "The common-loop result exercises controlled synthetic returns. It proves no live-game success, physical timing or complete original-caller parity.",
+    "Ablation in the common-loop report reconstructs only the FramedWindow component, not all common-caller state."
+  ],
+  "developmentEvidence": {
+    "ownAccessTests": {
+      "passed": 78,
+      "failed": 0,
+      "phase": "before_final_freeze",
+      "frozenSourceBindingClaimed": false,
+      "log": {
+        "path": "docs/migration/lot3g-evidence/diagnostic/framed-access-targeted-1.log.gz",
+        "bytes": 1633,
+        "sha256": "366587601cedb0072d550eb7288a389e128e9d602ec1dedf9215c367ef2e49e2"
+      }
+    },
+    "rootIntegrationTests": {
+      "initialPassed": 15,
+      "initialFailed": 1,
+      "correctedPassed": 16,
+      "correctedFailed": 0,
+      "phase": "before_final_freeze",
+      "qualification": "The original harness attempted Node fetch(file:) without injected declarations. Root corrected the harness; both logs remain retained. These development logs are not substituted for final frozen validation.",
+      "receipts": [
+        {
+          "path": "docs/migration/lot3g-evidence/diagnostic/root-development-checks.json",
+          "bytes": 1475,
+          "sha256": "3930897509630bb9a049962bd0fdd732021c76cc1d12a48f3fd8c212090b283b"
+        },
+        {
+          "path": "docs/migration/lot3g-evidence/diagnostic/framed-integration-targeted-1.log.gz",
+          "bytes": 973,
+          "sha256": "52fa3fa25e32dc52883971b4265ed05b19c9efbe9d511025b963e82236aa4d69"
+        },
+        {
+          "path": "docs/migration/lot3g-evidence/diagnostic/framed-integration-targeted-2.log.gz",
+          "bytes": 630,
+          "sha256": "218d38e4fd65cae80b7e6147e43b6cfb8ae79aa13618bc48191b8c2082f6a1d7"
+        }
+      ]
+    },
+    "commonLoopProbe": {
+      "status": "passed",
+      "qualification": "Successful development probe, kept separate from the official frozen proof.",
+      "report": {
+        "path": "docs/migration/lot3g-evidence/diagnostic/framed-window-common-loop-probe-1.json.gz",
+        "bytes": 87285,
+        "sha256": "4fcd8cb040bf09806d91b8e777ffa084876759a234a475bc89dbd86c8778b749"
+      },
+      "log": {
+        "path": "docs/migration/lot3g-evidence/diagnostic/framed-window-common-loop-probe-1.log.gz",
+        "bytes": 425,
+        "sha256": "7949cc0c6a39335495cec0107c366395b2a2fb0aaa082e8d1a3743ac25ae2fe4"
+      }
+    }
+  },
+  "officialCommonLoop": {
+    "status": "passed",
+    "verifiedCheckGroups": 15,
+    "scope": {
+      "synthetic": true,
+      "coldControllerSessions": 2,
+      "controlledReturnedCommands": 2,
+      "commonAcquiredTransitions": 2,
+      "furtherReleasedCommandsNotReturned": 2,
+      "liveGameSessions": 0,
+      "liveGameActions": 0,
+      "liveGameLevelCompletions": 0,
+      "liveGameVictories": 0,
+      "sourcePythonAgentExecutions": 0,
+      "learnedCheckpointsInjected": 0,
+      "fullCallerParityClaimed": false,
+      "fullCallerAblationExecuted": false
+    },
+    "nativeSourceDigest": "fce8dfc3e6861742649203161b3bf55b6480462e44c77d8015453ce55b724a26",
+    "report": {
+      "path": "docs/migration/lot3g-evidence/final/framed-window-common-loop.json.gz",
+      "bytes": 87289,
+      "sha256": "f28205cc681edc8988baf05a7ac6b27d4234c72317b43d37648c8f08dcd9a91b"
+    },
+    "log": {
+      "path": "docs/migration/lot3g-evidence/final/framed-window-common-loop.log",
+      "bytes": 617,
+      "sha256": "ba5f99933fdd7bd274ddc3085f474dfab62a439ec008711630104bcd71782c3a"
+    },
+    "script": {
+      "path": "scripts/prove-framed-window-common-loop.mjs",
+      "bytes": 22566,
+      "sha256": "447b56b3b87772d63459dcacde0b057f46e588839b831587efc8658b3ce90bf7"
+    },
+    "sourceUnchangedDuringRun": true,
+    "executionInputsUnchangedDuringRun": true
+  },
+  "qualification": "This review reports no blocking integration defect within its stated scope. Final formal regression, static checks, build, costs and publication remain owned by the main task."
+}

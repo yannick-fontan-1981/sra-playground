@@ -1,0 +1,15 @@
+{
+  "schema": "logos-engine.lot6b-browser-root-source-review.v1",
+  "reviewedAt": "2026-11-11T20:03:15.301274+00:00",
+  "helperSha256": "13c6271b3a5ededca471216be30305ff82c7e436cb143328100611dab947eac2",
+  "findings": [],
+  "verified": [
+    "known stopped stdout matches a real newline",
+    "URL pattern extracts only a nonambiguous returnedHTTP(S) URL",
+    "existing preview refused",
+    "start/status/stop bounded",
+    "operator signal requires actual tab and preview closure",
+    "outer600s does not prove UIworker termination"
+  ],
+  "functionalQaNotYetExecuted": true
+}

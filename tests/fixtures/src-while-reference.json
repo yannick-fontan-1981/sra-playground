@@ -1,0 +1,1762 @@
+{
+  "schema": "src.while.python-reference.v1",
+  "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceHashes": {
+    "agents/yf_arc3_v5/src/compiler.py": "d23775af2ea83f85edcfddeba9c7ca1b1e4024cd9546883f3e1dd88fde4e718d",
+    "agents/yf_arc3_v5/scheduler/runtime.py": "dc8540bde3be0e1e6c60cb27d8bc5720f3bd5081560aa7cbf40ccc16a8e89d64"
+  },
+  "programs": {
+    "1": {
+      "module_id": "test.bounded_loop",
+      "source_name": "bounded-1.src",
+      "source_hash": "917df6d7b2a841571a5665efae529a3ddce86da0588d70b7a57e2e7e3c32f798",
+      "semantic_hash": "f2467c5c5a35168be89cce77384144f253b36d9e6e44aaa2114e1849fec3f439",
+      "imports": [],
+      "workflows": [
+        {
+          "id": "test.bounded_loop.run",
+          "entry_step_id": "test.bounded_loop.run.begin",
+          "inputs": [
+            {
+              "name": "request",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "result",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            }
+          ],
+          "state": [
+            {
+              "name": "session",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            }
+          ],
+          "steps": [
+            {
+              "id": "test.bounded_loop.run.begin",
+              "statements": [
+                {
+                  "id": "test.bounded_loop.run.begin.s0000",
+                  "kind": "CALL",
+                  "target": null,
+                  "expression": {
+                    "kind": "call",
+                    "value": "test.begin",
+                    "items": [],
+                    "arguments": [
+                      {
+                        "name": "request",
+                        "value": {
+                          "kind": "reference",
+                          "value": "request",
+                          "items": [],
+                          "arguments": []
+                        }
+                      }
+                    ]
+                  },
+                  "type_annotation": null,
+                  "result_binding": "session",
+                  "clauses": [],
+                  "body": [],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                },
+                {
+                  "id": "test.bounded_loop.run.begin.s0001",
+                  "kind": "NEXT",
+                  "target": null,
+                  "expression": {
+                    "kind": "reference",
+                    "value": "examine",
+                    "items": [],
+                    "arguments": []
+                  },
+                  "type_annotation": null,
+                  "result_binding": null,
+                  "clauses": [],
+                  "body": [],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                }
+              ]
+            },
+            {
+              "id": "test.bounded_loop.run.examine",
+              "statements": [
+                {
+                  "id": "test.bounded_loop.run.examine.s0000",
+                  "kind": "WHILE",
+                  "target": null,
+                  "expression": {
+                    "kind": "call",
+                    "value": "test.condition",
+                    "items": [],
+                    "arguments": [
+                      {
+                        "name": "session",
+                        "value": {
+                          "kind": "reference",
+                          "value": "session",
+                          "items": [],
+                          "arguments": []
+                        }
+                      }
+                    ]
+                  },
+                  "type_annotation": null,
+                  "result_binding": null,
+                  "clauses": [],
+                  "body": [
+                    {
+                      "id": "test.bounded_loop.run.examine.s0000.body.s0000",
+                      "kind": "CALL",
+                      "target": null,
+                      "expression": {
+                        "kind": "call",
+                        "value": "test.advance",
+                        "items": [],
+                        "arguments": [
+                          {
+                            "name": "session",
+                            "value": {
+                              "kind": "reference",
+                              "value": "session",
+                              "items": [],
+                              "arguments": []
+                            }
+                          }
+                        ]
+                      },
+                      "type_annotation": null,
+                      "result_binding": "session",
+                      "clauses": [],
+                      "body": [],
+                      "else_body": [],
+                      "match_arms": [],
+                      "iterator": null,
+                      "loop_contract": null
+                    }
+                  ],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": {
+                    "progress_witness": {
+                      "kind": "call",
+                      "value": "test.progress",
+                      "items": [],
+                      "arguments": [
+                        {
+                          "name": "session",
+                          "value": {
+                            "kind": "reference",
+                            "value": "session",
+                            "items": [],
+                            "arguments": []
+                          }
+                        }
+                      ]
+                    },
+                    "stop_condition": {
+                      "kind": "call",
+                      "value": "test.stop",
+                      "items": [],
+                      "arguments": [
+                        {
+                          "name": "session",
+                          "value": {
+                            "kind": "reference",
+                            "value": "session",
+                            "items": [],
+                            "arguments": []
+                          }
+                        }
+                      ]
+                    },
+                    "maximum_symbolic_depth": 1,
+                    "limit_result": {
+                      "kind": "reference",
+                      "value": "unresolved",
+                      "items": [],
+                      "arguments": []
+                    }
+                  }
+                },
+                {
+                  "id": "test.bounded_loop.run.examine.s0001",
+                  "kind": "STOP",
+                  "target": null,
+                  "expression": {
+                    "kind": "reference",
+                    "value": "session",
+                    "items": [],
+                    "arguments": []
+                  },
+                  "type_annotation": null,
+                  "result_binding": null,
+                  "clauses": [],
+                  "body": [],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "authority_attestations": [
+        {
+          "authority_id": "test.advance",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "test.bounded_loop.callbacks",
+          "source_hash": "94394026fce998656225ab9e179a5e6de88b3f10bf2587f1c5fbffe93354d19e"
+        },
+        {
+          "authority_id": "test.begin",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "test.bounded_loop.callbacks",
+          "source_hash": "94394026fce998656225ab9e179a5e6de88b3f10bf2587f1c5fbffe93354d19e"
+        },
+        {
+          "authority_id": "test.condition",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "test.bounded_loop.callbacks",
+          "source_hash": "94394026fce998656225ab9e179a5e6de88b3f10bf2587f1c5fbffe93354d19e"
+        },
+        {
+          "authority_id": "test.progress",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "test.bounded_loop.callbacks",
+          "source_hash": "94394026fce998656225ab9e179a5e6de88b3f10bf2587f1c5fbffe93354d19e"
+        },
+        {
+          "authority_id": "test.stop",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "test.bounded_loop.callbacks",
+          "source_hash": "94394026fce998656225ab9e179a5e6de88b3f10bf2587f1c5fbffe93354d19e"
+        }
+      ],
+      "source_map": [
+        {
+          "node_id": "test.bounded_loop",
+          "construct_kind": "MODULE",
+          "span": {
+            "source_name": "bounded-1.src",
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 18,
+              "column": 1,
+              "offset": 503
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run",
+          "construct_kind": "WORKFLOW",
+          "span": {
+            "source_name": "bounded-1.src",
+            "start": {
+              "line": 3,
+              "column": 1,
+              "offset": 26
+            },
+            "end": {
+              "line": 18,
+              "column": 1,
+              "offset": 503
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.input.request",
+          "construct_kind": "INPUT",
+          "span": {
+            "source_name": "bounded-1.src",
+            "start": {
+              "line": 3,
+              "column": 14,
+              "offset": 39
+            },
+            "end": {
+              "line": 3,
+              "column": 26,
+              "offset": 51
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.output.result",
+          "construct_kind": "OUTPUT",
+          "span": {
+            "source_name": "bounded-1.src",
+            "start": {
+              "line": 3,
+              "column": 31,
+              "offset": 56
+            },
+            "end": {
+              "line": 3,
+              "column": 34,
+              "offset": 59
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.state.session",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "bounded-1.src",
+            "start": {
+              "line": 5,
+              "column": 9,
+              "offset": 78
+            },
+            "end": {
+              "line": 5,
+              "column": 21,
+              "offset": 90
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.begin",
+          "construct_kind": "STEP",
+          "span": {
+            "source_name": "bounded-1.src",
+            "start": {
+              "line": 6,
+              "column": 5,
+              "offset": 95
+            },
+            "end": {
+              "line": 9,
+              "column": 5,
+              "offset": 183
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.begin.s0000",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "bounded-1.src",
+            "start": {
+              "line": 7,
+              "column": 9,
+              "offset": 114
+            },
+            "end": {
+              "line": 7,
+              "column": 52,
+              "offset": 157
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.begin.s0001",
+          "construct_kind": "NEXT",
+          "span": {
+            "source_name": "bounded-1.src",
+            "start": {
+              "line": 8,
+              "column": 9,
+              "offset": 166
+            },
+            "end": {
+              "line": 8,
+              "column": 21,
+              "offset": 178
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.examine",
+          "construct_kind": "STEP",
+          "span": {
+            "source_name": "bounded-1.src",
+            "start": {
+              "line": 9,
+              "column": 5,
+              "offset": 183
+            },
+            "end": {
+              "line": 18,
+              "column": 1,
+              "offset": 503
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.examine.s0000",
+          "construct_kind": "WHILE",
+          "span": {
+            "source_name": "bounded-1.src",
+            "start": {
+              "line": 10,
+              "column": 9,
+              "offset": 204
+            },
+            "end": {
+              "line": 17,
+              "column": 9,
+              "offset": 490
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.examine.s0000.body.s0000",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "bounded-1.src",
+            "start": {
+              "line": 16,
+              "column": 17,
+              "offset": 436
+            },
+            "end": {
+              "line": 16,
+              "column": 62,
+              "offset": 481
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.examine.s0000.loop_contract",
+          "construct_kind": "LOOP_CONTRACT",
+          "span": {
+            "source_name": "bounded-1.src",
+            "start": {
+              "line": 11,
+              "column": 13,
+              "offset": 254
+            },
+            "end": {
+              "line": 17,
+              "column": 9,
+              "offset": 490
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.examine.s0001",
+          "construct_kind": "STOP",
+          "span": {
+            "source_name": "bounded-1.src",
+            "start": {
+              "line": 17,
+              "column": 9,
+              "offset": 490
+            },
+            "end": {
+              "line": 17,
+              "column": 21,
+              "offset": 502
+            }
+          }
+        }
+      ],
+      "schema_version": "yf_arc3_v5.src_ir.v0_1"
+    },
+    "3": {
+      "module_id": "test.bounded_loop",
+      "source_name": "bounded-3.src",
+      "source_hash": "748301ba188df57b588411fc7cf8aa4856f777cb02e1436d42cd3f5fc9af2f55",
+      "semantic_hash": "a3792a1cfaf139bbf5cc8e80f24b7a6f50c04c9aaf8d326e053f11a97247b2c5",
+      "imports": [],
+      "workflows": [
+        {
+          "id": "test.bounded_loop.run",
+          "entry_step_id": "test.bounded_loop.run.begin",
+          "inputs": [
+            {
+              "name": "request",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "result",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            }
+          ],
+          "state": [
+            {
+              "name": "session",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            }
+          ],
+          "steps": [
+            {
+              "id": "test.bounded_loop.run.begin",
+              "statements": [
+                {
+                  "id": "test.bounded_loop.run.begin.s0000",
+                  "kind": "CALL",
+                  "target": null,
+                  "expression": {
+                    "kind": "call",
+                    "value": "test.begin",
+                    "items": [],
+                    "arguments": [
+                      {
+                        "name": "request",
+                        "value": {
+                          "kind": "reference",
+                          "value": "request",
+                          "items": [],
+                          "arguments": []
+                        }
+                      }
+                    ]
+                  },
+                  "type_annotation": null,
+                  "result_binding": "session",
+                  "clauses": [],
+                  "body": [],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                },
+                {
+                  "id": "test.bounded_loop.run.begin.s0001",
+                  "kind": "NEXT",
+                  "target": null,
+                  "expression": {
+                    "kind": "reference",
+                    "value": "examine",
+                    "items": [],
+                    "arguments": []
+                  },
+                  "type_annotation": null,
+                  "result_binding": null,
+                  "clauses": [],
+                  "body": [],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                }
+              ]
+            },
+            {
+              "id": "test.bounded_loop.run.examine",
+              "statements": [
+                {
+                  "id": "test.bounded_loop.run.examine.s0000",
+                  "kind": "WHILE",
+                  "target": null,
+                  "expression": {
+                    "kind": "call",
+                    "value": "test.condition",
+                    "items": [],
+                    "arguments": [
+                      {
+                        "name": "session",
+                        "value": {
+                          "kind": "reference",
+                          "value": "session",
+                          "items": [],
+                          "arguments": []
+                        }
+                      }
+                    ]
+                  },
+                  "type_annotation": null,
+                  "result_binding": null,
+                  "clauses": [],
+                  "body": [
+                    {
+                      "id": "test.bounded_loop.run.examine.s0000.body.s0000",
+                      "kind": "CALL",
+                      "target": null,
+                      "expression": {
+                        "kind": "call",
+                        "value": "test.advance",
+                        "items": [],
+                        "arguments": [
+                          {
+                            "name": "session",
+                            "value": {
+                              "kind": "reference",
+                              "value": "session",
+                              "items": [],
+                              "arguments": []
+                            }
+                          }
+                        ]
+                      },
+                      "type_annotation": null,
+                      "result_binding": "session",
+                      "clauses": [],
+                      "body": [],
+                      "else_body": [],
+                      "match_arms": [],
+                      "iterator": null,
+                      "loop_contract": null
+                    }
+                  ],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": {
+                    "progress_witness": {
+                      "kind": "call",
+                      "value": "test.progress",
+                      "items": [],
+                      "arguments": [
+                        {
+                          "name": "session",
+                          "value": {
+                            "kind": "reference",
+                            "value": "session",
+                            "items": [],
+                            "arguments": []
+                          }
+                        }
+                      ]
+                    },
+                    "stop_condition": {
+                      "kind": "call",
+                      "value": "test.stop",
+                      "items": [],
+                      "arguments": [
+                        {
+                          "name": "session",
+                          "value": {
+                            "kind": "reference",
+                            "value": "session",
+                            "items": [],
+                            "arguments": []
+                          }
+                        }
+                      ]
+                    },
+                    "maximum_symbolic_depth": 3,
+                    "limit_result": {
+                      "kind": "reference",
+                      "value": "unresolved",
+                      "items": [],
+                      "arguments": []
+                    }
+                  }
+                },
+                {
+                  "id": "test.bounded_loop.run.examine.s0001",
+                  "kind": "STOP",
+                  "target": null,
+                  "expression": {
+                    "kind": "reference",
+                    "value": "session",
+                    "items": [],
+                    "arguments": []
+                  },
+                  "type_annotation": null,
+                  "result_binding": null,
+                  "clauses": [],
+                  "body": [],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "authority_attestations": [
+        {
+          "authority_id": "test.advance",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "test.bounded_loop.callbacks",
+          "source_hash": "94394026fce998656225ab9e179a5e6de88b3f10bf2587f1c5fbffe93354d19e"
+        },
+        {
+          "authority_id": "test.begin",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "test.bounded_loop.callbacks",
+          "source_hash": "94394026fce998656225ab9e179a5e6de88b3f10bf2587f1c5fbffe93354d19e"
+        },
+        {
+          "authority_id": "test.condition",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "test.bounded_loop.callbacks",
+          "source_hash": "94394026fce998656225ab9e179a5e6de88b3f10bf2587f1c5fbffe93354d19e"
+        },
+        {
+          "authority_id": "test.progress",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "test.bounded_loop.callbacks",
+          "source_hash": "94394026fce998656225ab9e179a5e6de88b3f10bf2587f1c5fbffe93354d19e"
+        },
+        {
+          "authority_id": "test.stop",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "test.bounded_loop.callbacks",
+          "source_hash": "94394026fce998656225ab9e179a5e6de88b3f10bf2587f1c5fbffe93354d19e"
+        }
+      ],
+      "source_map": [
+        {
+          "node_id": "test.bounded_loop",
+          "construct_kind": "MODULE",
+          "span": {
+            "source_name": "bounded-3.src",
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 18,
+              "column": 1,
+              "offset": 503
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run",
+          "construct_kind": "WORKFLOW",
+          "span": {
+            "source_name": "bounded-3.src",
+            "start": {
+              "line": 3,
+              "column": 1,
+              "offset": 26
+            },
+            "end": {
+              "line": 18,
+              "column": 1,
+              "offset": 503
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.input.request",
+          "construct_kind": "INPUT",
+          "span": {
+            "source_name": "bounded-3.src",
+            "start": {
+              "line": 3,
+              "column": 14,
+              "offset": 39
+            },
+            "end": {
+              "line": 3,
+              "column": 26,
+              "offset": 51
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.output.result",
+          "construct_kind": "OUTPUT",
+          "span": {
+            "source_name": "bounded-3.src",
+            "start": {
+              "line": 3,
+              "column": 31,
+              "offset": 56
+            },
+            "end": {
+              "line": 3,
+              "column": 34,
+              "offset": 59
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.state.session",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "bounded-3.src",
+            "start": {
+              "line": 5,
+              "column": 9,
+              "offset": 78
+            },
+            "end": {
+              "line": 5,
+              "column": 21,
+              "offset": 90
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.begin",
+          "construct_kind": "STEP",
+          "span": {
+            "source_name": "bounded-3.src",
+            "start": {
+              "line": 6,
+              "column": 5,
+              "offset": 95
+            },
+            "end": {
+              "line": 9,
+              "column": 5,
+              "offset": 183
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.begin.s0000",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "bounded-3.src",
+            "start": {
+              "line": 7,
+              "column": 9,
+              "offset": 114
+            },
+            "end": {
+              "line": 7,
+              "column": 52,
+              "offset": 157
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.begin.s0001",
+          "construct_kind": "NEXT",
+          "span": {
+            "source_name": "bounded-3.src",
+            "start": {
+              "line": 8,
+              "column": 9,
+              "offset": 166
+            },
+            "end": {
+              "line": 8,
+              "column": 21,
+              "offset": 178
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.examine",
+          "construct_kind": "STEP",
+          "span": {
+            "source_name": "bounded-3.src",
+            "start": {
+              "line": 9,
+              "column": 5,
+              "offset": 183
+            },
+            "end": {
+              "line": 18,
+              "column": 1,
+              "offset": 503
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.examine.s0000",
+          "construct_kind": "WHILE",
+          "span": {
+            "source_name": "bounded-3.src",
+            "start": {
+              "line": 10,
+              "column": 9,
+              "offset": 204
+            },
+            "end": {
+              "line": 17,
+              "column": 9,
+              "offset": 490
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.examine.s0000.body.s0000",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "bounded-3.src",
+            "start": {
+              "line": 16,
+              "column": 17,
+              "offset": 436
+            },
+            "end": {
+              "line": 16,
+              "column": 62,
+              "offset": 481
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.examine.s0000.loop_contract",
+          "construct_kind": "LOOP_CONTRACT",
+          "span": {
+            "source_name": "bounded-3.src",
+            "start": {
+              "line": 11,
+              "column": 13,
+              "offset": 254
+            },
+            "end": {
+              "line": 17,
+              "column": 9,
+              "offset": 490
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.examine.s0001",
+          "construct_kind": "STOP",
+          "span": {
+            "source_name": "bounded-3.src",
+            "start": {
+              "line": 17,
+              "column": 9,
+              "offset": 490
+            },
+            "end": {
+              "line": 17,
+              "column": 21,
+              "offset": 502
+            }
+          }
+        }
+      ],
+      "schema_version": "yf_arc3_v5.src_ir.v0_1"
+    },
+    "8": {
+      "module_id": "test.bounded_loop",
+      "source_name": "bounded-8.src",
+      "source_hash": "f524efc195b6d52845cade7f7df9d9c7062d1d692ca7679b9b8f9bfc80306c4c",
+      "semantic_hash": "99ee034480663878089356f1a9f5a29b879a3f6b6f90f5a68b1b5d678d9f45c7",
+      "imports": [],
+      "workflows": [
+        {
+          "id": "test.bounded_loop.run",
+          "entry_step_id": "test.bounded_loop.run.begin",
+          "inputs": [
+            {
+              "name": "request",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "result",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            }
+          ],
+          "state": [
+            {
+              "name": "session",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            }
+          ],
+          "steps": [
+            {
+              "id": "test.bounded_loop.run.begin",
+              "statements": [
+                {
+                  "id": "test.bounded_loop.run.begin.s0000",
+                  "kind": "CALL",
+                  "target": null,
+                  "expression": {
+                    "kind": "call",
+                    "value": "test.begin",
+                    "items": [],
+                    "arguments": [
+                      {
+                        "name": "request",
+                        "value": {
+                          "kind": "reference",
+                          "value": "request",
+                          "items": [],
+                          "arguments": []
+                        }
+                      }
+                    ]
+                  },
+                  "type_annotation": null,
+                  "result_binding": "session",
+                  "clauses": [],
+                  "body": [],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                },
+                {
+                  "id": "test.bounded_loop.run.begin.s0001",
+                  "kind": "NEXT",
+                  "target": null,
+                  "expression": {
+                    "kind": "reference",
+                    "value": "examine",
+                    "items": [],
+                    "arguments": []
+                  },
+                  "type_annotation": null,
+                  "result_binding": null,
+                  "clauses": [],
+                  "body": [],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                }
+              ]
+            },
+            {
+              "id": "test.bounded_loop.run.examine",
+              "statements": [
+                {
+                  "id": "test.bounded_loop.run.examine.s0000",
+                  "kind": "WHILE",
+                  "target": null,
+                  "expression": {
+                    "kind": "call",
+                    "value": "test.condition",
+                    "items": [],
+                    "arguments": [
+                      {
+                        "name": "session",
+                        "value": {
+                          "kind": "reference",
+                          "value": "session",
+                          "items": [],
+                          "arguments": []
+                        }
+                      }
+                    ]
+                  },
+                  "type_annotation": null,
+                  "result_binding": null,
+                  "clauses": [],
+                  "body": [
+                    {
+                      "id": "test.bounded_loop.run.examine.s0000.body.s0000",
+                      "kind": "CALL",
+                      "target": null,
+                      "expression": {
+                        "kind": "call",
+                        "value": "test.advance",
+                        "items": [],
+                        "arguments": [
+                          {
+                            "name": "session",
+                            "value": {
+                              "kind": "reference",
+                              "value": "session",
+                              "items": [],
+                              "arguments": []
+                            }
+                          }
+                        ]
+                      },
+                      "type_annotation": null,
+                      "result_binding": "session",
+                      "clauses": [],
+                      "body": [],
+                      "else_body": [],
+                      "match_arms": [],
+                      "iterator": null,
+                      "loop_contract": null
+                    }
+                  ],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": {
+                    "progress_witness": {
+                      "kind": "call",
+                      "value": "test.progress",
+                      "items": [],
+                      "arguments": [
+                        {
+                          "name": "session",
+                          "value": {
+                            "kind": "reference",
+                            "value": "session",
+                            "items": [],
+                            "arguments": []
+                          }
+                        }
+                      ]
+                    },
+                    "stop_condition": {
+                      "kind": "call",
+                      "value": "test.stop",
+                      "items": [],
+                      "arguments": [
+                        {
+                          "name": "session",
+                          "value": {
+                            "kind": "reference",
+                            "value": "session",
+                            "items": [],
+                            "arguments": []
+                          }
+                        }
+                      ]
+                    },
+                    "maximum_symbolic_depth": 8,
+                    "limit_result": {
+                      "kind": "reference",
+                      "value": "unresolved",
+                      "items": [],
+                      "arguments": []
+                    }
+                  }
+                },
+                {
+                  "id": "test.bounded_loop.run.examine.s0001",
+                  "kind": "STOP",
+                  "target": null,
+                  "expression": {
+                    "kind": "reference",
+                    "value": "session",
+                    "items": [],
+                    "arguments": []
+                  },
+                  "type_annotation": null,
+                  "result_binding": null,
+                  "clauses": [],
+                  "body": [],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "authority_attestations": [
+        {
+          "authority_id": "test.advance",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "test.bounded_loop.callbacks",
+          "source_hash": "94394026fce998656225ab9e179a5e6de88b3f10bf2587f1c5fbffe93354d19e"
+        },
+        {
+          "authority_id": "test.begin",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "test.bounded_loop.callbacks",
+          "source_hash": "94394026fce998656225ab9e179a5e6de88b3f10bf2587f1c5fbffe93354d19e"
+        },
+        {
+          "authority_id": "test.condition",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "test.bounded_loop.callbacks",
+          "source_hash": "94394026fce998656225ab9e179a5e6de88b3f10bf2587f1c5fbffe93354d19e"
+        },
+        {
+          "authority_id": "test.progress",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "test.bounded_loop.callbacks",
+          "source_hash": "94394026fce998656225ab9e179a5e6de88b3f10bf2587f1c5fbffe93354d19e"
+        },
+        {
+          "authority_id": "test.stop",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "test.bounded_loop.callbacks",
+          "source_hash": "94394026fce998656225ab9e179a5e6de88b3f10bf2587f1c5fbffe93354d19e"
+        }
+      ],
+      "source_map": [
+        {
+          "node_id": "test.bounded_loop",
+          "construct_kind": "MODULE",
+          "span": {
+            "source_name": "bounded-8.src",
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 18,
+              "column": 1,
+              "offset": 503
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run",
+          "construct_kind": "WORKFLOW",
+          "span": {
+            "source_name": "bounded-8.src",
+            "start": {
+              "line": 3,
+              "column": 1,
+              "offset": 26
+            },
+            "end": {
+              "line": 18,
+              "column": 1,
+              "offset": 503
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.input.request",
+          "construct_kind": "INPUT",
+          "span": {
+            "source_name": "bounded-8.src",
+            "start": {
+              "line": 3,
+              "column": 14,
+              "offset": 39
+            },
+            "end": {
+              "line": 3,
+              "column": 26,
+              "offset": 51
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.output.result",
+          "construct_kind": "OUTPUT",
+          "span": {
+            "source_name": "bounded-8.src",
+            "start": {
+              "line": 3,
+              "column": 31,
+              "offset": 56
+            },
+            "end": {
+              "line": 3,
+              "column": 34,
+              "offset": 59
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.state.session",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "bounded-8.src",
+            "start": {
+              "line": 5,
+              "column": 9,
+              "offset": 78
+            },
+            "end": {
+              "line": 5,
+              "column": 21,
+              "offset": 90
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.begin",
+          "construct_kind": "STEP",
+          "span": {
+            "source_name": "bounded-8.src",
+            "start": {
+              "line": 6,
+              "column": 5,
+              "offset": 95
+            },
+            "end": {
+              "line": 9,
+              "column": 5,
+              "offset": 183
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.begin.s0000",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "bounded-8.src",
+            "start": {
+              "line": 7,
+              "column": 9,
+              "offset": 114
+            },
+            "end": {
+              "line": 7,
+              "column": 52,
+              "offset": 157
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.begin.s0001",
+          "construct_kind": "NEXT",
+          "span": {
+            "source_name": "bounded-8.src",
+            "start": {
+              "line": 8,
+              "column": 9,
+              "offset": 166
+            },
+            "end": {
+              "line": 8,
+              "column": 21,
+              "offset": 178
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.examine",
+          "construct_kind": "STEP",
+          "span": {
+            "source_name": "bounded-8.src",
+            "start": {
+              "line": 9,
+              "column": 5,
+              "offset": 183
+            },
+            "end": {
+              "line": 18,
+              "column": 1,
+              "offset": 503
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.examine.s0000",
+          "construct_kind": "WHILE",
+          "span": {
+            "source_name": "bounded-8.src",
+            "start": {
+              "line": 10,
+              "column": 9,
+              "offset": 204
+            },
+            "end": {
+              "line": 17,
+              "column": 9,
+              "offset": 490
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.examine.s0000.body.s0000",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "bounded-8.src",
+            "start": {
+              "line": 16,
+              "column": 17,
+              "offset": 436
+            },
+            "end": {
+              "line": 16,
+              "column": 62,
+              "offset": 481
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.examine.s0000.loop_contract",
+          "construct_kind": "LOOP_CONTRACT",
+          "span": {
+            "source_name": "bounded-8.src",
+            "start": {
+              "line": 11,
+              "column": 13,
+              "offset": 254
+            },
+            "end": {
+              "line": 17,
+              "column": 9,
+              "offset": 490
+            }
+          }
+        },
+        {
+          "node_id": "test.bounded_loop.run.examine.s0001",
+          "construct_kind": "STOP",
+          "span": {
+            "source_name": "bounded-8.src",
+            "start": {
+              "line": 17,
+              "column": 9,
+              "offset": 490
+            },
+            "end": {
+              "line": 17,
+              "column": 21,
+              "offset": 502
+            }
+          }
+        }
+      ],
+      "schema_version": "yf_arc3_v5.src_ir.v0_1"
+    }
+  },
+  "cases": [
+    {
+      "id": "stops_on_last_admitted_iteration",
+      "depth": 3,
+      "inputs": {
+        "request": {
+          "pending": true,
+          "done": false,
+          "increment": 1,
+          "finishAt": 3,
+          "conditionAt": 99
+        }
+      },
+      "expected": {
+        "status": "completed",
+        "value": {
+          "conditionAt": 99,
+          "done": true,
+          "finishAt": 3,
+          "increment": 1,
+          "index": 3,
+          "pending": true,
+          "progress": 3
+        },
+        "session": {
+          "conditionAt": 99,
+          "done": true,
+          "finishAt": 3,
+          "increment": 1,
+          "index": 3,
+          "pending": true,
+          "progress": 3
+        },
+        "calls": [
+          "begin",
+          "stop:0",
+          "condition:0",
+          "progress:0",
+          "advance:0",
+          "stop:1",
+          "progress:1",
+          "condition:1",
+          "advance:1",
+          "stop:2",
+          "progress:2",
+          "condition:2",
+          "advance:2",
+          "stop:3",
+          "progress:3"
+        ],
+        "executedStatements": [
+          "test.bounded_loop.run.begin.s0000",
+          "test.bounded_loop.run.begin.s0001",
+          "test.bounded_loop.run.examine.s0000",
+          "test.bounded_loop.run.examine.s0000.body.s0000",
+          "test.bounded_loop.run.examine.s0000",
+          "test.bounded_loop.run.examine.s0000.body.s0000",
+          "test.bounded_loop.run.examine.s0000",
+          "test.bounded_loop.run.examine.s0000.body.s0000",
+          "test.bounded_loop.run.examine.s0000",
+          "test.bounded_loop.run.examine.s0001"
+        ]
+      }
+    },
+    {
+      "id": "condition_stops_before_depth",
+      "depth": 8,
+      "inputs": {
+        "request": {
+          "pending": true,
+          "done": false,
+          "increment": 1,
+          "finishAt": 99,
+          "conditionAt": 2
+        }
+      },
+      "expected": {
+        "status": "completed",
+        "value": {
+          "conditionAt": 2,
+          "done": false,
+          "finishAt": 99,
+          "increment": 1,
+          "index": 2,
+          "pending": false,
+          "progress": 2
+        },
+        "session": {
+          "conditionAt": 2,
+          "done": false,
+          "finishAt": 99,
+          "increment": 1,
+          "index": 2,
+          "pending": false,
+          "progress": 2
+        },
+        "calls": [
+          "begin",
+          "stop:0",
+          "condition:0",
+          "progress:0",
+          "advance:0",
+          "stop:1",
+          "progress:1",
+          "condition:1",
+          "advance:1",
+          "stop:2",
+          "progress:2",
+          "condition:2"
+        ],
+        "executedStatements": [
+          "test.bounded_loop.run.begin.s0000",
+          "test.bounded_loop.run.begin.s0001",
+          "test.bounded_loop.run.examine.s0000",
+          "test.bounded_loop.run.examine.s0000.body.s0000",
+          "test.bounded_loop.run.examine.s0000",
+          "test.bounded_loop.run.examine.s0000.body.s0000",
+          "test.bounded_loop.run.examine.s0000",
+          "test.bounded_loop.run.examine.s0001"
+        ]
+      }
+    },
+    {
+      "id": "no_progress_precedes_false_condition",
+      "depth": 8,
+      "inputs": {
+        "request": {
+          "pending": true,
+          "done": false,
+          "increment": 0,
+          "finishAt": 99,
+          "conditionAt": 1
+        }
+      },
+      "expected": {
+        "status": "deferred",
+        "value": "unresolved:no_progress:test.bounded_loop.run.examine.s0000",
+        "session": {
+          "conditionAt": 1,
+          "done": false,
+          "finishAt": 99,
+          "increment": 0,
+          "index": 1,
+          "pending": false,
+          "progress": 0
+        },
+        "calls": [
+          "begin",
+          "stop:0",
+          "condition:0",
+          "progress:0",
+          "advance:0",
+          "stop:1",
+          "progress:1"
+        ],
+        "executedStatements": [
+          "test.bounded_loop.run.begin.s0000",
+          "test.bounded_loop.run.begin.s0001",
+          "test.bounded_loop.run.examine.s0000",
+          "test.bounded_loop.run.examine.s0000.body.s0000",
+          "test.bounded_loop.run.examine.s0000"
+        ]
+      }
+    },
+    {
+      "id": "depth_precedes_false_condition",
+      "depth": 1,
+      "inputs": {
+        "request": {
+          "pending": true,
+          "done": false,
+          "increment": 1,
+          "finishAt": 99,
+          "conditionAt": 1
+        }
+      },
+      "expected": {
+        "status": "deferred",
+        "value": "unresolved",
+        "session": {
+          "conditionAt": 1,
+          "done": false,
+          "finishAt": 99,
+          "increment": 1,
+          "index": 1,
+          "pending": false,
+          "progress": 1
+        },
+        "calls": [
+          "begin",
+          "stop:0",
+          "condition:0",
+          "progress:0",
+          "advance:0",
+          "stop:1",
+          "progress:1"
+        ],
+        "executedStatements": [
+          "test.bounded_loop.run.begin.s0000",
+          "test.bounded_loop.run.begin.s0001",
+          "test.bounded_loop.run.examine.s0000",
+          "test.bounded_loop.run.examine.s0000.body.s0000",
+          "test.bounded_loop.run.examine.s0000"
+        ]
+      }
+    },
+    {
+      "id": "initial_stop_still_evaluates_condition",
+      "depth": 8,
+      "inputs": {
+        "request": {
+          "pending": true,
+          "done": true,
+          "increment": 0,
+          "finishAt": 99,
+          "conditionAt": 99
+        }
+      },
+      "expected": {
+        "status": "completed",
+        "value": {
+          "conditionAt": 99,
+          "done": true,
+          "finishAt": 99,
+          "increment": 0,
+          "index": 0,
+          "pending": true,
+          "progress": 0
+        },
+        "session": {
+          "conditionAt": 99,
+          "done": true,
+          "finishAt": 99,
+          "increment": 0,
+          "index": 0,
+          "pending": true,
+          "progress": 0
+        },
+        "calls": [
+          "begin",
+          "stop:0",
+          "condition:0"
+        ],
+        "executedStatements": [
+          "test.bounded_loop.run.begin.s0000",
+          "test.bounded_loop.run.begin.s0001",
+          "test.bounded_loop.run.examine.s0000",
+          "test.bounded_loop.run.examine.s0001"
+        ]
+      }
+    },
+    {
+      "id": "false_initial_condition_skips_progress",
+      "depth": 8,
+      "inputs": {
+        "request": {
+          "pending": false,
+          "done": false,
+          "increment": 1,
+          "finishAt": 99,
+          "conditionAt": 99
+        }
+      },
+      "expected": {
+        "status": "completed",
+        "value": {
+          "conditionAt": 99,
+          "done": false,
+          "finishAt": 99,
+          "increment": 1,
+          "index": 0,
+          "pending": false,
+          "progress": 0
+        },
+        "session": {
+          "conditionAt": 99,
+          "done": false,
+          "finishAt": 99,
+          "increment": 1,
+          "index": 0,
+          "pending": false,
+          "progress": 0
+        },
+        "calls": [
+          "begin",
+          "stop:0",
+          "condition:0"
+        ],
+        "executedStatements": [
+          "test.bounded_loop.run.begin.s0000",
+          "test.bounded_loop.run.begin.s0001",
+          "test.bounded_loop.run.examine.s0000",
+          "test.bounded_loop.run.examine.s0001"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.native-cost-log-transport.v1",
+  "status": "passed",
+  "source": {
+    "path": "/workspace/scratch/c4dd29871d33/lot2b-performance-raw/after-attempt-01.log",
+    "sha256": "40e6ce87fc244a0b85693d07b68033c2012a599735cffe74af1554512bdc8c2f",
+    "bytes": 1807
+  },
+  "originalOutputPath": "docs/migration/lot2b-evidence/performance/after-attempt-01.log",
+  "destination": {
+    "path": "docs/migration/lot2b-evidence/performance/after-attempt-01.log.gz",
+    "sha256": "2b8416f6431fdc6ec78583422a8a9440872101331ed010f82ccc33e8c1383fb2",
+    "bytes": 457
+  },
+  "compression": "gzip with mtime=0; decompressed stdout/stderr bytes match exactly"
+}

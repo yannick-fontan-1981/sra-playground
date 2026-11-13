@@ -1,0 +1,5 @@
+{
+  "status": "preflight_missing_manifest_resolved",
+  "gameExecutionStarted": false,
+  "reason": "Initial runner stopped before campaign because the required local source-manifest.json was absent. Exact frozen parent manifest copied before retry."
+}

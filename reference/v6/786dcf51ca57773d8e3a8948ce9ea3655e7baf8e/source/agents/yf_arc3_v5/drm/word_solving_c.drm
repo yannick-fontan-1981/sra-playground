@@ -1,0 +1,177 @@
+{
+  "module_id": "word_solving_c",
+  "declarations": [
+    {
+      "id": "policy.word_solving_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_typed_word_relation_parent_question"
+      ],
+      "applicability": [
+        "K30_requested_operation"
+      ],
+      "invariants": [
+        "grounded_typed_word_relation",
+        "shared_edit_phase_constraints",
+        "current_rule_and_example_state",
+        "current_evidence_revision",
+        "complete_parse_alternatives_not_longest_prefix_priority",
+        "composition_order_from_declared_type_graph",
+        "shared_dictionary_constraints_not_witness_dictionary",
+        "observed_focus_and_mutation_graphs_separate",
+        "validation_spans_confirmation_not_interactive_units_or_submit",
+        "no_act"
+      ],
+      "falsifiers": [
+        "unbound_connector_relation",
+        "wrong_rule_or_editability_receipt",
+        "stale_shared_rule_or_editability"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "word_solving.native",
+        "word_solving.missing"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.word_solving.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "word_solving.native"
+            },
+            {
+              "field": "current_word_question",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "word_solving.native"
+          }
+        },
+        {
+          "id": "projection.word_solving.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "word_solving.missing"
+            },
+            {
+              "field": "current_word_question",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "word_solving.missing"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.word_solving.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "word_solving.native"
+            }
+          ],
+          "reason_ref": "reason.typed_rule_derivations_explain_grounded_word_relation"
+        },
+        {
+          "id": "tier.word_solving.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "word_solving.missing"
+            }
+          ],
+          "reason_ref": "reason.word_question_requires_current_evidence"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.word_solving_activation_unverified",
+      "reason_refs": [
+        "reason.typed_rule_derivations_explain_grounded_word_relation",
+        "reason.word_question_requires_current_evidence"
+      ]
+    },
+    {
+      "id":"policy.word_dependency_citation_c",
+      "kind":"selection_policy",
+      "evaluation":"declared_eligibility_single",
+      "supported_operators":["SELECT"],
+      "input_contract":"yf_arc3_v5.authority_input.selection.v1",
+      "output_contract":"yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs":["word_dependency.publish"],
+      "selection_required_fact_fields":["alternative_ref"],
+      "selection_eligibility_conditions":[{"field":"eligible","operator":"equals","expected":true}],
+      "fact_projections":[{"id":"projection.word_dependency.current",
+        "all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"word_dependency.publish"},
+          {"field":"dependency_bindings_current","operator":"equals","expected":true}],
+        "static_facts":{"eligible":true}}],
+      "meaning_template_ref_by_alternative":{"word_dependency.publish":"rule.word_dependency_citation_c"},
+      "premises":["canonical_rule_and_derivation_terms","exact_current_rule_revision","supported_citation_evidence"],
+      "invariants":["stored_citation_is_not_current_output_truth","changed_rule_invalidates_all_citing_views","preserve_independent_views"],
+      "falsifiers":["missing_canonical_reference","wrong_rule_revision","unsupported_citation"],
+      "reason_refs":["reason.canonical_rule_citation_dependency"]
+    },
+    {
+      "id":"rule.word_dependency_citation_c",
+      "kind":"rule",
+      "evaluation":"project_requested_conclusions",
+      "supported_operators":["DERIVE"],
+      "input_contract":"yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract":"yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family":"control",
+      "term_templates":[{
+        "id_pattern":"word_dependency.{rule_ref}.{derivation_ref}.{stored_revision_ref}",
+        "kind":"value","label":"Stored word rule citation revision",
+        "required_fields":["rule_ref","derivation_ref","stored_revision_ref"],
+        "attribute_bindings":{"rule_ref":"rule_ref","derivation_ref":"derivation_ref","stored_revision_ref":"stored_revision_ref"},
+        "static_attributes":{"projection_contract_ref":"word.rule_citation_dependency.c.v1"}
+      }],
+      "claim_templates":[{
+        "id_pattern":"claim.word_dependency.{rule_ref}.{derivation_ref}.{stored_revision_ref}",
+        "predicate":"depends_on","family":"control","epistemic_status":"supported",
+        "argument_patterns":["{rule_ref}","{derivation_ref}"],
+        "required_term_patterns":["{rule_ref}","{derivation_ref}","{parent_goal_ref}"],
+        "required_fields":["rule_ref","derivation_ref","stored_revision_ref","parent_goal_ref"],
+        "scope_bindings":{"parent_goal_ref":"parent_goal_ref","epoch":"epoch","episode_ref":"episode_ref","level_scope_ref":"level_scope_ref"},
+        "attribute_bindings":{"stored_rule_revision_ref":"stored_revision_ref"},
+        "static_attributes":{"dependent_kind":"derived_view","projection_contract_ref":"word.rule_citation_dependency.c.v1"}
+      }],
+      "premises":["supported_stored_word_rule_citation"],
+      "invariants":["no_action_authority","dependency_is_distinct_from_derived_word_truth"],
+      "falsifiers":["citation_revision_or_owner_changes"],
+      "reason_refs":["reason.canonical_rule_citation_dependency"]
+    }
+  ]
+}

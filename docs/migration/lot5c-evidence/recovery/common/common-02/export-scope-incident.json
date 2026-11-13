@@ -1,0 +1,28 @@
+{
+  "schema": "logos-engine.lot5c.original-export-scope-incident.v1",
+  "recordedAt": "2026-11-11T13:38:02.410794+00:00",
+  "status": "retained_failed_review_followed_by_per_case_exports",
+  "aggregateExport": "docs/migration/lot5c-evidence/recovery/common/common-02/original-export.json",
+  "counts": {
+    "helpers": 0,
+    "coldChains": 4,
+    "isolatedSourceRestoreContracts": 0,
+    "chains": 4,
+    "chainOperations": 412,
+    "sourceExceptions": 0,
+    "attentionMemoryPuts": 6,
+    "sourceStateRetentionChecks": 80,
+    "sourceStateRetentions": 80
+  },
+  "retainedFailedReview": "docs/migration/lot5c-evidence/recovery/common/common-02/positive/original-comparison.json",
+  "failedChecks": [
+    "source_retention_export_count",
+    "source_retention_taken_count"
+  ],
+  "cause": "The exporter accepts several journals and reports global retention counters, but this reviewer compares those counters to one selected chain. My four-journal invocation was incompatible with that per-case contract. Native values, consumed mapping orders and source calls have no reported difference in the retained positive comparison.",
+  "correction": "Run the unchanged exporter independently for each of the four unchanged actual journals; then run the unchanged reviewer with a new exclusive output. No native scenario is rerun, no expected value or comparison rule is changed, and the aggregate export and failed comparison remain retained.",
+  "nativeTestsPassed": 7,
+  "declaredScenarios": 8,
+  "originalReviewerChanged": false,
+  "exporterChanged": false
+}

@@ -1,0 +1,1398 @@
+{
+  "schema": "logos-engine.native-loop-profile-comparison.v1",
+  "status": "strict_identity_failed",
+  "recordedAt": "2026-11-09T21:23:10.213Z",
+  "generator": {
+    "path": "scripts/compare-native-loop-diagnostics.mjs",
+    "bytes": 23639,
+    "sha256": "fb98618b982a98b6c6cb43f8a08e55167ed33a9368146a0bc4695c67e5ab8e91"
+  },
+  "inputs": {
+    "before": {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/baseline.json.gz",
+      "bytes": 121381,
+      "sha256": "d8bd2f3b4b85270ab5c9e82807f369b5ffb0fce407bfe5e0642098d5dd7b71fa"
+    },
+    "after": {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/after.json.gz",
+      "bytes": 121902,
+      "sha256": "26cdd988efdda613e9cfe6f89c0d21a7a931d8a1420bede6d22d6bd2ae60b181"
+    }
+  },
+  "nativeDigests": {
+    "before": "3cd17565b114a40ed71870bf8d7875a1b91102440b92d14a9258bfa98d4f7779",
+    "after": "ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b"
+  },
+  "initiallyQualifiedSnapshotFields": [
+    "/final/snapshot/implementation",
+    "/final/snapshot/activeSeconds"
+  ],
+  "allFinalDifferences": [
+    {
+      "path": "/final/snapshot/activeSeconds",
+      "before": 12.171311173999998,
+      "after": 11.529866974000003
+    },
+    {
+      "path": "/final/snapshot/trace/0/graph_chain",
+      "before": "c8c5956acb8a7cdb6276bbbf3fbc20fc55d332ac4cd6a4db475bdf98470580f2",
+      "after": "aa86789b484dca9291dc2e28d6b2a7a39583a60e126fb09d805ae14cec2bb005"
+    },
+    {
+      "path": "/final/snapshot/trace/3/graph_chain",
+      "before": "e15fa75153555117d248c051da8e311963278e710213a7abb4852ddcfe1e6c69",
+      "after": "23688bb7ad3bf43e1c88226dc303075a6386ed85b62a538bca2f618bac901154"
+    },
+    {
+      "path": "/final/snapshot/trace/6/graph_chain",
+      "before": "58d8933151b60dca546e1109744f34fd7d766cb97bd1171956c0432a22c91848",
+      "after": "cae213c95b959c781762e5e30a2d7568850e1f4eac47e82501b00a6bf14bba9c"
+    },
+    {
+      "path": "/final/snapshot/trace/9/graph_chain",
+      "before": "1dbc74be7077411df9e8a4d183463e160586996858f15323b3d898dd62b5fc93",
+      "after": "cb24f782f4ecdf3634bf6d85f756b4db4f03aa24efebc5a67e990bfc8c6161c9"
+    },
+    {
+      "path": "/final/snapshot/trace/12/graph_chain",
+      "before": "90545bb75acb8a625e2b9923393fdb2f59c12830ed3cbf04eaaaa199fcb63220",
+      "after": "997f788c1c7d20352ce24fa655ca774987dec430a9dd0e3dacdb9b911acb598a"
+    },
+    {
+      "path": "/final/snapshot/trace/15/graph_chain",
+      "before": "638eb40ba8ba303893b5c5375518129a12ac49aec2ae5c25487cd158e8c2eeb1",
+      "after": "3993d87a11ff6356fd56bc18da7db190ccf8061d476eaecce74d16a8472307a2"
+    },
+    {
+      "path": "/final/snapshot/trace/19/graph_chain",
+      "before": "0cb93eaa3ab80cfa9b32d98982344efb5a7600120cb228a026f52283b4ff0c6b",
+      "after": "f5453550e2207d9b7363ffd2ef6f979d7c67624dad6e30c0d61c2a3eeb261398"
+    },
+    {
+      "path": "/final/snapshot/trace/22/graph_chain",
+      "before": "1a83c5a6c8e45b47acfae2174885477f3075ac9bd807d5cbf10758a4e3483a5c",
+      "after": "a4c936a35cd1e07229f1d631a3a7b2ba7c6f844c0f1238be721ab466402c372a"
+    },
+    {
+      "path": "/final/snapshot/trace/26/graph_chain",
+      "before": "1e07b01f7b20c737d88b5bce93bf65c94e475b7687b49865d11e721c99663e00",
+      "after": "4477813da727a2d44515ebf1e1106209f26c001fee43687656c02c18f9128b33"
+    },
+    {
+      "path": "/final/snapshot/trace/29/graph_chain",
+      "before": "0657dda918970d75177972f6629353bc675c494019c99465e770eebdb21186fc",
+      "after": "947b56e8ef471c8ae05c699c10b52a847d068500b27ff7fe766d8f37eff7b0ed"
+    },
+    {
+      "path": "/final/snapshot/trace/40/graph_chain",
+      "before": "73bf1976ae991348f2d86df13374cf8901a64a71fafbaef55b8a768082b430b7",
+      "after": "07ea28943f05594f746f960a7d2f89a203384cf73dd6b9f22b7fbb91938bf1ec"
+    },
+    {
+      "path": "/final/snapshot/trace/43/graph_chain",
+      "before": "bf632ccb8ff3398f69824c490180f91fbe8b2efad927b022c8cc90fb32a2f675",
+      "after": "b646d84fca83e12e9ff62500f94c082b5ad498aab487d9ff01835dc16add90e0"
+    },
+    {
+      "path": "/final/snapshot/sourceDigest",
+      "before": "5fdeb20e1fa511f5e00ec2f4cce99d1b77a7139bc71e15e9e85897ddb3e5d9f3",
+      "after": "17b8dfa3529b2aa3c3f2c4382d6bf2ed0a9ec9fa5ff16ad46ffbe15f060286d9"
+    },
+    {
+      "path": "/final/snapshot/implementation",
+      "before": "logos-engine.typescript.v6.native-migration/0.35.0",
+      "after": "logos-engine.typescript.v6.native-migration/0.36.0"
+    },
+    {
+      "path": "/final/snapshot/whyAct/decision/total_ms",
+      "before": 2.116916000000856,
+      "after": 2.5896620000003168
+    },
+    {
+      "path": "/final/snapshot/graphChain",
+      "before": "1b2c25191ba0603e688395669b43fd669b3b3fe3c8daf34e6778b60d8fcc1652",
+      "after": "9591c57eaec0035533741a3876594df7875e098673547ad55ec9638cf53f9756"
+    },
+    {
+      "path": "/final/snapshot/nativeExecutionDigest",
+      "before": "72298f4673f672d4e73bf86d45c29228d2792dce17490a5543b275afeb7933fd",
+      "after": "2dbb81d9fd2bc3dcfa03e6daa1fc36ea1545b091d253bf1d29d0565eaf26d81c"
+    },
+    {
+      "path": "/final/knowledge/chain",
+      "before": "1b2c25191ba0603e688395669b43fd669b3b3fe3c8daf34e6778b60d8fcc1652",
+      "after": "9591c57eaec0035533741a3876594df7875e098673547ad55ec9638cf53f9756"
+    },
+    {
+      "path": "/final/knowledge/jsonSha256",
+      "before": "379b81e8fa8c708acc630b0b4d4bbe132dcc611aeadf8b1ffeede52f683879d1",
+      "after": "0d9215919f91938294033d4a325b691f92ab3d5660756c3312b60cb71f8c16fa"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:1/valueJsonSha256",
+      "before": "b932822e1fd011b4aa9c8bdff31a7537a730354084411f31cea5e350149da550",
+      "after": "b46d9c69f6bae6d7cc6c87c6ed9bf7efb1ff5b4550f523ff6610fbc5892066e5"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:10/valueJsonSha256",
+      "before": "6c80d1eea1a5a0b5730a85d6802ccfbcdf6a4f0879d51d63ae7faaedc0b2adeb",
+      "after": "363714f61c2f09362aa8f99ec364a50b7fa1067ed9567833bcc1b8c923fa816d"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:11/valueJsonSha256",
+      "before": "ae4c452a35aa1198f73bc8647436bc88c0a1241fcd7c7e153bd35a7792e4b1b5",
+      "after": "c159f980aebff9b170c2ba318e00bdc3b87da53bd771cf4ad45ed1c7671529f8"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:12/valueJsonSha256",
+      "before": "917c0cf16dddf19c554d31829a63f6b56b5593c446fac9158da4e2f7473a0ed1",
+      "after": "dfd5a29c69adee9bdfe6718f9a13c718f309cf081b36875ef73e6b35213ca878"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:13/valueJsonSha256",
+      "before": "44fe6c517f8c7b002b53fe4c77ed4381db7baf471ffb52d10f7d527b14972b57",
+      "after": "8360d4ad4f0fd1d705d42dc24ce2455c17f466e9f556a806c330750ec5d8bd11"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:14/valueJsonSha256",
+      "before": "24c5c9b6dc74afa0a49f37a6486f0024fddb69c0fa9bd0fc9ef30d0d5b4a029a",
+      "after": "44dd6b225e8acfd65c42c9982e2cd3c1481a1412e7f0423b11074cd609ec380b"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:15/valueJsonSha256",
+      "before": "bb3a2b6da8ceaceb489a82b8eb2cb1ba1a14c4e68c1f64f310372d38dba75437",
+      "after": "2886aab7999cb295dbd75ccee4ad1322b1b0383968c3841ac26957f0f9a770d0"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:16/valueJsonSha256",
+      "before": "69d658dff4004316dcfa0eaeba9ba31addc6231fc5fc0c39fafd9080e9490509",
+      "after": "2c1ed1dd3ee50de707637afa89e286a4ee436b0cc5e07c70e2348fcc1d9acbe0"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:17/valueJsonSha256",
+      "before": "a0f09f83e4dd6e442cdef74b8cb5afe4687a32b199e5b990f9a679efd0fe550c",
+      "after": "ca09f3713dbe11d316dad93a19cc532b60560b304494be7e1ebafcd3311a0337"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:18/valueJsonSha256",
+      "before": "d9e944e73bf5f9948aa80b8261bbf306d81c7e7937c953048569d30febf286f2",
+      "after": "1554374ccf807c25006886d3f5688483b12deb40509e333038436e185a111bbc"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:19/valueJsonSha256",
+      "before": "1fcf64ed19e73e7e74b04a52830b6e94ee2461127ec14f5ffc82fb53c904b24a",
+      "after": "116c1d97691715e6148223061904f1583b4ebf12970d7bd7eecfb33a23f3b8d1"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:2/valueJsonSha256",
+      "before": "500e6d1747735f2ffcc155c9ee4f4997c59e2cd063cf282a1e9972b65e94361a",
+      "after": "53ecef7f9b92358df99319b21a84b7b821d1c161d7d8f5dfbe02d4e494ef034f"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:20/valueJsonSha256",
+      "before": "8546bd65e699e14df9e82bc258e5e8816bb6b3c7a5667bf82d2220a738a7b392",
+      "after": "253ba17225edd4ee9740e0f52136b84d7d18bea8715b565b4e95bba28d84385a"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:21/valueJsonSha256",
+      "before": "14fb131230273779d35961a1194f27811a9fe9cb2e83d2fc6737c9b694fcc7a8",
+      "after": "4c8eb0f2ff990745ac3b70ffd23d42846d9c69c60c78cc1e6f24fd09d3e2fa3a"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:22/valueJsonSha256",
+      "before": "63c0b9e88159b71486419f78e2923e6bd23e90fb84d21d1d29d4e49d78f0ce14",
+      "after": "b60affc920fdf485e20000681d425cf8e4c4d7628950191868fdc61cf250c157"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:23/valueJsonSha256",
+      "before": "2dac9c7a674d730bbcce527e005591e0e565731bd2fd3886ddb869b5d7a87883",
+      "after": "55bb695262162f189dcd50550f2017c4eda00ba58438930067a8e104c9b69ed8"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:24/valueJsonSha256",
+      "before": "5c683cd1019b650fe3979cf91b68757f21430d54c7e3d9f9015ef581c38a7097",
+      "after": "355f32130f273cacd9e6ed8894a8b5f7509addc7391ce8856e2c568b962c7c31"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:3/valueJsonSha256",
+      "before": "069077544843b5c14bbf2ecb26d01083801abe05fd11f628b77997283ac0a47d",
+      "after": "282765ff97476e89b41712104af85a5496821d54842830e3b9866ed8c6f006b3"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:4/valueJsonSha256",
+      "before": "0d69f8edd0fefbba18baf2e4e4d923286a946f4514941dddd4533a32149b5f95",
+      "after": "5c8154bff18a9ef4fba30e60a2401c01384d06e1837fa418fab6b3bcb41d83c8"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:5/valueJsonSha256",
+      "before": "6436128bb3e464f06ed7ea05fac67940aa21bb5f38c5bfcb8c752e4b8725f871",
+      "after": "9c6a7a99da7d1a73f15fc148c47cbb95d41de4005c488ccfa4718f8af605e3a5"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:6/valueJsonSha256",
+      "before": "e1a737c3acfb432fca4ad74396f03ebc3581cb552758feefdf00e259985924de",
+      "after": "d3d4915c1cc22dc81b20f6079a256efb280afd3b0329ef93392b9c630e5ddf10"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:7/valueJsonSha256",
+      "before": "63010264ce678a7ec2503350c9013876d435a18552ba9214140a58ea60017f39",
+      "after": "1b595593d2871d9e67eea99e2b52849eb2af5e9ac654a410115953f56ee255fc"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:8/valueJsonSha256",
+      "before": "1376fd7d81c8a578b075240feb2d4638379ac9627743c93b77a7067a63cbc676",
+      "after": "852a7ff8b21a6e3e9cbebc37d7ceb889ea68a37c519a9b89e3af176783a58ab7"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:9/valueJsonSha256",
+      "before": "f1c0cd0f2969d4655eeb6e19528e8a9bbe418fa11bfa1dfd5c6b6f8025891461",
+      "after": "6aed8b6d376cf6c7eb4d11833327681a76b1c4d78c7370290fadec7422a9de9d"
+    }
+  ],
+  "differencesOutsideInitialQualification": [
+    {
+      "path": "/final/snapshot/trace/0/graph_chain",
+      "before": "c8c5956acb8a7cdb6276bbbf3fbc20fc55d332ac4cd6a4db475bdf98470580f2",
+      "after": "aa86789b484dca9291dc2e28d6b2a7a39583a60e126fb09d805ae14cec2bb005"
+    },
+    {
+      "path": "/final/snapshot/trace/3/graph_chain",
+      "before": "e15fa75153555117d248c051da8e311963278e710213a7abb4852ddcfe1e6c69",
+      "after": "23688bb7ad3bf43e1c88226dc303075a6386ed85b62a538bca2f618bac901154"
+    },
+    {
+      "path": "/final/snapshot/trace/6/graph_chain",
+      "before": "58d8933151b60dca546e1109744f34fd7d766cb97bd1171956c0432a22c91848",
+      "after": "cae213c95b959c781762e5e30a2d7568850e1f4eac47e82501b00a6bf14bba9c"
+    },
+    {
+      "path": "/final/snapshot/trace/9/graph_chain",
+      "before": "1dbc74be7077411df9e8a4d183463e160586996858f15323b3d898dd62b5fc93",
+      "after": "cb24f782f4ecdf3634bf6d85f756b4db4f03aa24efebc5a67e990bfc8c6161c9"
+    },
+    {
+      "path": "/final/snapshot/trace/12/graph_chain",
+      "before": "90545bb75acb8a625e2b9923393fdb2f59c12830ed3cbf04eaaaa199fcb63220",
+      "after": "997f788c1c7d20352ce24fa655ca774987dec430a9dd0e3dacdb9b911acb598a"
+    },
+    {
+      "path": "/final/snapshot/trace/15/graph_chain",
+      "before": "638eb40ba8ba303893b5c5375518129a12ac49aec2ae5c25487cd158e8c2eeb1",
+      "after": "3993d87a11ff6356fd56bc18da7db190ccf8061d476eaecce74d16a8472307a2"
+    },
+    {
+      "path": "/final/snapshot/trace/19/graph_chain",
+      "before": "0cb93eaa3ab80cfa9b32d98982344efb5a7600120cb228a026f52283b4ff0c6b",
+      "after": "f5453550e2207d9b7363ffd2ef6f979d7c67624dad6e30c0d61c2a3eeb261398"
+    },
+    {
+      "path": "/final/snapshot/trace/22/graph_chain",
+      "before": "1a83c5a6c8e45b47acfae2174885477f3075ac9bd807d5cbf10758a4e3483a5c",
+      "after": "a4c936a35cd1e07229f1d631a3a7b2ba7c6f844c0f1238be721ab466402c372a"
+    },
+    {
+      "path": "/final/snapshot/trace/26/graph_chain",
+      "before": "1e07b01f7b20c737d88b5bce93bf65c94e475b7687b49865d11e721c99663e00",
+      "after": "4477813da727a2d44515ebf1e1106209f26c001fee43687656c02c18f9128b33"
+    },
+    {
+      "path": "/final/snapshot/trace/29/graph_chain",
+      "before": "0657dda918970d75177972f6629353bc675c494019c99465e770eebdb21186fc",
+      "after": "947b56e8ef471c8ae05c699c10b52a847d068500b27ff7fe766d8f37eff7b0ed"
+    },
+    {
+      "path": "/final/snapshot/trace/40/graph_chain",
+      "before": "73bf1976ae991348f2d86df13374cf8901a64a71fafbaef55b8a768082b430b7",
+      "after": "07ea28943f05594f746f960a7d2f89a203384cf73dd6b9f22b7fbb91938bf1ec"
+    },
+    {
+      "path": "/final/snapshot/trace/43/graph_chain",
+      "before": "bf632ccb8ff3398f69824c490180f91fbe8b2efad927b022c8cc90fb32a2f675",
+      "after": "b646d84fca83e12e9ff62500f94c082b5ad498aab487d9ff01835dc16add90e0"
+    },
+    {
+      "path": "/final/snapshot/sourceDigest",
+      "before": "5fdeb20e1fa511f5e00ec2f4cce99d1b77a7139bc71e15e9e85897ddb3e5d9f3",
+      "after": "17b8dfa3529b2aa3c3f2c4382d6bf2ed0a9ec9fa5ff16ad46ffbe15f060286d9"
+    },
+    {
+      "path": "/final/snapshot/whyAct/decision/total_ms",
+      "before": 2.116916000000856,
+      "after": 2.5896620000003168
+    },
+    {
+      "path": "/final/snapshot/graphChain",
+      "before": "1b2c25191ba0603e688395669b43fd669b3b3fe3c8daf34e6778b60d8fcc1652",
+      "after": "9591c57eaec0035533741a3876594df7875e098673547ad55ec9638cf53f9756"
+    },
+    {
+      "path": "/final/snapshot/nativeExecutionDigest",
+      "before": "72298f4673f672d4e73bf86d45c29228d2792dce17490a5543b275afeb7933fd",
+      "after": "2dbb81d9fd2bc3dcfa03e6daa1fc36ea1545b091d253bf1d29d0565eaf26d81c"
+    },
+    {
+      "path": "/final/knowledge/chain",
+      "before": "1b2c25191ba0603e688395669b43fd669b3b3fe3c8daf34e6778b60d8fcc1652",
+      "after": "9591c57eaec0035533741a3876594df7875e098673547ad55ec9638cf53f9756"
+    },
+    {
+      "path": "/final/knowledge/jsonSha256",
+      "before": "379b81e8fa8c708acc630b0b4d4bbe132dcc611aeadf8b1ffeede52f683879d1",
+      "after": "0d9215919f91938294033d4a325b691f92ab3d5660756c3312b60cb71f8c16fa"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:1/valueJsonSha256",
+      "before": "b932822e1fd011b4aa9c8bdff31a7537a730354084411f31cea5e350149da550",
+      "after": "b46d9c69f6bae6d7cc6c87c6ed9bf7efb1ff5b4550f523ff6610fbc5892066e5"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:10/valueJsonSha256",
+      "before": "6c80d1eea1a5a0b5730a85d6802ccfbcdf6a4f0879d51d63ae7faaedc0b2adeb",
+      "after": "363714f61c2f09362aa8f99ec364a50b7fa1067ed9567833bcc1b8c923fa816d"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:11/valueJsonSha256",
+      "before": "ae4c452a35aa1198f73bc8647436bc88c0a1241fcd7c7e153bd35a7792e4b1b5",
+      "after": "c159f980aebff9b170c2ba318e00bdc3b87da53bd771cf4ad45ed1c7671529f8"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:12/valueJsonSha256",
+      "before": "917c0cf16dddf19c554d31829a63f6b56b5593c446fac9158da4e2f7473a0ed1",
+      "after": "dfd5a29c69adee9bdfe6718f9a13c718f309cf081b36875ef73e6b35213ca878"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:13/valueJsonSha256",
+      "before": "44fe6c517f8c7b002b53fe4c77ed4381db7baf471ffb52d10f7d527b14972b57",
+      "after": "8360d4ad4f0fd1d705d42dc24ce2455c17f466e9f556a806c330750ec5d8bd11"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:14/valueJsonSha256",
+      "before": "24c5c9b6dc74afa0a49f37a6486f0024fddb69c0fa9bd0fc9ef30d0d5b4a029a",
+      "after": "44dd6b225e8acfd65c42c9982e2cd3c1481a1412e7f0423b11074cd609ec380b"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:15/valueJsonSha256",
+      "before": "bb3a2b6da8ceaceb489a82b8eb2cb1ba1a14c4e68c1f64f310372d38dba75437",
+      "after": "2886aab7999cb295dbd75ccee4ad1322b1b0383968c3841ac26957f0f9a770d0"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:16/valueJsonSha256",
+      "before": "69d658dff4004316dcfa0eaeba9ba31addc6231fc5fc0c39fafd9080e9490509",
+      "after": "2c1ed1dd3ee50de707637afa89e286a4ee436b0cc5e07c70e2348fcc1d9acbe0"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:17/valueJsonSha256",
+      "before": "a0f09f83e4dd6e442cdef74b8cb5afe4687a32b199e5b990f9a679efd0fe550c",
+      "after": "ca09f3713dbe11d316dad93a19cc532b60560b304494be7e1ebafcd3311a0337"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:18/valueJsonSha256",
+      "before": "d9e944e73bf5f9948aa80b8261bbf306d81c7e7937c953048569d30febf286f2",
+      "after": "1554374ccf807c25006886d3f5688483b12deb40509e333038436e185a111bbc"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:19/valueJsonSha256",
+      "before": "1fcf64ed19e73e7e74b04a52830b6e94ee2461127ec14f5ffc82fb53c904b24a",
+      "after": "116c1d97691715e6148223061904f1583b4ebf12970d7bd7eecfb33a23f3b8d1"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:2/valueJsonSha256",
+      "before": "500e6d1747735f2ffcc155c9ee4f4997c59e2cd063cf282a1e9972b65e94361a",
+      "after": "53ecef7f9b92358df99319b21a84b7b821d1c161d7d8f5dfbe02d4e494ef034f"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:20/valueJsonSha256",
+      "before": "8546bd65e699e14df9e82bc258e5e8816bb6b3c7a5667bf82d2220a738a7b392",
+      "after": "253ba17225edd4ee9740e0f52136b84d7d18bea8715b565b4e95bba28d84385a"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:21/valueJsonSha256",
+      "before": "14fb131230273779d35961a1194f27811a9fe9cb2e83d2fc6737c9b694fcc7a8",
+      "after": "4c8eb0f2ff990745ac3b70ffd23d42846d9c69c60c78cc1e6f24fd09d3e2fa3a"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:22/valueJsonSha256",
+      "before": "63c0b9e88159b71486419f78e2923e6bd23e90fb84d21d1d29d4e49d78f0ce14",
+      "after": "b60affc920fdf485e20000681d425cf8e4c4d7628950191868fdc61cf250c157"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:23/valueJsonSha256",
+      "before": "2dac9c7a674d730bbcce527e005591e0e565731bd2fd3886ddb869b5d7a87883",
+      "after": "55bb695262162f189dcd50550f2017c4eda00ba58438930067a8e104c9b69ed8"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:24/valueJsonSha256",
+      "before": "5c683cd1019b650fe3979cf91b68757f21430d54c7e3d9f9015ef581c38a7097",
+      "after": "355f32130f273cacd9e6ed8894a8b5f7509addc7391ce8856e2c568b962c7c31"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:3/valueJsonSha256",
+      "before": "069077544843b5c14bbf2ecb26d01083801abe05fd11f628b77997283ac0a47d",
+      "after": "282765ff97476e89b41712104af85a5496821d54842830e3b9866ed8c6f006b3"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:4/valueJsonSha256",
+      "before": "0d69f8edd0fefbba18baf2e4e4d923286a946f4514941dddd4533a32149b5f95",
+      "after": "5c8154bff18a9ef4fba30e60a2401c01384d06e1837fa418fab6b3bcb41d83c8"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:5/valueJsonSha256",
+      "before": "6436128bb3e464f06ed7ea05fac67940aa21bb5f38c5bfcb8c752e4b8725f871",
+      "after": "9c6a7a99da7d1a73f15fc148c47cbb95d41de4005c488ccfa4718f8af605e3a5"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:6/valueJsonSha256",
+      "before": "e1a737c3acfb432fca4ad74396f03ebc3581cb552758feefdf00e259985924de",
+      "after": "d3d4915c1cc22dc81b20f6079a256efb280afd3b0329ef93392b9c630e5ddf10"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:7/valueJsonSha256",
+      "before": "63010264ce678a7ec2503350c9013876d435a18552ba9214140a58ea60017f39",
+      "after": "1b595593d2871d9e67eea99e2b52849eb2af5e9ac654a410115953f56ee255fc"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:8/valueJsonSha256",
+      "before": "1376fd7d81c8a578b075240feb2d4638379ac9627743c93b77a7067a63cbc676",
+      "after": "852a7ff8b21a6e3e9cbebc37d7ceb889ea68a37c519a9b89e3af176783a58ab7"
+    },
+    {
+      "path": "/final/knowledge/nodes/reasoning:trace:9/valueJsonSha256",
+      "before": "f1c0cd0f2969d4655eeb6e19528e8a9bbe418fa11bfa1dfd5c6b6f8025891461",
+      "after": "6aed8b6d376cf6c7eb4d11833327681a76b1c4d78c7370290fadec7422a9de9d"
+    }
+  ],
+  "commandsExactlyEqual": true,
+  "capturedOwnerStatesExactlyEqual": true,
+  "nodeValueFingerprints": {
+    "compared": 344,
+    "equal": 320,
+    "changed": [
+      "reasoning:trace:1",
+      "reasoning:trace:10",
+      "reasoning:trace:11",
+      "reasoning:trace:12",
+      "reasoning:trace:13",
+      "reasoning:trace:14",
+      "reasoning:trace:15",
+      "reasoning:trace:16",
+      "reasoning:trace:17",
+      "reasoning:trace:18",
+      "reasoning:trace:19",
+      "reasoning:trace:2",
+      "reasoning:trace:20",
+      "reasoning:trace:21",
+      "reasoning:trace:22",
+      "reasoning:trace:23",
+      "reasoning:trace:24",
+      "reasoning:trace:3",
+      "reasoning:trace:4",
+      "reasoning:trace:5",
+      "reasoning:trace:6",
+      "reasoning:trace:7",
+      "reasoning:trace:8",
+      "reasoning:trace:9"
+    ]
+  },
+  "timings": {
+    "runtime.creation": {
+      "before": {
+        "count": 1,
+        "totalMs": 113.22540600000002,
+        "medianMs": 113.22540600000002,
+        "minMs": 113.22540600000002,
+        "maxMs": 113.22540600000002,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      },
+      "after": {
+        "count": 1,
+        "totalMs": 89.24483699999996,
+        "medianMs": 89.24483699999996,
+        "minMs": 89.24483699999996,
+        "maxMs": 89.24483699999996,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      }
+    },
+    "family.state": {
+      "before": {
+        "count": 739,
+        "totalMs": 12.073109000012323,
+        "medianMs": 0.009484000000156811,
+        "minMs": 0.00008999999954539817,
+        "maxMs": 0.281345999999985,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      },
+      "after": {
+        "count": 748,
+        "totalMs": 12.167366999988758,
+        "medianMs": 0.00977950000014971,
+        "minMs": 0.00008999999954539817,
+        "maxMs": 0.17460799999992105,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      }
+    },
+    "family.nativeState": {
+      "before": {
+        "count": 122,
+        "totalMs": 96.94502399999999,
+        "medianMs": 0.030419999999196534,
+        "minMs": 0.0008809999999357387,
+        "maxMs": 23.38603300000068,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      },
+      "after": {
+        "count": 122,
+        "totalMs": 94.45677099999648,
+        "medianMs": 0.03683950000015557,
+        "minMs": 0.0010309999997843988,
+        "maxMs": 18.61044100000072,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      }
+    },
+    "knowledge.commit": {
+      "before": {
+        "count": 103,
+        "totalMs": 4841.147560999999,
+        "medianMs": 4.331263000000035,
+        "minMs": 0.45468499999969936,
+        "maxMs": 921.0395930000013,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      },
+      "after": {
+        "count": 103,
+        "totalMs": 4398.395180000003,
+        "medianMs": 4.3787240000001475,
+        "minMs": 0.1766410000000178,
+        "maxMs": 720.7580730000009,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      }
+    },
+    "knowledge.stateValue": {
+      "before": {
+        "count": 1082,
+        "totalMs": 800.5865210000052,
+        "medianMs": 0.006229500000245025,
+        "minMs": 0.00025999999979831045,
+        "maxMs": 188.08634299999903,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      },
+      "after": {
+        "count": 1082,
+        "totalMs": 756.5210460000092,
+        "medianMs": 0.003649999999197462,
+        "minMs": 0.0003799999994953396,
+        "maxMs": 197.6899689999991,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      }
+    },
+    "caller.checkpointWrites": {
+      "before": {
+        "count": 13,
+        "totalMs": 48.906167999999525,
+        "medianMs": 2.8664600000001883,
+        "minMs": 0.4561060000000907,
+        "maxMs": 10.61785400000008,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      },
+      "after": {
+        "count": 13,
+        "totalMs": 39.26289299999985,
+        "medianMs": 2.66150000000016,
+        "minMs": 0.7980620000000727,
+        "maxMs": 6.456861000000117,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      }
+    },
+    "runtime.persistFamilies": {
+      "before": {
+        "count": 13,
+        "totalMs": 2546.0560529999993,
+        "medianMs": 181.22533699999985,
+        "minMs": 18.75343900000007,
+        "maxMs": 384.1320489999998,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      },
+      "after": {
+        "count": 13,
+        "totalMs": 2491.289098999997,
+        "medianMs": 208.44083599999976,
+        "minMs": 22.692146000000093,
+        "maxMs": 335.7260349999997,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      }
+    },
+    "family.restore": {
+      "before": {
+        "count": 482,
+        "totalMs": 10.86731400000076,
+        "medianMs": 0.00945899999987887,
+        "minMs": 0.002352999999857275,
+        "maxMs": 0.23627999999962412,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      },
+      "after": {
+        "count": 482,
+        "totalMs": 10.139719999994668,
+        "medianMs": 0.009474000000068372,
+        "minMs": 0.003124000000752858,
+        "maxMs": 0.23746200000005047,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      }
+    },
+    "family.restoreNative": {
+      "before": {
+        "count": 106,
+        "totalMs": 149.97336199999995,
+        "medianMs": 0.07540199999994002,
+        "minMs": 0.000871999999617401,
+        "maxMs": 27.682103999999526,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      },
+      "after": {
+        "count": 106,
+        "totalMs": 138.46929299999306,
+        "medianMs": 0.061926499999572115,
+        "minMs": 0.0010120000001734297,
+        "maxMs": 22.743201000001136,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      }
+    },
+    "runtime.restoreFamilies": {
+      "before": {
+        "count": 12,
+        "totalMs": 263.8978169999989,
+        "medianMs": 12.014554499999463,
+        "minMs": 2.593586000000414,
+        "maxMs": 81.22759099999894,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      },
+      "after": {
+        "count": 12,
+        "totalMs": 230.45129700000098,
+        "medianMs": 10.780855000000201,
+        "minMs": 2.120936999999685,
+        "maxMs": 65.41368700000021,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      }
+    },
+    "runtime.authorize": {
+      "before": {
+        "count": 10,
+        "totalMs": 189.8944069999984,
+        "medianMs": 16.078862000000072,
+        "minMs": 0.14650799999981245,
+        "maxMs": 52.75518000000011,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      },
+      "after": {
+        "count": 10,
+        "totalMs": 148.71284600000058,
+        "medianMs": 14.92276000000004,
+        "minMs": 0.1520250000003216,
+        "maxMs": 47.39047799999935,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      }
+    },
+    "runtime.plan": {
+      "before": {
+        "count": 6,
+        "totalMs": 2227.6413769999995,
+        "medianMs": 382.4623325,
+        "minMs": 269.201051,
+        "maxMs": 470.889279,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      },
+      "after": {
+        "count": 6,
+        "totalMs": 2094.1134310000007,
+        "medianMs": 372.0885639999999,
+        "minMs": 244.18961800000034,
+        "maxMs": 415.6099280000001,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      }
+    },
+    "runtime.snapshot": {
+      "before": {
+        "count": 26,
+        "totalMs": 8.000423000002229,
+        "medianMs": 0.2837254999999459,
+        "minMs": 0.10993299999972805,
+        "maxMs": 1.1847170000000915,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      },
+      "after": {
+        "count": 16,
+        "totalMs": 3.466607000000522,
+        "medianMs": 0.20190450000018245,
+        "minMs": 0.13259600000128557,
+        "maxMs": 0.5436849999998685,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      }
+    },
+    "service.snapshot": {
+      "before": {
+        "count": 16,
+        "totalMs": 11.035691999997653,
+        "medianMs": 0.717027999999118,
+        "minMs": 0.45480399999996735,
+        "maxMs": 0.8482369999992443,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      },
+      "after": {
+        "count": 16,
+        "totalMs": 11.580848000000515,
+        "medianMs": 0.7154119999995601,
+        "minMs": 0.39808099999982005,
+        "maxMs": 1.0269310000003316,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      }
+    },
+    "service.accept": {
+      "before": {
+        "count": 16,
+        "totalMs": 12.01643500000182,
+        "medianMs": 0.7990995000000112,
+        "minMs": 0.4658309999999801,
+        "maxMs": 0.9163089999997283,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      },
+      "after": {
+        "count": 16,
+        "totalMs": 12.714375000001155,
+        "medianMs": 0.7940324999996164,
+        "minMs": 0.47798899999997957,
+        "maxMs": 1.1180060000006051,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      }
+    },
+    "runtime.seal": {
+      "before": {
+        "count": 6,
+        "totalMs": 8754.539738999998,
+        "medianMs": 1117.5891119999997,
+        "minMs": 546.3455349999995,
+        "maxMs": 4129.195565,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      },
+      "after": {
+        "count": 6,
+        "totalMs": 8580.304552000001,
+        "medianMs": 1055.6489615,
+        "minMs": 525.0102420000003,
+        "maxMs": 4053.9594050000005,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      }
+    },
+    "runtime.advance": {
+      "before": {
+        "count": 10,
+        "totalMs": 9022.309015999997,
+        "medianMs": 648.4129119999998,
+        "minMs": 17.33299100000022,
+        "maxMs": 4157.721148,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      },
+      "after": {
+        "count": 10,
+        "totalMs": 8721.616266,
+        "medianMs": 609.8634689999999,
+        "minMs": 7.5896270000002914,
+        "maxMs": 4074.496317,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      }
+    },
+    "runtime.authorizationIdentity": {
+      "before": null,
+      "after": {
+        "count": 10,
+        "totalMs": 0.13916600000015933,
+        "medianMs": 0.004090500000074826,
+        "minMs": 0.0030249999999796273,
+        "maxMs": 0.07784600000013597,
+        "qualification": "One diagnostic session; no p95, confidence interval, or budget acceptance."
+      }
+    }
+  },
+  "continuations": {
+    "before": [
+      {
+        "sequence": 5,
+        "serviceMs": 26.23075499999959,
+        "stages": [
+          {
+            "id": 2011,
+            "stage": "runtime.snapshot",
+            "method": "snapshot",
+            "operation": "advance",
+            "sequence": 5,
+            "actionBefore": 4,
+            "actionAfter": 4,
+            "elapsedMs": 0.15228600000045844,
+            "failed": false
+          },
+          {
+            "id": 2013,
+            "stage": "runtime.authorize",
+            "method": "authorize",
+            "operation": "advance",
+            "sequence": 5,
+            "actionBefore": 5,
+            "actionAfter": 5,
+            "elapsedMs": 0.2433099999998376,
+            "failed": false
+          },
+          {
+            "id": 2014,
+            "stage": "runtime.snapshot",
+            "method": "snapshot",
+            "operation": "advance",
+            "sequence": 5,
+            "actionBefore": 5,
+            "actionAfter": 5,
+            "elapsedMs": 0.24794699999984005,
+            "failed": false
+          },
+          {
+            "id": 2012,
+            "stage": "runtime.advance",
+            "method": "advance",
+            "operation": "advance",
+            "sequence": 5,
+            "actionBefore": 4,
+            "actionAfter": 5,
+            "elapsedMs": 24.032885999999962,
+            "failed": false
+          },
+          {
+            "id": 2016,
+            "stage": "service.snapshot",
+            "method": "snapshot",
+            "operation": "advance",
+            "sequence": 5,
+            "actionBefore": 5,
+            "actionAfter": 5,
+            "elapsedMs": 0.8466549999993731,
+            "failed": false
+          },
+          {
+            "id": 2015,
+            "stage": "service.accept",
+            "method": "accept",
+            "operation": "advance",
+            "sequence": 5,
+            "actionBefore": 5,
+            "actionAfter": 5,
+            "elapsedMs": 0.9106700000002093,
+            "failed": false
+          }
+        ]
+      },
+      {
+        "sequence": 6,
+        "serviceMs": 19.44473300000027,
+        "stages": [
+          {
+            "id": 2017,
+            "stage": "runtime.snapshot",
+            "method": "snapshot",
+            "operation": "advance",
+            "sequence": 6,
+            "actionBefore": 5,
+            "actionAfter": 5,
+            "elapsedMs": 0.19941600000038306,
+            "failed": false
+          },
+          {
+            "id": 2019,
+            "stage": "runtime.authorize",
+            "method": "authorize",
+            "operation": "advance",
+            "sequence": 6,
+            "actionBefore": 6,
+            "actionAfter": 6,
+            "elapsedMs": 0.27941399999963323,
+            "failed": false
+          },
+          {
+            "id": 2020,
+            "stage": "runtime.snapshot",
+            "method": "snapshot",
+            "operation": "advance",
+            "sequence": 6,
+            "actionBefore": 6,
+            "actionAfter": 6,
+            "elapsedMs": 0.27177300000039395,
+            "failed": false
+          },
+          {
+            "id": 2018,
+            "stage": "runtime.advance",
+            "method": "advance",
+            "operation": "advance",
+            "sequence": 6,
+            "actionBefore": 5,
+            "actionAfter": 6,
+            "elapsedMs": 17.33299100000022,
+            "failed": false
+          },
+          {
+            "id": 2022,
+            "stage": "service.snapshot",
+            "method": "snapshot",
+            "operation": "advance",
+            "sequence": 6,
+            "actionBefore": 6,
+            "actionAfter": 6,
+            "elapsedMs": 0.8482369999992443,
+            "failed": false
+          },
+          {
+            "id": 2021,
+            "stage": "service.accept",
+            "method": "accept",
+            "operation": "advance",
+            "sequence": 6,
+            "actionBefore": 6,
+            "actionAfter": 6,
+            "elapsedMs": 0.894666000000143,
+            "failed": false
+          }
+        ]
+      },
+      {
+        "sequence": 7,
+        "serviceMs": 19.22913400000016,
+        "stages": [
+          {
+            "id": 2023,
+            "stage": "runtime.snapshot",
+            "method": "snapshot",
+            "operation": "advance",
+            "sequence": 7,
+            "actionBefore": 6,
+            "actionAfter": 6,
+            "elapsedMs": 0.1419609999993554,
+            "failed": false
+          },
+          {
+            "id": 2025,
+            "stage": "runtime.authorize",
+            "method": "authorize",
+            "operation": "advance",
+            "sequence": 7,
+            "actionBefore": 7,
+            "actionAfter": 7,
+            "elapsedMs": 0.29018100000030245,
+            "failed": false
+          },
+          {
+            "id": 2026,
+            "stage": "runtime.snapshot",
+            "method": "snapshot",
+            "operation": "advance",
+            "sequence": 7,
+            "actionBefore": 7,
+            "actionAfter": 7,
+            "elapsedMs": 0.2536760000002687,
+            "failed": false
+          },
+          {
+            "id": 2024,
+            "stage": "runtime.advance",
+            "method": "advance",
+            "operation": "advance",
+            "sequence": 7,
+            "actionBefore": 6,
+            "actionAfter": 7,
+            "elapsedMs": 17.64075799999955,
+            "failed": false
+          },
+          {
+            "id": 2028,
+            "stage": "service.snapshot",
+            "method": "snapshot",
+            "operation": "advance",
+            "sequence": 7,
+            "actionBefore": 7,
+            "actionAfter": 7,
+            "elapsedMs": 0.7685390000006009,
+            "failed": false
+          },
+          {
+            "id": 2027,
+            "stage": "service.accept",
+            "method": "accept",
+            "operation": "advance",
+            "sequence": 7,
+            "actionBefore": 7,
+            "actionAfter": 7,
+            "elapsedMs": 0.8042219999997542,
+            "failed": false
+          }
+        ]
+      },
+      {
+        "sequence": 8,
+        "serviceMs": 21.38391799999954,
+        "stages": [
+          {
+            "id": 2029,
+            "stage": "runtime.snapshot",
+            "method": "snapshot",
+            "operation": "advance",
+            "sequence": 8,
+            "actionBefore": 7,
+            "actionAfter": 7,
+            "elapsedMs": 0.1696009999996022,
+            "failed": false
+          },
+          {
+            "id": 2031,
+            "stage": "runtime.authorize",
+            "method": "authorize",
+            "operation": "advance",
+            "sequence": 8,
+            "actionBefore": 8,
+            "actionAfter": 8,
+            "elapsedMs": 0.14650799999981245,
+            "failed": false
+          },
+          {
+            "id": 2032,
+            "stage": "runtime.snapshot",
+            "method": "snapshot",
+            "operation": "advance",
+            "sequence": 8,
+            "actionBefore": 8,
+            "actionAfter": 8,
+            "elapsedMs": 0.32311900000058813,
+            "failed": false
+          },
+          {
+            "id": 2030,
+            "stage": "runtime.advance",
+            "method": "advance",
+            "operation": "advance",
+            "sequence": 8,
+            "actionBefore": 7,
+            "actionAfter": 8,
+            "elapsedMs": 19.77378099999987,
+            "failed": false
+          },
+          {
+            "id": 2034,
+            "stage": "service.snapshot",
+            "method": "snapshot",
+            "operation": "advance",
+            "sequence": 8,
+            "actionBefore": 8,
+            "actionAfter": 8,
+            "elapsedMs": 0.8109830000003058,
+            "failed": false
+          },
+          {
+            "id": 2033,
+            "stage": "service.accept",
+            "method": "accept",
+            "operation": "advance",
+            "sequence": 8,
+            "actionBefore": 8,
+            "actionAfter": 8,
+            "elapsedMs": 0.848508000000038,
+            "failed": false
+          }
+        ]
+      }
+    ],
+    "after": [
+      {
+        "sequence": 5,
+        "serviceMs": 9.406198000000586,
+        "stages": [
+          {
+            "id": 2017,
+            "stage": "runtime.authorizationIdentity",
+            "method": "authorizationIdentity",
+            "operation": "advance",
+            "sequence": 5,
+            "actionBefore": 4,
+            "actionAfter": 4,
+            "elapsedMs": 0.0037249999995765393,
+            "failed": false
+          },
+          {
+            "id": 2019,
+            "stage": "runtime.authorize",
+            "method": "authorize",
+            "operation": "advance",
+            "sequence": 5,
+            "actionBefore": 5,
+            "actionAfter": 5,
+            "elapsedMs": 0.22616500000003725,
+            "failed": false
+          },
+          {
+            "id": 2020,
+            "stage": "runtime.snapshot",
+            "method": "snapshot",
+            "operation": "advance",
+            "sequence": 5,
+            "actionBefore": 5,
+            "actionAfter": 5,
+            "elapsedMs": 0.25458699999944656,
+            "failed": false
+          },
+          {
+            "id": 2018,
+            "stage": "runtime.advance",
+            "method": "advance",
+            "operation": "advance",
+            "sequence": 5,
+            "actionBefore": 4,
+            "actionAfter": 5,
+            "elapsedMs": 7.5896270000002914,
+            "failed": false
+          },
+          {
+            "id": 2022,
+            "stage": "service.snapshot",
+            "method": "snapshot",
+            "operation": "advance",
+            "sequence": 5,
+            "actionBefore": 5,
+            "actionAfter": 5,
+            "elapsedMs": 0.8178509999997914,
+            "failed": false
+          },
+          {
+            "id": 2021,
+            "stage": "service.accept",
+            "method": "accept",
+            "operation": "advance",
+            "sequence": 5,
+            "actionBefore": 5,
+            "actionAfter": 5,
+            "elapsedMs": 0.8730029999996987,
+            "failed": false
+          }
+        ]
+      },
+      {
+        "sequence": 6,
+        "serviceMs": 13.60477499999979,
+        "stages": [
+          {
+            "id": 2023,
+            "stage": "runtime.authorizationIdentity",
+            "method": "authorizationIdentity",
+            "operation": "advance",
+            "sequence": 6,
+            "actionBefore": 5,
+            "actionAfter": 5,
+            "elapsedMs": 0.003425000000788714,
+            "failed": false
+          },
+          {
+            "id": 2025,
+            "stage": "runtime.authorize",
+            "method": "authorize",
+            "operation": "advance",
+            "sequence": 6,
+            "actionBefore": 6,
+            "actionAfter": 6,
+            "elapsedMs": 0.35217199999988225,
+            "failed": false
+          },
+          {
+            "id": 2026,
+            "stage": "runtime.snapshot",
+            "method": "snapshot",
+            "operation": "advance",
+            "sequence": 6,
+            "actionBefore": 6,
+            "actionAfter": 6,
+            "elapsedMs": 0.2195449999999255,
+            "failed": false
+          },
+          {
+            "id": 2024,
+            "stage": "runtime.advance",
+            "method": "advance",
+            "operation": "advance",
+            "sequence": 6,
+            "actionBefore": 5,
+            "actionAfter": 6,
+            "elapsedMs": 11.962453000000096,
+            "failed": false
+          },
+          {
+            "id": 2028,
+            "stage": "service.snapshot",
+            "method": "snapshot",
+            "operation": "advance",
+            "sequence": 6,
+            "actionBefore": 6,
+            "actionAfter": 6,
+            "elapsedMs": 0.9339829999998983,
+            "failed": false
+          },
+          {
+            "id": 2027,
+            "stage": "service.accept",
+            "method": "accept",
+            "operation": "advance",
+            "sequence": 6,
+            "actionBefore": 6,
+            "actionAfter": 6,
+            "elapsedMs": 0.9855090000000928,
+            "failed": false
+          }
+        ]
+      },
+      {
+        "sequence": 7,
+        "serviceMs": 10.853061000000707,
+        "stages": [
+          {
+            "id": 2029,
+            "stage": "runtime.authorizationIdentity",
+            "method": "authorizationIdentity",
+            "operation": "advance",
+            "sequence": 7,
+            "actionBefore": 6,
+            "actionAfter": 6,
+            "elapsedMs": 0.0031749999998282874,
+            "failed": false
+          },
+          {
+            "id": 2031,
+            "stage": "runtime.authorize",
+            "method": "authorize",
+            "operation": "advance",
+            "sequence": 7,
+            "actionBefore": 7,
+            "actionAfter": 7,
+            "elapsedMs": 0.31804100000044855,
+            "failed": false
+          },
+          {
+            "id": 2032,
+            "stage": "runtime.snapshot",
+            "method": "snapshot",
+            "operation": "advance",
+            "sequence": 7,
+            "actionBefore": 7,
+            "actionAfter": 7,
+            "elapsedMs": 0.27813099999912083,
+            "failed": false
+          },
+          {
+            "id": 2030,
+            "stage": "runtime.advance",
+            "method": "advance",
+            "operation": "advance",
+            "sequence": 7,
+            "actionBefore": 6,
+            "actionAfter": 7,
+            "elapsedMs": 8.963592000000062,
+            "failed": false
+          },
+          {
+            "id": 2034,
+            "stage": "service.snapshot",
+            "method": "snapshot",
+            "operation": "advance",
+            "sequence": 7,
+            "actionBefore": 7,
+            "actionAfter": 7,
+            "elapsedMs": 1.0269310000003316,
+            "failed": false
+          },
+          {
+            "id": 2033,
+            "stage": "service.accept",
+            "method": "accept",
+            "operation": "advance",
+            "sequence": 7,
+            "actionBefore": 7,
+            "actionAfter": 7,
+            "elapsedMs": 1.1180060000006051,
+            "failed": false
+          }
+        ]
+      },
+      {
+        "sequence": 8,
+        "serviceMs": 10.122548999999708,
+        "stages": [
+          {
+            "id": 2035,
+            "stage": "runtime.authorizationIdentity",
+            "method": "authorizationIdentity",
+            "operation": "advance",
+            "sequence": 8,
+            "actionBefore": 7,
+            "actionAfter": 7,
+            "elapsedMs": 0.004797000000507978,
+            "failed": false
+          },
+          {
+            "id": 2037,
+            "stage": "runtime.authorize",
+            "method": "authorize",
+            "operation": "advance",
+            "sequence": 8,
+            "actionBefore": 8,
+            "actionAfter": 8,
+            "elapsedMs": 0.1520250000003216,
+            "failed": false
+          },
+          {
+            "id": 2038,
+            "stage": "runtime.snapshot",
+            "method": "snapshot",
+            "operation": "advance",
+            "sequence": 8,
+            "actionBefore": 8,
+            "actionAfter": 8,
+            "elapsedMs": 0.16062799999963318,
+            "failed": false
+          },
+          {
+            "id": 2036,
+            "stage": "runtime.advance",
+            "method": "advance",
+            "operation": "advance",
+            "sequence": 8,
+            "actionBefore": 7,
+            "actionAfter": 8,
+            "elapsedMs": 8.218579999999747,
+            "failed": false
+          },
+          {
+            "id": 2040,
+            "stage": "service.snapshot",
+            "method": "snapshot",
+            "operation": "advance",
+            "sequence": 8,
+            "actionBefore": 8,
+            "actionAfter": 8,
+            "elapsedMs": 0.8822860000000219,
+            "failed": false
+          },
+          {
+            "id": 2039,
+            "stage": "service.accept",
+            "method": "accept",
+            "operation": "advance",
+            "sequence": 8,
+            "actionBefore": 8,
+            "actionAfter": 8,
+            "elapsedMs": 1.023005000000012,
+            "failed": false
+          }
+        ]
+      }
+    ]
+  },
+  "qualification": "The original profiles lack full reasoning-trace values. Their strict identity failure and all unequal fingerprints remain unchanged; the separate semantic replay does not retroactively prove unavailable profile leaves. Timings are instrumented single-session diagnostics, nested and nonadditive, with a brief baseline/typecheck overlap documented separately. No budget acceptance is inferred."
+}

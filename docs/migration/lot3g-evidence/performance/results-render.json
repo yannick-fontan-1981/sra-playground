@@ -1,0 +1,160 @@
+{
+  "schema": "logos-engine.lot3g-cost-report-render.v1",
+  "recordedAt": "2026-11-10T12:25:46.054950-03:00",
+  "status": "rendered_retained_receipts",
+  "generator": {
+    "path": "docs/migration/lot3g-evidence/write-cost-results.py",
+    "bytes": 28582,
+    "sha256": "ed0b6c1f2503ec28233adb0600aae8437e140830a0a90c4a5261977a2c6b0942"
+  },
+  "report": {
+    "path": "docs/migration/lot3g-evidence/performance/results.md",
+    "bytes": 31135,
+    "sha256": "a2c432abbe8c74defe17fab30b48296bdc4a57bfc56fbc216cce749d87a94068"
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot3g-evidence/performance/window.json",
+      "bytes": 10160,
+      "sha256": "938701e3061ac6e1ae2a26d03c35d503f0e196dd8d333810a4a99badaa7dae2f"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/declaration.json",
+      "bytes": 4102,
+      "sha256": "3224f875715181be556063ef63a91a6a49f74aea2d1a6dab5a5100b73d3c2a13"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/global-budget-policy.json",
+      "bytes": 2009,
+      "sha256": "96876fa3f683bca67c8f8d314cb0b42011b48c91b02d0d1c63aa06bd9e84bb2b"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/readiness.json",
+      "bytes": 7328,
+      "sha256": "6af44fb9b788c195b96770eb0c2e9bb970e200de636cdd0cd2d9d2e50d0b08b9"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/static-preflight.json",
+      "bytes": 11217,
+      "sha256": "66bb980b481a3f5d937ce4522da80a827208ce8266fbb0f027c9e480b301a6df"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/combined-comparison.json",
+      "bytes": 31232,
+      "sha256": "1fe05aea7a623abb381016372412f493e082cc62d4e790683e4fcb3390c78f76"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/consolidation-review.json",
+      "bytes": 46779,
+      "sha256": "8c5c9e514088e5f04a5162e0afde0e5514bf1e9c6668982248e984499a551294"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/global-budget-decision.json",
+      "bytes": 30063,
+      "sha256": "fc98b778492bda82934da0d5b4a4490a9dd1b8177125dcb6056bbc843e7f3149"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/log-transport.json",
+      "bytes": 2772,
+      "sha256": "ab3d99b9384ff05bb2b0d164ab32e336d39099344bfc786ef4c2d8e443f28635"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cohort1/baseline.json",
+      "bytes": 427696,
+      "sha256": "243087f0becd29958751b919ffdc6c8de5a91b53fc5ff5d8d1c2f7823f1b6ddd"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cohort1/after.json",
+      "bytes": 428069,
+      "sha256": "ca0dd201131d977596f54baa9a67c5fcd7062c8927a2c4dede4a71298a3cbee8"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cohort1/comparison.json",
+      "bytes": 26303,
+      "sha256": "5d1d84c3ae4350207690202b7cf78a7483690a40be8adda67774b5724cf697c5"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cohort2/baseline.json",
+      "bytes": 427702,
+      "sha256": "eb89b8397ebb8d8935b3d83a51455c1c4aba17756ab15fa63981ed69a5ffa85f"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cohort2/after.json",
+      "bytes": 428034,
+      "sha256": "ead110f710a32d6d80b0830d1a836ed51ada41c9b58a8b04cb014570064a9ba3"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cohort2/comparison.json",
+      "bytes": 25757,
+      "sha256": "26bc8eb73bf016e706861ed263a5acae96daf5ad0f93540bf20fa976fa0bfd33"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/source-archive.json",
+      "bytes": 33151,
+      "sha256": "ed5f97a0e284f24fa8fa76c2440d9b1cdc790c7ed82b097144830943491e9ac2"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/source-manifest.json",
+      "bytes": 31520,
+      "sha256": "3830e87db836b6df95b34550dec845f3d8c95abe2e69bb05d0814b12bef6bfad"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cohort1/baseline.log",
+      "bytes": 1573,
+      "sha256": "c343bb502b3b959513de8f266c9b002ab7a709a6f5837bde75fc3aaaaa152e93"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cohort1/baseline.log.gz",
+      "bytes": 438,
+      "sha256": "0641b32c938084330bc7e52a9b5542bd72f0b038d7077228259e39b9e7cee1b8"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cohort1/after.log",
+      "bytes": 1563,
+      "sha256": "72d2e7fd19065b121afbcbb44a436622a49e4ad98b1b08fd0cd0a2938bf9b14c"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cohort1/after.log.gz",
+      "bytes": 437,
+      "sha256": "53b6c8a8bd5dc2e0b849aec88676ee5f441bd786f0802e0c6cf040c013a52064"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cohort2/after.log",
+      "bytes": 1573,
+      "sha256": "2c50439f256d70b6647b335375ca45518ee08511895b92fb904199ab7a7fcd49"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cohort2/after.log.gz",
+      "bytes": 439,
+      "sha256": "18753e19ad385df4d82bccd87fa11b2d4c484cf462e98b8c5f9fd1aafdbc99a4"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cohort2/baseline.log",
+      "bytes": 1564,
+      "sha256": "219f32157e06938051ce4b8494cf81e7a6ccfd7ee351fbe9fa1a55f395c730ea"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cohort2/baseline.log.gz",
+      "bytes": 433,
+      "sha256": "fb7d3ebc5fdbb61ed479bf5976c2aba6074654ea00e47c476cd79ffdbcd21e4c"
+    }
+  ],
+  "aggregateDiagnostics": 16,
+  "cohortDiagnostics": 32,
+  "timezone": "UTC−03",
+  "inputReceiptsUnchanged": true,
+  "localLinksChecked": 25,
+  "runtimeOrGameExecuted": false,
+  "measurementExecuted": false,
+  "qualification": "Formatting of completed retained evidence only. No assumed outcome, selected session or new acceptance rule."
+}

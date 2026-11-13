@@ -1,0 +1,96 @@
+{
+  "schema": "logos-engine.lot8a.resumption-push-index.v1",
+  "receipts": [
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/transport/lot8a-resumption-common-push-01.json",
+      "bytes": 4238,
+      "sha256": "db13d0371d2f28f233d35a132a5368c75c739a4d3a68ff71affae92ebbd4a384",
+      "status": "pushed_and_verified",
+      "expectedCommit": "f51e87261386e9a6bd95d0b630ddc991d92af7d6",
+      "remoteCommitAfter": "f51e87261386e9a6bd95d0b630ddc991d92af7d6",
+      "globalLockAcquired": false,
+      "sitePublicationPerformed": false
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/transport/lot8a-resumption-selected-push-01.json",
+      "bytes": 4239,
+      "sha256": "485cd5133ac4769a1fb14cc8674c7218f4d6993886371df20cdeba88e12ba6e0",
+      "status": "pushed_and_verified",
+      "expectedCommit": "deb4b5e433eccdd94b0edd9321b81d2f775f4e26",
+      "remoteCommitAfter": "deb4b5e433eccdd94b0edd9321b81d2f775f4e26",
+      "globalLockAcquired": false,
+      "sitePublicationPerformed": false
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/transport/lot8a-resumption-stream-first-results-push-01.json",
+      "bytes": 4237,
+      "sha256": "0943623b0b30ed4f56055e67ed2743904121421383a67ab1a7e4ea9e54ae3f3d",
+      "status": "pushed_and_verified",
+      "expectedCommit": "5f6a3c13da47166868f0528b6755c937116377ae",
+      "remoteCommitAfter": "5f6a3c13da47166868f0528b6755c937116377ae",
+      "globalLockAcquired": false,
+      "sitePublicationPerformed": false
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/transport/lot8a-resumption-stream-push-01.json",
+      "bytes": 4239,
+      "sha256": "dddfcf53586866aff837162116fa0750ac761bb81cece88556007a2fcdd468b0",
+      "status": "pushed_and_verified",
+      "expectedCommit": "dae198c42a2270100ce3cbff9c1bc57d52adf8b1",
+      "remoteCommitAfter": "dae198c42a2270100ce3cbff9c1bc57d52adf8b1",
+      "globalLockAcquired": false,
+      "sitePublicationPerformed": false
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/transport/lot8a-resumption-terminal-regressions-push-01.json",
+      "bytes": 4229,
+      "sha256": "757baec45c4ba346953577bb0823e8fdee68c72470805ae2007e3b8dc2ec9214",
+      "status": "pushed_and_verified",
+      "expectedCommit": "f5f6062e4a60ccd23b3f9c00cb89ccf607612b7e",
+      "remoteCommitAfter": "f5f6062e4a60ccd23b3f9c00cb89ccf607612b7e",
+      "globalLockAcquired": false,
+      "sitePublicationPerformed": false
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/transport/lot8a-resumption-vois-push-01.json",
+      "bytes": 1672,
+      "sha256": "dcc1464c37be42376b8d06cccc55e016ce7e842453b0e27f04b8bcee6e4f920d",
+      "status": "failed",
+      "expectedCommit": "4eb431ddf2021fc4b394bdf038c0a87911b6b419",
+      "remoteCommitAfter": null,
+      "globalLockAcquired": false,
+      "sitePublicationPerformed": false
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/transport/lot8a-resumption-vois-push-02.json",
+      "bytes": 4239,
+      "sha256": "70e511e7378ec72097cd68f6f150dd8ce526a6f19bcb3904f68a6b1c46451bc0",
+      "status": "pushed_and_verified",
+      "expectedCommit": "4eb431ddf2021fc4b394bdf038c0a87911b6b419",
+      "remoteCommitAfter": "4eb431ddf2021fc4b394bdf038c0a87911b6b419",
+      "globalLockAcquired": false,
+      "sitePublicationPerformed": false
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/transport/lot8a-resumption-weav-pinned-plan-push-01.json",
+      "bytes": 4235,
+      "sha256": "025b82d2a3f78b9c77929a56ebded1f5ab6052cae8e56fd2b207a4bab8c25c9e",
+      "status": "pushed_and_verified",
+      "expectedCommit": "f3fa67368feafea2f19bc20c386bc20a41b58689",
+      "remoteCommitAfter": "f3fa67368feafea2f19bc20c386bc20a41b58689",
+      "globalLockAcquired": false,
+      "sitePublicationPerformed": false
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/transport/lot8a-resumption-workforms-plan-push-01.json",
+      "bytes": 4228,
+      "sha256": "b4b8971a7adefb3c3c62944d11f7d7b3f05fd419484b1ab6848e0dff8b9d2a93",
+      "status": "pushed_and_verified",
+      "expectedCommit": "4918e571b53159f0bcf4ff7e4715cbc913a0652b",
+      "remoteCommitAfter": "4918e571b53159f0bcf4ff7e4715cbc913a0652b",
+      "globalLockAcquired": false,
+      "sitePublicationPerformed": false
+    }
+  ],
+  "scope": "Independent source branch checkpoints only; no performance lock or Site publication."
+}

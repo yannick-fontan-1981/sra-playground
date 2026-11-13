@@ -1,0 +1,149 @@
+{
+  "schema": "logos-engine.lot5c.cost-domain-source-review.v1",
+  "status": "superseded_before_capture",
+  "recordedAt": "2026-11-11T12:05:27.056410+00:00",
+  "priorHypothesis": {
+    "acquisitionMode": "passive_nonadmitted_source_binding",
+    "everyRecordNull": true,
+    "persistedSourceFacts": 0
+  },
+  "reason": "The original tracker returns the exact scope-change event on an official boundary even without core or acquired methods. Published fixed-cost forms already cross such boundaries, so the zero-facts hypothesis is false by source/public-evidence reading.",
+  "revisedDomain": {
+    "acquisitionMode": "passive_nonadmitted_source_binding",
+    "contextAdmission": false,
+    "core": null,
+    "methods": [],
+    "attentionMutation": false,
+    "nativeAcquisitionIncomplete": false,
+    "recordOutsideOfficialBoundary": null,
+    "recordAtOfficialBoundary": {
+      "status": "scope_changed_preserving_conditional_methods",
+      "evidence": [
+        "before.observation_ref",
+        "after.observation_ref"
+      ]
+    },
+    "recordPayloadKeys": [
+      "status",
+      "evidence"
+    ],
+    "officialBoundaryPredicate": "before.level_epoch != after.level_epoch or after.levels_completed > before.levels_completed",
+    "factCoverage": "One exact passive source fact for each actually captured nonnull boundary return; no fact for a null return. sourceCallIndices covers every acquired return; sourceEventCallIndices is exactly the ordered nonnull subset."
+  },
+  "evidenceInputs": [
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/guarded_binding/tracker.py",
+      "bytes": 10802,
+      "sha256": "73ecff4ca22e2edbac5f6955fcbac55cc29a5f3a9bb55075b31969b6785fe517"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/guarded_binding/family.py",
+      "bytes": 9286,
+      "sha256": "7905b2ae89f0514c1c9a938db9ec955058e68e795259903deeb0874b33f62389"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/owner-structural-fixture.json",
+      "bytes": 60029,
+      "sha256": "832ad17bcfeee27d01ad47273fc306437898fa46a5916014d103d0e4d34bf71d"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-source-evidence-paths.json",
+      "bytes": 528,
+      "sha256": "4960a996175c03c0ce92365bda7f3dcaf747f1c7fd8467e34a84584816a87b62"
+    }
+  ],
+  "sourceLineEvidence": {
+    "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/guarded_binding/tracker.py": [
+      {
+        "line": 42,
+        "text": " def record(self,before,after,command,first,second,proposal=None,index=0):"
+      },
+      {
+        "line": 45,
+        "text": "  if before['level_epoch']!=after['level_epoch'] or after['levels_completed']>before['levels_completed']:"
+      },
+      {
+        "line": 49,
+        "text": "   self.reset(after['level_epoch']);return {'status':'scope_changed_preserving_conditional_methods','evidence':evidence}"
+      },
+      {
+        "line": 112,
+        "text": "  return event"
+      }
+    ],
+    "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/guarded_binding/family.py": [
+      {
+        "line": 57,
+        "text": " def record(self,before,after,command,first,second,proposal=None,index=0):"
+      },
+      {
+        "line": 62,
+        "text": "   return event"
+      },
+      {
+        "line": 63,
+        "text": "  if before['level_epoch']!=after['level_epoch'] or after['levels_completed']>before['levels_completed']:"
+      },
+      {
+        "line": 68,
+        "text": "  return event"
+      }
+    ]
+  },
+  "publishedForms": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "baselineActions": 3,
+      "baselineLevelsCompleted": 1,
+      "candidateActions": 3,
+      "candidateLevelsCompleted": 1
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "baselineActions": 10,
+      "baselineLevelsCompleted": 2,
+      "candidateActions": 10,
+      "candidateLevelsCompleted": 2
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "baselineActions": 3,
+      "baselineLevelsCompleted": 1,
+      "candidateActions": 3,
+      "candidateLevelsCompleted": 1
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "baselineActions": 15,
+      "baselineLevelsCompleted": 3,
+      "candidateActions": 15,
+      "candidateLevelsCompleted": 3
+    }
+  ],
+  "sourceEvidencePaths": [
+    "src/logos-engine/v6-native-runtime.ts",
+    "src/logos-engine/v6-observed-binding.ts",
+    "src/logos-engine/v6-observed-binding-state.ts",
+    "src/logos-engine/v6-object-binding-common.ts",
+    "src/logos-engine/v6-object-binding-geometry.ts",
+    "src/logos-engine/v6-object-binding-identity.ts",
+    "src/logos-engine/v6-object-binding-planning.ts",
+    "src/logos-engine/v6-object-binding-reception.ts",
+    "src/logos-engine/v6-object-binding-tracker.ts",
+    "src/logos-engine/v6-knowledge-store.ts",
+    "src/logos-engine/kernel.ts"
+  ],
+  "functionalCapturesStarted": false,
+  "costMeasurementsStarted": false,
+  "executionFailureClaimed": false,
+  "qualification": "Premeasurement source-domain correction only. No failed execution is invented, no session is excluded and no future capture or timing outcome is asserted."
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "logos-engine.native-cost-window.v1",
+  "status": "completed",
+  "startedAt": "2026-11-09T20:28:49.832373+00:00",
+  "command": [
+    "node",
+    "scripts/measure-native-loop-costs.mjs",
+    "docs/migration/lot2b-evidence/performance/cases.json",
+    "docs/migration/lot2c-evidence/performance/after.json"
+  ],
+  "projectWindow": "Reserved; other agents only read sources or write text. Browser campaign, source exporters/comparisons, formal tests and build have finished; managed preview stopped.",
+  "externalHostIsolation": false,
+  "baseline": "Explicitly reused completed 0.34 after-run, not a new baseline run.",
+  "finishedAt": "2026-11-09T20:37:50.631788+00:00",
+  "elapsedSeconds": 540.7994192100014,
+  "exitCode": 0,
+  "output": {
+    "path": "docs/migration/lot2c-evidence/performance/after-attempt-01.log.gz",
+    "sha256": "90913bd8739a37381a1906af1b9659c01625ba322ad65485eb6b4aeea45bc8e6",
+    "bytes": 464
+  }
+}

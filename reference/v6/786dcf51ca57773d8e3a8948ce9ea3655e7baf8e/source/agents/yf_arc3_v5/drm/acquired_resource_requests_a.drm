@@ -1,0 +1,1218 @@
+{
+  "module_id": "acquired_resource_requests_a",
+  "declarations": [
+    {
+      "id": "policy.acquired_resource_relations_a",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.actual_resource_relation_requires_discriminating_evidence"
+      ],
+      "declared_alternative_refs": [
+        "resource_relation_a.quantity_transfer",
+        "resource_relation_a.quantity_ready_without_passage",
+        "resource_relation_a.quantity_tag_passage",
+        "resource_relation_a.quantity_preservation_conflict",
+        "resource_relation_a.reaction_selection_transfer",
+        "resource_relation_a.reaction_restored_scope",
+        "resource_relation_a.reaction_active_scope",
+        "resource_relation_a.lineage_owned_production",
+        "resource_relation_a.lineage_core_transform",
+        "resource_relation_a.lineage_refusal_selection",
+        "resource_relation_a.lineage_overwrite_without_progress",
+        "resource_relation_a.reaction_junction_phase_memory",
+        "resource_relation_a.unknown",
+        "resource_relation_a.quantity_failure_incorrect_control",
+        "resource_relation_a.quantity_failure_empty_donor",
+        "resource_relation_a.quantity_failure_capacity_limit",
+        "resource_relation_a.quantity_failure_unready_passage",
+        "resource_relation_a.quantity_failure_unresolved_measurement",
+        "resource_relation_a.quantity_observed_cost",
+        "resource_relation_a.quantity_reciprocal_exchange",
+        "resource_relation_a.quantity_route_consumer_support",
+        "resource_relation_a.quantity_buffer_cycle_usefulness",
+        "resource_relation_a.quantity_reserve_conflict",
+        "resource_relation_a.quantity_reserve_supported",
+        "resource_relation_a.reaction_activity_held",
+        "resource_relation_a.reaction_incoming_discarded",
+        "resource_relation_a.reaction_local_extinction",
+        "resource_relation_a.reaction_global_quiescence",
+        "resource_relation_a.reaction_rejected_activation",
+        "resource_relation_a.reaction_restoration",
+        "resource_relation_a.reaction_accepted_target",
+        "resource_relation_a.reaction_official_failure",
+        "resource_relation_a.reaction_terminal_checkpoint_candidate",
+        "resource_relation_a.reaction_target_predecessor_support",
+        "resource_relation_a.reaction_provider_access",
+        "resource_relation_a.reaction_natural_opening",
+        "resource_relation_a.reaction_forced_opening",
+        "resource_relation_a.reaction_single_use_transit",
+        "resource_relation_a.reaction_staged_move",
+        "resource_relation_a.reaction_staged_select",
+        "resource_relation_a.reaction_relay_reuse",
+        "resource_relation_a.reaction_requested_target_activation",
+        "resource_relation_a.reaction_arrival_reservation",
+        "resource_relation_a.reaction_target_causal_route",
+        "resource_relation_a.reaction_bridge_passage",
+        "resource_relation_a.reaction_force_passage",
+        "resource_relation_a.reaction_preserved_pending_passage",
+        "resource_relation_a.reaction_delayed_activity_passage",
+        "resource_relation_a.reaction_intercepted_earlier_passage",
+        "resource_relation_a.reaction_causal_why",
+        "resource_relation_a.lineage_requested_delivery",
+        "resource_relation_a.lineage_core_preserved_across_shell",
+        "resource_relation_a.lineage_global_assignment",
+        "resource_relation_a.lineage_interleaved_route",
+        "resource_relation_a.lineage_rotation_unnecessary",
+        "resource_relation_a.lineage_rotation_repairs_core",
+        "resource_relation_a.lineage_visible_acceptance",
+        "resource_relation_a.lineage_delivery_dependency_support",
+        "resource_relation_a.lineage_current_solving_scope"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.resource_relation_equivalent",
+      "invariants": ["target_incidence_chains_retain_same_direction_alternatives",
+        "ordinary_activation_and_all_secondary_suppression_are_not_goals",
+        "service_receipts_explain_this_downstream_passage_not_universal_necessity",
+        "simulated_causal_receipts_are_not_actual_observations"],
+      "selection_tiers": [
+        {
+          "id": "tier.resource_relation_a.quantity_transfer",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.quantity_transfer"
+            },
+            {
+              "field": "relation_ref",
+              "operator": "equals",
+              "expected": "quantity.transfer"
+            },
+            {
+              "field": "endpoints_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "opposite_nonzero_quantity_deltas",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tag_owners_unchanged",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tag_population_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "component_quantities_preserved",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.quantity_ready_without_passage",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.quantity_ready_without_passage"
+            },
+            {
+              "field": "relation_ref",
+              "operator": "equals",
+              "expected": "quantity.door_ready"
+            },
+            {
+              "field": "endpoints_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "door_support_ready",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tag_owners_unchanged",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tag_population_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "component_quantities_preserved",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "door_readiness_is_not_passage",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.quantity_tag_passage",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.quantity_tag_passage"
+            },
+            {
+              "field": "relation_ref",
+              "operator": "equals",
+              "expected": "quantity.ownership"
+            },
+            {
+              "field": "endpoints_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "total_quantity_preserved",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tag_owner_changed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tag_population_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "component_quantities_preserved",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tag_passage_matches_supported_door",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.quantity_preservation_conflict",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.quantity_preservation_conflict"
+            },
+            {
+              "field": "relation_ref",
+              "operator": "equals",
+              "expected": "quantity.reserve_use"
+            },
+            {
+              "field": "endpoints_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "remaining_transport_conflict",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tag_population_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "component_quantities_preserved",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.reaction_selection_transfer",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.reaction_selection_transfer"
+            },
+            {
+              "field": "relation_ref",
+              "operator": "equals",
+              "expected": "reaction.control_transfer"
+            },
+            {
+              "field": "reaction_directional_selection_observed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "endpoints_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "control_receiver_changed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "provider_positions_unchanged",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.reaction_restored_scope",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.reaction_restored_scope"
+            },
+            {
+              "field": "relation_ref",
+              "operator": "equals",
+              "expected": "reaction.outcome_scope"
+            },
+            {
+              "field": "endpoints_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "restore_epoch_changed",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.reaction_active_scope",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.reaction_active_scope"
+            },
+            {
+              "field": "relation_ref",
+              "operator": "equals",
+              "expected": "reaction.activity"
+            },
+            {
+              "field": "endpoints_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "activity_after",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.lineage_owned_production",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.lineage_owned_production"
+            },
+            {
+              "field": "relation_ref",
+              "operator": "equals",
+              "expected": "lineage.lineage_not_disappearance"
+            },
+            {
+              "field": "endpoints_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "production_event_links_occurrences",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.lineage_core_transform",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.lineage_core_transform"
+            },
+            {
+              "field": "relation_ref",
+              "operator": "equals",
+              "expected": "lineage.core_transform"
+            },
+            {
+              "field": "endpoints_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "lineage_complete_core_changed",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.lineage_refusal_selection",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.lineage_refusal_selection"
+            },
+            {
+              "field": "relation_ref",
+              "operator": "equals",
+              "expected": "lineage.rejection_selection"
+            },
+            {
+              "field": "endpoints_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "lineage_refusal_selection_observed",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.lineage_overwrite_without_progress",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.lineage_overwrite_without_progress"
+            },
+            {
+              "field": "relation_ref",
+              "operator": "equals",
+              "expected": "lineage.request_overwrite"
+            },
+            {
+              "field": "endpoints_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "lineage_owned_overwrite_without_progress",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.reaction_junction_phase_memory",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.reaction_junction_phase_memory"
+            },
+            {
+              "field": "relation_ref",
+              "operator": "equals",
+              "expected": "reaction.junction_memory"
+            },
+            {
+              "field": "endpoints_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "epoch_unchanged",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "reaction_junction_memory_available",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.quantity_failure_incorrect_control",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.quantity_failure_incorrect_control"
+            },
+            {
+              "field": "relation_ref",
+              "operator": "equals",
+              "expected": "quantity.failed_transfer"
+            },
+            {
+              "field": "endpoints_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_failure_scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_expected_control_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_failed_primitive_observed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_actual_control_matches",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.quantity_failure_empty_donor",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.quantity_failure_empty_donor"
+            },
+            {
+              "field": "relation_ref",
+              "operator": "equals",
+              "expected": "quantity.failed_transfer"
+            },
+            {
+              "field": "endpoints_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_failure_scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_expected_control_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_failed_primitive_observed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_actual_control_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_donor_empty",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.quantity_failure_capacity_limit",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.quantity_failure_capacity_limit"
+            },
+            {
+              "field": "relation_ref",
+              "operator": "equals",
+              "expected": "quantity.failed_transfer"
+            },
+            {
+              "field": "endpoints_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_failure_scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_expected_control_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_failed_primitive_observed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_actual_control_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_recipient_capacity_exceeded",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.quantity_failure_unready_passage",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.quantity_failure_unready_passage"
+            },
+            {
+              "field": "relation_ref",
+              "operator": "equals",
+              "expected": "quantity.failed_transfer"
+            },
+            {
+              "field": "endpoints_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_failure_scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_expected_control_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_failed_primitive_observed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_actual_control_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_door_unready",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.quantity_failure_unresolved_measurement",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.quantity_failure_unresolved_measurement"
+            },
+            {
+              "field": "relation_ref",
+              "operator": "equals",
+              "expected": "quantity.failed_transfer"
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.quantity_observed_cost",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.quantity_observed_cost"
+            },
+            {
+              "field": "relation_ref",
+              "operator": "equals",
+              "expected": "quantity.cost"
+            },
+            {
+              "field": "endpoints_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "component_quantities_preserved",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_cost_observation_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "batch_count_is_not_primitive_count",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observed_cost_is_not_future_optimality",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.quantity_reciprocal_exchange",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.quantity_reciprocal_exchange"
+            },
+            {
+              "field": "relation_ref",
+              "operator": "equals",
+              "expected": "quantity.exchange"
+            },
+            {
+              "field": "endpoints_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tag_population_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "component_quantities_preserved",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tag_passage_matches_supported_door",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "reciprocal_exchange_observed",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.quantity_route_consumer_support",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.quantity_route_consumer_support"
+            },
+            {
+              "field": "relation_ref",
+              "operator": "equals",
+              "expected": "quantity.route_usefulness"
+            },
+            {
+              "field": "quantity_tag_target_passage_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_route_dependency_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_route_all_transfers_have_consumers",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_route_preserves_original_terminal_goals",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_complete_route_witness_count",
+              "operator": "equals",
+              "expected": 1
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.quantity_buffer_cycle_usefulness",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.quantity_buffer_cycle_usefulness"
+            },
+            {
+              "field": "relation_ref",
+              "operator": "equals",
+              "expected": "quantity.buffer_usefulness"
+            },
+            {
+              "field": "native_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_route_dependency_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_route_all_transfers_have_consumers",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_route_preserves_original_terminal_goals",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_supported_direction_cycles_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "quantity_complete_route_witness_count",
+              "operator": "equals",
+              "expected": 1
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.quantity_reserve_conflict",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "resource_relation_a.quantity_reserve_conflict"},
+            {"field": "relation_ref", "operator": "equals", "expected": "quantity.reserve_preflight"},
+            {"field": "native_current", "operator": "equals", "expected": true},
+            {"field": "quantity_reserve_certificate_projection_complete", "operator": "equals", "expected": true},
+            {"field": "remaining_transport_conflict", "operator": "equals", "expected": true}
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.quantity_reserve_supported",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "resource_relation_a.quantity_reserve_supported"},
+            {"field": "relation_ref", "operator": "equals", "expected": "quantity.reserve_preflight"},
+            {"field": "native_current", "operator": "equals", "expected": true},
+            {"field": "quantity_reserve_complete_remaining_route", "operator": "equals", "expected": true},
+            {"field": "quantity_reserve_current_certificates_absent", "operator": "equals", "expected": true}
+          ]
+        },
+        {"id":"tier.resource_relation_a.reaction_activity_held","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_activity_held"},{"field":"relation_ref","operator":"equals","expected":"reaction.activity_held"},{"field":"endpoints_current","operator":"equals","expected":true},{"field":"reaction_retained_activity_under_cover","operator":"equals","expected":true},{"field":"native_current","operator":"equals","expected":true}]},
+        {"id":"tier.resource_relation_a.reaction_incoming_discarded","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_incoming_discarded"},{"field":"relation_ref","operator":"equals","expected":"reaction.incoming_discarded"},{"field":"endpoints_current","operator":"equals","expected":true},{"field":"reaction_incoming_absent_under_cover","operator":"equals","expected":true},{"field":"native_current","operator":"equals","expected":true},{"field":"reaction_owned_incidence_frames_current","operator":"equals","expected":true}]},
+        {"id":"tier.resource_relation_a.reaction_local_extinction","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_local_extinction"},{"field":"relation_ref","operator":"equals","expected":"reaction.local_extinction"},{"field":"endpoints_current","operator":"equals","expected":true},{"field":"reaction_local_extinction_observed","operator":"equals","expected":true}]},
+        {"id":"tier.resource_relation_a.reaction_global_quiescence","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_global_quiescence"},{"field":"relation_ref","operator":"equals","expected":"reaction.global_quiescence"},{"field":"endpoints_current","operator":"equals","expected":true},{"field":"reaction_quiescent_after","operator":"equals","expected":true}]},
+        {"id":"tier.resource_relation_a.reaction_rejected_activation","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_rejected_activation"},{"field":"relation_ref","operator":"equals","expected":"reaction.rejected_activation"},{"field":"endpoints_current","operator":"equals","expected":true},{"field":"reaction_rejected_after","operator":"equals","expected":true}]},
+        {"id":"tier.resource_relation_a.reaction_restoration","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_restoration"},{"field":"relation_ref","operator":"equals","expected":"reaction.restoration"},{"field":"endpoints_current","operator":"equals","expected":true},{"field":"reaction_restored_observed","operator":"equals","expected":true}]},
+        {"id":"tier.resource_relation_a.reaction_accepted_target","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_accepted_target"},{"field":"relation_ref","operator":"equals","expected":"reaction.accepted_target"},{"field":"endpoints_current","operator":"equals","expected":true},{"field":"reaction_target_events_observed","operator":"equals","expected":true}]},
+        {"id":"tier.resource_relation_a.reaction_official_failure","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_official_failure"},{"field":"relation_ref","operator":"equals","expected":"reaction.official_failure"},{"field":"endpoints_current","operator":"equals","expected":true},{"field":"reaction_official_failure_after","operator":"equals","expected":true}]},
+        {
+          "id": "tier.resource_relation_a.reaction_terminal_checkpoint_candidate",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "resource_relation_a.reaction_terminal_checkpoint_candidate"},
+            {"field": "relation_ref", "operator": "equals", "expected": "reaction.global_terminal"},
+            {"field": "native_current", "operator": "equals", "expected": true},
+            {"field": "reaction_complete_terminal_witness_count", "operator": "equals", "expected": 1},
+            {"field": "reaction_terminal_check_in_all_witnesses", "operator": "equals", "expected": true}
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.reaction_target_predecessor_support",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "resource_relation_a.reaction_target_predecessor_support"},
+            {"field": "relation_ref", "operator": "equals", "expected": "reaction.target_predecessors"},
+            {"field": "native_current", "operator": "equals", "expected": true},
+            {"field": "reaction_predecessor_projection_complete", "operator": "equals", "expected": true}
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.reaction_provider_access",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "resource_relation_a.reaction_provider_access"},
+            {"field": "relation_ref", "operator": "equals", "expected": "reaction.provider_access"},
+            {"field": "native_current", "operator": "equals", "expected": true},
+            {"field": "reaction_complete_terminal_witness_count", "operator": "equals", "expected": 1},
+            {"field": "reaction_service_microstate_constraints_checked", "operator": "equals", "expected": true}
+          ]
+        },
+        {"id":"tier.resource_relation_a.reaction_natural_opening","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_natural_opening"},{"field":"relation_ref","operator":"equals","expected":"reaction.natural_opening"},{"field":"native_current","operator":"equals","expected":true},{"field":"reaction_opening_projection_complete","operator":"equals","expected":true},{"field":"source_service_cell_matches","operator":"equals","expected":true},{"field":"current_service_window","operator":"equals","expected":true},{"field":"current_cell_blocked","operator":"equals","expected":false},{"field":"current_threshold_met","operator":"equals","expected":true},{"field":"provider_present","operator":"equals","expected":false},{"field":"lower_following_threshold","operator":"equals","expected":true},{"field":"multiple_current_directions","operator":"equals","expected":true}]},
+        {"id":"tier.resource_relation_a.reaction_forced_opening","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_forced_opening"},{"field":"relation_ref","operator":"equals","expected":"reaction.forced_opening"},{"field":"native_current","operator":"equals","expected":true},{"field":"reaction_opening_projection_complete","operator":"equals","expected":true},{"field":"source_service_cell_matches","operator":"equals","expected":true},{"field":"current_service_window","operator":"equals","expected":true},{"field":"current_cell_blocked","operator":"equals","expected":false},{"field":"current_threshold_met","operator":"equals","expected":true},{"field":"provider_present","operator":"equals","expected":true},{"field":"provider_currently_at_service_cell","operator":"equals","expected":true},{"field":"lower_following_threshold","operator":"equals","expected":true},{"field":"additional_direction_count","operator":"greater_than","expected":0}]},
+        {"id":"tier.resource_relation_a.reaction_single_use_transit","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_single_use_transit"},{"field":"relation_ref","operator":"equals","expected":"reaction.single_use_transit"},{"field":"native_current","operator":"equals","expected":true},{"field":"reaction_opening_projection_complete","operator":"equals","expected":true},{"field":"source_service_cell_matches","operator":"equals","expected":true},{"field":"current_service_window","operator":"equals","expected":true},{"field":"current_cell_blocked","operator":"equals","expected":false},{"field":"current_threshold_met","operator":"equals","expected":true},{"field":"provider_present","operator":"equals","expected":false},{"field":"single_current_threshold","operator":"equals","expected":true},{"field":"following_phase_rejects_incidence","operator":"equals","expected":true}]},
+        {"id":"tier.resource_relation_a.reaction_staged_move","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_staged_move"},{"field":"relation_ref","operator":"equals","expected":"reaction.staged_release"},{"field":"native_current","operator":"equals","expected":true},{"field":"reaction_staged_endpoint_projection_complete","operator":"equals","expected":true},{"field":"endpoint_on_complete_witness","operator":"equals","expected":true},{"field":"endpoint_active","operator":"equals","expected":true},{"field":"same_restore_epoch","operator":"equals","expected":true},{"field":"next_command_exists","operator":"equals","expected":true},{"field":"next_command_kind","operator":"equals","expected":"MOVE"}]},
+        {"id":"tier.resource_relation_a.reaction_staged_select","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_staged_select"},{"field":"relation_ref","operator":"equals","expected":"reaction.staged_release"},{"field":"native_current","operator":"equals","expected":true},{"field":"reaction_staged_endpoint_projection_complete","operator":"equals","expected":true},{"field":"endpoint_on_complete_witness","operator":"equals","expected":true},{"field":"endpoint_active","operator":"equals","expected":true},{"field":"same_restore_epoch","operator":"equals","expected":true},{"field":"next_command_exists","operator":"equals","expected":true},{"field":"next_command_kind","operator":"equals","expected":"SELECT"}]},
+        {"id":"tier.resource_relation_a.reaction_relay_reuse","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_relay_reuse"},{"field":"relation_ref","operator":"equals","expected":"reaction.relay_reuse"},{"field":"native_current","operator":"equals","expected":true},{"field":"reaction_relay_reuse_projection_complete","operator":"equals","expected":true},{"field":"reaction_service_microstate_constraints_checked","operator":"equals","expected":true},{"field":"reusable_after_transmission","operator":"equals","expected":true},{"field":"delivery_precedes_relocation","operator":"equals","expected":true},{"field":"source_window_ended","operator":"equals","expected":true},{"field":"same_restore_epoch","operator":"equals","expected":true},{"field":"relocation_on_complete_witness","operator":"equals","expected":true},{"field":"command_kind","operator":"equals","expected":"MOVE"}]},
+        {"id":"tier.resource_relation_a.reaction_requested_target_activation","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_requested_target_activation"},{"field":"relation_ref","operator":"equals","expected":"reaction.requested_target_activation"},{"field":"endpoints_current","operator":"equals","expected":true},{"field":"reaction_all_requested_targets_added_in_interval","operator":"equals","expected":true}]},
+        {"id":"tier.resource_relation_a.reaction_arrival_reservation","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_arrival_reservation"},{"field":"relation_ref","operator":"equals","expected":"reaction.arrival_reservation"},{"field":"native_current","operator":"equals","expected":true},{"field":"reaction_arrival_reservation_projection_complete","operator":"equals","expected":true},{"field":"requested_target_bound","operator":"equals","expected":true},{"field":"junction_on_target_predecessors","operator":"equals","expected":true},{"field":"same_restore_epoch","operator":"equals","expected":true},{"field":"phase_accepts_incidence","operator":"equals","expected":true},{"field":"required_distinct_direction_count","operator":"equals","expected":1},{"field":"following_phase_accepts_incidence","operator":"equals","expected":false},{"field":"both_arrivals_name_this_receiver","operator":"equals","expected":true},{"field":"distinct_incidence_refs","operator":"equals","expected":true},{"field":"competing_resolution_not_after_useful","operator":"equals","expected":true},{"field":"competing_arrival_not_in_past","operator":"equals","expected":true},{"field":"current_receiver_pending","operator":"equals","expected":false},{"field":"provider_pose_in_declared_domain","operator":"equals","expected":true}]},
+        {"id":"tier.resource_relation_a.reaction_target_causal_route","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_target_causal_route"},{"field":"relation_ref","operator":"equals","expected":"reaction.target_causal_route"},{"field":"native_current","operator":"equals","expected":true},{"field":"reaction_causal_projection_complete","operator":"equals","expected":true},{"field":"reaction_all_target_closures_complete","operator":"equals","expected":true},{"field":"target_closure_complete","operator":"equals","expected":true}]},
+        {"id":"tier.resource_relation_a.reaction_bridge_passage","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_bridge_passage"},{"field":"relation_ref","operator":"equals","expected":"reaction.service_causal_passage"},{"field":"native_current","operator":"equals","expected":true},{"field":"reaction_causal_projection_complete","operator":"equals","expected":true},{"field":"target_closure_complete","operator":"equals","expected":true},{"field":"service_kind","operator":"equals","expected":"BRIDGE"},{"field":"bridge_delivery_count","operator":"greater_than","expected":0}]},
+        {"id":"tier.resource_relation_a.reaction_force_passage","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_force_passage"},{"field":"relation_ref","operator":"equals","expected":"reaction.service_causal_passage"},{"field":"native_current","operator":"equals","expected":true},{"field":"reaction_causal_projection_complete","operator":"equals","expected":true},{"field":"target_closure_complete","operator":"equals","expected":true},{"field":"service_kind","operator":"equals","expected":"FORCE_JUNCTION"},{"field":"forced_emission_under_natural_threshold_count","operator":"greater_than","expected":0}]},
+        {"id":"tier.resource_relation_a.reaction_preserved_pending_passage","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_preserved_pending_passage"},{"field":"relation_ref","operator":"equals","expected":"reaction.service_causal_passage"},{"field":"native_current","operator":"equals","expected":true},{"field":"reaction_causal_projection_complete","operator":"equals","expected":true},{"field":"target_closure_complete","operator":"equals","expected":true},{"field":"service_kind","operator":"equals","expected":"HOLD_PENDING"},{"field":"subject_on_target_trace","operator":"equals","expected":true},{"field":"pending_loss_without_cover_count","operator":"greater_than","expected":0}]},
+        {"id":"tier.resource_relation_a.reaction_delayed_activity_passage","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_delayed_activity_passage"},{"field":"relation_ref","operator":"equals","expected":"reaction.service_causal_passage"},{"field":"native_current","operator":"equals","expected":true},{"field":"reaction_causal_projection_complete","operator":"equals","expected":true},{"field":"target_closure_complete","operator":"equals","expected":true},{"field":"service_kind","operator":"equals","expected":"HOLD_PRIMED"},{"field":"subject_on_target_trace","operator":"equals","expected":true},{"field":"hold_event_count","operator":"greater_than","expected":0}]},
+        {"id":"tier.resource_relation_a.reaction_delayed_pending_passage","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_delayed_activity_passage"},{"field":"relation_ref","operator":"equals","expected":"reaction.service_causal_passage"},{"field":"native_current","operator":"equals","expected":true},{"field":"reaction_causal_projection_complete","operator":"equals","expected":true},{"field":"target_closure_complete","operator":"equals","expected":true},{"field":"service_kind","operator":"equals","expected":"HOLD_PENDING"},{"field":"subject_on_target_trace","operator":"equals","expected":true},{"field":"hold_event_count","operator":"greater_than","expected":0}]},
+        {"id":"tier.resource_relation_a.reaction_intercepted_earlier_passage","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_intercepted_earlier_passage"},{"field":"relation_ref","operator":"equals","expected":"reaction.service_causal_passage"},{"field":"native_current","operator":"equals","expected":true},{"field":"reaction_causal_projection_complete","operator":"equals","expected":true},{"field":"target_closure_complete","operator":"equals","expected":true},{"field":"service_kind","operator":"equals","expected":"SUPPRESS_NEW_HIT"},{"field":"one_shot_earlier_interception_count","operator":"greater_than","expected":0}]},
+        {"id":"tier.resource_relation_a.reaction_causal_why","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.reaction_causal_why"},{"field":"relation_ref","operator":"equals","expected":"reaction.causal_why"},{"field":"native_current","operator":"equals","expected":true},{"field":"reaction_causal_projection_complete","operator":"equals","expected":true},{"field":"reaction_all_target_closures_complete","operator":"equals","expected":true},{"field":"scope_disposition_count","operator":"greater_than","expected":0},{"field":"scope_unknown_disposition_count","operator":"equals","expected":0}]},
+        {"id":"tier.resource_relation_a.lineage_requested_delivery","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.lineage_requested_delivery"},{"field":"relation_ref","operator":"equals","expected":"lineage.requested_delivery"},{"field":"endpoints_current","operator":"equals","expected":true},{"field":"lineage_all_requested_receptors_acquired","operator":"equals","expected":true}]},
+        {"id":"tier.resource_relation_a.lineage_core_preserved_across_shell","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.lineage_core_preserved_across_shell"},{"field":"relation_ref","operator":"equals","expected":"lineage.core_before_shell"},{"field":"endpoints_current","operator":"equals","expected":true},{"field":"lineage_complete_core_retained_with_changed_shell","operator":"equals","expected":true}]},
+        {"id":"tier.resource_relation_a.lineage_global_assignment","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.lineage_global_assignment"},{"field":"relation_ref","operator":"equals","expected":"lineage.global_assignment"},{"field":"native_current","operator":"equals","expected":true},{"field":"lineage_known_complete_assignment","operator":"equals","expected":true}]},
+        {"id":"tier.resource_relation_a.lineage_interleaved_route","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.lineage_interleaved_route"},{"field":"relation_ref","operator":"equals","expected":"lineage.interleave"},{"field":"native_current","operator":"equals","expected":true},{"field":"lineage_native_domain_complete","operator":"equals","expected":true},{"field":"lineage_interleaved_complete_word_count","operator":"equals","expected":1}]},
+        {"id":"tier.resource_relation_a.lineage_rotation_unnecessary","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.lineage_rotation_unnecessary"},{"field":"relation_ref","operator":"equals","expected":"lineage.rotate_missing_aspect"},{"field":"lineage_rotation_operands_current","operator":"equals","expected":true},{"field":"lineage_rotation_current_acceptance","operator":"equals","expected":true}]},
+        {"id":"tier.resource_relation_a.lineage_rotation_repairs_core","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.lineage_rotation_repairs_core"},{"field":"relation_ref","operator":"equals","expected":"lineage.rotate_missing_aspect"},{"field":"lineage_rotation_operands_current","operator":"equals","expected":true},{"field":"lineage_rotation_current_acceptance","operator":"equals","expected":false},{"field":"lineage_rotation_chosen_acceptance_after","operator":"equals","expected":true},{"field":"lineage_rotation_core_changed","operator":"equals","expected":true},{"field":"lineage_rotation_owner_matches","operator":"equals","expected":true},{"field":"lineage_rotation_receptor_open","operator":"equals","expected":true},{"field":"lineage_rotation_transform_bound","operator":"equals","expected":true}]},
+        {
+          "id": "tier.resource_relation_a.lineage_requested_production_dependencies",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.lineage_delivery_dependency_support"},
+            {"field":"relation_ref","operator":"equals","expected":"lineage.requests_before_products"},
+            {"field":"native_current","operator":"equals","expected":true},
+            {"field":"lineage_native_domain_complete","operator":"equals","expected":true},
+            {"field":"lineage_delivery_dependency_complete","operator":"equals","expected":true}
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.lineage_causal_delivery_dependencies",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.lineage_delivery_dependency_support"},
+            {"field":"relation_ref","operator":"equals","expected":"lineage.causal_why"},
+            {"field":"native_current","operator":"equals","expected":true},
+            {"field":"lineage_native_domain_complete","operator":"equals","expected":true},
+            {"field":"lineage_delivery_dependency_complete","operator":"equals","expected":true}
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.lineage_current_solving_scope",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.lineage_current_solving_scope"},
+            {"field":"relation_ref","operator":"equals","expected":"lineage.solving_scope"},
+            {"field":"lineage_current_solving_scope_bound","operator":"equals","expected":true}
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.lineage_visible_acceptance",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {"field":"alternative_ref","operator":"equals","expected":"resource_relation_a.lineage_visible_acceptance"},
+            {"field":"relation_ref","operator":"equals","expected":"lineage.visible_learning"},
+            {"field":"endpoints_current","operator":"equals","expected":true},
+            {"field":"lineage_visible_owned_acceptance_present","operator":"equals","expected":true}
+          ]
+        },
+        {
+          "id": "tier.resource_relation_a.unknown",
+          "reason_ref": "reason.actual_resource_relation_requires_discriminating_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_relation_a.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {},
+      "configuration": {}
+    },
+    {
+      "id": "policy.acquired_resource_return_a",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.acquired_resource_exact_scoped_computation"
+      ],
+      "declared_alternative_refs": [
+        "acquired_resource_return_a.current",
+        "acquired_resource_return_a.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.acquired_resource_return_equivalent",
+      "selection_tiers": [
+        {
+          "id": "tier.acquired_resource_return_a.current",
+          "reason_ref": "reason.acquired_resource_exact_scoped_computation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "acquired_resource_return_a.current"
+            },
+            {
+              "field": "return_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {"field":"expected_unknown_disposition_count","operator":"equals","expected":0}
+          ]
+        },
+        {
+          "id": "tier.acquired_resource_return_a.unknown",
+          "reason_ref": "reason.acquired_resource_exact_scoped_computation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "acquired_resource_return_a.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "acquired_resource_return_a.current": "rule.acquired_resource_return_a"
+      },
+      "configuration": {}
+    },
+    {
+      "id": "rule.acquired_resource_return_a",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.acquired_resource_exact_scoped_computation"
+      ],
+      "invariants": [
+        "actual_retained_input_pair",
+        "source_declared_native_parameter_domain",
+        "original_wanted_domain_and_parent_preserved",
+        "no_terminal_satisfaction_or_action_release"
+      ],
+      "term_templates": [],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_claim_ref}",
+          "predicate": "supports_acquired_resource_computational_return",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}"
+          ],
+          "required_fields": [
+            "output_claim_ref",
+            "parent_goal_ref",
+            "scope_ref",
+            "epoch",
+            "input_revision_ref",
+            "episode_ref",
+            "level_scope_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "frame_ref",
+            "why_digest"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref"
+          },
+          "attribute_bindings": {
+            "normalized_return": "normalized_return",
+            "exact_demand": "exact_demand",
+            "frame_ref": "frame_ref",
+            "why_digest": "why_digest",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "relation_results": "relation_results",
+            "affected_dependency_refs": "affected_dependency_refs",
+            "preserved_sibling_refs": "preserved_sibling_refs",
+            "expected_relation_dispositions": "expected_relation_dispositions"
+          },
+          "static_attributes": {
+            "terminal_goal_satisfied": false,
+            "execution_authority": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.resource_composition_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.current_correlated_family_domains_keep_parent_why"
+      ],
+      "declared_alternative_refs": [
+        "resource_composition.join",
+        "resource_composition.missing",
+        "resource_composition.not_requested"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.resource_composition.exact_domains",
+      "selection_tiers": [
+        {
+          "id": "tier.resource_composition.join",
+          "reason_ref": "reason.current_correlated_family_domains_keep_parent_why",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_composition.join"
+            },
+            {
+              "field": "composition_bound",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_composition.missing",
+          "reason_ref": "reason.current_correlated_family_domains_keep_parent_why",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_composition.missing"
+            },
+            {
+              "field": "composition_requested",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.resource_composition.not_requested",
+          "reason_ref": "reason.current_correlated_family_domains_keep_parent_why",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "resource_composition.not_requested"
+            }
+          ]
+        }
+      ],
+      "invariants": [
+        "one_parent_epoch_episode_and_level",
+        "current_exact_peer_receipts_not_proxy_results",
+        "shared_assignments_and_resources_are_equalities",
+        "three_global_resource_witnesses",
+        "no_k09_recursion_and_no_puzzle_action"
+      ]
+    }
+  ]
+}

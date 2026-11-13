@@ -1,0 +1,531 @@
+{
+  "schema": "logos-engine.lot8a.qualification-after-published063.v1",
+  "status": "actual063_reconciled_prepared_qualification_preserved_064_cost_and_release_pending",
+  "recordedAt": "2026-11-11T22:33:16.996219+00:00",
+  "candidate": {
+    "version": "0.65.0_reserved_unpublished",
+    "nativeFileCount": 324,
+    "nativeDigest": "936fa2bf81965272b1ddbab4a5c01f98aeb6a48188c1f7a8c91de226598c5e43",
+    "compositionSourceCommit": "a9ef0c67ea4b85d8eb68f57fb144772e162dcf35",
+    "qualificationHeadForInventoryCapturesAndReview": "7c8f43365a277406e95c898165d01a7bf6e19772",
+    "sourceManifest": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/source-manifest.json",
+      "sha256": "325268f8cd80b67996ab2d4a05df5203247257bc603f1cf29f63f0d9165d7167",
+      "bytes": 38477
+    },
+    "finalIntegrity": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/final-input-integrity.json",
+      "sha256": "d60c7ca3589de3713f3b54393a5b3ed1ea251ac9cb7aa3635a4fc7bd760c0a24",
+      "bytes": 1495
+    },
+    "actualPublished063Integrated": true,
+    "published063Source": "bc53ddf36f0379be24cfc0667f8f8d6fdd650032",
+    "integrityAfterPublished063": {
+      "path": "docs/migration/lot8a-evidence/integration-published-063-01/source-reconciliation.json",
+      "sha256": "6fbed4834fbfb66e79285f2cc887506378d6a996040f3fc1368ea564549eabf5",
+      "bytes": 66615
+    }
+  },
+  "inheritedValidatedFreeze": {
+    "evidence": {
+      "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-summary.json",
+      "sha256": "679b118a0351c58792a9a9758c2026339754a2a9026c6b8d18cf241ddf3a4c0b",
+      "bytes": 10631
+    },
+    "tests": {
+      "files": 145,
+      "tests": 5606,
+      "pass": 5606,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "startedAt": "2026-11-11T19:35:33.967816+00:00",
+      "finishedAt": "2026-11-11T19:52:18.316545+00:00",
+      "elapsedSeconds": 1004.348751382,
+      "inputsUnchanged": true,
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-01/tests-run.json",
+        "sha256": "28ede04ed1f558f577333a5c158dc5ac50731fdcb74b51e8af6dd95fe81a926b",
+        "bytes": 1271939
+      }
+    },
+    "checks": [
+      {
+        "name": "typecheck",
+        "status": "passed",
+        "exitCode": 0,
+        "semanticPassed": true,
+        "inputsUnchanged": true,
+        "startedAt": "2026-11-11T20:00:21.483895+00:00",
+        "finishedAt": "2026-11-11T20:00:33.965368+00:00",
+        "elapsedSeconds": 12.481493920000503,
+        "receipt": {
+          "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-01/typecheck-run.json",
+          "sha256": "67d5ca6082ce5687297bcba6297ea557ce8752ba17bd77be1d1eeb80197ad58a",
+          "bytes": 1477551
+        }
+      },
+      {
+        "name": "entry-audit",
+        "status": "passed",
+        "exitCode": 0,
+        "semanticPassed": true,
+        "inputsUnchanged": true,
+        "startedAt": "2026-11-11T20:01:04.373491+00:00",
+        "finishedAt": "2026-11-11T20:01:05.541432+00:00",
+        "elapsedSeconds": 1.1679613060005067,
+        "receipt": {
+          "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-01/entry-audit-run.json",
+          "sha256": "b2cf0fd7ccf6fecd93e2dcede8a3775a517c24c55a9c5ab3331db9cf72b3a7a8",
+          "bytes": 1478577
+        }
+      },
+      {
+        "name": "migration-audit",
+        "status": "passed",
+        "exitCode": 0,
+        "semanticPassed": true,
+        "inputsUnchanged": true,
+        "startedAt": "2026-11-11T20:01:22.652459+00:00",
+        "finishedAt": "2026-11-11T20:01:28.874816+00:00",
+        "elapsedSeconds": 6.222375596000347,
+        "receipt": {
+          "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-01/migration-audit-run.json",
+          "sha256": "d910d0b5b9838e7eb1ffca59795d2b1bdbe670f731890d50a9fbaae622433f87",
+          "bytes": 1478574
+        }
+      },
+      {
+        "name": "diff-check",
+        "status": "passed",
+        "exitCode": 0,
+        "semanticPassed": true,
+        "inputsUnchanged": true,
+        "startedAt": "2026-11-11T20:01:35.454784+00:00",
+        "finishedAt": "2026-11-11T20:01:35.627715+00:00",
+        "elapsedSeconds": 0.17285113199977786,
+        "receipt": {
+          "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-01/diff-check-run.json",
+          "sha256": "b8613b03678110396341f90e319029b05bc71b4237bb0b7a69426534782353a3",
+          "bytes": 1478251
+        }
+      },
+      {
+        "name": "build",
+        "status": "passed",
+        "exitCode": 0,
+        "semanticPassed": true,
+        "inputsUnchanged": true,
+        "startedAt": "2026-11-11T20:01:47.176629+00:00",
+        "finishedAt": "2026-11-11T20:02:04.045992+00:00",
+        "elapsedSeconds": 16.86938211300003,
+        "receipt": {
+          "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-01/build-run.json",
+          "sha256": "6d21f7162c873949f2791cb2a87bd2f3d98e6d0d0a6e53a0c977ae931efba288",
+          "bytes": 1487282
+        }
+      }
+    ],
+    "entryCoverage": {
+      "connected": 67,
+      "declared": 76,
+      "percent": 88.2,
+      "groups": [
+        {
+          "id": "goal_access",
+          "connected": 12,
+          "declared": 12
+        },
+        {
+          "id": "window_constraints",
+          "connected": 21,
+          "declared": 21
+        },
+        {
+          "id": "surface",
+          "connected": 10,
+          "declared": 10
+        },
+        {
+          "id": "factored_material_return",
+          "connected": 24,
+          "declared": 33
+        }
+      ],
+      "fullV6Parity": false
+    },
+    "componentCoverage": {
+      "pythonModules": 1369,
+      "pythonLines": 320375,
+      "declaredClassesAndFunctions": 12857,
+      "dataFiles": 417,
+      "verifiedModules": 0,
+      "componentVerifiedModules": 209,
+      "partiallyTransferredModules": 147,
+      "transferredUnverifiedModules": 0,
+      "pendingModules": 1013,
+      "strategyFamilies": 16
+    },
+    "completeMigrationGates": {
+      "allRequiredCapabilitiesTransferred": false,
+      "fullCommonCallerDifferentialParity": false,
+      "allDeclaredFamiliesIntegrated": false,
+      "commonGraphEditingCoversExecutedPrograms": false,
+      "pythonNumericSemanticsCovered": false,
+      "fullCampaignRegression": false
+    },
+    "freshFullSuiteRerunDuringThisClosure": false,
+    "continuityBasis": "All source/test/script/build/original inputs still equal the validated prospective freeze."
+  },
+  "common": {
+    "review": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/review/common-integrity-review.json",
+      "sha256": "0c206ef01f7eeca9fde05cb30da767f06775a6196bfbc6419d26a30736fc11e5",
+      "bytes": 1183573
+    },
+    "binding": {
+      "scenarios": 4,
+      "checksPassed": 6818,
+      "checksTotal": 6818
+    },
+    "motif": {
+      "checksPassed": 20,
+      "checksTotal": 20,
+      "evidence": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-01/common/motif-caller-review-01.json",
+        "sha256": "dce3a1869450aa12e0f2acab23fa6f742dcb1eafd740df8d43aced3c4f1b5fbf",
+        "bytes": 2933
+      }
+    },
+    "selectedRigid": {
+      "comparedEvents": 56,
+      "differences": 0,
+      "ablations": 22,
+      "actionChangingAblations": 7,
+      "ablationErrors": 0,
+      "comparison": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-01/selected-rigid/comparison-02.json",
+        "sha256": "f8880b32f2ec23a9476b9fe1fb2393defe5577bc5bfd07adc17aedd528c20b3f",
+        "bytes": 393242
+      }
+    },
+    "qualification": "Separate synthetic common-component scenarios on the same frozen native. No same-episode three-active-owner interaction or full original caller parity is established."
+  },
+  "recordedRegressions": {
+    "evidence": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/reconciliation-recorded-regressions.json",
+      "sha256": "bea2a134e909ac6bcaf24a031a9b36410a34e35ee1b7abc416de162f41005c7a",
+      "bytes": 31312
+    },
+    "independentReview": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/review/recorded-regression-reconciliation-review.json",
+      "sha256": "52bcf4eb89ef270b3c859e9f347ae251f2cc04eb25afa5c8247059f7dc9dc155",
+      "bytes": 18047
+    },
+    "status": "passed_across_retained_attempts",
+    "casesPassed": 11,
+    "casesTotal": 11,
+    "checksPassed": 187,
+    "checksTotal": 187,
+    "selection": "Ten successful cases from attempt02 plus WEAV03, eleven distinct original case IDs. Attempt02 remains failed,10/11,170/187.",
+    "caseResults": [
+      {
+        "case": "catr-051",
+        "game": "CATR",
+        "attempt": "recorded-regressions-02",
+        "actions": 12,
+        "prefixes": 8,
+        "levelsCompleted": 3,
+        "comparisonChecksPassed": 17
+      },
+      {
+        "case": "rswp-051",
+        "game": "RSWP",
+        "attempt": "recorded-regressions-02",
+        "actions": 19,
+        "prefixes": 11,
+        "levelsCompleted": 3,
+        "comparisonChecksPassed": 17
+      },
+      {
+        "case": "fogw-051",
+        "game": "FOGW",
+        "attempt": "recorded-regressions-02",
+        "actions": 50,
+        "prefixes": 27,
+        "levelsCompleted": 3,
+        "comparisonChecksPassed": 17
+      },
+      {
+        "case": "vois-051",
+        "game": "VOIS",
+        "attempt": "recorded-regressions-02",
+        "actions": 78,
+        "prefixes": 42,
+        "levelsCompleted": 3,
+        "comparisonChecksPassed": 17
+      },
+      {
+        "case": "conn-050",
+        "game": "CONN",
+        "attempt": "recorded-regressions-02",
+        "actions": 21,
+        "prefixes": 21,
+        "levelsCompleted": 3,
+        "comparisonChecksPassed": 17
+      },
+      {
+        "case": "mind-051",
+        "game": "MIND",
+        "attempt": "recorded-regressions-02",
+        "actions": 31,
+        "prefixes": 20,
+        "levelsCompleted": 3,
+        "comparisonChecksPassed": 17
+      },
+      {
+        "case": "tria-development-4b",
+        "game": "TRIA",
+        "attempt": "recorded-regressions-02",
+        "actions": 17,
+        "prefixes": 17,
+        "levelsCompleted": 3,
+        "comparisonChecksPassed": 17
+      },
+      {
+        "case": "craf-055",
+        "game": "CRAF",
+        "attempt": "recorded-regressions-02",
+        "actions": 36,
+        "prefixes": 36,
+        "levelsCompleted": 3,
+        "comparisonChecksPassed": 17
+      },
+      {
+        "case": "isos-development-4c",
+        "game": "ISOS",
+        "attempt": "recorded-regressions-02",
+        "actions": 12,
+        "prefixes": 12,
+        "levelsCompleted": 3,
+        "comparisonChecksPassed": 17
+      },
+      {
+        "case": "kata-060-self-consistency",
+        "game": "KATA",
+        "attempt": "recorded-regressions-02",
+        "actions": 33,
+        "prefixes": 14,
+        "levelsCompleted": 3,
+        "comparisonChecksPassed": 17
+      },
+      {
+        "case": "weav-051",
+        "game": "WEAV",
+        "attempt": "weav-recovery-03",
+        "actions": 81,
+        "prefixes": 81,
+        "levelsCompleted": 3,
+        "comparisonChecksPassed": 17
+      }
+    ],
+    "weavHostRecovery": {
+      "actions": 81,
+      "prefixes": 81,
+      "levelsCompleted": 3,
+      "v8OldSpaceLimitMiB": 1536,
+      "rssKiBMaximumSampled": 1723184,
+      "hwmKiBMaximumRecorded": 1789120,
+      "memoryScope": "1536MiB is the Node/V8 old-space cap, not a total process RSS limit. Samples are functional diagnostics, not official cost measurements.",
+      "fullReportPreserved": true,
+      "nativeStateAndBudgetUnchanged": true,
+      "originalComparatorUnchanged": true
+    }
+  },
+  "preparedWorkForms": {
+    "inventory": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/work-forms-01/owner-inventory.json",
+      "sha256": "6bf16425d44e0437d7fa00780140d93b1d7e79e16e95ba3cda3710e8574640d1",
+      "bytes": 127075
+    },
+    "graphQualification": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/work-forms-01/owner-graph-attribution.json",
+      "sha256": "58a65d816c52740d401e538165a070a287ddeb9111b5c5ff92e4a5b7ef4e9298",
+      "bytes": 207219
+    },
+    "independentReview": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/review/work-form-qualification-review.json",
+      "sha256": "b0cb98ca4bbf76006802274a51316b44808165edcab17d0a0a90bd268c0b9902",
+      "bytes": 16204
+    },
+    "capturePlan": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/contract/work-form-capture-plan-v2.json",
+      "sha256": "88f6d92d9daba0ccb4f12bc921e451308b9b3c4b60eb343da25ef002de4e0a1c",
+      "bytes": 29751
+    },
+    "qualificationPlan": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/contract/work-form-qualification-plan.json",
+      "sha256": "31487820a4899689cd9ef4e33b52e13d1bac42fa18cb0e647140f4585ce96d2c",
+      "bytes": 32266
+    },
+    "baselineCommit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+    "baselinePublished": false,
+    "baselineNativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+    "sessionsPerRole": 4,
+    "actionsPerRole": 31,
+    "totalSessions": 8,
+    "totalActions": 62,
+    "readerChecks": 64,
+    "pairedGraphPoints": 58,
+    "roleGraphObservations": 116,
+    "traceClockBounds": 168,
+    "ownerCheckpointEntries": 290,
+    "retainedDifferenceCount": 21956,
+    "unattributedDifferenceCount": 0,
+    "differenceClasses": {
+      "attributed_role_source_digest": 20893,
+      "attributed_exact_trace_created_wall_clock": 1055,
+      "attributed_motif_owner_or_reachable_fragment": 8
+    },
+    "differenceStream": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/work-forms-01/owner-graph-attribution.differences.jsonl.gz",
+      "bytes": 715754,
+      "sha256": "c1c1f9b61080299d3d66c1c8e9554f32e4e91f9f7f8cce2694a7d824ce9baa0e"
+    },
+    "measuredCostSessions": 0,
+    "preparedOnly": true,
+    "strictCommonGraphParity": false,
+    "officialPerformanceEligible": false,
+    "formCount": 4,
+    "formsEvidence": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/work-forms-01/work-forms.json",
+      "sha256": "521772f4db5810e3d9136acef57b92b76ac9c138e971352c7d065f897d906cd5",
+      "bytes": 60514
+    }
+  },
+  "currentPublication": {
+    "evidence": {
+      "path": "docs/migration/lot8a-evidence/integration-published-063-01/publication-observation.json",
+      "sha256": "27a9986d1affa1248b10fa43a55335a54296b32da59e6b10845fb6ac75b9f447",
+      "bytes": 2168
+    },
+    "siteVersion": 104,
+    "nativeVersion": "0.63.0",
+    "source": "bc53ddf36f0379be24cfc0667f8f8d6fdd650032",
+    "deploymentStatus": "succeeded",
+    "ownerOnly": true,
+    "publishedEntryCoverage": {
+      "connected": 65,
+      "declared": 76,
+      "percent": 85.5
+    },
+    "published5CCostMeasured": false,
+    "published5CCostAccepted": false,
+    "candidatePublicationPerformed": false
+  },
+  "workPolicy": {
+    "evidence": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/current-work-lock-policy.json",
+      "sha256": "95d81233c9a267fc07df4ded2f764c059b47c1498bb369955e2cb5fcc2587914",
+      "bytes": 1522
+    },
+    "ownCheckout": "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout",
+    "ownBranch": "lot8a-integrated-20261111",
+    "checkpointBranch": "lot8a-motif-checkpoint-20261111",
+    "ordinaryWorkRequiresGlobalLock": false,
+    "ordinaryWorkWaitsForOtherPublications": false,
+    "globalLockAcquired": false,
+    "heldLockFileDeleted": false,
+    "shortExclusiveOperations": [
+      "official_performance_measurement",
+      "publication"
+    ],
+    "checkpointTransports": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/transport/push-receipts-index-02.json",
+      "sha256": "3caeb6a245763e2a921b9b40655e77dc4d33179649b13f02dd818331ccf5f90a",
+      "bytes": 6534
+    }
+  },
+  "officialCost": {
+    "started": false,
+    "measuredSessions": 0,
+    "requiredBaseline": "actual_published_native0.64",
+    "plan": {
+      "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/contract/cost-qualification-plan.json",
+      "sha256": "ae8fcf8d1eeca229a882f9d60d4e7744985572f2ed38e8a11741ae51f4a94f47",
+      "bytes": 8575
+    },
+    "completeSessionMedianRelativeIncreaseMustBeStrictlyBelow": 0.1,
+    "casesIndependently": [
+      "STCK",
+      "SMLP"
+    ],
+    "phaseAboveTenPercentAllowedIfBothGlobalCriteriaPass": true,
+    "retainAllSamplesCohortsAndDiagnostics": true
+  },
+  "nextOrdinaryWork": {
+    "entry": "parallel_branch_routing",
+    "preparation": {
+      "path": "docs/migration/lot8b-evidence/preparation-20261111/source-inventory.json",
+      "sha256": "50551302d02f4b032ed798ec625e229d4e9ef9cb12eadc88f6f8fd205ca7e8c9",
+      "bytes": 9206
+    },
+    "note": {
+      "path": "docs/migration/lot8b-evidence/preparation-20261111/README.md",
+      "sha256": "3d539492fe5b7f49aebbf4a912422827581f6f92eaec5d2b2fc4abead403ce99",
+      "bytes": 5928
+    },
+    "status": "source_preparation_only",
+    "entryConnected": false,
+    "next": "Declare the8B transfer contract and independent small original-component corpus, then port BranchRouting and consumed dependencies on its own development branch."
+  },
+  "next8AReleaseWork": [
+    "Actual published0.63 is integrated and its native continuity is verified. Reconcile the actual published0.64 when available and establish its exact native delta from the prepared baseline.",
+    "Re-freeze and renew only affected final qualifications, including the final strict work/graph contract.",
+    "Acquire a short bounded official measurement window, run the complete declared ABBA protocol, preserve every sample and judge each global median independently.",
+    "Publish0.65 privately only after acceptance, under short publication exclusivity, and verify deployment/source identity."
+  ],
+  "retainedAttempts": {
+    "interruptedFirstRegressionDirectory": "docs/migration/lot8a-evidence/qualification-provisional-02/retained-interruption",
+    "attempt02FailedSummary": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/regression-summary.json",
+      "sha256": "f2d0ab8fc08ee34c64059295d9bcbe729851f6f84987bf81aae99ec77719fce2",
+      "bytes": 145843
+    },
+    "recovery03InitialPreflightRefusal": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/stages/weav-released-host-recovery-03/receipt.json",
+      "sha256": "78f65fedf880d02e2726ea6460e037f6d0729b0454285c6dfd9ebf43461ed7a9",
+      "bytes": 585585
+    },
+    "initialWorkInventoryMissingReference": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/stages/work-form-owner-inventory/receipt.json",
+      "sha256": "f08b0693fc828a1fa77cf81cd3ecd9ad3d718756b8ca18bdee6f47ed281ced93",
+      "bytes": 1160838
+    },
+    "baselineSupportRecovery": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/work-forms-01/baseline-support-materialization.json",
+      "sha256": "e1af98849072860ccba3b0175d2333be63366c7e107ee1c18087272c1096386b",
+      "bytes": 2201
+    }
+  },
+  "limits": [
+    "All six complete-migration gates remain false.",
+    "Common component scenarios and recorded regressions are not full original caller parity or new live-game successes.",
+    "The prepared baseline is not an actual published0.64 predecessor.",
+    "Prepared work-form qualification does not grant official performance eligibility or general strict common-graph parity.",
+    "LKEY remains permanently closed; no payload/game/oracle/replay or budget reset is introduced.",
+    "Evidence populations are separate and are not added to the inherited5606-test count.",
+    "The observed priority publication0.63 retains unmeasured/unaccepted official cost; this is not a cost waiver or publication authorization for8A."
+  ],
+  "priorPreparedQualificationSnapshot": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-02/qualification-summary.json",
+    "sha256": "0b6b27f7a8e65d8dde4f55d9fcf857a6dd8a4a9b6371b9287d140cd2696626da",
+    "bytes": 19453
+  },
+  "sourceReconciliation": {
+    "path": "docs/migration/lot8a-evidence/integration-published-063-01/source-reconciliation.json",
+    "sha256": "6fbed4834fbfb66e79285f2cc887506378d6a996040f3fc1368ea564549eabf5",
+    "bytes": 66615
+  }
+}

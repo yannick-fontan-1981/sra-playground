@@ -1,0 +1,6 @@
+{"case": "isos-development-4c", "phase": "node_running", "elapsedSeconds": 0.0, "lastProgress": null, "nodeMemory": {"pid": 12, "VmSize": "112336 kB", "VmHWM": "1088 kB", "VmRSS": "1088 kB", "Threads": "1"}}
+{"case": "isos-development-4c", "nodeProgress": {"phase": "baseline-released"}}
+{"case": "isos-development-4c", "phase": "node_running", "elapsedSeconds": 15.06, "lastProgress": {"phase": "request", "operation": "advance", "sequence": 7}, "nodeMemory": {"pid": 12, "VmSize": "10534988 kB", "VmHWM": "510012 kB", "VmRSS": "507676 kB", "Threads": "11"}}
+{"case": "isos-development-4c", "phase": "comparison_running", "nodeExitCode": 0}
+{"case": "isos-development-4c", "phase": "completed", "passed": true, "actions": 12, "comparisonChecks": 17, "failedChecks": []}
+{"status": "passed", "passed": 1, "total": 1, "comparisonChecksPassed": 17}

@@ -1,0 +1,54 @@
+{
+  "module_id": "coverage_panels_d",
+  "declarations": [{
+    "id": "policy.d_coverage_panels",
+    "kind": "selection_policy",
+    "evaluation": "declared_lexicographic_order",
+    "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "reason_refs": ["reason.d_controls_legends_active_and_visit_markers_are_independent_samples",
+      "reason.d_unknown_coverage_samples_are_not_decoded_visits",
+      "reason.d_coverage_panel_scope_or_support_not_qualified"],
+    "selection_required_fact_fields": ["layer_bindings_match", "unknown_pixel_count",
+      "unknown_marker_count", "incompatible_sampling_count", "unprovided_catalogue_or_resource_count",
+      "highlight_is_not_subtracted_from_visit_evidence"],
+    "declared_alternative_refs": ["d_coverage_panels.current_visible", "d_coverage_panels.current_obscured", "d_coverage_panels.unknown"],
+    "canonical_equivalence_tie_break_debt_ref": "debt.d_coverage_panels_equivalent_scope",
+    "selection_tie_breakers": [{"field": "alternative_ref", "preferred_order": "minimize"}],
+    "selection_tiers": [
+      {"id": "tier.d_coverage_panels.visible", "reason_ref": "reason.d_controls_legends_active_and_visit_markers_are_independent_samples",
+       "all_conditions": [
+         {"field": "alternative_ref", "operator": "equals", "expected": "d_coverage_panels.current_visible"},
+         {"field": "layer_bindings_match", "operator": "equals", "expected": true},
+         {"field": "highlight_is_not_subtracted_from_visit_evidence", "operator": "equals", "expected": true},
+         {"field": "unknown_pixel_count", "operator": "equals", "expected": 0},
+         {"field": "unknown_marker_count", "operator": "equals", "expected": 0},
+         {"field": "incompatible_sampling_count", "operator": "equals", "expected": 0},
+         {"field": "unprovided_catalogue_or_resource_count", "operator": "equals", "expected": 0}]},
+      {"id": "tier.d_coverage_panels.obscured", "reason_ref": "reason.d_unknown_coverage_samples_are_not_decoded_visits",
+       "all_conditions": [
+         {"field": "alternative_ref", "operator": "equals", "expected": "d_coverage_panels.current_obscured"},
+         {"field": "layer_bindings_match", "operator": "equals", "expected": true},
+         {"field": "highlight_is_not_subtracted_from_visit_evidence", "operator": "equals", "expected": true},
+         {"field": "unknown_pixel_count", "operator": "greater_than", "expected": 0}]},
+      {"id": "tier.d_coverage_panels.unprovided", "reason_ref": "reason.d_unknown_coverage_samples_are_not_decoded_visits",
+       "all_conditions": [
+         {"field": "alternative_ref", "operator": "equals", "expected": "d_coverage_panels.current_obscured"},
+         {"field": "layer_bindings_match", "operator": "equals", "expected": true},
+         {"field": "highlight_is_not_subtracted_from_visit_evidence", "operator": "equals", "expected": true},
+         {"field": "unknown_marker_count", "operator": "greater_than", "expected": 0}]},
+      {"id": "tier.d_coverage_panels.unknown", "reason_ref": "reason.d_coverage_panel_scope_or_support_not_qualified",
+       "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "d_coverage_panels.unknown"}]}
+    ],
+    "configuration": {
+      "operation_ref": "mechanics.cyclic_configuration_coverage.control_catalogue_measure", "mode_ref": "MEASURE",
+      "admitted_native_return_ref": "d_effect_request.descriptive_return",
+      "qualification_status_refs": ["supported", "established"],
+      "frame_field": "coverage_panel_frame_ref", "frame_digest_field": "coverage_panel_frame_digest",
+      "layout_digest_field": "coverage_panel_layout_digest",
+      "current_highlight_never_removes_visit_evidence": true, "unknown_is_not_empty": true,
+      "no_transfer_or_model_confirmation": true, "no_action_authority": true
+    }
+  }]
+}

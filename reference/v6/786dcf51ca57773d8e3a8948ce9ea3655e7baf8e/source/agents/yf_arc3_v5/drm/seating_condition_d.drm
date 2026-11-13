@@ -1,0 +1,78 @@
+{
+  "module_id": "arc3.seating_condition_d",
+  "declarations": [
+    {
+      "id": "policy.initial_seating_condition_d", "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order", "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason.current_requested_body_geometry_opens_seating_question", "reason.initial_seating_question_basis_missing"],
+      "configuration": {"why_predicate_ref": "supports_current_candidate_seating_condition_question",
+        "why_rule_ref": "rule.initial_seating_condition_d", "source_kind_ref": "seating.initial_candidate_condition.v1",
+        "condition_kind_ref": "condition.injective_typed_seating_conjunction",
+        "utility_reason_ref": "reason.current_requested_body_geometry_opens_seating_question",
+        "falsifier_ref": "falsifier.seating_question_goal_body_geometry_or_scope_changed",
+        "required_parent_scope_fields": ["parent_goal_ref", "epoch", "level_scope_ref", "input_revision_ref", "scope_ref"]},
+      "declared_alternative_refs": ["seating_condition.propose", "seating_condition.unknown"],
+      "selection_tie_breakers": [{"field": "alternative_ref", "preferred_order": "minimize"}],
+      "canonical_equivalence_tie_break_debt_ref": "debt.equivalent_current_seating_question_basis",
+      "selection_tiers": [
+        {"id": "tier.seating_condition.propose", "reason_ref": "reason.current_requested_body_geometry_opens_seating_question",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "seating_condition.propose"},
+            {"field": "initial_candidate_basis_current", "operator": "equals", "expected": true},
+            {"field": "geometric_fit_pair_present", "operator": "equals", "expected": true},
+            {"field": "principal_status_ref", "operator": "not_equals", "expected": "achieved"},
+            {"field": "principal_status_ref", "operator": "not_equals", "expected": "disabled"},
+            {"field": "principal_status_ref", "operator": "not_equals", "expected": "falsified"},
+            {"field": "principal_status_ref", "operator": "not_equals", "expected": "abandoned"}
+          ]},
+        {"id": "tier.seating_condition.unknown", "reason_ref": "reason.initial_seating_question_basis_missing",
+          "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "seating_condition.unknown"}]}
+      ],
+      "meaning_template_ref_by_alternative": {"seating_condition.propose": "rule.initial_seating_condition_d"},
+      "invariants": ["principal_goal_unchanged", "no_new_child_or_concentration_context",
+        "candidate_question_not_final_terminal_contract", "only_source_requested_observed_population",
+        "retained_original_body_and_law_status", "no_universal_seat_or_actor_quantifier",
+        "conditional_type_and_acceptance_remain_open", "no_action_authority", "no_physical_goal_confirmation"]
+    },
+    {
+      "id": "rule.initial_seating_condition_d", "kind": "rule", "evaluation": "project_requested_conclusions",
+      "supported_operators": ["DERIVE"], "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1", "relation_family": "epistemic",
+      "reason_refs": ["reason.current_requested_body_geometry_opens_seating_question"],
+      "term_templates": [{
+        "id_pattern": "{desired_condition_ref}", "kind": "schema", "label": "Revisable requested injective seating configuration",
+        "required_fields": ["desired_condition_ref", "parent_goal_ref", "wanted_configuration", "wanted_configuration_digest"],
+        "attribute_bindings": {"parent_goal_ref": "parent_goal_ref", "wanted_configuration": "wanted_configuration",
+          "wanted_configuration_digest": "wanted_configuration_digest", "principal_goal_basis_digest": "principal_goal_basis_digest",
+          "field_provenance": "field_provenance", "field_provenance_digest": "field_provenance_digest"},
+        "static_attributes": {"source_kind_ref": "seating.initial_candidate_condition.v1", "status": "proposed",
+          "condition_kind_ref": "condition.injective_typed_seating_conjunction",
+          "population_quantifier": "each_named_requested_member", "assignment_constraint": "injective",
+          "physical_goal_confirmed": false, "acceptance_confirmed": false, "control_confirmed": false,
+          "no_action_authority": true}
+      }],
+      "claim_templates": [{
+        "id_pattern": "{why_support_claim_ref}", "predicate": "supports_current_candidate_seating_condition_question",
+        "family": "epistemic", "epistemic_status": "supported",
+        "argument_patterns": ["{parent_goal_ref}", "{desired_condition_ref}"],
+        "required_term_patterns": ["{parent_goal_ref}", "{desired_condition_ref}"],
+        "required_fields": ["why_support_claim_ref", "utility_reason_ref", "falsifier_ref", "required_member_refs"],
+        "attribute_bindings": {"utility_reason_ref": "utility_reason_ref", "falsifier_ref": "falsifier_ref",
+          "required_member_refs": "required_member_refs", "requested_seat_refs": "requested_seat_refs",
+          "wanted_configuration_digest": "wanted_configuration_digest", "principal_goal_basis_digest": "principal_goal_basis_digest",
+          "field_provenance_digest": "field_provenance_digest"},
+        "scope_bindings": {"frame_ref": "frame_ref", "raw_input_ref": "raw_input_ref", "timeline_ref": "timeline_ref",
+          "observation_record_ref": "observation_record_ref", "parent_goal_ref": "parent_goal_ref",
+          "parent_contribution_ref": "parent_contribution_ref", "consumer_ref": "consumer_ref", "caller_ref": "caller_ref",
+          "scope_ref": "scope_ref", "episode_ref": "episode_ref", "level_scope_ref": "level_scope_ref", "epoch": "epoch",
+          "input_revision_ref": "input_revision_ref", "evidence_revision_ref": "evidence_revision_ref",
+          "model_revision_ref": "model_revision_ref", "event_owner_ref": "event_owner_ref"},
+        "static_attributes": {"condition_kind_ref": "condition.injective_typed_seating_conjunction",
+          "candidate_condition_status": "proposed", "principal_goal_replaced": false,
+          "terminal_equivalence_confirmed": false, "no_action_authority": true, "no_physical_goal_confirmation": true}
+      }]
+    }
+  ]
+}

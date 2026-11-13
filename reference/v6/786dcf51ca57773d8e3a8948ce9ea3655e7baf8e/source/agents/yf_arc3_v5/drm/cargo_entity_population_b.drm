@@ -1,0 +1,321 @@
+{
+  "module_id": "arc3.cargo_entity_population_b",
+  "declarations": [
+    {
+      "id": "policy.b_cargo_entity_population",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_source_roles_keep_original_status_in_complete_cargo_population"
+      ],
+      "declared_alternative_refs": [
+        "cargo_entities.observed",
+        "cargo_entities.conditional",
+        "cargo_entities.missing"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "cargo_entities.observed": "rule.b_observed_cargo_entity_population",
+        "cargo_entities.conditional": "rule.b_conditional_cargo_entity_population"
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_entities.observed",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_entities.observed"
+            },
+            {
+              "field": "entity_population_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "population_original_statuses_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_source_roles_keep_original_status_in_complete_cargo_population",
+            "epistemic_status": "supported",
+            "support_predicate": "observed_native_state_field_supported",
+            "source_kind_ref": "acquired_observation",
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_entities.conditional",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_entities.conditional"
+            },
+            {
+              "field": "entity_population_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "population_original_statuses_supported",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_source_roles_keep_original_status_in_complete_cargo_population",
+            "epistemic_status": "proposed",
+            "support_predicate": "conditional_native_cargo_population",
+            "source_kind_ref": "conditional_source_body_population",
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_entities.missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_entities.missing"
+            },
+            {
+              "field": "entity_population_complete",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_source_roles_keep_original_status_in_complete_cargo_population",
+            "epistemic_status": null,
+            "support_predicate": null,
+            "source_kind_ref": null,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_observed_cargo_entity_population",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "closed_source_population",
+        "current_body_axes_and_explicit_fields",
+        "original_role_status_retained"
+      ],
+      "applicability": [
+        "source_scoped_cargo_population"
+      ],
+      "invariants": [
+        "no_role_truth_upgrade",
+        "no_default_native_fields",
+        "no_dispatch_authority"
+      ],
+      "falsifiers": [
+        "changed_field_scope_or_provenance",
+        "unaccounted_population_member"
+      ],
+      "reason_refs": [
+        "reason_source_roles_keep_original_status_in_complete_cargo_population"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Source cargo population retaining role status",
+          "required_fields": [
+            "output_term_ref",
+            "native_kind"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "acquired_observation",
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "population": "population",
+            "population_digest": "population_digest",
+            "provenance_digest": "provenance_digest",
+            "field_provenance": "field_provenance",
+            "original_role_statuses": "original_role_statuses",
+            "native_kind": "native_kind",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "level_scope_ref": "level_scope_ref",
+            "value": "population",
+            "original_body_role_statuses": "original_body_role_statuses",
+            "input_field_support_statuses": "input_field_support_statuses",
+            "body_coordinate_axis_orders": "body_coordinate_axis_orders",
+            "body_input_epistemic_statuses": "body_input_epistemic_statuses"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_support_claim_ref}",
+          "predicate": "observed_native_state_field_supported",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{observation_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "output_support_claim_ref",
+            "output_term_ref",
+            "observation_record_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "level_scope_ref": "level_scope_ref",
+            "current_frame_ref": "frame_ref"
+          },
+          "attribute_bindings": {
+            "population_digest": "population_digest",
+            "provenance_digest": "provenance_digest",
+            "original_role_statuses": "original_role_statuses",
+            "native_kind": "native_kind",
+            "original_body_role_statuses": "original_body_role_statuses",
+            "input_field_support_statuses": "input_field_support_statuses",
+            "body_coordinate_axis_orders": "body_coordinate_axis_orders",
+            "body_input_epistemic_statuses": "body_input_epistemic_statuses"
+          },
+          "static_attributes": {
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_conditional_cargo_entity_population",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "closed_source_population",
+        "current_body_axes_and_explicit_fields",
+        "original_role_status_retained"
+      ],
+      "applicability": [
+        "source_scoped_cargo_population"
+      ],
+      "invariants": [
+        "no_role_truth_upgrade",
+        "no_default_native_fields",
+        "no_dispatch_authority"
+      ],
+      "falsifiers": [
+        "changed_field_scope_or_provenance",
+        "unaccounted_population_member"
+      ],
+      "reason_refs": [
+        "reason_source_roles_keep_original_status_in_complete_cargo_population"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Source cargo population retaining role status",
+          "required_fields": [
+            "output_term_ref",
+            "native_kind"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "conditional_source_body_population",
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "population": "population",
+            "population_digest": "population_digest",
+            "provenance_digest": "provenance_digest",
+            "field_provenance": "field_provenance",
+            "original_role_statuses": "original_role_statuses",
+            "native_kind": "native_kind",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "level_scope_ref": "level_scope_ref",
+            "value": "population",
+            "original_body_role_statuses": "original_body_role_statuses",
+            "input_field_support_statuses": "input_field_support_statuses",
+            "body_coordinate_axis_orders": "body_coordinate_axis_orders",
+            "body_input_epistemic_statuses": "body_input_epistemic_statuses"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_support_claim_ref}",
+          "predicate": "conditional_native_cargo_population",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{observation_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "output_support_claim_ref",
+            "output_term_ref",
+            "observation_record_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "level_scope_ref": "level_scope_ref",
+            "current_frame_ref": "frame_ref"
+          },
+          "attribute_bindings": {
+            "population_digest": "population_digest",
+            "provenance_digest": "provenance_digest",
+            "original_role_statuses": "original_role_statuses",
+            "native_kind": "native_kind",
+            "original_body_role_statuses": "original_body_role_statuses",
+            "input_field_support_statuses": "input_field_support_statuses",
+            "body_coordinate_axis_orders": "body_coordinate_axis_orders",
+            "body_input_epistemic_statuses": "body_input_epistemic_statuses"
+          },
+          "static_attributes": {
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    }
+  ]
+}

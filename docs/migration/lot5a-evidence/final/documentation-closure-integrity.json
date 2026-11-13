@@ -1,0 +1,137 @@
+{
+  "schema": "logos-engine.lot5a-documentation-closure-integrity.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T22:18:13.641524+00:00",
+  "publishedNativeBase": "51e2813dedb2d71001290f94f100605e0327ead3",
+  "publishedSiteVersion": 84,
+  "nativeVersion": "0.53.0",
+  "nativeDigest": "d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f",
+  "nativeTestBuildDependencyTrackedPathsUnchanged": true,
+  "compiledNativeWorker": {
+    "path": "dist/assets/v6-agent-worker-DyiW3O_3.js",
+    "sha256": "21232c488700e1572c68185b0a8835b178308f34ce945b70b40f2e232b583673",
+    "bytes": 6641334
+  },
+  "originalEvidenceIndex": {
+    "path": "docs/migration/lot5a-evidence/final/evidence-index.json",
+    "bytes": 75352,
+    "sha256": "550364497c1c2cfa414f8a7f4bb16f24651449a81abe10821e0631cc31ce8456"
+  },
+  "unchangedOriginalIndexedFiles": 349,
+  "updatedDocumentation": [
+    {
+      "previous": {
+        "path": "docs/migration/lot5a-evidence/README.md",
+        "bytes": 24498,
+        "sha256": "16e6b41a774f5c4736bff2de4ade7f18878fbaec2d9003cfc9083209b34b2a0b"
+      },
+      "current": {
+        "path": "docs/migration/lot5a-evidence/README.md",
+        "bytes": 26012,
+        "sha256": "3e8976329ce8049c4f7fafb05436516bae1979fb229779a78f58702cf56321d8"
+      }
+    },
+    {
+      "previous": {
+        "path": "docs/migration/lot5a-linked-temporal-preparation.md",
+        "bytes": 36744,
+        "sha256": "ea8832dbb30b01cd4cbb9d6c3c55b4477353203bd1a8c4f79b2e947229920408"
+      },
+      "current": {
+        "path": "docs/migration/lot5a-linked-temporal-preparation.md",
+        "bytes": 38491,
+        "sha256": "c3d339370284d035ea94fdc813c2732427b5beb5651b7d418a3bc4835a78efce"
+      }
+    },
+    {
+      "previous": {
+        "path": "docs/migration/lot5a-linked-temporal-lineage.md",
+        "bytes": 38342,
+        "sha256": "a2a636dbffad38acc5568e37813baf86a0be9bd1100053a2960b7e4adbaf1ccb"
+      },
+      "current": {
+        "path": "docs/migration/lot5a-linked-temporal-lineage.md",
+        "bytes": 40299,
+        "sha256": "4a809fb11b4bc5e9f09a0df038b6c2c27b5cfbddfddb1840b569d976782fa4a2"
+      }
+    },
+    {
+      "previous": {
+        "path": "docs/migration/v6-delivery-roadmap.md",
+        "bytes": 146509,
+        "sha256": "b6483f4de831244e4ed971dad01fb2cc8d494b67114978fad1eb879219745344"
+      },
+      "current": {
+        "path": "docs/migration/v6-delivery-roadmap.md",
+        "bytes": 148206,
+        "sha256": "b0b09b93b4efcdc1387934acc55d0ef7eea8e200b93b3e5a6d33158d5cc732f4"
+      }
+    },
+    {
+      "previous": {
+        "path": "docs/migration/v6-native-transfer.md",
+        "bytes": 199708,
+        "sha256": "71bcdb216aa588e59c8122a40e5bbc6518aed64220142e5099f62e6b856eb2c7"
+      },
+      "current": {
+        "path": "docs/migration/v6-native-transfer.md",
+        "bytes": 200990,
+        "sha256": "e7582646a847e4630b4243561c0f052b3d253aeb90a3edc6ad9c4d561db3e3fd"
+      }
+    }
+  ],
+  "additionalReceiptsAndTransportRecords": [
+    {
+      "path": "docs/migration/lot5a-evidence/final/publication-site84.json",
+      "bytes": 2355,
+      "sha256": "91cfae3f56e5547365f7e257fca22002650e54811e8de326d2f4126eac54b6bd"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/publication-source-transport.json",
+      "bytes": 7002,
+      "sha256": "4345c7cdd50a9a623d7da392e1223e51f6f61f1cfa82c00672625a62d18bb0cf"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/independent-review.json",
+      "bytes": 9755,
+      "sha256": "718d3fa392fa8808faa9dc6dca90011b2359f70cdd54d675453b37b12f27f485"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/lot5a-bounded-source-plan-v3.json",
+      "bytes": 57779,
+      "sha256": "de07d48159a584582992c8aa6bbf6894f73a4362bd2d491604a0b524ae4760f9"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/lot5a-pushed-archive-integrity.json",
+      "bytes": 14457,
+      "sha256": "7944b226bc060bb3c9b254afcba4fcb4da009d19aba408ecb933e7a6b44e32c2"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/lot5a-recovery-step-1.json",
+      "bytes": 684,
+      "sha256": "97e266efd15c4b5f598292be4ced11a4f9775db69f9f5f1dcee695022e1ec73a"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/lot5a-recovery-step-2.json",
+      "bytes": 679,
+      "sha256": "1dca0d43ae70bb5b8db1d14ed1749d18dccf5a802afd91d4da3dffcec09834ac"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/lot5a-recovery-step-3.json",
+      "bytes": 678,
+      "sha256": "05beff4b18b89339f18e454b11681e6e07a3507d4bbe3742520d65f01b14f7ca"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/lot5a-recovery-step-4.json",
+      "bytes": 688,
+      "sha256": "3f8bc8b9e79d55d0185a24592d2b1ccb080726659e6b45774a943d81d05de106"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/lot5a-safe-source-target.json",
+      "bytes": 349,
+      "sha256": "90c8775d73917446ba43d740be598b587ef2a35e1a56f2e1f19c1c4a88b0503b"
+    }
+  ],
+  "originalSourceBranchUnchanged": true,
+  "qualification": "Documentation-only closure after the actual first Site84 deployment. The frozen354-entry index remains immutable; its349 non-documentation entries remain exact, and the five changed publications documents are fingerprinted here. Native tests/build/costs are not rerun or altered. This receipt excludes itself."
+}

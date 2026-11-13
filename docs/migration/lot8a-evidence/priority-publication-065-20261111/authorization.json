@@ -1,0 +1,28 @@
+{
+  "schema": "logos-engine.lot8a.priority065-publication-authorization.v1",
+  "recordedAt": "2026-11-12T01:06:52.393723+00:00",
+  "userInstruction": "fait la publication de manière prioritaire est forcé de 0.65 sans attendre une disponibilité",
+  "version": "0.65.0",
+  "priorityPublicationAuthorized": true,
+  "waitForPeerAvailability": false,
+  "peerQuietAcknowledgementsRequired": false,
+  "publishBeforeOfficialCostAccepted": true,
+  "officialCostMeasured": false,
+  "officialCostAccepted": false,
+  "performanceMeasurementExecuted": false,
+  "globalMedianRequirement": {
+    "STCK": "strictly_less_than_10_percent_increase",
+    "SMLP": "strictly_less_than_10_percent_increase",
+    "phaseAbove10PercentAcceptableIfBothGlobalCriteriaPass": true
+  },
+  "publicationExclusivity": "short_nonblocking_owned_flock",
+  "publicationLockFileDeletionAuthorized": false,
+  "developmentTestsCommitsCheckpointPushRequireGlobalLock": false,
+  "forceGitHistoryRewrite": false,
+  "preserveOwnerPrivateAudience": true,
+  "candidateRestoredCommit": "c58d82e0da5f0eed6b9ffa8e60f46727514b42d0",
+  "published064Commit": "deb9ebbbb06a8a35940b2e8f3fefdbed690ce772",
+  "branch": "lot8a-priority065-20261111",
+  "checkout": "/workspace/sites/sra-lot8a-publish065-20261111/.sites-checkout",
+  "closedLKEYReopened": false
+}

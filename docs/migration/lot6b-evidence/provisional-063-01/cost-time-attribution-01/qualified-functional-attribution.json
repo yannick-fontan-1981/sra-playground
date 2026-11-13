@@ -1,0 +1,5187 @@
+{
+  "schema": "logos-engine.lot6b-owner-cost-structural-attribution.v1",
+  "status": "qualified_functional_structure",
+  "startedAt": "2026-11-11T19:24:10.370Z",
+  "checks": [
+    {
+      "name": "immutable_capture_provenance_before_measurement",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:5",
+      "passed": true
+    },
+    {
+      "name": "shape:STCK:warmup",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:5",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:6",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:7",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:8",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:9",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:10",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:11",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:12",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:13",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:14",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:15",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:16",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:17",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:18",
+      "passed": true
+    },
+    {
+      "name": "shape:STCK:measured",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:5",
+      "passed": true
+    },
+    {
+      "name": "shape:SMLP:warmup",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:5",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:6",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:7",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:8",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:9",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:10",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:11",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:12",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:13",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:14",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:15",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:16",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:17",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:18",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:19",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:20",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:21",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:22",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:23",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:24",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:25",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:26",
+      "passed": true
+    },
+    {
+      "name": "shape:SMLP:measured",
+      "passed": true
+    },
+    {
+      "name": "all_inputs_unchanged_and_no_window_started",
+      "passed": true
+    }
+  ],
+  "nodeAttributions": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 55,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "61a4f68bdffa61e6788662b7016e4d61f97506ba6d0b5aa28b767e1adbe3cc31",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 56,
+      "nodeId": "family_activation:selected_rigid",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "19d3f3bc43f2bd0bd646f1ec2acfdf5103be1e06b3a3aed357e53b6dad94aba6",
+      "category": "selectedRigid_installation"
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 277,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "21c20979e00fed73906a8d4e9f2df7481a1fb24aef6fd3b97c097dd0f6881cee",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 396,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "e4426f9a21965161c51edb47a8e784db7b1ed0b682d1ab9ed68b5998980825c0",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 512,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "190263b837bd472ee64ee0fc68e07dfb8720e2c7de0c99c4f7a55dba60908356",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 55,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "53bfa1feef07f66a387511d9b197386fb9dada3e0363a1422a20e51136d2b540",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 56,
+      "nodeId": "family_activation:selected_rigid",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "b64bf420bba2cde37ecf8edfff605dd71d7d1d934dd3af837d1bea042f3b6803",
+      "category": "selectedRigid_installation"
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 277,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "da21f4a94e3e6c82f8d64d4e45406a6f11bde8bec27b11fb2a56d761f316d924",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 396,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "73870d01ac3075bad63a695e9d592ab1cf2af6d638eddb20def6a6210dcc393b",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 512,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "c8d7d11fbeb30596b6ec6677e5f79c05e0ac8e85c8bf5cf95397ad702d574f50",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "requestSequence": 4,
+      "deltaSequence": 639,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 5,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:4"
+      ],
+      "nodeSha256": "c5d2a4d66377e606f7793479a264cad6c6c8a521e0fd8a6822b05597d58e0c6b",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "requestSequence": 9,
+      "deltaSequence": 819,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 6,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:5"
+      ],
+      "nodeSha256": "68d86ea6f6e8238afdd0351ec32616b8545b55d94bbb7834dbdf8268ba609c43",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "requestSequence": 10,
+      "deltaSequence": 941,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 7,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:10"
+      ],
+      "nodeSha256": "a5fd5ef4e1f65a324b3f803b80c83ed2de5e7b0130517787a5fab3cd79294671",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 55,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "0117ce4e3b77e1ed779225e682b469b1f81b80bbaae4a0d633868cd22d540b77",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 56,
+      "nodeId": "family_activation:selected_rigid",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "edd5cd86c91dac79326b3a5180d4f2dea0110661bdfe477369bfc6eb0b2ebefb",
+      "category": "selectedRigid_installation"
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 294,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "e0a1ec734ccb12d2b4c5371ac0e7c6353aa489415a402ff133ff1dc453f56eec",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 407,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "153f9a2f8fae60a4c649cba2affdbc797466cb48141d3a016c33ae8eeae068c9",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 521,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "c805a4a8f6c9896a557f9c60b9a4b6237e11b1096dc9f8ed7e04fb2fd44cd03b",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 55,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "e9d412c0a641e4ac1b34a67726cb8b0e1e5fca1d1ea6c0af4d41efeda9ef9443",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 56,
+      "nodeId": "family_activation:selected_rigid",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "5fcf560f3517feb6224728eaea9a1c1c7680a12f71e75517883a8a5865d1abe0",
+      "category": "selectedRigid_installation"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 294,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "2c328da81fb6ccf5a3479e393efabd20dcc5e04967e6689576b83fbab008c287",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 407,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "2d2be8104ae3376a69c32b55f48e39bebe2cdc58849b81e8f407eecf1583a833",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 521,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "60206106f359c29d8d1127634a3dbac1839775921045ab84e1685e94ff4012c1",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "requestSequence": 4,
+      "deltaSequence": 650,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 5,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:4"
+      ],
+      "nodeSha256": "3e20f2e9e260019c8e0835db04b227958a54d478158de835e1d27bc16a0cd8ba",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 11,
+      "request": "advance",
+      "requestSequence": 7,
+      "deltaSequence": 794,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 6,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:5"
+      ],
+      "nodeSha256": "977088d96218f2953d7251ecf2991470600295fc19dae5c71be828428d6aee9a",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "requestSequence": 8,
+      "deltaSequence": 918,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 7,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:8"
+      ],
+      "nodeSha256": "ca3f873f9b100ec7ba312c3b13017cd046886ddd685033207138f4d8b3a59245",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "requestSequence": 9,
+      "deltaSequence": 1039,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 8,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:9"
+      ],
+      "nodeSha256": "645ffa4c5fa7da01378056768f4d3b79987396e279e4ffdd8e22e9eecf796cff",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 18,
+      "request": "advance",
+      "requestSequence": 11,
+      "deltaSequence": 1172,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 9,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:10"
+      ],
+      "nodeSha256": "c94089febbf72eea5d1567cc6eaade8185b99dece9b04d2a01419b5eb00f456d",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 23,
+      "request": "advance",
+      "requestSequence": 15,
+      "deltaSequence": 1333,
+      "nodeId": "family_state:selected_rigid",
+      "kind": "family_state",
+      "revision": 10,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:12"
+      ],
+      "nodeSha256": "1c11a42ef8d812a4506889c787336da679712182709b12f481ee64b53168493a",
+      "category": "selectedRigid_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "13f42877edf66dca17a044e72c3bda21bd08ff74e29e0c25eba5d58c6ef736bf",
+      "retainedEventCount": 0
+    }
+  ],
+  "points": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 182,
+      "candidateNodeCount": 184,
+      "baselineGraphRevision": 192,
+      "candidateGraphRevision": 194,
+      "baselineDeltaCount": 192,
+      "candidateDeltaCount": 194,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 2,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 211,
+      "candidateNodeCount": 213,
+      "baselineGraphRevision": 305,
+      "candidateGraphRevision": 308,
+      "baselineDeltaCount": 113,
+      "candidateDeltaCount": 114,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 213,
+      "candidateNodeCount": 215,
+      "baselineGraphRevision": 315,
+      "candidateGraphRevision": 318,
+      "baselineDeltaCount": 10,
+      "candidateDeltaCount": 10,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 236,
+      "candidateNodeCount": 238,
+      "baselineGraphRevision": 425,
+      "candidateGraphRevision": 429,
+      "baselineDeltaCount": 110,
+      "candidateDeltaCount": 111,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 238,
+      "candidateNodeCount": 240,
+      "baselineGraphRevision": 435,
+      "candidateGraphRevision": 439,
+      "baselineDeltaCount": 10,
+      "candidateDeltaCount": 10,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 262,
+      "candidateNodeCount": 264,
+      "baselineGraphRevision": 541,
+      "candidateGraphRevision": 546,
+      "baselineDeltaCount": 106,
+      "candidateDeltaCount": 107,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 182,
+      "candidateNodeCount": 184,
+      "baselineGraphRevision": 192,
+      "candidateGraphRevision": 194,
+      "baselineDeltaCount": 192,
+      "candidateDeltaCount": 194,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 2,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 211,
+      "candidateNodeCount": 213,
+      "baselineGraphRevision": 305,
+      "candidateGraphRevision": 308,
+      "baselineDeltaCount": 113,
+      "candidateDeltaCount": 114,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 213,
+      "candidateNodeCount": 215,
+      "baselineGraphRevision": 315,
+      "candidateGraphRevision": 318,
+      "baselineDeltaCount": 10,
+      "candidateDeltaCount": 10,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 236,
+      "candidateNodeCount": 238,
+      "baselineGraphRevision": 425,
+      "candidateGraphRevision": 429,
+      "baselineDeltaCount": 110,
+      "candidateDeltaCount": 111,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 238,
+      "candidateNodeCount": 240,
+      "baselineGraphRevision": 435,
+      "candidateGraphRevision": 439,
+      "baselineDeltaCount": 10,
+      "candidateDeltaCount": 10,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 262,
+      "candidateNodeCount": 264,
+      "baselineGraphRevision": 541,
+      "candidateGraphRevision": 546,
+      "baselineDeltaCount": 106,
+      "candidateDeltaCount": 107,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 6,
+      "request": "resume",
+      "sequence": 3,
+      "baselineNodeCount": 264,
+      "candidateNodeCount": 266,
+      "baselineGraphRevision": 554,
+      "candidateGraphRevision": 559,
+      "baselineDeltaCount": 13,
+      "candidateDeltaCount": 13,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "sequence": 4,
+      "baselineNodeCount": 287,
+      "candidateNodeCount": 289,
+      "baselineGraphRevision": 664,
+      "candidateGraphRevision": 670,
+      "baselineDeltaCount": 110,
+      "candidateDeltaCount": 111,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 8,
+      "request": "resume",
+      "sequence": 4,
+      "baselineNodeCount": 289,
+      "candidateNodeCount": 291,
+      "baselineGraphRevision": 675,
+      "candidateGraphRevision": 681,
+      "baselineDeltaCount": 11,
+      "candidateDeltaCount": 11,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 9,
+      "request": "advance",
+      "sequence": 5,
+      "baselineNodeCount": 289,
+      "candidateNodeCount": 291,
+      "baselineGraphRevision": 675,
+      "candidateGraphRevision": 681,
+      "baselineDeltaCount": 0,
+      "candidateDeltaCount": 0,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 10,
+      "request": "advance",
+      "sequence": 6,
+      "baselineNodeCount": 289,
+      "candidateNodeCount": 291,
+      "baselineGraphRevision": 675,
+      "candidateGraphRevision": 681,
+      "baselineDeltaCount": 0,
+      "candidateDeltaCount": 0,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 11,
+      "request": "advance",
+      "sequence": 7,
+      "baselineNodeCount": 289,
+      "candidateNodeCount": 291,
+      "baselineGraphRevision": 675,
+      "candidateGraphRevision": 681,
+      "baselineDeltaCount": 0,
+      "candidateDeltaCount": 0,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 12,
+      "request": "advance",
+      "sequence": 8,
+      "baselineNodeCount": 289,
+      "candidateNodeCount": 291,
+      "baselineGraphRevision": 675,
+      "candidateGraphRevision": 681,
+      "baselineDeltaCount": 0,
+      "candidateDeltaCount": 0,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "sequence": 9,
+      "baselineNodeCount": 373,
+      "candidateNodeCount": 375,
+      "baselineGraphRevision": 847,
+      "candidateGraphRevision": 854,
+      "baselineDeltaCount": 172,
+      "candidateDeltaCount": 173,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 14,
+      "request": "resume",
+      "sequence": 9,
+      "baselineNodeCount": 375,
+      "candidateNodeCount": 377,
+      "baselineGraphRevision": 857,
+      "candidateGraphRevision": 864,
+      "baselineDeltaCount": 10,
+      "candidateDeltaCount": 10,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "sequence": 10,
+      "baselineNodeCount": 397,
+      "candidateNodeCount": 399,
+      "baselineGraphRevision": 966,
+      "candidateGraphRevision": 974,
+      "baselineDeltaCount": 109,
+      "candidateDeltaCount": 110,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 16,
+      "request": "inspect",
+      "sequence": 10,
+      "baselineNodeCount": 397,
+      "candidateNodeCount": 399,
+      "baselineGraphRevision": 966,
+      "candidateGraphRevision": 974,
+      "baselineDeltaCount": 0,
+      "candidateDeltaCount": 0,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 17,
+      "request": "inspect",
+      "sequence": 10,
+      "baselineNodeCount": 397,
+      "candidateNodeCount": 399,
+      "baselineGraphRevision": 966,
+      "candidateGraphRevision": 974,
+      "baselineDeltaCount": 0,
+      "candidateDeltaCount": 0,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 18,
+      "request": "inspect",
+      "sequence": 10,
+      "baselineNodeCount": 397,
+      "candidateNodeCount": 399,
+      "baselineGraphRevision": 966,
+      "candidateGraphRevision": 974,
+      "baselineDeltaCount": 0,
+      "candidateDeltaCount": 0,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 187,
+      "candidateNodeCount": 189,
+      "baselineGraphRevision": 222,
+      "candidateGraphRevision": 224,
+      "baselineDeltaCount": 222,
+      "candidateDeltaCount": 224,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 2,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 206,
+      "candidateNodeCount": 208,
+      "baselineGraphRevision": 322,
+      "candidateGraphRevision": 325,
+      "baselineDeltaCount": 100,
+      "candidateDeltaCount": 101,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 208,
+      "candidateNodeCount": 210,
+      "baselineGraphRevision": 332,
+      "candidateGraphRevision": 335,
+      "baselineDeltaCount": 10,
+      "candidateDeltaCount": 10,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 224,
+      "candidateNodeCount": 226,
+      "baselineGraphRevision": 434,
+      "candidateGraphRevision": 438,
+      "baselineDeltaCount": 102,
+      "candidateDeltaCount": 103,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 226,
+      "candidateNodeCount": 228,
+      "baselineGraphRevision": 444,
+      "candidateGraphRevision": 448,
+      "baselineDeltaCount": 10,
+      "candidateDeltaCount": 10,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 253,
+      "candidateNodeCount": 255,
+      "baselineGraphRevision": 553,
+      "candidateGraphRevision": 558,
+      "baselineDeltaCount": 109,
+      "candidateDeltaCount": 110,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 187,
+      "candidateNodeCount": 189,
+      "baselineGraphRevision": 222,
+      "candidateGraphRevision": 224,
+      "baselineDeltaCount": 222,
+      "candidateDeltaCount": 224,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 2,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 206,
+      "candidateNodeCount": 208,
+      "baselineGraphRevision": 322,
+      "candidateGraphRevision": 325,
+      "baselineDeltaCount": 100,
+      "candidateDeltaCount": 101,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 208,
+      "candidateNodeCount": 210,
+      "baselineGraphRevision": 332,
+      "candidateGraphRevision": 335,
+      "baselineDeltaCount": 10,
+      "candidateDeltaCount": 10,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 224,
+      "candidateNodeCount": 226,
+      "baselineGraphRevision": 434,
+      "candidateGraphRevision": 438,
+      "baselineDeltaCount": 102,
+      "candidateDeltaCount": 103,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 226,
+      "candidateNodeCount": 228,
+      "baselineGraphRevision": 444,
+      "candidateGraphRevision": 448,
+      "baselineDeltaCount": 10,
+      "candidateDeltaCount": 10,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 253,
+      "candidateNodeCount": 255,
+      "baselineGraphRevision": 553,
+      "candidateGraphRevision": 558,
+      "baselineDeltaCount": 109,
+      "candidateDeltaCount": 110,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 6,
+      "request": "resume",
+      "sequence": 3,
+      "baselineNodeCount": 255,
+      "candidateNodeCount": 257,
+      "baselineGraphRevision": 575,
+      "candidateGraphRevision": 580,
+      "baselineDeltaCount": 22,
+      "candidateDeltaCount": 22,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "sequence": 4,
+      "baselineNodeCount": 270,
+      "candidateNodeCount": 272,
+      "baselineGraphRevision": 675,
+      "candidateGraphRevision": 681,
+      "baselineDeltaCount": 100,
+      "candidateDeltaCount": 101,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 8,
+      "request": "resume",
+      "sequence": 4,
+      "baselineNodeCount": 272,
+      "candidateNodeCount": 274,
+      "baselineGraphRevision": 685,
+      "candidateGraphRevision": 691,
+      "baselineDeltaCount": 10,
+      "candidateDeltaCount": 10,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 9,
+      "request": "advance",
+      "sequence": 5,
+      "baselineNodeCount": 272,
+      "candidateNodeCount": 274,
+      "baselineGraphRevision": 685,
+      "candidateGraphRevision": 691,
+      "baselineDeltaCount": 0,
+      "candidateDeltaCount": 0,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 10,
+      "request": "advance",
+      "sequence": 6,
+      "baselineNodeCount": 272,
+      "candidateNodeCount": 274,
+      "baselineGraphRevision": 685,
+      "candidateGraphRevision": 691,
+      "baselineDeltaCount": 0,
+      "candidateDeltaCount": 0,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 11,
+      "request": "advance",
+      "sequence": 7,
+      "baselineNodeCount": 323,
+      "candidateNodeCount": 325,
+      "baselineGraphRevision": 823,
+      "candidateGraphRevision": 830,
+      "baselineDeltaCount": 138,
+      "candidateDeltaCount": 139,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 12,
+      "request": "resume",
+      "sequence": 7,
+      "baselineNodeCount": 325,
+      "candidateNodeCount": 327,
+      "baselineGraphRevision": 835,
+      "candidateGraphRevision": 842,
+      "baselineDeltaCount": 12,
+      "candidateDeltaCount": 12,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "sequence": 8,
+      "baselineNodeCount": 345,
+      "candidateNodeCount": 347,
+      "baselineGraphRevision": 941,
+      "candidateGraphRevision": 949,
+      "baselineDeltaCount": 106,
+      "candidateDeltaCount": 107,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 14,
+      "request": "resume",
+      "sequence": 8,
+      "baselineNodeCount": 347,
+      "candidateNodeCount": 349,
+      "baselineGraphRevision": 959,
+      "candidateGraphRevision": 967,
+      "baselineDeltaCount": 18,
+      "candidateDeltaCount": 18,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "sequence": 9,
+      "baselineNodeCount": 367,
+      "candidateNodeCount": 369,
+      "baselineGraphRevision": 1063,
+      "candidateGraphRevision": 1072,
+      "baselineDeltaCount": 104,
+      "candidateDeltaCount": 105,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 16,
+      "request": "resume",
+      "sequence": 9,
+      "baselineNodeCount": 369,
+      "candidateNodeCount": 371,
+      "baselineGraphRevision": 1073,
+      "candidateGraphRevision": 1082,
+      "baselineDeltaCount": 10,
+      "candidateDeltaCount": 10,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 17,
+      "request": "advance",
+      "sequence": 10,
+      "baselineNodeCount": 369,
+      "candidateNodeCount": 371,
+      "baselineGraphRevision": 1073,
+      "candidateGraphRevision": 1082,
+      "baselineDeltaCount": 0,
+      "candidateDeltaCount": 0,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 18,
+      "request": "advance",
+      "sequence": 11,
+      "baselineNodeCount": 405,
+      "candidateNodeCount": 407,
+      "baselineGraphRevision": 1195,
+      "candidateGraphRevision": 1205,
+      "baselineDeltaCount": 122,
+      "candidateDeltaCount": 123,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 10,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 19,
+      "request": "resume",
+      "sequence": 11,
+      "baselineNodeCount": 407,
+      "candidateNodeCount": 409,
+      "baselineGraphRevision": 1205,
+      "candidateGraphRevision": 1215,
+      "baselineDeltaCount": 10,
+      "candidateDeltaCount": 10,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 10,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 20,
+      "request": "advance",
+      "sequence": 12,
+      "baselineNodeCount": 407,
+      "candidateNodeCount": 409,
+      "baselineGraphRevision": 1205,
+      "candidateGraphRevision": 1215,
+      "baselineDeltaCount": 0,
+      "candidateDeltaCount": 0,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 10,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 21,
+      "request": "advance",
+      "sequence": 13,
+      "baselineNodeCount": 407,
+      "candidateNodeCount": 409,
+      "baselineGraphRevision": 1205,
+      "candidateGraphRevision": 1215,
+      "baselineDeltaCount": 0,
+      "candidateDeltaCount": 0,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 10,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 22,
+      "request": "advance",
+      "sequence": 14,
+      "baselineNodeCount": 407,
+      "candidateNodeCount": 409,
+      "baselineGraphRevision": 1205,
+      "candidateGraphRevision": 1215,
+      "baselineDeltaCount": 0,
+      "candidateDeltaCount": 0,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 10,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 23,
+      "request": "advance",
+      "sequence": 15,
+      "baselineNodeCount": 472,
+      "candidateNodeCount": 474,
+      "baselineGraphRevision": 1357,
+      "candidateGraphRevision": 1368,
+      "baselineDeltaCount": 152,
+      "candidateDeltaCount": 153,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 11,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 24,
+      "request": "inspect",
+      "sequence": 15,
+      "baselineNodeCount": 472,
+      "candidateNodeCount": 474,
+      "baselineGraphRevision": 1357,
+      "candidateGraphRevision": 1368,
+      "baselineDeltaCount": 0,
+      "candidateDeltaCount": 0,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 11,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 25,
+      "request": "inspect",
+      "sequence": 15,
+      "baselineNodeCount": 472,
+      "candidateNodeCount": 474,
+      "baselineGraphRevision": 1357,
+      "candidateGraphRevision": 1368,
+      "baselineDeltaCount": 0,
+      "candidateDeltaCount": 0,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 11,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 26,
+      "request": "inspect",
+      "sequence": 15,
+      "baselineNodeCount": 472,
+      "candidateNodeCount": 474,
+      "baselineGraphRevision": 1357,
+      "candidateGraphRevision": 1368,
+      "baselineDeltaCount": 0,
+      "candidateDeltaCount": 0,
+      "addedNodeIds": [
+        "family_activation:selected_rigid",
+        "family_state:selected_rigid"
+      ],
+      "attributedCumulativeDeltas": 11,
+      "officialBoundarySourceCalls": []
+    }
+  ],
+  "failures": [],
+  "commandBoundaryProjections": [],
+  "sourceFactCoverage": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 1
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 1,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 1
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 2,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 2
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 3,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 2
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 4,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 3
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 3
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 1
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 1,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 1
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 2,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 2
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 3,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 2
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 4,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 3
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 3
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 6,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 4
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 7,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 4
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 8,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 5
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 9,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 5
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 10,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 5
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 11,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 5
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 12,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 5
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 13,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 5
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 14,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 6
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 15,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 6
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 16,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 6
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 17,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 6
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 18,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 6
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 1
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 1,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 1
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 2,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 2
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 3,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 2
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 4,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 3
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 5,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 3
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 1
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 1,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 1
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 2,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 2
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 3,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 2
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 4,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 3
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 5,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 3
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 6,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 4
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 7,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 4
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 8,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 5
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 9,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 5
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 10,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 5
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 11,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 5
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 12,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 6
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 13,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 6
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 14,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 7
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 15,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 7
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 16,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 8
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 17,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 8
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 18,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 8
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 19,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 9
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 20,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 9
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 21,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 9
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 22,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 9
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 23,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 9
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 24,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 9
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 25,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 9
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 26,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 9
+    }
+  ],
+  "commonValueCoverage": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "commonNodesCompared": 182,
+      "commonDeltasCompared": 192,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 1,
+      "commonNodesCompared": 211,
+      "commonDeltasCompared": 113,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 2,
+      "commonNodesCompared": 213,
+      "commonDeltasCompared": 10,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 3,
+      "commonNodesCompared": 236,
+      "commonDeltasCompared": 110,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 4,
+      "commonNodesCompared": 238,
+      "commonDeltasCompared": 10,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "commonNodesCompared": 262,
+      "commonDeltasCompared": 106,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "commonNodesCompared": 182,
+      "commonDeltasCompared": 192,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 1,
+      "commonNodesCompared": 211,
+      "commonDeltasCompared": 113,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 2,
+      "commonNodesCompared": 213,
+      "commonDeltasCompared": 10,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 3,
+      "commonNodesCompared": 236,
+      "commonDeltasCompared": 110,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 4,
+      "commonNodesCompared": 238,
+      "commonDeltasCompared": 10,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "commonNodesCompared": 262,
+      "commonDeltasCompared": 106,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 6,
+      "commonNodesCompared": 264,
+      "commonDeltasCompared": 13,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 7,
+      "commonNodesCompared": 287,
+      "commonDeltasCompared": 110,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 8,
+      "commonNodesCompared": 289,
+      "commonDeltasCompared": 11,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 9,
+      "commonNodesCompared": 289,
+      "commonDeltasCompared": 0,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 10,
+      "commonNodesCompared": 289,
+      "commonDeltasCompared": 0,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 11,
+      "commonNodesCompared": 289,
+      "commonDeltasCompared": 0,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 12,
+      "commonNodesCompared": 289,
+      "commonDeltasCompared": 0,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 13,
+      "commonNodesCompared": 373,
+      "commonDeltasCompared": 172,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 14,
+      "commonNodesCompared": 375,
+      "commonDeltasCompared": 10,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 15,
+      "commonNodesCompared": 397,
+      "commonDeltasCompared": 109,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 16,
+      "commonNodesCompared": 397,
+      "commonDeltasCompared": 0,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 17,
+      "commonNodesCompared": 397,
+      "commonDeltasCompared": 0,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 18,
+      "commonNodesCompared": 397,
+      "commonDeltasCompared": 0,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "commonNodesCompared": 187,
+      "commonDeltasCompared": 222,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 1,
+      "commonNodesCompared": 206,
+      "commonDeltasCompared": 100,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 2,
+      "commonNodesCompared": 208,
+      "commonDeltasCompared": 10,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 3,
+      "commonNodesCompared": 224,
+      "commonDeltasCompared": 102,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 4,
+      "commonNodesCompared": 226,
+      "commonDeltasCompared": 10,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 5,
+      "commonNodesCompared": 253,
+      "commonDeltasCompared": 109,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "commonNodesCompared": 187,
+      "commonDeltasCompared": 222,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 1,
+      "commonNodesCompared": 206,
+      "commonDeltasCompared": 100,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 2,
+      "commonNodesCompared": 208,
+      "commonDeltasCompared": 10,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 3,
+      "commonNodesCompared": 224,
+      "commonDeltasCompared": 102,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 4,
+      "commonNodesCompared": 226,
+      "commonDeltasCompared": 10,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 5,
+      "commonNodesCompared": 253,
+      "commonDeltasCompared": 109,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 6,
+      "commonNodesCompared": 255,
+      "commonDeltasCompared": 22,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 7,
+      "commonNodesCompared": 270,
+      "commonDeltasCompared": 100,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 8,
+      "commonNodesCompared": 272,
+      "commonDeltasCompared": 10,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 9,
+      "commonNodesCompared": 272,
+      "commonDeltasCompared": 0,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 10,
+      "commonNodesCompared": 272,
+      "commonDeltasCompared": 0,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 11,
+      "commonNodesCompared": 323,
+      "commonDeltasCompared": 138,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 12,
+      "commonNodesCompared": 325,
+      "commonDeltasCompared": 12,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 13,
+      "commonNodesCompared": 345,
+      "commonDeltasCompared": 106,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 14,
+      "commonNodesCompared": 347,
+      "commonDeltasCompared": 18,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 15,
+      "commonNodesCompared": 367,
+      "commonDeltasCompared": 104,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 16,
+      "commonNodesCompared": 369,
+      "commonDeltasCompared": 10,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 17,
+      "commonNodesCompared": 369,
+      "commonDeltasCompared": 0,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 18,
+      "commonNodesCompared": 405,
+      "commonDeltasCompared": 122,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 19,
+      "commonNodesCompared": 407,
+      "commonDeltasCompared": 10,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 20,
+      "commonNodesCompared": 407,
+      "commonDeltasCompared": 0,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 21,
+      "commonNodesCompared": 407,
+      "commonDeltasCompared": 0,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 22,
+      "commonNodesCompared": 407,
+      "commonDeltasCompared": 0,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 23,
+      "commonNodesCompared": 472,
+      "commonDeltasCompared": 152,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 24,
+      "commonNodesCompared": 472,
+      "commonDeltasCompared": 0,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 25,
+      "commonNodesCompared": 472,
+      "commonDeltasCompared": 0,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 26,
+      "commonNodesCompared": 472,
+      "commonDeltasCompared": 0,
+      "comparison": "exact_except_attributed_trace_envelope_created",
+      "unattributedDifferences": 0
+    }
+  ],
+  "commonValuePolicy": {
+    "comparison": "exact_except_attributed_trace_envelope_created",
+    "permittedMetadataDifference": "origin.source_digest",
+    "identityValueAttributions": [],
+    "unattributedDifferencesAllowed": 0,
+    "traceCreatedAttribution": {
+      "nodeComponent": "native_reasoning_trace",
+      "path": "/value/root/members/created/bits",
+      "sourceClock": "Date.now() / 1000",
+      "sourceFiles": [
+        "src/logos-engine/v6-reasoning-memory.ts",
+        "src/logos-engine/v6-native-authority.ts"
+      ],
+      "captureWindows": {
+        "baseline": {
+          "startedAt": "2026-11-11T17:59:38.443Z",
+          "finishedAt": "2026-11-11T18:00:25.990Z",
+          "startMs": 1794419978443,
+          "finishMs": 1794420025990
+        },
+        "candidate": {
+          "startedAt": "2026-11-11T18:00:26.181Z",
+          "finishedAt": "2026-11-11T18:01:12.672Z",
+          "startMs": 1794420026181,
+          "finishMs": 1794420072672
+        }
+      },
+      "stabilityKey": [
+        "role",
+        "sessionId",
+        "nodeId"
+      ],
+      "records": [
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:1",
+          "bits": "41dabd2b4330d4fe",
+          "seconds": 1794419980.763,
+          "milliseconds": 1794419980763,
+          "createdAt": "2026-11-11T17:59:40.763Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:1",
+          "bits": "41dabd2b4f0dc28f",
+          "seconds": 1794420028.215,
+          "milliseconds": 1794420028215,
+          "createdAt": "2026-11-11T18:00:28.215Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:2",
+          "bits": "41dabd2b436f0a3d",
+          "seconds": 1794419981.735,
+          "milliseconds": 1794419981735,
+          "createdAt": "2026-11-11T17:59:41.735Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:2",
+          "bits": "41dabd2b4f390625",
+          "seconds": 1794420028.891,
+          "milliseconds": 1794420028891,
+          "createdAt": "2026-11-11T18:00:28.891Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:3",
+          "bits": "41dabd2b436fae14",
+          "seconds": 1794419981.745,
+          "milliseconds": 1794419981745,
+          "createdAt": "2026-11-11T17:59:41.745Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:3",
+          "bits": "41dabd2b4f39a9fc",
+          "seconds": 1794420028.901,
+          "milliseconds": 1794420028901,
+          "createdAt": "2026-11-11T18:00:28.901Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:4",
+          "bits": "41dabd2b4370d4fe",
+          "seconds": 1794419981.763,
+          "milliseconds": 1794419981763,
+          "createdAt": "2026-11-11T17:59:41.763Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:4",
+          "bits": "41dabd2b4f3a6e98",
+          "seconds": 1794420028.913,
+          "milliseconds": 1794420028913,
+          "createdAt": "2026-11-11T18:00:28.913Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:5",
+          "bits": "41dabd2b43b820c5",
+          "seconds": 1794419982.877,
+          "milliseconds": 1794419982877,
+          "createdAt": "2026-11-11T17:59:42.877Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:5",
+          "bits": "41dabd2b4f73020c",
+          "seconds": 1794420029.797,
+          "milliseconds": 1794420029797,
+          "createdAt": "2026-11-11T18:00:29.797Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:6",
+          "bits": "41dabd2b44079db2",
+          "seconds": 1794419984.119,
+          "milliseconds": 1794419984119,
+          "createdAt": "2026-11-11T17:59:44.119Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:6",
+          "bits": "41dabd2b4fa58106",
+          "seconds": 1794420030.586,
+          "milliseconds": 1794420030586,
+          "createdAt": "2026-11-11T18:00:30.586Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:7",
+          "bits": "41dabd2b440872b0",
+          "seconds": 1794419984.132,
+          "milliseconds": 1794419984132,
+          "createdAt": "2026-11-11T17:59:44.132Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:7",
+          "bits": "41dabd2b4fa5d2f2",
+          "seconds": 1794420030.591,
+          "milliseconds": 1794420030591,
+          "createdAt": "2026-11-11T18:00:30.591Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:8",
+          "bits": "41dabd2b440b4396",
+          "seconds": 1794419984.176,
+          "milliseconds": 1794419984176,
+          "createdAt": "2026-11-11T17:59:44.176Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:8",
+          "bits": "41dabd2b4fa645a2",
+          "seconds": 1794420030.598,
+          "milliseconds": 1794420030598,
+          "createdAt": "2026-11-11T18:00:30.598Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:9",
+          "bits": "41dabd2b44371aa0",
+          "seconds": 1794419984.861,
+          "milliseconds": 1794419984861,
+          "createdAt": "2026-11-11T17:59:44.861Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:9",
+          "bits": "41dabd2b4fcd9168",
+          "seconds": 1794420031.212,
+          "milliseconds": 1794420031212,
+          "createdAt": "2026-11-11T18:00:31.212Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:10",
+          "bits": "41dabd2b444fef9e",
+          "seconds": 1794419985.249,
+          "milliseconds": 1794419985249,
+          "createdAt": "2026-11-11T17:59:45.249Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:10",
+          "bits": "41dabd2b4fddb22d",
+          "seconds": 1794420031.464,
+          "milliseconds": 1794420031464,
+          "createdAt": "2026-11-11T18:00:31.464Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:11",
+          "bits": "41dabd2b4450a3d7",
+          "seconds": 1794419985.26,
+          "milliseconds": 1794419985260,
+          "createdAt": "2026-11-11T17:59:45.260Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:11",
+          "bits": "41dabd2b4fde45a2",
+          "seconds": 1794420031.473,
+          "milliseconds": 1794420031473,
+          "createdAt": "2026-11-11T18:00:31.473Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:12",
+          "bits": "41dabd2b4451999a",
+          "seconds": 1794419985.275,
+          "milliseconds": 1794419985275,
+          "createdAt": "2026-11-11T17:59:45.275Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-warmup",
+          "nodeId": "reasoning:trace:12",
+          "bits": "41dabd2b4fdec8b4",
+          "seconds": 1794420031.481,
+          "milliseconds": 1794420031481,
+          "createdAt": "2026-11-11T18:00:31.481Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:1",
+          "bits": "41dabd2b44aa7efa",
+          "seconds": 1794419986.664,
+          "milliseconds": 1794419986664,
+          "createdAt": "2026-11-11T17:59:46.664Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:1",
+          "bits": "41dabd2b503af1aa",
+          "seconds": 1794420032.921,
+          "milliseconds": 1794420032921,
+          "createdAt": "2026-11-11T18:00:32.921Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:2",
+          "bits": "41dabd2b44d77cee",
+          "seconds": 1794419987.367,
+          "milliseconds": 1794419987367,
+          "createdAt": "2026-11-11T17:59:47.367Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:2",
+          "bits": "41dabd2b5066f9db",
+          "seconds": 1794420033.609,
+          "milliseconds": 1794420033609,
+          "createdAt": "2026-11-11T18:00:33.609Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:3",
+          "bits": "41dabd2b44d7df3b",
+          "seconds": 1794419987.373,
+          "milliseconds": 1794419987373,
+          "createdAt": "2026-11-11T17:59:47.373Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:3",
+          "bits": "41dabd2b5067ced9",
+          "seconds": 1794420033.622,
+          "milliseconds": 1794420033622,
+          "createdAt": "2026-11-11T18:00:33.622Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:4",
+          "bits": "41dabd2b44d8a3d7",
+          "seconds": 1794419987.385,
+          "milliseconds": 1794419987385,
+          "createdAt": "2026-11-11T17:59:47.385Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:4",
+          "bits": "41dabd2b506872b0",
+          "seconds": 1794420033.632,
+          "milliseconds": 1794420033632,
+          "createdAt": "2026-11-11T18:00:33.632Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:5",
+          "bits": "41dabd2b452645a2",
+          "seconds": 1794419988.598,
+          "milliseconds": 1794419988598,
+          "createdAt": "2026-11-11T17:59:48.598Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:5",
+          "bits": "41dabd2b50ba0c4a",
+          "seconds": 1794420034.907,
+          "milliseconds": 1794420034907,
+          "createdAt": "2026-11-11T18:00:34.907Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:6",
+          "bits": "41dabd2b45652f1b",
+          "seconds": 1794419989.581,
+          "milliseconds": 1794419989581,
+          "createdAt": "2026-11-11T17:59:49.581Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:6",
+          "bits": "41dabd2b50e8e560",
+          "seconds": 1794420035.639,
+          "milliseconds": 1794420035639,
+          "createdAt": "2026-11-11T18:00:35.639Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:7",
+          "bits": "41dabd2b4566353f",
+          "seconds": 1794419989.597,
+          "milliseconds": 1794419989597,
+          "createdAt": "2026-11-11T17:59:49.597Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:7",
+          "bits": "41dabd2b50e95810",
+          "seconds": 1794420035.646,
+          "milliseconds": 1794420035646,
+          "createdAt": "2026-11-11T18:00:35.646Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:8",
+          "bits": "41dabd2b4566a7f0",
+          "seconds": 1794419989.604,
+          "milliseconds": 1794419989604,
+          "createdAt": "2026-11-11T17:59:49.604Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:8",
+          "bits": "41dabd2b50ea4dd3",
+          "seconds": 1794420035.661,
+          "milliseconds": 1794420035661,
+          "createdAt": "2026-11-11T18:00:35.661Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:9",
+          "bits": "41dabd2b458cac08",
+          "seconds": 1794419990.198,
+          "milliseconds": 1794419990198,
+          "createdAt": "2026-11-11T17:59:50.198Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:9",
+          "bits": "41dabd2b51250e56",
+          "seconds": 1794420036.579,
+          "milliseconds": 1794420036579,
+          "createdAt": "2026-11-11T18:00:36.579Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:10",
+          "bits": "41dabd2b459bb646",
+          "seconds": 1794419990.433,
+          "milliseconds": 1794419990433,
+          "createdAt": "2026-11-11T17:59:50.433Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:10",
+          "bits": "41dabd2b51349ba6",
+          "seconds": 1794420036.822,
+          "milliseconds": 1794420036822,
+          "createdAt": "2026-11-11T18:00:36.822Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:11",
+          "bits": "41dabd2b459dd2f2",
+          "seconds": 1794419990.466,
+          "milliseconds": 1794419990466,
+          "createdAt": "2026-11-11T17:59:50.466Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:11",
+          "bits": "41dabd2b51353f7d",
+          "seconds": 1794420036.832,
+          "milliseconds": 1794420036832,
+          "createdAt": "2026-11-11T18:00:36.832Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:12",
+          "bits": "41dabd2b459e6666",
+          "seconds": 1794419990.475,
+          "milliseconds": 1794419990475,
+          "createdAt": "2026-11-11T17:59:50.475Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:12",
+          "bits": "41dabd2b5135c28f",
+          "seconds": 1794420036.84,
+          "milliseconds": 1794420036840,
+          "createdAt": "2026-11-11T18:00:36.840Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:13",
+          "bits": "41dabd2b45cd8106",
+          "seconds": 1794419991.211,
+          "milliseconds": 1794419991211,
+          "createdAt": "2026-11-11T17:59:51.211Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:13",
+          "bits": "41dabd2b51611687",
+          "seconds": 1794420037.517,
+          "milliseconds": 1794420037517,
+          "createdAt": "2026-11-11T18:00:37.517Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:14",
+          "bits": "41dabd2b45fcbc6a",
+          "seconds": 1794419991.949,
+          "milliseconds": 1794419991949,
+          "createdAt": "2026-11-11T17:59:51.949Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:14",
+          "bits": "41dabd2b51922d0e",
+          "seconds": 1794420038.284,
+          "milliseconds": 1794420038284,
+          "createdAt": "2026-11-11T18:00:38.284Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:15",
+          "bits": "41dabd2b45fda1cb",
+          "seconds": 1794419991.963,
+          "milliseconds": 1794419991963,
+          "createdAt": "2026-11-11T17:59:51.963Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:15",
+          "bits": "41dabd2b51929fbe",
+          "seconds": 1794420038.291,
+          "milliseconds": 1794420038291,
+          "createdAt": "2026-11-11T18:00:38.291Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:16",
+          "bits": "41dabd2b45fe24dd",
+          "seconds": 1794419991.971,
+          "milliseconds": 1794419991971,
+          "createdAt": "2026-11-11T17:59:51.971Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:16",
+          "bits": "41dabd2b519322d1",
+          "seconds": 1794420038.299,
+          "milliseconds": 1794420038299,
+          "createdAt": "2026-11-11T18:00:38.299Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:17",
+          "bits": "41dabd2b462a8f5c",
+          "seconds": 1794419992.665,
+          "milliseconds": 1794419992665,
+          "createdAt": "2026-11-11T17:59:52.665Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:17",
+          "bits": "41dabd2b51bb53f8",
+          "seconds": 1794420038.927,
+          "milliseconds": 1794420038927,
+          "createdAt": "2026-11-11T18:00:38.927Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:18",
+          "bits": "41dabd2b473947ae",
+          "seconds": 1794419996.895,
+          "milliseconds": 1794419996895,
+          "createdAt": "2026-11-11T17:59:56.895Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:18",
+          "bits": "41dabd2b52a3c6a8",
+          "seconds": 1794420042.559,
+          "milliseconds": 1794420042559,
+          "createdAt": "2026-11-11T18:00:42.559Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:19",
+          "bits": "41dabd2b4739db23",
+          "seconds": 1794419996.904,
+          "milliseconds": 1794419996904,
+          "createdAt": "2026-11-11T17:59:56.904Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:19",
+          "bits": "41dabd2b52a47ae1",
+          "seconds": 1794420042.57,
+          "milliseconds": 1794420042570,
+          "createdAt": "2026-11-11T18:00:42.570Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:20",
+          "bits": "41dabd2b473b22d1",
+          "seconds": 1794419996.924,
+          "milliseconds": 1794419996924,
+          "createdAt": "2026-11-11T17:59:56.924Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:20",
+          "bits": "41dabd2b52a5f3b6",
+          "seconds": 1794420042.593,
+          "milliseconds": 1794420042593,
+          "createdAt": "2026-11-11T18:00:42.593Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:21",
+          "bits": "41dabd2b478e147b",
+          "seconds": 1794419998.22,
+          "milliseconds": 1794419998220,
+          "createdAt": "2026-11-11T17:59:58.220Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:21",
+          "bits": "41dabd2b5313b646",
+          "seconds": 1794420044.308,
+          "milliseconds": 1794420044308,
+          "createdAt": "2026-11-11T18:00:44.308Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:22",
+          "bits": "41dabd2b479bb646",
+          "seconds": 1794419998.433,
+          "milliseconds": 1794419998433,
+          "createdAt": "2026-11-11T17:59:58.433Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:22",
+          "bits": "41dabd2b53218937",
+          "seconds": 1794420044.524,
+          "milliseconds": 1794420044524,
+          "createdAt": "2026-11-11T18:00:44.524Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:23",
+          "bits": "41dabd2b479ccccd",
+          "seconds": 1794419998.45,
+          "milliseconds": 1794419998450,
+          "createdAt": "2026-11-11T17:59:58.450Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:23",
+          "bits": "41dabd2b53221cac",
+          "seconds": 1794420044.533,
+          "milliseconds": 1794420044533,
+          "createdAt": "2026-11-11T18:00:44.533Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:24",
+          "bits": "41dabd2b479dd2f2",
+          "seconds": 1794419998.466,
+          "milliseconds": 1794419998466,
+          "createdAt": "2026-11-11T17:59:58.466Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-stck-measured",
+          "nodeId": "reasoning:trace:24",
+          "bits": "41dabd2b5322d0e5",
+          "seconds": 1794420044.544,
+          "milliseconds": 1794420044544,
+          "createdAt": "2026-11-11T18:00:44.544Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:1",
+          "bits": "41dabd2b48b7ae14",
+          "seconds": 1794420002.87,
+          "milliseconds": 1794420002870,
+          "createdAt": "2026-11-11T18:00:02.870Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:1",
+          "bits": "41dabd2b540a0c4a",
+          "seconds": 1794420048.157,
+          "milliseconds": 1794420048157,
+          "createdAt": "2026-11-11T18:00:48.157Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:2",
+          "bits": "41dabd2b48ee45a2",
+          "seconds": 1794420003.723,
+          "milliseconds": 1794420003723,
+          "createdAt": "2026-11-11T18:00:03.723Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:2",
+          "bits": "41dabd2b54348b44",
+          "seconds": 1794420048.821,
+          "milliseconds": 1794420048821,
+          "createdAt": "2026-11-11T18:00:48.821Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:3",
+          "bits": "41dabd2b48eeb852",
+          "seconds": 1794420003.73,
+          "milliseconds": 1794420003730,
+          "createdAt": "2026-11-11T18:00:03.730Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:3",
+          "bits": "41dabd2b5434ed91",
+          "seconds": 1794420048.827,
+          "milliseconds": 1794420048827,
+          "createdAt": "2026-11-11T18:00:48.827Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:4",
+          "bits": "41dabd2b48ef2b02",
+          "seconds": 1794420003.737,
+          "milliseconds": 1794420003737,
+          "createdAt": "2026-11-11T18:00:03.737Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:4",
+          "bits": "41dabd2b54354fdf",
+          "seconds": 1794420048.833,
+          "milliseconds": 1794420048833,
+          "createdAt": "2026-11-11T18:00:48.833Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:5",
+          "bits": "41dabd2b4916b852",
+          "seconds": 1794420004.355,
+          "milliseconds": 1794420004355,
+          "createdAt": "2026-11-11T18:00:04.355Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:5",
+          "bits": "41dabd2b545e76c9",
+          "seconds": 1794420049.476,
+          "milliseconds": 1794420049476,
+          "createdAt": "2026-11-11T18:00:49.476Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:6",
+          "bits": "41dabd2b493b020c",
+          "seconds": 1794420004.922,
+          "milliseconds": 1794420004922,
+          "createdAt": "2026-11-11T18:00:04.922Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:6",
+          "bits": "41dabd2b547eb852",
+          "seconds": 1794420049.98,
+          "milliseconds": 1794420049980,
+          "createdAt": "2026-11-11T18:00:49.980Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:7",
+          "bits": "41dabd2b493b74bc",
+          "seconds": 1794420004.929,
+          "milliseconds": 1794420004929,
+          "createdAt": "2026-11-11T18:00:04.929Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:7",
+          "bits": "41dabd2b547f1aa0",
+          "seconds": 1794420049.986,
+          "milliseconds": 1794420049986,
+          "createdAt": "2026-11-11T18:00:49.986Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:8",
+          "bits": "41dabd2b493c0831",
+          "seconds": 1794420004.938,
+          "milliseconds": 1794420004938,
+          "createdAt": "2026-11-11T18:00:04.938Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:8",
+          "bits": "41dabd2b547f9db2",
+          "seconds": 1794420049.994,
+          "milliseconds": 1794420049994,
+          "createdAt": "2026-11-11T18:00:49.994Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:9",
+          "bits": "41dabd2b496dc28f",
+          "seconds": 1794420005.715,
+          "milliseconds": 1794420005715,
+          "createdAt": "2026-11-11T18:00:05.715Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:9",
+          "bits": "41dabd2b54b50e56",
+          "seconds": 1794420050.829,
+          "milliseconds": 1794420050829,
+          "createdAt": "2026-11-11T18:00:50.829Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:10",
+          "bits": "41dabd2b498147ae",
+          "seconds": 1794420006.02,
+          "milliseconds": 1794420006020,
+          "createdAt": "2026-11-11T18:00:06.020Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:10",
+          "bits": "41dabd2b54cba5e3",
+          "seconds": 1794420051.182,
+          "milliseconds": 1794420051182,
+          "createdAt": "2026-11-11T18:00:51.182Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:11",
+          "bits": "41dabd2b4981cac1",
+          "seconds": 1794420006.028,
+          "milliseconds": 1794420006028,
+          "createdAt": "2026-11-11T18:00:06.028Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:11",
+          "bits": "41dabd2b54cc3958",
+          "seconds": 1794420051.191,
+          "milliseconds": 1794420051191,
+          "createdAt": "2026-11-11T18:00:51.191Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:12",
+          "bits": "41dabd2b49823d71",
+          "seconds": 1794420006.035,
+          "milliseconds": 1794420006035,
+          "createdAt": "2026-11-11T18:00:06.035Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-warmup",
+          "nodeId": "reasoning:trace:12",
+          "bits": "41dabd2b54cced91",
+          "seconds": 1794420051.202,
+          "milliseconds": 1794420051202,
+          "createdAt": "2026-11-11T18:00:51.202Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:1",
+          "bits": "41dabd2b4a0b020c",
+          "seconds": 1794420008.172,
+          "milliseconds": 1794420008172,
+          "createdAt": "2026-11-11T18:00:08.172Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:1",
+          "bits": "41dabd2b5543f7cf",
+          "seconds": 1794420053.062,
+          "milliseconds": 1794420053062,
+          "createdAt": "2026-11-11T18:00:53.062Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:2",
+          "bits": "41dabd2b4a316873",
+          "seconds": 1794420008.772,
+          "milliseconds": 1794420008772,
+          "createdAt": "2026-11-11T18:00:08.772Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:2",
+          "bits": "41dabd2b55808312",
+          "seconds": 1794420054.008,
+          "milliseconds": 1794420054008,
+          "createdAt": "2026-11-11T18:00:54.008Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:3",
+          "bits": "41dabd2b4a31db23",
+          "seconds": 1794420008.779,
+          "milliseconds": 1794420008779,
+          "createdAt": "2026-11-11T18:00:08.779Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:3",
+          "bits": "41dabd2b5580e560",
+          "seconds": 1794420054.014,
+          "milliseconds": 1794420054014,
+          "createdAt": "2026-11-11T18:00:54.014Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:4",
+          "bits": "41dabd2b4a327efa",
+          "seconds": 1794420008.789,
+          "milliseconds": 1794420008789,
+          "createdAt": "2026-11-11T18:00:08.789Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:4",
+          "bits": "41dabd2b55815810",
+          "seconds": 1794420054.021,
+          "milliseconds": 1794420054021,
+          "createdAt": "2026-11-11T18:00:54.021Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:5",
+          "bits": "41dabd2b4a5ba5e3",
+          "seconds": 1794420009.432,
+          "milliseconds": 1794420009432,
+          "createdAt": "2026-11-11T18:00:09.432Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:5",
+          "bits": "41dabd2b55a2b021",
+          "seconds": 1794420054.542,
+          "milliseconds": 1794420054542,
+          "createdAt": "2026-11-11T18:00:54.542Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:6",
+          "bits": "41dabd2b4a7f2b02",
+          "seconds": 1794420009.987,
+          "milliseconds": 1794420009987,
+          "createdAt": "2026-11-11T18:00:09.987Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:6",
+          "bits": "41dabd2b55c3126f",
+          "seconds": 1794420055.048,
+          "milliseconds": 1794420055048,
+          "createdAt": "2026-11-11T18:00:55.048Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:7",
+          "bits": "41dabd2b4a7fced9",
+          "seconds": 1794420009.997,
+          "milliseconds": 1794420009997,
+          "createdAt": "2026-11-11T18:00:09.997Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:7",
+          "bits": "41dabd2b55c3851f",
+          "seconds": 1794420055.055,
+          "milliseconds": 1794420055055,
+          "createdAt": "2026-11-11T18:00:55.055Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:8",
+          "bits": "41dabd2b4a808312",
+          "seconds": 1794420010.008,
+          "milliseconds": 1794420010008,
+          "createdAt": "2026-11-11T18:00:10.008Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:8",
+          "bits": "41dabd2b55c40831",
+          "seconds": 1794420055.063,
+          "milliseconds": 1794420055063,
+          "createdAt": "2026-11-11T18:00:55.063Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:9",
+          "bits": "41dabd2b4aaa2d0e",
+          "seconds": 1794420010.659,
+          "milliseconds": 1794420010659,
+          "createdAt": "2026-11-11T18:00:10.659Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:9",
+          "bits": "41dabd2b55f851ec",
+          "seconds": 1794420055.88,
+          "milliseconds": 1794420055880,
+          "createdAt": "2026-11-11T18:00:55.880Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:10",
+          "bits": "41dabd2b4abaf1aa",
+          "seconds": 1794420010.921,
+          "milliseconds": 1794420010921,
+          "createdAt": "2026-11-11T18:00:10.921Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:10",
+          "bits": "41dabd2b5608c49c",
+          "seconds": 1794420056.137,
+          "milliseconds": 1794420056137,
+          "createdAt": "2026-11-11T18:00:56.137Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:11",
+          "bits": "41dabd2b4abb851f",
+          "seconds": 1794420010.93,
+          "milliseconds": 1794420010930,
+          "createdAt": "2026-11-11T18:00:10.930Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:11",
+          "bits": "41dabd2b560978d5",
+          "seconds": 1794420056.148,
+          "milliseconds": 1794420056148,
+          "createdAt": "2026-11-11T18:00:56.148Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:12",
+          "bits": "41dabd2b4abc3958",
+          "seconds": 1794420010.941,
+          "milliseconds": 1794420010941,
+          "createdAt": "2026-11-11T18:00:10.941Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:12",
+          "bits": "41dabd2b560a5e35",
+          "seconds": 1794420056.162,
+          "milliseconds": 1794420056162,
+          "createdAt": "2026-11-11T18:00:56.162Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:13",
+          "bits": "41dabd2b4af18937",
+          "seconds": 1794420011.774,
+          "milliseconds": 1794420011774,
+          "createdAt": "2026-11-11T18:00:11.774Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:13",
+          "bits": "41dabd2b5646f9db",
+          "seconds": 1794420057.109,
+          "milliseconds": 1794420057109,
+          "createdAt": "2026-11-11T18:00:57.109Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:14",
+          "bits": "41dabd2b4b1d9168",
+          "seconds": 1794420012.462,
+          "milliseconds": 1794420012462,
+          "createdAt": "2026-11-11T18:00:12.462Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:14",
+          "bits": "41dabd2b56753f7d",
+          "seconds": 1794420057.832,
+          "milliseconds": 1794420057832,
+          "createdAt": "2026-11-11T18:00:57.832Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:15",
+          "bits": "41dabd2b4b1e45a2",
+          "seconds": 1794420012.473,
+          "milliseconds": 1794420012473,
+          "createdAt": "2026-11-11T18:00:12.473Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:15",
+          "bits": "41dabd2b5675c28f",
+          "seconds": 1794420057.84,
+          "milliseconds": 1794420057840,
+          "createdAt": "2026-11-11T18:00:57.840Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:16",
+          "bits": "41dabd2b4b1fef9e",
+          "seconds": 1794420012.499,
+          "milliseconds": 1794420012499,
+          "createdAt": "2026-11-11T18:00:12.499Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:16",
+          "bits": "41dabd2b56775c29",
+          "seconds": 1794420057.865,
+          "milliseconds": 1794420057865,
+          "createdAt": "2026-11-11T18:00:57.865Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:17",
+          "bits": "41dabd2b4b4978d5",
+          "seconds": 1794420013.148,
+          "milliseconds": 1794420013148,
+          "createdAt": "2026-11-11T18:00:13.148Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:17",
+          "bits": "41dabd2b56a0f5c3",
+          "seconds": 1794420058.515,
+          "milliseconds": 1794420058515,
+          "createdAt": "2026-11-11T18:00:58.515Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:18",
+          "bits": "41dabd2b4bbac083",
+          "seconds": 1794420014.918,
+          "milliseconds": 1794420014918,
+          "createdAt": "2026-11-11T18:00:14.918Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:18",
+          "bits": "41dabd2b570353f8",
+          "seconds": 1794420060.052,
+          "milliseconds": 1794420060052,
+          "createdAt": "2026-11-11T18:01:00.052Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:19",
+          "bits": "41dabd2b4bbbe76d",
+          "seconds": 1794420014.936,
+          "milliseconds": 1794420014936,
+          "createdAt": "2026-11-11T18:00:14.936Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:19",
+          "bits": "41dabd2b5704ac08",
+          "seconds": 1794420060.073,
+          "milliseconds": 1794420060073,
+          "createdAt": "2026-11-11T18:01:00.073Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:20",
+          "bits": "41dabd2b4bbcbc6a",
+          "seconds": 1794420014.949,
+          "milliseconds": 1794420014949,
+          "createdAt": "2026-11-11T18:00:14.949Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:20",
+          "bits": "41dabd2b57059168",
+          "seconds": 1794420060.087,
+          "milliseconds": 1794420060087,
+          "createdAt": "2026-11-11T18:01:00.087Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:21",
+          "bits": "41dabd2b4be76c8b",
+          "seconds": 1794420015.616,
+          "milliseconds": 1794420015616,
+          "createdAt": "2026-11-11T18:00:15.616Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:21",
+          "bits": "41dabd2b572fae14",
+          "seconds": 1794420060.745,
+          "milliseconds": 1794420060745,
+          "createdAt": "2026-11-11T18:01:00.745Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:22",
+          "bits": "41dabd2b4c1fdf3b",
+          "seconds": 1794420016.498,
+          "milliseconds": 1794420016498,
+          "createdAt": "2026-11-11T18:00:16.498Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:22",
+          "bits": "41dabd2b576c6a7f",
+          "seconds": 1794420061.694,
+          "milliseconds": 1794420061694,
+          "createdAt": "2026-11-11T18:01:01.694Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:23",
+          "bits": "41dabd2b4c20624e",
+          "seconds": 1794420016.506,
+          "milliseconds": 1794420016506,
+          "createdAt": "2026-11-11T18:00:16.506Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:23",
+          "bits": "41dabd2b576d6042",
+          "seconds": 1794420061.709,
+          "milliseconds": 1794420061709,
+          "createdAt": "2026-11-11T18:01:01.709Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:24",
+          "bits": "41dabd2b4c20f5c3",
+          "seconds": 1794420016.515,
+          "milliseconds": 1794420016515,
+          "createdAt": "2026-11-11T18:00:16.515Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:24",
+          "bits": "41dabd2b576df3b6",
+          "seconds": 1794420061.718,
+          "milliseconds": 1794420061718,
+          "createdAt": "2026-11-11T18:01:01.718Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:25",
+          "bits": "41dabd2b4c40e560",
+          "seconds": 1794420017.014,
+          "milliseconds": 1794420017014,
+          "createdAt": "2026-11-11T18:00:17.014Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:25",
+          "bits": "41dabd2b5794dd2f",
+          "seconds": 1794420062.326,
+          "milliseconds": 1794420062326,
+          "createdAt": "2026-11-11T18:01:02.326Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:26",
+          "bits": "41dabd2b4c690625",
+          "seconds": 1794420017.641,
+          "milliseconds": 1794420017641,
+          "createdAt": "2026-11-11T18:00:17.641Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:26",
+          "bits": "41dabd2b57c03127",
+          "seconds": 1794420063.003,
+          "milliseconds": 1794420063003,
+          "createdAt": "2026-11-11T18:01:03.003Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:27",
+          "bits": "41dabd2b4c698937",
+          "seconds": 1794420017.649,
+          "milliseconds": 1794420017649,
+          "createdAt": "2026-11-11T18:00:17.649Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:27",
+          "bits": "41dabd2b57c0d4fe",
+          "seconds": 1794420063.013,
+          "milliseconds": 1794420063013,
+          "createdAt": "2026-11-11T18:01:03.013Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:28",
+          "bits": "41dabd2b4c6a1cac",
+          "seconds": 1794420017.658,
+          "milliseconds": 1794420017658,
+          "createdAt": "2026-11-11T18:00:17.658Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:28",
+          "bits": "41dabd2b57c1999a",
+          "seconds": 1794420063.025,
+          "milliseconds": 1794420063025,
+          "createdAt": "2026-11-11T18:01:03.025Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:29",
+          "bits": "41dabd2b4ca9fbe7",
+          "seconds": 1794420018.656,
+          "milliseconds": 1794420018656,
+          "createdAt": "2026-11-11T18:00:18.656Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:29",
+          "bits": "41dabd2b5805b22d",
+          "seconds": 1794420064.089,
+          "milliseconds": 1794420064089,
+          "createdAt": "2026-11-11T18:01:04.089Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:30",
+          "bits": "41dabd2b4d0020c5",
+          "seconds": 1794420020.002,
+          "milliseconds": 1794420020002,
+          "createdAt": "2026-11-11T18:00:20.002Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:30",
+          "bits": "41dabd2b589a8f5c",
+          "seconds": 1794420066.415,
+          "milliseconds": 1794420066415,
+          "createdAt": "2026-11-11T18:01:06.415Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:31",
+          "bits": "41dabd2b4d00d4fe",
+          "seconds": 1794420020.013,
+          "milliseconds": 1794420020013,
+          "createdAt": "2026-11-11T18:00:20.013Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:31",
+          "bits": "41dabd2b589b74bc",
+          "seconds": 1794420066.429,
+          "milliseconds": 1794420066429,
+          "createdAt": "2026-11-11T18:01:06.429Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:32",
+          "bits": "41dabd2b4d01a9fc",
+          "seconds": 1794420020.026,
+          "milliseconds": 1794420020026,
+          "createdAt": "2026-11-11T18:00:20.026Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:32",
+          "bits": "41dabd2b589db22d",
+          "seconds": 1794420066.464,
+          "milliseconds": 1794420066464,
+          "createdAt": "2026-11-11T18:01:06.464Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:33",
+          "bits": "41dabd2b4d4051ec",
+          "seconds": 1794420021.005,
+          "milliseconds": 1794420021005,
+          "createdAt": "2026-11-11T18:00:21.005Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:33",
+          "bits": "41dabd2b58d95810",
+          "seconds": 1794420067.396,
+          "milliseconds": 1794420067396,
+          "createdAt": "2026-11-11T18:01:07.396Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:34",
+          "bits": "41dabd2b4df41893",
+          "seconds": 1794420023.814,
+          "milliseconds": 1794420023814,
+          "createdAt": "2026-11-11T18:00:23.814Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:34",
+          "bits": "41dabd2b599ccccd",
+          "seconds": 1794420070.45,
+          "milliseconds": 1794420070450,
+          "createdAt": "2026-11-11T18:01:10.450Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:35",
+          "bits": "41dabd2b4df5e354",
+          "seconds": 1794420023.842,
+          "milliseconds": 1794420023842,
+          "createdAt": "2026-11-11T18:00:23.842Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:35",
+          "bits": "41dabd2b599e5604",
+          "seconds": 1794420070.474,
+          "milliseconds": 1794420070474,
+          "createdAt": "2026-11-11T18:01:10.474Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        },
+        {
+          "role": "baseline",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:36",
+          "bits": "41dabd2b4df80000",
+          "seconds": 1794420023.875,
+          "milliseconds": 1794420023875,
+          "createdAt": "2026-11-11T18:00:23.875Z",
+          "captureStartedAt": "2026-11-11T17:59:38.443Z",
+          "captureFinishedAt": "2026-11-11T18:00:25.990Z"
+        },
+        {
+          "role": "candidate",
+          "sessionId": "lot6b-owner-cost-smlp-measured",
+          "nodeId": "reasoning:trace:36",
+          "bits": "41dabd2b59a0e560",
+          "seconds": 1794420070.514,
+          "milliseconds": 1794420070514,
+          "createdAt": "2026-11-11T18:01:10.514Z",
+          "captureStartedAt": "2026-11-11T18:00:26.181Z",
+          "captureFinishedAt": "2026-11-11T18:01:12.672Z"
+        }
+      ],
+      "allOtherFieldsExact": true
+    }
+  },
+  "generator": {
+    "path": "docs/migration/lot6b-evidence/qualify-cost-owner-graphs.mjs",
+    "bytes": 48494,
+    "sha256": "703da28f89b8c025d01110c49ae8b16ff6a63c0d463e4438a58526eee18904d9"
+  },
+  "derivedFrom": {
+    "path": "docs/migration/lot6a-evidence/qualify-cost-owner-graphs.mjs",
+    "bytes": 40668,
+    "sha256": "284e3fc3fa0ea2cb0513e6ecaf920598a5a1baa546723b0a69e0de124f0035d5"
+  },
+  "nativeDigests": {
+    "baseline": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+    "candidate": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886"
+  },
+  "recordedAt": "2026-11-11T19:24:49.570Z",
+  "inputs": [
+    {
+      "path": "docs/migration/lot6b-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 48494,
+      "sha256": "703da28f89b8c025d01110c49ae8b16ff6a63c0d463e4438a58526eee18904d9"
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 40668,
+      "sha256": "284e3fc3fa0ea2cb0513e6ecaf920598a5a1baa546723b0a69e0de124f0035d5"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 25111,
+      "sha256": "6b567b2bdd39309f951e510e7e6c14fa4aade1f09f08e17961744adfa71315ed"
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 23229,
+      "sha256": "bdeb730acce872041354d30085c7703e111bf52056bdad07e6f7d52ea0a2be64"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/functional-805b/owner-baseline.receipt.json",
+      "bytes": 116566,
+      "sha256": "bed95d45ad7f6dddd057fc23767a3396ca95612d7c67825e9e5059b1e7f98426"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/functional-805b/baseline-source-manifest.json",
+      "bytes": 37772,
+      "sha256": "6fd96a8c19867ee6740db8293c14bf241d9929a31e24f391e95d3aee4c6fab66"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/functional-805b/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/functional-805b/owner-baseline.json.gz",
+      "bytes": 5114146,
+      "sha256": "c87bd33945a9240a98260fe1753f4e1c553453c1ca161b688a34936c9790a255"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6b-baseline-063-20261111/.sites-checkout/src/logos-engine/v6-native-runtime.ts",
+      "bytes": 167438,
+      "sha256": "c5bc40b3dd40b383f6bd31bbc8c77955a24c7b62a774792ccea38e9f8b79d0f3"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6b-baseline-063-20261111/.sites-checkout/src/logos-engine/kernel.ts",
+      "bytes": 23637,
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6b-baseline-063-20261111/.sites-checkout/src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14849,
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6b-baseline-063-20261111/.sites-checkout/scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6b-baseline-063-20261111/.sites-checkout/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6b-baseline-063-20261111/.sites-checkout/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6b-baseline-063-20261111/.sites-checkout/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6b-baseline-063-20261111/.sites-checkout/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/functional-805b/owner-candidate.receipt.json",
+      "bytes": 116447,
+      "sha256": "2acae4389b9c5b86f61f98c96c1c21c43d5e27f4f8365bc82b0fa7df83f1e7d0"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/source-manifest.json",
+      "bytes": 38246,
+      "sha256": "2098197ea6c45c06bf42983bc1b47cd2dbe15a49f43b2f647d1884e591649f42"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/functional-805b/owner-candidate.json.gz",
+      "bytes": 5123898,
+      "sha256": "637c30a2dce3e6e002b432d346beeac1a1a05aa96d2cc007313dcb061aed43f9"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 172627,
+      "sha256": "267c976c386f6a459b0fc3edb05035d8b0c73173294f77a6534010dcea3ae972"
+    },
+    {
+      "path": "src/logos-engine/kernel.ts",
+      "bytes": 23637,
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207"
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14849,
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "src/logos-engine/v6-selected-rigid.ts",
+      "bytes": 29799,
+      "sha256": "767556eac7484145e40a00c191004de266aa2b952f12518e720f00a5925b1751"
+    },
+    {
+      "path": "src/logos-engine/v6-selected-rigid-types.ts",
+      "bytes": 4586,
+      "sha256": "dace249fcb41ed2e54b87cd65e733d23bfbbb76ac65bd5f1562aaa19736710a5"
+    },
+    {
+      "path": "src/logos-engine/v6-selected-rigid-geometry.ts",
+      "bytes": 8625,
+      "sha256": "c381780144d2c159f52767b5b9b4f3731023bf37379e000b8e95c8dbb59fce66"
+    },
+    {
+      "path": "src/logos-engine/v6-selected-rigid-search.ts",
+      "bytes": 8844,
+      "sha256": "fc4777ad7d2d6c6a97ab3df2e6032bda8bb296eddfa0f89e051287f40313fd91"
+    },
+    {
+      "path": "src/logos-engine/v6-reasoning-memory.ts",
+      "bytes": 12962,
+      "sha256": "b55c186c99636f28c9e6e9c657b9bb50892eac06a3306be197503188069d901a"
+    },
+    {
+      "path": "src/logos-engine/v6-native-authority.ts",
+      "bytes": 23736,
+      "sha256": "f5a54ecac86fb097ee739dc6e4f8b4729819d58c9992fee92188527a1544b3ff"
+    },
+    {
+      "path": "src/logos-engine/canonical.ts",
+      "bytes": 11291,
+      "sha256": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1"
+    },
+    {
+      "path": "src/logos-engine/v6-native-state-graph.ts",
+      "bytes": 21947,
+      "sha256": "b739db6d6066a06f4175b4377f0d0ae1f351b708e5d27fbdb99c9de7e6ed0b4d"
+    },
+    {
+      "path": "src/logos-engine/v6-hash.ts",
+      "bytes": 2842,
+      "sha256": "6b86db7b533d55da900a3c65a06ec1e18547180245b3e3a2eaa837be09c669f5"
+    },
+    {
+      "path": "src/logos-engine/v6-src-program.ts",
+      "bytes": 5903,
+      "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77"
+    },
+    {
+      "path": "src/logos-engine/v6/programs.json",
+      "bytes": 1502394,
+      "sha256": "e006723f49460276a0753c1977ab0eabb30775409b37ba7d7af8b0b8b8527834"
+    },
+    {
+      "path": "src/runtime/v6-agent-service.ts",
+      "bytes": 18195,
+      "sha256": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96"
+    }
+  ],
+  "checkedCount": 64,
+  "formsSha256": "ce70b05800a7d7355d5b52613a4ba587d7612c061eaffe0c450f5c290f934798",
+  "qualification": "Every captured graph reconstructs from its exact complete Kernel delta chain using the validator bound to its own source freeze and identical value codecs. Every fragment identifier is checked against its content and every changed native graph root is hydrated. Added candidate nodes/deltas receive explicit installation, actual SelectedRigid checkpoint or reachable-fragment attribution, with zero source record calls or source-event facts and the exact empty source journal at every actual point in these foreign-owner cost traces. The observed acquisition owner is the registered family instance. Common node values are compared exactly except the encoded created leaf of native_reasoning_trace envelopes, validated as finite Date.now()/1000 timestamps within each own capture interval and stable per role/session/trace; every other trace field remains exact. Common metadata differs only at the explicitly bound origin.source_digest. Common delta identity/cause/order remains exact. Any further computed identity difference inside a value is refused pending a specific premeasurement attribution. This stricter 6B scope does not amend the historical 6A qualification. Structural counts come from the captures, without an added-node or cycle formula. The forms are fixed before any cost window and every future raw trial must match its own form exactly. No cost values, timing correction, future-run success, uncaptured measured-graph values or full caller semantic parity is inferred."
+}

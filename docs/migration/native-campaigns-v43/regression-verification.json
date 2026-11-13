@@ -1,0 +1,411 @@
+{
+  "schema": "logos-engine.v43.regression-verification.v1",
+  "status": "passed",
+  "passed": true,
+  "verifiedAt": "2026-11-08T18:20:00.120025+00:00",
+  "scope": "Seven fresh cold public-game campaigns, sequential independent sessions with a retained session per game; no manual game actions. Each target and production budget exactly matches its recorded v42 baseline.",
+  "baselineImplementation": "logos-engine.typescript.v6.native-migration/0.12.0",
+  "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.13.0",
+  "nativeSource": {
+    "fileCount": 143,
+    "digest": "702fd71e5c234d1942dab9685306aa252b68eaa1280def89d9665a3fcbe2a3fb",
+    "sourceUnchangedDuringAllRuns": true,
+    "currentSourceFilesMatchAllRecordedRuns": true
+  },
+  "pythonAgentModules": [],
+  "manualGameActions": 0,
+  "totals": {
+    "campaigns": 7,
+    "commands": 303,
+    "completePublicPackets": 310,
+    "prefixes": 184,
+    "checks": 91
+  },
+  "perRun": [
+    {
+      "game": "MEMO",
+      "targetLevels": 3,
+      "status": "passed",
+      "passed": true,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v42/memo-three-levels.json",
+        "sha256": "0481da6c99e6cfec6490de81039077d1c22b8204a81825375591e21505e6fca3",
+        "bytes": 251453
+      },
+      "report": {
+        "path": "docs/migration/native-campaigns-v43/memo-three-levels.json",
+        "sha256": "f755edf675045f35c1839d3f5bc3bafc1829b32a37fa1cce1029538e28e5c0cd",
+        "bytes": 255104
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v43/memo-comparison.json",
+        "sha256": "b633279a8e187a4f8519d7ebb94b3dcce72b0f5c736deae34ecd37555ac83653",
+        "bytes": 3407
+      },
+      "log": {
+        "path": "docs/migration/native-campaigns-v43/logs/regression-memo.log.gz",
+        "sha256": "b5d29ab407fa34036b6c3231ff642b108c5195ce60b20e57e6b574e6a214a209",
+        "bytes": 4200,
+        "uncompressedSha256": "0e1763ed83a62af413dbf2f3b698b082c7e9b30d6ed45a03232f598602cc4d91",
+        "uncompressedBytes": 66158,
+        "capturedExecutionLog": "/workspace/scratch/1cef09f3652c/v43-regression-memo.log"
+      },
+      "checks": 13,
+      "compared": {
+        "commands": 30,
+        "completePublicPackets": 31,
+        "prefixes": 30
+      },
+      "final": {
+        "state": "NOT_FINISHED",
+        "levelsCompleted": 3,
+        "actions": 30,
+        "prefixes": 30,
+        "sessions": 1,
+        "reason": "target_levels_completed",
+        "levelActions": [
+          10,
+          10,
+          10
+        ]
+      },
+      "sourceUnchangedDuringRun": true,
+      "pythonAgentModules": [],
+      "newProductAcquisitionEmpty": true
+    },
+    {
+      "game": "TICT",
+      "targetLevels": 6,
+      "status": "passed",
+      "passed": true,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v42/tict-six-levels.json",
+        "sha256": "85069950ea82af8731af3d05d105baebeadffffc17f7c2892bd9a86e5a7d5da2",
+        "bytes": 795792
+      },
+      "report": {
+        "path": "docs/migration/native-campaigns-v43/tict-six-levels.json",
+        "sha256": "6c571f9b276c9a6eef2120edc605ad4fc2075feb1276b5242e56253ec39538d5",
+        "bytes": 802138
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v43/tict-comparison.json",
+        "sha256": "9455cb10cd779684884140017077757294e12bfbeb37692c9dda9728b970f762",
+        "bytes": 3403
+      },
+      "log": {
+        "path": "docs/migration/native-campaigns-v43/logs/regression-tict.log.gz",
+        "sha256": "7493179e0dca89621d32e6dd67e18430d1364527d4715a9cf64fa4f26900c6db",
+        "bytes": 6934,
+        "uncompressedSha256": "96258cf3e57e54cc1baf1d87c6c44298de34db0ef9e5a0e27391b4ba67692ab7",
+        "uncompressedBytes": 120959,
+        "capturedExecutionLog": "/workspace/scratch/1cef09f3652c/v43-regression-tict.log"
+      },
+      "checks": 13,
+      "compared": {
+        "commands": 55,
+        "completePublicPackets": 56,
+        "prefixes": 55
+      },
+      "final": {
+        "state": "WIN",
+        "levelsCompleted": 6,
+        "actions": 55,
+        "prefixes": 55,
+        "sessions": 1,
+        "reason": "target_levels_completed",
+        "levelActions": [
+          3,
+          12,
+          7,
+          7,
+          12,
+          14
+        ]
+      },
+      "sourceUnchangedDuringRun": true,
+      "pythonAgentModules": [],
+      "newProductAcquisitionEmpty": true
+    },
+    {
+      "game": "HANO",
+      "targetLevels": 4,
+      "status": "passed",
+      "passed": true,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v42/hano-four-levels.json",
+        "sha256": "eb5ab72f6312ab14fbe0efb4756681f2609027b7e891475f7ac6793389da1ec7",
+        "bytes": 311336
+      },
+      "report": {
+        "path": "docs/migration/native-campaigns-v43/hano-four-levels.json",
+        "sha256": "cfda2a25696d13130387ecd29aac81455ff970a8ac6ae1df486ade2139d29d7d",
+        "bytes": 315008
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v43/hano-comparison.json",
+        "sha256": "5a9caba010518d16578584fca3e8e4cbcf7d5d893c62f80b58454c946edd5fc4",
+        "bytes": 3405
+      },
+      "log": {
+        "path": "docs/migration/native-campaigns-v43/logs/regression-hano.log.gz",
+        "sha256": "1aff0a6e4c5b072feead3e491753dc3820eb3768ad3063001f1ed0bc6e557ce4",
+        "bytes": 5663,
+        "uncompressedSha256": "5c251986af4b9472a91b9c265e93008eeb2286e70158c3769a62399462c1b390",
+        "uncompressedBytes": 98498,
+        "capturedExecutionLog": "/workspace/scratch/1cef09f3652c/v43-regression-hano.log"
+      },
+      "checks": 13,
+      "compared": {
+        "commands": 60,
+        "completePublicPackets": 61,
+        "prefixes": 30
+      },
+      "final": {
+        "state": "WIN",
+        "levelsCompleted": 4,
+        "actions": 60,
+        "prefixes": 30,
+        "sessions": 1,
+        "reason": "target_levels_completed",
+        "levelActions": [
+          6,
+          10,
+          14,
+          30
+        ]
+      },
+      "sourceUnchangedDuringRun": true,
+      "pythonAgentModules": [],
+      "newProductAcquisitionEmpty": true
+    },
+    {
+      "game": "ELAS",
+      "targetLevels": 3,
+      "status": "passed",
+      "passed": true,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v42/elas-three-levels.json",
+        "sha256": "3052fe0d74e59afdeb472eda54f27edcabb71ca8a3c62c7473a518337f6d4c22",
+        "bytes": 136849
+      },
+      "report": {
+        "path": "docs/migration/native-campaigns-v43/elas-three-levels.json",
+        "sha256": "1340df6a4e82e14cfa92471aec833121f56aa487246cf59eb524b216041a5d4d",
+        "bytes": 138321
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v43/elas-comparison.json",
+        "sha256": "070477086c641c77dbf84ce8b1d979e4bfccab245ba0d6b87b3950cab4f947de",
+        "bytes": 3406
+      },
+      "log": {
+        "path": "docs/migration/native-campaigns-v43/logs/regression-elas.log.gz",
+        "sha256": "f5c5eb5654ba82306be1003096e8e299fb7354719d96fa29c34fdba31f0c582b",
+        "bytes": 2861,
+        "uncompressedSha256": "c4b65c5466b905eecc4a6fa16652ec7590099f9189062c391421bc1398f75f96",
+        "uncompressedBytes": 47163,
+        "capturedExecutionLog": "/workspace/scratch/1cef09f3652c/v43-regression-elas.log"
+      },
+      "checks": 13,
+      "compared": {
+        "commands": 33,
+        "completePublicPackets": 34,
+        "prefixes": 9
+      },
+      "final": {
+        "state": "NOT_FINISHED",
+        "levelsCompleted": 3,
+        "actions": 33,
+        "prefixes": 9,
+        "sessions": 1,
+        "reason": "target_levels_completed",
+        "levelActions": [
+          2,
+          9,
+          22
+        ]
+      },
+      "sourceUnchangedDuringRun": true,
+      "pythonAgentModules": [],
+      "newProductAcquisitionEmpty": true
+    },
+    {
+      "game": "TU93",
+      "targetLevels": 3,
+      "status": "passed",
+      "passed": true,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v42/tu93-three-levels.json",
+        "sha256": "cc5570b103cce0fe705b41f6b0a986553d3267eb557e76ed2fb380e5d7e5ff3c",
+        "bytes": 278868
+      },
+      "report": {
+        "path": "docs/migration/native-campaigns-v43/tu93-three-levels.json",
+        "sha256": "fa75d2e446a3a867d9a48869936b18497bf4fc0e8473ee217b7cafbcc84d867d",
+        "bytes": 281938
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v43/tu93-comparison.json",
+        "sha256": "28e1e691463c6adcebb6f1205218cab070a49726d6c18173980f9d9c5b0daaae",
+        "bytes": 3407
+      },
+      "log": {
+        "path": "docs/migration/native-campaigns-v43/logs/regression-tu93.log.gz",
+        "sha256": "0f8d6e5a897d4a2e8f6e5fd1bae4def56e74b7b14f5718c36148b4ec3383b5a0",
+        "bytes": 5262,
+        "uncompressedSha256": "f6716401e755f624f6d38adb1ce05f9310e0e96dcb8c77ebabc5bd3a76926669",
+        "uncompressedBytes": 98952,
+        "capturedExecutionLog": "/workspace/scratch/1cef09f3652c/v43-regression-tu93.log"
+      },
+      "checks": 13,
+      "compared": {
+        "commands": 67,
+        "completePublicPackets": 68,
+        "prefixes": 25
+      },
+      "final": {
+        "state": "NOT_FINISHED",
+        "levelsCompleted": 3,
+        "actions": 67,
+        "prefixes": 25,
+        "sessions": 1,
+        "reason": "target_levels_completed",
+        "levelActions": [
+          32,
+          10,
+          25
+        ]
+      },
+      "sourceUnchangedDuringRun": true,
+      "pythonAgentModules": [],
+      "newProductAcquisitionEmpty": true
+    },
+    {
+      "game": "STCK",
+      "targetLevels": 3,
+      "status": "passed",
+      "passed": true,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v42/stck-three-levels.json",
+        "sha256": "aef40947719481ce761f394a0e7709c95cc0bf6193053f449fde35ec3425a258",
+        "bytes": 183846
+      },
+      "report": {
+        "path": "docs/migration/native-campaigns-v43/stck-three-levels.json",
+        "sha256": "f23f13d4d53f3a1e9565256d885353e2efd887117623c68d0a70a927a43b1544",
+        "bytes": 185859
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v43/stck-comparison.json",
+        "sha256": "a4c1b3910895ebc86fd99b8dc61601655f76570a8bd10401e0853f8ab37ad756",
+        "bytes": 3407
+      },
+      "log": {
+        "path": "docs/migration/native-campaigns-v43/logs/regression-stck.log.gz",
+        "sha256": "420cbad2db5899900202fb1f0ef4fd1d641380fb90491da33c4b1253de6a0b1e",
+        "bytes": 3366,
+        "uncompressedSha256": "5000dcd9a7bb576eaab6798af6b1d0d020b1a0b7d615403632ec51627ff8ccd3",
+        "uncompressedBytes": 55666,
+        "capturedExecutionLog": "/workspace/scratch/1cef09f3652c/v43-regression-stck.log"
+      },
+      "checks": 13,
+      "compared": {
+        "commands": 35,
+        "completePublicPackets": 36,
+        "prefixes": 15
+      },
+      "final": {
+        "state": "NOT_FINISHED",
+        "levelsCompleted": 3,
+        "actions": 35,
+        "prefixes": 15,
+        "sessions": 1,
+        "reason": "target_levels_completed",
+        "levelActions": [
+          3,
+          7,
+          25
+        ]
+      },
+      "sourceUnchangedDuringRun": true,
+      "pythonAgentModules": [],
+      "newProductAcquisitionEmpty": true
+    },
+    {
+      "game": "PIPE",
+      "targetLevels": 3,
+      "status": "passed",
+      "passed": true,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v42/pipe-three-levels.json",
+        "sha256": "0cf5a40384efc7158b340d2c9c33fa712b177af1f1ee49e50a09f614a31fcb42",
+        "bytes": 195157
+      },
+      "report": {
+        "path": "docs/migration/native-campaigns-v43/pipe-three-levels.json",
+        "sha256": "3a053f442b9a211ea4bd768720755177ec4fabddb70afaf3e003df47659f3986",
+        "bytes": 197726
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v43/pipe-comparison.json",
+        "sha256": "e6be88c95f9e5a312aab1ccf9ad197f1cd024f536601980bd64088c467a9a6e4",
+        "bytes": 3407
+      },
+      "log": {
+        "path": "docs/migration/native-campaigns-v43/logs/regression-pipe.log.gz",
+        "sha256": "ae8db342262e12b17d5c1328d8be9a0c54596318dcc86ca99684ba3c52c2f4b1",
+        "bytes": 3261,
+        "uncompressedSha256": "32859f50cf30d584a8561b53aa655aea470fad76821793a0fabfa26527a3472a",
+        "uncompressedBytes": 48549,
+        "capturedExecutionLog": "/workspace/scratch/1cef09f3652c/v43-regression-pipe.log"
+      },
+      "checks": 13,
+      "compared": {
+        "commands": 23,
+        "completePublicPackets": 24,
+        "prefixes": 20
+      },
+      "final": {
+        "state": "NOT_FINISHED",
+        "levelsCompleted": 3,
+        "actions": 23,
+        "prefixes": 20,
+        "sessions": 1,
+        "reason": "target_levels_completed",
+        "levelActions": [
+          4,
+          8,
+          11
+        ]
+      },
+      "sourceUnchangedDuringRun": true,
+      "pythonAgentModules": [],
+      "newProductAcquisitionEmpty": true
+    }
+  ],
+  "executionReceipt": {
+    "path": "docs/migration/native-campaigns-v43/regression-summary.json",
+    "sha256": "6e040f227ff4320709ba43738e182b9d19da0599be3560adb3c022b24f6dacbd",
+    "bytes": 21149
+  },
+  "executionLog": {
+    "path": "docs/migration/native-campaigns-v43/logs/regression-campaigns.log.gz",
+    "sha256": "6d5561bb1f48f9e2932c1818fbec19b8a4921e55203abaea41fb7bc50f92460c",
+    "bytes": 777,
+    "uncompressedSha256": "588805689bc0dfb337065a8b6ad2a0eeec4251eeb29d9aecde3602162622737f",
+    "uncompressedBytes": 4379,
+    "capturedExecutionLog": "/workspace/scratch/1cef09f3652c/v43-regression-campaigns.log"
+  },
+  "harness": {
+    "path": "tests/v6-agent-native.smoke.ts",
+    "sha256": "496f51292f3068978b842b447ba2fc0962225327bd95365f5e34c09605dae58b",
+    "bytes": 1911
+  },
+  "comparisonTool": {
+    "path": "scripts/compare-v43-regressions.mjs",
+    "sha256": "15ed6d0872069dcd58b46b0d44bf9abeb854234a92bb78a5c8c8b5c0dcb2319d",
+    "bytes": 6011
+  },
+  "qualification": "The comparisons preserve exact physical commands, complete public packet hashes, source prefix kinds, acquisition counters, official boundaries and prior series projections. Observation session scope is normalized; session-derived program model IDs, native graph chains/revisions, shared inherited digests and timings are excluded. New product acquisition must remain empty; prior quota/relation evidence remains compared. These are bounded regression results, not a speed benchmark or full original-caller parity."
+}

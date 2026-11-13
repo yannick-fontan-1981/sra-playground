@@ -1,0 +1,47 @@
+{
+  "schema": "logos-engine.lot8b.static-preparation-review-pin-reconciliation.v1",
+  "recordedAt": "2026-11-12T05:29:16.680656+00:00",
+  "status": "exact_initial_bytes_reconstructed_and_current_execution_pin_verified",
+  "independentReview": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-tools-v2-independent-review.json",
+    "bytes": 23663,
+    "sha256": "6973e5c948f0883ad530694737155183608c4d097fbfcf35be56945a2e85ccd6"
+  },
+  "initialReviewPin": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-tools-v2-static-preparation.json",
+    "bytes": 956,
+    "sha256": "26f0cfde9aab74073ba28070088ecd40142609fbe66ca114c32d16ea6750d250"
+  },
+  "retainedInitialBytes": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-tools-v2-static-preparation-initial.json",
+    "bytes": 956,
+    "sha256": "26f0cfde9aab74073ba28070088ecd40142609fbe66ca114c32d16ea6750d250"
+  },
+  "currentEnrichedPreparation": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-tools-v2-static-preparation.json",
+    "bytes": 1404,
+    "sha256": "f9eebfc17faafb23d7ce91efecb126ce38240a48359f12901a09d7aabb8349f3"
+  },
+  "onlyAddedTopLevelField": "fixtureLabelStaticCheck",
+  "addedField": {
+    "recordedAt": "2026-11-12T05:22:40.469885+00:00",
+    "fixture": "tests/fixtures/v6-branch-routing-reference.json",
+    "sha256": "e6ae197b7b982bd41f561b9df8e458436d7ce0797f39bbf86d972e55472b6769",
+    "frameCount": 37,
+    "compactJsonSha256Prefix16MatchesLabels": true,
+    "lastPacketFrameMatchesCurrentRows": true,
+    "nativeExecution": false,
+    "oracleExecution": false,
+    "fixtureModified": false
+  },
+  "reconstructionMethod": "Remove only fixtureLabelStaticCheck from the current parsed document; emit insertion-order JSON with2-space indentation, ensure_ascii=false and one terminal newline. Exact bytes match the previously recorded956-byte SHA.",
+  "timelineQualification": "The reviewer had fingerprinted the initial syntax receipt. Root appended the static37-frame label check before plan02. Plan02 and both executed02 commands pinned the enriched receipt and remained unchanged. The capture/reader tools, native sources and fixture were not modified by this metadata append.",
+  "executionPlanPin": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-tools-v2-static-preparation.json",
+    "bytes": 1404,
+    "sha256": "f9eebfc17faafb23d7ce91efecb126ce38240a48359f12901a09d7aabb8349f3"
+  },
+  "oldReviewOrExecutionReceiptsRewritten": false,
+  "nativeOrToolCodeChanged": false,
+  "testOrCaptureRerunRequired": false
+}

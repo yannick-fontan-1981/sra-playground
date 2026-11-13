@@ -1,0 +1,29 @@
+{
+  "schema": "logos-engine.v46.evidence-retention.v1",
+  "artifacts": [
+    {
+      "originalPath": "scripts/compare-v46-regressions.mjs",
+      "sha256": "dc1d39e214a3434974eb442cdc19db54feece50ab242c0ed4fb3539df2894ef4",
+      "retainedPath": "docs/migration/native-campaigns-v46/diagnostics/compare-v46-regressions-initial.mjs",
+      "reason": "Byte-preserved initial evidence before correcting the comparison projection: eliminationWitnessDigest hashes training observation session references. Original public commands, images and acquisition are unchanged; only the recorded CATL comparison is recomputed."
+    },
+    {
+      "originalPath": "docs/migration/native-campaigns-v46/regression-verification.json",
+      "sha256": "cb75d3b106e31c11987a7b0e0de715c82993ba3f8b5ef89883cdad5cfb999e29",
+      "retainedPath": "docs/migration/native-campaigns-v46/diagnostics/initial-regression-verification.json",
+      "reason": "Byte-preserved initial evidence before correcting the comparison projection: eliminationWitnessDigest hashes training observation session references. Original public commands, images and acquisition are unchanged; only the recorded CATL comparison is recomputed."
+    },
+    {
+      "originalPath": "docs/migration/native-campaigns-v46/regression-summary.json",
+      "sha256": "5036e43f096656efe0ae61eff7ae033f2c8bf5ca2f2cb658ceb699723372ee30",
+      "retainedPath": "docs/migration/native-campaigns-v46/diagnostics/initial-regression-summary.json",
+      "reason": "Byte-preserved initial evidence before correcting the comparison projection: eliminationWitnessDigest hashes training observation session references. Original public commands, images and acquisition are unchanged; only the recorded CATL comparison is recomputed."
+    },
+    {
+      "originalPath": "docs/migration/native-campaigns-v46/logs/regression-catl-receipt.json",
+      "sha256": "11eab55ed37929e8a1849ba87a67fa9198bf20173428cc38f7a2a2a339999dee",
+      "retainedPath": "docs/migration/native-campaigns-v46/diagnostics/initial-regression-catl-receipt.json",
+      "reason": "Byte-preserved initial evidence before correcting the comparison projection: eliminationWitnessDigest hashes training observation session references. Original public commands, images and acquisition are unchanged; only the recorded CATL comparison is recomputed."
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "schema": "logos-engine.native-global-cost-policy.v1",
+  "declaredAt": "2026-11-10T07:17:16.220373+00:00",
+  "authorization": {
+    "source": "explicit user message before this lot3C current-evidence correction official window",
+    "date": "2026-11-10",
+    "verbatim": "si le global reste en dessous de 10% d'augmentation alors une phase qui dépasse 10% peut être accepté."
+  },
+  "globalStage": "session_elapsed",
+  "statistic": "pooled median of complete measured-session durations per tested case",
+  "caseIds": [
+    "STCK",
+    "SMLP"
+  ],
+  "relativeIncreaseLimit": 0.1,
+  "comparison": "strictly_less_than",
+  "allCasesMustPass": true,
+  "crossCaseCompensation": false,
+  "phaseOverrunsMayBeAccepted": true,
+  "phasesAndP95RemainVisible": true,
+  "diagnosticPhasePolicy": "docs/migration/lot3c-current-evidence/performance/comparison-policy.json",
+  "plannedOrder": [
+    "A1",
+    "B1",
+    "B2",
+    "A2"
+  ],
+  "cohorts": 2,
+  "sessionsPerCaseVersionCohort": 4,
+  "measuredSessions": 32,
+  "measuredActions": 400,
+  "excludedWarmupSessions": 8,
+  "excludedWarmupActions": 24,
+  "excludedMeasuredSessions": 0,
+  "excludedOutliers": 0,
+  "baseline": {
+    "nativeVersion": "0.43.0",
+    "siteVersion": 71,
+    "commit": "e9fd144112b05a65af5c88e9f05c541f43ed8ed7",
+    "nativeDigest": "3e88aa12214fd3d4a4feb8d63b946123b8394cb4a0cbd0a156cc059c37f7b46c",
+    "nativeFiles": 251
+  },
+  "candidate": {
+    "nativeVersion": "0.44.0",
+    "nativeDigest": "e914399487992c3f53b3058ee734c470d738594e7344285799203462fac6a255",
+    "nativeFiles": 251
+  },
+  "qualification": "This rule is declared before this new official window against freshly measured published0.43. It does not alter any historical timing data, phase-comparator output or cost protocol. Global means the complete session for each case, not a sum of nested phases or compensation across games. Functional and contribution gates remain separate."
+}

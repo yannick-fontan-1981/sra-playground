@@ -1,0 +1,29 @@
+{
+  "schema": "logos-engine.v45.actual-campaign-execution.v1",
+  "command": [
+    "node",
+    "scripts/run-v44-campaign.mjs",
+    "LF52",
+    "3",
+    "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/docs/migration/native-campaigns-v45/lf52-three-levels.json",
+    "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/docs/migration/native-campaigns-v45/lf52-public-trace.json.gz"
+  ],
+  "exitCode": 1,
+  "startedAt": "2026-11-08T19:32:17.820073+00:00",
+  "finishedAt": "2026-11-08T19:39:39.848678+00:00",
+  "nativeSourceManifestDigest": "2819ec88e8c6b9c00c2ff04b9086dd7958d7cfdffef93c5a7edad1f2e16c789f",
+  "nativeSourceUnchanged": true,
+  "report": {
+    "path": "docs/migration/native-campaigns-v45/lf52-three-levels.json",
+    "sha256": "f9892b2364b5407c633a6bca20d71e6736587d34c9c7a1535cba232764e196c4"
+  },
+  "trace": {
+    "path": "docs/migration/native-campaigns-v45/lf52-public-trace.json.gz",
+    "sha256": "90551f9277b3ad428933e93bf0b50aff2a33d92a2fc12250690d3814667f8626"
+  },
+  "output": {
+    "path": "docs/migration/native-campaigns-v45/logs/lf52-output.log.gz",
+    "sha256": "3e03b01371fc299c44420c2f2e5bbfefbd58f16cb933959622f69147cda28b43",
+    "bytes": 11371
+  }
+}

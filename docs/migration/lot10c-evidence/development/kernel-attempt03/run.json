@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "command": [
+    "node",
+    "--test",
+    "--test-concurrency=1",
+    "--test-reporter=tap",
+    "tests/v6-ordered-recruitment-kernel.test.ts"
+  ],
+  "startedAt": "2026-11-11T17:20:30.375979+00:00",
+  "timeoutSeconds": 120,
+  "inputs": {
+    "tests/v6-ordered-recruitment-kernel.test.ts": "9a740d45617ee3afdb73c221d8efebccf06379f158e78021ece4a7d795292fda",
+    "tests/fixtures/v6-ordered-recruitment-reference.json.gz": "bfcc4444286bd5a55252eacd11f6cdc06cbf0163924796a9debef302586f2460"
+  },
+  "qualification": "Development-only cold synthetic common-kernel checks. No game, cost or final-freeze claim.",
+  "exitCode": 0,
+  "elapsedSeconds": 13.699552938000124,
+  "finishedAt": "2026-11-11T17:20:44.076781+00:00",
+  "inputsUnchanged": true
+}

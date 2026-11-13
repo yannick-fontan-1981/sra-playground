@@ -1,0 +1,461 @@
+{
+  "module_id": "observed_neighbor_pattern",
+  "declarations": [
+    {
+      "id": "policy.observed_neighbor_pattern_model",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_partial_neighbor_samples_and_complete_reference"
+      ],
+      "configuration": {
+        "measurement_contract": {
+          "maximum_frame_pixels": 4096,
+          "maximum_component_count": 512,
+          "maximum_cell_count": 4096,
+          "maximum_member_count": 16,
+          "minimum_mask_extent": 1,
+          "maximum_mask_extent": 64,
+          "minimum_mask_area": 1,
+          "maximum_framed_occurrences": 32,
+          "maximum_work": 131072,
+          "maximum_transport_witnesses": 3,
+          "allow_revalidated_partial_table_recall": true,
+          "allow_revalidated_proxy_signature_relocalization": true,
+          "candidate_offsets": [
+            [
+              -1,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              -1
+            ]
+          ]
+        }
+      },
+      "declared_alternative_refs": [
+        "neighbor_pattern.admit_partial_model",
+        "neighbor_pattern.retain_general_reasoning"
+      ],
+      "invariants": [
+        "hypothesis_not_complete_mechanic",
+        "retain_unknown_sample_cases",
+        "no_palette_or_game_specific_roles",
+        "resource_absence_not_zero_credit",
+        "fixed_window_is_revisable",
+        "preserve_parent_and_current_control_evidence",
+        "unknown_current_cases_do_not_refute_known_samples_or_extend_the_table",
+        "known_sample_contradictions_still_refuse_the_model",
+        "proposed_terminal_layout_must_match_the_supplied_partial_table"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.neighbor_pattern.preserve_known_parent_terminal",
+          "all_conditions": [
+            {
+              "field": "parent_terminal_goal_ref_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "bound_facts": {
+            "effective_terminal_goal_ref": "parent_terminal_goal_ref"
+          }
+        },
+        {
+          "id": "projection.neighbor_pattern.provisional_reference_terminal",
+          "all_conditions": [
+            {
+              "field": "parent_terminal_goal_ref_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "templated_facts": {
+            "effective_terminal_goal_ref": "goal.match_observed_neighbor_reference.{method_digest}"
+          }
+        },
+        {
+          "id": "projection.neighbor_pattern.current_samples_covered",
+          "all_conditions": [
+            {
+              "field": "geometry_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_known_neighbor_samples_consistent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_unmapped_neighbor_sample_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "neighbor_revalidation_scope_ref": "scope.neighbor_pattern.current_samples_covered"
+          }
+        },
+        {
+          "id": "projection.neighbor_pattern.current_unmapped_samples_preserve_partial_scope",
+          "all_conditions": [
+            {
+              "field": "geometry_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_known_neighbor_samples_consistent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_unmapped_neighbor_sample_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "neighbor_revalidation_scope_ref": "scope.neighbor_pattern.unmapped_current_samples_preserved"
+          }
+        },
+        {
+          "id": "projection.neighbor_pattern.admit_partial_model",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "neighbor_pattern.admit_partial_model"
+            },
+            {
+              "field": "geometry_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "member_count",
+              "operator": "greater_than",
+              "expected": 1
+            },
+            {
+              "field": "reference_empty_margins_preserved",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_known_neighbor_samples_consistent",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "neighbor_pattern.admit_partial_model",
+            "neighbor_model_contract": {
+              "color_key_law_ref": "ordered_direction_mask",
+              "crop_law_ref": "fixed_full_window",
+              "operation_ref": "mechanics.neighborhood_pattern_construction.site_domain",
+              "point_action_ref": "ACTION6",
+              "action_steps": [
+                [
+                  "ACTION1",
+                  -1,
+                  0
+                ],
+                [
+                  "ACTION2",
+                  1,
+                  0
+                ],
+                [
+                  "ACTION3",
+                  0,
+                  -1
+                ],
+                [
+                  "ACTION4",
+                  0,
+                  1
+                ]
+              ]
+            },
+            "model_status_ref": "hypothesis.revalidated_partial_neighbor_pattern",
+            "caller_next_item_ref": "item.consume_neighbor_reference_placement",
+            "assumption_refs": [
+              "hypothesis.current_non_support_cells_are_transportable_members",
+              "hypothesis.sampled_support_values_allow_cardinal_transport",
+              "hypothesis.observed_partial_neighbor_samples_transfer",
+              "hypothesis.reference_compares_full_framed_window",
+              "hypothesis.point_selects_occupied_member"
+            ],
+            "point_expectation_refs": [
+              "expectation.point_tests_member_control_transfer"
+            ]
+          },
+          "sequence_compositions": [{
+            "output_field": "neighbor_method_claim_refs",
+            "source_fields": ["neighbor_method_claim_refs", "recalled_method_claim_refs"],
+            "max_items": 64,
+            "unique_items": true
+          }],
+          "templated_facts": {
+            "goal_ref": "goal.neighbor_reference_placement.{method_digest}",
+            "neighbor_method_claim_refs": [
+              "claim.neighbor_method.{method_claim_digest}"
+            ]
+          }
+        },
+        {
+          "id": "projection.neighbor_pattern.retain_general_reasoning",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "neighbor_pattern.retain_general_reasoning"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "neighbor_pattern.retain_general_reasoning"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.neighbor_pattern.admit",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "neighbor_pattern.admit_partial_model"
+            }
+          ],
+          "reason_ref": "reason.current_partial_neighbor_samples_support_joint_reference_experiment"
+        },
+        {
+          "id": "tier.neighbor_pattern.retain",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "neighbor_pattern.retain_general_reasoning"
+            }
+          ],
+          "reason_ref": "reason.neighbor_model_missing_or_contradicted"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.neighbor_model_requires_current_prediction_validation",
+      "meaning_template_ref_by_alternative": {
+        "neighbor_pattern.admit_partial_model": "rule.remember_observed_neighbor_pattern"
+      },
+      "reason_refs": [
+        "reason.current_partial_neighbor_samples_support_joint_reference_experiment"
+      ]
+    },
+    {
+      "id": "policy.prepared_neighbor_reference_alignment_script",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "fact_projections": [
+        {
+          "id": "projection.prepared_neighbor_reference_alignment.admission",
+          "all_conditions": [
+            {
+              "field": "neighbor_reference_placement_step_measured",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "neighbor_partial_table_currently_revalidated",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "neighbor_staged_primitive_count_equals_minimum",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "advances_active_goal_chain",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "selection_principle_ref",
+              "operator": "equals",
+              "expected": "principle.partial_neighbor_relation_prepares_joint_reference"
+            },
+            {
+              "field": "ordinary_contextual_no_effect_repeat_eligible",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "incoming_declared_route_engagement_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "neighbor_incoming_goal_matches_placement",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "prepared_neighbor_reference_alignment_admitted": true
+          }
+        }
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "prepared_neighbor_reference_alignment_admitted",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "reason_refs": [
+        "reason.consume_partial_neighbor_model_for_joint_reference_placement"
+      ],
+      "invariants": [
+        "current_source_model_scope_and_reference_revalidated",
+        "minimum_staged_witness_is_measured_not_oracle_order",
+        "foreign_validated_continuations_not_replaced",
+        "ordinary_current_ranking_premises_why_permits_and_reconciliation_retained",
+        "admission_is_not_action_authorization",
+        "no_global_replanning_or_unrelated_saved_point_frontier_while_current_continuation_applies"
+      ]
+    },
+    {
+      "id": "rule.remember_observed_neighbor_pattern",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "invariants": [
+        "record_sampled_partial_law_not_all_possible_neighborhoods",
+        "current_revalidation_before_every_consumption",
+        "do_not_store_solution_routes_or_game_identifiers",
+        "changed_reference_epoch_or_unsupported_current_mask_refuses_use"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "memory.neighbor_method.{method_digest}",
+          "kind": "schema",
+          "label": "revisable_observed_neighbor_color_method",
+          "required_fields": [
+            "method_digest",
+            "level_epoch",
+            "measurement"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.observed_neighbor_color_method.v1",
+            "canonical_fact_projection_enabled": true,
+            "active": true,
+            "memory_scope": "same_level",
+            "commitment": "revisable",
+            "canonical_role_link_constraints": {
+              "allowed_statuses": [
+                "supported",
+                "established"
+              ],
+              "disposition": "active",
+              "polarity": "positive",
+              "no_contradictions": true,
+              "no_defeaters": true
+            },
+            "falsifier_refs": [
+              "falsifier.current_neighbor_mask_unknown_or_contradicted",
+              "falsifier.reference_or_level_epoch_changed"
+            ]
+          },
+          "attribute_bindings": {
+            "method_digest": "method_digest",
+            "level_epoch": "level_epoch",
+            "measurement": "measurement",
+            "role_premise_claim_refs": "neighbor_method_claim_refs",
+            "parent_terminal_goal_ref": "parent_terminal_goal_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.neighbor_method.{method_claim_digest}",
+          "predicate": "remembers_partial_observed_neighbor_color_method",
+          "family": "control",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "memory.neighbor_method.{method_digest}"
+          ],
+          "required_fields": [
+            "method_digest"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "complete_mechanical_law": false
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.observed_partial_samples_are_revisable_memory"
+      ]
+    },
+    {
+      "id": "principle.partial_neighbor_relation_prepares_joint_reference",
+      "kind": "principle",
+      "evaluation": "declarative_only",
+      "supported_operators": [],
+      "premises": [
+        "sampled_neighbor_masks_revalidate_current_colors",
+        "complete_reference_and_margins_match_supplied_layout"
+      ],
+      "invariants": [
+        "preserve_parent_until_both_members_place",
+        "separation_can_temporarily_restore_isolated_color",
+        "color_is_not_identity",
+        "existing_bfs_excludes_other_occupied_cells",
+        "prefer_shorter_complete_staged_witness",
+        "probe_selection_before_claiming_click_control",
+        "unknown_case_requires_more_evidence"
+      ],
+      "falsifiers": [
+        "falsifier.sample_contradicted",
+        "falsifier.current_movement_or_selection_fails"
+      ],
+      "reason_refs": [
+        "reason.consume_partial_neighbor_model_for_joint_reference_placement"
+      ]
+    }
+  ]
+}

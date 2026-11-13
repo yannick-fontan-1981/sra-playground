@@ -1,0 +1,9 @@
+{
+  "schema": "logos-engine.oracle-reference-retention.v1",
+  "recordedAt": "2026-11-11T17:16:26.295868+00:00",
+  "originalPath": "tests/fixtures/v6-ordered-recruitment-reference.json.gz",
+  "retainedPath": "docs/migration/lot10c-evidence/oracle/reference-03.json.gz",
+  "sha256": "c0f0fdde8371cb38c5759cebe2b46e79eb65ba6e3da52fed3bd20bda08a5e2c3",
+  "bytes": 997482,
+  "reason": "Add one independent geometric source case with an observed local-cache hit and two original FrozenMap normalization boundaries. Kernel public inputs and source chain are unchanged from run03; all prior references retained."
+}

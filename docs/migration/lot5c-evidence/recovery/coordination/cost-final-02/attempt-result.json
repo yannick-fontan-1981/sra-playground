@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.lot5c-single-recovery-attempt.v1",
+  "requestId": "lot5c-cost-a33a5f88-recovery-02",
+  "startedAt": "2026-11-11T20:20:25.581679+00:00",
+  "officialMeasurementAcceptanceAsserted": false,
+  "status": "failed_or_expired",
+  "failureType": "TimeoutError",
+  "failureReason": "availability_deadline_before_fresh_acks",
+  "release": {
+    "releasedAt": "2026-11-11T20:30:25.610691+00:00",
+    "reason": "failed_or_expired",
+    "requestId": "lot5c-cost-a33a5f88-recovery-02",
+    "automaticRetry": false
+  },
+  "finishedAt": "2026-11-11T20:30:25.612888+00:00",
+  "windowArtifactPresent": false,
+  "cleanupConfirmed": true,
+  "measurementQualification": "Actual samples and acceptance require the controller and window evidence; artifact existence alone is not a measurement claim."
+}

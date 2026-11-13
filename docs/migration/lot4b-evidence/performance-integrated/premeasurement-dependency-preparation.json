@@ -1,0 +1,44 @@
+{
+  "schema": "logos-engine.premeasurement-dependency-preparation.v1",
+  "status": "prepared_before_measurement",
+  "startedAt": "2026-11-10T22:36:46.239545+00:00",
+  "finishedAt": "2026-11-10T22:36:46.240461+00:00",
+  "initialStaticFailure": {
+    "path": "docs/migration/lot4b-evidence/performance-integrated/static-preflight.json",
+    "bytes": 16166,
+    "sha256": "dd6ce62d7b752f806fbbb96d1c2995850f96d830d6826e455650929934dbc2e1"
+  },
+  "initialFailedChecks": [
+    "baseline_dependency_equivalence_node_modules",
+    "baseline_dependency_equivalence_public/vendor/pyodide"
+  ],
+  "links": [
+    {
+      "path": "/workspace/sites/sra-lot4b-baseline-5a-20261110/node_modules",
+      "target": "/workspace/sites/sra-lot4a-20261110/.sites-checkout/node_modules",
+      "resolvedTarget": "/workspace/sites/sra-lot4a-20261110/.sites-checkout/node_modules",
+      "sameTargetAsCandidate": true,
+      "operation": "create_missing_dependency_symlink"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4b-baseline-5a-20261110/public/vendor/pyodide",
+      "target": "/workspace/sites/sra-lot4a-20261110/.sites-checkout/public/vendor/pyodide",
+      "resolvedTarget": "/workspace/sites/sra-lot4a-20261110/.sites-checkout/public/vendor/pyodide",
+      "sameTargetAsCandidate": true,
+      "operation": "create_missing_dependency_symlink"
+    }
+  ],
+  "toolBefore": {
+    "path": "docs/migration/lot4b-evidence/check-cost-static-inputs.py",
+    "bytes": 23603,
+    "sha256": "9cbe543d0166d366d4d8e576dcc8553c7a8116d4d657202c5be29a4d2607a121"
+  },
+  "toolAfter": {
+    "path": "docs/migration/lot4b-evidence/check-cost-static-inputs.py",
+    "bytes": 23603,
+    "sha256": "9cbe543d0166d366d4d8e576dcc8553c7a8116d4d657202c5be29a4d2607a121"
+  },
+  "sourceAndProtocolChanges": false,
+  "officialMeasurementStarted": false,
+  "qualification": "Only two previously missing runtime dependency links in the separate published baseline checkout were created. No source, tool, threshold, trace, timing or official measurement was changed. The original failed static receipt remains failed and will be retained byte for byte; new validation must execute the unchanged tool."
+}

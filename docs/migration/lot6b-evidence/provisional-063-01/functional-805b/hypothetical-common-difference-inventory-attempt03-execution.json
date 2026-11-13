@@ -1,0 +1,55 @@
+{
+  "schema": "logos-engine.lot6b-independent-diagnostic-execution.v1",
+  "attempt": 3,
+  "status": "diagnostic_complete_not_official_qualification",
+  "officialQualification": false,
+  "startedAt": "2026-11-11T18:18:24.897078+00:00",
+  "finishedAt": "2026-11-11T18:18:37.942960+00:00",
+  "elapsedSeconds": 13.04587946600077,
+  "command": [
+    "node",
+    "--max-old-space-size=768",
+    "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/provisional-063-01/functional-805b/inventory-common-differences-attempt03.mjs"
+  ],
+  "exitCode": 0,
+  "externalTimeoutSeconds": 120,
+  "timedOut": false,
+  "coordinationBefore": {
+    "lot10c-status.json": {
+      "updated_at": "2026-11-11T18:14:04.475072+00:00",
+      "phase": null,
+      "stage": "Development gates complete: 1382/1382 tests across 46 files, five checks/build, 173 original-source cases and four cold-kernel cases passed.",
+      "quiet_requested": false,
+      "quiet_request_id": "lot10c-recr01-bb7d62-functional",
+      "active_command": "Declared10recorded regressions active underSH; first3/10passed, fourth running. Source-only checkpoint649789e including RECR/parity/browser proofs remotely verified; running regression outputs explicitly excluded. All workers idle."
+    },
+    "lot5c-status.json": {
+      "updated_at": "2026-11-11T18:09:57.968586+00:00",
+      "phase": "final_recorded_regressions_running",
+      "stage": null,
+      "quiet_requested": false,
+      "quiet_request_id": "lot10c-recr01-bb7d62-functional",
+      "active_command": "Sequential unchanged 11-case recorded replay driver, 2400s maximum per case, shared performance lock. Exact22 pinned inputs restored and verified. No live game or official cost; bounded readiness planning worker only."
+    }
+  },
+  "script": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/functional-805b/inventory-common-differences-attempt03.mjs",
+    "sha256": "f2d7d6b8ac122eca457dfa1943cb32eabefcc14037b43b14a1a36ae818c95149"
+  },
+  "report": "docs/migration/lot6b-evidence/provisional-063-01/functional-805b/hypothetical-common-difference-inventory-attempt03.json",
+  "counts": {
+    "commonNodeComparisons": 17331,
+    "rawDifferences": 35769,
+    "residualAfterCreatedOnly": 34714,
+    "originSourceDigestDifferences": 20748,
+    "candidateOnlyNodeOccurrences": 116,
+    "commonDeltaComparisons": 3417,
+    "candidateOnlyDeltaOccurrences": 29,
+    "pointsCompared": 58
+  },
+  "nativeImportedOrExecuted": false,
+  "nativeOrTestsModified": false,
+  "officialQualifierModified": false,
+  "oldAttemptsModified": false,
+  "captureOrGameOrCostExecuted": false
+}

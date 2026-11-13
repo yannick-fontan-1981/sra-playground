@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.preview-stop-verification.v1",
+  "recordedAt": "2026-11-10T22:23:11.818814+00:00",
+  "stopObserved": "Sites preview stopped",
+  "statusCommand": [
+    "sites-preview",
+    "status"
+  ],
+  "exitCode": 0,
+  "output": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/browser/preview-stopped.log",
+    "sha256": "45fce2face59c97f95454e6f74029696846e8e839404f9c69c8a954a3fc89764",
+    "bytes": 22
+  },
+  "statusText": "Sites preview stopped\n"
+}

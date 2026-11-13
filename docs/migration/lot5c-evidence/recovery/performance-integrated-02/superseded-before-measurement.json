@@ -1,0 +1,64 @@
+{
+  "schema": "logos-engine.lot5c-cost-preparation-supersession.v1",
+  "status": "new_attempt_supersedes_failed_static_preflight_before_measurement",
+  "recordedAt": "2026-11-11T17:40:09.168554+00:00",
+  "supersededDirectory": "docs/migration/lot5c-evidence/recovery/performance-integrated-01",
+  "activeDirectory": "docs/migration/lot5c-evidence/recovery/performance-integrated-02",
+  "supersessionAppliesToPriorDirectoryOnly": true,
+  "reason": "The first static preflight rejected two absent baseline dependencies; only ignored baseline links were added to the existing candidate dependency targets.",
+  "priorFailedPreflight": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/static-preflight.json",
+    "bytes": 19941,
+    "sha256": "7112cfff86b26a59e2f804b45a62c20ed0e7b42aeeb311eb2157ca219504d7e1"
+  },
+  "priorFailureExecution": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/static-preflight-command.execution.json",
+    "bytes": 1287,
+    "sha256": "ea99789ecab9828d9a4a0dd34d44627e4cc487204d94a3b31d13afa371aa6235"
+  },
+  "priorDeclaration": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/declaration.json",
+    "bytes": 5661,
+    "sha256": "7b3022ccdd57849f6121446b9e8170e93f16bfec9c73eb8978b8b625eaab7351"
+  },
+  "priorStructuralContract": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-growth-contract.json",
+    "bytes": 6009,
+    "sha256": "d2f97d71bb68388c77ccfc45b791a1529806ed4096893f7a227d497af7079e25"
+  },
+  "priorStructuralAttribution": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-graph-attribution.json",
+    "bytes": 107007,
+    "sha256": "c0528cf494f17f156086e8d0c540fa0421c8bcf7b1c656454d96767b0916f74c"
+  },
+  "priorStructuralFixture": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-structural-fixture.json",
+    "bytes": 60104,
+    "sha256": "67d2afc5d54b8203c636aa8868c7b5967760dc7b44b0329eeb8b67ef98253296"
+  },
+  "priorAttemptInventory": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/prior-attempt-inventory.json",
+    "bytes": 6350,
+    "sha256": "0d5f1a51c7c413664459adb2e46a8b8078f0a0c25cb4e93acd4180ea6ae12698"
+  },
+  "dependencyRepair": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/dependency-repair.json",
+    "bytes": 4511,
+    "sha256": "606e2655c472d11823c3367f6a7213df318c24bbf3527f0c9a462e36854fa101"
+  },
+  "preservation": "The entire first attempt remains byte-for-byte intact, including the failed preflight and all valid functional captures. No old success is relabelled as new evidence.",
+  "newAttemptRequirements": [
+    "New declaration and owner source inventory",
+    "Fresh sequential baseline/candidate functional captures",
+    "Unchanged structural qualification",
+    "Contract derived only after qualification passes",
+    "Fresh static preflight before separate functional readiness and isolation"
+  ],
+  "nativeSourcesChanged": false,
+  "thresholdChanged": false,
+  "domainChanged": false,
+  "allowedOwner": "public_observed_binding",
+  "allowedProgram": "v6.observed_binding.choose",
+  "measuredWindowStarted": false,
+  "readinessAsserted": false
+}

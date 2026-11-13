@@ -1,0 +1,386 @@
+{
+  "schema": "logos-engine.lot5b-quiet-lane-preparation.v1",
+  "status": "preparation_not_quiet_evidence",
+  "preparedAt": "2026-11-11T01:22:59.501Z",
+  "purpose": "Prepare the exact currently known status coverage and fresh capture requirements for the future 5B cost window after actual 4C publication.",
+  "futureQuietEstablished": false,
+  "futureWindowAuthorized": false,
+  "currentWindow": {
+    "owner": "4C",
+    "observedStatusUpdatedAt": "2026-11-11T01:11:47.981891+00:00",
+    "observedPhase": "official_isolated_cost_window",
+    "observedActiveCommand": "launch-isolated-cost-window.py -> unchanged run-native-cost-window.py; A1 B1 B2 A2",
+    "lot5bQuietAcknowledgedAt": "2026-11-11T01:08:32.603053+00:00",
+    "qualification": "The current 4C measurement is active in the status read here. No future terminal release is inferred and this preparation does not authorize 5B execution."
+  },
+  "readRestrictions": {
+    "readOnlyInputs": "Small shared status JSON files, the coordination README, the small 3I handoff receipt and the current readiness tool's quiet-field source text.",
+    "sharedStatusesModified": false,
+    "agentsRestarted": false,
+    "functionalProgramsExecuted": false,
+    "syntaxChecksExecuted": false,
+    "testsBuildsOraclesGamesCostsExecuted": false,
+    "gitCommandsExecuted": false,
+    "archivesReadOrReconstructed": false,
+    "largeFileHashesCalculated": false,
+    "inputFingerprintsNotCalculatedDuringQuiet": true,
+    "soleWrittenFile": "docs/migration/lot5b-evidence/coordination/quiet-lane-preparation.json"
+  },
+  "statusInventory": {
+    "directory": "/workspace/shared/sra-coordination",
+    "observedStatusFileCount": 10,
+    "nonMeasuringStatusRowsToAccountFor": 9,
+    "requiredQuietLanes": [
+      "3I",
+      "4A",
+      "4B",
+      "4C",
+      "5A",
+      "7A",
+      "7B",
+      "10A",
+      "4C-auxiliary"
+    ],
+    "ownStatus": "/workspace/shared/sra-coordination/lot5b-status.json",
+    "qualification": "These are nine status records to cover, not nine claims of distinct active conversations or processes. Preserve all historical aliases in the evidence and assess their actual successor; do not silently omit a known status."
+  },
+  "lanes": [
+    {
+      "id": "3I",
+      "aliases": [
+        "3",
+        "lot3",
+        "3I recurrent_series"
+      ],
+      "statusPath": "/workspace/shared/sra-coordination/lot3-status.json",
+      "statusUpdatedAt": "2026-11-10T19:03:07.717559+00:00",
+      "observedClass": "terminal_historical_lane",
+      "rawCurrentFields": {
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": true,
+        "active_command": null
+      },
+      "terminalReleaseFieldsActuallyPresent": {
+        "own_agents": "Completed; no active compute or publication",
+        "release_estimate": "Released now after confirmed successful private deployment.",
+        "publication_completed": true,
+        "slot_released": true,
+        "slot_released_to": "4A observed_feedback_sequence",
+        "publication.publicationComplete": true,
+        "publication.slotReleasedTo": "4A observed_feedback_sequence"
+      },
+      "corroboratingSmallReceipt": "/workspace/shared/sra-coordination/lot3i-publication-handoff.json",
+      "nuance": "publication_started=true is retained historical data, alongside publication_completed=true, explicit release and active_command=null. Do not rewrite or misread that old started flag as an active publication. successor_lane_notice concerns 5A and must remain visible in the alias inventory.",
+      "futureCapture": "Freshly reread this terminal status after the new 5B request; retain its original timestamp, the actual release statement and a new observedAt. Reassess if any successor or new active command appears."
+    },
+    {
+      "id": "4A",
+      "statusPath": "/workspace/shared/sra-coordination/lot4a-status.json",
+      "statusUpdatedAt": "2026-11-10T21:02:36.176186+00:00",
+      "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+      "observedClass": "terminal_historical_alias_of_successor_4B_then_4C",
+      "rawCurrentFields": {
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null,
+        "quiet_acknowledged": true
+      },
+      "terminalReleaseFieldsActuallyPresent": {
+        "own_agents": "All subagents and compute jobs finished. No preview, build, test, replay or benchmark running.",
+        "release_estimate": "Completed and released.",
+        "slot_released": true,
+        "functional_compute_slot_released_to7A": true,
+        "publication_slot_retained": false,
+        "publication_completed": true,
+        "slot_released_at": "2026-11-10T20:16:35.791120+00:00",
+        "successor_lane_notice.lot": "4B",
+        "successor_lane_notice.status": "/workspace/shared/sra-coordination/lot4b-status.json",
+        "successor_lane_notice.qualification": "4A remains delivered and inactive.4B new user continuation is read/text only during7Aexclusive window."
+      },
+      "nuance": "The status also retains old requests and an old publication_lock_holder_session value. Its own terminal release does not establish quiet for the later 4B/4C work using the same checkout.",
+      "futureCapture": "Fresh terminal-status observation plus explicit accounting for current 4C and its auxiliary workers."
+    },
+    {
+      "id": "4B",
+      "statusPath": "/workspace/shared/sra-coordination/lot4b-status.json",
+      "statusUpdatedAt": "2026-11-10T23:03:50.097808+00:00",
+      "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+      "observedClass": "terminal_historical_alias_of_successor_4C",
+      "rawCurrentFields": {
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null,
+        "quiet_acknowledged": true
+      },
+      "terminalReleaseFieldsActuallyPresent": {
+        "stage": "Completed: first native0.54 publication Site86 and documentation closure Site87 both succeeded privately. Final source dd355400264b50942486559b8ca56ee6dfc6a3cc. All native/test/build/cost inputs unchanged; roadmap current. No further4B execution; releasing publication lock.",
+        "own_agents": "All three4B agents complete or stopped; no active compute.",
+        "functional_release": "Explicit 4B compute release: ABBA has finished and shared performance.lock is released. Other lanes may resume functional tests/builds/games. No further 4B measurement planned; publication order remains 4B then7B.",
+        "publication_lock_released_at": "2026-11-10T23:03:50.097822+00:00"
+      },
+      "publishedReceipt": "/workspace/shared/sra-coordination/published-4b-site87.json",
+      "nuance": "Terminal 4B release and shared-checkout identity do not substitute for the currently active 4C acknowledgement.",
+      "futureCapture": "Fresh terminal-status observation, preserving the old release time, and current 4C coverage."
+    },
+    {
+      "id": "4C",
+      "statusPath": "/workspace/shared/sra-coordination/lot4c-status.json",
+      "statusUpdatedAt": "2026-11-11T01:11:47.981891+00:00",
+      "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+      "observedClass": "active_official_measuring_lane",
+      "rawCurrentFields": {
+        "heavy_work_started": true,
+        "performance_started": true,
+        "publication_started": false,
+        "quiet_acknowledged": false,
+        "active_command": "launch-isolated-cost-window.py -> unchanged run-native-cost-window.py; A1 B1 B2 A2"
+      },
+      "currentFieldsActuallyPresent": {
+        "phase": "official_isolated_cost_window",
+        "functional_validation_complete": true,
+        "browser_preview_stopped": true,
+        "quiet_requested_at": "2026-11-11T01:07:57.482276+00:00",
+        "quiet_acknowledged_at": "2026-11-11T00:08:17.589929+00:00",
+        "request_to_lot5b": "Your fresh quiet at01:08:32 UTC is bound to the official4C isolation policy. Keep heavy/performance/publication false and active_command null until I explicitly release this window. Native0.57 publication follows validation of the complete results."
+      },
+      "terminalReleaseFieldsActuallyPresent": {},
+      "nuance": "The old quiet_acknowledged_at is not a fresh quiet acknowledgement and conflicts with any interpretation of present quiet: quiet_acknowledged=false and an official measurement is active. The old lockProbe only records past availability, not exclusivity.",
+      "futureCapture": "Wait for actual 4C measurement release and terminal publication before the final 5B phase. Then make a fresh 5B quiet request and retain current stopped execution plus either a fresh acknowledgement or an explicit terminal no-further-compute release. No such future receipt exists in this preparation."
+    },
+    {
+      "id": "5A",
+      "statusPath": "/workspace/shared/sra-coordination/lot5a-status.json",
+      "statusUpdatedAt": "2026-11-11T00:11:54.910557+00:00",
+      "observedClass": "terminal_historical_alias_of_own_5B",
+      "rawCurrentFields": {
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null,
+        "quiet_acknowledged": true
+      },
+      "terminalReleaseFieldsActuallyPresent": {
+        "stage": "Completed: first native0.53publication Site84 and documentation closure Site85 both succeeded privately. Final source a009e1f138bb18251d697f49647bacc615ee514f. Native/test/build/costs unchanged, all evidence retained. No further5Aexecution; releasing publication lock.",
+        "request_to_lot4b": "5A is actually published: Site85, native0.53, commit a009e1f138bb18251d697f49647bacc615ee514f. Integrate this real final successor before your validation/publication. Receipt: /workspace/shared/sra-coordination/published-5a-site85.json. All5Awork complete; compute released and publication lock released immediately after this write.",
+        "functional_release": "Explicit functional compute release:5A ABBA has ended and performance.lock is released.4B/7B may resume tests/builds/games. No further5A benchmark planned. Cost computation and source publication remain; actual5A published commit will follow before your release freezes."
+      },
+      "successorFieldsActuallyPresent": {
+        "continuation": "5B is now active source-only in /workspace/shared/sra-coordination/lot5b-status.json;10A has next cost/publication priority. No5B runtime compute started.",
+        "request_to_lot10a": "Fresh5B quiet acknowledgement covers all four workers; see lot5b-status.json. No tests/builds/exports/oracles/games/profiles/captures/archives/npm until explicit10A ABBA release.",
+        "quiet_acknowledged_at": "2026-11-11T00:11:54.910557+00:00"
+      },
+      "publishedReceipt": "/workspace/shared/sra-coordination/published-5a-site85.json",
+      "nuance": "This old acknowledgement belongs to the earlier 10A window. It is not future 5B quiet. The current own 5B workers must be accounted for separately; this historical alias is not a second independent active owner.",
+      "futureCapture": "Retain a fresh read of the terminal 5A status and link its successor to the actual own-worker stop records."
+    },
+    {
+      "id": "7A",
+      "statusPath": "/workspace/shared/sra-coordination/lot7a-status.json",
+      "statusUpdatedAt": "2026-11-10T21:24:13.816528+00:00",
+      "observedClass": "terminal_historical_alias_of_successor_7B",
+      "rawCurrentFields": {
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null,
+        "quiet_acknowledged": true,
+        "preview_stopped": true
+      },
+      "terminalReleaseFieldsActuallyPresent": {
+        "stage": "Delivered:7A native0.52 firstpublishedSite82 then documentationclosureSite83, bothsucceeded. Finalsourceclean. Publicationandcomputeslotsreleasedto5A.",
+        "request_to_lot4a": "Explicit release: official7A ABBA completed. Functional compute may resume; no further7A timing planned.",
+        "publication_complete": true,
+        "performance_complete": true,
+        "cost_window_finished_at": "2026-11-10T20:31:52.424397+00:00"
+      },
+      "successorFieldsActuallyPresent": {
+        "request": "7A fully deliveredSite83. Successor7Bexplicitlyquietfor5AupcomingABBA: source/text only, noexecution; see lot7b-status.json.",
+        "request_to_lot4b": "7AfinalSite83succeeded bed48116585da864dd5c412ed11dd6990a950e8e.5Anextpublication;7Bnowseparateworktree. Coordinate4B/7Borderafter5Areadiness. No7Afurthertiming."
+      },
+      "nuance": "The file retains source/text-only 7B messages and obsolete requests from former windows. Current successor coverage belongs to lot7b-status.json.",
+      "futureCapture": "Freshly observe the terminal 7A status and the current 7B status together; do not reuse an old 5A-window acknowledgement as a new one."
+    },
+    {
+      "id": "7B",
+      "statusPath": "/workspace/shared/sra-coordination/lot7b-status.json",
+      "statusUpdatedAt": "2026-11-11T00:03:07.031944+00:00",
+      "observedClass": "terminal_lane_with_explicit_no_further_compute",
+      "rawCurrentFields": {
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null,
+        "quiet_acknowledged": true,
+        "preview_stopped": true
+      },
+      "terminalReleaseFieldsActuallyPresent": {
+        "own_agents": "All work completed; no active commands, services, tests, campaigns or measurements.",
+        "functional_release": "All 7B execution and publication complete; no further 7B runtime, build, test, oracle or timing work planned.",
+        "publication_complete": true,
+        "documentationClosureComplete": true,
+        "publication_lock_state": "released",
+        "publication_lock_released_at": "2026-11-11T00:02:46.021115+00:00",
+        "cost_window_request": "Completed and accepted: A1/B1/B2/A2, 32 sessions, 400 actions; performance lock released. No further 7B timing planned."
+      },
+      "publishedReceipt": "/workspace/shared/sra-coordination/published-7b-site89.json",
+      "nuance": "The terminal statement is stronger than the old quiet_acknowledged_at. A future fresh read must still check for a continuation or changed active_command.",
+      "futureCapture": "A fresh observedAt after the 5B request may bind the unchanged terminal release statement; retain its actual old release time."
+    },
+    {
+      "id": "10A",
+      "statusPath": "/workspace/shared/sra-coordination/lot10a-status.json",
+      "statusUpdatedAt": "2026-11-11T00:45:33.605Z",
+      "observedClass": "terminal_lane_with_explicit_no_further_compute",
+      "rawCurrentFields": {
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null,
+        "quiet_acknowledged": true,
+        "preview_stopped": true,
+        "source_fetch_active": false
+      },
+      "terminalReleaseFieldsActuallyPresent": {
+        "own_agents": "All three own agents completed. No own tests, builds, replays, game campaigns, oracles, timing, services or preview remain.",
+        "no_further_lot10a_compute": true,
+        "request_to_lot5b": "FINAL10A RELEASE: private Site91 succeeded, native0.56.0, source5659ddc9420c7624df4865f0afc628782296a186. Full receipt /workspace/shared/sra-coordination/published-10a-site91.json. All own locks and compute released. Revised queue10A ->4C ->5B preserved; integrate actual4C successor before5B publication.",
+        "publication_complete": true,
+        "documentationClosureComplete": true,
+        "publication_lock_state": "released",
+        "publication_lock_released_at": "2026-11-11T00:45:06.556Z",
+        "closure_shared_lock_state": "released",
+        "closure_shared_lock_released_at": "2026-11-11T00:45:06.160Z"
+      },
+      "publishedReceipt": "/workspace/shared/sra-coordination/published-10a-site91.json",
+      "successorFieldsActuallyPresent": {
+        "next_sub_lot": "10B window_question"
+      },
+      "nuance": "10B is named as a next sub-lot but no 10B status file was present in the inspected directory. Do not infer that it is active or omit it if a status/continuation appears before the future window.",
+      "futureCapture": "Freshly reread terminal 10A and re-inventory the directory for any 10B continuation; bind terminal release only if its no-further-compute statement is still applicable."
+    },
+    {
+      "id": "4C-auxiliary",
+      "statusPath": "/workspace/shared/sra-coordination/lot4c-auxiliary-status.json",
+      "statusUpdatedAt": "2026-11-11T01:10:44.271352+00:00",
+      "observedClass": "auxiliary_quiet_for_current_4C_window_not_terminal",
+      "rawCurrentFields": {
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null,
+        "quiet_acknowledged": true
+      },
+      "quietFieldsActuallyPresent": {
+        "lot": "4C auxiliary workers only; excludes official ABBA runner",
+        "stage": "All functional tests, regressions, cold comparisons, real-game/browser runs, preview and untimed captures have finished. Only documentation/source-text review remains permitted until official window release. No test, build, oracle, Git, archive or other heavy command is active in an auxiliary 4C worker.",
+        "agents": [
+          "facet_component: acknowledged text-only quiet",
+          "facet_oracle: completed; shared lock released",
+          "facet_source_audit: read-only source review, no heavy execution"
+        ]
+      },
+      "terminalReleaseFieldsActuallyPresent": {},
+      "nuance": "This status explicitly excludes the active official ABBA runner and is scoped to the current 4C window. It must never substitute for 4C root release or imply permanent quiet after that window.",
+      "futureCapture": "Freshly cover every auxiliary worker after the future 5B request, through a new acknowledgement or an actual terminal 4C release explicitly including them. Keep this row distinct from the 4C runner row."
+    }
+  ],
+  "aliasGroups": [
+    {
+      "statuses": [
+        "4A",
+        "4B",
+        "4C"
+      ],
+      "relation": "Successive lots in the same /workspace/sites/sra-lot4a-20261110/.sites-checkout; the latest active 4C and its auxiliaries require actual current coverage."
+    },
+    {
+      "statuses": [
+        "5A",
+        "5B"
+      ],
+      "relation": "5A explicitly refers its continuation to the current own 5B status; the terminal alias is retained and own workers are captured separately."
+    },
+    {
+      "statuses": [
+        "7A",
+        "7B"
+      ],
+      "relation": "7A explicitly names successor 7B in a separate worktree; retain both terminal statuses and observe any further successor."
+    },
+    {
+      "statuses": [
+        "3I"
+      ],
+      "relation": "lot3-status.json names lot 3I; the aliases 3 and 3I refer to the same historical status, not two rows."
+    },
+    {
+      "statuses": [
+        "4C",
+        "4C-auxiliary"
+      ],
+      "relation": "Parent runner and auxiliary workers are distinct coverage rows; the auxiliary row excludes the runner."
+    }
+  ],
+  "ownWorkerPreparation": {
+    "statusPath": "/workspace/shared/sra-coordination/lot5b-status.json",
+    "observedStatusUpdatedAt": "2026-11-11T01:08:32.603053+00:00",
+    "acknowledgedCurrent4CWindowAt": "2026-11-11T01:08:32.603053+00:00",
+    "workersToAccountFor": [
+      "/root",
+      "/root/addressed_contract",
+      "/root/addressed_integration",
+      "/root/addressed_oracle"
+    ],
+    "workerNamesAreCurrentTaskIdentitiesNotFutureStopReceipts": true,
+    "observedScope": "Root has no active functional command; contract is completed; oracle and integration are limited to source/text work under the current 4C quiet instructions.",
+    "futureCapture": "Before the future 5B cost window, enumerate all then-tracked own workers, record actual execution end/stop times and local evidence, confirm no preview or background functional command remains. The official measurement runner is the declared exception; these rows cover all other own compute.",
+    "futureStoppedAtValuesNotInvented": true
+  },
+  "freshnessRequirements": {
+    "finalReceiptSchema": "logos-engine.coordinated-cost-isolation.v1",
+    "readinessSource": "docs/migration/lot5b-evidence/finalize-cost-readiness.py",
+    "defaultQuietMaximumAgeSeconds": 900,
+    "permittedConfiguredMaximumSeconds": 3600,
+    "actualFutureLimitMustComeFromDeclaredFinalInvocation": true,
+    "requiredLaneFields": [
+      "lot",
+      "observedAt",
+      "activeCommand",
+      "executionStopped",
+      "evidence"
+    ],
+    "requiredOwnWorkerFields": [
+      "id",
+      "stoppedAt",
+      "activeCommand",
+      "executionStopped",
+      "evidence"
+    ],
+    "sharedStatusCopiesBelongInsideCheckout": true,
+    "fingerprintsToBeCalculatedOnlyAtFutureFreshCapture": true,
+    "rules": [
+      "After actual 4C release/publication and when 5B is functionally ready, record a new requestedAt and re-inventory all status files.",
+      "Preserve the original shared status updated_at and release times. A new observedAt describes the actual fresh read, not a rewritten old acknowledgement.",
+      "For every non-terminal lane, require requestedAt <= acknowledgedAt <= observedAt <= recordedAt and an explicit stopped-execution statement.",
+      "For a genuinely terminal lane, terminalRelease=true may reuse its historical explicit no-further-compute statement only with a fresh observation after requestedAt and a retained releaseStatement. A paused or temporarily quiet lane is not terminal.",
+      "At readiness, recordedAt and every observedAt must be no older than the actual configured freshness limit and must not be in the future.",
+      "Account for every required lane and every then-tracked own worker exactly once; retain alias relationships without treating an old alias as coverage for an active successor.",
+      "Require activeCommand=null and executionStopped=true in future capture rows, with evidence supporting those claims; root must not manufacture them from an old boolean alone.",
+      "A lock file, a historical lock probe, a quiet_acknowledged flag or this preparation alone does not establish machine exclusivity. Retain actual cooperative acknowledgements and the exclusive window lock.",
+      "Recheck publication/source-fetch activity, previews, tests, builds, games, oracles, captures, profiling, archives and worker queues before the future window.",
+      "If 10B, 4D or any other continuation/status appears before capture, extend the declared inventory and obtain its applicable acknowledgement; this preparation is not a fixed ceiling."
+    ]
+  },
+  "finalCaptureStillNeeded": [
+    "Actual 4C terminal publication and measurement release.",
+    "Fresh 5B request and copied small status/terminal-release evidence after that request.",
+    "Fresh non-terminal acknowledgements covering 4C and all its auxiliaries if they have not been explicitly terminated.",
+    "Fresh re-inventory for any new successor lanes, including the announced but not observed 10B.",
+    "Actual own-worker execution-stop receipts for the then-current worker list.",
+    "A complete coordinated-isolation receipt with actual timestamps and small-file fingerprints, followed by the unmodified readiness gate."
+  ],
+  "qualification": "Read-only preparation during another lane's official measurement. Historical terminal releases, temporary acknowledgements and aliases remain distinct. No future quiet state, future publication, machine exclusivity or permission to measure is asserted. No WEAV budget or campaign state is changed."
+}

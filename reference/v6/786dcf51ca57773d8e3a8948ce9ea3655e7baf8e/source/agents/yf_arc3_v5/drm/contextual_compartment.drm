@@ -1,0 +1,875 @@
+{
+  "module_id": "contextual_compartment",
+  "declarations": [
+    {
+      "id": "principle.observed_compartment_changes_open_contextual_lifecycle_experiments",
+      "kind": "principle",
+      "family_ref": "family.interaction_configuration",
+      "abstraction_level": "causal_variant",
+      "general_principle_refs": [
+        "principle.action_conditioned_multiframe_transition_opens_process_supposition"
+      ],
+      "premises": [
+        "equal_framed_contents_adjoin_one_pattern_and_one_parallel_cavity",
+        "graphical_identity_can_propose_but_not_confirm_a_transfer",
+        "jointly_present_contents_can_motivate_one_activation_experiment",
+        "local_activity_can_motivate_one_progress_experiment",
+        "new_parallel_content_can_motivate_one_contextual_dispatch_experiment"
+      ],
+      "invariants": [
+        "retain_occlusion_displacement_and_transformation_alternatives",
+        "no_complete_recipe_or_timing_law_from_appearance_alone",
+        "method_recall_never_renews_current_evidence",
+        "canonical_why_and_act_remain_independent"
+      ],
+      "falsifiers": [
+        "current_frame_geometry_or_sealed_transition_disagrees",
+        "two_relevant_experiments_remain_and_no_common_prefix_is_justified"
+      ],
+      "reason_refs": [
+        "reason.current_contextual_compartment_question"
+      ]
+    },
+    {
+      "id": "policy.contextual_compartment_scope",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "contextual_compartment.describe_current",
+        "contextual_compartment.retain_unknown"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.contextual_compartment.current_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "contextual_compartment.describe_current"
+            },
+            {
+              "field": "compartment_geometry_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "compartment_current_model_fits",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "compartment_point_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "committed_plan_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "compartment_scope_admitted": true
+          }
+        },
+        {
+          "id": "projection.contextual_compartment.unknown_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "contextual_compartment.retain_unknown"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.compartment.current_scope",
+          "all_conditions": [
+            {
+              "field": "compartment_scope_admitted",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.current_contextual_compartment_question"
+        },
+        {
+          "id": "tier.compartment.unknown_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "contextual_compartment.retain_unknown"
+            }
+          ],
+          "reason_ref": "reason.current_contextual_compartment_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "compartment_current_model_fits",
+          "preferred_order": "maximize"
+        }
+      ],
+      "invariants": [
+        "roles_remain_conditional",
+        "one_current_experiment_only",
+        "unacquired_temporal_laws_remain_unknown"
+      ],
+      "reason_refs": [
+        "reason.current_contextual_compartment_question"
+      ]
+    },
+    {
+      "id": "policy.contextual_compartment_description",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.compartment.parallel_matches_missing_outside_value",
+          "all_conditions": [
+            {
+              "field": "compartment_description_unknown",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "compartment_description_kind_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "description_kind",
+              "operator": "equals",
+              "expected": "parallel_matches_missing_outside_value"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "compartment_description_admitted": true,
+            "compartment_question_ref": "subgoal.test_linked_content_transfer",
+            "compartment_expected_relation_ref": "relation.matching_content_may_relocate_to_missing_member",
+            "compartment_falsifier_refs": [
+              "falsifier.test_linked_content_transfer.sealed_response_disagrees"
+            ],
+            "compartment_candidate_scope": "current_admitted_point"
+          },
+          "templated_facts": {
+            "compartment_model_term_ref": "model.compartment.{level_index}.{geometry_token}",
+            "compartment_model_claim_ref": "claim.compartment.{level_index}.{geometry_token}",
+            "compartment_witness_term_ref": "witness.compartment.{frame_token}.{word_token}",
+            "compartment_witness_claim_ref": "claim.compartment.witness.{frame_token}.{word_token}",
+            "compartment_expectation_ref": "expectation.compartment.{frame_token}.{word_token}",
+            "compartment_experiment_ref": "experiment.compartment.{frame_token}.{word_token}",
+            "compartment_model_claim_refs": [
+              "claim.compartment.{level_index}.{geometry_token}"
+            ],
+            "compartment_witness_claim_refs": [
+              "claim.compartment.witness.{frame_token}.{word_token}"
+            ]
+          },
+          "sequence_compositions": [
+            {
+              "output_field": "compartment_premise_claim_refs",
+              "source_fields": [
+                "compartment_model_claim_refs",
+                "compartment_witness_claim_refs"
+              ],
+              "max_items": 16,
+              "unique_items": true
+            }
+          ]
+        },
+        {
+          "id": "projection.compartment.jointly_populated_group_with_unfilled_parallel",
+          "all_conditions": [
+            {
+              "field": "compartment_description_unknown",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "compartment_description_kind_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "description_kind",
+              "operator": "equals",
+              "expected": "jointly_populated_group_with_unfilled_parallel"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "compartment_description_admitted": true,
+            "compartment_question_ref": "subgoal.test_joint_content_activation",
+            "compartment_expected_relation_ref": "relation.joint_contents_may_clear_into_activity_or_new_output",
+            "compartment_falsifier_refs": [
+              "falsifier.test_joint_content_activation.sealed_response_disagrees"
+            ],
+            "compartment_candidate_scope": "current_admitted_point"
+          },
+          "templated_facts": {
+            "compartment_model_term_ref": "model.compartment.{level_index}.{geometry_token}",
+            "compartment_model_claim_ref": "claim.compartment.{level_index}.{geometry_token}",
+            "compartment_witness_term_ref": "witness.compartment.{frame_token}.{word_token}",
+            "compartment_witness_claim_ref": "claim.compartment.witness.{frame_token}.{word_token}",
+            "compartment_expectation_ref": "expectation.compartment.{frame_token}.{word_token}",
+            "compartment_experiment_ref": "experiment.compartment.{frame_token}.{word_token}",
+            "compartment_model_claim_refs": [
+              "claim.compartment.{level_index}.{geometry_token}"
+            ],
+            "compartment_witness_claim_refs": [
+              "claim.compartment.witness.{frame_token}.{word_token}"
+            ]
+          },
+          "sequence_compositions": [
+            {
+              "output_field": "compartment_premise_claim_refs",
+              "source_fields": [
+                "compartment_model_claim_refs",
+                "compartment_witness_claim_refs"
+              ],
+              "max_items": 16,
+              "unique_items": true
+            }
+          ]
+        },
+        {
+          "id": "projection.compartment.cleared_group_and_changed_adjacent_pattern",
+          "all_conditions": [
+            {
+              "field": "compartment_description_unknown",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "compartment_description_kind_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "description_kind",
+              "operator": "equals",
+              "expected": "cleared_group_and_changed_adjacent_pattern"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "compartment_description_admitted": true,
+            "compartment_question_ref": "subgoal.test_active_pattern_progress",
+            "compartment_expected_relation_ref": "relation.local_activity_may_advance_or_make_output_available",
+            "compartment_falsifier_refs": [
+              "falsifier.test_active_pattern_progress.sealed_response_disagrees"
+            ],
+            "compartment_candidate_scope": "current_admitted_point"
+          },
+          "templated_facts": {
+            "compartment_model_term_ref": "model.compartment.{level_index}.{geometry_token}",
+            "compartment_model_claim_ref": "claim.compartment.{level_index}.{geometry_token}",
+            "compartment_witness_term_ref": "witness.compartment.{frame_token}.{word_token}",
+            "compartment_witness_claim_ref": "claim.compartment.witness.{frame_token}.{word_token}",
+            "compartment_expectation_ref": "expectation.compartment.{frame_token}.{word_token}",
+            "compartment_experiment_ref": "experiment.compartment.{frame_token}.{word_token}",
+            "compartment_model_claim_refs": [
+              "claim.compartment.{level_index}.{geometry_token}"
+            ],
+            "compartment_witness_claim_refs": [
+              "claim.compartment.witness.{frame_token}.{word_token}"
+            ]
+          },
+          "sequence_compositions": [
+            {
+              "output_field": "compartment_premise_claim_refs",
+              "source_fields": [
+                "compartment_model_claim_refs",
+                "compartment_witness_claim_refs"
+              ],
+              "max_items": 16,
+              "unique_items": true
+            }
+          ]
+        },
+        {
+          "id": "projection.compartment.new_parallel_content_after_adjacent_contact",
+          "all_conditions": [
+            {
+              "field": "compartment_description_unknown",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "compartment_description_kind_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "description_kind",
+              "operator": "equals",
+              "expected": "new_parallel_content_after_adjacent_contact"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "compartment_description_admitted": true,
+            "compartment_question_ref": "subgoal.test_same_control_with_new_output",
+            "compartment_expected_relation_ref": "relation.new_output_may_transfer_to_connected_endpoint",
+            "compartment_falsifier_refs": [
+              "falsifier.test_same_control_with_new_output.sealed_response_disagrees"
+            ],
+            "compartment_candidate_scope": "current_admitted_point"
+          },
+          "templated_facts": {
+            "compartment_model_term_ref": "model.compartment.{level_index}.{geometry_token}",
+            "compartment_model_claim_ref": "claim.compartment.{level_index}.{geometry_token}",
+            "compartment_witness_term_ref": "witness.compartment.{frame_token}.{word_token}",
+            "compartment_witness_claim_ref": "claim.compartment.witness.{frame_token}.{word_token}",
+            "compartment_expectation_ref": "expectation.compartment.{frame_token}.{word_token}",
+            "compartment_experiment_ref": "experiment.compartment.{frame_token}.{word_token}",
+            "compartment_model_claim_refs": [
+              "claim.compartment.{level_index}.{geometry_token}"
+            ],
+            "compartment_witness_claim_refs": [
+              "claim.compartment.witness.{frame_token}.{word_token}"
+            ]
+          },
+          "sequence_compositions": [
+            {
+              "output_field": "compartment_premise_claim_refs",
+              "source_fields": [
+                "compartment_model_claim_refs",
+                "compartment_witness_claim_refs"
+              ],
+              "max_items": 16,
+              "unique_items": true
+            }
+          ]
+        },
+        {
+          "id": "projection.compartment.unknown_description",
+          "all_conditions": [
+            {
+              "field": "compartment_description_unknown",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "compartment_description_admitted": false
+          }
+        },
+        {
+          "id": "projection.compartment.known_group_has_matching_parallel_content",
+          "all_conditions": [
+            {
+              "field": "compartment_description_unknown",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "description_kind",
+              "operator": "equals",
+              "expected": "known_group_has_matching_parallel_content"
+            },
+            {
+              "field": "compartment_origin_group_contains_known_effectful_point",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "compartment_description_admitted": true,
+            "compartment_question_ref": "subgoal.test_same_control_with_new_output",
+            "compartment_expected_relation_ref": "relation.same_bound_control_may_inject_new_output",
+            "compartment_falsifier_refs": [
+              "falsifier.test_same_control_with_new_output.sealed_response_disagrees"
+            ],
+            "compartment_candidate_scope": "current_admitted_point"
+          },
+          "templated_facts": {
+            "compartment_model_term_ref": "model.compartment.{level_index}.{geometry_token}",
+            "compartment_model_claim_ref": "claim.compartment.{level_index}.{geometry_token}",
+            "compartment_witness_term_ref": "witness.compartment.{frame_token}.{word_token}",
+            "compartment_witness_claim_ref": "claim.compartment.witness.{frame_token}.{word_token}",
+            "compartment_expectation_ref": "expectation.compartment.{frame_token}.{word_token}",
+            "compartment_experiment_ref": "experiment.compartment.{frame_token}.{word_token}",
+            "compartment_model_claim_refs": [
+              "claim.compartment.{level_index}.{geometry_token}"
+            ],
+            "compartment_witness_claim_refs": [
+              "claim.compartment.witness.{frame_token}.{word_token}"
+            ]
+          },
+          "sequence_compositions": [
+            {
+              "output_field": "compartment_premise_claim_refs",
+              "source_fields": [
+                "compartment_model_claim_refs",
+                "compartment_witness_claim_refs"
+              ],
+              "max_items": 16,
+              "unique_items": true
+            }
+          ]
+        },
+        {
+          "id": "projection.compartment.connected_patch_matches_missing_outside_value",
+          "all_conditions": [
+            {
+              "field": "compartment_description_unknown",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "description_kind",
+              "operator": "equals",
+              "expected": "connected_patch_matches_missing_outside_value"
+            },
+            {
+              "field": "compartment_connected_patch_clearance",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "compartment_connected_patch_outside_groups",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "compartment_description_admitted": true,
+            "compartment_question_ref": "subgoal.test_connected_content_supply",
+            "compartment_expected_relation_ref": "relation.connected_content_may_populate_matching_missing_member",
+            "compartment_falsifier_refs": [
+              "falsifier.test_connected_content_supply.sealed_response_disagrees"
+            ],
+            "compartment_candidate_scope": "current_admitted_point"
+          },
+          "templated_facts": {
+            "compartment_model_term_ref": "model.compartment.{level_index}.{geometry_token}",
+            "compartment_model_claim_ref": "claim.compartment.{level_index}.{geometry_token}",
+            "compartment_witness_term_ref": "witness.compartment.{frame_token}.{word_token}",
+            "compartment_witness_claim_ref": "claim.compartment.witness.{frame_token}.{word_token}",
+            "compartment_expectation_ref": "expectation.compartment.{frame_token}.{word_token}",
+            "compartment_experiment_ref": "experiment.compartment.{frame_token}.{word_token}",
+            "compartment_model_claim_refs": [
+              "claim.compartment.{level_index}.{geometry_token}"
+            ],
+            "compartment_witness_claim_refs": [
+              "claim.compartment.witness.{frame_token}.{word_token}"
+            ]
+          },
+          "sequence_compositions": [
+            {
+              "output_field": "compartment_premise_claim_refs",
+              "source_fields": [
+                "compartment_model_claim_refs",
+                "compartment_witness_claim_refs"
+              ],
+              "max_items": 16,
+              "unique_items": true
+            }
+          ]
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.compartment.new_output_at_known_control",
+          "all_conditions": [
+            {
+              "field": "compartment_description_admitted",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "description_kind",
+              "operator": "equals",
+              "expected": "new_parallel_content_after_adjacent_contact"
+            }
+          ],
+          "reason_ref": "reason.current_contextual_compartment_question"
+        },
+        {
+          "id": "tier.compartment.known_control_with_matching_output",
+          "all_conditions": [
+            {
+              "field": "compartment_description_admitted",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "description_kind",
+              "operator": "equals",
+              "expected": "known_group_has_matching_parallel_content"
+            }
+          ],
+          "reason_ref": "reason.current_contextual_compartment_question"
+        },
+        {
+          "id": "tier.compartment.matching_exposed_content",
+          "all_conditions": [
+            {
+              "field": "compartment_description_admitted",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "description_kind",
+              "operator": "equals",
+              "expected": "parallel_matches_missing_outside_value"
+            }
+          ],
+          "reason_ref": "reason.current_contextual_compartment_question"
+        },
+        {
+          "id": "tier.compartment.populated_group_activation",
+          "all_conditions": [
+            {
+              "field": "compartment_description_admitted",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "description_kind",
+              "operator": "equals",
+              "expected": "jointly_populated_group_with_unfilled_parallel"
+            }
+          ],
+          "reason_ref": "reason.current_contextual_compartment_question"
+        },
+        {
+          "id": "tier.compartment.connected_filled_patch_supply",
+          "all_conditions": [
+            {
+              "field": "compartment_description_admitted",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "description_kind",
+              "operator": "equals",
+              "expected": "connected_patch_matches_missing_outside_value"
+            }
+          ],
+          "reason_ref": "reason.current_contextual_compartment_question"
+        },
+        {
+          "id": "tier.compartment.activity_progress_after_productive_questions",
+          "all_conditions": [
+            {
+              "field": "compartment_description_admitted",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "description_kind",
+              "operator": "equals",
+              "expected": "cleared_group_and_changed_adjacent_pattern"
+            }
+          ],
+          "reason_ref": "reason.current_contextual_compartment_question"
+        },
+        {
+          "id": "tier.compartment.unknown_description",
+          "all_conditions": [
+            {
+              "field": "compartment_description_unknown",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.current_contextual_compartment_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "compartment_description_unknown",
+          "preferred_order": "minimize"
+        },
+        {
+          "field": "compartment_parallel_content_area",
+          "preferred_order": "minimize",
+          "reason_ref": "reason.current_contextual_compartment_question"
+        },
+        {
+          "field": "compartment_connected_patch_clearance",
+          "preferred_order": "maximize",
+          "reason_ref": "reason.current_contextual_compartment_question"
+        },
+        {
+          "field": "compartment_connected_patch_area",
+          "preferred_order": "maximize",
+          "reason_ref": "reason.current_contextual_compartment_question"
+        },
+        {
+          "field": "compartment_point_row",
+          "preferred_order": "minimize",
+          "reason_ref": "reason.current_contextual_compartment_question"
+        },
+        {
+          "field": "compartment_point_column",
+          "preferred_order": "minimize",
+          "reason_ref": "reason.current_contextual_compartment_question"
+        }
+      ],
+      "invariants": [
+        "roles_remain_conditional",
+        "one_current_experiment_only",
+        "unacquired_temporal_laws_remain_unknown"
+      ],
+      "reason_refs": [
+        "reason.current_contextual_compartment_question"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.revisable_compartment_memory"
+      }
+    },
+    {
+      "id": "rule.revisable_compartment_memory",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "relation_family": "structural",
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "premises": [
+        "current_bound_equal_frame_group_adjacent_pattern_and_parallel_cavity",
+        "current_informative_experiment_selected_by_declared_source_policy"
+      ],
+      "invariants": [
+        "method_and_current_observation_are_separate",
+        "occlusion_displacement_and_transformation_remain_alternatives",
+        "no_recipe_duration_yield_or_expiry_law_is_invented",
+        "one_current_experiment_not_a_committed_schedule"
+      ],
+      "falsifiers": [
+        "sealed_response_contradicts_the_current_experiment_expectation"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "model.compartment.{level_index}.{geometry_token}",
+          "kind": "schema",
+          "label": "conditional compartment lifecycle schema",
+          "required_fields": [
+            "model",
+            "level_index",
+            "geometry_token",
+            "frame_ref"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.revisable_contextual_compartment.v1",
+            "commitment": "revisable",
+            "action_authorization": false,
+            "canonical_fact_projection_enabled": true,
+            "conditional_geometry_and_question_not_world_law": true,
+            "occlusion_displacement_transformation_remain_alternatives": true
+          },
+          "attribute_bindings": {
+            "model": "model",
+            "level_index": "level_index",
+            "measurement_ref": "measurement_ref",
+            "scope_counter": "scope_counter",
+            "model_signature": "model_token",
+            "acquisition_observation_ref": "frame_ref"
+          },
+          "all_conditions": [
+            {
+              "field": "prior_model_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id_pattern": "goal.progress_contextual_compartment_lifecycle",
+          "kind": "schema",
+          "label": "conditional compartment lifecycle schema",
+          "required_fields": [
+            "model"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.compartment_goal.v1",
+            "goal_ref": "goal.progress_contextual_compartment_lifecycle",
+            "commitment": "revisable",
+            "action_authorization": false,
+            "conditional_geometry_and_question_not_world_law": true,
+            "occlusion_displacement_transformation_remain_alternatives": true
+          },
+          "attribute_bindings": {
+            "model": "model",
+            "level_index": "level_index",
+            "scope_counter": "scope_counter"
+          },
+          "all_conditions": [
+            {
+              "field": "prior_model_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id_pattern": "witness.compartment.{frame_token}.{word_token}",
+          "kind": "schema",
+          "label": "conditional compartment lifecycle schema",
+          "required_fields": [
+            "model",
+            "frame_ref",
+            "description",
+            "scope_counter",
+            "compartment_model_term_ref",
+            "compartment_question_ref",
+            "compartment_expected_relation_ref"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.current_compartment_witness.v1",
+            "action_authorization": false,
+            "conditional_geometry_and_question_not_world_law": true,
+            "occlusion_displacement_transformation_remain_alternatives": true
+          },
+          "attribute_bindings": {
+            "model_ref": "compartment_model_term_ref",
+            "model_claim_ref": "compartment_model_claim_ref",
+            "model_signature": "model_token",
+            "scope_counter": "scope_counter",
+            "observation_ref": "frame_ref",
+            "measurement_ref": "measurement_ref",
+            "word_ref": "word_ref",
+            "description": "description",
+            "operational_scene_ref": "frame_ref",
+            "question_ref": "compartment_question_ref",
+            "expected_relation_ref": "compartment_expected_relation_ref",
+            "falsifier_refs": "compartment_falsifier_refs"
+          }
+        },
+        {
+          "id_pattern": "expectation.compartment.{frame_token}.{word_token}",
+          "kind": "schema",
+          "label": "conditional compartment lifecycle schema",
+          "required_fields": [
+            "description",
+            "frame_ref",
+            "compartment_question_ref",
+            "compartment_expected_relation_ref"
+          ],
+          "static_attributes": {
+            "conditional": true,
+            "requires_sealed_response": true,
+            "conditional_geometry_and_question_not_world_law": true,
+            "occlusion_displacement_transformation_remain_alternatives": true
+          },
+          "attribute_bindings": {
+            "model_ref": "compartment_model_term_ref",
+            "current_witness_ref": "compartment_witness_term_ref",
+            "description": "description",
+            "observation_ref": "frame_ref",
+            "question_ref": "compartment_question_ref",
+            "expected_relation_ref": "compartment_expected_relation_ref",
+            "falsifier_refs": "compartment_falsifier_refs"
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.current_contextual_compartment_question"
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.compartment.{level_index}.{geometry_token}",
+          "predicate": "conditional_compartment_geometry_supports_lifecycle_question",
+          "family": "structural",
+          "epistemic_status": "supported",
+          "required_fields": [
+            "model",
+            "level_index",
+            "geometry_token"
+          ],
+          "required_term_patterns": [
+            "model.compartment.{level_index}.{geometry_token}"
+          ],
+          "argument_patterns": [
+            "model.compartment.{level_index}.{geometry_token}"
+          ],
+          "static_attributes": {
+            "authorizes_action": false,
+            "universal_world_law": false,
+            "requires_current_revalidation": true
+          },
+          "all_conditions": [
+            {
+              "field": "prior_model_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "attribute_bindings": {}
+        },
+        {
+          "id_pattern": "claim.compartment.witness.{frame_token}.{word_token}",
+          "predicate": "current_compartment_geometry_and_question_bound",
+          "family": "structural",
+          "epistemic_status": "supported",
+          "required_fields": [
+            "compartment_witness_term_ref",
+            "compartment_model_term_ref",
+            "frame_ref"
+          ],
+          "required_term_patterns": [
+            "witness.compartment.{frame_token}.{word_token}"
+          ],
+          "argument_patterns": [
+            "{compartment_witness_term_ref}",
+            "{compartment_model_term_ref}",
+            "{frame_ref}"
+          ],
+          "static_attributes": {
+            "conditional_model_not_world_law": true,
+            "authorizes_action": false,
+            "requires_current_revalidation": true
+          },
+          "attribute_bindings": {
+            "model_signature": "model_token",
+            "scope_counter": "scope_counter",
+            "observation_ref": "frame_ref",
+            "word_ref": "word_ref"
+          }
+        }
+      ]
+    }
+  ]
+}

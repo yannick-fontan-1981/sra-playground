@@ -1,0 +1,579 @@
+{
+  "schema": "logos-engine.lot9a.delivery-preparation-review.v1",
+  "status": "common_static_preparation_favorable_work_initial_preparation_frozen_separately",
+  "reviewer": "/root/chart_geometry",
+  "reviewDateUtc": "2026-11-12",
+  "reviewMethod": "Lecture statique des outils et protocoles; vérifications de données et empreintes seulement. Aucun moteur, oracle, test ou capture native exécuté par le reviewer.",
+  "sourceIdentityAndBuild": {
+    "status": "literal_and_retained_build_artifacts_verified_without_execution",
+    "baselineHead": "8462204043aa368faa7df280d796bb706eb53b38",
+    "baselineCount": 331,
+    "baselineDigest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+    "priorCandidateDigest": "80173ed808e90e721939070f4d0087cba1d51fd396cc700dede3699333215bb7",
+    "candidateCount": 334,
+    "candidateDigest": "e7a94fbc7cdcb19d8704b5d4120f27a858cbcd07e455084711510ee147f4e653",
+    "candidateVersion": "0.68.0",
+    "inverseLiteralSubstitutionExact": true,
+    "addedNativeFiles": [
+      "src/logos-engine/v6-chart-navigation-geometry.ts",
+      "src/logos-engine/v6-chart-navigation-policy.ts",
+      "src/logos-engine/v6-chart-navigation.ts"
+    ],
+    "changedNativeFiles": [
+      "src/logos-engine/v6-native-runtime.ts"
+    ],
+    "removedNativeFiles": [],
+    "historicalTestsRetainedNotRerun": 175,
+    "build": {
+      "receiptStatus": "passed",
+      "elapsedSeconds": 11.36274305400002,
+      "inputsVerified": 373,
+      "sourceHead": "dcd6b5b7027615ae37eb5afd02d704987f12702f",
+      "nativeSessions": 0,
+      "physicalReturns": 0,
+      "typeScriptIncluded": true,
+      "fileCount": 74,
+      "totalBytes": 30149887,
+      "allFilesHashVerified": true,
+      "worker": {
+        "path": "dist/assets/v6-agent-worker-BQvVnNgs.js",
+        "bytes": 7044703,
+        "sha256": "fe31e2caff224557a8bd97bcdb541be7c0f61049317b8dee1e5b4ef3be2c0478"
+      },
+      "publicationPerformed": false
+    },
+    "fingerprints": {
+      "identity-reconciliation.json": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/identity-reconciliation.json",
+        "bytes": 1672,
+        "sha256": "9e04b6dca5af3abf5b4fc244e0c374a50959f02c9eeb8b9b186c847974ad17d8"
+      },
+      "version-reservation.json": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/version-reservation.json",
+        "bytes": 898,
+        "sha256": "83f3a8be9bdc4c5f16870e0ac0d2333aeafede481e66e81cc64fc132e1917161"
+      },
+      "baseline-native.json": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/baseline-native.json",
+        "bytes": 39333,
+        "sha256": "18fcc15c6e57f1bf6aab33cc62498e6a5a76836d85b890378be957a0e6da1c57"
+      },
+      "candidate-native.json": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/candidate-native.json",
+        "bytes": 39694,
+        "sha256": "10ef61a1b937cbfca47332f7138a4bd1872323434eee2c3b41c0d0fea81f5379"
+      },
+      "prior-candidate-native.json": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/prior-candidate-native.json",
+        "bytes": 39694,
+        "sha256": "32a4ea393991353e701a15b634fdf8e1bc5ef58252ec756b552861e49c7dce91"
+      },
+      "build-execution-plan.json": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/build-execution-plan.json",
+        "bytes": 66475,
+        "sha256": "3ab2480c94795d72fb1d2d9530ded5cc1d20c379fc07ad8db40f728fa1be8721"
+      },
+      "build-01/receipt.json": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/build-01/receipt.json",
+        "bytes": 2199,
+        "sha256": "620b36463c5dfdbe5f9b7432b90db627c62bd1b6b206eed9f3fd5b5bc9bc6a40"
+      },
+      "build-manifest.json": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/build-manifest.json",
+        "bytes": 11802,
+        "sha256": "f11d98880eb82086035a23453e388a3dfcff8443531a3e0e793cd4a0c0bc4225"
+      }
+    },
+    "engineExecutionsByReviewer": 0,
+    "sourceOracleExecutionsByReviewer": 0
+  },
+  "reviewedHistoricalBasis": [
+    "docs/migration/lot8b-evidence/tools/final-functional/work-forms/capture-cost-owner-graphs.mjs",
+    "docs/migration/lot8b-evidence/tools/final-functional/work-forms/record-owner-source-inventory.mjs",
+    "docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs-v2.mjs",
+    "docs/migration/lot8b-evidence/tools/final-functional/run-functional-command.py",
+    "docs/migration/lot8b-evidence/final-performance-067-01/protocol.md",
+    "docs/migration/lot8b-evidence/final-performance-067-01/contract.json",
+    "docs/migration/lot8b-evidence/tools/final-cost/review.py"
+  ],
+  "derivativeReviewProgress": {
+    "workFormsCaptureAndInventory": {
+      "status": "review_complete_in_immutable_separate_report",
+      "review": {
+        "path": "docs/migration/lot9a-evidence/work-delivery-preparation-review.json",
+        "sha256": "0fd003eae1e7923466f1beee504549d577861c3046176863e0878cb98db4851a",
+        "status": "favorable_static_work_preparation_with_explicit_descriptive_metadata_reservation"
+      }
+    },
+    "pairedGraphReader": {
+      "status": "review_complete_in_immutable_separate_report",
+      "review": {
+        "path": "docs/migration/lot9a-evidence/work-delivery-preparation-review.json",
+        "sha256": "0fd003eae1e7923466f1beee504549d577861c3046176863e0878cb98db4851a",
+        "status": "favorable_static_work_preparation_with_explicit_descriptive_metadata_reservation"
+      },
+      "fixedFindings": [
+        {
+          "id": "partial_consumption",
+          "status": "fixed_before_capture",
+          "resolution": "sessionStarts, initializedSessions and physicalReturns are independent of completed shapes, retained in points/errors/sessions/receipt, and recomputed by the reader. Historical actions is not used to erase incomplete-session consumption."
+        },
+        {
+          "id": "factory_identity",
+          "status": "fixed_before_capture",
+          "resolution": "Each graph sourceDigest must equal the separately inventoried role factorySourceDigest. The native source-byte digest remains a different identity."
+        },
+        {
+          "id": "activation_root",
+          "status": "fixed_before_capture",
+          "resolution": "New Chart activation is checked as revision 1, active, enabled:true, and exact initialize/family.install cause; state and program roots have their own independent bindings."
+        },
+        {
+          "id": "corrective_reader_paths",
+          "status": "fixed_before_capture",
+          "resolution": "The initial plan selects attempt01 explicitly. A retained prospective amendment binds changed tools/capture paths and preserves budgetKey, maximumAttempts and cumulative active allowance."
+        }
+      ],
+      "remainingDescriptiveReservation": {
+        "blocking": false,
+        "field": "provenance.historicalCaseRowsExact",
+        "recordedValue": true,
+        "literalEntireRowsEqual": false,
+        "functionalInputsExactlyEqual": [
+          "id",
+          "trace",
+          "traceSha256",
+          "actions",
+          "targetLevels",
+          "warmupActions"
+        ],
+        "descriptiveDifference": "Only purpose text inside each case row changes BranchRouting to Chart; top-level scope/provenance metadata also changes explicitly. The true claim is exact functional case inputs, not byte-identical or fully equal case rows.",
+        "rootQualification": {
+          "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-case-metadata-qualification.json",
+          "bytes": 875,
+          "sha256": "116149773ec2a91c8dcfac3f0fc96a400718cfd5a51f351b7a0802318759feab"
+        }
+      }
+    },
+    "chartCommonCaptureAndReader": {
+      "status": "favorable_static_preparation",
+      "plan": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/common-execution-plan.json",
+        "bytes": 72772,
+        "sha256": "e8ca9501bc5afe4934598886ff7ae3fcfc6c134d149e29099c37da5490caf950"
+      },
+      "declaration": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/common-declaration.json",
+        "bytes": 5151,
+        "sha256": "10fc90c627a560938ff7b3b170ec43968a02eb2550e21c67a41c8b939e2f45e4"
+      },
+      "allPlanPinsVerified": 377,
+      "allDeclarationPinsVerified": 15,
+      "toolAndProtocolFingerprints": [
+        {
+          "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/README.md",
+          "bytes": 10075,
+          "sha256": "62d87c395c59c0f77d2fb12820800038b9b136325fba7ab8bd1627f47b88f052"
+        },
+        {
+          "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/capture.mjs",
+          "bytes": 34753,
+          "sha256": "096311ef408c20f70061ca5d67ec97ccf779327091c5b8416e828521b6d2b9ac"
+        },
+        {
+          "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/derivation-diffs/capture-vs-branch-common-capture-v2.diff",
+          "bytes": 68011,
+          "sha256": "2887f39d2c376e4218b9d6a4007db20b0be71373070a853d0651dc56ace68cb3"
+        },
+        {
+          "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/derivation-diffs/capture-vs-public-boundary-capture-v2.diff",
+          "bytes": 72955,
+          "sha256": "2ebf260cddbae7df5d643e161bb6fa55a82e2c88078f44ed29838cacbf2171da"
+        },
+        {
+          "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/derivation-diffs/qualify-vs-branch-common-qualify-v2.diff",
+          "bytes": 99643,
+          "sha256": "1289fff2d417e3eca25d11500f0cd2da940b60065ec25029bf9d8351ca63c393"
+        },
+        {
+          "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/derivation-diffs/qualify-vs-public-boundary-qualify-v2.diff",
+          "bytes": 115937,
+          "sha256": "5a92771a30741475fc32fc8058c4519d3c2bec3b6209bc080b3da2b4e258da75"
+        },
+        {
+          "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/preparation-plan.json",
+          "bytes": 5738,
+          "sha256": "0129015a8a56c0000f69ac4cd10f270ab0e050e8bd143b3d0d08a0d66e3136d9"
+        },
+        {
+          "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/provenance.json",
+          "bytes": 7243,
+          "sha256": "8a0cfb34215d882bcf72ba6fe1f348bbc443a3e15eaff0a61fa32856edb6eed3"
+        },
+        {
+          "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/qualify.mjs",
+          "bytes": 39886,
+          "sha256": "edc24c0c2896cb0497606810ba06bb58fbf815c9690ae0f2834126359eb4b638"
+        },
+        {
+          "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/syntax-checks.json",
+          "bytes": 1221,
+          "sha256": "d7589ca5a17bb8e13a122d1541f6898ecc3a0becec935c236be3cb4e52614410"
+        }
+      ],
+      "provenance": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/provenance.json",
+        "bytes": 7243,
+        "sha256": "8a0cfb34215d882bcf72ba6fe1f348bbc443a3e15eaff0a61fa32856edb6eed3"
+      },
+      "fourCompleteUnifiedDiffsReconstructedExactly": true,
+      "retainedSyntaxChecks": 2,
+      "syntaxOnlyNotNativeExecution": true,
+      "sourceProofs": [
+        "Actual complete production factory and cold owner; source subquestion position 24; no selection group filtering.",
+        "All 14 source-state fields are compared to the recovered original fixture after active/passive acquisition.",
+        "Unchanged 64×64 source rasters and full ordered returned frame packets are retained and checked.",
+        "Exactly one recordSource per physical return; the nested record wrapper is separately identified and is not counted twice.",
+        "The five exact method sequences contain 52 points, 5 session starts and 9 physical returns.",
+        "Full result.snapshot equals the separately retained runtime.snapshot after every native yield; proposal, decision, whyAct and trace are never projected away.",
+        "Every complete graph and delta chain is reconstructed and checked; SHA-addressed blobs verify both compressed and raw content and remain unchanged through qualification.",
+        "Historical native restore arguments match the actual family_state root and hydrated fragments at graphAtStart.",
+        "Source put precedes get precedes restore; restored values match the actual committed chart_navigation_state fact.",
+        "The two explicit cold resets are separate from source-fact restorations and are demonstrably repaired by the common graph.",
+        "Ablation retains the physical return while suppressing only its declared recordSource acquisition.",
+        "Passive cases disable Chart via the supported edit API after a real gain; the same owner receives the foreign return with proposal:null.",
+        "Header declaration, declarationPin and source HEAD agree with the frozen files and retained receipt.",
+        "Session/return/point counters, footer and cumulative history are independently reconstructed and checked; previous receipts are hash-verified and remain stable."
+      ],
+      "correctedBeforeFreeze": [
+        "Pre-initialize authorization identity is null, avoiding an uninitialized authority call.",
+        "lastYield is distinct from last inspect point when linking the authorized action to its physical return.",
+        "Full snapshot and exact work-form sequence checks added.",
+        "Header/declaration/HEAD linkage and independently reconstructed receipt/footer/history totals added."
+      ],
+      "blockingFindingsRemaining": [],
+      "proofLimit": "Structural and execution-evidence linkage for this declared bounded synthetic corpus. No universal provenance/authenticity or all-V5 parity claim."
+    },
+    "rootFunctionalDeclaration": {
+      "status": "work_and_common_scopes_frozen_and_all_pins_verified",
+      "budgets": {
+        "plannedNewSessions": 13,
+        "plannedNewPhysicalReturns": 71,
+        "inheritedSessions": 10,
+        "inheritedPhysicalReturns": 14,
+        "plannedIncludingPriorSessions": 23,
+        "plannedIncludingPriorPhysicalReturns": 85,
+        "maximumIncludingPriorSessions": 36,
+        "maximumIncludingPriorPhysicalReturns": 156
+      },
+      "maximumAttemptsPerCategory": 2,
+      "activeTimeoutSeconds": {
+        "inventory": 120,
+        "workCapture": 300,
+        "workReader": 300,
+        "commonCapture": 300,
+        "commonReader": 240
+      },
+      "correctivePolicy": "Plan initial conservé; amendement prospectif avec chemins explicites et empreintes, défaut observé et budgetKey/maxAttempts/maximumCumulativeSeconds inchangés. Aucune autodécouverte de l’essai favorable.",
+      "commonReaderDependencies": "Receipt et events.jsonl.gz figés avant/après; le lecteur doit vérifier tous les blobs liés par le receipt.",
+      "durationScope": "Le délai d’activité diffère du temps réel incluant clôture/conservation; les durées réellement observées sont conservées et déduites des budgets cumulatifs.",
+      "maximumCountersEnforcement": "Le superviseur enregistre les plafonds; boucles figées et lecteurs imposent/recomptent les sessions et retours. Les essais partiels ne sont pas effacés.",
+      "workPlan": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-execution-plan.json",
+        "bytes": 74970,
+        "sha256": "97cbaffa21c2cd4c33c866a681153e8bf1abbbffcd050b69c263e0e6f39c5527"
+      },
+      "scopeSplit": "Work and common are frozen before their respective native captures. Global budgetKey/history and 23/85 expected, 36/156 maximum combined ledger are retained without resetting phase counts.",
+      "commonPlan": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/common-execution-plan.json",
+        "bytes": 72772,
+        "sha256": "e8ca9501bc5afe4934598886ff7ae3fcfc6c134d149e29099c37da5490caf950"
+      },
+      "commonDeclaration": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/common-declaration.json",
+        "bytes": 5151,
+        "sha256": "10fc90c627a560938ff7b3b170ec43968a02eb2550e21c67a41c8b939e2f45e4"
+      }
+    },
+    "officialCostContract": "hors de cette revue de préparation fonctionnelle"
+  },
+  "expectedAttribution": {
+    "ownerAdded": "public_chart_navigation",
+    "ownersRemoved": [],
+    "familyProgramAdded": "v6.chart_navigation.choose",
+    "familyProgramsRemoved": [],
+    "expectedOwners": {
+      "baseline": 62,
+      "candidate": 63
+    },
+    "expectedFamilyInstalledPrograms": {
+      "baseline": 28,
+      "candidate": 29
+    },
+    "newRootIds": [
+      "family_state:public_chart_navigation",
+      "family_activation:public_chart_navigation",
+      "program:v6.chart_navigation.choose"
+    ],
+    "programQualification": "IR déjà compilé n'implique pas programme déjà installé. attachPrograms enregistre le nouveau programme Chart dans le store partagé.",
+    "additionalFragments": "Uniquement les fragments supplémentaires réellement atteignables depuis les racines déclarées, avec contenu, identité, hydratation et rattachement vérifiés.",
+    "commonOwnersToCompare": [
+      "public_observed_binding",
+      "selected_rigid",
+      "motif_access",
+      "public_ordered_recruitment",
+      "branch_routing"
+    ],
+    "inheritedBranchRoutingExceptionMustBeRemoved": true,
+    "roleSourceDigestRule": "origin.source_digest et nativeExecutionDigest utilisent le digest de factory du rôle, distinct du digest canonique des fichiers natifs.",
+    "maximumUnattributedDifferences": 0
+  },
+  "completeEvidenceRequirements": [
+    "Capturer response.snapshot intégral, notamment trace, srcDecision, proposal, whyAct, caller et familyStateRefs; garder la projection historique uniquement pour les formes.",
+    "Conserver requêtes, commandes, tickets, observations et paquets de frames dans leur ordre exact.",
+    "Reconstituer chaque graphe depuis tous ses deltas et utiliser le Kernel/store de son propre rôle.",
+    "Valider chaque hash, chaîne, révision, identité, cause, ordre de delta et fragment; ne pas retirer node.value.",
+    "Vérifier les identités d'exécution et tickets contre les graphes exacts du rôle, pas par remplacement générique de chaînes.",
+    "Attribuer coverage.registeredFamilies, coverage.sourceGroups et familyStateRefs à l'ajout exact du seul propriétaire Chart.",
+    "Conserver chaque différence de décision, proposition, acquis ou état; une détection ou acquisition Chart sur STCK/SMLP ne devient pas automatiquement une différence structurelle permise.",
+    "Limiter l'attribution historique d'horloge au created exact d'une trace validée et à ses bornes réelles.",
+    "Traiter activeSeconds séparément avec sa source native et ses observations monotones réelles, sans suppression générale de timestamps."
+  ],
+  "positiveChartInvariants": {
+    "corpusSha256": "0770706db16249ac4ab1c7c8b9533d571f2fc2cdaeaf5dae2d990806e412cfe8",
+    "originalWrapperStatusesPreserved": [
+      "failed",
+      "failed"
+    ],
+    "qualification": "Corpus synthétique récupéré et vérifié; aucune nouvelle exécution de l'oracle.",
+    "sourceStateFields": [
+      "epoch",
+      "chart",
+      "position",
+      "positions",
+      "position_status",
+      "visited",
+      "grants",
+      "gains",
+      "views",
+      "blocked",
+      "evidence",
+      "portable",
+      "last",
+      "method_use"
+    ],
+    "expectedSessions": [
+      {
+        "id": "primary",
+        "physicalReturns": 3,
+        "activeChartAcquisitions": 3,
+        "passiveChartAcquisitions": 0,
+        "suppressedAcquisitions": 0
+      },
+      {
+        "id": "contrary",
+        "physicalReturns": 1,
+        "activeChartAcquisitions": 1,
+        "passiveChartAcquisitions": 0,
+        "suppressedAcquisitions": 0
+      },
+      {
+        "id": "ablation",
+        "physicalReturns": 1,
+        "activeChartAcquisitions": 0,
+        "passiveChartAcquisitions": 0,
+        "suppressedAcquisitions": 1
+      },
+      {
+        "id": "passive_equal",
+        "physicalReturns": 2,
+        "activeChartAcquisitions": 1,
+        "passiveChartAcquisitions": 1,
+        "suppressedAcquisitions": 0
+      },
+      {
+        "id": "passive_changed",
+        "physicalReturns": 2,
+        "activeChartAcquisitions": 1,
+        "passiveChartAcquisitions": 1,
+        "suppressedAcquisitions": 0
+      }
+    ],
+    "requiredProofs": [
+      "Propriétaire froid réel, groupes de production non filtrés et aucune injection d'état appris.",
+      "Égalité complète des 14 champs avec les cas source; ordre des membres JSON non significatif, aucun champ retiré.",
+      "Paquet complet de frames intermédiaires égal au corpus; perte d'inventaire seule sans frontière ne prouve aucune permission.",
+      "Une acquisition logique recordSource par retour attribué; profondeur des wrappers conservée si plusieurs méthodes sont observées.",
+      "Retour étranger acquis avec proposal=null par la même instance, une seule fois.",
+      "Fait source chart_navigation_state relu puis restore réellement observé; checkpoint natif hydraté puis restoreNative réellement observé.",
+      "Deux remises à froid contrôlées ne sont pas deux restaurations acquises supplémentaires; les nombres d'appels ne deviennent pas des nombres d'acquisitions.",
+      "Ablation conserve le retour physique et retire l'acquisition; la différence de continuation ne prétend pas forcément changer la commande physique.",
+      "Aucun niveau officiel résolu revendiqué."
+    ]
+  },
+  "accountingToFreeze": {
+    "priorConsumed": {
+      "initializedSessions": 10,
+      "physicalReturns": 14,
+      "registrationOnlyFactories": 2
+    },
+    "priorReservationPreserved": "L'ancien maximumSessions:8 était ambigu entre lancement et cumul; ne pas prétendre le satisfaire rétrospectivement.",
+    "plannedFreshWorkForms": {
+      "captures": 2,
+      "initializedSessions": 8,
+      "physicalReturns": 62,
+      "perRoleSessions": 4,
+      "perRoleReturns": 31
+    },
+    "plannedFreshChartCommon": {
+      "captures": 1,
+      "initializedSessions": 5,
+      "physicalReturns": 9
+    },
+    "plannedAdditionalFunctionalTotals": {
+      "initializedSessions": 13,
+      "physicalReturns": 71
+    },
+    "plannedCumulativeFunctionalTotalsIncludingPrior": {
+      "initializedSessions": 23,
+      "physicalReturns": 85
+    },
+    "inventoryFactoriesRemainSeparate": true,
+    "buildNativeSessions": 0,
+    "buildPhysicalReturns": 0,
+    "failedAndPartialCapturesMustCount": true,
+    "runnerObservation": "Le superviseur impose maximumAttempts et maximumCumulativeSeconds par budgetKey. Les plafonds de sessions/retours sont consignés; les captures figées doivent borner leurs boucles et le lecteur doit recompter les traces partielles ou complètes.",
+    "durationQualification": "Timeout d'activité enfant distinct de la fermeture TERM/KILL et des écritures/compressions/hashes. Conserver elapsedSeconds réellement consommé sans prétendre une borne murale globale identique.",
+    "newLimitsRequireRootDeclaration": false,
+    "finalScopeBudgets": {
+      "work": {
+        "plannedSessions": 8,
+        "plannedPhysicalReturns": 62,
+        "maximumNewSessions": 16,
+        "maximumNewPhysicalReturns": 124
+      },
+      "common": {
+        "plannedSessions": 5,
+        "plannedPhysicalReturns": 9,
+        "maximumNewSessions": 10,
+        "maximumNewPhysicalReturns": 18,
+        "expectedPoints": 52,
+        "maximumPointsPerCapture": 64
+      },
+      "expectedIncludingPrior": {
+        "initializedSessions": 23,
+        "physicalReturns": 85
+      },
+      "maximumIncludingPrior": {
+        "initializedSessions": 36,
+        "physicalReturns": 156
+      }
+    }
+  },
+  "officialCostRemainsSeparate": {
+    "notPerformedByThisReview": true,
+    "proposedHistoricalOrder": [
+      "A1",
+      "B1",
+      "B2",
+      "A2"
+    ],
+    "cases": [
+      "STCK10",
+      "SMLP15"
+    ],
+    "measuredSessions": 32,
+    "measuredReturns": 400,
+    "warmupSessions": 8,
+    "warmupReturns": 24,
+    "sessionsPerCaseAndVersion": 8,
+    "globalAcceptance": "Pour chaque jeu séparément: médiane B strictement inférieure à 1,1 fois médiane A.",
+    "crossCaseCompensation": false,
+    "discardedMeasuredSessions": 0,
+    "discardedOutliers": 0,
+    "phaseOverrunsRemainVisible": true,
+    "allowedWorkShapeCountDifferences": [
+      "observations[*].nodeCount",
+      "inspection[*].graphNodes",
+      "final.nodeCount",
+      "final.graphRevision"
+    ],
+    "countValuesMustBeFreshlyProvedBeforeMeasurement": true,
+    "literalVersionOrPriorCountsMustNotBeRelabeled": true,
+    "prospectiveCombinedSessionLedgerIfAllPlannedRunsOccur": {
+      "initializedSessions": 63,
+      "physicalReturns": 509
+    },
+    "noGlobalLockForFunctionalWork": true,
+    "shortExclusivityOnlyForOfficialMeasurementAndPublication": true
+  },
+  "pendingBeforeFinalReview": [],
+  "releaseAuthority": false,
+  "officialPerformanceEligible": false,
+  "universalParityClaim": false,
+  "commonReviewFrozenAt": "2026-11-12T14:59:28.791963+00:00",
+  "supersededInitialActiveLimitSuggestions": [
+    {
+      "command": "inventory",
+      "maximumAttempts": 1,
+      "maximumSecondsPerLaunch": 120,
+      "maximumCumulativeActiveSeconds": 120,
+      "sessions": 0,
+      "returns": 0
+    },
+    {
+      "command": "work-baseline",
+      "maximumAttempts": 1,
+      "maximumSecondsPerLaunch": 300,
+      "maximumCumulativeActiveSeconds": 300,
+      "sessions": 4,
+      "returns": 31
+    },
+    {
+      "command": "work-candidate",
+      "maximumAttempts": 1,
+      "maximumSecondsPerLaunch": 300,
+      "maximumCumulativeActiveSeconds": 300,
+      "sessions": 4,
+      "returns": 31
+    },
+    {
+      "command": "work-reader",
+      "maximumAttempts": 1,
+      "maximumSecondsPerLaunch": 300,
+      "maximumCumulativeActiveSeconds": 300,
+      "sessions": 0,
+      "returns": 0
+    },
+    {
+      "command": "chart-common-capture",
+      "maximumAttempts": 1,
+      "maximumSecondsPerLaunch": 300,
+      "maximumCumulativeActiveSeconds": 300,
+      "sessions": 5,
+      "returns": 9
+    },
+    {
+      "command": "chart-common-reader",
+      "maximumAttempts": 1,
+      "maximumSecondsPerLaunch": 300,
+      "maximumCumulativeActiveSeconds": 300,
+      "sessions": 0,
+      "returns": 0
+    }
+  ],
+  "supersededInitialActiveLimitSuggestionsQualification": "Historical suggestions only; the final frozen plans define two attempts and their actual active/cumulative allowances.",
+  "pendingExecutionQualifications": [
+    "Chart common captures and qualification outcomes remain to be read separately.",
+    "Initial work qualification remains failed; any corrective reader must be a new frozen derivative and prospective amendment, with no recapture authorized by this preparation review.",
+    "Public worker/service positive Chart proofs, official cost and publication remain separate."
+  ],
+  "observedWorkReaderOutcomeOutsidePreparation": {
+    "firstReaderStatus": "failed",
+    "formsRead": 4,
+    "allDifferences": 28279,
+    "unattributedDifferences": 58,
+    "onlyUnattributedPath": "/whyAct/decision/total_ms",
+    "qualification": "The original failure remains unchanged. A separately prepared narrow source-clock attribution is required; preparation approval did not claim capture outcome parity."
+  }
+}

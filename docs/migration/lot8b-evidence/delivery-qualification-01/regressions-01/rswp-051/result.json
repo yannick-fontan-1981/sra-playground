@@ -1,0 +1,210 @@
+{
+  "case": "rswp-051",
+  "game": "RSWP",
+  "passed": true,
+  "baseline": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+    "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba"
+  },
+  "trace": {
+    "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+    "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755"
+  },
+  "replay": {
+    "schema": "logos-engine.lot8b.recorded-process.v1",
+    "name": "replay",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "docs/migration/lot8a-evidence/tools/replay-recorded-public-streaming.mjs",
+      "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+      "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+      "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/replay.json.gz"
+    ],
+    "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+    "startedAt": "2026-11-12T04:57:00.438107+00:00",
+    "phaseTimeoutSeconds": 600,
+    "effectiveTimeoutSeconds": 600,
+    "environment": {
+      "NODE_OPTIONS": "--max-old-space-size=1536",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0"
+    },
+    "status": "passed",
+    "pid": 20,
+    "processGroup": 20,
+    "exitCode": 0,
+    "timedOut": false,
+    "interrupted": false,
+    "automaticRetry": false,
+    "elapsedSeconds": 29.437253213000076,
+    "lastObservedAt": "2026-11-12T04:57:15.462336+00:00",
+    "stdoutBytes": 32170,
+    "stderrBytes": 0,
+    "processGroupStopped": true,
+    "finishedAt": "2026-11-12T04:57:29.875332+00:00",
+    "stdout": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/replay.stdout.log",
+      "bytes": 55419,
+      "sha256": "50afc02d1f65304fde0a723e90fc898c67bdf1d44e8f17d496450d54977d92a9"
+    },
+    "stderr": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "hostPreparationPassed": true,
+  "comparisonProcess": {
+    "schema": "logos-engine.lot8b.recorded-process.v1",
+    "name": "comparison",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+      "-B",
+      "scripts/run-released-public-regressions.py",
+      "--compare-case",
+      "{\"baseline\":\"docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz\",\"trace\":\"docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz\",\"report\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/replay.json.gz\",\"sourceManifest\":\"docs/migration/lot8b-evidence/delivery-qualification-01/candidate-native.json\",\"caseManifest\":\"docs/migration/lot8b-evidence/tools/delivery/regressions/cases.json\",\"comparison\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/comparison.json\",\"presence\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/passive-owner-presence.json\",\"requirements\":[]}"
+    ],
+    "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+    "startedAt": "2026-11-12T04:57:29.877518+00:00",
+    "phaseTimeoutSeconds": 180,
+    "effectiveTimeoutSeconds": 180,
+    "environment": {
+      "NODE_OPTIONS": "--max-old-space-size=1536",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0"
+    },
+    "status": "passed",
+    "pid": 32,
+    "processGroup": 32,
+    "exitCode": 0,
+    "timedOut": false,
+    "interrupted": false,
+    "automaticRetry": false,
+    "processGroupStopped": true,
+    "finishedAt": "2026-11-12T04:57:31.891332+00:00",
+    "elapsedSeconds": 2.013834694000252,
+    "stdout": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/comparison.stdout.log",
+      "bytes": 2676,
+      "sha256": "04e5951b175e703bedb2e056aca10d6fe6d6b23fa59b2d5dfd5e0d999a0b1991"
+    },
+    "stderr": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/comparison.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "comparisonResult": {
+    "report": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/replay.json.gz",
+      "sha256": "2773a3b791b2b5e05c2dcee1edbf0b0f966c25be24db74f5afb56473d03eab9f",
+      "bytes": 3917912
+    },
+    "status": "passed",
+    "actions": 19,
+    "prefixes": 11,
+    "final": {
+      "actions": 19,
+      "levelsCompleted": 3,
+      "level": 4,
+      "state": "NOT_FINISHED",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "activeSeconds": 21.019710177000007,
+      "prefixes": 11,
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 19,
+        "boundaryReplays": 2,
+        "goalEvents": 3,
+        "frontierDeltas": 39,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 12
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 12
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 12
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 11
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 1
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 12
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology"
+        ],
+        "morphologyProvider": {
+          "status": "partial_current_measurements_control_attention_and_methods",
+          "state_owner": "family_state:morphology",
+          "motion_owner": "caller:goal",
+          "forecast_owner": "family_state:public_observed_inventory",
+          "current_decision_scope": "one_source_selection_cycle",
+          "attention_owner": "caller:attention",
+          "method_owner": "caller:counters.targetMethod",
+          "entry_return_owner": "family_state:morphology.entry_access_return",
+          "connected_methods": [
+            "retained_station_method",
+            "entry_access_return",
+            "entry_rebind",
+            "entry_probe",
+            "managed_capacity",
+            "target_extension_continuation"
+          ],
+          "pending": [
+            "complete_original_caller_parity_and_domain_closure"
+          ]
+        },
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      },
+      "fullV6Parity": false,
+      "sessions": 1,
+      "operationCounts": {
+        "init": 1,
+        "advance": 19,
+        "resume": 10
+      },
+      "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.66.0"
+    },
+    "passiveOwnerPresence": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/passive-owner-presence.json",
+      "sha256": "0e2a35379a80097e40755a7c5628708df5700a77cd31262eab8a5afc1760342f",
+      "bytes": 1109
+    },
+    "passiveOwnerPresencePassed": true,
+    "passiveOwnerPrefixesChecked": 0,
+    "passiveOwnerPrefixesPassed": 0,
+    "passiveOwnerTransitionsRetained": 0,
+    "comparison": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/comparison.json",
+      "sha256": "be4c36e957fc84705fe332cac83702d3e24094681b2d8c4b02fb913fd7aad8aa",
+      "bytes": 11013
+    },
+    "comparisonPassed": true,
+    "comparisonChecks": 17,
+    "failedChecks": []
+  },
+  "originalCheckNamesPreserved": true,
+  "inputsUnchanged": true
+}

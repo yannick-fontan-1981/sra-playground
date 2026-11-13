@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.lot10c.case-activity-execution.v1",
+  "attemptId": "docs/migration/lot10c-evidence/case-activities/recr01-summary-binding",
+  "game": "RECR",
+  "purpose": "Bind final development case summary to retained exact original comparison and actual browser receipts without rerunning the game",
+  "startedAt": "2026-11-11T18:28:27.661639+00:00",
+  "finishedAt": "2026-11-11T18:28:27.795806+00:00",
+  "status": "completed",
+  "elapsedSecondsThroughCapture": 0.134146184,
+  "activityCeilingSeconds": 60.0,
+  "ceilingExceeded": false,
+  "evidence": [
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-proof-summary.json",
+      "sha256": "acd5a2405a00df1ebffe8f5613c78f6ca92ae82a4a4317450238b0519480e2d0",
+      "bytes": 6642
+    }
+  ],
+  "generator": {
+    "path": "docs/migration/lot10c-evidence/case-activity.py",
+    "sha256": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+    "bytes": 8126
+  },
+  "executionHelpersUnchanged": true,
+  "qualification": "The entire observed diagnostic/browser interval is charged, including any ceiling excess. No new campaign or success is inferred."
+}

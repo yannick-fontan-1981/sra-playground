@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.pre-freeze-audit-transport.v1",
+  "original": {
+    "path": "diagnostic/pre-freeze-migration-audit.json",
+    "bytes": 2722602,
+    "sha256": "b420258c9ca7d3066fdd98f0dd9a824c833797a0e62e0b9a0822399f50947a6b"
+  },
+  "compressed": {
+    "path": "diagnostic/pre-freeze-migration-audit.json.gz",
+    "bytes": 314313,
+    "sha256": "7ce919f15902433cf23d2b7bb06bda7b76539b7b2b822c408fb9a9b274b15013"
+  },
+  "gzipMtime": 0,
+  "roundTripBytesEqual": true,
+  "qualification": "Exact deterministic gzip of the retained pre-freeze migration audit output. No audit, source calculation, test or case is rerun. The original remains local and is restored with gzip -dk on this exact gzip file."
+}

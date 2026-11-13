@@ -1,0 +1,46 @@
+{
+  "schema": "logos-engine.lot8b.recorded-process.v1",
+  "name": "replay",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "--expose-gc",
+    "--max-old-space-size=1536",
+    "docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs",
+    "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+    "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/replay.json.gz",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/host-preparation.json"
+  ],
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T05:03:50.397538+00:00",
+  "phaseTimeoutSeconds": 600,
+  "effectiveTimeoutSeconds": 600,
+  "environment": {
+    "NODE_OPTIONS": "--max-old-space-size=1536",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONHASHSEED": "0"
+  },
+  "status": "passed",
+  "pid": 85,
+  "processGroup": 85,
+  "exitCode": 0,
+  "timedOut": false,
+  "interrupted": false,
+  "automaticRetry": false,
+  "elapsedSeconds": 230.26573486399866,
+  "lastObservedAt": "2026-11-12T05:07:35.657298+00:00",
+  "stdoutBytes": 266642,
+  "stderrBytes": 0,
+  "processGroupStopped": true,
+  "finishedAt": "2026-11-12T05:07:40.663250+00:00",
+  "stdout": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/replay.stdout.log",
+    "bytes": 268939,
+    "sha256": "a498e220fe3bad93a7a02069bb626305a58448941218557dd86567c32ef63f91"
+  },
+  "stderr": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/replay.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

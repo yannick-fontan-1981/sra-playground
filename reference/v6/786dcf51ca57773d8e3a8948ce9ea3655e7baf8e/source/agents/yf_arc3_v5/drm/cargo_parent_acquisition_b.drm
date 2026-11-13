@@ -1,0 +1,302 @@
+{
+  "module_id": "arc3.cargo_parent_acquisition_b",
+  "declarations": [
+    {
+      "id": "policy.b_cargo_parent_acquisition",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_only_current_explicit_source_fields_can_activate_the_complete_cargo_parent"
+      ],
+      "declared_alternative_refs": [
+        "cargo_parent_fields.backed",
+        "cargo_parent_fields.proposed",
+        "cargo_parent_fields.missing"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "cargo_parent_fields.backed": "rule.b_current_backed_cargo_parent_fields",
+        "cargo_parent_fields.proposed": "rule.b_current_proposed_cargo_parent_fields"
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_parent_fields.backed",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_parent_fields.backed"
+            },
+            {
+              "field": "parent_fields_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_field_support_backed",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "epistemic_status": "supported",
+            "reason_ref": "reason_only_current_explicit_source_fields_can_activate_the_complete_cargo_parent",
+            "no_physical_truth_promotion": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_parent_fields.proposed",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_parent_fields.proposed"
+            },
+            {
+              "field": "parent_fields_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_field_support_backed",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "epistemic_status": "proposed",
+            "reason_ref": "reason_only_current_explicit_source_fields_can_activate_the_complete_cargo_parent",
+            "no_physical_truth_promotion": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_parent_fields.missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_parent_fields.missing"
+            },
+            {
+              "field": "parent_fields_complete",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "epistemic_status": null,
+            "reason_ref": "reason_only_current_explicit_source_fields_can_activate_the_complete_cargo_parent",
+            "no_physical_truth_promotion": true,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_current_backed_cargo_parent_fields",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "actual_current_acquisition",
+        "explicit_canonical_source_parent_fields",
+        "exact_typed_parent_scope_and_why"
+      ],
+      "applicability": [
+        "source_parent_request_binding"
+      ],
+      "invariants": [
+        "no_why_or_model_reconstruction",
+        "no_physical_truth_promotion",
+        "preserve_input_provenance_and_named_debts"
+      ],
+      "falsifiers": [
+        "missing_stale_or_contradictory_source_field",
+        "changed_whole_field_claim_or_term",
+        "parent_why_or_profile_owner_changed"
+      ],
+      "reason_refs": [
+        "reason_only_current_explicit_source_fields_can_activate_the_complete_cargo_parent"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Current Source cargo parent fields",
+          "required_fields": [
+            "output_term_ref",
+            "parent_goal_ref",
+            "parent_payload"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "cargo.source_parent_request.b.v1",
+            "no_physical_truth_promotion": true,
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "parent_digest": "parent_digest",
+            "provenance_digest": "provenance_digest",
+            "field_provenance": "field_provenance",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "level_scope_ref": "level_scope_ref",
+            "value": "parent_payload"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_support_claim_ref}",
+          "predicate": "current_source_cargo_parent_fields_bound",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{observation_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "output_support_claim_ref",
+            "output_term_ref",
+            "observation_record_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "level_scope_ref": "level_scope_ref",
+            "current_frame_ref": "frame_ref"
+          },
+          "attribute_bindings": {
+            "parent_digest": "parent_digest",
+            "provenance_digest": "provenance_digest",
+            "field_provenance": "field_provenance"
+          },
+          "static_attributes": {
+            "no_physical_truth_promotion": true,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_current_proposed_cargo_parent_fields",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "actual_current_acquisition",
+        "explicit_canonical_source_parent_fields",
+        "exact_typed_parent_scope_and_why"
+      ],
+      "applicability": [
+        "source_parent_request_binding"
+      ],
+      "invariants": [
+        "no_why_or_model_reconstruction",
+        "no_physical_truth_promotion",
+        "preserve_input_provenance_and_named_debts"
+      ],
+      "falsifiers": [
+        "missing_stale_or_contradictory_source_field",
+        "changed_whole_field_claim_or_term",
+        "parent_why_or_profile_owner_changed"
+      ],
+      "reason_refs": [
+        "reason_only_current_explicit_source_fields_can_activate_the_complete_cargo_parent"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Current Source cargo parent fields",
+          "required_fields": [
+            "output_term_ref",
+            "parent_goal_ref",
+            "parent_payload"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "cargo.source_parent_request.b.v1",
+            "no_physical_truth_promotion": true,
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "parent_digest": "parent_digest",
+            "provenance_digest": "provenance_digest",
+            "field_provenance": "field_provenance",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "level_scope_ref": "level_scope_ref",
+            "value": "parent_payload"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_support_claim_ref}",
+          "predicate": "current_source_cargo_parent_fields_bound",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{observation_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "output_support_claim_ref",
+            "output_term_ref",
+            "observation_record_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "level_scope_ref": "level_scope_ref",
+            "current_frame_ref": "frame_ref"
+          },
+          "attribute_bindings": {
+            "parent_digest": "parent_digest",
+            "provenance_digest": "provenance_digest",
+            "field_provenance": "field_provenance"
+          },
+          "static_attributes": {
+            "no_physical_truth_promotion": true,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    }
+  ]
+}

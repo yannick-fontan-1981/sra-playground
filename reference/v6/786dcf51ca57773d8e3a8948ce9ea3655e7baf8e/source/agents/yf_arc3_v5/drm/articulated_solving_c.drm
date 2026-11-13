@@ -1,0 +1,396 @@
+{
+  "module_id": "articulated_solving_c",
+  "declarations": [{
+    "id": "policy.articulated_solving_c",
+    "kind": "selection_policy",
+    "evaluation": "declared_eligibility_single",
+    "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "declared_alternative_refs": ["articulated_solving.native", "articulated_solving.missing"],
+    "selection_required_fact_fields": ["alternative_ref"],
+    "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+    "fact_projections": [
+      {"id": "projection.articulated_solving.native", "all_conditions": [
+        {"field": "alternative_ref", "operator": "equals", "expected": "articulated_solving.native"},
+        {"field": "current_articulated_question", "operator": "equals", "expected": true}
+      ], "static_facts": {"eligible": true}},
+      {"id": "projection.articulated_solving.missing", "all_conditions": [
+        {"field": "alternative_ref", "operator": "equals", "expected": "articulated_solving.missing"},
+        {"field": "current_articulated_question", "operator": "equals", "expected": false}
+      ], "static_facts": {"eligible": true}}
+    ],
+    "premises": ["current_parent_agenda", "exact_acquired_field_values", "distinct_grounded_relation_graphs"],
+    "invariants": ["same_K24", "parent_why_preserved", "passive_geometry_retained", "no_ACT"],
+    "falsifiers": ["stale_acquisition", "missing_receiver", "contact_as_attachment", "unbound_restoration"],
+    "reason_refs": ["reason.articulated_requested_domain_preserves_current_why_and_unknowns"]
+  }, {
+    "id": "policy.articulated_geometry_publication_c",
+    "kind": "selection_policy", "evaluation": "declared_eligibility_single",
+    "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "declared_alternative_refs": ["articulated_geometry.publish"],
+    "selection_required_fact_fields": ["alternative_ref"],
+    "selection_eligibility_conditions": [{"field":"eligible","operator":"equals","expected":true}],
+    "fact_projections": [{"id":"projection.articulated_geometry.publish","all_conditions":[
+      {"field":"alternative_ref","operator":"equals","expected":"articulated_geometry.publish"},
+      {"field":"publication_current","operator":"equals","expected":true}],"static_facts":{"eligible":true}}],
+    "meaning_template_ref_by_alternative":{"articulated_geometry.publish":"rule.articulated_observed_world_geometry_c"},
+    "premises":["actual_repository_geometry","current_independent_body_landmark_associations"],
+    "invariants":["no_mechanical_role_confirmation","no_ACT"],
+    "falsifiers":["changed_frame_or_sources","clipped_geometry"],
+    "reason_refs":["reason.publish_measured_world_geometry_without_promoting_a_model"]
+  }, {
+    "id":"rule.articulated_observed_world_geometry_c", "kind":"rule",
+    "evaluation":"project_requested_conclusions", "supported_operators":["DERIVE"],
+    "input_contract":"yf_arc3_v5.authority_input.derivation.v1",
+    "output_contract":"yf_arc3_v5.authority_output.derivation.v1", "relation_family":"epistemic",
+    "term_templates":[{"id_pattern":"{term_ref}","kind":"value","label":"Actual articulated world geometry",
+      "required_fields":["term_ref","geometry","geometry_digest","frame_ref"],
+      "attribute_bindings":{"geometry":"geometry","geometry_digest":"geometry_digest","frame_ref":"frame_ref",
+        "observation_record_ref":"observation_record_ref","raw_input_ref":"raw_input_ref","examined_count":"examined_count"},
+      "static_attributes":{"projection_contract_ref":"articulated.observed_world_geometry.c.v1",
+        "source_kind_ref":"articulated.observed_world_geometry.c.v1","physical_model_confirmed":false}}],
+    "claim_templates":[{"id_pattern":"{claim_ref}","predicate":"records_acquired_articulated_world_geometry",
+      "family":"epistemic","epistemic_status":"supported","argument_patterns":["{term_ref}","{observation_record_ref}"],
+      "required_term_patterns":["{term_ref}","{parent_goal_ref}"],"required_fields":["claim_ref","term_ref","parent_goal_ref"],
+      "scope_bindings":{"parent_goal_ref":"parent_goal_ref","epoch":"epoch","episode_ref":"episode_ref",
+        "level_scope_ref":"level_scope_ref","evidence_revision_ref":"evidence_revision_ref","model_revision_ref":"model_revision_ref"},
+      "attribute_bindings":{"geometry_digest":"geometry_digest","frame_ref":"frame_ref","observation_record_ref":"observation_record_ref"}}],
+    "premises":["actual_current_acquisition"],"invariants":["world_geometry_only","no_ACT"],
+    "falsifiers":["changed_geometry_or_sources"],"reason_refs":["reason.keep_actual_geometry_separate_from_laws"]
+  }, {
+    "id":"policy.articulated_route_bridge_c","kind":"selection_policy","evaluation":"declared_eligibility_single",
+    "supported_operators":["SELECT"],"input_contract":"yf_arc3_v5.authority_input.selection.v1",
+    "output_contract":"yf_arc3_v5.authority_output.selection.v1",
+    "declared_alternative_refs":["articulated_route.calculate","articulated_route.missing"],
+    "selection_required_fact_fields":["alternative_ref"],
+    "selection_eligibility_conditions":[{"field":"eligible","operator":"equals","expected":true}],
+    "fact_projections":[
+      {"id":"projection.articulated_route.calculate","all_conditions":[
+        {"field":"alternative_ref","operator":"equals","expected":"articulated_route.calculate"},
+        {"field":"bridge_current","operator":"equals","expected":true}],"static_facts":{"eligible":true}},
+      {"id":"projection.articulated_route.missing","all_conditions":[
+        {"field":"alternative_ref","operator":"equals","expected":"articulated_route.missing"},
+        {"field":"bridge_current","operator":"equals","expected":false}],"static_facts":{"eligible":true}}],
+    "premises":["exact_current_K24_transitions"],"invariants":["same_K09","full_state_keys","no_ACT"],
+    "falsifiers":["wrong_native_identity","incomplete_transition"],"reason_refs":["reason.search_over_exact_articulated_transitions"]
+  }, {
+    "id":"policy.articulated_passive_goal_c","kind":"selection_policy","evaluation":"declared_eligibility_single",
+    "supported_operators":["SELECT"],"input_contract":"yf_arc3_v5.authority_input.selection.v1",
+    "output_contract":"yf_arc3_v5.authority_output.selection.v1",
+    "declared_alternative_refs":["articulated_passive.form"],"selection_required_fact_fields":["alternative_ref"],
+    "selection_eligibility_conditions":[{"field":"eligible","operator":"equals","expected":true}],
+    "fact_projections":[{"id":"projection.articulated_passive.form","all_conditions":[
+      {"field":"alternative_ref","operator":"equals","expected":"articulated_passive.form"},
+      {"field":"indirect_options_present","operator":"equals","expected":true},
+      {"field":"parent_question_current","operator":"equals","expected":true}],"static_facts":{"eligible":true}}],
+    "meaning_template_ref_by_alternative":{"articulated_passive.form":"rule.articulated_passive_clearance_goal_c"},
+    "premises":["current_parent_dependency","grounded_controllable_ancestors"],
+    "invariants":["retain_all_ancestor_options","principal_goal_unchanged","no_ACT"],
+    "falsifiers":["dependency_no_longer_blocked","unavailable_ancestor_control"],
+    "reason_refs":["reason.indirect_clearance_enables_the_parent_dependency"]
+  }, {
+    "id":"rule.articulated_passive_clearance_goal_c","kind":"rule","evaluation":"project_requested_conclusions",
+    "supported_operators":["DERIVE"],"input_contract":"yf_arc3_v5.authority_input.derivation.v1",
+    "output_contract":"yf_arc3_v5.authority_output.derivation.v1","relation_family":"epistemic",
+    "term_templates":[{"id_pattern":"goal.articulated.clearance.{projection_ref}","kind":"goal","label":"Clear a passive blocker through its controllable ancestors",
+      "required_fields":["projection_ref","parent_goal_ref","dependency_ref","passive_blocker_ref"],
+      "attribute_bindings":{"parent_goal_ref":"parent_goal_ref","dependency_ref":"dependency_ref",
+        "passive_blocker_ref":"passive_blocker_ref","ancestor_intervention_options":"ancestor_intervention_options",
+        "restoration_target_refs":"restoration_target_refs","frozen_why":"frozen_why","falsifier_ref":"falsifier_ref"},
+      "static_attributes":{"status":"proposed","commitment":"revisable","no_action_authority":true}}],
+    "claim_templates":[{"id_pattern":"claim.articulated.clearance.{projection_ref}","predicate":"proposes_indirect_passive_clearance_dependency",
+      "family":"epistemic","epistemic_status":"proposed",
+      "argument_patterns":["goal.articulated.clearance.{projection_ref}","{parent_goal_ref}","{dependency_ref}"],
+      "required_term_patterns":["goal.articulated.clearance.{projection_ref}","{parent_goal_ref}"],
+      "required_fields":["projection_ref","parent_goal_ref","dependency_ref"],
+      "attribute_bindings":{"blocked_input_ref":"blocked_input_ref","restoration_target_refs":"restoration_target_refs"}}],
+    "premises":["conditional_blocked_edit_and_supported_ancestor_options"],"invariants":["hypothesis_not_physical_satisfaction"],
+    "falsifiers":["actual_edit_contradicts_blocker_model"],"reason_refs":["reason.preserve_parent_and_restore_contributors"]
+  }, {
+    "id":"policy.articulated_dependency_effect_c","kind":"selection_policy","evaluation":"declared_eligibility_single",
+    "supported_operators":["SELECT"],"input_contract":"yf_arc3_v5.authority_input.selection.v1",
+    "output_contract":"yf_arc3_v5.authority_output.selection.v1",
+    "declared_alternative_refs":["articulated_dependency.supported","articulated_dependency.unresolved"],
+    "selection_required_fact_fields":["alternative_ref"],
+    "selection_eligibility_conditions":[{"field":"eligible","operator":"equals","expected":true}],
+    "fact_projections":[{
+      "id":"projection.articulated_dependency.supported","all_conditions":[
+        {"field":"alternative_ref","operator":"equals","expected":"articulated_dependency.supported"},
+        {"field":"before_predicate_satisfied","operator":"equals","expected":true},
+        {"field":"after_predicate_satisfied","operator":"equals","expected":true},
+        {"field":"state_changed","operator":"equals","expected":true}],"static_facts":{"eligible":true}}, {
+      "id":"projection.articulated_dependency.unresolved","all_conditions":[
+        {"field":"alternative_ref","operator":"equals","expected":"articulated_dependency.unresolved"}],
+      "any_conditions":[{"field":"before_predicate_satisfied","operator":"not_equals","expected":true},
+        {"field":"after_predicate_satisfied","operator":"not_equals","expected":true},
+        {"field":"state_changed","operator":"equals","expected":false}],"static_facts":{"eligible":true}}],
+    "meaning_template_ref_by_alternative":{"articulated_dependency.supported":"rule.articulated_conditional_dependency_effect_c"},
+    "premises":["current_parent_declared_dependency_predicates","exact_complete_successor_receipt"],
+    "invariants":["computed_effect_is_conditional","unknown_is_not_true","no_ACT"],
+    "falsifiers":["physical_edit_contradicts_predicates","changed_model_or_parent"],
+    "reason_refs":["reason.declared_dependency_change_precedes_restoration"]
+  }, {
+    "id":"rule.articulated_conditional_dependency_effect_c","kind":"rule","evaluation":"project_requested_conclusions",
+    "supported_operators":["DERIVE"],"input_contract":"yf_arc3_v5.authority_input.derivation.v1",
+    "output_contract":"yf_arc3_v5.authority_output.derivation.v1","relation_family":"epistemic",
+    "claim_templates":[{"id_pattern":"claim.articulated.dependency_effect.{projection_ref}",
+      "predicate":"conditionally_supports_articulated_parent_dependency","family":"epistemic","epistemic_status":"proposed",
+      "argument_patterns":["{parent_goal_ref}","{dependency_ref}","{input_ref}"],
+      "required_term_patterns":["{parent_goal_ref}"],
+      "required_fields":["projection_ref","parent_goal_ref","dependency_ref","input_ref","before_state_digest","after_state_digest","request_ref"],
+      "attribute_bindings":{"before_state_digest":"before_state_digest","after_state_digest":"after_state_digest",
+        "request_ref":"request_ref","support_claim_ref":"support_claim_ref","frozen_why":"frozen_why"},
+      "static_attributes":{"conditional_effect_supported":true,"physical_dependency_satisfied":false}}],
+    "premises":["both_declared_transition_predicates_hold","full_state_changes_under_current_model"],
+    "invariants":["not_observed_dependency_satisfaction","principal_goal_unchanged"],
+    "falsifiers":["actual_transition_contradicts_model"],"reason_refs":["reason.keep_useful_conditional_effect_linked_to_parent"]
+  }, {
+    "id":"policy.articulated_useful_prefix_c","kind":"selection_policy","evaluation":"declared_eligibility_single",
+    "supported_operators":["SELECT"],"input_contract":"yf_arc3_v5.authority_input.selection.v1",
+    "output_contract":"yf_arc3_v5.authority_output.selection.v1",
+    "declared_alternative_refs":["articulated_prefix.supported","articulated_prefix.unresolved"],
+    "selection_required_fact_fields":["alternative_ref"],
+    "selection_eligibility_conditions":[{"field":"eligible","operator":"equals","expected":true}],
+    "fact_projections":[{
+      "id":"projection.articulated_prefix.supported","all_conditions":[
+        {"field":"alternative_ref","operator":"equals","expected":"articulated_prefix.supported"},
+        {"field":"matched_effect_count","operator":"greater_than","expected":0},
+        {"field":"state_changed_from_initial","operator":"equals","expected":true}],"static_facts":{"eligible":true}}, {
+      "id":"projection.articulated_prefix.unresolved","all_conditions":[
+        {"field":"alternative_ref","operator":"equals","expected":"articulated_prefix.unresolved"}],
+      "any_conditions":[{"field":"matched_effect_count","operator":"equals","expected":0},
+        {"field":"state_changed_from_initial","operator":"equals","expected":false}],"static_facts":{"eligible":true}}],
+    "meaning_template_ref_by_alternative":{"articulated_prefix.supported":"rule.articulated_useful_prefix_c"},
+    "premises":["actual_legal_joint_word_prefix","conditional_effect_from_exact_prefix_state"],
+    "invariants":["legal_does_not_imply_useful","blocked_full_word_does_not_erase_prefix","no_ACT"],
+    "falsifiers":["dependency_effect_has_different_before_state","actual_model_contradiction"],
+    "reason_refs":["reason.a_smaller_legal_growth_can_enable_a_dependency"]
+  }, {
+    "id":"rule.articulated_useful_prefix_c","kind":"rule","evaluation":"project_requested_conclusions",
+    "supported_operators":["DERIVE"],"input_contract":"yf_arc3_v5.authority_input.derivation.v1",
+    "output_contract":"yf_arc3_v5.authority_output.derivation.v1","relation_family":"epistemic",
+    "claim_templates":[{"id_pattern":"claim.articulated.useful_prefix.{projection_ref}",
+      "predicate":"conditionally_enables_dependencies_from_articulated_prefix","family":"epistemic","epistemic_status":"proposed",
+      "argument_patterns":["{parent_goal_ref}","{candidate_ref}"],"required_term_patterns":["{parent_goal_ref}"],
+      "required_fields":["projection_ref","parent_goal_ref","candidate_ref","prefix_state_digest"],
+      "attribute_bindings":{"prefix_state_digest":"prefix_state_digest","prefix_primitive_count":"prefix_primitive_count",
+        "prefix_after_state":"prefix_after_state","amplitudes_by_body":"amplitudes_by_body",
+        "matched_dependency_effects":"matched_dependency_effects","complete_word_blocked":"complete_word_blocked",
+        "restoration_targets":"restoration_targets",
+        "frozen_why":"frozen_why"},
+      "static_attributes":{"conditional_prefix_supported":true,"physical_dependency_satisfied":false,"execution_authority":false}}],
+    "premises":["current_parent_dependency_and_legal_prefix","exact_conditional_effect"],
+    "invariants":["not_an_executable_word_or_action_release","keep_restoration_debt"],
+    "falsifiers":["actual_successor_or_dependency_contradicts_model"],
+    "reason_refs":["reason.preserve_useful_intermediate_clearance_after_complete_growth_refusal"]
+  }, {
+    "id":"policy.articulated_pose_question_c","kind":"selection_policy","evaluation":"declared_eligibility_single",
+    "supported_operators":["SELECT"],"input_contract":"yf_arc3_v5.authority_input.selection.v1",
+    "output_contract":"yf_arc3_v5.authority_output.selection.v1",
+    "declared_alternative_refs":["articulated_pose.form"],"selection_required_fact_fields":["alternative_ref"],
+    "selection_eligibility_conditions":[{"field":"eligible","operator":"equals","expected":true}],
+    "fact_projections":[{"id":"projection.articulated_pose.form","all_conditions":[
+      {"field":"alternative_ref","operator":"equals","expected":"articulated_pose.form"},
+      {"field":"question_formation_current","operator":"equals","expected":true},
+      {"field":"marker_population_complete","operator":"equals","expected":true}],"static_facts":{"eligible":true}}],
+    "meaning_template_ref_by_alternative":{"articulated_pose.form":"rule.articulated_pose_question_c"},
+    "premises":["current_parent_marker_ensemble","grounded_local_marker_offsets"],
+    "invariants":["whole_marker_conjunction","no_arbitrary_pose_when_underdetermined","no_ACT"],
+    "falsifiers":["marker_body_or_target_changed","ancestor_relation_contradicted"],
+    "reason_refs":["reason.all_marker_constraints_define_the_requested_future_configuration"]
+  }, {
+    "id":"rule.articulated_pose_question_c","kind":"rule","evaluation":"project_requested_conclusions",
+    "supported_operators":["DERIVE"],"input_contract":"yf_arc3_v5.authority_input.derivation.v1",
+    "output_contract":"yf_arc3_v5.authority_output.derivation.v1","relation_family":"epistemic",
+    "term_templates":[{"id_pattern":"question.articulated.pose.{projection_ref}","kind":"goal",
+      "label":"Pose constraints from the marker ensemble",
+      "required_fields":["projection_ref","parent_goal_ref","body_ref","marker_constraints"],
+      "attribute_bindings":{"parent_goal_ref":"parent_goal_ref","body_ref":"body_ref","marker_constraints":"marker_constraints",
+        "ancestor_body_refs":"ancestor_body_refs","available_ancestor_channel_refs":"available_ancestor_channel_refs",
+        "principal_desired_future":"principal_desired_future","utility_reason_ref":"utility_reason_ref",
+        "frozen_why":"frozen_why","preservation_refs":"preservation_refs","restoration_targets":"restoration_targets",
+        "falsifier_ref":"falsifier_ref"},"static_attributes":{"status":"proposed","no_action_authority":true}}],
+    "claim_templates":[{"id_pattern":"claim.articulated.pose.{projection_ref}",
+      "predicate":"proposes_articulated_marker_ensemble_pose_question","family":"epistemic","epistemic_status":"proposed",
+      "argument_patterns":["{parent_goal_ref}","{body_ref}","question.articulated.pose.{projection_ref}"],
+      "required_term_patterns":["{parent_goal_ref}","question.articulated.pose.{projection_ref}"],
+      "required_fields":["projection_ref","parent_goal_ref","body_ref","marker_constraints"],
+      "attribute_bindings":{"marker_constraints":"marker_constraints","frozen_why":"frozen_why"}}],
+    "premises":["all_acquired_marker_targets_on_this_body"],"invariants":["principal_goal_unchanged","retain_free_pose_parameters"],
+    "falsifiers":["actual_marker_geometry_changed"],"reason_refs":["reason.pose_and_ancestor_clearance_serve_the_marker_conjunction"]
+  }, {
+  "id": "policy.articulated_restoration_target_c",
+  "kind": "selection_policy",
+  "evaluation": "declared_eligibility_single",
+  "supported_operators": [
+    "SELECT"
+  ],
+  "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+  "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+  "declared_alternative_refs": [
+    "articulated_restoration_target.form"
+  ],
+  "selection_required_fact_fields": [
+    "alternative_ref"
+  ],
+  "selection_eligibility_conditions": [
+    {
+      "field": "eligible",
+      "operator": "equals",
+      "expected": true
+    }
+  ],
+  "fact_projections": [
+    {
+      "id": "projection.articulated_restoration_target.form",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "articulated_restoration_target.form"
+        },
+        {
+          "field": "question_formation_current",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "initial_alignment_observed",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "clearance_control_affects_contributor",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "static_facts": {
+        "eligible": true
+      }
+    }
+  ],
+  "meaning_template_ref_by_alternative": {
+    "articulated_restoration_target.form": "rule.articulated_restoration_target_c"
+  },
+  "premises": [
+    "current_observed_initial_marker_alignment",
+    "available_clearance_control_affects_this_contributor"
+  ],
+  "invariants": [
+    "principal_goal_unchanged",
+    "preserve_marker_relation_without_arbitrary_full_pose",
+    "no_ACT"
+  ],
+  "falsifiers": [
+    "initial_alignment_not_observed",
+    "command_does_not_affect_body",
+    "no_parent_clearance_dependency"
+  ],
+  "reason_refs": [
+    "reason.temporary_clearance_preserves_the_complete_terminal_marker_conjunction"
+  ]
+}, {
+  "id": "rule.articulated_restoration_target_c",
+  "kind": "rule",
+  "evaluation": "project_requested_conclusions",
+  "supported_operators": [
+    "DERIVE"
+  ],
+  "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+  "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+  "relation_family": "epistemic",
+  "term_templates": [
+    {
+      "id_pattern": "question.articulated.restore.{projection_ref}",
+      "kind": "goal",
+      "label": "Restore the initially aligned marker after useful clearance",
+      "required_fields": [
+        "projection_ref",
+        "parent_goal_ref",
+        "body_ref",
+        "marker_ref",
+        "dependency_ref"
+      ],
+      "attribute_bindings": {
+        "parent_goal_ref": "parent_goal_ref",
+        "dependency_ref": "dependency_ref",
+        "body_ref": "body_ref",
+        "marker_ref": "marker_ref",
+        "world_position": "world_position",
+        "primitive_ref": "primitive_ref",
+        "input_ref": "input_ref",
+        "affected_body_refs": "affected_body_refs",
+        "passive_blocker_ref": "passive_blocker_ref",
+        "observed_frame_ref": "observed_frame_ref",
+        "frozen_why": "frozen_why",
+        "falsifier_ref": "falsifier_ref"
+      },
+      "static_attributes": {
+        "status": "proposed",
+        "no_action_authority": true,
+        "restoration_relation": "MARKER_WORLD_POSITION"
+      }
+    }
+  ],
+  "claim_templates": [
+    {
+      "id_pattern": "claim.articulated.restore.{projection_ref}",
+      "predicate": "proposes_restoration_of_initially_aligned_clearance_contributor",
+      "family": "epistemic",
+      "epistemic_status": "proposed",
+      "argument_patterns": [
+        "{parent_goal_ref}",
+        "{body_ref}",
+        "question.articulated.restore.{projection_ref}"
+      ],
+      "required_term_patterns": [
+        "{parent_goal_ref}",
+        "question.articulated.restore.{projection_ref}"
+      ],
+      "required_fields": [
+        "projection_ref",
+        "parent_goal_ref",
+        "body_ref",
+        "marker_ref",
+        "dependency_ref"
+      ],
+      "attribute_bindings": {
+        "parent_goal_ref": "parent_goal_ref",
+        "dependency_ref": "dependency_ref",
+        "body_ref": "body_ref",
+        "marker_ref": "marker_ref",
+        "world_position": "world_position",
+        "primitive_ref": "primitive_ref",
+        "input_ref": "input_ref",
+        "affected_body_refs": "affected_body_refs",
+        "passive_blocker_ref": "passive_blocker_ref",
+        "observed_frame_ref": "observed_frame_ref",
+        "frozen_why": "frozen_why",
+        "falsifier_ref": "falsifier_ref"
+      }
+    }
+  ],
+  "premises": [
+    "current_observed_initial_marker_alignment",
+    "available_clearance_control_affects_this_contributor"
+  ],
+  "invariants": [
+    "principal_goal_unchanged",
+    "preserve_marker_relation_without_arbitrary_full_pose",
+    "no_ACT"
+  ],
+  "falsifiers": [
+    "initial_alignment_not_observed",
+    "command_does_not_affect_body",
+    "no_parent_clearance_dependency"
+  ],
+  "reason_refs": [
+    "reason.temporary_clearance_preserves_the_complete_terminal_marker_conjunction"
+  ]
+}
+  ]
+}

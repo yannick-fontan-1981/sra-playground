@@ -1,0 +1,73 @@
+{
+  "operation": "pack",
+  "directory": "docs/migration/lot10a-evidence/isolated-functional",
+  "partBytes": 900000,
+  "verified": [
+    {
+      "path": "docs/migration/lot10a-evidence/isolated-functional/regressions/catr-site83-replay.json.gz",
+      "sha256": "e0e74ad58649164d1149a30a8aa252925e4fd9a1643403007b4c1759cbe075f2",
+      "bytes": 1924521,
+      "manifest": "docs/migration/lot10a-evidence/isolated-functional/regressions/catr-site83-replay.json.gz.parts.json",
+      "parts": 3,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/isolated-functional/regressions/conn-site83-replay.json.gz",
+      "sha256": "285f70d70bea63d943648ab7870d5fece0d2b10be159b1b01fac5fc1193c8221",
+      "bytes": 3733464,
+      "manifest": "docs/migration/lot10a-evidence/isolated-functional/regressions/conn-site83-replay.json.gz.parts.json",
+      "parts": 5,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/isolated-functional/regressions/fogw-site83-replay.json.gz",
+      "sha256": "10ce9ade6000f85937c3b2dbf32f9e697ddb8e2d12567eff273d07805d9e17a5",
+      "bytes": 9453022,
+      "manifest": "docs/migration/lot10a-evidence/isolated-functional/regressions/fogw-site83-replay.json.gz.parts.json",
+      "parts": 11,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/isolated-functional/regressions/mind-site83-replay.json.gz",
+      "sha256": "91577f96b6859083df87f8cb1b76435bab5039e5c72ec3fec7a19dd77314c0b6",
+      "bytes": 4976817,
+      "manifest": "docs/migration/lot10a-evidence/isolated-functional/regressions/mind-site83-replay.json.gz.parts.json",
+      "parts": 6,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/isolated-functional/regressions/rswp-site83-replay.json.gz",
+      "sha256": "a98cd73eb905ba1d1ca23ec000ad4fdbd68f637cd45706a10527208723e0f9b9",
+      "bytes": 2990967,
+      "manifest": "docs/migration/lot10a-evidence/isolated-functional/regressions/rswp-site83-replay.json.gz.parts.json",
+      "parts": 4,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/isolated-functional/regressions/vois-site83-replay.json.gz",
+      "sha256": "1582ae9b29e779373150c83a2be5c0e1170f72c9c753984984287c1b68e3993d",
+      "bytes": 12325280,
+      "manifest": "docs/migration/lot10a-evidence/isolated-functional/regressions/vois-site83-replay.json.gz.parts.json",
+      "parts": 14,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/isolated-functional/regressions/weav-site83-replay.json.gz",
+      "sha256": "a1f4c6f3dfe92ed37bd746d3516805ffccaad2120e38029044c71f77e44df840",
+      "bytes": 15388665,
+      "manifest": "docs/migration/lot10a-evidence/isolated-functional/regressions/weav-site83-replay.json.gz.parts.json",
+      "parts": 18,
+      "restored": false
+    }
+  ],
+  "gitignoreEntriesAdded": [
+    "/docs/migration/lot10a-evidence/isolated-functional/regressions/catr-site83-replay.json.gz",
+    "/docs/migration/lot10a-evidence/isolated-functional/regressions/conn-site83-replay.json.gz",
+    "/docs/migration/lot10a-evidence/isolated-functional/regressions/fogw-site83-replay.json.gz",
+    "/docs/migration/lot10a-evidence/isolated-functional/regressions/mind-site83-replay.json.gz",
+    "/docs/migration/lot10a-evidence/isolated-functional/regressions/rswp-site83-replay.json.gz",
+    "/docs/migration/lot10a-evidence/isolated-functional/regressions/vois-site83-replay.json.gz",
+    "/docs/migration/lot10a-evidence/isolated-functional/regressions/weav-site83-replay.json.gz"
+  ],
+  "qualification": "Exact byte transport only; no agent result is regenerated or reinterpreted."
+}

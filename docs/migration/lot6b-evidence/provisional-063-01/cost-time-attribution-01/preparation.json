@@ -1,0 +1,33 @@
+{
+  "schema": "logos-engine.lot6b-prospective-time-attribution-source.v1",
+  "status": "prepared_not_executed",
+  "preparedAt": "2026-11-11T18:33:17.414953+00:00",
+  "qualifier": "docs/migration/lot6b-evidence/qualify-cost-owner-graphs.mjs",
+  "beforeQualifier": "docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/before-qualifier.mjs",
+  "beforeRefusal": "docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/before-refusal.json",
+  "diff": "docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/qualifier.patch",
+  "test": "docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/trace-created-attribution.test.mjs",
+  "api": [
+    "TraceCreatedAttribution(windows)",
+    "commonNode(a,b,digestA,digestB,{attribution,sessionId})"
+  ],
+  "sourceClock": {
+    "path": "src/logos-engine/v6-reasoning-memory.ts",
+    "symbols": [
+      "constructor",
+      "trace"
+    ],
+    "defaultClock": "Date.now() / 1000",
+    "sourceConstructor": "src/logos-engine/v6-native-authority.ts: NativeCompositionAuthority.memory = new NativeReasoningMemory()"
+  },
+  "existingCapturedSourceIdentities": {
+    "src/logos-engine/v6-reasoning-memory.ts": "b55c186c99636f28c9e6e9c657b9bb50892eac06a3306be197503188069d901a",
+    "src/logos-engine/v6-native-authority.ts": "f5a54ecac86fb097ee739dc6e4f8b4729819d58c9992fee92188527a1544b3ff"
+  },
+  "nativeChanged": false,
+  "frozenTestsChanged": false,
+  "testsExecuted": false,
+  "importsExecuted": false,
+  "qualificationExecuted": false,
+  "captureOrGameOrCostExecuted": false
+}

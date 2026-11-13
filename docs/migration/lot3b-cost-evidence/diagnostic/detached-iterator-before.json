@@ -1,0 +1,78 @@
+{
+  "schema": "logos-engine.detached-iterator-regression.v1",
+  "status": "expected_failure_reproduced",
+  "command": [
+    "node",
+    "--test",
+    "--test-reporter=tap",
+    "--test-name-pattern=a detached Map inherited iterator cannot certify a closure-dependent inventory projection",
+    "tests/v6-inventory-restoration-cache.test.ts"
+  ],
+  "startedAt": "2026-11-10T01:11:57.675429+00:00",
+  "finishedAt": "2026-11-10T01:11:58.004263+00:00",
+  "elapsedSeconds": 0.32877946700318716,
+  "exitCode": 1,
+  "testCounts": {
+    "tests": 1,
+    "pass": 0,
+    "fail": 1,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "inputs": [
+    {
+      "path": "src/logos-engine/v6-native-working-witness.ts",
+      "sha256": "5d2ef745abdd8c6aa7b298627d60acc09c0306ab101ba71f0c2393c5c0ddd74e",
+      "bytes": 5006
+    },
+    {
+      "path": "src/logos-engine/v6-observed-inventory.ts",
+      "sha256": "ba67f83a8c8b8457a72ed82fea84221f122acddbd866a691ba44370f03783f69",
+      "bytes": 43333
+    },
+    {
+      "path": "tests/v6-inventory-restoration-cache.test.ts",
+      "sha256": "3cbd8db7cad3987f48cc508bf7b264b545ffe642e0639e911786a0eca3c9ad71",
+      "bytes": 14848
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "src/logos-engine/v6-native-working-witness.ts",
+      "sha256": "5d2ef745abdd8c6aa7b298627d60acc09c0306ab101ba71f0c2393c5c0ddd74e",
+      "bytes": 5006
+    },
+    {
+      "path": "src/logos-engine/v6-observed-inventory.ts",
+      "sha256": "ba67f83a8c8b8457a72ed82fea84221f122acddbd866a691ba44370f03783f69",
+      "bytes": 43333
+    },
+    {
+      "path": "tests/v6-inventory-restoration-cache.test.ts",
+      "sha256": "3cbd8db7cad3987f48cc508bf7b264b545ffe642e0639e911786a0eca3c9ad71",
+      "bytes": 14848
+    }
+  ],
+  "inputsUnchanged": true,
+  "nativeSourceBefore": {
+    "fileCount": 249,
+    "digest": "55192314213367a8c35e579b8cba17a022146359e1a76efcc1ae9caf5f6ce9cc"
+  },
+  "nativeSourceAfter": {
+    "fileCount": 249,
+    "digest": "55192314213367a8c35e579b8cba17a022146359e1a76efcc1ae9caf5f6ce9cc"
+  },
+  "nativeSourceUnchanged": true,
+  "frozenSourceManifest": {
+    "path": "docs/migration/lot3b-cost-evidence/final/source-manifest.json",
+    "sha256": "500fd3eb8f391a59dce7d044d8b7021a942c0d4cb5c314644b1ddc6890cddbfc",
+    "bytes": 29431
+  },
+  "output": {
+    "path": "docs/migration/lot3b-cost-evidence/diagnostic/detached-iterator-before-output.tap.gz",
+    "sha256": "ee3a4725eab8a3ec2e51adc6c77259e9d79f2ac8c00fbd00bedfa203ac8e301c",
+    "bytes": 2348
+  },
+  "qualification": "One synthetic component regression executed by exact test-name filter on the unchanged preliminary native source. The actual assertion failure and full TAP are retained, not normalized. No game, benchmark, build or source oracle ran. The test demonstrates a stale native checkpoint after a Map loses Map.prototype and a closure-dependent inherited iterator continues to affect the source projection."
+}

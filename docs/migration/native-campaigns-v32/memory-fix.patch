@@ -1,0 +1,217 @@
+diff --git a/src/logos-engine/canonical.ts b/src/logos-engine/canonical.ts
+--- a/src/logos-engine/canonical.ts
++++ b/src/logos-engine/canonical.ts
+@@ -1,4 +1,5 @@
+ import type { JsonObject, JsonValue } from './ir.ts';
++import { BoundedWeakCache } from './bounded-weak-cache.ts';
+ 
+ /**
+  * Portable V7 scalar contract for this first browser port.
+@@ -16,7 +17,11 @@
+ const immutableObjects = new WeakSet<object>();
+ // Only deeply immutable, fully validated trees enter this cache. Size and
+ // height are retained so reuse cannot evade the original structural limits.
+-const canonicalObjects = new WeakMap<object, { text: string; nodes: number; height: number }>();
++// Historical V7 nodes deliberately remain alive. Weak keys alone therefore do
++// not bound the redundant text of every historical descendant/ancestor. This
++// cache holds at most 16 MiB of UTF-16 text plus an allowance for each entry;
++// eviction only removes a recomputable encoding, never a knowledge revision.
++const canonicalObjects = new BoundedWeakCache<{ text: string; nodes: number; height: number }>(16 * 1024 * 1024, 4096);
+ const MAX_DEPTH = 128;
+ const MAX_NODES = 1_000_000;
+ 
+@@ -178,7 +183,7 @@
+     }
+     ancestors.delete(item);
+     lastHeight = height; lastImmutable = deeplyImmutable;
+-    if (deeplyImmutable) canonicalObjects.set(item, { text: encoded, nodes: nodes - initialNodes + 1, height });
++    if (deeplyImmutable) canonicalObjects.set(item, { text: encoded, nodes: nodes - initialNodes + 1, height }, 2 * encoded.length + 128);
+     return encoded;
+   }
+   return encode(value, 0);
+diff --git a/src/logos-engine/v6-native-state-graph.ts b/src/logos-engine/v6-native-state-graph.ts
+--- a/src/logos-engine/v6-native-state-graph.ts
++++ b/src/logos-engine/v6-native-state-graph.ts
+@@ -1,7 +1,8 @@
+ /** Lossless native state graphs; immutable fragments are ordinary versioned V7 nodes. */
+-import { assertUnicode, compareUnicode, isJsonObject } from './canonical.ts';
++import { assertUnicode, compareUnicode, immutableJson, isJsonObject } from './canonical.ts';
+ import { sha256Bytes, symbolicDigest } from './v6-hash.ts';
+ import type { JsonObject, JsonValue } from './ir.ts';
++import { BoundedWeakCache } from './bounded-weak-cache.ts';
+ 
+ export const NATIVE_STATE_GRAPH_PROFILE = 'logos-engine.v6.state-graph.v1';
+ export const NATIVE_STATE_FRAGMENT_PREFIX = 'state_fragment:';
+@@ -25,6 +26,13 @@
+ const frozenStateNodes = new WeakMap<object, { limit: number; value: Sized; height: number; fragments: readonly NativeStateFragment[] }>();
+ const NO_FRAGMENTS: readonly NativeStateFragment[] = Object.freeze([]);
+ 
++// Own the closed AST when each node is built. Its children are then recognized
++// at the ordinary V7 ingress boundary, so persisting the next root preserves
++// their identities instead of recopying every unchanged encoded descendant.
++// Raw caller values still go through visitRaw; the complete canonical digest
++// before a Kernel commit still checks full size, depth and portable scalars.
++function ownedEncoded<T extends Encoded>(node: T): T { return immutableJson(node) as T; }
++
+ /**
+  * The encoder below has already checked every raw value and creates this closed
+  * immutable AST itself. Revalidating its thousands of tiny envelope objects in
+@@ -33,7 +41,7 @@
+  * fast path never accepts stored or caller-created ASTs; hydration still checks
+  * untrusted fragments through the full canonical/hash boundary.
+  */
+-const encodedText = new WeakMap<object, string>();
++const encodedText = new BoundedWeakCache<string>(4 * 1024 * 1024, 2048);
+ function encodedCanonical(node: Encoded): string {
+   if (node === null || typeof node !== 'object') return JSON.stringify(node);
+   const cached = encodedText.get(node); if (cached !== undefined) return cached;
+@@ -46,7 +54,7 @@
+       .map(key => `${JSON.stringify(key)}:${encodedCanonical(node.members[key]!)}`).join(',')}}}`; break;
+     case 'concat': case 'merge': result = `{"kind":"${node.kind}","parts":[${node.parts.map(encodedCanonical).join(',')}]}`; break;
+   }
+-  encodedText.set(node, result); return result;
++  encodedText.set(node, result, 2 * result.length + 96); return result;
+ }
+ 
+ /**
+@@ -75,11 +83,11 @@
+     emitted.push(fragment);
+   };
+   const fragment = (node: Encoded): Sized => {
+-    const value = Object.freeze({ profile: NATIVE_STATE_GRAPH_PROFILE, node }) as unknown as JsonObject;
++    const value = immutableJson({ profile: NATIVE_STATE_GRAPH_PROFILE, node }) as JsonObject;
+     const bytes = new TextEncoder().encode(`{"node":${encodedCanonical(node)},"profile":${JSON.stringify(NATIVE_STATE_GRAPH_PROFILE)}}`);
+     const id = `${NATIVE_STATE_FRAGMENT_PREFIX}${sha256Bytes(bytes)}`;
+     emit(fragments.get(id) ?? Object.freeze({ id, value }));
+-    return { node: Object.freeze({ kind: 'ref', id }), cost: 3 };
++    return { node: ownedEncoded({ kind: 'ref', id }), cost: 3 };
+   };
+   const combine = (kind: 'concat' | 'merge', children: Sized[]): Sized => {
+     // A flat collection can itself be enormous: bound the reference fanout too.
+@@ -87,13 +95,13 @@
+     while (3 + parts.reduce((n, part) => n + part.cost, 0) > bound) {
+       const next: Sized[] = []; let group: Sized[] = [], cost = 3;
+       for (const part of parts) {
+-        if (cost + part.cost > bound && group.length) { next.push(fragment(Object.freeze({ kind, parts: Object.freeze(group.map(p => p.node)) }))); group = []; cost = 3; }
++        if (cost + part.cost > bound && group.length) { next.push(fragment(ownedEncoded({ kind, parts: Object.freeze(group.map(p => p.node)) }))); group = []; cost = 3; }
+         group.push(part); cost += part.cost;
+       }
+-      if (group.length) next.push(fragment(Object.freeze({ kind, parts: Object.freeze(group.map(p => p.node)) })));
++      if (group.length) next.push(fragment(ownedEncoded({ kind, parts: Object.freeze(group.map(p => p.node)) })));
+       parts = next;
+     }
+-    return { node: Object.freeze({ kind, parts: Object.freeze(parts.map(p => p.node)) }), cost: 3 + parts.reduce((n, p) => n + p.cost, 0) };
++    return { node: ownedEncoded({ kind, parts: Object.freeze(parts.map(p => p.node)) }), cost: 3 + parts.reduce((n, p) => n + p.cost, 0) };
+   };
+   const visitRaw = (input: unknown, depth: number): Sized => {
+     if (depth > 128) throw new TypeError('Native state nesting exceeds the V7 structural contract');
+@@ -103,7 +111,7 @@
+       if (!Number.isFinite(input)) throw new TypeError('Native state numbers must be finite');
+       if (Number.isSafeInteger(input) && !Object.is(input, -0)) return { node: input, cost: 1 };
+       const bytes = new Uint8Array(8); new DataView(bytes.buffer).setFloat64(0, input, false);
+-      return { node: Object.freeze({ kind: 'float64', bits: [...bytes].map(byte => byte.toString(16).padStart(2, '0')).join('') }), cost: 3 };
++      return { node: ownedEncoded({ kind: 'float64', bits: [...bytes].map(byte => byte.toString(16).padStart(2, '0')).join('') }), cost: 3 };
+     }
+     if (typeof input !== 'object') throw new TypeError('Native state requires explicit JSON values');
+     if (!Array.isArray(input) && !isJsonObject(input)) throw new TypeError('Native state requires plain objects and arrays');
+@@ -121,7 +129,7 @@
+         const children = names.map(name => visit(descriptors[name]!.value, depth + 1));
+         const cost = 3 + children.reduce((n, child) => n + child.cost, 0);
+         if (cost <= bound) {
+-          const node = Object.freeze({ kind: 'array' as const, items: Object.freeze(children.map(child => child.node)) });
++          const node = ownedEncoded({ kind: 'array' as const, items: Object.freeze(children.map(child => child.node)) });
+           const pixelMatrix = input.length > 0 && input.every(row => Array.isArray(row) && row.length > 0 && row.every(v => typeof v === 'number' && Number.isSafeInteger(v) && v >= 0 && v <= 255));
+           if (pixelMatrix && cost >= 512) {
+             return fragment(node);
+@@ -131,22 +139,22 @@
+         const groups: Sized[] = []; let group: Sized[] = [], groupCost = 3;
+         for (let child of children) {
+           if (child.cost + 3 > bound) child = fragment(child.node);
+-          if (groupCost + child.cost > bound && group.length) { groups.push(fragment(Object.freeze({ kind: 'array', items: Object.freeze(group.map(c => c.node)) }))); group = []; groupCost = 3; }
++          if (groupCost + child.cost > bound && group.length) { groups.push(fragment(ownedEncoded({ kind: 'array', items: Object.freeze(group.map(c => c.node)) }))); group = []; groupCost = 3; }
+           group.push(child); groupCost += child.cost;
+         }
+-        if (group.length) groups.push(fragment(Object.freeze({ kind: 'array', items: Object.freeze(group.map(c => c.node)) })));
++        if (group.length) groups.push(fragment(ownedEncoded({ kind: 'array', items: Object.freeze(group.map(c => c.node)) })));
+         return combine('concat', groups);
+       }
+       const entries = names.sort(compareUnicode).map(name => [name, visit(descriptors[name]!.value, depth + 1)] as const);
+       const cost = 3 + entries.reduce((n, [, child]) => n + child.cost, 0);
+-      if (cost <= bound) return { node: Object.freeze({ kind: 'object', members: Object.freeze(Object.fromEntries(entries.map(([name, child]) => [name, child.node]))) }), cost };
++      if (cost <= bound) return { node: ownedEncoded({ kind: 'object', members: Object.freeze(Object.fromEntries(entries.map(([name, child]) => [name, child.node]))) }), cost };
+       const groups: Sized[] = []; let group: (readonly [string, Sized])[] = [], groupCost = 3;
+       for (const [name, original] of entries) {
+         const child = original.cost + 3 > bound ? fragment(original.node) : original;
+-        if (groupCost + child.cost > bound && group.length) { groups.push(fragment(Object.freeze({ kind: 'object', members: Object.freeze(Object.fromEntries(group.map(([name, child]) => [name, child.node]))) }))); group = []; groupCost = 3; }
++        if (groupCost + child.cost > bound && group.length) { groups.push(fragment(ownedEncoded({ kind: 'object', members: Object.freeze(Object.fromEntries(group.map(([name, child]) => [name, child.node]))) }))); group = []; groupCost = 3; }
+         group.push([name, child]); groupCost += child.cost;
+       }
+-      if (group.length) groups.push(fragment(Object.freeze({ kind: 'object', members: Object.freeze(Object.fromEntries(group.map(([name, child]) => [name, child.node]))) })));
++      if (group.length) groups.push(fragment(ownedEncoded({ kind: 'object', members: Object.freeze(Object.fromEntries(group.map(([name, child]) => [name, child.node]))) })));
+       return combine('merge', groups);
+     } finally { ancestors.delete(input); }
+   };
+@@ -181,7 +189,8 @@
+     const value = visitRaw(input, depth); note(0, true); return value;
+   };
+   const encoded = visit(value, 0);
+-  return Object.freeze({ root: Object.freeze({ profile: NATIVE_STATE_GRAPH_PROFILE, component, root: encoded.node as JsonValue }), fragments: Object.freeze([...fragments.values()]) });
++  return Object.freeze({ root: immutableJson({ profile: NATIVE_STATE_GRAPH_PROFILE, component, root: encoded.node as JsonValue }) as NativeStateGraphRoot,
++    fragments: Object.freeze([...fragments.values()]) });
+ }
+ 
+ export function isNativeStateGraph(value: unknown): value is NativeStateGraphRoot {
+diff --git a/src/logos-engine/bounded-weak-cache.ts b/src/logos-engine/bounded-weak-cache.ts
+new file mode 100644
+--- /dev/null
++++ b/src/logos-engine/bounded-weak-cache.ts
+@@ -0,0 +1,49 @@
++/** Disposable computed values; neither cache keys nor old evicted values are retained. */
++export class BoundedWeakCache<V> {
++  private readonly values = new WeakMap<object, { value: V; token: object }>();
++  private readonly order = new Map<object, { key: WeakRef<object>; weight: number }>();
++  private weight = 0;
++  readonly maxWeight: number;
++  readonly maxEntries: number;
++
++  constructor(maxWeight: number, maxEntries: number) {
++    if (!Number.isSafeInteger(maxWeight) || maxWeight < 1 || !Number.isSafeInteger(maxEntries) || maxEntries < 1) {
++      throw new RangeError('A computed-value cache requires positive finite bounds');
++    }
++    this.maxWeight = maxWeight; this.maxEntries = maxEntries;
++  }
++  get retainedWeight(): number { return this.weight; }
++  get entryCount(): number { return this.order.size; }
++
++  get(key: object): V | undefined {
++    const found = this.values.get(key);
++    if (!found) return undefined;
++    // The ordering table contains only weak keys and integer weights. In
++    // particular it must not contain the computed value: a dead key releases
++    // its value even while this conservative accounting entry remains queued.
++    const accounting = this.order.get(found.token)!;
++    this.order.delete(found.token); this.order.set(found.token, accounting);
++    return found.value;
++  }
++
++  set(key: object, value: V, weight: number): void {
++    if (!Number.isSafeInteger(weight) || weight < 1) throw new RangeError('Invalid computed-value cache weight');
++    const previous = this.values.get(key);
++    if (previous) {
++      this.weight -= this.order.get(previous.token)!.weight;
++      this.order.delete(previous.token); this.values.delete(key);
++    }
++    // An individual result larger than the entire cache remains a valid
++    // computed result; it is simply recomputed if it is requested again.
++    if (weight > this.maxWeight) return;
++    const token = {};
++    this.values.set(key, { value, token });
++    this.order.set(token, { key: new WeakRef(key), weight }); this.weight += weight;
++    while (this.weight > this.maxWeight || this.order.size > this.maxEntries) {
++      const [oldToken, old] = this.order.entries().next().value!;
++      this.order.delete(oldToken); this.weight -= old.weight;
++      const oldKey = old.key.deref();
++      if (oldKey && this.values.get(oldKey)?.token === oldToken) this.values.delete(oldKey);
++    }
++  }
++}

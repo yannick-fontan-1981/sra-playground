@@ -1,0 +1,223 @@
+{
+  "schema": "logos-engine.v47.release-validation.v1",
+  "status": "passed",
+  "sourceDigest": "2f8f5d8660716e44e81fa987d08264324f61838c81ba9e96b2e64f69c136d100",
+  "nativeSourceFiles": 158,
+  "nativeSourceManifest": {
+    "path": "docs/migration/native-campaigns-v47/source-manifest.json",
+    "sha256": "cc8622ed59c6d1a93d98583271aa3ae744f68159a64887c98a8d080c5011c936",
+    "bytes": 18375
+  },
+  "newActualCampaign": {
+    "report": {
+      "path": "docs/migration/native-campaigns-v47/sele-three-levels.json",
+      "sha256": "36f06711eea87e103312501b6b524ff30b3a773a0a0d598d1ce4027a78d6a430",
+      "bytes": 3958303
+    },
+    "execution": {
+      "path": "docs/migration/native-campaigns-v47/logs/execution-sele.json",
+      "sha256": "cc335fc9a907f10f90d48e0926aeff292ad2e2f7086667433e028e1b491baaf9",
+      "bytes": 38909
+    },
+    "trace": {
+      "path": "docs/migration/native-campaigns-v47/sele-public-trace.json.gz",
+      "sha256": "f62033bd4cc0d829ba9ffe36c9c3efd6b77a63bf1e5896f7a9b0a2694d49e3a2",
+      "bytes": 36187
+    },
+    "campaignStatus": "passed",
+    "targetLevels": 3,
+    "targetReached": true,
+    "levelsCompleted": 3,
+    "actions": 44,
+    "prefixes": 44,
+    "actionsThroughLastBoundary": 44,
+    "sessions": 1,
+    "stopReason": "target_levels_completed",
+    "officialState": "NOT_FINISHED",
+    "officialWin": false,
+    "completePublicPackets": 45,
+    "animationFramesIncludingInitial": 229
+  },
+  "retainedExtensionAttempt": {
+    "report": {
+      "path": "docs/migration/native-campaigns-v47/zipp-six-levels.json",
+      "sha256": "f404ad30668c01804de9e466f3c0a944695e8988dbf33b531d8cfd20e02db62b",
+      "bytes": 2294194
+    },
+    "execution": {
+      "path": "docs/migration/native-campaigns-v47/logs/execution-zipp.json",
+      "sha256": "a83673a6b45d6cfaa78a6e1ab32d549adc2a32929267627bc268805f58830d29",
+      "bytes": 38906
+    },
+    "trace": {
+      "path": "docs/migration/native-campaigns-v47/zipp-public-trace.json.gz",
+      "sha256": "5a908ef86ec8b63c64cd19e9c662c5af32bdd5fe0f4025de691a840499c7ed6a",
+      "bytes": 27629
+    },
+    "campaignStatus": "failed",
+    "targetLevels": 6,
+    "targetReached": false,
+    "levelsCompleted": 5,
+    "actions": 78,
+    "prefixes": 37,
+    "actionsThroughLastBoundary": 77,
+    "sessions": 1,
+    "stopReason": "frontier_unknown",
+    "officialState": "NOT_FINISHED",
+    "officialWin": false,
+    "completePublicPackets": 79,
+    "animationFramesIncludingInitial": 94
+  },
+  "componentComparisons": {
+    "linkedPacket": {
+      "path": "docs/migration/native-campaigns-v47/sele-original-component-comparison.json",
+      "sha256": "52bcecd5606e7955caa1828cae25d2eff4c75cd5ba020f18eaba592d2472556e",
+      "bytes": 69419
+    },
+    "traceExtension": {
+      "path": "docs/migration/native-campaigns-v47/zipp-trace-extension-comparison.json",
+      "sha256": "e0178b78a9ff823572e51f59cde7ffdedd0e1918dc5e0c7df5442e24daa1fe5c",
+      "bytes": 50536
+    },
+    "sourceAliasDiagnosticArchive": {
+      "diagnostic": {
+        "path": "tests/fixtures/v6-linked-packet-reference-alias-diagnostic.json.gz",
+        "sha256": "3ee4fe6907c44726ec06f5789effcf6bba6857e23cc06741a4034356ea93aa83",
+        "bytes": 1580717
+      },
+      "originalGenerator": {
+        "path": "scripts/history/export-v6-linked-packet-reference-pre-emission.py",
+        "sha256": "6523c8cbab77c318a64ebf52d6204dcf426d1140218f45d4126cdb2ea1af16ab",
+        "bytes": 9754
+      }
+    },
+    "readOnlyRecomputationPassed": true,
+    "maximumAbsoluteNumericError": 7.105427357601002e-15,
+    "scope": "44 full production plans and 44 latest Kernel events are compared. The 53 source emissions and nine aliases are tested in the reference fixture; production reports do not retain every intermediate event payload. No full original common-caller parity is claimed."
+  },
+  "deltaTests": {
+    "receipt": {
+      "path": "docs/migration/native-campaigns-v47/validation/delta-tests-final.json",
+      "sha256": "6b8c13edc8925c4cc769459128d64642c57940881653393890c1af76caf5cf74",
+      "bytes": 171518
+    },
+    "initialExecution": {
+      "path": "docs/migration/native-campaigns-v47/validation/delta-tests-run.json",
+      "sha256": "6387c9b4a9fc375acbb65561c2e799e954005107bc097e93bcbdc6114d84df81",
+      "bytes": 80460
+    },
+    "initialExecutionStatus": "failed",
+    "initialFreezeGatePassed": false,
+    "validationMode": "unchanged-tests-plus-scoped-recheck",
+    "counts": {
+      "tests": 664,
+      "pass": 664,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "testFiles": 17,
+    "unchangedTests": 609,
+    "recheckedTests": 55,
+    "actualExecutedTests": 719,
+    "qualification": "609 unchanged checks plus 55 checks rerun from the sole changed test file cover 664 distinct final checks. The original functional 664/664 run and its failed input-freeze gate are retained. This is not a single final frozen execution of all 664 tests."
+  },
+  "regressions": {
+    "summary": {
+      "path": "docs/migration/native-campaigns-v47/regression-summary.json",
+      "sha256": "32ed7c666897701d5a13c4106095b5b88b20c9cbd378cf113ea3d11cc48902a7",
+      "bytes": 4379
+    },
+    "groups": [
+      {
+        "mode": "recorded-public-replay",
+        "runs": 4,
+        "passed": true,
+        "commands": 242,
+        "completePublicPackets": 246,
+        "prefixes": 189,
+        "comparisonChecks": 60,
+        "games": [
+          "STCK",
+          "CATL",
+          "LF52",
+          "TICT"
+        ]
+      },
+      {
+        "mode": "actual-game-campaign",
+        "runs": 0,
+        "passed": true,
+        "commands": 0,
+        "completePublicPackets": 0,
+        "prefixes": 0,
+        "comparisonChecks": 0,
+        "games": []
+      }
+    ],
+    "qualification": "Four cold native replays recompute commands against recorded complete public returns. They are not four additional live game campaigns."
+  },
+  "checks": {
+    "receipt": {
+      "path": "docs/migration/native-campaigns-v47/validation/checks-run.json",
+      "sha256": "1ce97236b3fa216215f051d2c35ff5780990deb0e0918b7378d096b03db8a22f",
+      "bytes": 65706
+    },
+    "nativeAgentWorker": {
+      "path": "dist/assets/v6-agent-worker-CI1mSv8S.js",
+      "sha256": "4ffa525ce515ebaf4450816940f76843212983368e203de6548698c7469a3bc0",
+      "bytes": 5370615
+    }
+  },
+  "browser": {
+    "receipt": {
+      "path": "docs/migration/native-campaigns-v47/sele-browser-verification.json",
+      "sha256": "196669f28523c41d1971f526e9827c41052dabe50d55931c41f996e054d7308d",
+      "bytes": 13639
+    },
+    "measurements": 10,
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    },
+    "boardColumnHeight": 442,
+    "canvasSize": 384,
+    "statusHeight": 98,
+    "maximumDocumentPositionDeltaPx": 0,
+    "maximumDimensionDeltaPx": 0,
+    "completedLevels": 3,
+    "actions": 44,
+    "prefixes": 44,
+    "inspectionClosedThroughout": true,
+    "captureFormat": "JPEG",
+    "fullscreen": "unavailable_in_browser",
+    "mobile": "not_measured",
+    "qualification": "All six measured document rectangles are identical in ten observations of the normal desktop layout, including after the unavailable fullscreen request. No fullscreen-mode or mobile-size validation is claimed."
+  },
+  "progress": {
+    "connected": 38,
+    "declared": 76,
+    "percent": 50,
+    "metric": "Connection of the explicit subquestions in the four ordered source DRM lists",
+    "entryAudit": {
+      "path": "docs/migration/v6-entry-point-progress.json",
+      "sha256": "cc6a53241e08864bbcfd3cf41ec9e5edbb497cc52f881329b05d84d94effd0c5",
+      "bytes": 15266
+    },
+    "migrationAudit": {
+      "path": "docs/migration/v6-coverage.json",
+      "sha256": "2c7d10ebf7391c3cf936768ae4077825e79ec5ad96767dd1b44f50ecf48354bb",
+      "bytes": 2401239
+    },
+    "qualification": "50% measures connected subquestions in the four declared source DRM lists; it is not full migration, original-caller parity, or a game success rate."
+  },
+  "completeMigration": false,
+  "originalFullCommonCallerParity": false,
+  "generator": {
+    "path": "scripts/validate-v47-release.py",
+    "sha256": "3ed2ed28ece5040544adf17d3b4c87be4ad51e2d3235343a136da610effa3084",
+    "bytes": 47673
+  },
+  "scope": "Read-only validation of retained actual executions, the frozen source, recomputed component comparisons, affected tests, four recorded-public regressions, build inputs and observed desktop UI measurements. No game or agent is executed. ZIPP remains a failed six-level attempt with five completed levels; neither new actual campaign is an official full-game WIN."
+}

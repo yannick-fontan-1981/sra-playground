@@ -1,0 +1,15 @@
+{
+  "command": [
+    "node",
+    "scripts/prove-addressed-material-common-loop.mjs",
+    "docs/migration/lot5b-evidence/integrated-final/common-stock",
+    "docs/migration/lot5b-evidence/integrated-final/source-manifest.json",
+    "cold-stock-source-selected",
+    "stock-preservation-refusal"
+  ],
+  "startedAt": "2026-11-11T01:51:28.942960+00:00",
+  "finishedAt": "2026-11-11T01:51:38.389941+00:00",
+  "exitCode": 0,
+  "status": "passed",
+  "log": "docs/migration/lot5b-evidence/integrated-final/common-stock/driver.log.gz"
+}

@@ -1,0 +1,87 @@
+{
+  "schema": "logos-engine.lot5c.bounded-transport-operator-contract.v3",
+  "invokeDirectlyWithoutOuterFlock": true,
+  "ttyRequired": true,
+  "input": "One UTF-8 JSON object followed by newline, maximum65536bytes including terminator, sent only through the existing interactive tool session.",
+  "actualToolSessionId": "Record the real ID in a separate coordination receipt before sending credentials; never infer it from an OS PID.",
+  "liveReceipt": "Fresh path outside checkout; parent directory must already exist. Root may copy a terminal receipt into repository evidence after command completion.",
+  "credentialObject": {
+    "source": "fresh credential returned for the same project, never copied into this document or any receipt",
+    "requiredFields": [
+      "auth_mode",
+      "remote_url",
+      "branch"
+    ],
+    "auth_mode": "work_proxy or http_extra_header",
+    "branch": "main for both checkpoint helpers; use returned authorized branch for official Sites",
+    "token": "required only for http_extra_header; hidden stdin only, never argv/file/persistent environment",
+    "remote_url": "exact returned authorized project repository HTTPS URL"
+  },
+  "modes": {
+    "checkpoint": {
+      "cliHelper": "checkpoint",
+      "jsonRequired": [
+        "credential",
+        "expectedCommit"
+      ],
+      "jsonOptional": {
+        "fetchOnly": "boolean; true only fetches and verifies"
+      },
+      "expectedCommit": "exact40hex intended clean checkout HEAD"
+    },
+    "bounded-checkpoints": {
+      "cliHelper": "bounded-checkpoints",
+      "jsonRequired": [
+        "credential",
+        "expectedCommit",
+        "expectedRemoteCommit"
+      ],
+      "jsonOptional": {
+        "transportCommits": "ordered unique array of1..20 exact40hex commits, final item expectedCommit; omission means[HEAD]",
+        "fetchOnly": "boolean; true bypasses push loop"
+      },
+      "expectedRemoteCommit": "exact40hex current checkpoint branch HEAD, must match fresh remote observation",
+      "volumeBound": "maximum32000000 raw new object bytes per transport step; time separately bounded by wrapper"
+    },
+    "sites-workflow": {
+      "cliHelper": "sites-workflow",
+      "fixedArgv": [
+        "node",
+        "/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.6/scripts/site-workflow.mjs",
+        "--project-id",
+        "appgprj_6adbc388d79081918581b93b919d7258"
+      ],
+      "jsonRequired": [
+        "credential",
+        "source"
+      ],
+      "sourceObject": {
+        "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+        "checkout_path": "absolute checkout equal to wrapper --checkout or its default"
+      },
+      "jsonForPublicationPreparation": {
+        "commands": "zero or more explicitly intended preparation argv arrays inside JSON; at most20 arrays, at most64 strings each; no arbitrary command-line argv accepted by wrapper",
+        "archivePath": "absolute destination outside checkout"
+      },
+      "stageAuthorization": "Root invokes publication preparation only after the actual cost gate and other required publication gates pass. This generic transport wrapper does not assert those gates.",
+      "effect": "Official helper prepares/saves source and archive. Actual Site publication remains a separate provider operation."
+    }
+  },
+  "timeLimits": {
+    "inputDefaultAndMaxSeconds": 45,
+    "handshakeDefaultSeconds": 10,
+    "handshakeMaxSeconds": 15,
+    "workDefaultSeconds": 300,
+    "workMaxSeconds": 540,
+    "handshakeIncludedInWorkDeadline": true
+  },
+  "quietGuards": "Ignore prospective quiet/publication/ordinary-heavy-work alone. Respect authoritative official_performance_active boolean; when omitted/null, fallback performance_started:true AND quiet_released!=true. Check before/after input, before child launch, and every0.5seconds during child work.",
+  "terminalRule": "Require terminal tool result and cleanup.complete=true; a failed or absent terminal receipt is not an idle ACK.",
+  "noAutomaticRetry": true,
+  "realTransportExecutedForTheseTests": false,
+  "entrypoint": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v3/run-bounded-command.py",
+  "performanceMutexAccessed": false,
+  "publicationMutexManagedHere": false,
+  "publicationProtection": "Actual publication is serialized separately by publication-coordination-v1/publication-guard.py. A pending foreign publication does not block ordinary source transport.",
+  "historicalV2Unmodified": true
+}

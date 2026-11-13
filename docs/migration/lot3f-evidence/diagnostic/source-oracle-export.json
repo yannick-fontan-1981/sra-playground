@@ -1,0 +1,25 @@
+{
+  "schema": "logos-engine.reference-population-source-oracle-export.v1",
+  "status": "passed",
+  "generator": {
+    "path": "scripts/export-v6-reference-population-reference.py",
+    "sha256": "9835bf728969433c553f3a885c75a2f9c45d86825899669007dd103fcd4a488c"
+  },
+  "fixture": {
+    "path": "tests/fixtures/v6-reference-population-reference.json.gz",
+    "bytes": 676234,
+    "sha256": "4a8f656ab4aa5708647916bd3fe52a1a09b2c78a64376c2c0cc0552214d86b97"
+  },
+  "cases": 89,
+  "guards": 24,
+  "sourceExceptions": 3,
+  "matchingCases": 10,
+  "physicalCases": 19,
+  "publicProjectionCases": 97,
+  "admittedGames": [
+    "VOIS"
+  ],
+  "originalFilesVerifiedBefore": 1786,
+  "originalFilesVerifiedAfter": 1786,
+  "qualification": "Unmodified own ReferencePopulation contracts and consumed V5 tuple matcher / selected cardinal step. Own digest comparisons use an explicitly opaque original parent digest, not full inherited-caller parity. Scene retained-frame indexing errors, unavailable point offer, empty pending-input error, own limit/deadline behavior, retained controls across epochs and limited target-frame continuation are retained. No game action, engine, specification, route or solution. Synthetic control/state seeds are contract cases and never preinitialize a live campaign."
+}

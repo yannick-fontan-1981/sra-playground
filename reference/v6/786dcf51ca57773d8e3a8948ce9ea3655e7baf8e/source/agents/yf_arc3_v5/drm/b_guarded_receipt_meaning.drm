@@ -1,0 +1,650 @@
+{
+  "module_id": "b_guarded_receipt_meaning",
+  "declarations": [
+    {
+      "id": "policy.b_guarded_receipt_meaning",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_handoff_and_pickup_must_enable_remaining_delivery"
+      ],
+      "premises": [
+        "complete_current_correlated_receipt",
+        "explicit_parent_quota_and_preservation"
+      ],
+      "invariants": [
+        "conditional_model_scope_only",
+        "no_world_success_confirmation",
+        "no_act_authority",
+        "unbound_later_consumer_stays_open"
+      ],
+      "falsifiers": [
+        "changed_scope_or_occurrence_identity",
+        "missing_later_consumer"
+      ],
+      "declared_alternative_refs": [
+        "guarded_receipt.derive",
+        "guarded_receipt.open"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.guarded_receipt.delivered",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_receipt.derive"
+            },
+            {
+              "field": "receipt_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "delivered_at_terminal_side",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receipt_kind",
+              "operator": "equals",
+              "expected": "handoff"
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "causal_reason_ref": "reason_handoff_fulfills_member_delivery"
+          }
+        },
+        {
+          "id": "projection.guarded_receipt.return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_receipt.derive"
+            },
+            {
+              "field": "receipt_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "delivered_at_terminal_side",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "next_pickup_named",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receipt_kind",
+              "operator": "equals",
+              "expected": "handoff"
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "causal_reason_ref": "reason_temporary_handoff_keeps_next_pickup_for_remaining_delivery"
+          }
+        },
+        {
+          "id": "projection.guarded_receipt.open",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_receipt.open"
+            },
+            {
+              "field": "receipt_bindings_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.guarded_receipt.carry",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_receipt.derive"
+            },
+            {
+              "field": "receipt_kind",
+              "operator": "equals",
+              "expected": "preservation"
+            },
+            {
+              "field": "receipt_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "declared_operator",
+              "operator": "equals",
+              "expected": "pickup"
+            },
+            {
+              "field": "carried_member_consumer_named",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "causal_reason_ref": "reason_carried_member_remains_available_for_named_delivery"
+          }
+        },
+        {
+          "id": "projection.guarded_receipt.supervise",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_receipt.derive"
+            },
+            {
+              "field": "receipt_kind",
+              "operator": "equals",
+              "expected": "preservation"
+            },
+            {
+              "field": "receipt_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "declared_operator",
+              "operator": "equals",
+              "expected": "set_supervision"
+            },
+            {
+              "field": "supervision_changed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "safe_checkpoint_observed_in_model",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "causal_reason_ref": "reason_supervision_preserves_modeled_delivery_safety"
+          }
+        },
+        {
+          "id": "projection.guarded_receipt.separate.translate",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_receipt.derive"
+            },
+            {
+              "field": "receipt_kind",
+              "operator": "equals",
+              "expected": "preservation"
+            },
+            {
+              "field": "receipt_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "relative_offsets_changed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "safe_checkpoint_observed_in_model",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "declared_operator",
+              "operator": "equals",
+              "expected": "translate"
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "causal_reason_ref": "reason_relative_member_configuration_preserves_modeled_delivery_safety"
+          }
+        },
+        {
+          "id": "projection.guarded_receipt.separate.cross",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_receipt.derive"
+            },
+            {
+              "field": "receipt_kind",
+              "operator": "equals",
+              "expected": "preservation"
+            },
+            {
+              "field": "receipt_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "relative_offsets_changed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "safe_checkpoint_observed_in_model",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "declared_operator",
+              "operator": "equals",
+              "expected": "cross"
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "causal_reason_ref": "reason_relative_member_configuration_preserves_modeled_delivery_safety"
+          }
+        },
+        {
+          "id": "projection.guarded_receipt.open.pickup.carried_member_consumer_named",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_receipt.open"
+            },
+            {
+              "field": "receipt_kind",
+              "operator": "equals",
+              "expected": "preservation"
+            },
+            {
+              "field": "declared_operator",
+              "operator": "equals",
+              "expected": "pickup"
+            },
+            {
+              "field": "carried_member_consumer_named",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.guarded_receipt.open.set_supervision.supervision_changed",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_receipt.open"
+            },
+            {
+              "field": "receipt_kind",
+              "operator": "equals",
+              "expected": "preservation"
+            },
+            {
+              "field": "declared_operator",
+              "operator": "equals",
+              "expected": "set_supervision"
+            },
+            {
+              "field": "supervision_changed",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.guarded_receipt.open.set_supervision.safe_checkpoint_observed_in_model",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_receipt.open"
+            },
+            {
+              "field": "receipt_kind",
+              "operator": "equals",
+              "expected": "preservation"
+            },
+            {
+              "field": "declared_operator",
+              "operator": "equals",
+              "expected": "set_supervision"
+            },
+            {
+              "field": "safe_checkpoint_observed_in_model",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.guarded_receipt.open.translate.relative_offsets_changed",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_receipt.open"
+            },
+            {
+              "field": "receipt_kind",
+              "operator": "equals",
+              "expected": "preservation"
+            },
+            {
+              "field": "declared_operator",
+              "operator": "equals",
+              "expected": "translate"
+            },
+            {
+              "field": "relative_offsets_changed",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.guarded_receipt.open.translate.safe_checkpoint_observed_in_model",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_receipt.open"
+            },
+            {
+              "field": "receipt_kind",
+              "operator": "equals",
+              "expected": "preservation"
+            },
+            {
+              "field": "declared_operator",
+              "operator": "equals",
+              "expected": "translate"
+            },
+            {
+              "field": "safe_checkpoint_observed_in_model",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.guarded_receipt.open.cross.relative_offsets_changed",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_receipt.open"
+            },
+            {
+              "field": "receipt_kind",
+              "operator": "equals",
+              "expected": "preservation"
+            },
+            {
+              "field": "declared_operator",
+              "operator": "equals",
+              "expected": "cross"
+            },
+            {
+              "field": "relative_offsets_changed",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.guarded_receipt.open.cross.safe_checkpoint_observed_in_model",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_receipt.open"
+            },
+            {
+              "field": "receipt_kind",
+              "operator": "equals",
+              "expected": "preservation"
+            },
+            {
+              "field": "declared_operator",
+              "operator": "equals",
+              "expected": "cross"
+            },
+            {
+              "field": "safe_checkpoint_observed_in_model",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.guarded_receipt.open.unsupported.deposit",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_receipt.open"
+            },
+            {
+              "field": "receipt_kind",
+              "operator": "equals",
+              "expected": "preservation"
+            },
+            {
+              "field": "declared_operator",
+              "operator": "equals",
+              "expected": "deposit"
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.guarded_receipt.open.unsupported.reset",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_receipt.open"
+            },
+            {
+              "field": "receipt_kind",
+              "operator": "equals",
+              "expected": "preservation"
+            },
+            {
+              "field": "declared_operator",
+              "operator": "equals",
+              "expected": "reset"
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.guarded_receipt.open.unsupported.None",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_receipt.open"
+            },
+            {
+              "field": "receipt_kind",
+              "operator": "equals",
+              "expected": "preservation"
+            },
+            {
+              "field": "declared_operator_known",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "guarded_receipt.derive": "rule.b_guarded_receipt_meaning"
+      }
+    },
+    {
+      "id": "rule.b_guarded_receipt_meaning",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "source_selected_current_future_receipt"
+      ],
+      "applicability": [
+        "conditional_model_means_for_parent"
+      ],
+      "invariants": [
+        "not_an_exclusive_necessity_proof",
+        "not_an_observed_world_effect"
+      ],
+      "falsifiers": [
+        "future_model_or_scope_refuted"
+      ],
+      "reason_refs": [
+        "reason_handoff_and_pickup_must_enable_remaining_delivery"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{reason_candidate_ref}",
+          "kind": "value",
+          "label": "Conditional handoff and pickup for remaining delivery",
+          "required_fields": [
+            "reason_candidate_ref",
+            "candidate"
+          ],
+          "static_attributes": {
+            "projection_contract": "mechanical.guarded_parent_reason.b.v1",
+            "conditional_model_only": true,
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "candidate": "candidate",
+            "causal_reason_ref": "causal_reason_ref",
+            "utility_reason_ref": "utility_reason_ref",
+            "desired_future": "desired_future",
+            "goal_contract": "goal_contract",
+            "consumer_refs": "consumer_refs",
+            "preservation_refs": "preservation_refs",
+            "model_refs": "model_refs",
+            "source_return_ref": "source_return_ref",
+            "group_ref": "group_ref",
+            "job_ref": "job_ref",
+            "next_item_ref": "next_item_ref",
+            "sibling_item_refs": "sibling_item_refs"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{reason_candidate_ref}",
+          "predicate": "proposes_projected_handoff_or_pickup_means_for_parent",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{reason_candidate_ref}",
+            "{parent_goal_ref}"
+          ],
+          "required_term_patterns": [
+            "{reason_candidate_ref}",
+            "{parent_goal_ref}"
+          ],
+          "required_fields": [
+            "reason_candidate_ref",
+            "parent_goal_ref",
+            "causal_reason_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref"
+          },
+          "attribute_bindings": {
+            "candidate": "candidate",
+            "causal_reason_ref": "causal_reason_ref",
+            "utility_reason_ref": "utility_reason_ref",
+            "desired_future": "desired_future",
+            "goal_contract": "goal_contract",
+            "consumer_refs": "consumer_refs",
+            "preservation_refs": "preservation_refs",
+            "model_refs": "model_refs",
+            "source_return_ref": "source_return_ref",
+            "group_ref": "group_ref",
+            "job_ref": "job_ref",
+            "next_item_ref": "next_item_ref",
+            "sibling_item_refs": "sibling_item_refs"
+          },
+          "static_attributes": {
+            "conditional_model_only": true,
+            "no_world_success_confirmation": true,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    }
+  ]
+}

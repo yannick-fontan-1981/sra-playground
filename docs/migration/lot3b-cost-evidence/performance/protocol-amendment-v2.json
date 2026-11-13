@@ -1,0 +1,35 @@
+{
+  "schema": "logos-engine.premeasurement-protocol-amendment.v1",
+  "recordedAt": "2026-11-10T01:13:59.574602+00:00",
+  "status": "declared_before_measurement",
+  "mode": "append_only",
+  "originalProtocol": {
+    "path": "docs/migration/lot3b-cost-evidence/performance/protocol.md",
+    "sha256": "ce58aaa846482a07676e221155db86f5f9836087972f01d6ddefb211e9376b65",
+    "bytes": 12678
+  },
+  "amendedProtocol": {
+    "path": "docs/migration/lot3b-cost-evidence/performance/protocol.md",
+    "sha256": "700002c29970f7e59af8b4e7f29d14efcbf4b97faf21ad01a56cc6b4767da3c8",
+    "bytes": 15123
+  },
+  "originalPrefixBytesPreserved": true,
+  "officialWindowExists": false,
+  "changedInput": "corrected frozen-source manifest path: final/source-manifest.json -> final-v2/source-manifest.json",
+  "reasonReceipt": {
+    "path": "docs/migration/lot3b-cost-evidence/diagnostic/preliminary-freeze.json",
+    "sha256": "6a71abf63a6371529bdf66223739aeaa99839cb048b7eedc5529cf8b4acde3d2",
+    "bytes": 3019
+  },
+  "unchangedCases": {
+    "path": "docs/migration/lot3b-cost-evidence/performance/cases.json",
+    "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+    "bytes": 1451
+  },
+  "unchangedPolicy": {
+    "path": "docs/migration/lot3b-cost-evidence/performance/comparison-policy.json",
+    "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+    "bytes": 991
+  },
+  "qualification": "Pre-measurement source-freeze amendment only. No official cohort has run. Cases, work, order, warmups, counts, thresholds, exclusions and aggregation rule are unchanged; preliminary source and passed tests remain retained rather than relabeled."
+}

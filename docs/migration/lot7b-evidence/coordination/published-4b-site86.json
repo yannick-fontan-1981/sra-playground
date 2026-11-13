@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.published-predecessor-verification.v1",
+  "verifiedAt": "2026-11-10T22:59:54.108Z",
+  "verifiedBy": "Sites list_site_versions and get_deployment_status",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "siteVersion": 86,
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_4ef4534a7080819194a01604513ae2dc",
+  "commit": "082ce553ce4dfbac37071a64497bcca129b7ced0",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_00000000a9bc820e8f857d8eb6004942",
+    "content_hash": "sha256:f53c8790f0b099113c899c06ac55f455eb7c86153da7d5036499b6076433870c",
+    "size_bytes": 29829120,
+    "file_count": 75
+  },
+  "deployment": {
+    "id": "appgdep_6af3a1a4ffb081918113831cbc83ee4d",
+    "status": "succeeded",
+    "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_4ef4534a7080819194a01604513ae2dc",
+    "updatedAt": "2026-11-10T22:59:03.528254+00:00",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site"
+  },
+  "nativeVersion": "0.54.0",
+  "nativeDigest": "f25d56d1c63dc929b01bb31b3898b84cecc69e6e412d535c0d122170ea401ce9",
+  "qualification": "Actual saved Site86 version and terminal production deployment independently verified. Published native source identity is checked from the immutable commit before integration."
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.lot5c-final-freeze-binding.v1",
+  "recordedAt": "2026-11-11T17:16:54.647511+00:00",
+  "status": "final_source_and_declared_scope_frozen_before_execution",
+  "sourceCommit": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+  "nativeVersion": "0.63.0",
+  "nativeFiles": 318,
+  "nativeDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+  "archiveMembers": 867,
+  "archive": {
+    "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-archive.tar.gz",
+    "sha256": "daa818bcf00c288efbd5638ca8218865fcdc5c43927fb7c343edc9eeb7341141",
+    "bytes": 6466073
+  },
+  "partCount": 8,
+  "all138TestFilesArchived": true,
+  "validationContractSha256": "4a57ed369cc5e314a7a4f6babf61e51aa7b70e171c2b2a3586d296b79f8013ff",
+  "testScopeSha256": "91530b6fdfcfdb89db815b610d37e7988866aac610d4669c8c6f572822f0bdc1",
+  "replayScopeSha256": "18684d23bf7122a9f88f85d8bdb6f557144f892e7f09f2ef7630cbb5a7e6bc33",
+  "qualification": "Fresh immutable source freeze and scope binding only. No test, replay, source comparison, cost acceptance or5Cpublication is claimed."
+}

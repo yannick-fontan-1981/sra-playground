@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.native-campaign-resolution.v1",
+  "game": "LS20",
+  "selection": "docs/migration/lot2c-evidence/final/ls20-selection.json",
+  "execution": "docs/migration/lot2c-evidence/final/ls20-method-continuation/execution-ls20.json",
+  "resolvedAt": "2026-11-09T20:22:36.180757+00:00",
+  "secondsThisSelection": 283.53151,
+  "carriedBlockedSeconds": 967.661748,
+  "cumulativeBlockedSeconds": 1251.193258,
+  "maximumBlockedSeconds": 2400,
+  "status": "target_reached",
+  "levelsCompleted": 3,
+  "targetLevels": 3,
+  "actions": 142,
+  "officialState": "NOT_FINISHED",
+  "sourceUnchanged": true,
+  "nextCandidate": null,
+  "resolutionBasis": "Three target levels completed naturally in one cold common native session. Stop on entry to level4; no complete-game WIN claim. Preserve carried time and all prior failed targets. Browser and source verification are separate checks of this completed result."
+}

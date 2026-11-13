@@ -1,0 +1,441 @@
+{
+  "module_id": "native_memory_owner_d",
+  "declarations": [
+    {
+      "id": "policy.d_native_memory_owner",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.d_current_canonical_native_content_keeps_original_provenance"
+      ],
+      "declared_alternative_refs": [
+        "d_native_memory.acquire",
+        "d_native_memory.blocked"
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.d_native_memory_equivalent_acquisition",
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.d_native_memory.acquire",
+          "reason_ref": "reason.d_current_canonical_native_content_keeps_original_provenance",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_native_memory.acquire"
+            },
+            {
+              "field": "owner_bindings_match",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_native_memory.blocked",
+          "reason_ref": "reason.d_current_canonical_native_content_keeps_original_provenance",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_native_memory.blocked"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "d_native_memory.acquire": "rule.d_native_memory_content_reference"
+      },
+      "configuration": {
+        "admitted_memory_refs": [
+          "d_native_memory.acquire"
+        ],
+        "publication_admitted_refs": [
+          "native_effect.publish",
+          "native_effect.already_current"
+        ],
+        "source_projection_contract_ref": "family.sealed_effect.publication.b.v1",
+        "source_qualification_predicate_refs": [
+          "records_source_interpretation_of_sealed_family_response",
+          "qualifies_native_family_sealed_interpretation"
+        ],
+        "qualification_status_refs": [
+          "supported",
+          "established"
+        ],
+        "raw_photo_kind_ref": "RAW_PHOTO",
+        "raw_photo_content_kind_ref": "acquired_photo_content",
+        "memory_projection_contract_ref": "d.native_memory_content_reference.v1",
+        "memory_predicate_ref": "retains_source_owned_native_content_reference",
+        "memory_binding_fields": [
+          "kind_ref",
+          "source_publication_ref",
+          "source_qualification_ref",
+          "source_publication_digest",
+          "content_path",
+          "content_digest",
+          "dependency_contract_ref",
+          "dependency_values",
+          "game_ref",
+          "level_ref",
+          "session_ref",
+          "parent_goal_ref",
+          "context_ref",
+          "epoch",
+          "evidence_revision_ref",
+          "model_revision_ref",
+          "source_packet_ref",
+          "source_packet_digest",
+          "source_packet_projection_contract_ref"
+        ],
+        "memory_scope_fields": [
+          "parent_goal_ref",
+          "context_ref",
+          "epoch",
+          "evidence_revision_ref",
+          "model_revision_ref"
+        ],
+        "content_specs_by_kind": {
+          "RAW_PHOTO": {
+            "operation_refs": [
+              "mechanics.temporal_fragment_match.ingest_packet"
+            ],
+            "path_prefixes": [
+              [
+                "native_result",
+                "values",
+                "proposed_photo_archive_delta"
+              ]
+            ]
+          },
+          "REFERENCE_CANDIDATE": {
+            "operation_refs": [
+              "mechanics.temporal_fragment_match.exact_candidates",
+              "reference_consensus",
+              "joint_reference_filter"
+            ],
+            "path_prefixes": [
+              [
+                "native_result",
+                "values",
+                "model_correlated_results"
+              ],
+              [
+                "native_result",
+                "values",
+                "reference_candidates"
+              ],
+              [
+                "native_result",
+                "values",
+                "retained_fixed_references"
+              ]
+            ]
+          },
+          "MODEL_EVIDENCE": {
+            "operation_refs": [
+              "mechanics.directed_accretive_flow.flow_fit",
+              "mechanics.temporal_fragment_match.ingest_packet",
+              "mechanics.temporal_fragment_match.exact_candidates",
+              "mechanics.temporal_fragment_match.transport_model",
+              "mechanics.finite_alignment_game.transaction_reconcile",
+              "mechanics.finite_alignment_game.recovery_memory",
+              "mechanics.oriented_cargo_handoffs.autonomous_fit",
+              "mechanics.finite_instruction_device.demo_fit"
+            ],
+            "path_prefixes": [
+              [
+                "native_input",
+                "models"
+              ],
+              [
+                "device_operator_method"
+              ]
+            ]
+          },
+          "COUNTEREXAMPLE_EVIDENCE": {
+            "operation_refs": [
+              "mechanics.finite_alignment_game.transaction_reconcile",
+              "mechanics.temporal_fragment_match.reconcile_feedback"
+            ],
+            "path_prefixes": [
+              [
+                "native_result",
+                "values"
+              ],
+              [
+                "native_input",
+                "observations"
+              ]
+            ]
+          },
+          "RECOVERY_EVIDENCE": {
+            "operation_refs": [
+              "mechanics.finite_alignment_game.recovery_memory",
+              "mechanics.finite_alignment_game.transaction_reconcile"
+            ],
+            "path_prefixes": [
+              [
+                "native_result",
+                "values",
+                "recovery_record_comparisons"
+              ],
+              [
+                "native_input",
+                "recovery_records"
+              ],
+              [
+                "native_input",
+                "observations"
+              ]
+            ]
+          }
+        },
+        "operation_ref": "mechanics.temporal_fragment_match.memory_scope",
+        "mode_ref": "RETAIN",
+        "temporal_memory_kind_refs": [
+          "RAW_PHOTO",
+          "REFERENCE_CANDIDATE",
+          "MODEL_EVIDENCE",
+          "COUNTEREXAMPLE_EVIDENCE"
+        ],
+        "temporal_operation_prefix": "mechanics.temporal_fragment_match.",
+        "raw_photo_required_dependency_axes": [
+          "game_ref",
+          "scene_ref",
+          "film_revision_ref"
+        ]
+      }
+    },
+    {
+      "id": "rule.d_native_memory_content_reference",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "current_canonical_native_publication_and_exact_declared_content"
+      ],
+      "reason_refs": [
+        "reason.d_current_canonical_native_content_keeps_original_provenance"
+      ],
+      "invariants": [
+        "original_content_is_not_overwritten_or_duplicated",
+        "model_or_counterexample_tag_is_not_truth_confirmation",
+        "no_action_or_actual_use_authority",
+        "parent_preserved"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{memory_term_ref}",
+          "kind": "value",
+          "label": "Source-owned immutable native memory content reference",
+          "required_fields": [
+            "memory_term_ref",
+            "kind_ref",
+            "source_publication_ref",
+            "source_qualification_ref",
+            "source_publication_digest",
+            "content_path",
+            "content_digest",
+            "dependency_contract_ref",
+            "dependency_values",
+            "game_ref",
+            "level_ref",
+            "session_ref",
+            "parent_goal_ref",
+            "context_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "source_packet_ref",
+            "source_packet_digest",
+            "source_packet_projection_contract_ref"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "{source_publication_ref}"
+          ],
+          "attribute_bindings": {
+            "kind_ref": "kind_ref",
+            "source_publication_ref": "source_publication_ref",
+            "source_qualification_ref": "source_qualification_ref",
+            "source_publication_digest": "source_publication_digest",
+            "content_path": "content_path",
+            "content_digest": "content_digest",
+            "dependency_contract_ref": "dependency_contract_ref",
+            "dependency_values": "dependency_values",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "context_ref": "context_ref",
+            "epoch": "epoch",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "source_packet_ref": "source_packet_ref",
+            "source_packet_digest": "source_packet_digest",
+            "source_packet_projection_contract_ref": "source_packet_projection_contract_ref"
+          },
+          "static_attributes": {
+            "projection_contract_ref": "d.native_memory_content_reference.v1",
+            "no_dispatch_or_action_authority": true,
+            "no_model_or_law_confirmation": true
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{memory_claim_ref}",
+          "predicate": "retains_source_owned_native_content_reference",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "{source_publication_ref}",
+            "{memory_term_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "{source_publication_ref}",
+            "{memory_term_ref}"
+          ],
+          "required_fields": [
+            "memory_claim_ref",
+            "memory_term_ref",
+            "kind_ref",
+            "source_publication_ref",
+            "source_qualification_ref",
+            "source_publication_digest",
+            "content_path",
+            "content_digest",
+            "dependency_contract_ref",
+            "dependency_values",
+            "game_ref",
+            "level_ref",
+            "session_ref",
+            "parent_goal_ref",
+            "context_ref",
+            "parent_goal_ref",
+            "context_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "source_packet_ref",
+            "source_packet_digest",
+            "source_packet_projection_contract_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "context_ref": "context_ref",
+            "epoch": "epoch",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "attribute_bindings": {
+            "kind_ref": "kind_ref",
+            "source_publication_ref": "source_publication_ref",
+            "source_qualification_ref": "source_qualification_ref",
+            "source_publication_digest": "source_publication_digest",
+            "content_path": "content_path",
+            "content_digest": "content_digest",
+            "dependency_contract_ref": "dependency_contract_ref",
+            "dependency_values": "dependency_values",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "context_ref": "context_ref",
+            "epoch": "epoch",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "source_packet_ref": "source_packet_ref",
+            "source_packet_digest": "source_packet_digest",
+            "source_packet_projection_contract_ref": "source_packet_projection_contract_ref"
+          },
+          "static_attributes": {
+            "no_dispatch_or_action_authority": true,
+            "no_model_or_law_confirmation": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.d_temporal_memory_use",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.d_canonical_temporal_memory_inputs_keep_current_owner_and_original_content"
+      ],
+      "declared_alternative_refs": [
+        "d_temporal_memory.use",
+        "d_temporal_memory.blocked"
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.d_temporal_memory_equivalent_recall",
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.d_temporal_memory.use",
+          "reason_ref": "reason.d_canonical_temporal_memory_inputs_keep_current_owner_and_original_content",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_temporal_memory.use"
+            },
+            {
+              "field": "current_owner_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.temporal_fragment_match.memory_scope"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "RETAIN"
+            }
+          ]
+        },
+        {
+          "id": "tier.d_temporal_memory.blocked",
+          "reason_ref": "reason.d_canonical_temporal_memory_inputs_keep_current_owner_and_original_content",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_temporal_memory.blocked"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

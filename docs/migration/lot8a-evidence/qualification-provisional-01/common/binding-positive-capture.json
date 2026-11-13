@@ -1,0 +1,38 @@
+{
+  "schema": "logos-engine.lot8a.binding-common-capture.v1",
+  "status": "passed",
+  "mode": "positive",
+  "synthetic": true,
+  "returned": 24,
+  "ownReturns": 23,
+  "sourceStages": 24,
+  "declaredStages": 24,
+  "sourceDeclarationsModified": false,
+  "executionInputsUnchangedDuringRun": true,
+  "checks": {
+    "passed": 9,
+    "names": [
+      "cold_unique_owner_and_original_material_subquestion_order",
+      "arrival_remains_pending_until_measured_local_separation",
+      "acquired_contrast_changes_next_actual_common_target_and_decision",
+      "one_selected_or_passive_acquisition_per_actual_return",
+      "authoritative_checkpoint_and_fresh_owner_restoration",
+      "source_selected_null_retained_and_passive_null_not_retained",
+      "caller_attention_restoration_has_one_shared_owner",
+      "ordinary_why_act_authorizes_every_released_step",
+      "public_response_never_depends_on_owner_or_expected_native_result"
+    ],
+    "failures": []
+  },
+  "actualJournal": {
+    "path": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-positive-01/positive/actual-operations.json",
+    "bytes": 4197296,
+    "sha256": "115986db3a75316bbbc18a9e3ac0f570238a0abf8ee1b11a05577f6ca45289ff"
+  },
+  "fullReport": {
+    "path": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-positive-01/positive/common-loop.json.gz",
+    "bytes": 30366,
+    "sha256": "f04f17f275b4e3eeda8c3dfa58e23942998dca2ca080b3ed0512c20cf5c8767e"
+  },
+  "qualification": "Fresh synthetic Binding common capture on the unchanged prepared5C/6B/Motif composition. Original comparison is a separate declared stage. No live game, official cost or publication."
+}

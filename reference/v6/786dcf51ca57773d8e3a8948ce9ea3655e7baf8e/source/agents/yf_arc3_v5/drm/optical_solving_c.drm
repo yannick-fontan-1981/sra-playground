@@ -1,0 +1,164 @@
+{
+  "module_id": "optical_solving_c",
+  "declarations": [
+    {
+      "id": "policy.optical_solving_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_goal_owned_optical_question"
+      ],
+      "applicability": [
+        "declared_K73_case"
+      ],
+      "invariants": [
+        "terminal_chain",
+        "no_implicit_all_relays",
+        "independent_preparation_order",
+        "reset_scope",
+        "no_recursive_search",
+        "no_act"
+      ],
+      "falsifiers": [
+        "stale_agenda",
+        "unknown_first_impact",
+        "unbound_terminal_contract"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "optical_solving.missing",
+        "optical_solving.query",
+        "optical_solving.profile"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.optical_solving.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "optical_solving.missing"
+            },
+            {
+              "field": "current_optical_question",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "optical_solving.missing"
+          }
+        },
+        {
+          "id": "projection.optical_solving.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "optical_solving.query"
+            },
+            {
+              "field": "current_optical_question",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_route_query_case",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "optical_solving.query"
+          }
+        },
+        {
+          "id": "projection.optical_solving.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "optical_solving.profile"
+            },
+            {
+              "field": "current_optical_question",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_route_query_case",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "optical_solving.profile"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.optical_solving.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "optical_solving.missing"
+            }
+          ],
+          "reason_ref": "reason.optical_question_retains_named_missing_evidence"
+        },
+        {
+          "id": "tier.optical_solving.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "optical_solving.query"
+            }
+          ],
+          "reason_ref": "reason.optical_useful_first_receiver_chain_serves_terminal_goal"
+        },
+        {
+          "id": "tier.optical_solving.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "optical_solving.profile"
+            }
+          ],
+          "reason_ref": "reason.optical_useful_first_receiver_chain_serves_terminal_goal"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.optical_solving_activation_unverified",
+      "reason_refs": [
+        "reason.optical_useful_first_receiver_chain_serves_terminal_goal",
+        "reason.optical_question_retains_named_missing_evidence"
+      ]
+    }
+  ]
+}

@@ -15,6 +15,7 @@
     <a class="skip-link" href="#content">Skip to content</a>
 
     <header class="site-header wrap">
+      <div class="site-masthead">
       <a class="brand" href="/" aria-label="SRA Playground — Symbolic Reasoning Agent home">
         <svg class="brand-symbol" viewBox="0 0 36 36" shape-rendering="crispEdges" aria-hidden="true">
           <rect x="0" y="0" width="10" height="10" class="brand-green"/>
@@ -30,13 +31,21 @@
         <span class="brand-type"><span class="brand-title">SRA Playground</span><span class="brand-project">SYMBOLIC REASONING AGENT</span></span>
         <span class="brand-context">ARC AGI <span>3</span></span>
       </a>
+        <div class="site-author">
+          <p class="site-author-name">Yannick Fontan</p>
+          <p class="site-author-description">INTERACTIVE GAMES / INDEPENDENT RESEARCH</p>
+        </div>
+      </div>
       <nav aria-label="Main navigation">
+        <a href="/motivation.html">Motivation</a>
         <a href="/">Playground</a>
         <a href="/gallery.html">75 New Games</a>
+        <a href="/reasoning-lab.html">Reasoning Lab</a>
         <a href="/arc-agi-3.html" aria-label="What is ARC-AGI-3?">ARC-AGI-3</a>
         <a href="/symbolic-reasoning.html">Symbolic Reasoning</a>
         <a class="nav-active" aria-current="page" href="/architecture.html">Architecture</a>
         <a href="/videos.html">Videos</a>
+        <a href="/contact.html">Contact</a>
         <a class="source-link" href="https://github.com/yannick-fontan-1981/sra-playground" target="_blank" rel="noopener noreferrer" aria-label="SRA Playground source code on GitHub"><span>GitHub</span><svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
       </nav>
     </header>
@@ -92,8 +101,9 @@ STEP observe_result
     <h2>What runs in the Playground</h2>
 
     <p>The website currently executes the original Python engines for 25 official games and 75 custom games. Pyodide runs Python in WebAssembly inside a worker. TypeScript handles selection, controls, and rendering. Initial assets come from the site; subsequent game actions execute locally.</p>
-<p>The SRA reasoning agent is not connected to this worker. Browser integration must preserve the Python agent&#39;s observations, action semantics, and resumable reasoning state. The agent should receive the public observation projection, with hidden engine variables kept outside that interface.</p>
-<p>Undo, Reset, a game change, or manual intervention can invalidate a pending plan. The integration therefore needs a lifecycle for initialization, stepping, pause, cancellation, and resumption, followed by comparisons with the Python reference. A complete TypeScript translation remains a separate implementation choice.</p>
+<p>The Logos Engine Reasoning Lab now executes a first native TypeScript port of the V7 acquisition program in a separate worker. It uses controlled observations to demonstrate hypothesis creation, composition, revision and contradiction, with the executed program tree and knowledge available for inspection.</p>
+<p>SRA Agent is being transferred from the complete V6 symbolic solver into native TypeScript and the common V7 reasoning architecture. The current native path handles public observations, coordinate inputs, guarded action sequences and memory across levels. Every transferred capability is compared with the unchanged Python reference during development; the browser does not run a Python agent. The complete migration is still in progress.</p>
+<p>Undo, Reset, a game change, or manual intervention invalidates a pending agent plan. The TypeScript lifecycle checks the current session, observation and command before execution, acquires the real game outcome, and preserves a committed sequence through Pause. Completing the migration requires all V6 families, operation authority, knowledge and transfer mechanisms to retain their behavior in the common V7 architecture.</p>
 
 
 
@@ -109,7 +119,7 @@ STEP observe_result
         <nav class="reading-pager" aria-label="Chapter navigation"><a href="/architecture/principle-distillation.html"><small>Previous</small><span>Principle distillation</span></a><a class="pager-next" href="/">Playground <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a></nav>
       </article>
     </main>
-    <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Yannick Fontan</span><div><a href="/">Play the games <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a><a href="https://www.youtube.com/@Yanik_AI/videos" target="_blank" rel="noopener noreferrer">Yanik_AI<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a><a href="https://github.com/yannick-fontan-1981/sra-playground/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener noreferrer">Licenses &amp; notices<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div></footer>
+    <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Yannick Fontan</span><div><a href="/">Play the games <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a><a href="/contact.html">Contact <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a><a href="https://www.youtube.com/@Yanik_AI/videos" target="_blank" rel="noopener noreferrer">Yanik_AI<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a><a href="https://github.com/yannick-fontan-1981/sra-playground/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener noreferrer">Licenses &amp; notices<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div></footer>
     <script type="module" src="/src/reading.ts"></script>
   </body>
 </html>

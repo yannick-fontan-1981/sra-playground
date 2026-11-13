@@ -1,0 +1,55 @@
+{
+  "schema": "logos-engine.native-cost-measurement-windows.v1",
+  "baseline": {
+    "startedAt": "2026-11-09T18:54:35.113Z",
+    "finishedAt": "2026-11-09T19:04:12.473Z",
+    "projectWindowReserved": true,
+    "allowedConcurrentProjectWork": [
+      "source reads",
+      "text edits"
+    ],
+    "excludedConcurrentProjectWork": [
+      "fixture generation",
+      "tests",
+      "builds",
+      "game campaigns",
+      "browser exercise"
+    ],
+    "knownDeliberateHeavyProjectOverlap": [],
+    "fixtureGenerationOverlapObserved": false,
+    "coordinationEvidence": [
+      "Root reserved the baseline window before launch and restricted the other agents to source reads and text edits.",
+      "The contextual-translation agent explicitly held its exporter and tests until the baseline release.",
+      "The performance agent released the window at 19:04:12 UTC after completion; source fixture generation was reported as starting after that release."
+    ]
+  },
+  "after": {
+    "startedAt": "2026-11-09T19:42:11.549Z",
+    "finishedAt": "2026-11-09T19:51:27.212Z",
+    "projectWindowReserved": true,
+    "allowedConcurrentProjectWork": [
+      "small source reads",
+      "text edits"
+    ],
+    "knownDeliberateHeavyProjectOverlap": [],
+    "fixtureGenerationOverlapObserved": false,
+    "coordinationEvidence": [
+      "Root explicitly closed all campaigns, browser verification, compressions and partitions before GO. Other agents are restricted to small reads and text edits until the performance window is released."
+    ],
+    "exitCode": 0
+  },
+  "component": {
+    "startedAt": "2026-11-09T19:51:39.724Z",
+    "finishedAt": "2026-11-09T19:51:49.934Z",
+    "projectWindowReserved": true,
+    "knownDeliberateHeavyProjectOverlap": [],
+    "fixtureGenerationOverlapObserved": false,
+    "coordinationEvidence": [
+      "Continues immediately after the completed after benchmark, within the same project window reserved by root."
+    ],
+    "exitCode": 0
+  },
+  "qualification": "Project scheduling is based on explicit team coordination. Host CPU utilization and external process activity were not independently logged. No deliberate heavy project overlap was reported or observed during the baseline, after run or component diagnostic, including no source-fixture generation overlap; machine isolation and causal attribution are not established.",
+  "measurementCompletedAt": "2026-11-09T19:51:49.934Z",
+  "projectWindowReleasedAfterComponent": true
+}

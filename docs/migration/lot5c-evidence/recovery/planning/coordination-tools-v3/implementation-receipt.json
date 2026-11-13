@@ -1,0 +1,62 @@
+{
+  "schema": "logos-engine.lot5c.bounded-command-v3-implementation.v1",
+  "status": "focused_tests_passed_pending_independent_review",
+  "recordedAt": "2026-11-11T21:25:31.526282+00:00",
+  "wrapper": {
+    "file": "run-bounded-command.py",
+    "bytes": 28896,
+    "sha256": "cef0c238244e587afa94a822264861c12017cec919608d5a10cfe5610ecc60fe"
+  },
+  "files": [
+    {
+      "file": "README.md",
+      "bytes": 5679,
+      "sha256": "9b3cc833aea5d660a3f000e55e3fd74276e69fa387deeac45c575d383b9f07c4"
+    },
+    {
+      "file": "derivation.json",
+      "bytes": 1441,
+      "sha256": "14ff95cb54b3b999637d35e7f9cc895bdff9053f0e5cbe62ba0f05e2f8671f3f"
+    },
+    {
+      "file": "operator-contract.json",
+      "bytes": 4477,
+      "sha256": "3d875533ada36e3b154f4a693aef33982347dcd52bbef3e00ca968879653a7ad"
+    },
+    {
+      "file": "run-bounded-command.py",
+      "bytes": 28896,
+      "sha256": "cef0c238244e587afa94a822264861c12017cec919608d5a10cfe5610ecc60fe"
+    },
+    {
+      "file": "test-bounded-command-v3.py",
+      "bytes": 7491,
+      "sha256": "6e73bf7b703cb14444c4a9813b1593e60a7ad147f40ed75cb654a1b1a352b84f"
+    },
+    {
+      "file": "test-execution-01.json",
+      "bytes": 27592,
+      "sha256": "a6851dd95e367404e039fd7679d3989032ebe483d4449b548b4f36cdf67fd021"
+    }
+  ],
+  "tests": {
+    "file": "test-execution-01.json",
+    "status": "passed",
+    "cases": 4,
+    "passedChecks": 69,
+    "totalChecks": 69,
+    "fullEighteenCaseSuiteReexecuted": false
+  },
+  "toolResult": {
+    "sessionId": null,
+    "completedWithoutYield": true,
+    "chunkId": "847b03",
+    "exitCode": 0
+  },
+  "allOrdinaryPreparationCommandsUsedSharedPerformanceLock": false,
+  "realProviderGitCredentialOrPublicationCalls": 0,
+  "productionMutexAcquisitions": 0,
+  "priorV2NativeCostAndPublicationGuardianModified": false,
+  "activeWindowContractConfirmedByRoot": true,
+  "next": "independent review of the narrow v3 changes; root may then use this entrypoint for the prepared checkpoint"
+}

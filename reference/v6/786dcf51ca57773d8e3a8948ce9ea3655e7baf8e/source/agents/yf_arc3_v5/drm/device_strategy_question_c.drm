@@ -1,0 +1,31 @@
+{
+  "module_id":"device_strategy_question_c",
+  "declarations":[{
+    "id":"policy.device_strategy_question_c","kind":"selection_policy","evaluation":"declared_eligibility_single",
+    "supported_operators":["SELECT"],"input_contract":"yf_arc3_v5.authority_input.selection.v1","output_contract":"yf_arc3_v5.authority_output.selection.v1",
+    "declared_alternative_refs":["device.strategy.question"],"selection_required_fact_fields":["alternative_ref"],
+    "selection_eligibility_conditions":[{"field":"eligible","operator":"equals","expected":true}],
+    "fact_projections":[{"id":"projection.device.strategy.question","all_conditions":[
+      {"field":"alternative_ref","operator":"equals","expected":"device.strategy.question"},
+      {"field":"question_bound","operator":"equals","expected":true}],"static_facts":{"eligible":true}}],
+    "meaning_template_ref_by_alternative":{"device.strategy.question":"rule.device_strategy_question_c"},
+    "premises":["current_parent_agenda","exact_complete_preparatory_K28_return","independent_edit_preservation"],
+    "invariants":["question_not_observation_or_physical_progress","no_ACT"],"falsifiers":["stale_agenda_or_model"],
+    "reason_refs":["reason.preparatory_checkpoint_needs_feasible_next_program"]
+  },{
+    "id":"rule.device_strategy_question_c","kind":"rule","evaluation":"project_requested_conclusions",
+    "supported_operators":["DERIVE"],"input_contract":"yf_arc3_v5.authority_input.derivation.v1","output_contract":"yf_arc3_v5.authority_output.derivation.v1",
+    "relation_family":"epistemic","term_templates":[{"id_pattern":"{term_ref}","kind":"value","label":"Current derived checkpoint strategy question",
+      "required_fields":["term_ref","value","frame_ref","observation_record_ref","native_result","frozen_why"],
+      "attribute_bindings":{"value":"value","frame_ref":"frame_ref","observation_record_ref":"observation_record_ref",
+        "native_request_ref":"native_request_ref","native_result":"native_result","frozen_why":"frozen_why"},
+      "static_attributes":{"source_kind_ref":"derived_device_checkpoint_strategy_question","calculation_is_observation":false}}],
+    "claim_templates":[{"id_pattern":"{claim_ref}","predicate":"records_current_device_checkpoint_strategy_question","family":"epistemic","epistemic_status":"supported",
+      "argument_patterns":["{term_ref}","{observation_record_ref}"],"required_term_patterns":["{term_ref}"],"required_fields":["claim_ref","term_ref","value"],
+      "attribute_bindings":{"value":"value","native_request_ref":"native_request_ref"},
+      "scope_bindings":{"parent_goal_ref":"parent_goal_ref","epoch":"epoch","evidence_revision_ref":"evidence_revision_ref",
+        "model_revision_ref":"model_revision_ref","episode_ref":"episode_ref","level_scope_ref":"level_scope_ref"}}],
+    "premises":["current_conditional_computation_dependency"],"invariants":["principal_goal_preserved","no_official_success"],
+    "falsifiers":["changed_preparatory_return"],"reason_refs":["reason.current_question_requires_exact_next_domain"]
+  }]
+}

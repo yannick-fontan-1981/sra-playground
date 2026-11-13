@@ -1,0 +1,22 @@
+{
+  "schema": "logos-engine.lot10c.lossless-transport-verification.v1",
+  "verifiedAt": "2026-11-11T18:11:33.390322+00:00",
+  "raw": {
+    "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-checkpoint.json",
+    "bytes": 64375310,
+    "sha256": "95d3db9db5010a428a461e1fd164751b424138869162748248d2b94ce8692ebe"
+  },
+  "compressed": {
+    "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-checkpoint.json.gz",
+    "bytes": 6867013,
+    "sha256": "dbbf6ccba41ef3bf90dbd8c0f370f2f51212309ddac22a0fcb3691877f60ade7"
+  },
+  "decompressed": {
+    "bytes": 64375310,
+    "sha256": "95d3db9db5010a428a461e1fd164751b424138869162748248d2b94ce8692ebe"
+  },
+  "exact": true,
+  "semanticPayloadRead": false,
+  "originalRawRetainedOnDisk": true,
+  "qualification": "Only byte streams were hashed. The raw checkpoint exceeds32MiB and will be omitted from Git; its exact gzip representation is retained and can restore the original bytes."
+}

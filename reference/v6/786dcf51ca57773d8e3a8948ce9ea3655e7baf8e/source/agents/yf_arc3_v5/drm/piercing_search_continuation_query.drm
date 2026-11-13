@@ -1,0 +1,446 @@
+{
+  "module_id": "piercing_search_continuation_query",
+  "declarations": [
+    {
+      "id": "policy.declared_piercing_search_continuation_query",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "canonical_source_frontier_and_exact_observed_state"
+      ],
+      "applicability": [
+        "qualify_reuse_or_explicit_observed_state_invalidation"
+      ],
+      "invariants": [
+        "same_problem_invalid_or_ambiguous_frontier_never_refreshes_quota",
+        "frontier_query_never_authorizes_act_or_whole_physical_influence",
+        "new_frame_requires_canonical_observation_and_committed_source_invalidation"
+      ],
+      "falsifiers": [
+        "falsifier.source_frontier_fingerprint_scope_or_origin_disagrees"
+      ],
+      "configuration": {
+        "measurement_contract": {
+          "frontier_predicate": "piercing_search_frontier_revision",
+          "decision_predicate": "piercing_search_continuation_decision"
+        }
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.piercing_continuation.canonical_query",
+          "all_conditions": [],
+          "reason_ref": "reason.canonical_frontier_reuse_or_explicit_observed_state_revalidation"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "same_request_frontier_count",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.canonical_frontier_query_domain",
+          "reason_ref": "reason.canonical_frontier_reuse_or_explicit_observed_state_revalidation"
+        }
+      ],
+      "reason_refs": [
+        "reason.canonical_frontier_reuse_or_explicit_observed_state_revalidation"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.piercing_search_continuation_decision"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.piercing_continuation.revalidation",
+          "all_conditions": [],
+          "static_facts": {
+            "applicable": true,
+            "resume_existing": false,
+            "fresh_search_authorized": false,
+            "continuation_query_requires_revalidation": true,
+            "resume_source_class_ref": "continuation.requires_revalidation",
+            "search_continuation": null,
+            "continuation_decision_needs_commit": false,
+            "gap_refs": [
+              "gap.canonical_search_continuation_requires_source_revalidation"
+            ],
+            "whole_influence_prediction_complete": false,
+            "action_authority": false,
+            "current_source_parent_scope_qualified": false
+          },
+          "bound_facts": {
+            "resume_source_decision_ref": "measured_decision_ref",
+            "request_fingerprint": "request_fingerprint",
+            "scope": "scope",
+            "frame_ref": "frame_ref",
+            "qualified_parent_goal_ref": "qualified_parent_goal_ref",
+            "retained_parent_goal_why_contract": "retained_parent_goal_why_contract",
+            "canonical_frontier_refs": "measured_canonical_frontier_refs",
+            "source_origin_refs": "measured_source_origin_refs",
+            "invalidated_frontier_refs": "measured_observed_state_invalidation_refs"
+          }
+        },
+        {
+          "id": "projection.piercing_continuation.retained_lease_scope",
+          "all_conditions": [
+            {
+              "field": "prior_lease_scope_matches",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "current_source_parent_scope_qualified": true
+          }
+        },
+        {
+          "id": "projection.piercing_continuation.current_source_owner_bootstrap",
+          "all_conditions": [
+            {
+              "field": "prior_lease_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "parent_continuity_class_ref",
+              "operator": "equals",
+              "expected": "continuity.legacy_without_parent"
+            },
+            {
+              "field": "parent_continuity_allows_candidate",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "request_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "request_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "request_parent_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "request_why_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_why_missing_canonical_ref_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "current_request_origin_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "parent_why_origin_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "parent_why_scope_proof_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "current_source_parent_scope_qualified": true
+          }
+        },
+        {
+          "id": "projection.piercing_continuation.exact_resume",
+          "all_conditions": [
+            {
+              "field": "request_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "request_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "request_parent_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_source_parent_scope_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_request_frontier_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "current_frame_frontier_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "same_request_active_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "same_request_positive_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "same_request_contradiction_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "same_request_defeated_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "same_request_typed_fingerprint_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "same_request_origin_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "request_why_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_request_proposed_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "same_request_why_match_count",
+              "operator": "equals",
+              "expected": 1
+            }
+          ],
+          "static_facts": {
+            "resume_existing": true,
+            "fresh_search_authorized": false,
+            "continuation_query_requires_revalidation": false,
+            "resume_source_class_ref": "continuation.resume_existing",
+            "gap_refs": []
+          },
+          "bound_facts": {
+            "search_continuation": "measured_search_continuation"
+          }
+        },
+        {
+          "id": "projection.piercing_continuation.initial_absence",
+          "all_conditions": [
+            {
+              "field": "request_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "request_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "request_parent_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_source_parent_scope_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "scoped_frontier_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "same_request_decision_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "scoped_decision_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "current_request_origin_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "request_why_matches",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "resume_existing": false,
+            "fresh_search_authorized": true,
+            "continuation_query_requires_revalidation": false,
+            "resume_source_class_ref": "continuation.initial_absence",
+            "gap_refs": [],
+            "continuation_decision_needs_commit": true
+          }
+        },
+        {
+          "id": "projection.piercing_continuation.observed_state_invalidation",
+          "all_conditions": [
+            {
+              "field": "request_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "request_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "request_parent_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_source_parent_scope_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_request_frontier_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "current_frame_source_record_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "different_frame_source_record_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "current_observation_proof_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "same_request_decision_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "current_request_origin_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "request_why_matches",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "resume_existing": false,
+            "fresh_search_authorized": true,
+            "continuation_query_requires_revalidation": false,
+            "continuation_decision_needs_commit": true,
+            "resume_source_class_ref": "continuation.observed_state_invalidation",
+            "gap_refs": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.piercing_search_continuation_decision",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "term_templates": [
+        {
+          "id_pattern": "{resume_source_decision_ref}",
+          "kind": "schema",
+          "label": "Source search continuation decision",
+          "required_fields": [
+            "resume_source_decision_ref"
+          ],
+          "static_attributes": {
+            "commitment": "revisable"
+          },
+          "attribute_bindings": {}
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{resume_source_decision_ref}",
+          "predicate": "piercing_search_continuation_decision",
+          "family": "control",
+          "argument_patterns": [
+            "{resume_source_decision_ref}"
+          ],
+          "epistemic_status": "proposed",
+          "required_fields": [
+            "resume_source_decision_ref"
+          ],
+          "static_attributes": {
+            "whole_influence_prediction_complete": false,
+            "action_authority": false
+          },
+          "attribute_bindings": {
+            "resume_source_decision_ref": "resume_source_decision_ref",
+            "resume_source_class_ref": "resume_source_class_ref",
+            "request_fingerprint": "request_fingerprint",
+            "scope": "scope",
+            "frame_ref": "frame_ref",
+            "qualified_parent_goal_ref": "qualified_parent_goal_ref",
+            "retained_parent_goal_why_contract": "retained_parent_goal_why_contract",
+            "canonical_frontier_refs": "canonical_frontier_refs",
+            "source_origin_refs": "source_origin_refs",
+            "invalidated_frontier_refs": "invalidated_frontier_refs",
+            "fresh_search_authorized": "fresh_search_authorized",
+            "resume_existing": "resume_existing"
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.canonical_frontier_reuse_or_explicit_observed_state_revalidation"
+      ]
+    }
+  ]
+}

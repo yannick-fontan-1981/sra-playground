@@ -1,0 +1,40 @@
+{
+  "schema": "logos-engine.lot5c-published-site102-native-source-observation.v1",
+  "recordedAt": "2026-11-11T17:00:23.783969+00:00",
+  "status": "published_native_manifest_verified_candidate_delta_requires_merge_review",
+  "siteVersion": 102,
+  "nativeVersion": "0.62.0",
+  "sourceCommit": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464",
+  "checkout": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout",
+  "nativeManifest": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json",
+  "nativeFileCount": 310,
+  "nativeDigest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+  "allPublishedNativeFileSha256Matched": true,
+  "candidateBeforeMerge": "670892410f136da67d4e05ec1251c5770f7825b0",
+  "candidateComparedManifest": "docs/migration/lot5c-evidence/recovery/integration-published-6a/source-after-clock/source-manifest.json",
+  "candidateManifestDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+  "sharedFilesIdentical": 308,
+  "sharedFilesDifferent": [
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "published": "35ee423d3dbfd74b7969c568db48222260ef78dab8a75402a7f28d643a110438",
+      "candidate": "c5bc40b3dd40b383f6bd31bbc8c77955a24c7b62a774792ccea38e9f8b79d0f3"
+    },
+    {
+      "path": "src/logos-engine/v6-native-types.ts",
+      "published": "7ce043684a9243224f845b97e7a3f22aa7c9348643d2af89316755d9e441c6ca",
+      "candidate": "8e9a34137ef32f076bc8b73af3f71ef9a78956c93aac20dabcd9c61e1b2f9db8"
+    }
+  ],
+  "candidateOnlyNativeFiles": [
+    "src/logos-engine/v6-object-binding-common.ts",
+    "src/logos-engine/v6-object-binding-geometry.ts",
+    "src/logos-engine/v6-object-binding-identity.ts",
+    "src/logos-engine/v6-object-binding-planning.ts",
+    "src/logos-engine/v6-object-binding-reception.ts",
+    "src/logos-engine/v6-object-binding-tracker.ts",
+    "src/logos-engine/v6-observed-binding-state.ts",
+    "src/logos-engine/v6-observed-binding.ts"
+  ],
+  "qualification": "Comparison of verified frozen native inventories. This does not resolve the integration delta or claim a new candidate validation."
+}

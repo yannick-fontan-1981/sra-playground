@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.lot6b.prospective-development-campaign.v1",
+  "declaredAt": "2026-11-11T15:36:14.819584+00:00",
+  "game": "KLOT",
+  "targetLevels": 3,
+  "outerMaximumAcquiredActions": 300,
+  "commandLimitSeconds": 360,
+  "originalSourcePin": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "basePublishedSiteVersion": 97,
+  "basePublishedCommit": "98336fba4e696a51c90ff7f7b37b8bdf95f34847",
+  "developmentNativeVersion": "0.64.0",
+  "caseClock": "docs/migration/lot6b-evidence/klot-case-clock.json",
+  "retainedPriorChargeSeconds": 24.942972560999884,
+  "plannedFreeze": "docs/migration/lot6b-evidence/development-freeze-01",
+  "qualification": "First cold native common-caller attempt on the retained development base. No expected actions, state, source agent or game implementation is inspected or supplied to production decisions. All outcomes are retained. This is not a final integrated delivery or cost freeze; actual published predecessors must still be reconciled and the retained public path revalidated before delivery. An outer reference cap does not change production policy."
+}

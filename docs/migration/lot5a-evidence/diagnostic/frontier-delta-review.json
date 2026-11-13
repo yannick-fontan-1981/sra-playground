@@ -1,0 +1,149 @@
+{
+  "schema": "logos-engine.frontier-native-delta-review.v1",
+  "recordedAt": "2026-11-10T17:21:57.660044-03:00",
+  "status": "reviewed_no_blocking_issue_in_declared_scope",
+  "activity": "Source inspection, existing TAP receipt inspection and byte fingerprinting only. No test, build, replay, benchmark or game was executed by this receipt.",
+  "publishedBase": {
+    "siteVersion": 79,
+    "nativeVersion": "0.50.0",
+    "commit": "6d03c2adda9f60b1c97304f5491a428cfbec7a6c"
+  },
+  "implementationFiles": [
+    "src/logos-engine/v6-observed-frontier.ts",
+    "src/logos-engine/v6-native-caller.ts"
+  ],
+  "inputFingerprints": [
+    {
+      "path": "src/logos-engine/v6-observed-frontier.ts",
+      "sha256": "c2adeb462bf5a4089af59c8141b880c9ef2ba6378d1fc5c52c33333fe564ba62",
+      "bytes": 40967
+    },
+    {
+      "path": "src/logos-engine/v6-native-caller.ts",
+      "sha256": "621aa8b5569420e12905af4c22db1be50a387e22cec0e01bc24db1695b1b917a",
+      "bytes": 41090
+    },
+    {
+      "path": "src/logos-engine/v6-native-owned.ts",
+      "sha256": "b4a1eeb1cf43bb04695bce8267903cd122fe778b4b938a98b1640a9ba6ee4839",
+      "bytes": 6626
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "sha256": "52192547e57c1de7eeaf8c5d3fc19693d632ff8f437b5c89a23be9ab7152b7b0",
+      "bytes": 136130
+    },
+    {
+      "path": "tests/v6-frontier-native-snapshot.test.ts",
+      "sha256": "fc1aaed4faefa0cbd8083c15d6f65a764d0cf9878dc398984411cece1deccb3f",
+      "bytes": 13034
+    },
+    {
+      "path": "tests/v6-observed-frontier.test.ts",
+      "sha256": "9ad30c4e5129ad045294846c7fc34ccfba5992c9fceca214c60e00ff8125367b",
+      "bytes": 5221
+    },
+    {
+      "path": "tests/v6-native-mixed-path.test.ts",
+      "sha256": "95bbe592e8b6b992eb092d088030b1716d64d4976a9be06816fe5fbcf5711fc0",
+      "bytes": 10739
+    },
+    {
+      "path": "tests/fixtures/v6-frontier-reference.json",
+      "sha256": "a6c6c7a2d7222bba1e801f398d32cbd61b7f088e45aefde6375fdd479278181e",
+      "bytes": 869283
+    }
+  ],
+  "originalSource": {
+    "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "files": [
+      {
+        "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier.py",
+        "sha256": "39c4663cbb7b0c0c508df4fb52e60bc2fba96f6c80df4f05eed27b8f4b6b8639",
+        "bytes": 31844,
+        "matchesExistingOracleSourceHash": true
+      },
+      {
+        "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/return_fork.py",
+        "sha256": "a523fb2b9d8ff974b54061d8dc8a8a5210ac1755c7aa0c8dd75e25fddee74458",
+        "bytes": 2844,
+        "matchesExistingOracleSourceHash": true
+      },
+      {
+        "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+        "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f",
+        "bytes": 48531,
+        "matchesExistingOracleSourceHash": true
+      }
+    ],
+    "unchangedOracleFixture": {
+      "path": "tests/fixtures/v6-frontier-reference.json",
+      "sha256": "a6c6c7a2d7222bba1e801f398d32cbd61b7f088e45aefde6375fdd479278181e",
+      "bytes": 869283
+    }
+  },
+  "existingValidation": {
+    "frontierDefaultAndNative": {
+      "path": "docs/migration/lot5a-evidence/diagnostic/frontier-snapshot-targeted-tests-initial.tap",
+      "sha256": "3790d70e7ff1b18c9afe27f4917cf2d068c43c626d393288cd38e0e78994b8ee",
+      "bytes": 9647,
+      "counts": {
+        "tests": 43,
+        "pass": 43,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "executedByThisReceipt": false
+    },
+    "mixedPath": {
+      "path": "docs/migration/lot5a-evidence/diagnostic/mixed-path-targeted-tests.tap",
+      "sha256": "811858e14725e66dedb762ef81455928afe2d33616264aeb3c90e8c7f1ae155a",
+      "bytes": 1624,
+      "counts": {
+        "tests": 6,
+        "pass": 6,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "executedByThisReceipt": false
+    },
+    "qualification": "These are earlier targeted receipts, not a final integrated gate or official timing window. This review does not rerun them."
+  },
+  "ownershipAndApis": {
+    "default": "ObservedFrontier defaults to the existing mutable source-compatible behavior. Its public snapshot() returns detached mutable values in both modes.",
+    "optIn": "NativeCallerCoordinator explicitly constructs nativeOwned:true at initialization, full restore and natural-boundary replay. The ownership option and snapshot cache are not serialized source fields.",
+    "nativeSnapshot": "Native snapshot values are deeply retained through retainNativeJson. Unchanged owned root identities and all serialized scalars authorize cache reuse; max_prefix changes therefore invalidate the root snapshot even without a new event.",
+    "foreignInputs": "A shallow Object.freeze is not trusted. Foreign replacement trees are fully validated and detached before adoption; nested writes to adopted owned state are blocked, and replacing a root is detected on the next snapshot.",
+    "restoration": "restoreFrom still calls store.stateValue for every caller component, validating roots and referenced fragments. No per-component restore is skipped merely because a hydrated root identity is unchanged."
+  },
+  "equivalence": {
+    "sourceSequences": "All retained fixture scenarios run through both the default and native classes. Results, public snapshots, original Python states and ordered deltas compare exactly after every step.",
+    "hashes": "Event schema, sequence, previous_digest, kind, payload and digest remain identical for completed source operations. Replayed native snapshots match both source states and ordinary TypeScript snapshots.",
+    "copyOnWrite": "Observation, domain, transition and proposal deltas replace only their affected nested records and share unchanged immutable branches. Previous snapshots remain unchanged.",
+    "publication": "The native path captures incoming events before asynchronous hashing, prepares replacement records, validates closure, checks that the prior working roots and scalars remain current, then publishes the complete replacement.",
+    "invalidDeltas": "Tampered, repeated, unknown and malformed deltas leave the retained graph, counters, chain and cached snapshot unchanged in the targeted tests.",
+    "boundary": "The caller still replays and verifies original retained goal/frontier events at a natural boundary. No journal validation is bypassed. The existing max_prefix restoration behavior is retained.",
+    "fullRestore": "Constructing from an owned native snapshot preserves immutable branch identities. A subsequent valid delta remains equal to ordinary source behavior without mutating that snapshot."
+  },
+  "retentionAndComplexity": {
+    "deletedHistoricalFacts": false,
+    "retained": "All observations, transitions, occurrences, attempts, rule summaries, navigation counts and event history remain available across epochs.",
+    "remainingCost": "Changed top-level maps still require shallow copies and validation of their entries, so that portion remains O(number of retained entries). Boundary replay, historical searches and other caller components retain their existing history-dependent work. This is not an O(1) session claim.",
+    "scope": "The optimization removes repeated deep copies of unchanged frontier records and permits immutable-state fragment reuse. It does not establish any specific WEAV level completion, production speedup or bounded total memory."
+  },
+  "runtimeCounterAndSetReadOnlyReview": {
+    "status": "no_blocking_issue_for_admitted_portable_family_results",
+    "baselineReads": "In the published baseline, records was read only through length, and compositions only through size; the two insertion sites supplied no subsequent reasoning reads.",
+    "recordCounter": "The root change retains structuredClone/freeze validation of each selected record before increasing acquiredRecordCount. A malformed unclonable record therefore still fails before the displayed count increases.",
+    "compositionSet": "The entire proposal is still cloned and frozen before composition IDs are retained. Set size preserves Map key-count semantics, including repeated IDs; removed Map payloads were redundant diagnostic copies.",
+    "authoritativeData": "Reasoning records, proposals and composition evidence remain in their existing authoritative graph and acquisition paths. This change removes additional runtime-held payload copies, not acquired facts.",
+    "qualification": "Static review of the fingerprinted runtime subset only. The linked-temporal integration and final merged-runtime validation are separate. No arbitrary accessor-side-effect equivalence or new gameplay result is claimed."
+  },
+  "mixedPathQualification": "The earlier six-test proof uses the actual browser controller, service and native runtime with a declared synthetic family. It covers existing path transport, tickets, guards, current point binding, Pause and exact-once reduction; it does not add a WEAV multi-action policy or prove the full production caller/WHY-ACT attribution.",
+  "reviewOwnership": "The frontier implementation and targeted source-parity tests were prepared by the same subagent. The root separately inspected the diff and reported no immediate blocking issue. This receipt is a provenance/self-review record, not a claim of an independent implementation audit.",
+  "pending": "Final merged-source validation and any official cost decision remain separate, after the coordinated 7A exclusive window."
+}

@@ -1,0 +1,553 @@
+{
+  "schema": "logos-engine.lot3i-independent-cost-protocol-review.v1",
+  "recordedAt": "2026-11-10T17:52:38.653416+00:00",
+  "reviewer": "recurrent_access independent reviewer of root-owned protocol tools",
+  "status": "finalized_static_inputs_reviewed_readiness_pending",
+  "phase": "finalized_static_inputs",
+  "checkedCount": 56,
+  "satisfiedCount": 56,
+  "checks": [
+    {
+      "name": "seven_retained_tool_roles",
+      "satisfied": true
+    },
+    {
+      "name": "unchanged_retained_tool:scripts/run-native-cost-window.py",
+      "satisfied": true,
+      "receipt": {
+        "path": "scripts/run-native-cost-window.py",
+        "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613",
+        "bytes": 8933
+      }
+    },
+    {
+      "name": "unchanged_retained_tool:scripts/measure-native-loop-costs.mjs",
+      "satisfied": true,
+      "receipt": {
+        "path": "scripts/measure-native-loop-costs.mjs",
+        "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+        "bytes": 20670
+      }
+    },
+    {
+      "name": "unchanged_retained_tool:scripts/compare-native-loop-costs.mjs",
+      "satisfied": true,
+      "receipt": {
+        "path": "scripts/compare-native-loop-costs.mjs",
+        "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+        "bytes": 9861
+      }
+    },
+    {
+      "name": "unchanged_retained_tool:scripts/compare-native-cost-cohorts.mjs",
+      "satisfied": true,
+      "receipt": {
+        "path": "scripts/compare-native-cost-cohorts.mjs",
+        "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+        "bytes": 19460
+      }
+    },
+    {
+      "name": "unchanged_retained_tool:scripts/review-native-cost-consolidation.py",
+      "satisfied": true,
+      "receipt": {
+        "path": "scripts/review-native-cost-consolidation.py",
+        "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4",
+        "bytes": 17810
+      }
+    },
+    {
+      "name": "unchanged_retained_tool:scripts/review-native-global-cost-window.py",
+      "satisfied": true,
+      "receipt": {
+        "path": "scripts/review-native-global-cost-window.py",
+        "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940",
+        "bytes": 22204
+      }
+    },
+    {
+      "name": "unchanged_retained_tool:scripts/review-native-global-cost-budget.py",
+      "satisfied": true,
+      "receipt": {
+        "path": "scripts/review-native-global-cost-budget.py",
+        "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341",
+        "bytes": 8476
+      }
+    },
+    {
+      "name": "historical_input_byte_identity:cases.json",
+      "satisfied": true,
+      "fingerprint": {
+        "path": "docs/migration/lot3i-evidence/performance/cases.json",
+        "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+        "bytes": 1451
+      }
+    },
+    {
+      "name": "historical_input_byte_identity:comparison-policy.json",
+      "satisfied": true,
+      "fingerprint": {
+        "path": "docs/migration/lot3i-evidence/performance/comparison-policy.json",
+        "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+        "bytes": 991
+      }
+    },
+    {
+      "name": "published_baseline_actual_manifest",
+      "satisfied": true
+    },
+    {
+      "name": "published_baseline_commit_and_site",
+      "satisfied": true
+    },
+    {
+      "name": "separate_real_checkouts",
+      "satisfied": true
+    },
+    {
+      "name": "unchanged_runner_between_checkouts",
+      "satisfied": true
+    },
+    {
+      "name": "public_return_digest:A:STCK",
+      "satisfied": true,
+      "trace": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "expected": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "name": "public_return_digest:B:STCK",
+      "satisfied": true,
+      "trace": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "expected": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "name": "public_return_digest:A:SMLP",
+      "satisfied": true,
+      "trace": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "expected": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "name": "public_return_digest:B:SMLP",
+      "satisfied": true,
+      "trace": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "expected": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "name": "unchanged_execution_order",
+      "satisfied": true,
+      "parsedPlan": [
+        [
+          "A1",
+          "baseline",
+          "cohort1/baseline"
+        ],
+        [
+          "B1",
+          "ROOT",
+          "cohort1/after"
+        ],
+        [
+          "B2",
+          "ROOT",
+          "cohort2/after"
+        ],
+        [
+          "A2",
+          "baseline",
+          "cohort2/baseline"
+        ]
+      ]
+    },
+    {
+      "name": "unchanged_case_rounds_and_action_limits",
+      "satisfied": true
+    },
+    {
+      "name": "independently_calculated_effectifs",
+      "satisfied": true,
+      "calculated": {
+        "measuredSessions": 32,
+        "measuredActions": 400,
+        "excludedWarmupSessions": 8,
+        "excludedWarmupActions": 24
+      }
+    },
+    {
+      "name": "strict_complete_session_gate_per_game",
+      "satisfied": true
+    },
+    {
+      "name": "phase_overruns_remain_diagnostic",
+      "satisfied": true
+    },
+    {
+      "name": "no_measured_session_or_outlier_exclusion",
+      "satisfied": true
+    },
+    {
+      "name": "python_ast_parses:prepare-cost-protocol.py",
+      "satisfied": true
+    },
+    {
+      "name": "python_ast_parses:check-cost-static-inputs.py",
+      "satisfied": true
+    },
+    {
+      "name": "reviewed_finalization_binds_actual_native_inventory",
+      "satisfied": true,
+      "method": "Manual code review with explicit statement anchors; finalization has not been executed by this reviewer."
+    },
+    {
+      "name": "reviewed_static_checker_requires_actual_270_file_candidate",
+      "satisfied": true
+    },
+    {
+      "name": "reviewed_static_checker_binds_actual_281_file_archive",
+      "satisfied": true
+    },
+    {
+      "name": "reviewed_calculation_uses_decimal_strict_threshold",
+      "satisfied": true,
+      "method": "Read-only inspection of unchanged arithmetic implementation, not execution of tests or candidate samples."
+    },
+    {
+      "name": "reviewed_global_acceptance_does_not_use_phase_verdict",
+      "satisfied": true
+    },
+    {
+      "name": "no_official_window_started",
+      "satisfied": true
+    },
+    {
+      "name": "preparation_does_not_claim_readiness",
+      "satisfied": true
+    },
+    {
+      "name": "final:actual_candidate_native_freeze",
+      "satisfied": true,
+      "actualDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+      "fileCount": 270
+    },
+    {
+      "name": "final:actual_candidate_version",
+      "satisfied": true,
+      "version": "0.50.0"
+    },
+    {
+      "name": "final:declared_fingerprint:protocol",
+      "satisfied": true,
+      "actual": {
+        "path": "docs/migration/lot3i-evidence/performance/protocol.md",
+        "sha256": "20f00e9eb612099dafd0033718b8c130d684665419525aca73334caa6653d990",
+        "bytes": 10100
+      }
+    },
+    {
+      "name": "final:declared_fingerprint:cases",
+      "satisfied": true,
+      "actual": {
+        "path": "docs/migration/lot3i-evidence/performance/cases.json",
+        "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+        "bytes": 1451
+      }
+    },
+    {
+      "name": "final:declared_fingerprint:diagnosticComparisonPolicy",
+      "satisfied": true,
+      "actual": {
+        "path": "docs/migration/lot3i-evidence/performance/comparison-policy.json",
+        "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+        "bytes": 991
+      }
+    },
+    {
+      "name": "final:declared_fingerprint:globalBudgetPolicy",
+      "satisfied": true,
+      "actual": {
+        "path": "docs/migration/lot3i-evidence/performance/global-budget-policy.json",
+        "sha256": "73cb36faac8bd0e49c83ccb808dc9bc71d13fad2607a917c0f886199d336e89e",
+        "bytes": 2011
+      }
+    },
+    {
+      "name": "final:declared_fingerprint:baselineManifest",
+      "satisfied": true,
+      "actual": {
+        "path": "docs/migration/lot3i-evidence/baseline/source-manifest.json",
+        "sha256": "5ab90c3cbd2f8356ba27025052a1c40cd16e7cb38326a89a48ac6e53cb9b3a24",
+        "bytes": 31765
+      }
+    },
+    {
+      "name": "final:declared_fingerprint:candidateManifest",
+      "satisfied": true,
+      "actual": {
+        "path": "docs/migration/lot3i-evidence/final/source-manifest.json",
+        "sha256": "6345dc2902336aaf6f680b798b3c312281dcb66bbd7994b349b1734e5a42c1bd",
+        "bytes": 32014
+      }
+    },
+    {
+      "name": "final:declared_fingerprint:candidateArchiveManifest",
+      "satisfied": true,
+      "actual": {
+        "path": "docs/migration/lot3i-evidence/final/source-archive.json",
+        "sha256": "c4c99644a7140026703bf865ff7b81ffa075e2316b1ce0fc82f21a216251055a",
+        "bytes": 33645
+      }
+    },
+    {
+      "name": "final:declared_fingerprint:globalDecisionTool",
+      "satisfied": true,
+      "actual": {
+        "path": "scripts/review-native-global-cost-window.py",
+        "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940",
+        "bytes": 22204
+      }
+    },
+    {
+      "name": "final:declared_fingerprint:globalCalculationTool",
+      "satisfied": true,
+      "actual": {
+        "path": "scripts/review-native-global-cost-budget.py",
+        "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341",
+        "bytes": 8476
+      }
+    },
+    {
+      "name": "final:actual_candidate_policy_identity",
+      "satisfied": true
+    },
+    {
+      "name": "final:archive_bound_to_actual_native_freeze",
+      "satisfied": true,
+      "nativeDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+      "fileCount": 281
+    },
+    {
+      "name": "final:archive_actual_bytes",
+      "satisfied": true,
+      "actual": {
+        "path": "docs/migration/lot3i-evidence/final/source-archive.tar.gz",
+        "sha256": "0584411aa31fb00c60d523e8eafd7b51394a182ac75b06f49206c8375def6fed",
+        "bytes": 1712185
+      }
+    },
+    {
+      "name": "final:archive_members_and_multiplicity",
+      "satisfied": true,
+      "archiveMembers": 281
+    },
+    {
+      "name": "final:all_archive_source_bytes_still_current",
+      "satisfied": true,
+      "mismatched": []
+    },
+    {
+      "name": "final:static_preflight_receipt_passed_and_bound",
+      "satisfied": true,
+      "checkedCount": 52,
+      "receipt": {
+        "path": "docs/migration/lot3i-evidence/performance/static-preflight.json",
+        "sha256": "0b12c7b0eea353a463646f042a4ada8fd8d0812f10a3a8d5b2a4c0801cc94cc1",
+        "bytes": 12138
+      }
+    },
+    {
+      "name": "final:retained_protocol_contract_receipt_passed_and_bound",
+      "satisfied": true
+    },
+    {
+      "name": "final:global_rule_not_weakened_at_finalization",
+      "satisfied": true
+    },
+    {
+      "name": "final:editorial_lot_reference_corrected_before_finalization",
+      "satisfied": true
+    },
+    {
+      "name": "final:declaration_chronology",
+      "satisfied": true,
+      "finalizedAt": "2026-11-10T14:51:24.333521-03:00"
+    },
+    {
+      "name": "final:official_window_still_absent",
+      "satisfied": true
+    },
+    {
+      "name": "final:static_receipts_do_not_claim_functional_readiness_or_isolation",
+      "satisfied": true
+    }
+  ],
+  "findings": [],
+  "blockingFindings": [],
+  "inputs": [
+    {
+      "path": "docs/migration/lot3i-evidence/prepare-cost-protocol.py",
+      "sha256": "d7148451adb825c418a10041076367a576fd8b0e88daec2d742ddd0e66503779",
+      "bytes": 22843
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/check-cost-static-inputs.py",
+      "sha256": "f9bfb5f89eb060e74a2cce3e9945b83bb86b740e800f09df24415631d1b3d663",
+      "bytes": 16709
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/preparation.json",
+      "sha256": "d607c8db960df644097a9a8cb4588d5d5e6e58bad25099c89fc3b4f3a68b4d9a",
+      "bytes": 3409
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/global-budget-policy.json",
+      "sha256": "73cb36faac8bd0e49c83ccb808dc9bc71d13fad2607a917c0f886199d336e89e",
+      "bytes": 2011
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/protocol.md",
+      "sha256": "20f00e9eb612099dafd0033718b8c130d684665419525aca73334caa6653d990",
+      "bytes": 10100
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/baseline/source-manifest.json",
+      "sha256": "5ab90c3cbd2f8356ba27025052a1c40cd16e7cb38326a89a48ac6e53cb9b3a24",
+      "bytes": 31765
+    }
+  ],
+  "baselineVerified": {
+    "siteVersion": 78,
+    "nativeVersion": "0.49.0",
+    "commit": "8fa6b261b8b23ac8d232e60c9c179e2f3407d82f",
+    "fileCount": 268,
+    "nativeDigest": "d6cb9abdf48a9062936d4647dbd809dc4cee1d1528f85e973fda83c7af8e6054"
+  },
+  "candidateObservedUnfrozen": {
+    "fileCount": 270,
+    "nativeDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+    "frozen": false,
+    "qualification": "Transient inventory observation only. The final candidate digest must come from the actual final manifest and be rechecked after declaration finalization."
+  },
+  "finalizationPathsAtReview": [
+    {
+      "path": "docs/migration/lot3i-evidence/final/source-manifest.json",
+      "exists": true
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/source-archive.json",
+      "exists": true
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/declaration.json",
+      "exists": true
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/protocol-check.json",
+      "exists": true
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/static-preflight.json",
+      "exists": true
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/readiness.json",
+      "exists": false
+    }
+  ],
+  "measurementExecuted": false,
+  "testExecuted": false,
+  "buildExecuted": false,
+  "protocolGeneratorExecuted": false,
+  "staticCheckerExecuted": false,
+  "readinessAuthorized": false,
+  "qualifications": [
+    "This independent review inspected JSON, source statements, Python AST, hashes, git HEAD and schedule arithmetic only. It launched no runtime, worker, game, benchmark, test, build or campaign.",
+    "The unchanged historical phase-policy prose retains older publication identifiers and its old phase verdict. The current global policy/declaration supplies the current A/B identities and nonblocking phase interpretation.",
+    "The wrapper checks native inventories and watched inputs per series and at the end, but readiness/isolation is an owner gate. This review does not authorize measurements or assert functional success.",
+    "Finalization validates native inventory and archive input bindings; the required static preflight separately checks archive bytes, exact file counts, actual implementation version, dependency equivalence and exclusive output absence.",
+    "STCK/SMLP measure complete common-loop replay sessions. They are not direct contribution evidence for RepeatedLine/SupportedLine and do not include game-engine, production-network or browser-rendering wall cost.",
+    "The owner finalized the protocol while this independent review was being recorded. The initial review status described pending verification, not an assertion that final files did not yet exist; exact initial observed path states and timestamps are retained.",
+    "This final review verified actual native and archive manifests, archive members/current bytes, declaration fingerprints and the existing 52/52 static-preflight receipt. It did not execute either protocol generator or static checker.",
+    "The candidate freeze and policy are now bound to actual bytes. Functional readiness, contribution qualification and compute isolation remain separate and were not authorized by this reviewer."
+  ],
+  "initialReviewRecordedAt": "2026-11-10T17:51:30.833455+00:00",
+  "initialReviewCheckedCount": 33,
+  "finalReviewCheckedCount": 23,
+  "candidateFreezeVerified": {
+    "nativeVersion": "0.50.0",
+    "nativeDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+    "nativeFiles": 270,
+    "archiveFiles": 281,
+    "archive": {
+      "path": "docs/migration/lot3i-evidence/final/source-archive.tar.gz",
+      "sha256": "0584411aa31fb00c60d523e8eafd7b51394a182ac75b06f49206c8375def6fed",
+      "bytes": 1712185
+    }
+  },
+  "finalizedAt": "2026-11-10T14:51:24.333521-03:00",
+  "finalInputs": [
+    {
+      "path": "docs/migration/lot3i-evidence/final/source-manifest.json",
+      "sha256": "6345dc2902336aaf6f680b798b3c312281dcb66bbd7994b349b1734e5a42c1bd",
+      "bytes": 32014
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/source-archive.json",
+      "sha256": "c4c99644a7140026703bf865ff7b81ffa075e2316b1ce0fc82f21a216251055a",
+      "bytes": 33645
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/declaration.json",
+      "sha256": "f36a111701e6f2c795b391e6ff851ece136c218c8b3ff008ee20580b4b010492",
+      "bytes": 4105
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/global-budget-policy.json",
+      "sha256": "73cb36faac8bd0e49c83ccb808dc9bc71d13fad2607a917c0f886199d336e89e",
+      "bytes": 2011
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/protocol.md",
+      "sha256": "20f00e9eb612099dafd0033718b8c130d684665419525aca73334caa6653d990",
+      "bytes": 10100
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/protocol-check.json",
+      "sha256": "178a281796be509cc8940efa2ab3d5fe3cba15bb7e179a29bd9c65bbdfda8dd1",
+      "bytes": 406
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/static-preflight.json",
+      "sha256": "0b12c7b0eea353a463646f042a4ada8fd8d0812f10a3a8d5b2a4c0801cc94cc1",
+      "bytes": 12138
+    }
+  ],
+  "finalizationPathsAtFinalReview": [
+    {
+      "path": "docs/migration/lot3i-evidence/final/source-manifest.json",
+      "exists": true
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/source-archive.json",
+      "exists": true
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/declaration.json",
+      "exists": true
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/protocol-check.json",
+      "exists": true
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/static-preflight.json",
+      "exists": true
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/readiness.json",
+      "exists": false
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/window.json",
+      "exists": false
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "schema": "logos-engine.executor-command-handle.v1",
+  "sessionId": 42453,
+  "kind": "five_project_checks_after_asset_materialization",
+  "receipt": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/validation/checks-run.json",
+  "noAutomaticFollowup": true
+}

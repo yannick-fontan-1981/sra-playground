@@ -1,0 +1,167 @@
+{
+  "schema": "logos-engine.framed-window-retained-scan-plan.v1",
+  "status": "declared_before_measurement",
+  "excludedGames": [
+    "CWSE",
+    "FOGW",
+    "SK48",
+    "VOIS"
+  ],
+  "pathSelection": "One trace per game, largest retained compressed file then lexicographic path; decisions use filenames and sizes only.",
+  "imageSelection": "At most 40 unique complete canonical frame_rows per trace, deterministically spread over its ordered unique public packet sequence, including first and last when present. No animation frames or proposals.",
+  "maxTraces": 30,
+  "maxCanonicalViewsPerTrace": 40,
+  "maxSourceCalls": 1200,
+  "traces": [
+    {
+      "game": "AS66",
+      "path": "docs/migration/native-campaigns-v55/baseline-as66/as66-public-trace.json.gz",
+      "bytes": 20409
+    },
+    {
+      "game": "CASC",
+      "path": "docs/migration/native-campaigns-v55/baseline-casc/casc-public-trace.json.gz",
+      "bytes": 944
+    },
+    {
+      "game": "CATL",
+      "path": "docs/migration/native-campaigns-v45/before-continuation-coordination/catl-public-trace.json.gz",
+      "bytes": 38151
+    },
+    {
+      "game": "CATR",
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/catr-cost-session/catr-public-trace.json.gz",
+      "bytes": 24340
+    },
+    {
+      "game": "CN04",
+      "path": "docs/migration/native-campaigns-v53/attempt7/cn04-public-trace.json.gz",
+      "bytes": 21107
+    },
+    {
+      "game": "COLM",
+      "path": "docs/migration/native-campaigns-v48/colm-public-trace.json.gz",
+      "bytes": 27249
+    },
+    {
+      "game": "COMB",
+      "path": "docs/migration/native-campaigns-v43/comb-six-level-public-trace.json.gz",
+      "bytes": 38223
+    },
+    {
+      "game": "ESCT",
+      "path": "docs/migration/native-campaigns-v53/attempt3/esct-public-trace.json.gz",
+      "bytes": 203734
+    },
+    {
+      "game": "GARE",
+      "path": "docs/migration/native-campaigns-v52/attempt7/gare-public-trace.json.gz",
+      "bytes": 69370
+    },
+    {
+      "game": "GLOB",
+      "path": "docs/migration/native-campaigns-v56/baseline-glob/glob-public-trace.json.gz",
+      "bytes": 60688
+    },
+    {
+      "game": "GRIL",
+      "path": "docs/migration/native-campaigns-v49/gril-public-trace.json.gz",
+      "bytes": 12713
+    },
+    {
+      "game": "LF52",
+      "path": "docs/migration/native-campaigns-v45/lf52-public-trace.json.gz",
+      "bytes": 124573
+    },
+    {
+      "game": "LIFE",
+      "path": "docs/migration/lot1-evidence/final/life-public-trace.json.gz",
+      "bytes": 39364
+    },
+    {
+      "game": "LKEY",
+      "path": "docs/migration/native-campaigns-v52/final/lkey-public-trace.json.gz",
+      "bytes": 32637
+    },
+    {
+      "game": "LS20",
+      "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-public-trace.json.gz",
+      "bytes": 44679
+    },
+    {
+      "game": "MEMO",
+      "path": "docs/migration/native-campaigns-v40/memo-public-trace.json.gz",
+      "bytes": 23419
+    },
+    {
+      "game": "PIPE",
+      "path": "docs/migration/native-campaigns-v41/pipe-public-trace.json.gz",
+      "bytes": 11877
+    },
+    {
+      "game": "RE86",
+      "path": "docs/migration/native-campaigns-v54/baseline-re86/re86-public-trace.json.gz",
+      "bytes": 37318
+    },
+    {
+      "game": "RSWP",
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+      "bytes": 41445
+    },
+    {
+      "game": "SELE",
+      "path": "docs/migration/native-campaigns-v47/sele-public-trace.json.gz",
+      "bytes": 36187
+    },
+    {
+      "game": "SMLP",
+      "path": "docs/migration/native-campaigns-v57/baseline-smlp/smlp-public-trace.json.gz",
+      "bytes": 111624
+    },
+    {
+      "game": "STCK",
+      "path": "docs/migration/native-campaigns-v42/stck-four-level-public-trace.json.gz",
+      "bytes": 62949
+    },
+    {
+      "game": "SYME",
+      "path": "docs/migration/native-campaigns-v53/supplementary/syme-attempt5/syme-public-trace.json.gz",
+      "bytes": 60111
+    },
+    {
+      "game": "THER",
+      "path": "docs/migration/native-campaigns-v42/diagnostics/ther-six-level-public-trace.json.gz",
+      "bytes": 34758
+    },
+    {
+      "game": "TICT",
+      "path": "docs/migration/native-campaigns-v46/tict-public-trace.json.gz",
+      "bytes": 84422
+    },
+    {
+      "game": "TR87",
+      "path": "docs/migration/lot2a-evidence/tr87-cold/tr87-public-trace.json.gz",
+      "bytes": 73765
+    },
+    {
+      "game": "VALV",
+      "path": "docs/migration/native-campaigns-v51/valv-public-trace.json.gz",
+      "bytes": 41686
+    },
+    {
+      "game": "WA30",
+      "path": "docs/migration/native-campaigns-v54/baseline-wa30/wa30-public-trace.json.gz",
+      "bytes": 18056
+    },
+    {
+      "game": "WEAV",
+      "path": "docs/migration/lot2b-evidence/final/weav-control-attention/weav-public-trace.json.gz",
+      "bytes": 22472
+    },
+    {
+      "game": "ZIPP",
+      "path": "docs/migration/native-campaigns-v48/zipp-public-trace.json.gz",
+      "bytes": 36532
+    }
+  ]
+}

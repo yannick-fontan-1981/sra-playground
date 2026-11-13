@@ -1,0 +1,1465 @@
+{
+  "schema": "logos-engine.v45.reduction-public-component-comparison.v1",
+  "status": "passed",
+  "comparisonConclusion": "shared_prefix_with_explicit_caller_divergence",
+  "completeTrajectoryEquivalent": false,
+  "inputs": {
+    "sourceComponent": {
+      "path": "tests/fixtures/v6-reduction-transport-lf52-original-public.json.gz",
+      "sha256": "e407a3067e902effd0fb1dcca56d0651bafc0ede06e8b88b06c8d736c50cbe30",
+      "bytes": 1147274
+    },
+    "nativeCampaign": {
+      "path": "docs/migration/native-campaigns-v45/lf52-three-levels.json",
+      "sha256": "555181d73960aefa6dddce778adddd6f0ce34c2d723f149158fb81e50182b7ca",
+      "bytes": 3941769
+    },
+    "nativeTrace": {
+      "path": "docs/migration/native-campaigns-v45/lf52-public-trace.json.gz",
+      "sha256": "61eada811448b278e2049a668b6594b4f8acaeec36b6769aeebd2599c67b6155",
+      "bytes": 124573
+    }
+  },
+  "generator": {
+    "path": "scripts/compare-v45-public-evidence.py",
+    "sha256": "2d878b4f9913636025142c1c40d4112e8035a18f557fa4a90ad6880d13f3c3bf",
+    "bytes": 12718
+  },
+  "nativeSourceDigest": "1278235f269085c057e4dfea619c5a65587bfd90998505858caeef067319640c",
+  "summary": {
+    "nativeCommands": 104,
+    "sourceComponentCommands": 102,
+    "nativeCompletePublicPackets": 105,
+    "nativeAnimationFramesIncludingInitial": 502,
+    "nativePrefixes": 71,
+    "reductionPrefixes": 69,
+    "boundaries": 3,
+    "sharedPrefixCommands": 71,
+    "sharedPrefixCompletePublicPackets": 72,
+    "alignedReductionCommands": 102,
+    "alignedRawExactCommands": 42,
+    "alignedNormalizedNonpointEmptyPayloads": 60,
+    "differentAlignedPublicPackets": 31,
+    "additionalCallerActions": 2
+  },
+  "sourceVerification": {
+    "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "sourceFiles": 6,
+    "unchanged": true
+  },
+  "checkpoints": [
+    {
+      "sourceIndex": 0,
+      "nativeIndex": 0,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "8e4f4660cc2db442172a71978a44a74b9811d2319a8589367eb2dbbf457d8abd",
+      "animationFrames": 1
+    },
+    {
+      "sourceIndex": 1,
+      "nativeIndex": 1,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "1a259b8ec396d91cd8e9964467e666651b348f207e158064496c3238a329cc66",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 2,
+      "nativeIndex": 2,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "0a13fd042405858de5476cf027c0abcfd1baa7011f01ef79c4fd3f1c4cfa6c05",
+      "animationFrames": 10
+    },
+    {
+      "sourceIndex": 3,
+      "nativeIndex": 3,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "38796ba665732156bae62f4410e91a551995a944ddfc3c8c7fd49fb93412a718",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 4,
+      "nativeIndex": 4,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "04dc1594c43f84c8fb370c6291b4a9a4f83053a5d602d814bb010047d757f582",
+      "animationFrames": 10
+    },
+    {
+      "sourceIndex": 5,
+      "nativeIndex": 5,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "0df365ea37b7ec6bc4df7cf7d2abbb583087784a2b77949291d08d2329d399f1",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 6,
+      "nativeIndex": 6,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "008f40abae76390b699b8868519abe578eb4a8b6804c9fa75d943c654c771ed5",
+      "animationFrames": 10
+    },
+    {
+      "sourceIndex": 7,
+      "nativeIndex": 7,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "65dc43d799e38604f7b61bb3da22afa379222aafa46089a97ba81449c9706af4",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 8,
+      "nativeIndex": 8,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "f6d02cef949e7c9e8dde1a6b465db9611b9aa7c9001c9db59421aba309f76f2d",
+      "animationFrames": 27
+    },
+    {
+      "sourceIndex": 9,
+      "nativeIndex": 9,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "1b7c9c79f729ccb01e11ebe79af1e3dec436e8e34cc8df4f9b4bca19ea5eb635",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 10,
+      "nativeIndex": 10,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "95aac3e36400f414eaf0dba1f92cba30094995a88ed92e7b7d61a7b1640703a2",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 11,
+      "nativeIndex": 11,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "9ae8c3d5eaef53fee6cc78b8bf35533660c2ffb993bb06685354b602ae271b0c",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 12,
+      "nativeIndex": 12,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "515b13911636db3de88b6704863ca525da362505a3c98b86dc32c4872e0631ca",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 13,
+      "nativeIndex": 13,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "e31ff5e9cc67a18b3c021eb5ccadf52d412f6794a36c98f37d592043a6e08772",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 14,
+      "nativeIndex": 14,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "bb5bc787247c136adcfac2817f3e05793acee59c604cf48e0908a9cd3e170a6f",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 15,
+      "nativeIndex": 15,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "3cf2d4f6cc1a095b0110f287c10bd1b459024e00a515adc4dbfad1540e784484",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 16,
+      "nativeIndex": 16,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "3ddb72eeb9bea7f1ec6ba64cc54eb3c14effea507328151ca2887a3ebe6af6b3",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 17,
+      "nativeIndex": 17,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "b449cc29341e0cea86eb74b2121d057031726a04c095edc8e026f121a72b8fad",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 18,
+      "nativeIndex": 18,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "6109fda8db98d84b7ac3b3e0ec30151e4544fedc17b909f63c5cddc82c96f49b",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 19,
+      "nativeIndex": 19,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "67fea6c4300a5804d5fafa5e184d40e06ac03e3017f34fc2109a74c1da87ffd6",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 20,
+      "nativeIndex": 20,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "c80430a9ad9660e595569354e29785819b758f0088184cba58060b088b7ef73a",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 21,
+      "nativeIndex": 21,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "01f01aa6a7eaf077b2cdab7148955127d617831aa466bf2a973ba0c3e289c6d7",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 22,
+      "nativeIndex": 22,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "dff7eebc6fcb484b73c8fe233b1ea228ba68082d42bd608f720f3a7468d29825",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 23,
+      "nativeIndex": 23,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "29f39020d73c694ed82020c53237e9e2c255f2cd36aa6cac395461652f0d6ca5",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 24,
+      "nativeIndex": 24,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "f5b750d2b3c13fcef28efad15cce8d5e217ef02ab56c2adbd5d9900c6a97826a",
+      "animationFrames": 10
+    },
+    {
+      "sourceIndex": 25,
+      "nativeIndex": 25,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "1171f81f84ed6804d8fbf18569f7c4f297b126b626f8939d18697ae2acc47146",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 26,
+      "nativeIndex": 26,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "8789af32a73dd856ffee4fb7a00cb130d3b7de3dd9a869414be0ad1c57c2d97c",
+      "animationFrames": 10
+    },
+    {
+      "sourceIndex": 27,
+      "nativeIndex": 27,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "97ad1697199c77bf7414fc2389e5d0b3663bcc961bff7850e431c1dc1baf6f21",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 28,
+      "nativeIndex": 28,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "75cc2ad83af629a521ae303aa0dad0fb5e98d072410958852dea6617a99fd5c9",
+      "animationFrames": 10
+    },
+    {
+      "sourceIndex": 29,
+      "nativeIndex": 29,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "b766d89a7d82f726513dab72451948fc92eb92307432e64bbbe663c23ea7e11a",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 30,
+      "nativeIndex": 30,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "1175c40b0f91d5c4761ea77347945c51d31882f67d8f8ccd3b0b5acfff985c8b",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 31,
+      "nativeIndex": 31,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "aea4e2fe46e97abd7dd7ab87b87f695abe9801b30688d5b6e9c155cd5d5a7ba8",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 32,
+      "nativeIndex": 32,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "05b110c72f34ac009a3cfb1325ed3b203b1ac396f799db4923c611a7bca91f7c",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 33,
+      "nativeIndex": 33,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "54c8fe0b2ecae526e3ff0f574adc702fefae785b4c34793f8e1df46649e71667",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 34,
+      "nativeIndex": 34,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "e11c72e476581d240e8dadf04793cdbd62e43aafcaea329d1e3c5bcb106a1e5e",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 35,
+      "nativeIndex": 35,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "931bf15b9b5230b146c810d5af53f5ef0a73e975a69da68beb2933f37ba5c680",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 36,
+      "nativeIndex": 36,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "da6304f3cf7db9841f69660af3f2da31bdf97589fff5edd552630d8189bf05e4",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 37,
+      "nativeIndex": 37,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "8b227adcda5fb55062a1cd38073711a23c0d64d62bc7c9c55a8623438a3f86b2",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 38,
+      "nativeIndex": 38,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "1a64d145ca4318b763b6d794c3930cd33289ebbe3383c503ca295dc320444ce4",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 39,
+      "nativeIndex": 39,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "aa51fdb7257e4509f95755eb37cc688ac5d696bbae8ed7077b1105faa420e012",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 40,
+      "nativeIndex": 40,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "71d5052a17c95acf138bc46590b2e62aaf1d00d73a84782c6709d5193932fdc2",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 41,
+      "nativeIndex": 41,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "6fea20c8293bf07ebbc537fea7b6a405a0200c19563d18cda1d71d761118da10",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 42,
+      "nativeIndex": 42,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "d45dcc62a19e0bf7ee479a6531f2377dbd817fe9d2c6cb7df9db04bd0c44a438",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 43,
+      "nativeIndex": 43,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "c6dc36086197683341b2007f77e343ced105b4fb36d7dfdb47d6727b581a7484",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 44,
+      "nativeIndex": 44,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "c0a8a81f01902bd9aafb7c5acce6ab2eec46daf482ddf97c2165d9de13c5970a",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 45,
+      "nativeIndex": 45,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "75a4479fdf841880d02070358eb5d667ecbf06fb521b1445705c227290736502",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 46,
+      "nativeIndex": 46,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "12a530ea22d19452a62ce1011cfae1f52678568f1efe0f9fc350f5932186eeba",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 47,
+      "nativeIndex": 47,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "c156f086ac9123f958d5d5e45fa89a2ece1dc3698ee6f45ac3b45a98070a9190",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 48,
+      "nativeIndex": 48,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "923021075c32764ec7bebec202af48a7b34e580632030206332ae5ab53b4dc2b",
+      "animationFrames": 27
+    },
+    {
+      "sourceIndex": 49,
+      "nativeIndex": 49,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "ea4b45919d502f63df64794421752167a160fe8711447b2a3cb238126b28173a",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 50,
+      "nativeIndex": 50,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "f61a3d9b52a6e2ba3b5e69f8ceba6780774697c51d5ba1b3d5456a886089ec91",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 51,
+      "nativeIndex": 51,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "9fd880f03a0689c996144c36314ba8eaaf28fb0badecae0212c3bababe9ba226",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 52,
+      "nativeIndex": 52,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "4caa3f82291b873beea5aef79caadb02308d4bc90819eeaa5452e07787574ae1",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 53,
+      "nativeIndex": 53,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "3b49a08ae99f5154465ff225dc6284dee28e8ee30d580a610be36906ccc6d688",
+      "animationFrames": 10
+    },
+    {
+      "sourceIndex": 54,
+      "nativeIndex": 54,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "d2ec150e05f7bdc69d1ce3c17c92736fbc0dd691fa4c697d6acffaf146142d1a",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 55,
+      "nativeIndex": 55,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "8c43ced3cf98a1180f9e46b330e25c5fead58e0749800a7420943477cde478a5",
+      "animationFrames": 10
+    },
+    {
+      "sourceIndex": 56,
+      "nativeIndex": 56,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "0ea5f20efa9e65d0ccdf2fc4dd83a0bc1b86a5798e9052b706c537e708083759",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 57,
+      "nativeIndex": 57,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "ac67bb9542ea51f4b24588674d0493003f2522c286a22133fed49924897572f0",
+      "animationFrames": 10
+    },
+    {
+      "sourceIndex": 58,
+      "nativeIndex": 58,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "f222a51e90acaad7c6e648b63102586424e18438ccf494e39e7cada8f5d5273c",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 59,
+      "nativeIndex": 59,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "1a37b4221681e6999ec0e41522cbdd1a14a352859c842ad3f5cd463838ba59fa",
+      "animationFrames": 10
+    },
+    {
+      "sourceIndex": 60,
+      "nativeIndex": 60,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "2aa6faadea2002066ae6371f5af75884faf3167d9efa9446d49592ae56368315",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 61,
+      "nativeIndex": 61,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "d9365af160855506684bf7b78e0503a0cafde04774864114e6ea6217fa790a7a",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 62,
+      "nativeIndex": 62,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "b4397844a390b7a060f66c4489acc20e4a5695ef66b5b14b4daf6d08cb5e509e",
+      "animationFrames": 7
+    },
+    {
+      "sourceIndex": 63,
+      "nativeIndex": 63,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "83cdfbe6a03842d86e53fee8248442e129cfe54dc0caadeeec331f6fef96cb3b",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 64,
+      "nativeIndex": 64,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "4368fb100af94bfecc631e4ac350e59238c7565308577f737d823e33658b13f5",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 65,
+      "nativeIndex": 65,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "519f210a2010cb77a38c08f3dc7ab12ddb2e49ec58867fba00311f17df3dd416",
+      "animationFrames": 7
+    },
+    {
+      "sourceIndex": 66,
+      "nativeIndex": 66,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "c81f8012357be1dffb7ff9d635288aa9d0c810c446411b145acc50e6027c328d",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 67,
+      "nativeIndex": 67,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "3b31e25bf0763b362570d41222a9a566c284afa68ef5b85e9b2f0bc673c1c191",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 68,
+      "nativeIndex": 68,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "2be4f6067a58acf0ee8f79a914ef7625c84f5750ddf29d2b6c6ec7644a7f3367",
+      "animationFrames": 7
+    },
+    {
+      "sourceIndex": 69,
+      "nativeIndex": 69,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "06248793be6bf040ff6a107c3194c909689175ce7945c240c7be84c7f1e440ec",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 70,
+      "nativeIndex": 70,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "8fb5ee4649a0524b476d8fa39c4bf328380bf6453a988fd73e15f0abdc38e5da",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 71,
+      "nativeIndex": 71,
+      "completePublicPacketExact": true,
+      "differentFields": [],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "589468537d0fa991129253f2de7fa3021441f585022fb8a117f5a9ba043e852e",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 72,
+      "nativeIndex": 73,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "e755108e95931ecea99f2390adb1399ae8e58550cc2a3dcf2ffcfb10c3b32c31",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 73,
+      "nativeIndex": 74,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "d260b7a6f815fd854555bb8be80026d4f745c2e03f2b0bb77a1060ee597eca80",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 74,
+      "nativeIndex": 75,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "8518a9ce4280d745cee4ccf55dab1ce6b3681d6638f0f3e842aa88f25bfc85e6",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 75,
+      "nativeIndex": 76,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "fa51a3c7218f7f4e7d00ee0a1e2616308e4b2c0d8b937c09dc29944f7e493d40",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 76,
+      "nativeIndex": 77,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "26bf346c44378c7fa72a50f0ddee2c09c19e26e76001ff700ee8af0198bf34ba",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 77,
+      "nativeIndex": 79,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "5a33b04325c22b73a8e0a40d0473cf0ebc7922f992f9ba25826ad607287b0616",
+      "animationFrames": 10
+    },
+    {
+      "sourceIndex": 78,
+      "nativeIndex": 80,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "c3dc74cf09daa02b0b10c0208ab966ad86d7b4da03e383416fabc2e6f3e3142a",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 79,
+      "nativeIndex": 81,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "cf592c02ffa0c206fe837868e018467c44db2fd5957cb00ee258edb6e80aca50",
+      "animationFrames": 10
+    },
+    {
+      "sourceIndex": 80,
+      "nativeIndex": 82,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "c47ace50c27e3d566fc561a4afe74ccd28ac4d0cb482f88fa85f281c7d85624b",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 81,
+      "nativeIndex": 83,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "e10d6f5100b4eea22c32aa61bda97500c33444a955d5d3d657423eb38764d413",
+      "animationFrames": 10
+    },
+    {
+      "sourceIndex": 82,
+      "nativeIndex": 84,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "76e3bb8eec94a9253c8b139e237b722b8c2fa88bbe06fcef11117ac5c4ea23d9",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 83,
+      "nativeIndex": 85,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "fe4f12070df5662f8e34cf31c68fc932bf595eab87d3d22d47958ec6abc30382",
+      "animationFrames": 10
+    },
+    {
+      "sourceIndex": 84,
+      "nativeIndex": 86,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "27a0dd06d6c36d31342cf67d144794d7551f04cee28d482ff444a312e7f48aaf",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 85,
+      "nativeIndex": 87,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "31b5a19aaba7537ffd38bc57393db63de50665ed81439fcefa8415f109d9e9a5",
+      "animationFrames": 10
+    },
+    {
+      "sourceIndex": 86,
+      "nativeIndex": 88,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "a05f1856abba99e96f459c2e405272bc231d55f5ded88cd29e2717517f1413fa",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 87,
+      "nativeIndex": 89,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "e64abbc99fc2f3d40ade776728f1d79f120c38418a59640d42333872283450f0",
+      "animationFrames": 10
+    },
+    {
+      "sourceIndex": 88,
+      "nativeIndex": 90,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "8bbf3331ed5c8467a10640dc9599504ad328e30676e030db9ce5da602943540b",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 89,
+      "nativeIndex": 91,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "e9ebca47d39b8e6a09c6cbe82e444cb821c388af0c22fbd0f25d0f5be9cd0b57",
+      "animationFrames": 10
+    },
+    {
+      "sourceIndex": 90,
+      "nativeIndex": 92,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "8d29d0891b15e99e8abdb70bd2d355aec91519a1e4db1519d26794a466e5dd64",
+      "animationFrames": 7
+    },
+    {
+      "sourceIndex": 91,
+      "nativeIndex": 93,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "26a052ff0f792b8e4b24c7de1b4564fd9ce24baab265cbb06588f1ba66aae58b",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 92,
+      "nativeIndex": 94,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "b15e3c66bbc762b238812613bac0b15f98d7be5d8713af5e6ab74a05a4cb70c6",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 93,
+      "nativeIndex": 95,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "e308ffe5e01d24df60677ce1814319097ad549179887702028d322128c20fa8c",
+      "animationFrames": 7
+    },
+    {
+      "sourceIndex": 94,
+      "nativeIndex": 96,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "4ec77db107e61ea2db28a0294d49823d364267d8c87dee719ecac579901cd671",
+      "animationFrames": 7
+    },
+    {
+      "sourceIndex": 95,
+      "nativeIndex": 97,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "f60d2dd8f300f333a1fab1d61c7a876fcad5d77b2a448ed92a73cba830331b73",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 96,
+      "nativeIndex": 98,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "793c45dc76a564b01a13e1ad6cc22262d30c91551cf40d90edccd5ba97c09e3a",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 97,
+      "nativeIndex": 99,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "864687f70add2695706225ca7d440b31e305414962c4326195840d8ca32cfc94",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 98,
+      "nativeIndex": 100,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "absent_nonpoint_payload_to_empty_object",
+      "nativePublicPacketSha256": "50b23f7189dc2ee53da29121988c767d5247708b38f4c44c81058545532e8b2f",
+      "animationFrames": 3
+    },
+    {
+      "sourceIndex": 99,
+      "nativeIndex": 101,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "1f63bf4efd27215abdcc4b52674162b92fbf6399a77a16aa3e9613413023aaf2",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 100,
+      "nativeIndex": 102,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "0baa897ebd5e83875c8f70d4d061be2f4fd8f7d2e32d00a90af644c322df75b2",
+      "animationFrames": 10
+    },
+    {
+      "sourceIndex": 101,
+      "nativeIndex": 103,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "4454324bae90df3378e7fd4c0978254eb24aac1e86b9020c9c8648de6908637a",
+      "animationFrames": 2
+    },
+    {
+      "sourceIndex": 102,
+      "nativeIndex": 104,
+      "completePublicPacketExact": false,
+      "differentFields": [
+        "frame_packet",
+        "step_index"
+      ],
+      "commandComparison": "exact",
+      "nativePublicPacketSha256": "3f9adf2f550039e0e4f76b22db5f30f40163771575cebbadfe74bd26e0b0c462",
+      "animationFrames": 27
+    }
+  ],
+  "additionalCallerActions": [
+    {
+      "nativeIndex": 72,
+      "command": {
+        "action_ref": "ACTION1",
+        "data": {}
+      },
+      "publicPacketSha256": "5f0a6db5475a620e6bf7804b6589440da511fb50bd138cefb4eef53158cf3859",
+      "animationFrames": 2,
+      "returnedPixelsChanged": true
+    },
+    {
+      "nativeIndex": 78,
+      "command": {
+        "action_ref": "ACTION2",
+        "data": {}
+      },
+      "publicPacketSha256": "bead192b81ce29377cc17cfbdb1960035d432a9436905a8594a0678e2bc2ef95",
+      "animationFrames": 2,
+      "returnedPixelsChanged": true
+    }
+  ],
+  "differentAlignedPackets": [
+    {
+      "sourceIndex": 72,
+      "nativeIndex": 73,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 73,
+      "nativeIndex": 74,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 74,
+      "nativeIndex": 75,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 75,
+      "nativeIndex": 76,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 76,
+      "nativeIndex": 77,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 77,
+      "nativeIndex": 79,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 78,
+      "nativeIndex": 80,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 79,
+      "nativeIndex": 81,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 80,
+      "nativeIndex": 82,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 81,
+      "nativeIndex": 83,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 82,
+      "nativeIndex": 84,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 83,
+      "nativeIndex": 85,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 84,
+      "nativeIndex": 86,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 85,
+      "nativeIndex": 87,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 86,
+      "nativeIndex": 88,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 87,
+      "nativeIndex": 89,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 88,
+      "nativeIndex": 90,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 89,
+      "nativeIndex": 91,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 90,
+      "nativeIndex": 92,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 91,
+      "nativeIndex": 93,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 92,
+      "nativeIndex": 94,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 93,
+      "nativeIndex": 95,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 94,
+      "nativeIndex": 96,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 95,
+      "nativeIndex": 97,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 96,
+      "nativeIndex": 98,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 97,
+      "nativeIndex": 99,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 98,
+      "nativeIndex": 100,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 99,
+      "nativeIndex": 101,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 100,
+      "nativeIndex": 102,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 101,
+      "nativeIndex": 103,
+      "differentFields": [
+        "frame_rows",
+        "frame_packet",
+        "step_index",
+        "frame_hash"
+      ]
+    },
+    {
+      "sourceIndex": 102,
+      "nativeIndex": 104,
+      "differentFields": [
+        "frame_packet",
+        "step_index"
+      ]
+    }
+  ],
+  "qualification": "The first 71 commands and 72 complete public packets match, with absent nonpoint data normalized to an empty object. The full native campaign has two additional real caller inquiries at actions 72 and 78, whose returned pixels change. Its 102 reduction-owned commands still match the isolated source command stream under that normalization, but 31 later aligned complete packets differ, including public images. No suffix image, step-index or protocol-field normalization is used to assert equality. Both complete native and isolated-source traces are retained. Source budget is 120 actions/180 seconds per level; native budget is 600 actions/360 active seconds. This is bounded component evidence with an explicit caller divergence, not complete original common-caller parity, identical trajectories, identical budgets or a speed benchmark."
+}

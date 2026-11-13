@@ -1,0 +1,59 @@
+{
+  "schema": "logos-engine.native-state-cost-input-copies.v1",
+  "recordedAt": "2026-11-10T04:13:39.286568+00:00",
+  "copies": [
+    {
+      "source": {
+        "path": "docs/migration/lot3b-smlp-cost-evidence/base/source-manifest.json",
+        "sha256": "0024028577107a7dbcc65ea0cc3ffa929a0ce5a6e7f11bf4515a169fc5cb1146",
+        "bytes": 28936
+      },
+      "copy": {
+        "path": "docs/migration/lot3b-state-cost-evidence/base/source-manifest.json",
+        "sha256": "0024028577107a7dbcc65ea0cc3ffa929a0ce5a6e7f11bf4515a169fc5cb1146",
+        "bytes": 28936
+      },
+      "byteIdentical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot3b-smlp-cost-evidence/final/source-manifest.json",
+        "sha256": "12b765bcd7348af0f7e3e4325862cae570c2b81470475839fdfe9df79fa2078b",
+        "bytes": 29431
+      },
+      "copy": {
+        "path": "docs/migration/lot3b-state-cost-evidence/published/source-manifest.json",
+        "sha256": "12b765bcd7348af0f7e3e4325862cae570c2b81470475839fdfe9df79fa2078b",
+        "bytes": 29431
+      },
+      "byteIdentical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot3b-smlp-cost-evidence/performance/cases.json",
+        "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+        "bytes": 1451
+      },
+      "copy": {
+        "path": "docs/migration/lot3b-state-cost-evidence/performance/cases.json",
+        "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+        "bytes": 1451
+      },
+      "byteIdentical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot3b-smlp-cost-evidence/performance/comparison-policy.json",
+        "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+        "bytes": 991
+      },
+      "copy": {
+        "path": "docs/migration/lot3b-state-cost-evidence/performance/comparison-policy.json",
+        "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+        "bytes": 991
+      },
+      "byteIdentical": true
+    }
+  ],
+  "qualification": "Exact historical bytes. Performance input prose still identifies an older 0.40 correction; the new predeclared protocol will explicitly bind 0.42 without altering any historical input or threshold."
+}

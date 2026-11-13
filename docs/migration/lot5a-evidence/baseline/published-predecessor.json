@@ -1,0 +1,18 @@
+{
+  "schema": "logos-engine.lot5a.published-predecessor.v1",
+  "verifiedAt": "2026-11-10T21:00:16.790157+00:00",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "siteVersion": 82,
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_313e1b8e10c48191b1021845fb64fc55",
+  "deploymentId": "appgdep_6af3842943848191a1b559c431014ee7",
+  "deploymentStatus": "succeeded",
+  "deploymentUpdatedAt": "2026-11-10T20:53:16.560226+00:00",
+  "publishedCommit": "0ca36b0a6a358e1e89420753bbcec4a33f028e0a",
+  "nativeVersion": "0.52.0",
+  "nativeDigest": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb",
+  "nativeFiles": 279,
+  "baselineCheckout": "/workspace/sites/sra-lot5-baseline-052",
+  "sourcePreparationCommit": "5ff6d707ca3b924d554e4ed9de2b002326543f3c",
+  "publicationChangedExecutionInputs": false,
+  "qualification": "Actual source and terminal deployment verified independently through Sites. Compared preparation and published commit: no changes in src/tests/public/content/package inputs/migration/scripts/.openai or generated coverage. Later documentation-only7Aclosure will also be merged before5Apublication."
+}

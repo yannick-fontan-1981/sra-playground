@@ -1,0 +1,104 @@
+{
+  "schema": "logos-engine.lot5c-premeasurement-lock-blocker.v1",
+  "status": "blocked_before_any_measurement_quiet_released",
+  "recordedAt": "2026-11-11T19:08:34.656015+00:00",
+  "requestId": "lot5c-cost-a33a5f88-final-01",
+  "lock": {
+    "path": "/workspace/shared/sra-coordination/performance.lock",
+    "device": 27,
+    "inode": 1971854,
+    "sharedProbeSucceeded": true,
+    "exclusiveProbeSucceeded": false,
+    "disposableNewFileExclusiveProbeSucceeded": true,
+    "posixGetlkReportedNoPosixRecord": true,
+    "flockHolderIdentified": false
+  },
+  "diagnosis": {
+    "rootVisibleExactDescriptors": 0,
+    "rootProbeToolChunk": "20e674",
+    "rootPosixQueryToolChunk": "3496a7",
+    "ownWorkers": [
+      {
+        "name": "lot5_site101_merge_audit",
+        "endedAt": "2026-11-11T19:06:44.184628+00:00",
+        "seconds": 0.044,
+        "visibleProcesses": 3,
+        "visibleDescriptors": 11,
+        "matchingOldLockDescriptors": 0
+      },
+      {
+        "name": "lot5_scope_preview",
+        "endedAt": "2026-11-11T19:07:00+00:00",
+        "seconds": 0.023,
+        "visibleProcesses": 3,
+        "visibleDescriptors": 10,
+        "matchingOldLockDescriptors": 0
+      },
+      {
+        "name": "lot5_cost_protocol_audit",
+        "seconds": 0.052,
+        "visibleProcesses": 4,
+        "matchingOldLockDescriptors": 0,
+        "qualification": "Only its own temporary diagnostic SH flock and child were visible; command ended."
+      }
+    ],
+    "knownOwnSessionsPolled": [
+      60502,
+      81230,
+      51845,
+      11486,
+      21691,
+      88757,
+      56704,
+      18054
+    ],
+    "knownOwnSessionsResult": "all Unknown process id; no active retained session",
+    "processVisibilityLimitation": "Each executor view exposes only the command-local process namespace. An external or executor-managed PTY holder cannot be excluded.",
+    "lot8aUnconfirmedHelper": "A prior hidden-input helper attempt has a truncated tool result and no recovered session/cell identifier. No credential/input was sent. This is an unconfirmed possibility, not an identified lock owner.",
+    "personalContextRecoveredSessionId": false,
+    "processesSignaled": 0,
+    "actualMutexDeletedOrRecreated": false
+  },
+  "readiness": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/readiness.json",
+    "bytes": 581225,
+    "sha256": "bf1caef4f9824367aad9564c9cffa3683137b07f6e74af753d67f52b9e52ff90",
+    "statusAtCompletion": "ready",
+    "functionalAndStaticProofsRemainPreserved": true,
+    "usableForANewWindowAfterThisRelease": false,
+    "reason": "Fresh exact all-worker ACK snapshots and readiness are required after the explicit quiet release; original ready receipt is retained unchanged."
+  },
+  "peerSnapshots": [
+    {
+      "lane": "6b",
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-01/lot6b-post-diagnostic-status.json",
+      "bytes": 10444,
+      "sha256": "badf5f08e465edf2946bd8258edf565657a3df252fa3a73ee202469fee977f06",
+      "updatedAt": "2026-11-11T19:06:08.571746+00:00"
+    },
+    {
+      "lane": "8a",
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-01/lot8a-post-diagnostic-status.json",
+      "bytes": 11067,
+      "sha256": "5f257dd407aa57b3433244fc44648f5fc42985d4a73a9889f1310f98417d049f",
+      "updatedAt": "2026-11-11T19:07:05.447763+00:00"
+    },
+    {
+      "lane": "10c",
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-01/lot10c-post-diagnostic-status.json",
+      "bytes": 9261,
+      "sha256": "42e000380ad07801e7d490a6609e3811f64f9a106c4f9549a49ce6087b2a62b2",
+      "updatedAt": "2026-11-11T19:07:45.846159+00:00"
+    }
+  ],
+  "officialMeasurementExecuted": false,
+  "officialCostSamples": 0,
+  "windowExists": false,
+  "lockWindowExists": false,
+  "nativeChanged": false,
+  "benchmarkProtocolChanged": false,
+  "thresholdChanged": false,
+  "quietReleasedAt": "2026-11-11T19:08:34.656015+00:00",
+  "releaseScope": "Ordinary work under the same SH performance mutex may resume. No official cost window was opened. Publication order remains 5C0.63 then6B0.64 then8A0.65 then10C0.66, each after its actual published predecessor.",
+  "nextRequiredStep": "Identify and close the actual existing holder or observe real EX availability, then request fresh exact all-worker quiet, preserve/renew isolation and readiness, execute the unchanged complete ABBA cost protocol, review both per-game globals strictly below+10%, and publish only on acceptance."
+}

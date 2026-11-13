@@ -1,0 +1,23 @@
+{
+  "schema": "logos-engine.diagnostic-protocol-deviation.v1",
+  "recordedAt": "2026-11-10T04:16:31.378499+00:00",
+  "status": "diagnostic_isolation_not_established",
+  "windows": [
+    {
+      "case": "before-stck",
+      "startedAt": "2026-11-10T04:14:07.069Z",
+      "finishedAt": "2026-11-10T04:14:19.099Z",
+      "replayElapsedMs": 12029.857177
+    },
+    {
+      "case": "before-smlp",
+      "startedAt": "2026-11-10T04:14:35.955Z",
+      "finishedAt": "2026-11-10T04:14:53.511Z",
+      "replayElapsedMs": 17555.500512
+    }
+  ],
+  "declaredCondition": "No simultaneous tests, builds, campaigns or measurements during diagnostic profiles.",
+  "observedDeviation": "Root permitted short unit tests while baseline diagnostics were being scheduled, contrary to the prepared diagnostic protocol. Persistence agent reports a45-test invocation after test edit04:14:27.244 UTC, duration1266.269ms, but exact start/end timestamps were not recorded. The actual SMLP replay window is04:14:35.955\u201304:14:53.511 UTC; an overlap cannot be established or excluded solely from edit-time lower bounds. Another58-test invocation follows edit04:15:05.552 UTC, after both baseline reports. No before-STCK overlap is evidenced.",
+  "consequence": "Retain both complete baseline diagnostic outputs unchanged. Strict isolation of the diagnostic timing series is not established; do not use it as causal or official before/after performance evidence. The six bounded behavioral checks remain applicable. Do not rerun unchanged baselines or select replacement timings. Official cost window remains separate and will begin only after explicit quiescence of all other workloads.",
+  "protocolUnchanged": true
+}

@@ -1,0 +1,27 @@
+{
+  "schema": "logos-engine.native.interrupted-campaign.v1",
+  "status": "interrupted",
+  "exitCode": 130,
+  "recordedAt": "2026-11-09T07:46:19.224860+00:00",
+  "sourceManifestDigest": "4de2508ac3e7c6eadbd265ed1b5841db49a0bdc869a78f7c91e6b7cb35ab28b9",
+  "reason": "Stopped unchanged frozen evaluation after public evidence isolated missing current role revalidation across an official boundary and intermittent current announcements. No three-level success is claimed.",
+  "actualPublicActions": 109,
+  "lastPublicState": {
+    "level": 2,
+    "levels_completed": 1,
+    "state": "NOT_FINISHED",
+    "step_index": 109
+  },
+  "evidence": {
+    "esct-output.log.gz": {
+      "path": "docs/migration/native-campaigns-v53/attempt5/esct-output.log.gz",
+      "sha256": "62be0c8902c748519d499dc9c8d3b911c97ae4a7bec65558d1ad47e0b68ff2b2",
+      "bytes": 11715
+    },
+    "esct-actual-public-journal.jsonl.gz": {
+      "path": "docs/migration/native-campaigns-v53/attempt5/esct-actual-public-journal.jsonl.gz",
+      "sha256": "3dc401d633249114fc53dae339e11e2ff2524d724883fd56624fa75f63d5a391",
+      "bytes": 87215
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.lot5c.command-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T21:36:55.746938+00:00",
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot5c-evidence/recovery/planning/v4-test-coordination-scope.py"
+  ],
+  "cwd": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "timeoutSeconds": 90.0,
+  "wrapper": {
+    "path": "docs/migration/lot5c-evidence/run-evidence-command.py",
+    "bytes": 3904,
+    "sha256": "99b16a35eac1f12acb3063e43d303ffc020b3339109e22eff1f807d1e87e47db"
+  },
+  "finishedAt": "2026-11-11T21:36:56.014410+00:00",
+  "durationSeconds": 0.26627793700026814,
+  "exitCode": 0,
+  "timedOut": false,
+  "log": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/v4-coordination-scope-tests-01.log",
+    "bytes": 1143,
+    "sha256": "77d6797733858eb969ae6598e50fff24089ab155fcc64085390d77135b21f34f"
+  },
+  "compressedLog": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/v4-coordination-scope-tests-01.log.gz",
+    "bytes": 345,
+    "sha256": "d3bafb64f28263407ed0258fc1104a3e6a72b25ef6b5fee6049effc2b146ed9e"
+  }
+}

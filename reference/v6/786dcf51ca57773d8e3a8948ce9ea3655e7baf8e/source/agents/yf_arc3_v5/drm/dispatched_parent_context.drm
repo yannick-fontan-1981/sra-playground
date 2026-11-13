@@ -1,0 +1,222 @@
+{
+  "module_id": "dispatched_parent_context",
+  "declarations": [
+    {
+      "id": "policy.declared_dispatched_parent_context",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "canonical_actual_dispatch_and_release_permit_with_original_source_preparation"
+      ],
+      "applicability": [
+        "recover_original_goal_order_context_after_ordinary_or_declared_series_dispatch"
+      ],
+      "invariants": [
+        "original_context_and_frame_are_immutable",
+        "declared_series_membership_does_not_imply_new_goal_or_attachment",
+        "no_action_permission_from_context_recovery"
+      ],
+      "falsifiers": [
+        "foreign_intent_or_series_index_or_action_or_scope_or_declared_why"
+      ],
+      "configuration": {
+        "measurement_contract": {
+          "identity_fields": [
+            "active_goal_ref",
+            "active_terminal_goal_ref",
+            "declared_terminal_goal_ref",
+            "subgoal_ref",
+            "goal_graph_edge_refs",
+            "goal_dependency_chain_refs",
+            "declared_dependency_chain_refs",
+            "selection_principle_ref",
+            "premise_claim_refs",
+            "canonical_premise_claim_refs",
+            "expectation_refs",
+            "expected_effect_class",
+            "expected_configuration_or_goal_delta_ref",
+            "falsifier_refs",
+            "committed_plan_ref",
+            "discriminating_experiment_ref",
+            "declared_plan_ref",
+            "declared_plan_stage_refs",
+            "declared_plan_ordered_member_refs",
+            "declared_plan_ordered_member_values",
+            "declared_plan_current_stage_ref",
+            "reconciliation_checkpoint_ref"
+          ]
+        }
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "exact_lineage_matches",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "exact_lineage_row_count",
+          "operator": "equals",
+          "expected": 1
+        }
+      ],
+      "reason_refs": [
+        "reason.exact_canonical_dispatch_permit_and_source_preparation_lineage"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.source_dispatched_parent_context_lineage"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.dispatched_parent_context.exact_lineage",
+          "all_conditions": [
+            {
+              "field": "exact_lineage_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "exact_lineage_row_count",
+              "operator": "equals",
+              "expected": 1
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "source_dispatch_preparation_lineage_matches": true,
+            "action_released": false,
+            "reason_ref": "reason.exact_canonical_dispatch_permit_and_source_preparation_lineage"
+          },
+          "bound_facts": {
+            "source_prepared_context": "source_prepared_context",
+            "source_preparation_frame_ref": "source_preparation_frame_ref",
+            "dispatched_frame_ref": "dispatched_frame_ref",
+            "current_frame_ref": "current_frame_ref",
+            "prepared_intent_ref": "prepared_intent_ref",
+            "qualified_actual_intent_ref": "qualified_actual_intent_ref",
+            "permit_origin_intent_ref": "permit_origin_intent_ref",
+            "dispatch_ref": "dispatch_ref",
+            "permit_ref": "permit_ref",
+            "source_checkpoint_ref": "source_checkpoint_ref",
+            "source_workflow_instance_ref": "source_workflow_instance_ref",
+            "source_workflow_definition_ref": "source_workflow_definition_ref",
+            "source_transitive_hash": "source_transitive_hash",
+            "source_origin_refs": "source_origin_refs",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "measurement_equivalence_ref": "measurement_equivalence_ref",
+            "equivalent_source_preparation_count": "equivalent_source_preparation_count",
+            "source_preparation_timeline_ref": "source_preparation_timeline_ref",
+            "source_release_checkpoint_ref": "source_release_checkpoint_ref",
+            "source_checkpoint_refs": "source_checkpoint_refs",
+            "source_workflow_instance_refs": "source_workflow_instance_refs",
+            "source_workflow_definition_refs": "source_workflow_definition_refs",
+            "source_transitive_hashes": "source_transitive_hashes",
+            "source_release_checkpoint_refs": "source_release_checkpoint_refs"
+          },
+          "templated_facts": {
+            "source_dispatch_context_revision_ref": "source.dispatched_parent_context.{dispatch_ref}.{measurement_equivalence_ref}",
+            "source_dispatch_context_claim_ref": "claim.source.dispatched_parent_context.{dispatch_ref}.{measurement_equivalence_ref}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.source_dispatched_parent_context_lineage",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "premises": [
+        "unique_source_qualified_actual_dispatch_preparation_lineage"
+      ],
+      "applicability": [
+        "recover_original_context_without_relabeling_original_frame"
+      ],
+      "invariants": [
+        "no_physical_state_or_permission_is_inferred",
+        "original_source_context_and_goal_why_unchanged"
+      ],
+      "falsifiers": [
+        "canonical_dispatch_membership_or_payload_join_changes"
+      ],
+      "reason_refs": [
+        "reason.exact_canonical_dispatch_permit_and_source_preparation_lineage"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{source_dispatch_context_revision_ref}",
+          "kind": "schema",
+          "label": "Source qualified original preparation of actual dispatch",
+          "required_fields": [
+            "source_dispatch_context_revision_ref"
+          ],
+          "static_attributes": {
+            "role_supposition": "source_dispatch_preparation_lineage",
+            "action_released": false
+          },
+          "attribute_bindings": {}
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{source_dispatch_context_claim_ref}",
+          "predicate": "source_dispatch_preparation_lineage",
+          "family": "control",
+          "argument_patterns": [
+            "{source_dispatch_context_revision_ref}"
+          ],
+          "epistemic_status": "supported",
+          "required_fields": [
+            "source_dispatch_context_revision_ref",
+            "source_prepared_context",
+            "qualified_actual_intent_ref",
+            "dispatch_ref"
+          ],
+          "static_attributes": {
+            "source_dispatch_preparation_lineage_matches": true,
+            "action_released": false
+          },
+          "attribute_bindings": {
+            "source_prepared_context": "source_prepared_context",
+            "source_preparation_frame_ref": "source_preparation_frame_ref",
+            "dispatched_frame_ref": "dispatched_frame_ref",
+            "current_frame_ref": "current_frame_ref",
+            "prepared_intent_ref": "prepared_intent_ref",
+            "qualified_actual_intent_ref": "qualified_actual_intent_ref",
+            "permit_origin_intent_ref": "permit_origin_intent_ref",
+            "dispatch_ref": "dispatch_ref",
+            "permit_ref": "permit_ref",
+            "source_checkpoint_ref": "source_checkpoint_ref",
+            "source_workflow_instance_ref": "source_workflow_instance_ref",
+            "source_workflow_definition_ref": "source_workflow_definition_ref",
+            "source_transitive_hash": "source_transitive_hash",
+            "source_origin_refs": "source_origin_refs",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "source_dispatch_context_revision_ref": "source_dispatch_context_revision_ref",
+            "measurement_equivalence_ref": "measurement_equivalence_ref",
+            "equivalent_source_preparation_count": "equivalent_source_preparation_count",
+            "source_preparation_timeline_ref": "source_preparation_timeline_ref",
+            "source_release_checkpoint_ref": "source_release_checkpoint_ref",
+            "source_checkpoint_refs": "source_checkpoint_refs",
+            "source_workflow_instance_refs": "source_workflow_instance_refs",
+            "source_workflow_definition_refs": "source_workflow_definition_refs",
+            "source_transitive_hashes": "source_transitive_hashes",
+            "source_release_checkpoint_refs": "source_release_checkpoint_refs"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "scope": "Reverification after correcting one pre-existing stale test metadata expectation; native implementation and frozen campaign inputs unchanged.",
+  "originalFailedReceipt": "docs/migration/native-campaigns-v55/final/validation/delta-tests-run.json",
+  "focusedRepairReceipt": "docs/migration/native-campaigns-v55/support-caller-expectation-verification/support-caller-run.json",
+  "sourceManifestDigest": "3794fa1b97951b20f3ce06d2d1d11b20d8c2b47132591fb5b8cf6f3e75b661d3"
+}

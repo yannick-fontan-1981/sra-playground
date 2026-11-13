@@ -1,0 +1,94 @@
+{
+  "schema": "lot8a.provisional-composition-attempt.v1",
+  "time": "2026-11-11T19:11:48.058592+00:00",
+  "ownCheckpoint": "7c10456a675f0e9a93089a0f679e96677ede03af",
+  "incomingCheckpoint": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+  "incomingIsPublished064": false,
+  "branch": "lot8a-integrated-20261111",
+  "commands": [
+    {
+      "command": [
+        "git",
+        "status",
+        "--porcelain"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "stdout": "7c10456a675f0e9a93089a0f679e96677ede03af\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "checkout",
+        "-b",
+        "lot8a-integrated-20261111"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "Switched to a new branch 'lot8a-integrated-20261111'\n"
+    },
+    {
+      "command": [
+        "git",
+        "fetch",
+        "--no-tags",
+        "--no-recurse-submodules",
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout",
+        "a01e6faf330d82fa220feac0c9ad4632bb75a9de"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "From /workspace/sites/sra-lot6b-20261111/.sites-checkout\n * branch            a01e6faf330d82fa220feac0c9ad4632bb75a9de -> FETCH_HEAD\n"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "FETCH_HEAD"
+      ],
+      "exitCode": 0,
+      "stdout": "a01e6faf330d82fa220feac0c9ad4632bb75a9de\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "merge",
+        "--no-commit",
+        "--no-ff",
+        "a01e6faf330d82fa220feac0c9ad4632bb75a9de"
+      ],
+      "exitCode": 1,
+      "stdout": "Auto-merging docs/migration/v6-coverage.json\nCONFLICT (content): Merge conflict in docs/migration/v6-coverage.json\nAuto-merging docs/migration/v6-delivery-roadmap.md\nCONFLICT (content): Merge conflict in docs/migration/v6-delivery-roadmap.md\nAuto-merging docs/migration/v6-entry-point-progress.json\nCONFLICT (content): Merge conflict in docs/migration/v6-entry-point-progress.json\nAuto-merging migration/v6-transfer-map.json\nAuto-merging scripts/audit-v6-entry-points.ts\nAuto-merging src/logos-engine/v6-native-runtime.ts\nCONFLICT (content): Merge conflict in src/logos-engine/v6-native-runtime.ts\nAuto-merging tests/v6-radial-port-integration.test.ts\nCONFLICT (content): Merge conflict in tests/v6-radial-port-integration.test.ts\nAutomatic merge failed; fix conflicts and then commit the result.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--name-only",
+        "--diff-filter=U"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/migration/v6-coverage.json\ndocs/migration/v6-delivery-roadmap.md\ndocs/migration/v6-entry-point-progress.json\nsrc/logos-engine/v6-native-runtime.ts\ntests/v6-radial-port-integration.test.ts\n",
+      "stderr": ""
+    }
+  ],
+  "conflicts": [
+    "docs/migration/v6-coverage.json",
+    "docs/migration/v6-delivery-roadmap.md",
+    "docs/migration/v6-entry-point-progress.json",
+    "src/logos-engine/v6-native-runtime.ts",
+    "tests/v6-radial-port-integration.test.ts"
+  ]
+}

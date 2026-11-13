@@ -1,0 +1,12 @@
+{
+  "schema": "logos-engine.lot2a.campaign-selection.v1",
+  "game": "TR87",
+  "targetLevels": 3,
+  "selectedAt": "2026-11-09T17:51:45.934488+00:00",
+  "switchDeadline": "2026-11-09T18:31:45.934488+00:00",
+  "maximumBlockedSeconds": 2400,
+  "sourceManifestDigest": "cc4bcea77e0099dc035afa5d6ae03e0d5a7a00082633b8e2332691f34b769ad3",
+  "previousGameResolution": "docs/migration/lot2a-evidence/ls20-cold/selection-resolution.json",
+  "selectionBasis": "Second candidate from read-only unchanged original geometry.pairs over archived public initial rasters: exactly one asymmetric pair. No solution, hidden game state, command route or learned knowledge supplied.",
+  "clockPolicy": "The original TR87 selection time persists across fixes or retries; stop working on this game within40minutes blocked."
+}

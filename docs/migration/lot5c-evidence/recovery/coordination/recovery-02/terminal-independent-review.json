@@ -1,0 +1,343 @@
+{
+  "schema": "logos-engine.lot5c-recovery-terminal-independent-review.v1",
+  "status": "passed_documentary_review",
+  "reviewer": "lot5_site101_merge_audit",
+  "requestId": "lot5c-cost-a33a5f88-recovery-02",
+  "reviewReadStartedAt": "2026-11-11T20:31:56.548908+00:00",
+  "lastHandleReadAt": "2026-11-11T20:33:31.025095+00:00",
+  "subjects": [
+    {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/coordination/cost-final-02/request.json",
+      "bytes": 2260,
+      "sha256": "8dfeeb1657be09764a45d5503cc5ff78c014f6e1bbfaf0fd566305ce6b12285c"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/coordination/cost-final-02/attempt-result.json",
+      "bytes": 806,
+      "sha256": "3f6d2083d6dc6afc515b42aa6518ac9defce9fa06b4b5974f4c213fbb2dc23a4"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/coordination/cost-final-01/lock-blocker-and-quiet-release.json",
+      "bytes": 4517,
+      "sha256": "d6417adf006ccee3c45ed45438b5572ca0016adf43cfa3be8e43fb20c096d5c7"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/coordination/cost-final-02/availability-observation-01/lot6b-status.json",
+      "bytes": 12936,
+      "sha256": "ad384cdd2c26f5ed7ac23fb6c48c8f8c0385f1a044ab62efb5930b7b683f17d5"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/coordination/cost-final-02/availability-observation-01/lot10c-status.json",
+      "bytes": 8867,
+      "sha256": "0944ff0d0e1f2448431470e9dbf8ed23807566b36fbcc2a115e16474fc46317f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/coordination/cost-final-02/availability-observation-01/lot8a-status.json",
+      "bytes": 16015,
+      "sha256": "afd9862ab1e35729961ef530e402cf6565cce998c587b06e21dfca84aefdbc55"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/coordination/cost-final-02/availability-observation-01/summary.json",
+      "bytes": 2151,
+      "sha256": "f8b9f3c7427e15855325500d2974eee5adacf98e40d4c1f31ca8c2459e1fc6b1"
+    },
+    {
+      "path": "/workspace/shared/sra-coordination/lot5c-execution-handles/recovery02-orchestrator-handle.json",
+      "bytes": 427,
+      "sha256": "1d51c88184ff2d77d27cbea89c1f2324ac943fefa0f901b079365b1269b69f0d"
+    },
+    {
+      "path": "/workspace/shared/sra-coordination/lot5c-execution-handles/recovery02-orchestrator-terminal.json",
+      "bytes": 1168,
+      "sha256": "31fd69f7901f151b61b6cf003f743c5509411343b2c76abd8f57f4c0a0fdcb1a"
+    }
+  ],
+  "coordinationSnapshots": [
+    {
+      "lane": "lot5c",
+      "path": "/workspace/shared/sra-coordination/lot5c-status.json",
+      "bytes": 16771,
+      "sha256": "58d640d4e9c400c4757581ff896d2d66ddcccdd24a6bcbbb8a00bef5b5a0ea48",
+      "fields": {
+        "updated_at": "2026-11-11T20:31:17.228505+00:00",
+        "quiet_requested": false,
+        "quiet_request_id": "lot5c-cost-a33a5f88-recovery-02",
+        "quiet_released": true,
+        "quiet_released_at": "2026-11-11T20:30:25.610691+00:00",
+        "released_request_id": "lot5c-cost-a33a5f88-recovery-02",
+        "active_command": "Bounded documentary closure and independent evidence review after explicit quiet release; no new diagnostic, test, EX attempt, cost or publication.",
+        "heavy_execution_active": false,
+        "cleanup_confirmed": true,
+        "no_queued_commands": true,
+        "quiet_acknowledged": false,
+        "quiet_acknowledged_at": "2026-11-11T17:51:23.840576+00:00"
+      }
+    },
+    {
+      "lane": "lot6b",
+      "path": "/workspace/shared/sra-coordination/lot6b-status.json",
+      "bytes": 12935,
+      "sha256": "31e94059f9373fca5254126e33de50123d0aef3bfa1e184c64f92a2d21330adf",
+      "fields": {
+        "updated_at": "2026-11-11T20:31:07.200353+00:00",
+        "quiet_requested": false,
+        "quiet_request_id": "lot5c-cost-a33a5f88-recovery-02",
+        "quiet_released": null,
+        "quiet_released_at": null,
+        "released_request_id": null,
+        "active_command": "Source-only checkpoint transport preparation and documentary closure. KLOT readback only if separately charged; no new game or cost.",
+        "heavy_execution_active": false,
+        "cleanup_confirmed": null,
+        "no_queued_commands": true,
+        "quiet_acknowledged": false,
+        "quiet_acknowledged_at": "2026-11-11T20:22:15.406525+00:00"
+      }
+    },
+    {
+      "lane": "lot8a",
+      "path": "/workspace/shared/sra-coordination/lot8a-status.json",
+      "bytes": 16015,
+      "sha256": "afd9862ab1e35729961ef530e402cf6565cce998c587b06e21dfca84aefdbc55",
+      "fields": {
+        "updated_at": "2026-11-11T20:11:32.565538+00:00",
+        "quiet_requested": null,
+        "quiet_request_id": "lot5c-cost-a33a5f88-final-01",
+        "quiet_released": null,
+        "quiet_released_at": null,
+        "released_request_id": null,
+        "active_command": null,
+        "heavy_execution_active": false,
+        "cleanup_confirmed": null,
+        "no_queued_commands": true,
+        "quiet_acknowledged": false,
+        "quiet_acknowledged_at": "2026-11-11T18:35:44.230663+00:00"
+      }
+    },
+    {
+      "lane": "lot10c",
+      "path": "/workspace/shared/sra-coordination/lot10c-status.json",
+      "bytes": 8867,
+      "sha256": "0944ff0d0e1f2448431470e9dbf8ed23807566b36fbcc2a115e16474fc46317f",
+      "fields": {
+        "updated_at": "2026-11-11T20:01:17.074830+00:00",
+        "quiet_requested": false,
+        "quiet_request_id": "lot5c-cost-a33a5f88-final-01",
+        "quiet_released": null,
+        "quiet_released_at": "2026-11-11T17:53:53.132648+00:00",
+        "released_request_id": null,
+        "active_command": "Source-only ancestor transport:18 declared sequential steps,one verified; each<=180s under SH with fresh quiet checks and exact advertised/ref verification. No automatic next step, no main update or publication.",
+        "heavy_execution_active": false,
+        "cleanup_confirmed": null,
+        "no_queued_commands": true,
+        "quiet_acknowledged": false,
+        "quiet_acknowledged_at": "2026-11-11T19:05:59.348551+00:00"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "id": "exact_request_id",
+      "passed": true
+    },
+    {
+      "id": "availability_deadline_exactly_600_seconds",
+      "passed": true
+    },
+    {
+      "id": "no_retry_and_at_most_one_future_ex_attempt",
+      "passed": true
+    },
+    {
+      "id": "request_has_explicit_automatic_expiry",
+      "passed": true
+    },
+    {
+      "id": "terminal_timeout_before_fresh_ack_completion",
+      "passed": true
+    },
+    {
+      "id": "release_exact_and_cleanup_confirmed",
+      "passed": true
+    },
+    {
+      "id": "real_handle_and_terminal_match",
+      "passed": true
+    },
+    {
+      "id": "terminal_stdout_equals_retained_attempt_result",
+      "passed": true
+    },
+    {
+      "id": "terminal_missing_lanes_exactly_8a_and_10c",
+      "passed": true
+    },
+    {
+      "id": "snapshot_only_6b_fresh_exact_ack",
+      "passed": true
+    },
+    {
+      "id": "availability_snapshot_hashes_match",
+      "passed": true
+    },
+    {
+      "id": "snapshot_does_not_authorize_ex",
+      "passed": true
+    },
+    {
+      "id": "no_new_ready_window_controller_or_child_registry",
+      "passed": true
+    },
+    {
+      "id": "no_official_cost_acceptance_claim",
+      "passed": true
+    },
+    {
+      "id": "own_release_matches_attempt",
+      "passed": true
+    },
+    {
+      "id": "all_four_named_quiet_checks_clear",
+      "passed": true
+    },
+    {
+      "id": "old_holder_remains_unknown",
+      "passed": true
+    },
+    {
+      "id": "old_diagnostic_no_signals_no_mutex_replacement",
+      "passed": true
+    },
+    {
+      "id": "old_readiness_not_reusable",
+      "passed": true
+    }
+  ],
+  "checksPassed": 19,
+  "checksTotal": 19,
+  "unresolvedFindings": [],
+  "conclusions": {
+    "terminal": true,
+    "sessionId": 17255,
+    "exitCode": 124,
+    "terminalChunkId": "614492",
+    "result": "Availability expired before the fresh three-lane ACK set was complete.",
+    "availabilityDeadline": "2026-11-11T20:30:25.609789+00:00",
+    "explicitQuietReleaseAt": "2026-11-11T20:30:25.610691+00:00",
+    "freshAcknowledgedLanesAtSavedObservation": [
+      "lot6b"
+    ],
+    "missingFreshAcknowledgments": [
+      "lot8a",
+      "lot10c"
+    ],
+    "lastObservedMissingLanesAt": "2026-11-11T20:29:55.968734+00:00",
+    "cleanupConfirmed": true,
+    "exclusiveAttemptsInThisCycle": 0,
+    "exclusiveAttemptBasis": "Terminal path stopped in availability before fresh ACK completion; saved observation declares no EX, and readiness03, lease, controller receipts and child registry are absent. This is a documentary conclusion, not system-wide tracing.",
+    "officialCostSamplesInThisCycle": 0,
+    "readiness03Created": false,
+    "windowLeaseCreated": false,
+    "controllerStarted": false,
+    "officialCostAccepted": false,
+    "publicationAuthorized": false,
+    "oldReadinessReused": false,
+    "automaticRetry": false,
+    "newCycleAuthorizedByThisReview": false
+  },
+  "absentArtifactObservations": {
+    "performance-integrated-03/readiness.json": true,
+    "performance-integrated-03/window.json": true,
+    "coordination/cost-final-02/window-lease.json": true,
+    "coordination/cost-final-02/controller-execution.json": true,
+    "coordination/cost-final-02/controller-started.json": true,
+    "coordination/cost-final-02/lock-window.json": true
+  },
+  "childRegistry": {
+    "path": "/workspace/shared/sra-coordination/lot5c-recovery-02-active-children.json",
+    "absent": true
+  },
+  "historicalDiagnostic": {
+    "requestId": "lot5c-cost-a33a5f88-final-01",
+    "lock": {
+      "path": "/workspace/shared/sra-coordination/performance.lock",
+      "device": 27,
+      "inode": 1971854,
+      "sharedProbeSucceeded": true,
+      "exclusiveProbeSucceeded": false,
+      "disposableNewFileExclusiveProbeSucceeded": true,
+      "posixGetlkReportedNoPosixRecord": true,
+      "flockHolderIdentified": false
+    },
+    "actualHolderIdentified": false,
+    "oldUnidentifiedSessionClosed": false,
+    "limitations": [
+      "Prior process and lock views were local to command namespaces; no visible descriptor does not prove absence of an executor-managed or external holder.",
+      "Unknown process/session IDs from polling do not establish actual process termination.",
+      "The lost 8A hidden-input helper remains an unconfirmed possibility, not an identified owner.",
+      "Replacement of old launch entrypoint files only prevents future invocation; it does not close an already running historical session.",
+      "No new EX attempt was made during recovery-02; this cycle does not establish current EX availability or persistence of the old blocking holder."
+    ],
+    "processesSignaledByHistoricalDiagnostic": 0,
+    "actualMutexDeletedOrRecreated": false
+  },
+  "requiredAdministrativeAction": {
+    "scope": "Execution-service administration, outside this completed review; no new cost cycle or lock probe is requested here.",
+    "steps": [
+      "Inventory the real execution service's retained executions and terminal/PTY sessions across its actual namespaces, including their observed service handles.",
+      "Identify the exact owner of the existing /workspace/shared/sra-coordination/performance.lock object, device 27 and inode 1971854, using service-level descriptor/ownership evidence.",
+      "Correlate the verified owner with its current task and owner before deciding whether any work is abandoned; do not guess a PID or session from an unrelated namespace.",
+      "Only if the verified owning execution is abandoned, close it gracefully through the owning execution service and preserve the terminal result and useful work.",
+      "Keep the current mutex file and identity intact: do not delete, recreate, substitute, or bypass it. Do not signal an unknown process."
+    ],
+    "serviceInventoryPerformedByThisReview": false,
+    "holderSearchPerformedByThisReview": false,
+    "closurePerformedByThisReview": false
+  },
+  "limits": [
+    "One bounded metadata review only. No native source, test, replay, live game, build, benchmark, large journal, raw graph or Git operation was executed.",
+    "No /proc inspection, process signaling, EX probe, readiness finalization, controller execution or cost measurement was performed.",
+    "Fresh quiet flags are checked before every filesystem command and again immediately before the sole new review write; an absent quiet_requested field is recorded as absent, not fabricated as an ACK.",
+    "The fresh 6B snapshot and last terminal waiting line support the incomplete ACK set. Lack of a qualifying 8A/10C snapshot is not proof of their activity, fault, or unresponsiveness.",
+    "Functional proof counts are quoted by the request but were not revalidated or reexecuted in this terminal review.",
+    "The former 60-second allowance is applied to bounded filesystem commands; elapsed review wall time includes context handoff and analysis and is separately visible in timestamps. No claim of a sub-60-second total wall interval is made."
+  ],
+  "actions": {
+    "existingEvidenceModified": false,
+    "roadmapModified": false,
+    "newCycleStarted": false,
+    "reviewOnlyNewFile": true
+  },
+  "terminalIdleAfterWrite": true,
+  "recordedAt": "2026-11-11T20:34:28.965954+00:00",
+  "finalQuietCheck": [
+    {
+      "lane": "lot5c",
+      "path": "/workspace/shared/sra-coordination/lot5c-status.json",
+      "bytes": 16771,
+      "sha256": "58d640d4e9c400c4757581ff896d2d66ddcccdd24a6bcbbb8a00bef5b5a0ea48",
+      "quiet_requested": false
+    },
+    {
+      "lane": "lot6b",
+      "path": "/workspace/shared/sra-coordination/lot6b-status.json",
+      "bytes": 12935,
+      "sha256": "31e94059f9373fca5254126e33de50123d0aef3bfa1e184c64f92a2d21330adf",
+      "quiet_requested": false
+    },
+    {
+      "lane": "lot8a",
+      "path": "/workspace/shared/sra-coordination/lot8a-status.json",
+      "bytes": 16015,
+      "sha256": "afd9862ab1e35729961ef530e402cf6565cce998c587b06e21dfca84aefdbc55",
+      "quiet_requested": null
+    },
+    {
+      "lane": "lot10c",
+      "path": "/workspace/shared/sra-coordination/lot10c-status.json",
+      "bytes": 8867,
+      "sha256": "0944ff0d0e1f2448431470e9dbf8ed23807566b36fbcc2a115e16474fc46317f",
+      "quiet_requested": false
+    }
+  ],
+  "newWriteCommandSecondsBeforeWrite": 0.0011718690002453513
+}

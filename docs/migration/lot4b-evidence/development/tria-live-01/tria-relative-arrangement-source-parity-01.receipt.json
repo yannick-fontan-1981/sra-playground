@@ -1,0 +1,55 @@
+{
+  "schema": "logos-engine.relative-arrangement-source-parity-execution.v1",
+  "status": "failed",
+  "startedAt": "2026-11-10T20:44:37.723631+00:00",
+  "completedAt": "2026-11-10T20:44:55.376327+00:00",
+  "elapsedSeconds": 17.65270119800698,
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "scripts/compare-relative-arrangement-public-parity.py",
+    "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+    "--output",
+    "docs/migration/lot4b-evidence/development/tria-live-01/tria-relative-arrangement-source-parity-01.json.gz"
+  ],
+  "cwd": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "exitCode": 1,
+  "inputs": {
+    "campaign": {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+      "bytes": 3161161,
+      "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe"
+    },
+    "generator": {
+      "path": "scripts/compare-relative-arrangement-public-parity.py",
+      "bytes": 38493,
+      "sha256": "2811c704b11782452574b5581582062ab34e4f23d2b553526910ac9559257a15"
+    }
+  },
+  "inputsAfter": {
+    "campaign": {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+      "bytes": 3161161,
+      "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe"
+    },
+    "generator": {
+      "path": "scripts/compare-relative-arrangement-public-parity.py",
+      "bytes": 38493,
+      "sha256": "2811c704b11782452574b5581582062ab34e4f23d2b553526910ac9559257a15"
+    }
+  },
+  "inputsUnchanged": true,
+  "output": {
+    "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-relative-arrangement-source-parity-01.json.gz",
+    "bytes": 64610,
+    "sha256": "af9e94ed97f53247089b07f8739575ff046777865d3b4d5851c0c787201daee1"
+  },
+  "log": {
+    "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-relative-arrangement-source-parity-01.log",
+    "bytes": 2442,
+    "sha256": "237f7627b0b5e1f2d6d52bf5f213723510e3f0986f673ef4ca199ef960bbaf08"
+  },
+  "gameHostRun": false,
+  "nativeAgentRun": false,
+  "originalCommonCallerRun": false
+}

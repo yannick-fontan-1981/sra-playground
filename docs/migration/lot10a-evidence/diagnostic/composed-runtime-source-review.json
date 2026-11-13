@@ -1,0 +1,44 @@
+{
+  "schema": "logos-engine.lot10a-composed-runtime-source-review.v1",
+  "status": "no_merge_defect_found_in_textual_review",
+  "recordedAt": "2026-11-10T23:12:40.125894+00:00",
+  "reviewer": "independent axial_source_contract agent",
+  "preparedPredecessor": "28f3f388e18bad21a186795f965102a83e6b53d7",
+  "candidateNativeVersion": "0.56.0",
+  "nativeDifferencePaths": [
+    "src/logos-engine/v6-axial-question-geometry.ts",
+    "src/logos-engine/v6-axial-question-policy.ts",
+    "src/logos-engine/v6-axial-question.ts",
+    "src/logos-engine/v6-native-runtime.ts"
+  ],
+  "reviewedFiles": [
+    {
+      "path": "src/logos-engine/v6-axial-question-geometry.ts",
+      "sha256": "351bc7cbc2b53fa1ecef11fd6f6fc36664924316f88e827e008d0f0603542140",
+      "bytes": 12228
+    },
+    {
+      "path": "src/logos-engine/v6-axial-question-policy.ts",
+      "sha256": "1f15a3b835246e7fa227966ec23422b5c0cce06210b15427a46f9438e937dedd",
+      "bytes": 4068
+    },
+    {
+      "path": "src/logos-engine/v6-axial-question.ts",
+      "sha256": "9ca532ec7e625f5057e501a0225e90b4f5020fcb7d5c6568d44e5e8aa66d0480",
+      "bytes": 19173
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "sha256": "ddbe8767e813c00c0ce5e4e5008f6021151f3d81dd3d02b4a354a36ad5359644",
+      "bytes": 150713
+    }
+  ],
+  "findings": [
+    "One selected Axial record per sealed transition; passive path excludes that selected owner and receives the complete observed packet with a null proposal.",
+    "Axial source state publication is conditional on selection, rotations or portable knowledge, before Recolor. Full native persistence independently retains attempts and last.",
+    "Symbols remains selected-only after ReactiveContact and before Workshop state; no foreign acquisition was added.",
+    "All5A common optimizations and4B sourceGroupStop with both priority guards remain intact. Only the Axial native extension is added.",
+    "The three Axial module bytes remain unchanged from d967a48. Version change0.55to0.56 is explicit."
+  ],
+  "qualification": "Read-only source review, not an executed test, game, cost or publication. The7B predecessor remains prepared until actual deployment is verified."
+}

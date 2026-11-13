@@ -1,0 +1,24 @@
+{
+  "lot": "4A observed_feedback_sequence",
+  "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "branch": "lot4a-observed-feedback-sequence",
+  "base": "8fa6b261b8b23ac8d232e60c9c179e2f3407d82f",
+  "stage": "Acknowledged quiet slot for3I: no heavy computation or publication until3I releases.4A final548-test gate completed; only lightweight preparation now.",
+  "performance_lock": "/workspace/shared/sra-coordination/performance.lock",
+  "publication_lock": "/workspace/shared/sra-coordination/publication.lock",
+  "updated_at": "2026-11-10T18:17:47.912135+00:00",
+  "coordination_scope": "Both roots now acknowledge the shared locks and explicit quiet sequence. No4A performance measurement has started.",
+  "coordination_request": "Lot3 owner: please acknowledge a quiet interval through lot4a-status / performance.lock before running heavy work. Lot4A will not claim exclusivity from this advisory lock alone.",
+  "own_agents": "one lightweight cost-report writer; other agents idle",
+  "performance_started": false,
+  "coordination_acknowledged": true,
+  "accepted_sequence": [
+    "isolated WEAV replay",
+    "integrity and readiness",
+    "A1 B1 B2 A2",
+    "private publication 3I",
+    "release slot for integrated 4A"
+  ],
+  "publication_order": "3I publishes native0.50 first;4A fetches and integrates its actual commit, then validates and publishes native0.51.",
+  "heavy_work_started": false
+}

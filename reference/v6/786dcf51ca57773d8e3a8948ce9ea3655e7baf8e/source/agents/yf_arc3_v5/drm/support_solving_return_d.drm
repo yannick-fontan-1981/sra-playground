@@ -1,0 +1,115 @@
+{
+  "module_id": "support_solving_return_d",
+  "declarations": [
+    {
+      "id": "policy.support_solving_return_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "exact_complete_parent_support_return"
+      ],
+      "applicability": [
+        "current_support_question_answer"
+      ],
+      "invariants": [
+        "whole_footprint_union",
+        "separate_control_maps",
+        "named_permission_maintainer",
+        "actual_masks_not_ui_fill",
+        "no_act"
+      ],
+      "falsifiers": [
+        "missing_return",
+        "incomplete_domain",
+        "changed_scope"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "support_solving.retain_complete_maps",
+        "support_solving.return_need"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.support_return.complete",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "support_solving.retain_complete_maps"
+            },
+            {
+              "field": "complete_same_parent_return",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.support_return.need",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "support_solving.return_need"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.support_return.complete",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "support_solving.retain_complete_maps"
+            }
+          ],
+          "reason_ref": "reason.full_support_union_and_distinct_controls_preserved"
+        },
+        {
+          "id": "tier.support_return.need",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "support_solving.return_need"
+            }
+          ],
+          "reason_ref": "reason.support_return_needs_current_evidence"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.support_solving_return_actual_use_unverified",
+      "reason_refs": [
+        "reason.full_support_union_and_distinct_controls_preserved",
+        "reason.support_return_needs_current_evidence"
+      ]
+    }
+  ]
+}

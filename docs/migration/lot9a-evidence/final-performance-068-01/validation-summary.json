@@ -1,0 +1,354 @@
+{
+  "schema": "logos-engine.lot9a.official-cost-delivery-validation.v1",
+  "validatedAt": "2026-11-12T15:45:35.860435+00:00",
+  "status": "passed",
+  "officialCostAccepted": true,
+  "globalBudgetAccepted": true,
+  "publicationPerformed": false,
+  "baseline": {
+    "siteVersion": 108,
+    "nativeVersion": "0.67.0",
+    "sourceCommit": "8462204043aa368faa7df280d796bb706eb53b38"
+  },
+  "candidate": {
+    "nativeVersion": "0.68.0",
+    "measuredCommit": "95f76a959f5c8f195590f281f62914505a06be5a",
+    "nativeFiles": 334,
+    "nativeDigest": "e7a94fbc7cdcb19d8704b5d4120f27a858cbcd07e455084711510ee147f4e653"
+  },
+  "globals": [
+    {
+      "case": "STCK",
+      "sessionsPerVersion": 8,
+      "beforeMedianMs": 10009.077311000001,
+      "afterMedianMs": 10196.859004999998,
+      "medianRelativeIncrease": 0.018761139330358167,
+      "accepted": true,
+      "baselineRawMs": [
+        9791.6475,
+        10415.596442000002,
+        10007.522352,
+        9562.773330000004,
+        10010.63227,
+        10235.541693,
+        9888.627866000003,
+        10176.737512
+      ],
+      "candidateRawMs": [
+        10399.870488,
+        10344.718764999998,
+        10198.864087999998,
+        9883.573282999998,
+        10373.53896,
+        9948.577753999998,
+        10194.853921999998,
+        10132.703687000001
+      ]
+    },
+    {
+      "case": "SMLP",
+      "sessionsPerVersion": 8,
+      "beforeMedianMs": 15352.174746,
+      "afterMedianMs": 15384.757774499994,
+      "medianRelativeIncrease": 0.002122372174566456,
+      "accepted": true,
+      "baselineRawMs": [
+        15344.969622000004,
+        15532.995123,
+        14590.542335999999,
+        14916.48040700001,
+        15359.379869999997,
+        15399.085989,
+        14829.792398999998,
+        15368.95805700001
+      ],
+      "candidateRawMs": [
+        15226.147689999998,
+        15018.270781999992,
+        15551.046353999991,
+        15031.708777000007,
+        15561.543856000004,
+        15367.612515999994,
+        15401.903032999995,
+        15469.349279999995
+      ]
+    }
+  ],
+  "population": {
+    "measuredSessions": 32,
+    "measuredActions": 400,
+    "warmupSessions": 8,
+    "warmupActions": 24,
+    "excludedMeasuredSessions": 0,
+    "excludedOutliers": 0,
+    "exactFinalFormsChecked": 40,
+    "fullWorkSignaturesChecked": 40
+  },
+  "pooledPhaseOverruns": [
+    {
+      "case": "STCK",
+      "stage": "new_decision",
+      "before": {
+        "count": 48,
+        "medianMs": 294.00517299999956,
+        "p95Ms": 605.9162310000011,
+        "minMs": 208.64562099999966,
+        "maxMs": 704.8800429999974
+      },
+      "after": {
+        "count": 48,
+        "medianMs": 337.13762549999956,
+        "p95Ms": 636.1966400000019,
+        "minMs": 226.3248550000062,
+        "maxMs": 800.631628000001
+      },
+      "medianRelativeIncrease": 0.14670644077408812,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.2285435337260717,
+        "afterRelativeRange": 0.27717251487591565
+      },
+      "budgetApplies": true,
+      "result": "over_budget_with_noise_unresolved"
+    },
+    {
+      "case": "STCK",
+      "stage": "known_prefix_guard",
+      "before": {
+        "count": 32,
+        "medianMs": 0.17877550000412157,
+        "p95Ms": 0.31982500000049185,
+        "minMs": 0.076654000000417,
+        "maxMs": 0.32475200000044424
+      },
+      "after": {
+        "count": 32,
+        "medianMs": 0.2032874999986234,
+        "p95Ms": 7.999439000001075,
+        "minMs": 0.07890699999916251,
+        "maxMs": 9.228215999995882
+      },
+      "medianRelativeIncrease": 0.13711051007513175,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.4600228331670701,
+        "afterRelativeRange": 0.44623449477029575
+      },
+      "budgetApplies": true,
+      "result": "over_budget_with_noise_unresolved"
+    },
+    {
+      "case": "SMLP",
+      "stage": "restoration",
+      "before": {
+        "count": 144,
+        "medianMs": 7.796815000001516,
+        "p95Ms": 47.132689000005485,
+        "minMs": 2.302255000002333,
+        "maxMs": 109.60833999999159
+      },
+      "after": {
+        "count": 144,
+        "medianMs": 8.848077000009653,
+        "p95Ms": 41.34353299999202,
+        "minMs": 2.317873000007239,
+        "maxMs": 104.10685099998955
+      },
+      "medianRelativeIncrease": 0.13483223598455685,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.3421642637741847,
+        "afterRelativeRange": 0.5132598330674828
+      },
+      "budgetApplies": true,
+      "result": "over_budget_with_noise_unresolved"
+    }
+  ],
+  "pairPhaseOverruns": [
+    {
+      "pair": 1,
+      "case": "STCK",
+      "stage": "new_decision",
+      "before": {
+        "count": 24,
+        "medianMs": 291.6336329999999,
+        "p95Ms": 628.2047610000009,
+        "minMs": 208.64562099999966,
+        "maxMs": 704.8800429999974
+      },
+      "after": {
+        "count": 24,
+        "medianMs": 339.717291500001,
+        "p95Ms": 539.2583149999991,
+        "minMs": 226.3248550000062,
+        "maxMs": 800.631628000001
+      },
+      "medianRelativeIncrease": 0.16487693139289283,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.16354465896866063,
+        "afterRelativeRange": 0.2578983474051893
+      },
+      "budgetApplies": true,
+      "result": "over_budget_with_noise_unresolved"
+    },
+    {
+      "pair": 1,
+      "case": "STCK",
+      "stage": "known_prefix_guard",
+      "before": {
+        "count": 16,
+        "medianMs": 0.17603600000438746,
+        "p95Ms": null,
+        "minMs": 0.076654000000417,
+        "maxMs": 0.31982500000049185
+      },
+      "after": {
+        "count": 16,
+        "medianMs": 0.19872050000049057,
+        "p95Ms": null,
+        "minMs": 0.07890699999916251,
+        "maxMs": 0.733007999995607
+      },
+      "medianRelativeIncrease": 0.12886284621064847,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.4223838119423376,
+        "afterRelativeRange": 0.3615696206231898
+      },
+      "budgetApplies": true,
+      "result": "over_budget_with_noise_unresolved"
+    },
+    {
+      "pair": 1,
+      "case": "SMLP",
+      "stage": "restoration",
+      "before": {
+        "count": 72,
+        "medianMs": 6.720506999998179,
+        "p95Ms": 49.83365099999355,
+        "minMs": 2.302255000002333,
+        "maxMs": 99.28600799999549
+      },
+      "after": {
+        "count": 72,
+        "medianMs": 9.14938100001018,
+        "p95Ms": 45.1459060000052,
+        "minMs": 2.317873000007239,
+        "maxMs": 80.0910259999946
+      },
+      "medianRelativeIncrease": 0.3614123160667282,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.14478352024970514,
+        "afterRelativeRange": 0.49506687141460437
+      },
+      "budgetApplies": true,
+      "result": "over_budget_with_noise_unresolved"
+    },
+    {
+      "pair": 2,
+      "case": "STCK",
+      "stage": "known_prefix_guard",
+      "before": {
+        "count": 16,
+        "medianMs": 0.18921600000248873,
+        "p95Ms": null,
+        "minMs": 0.07975799999985611,
+        "maxMs": 0.32475200000044424
+      },
+      "after": {
+        "count": 16,
+        "medianMs": 0.21665699999812205,
+        "p95Ms": null,
+        "minMs": 0.07904699999926379,
+        "maxMs": 9.228215999995882
+      },
+      "medianRelativeIncrease": 0.14502473361276214,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.4211860425865338,
+        "afterRelativeRange": 0.43900315444289806
+      },
+      "budgetApplies": true,
+      "result": "over_budget_with_noise_unresolved"
+    },
+    {
+      "pair": 2,
+      "case": "SMLP",
+      "stage": "known_prefix_guard",
+      "before": {
+        "count": 24,
+        "medianMs": 0.30320949999440927,
+        "p95Ms": 0.4343640000006417,
+        "minMs": 0.18344199999410193,
+        "maxMs": 0.45297199999913573
+      },
+      "after": {
+        "count": 24,
+        "medianMs": 0.3418870000059542,
+        "p95Ms": 1.175403000001097,
+        "minMs": 0.18562499999825377,
+        "maxMs": 1.7126920000009704
+      },
+      "medianRelativeIncrease": 0.12756031724684758,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.08188955603527445,
+        "afterRelativeRange": 0.8233911834366522
+      },
+      "budgetApplies": true,
+      "result": "over_budget_with_noise_unresolved"
+    }
+  ],
+  "phaseOverrunsAcceptedUnderUserGlobalRule": true,
+  "historicalStrictComparisonPassed": false,
+  "strictFailureRetained": true,
+  "automaticRemeasurement": false,
+  "lockHeldSeconds": 484.669552,
+  "sameLockFile": true,
+  "lockDescriptorClosed": true,
+  "allOwnedProcessesClosed": true,
+  "isolationScope": "Owned checkouts and visible execution namespace; no claim of global host quiet or exclusive CPUs.",
+  "durationScope": "Native harness controller through last acquired return, including pauses/resumes; excludes worker startup, begin, final inspections, close, live game engine, network and browser rendering.",
+  "reservations": [
+    "Positive Chart public service/worker/ticket path remains a separate open qualification.",
+    "Historical functional/oracle/reader failures and the maximumSessions8 wording reservation remain retained.",
+    "Original strict comparator failure remains failed; the supplementary path was declared before measurement and verifies complete forms and signatures.",
+    "All six global migration gates remain false. LKEY remains permanently closed."
+  ],
+  "evidence": [
+    {
+      "path": "docs/migration/lot9a-evidence/final-performance-068-01/contract.json",
+      "bytes": 182234,
+      "sha256": "53058883838c3ac9d3c384db528bb687b6ecadf605f514682ecd7f4932776e6b"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/final-performance-068-01/window.json",
+      "bytes": 11008,
+      "sha256": "0fc33d599eb8fb75e6d4986f7c4686f46979f9aa1415a1abde6d11d5a9c707d8"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/final-performance-068-01/analysis.json",
+      "bytes": 298303,
+      "sha256": "306c5ba68504c3a07fa42a24001f837cee9886f1fba011d219c7c3fc2d9395d4"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/final-performance-068-01/independent-review.json",
+      "bytes": 175520,
+      "sha256": "b787918774e20731d91c2c9a5aed1465ae86f9eee7fb863a137d9b6780d68514"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/final-performance-068-01/independent-delivery-cost-review.json",
+      "bytes": 27826,
+      "sha256": "6190e7ca5a0e65ca41dc7de5127e8f211449d3f9f3c414ef76a5528bb79fbe5e"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/final-performance-068-01/strict.execution.json",
+      "bytes": 3097,
+      "sha256": "bf6aa121f314c1d9884dfc00685e0b3eed2ab9440d73833f2edf27a7e68ec19a"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/official-window-controller-068-01/controller.json",
+      "bytes": 7041,
+      "sha256": "869bf0017ccd4f775883f2a6e9c2fc99d2bad970d3e4d23685ce49f55034e851"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/independent-delivery-review.json",
+      "bytes": 41738,
+      "sha256": "264db5ad57e16beab648d819a732f5c0a1df4cf262559160e79818a8fa59ffcb"
+    }
+  ]
+}

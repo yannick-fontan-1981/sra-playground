@@ -1,0 +1,720 @@
+{
+  "schema": "logos-engine.lot2a.campaign-evidence-index.v1",
+  "status": "verified",
+  "verifiedAt": "2026-11-09T18:05:10.218991+00:00",
+  "nativeSourceFileCount": 239,
+  "nativeSourceManifestDigest": "cc4bcea77e0099dc035afa5d6ae03e0d5a7a00082633b8e2332691f34b769ad3",
+  "currentNativeInventoryMatchesAllCampaignFreezes": true,
+  "finalSourceFreeze": {
+    "manifest": {
+      "path": "docs/migration/lot2a-evidence/final/source-manifest.json",
+      "sha256": "926d2a91ed0fb72761f9982746743c00688f7b2fccb10e9a39b83d0ef56bc48d",
+      "bytes": 28216
+    },
+    "archiveManifest": {
+      "path": "docs/migration/lot2a-evidence/final/source-archive.json",
+      "sha256": "fde8896cd91ff44b3cd554728d660233f42dc5b816a78a3562eeabb8c7972820",
+      "bytes": 29847
+    },
+    "archive": {
+      "path": "docs/migration/lot2a-evidence/final/source-archive.tar.gz",
+      "sha256": "b596059be89fad2fad3c42bd6d82eec71d4f464fc412dccca3f4f9df51a8df50",
+      "bytes": 1587259
+    },
+    "partsManifest": {
+      "path": "docs/migration/lot2a-evidence/final/source-archive-parts.json",
+      "sha256": "286e5edb6d463cae3976ed2bc6295e056bbe4a125e6907e295050171871341d6",
+      "bytes": 791
+    },
+    "parts": [
+      {
+        "path": "docs/migration/lot2a-evidence/final/source-archive.tar.gz.part000",
+        "sha256": "b9a6c0c74a99e96db9fb84d909b15c4ac735d9a76421fb109cbc5e8da9d6555d",
+        "bytes": 900000
+      },
+      {
+        "path": "docs/migration/lot2a-evidence/final/source-archive.tar.gz.part001",
+        "sha256": "c11a14a53236a6c1d482874e8402ac10365b6e224873979c826ca634943a7824",
+        "bytes": 687259
+      }
+    ],
+    "nativeFileCount": 239,
+    "archivedFileCount": 250,
+    "nativeSourceDigest": "cc4bcea77e0099dc035afa5d6ae03e0d5a7a00082633b8e2332691f34b769ad3",
+    "archiveMembersHashMatched": 250,
+    "orderedPartsReconstructOriginal": true
+  },
+  "campaigns": {
+    "LS20": {
+      "game": "LS20",
+      "targetLevels": 3,
+      "status": "failed",
+      "levelsCompleted": 1,
+      "actions": 144,
+      "finalPublicState": "GAME_OVER",
+      "stopReason": "native_game_over",
+      "prefixes": 82,
+      "activeSeconds": 318.7494498700002,
+      "oneColdSession": true,
+      "naturalBoundaries": [
+        {
+          "completedLevel": 1,
+          "nativeLevel": 2,
+          "levelsCompleted": 1,
+          "levelActions": 28,
+          "totalActions": 28
+        }
+      ],
+      "execution": {
+        "path": "docs/migration/lot2a-evidence/ls20-cold/execution-ls20.json",
+        "sha256": "6aa1eef1dd476b459614325f8a45a589a7a794d170b9bbdfd6ed0341c2076197",
+        "bytes": 60637
+      },
+      "executionInputs": {
+        "runner": {
+          "path": "scripts/run-v53-journaled-campaign.mjs",
+          "sha256": "fea5ea30777475f21ee6ffc3cfa221f652e0e5deccc606c16f9b51d6bd47f646",
+          "bytes": 1961
+        },
+        "harness": {
+          "path": "tests/helpers/v6-live-game-campaign.ts",
+          "sha256": "be94aba86c614084b19f925395f15a3e37979bbc448ea4703e5ce050dccf871b",
+          "bytes": 55178
+        },
+        "generator": {
+          "path": "scripts/run-v53-campaign-proof.py",
+          "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+          "bytes": 5421
+        }
+      },
+      "artifacts": {
+        "report": {
+          "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz",
+          "sha256": "200b3b4f9729891f43540047fb61241402ed40862530bec52b701ca383c25bb6",
+          "bytes": 22350769
+        },
+        "trace": {
+          "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-public-trace.json.gz",
+          "sha256": "4999807972108aa67db827f6792a33c00378f89bdfad5d5a2ed8a72753a7d582",
+          "bytes": 44679
+        },
+        "publicJournal": {
+          "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-actual-public-journal.jsonl.gz",
+          "sha256": "ec76514fa1a32b0214348f43b1b437ac9da135f7b5a297eb8dde370dfb0ec001",
+          "bytes": 24756
+        },
+        "output": {
+          "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-output.log.gz",
+          "sha256": "52a990a0a30444cb12604e75d2f6e6b45d51737a6ab74f269abae5dd96ddd553",
+          "bytes": 12568
+        }
+      },
+      "sourceFreeze": {
+        "manifest": {
+          "path": "docs/migration/lot2a-evidence/ls20-cold/source-manifest.json",
+          "sha256": "926d2a91ed0fb72761f9982746743c00688f7b2fccb10e9a39b83d0ef56bc48d",
+          "bytes": 28216
+        },
+        "archiveManifest": {
+          "path": "docs/migration/lot2a-evidence/ls20-cold/source-archive.json",
+          "sha256": "a5552817b4d6d47c894a8a3c92d5eef250a5f45fc648d607fd7247964c1ad509",
+          "bytes": 29851
+        },
+        "archive": {
+          "path": "docs/migration/lot2a-evidence/ls20-cold/source-archive.tar.gz",
+          "sha256": "b596059be89fad2fad3c42bd6d82eec71d4f464fc412dccca3f4f9df51a8df50",
+          "bytes": 1587259
+        },
+        "partsManifest": {
+          "path": "docs/migration/lot2a-evidence/ls20-cold/source-archive-parts.json",
+          "sha256": "60fc37be8624d633a0624cb6e661471aa13ab187524323c2c4e685c789993dd6",
+          "bytes": 803
+        },
+        "parts": [
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/source-archive.tar.gz.part000",
+            "sha256": "b9a6c0c74a99e96db9fb84d909b15c4ac735d9a76421fb109cbc5e8da9d6555d",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/source-archive.tar.gz.part001",
+            "sha256": "c11a14a53236a6c1d482874e8402ac10365b6e224873979c826ca634943a7824",
+            "bytes": 687259
+          }
+        ],
+        "nativeFileCount": 239,
+        "archivedFileCount": 250,
+        "nativeSourceDigest": "cc4bcea77e0099dc035afa5d6ae03e0d5a7a00082633b8e2332691f34b769ad3",
+        "archiveMembersHashMatched": 250,
+        "orderedPartsReconstructOriginal": true
+      },
+      "reportByteParts": {
+        "manifest": {
+          "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.parts.json",
+          "sha256": "2da0c47ce5ba3913c06afffb1488ec58d8ff30cda46480d0a7eb8ced3c27e2b8",
+          "bytes": 4492
+        },
+        "parts": [
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part000",
+            "sha256": "866fe6f2cb839434199d66ec068324426a748dd1cd30b7f7fde42cbf5836daaf",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part001",
+            "sha256": "eebb44d194885f1345a0c918a1a2a94ddf9dc7700888f6ba4d22305d2fe7c9b0",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part002",
+            "sha256": "07e3af6f509b3503c4ae8e82385d78494e59cba7fe90c8df73b38f82d10d4de1",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part003",
+            "sha256": "d1938cd35056e0ffe83f94d863c0f38352b94e5ddcbdd64089669073b1c4ba7e",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part004",
+            "sha256": "7604419ce7a6e8da859e49919cd14055232877400404b22a2f6f55d140a15e13",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part005",
+            "sha256": "968ddf11edb9c83bcd5a4aeeeb85f30e136296df63d88baab019a26e70946faf",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part006",
+            "sha256": "cd7e76b959ae52ffbb7a2120d3328a5cb2f152ef4e3324195b63246d581642cd",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part007",
+            "sha256": "8213f7314805a78d254ced9ca7183ad58a6e7258b7d87337a9c30331ddcf7172",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part008",
+            "sha256": "ec91702554e841121436da42209a3775898d5d36e3d69413e346535c73d9a877",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part009",
+            "sha256": "7d7f80d528cee8c5c083f616d76d15c11b89361fa3a6996034d3f6f4db6a8def",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part010",
+            "sha256": "3043fff545d240c6fd95a7a8a1abc4efed079f3a5a87d29b51853e3e95e6a218",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part011",
+            "sha256": "9291ce83e067ebd9eb3802c6b4e8b095a7c44659c8a06bdc70d7c84336b53f45",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part012",
+            "sha256": "5f540a24bc319792fff90b40f7d4066ad3cc2e2e6dda05743cd0160f4fa5d660",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part013",
+            "sha256": "65c9a6ee09a1da0313a17a0336a6f4b95230edb725c8faca3ca0d0adefcfb3f7",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part014",
+            "sha256": "fdb9bfbf2e82155d5fd8fc5d2b7516900c41da87f41f95ef3dbe9c9dd3f296ce",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part015",
+            "sha256": "e59df840bce2b9dc62b52b2659279c508be5106466e24b63c87e597df9bc9f1b",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part016",
+            "sha256": "c1e96ccad1a6314211d9c525d64a937ec4fa7d6ea1c41d781081880e4b5379cc",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part017",
+            "sha256": "6cc1e0ef83942fda491b24e88ce4aa1cf2f1953cc945e7abf343c7335b0fd7b8",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part018",
+            "sha256": "e98649578d232802a6372429d526b97fb3cb8bfdfae20b5135a5df559a8ecc19",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part019",
+            "sha256": "be0c0032268e3e296034add82d98f9b2cc3f97ed417703093cfc4ba7c012e179",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part020",
+            "sha256": "4382b4f83943b24e2c62a2372aab7b323eabd16c550499cccdb57c32258c088c",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part021",
+            "sha256": "fc27ded0d5c4e2221ed6b670629fcc4bd8bc26ba5503cd68875df1755888a36c",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part022",
+            "sha256": "9f4ca5835bc5efec8c46ce41775a9206f408079306f9888636df3f2fbada6f18",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part023",
+            "sha256": "ceabd91bdc93a4902ac572306b9031f4de28de6294896eed3a49f19576a2c211",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz.part024",
+            "sha256": "dd6916ce6b2ffb5d97d379bc8e9ec865319a81c5b27877aeae3fab03a7926601",
+            "bytes": 750769
+          }
+        ],
+        "partCount": 25,
+        "reconstructedBytes": 22350769,
+        "reconstructedSha256": "200b3b4f9729891f43540047fb61241402ed40862530bec52b701ca383c25bb6",
+        "matchesOriginal": true
+      },
+      "publicEvidenceChecks": {
+        "journalExactlyEqualsTrace": true,
+        "publicPackets": 145,
+        "commands": 144,
+        "frameHashesChecked": 145,
+        "stepIndicesContinuous": true,
+        "allCommandsAvailableInPrecedingPacket": true,
+        "boundaryCountersMatchExecutionOutput": true
+      },
+      "selection": {
+        "path": "docs/migration/lot2a-evidence/campaign-selection.json",
+        "sha256": "84a26efe6f2a2e1d712f8340cf9ea7336e2a1844473337fb4d60820f5a2b2de5",
+        "bytes": 689
+      },
+      "selectionResolution": {
+        "path": "docs/migration/lot2a-evidence/ls20-cold/selection-resolution.json",
+        "sha256": "f63b44bab24ea35ee2ba75bc4868ee249c7d74c74e0c4cd6ea1f4106f88f5364",
+        "bytes": 908
+      },
+      "selectedAt": "2026-11-09T17:43:50.333677+00:00",
+      "switchDeadline": "2026-11-09T18:23:50.333677+00:00",
+      "finishedAt": "2026-11-09T17:51:01.886416+00:00",
+      "finishedWithin40Minutes": true,
+      "executionCodeUnchanged": true,
+      "causalExcerpt": {
+        "path": "docs/migration/lot2a-evidence/ls20-cold/morphology-causal-excerpt.json",
+        "sha256": "e79ea633c244588187e3326df85c6787b5101a5c9cdfb28839756ffc8d2c1100",
+        "bytes": 125030
+      },
+      "actionFamilyCounts": {
+        "observed_frontier": 42,
+        "view": 22,
+        "view_continuity": 14,
+        "morphology": 65,
+        "information_goal": 1
+      },
+      "attribution": "Observed morphology contribution to level1 and station acquisition in level2; target3 failed at official GAME_OVER."
+    },
+    "TR87": {
+      "game": "TR87",
+      "targetLevels": 3,
+      "status": "passed",
+      "levelsCompleted": 3,
+      "actions": 105,
+      "finalPublicState": "NOT_FINISHED",
+      "stopReason": "target_levels_completed",
+      "prefixes": 30,
+      "activeSeconds": 128.58836373599988,
+      "oneColdSession": true,
+      "naturalBoundaries": [
+        {
+          "completedLevel": 1,
+          "nativeLevel": 2,
+          "levelsCompleted": 1,
+          "levelActions": 22,
+          "totalActions": 22
+        },
+        {
+          "completedLevel": 2,
+          "nativeLevel": 3,
+          "levelsCompleted": 2,
+          "levelActions": 37,
+          "totalActions": 59
+        },
+        {
+          "completedLevel": 3,
+          "nativeLevel": 4,
+          "levelsCompleted": 3,
+          "levelActions": 46,
+          "totalActions": 105
+        }
+      ],
+      "execution": {
+        "path": "docs/migration/lot2a-evidence/tr87-cold/execution-tr87.json",
+        "sha256": "ef8a43b94ddbca443e4717d26601ad147b6756dab46c9745c5da26e12a67b5c8",
+        "bytes": 60636
+      },
+      "executionInputs": {
+        "runner": {
+          "path": "scripts/run-v53-journaled-campaign.mjs",
+          "sha256": "fea5ea30777475f21ee6ffc3cfa221f652e0e5deccc606c16f9b51d6bd47f646",
+          "bytes": 1961
+        },
+        "harness": {
+          "path": "tests/helpers/v6-live-game-campaign.ts",
+          "sha256": "be94aba86c614084b19f925395f15a3e37979bbc448ea4703e5ce050dccf871b",
+          "bytes": 55178
+        },
+        "generator": {
+          "path": "scripts/run-v53-campaign-proof.py",
+          "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+          "bytes": 5421
+        }
+      },
+      "artifacts": {
+        "report": {
+          "path": "docs/migration/lot2a-evidence/tr87-cold/tr87-campaign.json.gz",
+          "sha256": "32782b39d6b2034ec58f4bd62be683f43198884a8d93aa30749f9060e521c2fc",
+          "bytes": 10347580
+        },
+        "trace": {
+          "path": "docs/migration/lot2a-evidence/tr87-cold/tr87-public-trace.json.gz",
+          "sha256": "667ec5c470dd699b2ae866f904f356c11c3055cbc2649139a5094eba0a23860a",
+          "bytes": 73765
+        },
+        "publicJournal": {
+          "path": "docs/migration/lot2a-evidence/tr87-cold/tr87-actual-public-journal.jsonl.gz",
+          "sha256": "6d64bc42b01e249e7b67b199a03e606525ea0de2ce4f64b94b6ab3668f126b96",
+          "bytes": 33665
+        },
+        "output": {
+          "path": "docs/migration/lot2a-evidence/tr87-cold/tr87-output.log.gz",
+          "sha256": "88f417b47a19b1af0889ad596549e7560062b4522d116411830c472b2d515e4a",
+          "bytes": 7664
+        }
+      },
+      "sourceFreeze": {
+        "manifest": {
+          "path": "docs/migration/lot2a-evidence/tr87-cold/source-manifest.json",
+          "sha256": "926d2a91ed0fb72761f9982746743c00688f7b2fccb10e9a39b83d0ef56bc48d",
+          "bytes": 28216
+        },
+        "archiveManifest": {
+          "path": "docs/migration/lot2a-evidence/tr87-cold/source-archive.json",
+          "sha256": "4a0dca848e2eb7f4ca8f14a25cb9344455f7e3bc34868613b7844cbc617f400f",
+          "bytes": 29851
+        },
+        "archive": {
+          "path": "docs/migration/lot2a-evidence/tr87-cold/source-archive.tar.gz",
+          "sha256": "b596059be89fad2fad3c42bd6d82eec71d4f464fc412dccca3f4f9df51a8df50",
+          "bytes": 1587259
+        },
+        "partsManifest": {
+          "path": "docs/migration/lot2a-evidence/tr87-cold/source-archive-parts.json",
+          "sha256": "2705c2dca2bc7bd7d93092095c6d83df979795d4abf8c246c36071202ff81dda",
+          "bytes": 803
+        },
+        "parts": [
+          {
+            "path": "docs/migration/lot2a-evidence/tr87-cold/source-archive.tar.gz.part000",
+            "sha256": "b9a6c0c74a99e96db9fb84d909b15c4ac735d9a76421fb109cbc5e8da9d6555d",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/tr87-cold/source-archive.tar.gz.part001",
+            "sha256": "c11a14a53236a6c1d482874e8402ac10365b6e224873979c826ca634943a7824",
+            "bytes": 687259
+          }
+        ],
+        "nativeFileCount": 239,
+        "archivedFileCount": 250,
+        "nativeSourceDigest": "cc4bcea77e0099dc035afa5d6ae03e0d5a7a00082633b8e2332691f34b769ad3",
+        "archiveMembersHashMatched": 250,
+        "orderedPartsReconstructOriginal": true
+      },
+      "reportByteParts": {
+        "manifest": {
+          "path": "docs/migration/lot2a-evidence/tr87-cold/tr87-campaign.json.gz.parts.json",
+          "sha256": "756f9c4fedcc481106b728f31dfba26491ed182d4274f89b1cf7f01b19f1e8c8",
+          "bytes": 2334
+        },
+        "parts": [
+          {
+            "path": "docs/migration/lot2a-evidence/tr87-cold/tr87-campaign.json.gz.part000",
+            "sha256": "b7b158cb2daa9c7880ad70ee38e9e0cd066a4cf5acac1608834fba2c1d8b6f9e",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/tr87-cold/tr87-campaign.json.gz.part001",
+            "sha256": "ea2c32397041cb159ff1ce94a7f0b4333b75b0562f00328a151756fa1e102613",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/tr87-cold/tr87-campaign.json.gz.part002",
+            "sha256": "ff28dd18eecbc531f829fd6fb83220f4902c794226d301eaa9f108f8cc840e85",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/tr87-cold/tr87-campaign.json.gz.part003",
+            "sha256": "e15bc5d1656d6a824301683bfdd282e7aa33d4eb4c598437077fdbfd185b20e5",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/tr87-cold/tr87-campaign.json.gz.part004",
+            "sha256": "ff606aed9eaef8d1d36f6ebfe6e7c9f776278589865afde3acc021c1ccfd26db",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/tr87-cold/tr87-campaign.json.gz.part005",
+            "sha256": "30d4fdcdbfed49281358f9774658dfe763df6b837a440df6ce69f4dc0729eba7",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/tr87-cold/tr87-campaign.json.gz.part006",
+            "sha256": "75d0fafec42556a3f0b7078580951e0bb6b7bcbd2357efaf4ab85bf902b4af0c",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/tr87-cold/tr87-campaign.json.gz.part007",
+            "sha256": "c2f77ae121b42f236b7b25821498f0d26c7b161c9c0445802db44f43f9da285e",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/tr87-cold/tr87-campaign.json.gz.part008",
+            "sha256": "c9dddb6e8001c9e944bad4d9401d13936e4dd262cf8a5829ba30b361565ba7c9",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/tr87-cold/tr87-campaign.json.gz.part009",
+            "sha256": "b023a2dd21a4b513fb6b24c21b8150d340a27b476365ca2ec110b38170f20fab",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/tr87-cold/tr87-campaign.json.gz.part010",
+            "sha256": "515a1240d11b25688266ad7745d56db2d64cb41b01f5579f8d5984eef1fcf08a",
+            "bytes": 900000
+          },
+          {
+            "path": "docs/migration/lot2a-evidence/tr87-cold/tr87-campaign.json.gz.part011",
+            "sha256": "a0234d8bd8d347fa80360cada22236daec506eb85a21d6275fba0fd681b06ba9",
+            "bytes": 447580
+          }
+        ],
+        "partCount": 12,
+        "reconstructedBytes": 10347580,
+        "reconstructedSha256": "32782b39d6b2034ec58f4bd62be683f43198884a8d93aa30749f9060e521c2fc",
+        "matchesOriginal": true
+      },
+      "publicEvidenceChecks": {
+        "journalExactlyEqualsTrace": true,
+        "publicPackets": 106,
+        "commands": 105,
+        "frameHashesChecked": 106,
+        "stepIndicesContinuous": true,
+        "allCommandsAvailableInPrecedingPacket": true,
+        "boundaryCountersMatchExecutionOutput": true
+      },
+      "selection": {
+        "path": "docs/migration/lot2a-evidence/tr87-cold/campaign-selection.json",
+        "sha256": "55f611746b6180b6222a749b74bd66a10002ca4551154bdc38cbe2a295dcb927",
+        "bytes": 801
+      },
+      "selectionResolution": {
+        "path": "docs/migration/lot2a-evidence/tr87-cold/selection-resolution.json",
+        "sha256": "673186a8be5622ef3ff0a82a80776bc69ad19193815b0ebd331dcd2cf3a3b85d",
+        "bytes": 763
+      },
+      "selectedAt": "2026-11-09T17:51:45.934488+00:00",
+      "switchDeadline": "2026-11-09T18:31:45.934488+00:00",
+      "finishedAt": "2026-11-09T17:55:39.222568+00:00",
+      "finishedWithin40Minutes": true,
+      "executionCodeUnchanged": true,
+      "summary": {
+        "path": "docs/migration/lot2a-evidence/tr87-cold/campaign-summary.json",
+        "sha256": "9b027e50a8e8d05e5b4da47e26f17c16b311037f34398a79aca5b57342596f74",
+        "bytes": 2656
+      },
+      "actionFamilyCounts": {
+        "word_interface": 105
+      },
+      "attribution": "Three new official levels validated through existing generic word_interface; no morphology selection occurred."
+    }
+  },
+  "originalMorphologyComparison": {
+    "receipt": {
+      "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-morphology-original-comparison.json.gz",
+      "sha256": "cec19a1a121426a49e5f1d5b1c3e498136ed1be3e0f12a3d3de88cd79ee875c9",
+      "bytes": 84361
+    },
+    "status": "passed",
+    "inputs": {
+      "campaign": {
+        "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz",
+        "sha256": "200b3b4f9729891f43540047fb61241402ed40862530bec52b701ca383c25bb6",
+        "bytes": 22350769
+      },
+      "trace": {
+        "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-public-trace.json.gz",
+        "sha256": "4999807972108aa67db827f6792a33c00378f89bdfad5d5a2ed8a72753a7d582",
+        "bytes": 44679
+      },
+      "execution": {
+        "path": "docs/migration/lot2a-evidence/ls20-cold/execution-ls20.json",
+        "sha256": "6aa1eef1dd476b459614325f8a45a589a7a794d170b9bbdfd6ed0341c2076197",
+        "bytes": 60637
+      },
+      "manifest": {
+        "path": "docs/migration/lot2a-evidence/ls20-cold/source-manifest.json",
+        "sha256": "926d2a91ed0fb72761f9982746743c00688f7b2fccb10e9a39b83d0ef56bc48d",
+        "bytes": 28216
+      }
+    },
+    "generator": {
+      "path": "scripts/compare-native-morphology-public-evidence.py",
+      "sha256": "73dd7cec5d67fac527105654e44709e68c788a80a8afd9124b598292599b4d5b",
+      "bytes": 31593
+    },
+    "originalReferenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "sourceFilesVerifiedBeforeAndAfterByComparator": 1786,
+    "publicPacketsCompared": 145,
+    "counts": {
+      "sharedContext.preservation_obligations": 82,
+      "sharedContext.proposeSource": 82,
+      "sharedContext.observeCallerContext": 226,
+      "sharedContext.recordCallerContext": 144,
+      "sharedContext.recordSource": 144,
+      "publicSnapshotsCompared": 144,
+      "abstentions": 69,
+      "episodeTransitionsCompared": 3992,
+      "sourceFactsAndDecisionComparisons": 82,
+      "propose": 82,
+      "departureEventsAcquired": 4,
+      "observeDepartures": 144,
+      "nonNullOffers": 13,
+      "record": 65,
+      "selectedEventsAcquired": 12,
+      "foreignPrefixes": 69,
+      "sealedCheckpointsCompared": 82,
+      "selectedPrefixes": 13,
+      "selectedOutcomesCompared": 65
+    },
+    "scope": {
+      "station_method": null,
+      "entry_method": null,
+      "entry_access_return": null,
+      "sourceStateFieldsCompared": [
+        "contacts",
+        "tried",
+        "feature_trials"
+      ],
+      "nativeWrapperFieldsExcludedFromOriginalProposal": [
+        "morphology_measurement_receipt"
+      ],
+      "nativePolicyReceiptFieldsExcluded": [
+        "all_executed_statements",
+        "edited",
+        "execution_engine",
+        "instruction_quantum",
+        "instructions",
+        "native_execution_hash",
+        "reference_commit",
+        "reference_semantic_hash",
+        "source_definition_hash",
+        "trace"
+      ],
+      "measurementReceiptSourceFieldsCompared": [
+        "facts_digest",
+        "decision",
+        "routes",
+        "meter_observation_ref"
+      ],
+      "morphLastStrategicHandoffCompared": false,
+      "fullOriginalCallerCompared": false,
+      "independentGameSuccess": false,
+      "inventoryFamilyProposalsCompared": false
+    },
+    "qualification": "The existing successful original-source comparator is indexed and its inputs rehashed; the Python component comparison is not rerun by this index."
+  },
+  "boundedV60Ablation": {
+    "receipt": {
+      "path": "docs/migration/lot2a-evidence/ablation/v60-ls20-first-divergence.json",
+      "sha256": "fd3ea6eea5d86c7cfb1865bfcc54871fcfb6f28b57440a767ba419bde19bf506",
+      "bytes": 68513
+    },
+    "status": "first_command_divergence_observed",
+    "baselineNativeFileCount": 237,
+    "baselineNativeSourceDigest": "8a67b57947364dab988c7081e35eb6a923beee2305eb4b8a8a89c2fc86ebea57",
+    "matchedCommands": 18,
+    "divergence": {
+      "sequence": 19,
+      "recomputedCommand": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "observedCurrentCommand": {
+        "action_ref": "ACTION1",
+        "data": {}
+      },
+      "baselineFamily": "view",
+      "baselineDecisionRevision": 18,
+      "levelBefore": 1,
+      "levelsCompletedBefore": 0,
+      "beforePublicPacketSha256": "37641aa1afb0c0d53aef7a1fa480646269e6a8c191145ebba38bc4645244ad69",
+      "baselineWhyActStatus": "action_set_released",
+      "differingReturnSupplied": false
+    },
+    "qualification": "One cold ordinary native controller/service session. Archived expected commands remain outside production and are compared only after a released command is independently chosen. The experiment stops before any mismatched return is supplied. No game host executes; no new live completion, full baseline failure, timing improvement or unique-cause claim follows from this bounded divergence test."
+  },
+  "preservedDiagnostics": {
+    "startup": {
+      "execution": {
+        "path": "docs/migration/lot2a-evidence/final/execution-ls20.json",
+        "sha256": "c1781946e74e010c2d0455e8dc3777b5b61095ba17df9540d6358906b32fd2a8",
+        "bytes": 60001
+      },
+      "output": {
+        "path": "docs/migration/lot2a-evidence/final/ls20-output.log.gz",
+        "sha256": "d8756412e8c616f5ef6b3b0eae5f4b248a79d788dccc146cb585c5a7eeb1d09f",
+        "bytes": 477
+      },
+      "classification": "missing_ignored_pyodide_runtime_asset_before_game_start",
+      "noCampaignOrPublicJournalProduced": true,
+      "qualification": "This setup failure remains at its original canonical paths. It is not a game result and does not reset the LS20 selection clock."
+    },
+    "comparatorScopeCorrection": {
+      "receipt": {
+        "path": "docs/migration/lot2a-evidence/diagnostics/morphology-comparator-receipt-scope-correction.json",
+        "sha256": "30ae5cca5a973c82709caea0b607dccf592f7701156f46489d17bccd57f83dee",
+        "bytes": 4258
+      },
+      "classification": "native_registry_receipt_fields_missing_from_offline_comparator_exclusion_list",
+      "productionChangeRequired": false,
+      "finalComparisonStatus": "passed"
+    }
+  },
+  "verificationMethod": [
+    "Read and hash completed evidence; no agent, game host, source comparator or test suite executed.",
+    "Recompute the current239-file native inventory; compare all frozen and before/after execution inventories.",
+    "Reconstruct every frozen source archive from ordered byte parts in memory and hash all250 archived file members.",
+    "Reconstruct both compressed campaign reports from ordered byte parts; compare exact size andSHA-256 with their immutable execution records.",
+    "Compare every public journal entry against its trace, all frame hashes, action availability, continuous step indices and natural level-completion counters.",
+    "Check canonical execution output and summaries, comparator input identities, bounded baseline divergence, selection deadlines and preserved failures."
+  ],
+  "limitations": [
+    "LS20 completed1 of3 target levels and ended at officialGAME_OVER on level2; that failure remains a failed campaign.",
+    "TR87 completed3 target levels throughword_interface; no full-game victory or morphology-caused improvement is claimed.",
+    "The original-source comparison covers the transferred morphology component and shared owner contracts, not full V6 strategic caller parity or morph.last.",
+    "The V60 comparison stops before a mismatched archived return; it does not establish whole-game baseline failure or a performance gain.",
+    "This read-only evidence index does not replace the final native delivery, browser or performance validation."
+  ],
+  "canonicalEvidenceMovedOrRewritten": false
+}

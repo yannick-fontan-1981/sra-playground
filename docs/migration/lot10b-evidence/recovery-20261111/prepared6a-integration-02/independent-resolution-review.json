@@ -1,0 +1,177 @@
+{
+  "schema": "logos-engine.lot10b.prepared-source-resolution-review.v1",
+  "reviewer": "window_geometry",
+  "fingerprintedAt": "2026-11-11T12:35:05.180807+00:00",
+  "status": "passed_static_review",
+  "blockingFindings": [],
+  "scope": "Independent review of the resolved runtime, campaign harness and entry-point audit against the three retained .prepared copies, the actual import receipt, the consumed original common caller and the owner/checkpoint implementations. This is a source review, not a new executable validation or a publication receipt.",
+  "provenance": {
+    "baseCommit": "3a70463039768f7114edae7d94d7dd33b7f36aa8",
+    "preparedPreviewNativeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+    "preparedPreviewNativeFileCount": 306,
+    "preparedPreviewPublicationStatus": "prepared_unpublished",
+    "workshopCommit": "93b8f8d061e038d545ba0ee80b1b179c58c8172b",
+    "resolvedNativeVersion": "logos-engine.typescript.v6.native-migration/0.62.0",
+    "sourceObservation": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/prepared6a-integration-02/source-observation.json",
+      "sha256": "d56f6ed1d4e78b237ebe68a44d0031e07837af0e631d7b9fd6f6080450225dcc",
+      "bytes": 11952
+    },
+    "qualification": "The original receipt and its unresolvedMergeFiles/merge exit codes remain unchanged as the import-time observation. This additive review records their later resolution. The archive itself was not re-extracted or rehashed by this review; the retained prepared copies were freshly hashed against the import receipt. Reconciliation with the actual published predecessor remains required."
+  },
+  "resolvedFiles": [
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "sha256": "13a6bc9a9d80b18e31a31c38d0acab2eadbbcc16752b4c9262e0da1623f37288",
+      "bytes": 161552,
+      "preparedCopy": "docs/migration/lot10b-evidence/recovery-20261111/prepared6a-integration-02/v6-native-runtime.ts.prepared",
+      "preparedSha256": "6a6a52060c9202f8cf64b252bb849b6bf569a78b50a2e17adc4bd495471fecbd",
+      "preparedCopyMatchesImportReceipt": true,
+      "conflictMarkersAbsent": true,
+      "resolution": "Preserves the prepared Preview owner, adapter, source entry, selected acquisition and conditional state retention. Adds the recovered Window owner and its source entry/acquisition, the Workshop continuation delta, current execution at native guards and implementation identity 0.62.0."
+    },
+    {
+      "path": "tests/helpers/v6-live-game-campaign.ts",
+      "sha256": "ea345cc2245af03c4dc3feb3c9e7572254272fdf134aa27d98d031ab3718cef7",
+      "bytes": 87649,
+      "preparedCopy": "docs/migration/lot10b-evidence/recovery-20261111/prepared6a-integration-02/v6-live-game-campaign.ts.prepared",
+      "preparedSha256": "0c9c32e03b6ef130f95eaa881b937cdeab79d9067103a18cb4895e3f4e1df76a",
+      "preparedCopyMatchesImportReceipt": true,
+      "conflictMarkersAbsent": true,
+      "resolution": "Preserves the archived Preview capture and prefix checkpoint. Adds the Window observer, prefix checkpoint and disposal. Symbol proposeSource and before capture only their four source arguments while original.apply(this, args) receives all actual arguments."
+    },
+    {
+      "path": "scripts/audit-v6-entry-points.ts",
+      "sha256": "c02b619e25f234963c068d0ac8f5a51b7893bcd77803c1868f92fab555dddc92",
+      "bytes": 7358,
+      "preparedCopy": "docs/migration/lot10b-evidence/recovery-20261111/prepared6a-integration-02/audit-v6-entry-points.ts.prepared",
+      "preparedSha256": "f8bab69fda507cddb2f4b5b5521a65ae09d16b988e7fa1442bc4eef532307dbf",
+      "preparedCopyMatchesImportReceipt": true,
+      "conflictMarkersAbsent": true,
+      "resolution": "Keeps the explicit shared Preview entry and adds the window_question/public_window_question alias and explicit shared Window entry. Existing alignment checks remain unchanged."
+    }
+  ],
+  "exactCopyVerification": {
+    "comparedAgainst": "source-observation.json files[].preparedSha256",
+    "checked": 15,
+    "matched": 15,
+    "mismatches": [],
+    "paths": [
+      "src/logos-engine/v6-preview-packing-calculus.ts",
+      "src/logos-engine/v6-preview-packing-geometry.ts",
+      "src/logos-engine/v6-preview-packing-types.ts",
+      "src/logos-engine/v6-preview-packing.ts",
+      "tests/helpers/capture-preview-packing.ts",
+      "tests/v6-preview-packing-native.test.ts",
+      "tests/v6-preview-packing-reference.test.ts",
+      "tests/v6-preview-packing-integration.test.ts",
+      "tests/v6-preview-capture.test.ts",
+      "tests/fixtures/v6-preview-packing/reference.json.gz",
+      "scripts/compare-v6-preview-packing-reference.ts",
+      "scripts/export-v6-preview-packing-reference.py",
+      "scripts/compare-preview-packing-public-parity.py",
+      "docs/migration/lot6a-preview-packing-lineage.md",
+      "docs/migration/lot6a-evidence/recovery/native-source-review.json"
+    ]
+  },
+  "supportingSources": [
+    {
+      "path": "src/logos-engine/v6-native-types.ts",
+      "sha256": "7ce043684a9243224f845b97e7a3f22aa7c9348643d2af89316755d9e441c6ca",
+      "bytes": 13085
+    },
+    {
+      "path": "src/logos-engine/v6-window-question.ts",
+      "sha256": "e39796308982f8758e7cc8b3caf8f9eb52d59fadfacd0219202fde4520e57e79",
+      "bytes": 23042
+    },
+    {
+      "path": "src/logos-engine/v6-ranked-workshop.ts",
+      "sha256": "c605eef3247cfbf5572b7d8d23dadd618957e1944e928121c385760d8eaef717",
+      "bytes": 27970,
+      "unchangedAgainstWorkshopCommit": "93b8f8d061e038d545ba0ee80b1b179c58c8172b"
+    },
+    {
+      "path": "tests/helpers/v6-window-question-capture.ts",
+      "sha256": "e6e9d7ec73bc623d966a4c36d612b9c43a16615faeaff928119150f822c9dc23",
+      "bytes": 9178
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_runtime.py",
+      "sha256": "bcc9bc79d04287c830efedce48b4cc2ab89b5600b8a77fe09782c35d1c05c064",
+      "bytes": 97217
+    }
+  ],
+  "checks": [
+    {
+      "id": "current_native_guard_execution",
+      "status": "passed",
+      "evidence": "All six common family.before call sites pass a fifth execution argument: current required service, acquired continuation, learned preparation, stationary contact continuation, returned contact continuation and final authorization. Planning guards receive this.planning.execution. Final authorization and direct required-service admission derive execution from the current request. currentExecution preserves the current signal/yield function and takes the minimum of the incoming deadline and remaining active level budget."
+    },
+    {
+      "id": "source_call_arity_and_observer_forwarding",
+      "status": "passed",
+      "evidence": "NativeFamily.before has an optional fifth context. The common source-caller adapter and raw Preview guard retain explicit four-argument calls. Preview selected record receives eight arguments, including the complete returned frame packet. Window beforeSource remains four arguments; its native before receives current execution. Window recordSource has eight source arguments. Both observers capture the four/four/eight source arguments and forward the original actual arguments/return or Promise unchanged. Symbol capture excludes the fifth context from structuredClone without removing it from invocation."
+    },
+    {
+      "id": "single_owner_registration_and_entries",
+      "status": "passed",
+      "evidence": "The factory constructs one Window instance and one raw Preview instance plus its adapter. Window is present in families, material source routing and acquisitionFamilies; constructor identity requires that same instance. Preview's constructor identity uses rawNativePreviewPacking behind the registered adapter, and the same raw owner is used for retention and capture. Preview remains the declared goal_access entry."
+    },
+    {
+      "id": "selected_and_foreign_acquisition_order",
+      "status": "passed",
+      "evidence": "seal records the selected owner exactly once with eight arguments before common passive acquisition. Preview has no foreign record path: only its non-null acquired model triggers source-state retention/restoration. This occurs after Workshop and before Window. Window invokes foreign recordSource only when it was not selected, passing null proposal, the real action index and the complete returned frame packet. Active and foreign source event publication remain distinct. This matches the ordering and predicates of the consumed original caller; unported intervening owners remain outside this review."
+    },
+    {
+      "id": "source_fact_and_complete_checkpoint_separation",
+      "status": "passed",
+      "evidence": "Preview publishes/restores preview_packing_state only when packing_model is non-null. Window publishes/restores window_question_state only when edits, portable or attempts is nonempty. Launches or last alone do not strengthen that source predicate. The common Kernel checkpoint independently uses nativeState for both owners and restores through restoreNative. Window's validated checkpoint contains all six source fields: epoch, edits, portable, launches, attempts and last. Preview's validated native checkpoint retains the complete source model, controls, events and scene cache. No planning execution object is placed in either checkpoint."
+    },
+    {
+      "id": "workshop_continuation_union",
+      "status": "passed",
+      "evidence": "The ranked-workshop implementation is byte-identical to commit 93b8f8d061e038d545ba0ee80b1b179c58c8172b. The runtime preserves that commit's scan of the remaining current group then later declared groups, null-offer cache, local source-stop/refusal handling and first non-null question ownership. Its current grounded guard receives the fifth planning context. subquestionFamily forwards groundedInquiryWitness and the guard arguments."
+    },
+    {
+      "id": "parallel_passive_capture",
+      "status": "passed",
+      "evidence": "The campaign installs Window capture on the registered Window owner and Preview capture on the raw owner obtained from its adapter. Window's prefix snapshot reads the already persisted Kernel checkpoint, source event facts including episode/evidence/revision, actual call/restore cursors and current source state. Preview retains its archived call/restore journal, persisted owner checkpoint and current source state. No expected state, action or return is injected by these observers."
+    },
+    {
+      "id": "entry_point_audit_union",
+      "status": "passed",
+      "evidence": "The prepared Preview explicit shared entry survives. Window's alias and explicit shared entry are present together with the existing actual entry/family alignment checks. No conflict markers remain in any of the three resolved files."
+    }
+  ],
+  "qualifications": [
+    "The prepared 6A working campaign helper had a different hash at import. A read-only diff confirms its later additions expose previewPacking.acquired and retainedSourceFact. The resolved helper deliberately preserves the actual frozen .prepared version instead; that distinction remains recorded in source-observation.json. The imported Preview public comparator checks its event journal, owner checkpoint, instance state and actual restorations, and does not require those two later fields. This review does not claim separate Preview source-fact capture coverage from absent fields.",
+    "This review qualifies the three resolved integration files and their consumed interfaces. It does not promote the common caller to full source parity or certify future game levels, replay coverage, cost acceptance, build identity or deployment.",
+    "The earlier failed import receipt and all import-time evidence are retained unchanged. No historical result from the lost environment was recreated or reused."
+  ],
+  "existingValidationObserved": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/lot10b-composed-kernel-01.tap",
+    "sha256": "a2ca56e1da832656bec2e8f6786961fb4261a756e544949a28059a05bdf63c77",
+    "bytes": 13517,
+    "tests": 61,
+    "passed": 61,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "qualification": "Read from the already completed TAP file. This reviewer did not run or repeat the suite and did not independently rerun typecheck."
+  },
+  "reviewOperations": {
+    "sourceReads": true,
+    "targetedDiffs": true,
+    "targetedSha256UnderSharedPerformanceLock": true,
+    "applicationImports": false,
+    "tests": false,
+    "gamesOrReplays": false,
+    "builds": false,
+    "archivesCreatedOrExtracted": false,
+    "costMeasurements": false,
+    "sourceChanges": false,
+    "onlyNewWrite": "docs/migration/lot10b-evidence/recovery-20261111/prepared6a-integration-02/independent-resolution-review.json"
+  }
+}

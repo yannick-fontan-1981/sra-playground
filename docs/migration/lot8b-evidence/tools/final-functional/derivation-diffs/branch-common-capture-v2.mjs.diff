@@ -1,0 +1,32 @@
+--- docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs
++++ docs/migration/lot8b-evidence/tools/final-functional/branch-common-capture-v2.mjs
+@@ -14,14 +14,16 @@
+ import { createGzip } from 'node:zlib';
+ 
+ const SCRIPT = fileURLToPath(import.meta.url), ROOT = resolve(dirname(SCRIPT), '../../../../..');
+-const BASE = resolve(ROOT, 'docs/migration/lot8b-evidence');
++const BASE = resolve(ROOT, 'docs/migration/lot8b-evidence/final-version-067-01');
+ const OWNER = 'branch_routing', REFERENCE = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
+ const FIXTURE = 'tests/fixtures/v6-branch-routing-reference.json';
+ const FIXTURE_SHA256 = 'e6ae197b7b982bd41f561b9df8e458436d7ce0797f39bbf86d972e55472b6769';
+ const TEST = 'tests/v6-branch-routing-kernel.test.ts';
+ const QUALIFIER = resolve(dirname(SCRIPT), 'branch-common-qualify-v2.mjs');
+ const PREVIOUS_ATTEMPT = 'docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/capture.receipt.json';
+-const DERIVATION = 'docs/migration/lot8a-evidence/tools/work-forms/capture-cost-owner-graphs.mjs';
++const DERIVATION = 'docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs';
++const EXPECTED_NATIVE = { fileCount: 331, digest: 'c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a' };
++const EXPECTED_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.67.0';
+ const DECLARATION_ROOT = `reference/v6/${REFERENCE}/source/agents/yf_arc3_v6`;
+ const DECLARATIONS = [`${DECLARATION_ROOT}/laya_proto/common_frontier_policy.drm.json`,
+   `${DECLARATION_ROOT}/morphology_policy/strategy.drm`, `${DECLARATION_ROOT}/laya_proto/composition_target_tree.json`];
+@@ -169,6 +171,10 @@
+     const frozen = JSON.parse(await input(manifestPath)); receipt.nativeManifest = await fingerprint(manifestPath);
+     assert.deepEqual(Object.keys(frozen).sort(), ['digest', 'fileCount', 'files']);
+     nativeBefore = await inventory(checkout); assert.deepEqual(nativeBefore, frozen, 'Frozen native file identities differ');
++    assert.deepEqual({ fileCount: nativeBefore.fileCount, digest: nativeBefore.digest }, EXPECTED_NATIVE);
++    const runtimeSource = (await input('src/logos-engine/v6-native-runtime.ts', nativeBefore.files['src/logos-engine/v6-native-runtime.ts'])).toString('utf8');
++    const versions = [...runtimeSource.matchAll(/NATIVE_V6_IMPLEMENTATION\s*=\s*['"]([^'"]+)['"]/g)].map(match => match[1]);
++    assert.deepEqual(versions, [EXPECTED_IMPLEMENTATION]); receipt.nativeVersion = '0.67.0';
+     receipt.nativeBefore = nativeBefore;
+     sourceCommit = execFileSync('git', ['-C', checkout, 'rev-parse', 'HEAD'], { encoding: 'utf8', timeout: 10000 }).trim();
+     receipt.sourceCommit = sourceCommit;

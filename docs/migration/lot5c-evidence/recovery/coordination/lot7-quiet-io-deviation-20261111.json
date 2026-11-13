@@ -1,0 +1,19 @@
+{
+  "schema": "sra.quiet-interval-deviation.v1",
+  "reportedAt": "2026-11-11T14:21:24.082639+00:00",
+  "reportingLane": "lot5c",
+  "affectedQuietRequest": "lot7-followup-f8d5097-strict-window",
+  "status": "disclosed_potential_measurement_contamination",
+  "conservativeIntervalStart": "2026-11-11T14:19:51+00:00",
+  "conservativeIntervalEnd": "2026-11-11T14:22:52.050157+00:00",
+  "details": "Two Lot5 review agents independently used recursive text rg over10B recovery JSON while instructed to do small source-text reads only. Each matched huge inline journals and emitted about175-178MB, with at least10s commands. Both were immediately stopped; terminal exit0 reported for sessions86848 and84242. No tests, runtime imports, Git, hashing, build or game ran, but substantial I/O occurred during official ABBA. All Lot5 reviewers have now been instructed to stop every tool/command. Exact timestamps unavailable from current receipts; use this conservative enclosing interval.",
+  "measurementQualification": "Do not treat overlapping samples/window as fully isolated. Preserve this attempt and raw samples; decide an explicitly recorded full rerun or other predeclared valid handling. No samples may be silently removed.",
+  "sessions": [
+    86848,
+    84242
+  ],
+  "allWorkersConfirmedTerminalAt": "2026-11-11T14:22:52.050157+00:00",
+  "allOwnAgentsIdle": true,
+  "subsequentToolUse": "Parent coordination metadata writes only. All three reviewers have explicitly stopped and reported terminal sessions. No commands are queued.",
+  "terminationQualification": "Ctrl-C was sent to each yielded session, which returned exit0; the scans may have completed before the interrupt, so interruption is not claimed."
+}

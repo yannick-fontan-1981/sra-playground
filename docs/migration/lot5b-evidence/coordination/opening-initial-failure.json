@@ -1,0 +1,9 @@
+{
+  "schema": "logos-engine.lot5b-opening-attempt.v1",
+  "status": "failed",
+  "helper": "/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.6/scripts/site-workflow.mjs",
+  "requestedDirectory": "/workspace/sites/sra-lot5b-20261110",
+  "exitCode": 1,
+  "message": "Unable to prepare the Site.",
+  "qualification": "The helper did not expose a more specific cause or opening result. The requested directory was subsequently verified writable, empty, and with24GiB free. No source editing or publication occurred. Recovery uses an isolated Git worktree of our already-published source, then the unchanged official opening helper to synchronize remote history."
+}

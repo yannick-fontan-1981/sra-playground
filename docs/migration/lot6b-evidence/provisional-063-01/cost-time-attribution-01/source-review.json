@@ -1,0 +1,225 @@
+{
+  "schema": "logos-engine.lot6b-trace-created-independent-source-review.v1",
+  "recordedAt": "2026-11-11T19:19:16.950169+00:00",
+  "reviewer": "runtime_review",
+  "status": "source_review_complete_with_downstream_integration_blocker",
+  "scope": "Read-only source review of the active qualifier, its exact retained patch, producer paths and 24 prepared tests. This JSON is the only file written by the review.",
+  "execution": {
+    "testsExecuted": false,
+    "qualificationExecuted": false,
+    "nativeImportsExecuted": false,
+    "runtimeOrGameExecuted": false,
+    "officialCostExecuted": false,
+    "gitExecuted": false,
+    "sourceOrTestMutations": false,
+    "sharedPerformanceLockUsed": true,
+    "perCommandTimeoutSeconds": 30
+  },
+  "reviewedInputs": [
+    "docs/migration/lot6b-evidence/qualify-cost-owner-graphs.mjs",
+    "docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/before-qualifier.mjs",
+    "docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/qualifier.patch",
+    "docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/trace-created-attribution.test.mjs",
+    "docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/README.md",
+    "src/logos-engine/v6-reasoning-memory.ts",
+    "src/logos-engine/v6-native-authority.ts",
+    "docs/migration/lot6b-evidence/finalize-owner-cost-contract.py",
+    "docs/migration/lot6b-evidence/check-cost-static-inputs.py",
+    "docs/migration/lot6b-evidence/consolidate-owner-costs.mjs",
+    "docs/migration/lot6b-evidence/review-owner-costs.py"
+  ],
+  "sourceEvidence": [
+    {
+      "path": "src/logos-engine/v6-reasoning-memory.ts",
+      "lines": [
+        64,
+        123,
+        124,
+        125,
+        161,
+        179
+      ],
+      "finding": "Default clock is Date.now()/1000; trace allocates a positive sequential id and retains id/episode/kind/body/created. Checkpoint and restoration use ids and versions, not created ordering."
+    },
+    {
+      "path": "src/logos-engine/v6-native-authority.ts",
+      "lines": [
+        51,
+        165,
+        169,
+        180
+      ],
+      "finding": "The authority constructs NativeReasoningMemory without a substituted clock and persists these records as native_reasoning_trace component_state nodes."
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/qualify-cost-owner-graphs.mjs",
+      "lines": [
+        31,
+        32,
+        281,
+        282,
+        298,
+        299,
+        300,
+        301
+      ],
+      "finding": "Both producer files become common provenance inputs and must fingerprint-identically to both captured native inventories. Receipt windows are taken only after existing capture provenance checks."
+    }
+  ],
+  "staticChecks": [
+    {
+      "name": "retained_patch_exactly_matches_before_to_active_source_diff",
+      "satisfied": true,
+      "method": "Python textual unified diff comparison; no imports or execution of the qualifier"
+    },
+    {
+      "name": "command_ticket_checks_textually_unchanged",
+      "satisfied": true,
+      "section": "command(state, row)"
+    },
+    {
+      "name": "graph_hash_chain_fragment_and_execution_digest_checks_textually_unchanged",
+      "satisfied": true,
+      "section": "async graph(state, row)"
+    },
+    {
+      "name": "exception_has_exact_trace_identity_and_envelope",
+      "satisfied": true,
+      "details": "Requires canonical positive safe trace id, component_state/native_reasoning_trace, real session scope, exact value/root/member/float64 keys, matching component/id, and common-observation-frontier episode."
+    },
+    {
+      "name": "clock_value_bound_to_own_role_receipt_and_stable_identity",
+      "satisfied": true,
+      "details": "Canonical role-specific closed receipt interval; finite float64 equal to an integer millisecond divided by1000; stability keyed by role/sessionId/nodeId."
+    },
+    {
+      "name": "body_nested_created_and_other_metadata_remain_exact",
+      "satisfied": true,
+      "details": "Only a shallow comparison copy of /value/root/members/created/bits is replaced. Entire body and every other node value/field remain in deep equality. origin.source_digest remains separately bound to the exact role runtime digest."
+    },
+    {
+      "name": "inputs_and_hash_inputs_not_normalized",
+      "satisfied": true,
+      "details": "Original nodes/deltas remain unchanged; temporary values are used only by commonNode after graph validation. No substitution in chains, fragments, tickets, executable digests or cause/order comparison."
+    },
+    {
+      "name": "attribution_commit_follows_success_of_all_common_node_fields",
+      "satisfied": true,
+      "details": "prepare validates both roles, then commonNode compares every other field; commit occurs only after those comparisons succeed."
+    },
+    {
+      "name": "new_policy_is_explicit_not_mislabelled_exact",
+      "satisfied": true,
+      "details": "commonValuePolicy and point coverage now state exact_except_attributed_trace_envelope_created and retain role/session/node timestamp records."
+    }
+  ],
+  "preparedTests": {
+    "count": 24,
+    "countBasis": {
+      "distinct_time_positive": 1,
+      "inclusive_endpoints_and_session_isolation": 1,
+      "invalid_created_cases": 9,
+      "role_instability_cases": 2,
+      "other_node_envelope_body_origin_or_session_changes": 8,
+      "nontrace_created": 1,
+      "false_id_and_missing_context": 1,
+      "invalid_capture_windows": 1
+    },
+    "coverage": "Positive comparison, immutable inputs, deduplicated per-role records, role-specific windows, finite and millisecond constraints, malformed encoding, stability in both roles, strict body/nested-created equality, metadata/origin rejection and absence of partial attribution.",
+    "notCoveredByTheseUnitTests": [
+      "Complete capture provenance and producer-fingerprint rejection through Qualification.provenance",
+      "Execution of retained full graph/ticket/hash-chain validators",
+      "Compatibility with downstream protocol/contract/preflight/consolidation readers"
+    ],
+    "executed": false,
+    "proposedCommand": [
+      "node",
+      "--test",
+      "--test-concurrency=1",
+      "docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/trace-created-attribution.test.mjs"
+    ]
+  },
+  "findings": [
+    {
+      "id": "COST-TIME-DOWNSTREAM-POLICY-001",
+      "severity": "blocks_final_cost_pipeline",
+      "kind": "concrete_integration_incompatibility",
+      "description": "The qualifier emits a new comparison name plus traceCreatedAttribution. Four active downstream readers still require the old exact policy object and exact point-coverage label. They will reject the new attribution even if its functional qualification succeeds.",
+      "locations": [
+        {
+          "path": "docs/migration/lot6b-evidence/finalize-owner-cost-contract.py",
+          "lines": [
+            200,
+            201,
+            202,
+            208,
+            209,
+            210,
+            211
+          ]
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/check-cost-static-inputs.py",
+          "lines": [
+            322,
+            323,
+            324,
+            325,
+            327,
+            328,
+            329,
+            330
+          ]
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/consolidate-owner-costs.mjs",
+          "lines": [
+            275,
+            276,
+            278,
+            279,
+            280
+          ]
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/review-owner-costs.py",
+          "lines": [
+            442,
+            443,
+            444,
+            446,
+            447,
+            448,
+            449
+          ]
+        }
+      ],
+      "requiredResolution": "Before a final cost contract or window, make a separately reviewed, prospective downstream adaptation that validates the precise temporal attribution and all its role/session/source/coverage bindings. Do not weaken these readers to accept arbitrary policy names or arbitrary value exceptions."
+    }
+  ],
+  "limits": [
+    "No local comparison bypass or body-normalization defect was found in this source review; this is not a test-pass claim.",
+    "The timestamp is bounded by its whole role capture receipt, not reconstructed as the exact instant of each trace operation. Session identity and per-trace stability are checked separately.",
+    "The new unit tests are not proof that the complete qualifier or downstream cost pipeline passes.",
+    "Actual publication0.63, final source reconciliation and official cost acceptance remain outside this review."
+  ],
+  "recommendation": {
+    "boundedUnitExecution": "Source review supports root proceeding to the24 prepared tests under a new declared execution; none executed here.",
+    "functionalQualification": "After test success and root release, use fresh attribution/fixture output paths and retain the original refusal unchanged. All existing graph/hash/ticket validation must remain active.",
+    "finalCostReadiness": "Not ready: the four downstream exact-policy checks require the explicit reviewed adaptation above, followed by actual0.63 reconciliation and normal final evidence."
+  },
+  "coordinationAtReport": {
+    "lot5c-status.json": {
+      "updated_at": "2026-11-11T19:16:00.226786+00:00",
+      "quiet_requested": false,
+      "quiet_request_id": "lot5c-cost-a33a5f88-final-01",
+      "quiet_released_at": "2026-11-11T19:08:34.656015+00:00"
+    },
+    "lot10c-status.json": {
+      "updated_at": "2026-11-11T19:17:26.118233+00:00",
+      "quiet_requested": false,
+      "quiet_request_id": "lot5c-cost-a33a5f88-final-01",
+      "quiet_released_at": "2026-11-11T17:53:53.132648+00:00"
+    }
+  }
+}

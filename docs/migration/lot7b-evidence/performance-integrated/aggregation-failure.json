@@ -1,0 +1,68 @@
+{
+  "schema": "logos-engine.retained-tool-failure.v1",
+  "startedAt": "2026-11-10T23:42:05.246763+00:00",
+  "finishedAt": "2026-11-10T23:42:05.355411+00:00",
+  "command": [
+    "node",
+    "scripts/compare-native-cost-cohorts.mjs",
+    "docs/migration/lot7b-evidence/performance-integrated/comparison-policy.json",
+    "docs/migration/lot7b-evidence/performance-integrated/cohort1/baseline.json",
+    "docs/migration/lot7b-evidence/performance-integrated/cohort1/after.json",
+    "docs/migration/lot7b-evidence/performance-integrated/cohort1/comparison.json",
+    "docs/migration/lot7b-evidence/performance-integrated/cohort2/baseline.json",
+    "docs/migration/lot7b-evidence/performance-integrated/cohort2/after.json",
+    "docs/migration/lot7b-evidence/performance-integrated/cohort2/comparison.json",
+    "docs/migration/lot7b-evidence/performance-integrated/combined-comparison.json"
+  ],
+  "exitCode": 1,
+  "inputs": [
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "bytes": 19460,
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/cohort1/baseline.json",
+      "bytes": 430658,
+      "sha256": "5c805592fc60ac595d92299fc6a84884defb7e2ff5d701b87c1e7ce504ec460d"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/cohort1/after.json",
+      "bytes": 431271,
+      "sha256": "b2cf4b6ccb459275f7c128391730241b0231dec3ef53cf7dfd4b8faa97aade83"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/cohort1/comparison.json",
+      "bytes": 25422,
+      "sha256": "1ca112f2b34c773927240fbb80b849dcb6043e10e1652edec9688f702c7a8977"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/cohort2/baseline.json",
+      "bytes": 430535,
+      "sha256": "a6128b9e2fa0936e2e46c0ae94dc0161c9e6d92e4c15e1733844ea2b8c15d4c8"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/cohort2/after.json",
+      "bytes": 431209,
+      "sha256": "f6663864abda0fb49384aa41809b34ec73bc2484caa58f0f0a511c6693776655"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/cohort2/comparison.json",
+      "bytes": 25422,
+      "sha256": "ba88c818fe6e69434c121ced14e8303b66b978dfdd9053b9fba5edc07b1722f2"
+    }
+  ],
+  "inputsUnchanged": true,
+  "outputExists": false,
+  "log": {
+    "path": "docs/migration/lot7b-evidence/performance-integrated/aggregation-failure.log",
+    "bytes": 204711,
+    "sha256": "4354e84115bff3ffa4b2209c355e7928f2786d2d34fc02b036684bbf3849c4a7"
+  },
+  "qualification": "Actual unchanged historical comparator invocation; complete stdout/stderr retained. No measured input rewritten."
+}

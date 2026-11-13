@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.reference-population-contribution-transport.v1",
+  "original": {
+    "path": "final/vois-population-session/reference-population-contribution.json",
+    "bytes": 1100208,
+    "sha256": "6d61dbea3376060da97436362ae3d888087122c740c6961a01747a761565b225"
+  },
+  "compressed": {
+    "path": "final/vois-population-session/reference-population-contribution.json.gz",
+    "bytes": 45249,
+    "sha256": "9d1c44047bda29284024f0c0486300b7a9007877bded7c2318f27f12b31c5311"
+  },
+  "gzipMtime": 0,
+  "roundTripBytesEqual": true,
+  "qualification": "Lossless deterministic gzip of the unchanged completed contribution proof; no game, analysis or proof recomputation."
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.lot9a.work-case-metadata-qualification.v1",
+  "recordedAt": "2026-11-12T14:51:29.799174+00:00",
+  "status": "functional_fields_exact_metadata_description_changed",
+  "qualification": "The frozen provenance flag historicalCaseRowsExact is too broad: the descriptive purpose strings changed from Branch to Chart. All six execution fields remain exactly equal; no full-row identity is claimed. Original tools/provenance/captures remain untouched.",
+  "functionalFields": [
+    "id",
+    "trace",
+    "traceSha256",
+    "actions",
+    "targetLevels",
+    "warmupActions"
+  ],
+  "functionalFieldsExact": true,
+  "entireRowsExact": false,
+  "oldCasesSha256": "65e27dbcc2f5871ab259358cc46576b2671058630be0b37c643eadad66593173",
+  "newCasesSha256": "8bb390fb0b9fd2c84202c1eac55d599558b29336d410b92d76618048a2fd1124",
+  "nativeExecutionPerformed": false
+}

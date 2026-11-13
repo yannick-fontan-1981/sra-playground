@@ -1,0 +1,18 @@
+{
+  "schema": "logos-engine.framed-window-loop-log-transport.v1",
+  "recordedAt": "2026-11-10T12:25:45.964450-03:00",
+  "status": "passed",
+  "original": {
+    "path": "docs/migration/lot3g-evidence/final/framed-window-common-loop.log",
+    "bytes": 617,
+    "sha256": "ba5f99933fdd7bd274ddc3085f474dfab62a439ec008711630104bcd71782c3a"
+  },
+  "transport": {
+    "path": "docs/migration/lot3g-evidence/final/framed-window-common-loop.log.gz",
+    "bytes": 426,
+    "sha256": "8b367495f9de7c36118816a40db8db4acbeaca3094df879bc048f7ef60ef0f2b"
+  },
+  "decodedBytesIdentical": true,
+  "gzipMtime": 0,
+  "qualification": "Exact stdout byte transport of the completed proof; no proof or game rerun. Original log remains available and is never overwritten."
+}

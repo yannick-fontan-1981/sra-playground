@@ -1,0 +1,90 @@
+{
+  "startedAt": "2026-11-11T14:46:32.548Z",
+  "schema": "sra.selected-rigid-independent-source-comparison.v1",
+  "status": "passed",
+  "checks": 3439,
+  "sourceFileChecks": 2511,
+  "behaviorChecks": 928,
+  "originalFilesVerified": 1786,
+  "additionalConsumedSourceFiles": 725,
+  "initialCases": 17,
+  "coldSessions": 6,
+  "sourceSteps": 21,
+  "selectedRecords": 16,
+  "helpers": {
+    "scenes": 8,
+    "points": 12,
+    "inputs": 4,
+    "poses": 4,
+    "moved": 51,
+    "routes": 14
+  },
+  "guards": {
+    "before": 15,
+    "after": 15,
+    "bind": 2
+  },
+  "declaredStateInterventions": 8,
+  "restoreCases": 5,
+  "exceptionComparisons": [
+    {
+      "label": "Initial missing-level-action-budget",
+      "source": {
+        "type": "ValueError",
+        "message": "Missing current level action budget"
+      },
+      "native": {
+        "type": "TypeError",
+        "message": "Missing current level action budget"
+      },
+      "rule": "Same message and rejection; language exception class retained separately."
+    },
+    {
+      "label": "restore/wrong-format",
+      "source": {
+        "type": "ValueError",
+        "message": "Incomplete selected rigid state"
+      },
+      "native": {
+        "type": "TypeError",
+        "message": "Invalid SelectedRigid checkpoint: source format/events"
+      },
+      "rule": "Malformed-state comparison covers rejection and atomicity only; native validation text is not original Python text."
+    },
+    {
+      "label": "restore/extra-top-level-field",
+      "source": {
+        "type": "ValueError",
+        "message": "Incomplete selected rigid state"
+      },
+      "native": {
+        "type": "TypeError",
+        "message": "Invalid SelectedRigid checkpoint: source state fields"
+      },
+      "rule": "Malformed-state comparison covers rejection and atomicity only; native validation text is not original Python text."
+    },
+    {
+      "label": "restore/foreign-event-kind",
+      "source": {
+        "type": "ValueError",
+        "message": "Unexpected selected rigid event"
+      },
+      "native": {
+        "type": "TypeError",
+        "message": "Invalid SelectedRigid checkpoint: event fields"
+      },
+      "rule": "Malformed-state comparison covers rejection and atomicity only; native validation text is not original Python text."
+    }
+  ],
+  "gameExecution": false,
+  "historicalResultsReused": false,
+  "nativeStatesUsedToGenerateExpected": false,
+  "nativePlansUsedToGenerateExpected": false,
+  "fixture": {
+    "bytes": 1727762,
+    "sha256": "0bbb3017d111fa27e2928d0e7c07246b1bd28d7b1e2d4776db69522ac14dccfe"
+  },
+  "elapsedMilliseconds": 2674.339059,
+  "qualification": "Complete source outputs on declared public synthetic cases; exact helpers, proposals, events, guards and event replay. Controlled clocks are not timing measurements. Malformed restore exceptions compare rejection and atomicity only.",
+  "finishedAt": "2026-11-11T14:46:35.224Z"
+}

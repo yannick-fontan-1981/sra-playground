@@ -1,0 +1,31 @@
+{
+  "phase": "freeze",
+  "command": [
+    "python",
+    "-B",
+    "scripts/freeze-v53-native-source.py",
+    "freeze",
+    "docs/migration/lot4c-evidence/reference-isos-056"
+  ],
+  "cwd": "/workspace/sites/sra-lot4c-reference-056",
+  "startedAt": "2026-11-11T00:51:34.660918+00:00",
+  "finishedAt": "2026-11-11T00:51:35.427281+00:00",
+  "elapsedSeconds": 0.7663674979994539,
+  "exitCode": 0,
+  "timedOut": false,
+  "stdout": {
+    "path": "docs/migration/lot4c-evidence/reference-isos-056/freeze.stdout.log",
+    "sha256": "baa31dd7aa7205efcd449cef18ab7bbf1483a33b0bb0af2f5c3162f73644fa12",
+    "bytes": 235
+  },
+  "stdoutArchive": {
+    "compressed": {
+      "path": "docs/migration/lot4c-evidence/reference-isos-056/freeze.stdout.log.gz",
+      "sha256": "a9f2650cfcc828426ad90afc678c572fd1bd314e78d21877eee17e6596604adf",
+      "bytes": 197
+    },
+    "uncompressedBytes": 235,
+    "uncompressedSha256": "baa31dd7aa7205efcd449cef18ab7bbf1483a33b0bb0af2f5c3162f73644fa12",
+    "exactRoundTrip": true
+  }
+}

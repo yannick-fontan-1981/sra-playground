@@ -1,0 +1,46 @@
+{
+  "schema": "logos-engine.v6.exposed-terminal-native-diagnostic.v1",
+  "sourceResultSha256": "fab959ef2ac9f9123c5d179524c8cfdd7407cf24d22fe7e0f2c800833c0d7f96",
+  "nativeSourceDigest": "3e88aa12214fd3d4a4feb8d63b946123b8394cb4a0cbd0a156cc059c37f7b46c",
+  "nativeMatchesOriginal": {
+    "measurements": true,
+    "ownRecordNoEvent": true,
+    "ownStateUnchanged": true,
+    "completeProposal": true,
+    "proposalIdentity": true,
+    "targetRejection": true
+  },
+  "sceneAdmissions": [
+    {
+      "sequence": 19,
+      "admitted": true
+    },
+    {
+      "sequence": 20,
+      "admitted": false
+    },
+    {
+      "sequence": 21,
+      "admitted": true
+    }
+  ],
+  "targetBinding": {
+    "root": "G_official_completion",
+    "level_epoch": 3,
+    "observation_ref": "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:22:frame:280241335b079aeb",
+    "version": "1.1-v6",
+    "retained_target": null,
+    "admitted": false,
+    "reason": "unbound_action_set"
+  },
+  "actionsEqualBundle": true,
+  "currentObservationInBundleEvidence": false,
+  "retainedOwnEvents": 19,
+  "hypothesisStatus": {
+    "exposedPortDivergence": "Not observed: same full proposal and guard outcome as retained source on this real terminal packet.",
+    "morphologyTargetBranch": "Not reached: current-evidence gate rejects before morphology-specific target checks.",
+    "missingEphemeralMap": "Not established by this check. Scene disappearance caused ancestor fallback at packet20; complete original caller behavior is outside this component diagnosis.",
+    "sourceEvidenceRebinding": "Confirmed: same-epoch/same-layout state preserves its evidence ending before the unmeasurable transition and foreign action; current scene is remeasured but its observation reference is absent from bundle evidence."
+  },
+  "qualification": "No game code, solution, host, new session, source mutation, synthetic command, or counterfactual game result. This compares immutable source components using prior real own events and public packets."
+}

@@ -1,0 +1,158 @@
+{
+  "schema": "logos-engine.lot10c.composed-replay-review.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T21:25:11.936016+00:00",
+  "nativeSourceDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+  "summary": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/regression-summary.json",
+    "sha256": "4e632558bdf6cf6a1a214f69fc640565ccd79e0c20014cfb120d217369b1389d",
+    "bytes": 218171
+  },
+  "unchangedVerifier": {
+    "path": "scripts/verify-native-delivery.py",
+    "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a",
+    "bytes": 26494
+  },
+  "strictComparator": {
+    "path": "scripts/compare-v54-regressions.py",
+    "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "bytes": 18166
+  },
+  "executionInputsChecked": 10,
+  "casesPassed": 10,
+  "comparisonChecksPassed": 170,
+  "results": [
+    {
+      "game": "CATR",
+      "case": "catr-051",
+      "actions": 12,
+      "comparisonChecks": 17,
+      "comparison": {
+        "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/catr-051-comparison.json",
+        "sha256": "094e791126b8ad3e656d9d24f328b59f8cb6e290b5f9e94f14b92e1cd52b313c",
+        "bytes": 11038
+      },
+      "nodeExitObserved": true
+    },
+    {
+      "game": "RSWP",
+      "case": "rswp-051",
+      "actions": 19,
+      "comparisonChecks": 17,
+      "comparison": {
+        "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/rswp-051-comparison.json",
+        "sha256": "0165c10c04139e6316e7b4fda79339a2a50f625fc3518a97cb1f4ad18349ab73",
+        "bytes": 11025
+      },
+      "nodeExitObserved": true
+    },
+    {
+      "game": "FOGW",
+      "case": "fogw-051",
+      "actions": 50,
+      "comparisonChecks": 17,
+      "comparison": {
+        "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/fogw-051-comparison.json",
+        "sha256": "06ed41089ac591ac955137d0978b92cac8e00c026eb9981e888f60ced9ddc732",
+        "bytes": 11028
+      },
+      "nodeExitObserved": true
+    },
+    {
+      "game": "VOIS",
+      "case": "vois-051",
+      "actions": 78,
+      "comparisonChecks": 17,
+      "comparison": {
+        "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/vois-051-comparison.json",
+        "sha256": "4a2308953f9eb1fe198ee091f36a430dc6e10f8efa18dddfb662d4edb51ec6f2",
+        "bytes": 11030
+      },
+      "nodeExitObserved": true
+    },
+    {
+      "game": "CONN",
+      "case": "conn-050",
+      "actions": 21,
+      "comparisonChecks": 17,
+      "comparison": {
+        "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/conn-050-comparison.json",
+        "sha256": "5fb84436d31a9310de134ea421d6f97043cdd6dcde22c506d9e60935d5284bde",
+        "bytes": 11041
+      },
+      "nodeExitObserved": true
+    },
+    {
+      "game": "MIND",
+      "case": "mind-051",
+      "actions": 31,
+      "comparisonChecks": 17,
+      "comparison": {
+        "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/mind-051-comparison.json",
+        "sha256": "d98c23b6bef017f3fe49fa6833acd22d315a1a4c48d99b625484b4507ad3f757",
+        "bytes": 11026
+      },
+      "nodeExitObserved": true
+    },
+    {
+      "game": "WEAV",
+      "case": "weav-051",
+      "actions": 81,
+      "comparisonChecks": 17,
+      "comparison": {
+        "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/weav-051-comparison.json",
+        "sha256": "e9bc388e4fbe800cff0dc50b1082869ddbb3dac82b30c2a281a10de4feb01e99",
+        "bytes": 11045
+      },
+      "nodeExitObserved": true
+    },
+    {
+      "game": "TRIA",
+      "case": "tria-development-4b",
+      "actions": 17,
+      "comparisonChecks": 17,
+      "comparison": {
+        "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/tria-development-4b-comparison.json",
+        "sha256": "623ba4b3b2e72f0fb76732e82181c60b97cc497151d10f7d288f7fb737d8435c",
+        "bytes": 11029
+      },
+      "nodeExitObserved": true
+    },
+    {
+      "game": "CRAF",
+      "case": "craf-055",
+      "actions": 36,
+      "comparisonChecks": 17,
+      "comparison": {
+        "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/craf-055-comparison.json",
+        "sha256": "1c95ef2d8bfb59a3ecf444168593854e39035efceb2bba69607971fc5a4968e5",
+        "bytes": 11005
+      },
+      "nodeExitObserved": true
+    },
+    {
+      "game": "ISOS",
+      "case": "isos-development-4c",
+      "actions": 12,
+      "comparisonChecks": 17,
+      "comparison": {
+        "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/isos-development-4c-comparison.json",
+        "sha256": "73dabd97e8ee3441e7cc64888307aa873b8608b93e7bc4121db8c6eb5cd19e28",
+        "bytes": 11029
+      },
+      "nodeExitObserved": true
+    }
+  ],
+  "prevalidatedTotals": {
+    "commands": 357,
+    "completePublicPackets": 367,
+    "animationFrames": 1676,
+    "prefixes": 275,
+    "requests": 632,
+    "naturalLevelBoundaries": 30
+  },
+  "newGame": false,
+  "timingClaim": false,
+  "kataClaimedInThisExecution": false,
+  "qualification": "Ten declared archived cases; unchanged comparator and 17 checks per case. KATA is a separately declared execution. No new live success, full caller parity, official cost or publication follows from this functional result."
+}

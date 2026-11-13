@@ -1,0 +1,38 @@
+{
+  "schema": "sra.parallel-lane-status.v1",
+  "lane": "lot8a",
+  "parent_lane": "lot7-followup",
+  "phase": "reserved_context_only_during_10b_proof_qa",
+  "updated_at": "2026-11-11T16:08:24.314711+00:00",
+  "owner": "former lot7 thread, user-authorized next step",
+  "capability": "motif_conditioned_access",
+  "scope": "First sublot of planned lot8: source-faithful motif/command/effect acquisition and guarded goal access; preserve source contributor order, alternatives, refusal, restoration and current authorization. parallel_branch_routing remains later8B.",
+  "base_published_site": 101,
+  "base_published_commit": "d75a36f0a99bf6c301034523a3138a64d2f6e744",
+  "proposed_native_version": "0.65.0 after actual10B0.62,5C0.63,6B0.64; reservation subject to real publication handoffs",
+  "publication_order": "10B0.62 ->5C0.63 ->6B0.64 ->8A next agreed free slot",
+  "active_command": null,
+  "heavy_execution_active": false,
+  "performance_started": false,
+  "publication_started": false,
+  "all_own_subagents_compute_idle": true,
+  "no_queued_commands": true,
+  "quiet_request_id": "lot10b-hpdl02-proof-qa",
+  "quiet_acknowledged": true,
+  "quiet_acknowledged_at": "2026-11-11T16:03:36.401083+00:00",
+  "quiet_scope": "All local work deferred until explicit10Bproof/QA release. Only context reasoning and tiny named coordination metadata.",
+  "read_evidence": {
+    "roadmap": "docs/migration/v6-delivery-roadmap.md",
+    "register": "docs/migration/v6-entry-point-progress.json",
+    "totalBytes": 257150,
+    "readFinishedAt": "2026-11-11T16:00:34.865856+00:00"
+  },
+  "user_rule": "Each case separately: complete-session median increase strictly below+10%; phase overruns retained and acceptable when global criteria pass. Entire measured populations retained.",
+  "closed_cases": {
+    "LKEY": "permanently closed at2390.347106991s; no action/replay/oracle/payload analysis/browser; no reset"
+  },
+  "request_to_lot10b": "Maintaining complete tool-idle ACK through lot10b-hpdl02-proof-qa. All own agents are idle; no queued source or compute commands. Please explicitly release 8A along with the other active lanes after this scope closes. Before any later official cost request, allow a finite source-preparation interval so this newly reserved lot can obtain its actual source contract and an isolated checkpoint; we will acknowledge any subsequent cost window only after all own work is terminal.",
+  "request_to_lot5c": "8A motif_conditioned_access reserved after completed7, without taking5C work. Execution deferred through current10Bproof/QA. Planned publication follows existing0.62/0.63/0.64 order.",
+  "request_to_lot6b": "8A motif_conditioned_access reserved after completed7, without taking6B work. Execution deferred through current10Bproof/QA. Planned publication follows existing0.62/0.63/0.64 order.",
+  "context_review": "Independent reviewer prepared acceptance checklist from conversation only; no tools or source reads. Reviewer is idle again."
+}

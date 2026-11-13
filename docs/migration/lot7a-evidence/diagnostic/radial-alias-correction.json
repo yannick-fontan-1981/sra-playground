@@ -1,0 +1,10 @@
+{
+  "schema": "logos-engine.entry-test-coverage-correction.v1",
+  "recordedAt": "2026-11-10T18:59:47.601892+00:00",
+  "nativeSourceChanged": false,
+  "test": "tests/v6-radial-port-integration.test.ts",
+  "finding": "The isolated legacy radial registry test omitted the workshop alias and therefore still counted53 while the actual entry audit and workshop kernel recorded54.",
+  "correction": "Add observed_ranked_workshop alias, require its explicit source entry, and align isolated material18/33 and total54/76 with actual audit. Reconcile other aliases and recalculate counts after integration.",
+  "testSha256": "8abf3e5d5d993ce1083c38c8c158083f41ed273e36eaf1f6918d437136ddcf26",
+  "verification": "No rerun during the reserved performance window. The existing2960/2961 receipt is unchanged; this edit is to be verified on the integrated candidate."
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.actual-command-execution.v1",
+  "status": "passed",
+  "command": [
+    "npm",
+    "run",
+    "typecheck"
+  ],
+  "startedAt": "2026-11-11T14:43:51.186726+00:00",
+  "finishedAt": "2026-11-11T14:44:02.974313+00:00",
+  "elapsedSeconds": 11.786376906999067,
+  "exitCode": 0,
+  "inputs": [
+    {
+      "path": "docs/migration/lot6b-evidence/record-command.py",
+      "bytes": 3056,
+      "sha256": "da05ed5bfb355afc29a9d20e79e19e51e695f39781ece9068ce0ba0e14b7d420"
+    }
+  ],
+  "inputsUnchanged": true,
+  "output": {
+    "path": "docs/migration/lot6b-evidence/integration/attempt-01/typecheck.log.gz",
+    "bytes": 141,
+    "sha256": "0d2cbbee31ca5839df68f3a5ae10b6102ed35a65bd129facd4509c36a18a564d"
+  }
+}

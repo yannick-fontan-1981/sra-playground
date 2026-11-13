@@ -1,0 +1,22 @@
+{
+  "schema": "lot8a.composition-plan-preflight.v1",
+  "startedAt": "2026-11-11T19:30:12.729508+00:00",
+  "plan": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/contract/validation-plan.json",
+    "sha256": "ab733519baac308ceb2b38269bbe9eb2083e4b4b0ccc0b628d1184e359688b02",
+    "bytes": 47452
+  },
+  "runner": {
+    "path": "docs/migration/lot8a-evidence/tools/validate-composition.py",
+    "sha256": "3d58f82af41a4c467077f2cb1210347989c8ffac9f008da094b3891272be3e3d",
+    "bytes": 34550
+  },
+  "status": "passed",
+  "testsExecuted": 0,
+  "gatesExecuted": 0,
+  "native": {
+    "fileCount": 324,
+    "digest": "936fa2bf81965272b1ddbab4a5c01f98aeb6a48188c1f7a8c91de226598c5e43"
+  },
+  "finishedAt": "2026-11-11T19:30:13.034610+00:00"
+}

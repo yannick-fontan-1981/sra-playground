@@ -1,0 +1,2026 @@
+{
+  "schema": "logos-engine.feedback-live-contribution.v1",
+  "status": "passed",
+  "scope": "Public live-report coherence and cold original FeedbackSequences component parity over captured arguments. The original common caller is not run. This verifier does not recompute counterfactual proposals: it checks the complete ablation inventory, retained views, flags and provenance of the existing source comparator. Local decision dependence does not establish whole-game causal improvement, full-game completion, full V6 parity or a performance comparison. No replay-only regression field is synthesized.",
+  "startedAt": "2026-11-10T19:26:09.655620+00:00",
+  "checks": [
+    {
+      "name": "selection_and_cumulative_clock",
+      "status": "passed",
+      "assertions": 32
+    },
+    {
+      "name": "live_and_frozen_provenance",
+      "status": "passed",
+      "assertions": 355
+    },
+    {
+      "name": "journal_trace_actions_and_common_acquisition",
+      "status": "passed",
+      "assertions": 367
+    },
+    {
+      "name": "feedback_unique_acquisition_and_retained_states",
+      "status": "passed",
+      "assertions": 1198
+    },
+    {
+      "name": "complete_cold_original_family_parity",
+      "status": "passed",
+      "assertions": 72
+    },
+    {
+      "name": "all_history_ablations",
+      "status": "passed",
+      "assertions": 26
+    },
+    {
+      "name": "unchanged_inputs_and_originals",
+      "status": "passed",
+      "assertions": 3
+    }
+  ],
+  "newGameRun": false,
+  "sourceReplayRepeated": false,
+  "resumes": {
+    "path": "docs/migration/lot4a-evidence/final/mind-resolution.json",
+    "bytes": 2267,
+    "sha256": "213eb088d2bf4b60be770d948f2efdf76ab73592dc4838cb5abb8e039abd119c"
+  },
+  "game": "MIND",
+  "targetLevels": 3,
+  "frozenNativeLink": {
+    "nativeSourceDigest": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7",
+    "nativeFileCount": 273,
+    "liveAndFrozenManifestsByteIdentical": true,
+    "qualification": "The current native tree and passive execution tools are checked against the frozen manifest/archive index. Archive transport bytes remain the responsibility of the existing delivery-integrity verifier."
+  },
+  "historyAblation": {
+    "cases": [
+      {
+        "ablatedStateBeforeDigest": "c52f75c623f1bf41cbc99e51cd7af212dd55d481aabfce05367b857d7cf98c28",
+        "actionOrRefusalChanged": true,
+        "actualAccounting": {
+          "candidate_count": 2,
+          "information_cost": 4,
+          "law_alternatives": 4,
+          "minimax": {
+            "NONWINNING_BRANCHES": 1,
+            "SUM_SQUARED_RESIDUALS": 1,
+            "WORST_NONWINNING_RESIDUAL": 1
+          },
+          "partition_count": 2,
+          "trial_count": 1
+        },
+        "actualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            8,
+            9,
+            14
+          ],
+          "status": "proposed"
+        },
+        "actualProposalDigest": "90fdbc6f90f96203e75c3581e95a25200eebb267d5affa9f470e2c2c4f75b58b",
+        "allOtherOwnerFieldsPreserved": true,
+        "callIndex": 8,
+        "counterfactualAccounting": {
+          "candidate_count": 9,
+          "information_cost": 4,
+          "law_alternatives": 1,
+          "minimax": {
+            "NONWINNING_BRANCHES": 6,
+            "SUM_SQUARED_RESIDUALS": 12,
+            "WORST_NONWINNING_RESIDUAL": 2
+          },
+          "partition_count": 7,
+          "trial_count": 2
+        },
+        "counterfactualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            8,
+            14,
+            9
+          ],
+          "status": "proposed"
+        },
+        "counterfactualDiagnostic": {
+          "assumptions": [
+            "positionwise_exact_elsewhere_absent_feedback",
+            "unrevealed_values_remain_possible",
+            "secret_repetitions_not_excluded_by_palette_removal"
+          ],
+          "candidate_count": 9,
+          "evidence": [],
+          "information_cost": 4,
+          "law_alternatives": 1,
+          "minimax": {
+            "NONWINNING_BRANCHES": 6,
+            "SUM_SQUARED_RESIDUALS": 12,
+            "WORST_NONWINNING_RESIDUAL": 2
+          },
+          "partition_count": 7,
+          "scope": "minimum worst residual among complete plausible codes preserving the active prefix; no multi-attempt success guarantee",
+          "status": "proposed",
+          "trial": [
+            8,
+            14,
+            9
+          ],
+          "trial_count": 2
+        },
+        "counterfactualProposalDigest": "589bd315b220d63d9a6d1510b014d49edca7e190ea2436319d1acc5379d12387",
+        "counterfactualSourceAfterDigest": "b6615bcdb5fe8fb4682441a9e4041228ff1342a9f89e1c7b43c5681b8943f534",
+        "executed": true,
+        "hypothesisAccountingChanged": true,
+        "intervention": "remove_acquired_feedback_history",
+        "nativeStateSeed": false,
+        "orderedTrialChanged": true,
+        "removedEvidenceRefs": [
+          "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:1:revision:5:frame:5c7fc6d05dd7864d"
+        ],
+        "removedFeedbackRows": 1,
+        "retainedBoundTrial": false,
+        "scope": "Source-component counterfactual at the same captured public context. Current revealed ranks and any already bound trial remain. No new game run, full-caller ablation or success guarantee.",
+        "sourceStateBeforeDigest": "2e8ff10598f889b27c5e43dbfbdcae9ebf1d12a57a8c0d0ce1cbdcbabc2e382b",
+        "stateOrigin": "Only original state acquired/computed by the cold public-call replay before this proposal",
+        "strictProposalChanged": true,
+        "unmodifiedRestorationProposalEqual": true
+      },
+      {
+        "ablatedStateBeforeDigest": "cbe238d833258336b09d5d78aad9ef2de97d3f026bc2a66390fa070989316287",
+        "actionOrRefusalChanged": false,
+        "actualAccounting": {
+          "information_cost": 1
+        },
+        "actualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            8,
+            9,
+            14
+          ],
+          "status": "proposed"
+        },
+        "actualProposalDigest": "89bbd0dec45b286ae2e4f097a1ccd6a855cb9530759c936d91cb53986c0f4b58",
+        "allOtherOwnerFieldsPreserved": true,
+        "callIndex": 12,
+        "counterfactualAccounting": {
+          "information_cost": 1
+        },
+        "counterfactualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            8,
+            9,
+            14
+          ],
+          "status": "proposed"
+        },
+        "counterfactualDiagnostic": null,
+        "counterfactualProposalDigest": "c48d411326666e23427940f00baaee031c2baf97038c76b142641b12a542661b",
+        "counterfactualSourceAfterDigest": "cbe238d833258336b09d5d78aad9ef2de97d3f026bc2a66390fa070989316287",
+        "executed": true,
+        "hypothesisAccountingChanged": false,
+        "intervention": "remove_acquired_feedback_history",
+        "nativeStateSeed": false,
+        "orderedTrialChanged": false,
+        "removedEvidenceRefs": [
+          "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:1:revision:5:frame:5c7fc6d05dd7864d"
+        ],
+        "removedFeedbackRows": 1,
+        "retainedBoundTrial": true,
+        "scope": "Source-component counterfactual at the same captured public context. Current revealed ranks and any already bound trial remain. No new game run, full-caller ablation or success guarantee.",
+        "sourceStateBeforeDigest": "27ca51fdeefd9029f786c0adee77e301a6ec55ae74eae780820b028c2d5ddcf8",
+        "stateOrigin": "Only original state acquired/computed by the cold public-call replay before this proposal",
+        "strictProposalChanged": true,
+        "unmodifiedRestorationProposalEqual": true
+      },
+      {
+        "ablatedStateBeforeDigest": "0d74ff37c38ec176e91cc67ca19f0baf6ccbe1799216994e273721a30894a44c",
+        "actionOrRefusalChanged": false,
+        "actualAccounting": {
+          "candidate_count": 4,
+          "information_cost": 4,
+          "law_alternatives": 12,
+          "minimax": {
+            "NONWINNING_BRANCHES": 3,
+            "SUM_SQUARED_RESIDUALS": 6,
+            "WORST_NONWINNING_RESIDUAL": 2
+          },
+          "partition_count": 5,
+          "trial_count": 3
+        },
+        "actualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 16,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            14,
+            6,
+            8
+          ],
+          "status": "proposed"
+        },
+        "actualProposalDigest": "43c389c6646ebb0c2a60cee62f785810f8c6db229075126725fbe1f33a42a08a",
+        "allOtherOwnerFieldsPreserved": true,
+        "callIndex": 22,
+        "counterfactualAccounting": {
+          "candidate_count": 64,
+          "information_cost": 4,
+          "law_alternatives": 1,
+          "minimax": {
+            "NONWINNING_BRANCHES": 23,
+            "SUM_SQUARED_RESIDUALS": 209,
+            "WORST_NONWINNING_RESIDUAL": 5
+          },
+          "partition_count": 24,
+          "trial_count": 24
+        },
+        "counterfactualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 16,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            14,
+            6,
+            8
+          ],
+          "status": "proposed"
+        },
+        "counterfactualDiagnostic": {
+          "assumptions": [
+            "positionwise_exact_elsewhere_absent_feedback",
+            "unrevealed_values_remain_possible",
+            "secret_repetitions_not_excluded_by_palette_removal"
+          ],
+          "candidate_count": 64,
+          "evidence": [],
+          "information_cost": 4,
+          "law_alternatives": 1,
+          "minimax": {
+            "NONWINNING_BRANCHES": 23,
+            "SUM_SQUARED_RESIDUALS": 209,
+            "WORST_NONWINNING_RESIDUAL": 5
+          },
+          "partition_count": 24,
+          "scope": "minimum worst residual among complete plausible codes preserving the active prefix; no multi-attempt success guarantee",
+          "status": "proposed",
+          "trial": [
+            14,
+            6,
+            8
+          ],
+          "trial_count": 24
+        },
+        "counterfactualProposalDigest": "d528be8ffd11074e89b6ae1773a91d32d6f83332440d37d0f4b1bbb74cec7b65",
+        "counterfactualSourceAfterDigest": "6d7725c47235e2c79000f1b5a67ced884912e3d3088d9553246bd14f1e31653a",
+        "executed": true,
+        "hypothesisAccountingChanged": true,
+        "intervention": "remove_acquired_feedback_history",
+        "nativeStateSeed": false,
+        "orderedTrialChanged": false,
+        "removedEvidenceRefs": [
+          "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:2:revision:13:frame:aa2ee9fedc4437d0"
+        ],
+        "removedFeedbackRows": 1,
+        "retainedBoundTrial": false,
+        "scope": "Source-component counterfactual at the same captured public context. Current revealed ranks and any already bound trial remain. No new game run, full-caller ablation or success guarantee.",
+        "sourceStateBeforeDigest": "143bc63bff9de0f0ebb41ac05651d84ebd1fa5499740f91ecd72d267966f3e83",
+        "stateOrigin": "Only original state acquired/computed by the cold public-call replay before this proposal",
+        "strictProposalChanged": true,
+        "unmodifiedRestorationProposalEqual": true
+      },
+      {
+        "ablatedStateBeforeDigest": "d086e9e0eac210e4438df6f43e510306217c2c8904b6fdf74ecb750939e50630",
+        "actionOrRefusalChanged": false,
+        "actualAccounting": {
+          "information_cost": 1
+        },
+        "actualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            14,
+            6,
+            8
+          ],
+          "status": "proposed"
+        },
+        "actualProposalDigest": "a776933010aac40580f3137ce2197847042a6c782cb8261440e713949c61eec8",
+        "allOtherOwnerFieldsPreserved": true,
+        "callIndex": 26,
+        "counterfactualAccounting": {
+          "information_cost": 1
+        },
+        "counterfactualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            14,
+            6,
+            8
+          ],
+          "status": "proposed"
+        },
+        "counterfactualDiagnostic": null,
+        "counterfactualProposalDigest": "754949a60b6304fb7a1e54b276b375a1fabf9646574f9526301e7a85206d7408",
+        "counterfactualSourceAfterDigest": "d086e9e0eac210e4438df6f43e510306217c2c8904b6fdf74ecb750939e50630",
+        "executed": true,
+        "hypothesisAccountingChanged": false,
+        "intervention": "remove_acquired_feedback_history",
+        "nativeStateSeed": false,
+        "orderedTrialChanged": false,
+        "removedEvidenceRefs": [
+          "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:2:revision:13:frame:aa2ee9fedc4437d0"
+        ],
+        "removedFeedbackRows": 1,
+        "retainedBoundTrial": true,
+        "scope": "Source-component counterfactual at the same captured public context. Current revealed ranks and any already bound trial remain. No new game run, full-caller ablation or success guarantee.",
+        "sourceStateBeforeDigest": "9eaa54e7c50a823dad27317151251d89c9b3eca55dcbecb18c2cc714a6fe8f35",
+        "stateOrigin": "Only original state acquired/computed by the cold public-call replay before this proposal",
+        "strictProposalChanged": true,
+        "unmodifiedRestorationProposalEqual": true
+      },
+      {
+        "ablatedStateBeforeDigest": "0d2f8fafdfb7c96efaf71a61f5a238e6f5ca136c07a796efb6c4a6fe6efac3a8",
+        "actionOrRefusalChanged": true,
+        "actualAccounting": {
+          "candidate_count": 3,
+          "information_cost": 5,
+          "law_alternatives": 4,
+          "minimax": {
+            "NONWINNING_BRANCHES": 1,
+            "SUM_SQUARED_RESIDUALS": 4,
+            "WORST_NONWINNING_RESIDUAL": 2
+          },
+          "partition_count": 2,
+          "trial_count": 2
+        },
+        "actualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            14,
+            9,
+            6,
+            8
+          ],
+          "status": "proposed"
+        },
+        "actualProposalDigest": "39e61da7f9f2ed75e168c6e22dbdbd964ab372c99bf254da27dad189a10675ea",
+        "allOtherOwnerFieldsPreserved": true,
+        "callIndex": 37,
+        "counterfactualAccounting": {
+          "candidate_count": 64,
+          "information_cost": 5,
+          "law_alternatives": 1,
+          "minimax": {
+            "NONWINNING_BRANCHES": 23,
+            "SUM_SQUARED_RESIDUALS": 209,
+            "WORST_NONWINNING_RESIDUAL": 5
+          },
+          "partition_count": 24,
+          "trial_count": 6
+        },
+        "counterfactualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            14,
+            8,
+            6,
+            9
+          ],
+          "status": "proposed"
+        },
+        "counterfactualDiagnostic": {
+          "assumptions": [
+            "positionwise_exact_elsewhere_absent_feedback",
+            "unrevealed_values_remain_possible",
+            "secret_repetitions_not_excluded_by_palette_removal"
+          ],
+          "candidate_count": 64,
+          "evidence": [],
+          "information_cost": 5,
+          "law_alternatives": 1,
+          "minimax": {
+            "NONWINNING_BRANCHES": 23,
+            "SUM_SQUARED_RESIDUALS": 209,
+            "WORST_NONWINNING_RESIDUAL": 5
+          },
+          "partition_count": 24,
+          "scope": "minimum worst residual among complete plausible codes preserving the active prefix; no multi-attempt success guarantee",
+          "status": "proposed",
+          "trial": [
+            14,
+            8,
+            6,
+            9
+          ],
+          "trial_count": 6
+        },
+        "counterfactualProposalDigest": "31b76dde328a57654401a9357e8568a69065eb604f3683b3dadc9c27847ee00f",
+        "counterfactualSourceAfterDigest": "01e2d11515f1db917d2767731c0b8765d1557037492557bc443abf6bd3cd61d1",
+        "executed": true,
+        "hypothesisAccountingChanged": true,
+        "intervention": "remove_acquired_feedback_history",
+        "nativeStateSeed": false,
+        "orderedTrialChanged": true,
+        "removedEvidenceRefs": [
+          "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:3:revision:22:frame:c252b47f27930110"
+        ],
+        "removedFeedbackRows": 1,
+        "retainedBoundTrial": false,
+        "scope": "Source-component counterfactual at the same captured public context. Current revealed ranks and any already bound trial remain. No new game run, full-caller ablation or success guarantee.",
+        "sourceStateBeforeDigest": "93fbf7f02380575fae94f69520d10e4be61bfed054375a6affd9b0a48ad39b7e",
+        "stateOrigin": "Only original state acquired/computed by the cold public-call replay before this proposal",
+        "strictProposalChanged": true,
+        "unmodifiedRestorationProposalEqual": true
+      },
+      {
+        "ablatedStateBeforeDigest": "8ca2149dfc1038f82b428a76525747469b8c2a8cfd6e4e6ed544d4075c77f26b",
+        "actionOrRefusalChanged": false,
+        "actualAccounting": {
+          "information_cost": 1
+        },
+        "actualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            14,
+            9,
+            6,
+            8
+          ],
+          "status": "proposed"
+        },
+        "actualProposalDigest": "2c29df45b5b372a08e108cdd50c8e451ceee8c567f2496db98d8e7f694402c4b",
+        "allOtherOwnerFieldsPreserved": true,
+        "callIndex": 42,
+        "counterfactualAccounting": {
+          "information_cost": 1
+        },
+        "counterfactualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            14,
+            9,
+            6,
+            8
+          ],
+          "status": "proposed"
+        },
+        "counterfactualDiagnostic": null,
+        "counterfactualProposalDigest": "957b716fd8f02673d1b565653286dcf0654d62cb8949616f262c107235c92d62",
+        "counterfactualSourceAfterDigest": "8ca2149dfc1038f82b428a76525747469b8c2a8cfd6e4e6ed544d4075c77f26b",
+        "executed": true,
+        "hypothesisAccountingChanged": false,
+        "intervention": "remove_acquired_feedback_history",
+        "nativeStateSeed": false,
+        "orderedTrialChanged": false,
+        "removedEvidenceRefs": [
+          "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:3:revision:22:frame:c252b47f27930110"
+        ],
+        "removedFeedbackRows": 1,
+        "retainedBoundTrial": true,
+        "scope": "Source-component counterfactual at the same captured public context. Current revealed ranks and any already bound trial remain. No new game run, full-caller ablation or success guarantee.",
+        "sourceStateBeforeDigest": "c2a2d594f63f4c92b5ebc55784859713dd2d94c5a7a74e3337433b388f1a01c7",
+        "stateOrigin": "Only original state acquired/computed by the cold public-call replay before this proposal",
+        "strictProposalChanged": true,
+        "unmodifiedRestorationProposalEqual": true
+      },
+      {
+        "ablatedStateBeforeDigest": "d6302ecbccc35abfd30e59980f69c70e0f2c6a8e8ef0bafcf2999fbef16a4600",
+        "actionOrRefusalChanged": true,
+        "actualAccounting": {
+          "candidate_count": 2,
+          "information_cost": 5,
+          "law_alternatives": 4,
+          "minimax": {
+            "NONWINNING_BRANCHES": 1,
+            "SUM_SQUARED_RESIDUALS": 1,
+            "WORST_NONWINNING_RESIDUAL": 1
+          },
+          "partition_count": 2,
+          "trial_count": 1
+        },
+        "actualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 16,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            9,
+            8,
+            6,
+            14
+          ],
+          "status": "proposed"
+        },
+        "actualProposalDigest": "5ef55dcad6a0f9babb60afaf0f45cde17a1dd8840586e6a39b2d3b1117efd881",
+        "allOtherOwnerFieldsPreserved": true,
+        "callIndex": 44,
+        "counterfactualAccounting": {
+          "candidate_count": 64,
+          "information_cost": 5,
+          "law_alternatives": 1,
+          "minimax": {
+            "NONWINNING_BRANCHES": 23,
+            "SUM_SQUARED_RESIDUALS": 209,
+            "WORST_NONWINNING_RESIDUAL": 5
+          },
+          "partition_count": 24,
+          "trial_count": 6
+        },
+        "counterfactualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            14,
+            8,
+            6,
+            9
+          ],
+          "status": "proposed"
+        },
+        "counterfactualDiagnostic": {
+          "assumptions": [
+            "positionwise_exact_elsewhere_absent_feedback",
+            "unrevealed_values_remain_possible",
+            "secret_repetitions_not_excluded_by_palette_removal"
+          ],
+          "candidate_count": 64,
+          "evidence": [],
+          "information_cost": 5,
+          "law_alternatives": 1,
+          "minimax": {
+            "NONWINNING_BRANCHES": 23,
+            "SUM_SQUARED_RESIDUALS": 209,
+            "WORST_NONWINNING_RESIDUAL": 5
+          },
+          "partition_count": 24,
+          "scope": "minimum worst residual among complete plausible codes preserving the active prefix; no multi-attempt success guarantee",
+          "status": "proposed",
+          "trial": [
+            14,
+            8,
+            6,
+            9
+          ],
+          "trial_count": 6
+        },
+        "counterfactualProposalDigest": "4c74b5d59fe32ea2c7d1af3b9d96d9a8f4c42094bad0f9b051106c7ac28d7599",
+        "counterfactualSourceAfterDigest": "8b9a69d4de928baf96d8b1998e4c9c3099f3890ea01019ef407d6e5eef3812bb",
+        "executed": true,
+        "hypothesisAccountingChanged": true,
+        "intervention": "remove_acquired_feedback_history",
+        "nativeStateSeed": false,
+        "orderedTrialChanged": true,
+        "removedEvidenceRefs": [
+          "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:3:revision:22:frame:c252b47f27930110",
+          "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:3:revision:27:frame:73af6cfbe672501a"
+        ],
+        "removedFeedbackRows": 2,
+        "retainedBoundTrial": false,
+        "scope": "Source-component counterfactual at the same captured public context. Current revealed ranks and any already bound trial remain. No new game run, full-caller ablation or success guarantee.",
+        "sourceStateBeforeDigest": "8e4873e8ac24ee6e695c47cdea7276ba4dba66fab0133b1517f3a56c23e12637",
+        "stateOrigin": "Only original state acquired/computed by the cold public-call replay before this proposal",
+        "strictProposalChanged": true,
+        "unmodifiedRestorationProposalEqual": true
+      },
+      {
+        "ablatedStateBeforeDigest": "f2ed185d03b5c54df2fee71fb97e57081bd478a461474e69ffbeb9897fbd01da",
+        "actionOrRefusalChanged": false,
+        "actualAccounting": {
+          "information_cost": 1
+        },
+        "actualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            9,
+            8,
+            6,
+            14
+          ],
+          "status": "proposed"
+        },
+        "actualProposalDigest": "8482a7ff5e0fb7fa8af5e6557ab994cdc63d70ba7e6e19e9493d6f0c8b966c56",
+        "allOtherOwnerFieldsPreserved": true,
+        "callIndex": 49,
+        "counterfactualAccounting": {
+          "information_cost": 1
+        },
+        "counterfactualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            9,
+            8,
+            6,
+            14
+          ],
+          "status": "proposed"
+        },
+        "counterfactualDiagnostic": null,
+        "counterfactualProposalDigest": "fc25ad5c23a317e3f25c2b16441cfe1c36513301a516f0c480640d35ed8f3460",
+        "counterfactualSourceAfterDigest": "f2ed185d03b5c54df2fee71fb97e57081bd478a461474e69ffbeb9897fbd01da",
+        "executed": true,
+        "hypothesisAccountingChanged": false,
+        "intervention": "remove_acquired_feedback_history",
+        "nativeStateSeed": false,
+        "orderedTrialChanged": false,
+        "removedEvidenceRefs": [
+          "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:3:revision:22:frame:c252b47f27930110",
+          "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:3:revision:27:frame:73af6cfbe672501a"
+        ],
+        "removedFeedbackRows": 2,
+        "retainedBoundTrial": true,
+        "scope": "Source-component counterfactual at the same captured public context. Current revealed ranks and any already bound trial remain. No new game run, full-caller ablation or success guarantee.",
+        "sourceStateBeforeDigest": "380884ef96d07c879bd8e4177ffff3cad4e20ddf94ddd51243d92a289f1f47a1",
+        "stateOrigin": "Only original state acquired/computed by the cold public-call replay before this proposal",
+        "strictProposalChanged": true,
+        "unmodifiedRestorationProposalEqual": true
+      }
+    ],
+    "qualification": "All eligible cases are retained, including unchanged decisions and any recorded errors.",
+    "allEligibleContextsRetained": true,
+    "counts": {
+      "total": 8,
+      "executed": 8,
+      "errors": 0,
+      "actionOrRefusalChanged": 3,
+      "orderedTrialChanged": 3,
+      "hypothesisAccountingChanged": 4,
+      "strictProposalChanged": 8,
+      "actionAndTrialUnchanged": 5
+    }
+  },
+  "sourceBefore": {
+    "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "filesVerified": 1786,
+    "inventoryDigest": "9e8f6be8b05a83b0666066b3fda55c0f955e25d9428328e85cac1938b3d9cc2e",
+    "manifest": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+      "bytes": 424024,
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+    }
+  },
+  "evidence": {
+    "campaign": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+      "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a",
+      "bytes": 4349054
+    },
+    "trace": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-public-trace.json.gz",
+      "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c",
+      "bytes": 17256
+    },
+    "journal": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-actual-public-journal.jsonl.gz",
+      "sha256": "eed9ed2b157b178e227ed3e8f71ea6319fac309d5dd6aa5b68e0958720862bfd",
+      "bytes": 11527
+    },
+    "execution": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/execution-mind.json",
+      "sha256": "0c1b6cabfa5a04a0e6b1a9528ffebac252eef935f4aba77bac9edf8cca6fe639",
+      "bytes": 69140
+    },
+    "manifest": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/source-manifest.json",
+      "sha256": "391b3e33c4bbd66ed9a1885d4803fb754b596a6e31ba42b79114fc2c43d6e6cd",
+      "bytes": 32379
+    },
+    "liveManifest": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/source-manifest.json",
+      "sha256": "391b3e33c4bbd66ed9a1885d4803fb754b596a6e31ba42b79114fc2c43d6e6cd",
+      "bytes": 32379
+    },
+    "archive": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/source-archive.json",
+      "sha256": "1372ad8554dabd2dc5440ca78703faf3ad548bdac3605c1abd3982978fe20448",
+      "bytes": 34019
+    },
+    "parity": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-feedback-source-parity.json.gz",
+      "sha256": "de54e6f1442b6c7914eb04d36e077d749315758da2266f42c59e5750bc1f1ef4",
+      "bytes": 36347
+    }
+  },
+  "campaignObserved": {
+    "actions": 31,
+    "prefixes": 20,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "sessions": 1,
+    "reason": "target_levels_completed",
+    "fullV6Parity": false,
+    "publicPackets": 32,
+    "journalEntries": 32,
+    "boundaries": [
+      {
+        "completedLevel": 1,
+        "nativeLevel": 2,
+        "levelsCompleted": 1,
+        "totalActions": 8,
+        "levelActions": 8,
+        "prefixCount": 6,
+        "sessionRetained": true
+      },
+      {
+        "completedLevel": 2,
+        "nativeLevel": 3,
+        "levelsCompleted": 2,
+        "totalActions": 16,
+        "levelActions": 8,
+        "prefixCount": 12,
+        "sessionRetained": true
+      },
+      {
+        "completedLevel": 3,
+        "nativeLevel": 4,
+        "levelsCompleted": 3,
+        "totalActions": 31,
+        "levelActions": 15,
+        "prefixCount": 20,
+        "sessionRetained": true
+      }
+    ],
+    "callerAcquiredTransitions": 31
+  },
+  "capturedStreamCrossChecks": {
+    "counts": {
+      "nonNullProposals": 20,
+      "propose": 20,
+      "selectionEntry:['goal_access', 'observed_feedback_sequence']": 20,
+      "selectedRecords": 31,
+      "recordStatus:observed_append": 24,
+      "record": 31,
+      "recordStatus:observed_submission_feedback": 4,
+      "recordStatus:official_boundary": 3
+    },
+    "uniqueAcquisitions": 31,
+    "publicObservations": 32,
+    "prefixChecks": [
+      {
+        "prefix": "prefix_evidence:1",
+        "throughAction": 1,
+        "throughFeedbackCallIndex": 1,
+        "retainedStateEqual": true,
+        "methodWithoutLayout": false
+      },
+      {
+        "prefix": "prefix_evidence:2",
+        "throughAction": 2,
+        "throughFeedbackCallIndex": 3,
+        "retainedStateEqual": true,
+        "methodWithoutLayout": false
+      },
+      {
+        "prefix": "prefix_evidence:3",
+        "throughAction": 3,
+        "throughFeedbackCallIndex": 5,
+        "retainedStateEqual": true,
+        "methodWithoutLayout": false
+      },
+      {
+        "prefix": "prefix_evidence:4",
+        "throughAction": 4,
+        "throughFeedbackCallIndex": 7,
+        "retainedStateEqual": true,
+        "methodWithoutLayout": false
+      },
+      {
+        "prefix": "prefix_evidence:5",
+        "throughAction": 7,
+        "throughFeedbackCallIndex": 11,
+        "retainedStateEqual": true,
+        "methodWithoutLayout": false
+      },
+      {
+        "prefix": "prefix_evidence:8",
+        "throughAction": 8,
+        "throughFeedbackCallIndex": 13,
+        "retainedStateEqual": true,
+        "methodWithoutLayout": true
+      },
+      {
+        "prefix": "prefix_evidence:9",
+        "throughAction": 9,
+        "throughFeedbackCallIndex": 15,
+        "retainedStateEqual": true,
+        "methodWithoutLayout": false
+      },
+      {
+        "prefix": "prefix_evidence:10",
+        "throughAction": 10,
+        "throughFeedbackCallIndex": 17,
+        "retainedStateEqual": true,
+        "methodWithoutLayout": false
+      },
+      {
+        "prefix": "prefix_evidence:11",
+        "throughAction": 11,
+        "throughFeedbackCallIndex": 19,
+        "retainedStateEqual": true,
+        "methodWithoutLayout": false
+      },
+      {
+        "prefix": "prefix_evidence:12",
+        "throughAction": 12,
+        "throughFeedbackCallIndex": 21,
+        "retainedStateEqual": true,
+        "methodWithoutLayout": false
+      },
+      {
+        "prefix": "prefix_evidence:13",
+        "throughAction": 15,
+        "throughFeedbackCallIndex": 25,
+        "retainedStateEqual": true,
+        "methodWithoutLayout": false
+      },
+      {
+        "prefix": "prefix_evidence:16",
+        "throughAction": 16,
+        "throughFeedbackCallIndex": 27,
+        "retainedStateEqual": true,
+        "methodWithoutLayout": true
+      },
+      {
+        "prefix": "prefix_evidence:17",
+        "throughAction": 17,
+        "throughFeedbackCallIndex": 29,
+        "retainedStateEqual": true,
+        "methodWithoutLayout": false
+      },
+      {
+        "prefix": "prefix_evidence:18",
+        "throughAction": 18,
+        "throughFeedbackCallIndex": 31,
+        "retainedStateEqual": true,
+        "methodWithoutLayout": false
+      },
+      {
+        "prefix": "prefix_evidence:19",
+        "throughAction": 20,
+        "throughFeedbackCallIndex": 34,
+        "retainedStateEqual": true,
+        "methodWithoutLayout": false
+      },
+      {
+        "prefix": "prefix_evidence:21",
+        "throughAction": 21,
+        "throughFeedbackCallIndex": 36,
+        "retainedStateEqual": true,
+        "methodWithoutLayout": false
+      },
+      {
+        "prefix": "prefix_evidence:22",
+        "throughAction": 25,
+        "throughFeedbackCallIndex": 41,
+        "retainedStateEqual": true,
+        "methodWithoutLayout": false
+      },
+      {
+        "prefix": "prefix_evidence:26",
+        "throughAction": 26,
+        "throughFeedbackCallIndex": 43,
+        "retainedStateEqual": true,
+        "methodWithoutLayout": false
+      },
+      {
+        "prefix": "prefix_evidence:27",
+        "throughAction": 30,
+        "throughFeedbackCallIndex": 48,
+        "retainedStateEqual": true,
+        "methodWithoutLayout": false
+      },
+      {
+        "prefix": "prefix_evidence:31",
+        "throughAction": 31,
+        "throughFeedbackCallIndex": 50,
+        "retainedStateEqual": true,
+        "methodWithoutLayout": true
+      }
+    ]
+  },
+  "publicReturns": [
+    {
+      "recordCallIndex": 7,
+      "actionSequence": 4,
+      "observationBefore": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:1:revision:4:frame:73cdb7a6b5595c70",
+      "observationAfter": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:1:revision:5:frame:5c7fc6d05dd7864d",
+      "boundTrialBefore": {
+        "epoch": 1,
+        "selection": {
+          "assumptions": [
+            "positionwise_exact_elsewhere_absent_feedback",
+            "unrevealed_values_remain_possible",
+            "secret_repetitions_not_excluded_by_palette_removal"
+          ],
+          "candidate_count": 27,
+          "evidence": [],
+          "information_cost": 3,
+          "law_alternatives": 1,
+          "minimax": {
+            "NONWINNING_BRANCHES": 19,
+            "SUM_SQUARED_RESIDUALS": 40,
+            "WORST_NONWINNING_RESIDUAL": 2
+          },
+          "partition_count": 20,
+          "scope": "minimum worst residual among complete plausible codes preserving the active prefix; no multi-attempt success guarantee",
+          "status": "proposed",
+          "trial": [
+            8,
+            14,
+            9
+          ],
+          "trial_count": 2
+        },
+        "trial": [
+          8,
+          14,
+          9
+        ]
+      },
+      "command": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "returnedFeedback": {
+        "status": "observed_submission_feedback",
+        "event": {
+          "y": 12,
+          "values": [
+            8,
+            14,
+            9
+          ],
+          "marks": [
+            "style:fd76db5c8ad0929a",
+            "style:cc4da5498be93ad2",
+            "style:cc4da5498be93ad2"
+          ],
+          "ref": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:1:revision:5:frame:5c7fc6d05dd7864d",
+          "before": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:1:revision:4:frame:73cdb7a6b5595c70"
+        }
+      },
+      "retainedHistory": [
+        {
+          "y": 12,
+          "values": [
+            8,
+            14,
+            9
+          ],
+          "marks": [
+            "style:fd76db5c8ad0929a",
+            "style:cc4da5498be93ad2",
+            "style:cc4da5498be93ad2"
+          ],
+          "ref": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:1:revision:5:frame:5c7fc6d05dd7864d",
+          "before": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:1:revision:4:frame:73cdb7a6b5595c70"
+        }
+      ],
+      "nextProposal": {
+        "callIndex": 8,
+        "decision": {
+          "status": "proposed",
+          "kind": "public_feedback_sequence",
+          "actions": [
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            }
+          ],
+          "orderedTrial": [
+            8,
+            9,
+            14
+          ]
+        },
+        "accounting": {
+          "candidate_count": 2,
+          "law_alternatives": 4,
+          "trial_count": 1,
+          "minimax": {
+            "WORST_NONWINNING_RESIDUAL": 1,
+            "SUM_SQUARED_RESIDUALS": 1,
+            "NONWINNING_BRANCHES": 1
+          },
+          "partition_count": 2,
+          "information_cost": 4
+        }
+      }
+    },
+    {
+      "recordCallIndex": 21,
+      "actionSequence": 12,
+      "observationBefore": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:2:revision:12:frame:7b180d232614cf27",
+      "observationAfter": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:2:revision:13:frame:aa2ee9fedc4437d0",
+      "boundTrialBefore": {
+        "epoch": 2,
+        "selection": {
+          "assumptions": [
+            "positionwise_exact_elsewhere_absent_feedback",
+            "unrevealed_values_remain_possible",
+            "secret_repetitions_not_excluded_by_palette_removal"
+          ],
+          "candidate_count": 64,
+          "evidence": [],
+          "information_cost": 3,
+          "law_alternatives": 1,
+          "minimax": {
+            "NONWINNING_BRANCHES": 23,
+            "SUM_SQUARED_RESIDUALS": 209,
+            "WORST_NONWINNING_RESIDUAL": 5
+          },
+          "partition_count": 24,
+          "scope": "minimum worst residual among complete plausible codes preserving the active prefix; no multi-attempt success guarantee",
+          "status": "proposed",
+          "trial": [
+            8,
+            14,
+            6
+          ],
+          "trial_count": 6
+        },
+        "trial": [
+          8,
+          14,
+          6
+        ]
+      },
+      "command": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "returnedFeedback": {
+        "status": "observed_submission_feedback",
+        "event": {
+          "y": 12,
+          "values": [
+            8,
+            14,
+            6
+          ],
+          "marks": [
+            "style:cc4da5498be93ad2",
+            "style:cc4da5498be93ad2",
+            "style:cc4da5498be93ad2"
+          ],
+          "ref": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:2:revision:13:frame:aa2ee9fedc4437d0",
+          "before": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:2:revision:12:frame:7b180d232614cf27"
+        }
+      },
+      "retainedHistory": [
+        {
+          "y": 12,
+          "values": [
+            8,
+            14,
+            6
+          ],
+          "marks": [
+            "style:cc4da5498be93ad2",
+            "style:cc4da5498be93ad2",
+            "style:cc4da5498be93ad2"
+          ],
+          "ref": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:2:revision:13:frame:aa2ee9fedc4437d0",
+          "before": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:2:revision:12:frame:7b180d232614cf27"
+        }
+      ],
+      "nextProposal": {
+        "callIndex": 22,
+        "decision": {
+          "status": "proposed",
+          "kind": "public_feedback_sequence",
+          "actions": [
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 16,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            }
+          ],
+          "orderedTrial": [
+            14,
+            6,
+            8
+          ]
+        },
+        "accounting": {
+          "candidate_count": 4,
+          "law_alternatives": 12,
+          "trial_count": 3,
+          "minimax": {
+            "WORST_NONWINNING_RESIDUAL": 2,
+            "SUM_SQUARED_RESIDUALS": 6,
+            "NONWINNING_BRANCHES": 3
+          },
+          "partition_count": 5,
+          "information_cost": 4
+        }
+      }
+    },
+    {
+      "recordCallIndex": 36,
+      "actionSequence": 21,
+      "observationBefore": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:3:revision:21:frame:c11446f70cfef820",
+      "observationAfter": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:3:revision:22:frame:c252b47f27930110",
+      "boundTrialBefore": {
+        "epoch": 3,
+        "selection": {
+          "assumptions": [
+            "positionwise_exact_elsewhere_absent_feedback",
+            "unrevealed_values_remain_possible",
+            "secret_repetitions_not_excluded_by_palette_removal"
+          ],
+          "candidate_count": 256,
+          "evidence": [],
+          "information_cost": 4,
+          "law_alternatives": 1,
+          "minimax": {
+            "NONWINNING_BRANCHES": 71,
+            "SUM_SQUARED_RESIDUALS": 1367,
+            "WORST_NONWINNING_RESIDUAL": 12
+          },
+          "partition_count": 72,
+          "scope": "minimum worst residual among complete plausible codes preserving the active prefix; no multi-attempt success guarantee",
+          "status": "proposed",
+          "trial": [
+            8,
+            14,
+            6,
+            9
+          ],
+          "trial_count": 6
+        },
+        "trial": [
+          8,
+          14,
+          6,
+          9
+        ]
+      },
+      "command": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "returnedFeedback": {
+        "status": "observed_submission_feedback",
+        "event": {
+          "y": 12,
+          "values": [
+            8,
+            14,
+            6,
+            9
+          ],
+          "marks": [
+            "style:cc4da5498be93ad2",
+            "style:cc4da5498be93ad2",
+            "style:fd76db5c8ad0929a",
+            "style:cc4da5498be93ad2"
+          ],
+          "ref": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:3:revision:22:frame:c252b47f27930110",
+          "before": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:3:revision:21:frame:c11446f70cfef820"
+        }
+      },
+      "retainedHistory": [
+        {
+          "y": 12,
+          "values": [
+            8,
+            14,
+            6,
+            9
+          ],
+          "marks": [
+            "style:cc4da5498be93ad2",
+            "style:cc4da5498be93ad2",
+            "style:fd76db5c8ad0929a",
+            "style:cc4da5498be93ad2"
+          ],
+          "ref": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:3:revision:22:frame:c252b47f27930110",
+          "before": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:3:revision:21:frame:c11446f70cfef820"
+        }
+      ],
+      "nextProposal": {
+        "callIndex": 37,
+        "decision": {
+          "status": "proposed",
+          "kind": "public_feedback_sequence",
+          "actions": [
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            }
+          ],
+          "orderedTrial": [
+            14,
+            9,
+            6,
+            8
+          ]
+        },
+        "accounting": {
+          "candidate_count": 3,
+          "law_alternatives": 4,
+          "trial_count": 2,
+          "minimax": {
+            "WORST_NONWINNING_RESIDUAL": 2,
+            "SUM_SQUARED_RESIDUALS": 4,
+            "NONWINNING_BRANCHES": 1
+          },
+          "partition_count": 2,
+          "information_cost": 5
+        }
+      }
+    },
+    {
+      "recordCallIndex": 43,
+      "actionSequence": 26,
+      "observationBefore": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:3:revision:26:frame:51227c4ab04f6d42",
+      "observationAfter": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:3:revision:27:frame:73af6cfbe672501a",
+      "boundTrialBefore": {
+        "epoch": 3,
+        "selection": {
+          "assumptions": [
+            "positionwise_exact_elsewhere_absent_feedback",
+            "unrevealed_values_remain_possible",
+            "secret_repetitions_not_excluded_by_palette_removal"
+          ],
+          "candidate_count": 3,
+          "evidence": [
+            "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:3:revision:22:frame:c252b47f27930110"
+          ],
+          "information_cost": 5,
+          "law_alternatives": 4,
+          "minimax": {
+            "NONWINNING_BRANCHES": 1,
+            "SUM_SQUARED_RESIDUALS": 4,
+            "WORST_NONWINNING_RESIDUAL": 2
+          },
+          "partition_count": 2,
+          "scope": "minimum worst residual among complete plausible codes preserving the active prefix; no multi-attempt success guarantee",
+          "status": "proposed",
+          "trial": [
+            14,
+            9,
+            6,
+            8
+          ],
+          "trial_count": 2
+        },
+        "trial": [
+          14,
+          9,
+          6,
+          8
+        ]
+      },
+      "command": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "returnedFeedback": {
+        "status": "observed_submission_feedback",
+        "event": {
+          "y": 20,
+          "values": [
+            14,
+            9,
+            6,
+            8
+          ],
+          "marks": [
+            "style:cc4da5498be93ad2",
+            "style:cc4da5498be93ad2",
+            "style:fd76db5c8ad0929a",
+            "style:cc4da5498be93ad2"
+          ],
+          "ref": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:3:revision:27:frame:73af6cfbe672501a",
+          "before": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:3:revision:26:frame:51227c4ab04f6d42"
+        }
+      },
+      "retainedHistory": [
+        {
+          "before": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:3:revision:21:frame:c11446f70cfef820",
+          "marks": [
+            "style:cc4da5498be93ad2",
+            "style:cc4da5498be93ad2",
+            "style:fd76db5c8ad0929a",
+            "style:cc4da5498be93ad2"
+          ],
+          "ref": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:3:revision:22:frame:c252b47f27930110",
+          "values": [
+            8,
+            14,
+            6,
+            9
+          ],
+          "y": 12
+        },
+        {
+          "y": 20,
+          "values": [
+            14,
+            9,
+            6,
+            8
+          ],
+          "marks": [
+            "style:cc4da5498be93ad2",
+            "style:cc4da5498be93ad2",
+            "style:fd76db5c8ad0929a",
+            "style:cc4da5498be93ad2"
+          ],
+          "ref": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:3:revision:27:frame:73af6cfbe672501a",
+          "before": "sra-v6-46886b7b-8c4d-4062-a06f-4a515a01a9aa:epoch:3:revision:26:frame:51227c4ab04f6d42"
+        }
+      ],
+      "nextProposal": {
+        "callIndex": 44,
+        "decision": {
+          "status": "proposed",
+          "kind": "public_feedback_sequence",
+          "actions": [
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 16,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            }
+          ],
+          "orderedTrial": [
+            9,
+            8,
+            6,
+            14
+          ]
+        },
+        "accounting": {
+          "candidate_count": 2,
+          "law_alternatives": 4,
+          "trial_count": 1,
+          "minimax": {
+            "WORST_NONWINNING_RESIDUAL": 1,
+            "SUM_SQUARED_RESIDUALS": 1,
+            "NONWINNING_BRANCHES": 1
+          },
+          "partition_count": 2,
+          "information_cost": 5
+        }
+      }
+    }
+  ],
+  "originalParity": {
+    "callsCompared": 51,
+    "publicObservationsRemeasuredByOriginal": 32,
+    "stateBeforeComparisons": 51,
+    "stateAfterComparisons": 51,
+    "coldStart": true,
+    "nativeStatesUsedToPrimeSource": false,
+    "normalizations": [],
+    "fullOriginalCallerRun": false,
+    "sourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e"
+  },
+  "contribution": {
+    "status": "local_decision_dependence_observed",
+    "selectedAcquisitions": 31,
+    "passiveAcquisitions": 0,
+    "publicSubmissionReturns": 4,
+    "actionOrRefusalChanged": 3,
+    "orderedTrialChanged": 3,
+    "wholeGameCausalImprovementEstablished": false
+  },
+  "sourceAfter": {
+    "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "filesVerified": 1786,
+    "inventoryDigest": "9e8f6be8b05a83b0666066b3fda55c0f955e25d9428328e85cac1938b3d9cc2e",
+    "manifest": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+      "bytes": 424024,
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+    }
+  },
+  "inputsBefore": {
+    "docs/migration/lot4a-evidence/final/mind-resolution.json": {
+      "path": "docs/migration/lot4a-evidence/final/mind-resolution.json",
+      "sha256": "213eb088d2bf4b60be770d948f2efdf76ab73592dc4838cb5abb8e039abd119c",
+      "bytes": 2267
+    },
+    "docs/migration/lot4a-evidence/integrated-051/mind-live-01/execution-mind.json": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/execution-mind.json",
+      "sha256": "0c1b6cabfa5a04a0e6b1a9528ffebac252eef935f4aba77bac9edf8cca6fe639",
+      "bytes": 69140
+    },
+    "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-actual-public-journal.jsonl.gz": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-actual-public-journal.jsonl.gz",
+      "sha256": "eed9ed2b157b178e227ed3e8f71ea6319fac309d5dd6aa5b68e0958720862bfd",
+      "bytes": 11527
+    },
+    "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+      "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a",
+      "bytes": 4349054
+    },
+    "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-feedback-source-parity.json.gz": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-feedback-source-parity.json.gz",
+      "sha256": "de54e6f1442b6c7914eb04d36e077d749315758da2266f42c59e5750bc1f1ef4",
+      "bytes": 36347
+    },
+    "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-output.log.gz": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-output.log.gz",
+      "sha256": "7708f3f52d29ebe0c058b338dd66d9383e70c2d97aa007f2f4ae92996608b678",
+      "bytes": 4465
+    },
+    "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-public-trace.json.gz": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-public-trace.json.gz",
+      "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c",
+      "bytes": 17256
+    },
+    "docs/migration/lot4a-evidence/integrated-051/mind-live-01/source-manifest.json": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/source-manifest.json",
+      "sha256": "391b3e33c4bbd66ed9a1885d4803fb754b596a6e31ba42b79114fc2c43d6e6cd",
+      "bytes": 32379
+    },
+    "docs/migration/lot4a-evidence/integrated-051/source-archive.json": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/source-archive.json",
+      "sha256": "1372ad8554dabd2dc5440ca78703faf3ad548bdac3605c1abd3982978fe20448",
+      "bytes": 34019
+    },
+    "docs/migration/lot4a-evidence/integrated-051/source-manifest.json": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/source-manifest.json",
+      "sha256": "391b3e33c4bbd66ed9a1885d4803fb754b596a6e31ba42b79114fc2c43d6e6cd",
+      "bytes": 32379
+    },
+    "docs/migration/lot4a-evidence/mind-integrated-051-01-phase.json": {
+      "path": "docs/migration/lot4a-evidence/mind-integrated-051-01-phase.json",
+      "sha256": "8fc942bafdc4d107f8d8f8a8b8d2cb745510eb587c100f32c4bfa4bbb41d5f97",
+      "bytes": 2816
+    },
+    "docs/migration/lot4a-evidence/mind-integrated-051-01-phase.log": {
+      "path": "docs/migration/lot4a-evidence/mind-integrated-051-01-phase.log",
+      "sha256": "6c83fbe47822c972e3fc9cda9a4641e6c0509b061eb737dfd93a9960d2d229fa",
+      "bytes": 1897
+    },
+    "docs/migration/lot4a-evidence/mind-integrated-051-resumption.json": {
+      "path": "docs/migration/lot4a-evidence/mind-integrated-051-resumption.json",
+      "sha256": "91fe6f9d6dcb964dc2a6bd17d764c442c733c946fd07a7e26b43769adf356042",
+      "bytes": 1264
+    },
+    "docs/migration/lot4a-evidence/run-case-phase.py": {
+      "path": "docs/migration/lot4a-evidence/run-case-phase.py",
+      "sha256": "8731f865589a3435d54970dca274ddc62bb198bc56c2776e54f58bd6b6c15230",
+      "bytes": 3760
+    },
+    "docs/migration/lot4a-evidence/verify-feedback-live-contribution.py": {
+      "path": "docs/migration/lot4a-evidence/verify-feedback-live-contribution.py",
+      "sha256": "b703608c0b30f5b143f5ef1e5319db032ac15b47369b25a327e8d5a9e478e75c",
+      "bytes": 43347
+    },
+    "public/python/custom-games.zip": {
+      "path": "public/python/custom-games.zip",
+      "sha256": "44d108fe4feed3ce0c9587e90f071876b13730af8136cd54cbfa5c1562d87822",
+      "bytes": 899593
+    },
+    "public/python/custom_level_navigation.py": {
+      "path": "public/python/custom_level_navigation.py",
+      "sha256": "8cc1716619aff08915135ebfa093fc305b211e28fabdff2c027d994d84f82c9b",
+      "bytes": 7900
+    },
+    "public/python/game_bridge.py": {
+      "path": "public/python/game_bridge.py",
+      "sha256": "cc9df3ea6eae0057898fa01fd949322c6af0b481030f4c271b9a719f0a07983e",
+      "bytes": 13121
+    },
+    "public/python/official-games.zip": {
+      "path": "public/python/official-games.zip",
+      "sha256": "90b5aeaee21ec11285799287445b33d3c19f4ea4894a8a60964117f7757f59ed",
+      "bytes": 304996
+    },
+    "public/python/official_adapter.py": {
+      "path": "public/python/official_adapter.py",
+      "sha256": "efead273b89ffe8cf595e41b9f4b25a6106e6cb6e5a7d1013ebc887cfc646837",
+      "bytes": 9574
+    },
+    "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6",
+      "bytes": 424024
+    },
+    "scripts/compare-feedback-public-parity.py": {
+      "path": "scripts/compare-feedback-public-parity.py",
+      "sha256": "0f22f59cab245e210be437c81e032bf64657fe7241ece0f49970fb25220f3ffd",
+      "bytes": 18997
+    },
+    "scripts/compare-v54-regressions.py": {
+      "path": "scripts/compare-v54-regressions.py",
+      "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+      "bytes": 18166
+    },
+    "scripts/run-v53-campaign-proof.py": {
+      "path": "scripts/run-v53-campaign-proof.py",
+      "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+      "bytes": 5421
+    },
+    "scripts/run-v53-journaled-campaign.mjs": {
+      "path": "scripts/run-v53-journaled-campaign.mjs",
+      "sha256": "fea5ea30777475f21ee6ffc3cfa221f652e0e5deccc606c16f9b51d6bd47f646",
+      "bytes": 1961
+    },
+    "scripts/verify-native-delivery.py": {
+      "path": "scripts/verify-native-delivery.py",
+      "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a",
+      "bytes": 26494
+    },
+    "tests/helpers/v6-live-game-campaign.ts": {
+      "path": "tests/helpers/v6-live-game-campaign.ts",
+      "sha256": "5791eb210615977f15010587c27acc886211aa04919ccd5dfa9c820f4274821e",
+      "bytes": 69253
+    }
+  },
+  "inputsAfter": {
+    "docs/migration/lot4a-evidence/final/mind-resolution.json": {
+      "path": "docs/migration/lot4a-evidence/final/mind-resolution.json",
+      "sha256": "213eb088d2bf4b60be770d948f2efdf76ab73592dc4838cb5abb8e039abd119c",
+      "bytes": 2267
+    },
+    "docs/migration/lot4a-evidence/integrated-051/mind-live-01/execution-mind.json": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/execution-mind.json",
+      "sha256": "0c1b6cabfa5a04a0e6b1a9528ffebac252eef935f4aba77bac9edf8cca6fe639",
+      "bytes": 69140
+    },
+    "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-actual-public-journal.jsonl.gz": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-actual-public-journal.jsonl.gz",
+      "sha256": "eed9ed2b157b178e227ed3e8f71ea6319fac309d5dd6aa5b68e0958720862bfd",
+      "bytes": 11527
+    },
+    "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+      "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a",
+      "bytes": 4349054
+    },
+    "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-feedback-source-parity.json.gz": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-feedback-source-parity.json.gz",
+      "sha256": "de54e6f1442b6c7914eb04d36e077d749315758da2266f42c59e5750bc1f1ef4",
+      "bytes": 36347
+    },
+    "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-output.log.gz": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-output.log.gz",
+      "sha256": "7708f3f52d29ebe0c058b338dd66d9383e70c2d97aa007f2f4ae92996608b678",
+      "bytes": 4465
+    },
+    "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-public-trace.json.gz": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-public-trace.json.gz",
+      "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c",
+      "bytes": 17256
+    },
+    "docs/migration/lot4a-evidence/integrated-051/mind-live-01/source-manifest.json": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/source-manifest.json",
+      "sha256": "391b3e33c4bbd66ed9a1885d4803fb754b596a6e31ba42b79114fc2c43d6e6cd",
+      "bytes": 32379
+    },
+    "docs/migration/lot4a-evidence/integrated-051/source-archive.json": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/source-archive.json",
+      "sha256": "1372ad8554dabd2dc5440ca78703faf3ad548bdac3605c1abd3982978fe20448",
+      "bytes": 34019
+    },
+    "docs/migration/lot4a-evidence/integrated-051/source-manifest.json": {
+      "path": "docs/migration/lot4a-evidence/integrated-051/source-manifest.json",
+      "sha256": "391b3e33c4bbd66ed9a1885d4803fb754b596a6e31ba42b79114fc2c43d6e6cd",
+      "bytes": 32379
+    },
+    "docs/migration/lot4a-evidence/mind-integrated-051-01-phase.json": {
+      "path": "docs/migration/lot4a-evidence/mind-integrated-051-01-phase.json",
+      "sha256": "8fc942bafdc4d107f8d8f8a8b8d2cb745510eb587c100f32c4bfa4bbb41d5f97",
+      "bytes": 2816
+    },
+    "docs/migration/lot4a-evidence/mind-integrated-051-01-phase.log": {
+      "path": "docs/migration/lot4a-evidence/mind-integrated-051-01-phase.log",
+      "sha256": "6c83fbe47822c972e3fc9cda9a4641e6c0509b061eb737dfd93a9960d2d229fa",
+      "bytes": 1897
+    },
+    "docs/migration/lot4a-evidence/mind-integrated-051-resumption.json": {
+      "path": "docs/migration/lot4a-evidence/mind-integrated-051-resumption.json",
+      "sha256": "91fe6f9d6dcb964dc2a6bd17d764c442c733c946fd07a7e26b43769adf356042",
+      "bytes": 1264
+    },
+    "docs/migration/lot4a-evidence/run-case-phase.py": {
+      "path": "docs/migration/lot4a-evidence/run-case-phase.py",
+      "sha256": "8731f865589a3435d54970dca274ddc62bb198bc56c2776e54f58bd6b6c15230",
+      "bytes": 3760
+    },
+    "docs/migration/lot4a-evidence/verify-feedback-live-contribution.py": {
+      "path": "docs/migration/lot4a-evidence/verify-feedback-live-contribution.py",
+      "sha256": "b703608c0b30f5b143f5ef1e5319db032ac15b47369b25a327e8d5a9e478e75c",
+      "bytes": 43347
+    },
+    "public/python/custom-games.zip": {
+      "path": "public/python/custom-games.zip",
+      "sha256": "44d108fe4feed3ce0c9587e90f071876b13730af8136cd54cbfa5c1562d87822",
+      "bytes": 899593
+    },
+    "public/python/custom_level_navigation.py": {
+      "path": "public/python/custom_level_navigation.py",
+      "sha256": "8cc1716619aff08915135ebfa093fc305b211e28fabdff2c027d994d84f82c9b",
+      "bytes": 7900
+    },
+    "public/python/game_bridge.py": {
+      "path": "public/python/game_bridge.py",
+      "sha256": "cc9df3ea6eae0057898fa01fd949322c6af0b481030f4c271b9a719f0a07983e",
+      "bytes": 13121
+    },
+    "public/python/official-games.zip": {
+      "path": "public/python/official-games.zip",
+      "sha256": "90b5aeaee21ec11285799287445b33d3c19f4ea4894a8a60964117f7757f59ed",
+      "bytes": 304996
+    },
+    "public/python/official_adapter.py": {
+      "path": "public/python/official_adapter.py",
+      "sha256": "efead273b89ffe8cf595e41b9f4b25a6106e6cb6e5a7d1013ebc887cfc646837",
+      "bytes": 9574
+    },
+    "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6",
+      "bytes": 424024
+    },
+    "scripts/compare-feedback-public-parity.py": {
+      "path": "scripts/compare-feedback-public-parity.py",
+      "sha256": "0f22f59cab245e210be437c81e032bf64657fe7241ece0f49970fb25220f3ffd",
+      "bytes": 18997
+    },
+    "scripts/compare-v54-regressions.py": {
+      "path": "scripts/compare-v54-regressions.py",
+      "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+      "bytes": 18166
+    },
+    "scripts/run-v53-campaign-proof.py": {
+      "path": "scripts/run-v53-campaign-proof.py",
+      "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+      "bytes": 5421
+    },
+    "scripts/run-v53-journaled-campaign.mjs": {
+      "path": "scripts/run-v53-journaled-campaign.mjs",
+      "sha256": "fea5ea30777475f21ee6ffc3cfa221f652e0e5deccc606c16f9b51d6bd47f646",
+      "bytes": 1961
+    },
+    "scripts/verify-native-delivery.py": {
+      "path": "scripts/verify-native-delivery.py",
+      "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a",
+      "bytes": 26494
+    },
+    "tests/helpers/v6-live-game-campaign.ts": {
+      "path": "tests/helpers/v6-live-game-campaign.ts",
+      "sha256": "5791eb210615977f15010587c27acc886211aa04919ccd5dfa9c820f4274821e",
+      "bytes": 69253
+    }
+  },
+  "completedAt": "2026-11-10T19:26:12.714289+00:00",
+  "budgetClosure": {
+    "closed": true,
+    "clockReset": false,
+    "selectedAt": "2026-11-10T19:22:59.174932+00:00",
+    "deadline": "2026-11-10T19:51:26.643940+00:00",
+    "resolvedAt": "2026-11-10T19:26:12.714289+00:00",
+    "verificationFinishedAt": "2026-11-10T19:26:12.714289+00:00",
+    "maximumCumulativeSeconds": 2400.0,
+    "previousChargedSeconds": 692.530992,
+    "currentIntervalSeconds": 193.539357,
+    "cumulativeChargedSeconds": 886.070349,
+    "remainingSeconds": 1513.929651,
+    "withinBudget": true,
+    "deadlineExhausted": false,
+    "qualification": "All wall time since this selection, including source parity and this verification, is charged. The already closed prior interval is carried intact. A failed receipt leaves the interval open; it does not pause or reset its deadline."
+  }
+}

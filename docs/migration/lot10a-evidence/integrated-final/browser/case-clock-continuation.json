@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.browser-case-clock-continuation.v1",
+  "status": "completed",
+  "game": "TRIA",
+  "clockReset": false,
+  "maximumCumulativeSeconds": 2400,
+  "startedAt": "2026-11-10T23:42:25.056369+00:00",
+  "finishedAt": "2026-11-10T23:44:37.115000+00:00",
+  "elapsedSeconds": 132.058631,
+  "cumulativeBeforeSeconds": 763.736664,
+  "cumulativeAfterSeconds": 895.795295,
+  "remainingSeconds": 1504.204705,
+  "priorClock": {
+    "path": "docs/migration/lot10a-evidence/integrated-final/browser/prior-case-clock.json",
+    "sha256": "c5a989f63e146a0cf2c14e16823f7f70aad844c1a8e0684fd10bd05a3b34190d",
+    "bytes": 1573
+  },
+  "browserReceipt": {
+    "path": "docs/migration/lot10a-evidence/integrated-final/browser/browser-qa.json",
+    "sha256": "b6832a442ac1bb421241155b297fb4fa5ba242ab41fa7249e8e5206639c698ad",
+    "bytes": 3151
+  },
+  "qualification": "Entire continuous 10A browser QA interval, from preview startup through final observation and screenshot, added to the retained initial resolution and 4B browser intervals. No reset, injected learned state, manual action, level jump or excluded failed attempt."
+}

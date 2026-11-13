@@ -1,0 +1,70 @@
+{
+  "schema": "logos-engine.native-profile-comparison.v1",
+  "before": {
+    "summary": "../native-campaigns-v36/tu93-cpu-summary.json",
+    "profileSha256": "e95b7b05a0954cb146a3761f21e73f127b9f186a494f90d15f35138d2d398c1e",
+    "sampledSeconds": 68.169155,
+    "explicitInspectionSeconds": 14.268468
+  },
+  "after": {
+    "summary": "tu93-cpu-summary.json",
+    "profileSha256": "73bc4bdaf2e925f8eed5cf045198a4098d2e043c40ffdeafb94145d6e5741c0a",
+    "sampledSeconds": 55.12007,
+    "explicitInspectionSeconds": 7.368758,
+    "archive": "tu93.cpuprofile.gz",
+    "archiveSha256": "e7376fcf5fc0ce26937d8f4e111366867cd66b559cad7dc467cde4c8e2a7c5f1",
+    "archiveBytes": 669554
+  },
+  "modules": [
+    {
+      "module": "src/logos-engine/canonical.ts",
+      "before": {
+        "selfSampledSeconds": 26.579249,
+        "explicitInspectionSampledSeconds": 6.317083,
+        "withoutExplicitInspectionSampledSeconds": 20.262166
+      },
+      "after": {
+        "selfSampledSeconds": 23.275621,
+        "explicitInspectionSampledSeconds": 3.652385,
+        "withoutExplicitInspectionSampledSeconds": 19.623236000000002
+      }
+    },
+    {
+      "module": "src/logos-engine/bounded-weak-cache.ts",
+      "before": {
+        "selfSampledSeconds": 16.798927,
+        "explicitInspectionSampledSeconds": 6.767191,
+        "withoutExplicitInspectionSampledSeconds": 10.031735999999999
+      },
+      "after": {
+        "selfSampledSeconds": 6.137533,
+        "explicitInspectionSampledSeconds": 2.429338,
+        "withoutExplicitInspectionSampledSeconds": 3.7081950000000004
+      }
+    },
+    {
+      "module": "src/logos-engine/v6-native-state-graph.ts",
+      "before": {
+        "selfSampledSeconds": 5.432652,
+        "explicitInspectionSampledSeconds": 0.690846,
+        "withoutExplicitInspectionSampledSeconds": 4.741806
+      },
+      "after": {
+        "selfSampledSeconds": 5.93384,
+        "explicitInspectionSampledSeconds": 0.758461,
+        "withoutExplicitInspectionSampledSeconds": 5.1753789999999995
+      }
+    }
+  ],
+  "requestTimingComparison": "tu93-comparison.json",
+  "observedActiveReductionPercent": 12.886282926081217,
+  "observedWallReductionPercent": 19.245628770418858,
+  "qualifications": [
+    "One before/after sampled process pair. Exact public commands, packets and reported projections are checked separately; this is not a repeated benchmark or a guarantee for other games or machines.",
+    "Module self times are sampled leaf attribution. Inspection contexts overlap module totals; do not add module times to context times.",
+    "Removing explicit helper-inspection samples is a useful distinction, not an exact production-only attribution: async ancestry and other proof work remain partially unattributed.",
+    "The cache and trusted canonical-entry changes were applied together. The campaigns do not independently isolate each change’s end-to-end causal effect.",
+    "Request elapsed times exclude explicit full-graph inspections performed by the test helper after service responses. Profile wall duration includes game loading, inspection, GC and scheduling.",
+    "No claim that source journal growth, all canonical computation, or long-session acquisition cost has been eliminated."
+  ]
+}

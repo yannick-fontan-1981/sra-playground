@@ -1,0 +1,32 @@
+{
+  "schema": "logos-engine.derived-evidence-lineage.v1",
+  "createdAt": "2026-11-09T20:26:28.283546+00:00",
+  "predecessor": {
+    "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/ls20-method-continuation-attribution.json",
+    "bytes": 107232,
+    "sha256": "4b814b641ad067ad38580344862b253d31812f27beab1210cd1e0e214645d24f"
+  },
+  "successor": {
+    "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/ls20-method-continuation-attribution-v2.json",
+    "bytes": 127848,
+    "sha256": "72c1183d81cac9b5568b51b19bc8eaa936191a2b4cfccb58a5dc653b356ac315"
+  },
+  "predecessorExtractor": {
+    "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/method-continuation-extractor-v1.py",
+    "bytes": 26660,
+    "sha256": "2dc459199d857538dd38ca7b69643d6ca1015544f9677a58276cea3247bb68d6"
+  },
+  "successorExtractor": {
+    "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/method-continuation-extractor-v2.py",
+    "bytes": 28746,
+    "sha256": "4b09d2e19e3e31eb48354d7308bbea71c8cba999b50febac0805c03dfdcafa26"
+  },
+  "sourceInputsIdentical": true,
+  "oldAttributionCountersIdentical": true,
+  "rawEvidenceUnchanged": true,
+  "additions": [
+    "All currentDecision target extensions, including abstentions",
+    "Binding versus offer/selection counts with explicit release_authority"
+  ],
+  "qualification": "The first derived receipt is preserved byte-for-byte. The successor adds passive projection fields from the same unchanged capture; archived extractor files are exact byte snapshots of each original executable at its original scripts path."
+}

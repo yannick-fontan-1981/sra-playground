@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.lot8b.preperformance-publication-observation.v1",
+  "observedAt": "2026-11-12T12:30:29Z",
+  "method": "Native Sites get_site plus get_site_version; saved publication identity retained without repolling its already-terminal deployment.",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "liveUrl": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "latestSiteVersion": 107,
+  "savedVersion": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_94f341f3a7188191b79c05be4f3820f1",
+    "versionNumber": 107,
+    "sourceCommit": "4ff7bf45286a8a19d34401988adca587253ae41e",
+    "deploymentId": "appgdep_6af5171c53b08191ad6f80c0e52b41b7"
+  },
+  "audience": {
+    "currentUserRole": "owner",
+    "mode": "custom",
+    "revision": 3,
+    "allowedUsers": 1,
+    "ownerUsers": 1,
+    "allowedGroups": 0,
+    "externalVisitorCount": 0,
+    "ownerPrivate": true
+  },
+  "nativeVersion": "0.66.0",
+  "qualification": "Native version is verified independently from the published Git source; version metadata does not contain a native implementation string."
+}

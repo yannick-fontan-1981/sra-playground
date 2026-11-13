@@ -1,0 +1,14 @@
+{
+  "schema": "logos-engine.advisory-performance-lock.v1",
+  "status": "acquired_before_readiness",
+  "acquiredAt": "2026-11-10T23:28:41.129153+00:00",
+  "pid": 2,
+  "lock": "/workspace/shared/sra-coordination/performance.lock",
+  "launcher": {
+    "path": "docs/migration/lot7b-evidence/performance-integrated/launch-locked-window.py",
+    "bytes": 3508,
+    "sha256": "cf80b01cd8a068156d1bf8bd04b1aa2db066d8abd86c341f3ff06ff0301a2078"
+  },
+  "nodeOptionsOverride": null,
+  "qualification": "Actual exclusive nonblocking flock. Retained through the unchanged official runner. Cooperative lane and own-work evidence remain separate."
+}

@@ -1,0 +1,7 @@
+{
+  "status": "tool_orchestration_syntax_refused_before_execution",
+  "error": "Unescaped Markdown backtick in JavaScript command string",
+  "shellCommandStarted": false,
+  "fileChangesFromRefusedAttempt": false,
+  "subsequentAttempt": "This corpus/test source preparation completed; no tests were executed."
+}

@@ -1,0 +1,565 @@
+{
+  "schema": "logos-engine.v6.program-control-discovery-public-audit.v1",
+  "game": "STCK",
+  "auditStatus": "passed",
+  "scope": "Audit hors ligne des artefacts canoniques et des pixels publics enregistrés. Aucun moteur de jeu, module agent ou modèle ajusté exécuté par cet audit ; aucune source de jeu, oracle ou état privé consulté.",
+  "inputs": {
+    "canonicalReport": {
+      "path": "docs/migration/native-campaigns-v41/diagnostics/stck-control-discovery-six-level-attempt.json",
+      "sha256": "26c3b383ae3bb08f1ef024ba62a978b2dc03770a66a0c8cb79616504002a3f81",
+      "bytes": 275574
+    },
+    "canonicalPublicTrace": {
+      "path": "docs/migration/native-campaigns-v41/diagnostics/stck-control-discovery-public.json.gz",
+      "sha256": "13f430ea562ec28234c1812bd3b24e2ef793b02f48d22be055a8ae2c251d1cef",
+      "bytes": 57577,
+      "uncompressedSha256": "d97dade11c0fd6d6982254b36e32f4d136ef029015c6e78d523e91eea13aef6a",
+      "uncompressedBytes": 3169099
+    },
+    "v40Report": {
+      "path": "docs/migration/native-campaigns-v40/diagnostics/stck-current-access-six-level-attempt.json",
+      "sha256": "df147d9e3ec690c40797cf019d05511ba54c9b02e3b0ddc0b0f41551d998400d",
+      "bytes": 198237
+    },
+    "v40PublicTrace": {
+      "path": "docs/migration/native-campaigns-v40/diagnostics/stck-current-access-public.json.gz",
+      "sha256": "db35baee343647f6d4d0e651027a346269fa6d689222fbce4962eb5764c9f15b",
+      "bytes": 54137,
+      "uncompressedSha256": "b613e0bcdb6a95c71760d533f1bd554f1aef1eaeddba55741d815df499ca4d19",
+      "uncompressedBytes": 2966898
+    }
+  },
+  "hashVerification": {
+    "algorithm": "SHA-256",
+    "packetEncoding": "UTF-8 JSON compact, ordre des champs fixé comme packetHash du harnais, sans espaces ; toutes les images intermédiaires incluses.",
+    "packetFieldOrder": [
+      "frame_rows",
+      "frame_packet",
+      "level",
+      "levels_completed",
+      "state",
+      "step_index",
+      "available_action_refs",
+      "frame_hash"
+    ],
+    "canonicalPublicPacketsVerified": 40,
+    "canonicalPhysicalCommandsMatchedToTrace": 39,
+    "canonicalFinalFrameHashesVerified": 40,
+    "executionAnimationFrameDigestsVerified": 21,
+    "v40PublicPacketsVerified": 38,
+    "sourceManifestDigestRecomputed": "377300aa01f2c942b6150033c61520a7c62292871ee62083ec6b78dde1fc6605",
+    "sourceManifestFileCount": 135,
+    "traceSourceDigestMatchesReport": true,
+    "sourceUnchangedDuringRunReported": true,
+    "qualification": "Les hashes des paquets et du manifeste sont recalculés. Les hashes des fichiers identifient les entrées ; cet audit ne prétend pas fournir une signature externe ni reconstruire le graphe complet."
+  },
+  "officialProgress": {
+    "targetLevels": 6,
+    "completedLevels": 3,
+    "completedLevelActionCounts": [
+      3,
+      7,
+      25
+    ],
+    "cumulativeCompletionActions": [
+      3,
+      10,
+      35
+    ],
+    "boundariesRecomputedFromPublicScores": [
+      {
+        "completedLevel": 1,
+        "nativeLevel": 2,
+        "levelActions": 3,
+        "totalActions": 3,
+        "publicPacketSha256": "5a833738ffeec6fe724c506da7d3b97693eeb758f6f696c3c12fe6c1ba9d9c47"
+      },
+      {
+        "completedLevel": 2,
+        "nativeLevel": 3,
+        "levelActions": 7,
+        "totalActions": 10,
+        "publicPacketSha256": "1dabcb56c7639a4bd7a63b0b0b3c5380265e9ee120229ff93779f13caa5a4ca4"
+      },
+      {
+        "completedLevel": 3,
+        "nativeLevel": 4,
+        "levelActions": 25,
+        "totalActions": 35,
+        "publicPacketSha256": "f564c8119068434b2781b56418caea68f701c0c5dcd74af0b0d07464269b64e0"
+      }
+    ],
+    "levelFourActions": 4,
+    "final": {
+      "actions": 39,
+      "levelsCompleted": 3,
+      "level": 4,
+      "state": "NOT_FINISHED",
+      "status": "stopped",
+      "reason": "frontier_unknown",
+      "activeSeconds": 56.769278585999935,
+      "sessions": 1,
+      "fullV6Parity": false
+    },
+    "levelFourCompleted": false,
+    "sixLevelGoalMet": false
+  },
+  "v40Comparison": {
+    "first35CommandsIdentical": true,
+    "first35ReturnPacketsIncludingAnimationsIdentical": true,
+    "initialPacketIdentical": true,
+    "entireAvailablePrefixCommandsCompared": 37,
+    "entireAvailablePrefixPacketsComparedIncludingInitial": 38,
+    "allComparedCommandsAndPacketsIdentical": true,
+    "newPhysicalActionsBeyondV40": [
+      38,
+      39
+    ],
+    "qualification": "Comparaison exacte de deux campagnes enregistrées ; aucune commande de la trace n’a été injectée dans un agent par cet audit."
+  },
+  "newPhysicalActions": [
+    {
+      "sequence": 38,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 56,
+          "y": 56
+        }
+      },
+      "levelBefore": 4,
+      "completedBefore": 3,
+      "levelAfter": 4,
+      "completedAfter": 3,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "38eb2a4fdf33a777c04c33fb137eee6688f1ef68268f1c57fb759d08456e53b2",
+      "frameHash": "e3d95afbdf6dab45",
+      "animationFrames": 1,
+      "decisionRevision": 38,
+      "family": "public_occurrence_recall",
+      "probeMode": "probe_edit",
+      "prefixEvidenceRef": "prefix_evidence:38",
+      "operations": [
+        "OP29",
+        "OP30",
+        "OP31"
+      ],
+      "callerAcquiredTransitions": 38,
+      "graphChain": "124b8fb0b48e98bdd7ec38cf03c8193d603700af52e26fc058e3b1261361fd55",
+      "graphRevision": 2046,
+      "coordinationRule": "stationary_unlearned_contact_refusal_is_local",
+      "inquiryWitnessStatus": "acquired_context_for_unknown_effect",
+      "learnedEffectPriorityClaimed": false
+    },
+    {
+      "sequence": 39,
+      "command": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "levelBefore": 4,
+      "completedBefore": 3,
+      "levelAfter": 4,
+      "completedAfter": 3,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "1b958240679c5c348342c78a1c4344042670e5b047e7cecf492c77790b947f07",
+      "frameHash": "db54980ae0af1365",
+      "animationFrames": 21,
+      "decisionRevision": 39,
+      "family": "public_occurrence_recall",
+      "probeMode": "probe_execute",
+      "prefixEvidenceRef": "prefix_evidence:39",
+      "operations": [
+        "OP29",
+        "OP30",
+        "OP31"
+      ],
+      "callerAcquiredTransitions": 39,
+      "graphChain": "44140b62d59a8b3007697b58c2a44cb455110dc37b2f9ebd3048c3fa9b4e29fc",
+      "graphRevision": 2138,
+      "coordinationRule": "stationary_unlearned_contact_refusal_is_local",
+      "inquiryWitnessStatus": "acquired_context_for_unknown_effect",
+      "learnedEffectPriorityClaimed": false
+    }
+  ],
+  "retainedDiscoveryJournal": {
+    "eventOrder": [
+      "native_program_control_trial",
+      "native_program_control_binding",
+      "native_program_control_trial",
+      "native_program_control_effect"
+    ],
+    "events": [
+      {
+        "actionSequence": 38,
+        "prefixEvidenceRef": "prefix_evidence:38",
+        "kind": "native_program_control_trial",
+        "mode": "probe_edit",
+        "status": "collection_insertion_measured",
+        "modelId": "program-model:8dc94d73c719cee2dff0",
+        "modelDigest": "d4fdea3f23e93114098f621da3da97b378667ee96425d561be2664aafb15db62",
+        "evidence": [
+          "sra-v6-ff6d90f9-3418-4cc4-b3f2-6c9d4974452f:epoch:4:revision:38:frame:0cc68f4612038591",
+          "sra-v6-ff6d90f9-3418-4cc4-b3f2-6c9d4974452f:epoch:4:revision:39:frame:e3d95afbdf6dab45"
+        ],
+        "eventSha256": "26b557d78da8f5f81d91569ea15270a0e9f8aa0ffe1a120d8855553be78b2403"
+      },
+      {
+        "actionSequence": 38,
+        "prefixEvidenceRef": "prefix_evidence:38",
+        "kind": "native_program_control_binding",
+        "mode": null,
+        "status": "observed_collection_insertion",
+        "modelId": "program-model:8dc94d73c719cee2dff0",
+        "modelDigest": "d4fdea3f23e93114098f621da3da97b378667ee96425d561be2664aafb15db62",
+        "evidence": [
+          "sra-v6-ff6d90f9-3418-4cc4-b3f2-6c9d4974452f:epoch:4:revision:38:frame:0cc68f4612038591",
+          "sra-v6-ff6d90f9-3418-4cc4-b3f2-6c9d4974452f:epoch:4:revision:39:frame:e3d95afbdf6dab45"
+        ],
+        "eventSha256": "2e4ed95c43971d505209219bc6825ba23a9bf569af2294cbcd9633306ee9f53c"
+      },
+      {
+        "actionSequence": 39,
+        "prefixEvidenceRef": "prefix_evidence:39",
+        "kind": "native_program_control_trial",
+        "mode": "probe_execute",
+        "status": "isolated_public_phase_measured",
+        "modelId": "program-model:8dc94d73c719cee2dff0",
+        "modelDigest": "d4fdea3f23e93114098f621da3da97b378667ee96425d561be2664aafb15db62",
+        "evidence": [
+          "sra-v6-ff6d90f9-3418-4cc4-b3f2-6c9d4974452f:epoch:4:revision:39:frame:e3d95afbdf6dab45",
+          "sra-v6-ff6d90f9-3418-4cc4-b3f2-6c9d4974452f:epoch:4:revision:40:frame:db54980ae0af1365"
+        ],
+        "eventSha256": "a18cca3b399f73f9731b01cc39f41c4a4a47bb93d48cb86e523dd4c4f1332bd2"
+      },
+      {
+        "actionSequence": 39,
+        "prefixEvidenceRef": "prefix_evidence:39",
+        "kind": "native_program_control_effect",
+        "mode": null,
+        "status": "isolated_public_phase_measured",
+        "modelId": "program-model:8dc94d73c719cee2dff0",
+        "modelDigest": "d4fdea3f23e93114098f621da3da97b378667ee96425d561be2664aafb15db62",
+        "evidence": [
+          "sra-v6-ff6d90f9-3418-4cc4-b3f2-6c9d4974452f:epoch:4:revision:39:frame:e3d95afbdf6dab45",
+          "sra-v6-ff6d90f9-3418-4cc4-b3f2-6c9d4974452f:epoch:4:revision:40:frame:db54980ae0af1365"
+        ],
+        "eventSha256": "17c1d5d3df23b1fa4eb793a1b2816054c50ae6e22e6194643f7ffd39e1eb4d44"
+      }
+    ],
+    "countsBeforeAction38": {
+      "trialCount": 0,
+      "bindingCount": 0,
+      "effectCount": 0
+    },
+    "countsAfterAction38": {
+      "trialCount": 1,
+      "bindingCount": 1,
+      "effectCount": 0
+    },
+    "countsAfterAction39": {
+      "trialCount": 2,
+      "bindingCount": 1,
+      "effectCount": 1
+    },
+    "sharedEventCountDeltas": [
+      2,
+      2
+    ],
+    "bindingReusedUnchangedForExecution": true,
+    "qualification": "Les compteurs et derniers événements sont extraits par la campagne des nœuds acquis du Kernel ; leur chronologie est recoupée avec les commandes et retours publics."
+  },
+  "measuredInsertion": {
+    "actionSequence": 38,
+    "bindingId": "program-control-binding:155922aedae326035d8f693b",
+    "controlBbox": [
+      52,
+      54,
+      60,
+      58
+    ],
+    "controlPatchSha256": "1b0887658792d992eae20c062f152e52a1120d1758e3b04e51c8e9e6a09480e7",
+    "controlPalette": [
+      0,
+      3,
+      7
+    ],
+    "unavailableOldControlLabels": [
+      8
+    ],
+    "knownOperatorLabelsBeforeProbe": [
+      8,
+      9,
+      10,
+      11,
+      14
+    ],
+    "memberGeometry": {
+      "x": 1,
+      "width": 8,
+      "height": 5,
+      "limit": 54
+    },
+    "membersBeforeIndependentlyMeasured": [
+      {
+        "area": 40,
+        "bbox": [
+          1,
+          48,
+          8,
+          52
+        ],
+        "color": 9
+      }
+    ],
+    "membersAfterIndependentlyMeasured": [
+      {
+        "area": 40,
+        "bbox": [
+          1,
+          42,
+          8,
+          46
+        ],
+        "color": 7
+      },
+      {
+        "area": 40,
+        "bbox": [
+          1,
+          48,
+          8,
+          52
+        ],
+        "color": 9
+      }
+    ],
+    "wordBefore": [
+      9
+    ],
+    "wordAfter": [
+      7,
+      9
+    ],
+    "uniqueInsertionIndex": 0,
+    "labelMeasuredFromAddedMember": 7,
+    "auditLabelMeasurementUsedGlyphPalette": false,
+    "ownerBefore": {
+      "anchor": [
+        30,
+        21
+      ],
+      "base": [
+        30,
+        22
+      ],
+      "binding": "measured_extruded_public_color_word",
+      "word": [
+        9
+      ]
+    },
+    "ownerAfter": {
+      "anchor": [
+        30,
+        20
+      ],
+      "base": [
+        30,
+        22
+      ],
+      "binding": "measured_extruded_public_color_word",
+      "word": [
+        7,
+        9
+      ]
+    },
+    "sameReportedOwnerBase": true,
+    "operatorStatus": "unknown",
+    "qualification": "L’étiquette 7 est obtenue en comparant les rectangles visibles avant/après et en isolant l’unique ajout. Sa présence dans la palette du glyphe ne sert pas à cette mesure. Aucun remplacement sémantique de l’étiquette 8 par 7 n’est établi."
+  },
+  "executionMeasurement": {
+    "actionSequence": 39,
+    "command": {
+      "action_ref": "ACTION5",
+      "data": {}
+    },
+    "packetFrameCount": 21,
+    "alignmentStatus": "phase_aligned_candidates",
+    "status": "isolated_public_phase_measured",
+    "orderedPhaseLabels": [
+      9,
+      7
+    ],
+    "isolatedNewMemberPhaseCount": 1,
+    "phases": [
+      {
+        "label": 9,
+        "memberIndex": 1,
+        "newControlLabel": false,
+        "packetFrameIndicesZeroBased": [
+          1,
+          4
+        ],
+        "endpointFrameSha256": [
+          "b69016a9bdb1504ba9455de83baec9ad5de32c855ef3c084ae282f22982e88f5",
+          "2f6a2ea0a338cac453695337db93ead4e4e6e00d57fd5c2eb1560634a0209d26"
+        ],
+        "translations": [
+          {
+            "after_base": [
+              34,
+              20
+            ],
+            "before_base": [
+              30,
+              22
+            ],
+            "status": "unique_public_word_correspondence",
+            "vector": [
+              4,
+              -2
+            ],
+            "word": [
+              7,
+              9
+            ],
+            "rasterBeforeBbox": [
+              30,
+              20,
+              32,
+              23
+            ],
+            "rasterAfterBbox": [
+              34,
+              18,
+              36,
+              21
+            ],
+            "rasterArea": 8,
+            "coloredMaskSha256": "45c1f92566d0018394008d27d210c32194e2d1b8e03aca07574017010f3b271f",
+            "exactColoredShapePreserved": true,
+            "uniqueAppearanceCorrespondenceAtBothEndpoints": true
+          }
+        ],
+        "preservedObjects": [
+          {
+            "word": [
+              8,
+              8,
+              8
+            ],
+            "reportedBase": [
+              38,
+              22
+            ],
+            "rasterBbox": [
+              38,
+              19,
+              40,
+              23
+            ],
+            "rasterArea": 11,
+            "coloredMaskSha256": "b1c09c742e9df07d83360944b35ff51786b2f55f36976e77087b16eeb1fff26b",
+            "samePixelsAtSamePosition": true
+          }
+        ],
+        "unmatchedBeforeCount": 0,
+        "unmatchedAfterCount": 0,
+        "wordChangeCount": 0
+      },
+      {
+        "label": 7,
+        "memberIndex": 0,
+        "newControlLabel": true,
+        "packetFrameIndicesZeroBased": [
+          4,
+          8
+        ],
+        "endpointFrameSha256": [
+          "2f6a2ea0a338cac453695337db93ead4e4e6e00d57fd5c2eb1560634a0209d26",
+          "f7cc07732f02b07ac1f3d93b979a872307fec70aa4011381dcfddd5fcfa87951"
+        ],
+        "translations": [
+          {
+            "after_base": [
+              42,
+              24
+            ],
+            "before_base": [
+              38,
+              22
+            ],
+            "status": "unique_public_word_correspondence",
+            "vector": [
+              4,
+              2
+            ],
+            "word": [
+              8,
+              8,
+              8
+            ],
+            "rasterBeforeBbox": [
+              38,
+              19,
+              40,
+              23
+            ],
+            "rasterAfterBbox": [
+              42,
+              21,
+              44,
+              25
+            ],
+            "rasterArea": 11,
+            "coloredMaskSha256": "b1c09c742e9df07d83360944b35ff51786b2f55f36976e77087b16eeb1fff26b",
+            "exactColoredShapePreserved": true,
+            "uniqueAppearanceCorrespondenceAtBothEndpoints": true
+          }
+        ],
+        "preservedObjects": [
+          {
+            "word": [
+              7,
+              9
+            ],
+            "reportedBase": [
+              34,
+              20
+            ],
+            "rasterBbox": [
+              34,
+              18,
+              36,
+              21
+            ],
+            "rasterArea": 8,
+            "coloredMaskSha256": "45c1f92566d0018394008d27d210c32194e2d1b8e03aca07574017010f3b271f",
+            "samePixelsAtSamePosition": true
+          }
+        ],
+        "unmatchedBeforeCount": 0,
+        "unmatchedAfterCount": 0,
+        "wordChangeCount": 0
+      }
+    ],
+    "otherPublicDisplayChangesPresent": true,
+    "officialProgress": false,
+    "operatorModelCreated": false,
+    "qualification": "Les champs packetFrameIndicesZeroBased désignent les positions du paquet de 21 images à partir de zéro ; reportedPhaseExclusionMarker conserve la convention du rapport source. Les translations sont revérifiées par composantes connexes de pixels et égalité exacte des masques colorés, indépendamment des fonctions du projet. Les mots, bases et attributions de phase restent les interprétations conditionnelles acquises indiquées dans le rapport. Les autres changements publics ne sont pas occultés ; la réécriture finale de collection est exclue de l’attribution de phase.",
+    "reportedPhaseExclusionMarker": 21
+  },
+  "retainedModelBoundary": {
+    "programModelSummariesUnchangedAcrossBothProbes": true,
+    "programModelId": "program-model:8dc94d73c719cee2dff0",
+    "programModelDigestUsedByAllFourEvents": "d4fdea3f23e93114098f621da3da97b378667ee96425d561be2664aafb15db62",
+    "programRefutedEpochsBeforeAndAfter": [],
+    "programPhaseAlignmentCountBeforeAndAfter": 2,
+    "programReconciliationCountBeforeAndAfter": 31,
+    "newOperatorLawPromoted": false,
+    "movementReductionRepetitionTerminalOrInterchangeabilityLawClaimed": false,
+    "qualification": "Une insertion observée et une phase isolée ne constituent pas une loi générale. La causalité complète, les conditions du déplacement, les autres configurations et le rôle terminal restent inconnus."
+  },
+  "conclusion": "STCK conserve ses trois premiers niveaux réussis en 3, 7 et 25 actions. Deux actions réelles supplémentaires acquièrent l’étiquette ajoutée puis une phase isolée : l’apparence [8,8,8] se déplace de [4,2] tandis que le porteur [7,9] reste en place pendant cette phase. Aucun opérateur général n’est promu ; le niveau 4 reste non réussi et l’agent s’arrête à frontier_unknown après 39 actions.",
+  "nextEvidenceNeeded": "Obtenir un contraste public indépendant qui distingue les conditions et la cible de l’effet avant toute intégration de cette nouvelle opération à la recherche de programmes."
+}

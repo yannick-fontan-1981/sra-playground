@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.lot8b.functional-command.v1",
+  "key": "branch-capture",
+  "attempt": "branch-capture-02",
+  "plan": {
+    "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/branch-execution-plan-02.json",
+    "bytes": 70213,
+    "sha256": "0d5a16b191c0bf40b76ad59bf5bb3ed76341fdff20ae0404b6c60b64851aa976"
+  },
+  "command": [
+    "node",
+    "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs",
+    "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/candidate-native.json",
+    "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-02/capture.jsonl.gz"
+  ],
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T05:24:24.710356+00:00",
+  "timeoutSeconds": 300,
+  "headBefore": "4d84045a6e485c412c0114de75edd216c329a90b",
+  "globalLockAcquired": false,
+  "officialPerformanceMeasurement": false,
+  "gameEngineExecuted": false,
+  "published": false,
+  "status": "running"
+}

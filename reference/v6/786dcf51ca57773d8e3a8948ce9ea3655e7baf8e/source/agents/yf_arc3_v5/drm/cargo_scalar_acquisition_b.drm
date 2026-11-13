@@ -1,0 +1,332 @@
+{
+  "module_id": "cargo_scalar_acquisition_b",
+  "declarations": [
+    {
+      "id": "policy.b_cargo_scalar_acquisition",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_only_unique_complete_actual_source_symbol_match_supports_a_field"
+      ],
+      "declared_alternative_refs": [
+        "cargo_scalar.unique",
+        "cargo_scalar.unique_owner",
+        "cargo_scalar.unresolved"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "cargo_scalar.unique": "rule.b_acquired_cargo_scalar_field",
+        "cargo_scalar.unique_owner": "rule.b_acquired_cargo_scalar_owner_field"
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_scalar.unique",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_scalar.unique"
+            },
+            {
+              "field": "scalar_unique_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "scalar_owner_scope_bound",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "CURRENT_OBSERVED_FIELD",
+            "reason_ref": "reason_only_unique_complete_actual_source_symbol_match_supports_a_field",
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_scalar.unique_owner",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_scalar.unique_owner"
+            },
+            {
+              "field": "scalar_unique_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "scalar_owner_scope_bound",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "CURRENT_OBSERVED_FIELD",
+            "reason_ref": "reason_only_unique_complete_actual_source_symbol_match_supports_a_field",
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_scalar.unresolved",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_scalar.unresolved"
+            },
+            {
+              "field": "scalar_unique_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_status": "NEEDS_EVIDENCE_OR_RETAINED_ALTERNATIVES",
+            "reason_ref": "reason_only_unique_complete_actual_source_symbol_match_supports_a_field",
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_acquired_cargo_scalar_field",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "actual_acquisition_and_current_source_pixel_method",
+        "complete_unique_semantic_value_domain"
+      ],
+      "applicability": [
+        "observed_scalar_field"
+      ],
+      "invariants": [
+        "no_first_case_selection_under_ambiguity",
+        "no_unique_result_from_a_partial_case_prefix",
+        "pixel_meaning_is_source_owned"
+      ],
+      "falsifiers": [
+        "method_scope_stale_or_pixels_changed",
+        "additional_compatible_semantic_value"
+      ],
+      "reason_refs": [
+        "reason_only_unique_complete_actual_source_symbol_match_supports_a_field"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Acquired Source decoded field",
+          "required_fields": [
+            "output_term_ref",
+            "field_ref",
+            "method_claim_ref"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "acquired_observation",
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "value": "decoded_value",
+            "field_ref": "field_ref",
+            "raster_digest": "raster_digest",
+            "method_claim_ref": "method_claim_ref",
+            "method_claim_digest": "method_claim_digest",
+            "matching_case_indices": "matching_case_indices",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "raw_input_ref": "raw_input_ref",
+            "timeline_ref": "timeline_ref",
+            "level_scope_ref": "level_scope_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_support_claim_ref}",
+          "predicate": "observed_native_state_field_supported",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{observation_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "output_support_claim_ref",
+            "output_term_ref",
+            "observation_record_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "level_scope_ref": "level_scope_ref",
+            "current_frame_ref": "frame_ref"
+          },
+          "attribute_bindings": {
+            "field_ref": "field_ref",
+            "raster_digest": "raster_digest",
+            "method_claim_ref": "method_claim_ref",
+            "method_claim_digest": "method_claim_digest",
+            "matching_case_indices": "matching_case_indices",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "raw_input_ref": "raw_input_ref",
+            "timeline_ref": "timeline_ref",
+            "level_scope_ref": "level_scope_ref"
+          },
+          "static_attributes": {
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_acquired_cargo_scalar_owner_field",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "actual_acquisition_and_current_source_pixel_method",
+        "complete_unique_semantic_value_domain"
+      ],
+      "applicability": [
+        "observed_scalar_field"
+      ],
+      "invariants": [
+        "no_first_case_selection_under_ambiguity",
+        "no_unique_result_from_a_partial_case_prefix",
+        "pixel_meaning_is_source_owned"
+      ],
+      "falsifiers": [
+        "method_scope_stale_or_pixels_changed",
+        "additional_compatible_semantic_value"
+      ],
+      "reason_refs": [
+        "reason_only_unique_complete_actual_source_symbol_match_supports_a_field"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Acquired Source decoded field",
+          "required_fields": [
+            "output_term_ref",
+            "field_ref",
+            "method_claim_ref"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "acquired_observation",
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "value": "decoded_value",
+            "field_ref": "field_ref",
+            "raster_digest": "raster_digest",
+            "method_claim_ref": "method_claim_ref",
+            "method_claim_digest": "method_claim_digest",
+            "matching_case_indices": "matching_case_indices",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "raw_input_ref": "raw_input_ref",
+            "timeline_ref": "timeline_ref",
+            "level_scope_ref": "level_scope_ref",
+            "owner_scope_term_ref": "owner_scope_term_ref",
+            "owner_scope_support_claim_ref": "owner_scope_support_claim_ref",
+            "principal_goal_support_claim_ref": "principal_goal_support_claim_ref",
+            "owner_scope_digest": "owner_scope_digest"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_support_claim_ref}",
+          "predicate": "observed_native_state_field_supported",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{observation_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "output_support_claim_ref",
+            "output_term_ref",
+            "observation_record_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "level_scope_ref": "level_scope_ref",
+            "current_frame_ref": "frame_ref",
+            "caller_ref": "caller_ref",
+            "parent_consumer_ref": "parent_consumer_ref",
+            "parent_contribution_ref": "parent_contribution_ref",
+            "caller_next_item_ref": "caller_next_item_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "model_status_ref": "model_status_ref",
+            "event_owner_ref": "event_owner_ref",
+            "input_domain_complete": "input_domain_complete",
+            "assumption_refs": "assumption_refs",
+            "episode_ref": "episode_ref"
+          },
+          "attribute_bindings": {
+            "field_ref": "field_ref",
+            "raster_digest": "raster_digest",
+            "method_claim_ref": "method_claim_ref",
+            "method_claim_digest": "method_claim_digest",
+            "matching_case_indices": "matching_case_indices",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "raw_input_ref": "raw_input_ref",
+            "timeline_ref": "timeline_ref",
+            "level_scope_ref": "level_scope_ref",
+            "owner_scope_term_ref": "owner_scope_term_ref",
+            "owner_scope_support_claim_ref": "owner_scope_support_claim_ref",
+            "principal_goal_support_claim_ref": "principal_goal_support_claim_ref",
+            "owner_scope_digest": "owner_scope_digest"
+          },
+          "static_attributes": {
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    }
+  ]
+}

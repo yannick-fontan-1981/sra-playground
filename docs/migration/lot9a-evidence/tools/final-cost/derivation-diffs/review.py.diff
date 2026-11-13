@@ -1,0 +1,39 @@
+--- docs/migration/lot8b-evidence/tools/final-cost/review.py
++++ docs/migration/lot9a-evidence/tools/final-cost/review.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""Independent standard-library review of the Lot8B supplementary cost result.
++"""Independent standard-library review of the Lot9A supplementary cost result.
+ 
+ Usage: python -B review.py CONTRACT ANALYSIS NEW_OUTPUT
+ No JavaScript import, native execution, benchmark, lock or evidence mutation.
+@@ -167,17 +167,17 @@
+                           parse_constant=lambda v: (_ for _ in ()).throw(ValueError('Non-finite JSON: ' + v))), record
+ 
+     output = (ROOT / args.output).absolute()
+-    require(output.is_relative_to(ROOT / 'docs/migration/lot8b-evidence') and not output.exists(), 'New evidence output required')
++    require(output.is_relative_to(ROOT / 'docs/migration/lot9a-evidence') and not output.exists(), 'New evidence output required')
+     contract, contract_fp = read(args.contract)
+     baseline = Path(contract['baseline']['checkout']).resolve(strict=True)
+-    require(contract['schema'] == 'logos-engine.lot8b-final-cost-contract.v1'
++    require(contract['schema'] == 'logos-engine.lot9a-final-cost-contract.v1'
+             and contract['status'] == 'declared_before_official_window', 'Invalid prospective contract')
+     require(Path(contract['candidate']['checkout']).resolve() == ROOT, 'Candidate checkout differs')
+     require(contract['supplementaryTools']['reviewer'] == fp(Path(__file__)), 'Reviewer was not prospectively pinned')
+     for record in contract['inputFingerprints']:
+         verify(record)
+     analysis, analysis_fp = read(args.analysis)
+-    require(analysis['schema'] == 'logos-engine.lot8b-final-cost-analysis.v1' and analysis['status'] == 'analysis_passed', 'Invalid analysis')
++    require(analysis['schema'] == 'logos-engine.lot9a-final-cost-analysis.v1' and analysis['status'] == 'analysis_passed', 'Invalid analysis')
+     require(analysis['contract'] == contract_fp and analysis['nativeDigests'] == contract['nativeDigests'], 'Analysis contract/source mismatch')
+     require(analysis['generator'] == contract['supplementaryTools']['analyzer'], 'Analyzer was not prospectively pinned')
+     for record in analysis['inputFingerprints']:
+@@ -325,7 +325,7 @@
+         equal(analysis[key], value)
+     for record in list(watched.values()):
+         verify(record)
+-    result = {'schema': 'logos-engine.lot8b-final-cost-independent-review.v1', 'status': 'review_passed',
++    result = {'schema': 'logos-engine.lot9a-final-cost-independent-review.v1', 'status': 'review_passed',
+         'recordedAt': datetime.now(timezone.utc).isoformat(), 'generator': fp(Path(__file__)),
+         'contract': contract_fp, 'analysis': analysis_fp, 'nativeDigests': contract['nativeDigests'],
+         'checked': {'trials': 40, 'measuredSessions': 32, 'measuredActions': 400, 'warmups': 8, 'warmupActions': 24,

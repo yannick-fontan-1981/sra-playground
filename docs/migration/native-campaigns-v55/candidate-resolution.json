@@ -1,0 +1,184 @@
+{
+  "schema": "logos-engine.bounded-game-candidate-resolution.v1",
+  "observedAt": "2026-11-09T13:26:05.595303+00:00",
+  "originalSelection": {
+    "path": "docs/migration/native-campaigns-v55/candidate-selection.json",
+    "sha256": "62ca6d4676cac0c006795050ddf17f22e80b9d05d3bea7a561a47825fe57c56f",
+    "bytes": 3652
+  },
+  "maximumBlockedWallMinutesPerCandidate": 40,
+  "deliveredGame": "AS66",
+  "runs": [
+    {
+      "game": "AS66",
+      "selectedAt": "2026-11-09T13:09:49.237518+00:00",
+      "originalBlockedDeadline": "2026-11-09T13:49:49.237518+00:00",
+      "finalExecutionStartedAt": "2026-11-09T13:23:54.785939+00:00",
+      "finalExecutionFinishedAt": "2026-11-09T13:24:19.932846+00:00",
+      "candidateClosedAt": "2026-11-09T13:24:19.932846+00:00",
+      "closedBeforeOriginalDeadline": true,
+      "selectedToFinalFinishSeconds": 870.695328,
+      "finalStatus": "passed",
+      "result": {
+        "actions": 19,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 18.170672012999997,
+        "prefixes": 11,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 19,
+          "boundaryReplays": 2,
+          "goalEvents": 9,
+          "frontierDeltas": 43,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 12
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 16
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 12
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 8
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 1
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 16
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology",
+            "attention_parent_return",
+            "acquire_control_for_target"
+          ],
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 19,
+          "resume": 10
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.29.0"
+      },
+      "providers": {
+        "observed_frontier": 4,
+        "sliding_cavity": 7
+      },
+      "execution": {
+        "path": "docs/migration/native-campaigns-v55/final/execution-as66.json",
+        "sha256": "7c954e17b9c55f3f9c4b75c18649ece298ecae45b6312c520c3072f9cee00c71",
+        "bytes": 54519
+      }
+    },
+    {
+      "game": "CASC",
+      "selectedAt": "2026-11-09T13:12:45.455277+00:00",
+      "originalBlockedDeadline": "2026-11-09T13:52:45.455277+00:00",
+      "finalExecutionStartedAt": "2026-11-09T13:22:48.645312+00:00",
+      "finalExecutionFinishedAt": "2026-11-09T13:22:56.403713+00:00",
+      "candidateClosedAt": "2026-11-09T13:22:56.403713+00:00",
+      "closedBeforeOriginalDeadline": true,
+      "selectedToFinalFinishSeconds": 610.948436,
+      "finalStatus": "failed",
+      "result": {
+        "actions": 1,
+        "levelsCompleted": 0,
+        "level": 1,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "frontier_unknown",
+        "activeSeconds": 2.7624362870000003,
+        "prefixes": 1,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 1,
+          "boundaryReplays": 0,
+          "goalEvents": 0,
+          "frontierDeltas": 3,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 2
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 2
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 2
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 2
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 1
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 3
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology",
+            "attention_parent_return",
+            "acquire_control_for_target"
+          ],
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 1,
+          "resume": 1
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.29.0"
+      },
+      "providers": {
+        "animated_contact": 1
+      },
+      "execution": {
+        "path": "docs/migration/native-campaigns-v55/final/execution-casc.json",
+        "sha256": "cb28f95da24c6e6ca92ea768ea51b66eca8d60df28fbfd24311aafd4e5921b7c",
+        "bytes": 54515
+      }
+    }
+  ],
+  "decision": "AS66 confirms the three-level target on the frozen integrated source. CASC reproduces its one-action frontier_unknown because current directional control remains unacquired; no further attempt is made. Original selection clocks are preserved.",
+  "qualification": "The original selection ledger and byte-identical baseline relocation evidence remain unchanged; this receipt closes the later integrated runs."
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "logos-engine.native-cost-static-review-development-incident.v1",
+  "recordedAt": "2026-11-10T13:53:44.245967+00:00",
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot3f-evidence/check-cost-static-inputs.py"
+  ],
+  "exitCode": 1,
+  "error": "FileNotFoundError while opening /workspace/sites/sra-published-046/docs/migration/lot3f-evidence/performance/protocol.md for exclusive output",
+  "cause": "The newly adapted checker reused destination for a baseline-input inspection and for its output receipt. The final receipt path therefore shadowed the intended local output.",
+  "correction": "Use a separate output_path for the static-preflight receipt, preserving the inspected baseline paths.",
+  "initialGenerator": {
+    "path": "docs/migration/lot3f-evidence/diagnostic/check-cost-static-inputs-initial-path-shadow.py",
+    "bytes": 13108,
+    "sha256": "8013b004abf900e041929edab2c739ea3a6bb9c05a9b0923e1c36191c99ce608"
+  },
+  "candidateNativeSourcesChanged": false,
+  "baselineChanged": false,
+  "measurementExecuted": false,
+  "readinessCreated": false,
+  "qualification": "Local checker development failure before its receipt could be written. No measured session or official-window output existed or was replaced."
+}

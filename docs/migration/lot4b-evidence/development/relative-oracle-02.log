@@ -1,0 +1,97 @@
+{
+  "file": "/workspace/sites/sra-lot4a-20261110/.sites-checkout/tests/fixtures/v6-relative-arrangements-reference.json.gz",
+  "bytes": 1099570,
+  "sourceFiles": 724,
+  "initial": 16,
+  "planner": 28,
+  "sessions": [
+    {
+      "id": "selected_displacement",
+      "steps": 7,
+      "events": [
+        "selection_observed",
+        "single_object_and_actuator_displacement",
+        "single_object_and_actuator_displacement",
+        "selection_observed",
+        "single_object_and_actuator_displacement",
+        "selection_observed",
+        null
+      ]
+    },
+    {
+      "id": "failed_trial",
+      "steps": 4,
+      "events": [
+        "selection_observed",
+        "no_arrangement_change",
+        "no_arrangement_change",
+        null
+      ]
+    },
+    {
+      "id": "official_boundary",
+      "steps": 3,
+      "events": [
+        "selection_observed",
+        "official_boundary",
+        null
+      ]
+    },
+    {
+      "id": "discriminating-return-unit",
+      "steps": 3,
+      "events": [
+        "selection_observed",
+        "single_object_and_actuator_displacement",
+        null
+      ]
+    },
+    {
+      "id": "discriminating-return-opposite",
+      "steps": 3,
+      "events": [
+        "selection_observed",
+        "single_object_and_actuator_displacement",
+        null
+      ]
+    }
+  ],
+  "records": [
+    {
+      "id": "single-selected-object-and-one-actuator",
+      "status": "single_object_and_actuator_displacement"
+    },
+    {
+      "id": "no-effect-excludes-current-trial",
+      "status": "no_arrangement_change"
+    },
+    {
+      "id": "multiple-participants-move",
+      "status": "ambiguous_multi_object_change"
+    },
+    {
+      "id": "moved-participant-no-longer-selected",
+      "status": "selected_identity_unbound"
+    },
+    {
+      "id": "another-participant-selected",
+      "status": "selected_identity_unbound"
+    },
+    {
+      "id": "movement-without-actuator-marker-change",
+      "status": "actuator_change_ambiguous"
+    },
+    {
+      "id": "actuator-layout-disappeared",
+      "status": "scope_unbound"
+    },
+    {
+      "id": "epoch-changed-without-completion",
+      "status": "scope_unbound"
+    },
+    {
+      "id": "official-boundary-retains-events-resets-epoch-models",
+      "status": "official_boundary"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schema": "logos-engine.lot4b.published-predecessor-integration.v1",
+  "verifiedAt": "2026-11-10T22:13:32.104372+00:00",
+  "status": "verified",
+  "publishedSiteVersion": 84,
+  "publishedCommit": "51e2813dedb2d71001290f94f100605e0327ead3",
+  "baselineCheckout": "/workspace/sites/sra-lot4b-baseline-5a-20261110",
+  "baselineNativeVersion": "0.53.0",
+  "baselineNativeDigest": "d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f",
+  "baselineNativeFiles": 283,
+  "candidateVersionAssigned": "0.54.0",
+  "integrationHeadBeforeVersionCommit": "64e024f5a6c2faf42205dc39fe4b35a6cecbcc9f",
+  "inputs": {
+    "source-manifest.json": {
+      "path": "docs/migration/lot4b-evidence/integrated-baseline/source-manifest.json",
+      "bytes": 33584,
+      "sha256": "631951d71c675e5c29f712e92724f17e446915807570581c049357bb97bf46b3",
+      "publishedPath": "docs/migration/lot5a-evidence/final/source-manifest.json"
+    },
+    "published-tests.json": {
+      "path": "docs/migration/lot4b-evidence/integrated-baseline/published-tests.json",
+      "bytes": 122235,
+      "sha256": "b214a95000c34933cceb10ab1aa395ed1116d86da94f3e5df475ad018ddd6cd7",
+      "publishedPath": "docs/migration/lot5a-evidence/final/test-expectation-correction/validation/delta-tests-run.json"
+    }
+  },
+  "publishedCommitIsAncestor": true,
+  "rejectedUnpublishedOversizedTargetIsAncestor": false,
+  "qualification": "Exact published test receipt and native manifest bytes copied from terminal Site84. Baseline checkout is at that commit and native files are clean and match all283hashes. Final4Bvalidation follows its new0.54freeze."
+}

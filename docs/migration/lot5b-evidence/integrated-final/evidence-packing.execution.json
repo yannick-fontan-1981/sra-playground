@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "scripts/evidence-byte-parts.py",
+    "pack",
+    "docs/migration/lot5b-evidence/integrated-final"
+  ],
+  "startedAt": "2026-11-11T02:12:16.526131+00:00",
+  "finishedAt": "2026-11-11T02:12:17.379830+00:00",
+  "exitCode": 0
+}

@@ -1,0 +1,520 @@
+{
+  "schema": "logos-engine.native-performance-evidence-index.v1",
+  "recordedAt": "2026-11-09T21:50:37.288297+00:00",
+  "status": "passed",
+  "lotClosure": "closed_within_declared_scope",
+  "nativeSourceDigest": "ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b",
+  "baselineNativeSourceDigest": "17252e294212a1563b75037a0b0dd782c2ecbc8cc4e1997a4f2bb2103bdf4e8b",
+  "budget": {
+    "relativeBudget": 0.1,
+    "applicableMedianMetrics": 16,
+    "withinObservedBudget": 16,
+    "unresolved": []
+  },
+  "measuredSessionsPerVersion": 9,
+  "measuredActionsPerVersion": 222,
+  "warmupSessionsPerVersion": 3,
+  "warmupActionsPerVersion": 9,
+  "harnessInputsMatched": true,
+  "environmentMatched": true,
+  "replayWorkMatched": true,
+  "metrics": [
+    {
+      "case": "STCK",
+      "stage": "session_elapsed",
+      "before": {
+        "count": 3,
+        "medianMs": 12999.339684999999,
+        "p95Ms": null,
+        "minMs": 12446.955023000002,
+        "maxMs": 13204.971812000003
+      },
+      "after": {
+        "count": 3,
+        "medianMs": 11483.395462,
+        "p95Ms": null,
+        "minMs": 11277.098076000002,
+        "maxMs": 12076.028235
+      },
+      "medianRelativeIncrease": -0.11661701745891406,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.0583119456347987,
+        "afterRelativeRange": 0.06957264178907346
+      },
+      "budgetApplies": true,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "STCK",
+      "stage": "new_decision",
+      "before": {
+        "count": 18,
+        "medianMs": 328.13571150000007,
+        "p95Ms": null,
+        "minMs": 234.12344400000075,
+        "maxMs": 576.824101000002
+      },
+      "after": {
+        "count": 18,
+        "medianMs": 289.4843825000007,
+        "p95Ms": null,
+        "minMs": 213.30957399999897,
+        "maxMs": 483.43153300000085
+      },
+      "medianRelativeIncrease": -0.11779068124988079,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.2468657351065866,
+        "afterRelativeRange": 0.24893747938198102
+      },
+      "budgetApplies": true,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "STCK",
+      "stage": "known_prefix_service",
+      "before": {
+        "count": 12,
+        "medianMs": 21.729949000000488,
+        "p95Ms": null,
+        "minMs": 19.981306000001496,
+        "maxMs": 29.145393999999214
+      },
+      "after": {
+        "count": 12,
+        "medianMs": 12.99988200000007,
+        "p95Ms": null,
+        "minMs": 8.06815700000152,
+        "maxMs": 24.26571899999908
+      },
+      "medianRelativeIncrease": -0.4017527606714687,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.309442695884785,
+        "afterRelativeRange": 0.5673757935202961
+      },
+      "budgetApplies": true,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "STCK",
+      "stage": "known_prefix_request",
+      "before": {
+        "count": 12,
+        "medianMs": 23.842476999999235,
+        "p95Ms": null,
+        "minMs": 22.025281000000177,
+        "maxMs": 31.73902000000089
+      },
+      "after": {
+        "count": 12,
+        "medianMs": 15.17713300000014,
+        "p95Ms": null,
+        "minMs": 9.847218999995675,
+        "maxMs": 27.127822999998898
+      },
+      "medianRelativeIncrease": -0.363441432700108,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.2990496541109773,
+        "afterRelativeRange": 0.5195651768599168
+      },
+      "budgetApplies": true,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "STCK",
+      "stage": "known_prefix_guard",
+      "before": {
+        "count": 12,
+        "medianMs": 0.27198000000134925,
+        "p95Ms": null,
+        "minMs": 0.13638299999729497,
+        "maxMs": 0.45281099999920116
+      },
+      "after": {
+        "count": 12,
+        "medianMs": 0.187737999998717,
+        "p95Ms": null,
+        "minMs": 0.09371900000041933,
+        "maxMs": 0.41746899999998277
+      },
+      "medianRelativeIncrease": -0.30973601000887696,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.4286436502723098,
+        "afterRelativeRange": 0.8608246599330017
+      },
+      "budgetApplies": true,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "STCK",
+      "stage": "acquisition_and_persistence",
+      "before": {
+        "count": 18,
+        "medianMs": 1130.4284909999992,
+        "p95Ms": null,
+        "minMs": 480.9211379999997,
+        "maxMs": 4806.287851000001
+      },
+      "after": {
+        "count": 18,
+        "medianMs": 947.9642050000002,
+        "p95Ms": null,
+        "minMs": 439.20118300000104,
+        "maxMs": 4339.688104000001
+      },
+      "medianRelativeIncrease": -0.1614116128996249,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.08461967935924943,
+        "afterRelativeRange": 0.0805773705275648
+      },
+      "budgetApplies": true,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "STCK",
+      "stage": "persistence",
+      "before": {
+        "count": 39,
+        "medianMs": 197.50189600000158,
+        "p95Ms": 404.7485239999951,
+        "minMs": 15.793499999999767,
+        "maxMs": 469.5821270000015
+      },
+      "after": {
+        "count": 39,
+        "medianMs": 182.12368199999764,
+        "p95Ms": 426.36084299999857,
+        "minMs": 14.77704299999823,
+        "maxMs": 499.6251709999997
+      },
+      "medianRelativeIncrease": -0.07786362719274253,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.23141147159890915,
+        "afterRelativeRange": 0.18088215457890372
+      },
+      "budgetApplies": true,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "STCK",
+      "stage": "restoration",
+      "before": {
+        "count": 36,
+        "medianMs": 14.549810000000434,
+        "p95Ms": 82.22795899999619,
+        "minMs": 2.0275780000010855,
+        "maxMs": 89.1008780000011
+      },
+      "after": {
+        "count": 36,
+        "medianMs": 10.508797999999842,
+        "p95Ms": 84.97032599999511,
+        "minMs": 1.6431420000008075,
+        "maxMs": 93.83127699999932
+      },
+      "medianRelativeIncrease": -0.27773641030367213,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.3446946719806057,
+        "afterRelativeRange": 0.2761599368681391
+      },
+      "budgetApplies": true,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "SMLP",
+      "stage": "session_elapsed",
+      "before": {
+        "count": 3,
+        "medianMs": 26070.602017000005,
+        "p95Ms": null,
+        "minMs": 26016.835663999984,
+        "maxMs": 28335.294748
+      },
+      "after": {
+        "count": 3,
+        "medianMs": 25813.489490000007,
+        "p95Ms": null,
+        "minMs": 25569.603529000015,
+        "maxMs": 25993.863479000007
+      },
+      "medianRelativeIncrease": -0.009862163015351144,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.08893001713148802,
+        "afterRelativeRange": 0.01643559078536624
+      },
+      "budgetApplies": true,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "SMLP",
+      "stage": "new_decision",
+      "before": {
+        "count": 27,
+        "medianMs": 521.8536040000035,
+        "p95Ms": 3282.3133450000023,
+        "minMs": 221.34333000000333,
+        "maxMs": 3328.6351110000032
+      },
+      "after": {
+        "count": 27,
+        "medianMs": 508.5258920000051,
+        "p95Ms": 3331.3296850000042,
+        "minMs": 216.0872459999955,
+        "maxMs": 3701.475151000006
+      },
+      "medianRelativeIncrease": -0.025539177841911287,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.19918013444535845,
+        "afterRelativeRange": 0.17717875022182514
+      },
+      "budgetApplies": true,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "SMLP",
+      "stage": "known_prefix_service",
+      "before": {
+        "count": 18,
+        "medianMs": 25.89211449999857,
+        "p95Ms": null,
+        "minMs": 17.182743999990635,
+        "maxMs": 35.81078400000115
+      },
+      "after": {
+        "count": 18,
+        "medianMs": 11.18270699999266,
+        "p95Ms": null,
+        "minMs": 9.062379000002693,
+        "maxMs": 17.87301500000467
+      },
+      "medianRelativeIncrease": -0.5681037560685405,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.14475641988635812,
+        "afterRelativeRange": 0.10248104694718083
+      },
+      "budgetApplies": true,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "SMLP",
+      "stage": "known_prefix_request",
+      "before": {
+        "count": 18,
+        "medianMs": 28.64464049999515,
+        "p95Ms": null,
+        "minMs": 19.1986739999993,
+        "maxMs": 38.617935000002035
+      },
+      "after": {
+        "count": 18,
+        "medianMs": 13.400674499993329,
+        "p95Ms": null,
+        "minMs": 10.931526000000304,
+        "maxMs": 20.98556600000302
+      },
+      "medianRelativeIncrease": -0.5321751550697381,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.15454365236014045,
+        "afterRelativeRange": 0.07767049042513809
+      },
+      "budgetApplies": true,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "SMLP",
+      "stage": "known_prefix_guard",
+      "before": {
+        "count": 18,
+        "medianMs": 0.4402315000043018,
+        "p95Ms": null,
+        "minMs": 0.20064300000376534,
+        "maxMs": 4.607665999996243
+      },
+      "after": {
+        "count": 18,
+        "medianMs": 0.35772399999405025,
+        "p95Ms": null,
+        "minMs": 0.20184900000458583,
+        "maxMs": 0.6615179999935208
+      },
+      "medianRelativeIncrease": -0.1874184378206587,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.08403454502139239,
+        "afterRelativeRange": 0.2700695660433948
+      },
+      "budgetApplies": true,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "SMLP",
+      "stage": "acquisition_and_persistence",
+      "before": {
+        "count": 27,
+        "medianMs": 1980.001019000003,
+        "p95Ms": 3170.416838999983,
+        "minMs": 331.2175959999877,
+        "maxMs": 3294.783846999999
+      },
+      "after": {
+        "count": 27,
+        "medianMs": 1878.1494419999945,
+        "p95Ms": 3140.2690230000153,
+        "minMs": 368.565419999999,
+        "maxMs": 3451.7378360000002
+      },
+      "medianRelativeIncrease": -0.05144016393054618,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.20775179106107658,
+        "afterRelativeRange": 0.15088260230737924
+      },
+      "budgetApplies": true,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "SMLP",
+      "stage": "persistence",
+      "before": {
+        "count": 57,
+        "medianMs": 172.37832600000547,
+        "p95Ms": 330.82517799999914,
+        "minMs": 20.31904200000281,
+        "maxMs": 343.83326600000146
+      },
+      "after": {
+        "count": 57,
+        "medianMs": 167.14062999999442,
+        "p95Ms": 290.6429749999952,
+        "minMs": 23.507482999993954,
+        "maxMs": 292.536970000001
+      },
+      "medianRelativeIncrease": -0.030384887250911596,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.08428026180939945,
+        "afterRelativeRange": 0.13342348895064063
+      },
+      "budgetApplies": true,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "SMLP",
+      "stage": "restoration",
+      "before": {
+        "count": 54,
+        "medianMs": 5.268021500007308,
+        "p95Ms": 29.8952649999992,
+        "minMs": 1.8252559999964433,
+        "maxMs": 56.49626200000057
+      },
+      "after": {
+        "count": 54,
+        "medianMs": 5.354892499999551,
+        "p95Ms": 24.71289799999795,
+        "minMs": 2.09280499999295,
+        "maxMs": 37.792880999986664
+      },
+      "medianRelativeIncrease": 0.01649025160434947,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.16982440941754087,
+        "afterRelativeRange": 0.08919392718004424
+      },
+      "budgetApplies": true,
+      "result": "within_observed_budget"
+    }
+  ],
+  "diagnosticCase": "LIFE",
+  "historicalReservation": {
+    "status": "retained_unchanged",
+    "receipt": {
+      "path": "docs/migration/lot2c-evidence/final/performance-evidence-index.json",
+      "bytes": 9697,
+      "sha256": "727d6a2bab30dc1198013f854c158866f848282a5f5f1531a4df6a7d614e43c7"
+    }
+  },
+  "receipts": [
+    {
+      "path": "docs/migration/lot2c-cost-evidence/performance/README.md",
+      "bytes": 3852,
+      "sha256": "3a5fd6ffc6b935618ab958c39fc1f70b926370f91242ca82df5da7220b98c80b"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/performance/after-output.log.gz",
+      "bytes": 465,
+      "sha256": "acad90ed244b0b421b065ee9ec72cc894d057e93be1de04d24e79a0048f5cacd"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/performance/after.json.gz",
+      "bytes": 81344,
+      "sha256": "11a7629e79add8e6bc4778e8a16c38764daec02524225f00dcd41d55dfb0a77b"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/performance/baseline-output.log.gz",
+      "bytes": 472,
+      "sha256": "8c6de3b66c7a33518aaabe5e9e768b27568799eb0afd4067df4afef05b7655c0"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/performance/baseline.json.gz",
+      "bytes": 81391,
+      "sha256": "9d07a9819748a58d4534b29ab39f3941834224a4717430ba99807fc1b900c9d5"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/performance/comparison-policy.json",
+      "bytes": 798,
+      "sha256": "55e9530209b1b785c27474aa6085b2364995a99e894414078647007d0c0bfefb"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/performance/comparison.json",
+      "bytes": 38003,
+      "sha256": "b0d5f0c335e2e33b112c0de4e4d1f8e2540cb3a5022a7ddd54b50cea62293e84"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/performance/results.md",
+      "bytes": 23167,
+      "sha256": "938d0d33f85ad907d0c5bb9b1cefd70cd3fa470d7482dd1baf84aa7b4f702a87"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/performance/window.json",
+      "bytes": 3735,
+      "sha256": "714ec90bb7b224510c4c02b99a5c138c77f39006c420349731802e9072d054e1"
+    }
+  ],
+  "losslessTransportChecks": [
+    {
+      "original": {
+        "path": "docs/migration/lot2c-cost-evidence/performance/baseline.json",
+        "bytes": 976698,
+        "sha256": "fbe5716f16982b0cca2f3c97d127925684e79c97195987c8f86df1d679d5087f"
+      },
+      "archive": {
+        "path": "docs/migration/lot2c-cost-evidence/performance/baseline.json.gz",
+        "bytes": 81391,
+        "sha256": "9d07a9819748a58d4534b29ab39f3941834224a4717430ba99807fc1b900c9d5"
+      },
+      "byteIdentical": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot2c-cost-evidence/performance/after.json",
+        "bytes": 976900,
+        "sha256": "51cc39959cb65a66cdb405534bd245822b2190cce0423db742e9e71ad0c67c2e"
+      },
+      "archive": {
+        "path": "docs/migration/lot2c-cost-evidence/performance/after.json.gz",
+        "bytes": 81344,
+        "sha256": "11a7629e79add8e6bc4778e8a16c38764daec02524225f00dcd41d55dfb0a77b"
+      },
+      "byteIdentical": true
+    }
+  ],
+  "generators": [
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "bytes": 9861,
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb"
+    }
+  ],
+  "qualification": "One predeclared fresh V62 run followed by one frozen 0.36 run; no repeat selected and no threshold relaxed. Official sixteen STCK/SMLP medians pass; local increases, LIFE diagnostics, admissible p95, variation, inspection and Pause limits remain in results and raw receipts. Historical 0.35 failures remain unchanged. This closes the declared 2C cost gate, not complete V5/V6 migration, arbitrary search preemption, hours-long memory stability or a machine-independent speed claim."
+}

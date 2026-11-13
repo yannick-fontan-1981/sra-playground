@@ -1,0 +1,126 @@
+{
+  "schema": "logos-engine.recorded-regression-memory-recovery-plan.v1",
+  "recordedAt": "2026-11-10T18:21:37.322608+00:00",
+  "status": "prepared_not_executed",
+  "preservedFailures": [
+    {
+      "path": "docs/migration/lot3i-evidence/final/regressions/weav-049-execution.json",
+      "bytes": 1573,
+      "sha256": "7ff21722fa9d1ead445db13b1870a615f023e8796c0c918c235b3d5e70caf8b5"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/regressions/weav-049-output.log.gz",
+      "bytes": 8020,
+      "sha256": "01b5a48c5481e64ca5be93d6fd53ecbc2101692a715c170799298db0845f7a2d"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/weav-retry/regressions/weav-049-isolated-execution.json",
+      "bytes": 1621,
+      "sha256": "f77765990d011e477ebe1725bcbef8beab1d9ebeda309a6f144ea813dce1ea34"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/weav-retry/regressions/weav-049-isolated-output.log.gz",
+      "bytes": 2928,
+      "sha256": "3ce7d041b1b91a9cfa75ca8b5b416f5fa55d171af60f5a297e1a242c93d4d41a"
+    }
+  ],
+  "diagnosis": {
+    "baselineDecodedBytes": 90453644,
+    "firstAttempt": {
+      "exitCode": -9,
+      "lastAcquiredActions": 67,
+      "cause": "External SIGKILL; cause not established by this log alone."
+    },
+    "secondAttempt": {
+      "exitCode": -6,
+      "nodeOldSpaceMiB": 768,
+      "lastRequestedOperation": "resume",
+      "sequence": 16,
+      "fatal": "Ineffective mark-compacts near heap limit; JavaScript heap out of memory"
+    },
+    "retentions": "Historical Node host keeps the full baseline root and compressed buffers in module scope during the campaign; historical Python runner keeps before/trace while Node runs."
+  },
+  "command": [
+    "python",
+    "scripts/run-released-public-regressions.py",
+    "docs/migration/lot3i-evidence/weav-memory-recovery-cases.json",
+    "docs/migration/lot3i-evidence/final/weav-memory-retry",
+    "--source-manifest",
+    "docs/migration/lot3i-evidence/final/source-manifest.json",
+    "--node-old-space-mib",
+    "1536",
+    "--timeout-seconds",
+    "2400"
+  ],
+  "caseManifest": {
+    "path": "docs/migration/lot3i-evidence/weav-memory-recovery-cases.json",
+    "bytes": 1193,
+    "sha256": "b93a819dc3554aa0d3d9e951e4d7cfb95fd1f7da02987fdc91cd60243b43ed1b"
+  },
+  "sourceManifest": {
+    "path": "docs/migration/lot3i-evidence/final/source-manifest.json",
+    "bytes": 32014,
+    "sha256": "6345dc2902336aaf6f680b798b3c312281dcb66bbd7994b349b1734e5a42c1bd"
+  },
+  "newReplayHost": {
+    "path": "scripts/replay-public-regression-released-baseline.mjs",
+    "bytes": 6355,
+    "sha256": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164"
+  },
+  "newRunner": {
+    "path": "scripts/run-released-public-regressions.py",
+    "bytes": 14089,
+    "sha256": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909"
+  },
+  "unchangedHarness": {
+    "path": "tests/helpers/v6-live-game-campaign.ts",
+    "bytes": 66724,
+    "sha256": "b0acd3a5a3a7e1293745c3a5843231eda7929589a7ce0c5fe402fc30d390d257"
+  },
+  "unchangedComparator": {
+    "path": "scripts/compare-v54-regressions.py",
+    "bytes": 18166,
+    "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0"
+  },
+  "unchangedHistoricalRunner": {
+    "path": "scripts/run-recorded-public-regressions.py",
+    "bytes": 20897,
+    "sha256": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40"
+  },
+  "unchangedHistoricalHost": {
+    "path": "scripts/replay-v53-public-regression.mjs",
+    "bytes": 2447,
+    "sha256": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e"
+  },
+  "memoryPolicy": {
+    "nodeOldSpaceMiB": 1536,
+    "flags": [
+      "--expose-gc",
+      "--max-old-space-size=1536"
+    ],
+    "baselineRootMustBeCollectedBeforeHarnessImport": true,
+    "pythonPrevalidationProcessMustExitBeforeNode": true,
+    "comparisonProcessStartsOnlyAfterNodeExit": true,
+    "currentRunEvidenceRetainedInFull": true,
+    "productionBudgetsChanged": false,
+    "officialCostEnvironmentChanged": false,
+    "rationale": "Bound the replay host while retaining all81 current prefixes and report serialization. The previous768MiB failure retained an unnecessary historical object graph; release is separately certified before runtime startup."
+  },
+  "expected": {
+    "commands": 81,
+    "completePublicPackets": 82,
+    "historicalComparisonChecks": 17,
+    "maximumConcurrentReplays": 1,
+    "summary": "docs/migration/lot3i-evidence/final/weav-memory-retry/regressions/regression-summary.json",
+    "preflight": "docs/migration/lot3i-evidence/final/weav-memory-retry/preflight.json",
+    "hostPreparation": "docs/migration/lot3i-evidence/final/weav-memory-retry/regressions/weav-049-memory-efficient-host-preparation.json"
+  },
+  "lightweightVerification": {
+    "nodeSyntax": "passed",
+    "pythonSyntax": "passed",
+    "syntheticOneActionPrepareOnly": "passed",
+    "syntheticBaselineRootCollected": true,
+    "realWEAVReplayExecuted": false
+  },
+  "qualification": "Recovery changes host reference lifetimes and process scheduling only. Immutable source0.50, public returns, expected81 commands, full harness assertions and all17 comparator checks remain unchanged. Both failed attempts are preserved. No live game, prior case-clock restart or speed comparison."
+}

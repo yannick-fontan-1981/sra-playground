@@ -1,0 +1,43 @@
+{
+  "schema": "logos-engine.diagnostic-output-copy.v1",
+  "copiedAt": "2026-11-10T04:15:29.319356+00:00",
+  "files": [
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/before-stck.json.gz",
+      "bytes": 112516,
+      "sha256": "470d11eb0f82b2a0e6bbc36cd7279bfc709279e2f88591f721c39e13e09c2330",
+      "source": "/workspace/sites/sra-published-041/docs/migration/lot3b-state-cost-evidence/diagnostic/before-stck.json.gz"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/before-stck.cpuprofile",
+      "bytes": 2390956,
+      "sha256": "d06fc8b629a03d998da977c7a082251630fbabb417891f82be1e44cf1948e84c",
+      "source": "/workspace/sites/sra-published-041/docs/migration/lot3b-state-cost-evidence/diagnostic/before-stck.cpuprofile"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/before-stck.log",
+      "bytes": 564,
+      "sha256": "d5c6afd6169b20ffc1f557a6aaf548db7ce19e79515e7e8d0e2dbceccab64b9a",
+      "source": "/workspace/sites/sra-published-041/docs/migration/lot3b-state-cost-evidence/diagnostic/before-stck.log"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/before-smlp.json.gz",
+      "bytes": 142549,
+      "sha256": "f686cd0336aca4f403d5e9fcc2cbcbf081c72fb716859aa14cc88c3b83934bb7",
+      "source": "/workspace/sites/sra-published-041/docs/migration/lot3b-state-cost-evidence/diagnostic/before-smlp.json.gz"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/before-smlp.cpuprofile",
+      "bytes": 2748824,
+      "sha256": "c90e15645b76b29815296adaaf916f55ac1394c4446b3e1ee89d6d0e9d3bfbea",
+      "source": "/workspace/sites/sra-published-041/docs/migration/lot3b-state-cost-evidence/diagnostic/before-smlp.cpuprofile"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/before-smlp.log",
+      "bytes": 564,
+      "sha256": "4f226f0f4fd84955b19d0ba30c23086cb8dc3ae88f9f6d0abfc9947827b3beb7",
+      "source": "/workspace/sites/sra-published-041/docs/migration/lot3b-state-cost-evidence/diagnostic/before-smlp.log"
+    }
+  ],
+  "qualification": "Exact copies from frozen published0.41 checkout; no rerun or discarded output."
+}

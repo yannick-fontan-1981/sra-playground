@@ -1,0 +1,22 @@
+{
+  "schema": "logos-engine.bounded-static-tool-review-execution.v1",
+  "startedAt": "2026-11-11T14:50:45.580958+00:00",
+  "finishedAt": "2026-11-11T14:50:45.976966+00:00",
+  "command": [
+    "python3",
+    "-B",
+    "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/cost-review/attempt-01/verify-review.py"
+  ],
+  "exitCode": 0,
+  "lock": "shared:/workspace/shared/sra-coordination/performance.lock",
+  "log": {
+    "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/verify-review.log",
+    "bytes": 320,
+    "sha256": "fea16fb91f02392f04b4f54b884476655d29f69ff0dac4258f9b543cbb87d1b4"
+  },
+  "costToolsExecuted": false,
+  "runtimeImported": false,
+  "testsExecuted": false,
+  "gameExecuted": false,
+  "buildExecuted": false
+}

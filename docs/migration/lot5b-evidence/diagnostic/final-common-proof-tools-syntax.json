@@ -1,0 +1,29 @@
+{
+  "schema": "logos-engine.source-syntax-checks.v1",
+  "recordedAt": "2026-11-11T01:08:10.596112+00:00",
+  "status": "passed",
+  "checks": [
+    {
+      "path": "scripts/prove-addressed-material-common-loop.mjs",
+      "bytes": 22989,
+      "sha256": "0d1df8195165fb67e70efc6f98fb0a4533085c33611f3b91acd5618ed8a7006a",
+      "check": "node --check",
+      "passed": true
+    },
+    {
+      "path": "scripts/review-addressed-material-common-loop.mjs",
+      "bytes": 10169,
+      "sha256": "698126bfafd5c7da4de94c03f8819f8f99776633acc9d45cac631e097d6e2fa2",
+      "check": "node --check",
+      "passed": true
+    },
+    {
+      "path": "scripts/review-addressed-preservation-original.py",
+      "bytes": 24649,
+      "sha256": "f1ff69e2f9a5dd5e6e18d30296e1135c3e715483af61397e446c0ac8f3d21747",
+      "check": "ast.parse",
+      "passed": true
+    }
+  ],
+  "qualification": "Syntax only before final integrated execution; no native, original agent or game was run."
+}

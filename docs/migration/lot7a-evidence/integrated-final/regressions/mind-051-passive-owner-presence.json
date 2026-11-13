@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.passive-owner-evidence-presence.v1",
+  "report": {
+    "path": "docs/migration/lot7a-evidence/integrated-final/regressions/mind-051-replay.json.gz",
+    "sha256": "a23bcfb3603b904f7049fb6ff1dd1426b2959b8ffd2e20612c616053b887dc44",
+    "bytes": 4977259
+  },
+  "caseManifest": {
+    "path": "docs/migration/lot7a-evidence/recorded-regression-cases-integrated.json",
+    "sha256": "9dc1302d8289118e38a3c8b54112fbdfba35d5b3d7ae29b1d93bb49fa0b14474",
+    "bytes": 4280
+  },
+  "owners": [],
+  "passed": true,
+  "qualification": "Post-run evidence-presence checks on every completed current replay prefix. The manifest declares retained owner identity, exact source-field names, checkpoint format and optional context annex bindings. Each retained checkpoint is checked against its own current source projection, and its transition count against that prefix acquiredActions. These checks neither initialize native state nor assert equality with an older baseline, complete caller parity or a live game success. They are separate from the 17 historical regression comparisons."
+}

@@ -1,0 +1,308 @@
+{
+  "schema": "lot10c.source-only-ancestor-transport-plan.v1",
+  "recordedAt": "2026-11-11T19:58:26.668169+00:00",
+  "status": "proposal_only_not_executed",
+  "baseRemoteCheckpoint": "3ea5e39b7c3f18ea84baf485a2494a9b948e0984",
+  "finalCommit": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+  "method": "Git reachability metadata only: full reachable object-ID sets differenced, then cat-file --batch-check objecttype/objectsize. No object payload read. Full-set subtraction corrects conservative rev-list exclusion overcounts.",
+  "newObjectCount": 1834,
+  "newRawBytes": 369648999,
+  "preferredStageRawLimitBytes": 25165824,
+  "serverReportedPackLimitBytes": 67108864,
+  "chainDeltas": [
+    {
+      "commit": "5fa37f986071f5d763675af87ba154729a2e3864",
+      "newRawBytes": 355154,
+      "newObjectCount": 12
+    },
+    {
+      "commit": "75fed144acb5a717f39d3f8b38f44659409bcce3",
+      "newRawBytes": 229199357,
+      "newObjectCount": 971
+    },
+    {
+      "commit": "2fde3355e763b1a23e64a43b6e4afc61d29e9979",
+      "newRawBytes": 109771171,
+      "newObjectCount": 606
+    },
+    {
+      "commit": "dd864cc645b1e9789e51d1a6c1498f4d0b18aa6f",
+      "newRawBytes": 19059074,
+      "newObjectCount": 167
+    },
+    {
+      "commit": "783dc3c2d7f8b2d8902f4448ef065264b9a79db7",
+      "newRawBytes": 150838,
+      "newObjectCount": 25
+    },
+    {
+      "commit": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+      "newRawBytes": 11113405,
+      "newObjectCount": 53
+    }
+  ],
+  "stages": [
+    {
+      "index": 1,
+      "commit": "5fa37f986071f5d763675af87ba154729a2e3864",
+      "remoteRef": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+      "expectedPreviousRef": "3ea5e39b7c3f18ea84baf485a2494a9b948e0984",
+      "newRawBytes": 355154,
+      "newRawMiB": 0.338701,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    {
+      "index": 2,
+      "commit": "d6772376858ce0659346e674034ff1f379f950f5",
+      "remoteRef": "refs/heads/lot10c-prepared-5c-transport-20261111",
+      "expectedPreviousRef": null,
+      "newRawBytes": 7853845,
+      "newRawMiB": 7.49001,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    {
+      "index": 3,
+      "commit": "b9fe50d8f0e9d24cfec85bdfb36cde570df5d1f0",
+      "remoteRef": "refs/heads/lot10c-prepared-5c-transport-20261111",
+      "expectedPreviousRef": "d6772376858ce0659346e674034ff1f379f950f5",
+      "newRawBytes": 30803210,
+      "newRawMiB": 29.37623,
+      "exceedsPreferred24MiB": true,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    {
+      "index": 4,
+      "commit": "d090c60aa07fb1ef7cb6e9a5b068840a3b81baec",
+      "remoteRef": "refs/heads/lot10c-prepared-5c-transport-20261111",
+      "expectedPreviousRef": "b9fe50d8f0e9d24cfec85bdfb36cde570df5d1f0",
+      "newRawBytes": 3277934,
+      "newRawMiB": 3.126081,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    {
+      "index": 5,
+      "commit": "9788021949b31bcd2d30850b3030a910d7d0a2ff",
+      "remoteRef": "refs/heads/lot10c-prepared-5c-transport-20261111",
+      "expectedPreviousRef": "d090c60aa07fb1ef7cb6e9a5b068840a3b81baec",
+      "newRawBytes": 40402704,
+      "newRawMiB": 38.531021,
+      "exceedsPreferred24MiB": true,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    {
+      "index": 6,
+      "commit": "c8ff4f2b4d495e12494130112258b7a62281d93c",
+      "remoteRef": "refs/heads/lot10c-prepared-5c-transport-20261111",
+      "expectedPreviousRef": "9788021949b31bcd2d30850b3030a910d7d0a2ff",
+      "newRawBytes": 23063694,
+      "newRawMiB": 21.995253,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    {
+      "index": 7,
+      "commit": "54cd83b9aa11f5390eea175603dbfc84908ffffa",
+      "remoteRef": "refs/heads/lot10c-prepared-5c-transport-20261111",
+      "expectedPreviousRef": "c8ff4f2b4d495e12494130112258b7a62281d93c",
+      "newRawBytes": 27350402,
+      "newRawMiB": 26.083376,
+      "exceedsPreferred24MiB": true,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    {
+      "index": 8,
+      "commit": "861c87b9351c405ee3114f5ecbf077060eea2b71",
+      "remoteRef": "refs/heads/lot10c-prepared-5c-transport-20261111",
+      "expectedPreviousRef": "54cd83b9aa11f5390eea175603dbfc84908ffffa",
+      "newRawBytes": 23846481,
+      "newRawMiB": 22.741776,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    {
+      "index": 9,
+      "commit": "7c4fed10c3a3e57f581fa9df790a577f18e7a8d7",
+      "remoteRef": "refs/heads/lot10c-prepared-5c-transport-20261111",
+      "expectedPreviousRef": "861c87b9351c405ee3114f5ecbf077060eea2b71",
+      "newRawBytes": 21484536,
+      "newRawMiB": 20.48925,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    {
+      "index": 10,
+      "commit": "738d858b2ce19182b334d7178a185fc01c36edfe",
+      "remoteRef": "refs/heads/lot10c-prepared-5c-transport-20261111",
+      "expectedPreviousRef": "7c4fed10c3a3e57f581fa9df790a577f18e7a8d7",
+      "newRawBytes": 21410071,
+      "newRawMiB": 20.418235,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    {
+      "index": 11,
+      "commit": "c3f158ad6bb2918808993e4d18602c52d0e32ce3",
+      "remoteRef": "refs/heads/lot10c-prepared-5c-transport-20261111",
+      "expectedPreviousRef": "738d858b2ce19182b334d7178a185fc01c36edfe",
+      "newRawBytes": 21256836,
+      "newRawMiB": 20.272099,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    {
+      "index": 12,
+      "commit": "75fed144acb5a717f39d3f8b38f44659409bcce3",
+      "remoteRef": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+      "expectedPreviousRef": "5fa37f986071f5d763675af87ba154729a2e3864",
+      "newRawBytes": 8449644,
+      "newRawMiB": 8.058208,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    {
+      "index": 13,
+      "commit": "4fbf518f292d77d3876da1a3dac7d63dc1a1be19",
+      "remoteRef": "refs/heads/lot10c-prepared-6b-transport-20261111",
+      "expectedPreviousRef": null,
+      "newRawBytes": 25192886,
+      "newRawMiB": 24.025808,
+      "exceedsPreferred24MiB": true,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    {
+      "index": 14,
+      "commit": "5c1b2c9f53f8a5f12526e665f82e9f84260b74b5",
+      "remoteRef": "refs/heads/lot10c-prepared-6b-transport-20261111",
+      "expectedPreviousRef": "4fbf518f292d77d3876da1a3dac7d63dc1a1be19",
+      "newRawBytes": 20349228,
+      "newRawMiB": 19.406536,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    {
+      "index": 15,
+      "commit": "17bba57ab1ed3c29dfe695e72e333a13796362eb",
+      "remoteRef": "refs/heads/lot10c-prepared-6b-transport-20261111",
+      "expectedPreviousRef": "5c1b2c9f53f8a5f12526e665f82e9f84260b74b5",
+      "newRawBytes": 23866991,
+      "newRawMiB": 22.761336,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    {
+      "index": 16,
+      "commit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+      "remoteRef": "refs/heads/lot10c-prepared-6b-transport-20261111",
+      "expectedPreviousRef": "17bba57ab1ed3c29dfe695e72e333a13796362eb",
+      "newRawBytes": 36637941,
+      "newRawMiB": 34.940663,
+      "exceedsPreferred24MiB": true,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    {
+      "index": 17,
+      "commit": "783dc3c2d7f8b2d8902f4448ef065264b9a79db7",
+      "remoteRef": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+      "expectedPreviousRef": "75fed144acb5a717f39d3f8b38f44659409bcce3",
+      "newRawBytes": 22934037,
+      "newRawMiB": 21.871602,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    {
+      "index": 18,
+      "commit": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+      "remoteRef": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+      "expectedPreviousRef": "783dc3c2d7f8b2d8902f4448ef065264b9a79db7",
+      "newRawBytes": 11113405,
+      "newRawMiB": 10.598569,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    }
+  ],
+  "largestNewBlobs": [
+    {
+      "oid": "0a7c8293a9945016c581744add53aeb54ea6cbea",
+      "bytes": 11235905,
+      "path": "docs/migration/lot5c-evidence/recovery/common/common-02/foreign-parent/actual-operations.json"
+    },
+    {
+      "oid": "dddbf2ca49b2676a7c015f5118eca3af6dc46777",
+      "bytes": 11235847,
+      "path": "docs/migration/lot5c-evidence/recovery/common/common-01/foreign-parent/actual-operations.json"
+    },
+    {
+      "oid": "5920695f9d1c9c5041c771a23151e8cd8fc8997f",
+      "bytes": 10936146,
+      "path": "docs/migration/lot6b-evidence/development-freeze-01/klot-campaign.json.gz"
+    },
+    {
+      "oid": "04d2509eeffb68b12b87401f7d3217acd1147157",
+      "bytes": 10773024,
+      "path": "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/results/acquired-selection-detail/report.json.gz"
+    },
+    {
+      "oid": "82bef9dd4979b2e9d6e3483485cb0aabd903147c",
+      "bytes": 10767534,
+      "path": "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/results/proposal-measured-mask-fact/report.json.gz"
+    },
+    {
+      "oid": "a563b4e3e6d9604deb03045c62d7d72f9d6e4e30",
+      "bytes": 6466073,
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-archive.tar.gz"
+    }
+  ],
+  "conditions": [
+    "Remote must advertise and retain every successfully preloaded reference until final checkpoint verification.",
+    "Each push is ordinary, source-only and non-force; target refs are exclusively owned by lot10c.",
+    "Before each real send, check fresh quiet guard, SH lock, expected remote ref and credential conditions; verify exact remote commit after success.",
+    "No history rewriting, payload deletion, intermediate publication or main update.",
+    "Five existing commit increments exceed preferred24MiB; maximum40402704 raw bytes, still below64MiB. They cannot be divided by choosing earlier ancestors of the same branch.",
+    "Raw object size is not a measured pack size; remote refs/negotiation must be verified at execution.",
+    "Coordinator reports an ancestor-aware helper ready; use exact commit/ref pairs below, with fresh remote predecessor verification."
+  ],
+  "networkUsed": false,
+  "credentialAccessed": false,
+  "gitRefsChanged": false,
+  "checkoutChanged": false,
+  "supersedesPlan": "/workspace/scratch/059a057ef035/lot10c-ancestor-transport-plan-01.json"
+}

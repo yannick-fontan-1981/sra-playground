@@ -1,0 +1,313 @@
+{
+  "schema": "logos-engine.native-cost-static-preflight.v1",
+  "recordedAt": "2026-11-10T08:56:46.239457+00:00",
+  "startedAt": "2026-11-10T08:56:46.139208+00:00",
+  "status": "static_inputs_checked",
+  "measurementExecuted": false,
+  "baselineCheckout": "/workspace/sites/sra-published-044",
+  "candidateCheckout": "/workspace/sites/sra-playground-step3d/.sites-checkout",
+  "nodeVersion": "v24.22.1",
+  "checks": [
+    {
+      "name": "distinct_checkouts",
+      "satisfied": true
+    },
+    {
+      "name": "baseline_frozen_inventory",
+      "satisfied": true,
+      "digest": "e914399487992c3f53b3058ee734c470d738594e7344285799203462fac6a255",
+      "fileCount": 251,
+      "manifest": {
+        "path": "docs/migration/lot3d-evidence/baseline/source-manifest.json",
+        "sha256": "827f90441f353be4f4c0e9b3ec35c5c71cf7dadd923e4fe7d98cf7bd8e0350c3",
+        "bytes": 29682
+      }
+    },
+    {
+      "name": "baseline_declared_native_identity",
+      "satisfied": true
+    },
+    {
+      "name": "candidate_frozen_inventory",
+      "satisfied": true,
+      "digest": "5b5e59e14e4d417d92cacd6e79d21b6e8e833d715c8d05df2b74806bb09b40f3",
+      "fileCount": 256,
+      "manifest": {
+        "path": "docs/migration/lot3d-evidence/final/source-manifest.json",
+        "sha256": "d7c139d6b4da64e6070f044ab49d0a6646b3dbf69bfedaa1434b853df5a5ebb6",
+        "bytes": 30270
+      }
+    },
+    {
+      "name": "candidate_declared_native_identity",
+      "satisfied": true
+    },
+    {
+      "name": "baseline_published_commit",
+      "satisfied": true,
+      "commit": "a39997bffdca1ce080879d967d3f5eb95a88d544",
+      "siteVersion": 72
+    },
+    {
+      "name": "declared_fingerprint_protocol",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_cases",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_diagnosticComparisonPolicy",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_globalBudgetPolicy",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_baselineManifest",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_candidateManifest",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_candidateArchiveManifest",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_globalDecisionTool",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_globalCalculationTool",
+      "satisfied": true
+    },
+    {
+      "name": "retained_tool_scripts/run-native-cost-window.py",
+      "satisfied": true
+    },
+    {
+      "name": "retained_tool_scripts/measure-native-loop-costs.mjs",
+      "satisfied": true
+    },
+    {
+      "name": "retained_tool_scripts/compare-native-loop-costs.mjs",
+      "satisfied": true
+    },
+    {
+      "name": "retained_tool_scripts/compare-native-cost-cohorts.mjs",
+      "satisfied": true
+    },
+    {
+      "name": "retained_tool_scripts/review-native-cost-consolidation.py",
+      "satisfied": true
+    },
+    {
+      "name": "retained_tool_scripts/review-native-global-cost-window.py",
+      "satisfied": true
+    },
+    {
+      "name": "retained_tool_scripts/review-native-global-cost-budget.py",
+      "satisfied": true
+    },
+    {
+      "name": "historical_input_cases.json",
+      "satisfied": true,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "name": "historical_input_comparison-policy.json",
+      "satisfied": true,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "name": "same_measurement_runner",
+      "satisfied": true
+    },
+    {
+      "name": "same_source_declaration_laya_proto/common_frontier_policy.drm.json",
+      "satisfied": true,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "name": "same_source_declaration_morphology_policy/strategy.drm",
+      "satisfied": true,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "name": "baseline_trace_STCK",
+      "satisfied": true,
+      "path": "/workspace/sites/sra-published-044/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "name": "candidate_trace_STCK",
+      "satisfied": true,
+      "path": "/workspace/sites/sra-playground-step3d/.sites-checkout/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "name": "baseline_trace_SMLP",
+      "satisfied": true,
+      "path": "/workspace/sites/sra-published-044/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "name": "candidate_trace_SMLP",
+      "satisfied": true,
+      "path": "/workspace/sites/sra-playground-step3d/.sites-checkout/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "name": "wrapper_order",
+      "satisfied": true,
+      "plans": [
+        {
+          "label": "A1",
+          "checkoutVariable": "baseline",
+          "outputStem": "cohort1/baseline"
+        },
+        {
+          "label": "B1",
+          "checkoutVariable": "ROOT",
+          "outputStem": "cohort1/after"
+        },
+        {
+          "label": "B2",
+          "checkoutVariable": "ROOT",
+          "outputStem": "cohort2/after"
+        },
+        {
+          "label": "A2",
+          "checkoutVariable": "baseline",
+          "outputStem": "cohort2/baseline"
+        }
+      ]
+    },
+    {
+      "name": "declared_cohort_counts",
+      "satisfied": true,
+      "cohorts": 2,
+      "sessionsPerCaseVersionCohort": 4,
+      "measuredSessions": 32,
+      "measuredActions": 400,
+      "excludedWarmupSessions": 8,
+      "excludedWarmupActions": 24
+    },
+    {
+      "name": "global_gate_contract",
+      "satisfied": true
+    },
+    {
+      "name": "baseline_input_copy_cases.json",
+      "satisfied": true,
+      "state": "absent_runner_will_copy"
+    },
+    {
+      "name": "baseline_input_copy_comparison-policy.json",
+      "satisfied": true,
+      "state": "absent_runner_will_copy"
+    },
+    {
+      "name": "baseline_input_copy_protocol.md",
+      "satisfied": true,
+      "state": "absent_runner_will_copy"
+    },
+    {
+      "name": "exclusive_measurement_outputs_absent",
+      "satisfied": true,
+      "existing": []
+    },
+    {
+      "name": "baseline_dependency_link_node_modules",
+      "satisfied": true
+    },
+    {
+      "name": "baseline_dependency_link_public/vendor/pyodide",
+      "satisfied": true
+    },
+    {
+      "name": "managed_preview_stopped",
+      "satisfied": true
+    },
+    {
+      "name": "protocol_contract_receipt",
+      "satisfied": true
+    }
+  ],
+  "unsatisfied": [],
+  "traces": [
+    {
+      "role": "baseline",
+      "case": "STCK",
+      "path": "/workspace/sites/sra-published-044/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "present": true,
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+      "expectedSha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "role": "candidate",
+      "case": "STCK",
+      "path": "/workspace/sites/sra-playground-step3d/.sites-checkout/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "present": true,
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+      "expectedSha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "role": "baseline",
+      "case": "SMLP",
+      "path": "/workspace/sites/sra-published-044/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "present": true,
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+      "expectedSha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "role": "candidate",
+      "case": "SMLP",
+      "path": "/workspace/sites/sra-playground-step3d/.sites-checkout/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "present": true,
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+      "expectedSha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    }
+  ],
+  "byteTransportRestorations": [],
+  "dependencyLinks": [
+    {
+      "path": "/workspace/sites/sra-published-044/node_modules",
+      "isSymlink": true,
+      "target": "/workspace/sites/sra-playground-step3d/.sites-checkout/node_modules",
+      "targetExists": true,
+      "sameTargetAsCandidate": true
+    },
+    {
+      "path": "/workspace/sites/sra-published-044/public/vendor/pyodide",
+      "isSymlink": true,
+      "target": "/workspace/sites/sra-playground-step3d/.sites-checkout/public/vendor/pyodide",
+      "targetExists": true,
+      "sameTargetAsCandidate": true
+    }
+  ],
+  "preview": {
+    "command": [
+      "sites-preview",
+      "status"
+    ],
+    "observedAt": "2026-11-10T08:56:46.239084+00:00",
+    "exitCode": 0,
+    "stdout": "Sites preview stopped",
+    "stderr": ""
+  },
+  "protocolCheck": {
+    "path": "docs/migration/lot3d-evidence/performance/protocol-check.json",
+    "bytes": 406,
+    "sha256": "5be475edced88bed406dbe9e014e7090c20eec0919829c9f6e2456fa0749838c"
+  },
+  "readinessCreated": false,
+  "qualification": "Static inventory, fingerprint, AST, link and managed-preview status inspection only. Both public traces were already present and byte-identical in both checkouts, so no byte restoration was needed. No native runtime, worker, game, replay, benchmark, test or build was started by this check. Native identities are unchanged from the declared freeze; this receipt does not assert test-suite, campaign, original-parity or complete functional readiness. The final revalidation and source/live-parity work remain separate evidence. No readiness receipt or permission to launch the official window is created here."
+}

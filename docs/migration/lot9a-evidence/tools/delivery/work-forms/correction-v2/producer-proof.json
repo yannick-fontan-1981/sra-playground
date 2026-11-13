@@ -1,0 +1,123 @@
+{
+  "schema": "logos-engine.lot9a-release-duration-producer-proof.v1",
+  "createdAt": "2026-11-12T15:02:38.621129+00:00",
+  "inspection": "Static source bytes and retained JSON/gzip only; no native module imported or executed.",
+  "sources": {
+    "baseline": {
+      "src/logos-engine/v6-composition-engine.ts": {
+        "path": "/workspace/sites/sra-lot9a-baseline067-20261112/src/logos-engine/v6-composition-engine.ts",
+        "bytes": 27038,
+        "sha256": "c259548ad4b74b6aa9eaa589da3856469b73c4e1e1104ccfac55f00e8e1ead56"
+      },
+      "src/logos-engine/v6-native-authority.ts": {
+        "path": "/workspace/sites/sra-lot9a-baseline067-20261112/src/logos-engine/v6-native-authority.ts",
+        "bytes": 23736,
+        "sha256": "f5a54ecac86fb097ee739dc6e4f8b4729819d58c9992fee92188527a1544b3ff"
+      },
+      "src/logos-engine/v6-reasoning-memory.ts": {
+        "path": "/workspace/sites/sra-lot9a-baseline067-20261112/src/logos-engine/v6-reasoning-memory.ts",
+        "bytes": 12962,
+        "sha256": "b55c186c99636f28c9e6e9c657b9bb50892eac06a3306be197503188069d901a"
+      },
+      "src/logos-engine/v6-native-runtime.ts": {
+        "path": "/workspace/sites/sra-lot9a-baseline067-20261112/src/logos-engine/v6-native-runtime.ts",
+        "bytes": 180119,
+        "sha256": "e68adc608d73ac8d19e41a01cb7f9834a014b17f7f71b26480a14c36b4025446"
+      }
+    },
+    "candidate": {
+      "src/logos-engine/v6-composition-engine.ts": {
+        "path": "src/logos-engine/v6-composition-engine.ts",
+        "bytes": 27038,
+        "sha256": "c259548ad4b74b6aa9eaa589da3856469b73c4e1e1104ccfac55f00e8e1ead56"
+      },
+      "src/logos-engine/v6-native-authority.ts": {
+        "path": "src/logos-engine/v6-native-authority.ts",
+        "bytes": 23736,
+        "sha256": "f5a54ecac86fb097ee739dc6e4f8b4729819d58c9992fee92188527a1544b3ff"
+      },
+      "src/logos-engine/v6-reasoning-memory.ts": {
+        "path": "src/logos-engine/v6-reasoning-memory.ts",
+        "bytes": 12962,
+        "sha256": "b55c186c99636f28c9e6e9c657b9bb50892eac06a3306be197503188069d901a"
+      },
+      "src/logos-engine/v6-native-runtime.ts": {
+        "path": "src/logos-engine/v6-native-runtime.ts",
+        "bytes": 181663,
+        "sha256": "7ba8d9a6953c282c2b92cda0585d890d24e36bdd9a47ade993a4c2e89b7ece4e"
+      }
+    }
+  },
+  "excerpts": {
+    "actualBridge": {
+      "source": {
+        "path": "src/logos-engine/v6-composition-engine.ts",
+        "bytes": 27038,
+        "sha256": "c259548ad4b74b6aa9eaa589da3856469b73c4e1e1104ccfac55f00e8e1ead56"
+      },
+      "firstLine": 318,
+      "lastLine": 399,
+      "sha256": "beaf0240e8be83bf060f7f3578ab4e796c6f84084088fa1ab1bf81c9e53d4842",
+      "text": "export class NativeSrcBridge {\n  readonly engine: NativeEngine;\n  readonly continuous: boolean;\n  sequence = 0;\n  last_execution: CompositionRecord | null = null;\n  private program: Promise<CompositionProgram>;\n  private busy = false;\n  private modelError: NativeModelUnavailableError | null = null;\n  private resultCalls = 0;\n  private readonly clock: () => number;\n  private readonly callbacks: Readonly<Record<string, Primitive>>;\n\n  constructor(engine: NativeEngine, options: { continuous?: boolean; clock?: () => number; programHost?: CompositionProgramHost } = {}) {\n    this.engine = engine; this.continuous = options.continuous ?? false; this.clock = options.clock ?? (() => performance.now());\n    const names = ['begin', 'context', 'unique', 'abstain', 'laya', 'apply', 'navigate', 'resume', 'complete_navigation', 'release', 'reject', 'result'] as const;\n    const callbacks: Record<string, Primitive> = {};\n    for (const name of names) callbacks[`prototype.${name}`] = args => {\n      try {\n        let value: CompositionRecord;\n        if (name === 'begin') value = this.engine.src_begin(args.request as CompositionRecord);\n        else if (name === 'apply' || name === 'navigate') value = this.engine[`src_${name}`](args.session as CompositionRecord, args.choice as CompositionRecord);\n        else {\n          if (name === 'result') this.resultCalls++;\n          value = this.engine[`src_${name}`](args.session as CompositionRecord);\n        }\n        return value as JsonObject;\n      } catch (error) {\n        if (error instanceof NativeModelUnavailableError) this.modelError = error;\n        throw error;\n      }\n    };\n    this.callbacks = Object.freeze(callbacks);\n    this.program = options.programHost ? options.programHost.registerProgram('prototype.laya_router.route', this.callbacks) :\n      NativeSrcProgram.create('prototype.laya_router.route', this.callbacks);\n  }\n  /** Select the authoritative shared IR store before running a subsequent call. */\n  setProgramHost(host: CompositionProgramHost): void {\n    if (this.busy) throw new Error('Cannot replace the composition program host during execution');\n    this.program = host.registerProgram('prototype.laya_router.route', this.callbacks);\n  }\n  async attachPrograms(registry: NativeProgramRegistry): Promise<void> {\n    this.setProgramHost(registry); await this.program;\n  }\n  /** Restore alongside the same reasoning-memory revision between executions. */\n  state(): CompositionBridgeState {\n    if (this.busy) throw new Error('Cannot checkpoint composition reasoning during execution');\n    return { schema: 'logos-engine.v6.composition-bridge.v1', continuous: this.continuous,\n      sequence: this.sequence, engine: this.engine.state() };\n  }\n  restore(state: CompositionBridgeState): void {\n    if (this.busy) throw new Error('Cannot restore composition reasoning during execution');\n    if (state.schema !== 'logos-engine.v6.composition-bridge.v1' || state.continuous !== this.continuous ||\n      !Number.isSafeInteger(state.sequence) || state.sequence < 0) throw new TypeError('Invalid composition bridge checkpoint');\n    this.engine.restore(state.engine); this.sequence = state.sequence; this.last_execution = null;\n  }\n  async run(request: CompositionRecord, options: ExecutionOptions = {}): Promise<CompositionReport> {\n    if (this.busy) throw new Error('Concurrent WHY/ACT evaluation is unavailable');\n    this.busy = true;\n    const started = this.clock(); this.modelError = null; this.resultCalls = 0;\n    try {\n      const prepared = this.engine.prepare(request); this.sequence++;\n      const program = await this.program;\n      let execution: Awaited<ReturnType<CompositionProgram['run']>>;\n      try { execution = await program.run({ request: prepared } as JsonObject, { maxInstructions: 1024, yieldEvery: 128, ...options }); }\n      catch (error) { if (this.modelError) throw this.modelError; throw error; }\n      if (execution.receipt.src_status !== 'completed') throw new Error(`SRC prototype did not complete: ${execution.receipt.src_status}`);\n      if (this.resultCalls !== 1 || this.engine.last_result === null || !pythonEqual(execution.result, this.engine.last_result)) {\n        throw new Error('SRC result is not bound to the completed composition callback');\n      }\n      const statements = execution.receipt.all_executed_statements ?? execution.receipt.executed_statements;\n      const finalSliceLength = statements.length % 128 || Math.min(statements.length, 128);\n      const report: CompositionReport = { src_status: 'completed', src_hash: execution.receipt.src_hash,\n        src_statement_count_last_slice: finalSliceLength, decision: this.engine.last_result };\n      this.engine.persist(prepared, report);\n      report.total_ms = this.clock() - started;\n      this.last_execution = { sequence: this.sequence, run_id: this.continuous ? 'run:laya-continuous' : `run:laya-prototype-${this.sequence}`,\n        workflow_instance_id: `instance:laya-${this.sequence}`, timeline_id: this.continuous ? 'timeline:laya-continuous' : `timeline:${this.sequence}`,\n        frame_id: `frame:${this.sequence}`, receipt: execution.receipt };\n      return report;\n    } finally { this.busy = false; }\n  }\n}\n"
+    },
+    "persistBeforeDuration": {
+      "source": {
+        "path": "src/logos-engine/v6-composition-engine.ts",
+        "bytes": 27038,
+        "sha256": "c259548ad4b74b6aa9eaa589da3856469b73c4e1e1104ccfac55f00e8e1ead56"
+      },
+      "firstLine": 217,
+      "lastLine": 222,
+      "sha256": "6feb6fefdcbced8f2a9a5e6081030d38aa5f41d08b980d562e0a913533496536",
+      "text": "  persist(request: CompositionRecord, report: CompositionReport): void {\n    const episode = request.episode;\n    this.memory.trace(episode, 'src_decision', report);\n    this.memory.put(episode, 'current_key', report.decision.current_key, 'measured-src-prototype', request.revision);\n    if (pythonTruthy(get(report.decision, 'action'))) this.memory.put(episode, 'symbolic_last_action', report.decision.action,\n      'symbolic-guard-not-real-game', increment(request.revision));\n  }"
+    },
+    "authorityBridgeInvocation": {
+      "source": {
+        "path": "src/logos-engine/v6-native-authority.ts",
+        "bytes": 23736,
+        "sha256": "f5a54ecac86fb097ee739dc6e4f8b4729819d58c9992fee92188527a1544b3ff"
+      },
+      "firstLine": 183,
+      "lastLine": 187,
+      "sha256": "14e25777c23aea7ac6e695db99022474b621077169ee6fea47663d7094916401",
+      "text": "  private async run(request: R, execution: NativeExecution): Promise<CompositionReport> {\n    await this.checkpoint('before.prepare'); this.restore();\n    const report = await this.bridge.run(request, { signal: execution.signal });\n    await this.checkpoint('after.persist'); return report;\n  }\n"
+    },
+    "authorityReleaseAssignment": {
+      "source": {
+        "path": "src/logos-engine/v6-native-authority.ts",
+        "bytes": 23736,
+        "sha256": "f5a54ecac86fb097ee739dc6e4f8b4729819d58c9992fee92188527a1544b3ff"
+      },
+      "firstLine": 197,
+      "lastLine": 235,
+      "sha256": "6e7a5f51aba04cd91c66f91bbfac7ca7d838922d657fa344e330cb9e46b7db98",
+      "text": "  async release(proposal: NativeProposal, observation: NativeObservation, guard: { admitted: boolean; reason: string; native_binding_receipt?: R }, execution: NativeExecution): Promise<boolean> {\n    const template = proposal.bundle_template as R, target = proposal.composition_target_tree as R;\n    if (!target?.admitted || !guard.admitted) return false;\n    if (!template || !['OP18', 'OP28'].includes(template.operation_key)) throw new Error('Unsupported physical frontier operation');\n    if (!proposal.steps || proposal.steps.length !== proposal.actions.length || proposal.steps.some(step => !Object.hasOwn(step, 'expected_after'))) {\n      throw new Error('Committed prefix lacks an explicit known/unknown expectation for each step');\n    }\n    const revision = observation.revision, ref = template.composition_ref;\n    const bundle: R = { ...template, id: 'B0', observation_revision: revision, level_epoch: observation.level_epoch,\n      target_tree_path: target.path, target_tree_observation: target.observation_ref, kind: template.operation_key === 'OP18' ? 'probe' : 'realize',\n      actions: proposal.actions, preserve_refs: template.preserve_refs ?? [], outcome_guard: { path: ['value'], contains: template.operation_key === 'OP18' ? ref : 'B0' } };\n    const claims: R[] = proposal.steps.flatMap((step, index) => Object.hasOwn(step, 'point_binding') ? [{ index, ...step.point_binding as R }] : []);\n    if (claims.length) { bundle.point_bindings = claims; bundle.evidence = [...bundle.evidence, ...claims.map(claim => `${claim.observation_ref}/${claim.entity_ref}`)]; }\n    let registry: R[] = [], registryRevision: number | null = null;\n    try { const remembered = this.memory.nativeGet(EPISODE, 'empirical_registry'); registry = remembered.value; registryRevision = remembered.revision; } catch (error) { if (!(error instanceof RangeError)) throw error; }\n    const properties: R[] = this.memory.nativeGet(EPISODE, 'property_rules').value;\n    const first = proposal.actions[0]!;\n    this.frozen = frozenSource({ before_observation_ref: observation.observation_ref, prior_rules: registry, prior_property_rules: properties,\n      first_action: first, candidate_predictions: await Promise.all(registry.map(rule => predictCandidateRule(rule, observation, first))),\n      addressed_predictions: first.action_ref === 'ACTION6' ? await Promise.all(properties.map(async rule => ({ action: first, prediction: await predictPropertyRule(rule, observation, first) }))) : [],\n      selected_experiment: (proposal.question as R)?.experiment ?? null, selected_control: (proposal.question as R)?.control_experiment ?? null,\n      scope: 'first-action mechanism predictions are conditional; later path steps use frozen historical protocol expectations from the committed proposal' });\n    this.memory.put(EPISODE, 'state', { level_epoch: observation.level_epoch, observation_revision: revision, facts: proposal.facts ?? {},\n      compositions: stateCompositions(proposal, this.objective), bundles: [{ id: 'B0', composition_ref: ref, admitted: guard.admitted, actions: proposal.actions }],\n      memory_hint: { current_observation: summary(observation), main_objective_memory_revision: this.memory.get(EPISODE, 'main_objective').revision,\n        path_refs: proposal.route_refs ?? [], library_registry_revision: registryRevision } }, observation.observation_ref, revision);\n    await this.checkpoint('prediction.freeze', [{ id: `reasoning:prediction:${revision}`, kind: 'component_state', component: 'prospective_predictions', value: this.frozen,\n      evidence: [observation.observation_ref], relations: [{ relation: 'tests', target: 'reasoning:memory' }] },\n      ...(guard.native_binding_receipt ? [{ id: `reasoning:binding:${revision}`, kind: 'transition_evidence' as const,\n        component: 'native_current_input_binding', status: 'observed' as const,\n        value: { observation_ref: observation.observation_ref, level_epoch: observation.level_epoch, frame_hash: observation.frame_hash,\n          command: first, guard: structuredClone(guard), qualification: 'Current public input binding retained before ordinary WHY/ACT release; no physical effect or terminal role is inferred.' },\n        evidence: [observation.observation_ref], relations: [{ relation: 'supports', target: 'reasoning:memory' }] }] : [])]);\n    const report = await this.run({ episode: EPISODE, id: `frontier-${revision}`, level_epoch: observation.level_epoch, policy: 'code_only', context: bundle.purpose,\n      bundles: { B0: bundle }, candidates: ['B0'], relevant_compositions: stateCompositions(proposal, this.objective).map(composition => composition.id) }, execution);\n    this.lastRelease = report;\n    if (report.decision.model_calls?.length) throw new Error('Unexpected neural selection');\n    return report.decision.status === 'action_set_released' && same(report.decision.action_set, bundle);\n  }\n"
+    },
+    "copiedTraceBody": {
+      "source": {
+        "path": "src/logos-engine/v6-reasoning-memory.ts",
+        "bytes": 12962,
+        "sha256": "b55c186c99636f28c9e6e9c657b9bb50892eac06a3306be197503188069d901a"
+      },
+      "firstLine": 122,
+      "lastLine": 125,
+      "sha256": "4d522709f9f73e45b42dd1363d997ec45c040892f53ea2e2f998fe0d24b770a5",
+      "text": "  trace(episode: string, kind: string, value: any): void {\n    this.available(); const id = (this.traces[this.traces.length - 1]?.id ?? 0) + 1;\n    this.traces.push(freezeOwned({ id, episode, kind, body: copy(value), created: this.clock() }));\n    this.traceVersions.set(id, ++this.nativeRevision);\n  }"
+    },
+    "actualRuntimeReleaseNote": {
+      "source": {
+        "path": "src/logos-engine/v6-native-runtime.ts",
+        "bytes": 181663,
+        "sha256": "7ba8d9a6953c282c2b92cda0585d890d24e36bdd9a47ade993a4c2e89b7ece4e"
+      },
+      "firstLine": 1180,
+      "lastLine": 1190,
+      "sha256": "39748f9476e0bbe8b3750a159d4fbec1cb33c54cb7abddfaa10537ec7d611d0e",
+      "text": "    if (!this.prefix.released) {\n      if (this.authority && !await this.authority.release(proposal, this.observation, before, execution)) {\n        this.prefix.interruption = 'src_action_set_not_released'; return false;\n      }\n      if (before.native_binding_receipt) this.prefix.nativeBindings.push(freeze({ index,\n        observation_ref: this.observation.observation_ref, command: structuredClone(command),\n        native_binding_receipt: structuredClone(before.native_binding_receipt),\n        ...(this.authority ? { evidence_node: `reasoning:binding:${this.observation.revision}` } : {}) }));\n      this.prefix.released = true;\n      this.note({ kind: 'why_act_release', admitted: true, decision_revision: this.prefix.revision,\n        native_gate: this.authority !== null, graph_chain: this.knowledge?.graphChain ?? null });\n    }"
+    }
+  },
+  "producer": "NativeSrcBridge.run, not an unrelated total_ms producer. NativeCompositionAuthority.bridge uses its default unmodified performance.now clock.",
+  "creationRule": "A new lastRelease must match a unique source-persisted src_decision body from the same handle before total_ms is added; its release note must name a newly validated role chain. Duration must be finite, nonnegative and no greater than both captured containing intervals.",
+  "retentionRule": "The whole report and release note are byte-value-identical to creation on subsequent advance/inspect points, including total_ms.",
+  "limit": "The bridge internal start/end timestamps were not separately captured; creation duration is bounded, not recomputed. No decision field other than the exact /whyAct/decision/total_ms leaf gets a new inter-role attribution."
+}

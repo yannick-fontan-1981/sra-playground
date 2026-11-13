@@ -1,0 +1,103 @@
+{
+  "schema": "logos-engine.v53.life-original-baseline-comparison-execution.v1",
+  "passed": true,
+  "command": [
+    "node",
+    "scripts/compare-v52-regressions.mjs",
+    "docs/migration/native-campaigns-v50/life-three-levels-final.json",
+    "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/artifacts/v53-life-original-baseline-0cx7qyvr/life-current.json",
+    "docs/migration/native-campaigns-v53/attempt7/regressions/life-original-baseline-comparison.json"
+  ],
+  "startedAt": "2026-11-09T08:23:58.095700+00:00",
+  "finishedAt": "2026-11-09T08:23:58.807770+00:00",
+  "elapsedSeconds": 0.7120706499990774,
+  "exitCode": 0,
+  "comparatorFileSha256": {
+    "scripts/compare-v52-regressions.mjs": "546187729a8b14653ba7e5916cfa35b74d15440b7bab5b5eda69a732614d8c51",
+    "scripts/compare-v52-material-projection.mjs": "a54b7b368687ec553e88dfe675bd88b2fc85014f30907d2b21f49af090a53895"
+  },
+  "comparatorFileSha256After": {
+    "scripts/compare-v52-regressions.mjs": "546187729a8b14653ba7e5916cfa35b74d15440b7bab5b5eda69a732614d8c51",
+    "scripts/compare-v52-material-projection.mjs": "a54b7b368687ec553e88dfe675bd88b2fc85014f30907d2b21f49af090a53895"
+  },
+  "comparatorsUnchanged": true,
+  "identicalToV52ComparatorHashes": true,
+  "nativeSourceDigestBefore": "d87f952e0db958cf2168c1af68ecdc85f4164e1dda7e75e2874733fa03359b70",
+  "nativeSourceDigestAfter": "d87f952e0db958cf2168c1af68ecdc85f4164e1dda7e75e2874733fa03359b70",
+  "nativeSourceUnchanged": true,
+  "inputs": {
+    "originalBaseline": {
+      "path": "docs/migration/native-campaigns-v50/life-three-levels-final.json",
+      "sha256": "b704dde9b4e3347cabc252c6655dbf9dcd85e9027535d7b7d0c2d98ff68c28b8",
+      "bytes": 3271456,
+      "rawSha256": "b704dde9b4e3347cabc252c6655dbf9dcd85e9027535d7b7d0c2d98ff68c28b8",
+      "rawBytes": 3271456
+    },
+    "currentReplay": {
+      "path": "docs/migration/native-campaigns-v53/attempt7/regressions/life-replay.json.gz",
+      "sha256": "ebf4d1f109cc4c48bdba1fd1fd51073742cc3f34aba70f6b84c5b00232cd5599",
+      "bytes": 275577,
+      "rawSha256": "4f08f683f72ef96dc280927bb3f5f8c02b69e45f5af966c963a68c9511752ef7",
+      "rawBytes": 2109342
+    },
+    "identityRecipes": {
+      "path": "docs/migration/native-campaigns-v50/life-material-identity-recipes.json.gz",
+      "sha256": "9f584098c09f837f5b594263dc9ec6b3bf592c3cbba3d905c3d9993d52c9c128",
+      "bytes": 311969,
+      "rawSha256": "5215ff7124e1217e5226a8390bf388be546b6bc408370ed89fde94dda6d35ed8",
+      "rawBytes": 3399906
+    }
+  },
+  "output": {
+    "path": "docs/migration/native-campaigns-v53/attempt7/regressions/life-original-baseline-comparison-output.log.gz",
+    "sha256": "c319ae40c46d568383e5af1f2d2257d742381b49a7896a25c34fa9e54c2f580f",
+    "bytes": 111,
+    "rawSha256": "f4fbda98526f498330635fb8e9f55b58449837db1d6a71799d0839df46afc97c",
+    "rawBytes": 108
+  },
+  "comparison": {
+    "path": "docs/migration/native-campaigns-v53/attempt7/regressions/life-original-baseline-comparison.json",
+    "sha256": "3a42149d21fb75835d43a661a94e0b36b84b17d4ea57e86f13a0d2c5f962dc3f",
+    "bytes": 129635,
+    "rawSha256": "3a42149d21fb75835d43a661a94e0b36b84b17d4ea57e86f13a0d2c5f962dc3f",
+    "rawBytes": 129635
+  },
+  "previousFailuresPreserved": true,
+  "previousFailureFiles": [
+    {
+      "path": "docs/migration/native-campaigns-v53/attempt7/regression-summary.json",
+      "sha256": "1ac843e49b3fab1edc97af0103363743d46eddbc1b2212b474ff480dd0efa267",
+      "bytes": 64757,
+      "rawSha256": "1ac843e49b3fab1edc97af0103363743d46eddbc1b2212b474ff480dd0efa267",
+      "rawBytes": 64757,
+      "unchangedSinceBeforeComparison": true
+    },
+    {
+      "path": "docs/migration/native-campaigns-v53/attempt7/regressions/life-comparison-output.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "bytes": 20,
+      "rawSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rawBytes": 0,
+      "unchangedSinceBeforeComparison": true
+    },
+    {
+      "path": "docs/migration/native-campaigns-v53/attempt7/regressions/life-comparison-retry-output.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "bytes": 20,
+      "rawSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rawBytes": 0,
+      "unchangedSinceBeforeComparison": true
+    },
+    {
+      "path": "docs/migration/native-campaigns-v53/attempt7/regressions/life-comparison-retry-execution.json",
+      "sha256": "7d9d866e07fcae82bb15f7a0d48b5c131f6fb47c9542c4dde1cbe5553d6be2c4",
+      "bytes": 2165,
+      "rawSha256": "7d9d866e07fcae82bb15f7a0d48b5c131f6fb47c9542c4dde1cbe5553d6be2c4",
+      "rawBytes": 2165,
+      "unchangedSinceBeforeComparison": true
+    }
+  ],
+  "checks": 19,
+  "failedChecks": [],
+  "qualification": "Unchanged complete v52 comparator, including its complete material projection, executed with the original v50 baseline whose scope owns the fixed identity recipes. The current compressed replay was temporarily materialized byte-for-byte for the original reader. Prior failed batch and SIGKILL logs/receipt remain intact. This is evidence comparison, not a new game run."
+}

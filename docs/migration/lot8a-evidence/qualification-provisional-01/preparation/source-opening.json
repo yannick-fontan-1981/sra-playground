@@ -1,0 +1,19 @@
+{
+  "schema": "lot8a.source-opening-attempt.v1",
+  "attempt": 4,
+  "startedAt": "2026-11-11T20:43:30.970404+00:00",
+  "inputWaitHoldsPerformanceLock": false,
+  "inputDeadlineSeconds": 45,
+  "helperDeadlineSeconds": 90,
+  "guardPollSeconds": 1,
+  "mutexOpenedExistingReadOnly": true,
+  "helperStartedAt": "2026-11-11T20:43:32.213567+00:00",
+  "helperExitCode": 0,
+  "opening": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout",
+    "commit_sha": "705d5c752500f88bd23fea3fa620edb6914579d2"
+  },
+  "status": "opened",
+  "finishedAt": "2026-11-11T20:43:32.318375+00:00"
+}

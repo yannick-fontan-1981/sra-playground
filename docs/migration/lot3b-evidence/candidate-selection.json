@@ -1,0 +1,28 @@
+{
+  "schema": "logos-engine.native-campaign-selection.v1",
+  "game": "CATR",
+  "targetLevels": 3,
+  "selectedAt": "2026-11-10T00:06:23+00:00",
+  "switchDeadline": "2026-11-10T00:44:35.600674+00:00",
+  "maximumBlockedSeconds": 2400,
+  "carriedBlockedSeconds": 107.399326,
+  "previousResolution": {
+    "path": "docs/migration/lot2b-evidence/final/catr-resolution.json",
+    "bytes": 2703,
+    "sha256": "1281bd182e2976c7dde75b151a664bead41bbbe6139444d8238d5149f8b08d0c"
+  },
+  "functionalBaseline": {
+    "publication": 66,
+    "commitSha": "b5d95c59bda43e5a5ee83dd067a0f28767205ab0",
+    "implementation": "logos-engine.typescript.v6.native-migration/0.38.0",
+    "nativeSourceDigest": "f0d8b2b0a746f19036076010025fffa1ad532d5751caa176f7efcccff7bc4aff"
+  },
+  "selectionBasis": "The retained public-initial-observation scan recognizes CATR through the unchanged relational_chamber_projection source. This is an observed eligibility condition, not a solution, success claim or hidden game rule.",
+  "publicEligibilityEvidence": {
+    "path": "docs/migration/lot3a-evidence/public-candidate-scan.json",
+    "bytes": 104485,
+    "sha256": "cba88bbca4263d8f195a6d26a7290b29a49c2f0383bdf5c7938ac7bcd8a44d37"
+  },
+  "clockPolicy": "Carried time plus wall-clock time since selectedAt includes preparation, diagnosis and retries. Do not reset the clock. Switch games when blocked for 2400 cumulative seconds. A successful campaign resolves this selection; later independent regression, browser and performance validation are recorded separately.",
+  "nextCandidatePolicy": "At the deadline or an earlier unresolved stop, retain all evidence and select another publicly observed game with its own carried clock."
+}

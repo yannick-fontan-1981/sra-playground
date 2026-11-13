@@ -1,0 +1,114 @@
+{
+  "schema": "logos-engine.lot5c.coordination-tools-v2-implementation.v1",
+  "status": "implemented_independent_temporary_tests_passed_pending_source_review",
+  "recordedAt": "2026-11-11T19:47:30.423290+00:00",
+  "supersedesCurrentBinding": "implementation-receipt.json (retained as the preceding historical revision)",
+  "files": [
+    {
+      "file": "README.md",
+      "bytes": 7684,
+      "sha256": "db7dbc92f49714e7009f6f48a9422374a0268e0d4f92c26a54a4ff7d1cf5b233"
+    },
+    {
+      "file": "implementation-receipt.json",
+      "bytes": 4109,
+      "sha256": "12b678b9c4eed64d3f6e4ea09cd1d0778c6969b5988c941a566ba1922212bbed"
+    },
+    {
+      "file": "operator-contract.json",
+      "bytes": 3893,
+      "sha256": "23fcd97a0dc01f809fec072c0075638c4aab78d53eea4fd07745c8b90eeeb1f3"
+    },
+    {
+      "file": "push_lot5_checkpoint.mjs",
+      "bytes": 4953,
+      "sha256": "d2d610d16dc972c6f7263650caf89a06c10a441bc12d2405eb591a7e7f8d39c2"
+    },
+    {
+      "file": "push_lot5_checkpoints_bounded.mjs",
+      "bytes": 7201,
+      "sha256": "84e8727e4b86a1a5e3d66bc843c4f3718a3d716c498fd232a810aab627665e04"
+    },
+    {
+      "file": "run-bounded-locked-command.py",
+      "bytes": 29004,
+      "sha256": "1cf15ba630657b8fe83bd81c98071b0b67965a93a5caa211a568655df338e3a6"
+    },
+    {
+      "file": "test-execution-01.json",
+      "bytes": 80300,
+      "sha256": "82218b8c792bcb3237a64d9ad76394b0ca720cae67b2460125e9f58285a4da7d"
+    },
+    {
+      "file": "test-execution-02.json",
+      "bytes": 88150,
+      "sha256": "4f2ac45fdd919996feb720d1ba1a9e48870ff95d896a520ea91356f2b61e7256"
+    },
+    {
+      "file": "test-execution-03.json",
+      "bytes": 101914,
+      "sha256": "2cd3a9b230b1747c4e3b9802ed0e9889bb297c339c199ba1aeaaca60c415f1cc"
+    },
+    {
+      "file": "test_bounded_locked_command.py",
+      "bytes": 19956,
+      "sha256": "9eb66818f4a187252f7ef532879a778247697ba00a20445b93e5a67ce66a1b51"
+    }
+  ],
+  "finalWrapper": {
+    "file": "run-bounded-locked-command.py",
+    "bytes": 29004,
+    "sha256": "1cf15ba630657b8fe83bd81c98071b0b67965a93a5caa211a568655df338e3a6"
+  },
+  "finalTemporaryTests": {
+    "file": "test-execution-03.json",
+    "fingerprint": {
+      "file": "test-execution-03.json",
+      "bytes": 101914,
+      "sha256": "2cd3a9b230b1747c4e3b9802ed0e9889bb297c339c199ba1aeaaca60c415f1cc"
+    },
+    "wrapperSha256": "1cf15ba630657b8fe83bd81c98071b0b67965a93a5caa211a568655df338e3a6",
+    "status": "passed",
+    "cases": 18,
+    "passedChecks": 239,
+    "totalChecks": 239
+  },
+  "historicalTestsRetained": [
+    "test-execution-01.json",
+    "test-execution-02.json"
+  ],
+  "toolSessions": [
+    {
+      "sessionId": 40858,
+      "terminalExitCode": 0,
+      "terminalChunkId": "2c060c"
+    },
+    {
+      "sessionId": 82816,
+      "terminalExitCode": 0,
+      "terminalChunkId": "fbb6a5"
+    },
+    {
+      "sessionId": 5174,
+      "terminalExitCode": 0,
+      "terminalChunkId": "70afaf"
+    }
+  ],
+  "credentialsUsed": false,
+  "gitExecuted": false,
+  "actualNodeHelpersExecuted": false,
+  "officialSitesWorkflowExecuted": false,
+  "productionExclusiveLockAttempted": false,
+  "projectRuntimeExecuted": false,
+  "productionLockHolderSearchPerformed": false,
+  "originalHelpersModified": false,
+  "originalCostControllersModified": false,
+  "reviewClarification": "The initial independent canonical-PTY counterexample used a stand-in omitting the real pinned helpers setRawMode-before-handshake step. No defect of the real helper sequence was established. The wrapper nevertheless now disables ICANON itself (VMIN1/VTIME0), removing that dependency;6016-byte and65536-byte stand-ins without setraw both pass.",
+  "writesConfinedTo": [
+    "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2",
+    "explicit session metadata under /workspace/shared/sra-coordination/lot5c-execution-handles",
+    "independent automatically removed temporary test directories"
+  ],
+  "noFurtherTestsPlanned": true,
+  "next": "independent source review; no actual transport authorization or cost acceptance inferred from tests"
+}

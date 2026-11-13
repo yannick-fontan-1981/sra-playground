@@ -1,0 +1,21 @@
+{
+  "declaredAt": "2026-11-11T17:12:38.810978+00:00",
+  "publishedPredecessor": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+  "developmentCheckpoint": "4d1af37632cc40323171ddb3d05dab4c8389aa34",
+  "command": [
+    "node",
+    "--test",
+    "--test-concurrency=1",
+    "tests/v6-selected-rigid-integration.test.ts",
+    "tests/v6-selected-rigid-capture.test.ts",
+    "tests/v6-radial-port-integration.test.ts"
+  ],
+  "files": [
+    "tests/v6-selected-rigid-integration.test.ts",
+    "tests/v6-selected-rigid-capture.test.ts",
+    "tests/v6-radial-port-integration.test.ts"
+  ],
+  "expectedSelectedRigidIntegrationTests": 11,
+  "maximumSeconds": 120,
+  "qualification": "Synthetic targeted integration, capture schema and registry after actual0.62 integration; not final0.63 freeze, browser, game or cost."
+}

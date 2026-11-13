@@ -1,0 +1,102 @@
+{
+  "schema": "logos-engine.lot8a.motif-common-capture-review.v1",
+  "status": "passed",
+  "input": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/common/motif-caller-01.json",
+    "sha256": "426f1eb77ffd964a32ae2548416cb385d2824d613c0e683174742a79aa8d4264",
+    "bytes": 338482
+  },
+  "reviewer": {
+    "path": "docs/migration/lot8a-evidence/tools/review-motif-common-capture.py",
+    "sha256": "22ed2f76196bd17d5eb80253f3565c26d3b84d7465d99d90f70bf726910656bb",
+    "bytes": 4822
+  },
+  "checks": {
+    "total": 20,
+    "passed": 20,
+    "failures": [],
+    "items": [
+      {
+        "name": "declared_diagnostic_schema",
+        "passed": true
+      },
+      {
+        "name": "all_declared_steps_completed",
+        "passed": true
+      },
+      {
+        "name": "four_actual_offers_and_four_returns",
+        "passed": true
+      },
+      {
+        "name": "declared_public_frames_in_order",
+        "passed": true
+      },
+      {
+        "name": "four_selected_acquisitions_without_duplicates",
+        "passed": true
+      },
+      {
+        "name": "actual_selected_modes",
+        "passed": true
+      },
+      {
+        "name": "every_offer_is_authorized_motif_action",
+        "passed": true
+      },
+      {
+        "name": "recorded_commands_are_the_actual_offers",
+        "passed": true
+      },
+      {
+        "name": "each_return_seals_and_runs_common_reconciliation",
+        "passed": true
+      },
+      {
+        "name": "complete_record_count_at_every_return",
+        "passed": true
+      },
+      {
+        "name": "no_official_level_in_synthetic_capture",
+        "passed": true
+      },
+      {
+        "name": "common_restore_preserves_learned",
+        "passed": true
+      },
+      {
+        "name": "common_restore_preserves_motion",
+        "passed": true
+      },
+      {
+        "name": "common_restore_preserves_events",
+        "passed": true
+      },
+      {
+        "name": "common_restore_preserves_passed",
+        "passed": true
+      },
+      {
+        "name": "restoration_is_exercised_after_actual_acquisition",
+        "passed": true
+      },
+      {
+        "name": "four_final_source_events",
+        "passed": true
+      },
+      {
+        "name": "four_common_store_keys_match_actual_record_revisions",
+        "passed": true
+      },
+      {
+        "name": "common_store_values_match_retained_owner_events",
+        "passed": true
+      },
+      {
+        "name": "input_unchanged",
+        "passed": true
+      }
+    ]
+  },
+  "qualification": "Review of the actual synthetic four-return positive diagnostic, including deliberately clearing native owner state and restoring acquired knowledge from common memory. Existing contrary-return, acquisition-ablation and local symmetry-boundary proofs remain separately bound by the passing145-file suite. No full original caller, same-episode three-owner activation, live-game, cost or publication claim."
+}

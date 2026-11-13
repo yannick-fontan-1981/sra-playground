@@ -1,0 +1,210 @@
+{
+  "schema": "logos-engine.lot8b.recorded-evidence-checkpoint.v1",
+  "recordedAt": "2026-11-12T05:08:56.510184+00:00",
+  "part": 2,
+  "cases": [
+    "mind-051",
+    "weav-051",
+    "tria-development-4b"
+  ],
+  "completedCasesInThisCheckpoint": 3,
+  "passedComparisonProjectionsInThisCheckpoint": 51,
+  "completedCasesAcrossFirstTwoCheckpoints": 8,
+  "passedProjectionsAcrossFirstTwoCheckpoints": 136,
+  "campaignStillRunning": true,
+  "allElevenPassedClaimed": false,
+  "files": [
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/comparison.json",
+      "bytes": 11014,
+      "sha256": "9dc3a53144e639c9d5eca786fda42c059924d05774f7d7bec8d2734087c41f19"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/comparison.receipt.json",
+      "bytes": 2093,
+      "sha256": "aef7c80b43b9a81fea15ac040b7b1a2047071511ed6e2b2ddd6a47ae85a424cd"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/comparison.started.json",
+      "bytes": 1510,
+      "sha256": "b20cedb0640ec58f88eed36167b98fae05ca11dedeaa245cc4ff19c79aec330f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/comparison.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/comparison.stdout.log",
+      "bytes": 2676,
+      "sha256": "36dbe60b6c97927d703341be2c1246487d794cf70b1cc55fdf31987ecfb42231"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/passive-owner-presence.json",
+      "bytes": 1109,
+      "sha256": "c717e0c917283646f629152b3189a1859c3e4c1c00dc635c4c900ffcb0184aa0"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/replay.json.gz",
+      "bytes": 6769763,
+      "sha256": "df7a2e9638240e38259d063719127bac7c52add15c457fdbcc7f1b6d6bfd7664"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/replay.receipt.json",
+      "bytes": 1692,
+      "sha256": "efdb8665f7ab86756561dfeab0cf14615de654ab369a9fb151d83ca37720e19d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/replay.started.json",
+      "bytes": 1016,
+      "sha256": "9c974aa13c4e5d853ffcd87b0137a2d7ec5a75c0355e65756b1a29fa739a37a7"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/replay.stdout.log",
+      "bytes": 89140,
+      "sha256": "fa1efba250e9269c503cb5238a648ea6bc71bf72c80d95a47e6116d99e835d33"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/result.json",
+      "bytes": 8183,
+      "sha256": "c974de48e61f7cd85ff9adc7736a6a68aa799842ea64bb552672adb16d41eef9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/comparison.json",
+      "bytes": 11033,
+      "sha256": "52cd9bcb6f9c16808f6e7335285b48980b413f2829894d42de28a3a237f0c523"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/comparison.receipt.json",
+      "bytes": 2108,
+      "sha256": "937b1f11dbfb20a82fad516075e49ca71720bbec7c253a75d35b2b0365fe7253"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/comparison.started.json",
+      "bytes": 1526,
+      "sha256": "453670bef3543183bb26e0d92d7a22c84f82508e2e3ec686fb6454934779ea49"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/comparison.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/comparison.stdout.log",
+      "bytes": 2678,
+      "sha256": "7be160ffb3f76f7ab565a75334d75fd70c7b95958d1e6c253ecb851330974b44"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/host-preparation.json",
+      "bytes": 19683,
+      "sha256": "7a5464b7916b0935beaabc875300a84784828ca30a7cae96875ced570a4cd090"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/passive-owner-presence.json",
+      "bytes": 1110,
+      "sha256": "a72dcd581e6c2c48738938cc21d3166aa727b0eca2e09a637fe4b217e10124e0"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/replay.json.gz",
+      "bytes": 21259326,
+      "sha256": "81bc6c842ea8564703f8aad5e36702a2674065419004544ab007bebe12b0641f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/replay.receipt.json",
+      "bytes": 1884,
+      "sha256": "a8417a0d6ce3b982ec5c2ab4d4a9bfa43653e6e228e51e0d5ccfcd59eec23929"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/replay.started.json",
+      "bytes": 1205,
+      "sha256": "e5e71f872533e94fef51705d4428f49c3ce4d60aca5fc6530d38d6f165ed18ec"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/replay.stdout.log",
+      "bytes": 268939,
+      "sha256": "a498e220fe3bad93a7a02069bb626305a58448941218557dd86567c32ef63f91"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/result.json",
+      "bytes": 8660,
+      "sha256": "63510b237d5a07bdc3f2ff1f196825db5bcf1ca3e268da10a73c75c78dd2b2f3"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/comparison.json",
+      "bytes": 11017,
+      "sha256": "bb8d51ce9285e7fdec8bdb7ad2ba275ae00090f199151bf26613add8ed55adfb"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/comparison.receipt.json",
+      "bytes": 2144,
+      "sha256": "da00e4d12893141866d32e05c9130a4dc04b026d14529c171fa1f422d6e9be5c"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/comparison.started.json",
+      "bytes": 1536,
+      "sha256": "2b1fefd5c5ce478e56d3fb2225634a7da2946dc3f3cfa22f10ee90d9f5790e9f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/comparison.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/comparison.stdout.log",
+      "bytes": 2709,
+      "sha256": "2420033b4436e42a4a979b6271a1744048a90ea6d394958abed26cf5e242282e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/passive-owner-presence.json",
+      "bytes": 1120,
+      "sha256": "e7d8c0f23632803628293316c462b2b5f4b532e134b3e458e21b97577c453b73"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/replay.json.gz",
+      "bytes": 4482711,
+      "sha256": "1c878a37499d1059f343f5a6b478e71f4e87e37df2331f62e840402f8cbc7cb0"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/replay.receipt.json",
+      "bytes": 1718,
+      "sha256": "47c1d553ee822ca98fa013a674845e1ed1984ae270cd0a687ff7fa314ce87079"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/replay.started.json",
+      "bytes": 1020,
+      "sha256": "9d3364f34f45bb873e691e96e1501d998a70f3663f14672aceac23f0ca69363a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/replay.stdout.log",
+      "bytes": 61845,
+      "sha256": "e7237368269f4ae99566d461902ff6aa49d832c87efa8ed059852a91bfecd837"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/result.json",
+      "bytes": 8297,
+      "sha256": "c8da616ee5e4a9ce674ce069f51f63de687c770b4515fb3b05d529db5011271a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/checkpoint-regressions-part1-push-11.json",
+      "bytes": 4257,
+      "sha256": "e9a07a3806d750f86f956b822e56b4380369ddc83cd1640d0c3b0f8ba6efc4a3"
+    }
+  ],
+  "retainedBytes": 33044722,
+  "ordinaryPushNoGlobalLock": true
+}

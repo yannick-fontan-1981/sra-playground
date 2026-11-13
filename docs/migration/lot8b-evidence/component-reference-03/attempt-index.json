@@ -1,0 +1,103 @@
+{
+  "schema": "logos-engine.v6.branch-routing-reference-attempt-index.v1",
+  "recordedAt": "2026-11-12T03:36:06.697807+00:00",
+  "currentSuccessfulAttempt": 3,
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "failed",
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/component-reference-01/execution.json",
+        "bytes": 1499,
+        "sha256": "0c235cefa24fdefe54e9556cfa5ff0069489a7d844531611016766a7c55f34ed"
+      },
+      "stdout": {
+        "path": "docs/migration/lot8b-evidence/component-reference-01/stdout.log.gz",
+        "bytes": 131,
+        "sha256": "21df556b02cee448c392eef74dacf681402218a2ed9fd5e1646f08886b0514c1"
+      },
+      "stderr": {
+        "path": "docs/migration/lot8b-evidence/component-reference-01/stderr.log.gz",
+        "bytes": 296,
+        "sha256": "bddc7faa08d75753317fa99159a07b27980e27e7fb107c53f93a2377d69a4a11"
+      },
+      "sourceBeforeCount": 1786,
+      "sourceAfterCount": 1786,
+      "retainedGenerator": {
+        "path": "docs/migration/lot8b-evidence/component-reference-01/exporter-attempt01.py",
+        "bytes": 25788,
+        "sha256": "86cbe935eba50d615cd1d3c1b59d4c63a71acded0fd9878834334b3a82967dce"
+      }
+    },
+    {
+      "attempt": 2,
+      "status": "passed",
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/component-reference-02/execution.json",
+        "bytes": 1626,
+        "sha256": "b82c9ded5910c750569ee1dc0905031ae57071c2a6d559d0b063ce2b574fda74"
+      },
+      "stdout": {
+        "path": "docs/migration/lot8b-evidence/component-reference-02/stdout.log.gz",
+        "bytes": 136,
+        "sha256": "b5e62304ce52e58a9773e40c5d8ca3c7ab087977145e46448c115022ae027dd6"
+      },
+      "stderr": {
+        "path": "docs/migration/lot8b-evidence/component-reference-02/stderr.log.gz",
+        "bytes": 20,
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+      },
+      "sourceBeforeCount": 1786,
+      "sourceAfterCount": 1786,
+      "retainedGenerator": {
+        "path": "docs/migration/lot8b-evidence/component-reference-02/exporter-attempt02.py",
+        "bytes": 26099,
+        "sha256": "95c10ba2c9010ce48b90705a0b055b4a87d11582cb4389bf1634474708c620b4"
+      },
+      "retainedHistoricalOutput": {
+        "path": "docs/migration/lot8b-evidence/component-reference-02/reference.json",
+        "bytes": 523996,
+        "sha256": "d58a6551552e3ec88cb9a748e91c3cc1188b32e5cd3a1da62cdeac46cc67ae05"
+      }
+    },
+    {
+      "attempt": 3,
+      "status": "passed",
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/component-reference-03/execution.json",
+        "bytes": 1627,
+        "sha256": "ef4e75b3cc5f24c529ef0ed0814464e44f09f865eaa5b52d5571bf79ecb2182f"
+      },
+      "stdout": {
+        "path": "docs/migration/lot8b-evidence/component-reference-03/stdout.log.gz",
+        "bytes": 138,
+        "sha256": "848e8917b21ec84934ffe442906ddda125ce02d23752be1132b17212314e5523"
+      },
+      "stderr": {
+        "path": "docs/migration/lot8b-evidence/component-reference-03/stderr.log.gz",
+        "bytes": 20,
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+      },
+      "sourceBeforeCount": 1786,
+      "sourceAfterCount": 1786,
+      "generator": {
+        "path": "scripts/export-v6-branch-routing-reference.py",
+        "bytes": 26287,
+        "sha256": "7def846785568c7afad5786437c2ad2f2dce82e5348a37be569a38e8f6c7ef89"
+      },
+      "currentFixture": {
+        "path": "tests/fixtures/v6-branch-routing-reference.json",
+        "bytes": 542660,
+        "sha256": "e6ae197b7b982bd41f561b9df8e458436d7ce0797f39bbf86d972e55472b6769"
+      }
+    }
+  ],
+  "retention": "Original receipt paths preserve their generation-time meaning. Attempts01/02 generators are retained at their explicit alternate paths. Attempt02 original fixture is retained byte-exact under component-reference-02/reference.json; the current fixture path contains attempt03. No failed receipt is reclassified.",
+  "limits": [
+    "Synthetic component evidence only; no live game, original common caller, dispatch or solved-level claim.",
+    "Counterfactual initial motion fields are explicitly marked and are not fresh physical acquisitions.",
+    "Complete small-domain original searches do not qualify native cooperative bound/deadline handling.",
+    "Full common caller memory admission and selected-owner exactly-once acquisition remain future integration proofs.",
+    "No execution or semantic reading of LKEY payloads, game data or oracle. Only complete original-manifest opaque hashing occurs."
+  ]
+}

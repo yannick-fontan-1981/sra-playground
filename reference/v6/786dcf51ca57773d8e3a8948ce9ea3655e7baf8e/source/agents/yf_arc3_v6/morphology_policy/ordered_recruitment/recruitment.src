@@ -1,0 +1,7 @@
+MODULE v6.ordered_recruitment
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        decision: Any
+    STEP select
+        CALL recruitment.select(request=request) -> decision
+        STOP decision

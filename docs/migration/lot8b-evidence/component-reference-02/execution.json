@@ -1,0 +1,45 @@
+{
+  "schema": "logos-engine.v6.branch-routing-reference-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-12T03:34:03.746265+00:00",
+  "timeoutSeconds": 60,
+  "maximumRasterWidth": 32,
+  "maximumRasterHeight": 32,
+  "maximumBars": 3,
+  "maximumLimit": 16,
+  "maximumCartesianCandidatesPerCall": 4096,
+  "maximumStatefulOperations": 100,
+  "globalLockAcquired": false,
+  "performanceMeasurement": false,
+  "nativeImports": false,
+  "gamePayloadsInterpreted": 0,
+  "gameActionsDispatched": 0,
+  "sourceModified": false,
+  "generator": {
+    "path": "scripts/export-v6-branch-routing-reference.py",
+    "bytes": 26099,
+    "sha256": "95c10ba2c9010ce48b90705a0b055b4a87d11582cb4389bf1634474708c620b4"
+  },
+  "sourceBeforeCount": 1786,
+  "sourceAfterCount": 1786,
+  "fixture": {
+    "path": "tests/fixtures/v6-branch-routing-reference.json",
+    "bytes": 523996,
+    "sha256": "d58a6551552e3ec88cb9a748e91c3cc1188b32e5cd3a1da62cdeac46cc67ae05"
+  },
+  "geometryCount": 20,
+  "scenarioCount": 12,
+  "statefulOperationCount": 83,
+  "frameCount": 35,
+  "sourceFilesVerifiedBeforeAndAfter": [
+    1786,
+    1786
+  ],
+  "sourceHashes": {
+    "agents/yf_arc3_v6/laya_proto/common_branch_routing.py": "b3f6a743e1ebdbf040a06a9c0d42b822c08ec28dff43cd2eb013ef41d0f27567",
+    "agents/yf_arc3_v6/laya_proto/geometric_observer.py": "1017b130cb91f799ab5bdb2f26789c2645078d9b9d226469b3915d4a7262eaac",
+    "agents/yf_arc3_v6/laya_proto/common_multiscale_constraints.py": "01da7c7f636ed2039a364188c7f4fedb2c4c0a0e8bb6b2ba7f22b1c259eaaf12"
+  },
+  "finishedAt": "2026-11-12T03:34:05.246507+00:00",
+  "elapsedSeconds": 1.499980358999892
+}

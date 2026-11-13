@@ -1,0 +1,23 @@
+{
+  "schema": "logos-engine.native-loop-cost-relocation.v1",
+  "recordedAt": "2026-11-09T17:03:19.024179+00:00",
+  "source": "/workspace/scratch/c4dd29871d33/lot1-performance-after/after.json",
+  "destination": "docs/migration/lot1-evidence/performance/after.json.gz",
+  "original": {
+    "bytes": 975914,
+    "sha256": "eef43a47d6fca31336555ae70174ddfd653f329d0f51af4b91d32c07fff442c4"
+  },
+  "compressed": {
+    "bytes": 81129,
+    "sha256": "1f6eb22248c2694159f4f0b609bbfeddd8dc92eb4b11a680592629e6c1eff869"
+  },
+  "decompressionExact": true,
+  "headCommit": "f7b9a56af5488c8d4cebd5d912262a541f4fe403",
+  "nativeDigest": "8a67b57947364dab988c7081e35eb6a923beee2305eb4b8a8a89c2fc86ebea57",
+  "completedAt": "2026-11-09T17:03:04.553Z",
+  "harness": {
+    "path": "scripts/measure-native-loop-costs.mjs",
+    "bytes": 20670,
+    "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+  }
+}

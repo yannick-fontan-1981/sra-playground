@@ -1,0 +1,26 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot5b-evidence/prepare-cost-protocol.py",
+    "--finalize",
+    "--baseline-checkout",
+    "/workspace/sites/sra-lot5b-reference-057",
+    "--baseline-site-version",
+    "92",
+    "--candidate-version",
+    "0.58.0",
+    "--baseline-manifest",
+    "docs/migration/lot5b-evidence/baseline-published-057/source-manifest.json",
+    "--candidate-source-directory",
+    "docs/migration/lot5b-evidence/integrated-final",
+    "--output-directory",
+    "docs/migration/lot5b-evidence/performance-integrated",
+    "--owner-cost-qualification"
+  ],
+  "startedAt": "2026-11-11T01:53:15.809582+00:00",
+  "finishedAt": "2026-11-11T01:53:16.525447+00:00",
+  "exitCode": 0,
+  "log": "docs/migration/lot5b-evidence/performance-integrated/protocol-finalization.log",
+  "officialCostMeasurement": false
+}

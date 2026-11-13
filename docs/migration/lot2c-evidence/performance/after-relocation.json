@@ -1,0 +1,14 @@
+{
+  "schema": "logos-engine.lossless-json-transport.v1",
+  "original": {
+    "path": "docs/migration/lot2c-evidence/performance/after.json",
+    "bytes": 976870,
+    "sha256": "40e71f85286797873044775c67288875e932aec94dbb5a1100ae823d42499c29"
+  },
+  "compressed": {
+    "path": "docs/migration/lot2c-evidence/performance/after.json.gz",
+    "bytes": 81480,
+    "sha256": "922bdc2c25857e688d57e77fe834409a02394f702636cdeb67c5d4bc4d0073b1"
+  },
+  "qualification": "The original JSON bytes are retained verbatim inside gzip. No timings, samples, work counts or source identity are changed."
+}

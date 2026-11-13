@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.lot5c.peer-isolation-withdrawal-observation.v1",
+  "recordedAt": "2026-11-11T15:07:54.647548+00:00",
+  "peerStatusUpdatedAt": "2026-11-11T15:04:22.096246+00:00",
+  "peerPhase": "clean_repeat_preparation_bounded_source_release",
+  "peerStage": "ACKnowledged disclosed concurrent I/O; native98/docs99 succeeded but first ABBA is not eligible as isolated accepted cost. Entire clean repeat required on unchanged native.",
+  "costResult": {
+    "status": "first_window_isolation_invalidated_clean_repeat_pending",
+    "firstWindowNumericalSTCKIncrease": 0.05918584935329077,
+    "firstWindowNumericalSMLPIncrease": 0.013044211943558062,
+    "numericalReceiptUnchanged": true
+  },
+  "firstWindowIncident": "docs/migration/lot5c-evidence/recovery/coordination/lot7-quiet-io-deviation-20261111.json",
+  "ownerAcknowledgment": "First window formally ineligible for isolated cost; all raw/results retained unchanged; full clean ABBA repeat required.",
+  "qualification": "Acknowledgment and withdrawal now observed. The earlier source reconciliation correctly retained the then-unacknowledged reserve; this subsequent observation updates its status without rewriting any measured sample. Native source identity and its16bounded functional tests remain separate."
+}

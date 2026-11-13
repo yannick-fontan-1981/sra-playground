@@ -1,0 +1,46 @@
+{
+  "schema": "logos-engine.lot10c.kata-supplement-review.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T20:56:24.690602+00:00",
+  "sourceManifest": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/source-manifest.json",
+    "sha256": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7",
+    "bytes": 39098
+  },
+  "nativeSourceDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+  "summary": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/replay01/regressions/regression-summary.json",
+    "sha256": "5168d645671333e1ac0de66c1c8fed3f8020a8796215a73ef1a196ccabea5960",
+    "bytes": 96787
+  },
+  "declaration": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/recorded-regression-case-kata.json",
+    "sha256": "23ddc58b54e5ad3657ada016daa88466244dc951d1a6f57f90aeae9a38717f66",
+    "bytes": 3477
+  },
+  "strictComparator": {
+    "path": "scripts/compare-v54-regressions.py",
+    "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "bytes": 18166
+  },
+  "executionInputsChecked": 10,
+  "casesPassed": 1,
+  "casesTotal": 1,
+  "comparisonChecksPassed": 17,
+  "comparisonChecksExpected": 17,
+  "results": [
+    {
+      "case": "kata-060-self-consistency",
+      "game": "KATA",
+      "actions": 33,
+      "comparisonChecks": 17,
+      "failedChecks": [],
+      "nativeSourceUnchanged": true,
+      "immutableInputsUnchanged": true
+    }
+  ],
+  "newGame": false,
+  "mainTenCaseSuiteClaimed": false,
+  "timingClaim": false,
+  "qualification": "Separate KATA archived public regression on composed native329. The unchanged17-check comparison and direct child terminal receipts passed. This does not establish the main10-case suite, formal test suite, RECR success, cost, final delivery or publication."
+}

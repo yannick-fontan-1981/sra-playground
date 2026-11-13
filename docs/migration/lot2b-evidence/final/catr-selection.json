@@ -1,0 +1,13 @@
+{
+  "schema": "logos-engine.native-campaign-selection.v1",
+  "game": "CATR",
+  "targetLevels": 3,
+  "selectedAt": "2026-11-09T19:19:51.434185+00:00",
+  "switchDeadline": "2026-11-09T19:59:51.434185+00:00",
+  "maximumBlockedSeconds": 2400,
+  "previousResolution": "docs/migration/lot2b-evidence/final/ls20-resolution.json",
+  "sourceManifestDigest": "17252e294212a1563b75037a0b0dd782c2ecbc8cc4e1997a4f2bb2103bdf4e8b",
+  "selectionBasis": "Public game catalogue identifies Configured Attraction. Test a different public relation/arrangement interface using the unchanged generic common runtime, without inspecting the game engine or supplying a route.",
+  "clockPolicy": "This identity and original selection time persist across diagnosis and retries; switch after 40 minutes blocked.",
+  "nextCandidate": "MOTO"
+}

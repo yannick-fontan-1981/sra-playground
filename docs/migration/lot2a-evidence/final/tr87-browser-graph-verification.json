@@ -1,0 +1,29 @@
+{
+  "schema": "logos-engine.browser-postrun-graph-verification.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-09T18:17:06.525371+00:00",
+  "campaignBrowserReceipt": {
+    "path": "docs/migration/lot2a-evidence/final/tr87-browser-verification.json",
+    "sha256": "25b29d64f30f9a2c61811b9617eef9bd3568f95593d2736c0cb2ebbee2c47644",
+    "bytes": 2773
+  },
+  "method": "Read-only inspection through the visible Inspect reasoning > Inspect and edit the live reasoning graph > Read current graph controls, after the three-level run. No graph edit or game action.",
+  "url": "http://127.0.0.1:4173/?game=TR87&level=4",
+  "visibleGraph": {
+    "nodes": 1494,
+    "recordedRevisions": 3856,
+    "chainPrefix": "77e50be0c0d4",
+    "registeredProgramsObserved": [
+      "program:v6.morphology.evaluate \u00b7 r1",
+      "program:v6.composition_strategy.choose \u00b7 r1"
+    ],
+    "selectedFamily": "word_interface"
+  },
+  "countersBeforeAndAfter": {
+    "actions": 105,
+    "levelsSolved": 3,
+    "completedPlans": 30
+  },
+  "finalInspectorState": "collapsed",
+  "qualification": "The new common morphology program is visible in the retained graph. Program registration is not evidence of morphology selection on TR87; actual source-call attribution is retained separately in the campaign."
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "logos-engine.post-merge-integration-check.v1",
+  "startedAt": "2026-11-11T01:35:11.177649+00:00",
+  "finishedAt": "2026-11-11T01:37:12.293990+00:00",
+  "command": [
+    "node",
+    "--test",
+    "--test-concurrency=1",
+    "--test-reporter=tap",
+    "tests/v6-native-runtime.test.ts",
+    "tests/v6-addressed-material-kernel.test.ts",
+    "tests/v6-axial-question-kernel.test.ts",
+    "tests/v6-symbol-transactions-kernel.test.ts",
+    "tests/v6-select-reference.test.ts"
+  ],
+  "status": "passed",
+  "exitCode": 0,
+  "counts": {
+    "tests": 135,
+    "pass": 135,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "nativeSourceDigest": "25b8ef962919662283f4886c1b11466cc8c2ae73315ab14523eebaf9d06ac134",
+  "nativeFiles": 298,
+  "nativeSourceUnchanged": true,
+  "output": {
+    "path": "docs/migration/lot5b-evidence/diagnostic/post-site91-kernel-integration.log.gz",
+    "bytes": 4200,
+    "sha256": "6a7de4f3b52cab99d972b4df8abd8f2a6e2f6599e86202c56e1027a861710f28"
+  },
+  "qualification": "Bounded development integration check after actual Site91 merge; addresses coexistence of new Addressed owner with published Axial/Symbol owners. Not final4C integrated release validation."
+}

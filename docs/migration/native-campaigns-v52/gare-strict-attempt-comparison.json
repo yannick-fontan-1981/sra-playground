@@ -1,0 +1,27 @@
+{
+  "schema": "logos-engine.v52.strict-framed-attempt-comparison.v1",
+  "status": "passed",
+  "inputs": {
+    "sourceComponent": {
+      "path": "tests/fixtures/v6-framed-transfer-original-public.json.gz",
+      "sha256": "72b34a8e699086d5cc54987f98fd4e1c4c0f9972feb27b1f0368dacae93c1dfa"
+    },
+    "nativePublicTrace": {
+      "path": "docs/migration/native-campaigns-v52/gare-public-trace-attempt2.json.gz",
+      "sha256": "24440da44daf386377fe826af3e0ee9a0d32e1078daa3dc9187b532c0fbbc26f"
+    },
+    "nativeCampaign": {
+      "path": "docs/migration/native-campaigns-v52/gare-three-levels-attempt2.json",
+      "sha256": "197324672c850eae558f667cbd0ad1eb2c3435d2185831b299e715f3928d31c1"
+    }
+  },
+  "nativeActions": 12,
+  "sameCommands": 12,
+  "sameCompletePublicPackets": 13,
+  "sourceLevelsCompleted": 1,
+  "nativeLevelsCompleted": 1,
+  "sourceReason": "before_guard_refused",
+  "nativeReason": "no_admissible_prefix",
+  "originalFullCallerParity": false,
+  "qualification": "The native full caller and independent isolated unchanged FramedTransfer component executed the same12 commands and retained13 identical complete public packets. Both stopped before a13th physical action. This is a preserved failed three-level attempt, not a new three-level success or proof of complete-original-caller equivalence."
+}

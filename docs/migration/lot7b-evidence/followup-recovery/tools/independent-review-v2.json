@@ -1,0 +1,240 @@
+{
+  "schema": "sra.lot7.followup-independent-tool-review.v2",
+  "status": "passed_source_review_only",
+  "reviewMode": "source_review_only",
+  "reviewer": "/root/audit_caller_contract",
+  "recordedAt": "2026-11-11T12:36:09.422763+00:00",
+  "historicalReview": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/independent-review.json",
+    "sha256": "9838a672587b03e8c8e379cb69d898a4f45a466fe7d113e498049d13953077ea",
+    "bytes": 7357
+  },
+  "historicalReviewPreservedUnchanged": true,
+  "prospectiveAmendment": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/readiness-scope-amendment.json",
+    "sha256": "4a229bad726205ffd29bcc7fd8603593bb4902abf0fec04216d2c23df11aa98f",
+    "bytes": 4789
+  },
+  "tools": [
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/capture-strict-cost-forms.mjs",
+      "sha256": "8e269df48afbfea2991e976a252bf49e95cd15207b2442794078454c9fc8a568",
+      "bytes": 12545
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/verify-strict-cost-forms.mjs",
+      "sha256": "07276dd501a919c97d3f53b7ea594eed8029b5a363f2a498515c1a304551a22b",
+      "bytes": 7759
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/finalize-cost-readiness.py",
+      "sha256": "1cee23b5aace9a7bbed096d498a0c6255842f28dfd7e9dfc4760a67859a5e913",
+      "bytes": 36312
+    }
+  ],
+  "toolBytesUnchangedDuringSyntaxChecks": true,
+  "syntaxChecks": [
+    {
+      "kind": "syntax_only",
+      "tool": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/tools/capture-strict-cost-forms.mjs",
+        "sha256": "8e269df48afbfea2991e976a252bf49e95cd15207b2442794078454c9fc8a568",
+        "bytes": 12545
+      },
+      "argv": [
+        "node",
+        "--check",
+        "docs/migration/lot7b-evidence/followup-recovery/tools/capture-strict-cost-forms.mjs"
+      ],
+      "startedAt": "2026-11-11T12:36:09.255473+00:00",
+      "finishedAt": "2026-11-11T12:36:09.336746+00:00",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "moduleExecuted": false
+    },
+    {
+      "kind": "syntax_only",
+      "tool": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/tools/verify-strict-cost-forms.mjs",
+        "sha256": "07276dd501a919c97d3f53b7ea594eed8029b5a363f2a498515c1a304551a22b",
+        "bytes": 7759
+      },
+      "argv": [
+        "node",
+        "--check",
+        "docs/migration/lot7b-evidence/followup-recovery/tools/verify-strict-cost-forms.mjs"
+      ],
+      "startedAt": "2026-11-11T12:36:09.336885+00:00",
+      "finishedAt": "2026-11-11T12:36:09.413860+00:00",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "moduleExecuted": false
+    },
+    {
+      "kind": "syntax_only",
+      "tool": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/tools/finalize-cost-readiness.py",
+        "sha256": "1cee23b5aace9a7bbed096d498a0c6255842f28dfd7e9dfc4760a67859a5e913",
+        "bytes": 36312
+      },
+      "method": "Python ast.parse of file text without import or module execution",
+      "startedAt": "2026-11-11T12:36:09.413881+00:00",
+      "finishedAt": "2026-11-11T12:36:09.419863+00:00",
+      "status": "passed",
+      "moduleExecuted": false
+    }
+  ],
+  "scope": "Independent review of the prospective eleven-case requirement and exact prepared-to-published6A source reconciliation. The prior review remains the historical review of its earlier ten-case helper.",
+  "metadataInputs": [
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/regression-cases.json",
+      "sha256": "a16f67724f53def79fe476716c12a61e8064df871911772731983fa2505da3a9",
+      "bytes": 8305
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/prepared-6a-regression-cases.json",
+      "sha256": "dc84ecc83902ecb71865710220b593df351dc0ca7ae6885561e986a509df7ea1",
+      "bytes": 8422
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/contract/regression-cases-final.json",
+      "sha256": "612786e95a3cd6c98c7a0ccd4bd5e616ff5b54d1de18f7962aae79d50faf4f36",
+      "bytes": 9035
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/prepared-6a-source-manifest.json",
+      "sha256": "52f3624d419cb8209e6545274b3867b5f150d8630a0daa05369fd7613ed435fe",
+      "bytes": 36332
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/prepared-6a-source-observation.json",
+      "sha256": "682c29eb19f69943e4642c5b53d2c5b0f05109e939cad81e6e83de7714479441",
+      "bytes": 6583
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/contract/test-scope.json",
+      "sha256": "2cecca0a3969206a5a6a4111f4447bddf21cdf4d77121d15fa6741a57c7d2fa3",
+      "bytes": 8080
+    }
+  ],
+  "regressionDeclarationReview": {
+    "status": "metadata_verified_only",
+    "requiredCases": 11,
+    "requiredStrictChecks": 187,
+    "strictChecksPerCase": 17,
+    "caseIds": [
+      "catr-051",
+      "rswp-051",
+      "fogw-051",
+      "vois-051",
+      "conn-050",
+      "mind-051",
+      "weav-051",
+      "tria-development-4b",
+      "craf-055",
+      "isos-development-4c",
+      "kata-060-self-consistency"
+    ],
+    "firstTenSite95RowsExactlyUnchanged": true,
+    "allElevenRowsExactlyMatchRetainedPrepared6A": true,
+    "strictComparatorAndAllCheckNamesUnchanged": true,
+    "passiveOwnerRequirementsUnchanged": true,
+    "additionalKataRow": {
+      "id": "kata-060-self-consistency",
+      "game": "KATA",
+      "baseline": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz",
+        "sha256": "a3318ed5f7d742f63b5923f3e1e46b0d9cfff1d18e767b45c522d61aa354e455"
+      },
+      "trace": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-public-trace.json.gz",
+        "sha256": "c236c95ec0bdcb892a6940940098e4310eb35a6ae11acaf6b74545d09aa22daa"
+      },
+      "comparisonBasis": "fresh_current_native_self_consistency"
+    },
+    "kataComparisonBasisQualification": "The inherited self-consistency label describes6A provenance. The follow-up comparison uses the exact retained predecessor baseline/trace and must reconcile to its actual publication before cost. No native0.58 KATA parity is inferred.",
+    "casePayloadsOpenedOrDecoded": false,
+    "regressionResultsVerifiedByThisReview": false
+  },
+  "publicationReconciliationReview": {
+    "reviewedAsFutureMandatoryGate": true,
+    "actualPublicationVerifiedByThisReview": false,
+    "requiresSucceededActualBaselinePublication": true,
+    "requiresActualBaselineFullNativeInventoryEqualPreparedManifest": true,
+    "preparedNativeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+    "requiresPublishedNativeManifestGitBlobEqualPreparedBytes": true,
+    "requiresPublishedRegressionManifestGitBlobEqualRetainedBytes": true,
+    "requiresPreparedCandidateAndPublishedCaseRowsEqual": true,
+    "lateSourceChangeExceptionPermitted": false,
+    "changedSourceRequires": "New integration, source freeze and matching fresh proofs before readiness."
+  },
+  "findingsClosed": [
+    {
+      "id": "late_predecessor_runtime_change",
+      "finding": "Reconciling only the published case declaration left a late6A runtime-only source change undetected because runtime is already an allowed follow-up difference.",
+      "resolution": "The finalizer now requires the full actual baseline native manifest to equal the retained prepared6A manifest, checks its observation/version/digest, and requires exact frozen-manifest bytes from the actual published Git commit."
+    }
+  ],
+  "priorCurrentInputBindingChecksRetained": true,
+  "strictCostScopeUnchanged": {
+    "captureToolByteIdenticalToHistoricalReview": true,
+    "postWindowVerifierByteIdenticalToHistoricalReview": true,
+    "functionalSessions": 8,
+    "functionalActions": 62,
+    "officialTrials": 40,
+    "measuredSessions": 32,
+    "measuredActions": 400,
+    "excludedWarmupSessions": 8,
+    "excludedWarmupActions": 24,
+    "structuralExemptions": [],
+    "globalRule": "Pooled complete-session median strictly below+10% separately for STCK and SMLP. Phase excess remains diagnostic; no post-measurement exclusions."
+  },
+  "mandatoryFollowupGates": [
+    {
+      "id": "strict_post_window_work_verification",
+      "required": true,
+      "action": "Execute verify-strict-cost-forms.mjs after the same official window and require its passed receipt before delivery. The historical cost renderer does not require it automatically."
+    },
+    {
+      "id": "fresh_safe_6a_tests",
+      "declaredScopeVerified": true,
+      "prospectiveUniqueFiles": 133,
+      "previewTests": [
+        "tests/v6-preview-capture.test.ts",
+        "tests/v6-preview-packing-integration.test.ts",
+        "tests/v6-preview-packing-native.test.ts",
+        "tests/v6-preview-packing-reference.test.ts"
+      ],
+      "formalExecutionVerifiedByThisReview": false
+    },
+    {
+      "id": "actual_published_predecessor_reconciliation",
+      "requiredBeforeOfficialCost": true,
+      "satisfiedByThisReview": false
+    }
+  ],
+  "observedAbsentOwnExecutionReceiptsAtReview": {
+    "window.json": [],
+    "readiness.json": [],
+    "strict-work-capture.json": [],
+    "*-execution-started.json": [],
+    "regression-summary.json": []
+  },
+  "remainingBlockingSourceFindings": [],
+  "executionLimits": {
+    "syntaxChecksOnly": true,
+    "functionalCaptureExecuted": false,
+    "officialCostWindowExecuted": false,
+    "nativeWorkerStarted": false,
+    "gameExecuted": false,
+    "replayExecuted": false,
+    "oracleExecuted": false,
+    "kataPayloadDecoded": false,
+    "lkeyPayloadDecoded": false,
+    "testsExecuted": false,
+    "helperEditsMadeByReviewer": false
+  },
+  "qualification": "Prospective source review and syntax checks only, recorded before any own regression or cost receipt was present. It does not assert actual6A publication, regression success, readiness, numerical cost acceptance, new gameplay or complete original-caller parity. LKEY remains closed."
+}

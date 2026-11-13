@@ -1,0 +1,68 @@
+{
+  "schema": "logos-engine.browser-qa-observation.v1",
+  "status": "controls_and_three_levels_verified",
+  "recordedAt": "2026-11-10T12:56:36.615304+00:00",
+  "game": "FOGW",
+  "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.46.0",
+  "nativeSourceDigest": "5adf58cb9bd0802dd083812e7591c53cb786410ad23c14a29814d870ef67276c",
+  "managedPreview": "http://127.0.0.1:4173/",
+  "finalObservedUrl": "http://127.0.0.1:4173/?game=FOGW&level=4",
+  "method": "CUA visible controls, accessibility observations and screenshot only. No browser agent state, hidden game data or game code read. Frozen checkout/build receipts establish source identity.",
+  "steps": [
+    {
+      "action": "Select FOGW then Agent; cold session",
+      "actions": 0,
+      "levelsSolved": 0,
+      "completedPlans": 0,
+      "level": 1
+    },
+    {
+      "action": "Run then Pause; Paused observed",
+      "actions": 0,
+      "levelsSolved": 0,
+      "completedPlans": 0,
+      "level": 1
+    },
+    {
+      "action": "One action completed",
+      "actions": 1,
+      "levelsSolved": 0,
+      "completedPlans": 1,
+      "level": 1
+    },
+    {
+      "action": "Resume Run to next level; Level completed",
+      "actions": 18,
+      "levelsSolved": 1,
+      "completedPlans": 9,
+      "level": 2
+    },
+    {
+      "action": "Run to next level; Level completed",
+      "actions": 32,
+      "levelsSolved": 2,
+      "completedPlans": 18,
+      "level": 3
+    },
+    {
+      "action": "Run to next level; Level completed",
+      "actions": 50,
+      "levelsSolved": 3,
+      "completedPlans": 27,
+      "level": 4
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "docs/migration/lot3e-evidence/final/browser/fogw-final.png",
+      "bytes": 82352,
+      "sha256": "a242a99e91599c69aeb4c75d4c63e0d555d7a85c210ed1dd47f3f001df1491e3"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/browser/fogw-final-ax.txt",
+      "bytes": 1072,
+      "sha256": "d9cbe6cb9e978144550d2256aedaaf22c405290d0959a10353b873f6433827d6"
+    }
+  ],
+  "qualification": "One separate continuous cold browser session. No level jump, route or memory injection. Pause, single action and resume verified; three naturally completed levels match the instrumented campaign. Inspector stayed closed. Saved AX is the final diff; screenshot includes all three counters. This is source-preview UI verification, separate from source oracle, compiled build and timing evidence."
+}

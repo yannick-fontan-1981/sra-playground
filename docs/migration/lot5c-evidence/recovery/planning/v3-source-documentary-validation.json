@@ -1,0 +1,246 @@
+{
+  "schema": "logos-engine.lot5c-v3-source-documentary-validation.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T20:56:49.548929+00:00",
+  "finishedAt": "2026-11-11T20:56:49.896997+00:00",
+  "checksPassed": 28,
+  "checksTotal": 28,
+  "checks": [
+    {
+      "id": "exact_new_request",
+      "passed": true
+    },
+    {
+      "id": "exact_performance04",
+      "passed": true
+    },
+    {
+      "id": "exact_coordination03",
+      "passed": true
+    },
+    {
+      "id": "exact_parent_v3",
+      "passed": true
+    },
+    {
+      "id": "exact_global_review_v3",
+      "passed": true
+    },
+    {
+      "id": "exact_child_registry03",
+      "passed": true
+    },
+    {
+      "id": "same_existing_mutex",
+      "passed": true
+    },
+    {
+      "id": "same_process_helper",
+      "passed": true
+    },
+    {
+      "id": "all_controller_bodies_unchanged",
+      "passed": true
+    },
+    {
+      "id": "unchanged_reader_Evidence",
+      "passed": true
+    },
+    {
+      "id": "unchanged_reader_unmeasured",
+      "passed": true
+    },
+    {
+      "id": "unchanged_reader_load_verifier",
+      "passed": true
+    },
+    {
+      "id": "unchanged_reader_native_inventory",
+      "passed": true
+    },
+    {
+      "id": "unchanged_reader_native_version",
+      "passed": true
+    },
+    {
+      "id": "unchanged_reader_formal",
+      "passed": true
+    },
+    {
+      "id": "unchanged_reader_regressions",
+      "passed": true
+    },
+    {
+      "id": "unchanged_reader_common",
+      "passed": true
+    },
+    {
+      "id": "unchanged_reader_browser",
+      "passed": true
+    },
+    {
+      "id": "unchanged_reader_preparation_02",
+      "passed": true
+    },
+    {
+      "id": "single_substitution_REQUEST",
+      "passed": true
+    },
+    {
+      "id": "single_substitution_PERF",
+      "passed": true
+    },
+    {
+      "id": "single_substitution_COORD",
+      "passed": true
+    },
+    {
+      "id": "single_substitution_REGISTRY_PATH",
+      "passed": true
+    },
+    {
+      "id": "controller_exact_four_substitutions_only",
+      "passed": true
+    },
+    {
+      "id": "documentary_predecessor03_anchor02",
+      "passed": true
+    },
+    {
+      "id": "actual04_documentary_preparation_reader_passed",
+      "passed": true
+    },
+    {
+      "id": "all_observed_documentary_inputs_unchanged",
+      "passed": true
+    },
+    {
+      "id": "no_current_readiness_or_window",
+      "passed": true
+    }
+  ],
+  "sources": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c-v2.py",
+      "bytes": 25586,
+      "sha256": "174bd2363d6a85f19d3bf4243d39067f7d8482cf77e7d4dbf070ca8f66673105"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c-v3.py",
+      "bytes": 25588,
+      "sha256": "07bfb3b94da98906b431272f94e8946ca7e4bd5b9deae1d798b9ef5239fd62c8"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c-v2.py",
+      "bytes": 65022,
+      "sha256": "2372e634fdd493430d90ae0a6ba00d98421689ca9121861f88ec7281413a1ad7"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c-v3.py",
+      "bytes": 67027,
+      "sha256": "3abd980dd710d4741d32e89a4163c3ad5cc735ce450df6bdeee004353d51a118"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-process-control-v2.py",
+      "bytes": 8499,
+      "sha256": "7e5fa20cdc5590cb28fdfbda24a9f493ec3e24534b9866fa366221a1a3a5a24c"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/v3-verify-source-and-documentary-bindings.py",
+      "bytes": 7431,
+      "sha256": "cab61f73b81c3fffd49d5ba1b83dbb81756eb511b15e5d817ef5066312af9713"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/v3-source-substitutions.json",
+      "bytes": 2795,
+      "sha256": "043105ae06b9c8b71462348a71a2a91f01d886c8f42542eee9c58f3be41381a1"
+    }
+  ],
+  "documentaryInputsVerified": 179,
+  "ownerContract": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/owner-growth-contract.json",
+    "bytes": 6009,
+    "sha256": "b6a039ec4725d6ac408147149faf180d31cf089b0e2097e27c45727848112fcc"
+  },
+  "actualPreparationFacts": {
+    "staticPreflight": {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/static-preflight.json",
+      "bytes": 19703,
+      "sha256": "a879db5d40eb3b1f5531c20fbbea5b1bb90ccc549c976d7877fb2cc6d5fa75db"
+    },
+    "staticChecks": 76,
+    "independentPreparationReview": {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/independent-readiness-input-review.json",
+      "bytes": 36942,
+      "sha256": "17118655a5e4803b2e965de673ef6b055ca965c21617ed5520e31fb44a39e70c"
+    },
+    "independentChecks": 84,
+    "original02Preparation": {
+      "staticPreflight": {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/static-preflight.json",
+        "bytes": 19919,
+        "sha256": "2bed63fe86914300d5933c98ed65cc0e222df308f44336836414603a5cd0e46b"
+      },
+      "staticChecks": 76,
+      "independentPreparationReview": {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/independent-readiness-input-review.json",
+        "bytes": 36942,
+        "sha256": "17118655a5e4803b2e965de673ef6b055ca965c21617ed5520e31fb44a39e70c"
+      },
+      "independentChecks": 84,
+      "priorAttemptPreservation": {
+        "inventory": {
+          "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/prior-attempt-inventory.json",
+          "bytes": 6350,
+          "sha256": "0d5f1a51c7c413664459adb2e46a8b8078f0a0c25cb4e93acd4180ea6ae12698"
+        },
+        "fileCount": 39,
+        "allListedFilesByteIdentical": true,
+        "failedPreflightRetained": {
+          "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/static-preflight.json",
+          "bytes": 19941,
+          "sha256": "7112cfff86b26a59e2f804b45a62c20ed0e7b42aeeb311eb2157ca219504d7e1"
+        }
+      },
+      "supersession": {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/superseded-before-measurement.json",
+        "bytes": 3297,
+        "sha256": "1d3f45d98ae9dcd142953a60e5bd0b122a00e0ee53f433a0e0f9c4dc751eae8f"
+      },
+      "structuralEquivalence": {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/structural-repeat-equivalence.json",
+        "bytes": 5183,
+        "sha256": "e36f2b0072b5e9da21afae2a13179ece7be921d33bae7e9206c857737dc094a6"
+      }
+    },
+    "coordinationRepreparation": {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/coordination-repreparation.json",
+      "bytes": 16708,
+      "sha256": "7b47a0412acfa9e2a6489c07c85a4ce0341027ac005452d6023ca9ec51ce737b"
+    },
+    "structuralEvidenceQualification": "reused_structure_new_documentary_binding_only",
+    "fixtureRebinding": {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/structural-documentary-rebinding.json",
+      "bytes": 4743,
+      "sha256": "7458de03ab6d8fe33e4d9711aaceea5a5c7fbcda8d43db55adf80db96a27749b"
+    },
+    "historical03Preservation": {
+      "fileCount": 23,
+      "allListedFilesByteIdentical": true
+    },
+    "historical02Preservation": {
+      "fileCount": 44,
+      "allListedFilesByteIdentical": true
+    },
+    "newCaptureExecuted": false,
+    "newReplayExecuted": false,
+    "oldReadinessReusedAsActive": false
+  },
+  "runtimeProcessCreationDisabled": true,
+  "fullReadinessFinalizerInvoked": false,
+  "readinessCreated": false,
+  "quietRequestIssued": false,
+  "measurementExecuted": false,
+  "newNativeProofExecuted": false,
+  "qualification": "Pure source/path checks and the source-only documentary preparation reader. Its original02 proof checks and new03/04 bindings are verified without calling finalize/main or any process. Unchanged lifecycle bodies retain their prior temporary tests; no production mutex or peer status is changed."
+}

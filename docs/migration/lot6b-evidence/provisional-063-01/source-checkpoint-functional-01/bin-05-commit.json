@@ -1,0 +1,1193 @@
+{
+  "schema": "logos-engine.lot6b.single-bin-commit.v1",
+  "bin": "bin-05",
+  "status": "committed",
+  "attempt": 1,
+  "startedAt": "2026-11-11T20:48:07.726740+00:00",
+  "parent": "802dc1a60ea58cbdc095deb25bc2b4ba22e032e6",
+  "commit": "775e4c33740b4065fda0fa9f69cdf875962b6e3c",
+  "branch": "lot6b-selected-rigid-checkpoint-20261111",
+  "commands": [
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "rev-parse",
+        "--show-toplevel"
+      ],
+      "startedAt": "2026-11-11T20:48:07.729051+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 5,
+      "childProcessGroupId": 5,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 52,
+      "stdoutSha256": "1b9fbf98bad7efbbfe81b1e0277caa0d43308df834d0c05d84c7936d08e58f52",
+      "stdout": "/workspace/sites/sra-lot6b-20261111/.sites-checkout\n",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 5,
+          "startedAt": "2026-11-11T20:48:07.732724+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:07.732768+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:07.732774+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "rev-parse",
+        "HEAD"
+      ],
+      "startedAt": "2026-11-11T20:48:07.732798+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 6,
+      "childProcessGroupId": 6,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 41,
+      "stdoutSha256": "936e704417b2aed63ffdc3e405bd53cafd80ba58caa573b43ecb8fd72788e363",
+      "stdout": "802dc1a60ea58cbdc095deb25bc2b4ba22e032e6\n",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 6,
+          "startedAt": "2026-11-11T20:48:07.734615+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:07.734628+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:07.734632+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "diff",
+        "--cached",
+        "--name-only",
+        "-z"
+      ],
+      "startedAt": "2026-11-11T20:48:07.734641+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 7,
+      "childProcessGroupId": 7,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 7,
+          "startedAt": "2026-11-11T20:48:07.738749+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:07.738764+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:07.738768+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "ls-files",
+        "--deleted",
+        "-z"
+      ],
+      "startedAt": "2026-11-11T20:48:07.738776+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 8,
+      "childProcessGroupId": 8,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 8,
+          "startedAt": "2026-11-11T20:48:07.768618+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:07.768660+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:07.768665+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "check-ignore",
+        "--no-index",
+        "-z",
+        "--stdin"
+      ],
+      "startedAt": "2026-11-11T20:48:07.837087+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 9,
+      "childProcessGroupId": 9,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 170,
+      "stdoutSha256": "d00d2a20087ea3685757ff6a1f439368758f267d0ec3574eef7d762aafcb074f",
+      "stdout": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/isos-development-4c-output.raw.log\u0000",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 9,
+          "startedAt": "2026-11-11T20:48:07.839833+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:07.839853+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:07.839857+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "add",
+        "--",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/bounded-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/bounded-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/regressions/mind-051-replay.json.gz",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/bounded-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/regressions/tria-development-4b-replay.json.gz",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/bounded-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/bounded-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/preparation-static-check-02.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/proposal-measured-mask-fact/report.json.gz"
+      ],
+      "startedAt": "2026-11-11T20:48:07.840287+00:00",
+      "timeoutSeconds": 30,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 10,
+      "childProcessGroupId": 10,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 10,
+          "startedAt": "2026-11-11T20:48:08.615949+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:08.615988+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:08.615993+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "add",
+        "--force",
+        "--",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/isos-development-4c-output.raw.log"
+      ],
+      "startedAt": "2026-11-11T20:48:08.616038+00:00",
+      "timeoutSeconds": 30,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 31,
+      "childProcessGroupId": 31,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 31,
+          "startedAt": "2026-11-11T20:48:08.636186+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:08.636256+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:08.636262+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "diff",
+        "--cached",
+        "--name-status",
+        "--no-renames",
+        "-z"
+      ],
+      "startedAt": "2026-11-11T20:48:08.636285+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 52,
+      "childProcessGroupId": 52,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 1417,
+      "stdoutSha256": "961550456343621da7d9e1463743f46151dc64251ef5bd2366251ad2d1008b85",
+      "stdout": "A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/bounded-command.json\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/isos-development-4c-output.raw.log\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/bounded-command.json\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/regressions/mind-051-replay.json.gz\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/bounded-command.json\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/regressions/tria-development-4b-replay.json.gz\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/bounded-command.json\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/bounded-command.json\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/preparation-static-check-02.json\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/proposal-measured-mask-fact/report.json.gz\u0000",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 52,
+          "startedAt": "2026-11-11T20:48:08.655454+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:08.655493+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:08.655498+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "ls-files",
+        "--stage",
+        "-z",
+        "--",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/bounded-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/isos-development-4c-output.raw.log",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/bounded-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/regressions/mind-051-replay.json.gz",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/bounded-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/regressions/tria-development-4b-replay.json.gz",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/bounded-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/bounded-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/preparation-static-check-02.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/proposal-measured-mask-fact/report.json.gz"
+      ],
+      "startedAt": "2026-11-11T20:48:08.655539+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 53,
+      "childProcessGroupId": 53,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 1897,
+      "stdoutSha256": "d18772ac6ffe84d33c8ddf438c027de88bb042d210bc1ad658ffd43e0e036f0d",
+      "stdout": "100644 4088cf29ba20acecbe5edcde56fe9f3becb24d0a 0\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/bounded-command.json\u0000100644 1c9bc5db140542b48a4b577b2d09a883f15979e8 0\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/isos-development-4c-output.raw.log\u0000100644 89ae997776c47769ccf03d7d5f861b15111e208d 0\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/bounded-command.json\u0000100644 3f01b887b6973d18b64e27eeafcc5dec324404b0 0\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/regressions/mind-051-replay.json.gz\u0000100644 a44a04e1698094660cca5f3e70822ba5afd7324b 0\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/bounded-command.json\u0000100644 f18dc6e114e970fcf214bc66e0fba1bf9ea843a0 0\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/regressions/tria-development-4b-replay.json.gz\u0000100644 ab41bd94f0b28b9e53689b9bf1fd6d4d2b122be1 0\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/bounded-command.json\u0000100644 faef645881eaf264598a6c43ae8569f398e03a19 0\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/bounded-command.json\u0000100644 d86afeb1c85671e8180d8485bc38618accaa611a 0\tdocs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/preparation-static-check-02.json\u0000100644 7e36b1d9dc9df253e2aed71d8172006083dff852 0\tdocs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/proposal-measured-mask-fact/report.json.gz\u0000",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 53,
+          "startedAt": "2026-11-11T20:48:08.659049+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:08.659075+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:08.659080+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "cat-file",
+        "blob",
+        "4088cf29ba20acecbe5edcde56fe9f3becb24d0a"
+      ],
+      "startedAt": "2026-11-11T20:48:08.659106+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 54,
+      "childProcessGroupId": 54,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 664191,
+      "stdoutSha256": "a120095b3b4eae4302006944dbbb2d5fdd553596c74217b3e8123bc8440c277a",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 54,
+          "startedAt": "2026-11-11T20:48:08.666196+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:08.666231+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:08.666236+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "cat-file",
+        "blob",
+        "1c9bc5db140542b48a4b577b2d09a883f15979e8"
+      ],
+      "startedAt": "2026-11-11T20:48:08.666780+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 55,
+      "childProcessGroupId": 55,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 45623,
+      "stdoutSha256": "77e5b084e535cc063b035d1abb19674372414e0d11bb448bf2207a19b3b2b04d",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 55,
+          "startedAt": "2026-11-11T20:48:08.670191+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:08.670211+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:08.670214+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "cat-file",
+        "blob",
+        "89ae997776c47769ccf03d7d5f861b15111e208d"
+      ],
+      "startedAt": "2026-11-11T20:48:08.670274+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 56,
+      "childProcessGroupId": 56,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 664212,
+      "stdoutSha256": "fc0cceeabc8f2e0b7ba67b7756ff14e1fe288a05eb3d33ff97249c358866825c",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 56,
+          "startedAt": "2026-11-11T20:48:08.679622+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:08.679666+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:08.679671+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "cat-file",
+        "blob",
+        "3f01b887b6973d18b64e27eeafcc5dec324404b0"
+      ],
+      "startedAt": "2026-11-11T20:48:08.680191+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 57,
+      "childProcessGroupId": 57,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 6115157,
+      "stdoutSha256": "80023012f0a10a1c48e12fa0217e6a0affc7858df4f459dddb9efa32075f3d42",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 57,
+          "startedAt": "2026-11-11T20:48:08.719165+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:08.719217+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:08.719222+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "cat-file",
+        "blob",
+        "a44a04e1698094660cca5f3e70822ba5afd7324b"
+      ],
+      "startedAt": "2026-11-11T20:48:08.722888+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 58,
+      "childProcessGroupId": 58,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 664282,
+      "stdoutSha256": "47782b1a616e5469977ffff561b8c9734ef9a0086f7e575ffbbe389e29db6031",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 58,
+          "startedAt": "2026-11-11T20:48:08.729286+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:08.729315+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:08.729321+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "cat-file",
+        "blob",
+        "f18dc6e114e970fcf214bc66e0fba1bf9ea843a0"
+      ],
+      "startedAt": "2026-11-11T20:48:08.729716+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 59,
+      "childProcessGroupId": 59,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 4165019,
+      "stdoutSha256": "f0f65a86625efb7f01b9c775e2edc7af09d48bdb7e9379d92a8fa209e2c6a794",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 59,
+          "startedAt": "2026-11-11T20:48:08.760980+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:08.761056+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:08.761062+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "cat-file",
+        "blob",
+        "ab41bd94f0b28b9e53689b9bf1fd6d4d2b122be1"
+      ],
+      "startedAt": "2026-11-11T20:48:08.763439+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 60,
+      "childProcessGroupId": 60,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 664216,
+      "stdoutSha256": "2df926f97a177056f17702abd0dc296c3fcdd9f828b7ee3d34928aa0dee11cf2",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 60,
+          "startedAt": "2026-11-11T20:48:08.769780+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:08.769811+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:08.769816+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "cat-file",
+        "blob",
+        "faef645881eaf264598a6c43ae8569f398e03a19"
+      ],
+      "startedAt": "2026-11-11T20:48:08.770230+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 61,
+      "childProcessGroupId": 61,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 664230,
+      "stdoutSha256": "3b6b925af6cdf4b9d66ac751daf24954752907534d2c75e88a0110149528e2b6",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 61,
+          "startedAt": "2026-11-11T20:48:08.777445+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:08.777469+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:08.777473+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "cat-file",
+        "blob",
+        "d86afeb1c85671e8180d8485bc38618accaa611a"
+      ],
+      "startedAt": "2026-11-11T20:48:08.777859+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 62,
+      "childProcessGroupId": 62,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 1679,
+      "stdoutSha256": "0243d2224ccc4d3d9dfa7c74913b884a963f5db715fb72a50d648b04b9567211",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 62,
+          "startedAt": "2026-11-11T20:48:08.780696+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:08.780714+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:08.780718+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "cat-file",
+        "blob",
+        "7e36b1d9dc9df253e2aed71d8172006083dff852"
+      ],
+      "startedAt": "2026-11-11T20:48:08.780739+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 63,
+      "childProcessGroupId": 63,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 11517174,
+      "stdoutSha256": "3ebce1dacfa24fb46bc08ae69bf5c974f5e7cbca1f8c1d92698ab68cabe4b118",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 63,
+          "startedAt": "2026-11-11T20:48:08.887177+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:08.887251+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:08.887258+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "commit",
+        "-m",
+        "Checkpoint Lot 6B functional evidence bin-05/07"
+      ],
+      "startedAt": "2026-11-11T20:48:08.893883+00:00",
+      "timeoutSeconds": 120,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 64,
+      "childProcessGroupId": 64,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 1720,
+      "stdoutSha256": "84e9fde4e5e2a96c85fb484482e0b6d72afad756898e3f922d9c2f40d9d67805",
+      "stdout": "[lot6b-selected-rigid-064 775e4c33] Checkpoint Lot 6B functional evidence bin-05/07\n 10 files changed, 74627 insertions(+)\n create mode 100644 docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/bounded-command.json\n create mode 100644 docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/isos-development-4c-output.raw.log\n create mode 100644 docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/bounded-command.json\n create mode 100644 docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/regressions/mind-051-replay.json.gz\n create mode 100644 docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/bounded-command.json\n create mode 100644 docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/regressions/tria-development-4b-replay.json.gz\n create mode 100644 docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/bounded-command.json\n create mode 100644 docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/bounded-command.json\n create mode 100644 docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/preparation-static-check-02.json\n create mode 100644 docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/proposal-measured-mask-fact/report.json.gz\n",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 64,
+          "startedAt": "2026-11-11T20:48:08.945231+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:08.945277+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:08.945283+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "rev-parse",
+        "HEAD"
+      ],
+      "startedAt": "2026-11-11T20:48:08.945301+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 107,
+      "childProcessGroupId": 107,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 41,
+      "stdoutSha256": "1f3e485f3f391ee4a483b774fb6b2d4be819c26014d844cc96cf63f7bb7e2365",
+      "stdout": "775e4c33740b4065fda0fa9f69cdf875962b6e3c\n",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 107,
+          "startedAt": "2026-11-11T20:48:08.947314+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:08.947330+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:08.947333+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "rev-parse",
+        "HEAD^"
+      ],
+      "startedAt": "2026-11-11T20:48:08.947346+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 108,
+      "childProcessGroupId": 108,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 41,
+      "stdoutSha256": "936e704417b2aed63ffdc3e405bd53cafd80ba58caa573b43ecb8fd72788e363",
+      "stdout": "802dc1a60ea58cbdc095deb25bc2b4ba22e032e6\n",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 108,
+          "startedAt": "2026-11-11T20:48:08.949476+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:08.949490+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:08.949494+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "diff",
+        "--name-status",
+        "--no-renames",
+        "-z",
+        "802dc1a60ea58cbdc095deb25bc2b4ba22e032e6",
+        "775e4c33740b4065fda0fa9f69cdf875962b6e3c",
+        "--"
+      ],
+      "startedAt": "2026-11-11T20:48:08.949504+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 109,
+      "childProcessGroupId": 109,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 1417,
+      "stdoutSha256": "961550456343621da7d9e1463743f46151dc64251ef5bd2366251ad2d1008b85",
+      "stdout": "A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/bounded-command.json\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/isos-development-4c-output.raw.log\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/bounded-command.json\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/regressions/mind-051-replay.json.gz\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/bounded-command.json\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/regressions/tria-development-4b-replay.json.gz\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/bounded-command.json\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/bounded-command.json\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/preparation-static-check-02.json\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/proposal-measured-mask-fact/report.json.gz\u0000",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 109,
+          "startedAt": "2026-11-11T20:48:08.952716+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:08.952733+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:08.952737+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "ls-tree",
+        "-r",
+        "-z",
+        "775e4c33740b4065fda0fa9f69cdf875962b6e3c",
+        "--",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/bounded-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/isos-development-4c-output.raw.log",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/bounded-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/regressions/mind-051-replay.json.gz",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/bounded-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/regressions/tria-development-4b-replay.json.gz",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/bounded-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/bounded-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/preparation-static-check-02.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/proposal-measured-mask-fact/report.json.gz"
+      ],
+      "startedAt": "2026-11-11T20:48:08.952769+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 110,
+      "childProcessGroupId": 110,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 1927,
+      "stdoutSha256": "62b922e0e780b201daacab6beb7869f6ee622718a58e4915ea29e6161dc276d3",
+      "stdout": "100644 blob 4088cf29ba20acecbe5edcde56fe9f3becb24d0a\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/bounded-command.json\u0000100644 blob 1c9bc5db140542b48a4b577b2d09a883f15979e8\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/isos-development-4c-output.raw.log\u0000100644 blob 89ae997776c47769ccf03d7d5f861b15111e208d\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/bounded-command.json\u0000100644 blob 3f01b887b6973d18b64e27eeafcc5dec324404b0\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/regressions/mind-051-replay.json.gz\u0000100644 blob a44a04e1698094660cca5f3e70822ba5afd7324b\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/bounded-command.json\u0000100644 blob f18dc6e114e970fcf214bc66e0fba1bf9ea843a0\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/regressions/tria-development-4b-replay.json.gz\u0000100644 blob ab41bd94f0b28b9e53689b9bf1fd6d4d2b122be1\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/bounded-command.json\u0000100644 blob faef645881eaf264598a6c43ae8569f398e03a19\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/bounded-command.json\u0000100644 blob d86afeb1c85671e8180d8485bc38618accaa611a\tdocs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/preparation-static-check-02.json\u0000100644 blob 7e36b1d9dc9df253e2aed71d8172006083dff852\tdocs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/proposal-measured-mask-fact/report.json.gz\u0000",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 110,
+          "startedAt": "2026-11-11T20:48:08.955459+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:08.955473+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:08.955477+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "diff",
+        "--cached",
+        "--name-only",
+        "-z"
+      ],
+      "startedAt": "2026-11-11T20:48:08.955510+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 111,
+      "childProcessGroupId": 111,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 111,
+          "startedAt": "2026-11-11T20:48:08.961045+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:48:08.961070+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:48:08.961074+00:00"
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/bounded-command.json",
+      "sha256": "a120095b3b4eae4302006944dbbb2d5fdd553596c74217b3e8123bc8440c277a",
+      "bytes": 664191,
+      "mode": "0644",
+      "gitState": "new_untracked",
+      "requiresExplicitForceAdd": false,
+      "contentHandling": "opaque_bytes_only"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/isos-development-4c-output.raw.log",
+      "sha256": "77e5b084e535cc063b035d1abb19674372414e0d11bb448bf2207a19b3b2b04d",
+      "bytes": 45623,
+      "mode": "0644",
+      "gitState": "ignored_auxiliary_of_new_closed_evidence",
+      "requiresExplicitForceAdd": true,
+      "contentHandling": "opaque_bytes_only"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/bounded-command.json",
+      "sha256": "fc0cceeabc8f2e0b7ba67b7756ff14e1fe288a05eb3d33ff97249c358866825c",
+      "bytes": 664212,
+      "mode": "0644",
+      "gitState": "new_untracked",
+      "requiresExplicitForceAdd": false,
+      "contentHandling": "opaque_bytes_only"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/regressions/mind-051-replay.json.gz",
+      "sha256": "80023012f0a10a1c48e12fa0217e6a0affc7858df4f459dddb9efa32075f3d42",
+      "bytes": 6115157,
+      "mode": "0644",
+      "gitState": "new_untracked",
+      "requiresExplicitForceAdd": false,
+      "contentHandling": "opaque_bytes_only"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/bounded-command.json",
+      "sha256": "47782b1a616e5469977ffff561b8c9734ef9a0086f7e575ffbbe389e29db6031",
+      "bytes": 664282,
+      "mode": "0644",
+      "gitState": "new_untracked",
+      "requiresExplicitForceAdd": false,
+      "contentHandling": "opaque_bytes_only"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/regressions/tria-development-4b-replay.json.gz",
+      "sha256": "f0f65a86625efb7f01b9c775e2edc7af09d48bdb7e9379d92a8fa209e2c6a794",
+      "bytes": 4165019,
+      "mode": "0644",
+      "gitState": "new_untracked",
+      "requiresExplicitForceAdd": false,
+      "contentHandling": "opaque_bytes_only"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/bounded-command.json",
+      "sha256": "2df926f97a177056f17702abd0dc296c3fcdd9f828b7ee3d34928aa0dee11cf2",
+      "bytes": 664216,
+      "mode": "0644",
+      "gitState": "new_untracked",
+      "requiresExplicitForceAdd": false,
+      "contentHandling": "opaque_bytes_only"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/bounded-command.json",
+      "sha256": "3b6b925af6cdf4b9d66ac751daf24954752907534d2c75e88a0110149528e2b6",
+      "bytes": 664230,
+      "mode": "0644",
+      "gitState": "new_untracked",
+      "requiresExplicitForceAdd": false,
+      "contentHandling": "opaque_bytes_only"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/preparation-static-check-02.json",
+      "sha256": "0243d2224ccc4d3d9dfa7c74913b884a963f5db715fb72a50d648b04b9567211",
+      "bytes": 1679,
+      "mode": "0644",
+      "gitState": "new_untracked",
+      "requiresExplicitForceAdd": false,
+      "contentHandling": "opaque_bytes_only"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/proposal-measured-mask-fact/report.json.gz",
+      "sha256": "3ebce1dacfa24fb46bc08ae69bf5c974f5e7cbca1f8c1d92698ab68cabe4b118",
+      "bytes": 11517174,
+      "mode": "0644",
+      "gitState": "new_untracked",
+      "requiresExplicitForceAdd": false,
+      "contentHandling": "opaque_bytes_only"
+    }
+  ],
+  "networkUsed": false,
+  "automaticResetOrRetry": false,
+  "remoteVerificationPerformed": false,
+  "rootMustVerifyRemoteSeparately": true,
+  "coordinationBefore": [
+    {
+      "lane": "lot5c",
+      "updatedAt": "2026-11-11T20:39:04.511712+00:00",
+      "quietRequested": false,
+      "requestId": "lot5c-cost-a33a5f88-recovery-02"
+    },
+    {
+      "lane": "lot8a",
+      "updatedAt": "2026-11-11T20:42:24.934984+00:00",
+      "quietRequested": null,
+      "requestId": "lot5c-cost-a33a5f88-final-01"
+    },
+    {
+      "lane": "lot10c",
+      "updatedAt": "2026-11-11T20:47:11.343931+00:00",
+      "quietRequested": false,
+      "requestId": "lot5c-cost-a33a5f88-final-01"
+    }
+  ],
+  "planSha256": "39a6b0c8024fc7869acd4aeacc1438a1d68199fc4d9769bacac3a3bde66ed2d4",
+  "rawBytes": 25165783,
+  "normalAddPaths": [
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/bounded-command.json",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/bounded-command.json",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/regressions/mind-051-replay.json.gz",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/bounded-command.json",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/regressions/tria-development-4b-replay.json.gz",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/bounded-command.json",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/bounded-command.json",
+    "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/preparation-static-check-02.json",
+    "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/proposal-measured-mask-fact/report.json.gz"
+  ],
+  "forceAddPaths": [
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/isos-development-4c-output.raw.log"
+  ],
+  "previousPushReceipt": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-04-push.json",
+    "sha256": "4c31b2ad916b87599b27abbb6b069c197f46c51aab01461f5098d9376c44273d",
+    "bytes": 1101
+  },
+  "coordinationImmediatelyBeforeStaging": [
+    {
+      "lane": "lot5c",
+      "updatedAt": "2026-11-11T20:39:04.511712+00:00",
+      "quietRequested": false,
+      "requestId": "lot5c-cost-a33a5f88-recovery-02"
+    },
+    {
+      "lane": "lot8a",
+      "updatedAt": "2026-11-11T20:42:24.934984+00:00",
+      "quietRequested": null,
+      "requestId": "lot5c-cost-a33a5f88-final-01"
+    },
+    {
+      "lane": "lot10c",
+      "updatedAt": "2026-11-11T20:47:11.343931+00:00",
+      "quietRequested": false,
+      "requestId": "lot5c-cost-a33a5f88-final-01"
+    }
+  ],
+  "stagedObjects": {
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/bounded-command.json": {
+      "mode": "100644",
+      "object": "4088cf29ba20acecbe5edcde56fe9f3becb24d0a"
+    },
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/isos-development-4c-output.raw.log": {
+      "mode": "100644",
+      "object": "1c9bc5db140542b48a4b577b2d09a883f15979e8"
+    },
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/bounded-command.json": {
+      "mode": "100644",
+      "object": "89ae997776c47769ccf03d7d5f861b15111e208d"
+    },
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/regressions/mind-051-replay.json.gz": {
+      "mode": "100644",
+      "object": "3f01b887b6973d18b64e27eeafcc5dec324404b0"
+    },
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/bounded-command.json": {
+      "mode": "100644",
+      "object": "a44a04e1698094660cca5f3e70822ba5afd7324b"
+    },
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/regressions/tria-development-4b-replay.json.gz": {
+      "mode": "100644",
+      "object": "f18dc6e114e970fcf214bc66e0fba1bf9ea843a0"
+    },
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/bounded-command.json": {
+      "mode": "100644",
+      "object": "ab41bd94f0b28b9e53689b9bf1fd6d4d2b122be1"
+    },
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/bounded-command.json": {
+      "mode": "100644",
+      "object": "faef645881eaf264598a6c43ae8569f398e03a19"
+    },
+    "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/preparation-static-check-02.json": {
+      "mode": "100644",
+      "object": "d86afeb1c85671e8180d8485bc38618accaa611a"
+    },
+    "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/proposal-measured-mask-fact/report.json.gz": {
+      "mode": "100644",
+      "object": "7e36b1d9dc9df253e2aed71d8172006083dff852"
+    }
+  },
+  "exactCommittedPathSet": true,
+  "committedBlobsMatchPlan": true,
+  "workingFilesStillMatchPlan": true,
+  "finishedAt": "2026-11-11T20:48:08.983290+00:00",
+  "elapsedSeconds": 1.2565619430024526,
+  "actualExitCode": 0
+}

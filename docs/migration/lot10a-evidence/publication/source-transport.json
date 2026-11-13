@@ -1,0 +1,69 @@
+{
+  "schema": "logos-engine.bounded-source-transport-execution.v1",
+  "status": "completed",
+  "recordedAt": "2026-11-11T00:40:08.292Z",
+  "publishedBaseCommit": "4cea66731c0809f08288ea6f7287ef3dd7a392bd",
+  "retainedDeliveryCommit": "c045cd674f47c1a11b44623e832743d53742ad41",
+  "finalPushedCommit": "617d1f607d37a6bba1f7ae8ffe1826806e6749a0",
+  "finalTree": "74af8b5cf1eeebc8abe18afdac0035cd86016b39",
+  "finalParents": [
+    "63964db32fd02a6374772ba05321de8408e1151d",
+    "c045cd674f47c1a11b44623e832743d53742ad41"
+  ],
+  "pushCount": 5,
+  "ordinaryFastForwardPushesOnly": true,
+  "forcePush": false,
+  "intermediateSiteVersionsSaved": 0,
+  "intermediateSiteDeployments": 0,
+  "lastObservedSiteVersionBeforeFinalDeploy": 89,
+  "steps": [
+    {
+      "step": 1,
+      "startedAt": "2026-11-11T00:30:52.161Z",
+      "finishedAt": "2026-11-11T00:31:23.449Z",
+      "exitCode": 0,
+      "commit": "3fd029c866a002de578af8684f15275e412dd8a5",
+      "archive": "/workspace/sites/lot10a-publication-20261111/site-step-1.tar.gz",
+      "executionReceipt": "docs/migration/lot10a-evidence/publication/source-push-step-1.json"
+    },
+    {
+      "step": 2,
+      "startedAt": "2026-11-11T00:31:35.443Z",
+      "finishedAt": "2026-11-11T00:31:48.417Z",
+      "exitCode": 0,
+      "commit": "468332253b8971dc3892cbfa0e0a5451bfd74dcb",
+      "archive": "/workspace/sites/lot10a-publication-20261111/site-step-2.tar.gz",
+      "executionReceipt": "docs/migration/lot10a-evidence/publication/source-push-step-2.json"
+    },
+    {
+      "step": 3,
+      "startedAt": "2026-11-11T00:31:49.767Z",
+      "finishedAt": "2026-11-11T00:32:01.915Z",
+      "exitCode": 0,
+      "commit": "0e428835a81b0acdc82497d1a26a2514cca52061",
+      "archive": "/workspace/sites/lot10a-publication-20261111/site-step-3.tar.gz",
+      "executionReceipt": "docs/migration/lot10a-evidence/publication/source-push-step-3.json"
+    },
+    {
+      "step": 4,
+      "startedAt": "2026-11-11T00:32:03.107Z",
+      "finishedAt": "2026-11-11T00:32:15.321Z",
+      "exitCode": 0,
+      "commit": "63964db32fd02a6374772ba05321de8408e1151d",
+      "archive": "/workspace/sites/lot10a-publication-20261111/site-step-4.tar.gz",
+      "executionReceipt": "docs/migration/lot10a-evidence/publication/source-push-step-4.json"
+    },
+    {
+      "step": 5,
+      "startedAt": "2026-11-11T00:32:16.276Z",
+      "finishedAt": "2026-11-11T00:32:23.837Z",
+      "exitCode": 0,
+      "commit": "617d1f607d37a6bba1f7ae8ffe1826806e6749a0",
+      "archive": "/workspace/sites/lot10a-publication-20261111/site-step-5.tar.gz",
+      "executionReceipt": "docs/migration/lot10a-evidence/publication/source-push-step-5.json"
+    }
+  ],
+  "sourcePushPlan": "docs/migration/lot10a-evidence/publication/lot10a-source-push-plan.json",
+  "archiveEquality": "docs/migration/lot10a-evidence/publication/source-archive-equality.json",
+  "qualification": "Executed with the unchanged Sites workflow and ordinary credentials without publish_on_push. All five helper results confirmed the expected remote source HEAD and packaged archive. The original delivery commit is a direct parent of the final transport commit and its exact tree is retained. Every application archive member matches the validated build; archive-container metadata is not treated as a new build. No credential is retained in these receipts."
+}

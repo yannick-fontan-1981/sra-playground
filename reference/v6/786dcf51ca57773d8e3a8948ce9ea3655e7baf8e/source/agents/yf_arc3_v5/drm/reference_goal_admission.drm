@@ -1,0 +1,341 @@
+{
+  "module_id": "reference_goal_admission",
+  "declarations": [
+    {
+      "id": "policy.reference_goal_means_admission",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "reference_admission.proposal",
+        "reference_admission.indirect",
+        "reference_admission.direct"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.reference_admission.proposal",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reference_admission.proposal"
+            }
+          ],
+          "static_facts": {
+            "reference_admission_disposition_declared": true,
+            "reference_guided_goal_admitted": false,
+            "reference_guided_goal_exclusive": false,
+            "reference_guided_goal_admission_kind": "proposal_only",
+            "applicable": true,
+            "reference_goal_continuation_route_ref": "route.acquire_current_reference_goal_means"
+          },
+          "templated_facts": {
+            "reference_goal_admission_claim_ref": "claim.reference_goal_admission.{frame_token}.proposal_only"
+          },
+          "bound_facts": {
+            "reference_goal_admission_frame_ref": "frame_ref"
+          }
+        },
+        {
+          "id": "projection.reference_admission.indirect",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reference_admission.indirect"
+            }
+          ],
+          "static_facts": {
+            "reference_admission_disposition_declared": true,
+            "reference_guided_goal_admitted": true,
+            "reference_guided_goal_exclusive": false,
+            "reference_guided_goal_admission_kind": "indirect_probe",
+            "applicable": false,
+            "reference_goal_continuation_route_ref": "route.choose_information_probe"
+          },
+          "templated_facts": {
+            "reference_goal_admission_claim_ref": "claim.reference_goal_admission.{frame_token}.indirect_probe"
+          },
+          "bound_facts": {
+            "reference_goal_admission_frame_ref": "frame_ref"
+          }
+        },
+        {
+          "id": "projection.reference_admission.direct",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reference_admission.direct"
+            }
+          ],
+          "static_facts": {
+            "reference_admission_disposition_declared": true,
+            "reference_guided_goal_admitted": true,
+            "reference_guided_goal_exclusive": false,
+            "reference_guided_goal_admission_kind": "direct_continuation",
+            "applicable": false,
+            "reference_goal_continuation_route_ref": "route.existing_verified_alignment_or_recipe"
+          },
+          "templated_facts": {
+            "reference_goal_admission_claim_ref": "claim.reference_goal_admission.{frame_token}.direct_continuation"
+          },
+          "bound_facts": {
+            "reference_goal_admission_frame_ref": "frame_ref"
+          }
+        },
+        {
+          "id": "projection.reference_admission.current_direct_means",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reference_admission.direct"
+            },
+            {
+              "field": "declared_reference_guided_goal_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "reference_write_binding_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "reference_write_pose_palette_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "reference_write_premise_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "reference_write_mismatch_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.reference_admission.current_indirect_question",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reference_admission.indirect"
+            },
+            {
+              "field": "declared_reference_guided_goal_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "reference_indirect_question_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.reference_admission.validated_matching_commitment",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reference_admission.direct"
+            },
+            {
+              "field": "declared_reference_guided_goal_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "reference_write_binding_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "reference_write_pose_palette_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "reference_write_premise_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "reference_write_mismatch_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "reference_committed_goal_matches_current_binding",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "reference_guided_goal_exclusive": true
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.reference_admission.direct",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reference_admission.direct"
+            }
+          ],
+          "reason_ref": "reason.reference_goal_admission_requires_current_qualified_means"
+        },
+        {
+          "id": "tier.reference_admission.indirect",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reference_admission.indirect"
+            }
+          ],
+          "reason_ref": "reason.reference_goal_admission_requires_current_qualified_means"
+        },
+        {
+          "id": "tier.reference_admission.proposal",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reference_admission.proposal"
+            }
+          ],
+          "reason_ref": "reason.reference_goal_admission_requires_current_qualified_means"
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.reference_goal_current_means_receipt"
+      },
+      "invariants": [
+        "goal_inventory_is_not_admission_or_exclusivity",
+        "indirect_probe_preserves_siblings_and_does_not_establish_control",
+        "direct_means_reuse_existing_alignment_or_recipe",
+        "root_why_and_act_validation_remain_independent"
+      ],
+      "reason_refs": [
+        "reason.reference_goal_admission_requires_current_qualified_means"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "reference_guided_goal_admitted",
+          "preferred_order": "maximize"
+        }
+      ]
+    },
+    {
+      "id": "rule.reference_goal_current_means_receipt",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "relation_family": "structural",
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "premises": [
+        "source_disposition_from_current_means_and_separate_goal_inventory"
+      ],
+      "invariants": [
+        "absence_of_qualified_means_is_not_goal_refutation",
+        "indirect_admission_does_not_establish_control",
+        "receipt_does_not_authorize_action"
+      ],
+      "falsifiers": [
+        "current_frame_or_role_binding_has_changed"
+      ],
+      "reason_refs": [
+        "reason.reference_goal_admission_requires_current_qualified_means"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "receipt.reference_goal_admission.{frame_token}.{reference_guided_goal_admission_kind}",
+          "kind": "schema",
+          "label": "current Source admission separate from goal inventory and exclusivity",
+          "required_fields": [
+            "frame_ref",
+            "reference_guided_goal_admission_kind",
+            "reference_guided_goal_exclusive"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.current_reference_goal_admission.v1",
+            "commitment": "revisable",
+            "action_authorization": false,
+            "indirect_control_not_established": true
+          },
+          "attribute_bindings": {
+            "observation_ref": "frame_ref",
+            "operational_scene_ref": "frame_ref",
+            "admission_kind": "reference_guided_goal_admission_kind",
+            "admitted": "reference_guided_goal_admitted",
+            "exclusive": "reference_guided_goal_exclusive",
+            "raw_goal_count": "declared_reference_guided_goal_count"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.reference_goal_admission.{frame_token}.{reference_guided_goal_admission_kind}",
+          "predicate": "current_reference_goal_means_admission_receipt",
+          "family": "structural",
+          "epistemic_status": "supported",
+          "required_fields": [
+            "frame_ref",
+            "reference_guided_goal_admission_kind"
+          ],
+          "required_term_patterns": [
+            "receipt.reference_goal_admission.{frame_token}.{reference_guided_goal_admission_kind}"
+          ],
+          "argument_patterns": [
+            "receipt.reference_goal_admission.{frame_token}.{reference_guided_goal_admission_kind}",
+            "{frame_ref}"
+          ],
+          "static_attributes": {
+            "authorizes_action": false,
+            "requires_current_revalidation": true,
+            "absence_does_not_refute_proposed_goal": true
+          },
+          "attribute_bindings": {
+            "observation_ref": "frame_ref",
+            "operational_scene_ref": "frame_ref",
+            "admission_kind": "reference_guided_goal_admission_kind",
+            "admitted": "reference_guided_goal_admitted",
+            "exclusive": "reference_guided_goal_exclusive",
+            "raw_goal_count": "declared_reference_guided_goal_count"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+--- docs/migration/lot8b-evidence/tools/final-cost/analyze.mjs
++++ docs/migration/lot9a-evidence/tools/final-cost/analyze.mjs
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env node
+-/** Lot8B supplement. Reads retained reports; runs no native code or measurement.
++/** Lot9A supplement. Reads retained reports; runs no native code or measurement.
+  * CLI: node analyze.mjs CONTRACT STRICT_ATTEMPT_RECEIPT NEW_OUTPUT
+  * Historical arithmetic/workSignature are imported unchanged. Full raw trial
+  * metadata is compared; exactly four predeclared structural paths may differ.
+@@ -89,10 +89,10 @@
+ const [contractArg, strictArg, outputArg] = process.argv.slice(2);
+ assert.ok(contractArg && strictArg && outputArg && process.argv.length === 5, 'Usage: analyze.mjs CONTRACT STRICT_ATTEMPT NEW_OUTPUT');
+ const output = resolve(ROOT, outputArg);
+-assert.ok(output.startsWith(ROOT + '/docs/migration/lot8b-evidence/'));
++assert.ok(output.startsWith(ROOT + '/docs/migration/lot9a-evidence/'));
+ try { await access(output); assert.fail('Output already exists'); } catch (error) { if (error.code !== 'ENOENT') throw error; }
+ const contractFile = await read(contractArg), contract = contractFile.value;
+-assert.equal(contract.schema, 'logos-engine.lot8b-final-cost-contract.v1');
++assert.equal(contract.schema, 'logos-engine.lot9a-final-cost-contract.v1');
+ assert.equal(contract.status, 'declared_before_official_window');
+ baselineRoot = await realpath(contract.baseline.checkout);
+ assert.equal(await realpath(contract.candidate.checkout), ROOT);
+@@ -109,7 +109,7 @@
+ assert.deepEqual(contract.supplementaryTools.analyzer, await fp(SELF));
+ for (const record of contract.inputFingerprints) await verify(record);
+ const perf = contract.performanceDirectory;
+-assert.ok(resolve(ROOT, perf).startsWith(ROOT + '/docs/migration/lot8b-evidence/'));
++assert.ok(resolve(ROOT, perf).startsWith(ROOT + '/docs/migration/lot9a-evidence/'));
+ const cases = (await read(contract.cases.path)).value, policy = (await read(contract.comparisonPolicy.path)).value;
+ assert.deepEqual(policy.stages, STAGES); assert.deepEqual(policy.unaffectedCaseIds, ['STCK', 'SMLP']); assert.equal(policy.relativeBudget, 0.1);
+ assert.equal(cases.rounds, 4); assert.deepEqual(cases.cases.map(row => [row.id, row.actions, row.warmupActions]), [['STCK', 10, 3], ['SMLP', 15, 3]]);
+@@ -234,7 +234,7 @@
+ const phaseOverruns = comparisons.flatMap(row => row.metrics.filter(m => m.stage !== 'session_elapsed' && m.result !== 'within_observed_budget')
+   .map(metric => ({ case: row.case, ...metric })));
+ for (const record of [...touched.values()]) await verify(record);
+-const result = { schema: 'logos-engine.lot8b-final-cost-analysis.v1', status: 'analysis_passed', recordedAt: new Date().toISOString(),
++const result = { schema: 'logos-engine.lot9a-final-cost-analysis.v1', status: 'analysis_passed', recordedAt: new Date().toISOString(),
+   generator: await fp(SELF), contract: contractFile.record, window: windowFile.record, strictAttempt: strictFile.record,
+   nativeDigests: contract.nativeDigests, pairs, includedTrials: ledger, measuredSessions: 32, measuredActions,
+   warmupSessions: 8, warmupActions, excludedMeasuredSessions: 0, excludedOutliers: 0,

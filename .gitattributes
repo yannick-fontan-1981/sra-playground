@@ -1,0 +1,10 @@
+# Exact binary evidence fragments must never receive text conversion or merging.
+*.part[0-9][0-9][0-9] binary
+
+# Retained proof patches and browser transcripts preserve original whitespace.
+docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-snapshot-correction.patch whitespace=-blank-at-eol
+docs/migration/lot4c-evidence/publication-preflight/record-publication-inputs-compatibility.patch whitespace=-blank-at-eol
+docs/migration/lot4c-evidence/integrated-final/browser/01-native-panel.txt whitespace=-blank-at-eol
+# Preserve the exact predeclared measurement-review tool bytes after the window.
+docs/migration/lot4c-evidence/review-owner-costs.py whitespace=-blank-at-eof
+docs/migration/lot4c-evidence/planning/publication-whitespace/commit-step-02.stdout whitespace=-blank-at-eol

@@ -1,0 +1,1498 @@
+{
+  "module_id": "rigid_rearrangement",
+  "declarations": [
+    {
+      "id": "principle.rigid_scene.current_marked_frame_is_not_a_single_color_mask",
+      "kind": "principle",
+      "premises": [
+        "a_closed_frame_encloses_several_current_components",
+        "the_enclosed_components_share_the_current_input_aligned_translation"
+      ],
+      "applicability": [
+        "current_observed_rigid_scene_acquisition"
+      ],
+      "invariants": [
+        "preserve_the_outer_frame_and_each_interior_component_separately",
+        "a_marking_is_not_a_hole_or_another_body_by_color_alone",
+        "infer_a_rigid_body_only_as_a_revisable_effect_backed_supposition",
+        "derive_quantum_from_observed_translation_not_a_game_constant",
+        "keep_palette_correspondence_distinct_from_collision_class_membership"
+      ],
+      "falsifiers": [
+        "enclosed_components_move_differently",
+        "the_frame_is_incomplete",
+        "a_same_class_object_passes_over_another"
+      ],
+      "reason_refs": [
+        "reason.rigid_scene.current_cotranslated_frame_preserves_marked_body_identity",
+        "reason.rigid_scene.certified_clearance_word_serves_the_preserved_parent"
+      ]
+    },
+    {
+      "id": "policy.observed_rigid_scene_model_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "only_current_raster_geometry_and_action_conditioned_effects_are_inputs"
+      ],
+      "applicability": [
+        "observation_acquired_rimmed_rigid_rearrangement"
+      ],
+      "invariants": [
+        "do_not_evict_a_validated_continuation",
+        "retain_the_existing_parent_and_evidence",
+        "the_mechanical_model_and_resource_reading_are_conditional_not_global_truth",
+        "one_segment_conversion_and_aggregate_count_support_constant_debit_but_do_not_prove_all_future_contexts",
+        "a_library_result_is_not_action_authority",
+        "no_oracle_board_palette_or_solution_word",
+        "unknown_or_incomplete_returns_the_original_agenda",
+        "retained_collision_support_remains_conditional_and_current_poses_are_remeasured_without_inherited_positions"
+      ],
+      "falsifiers": [
+        "current_whole_body_translation_disagrees_with_the_model",
+        "an_object_is_overflown",
+        "selection_or_debit_is_context_dependent",
+        "another_correspondence_or_clock_is_relevant"
+      ],
+      "declared_alternative_refs": [
+        "rigid_scene.prepare_conditional_model",
+        "rigid_scene.keep_agenda"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.rigid_scene.prepare_conditional_model",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "rigid_scene.prepare_conditional_model"
+            },
+            {
+              "field": "geometry_enumeration_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_frame_ref_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_goal_ref_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "incoming_declared_route_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "interface_direction_count",
+              "operator": "equals",
+              "expected": 4
+            },
+            {
+              "field": "aligned_frame_group_count",
+              "operator": "greater_than",
+              "expected": 2
+            },
+            {
+              "field": "current_aligned_motion_frame_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "current_aligned_motion_component_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "immediately_prior_internal_contact_pair_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "translation_scalar_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "equal_extent_palette_peer_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "modal_underlay_core_value_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "common_cell_domain_rectangular",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "peer_interior_matches_underlay_mode",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "changing_edge_patch_array_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "edge_converted_count_matches_commands",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "converted_from_remaining_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "aligned_modal_cell_masks_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "rigid_scene.prepare_conditional_model",
+            "rigid_scene_model_contract": {
+              "caller_ref": "measurement.observed_rigid_scene",
+              "consumer_ref": "composition.rigid_frame_to_corresponding_reception",
+              "next_item_ref": "measurement.rigid_scene_complete_route",
+              "model_status_ref": "SUPPORTED_HYPOTHESIS",
+              "event_owner_ref": "measurement.rigid_scene_external_command",
+              "model_ref": "model.observed_rimmed_rigid_configuration",
+              "assumption_refs": [
+                "supposition.rigid_scene.independent_unit_translation_persistent_selection",
+                "supposition.rigid_scene.one_submitted_cost_without_clock_or_refill"
+              ],
+              "native_parameters": {
+                "operation_ref": "mechanics.editable_configuration_graph.rigid_edit_external_primitive",
+                "mode_ref": "STEP",
+                "requested_result_type": "DMechanicalResult",
+                "node_bound": 4096,
+                "depth_bound": 1,
+                "domain_bound": 4096,
+                "time_bound_ms": 1000,
+                "observations": [],
+                "phase_ref": "EXTERNAL_COMMAND",
+                "channel": "TRANSLATE",
+                "click_point": null,
+                "absolute_origin": null,
+                "click_selection_precedes_placement": true,
+                "click_focused_body_rule": "SELECT_ONLY",
+                "absolute_placement_supported": false,
+                "quantizer_pitch": [
+                  1,
+                  1
+                ],
+                "quantizer_offset": [
+                  0,
+                  0
+                ],
+                "quantizer_rule": "EXACT",
+                "admission_kind": "FINAL_ONLY",
+                "containment_supported": false,
+                "collision_exclusion_pairs": [],
+                "checkpoints": [],
+                "restore_origins": [],
+                "restore_native_focus_ref": null,
+                "submitted_cost": 1,
+                "accepted_edit_cost": 0,
+                "refused_cost": 0
+              },
+              "common_identity_parameters": {
+                "kernel_ref": "mechanics.editable_configuration_graph",
+                "operation_ref": "mechanics.editable_configuration_graph.rigid_edit_external_primitive",
+                "mode": "STEP",
+                "expected_return_type": "yf_arc3_v5.d_mechanical_result.v1"
+              },
+              "binding_status": "SUPPORTED_HYPOTHESIS",
+              "falsifier_ref": "falsifier.rigid_scene.observed_full_configuration_or_debit_disagrees",
+              "profile_parameters": {
+                "profile_ref": "solving.rigid_rearrangement",
+                "utility_reason_ref": "reason.rigid_scene.full_corresponding_receiver_is_the_alignment_question",
+                "usefulness_premise_refs": [
+                  "supposition.rigid_scene.corresponding_hollow_frame_receives_the_body"
+                ],
+                "morphology_premise_refs": [
+                  "supposition.rigid_scene.closed_rim_encloses_a_body_even_with_a_marking"
+                ],
+                "temporal_scope_ref": "measurement.rigid_scene.one_external_command",
+                "falsifier_ref": "falsifier.rigid_scene.observed_full_configuration_or_debit_disagrees",
+                "closure_enumerated": true,
+                "maximum_binding_checks": 4096,
+                "time_bound_ms": 1000,
+                "missing_cause": "MISSING_OBSERVATION",
+                "maximum_join_evidence_checks": 4096
+              },
+              "event_parameters": {
+                "kind_ref": "measurement.rigid_scene.external_command",
+                "clock_ref": "measurement.rigid_scene.command_clock",
+                "tick": 1,
+                "snapshot_kind": "SIMULTANEOUS",
+                "reads": {},
+                "writes": {}
+              },
+              "packet_parameters": {
+                "poses_field": "poses",
+                "focus_field": "native_focus_ref",
+                "closure_domain_ref": "measurement.rigid_scene.one_command_domain",
+                "closure_stop_ref": "measurement.rigid_scene.complete_response",
+                "cost_state_independent": true
+              },
+              "search_kernel_ref": "mechanics.bounded_route_search",
+              "search_return_type": "SearchResultC",
+              "search_bounds": {
+                "max_states": 512,
+                "max_candidates": 2048,
+                "max_events": 2
+              },
+              "maximum_word_length": 24,
+              "membership_kind": "PALETTE_INDEPENDENT_MORPHOLOGY",
+              "morphology_class_ref": "morphology.closed_rimmed_rectangular_piece",
+              "morphology_premise_refs": [
+                "supposition.rigid_scene.closed_rim_encloses_a_body_even_with_a_marking"
+              ],
+              "contact_excluded_cause_refs": [
+                "reason.rigid_scene.refusal_destination_inside_common_domain_excludes_external_wall",
+                "reason.rigid_scene.adjacent_free_translation_without_reselection_preserves_control_context"
+              ],
+              "selection_decoration_separated_from_body": true,
+              "collision_falsifier_ref": "falsifier.rigid_scene.same_class_bodies_can_overfly",
+              "goal_predicate_ref": "predicate.rigid_scene.whole_body_at_corresponding_frame",
+              "goal_contract_ref": "contract.rigid_scene.whole_corresponding_receiver",
+              "selection_action_ref": "ACTION6",
+              "response_ref": "measurement.rigid_scene.deterministic_supported_model",
+              "maximum_geometry_checks": 65536,
+              "carrier_field": "unique_motion_frame_ref",
+              "collision_support_kind": "current_contact",
+              "body_cell_offsets_field": "modal_interior_cell_offsets"
+            }
+          }
+        },
+        {
+          "id": "projection.rigid_scene.revalidated_retained_collision_hypothesis",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "rigid_scene.prepare_conditional_model"
+            },
+            {
+              "field": "geometry_enumeration_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_frame_ref_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_goal_ref_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "incoming_declared_route_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "interface_direction_count",
+              "operator": "equals",
+              "expected": 4
+            },
+            {
+              "field": "aligned_frame_group_count",
+              "operator": "greater_than",
+              "expected": 2
+            },
+            {
+              "field": "translation_scalar_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "equal_extent_palette_peer_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "modal_underlay_core_value_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "common_cell_domain_rectangular",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "peer_interior_matches_underlay_mode",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "changing_edge_patch_array_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "edge_converted_count_matches_commands",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "converted_from_remaining_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "source_revalidated_control_anchor_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_recalled_collision_evidence_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "immediately_prior_internal_contact_pair_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "aligned_modal_cell_masks_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "rigid_scene.prepare_conditional_model",
+            "rigid_scene_model_contract": {
+              "caller_ref": "measurement.observed_rigid_scene",
+              "consumer_ref": "composition.rigid_frame_to_corresponding_reception",
+              "next_item_ref": "measurement.rigid_scene_complete_route",
+              "model_status_ref": "SUPPORTED_HYPOTHESIS",
+              "event_owner_ref": "measurement.rigid_scene_external_command",
+              "model_ref": "model.observed_rimmed_rigid_configuration",
+              "assumption_refs": [
+                "supposition.rigid_scene.independent_unit_translation_persistent_selection",
+                "supposition.rigid_scene.one_submitted_cost_without_clock_or_refill",
+                "supposition.rigid_scene.retained_collision_class_is_revalidated_on_current_closed_frames"
+              ],
+              "native_parameters": {
+                "operation_ref": "mechanics.editable_configuration_graph.rigid_edit_external_primitive",
+                "mode_ref": "STEP",
+                "requested_result_type": "DMechanicalResult",
+                "node_bound": 4096,
+                "depth_bound": 1,
+                "domain_bound": 4096,
+                "time_bound_ms": 1000,
+                "observations": [],
+                "phase_ref": "EXTERNAL_COMMAND",
+                "channel": "TRANSLATE",
+                "click_point": null,
+                "absolute_origin": null,
+                "click_selection_precedes_placement": true,
+                "click_focused_body_rule": "SELECT_ONLY",
+                "absolute_placement_supported": false,
+                "quantizer_pitch": [
+                  1,
+                  1
+                ],
+                "quantizer_offset": [
+                  0,
+                  0
+                ],
+                "quantizer_rule": "EXACT",
+                "admission_kind": "FINAL_ONLY",
+                "containment_supported": false,
+                "collision_exclusion_pairs": [],
+                "checkpoints": [],
+                "restore_origins": [],
+                "restore_native_focus_ref": null,
+                "submitted_cost": 1,
+                "accepted_edit_cost": 0,
+                "refused_cost": 0
+              },
+              "common_identity_parameters": {
+                "kernel_ref": "mechanics.editable_configuration_graph",
+                "operation_ref": "mechanics.editable_configuration_graph.rigid_edit_external_primitive",
+                "mode": "STEP",
+                "expected_return_type": "yf_arc3_v5.d_mechanical_result.v1"
+              },
+              "binding_status": "SUPPORTED_HYPOTHESIS",
+              "falsifier_ref": "falsifier.rigid_scene.observed_full_configuration_or_debit_disagrees",
+              "profile_parameters": {
+                "profile_ref": "solving.rigid_rearrangement",
+                "utility_reason_ref": "reason.rigid_scene.full_corresponding_receiver_is_the_alignment_question",
+                "usefulness_premise_refs": [
+                  "supposition.rigid_scene.corresponding_hollow_frame_receives_the_body"
+                ],
+                "morphology_premise_refs": [
+                  "supposition.rigid_scene.closed_rim_encloses_a_body_even_with_a_marking"
+                ],
+                "temporal_scope_ref": "measurement.rigid_scene.one_external_command",
+                "falsifier_ref": "falsifier.rigid_scene.observed_full_configuration_or_debit_disagrees",
+                "closure_enumerated": true,
+                "maximum_binding_checks": 4096,
+                "time_bound_ms": 1000,
+                "missing_cause": "MISSING_OBSERVATION",
+                "maximum_join_evidence_checks": 4096
+              },
+              "event_parameters": {
+                "kind_ref": "measurement.rigid_scene.external_command",
+                "clock_ref": "measurement.rigid_scene.command_clock",
+                "tick": 1,
+                "snapshot_kind": "SIMULTANEOUS",
+                "reads": {},
+                "writes": {}
+              },
+              "packet_parameters": {
+                "poses_field": "poses",
+                "focus_field": "native_focus_ref",
+                "closure_domain_ref": "measurement.rigid_scene.one_command_domain",
+                "closure_stop_ref": "measurement.rigid_scene.complete_response",
+                "cost_state_independent": true
+              },
+              "search_kernel_ref": "mechanics.bounded_route_search",
+              "search_return_type": "SearchResultC",
+              "search_bounds": {
+                "max_states": 512,
+                "max_candidates": 2048,
+                "max_events": 2
+              },
+              "maximum_word_length": 24,
+              "membership_kind": "PALETTE_INDEPENDENT_MORPHOLOGY",
+              "morphology_class_ref": "morphology.closed_rimmed_rectangular_piece",
+              "morphology_premise_refs": [
+                "supposition.rigid_scene.closed_rim_encloses_a_body_even_with_a_marking"
+              ],
+              "contact_excluded_cause_refs": [
+                "reason.rigid_scene.refusal_destination_inside_common_domain_excludes_external_wall",
+                "reason.rigid_scene.adjacent_free_translation_without_reselection_preserves_control_context"
+              ],
+              "selection_decoration_separated_from_body": true,
+              "collision_falsifier_ref": "falsifier.rigid_scene.same_class_bodies_can_overfly",
+              "goal_predicate_ref": "predicate.rigid_scene.whole_body_at_corresponding_frame",
+              "goal_contract_ref": "contract.rigid_scene.whole_corresponding_receiver",
+              "selection_action_ref": "ACTION6",
+              "response_ref": "measurement.rigid_scene.deterministic_supported_model",
+              "maximum_geometry_checks": 65536,
+              "carrier_field": "source_revalidated_control_frame_ref",
+              "collision_support_kind": "retained_morphology_hypothesis",
+              "recalled_morphology_premise_refs": [
+                "supposition.rigid_scene.retained_collision_class_is_revalidated_on_current_closed_frames"
+              ],
+              "body_cell_offsets_field": "modal_interior_cell_offsets"
+            }
+          }
+        },
+        {
+          "id": "projection.rigid_scene.keep_agenda",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "rigid_scene.keep_agenda"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "rigid_scene.keep_agenda"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.rigid_scene.prepare_conditional_model",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "rigid_scene.prepare_conditional_model"
+            }
+          ],
+          "reason_ref": "reason.rigid_scene.current_cotranslated_frame_preserves_marked_body_identity"
+        },
+        {
+          "id": "tier.rigid_scene.keep_agenda",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "rigid_scene.keep_agenda"
+            }
+          ],
+          "reason_ref": "reason.rigid_scene.incomplete_or_competing_meanings_preserve_general_solver"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.rigid_scene.no_claim_of_global_mechanical_identification",
+      "reason_refs": [
+        "reason.rigid_scene.current_cotranslated_frame_preserves_marked_body_identity",
+        "reason.rigid_scene.incomplete_or_competing_meanings_preserve_general_solver"
+      ]
+    },
+    {
+      "id": "principle.rigid_rearrangement.unique_approach_clearance_is_a_focused_question",
+      "kind": "principle",
+      "premises": [
+        "a_static_independent_unit_translation_model_is_currently_admitted",
+        "the_beneficiary_has_exactly_one_admitted_non_goal_predecessor_for_final_entry",
+        "complete_bounded_incidence_measurement_yields_one_participant_set_for_clearance"
+      ],
+      "applicability": [
+        "source_rigid_rearrangement_search_request"
+      ],
+      "invariants": [
+        "a_blocker_endpoint_must_leave_the_whole_approach_footprint",
+        "an_optional_helper_has_a_currently_free_endpoint_preserving_approach_and_blocker_endpoint",
+        "retain_the_current_focus_in_the_participant_set",
+        "all_other_bodies_remain_in_full_state_and_collision_masks",
+        "only_selection_operator_domain_is_restricted",
+        "K09_still_computes_every_route_and_detour",
+        "partial_enumeration_never_proves_uniqueness",
+        "focused_failure_widens_to_the_preserved_full_question_within_the_existing_watchdog",
+        "restricted_minimality_or_exhaustion_never_means_global_minimality_or_impossibility"
+      ],
+      "falsifiers": [
+        "admissions_or_poses_change",
+        "a_non_unit_or_coupled_transition_is_required",
+        "geometry_measurement_is_incomplete",
+        "several_participant_sets_remain"
+      ],
+      "reason_refs": [
+        "reason.rigid_rearrangement.unique_clearance_incidence_prepares_existing_search"
+      ]
+    },
+    {
+      "id": "policy.rigid_rearrangement_participant_scope_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "the_current_model_and_collision_classes_are_already_source_admitted"
+      ],
+      "applicability": [
+        "typed_rigid_rearrangement_library_call"
+      ],
+      "invariants": [
+        "retain_full_question_and_all_obstacles",
+        "no_route_invention",
+        "no_action_release"
+      ],
+      "falsifiers": [
+        "the_current_scope_or_incidence_measurement_is_incomplete"
+      ],
+      "declared_alternative_refs": [
+        "rigid_scope.unique_approach_clearance",
+        "rigid_scope.full"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.rigid_scope.unique_approach_clearance",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "rigid_scope.unique_approach_clearance"
+            },
+            {
+              "field": "incidence_enumeration_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "approach_origin_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "approach_occupant_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "participant_set_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "strict_participant_subset",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "rigid_scope.unique_approach_clearance"
+          }
+        },
+        {
+          "id": "projection.rigid_scope.full",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "rigid_scope.full"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "rigid_scope.full"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.rigid_scope.unique_approach_clearance",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "rigid_scope.unique_approach_clearance"
+            }
+          ],
+          "reason_ref": "reason.rigid_rearrangement.unique_clearance_incidence_prepares_existing_search"
+        },
+        {
+          "id": "tier.rigid_scope.full",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "rigid_scope.full"
+            }
+          ],
+          "reason_ref": "reason.rigid_rearrangement.full_configuration_keeps_future_services_accessible"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.rigid_rearrangement.incidence_is_not_route_or_equivalence_proof",
+      "reason_refs": [
+        "reason.rigid_rearrangement.unique_clearance_incidence_prepares_existing_search",
+        "reason.rigid_rearrangement.full_configuration_keeps_future_services_accessible"
+      ]
+    },
+    {
+      "id": "principle.rigid_rearrangement.one_settled_unit_cost_witness_suffices",
+      "kind": "principle",
+      "premises": [
+        "the_source_bound_model_is_deterministic_independent_translation_with_unit_primitive_cost",
+        "the_caller_requests_one_complete_beneficiary_route_without_secondary_objective"
+      ],
+      "applicability": [
+        "source_rigid_rearrangement_search_request"
+      ],
+      "invariants": [
+        "request_FIRST_SHORTEST_explicitly_in_SRC",
+        "retain_complete_pose_and_selection_state_and_all_static_mask_admission_laws",
+        "unsupported_attachment_rotation_resource_or_clock_changes_require_another_state_contract",
+        "unknown_lower_cost_responses_block_minimality",
+        "do_not_expand_more_costly_states_while_lower_cost_responses_are_pending",
+        "one_witness_does_not_prove_equivalence_to_other_equal_cost_words",
+        "a_witness_certificate_never_closes_or_exhausts_the_unvisited_domain",
+        "keep_PER_ROOT_BOUNDED_default_for_other_callers"
+      ],
+      "falsifiers": [
+        "cost_is_not_uniform_one",
+        "the_state_omits_a_transition_relevant_member",
+        "a_lower_cost_frontier_remains_unresolved",
+        "a_secondary_goal_or_algorithm_is_requested"
+      ],
+      "reason_refs": [
+        "reason.first_shortest_witness_has_no_cheaper_unknown_frontier"
+      ]
+    },
+    {
+      "id": "principle.rigid_rearrangement.observed_blocking_transfers_by_morphology_not_color",
+      "kind": "principle",
+      "premises": [
+        "a_controlled_body_translates_in_free_space_but_stays_when_its_whole_mask_meets_a_peer",
+        "wrong_selection_wall_budget_animation_and_other_causes_are_excluded_for_the_observation",
+        "current_palette_independent_morphology_memberships_are_supported"
+      ],
+      "applicability": [
+        "non_overflight_model_admission_before_rigid_rearrangement_search"
+      ],
+      "invariants": [
+        "propose_nonpenetration_for_the_observed_pair_of_morphology_classes",
+        "transfer_the_hypothesis_to_other_members_independently_of_color",
+        "do_not_transfer_a_law_to_unrelated_morphology_classes",
+        "selection_outline_black_to_white_does_not_create_a_new_class",
+        "black_outlined_solid_fill_is_an_initial_clue_not_a_universal_requirement",
+        "retain_observed_pass_over_as_a_falsifier",
+        "a_single_contact_supports_a_revisable_class_law_not_universal_confirmation"
+      ],
+      "falsifiers": [
+        "an_object_of_the_same_class_passes_over_a_peer_under_comparable_control",
+        "the_refusal_was_caused_by_a_wall_selection_resource_or_phase",
+        "current_morphology_membership_or_scope_is_contradicted"
+      ],
+      "reason_refs": [
+        "reason.rigid_rearrangement.blocking_is_transferred_through_current_morphological_class_membership"
+      ]
+    },
+    {
+      "id": "policy.rigid_rearrangement_collision_class_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "a_current_class_pair_requires_non_overflight_admission_before_search"
+      ],
+      "applicability": [
+        "typed_rigid_rearrangement_class_pair_gate"
+      ],
+      "invariants": [
+        "no_color_identity_shortcut",
+        "unknown_or_overflight_never_licenses_nonpenetrating_search"
+      ],
+      "falsifiers": [
+        "current_same_class_overflight_or_incomparable_refusal"
+      ],
+      "declared_alternative_refs": [
+        "rigid_collision.non_overflight_hypothesis",
+        "rigid_collision.needs_evidence"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.rigid_collision.observed_blocking_supports_class_pair",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "rigid_collision.non_overflight_hypothesis"
+            },
+            {
+              "field": "evidence_scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "overflight_observed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "contact_pair_matches_declared_classes",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "free_translation_evidence_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "blocked_translation_evidence_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "control_evidence_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "contact_prediction_evidence_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "excluded_competing_cause_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "mover_translation_zero",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "peer_translation_zero",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "command_context_comparable",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "rigid_collision.non_overflight_hypothesis",
+            "non_overflight_is_hypothesis": true,
+            "color_independent_class_transfer": true
+          }
+        },
+        {
+          "id": "projection.rigid_collision.outlined_solid_morphology_supports_question",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "rigid_collision.non_overflight_hypothesis"
+            },
+            {
+              "field": "evidence_scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "overflight_observed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "outlined_solid_morphology_premise_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "selection_decoration_separated_from_body",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "rigid_collision.non_overflight_hypothesis",
+            "non_overflight_is_hypothesis": true,
+            "initial_morphological_clue_only": true
+          }
+        },
+        {
+          "id": "projection.rigid_collision.needs_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "rigid_collision.needs_evidence"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "rigid_collision.needs_evidence"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.rigid_collision.non_overflight_hypothesis",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "rigid_collision.non_overflight_hypothesis"
+            }
+          ],
+          "reason_ref": "reason.rigid_rearrangement.blocking_is_transferred_through_current_morphological_class_membership"
+        },
+        {
+          "id": "tier.rigid_collision.needs_evidence",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "rigid_collision.needs_evidence"
+            }
+          ],
+          "reason_ref": "reason.rigid_rearrangement.free_motion_discriminates_control_and_step"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.rigid_rearrangement.equivalent_class_gate_is_not_physical_confirmation",
+      "reason_refs": [
+        "reason.rigid_rearrangement.blocking_is_transferred_through_current_morphological_class_membership",
+        "reason.rigid_rearrangement.free_motion_discriminates_control_and_step"
+      ]
+    },
+    {
+      "id": "principle.rigid_rearrangement.vacancy_is_a_service_to_a_preserved_consumer",
+      "kind": "principle",
+      "premises": [
+        "identified_non_traversable_multicell_bodies_share_a_finite_admission_space",
+        "a_current_goal_names_a_beneficiary_and_complete_destination"
+      ],
+      "applicability": [
+        "mutual_obstruction_of_independently_controlled_rigid_bodies"
+      ],
+      "invariants": [
+        "retain_exact_masks_and_holes_not_only_bounding_boxes",
+        "selected_control_identity_is_not_the_goal_beneficiary",
+        "move_blockers_only_for_a_needed_vacancy_or_discriminating_question",
+        "preserve_the_vacated_mask_until_its_consumer",
+        "permit_temporary_target_detours_and_reusable_parking",
+        "reject_no_progress_only_after_full_configuration_and_information_reconciliation"
+      ],
+      "falsifiers": [
+        "pushing_rotation_containment_or_time_changes_the_transition_model",
+        "parking_blocks_the_required_continuation",
+        "a_presumed_vacancy_is_not_admitted_or_is_occupied"
+      ],
+      "reason_refs": [
+        "reason.rigid_rearrangement.preparation_serves_the_final_body_goal"
+      ]
+    },
+    {
+      "id": "principle.rigid_rearrangement.calibrate_selected_identity_before_spending_reserve",
+      "kind": "principle",
+      "premises": [
+        "selection_and_translation_may_be_distinct_commands",
+        "the_mechanical_model_has_explicit_unknowns"
+      ],
+      "applicability": [
+        "rigid_body_control_acquisition"
+      ],
+      "invariants": [
+        "prefer_a_predicted_free_whole_mask_translation_without_rigid_action_order",
+        "a_blocked_command_does_not_measure_the_motion_quantum",
+        "unknown_directions_are_scoped_to_the_selected_body",
+        "selection_decoration_does_not_change_body_identity",
+        "charge_selection_refusal_and_other_commands_when_supported",
+        "an_unproved_model_produces_a_question_not_an_unconditional_route"
+      ],
+      "falsifiers": [
+        "selection_does_not_persist",
+        "command_moves_another_body_or_pushes_a_peer",
+        "reserve_or_quantum_changes_with_context"
+      ],
+      "reason_refs": [
+        "reason.rigid_rearrangement.free_motion_discriminates_control_and_step"
+      ]
+    },
+    {
+      "id": "principle.rigid_rearrangement.configuration_search_not_target_only_navigation",
+      "kind": "principle",
+      "premises": [
+        "current_supported_model_describes_all_bodies_admissions_and_commands",
+        "direct_target_navigation_is_insufficient_due_to_mutual_obstruction"
+      ],
+      "applicability": [
+        "rigid_rearrangement_library"
+      ],
+      "invariants": [
+        "search_full_body_poses_and_selection",
+        "reuse_native_rigid_step_and_common_search_not_a_game_specific_bfs",
+        "account_for_every_primitive_in_the_remaining_reserve",
+        "cost_dominance_requires_explicit_no_refill_no_clock_cost_independent_physics_premises",
+        "a_bound_or_unknown_is_not_an_impossibility_proof",
+        "a_simulated_route_is_not_action_authority",
+        "retain_current_why_scope_permits_and_terminal_reconciliation",
+        "general_solver_and_valid_continuations_remain_preferred_when_sufficient"
+      ],
+      "falsifiers": [
+        "a_state_affecting_resource_or_clock_is_omitted",
+        "only_target_distance_is_used_to_discard_a_configuration",
+        "goal_or_current_model_binding_is_stale"
+      ],
+      "reason_refs": [
+        "reason.rigid_rearrangement.full_configuration_keeps_future_services_accessible"
+      ]
+    },
+    {
+      "id": "policy.rigid_rearrangement_library_entry_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "the_caller_has_already_selected_the_rigid_rearrangement_question"
+      ],
+      "applicability": [
+        "typed_rigid_rearrangement_library_call"
+      ],
+      "invariants": [
+        "no_role_or_goal_invention",
+        "no_action_release",
+        "preserve_unknowns_and_parent"
+      ],
+      "falsifiers": [
+        "current_model_scope_cost_or_geometry_missing"
+      ],
+      "declared_alternative_refs": [
+        "rigid_rearrangement.prepare",
+        "rigid_rearrangement.needs_evidence"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.rigid_rearrangement.prepare",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "rigid_rearrangement.prepare"
+            },
+            {
+              "field": "collision_exclusion_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "independent_body_model",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "exact_source_model_bound",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "rigid_rearrangement.prepare"
+          }
+        },
+        {
+          "id": "projection.rigid_rearrangement.needs_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "rigid_rearrangement.needs_evidence"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "rigid_rearrangement.needs_evidence"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.rigid_rearrangement.prepare",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "rigid_rearrangement.prepare"
+            }
+          ],
+          "reason_ref": "reason.rigid_rearrangement.full_configuration_keeps_future_services_accessible"
+        },
+        {
+          "id": "tier.rigid_rearrangement.needs_evidence",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "rigid_rearrangement.needs_evidence"
+            }
+          ],
+          "reason_ref": "reason.rigid_rearrangement.free_motion_discriminates_control_and_step"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.rigid_rearrangement.equivalent_entry_alternatives_are_not_model_evidence",
+      "reason_refs": [
+        "reason.rigid_rearrangement.full_configuration_keeps_future_services_accessible",
+        "reason.rigid_rearrangement.free_motion_discriminates_control_and_step"
+      ]
+    },
+    {
+      "id": "policy.rigid_selection_observation_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "selection.current"
+      ],
+      "selection_eligibility_conditions": [],
+      "reason_refs": [
+        "reason.control_selection_is_revalidated_before_directional_application",
+        "principle.selected_body_motion_requires_current_selection"
+      ],
+      "premises": [
+        "actual_source_bound_motion_and_exclusive_selection_model_are_retained"
+      ],
+      "invariants": [
+        "no_palette_constant_or_inherited_piece_pose",
+        "absence_requires_complete_enumeration_and_no_indicator_pixels",
+        "state_remains_conditional_on_the_recalled_indicator_model",
+        "an_unconfirmed_selection_attempt_reopens_indicator_validation_instead_of_repeatedly_vetoing_every_direction",
+        "indicator_color_presence_does_not_require_a_closed_outline_or_lattice"
+      ],
+      "falsifiers": [
+        "selection_does_not_produce_the_predicted_indicator_color",
+        "indicator_color_no_longer_tracks_exclusive_control"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.control_outline.unknown_by_default",
+          "all_conditions": [],
+          "static_facts": {
+            "control_selection_state": "unknown",
+            "rigid_geometry_revalidation_ref": "rigid_geometry.keep_current_measurement",
+            "direct_selection_candidates_ref": "selection_candidates.preserve_existing"
+          }
+        },
+        {
+          "id": "projection.control_outline.known_absence",
+          "all_conditions": [
+            {
+              "field": "retained_control_outline_value_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "retained_control_indicator_examples_agree",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "control_outline_enumeration_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_control_outline_pixel_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "control_outline_just_submitted_selection",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "control_selection_state": "none"
+          }
+        },
+        {
+          "id": "projection.control_indicator.color_present",
+          "all_conditions": [
+            {
+              "field": "retained_control_outline_value_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "retained_control_indicator_examples_agree",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "control_outline_enumeration_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_control_outline_pixel_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "control_selection_state": "selected"
+          }
+        },
+        {
+          "id": "projection.rigid_geometry.revalidate_selected_control_anchor",
+          "all_conditions": [
+            {
+              "field": "retained_control_indicator_examples_agree",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "control_outline_enumeration_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_control_outline_pixel_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "current_control_outline_group_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "retained_rigid_collision_class_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "retained_rigid_underlay_value_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "translation_scalar_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "geometry_enumeration_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_motion_agrees_with_control_indicator",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "rigid_geometry_revalidation_ref": "rigid_geometry.remeasure_selected_anchor"
+          }
+        },
+        {
+          "id": "projection.selection.enumerate_known_direct_object_hits",
+          "all_conditions": [
+            {
+              "field": "retained_control_outline_value_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "retained_control_indicator_examples_agree",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "control_outline_enumeration_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_control_outline_pixel_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "control_outline_just_submitted_selection",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "retained_point_selection_action_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "retained_point_selection_action_available",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "direct_selection_candidates_ref": "selection_candidates.enumerate_known_direct_points",
+            "direct_selection_measurement_overrides": {
+              "declared_point_candidate_scope_ref": "probe_scope.full_point_loci",
+              "interaction_measurement_scope_ref": "measurement_scope.full_interaction_frontier"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.rigid_rearrangement_indexed_math_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "the_current_model_and_collision_classes_are_already_source_admitted"
+      ],
+      "applicability": [
+        "typed_rigid_rearrangement_library_call"
+      ],
+      "invariants": [
+        "retain_full_question_and_all_obstacles",
+        "no_action_release",
+        "every_returned_primitive_is_replayed_by_native_D",
+        "indexed_bounds_are_explicit_Source_parameters",
+        "unsupported_or_unsettled_returns_to_the_existing_STEP_ledger"
+      ],
+      "falsifiers": [
+        "indexed_candidate_disagrees_with_native_D",
+        "unsupported_control_cost_or_checkpoint_model"
+      ],
+      "declared_alternative_refs": [
+        "rigid_search.indexed",
+        "rigid_search.step_ledger"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.rigid_search.indexed",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "rigid_search.indexed"
+            },
+            {
+              "field": "indexed_model_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "rigid_search.indexed"
+          }
+        },
+        {
+          "id": "projection.rigid_search.step_ledger",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "rigid_search.step_ledger"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "rigid_search.step_ledger"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.rigid_search.indexed",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "rigid_search.indexed"
+            }
+          ],
+          "reason_ref": "reason.rigid_rearrangement.full_configuration_keeps_future_services_accessible"
+        },
+        {
+          "id": "tier.rigid_search.step_ledger",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "rigid_search.step_ledger"
+            }
+          ],
+          "reason_ref": "reason.rigid_rearrangement.full_configuration_keeps_future_services_accessible"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.rigid_rearrangement.indexed_math_is_not_execution_or_transfer_proof",
+      "reason_refs": [
+        "reason.rigid_rearrangement.full_configuration_keeps_future_services_accessible"
+      ]
+    }
+  ]
+}

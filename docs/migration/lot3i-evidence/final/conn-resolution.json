@@ -1,0 +1,273 @@
+{
+  "schema": "logos-engine.selected-game-case-resolution.v1",
+  "game": "CONN",
+  "status": "target_reached",
+  "recordedAt": "2026-11-10T15:01:48.249103-03:00",
+  "displayTimeZone": "UTC-03:00",
+  "nativeVersion": "0.50.0",
+  "nativeSourceDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+  "targetLevels": 3,
+  "actual": {
+    "actions": 21,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 45.058072626999994,
+    "prefixes": 21,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 21,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 50,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 22
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 29
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 17
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 19
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 3
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 14
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 30
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 21,
+      "resume": 20
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.50.0"
+  },
+  "boundedFreshBaseline": {
+    "nativeVersion": "0.49.0",
+    "siteVersion": 78,
+    "actual": {
+      "actions": 8,
+      "levelsCompleted": 0,
+      "level": 1,
+      "state": "NOT_FINISHED",
+      "status": "error",
+      "reason": null,
+      "activeSeconds": 14.254214970000003,
+      "prefixes": 7,
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 7,
+        "boundaryReplays": 0,
+        "goalEvents": 0,
+        "frontierDeltas": 23,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 8
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 16
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 2
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 8
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 2
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 1
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 16
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology"
+        ],
+        "morphologyProvider": {
+          "status": "partial_current_measurements_control_attention_and_methods",
+          "state_owner": "family_state:morphology",
+          "motion_owner": "caller:goal",
+          "forecast_owner": "family_state:public_observed_inventory",
+          "current_decision_scope": "one_source_selection_cycle",
+          "attention_owner": "caller:attention",
+          "method_owner": "caller:counters.targetMethod",
+          "entry_return_owner": "family_state:morphology.entry_access_return",
+          "connected_methods": [
+            "retained_station_method",
+            "entry_access_return",
+            "entry_rebind",
+            "entry_probe",
+            "managed_capacity",
+            "target_extension_continuation"
+          ],
+          "pending": [
+            "complete_original_caller_parity_and_domain_closure"
+          ]
+        },
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      },
+      "fullV6Parity": false,
+      "sessions": 1,
+      "operationCounts": {
+        "init": 1,
+        "advance": 8,
+        "resume": 7
+      },
+      "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.49.0"
+    },
+    "phaseReceipt": {
+      "path": "docs/migration/lot3i-evidence/baseline-case-phase.json",
+      "bytes": 2922,
+      "sha256": "02ed59ccd2923fa90a1673d0f9ef43ad5693d541587fa61cc0c0e8dbfc5db73d"
+    },
+    "qualification": "Predeclared eight-action cap reached with zero levels. The report keeps seven completed prefixes while the public journal retains the eighth acquired return. This short reference is not a complete-game failure verdict."
+  },
+  "sourceComparison": {
+    "receipt": {
+      "path": "docs/migration/lot3i-evidence/diagnostic/conn-public-parity.json",
+      "bytes": 224507,
+      "sha256": "30527c4edc4f49afa42be6e17b32a6fd7ae7b4532e25fdd1efce5125edd16ec2"
+    },
+    "sourceReceipt": {
+      "path": "docs/migration/lot3i-evidence/diagnostic/conn-public-source-parity.json.gz",
+      "bytes": 690175,
+      "sha256": "14651e04e1a0af86c2673e919cd64516cfe711976d333f2afee63e3d9b34a522"
+    },
+    "checkedCount": 1361,
+    "exactOriginal": {
+      "selectedPrefixes": 14,
+      "returns": 21,
+      "selectedReturns": 14,
+      "ownEvents": 34,
+      "restorations": 35,
+      "coldStart": true,
+      "primedFromCapturedProposalMemory": false,
+      "completeSelectedOwnTrajectoryParity": true,
+      "completeAllReturnAcquisitionParity": true,
+      "fullInheritedCallerParity": false
+    }
+  },
+  "contribution": {
+    "interventions": 84,
+    "executed": 84,
+    "actionOrRefusalChanges": 33,
+    "decisionChanges": 35,
+    "negativeOrUnchanged": 51,
+    "componentAblation": true,
+    "fullCallerAblation": false
+  },
+  "browserReceipt": {
+    "path": "docs/migration/lot3i-evidence/final/browser/browser-qa.json",
+    "bytes": 2678,
+    "sha256": "b3bff0a23caa446a2ef7d0fe9abfed6dc6666fe022d967b7035ae34a8f168974"
+  },
+  "caseClock": {
+    "startedAt": "2026-11-10T14:44:53.485291-03:00",
+    "workFinishedAt": "2026-11-10T15:01:48.249103-03:00",
+    "previousCumulativeSeconds": 0,
+    "currentIntervalSeconds": 1014.763812,
+    "cumulativeSeconds": 1014.763812,
+    "maximumCumulativeSeconds": 2400,
+    "remainingSeconds": 1385.2361879999999,
+    "clockReset": false,
+    "exhausted": false,
+    "furtherWorkThisDelivery": false,
+    "qualification": "Conservatively charged from the initial public scan, before case selection. Entire interval includes baseline, candidate, source/native comparisons, ablations, browser QA and case review with no pause/reset. Subsequent release transport, documentation, regressions of other games, integrity and STCK/SMLP costs are release work. Future CONN diagnosis must resume this value."
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot3i-evidence/conn-selection.json",
+      "bytes": 3099,
+      "sha256": "5f8c293fe4ff440a0167b08f04551b90608ffa4f609e6c15cda73e1b9309ea98"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/candidate-case-phase.json",
+      "bytes": 3005,
+      "sha256": "8dd7ce3e06346ce0b82903949a55f1975ea5d26c1202366ad401582d9e16ffff"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/execution-conn.json",
+      "bytes": 68474,
+      "sha256": "fcb5d7fddf4f874a4c4bd9e09cd0fc1257c9eff8a55aa5f5cc0c561219496d5f"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+      "bytes": 2630905,
+      "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+      "bytes": 56466,
+      "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-actual-public-journal.jsonl.gz",
+      "bytes": 35604,
+      "sha256": "66b1e3cff2a243108fb3ed4a91e4bc74c86f9d977c32006280edc0f36f8f945b"
+    }
+  ],
+  "qualification": "Three natural levels reached by the common native caller. Repeated and Supported selected proposals and acquisition of all returns match unchanged source from cold own memory; component ablations retain all negative outcomes. Full inherited-caller parity and full-caller counterfactuals are not claimed. No engine, specification or solution was read."
+}

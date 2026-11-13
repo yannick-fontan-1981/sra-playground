@@ -1,0 +1,3 @@
+{"case": "rswp-051", "game": "RSWP", "phase": "started", "expectedActions": 19, "maximumConcurrentReplays": 1}
+{"case": "rswp-051", "game": "RSWP", "phase": "completed", "passed": true, "actions": 19, "levelsCompleted": 3, "passiveOwnerPresencePassed": true, "failedChecks": []}
+{"status": "passed", "passed": 1, "total": 1, "comparisonChecksPassed": 17}

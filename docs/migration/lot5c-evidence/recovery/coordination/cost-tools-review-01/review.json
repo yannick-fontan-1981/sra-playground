@@ -1,0 +1,467 @@
+{
+  "schema": "logos-engine.lot5c-cost-tools-source-review.v1",
+  "status": "source_review_and_syntax_passed",
+  "startedAt": "2026-11-11T12:30:13.776823+00:00",
+  "finishedAt": "2026-11-11T12:30:14.267584+00:00",
+  "durationSeconds": 0.4907608920002531,
+  "scope": "six cost preparation/analysis tools only; no native production or test edits",
+  "beforeReview": {
+    "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/before.json",
+    "bytes": 4497,
+    "sha256": "c5fcae952ec03ba966c5703d99f7b3566e085bbaa840c9ea6a9cdd6c9a02e743"
+  },
+  "tools": [
+    {
+      "tool": {
+        "path": "docs/migration/lot5c-evidence/record-owner-source-inventory.mjs",
+        "bytes": 13603,
+        "sha256": "50c9275c331e1013b7d618dd93023f79826398aa191c34fb9c05680b01210d8d"
+      },
+      "preservedBefore": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/before/record-owner-source-inventory.mjs",
+        "bytes": 13189,
+        "sha256": "a8d7e6553957854f319e1c4515e26fec4536f920e8cbd0105f42d6a6e1e4504a"
+      },
+      "preservedAfter": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/after/record-owner-source-inventory.mjs",
+        "bytes": 13603,
+        "sha256": "50c9275c331e1013b7d618dd93023f79826398aa191c34fb9c05680b01210d8d"
+      },
+      "change": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/record-owner-source-inventory.mjs.diff",
+        "bytes": 2359,
+        "sha256": "4eb3ef24dad5a4a812a324a43b0792cd2754df63cf23173ad1e14b6fe59284bc"
+      },
+      "direct5BSource": {
+        "path": "docs/migration/lot5b-evidence/record-owner-source-inventory.mjs",
+        "bytes": 12876,
+        "sha256": "fdfed96d27d08554a7a4ec6a50a68a4b65dd62001cd2fec057f2f580f1627ce2"
+      },
+      "direct5BUnchanged": true
+    },
+    {
+      "tool": {
+        "path": "docs/migration/lot5c-evidence/prepare-cost-protocol.py",
+        "bytes": 34082,
+        "sha256": "4de15b6ceada24443592515c6c5efd9af5ac278b2343424555fc8e4bd607a229"
+      },
+      "preservedBefore": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/before/prepare-cost-protocol.py",
+        "bytes": 30510,
+        "sha256": "d0f63652e768427c0d12555cd0a63d0d515891c2d5001dc08236dd714fd584a2"
+      },
+      "preservedAfter": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/after/prepare-cost-protocol.py",
+        "bytes": 34082,
+        "sha256": "4de15b6ceada24443592515c6c5efd9af5ac278b2343424555fc8e4bd607a229"
+      },
+      "change": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/prepare-cost-protocol.py.diff",
+        "bytes": 7401,
+        "sha256": "40a322f5b292623e845e7adceaf93421fcef1e654dc822107c022b7ab20e880b"
+      },
+      "direct5BSource": {
+        "path": "docs/migration/lot5b-evidence/prepare-cost-protocol.py",
+        "bytes": 30134,
+        "sha256": "c53e6534b4f570c94610ca7c338462a1e4edc91975d9130a770dcee200811efe"
+      },
+      "direct5BUnchanged": true
+    },
+    {
+      "tool": {
+        "path": "docs/migration/lot5c-evidence/finalize-owner-cost-contract.py",
+        "bytes": 26586,
+        "sha256": "cf55728cecbe12181c8694d3b18faedfc5aaec47448ff4de80ec45f989fc86e8"
+      },
+      "preservedBefore": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/before/finalize-owner-cost-contract.py",
+        "bytes": 16720,
+        "sha256": "87a2b979c7b8c208c80e8995accfc3bdcf09ad6f4c2f4692890984525ebe843c"
+      },
+      "preservedAfter": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/after/finalize-owner-cost-contract.py",
+        "bytes": 26586,
+        "sha256": "cf55728cecbe12181c8694d3b18faedfc5aaec47448ff4de80ec45f989fc86e8"
+      },
+      "change": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/finalize-owner-cost-contract.py.diff",
+        "bytes": 22430,
+        "sha256": "3e4eba77d2c441cd2b845ec66d1dd9e16609d90038718394702febf8242598ff"
+      },
+      "direct5BSource": {
+        "path": "docs/migration/lot5b-evidence/finalize-owner-cost-contract.py",
+        "bytes": 15763,
+        "sha256": "58fd6f433ee6043c3cd24f3c763f4ede265c4b2e60374a9916807bccc68c2997"
+      },
+      "direct5BUnchanged": true
+    },
+    {
+      "tool": {
+        "path": "docs/migration/lot5c-evidence/check-cost-static-inputs.py",
+        "bytes": 37985,
+        "sha256": "b0c188b44acc886aba4a1d3539f4b9fb48eb66cb5cc5a50f2de111b9c209ca27"
+      },
+      "preservedBefore": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/before/check-cost-static-inputs.py",
+        "bytes": 27926,
+        "sha256": "7ce8ac48e3c509e0766941c27695a1bb5e576debb958a0d8eb68f47fd647287a"
+      },
+      "preservedAfter": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/after/check-cost-static-inputs.py",
+        "bytes": 37985,
+        "sha256": "b0c188b44acc886aba4a1d3539f4b9fb48eb66cb5cc5a50f2de111b9c209ca27"
+      },
+      "change": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/check-cost-static-inputs.py.diff",
+        "bytes": 17639,
+        "sha256": "4ea8933bd898996729857c0b9503381e467219e872162aa8b5c7fe9929bc4a8b"
+      },
+      "direct5BSource": {
+        "path": "docs/migration/lot5b-evidence/check-cost-static-inputs.py",
+        "bytes": 27635,
+        "sha256": "024c23aad5bae4b666cd2e47226b396a937a658a84a0d3cd927fcd1b9fa14cc1"
+      },
+      "direct5BUnchanged": true
+    },
+    {
+      "tool": {
+        "path": "docs/migration/lot5c-evidence/consolidate-owner-costs.mjs",
+        "bytes": 60732,
+        "sha256": "d7c093afc54683682311b6b0a1935bfbc7351ac787ba001827ebfc3543effed7"
+      },
+      "preservedBefore": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/before/consolidate-owner-costs.mjs",
+        "bytes": 53250,
+        "sha256": "db063492f84092280c51a71d7ae8bfd34a50b586ca545b24173cb78c1cdc625a"
+      },
+      "preservedAfter": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/after/consolidate-owner-costs.mjs",
+        "bytes": 60732,
+        "sha256": "d7c093afc54683682311b6b0a1935bfbc7351ac787ba001827ebfc3543effed7"
+      },
+      "change": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/consolidate-owner-costs.mjs.diff",
+        "bytes": 16952,
+        "sha256": "82a12b6fc710edd63e333c07254b45a379c7da42ebd6b9d9edff84d1c627f0a0"
+      },
+      "direct5BSource": {
+        "path": "docs/migration/lot5b-evidence/consolidate-owner-costs.mjs",
+        "bytes": 52981,
+        "sha256": "cccc02b44a500292ac64a62379270e4003d3430f8ac0b68c81eb89609fffef95"
+      },
+      "direct5BUnchanged": true
+    },
+    {
+      "tool": {
+        "path": "docs/migration/lot5c-evidence/review-owner-costs.py",
+        "bytes": 80634,
+        "sha256": "ade4fe2d921b7417b37aaade9d2c62e981fec79c056119cecf9439e5e078048e"
+      },
+      "preservedBefore": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/before/review-owner-costs.py",
+        "bytes": 70578,
+        "sha256": "056a188b8f91cb570d316a86eed6fd5c3166df56633d049cfb1dac2d44682ec2"
+      },
+      "preservedAfter": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/after/review-owner-costs.py",
+        "bytes": 80634,
+        "sha256": "ade4fe2d921b7417b37aaade9d2c62e981fec79c056119cecf9439e5e078048e"
+      },
+      "change": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/review-owner-costs.py.diff",
+        "bytes": 19842,
+        "sha256": "a4d80d401bf851f7a602f09ac875c44a1b11f0ebec83f0c29a4ac4eea8057a24"
+      },
+      "direct5BSource": {
+        "path": "docs/migration/lot5b-evidence/review-owner-costs.py",
+        "bytes": 70321,
+        "sha256": "dd2524cbc52e51ed77a7393d4c4a044028f49c4a7fd6a36687534aeb1d8880e7"
+      },
+      "direct5BUnchanged": true
+    }
+  ],
+  "syntax": [
+    {
+      "file": {
+        "path": "docs/migration/lot5c-evidence/record-owner-source-inventory.mjs",
+        "bytes": 13603,
+        "sha256": "50c9275c331e1013b7d618dd93023f79826398aa191c34fb9c05680b01210d8d"
+      },
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot5c-evidence/record-owner-source-inventory.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "startedAt": "2026-11-11T12:30:13.780085+00:00",
+      "finishedAt": "2026-11-11T12:30:13.949234+00:00"
+    },
+    {
+      "file": {
+        "path": "docs/migration/lot5c-evidence/prepare-cost-protocol.py",
+        "bytes": 34082,
+        "sha256": "4de15b6ceada24443592515c6c5efd9af5ac278b2343424555fc8e4bd607a229"
+      },
+      "method": "Python ast.parse(source); no import or execution",
+      "exitCode": 0,
+      "startedAt": "2026-11-11T12:30:13.950274+00:00",
+      "finishedAt": "2026-11-11T12:30:13.955487+00:00"
+    },
+    {
+      "file": {
+        "path": "docs/migration/lot5c-evidence/finalize-owner-cost-contract.py",
+        "bytes": 26586,
+        "sha256": "cf55728cecbe12181c8694d3b18faedfc5aaec47448ff4de80ec45f989fc86e8"
+      },
+      "method": "Python ast.parse(source); no import or execution",
+      "exitCode": 0,
+      "startedAt": "2026-11-11T12:30:13.955672+00:00",
+      "finishedAt": "2026-11-11T12:30:13.968165+00:00"
+    },
+    {
+      "file": {
+        "path": "docs/migration/lot5c-evidence/check-cost-static-inputs.py",
+        "bytes": 37985,
+        "sha256": "b0c188b44acc886aba4a1d3539f4b9fb48eb66cb5cc5a50f2de111b9c209ca27"
+      },
+      "method": "Python ast.parse(source); no import or execution",
+      "exitCode": 0,
+      "startedAt": "2026-11-11T12:30:13.970808+00:00",
+      "finishedAt": "2026-11-11T12:30:13.983702+00:00"
+    },
+    {
+      "file": {
+        "path": "docs/migration/lot5c-evidence/consolidate-owner-costs.mjs",
+        "bytes": 60732,
+        "sha256": "d7c093afc54683682311b6b0a1935bfbc7351ac787ba001827ebfc3543effed7"
+      },
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot5c-evidence/consolidate-owner-costs.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "startedAt": "2026-11-11T12:30:13.983919+00:00",
+      "finishedAt": "2026-11-11T12:30:14.124539+00:00"
+    },
+    {
+      "file": {
+        "path": "docs/migration/lot5c-evidence/review-owner-costs.py",
+        "bytes": 80634,
+        "sha256": "ade4fe2d921b7417b37aaade9d2c62e981fec79c056119cecf9439e5e078048e"
+      },
+      "method": "Python ast.parse(source); no import or execution",
+      "exitCode": 0,
+      "startedAt": "2026-11-11T12:30:14.124723+00:00",
+      "finishedAt": "2026-11-11T12:30:14.152023+00:00"
+    }
+  ],
+  "statisticalSourceComparisons": [
+    {
+      "tool": "review-owner-costs.py",
+      "function": "same",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "8400d2a8a33477a885ee13192717fc7e572074b20f151e4d091525faa196cc79",
+      "direct5BSha256": "8400d2a8a33477a885ee13192717fc7e572074b20f151e4d091525faa196cc79"
+    },
+    {
+      "tool": "review-owner-costs.py",
+      "function": "without",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "36476235e8a5574552a9ac4ae9eb28d0c570829a357c1099aea89b0f5fef96e0",
+      "direct5BSha256": "36476235e8a5574552a9ac4ae9eb28d0c570829a357c1099aea89b0f5fef96e0"
+    },
+    {
+      "tool": "review-owner-costs.py",
+      "function": "numeric",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "c1e3750ac9af8504250b2138d5813e776d3f04f2bfd2590eaa98a4f7d76f4484",
+      "direct5BSha256": "c1e3750ac9af8504250b2138d5813e776d3f04f2bfd2590eaa98a4f7d76f4484"
+    },
+    {
+      "tool": "review-owner-costs.py",
+      "function": "distribution",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "2890f4dd166cbbb24978659da6a0cc3274fb9073ec249b177d05917794cebd27",
+      "direct5BSha256": "2890f4dd166cbbb24978659da6a0cc3274fb9073ec249b177d05917794cebd27"
+    },
+    {
+      "tool": "review-owner-costs.py",
+      "function": "samples",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "4fcd7521fea4d27ff3f0d6870f3cf888a72057d36eb0ff283a0821c42b0bc002",
+      "direct5BSha256": "4fcd7521fea4d27ff3f0d6870f3cf888a72057d36eb0ff283a0821c42b0bc002"
+    },
+    {
+      "tool": "review-owner-costs.py",
+      "function": "calculate",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "dfd87f31a198ce250f16b68107998fd8348493c4d179843391bca76aa29bdea2",
+      "direct5BSha256": "dfd87f31a198ce250f16b68107998fd8348493c4d179843391bca76aa29bdea2"
+    },
+    {
+      "tool": "review-owner-costs.py",
+      "function": "metric",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "d51e12dcb1ea759740d718776aa70fa42179e6dc148212e88ff11c59ccfeb1b3",
+      "direct5BSha256": "d51e12dcb1ea759740d718776aa70fa42179e6dc148212e88ff11c59ccfeb1b3"
+    },
+    {
+      "tool": "review-owner-costs.py",
+      "function": "unresolved_for",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "533aa3a1f63de8472512a0ee474db26b0fe3ab48a1a61bbb6cea39694b8f578e",
+      "direct5BSha256": "533aa3a1f63de8472512a0ee474db26b0fe3ab48a1a61bbb6cea39694b8f578e"
+    },
+    {
+      "tool": "review-owner-costs.py",
+      "function": "within_decimal",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "fcfb7c8d1df901a26e83742b27856d6892a316b357c14d808fed5670341dc677",
+      "direct5BSha256": "fcfb7c8d1df901a26e83742b27856d6892a316b357c14d808fed5670341dc677"
+    },
+    {
+      "tool": "review-owner-costs.py",
+      "function": "work",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "88506e18b67aae49aaac884bfbc1f4eeafad9dbc57122363e8bc0eac1cd6a390",
+      "direct5BSha256": "88506e18b67aae49aaac884bfbc1f4eeafad9dbc57122363e8bc0eac1cd6a390"
+    },
+    {
+      "tool": "review-owner-costs.py",
+      "function": "functional_shape",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "60d94d3118e58722ee467c3e5eabe29ef2d02a40d46f830ecab2be39f514ed77",
+      "direct5BSha256": "60d94d3118e58722ee467c3e5eabe29ef2d02a40d46f830ecab2be39f514ed77"
+    },
+    {
+      "tool": "consolidate-owner-costs.mjs",
+      "function": "unresolvedFor",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "9fa920d824d1b7b5877b67ed94a69f06d849603375ccb11b96005903026db223",
+      "direct5BSha256": "9fa920d824d1b7b5877b67ed94a69f06d849603375ccb11b96005903026db223"
+    },
+    {
+      "tool": "consolidate-owner-costs.mjs",
+      "function": "strictDecimalBudget",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "2b24983f605ab50b14e7a6e9bfd0519a837ab77e6e7cccd5d0c3895e1b01d649",
+      "direct5BSha256": "2b24983f605ab50b14e7a6e9bfd0519a837ab77e6e7cccd5d0c3895e1b01d649"
+    },
+    {
+      "tool": "consolidate-owner-costs.mjs",
+      "function": "distribution",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "2bc773a4f0fc3fde21238ec2093161538e0a39b93339be2d41455af84ef23ab7",
+      "direct5BSha256": "2bc773a4f0fc3fde21238ec2093161538e0a39b93339be2d41455af84ef23ab7"
+    },
+    {
+      "tool": "consolidate-owner-costs.mjs",
+      "function": "valuesFor",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "b080aa4537ea35a9d846a09bab841299a594a7ad9372db76b4a24fb87cea9a69",
+      "direct5BSha256": "b080aa4537ea35a9d846a09bab841299a594a7ad9372db76b4a24fb87cea9a69"
+    },
+    {
+      "tool": "consolidate-owner-costs.mjs",
+      "function": "metricFor",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "de400988009e0e81fed631523b1510083689abcaf8b097f4e5448075fe7e92ee",
+      "direct5BSha256": "de400988009e0e81fed631523b1510083689abcaf8b097f4e5448075fe7e92ee"
+    },
+    {
+      "tool": "consolidate-owner-costs.mjs",
+      "function": "comparisonMetrics",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "b36f39cf24017ff75fe89da7977be53cea74a6e77b19773daa9b5ea81d1dbacf",
+      "direct5BSha256": "b36f39cf24017ff75fe89da7977be53cea74a6e77b19773daa9b5ea81d1dbacf"
+    },
+    {
+      "tool": "consolidate-owner-costs.mjs",
+      "function": "workSignature",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "218d3596575fe8cd1f4f8abb2767c3b7b67f7b6efaf2a12f445c850641baa328",
+      "direct5BSha256": "218d3596575fe8cd1f4f8abb2767c3b7b67f7b6efaf2a12f445c850641baa328"
+    },
+    {
+      "tool": "consolidate-owner-costs.mjs",
+      "function": "validateTrial",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "0b20179dcc50d8a9d0da28f79c9d1adc0b4bd73c91cef75a762c5af7962f0ee8",
+      "direct5BSha256": "0b20179dcc50d8a9d0da28f79c9d1adc0b4bd73c91cef75a762c5af7962f0ee8"
+    }
+  ],
+  "closedPythonDomainConstants": [
+    {
+      "tool": "docs/migration/lot5c-evidence/prepare-cost-protocol.py",
+      "matchesDeclaredRevisedDomain": true
+    },
+    {
+      "tool": "docs/migration/lot5c-evidence/finalize-owner-cost-contract.py",
+      "matchesDeclaredRevisedDomain": true
+    },
+    {
+      "tool": "docs/migration/lot5c-evidence/check-cost-static-inputs.py",
+      "matchesDeclaredRevisedDomain": true
+    },
+    {
+      "tool": "docs/migration/lot5c-evidence/review-owner-costs.py",
+      "matchesDeclaredRevisedDomain": true
+    }
+  ],
+  "domainReview": {
+    "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-domain-source-review.json",
+    "bytes": 5584,
+    "sha256": "ad027c2327b0b073c75deaa48cd9d27e90e5909066beb78a94973d706565f626"
+  },
+  "canonicalSourcePaths": {
+    "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-source-evidence-paths.json",
+    "bytes": 528,
+    "sha256": "4960a996175c03c0ce92365bda7f3dcaf747f1c7fd8467e34a84584816a87b62"
+  },
+  "inputsUnchangedDuringSyntax": true,
+  "functionalToolsImported": false,
+  "factoryExecutions": 0,
+  "functionalCaptures": 0,
+  "costMeasurements": 0,
+  "timingMetricsCalculated": 0,
+  "historicalResultsReused": false,
+  "futureCaptureOrBudgetVerdictClaimed": false,
+  "findingsResolved": [
+    "Direct 5B provenance is pinned and historical tools are unchanged.",
+    "Only public_observed_binding and its existing compiled workflow v6.observed_binding.choose may be newly installed; prior registration order remains exact.",
+    "The revised source domain and canonical eleven-file source list are bound by fingerprints across preparation, contract, preflight and both analyzers.",
+    "Source coverage is one ordered row per actual request/inspection, all acquired return indices, and exactly the source nonnull boundary subset linked to attributed facts.",
+    "Python booleans cannot satisfy source coverage counters/indices or timing-free capture counts.",
+    "External attribution paths must be exact inputs of the actual frozen baseline capture; source inventory/manifest identities remain distinct.",
+    "The 19 retained value/statistics/signature/validation helper bodies are byte-identical to direct 5B sources."
+  ],
+  "readinessIntegration": {
+    "requiredAdditionalInputs": [
+      "contract.domainReview",
+      "contract.sourceEvidencePaths"
+    ],
+    "contractAdds": [
+      "generator",
+      "derivedFrom",
+      "domainReview",
+      "sourceEvidencePaths",
+      "acquisitionDomain"
+    ],
+    "aggregateAdds": [
+      "directlyAdaptedFrom",
+      "inputs.domainReview",
+      "inputs.sourceEvidencePaths"
+    ],
+    "reviewAdds": [
+      "directlyAdaptedFrom",
+      "domainReview",
+      "sourceEvidencePaths"
+    ]
+  },
+  "qualification": "Source and syntax preparation only. No captured graph, timing population, cost result, readiness, published predecessor or final freeze is manufactured. Actual capture/finalization remain blocked until the delivery owner supplies the real frozen candidate and published predecessor."
+}

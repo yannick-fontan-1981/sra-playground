@@ -1,0 +1,501 @@
+{
+  "module_id": "capacity_supposition_c",
+  "declarations": [
+    {
+      "id": "policy.actor_program_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_independent_capacity_or_support_evidence"
+      ],
+      "applicability": [
+        "revisable_capacity_or_support_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_law",
+        "program_capacity_and_execution_separate",
+        "edit_permission_not_movement_permission",
+        "visibility_not_traversability_or_actuation",
+        "budget_includes_recovery",
+        "envelope_not_threshold_or_routing_role",
+        "same_settled_state_not_prior_visits",
+        "all_required_cursors_not_surplus_seats",
+        "unknowns_remain_unknown",
+        "native_measure_only"
+      ],
+      "falsifiers": [
+        "foreign_scope_or_actor_stack",
+        "unqualified_region_or_identity",
+        "incomplete_settled_inventory",
+        "unmeasured_threshold_or_role",
+        "work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "actor_program.retain_program_edit_and_destructible_capacity_question",
+        "actor_program.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.actor_program_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "actor_program.retain_program_edit_and_destructible_capacity_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_and_destructible_capacity_question_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "actor_program.retain_program_edit_and_destructible_capacity_question"
+          }
+        },
+        {
+          "id": "projection.policy.actor_program_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "actor_program.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "actor_program.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.actor_program_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "actor_program.retain_program_edit_and_destructible_capacity_question"
+            }
+          ],
+          "reason_ref": "reason.retain_program_edit_and_destructible_capacity_question"
+        },
+        {
+          "id": "tier.policy.actor_program_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "actor_program.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_program_edit_and_destructible_capacity_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.capacity_question_not_act_or_terminal_selection",
+      "reason_refs": [
+        "reason.retain_program_edit_and_destructible_capacity_question"
+      ]
+    },
+    {
+      "id": "policy.visibility_capacity_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_independent_capacity_or_support_evidence"
+      ],
+      "applicability": [
+        "revisable_capacity_or_support_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_law",
+        "program_capacity_and_execution_separate",
+        "edit_permission_not_movement_permission",
+        "visibility_not_traversability_or_actuation",
+        "budget_includes_recovery",
+        "envelope_not_threshold_or_routing_role",
+        "same_settled_state_not_prior_visits",
+        "all_required_cursors_not_surplus_seats",
+        "unknowns_remain_unknown",
+        "native_measure_only"
+      ],
+      "falsifiers": [
+        "foreign_scope_or_actor_stack",
+        "unqualified_region_or_identity",
+        "incomplete_settled_inventory",
+        "unmeasured_threshold_or_role",
+        "work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "visibility_capacity.retain_reveal_traversal_permission_and_capacity_question",
+        "visibility_capacity.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.visibility_capacity_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "visibility_capacity.retain_reveal_traversal_permission_and_capacity_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "reveal_and_reserve_capacity_question_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "visibility_capacity.retain_reveal_traversal_permission_and_capacity_question"
+          }
+        },
+        {
+          "id": "projection.policy.visibility_capacity_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "visibility_capacity.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "visibility_capacity.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.visibility_capacity_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "visibility_capacity.retain_reveal_traversal_permission_and_capacity_question"
+            }
+          ],
+          "reason_ref": "reason.retain_reveal_traversal_permission_and_capacity_question"
+        },
+        {
+          "id": "tier.policy.visibility_capacity_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "visibility_capacity.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_reveal_traversal_permission_and_capacity_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.capacity_question_not_act_or_terminal_selection",
+      "reason_refs": [
+        "reason.retain_reveal_traversal_permission_and_capacity_question"
+      ]
+    },
+    {
+      "id": "policy.finite_flow_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_independent_capacity_or_support_evidence"
+      ],
+      "applicability": [
+        "revisable_capacity_or_support_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_law",
+        "program_capacity_and_execution_separate",
+        "edit_permission_not_movement_permission",
+        "visibility_not_traversability_or_actuation",
+        "budget_includes_recovery",
+        "envelope_not_threshold_or_routing_role",
+        "same_settled_state_not_prior_visits",
+        "all_required_cursors_not_surplus_seats",
+        "unknowns_remain_unknown",
+        "native_measure_only"
+      ],
+      "falsifiers": [
+        "foreign_scope_or_actor_stack",
+        "unqualified_region_or_identity",
+        "incomplete_settled_inventory",
+        "unmeasured_threshold_or_role",
+        "work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "finite_flow.retain_conditional_relays_thresholds_and_flow_question",
+        "finite_flow.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.finite_flow_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "finite_flow.retain_conditional_relays_thresholds_and_flow_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "conditional_material_distribution_question_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "finite_flow.retain_conditional_relays_thresholds_and_flow_question"
+          }
+        },
+        {
+          "id": "projection.policy.finite_flow_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "finite_flow.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "finite_flow.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.finite_flow_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "finite_flow.retain_conditional_relays_thresholds_and_flow_question"
+            }
+          ],
+          "reason_ref": "reason.retain_conditional_relays_thresholds_and_flow_question"
+        },
+        {
+          "id": "tier.policy.finite_flow_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "finite_flow.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_conditional_relays_thresholds_and_flow_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.capacity_question_not_act_or_terminal_selection",
+      "reason_refs": [
+        "reason.retain_conditional_relays_thresholds_and_flow_question"
+      ]
+    },
+    {
+      "id": "policy.wrap_slide_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_independent_capacity_or_support_evidence"
+      ],
+      "applicability": [
+        "revisable_capacity_or_support_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_law",
+        "program_capacity_and_execution_separate",
+        "edit_permission_not_movement_permission",
+        "visibility_not_traversability_or_actuation",
+        "budget_includes_recovery",
+        "envelope_not_threshold_or_routing_role",
+        "same_settled_state_not_prior_visits",
+        "all_required_cursors_not_surplus_seats",
+        "unknowns_remain_unknown",
+        "native_measure_only"
+      ],
+      "falsifiers": [
+        "foreign_scope_or_actor_stack",
+        "unqualified_region_or_identity",
+        "incomplete_settled_inventory",
+        "unmeasured_threshold_or_role",
+        "work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "wrap_slide.retain_same_settled_state_required_cursor_coverage_question",
+        "wrap_slide.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.wrap_slide_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "wrap_slide.retain_same_settled_state_required_cursor_coverage_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "distinct_seat_coverage_question_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "wrap_slide.retain_same_settled_state_required_cursor_coverage_question"
+          }
+        },
+        {
+          "id": "projection.policy.wrap_slide_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "wrap_slide.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "wrap_slide.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.wrap_slide_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "wrap_slide.retain_same_settled_state_required_cursor_coverage_question"
+            }
+          ],
+          "reason_ref": "reason.retain_same_settled_state_required_cursor_coverage_question"
+        },
+        {
+          "id": "tier.policy.wrap_slide_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "wrap_slide.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_same_settled_state_required_cursor_coverage_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.capacity_question_not_act_or_terminal_selection",
+      "reason_refs": [
+        "reason.retain_same_settled_state_required_cursor_coverage_question"
+      ]
+    }
+  ]
+}

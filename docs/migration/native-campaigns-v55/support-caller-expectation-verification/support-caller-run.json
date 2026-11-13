@@ -1,0 +1,99 @@
+{
+  "schema": "logos-engine.v55.support-caller-expectation-repair.v1",
+  "status": "passed",
+  "baselineEvidence": {
+    "commit": "9355290a1f839bc3151b75817eedda5f148b0eba",
+    "method": "exact git blob and binding comparison; no isolated baseline execution claimed",
+    "test": {
+      "path": "tests/v6-support-caller-integration.test.ts",
+      "baselineSha256": "87d36b176d9e52423a5c8a8901e69b7c25741ab24ba6a158381a8f65935f61b7",
+      "originalFailingRunSha256": "87d36b176d9e52423a5c8a8901e69b7c25741ab24ba6a158381a8f65935f61b7",
+      "testUnchangedInFailedV55Run": true
+    },
+    "constantOwner": {
+      "path": "src/logos-engine/v6-shared-series.ts",
+      "baselineSha256": "0f45e9955cd66be44ab7748279c97310b79da43362e4b3351d32e3c99fef531b",
+      "currentSha256": "0f45e9955cd66be44ab7748279c97310b79da43362e4b3351d32e3c99fef531b",
+      "unchangedFromBaseline": true
+    },
+    "baselineRuntimeBinding": "sharedSeriesDigestScope: SHARED_SERIES_DIGEST_SCOPE,",
+    "currentRuntimeBinding": "sharedSeriesDigestScope: SHARED_SERIES_DIGEST_SCOPE,"
+  },
+  "repair": {
+    "test": {
+      "path": "tests/v6-support-caller-integration.test.ts",
+      "sha256": "3541ede8d93cc8ffe129ec2498e1cc554aa1e84c16735902355a04d6f7d81e79",
+      "bytes": 11174
+    },
+    "oldExpected": "native_program_relations_recall_radial_ports_rooted_quota_mark_support_product_panel_labeled_sequence_cell_placement_alternating_graph_and_coupled_support_v6",
+    "newExpected": "native_program_relations_recall_typed_material_and_pose_radial_ports_field_service_rooted_quota_mark_support_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_and_coupled_support_v6",
+    "onlyOneLiteralReplaced": true,
+    "diff": "diff --git a/tests/v6-support-caller-integration.test.ts b/tests/v6-support-caller-integration.test.ts\nindex edb449f..93efa54 100644\n--- a/tests/v6-support-caller-integration.test.ts\n+++ b/tests/v6-support-caller-integration.test.ts\n@@ -53,7 +53,7 @@ test('the real common caller retains the complete first recall envelope, epoch a\n   assert.notEqual(series.digest, sourceFacts.find(fact => fact.key === 'repeated_series_state')!.value.digest,\n     'The native closure does not impersonate the digest of the unported inheritance chain');\n   assert.match((result.snapshot.coverage as R).sharedSeriesMemory, /remaining ObservedCompositionConstraint providers pending/);\n-  assert.equal((result.snapshot.coverage as R).sharedSeriesDigestScope, 'native_program_relations_recall_radial_ports_rooted_quota_mark_support_product_panel_labeled_sequence_cell_placement_alternating_graph_and_coupled_support_v6');\n+  assert.equal((result.snapshot.coverage as R).sharedSeriesDigestScope, 'native_program_relations_recall_typed_material_and_pose_radial_ports_field_service_rooted_quota_mark_support_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_and_coupled_support_v6');\n   assert.equal(read('family_state:public_occurrence_recall').events.filter((event: R) => event.kind === 'occurrence_recall_transition').length, 1,\n     'The selected recall event is not acquired a second time by passive observation');\n });\n"
+  },
+  "preservedFailure": {
+    "artifacts": [
+      {
+        "path": "docs/migration/native-campaigns-v55/final/validation/delta-tests-run.json",
+        "sha256": "dcf2f3d553e8352a084d3da57a6c4675a43bc72e21531c54131c0ace1e49f4d6",
+        "bytes": 84612
+      },
+      {
+        "path": "docs/migration/native-campaigns-v55/final/validation/delta-tests-output.log.gz",
+        "sha256": "bf62efd37b858ff203e2fa74e018818d912867b738c67929e3e7eef030afdd25",
+        "bytes": 17683
+      }
+    ],
+    "byteIdenticalAfterFocusedRun": true,
+    "originalCounts": {
+      "tests": 607,
+      "pass": 606,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    }
+  },
+  "frozenSource": {
+    "manifest": {
+      "path": "docs/migration/native-campaigns-v55/final/source-manifest.json",
+      "sha256": "6916302960002c81308929be25612c996f275dd777c3a678bd86af1922595a88",
+      "bytes": 25209
+    },
+    "fileCount": 214,
+    "digest": "3794fa1b97951b20f3ce06d2d1d11b20d8c2b47132591fb5b8cf6f3e75b661d3",
+    "allManifestFilesMatch": true,
+    "allArchiveFilesMatch": true,
+    "archiveSha256": "a71e59d470bb2ac3ce8a857765e303347f82df1e1b3ef425248baab197c4e696",
+    "archiveEntryCount": 225,
+    "repairedTestInNativeManifest": false,
+    "repairedTestInArchiveManifest": false,
+    "repairedTestInArchiveTar": false
+  },
+  "check": {
+    "command": [
+      "node",
+      "--test",
+      "--test-concurrency=1",
+      "--test-reporter=tap",
+      "tests/v6-support-caller-integration.test.ts"
+    ],
+    "startedAt": "2026-11-09T13:31:51.751784+00:00",
+    "finishedAt": "2026-11-09T13:32:03.475798+00:00",
+    "elapsedSeconds": 11.723986117000095,
+    "exitCode": 0,
+    "counts": {
+      "tests": 21,
+      "pass": 21,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "output": {
+      "path": "docs/migration/native-campaigns-v55/support-caller-expectation-verification/support-caller-output.log.gz",
+      "sha256": "2c241de47e9e9a2a559c73bcee797a443f0eada04518fde2e423366c4e7eaf81",
+      "bytes": 726
+    }
+  },
+  "qualification": "A stale assertion already present in published v54 was corrected to its existing source constant. No native source or frozen campaign input was changed. The original failed 607-test receipt and log remain retained."
+}

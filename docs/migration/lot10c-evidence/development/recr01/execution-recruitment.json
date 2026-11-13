@@ -1,0 +1,371 @@
+{
+  "schema": "logos-engine.lot10c.recruitment-clocked-execution.v1",
+  "attemptId": "docs/migration/lot10c-evidence/development/recr01",
+  "game": "RECR",
+  "targetLevels": 3,
+  "startedAt": "2026-11-11T17:51:33.394937+00:00",
+  "captureFinishedAt": "2026-11-11T17:53:17.016805+00:00",
+  "elapsedSecondsThroughCapture": 103.62185209,
+  "activityCeilingSeconds": 300.0,
+  "terminationMarginSeconds": 0.5,
+  "retentionReserveSeconds": 30.0,
+  "priorCumulativeSeconds": 0.210466935,
+  "remainingBeforeSeconds": 2399.789533065,
+  "child": {
+    "pid": 6,
+    "startedAt": "2026-11-11T17:51:33.632961+00:00",
+    "startedElapsedSeconds": 0.238039537,
+    "allowanceAfterPreflightSeconds": 299.2620250740001,
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--max-old-space-size=1536",
+      "/workspace/sites/sra-lot10c-20261111/.sites-checkout/docs/migration/lot10c-evidence/run-ordered-recruitment-campaign.mjs",
+      "/workspace/sites/sra-lot10c-20261111/.sites-checkout/docs/migration/lot10c-evidence/development/recr01"
+    ],
+    "nodeOldSpaceMiB": 1536,
+    "parentDeathSignal": "SIGKILL",
+    "separateProcessGroup": true,
+    "finishedAt": "2026-11-11T17:53:04.539041+00:00",
+    "finishedElapsedSeconds": 91.144143549,
+    "exitCode": 0
+  },
+  "exitCode": 0,
+  "attemptOutcome": "child_returned",
+  "termination": null,
+  "receivedSignals": [],
+  "nativeSourceManifestDigest": "bb7d62b5823d76ae7a5ecd452cb622ebb04f2b85b20fb0d2f9a5c35a1535b361",
+  "sourceInputsUnchanged": true,
+  "capture": {
+    "errors": [],
+    "publicJournal": {
+      "present": true,
+      "completeRecords": 18,
+      "initialReturns": 1,
+      "observedActionReturns": 17,
+      "malformedCompleteRecords": [],
+      "trailingPartialBytes": 0,
+      "traceMatchesCompleteRecords": true,
+      "lastObservedPublicFields": {
+        "level": 4,
+        "levels_completed": 3,
+        "state": "NOT_FINISHED",
+        "step_index": 17,
+        "frame_hash": "a09dee723a6c769a"
+      },
+      "qualification": "Counts only complete observed public returns. An interrupted or in-flight action is not invented."
+    },
+    "lastCheckpoint": {
+      "sequence": 17,
+      "recordedAt": "2026-11-11T17:52:54.683Z",
+      "completeCampaign": false,
+      "reportStatus": "running",
+      "recordedActions": 17,
+      "recordedPrefixes": 17
+    },
+    "checkpointIndex": {
+      "present": true,
+      "completeRecords": 17,
+      "lastCompleteRecord": {
+        "sequence": 17,
+        "recordedAt": "2026-11-11T17:52:54.683Z",
+        "completeCampaign": false,
+        "reportStatus": "running",
+        "recordedActions": 17,
+        "recordedPrefixes": 17,
+        "packetsObserved": 18,
+        "actionReturnsObserved": 17,
+        "captureDiagnostics": {
+          "serialization": "incremental_json_v1",
+          "checkpointBytes": 64375310,
+          "serializationAndCommitElapsedMs": 4530.684756999995,
+          "memoryBeforeCapture": {
+            "rss": 1118814208,
+            "heapTotal": 865878016,
+            "heapUsed": 571778728,
+            "external": 109205599,
+            "arrayBuffers": 40399888
+          },
+          "memoryAfterCapture": {
+            "rss": 1118814208,
+            "heapTotal": 866926592,
+            "heapUsed": 571572552,
+            "external": 109146170,
+            "arrayBuffers": 40340459
+          },
+          "processLifetimeMaxRssBeforeCaptureKilobytes": 1128672,
+          "processLifetimeMaxRssAfterCaptureKilobytes": 1128672,
+          "qualification": "Elapsed time uses a monotonic clock and covers serialization and commit. maxRSS values are cumulative process-lifetime maxima in kilobytes, not peaks attributable to this capture. Process memory samples surround serialization and commit only. No cause of an earlier process termination is inferred."
+        }
+      },
+      "trailingPartialBytes": 0,
+      "malformedCompleteRecords": []
+    },
+    "campaignStatus": "passed",
+    "actualFinal": {
+      "actions": 17,
+      "levelsCompleted": 3,
+      "level": 4,
+      "state": "NOT_FINISHED",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "activeSeconds": 41.507245301000026,
+      "prefixes": 17,
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 17,
+        "boundaryReplays": 2,
+        "goalEvents": 3,
+        "frontierDeltas": 36,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 18
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 19
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 18
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 14
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 2
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 1
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 19
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology"
+        ],
+        "morphologyProvider": {
+          "status": "partial_current_measurements_control_attention_and_methods",
+          "state_owner": "family_state:morphology",
+          "motion_owner": "caller:goal",
+          "forecast_owner": "family_state:public_observed_inventory",
+          "current_decision_scope": "one_source_selection_cycle",
+          "attention_owner": "caller:attention",
+          "method_owner": "caller:counters.targetMethod",
+          "entry_return_owner": "family_state:morphology.entry_access_return",
+          "connected_methods": [
+            "retained_station_method",
+            "entry_access_return",
+            "entry_rebind",
+            "entry_probe",
+            "managed_capacity",
+            "target_extension_continuation"
+          ],
+          "pending": [
+            "complete_original_caller_parity_and_domain_closure"
+          ]
+        },
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      },
+      "fullV6Parity": false,
+      "sessions": 1,
+      "operationCounts": {
+        "init": 1,
+        "advance": 17,
+        "resume": 16
+      },
+      "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.62.0"
+    },
+    "actualFailure": null,
+    "finalCaptureComplete": true,
+    "reportCountsMatchJournal": true,
+    "finalPublicFieldsMatch": true,
+    "qualification": "A missing/partial capture is an evidence limitation, never an inferred game failure or campaign success."
+  },
+  "boundedRetention": {
+    "schema": "logos-engine.lot10c.bounded-retention.v1",
+    "startedAt": "2026-11-11T17:53:04.539125+00:00",
+    "allowanceSeconds": 30.0,
+    "maximumAddressSpaceBytes": 2147483648,
+    "rawEvidencePreserved": true,
+    "termination": null,
+    "pid": 18,
+    "finishedAt": "2026-11-11T17:53:17.012998+00:00",
+    "elapsedSeconds": 12.473895286999323,
+    "exitCode": 0
+  },
+  "cumulativeBudgetWithinLimitThroughCapture": true,
+  "finalExecutionEvidenceComplete": true,
+  "campaignPassedEstablished": true,
+  "completeActionCountEstablished": true,
+  "errors": [],
+  "artifacts": {
+    "attempt-start.json": {
+      "path": "docs/migration/lot10c-evidence/development/recr01/attempt-start.json",
+      "sha256": "0a439b0f3cf82b1041ed57787861922187024e59b7aef9906cc6562e92b9bb28",
+      "bytes": 1164
+    },
+    "child-process.json": {
+      "path": "docs/migration/lot10c-evidence/development/recr01/child-process.json",
+      "sha256": "5c7d50f4ea671193ffd39fa9f0755dbae6398acc190df573a64c9d1e5efe041b",
+      "bytes": 684
+    },
+    "clock-before.json": {
+      "path": "docs/migration/lot10c-evidence/development/recr01/clock-before.json",
+      "sha256": "597d32a0a6646aaa71d8e5f55f62afd22a86fa03ee952d6de12f6c4f06091523",
+      "bytes": 1656
+    },
+    "postflight.json": {
+      "path": "docs/migration/lot10c-evidence/development/recr01/postflight.json",
+      "sha256": "37194413eaa79340cb7975ea2689c505963d0447b225f94f04062c1e9472736f",
+      "bytes": 114352
+    },
+    "preflight.json": {
+      "path": "docs/migration/lot10c-evidence/development/recr01/preflight.json",
+      "sha256": "83295f6be3406ed97b3ede939f0c3579504215391710c81eff1b837062ffb3fc",
+      "bytes": 115046
+    },
+    "recruitment-actual-public-journal.jsonl": {
+      "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-actual-public-journal.jsonl",
+      "sha256": "ae68aa79fbf99dca6a038cd812879896712b46a6753a0cc82e0f708d665a766e",
+      "bytes": 1691400
+    },
+    "recruitment-actual-public-journal.jsonl.gz": {
+      "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-actual-public-journal.jsonl.gz",
+      "sha256": "7955fdd7911564f1488cca6bb29e03b566e64bc5c75d0a478580bed7c753dd0a",
+      "bytes": 22661
+    },
+    "recruitment-campaign.json.gz": {
+      "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-campaign.json.gz",
+      "sha256": "bb5bf080d424a3e21312a229a4253aecf904ebb55ab78baaa6ec6e930ce365b0",
+      "bytes": 7006750
+    },
+    "recruitment-checkpoint.json": {
+      "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-checkpoint.json",
+      "sha256": "95d3db9db5010a428a461e1fd164751b424138869162748248d2b94ce8692ebe",
+      "bytes": 64375310
+    },
+    "recruitment-checkpoint.json.gz": {
+      "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-checkpoint.json.gz",
+      "sha256": "dbbf6ccba41ef3bf90dbd8c0f370f2f51212309ddac22a0fcb3691877f60ade7",
+      "bytes": 6867013
+    },
+    "recruitment-checkpoints.jsonl": {
+      "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-checkpoints.jsonl",
+      "sha256": "1296e202b0e9a7db645a8074b32167a4bebf390acde81b540d89fe7a2cd7648e",
+      "bytes": 17223
+    },
+    "recruitment-checkpoints.jsonl.gz": {
+      "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-checkpoints.jsonl.gz",
+      "sha256": "ea530fad0f1be11361c424fbc66d4a6b11167b5912b38d71a598fe4228faae32",
+      "bytes": 2448
+    },
+    "recruitment-child-return.json": {
+      "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-child-return.json",
+      "sha256": "e85d2ebbaa1c0c5a6a8d055579fcb61f7fd80e5e7048e948e725d59bc6b8427a",
+      "bytes": 2027
+    },
+    "recruitment-child-start.json": {
+      "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-child-start.json",
+      "sha256": "4d38163cf6825c998ee5978109db98277a8035b5a85baf8c4a5c36c66416b1ba",
+      "bytes": 376
+    },
+    "recruitment-live.log": {
+      "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-live.log",
+      "sha256": "f83b8c5b8a39cba4e3fe2462f45f490ebd789546a9275b4eb0780838516497a7",
+      "bytes": 61685
+    },
+    "recruitment-live.log.gz": {
+      "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-live.log.gz",
+      "sha256": "dfed482caec0b4a9cd2305087159cd3da01d244f65967e9d4638032d61614714",
+      "bytes": 3344
+    },
+    "recruitment-public-trace.json.gz": {
+      "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-public-trace.json.gz",
+      "sha256": "e0fad661cabb078438b29a94f6b032bfefe5376f553fd5d193d26a6f4f547b29",
+      "bytes": 35232
+    },
+    "retention-result.json": {
+      "path": "docs/migration/lot10c-evidence/development/recr01/retention-result.json",
+      "sha256": "4019f09386a999d1039a3015664cd7bb7b8f5f2662b7f8716c69afa4d7dbd9b4",
+      "bytes": 130347
+    },
+    "retention-execution.json": {
+      "path": "docs/migration/lot10c-evidence/development/recr01/retention-execution.json",
+      "sha256": "0a27fd986228c49447ba5699fe1d58ec219004cb5f724082519df641f2f5864e",
+      "bytes": 357
+    }
+  },
+  "losslessArchives": [
+    {
+      "original": {
+        "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-live.log",
+        "sha256": "f83b8c5b8a39cba4e3fe2462f45f490ebd789546a9275b4eb0780838516497a7",
+        "bytes": 61685
+      },
+      "compressed": {
+        "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-live.log.gz",
+        "sha256": "dfed482caec0b4a9cd2305087159cd3da01d244f65967e9d4638032d61614714",
+        "bytes": 3344
+      },
+      "roundtripVerified": true,
+      "restoredSha256": "f83b8c5b8a39cba4e3fe2462f45f490ebd789546a9275b4eb0780838516497a7",
+      "restoredBytes": 61685
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-actual-public-journal.jsonl",
+        "sha256": "ae68aa79fbf99dca6a038cd812879896712b46a6753a0cc82e0f708d665a766e",
+        "bytes": 1691400
+      },
+      "compressed": {
+        "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-actual-public-journal.jsonl.gz",
+        "sha256": "7955fdd7911564f1488cca6bb29e03b566e64bc5c75d0a478580bed7c753dd0a",
+        "bytes": 22661
+      },
+      "roundtripVerified": true,
+      "restoredSha256": "ae68aa79fbf99dca6a038cd812879896712b46a6753a0cc82e0f708d665a766e",
+      "restoredBytes": 1691400
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-checkpoints.jsonl",
+        "sha256": "1296e202b0e9a7db645a8074b32167a4bebf390acde81b540d89fe7a2cd7648e",
+        "bytes": 17223
+      },
+      "compressed": {
+        "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-checkpoints.jsonl.gz",
+        "sha256": "ea530fad0f1be11361c424fbc66d4a6b11167b5912b38d71a598fe4228faae32",
+        "bytes": 2448
+      },
+      "roundtripVerified": true,
+      "restoredSha256": "1296e202b0e9a7db645a8074b32167a4bebf390acde81b540d89fe7a2cd7648e",
+      "restoredBytes": 17223
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-checkpoint.json",
+        "sha256": "95d3db9db5010a428a461e1fd164751b424138869162748248d2b94ce8692ebe",
+        "bytes": 64375310
+      },
+      "compressed": {
+        "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-checkpoint.json.gz",
+        "sha256": "dbbf6ccba41ef3bf90dbd8c0f370f2f51212309ddac22a0fcb3691877f60ade7",
+        "bytes": 6867013
+      },
+      "roundtripVerified": true,
+      "restoredSha256": "95d3db9db5010a428a461e1fd164751b424138869162748248d2b94ce8692ebe",
+      "restoredBytes": 64375310
+    }
+  ],
+  "qualification": "One admitted cold production campaign, target three, without any additional action cap. The monotone charge includes wrapper preparation, full child lifetime and post-stop retention. Retention is supervised in a separate process with a hard deadline and address-space bound. The final ledger additionally charges receipt writing/hashing before its atomic terminal update and must also pass its budget gate. Every prior diagnostic, browser and campaign debit remains in the same case ledger. Partial checkpoints and clock/capture failures do not establish campaign success or game failure. No source/function/full-caller parity is inferred."
+}

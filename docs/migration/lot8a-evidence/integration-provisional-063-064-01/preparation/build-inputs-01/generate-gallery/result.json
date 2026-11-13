@@ -1,0 +1,33 @@
+{
+  "name": "generate-gallery",
+  "command": [
+    "node",
+    "scripts/generate-game-gallery.mjs"
+  ],
+  "startedAt": "2026-11-11T19:19:57.632367+00:00",
+  "finishedAt": "2026-11-11T19:19:57.847870+00:00",
+  "elapsedSeconds": 0.21551960199940368,
+  "exitCode": 0,
+  "predeclaredTimeoutSeconds": 180,
+  "stoppedReason": null,
+  "stdout": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/generate-gallery/generate-gallery-stdout.log",
+    "sha256": "0f38b2eddbb5764788c53370badcc3136f2484d3e487592cef269c2d15ffe9a2",
+    "bytes": 86
+  },
+  "stderr": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/generate-gallery/generate-gallery-stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "activity": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/generate-gallery/generate-gallery-activity.jsonl",
+    "sha256": "07a2c71fc986d3c6afc7c5f47597ac9b397b5ebda16d7392e8214ba9f9d9da5a",
+    "bytes": 107
+  },
+  "logTransport": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/build-inputs-01/generate-gallery/generate-gallery-log-transport.json",
+    "sha256": "ff6d5260e1ef22c02144ea06afe6b025377f2d4d3d6544fc9236567fb59b3fae",
+    "bytes": 2067
+  }
+}

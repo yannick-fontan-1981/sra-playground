@@ -1,0 +1,104 @@
+{
+  "schema": "logos-engine.framed-window-geometric-development-diagnostic.v1",
+  "recordedAt": "2026-11-10T12:03:17.975995-03:00",
+  "timezone": "UTC−03",
+  "status": "prior_observations_preserved_no_rerun",
+  "observedDate": "2026-11-10",
+  "observedAbsoluteTimestamps": null,
+  "provenance": "Commands and stdout transcribed from this development session tool receipts. This file was written after the observations; absolute start/end instants and a source digest at observation were not captured.",
+  "officialCostMeasurement": false,
+  "gameExecution": false,
+  "gameProgressOrResolutionClaim": false,
+  "scope": "Synthetic portable public-palette rasters passed only to measureFramedWindow. No game engine, specification, solution, public-case campaign or per-game clock was used.",
+  "sourceGrammarChanged": false,
+  "nativeDigestAtObservation": null,
+  "boundsReview": {
+    "imagePixelsMaximum": 65536,
+    "imageBoundEnforcedBy": "measureFramedWindow -> geometricComponents -> validateRows in src/logos-engine/v6-native-observer.ts",
+    "inputDomain": "Nonempty rectangular uint8 palette matrix, at most 65536 pixels.",
+    "minimumAcceptedFrameComponentPixels": 8,
+    "frameCountUpperBound": "F <= floor(P / 8), because accepted components have at least an eight-pixel 3-by-3 perimeter and component masks are disjoint.",
+    "orderedPairVisits": "F * F; the implementation scans all ordered pairs before retaining pairs with strictly different interior areas and the source geometry constraints.",
+    "retainedPairCountUpperBound": "F * (F - 1) / 2; strict area ordering permits at most one orientation for each distinct pair.",
+    "perPairWindowCount": "(imageWidth - referenceWidth + 1) * (imageHeight - referenceHeight + 1)",
+    "perPairPixelComparisonUpperBound": "windowCount * referenceWidth * referenceHeight; first differing pixels shorten actual work.",
+    "allocation": "Admissible pairs are materialized; reference/image interiors and matching-window metadata are allocated during scanning.",
+    "prefilterDeadlineOrNodeChecks": false,
+    "certificationBounds": "The consumed D request is separately bounded by node/depth/domain/time checks after measurement. Those bounds do not interrupt the preceding synchronous prefilter.",
+    "risk": "Finite input size bounds total work but gives no small latency guarantee. Dense frames cause quadratic pair work; nearly equal windows cause repeated pixel comparisons and synchronous latency.",
+    "decision": "No extra frame/pair/window cutoff, early ambiguity stop, cancellation or other grammar change was silently added. Any future bounded adaptation requires explicit qualification and parity review."
+  },
+  "runs": [
+    {
+      "id": "repeated_frame_matrix",
+      "command": [
+        "node",
+        "--input-type=module"
+      ],
+      "cwdAtExecution": "/workspace/sites/sra-playground-step3d/.sites-checkout",
+      "stdinSource": "import { measureFramedWindow } from './src/logos-engine/v6-framed-window-observation.ts';\nfor (const size of [32,64,96,128]) {\n  const rows=Array.from({length:size},()=>Array(size).fill(0));\n  let small=0,large=0;\n  for(let y=1;y+5<size-1;y+=8)for(let x=1;x+5<size-1;x+=8){\n    const bigger=((x+y-2)/8)%2===1,side=bigger?6:4;\n    if(bigger)large++;else small++;\n    for(let dy=0;dy<side;dy++)for(let dx=0;dx<side;dx++)rows[y+dy][x+dx]=(dx===0||dy===0||dx===side-1||dy===side-1)?1:2;\n    rows[y+1][x+1]=3;rows[y+1][x+2]=4;rows[y+2][x+1]=5;rows[y+2][x+2]=6;\n  }\n  const started=performance.now();const scene=measureFramedWindow(rows);const elapsedMs=performance.now()-started;\n  console.log(JSON.stringify({domainPixels:size*size,smallFrames:small,largeFrames:large,compatiblePairs:small*large,scene,elapsedMs}));\n}\n",
+      "exitCode": 0,
+      "stdout": "{\"domainPixels\":1024,\"smallFrames\":8,\"largeFrames\":8,\"compatiblePairs\":64,\"scene\":null,\"elapsedMs\":5.760057000000003}\n{\"domainPixels\":4096,\"smallFrames\":32,\"largeFrames\":32,\"compatiblePairs\":1024,\"scene\":null,\"elapsedMs\":10.964749999999995}\n{\"domainPixels\":9216,\"smallFrames\":72,\"largeFrames\":72,\"compatiblePairs\":5184,\"scene\":null,\"elapsedMs\":26.059039}\n{\"domainPixels\":16384,\"smallFrames\":128,\"largeFrames\":128,\"compatiblePairs\":16384,\"scene\":null,\"elapsedMs\":79.68905000000001}\n",
+      "observations": [
+        {
+          "domainPixels": 1024,
+          "smallFrames": 8,
+          "largeFrames": 8,
+          "compatiblePairs": 64,
+          "scene": null,
+          "elapsedMs": 5.760057000000003
+        },
+        {
+          "domainPixels": 4096,
+          "smallFrames": 32,
+          "largeFrames": 32,
+          "compatiblePairs": 1024,
+          "scene": null,
+          "elapsedMs": 10.964749999999995
+        },
+        {
+          "domainPixels": 9216,
+          "smallFrames": 72,
+          "largeFrames": 72,
+          "compatiblePairs": 5184,
+          "scene": null,
+          "elapsedMs": 26.059039
+        },
+        {
+          "domainPixels": 16384,
+          "smallFrames": 128,
+          "largeFrames": 128,
+          "compatiblePairs": 16384,
+          "scene": null,
+          "elapsedMs": 79.68905000000001
+        }
+      ],
+      "counterQualification": "compatiblePairs is the construction formula smallFrames * largeFrames, not an instrumented internal counter."
+    },
+    {
+      "id": "maximum_image_nearly_equal_windows",
+      "command": [
+        "node",
+        "--input-type=module"
+      ],
+      "cwdAtExecution": "/workspace/sites/sra-playground-step3d/.sites-checkout",
+      "stdinSource": "import { measureFramedWindow } from './src/logos-engine/v6-framed-window-observation.ts';\nconst rows=Array.from({length:256},()=>Array(256).fill(0));\nfunction frame(left,top,right,bottom){for(let y=top;y<=bottom;y++)for(let x=left;x<=right;x++)rows[y][x]=(x===left||x===right||y===top||y===bottom)?1:2;}\nframe(1,1,160,254); frame(162,1,254,200); rows[199][253]=3;\nconst started=performance.now(), scene=measureFramedWindow(rows), elapsedMs=performance.now()-started;\nconsole.log(JSON.stringify({domainPixels:65536,referenceArea:91*198,imageArea:158*252,candidateWindows:68*55,comparisonPixelUpperWitness:68*55*91*198,scene,elapsedMs,qualification:'Synthetic portable raster; no game, official cost measurement or performance guarantee.'}));\n",
+      "exitCode": 0,
+      "stdout": "{\"domainPixels\":65536,\"referenceArea\":18018,\"imageArea\":39816,\"candidateWindows\":3740,\"comparisonPixelUpperWitness\":67387320,\"scene\":null,\"elapsedMs\":248.88776000000001,\"qualification\":\"Synthetic portable raster; no game, official cost measurement or performance guarantee.\"}\n",
+      "observations": [
+        {
+          "domainPixels": 65536,
+          "referenceArea": 18018,
+          "imageArea": 39816,
+          "candidateWindows": 3740,
+          "comparisonPixelUpperWitness": 67387320,
+          "scene": null,
+          "elapsedMs": 248.88776000000001,
+          "qualification": "Synthetic portable raster; no game, official cost measurement or performance guarantee."
+        }
+      ],
+      "counterQualification": "Areas, candidateWindows and comparisonPixelUpperWitness are formulas from the constructed geometry, not instrumented pixel counters. Each equal-size test window differs at the final reference pixel by construction."
+    }
+  ],
+  "qualification": "These one-off elapsed times are development observations only, with no isolated environment, ABBA baseline, repeated cohort, warmup policy, attribution or performance guarantee. They are not inputs to the official STCK/SMLP cost window, do not certify worst-case latency, and do not establish FramedWindow contribution in a public game. No Python-source timing or parity run was performed for these two geometric witnesses."
+}

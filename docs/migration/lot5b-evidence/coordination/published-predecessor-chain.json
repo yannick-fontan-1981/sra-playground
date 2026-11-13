@@ -1,0 +1,52 @@
+{
+  "schema": "logos-engine.lot5b-published-predecessor-chain.v1",
+  "status": "verified",
+  "recordedAt": "2026-11-11T01:53:45.844184+00:00",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "candidateSourceBaseCommit": "ee0c2e663a68e7ac7b272625adf929fcac483956",
+  "publishedPredecessorCommit": "d06620d1e4ca2c9758cc693b1ced9eeeddccb7e6",
+  "publishedPredecessorIsAncestorOfCandidateBase": true,
+  "candidateBaseAncestry": {
+    "path": "docs/migration/lot5b-evidence/coordination/candidate-base-ancestry.json",
+    "sha256": "f7a25764558232691f0f3cd3a08f8e9a2a128a47cf21e1902f8451cdab84a16a",
+    "bytes": 1772
+  },
+  "predecessors": [
+    {
+      "lot": "10A",
+      "publication": {
+        "path": "docs/migration/lot5b-evidence/coordination/published-10a-site91.json",
+        "sha256": "5ff7d987517545f3c9bcd9efe59aed715e3b6a122990fcfbd4995d871356f7c1",
+        "bytes": 1635
+      },
+      "sourceManifest": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/source-manifest.json",
+        "sha256": "55b78bacc97745a6b8b1bde35156ec0f7184a6ad1cf4a637d35a81b82abec42f",
+        "bytes": 34908
+      },
+      "sourceVerification": {
+        "path": "docs/migration/lot5b-evidence/coordination/published-10a-source-verification.json",
+        "sha256": "68876d965f716fbe107c0ef7dcbf90b32af7ab0f48971611a876988aa9012264",
+        "bytes": 36420
+      }
+    },
+    {
+      "lot": "4C",
+      "publication": {
+        "path": "docs/migration/lot5b-evidence/coordination/published-4c-site92.json",
+        "sha256": "2b79ab3c147e6b6e4dd86161324634413691ef4feb95ab215d5507f72fecbda4",
+        "bytes": 1496
+      },
+      "sourceManifest": {
+        "path": "docs/migration/lot4c-evidence/integrated-final/source-manifest.json",
+        "sha256": "453b773ee0b81364d44679b611214a527c008aab8f01ae2bf9cd402e7996f4aa",
+        "bytes": 35387
+      },
+      "sourceVerification": {
+        "path": "docs/migration/lot5b-evidence/coordination/published-4c-source-verification.json",
+        "sha256": "2babd319a77392755a6027415dc483fd4187ad0d4d4ebe7a370e8995ccc3e285",
+        "bytes": 36662
+      }
+    }
+  ]
+}

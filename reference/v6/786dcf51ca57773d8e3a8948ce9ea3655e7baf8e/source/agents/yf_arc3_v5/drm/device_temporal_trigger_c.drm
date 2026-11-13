@@ -1,0 +1,13 @@
+{"module_id":"device_temporal_trigger_c","declarations":[{
+ "id":"policy.device_temporal_trigger_c","kind":"selection_policy","evaluation":"declared_eligibility_single",
+ "supported_operators":["SELECT"],"input_contract":"yf_arc3_v5.authority_input.selection.v1","output_contract":"yf_arc3_v5.authority_output.selection.v1",
+ "declared_alternative_refs":["device.temporal.conditional_means"],"selection_required_fact_fields":["alternative_ref"],
+ "selection_eligibility_conditions":[{"field":"eligible","operator":"equals","expected":true}],
+ "fact_projections":[{"id":"projection.device.temporal.conditional_means","all_conditions":[
+  {"field":"alternative_ref","operator":"equals","expected":"device.temporal.conditional_means"},
+  {"field":"temporal_trigger_bound","operator":"equals","expected":true},
+  {"field":"known_domain_without_target","operator":"equals","expected":true}],"static_facts":{"eligible":true}}],
+ "premises":["exact_complete_current_known_program_domain","current_supported_clock_hazard_schedule"],
+ "invariants":["unknown_encodings_remain_unknown","timing_means_are_conditional","waiting_requires_existing_guards","no_ACT"],
+ "falsifiers":["compatible_current_program","incomplete_domain","changed_schedule"],"reason_refs":["reason_temporal_window_may_enable_known_program_under_new_departure"]
+}]}

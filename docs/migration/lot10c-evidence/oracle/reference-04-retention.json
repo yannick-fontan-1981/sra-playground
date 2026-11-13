@@ -1,0 +1,9 @@
+{
+  "schema": "logos-engine.oracle-reference-retention.v1",
+  "recordedAt": "2026-11-11T17:17:37.254546+00:00",
+  "originalPath": "tests/fixtures/v6-ordered-recruitment-reference.json.gz",
+  "retainedPath": "docs/migration/lot10c-evidence/oracle/reference-04.json.gz",
+  "sha256": "e962c0e96a7df7622e1dd699ee0588f259a37ec418487d6592cec312022c8e12",
+  "bytes": 1008825,
+  "reason": "Actual cold-runtime observation by delivery owner showed ACTION5 without data, contrary to the earlier static enumeration inference. Run05 executes originals on the observed command. The normalized empty-data variant remains a separate explicit source case. No expected source output is patched."
+}

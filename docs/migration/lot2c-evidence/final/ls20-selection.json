@@ -1,0 +1,15 @@
+{
+  "schema": "logos-engine.native-campaign-selection.v1",
+  "game": "LS20",
+  "targetLevels": 3,
+  "selectedAt": "2026-11-09T20:17:52.649247+00:00",
+  "maximumBlockedSeconds": 2400,
+  "carriedBlockedSeconds": 967.661748,
+  "priorResolution": "docs/migration/lot2b-evidence/final/ls20-resolution.json",
+  "remainingBlockedSeconds": 1432.338252,
+  "switchDeadline": "2026-11-09T20:41:44.987499+00:00",
+  "nextCandidate": "LS19",
+  "sourceManifestDigest": "3cd17565b114a40ed71870bf8d7875a1b91102440b92d14a9258bfa98d4f7779",
+  "selectionBasis": "Re-evaluate the publicly witnessed LS20 level boundary after connecting source station-method enrichment, entry continuation and managed capacity. Use one cold common native session; no game implementation, solution, expected action or acquired checkpoint enters the agent.",
+  "clockPolicy": "Keep the carried cumulative blocked time. Count this selection, diagnosis and any retry continuously until an explicit switch; never reset the identity during fixes."
+}

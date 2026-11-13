@@ -1,0 +1,28 @@
+{
+  "schema": "logos-engine.lot10c.final-build-input-review.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T20:48:50.084934+00:00",
+  "verifier": {
+    "path": "scripts/verify-native-delivery.py",
+    "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a",
+    "bytes": 26494
+  },
+  "checksReceipt": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/validation/checks-run.json",
+    "sha256": "0e80441e35327795eed6c40458e598def32df0b6b63975650782100b69f2b4ce",
+    "bytes": 223253
+  },
+  "buildInputsMatched": 394,
+  "worker": {
+    "path": "dist/assets/v6-agent-worker-DW42rSkw.js",
+    "sha256": "59a0e378d31d4701270bcea5a95715db4f54b8b204112a0ec2660f7ff5c0ff26",
+    "bytes": 6995019
+  },
+  "assetsMaterialization": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/build-assets-materialization.json",
+    "sha256": "2813d9d45cc6291cec06cffef1c24d2cadb795b53cf0cfdb2b2372fa031016b0",
+    "bytes": 3262
+  },
+  "nativeSourceDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+  "qualification": "The unchanged delivery verifier now accepts the fresh five-check receipt including materialized pinned browser runtime assets. This is build/input validation only, not complete delivery/cost/publication acceptance."
+}

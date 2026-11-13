@@ -1,0 +1,108 @@
+{
+  "schema": "logos-engine.public-preview-candidate.v1",
+  "game": "TU93",
+  "requestedTargetLevels": 3,
+  "status": "candidate_only_no_game_execution",
+  "qualification": "Selection from already-published initial-frame gallery images. This is evidence of geometric compatibility with the original alternating-graph prerequisites, not learned controls, a valid route, contact-removal evidence, or completed levels.",
+  "source": {
+    "originalV6Commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "measurement": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v5/capabilities/interaction.py::_alternating_material_graph_measurement",
+    "observation": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/alternating_graph_observation.py::description",
+    "galleryManifest": "content/game-gallery-assets.json",
+    "gallerySourceCommit": "212d8d426f07eea2b6797c2bb647545767488a96",
+    "image": "public/gallery/official.png",
+    "group": "official",
+    "rowZeroBased": 22,
+    "tileSize": 64,
+    "palette": ["#FFFFFF", "#CCCCCC", "#999999", "#666666", "#333333", "#000000", "#E53AA3", "#FF7BCC", "#F93C31", "#1E93FF", "#88D8F1", "#FFDC00", "#FF851B", "#921231", "#4FCC30", "#A356D6"],
+    "verification": "Lossless PNG tiles decoded to palette indices; SHA256 of the 4096 frame bytes matched each manifest frameSha256. Atlas hashes also matched the manifest."
+  },
+  "selection": {
+    "initialFramesInspected": 100,
+    "geometricCandidates": ["TU93", "ESCT"],
+    "exactPaletteHashVerifiedInitialFrames": 77,
+    "otherInitialFrames": "For 23 nonstandard-palette previews, only color-equality geometry was examined using distinct local labels; no source-index or frame-hash claim was made for those frames.",
+    "reason": "TU93 has a single repeated square support material, a single repeated square connector material, one exceptional uniform occurrence, and multicolored overlays. Its next two public previews retain the same geometry and remain within the original three-additional-overlay bound. ESCT has a superficially compatible raster but its public description concerns a moving escort and hunters, and two connector materials appear in its initial preview.",
+    "excludedAlreadyDemonstrated": ["HANO", "ONDE", "DICO", "M0R0", "SKBN", "DAME", "SYME", "DNOI"]
+  },
+  "levels": [
+    {
+      "level": 1,
+      "columnZeroBased": 0,
+      "frameSha256": "98673a054ca46c417d9b879aaa6997061bfa9ceeb34cf75f719faed6b504210f",
+      "quantum": 3,
+      "pitch": 6,
+      "firstMaterial": 0,
+      "connectorMaterials": [2],
+      "stableSquareCount": 29,
+      "connectorSquareCount": 32,
+      "nodeCount": 31,
+      "edgeCount": 32,
+      "overlays": [
+        {"bbox": [15, 15, 17, 17], "histogram": [[4, 1], [9, 8]], "cardinalSingletonSteps": [[0, 1]]},
+        {"bbox": [45, 45, 47, 47], "histogram": [[14, 9]], "cardinalSingletonSteps": []}
+      ]
+    },
+    {
+      "level": 2,
+      "columnZeroBased": 1,
+      "frameSha256": "96265052e474bee9ba84ea5a61a7300ea59f685f4c2ecca3d8cd6da9bed0acfc",
+      "quantum": 3,
+      "pitch": 6,
+      "firstMaterial": 0,
+      "connectorMaterials": [2],
+      "stableSquareCount": 9,
+      "connectorSquareCount": 13,
+      "nodeCount": 12,
+      "edgeCount": 13,
+      "overlays": [
+        {"bbox": [21, 48, 23, 50], "histogram": [[14, 9]], "cardinalSingletonSteps": []},
+        {"bbox": [27, 36, 29, 38], "histogram": [[8, 8], [15, 1]], "cardinalSingletonSteps": [[0, -1]]},
+        {"bbox": [33, 12, 35, 14], "histogram": [[4, 1], [9, 8]], "cardinalSingletonSteps": [[-1, 0]]}
+      ]
+    },
+    {
+      "level": 3,
+      "columnZeroBased": 2,
+      "frameSha256": "50c0be06b5054312d8802f3a0616bec9fbc27586ce1071a95ab4e822f1ae4634",
+      "quantum": 3,
+      "pitch": 6,
+      "firstMaterial": 0,
+      "connectorMaterials": [2],
+      "stableSquareCount": 18,
+      "connectorSquareCount": 28,
+      "nodeCount": 23,
+      "edgeCount": 28,
+      "overlays": [
+        {"bbox": [24, 24, 26, 26], "histogram": [[8, 8], [15, 1]], "cardinalSingletonSteps": [[0, 1]]},
+        {"bbox": [24, 30, 26, 32], "histogram": [[8, 8], [15, 1]], "cardinalSingletonSteps": [[1, 0]]},
+        {"bbox": [36, 12, 38, 14], "histogram": [[8, 8], [15, 1]], "cardinalSingletonSteps": [[0, 1]]},
+        {"bbox": [42, 24, 44, 26], "histogram": [[14, 9]], "cardinalSingletonSteps": []},
+        {"bbox": [42, 42, 44, 44], "histogram": [[4, 1], [9, 8]], "cardinalSingletonSteps": [[-1, 0]]}
+      ]
+    }
+  ],
+  "method": [
+    "Use original pure component/sprite descriptions on decoded public initial rasters.",
+    "Count only full squares with side 2 through 16 away from the frame boundary.",
+    "Find a unique most-frequent phase with at least four support squares at pitch twice their side.",
+    "Count equally-sized differently-colored squares at half-step connector phases and exceptional same-footprint overlays.",
+    "Count geometric node/link incidence and cardinal singleton marker offsets without assigning an actor, goal, safe route, or action mapping."
+  ],
+  "unprovenPrerequisites": [
+    "The common coordinator must acquire actual input-conditioned translations and distinguish the controlled overlay from the other overlays.",
+    "The original measurement needs compatible available action refs and observed effectful translations; with no controls it does not emit a route-bearing description.",
+    "The original marker precaution is a counterfactual exclusion hypothesis, not an observed reaction law.",
+    "Instrumental contact transfer requires a prior actual removal with matching histogram and size, then a departure revealing ordinary support; the initial gallery images supply no such evidence.",
+    "The source search bounds, prefix interruption, remaining action budget, and observed terminal conditions must all be respected by a real campaign."
+  ],
+  "execution": {
+    "gameRuns": 0,
+    "gameActions": 0,
+    "suppliedPrimingActions": 0,
+    "suppliedControlTranslations": 0,
+    "hiddenGameStateRead": false,
+    "gameSolutionSourceRead": false,
+    "productCodeChangedForSelection": false
+  }
+}

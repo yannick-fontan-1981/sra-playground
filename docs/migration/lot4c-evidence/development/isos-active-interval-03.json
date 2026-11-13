@@ -1,0 +1,23 @@
+{
+  "schema": "logos-engine.game-case-active-interval.v1",
+  "game": "ISOS",
+  "startedAt": "2026-11-11T00:51:07.023882+00:00",
+  "status": "closed",
+  "purpose": "Final static0.57 build browser validation: cold ISOS selection, Pause, one action and continuous resume. Concurrent baseline interval is retained separately; any overlap is conservatively charged twice.",
+  "maximumSeconds": 2400,
+  "clockWasReset": false,
+  "finishedAt": "2026-11-11T00:58:31.724782+00:00",
+  "chargedSeconds": 444.7009,
+  "evidence": [
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/browser/browser-qa.json",
+      "bytes": 5471,
+      "sha256": "cb305c01c36dc94239e2514ceea5b3b61296d1f996a1c787534392daa1449861"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/browser/isos-three-levels.png",
+      "bytes": 84419,
+      "sha256": "17f1c51ef8479b8606ee5829e97cade8d5990ff4aeaa7d3499894e6048b6cf8a"
+    }
+  ]
+}

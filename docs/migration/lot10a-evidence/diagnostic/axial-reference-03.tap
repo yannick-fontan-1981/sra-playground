@@ -1,0 +1,1610 @@
+TAP version 13
+# Subtest: axial original geometry: unselected_anchor_grid
+ok 1 - axial original geometry: unselected_anchor_grid
+  ---
+  duration_ms: 12.295199
+  type: 'test'
+  ...
+# Subtest: axial original geometry: one_distinct_selected_marker
+ok 2 - axial original geometry: one_distinct_selected_marker
+  ---
+  duration_ms: 6.162422
+  type: 'test'
+  ...
+# Subtest: axial original geometry: empty
+ok 3 - axial original geometry: empty
+  ---
+  duration_ms: 0.145525
+  type: 'test'
+  ...
+# Subtest: axial original geometry: empty_row
+ok 4 - axial original geometry: empty_row
+  ---
+  duration_ms: 0.078886
+  type: 'test'
+  ...
+# Subtest: axial original geometry: absent_bodies
+ok 5 - axial original geometry: absent_bodies
+  ---
+  duration_ms: 1.907227
+  type: 'test'
+  ...
+# Subtest: axial original geometry: horizontal_mirror
+ok 6 - axial original geometry: horizontal_mirror
+  ---
+  duration_ms: 6.906181
+  type: 'test'
+  ...
+# Subtest: axial original geometry: vertical_mirror
+ok 7 - axial original geometry: vertical_mirror
+  ---
+  duration_ms: 4.953496
+  type: 'test'
+  ...
+# Subtest: axial original geometry: palette_bijection
+ok 8 - axial original geometry: palette_bijection
+  ---
+  duration_ms: 6.429617
+  type: 'test'
+  ...
+# Subtest: axial original geometry: translated
+ok 9 - axial original geometry: translated
+  ---
+  duration_ms: 3.60161
+  type: 'test'
+  ...
+# Subtest: axial original geometry: quantum_3
+ok 10 - axial original geometry: quantum_3
+  ---
+  duration_ms: 0.619425
+  type: 'test'
+  ...
+# Subtest: axial original geometry: quantum_7
+ok 11 - axial original geometry: quantum_7
+  ---
+  duration_ms: 8.855679
+  type: 'test'
+  ...
+# Subtest: axial original geometry: quantum_9
+ok 12 - axial original geometry: quantum_9
+  ---
+  duration_ms: 22.628031
+  type: 'test'
+  ...
+# Subtest: axial original geometry: orientation_[-1, 0]
+ok 13 - axial original geometry: orientation_[-1, 0]
+  ---
+  duration_ms: 4.494768
+  type: 'test'
+  ...
+# Subtest: axial original geometry: pivot_projection_[-1, 0]
+ok 14 - axial original geometry: pivot_projection_[-1, 0]
+  ---
+  duration_ms: 1.919065
+  type: 'test'
+  ...
+# Subtest: axial original geometry: relations_[-1, 0]
+ok 15 - axial original geometry: relations_[-1, 0]
+  ---
+  duration_ms: 0.458948
+  type: 'test'
+  ...
+# Subtest: axial original geometry: orientation_[0, 1]
+ok 16 - axial original geometry: orientation_[0, 1]
+  ---
+  duration_ms: 6.942504
+  type: 'test'
+  ...
+# Subtest: axial original geometry: pivot_projection_[0, 1]
+ok 17 - axial original geometry: pivot_projection_[0, 1]
+  ---
+  duration_ms: 0.468022
+  type: 'test'
+  ...
+# Subtest: axial original geometry: relations_[0, 1]
+ok 18 - axial original geometry: relations_[0, 1]
+  ---
+  duration_ms: 0.150342
+  type: 'test'
+  ...
+# Subtest: axial original geometry: orientation_[1, 0]
+ok 19 - axial original geometry: orientation_[1, 0]
+  ---
+  duration_ms: 4.065214
+  type: 'test'
+  ...
+# Subtest: axial original geometry: pivot_projection_[1, 0]
+ok 20 - axial original geometry: pivot_projection_[1, 0]
+  ---
+  duration_ms: 0.499808
+  type: 'test'
+  ...
+# Subtest: axial original geometry: relations_[1, 0]
+ok 21 - axial original geometry: relations_[1, 0]
+  ---
+  duration_ms: 0.150292
+  type: 'test'
+  ...
+# Subtest: axial original geometry: orientation_[0, -1]
+ok 22 - axial original geometry: orientation_[0, -1]
+  ---
+  duration_ms: 4.083751
+  type: 'test'
+  ...
+# Subtest: axial original geometry: pivot_projection_[0, -1]
+ok 23 - axial original geometry: pivot_projection_[0, -1]
+  ---
+  duration_ms: 0.3592
+  type: 'test'
+  ...
+# Subtest: axial original geometry: relations_[0, -1]
+ok 24 - axial original geometry: relations_[0, -1]
+  ---
+  duration_ms: 0.178344
+  type: 'test'
+  ...
+# Subtest: axial original geometry: multiple_selected_markers
+ok 25 - axial original geometry: multiple_selected_markers
+  ---
+  duration_ms: 3.079489
+  type: 'test'
+  ...
+# Subtest: axial original geometry: missing_unique_target
+ok 26 - axial original geometry: missing_unique_target
+  ---
+  duration_ms: 4.084423
+  type: 'test'
+  ...
+# Subtest: axial original geometry: two_target_markers
+ok 27 - axial original geometry: two_target_markers
+  ---
+  duration_ms: 5.24741
+  type: 'test'
+  ...
+# Subtest: axial original geometry: nonuniform_body_core
+ok 28 - axial original geometry: nonuniform_body_core
+  ---
+  duration_ms: 2.999831
+  type: 'test'
+  ...
+# Subtest: axial original geometry: connected_bars_source_order
+ok 29 - axial original geometry: connected_bars_source_order
+  ---
+  duration_ms: 0.364308
+  type: 'test'
+  ...
+# Subtest: axial original geometry: canonical_digest_nested_order
+ok 30 - axial original geometry: canonical_digest_nested_order
+  ---
+  duration_ms: 0.349606
+  type: 'test'
+  ...
+# Subtest: axial original geometry: outside_before_pair
+ok 31 - axial original geometry: outside_before_pair
+  ---
+  duration_ms: 0.174698
+  type: 'test'
+  ...
+# Subtest: axial original geometry: outside_after_pair
+ok 32 - axial original geometry: outside_after_pair
+  ---
+  duration_ms: 0.154398
+  type: 'test'
+  ...
+# Subtest: axial original geometry: column_between
+ok 33 - axial original geometry: column_between
+  ---
+  duration_ms: 0.081841
+  type: 'test'
+  ...
+# Subtest: axial original geometry: peer_axis_not_aligned
+ok 34 - axial original geometry: peer_axis_not_aligned
+  ---
+  duration_ms: 0.061821
+  type: 'test'
+  ...
+# Subtest: axial original geometry: peer_off_axis
+ok 35 - axial original geometry: peer_off_axis
+  ---
+  duration_ms: 0.05417
+  type: 'test'
+  ...
+# Subtest: axial original geometry: transverse_dependency
+ok 36 - axial original geometry: transverse_dependency
+  ---
+  duration_ms: 0.088431
+  type: 'test'
+  ...
+# Subtest: axial original geometry: transverse_without_dependency
+ok 37 - axial original geometry: transverse_without_dependency
+  ---
+  duration_ms: 0.061251
+  type: 'test'
+  ...
+# Subtest: axial original geometry: target_at_actor_is_outside
+ok 38 - axial original geometry: target_at_actor_is_outside
+  ---
+  duration_ms: 0.062783
+  type: 'test'
+  ...
+# Subtest: axial original family: cold_unselected_abstention
+ok 39 - axial original family: cold_unselected_abstention
+  ---
+  duration_ms: 28.604949
+  type: 'test'
+  ...
+# Subtest: axial original family: visible_selection_without_acquisition_abstains
+ok 40 - axial original family: visible_selection_without_acquisition_abstains
+  ---
+  duration_ms: 12.234179
+  type: 'test'
+  ...
+# Subtest: axial original family: zero_budget_scopes_without_offer
+ok 41 - axial original family: zero_budget_scopes_without_offer
+  ---
+  duration_ms: 3.348926
+  type: 'test'
+  ...
+# Subtest: axial original family: cold_passive_single_marker_acquisition
+ok 42 - axial original family: cold_passive_single_marker_acquisition
+  ---
+  duration_ms: 12.667179
+  type: 'test'
+  ...
+# Subtest: axial original family: acquired_selection_invokes_real_src
+ok 43 - axial original family: acquired_selection_invokes_real_src
+  ---
+  duration_ms: 7.506096
+  type: 'test'
+  ...
+# Subtest: axial original family: acquired_offers_keep_both_controls_in_source_order
+ok 44 - axial original family: acquired_offers_keep_both_controls_in_source_order
+  ---
+  duration_ms: 7.4002
+  type: 'test'
+  ...
+# Subtest: axial original family: method_signature_contract
+ok 45 - axial original family: method_signature_contract
+  ---
+  duration_ms: 1.561076
+  type: 'test'
+  ...
+# Subtest: axial original family: current_single_action_binding
+ok 46 - axial original family: current_single_action_binding
+  ---
+  duration_ms: 1.36066
+  type: 'test'
+  ...
+# Subtest: axial original family: current_before_guard
+ok 47 - axial original family: current_before_guard
+  ---
+  duration_ms: 5.60549
+  type: 'test'
+  ...
+# Subtest: axial original family: after_does_not_assume_rotation_or_goal
+ok 48 - axial original family: after_does_not_assume_rotation_or_goal
+  ---
+  duration_ms: 3.566607
+  type: 'test'
+  ...
+# Subtest: axial original family: before_stale_observation_ref
+ok 49 - axial original family: before_stale_observation_ref
+  ---
+  duration_ms: 1.998211
+  type: 'test'
+  ...
+# Subtest: axial original family: before_stale_level_epoch
+ok 50 - axial original family: before_stale_level_epoch
+  ---
+  duration_ms: 2.209424
+  type: 'test'
+  ...
+# Subtest: axial original family: before_stale_frame_hash
+ok 51 - axial original family: before_stale_frame_hash
+  ---
+  duration_ms: 1.533865
+  type: 'test'
+  ...
+# Subtest: axial original family: before_wrong_step_index
+ok 52 - axial original family: before_wrong_step_index
+  ---
+  duration_ms: 2.630145
+  type: 'test'
+  ...
+# Subtest: axial original family: before_absent_available_control
+ok 53 - axial original family: before_absent_available_control
+  ---
+  duration_ms: 5.522367
+  type: 'test'
+  ...
+# Subtest: axial original family: before_scene_measurement_changed
+ok 54 - axial original family: before_scene_measurement_changed
+  ---
+  duration_ms: 5.120242
+  type: 'test'
+  ...
+# Subtest: axial original family: before_marker_ambiguous
+ok 55 - axial original family: before_marker_ambiguous
+  ---
+  duration_ms: 5.257726
+  type: 'test'
+  ...
+# Subtest: axial original family: binding_rejects_changed_action_step
+ok 56 - axial original family: binding_rejects_changed_action_step
+  ---
+  duration_ms: 2.398913
+  type: 'test'
+  ...
+# Subtest: axial original family: binding_rejects_empty_prefix
+ok 57 - axial original family: binding_rejects_empty_prefix
+  ---
+  duration_ms: 2.290553
+  type: 'test'
+  ...
+# Subtest: axial original family: before_exact_selected_command_required
+ok 58 - axial original family: before_exact_selected_command_required
+  ---
+  duration_ms: 5.774218
+  type: 'test'
+  ...
+# Subtest: axial original family: selection_attestation_epoch_incompatible
+ok 59 - axial original family: selection_attestation_epoch_incompatible
+  ---
+  duration_ms: 4.653263
+  type: 'test'
+  ...
+# Subtest: axial original family: selection_attestation_center_incompatible
+ok 60 - axial original family: selection_attestation_center_incompatible
+  ---
+  duration_ms: 4.070292
+  type: 'test'
+  ...
+# Subtest: axial original family: selection_attestation_marker_incompatible
+ok 61 - axial original family: selection_attestation_marker_incompatible
+  ---
+  duration_ms: 4.701985
+  type: 'test'
+  ...
+# Subtest: axial original family: selection_attestation_signature_incompatible
+ok 62 - axial original family: selection_attestation_signature_incompatible
+  ---
+  duration_ms: 7.125935
+  type: 'test'
+  ...
+# Subtest: axial original family: no_public_rotation_commands
+ok 63 - axial original family: no_public_rotation_commands
+  ---
+  duration_ms: 4.767551
+  type: 'test'
+  ...
+# Subtest: axial original family: caller_inputs_do_not_override_public_control
+ok 64 - axial original family: caller_inputs_do_not_override_public_control
+  ---
+  duration_ms: 6.054312
+  type: 'test'
+  ...
+# Subtest: axial original family: outside_target_selection_acquired
+ok 65 - axial original family: outside_target_selection_acquired
+  ---
+  duration_ms: 12.376851
+  type: 'test'
+  ...
+# Subtest: axial original family: outside_target_opposed_axis_proposal
+not ok 66 - axial original family: outside_target_opposed_axis_proposal
+  ---
+  duration_ms: 9.037098
+  type: 'test'
+  location: '/workspace/sites/sra-lot10a-20261110/.sites-checkout/tests/v6-axial-question-reference.test.ts:28:34'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    ... Skipped lines
+    
+      {
+        actions: [
+          {
+            action_ref: 'ACTION3'
+          }
+    ...
+              desired_axis: [
+    +           -0,
+    -           0,
+                -1
+              ],
+              direction_hypothesis: 'opposed_pair_may_separate_toward_external_marker',
+              kind: 'outside',
+              peer: {
+    ...
+                desired_axis: [
+    +             -0,
+    -             0,
+                  -1
+                ],
+                direction_hypothesis: 'opposed_pair_may_separate_toward_external_marker',
+                kind: 'outside',
+                peer: {
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    status: 'proposed'
+    kind: 'public_axial_question'
+    actions:
+      0:
+        action_ref: 'ACTION3'
+    steps:
+      0:
+        action:
+          action_ref: 'ACTION3'
+        expected_after: ~
+    facts:
+      axial_question_current: true
+    binding:
+      observation_ref: 'axial:synthetic:epoch:1:revision:2:frame:c68430d5a2f1fe95'
+      level_epoch: 1
+      frame_hash: 'c68430d5a2f1fe95'
+      levels_completed: 0
+    axial_plan:
+      offer:
+        kind: 'outside'
+        facts:
+          selection_attested_current: true
+          goal_marker_unique: true
+          scope_current: true
+        quarter_distance: 1
+        recalled_control_first: 1
+        action: 'ACTION3'
+        turn: -1
+        projection:
+          turn: -1
+          axis:
+            0: 0
+            1: -1
+          scope: 'conditional_orientation_only_no_translation_model'
+        relation:
+          kind: 'outside'
+          peer:
+            bbox:
+              0: 18
+              1: 13
+              2: 22
+              3: 17
+            center:
+              0: 20
+              1: 15
+            axis:
+              0: 0
+              1: 1
+            poles:
+              0: 1
+              1: 2
+            core: 3
+            side: 8
+            marker: 3
+            size: 5
+            signature:
+              0: 1
+              1: 2
+              2: 3
+              3: 8
+              4: 5
+          dependency:
+          target:
+            0: 25
+            1: 15
+          scope: 'qualitative_interaction_hypothesis_no_endpoint_prediction'
+          desired_axis:
+            0: 0
+            1: -1
+          direction_hypothesis: 'opposed_pair_may_separate_toward_external_marker'
+        measurement:
+          bodies:
+            0:
+              bbox:
+                0: 8
+                1: 13
+                2: 12
+                3: 17
+              center:
+                0: 10
+                1: 15
+              axis:
+                0: -1
+                1: 0
+              poles:
+                0: 1
+                1: 2
+              core: 3
+              side: 8
+              marker: 7
+              size: 5
+              signature:
+                0: 1
+                1: 2
+                2: 3
+                3: 8
+                4: 5
+            1:
+              bbox:
+                0: 18
+                1: 13
+                2: 22
+                3: 17
+              center:
+                0: 20
+                1: 15
+              axis:
+                0: 0
+                1: 1
+              poles:
+                0: 1
+                1: 2
+              core: 3
+              side: 8
+              marker: 3
+              size: 5
+              signature:
+                0: 1
+                1: 2
+                2: 3
+                3: 8
+                4: 5
+          target:
+            center:
+              0: 25
+              1: 15
+            bbox:
+              0: 23
+              1: 13
+              2: 27
+              3: 17
+            ring_value: 9
+            inside: 3
+          quantum: 5
+          grid_bounds:
+            0: 5
+            1: 5
+            2: 30
+            3: 25
+          anchors:
+            0:
+              0: 5
+              1: 5
+            1:
+              0: 10
+              1: 5
+            2:
+              0: 15
+              1: 5
+            3:
+              0: 20
+              1: 5
+            4:
+              0: 25
+              1: 5
+            5:
+              0: 30
+              1: 5
+            6:
+              0: 5
+              1: 10
+            7:
+              0: 10
+              1: 10
+            8:
+              0: 15
+              1: 10
+            9:
+              0: 20
+              1: 10
+            10:
+              0: 25
+              1: 10
+            11:
+              0: 30
+              1: 10
+            12:
+              0: 5
+              1: 15
+            13:
+              0: 15
+              1: 15
+            14:
+              0: 20
+              1: 15
+            15:
+              0: 30
+              1: 15
+            16:
+              0: 5
+              1: 20
+            17:
+              0: 10
+              1: 20
+            18:
+              0: 15
+              1: 20
+            19:
+              0: 20
+              1: 20
+            20:
+              0: 25
+              1: 20
+            21:
+              0: 30
+              1: 20
+            22:
+              0: 5
+              1: 25
+            23:
+              0: 10
+              1: 25
+            24:
+              0: 15
+              1: 25
+            25:
+              0: 20
+              1: 25
+            26:
+              0: 25
+              1: 25
+            27:
+              0: 30
+              1: 25
+          selected:
+            bbox:
+              0: 8
+              1: 13
+              2: 12
+              3: 17
+            center:
+              0: 10
+              1: 15
+            axis:
+              0: -1
+              1: 0
+            poles:
+              0: 1
+              1: 2
+            core: 3
+            side: 8
+            marker: 7
+            size: 5
+            signature:
+              0: 1
+              1: 2
+              2: 3
+              3: 8
+              4: 5
+          ambiguous_selection: false
+          signature:
+            0: 1
+            1: 2
+            2: 3
+            3: 8
+            4: 5
+        actor:
+          bbox:
+            0: 8
+            1: 13
+            2: 12
+            3: 17
+          center:
+            0: 10
+            1: 15
+          axis:
+            0: -1
+            1: 0
+          poles:
+            0: 1
+            1: 2
+          core: 3
+          side: 8
+          marker: 7
+          size: 5
+          signature:
+            0: 1
+            1: 2
+            2: 3
+            3: 8
+            4: 5
+        key: 'a8fdb2ea0f6355fcdfc1cc1637d5ab1e1589f6705f0aedf5cbd356edda88ced1'
+        selection_evidence:
+          0: 'axial:synthetic:epoch:1:revision:1:frame:344939dd0f9a7a7d'
+          1: 'axial:synthetic:epoch:1:revision:2:frame:c68430d5a2f1fe95'
+        method_revalidation: ~
+      choice:
+        hypotheses:
+          0: 'target_marker_is_final_occupancy_goal'
+          1: 'cooriented_pair_may_approach_opposed_pair_may_separate'
+          2: 'rotation_command_prior_or_current_recalled_method'
+        index: 0
+        reason: 'test_opposed_axial_pair_toward_external_target'
+        release_authority: false
+        status: 'selected'
+      workflow:
+        workflow: 'v6.axial_question.choose'
+        src_hash: '2ab3f1dd830e18c470be06de51cf52eed435a3caa31c13ad631c6f1807db299d'
+        src_status: 'completed'
+        executed_statements:
+          0: 'v6.axial_question.choose.select.s0000'
+          1: 'v6.axial_question.choose.select.s0001'
+      drm_hash: 'd03991cf03d68a4962ef120e23593999b954ba64f77982969eb8224ceaf6221a'
+    compositions:
+      0:
+        id: 'composition:axial:fec9ec45271a8213852890d86a8f05760050119331659f2e8ca31d10487f720d'
+        role: 'conditional_axial_configuration'
+        observed: false
+        things:
+          0: 'selected:9c7154bc1566b9c7c543f3584d50359822b8063bbf78ed371ddf632a44089688'
+          1: 'peer:bfe09c934ca405fef5b256349bd4e3ab41f03dd3e49d229eb29ab37e1b50cc4c'
+        properties:
+          relation:
+            kind: 'outside'
+            peer:
+              bbox:
+                0: 18
+                1: 13
+                2: 22
+                3: 17
+              center:
+                0: 20
+                1: 15
+              axis:
+                0: 0
+                1: 1
+              poles:
+                0: 1
+                1: 2
+              core: 3
+              side: 8
+              marker: 3
+              size: 5
+              signature:
+                0: 1
+                1: 2
+                2: 3
+                3: 8
+                4: 5
+            dependency:
+            target:
+              0: 25
+              1: 15
+            scope: 'qualitative_interaction_hypothesis_no_endpoint_prediction'
+            desired_axis:
+              0: 0
+              1: -1
+            direction_hypothesis: 'opposed_pair_may_separate_toward_external_marker'
+          orientation_projection:
+            turn: -1
+            axis:
+              0: 0
+              1: -1
+            scope: 'conditional_orientation_only_no_translation_model'
+          method_revalidation: ~
+          goal_hypothesis: true
+          unknown:
+            0: 'command_rotation_until_observed'
+            1: 'interaction_direction_until_observed'
+            2: 'wall_transmission'
+            3: 'force_law'
+            4: 'terminal_stability'
+            5: 'recipient_identity'
+        relations:
+          0: 'contributes_to:G_official_completion'
+        open_question: 'test_opposed_axial_pair_toward_external_target'
+    question:
+      reason: 'test_opposed_axial_pair_toward_external_target'
+      hypothesis_refs:
+        0: 'target_marker_is_final_occupancy_goal'
+        1: 'cooriented_pair_may_approach_opposed_pair_may_separate'
+        2: 'rotation_command_prior_or_current_recalled_method'
+    route_refs:
+      0: 'axial:synthetic:epoch:1:revision:2:frame:c68430d5a2f1fe95'
+      1: 'axial:synthetic:epoch:1:revision:1:frame:344939dd0f9a7a7d'
+      2: 'axial:synthetic:epoch:1:revision:2:frame:c68430d5a2f1fe95'
+    bundle_template:
+      operation_key: 'OP18'
+      composition_ref: 'composition:axial:fec9ec45271a8213852890d86a8f05760050119331659f2e8ca31d10487f720d'
+      objective_ref: 'G_official_completion'
+      purpose: 'test_opposed_axial_pair_toward_external_target'
+      preconditions:
+        axial_question_current: true
+      evidence:
+        0: 'axial:synthetic:epoch:1:revision:2:frame:c68430d5a2f1fe95'
+        1: 'axial:synthetic:epoch:1:revision:1:frame:344939dd0f9a7a7d'
+        2: 'axial:synthetic:epoch:1:revision:2:frame:c68430d5a2f1fe95'
+      actions:
+        0:
+          action_ref: 'ACTION3'
+      preserve_refs:
+      preservation_evidence:
+      outcome_guard:
+        path:
+          0: 'value'
+        contains: 'composition:axial:fec9ec45271a8213852890d86a8f05760050119331659f2e8ca31d10487f720d'
+  actual:
+    status: 'proposed'
+    kind: 'public_axial_question'
+    actions:
+      0:
+        action_ref: 'ACTION3'
+    steps:
+      0:
+        action:
+          action_ref: 'ACTION3'
+        expected_after: ~
+    facts:
+      axial_question_current: true
+    binding:
+      observation_ref: 'axial:synthetic:epoch:1:revision:2:frame:c68430d5a2f1fe95'
+      level_epoch: 1
+      frame_hash: 'c68430d5a2f1fe95'
+      levels_completed: 0
+    axial_plan:
+      offer:
+        kind: 'outside'
+        facts:
+          selection_attested_current: true
+          goal_marker_unique: true
+          scope_current: true
+        quarter_distance: 1
+        recalled_control_first: 1
+        action: 'ACTION3'
+        turn: -1
+        projection:
+          turn: -1
+          axis:
+            0: 0
+            1: -1
+          scope: 'conditional_orientation_only_no_translation_model'
+        relation:
+          kind: 'outside'
+          peer:
+            bbox:
+              0: 18
+              1: 13
+              2: 22
+              3: 17
+            center:
+              0: 20
+              1: 15
+            axis:
+              0: 0
+              1: 1
+            poles:
+              0: 1
+              1: 2
+            core: 3
+            side: 8
+            marker: 3
+            size: 5
+            signature:
+              0: 1
+              1: 2
+              2: 3
+              3: 8
+              4: 5
+          dependency:
+          target:
+            0: 25
+            1: 15
+          scope: 'qualitative_interaction_hypothesis_no_endpoint_prediction'
+          desired_axis:
+            0: -0
+            1: -1
+          direction_hypothesis: 'opposed_pair_may_separate_toward_external_marker'
+        measurement:
+          bodies:
+            0:
+              bbox:
+                0: 8
+                1: 13
+                2: 12
+                3: 17
+              center:
+                0: 10
+                1: 15
+              axis:
+                0: -1
+                1: 0
+              poles:
+                0: 1
+                1: 2
+              core: 3
+              side: 8
+              marker: 7
+              size: 5
+              signature:
+                0: 1
+                1: 2
+                2: 3
+                3: 8
+                4: 5
+            1:
+              bbox:
+                0: 18
+                1: 13
+                2: 22
+                3: 17
+              center:
+                0: 20
+                1: 15
+              axis:
+                0: 0
+                1: 1
+              poles:
+                0: 1
+                1: 2
+              core: 3
+              side: 8
+              marker: 3
+              size: 5
+              signature:
+                0: 1
+                1: 2
+                2: 3
+                3: 8
+                4: 5
+          target:
+            center:
+              0: 25
+              1: 15
+            bbox:
+              0: 23
+              1: 13
+              2: 27
+              3: 17
+            ring_value: 9
+            inside: 3
+          quantum: 5
+          grid_bounds:
+            0: 5
+            1: 5
+            2: 30
+            3: 25
+          anchors:
+            0:
+              0: 5
+              1: 5
+            1:
+              0: 10
+              1: 5
+            2:
+              0: 15
+              1: 5
+            3:
+              0: 20
+              1: 5
+            4:
+              0: 25
+              1: 5
+            5:
+              0: 30
+              1: 5
+            6:
+              0: 5
+              1: 10
+            7:
+              0: 10
+              1: 10
+            8:
+              0: 15
+              1: 10
+            9:
+              0: 20
+              1: 10
+            10:
+              0: 25
+              1: 10
+            11:
+              0: 30
+              1: 10
+            12:
+              0: 5
+              1: 15
+            13:
+              0: 15
+              1: 15
+            14:
+              0: 20
+              1: 15
+            15:
+              0: 30
+              1: 15
+            16:
+              0: 5
+              1: 20
+            17:
+              0: 10
+              1: 20
+            18:
+              0: 15
+              1: 20
+            19:
+              0: 20
+              1: 20
+            20:
+              0: 25
+              1: 20
+            21:
+              0: 30
+              1: 20
+            22:
+              0: 5
+              1: 25
+            23:
+              0: 10
+              1: 25
+            24:
+              0: 15
+              1: 25
+            25:
+              0: 20
+              1: 25
+            26:
+              0: 25
+              1: 25
+            27:
+              0: 30
+              1: 25
+          selected:
+            bbox:
+              0: 8
+              1: 13
+              2: 12
+              3: 17
+            center:
+              0: 10
+              1: 15
+            axis:
+              0: -1
+              1: 0
+            poles:
+              0: 1
+              1: 2
+            core: 3
+            side: 8
+            marker: 7
+            size: 5
+            signature:
+              0: 1
+              1: 2
+              2: 3
+              3: 8
+              4: 5
+          ambiguous_selection: false
+          signature:
+            0: 1
+            1: 2
+            2: 3
+            3: 8
+            4: 5
+        actor:
+          bbox:
+            0: 8
+            1: 13
+            2: 12
+            3: 17
+          center:
+            0: 10
+            1: 15
+          axis:
+            0: -1
+            1: 0
+          poles:
+            0: 1
+            1: 2
+          core: 3
+          side: 8
+          marker: 7
+          size: 5
+          signature:
+            0: 1
+            1: 2
+            2: 3
+            3: 8
+            4: 5
+        key: 'a8fdb2ea0f6355fcdfc1cc1637d5ab1e1589f6705f0aedf5cbd356edda88ced1'
+        selection_evidence:
+          0: 'axial:synthetic:epoch:1:revision:1:frame:344939dd0f9a7a7d'
+          1: 'axial:synthetic:epoch:1:revision:2:frame:c68430d5a2f1fe95'
+        method_revalidation: ~
+      choice:
+        hypotheses:
+          0: 'target_marker_is_final_occupancy_goal'
+          1: 'cooriented_pair_may_approach_opposed_pair_may_separate'
+          2: 'rotation_command_prior_or_current_recalled_method'
+        index: 0
+        reason: 'test_opposed_axial_pair_toward_external_target'
+        release_authority: false
+        status: 'selected'
+      workflow:
+        workflow: 'v6.axial_question.choose'
+        src_hash: '2ab3f1dd830e18c470be06de51cf52eed435a3caa31c13ad631c6f1807db299d'
+        src_status: 'completed'
+        executed_statements:
+          0: 'v6.axial_question.choose.select.s0000'
+          1: 'v6.axial_question.choose.select.s0001'
+      drm_hash: 'd03991cf03d68a4962ef120e23593999b954ba64f77982969eb8224ceaf6221a'
+    compositions:
+      0:
+        id: 'composition:axial:fec9ec45271a8213852890d86a8f05760050119331659f2e8ca31d10487f720d'
+        role: 'conditional_axial_configuration'
+        observed: false
+        things:
+          0: 'selected:9c7154bc1566b9c7c543f3584d50359822b8063bbf78ed371ddf632a44089688'
+          1: 'peer:bfe09c934ca405fef5b256349bd4e3ab41f03dd3e49d229eb29ab37e1b50cc4c'
+        properties:
+          relation:
+            kind: 'outside'
+            peer:
+              bbox:
+                0: 18
+                1: 13
+                2: 22
+                3: 17
+              center:
+                0: 20
+                1: 15
+              axis:
+                0: 0
+                1: 1
+              poles:
+                0: 1
+                1: 2
+              core: 3
+              side: 8
+              marker: 3
+              size: 5
+              signature:
+                0: 1
+                1: 2
+                2: 3
+                3: 8
+                4: 5
+            dependency:
+            target:
+              0: 25
+              1: 15
+            scope: 'qualitative_interaction_hypothesis_no_endpoint_prediction'
+            desired_axis:
+              0: -0
+              1: -1
+            direction_hypothesis: 'opposed_pair_may_separate_toward_external_marker'
+          orientation_projection:
+            turn: -1
+            axis:
+              0: 0
+              1: -1
+            scope: 'conditional_orientation_only_no_translation_model'
+          method_revalidation: ~
+          goal_hypothesis: true
+          unknown:
+            0: 'command_rotation_until_observed'
+            1: 'interaction_direction_until_observed'
+            2: 'wall_transmission'
+            3: 'force_law'
+            4: 'terminal_stability'
+            5: 'recipient_identity'
+        relations:
+          0: 'contributes_to:G_official_completion'
+        open_question: 'test_opposed_axial_pair_toward_external_target'
+    question:
+      reason: 'test_opposed_axial_pair_toward_external_target'
+      hypothesis_refs:
+        0: 'target_marker_is_final_occupancy_goal'
+        1: 'cooriented_pair_may_approach_opposed_pair_may_separate'
+        2: 'rotation_command_prior_or_current_recalled_method'
+    route_refs:
+      0: 'axial:synthetic:epoch:1:revision:2:frame:c68430d5a2f1fe95'
+      1: 'axial:synthetic:epoch:1:revision:1:frame:344939dd0f9a7a7d'
+      2: 'axial:synthetic:epoch:1:revision:2:frame:c68430d5a2f1fe95'
+    bundle_template:
+      operation_key: 'OP18'
+      composition_ref: 'composition:axial:fec9ec45271a8213852890d86a8f05760050119331659f2e8ca31d10487f720d'
+      objective_ref: 'G_official_completion'
+      purpose: 'test_opposed_axial_pair_toward_external_target'
+      preconditions:
+        axial_question_current: true
+      evidence:
+        0: 'axial:synthetic:epoch:1:revision:2:frame:c68430d5a2f1fe95'
+        1: 'axial:synthetic:epoch:1:revision:1:frame:344939dd0f9a7a7d'
+        2: 'axial:synthetic:epoch:1:revision:2:frame:c68430d5a2f1fe95'
+      actions:
+        0:
+          action_ref: 'ACTION3'
+      preserve_refs:
+      preservation_evidence:
+      outcome_guard:
+        path:
+          0: 'value'
+        contains: 'composition:axial:fec9ec45271a8213852890d86a8f05760050119331659f2e8ca31d10487f720d'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/sites/sra-lot10a-20261110/.sites-checkout/tests/v6-axial-question-reference.test.ts:34:57)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: axial original family: selection_plus_foreign_change_is_not_evidence
+ok 67 - axial original family: selection_plus_foreign_change_is_not_evidence
+  ---
+  duration_ms: 23.804599
+  type: 'test'
+  ...
+# Subtest: axial original family: selection_already_present_is_not_new_evidence
+ok 68 - axial original family: selection_already_present_is_not_new_evidence
+  ---
+  duration_ms: 11.569628
+  type: 'test'
+  ...
+# Subtest: axial original family: ambiguous_marker_change_is_not_evidence
+ok 69 - axial original family: ambiguous_marker_change_is_not_evidence
+  ---
+  duration_ms: 12.076988
+  type: 'test'
+  ...
+# Subtest: axial original family: absent_before_domain_has_no_return
+ok 70 - axial original family: absent_before_domain_has_no_return
+  ---
+  duration_ms: 2.513142
+  type: 'test'
+  ...
+# Subtest: axial original family: passive_selection_disappeared
+ok 71 - axial original family: passive_selection_disappeared
+  ---
+  duration_ms: 11.643978
+  type: 'test'
+  ...
+# Subtest: axial original family: active_contrary_quarter_turn_observed
+ok 72 - axial original family: active_contrary_quarter_turn_observed
+  ---
+  duration_ms: 11.093364
+  type: 'test'
+  ...
+# Subtest: axial original family: recalled_control_changes_next_choice
+ok 73 - axial original family: recalled_control_changes_next_choice
+  ---
+  duration_ms: 7.274344
+  type: 'test'
+  ...
+# Subtest: axial original family: same_return_without_rotation_memory_selects_other_control
+ok 74 - axial original family: same_return_without_rotation_memory_selects_other_control
+  ---
+  duration_ms: 6.014113
+  type: 'test'
+  ...
+# Subtest: axial original family: passive_rotation_does_not_establish_control_law
+ok 75 - axial original family: passive_rotation_does_not_establish_control_law
+  ---
+  duration_ms: 11.615687
+  type: 'test'
+  ...
+# Subtest: axial original family: half_turn_is_not_a_quarter_rotation
+ok 76 - axial original family: half_turn_is_not_a_quarter_rotation
+  ---
+  duration_ms: 11.723575
+  type: 'test'
+  ...
+# Subtest: axial original family: no_effect_retains_attempt
+ok 77 - axial original family: no_effect_retains_attempt
+  ---
+  duration_ms: 12.290173
+  type: 'test'
+  ...
+# Subtest: axial original family: no_effect_prevents_same_control_repetition
+ok 78 - axial original family: no_effect_prevents_same_control_repetition
+  ---
+  duration_ms: 7.208747
+  type: 'test'
+  ...
+# Subtest: axial original family: second_no_effect_retains_both_attempts
+ok 79 - axial original family: second_no_effect_retains_both_attempts
+  ---
+  duration_ms: 14.392567
+  type: 'test'
+  ...
+# Subtest: axial original family: both_context_attempts_prevent_blind_repeat
+ok 80 - axial original family: both_context_attempts_prevent_blind_repeat
+  ---
+  duration_ms: 6.001394
+  type: 'test'
+  ...
+# Subtest: axial original family: changed_geometry_reopens_new_question
+ok 81 - axial original family: changed_geometry_reopens_new_question
+  ---
+  duration_ms: 6.835065
+  type: 'test'
+  ...
+# Subtest: axial original family: multiple_peers_selection_acquired
+ok 82 - axial original family: multiple_peers_selection_acquired
+  ---
+  duration_ms: 13.901212
+  type: 'test'
+  ...
+# Subtest: axial original family: multiple_peers_choose_deterministically
+ok 83 - axial original family: multiple_peers_choose_deterministically
+  ---
+  duration_ms: 7.167866
+  type: 'test'
+  ...
+# Subtest: axial original family: shared_key_multiple_peers_guard_abstains
+ok 84 - axial original family: shared_key_multiple_peers_guard_abstains
+  ---
+  duration_ms: 6.023677
+  type: 'test'
+  ...
+# Subtest: axial original family: boundary_uses_last_compatible_old_scene_sample
+ok 85 - axial original family: boundary_uses_last_compatible_old_scene_sample
+  ---
+  duration_ms: 25.860796
+  type: 'test'
+  ...
+# Subtest: axial original family: boundary_without_old_scene_sample_acquires_no_rotation
+ok 86 - axial original family: boundary_without_old_scene_sample_acquires_no_rotation
+  ---
+  duration_ms: 13.795486
+  type: 'test'
+  ...
+# Subtest: axial original family: source_identical_geometry_boundary_is_permissive
+ok 87 - axial original family: source_identical_geometry_boundary_is_permissive
+  ---
+  duration_ms: 14.636347
+  type: 'test'
+  ...
+# Subtest: axial original family: source_empty_packet_falls_back_to_return
+ok 88 - axial original family: source_empty_packet_falls_back_to_return
+  ---
+  duration_ms: 11.550931
+  type: 'test'
+  ...
+# Subtest: axial original family: malformed_intermediate_skipped
+ok 89 - axial original family: malformed_intermediate_skipped
+  ---
+  duration_ms: 17.2652
+  type: 'test'
+  ...
+# Subtest: axial original family: restored_portable_method_cannot_authorize_selection
+ok 90 - axial original family: restored_portable_method_cannot_authorize_selection
+  ---
+  duration_ms: 4.906367
+  type: 'test'
+  ...
+# Subtest: axial original family: new_epoch_selection_reacquired_from_public_return
+ok 91 - axial original family: new_epoch_selection_reacquired_from_public_return
+  ---
+  duration_ms: 12.083617
+  type: 'test'
+  ...
+# Subtest: axial original family: portable_method_current_signature_revalidated
+ok 92 - axial original family: portable_method_current_signature_revalidated
+  ---
+  duration_ms: 7.17003
+  type: 'test'
+  ...
+# Subtest: axial original family: historical_method_insufficient_evidence_not_recalled
+ok 93 - axial original family: historical_method_insufficient_evidence_not_recalled
+  ---
+  duration_ms: 5.378504
+  type: 'test'
+  ...
+# Subtest: axial original family: historical_method_foreign_signature_not_recalled
+ok 94 - axial original family: historical_method_foreign_signature_not_recalled
+  ---
+  duration_ms: 5.053123
+  type: 'test'
+  ...
+# Subtest: axial original family: historical_method_unavailable_control_not_recalled
+ok 95 - axial original family: historical_method_unavailable_control_not_recalled
+  ---
+  duration_ms: 6.14815
+  type: 'test'
+  ...
+# Subtest: axial original family: same_epoch_keeps_knowledge
+ok 96 - axial original family: same_epoch_keeps_knowledge
+  ---
+  duration_ms: 2.442928
+  type: 'test'
+  ...
+# Subtest: axial original family: new_epoch_exports_rotations_and_resets_context
+ok 97 - axial original family: new_epoch_exports_rotations_and_resets_context
+  ---
+  duration_ms: 1.86156
+  type: 'test'
+  ...
+# Subtest: axial original family: selection_without_rotation_does_not_create_portable
+ok 98 - axial original family: selection_without_rotation_does_not_create_portable
+  ---
+  duration_ms: 1.808872
+  type: 'test'
+  ...
+# Subtest: axial original family: partial_restore_preserves_other_source_fields
+ok 99 - axial original family: partial_restore_preserves_other_source_fields
+  ---
+  duration_ms: 1.552944
+  type: 'test'
+  ...
+# Subtest: axial original family: common_cold_foreign_action_acquires_selection
+ok 100 - axial original family: common_cold_foreign_action_acquires_selection
+  ---
+  duration_ms: 10.096002
+  type: 'test'
+  ...
+# Subtest: axial original family: common_cold_next_decision_is_axial
+ok 101 - axial original family: common_cold_next_decision_is_axial
+  ---
+  duration_ms: 4.753571
+  type: 'test'
+  ...
+# Subtest: axial original family: common_cold_axial_no_effect_attempt
+ok 102 - axial original family: common_cold_axial_no_effect_attempt
+  ---
+  duration_ms: 10.303397
+  type: 'test'
+  ...
+# Subtest: axial original family: common_cold_axial_contrary_rotation
+ok 103 - axial original family: common_cold_axial_contrary_rotation
+  ---
+  duration_ms: 10.324089
+  type: 'test'
+  ...
+# Subtest: axial original family: common_cold_recalled_rotation_next_decision
+ok 104 - axial original family: common_cold_recalled_rotation_next_decision
+  ---
+  duration_ms: 4.816163
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: empty
+ok 105 - axial original DRM/SRC selection: empty
+  ---
+  duration_ms: 1.497011
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: single
+ok 106 - axial original DRM/SRC selection: single
+  ---
+  duration_ms: 1.197889
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: kind_priority_before_distance
+ok 107 - axial original DRM/SRC selection: kind_priority_before_distance
+  ---
+  duration_ms: 1.017803
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: quarter_distance_before_recall
+ok 108 - axial original DRM/SRC selection: quarter_distance_before_recall
+  ---
+  duration_ms: 1.128907
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: recall_before_command
+ok 109 - axial original DRM/SRC selection: recall_before_command
+  ---
+  duration_ms: 1.02912
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: command_before_index
+ok 110 - axial original DRM/SRC selection: command_before_index
+  ---
+  duration_ms: 1.555758
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: source_index_final_tie
+ok 111 - axial original DRM/SRC selection: source_index_final_tie
+  ---
+  duration_ms: 1.366088
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: three_kinds_reversed
+ok 112 - axial original DRM/SRC selection: three_kinds_reversed
+  ---
+  duration_ms: 1.27957
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: unknown_kind_ignored
+ok 113 - axial original DRM/SRC selection: unknown_kind_ignored
+  ---
+  duration_ms: 1.180574
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: all_unknown_kinds_abstain
+ok 114 - axial original DRM/SRC selection: all_unknown_kinds_abstain
+  ---
+  duration_ms: 1.148096
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: selection_attested_current_missing
+ok 115 - axial original DRM/SRC selection: selection_attested_current_missing
+  ---
+  duration_ms: 1.241013
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: selection_attested_current_false
+ok 116 - axial original DRM/SRC selection: selection_attested_current_false
+  ---
+  duration_ms: 0.955781
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: goal_marker_unique_missing
+ok 117 - axial original DRM/SRC selection: goal_marker_unique_missing
+  ---
+  duration_ms: 2.432893
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: goal_marker_unique_false
+ok 118 - axial original DRM/SRC selection: goal_marker_unique_false
+  ---
+  duration_ms: 1.319458
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: scope_current_missing
+ok 119 - axial original DRM/SRC selection: scope_current_missing
+  ---
+  duration_ms: 0.963112
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: scope_current_false
+ok 120 - axial original DRM/SRC selection: scope_current_false
+  ---
+  duration_ms: 1.072294
+  type: 'test'
+  ...
+# Subtest: axial oracle verifies the original sources and executes the consumed V5 pivot path
+ok 121 - axial oracle verifies the original sources and executes the consumed V5 pivot path
+  ---
+  duration_ms: 28.589857
+  type: 'test'
+  ...
+# Subtest: axial cold public contrast, real SRC proposal and observed turn influence the next choice
+ok 122 - axial cold public contrast, real SRC proposal and observed turn influence the next choice
+  ---
+  duration_ms: 55.759627
+  type: 'test'
+  ...
+# Subtest: axial source tie selection is deterministic and independent of exact guard uniqueness
+ok 123 - axial source tie selection is deterministic and independent of exact guard uniqueness
+  ---
+  duration_ms: 6.444008
+  type: 'test'
+  ...
+# Subtest: axial boundary adaptation excludes the new final scene and preserves original packet ordinals
+ok 124 - axial boundary adaptation excludes the new final scene and preserves original packet ordinals
+  ---
+  duration_ms: 21.724206
+  type: 'test'
+  ...
+# Subtest: axial same-geometry new level is unknown rather than old-scene effect evidence
+ok 125 - axial same-geometry new level is unknown rather than old-scene effect evidence
+  ---
+  duration_ms: 31.459695
+  type: 'test'
+  ...
+# Subtest: axial boundary without attributable old frame keeps historical methods but resets current authority
+ok 126 - axial boundary without attributable old frame keeps historical methods but resets current authority
+  ---
+  duration_ms: 9.386134
+  type: 'test'
+  ...
+# Subtest: axial entry uses its exact source slot and no other source entry
+ok 127 - axial entry uses its exact source slot and no other source entry
+  ---
+  duration_ms: 5.299326
+  type: 'test'
+  ...
+# Subtest: axial checkpoint is detached, immutable, atomic and keeps exactly six source fields
+ok 128 - axial checkpoint is detached, immutable, atomic and keeps exactly six source fields
+  ---
+  duration_ms: 9.107601
+  type: 'test'
+  ...
+1..128
+# tests 128
+# suites 0
+# pass 127
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1072.226791

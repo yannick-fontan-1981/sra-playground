@@ -1,0 +1,106 @@
+{
+  "schema": "logos-engine.native-site-publication.v1",
+  "status": "succeeded",
+  "recordedAt": "2026-11-11T00:45:33.605Z",
+  "lot": "10A axial_question",
+  "nativeVersion": "0.56.0",
+  "nativeDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+  "retainedDeliveryCommit": "c045cd674f47c1a11b44623e832743d53742ad41",
+  "firstNativeSiteVersion": 90,
+  "firstNativePublishedCommit": "617d1f607d37a6bba1f7ae8ffe1826806e6749a0",
+  "firstNativePublicationReceipt": "/workspace/shared/sra-coordination/published-10a-site90.json",
+  "publishedCommit": "5659ddc9420c7624df4865f0afc628782296a186",
+  "version": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_6afc77b69e808191a4dafb41e25b7b05",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "version_number": 91,
+    "source": {
+      "commit_sha": "5659ddc9420c7624df4865f0afc628782296a186"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000008aa0820e8a6d0e39917b4282",
+      "content_hash": "sha256:11d54c5d3320c139561241638fdcbb9a33c0c2e895d9789a58c462d9c09b6072",
+      "size_bytes": 29880320,
+      "file_count": 75
+    },
+    "deployment_id": "appgdep_6af3b9f2c9d08191a4d379a088d5f2d9"
+  },
+  "deployment": {
+    "id": "appgdep_6af3b9f2c9d08191a4d379a088d5f2d9",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "title": "SRA Playground",
+    "version_id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_6afc77b69e808191a4dafb41e25b7b05",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6adbc388d79081918581b93b919d7258",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-11T00:42:39.670803+00:00"
+  },
+  "access": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "current_live_url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "current_user_role": "owner",
+    "latest_version_number": 91,
+    "access_mode": "custom",
+    "access_policy": {
+      "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+      "revision": 3,
+      "updated_at": "2026-11-02T14:06:30.480596+00:00",
+      "access_mode": "custom",
+      "allowed_user_count": 1,
+      "allowed_user_roles": [
+        "owner"
+      ],
+      "allowed_editor_count": 0,
+      "allowed_group_count": 0,
+      "external_visitor_count": 0
+    }
+  },
+  "documentationClosureComplete": true,
+  "publicationLockReleased": true,
+  "publicationLockRelease": {
+    "observedAt": "2026-11-11T00:45:06.556Z",
+    "result": {
+      "chunk_id": "14543f",
+      "wall_time_seconds": 4.4463e-05,
+      "exit_code": 0,
+      "original_token_count": 9,
+      "output": "\r\n10A publication lock released\r\n"
+    }
+  },
+  "closureSharedLockRelease": {
+    "observedAt": "2026-11-11T00:45:06.160Z",
+    "result": {
+      "chunk_id": "358cbd",
+      "wall_time_seconds": 3.8742e-05,
+      "exit_code": 0,
+      "original_token_count": 9,
+      "output": "\r\n10A closure shared lock released\r\n"
+    }
+  },
+  "applicationFileCount": 75,
+  "applicationArchiveUnchangedFromSite90": true,
+  "publicationInputGate": "docs/migration/lot10a-evidence/integrated-final/publication-inputs.json",
+  "postPublicationInputIntegrity": "docs/migration/lot10a-evidence/publication/post-publication-input-integrity.json",
+  "closureArchiveVerification": "/workspace/sites/lot10a-publication-20261111/documentation-closure-archive-verification.json",
+  "closureSourceTransport": "/workspace/sites/lot10a-publication-20261111/source-push-documentation-closure.json",
+  "sourceTransport": "docs/migration/lot10a-evidence/publication/source-transport.json",
+  "costAcceptedPerGame": {
+    "STCK": 0.38745685302171845,
+    "SMLP": 0.1365835131078264
+  },
+  "costReviewChecks": 7688,
+  "ownLiveContribution": "not_established",
+  "qualification": "Final private documentation closure after actual Site90 native0.56 publication. Native, test inputs and application member bytes unchanged. POLA cumulative clock unrecoverable, no new game budget assumed; own Axial live contribution, long rotation history cost, conservative boundary attribution and full Python caller parity remain reserved.",
+  "noFurtherLot10ACompute": true,
+  "nextSubLot": "10B window_question",
+  "publicationSuccessors": [
+    "4C",
+    "5B"
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "schema": "logos-engine.lot8b.public-structural-validation-reservation.v1",
+  "recordedAt": "2026-11-12T13:22:58.356933+00:00",
+  "status": "observed_unresolved_recovery_limitation",
+  "capture": {
+    "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-01/capture/receipt.json",
+    "bytes": 160331,
+    "sha256": "b65d2c045add7bcf4823e0841c6e55c3ab86cb23bff161236a60fa398ec3fd62"
+  },
+  "events": {
+    "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-01/capture/events.jsonl.gz",
+    "bytes": 22330445,
+    "sha256": "27337f073a7963a0bb315e23f342cc130d8ee005898245ad4111ac18c557d3ca"
+  },
+  "physicalReturns": 0,
+  "workersClosed": true,
+  "inputsUnchanged": true,
+  "recoverableChecksBeforeFailure": [
+    {
+      "name": "wrong_ticket",
+      "error": "stale",
+      "preserved": true
+    },
+    {
+      "name": "wrong_session",
+      "error": "stale",
+      "preserved": true
+    },
+    {
+      "name": "wrong_sequence",
+      "error": "stale",
+      "preserved": true
+    },
+    {
+      "name": "step_index_mismatch",
+      "error": "stale",
+      "preserved": true
+    }
+  ],
+  "rpcErrors": [
+    {
+      "requestOrdinal": 32,
+      "responseOrdinal": 33,
+      "operationType": "advance",
+      "error": {
+        "code": "stale",
+        "message": "The native outcome does not bind the one pending authorization."
+      }
+    },
+    {
+      "requestOrdinal": 47,
+      "responseOrdinal": 48,
+      "operationType": "advance",
+      "error": {
+        "code": "stale",
+        "message": "The native solver session is no longer current."
+      }
+    },
+    {
+      "requestOrdinal": 62,
+      "responseOrdinal": 63,
+      "operationType": "advance",
+      "error": {
+        "code": "stale",
+        "message": "The native outcome does not bind the one pending authorization."
+      }
+    },
+    {
+      "requestOrdinal": 77,
+      "responseOrdinal": 78,
+      "operationType": "advance",
+      "error": {
+        "code": "stale",
+        "message": "The native outcome does not advance the public transport counter."
+      }
+    },
+    {
+      "requestOrdinal": 92,
+      "responseOrdinal": 93,
+      "operationType": "advance",
+      "error": {
+        "code": "internal",
+        "message": "The public game frame must be 64 \u00d7 64."
+      }
+    },
+    {
+      "requestOrdinal": 94,
+      "responseOrdinal": 95,
+      "operationType": "resume",
+      "error": {
+        "code": "stale",
+        "message": "The native solver session is no longer current."
+      }
+    },
+    {
+      "requestOrdinal": 97,
+      "responseOrdinal": 98,
+      "operationType": "close",
+      "error": {
+        "code": "stale",
+        "message": "The native solver session is no longer current."
+      }
+    }
+  ],
+  "sourceExplanation": {
+    "protocol": "src/runtime/v6-agent-protocol.ts",
+    "baseProjection": "src/runtime/contracts.ts",
+    "service": "src/runtime/v6-agent-service.ts",
+    "finding": "Dimension and palette validation in toAgentObservation throws TypeError; the service closes on non-V6AgentError. The worker classifies it as internal. No recovery is claimed for these structural failures.",
+    "paletteStatus": "same source path, not yet executed"
+  },
+  "originalContractPassed": false,
+  "productionCodeChanged": false,
+  "officialCostAffected": false
+}

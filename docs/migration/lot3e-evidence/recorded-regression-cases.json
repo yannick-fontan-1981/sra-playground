@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "cases": [
+    {
+      "id": "catr-045",
+      "game": "CATR",
+      "baseline": {
+        "path": "docs/migration/lot3d-evidence/final/regressions/catr-044-replay.json.gz",
+        "sha256": "42e4ecf1321592f829d7424c5773a6fc16aac4cc18a2bdba436c5d82432895e2"
+      },
+      "trace": {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+        "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816"
+      }
+    },
+    {
+      "id": "rswp-045",
+      "game": "RSWP",
+      "baseline": {
+        "path": "docs/migration/lot3d-evidence/final/regressions/rswp-044-replay.json.gz",
+        "sha256": "5075fb552f5594f4e5b57eb076373c00f22a1280e99e02700b91a4914a9b2466"
+      },
+      "trace": {
+        "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+        "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755"
+      }
+    }
+  ],
+  "passiveOwnerRequirements": [],
+  "qualification": "Cold recorded-return regressions against actual native0.45 recomputed reports from Site73 commit79e8fb89521b2d0fa8907e79467f24e7cf8a2b4e, digest5b5e59e14e4d417d92cacd6e79d21b6e8e833d715c8d05df2b74806bb09b40f3. Historical public traces remain CATR0.42 and RSWP0.38, not new live0.45 traces. Every0.46 command must be computed before its recorded return. Same17unchanged checks per case. New passive ReceptionService fields absent until own selection/acquisition; no empty dictionary expansion for unrelated trajectories. No new live win, full-state equivalence, speed claim or ReceptionService contribution inferred."
+}

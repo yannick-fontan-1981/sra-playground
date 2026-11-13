@@ -1,0 +1,38 @@
+{
+  "initialLevel": 1,
+  "initialActions": 0,
+  "initialSolvedLevels": 0,
+  "initialPlans": 0,
+  "inspectionClosedAtStart": true,
+  "manualGameActions": 0,
+  "agentSessionResets": 0,
+  "levelJumps": 0,
+  "cumulativeActionsAtBoundaries": [
+    8,
+    16,
+    24,
+    32,
+    40,
+    48
+  ],
+  "completedPlansAtBoundaries": [
+    8,
+    16,
+    24,
+    32,
+    40,
+    48
+  ],
+  "solvedLevels": 6,
+  "completedPlans": 48,
+  "finalVisibleLevel": 6,
+  "victoryVisible": true,
+  "officialWinTextVisible": true,
+  "inspectionOpenedDuringRun": false,
+  "nativeSourceManifestDigest": "1278235f269085c057e4dfea619c5a65587bfd90998505858caeef067319640c",
+  "previewUrl": "http://127.0.0.1:4173/?game=CATL&level=6",
+  "qualification": "One cold browser session, six Run to next level requests, no manual game commands, resets, level jumps or inspection opening. VICTORY and The game reports WIN are visible.",
+  "screenshot": null,
+  "screenshotFailure": "Page.captureScreenshot timed out",
+  "postSuccessNavigation": "After official WIN was observed, a navigation to the playground anchor reloaded the player. A separate fresh browser campaign is used for the final screenshot."
+}

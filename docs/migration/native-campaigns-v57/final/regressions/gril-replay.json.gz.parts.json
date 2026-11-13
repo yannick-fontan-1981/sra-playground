@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "gril-replay.json.gz",
+    "sha256": "470a4d43227e5528a5586325ab31d5f189e84fd1dd507fccdbcac5750ed7681d",
+    "bytes": 2204833
+  },
+  "parts": [
+    {
+      "file": "gril-replay.json.gz.part000",
+      "sha256": "58fe5ebf896f5279671f262e245c02477ff4352929763f81cfc398e1e1d6bd12",
+      "bytes": 900000
+    },
+    {
+      "file": "gril-replay.json.gz.part001",
+      "sha256": "a5cc94dd21dc5ff9e3dc849ff35cc3fe9e6a19d2f98144e4eb14169756d9318d",
+      "bytes": 900000
+    },
+    {
+      "file": "gril-replay.json.gz.part002",
+      "sha256": "5a2042c6b53d91e7a02a192595ef26336d208544a73abb02971d08335e3f601e",
+      "bytes": 404833
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

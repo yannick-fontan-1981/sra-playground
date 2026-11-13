@@ -1,0 +1,133 @@
+{
+  "schema": "logos-engine.inventory-normalization-regression.v1",
+  "status": "passed",
+  "command": [
+    "node",
+    "--test",
+    "--test-reporter=tap",
+    "tests/v6-inventory-family-reference.test.ts",
+    "tests/v6-inventory-restoration-cache.test.ts"
+  ],
+  "startedAt": "2026-11-10T01:58:27.131611+00:00",
+  "finishedAt": "2026-11-10T01:58:28.492270+00:00",
+  "elapsedSeconds": 1.3606858769999235,
+  "exitCode": 0,
+  "testCounts": {
+    "tests": 188,
+    "pass": 188,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "normalizationCasesPassed": {
+    "native restoration projects an incomplete tracker before checkpoint certification": true,
+    "native restoration projects duplicate tracker underlays before checkpoint certification": true,
+    "native restoration projects duplicate caller meter entries before checkpoint certification": true
+  },
+  "inputs": [
+    {
+      "path": "src/logos-engine/v6-observed-inventory.ts",
+      "bytes": 45492,
+      "sha256": "645100e217005786a5662e825f604873a457c9f4642286b129be17c1d325dfff"
+    },
+    {
+      "path": "src/logos-engine/v6-native-working-witness.ts",
+      "bytes": 5896,
+      "sha256": "08bca697678eb3a89960ff2ed1c49b9fc0c91082b86952be51edf0f34a1f38fb"
+    },
+    {
+      "path": "src/logos-engine/v6-native-owned.ts",
+      "bytes": 3414,
+      "sha256": "363201fabc39c04fde4069b410a7b1fcdba89210aabd3671987fde9c6f8ef9c0"
+    },
+    {
+      "path": "src/logos-engine/v6-inventory-project.ts",
+      "bytes": 11045,
+      "sha256": "124bacd0897db9a99a3c1975afb386cafd659c73a6ad3ea290090f4dcd866fe9"
+    },
+    {
+      "path": "src/logos-engine/v6-inventory-caller-context.ts",
+      "bytes": 21023,
+      "sha256": "da6e83d1a7bd9afcc0ad8f2b4124609285dec49dac07f54502b130c867839ff9"
+    },
+    {
+      "path": "tests/v6-inventory-family-reference.test.ts",
+      "bytes": 10102,
+      "sha256": "2091f6807c8bbb0549f38f0ae3cd07ece7771cab222a6cf2a84dd56174d1a755"
+    },
+    {
+      "path": "tests/v6-inventory-restoration-cache.test.ts",
+      "bytes": 20452,
+      "sha256": "f17376ff75f4d1e70825d305e527df59c8ce0c614d8cd636618dfc79afd5eb11"
+    },
+    {
+      "path": "tests/fixtures/v6-inventory-family-reference.json.gz",
+      "bytes": 147644,
+      "sha256": "6ffb59fd02e8ce1755de8889e13ca9fb9773ba14334a314ef139f4c54ccc816b"
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "src/logos-engine/v6-observed-inventory.ts",
+      "bytes": 45492,
+      "sha256": "645100e217005786a5662e825f604873a457c9f4642286b129be17c1d325dfff"
+    },
+    {
+      "path": "src/logos-engine/v6-native-working-witness.ts",
+      "bytes": 5896,
+      "sha256": "08bca697678eb3a89960ff2ed1c49b9fc0c91082b86952be51edf0f34a1f38fb"
+    },
+    {
+      "path": "src/logos-engine/v6-native-owned.ts",
+      "bytes": 3414,
+      "sha256": "363201fabc39c04fde4069b410a7b1fcdba89210aabd3671987fde9c6f8ef9c0"
+    },
+    {
+      "path": "src/logos-engine/v6-inventory-project.ts",
+      "bytes": 11045,
+      "sha256": "124bacd0897db9a99a3c1975afb386cafd659c73a6ad3ea290090f4dcd866fe9"
+    },
+    {
+      "path": "src/logos-engine/v6-inventory-caller-context.ts",
+      "bytes": 21023,
+      "sha256": "da6e83d1a7bd9afcc0ad8f2b4124609285dec49dac07f54502b130c867839ff9"
+    },
+    {
+      "path": "tests/v6-inventory-family-reference.test.ts",
+      "bytes": 10102,
+      "sha256": "2091f6807c8bbb0549f38f0ae3cd07ece7771cab222a6cf2a84dd56174d1a755"
+    },
+    {
+      "path": "tests/v6-inventory-restoration-cache.test.ts",
+      "bytes": 20452,
+      "sha256": "f17376ff75f4d1e70825d305e527df59c8ce0c614d8cd636618dfc79afd5eb11"
+    },
+    {
+      "path": "tests/fixtures/v6-inventory-family-reference.json.gz",
+      "bytes": 147644,
+      "sha256": "6ffb59fd02e8ce1755de8889e13ca9fb9773ba14334a314ef139f4c54ccc816b"
+    }
+  ],
+  "inputsUnchanged": true,
+  "nativeSourceBefore": {
+    "fileCount": 249,
+    "digest": "391a2797414c0090fa632a2fc13736c7806c1f5fceceafa34e1583dd4ef9e3a9"
+  },
+  "nativeSourceAfter": {
+    "fileCount": 249,
+    "digest": "391a2797414c0090fa632a2fc13736c7806c1f5fceceafa34e1583dd4ef9e3a9"
+  },
+  "nativeSourceUnchanged": true,
+  "beforeRegression": {
+    "path": "docs/migration/lot3b-cost-evidence/diagnostic/inventory-normalization-before.json",
+    "bytes": 4253,
+    "sha256": "e9e5332793ae6cd08e241ebf9f6e2fc34957564d7c42df9138877131753977ba"
+  },
+  "output": {
+    "path": "docs/migration/lot3b-cost-evidence/diagnostic/inventory-normalization-after.tap.gz",
+    "bytes": 5333,
+    "sha256": "a9f0b0d0254fdea40eb34597b526fd464a822c6e7eed0ed94f3fab6d93815e4d"
+  },
+  "qualification": "One complete source-reference and inventory-cache validation after clearing the witness on full restoration. The previously failing tracker:{} input and two duplicate-Map normalization cases pass; earlier mutation, transaction, detached-copy and custom-restoration cases remain unskipped. Full final frozen validation and all official cost measurements are separate gates."
+}

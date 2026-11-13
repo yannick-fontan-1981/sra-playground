@@ -1,0 +1,27 @@
+{
+  "schema": "logos-engine.actual-command-execution.v1",
+  "status": "passed",
+  "command": [
+    "python3",
+    "-B",
+    "scripts/run-released-public-regressions-streamlog.py",
+    "docs/migration/lot6a-evidence/integrated-final-02/released-weav-exclusive-1536-cases.json",
+    "docs/migration/lot6a-evidence/integrated-final-02/released-weav-exclusive-1536",
+    "--source-manifest",
+    "docs/migration/lot6a-evidence/integrated-final-02/source-manifest.json",
+    "--node-old-space-mib",
+    "1536",
+    "--timeout-seconds",
+    "600"
+  ],
+  "startedAt": "2026-11-11T13:06:53.781122+00:00",
+  "finishedAt": "2026-11-11T13:11:33.105214+00:00",
+  "elapsedSeconds": 279.3241209789994,
+  "exitCode": 0,
+  "inputsUnchanged": true,
+  "output": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/released-weav-exclusive-1536-execution.log.gz",
+    "bytes": 753,
+    "sha256": "b635f5b26a088774be16cbedc4de043fb4ee44d6ba888a1bb0d5808b26f7f5bc"
+  }
+}

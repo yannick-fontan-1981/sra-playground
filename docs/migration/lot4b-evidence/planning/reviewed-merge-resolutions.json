@@ -1,0 +1,34 @@
+{
+  "schema": "logos-engine.lot4b.reviewed-merge-resolutions.v1",
+  "createdAt": "2026-11-10T22:02:04.650672+00:00",
+  "pre5aHead": "d49474cc013a62a71a22369baa1eee907bf12007",
+  "reviewedHead": "47608f05b4cec1094d5268811892a1fa02c51682",
+  "paths": [
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "sha256": "96071ede181246c251b5611d769505f033470a7666f92890c5e8aba5681e6941",
+      "bytes": 147934
+    },
+    {
+      "path": "migration/v6-transfer-map.json",
+      "sha256": "8b7be10059a287b597f9425dee558e3a2a4a2408ec26527c11c1cbf220ed9417",
+      "bytes": 397512
+    },
+    {
+      "path": "tests/v6-radial-port-integration.test.ts",
+      "sha256": "86a051c90fd919488b69509c24b6fca29420041a4870f728aa2bb083c02b50fa",
+      "bytes": 28209
+    },
+    {
+      "path": "docs/migration/v6-coverage.json",
+      "sha256": "dd0db5e76214096f84aa9002aa18386df725728cc897105914dfd300806e6b64",
+      "bytes": 2547146
+    },
+    {
+      "path": "docs/migration/v6-entry-point-progress.json",
+      "sha256": "2a703a27aaade2e83075d6f138cf4cc343532f0d9bcadbe842653fb761b36bb4",
+      "bytes": 18811
+    }
+  ],
+  "qualification": "Exact reviewed bytes recoverable from the preserved local branch. Reapply only after merging actual published5A; any new changes must be reviewed separately. Generated audits will be recalculated; runtime version assigned after published predecessor verification."
+}

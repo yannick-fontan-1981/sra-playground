@@ -1,0 +1,131 @@
+{
+  "module_id": "observed_room_strategy",
+  "declarations": [
+    {
+      "id": "policy.observed_passage_room_strategy",
+      "kind": "selection_policy",
+      "static_knowledge_node_kind": "priority",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "principle.observed_passage_composition_preserves_layer_pose_and_arrival"
+      ],
+      "invariants": [
+        "the_current_and_exit_components_are_regions_not_layer_numbers",
+        "reverse_search_transposes_only_supplied_directed_links",
+        "component_graph_routes_are_conditional_not_acquired_physical_laws",
+        "an_unjoined_or_partial_graph_is_not_evidence_of_unreachability",
+        "every_connection_keeps_endpoints_rooms_model_revision_and_evidence_scope",
+        "the_strategy_never_releases_a_world_action",
+        "unchosen_strategies_and_parallel_connections_remain_explicit",
+        "primitive_routes_still_require_the_existing_current_Source_domain_and_permit",
+        "outside_static_single_cell_unit_cardinal_projection_keep_existing_local_strategy"
+      ],
+      "falsifiers": [
+        "current_component_model_or_evidence_scope_changed",
+        "a_reverse_edge_was_invented_from_a_forward_observation",
+        "a_conditional_connection_was_promoted_to_established_without_evidence",
+        "a_room_level_plan_bypassed_current_primitive_validation"
+      ],
+      "declared_alternative_refs": [
+        "strategy.observed_passage.follow_conditionally_connected_exit",
+        "strategy.observed_passage.preserve_local_and_unjoined_questions"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.room_strategy.conditional_exit_chain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "strategy.observed_passage.follow_conditionally_connected_exit"
+            },
+            {
+              "field": "passage_room_graph_return_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "passage_room_search_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "passage_room_exit_chain_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "passage_room_static_signature_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.room_strategy.preserve_questions",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "strategy.observed_passage.preserve_local_and_unjoined_questions"
+            },
+            {
+              "field": "passage_room_graph_return_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.room_strategy.conditional_exit_chain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "strategy.observed_passage.follow_conditionally_connected_exit"
+            }
+          ],
+          "reason_ref": "principle.observed_passage_composition_preserves_layer_pose_and_arrival"
+        },
+        {
+          "id": "tier.room_strategy.preserve_questions",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "strategy.observed_passage.preserve_local_and_unjoined_questions"
+            }
+          ],
+          "reason_ref": "principle.observed_passage_composition_preserves_layer_pose_and_arrival"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break"
+    }
+  ]
+}

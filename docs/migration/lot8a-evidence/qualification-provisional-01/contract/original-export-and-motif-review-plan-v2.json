@@ -1,0 +1,780 @@
+{
+  "schema": "logos-engine.v6.functional-qualification-plan.v1",
+  "version": 1,
+  "status": "declared_ready_for_explicit_root_go",
+  "qualification": "functional_only",
+  "declaredAt": "2026-11-11T21:19:24.554326+00:00",
+  "qualificationDetail": "Four new original Binding component/attention replays from exact fresh native public-operation journals, plus independent Motif captured-state review. No game/cost/publication or complete caller parity.",
+  "parent": {
+    "commit": "705d5c752500f88bd23fea3fa620edb6914579d2",
+    "validatedSourceCommit": "a9ef0c67ea4b85d8eb68f57fb144772e162dcf35"
+  },
+  "summary": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-summary.json",
+    "sha256": "679b118a0351c58792a9a9758c2026339754a2a9026c6b8d18cf241ddf3a4c0b",
+    "bytes": 10631
+  },
+  "nativeManifest": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/source-manifest.json",
+    "sha256": "325268f8cd80b67996ab2d4a05df5203247257bc603f1cf29f63f0d9165d7167",
+    "bytes": 38477
+  },
+  "runner": {
+    "path": "docs/migration/lot8a-evidence/tools/qualify-composition-v2.py",
+    "sha256": "f7ad2afe5a7c80c08aa23497f2f53224413cf76e5c7a215baadd842c7f3516ed",
+    "bytes": 24513
+  },
+  "inventoryRunner": {
+    "path": "docs/migration/lot8a-evidence/tools/validate-composition.py",
+    "sha256": "3d58f82af41a4c467077f2cb1210347989c8ffac9f008da094b3891272be3e3d",
+    "bytes": 34550
+  },
+  "freeze": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/input-freeze.json",
+    "sha256": "072b5e52b1dc24a74c7bd2d19d0e6850191441b38005d884d3dc395e180225d4",
+    "bytes": 564572
+  },
+  "inputFiles": [
+    {
+      "path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "sha256": "61ab14cd750fc24d5db53490ec5fc40f756e4b6e136b78cf7004265471d9bd1d",
+      "bytes": 126939688
+    },
+    {
+      "path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+      "sha256": "fa67443527ed9647f760d807e2a38f26340757123e643c4639cf273ed15d5ea7",
+      "bytes": 30894944
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+      "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755",
+      "bytes": 41445
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+      "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816",
+      "bytes": 24340
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+      "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46",
+      "bytes": 39060
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+      "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d",
+      "bytes": 19976
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+      "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2",
+      "bytes": 26568
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+      "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750",
+      "bytes": 2630905
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+      "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102",
+      "bytes": 56466
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+      "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a",
+      "bytes": 4349054
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+      "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6",
+      "bytes": 1649205
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+      "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c",
+      "bytes": 8174480
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+      "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba",
+      "bytes": 2585868
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+      "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d",
+      "bytes": 10678168
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+      "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3",
+      "bytes": 13577757
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+      "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe",
+      "bytes": 3161161
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+      "sha256": "916d0f1cb1dcbfd9b7ba7624e7d3d4648a91ae7ef64583288af4711d2a955ac3",
+      "bytes": 13286
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+      "sha256": "93e59ab1146d4eef7c944a0e1fc0ab7b0d539cc90a074abe424742be011eec37",
+      "bytes": 3027289
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-public-trace.json.gz",
+      "sha256": "5b302279efb140d1c549d9650d434efb38fde0b8bc5809ab072de66159c8c329",
+      "bytes": 11183
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/common/common-plan.json",
+      "sha256": "5fc5b041ac24551549ad6d4cc79ce5e97d6c4710f7510b341da45e3febbfc41e",
+      "bytes": 9417
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-ambiguity-01/ambiguity/actual-operations.json",
+      "sha256": "20cb0948e00f535ec971ef29ab8d5aa44c3f492af3f3eb918a1dec177539015f",
+      "bytes": 1488335
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-ambiguity-01/ambiguity/common-loop.json.gz",
+      "sha256": "94595120dcf3493cfec36c32c5f3917cc1faa542c0c273723b0129f52ff2b4b7",
+      "bytes": 20749
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-boundary-01/boundary/actual-operations.json",
+      "sha256": "993337bab2b311f9b773c5f915d272be96524c31951fae1246ae62b9c62a087a",
+      "bytes": 3834331
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-boundary-01/boundary/common-loop.json.gz",
+      "sha256": "3e73184eb189f87a0ce9478f41072af160cc3d79dd33024cbd7d20935bfc3a34",
+      "bytes": 28908
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-positive-01/positive/actual-operations.json",
+      "sha256": "115986db3a75316bbbc18a9e3ac0f570238a0abf8ee1b11a05577f6ca45289ff",
+      "bytes": 4197296
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-positive-01/positive/common-loop.json.gz",
+      "sha256": "f04f17f275b4e3eeda8c3dfa58e23942998dca2ca080b3ed0512c20cf5c8767e",
+      "bytes": 30366
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-refutation-01/refutation/actual-operations.json",
+      "sha256": "51e5878ceb62ebb4a14a77c2b2b437e014f87c1d2e013dbc87390c66e41f5c23",
+      "bytes": 4215444
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-refutation-01/refutation/common-loop.json.gz",
+      "sha256": "8521c2bfe99bea4faef0cd88734b4f0194b941e8e6e9b2c2dec4977468416813",
+      "bytes": 30546
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz",
+      "sha256": "a3318ed5f7d742f63b5923f3e1e46b0d9cfff1d18e767b45c522d61aa354e455",
+      "bytes": 8253174
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-public-trace.json.gz",
+      "sha256": "c236c95ec0bdcb892a6940940098e4310eb35a6ae11acaf6b74545d09aa22daa",
+      "bytes": 12579
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+      "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c",
+      "bytes": 17256
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+      "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2",
+      "bytes": 12767727
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+      "sha256": "cf69ad941e80e17f8d6cd66edc0419a0c6ff7aa8d9bbdaf503cb56a49e8c3f98",
+      "bytes": 40777
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/contract/source-manifest.json",
+      "sha256": "9737642215681078a374f6b9bed31c40bb72e143f38858e3a743654af221a397",
+      "bytes": 38589
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-01/common/binding-ambiguity-capture.json",
+      "sha256": "5e815a528b92fb758091a1761d85f00498863838dd558f2488981cdb01c3e59b",
+      "bytes": 1605
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-01/common/binding-boundary-capture.json",
+      "sha256": "8b7b38451dfac1ee3810ac4369eb30faaf078a141703998751149ec2f3d929be",
+      "bytes": 1600
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-01/common/binding-positive-capture.json",
+      "sha256": "daea34b1ae5bf087ce9cf70349882cc8c7c68e4fd8798469d3f947ba23f099e0",
+      "bytes": 1657
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-01/common/binding-refutation-capture.json",
+      "sha256": "143670af6609fc18258c0ec2fc603264d77fff80ffc75d55205f9d44dd7487b4",
+      "bytes": 1667
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-01/common/motif-caller-01.json",
+      "sha256": "426f1eb77ffd964a32ae2548416cb385d2824d613c0e683174742a79aa8d4264",
+      "bytes": 338482
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/recorded-regression-cases.json",
+      "sha256": "2f2ead27c4a0b4e149baefd7a991ca0e8faf3cbab331f2aad498f9b295b12946",
+      "bytes": 8214
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-01/recorded-regressions-01/source-manifest.json",
+      "sha256": "325268f8cd80b67996ab2d4a05df5203247257bc603f1cf29f63f0d9165d7167",
+      "bytes": 38477
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-01/stages/binding-ambiguity-01/receipt.json",
+      "sha256": "a8ea4fa632e04271628cc2155c33bd672a4d17d90359b0057ef474bfb130b5dc",
+      "bytes": 1159705
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-01/stages/binding-boundary-01/receipt.json",
+      "sha256": "1cbfd859e056bf12fc80f51b21a1d0ab0e72ef52ed728b614eca63b78ebac2c2",
+      "bytes": 1159681
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-01/stages/binding-positive-01/receipt.json",
+      "sha256": "5b635c880449c6c87f14a7d919ec0a043db62d66ed32b14800843e9c02676f24",
+      "bytes": 1159682
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-01/stages/binding-refutation-01/receipt.json",
+      "sha256": "83a6f491a77946499a55936c06828e852dbe8aa442c7c9f56705eaeff463777b",
+      "bytes": 1159738
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-01/stages/motif-capture-01/receipt.json",
+      "sha256": "3a79daa46aaa834e750aa3acea07ac59194a02c7c8b54f90c64fb03aecc45172",
+      "bytes": 1159390
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/tools/capture-binding-composition.mjs",
+      "sha256": "c05704c75a25ed0ad0a97ae8af73e15fdea501efbb8dba6f0c0b689ffcc67bfd",
+      "bytes": 2451
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/tools/export-selected-rigid-synthetic-common.mjs",
+      "sha256": "e1731f9b1f3a63182fb4a36a9a4e99a74897e5e7b9e6eebabc3b8a19315d70ce",
+      "bytes": 18568
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/tools/preflight-recorded-composition.py",
+      "sha256": "f3fb97f6b5fe63df18f8431acf944797d571febc1092f7d8ad07fd444a1575be",
+      "bytes": 1546
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/tools/probe-caller.mjs",
+      "sha256": "9e54b0f105358aac17729da0c25020cb5061b5280473b6fb93008a7792921dca",
+      "bytes": 4255
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/tools/review-motif-common-capture.py",
+      "sha256": "22ed2f76196bd17d5eb80253f3565c26d3b84d7465d99d90f70bf726910656bb",
+      "bytes": 4822
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/current-work-lock-policy.json",
+      "sha256": "95d81233c9a267fc07df4ded2f764c059b47c1498bb369955e2cb5fcc2587914",
+      "bytes": 1522
+    }
+  ],
+  "stages": [
+    {
+      "name": "binding-positive-original",
+      "argv": [
+        "python",
+        "-B",
+        "scripts/export-observed-binding-reference.py",
+        "--journal",
+        "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-positive-01/positive/actual-operations.json",
+        "--fixture",
+        "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-positive-01/positive/original-replay.json.gz",
+        "--receipt",
+        "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-positive-01/positive/original-export.json"
+      ],
+      "env": {
+        "PYTHONHASHSEED": "0",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "timeoutSeconds": 120,
+      "totalTimeoutSeconds": 180,
+      "expectedExitCode": 0,
+      "outputPaths": [
+        "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-positive-01/positive/original-replay.json.gz",
+        "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-positive-01/positive/original-export.json"
+      ],
+      "assertions": [
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-positive-01/positive/original-export.json",
+          "path": [
+            "status"
+          ],
+          "op": "value_equal",
+          "value": "passed"
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-positive-01/positive/original-export.json",
+          "path": [
+            "mode"
+          ],
+          "op": "value_equal",
+          "value": "captured-public-journals"
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-positive-01/positive/original-export.json",
+          "path": [
+            "sourceFilesVerifiedBefore"
+          ],
+          "op": "value_equal",
+          "value": 1786
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-positive-01/positive/original-export.json",
+          "path": [
+            "sourceFilesVerifiedAfter"
+          ],
+          "op": "value_equal",
+          "value": 1786
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-positive-01/positive/original-export.json",
+          "path": [
+            "sourceInventoryUnchanged"
+          ],
+          "op": "value_equal",
+          "value": true
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-positive-01/positive/original-export.json",
+          "path": [
+            "counts",
+            "chains"
+          ],
+          "op": "value_equal",
+          "value": 1
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-positive-01/positive/original-export.json",
+          "path": [
+            "counts",
+            "chainOperations"
+          ],
+          "op": "value_equal",
+          "value": 124
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-positive-01/positive/original-export.json",
+          "path": [
+            "counts",
+            "sourceExceptions"
+          ],
+          "op": "value_equal",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "name": "binding-refutation-original",
+      "argv": [
+        "python",
+        "-B",
+        "scripts/export-observed-binding-reference.py",
+        "--journal",
+        "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-refutation-01/refutation/actual-operations.json",
+        "--fixture",
+        "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-refutation-01/refutation/original-replay.json.gz",
+        "--receipt",
+        "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-refutation-01/refutation/original-export.json"
+      ],
+      "env": {
+        "PYTHONHASHSEED": "0",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "timeoutSeconds": 120,
+      "totalTimeoutSeconds": 180,
+      "expectedExitCode": 0,
+      "outputPaths": [
+        "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-refutation-01/refutation/original-replay.json.gz",
+        "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-refutation-01/refutation/original-export.json"
+      ],
+      "assertions": [
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-refutation-01/refutation/original-export.json",
+          "path": [
+            "status"
+          ],
+          "op": "value_equal",
+          "value": "passed"
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-refutation-01/refutation/original-export.json",
+          "path": [
+            "mode"
+          ],
+          "op": "value_equal",
+          "value": "captured-public-journals"
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-refutation-01/refutation/original-export.json",
+          "path": [
+            "sourceFilesVerifiedBefore"
+          ],
+          "op": "value_equal",
+          "value": 1786
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-refutation-01/refutation/original-export.json",
+          "path": [
+            "sourceFilesVerifiedAfter"
+          ],
+          "op": "value_equal",
+          "value": 1786
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-refutation-01/refutation/original-export.json",
+          "path": [
+            "sourceInventoryUnchanged"
+          ],
+          "op": "value_equal",
+          "value": true
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-refutation-01/refutation/original-export.json",
+          "path": [
+            "counts",
+            "chains"
+          ],
+          "op": "value_equal",
+          "value": 1
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-refutation-01/refutation/original-export.json",
+          "path": [
+            "counts",
+            "chainOperations"
+          ],
+          "op": "value_equal",
+          "value": 124
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-refutation-01/refutation/original-export.json",
+          "path": [
+            "counts",
+            "sourceExceptions"
+          ],
+          "op": "value_equal",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "name": "binding-ambiguity-original",
+      "argv": [
+        "python",
+        "-B",
+        "scripts/export-observed-binding-reference.py",
+        "--journal",
+        "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-ambiguity-01/ambiguity/actual-operations.json",
+        "--fixture",
+        "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-ambiguity-01/ambiguity/original-replay.json.gz",
+        "--receipt",
+        "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-ambiguity-01/ambiguity/original-export.json"
+      ],
+      "env": {
+        "PYTHONHASHSEED": "0",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "timeoutSeconds": 120,
+      "totalTimeoutSeconds": 180,
+      "expectedExitCode": 0,
+      "outputPaths": [
+        "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-ambiguity-01/ambiguity/original-replay.json.gz",
+        "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-ambiguity-01/ambiguity/original-export.json"
+      ],
+      "assertions": [
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-ambiguity-01/ambiguity/original-export.json",
+          "path": [
+            "status"
+          ],
+          "op": "value_equal",
+          "value": "passed"
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-ambiguity-01/ambiguity/original-export.json",
+          "path": [
+            "mode"
+          ],
+          "op": "value_equal",
+          "value": "captured-public-journals"
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-ambiguity-01/ambiguity/original-export.json",
+          "path": [
+            "sourceFilesVerifiedBefore"
+          ],
+          "op": "value_equal",
+          "value": 1786
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-ambiguity-01/ambiguity/original-export.json",
+          "path": [
+            "sourceFilesVerifiedAfter"
+          ],
+          "op": "value_equal",
+          "value": 1786
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-ambiguity-01/ambiguity/original-export.json",
+          "path": [
+            "sourceInventoryUnchanged"
+          ],
+          "op": "value_equal",
+          "value": true
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-ambiguity-01/ambiguity/original-export.json",
+          "path": [
+            "counts",
+            "chains"
+          ],
+          "op": "value_equal",
+          "value": 1
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-ambiguity-01/ambiguity/original-export.json",
+          "path": [
+            "counts",
+            "chainOperations"
+          ],
+          "op": "value_equal",
+          "value": 50
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-ambiguity-01/ambiguity/original-export.json",
+          "path": [
+            "counts",
+            "sourceExceptions"
+          ],
+          "op": "value_equal",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "name": "binding-boundary-original",
+      "argv": [
+        "python",
+        "-B",
+        "scripts/export-observed-binding-reference.py",
+        "--journal",
+        "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-boundary-01/boundary/actual-operations.json",
+        "--fixture",
+        "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-boundary-01/boundary/original-replay.json.gz",
+        "--receipt",
+        "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-boundary-01/boundary/original-export.json"
+      ],
+      "env": {
+        "PYTHONHASHSEED": "0",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "timeoutSeconds": 120,
+      "totalTimeoutSeconds": 180,
+      "expectedExitCode": 0,
+      "outputPaths": [
+        "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-boundary-01/boundary/original-replay.json.gz",
+        "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-boundary-01/boundary/original-export.json"
+      ],
+      "assertions": [
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-boundary-01/boundary/original-export.json",
+          "path": [
+            "status"
+          ],
+          "op": "value_equal",
+          "value": "passed"
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-boundary-01/boundary/original-export.json",
+          "path": [
+            "mode"
+          ],
+          "op": "value_equal",
+          "value": "captured-public-journals"
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-boundary-01/boundary/original-export.json",
+          "path": [
+            "sourceFilesVerifiedBefore"
+          ],
+          "op": "value_equal",
+          "value": 1786
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-boundary-01/boundary/original-export.json",
+          "path": [
+            "sourceFilesVerifiedAfter"
+          ],
+          "op": "value_equal",
+          "value": 1786
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-boundary-01/boundary/original-export.json",
+          "path": [
+            "sourceInventoryUnchanged"
+          ],
+          "op": "value_equal",
+          "value": true
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-boundary-01/boundary/original-export.json",
+          "path": [
+            "counts",
+            "chains"
+          ],
+          "op": "value_equal",
+          "value": 1
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-boundary-01/boundary/original-export.json",
+          "path": [
+            "counts",
+            "chainOperations"
+          ],
+          "op": "value_equal",
+          "value": 114
+        },
+        {
+          "file": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-boundary-01/boundary/original-export.json",
+          "path": [
+            "counts",
+            "sourceExceptions"
+          ],
+          "op": "value_equal",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "name": "motif-review",
+      "argv": [
+        "python",
+        "-B",
+        "docs/migration/lot8a-evidence/tools/review-motif-common-capture.py",
+        "--input",
+        "docs/migration/lot8a-evidence/qualification-provisional-01/common/motif-caller-01.json",
+        "--output",
+        "docs/migration/lot8a-evidence/qualification-provisional-01/common/motif-caller-review-01.json"
+      ],
+      "env": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "timeoutSeconds": 60,
+      "totalTimeoutSeconds": 120,
+      "expectedExitCode": 0,
+      "outputPaths": [
+        "docs/migration/lot8a-evidence/qualification-provisional-01/common/motif-caller-review-01.json"
+      ],
+      "assertions": [
+        {
+          "file": "docs/migration/lot8a-evidence/qualification-provisional-01/common/motif-caller-review-01.json",
+          "path": [
+            "status"
+          ],
+          "op": "value_equal",
+          "value": "passed"
+        },
+        {
+          "file": "docs/migration/lot8a-evidence/qualification-provisional-01/common/motif-caller-review-01.json",
+          "path": [
+            "checks",
+            "total"
+          ],
+          "op": "value_equal",
+          "value": 20
+        },
+        {
+          "file": "docs/migration/lot8a-evidence/qualification-provisional-01/common/motif-caller-review-01.json",
+          "path": [
+            "checks",
+            "passed"
+          ],
+          "op": "value_equal",
+          "value": 20
+        },
+        {
+          "file": "docs/migration/lot8a-evidence/qualification-provisional-01/common/motif-caller-review-01.json",
+          "path": [
+            "checks",
+            "failures"
+          ],
+          "op": "list_empty"
+        }
+      ]
+    }
+  ],
+  "executionPolicy": {
+    "explicitRootGoPerStage": true,
+    "automaticRetry": false,
+    "maximumConcurrentNativeQualifications": 1,
+    "noLiveGames": true,
+    "newOriginalOraclesInThisCapturePlan": true,
+    "sourceComparisons": "The four original exports are fresh component/attention computations from public journals. Comparison to native state is a later declared review after original bytes exist. Motif review is data-only and launches no oracle.",
+    "quiet": "Informational metadata only; no global lock or predecessor publication required for ordinary functional qualification.",
+    "declaredOriginalOracleStages": 4,
+    "globalLockRequired": false,
+    "waitForOtherLotPublication": false,
+    "officialPerformanceOrPublication": false
+  },
+  "costRule": {
+    "games": [
+      "STCK",
+      "SMLP"
+    ],
+    "metric": "pooled_complete_session_median",
+    "strictUpperBoundPercent": 10,
+    "phaseOverrunsAllowedWhenBothGlobalCriteriaPass": true,
+    "officialCostExecuted": false,
+    "requiredBaseline": "actual published0.64"
+  },
+  "limits": {
+    "passiveOwnerRequirementsAreEmpty": true,
+    "seventeenHistoricalProjectionsOnly": true,
+    "fullCallerParity": false,
+    "sameEpisodeThreeOwnerActivation": false,
+    "LKEY": "Permanently closed, no payload/oracle/replay/game; four named loading modules excluded from execution."
+  },
+  "previousPlan": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/capture-regression-plan.json",
+    "sha256": "de60bc3c2b0196826a7ead64e366af18b5fb59bf0c5b01324275342f17293a92",
+    "bytes": 32447
+  },
+  "supersedesProspectively": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/original-export-and-motif-review-plan.json",
+    "sha256": "67602bd9c1e38ba2a0342ea81b375e3e17cde29c9f278e9f7f4d530f4b879adf",
+    "bytes": 29541
+  },
+  "currentWorkPolicy": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/current-work-lock-policy.json",
+    "sha256": "95d81233c9a267fc07df4ded2f764c059b47c1498bb369955e2cb5fcc2587914",
+    "bytes": 1522
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "logos-engine.lot8a.composition-documentary-closure.v1",
+  "recordedAt": "2026-11-11T20:09:59.913786+00:00",
+  "status": "validated_source_checkpoint_remote_verified",
+  "validatedMilestoneCommit": "5e58345ff8f4b7461088cda9ed352596045f6878",
+  "validatedDeclarationCommit": "30c9a8944f1ffd3b76df14a5d5515c3ae9520e3d",
+  "remoteBranch": "lot8a-motif-checkpoint-20261111",
+  "primaryTransport": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/coordination/source-checkpoint-validation.json",
+    "sha256": "a495253b187ea6015cd3dd91171dad08443bb8f8cbc2a69848cf7c4738e56d0a",
+    "bytes": 2406
+  },
+  "validationSummary": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-summary.json",
+    "sha256": "679b118a0351c58792a9a9758c2026339754a2a9026c6b8d18cf241ddf3a4c0b",
+    "bytes": 10631
+  },
+  "updatedRoadmap": {
+    "path": "docs/migration/v6-delivery-roadmap.md",
+    "sha256": "51f26324705581eb31cfcf3981aaf0aa37fb5292753b7c341259480f89de0b6e",
+    "bytes": 292856
+  },
+  "updatedEvidenceIndex": {
+    "path": "docs/migration/lot8a-evidence/README.md",
+    "sha256": "059ff6b44d2eefaba56f2ed909351b5756d133e9f907d350e1247be368c14130",
+    "bytes": 11849
+  },
+  "onlyClosureChanges": [
+    "docs/migration/v6-delivery-roadmap.md",
+    "docs/migration/lot8a-evidence/README.md",
+    "docs/migration/lot8a-evidence/integration-provisional-063-064-01/coordination/source-checkpoint-validation.json",
+    "docs/migration/lot8a-evidence/integration-provisional-063-064-01/coordination/documentary-closure.json"
+  ],
+  "nativeTestScriptBuildMapAuditInputsChanged": false,
+  "sitePublicationPerformed": false,
+  "officialCostMeasured": false,
+  "qualification": "These documentary additions record the already verified source checkpoint. They do not create new functional, cost or Site-publication results. The next transport receipt identifies the final documentary commit without a self-reference loop."
+}

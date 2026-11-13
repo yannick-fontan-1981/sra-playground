@@ -1,0 +1,79 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "declaredAt": "2026-11-11T13:06:34.011938+00:00",
+  "cases": [
+    {
+      "id": "weav-051",
+      "game": "WEAV",
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+        "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3"
+      },
+      "trace": {
+        "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+        "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2"
+      }
+    }
+  ],
+  "passiveOwnerRequirements": [],
+  "inheritedCaseManifest": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/regression-cases.json",
+    "sha256": "a16f67724f53def79fe476716c12a61e8064df871911772731983fa2505da3a9",
+    "bytes": 8305
+  },
+  "inheritedRegressionSummary": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/regressions/regression-summary.json",
+    "sha256": "e1656a5ada566f7ecfaac76c044f7ccd12dad1104a984a91f1fef673c81d74b9"
+  },
+  "publishedProvenance": {
+    "siteVersion": 95,
+    "nativeVersion": "0.58.0",
+    "commit": "3a70463039768f7114edae7d94d7dd33b7f36aa8",
+    "publication": {
+      "path": "docs/migration/lot6a-evidence/publication/published-baseline-site95.json",
+      "sha256": "9cbd902227685d8679d5876cd9ce66fc333044d56d10123c15d9ff011c05a0cb"
+    }
+  },
+  "strictComparator": {
+    "path": "scripts/compare-v54-regressions.py",
+    "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "bytes": 18166
+  },
+  "strictComparisonCheckNames": [
+    "both runs passed with the same declared game and target",
+    "same production budgets, source reference and opaque game asset provenance",
+    "same complete initial public packet hash and public state",
+    "every archived public packet independently hashes to the v53 baseline",
+    "every archived host-only command equals its prior baseline command",
+    "same commands, complete returned packet hashes, animation lengths and primitive boundaries",
+    "same selected family/group/kind/subquestion, acquired prefix lengths and retained solver scalars",
+    "same retained coordination source/preferred entries and current guard scope",
+    "same historical epoch anchors with session namespace normalized",
+    "same inherited source-series event counts on every sealed prefix",
+    "same common request outcomes and retained caller acquisition counters",
+    "same natural level boundaries and retained-session caller counters",
+    "same final public result and retained-session operation counts",
+    "same retained mechanical-domain assessments",
+    "both source runs remained unchanged and imported no Python agent module",
+    "current replay used the declared complete frozen native source",
+    "current replay identifies the exact host-only baseline and public trace"
+  ],
+  "expectedChecksPerCase": 17,
+  "expectedComparisonChecks": 17,
+  "qualification": "Only the remaining WEAV recorded replay, at1536MiB in an exclusive execution interval after a demonstrated1024MiB V8 heap failure. Same immutable source, complete baseline/trace packets, released host, passive harness and17historical checks. All earlier failed invocations stay failed; peer success is memory-host evidence only. No live game or cost sample.",
+  "recoveryOf": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/regression-cases.json",
+    "sha256": "dc84ecc83902ecb71865710220b593df351dc0ca7ae6885561e986a509df7ea1",
+    "bytes": 8422
+  },
+  "memoryDiagnostic": {
+    "path": "docs/migration/lot6a-evidence/recovery/weav-memory/diagnostic.json",
+    "bytes": 3244,
+    "sha256": "dfe800f85aeead706f2b2d94005005ba0de8e10dc0fdc240d5894d3434c97c49"
+  },
+  "retainedFailedIntermediateSummary": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/released-weav-1024/regressions/regression-summary.json",
+    "bytes": 96790,
+    "sha256": "1d78b763cea02c0fd0b2086abd268356d0dd74185c96ba6906d34aeb991e4f7b"
+  }
+}

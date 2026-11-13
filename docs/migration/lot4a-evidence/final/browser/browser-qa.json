@@ -1,0 +1,29 @@
+{
+  "schema": "logos-engine.browser-qa.v1",
+  "status": "blocked_infrastructure",
+  "recordedAt": "2026-11-10T18:03:47.304267+00:00",
+  "nativeVersion": "0.50.0",
+  "nativeSourceDigest": "66be0948fdff5abe10b12d253bb4583db067aab2f5b7248632c9f9d443bc53fe",
+  "preview": "Managed preview at http://127.0.0.1:4173/ started successfully for the isolated checkout.",
+  "attempts": [
+    {
+      "action": "CDP navigation to returned preview URL",
+      "result": "Page.enable timed out"
+    },
+    {
+      "action": "Current accessibility state",
+      "result": "Page.getFrameTree timed out"
+    },
+    {
+      "action": "Supported desktop screenshot",
+      "result": "Chromium visibly displayed Cannot open this page, error code9, on preexisting Motivation tab."
+    },
+    {
+      "action": "Supported native address-bar navigation",
+      "result": "AT-SPI provider unavailable; registry reported zero provider connections."
+    }
+  ],
+  "gameActionsExecuted": 0,
+  "checks": [],
+  "qualification": "No browser-game or Pause/single-step success is claimed. Tool/browser infrastructure prevented a functional browser session. The frozen production build passed; real common-controller campaigns, Pause/abort tests, source parity and persistence retain their separately stated scopes. No source change or alternative server was introduced to bypass this failure."
+}

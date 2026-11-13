@@ -1,0 +1,18 @@
+{
+  "schema": "logos-engine.native-campaign-resolution.v1",
+  "game": "SYME",
+  "selection": "docs/migration/lot2b-evidence/final/syme-selection.json",
+  "execution": "docs/migration/lot2b-evidence/final/syme-control-attention/execution-syme.json",
+  "resolvedAt": "2026-11-09T19:35:14.511688+00:00",
+  "secondsSinceSelection": 107.606312,
+  "status": "target_reached",
+  "levelsCompleted": 3,
+  "targetLevels": 3,
+  "actions": 36,
+  "prefixes": 14,
+  "officialState": "NOT_FINISHED",
+  "stoppedAtLevel": 4,
+  "sessionCount": 1,
+  "historicalSuccessKnown": true,
+  "qualification": "Fresh cold multi-level delivery regression; no first-ever or new control-provider success attributed."
+}

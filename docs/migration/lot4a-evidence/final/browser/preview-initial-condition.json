@@ -1,0 +1,6 @@
+{
+  "schema": "logos-engine.lot4a.preview-initial-condition.v1",
+  "observation": "Existing managed preview served a Motivation documentation page; browser inventory showed only production sign-in and the local Motivation page, no active game session. Initial start refused the active daemon lock. Reused supported stop/start workflow for the isolated lot4A checkout.",
+  "priorLocalUrl": "http://127.0.0.1:4173/motivation.html#content",
+  "codeOrGameStateEdited": false
+}

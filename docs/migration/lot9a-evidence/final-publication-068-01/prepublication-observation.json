@@ -1,0 +1,35 @@
+{
+  "schema": "logos-engine.lot9a.remote-publication-observation.v1",
+  "recordedAt": "2026-11-12T15:45:35.688Z",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "siteStatus": "active",
+  "siteVersion": 108,
+  "currentUserRole": "owner",
+  "currentLiveUrl": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "access": {
+    "mode": "custom",
+    "revision": 3,
+    "allowedUserCount": 1,
+    "allowedGroupCount": 0,
+    "externalVisitorCount": 0,
+    "ownerOnly": true
+  },
+  "latestSavedVersion": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_3d6cb049e7d08191882f1d0a7fed8343",
+    "versionNumber": 108,
+    "sourceCommit": "8462204043aa368faa7df280d796bb706eb53b38",
+    "deploymentId": "appgdep_6af5b61c537c8191b0a7252d3de9a4f9",
+    "archiveContentHash": "sha256:56eab1570b1cb343a4b40dbb6359a52bfbffcadb1a973a4601175678e5ed54a0"
+  },
+  "terminalDeploymentPreviouslyVerified": true,
+  "terminalDeploymentNotRepolled": true,
+  "nativeVersion": "0.67.0",
+  "candidateReservedVersion": "0.68.0",
+  "credentialStored": false,
+  "sourceMainRefFreshlyFetched": {
+    "commit": "8462204043aa368faa7df280d796bb706eb53b38",
+    "observedAt": "2026-11-12T15:43:25.858639+00:00",
+    "receipt": "docs/migration/lot9a-evidence/final-publication-068-01/official-cost-push-03.json"
+  },
+  "stage": "before_publication_lease"
+}

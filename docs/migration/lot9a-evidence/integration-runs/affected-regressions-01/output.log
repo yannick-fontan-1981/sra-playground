@@ -1,0 +1,32 @@
+✔ the real common runtime retains shared state through the opt-in immutable path (2376.981085ms)
+✔ native SRC/service/controller replays public HANO transitions without a Python solver (36554.243942ms)
+✔ native SRC/service/controller replays public SYME transitions without a Python solver (32139.997171ms)
+✔ native SRC/service/controller replays public DNOI transitions without a Python solver (21918.743182ms)
+✔ native service binds one immutable ticket, preserves it on resume and burns it after the witnessed action (18.105504ms)
+✔ bad outcome identity, timing and animation packets do not consume a native service authorization (4.575182ms)
+✔ a native backend state failure closes its authority and never resumes from partial evidence (14.342698ms)
+✔ native runtime defers family recording until a sealed prefix and ignores paused wall time (28.31062ms)
+✔ native current deadlines convert caller clock 10 to runtime clock 1000 (14.302534ms)
+✔ native current deadlines convert caller clock 1000 to runtime clock 10 (12.902252ms)
+✔ ordered reaction occupies its exact source entry with one cold owner and registered SRC (1170.006804ms)
+✔ foreign returns acquire ordered reaction once after sealing and before reactive contact (2904.429958ms)
+✔ selected ordered process uses WHY/ACT and acquires the complete restored animation packet exactly once (972.04543ms)
+✔ two source entries preserve priority while sharing one acquisition and one retained owner (29.94138ms)
+✔ a refusal at the earlier source entry stops the later entry (6.579264ms)
+✔ a current bounded-search witness respects its declared blocking flag (true) (7.252807ms)
+✔ a current bounded-search witness respects its declared blocking flag (false) (7.899047ms)
+✔ a current bounded-search witness respects its declared blocking flag (undefined) (4.926658ms)
+✔ a blocking witness cannot bypass current binding (stale_observation) (4.711787ms)
+✔ a blocking witness cannot bypass current binding (action_authority) (6.83204ms)
+✔ source-entry wiring rejects missing adapters, misalignment and malformed entries (0.393335ms)
+✔ recolor has one cold owner at its declared material position and uses the existing source program (1326.198181ms)
+✔ foreign public returns never become recolor records or selected recolor events (2824.012234ms)
+✔ four synthetic source selections and paints pass common WHY/ACT, acquire once and restore complete evidence (2170.96976ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 108444.816143

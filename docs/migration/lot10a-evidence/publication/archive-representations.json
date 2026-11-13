@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.publication-archive-representations.v1",
+  "recordedAt": "2026-11-11T00:40:34.717122+00:00",
+  "localUploadedGzip": {
+    "path": "/workspace/sites/lot10a-publication-20261111/site-step-5.tar.gz",
+    "bytes": 14805079,
+    "sha256": "68e7469f7ca505e84582e157b1d3b5c07977a43c39919f6e9158dc0faa5e69c3"
+  },
+  "localUncompressedTar": {
+    "bytes": 29890560,
+    "sha256": "2082a3840bba10923cc915e49dcc05778f46077f1779f54a2d23192170b8e9e4"
+  },
+  "serverSavedTar": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_000000000978820eb62ac087629f6cc3",
+    "content_hash": "sha256:11d54c5d3320c139561241638fdcbb9a33c0c2e895d9789a58c462d9c09b6072",
+    "size_bytes": 29880320,
+    "file_count": 75
+  },
+  "localFileCount": 75,
+  "validatedApplicationMembers": 75,
+  "localEveryMemberMatchesValidatedBuild": true,
+  "qualification": "These are separate archive representations. The Sites response describes its saved tar; it is not claimed byte-identical to the local gzip or raw tar stream. Local application members were individually verified. No server archive was downloaded or compared member by member. The standard save/deploy operation binds the supplied archive to the exact pushed commit."
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "logos-engine.native-restoration-comparator-validation.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T02:05:54.019831+00:00",
+  "generator": {
+    "path": "scripts/compare-native-restoration-paths.mjs",
+    "bytes": 11263,
+    "sha256": "da2468b0ff39dd30a67b46357aaf4c25ea3c94b21d569604e8b95542d2b36f0b"
+  },
+  "checks": [
+    {
+      "name": "v2_profile_schema_accepted",
+      "passed": true
+    },
+    {
+      "name": "v1_profile_schema_rejected",
+      "passed": true
+    }
+  ],
+  "checkCount": 2,
+  "qualification": "Schema alignment only, before any v2 diagnostic execution. Temporary synthetic fixtures; no profile/runtime/game executed. The earlier eleven-check receipt remains attached to its earlier comparator hash."
+}

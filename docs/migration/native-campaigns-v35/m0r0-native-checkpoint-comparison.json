@@ -1,0 +1,573 @@
+{
+  "schema": "logos-engine.v6.native-checkpoint-comparison.v1",
+  "qualification": "Comparison of recorded reports only; this script makes no game or agent calls. Equality is asserted for the initial public packet, 108 commands and their 108 complete public response packets, selected families, and committed prefix boundaries. The old full campaign failed later in L4; only its witnessed successful first three levels are compared. Native versions and target endpoints differ. Time reductions do not isolate individual copy/restore calls; no count of those calls or complete graph equality is claimed.",
+  "before": {
+    "path": "/workspace/scratch/656587eca20f/playground-site/.sites-checkout/docs/migration/native-campaigns-v35/m0r0-before-native-checkpoint.json",
+    "sha256": "1b2149aa6a86c156162ff03dcb67ac50b0228b193ed025cb4047d4d95379aac5",
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.6.0",
+    "sourceDigest": "f97d62f90e0726a1d6a834c944d4dcd4201d78ad46e9c15508448e80dc1c89c8",
+    "sourceFileCount": 116,
+    "requestedTarget": 6,
+    "entireCampaignStatus": "failed",
+    "entireCampaignFinal": {
+      "actions": 151,
+      "levelsCompleted": 3,
+      "level": 4,
+      "state": "NOT_FINISHED",
+      "status": "stopped",
+      "reason": "level_active_time_budget",
+      "activeSeconds": 559.556939295001,
+      "prefixes": 77,
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 151,
+        "boundaryReplays": 3,
+        "goalEvents": 3,
+        "frontierDeltas": 358,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 78
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 133
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 53
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 48
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 5
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 13
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 136
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      },
+      "fullV6Parity": false,
+      "sessions": 1,
+      "operationCounts": {
+        "init": 1,
+        "advance": 151,
+        "resume": 76
+      },
+      "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.6.0"
+    }
+  },
+  "after": {
+    "path": "/workspace/scratch/656587eca20f/playground-site/.sites-checkout/docs/migration/native-campaigns-v35/m0r0-three-levels.json",
+    "sha256": "7e8efb9728a6644bbd6ce49eb3fd5466c546d4cd327afffb1313dd4be47226ba",
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.6.2",
+    "sourceDigest": "5dca7abf6903cbd3af3363a4db9e192c8e730f9b6693af721ed1a14fb5ee9196",
+    "sourceFileCount": 117,
+    "requestedTarget": 3,
+    "entireCampaignStatus": "passed",
+    "entireCampaignFinal": {
+      "actions": 108,
+      "levelsCompleted": 3,
+      "level": 4,
+      "state": "NOT_FINISHED",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "activeSeconds": 186.68030742699983,
+      "prefixes": 34,
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 108,
+        "boundaryReplays": 2,
+        "goalEvents": 3,
+        "frontierDeltas": 229,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 35
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 47
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 33
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 9
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 4
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 13
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 50
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      },
+      "fullV6Parity": false,
+      "sessions": 1,
+      "operationCounts": {
+        "init": 1,
+        "advance": 108,
+        "resume": 33
+      },
+      "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.6.2"
+    }
+  },
+  "checks": [
+    {
+      "name": "fixed_game_and_requested_targets",
+      "passed": true
+    },
+    {
+      "name": "same_108_commands_and_109_complete_public_packets",
+      "passed": true
+    },
+    {
+      "name": "same_per_level_action_counts_19_27_62",
+      "passed": true
+    },
+    {
+      "name": "one_session_real_budgets_and_no_python_agent",
+      "passed": true
+    },
+    {
+      "name": "same_reference_and_game_assets",
+      "passed": true
+    },
+    {
+      "name": "source_manifests_match_their_saved_digests",
+      "passed": true
+    },
+    {
+      "name": "same_selected_families_and_committed_prefixes",
+      "passed": true
+    },
+    {
+      "name": "known_final_boundary_replay_difference",
+      "passed": true
+    }
+  ],
+  "witnesses": {
+    "commandsCompared": 108,
+    "completePublicPacketsCompared": 109,
+    "prefixesCompared": 34,
+    "perLevelActions": [
+      19,
+      27,
+      62
+    ],
+    "sessions": 1,
+    "pythonAgentModules": 0
+  },
+  "levels": [
+    {
+      "level": 1,
+      "actions": 19,
+      "beforeSeconds": 9.085596895000002,
+      "afterSeconds": 10.036529004,
+      "savedSeconds": -0.9509321089999982,
+      "reductionPercent": -10.46636913336223,
+      "ratioBeforeToAfter": 0.9052528908529025,
+      "beforePrefixCountCumulative": 5,
+      "afterPrefixCountCumulative": 5,
+      "beforeNodeCount": 303,
+      "afterNodeCount": 303,
+      "beforeGraphRevision": 681,
+      "afterGraphRevision": 681,
+      "timingQualification": "Same observed actions and both natural boundary replays are present. Real active-time comparison of the two integrated versions, not an isolated CPU benchmark."
+    },
+    {
+      "level": 2,
+      "actions": 27,
+      "beforeSeconds": 40.13380752800001,
+      "afterSeconds": 39.311432751999966,
+      "savedSeconds": 0.8223747760000464,
+      "reductionPercent": 2.049082373822375,
+      "ratioBeforeToAfter": 1.0209194811389368,
+      "beforePrefixCountCumulative": 11,
+      "afterPrefixCountCumulative": 11,
+      "beforeNodeCount": 693,
+      "afterNodeCount": 693,
+      "beforeGraphRevision": 1526,
+      "afterGraphRevision": 1526,
+      "timingQualification": "Same observed actions and both natural boundary replays are present. Real active-time comparison of the two integrated versions, not an isolated CPU benchmark."
+    },
+    {
+      "level": 3,
+      "actions": 62,
+      "beforeSeconds": 145.60633409100018,
+      "afterSeconds": 137.33234567099987,
+      "savedSeconds": 8.273988420000308,
+      "reductionPercent": 5.682437149217201,
+      "ratioBeforeToAfter": 1.060247921781092,
+      "beforePrefixCountCumulative": 34,
+      "afterPrefixCountCumulative": 34,
+      "beforeNodeCount": 1485,
+      "afterNodeCount": 1486,
+      "beforeGraphRevision": 4003,
+      "afterGraphRevision": 4004,
+      "timingQualification": "Includes the known endpoint difference: baseline target 6 replays the L3 boundary into L4; candidate target 3 stops after acquiring L3. The full level timing cannot isolate checkpoint savings from that omitted replay."
+    }
+  ],
+  "aggregateFirstTwoLevels": {
+    "beforeSeconds": 49.219404423000015,
+    "afterSeconds": 49.34796175599997,
+    "savedSeconds": -0.12855733299995364,
+    "reductionPercent": -0.2611923783049308,
+    "ratioBeforeToAfter": 0.9973948805902947,
+    "qualification": "Both reports continue after L2, so this aggregate avoids the final target-boundary replay difference."
+  },
+  "aggregateThreeLevels": {
+    "beforeSeconds": 194.8257385140002,
+    "afterSeconds": 186.68030742699983,
+    "savedSeconds": 8.145431087000361,
+    "reductionPercent": 4.180880385275698,
+    "ratioBeforeToAfter": 1.0436330494590897,
+    "qualification": "This total includes one fewer boundary replay in the candidate because its requested target is three levels."
+  },
+  "requestStatistics": {
+    "before": [
+      {
+        "level": 1,
+        "phase": "init",
+        "requests": 1,
+        "acquiredTransitions": 0,
+        "totalMs": 1265.6214300000006,
+        "minMs": 1265.6214300000006,
+        "maxMs": 1265.6214300000006,
+        "medianMs": 1265.6214300000006
+      },
+      {
+        "level": 1,
+        "phase": "acquire_one_transition",
+        "requests": 4,
+        "acquiredTransitions": 4,
+        "totalMs": 1938.4106770000008,
+        "minMs": 430.9754929999999,
+        "maxMs": 525.8980510000001,
+        "medianMs": 490.76856650000036
+      },
+      {
+        "level": 1,
+        "phase": "resume",
+        "requests": 4,
+        "acquiredTransitions": 0,
+        "totalMs": 1069.6818990000002,
+        "minMs": 227.23806100000002,
+        "maxMs": 319.79624500000045,
+        "medianMs": 261.32379649999984
+      },
+      {
+        "level": 1,
+        "phase": "continue_unsealed_prefix",
+        "requests": 14,
+        "acquiredTransitions": 0,
+        "totalMs": 190.77073000000019,
+        "minMs": 11.430010000000038,
+        "maxMs": 18.64618999999948,
+        "medianMs": 12.38047000000006
+      },
+      {
+        "level": 1,
+        "phase": "acquire_multiple_transitions",
+        "requests": 1,
+        "acquiredTransitions": 15,
+        "totalMs": 4615.889057,
+        "minMs": 4615.889057,
+        "maxMs": 4615.889057,
+        "medianMs": 4615.889057
+      },
+      {
+        "level": 2,
+        "phase": "resume",
+        "requests": 6,
+        "acquiredTransitions": 0,
+        "totalMs": 2981.0735559999957,
+        "minMs": 346.4945939999998,
+        "maxMs": 660.859620999996,
+        "medianMs": 483.0790959999995
+      },
+      {
+        "level": 2,
+        "phase": "acquire_one_transition",
+        "requests": 4,
+        "acquiredTransitions": 4,
+        "totalMs": 7287.062988999995,
+        "minMs": 1636.8442509999986,
+        "maxMs": 2132.129424999999,
+        "medianMs": 1759.0446564999984
+      },
+      {
+        "level": 2,
+        "phase": "continue_unsealed_prefix",
+        "requests": 21,
+        "acquiredTransitions": 0,
+        "totalMs": 513.4047450000035,
+        "minMs": 19.72450899999967,
+        "maxMs": 32.64032099999895,
+        "medianMs": 24.038778000001912
+      },
+      {
+        "level": 2,
+        "phase": "acquire_multiple_transitions",
+        "requests": 2,
+        "acquiredTransitions": 23,
+        "totalMs": 29296.916188,
+        "minMs": 10915.180615999998,
+        "maxMs": 18381.735572,
+        "medianMs": 14648.458094
+      },
+      {
+        "level": 3,
+        "phase": "resume",
+        "requests": 23,
+        "acquiredTransitions": 0,
+        "totalMs": 23696.37649200007,
+        "minMs": 619.6314509999938,
+        "maxMs": 2728.6471600000223,
+        "medianMs": 871.2408590000123
+      },
+      {
+        "level": 3,
+        "phase": "acquire_one_transition",
+        "requests": 16,
+        "acquiredTransitions": 16,
+        "totalMs": 59718.66147799985,
+        "minMs": 3203.2427819999866,
+        "maxMs": 4756.273749999993,
+        "medianMs": 3561.319150999996
+      },
+      {
+        "level": 3,
+        "phase": "continue_unsealed_prefix",
+        "requests": 39,
+        "acquiredTransitions": 0,
+        "totalMs": 754.8194799999619,
+        "minMs": 13.490315000002738,
+        "maxMs": 101.77359399999841,
+        "medianMs": 15.589905000000726
+      },
+      {
+        "level": 3,
+        "phase": "acquire_multiple_transitions",
+        "requests": 7,
+        "acquiredTransitions": 46,
+        "totalMs": 61419.38432499998,
+        "minMs": 4036.3609429999924,
+        "maxMs": 18001.250079999998,
+        "medianMs": 5915.354710999993
+      }
+    ],
+    "after": [
+      {
+        "level": 1,
+        "phase": "init",
+        "requests": 1,
+        "acquiredTransitions": 0,
+        "totalMs": 1415.5514949999997,
+        "minMs": 1415.5514949999997,
+        "maxMs": 1415.5514949999997,
+        "medianMs": 1415.5514949999997
+      },
+      {
+        "level": 1,
+        "phase": "acquire_one_transition",
+        "requests": 4,
+        "acquiredTransitions": 4,
+        "totalMs": 2197.477578,
+        "minMs": 502.40899700000045,
+        "maxMs": 637.8296729999993,
+        "medianMs": 528.6194540000001
+      },
+      {
+        "level": 1,
+        "phase": "resume",
+        "requests": 4,
+        "acquiredTransitions": 0,
+        "totalMs": 1067.0571069999996,
+        "minMs": 201.86710999999923,
+        "maxMs": 291.8003150000004,
+        "medianMs": 286.694841
+      },
+      {
+        "level": 1,
+        "phase": "continue_unsealed_prefix",
+        "requests": 14,
+        "acquiredTransitions": 0,
+        "totalMs": 203.97330799999872,
+        "minMs": 11.526232000000164,
+        "maxMs": 20.579478999999992,
+        "medianMs": 14.20535099999961
+      },
+      {
+        "level": 1,
+        "phase": "acquire_multiple_transitions",
+        "requests": 1,
+        "acquiredTransitions": 15,
+        "totalMs": 5145.885564,
+        "minMs": 5145.885564,
+        "maxMs": 5145.885564,
+        "medianMs": 5145.885564
+      },
+      {
+        "level": 2,
+        "phase": "resume",
+        "requests": 6,
+        "acquiredTransitions": 0,
+        "totalMs": 3120.9127290000033,
+        "minMs": 306.45096600000034,
+        "maxMs": 703.4668470000033,
+        "medianMs": 544.1142359999994
+      },
+      {
+        "level": 2,
+        "phase": "acquire_one_transition",
+        "requests": 4,
+        "acquiredTransitions": 4,
+        "totalMs": 7612.1739750000015,
+        "minMs": 1771.1383590000005,
+        "maxMs": 2103.9464149999985,
+        "medianMs": 1868.5446005000013
+      },
+      {
+        "level": 2,
+        "phase": "continue_unsealed_prefix",
+        "requests": 21,
+        "acquiredTransitions": 0,
+        "totalMs": 463.91231000001426,
+        "minMs": 19.3810650000014,
+        "maxMs": 28.140197000000626,
+        "medianMs": 21.731697999999597
+      },
+      {
+        "level": 2,
+        "phase": "acquire_multiple_transitions",
+        "requests": 2,
+        "acquiredTransitions": 23,
+        "totalMs": 28063.852620000005,
+        "minMs": 10170.500295000005,
+        "maxMs": 17893.352325,
+        "medianMs": 14031.926310000003
+      },
+      {
+        "level": 3,
+        "phase": "resume",
+        "requests": 23,
+        "acquiredTransitions": 0,
+        "totalMs": 21587.43127599996,
+        "minMs": 599.3713150000112,
+        "maxMs": 2065.2143890000007,
+        "medianMs": 802.7650759999815
+      },
+      {
+        "level": 3,
+        "phase": "acquire_one_transition",
+        "requests": 16,
+        "acquiredTransitions": 16,
+        "totalMs": 58111.893460000065,
+        "minMs": 3330.471875000003,
+        "maxMs": 4305.3124430000025,
+        "medianMs": 3539.127825500007
+      },
+      {
+        "level": 3,
+        "phase": "continue_unsealed_prefix",
+        "requests": 39,
+        "acquiredTransitions": 0,
+        "totalMs": 640.4827629998472,
+        "minMs": 13.28955099999439,
+        "maxMs": 31.6202340000018,
+        "medianMs": 15.38362199999392
+      },
+      {
+        "level": 3,
+        "phase": "acquire_multiple_transitions",
+        "requests": 7,
+        "acquiredTransitions": 46,
+        "totalMs": 56968.013618,
+        "minMs": 4208.404634000006,
+        "maxMs": 16933.057172,
+        "medianMs": 4914.451593000005
+      }
+    ],
+    "qualification": "Elapsed service-request durations from the reports, grouped by action-before level and newly acquired transitions. These are neither CPU samples nor an attribution to a specific function."
+  },
+  "sourceChanges": [
+    {
+      "path": "src/logos-engine/v6-auxiliary-support.ts",
+      "beforeSha256": "57369340ac0ae22a5664342980b7405e2489997c7e0115dd4a8237a8d60ed8e1",
+      "afterSha256": "6df9c42610bb7bd0e3e86333a659fbceb8780b0003696f92c3866ff033c25bef"
+    },
+    {
+      "path": "src/logos-engine/v6-coupled-pair-evidence.ts",
+      "beforeSha256": "fce7e238fb4a843a1de1e86c54ef0da8f8b0bbe0a469c3f926913afe1289a625",
+      "afterSha256": "eccadc2f8e0f24d98bf2bf6f2a0a879d862f6213bfbc02298d2fe28362ee5a17"
+    },
+    {
+      "path": "src/logos-engine/v6-native-authority.ts",
+      "beforeSha256": "d57fdde978070cf021037fb5aa73755b172b4c5c915e6dd104ad8fd202b24897",
+      "afterSha256": "b7b871e09a39004fb0a3b6a784c49f6a6f67b92a9a99ff886eefc4f5cba4018b"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "beforeSha256": "020c3493b448e43d32ed4b6fdd5a803b8e854ae43e92773b54800ff1aa06bc98",
+      "afterSha256": "ea0687d9b96ffdbf81058296cc144719b994fb9684d50a0b4c5618c65b7c3f7b"
+    },
+    {
+      "path": "src/logos-engine/v6-native-transition-domain.ts",
+      "beforeSha256": null,
+      "afterSha256": "e96f781bed5d88204cd347b61ee87b7dd3447b3f57b2ec6a4aba2e023fbe1621"
+    },
+    {
+      "path": "src/logos-engine/v6-native-types.ts",
+      "beforeSha256": "8581f225f15dec76c577edf7d1f22716b36224b1c59a31c2bd2ddee49eb6f9ff",
+      "afterSha256": "27b0700e86256a82c3f3f0255b359cfbd7032be6235c4cbde7e5f6da6b0bc303"
+    },
+    {
+      "path": "src/logos-engine/v6-shared-series.ts",
+      "beforeSha256": "2278feec9ed56b35e338bc0824cf2ac8456ea7420fca0bce98eac4c0cfac964e",
+      "afterSha256": "81538847ea52ca12f6461c4cf766d58377d284cf3bd143c8d6e552c6dc1b1025"
+    },
+    {
+      "path": "src/logos-engine/v6-transition-learning.ts",
+      "beforeSha256": "182c8db11fd7259395d23e1fd5fb87fbfb92f61f0baf5835183849a45ce6914f",
+      "afterSha256": "d086cfd9ad9601c8e6f8e627d8a34c1768f7408a0ea2c70fa1b2cc72a517e668"
+    }
+  ]
+}

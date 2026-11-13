@@ -1,0 +1,1 @@
+{"operation": "freeze", "directory": "docs/migration/lot10a-evidence/integrated-baseline", "verified": {"nativeSourceManifestDigest": "ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b", "files": 302, "nativeFiles": 291}}

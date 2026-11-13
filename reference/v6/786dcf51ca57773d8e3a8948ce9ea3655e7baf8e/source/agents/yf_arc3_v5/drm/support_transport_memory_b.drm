@@ -1,0 +1,104 @@
+{
+  "module_id": "arc3.support_transport_memory_b",
+  "declarations": [
+    {
+      "id": "principle.support_transport_memory_is_revisable_and_currently_bound",
+      "reason_refs": ["reason.transport_role_signatures_preserve_a_revisable_causal_assignment"],
+      "kind": "principle", "family_ref": "family.interaction_configuration",
+      "abstraction_level": "causal_variant",
+      "premises": ["selected_unique_transport_assignment_has_current_carrier_support"],
+      "invariants": ["palette_alone_never_assigns_a_role", "direct_control_and_contact_transport_remain_distinct", "portable_memory_has_no_positions_or_route", "matching_signatures_do_not_confirm_an_unmeasured_law", "current_recall_support_precedes_action_release"],
+      "falsifiers": ["observed_contact_effect_contradicts_the_provisional_push_model", "current_overlay_or_substrate_signature_is_incompatible"]
+    },
+    {
+      "id": "policy.qualify_support_transport_memory", "kind": "selection_policy",
+      "reason_refs": ["reason.selected_transport_assignment_precedes_role_memory_and_current_binding"],
+      "evaluation": "declared_eligibility_single", "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": ["support_memory.acquire", "support_memory.revalidate"],
+      "configuration": {"measurement_contract": {
+        "model_term_pattern": "memory.support_transport.{model_token}",
+        "model_claim_pattern": "claim.memory.support_transport.{model_token}"
+      }},
+      "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+      "meaning_template_ref_by_alternative": {
+        "support_memory.acquire": "rule.support_transport_memory",
+        "support_memory.revalidate": "rule.support_transport_memory"
+      },
+      "fact_projections": [
+        {"id": "projection.support_memory.acquire", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "support_memory.acquire"},
+          {"field": "has_acquisition", "operator": "equals", "expected": true},
+          {"field": "cell_support_transport_unique_witness_present", "operator": "equals", "expected": true},
+          {"field": "cell_support_transport_viable_assignment_count", "operator": "equals", "expected": 1}
+        ], "static_facts": {"eligible": true, "memory_case": "acquisition"}},
+        {"id": "projection.support_memory.revalidate", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "support_memory.revalidate"},
+          {"field": "has_revalidation", "operator": "equals", "expected": true},
+          {"field": "cell_support_transport_recalled_model_present", "operator": "equals", "expected": true},
+          {"field": "cell_support_transport_viable_assignment_count", "operator": "equals", "expected": 1}
+        ], "static_facts": {"eligible": true, "memory_case": "revalidation"}}
+      ]
+    },
+    {
+      "id": "rule.support_transport_memory", "kind": "rule", "evaluation": "project_requested_conclusions",
+      "reason_refs": ["reason.portable_roles_and_current_occurrences_have_distinct_evidence"],
+      "supported_operators": ["DERIVE"],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": ["source_selected_revisable_transport_assignment_and_exact_overlay_measurements"],
+      "invariants": ["acquisition_is_not_a_confirmed_push_law", "current_support_is_bound_to_this_observation", "historical_coordinates_are_not_portable"],
+      "term_templates": [
+        {"id_pattern": "memory.support_transport.{cell_support_transport_model_token}",
+          "kind": "schema", "label": "revisable portable support transport appearance model",
+          "required_fields": ["carrier_template", "item_template", "terminal_template", "model_claim_ref"],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.support_transport_appearance_model.v1",
+            "canonical_fact_projection_enabled": true, "memory_scope": "same_game",
+            "commitment": "revisable", "law_status": "provisional",
+            "drop_scene_local_bindings": true,
+            "current_claim_pattern": "claim.memory.support_transport.current.{binding_token}",
+            "terminal_goal_ref": "goal.complete_support_constrained_transport",
+            "terminal_relation": "all_required_items_simultaneously_occupy_compatible_terminals",
+            "canonical_role_link_constraints": {"allowed_statuses": ["supported", "established"], "disposition": "active", "polarity": "positive", "no_contradictions": true, "no_defeaters": true}
+          },
+          "attribute_bindings": {"carrier_template": "carrier_template", "item_template": "item_template",
+            "terminal_template": "terminal_template", "action_translation_deltas": "action_translation_deltas",
+            "model_claim_ref": "model_claim_ref", "role_premise_claim_refs": "model_premise_claim_refs"}},
+        {"id_pattern": "binding.support_transport.{cell_support_transport_current_binding_token}",
+          "kind": "schema", "label": "current revalidation of support transport role occurrences",
+          "required_fields": ["cell_support_transport_current_binding_token", "cell_support_transport_binding_frame_ref"],
+          "static_attributes": {"commitment": "revisable", "canonical_fact_projection_enabled": true},
+          "attribute_bindings": {"operational_scene_ref": "cell_support_transport_binding_frame_ref",
+            "model_ref": "cell_support_transport_recalled_model_ref",
+            "model_refs": "cell_support_transport_recalled_model_refs",
+            "action_refs": "cell_support_transport_route_action_refs",
+            "carrier_cell": "cell_support_transport_current_carrier_cell",
+            "item_cells": "cell_support_transport_current_item_cells",
+            "terminal_cells": "cell_support_transport_current_terminal_cells",
+            "traversable_cells": "cell_support_transport_current_traversable_cells",
+            "item_count": "cell_support_transport_current_item_count",
+            "terminal_count": "cell_support_transport_current_terminal_count"}}
+      ],
+      "claim_templates": [
+        {"id_pattern": "claim.memory.support_transport.{cell_support_transport_model_token}",
+          "predicate": "supports_revisable_support_transport_appearance_model", "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": ["memory.support_transport.{cell_support_transport_model_token}"],
+          "required_fields": ["carrier_template", "item_template", "terminal_template", "model_claim_ref"],
+          "required_term_patterns": ["memory.support_transport.{cell_support_transport_model_token}"],
+          "static_attributes": {"commitment": "revisable", "law_status": "provisional", "falsifier": "observed_contact_effect_or_role_signature_contradicts_model"}},
+        {"id_pattern": "claim.memory.support_transport.current.{cell_support_transport_current_binding_token}",
+          "predicate": "current_support_transport_model_has_exact_role_occurrences", "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": ["binding.support_transport.{cell_support_transport_current_binding_token}", "{cell_support_transport_recalled_model_ref}"],
+          "required_fields": ["cell_support_transport_current_binding_token", "cell_support_transport_binding_frame_ref"],
+          "required_term_patterns": ["binding.support_transport.{cell_support_transport_current_binding_token}", "{cell_support_transport_recalled_model_ref}"],
+          "attribute_bindings": {"memory_revalidation_observation_ref": "cell_support_transport_binding_frame_ref"},
+          "static_attributes": {"commitment": "revisable", "falsifier": "current_template_substrate_or_command_binding_changes"}}
+      ]
+    }
+  ]
+}

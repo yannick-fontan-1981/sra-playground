@@ -1,0 +1,640 @@
+{
+  "schema": "logos-engine.empty-series-observer-extension-qualification.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T00:28:57.964240+00:00",
+  "generator": {
+    "path": "scripts/qualify-empty-series-extension.py",
+    "sha256": "84ecb558abd1f899d4398da5d4deb7907d95cce1554ee777b940bf44a2c15ddb",
+    "bytes": 11821
+  },
+  "strictSummary": {
+    "path": "docs/migration/lot3b-evidence/final/regressions/strict-regression-summary.json",
+    "sha256": "2772268342938495ac2ad58c899a9cb45d282b6ed7fa2b77549161cdfffafbef",
+    "bytes": 69186
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot3b-evidence/final/regressions/strict-regression-summary.json",
+      "sha256": "2772268342938495ac2ad58c899a9cb45d282b6ed7fa2b77549161cdfffafbef",
+      "bytes": 69186
+    },
+    {
+      "path": "scripts/compare-v54-regressions.py",
+      "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+      "bytes": 18166
+    },
+    {
+      "path": "scripts/qualify-empty-series-extension.py",
+      "sha256": "84ecb558abd1f899d4398da5d4deb7907d95cce1554ee777b940bf44a2c15ddb",
+      "bytes": 11821
+    },
+    {
+      "path": "docs/migration/lot3b-evidence/recorded-regression-cases.json",
+      "sha256": "afc197f0253ff09b06194823024c518ebcb7c3751a121a1260c119eadb64b5fa",
+      "bytes": 917
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-campaign.json.gz",
+      "sha256": "e41fea4b37b249041c813c3755ea26a0886f466d9b5d6012940f782106c1889e",
+      "bytes": 2175375
+    },
+    {
+      "path": "docs/migration/lot3b-evidence/final/regressions/rswp-038-replay.json.gz",
+      "sha256": "2b4971c486f742645fd26d88fdfefe5ff40b1bf87a1f6d37073de5717292548e",
+      "bytes": 2176309
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+      "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755",
+      "bytes": 41445
+    },
+    {
+      "path": "docs/migration/lot3b-evidence/final/regressions/rswp-038-comparison.json",
+      "sha256": "4b13d4aa54a87c7d0590affa1253ee8bc3d5f96370c66ea9797e468053508663",
+      "bytes": 10781
+    },
+    {
+      "path": "docs/migration/lot3b-evidence/final/regressions/rswp-038-execution.json",
+      "sha256": "5ae640bedb80f756ef377ecfbc1e3ae179d03b68a49a30e1afe5e3e8eb35978e",
+      "bytes": 4945
+    },
+    {
+      "path": "docs/migration/lot3b-evidence/final/regressions/rswp-038-passive-owner-presence.json",
+      "sha256": "353b3e42ae397e30852300d48c65d569a8b468fb35aba79a85de16d79e9c02ff",
+      "bytes": 1077
+    }
+  ],
+  "nativeSourceDigest": "49648e72cf7d3d719addfe4a6bebd8c29842a0f618664a45ef3929a5d17132b1",
+  "declaredExtension": {
+    "counterField": "chamberRelationEventCount",
+    "acquiredEventsField": "chamberRelationAcquiredEvents",
+    "captureField": "observedChamberRelations",
+    "planField": "chamber_relation_plan"
+  },
+  "strictStatus": "failed",
+  "strictComparisonChecksPassed": 16,
+  "strictComparisonChecksExpected": 17,
+  "qualifiedCases": 1,
+  "cases": [
+    {
+      "case": "rswp-038",
+      "game": "RSWP",
+      "status": "qualified_empty_observer_extension",
+      "strictComparisonPassed": false,
+      "strictChecksPassed": 16,
+      "strictChecksExpected": 17,
+      "strictFailure": "same inherited source-series event counts on every sealed prefix",
+      "strictChecksExactlyReproduced": true,
+      "compared": {
+        "commands": 19,
+        "completePublicPackets": 20,
+        "prefixes": 11,
+        "requests": 30,
+        "naturalLevelBoundaries": 3,
+        "animationFrames": 221
+      },
+      "final": {
+        "actions": 19,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 21.342619165000002,
+        "prefixes": 11,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 19,
+          "boundaryReplays": 2,
+          "goalEvents": 3,
+          "frontierDeltas": 39,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 12
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 12
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 12
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 11
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 1
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 12
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology"
+          ],
+          "morphologyProvider": {
+            "status": "partial_current_measurements_control_attention_and_methods",
+            "state_owner": "family_state:morphology",
+            "motion_owner": "caller:goal",
+            "forecast_owner": "family_state:public_observed_inventory",
+            "current_decision_scope": "one_source_selection_cycle",
+            "attention_owner": "caller:attention",
+            "method_owner": "caller:counters.targetMethod",
+            "entry_return_owner": "family_state:morphology.entry_access_return",
+            "connected_methods": [
+              "retained_station_method",
+              "entry_access_return",
+              "entry_rebind",
+              "entry_probe",
+              "managed_capacity",
+              "target_extension_continuation"
+            ],
+            "pending": [
+              "complete_original_caller_parity_and_domain_closure"
+            ]
+          },
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 19,
+          "resume": 10
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.39.0"
+      },
+      "inheritedCountsExactlyEqual": true,
+      "inheritedBaselineProjectionSha256": "1f7f7680d8337fad7818c06b9193099a0aca119571c0b2f87f547dd27506446d",
+      "inheritedCurrentProjectionSha256": "1f7f7680d8337fad7818c06b9193099a0aca119571c0b2f87f547dd27506446d",
+      "forbiddenCaptureAndPlanPaths": [],
+      "prefixes": [
+        {
+          "prefixIndex": 0,
+          "prefixId": "prefix_evidence:1",
+          "addedCounter": {
+            "chamberRelationEventCount": 0
+          },
+          "addedAcquiredEvents": {
+            "chamberRelationAcquiredEvents": []
+          },
+          "inheritedCountKeys": [
+            "alternatingGraphContactCount",
+            "alternatingGraphEvidenceCount",
+            "alternatingGraphRemovalCount",
+            "alternatingGraphSampleCount",
+            "catalogueEventCount",
+            "cellPlacementEvidenceCount",
+            "eventCount",
+            "fieldServiceEventCount",
+            "labeledSequenceSubmissionCount",
+            "linkedPacketEvidenceCount",
+            "markedCollectionResultCount",
+            "pairEvidenceCount",
+            "panelServiceEventCount",
+            "productPanelStateCount",
+            "programEditSampleCount",
+            "programExtensionRefusalCount",
+            "programInputSupportCount",
+            "programPhaseAlignmentCount",
+            "programReconciliationCount",
+            "queuedFieldModelCount",
+            "radialPortEffectCount",
+            "respondentModelCount",
+            "respondentProbeCount",
+            "rootedQuotaStateCount",
+            "supportControlModelCount",
+            "supportPreparationCount",
+            "traceFieldExtensionCount",
+            "typedMaterialEventCount"
+          ],
+          "inheritedCountProjectionSha256": "93f04a19ee9a5f211a4c9a36c43b63c3b67a997724210501e91361f8dc49101d"
+        },
+        {
+          "prefixIndex": 1,
+          "prefixId": "prefix_evidence:2",
+          "addedCounter": {
+            "chamberRelationEventCount": 0
+          },
+          "addedAcquiredEvents": {
+            "chamberRelationAcquiredEvents": []
+          },
+          "inheritedCountKeys": [
+            "alternatingGraphContactCount",
+            "alternatingGraphEvidenceCount",
+            "alternatingGraphRemovalCount",
+            "alternatingGraphSampleCount",
+            "catalogueEventCount",
+            "cellPlacementEvidenceCount",
+            "eventCount",
+            "fieldServiceEventCount",
+            "labeledSequenceSubmissionCount",
+            "linkedPacketEvidenceCount",
+            "markedCollectionResultCount",
+            "pairEvidenceCount",
+            "panelServiceEventCount",
+            "productPanelStateCount",
+            "programEditSampleCount",
+            "programExtensionRefusalCount",
+            "programInputSupportCount",
+            "programPhaseAlignmentCount",
+            "programReconciliationCount",
+            "queuedFieldModelCount",
+            "radialPortEffectCount",
+            "respondentModelCount",
+            "respondentProbeCount",
+            "rootedQuotaStateCount",
+            "supportControlModelCount",
+            "supportPreparationCount",
+            "traceFieldExtensionCount",
+            "typedMaterialEventCount"
+          ],
+          "inheritedCountProjectionSha256": "5f9191003fd26daf51f5cb87cffa4a66344ec6ef5810e5561651695d9be4a56f"
+        },
+        {
+          "prefixIndex": 2,
+          "prefixId": "prefix_evidence:3",
+          "addedCounter": {
+            "chamberRelationEventCount": 0
+          },
+          "addedAcquiredEvents": {
+            "chamberRelationAcquiredEvents": []
+          },
+          "inheritedCountKeys": [
+            "alternatingGraphContactCount",
+            "alternatingGraphEvidenceCount",
+            "alternatingGraphRemovalCount",
+            "alternatingGraphSampleCount",
+            "catalogueEventCount",
+            "cellPlacementEvidenceCount",
+            "eventCount",
+            "fieldServiceEventCount",
+            "labeledSequenceSubmissionCount",
+            "linkedPacketEvidenceCount",
+            "markedCollectionResultCount",
+            "pairEvidenceCount",
+            "panelServiceEventCount",
+            "productPanelStateCount",
+            "programEditSampleCount",
+            "programExtensionRefusalCount",
+            "programInputSupportCount",
+            "programPhaseAlignmentCount",
+            "programReconciliationCount",
+            "queuedFieldModelCount",
+            "radialPortEffectCount",
+            "respondentModelCount",
+            "respondentProbeCount",
+            "rootedQuotaStateCount",
+            "supportControlModelCount",
+            "supportPreparationCount",
+            "traceFieldExtensionCount",
+            "typedMaterialEventCount"
+          ],
+          "inheritedCountProjectionSha256": "ed6a846b5af3b21b2f6b54f62306e586cfd0e1819af2895a3e60d0c0b94fc63f"
+        },
+        {
+          "prefixIndex": 3,
+          "prefixId": "prefix_evidence:4",
+          "addedCounter": {
+            "chamberRelationEventCount": 0
+          },
+          "addedAcquiredEvents": {
+            "chamberRelationAcquiredEvents": []
+          },
+          "inheritedCountKeys": [
+            "alternatingGraphContactCount",
+            "alternatingGraphEvidenceCount",
+            "alternatingGraphRemovalCount",
+            "alternatingGraphSampleCount",
+            "catalogueEventCount",
+            "cellPlacementEvidenceCount",
+            "eventCount",
+            "fieldServiceEventCount",
+            "labeledSequenceSubmissionCount",
+            "linkedPacketEvidenceCount",
+            "markedCollectionResultCount",
+            "pairEvidenceCount",
+            "panelServiceEventCount",
+            "productPanelStateCount",
+            "programEditSampleCount",
+            "programExtensionRefusalCount",
+            "programInputSupportCount",
+            "programPhaseAlignmentCount",
+            "programReconciliationCount",
+            "queuedFieldModelCount",
+            "radialPortEffectCount",
+            "respondentModelCount",
+            "respondentProbeCount",
+            "rootedQuotaStateCount",
+            "supportControlModelCount",
+            "supportPreparationCount",
+            "traceFieldExtensionCount",
+            "typedMaterialEventCount"
+          ],
+          "inheritedCountProjectionSha256": "a505371505f256046b96a0d3a7d2640a9ba1cefdecdf2c2619a0b8973b1a2986"
+        },
+        {
+          "prefixIndex": 4,
+          "prefixId": "prefix_evidence:7",
+          "addedCounter": {
+            "chamberRelationEventCount": 0
+          },
+          "addedAcquiredEvents": {
+            "chamberRelationAcquiredEvents": []
+          },
+          "inheritedCountKeys": [
+            "alternatingGraphContactCount",
+            "alternatingGraphEvidenceCount",
+            "alternatingGraphRemovalCount",
+            "alternatingGraphSampleCount",
+            "catalogueEventCount",
+            "cellPlacementEvidenceCount",
+            "eventCount",
+            "fieldServiceEventCount",
+            "labeledSequenceSubmissionCount",
+            "linkedPacketEvidenceCount",
+            "markedCollectionResultCount",
+            "pairEvidenceCount",
+            "panelServiceEventCount",
+            "productPanelStateCount",
+            "programEditSampleCount",
+            "programExtensionRefusalCount",
+            "programInputSupportCount",
+            "programPhaseAlignmentCount",
+            "programReconciliationCount",
+            "queuedFieldModelCount",
+            "radialPortEffectCount",
+            "respondentModelCount",
+            "respondentProbeCount",
+            "rootedQuotaStateCount",
+            "supportControlModelCount",
+            "supportPreparationCount",
+            "traceFieldExtensionCount",
+            "typedMaterialEventCount"
+          ],
+          "inheritedCountProjectionSha256": "d067220a568227810d6af15e731aa724f2c6d161c211a1ad31f07bde85833a58"
+        },
+        {
+          "prefixIndex": 5,
+          "prefixId": "prefix_evidence:8",
+          "addedCounter": {
+            "chamberRelationEventCount": 0
+          },
+          "addedAcquiredEvents": {
+            "chamberRelationAcquiredEvents": []
+          },
+          "inheritedCountKeys": [
+            "alternatingGraphContactCount",
+            "alternatingGraphEvidenceCount",
+            "alternatingGraphRemovalCount",
+            "alternatingGraphSampleCount",
+            "catalogueEventCount",
+            "cellPlacementEvidenceCount",
+            "eventCount",
+            "fieldServiceEventCount",
+            "labeledSequenceSubmissionCount",
+            "linkedPacketEvidenceCount",
+            "markedCollectionResultCount",
+            "pairEvidenceCount",
+            "panelServiceEventCount",
+            "productPanelStateCount",
+            "programEditSampleCount",
+            "programExtensionRefusalCount",
+            "programInputSupportCount",
+            "programPhaseAlignmentCount",
+            "programReconciliationCount",
+            "queuedFieldModelCount",
+            "radialPortEffectCount",
+            "respondentModelCount",
+            "respondentProbeCount",
+            "rootedQuotaStateCount",
+            "supportControlModelCount",
+            "supportPreparationCount",
+            "traceFieldExtensionCount",
+            "typedMaterialEventCount"
+          ],
+          "inheritedCountProjectionSha256": "0fe0b7425d149075265257d4e28992afe5285b2da7d74e36ac0a865be82d3108"
+        },
+        {
+          "prefixIndex": 6,
+          "prefixId": "prefix_evidence:11",
+          "addedCounter": {
+            "chamberRelationEventCount": 0
+          },
+          "addedAcquiredEvents": {
+            "chamberRelationAcquiredEvents": []
+          },
+          "inheritedCountKeys": [
+            "alternatingGraphContactCount",
+            "alternatingGraphEvidenceCount",
+            "alternatingGraphRemovalCount",
+            "alternatingGraphSampleCount",
+            "catalogueEventCount",
+            "cellPlacementEvidenceCount",
+            "eventCount",
+            "fieldServiceEventCount",
+            "labeledSequenceSubmissionCount",
+            "linkedPacketEvidenceCount",
+            "markedCollectionResultCount",
+            "pairEvidenceCount",
+            "panelServiceEventCount",
+            "productPanelStateCount",
+            "programEditSampleCount",
+            "programExtensionRefusalCount",
+            "programInputSupportCount",
+            "programPhaseAlignmentCount",
+            "programReconciliationCount",
+            "queuedFieldModelCount",
+            "radialPortEffectCount",
+            "respondentModelCount",
+            "respondentProbeCount",
+            "rootedQuotaStateCount",
+            "supportControlModelCount",
+            "supportPreparationCount",
+            "traceFieldExtensionCount",
+            "typedMaterialEventCount"
+          ],
+          "inheritedCountProjectionSha256": "45e7d160741ab606592472568613bff0a90aade6f4fd31608a66cd76472c63ab"
+        },
+        {
+          "prefixIndex": 7,
+          "prefixId": "prefix_evidence:12",
+          "addedCounter": {
+            "chamberRelationEventCount": 0
+          },
+          "addedAcquiredEvents": {
+            "chamberRelationAcquiredEvents": []
+          },
+          "inheritedCountKeys": [
+            "alternatingGraphContactCount",
+            "alternatingGraphEvidenceCount",
+            "alternatingGraphRemovalCount",
+            "alternatingGraphSampleCount",
+            "catalogueEventCount",
+            "cellPlacementEvidenceCount",
+            "eventCount",
+            "fieldServiceEventCount",
+            "labeledSequenceSubmissionCount",
+            "linkedPacketEvidenceCount",
+            "markedCollectionResultCount",
+            "pairEvidenceCount",
+            "panelServiceEventCount",
+            "productPanelStateCount",
+            "programEditSampleCount",
+            "programExtensionRefusalCount",
+            "programInputSupportCount",
+            "programPhaseAlignmentCount",
+            "programReconciliationCount",
+            "queuedFieldModelCount",
+            "radialPortEffectCount",
+            "respondentModelCount",
+            "respondentProbeCount",
+            "rootedQuotaStateCount",
+            "supportControlModelCount",
+            "supportPreparationCount",
+            "traceFieldExtensionCount",
+            "typedMaterialEventCount"
+          ],
+          "inheritedCountProjectionSha256": "ad1e87705931d615b630b2a6f010d6cd1f2a83a7e7082e1fd0c48d18e360c263"
+        },
+        {
+          "prefixIndex": 8,
+          "prefixId": "prefix_evidence:15",
+          "addedCounter": {
+            "chamberRelationEventCount": 0
+          },
+          "addedAcquiredEvents": {
+            "chamberRelationAcquiredEvents": []
+          },
+          "inheritedCountKeys": [
+            "alternatingGraphContactCount",
+            "alternatingGraphEvidenceCount",
+            "alternatingGraphRemovalCount",
+            "alternatingGraphSampleCount",
+            "catalogueEventCount",
+            "cellPlacementEvidenceCount",
+            "eventCount",
+            "fieldServiceEventCount",
+            "labeledSequenceSubmissionCount",
+            "linkedPacketEvidenceCount",
+            "markedCollectionResultCount",
+            "pairEvidenceCount",
+            "panelServiceEventCount",
+            "productPanelStateCount",
+            "programEditSampleCount",
+            "programExtensionRefusalCount",
+            "programInputSupportCount",
+            "programPhaseAlignmentCount",
+            "programReconciliationCount",
+            "queuedFieldModelCount",
+            "radialPortEffectCount",
+            "respondentModelCount",
+            "respondentProbeCount",
+            "rootedQuotaStateCount",
+            "supportControlModelCount",
+            "supportPreparationCount",
+            "traceFieldExtensionCount",
+            "typedMaterialEventCount"
+          ],
+          "inheritedCountProjectionSha256": "abfe994e7749381cb3778e168957b3efc25300de3d05f44c52ce2106650b7378"
+        },
+        {
+          "prefixIndex": 9,
+          "prefixId": "prefix_evidence:16",
+          "addedCounter": {
+            "chamberRelationEventCount": 0
+          },
+          "addedAcquiredEvents": {
+            "chamberRelationAcquiredEvents": []
+          },
+          "inheritedCountKeys": [
+            "alternatingGraphContactCount",
+            "alternatingGraphEvidenceCount",
+            "alternatingGraphRemovalCount",
+            "alternatingGraphSampleCount",
+            "catalogueEventCount",
+            "cellPlacementEvidenceCount",
+            "eventCount",
+            "fieldServiceEventCount",
+            "labeledSequenceSubmissionCount",
+            "linkedPacketEvidenceCount",
+            "markedCollectionResultCount",
+            "pairEvidenceCount",
+            "panelServiceEventCount",
+            "productPanelStateCount",
+            "programEditSampleCount",
+            "programExtensionRefusalCount",
+            "programInputSupportCount",
+            "programPhaseAlignmentCount",
+            "programReconciliationCount",
+            "queuedFieldModelCount",
+            "radialPortEffectCount",
+            "respondentModelCount",
+            "respondentProbeCount",
+            "rootedQuotaStateCount",
+            "supportControlModelCount",
+            "supportPreparationCount",
+            "traceFieldExtensionCount",
+            "typedMaterialEventCount"
+          ],
+          "inheritedCountProjectionSha256": "1bbe424ddb281daf5974bb981c677e716552e894f1a154afd5772a8757970a9e"
+        },
+        {
+          "prefixIndex": 10,
+          "prefixId": "prefix_evidence:19",
+          "addedCounter": {
+            "chamberRelationEventCount": 0
+          },
+          "addedAcquiredEvents": {
+            "chamberRelationAcquiredEvents": []
+          },
+          "inheritedCountKeys": [
+            "alternatingGraphContactCount",
+            "alternatingGraphEvidenceCount",
+            "alternatingGraphRemovalCount",
+            "alternatingGraphSampleCount",
+            "catalogueEventCount",
+            "cellPlacementEvidenceCount",
+            "eventCount",
+            "fieldServiceEventCount",
+            "labeledSequenceSubmissionCount",
+            "linkedPacketEvidenceCount",
+            "markedCollectionResultCount",
+            "pairEvidenceCount",
+            "panelServiceEventCount",
+            "productPanelStateCount",
+            "programEditSampleCount",
+            "programExtensionRefusalCount",
+            "programInputSupportCount",
+            "programPhaseAlignmentCount",
+            "programReconciliationCount",
+            "queuedFieldModelCount",
+            "radialPortEffectCount",
+            "respondentModelCount",
+            "respondentProbeCount",
+            "rootedQuotaStateCount",
+            "supportControlModelCount",
+            "supportPreparationCount",
+            "traceFieldExtensionCount",
+            "typedMaterialEventCount"
+          ],
+          "inheritedCountProjectionSha256": "d1f436c53e41d435f293d4557eacb1c746239b07f2c58c66d181a97e88f95bfd"
+        }
+      ]
+    }
+  ],
+  "qualification": "Pure comparison of retained evidence, not a new game/replay/test/performance run. Every historical strict check is recomputed with the unchanged comparator and must exactly match its retained receipt; only the single inherited-count check may fail. The new named counter must be integer zero on every prefix, its new acquired-event list exactly empty, and the named capture/plan fields absent throughout the retained current report. All inherited counters are independently equal after projecting only the explicitly declared addition. The strict summary and case statuses remain failed. This qualified observer-schema extension does not claim full report, provider-state, proposal, private graph or complete V5/V6 identity, and does not modify the original gate."
+}

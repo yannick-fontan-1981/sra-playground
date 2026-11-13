@@ -1,0 +1,77 @@
+✔ Chart registers one cold owner at source position 24, with one shared SRC program and the same passive owner (241.921525ms)
+✖ cold production caller acquires gain, intermediate boundary loss and the next conditional route once (1964.187208ms)
+✖ a contrary current anchor revises the actual common owner and retains its source refutation (1389.928962ms)
+✔ ablating the selected acquisition preserves the physical return but removes the learned continuation (1729.362178ms)
+ℹ {"physicalReturns":1,"sourceAcquisitions":0,"suppressedAcquisitions":1,"changedContinuation":true,"commandChangeClaimed":false}
+✖ a retained Chart owner acquires one foreign return after its selection is disabled (scene changed: false) (1566.767244ms)
+✖ a retained Chart owner acquires one foreign return after its selection is disabled (scene changed: true) (1560.038071ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 2
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9462.011789
+
+✖ failing tests:
+
+test at tests/v6-chart-navigation-kernel.test.ts:110:1
+✖ cold production caller acquires gain, intermediate boundary loss and the next conditional route once (1964.187208ms)
+  AssertionError [ERR_ASSERTION]: The source fact is actually restored
+      at acquired (file:///workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/tests/v6-chart-navigation-kernel.test.ts:85:10)
+      at TestContext.<anonymous> (file:///workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/tests/v6-chart-navigation-kernel.test.ts:123:46)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/v6-chart-navigation-kernel.test.ts:141:1
+✖ a contrary current anchor revises the actual common owner and retains its source refutation (1389.928962ms)
+  AssertionError [ERR_ASSERTION]: The source fact is actually restored
+      at acquired (file:///workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/tests/v6-chart-navigation-kernel.test.ts:85:10)
+      at TestContext.<anonymous> (file:///workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/tests/v6-chart-navigation-kernel.test.ts:148:46)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/v6-chart-navigation-kernel.test.ts:177:38
+✖ a retained Chart owner acquires one foreign return after its selection is disabled (scene changed: false) (1566.767244ms)
+  AssertionError [ERR_ASSERTION]: The source fact is actually restored
+      at acquired (file:///workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/tests/v6-chart-navigation-kernel.test.ts:85:10)
+      at TestContext.<anonymous> (file:///workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/tests/v6-chart-navigation-kernel.test.ts:187:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/v6-chart-navigation-kernel.test.ts:177:38
+✖ a retained Chart owner acquires one foreign return after its selection is disabled (scene changed: true) (1560.038071ms)
+  AssertionError [ERR_ASSERTION]: The source fact is actually restored
+      at acquired (file:///workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/tests/v6-chart-navigation-kernel.test.ts:85:10)
+      at TestContext.<anonymous> (file:///workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/tests/v6-chart-navigation-kernel.test.ts:187:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

@@ -1,0 +1,34 @@
+--- docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs
++++ docs/migration/lot8b-evidence/tools/final-functional/branch-common-qualify-v2.mjs
+@@ -17,10 +17,12 @@
+ import { symbolicDigest } from '../../../../../src/logos-engine/v6-hash.ts';
+ 
+ const SCRIPT = fileURLToPath(import.meta.url), ROOT = resolve(dirname(SCRIPT), '../../../../..');
+-const BASE = resolve(ROOT, 'docs/migration/lot8b-evidence'), OWNER = 'branch_routing', EPISODE = 'common-observation-frontier';
++const BASE = resolve(ROOT, 'docs/migration/lot8b-evidence/final-version-067-01'), OWNER = 'branch_routing', EPISODE = 'common-observation-frontier';
+ const CAPTURE = resolve(dirname(SCRIPT), 'branch-common-capture-v2.mjs');
+ const PREVIOUS_ATTEMPT = 'docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/capture.receipt.json';
+-const DERIVATION = 'docs/migration/lot8a-evidence/tools/work-forms/qualify-cost-owner-graphs.mjs';
++const DERIVATION = 'docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs';
++const EXPECTED_NATIVE = { fileCount: 331, digest: 'c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a' };
++const EXPECTED_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.67.0';
+ const FIXTURE = 'tests/fixtures/v6-branch-routing-reference.json', REFERENCE = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
+ const FIXTURE_SHA256 = 'e6ae197b7b982bd41f561b9df8e458436d7ce0797f39bbf86d972e55472b6769';
+ const SINGLE = 'cold_four_calibrations_move_propagate_epoch', TRIPLE = 'cold_equal_cost_select_first_point_bind_move';
+@@ -175,6 +177,7 @@
+     const graph = row.knowledge, snapshot = row.snapshot;
+     if (!state.kernel) { state.runtimeDigest = snapshot.sourceDigest; state.kernel = new NativeKnowledgeStore(state.runtimeDigest, state.sessionId).kernel; }
+     assert.equal(snapshot.sourceDigest, state.runtimeDigest); assert.equal(snapshot.sourceCommit, REFERENCE);
++    assert.equal(snapshot.implementation, EXPECTED_IMPLEMENTATION);
+     assert.equal(graph.fromRevision, state.revision); assert.equal(graph.toRevision, state.revision + graph.deltasAdded.length);
+     for (const delta of graph.deltasAdded) {
+       assert.deepEqual(Object.keys(delta).sort(), ['cause', 'digest', 'node', 'previous', 'sequence', 'source_digest']);
+@@ -571,6 +574,8 @@
+     for (const key of ['officialPerformanceEligible', 'globalLockUsed', 'acquiredStateInjected', 'wholeCallerParity']) assert.equal(receipt[key], false);
+     for (const key of ['officialGameRuns', 'gameReplays', 'originalOraclesExecuted', 'measuredCostSessions']) assert.equal(receipt[key], 0);
+     assert.deepEqual(receipt.capture, report.capture); assert.deepEqual(receipt.nativeBefore, receipt.nativeAfter);
++    assert.deepEqual({ fileCount: receipt.nativeBefore.fileCount, digest: receipt.nativeBefore.digest }, EXPECTED_NATIVE);
++    assert.equal(receipt.nativeVersion, '0.67.0');
+     assert.deepEqual(receipt.inputsBefore, receipt.inputsAfter); assert.equal(receipt.sourceCommit, receipt.sourceCommitAfter);
+     assert.deepEqual(receipt.qualifier, report.generator); await input(CAPTURE, receipt.generator);
+     for (const record of receipt.inputsBefore) await input(record.path, record);

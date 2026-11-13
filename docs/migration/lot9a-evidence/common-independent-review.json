@@ -1,0 +1,302 @@
+{
+  "schema": "logos-engine.lot9a.common-independent-review.v1",
+  "reviewedAt": "2026-11-12T14:03:39.890356+00:00",
+  "reviewer": "/root/chart_contract",
+  "method": "Lecture des six tests common, des deux reçus et journaux existants, contrôle des hashes et comparaison statique des entrées. Aucune réexécution de moteur, test, oracle ou benchmark.",
+  "scope": "Qualification synthétique du raccordement common ChartNavigation et comptabilité des tentatives; les régressions affectées sont évaluées séparément.",
+  "disposition": "accepted_for_the_six_passed_synthetic_common_cases_with_session_bound_wording_reservation",
+  "headAtBothCommonAttempts": "d38a37bc5a589d3eea8e2b30d43725ea961e49d2",
+  "independence": {
+    "commonTestsAuthoredByReviewer": false,
+    "commonRuntimeIntegrationAuthoredByReviewer": false,
+    "referenceOracleAndFixtureAuthoredByReviewer": false,
+    "ownerAndPolicyAuthoredByReviewer": true,
+    "nativeContractTestsAuthoredByReviewer": true,
+    "independentCommonTestReview": true,
+    "independentOwnerImplementationReviewClaimed": false,
+    "qualification": "La revue est indépendante de la rédaction du kernel test, de son instrumentation et du corpus original. Elle ne constitue pas une revue indépendante du propriétaire ou de sa policy, que ce reviewer a écrits."
+  },
+  "artifacts": [
+    {
+      "path": "tests/v6-chart-navigation-kernel.test.ts",
+      "bytes": 15491,
+      "sha256": "f15c0d6f01ff9f565d5407628f2d27d5309d0e574cb7d26d7ff016e8dff91914"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/integration-declaration.json",
+      "bytes": 4026,
+      "sha256": "dcd1c81fef91222279c5cf7995b7ebe71ba6d1dfaaf10ecadd8ce27a73f8bf88"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/integration-runs/chart-common-01/receipt.json",
+      "bytes": 130899,
+      "sha256": "5f45b8064b88b5c0a1acb93c85b426e16f7f69b3f7d4c362f9fdb4fddfb26cfb"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/integration-runs/chart-common-02/receipt.json",
+      "bytes": 130917,
+      "sha256": "a279fc1f2eec8109b2f3987f97e4f772c5b40b0d856c7117c6ef1822a4f5480d"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/common-reader-correction-02.json",
+      "bytes": 1038,
+      "sha256": "aa3d604e059b1b2d29d622d888a9d6463765a2f12c6bcd5050ce59e8665998e7"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/reference-01/native-tests-01.json",
+      "bytes": 671,
+      "sha256": "5aff8c22640c8f911a796f25ef26ef9921ae45d8b71edb338ae5adb6e95deaa9"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/reference-01/reference.json.gz",
+      "bytes": 2053926,
+      "sha256": "0770706db16249ac4ab1c7c8b9533d571f2fc2cdaeaf5dae2d990806e412cfe8"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/reference-01/QUALIFICATION.md",
+      "bytes": 6558,
+      "sha256": "c9e797029947b11fb075b5994bcdea3eefbe0cfeb9f4894554240e62d89f3402"
+    }
+  ],
+  "integrity": {
+    "capturedInputsPerCommonAttempt": 367,
+    "attempt01InputsUnchangedWithinRun": true,
+    "attempt02InputsUnchangedWithinRun": true,
+    "changedCapturedPathsBetweenAttempts": [
+      "tests/v6-chart-navigation-kernel.test.ts"
+    ],
+    "currentFilesMatchingAttempt02Capture": false,
+    "currentTestSha256": "f15c0d6f01ff9f565d5407628f2d27d5309d0e574cb7d26d7ff016e8dff91914",
+    "inMemoryAttempt01ReconstructionSha256": "75dee87df11e242dee38a4e5b2ef3cb95cdcbf69483da224f27a43f4cde64911",
+    "reconstructionMatchesRecordedAttempt01Test": true,
+    "common01Log": {
+      "path": "docs/migration/lot9a-evidence/integration-runs/chart-common-01/output.log",
+      "bytes": 4345,
+      "sha256": "3de1f21919a8a1753c389b2ea01b5da3831c82224f832e5d367cc73b635aa521",
+      "matchesRecordedBytesAndSha256": true
+    },
+    "common02Log": {
+      "path": "docs/migration/lot9a-evidence/integration-runs/chart-common-02/output.log",
+      "bytes": 1493,
+      "sha256": "eded0e24f5b747f2a6f667906a7dcc7b5566af35adaf98be9ba258fc3f4a29bb",
+      "matchesRecordedBytesAndSha256": true
+    },
+    "nativeReferenceLog": {
+      "path": "docs/migration/lot9a-evidence/reference-01/native-tests-01.log",
+      "bytes": 10300,
+      "sha256": "ef03e274b70a65d13a62a5b4f961d6f1be9b60cd9f0ae6440959bbf17424d7e0",
+      "matchesRecordedBytesAndSha256": true
+    },
+    "currentCaptureDifferencesAfterTestCompletion": [
+      {
+        "expected": {
+          "path": "migration/v6-transfer-map.json",
+          "bytes": 446566,
+          "sha256": "b70ad4a4745f4c30a0e3d68d462d96fddf3ee33dcb10977efd1529f8cd7c6847"
+        },
+        "current": {
+          "path": "migration/v6-transfer-map.json",
+          "bytes": 455825,
+          "sha256": "106f6c41e76a93cf1ff8be51ce91763ea25e91beae1bdfa21c981c2ee669d99c"
+        }
+      }
+    ],
+    "currentProductionCommonTestAndFixtureMatchAttempt02": true,
+    "laterWorktreeQualification": "Une mise à jour ultérieure de migration/v6-transfer-map.json est visible pendant la revue. Elle est consignée séparément et ne change pas les captures des deux passages ni leur comparaison. Cette revue porte sur les entrées exécutées; elle ne certifie pas par extension les écritures ultérieures du checkout."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "statusPreserved": "failed",
+      "passed": 2,
+      "failed": 4,
+      "elapsedSeconds": 9.623157513000479,
+      "exitCode": 1,
+      "failureSite": "The source fact is actually restored, dans acquired().",
+      "finding": "Les quatre cas en échec avaient déjà passé les comparaisons intégrales du retour, des 14 champs acquis, des frames, du fait source et de l’état du graphe. Le matcher de restauration comparait ensuite les objets JSON comme texte, donc dépendait de l’ordre des membres."
+    },
+    {
+      "attempt": 2,
+      "statusPreserved": "passed",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "elapsedSeconds": 12.997527649999938,
+      "exitCode": 0,
+      "cumulativeCommonSeconds": 22.620685163000417
+    }
+  ],
+  "matcherCorrection": {
+    "from": "JSON.stringify(state) === JSON.stringify(step.afterState)",
+    "to": "isDeepStrictEqual(state, step.afterState)",
+    "completeObjectsCompared": true,
+    "fieldsOmitted": 0,
+    "arrayOrderPreserved": true,
+    "valueTypesPreserved": true,
+    "productionChangedBetweenAttempts": false,
+    "fixtureChangedBetweenAttempts": false,
+    "scopeChangedBetweenAttempts": false,
+    "evidence": "Le seul fichier capturé différent est kernel.test.ts. L’inversion en mémoire de cet import et de cette expression retrouve exactement le SHA de la tentative 01; aucun autre changement n’est nécessaire."
+  },
+  "reviewedCases": [
+    {
+      "case": "registration",
+      "physicalReturnsInPassedAttempt": 0,
+      "checked": [
+        "Un seul propriétaire chart à froid, même instance pour sélection et acquisition passive.",
+        "Position source 24 et ordre ordered_reaction, chart_navigation, region_intervention.",
+        "Refus d’une instance passive distincte; fullV6Parity reste false."
+      ]
+    },
+    {
+      "case": "primary_gain_loss_and_continuation",
+      "physicalReturnsInPassedAttempt": 3,
+      "activeChartAcquisitions": 3,
+      "checked": [
+        "Factory de production complète, aucun filtrage des groupes de sélection.",
+        "Actions et chart_plan comparés intégralement au corpus original; programme SRC présent dans le store commun et autorisation WHY/ACT OP18.",
+        "Retours, états source à 14 champs, frames intermédiaires, fait et checkpoint du graphe comparés intégralement.",
+        "Un seul record par retour sélectionné, gain puis permission locale conditionnelle et décision suivante.",
+        "Deux remises à froid contrôlées entre retours suivies de resume démontrent la restauration depuis le graphe, sans nouvel appel record."
+      ]
+    },
+    {
+      "case": "contrary_current_anchor",
+      "physicalReturnsInPassedAttempt": 1,
+      "activeChartAcquisitions": 1,
+      "checked": [
+        "Ancre contraire conservée comme réfutation de la prédiction.",
+        "Visited et grants retirés, preuve de retour conservée dans owner et graphe."
+      ]
+    },
+    {
+      "case": "selected_acquisition_ablation",
+      "physicalReturnsInPassedAttempt": 1,
+      "activeChartAcquisitions": 0,
+      "suppressedChartAcquisitions": 1,
+      "checked": [
+        "Le caller reçoit toujours un retour public réel du scénario.",
+        "L’instrumentation supprime uniquement l’appel source record.",
+        "La proposition suivante diffère et reste annotation_dependency sans gains/visited/evidence acquis."
+      ],
+      "commandChangeProven": false
+    },
+    {
+      "case": "foreign_return_scene_equal",
+      "physicalReturnsInPassedAttempt": 2,
+      "activeChartAcquisitions": 1,
+      "passiveChartAcquisitions": 1,
+      "checked": [
+        "Premier gain à froid réellement acquis.",
+        "Désactivation de la sélection chart par edit de graphe supporté, sans injection d’un état appris.",
+        "Commande étrangère observed_frontier, un appel passif chart sans proposition attribuée, frames exactes.",
+        "Retour et état égaux au source; aucun gain, grant ou evidence actif inventé."
+      ]
+    },
+    {
+      "case": "foreign_return_scene_changed",
+      "physicalReturnsInPassedAttempt": 2,
+      "activeChartAcquisitions": 1,
+      "passiveChartAcquisitions": 1,
+      "checked": [
+        "Même procédure de désactivation après gain réel.",
+        "Changement de scène étranger retire la localisation selon le source.",
+        "Frames intermédiaires transmis; historique acquis antérieur conservé sans l’attribuer à une expérience chart."
+      ]
+    }
+  ],
+  "passedAttemptAccounting": {
+    "factoryConstructions": 6,
+    "registrationOnlyFactories": 1,
+    "initializedPhysicalSessions": 5,
+    "physicalReturns": 9,
+    "activeChartAcquisitions": 6,
+    "passiveChartAcquisitions": 2,
+    "suppressedChartAcquisitions": 1,
+    "equation": "9 = 6 acquisitions chart actives + 2 passives + 1 acquisition chart ablatée",
+    "officialSolvedLevels": 0,
+    "meaningOfPhysicalReturn": "Paquet public synthétique transmis à runtime.advance après une commande autorisée du caller; aucune exécution de jeu réel."
+  },
+  "priorFailedAttemptAccounting": {
+    "factoryConstructions": 6,
+    "registrationOnlyFactories": 1,
+    "initializedPhysicalSessions": 5,
+    "physicalReturns": 5,
+    "activeChartAcquisitions": 4,
+    "passiveChartAcquisitions": 0,
+    "suppressedChartAcquisitions": 1,
+    "derivation": "Quatre échecs au premier acquired(), donc un retour actif dans chacun; le cas d’ablation passé produit un retour supplémentaire. Les deux cas passifs échouent avant leur commande étrangère. Comptage déduit du flux de test et des sites d’échec, pas d’un nouveau runtime."
+  },
+  "cumulativeAccounting": {
+    "commonAttempts": 2,
+    "factoryConstructions": 12,
+    "registrationOnlyFactories": 2,
+    "initializedPhysicalSessions": 10,
+    "physicalReturns": 14,
+    "activeChartAcquisitions": 10,
+    "passiveChartAcquisitions": 2,
+    "suppressedChartAcquisitions": 2,
+    "officialSolvedLevels": 0,
+    "failedAttemptIncluded": true
+  },
+  "primaryRestorationAccounting": {
+    "instrumentedSourceRestoreCalls": 5,
+    "controlledColdResetCallsIncluded": 2,
+    "actualSourceFactRestorations": 3,
+    "instrumentedNativeRestoreCalls": 6,
+    "claim": "Le diagnostic sourceRestores:5 compte trois restaurations des faits et deux resets froids volontaires. Les six restoreNative sont des appels instrumentés, pas six états distincts ni six acquisitions physiques.",
+    "fiveSourceFactRestorationsClaimed": false
+  },
+  "bounds": {
+    "declaredMaximumCommonAttempts": 2,
+    "actualCommonAttempts": 2,
+    "commandAttemptBoundSatisfied": true,
+    "declaredCommandTimeoutSeconds": 120,
+    "bothCommandsFinishedWithinTimeout": true,
+    "declaredMaximumPhysicalReturns": 24,
+    "cumulativePhysicalReturns": 14,
+    "cumulativeReturnBoundSatisfied": true,
+    "declaredMaximumActionsPerSession": 8,
+    "maximumDispatchedReturnsPerObservedSession": 3,
+    "declaredMaximumSessions": 8,
+    "initializedSessionsPerAttempt": [
+      5,
+      5
+    ],
+    "cumulativeInitializedSessions": 10,
+    "sessionBoundWording": "maximumSessions ne précise pas explicitement si la borne est par tentative ou cumulée, tandis que la déclaration de commande permet deux tentatives.",
+    "sessionBoundDisposition": "Réserve de protocole: la borne 8 est satisfaite par lancement mais serait dépassée par le cumul de 10 sessions. Cette revue ne choisit pas rétroactivement une interprétation et ne prétend pas que le cumul est inférieur ou égal à 8.",
+    "rerunOrBroadeningRequested": false
+  },
+  "nativeReferenceResult": {
+    "attempt": 1,
+    "passed": 134,
+    "failed": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "receiptStatus": "passed",
+    "elapsedSeconds": 1.4268474340005923,
+    "sourceOracleCallsInNativeRun": 0,
+    "qualification": "Parité synthétique des composants face à la référence originale. Les deux reçus source en échec et leur récupération documentaire restent décrits séparément dans reference-01/QUALIFICATION.md; cette revue ne les transforme pas en exécutions oracle réussies."
+  },
+  "limits": [
+    "Aucun niveau officiel n’a été résolu par ces scénarios common.",
+    "Les durées de commandes sont des limites de travail fonctionnel, pas des mesures officielles de performance ni une acceptation du seuil global +10%.",
+    "Aucune preuve de façade publique, worker, déploiement ou campagne de jeu réel n’est ajoutée par cette revue.",
+    "La parité V6 globale reste explicitement fausse.",
+    "Les résultats de régressions affectées et du build final sont hors périmètre de cette revue."
+  ],
+  "reviewActions": {
+    "productionEdits": 0,
+    "testEdits": 0,
+    "runtimeExecutions": 0,
+    "testExecutions": 0,
+    "oracleExecutions": 0,
+    "gamePayloadReads": 0,
+    "globalLockAcquired": false,
+    "officialPerformanceMeasurement": false,
+    "publicationPerformed": false,
+    "onlyWrittenPath": "docs/migration/lot9a-evidence/common-independent-review.json"
+  }
+}

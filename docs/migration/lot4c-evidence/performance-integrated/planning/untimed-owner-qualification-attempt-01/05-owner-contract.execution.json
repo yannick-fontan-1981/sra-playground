@@ -1,0 +1,36 @@
+{
+  "name": "05-owner-contract",
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot4c-evidence/prepare-owner-cost-contract.py",
+    "--performance-directory",
+    "docs/migration/lot4c-evidence/performance-integrated",
+    "--owner-inventory",
+    "docs/migration/lot4c-evidence/performance-integrated/owner-source-inventory.json",
+    "--structural-fixture",
+    "docs/migration/lot4c-evidence/performance-integrated/owner-structural-fixture.json",
+    "--finalize"
+  ],
+  "startedAt": "2026-11-11T01:08:57.039950+00:00",
+  "pid": 56,
+  "exitCode": 0,
+  "executionElapsedSeconds": 0.10017554099613335,
+  "finishedAt": "2026-11-11T01:08:57.140157+00:00",
+  "stdout": {
+    "path": "docs/migration/lot4c-evidence/performance-integrated/planning/untimed-owner-qualification-attempt-01/05-owner-contract.stdout.log",
+    "bytes": 271,
+    "sha256": "ec1c7ffae9fff182f81eda98c9abbed31d90bee40be05e2d51fc6812df5b364b"
+  },
+  "stdoutArchive": {
+    "gzip": {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/planning/untimed-owner-qualification-attempt-01/05-owner-contract.stdout.log.gz",
+      "bytes": 221,
+      "sha256": "9477bda72a708a66273a3f7a73ab6d52a9d04bba254de4565f6d97f6a7792434"
+    },
+    "uncompressedBytes": 271,
+    "uncompressedSha256": "ec1c7ffae9fff182f81eda98c9abbed31d90bee40be05e2d51fc6812df5b364b",
+    "exactRoundTrip": true
+  },
+  "scope": "Execution audit only; elapsed process duration is not a cost sample or performance comparison."
+}

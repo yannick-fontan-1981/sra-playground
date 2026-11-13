@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "command": "node --test --test-name-pattern='native current-service look-ahead' tests/v6-relative-arrangements-integration.test.ts",
+  "startedAt": "2026-11-10T20:41:27.235Z",
+  "finishedAt": "2026-11-10T20:41:29.966Z",
+  "exitCode": 0,
+  "tests": 2,
+  "passed": 2,
+  "failed": 0,
+  "cancelled": 0,
+  "skipped": 0,
+  "testRunnerDurationMs": 2319.59173,
+  "log": "integration-attempt2.log",
+  "scope": "Only the two newly added current-service look-ahead contracts. Real RelativeArrangements recognition; controlled synthetic independent question and unavailable service witness. No fabricated acquired continuation, public effect, game campaign or benchmark."
+}

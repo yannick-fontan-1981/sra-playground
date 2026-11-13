@@ -1,0 +1,729 @@
+{
+  "module_id": "guarded_transport_mechanical_cases",
+  "declarations": [
+    {
+      "id": "policy.exact_guarded_transport_operation",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.exact_request_scoped_model_and_actual_bounds_precede_a_pure_case"
+      ],
+      "premises": [
+        "immutable_request_with_caller_parent_epoch_revision_and_return_type"
+      ],
+      "invariants": [
+        "only_selected_operation_runs",
+        "no_external_environment_input",
+        "no_action_release_from_returned_domain",
+        "observations_and_unrejected_model_alternatives_remain_separate",
+        "unknown_prerequisites_are_not_guessed",
+        "exact_domain_exhaustion_is_distinct_from_budget_reached",
+        "direct_automatic_and_acceptance_phases_have_one_owner",
+        "creator_oracle_does_not_enter_request",
+        "caller_resumes_its_existing_contribution_pipeline"
+      ],
+      "falsifiers": [
+        "operation_or_mode_mismatch",
+        "required_input_unknown",
+        "state_or_model_revision_changes",
+        "work_bound_reached"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "declared_alternative_refs": [
+        "guarded_transport.case.scene_layers",
+        "guarded_transport.case.control_crossing_fit",
+        "guarded_transport.case.binding_fit",
+        "guarded_transport.case.threat_fit",
+        "guarded_transport.case.protection_domain",
+        "guarded_transport.case.handoff_domain",
+        "guarded_transport.case.step",
+        "guarded_transport.case.route_domain",
+        "guarded_transport.case.return_necessity",
+        "guarded_transport.case.sealed_transport_compare",
+        "guarded_transport.case.external_primitive",
+        "guarded_transport.needs_input",
+        "guarded_transport.unmatched"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.guarded_transport.case.scene_layers",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_transport.case.scene_layers"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.guarded_transport.scene_layers"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "MEASURE"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.guarded_transport_scene_layers"
+          }
+        },
+        {
+          "id": "projection.guarded_transport.case.control_crossing_fit",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_transport.case.control_crossing_fit"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.guarded_transport.control_crossing_fit"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "FIT"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.guarded_transport_control_crossing_fit"
+          }
+        },
+        {
+          "id": "projection.guarded_transport.case.binding_fit",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_transport.case.binding_fit"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.guarded_transport.binding_fit"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "FIT"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.guarded_transport_binding_fit"
+          }
+        },
+        {
+          "id": "projection.guarded_transport.case.threat_fit",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_transport.case.threat_fit"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.guarded_transport.threat_fit"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "FIT"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.guarded_transport_threat_fit"
+          }
+        },
+        {
+          "id": "projection.guarded_transport.case.protection_domain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_transport.case.protection_domain"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.guarded_transport.protection_domain"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "EVALUATE"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.guarded_transport_protection_domain"
+          }
+        },
+        {
+          "id": "projection.guarded_transport.case.handoff_domain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_transport.case.handoff_domain"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.guarded_transport.handoff_domain"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "INVERSE_DOMAIN"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.guarded_transport_handoff_domain"
+          }
+        },
+        {
+          "id": "projection.guarded_transport.case.step",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_transport.case.step"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.guarded_transport.step"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "STEP"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.guarded_transport_step"
+          }
+        },
+        {
+          "id": "projection.guarded_transport.case.route_domain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_transport.case.route_domain"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.guarded_transport.route_domain"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "DOMAIN"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.guarded_transport_route_domain"
+          }
+        },
+        {
+          "id": "projection.guarded_transport.case.return_necessity",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_transport.case.return_necessity"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.guarded_transport.return_necessity"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "BOUND"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.guarded_transport_return_necessity"
+          }
+        },
+        {
+          "id": "projection.guarded_transport.case.sealed_transport_compare",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_transport.case.sealed_transport_compare"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.guarded_transport.sealed_transport_compare"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "COMPARE"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.guarded_transport_sealed_transport_compare"
+          }
+        },
+        {
+          "id": "projection.guarded_transport.case.external_primitive",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_transport.case.external_primitive"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.guarded_transport.external_primitive"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "STEP"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.guarded_transport_external_primitive"
+          }
+        },
+        {
+          "id": "projection.guarded_transport.needs_input",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_transport.needs_input"
+            },
+            {
+              "field": "signature_registered",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "cause": "MISSING_OBSERVATION",
+            "propose_game_probe_for_code_absence": false
+          }
+        },
+        {
+          "id": "projection.guarded_transport.unmatched",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_transport.unmatched"
+            },
+            {
+              "field": "signature_registered",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "cause": "SIGNATURE_MISMATCH",
+            "world_domain_exhausted": false
+          }
+        }
+      ],
+      "configuration": {
+        "cases": [
+          {
+            "operation": "scene_layers",
+            "mode": "MEASURE",
+            "state_fields": [],
+            "model_fields": [],
+            "data_fields": [
+              "entity_masks",
+              "layer_bindings",
+              "required_layer_refs"
+            ],
+            "bound_fields": [],
+            "observations_required": false,
+            "alternatives_required": false
+          },
+          {
+            "operation": "control_crossing_fit",
+            "mode": "FIT",
+            "state_fields": [],
+            "model_fields": [],
+            "data_fields": [],
+            "bound_fields": [],
+            "observations_required": true,
+            "alternatives_required": true
+          },
+          {
+            "operation": "binding_fit",
+            "mode": "FIT",
+            "state_fields": [],
+            "model_fields": [],
+            "data_fields": [],
+            "bound_fields": [],
+            "observations_required": true,
+            "alternatives_required": true
+          },
+          {
+            "operation": "threat_fit",
+            "mode": "FIT",
+            "state_fields": [],
+            "model_fields": [],
+            "data_fields": [],
+            "bound_fields": [],
+            "observations_required": true,
+            "alternatives_required": true
+          },
+          {
+            "operation": "protection_domain",
+            "mode": "EVALUATE",
+            "state_fields": [
+              "carrier_position",
+              "carrier_side",
+              "positions",
+              "sides",
+              "carried_refs"
+            ],
+            "model_fields": [
+              "directed_threats",
+              "protection_by_side"
+            ],
+            "data_fields": [
+              "checkpoint_ref"
+            ],
+            "bound_fields": [],
+            "observations_required": false,
+            "alternatives_required": false
+          },
+          {
+            "operation": "handoff_domain",
+            "mode": "INVERSE_DOMAIN",
+            "state_fields": [
+              "carrier_position",
+              "carrier_side",
+              "positions",
+              "sides",
+              "carried_refs"
+            ],
+            "model_fields": [
+              "actions",
+              "carrier_bounds",
+              "crossing_by_side",
+              "capacity",
+              "pickup_metric",
+              "pickup_radius",
+              "release_kind",
+              "directed_threats",
+              "protection_by_side",
+              "checkpoint_order"
+            ],
+            "data_fields": [
+              "deposit_action_ref",
+              "object_ref",
+              "next_object_ref",
+              "deposit_pose_domain",
+              "next_pickup_pose_domain",
+              "consumer_ref"
+            ],
+            "bound_fields": [
+              "max_domain"
+            ],
+            "observations_required": false,
+            "alternatives_required": false
+          },
+          {
+            "operation": "step",
+            "mode": "STEP",
+            "state_fields": [
+              "carrier_position",
+              "carrier_side",
+              "positions",
+              "sides",
+              "carried_refs"
+            ],
+            "model_fields": [
+              "actions",
+              "carrier_bounds",
+              "crossing_by_side",
+              "capacity",
+              "pickup_metric",
+              "pickup_radius",
+              "release_kind",
+              "directed_threats",
+              "protection_by_side",
+              "checkpoint_order"
+            ],
+            "data_fields": [
+              "action_ref"
+            ],
+            "bound_fields": [],
+            "observations_required": false,
+            "alternatives_required": false
+          },
+          {
+            "operation": "route_domain",
+            "mode": "DOMAIN",
+            "state_fields": [
+              "carrier_position",
+              "carrier_side",
+              "positions",
+              "sides",
+              "carried_refs"
+            ],
+            "model_fields": [
+              "actions",
+              "carrier_bounds",
+              "crossing_by_side",
+              "capacity",
+              "pickup_metric",
+              "pickup_radius",
+              "release_kind",
+              "directed_threats",
+              "protection_by_side",
+              "checkpoint_order",
+              "terminal_assignments",
+              "input_costs"
+            ],
+            "data_fields": [
+              "primitive_domain"
+            ],
+            "bound_fields": [
+              "max_nodes"
+            ],
+            "observations_required": false,
+            "alternatives_required": false
+          },
+          {
+            "operation": "return_necessity",
+            "mode": "BOUND",
+            "state_fields": [],
+            "model_fields": [],
+            "data_fields": [
+              "unrestricted_request",
+              "restricted_request",
+              "restriction_ref",
+              "removed_primitive_refs"
+            ],
+            "bound_fields": [],
+            "observations_required": false,
+            "alternatives_required": false,
+            "nested_requests": [
+              {
+                "field": "unrestricted_request",
+                "operation_ref": "mechanics.guarded_transport.route_domain",
+                "mode": "DOMAIN",
+                "state_fields": [
+                  "carrier_position",
+                  "carrier_side",
+                  "positions",
+                  "sides",
+                  "carried_refs"
+                ],
+                "model_fields": [
+                  "actions",
+                  "carrier_bounds",
+                  "crossing_by_side",
+                  "capacity",
+                  "pickup_metric",
+                  "pickup_radius",
+                  "release_kind",
+                  "directed_threats",
+                  "protection_by_side",
+                  "checkpoint_order",
+                  "terminal_assignments",
+                  "input_costs"
+                ],
+                "data_fields": [
+                  "primitive_domain"
+                ],
+                "bound_fields": [
+                  "max_nodes"
+                ]
+              },
+              {
+                "field": "restricted_request",
+                "operation_ref": "mechanics.guarded_transport.route_domain",
+                "mode": "DOMAIN",
+                "state_fields": [
+                  "carrier_position",
+                  "carrier_side",
+                  "positions",
+                  "sides",
+                  "carried_refs"
+                ],
+                "model_fields": [
+                  "actions",
+                  "carrier_bounds",
+                  "crossing_by_side",
+                  "capacity",
+                  "pickup_metric",
+                  "pickup_radius",
+                  "release_kind",
+                  "directed_threats",
+                  "protection_by_side",
+                  "checkpoint_order",
+                  "terminal_assignments",
+                  "input_costs"
+                ],
+                "data_fields": [
+                  "primitive_domain"
+                ],
+                "bound_fields": [
+                  "max_nodes"
+                ]
+              }
+            ]
+          },
+          {
+            "operation": "sealed_transport_compare",
+            "mode": "COMPARE",
+            "state_fields": [],
+            "model_fields": [
+              "actions",
+              "carrier_bounds",
+              "crossing_by_side",
+              "capacity",
+              "pickup_metric",
+              "pickup_radius",
+              "release_kind",
+              "directed_threats",
+              "protection_by_side",
+              "checkpoint_order"
+            ],
+            "data_fields": [
+              "sealed",
+              "dimension_refs",
+              "observed_epoch"
+            ],
+            "bound_fields": [],
+            "observations_required": true,
+            "alternatives_required": false
+          },
+          {
+            "operation": "external_primitive",
+            "mode": "STEP",
+            "state_fields": [
+              "carrier_position",
+              "carrier_side",
+              "positions",
+              "sides",
+              "carried_refs"
+            ],
+            "model_fields": [
+              "actions",
+              "carrier_bounds",
+              "crossing_by_side",
+              "capacity",
+              "pickup_metric",
+              "pickup_radius",
+              "release_kind",
+              "directed_threats",
+              "protection_by_side",
+              "checkpoint_order"
+            ],
+            "data_fields": [
+              "action_ref"
+            ],
+            "bound_fields": [],
+            "observations_required": false,
+            "alternatives_required": false
+          }
+        ],
+        "family_ref": "mechanics.guarded_transport"
+      }
+    }
+  ]
+}

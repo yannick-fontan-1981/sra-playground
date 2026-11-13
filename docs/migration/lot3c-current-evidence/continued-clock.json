@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.lot3c.continued-candidate-clock.v1",
+  "game": "CWSE",
+  "startedAt": "2026-11-10T07:13:29+00:00",
+  "priorResolution": {
+    "path": "docs/migration/lot3c-evidence/final/cwse-resolution.json",
+    "bytes": 2636,
+    "sha256": "4b1e1084eb8c15f7497b3760ac0affbf2b5739816b6627a2b32afd971bacab77"
+  },
+  "priorCumulativeSeconds": 1527.448427,
+  "maximumCumulativeSeconds": 2400,
+  "remainingSeconds": 872.551573,
+  "stopBy": "2026-11-10T07:28:01.551573+00:00",
+  "clockReset": false,
+  "qualification": "Continued same candidate after published0.43 failure. Retrieval before source became available is not game diagnosis. All source diagnosis/implementation/test/campaign/browser time from this start is conservatively added. No new candidate or zero clock is created."
+}

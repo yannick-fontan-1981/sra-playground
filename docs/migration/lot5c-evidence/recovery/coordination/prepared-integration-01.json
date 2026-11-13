@@ -1,0 +1,25 @@
+{
+  "schema": "logos-engine.lot5c.prepared-integration.v1",
+  "at": "2026-11-11T12:43:32.359026+00:00",
+  "basePublication": 95,
+  "baseCommit": "3a70463039768f7114edae7d94d7dd33b7f36aa8",
+  "ownCommit": "b9fe50d",
+  "preparedPeerCommit": "dd4a43288c51c68365ff1c5224f0576209a1dc67",
+  "peerPublished": false,
+  "publicationReconciliationRequiredBeforeOfficialCost": true,
+  "runtimeConflictResolutions": [
+    "candidate0.63",
+    "union_acquisition_types",
+    "union_acquisition_types",
+    "both_single_owner_guards_and_lazy_attention",
+    "all_source_event_keys",
+    "binding_incompletion_and_union_passive_owners",
+    "all_registered_single_owners",
+    "all_material_providers",
+    "all_material_entries",
+    "all_actual_acquisition_instances"
+  ],
+  "mappingCount": 238,
+  "scope": "Prepared Preview, Workshop and Window code composed with reconstructed Binding. Actual release evidence and source identity must be reconciled later.",
+  "generatedAudits": "pending_regeneration"
+}

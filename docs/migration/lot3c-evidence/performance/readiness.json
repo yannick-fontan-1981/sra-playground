@@ -1,0 +1,62 @@
+{
+  "schema": "logos-engine.native-cost-window-readiness.v1",
+  "recordedAt": "2026-11-10T05:27:15.550407+00:00",
+  "status": "ready_for_cost_measurement_with_functional_reservation",
+  "inputs": [
+    {
+      "path": "docs/migration/lot3c-evidence/final/validation/delta-tests-run.json",
+      "bytes": 101984,
+      "sha256": "be525002eadd293a57335d187f1920d2dd2ad0ff74e9afad9de779ba5a53c4eb"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/validation/checks-run.json",
+      "bytes": 69872,
+      "sha256": "8577303875c77317954b3d100b05adb5c9e0e6ce314e2120cd3391874cd9c21b"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/delivery-integrity-qualified.json",
+      "bytes": 17157,
+      "sha256": "74889492eca6280670cfd142b6da0b9737e8c1dfc8a10b349ee2f132048f7ba7"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/cwse-session/exposed-contribution.json",
+      "bytes": 204381,
+      "sha256": "7c5b8a874b6845f4aad2f8515b57e967fe0ca9bd1cb27a7a654eed4bbe539d3f"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/cwse-resolution.json",
+      "bytes": 2636,
+      "sha256": "4b1e1084eb8c15f7497b3760ac0affbf2b5739816b6627a2b32afd971bacab77"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/browser/browser-qa.json",
+      "bytes": 3093,
+      "sha256": "3c23e1883d3ba4abb9ff8fcfd17563c3c2ab19f2cfcb16e6714beea602db8a5f"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/regressions/empty-series-diagnostic-contract.json",
+      "bytes": 79023,
+      "sha256": "ede6af65eb219c25799f29ee41697d4743c2eacf4e63a7b5f5c0cc929c869872"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/performance/declaration.json",
+      "bytes": 4163,
+      "sha256": "c63cf57f82f159e03d51f0a84bf854de789dd3e218a814169ac8b17c797ebb34"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/performance/protocol.md",
+      "bytes": 11672,
+      "sha256": "dbf1a56cfce359f7337700da426c5c37ff9ada76726c8fca0e36602ba6fb6d91"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/performance/global-budget-policy.json",
+      "bytes": 1848,
+      "sha256": "4613be53bbcf1fa2a872d3545ee0ee82ac6b6e09624c2c5d4ea48d86592b3a5b"
+    }
+  ],
+  "preview": "stopped; confirmed by sites-preview status",
+  "isolation": "All formal tests, build, campaigns, replays, browser operations, source component comparisons and integrity reconstruction finished. All subagents finished their computational tasks. Only light documentation and reading continue during A1/B1/B2/A2. No tests, profiles, builds, new game sessions or browser execution run concurrently.",
+  "functionalQualification": "CWSE target3 not met:2levels/21actions/13prefixes, terminal source/native refusal reproduced. Lot3C remains open for generic evidence-binding follow-up independently of cost verdict. CATR/RSWP strict32/34 retained with complete empty-observer-extension diagnostic; no passive-owner coverage claimed.",
+  "costPolicy": "Strict per-case global session median increase below10%; all original phase diagnostics and p95 retained, no exclusion of measured sessions.",
+  "authorization": "User requested continuation and explicitly permitted phase overruns while global increase remains below10%. The new rule is declared before this window, unlike the separate historical3B acceptance."
+}

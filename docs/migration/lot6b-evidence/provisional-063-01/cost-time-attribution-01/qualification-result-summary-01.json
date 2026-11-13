@@ -1,0 +1,35 @@
+{
+  "schema": "logos-engine.lot6b-trace-created-functional-qualification-summary.v1",
+  "recordedAt": "2026-11-11T19:24:49.804688+00:00",
+  "status": "provisional_functional_qualification_passed",
+  "driverExitCode": 0,
+  "executionReceipt": "docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/qualification-execution-01.json",
+  "executionStatus": "passed",
+  "elapsedSeconds": 39.42734386200027,
+  "inputsUnchanged": true,
+  "driverInputsUnchanged": true,
+  "watchedFiles": 668,
+  "attributionStatus": "qualified_functional_structure",
+  "forms": 4,
+  "points": 58,
+  "commonValueCoverage": 58,
+  "checks": 64,
+  "attributedDeltas": 29,
+  "traceCreatedRecords": 168,
+  "traceCreatedRecordsByRole": {
+    "baseline": 84,
+    "candidate": 84
+  },
+  "policy": "exact_except_attributed_trace_envelope_created",
+  "failures": [],
+  "nativeDigests": {
+    "baseline": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+    "candidate": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886"
+  },
+  "provisionalBaseline": true,
+  "publishedBaselineClaimed": false,
+  "downstreamReadersValidated": false,
+  "officialCostMeasured": false,
+  "originalRefusalPreserved": true,
+  "automaticNextCommand": false
+}

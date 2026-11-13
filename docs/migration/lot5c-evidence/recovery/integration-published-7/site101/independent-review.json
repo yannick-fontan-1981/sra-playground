@@ -1,0 +1,40 @@
+{
+  "schema": "logos-engine.lot5c-site101-independent-review.v1",
+  "recordedAt": "2026-11-11T16:46:11.463499+00:00",
+  "reviewer": "/root/lot5_site101_merge_audit",
+  "reviewerCommandsTerminalAt": "2026-11-11T16:44:55Z",
+  "status": "passed",
+  "reviewedCommit": "932cd853996a349e16a064e595cd9f4412deb2ad",
+  "parentsVerified": [
+    "d54a58f2a03b36027e4da75c8eba12299c08b676",
+    "d75a36f0a99bf6c301034523a3138a64d2f6e744"
+  ],
+  "executionInputDiffEmpty": true,
+  "publishedLot7RoadmapBlockExactlyPreserved": true,
+  "fourReconciliationAndScopeFilesConfirmedCommitted": true,
+  "previous16TestsAnd3ChecksNotRelabeledAsFresh": true,
+  "firstLot7CostWindowRemainsIneligible": true,
+  "prospectiveScope": {
+    "tests": 138,
+    "allDistinctAndPresent": true,
+    "excludedLkeyModulesPresent": 0,
+    "recordedReplayRows": 11,
+    "plannedChecks": 187,
+    "kataProvenancePreserved": true,
+    "hpdlIncluded": false
+  },
+  "rootNativeHashReceiptReadButHashesNotRepeatedByReviewer": true,
+  "actualPublished10bReconciliationPending": true,
+  "remoteCheckpointVerificationNotPerformedByReviewer": true,
+  "actionsExcluded": [
+    "file edits",
+    "tests",
+    "runtime",
+    "replay",
+    "game",
+    "build",
+    "hashing",
+    "archives",
+    "network"
+  ]
+}

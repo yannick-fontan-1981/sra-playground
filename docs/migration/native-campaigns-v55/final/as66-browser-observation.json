@@ -1,0 +1,59 @@
+{
+  "schema": "logos-engine.v55.browser-observation.v1",
+  "observedAt": "2026-11-09T13:31:08.355Z",
+  "game": "AS66",
+  "samples": [
+    {
+      "phase": "initial",
+      "observedAt": "2026-11-09T13:24:21.619Z",
+      "actions": 0,
+      "levelsSolved": 0,
+      "completedPlans": 0
+    },
+    {
+      "phase": "after_level_1",
+      "observedAt": "2026-11-09T13:29:30.028Z",
+      "actions": 5,
+      "levelsSolved": 1,
+      "completedPlans": 5,
+      "panel": "Solve with SRA.\n\nLevel completed.\n\nRun to next level\nRun 16 actions\nOne action\nPause\n5\nactions\n1\nlevels solved\n5\ncompleted plans\nNew reasoning session\nReturn to Manual"
+    },
+    {
+      "phase": "after_level_2",
+      "observedAt": "2026-11-09T13:30:31.666Z",
+      "actions": 11,
+      "levelsSolved": 2,
+      "completedPlans": 8,
+      "panel": "Solve with SRA.\n\nLevel completed.\n\nRun to next level\nRun 16 actions\nOne action\nPause\n11\nactions\n2\nlevels solved\n8\ncompleted plans\nNew reasoning session\nReturn to Manual"
+    },
+    {
+      "phase": "after_level_3",
+      "observedAt": "2026-11-09T13:31:08.315Z",
+      "actions": 19,
+      "levelsSolved": 3,
+      "completedPlans": 11,
+      "panel": "Solve with SRA.\n\nLevel completed.\n\nRun to next level\nRun 16 actions\nOne action\nPause\n19\nactions\n3\nlevels solved\n11\ncompleted plans\nNew reasoning session\nReturn to Manual"
+    }
+  ],
+  "final": {
+    "canvas": {
+      "height": 384,
+      "width": 384
+    },
+    "inspectionOpen": false,
+    "panel": "Solve with SRA.\n\nLevel completed.\n\nRun to next level\nRun 16 actions\nOne action\nPause\n19\nactions\n3\nlevels solved\n11\ncompleted plans\nNew reasoning session\nReturn to Manual",
+    "url": "http://127.0.0.1:4173/?game=AS66&level=4",
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    }
+  },
+  "actionsPerformed": {
+    "selectedFromLevel1": true,
+    "runToNextLevelClicks": 3,
+    "newSessionClicks": 0,
+    "manualGameInputs": 0,
+    "levelJumps": 0,
+    "inspectorOpened": false
+  }
+}

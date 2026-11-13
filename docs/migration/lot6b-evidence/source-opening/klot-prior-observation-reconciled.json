@@ -1,0 +1,179 @@
+{
+  "schema": "logos-engine.lot6b.case-prior-observation.v2",
+  "case": "KLOT",
+  "recordedAt": "2026-11-11T14:38:08.332831+00:00",
+  "priorChargedSeconds": 11.393673999999999,
+  "supersedesIncompleteObservation": {
+    "path": "docs/migration/lot6b-evidence/source-opening/klot-prior-observation.json",
+    "bytes": 930,
+    "sha256": "f2d5b180ee44d497843e9aa76f3949570c70b28f1dc448aba06b95bca9cea05f"
+  },
+  "correction": "The first filename-based search missed public corpus screening records. Its statement that the new document was the sole textual match was incorrect; the initial receipt is retained and superseded before any live attempt.",
+  "historicalTimedScreenings": [
+    {
+      "input": {
+        "path": "docs/migration/lot7b-evidence/candidate-selection.json",
+        "bytes": 204016,
+        "sha256": "2a3045d3030eabc76cd5b08d5fd05cffc90dbb255ce272b0de7dd78fd5a0aeba"
+      },
+      "startedAt": "2026-11-10T21:12:37.523228+00:00",
+      "finishedAt": "2026-11-10T21:12:43.051382+00:00",
+      "chargedSeconds": 5.528154,
+      "observedCaseRow": {
+        "game": "KLOT",
+        "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:b70f41cc40f08e72",
+        "frameSha256": "b70f41cc40f08e72bc7e6b23399bf2a34a507a21b01957f126d454e1c9ea4f4b",
+        "initialLevel": 1,
+        "levelsCompleted": 0,
+        "proposal": null,
+        "error": null,
+        "inputCount": 63,
+        "guideContext": null,
+        "guideActive": false,
+        "sourceState": {
+          "epoch": 1,
+          "rejected": [],
+          "events": [],
+          "transition_count": 0,
+          "interface_state": {
+            "epoch": 1,
+            "samples": [],
+            "contrasts": [],
+            "methods": [],
+            "refutations": [],
+            "bound": null
+          }
+        },
+        "srcCalls": 0,
+        "elapsedSeconds": 0.002963327002362348
+      },
+      "basis": "Conservative allocation of the entire timed public corpus screening, including KLOT; no per-case duration is fabricated."
+    },
+    {
+      "input": {
+        "path": "docs/migration/lot4c-evidence/candidate-selection.json",
+        "bytes": 201734,
+        "sha256": "d4a1c5e476400ffaf8cfbe9183346bbc09a7628478b457f52ab11c9a157e0b7c"
+      },
+      "startedAt": "2026-11-11T00:27:17.955285+00:00",
+      "finishedAt": "2026-11-11T00:27:22.585805+00:00",
+      "chargedSeconds": 4.63052,
+      "observedCaseRow": {
+        "game": "KLOT",
+        "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:b70f41cc40f08e72",
+        "frameSha256": "b70f41cc40f08e72bc7e6b23399bf2a34a507a21b01957f126d454e1c9ea4f4b",
+        "initialLevel": 1,
+        "levelsCompleted": 0,
+        "proposal": null,
+        "error": null,
+        "inputCount": 63,
+        "projection": null,
+        "sourceState": {
+          "failed": [],
+          "events": [],
+          "method": null,
+          "epoch": 1,
+          "portable": null,
+          "compound_methods": {},
+          "refuted_compounds": []
+        },
+        "elapsedSeconds": 0.0036645229993155226
+      },
+      "basis": "Conservative allocation of the entire timed public corpus screening, including KLOT; no per-case duration is fabricated."
+    },
+    {
+      "input": {
+        "path": "docs/migration/lot10a-evidence/diagnostic/initial-public-admission.json",
+        "bytes": 38889,
+        "sha256": "054d357badedd82adaf0c7ddffc77e4630277b7a19f48b02b5e83ffb418159bf"
+      },
+      "startedAt": "2026-11-10T21:17:56.648Z",
+      "finishedAt": "2026-11-10T21:17:57.883Z",
+      "chargedSeconds": 1.235,
+      "observedCaseRow": {
+        "game": "KLOT",
+        "rowsSha256": "b70f41cc40f08e72bc7e6b23399bf2a34a507a21b01957f126d454e1c9ea4f4b",
+        "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:b70f41cc40f08e72",
+        "measurement": null,
+        "relations": [],
+        "acquiredSelection": false,
+        "coldFamilyAdmissible": false
+      },
+      "basis": "Conservative allocation of the entire timed public corpus screening, including KLOT; no per-case duration is fabricated."
+    }
+  ],
+  "untimedPublicCorpusScreenings": [
+    {
+      "path": "docs/migration/native-campaigns-v53/candidate-selection.json",
+      "bytes": 504795,
+      "sha256": "29594f8448a1a328e7da656c83f0c62a6bb7ec76d72a8b8aed9129f0bea10f2d"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/candidate-selection.json",
+      "bytes": 406645,
+      "sha256": "cab4e692688a63ee402f30fbbd74a5e63cd81e718bd1d3e556e214a7ff63f57a"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/ordered-reaction-candidate-selection.json",
+      "bytes": 95066,
+      "sha256": "1d87b6bcdda9b338f79f4a3d5f2291ad8f61495b7ee1e24325f1786f0d77a131"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v51/candidate-selection.json",
+      "bytes": 120554,
+      "sha256": "f437a571c635f969e167936fcfb4a9c6c803b93e9a6cec45ecbe4b03f31cb526"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v49/candidate-selection.json",
+      "bytes": 70419,
+      "sha256": "405546ae8c6863ff3bf75e8d9f0625a60e951a09b97f6dc427f3a32bfe08a39e"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v51/framed-transfer-candidate-selection.json",
+      "bytes": 136228,
+      "sha256": "1d42b7c228b12d0f4ec0d9b7298e8441531dcc9380f41f2d1e82a4813d79b174"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v50/candidate-selection.json",
+      "bytes": 117030,
+      "sha256": "99de22e721e48745f51087709c1b0050afd8337a016474b72a74575246e00b03"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/initial-morphology.json",
+      "bytes": 46670,
+      "sha256": "8e130872225c749aae1872de6541797f3a5064328cb086205c8e36cad1c67b53"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/initial-morphology-rerun.json",
+      "bytes": 46670,
+      "sha256": "d92a26f803e2d175f0780955a79b642edfcecf7b1927a54f4f434d5018f6dba2"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/diagnostic/crossed-prefix-public-admission.json",
+      "bytes": 30472,
+      "sha256": "07fab84d4fd564618c1a5e48fb1b85fa0993afb9d9225053686d6a30b7c832eb"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/diagnostic/framed-window-public-admission.json",
+      "bytes": 14670,
+      "sha256": "f163d84caeb4c025d21703ca6f7ab96211f4966781697e38b9b23c2a822c3da5"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/reference-population-public-admission.json",
+      "bytes": 24743,
+      "sha256": "4e4cc5a99328c20c649acba614855d60bdf4dab30571e1ff6509cdb2eab5ac49"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/diagnostic/reception-public-admission.json",
+      "bytes": 32039,
+      "sha256": "672ab284864acef4a22b12891cfa13e529c985bb2f3fe45a2169b4955d714c84"
+    }
+  ],
+  "retainedPriorLiveCampaignOrBlockedCaseClockFound": false,
+  "qualification": "Earlier records contain initial public geometry/admission screening, without dispatched KLOT actions or an observed blocked-case campaign. Full observed durations are carried conservatively where timestamps exist. Untimed corpus screening is disclosed, not assigned invented durations. All current case diagnostics and later attempts use this same retained cumulative clock.",
+  "generator": {
+    "path": "docs/migration/lot6b-evidence/reconcile-klot-prior-clock.py",
+    "bytes": 4830,
+    "sha256": "8b1651dfe08dc8158440d1e4ab47cc60374e1b3d78c4dd807d957086cc89351c"
+  }
+}

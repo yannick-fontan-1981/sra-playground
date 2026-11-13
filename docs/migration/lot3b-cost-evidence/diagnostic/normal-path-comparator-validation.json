@@ -1,0 +1,73 @@
+{
+  "schema": "logos-engine.native-restoration-comparator-validation.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T02:03:07.618180+00:00",
+  "generator": {
+    "path": "scripts/compare-native-restoration-paths.mjs",
+    "bytes": 11263,
+    "sha256": "bfa506ef075bc900ee1730f18185e49e8bfb8d248b5de81bb6e7091c6b65f5a6"
+  },
+  "checks": [
+    {
+      "name": "identity",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "exclusive_output_preserves_existing_bytes",
+      "passed": true,
+      "exitCode": 1
+    },
+    {
+      "name": "generator_difference",
+      "passed": true,
+      "exitCode": 1
+    },
+    {
+      "name": "inputs_difference",
+      "passed": true,
+      "exitCode": 1
+    },
+    {
+      "name": "case_difference",
+      "passed": true,
+      "exitCode": 1
+    },
+    {
+      "name": "commands_difference",
+      "passed": true,
+      "exitCode": 1
+    },
+    {
+      "name": "owners_difference",
+      "passed": true,
+      "exitCode": 1
+    },
+    {
+      "name": "requests_difference",
+      "passed": true,
+      "exitCode": 1
+    },
+    {
+      "name": "counts_timings_witness_and_final_are_separate",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "missing_owner_rejected",
+      "passed": true,
+      "exitCode": 1
+    },
+    {
+      "name": "old_profile_schema_rejected",
+      "passed": true,
+      "exitCode": 1
+    }
+  ],
+  "checkCount": 11,
+  "qualifications": [
+    "Temporary fixtures were derived from a retained before receipt; original profile receipts were read only.",
+    "No game, runtime replay, profiler, cost cohort or production test was executed.",
+    "Fixture files and comparison outputs were removed after verification; this validates comparator behavior only."
+  ]
+}

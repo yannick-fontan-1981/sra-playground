@@ -1,0 +1,96 @@
+{
+  "schema": "logos-engine.lot5c-coordination-policy-amendment.v4",
+  "status": "declared_operational_amendment_before_request",
+  "recordedAt": "2026-11-11T21:29:32.965895+00:00",
+  "authority": "Current user instruction, explicitly relayed by root: ordinary development/tests/commits/pushes do not use the global mutex; exclusivity is reserved to official measurement/publication. The current cost lock and quiet interval end once ABBA is terminal and its final integrity has passed.",
+  "requestId": "lot5c-cost-a33a5f88-available-03",
+  "performanceDirectory": "docs/migration/lot5c-evidence/recovery/performance-integrated-04",
+  "unchangedFrozenProtocol": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/protocol.md",
+    "bytes": 16466,
+    "sha256": "f1a58a87f924f73e22a1eee5c17a1eeacf1b1fd1d2090dbaa80e7abd48c71f39"
+  },
+  "amendedOriginalProvision": {
+    "line": 69,
+    "text": "**Conditions à établir par le responsable avant lancement :** finir les tests, exports, builds, campagnes, rejeux, profils, archives et contrôles navigateur ; arrêter le preview ; vérifier l'absence de campagne concurrente des autres fils ; lier les preuves et les réserves réelles au gel final dans `readiness.json`. Ces conditions ne sont pas déclarées satisfaites par le présent helper. Durant les quatre séries et jusqu’à la libération explicite après les comparaisons et la revue, tous les traitements et agents des voies actives restent arrêtés, sans commande en attente. Seules les petites métadonnées de coordination explicitement nommées peuvent être consultées ; aucune lecture ou modification de source ou de documentation, recherche récursive, opération Git, empreinte, archive, compilation, test, rejeu, jeu ou navigateur n’est exécutée. Les sources, tests, outils, cas et politiques restent immuables. Chaque voie et ses travailleurs fournissent un accusé frais pour l’identifiant exact de cette fenêtre ; tout écart réel est conservé et signalé.",
+    "scope": "Only the operational duration of quiet/exclusivity and the obsolete SH requirement for ordinary preparation. Original bytes and their history remain intact."
+  },
+  "ordinaryPreparation": {
+    "globalMutexRequired": false,
+    "foreignPendingQuietBlocksPreparation": false,
+    "foreignOrdinaryWorkBlocksPreparation": false,
+    "foreignPublicationBlocksPreparation": false,
+    "foreignActiveOfficialPerformanceBlocksPreparation": true
+  },
+  "officialMeasurement": {
+    "freshExactLaneAndWorkerAcksRequired": true,
+    "actualExclusiveNonblockingAcquisitionRequired": true,
+    "maximumExclusiveAttempts": 1,
+    "mutexPath": "/workspace/shared/sra-coordination/performance.lock",
+    "mutexDevice": 27,
+    "mutexInode": 1971854,
+    "scope": "The complete A1/B1/B2/A2 execution, terminal child cleanup, finalIntegrity passed and final retained quiet evidence.",
+    "releaseBefore": [
+      "cohort comparisons",
+      "historical strict refusal retention",
+      "qualified consolidation",
+      "arithmetic review",
+      "log transport",
+      "result rendering"
+    ],
+    "explicitMeasurementReleaseReceipt": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-03/measurement-release.json"
+  },
+  "ordinaryPostprocessing": {
+    "globalMutexRequired": false,
+    "quietAcksRequiredAfterMeasurementRelease": false,
+    "actualOrdinaryActivityRemainsDeclared": true,
+    "allOriginalCommandsAndInputsPreserved": true,
+    "allEvidenceAndSampleGuardsPreserved": true
+  },
+  "budgets": {
+    "availabilitySeconds": 600,
+    "wholeWorkflowAfterExclusiveAcquisitionSeconds": 5400,
+    "childSeconds": 3600,
+    "automaticRetries": 0
+  },
+  "officialPerformanceFlag": {
+    "name": "official_performance_active",
+    "trueOnlyAfterActualExclusiveAcquisition": true,
+    "falseAtActualMeasurementRelease": true,
+    "legacyFallback": "Exact shared wrapper predicate: a non-null official_performance_active must be boolean and is returned immediately. Only absent/null falls back to performance_started and quiet_released, each boolean or null: started is true AND released is not true. Other activity/publication/quiet-request fields are ignored."
+  },
+  "unchangedMeasurementInputs": {
+    "cases": {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    "comparisonPolicy": {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    "globalBudgetPolicy": {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/global-budget-policy.json",
+      "bytes": 2348,
+      "sha256": "24a2bf59eeaa442e0ce4704d4aeee3f2d09ac564273be9886a37aabe82eef4ba"
+    },
+    "declaration": {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/declaration.json",
+      "bytes": 5661,
+      "sha256": "e25bdadd4227edbb7f1fc11a56e61dfa87a10c4814e3c07ef4fc20dd592fb306"
+    },
+    "ownerCostContract": {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/owner-growth-contract.json",
+      "bytes": 6009,
+      "sha256": "b6a039ec4725d6ac408147149faf180d31cf089b0e2097e27c45727848112fcc"
+    }
+  },
+  "noNativeOrBenchmarkChange": true,
+  "noAcceptanceCriterionChange": true,
+  "frozenProtocolEdited": false,
+  "readinessCreated": false,
+  "requestIssued": false,
+  "measurementExecuted": false,
+  "qualification": "Explicit operational amendment under the newer user instruction. It does not claim compliance with the superseded extension of quiet through postprocessing in protocol line69. All samples remain protected by fresh ACKs, actual EX, complete ABBA and final integrity. Retained local ACK snapshots and immutable readiness inputs remain rechecked by unchanged consumers after release; live peer metadata may then change normally."
+}

@@ -1,0 +1,6866 @@
+{
+  "schema": "sra.v6.observer-reference.v1",
+  "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceHashes": {
+    "agents/yf_arc3_v6/laya_proto/geometric_observer.py": "1017b130cb91f799ab5bdb2f26789c2645078d9b9d226469b3915d4a7262eaac",
+    "agents/yf_arc3_v6/laya_proto/neutral_observer.py": "9b09085eb708c084d82682b13848666ef1ca5f3fc6c10861d96e139228af927a",
+    "agents/yf_arc3_v6/laya_proto/observed_input_domain.py": "5b8f2f84af9e946e939a53e4f4c70c1eea49e5e2f8017bac547537380e2a7785",
+    "agents/yf_arc3_v6/laya_proto/common_multiscale_constraints.py": "01da7c7f636ed2039a364188c7f4fedb2c4c0a0e8bb6b2ba7f22b1c259eaaf12",
+    "agents/yf_arc3_v5/capabilities/components.py": "60563b31d90e878eb4c5828818725b9c91252638e6e343aa31d236b1ac590a0f",
+    "agents/yf_arc3_v5/capabilities/contracts.py": "7597c2d1fc88993dafea3514c5adaf8210cf5cd65b1823f408810467d2791172",
+    "agents/yf_arc3_v5/logos/types.py": "92703a65cda3d92844688ad37242db030ba7709a494bd7cc1b61b885fa88a9d9"
+  },
+  "normalization": [
+    "frozenset masks sorted lexicographically",
+    "V5 bbox width/height properties materialized"
+  ],
+  "cases": [
+    {
+      "id": "irregular_repeated",
+      "rows": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          0,
+          2,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ]
+      ],
+      "public": {
+        "frame_rows": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            0,
+            2,
+            2,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            0,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ]
+        ],
+        "frame_hash": "f150f76f4e7d8240",
+        "level": 1,
+        "levels_completed": 0,
+        "state": "NOT_FINISHED",
+        "available_action_refs": [
+          "ACTION7",
+          "ACTION6",
+          "ACTION5",
+          "ACTION2"
+        ]
+      },
+      "observation": {
+        "revision": 1,
+        "level_epoch": 1,
+        "frame_hash": "f150f76f4e7d8240",
+        "observation_ref": "reference:epoch:1:revision:1:frame:f150f76f4e7d8240",
+        "coordinate_basis": "screen",
+        "entities": [
+          {
+            "id": "component:5afe69f58b9b9a69:0",
+            "signature": "5afe69f58b9b9a69f173935bb332e372b91f3d8dbad936c3a75700aee0a115db",
+            "position": [
+              0,
+              0
+            ],
+            "bbox": [
+              0,
+              0,
+              6,
+              5
+            ],
+            "area": 30,
+            "scale": 1,
+            "mask": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                4
+              ],
+              [
+                0,
+                5
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                2,
+                2
+              ],
+              [
+                2,
+                3
+              ],
+              [
+                2,
+                5
+              ],
+              [
+                3,
+                0
+              ],
+              [
+                3,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                4,
+                0
+              ],
+              [
+                4,
+                2
+              ],
+              [
+                4,
+                3
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                6,
+                0
+              ],
+              [
+                6,
+                1
+              ],
+              [
+                6,
+                2
+              ],
+              [
+                6,
+                3
+              ],
+              [
+                6,
+                4
+              ],
+              [
+                6,
+                5
+              ]
+            ],
+            "palette_value": 0,
+            "rectangular": false,
+            "identity_ambiguous": false,
+            "identity_scope": "monochrome_component_not_physical_object"
+          },
+          {
+            "id": "component:348ec42b369116d4:0",
+            "signature": "348ec42b369116d4c93c40dc6831e75f703d8ce523c6bd2e77ce2817e1905052",
+            "position": [
+              1,
+              1
+            ],
+            "bbox": [
+              1,
+              1,
+              2,
+              2
+            ],
+            "area": 3,
+            "scale": 1,
+            "mask": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            "palette_value": 1,
+            "rectangular": false,
+            "identity_ambiguous": true,
+            "identity_scope": "monochrome_component_not_physical_object"
+          },
+          {
+            "id": "component:c7cc8e221cd42707:0",
+            "signature": "c7cc8e221cd4270712e2f977300568d0e8af96d4bef0871a549c2cf21937db8a",
+            "position": [
+              4,
+              1
+            ],
+            "bbox": [
+              4,
+              1,
+              5,
+              2
+            ],
+            "area": 3,
+            "scale": 1,
+            "mask": [
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "palette_value": 2,
+            "rectangular": false,
+            "identity_ambiguous": false,
+            "identity_scope": "monochrome_component_not_physical_object"
+          },
+          {
+            "id": "component:348ec42b369116d4:1",
+            "signature": "348ec42b369116d4c93c40dc6831e75f703d8ce523c6bd2e77ce2817e1905052",
+            "position": [
+              1,
+              4
+            ],
+            "bbox": [
+              1,
+              4,
+              2,
+              5
+            ],
+            "area": 3,
+            "scale": 1,
+            "mask": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            "palette_value": 1,
+            "rectangular": false,
+            "identity_ambiguous": true,
+            "identity_scope": "monochrome_component_not_physical_object"
+          },
+          {
+            "id": "component:348ec42b369116d4:2",
+            "signature": "348ec42b369116d4c93c40dc6831e75f703d8ce523c6bd2e77ce2817e1905052",
+            "position": [
+              4,
+              4
+            ],
+            "bbox": [
+              4,
+              4,
+              5,
+              5
+            ],
+            "area": 3,
+            "scale": 1,
+            "mask": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            "palette_value": 1,
+            "rectangular": false,
+            "identity_ambiguous": true,
+            "identity_scope": "monochrome_component_not_physical_object"
+          }
+        ],
+        "available_action_refs": [
+          "ACTION7",
+          "ACTION6",
+          "ACTION5",
+          "ACTION2"
+        ],
+        "state": "NOT_FINISHED",
+        "levels_completed": 0,
+        "unknowns": [
+          "physical_object_roles",
+          "terminal_objective",
+          "input_semantics",
+          "logical_lattice"
+        ],
+        "provenance": "public_frame_connected_components_only"
+      },
+      "parts": [
+        {
+          "id": "component-0",
+          "color": 0,
+          "bbox": [
+            0,
+            0,
+            6,
+            5
+          ],
+          "area": 30,
+          "scale": 1,
+          "mask": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              0,
+              5
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              3
+            ],
+            [
+              5,
+              5
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              6,
+              1
+            ],
+            [
+              6,
+              2
+            ],
+            [
+              6,
+              3
+            ],
+            [
+              6,
+              4
+            ],
+            [
+              6,
+              5
+            ]
+          ],
+          "normalized": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              0,
+              5
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              3
+            ],
+            [
+              5,
+              5
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              6,
+              1
+            ],
+            [
+              6,
+              2
+            ],
+            [
+              6,
+              3
+            ],
+            [
+              6,
+              4
+            ],
+            [
+              6,
+              5
+            ]
+          ],
+          "rectangular": false
+        },
+        {
+          "id": "component-1",
+          "color": 1,
+          "bbox": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "area": 3,
+          "scale": 1,
+          "mask": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "normalized": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "rectangular": false
+        },
+        {
+          "id": "component-2",
+          "color": 2,
+          "bbox": [
+            4,
+            1,
+            5,
+            2
+          ],
+          "area": 3,
+          "scale": 1,
+          "mask": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "normalized": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "rectangular": false
+        },
+        {
+          "id": "component-3",
+          "color": 1,
+          "bbox": [
+            1,
+            4,
+            2,
+            5
+          ],
+          "area": 3,
+          "scale": 1,
+          "mask": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "normalized": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "rectangular": false
+        },
+        {
+          "id": "component-4",
+          "color": 1,
+          "bbox": [
+            4,
+            4,
+            5,
+            5
+          ],
+          "area": 3,
+          "scale": 1,
+          "mask": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "normalized": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "rectangular": false
+        }
+      ],
+      "correspondences": [
+        {
+          "first": "component-1",
+          "second": "component-2",
+          "quarter_turns": [
+            1
+          ],
+          "same_color": false,
+          "scale_ratio": [
+            1,
+            1
+          ],
+          "orientation_already_equal": false
+        },
+        {
+          "first": "component-1",
+          "second": "component-3",
+          "quarter_turns": [
+            0
+          ],
+          "same_color": true,
+          "scale_ratio": [
+            1,
+            1
+          ],
+          "orientation_already_equal": true
+        },
+        {
+          "first": "component-1",
+          "second": "component-4",
+          "quarter_turns": [
+            0
+          ],
+          "same_color": true,
+          "scale_ratio": [
+            1,
+            1
+          ],
+          "orientation_already_equal": true
+        },
+        {
+          "first": "component-2",
+          "second": "component-3",
+          "quarter_turns": [
+            3
+          ],
+          "same_color": false,
+          "scale_ratio": [
+            1,
+            1
+          ],
+          "orientation_already_equal": false
+        },
+        {
+          "first": "component-2",
+          "second": "component-4",
+          "quarter_turns": [
+            3
+          ],
+          "same_color": false,
+          "scale_ratio": [
+            1,
+            1
+          ],
+          "orientation_already_equal": false
+        },
+        {
+          "first": "component-3",
+          "second": "component-4",
+          "quarter_turns": [
+            0
+          ],
+          "same_color": true,
+          "scale_ratio": [
+            1,
+            1
+          ],
+          "orientation_already_equal": true
+        }
+      ],
+      "domains": [
+        {
+          "limit": 3,
+          "candidates": [
+            {
+              "action_ref": "ACTION2",
+              "data": {}
+            },
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 3,
+                "y": 2
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 5,
+                "y": 1
+              }
+            }
+          ],
+          "bindings": [
+            [
+              "1,1",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:f150f76f4e7d8240",
+                "level_epoch": 1,
+                "frame_hash": "f150f76f4e7d8240",
+                "entity_ref": "component:348ec42b369116d4:0",
+                "signature": "348ec42b369116d4c93c40dc6831e75f703d8ce523c6bd2e77ce2817e1905052",
+                "bbox": [
+                  1,
+                  1,
+                  2,
+                  2
+                ],
+                "palette_value": 1,
+                "point": [
+                  1,
+                  1
+                ],
+                "total_occurrences": 5,
+                "sampled_occurrences": 3
+              }
+            ],
+            [
+              "3,2",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:f150f76f4e7d8240",
+                "level_epoch": 1,
+                "frame_hash": "f150f76f4e7d8240",
+                "entity_ref": "component:5afe69f58b9b9a69:0",
+                "signature": "5afe69f58b9b9a69f173935bb332e372b91f3d8dbad936c3a75700aee0a115db",
+                "bbox": [
+                  0,
+                  0,
+                  6,
+                  5
+                ],
+                "palette_value": 0,
+                "point": [
+                  3,
+                  2
+                ],
+                "total_occurrences": 5,
+                "sampled_occurrences": 3
+              }
+            ],
+            [
+              "5,1",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:f150f76f4e7d8240",
+                "level_epoch": 1,
+                "frame_hash": "f150f76f4e7d8240",
+                "entity_ref": "component:c7cc8e221cd42707:0",
+                "signature": "c7cc8e221cd4270712e2f977300568d0e8af96d4bef0871a549c2cf21937db8a",
+                "bbox": [
+                  4,
+                  1,
+                  5,
+                  2
+                ],
+                "palette_value": 2,
+                "point": [
+                  5,
+                  1
+                ],
+                "total_occurrences": 5,
+                "sampled_occurrences": 3
+              }
+            ]
+          ]
+        },
+        {
+          "limit": 4096,
+          "candidates": [
+            {
+              "action_ref": "ACTION2",
+              "data": {}
+            },
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 3,
+                "y": 2
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 5,
+                "y": 1
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 1,
+                "y": 4
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 4
+              }
+            }
+          ],
+          "bindings": [
+            [
+              "1,1",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:f150f76f4e7d8240",
+                "level_epoch": 1,
+                "frame_hash": "f150f76f4e7d8240",
+                "entity_ref": "component:348ec42b369116d4:0",
+                "signature": "348ec42b369116d4c93c40dc6831e75f703d8ce523c6bd2e77ce2817e1905052",
+                "bbox": [
+                  1,
+                  1,
+                  2,
+                  2
+                ],
+                "palette_value": 1,
+                "point": [
+                  1,
+                  1
+                ],
+                "total_occurrences": 5,
+                "sampled_occurrences": 5
+              }
+            ],
+            [
+              "3,2",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:f150f76f4e7d8240",
+                "level_epoch": 1,
+                "frame_hash": "f150f76f4e7d8240",
+                "entity_ref": "component:5afe69f58b9b9a69:0",
+                "signature": "5afe69f58b9b9a69f173935bb332e372b91f3d8dbad936c3a75700aee0a115db",
+                "bbox": [
+                  0,
+                  0,
+                  6,
+                  5
+                ],
+                "palette_value": 0,
+                "point": [
+                  3,
+                  2
+                ],
+                "total_occurrences": 5,
+                "sampled_occurrences": 5
+              }
+            ],
+            [
+              "5,1",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:f150f76f4e7d8240",
+                "level_epoch": 1,
+                "frame_hash": "f150f76f4e7d8240",
+                "entity_ref": "component:c7cc8e221cd42707:0",
+                "signature": "c7cc8e221cd4270712e2f977300568d0e8af96d4bef0871a549c2cf21937db8a",
+                "bbox": [
+                  4,
+                  1,
+                  5,
+                  2
+                ],
+                "palette_value": 2,
+                "point": [
+                  5,
+                  1
+                ],
+                "total_occurrences": 5,
+                "sampled_occurrences": 5
+              }
+            ],
+            [
+              "1,4",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:f150f76f4e7d8240",
+                "level_epoch": 1,
+                "frame_hash": "f150f76f4e7d8240",
+                "entity_ref": "component:348ec42b369116d4:1",
+                "signature": "348ec42b369116d4c93c40dc6831e75f703d8ce523c6bd2e77ce2817e1905052",
+                "bbox": [
+                  1,
+                  4,
+                  2,
+                  5
+                ],
+                "palette_value": 1,
+                "point": [
+                  1,
+                  4
+                ],
+                "total_occurrences": 5,
+                "sampled_occurrences": 5
+              }
+            ],
+            [
+              "4,4",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:f150f76f4e7d8240",
+                "level_epoch": 1,
+                "frame_hash": "f150f76f4e7d8240",
+                "entity_ref": "component:348ec42b369116d4:2",
+                "signature": "348ec42b369116d4c93c40dc6831e75f703d8ce523c6bd2e77ce2817e1905052",
+                "bbox": [
+                  4,
+                  4,
+                  5,
+                  5
+                ],
+                "palette_value": 1,
+                "point": [
+                  4,
+                  4
+                ],
+                "total_occurrences": 5,
+                "sampled_occurrences": 5
+              }
+            ]
+          ]
+        }
+      ],
+      "v5": {
+        "4": {
+          "components": [
+            {
+              "component_id": "block.shape_6x7.area_30.pattern_142189a5.instance_001",
+              "value": 0,
+              "pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  0,
+                  4
+                ],
+                [
+                  0,
+                  5
+                ],
+                [
+                  0,
+                  6
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  0
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  6
+                ],
+                [
+                  5,
+                  0
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  5,
+                  5
+                ],
+                [
+                  5,
+                  6
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  0,
+                  4
+                ],
+                [
+                  0,
+                  5
+                ],
+                [
+                  0,
+                  6
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  0
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  6
+                ],
+                [
+                  5,
+                  0
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  5,
+                  5
+                ],
+                [
+                  5,
+                  6
+                ]
+              ],
+              "bbox": {
+                "top": 0,
+                "left": 0,
+                "bottom": 5,
+                "right": 6,
+                "width": 7,
+                "height": 6
+              },
+              "area": 30,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "block.shape_2x2.area_3.pattern_0c273d66.instance_001",
+              "value": 1,
+              "pixels": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ]
+              ],
+              "bbox": {
+                "top": 1,
+                "left": 1,
+                "bottom": 2,
+                "right": 2,
+                "width": 2,
+                "height": 2
+              },
+              "area": 3,
+              "touches_frame_boundary": false,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "block.shape_2x2.area_3.pattern_a1a1b91a.instance_001",
+              "value": 2,
+              "pixels": [
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  2,
+                  5
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  1
+                ]
+              ],
+              "bbox": {
+                "top": 1,
+                "left": 4,
+                "bottom": 2,
+                "right": 5,
+                "width": 2,
+                "height": 2
+              },
+              "area": 3,
+              "touches_frame_boundary": false,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "block.shape_2x2.area_3.pattern_0c273d66.instance_002",
+              "value": 1,
+              "pixels": [
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  5,
+                  1
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ]
+              ],
+              "bbox": {
+                "top": 4,
+                "left": 1,
+                "bottom": 5,
+                "right": 2,
+                "width": 2,
+                "height": 2
+              },
+              "area": 3,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "block.shape_2x2.area_3.pattern_0c273d66.instance_003",
+              "value": 1,
+              "pixels": [
+                [
+                  4,
+                  4
+                ],
+                [
+                  4,
+                  5
+                ],
+                [
+                  5,
+                  4
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ]
+              ],
+              "bbox": {
+                "top": 4,
+                "left": 4,
+                "bottom": 5,
+                "right": 5,
+                "width": 2,
+                "height": 2
+              },
+              "area": 3,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            }
+          ],
+          "schema_version": "yf_arc3_v5.component_extraction_result.v1"
+        },
+        "8": {
+          "components": [
+            {
+              "component_id": "zone.shape_6x7.area_30.pattern_142189a5.instance_001",
+              "value": 0,
+              "pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  0,
+                  4
+                ],
+                [
+                  0,
+                  5
+                ],
+                [
+                  0,
+                  6
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  0
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  6
+                ],
+                [
+                  5,
+                  0
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  5,
+                  5
+                ],
+                [
+                  5,
+                  6
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  0,
+                  4
+                ],
+                [
+                  0,
+                  5
+                ],
+                [
+                  0,
+                  6
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  4,
+                  0
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  6
+                ],
+                [
+                  5,
+                  0
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  5,
+                  5
+                ],
+                [
+                  5,
+                  6
+                ]
+              ],
+              "bbox": {
+                "top": 0,
+                "left": 0,
+                "bottom": 5,
+                "right": 6,
+                "width": 7,
+                "height": 6
+              },
+              "area": 30,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "zone.shape_2x2.area_3.pattern_0c273d66.instance_001",
+              "value": 1,
+              "pixels": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ]
+              ],
+              "bbox": {
+                "top": 1,
+                "left": 1,
+                "bottom": 2,
+                "right": 2,
+                "width": 2,
+                "height": 2
+              },
+              "area": 3,
+              "touches_frame_boundary": false,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "zone.shape_2x2.area_3.pattern_a1a1b91a.instance_001",
+              "value": 2,
+              "pixels": [
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  2,
+                  5
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  1
+                ]
+              ],
+              "bbox": {
+                "top": 1,
+                "left": 4,
+                "bottom": 2,
+                "right": 5,
+                "width": 2,
+                "height": 2
+              },
+              "area": 3,
+              "touches_frame_boundary": false,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "zone.shape_2x2.area_3.pattern_0c273d66.instance_002",
+              "value": 1,
+              "pixels": [
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  5,
+                  1
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ]
+              ],
+              "bbox": {
+                "top": 4,
+                "left": 1,
+                "bottom": 5,
+                "right": 2,
+                "width": 2,
+                "height": 2
+              },
+              "area": 3,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "zone.shape_2x2.area_3.pattern_0c273d66.instance_003",
+              "value": 1,
+              "pixels": [
+                [
+                  4,
+                  4
+                ],
+                [
+                  4,
+                  5
+                ],
+                [
+                  5,
+                  4
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ]
+              ],
+              "bbox": {
+                "top": 4,
+                "left": 4,
+                "bottom": 5,
+                "right": 5,
+                "width": 2,
+                "height": 2
+              },
+              "area": 3,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            }
+          ],
+          "schema_version": "yf_arc3_v5.component_extraction_result.v1"
+        }
+      },
+      "rowsDigest": "583899b58578a1e9f1e52509dbf52388c1a418dd6ffa2c40d450b5dcdc0af693",
+      "witness": {
+        "observation_ref": "reference:epoch:1:revision:1:frame:f150f76f4e7d8240",
+        "level_epoch": 1,
+        "frame_hash": "f150f76f4e7d8240",
+        "entity_ref": "component:348ec42b369116d4:0",
+        "signature": "348ec42b369116d4c93c40dc6831e75f703d8ce523c6bd2e77ce2817e1905052",
+        "bbox": [
+          1,
+          1,
+          2,
+          2
+        ],
+        "palette_value": 1,
+        "point": [
+          1,
+          1
+        ],
+        "projection_bbox": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "projected_rows_digest": "60102c5f31d5e587148fa0237c6931a1d99e918bad2d6e3f6648530bac819298",
+        "scope": "source_derived_locus_on_observed_pixel",
+        "reason": "measured reference",
+        "evidence": [
+          "reference:epoch:1:revision:1:frame:f150f76f4e7d8240"
+        ]
+      }
+    },
+    {
+      "id": "diagonal_connectivity",
+      "rows": [
+        [
+          1,
+          0,
+          2
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          2,
+          0,
+          1
+        ]
+      ],
+      "public": {
+        "frame_rows": [
+          [
+            1,
+            0,
+            2
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            2,
+            0,
+            1
+          ]
+        ],
+        "frame_hash": "c1dde8a83569f031",
+        "level": 1,
+        "levels_completed": 0,
+        "state": "NOT_FINISHED",
+        "available_action_refs": [
+          "ACTION7",
+          "ACTION6",
+          "ACTION5",
+          "ACTION2"
+        ]
+      },
+      "observation": {
+        "revision": 1,
+        "level_epoch": 1,
+        "frame_hash": "c1dde8a83569f031",
+        "observation_ref": "reference:epoch:1:revision:1:frame:c1dde8a83569f031",
+        "coordinate_basis": "screen",
+        "entities": [
+          {
+            "id": "component:5bcc1f6ebcb67f39:0",
+            "signature": "5bcc1f6ebcb67f3910e2e246b40ff36d6d5340af576af6727e0cf963885fa0fd",
+            "position": [
+              0,
+              0
+            ],
+            "bbox": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "area": 1,
+            "scale": 1,
+            "mask": [
+              [
+                0,
+                0
+              ]
+            ],
+            "palette_value": 1,
+            "rectangular": true,
+            "identity_ambiguous": true,
+            "identity_scope": "monochrome_component_not_physical_object"
+          },
+          {
+            "id": "component:6661afe7e976a28e:0",
+            "signature": "6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53",
+            "position": [
+              1,
+              0
+            ],
+            "bbox": [
+              1,
+              0,
+              1,
+              0
+            ],
+            "area": 1,
+            "scale": 1,
+            "mask": [
+              [
+                0,
+                0
+              ]
+            ],
+            "palette_value": 0,
+            "rectangular": true,
+            "identity_ambiguous": true,
+            "identity_scope": "monochrome_component_not_physical_object"
+          },
+          {
+            "id": "component:3d56381074064705:0",
+            "signature": "3d563810740647054900c733a25d9423781e0b6dbd965c6862eb9925d469a030",
+            "position": [
+              2,
+              0
+            ],
+            "bbox": [
+              2,
+              0,
+              2,
+              0
+            ],
+            "area": 1,
+            "scale": 1,
+            "mask": [
+              [
+                0,
+                0
+              ]
+            ],
+            "palette_value": 2,
+            "rectangular": true,
+            "identity_ambiguous": true,
+            "identity_scope": "monochrome_component_not_physical_object"
+          },
+          {
+            "id": "component:6661afe7e976a28e:1",
+            "signature": "6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53",
+            "position": [
+              0,
+              1
+            ],
+            "bbox": [
+              0,
+              1,
+              0,
+              1
+            ],
+            "area": 1,
+            "scale": 1,
+            "mask": [
+              [
+                0,
+                0
+              ]
+            ],
+            "palette_value": 0,
+            "rectangular": true,
+            "identity_ambiguous": true,
+            "identity_scope": "monochrome_component_not_physical_object"
+          },
+          {
+            "id": "component:5bcc1f6ebcb67f39:1",
+            "signature": "5bcc1f6ebcb67f3910e2e246b40ff36d6d5340af576af6727e0cf963885fa0fd",
+            "position": [
+              1,
+              1
+            ],
+            "bbox": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "area": 1,
+            "scale": 1,
+            "mask": [
+              [
+                0,
+                0
+              ]
+            ],
+            "palette_value": 1,
+            "rectangular": true,
+            "identity_ambiguous": true,
+            "identity_scope": "monochrome_component_not_physical_object"
+          },
+          {
+            "id": "component:6661afe7e976a28e:2",
+            "signature": "6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53",
+            "position": [
+              2,
+              1
+            ],
+            "bbox": [
+              2,
+              1,
+              2,
+              1
+            ],
+            "area": 1,
+            "scale": 1,
+            "mask": [
+              [
+                0,
+                0
+              ]
+            ],
+            "palette_value": 0,
+            "rectangular": true,
+            "identity_ambiguous": true,
+            "identity_scope": "monochrome_component_not_physical_object"
+          },
+          {
+            "id": "component:3d56381074064705:1",
+            "signature": "3d563810740647054900c733a25d9423781e0b6dbd965c6862eb9925d469a030",
+            "position": [
+              0,
+              2
+            ],
+            "bbox": [
+              0,
+              2,
+              0,
+              2
+            ],
+            "area": 1,
+            "scale": 1,
+            "mask": [
+              [
+                0,
+                0
+              ]
+            ],
+            "palette_value": 2,
+            "rectangular": true,
+            "identity_ambiguous": true,
+            "identity_scope": "monochrome_component_not_physical_object"
+          },
+          {
+            "id": "component:6661afe7e976a28e:3",
+            "signature": "6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53",
+            "position": [
+              1,
+              2
+            ],
+            "bbox": [
+              1,
+              2,
+              1,
+              2
+            ],
+            "area": 1,
+            "scale": 1,
+            "mask": [
+              [
+                0,
+                0
+              ]
+            ],
+            "palette_value": 0,
+            "rectangular": true,
+            "identity_ambiguous": true,
+            "identity_scope": "monochrome_component_not_physical_object"
+          },
+          {
+            "id": "component:5bcc1f6ebcb67f39:2",
+            "signature": "5bcc1f6ebcb67f3910e2e246b40ff36d6d5340af576af6727e0cf963885fa0fd",
+            "position": [
+              2,
+              2
+            ],
+            "bbox": [
+              2,
+              2,
+              2,
+              2
+            ],
+            "area": 1,
+            "scale": 1,
+            "mask": [
+              [
+                0,
+                0
+              ]
+            ],
+            "palette_value": 1,
+            "rectangular": true,
+            "identity_ambiguous": true,
+            "identity_scope": "monochrome_component_not_physical_object"
+          }
+        ],
+        "available_action_refs": [
+          "ACTION7",
+          "ACTION6",
+          "ACTION5",
+          "ACTION2"
+        ],
+        "state": "NOT_FINISHED",
+        "levels_completed": 0,
+        "unknowns": [
+          "physical_object_roles",
+          "terminal_objective",
+          "input_semantics",
+          "logical_lattice"
+        ],
+        "provenance": "public_frame_connected_components_only"
+      },
+      "parts": [
+        {
+          "id": "component-0",
+          "color": 1,
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "area": 1,
+          "scale": 1,
+          "mask": [
+            [
+              0,
+              0
+            ]
+          ],
+          "normalized": [
+            [
+              0,
+              0
+            ]
+          ],
+          "rectangular": true
+        },
+        {
+          "id": "component-1",
+          "color": 0,
+          "bbox": [
+            1,
+            0,
+            1,
+            0
+          ],
+          "area": 1,
+          "scale": 1,
+          "mask": [
+            [
+              0,
+              0
+            ]
+          ],
+          "normalized": [
+            [
+              0,
+              0
+            ]
+          ],
+          "rectangular": true
+        },
+        {
+          "id": "component-2",
+          "color": 2,
+          "bbox": [
+            2,
+            0,
+            2,
+            0
+          ],
+          "area": 1,
+          "scale": 1,
+          "mask": [
+            [
+              0,
+              0
+            ]
+          ],
+          "normalized": [
+            [
+              0,
+              0
+            ]
+          ],
+          "rectangular": true
+        },
+        {
+          "id": "component-3",
+          "color": 0,
+          "bbox": [
+            0,
+            1,
+            0,
+            1
+          ],
+          "area": 1,
+          "scale": 1,
+          "mask": [
+            [
+              0,
+              0
+            ]
+          ],
+          "normalized": [
+            [
+              0,
+              0
+            ]
+          ],
+          "rectangular": true
+        },
+        {
+          "id": "component-4",
+          "color": 1,
+          "bbox": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "area": 1,
+          "scale": 1,
+          "mask": [
+            [
+              0,
+              0
+            ]
+          ],
+          "normalized": [
+            [
+              0,
+              0
+            ]
+          ],
+          "rectangular": true
+        },
+        {
+          "id": "component-5",
+          "color": 0,
+          "bbox": [
+            2,
+            1,
+            2,
+            1
+          ],
+          "area": 1,
+          "scale": 1,
+          "mask": [
+            [
+              0,
+              0
+            ]
+          ],
+          "normalized": [
+            [
+              0,
+              0
+            ]
+          ],
+          "rectangular": true
+        },
+        {
+          "id": "component-6",
+          "color": 2,
+          "bbox": [
+            0,
+            2,
+            0,
+            2
+          ],
+          "area": 1,
+          "scale": 1,
+          "mask": [
+            [
+              0,
+              0
+            ]
+          ],
+          "normalized": [
+            [
+              0,
+              0
+            ]
+          ],
+          "rectangular": true
+        },
+        {
+          "id": "component-7",
+          "color": 0,
+          "bbox": [
+            1,
+            2,
+            1,
+            2
+          ],
+          "area": 1,
+          "scale": 1,
+          "mask": [
+            [
+              0,
+              0
+            ]
+          ],
+          "normalized": [
+            [
+              0,
+              0
+            ]
+          ],
+          "rectangular": true
+        },
+        {
+          "id": "component-8",
+          "color": 1,
+          "bbox": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "area": 1,
+          "scale": 1,
+          "mask": [
+            [
+              0,
+              0
+            ]
+          ],
+          "normalized": [
+            [
+              0,
+              0
+            ]
+          ],
+          "rectangular": true
+        }
+      ],
+      "correspondences": [],
+      "domains": [
+        {
+          "limit": 3,
+          "candidates": [
+            {
+              "action_ref": "ACTION2",
+              "data": {}
+            },
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 2,
+                "y": 0
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 1,
+                "y": 0
+              }
+            }
+          ],
+          "bindings": [
+            [
+              "2,0",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:c1dde8a83569f031",
+                "level_epoch": 1,
+                "frame_hash": "c1dde8a83569f031",
+                "entity_ref": "component:3d56381074064705:0",
+                "signature": "3d563810740647054900c733a25d9423781e0b6dbd965c6862eb9925d469a030",
+                "bbox": [
+                  2,
+                  0,
+                  2,
+                  0
+                ],
+                "palette_value": 2,
+                "point": [
+                  2,
+                  0
+                ],
+                "total_occurrences": 9,
+                "sampled_occurrences": 3
+              }
+            ],
+            [
+              "0,0",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:c1dde8a83569f031",
+                "level_epoch": 1,
+                "frame_hash": "c1dde8a83569f031",
+                "entity_ref": "component:5bcc1f6ebcb67f39:0",
+                "signature": "5bcc1f6ebcb67f3910e2e246b40ff36d6d5340af576af6727e0cf963885fa0fd",
+                "bbox": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "palette_value": 1,
+                "point": [
+                  0,
+                  0
+                ],
+                "total_occurrences": 9,
+                "sampled_occurrences": 3
+              }
+            ],
+            [
+              "1,0",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:c1dde8a83569f031",
+                "level_epoch": 1,
+                "frame_hash": "c1dde8a83569f031",
+                "entity_ref": "component:6661afe7e976a28e:0",
+                "signature": "6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53",
+                "bbox": [
+                  1,
+                  0,
+                  1,
+                  0
+                ],
+                "palette_value": 0,
+                "point": [
+                  1,
+                  0
+                ],
+                "total_occurrences": 9,
+                "sampled_occurrences": 3
+              }
+            ]
+          ]
+        },
+        {
+          "limit": 4096,
+          "candidates": [
+            {
+              "action_ref": "ACTION2",
+              "data": {}
+            },
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 2,
+                "y": 0
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 1,
+                "y": 0
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 0,
+                "y": 2
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 1,
+                "y": 1
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 0,
+                "y": 1
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 2,
+                "y": 2
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 2,
+                "y": 1
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 1,
+                "y": 2
+              }
+            }
+          ],
+          "bindings": [
+            [
+              "2,0",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:c1dde8a83569f031",
+                "level_epoch": 1,
+                "frame_hash": "c1dde8a83569f031",
+                "entity_ref": "component:3d56381074064705:0",
+                "signature": "3d563810740647054900c733a25d9423781e0b6dbd965c6862eb9925d469a030",
+                "bbox": [
+                  2,
+                  0,
+                  2,
+                  0
+                ],
+                "palette_value": 2,
+                "point": [
+                  2,
+                  0
+                ],
+                "total_occurrences": 9,
+                "sampled_occurrences": 9
+              }
+            ],
+            [
+              "0,0",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:c1dde8a83569f031",
+                "level_epoch": 1,
+                "frame_hash": "c1dde8a83569f031",
+                "entity_ref": "component:5bcc1f6ebcb67f39:0",
+                "signature": "5bcc1f6ebcb67f3910e2e246b40ff36d6d5340af576af6727e0cf963885fa0fd",
+                "bbox": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "palette_value": 1,
+                "point": [
+                  0,
+                  0
+                ],
+                "total_occurrences": 9,
+                "sampled_occurrences": 9
+              }
+            ],
+            [
+              "1,0",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:c1dde8a83569f031",
+                "level_epoch": 1,
+                "frame_hash": "c1dde8a83569f031",
+                "entity_ref": "component:6661afe7e976a28e:0",
+                "signature": "6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53",
+                "bbox": [
+                  1,
+                  0,
+                  1,
+                  0
+                ],
+                "palette_value": 0,
+                "point": [
+                  1,
+                  0
+                ],
+                "total_occurrences": 9,
+                "sampled_occurrences": 9
+              }
+            ],
+            [
+              "0,2",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:c1dde8a83569f031",
+                "level_epoch": 1,
+                "frame_hash": "c1dde8a83569f031",
+                "entity_ref": "component:3d56381074064705:1",
+                "signature": "3d563810740647054900c733a25d9423781e0b6dbd965c6862eb9925d469a030",
+                "bbox": [
+                  0,
+                  2,
+                  0,
+                  2
+                ],
+                "palette_value": 2,
+                "point": [
+                  0,
+                  2
+                ],
+                "total_occurrences": 9,
+                "sampled_occurrences": 9
+              }
+            ],
+            [
+              "1,1",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:c1dde8a83569f031",
+                "level_epoch": 1,
+                "frame_hash": "c1dde8a83569f031",
+                "entity_ref": "component:5bcc1f6ebcb67f39:1",
+                "signature": "5bcc1f6ebcb67f3910e2e246b40ff36d6d5340af576af6727e0cf963885fa0fd",
+                "bbox": [
+                  1,
+                  1,
+                  1,
+                  1
+                ],
+                "palette_value": 1,
+                "point": [
+                  1,
+                  1
+                ],
+                "total_occurrences": 9,
+                "sampled_occurrences": 9
+              }
+            ],
+            [
+              "0,1",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:c1dde8a83569f031",
+                "level_epoch": 1,
+                "frame_hash": "c1dde8a83569f031",
+                "entity_ref": "component:6661afe7e976a28e:1",
+                "signature": "6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53",
+                "bbox": [
+                  0,
+                  1,
+                  0,
+                  1
+                ],
+                "palette_value": 0,
+                "point": [
+                  0,
+                  1
+                ],
+                "total_occurrences": 9,
+                "sampled_occurrences": 9
+              }
+            ],
+            [
+              "2,2",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:c1dde8a83569f031",
+                "level_epoch": 1,
+                "frame_hash": "c1dde8a83569f031",
+                "entity_ref": "component:5bcc1f6ebcb67f39:2",
+                "signature": "5bcc1f6ebcb67f3910e2e246b40ff36d6d5340af576af6727e0cf963885fa0fd",
+                "bbox": [
+                  2,
+                  2,
+                  2,
+                  2
+                ],
+                "palette_value": 1,
+                "point": [
+                  2,
+                  2
+                ],
+                "total_occurrences": 9,
+                "sampled_occurrences": 9
+              }
+            ],
+            [
+              "2,1",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:c1dde8a83569f031",
+                "level_epoch": 1,
+                "frame_hash": "c1dde8a83569f031",
+                "entity_ref": "component:6661afe7e976a28e:2",
+                "signature": "6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53",
+                "bbox": [
+                  2,
+                  1,
+                  2,
+                  1
+                ],
+                "palette_value": 0,
+                "point": [
+                  2,
+                  1
+                ],
+                "total_occurrences": 9,
+                "sampled_occurrences": 9
+              }
+            ],
+            [
+              "1,2",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:c1dde8a83569f031",
+                "level_epoch": 1,
+                "frame_hash": "c1dde8a83569f031",
+                "entity_ref": "component:6661afe7e976a28e:3",
+                "signature": "6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53",
+                "bbox": [
+                  1,
+                  2,
+                  1,
+                  2
+                ],
+                "palette_value": 0,
+                "point": [
+                  1,
+                  2
+                ],
+                "total_occurrences": 9,
+                "sampled_occurrences": 9
+              }
+            ]
+          ]
+        }
+      ],
+      "v5": {
+        "4": {
+          "components": [
+            {
+              "component_id": "block.shape_1x1.area_1.pattern_b0d317a3.instance_001",
+              "value": 1,
+              "pixels": [
+                [
+                  0,
+                  0
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ]
+              ],
+              "bbox": {
+                "top": 0,
+                "left": 0,
+                "bottom": 0,
+                "right": 0,
+                "width": 1,
+                "height": 1
+              },
+              "area": 1,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "block.shape_1x1.area_1.pattern_b0d317a3.instance_002",
+              "value": 0,
+              "pixels": [
+                [
+                  0,
+                  1
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ]
+              ],
+              "bbox": {
+                "top": 0,
+                "left": 1,
+                "bottom": 0,
+                "right": 1,
+                "width": 1,
+                "height": 1
+              },
+              "area": 1,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "block.shape_1x1.area_1.pattern_b0d317a3.instance_003",
+              "value": 2,
+              "pixels": [
+                [
+                  0,
+                  2
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ]
+              ],
+              "bbox": {
+                "top": 0,
+                "left": 2,
+                "bottom": 0,
+                "right": 2,
+                "width": 1,
+                "height": 1
+              },
+              "area": 1,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "block.shape_1x1.area_1.pattern_b0d317a3.instance_004",
+              "value": 0,
+              "pixels": [
+                [
+                  1,
+                  0
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ]
+              ],
+              "bbox": {
+                "top": 1,
+                "left": 0,
+                "bottom": 1,
+                "right": 0,
+                "width": 1,
+                "height": 1
+              },
+              "area": 1,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "block.shape_1x1.area_1.pattern_b0d317a3.instance_005",
+              "value": 1,
+              "pixels": [
+                [
+                  1,
+                  1
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ]
+              ],
+              "bbox": {
+                "top": 1,
+                "left": 1,
+                "bottom": 1,
+                "right": 1,
+                "width": 1,
+                "height": 1
+              },
+              "area": 1,
+              "touches_frame_boundary": false,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "block.shape_1x1.area_1.pattern_b0d317a3.instance_006",
+              "value": 0,
+              "pixels": [
+                [
+                  1,
+                  2
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ]
+              ],
+              "bbox": {
+                "top": 1,
+                "left": 2,
+                "bottom": 1,
+                "right": 2,
+                "width": 1,
+                "height": 1
+              },
+              "area": 1,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "block.shape_1x1.area_1.pattern_b0d317a3.instance_007",
+              "value": 2,
+              "pixels": [
+                [
+                  2,
+                  0
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ]
+              ],
+              "bbox": {
+                "top": 2,
+                "left": 0,
+                "bottom": 2,
+                "right": 0,
+                "width": 1,
+                "height": 1
+              },
+              "area": 1,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "block.shape_1x1.area_1.pattern_b0d317a3.instance_008",
+              "value": 0,
+              "pixels": [
+                [
+                  2,
+                  1
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ]
+              ],
+              "bbox": {
+                "top": 2,
+                "left": 1,
+                "bottom": 2,
+                "right": 1,
+                "width": 1,
+                "height": 1
+              },
+              "area": 1,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "block.shape_1x1.area_1.pattern_b0d317a3.instance_009",
+              "value": 1,
+              "pixels": [
+                [
+                  2,
+                  2
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ]
+              ],
+              "bbox": {
+                "top": 2,
+                "left": 2,
+                "bottom": 2,
+                "right": 2,
+                "width": 1,
+                "height": 1
+              },
+              "area": 1,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            }
+          ],
+          "schema_version": "yf_arc3_v5.component_extraction_result.v1"
+        },
+        "8": {
+          "components": [
+            {
+              "component_id": "zone.shape_3x3.area_3.pattern_f89ed23f.instance_001",
+              "value": 1,
+              "pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ]
+              ],
+              "bbox": {
+                "top": 0,
+                "left": 0,
+                "bottom": 2,
+                "right": 2,
+                "width": 3,
+                "height": 3
+              },
+              "area": 3,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "zone.shape_3x3.area_4.pattern_2e8cdc36.instance_001",
+              "value": 0,
+              "pixels": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ]
+              ],
+              "bbox": {
+                "top": 0,
+                "left": 0,
+                "bottom": 2,
+                "right": 2,
+                "width": 3,
+                "height": 3
+              },
+              "area": 4,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "zone.shape_1x1.area_1.pattern_b0d317a3.instance_001",
+              "value": 2,
+              "pixels": [
+                [
+                  0,
+                  2
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ]
+              ],
+              "bbox": {
+                "top": 0,
+                "left": 2,
+                "bottom": 0,
+                "right": 2,
+                "width": 1,
+                "height": 1
+              },
+              "area": 1,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "zone.shape_1x1.area_1.pattern_b0d317a3.instance_002",
+              "value": 2,
+              "pixels": [
+                [
+                  2,
+                  0
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ]
+              ],
+              "bbox": {
+                "top": 2,
+                "left": 0,
+                "bottom": 2,
+                "right": 0,
+                "width": 1,
+                "height": 1
+              },
+              "area": 1,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            }
+          ],
+          "schema_version": "yf_arc3_v5.component_extraction_result.v1"
+        }
+      },
+      "rowsDigest": "33057cd98909f9bc1570ce9b719f0c99fab4198411e903f8f504896aed86c308",
+      "witness": {
+        "observation_ref": "reference:epoch:1:revision:1:frame:c1dde8a83569f031",
+        "level_epoch": 1,
+        "frame_hash": "c1dde8a83569f031",
+        "entity_ref": "component:3d56381074064705:0",
+        "signature": "3d563810740647054900c733a25d9423781e0b6dbd965c6862eb9925d469a030",
+        "bbox": [
+          2,
+          0,
+          2,
+          0
+        ],
+        "palette_value": 2,
+        "point": [
+          2,
+          0
+        ],
+        "projection_bbox": [
+          2,
+          0,
+          2,
+          0
+        ],
+        "projected_rows_digest": "73173e3d4fa4015f255a11e3778b77641f4710cf144029cac5d317e1a19d9077",
+        "scope": "source_derived_locus_on_observed_pixel",
+        "reason": "measured reference",
+        "evidence": [
+          "reference:epoch:1:revision:1:frame:c1dde8a83569f031"
+        ]
+      }
+    },
+    {
+      "id": "centroid_hole",
+      "rows": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          2,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "public": {
+        "frame_rows": [
+          [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            2,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        ],
+        "frame_hash": "798ddbfd425ffcb3",
+        "level": 1,
+        "levels_completed": 0,
+        "state": "NOT_FINISHED",
+        "available_action_refs": [
+          "ACTION7",
+          "ACTION6",
+          "ACTION5",
+          "ACTION2"
+        ]
+      },
+      "observation": {
+        "revision": 1,
+        "level_epoch": 1,
+        "frame_hash": "798ddbfd425ffcb3",
+        "observation_ref": "reference:epoch:1:revision:1:frame:798ddbfd425ffcb3",
+        "coordinate_basis": "screen",
+        "entities": [
+          {
+            "id": "component:65ec539c1828795e:0",
+            "signature": "65ec539c1828795e8457c4f85e2fa66544e58e402577731a6ef92c44b8ce4dfc",
+            "position": [
+              0,
+              0
+            ],
+            "bbox": [
+              0,
+              0,
+              4,
+              4
+            ],
+            "area": 16,
+            "scale": 1,
+            "mask": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                4
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                4
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                2,
+                4
+              ],
+              [
+                3,
+                0
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                4,
+                0
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                4,
+                2
+              ],
+              [
+                4,
+                3
+              ],
+              [
+                4,
+                4
+              ]
+            ],
+            "palette_value": 1,
+            "rectangular": false,
+            "identity_ambiguous": false,
+            "identity_scope": "monochrome_component_not_physical_object"
+          },
+          {
+            "id": "component:8d400bdafad83242:0",
+            "signature": "8d400bdafad8324213a3e7eda26415353caf53e3563eba8e320efb762705f7f4",
+            "position": [
+              1,
+              1
+            ],
+            "bbox": [
+              1,
+              1,
+              3,
+              3
+            ],
+            "area": 8,
+            "scale": 1,
+            "mask": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                2,
+                2
+              ]
+            ],
+            "palette_value": 0,
+            "rectangular": false,
+            "identity_ambiguous": false,
+            "identity_scope": "monochrome_component_not_physical_object"
+          },
+          {
+            "id": "component:3d56381074064705:0",
+            "signature": "3d563810740647054900c733a25d9423781e0b6dbd965c6862eb9925d469a030",
+            "position": [
+              2,
+              2
+            ],
+            "bbox": [
+              2,
+              2,
+              2,
+              2
+            ],
+            "area": 1,
+            "scale": 1,
+            "mask": [
+              [
+                0,
+                0
+              ]
+            ],
+            "palette_value": 2,
+            "rectangular": true,
+            "identity_ambiguous": false,
+            "identity_scope": "monochrome_component_not_physical_object"
+          }
+        ],
+        "available_action_refs": [
+          "ACTION7",
+          "ACTION6",
+          "ACTION5",
+          "ACTION2"
+        ],
+        "state": "NOT_FINISHED",
+        "levels_completed": 0,
+        "unknowns": [
+          "physical_object_roles",
+          "terminal_objective",
+          "input_semantics",
+          "logical_lattice"
+        ],
+        "provenance": "public_frame_connected_components_only"
+      },
+      "parts": [
+        {
+          "id": "component-0",
+          "color": 1,
+          "bbox": [
+            0,
+            0,
+            4,
+            4
+          ],
+          "area": 16,
+          "scale": 1,
+          "mask": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              4,
+              4
+            ]
+          ],
+          "normalized": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              4,
+              4
+            ]
+          ],
+          "rectangular": false
+        },
+        {
+          "id": "component-1",
+          "color": 0,
+          "bbox": [
+            1,
+            1,
+            3,
+            3
+          ],
+          "area": 8,
+          "scale": 1,
+          "mask": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ]
+          ],
+          "normalized": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ]
+          ],
+          "rectangular": false
+        },
+        {
+          "id": "component-2",
+          "color": 2,
+          "bbox": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "area": 1,
+          "scale": 1,
+          "mask": [
+            [
+              0,
+              0
+            ]
+          ],
+          "normalized": [
+            [
+              0,
+              0
+            ]
+          ],
+          "rectangular": true
+        }
+      ],
+      "correspondences": [],
+      "domains": [
+        {
+          "limit": 3,
+          "candidates": [
+            {
+              "action_ref": "ACTION2",
+              "data": {}
+            },
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 2,
+                "y": 2
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 2,
+                "y": 0
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 2,
+                "y": 1
+              }
+            }
+          ],
+          "bindings": [
+            [
+              "2,2",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:798ddbfd425ffcb3",
+                "level_epoch": 1,
+                "frame_hash": "798ddbfd425ffcb3",
+                "entity_ref": "component:3d56381074064705:0",
+                "signature": "3d563810740647054900c733a25d9423781e0b6dbd965c6862eb9925d469a030",
+                "bbox": [
+                  2,
+                  2,
+                  2,
+                  2
+                ],
+                "palette_value": 2,
+                "point": [
+                  2,
+                  2
+                ],
+                "total_occurrences": 3,
+                "sampled_occurrences": 3
+              }
+            ],
+            [
+              "2,0",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:798ddbfd425ffcb3",
+                "level_epoch": 1,
+                "frame_hash": "798ddbfd425ffcb3",
+                "entity_ref": "component:65ec539c1828795e:0",
+                "signature": "65ec539c1828795e8457c4f85e2fa66544e58e402577731a6ef92c44b8ce4dfc",
+                "bbox": [
+                  0,
+                  0,
+                  4,
+                  4
+                ],
+                "palette_value": 1,
+                "point": [
+                  2,
+                  0
+                ],
+                "total_occurrences": 3,
+                "sampled_occurrences": 3
+              }
+            ],
+            [
+              "2,1",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:798ddbfd425ffcb3",
+                "level_epoch": 1,
+                "frame_hash": "798ddbfd425ffcb3",
+                "entity_ref": "component:8d400bdafad83242:0",
+                "signature": "8d400bdafad8324213a3e7eda26415353caf53e3563eba8e320efb762705f7f4",
+                "bbox": [
+                  1,
+                  1,
+                  3,
+                  3
+                ],
+                "palette_value": 0,
+                "point": [
+                  2,
+                  1
+                ],
+                "total_occurrences": 3,
+                "sampled_occurrences": 3
+              }
+            ]
+          ]
+        },
+        {
+          "limit": 4096,
+          "candidates": [
+            {
+              "action_ref": "ACTION2",
+              "data": {}
+            },
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 2,
+                "y": 2
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 2,
+                "y": 0
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 2,
+                "y": 1
+              }
+            }
+          ],
+          "bindings": [
+            [
+              "2,2",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:798ddbfd425ffcb3",
+                "level_epoch": 1,
+                "frame_hash": "798ddbfd425ffcb3",
+                "entity_ref": "component:3d56381074064705:0",
+                "signature": "3d563810740647054900c733a25d9423781e0b6dbd965c6862eb9925d469a030",
+                "bbox": [
+                  2,
+                  2,
+                  2,
+                  2
+                ],
+                "palette_value": 2,
+                "point": [
+                  2,
+                  2
+                ],
+                "total_occurrences": 3,
+                "sampled_occurrences": 3
+              }
+            ],
+            [
+              "2,0",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:798ddbfd425ffcb3",
+                "level_epoch": 1,
+                "frame_hash": "798ddbfd425ffcb3",
+                "entity_ref": "component:65ec539c1828795e:0",
+                "signature": "65ec539c1828795e8457c4f85e2fa66544e58e402577731a6ef92c44b8ce4dfc",
+                "bbox": [
+                  0,
+                  0,
+                  4,
+                  4
+                ],
+                "palette_value": 1,
+                "point": [
+                  2,
+                  0
+                ],
+                "total_occurrences": 3,
+                "sampled_occurrences": 3
+              }
+            ],
+            [
+              "2,1",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:798ddbfd425ffcb3",
+                "level_epoch": 1,
+                "frame_hash": "798ddbfd425ffcb3",
+                "entity_ref": "component:8d400bdafad83242:0",
+                "signature": "8d400bdafad8324213a3e7eda26415353caf53e3563eba8e320efb762705f7f4",
+                "bbox": [
+                  1,
+                  1,
+                  3,
+                  3
+                ],
+                "palette_value": 0,
+                "point": [
+                  2,
+                  1
+                ],
+                "total_occurrences": 3,
+                "sampled_occurrences": 3
+              }
+            ]
+          ]
+        }
+      ],
+      "v5": {
+        "4": {
+          "components": [
+            {
+              "component_id": "block.shape_5x5.area_16.pattern_6129ad51.instance_001",
+              "value": 1,
+              "pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  0,
+                  4
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  4,
+                  0
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  0,
+                  4
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  4,
+                  0
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ]
+              ],
+              "bbox": {
+                "top": 0,
+                "left": 0,
+                "bottom": 4,
+                "right": 4,
+                "width": 5,
+                "height": 5
+              },
+              "area": 16,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "block.shape_3x3.area_8.pattern_65979ac0.instance_001",
+              "value": 0,
+              "pixels": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ]
+              ],
+              "bbox": {
+                "top": 1,
+                "left": 1,
+                "bottom": 3,
+                "right": 3,
+                "width": 3,
+                "height": 3
+              },
+              "area": 8,
+              "touches_frame_boundary": false,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "block.shape_1x1.area_1.pattern_b0d317a3.instance_001",
+              "value": 2,
+              "pixels": [
+                [
+                  2,
+                  2
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ]
+              ],
+              "bbox": {
+                "top": 2,
+                "left": 2,
+                "bottom": 2,
+                "right": 2,
+                "width": 1,
+                "height": 1
+              },
+              "area": 1,
+              "touches_frame_boundary": false,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            }
+          ],
+          "schema_version": "yf_arc3_v5.component_extraction_result.v1"
+        },
+        "8": {
+          "components": [
+            {
+              "component_id": "zone.shape_5x5.area_16.pattern_6129ad51.instance_001",
+              "value": 1,
+              "pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  0,
+                  4
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  4,
+                  0
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  0,
+                  4
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  4,
+                  0
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ]
+              ],
+              "bbox": {
+                "top": 0,
+                "left": 0,
+                "bottom": 4,
+                "right": 4,
+                "width": 5,
+                "height": 5
+              },
+              "area": 16,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "zone.shape_3x3.area_8.pattern_65979ac0.instance_001",
+              "value": 0,
+              "pixels": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ]
+              ],
+              "bbox": {
+                "top": 1,
+                "left": 1,
+                "bottom": 3,
+                "right": 3,
+                "width": 3,
+                "height": 3
+              },
+              "area": 8,
+              "touches_frame_boundary": false,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "zone.shape_1x1.area_1.pattern_b0d317a3.instance_001",
+              "value": 2,
+              "pixels": [
+                [
+                  2,
+                  2
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ]
+              ],
+              "bbox": {
+                "top": 2,
+                "left": 2,
+                "bottom": 2,
+                "right": 2,
+                "width": 1,
+                "height": 1
+              },
+              "area": 1,
+              "touches_frame_boundary": false,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            }
+          ],
+          "schema_version": "yf_arc3_v5.component_extraction_result.v1"
+        }
+      },
+      "rowsDigest": "c7b1ae359736121609ddf95833ec2ba8ab018b22c05dbd84f06be951c3c5dcdd",
+      "witness": {
+        "observation_ref": "reference:epoch:1:revision:1:frame:798ddbfd425ffcb3",
+        "level_epoch": 1,
+        "frame_hash": "798ddbfd425ffcb3",
+        "entity_ref": "component:3d56381074064705:0",
+        "signature": "3d563810740647054900c733a25d9423781e0b6dbd965c6862eb9925d469a030",
+        "bbox": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "palette_value": 2,
+        "point": [
+          2,
+          2
+        ],
+        "projection_bbox": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "projected_rows_digest": "73173e3d4fa4015f255a11e3778b77641f4710cf144029cac5d317e1a19d9077",
+        "scope": "source_derived_locus_on_observed_pixel",
+        "reason": "measured reference",
+        "evidence": [
+          "reference:epoch:1:revision:1:frame:798ddbfd425ffcb3"
+        ]
+      }
+    },
+    {
+      "id": "scaled_components",
+      "rows": [
+        [
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          2,
+          2,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          2,
+          2,
+          2
+        ]
+      ],
+      "public": {
+        "frame_rows": [
+          [
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            2,
+            2,
+            2,
+            2
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            2,
+            2,
+            2,
+            2
+          ]
+        ],
+        "frame_hash": "95679229e20cf425",
+        "level": 1,
+        "levels_completed": 0,
+        "state": "NOT_FINISHED",
+        "available_action_refs": [
+          "ACTION7",
+          "ACTION6",
+          "ACTION5",
+          "ACTION2"
+        ]
+      },
+      "observation": {
+        "revision": 1,
+        "level_epoch": 1,
+        "frame_hash": "95679229e20cf425",
+        "observation_ref": "reference:epoch:1:revision:1:frame:95679229e20cf425",
+        "coordinate_basis": "screen",
+        "entities": [
+          {
+            "id": "component:4a300e3d44e580b0:0",
+            "signature": "4a300e3d44e580b05dcbfbb449dc6651348cf3e0970868ae1200b5b5517b45a2",
+            "position": [
+              0,
+              0
+            ],
+            "bbox": [
+              0,
+              0,
+              3,
+              5
+            ],
+            "area": 16,
+            "scale": 2,
+            "mask": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                4
+              ],
+              [
+                0,
+                5
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                1,
+                4
+              ],
+              [
+                1,
+                5
+              ],
+              [
+                2,
+                4
+              ],
+              [
+                2,
+                5
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                3,
+                5
+              ]
+            ],
+            "palette_value": 0,
+            "rectangular": false,
+            "identity_ambiguous": false,
+            "identity_scope": "monochrome_component_not_physical_object"
+          },
+          {
+            "id": "component:37e4242902167006:0",
+            "signature": "37e4242902167006abab05fb97381648412e693f6e944bc6e7f5437cb6fb277c",
+            "position": [
+              2,
+              0
+            ],
+            "bbox": [
+              2,
+              0,
+              5,
+              3
+            ],
+            "area": 12,
+            "scale": 2,
+            "mask": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                3,
+                0
+              ],
+              [
+                3,
+                1
+              ]
+            ],
+            "palette_value": 1,
+            "rectangular": false,
+            "identity_ambiguous": false,
+            "identity_scope": "monochrome_component_not_physical_object"
+          },
+          {
+            "id": "component:8b57d3fc4f9ba085:0",
+            "signature": "8b57d3fc4f9ba0856f056e6f1324abd92fd1116b2259b39219803ec7322159d9",
+            "position": [
+              4,
+              0
+            ],
+            "bbox": [
+              4,
+              0,
+              7,
+              3
+            ],
+            "area": 12,
+            "scale": 2,
+            "mask": [
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                2,
+                2
+              ],
+              [
+                2,
+                3
+              ],
+              [
+                3,
+                0
+              ],
+              [
+                3,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                3,
+                3
+              ]
+            ],
+            "palette_value": 0,
+            "rectangular": false,
+            "identity_ambiguous": false,
+            "identity_scope": "monochrome_component_not_physical_object"
+          },
+          {
+            "id": "component:ffb10c58a671e416:0",
+            "signature": "ffb10c58a671e41634b0d63347c045a9b53115b78a0079462fdf26444b6f8eeb",
+            "position": [
+              4,
+              4
+            ],
+            "bbox": [
+              4,
+              4,
+              7,
+              5
+            ],
+            "area": 8,
+            "scale": 2,
+            "mask": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                3,
+                0
+              ],
+              [
+                3,
+                1
+              ]
+            ],
+            "palette_value": 2,
+            "rectangular": true,
+            "identity_ambiguous": false,
+            "identity_scope": "monochrome_component_not_physical_object"
+          }
+        ],
+        "available_action_refs": [
+          "ACTION7",
+          "ACTION6",
+          "ACTION5",
+          "ACTION2"
+        ],
+        "state": "NOT_FINISHED",
+        "levels_completed": 0,
+        "unknowns": [
+          "physical_object_roles",
+          "terminal_objective",
+          "input_semantics",
+          "logical_lattice"
+        ],
+        "provenance": "public_frame_connected_components_only"
+      },
+      "parts": [
+        {
+          "id": "component-0",
+          "color": 0,
+          "bbox": [
+            0,
+            0,
+            3,
+            5
+          ],
+          "area": 16,
+          "scale": 2,
+          "mask": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              0,
+              5
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              3,
+              5
+            ]
+          ],
+          "normalized": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "rectangular": false
+        },
+        {
+          "id": "component-1",
+          "color": 1,
+          "bbox": [
+            2,
+            0,
+            5,
+            3
+          ],
+          "area": 12,
+          "scale": 2,
+          "mask": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              1
+            ]
+          ],
+          "normalized": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "rectangular": false
+        },
+        {
+          "id": "component-2",
+          "color": 0,
+          "bbox": [
+            4,
+            0,
+            7,
+            3
+          ],
+          "area": 12,
+          "scale": 2,
+          "mask": [
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ]
+          ],
+          "normalized": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "rectangular": false
+        },
+        {
+          "id": "component-3",
+          "color": 2,
+          "bbox": [
+            4,
+            4,
+            7,
+            5
+          ],
+          "area": 8,
+          "scale": 2,
+          "mask": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              1
+            ]
+          ],
+          "normalized": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "rectangular": true
+        }
+      ],
+      "correspondences": [
+        {
+          "first": "component-1",
+          "second": "component-2",
+          "quarter_turns": [
+            2
+          ],
+          "same_color": false,
+          "scale_ratio": [
+            2,
+            2
+          ],
+          "orientation_already_equal": false
+        }
+      ],
+      "domains": [
+        {
+          "limit": 3,
+          "candidates": [
+            {
+              "action_ref": "ACTION2",
+              "data": {}
+            },
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 3,
+                "y": 1
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 1,
+                "y": 3
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 6,
+                "y": 2
+              }
+            }
+          ],
+          "bindings": [
+            [
+              "3,1",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:95679229e20cf425",
+                "level_epoch": 1,
+                "frame_hash": "95679229e20cf425",
+                "entity_ref": "component:37e4242902167006:0",
+                "signature": "37e4242902167006abab05fb97381648412e693f6e944bc6e7f5437cb6fb277c",
+                "bbox": [
+                  2,
+                  0,
+                  5,
+                  3
+                ],
+                "palette_value": 1,
+                "point": [
+                  3,
+                  1
+                ],
+                "total_occurrences": 4,
+                "sampled_occurrences": 3
+              }
+            ],
+            [
+              "1,3",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:95679229e20cf425",
+                "level_epoch": 1,
+                "frame_hash": "95679229e20cf425",
+                "entity_ref": "component:4a300e3d44e580b0:0",
+                "signature": "4a300e3d44e580b05dcbfbb449dc6651348cf3e0970868ae1200b5b5517b45a2",
+                "bbox": [
+                  0,
+                  0,
+                  3,
+                  5
+                ],
+                "palette_value": 0,
+                "point": [
+                  1,
+                  3
+                ],
+                "total_occurrences": 4,
+                "sampled_occurrences": 3
+              }
+            ],
+            [
+              "6,2",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:95679229e20cf425",
+                "level_epoch": 1,
+                "frame_hash": "95679229e20cf425",
+                "entity_ref": "component:8b57d3fc4f9ba085:0",
+                "signature": "8b57d3fc4f9ba0856f056e6f1324abd92fd1116b2259b39219803ec7322159d9",
+                "bbox": [
+                  4,
+                  0,
+                  7,
+                  3
+                ],
+                "palette_value": 0,
+                "point": [
+                  6,
+                  2
+                ],
+                "total_occurrences": 4,
+                "sampled_occurrences": 3
+              }
+            ]
+          ]
+        },
+        {
+          "limit": 4096,
+          "candidates": [
+            {
+              "action_ref": "ACTION2",
+              "data": {}
+            },
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 3,
+                "y": 1
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 1,
+                "y": 3
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 6,
+                "y": 2
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 5,
+                "y": 4
+              }
+            }
+          ],
+          "bindings": [
+            [
+              "3,1",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:95679229e20cf425",
+                "level_epoch": 1,
+                "frame_hash": "95679229e20cf425",
+                "entity_ref": "component:37e4242902167006:0",
+                "signature": "37e4242902167006abab05fb97381648412e693f6e944bc6e7f5437cb6fb277c",
+                "bbox": [
+                  2,
+                  0,
+                  5,
+                  3
+                ],
+                "palette_value": 1,
+                "point": [
+                  3,
+                  1
+                ],
+                "total_occurrences": 4,
+                "sampled_occurrences": 4
+              }
+            ],
+            [
+              "1,3",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:95679229e20cf425",
+                "level_epoch": 1,
+                "frame_hash": "95679229e20cf425",
+                "entity_ref": "component:4a300e3d44e580b0:0",
+                "signature": "4a300e3d44e580b05dcbfbb449dc6651348cf3e0970868ae1200b5b5517b45a2",
+                "bbox": [
+                  0,
+                  0,
+                  3,
+                  5
+                ],
+                "palette_value": 0,
+                "point": [
+                  1,
+                  3
+                ],
+                "total_occurrences": 4,
+                "sampled_occurrences": 4
+              }
+            ],
+            [
+              "6,2",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:95679229e20cf425",
+                "level_epoch": 1,
+                "frame_hash": "95679229e20cf425",
+                "entity_ref": "component:8b57d3fc4f9ba085:0",
+                "signature": "8b57d3fc4f9ba0856f056e6f1324abd92fd1116b2259b39219803ec7322159d9",
+                "bbox": [
+                  4,
+                  0,
+                  7,
+                  3
+                ],
+                "palette_value": 0,
+                "point": [
+                  6,
+                  2
+                ],
+                "total_occurrences": 4,
+                "sampled_occurrences": 4
+              }
+            ],
+            [
+              "5,4",
+              {
+                "observation_ref": "reference:epoch:1:revision:1:frame:95679229e20cf425",
+                "level_epoch": 1,
+                "frame_hash": "95679229e20cf425",
+                "entity_ref": "component:ffb10c58a671e416:0",
+                "signature": "ffb10c58a671e41634b0d63347c045a9b53115b78a0079462fdf26444b6f8eeb",
+                "bbox": [
+                  4,
+                  4,
+                  7,
+                  5
+                ],
+                "palette_value": 2,
+                "point": [
+                  5,
+                  4
+                ],
+                "total_occurrences": 4,
+                "sampled_occurrences": 4
+              }
+            ]
+          ]
+        }
+      ],
+      "v5": {
+        "4": {
+          "components": [
+            {
+              "component_id": "block.shape_6x4.area_16.pattern_eb481741.instance_001",
+              "value": 0,
+              "pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  4,
+                  0
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  5,
+                  0
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  4,
+                  0
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  5,
+                  0
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ]
+              ],
+              "bbox": {
+                "top": 0,
+                "left": 0,
+                "bottom": 5,
+                "right": 3,
+                "width": 4,
+                "height": 6
+              },
+              "area": 16,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "block.shape_4x4.area_12.pattern_1838ef30.instance_001",
+              "value": 1,
+              "pixels": [
+                [
+                  0,
+                  2
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  0,
+                  4
+                ],
+                [
+                  0,
+                  5
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  1
+                ]
+              ],
+              "bbox": {
+                "top": 0,
+                "left": 2,
+                "bottom": 3,
+                "right": 5,
+                "width": 4,
+                "height": 4
+              },
+              "area": 12,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "block.shape_4x4.area_12.pattern_4b3c91d6.instance_001",
+              "value": 0,
+              "pixels": [
+                [
+                  0,
+                  6
+                ],
+                [
+                  0,
+                  7
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  1,
+                  7
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  2,
+                  7
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  3,
+                  7
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  2
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ]
+              ],
+              "bbox": {
+                "top": 0,
+                "left": 4,
+                "bottom": 3,
+                "right": 7,
+                "width": 4,
+                "height": 4
+              },
+              "area": 12,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "block.shape_2x4.area_8.pattern_4ac977d1.instance_001",
+              "value": 2,
+              "pixels": [
+                [
+                  4,
+                  4
+                ],
+                [
+                  4,
+                  5
+                ],
+                [
+                  4,
+                  6
+                ],
+                [
+                  4,
+                  7
+                ],
+                [
+                  5,
+                  4
+                ],
+                [
+                  5,
+                  5
+                ],
+                [
+                  5,
+                  6
+                ],
+                [
+                  5,
+                  7
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ]
+              ],
+              "bbox": {
+                "top": 4,
+                "left": 4,
+                "bottom": 5,
+                "right": 7,
+                "width": 4,
+                "height": 2
+              },
+              "area": 8,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            }
+          ],
+          "schema_version": "yf_arc3_v5.component_extraction_result.v1"
+        },
+        "8": {
+          "components": [
+            {
+              "component_id": "zone.shape_6x8.area_28.pattern_2a5ac985.instance_001",
+              "value": 0,
+              "pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  6
+                ],
+                [
+                  0,
+                  7
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  1,
+                  7
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  2,
+                  7
+                ],
+                [
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  3,
+                  7
+                ],
+                [
+                  4,
+                  0
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  5,
+                  0
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  6
+                ],
+                [
+                  0,
+                  7
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  1,
+                  7
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  2,
+                  7
+                ],
+                [
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  3,
+                  7
+                ],
+                [
+                  4,
+                  0
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  5,
+                  0
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ]
+              ],
+              "bbox": {
+                "top": 0,
+                "left": 0,
+                "bottom": 5,
+                "right": 7,
+                "width": 8,
+                "height": 6
+              },
+              "area": 28,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "zone.shape_4x4.area_12.pattern_1838ef30.instance_001",
+              "value": 1,
+              "pixels": [
+                [
+                  0,
+                  2
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  0,
+                  4
+                ],
+                [
+                  0,
+                  5
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  1
+                ]
+              ],
+              "bbox": {
+                "top": 0,
+                "left": 2,
+                "bottom": 3,
+                "right": 5,
+                "width": 4,
+                "height": 4
+              },
+              "area": 12,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            },
+            {
+              "component_id": "zone.shape_2x4.area_8.pattern_4ac977d1.instance_001",
+              "value": 2,
+              "pixels": [
+                [
+                  4,
+                  4
+                ],
+                [
+                  4,
+                  5
+                ],
+                [
+                  4,
+                  6
+                ],
+                [
+                  4,
+                  7
+                ],
+                [
+                  5,
+                  4
+                ],
+                [
+                  5,
+                  5
+                ],
+                [
+                  5,
+                  6
+                ],
+                [
+                  5,
+                  7
+                ]
+              ],
+              "relative_pixels": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ]
+              ],
+              "bbox": {
+                "top": 4,
+                "left": 4,
+                "bottom": 5,
+                "right": 7,
+                "width": 4,
+                "height": 2
+              },
+              "area": 8,
+              "touches_frame_boundary": true,
+              "schema_version": "yf_arc3_v5.component_description.v1"
+            }
+          ],
+          "schema_version": "yf_arc3_v5.component_extraction_result.v1"
+        }
+      },
+      "rowsDigest": "eac1627e8e286c90c4f7f142368e4e516d37676443d582d33ed3867c3eaacce6",
+      "witness": {
+        "observation_ref": "reference:epoch:1:revision:1:frame:95679229e20cf425",
+        "level_epoch": 1,
+        "frame_hash": "95679229e20cf425",
+        "entity_ref": "component:37e4242902167006:0",
+        "signature": "37e4242902167006abab05fb97381648412e693f6e944bc6e7f5437cb6fb277c",
+        "bbox": [
+          2,
+          0,
+          5,
+          3
+        ],
+        "palette_value": 1,
+        "point": [
+          3,
+          1
+        ],
+        "projection_bbox": [
+          3,
+          1,
+          3,
+          1
+        ],
+        "projected_rows_digest": "60102c5f31d5e587148fa0237c6931a1d99e918bad2d6e3f6648530bac819298",
+        "scope": "source_derived_locus_on_observed_pixel",
+        "reason": "measured reference",
+        "evidence": [
+          "reference:epoch:1:revision:1:frame:95679229e20cf425"
+        ]
+      }
+    }
+  ],
+  "transition": {
+    "before": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        1,
+        0,
+        2,
+        2,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        0,
+        2,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    ],
+    "after": [
+      [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        2,
+        2,
+        2,
+        2
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        2,
+        2,
+        2,
+        2
+      ]
+    ],
+    "expected": []
+  }
+}

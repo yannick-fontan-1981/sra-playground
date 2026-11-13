@@ -1,0 +1,857 @@
+{
+  "module_id": "material_field_production_a",
+  "declarations": [
+    {
+      "id": "policy.material_pixel_field_a",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.material_pixel_field_a"
+      ],
+      "declared_alternative_refs": [
+        "material_pixel_field_a.role",
+        "material_pixel_field_a.metadata",
+        "material_pixel_field_a.recipes",
+        "material_pixel_field_a.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.material_pixel_field_a.equivalent",
+      "selection_tiers": [
+        {
+          "id": "tier.material_pixel_field_a.role",
+          "reason_ref": "reason.material_pixel_field_a",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_pixel_field_a.role"
+            },
+            {
+              "field": "field_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "category",
+              "operator": "equals",
+              "expected": "ROLE"
+            }
+          ]
+        },
+        {
+          "id": "tier.material_pixel_field_a.metadata",
+          "reason_ref": "reason.material_pixel_field_a",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_pixel_field_a.metadata"
+            },
+            {
+              "field": "field_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "category",
+              "operator": "equals",
+              "expected": "METADATA"
+            }
+          ]
+        },
+        {
+          "id": "tier.material_pixel_field_a.recipes",
+          "reason_ref": "reason.material_pixel_field_a",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_pixel_field_a.recipes"
+            },
+            {
+              "field": "field_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "category",
+              "operator": "equals",
+              "expected": "RECIPES"
+            }
+          ]
+        },
+        {
+          "id": "tier.material_pixel_field_a.unknown",
+          "reason_ref": "reason.material_pixel_field_a",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_pixel_field_a.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "material_pixel_field_a.role": "rule.material_pixel_field_role_a",
+        "material_pixel_field_a.metadata": "rule.material_pixel_field_metadata_a",
+        "material_pixel_field_a.recipes": "rule.material_pixel_field_recipes_a"
+      },
+      "configuration": {}
+    },
+    {
+      "id": "rule.material_pixel_field_role_a",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.material_observed_field_producer"
+      ],
+      "invariants": [
+        "actual_current_acquisition",
+        "source_declared_meanings_only",
+        "original_support_retained",
+        "no_method_truth_or_act"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Current acquired material field with explicit support",
+          "required_fields": [
+            "epoch",
+            "parent_goal_ref",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "observation_record_ref",
+            "request_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "why_digest",
+            "output_term_ref",
+            "output_claim_ref",
+            "value_digest"
+          ],
+          "attribute_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "request_ref": "request_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "why_digest": "why_digest",
+            "value": "value",
+            "value_digest": "value_digest",
+            "raster_digest": "raster_digest",
+            "pixel_method_claim_ref": "pixel_method_claim_ref",
+            "pixel_method_digest": "pixel_method_digest"
+          },
+          "static_attributes": {
+            "method_truth_promoted": false,
+            "action_release_authorized": false,
+            "actual_use_proved": false,
+            "source_kind_ref": "MATERIAL_ROLE_OBSERVATION"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_claim_ref}",
+          "predicate": "supports_material_role_observation",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{observation_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "epoch",
+            "parent_goal_ref",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "observation_record_ref",
+            "request_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "why_digest",
+            "value_digest",
+            "raster_digest",
+            "pixel_method_claim_ref",
+            "pixel_method_digest"
+          ],
+          "scope_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "attribute_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "request_ref": "request_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "why_digest": "why_digest",
+            "value": "value",
+            "value_digest": "value_digest",
+            "raster_digest": "raster_digest",
+            "pixel_method_claim_ref": "pixel_method_claim_ref",
+            "pixel_method_digest": "pixel_method_digest"
+          },
+          "static_attributes": {
+            "method_truth_promoted": false,
+            "action_release_authorized": false,
+            "actual_use_proved": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.material_pixel_field_metadata_a",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.material_observed_field_producer"
+      ],
+      "invariants": [
+        "actual_current_acquisition",
+        "source_declared_meanings_only",
+        "original_support_retained",
+        "no_method_truth_or_act"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Current acquired material field with explicit support",
+          "required_fields": [
+            "epoch",
+            "parent_goal_ref",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "observation_record_ref",
+            "request_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "why_digest",
+            "output_term_ref",
+            "output_claim_ref",
+            "value_digest"
+          ],
+          "attribute_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "request_ref": "request_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "why_digest": "why_digest",
+            "value": "value",
+            "value_digest": "value_digest",
+            "raster_digest": "raster_digest",
+            "pixel_method_claim_ref": "pixel_method_claim_ref",
+            "pixel_method_digest": "pixel_method_digest"
+          },
+          "static_attributes": {
+            "method_truth_promoted": false,
+            "action_release_authorized": false,
+            "actual_use_proved": false,
+            "source_kind_ref": "MATERIAL_METADATA_OBSERVATION"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_claim_ref}",
+          "predicate": "supports_material_metadata_observation",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{observation_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "epoch",
+            "parent_goal_ref",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "observation_record_ref",
+            "request_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "why_digest",
+            "value_digest",
+            "raster_digest",
+            "pixel_method_claim_ref",
+            "pixel_method_digest"
+          ],
+          "scope_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "attribute_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "request_ref": "request_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "why_digest": "why_digest",
+            "value": "value",
+            "value_digest": "value_digest",
+            "raster_digest": "raster_digest",
+            "pixel_method_claim_ref": "pixel_method_claim_ref",
+            "pixel_method_digest": "pixel_method_digest"
+          },
+          "static_attributes": {
+            "method_truth_promoted": false,
+            "action_release_authorized": false,
+            "actual_use_proved": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.material_pixel_field_recipes_a",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.material_observed_field_producer"
+      ],
+      "invariants": [
+        "actual_current_acquisition",
+        "source_declared_meanings_only",
+        "original_support_retained",
+        "no_method_truth_or_act"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Current acquired material field with explicit support",
+          "required_fields": [
+            "epoch",
+            "parent_goal_ref",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "observation_record_ref",
+            "request_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "why_digest",
+            "output_term_ref",
+            "output_claim_ref",
+            "value_digest"
+          ],
+          "attribute_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "request_ref": "request_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "why_digest": "why_digest",
+            "value": "value",
+            "value_digest": "value_digest",
+            "raster_digest": "raster_digest",
+            "pixel_method_claim_ref": "pixel_method_claim_ref",
+            "pixel_method_digest": "pixel_method_digest"
+          },
+          "static_attributes": {
+            "method_truth_promoted": false,
+            "action_release_authorized": false,
+            "actual_use_proved": false,
+            "source_kind_ref": "MATERIAL_RECIPE_OBSERVATION"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_claim_ref}",
+          "predicate": "supports_material_recipe_observation",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{observation_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "epoch",
+            "parent_goal_ref",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "observation_record_ref",
+            "request_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "why_digest",
+            "value_digest",
+            "raster_digest",
+            "pixel_method_claim_ref",
+            "pixel_method_digest"
+          ],
+          "scope_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "attribute_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "request_ref": "request_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "why_digest": "why_digest",
+            "value": "value",
+            "value_digest": "value_digest",
+            "raster_digest": "raster_digest",
+            "pixel_method_claim_ref": "pixel_method_claim_ref",
+            "pixel_method_digest": "pixel_method_digest"
+          },
+          "static_attributes": {
+            "method_truth_promoted": false,
+            "action_release_authorized": false,
+            "actual_use_proved": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.material_pixel_field_a",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.material_observed_field_producer"
+      ],
+      "invariants": [
+        "actual_current_acquisition",
+        "source_declared_meanings_only",
+        "original_support_retained",
+        "no_method_truth_or_act"
+      ],
+      "term_templates": [],
+      "claim_templates": []
+    },
+    {
+      "id": "policy.material_field_closure_a",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.material_field_closure_a"
+      ],
+      "declared_alternative_refs": [
+        "material_field_closure_a.current",
+        "material_field_closure_a.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.material_field_closure_a.equivalent",
+      "selection_tiers": [
+        {
+          "id": "tier.material_field_closure_a.current",
+          "reason_ref": "reason.material_field_closure_a",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_field_closure_a.current"
+            },
+            {
+              "field": "fields_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_field_closure_a.unknown",
+          "reason_ref": "reason.material_field_closure_a",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_field_closure_a.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "material_field_closure_a.current": "rule.material_state_field_closure_a"
+      },
+      "configuration": {}
+    },
+    {
+      "id": "rule.material_state_field_closure_a",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.material_observed_field_producer"
+      ],
+      "invariants": [
+        "actual_current_acquisition",
+        "source_declared_meanings_only",
+        "original_support_retained",
+        "no_method_truth_or_act"
+      ],
+      "term_templates": [],
+      "claim_templates": [
+        {
+          "id_pattern": "{closure_claim_ref}",
+          "predicate": "qualifies_material_state_field_dependency_closure",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "{observation_record_ref}"
+          ],
+          "required_term_patterns": [],
+          "required_fields": [
+            "epoch",
+            "parent_goal_ref",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "observation_record_ref",
+            "request_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "why_digest"
+          ],
+          "scope_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "attribute_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "request_ref": "request_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "why_digest": "why_digest",
+            "role_domain": "role_domain",
+            "component_domains": "component_domains"
+          },
+          "static_attributes": {
+            "method_truth_promoted": false,
+            "action_release_authorized": false,
+            "actual_use_proved": false,
+            "complete_material_state_dependency_closure": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.material_method_activation_a",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.material_method_activation_a"
+      ],
+      "declared_alternative_refs": [
+        "material_method_activation_a.current",
+        "material_method_activation_a.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.material_method_activation_a.equivalent",
+      "selection_tiers": [
+        {
+          "id": "tier.material_method_activation_a.current",
+          "reason_ref": "reason.material_method_activation_a",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_method_activation_a.current"
+            },
+            {
+              "field": "method_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_method_activation_a.unknown",
+          "reason_ref": "reason.material_method_activation_a",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_method_activation_a.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "material_method_activation_a.current": "rule.material_method_activation_a"
+      },
+      "configuration": {}
+    },
+    {
+      "id": "rule.material_method_activation_a",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.material_observed_field_producer"
+      ],
+      "invariants": [
+        "actual_current_acquisition",
+        "source_declared_meanings_only",
+        "original_support_retained",
+        "no_method_truth_or_act"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Current acquired material field with explicit support",
+          "required_fields": [
+            "epoch",
+            "parent_goal_ref",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "observation_record_ref",
+            "request_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "why_digest",
+            "output_term_ref",
+            "output_claim_ref",
+            "value_digest"
+          ],
+          "attribute_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "request_ref": "request_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "why_digest": "why_digest",
+            "value": "value",
+            "value_digest": "value_digest"
+          },
+          "static_attributes": {
+            "method_truth_promoted": false,
+            "action_release_authorized": false,
+            "actual_use_proved": false,
+            "source_kind_ref": "MATERIAL_METHOD_REVALIDATION"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_claim_ref}",
+          "predicate": "supports_material_method_revalidation",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{observation_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "epoch",
+            "parent_goal_ref",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "observation_record_ref",
+            "request_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "why_digest",
+            "value_digest"
+          ],
+          "scope_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "attribute_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "request_ref": "request_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "why_digest": "why_digest",
+            "value": "value",
+            "value_digest": "value_digest"
+          },
+          "static_attributes": {
+            "method_truth_promoted": false,
+            "action_release_authorized": false,
+            "actual_use_proved": false
+          }
+        },
+        {
+          "id_pattern": "{closure_claim_ref}",
+          "predicate": "qualifies_material_complete_dependency_closure",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "{observation_record_ref}"
+          ],
+          "required_term_patterns": [],
+          "required_fields": [
+            "epoch",
+            "parent_goal_ref",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "observation_record_ref",
+            "request_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "why_digest"
+          ],
+          "scope_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "attribute_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "request_ref": "request_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "why_digest": "why_digest",
+            "role_domain": "role_domain",
+            "component_domains": "component_domains"
+          },
+          "static_attributes": {
+            "method_truth_promoted": false,
+            "action_release_authorized": false,
+            "actual_use_proved": false,
+            "complete_material_dependency_closure": true
+          }
+        }
+      ]
+    }
+  ]
+}

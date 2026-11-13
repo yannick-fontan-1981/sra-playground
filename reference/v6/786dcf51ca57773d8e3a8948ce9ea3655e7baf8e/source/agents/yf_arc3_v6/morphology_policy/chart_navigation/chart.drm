@@ -1,0 +1,104 @@
+{
+  "module_id": "v6_chart_navigation",
+  "declarations": [
+    {
+      "id": "schema.chart_navigation",
+      "kind": "schema",
+      "premises": [
+        "current_chart_geometry_or_retained_scope",
+        "unique_current_anchor_hypothesis",
+        "available_directional_input"
+      ],
+      "applicability": [
+        "conditional_chart_route"
+      ],
+      "invariants": [
+        "no_private_map",
+        "no_static_annotation_as_owned_inventory",
+        "no_unseen_room_as_confirmed_arrival",
+        "no_universal_automatic_transaction"
+      ],
+      "falsifiers": [
+        "current_anchor_or_scope_changed",
+        "scene_return_does_not_match_expected_anchor",
+        "directional_probe_has_no_scene_effect",
+        "inventory_gain_or_loss_differs",
+        "local_link_evidence_missing_or_ambiguous",
+        "official_boundary_not_observed",
+        "alternative_locations_require_incompatible_next_actions",
+        "missing_chart_link_is_unknown_not_negative_anchor"
+      ],
+      "reason_refs": [
+        "0.1.1-5,19"
+      ],
+      "configuration": {
+        "goal": "G_official_completion",
+        "priority": [
+          "annotation_dependency",
+          "homologous_marker"
+        ],
+        "directions": [
+          {
+            "action": "ACTION1",
+            "delta": [
+              0,
+              -1
+            ]
+          },
+          {
+            "action": "ACTION2",
+            "delta": [
+              0,
+              1
+            ]
+          },
+          {
+            "action": "ACTION3",
+            "delta": [
+              -1,
+              0
+            ]
+          },
+          {
+            "action": "ACTION4",
+            "delta": [
+              1,
+              0
+            ]
+          }
+        ],
+        "conditions": [
+          {
+            "field": "current_scope",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "conditional_route_nonempty",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "common_action_for_locations",
+            "operator": "equals",
+            "expected": true
+          }
+        ],
+        "kind_meaning": {
+          "annotation_dependency": "Test access to a chart node whose annotation matches an intervening link; ownership and permission effects remain unknown.",
+          "homologous_marker": "Test access to the distinct node sharing the initial anchored marker appearance, preserving acquired prerequisites."
+        },
+        "semantics": {
+          "goal": "same_interior_annotation_as_current_anchor",
+          "dependency": "node_annotation_matches_link_annotation",
+          "unmatched_colored_nodes": "exclude_from_route_while_testing_related_nodes",
+          "consumed_token": "boundary_change_is_permission_hypothesis_not_confirmed_door_law"
+        },
+        "max_location_alternatives": 32,
+        "scene_equality": "retain_stay_and_projected_arrival_without_collision_claim",
+        "continuation_under_ambiguity": "require_same_next_direction_toward_same_composition_for_every_location",
+        "conditional_boundary_anchor": "match_explicit_link_annotation"
+      }
+    }
+  ]
+}

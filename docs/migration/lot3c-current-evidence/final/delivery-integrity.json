@@ -1,0 +1,191 @@
+{
+  "schema": "logos-engine.native-delivery-integrity.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T07:29:13.210800+00:00",
+  "directory": "docs/migration/lot3c-current-evidence/final",
+  "validationDirectory": "docs/migration/lot3c-current-evidence/final/validation",
+  "generator": {
+    "path": "scripts/verify-native-delivery.py",
+    "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a",
+    "bytes": 26494
+  },
+  "verificationHelpers": [
+    {
+      "path": "scripts/run-v53-campaign-proof.py",
+      "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+      "bytes": 5421
+    },
+    {
+      "path": "scripts/compare-v54-reactive-public-evidence.py",
+      "sha256": "3274acc5ed28a40f91ad0ee2e34c247ab160919ea43855cf514b4fbc22ef6a69",
+      "bytes": 18850
+    },
+    {
+      "path": "scripts/evidence-byte-parts.py",
+      "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+      "bytes": 7210
+    },
+    {
+      "path": "scripts/restore-v53-evidence.py",
+      "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+      "bytes": 3361
+    }
+  ],
+  "nativeSourceDigest": "e914399487992c3f53b3058ee734c470d738594e7344285799203462fac6a255",
+  "matchedFileInventories": {
+    "native": 251,
+    "archive": 262,
+    "sourceAndTests": 562,
+    "buildInputs": 316,
+    "regressionExecutionInputs": 7
+  },
+  "originalSourceFilesUnchanged": 1786,
+  "originalSourceManifest": {
+    "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+    "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6",
+    "bytes": 424024
+  },
+  "tests": {
+    "tests": 1536,
+    "pass": 1536,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "regressions": {
+    "passed": 2,
+    "total": 2,
+    "comparisonChecksPassed": 34,
+    "comparisonChecksExpected": 34,
+    "passiveOwnerPrefixesChecked": 0,
+    "passiveOwnerPrefixesPassed": 0,
+    "passiveOwnerTransitionsRetained": 0,
+    "prevalidatedTotals": {
+      "commands": 31,
+      "completePublicPackets": 33,
+      "animationFrames": 336,
+      "prefixes": 19,
+      "requests": 50,
+      "naturalLevelBoundaries": 6
+    }
+  },
+  "nativeAgentWorker": {
+    "path": "dist/assets/v6-agent-worker-KBdjt6_P.js",
+    "sha256": "ffac121ad6092923982cad96936713b58585c97c26734827305cdc655210c599",
+    "bytes": 6378810
+  },
+  "sourceArchiveVerification": {
+    "files": 262,
+    "archive": {
+      "path": "docs/migration/lot3c-current-evidence/final/source-archive.tar.gz",
+      "sha256": "0af0dc9e8a31d6eb832d2ac6f39e3b488130924d94d51cf83a237158f6ab9b6d",
+      "bytes": 1641979
+    },
+    "members": 262,
+    "parts": 2,
+    "byteIdentical": true
+  },
+  "byteStorage": {
+    "reports": 3,
+    "parts": 30,
+    "bytes": 25631639,
+    "originalsAbsentBeforeRestore": true,
+    "temporaryRootRemoved": true,
+    "originalsUnchanged": true,
+    "restoredByteIdentical": [
+      {
+        "path": "docs/migration/lot3c-current-evidence/final/cwse-current-session/cwse-campaign.json.gz",
+        "sha256": "e3b5055e513970d6f3d95003c929ccf3c61149b18ff72459f2ba9e9ce862d1fa",
+        "bytes": 22082069,
+        "manifest": "docs/migration/lot3c-current-evidence/final/cwse-current-session/cwse-campaign.json.gz.parts.json",
+        "parts": 25,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot3c-current-evidence/final/regressions/catr-043-replay.json.gz",
+        "sha256": "2b7c3f2c53442dddda580f3d4187458306c8bc272c0e31c0fbb3b39a04282209",
+        "bytes": 1372436,
+        "manifest": "docs/migration/lot3c-current-evidence/final/regressions/catr-043-replay.json.gz.parts.json",
+        "parts": 2,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot3c-current-evidence/final/regressions/rswp-043-replay.json.gz",
+        "sha256": "381b254ea252989d28e11ca4457cf621ddfdad63c5f68f8dcf326eee11f5e6c6",
+        "bytes": 2177134,
+        "manifest": "docs/migration/lot3c-current-evidence/final/regressions/rswp-043-replay.json.gz.parts.json",
+        "parts": 3,
+        "restored": true,
+        "byteIdentical": true
+      }
+    ],
+    "generators": [
+      {
+        "path": "scripts/evidence-byte-parts.py",
+        "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+        "bytes": 7210
+      },
+      {
+        "path": "scripts/restore-v53-evidence.py",
+        "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+        "bytes": 3361
+      }
+    ]
+  },
+  "receipts": [
+    {
+      "path": "docs/migration/lot3c-current-evidence/final/source-manifest.json",
+      "sha256": "827f90441f353be4f4c0e9b3ec35c5c71cf7dadd923e4fe7d98cf7bd8e0350c3",
+      "bytes": 29682
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/final/source-archive.json",
+      "sha256": "fd113abb6bebbc338e1edcf52ada5b7eb1a7c105e9ee05d45db8341d10c57653",
+      "bytes": 31321
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/final/source-archive-parts.json",
+      "sha256": "759208e0d8b1b4b24b2fa3d712e6fcbbb4f076fc756db047abce13107181ae97",
+      "bytes": 815
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/final/validation/delta-tests-run.json",
+      "sha256": "9224783687a5eae00852d33f2f4169ad2b2b7b9155622366a5a2a5a838e118d3",
+      "bytes": 102211
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/final/validation/checks-run.json",
+      "sha256": "ea8b1fae93b5ac44b92ecad938c9857c6d1a8f7cb6b280ce21423df788cf6fb1",
+      "bytes": 69913
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/final/regressions/regression-summary.json",
+      "sha256": "fda28d8f00646d5b9341bc03cd429629121bbfc7bf98036694019aeaa6966a85",
+      "bytes": 75669
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/final/browser/browser-qa.json",
+      "sha256": "145bbf1858ca3d1ca57ce1e43a072c4d8b28b5507075cef497a9ddfb080e501c",
+      "bytes": 2595
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/final/cwse-current-session/execution-cwse.json",
+      "sha256": "ee8138176b03e07a1c5d96d808b507d42c0004a688a78b956a70854335adc0e3",
+      "bytes": 63721
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/final/cwse-current-session/exposed-contribution.json",
+      "sha256": "88d996440ae43fd854d0d72c023beabac3313cc20c55538d7796ba69401102b0",
+      "bytes": 334227
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/final/cwse-resolution.json",
+      "sha256": "0c4d899d05750bbf56104ed18f023212823221429912d7e9f9a3a869ee47febb",
+      "bytes": 2786
+    }
+  ],
+  "qualification": "Post-validation file integrity and lossless evidence transport only. Every completed JSON evidence parts manifest is checked with the existing transport helpers, restored into an initially empty temporary root and compared byte for byte with its unchanged original. Frozen source archive members, recorded native/source/test/build inputs and recorded validation status are checked without rerunning or reinterpreting a game, agent, source comparison, test or build. Additional receipts are fingerprinted only. This is not a new campaign, proof of causal game improvement or complete migration."
+}

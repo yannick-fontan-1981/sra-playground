@@ -1,0 +1,14 @@
+{
+  "status": "failed_expected_manifest_location",
+  "recordedAt": "2026-11-11T01:36:43.452024+00:00",
+  "exitCode": 1,
+  "observation": {
+    "missing": [
+      ".openai/hosting.json"
+    ],
+    "extra": [
+      "dist/.openai/hosting.json"
+    ]
+  },
+  "qualification": "Initial verifier assumed the source manifest pathname was also the package member pathname. The unchanged standard packager explicitly stores it at dist/.openai/hosting.json; no archive/source/application bytes changed and no second package or push was needed."
+}

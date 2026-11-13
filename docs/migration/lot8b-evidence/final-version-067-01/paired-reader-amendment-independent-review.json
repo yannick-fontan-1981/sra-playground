@@ -1,0 +1,84 @@
+{
+  "schema": "logos-engine.lot8b.paired-reader-amendment-independent-review.v1",
+  "recordedAt": "2026-11-12T12:18:05.187221+00:00",
+  "status": "passed_static_delta_review",
+  "reviewerTask": "/root/final_proof_reconciliation",
+  "amendmentAuthor": "/root",
+  "reviewerAuthoredPreviousReader": true,
+  "reviewedScope": "Independent inspection of the root-authored two-line correction; not an independent re-audit of the whole reader or a runtime execution.",
+  "amendment": {
+    "path": "docs/migration/lot8b-evidence/final-version-067-01/paired-reader-amendment.json",
+    "bytes": 2247,
+    "sha256": "009a5f0072bcfcc709555e229b49d780c9b6d22dac90626ac4cd5d92e8f4dcdb"
+  },
+  "previousReader": {
+    "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs.mjs",
+    "bytes": 55737,
+    "sha256": "e53153482728e5eca466564d078a459db07871b06d80120cc05ad825ac572f2d"
+  },
+  "newReader": {
+    "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs-v2.mjs",
+    "bytes": 55746,
+    "sha256": "98c635bb4869009babc69c37a2b9d8aa9b43bb8393d2dfaa50a0765d7c67bafb"
+  },
+  "diff": {
+    "path": "docs/migration/lot8b-evidence/final-version-067-01/paired-reader-v2.diff",
+    "bytes": 1774,
+    "sha256": "5e384ce550e6018b15768726cfd3d9735777cdb68906220bf186db0bc5a18302"
+  },
+  "retainedFailureReceipt": {
+    "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/receipt.json",
+    "bytes": 3346,
+    "sha256": "0d2f68e09bd7ae339b210d070bb7673f9471dac9f67d419bb5b096a169a02251"
+  },
+  "retainedFailureReport": {
+    "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/graph-review.json",
+    "bytes": 16497,
+    "sha256": "58a0d11fd298689f1ce896ac44ded1e6a7923b9cf406ee3bca30b0914adc0a7e"
+  },
+  "checks": [
+    {
+      "name": "exact_two_line_delta",
+      "passed": true,
+      "finding": "Whole new file equals the retained previous file after only changing immediate derivation and binding each streamed preflight generator to its own already-qualified receipt."
+    },
+    {
+      "name": "provenance_precedes_stream_reading",
+      "passed": true,
+      "finding": "provenance() runs successfully before captures(); it pins the precise retained A receipt/report/generator and matches B to the current capture generator."
+    },
+    {
+      "name": "role_binding_not_relaxed",
+      "passed": true,
+      "finding": "The per-role receipt is selected from the same baseline/candidate loop as the streamed row. Its generator was already exactly matched to the permitted generator for that role, including before/after equality and frozen input inclusion."
+    },
+    {
+      "name": "remaining_shared_generator_assumptions",
+      "passed": true,
+      "finding": "Remaining this.captureTool uses bind the new candidate generator or label current output provenance; no remaining streamed A row is compared to B generator."
+    },
+    {
+      "name": "semantic_controls_unchanged",
+      "passed": true,
+      "finding": "Graph reconstruction, full raw values, differences, clocks, owner checks, command/return binding, counts, schemas and final source pins are byte-unchanged outside the exact two-line delta."
+    },
+    {
+      "name": "capture_reuse_supported",
+      "passed": true,
+      "finding": "Final candidate capture source does not import or fingerprint a qualifier, so replacing only the separately planned reader cannot change or invalidate the successful capture."
+    },
+    {
+      "name": "failed_attempt_preserved",
+      "passed": true,
+      "finding": "Actual failed wrapper and report match amendment fingerprints; the next manually declared output is a separate attempt."
+    }
+  ],
+  "blockingObjections": [],
+  "newRuntimeExecutions": 0,
+  "newNativeImports": 0,
+  "newOracleExecutions": 0,
+  "newGameExecutions": 0,
+  "newFunctionalTestExecutions": 0,
+  "globalLockAcquired": false,
+  "qualification": "Ready for the separately declared bounded reader-only attempt. This static review does not claim that the reader has passed, grant official timing eligibility, or require regenerating an unchanged successful capture."
+}

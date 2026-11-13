@@ -1,0 +1,230 @@
+{
+  "case": "catr-050",
+  "game": "CATR",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "--expose-gc",
+    "--max-old-space-size=1536",
+    "scripts/replay-public-regression-released-baseline.mjs",
+    "docs/migration/lot3i-evidence/final/regressions/catr-049-replay.json.gz",
+    "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+    "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+    "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-host-preparation.json"
+  ],
+  "startedAt": "2026-11-10T19:13:14.557291+00:00",
+  "timeoutSeconds": 2400,
+  "baseline": {
+    "path": "docs/migration/lot3i-evidence/final/regressions/catr-049-replay.json.gz",
+    "sha256": "779d50a3088a8c2c16abc2ff46213356402db4001309babac005a238cdd83350",
+    "bytes": 1373207
+  },
+  "trace": {
+    "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+    "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816",
+    "bytes": 24340
+  },
+  "expectedActions": 12,
+  "nodeOldSpaceMiB": 1536,
+  "preflight": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/preflight.json",
+    "sha256": "ba38c6b8f9738e5985200887a13fd143eb6e6e1b25bed34029174b8039f01a7f",
+    "bytes": 3351
+  },
+  "historicalReportProcessExitedBeforeNode": true,
+  "nativeSourceBeforeDigest": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7",
+  "executionInputsBefore": {
+    "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+    "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+    "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+    "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+    "tests/helpers/v6-live-game-campaign.ts": "5791eb210615977f15010587c27acc886211aa04919ccd5dfa9c820f4274821e",
+    "docs/migration/lot4a-evidence/integrated-051-regression-cases.json": "b6477f196390d0ae78c71ac74dfd9bb9656fee68f2f01161d027b7e51e1f6483",
+    "docs/migration/lot4a-evidence/integrated-051/source-manifest.json": "391b3e33c4bbd66ed9a1885d4803fb754b596a6e31ba42b79114fc2c43d6e6cd",
+    "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+  },
+  "phase": "completed",
+  "finishedAt": "2026-11-10T19:13:29.584713+00:00",
+  "exitCode": 0,
+  "timedOut": false,
+  "passed": true,
+  "nodeExitObserved": true,
+  "rawOutputPath": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-output.raw.log",
+  "driverPid": 2,
+  "nodePid": 6,
+  "memorySamples": [
+    {
+      "elapsedSeconds": 0.0019077280012425035,
+      "pid": 6,
+      "VmSize": "112336 kB",
+      "VmHWM": "1364 kB",
+      "VmRSS": "1364 kB",
+      "Threads": "1"
+    },
+    {
+      "elapsedSeconds": 5.007339879004576,
+      "pid": 6,
+      "VmSize": "10414432 kB",
+      "VmHWM": "388100 kB",
+      "VmRSS": "388100 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 10.013998278001964,
+      "pid": 6,
+      "VmSize": "10484800 kB",
+      "VmHWM": "469360 kB",
+      "VmRSS": "460240 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 15.022012656001607,
+      "pid": 6,
+      "Threads": "1"
+    }
+  ],
+  "lastObservedAt": "2026-11-10T19:13:29.581814+00:00",
+  "elapsedSeconds": 15.025309130003734,
+  "lastProgress": {
+    "status": "passed",
+    "failure": null
+  },
+  "rawOutputBytes": 39197,
+  "outputRaw": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-output.raw.log",
+    "sha256": "4c6031d0c05a6399fba11c8b0b0e0393ef2790089243bbf444f9fa6025a2eba7",
+    "bytes": 39197
+  },
+  "output": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-output.log.gz",
+    "sha256": "6e4b71fc734b10875b0425a0da7cddcd6dfb05cde156a6b10777f73bb8114ff5",
+    "bytes": 2670
+  },
+  "startedReceipt": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-execution-started.json",
+    "sha256": "295e4c9c16341dd368b152ac9f13a289b48f03786e048de147c4e6df5465513b",
+    "bytes": 3062
+  },
+  "nodeExitedBeforeComparison": true,
+  "hostPreparation": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-host-preparation.json",
+    "sha256": "78528d18d927f8440f003a8f4380500591a9418a20c27d7de9b7d76c2ceba07c",
+    "bytes": 4201
+  },
+  "hostPreparationPassed": true,
+  "report": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+    "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6",
+    "bytes": 1649205
+  },
+  "status": "passed",
+  "actions": 12,
+  "prefixes": 8,
+  "final": {
+    "actions": 12,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 12.769024956000004,
+    "prefixes": 8,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 12,
+      "boundaryReplays": 2,
+      "goalEvents": 6,
+      "frontierDeltas": 25,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 9
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 9
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 8
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 7
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 9
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 9
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 12,
+      "resume": 7
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.51.0"
+  },
+  "passiveOwnerPresence": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-passive-owner-presence.json",
+    "sha256": "c631b87d115e76623103e4a573889df3410943658200060d3ed11a41d107487b",
+    "bytes": 1093
+  },
+  "passiveOwnerPresencePassed": true,
+  "passiveOwnerPrefixesChecked": 0,
+  "passiveOwnerPrefixesPassed": 0,
+  "passiveOwnerTransitionsRetained": 0,
+  "comparison": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-comparison.json",
+    "sha256": "75b4bd3d8dd0a1419523052b1f9f7e858b410614298b55cca0e4422818f15fac",
+    "bytes": 11003
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "nativeSourceAfterDigest": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7",
+  "nativeSourceUnchanged": true,
+  "immutableInputsUnchanged": true,
+  "postprocessingFinishedAt": "2026-11-10T19:13:30.513449+00:00"
+}

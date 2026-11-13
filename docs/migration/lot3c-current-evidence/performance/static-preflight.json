@@ -1,0 +1,180 @@
+{
+  "schema": "logos-engine.native-cost-static-preflight.v1",
+  "recordedAt": "2026-11-10T07:23:59.061708+00:00",
+  "status": "static_inputs_checked",
+  "measurementExecuted": false,
+  "baselineCheckout": "/workspace/sites/sra-published-043",
+  "candidateCheckout": "/workspace/sites/sra-playground-step3c/.sites-checkout",
+  "nodeVersion": "v24.22.1",
+  "checks": [
+    {
+      "name": "distinct_checkouts",
+      "satisfied": true
+    },
+    {
+      "name": "baseline_frozen_inventory",
+      "satisfied": true,
+      "digest": "3e88aa12214fd3d4a4feb8d63b946123b8394cb4a0cbd0a156cc059c37f7b46c",
+      "fileCount": 251
+    },
+    {
+      "name": "candidate_frozen_inventory",
+      "satisfied": true,
+      "digest": "e914399487992c3f53b3058ee734c470d738594e7344285799203462fac6a255",
+      "fileCount": 251
+    },
+    {
+      "name": "baseline_published_commit",
+      "satisfied": true,
+      "commit": "e9fd144112b05a65af5c88e9f05c541f43ed8ed7"
+    },
+    {
+      "name": "retained_tool_scripts/run-native-cost-window.py",
+      "satisfied": true
+    },
+    {
+      "name": "retained_tool_scripts/measure-native-loop-costs.mjs",
+      "satisfied": true
+    },
+    {
+      "name": "retained_tool_scripts/compare-native-loop-costs.mjs",
+      "satisfied": true
+    },
+    {
+      "name": "retained_tool_scripts/compare-native-cost-cohorts.mjs",
+      "satisfied": true
+    },
+    {
+      "name": "retained_tool_scripts/review-native-cost-consolidation.py",
+      "satisfied": true
+    },
+    {
+      "name": "retained_tool_scripts/review-native-global-cost-window.py",
+      "satisfied": true
+    },
+    {
+      "name": "retained_tool_scripts/review-native-global-cost-budget.py",
+      "satisfied": true
+    },
+    {
+      "name": "same_measurement_runner",
+      "satisfied": true
+    },
+    {
+      "name": "same_source_declaration_laya_proto/common_frontier_policy.drm.json",
+      "satisfied": true,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "name": "same_source_declaration_morphology_policy/strategy.drm",
+      "satisfied": true,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "name": "baseline_trace_STCK",
+      "satisfied": true,
+      "path": "/workspace/sites/sra-published-043/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "name": "candidate_trace_STCK",
+      "satisfied": true,
+      "path": "/workspace/sites/sra-playground-step3c/.sites-checkout/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "name": "baseline_trace_SMLP",
+      "satisfied": true,
+      "path": "/workspace/sites/sra-published-043/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "name": "candidate_trace_SMLP",
+      "satisfied": true,
+      "path": "/workspace/sites/sra-playground-step3c/.sites-checkout/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "name": "baseline_input_copy_cases.json",
+      "satisfied": true,
+      "state": "absent_runner_will_copy"
+    },
+    {
+      "name": "baseline_input_copy_comparison-policy.json",
+      "satisfied": true,
+      "state": "absent_runner_will_copy"
+    },
+    {
+      "name": "baseline_input_copy_protocol.md",
+      "satisfied": true,
+      "state": "absent_runner_will_copy"
+    },
+    {
+      "name": "exclusive_measurement_outputs_absent",
+      "satisfied": true,
+      "existing": []
+    },
+    {
+      "name": "baseline_dependency_link_node_modules",
+      "satisfied": true
+    },
+    {
+      "name": "baseline_dependency_link_public/vendor/pyodide",
+      "satisfied": true
+    },
+    {
+      "name": "baseline_opaque_host_assets_present",
+      "satisfied": true
+    }
+  ],
+  "unsatisfied": [],
+  "dependencyLinks": [
+    {
+      "path": "/workspace/sites/sra-published-043/node_modules",
+      "isSymlink": true,
+      "target": "/workspace/sites/sra-playground-step3c/.sites-checkout/node_modules",
+      "targetExists": true,
+      "sameTargetAsCandidate": true
+    },
+    {
+      "path": "/workspace/sites/sra-published-043/public/vendor/pyodide",
+      "isSymlink": true,
+      "target": "/workspace/sites/sra-playground-step3c/.sites-checkout/public/vendor/pyodide",
+      "targetExists": true,
+      "sameTargetAsCandidate": true
+    }
+  ],
+  "opaqueHostAssets": [
+    {
+      "path": "public/python/custom-games.zip",
+      "baselineExists": true,
+      "sameBytesAsCandidate": true
+    },
+    {
+      "path": "public/python/official-games.zip",
+      "baselineExists": true,
+      "sameBytesAsCandidate": true
+    },
+    {
+      "path": "public/python/custom-manifest.json",
+      "baselineExists": true,
+      "sameBytesAsCandidate": true
+    },
+    {
+      "path": "public/python/game_bridge.py",
+      "baselineExists": true,
+      "sameBytesAsCandidate": true
+    },
+    {
+      "path": "public/python/official_adapter.py",
+      "baselineExists": true,
+      "sameBytesAsCandidate": true
+    },
+    {
+      "path": "public/python/custom_level_navigation.py",
+      "baselineExists": true,
+      "sameBytesAsCandidate": true
+    }
+  ],
+  "qualification": "Read-only static file, identity and link inspection; no runtime, worker, game, replay, benchmark, test or build was executed. Game archives were hashed as opaque bytes only. The source-level Node cost runner needs no baseline dist build or live Pyodide game execution. Missing baseline performance copies are expected: run-native-cost-window.py creates its exact copies. This snapshot does not establish isolation or authorize starting the window; readiness remains draft until the owner verifies all current evidence and stops preview/concurrent computation."
+}

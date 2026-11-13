@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.lot7a-source-transport-step.v1",
+  "step": 2,
+  "startedAt": "2026-11-10T20:51:19.559Z",
+  "finishedAt": "2026-11-10T20:51:35.701Z",
+  "plannedCommit": "5b982eb1df6e0f9ff79853056fd892c5b65ff729",
+  "plannedTree": "b5dbdebbf3e8850ec8a1cfd0c8d748c08cb1b52e",
+  "rawMissingObjectBytes": 40856599,
+  "command": "node /home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.6/scripts/site-workflow.mjs --project-id appgprj_6adbc388d79081918581b93b919d7258",
+  "exitCode": 0,
+  "output": "Ready for Site workflow JSON on stdin (input is hidden).\r\n/workspace/sites/sra-lot7a-20261110/lot7a-transport-step-2.tar\r\n{\"project_id\":\"appgprj_6adbc388d79081918581b93b919d7258\",\"checkout_path\":\"/workspace/sites/sra-lot7a-20261110/.sites-checkout\",\"commit_sha\":\"5b982eb1df6e0f9ff79853056fd892c5b65ff729\",\"archive\":\"/workspace/sites/sra-lot7a-20261110/lot7a-transport-step-2.tar\"}\r\n",
+  "helperResult": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot7a-20261110/.sites-checkout",
+    "commit_sha": "5b982eb1df6e0f9ff79853056fd892c5b65ff729",
+    "archive": "/workspace/sites/sra-lot7a-20261110/lot7a-transport-step-2.tar"
+  },
+  "intermediateSiteDeployment": false
+}

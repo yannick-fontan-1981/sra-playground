@@ -1,0 +1,28 @@
+{
+  "schema": "logos-engine.lot8b.recorded-regressions.v1",
+  "status": "started",
+  "startedAt": "2026-11-12T04:56:22.238957+00:00",
+  "manifest": "docs/migration/lot8b-evidence/tools/delivery/regressions/cases.json",
+  "sourceManifest": "docs/migration/lot8b-evidence/delivery-qualification-01/candidate-native.json",
+  "limits": {
+    "maximumConcurrentProcessGroups": 1,
+    "nodeOldSpaceMiB": 1536,
+    "prevalidationSeconds": 300,
+    "replaySeconds": 600,
+    "comparisonSeconds": 180,
+    "campaignSeconds": 2400,
+    "terminationGraceSeconds": 5,
+    "retentionSeconds": 60,
+    "automaticRetry": false
+  },
+  "results": [],
+  "total": 11,
+  "passed": 0,
+  "comparisonChecksExpected": 187,
+  "comparisonChecksPassed": 0,
+  "globalLockAcquired": false,
+  "officialPerformanceMeasurement": false,
+  "liveGameExecution": false,
+  "LKEY": "Permanently closed and excluded",
+  "memoryQualification": "1536 MiB bounds the Node old-space heap only. Python comparison memory and aggregate RSS are not bounded by that flag. Child process lifetimes do not overlap."
+}

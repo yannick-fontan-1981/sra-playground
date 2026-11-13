@@ -1,0 +1,40 @@
+{
+  "schema": "logos-engine.lot5c.common-preexecution-input-preservation.v1",
+  "status": "preserved_before_runtime",
+  "inputs": [
+    {
+      "input": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/common-plan.json",
+        "bytes": 9417,
+        "sha256": "5fc5b041ac24551549ad6d4cc79ce5e97d6c4710f7510b341da45e3febbfc41e"
+      },
+      "preservedPath": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-positive-01/execution-inputs/docs/migration/lot5c-evidence/recovery/common/common-plan.json"
+    },
+    {
+      "input": {
+        "path": "scripts/native-object-binding-common-loop.ts",
+        "bytes": 30696,
+        "sha256": "fc2dc72f18cd48ff6fd78492d5d9737a8ff3880b85fbc18b3cc888fc2ee1c0e6"
+      },
+      "preservedPath": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-positive-01/execution-inputs/scripts/native-object-binding-common-loop.ts"
+    },
+    {
+      "input": {
+        "path": "tests/v6-object-binding-common.test.ts",
+        "bytes": 30310,
+        "sha256": "eef0085a5b311ceba63f67fc19fceab19b8f1c961874c802951c42a11af646a8"
+      },
+      "preservedPath": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-positive-01/execution-inputs/tests/v6-object-binding-common.test.ts"
+    },
+    {
+      "input": {
+        "path": "scripts/review-observed-binding-common-replay.py",
+        "bytes": 26266,
+        "sha256": "5703fae25c0ca3101d01d847a14bd57c0dfe5af33ec77f6265fb6ecac67c62d2"
+      },
+      "preservedPath": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-positive-01/execution-inputs/scripts/review-observed-binding-common-replay.py"
+    }
+  ],
+  "qualification": "Plan, native driver, test and intended original reviewer copied before any runtime in this proof directory. The original reviewer also archives its own actual executed source when invoked.",
+  "recordedAt": "2026-11-11T21:05:56.905Z"
+}

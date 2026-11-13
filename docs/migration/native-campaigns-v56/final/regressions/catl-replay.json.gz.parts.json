@@ -1,0 +1,41 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "catl-replay.json.gz",
+    "sha256": "af0563e57111de085ef64ffd0a134587b345112dfb0e2125a50397ec2961b4bf",
+    "bytes": 4504954
+  },
+  "parts": [
+    {
+      "file": "catl-replay.json.gz.part000",
+      "sha256": "64397711ca3b0aba7c946b98c31f6942d11359057cdf779d636ed60e554fd8c7",
+      "bytes": 900000
+    },
+    {
+      "file": "catl-replay.json.gz.part001",
+      "sha256": "17e38ed4cc698eeee30d65e8e915e90e0f3e93ab4367019db5a71721c8c9bd1b",
+      "bytes": 900000
+    },
+    {
+      "file": "catl-replay.json.gz.part002",
+      "sha256": "c154b147d9bd2a13e46bcdee3dd53cd695f8c881fb130a5041fe3fde3570201d",
+      "bytes": 900000
+    },
+    {
+      "file": "catl-replay.json.gz.part003",
+      "sha256": "e92bdb82688b44a55a98d7ea2b7bc56bb7976f5e386e1d53f925af271decf3b1",
+      "bytes": 900000
+    },
+    {
+      "file": "catl-replay.json.gz.part004",
+      "sha256": "24ff54ba51cac50657e7c82e2d3b89acd43356d759a1939f189c808ffb79a07e",
+      "bytes": 900000
+    },
+    {
+      "file": "catl-replay.json.gz.part005",
+      "sha256": "a0dc50c7670dc172cca53b72a19583f7fe9bef2e052a2dc7067db0e4a1610525",
+      "bytes": 4954
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

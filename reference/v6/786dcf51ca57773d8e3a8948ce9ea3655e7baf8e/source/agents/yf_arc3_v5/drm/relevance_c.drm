@@ -1,0 +1,486 @@
+{
+  "module_id": "relevance_c",
+  "declarations": [
+    {
+      "id": "policy.relevance_occurrence_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_epoch_lease_and_reconciled_occurrences_are_explicit"
+      ],
+      "applicability": [
+        "sealed_endpoint_reconciliation_or_pending_explanation"
+      ],
+      "invariants": [
+        "no_position_only_irrelevance",
+        "one_count_per_external_occurrence",
+        "no_automatic_reset",
+        "finite_wait_not_renewed"
+      ],
+      "falsifiers": [
+        "duplicate_or_late_occurrence",
+        "pending_explanation",
+        "contradictory_acknowledgement"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "relevance.archive_only",
+        "relevance.useful",
+        "relevance.irrelevant",
+        "relevance.unresolved"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.relevance_occurrence_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "relevance.archive_only"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "epoch_current",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "revision_current",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "lease_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "choice_ref": "relevance.archive_only"
+          }
+        },
+        {
+          "id": "projection.policy.relevance_occurrence_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "relevance.useful"
+            },
+            {
+              "field": "epoch_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "revision_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "lease_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "endpoint_sealed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "explanation_processed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "known_positive_contribution",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "choice_ref": "relevance.useful"
+          }
+        },
+        {
+          "id": "projection.policy.relevance_occurrence_c.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "relevance.irrelevant"
+            },
+            {
+              "field": "epoch_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "revision_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "lease_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "endpoint_sealed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "explanation_processed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_contributions_explicitly_false",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "choice_ref": "relevance.irrelevant"
+          }
+        },
+        {
+          "id": "projection.policy.relevance_occurrence_c.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "relevance.unresolved"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "choice_ref": "relevance.unresolved"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.relevance_occurrence_c.0",
+          "all_conditions": [
+            {
+              "field": "choice_ref",
+              "operator": "equals",
+              "expected": "relevance.archive_only"
+            }
+          ],
+          "reason_ref": "reason.reconciled_occurrence_and_wait_scope"
+        },
+        {
+          "id": "tier.policy.relevance_occurrence_c.1",
+          "all_conditions": [
+            {
+              "field": "choice_ref",
+              "operator": "equals",
+              "expected": "relevance.useful"
+            }
+          ],
+          "reason_ref": "reason.reconciled_occurrence_and_wait_scope"
+        },
+        {
+          "id": "tier.policy.relevance_occurrence_c.2",
+          "all_conditions": [
+            {
+              "field": "choice_ref",
+              "operator": "equals",
+              "expected": "relevance.irrelevant"
+            }
+          ],
+          "reason_ref": "reason.reconciled_occurrence_and_wait_scope"
+        },
+        {
+          "id": "tier.policy.relevance_occurrence_c.3",
+          "all_conditions": [
+            {
+              "field": "choice_ref",
+              "operator": "equals",
+              "expected": "relevance.unresolved"
+            }
+          ],
+          "reason_ref": "reason.reconciled_occurrence_and_wait_scope"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.relevance_c_equivalent_ref_order_has_no_causal_meaning",
+      "reason_refs": [
+        "reason.reconciled_occurrence_and_wait_scope"
+      ]
+    },
+    {
+      "id": "policy.relevance_wait_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_epoch_lease_and_reconciled_occurrences_are_explicit"
+      ],
+      "applicability": [
+        "sealed_endpoint_reconciliation_or_pending_explanation"
+      ],
+      "invariants": [
+        "no_position_only_irrelevance",
+        "one_count_per_external_occurrence",
+        "no_automatic_reset",
+        "finite_wait_not_renewed"
+      ],
+      "falsifiers": [
+        "duplicate_or_late_occurrence",
+        "pending_explanation",
+        "contradictory_acknowledgement"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "wait.none",
+        "wait.remaining",
+        "wait.exhausted",
+        "wait.invalid"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.relevance_wait_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "wait.none"
+            },
+            {
+              "field": "wait_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "choice_ref": "wait.none"
+          }
+        },
+        {
+          "id": "projection.policy.relevance_wait_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "wait.remaining"
+            },
+            {
+              "field": "epoch_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "revision_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "lease_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "wait_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "ack_conflict",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "wait_exhausted",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "choice_ref": "wait.remaining"
+          }
+        },
+        {
+          "id": "projection.policy.relevance_wait_c.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "wait.exhausted"
+            },
+            {
+              "field": "epoch_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "revision_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "lease_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "wait_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "ack_conflict",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "wait_exhausted",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "choice_ref": "wait.exhausted"
+          }
+        },
+        {
+          "id": "projection.policy.relevance_wait_c.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "wait.invalid"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "choice_ref": "wait.invalid"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.relevance_wait_c.0",
+          "all_conditions": [
+            {
+              "field": "choice_ref",
+              "operator": "equals",
+              "expected": "wait.none"
+            }
+          ],
+          "reason_ref": "reason.reconciled_occurrence_and_wait_scope"
+        },
+        {
+          "id": "tier.policy.relevance_wait_c.1",
+          "all_conditions": [
+            {
+              "field": "choice_ref",
+              "operator": "equals",
+              "expected": "wait.remaining"
+            }
+          ],
+          "reason_ref": "reason.reconciled_occurrence_and_wait_scope"
+        },
+        {
+          "id": "tier.policy.relevance_wait_c.2",
+          "all_conditions": [
+            {
+              "field": "choice_ref",
+              "operator": "equals",
+              "expected": "wait.exhausted"
+            }
+          ],
+          "reason_ref": "reason.reconciled_occurrence_and_wait_scope"
+        },
+        {
+          "id": "tier.policy.relevance_wait_c.3",
+          "all_conditions": [
+            {
+              "field": "choice_ref",
+              "operator": "equals",
+              "expected": "wait.invalid"
+            }
+          ],
+          "reason_ref": "reason.reconciled_occurrence_and_wait_scope"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.relevance_c_equivalent_ref_order_has_no_causal_meaning",
+      "reason_refs": [
+        "reason.reconciled_occurrence_and_wait_scope"
+      ]
+    }
+  ]
+}

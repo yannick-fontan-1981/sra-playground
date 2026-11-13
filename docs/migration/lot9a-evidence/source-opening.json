@@ -1,0 +1,14 @@
+{
+  "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+  "checkout_path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout",
+  "commit_sha": "2277d31c3d68b8abb7e9e2fa7f2da3b6f5c78ca6",
+  "openedAt": "2026-11-12T13:49:14.733555+00:00",
+  "branch": "lot9a-chart-navigation-20261112",
+  "sourceHelper": "/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.6/scripts/site-workflow.mjs",
+  "credentialsRetained": false,
+  "baseline": {
+    "siteVersion": 108,
+    "nativeVersion": "0.67.0",
+    "sourceCommit": "8462204043aa368faa7df280d796bb706eb53b38"
+  }
+}

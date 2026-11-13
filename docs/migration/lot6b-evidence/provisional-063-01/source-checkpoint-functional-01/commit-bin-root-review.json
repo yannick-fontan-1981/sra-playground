@@ -1,0 +1,18 @@
+{
+  "schema": "logos-engine.lot6b.commit-bin-root-source-review.v1",
+  "recordedAt": "2026-11-11T20:43:43.168220+00:00",
+  "status": "source_reviewed_not_executed",
+  "sha256": "2ebf4232d478774b821783c058d80e054c8cfa12f71ff4e8eba5e98d78f9086a",
+  "checks": [
+    "Exact immutable plan and per-bin files/modes/SHA/size",
+    "Fresh quiet guard and nonblocking SH on existing lock",
+    "Empty index and exact expected parent",
+    "Prior exact remotely verified bin receipt for bins2..7",
+    "Only declared literal paths staged, force-add only planned ignored logs",
+    "Staged and committed blob identity, exact committed path set, hooks/settings preserved",
+    "Every Git child group checked after normal exit and errors; residual group refuses success even after bounded own-group cleanup",
+    "No push or automatic next bin; immutable actual outcome receipt"
+  ],
+  "nativeTestsExecuted": false,
+  "networkExecuted": false
+}

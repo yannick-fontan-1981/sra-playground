@@ -1,0 +1,1060 @@
+{
+  "module_id": "mechanical_response",
+  "declarations": [
+    {
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "mechanics.adapter.status_mapping",
+        "mechanics.adapter.source_status_normalization",
+        "mechanics.result.blocker_cause_partition",
+        "mechanics.composition.request_identity"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "id": "policy.mechanical_response_measurement",
+      "premises": [
+        "the_runtime_validates_the_bounded_typed_request_and_native_response"
+      ],
+      "applicability": [
+        "typed_mechanical_response"
+      ],
+      "invariants": [
+        "measurement_compares_identity_and_counts_without_selecting_status"
+      ],
+      "falsifiers": [
+        "typed_packet_validation_failed"
+      ],
+      "declared_alternative_refs": [
+        "mechanical_response.packet"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.mechanical_response.packet",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mechanical_response.packet"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ]
+    },
+    {
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "mechanics.adapter.status_mapping",
+        "mechanics.adapter.source_status_normalization",
+        "mechanics.result.blocker_cause_partition",
+        "mechanics.composition.request_identity"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "id": "policy.mechanical_source_status_normalization",
+      "premises": [
+        "status_selection_uses_only_the_measured_current_response_packet"
+      ],
+      "applicability": [
+        "mechanical_native_response_normalization"
+      ],
+      "invariants": [
+        "source_ok_does_not_upgrade_optimality",
+        "no_path_requires_named_domain_exhaustion",
+        "world_rejection_is_not_domain_exhaustion",
+        "missing_implementation_proposes_no_gameplay_experiment",
+        "the_exact_blocked_request_and_eligible_siblings_are_retained",
+        "response_identity_and_return_type_must_match",
+        "a_consumed_response_is_not_a_new_root_request",
+        "no_action_reset_or_canonical_mutation_is_released"
+      ],
+      "falsifiers": [
+        "identity_or_return_type_mismatch",
+        "stale_proof_scope",
+        "unqualified_domain_exhaustion"
+      ],
+      "declared_alternative_refs": [
+        "mechanical_return.identity_mismatch",
+        "mechanical_return.type_mismatch",
+        "mechanical_return.already_consumed",
+        "mechanical_return.found",
+        "mechanical_return.optimal",
+        "mechanical_return.unproved_optimal",
+        "mechanical_return.world_outcome",
+        "mechanical_return.no_path",
+        "mechanical_return.unqualified_no_path",
+        "mechanical_return.model_contradiction",
+        "mechanical_return.budget_reached",
+        "mechanical_return.not_applicable",
+        "mechanical_return.missing_implementation",
+        "mechanical_return.needs_missing_observation",
+        "mechanical_return.needs_unsupported_model",
+        "mechanical_return.needs_signature_mismatch",
+        "mechanical_return.needs_missing_implementation",
+        "mechanical_return.needs_domain_exhausted",
+        "mechanical_return.needs_computation_bound",
+        "mechanical_return.unrecognized_status"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.mechanical_return.identity_mismatch",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mechanical_return.identity_mismatch"
+            },
+            {
+              "field": "same_request_identity",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.mechanical_return.type_mismatch",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mechanical_return.type_mismatch"
+            },
+            {
+              "field": "same_request_identity",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_return_type",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.mechanical_return.already_consumed",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mechanical_return.already_consumed"
+            },
+            {
+              "field": "same_request_identity",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_return_type",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_consumed",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.mechanical_return.found",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mechanical_return.found"
+            },
+            {
+              "field": "same_request_identity",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_return_type",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_consumed",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "OK"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "FEASIBLE"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "FOUND"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.mechanical_return.optimal",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mechanical_return.optimal"
+            },
+            {
+              "field": "same_request_identity",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_return_type",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_consumed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "OPTIMAL_WITHIN_MODEL"
+            },
+            {
+              "field": "scoped_proof_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.mechanical_return.unproved_optimal",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mechanical_return.unproved_optimal"
+            },
+            {
+              "field": "same_request_identity",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_return_type",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_consumed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "OPTIMAL_WITHIN_MODEL"
+            },
+            {
+              "field": "scoped_proof_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.mechanical_return.world_outcome",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mechanical_return.world_outcome"
+            },
+            {
+              "field": "same_request_identity",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_return_type",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_consumed",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "CONFLICT"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "BLOCKED"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "END"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "NO_STOCK"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "WORLD_OUTCOME"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.mechanical_return.no_path",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mechanical_return.no_path"
+            },
+            {
+              "field": "same_request_identity",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_return_type",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_consumed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "named_domain_exhausted",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "NO_PATH"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "EMPTY_DECLARED_DOMAIN"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.mechanical_return.unqualified_no_path",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mechanical_return.unqualified_no_path"
+            },
+            {
+              "field": "same_request_identity",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_return_type",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_consumed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "named_domain_exhausted",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "NO_PATH"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "EMPTY_DECLARED_DOMAIN"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.mechanical_return.model_contradiction",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mechanical_return.model_contradiction"
+            },
+            {
+              "field": "same_request_identity",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_return_type",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_consumed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "MODEL_CONTRADICTION"
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.mechanical_return.budget_reached",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mechanical_return.budget_reached"
+            },
+            {
+              "field": "same_request_identity",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_return_type",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_consumed",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "BUDGET_EXHAUSTED"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "BUDGET_REACHED"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.mechanical_return.not_applicable",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mechanical_return.not_applicable"
+            },
+            {
+              "field": "same_request_identity",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_return_type",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_consumed",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "INAPPLICABLE"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "NOT_APPLICABLE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.mechanical_return.missing_implementation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mechanical_return.missing_implementation"
+            },
+            {
+              "field": "same_request_identity",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_return_type",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_consumed",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "IMPLEMENTATION_MISSING"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "MISSING_IMPLEMENTATION"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.mechanical_return.needs_missing_observation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mechanical_return.needs_missing_observation"
+            },
+            {
+              "field": "same_request_identity",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_return_type",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_consumed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "missing_cause",
+              "operator": "equals",
+              "expected": "MISSING_OBSERVATION"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "AMBIGUOUS"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "UNKNOWN"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "NEEDS_EVIDENCE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.mechanical_return.needs_unsupported_model",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mechanical_return.needs_unsupported_model"
+            },
+            {
+              "field": "same_request_identity",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_return_type",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_consumed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "missing_cause",
+              "operator": "equals",
+              "expected": "UNSUPPORTED_MODEL"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "AMBIGUOUS"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "UNKNOWN"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "NEEDS_EVIDENCE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.mechanical_return.needs_signature_mismatch",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mechanical_return.needs_signature_mismatch"
+            },
+            {
+              "field": "same_request_identity",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_return_type",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_consumed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "missing_cause",
+              "operator": "equals",
+              "expected": "SIGNATURE_MISMATCH"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "AMBIGUOUS"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "UNKNOWN"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "NEEDS_EVIDENCE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.mechanical_return.needs_missing_implementation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mechanical_return.needs_missing_implementation"
+            },
+            {
+              "field": "same_request_identity",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_return_type",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_consumed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "missing_cause",
+              "operator": "equals",
+              "expected": "MISSING_IMPLEMENTATION"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "AMBIGUOUS"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "UNKNOWN"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "NEEDS_EVIDENCE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.mechanical_return.needs_domain_exhausted",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mechanical_return.needs_domain_exhausted"
+            },
+            {
+              "field": "same_request_identity",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_return_type",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_consumed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "missing_cause",
+              "operator": "equals",
+              "expected": "DOMAIN_EXHAUSTED"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "AMBIGUOUS"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "UNKNOWN"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "NEEDS_EVIDENCE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.mechanical_return.needs_computation_bound",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mechanical_return.needs_computation_bound"
+            },
+            {
+              "field": "same_request_identity",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_return_type",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_consumed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "missing_cause",
+              "operator": "equals",
+              "expected": "COMPUTATION_BOUND"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "AMBIGUOUS"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "UNKNOWN"
+            },
+            {
+              "field": "source_status",
+              "operator": "equals",
+              "expected": "NEEDS_EVIDENCE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.mechanical_return.unrecognized_status",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mechanical_return.unrecognized_status"
+            },
+            {
+              "field": "same_request_identity",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_return_type",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "already_consumed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "source_status",
+              "operator": "not_equals",
+              "expected": "OK"
+            },
+            {
+              "field": "source_status",
+              "operator": "not_equals",
+              "expected": "FEASIBLE"
+            },
+            {
+              "field": "source_status",
+              "operator": "not_equals",
+              "expected": "FOUND"
+            },
+            {
+              "field": "source_status",
+              "operator": "not_equals",
+              "expected": "OPTIMAL_WITHIN_MODEL"
+            },
+            {
+              "field": "source_status",
+              "operator": "not_equals",
+              "expected": "CONFLICT"
+            },
+            {
+              "field": "source_status",
+              "operator": "not_equals",
+              "expected": "BLOCKED"
+            },
+            {
+              "field": "source_status",
+              "operator": "not_equals",
+              "expected": "END"
+            },
+            {
+              "field": "source_status",
+              "operator": "not_equals",
+              "expected": "NO_STOCK"
+            },
+            {
+              "field": "source_status",
+              "operator": "not_equals",
+              "expected": "WORLD_OUTCOME"
+            },
+            {
+              "field": "source_status",
+              "operator": "not_equals",
+              "expected": "NO_PATH"
+            },
+            {
+              "field": "source_status",
+              "operator": "not_equals",
+              "expected": "BUDGET_EXHAUSTED"
+            },
+            {
+              "field": "source_status",
+              "operator": "not_equals",
+              "expected": "BUDGET_REACHED"
+            },
+            {
+              "field": "source_status",
+              "operator": "not_equals",
+              "expected": "INAPPLICABLE"
+            },
+            {
+              "field": "source_status",
+              "operator": "not_equals",
+              "expected": "NOT_APPLICABLE"
+            },
+            {
+              "field": "source_status",
+              "operator": "not_equals",
+              "expected": "IMPLEMENTATION_MISSING"
+            },
+            {
+              "field": "source_status",
+              "operator": "not_equals",
+              "expected": "MISSING_IMPLEMENTATION"
+            },
+            {
+              "field": "source_status",
+              "operator": "not_equals",
+              "expected": "AMBIGUOUS"
+            },
+            {
+              "field": "source_status",
+              "operator": "not_equals",
+              "expected": "UNKNOWN"
+            },
+            {
+              "field": "source_status",
+              "operator": "not_equals",
+              "expected": "NEEDS_EVIDENCE"
+            },
+            {
+              "field": "source_status",
+              "operator": "not_equals",
+              "expected": "EMPTY_DECLARED_DOMAIN"
+            },
+            {
+              "field": "source_status",
+              "operator": "not_equals",
+              "expected": "MODEL_CONTRADICTION"
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,842 @@
+{
+  "module_id": "arc3.inventory_access_observation_b",
+  "declarations": [
+    {
+      "id": "policy.record_observed_inventory_access",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "interpretation.inventory_shape_transfer",
+        "interpretation.inventory_conditioned_entry",
+        "interpretation.inventory_boundary_possession_supposition",
+        "interpretation.inventory_episode_display_basis_change"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.inventory_access_observation_claim_binding",
+          "templated_facts": {
+            "source_claim_ref": "claim.inventory_access.{observation_token}"
+          }
+        },
+        {
+          "id": "projection.inventory_shape_transfer",
+          "all_conditions": [
+            {
+              "field": "observation_kind",
+              "operator": "equals",
+              "expected": "local_shape_transfer_to_edge_display"
+            },
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "interpretation.inventory_shape_transfer"
+            }
+          ],
+          "static_facts": {
+            "inventory_observation_eligible": true
+          }
+        },
+        {
+          "id": "projection.inventory_conditioned_entry",
+          "all_conditions": [
+            {
+              "field": "observation_kind",
+              "operator": "equals",
+              "expected": "display_conditioned_adjacent_entry"
+            },
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "interpretation.inventory_conditioned_entry"
+            }
+          ],
+          "static_facts": {
+            "inventory_observation_eligible": true
+          }
+        },
+        {
+          "id": "projection.inventory_access.exact_measured_complement_supports_observation",
+          "all_conditions": [
+            {
+              "field": "compatible_access_relation_observed",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "inventory_observation_basis_qualified": true
+          }
+        },
+        {
+          "id": "projection.inventory_access.acquired_slot_supports_new_part_transfer",
+          "all_conditions": [
+            {
+              "field": "observation_kind",
+              "operator": "equals",
+              "expected": "local_shape_transfer_to_edge_display"
+            },
+            {
+              "field": "display_count_scope",
+              "operator": "equals",
+              "expected": "acquired_slot_pattern"
+            },
+            {
+              "field": "slot_acquisition_support_ref_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "inventory_observation_basis_qualified": true
+          }
+        },
+        {
+          "id": "projection.inventory_access.boundary_mask_keeps_revisable_episode_candidate",
+          "all_conditions": [
+            {
+              "field": "observation_kind",
+              "operator": "equals",
+              "expected": "boundary_display_patch_change"
+            },
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "interpretation.inventory_boundary_possession_supposition"
+            },
+            {
+              "field": "display_before_equals_acquired_sample",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "display_after_equals_empty_sample",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "display_after_equals_acquired_sample",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "display_after_empty_delta_is_single_palette_support",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "display_after_empty_delta_value_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "display_after_empty_delta_value_is_new",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "inventory_observation_eligible": true,
+            "inventory_observation_basis_qualified": true
+          }
+        },
+        {
+          "id": "projection.inventory_access.observed_basis_change",
+          "all_conditions": [
+            {
+              "field": "observation_kind",
+              "operator": "equals",
+              "expected": "episode_display_basis_change"
+            },
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "interpretation.inventory_episode_display_basis_change"
+            },
+            {
+              "field": "observed_basis_patch_changed",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "inventory_observation_eligible": true,
+            "inventory_observation_basis_qualified": true
+          }
+        }
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "inventory_observation_eligible",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "inventory_observation_basis_qualified",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "interpretation.inventory_shape_transfer": "rule.observed_inventory_shape_transfer",
+        "interpretation.inventory_conditioned_entry": "rule.observed_inventory_conditioned_entry",
+        "interpretation.inventory_boundary_possession_supposition": "rule.boundary_display_supports_episode_possession_supposition",
+        "interpretation.inventory_episode_display_basis_change": "rule.observed_episode_display_basis_change"
+      },
+      "invariants": [
+        "one_witness_supports_a_conditional_method_not_a_universal_law",
+        "current_possession_requires_current_display_revalidation",
+        "exact_capacity_and_hidden_inventory_remain_unknown"
+      ],
+      "falsifiers": [
+        "current_world_display_or_control_scope_contradicts_the_sample"
+      ],
+      "reason_refs": [
+        "reason.coupled_world_display_changes_support_conditional_inventory_methods"
+      ],
+      "configuration": {
+        "meaning_evidence_refs_field": "inventory_evidence_refs"
+      }
+    },
+    {
+      "id": "rule.observed_inventory_shape_transfer",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "dynamic",
+      "premises": [
+        "current_canonical_lattice",
+        "two_observed_frames",
+        "measured_body_contact",
+        "measured_shape_correspondence_with_complement_or_acquired_empty_slot",
+        "coupled_world_and_display_changes"
+      ],
+      "invariants": [
+        "one_witness_supports_a_conditional_method_not_a_universal_law",
+        "current_possession_requires_current_display_revalidation",
+        "exact_capacity_and_hidden_inventory_remain_unknown"
+      ],
+      "falsifiers": [
+        "current_world_display_or_control_scope_contradicts_the_sample"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "event.inventory_access.{observation_token}",
+          "kind": "event",
+          "label": "observed inventory transfer and conditional reusable method",
+          "required_fields": [
+            "observation_token",
+            "observation_kind",
+            "transition_ref",
+            "action_ref",
+            "context_epoch",
+            "before_frame_ref",
+            "after_frame_ref",
+            "part_shape_ref",
+            "part_relative_pixels",
+            "inserted_cell_pixels",
+            "part_value",
+            "display_slot_bbox",
+            "display_patch_before",
+            "display_patch_after",
+            "display_part_count_before",
+            "display_part_count_after",
+            "world_contact_bbox",
+            "body_before_bbox",
+            "body_after_bbox",
+            "canonical_grid_geometry",
+            "canonical_grid_support_refs",
+            "source_claim_ref",
+            "world_contact_patch_before",
+            "world_contact_patch_after"
+          ],
+          "static_attributes": {
+            "conditional_method_kind": "contact_action_transfers_shape_to_display",
+            "capacity_lower_bound": 1,
+            "projection_contract": "yf_arc3_v5.inventory_access_observation.v1",
+            "canonical_fact_projection_enabled": true,
+            "commitment": "revisable",
+            "universal_mechanism_law_proven": false,
+            "hidden_inventory_complete": false,
+            "exact_capacity_known": false
+          },
+          "attribute_bindings": {
+            "observation_token": "observation_token",
+            "observation_kind": "observation_kind",
+            "transition_ref": "transition_ref",
+            "action_ref": "action_ref",
+            "context_epoch": "context_epoch",
+            "before_frame_ref": "before_frame_ref",
+            "after_frame_ref": "after_frame_ref",
+            "part_shape_ref": "part_shape_ref",
+            "complementary_shape_ref": "complementary_shape_ref",
+            "part_relative_pixels": "part_relative_pixels",
+            "inserted_cell_pixels": "inserted_cell_pixels",
+            "part_value": "part_value",
+            "display_slot_bbox": "display_slot_bbox",
+            "display_patch_before": "display_patch_before",
+            "display_patch_after": "display_patch_after",
+            "display_part_count_before": "display_part_count_before",
+            "display_part_count_after": "display_part_count_after",
+            "world_contact_bbox": "world_contact_bbox",
+            "matched_access_bbox": "matched_access_bbox",
+            "body_before_bbox": "body_before_bbox",
+            "body_after_bbox": "body_after_bbox",
+            "canonical_grid_geometry": "canonical_grid_geometry",
+            "canonical_grid_support_refs": "canonical_grid_support_refs",
+            "source_claim_ref": "source_claim_ref",
+            "world_contact_patch_before": "world_contact_patch_before",
+            "world_contact_patch_after": "world_contact_patch_after",
+            "matched_access_patch_before": "matched_access_patch_before",
+            "matched_access_patch_after": "matched_access_patch_after",
+            "display_count_scope": "display_count_scope",
+            "compatible_access_relation_observed": "compatible_access_relation_observed",
+            "slot_acquisition_support_refs": "slot_acquisition_support_refs",
+            "slot_acquisition_support_ref_count": "slot_acquisition_support_ref_count"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.inventory_access.{observation_token}",
+          "predicate": "observed_world_to_inventory_shape_transfer",
+          "family": "dynamic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{action_ref}",
+            "event.inventory_access.{observation_token}"
+          ],
+          "required_fields": [
+            "observation_token",
+            "observation_kind",
+            "transition_ref",
+            "action_ref",
+            "context_epoch",
+            "before_frame_ref",
+            "after_frame_ref",
+            "part_shape_ref",
+            "part_relative_pixels",
+            "inserted_cell_pixels",
+            "part_value",
+            "display_slot_bbox",
+            "display_patch_before",
+            "display_patch_after",
+            "display_part_count_before",
+            "display_part_count_after",
+            "world_contact_bbox",
+            "body_before_bbox",
+            "body_after_bbox",
+            "canonical_grid_geometry",
+            "canonical_grid_support_refs",
+            "source_claim_ref",
+            "world_contact_patch_before",
+            "world_contact_patch_after"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "method_is_conditional": true
+          },
+          "attribute_bindings": {
+            "observation_token": "observation_token",
+            "observation_kind": "observation_kind",
+            "transition_ref": "transition_ref",
+            "action_ref": "action_ref",
+            "context_epoch": "context_epoch",
+            "before_frame_ref": "before_frame_ref",
+            "after_frame_ref": "after_frame_ref",
+            "part_shape_ref": "part_shape_ref",
+            "complementary_shape_ref": "complementary_shape_ref",
+            "part_relative_pixels": "part_relative_pixels",
+            "inserted_cell_pixels": "inserted_cell_pixels",
+            "part_value": "part_value",
+            "display_slot_bbox": "display_slot_bbox",
+            "display_patch_before": "display_patch_before",
+            "display_patch_after": "display_patch_after",
+            "display_part_count_before": "display_part_count_before",
+            "display_part_count_after": "display_part_count_after",
+            "world_contact_bbox": "world_contact_bbox",
+            "matched_access_bbox": "matched_access_bbox",
+            "body_before_bbox": "body_before_bbox",
+            "body_after_bbox": "body_after_bbox",
+            "canonical_grid_geometry": "canonical_grid_geometry",
+            "canonical_grid_support_refs": "canonical_grid_support_refs",
+            "world_contact_patch_before": "world_contact_patch_before",
+            "world_contact_patch_after": "world_contact_patch_after",
+            "matched_access_patch_before": "matched_access_patch_before",
+            "matched_access_patch_after": "matched_access_patch_after",
+            "display_count_scope": "display_count_scope",
+            "compatible_access_relation_observed": "compatible_access_relation_observed",
+            "slot_acquisition_support_refs": "slot_acquisition_support_refs",
+            "slot_acquisition_support_ref_count": "slot_acquisition_support_ref_count"
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.coupled_world_display_changes_support_conditional_inventory_methods"
+      ]
+    },
+    {
+      "id": "rule.observed_inventory_conditioned_entry",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "dynamic",
+      "premises": [
+        "current_canonical_lattice",
+        "two_observed_frames",
+        "measured_body_contact",
+        "exact_complementary_part_shape",
+        "coupled_world_and_display_changes"
+      ],
+      "invariants": [
+        "one_witness_supports_a_conditional_method_not_a_universal_law",
+        "current_possession_requires_current_display_revalidation",
+        "exact_capacity_and_hidden_inventory_remain_unknown"
+      ],
+      "falsifiers": [
+        "current_world_display_or_control_scope_contradicts_the_sample"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "event.inventory_access.{observation_token}",
+          "kind": "event",
+          "label": "observed inventory entry and conditional reusable method",
+          "required_fields": [
+            "observation_token",
+            "observation_kind",
+            "transition_ref",
+            "action_ref",
+            "context_epoch",
+            "before_frame_ref",
+            "after_frame_ref",
+            "part_shape_ref",
+            "complementary_shape_ref",
+            "part_relative_pixels",
+            "inserted_cell_pixels",
+            "part_value",
+            "display_slot_bbox",
+            "display_patch_before",
+            "display_patch_after",
+            "display_part_count_before",
+            "display_part_count_after",
+            "world_contact_bbox",
+            "matched_access_bbox",
+            "body_before_bbox",
+            "body_after_bbox",
+            "canonical_grid_geometry",
+            "canonical_grid_support_refs",
+            "source_claim_ref",
+            "world_contact_patch_before",
+            "world_contact_patch_after",
+            "matched_access_patch_before",
+            "matched_access_patch_after"
+          ],
+          "static_attributes": {
+            "conditional_method_kind": "adjacent_directional_entry_transforms_access",
+            "presence_is_observed_condition_not_proven_necessity": true,
+            "projection_contract": "yf_arc3_v5.inventory_access_observation.v1",
+            "canonical_fact_projection_enabled": true,
+            "commitment": "revisable",
+            "universal_mechanism_law_proven": false,
+            "hidden_inventory_complete": false,
+            "exact_capacity_known": false
+          },
+          "attribute_bindings": {
+            "observation_token": "observation_token",
+            "observation_kind": "observation_kind",
+            "transition_ref": "transition_ref",
+            "action_ref": "action_ref",
+            "context_epoch": "context_epoch",
+            "before_frame_ref": "before_frame_ref",
+            "after_frame_ref": "after_frame_ref",
+            "part_shape_ref": "part_shape_ref",
+            "complementary_shape_ref": "complementary_shape_ref",
+            "part_relative_pixels": "part_relative_pixels",
+            "inserted_cell_pixels": "inserted_cell_pixels",
+            "part_value": "part_value",
+            "display_slot_bbox": "display_slot_bbox",
+            "display_patch_before": "display_patch_before",
+            "display_patch_after": "display_patch_after",
+            "display_part_count_before": "display_part_count_before",
+            "display_part_count_after": "display_part_count_after",
+            "world_contact_bbox": "world_contact_bbox",
+            "matched_access_bbox": "matched_access_bbox",
+            "body_before_bbox": "body_before_bbox",
+            "body_after_bbox": "body_after_bbox",
+            "canonical_grid_geometry": "canonical_grid_geometry",
+            "canonical_grid_support_refs": "canonical_grid_support_refs",
+            "source_claim_ref": "source_claim_ref",
+            "world_contact_patch_before": "world_contact_patch_before",
+            "world_contact_patch_after": "world_contact_patch_after",
+            "matched_access_patch_before": "matched_access_patch_before",
+            "matched_access_patch_after": "matched_access_patch_after",
+            "display_count_scope": "display_count_scope",
+            "compatible_access_relation_observed": "compatible_access_relation_observed",
+            "slot_acquisition_support_refs": "slot_acquisition_support_refs",
+            "slot_acquisition_support_ref_count": "slot_acquisition_support_ref_count"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.inventory_access.{observation_token}",
+          "predicate": "observed_compatible_display_conditioned_access_entry",
+          "family": "dynamic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{action_ref}",
+            "event.inventory_access.{observation_token}"
+          ],
+          "required_fields": [
+            "observation_token",
+            "observation_kind",
+            "transition_ref",
+            "action_ref",
+            "context_epoch",
+            "before_frame_ref",
+            "after_frame_ref",
+            "part_shape_ref",
+            "complementary_shape_ref",
+            "part_relative_pixels",
+            "inserted_cell_pixels",
+            "part_value",
+            "display_slot_bbox",
+            "display_patch_before",
+            "display_patch_after",
+            "display_part_count_before",
+            "display_part_count_after",
+            "world_contact_bbox",
+            "matched_access_bbox",
+            "body_before_bbox",
+            "body_after_bbox",
+            "canonical_grid_geometry",
+            "canonical_grid_support_refs",
+            "source_claim_ref",
+            "world_contact_patch_before",
+            "world_contact_patch_after",
+            "matched_access_patch_before",
+            "matched_access_patch_after"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "method_is_conditional": true
+          },
+          "attribute_bindings": {
+            "observation_token": "observation_token",
+            "observation_kind": "observation_kind",
+            "transition_ref": "transition_ref",
+            "action_ref": "action_ref",
+            "context_epoch": "context_epoch",
+            "before_frame_ref": "before_frame_ref",
+            "after_frame_ref": "after_frame_ref",
+            "part_shape_ref": "part_shape_ref",
+            "complementary_shape_ref": "complementary_shape_ref",
+            "part_relative_pixels": "part_relative_pixels",
+            "inserted_cell_pixels": "inserted_cell_pixels",
+            "part_value": "part_value",
+            "display_slot_bbox": "display_slot_bbox",
+            "display_patch_before": "display_patch_before",
+            "display_patch_after": "display_patch_after",
+            "display_part_count_before": "display_part_count_before",
+            "display_part_count_after": "display_part_count_after",
+            "world_contact_bbox": "world_contact_bbox",
+            "matched_access_bbox": "matched_access_bbox",
+            "body_before_bbox": "body_before_bbox",
+            "body_after_bbox": "body_after_bbox",
+            "canonical_grid_geometry": "canonical_grid_geometry",
+            "canonical_grid_support_refs": "canonical_grid_support_refs",
+            "world_contact_patch_before": "world_contact_patch_before",
+            "world_contact_patch_after": "world_contact_patch_after",
+            "matched_access_patch_before": "matched_access_patch_before",
+            "matched_access_patch_after": "matched_access_patch_after",
+            "display_count_scope": "display_count_scope",
+            "compatible_access_relation_observed": "compatible_access_relation_observed",
+            "slot_acquisition_support_refs": "slot_acquisition_support_refs",
+            "slot_acquisition_support_ref_count": "slot_acquisition_support_ref_count"
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.coupled_world_display_changes_support_conditional_inventory_methods"
+      ]
+    },
+    {
+      "id": "rule.observed_inventory_access",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "dynamic",
+      "premises": [
+        "selected_current_inventory_access_observation"
+      ],
+      "invariants": [
+        "one_witness_supports_a_conditional_method_not_a_universal_law",
+        "current_possession_requires_current_display_revalidation",
+        "exact_capacity_and_hidden_inventory_remain_unknown"
+      ],
+      "falsifiers": [
+        "current_world_display_or_control_scope_contradicts_the_sample"
+      ],
+      "reason_refs": [
+        "reason.coupled_world_display_changes_support_conditional_inventory_methods"
+      ]
+    },
+    {
+      "id": "rule.boundary_display_supports_episode_possession_supposition",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "dynamic",
+      "premises": [
+        "observed_acquisition_and_exact_last_visible_held_patch",
+        "observed_scene_epoch_change",
+        "current_compartment_replaced_by_new_uniform_material",
+        "current_display_does_not_match_acquired_empty_sample"
+      ],
+      "invariants": [
+        "supported_claim_concerns_a_revisable_supposition_not_hidden_inventory_truth",
+        "no_old_route_world_coordinate_or_pending_action_crosses_the_boundary",
+        "every_compatible_signature_is_retained",
+        "current_epoch_and_display_must_be_revalidated_before_each_use",
+        "no_global_policy_of_boundary_inventory_conservation"
+      ],
+      "falsifiers": [
+        "current_display_reverts_to_empty_or_changes_again",
+        "current_compatible_access_refuses_the_remembered_possession",
+        "observed_consumption_or_drop_or_epoch_change_invalidates_current_use"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "event.inventory_access.{observation_token}",
+          "kind": "entity",
+          "label": "revisable episode possession at an observed display mask",
+          "required_fields": [
+            "observation_token",
+            "observation_kind",
+            "transition_ref",
+            "action_ref",
+            "before_frame_ref",
+            "after_frame_ref",
+            "before_context_epoch",
+            "context_epoch",
+            "display_slot_bbox",
+            "display_patch_before",
+            "display_patch_after",
+            "display_empty_patch",
+            "part_shape_ref",
+            "part_relative_pixels",
+            "inserted_cell_pixels",
+            "part_value",
+            "acquisition_support_refs",
+            "source_claim_ref"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.episode_inventory_supposition.v1",
+            "canonical_fact_projection_enabled": true,
+            "memory_scope": "same_game",
+            "commitment": "revisable",
+            "hidden_type_observed": false,
+            "universal_boundary_preservation_proven": false
+          },
+          "attribute_bindings": {
+            "observation_token": "observation_token",
+            "observation_kind": "observation_kind",
+            "transition_ref": "transition_ref",
+            "action_ref": "action_ref",
+            "before_frame_ref": "before_frame_ref",
+            "after_frame_ref": "after_frame_ref",
+            "before_context_epoch": "before_context_epoch",
+            "context_epoch": "context_epoch",
+            "display_slot_bbox": "display_slot_bbox",
+            "display_patch_before": "display_patch_before",
+            "display_patch_after": "display_patch_after",
+            "display_empty_patch": "display_empty_patch",
+            "part_shape_ref": "part_shape_ref",
+            "part_relative_pixels": "part_relative_pixels",
+            "inserted_cell_pixels": "inserted_cell_pixels",
+            "part_value": "part_value",
+            "acquisition_support_refs": "acquisition_support_refs",
+            "source_claim_ref": "source_claim_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.inventory_access.{observation_token}",
+          "predicate": "boundary_display_supports_episode_possession_supposition",
+          "family": "dynamic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{action_ref}",
+            "event.inventory_access.{observation_token}"
+          ],
+          "required_fields": [
+            "observation_token",
+            "observation_kind",
+            "transition_ref",
+            "action_ref",
+            "before_frame_ref",
+            "after_frame_ref",
+            "before_context_epoch",
+            "context_epoch",
+            "display_slot_bbox",
+            "display_patch_before",
+            "display_patch_after",
+            "display_empty_patch",
+            "part_shape_ref",
+            "part_relative_pixels",
+            "inserted_cell_pixels",
+            "part_value",
+            "acquisition_support_refs",
+            "source_claim_ref"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "hidden_type_observed": false
+          },
+          "attribute_bindings": {
+            "observation_token": "observation_token",
+            "observation_kind": "observation_kind",
+            "transition_ref": "transition_ref",
+            "action_ref": "action_ref",
+            "before_frame_ref": "before_frame_ref",
+            "after_frame_ref": "after_frame_ref",
+            "before_context_epoch": "before_context_epoch",
+            "context_epoch": "context_epoch",
+            "display_slot_bbox": "display_slot_bbox",
+            "display_patch_before": "display_patch_before",
+            "display_patch_after": "display_patch_after",
+            "display_empty_patch": "display_empty_patch",
+            "part_shape_ref": "part_shape_ref",
+            "part_relative_pixels": "part_relative_pixels",
+            "inserted_cell_pixels": "inserted_cell_pixels",
+            "part_value": "part_value",
+            "acquisition_support_refs": "acquisition_support_refs",
+            "source_claim_ref": "source_claim_ref"
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.observed_acquisition_and_mask_change_support_episode_possession_supposition"
+      ]
+    },
+    {
+      "id": "rule.observed_episode_display_basis_change",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "dynamic",
+      "premises": [
+        "canonical_display_basis_and_two_actual_ordered_observations",
+        "before_patch_matches_basis_and_after_patch_differs"
+      ],
+      "invariants": [
+        "changed_display_retires_the_old_current_binding_not_the_historical_acquisition",
+        "a_later_identical_patch_does_not_erase_an_intervening_observed_change",
+        "no_hidden_ownership_loss_or_reset_policy_is_inferred"
+      ],
+      "falsifiers": [
+        "observation_pair_or_basis_identity_mismatch"
+      ],
+      "reason_refs": [
+        "reason.current_display_binding_needs_new_revalidation_after_observed_change"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "event.inventory_access.{observation_token}",
+          "kind": "event",
+          "label": "observed change of a remembered display basis",
+          "required_fields": [
+            "observation_token",
+            "observation_kind",
+            "transition_ref",
+            "action_ref",
+            "before_frame_ref",
+            "after_frame_ref",
+            "context_epoch",
+            "basis_claim_ref",
+            "source_claim_ref"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.episode_display_basis_change.v1",
+            "canonical_fact_projection_enabled": true,
+            "memory_scope": "same_game",
+            "hidden_ownership_loss_proven": false
+          },
+          "attribute_bindings": {
+            "observation_token": "observation_token",
+            "observation_kind": "observation_kind",
+            "transition_ref": "transition_ref",
+            "action_ref": "action_ref",
+            "before_frame_ref": "before_frame_ref",
+            "after_frame_ref": "after_frame_ref",
+            "context_epoch": "context_epoch",
+            "basis_claim_ref": "basis_claim_ref",
+            "source_claim_ref": "source_claim_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.inventory_access.{observation_token}",
+          "predicate": "observed_episode_display_basis_change",
+          "family": "dynamic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{basis_claim_ref}",
+            "event.inventory_access.{observation_token}"
+          ],
+          "required_fields": [
+            "observation_token",
+            "observation_kind",
+            "transition_ref",
+            "action_ref",
+            "before_frame_ref",
+            "after_frame_ref",
+            "context_epoch",
+            "basis_claim_ref",
+            "source_claim_ref"
+          ],
+          "static_attributes": {
+            "hidden_ownership_loss_proven": false
+          },
+          "attribute_bindings": {
+            "observation_token": "observation_token",
+            "observation_kind": "observation_kind",
+            "transition_ref": "transition_ref",
+            "action_ref": "action_ref",
+            "before_frame_ref": "before_frame_ref",
+            "after_frame_ref": "after_frame_ref",
+            "context_epoch": "context_epoch",
+            "basis_claim_ref": "basis_claim_ref",
+            "source_claim_ref": "source_claim_ref"
+          }
+        }
+      ]
+    }
+  ]
+}

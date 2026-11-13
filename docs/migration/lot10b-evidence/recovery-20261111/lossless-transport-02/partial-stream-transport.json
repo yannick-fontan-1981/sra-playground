@@ -1,0 +1,23 @@
+{
+  "schema": "logos-engine.lossless-evidence-transport.v1",
+  "recordedAt": "2026-11-11T16:06:38.439258+00:00",
+  "scope": "Exact byte preservation of a retained interrupted JSON stream; no parse, reconstruction, game, replay or new diagnostic.",
+  "mappings": [
+    {
+      "original": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-checkpoint-000039.inprogress.json",
+        "sha256": "b9886472da963a0e124209b169c00a8d381bf0f014bdbf093930afdcc8532e3b",
+        "bytes": 18130848
+      },
+      "compressed": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-checkpoint-000039.inprogress.json.gz",
+        "sha256": "ee35f5f9acaa7f9fc1799e96538d35ea29c3c01fd68d73b654a6190045900f37",
+        "bytes": 1460138
+      },
+      "roundtripVerified": true,
+      "restoredSha256": "b9886472da963a0e124209b169c00a8d381bf0f014bdbf093930afdcc8532e3b",
+      "restoredBytes": 18130848
+    }
+  ],
+  "qualification": "The partial in-progress stream remains partial. Compression does not promote it to a complete checkpoint or campaign."
+}

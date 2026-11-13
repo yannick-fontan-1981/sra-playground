@@ -1,0 +1,12 @@
+{
+  "schema": "logos-engine.lot2a.campaign-selection.v1",
+  "game": "LS20",
+  "targetLevels": 3,
+  "selectedAt": "2026-11-09T17:43:50.333677+00:00",
+  "switchDeadline": "2026-11-09T18:23:50.333677+00:00",
+  "maximumBlockedSeconds": 2400,
+  "nextCandidate": "TR87",
+  "sourceManifestDigest": "cc4bcea77e0099dc035afa5d6ae03e0d5a7a00082633b8e2332691f34b769ad3",
+  "selectionBasis": "Read-only unchanged original geometry.pairs on archived public initial rasters found one asymmetric pair; no solution, hidden game state, command route or learned knowledge supplied.",
+  "clockPolicy": "Original game selection clock persists across fixes and retries; change game after 40 minutes blocked."
+}

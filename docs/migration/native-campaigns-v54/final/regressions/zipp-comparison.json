@@ -1,0 +1,194 @@
+{
+  "schema": "logos-engine.v54.scoped-public-regression-comparison.v1",
+  "game": "ZIPP",
+  "passed": true,
+  "checks": [
+    {
+      "name": "both runs passed with the same declared game and target",
+      "passed": true,
+      "baselineProjectionSha256": "251c7a992556c68f7033665880aa1a587f6a4afb3540b2fed5eb66c51a698b44",
+      "currentProjectionSha256": "251c7a992556c68f7033665880aa1a587f6a4afb3540b2fed5eb66c51a698b44"
+    },
+    {
+      "name": "same production budgets, source reference and opaque game asset provenance",
+      "passed": true,
+      "baselineProjectionSha256": "434f0d818668e85d0d42e6e2f1846adbcb973b2ca0f4f494927f70a789a0692d",
+      "currentProjectionSha256": "434f0d818668e85d0d42e6e2f1846adbcb973b2ca0f4f494927f70a789a0692d"
+    },
+    {
+      "name": "same complete initial public packet hash and public state",
+      "passed": true,
+      "baselineProjectionSha256": "bf3162d0e59bdda5ff4914a2d104fc015dee92842a86ad34fb7fb28fb4f7a9cc",
+      "currentProjectionSha256": "bf3162d0e59bdda5ff4914a2d104fc015dee92842a86ad34fb7fb28fb4f7a9cc"
+    },
+    {
+      "name": "every archived public packet independently hashes to the v53 baseline",
+      "passed": true,
+      "baselineProjectionSha256": "867857627c59a1a04337edf88c924ab5e5b65d5db1959adb729be82fff18e4bd",
+      "currentProjectionSha256": "867857627c59a1a04337edf88c924ab5e5b65d5db1959adb729be82fff18e4bd"
+    },
+    {
+      "name": "every archived host-only command equals its prior baseline command",
+      "passed": true,
+      "baselineProjectionSha256": "560d0f0fc80ae4b879a2ded857fd68ffff3e3ef6f8e6b0598f400dab468a920e",
+      "currentProjectionSha256": "560d0f0fc80ae4b879a2ded857fd68ffff3e3ef6f8e6b0598f400dab468a920e"
+    },
+    {
+      "name": "same commands, complete returned packet hashes, animation lengths and primitive boundaries",
+      "passed": true,
+      "baselineProjectionSha256": "fde01301eff60bed9890a4bfeae4e2f2e6ae72dd13f151a48b574aa46d2fb35c",
+      "currentProjectionSha256": "fde01301eff60bed9890a4bfeae4e2f2e6ae72dd13f151a48b574aa46d2fb35c"
+    },
+    {
+      "name": "same selected family/group/kind/subquestion, acquired prefix lengths and retained solver scalars",
+      "passed": true,
+      "baselineProjectionSha256": "121d8966d0b07fa2a9595e6f0fd8f07c07e7177a9fd4ed2b05125eb003d0411d",
+      "currentProjectionSha256": "121d8966d0b07fa2a9595e6f0fd8f07c07e7177a9fd4ed2b05125eb003d0411d"
+    },
+    {
+      "name": "same retained coordination source/preferred entries and current guard scope",
+      "passed": true,
+      "baselineProjectionSha256": "2b62750fb326873a81f225d2e8cc17adf98e511c7fc46a458197352ec30b6ec5",
+      "currentProjectionSha256": "2b62750fb326873a81f225d2e8cc17adf98e511c7fc46a458197352ec30b6ec5"
+    },
+    {
+      "name": "same historical epoch anchors with session namespace normalized",
+      "passed": true,
+      "baselineProjectionSha256": "8024e317bd34d854d32c77213c6bab1cd5d1d41e28cb57270d75ecf3f9082547",
+      "currentProjectionSha256": "8024e317bd34d854d32c77213c6bab1cd5d1d41e28cb57270d75ecf3f9082547"
+    },
+    {
+      "name": "same inherited source-series event counts on every sealed prefix",
+      "passed": true,
+      "baselineProjectionSha256": "f16a8ec9e0ee64dae300bcaa3123b95bc80a999be26a775765989881439693ae",
+      "currentProjectionSha256": "f16a8ec9e0ee64dae300bcaa3123b95bc80a999be26a775765989881439693ae"
+    },
+    {
+      "name": "same common request outcomes and retained caller acquisition counters",
+      "passed": true,
+      "baselineProjectionSha256": "7bf4c0223e01b066fe317901dd6f56bf2eda7398f07a45941f4d7df6eec03f9e",
+      "currentProjectionSha256": "7bf4c0223e01b066fe317901dd6f56bf2eda7398f07a45941f4d7df6eec03f9e"
+    },
+    {
+      "name": "same natural level boundaries and retained-session caller counters",
+      "passed": true,
+      "baselineProjectionSha256": "7f27f18b464b2a6479e2f5c7f18e09c2c9dc48453b5bbd8e53de27c20e0dca24",
+      "currentProjectionSha256": "7f27f18b464b2a6479e2f5c7f18e09c2c9dc48453b5bbd8e53de27c20e0dca24"
+    },
+    {
+      "name": "same final public result and retained-session operation counts",
+      "passed": true,
+      "baselineProjectionSha256": "76776bdc17c3c24c4e9d9f2d5da2d79bfac99a1535f67202b1e5e6ce09b8ac58",
+      "currentProjectionSha256": "76776bdc17c3c24c4e9d9f2d5da2d79bfac99a1535f67202b1e5e6ce09b8ac58"
+    },
+    {
+      "name": "same retained mechanical-domain assessments",
+      "passed": true,
+      "baselineProjectionSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "currentProjectionSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "name": "both source runs remained unchanged and imported no Python agent module",
+      "passed": true,
+      "baselineProjectionSha256": "6dfa9e070d04981f350bd1b62a67aa294200924a4e300757121c928967837dd4",
+      "currentProjectionSha256": "6dfa9e070d04981f350bd1b62a67aa294200924a4e300757121c928967837dd4"
+    },
+    {
+      "name": "current replay used the declared complete frozen native source",
+      "passed": true,
+      "baselineProjectionSha256": "1d92e7a1a84bccc8fc28f032dcc082bf96b56aa2fca028488272333d29c726c6",
+      "currentProjectionSha256": "1d92e7a1a84bccc8fc28f032dcc082bf96b56aa2fca028488272333d29c726c6"
+    },
+    {
+      "name": "current replay identifies the exact host-only baseline and public trace",
+      "passed": true,
+      "baselineProjectionSha256": "b82d369ab58d3f5f31d254029c541bff23041a69d89033958a2e741dc590137c",
+      "currentProjectionSha256": "b82d369ab58d3f5f31d254029c541bff23041a69d89033958a2e741dc590137c"
+    }
+  ],
+  "before": {
+    "path": "docs/migration/native-campaigns-v53/attempt7/regressions/zipp-replay.json.gz",
+    "sha256": "673ab90226ee847a8a29acb0c2e370cc7c78937baf56d3892d0ae1fe37fd6f04",
+    "bytes": 165210,
+    "sourceDigest": "d87f952e0db958cf2168c1af68ecdc85f4164e1dda7e75e2874733fa03359b70"
+  },
+  "after": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/zipp-replay.json.gz",
+    "sha256": "989c7f54528dfd9ed61ab3c026f3315bbc0496896768a1cf091ce133c515263e",
+    "bytes": 294666,
+    "sourceDigest": "059d6204097fae6749138b9afc650ccc54867886bda3887ef6f978f6afdf393a"
+  },
+  "trace": {
+    "path": "docs/migration/native-campaigns-v48/zipp-public-trace.json.gz",
+    "sha256": "dca930510e267cdb3ae5098606da3441eecf14d362215f99197fc77023ab1917",
+    "bytes": 36532
+  },
+  "compared": {
+    "commands": 101,
+    "completePublicPackets": 102,
+    "prefixes": 40,
+    "requests": 141,
+    "naturalLevelBoundaries": 6,
+    "animationFrames": 119
+  },
+  "scope": {
+    "prefixKeys": [
+      "id",
+      "decisionRevision",
+      "acquiredActions",
+      "family",
+      "operations",
+      "proposalKind",
+      "fieldSubquestion",
+      "materialSubquestion",
+      "selectionGroup",
+      "programControlProbeMode",
+      "programRelationMode",
+      "rootedQuotaPhase",
+      "productPanelFactors",
+      "productPanelEstimated",
+      "productPanelObservedSteps",
+      "labeledSequenceLabel",
+      "labeledSequenceQuery",
+      "labeledSequenceTrainingReused",
+      "labeledSequenceCompatiblePredicates",
+      "labeledSequenceAgreement",
+      "labeledSequenceGrammarSize",
+      "supportMode",
+      "callerAcquiredTransitions"
+    ],
+    "coordinationKeys": [
+      "rule",
+      "observation_ref",
+      "guard_reason",
+      "scope",
+      "deferred_family",
+      "preferred_family",
+      "physical_action_authorized",
+      "source_trigger_group",
+      "source_trigger_entry",
+      "selected_group",
+      "selected_entry",
+      "selected_subquestion"
+    ],
+    "callerKeys": [
+      "enabled",
+      "acquiredTransitions",
+      "boundaryReplays",
+      "goalEvents",
+      "frontierDeltas",
+      "components"
+    ],
+    "boundaryKeys": [
+      "completedLevel",
+      "nativeLevel",
+      "levelsCompleted",
+      "levelActions",
+      "totalActions",
+      "prefixCount",
+      "phase",
+      "sessionRetained"
+    ]
+  },
+  "qualification": "Ten cold native common-caller replays use unchanged archived public returns; every current command is computed before the host supplies its expected return. The comparison covers every command, complete public-packet SHA-256, animation length, primitive boundary, selected family/group/proposal kind/subquestion, retained coordination entry/guard fields, acquired prefix lengths, epoch anchors, source-series event counts, common-caller counters, natural level boundaries and final public result. Only the fresh observation-session prefix is normalized in the selected fields. Timings, implementation labels and migration-status labels are excluded. Complete provider payloads, derived identities, graph chains/revisions, full original-caller parity and equality of the newly added ReactiveContact state are not asserted. Existing LIFE material recipe identities and GARE nonempty FieldService payloads remain retained in the raw reports, outside this declared comparison. The prior v53 comparison records are unchanged. These are regressions, not ten new live games and not a speed comparison."
+}

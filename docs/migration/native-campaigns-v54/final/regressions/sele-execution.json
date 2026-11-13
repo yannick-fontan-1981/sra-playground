@@ -1,0 +1,116 @@
+{
+  "game": "SELE",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "scripts/replay-v53-public-regression.mjs",
+    "docs/migration/native-campaigns-v53/attempt7/regressions/sele-replay.json.gz",
+    "docs/migration/native-campaigns-v47/sele-public-trace.json.gz",
+    "docs/migration/native-campaigns-v54/final/regressions/sele-replay.json.gz"
+  ],
+  "startedAt": "2026-11-09T12:26:10.372452+00:00",
+  "finishedAt": "2026-11-09T12:27:49.802821+00:00",
+  "elapsedSeconds": 99.4303689290009,
+  "exitCode": 0,
+  "timeoutSeconds": 2400,
+  "timedOut": false,
+  "baseline": {
+    "path": "docs/migration/native-campaigns-v53/attempt7/regressions/sele-replay.json.gz",
+    "sha256": "b9e8bdd43fb96bf36f3a5304a8081282dd360b0c08aeb018e1eace0eb45f30a3",
+    "bytes": 202500
+  },
+  "trace": {
+    "path": "docs/migration/native-campaigns-v47/sele-public-trace.json.gz",
+    "sha256": "f62033bd4cc0d829ba9ffe36c9c3efd6b77a63bf1e5896f7a9b0a2694d49e3a2",
+    "bytes": 36187
+  },
+  "output": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/sele-output.log.gz",
+    "sha256": "9cdcf5434b69f494d6f30e2a7380f64f5b8008937b409136a756fdd3eb9c323e",
+    "bytes": 5413
+  },
+  "passed": true,
+  "memory": {},
+  "report": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/sele-replay.json.gz",
+    "sha256": "3c3422fd91c7d0f5ce13777f814424b5ee499c3c38e3101482d63931058aecc1",
+    "bytes": 319630
+  },
+  "status": "passed",
+  "actions": 44,
+  "prefixes": 44,
+  "final": {
+    "actions": 44,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 78.80458139199997,
+    "prefixes": 44,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 44,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 89,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 45
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 45
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 21
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 16
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 1
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 46
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology",
+        "attention_parent_return",
+        "acquire_control_for_target"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 44,
+      "resume": 43
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.28.0"
+  },
+  "comparison": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/sele-comparison.json",
+    "sha256": "de4107df5099a2cd653aa3e55087b84a249b1f9982f948915901ce7257dddc51",
+    "bytes": 9094
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "immutableInputsUnchanged": true
+}

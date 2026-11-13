@@ -1,0 +1,106 @@
+{
+  "schema": "logos-engine.v56.baseline-candidate-resolution.v1",
+  "game": "GLOB",
+  "status": "three_levels_completed",
+  "selection": {
+    "path": "docs/migration/native-campaigns-v56/candidates/001-glob-selection.json",
+    "sha256": "f284a604c921da9217a39ada44808b9f69384b719012acf4de3390c67280da5d",
+    "bytes": 923
+  },
+  "execution": {
+    "path": "docs/migration/native-campaigns-v56/baseline-glob/execution-glob.json",
+    "sha256": "b6c5e2d875e68aa12f9d27fb2a9d739b3282bcb54c64c794e2ce9cd86a368e2c",
+    "bytes": 54521
+  },
+  "campaign": {
+    "path": "docs/migration/native-campaigns-v56/baseline-glob/glob-campaign.json.gz",
+    "sha256": "0e3301e2a75fb8eea9671a1a25e8c3411c537fca9c9fd8dfeb1ed4ae6188ab77",
+    "bytes": 105596
+  },
+  "closedAt": "2026-11-09T14:00:28.767120+00:00",
+  "elapsedSinceFirstSelectionSeconds": 52.039416,
+  "closedBeforeBlockedDeadline": true,
+  "sourceImplementation": "logos-engine.typescript.v6.native-migration/0.29.0",
+  "sourceDigest": "3794fa1b97951b20f3ce06d2d1d11b20d8c2b47132591fb5b8cf6f3e75b661d3",
+  "actionsPerLevel": [
+    5,
+    11,
+    4
+  ],
+  "prefixesPerProvider": {
+    "observed_frontier": 12,
+    "fixed_origin": 4,
+    "information_goal": 1
+  },
+  "actionsPerProvider": {
+    "observed_frontier": 12,
+    "fixed_origin": 7,
+    "information_goal": 1
+  },
+  "final": {
+    "actions": 20,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 39.39785585500002,
+    "prefixes": 17,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 20,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 54,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 18
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 31
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 8
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 15
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 3
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 4
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 31
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology",
+        "attention_parent_return",
+        "acquire_control_for_target"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 20,
+      "resume": 16
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.29.0"
+  },
+  "qualification": "Completed on unchanged published V55. This bounded cold common result is not a V56 integration claim and is not attributed to the future ObservedInventory transfer. Original first-selection clock and deadline remain immutable."
+}

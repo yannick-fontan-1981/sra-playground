@@ -1,0 +1,49 @@
+{
+  "schema": "logos-engine.merge-whitespace-review.v1",
+  "recordedAt": "2026-11-10T22:17:43.017654+00:00",
+  "checks": [
+    {
+      "name": "all-merged-history",
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exitCode": 2,
+      "output": {
+        "path": "docs/migration/lot10a-evidence/diagnostic/post5a-merge-all-merged-history.log.gz",
+        "sha256": "730ac399943363d2d0391d6089826afb9f05117e6a9b46856bea8bf8448d9523",
+        "bytes": 5193
+      }
+    },
+    {
+      "name": "resolved-source-and-documentation",
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check",
+        "--",
+        ".gitignore",
+        "docs/migration/v6-coverage.json",
+        "docs/migration/v6-delivery-roadmap.md",
+        "docs/migration/v6-entry-point-progress.json",
+        "docs/migration/v6-native-transfer.md",
+        "migration/v6-transfer-map.json",
+        "src/logos-engine/v6-native-runtime.ts",
+        "tests/v6-radial-port-integration.test.ts",
+        "docs/migration/lot10a-axial-question.md",
+        "docs/migration/lot10a-evidence/coordination",
+        "docs/migration/lot10a-evidence/integration-cost-source-review.md"
+      ],
+      "exitCode": 0,
+      "output": {
+        "path": "docs/migration/lot10a-evidence/diagnostic/post5a-merge-resolved-source-and-documentation.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+        "bytes": 20
+      }
+    }
+  ],
+  "qualification": "The whole merge includes already published binary byte parts and immutable historical diagnostic whitespace from the parents. Those bytes remain unchanged. The resolved source, documentation and regenerated inventories pass the scoped whitespace check. This does not relabel the whole-history failure as a pass."
+}

@@ -1,0 +1,3984 @@
+{
+  "schema": "logos-engine.lot2a.actual-morphology-causal-excerpt.v1",
+  "report": {
+    "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz",
+    "sha256": "200b3b4f9729891f43540047fb61241402ed40862530bec52b701ca383c25bb6",
+    "bytes": 22350769
+  },
+  "sourceDigest": "cc4bcea77e0099dc035afa5d6ae03e0d5a7a00082633b8e2332691f34b769ad3",
+  "game": "LS20",
+  "targetLevels": 3,
+  "status": "failed",
+  "failure": "Did not complete LS20 level 2: The game reports GAME_OVER.",
+  "final": {
+    "actions": 144,
+    "levelsCompleted": 1,
+    "level": 2,
+    "state": "GAME_OVER",
+    "status": "stopped",
+    "reason": "native_game_over",
+    "activeSeconds": 318.7494498700002,
+    "prefixes": 82,
+    "sessions": 1,
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.33.0"
+  },
+  "boundaries": [
+    {
+      "completedLevel": 1,
+      "nativeLevel": 2,
+      "levelsCompleted": 1,
+      "levelActions": 28,
+      "totalActions": 28,
+      "levelActiveSeconds": 35.340486640999984,
+      "activeSeconds": 35.340486640999984,
+      "prefixCount": 15,
+      "sessionRetained": true
+    }
+  ],
+  "actionFamilyCounts": {
+    "observed_frontier": 42,
+    "view": 22,
+    "view_continuity": 14,
+    "morphology": 65,
+    "information_goal": 1
+  },
+  "morphologyCallCounts": {
+    "propose": 82,
+    "observeDepartures": 144,
+    "record": 65
+  },
+  "selectedMorphologyPrefixes": [
+    {
+      "id": "prefix_evidence:18",
+      "decisionRevision": 18,
+      "acquiredActions": 4,
+      "family": "morphology",
+      "route_key": "modifier",
+      "access_phase": "contact",
+      "contact_in_prefix": true,
+      "full_access_length": 4,
+      "trial": "2b7ed61ecff8ee18e485a703d4a3e0b9550d11de9501e07d8d47c539b031e3f8",
+      "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:18:frame:97866900fa82a68c",
+      "level_epoch": 1,
+      "physicalActions": [
+        18,
+        19,
+        20,
+        21
+      ],
+      "commands": [
+        {
+          "action_ref": "ACTION3",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        }
+      ],
+      "levelBefore": 1,
+      "completedAfter": 0,
+      "measuredFacts": {
+        "asymmetric": true,
+        "orientation_relation": "different",
+        "color_relation": "equal",
+        "control_attested": true,
+        "single_pattern_contact_change": false,
+        "peer_discrimination_bound": false,
+        "extension_kind": null,
+        "extension_route": null,
+        "meter_forecast": {
+          "capacity_status": "largest_measured_value",
+          "capacity_steps": 42,
+          "current_units": 26,
+          "level_epoch": 1,
+          "loss_per_step": 1,
+          "measured_strip": [
+            "x",
+            61,
+            11,
+            "hi",
+            55
+          ],
+          "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:18:frame:97866900fa82a68c",
+          "qualification": "provisional_constant_loss_until_a_measured_change",
+          "steps_before_empty": 26
+        }
+      },
+      "featureResiduals": {
+        "color": "equal",
+        "observed_colors": [
+          9,
+          9
+        ],
+        "orientation": "different",
+        "orientation_alternatives": [
+          3
+        ],
+        "palette_values": [
+          9,
+          9
+        ],
+        "possible_peer": null,
+        "prior_method_ref": null,
+        "prior_surface": null,
+        "scope": "appearance and currently rebound reference-scale hypothesis; scoring role remains conditional",
+        "shape": "homologous_under_rotation",
+        "shape_class": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+        "sites": [
+          [
+            33,
+            9,
+            39,
+            15
+          ],
+          [
+            1,
+            53,
+            10,
+            62
+          ]
+        ]
+      }
+    },
+    {
+      "id": "prefix_evidence:22",
+      "decisionRevision": 22,
+      "acquiredActions": 2,
+      "family": "morphology",
+      "route_key": "peer_access_probe",
+      "trial": "2f668ba846a262d372100aaa0c21290751ebd6d87ce292bd7d413efdb8b3d5c4",
+      "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:22:frame:5aacc217fee375eb",
+      "level_epoch": 1,
+      "physicalActions": [
+        22,
+        23
+      ],
+      "commands": [
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION4",
+          "data": {}
+        }
+      ],
+      "levelBefore": 1,
+      "completedAfter": 0,
+      "measuredFacts": {
+        "asymmetric": true,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "peer_discrimination_bound": true,
+        "extension_kind": null,
+        "extension_route": null,
+        "meter_forecast": null
+      },
+      "featureResiduals": {
+        "color": "equal",
+        "observed_colors": [
+          9,
+          9
+        ],
+        "orientation": "aligned",
+        "orientation_alternatives": [
+          0
+        ],
+        "palette_values": [
+          9,
+          9
+        ],
+        "possible_peer": null,
+        "prior_method_ref": null,
+        "prior_surface": null,
+        "scope": "appearance and currently rebound reference-scale hypothesis; scoring role remains conditional",
+        "shape": "homologous_under_rotation",
+        "shape_class": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+        "sites": [
+          [
+            33,
+            9,
+            39,
+            15
+          ],
+          [
+            1,
+            53,
+            10,
+            62
+          ]
+        ]
+      }
+    },
+    {
+      "id": "prefix_evidence:24",
+      "decisionRevision": 24,
+      "acquiredActions": 1,
+      "family": "morphology",
+      "route_key": "peer_access_probe",
+      "trial": "bc247a430f2f8d88fd68b59565fa411ddc9ae10c7a425b515dc11a77c4baae15",
+      "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:24:frame:6442db86416d1e28",
+      "level_epoch": 1,
+      "physicalActions": [
+        24
+      ],
+      "commands": [
+        {
+          "action_ref": "ACTION4",
+          "data": {}
+        }
+      ],
+      "levelBefore": 1,
+      "completedAfter": 0,
+      "measuredFacts": {
+        "asymmetric": true,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "peer_discrimination_bound": true,
+        "extension_kind": null,
+        "extension_route": null,
+        "meter_forecast": null
+      },
+      "featureResiduals": {
+        "color": "equal",
+        "observed_colors": [
+          9,
+          9
+        ],
+        "orientation": "aligned",
+        "orientation_alternatives": [
+          0
+        ],
+        "palette_values": [
+          9,
+          9
+        ],
+        "possible_peer": null,
+        "prior_method_ref": null,
+        "prior_surface": null,
+        "scope": "appearance and currently rebound reference-scale hypothesis; scoring role remains conditional",
+        "shape": "homologous_under_rotation",
+        "shape_class": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+        "sites": [
+          [
+            33,
+            9,
+            39,
+            15
+          ],
+          [
+            1,
+            53,
+            10,
+            62
+          ]
+        ]
+      }
+    },
+    {
+      "id": "prefix_evidence:25",
+      "decisionRevision": 25,
+      "acquiredActions": 3,
+      "family": "morphology",
+      "route_key": "peer",
+      "access_phase": "contact",
+      "contact_in_prefix": true,
+      "full_access_length": 3,
+      "trial": "2e3a4a3c48ca61506f35d602cb1caab8e13e218c8b128519eaae941b61fcb690",
+      "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:25:frame:9d043911b587d0d9",
+      "level_epoch": 1,
+      "physicalActions": [
+        25,
+        26,
+        27
+      ],
+      "commands": [
+        {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        }
+      ],
+      "levelBefore": 1,
+      "completedAfter": 0,
+      "measuredFacts": {
+        "asymmetric": true,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "peer_discrimination_bound": false,
+        "extension_kind": null,
+        "extension_route": null,
+        "meter_forecast": null
+      },
+      "featureResiduals": {
+        "color": "equal",
+        "observed_colors": [
+          9,
+          9
+        ],
+        "orientation": "aligned",
+        "orientation_alternatives": [
+          0
+        ],
+        "palette_values": [
+          9,
+          9
+        ],
+        "possible_peer": null,
+        "prior_method_ref": null,
+        "prior_surface": null,
+        "scope": "appearance and currently rebound reference-scale hypothesis; scoring role remains conditional",
+        "shape": "homologous_under_rotation",
+        "shape_class": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+        "sites": [
+          [
+            33,
+            9,
+            39,
+            15
+          ],
+          [
+            1,
+            53,
+            10,
+            62
+          ]
+        ]
+      }
+    },
+    {
+      "id": "prefix_evidence:28",
+      "decisionRevision": 28,
+      "acquiredActions": 1,
+      "family": "morphology",
+      "route_key": "peer",
+      "access_phase": "contact",
+      "contact_in_prefix": true,
+      "full_access_length": 1,
+      "trial": "3d24aa410f91ff8aa3f0b02af3df128ab68757ec435bb2d5ef25db1bd36e2c93",
+      "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:28:frame:8fef1ddd84b3985e",
+      "level_epoch": 1,
+      "physicalActions": [
+        28
+      ],
+      "commands": [
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        }
+      ],
+      "levelBefore": 1,
+      "completedAfter": 1,
+      "measuredFacts": {
+        "asymmetric": true,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "peer_discrimination_bound": false,
+        "extension_kind": null,
+        "extension_route": null,
+        "meter_forecast": {
+          "capacity_status": "largest_measured_value",
+          "capacity_steps": 42,
+          "current_units": 17,
+          "level_epoch": 1,
+          "loss_per_step": 1,
+          "measured_strip": [
+            "x",
+            61,
+            11,
+            "hi",
+            55
+          ],
+          "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:28:frame:8fef1ddd84b3985e",
+          "qualification": "provisional_constant_loss_until_a_measured_change",
+          "steps_before_empty": 17
+        }
+      },
+      "featureResiduals": {
+        "color": "equal",
+        "observed_colors": [
+          9,
+          9
+        ],
+        "orientation": "aligned",
+        "orientation_alternatives": [
+          0
+        ],
+        "palette_values": [
+          9,
+          9
+        ],
+        "possible_peer": null,
+        "prior_method_ref": null,
+        "prior_surface": null,
+        "scope": "appearance and currently rebound reference-scale hypothesis; scoring role remains conditional",
+        "shape": "homologous_under_rotation",
+        "shape_class": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+        "sites": [
+          [
+            33,
+            9,
+            39,
+            15
+          ],
+          [
+            1,
+            53,
+            10,
+            62
+          ]
+        ]
+      }
+    },
+    {
+      "id": "prefix_evidence:51",
+      "decisionRevision": 51,
+      "acquiredActions": 2,
+      "family": "morphology",
+      "route_key": "capacity_access_probe",
+      "trial": "5c9077f0e77291cc4bd9ce87dbad71be34b7e6c162cab7df34b8217280753148",
+      "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:51:frame:5e86da3647ad7143",
+      "level_epoch": 2,
+      "physicalActions": [
+        51,
+        52
+      ],
+      "commands": [
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION4",
+          "data": {}
+        }
+      ],
+      "levelBefore": 2,
+      "completedAfter": 1,
+      "measuredFacts": {
+        "asymmetric": true,
+        "orientation_relation": "different",
+        "color_relation": "equal",
+        "control_attested": true,
+        "single_pattern_contact_change": false,
+        "peer_discrimination_bound": false,
+        "extension_kind": null,
+        "extension_route": null,
+        "meter_forecast": {
+          "capacity_status": "largest_measured_value",
+          "capacity_steps": 21,
+          "current_units": 42,
+          "level_epoch": 2,
+          "loss_per_step": 2,
+          "measured_strip": [
+            "x",
+            61,
+            11,
+            "hi",
+            55
+          ],
+          "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:51:frame:5e86da3647ad7143",
+          "qualification": "provisional_constant_loss_until_a_measured_change",
+          "steps_before_empty": 21
+        }
+      },
+      "featureResiduals": {
+        "color": "equal",
+        "observed_colors": [
+          9,
+          9
+        ],
+        "orientation": "different",
+        "orientation_alternatives": [
+          1
+        ],
+        "palette_values": [
+          9,
+          9
+        ],
+        "possible_peer": null,
+        "prior_method_ref": null,
+        "prior_surface": null,
+        "scope": "appearance and currently rebound reference-scale hypothesis; scoring role remains conditional",
+        "shape": "homologous_under_rotation",
+        "shape_class": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+        "sites": [
+          [
+            13,
+            39,
+            19,
+            45
+          ],
+          [
+            1,
+            53,
+            10,
+            62
+          ]
+        ]
+      }
+    },
+    {
+      "id": "prefix_evidence:53",
+      "decisionRevision": 53,
+      "acquiredActions": 10,
+      "family": "morphology",
+      "route_key": "capacity_probe",
+      "access_phase": "contact",
+      "contact_in_prefix": true,
+      "full_access_length": 10,
+      "trial": "0cd70839e646bb69b776e0ba4fbbc8d50ef688a2bafcad9e7b7d6e07432ee56f",
+      "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:53:frame:fa12316157c9ee71",
+      "level_epoch": 2,
+      "physicalActions": [
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62
+      ],
+      "commands": [
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION3",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION3",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION3",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION3",
+          "data": {}
+        }
+      ],
+      "levelBefore": 2,
+      "completedAfter": 1,
+      "measuredFacts": {
+        "asymmetric": true,
+        "orientation_relation": "different",
+        "color_relation": "equal",
+        "control_attested": true,
+        "single_pattern_contact_change": false,
+        "peer_discrimination_bound": false,
+        "extension_kind": null,
+        "extension_route": null,
+        "meter_forecast": {
+          "capacity_status": "largest_measured_value",
+          "capacity_steps": 21,
+          "current_units": 38,
+          "level_epoch": 2,
+          "loss_per_step": 2,
+          "measured_strip": [
+            "x",
+            61,
+            11,
+            "hi",
+            55
+          ],
+          "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:53:frame:fa12316157c9ee71",
+          "qualification": "provisional_constant_loss_until_a_measured_change",
+          "steps_before_empty": 19
+        }
+      },
+      "featureResiduals": {
+        "color": "equal",
+        "observed_colors": [
+          9,
+          9
+        ],
+        "orientation": "different",
+        "orientation_alternatives": [
+          1
+        ],
+        "palette_values": [
+          9,
+          9
+        ],
+        "possible_peer": null,
+        "prior_method_ref": null,
+        "prior_surface": null,
+        "scope": "appearance and currently rebound reference-scale hypothesis; scoring role remains conditional",
+        "shape": "homologous_under_rotation",
+        "shape_class": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+        "sites": [
+          [
+            13,
+            39,
+            19,
+            45
+          ],
+          [
+            1,
+            53,
+            10,
+            62
+          ]
+        ]
+      }
+    },
+    {
+      "id": "prefix_evidence:63",
+      "decisionRevision": 63,
+      "acquiredActions": 15,
+      "family": "morphology",
+      "route_key": "modifier",
+      "access_phase": "contact",
+      "contact_in_prefix": true,
+      "full_access_length": 15,
+      "trial": "50c850a0dc5fdbb450f7d6afd5a465173a71373e49f6515060b9b317050d67c7",
+      "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:63:frame:eaa9ad9600ae7c04",
+      "level_epoch": 2,
+      "physicalActions": [
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77
+      ],
+      "commands": [
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION2",
+          "data": {}
+        }
+      ],
+      "levelBefore": 2,
+      "completedAfter": 1,
+      "measuredFacts": {
+        "asymmetric": true,
+        "orientation_relation": "different",
+        "color_relation": "equal",
+        "control_attested": true,
+        "single_pattern_contact_change": false,
+        "peer_discrimination_bound": false,
+        "extension_kind": null,
+        "extension_route": null,
+        "meter_forecast": {
+          "capacity_status": "largest_measured_value",
+          "capacity_steps": 21,
+          "current_units": 42,
+          "level_epoch": 2,
+          "loss_per_step": 2,
+          "measured_strip": [
+            "x",
+            61,
+            11,
+            "hi",
+            55
+          ],
+          "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:63:frame:eaa9ad9600ae7c04",
+          "qualification": "provisional_constant_loss_until_a_measured_change",
+          "steps_before_empty": 21
+        }
+      },
+      "featureResiduals": {
+        "color": "equal",
+        "observed_colors": [
+          9,
+          9
+        ],
+        "orientation": "different",
+        "orientation_alternatives": [
+          1
+        ],
+        "palette_values": [
+          9,
+          9
+        ],
+        "possible_peer": null,
+        "prior_method_ref": null,
+        "prior_surface": null,
+        "scope": "appearance and currently rebound reference-scale hypothesis; scoring role remains conditional",
+        "shape": "homologous_under_rotation",
+        "shape_class": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+        "sites": [
+          [
+            13,
+            39,
+            19,
+            45
+          ],
+          [
+            1,
+            53,
+            10,
+            62
+          ]
+        ]
+      }
+    },
+    {
+      "id": "prefix_evidence:78",
+      "decisionRevision": 78,
+      "acquiredActions": 3,
+      "family": "morphology",
+      "route_key": "capacity_probe",
+      "access_phase": "contact",
+      "contact_in_prefix": true,
+      "full_access_length": 3,
+      "trial": "22075bbda689159691d922c7c212928880e104866ba70cc450ce529fb3567700",
+      "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:78:frame:bd2c8bfd49f9e0f8",
+      "level_epoch": 2,
+      "physicalActions": [
+        78,
+        79,
+        80
+      ],
+      "commands": [
+        {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION3",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION3",
+          "data": {}
+        }
+      ],
+      "levelBefore": 2,
+      "completedAfter": 1,
+      "measuredFacts": {
+        "asymmetric": true,
+        "orientation_relation": "different",
+        "color_relation": "equal",
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "peer_discrimination_bound": false,
+        "extension_kind": "remaining_alignment",
+        "extension_route": null,
+        "meter_forecast": {
+          "capacity_status": "largest_measured_value",
+          "capacity_steps": 21,
+          "current_units": 12,
+          "level_epoch": 2,
+          "loss_per_step": 2,
+          "measured_strip": [
+            "x",
+            61,
+            11,
+            "hi",
+            55
+          ],
+          "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:78:frame:bd2c8bfd49f9e0f8",
+          "qualification": "provisional_constant_loss_until_a_measured_change",
+          "steps_before_empty": 6
+        }
+      },
+      "featureResiduals": {
+        "color": "equal",
+        "observed_colors": [
+          9,
+          9
+        ],
+        "orientation": "different",
+        "orientation_alternatives": [
+          2
+        ],
+        "palette_values": [
+          9,
+          9
+        ],
+        "possible_peer": null,
+        "prior_method_ref": null,
+        "prior_surface": null,
+        "scope": "appearance and currently rebound reference-scale hypothesis; scoring role remains conditional",
+        "shape": "homologous_under_rotation",
+        "shape_class": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+        "sites": [
+          [
+            13,
+            39,
+            19,
+            45
+          ],
+          [
+            1,
+            53,
+            10,
+            62
+          ]
+        ]
+      }
+    },
+    {
+      "id": "prefix_evidence:81",
+      "decisionRevision": 81,
+      "acquiredActions": 3,
+      "family": "morphology",
+      "route_key": "modifier",
+      "access_phase": "contact",
+      "contact_in_prefix": true,
+      "full_access_length": 3,
+      "trial": "356642e7cecec6cf90175546050cea93358acaf7d9933ce9b250cb634fde5ae7",
+      "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:81:frame:8486a6c9601c365d",
+      "level_epoch": 2,
+      "physicalActions": [
+        81,
+        82,
+        83
+      ],
+      "commands": [
+        {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION4",
+          "data": {}
+        }
+      ],
+      "levelBefore": 2,
+      "completedAfter": 1,
+      "measuredFacts": {
+        "asymmetric": true,
+        "orientation_relation": "different",
+        "color_relation": "equal",
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "peer_discrimination_bound": false,
+        "extension_kind": "remaining_alignment",
+        "extension_route": "modifier",
+        "meter_forecast": {
+          "capacity_status": "largest_measured_value",
+          "capacity_steps": 21,
+          "current_units": 42,
+          "level_epoch": 2,
+          "loss_per_step": 2,
+          "measured_strip": [
+            "x",
+            61,
+            11,
+            "hi",
+            55
+          ],
+          "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:81:frame:8486a6c9601c365d",
+          "qualification": "provisional_constant_loss_until_a_measured_change",
+          "steps_before_empty": 21
+        }
+      },
+      "featureResiduals": {
+        "color": "equal",
+        "observed_colors": [
+          9,
+          9
+        ],
+        "orientation": "different",
+        "orientation_alternatives": [
+          2
+        ],
+        "palette_values": [
+          9,
+          9
+        ],
+        "possible_peer": null,
+        "prior_method_ref": null,
+        "prior_surface": null,
+        "scope": "appearance and currently rebound reference-scale hypothesis; scoring role remains conditional",
+        "shape": "homologous_under_rotation",
+        "shape_class": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+        "sites": [
+          [
+            13,
+            39,
+            19,
+            45
+          ],
+          [
+            1,
+            53,
+            10,
+            62
+          ]
+        ]
+      }
+    },
+    {
+      "id": "prefix_evidence:85",
+      "decisionRevision": 85,
+      "acquiredActions": 1,
+      "family": "morphology",
+      "route_key": "modifier",
+      "access_phase": "contact",
+      "contact_in_prefix": true,
+      "full_access_length": 1,
+      "trial": "b3bfda23576d8d1ac605750d85963bf13b1e39683a4a3bc04fb853b39b3ed65d",
+      "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:85:frame:89715b1909d2f21e",
+      "level_epoch": 2,
+      "physicalActions": [
+        85
+      ],
+      "commands": [
+        {
+          "action_ref": "ACTION3",
+          "data": {}
+        }
+      ],
+      "levelBefore": 2,
+      "completedAfter": 1,
+      "measuredFacts": {
+        "asymmetric": true,
+        "orientation_relation": "different",
+        "color_relation": "equal",
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "peer_discrimination_bound": false,
+        "extension_kind": "observed_derivation",
+        "extension_route": "modifier",
+        "meter_forecast": {
+          "capacity_status": "largest_measured_value",
+          "capacity_steps": 21,
+          "current_units": 34,
+          "level_epoch": 2,
+          "loss_per_step": 2,
+          "measured_strip": [
+            "x",
+            61,
+            11,
+            "hi",
+            55
+          ],
+          "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:85:frame:89715b1909d2f21e",
+          "qualification": "provisional_constant_loss_until_a_measured_change",
+          "steps_before_empty": 17
+        }
+      },
+      "featureResiduals": {
+        "color": "equal",
+        "observed_colors": [
+          9,
+          9
+        ],
+        "orientation": "different",
+        "orientation_alternatives": [
+          3
+        ],
+        "palette_values": [
+          9,
+          9
+        ],
+        "possible_peer": null,
+        "prior_method_ref": null,
+        "prior_surface": null,
+        "scope": "appearance and currently rebound reference-scale hypothesis; scoring role remains conditional",
+        "shape": "homologous_under_rotation",
+        "shape_class": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+        "sites": [
+          [
+            13,
+            39,
+            19,
+            45
+          ],
+          [
+            1,
+            53,
+            10,
+            62
+          ]
+        ]
+      }
+    },
+    {
+      "id": "prefix_evidence:103",
+      "decisionRevision": 103,
+      "acquiredActions": 16,
+      "family": "morphology",
+      "route_key": "capacity_probe",
+      "access_phase": "approach",
+      "contact_in_prefix": false,
+      "full_access_length": 20,
+      "trial": "b567d5e7c0d00ff4a1b8f5d96ca071180e58991339df560ef2e95289da663736",
+      "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:103:frame:cf0e838055f6d791",
+      "level_epoch": 2,
+      "physicalActions": [
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118
+      ],
+      "commands": [
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION2",
+          "data": {}
+        }
+      ],
+      "levelBefore": 2,
+      "completedAfter": 1,
+      "measuredFacts": {
+        "asymmetric": true,
+        "orientation_relation": "different",
+        "color_relation": "equal",
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "peer_discrimination_bound": false,
+        "extension_kind": "observed_derivation",
+        "extension_route": null,
+        "meter_forecast": {
+          "capacity_status": "largest_measured_value",
+          "capacity_steps": 21,
+          "current_units": 42,
+          "level_epoch": 2,
+          "loss_per_step": 2,
+          "measured_strip": [
+            "x",
+            61,
+            11,
+            "hi",
+            55
+          ],
+          "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:103:frame:cf0e838055f6d791",
+          "qualification": "provisional_constant_loss_until_a_measured_change",
+          "steps_before_empty": 21
+        }
+      },
+      "featureResiduals": {
+        "color": "equal",
+        "observed_colors": [
+          9,
+          9
+        ],
+        "orientation": "different",
+        "orientation_alternatives": [
+          1
+        ],
+        "palette_values": [
+          9,
+          9
+        ],
+        "possible_peer": null,
+        "prior_method_ref": null,
+        "prior_surface": null,
+        "scope": "appearance and currently rebound reference-scale hypothesis; scoring role remains conditional",
+        "shape": "homologous_under_rotation",
+        "shape_class": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+        "sites": [
+          [
+            13,
+            39,
+            19,
+            45
+          ],
+          [
+            1,
+            53,
+            10,
+            62
+          ]
+        ]
+      }
+    },
+    {
+      "id": "prefix_evidence:119",
+      "decisionRevision": 119,
+      "acquiredActions": 4,
+      "family": "morphology",
+      "route_key": "capacity_probe",
+      "access_phase": "contact",
+      "contact_in_prefix": true,
+      "full_access_length": 4,
+      "trial": "b567d5e7c0d00ff4a1b8f5d96ca071180e58991339df560ef2e95289da663736",
+      "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:119:frame:f04384fa954dd40f",
+      "level_epoch": 2,
+      "physicalActions": [
+        119,
+        120,
+        121,
+        122
+      ],
+      "commands": [
+        {
+          "action_ref": "ACTION3",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        {
+          "action_ref": "ACTION3",
+          "data": {}
+        }
+      ],
+      "levelBefore": 2,
+      "completedAfter": 1,
+      "measuredFacts": {
+        "asymmetric": true,
+        "orientation_relation": "different",
+        "color_relation": "equal",
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "peer_discrimination_bound": false,
+        "extension_kind": "observed_derivation",
+        "extension_route": null,
+        "meter_forecast": {
+          "capacity_status": "largest_measured_value",
+          "capacity_steps": 21,
+          "current_units": 10,
+          "level_epoch": 2,
+          "loss_per_step": 2,
+          "measured_strip": [
+            "x",
+            61,
+            11,
+            "hi",
+            55
+          ],
+          "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:119:frame:f04384fa954dd40f",
+          "qualification": "provisional_constant_loss_until_a_measured_change",
+          "steps_before_empty": 5
+        }
+      },
+      "featureResiduals": {
+        "color": "equal",
+        "observed_colors": [
+          9,
+          9
+        ],
+        "orientation": "different",
+        "orientation_alternatives": [
+          1
+        ],
+        "palette_values": [
+          9,
+          9
+        ],
+        "possible_peer": null,
+        "prior_method_ref": null,
+        "prior_surface": null,
+        "scope": "appearance and currently rebound reference-scale hypothesis; scoring role remains conditional",
+        "shape": "homologous_under_rotation",
+        "shape_class": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+        "sites": [
+          [
+            13,
+            39,
+            19,
+            45
+          ],
+          [
+            1,
+            53,
+            10,
+            62
+          ]
+        ]
+      }
+    }
+  ],
+  "actualAcquisitionEvents": [
+    {
+      "index": 34,
+      "method": "record",
+      "beforeRevision": 21,
+      "afterRevision": 22,
+      "result": {
+        "events": [
+          {
+            "trial": "2b7ed61ecff8ee18e485a703d4a3e0b9550d11de9501e07d8d47c539b031e3f8",
+            "epoch": 1,
+            "pair_key": "179d07e8cc1cd6937009e050aa6d0ebc7429bb10c7758d826334cdbd78c72436",
+            "unchanged_peer": [
+              33,
+              9,
+              39,
+              15
+            ],
+            "before": "476bcf5c23986c35",
+            "after": "5aacc217fee375eb",
+            "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:22:frame:5aacc217fee375eb",
+            "contact_action": {
+              "action_ref": "ACTION1"
+            },
+            "station_entry": {
+              "site": [
+                19,
+                30
+              ],
+              "site_surface": "8120edcf4dbdd2c9877f4c2b6a9b706f8d22154c6dff54f2259621683c9da943",
+              "footprint": "768c941fbe4dc2dab62d98faa701ce4e8ed585b66ac08de6c24604e7199f1d5d",
+              "size": [
+                5,
+                5
+              ],
+              "role_refs": [
+                "510f25975e2ade31316bca5e63e4f00c57c5b39625e5e76911c878c58667079d",
+                "b1ceb17a0c0ecbb1304fbd518665a312d4762956042c5adce142930250b80344"
+              ],
+              "from": [
+                19,
+                35
+              ],
+              "command": "ACTION1",
+              "before": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:21:frame:476bcf5c23986c35",
+              "after": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:22:frame:5aacc217fee375eb",
+              "before_pose": {
+                "residual": 3,
+                "peer_pose": "74791374318a34c227d092c5ca436ec6c538035e361262ba9ff6cecf4007f12b",
+                "mobile_pose": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+                "peer_color": 9,
+                "mobile_color": 9
+              },
+              "after_pose": {
+                "residual": 0,
+                "peer_pose": "74791374318a34c227d092c5ca436ec6c538035e361262ba9ff6cecf4007f12b",
+                "mobile_pose": "74791374318a34c227d092c5ca436ec6c538035e361262ba9ff6cecf4007f12b",
+                "peer_color": 9,
+                "mobile_color": 9
+              },
+              "delta": 1,
+              "peer_preserved": true,
+              "peer_scale": 1,
+              "observed_scales": [
+                1,
+                2
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "index": 38,
+      "method": "observeDepartures",
+      "beforeRevision": 22,
+      "afterRevision": 23,
+      "result": [
+        {
+          "kind": "departure",
+          "epoch": 1,
+          "pair_key": "179d07e8cc1cd6937009e050aa6d0ebc7429bb10c7758d826334cdbd78c72436",
+          "station_key": "aaded8d5389b202b56442e08bbe6e0d9410486a24dd4fe83e1fa52f31285b096",
+          "from": [
+            19,
+            30
+          ],
+          "to": [
+            19,
+            25
+          ],
+          "command": "ACTION1",
+          "before": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:22:frame:5aacc217fee375eb",
+          "after": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:23:frame:764f106a8c65162d",
+          "preserved": true,
+          "before_pose": {
+            "residual": 0,
+            "peer_pose": "74791374318a34c227d092c5ca436ec6c538035e361262ba9ff6cecf4007f12b",
+            "mobile_pose": "74791374318a34c227d092c5ca436ec6c538035e361262ba9ff6cecf4007f12b",
+            "peer_color": 9,
+            "mobile_color": 9
+          },
+          "after_pose": {
+            "residual": 0,
+            "peer_pose": "74791374318a34c227d092c5ca436ec6c538035e361262ba9ff6cecf4007f12b",
+            "mobile_pose": "74791374318a34c227d092c5ca436ec6c538035e361262ba9ff6cecf4007f12b",
+            "peer_color": 9,
+            "mobile_color": 9
+          }
+        }
+      ]
+    },
+    {
+      "index": 39,
+      "method": "record",
+      "beforeRevision": 23,
+      "afterRevision": 24,
+      "result": {
+        "events": [
+          {
+            "trial": "2f668ba846a262d372100aaa0c21290751ebd6d87ce292bd7d413efdb8b3d5c4",
+            "epoch": 1,
+            "pair_key": "179d07e8cc1cd6937009e050aa6d0ebc7429bb10c7758d826334cdbd78c72436",
+            "unchanged_peer": null,
+            "before": "764f106a8c65162d",
+            "after": "6442db86416d1e28",
+            "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:24:frame:6442db86416d1e28",
+            "contact_action": {
+              "action_ref": "ACTION4"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "index": 42,
+      "method": "record",
+      "beforeRevision": 24,
+      "afterRevision": 25,
+      "result": {
+        "events": [
+          {
+            "trial": "bc247a430f2f8d88fd68b59565fa411ddc9ae10c7a425b515dc11a77c4baae15",
+            "epoch": 1,
+            "pair_key": "179d07e8cc1cd6937009e050aa6d0ebc7429bb10c7758d826334cdbd78c72436",
+            "unchanged_peer": null,
+            "before": "6442db86416d1e28",
+            "after": "9d043911b587d0d9",
+            "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:25:frame:9d043911b587d0d9",
+            "contact_action": {
+              "action_ref": "ACTION4"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "index": 49,
+      "method": "record",
+      "beforeRevision": 27,
+      "afterRevision": 28,
+      "result": {
+        "events": [
+          {
+            "trial": "2e3a4a3c48ca61506f35d602cb1caab8e13e218c8b128519eaae941b61fcb690",
+            "epoch": 1,
+            "pair_key": "179d07e8cc1cd6937009e050aa6d0ebc7429bb10c7758d826334cdbd78c72436",
+            "unchanged_peer": null,
+            "before": "11a71c73dd1ef541",
+            "after": "8fef1ddd84b3985e",
+            "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:28:frame:8fef1ddd84b3985e",
+            "contact_action": {
+              "action_ref": "ACTION1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "index": 52,
+      "method": "record",
+      "beforeRevision": 28,
+      "afterRevision": 29,
+      "result": {
+        "events": [
+          {
+            "trial": "3d24aa410f91ff8aa3f0b02af3df128ab68757ec435bb2d5ef25db1bd36e2c93",
+            "epoch": 1,
+            "pair_key": "179d07e8cc1cd6937009e050aa6d0ebc7429bb10c7758d826334cdbd78c72436",
+            "unchanged_peer": null,
+            "before": "8fef1ddd84b3985e",
+            "after": "fa0ea3dd51f09af2",
+            "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:29:frame:fa0ea3dd51f09af2",
+            "contact_action": {
+              "action_ref": "ACTION1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "index": 101,
+      "method": "record",
+      "beforeRevision": 52,
+      "afterRevision": 53,
+      "result": {
+        "events": [
+          {
+            "trial": "5c9077f0e77291cc4bd9ce87dbad71be34b7e6c162cab7df34b8217280753148",
+            "epoch": 2,
+            "pair_key": "22acd8a110b6aa97d1af1b513f5f6dce218cbabcf4cee73d30396ced7390964d",
+            "unchanged_peer": null,
+            "before": "784a8adcaeb11574",
+            "after": "fa12316157c9ee71",
+            "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:53:frame:fa12316157c9ee71",
+            "contact_action": {
+              "action_ref": "ACTION4"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "index": 122,
+      "method": "record",
+      "beforeRevision": 62,
+      "afterRevision": 63,
+      "result": {
+        "events": [
+          {
+            "trial": "0cd70839e646bb69b776e0ba4fbbc8d50ef688a2bafcad9e7b7d6e07432ee56f",
+            "epoch": 2,
+            "pair_key": "22acd8a110b6aa97d1af1b513f5f6dce218cbabcf4cee73d30396ced7390964d",
+            "unchanged_peer": null,
+            "before": "5967a72d779a2fad",
+            "after": "eaa9ad9600ae7c04",
+            "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:63:frame:eaa9ad9600ae7c04",
+            "contact_action": {
+              "action_ref": "ACTION3"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "index": 153,
+      "method": "record",
+      "beforeRevision": 77,
+      "afterRevision": 78,
+      "result": {
+        "events": [
+          {
+            "trial": "50c850a0dc5fdbb450f7d6afd5a465173a71373e49f6515060b9b317050d67c7",
+            "epoch": 2,
+            "pair_key": "22acd8a110b6aa97d1af1b513f5f6dce218cbabcf4cee73d30396ced7390964d",
+            "unchanged_peer": [
+              13,
+              39,
+              19,
+              45
+            ],
+            "before": "c211effe80bcadb8",
+            "after": "bd2c8bfd49f9e0f8",
+            "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:78:frame:bd2c8bfd49f9e0f8",
+            "contact_action": {
+              "action_ref": "ACTION2"
+            },
+            "station_entry": {
+              "site": [
+                49,
+                45
+              ],
+              "site_surface": "8120edcf4dbdd2c9877f4c2b6a9b706f8d22154c6dff54f2259621683c9da943",
+              "footprint": "768c941fbe4dc2dab62d98faa701ce4e8ed585b66ac08de6c24604e7199f1d5d",
+              "size": [
+                5,
+                5
+              ],
+              "role_refs": [
+                "510f25975e2ade31316bca5e63e4f00c57c5b39625e5e76911c878c58667079d",
+                "b1ceb17a0c0ecbb1304fbd518665a312d4762956042c5adce142930250b80344"
+              ],
+              "from": [
+                49,
+                40
+              ],
+              "command": "ACTION2",
+              "before": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:77:frame:c211effe80bcadb8",
+              "after": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:78:frame:bd2c8bfd49f9e0f8",
+              "before_pose": {
+                "residual": 1,
+                "peer_pose": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+                "mobile_pose": "74791374318a34c227d092c5ca436ec6c538035e361262ba9ff6cecf4007f12b",
+                "peer_color": 9,
+                "mobile_color": 9
+              },
+              "after_pose": {
+                "residual": 2,
+                "peer_pose": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+                "mobile_pose": "af15386565b93223d48c88108e4cca275ecfb4e9b83209179817ac88baecd413",
+                "peer_color": 9,
+                "mobile_color": 9
+              },
+              "delta": 1,
+              "peer_preserved": true,
+              "peer_scale": 1,
+              "observed_scales": [
+                1,
+                2
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "index": 157,
+      "method": "observeDepartures",
+      "beforeRevision": 78,
+      "afterRevision": 79,
+      "result": [
+        {
+          "kind": "departure",
+          "epoch": 2,
+          "pair_key": "22acd8a110b6aa97d1af1b513f5f6dce218cbabcf4cee73d30396ced7390964d",
+          "station_key": "667bc984852cf07ebf41814c705fbbfa4d8a01504514da020c6a8c09974df05a",
+          "from": [
+            49,
+            45
+          ],
+          "to": [
+            49,
+            50
+          ],
+          "command": "ACTION2",
+          "before": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:78:frame:bd2c8bfd49f9e0f8",
+          "after": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:79:frame:c8a8b6d83d3d97d2",
+          "preserved": true,
+          "before_pose": {
+            "residual": 2,
+            "peer_pose": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+            "mobile_pose": "af15386565b93223d48c88108e4cca275ecfb4e9b83209179817ac88baecd413",
+            "peer_color": 9,
+            "mobile_color": 9
+          },
+          "after_pose": {
+            "residual": 2,
+            "peer_pose": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+            "mobile_pose": "af15386565b93223d48c88108e4cca275ecfb4e9b83209179817ac88baecd413",
+            "peer_color": 9,
+            "mobile_color": 9
+          }
+        }
+      ]
+    },
+    {
+      "index": 160,
+      "method": "record",
+      "beforeRevision": 80,
+      "afterRevision": 81,
+      "result": {
+        "events": [
+          {
+            "trial": "22075bbda689159691d922c7c212928880e104866ba70cc450ce529fb3567700",
+            "epoch": 2,
+            "pair_key": "22acd8a110b6aa97d1af1b513f5f6dce218cbabcf4cee73d30396ced7390964d",
+            "unchanged_peer": null,
+            "before": "69082ba518790ad1",
+            "after": "8486a6c9601c365d",
+            "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:81:frame:8486a6c9601c365d",
+            "contact_action": {
+              "action_ref": "ACTION3"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "index": 167,
+      "method": "record",
+      "beforeRevision": 83,
+      "afterRevision": 84,
+      "result": {
+        "events": [
+          {
+            "trial": "356642e7cecec6cf90175546050cea93358acaf7d9933ce9b250cb634fde5ae7",
+            "epoch": 2,
+            "pair_key": "22acd8a110b6aa97d1af1b513f5f6dce218cbabcf4cee73d30396ced7390964d",
+            "unchanged_peer": [
+              13,
+              39,
+              19,
+              45
+            ],
+            "before": "6cfb8796a8e76a23",
+            "after": "67b7641527b8cbe1",
+            "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:84:frame:67b7641527b8cbe1",
+            "contact_action": {
+              "action_ref": "ACTION4"
+            },
+            "station_entry": {
+              "site": [
+                49,
+                45
+              ],
+              "site_surface": "8120edcf4dbdd2c9877f4c2b6a9b706f8d22154c6dff54f2259621683c9da943",
+              "footprint": "768c941fbe4dc2dab62d98faa701ce4e8ed585b66ac08de6c24604e7199f1d5d",
+              "size": [
+                5,
+                5
+              ],
+              "role_refs": [
+                "510f25975e2ade31316bca5e63e4f00c57c5b39625e5e76911c878c58667079d",
+                "b1ceb17a0c0ecbb1304fbd518665a312d4762956042c5adce142930250b80344"
+              ],
+              "from": [
+                44,
+                45
+              ],
+              "command": "ACTION4",
+              "before": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:83:frame:6cfb8796a8e76a23",
+              "after": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:84:frame:67b7641527b8cbe1",
+              "before_pose": {
+                "residual": 2,
+                "peer_pose": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+                "mobile_pose": "af15386565b93223d48c88108e4cca275ecfb4e9b83209179817ac88baecd413",
+                "peer_color": 9,
+                "mobile_color": 9
+              },
+              "after_pose": {
+                "residual": 3,
+                "peer_pose": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+                "mobile_pose": "1eb1e4fc431064b311b54f4501dcefd2b23d0ffa8a8e9c0496b14f1ae490eebb",
+                "peer_color": 9,
+                "mobile_color": 9
+              },
+              "delta": 1,
+              "peer_preserved": true,
+              "peer_scale": 1,
+              "observed_scales": [
+                1,
+                2
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "index": 170,
+      "method": "observeDepartures",
+      "beforeRevision": 84,
+      "afterRevision": 85,
+      "result": [
+        {
+          "kind": "departure",
+          "epoch": 2,
+          "pair_key": "22acd8a110b6aa97d1af1b513f5f6dce218cbabcf4cee73d30396ced7390964d",
+          "station_key": "667bc984852cf07ebf41814c705fbbfa4d8a01504514da020c6a8c09974df05a",
+          "from": [
+            49,
+            45
+          ],
+          "to": [
+            54,
+            45
+          ],
+          "command": "ACTION4",
+          "before": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:84:frame:67b7641527b8cbe1",
+          "after": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:85:frame:89715b1909d2f21e",
+          "preserved": true,
+          "before_pose": {
+            "residual": 3,
+            "peer_pose": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+            "mobile_pose": "1eb1e4fc431064b311b54f4501dcefd2b23d0ffa8a8e9c0496b14f1ae490eebb",
+            "peer_color": 9,
+            "mobile_color": 9
+          },
+          "after_pose": {
+            "residual": 3,
+            "peer_pose": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+            "mobile_pose": "1eb1e4fc431064b311b54f4501dcefd2b23d0ffa8a8e9c0496b14f1ae490eebb",
+            "peer_color": 9,
+            "mobile_color": 9
+          }
+        }
+      ]
+    },
+    {
+      "index": 172,
+      "method": "record",
+      "beforeRevision": 85,
+      "afterRevision": 86,
+      "result": {
+        "events": [
+          {
+            "trial": "b3bfda23576d8d1ac605750d85963bf13b1e39683a4a3bc04fb853b39b3ed65d",
+            "epoch": 2,
+            "pair_key": "22acd8a110b6aa97d1af1b513f5f6dce218cbabcf4cee73d30396ced7390964d",
+            "unchanged_peer": [
+              13,
+              39,
+              19,
+              45
+            ],
+            "before": "89715b1909d2f21e",
+            "after": "c512fb52ebcc28ab",
+            "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:86:frame:c512fb52ebcc28ab",
+            "contact_action": {
+              "action_ref": "ACTION3"
+            },
+            "station_entry": {
+              "site": [
+                49,
+                45
+              ],
+              "site_surface": "8120edcf4dbdd2c9877f4c2b6a9b706f8d22154c6dff54f2259621683c9da943",
+              "footprint": "768c941fbe4dc2dab62d98faa701ce4e8ed585b66ac08de6c24604e7199f1d5d",
+              "size": [
+                5,
+                5
+              ],
+              "role_refs": [
+                "510f25975e2ade31316bca5e63e4f00c57c5b39625e5e76911c878c58667079d",
+                "b1ceb17a0c0ecbb1304fbd518665a312d4762956042c5adce142930250b80344"
+              ],
+              "from": [
+                54,
+                45
+              ],
+              "command": "ACTION3",
+              "before": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:85:frame:89715b1909d2f21e",
+              "after": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:86:frame:c512fb52ebcc28ab",
+              "before_pose": {
+                "residual": 3,
+                "peer_pose": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+                "mobile_pose": "1eb1e4fc431064b311b54f4501dcefd2b23d0ffa8a8e9c0496b14f1ae490eebb",
+                "peer_color": 9,
+                "mobile_color": 9
+              },
+              "after_pose": {
+                "residual": 0,
+                "peer_pose": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+                "mobile_pose": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+                "peer_color": 9,
+                "mobile_color": 9
+              },
+              "delta": 1,
+              "peer_preserved": true,
+              "peer_scale": 1,
+              "observed_scales": [
+                1,
+                2
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "index": 175,
+      "method": "observeDepartures",
+      "beforeRevision": 86,
+      "afterRevision": 87,
+      "result": [
+        {
+          "kind": "departure",
+          "epoch": 2,
+          "pair_key": "22acd8a110b6aa97d1af1b513f5f6dce218cbabcf4cee73d30396ced7390964d",
+          "station_key": "667bc984852cf07ebf41814c705fbbfa4d8a01504514da020c6a8c09974df05a",
+          "from": [
+            49,
+            45
+          ],
+          "to": [
+            44,
+            45
+          ],
+          "command": "ACTION3",
+          "before": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:86:frame:c512fb52ebcc28ab",
+          "after": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:87:frame:a8fe37d15c9541a9",
+          "preserved": true,
+          "before_pose": {
+            "residual": 0,
+            "peer_pose": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+            "mobile_pose": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+            "peer_color": 9,
+            "mobile_color": 9
+          },
+          "after_pose": {
+            "residual": 0,
+            "peer_pose": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+            "mobile_pose": "6e58fb9d14fa612115da2a815b0d29a2dab24f12fb29921f76c4a9dd38e5ef0d",
+            "peer_color": 9,
+            "mobile_color": 9
+          }
+        }
+      ]
+    },
+    {
+      "index": 247,
+      "method": "record",
+      "beforeRevision": 122,
+      "afterRevision": 123,
+      "result": {
+        "events": [
+          {
+            "trial": "b567d5e7c0d00ff4a1b8f5d96ca071180e58991339df560ef2e95289da663736",
+            "epoch": 2,
+            "pair_key": "22acd8a110b6aa97d1af1b513f5f6dce218cbabcf4cee73d30396ced7390964d",
+            "unchanged_peer": null,
+            "before": "f5f48c3cc5210a3c",
+            "after": "3a1a7d37b9064b33",
+            "observation_ref": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:123:frame:3a1a7d37b9064b33",
+            "contact_action": {
+              "action_ref": "ACTION3"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "morphologyEvaluations": [
+    {
+      "callIndex": 0,
+      "revision": 1,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:1:frame:f530cf6adb4a6d0f",
+      "historyLength": 0,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 2,
+      "revision": 2,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:2:frame:c11a377268d286ce",
+      "historyLength": 1,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 4,
+      "revision": 3,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:3:frame:b2ee2db27a608502",
+      "historyLength": 2,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 9,
+      "revision": 7,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:7:frame:667d2b24e97be558",
+      "historyLength": 6,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 0,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "deferred",
+        "reason": "insufficient_correspondence",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 11,
+      "revision": 8,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:8:frame:667d2b24e97be558",
+      "historyLength": 7,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 0,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "deferred",
+        "reason": "insufficient_correspondence",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 13,
+      "revision": 9,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:9:frame:61334b2bf51dd3ef",
+      "historyLength": 8,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 15,
+      "revision": 10,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:10:frame:4c7bd5955d8416ae",
+      "historyLength": 9,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 21,
+      "revision": 15,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:15:frame:7995c663d3ecfb7f",
+      "historyLength": 14,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 23,
+      "revision": 16,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:16:frame:4a5a6fa6a7bf991f",
+      "historyLength": 15,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 25,
+      "revision": 17,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:17:frame:47bafb679a3a8956",
+      "historyLength": 16,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 27,
+      "revision": 18,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:18:frame:97866900fa82a68c",
+      "historyLength": 17,
+      "selectedByMorphologyPolicy": true,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "modifier"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "proposed",
+        "reason": "change_one_pattern_to_test_alignment",
+        "route_key": "modifier",
+        "operation": "OP18",
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 36,
+      "revision": 22,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:22:frame:5aacc217fee375eb",
+      "historyLength": 21,
+      "selectedByMorphologyPolicy": true,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer_access_probe"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "proposed",
+        "reason": "discriminate_missing_control_for_peer_access",
+        "route_key": "peer_access_probe",
+        "operation": "OP18",
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 41,
+      "revision": 24,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:24:frame:6442db86416d1e28",
+      "historyLength": 23,
+      "selectedByMorphologyPolicy": true,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "modifier",
+          "peer_access_probe"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "proposed",
+        "reason": "discriminate_missing_control_for_peer_access",
+        "route_key": "peer_access_probe",
+        "operation": "OP18",
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 44,
+      "revision": 25,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:25:frame:9d043911b587d0d9",
+      "historyLength": 24,
+      "selectedByMorphologyPolicy": true,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "modifier"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "proposed",
+        "reason": "test_peer_contact_after_measured_selective_alignment",
+        "route_key": "peer",
+        "operation": "OP18",
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 51,
+      "revision": 28,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:1:revision:28:frame:8fef1ddd84b3985e",
+      "historyLength": 27,
+      "selectedByMorphologyPolicy": true,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 0,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "proposed",
+        "reason": "test_peer_contact_after_measured_selective_alignment",
+        "route_key": "peer",
+        "operation": "OP18",
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 54,
+      "revision": 29,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:29:frame:fa0ea3dd51f09af2",
+      "historyLength": 0,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 56,
+      "revision": 30,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:30:frame:6cdc959715fc6df8",
+      "historyLength": 1,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 58,
+      "revision": 31,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:31:frame:e8dd9a3e18ff8dcb",
+      "historyLength": 2,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 60,
+      "revision": 32,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:32:frame:8b7ac228f0013533",
+      "historyLength": 3,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 62,
+      "revision": 33,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:33:frame:94e86b9765f600a2",
+      "historyLength": 4,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 64,
+      "revision": 34,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:34:frame:7ae973cdb1d19691",
+      "historyLength": 5,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 66,
+      "revision": 35,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:35:frame:633864125d13d738",
+      "historyLength": 6,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 68,
+      "revision": 36,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:36:frame:af5c8a5e4c452057",
+      "historyLength": 7,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 70,
+      "revision": 37,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:37:frame:2c0bc6125a902236",
+      "historyLength": 8,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 72,
+      "revision": 38,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:38:frame:5186b1e35bae50af",
+      "historyLength": 9,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 74,
+      "revision": 39,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:39:frame:13c15833a3b08d3b",
+      "historyLength": 10,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 76,
+      "revision": 40,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:40:frame:e29bd71b5b2e46e3",
+      "historyLength": 11,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 78,
+      "revision": 41,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:41:frame:873ad097eed187dc",
+      "historyLength": 12,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 80,
+      "revision": 42,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:42:frame:2076cf4c09907869",
+      "historyLength": 13,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 82,
+      "revision": 43,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:43:frame:1037c19fca84a302",
+      "historyLength": 14,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 84,
+      "revision": 44,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:44:frame:2ed0e9a0c967e3fb",
+      "historyLength": 15,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 86,
+      "revision": 45,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:45:frame:24ac65f2ca0948ba",
+      "historyLength": 16,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 88,
+      "revision": 46,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:46:frame:8522342d9a534041",
+      "historyLength": 17,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 90,
+      "revision": 47,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:47:frame:f318a28890a7eeaa",
+      "historyLength": 18,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 92,
+      "revision": 48,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:48:frame:b2cea0a3f3e82fc6",
+      "historyLength": 19,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 94,
+      "revision": 49,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:49:frame:5420f0cd9db75201",
+      "historyLength": 20,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "capacity_probe"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 96,
+      "revision": 50,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:50:frame:8d3b0134d092d51c",
+      "historyLength": 21,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "capacity_probe"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 98,
+      "revision": 51,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:51:frame:5e86da3647ad7143",
+      "historyLength": 22,
+      "selectedByMorphologyPolicy": true,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "capacity_access_probe"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "proposed",
+        "reason": "test_missing_access_to_possible_capacity_source",
+        "route_key": "capacity_access_probe",
+        "operation": "OP18",
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 103,
+      "revision": 53,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:53:frame:fa12316157c9ee71",
+      "historyLength": 24,
+      "selectedByMorphologyPolicy": true,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "modifier",
+          "capacity_probe"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "proposed",
+        "reason": "probe_shared_appearance_to_restore_diminishing_capacity",
+        "route_key": "capacity_probe",
+        "operation": "OP18",
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 124,
+      "revision": 63,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:63:frame:eaa9ad9600ae7c04",
+      "historyLength": 34,
+      "selectedByMorphologyPolicy": true,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "modifier",
+          "capacity_probe"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "proposed",
+        "reason": "change_one_pattern_to_test_alignment",
+        "route_key": "modifier",
+        "operation": "OP18",
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 155,
+      "revision": 78,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:78:frame:bd2c8bfd49f9e0f8",
+      "historyLength": 49,
+      "selectedByMorphologyPolicy": true,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "capacity_probe"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "proposed",
+        "reason": "probe_shared_appearance_to_restore_diminishing_capacity",
+        "route_key": "capacity_probe",
+        "operation": "OP18",
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 162,
+      "revision": 81,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:81:frame:8486a6c9601c365d",
+      "historyLength": 52,
+      "selectedByMorphologyPolicy": true,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "modifier"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "proposed",
+        "reason": "change_one_pattern_to_test_alignment",
+        "route_key": "modifier",
+        "operation": "OP18",
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 169,
+      "revision": 84,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:84:frame:67b7641527b8cbe1",
+      "historyLength": 55,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 171,
+      "revision": 85,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:85:frame:89715b1909d2f21e",
+      "historyLength": 56,
+      "selectedByMorphologyPolicy": true,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "modifier"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "proposed",
+        "reason": "change_one_pattern_to_test_alignment",
+        "route_key": "modifier",
+        "operation": "OP18",
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 174,
+      "revision": 86,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:86:frame:c512fb52ebcc28ab",
+      "historyLength": 57,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "modifier"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "access_exceeds_observed_meter_seek_affordable_effect",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 176,
+      "revision": 87,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:87:frame:a8fe37d15c9541a9",
+      "historyLength": 58,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "modifier"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "access_exceeds_observed_meter_seek_affordable_effect",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 178,
+      "revision": 88,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:88:frame:3ada3af0543d98f2",
+      "historyLength": 59,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "modifier"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "access_exceeds_observed_meter_seek_affordable_effect",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 180,
+      "revision": 89,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:89:frame:1ab4b9db6ca5ad12",
+      "historyLength": 60,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "modifier"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "access_exceeds_observed_meter_seek_affordable_effect",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 182,
+      "revision": 90,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:90:frame:e920c78f5bded840",
+      "historyLength": 61,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "modifier"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "access_exceeds_observed_meter_seek_affordable_effect",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 184,
+      "revision": 91,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:91:frame:a30c689d3fb8d1d6",
+      "historyLength": 62,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "modifier"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "access_exceeds_observed_meter_seek_affordable_effect",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 186,
+      "revision": 92,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:92:frame:601e2bb1149600c6",
+      "historyLength": 63,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "modifier"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "access_exceeds_observed_meter_seek_affordable_effect",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 188,
+      "revision": 93,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:93:frame:deee55d3562bb22c",
+      "historyLength": 64,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "modifier"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "access_exceeds_observed_meter_seek_affordable_effect",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 190,
+      "revision": 94,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:94:frame:3bfe5928e15b1530",
+      "historyLength": 65,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "modifier"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "access_exceeds_observed_meter_seek_affordable_effect",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 192,
+      "revision": 95,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:95:frame:91bf3c93b96b4e39",
+      "historyLength": 66,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "modifier"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "access_exceeds_observed_meter_seek_affordable_effect",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 194,
+      "revision": 96,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:96:frame:8a5888839dd7f493",
+      "historyLength": 67,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "modifier"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "access_exceeds_observed_meter_seek_affordable_effect",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 196,
+      "revision": 97,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:97:frame:c9bb80083fcb6e13",
+      "historyLength": 68,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "modifier"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "access_exceeds_observed_meter_seek_affordable_effect",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 198,
+      "revision": 98,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:98:frame:7fe5e03d346e9dce",
+      "historyLength": 69,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "modifier"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "access_exceeds_observed_meter_seek_affordable_effect",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 200,
+      "revision": 99,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:99:frame:074843b0f76b1ee0",
+      "historyLength": 70,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "modifier"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "access_exceeds_observed_meter_seek_affordable_effect",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 202,
+      "revision": 100,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:100:frame:586944af7d823d55",
+      "historyLength": 71,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "modifier"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "access_exceeds_observed_meter_seek_affordable_effect",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 205,
+      "revision": 102,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:102:frame:4f8fed27c7d532b1",
+      "historyLength": 73,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "modifier"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "access_exceeds_observed_meter_seek_affordable_effect",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 207,
+      "revision": 103,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:103:frame:cf0e838055f6d791",
+      "historyLength": 74,
+      "selectedByMorphologyPolicy": true,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "capacity_probe"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "proposed",
+        "reason": "probe_shared_appearance_to_restore_diminishing_capacity",
+        "route_key": "capacity_probe",
+        "operation": "OP18",
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 240,
+      "revision": 119,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:119:frame:f04384fa954dd40f",
+      "historyLength": 90,
+      "selectedByMorphologyPolicy": true,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer",
+          "capacity_probe"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "proposed",
+        "reason": "probe_shared_appearance_to_restore_diminishing_capacity",
+        "route_key": "capacity_probe",
+        "operation": "OP18",
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 249,
+      "revision": 123,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:123:frame:3a1a7d37b9064b33",
+      "historyLength": 94,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 251,
+      "revision": 124,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:124:frame:f7b0fbada145750a",
+      "historyLength": 95,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 253,
+      "revision": 125,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:125:frame:6e90fba277c4f8a4",
+      "historyLength": 96,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 255,
+      "revision": 126,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:126:frame:0934b8e74df7eadc",
+      "historyLength": 97,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 257,
+      "revision": 127,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:127:frame:2536560dd6a16683",
+      "historyLength": 98,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 259,
+      "revision": 128,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:128:frame:0dde43b3366e38f0",
+      "historyLength": 99,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 261,
+      "revision": 129,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:129:frame:b80d33492f1c2248",
+      "historyLength": 100,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 263,
+      "revision": 130,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:130:frame:5ee3772e86d749f5",
+      "historyLength": 101,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 265,
+      "revision": 131,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:131:frame:83ce593a55d87e7e",
+      "historyLength": 102,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 267,
+      "revision": 132,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:132:frame:ec234d7655d61e67",
+      "historyLength": 103,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 269,
+      "revision": 133,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:133:frame:0161b38768166d42",
+      "historyLength": 104,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 271,
+      "revision": 134,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:134:frame:43dea63ce9c3a6da",
+      "historyLength": 105,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 273,
+      "revision": 135,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:135:frame:769667ea7d3680ad",
+      "historyLength": 106,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 275,
+      "revision": 136,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:136:frame:69124dabc8bd21bb",
+      "historyLength": 107,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 279,
+      "revision": 139,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:139:frame:c22589af536b1354",
+      "historyLength": 110,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 281,
+      "revision": 140,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:140:frame:6236c275225ed750",
+      "historyLength": 111,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 283,
+      "revision": 141,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:141:frame:1e741ed4165bd9c7",
+      "historyLength": 112,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 285,
+      "revision": 142,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:142:frame:21761b42dfb6db70",
+      "historyLength": 113,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 287,
+      "revision": 143,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:143:frame:aa6ebb29f54a57fd",
+      "historyLength": 114,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    },
+    {
+      "callIndex": 289,
+      "revision": 144,
+      "current": "sra-v6-90d39fb2-3b04-4d9b-9188-b0c167580363:epoch:2:revision:144:frame:eb7c4cb16f34a0f6",
+      "historyLength": 115,
+      "selectedByMorphologyPolicy": false,
+      "producer": {
+        "status": "measured",
+        "domain": "current_pair_routes_without_transferred_station_method",
+        "pair_candidate_count": 1,
+        "route_keys": [
+          "peer"
+        ],
+        "deferred_source_branches": []
+      },
+      "decision": {
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "route_key": null,
+        "operation": null,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750"
+      },
+      "refusal": null
+    }
+  ],
+  "qualification": "Read-only excerpt of the unchanged actual cold public-host campaign. Physical commands were independently released through the common caller; these summaries were made only after execution. One official level completed, then official GAME_OVER on level2; no claim of three-level success or whole-game equivalence. Source-call parity and baseline comparison are separate evidence."
+}

@@ -1,0 +1,165 @@
+{
+  "module_id": "reactive_solving_c",
+  "declarations": [
+    {
+      "id": "policy.reactive_solving_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_parent_surviving_exit_goal"
+      ],
+      "applicability": [
+        "current_reactive_question"
+      ],
+      "invariants": [
+        "whole_state",
+        "native_phase_order",
+        "no_implicit_all_guard_removal",
+        "no_second_physics",
+        "no_recursive_search",
+        "no_act"
+      ],
+      "falsifiers": [
+        "stale_agenda",
+        "incomplete_packet",
+        "unsafe_route",
+        "unbound_recovery"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "reactive_solving.missing",
+        "reactive_solving.native",
+        "reactive_solving.search"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.reactive_solving.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_solving.missing"
+            },
+            {
+              "field": "current_reactive_question",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_solving.missing"
+          }
+        },
+        {
+          "id": "projection.reactive_solving.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_solving.native"
+            },
+            {
+              "field": "current_reactive_question",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "search_question",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_solving.native"
+          }
+        },
+        {
+          "id": "projection.reactive_solving.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_solving.search"
+            },
+            {
+              "field": "current_reactive_question",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "search_question",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_solving.search"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.reactive_solving.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "reactive_solving.missing"
+            }
+          ],
+          "reason_ref": "reason.reactive_question_retains_named_evidence"
+        },
+        {
+          "id": "tier.reactive_solving.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "reactive_solving.native"
+            }
+          ],
+          "reason_ref": "reason.reactive_route_subgoal_serves_surviving_exit"
+        },
+        {
+          "id": "tier.reactive_solving.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "reactive_solving.search"
+            }
+          ],
+          "reason_ref": "reason.reactive_route_subgoal_serves_surviving_exit"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.reactive_solving_activation_unverified",
+      "reason_refs": [
+        "reason.reactive_route_subgoal_serves_surviving_exit",
+        "reason.reactive_question_retains_named_evidence"
+      ]
+    }
+  ]
+}

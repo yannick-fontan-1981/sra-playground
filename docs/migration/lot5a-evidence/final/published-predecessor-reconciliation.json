@@ -1,0 +1,45 @@
+{
+  "schema": "logos-engine.lot5a.published-predecessor-reconciliation.v1",
+  "recordedAt": "2026-11-10T21:06:26.860837+00:00",
+  "sourceHeadAfterMerge": "bc19974c910711f20385d9a40168a0927ec22057",
+  "publishedPredecessor": {
+    "siteVersion": 83,
+    "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_56ab94a2e69081918fc923b11c4484b9",
+    "commit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+    "deploymentId": "appgdep_6af3859669708191a724098872b5c7d4",
+    "deploymentStatus": "succeeded",
+    "deploymentUpdatedAt": "2026-11-10T20:59:14.979903+00:00"
+  },
+  "officialCostBaseline": {
+    "siteVersion": 82,
+    "commit": "0ca36b0a6a358e1e89420753bbcec4a33f028e0a",
+    "nativeVersion": "0.52.0",
+    "nativeDigest": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb"
+  },
+  "executionInputDiff": {
+    "command": [
+      "git",
+      "diff",
+      "--name-only",
+      "0ca36b0a6a358e1e89420753bbcec4a33f028e0a",
+      "bed48116585da864dd5c412ed11dd6990a950e8e",
+      "--",
+      "src",
+      "tests",
+      "public",
+      "content",
+      "package.json",
+      "package-lock.json",
+      "migration",
+      "scripts",
+      ".openai",
+      "docs/migration/v6-coverage.json",
+      "docs/migration/v6-entry-point-progress.json"
+    ],
+    "changedFiles": []
+  },
+  "candidateNativeDigest": "d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f",
+  "candidateNativeUnchanged": true,
+  "bothPublishedCommitsAreAncestors": true,
+  "qualification": "Site83 closes documentation for the identical0.52 code published inSite82. Both actual publications are merged. Frozen0.53 code, source/test/build inputs and recorded functional proofs are unchanged; no live game or validation result is fabricated by the documentation merge."
+}

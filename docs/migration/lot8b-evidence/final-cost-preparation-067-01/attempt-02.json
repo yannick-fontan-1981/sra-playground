@@ -1,0 +1,56 @@
+{
+  "schema": "logos-engine.lot8b.cost-preparation-attempt.v1",
+  "recordedAt": "2026-11-12T12:30:15.058658+00:00",
+  "startedAt": "2026-11-12T12:30:14.593462+00:00",
+  "durationSeconds": 0.46520597199992153,
+  "attempt": 2,
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot8b-evidence/tools/final-cost/prepare-v2.py",
+    "--baseline-checkout",
+    "/workspace/sites/sra-lot8b-baseline066-20261112",
+    "--baseline-manifest",
+    "docs/migration/lot8b-evidence/final-version-067-01/baseline-native.json",
+    "--candidate-manifest",
+    "docs/migration/lot8b-evidence/final-version-067-01/candidate-native.json",
+    "--reconciliation",
+    "docs/migration/lot8b-evidence/final-version-067-01/validation-summary.json",
+    "--work-forms",
+    "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/work-forms.json",
+    "--graph-review",
+    "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/graph-review.json",
+    "--owner-inventory",
+    "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/owner-source-inventory.json",
+    "--functional-review",
+    "docs/migration/lot8b-evidence/final-version-067-01/final-functional-independent-review.json",
+    "--output-directory",
+    "docs/migration/lot8b-evidence/final-performance-067-01"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "passed",
+  "sourceHead": "2cd4e7e557cb15034849da8c2794fa612cdbff18",
+  "generator": {
+    "path": "docs/migration/lot8b-evidence/tools/final-cost/prepare-v2.py",
+    "bytes": 22196,
+    "sha256": "e5465ba2614d26fc2efba1a5b33616c18840e2fa3184032f1773477831263423"
+  },
+  "nativeSessionsExecuted": 0,
+  "measurementStarted": false,
+  "globalLockAcquired": false,
+  "publicationPerformed": false,
+  "automaticRetry": false,
+  "logs": {
+    "attempt-02.stdout.log": {
+      "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/attempt-02.stdout.log",
+      "bytes": 265,
+      "sha256": "a58b4880678ae71c5a8dfcfaaa617c687b1b38dca3e4cdd2713ef6fb3146d785"
+    },
+    "attempt-02.stderr.log": {
+      "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/attempt-02.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

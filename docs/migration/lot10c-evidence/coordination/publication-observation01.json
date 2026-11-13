@@ -1,0 +1,37 @@
+{
+  "schema": "logos-engine.lot10c.actual-publication-observation.v1",
+  "observedAt": "2026-11-11T18:17:06.017Z",
+  "site": {
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "observedAt": "2026-11-11T18:16:36.570Z",
+    "latestVersionNumber": 103,
+    "currentLiveUrl": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "status": "active",
+    "currentUserRole": "owner",
+    "accessMode": "custom",
+    "accessRevision": 3,
+    "allowedUserCount": 1,
+    "allowedGroupCount": 0,
+    "externalVisitorCount": 0
+  },
+  "version": {
+    "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_c8356cd5ad648191a646ac0a9c059a24",
+    "versionNumber": 103,
+    "sourceCommit": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+    "deploymentId": "appgdep_6af49db69234819195c9c093cb79a7da",
+    "archiveContentHash": "sha256:9724c4bbc91636ebb8e008466b01fcf980fdc86edc46073555aa4e179946e386",
+    "archiveSizeBytes": 30023680,
+    "archiveFileCount": 75
+  },
+  "deployment": {
+    "id": "appgdep_6af49db69234819195c9c093cb79a7da",
+    "status": "succeeded",
+    "type": "publish",
+    "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_c8356cd5ad648191a646ac0a9c059a24",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "updatedAt": "2026-11-11T16:54:28.036164+00:00"
+  },
+  "nativeImplementationFromPublishedCommit": "logos-engine.typescript.v6.native-migration/0.62.0",
+  "lot10cPublished": false,
+  "qualification": "Read-only provider observation plus the exact source constant at the saved commit; no access settings or deployment changed."
+}

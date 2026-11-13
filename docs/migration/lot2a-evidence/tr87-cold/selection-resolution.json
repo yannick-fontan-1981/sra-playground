@@ -1,0 +1,18 @@
+{
+  "schema": "logos-engine.lot2a.campaign-resolution.v1",
+  "game": "TR87",
+  "selection": "docs/migration/lot2a-evidence/tr87-cold/campaign-selection.json",
+  "selectedAt": "2026-11-09T17:51:45.934488+00:00",
+  "switchDeadline": "2026-11-09T18:31:45.934488+00:00",
+  "execution": "docs/migration/lot2a-evidence/tr87-cold/execution-tr87.json",
+  "finishedAt": "2026-11-09T17:55:39.222568+00:00",
+  "secondsSinceSelection": 233.28808,
+  "status": "target_reached",
+  "levelsCompleted": 3,
+  "targetLevels": 3,
+  "actions": 105,
+  "officialState": "NOT_FINISHED",
+  "reason": "target_levels_completed",
+  "sameSource": true,
+  "qualification": "First three official levels completed in one cold session. Level4 is now visible; full-game victory is not claimed."
+}

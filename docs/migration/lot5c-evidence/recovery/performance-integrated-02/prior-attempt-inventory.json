@@ -1,0 +1,165 @@
+{
+  "schema": "logos-engine.lot5c-prior-cost-attempt-inventory.v1",
+  "recordedAt": "2026-11-11T17:40:09.118320+00:00",
+  "directory": "docs/migration/lot5c-evidence/recovery/performance-integrated-01",
+  "fileCount": 39,
+  "files": {
+    "baseline-owner-graphs-command.execution.json": {
+      "bytes": 1492,
+      "sha256": "e4aa6f9633701cc61e5dbbcafab32c3bc1d284da19ff4beb8e7aa918ea255739"
+    },
+    "baseline-owner-graphs-command.log": {
+      "bytes": 387,
+      "sha256": "cb16d43ce48f968b0322584dec91a920a7edb3900f1e182885c9150dc7755138"
+    },
+    "baseline-owner-graphs-command.log.gz": {
+      "bytes": 238,
+      "sha256": "294ec1c6a6f2fc0f0c81062ae264466525c7d1a3c9be11d87770490f6b8f4ade"
+    },
+    "baseline-owner-graphs.json.gz": {
+      "bytes": 5109271,
+      "sha256": "01aca0a4dde1029919b9dff233959f3aaa72820333dc1d7e3baea8c767e115b2"
+    },
+    "baseline-owner-graphs.receipt.json": {
+      "bytes": 114892,
+      "sha256": "72fe1ce2d3ba9f27b31f549421f0a4c1b79da52566e329911eb2a8afefa43098"
+    },
+    "candidate-owner-graphs-command.execution.json": {
+      "bytes": 1479,
+      "sha256": "ce10cd24d0419fbfc533ab689bd1282d61ee1492a059abe364dc5fbc62453424"
+    },
+    "candidate-owner-graphs-command.log": {
+      "bytes": 390,
+      "sha256": "efcf6e64534e4459c44d7b5dd9f72eb590382b93363ebe94740ae208e595d553"
+    },
+    "candidate-owner-graphs-command.log.gz": {
+      "bytes": 238,
+      "sha256": "79c11170576fce04f9864d8cf41b593d37b7a6b63bfb734e8607dd8fa2e454a0"
+    },
+    "candidate-owner-graphs.json.gz": {
+      "bytes": 5160803,
+      "sha256": "a39f71649496a2a0023658f6ebf4ff41d34a77fd479ce59edfadd9be4182462a"
+    },
+    "candidate-owner-graphs.receipt.json": {
+      "bytes": 115863,
+      "sha256": "eea5ddc96d52b1218c06f84fc9fe85e1f01cfddc4b74130c61bfa7280a98e8ba"
+    },
+    "cases.json": {
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    "comparison-policy.json": {
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    "declaration-independent-review.json": {
+      "bytes": 3027,
+      "sha256": "3056f7433e53e27bb153c0621767359d1babf8148da1ceffa7a83fa7064ac7fa"
+    },
+    "declaration.json": {
+      "bytes": 5661,
+      "sha256": "7b3022ccdd57849f6121446b9e8170e93f16bfec9c73eb8978b8b625eaab7351"
+    },
+    "global-budget-policy.json": {
+      "bytes": 2348,
+      "sha256": "ac3d2c33fb990b851c1dd96efb0e7f38ceb40c5f7efbd72ae227a654c3c18de0"
+    },
+    "owner-contract-finalization-command.execution.json": {
+      "bytes": 1285,
+      "sha256": "d94fddc4ad799bc62b7c2257984572cc2e762b56a1d069d110ed98a56033ea16"
+    },
+    "owner-contract-finalization-command.log": {
+      "bytes": 350,
+      "sha256": "a57dc7413fbf7e271bf25b09bb1a4c487d7e7afe8ca1cbdcb3c8f1fa3e663f89"
+    },
+    "owner-contract-finalization-command.log.gz": {
+      "bytes": 269,
+      "sha256": "c487f4a4d6999019e7ee29edd481833697e59e1c709692bbfa7d97eb5badb644"
+    },
+    "owner-graph-attribution.json": {
+      "bytes": 107007,
+      "sha256": "c0528cf494f17f156086e8d0c540fa0421c8bcf7b1c656454d96767b0916f74c"
+    },
+    "owner-graph-qualification-command.execution.json": {
+      "bytes": 1750,
+      "sha256": "c05c96608a9e1b703c1c1cf16dd24aca16722a98a0effc93acc5c1baa3f7f82a"
+    },
+    "owner-graph-qualification-command.log": {
+      "bytes": 319,
+      "sha256": "12a41f95f3f32c405359e74f0aa511db144631114591b6bb465afc7d6008b552"
+    },
+    "owner-graph-qualification-command.log.gz": {
+      "bytes": 191,
+      "sha256": "3357fdda9d71262e2c33af484ded76914ae104576581915d2d3aabcddf239d44"
+    },
+    "owner-growth-contract.json": {
+      "bytes": 6009,
+      "sha256": "d2f97d71bb68388c77ccfc45b791a1529806ed4096893f7a227d497af7079e25"
+    },
+    "owner-qualification-independent-review.json": {
+      "bytes": 17962,
+      "sha256": "bbe4c0cf056d6e3346e110aa00c7c56d77b1902c1c2ecf24ac40280006f78490"
+    },
+    "owner-source-inventory-command.execution.json": {
+      "bytes": 1301,
+      "sha256": "30e8ea93dcda5759e352d2acefeafd417bab38a1cc18e0cebf0d57de3d007711"
+    },
+    "owner-source-inventory-command.log": {
+      "bytes": 575,
+      "sha256": "24804144f8fb1f96e6e9cb2c3cba3ab3c73fdbc4ba247dd3645436ad78494ae8"
+    },
+    "owner-source-inventory-command.log.gz": {
+      "bytes": 359,
+      "sha256": "5ca078626fba122e688cf5e981c72c300f9c8863264015c1262327043a10bcc2"
+    },
+    "owner-source-inventory.json": {
+      "bytes": 123426,
+      "sha256": "936188c0d9368737e1b797e205fc3de099585a1cacc8bbc308b13a6c2ba0ba53"
+    },
+    "owner-structural-fixture.json": {
+      "bytes": 60104,
+      "sha256": "67d2afc5d54b8203c636aa8868c7b5967760dc7b44b0329eeb8b67ef98253296"
+    },
+    "preparation.json": {
+      "bytes": 4411,
+      "sha256": "1f2c25c7304afd4e215514f70137fcfac95c3339af8acf423b58a1ed6082e17f"
+    },
+    "protocol-check.json": {
+      "bytes": 429,
+      "sha256": "98272521d2984efbf0f8ba8dc521ea00575b9c4edeb6118453fa6016be751b15"
+    },
+    "protocol-preparation-command.execution.json": {
+      "bytes": 1753,
+      "sha256": "3cfad837fadc2eccda9cc8ed5eabc185eb35f28d394a8469da521246bd392086"
+    },
+    "protocol-preparation-command.log": {
+      "bytes": 429,
+      "sha256": "98272521d2984efbf0f8ba8dc521ea00575b9c4edeb6118453fa6016be751b15"
+    },
+    "protocol-preparation-command.log.gz": {
+      "bytes": 330,
+      "sha256": "a11989e686f9511afab24f5dae61f25463df143639a9a9400e81583b4d78ca6b"
+    },
+    "protocol.md": {
+      "bytes": 16466,
+      "sha256": "a1b24a837051099bc095350470a8ca47a2fe4513fe738687bf6ed08421a5aee2"
+    },
+    "static-preflight-command.execution.json": {
+      "bytes": 1287,
+      "sha256": "ea99789ecab9828d9a4a0dd34d44627e4cc487204d94a3b31d13afa371aa6235"
+    },
+    "static-preflight-command.log": {
+      "bytes": 445,
+      "sha256": "5bcece9a07052f36dcea0190bd1859104d0a791dc875dff0601d9b010aaab6dd"
+    },
+    "static-preflight-command.log.gz": {
+      "bytes": 310,
+      "sha256": "25affed22c4fbf9f04ba73bc84dbab09bbb24e5f0ea8648f626288b6f77dc692"
+    },
+    "static-preflight.json": {
+      "bytes": 19941,
+      "sha256": "7112cfff86b26a59e2f804b45a62c20ed0e7b42aeeb311eb2157ca219504d7e1"
+    }
+  },
+  "qualification": "Every prior file is retained exactly; no report or fixture is decoded by this preservation inventory."
+}

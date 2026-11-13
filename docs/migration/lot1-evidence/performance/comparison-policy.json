@@ -1,0 +1,7 @@
+{
+  "schema": "logos-engine.native-loop-cost-comparison-policy.v1",
+  "relativeBudget": 0.1,
+  "unaffectedCaseIds": ["STCK", "SMLP"],
+  "stages": ["session_elapsed", "new_decision", "known_prefix_service", "known_prefix_request", "known_prefix_guard", "acquisition_and_persistence", "persistence", "restoration"],
+  "qualification": "STCK and SMLP are predeclared unchanged-path controls. LIFE contains the selected typed-pose path and retained multi-level material state. Compare identical public returns, counts and harness inputs. An over-budget result is not waived by a broad noise allowance; retain it and use a targeted follow-up if necessary."
+}

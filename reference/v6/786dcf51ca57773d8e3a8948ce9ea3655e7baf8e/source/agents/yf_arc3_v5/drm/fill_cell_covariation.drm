@@ -1,0 +1,83 @@
+{
+  "module_id": "fill_cell_covariation",
+  "declarations": [
+    {
+      "id": "policy.fill_cell_covariation",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": ["sealed_action_conditioned_display_and_cell_supports"],
+      "applicability": ["current_covariation_measurement"],
+      "invariants": ["no_instance_palette_or_geometry", "covariation_is_revisable", "no_unique_visit_or_terminal_endpoint_inferred", "old_unrefuted_hypotheses_preserved"],
+      "falsifiers": ["current_geometry_or_quantified_relation_is_contradicted"],
+      "declared_alternative_refs": ["fill_cells.propose_covariation", "fill_cells.retain_unknown"],
+      "fact_projections": [
+        {
+          "id": "projection.fill_cells.propose",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "fill_cells.propose_covariation"},
+            {"field": "fill_cell_correspondence_count", "operator": "equals", "expected": 1}
+          ],
+          "static_facts": {"applicable": true}
+        },
+        {
+          "id": "projection.fill_cells.unknown",
+          "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "fill_cells.retain_unknown"}],
+          "static_facts": {"applicable": true}
+        }
+      ],
+      "selection_eligibility_conditions": [{"field": "applicable", "operator": "equals", "expected": true}],
+      "selection_tiers": [
+        {"id": "tier.fill_cells.propose", "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "fill_cells.propose_covariation"}], "reason_ref": "reason.current_cell_support_change_covaries_with_quantified_fill"},
+        {"id": "tier.fill_cells.unknown", "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "fill_cells.retain_unknown"}], "reason_ref": "reason.incomplete_or_ambiguous_covariation_preserves_unknowns"}
+      ],
+      "selection_tie_breakers": [{"field": "alternative_ref", "preferred_order": "minimize"}],
+      "meaning_template_ref_by_alternative": {"fill_cells.propose_covariation": "rule.fill_cell_covariation"},
+      "reason_refs": ["reason.current_cell_support_change_covaries_with_quantified_fill"]
+    },
+    {
+      "id": "rule.fill_cell_covariation",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": ["DERIVE"],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "premises": ["current_cell_support_change_and_display_quantification"],
+      "applicability": ["source_admitted_unique_measured_correspondence"],
+      "invariants": ["coverage_is_a_proposed_goal", "no_command_permission", "no_visit_multiplicity_inferred"],
+      "falsifiers": ["display_decouples_from_current_support_count", "full_coverage_has_no_terminal_progress"],
+      "reason_refs": ["reason.current_cell_support_change_covaries_with_quantified_fill"],
+      "term_templates": [
+        {
+          "id_pattern": "supposition.fill_cell_covariation.{geometry_digest}", "kind": "schema",
+          "label": "revisable cell-support and fill covariation",
+          "required_fields": ["geometry_digest", "cell_count", "rounding_refs"],
+          "static_attributes": {"projection_contract": "yf_arc3_v5.fill_cell_covariation.v1", "commitment": "revisable", "canonical_fact_projection_enabled": true},
+          "attribute_bindings": {"geometry_digest": "geometry_digest", "top": "top", "left": "left", "bottom": "bottom", "right": "right", "pitch": "pitch", "cell_count": "cell_count", "row_count": "row_count", "column_count": "column_count", "support_values": "support_values", "current_cell_indices": "current_cell_indices", "rounding_refs": "rounding_refs", "full_extent": "full_extent", "current_filled_extent": "current_filled_extent", "measurement_frame_ref": "measurement_frame_ref"},
+          "iteration": {"source_field": "fill_cell_correspondence_rows", "item_bindings": {"geometry_digest": "geometry_digest", "top": "top", "left": "left", "bottom": "bottom", "right": "right", "pitch": "pitch", "cell_count": "cell_count", "row_count": "row_count", "column_count": "column_count", "support_values": "support_values", "current_cell_indices": "current_cell_indices", "rounding_refs": "rounding_refs", "full_extent": "full_extent", "current_filled_extent": "current_filled_extent"}, "max_items": 3}
+        },
+        {
+          "id_pattern": "goal.full_support_coverage.{geometry_digest}", "kind": "goal",
+          "label": "test full support coverage suggested by the display",
+          "required_fields": ["geometry_digest", "cell_count"],
+          "static_attributes": {"goal_kind": "full_support_coverage_covariation", "status": "proposed", "commitment": "revisable", "falsifier": "coverage_and_display_or_terminal_feedback_disagree", "does_not_require_exact_actions": true},
+          "attribute_bindings": {"domain_ref": "geometry_digest", "quantified_support_count": "cell_count"},
+          "iteration": {"source_field": "fill_cell_correspondence_rows", "item_bindings": {"geometry_digest": "geometry_digest", "cell_count": "cell_count"}, "max_items": 3}
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.fill_cell_covariation.{geometry_digest}", "predicate": "proposes_open_goal_kind", "family": "control", "epistemic_status": "proposed",
+          "argument_patterns": ["goal.full_support_coverage.{geometry_digest}", "supposition.fill_cell_covariation.{geometry_digest}"],
+          "required_fields": ["geometry_digest"],
+          "static_attributes": {"goal_kind": "full_support_coverage_covariation", "commitment": "revisable", "falsifier": "current_display_support_covariation_is_contradicted"},
+          "iteration": {"source_field": "fill_cell_correspondence_rows", "item_bindings": {"geometry_digest": "geometry_digest"}, "max_items": 3}
+        }
+      ]
+    }
+  ]
+}

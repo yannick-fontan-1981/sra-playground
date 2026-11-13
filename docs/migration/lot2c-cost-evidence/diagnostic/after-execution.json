@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.native-profile-execution.v1",
+  "startedAt": "2026-11-09T21:14:11.876322+00:00",
+  "finishedAt": "2026-11-09T21:14:24.604730+00:00",
+  "elapsedSeconds": 12.728432035997685,
+  "command": [
+    "node",
+    "scripts/profile-native-loop-costs.mjs",
+    "docs/migration/lot2c-evidence/performance/stck-followup/cases.json",
+    "STCK",
+    "docs/migration/lot2c-cost-evidence/diagnostic/after.json.gz",
+    "ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b"
+  ],
+  "checkout": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout",
+  "exitCode": 0,
+  "log": {
+    "path": "docs/migration/lot2c-cost-evidence/diagnostic/after-attempt-01.log.gz",
+    "bytes": 348,
+    "sha256": "7ede56593632609c416cbb0acf9407f9cc91a08e4564dfc9b7673b320076b323"
+  }
+}

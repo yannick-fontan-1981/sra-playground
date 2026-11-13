@@ -1,0 +1,110 @@
+{
+  "schema": "logos-engine.native-state-cost-code-review.v1",
+  "recordedAt": "2026-11-10T04:21:04.328016+00:00",
+  "status": "no_remaining_blocker_in_reviewed_scope",
+  "reviewer": "independent protocol_review agent",
+  "method": "Read-only review of the current diff, complete ownership/copy/graph paths and relevant tests. No native campaign, profile, test suite or build executed by this review. A tiny language-only Node probe confirmed Object.getOwnPropertyNames versus descriptor-record integer-key ordering.",
+  "reviewedFiles": [
+    {
+      "path": "src/logos-engine/canonical.ts",
+      "sha256": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1",
+      "bytes": 11291
+    },
+    {
+      "path": "src/logos-engine/v6-native-state-graph.ts",
+      "sha256": "b739db6d6066a06f4175b4377f0d0ae1f351b708e5d27fbdb99c9de7e6ed0b4d",
+      "bytes": 21947
+    },
+    {
+      "path": "src/logos-engine/v6-native-owned.ts",
+      "sha256": "b4a1eeb1cf43bb04695bce8267903cd122fe778b4b938a98b1640a9ba6ee4839",
+      "bytes": 6626
+    },
+    {
+      "path": "src/logos-engine/v6-inventory-caller-context.ts",
+      "sha256": "617ff752c9ac5f65443bec856deb634a2c5a5d52863dad81e19828cadebf56e7",
+      "bytes": 21159
+    },
+    {
+      "path": "src/logos-engine/v6-inventory-project.ts",
+      "sha256": "42e4eaf682eab6e022aa4f6fc512c980c504e5196fc055dd8bb176a7bbbdd60f",
+      "bytes": 11111
+    },
+    {
+      "path": "src/logos-engine/v6-observed-inventory.ts",
+      "sha256": "dcd496eecc2131acc697a119c14ac028c2cabd73c5ddb78a7f21cef1ad0ae426",
+      "bytes": 45777
+    },
+    {
+      "path": "tests/canonical-cache.test.ts",
+      "sha256": "6062eb52ce1258640dd42b0a8316551e2544e76591d3e4b3985114ecb8972846",
+      "bytes": 8994
+    },
+    {
+      "path": "tests/v6-native-state-graph.test.ts",
+      "sha256": "5d43343376c73016fed9c01d92c781cdcbc67d81a6bfcc2b0934e0d2308b0c2c",
+      "bytes": 11336
+    },
+    {
+      "path": "tests/v6-native-copy.test.ts",
+      "sha256": "d109221ee552a7c80e1098b0d2acf3e7130169f1e7f447f552e8dea9b4990b8e",
+      "bytes": 6749
+    },
+    {
+      "path": "tests/v6-native-hydration-cache.test.ts",
+      "sha256": "213918b61178728029ba43588a288731125b4176f41f88833851318c114e9100",
+      "bytes": 10289
+    },
+    {
+      "path": "tests/v6-inventory-copy-cost.test.ts",
+      "sha256": "5fda1a77f3c37bf51ae65219765d693e075878fce205d2e9f7a051a6c4e53cd8",
+      "bytes": 5100
+    }
+  ],
+  "resolvedFindings": [
+    {
+      "issue": "New hydration provenance could certify a foreign container returned by an own array map method or custom Symbol.species.",
+      "resolution": "Hydration allocates its own plain arrays and groups with indexed loops. Only private decoder construction calls freezeHydrated; exported isHydratedNativeJson is read-only. Adversarial own-map, species and parts-map tests prevent externally supplied output containers from receiving provenance.",
+      "files": [
+        "src/logos-engine/v6-native-state-graph.ts",
+        "tests/v6-native-state-graph.test.ts"
+      ]
+    },
+    {
+      "issue": "Direct descriptor collection initially skipped the array length descriptor and preserved reordered Proxy integer keys, changing accepted-input snapshot semantics.",
+      "resolution": "All parent descriptors, including array length, are acquired before child traversal. Arrays regain contiguous numeric order; retainNativeJson also restores ordinary integer-key ordering for object Proxies while preserving nonindex order. Tests cover length-descriptor side effects, reordered valid array Proxies, mutated parent siblings and numeric object child traversal.",
+      "files": [
+        "src/logos-engine/canonical.ts",
+        "src/logos-engine/v6-native-state-graph.ts",
+        "src/logos-engine/v6-native-owned.ts",
+        "tests/canonical-cache.test.ts",
+        "tests/v6-native-state-graph.test.ts",
+        "tests/v6-native-copy.test.ts"
+      ]
+    },
+    {
+      "issue": "New hydration loops initially reread input collection identity and length during child decoding instead of preserving the previous Array.map length snapshot.",
+      "resolution": "Each source array/parts identity and length is captured before traversal. Tests mutate source length during first-child decoding and verify that the original bounded extent determines output.",
+      "files": [
+        "src/logos-engine/v6-native-state-graph.ts",
+        "tests/v6-native-state-graph.test.ts"
+      ]
+    }
+  ],
+  "acceptedDesign": [
+    "copyNativeValue fast copies only private canonical ingress or decoder-owned immutable containers. Object.freeze and retainNativeJson alone do not grant this certificate to foreign objects.",
+    "Each copy uses its own identity map, preserving aliases within the detached copy while separating the source and successive copies. Foreign accessors, collections, cycles and Proxies retain structuredClone behavior; functions and symbols retain rejection.",
+    "Raw scalar values, finite Float64 values, negative zero, Unicode keys, literal __proto__ keys and object member order remain covered. Existing scalar, depth, cycle and structural limits remain in their validating paths.",
+    "Cross-root leaf reuse still performs the authoritative fragment lookup. Content-address validation, replaced/missing dependencies, composite dependency traversal and repeated-reference depth checking are unchanged.",
+    "Inventory source publication remains after preparation; the customized-restorer fallback is unchanged. The helper is also used at CellProjection.restore without changing its source method identity checks."
+  ],
+  "explicitBehaviorChanges": [
+    "Malformed raw encoded arrays containing holes now fail decoding instead of returning sparse output. Graphs produced by splitNativeState are dense and unaffected.",
+    "Own map methods and custom array species on raw encoded collections no longer choose decoded output containers. Outputs are plain locally constructed immutable trees."
+  ],
+  "remainingLimits": [
+    "This review does not establish full V5/V6 caller parity, whole-graph equality, all-game regression coverage or any performance gain.",
+    "Formal frozen-source test/build/replay receipts and the separately predeclared cost window remain required; agent-reported targeted tests are not counted as reviewer executions.",
+    "The diagnostic baseline isolation qualification remains separate. This code review makes no timing or overlap assertion."
+  ]
+}

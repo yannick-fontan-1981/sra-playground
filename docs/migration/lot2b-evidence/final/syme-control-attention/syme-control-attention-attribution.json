@@ -1,0 +1,279 @@
+{
+  "schema": "logos-engine.native-control-attention-attribution.v1",
+  "generatedAt": "2026-11-09T19:35:13.404558+00:00",
+  "game": "SYME",
+  "evidence": {
+    "report": {
+      "path": "docs/migration/lot2b-evidence/final/syme-control-attention/syme-campaign.json.gz",
+      "bytes": 3051058,
+      "sha256": "f05b862eef194a7faa5043cd0fc6b699687c4188f57b4bb3810b5c964168d1cb"
+    },
+    "trace": {
+      "path": "docs/migration/lot2b-evidence/final/syme-control-attention/syme-public-trace.json.gz",
+      "bytes": 23317,
+      "sha256": "b723805216b6ff8fa39cc2bd49b8d4fa6eda49d5da424f7c445835ac6e93e035"
+    },
+    "execution": {
+      "path": "docs/migration/lot2b-evidence/final/syme-control-attention/execution-syme.json",
+      "bytes": 61007,
+      "sha256": "642f557d55676a32925eae897aae1d42c607630a9d3711628859b37737fd8f32"
+    },
+    "manifest": {
+      "path": "docs/migration/lot2b-evidence/final/syme-control-attention/source-manifest.json",
+      "bytes": 28337,
+      "sha256": "9c33919dbddcf392f162081600d6516bfab4b3c7a4a3de659a3d5fbe287125a6"
+    },
+    "journal": {
+      "path": "docs/migration/lot2b-evidence/final/syme-control-attention/syme-actual-public-journal.jsonl.gz",
+      "bytes": 11913,
+      "sha256": "a50c096dd8928693296eea9ed8fa417345601f4f8bd41d05fb12fb02bf7bfb89"
+    },
+    "archiveManifest": {
+      "path": "docs/migration/lot2b-evidence/final/syme-control-attention/source-archive.json",
+      "bytes": 29991,
+      "sha256": "11dfa7bdb3b4d2854640f88d8ab190e5e5a34a33426ef5eb98667b3b6eb959b2"
+    }
+  },
+  "extractor": {
+    "path": "scripts/extract-native-control-attention-evidence.py",
+    "bytes": 25634,
+    "sha256": "8184ee974e9eef6dcc2c6108296dfb29d96fd13b38c3c3e653e5d6309f5332b2"
+  },
+  "source": {
+    "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "nativeManifestDigest": "17252e294212a1563b75037a0b0dd782c2ecbc8cc4e1997a4f2bb2103bdf4e8b",
+    "nativeFileCount": 240,
+    "unchangedDuringRun": true,
+    "executionInputsUnchanged": true,
+    "executionInputs": {
+      "runner": {
+        "path": "scripts/run-v53-journaled-campaign.mjs",
+        "sha256": "fea5ea30777475f21ee6ffc3cfa221f652e0e5deccc606c16f9b51d6bd47f646",
+        "bytes": 1961
+      },
+      "harness": {
+        "path": "tests/helpers/v6-live-game-campaign.ts",
+        "sha256": "b5355151556c05f5442485c51d5b81e1ad8d0519be82bf73b94dac37f6c4cfca",
+        "bytes": 57517
+      },
+      "generator": {
+        "path": "scripts/run-v53-campaign-proof.py",
+        "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+        "bytes": 5421
+      }
+    },
+    "pythonAgentModules": []
+  },
+  "outcome": {
+    "campaignStatus": "passed",
+    "failure": null,
+    "targetLevels": 3,
+    "levelsCompleted": 3,
+    "targetCompleted": true,
+    "fullGameWinObserved": false,
+    "finalState": "NOT_FINISHED",
+    "actions": 36,
+    "sealedPrefixes": 14,
+    "acquiredActionsInCapturedPrefixes": 36,
+    "unattributedDispatchedActions": 0,
+    "prefixCaptureMatchesRuntimeCount": true,
+    "elapsedSeconds": 77.51831230099924,
+    "activeSeconds": 51.476120050999995,
+    "startedAt": "2026-11-09T19:33:27.903967+00:00",
+    "finishedAt": "2026-11-09T19:34:45.422268+00:00"
+  },
+  "publicProgression": {
+    "perSourceLevel": {
+      "1": {
+        "actions": 9,
+        "firstAction": 1,
+        "lastAction": 9
+      },
+      "2": {
+        "actions": 12,
+        "firstAction": 10,
+        "lastAction": 21
+      },
+      "3": {
+        "actions": 15,
+        "firstAction": 22,
+        "lastAction": 36
+      }
+    },
+    "scoreIncreases": [
+      {
+        "action": 9,
+        "levelBefore": 1,
+        "levelAfter": 2,
+        "completedBefore": 0,
+        "completedAfter": 1,
+        "state": "NOT_FINISHED",
+        "evidence": {
+          "report": "/actions/8",
+          "trace": "/packets/9"
+        }
+      },
+      {
+        "action": 21,
+        "levelBefore": 2,
+        "levelAfter": 3,
+        "completedBefore": 1,
+        "completedAfter": 2,
+        "state": "NOT_FINISHED",
+        "evidence": {
+          "report": "/actions/20",
+          "trace": "/packets/21"
+        }
+      },
+      {
+        "action": 36,
+        "levelBefore": 3,
+        "levelAfter": 4,
+        "completedBefore": 2,
+        "completedAfter": 3,
+        "state": "NOT_FINISHED",
+        "evidence": {
+          "report": "/actions/35",
+          "trace": "/packets/36"
+        }
+      }
+    ]
+  },
+  "selectedProviders": {
+    "groups": {
+      "window_constraints": {
+        "sealedPrefixes": 14,
+        "actionsInSealedPrefixes": 36
+      },
+      "morphology": {
+        "sealedPrefixes": 0,
+        "actionsInSealedPrefixes": 0
+      },
+      "attention_parent_return": {
+        "sealedPrefixes": 0,
+        "actionsInSealedPrefixes": 0
+      },
+      "information_goal": {
+        "sealedPrefixes": 0,
+        "actionsInSealedPrefixes": 0
+      },
+      "acquire_control_for_target": {
+        "sealedPrefixes": 0,
+        "actionsInSealedPrefixes": 0
+      }
+    },
+    "families": {
+      "regular_field_correspondence": {
+        "sealedPrefixes": 14,
+        "actionsInSealedPrefixes": 36
+      }
+    },
+    "groupsBySourceLevel": {
+      "1": {
+        "window_constraints": {
+          "sealedPrefixes": 6,
+          "actionsInSealedPrefixes": 9
+        }
+      },
+      "2": {
+        "window_constraints": {
+          "sealedPrefixes": 3,
+          "actionsInSealedPrefixes": 12
+        }
+      },
+      "3": {
+        "window_constraints": {
+          "sealedPrefixes": 5,
+          "actionsInSealedPrefixes": 15
+        }
+      }
+    },
+    "zeroSelectionAmongRelevantGroups": [
+      "morphology",
+      "attention_parent_return",
+      "information_goal",
+      "acquire_control_for_target"
+    ]
+  },
+  "morphology": {
+    "sourceMethodCalls": {
+      "observeDepartures": 36
+    },
+    "currentDecisionStatusesDuringEvaluation": {},
+    "currentDecisionReasonsDuringEvaluation": {},
+    "decisionStatusesAttachedToSelectedPrefixes": {
+      "not_evaluated": 14
+    }
+  },
+  "control": {
+    "methodCalls": {
+      "acquireControlForTarget": {
+        "calls": 0,
+        "nonNullResults": 0,
+        "errors": 0,
+        "inspectionCalls": 0,
+        "inspectionNonNullResults": 0
+      },
+      "attentionParentReturnOffer": {
+        "calls": 0,
+        "nonNullResults": 0,
+        "errors": 0,
+        "inspectionCalls": 0,
+        "inspectionNonNullResults": 0
+      },
+      "currentInformationOffer": {
+        "calls": 0,
+        "nonNullResults": 0,
+        "errors": 0,
+        "inspectionCalls": 0,
+        "inspectionNonNullResults": 0
+      }
+    },
+    "inspectionResultExperiments": {},
+    "proposedResultExperiments": {},
+    "selectedQuestionExperiments": {
+      "replicate_translation": {
+        "sealedPrefixes": 0,
+        "actionsInSealedPrefixes": 0,
+        "directPrefixes": 0,
+        "sharedInformationPrefixes": 0
+      },
+      "sample_unused_control": {
+        "sealedPrefixes": 0,
+        "actionsInSealedPrefixes": 0,
+        "directPrefixes": 0,
+        "sharedInformationPrefixes": 0
+      },
+      "replicate_after_contextual_block": {
+        "sealedPrefixes": 0,
+        "actionsInSealedPrefixes": 0,
+        "directPrefixes": 0,
+        "sharedInformationPrefixes": 0
+      }
+    },
+    "deferralReasonsOnSelectedPrefixes": {}
+  },
+  "attention": {
+    "observedOpenings": [],
+    "uniqueItemStates": 0,
+    "uniqueItemStateStatusCounts": {},
+    "acquiredReturnStatusCounts": {},
+    "acquiredReturnWitnesses": [],
+    "consumedReturnStatusCounts": {},
+    "consumedReturns": [],
+    "consumedReturnsSelectedByParentProvider": 0,
+    "firstObservedStates": []
+  },
+  "firstAttributionChains": [],
+  "qualifications": [
+    "Counts describe the complete captured run; first chains and first states are bounded examples with JSON pointers into the hashed report.",
+    "A method call, a non-null offer, a selected sealed prefix and its acquired actions are separate counts. Inspection can return a control question without selecting or dispatching it.",
+    "Nested calls are recorded independently. Their append order can differ from call-entry order; entryIndex is retained for ordering within the instrumented caller.",
+    "ActionsInSealedPrefixes attributes the prefix, not one separately confirmed control experiment per action.",
+    "Attention item states are deduplicated across observations of the same persisted state. Acquired-return witnesses additionally require returned_at to match an acquired transition after-reference.",
+    "The motion attention item is separate from the composition attention owner; composition attention is not counted as a control return.",
+    "A zero selected-provider count means no selected sealed prefix in this capture. Method-call counts separately show evaluation; no failure of the provider is inferred.",
+    "Official progress comes only from public score/state returns. Participation of a provider does not establish that it alone caused completion; no ablation or hypothetical success is inferred.",
+    "No solver, game implementation, private state, native source mutation or action execution is used by this extractor."
+  ]
+}

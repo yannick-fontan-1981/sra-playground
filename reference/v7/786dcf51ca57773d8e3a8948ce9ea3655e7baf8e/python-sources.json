@@ -1,0 +1,524 @@
+{
+  "schema": "logos-engine.v7.python-source-manifest.v1",
+  "repository": "yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan",
+  "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "source_boundary": {
+    "mode": "Original PreparedSource with an explicit minimal file closure",
+    "namespace_packages": [
+      "agents.yf_arc3_v5.observability",
+      "agents.yf_arc3_v5.drm"
+    ],
+    "omitted_package_initializers": {
+      "agents/yf_arc3_v5/observability/__init__.py": "9ad825f22eff1141522d938dfad98150e56700fd",
+      "agents/yf_arc3_v5/drm/__init__.py": "6af01c0cfdd345f79374808efece57e6bc48be34"
+    },
+    "reason": "Package export initializers are omitted to avoid unrelated visualization and capability re-exports. The original PreparedSource loader supplies namespace packages; all imported compiler, scheduler, runtime, kernel and dependency modules retain exact source bytes. This oracle covers the specified workflows, not a full-repository application import."
+  },
+  "files": {
+    "agents/__init__.py": {
+      "git_blob_sha1": "eb6cc75380f6db9a0a1e0d22754c34bd335e5484",
+      "sha256": "47e1570064ccd6202dcc583f0f6610038b30255193d4618de65cf305a2bc6bdd",
+      "bytes": 1066
+    },
+    "agents/yf_arc3_v5/__init__.py": {
+      "git_blob_sha1": "f7de0ce1a80a2cbb06b084fe254a7af5d8cd9dc7",
+      "sha256": "c0ab8aadc96ad74ce804d58465a0956ce28ccebe62b93f8f51d1f7ec160ca52b",
+      "bytes": 561
+    },
+    "agents/yf_arc3_v5/drm/contracts.py": {
+      "git_blob_sha1": "f9c087a76b2e7ac86265c392a50afea2b7c8d591",
+      "sha256": "7e6d41a4cdf9bd1da595c91b34d534136abec5a1bdd786e126a8dffd4dcf9b47",
+      "bytes": 29878
+    },
+    "agents/yf_arc3_v5/drm/loader.py": {
+      "git_blob_sha1": "1b5f9c700fa3be5be6393c12bd4e603b6713574e",
+      "sha256": "b7c8bb1cfa370d32a72257ea34235ff1bf628245ef3cff8499437472577706ac",
+      "bytes": 15969
+    },
+    "agents/yf_arc3_v5/dynamic_workflow/__init__.py": {
+      "git_blob_sha1": "f3032f158cc693744087049f93e5d2f3e0bd141e",
+      "sha256": "3fd9eae26a765d54754c52a1772e39145dc9878dfa8dbc69678de65ecff934de",
+      "bytes": 1903
+    },
+    "agents/yf_arc3_v5/dynamic_workflow/contracts.py": {
+      "git_blob_sha1": "143c399d7c2fcaed1c503fe6495bdcd72f388c37",
+      "sha256": "e8f600b8417ee5dd71f08bc7d47ff31a9f67bea02018a6a9149563557ae0d5ad",
+      "bytes": 27382
+    },
+    "agents/yf_arc3_v5/dynamic_workflow/declarations.py": {
+      "git_blob_sha1": "bff00ac3dd64b782947bf484fa3b5dfcfdca71e4",
+      "sha256": "f2e08b91e4c3ae5e4fb8ed986f3d42b2cde4fc31fb6ef76cfde4f135d47c5c08",
+      "bytes": 6437
+    },
+    "agents/yf_arc3_v5/dynamic_workflow/input_fingerprint.py": {
+      "git_blob_sha1": "bf85f7c5fc3ce8d0cc325875f1520d87cd246342",
+      "sha256": "cffe188aba09af5f971e8adb23484d65afbe105173d24c8d8fa6f2b88d4c9b8f",
+      "bytes": 1227
+    },
+    "agents/yf_arc3_v5/dynamic_workflow/loader.py": {
+      "git_blob_sha1": "0150679aee278e3c035df3286b4266a03134581c",
+      "sha256": "dfd120e75327d38eaffb5e0f15b97eb2dfdf1e7881a508321409fb4619bfc48c",
+      "bytes": 7272
+    },
+    "agents/yf_arc3_v5/dynamic_workflow/registry.py": {
+      "git_blob_sha1": "39c65aa69e0b1684b3734af525f7ad8d2c733561",
+      "sha256": "a64ab2f9d681cda25925d980d579bcb776f02681fae580c11bffbf1902ada57d",
+      "bytes": 4097
+    },
+    "agents/yf_arc3_v5/dynamic_workflow/runtime.py": {
+      "git_blob_sha1": "a66a28bb3f5d6594560a8e30e6620c201c4e16bf",
+      "sha256": "b04afdf0fb358e8f271597ea6018e8085d623f2be961490481bdc4eb15f3cde2",
+      "bytes": 35098
+    },
+    "agents/yf_arc3_v5/dynamic_workflow/shadow.py": {
+      "git_blob_sha1": "15557977bef887fe534fc2ad60ab992861128eee",
+      "sha256": "d43a6ea4666bebd3193919b0b493729dc5fa2204cf965277c1128ea6ba0fd5e5",
+      "bytes": 7173
+    },
+    "agents/yf_arc3_v5/dynamic_workflow/synthesis.py": {
+      "git_blob_sha1": "06b2fca5927dc2f0f949b3a692347cc1dbf89af0",
+      "sha256": "f931186186dd84bf75a85e76782a4b9288e60318a62246af5053e0752e580f31",
+      "bytes": 19276
+    },
+    "agents/yf_arc3_v5/logos/__init__.py": {
+      "git_blob_sha1": "a3e39071ccb68df51f4e543beca84633e05187e7",
+      "sha256": "6842854f322d94676896845362269293311dd05f6668f4ca9023f97b3d63658b",
+      "bytes": 3551
+    },
+    "agents/yf_arc3_v5/logos/claims.py": {
+      "git_blob_sha1": "e1f3346eb6cc1ab336d95e0e3f1151275d64e2f2",
+      "sha256": "f184f2e08172f446e1fc0699d3f09ece6a77a9b62bb5273cfacaf97bd46dee5b",
+      "bytes": 2250
+    },
+    "agents/yf_arc3_v5/logos/contact_experiment.py": {
+      "git_blob_sha1": "b197d0db0be793e62138436db299f792c84bb052",
+      "sha256": "be1985ea33a5f290fc0716ff5e944099d77228adede6ead0299e7c3c92c83e81",
+      "bytes": 2352
+    },
+    "agents/yf_arc3_v5/logos/field_metadata.py": {
+      "git_blob_sha1": "d51a871ea4725aa02c971460341518eddec2ea33",
+      "sha256": "40c51d2cfc66953f6b102193d4d8e4444881d92a649b20e38d06a4cf9dbe2a2f",
+      "bytes": 3774
+    },
+    "agents/yf_arc3_v5/logos/goal_frontier.py": {
+      "git_blob_sha1": "545e58507674055ace4805710619b039185df28f",
+      "sha256": "ad130bb24bdd4022a476322392a9f543704d9fff1a240f8eca81f6593527775a",
+      "bytes": 5969
+    },
+    "agents/yf_arc3_v5/logos/operational_acquisition.py": {
+      "git_blob_sha1": "e6e0daf1eef2280f502fe60bbb58bf4783121f04",
+      "sha256": "fa2bf5ad3a712e18c84a9812bfc1844eae35e159bc545958ee8c6537c102474a",
+      "bytes": 5022
+    },
+    "agents/yf_arc3_v5/logos/operational_branch.py": {
+      "git_blob_sha1": "0b389cefffaeabdea56c732e720e8d4e86e54198",
+      "sha256": "97cebe9f5534f45395bfceadc198ade60952b997a2d513fc2ce58a5521490d6b",
+      "bytes": 2942
+    },
+    "agents/yf_arc3_v5/logos/operational_engagement.py": {
+      "git_blob_sha1": "dd2a9c5a187b16d4a51985c22ebb350a6ecddb83",
+      "sha256": "ee111af1291f97817d7af85875ec64c2a2d1ba251da381b2207ff4ee0d616950",
+      "bytes": 2778
+    },
+    "agents/yf_arc3_v5/logos/operational_experiment_admission.py": {
+      "git_blob_sha1": "edcc667c6cc245055f9324912ff18ddc35394ef2",
+      "sha256": "7927f782322951f4a9631ec911c342d1dc3af0cc9f6a9892e0ca2993da2ff5d3",
+      "bytes": 10846
+    },
+    "agents/yf_arc3_v5/logos/operational_goal_hypothesis.py": {
+      "git_blob_sha1": "27ec7fa6153df7e1ebb5ca397524aedfc13b02af",
+      "sha256": "38ef60c25f9140121efd7cf08ed91716eec9202e12edf9261a04144ef6d5f65e",
+      "bytes": 9188
+    },
+    "agents/yf_arc3_v5/logos/operational_goal_intent.py": {
+      "git_blob_sha1": "dd773f510758f176fd7ee7725da83b1d3ab4fdff",
+      "sha256": "d870c9ded2cd4d9f0ecc3939053a5e371a5c8c89faa9f66f1b73ce687a55e1c2",
+      "bytes": 2158
+    },
+    "agents/yf_arc3_v5/logos/operational_information_opportunity.py": {
+      "git_blob_sha1": "f92e812c3afb6c4ffd15516b98e027ca76a9a458",
+      "sha256": "921e5d6608d5aaf915b436e26f54c8eb7482a101f368a1fd5a094cd8af334ea1",
+      "bytes": 2462
+    },
+    "agents/yf_arc3_v5/logos/operational_observation.py": {
+      "git_blob_sha1": "b90a024ff22054f794bc7d81ee261ada6a773a82",
+      "sha256": "b8a41ae6ed8295bc7613b06913561be16e50c4b1e5380c45112c49fe388cef73",
+      "bytes": 8576
+    },
+    "agents/yf_arc3_v5/logos/operational_propagation.py": {
+      "git_blob_sha1": "c8492a7af5d88ac41c7a764085f6913b438390ee",
+      "sha256": "a98c3c55b2342f98a48de41a84b5b8897d164c205dbeb3393b978b4d34fbe45b",
+      "bytes": 2341
+    },
+    "agents/yf_arc3_v5/logos/operational_reasoning.py": {
+      "git_blob_sha1": "8b060236aa19696c110af3935c010fcedfec8476",
+      "sha256": "54b5b6baa005ee1c86f5c3cf6eb46a6cc08a9b8b54c22b456fbedfcd17f48000",
+      "bytes": 12050
+    },
+    "agents/yf_arc3_v5/logos/operational_reevaluation.py": {
+      "git_blob_sha1": "4e62a8f284c76d8fe42018fd7cb11a0fe519c3f9",
+      "sha256": "1aa42079e2b08845c40378ef2c1011db104f64dcdb9671653970dbec933ae646",
+      "bytes": 9223
+    },
+    "agents/yf_arc3_v5/logos/operational_responsibility.py": {
+      "git_blob_sha1": "a331eb7abbbb97c10d7c7a7c1dc92c6a98fecf1f",
+      "sha256": "e597d1aa720487089234c528096f528ecd9aadf027e55e18074a3b08203f1f7b",
+      "bytes": 24162
+    },
+    "agents/yf_arc3_v5/logos/operations.py": {
+      "git_blob_sha1": "2c713bb31dc4d8ec8f1774be87018832c3a91eb6",
+      "sha256": "e901497533edecf24c18cdcc6be088a28ec2492cc80883823238a57bea01b0fe",
+      "bytes": 125156
+    },
+    "agents/yf_arc3_v5/logos/operator_support.py": {
+      "git_blob_sha1": "658a471c28ea96a481fe61e4dda31d3ab407401c",
+      "sha256": "c21809d22a7579053e2ae91139fb1d8b96a411046f97543f5b7bcfeda8e829e6",
+      "bytes": 1813
+    },
+    "agents/yf_arc3_v5/logos/source_completion.py": {
+      "git_blob_sha1": "354b0add62e9687540dc16be1ad6f30c5a543be4",
+      "sha256": "4e7a445e0fb2bbe38d9da990a30e3389c97bd627999614c17473e9765969eae8",
+      "bytes": 20119
+    },
+    "agents/yf_arc3_v5/logos/terms.py": {
+      "git_blob_sha1": "c44177bb72ffc3486f3488e3a825f24b42a121cf",
+      "sha256": "5eeb7b729cd7db2e552f7e76b6f9de7998b8c1a1b56f5841963c263219136843",
+      "bytes": 963
+    },
+    "agents/yf_arc3_v5/logos/types.py": {
+      "git_blob_sha1": "c1e82cee5751e03b9537b75404d87896c9a43687",
+      "sha256": "92703a65cda3d92844688ad37242db030ba7709a494bd7cc1b61b885fa88a9d9",
+      "bytes": 55942
+    },
+    "agents/yf_arc3_v5/observability/decision_capture.py": {
+      "git_blob_sha1": "6d94d403ea0d85cff6d59b8e3e3de6236b2566f0",
+      "sha256": "316c3ef4004b18dae309fd31ea8f407a42c11365edc32975b80c1c5bb2cc5ac2",
+      "bytes": 1423
+    },
+    "agents/yf_arc3_v5/operational/__init__.py": {
+      "git_blob_sha1": "fbbe1109fd56dbb7733b4c659bcf62b6466ed151",
+      "sha256": "b8e77a8e3fa676876f3768f50c5d69ab84261c0d2a9969c1e889d892068dc5b5",
+      "bytes": 62
+    },
+    "agents/yf_arc3_v5/operational/continuity.py": {
+      "git_blob_sha1": "8bc861b07b7b290efeb934b46aeaa97c391ef39c",
+      "sha256": "ff88a000390e06a0a87503b43b8fcfc65203db769419d93c58782189b6b5ad1f",
+      "bytes": 5680
+    },
+    "agents/yf_arc3_v5/operational/continuity_scope.py": {
+      "git_blob_sha1": "54fd4b59a8b6b79b1d553b23b2dc4cb50c629c75",
+      "sha256": "a899c2fb60ce975478f8b5df08a2aa5f934b777c624e6c4ba5476084e0ff7a57",
+      "bytes": 892
+    },
+    "agents/yf_arc3_v5/operators/__init__.py": {
+      "git_blob_sha1": "dbc74ef574953462a1a9fb10deebfe33407df6d2",
+      "sha256": "71b46b91751833b9fe5684a02dbac09c9289e7e30fb37a506bb672dadb14196a",
+      "bytes": 2292
+    },
+    "agents/yf_arc3_v5/operators/authority.py": {
+      "git_blob_sha1": "3111a070116518db8fa93330e077f772f8d0fe60",
+      "sha256": "75d3bc84844fb30e231b9d37919021e5636a129df3ca433db035a409d46dab48",
+      "bytes": 10122
+    },
+    "agents/yf_arc3_v5/operators/contracts.py": {
+      "git_blob_sha1": "42c3168529abdf1a0d379b34726b2efdbb7d55e8",
+      "sha256": "134eba6c4f9e4b0db83e62dff80b43c9a110be4ba46a8727d23866160cacded3",
+      "bytes": 18503
+    },
+    "agents/yf_arc3_v5/operators/runtime.py": {
+      "git_blob_sha1": "17a46b4ea93fd635cd6f075a837c44cf9d24fbbe",
+      "sha256": "40ab0174648568f01d2e95907098d1d1e97cdc2ef96a016902d991ade5e129c7",
+      "bytes": 56606
+    },
+    "agents/yf_arc3_v5/operators/selection_projection.py": {
+      "git_blob_sha1": "6c25bd39df821fd8b8620c0a4108a0f333d10376",
+      "sha256": "3b5b44beb8dff531bea28093a13da75dadeeb3ce5abc08ea89706ad37f81210b",
+      "bytes": 1540
+    },
+    "agents/yf_arc3_v5/performance.py": {
+      "git_blob_sha1": "508129e2f382bacba3f21d319ef0de53aaae5b93",
+      "sha256": "749dced0c87373dcf68b32cf921c09e84e4a4ccba23f78572da36925373061b2",
+      "bytes": 5963
+    },
+    "agents/yf_arc3_v5/scheduler/__init__.py": {
+      "git_blob_sha1": "29ec577eaf30e1b92b62220273291ee96aa43052",
+      "sha256": "30a81e6ae59086113d6ad2a5bb48e8616db09277fc88f44d2e068210585301c3",
+      "bytes": 1378
+    },
+    "agents/yf_arc3_v5/scheduler/call_refusal.py": {
+      "git_blob_sha1": "c310b01f10fb8213dae263f33ead01049e6f1398",
+      "sha256": "b84cc79bdd054dbfd40c7666889ec42b2d648dc12ab1eee5bb6eaf019e35a76c",
+      "bytes": 2109
+    },
+    "agents/yf_arc3_v5/scheduler/compiled_consciousness.py": {
+      "git_blob_sha1": "bd80c52b2bd5ff81b565dfc58acaf9c73df2f7a8",
+      "sha256": "98153bde5505105b6fb1868e78fb3a7285ce7cdfe5d0e4c19c2061ab51f77854",
+      "bytes": 18505
+    },
+    "agents/yf_arc3_v5/scheduler/contracts.py": {
+      "git_blob_sha1": "87cb3ad224dd41d0be7c20f5d202d09dba72f9e4",
+      "sha256": "ed6c345ca073d94e8ba4116f588059440bed5b4c29c00899417f2e650eb7b0fa",
+      "bytes": 53696
+    },
+    "agents/yf_arc3_v5/scheduler/dynamic_workflow_runtime.py": {
+      "git_blob_sha1": "d547e94557a85aea30742b4805e25992624210bf",
+      "sha256": "f9399ece92ad96a7054a7a37f1fb6e1de6ba4e2580364e80a5d124599c43f8e4",
+      "bytes": 28833
+    },
+    "agents/yf_arc3_v5/scheduler/dynamic_workflow_shadow.py": {
+      "git_blob_sha1": "215abdbdc5bf7e4ce941d0982df37eb57767b901",
+      "sha256": "b4f0c546d94d99b4dc8274dfc11fe70434b98775007a577101f0497d426ec510",
+      "bytes": 6791
+    },
+    "agents/yf_arc3_v5/scheduler/evaluator.py": {
+      "git_blob_sha1": "f1896754b2952037f67ac91e06406919c3031173",
+      "sha256": "519834fb3eb5a74da1cd9a9f38c8da842cad9f93222fab9664ea3845844009d6",
+      "bytes": 20047
+    },
+    "agents/yf_arc3_v5/scheduler/propagation.py": {
+      "git_blob_sha1": "d356bc0ce44e152f2f637bf1f56e5ef0952cb2a5",
+      "sha256": "34536043244dd573c133a70d10590eb694b9acda6175a1dba242f2314c512cb2",
+      "bytes": 6692
+    },
+    "agents/yf_arc3_v5/scheduler/registry.py": {
+      "git_blob_sha1": "deb08866b1bb1b93640d0e1ddcc91856a04a42b1",
+      "sha256": "3f6519c7eccc5458965920090ed8570833f758206a02e5a5da45b171d195555a",
+      "bytes": 11657
+    },
+    "agents/yf_arc3_v5/scheduler/runtime.py": {
+      "git_blob_sha1": "258324dcb643bc1d76d4d02766e9ff6b50fbc879",
+      "sha256": "dc8540bde3be0e1e6c60cb27d8bc5720f3bd5081560aa7cbf40ccc16a8e89d64",
+      "bytes": 139290
+    },
+    "agents/yf_arc3_v5/scheduler/source_return.py": {
+      "git_blob_sha1": "bbaab3613f5db0395222ed19ae6e8c4fe7d3f6b9",
+      "sha256": "75847d57fa346c40af50f547b39c266770b9568148424c1a3fa09704ad25d854",
+      "bytes": 42837
+    },
+    "agents/yf_arc3_v5/src/__init__.py": {
+      "git_blob_sha1": "c035bf2064074ebfd38c632e387176f87f791eda",
+      "sha256": "6db2102721b2eda89c47bbacc540cb27a25ab29e6ffb4380104008e8120f430c",
+      "bytes": 591
+    },
+    "agents/yf_arc3_v5/src/ast.py": {
+      "git_blob_sha1": "e98eb5c4fa22b6f847633ff160f27ef41de20527",
+      "sha256": "d5da74b4490df0ead38a82286b3b745a075730f80accf69187d7a3ed88ba8612",
+      "bytes": 9660
+    },
+    "agents/yf_arc3_v5/src/compiler.py": {
+      "git_blob_sha1": "685c34829cbc8211d3af55a1583bda7d79fc781e",
+      "sha256": "d23775af2ea83f85edcfddeba9c7ca1b1e4024cd9546883f3e1dd88fde4e718d",
+      "bytes": 22799
+    },
+    "agents/yf_arc3_v5/src/errors.py": {
+      "git_blob_sha1": "1bbae98166c9e900f64a0b2bf8ed2124618f0829",
+      "sha256": "2661dbd87ae64a70e7796fb486cf16e136215159209746658c889df50a88f40b",
+      "bytes": 663
+    },
+    "agents/yf_arc3_v5/src/lexer.py": {
+      "git_blob_sha1": "ddb88ac66b1697ca4b1bde97b7ac4e93c2e3ab33",
+      "sha256": "b1ce61c0ccb94b89fc7ed4e78dade9c31488fe8245b4501262c270097ebe7cf9",
+      "bytes": 11641
+    },
+    "agents/yf_arc3_v5/src/parser.py": {
+      "git_blob_sha1": "9c7be4b47c6c676fd4c22fa2522bec6d1069147f",
+      "sha256": "0b04d758592866acef42c4a9a90792927a6a3a07d08d11166ea007aace6f5d96",
+      "bytes": 34885
+    },
+    "agents/yf_arc3_v5/src/registry.py": {
+      "git_blob_sha1": "1e8772459c3a3bd1ec1fa771632e638219cbc0f2",
+      "sha256": "b60319de87217a9ba51887993a313be919f3d212bccca8a1f8ff2153f1f86e8e",
+      "bytes": 9134
+    },
+    "agents/yf_arc3_v5/src/symbols.py": {
+      "git_blob_sha1": "3745ef94343679d1224d4813c5593b7ecdbf9fe5",
+      "sha256": "d1a99c0aed0d832bcf4876019d66b077829437f18c8ac2025f5f62c7377f2ead",
+      "bytes": 10827
+    },
+    "agents/yf_arc3_v5/src/tokens.py": {
+      "git_blob_sha1": "31001dc3746cbddc6976f9ecd4c15697c72b075d",
+      "sha256": "029aa4367b0f4bc5a5e70d2c800098fcdd949f52cabb012038de17fa42e33c05",
+      "bytes": 2463
+    },
+    "agents/yf_arc3_v5/src/validation.py": {
+      "git_blob_sha1": "1ea4aa7d30222c7f71afbbf9d911c10de63cc24a",
+      "sha256": "108b6f0cb2a9515eee0bd43a4ae84875f656afbb9db03156f705dded22c1bddb",
+      "bytes": 46623
+    },
+    "agents/yf_arc3_v5/state/__init__.py": {
+      "git_blob_sha1": "935316c63babd3bc0f957685e608001d98419e9a",
+      "sha256": "fd2a74cc55054d5d3e814d2c2dbff77e887de13570cdaf666949143231520e09",
+      "bytes": 1120
+    },
+    "agents/yf_arc3_v5/state/action_observation.py": {
+      "git_blob_sha1": "640ab9e1c0f3c4af6efb752996744529cea5290f",
+      "sha256": "a4697d99047041015abc87048f36c73dc72695615d12b4ff476b82ed87385fe2",
+      "bytes": 6353
+    },
+    "agents/yf_arc3_v5/state/conscious_contribution_consumption.py": {
+      "git_blob_sha1": "013a6888b21a2ba50fbe670eb33f951b4daaf013",
+      "sha256": "0ccca69fedd6c791fba7cc515f2cb00e9b9cb78cba79712f74c927998afd89c9",
+      "bytes": 4284
+    },
+    "agents/yf_arc3_v5/state/conscious_dispatch_refusal.py": {
+      "git_blob_sha1": "c7e4c99b007042ef0bb952de3b2a98f44fcb646a",
+      "sha256": "ad4cedc77f105794cdb543a8ce09acb4dce0f69d180100497111d6a24fcc98fd",
+      "bytes": 9173
+    },
+    "agents/yf_arc3_v5/state/conscious_engagement.py": {
+      "git_blob_sha1": "29dfe26bfee5c97e5958ddb87f5bbdf31cb29a77",
+      "sha256": "53b29606bba73cb1a5f8c7ba24ad1cd272236c3678e126726782d181d4ca6150",
+      "bytes": 9453
+    },
+    "agents/yf_arc3_v5/state/conscious_experiment_feedback.py": {
+      "git_blob_sha1": "a647d9db0efabc88344df04398ec9f515cbdf288",
+      "sha256": "322c0c6133b4ac840fa48202978678ffee920ac348a78ec4e850d916ccf40c02",
+      "bytes": 6780
+    },
+    "agents/yf_arc3_v5/state/conscious_public_return.py": {
+      "git_blob_sha1": "8da35c7f026c471b7d18e9e4dd57bf2347fae6ce",
+      "sha256": "6b3ecc6d45bcef94c7e544f31c5e4e3bf5aba1ca49cabdcb2f37c12d8b6aa86b",
+      "bytes": 2558
+    },
+    "agents/yf_arc3_v5/state/conscious_response_reconciliation.py": {
+      "git_blob_sha1": "81c34b77f8e0c309696b3cb032d43d87fc9b2a93",
+      "sha256": "063edc40520bf42969538ea7af19d35e0c65000421e924211ed89f58042e81b6",
+      "bytes": 9388
+    },
+    "agents/yf_arc3_v5/state/conscious_resume_refusal.py": {
+      "git_blob_sha1": "b74e1b86bb5d4b6d45cdfa1d99c93a02b7ecc809",
+      "sha256": "0f8c8d53d3ab9c7baaccdd8e942d69856e9a7d69a2e083e2a8220a4797c4d953",
+      "bytes": 1981
+    },
+    "agents/yf_arc3_v5/state/conscious_symbolic_memory.py": {
+      "git_blob_sha1": "3e75695277c54c91d1b04ae9cb3b273b21b6dc94",
+      "sha256": "b58fa04098541058d47a6d3e8cd217e22c597f3e2be7f20d3be6e13d39fb4bf1",
+      "bytes": 2762
+    },
+    "agents/yf_arc3_v5/state/continuation_review_publication.py": {
+      "git_blob_sha1": "2d26982b1dd3806bb1058d8ae442404181a60a71",
+      "sha256": "3365263fc2e84cd360aad2fdecaf2f44becdf6458967aa13f134025b2f4e4df6",
+      "bytes": 2409
+    },
+    "agents/yf_arc3_v5/state/dependency.py": {
+      "git_blob_sha1": "0c6b15b6d858214e7941963b5e3194f995d3fa23",
+      "sha256": "8a14b19aa501d4d33b92fa4c11340a82e002c0aea6c23bf68726f9ed530c817d",
+      "bytes": 3519
+    },
+    "agents/yf_arc3_v5/state/event_store.py": {
+      "git_blob_sha1": "54a741eada2b1b7a50bd1a6cbb5634484084f8d2",
+      "sha256": "8ede70a172c670e869a57a3185864882168e257827faa9be59c75fbb8bb9f4f2",
+      "bytes": 47630
+    },
+    "agents/yf_arc3_v5/state/events.py": {
+      "git_blob_sha1": "546496a91a3b93ec8fe093761f8a493a75be7f37",
+      "sha256": "66da4b5267883c789f45e46112d01c0f3eb1025d43de535f26f758619999362b",
+      "bytes": 11843
+    },
+    "agents/yf_arc3_v5/state/operational_consciousness.py": {
+      "git_blob_sha1": "2eb2bffd001ab96d61268056b70eb0804dd0e1ad",
+      "sha256": "bef82f7743d923de76a283de978b5bd70b29a5ba2417f7f3719f5096e85ff112",
+      "bytes": 71547
+    },
+    "agents/yf_arc3_v5/state/post_action_consumption.py": {
+      "git_blob_sha1": "831af0b088f7418ecc5aa41fbdb5bd22eaf29aaa",
+      "sha256": "628795a24fa6861292972fdf9806c241f3ca209c59d4112570a1492eaaa4ff38",
+      "bytes": 10874
+    },
+    "agents/yf_arc3_v5/state/reasoning_context_publication.py": {
+      "git_blob_sha1": "db9e81995e16921501f2a32414e2126aa2c7b601",
+      "sha256": "96122758420788ae1f0b2df9257ea109258ccf3840badc9315da1ac7aa996c82",
+      "bytes": 7387
+    },
+    "agents/yf_arc3_v5/state/reducer.py": {
+      "git_blob_sha1": "443a5156428f3623ba40e2881155bed57f20498c",
+      "sha256": "cf244fe62ead62c45fddc95dcdb54982ddb264f60bdb4ea653bbe72e01dc69a1",
+      "bytes": 17895
+    },
+    "agents/yf_arc3_v5/state/shared_binding_digest.py": {
+      "git_blob_sha1": "136158e7e03e6cb18ece81ebef4c386d9875e2db",
+      "sha256": "68a9248bd2840df065a8d8286badda1203d993189a44fcc754030d4895c61561",
+      "bytes": 3930
+    },
+    "agents/yf_arc3_v5/state/snapshot.py": {
+      "git_blob_sha1": "6d83d33c4d3b89356c190ee89b2df9d88a6759c2",
+      "sha256": "2ae7ca6e7d987d571228ef220bca3f4446680bb4ba50daff984414a6b1f89ef7",
+      "bytes": 18108
+    },
+    "agents/yf_arc3_v5/state/transaction_index_overlay.py": {
+      "git_blob_sha1": "08cd52854c6848966db54d2b271a5556c9c4d5b0",
+      "sha256": "8afb64dfd8cbc71ddaafac526ae81a87a6f4780e2eb258c808c8bcb0de209f03",
+      "bytes": 3652
+    },
+    "agents/yf_arc3_v5/state/transactions.py": {
+      "git_blob_sha1": "88d95128318d8236e34272f23828fb9c7e8a90ad",
+      "sha256": "115f3c5192408a74f08207042cd5155339a8f391897d99d1b870ad2d5748fb9d",
+      "bytes": 1113
+    },
+    "agents/yf_arc3_v7/__init__.py": {
+      "git_blob_sha1": "ea634d49e1d9c25ee31783862f1a061f3eed4dae",
+      "sha256": "01af0eb02119ad0f40bdb3ac80d19a379ad631bc49628998390972e30a8a8d60",
+      "bytes": 100
+    },
+    "agents/yf_arc3_v7/activation.src": {
+      "git_blob_sha1": "57307faef2083d5704732a4d48ea54a70ad7a545",
+      "sha256": "369058af44c77253b981a1a410eb45add33eb1e94820b272b084f995c0acedec",
+      "bytes": 508
+    },
+    "agents/yf_arc3_v7/availability.py": {
+      "git_blob_sha1": "1c788e16e5b9972ba731a51d57345baefd7bea09",
+      "sha256": "4fd03b8e62f0706d0f6c3215fbcb367f79babb351aa022747460ec2638c2c970",
+      "bytes": 1608
+    },
+    "agents/yf_arc3_v7/composition_test.src": {
+      "git_blob_sha1": "11beb80a2ead977c72fac21820b408c3f30e46a8",
+      "sha256": "a4bd0cffd64cb8515b4df638ef7b11c4a355d54f15a5fef321bac7f4e929e8b9",
+      "bytes": 2420
+    },
+    "agents/yf_arc3_v7/demo.py": {
+      "git_blob_sha1": "f05182e1b988ea57f90120fd9ce34ba1829ecd8c",
+      "sha256": "8ea6fcdc39ea0f21036eb9fd858366083adc86f7d7930988fac1ca00e909473d",
+      "bytes": 3181
+    },
+    "agents/yf_arc3_v7/experiment.src": {
+      "git_blob_sha1": "44ca7479180e855e7dca6b8faff7d294009a2529",
+      "sha256": "ac34b875c22c17badb897248ecdd025ffde13064c66e7061fa3e8674ccc2a4fc",
+      "bytes": 4748
+    },
+    "agents/yf_arc3_v7/generators.src": {
+      "git_blob_sha1": "1bc9f837f7ec09ca2a5db332216cbca6f0b10474",
+      "sha256": "e5c9e07eaa050941a8def83884c3b5dca3c9e4a35c9a88157a0441ad05cd8ac7",
+      "bytes": 7415
+    },
+    "agents/yf_arc3_v7/goal_composition.src": {
+      "git_blob_sha1": "37b151929835bc47f100e234053412e75a80f3e4",
+      "sha256": "aaec720218d9894e379fc134f64dd4593803357ae6e7c5de678103359b0fa317",
+      "bytes": 9315
+    },
+    "agents/yf_arc3_v7/kernel.py": {
+      "git_blob_sha1": "649c0bc26872b8b80ef9936632b87fcd58d7652d",
+      "sha256": "c65c1b3e661eebe6a0449f902856a148a8e5ae53f359223739ed1af20216a392",
+      "bytes": 10069
+    },
+    "agents/yf_arc3_v7/knowledge.drm.json": {
+      "git_blob_sha1": "931ec74b795a25976c7725516b14f8ca282a8f1b",
+      "sha256": "c2eeef389cd37c4e1205dd17dac9b20b5d71da9110329abea4285cd729ef4541",
+      "bytes": 16093
+    },
+    "agents/yf_arc3_v7/knowledge.logos.json": {
+      "git_blob_sha1": "c11f13f3686b5530e79f2e63135ac90e1dddfb9d",
+      "sha256": "f632bf589cde404719d372034d5f1aefd994955dce8c782cf3ab60f1f2b0c96c",
+      "bytes": 2745
+    },
+    "agents/yf_arc3_v7/runtime.py": {
+      "git_blob_sha1": "86b357e353d16b33562f527ed5a2598d55688c2e",
+      "sha256": "0449f76764648b536f86cac1c65d3f17241baee2e556a8c1be891b863c1b9ab9",
+      "bytes": 34819
+    },
+    "tools/v7_prepared_source.py": {
+      "git_blob_sha1": "0f78e5098a30ea368b5d8b68c652d110e6232b7f",
+      "sha256": "b3550496813067d995bc392f466c4012c374e5c3e440e51d3182ebd17a497559",
+      "bytes": 13866
+    }
+  }
+}

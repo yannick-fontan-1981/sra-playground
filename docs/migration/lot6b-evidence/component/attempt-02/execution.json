@@ -1,0 +1,95 @@
+{
+  "schema": "logos-engine.actual-command-execution.v1",
+  "status": "passed",
+  "command": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=5s",
+    "60s",
+    "node",
+    "--test",
+    "tests/v6-selected-rigid-native.test.ts"
+  ],
+  "startedAt": "2026-11-11T14:42:48.156431+00:00",
+  "finishedAt": "2026-11-11T14:42:49.069163+00:00",
+  "elapsedSeconds": 0.9104144899993116,
+  "exitCode": 0,
+  "inputs": [
+    {
+      "path": "docs/migration/lot6b-evidence/record-command.py",
+      "bytes": 3056,
+      "sha256": "da05ed5bfb355afc29a9d20e79e19e51e695f39781ece9068ce0ba0e14b7d420"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/component/attempt-02/watch.json",
+      "bytes": 1463,
+      "sha256": "80b27565c81d59d166e86a18ac5060d26be18178eaeb70943cedf9295356c9bf"
+    },
+    {
+      "path": "src/logos-engine/v6-selected-rigid.ts",
+      "bytes": 29696,
+      "sha256": "117e6191517b2126a6df4cb8dbc0f77acb7fa5da7f1c3bcbbcc838cd1545437b"
+    },
+    {
+      "path": "src/logos-engine/v6-selected-rigid-types.ts",
+      "bytes": 4586,
+      "sha256": "dace249fcb41ed2e54b87cd65e733d23bfbbb76ac65bd5f1562aaa19736710a5"
+    },
+    {
+      "path": "src/logos-engine/v6-selected-rigid-geometry.ts",
+      "bytes": 8625,
+      "sha256": "c381780144d2c159f52767b5b9b4f3731023bf37379e000b8e95c8dbb59fce66"
+    },
+    {
+      "path": "src/logos-engine/v6-selected-rigid-search.ts",
+      "bytes": 8844,
+      "sha256": "fc4777ad7d2d6c6a97ab3df2e6032bda8bb296eddfa0f89e051287f40313fd91"
+    },
+    {
+      "path": "tests/v6-selected-rigid-native.test.ts",
+      "bytes": 27404,
+      "sha256": "b4007a8c135a763544b133adab34f3aaca92c403c307c1ecda0954a3837f41d7"
+    },
+    {
+      "path": "src/logos-engine/v6-native-types.ts",
+      "bytes": 13179,
+      "sha256": "f73bde1b8f2acd291aeee32536f5e08839dcba79e470d6f435c17c79696d9887"
+    },
+    {
+      "path": "src/logos-engine/v6-native-observer.ts",
+      "bytes": 22590,
+      "sha256": "1a0ffa26548bf6c1ebbd22724731c2238dc24c84074885e832b671dbbe8dfe02"
+    },
+    {
+      "path": "src/logos-engine/v6-native-owned.ts",
+      "bytes": 6626,
+      "sha256": "b4a1eeb1cf43bb04695bce8267903cd122fe778b4b938a98b1640a9ba6ee4839"
+    },
+    {
+      "path": "src/logos-engine/v6-hash.ts",
+      "bytes": 2842,
+      "sha256": "6b86db7b533d55da900a3c65a06ec1e18547180245b3e3a2eaa837be09c669f5"
+    },
+    {
+      "path": "src/logos-engine/v6-operations.ts",
+      "bytes": 11455,
+      "sha256": "4aad959893595a1844721b93ec8897479536f95ccfa890be045656fa1e96fa06"
+    },
+    {
+      "path": "src/logos-engine/canonical.ts",
+      "bytes": 11291,
+      "sha256": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1"
+    },
+    {
+      "path": "src/logos-engine/v6-src-program.ts",
+      "bytes": 5903,
+      "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77"
+    }
+  ],
+  "inputsUnchanged": true,
+  "output": {
+    "path": "docs/migration/lot6b-evidence/component/attempt-02/execution.log.gz",
+    "bytes": 1870,
+    "sha256": "350ae1111e8353d1e14a248e1e59a98a693ee0926d8c44cf9478b863db958dc6"
+  }
+}

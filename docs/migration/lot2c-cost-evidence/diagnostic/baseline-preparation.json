@@ -1,0 +1,20 @@
+{
+  "schema": "logos-engine.native-profile-baseline-preparation.v1",
+  "preparedAt": "2026-11-09T21:07:36.972850+00:00",
+  "baselineCheckout": "/workspace/scratch/c4dd29871d33/lot2c-cost-baseline",
+  "baselineCommit": "1193377f1d574451740a7409a4102833ef868310",
+  "expectedNativeDigest": "3cd17565b114a40ed71870bf8d7875a1b91102440b92d14a9258bfa98d4f7779",
+  "copiedByteIdentical": [
+    {
+      "path": "scripts/profile-native-loop-costs.mjs",
+      "bytes": 15138,
+      "sha256": "454094f98edb345a9169e2ce61f23ea753ce9158a5f797bb93ddd8bc5d8791b9"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/README.md",
+      "bytes": 4158,
+      "sha256": "bcceb6942e48c4754995d269f48b142c91ea572962e138de5ae84c9c2aa5d0f2"
+    }
+  ],
+  "measurementStarted": false
+}

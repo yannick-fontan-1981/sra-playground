@@ -1,0 +1,39 @@
+{
+  "observedAt": "2026-11-09T14:25:39.353Z",
+  "url": "http://127.0.0.1:4173/?game=GLOB&level=4",
+  "steps": [
+    {
+      "observedAt": "2026-11-09T14:23:21.573Z",
+      "stage": "cold_start",
+      "text": "Solve with SRA.\n\nReady to run from level 1.\n\nRun to next level\nRun 16 actions\nOne action\nPause\n0\nactions\n0\nlevels solved\n0\ncompleted plans\nNew reasoning session\nReturn to Manual"
+    },
+    {
+      "observedAt": "2026-11-09T14:24:08.789Z",
+      "stage": "level_1_completed",
+      "text": "Solve with SRA.\n\nLevel completed.\n\nRun to next level\nRun 16 actions\nOne action\nPause\n5\nactions\n1\nlevels solved\n4\ncompleted plans\nNew reasoning session\nReturn to Manual",
+      "url": "http://127.0.0.1:4173/?game=GLOB&level=2"
+    },
+    {
+      "observedAt": "2026-11-09T14:25:03.609Z",
+      "stage": "level_2_completed",
+      "text": "Solve with SRA.\n\nLevel completed.\n\nRun to next level\nRun 16 actions\nOne action\nPause\n16\nactions\n2\nlevels solved\n15\ncompleted plans\nNew reasoning session\nReturn to Manual",
+      "url": "http://127.0.0.1:4173/?game=GLOB&level=3"
+    },
+    {
+      "observedAt": "2026-11-09T14:25:39.306Z",
+      "stage": "level_3_completed",
+      "text": "Solve with SRA.\n\nLevel completed.\n\nRun to next level\nRun 16 actions\nOne action\nPause\n20\nactions\n3\nlevels solved\n17\ncompleted plans\nNew reasoning session\nReturn to Manual",
+      "url": "http://127.0.0.1:4173/?game=GLOB&level=4"
+    }
+  ],
+  "visible": {
+    "board": {
+      "height": 384,
+      "width": 384
+    },
+    "heading": "Globe Track",
+    "inspectorOpen": false,
+    "panelText": "Solve with SRA.\n\nLevel completed.\n\nRun to next level\nRun 16 actions\nOne action\nPause\n20\nactions\n3\nlevels solved\n17\ncompleted plans\nNew reasoning session\nReturn to Manual"
+  },
+  "ax": "Browser tab: 4, Title: \"SRA Playground · GLOB — Symbolic Reasoning Agent\", URL: \"http://127.0.0.1:4173/?game=GLOB&level=4\".\nThe following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.\n~0 AXWebArea SRA Playground · GLOB — Symbolic Reasoning Agent, URL: 127.0.0.1:4173/?game=GLOB&level=4\n~\t\t2 link Description: Skip to the games, Value: 127.0.0.1:4173/?game=GLOB&level=4#game-select\n~\t\t\t\t7 link Description: PLAYGROUND, Value: 127.0.0.1:4173/?game=GLOB&level=4#playground\n~\t\t\t\t\t\t226 text Level completed.\n~\t\t\t\t\t\t207 button Run to next level, ID: agent-run\n~\t\t\t\t\t\t208 button Run 16 actions, ID: agent-batch\n~\t\t\t\t\t\t209 button One action, ID: agent-step\n~\t\t\t\t\t\t210 button (disabled) Pause, ID: agent-pause\n~\t\t\t\t\t\t\t227 text 20\n~\t\t\t\t\t\t\t228 text 3\n~\t\t\t\t\t\t\t229 text 17\n~\t\t\t\t\t\t218 button New reasoning session, ID: agent-new-session\nThe focused UI element is 0 AXWebArea SRA Playground · GLOB — Symbolic Reasoning Agent, URL: 127.0.0.1:4173/?game=GLOB&level=4"
+}

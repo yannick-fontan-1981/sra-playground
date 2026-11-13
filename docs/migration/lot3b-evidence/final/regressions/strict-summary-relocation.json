@@ -1,0 +1,47 @@
+{
+  "schema": "logos-engine.exact-strict-summary-relocation.v1",
+  "recordedAt": "2026-11-10T00:28:55.462074+00:00",
+  "original": {
+    "path": "docs/migration/lot3b-evidence/final/regressions/regression-summary.json",
+    "bytes": 69186,
+    "sha256": "2772268342938495ac2ad58c899a9cb45d282b6ed7fa2b77549161cdfffafbef"
+  },
+  "relocated": {
+    "path": "docs/migration/lot3b-evidence/final/regressions/strict-regression-summary.json",
+    "bytes": 69186,
+    "sha256": "2772268342938495ac2ad58c899a9cb45d282b6ed7fa2b77549161cdfffafbef"
+  },
+  "byteIdentical": true,
+  "originalStatus": "failed",
+  "retainedStatus": "failed",
+  "strictComparisonChecksPassed": 16,
+  "strictComparisonChecksExpected": 17,
+  "retainedSiblings": [
+    {
+      "path": "docs/migration/lot3b-evidence/final/regressions/rswp-038-comparison.json",
+      "bytes": 10781,
+      "sha256": "4b13d4aa54a87c7d0590affa1253ee8bc3d5f96370c66ea9797e468053508663"
+    },
+    {
+      "path": "docs/migration/lot3b-evidence/final/regressions/rswp-038-execution.json",
+      "bytes": 4945,
+      "sha256": "5ae640bedb80f756ef377ecfbc1e3ae179d03b68a49a30e1afe5e3e8eb35978e"
+    },
+    {
+      "path": "docs/migration/lot3b-evidence/final/regressions/rswp-038-output.log.gz",
+      "bytes": 2924,
+      "sha256": "76d1005d74f7aa720bcc3ded2a2aebb3d303958019033228d64e5d45da8ce470"
+    },
+    {
+      "path": "docs/migration/lot3b-evidence/final/regressions/rswp-038-passive-owner-presence.json",
+      "bytes": 1077,
+      "sha256": "353b3e42ae397e30852300d48c65d569a8b468fb35aba79a85de16d79e9c02ff"
+    },
+    {
+      "path": "docs/migration/lot3b-evidence/final/regressions/rswp-038-replay.json.gz",
+      "bytes": 2176309,
+      "sha256": "2b4971c486f742645fd26d88fdfefe5ff40b1bf87a1f6d37073de5717292548e"
+    }
+  ],
+  "qualification": "Only the strict summary filename changes. Its exact bytes and failed 16/17 result remain preserved, as do every existing sibling report and receipt. A separate qualification may examine the explicitly named empty observer-schema addition; it cannot rewrite the historical comparator result. No replacement passed regression-summary.json is created."
+}

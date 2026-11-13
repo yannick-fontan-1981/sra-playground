@@ -1,0 +1,348 @@
+TAP version 13
+# Subtest: caller oracle provenance retains exact historical captures and pinned source
+ok 1 - caller oracle provenance retains exact historical captures and pinned source
+  ---
+  duration_ms: 119.278577
+  type: 'test'
+  ...
+# Subtest: native common caller: HANO first released prefix
+    # Subtest: initial caller objects
+    ok 1 - initial caller objects
+      ---
+      duration_ms: 0.359613
+      type: 'test'
+      ...
+    # Subtest: initial caller facts
+    ok 2 - initial caller facts
+      ---
+      duration_ms: 0.103145
+      type: 'test'
+      ...
+    # Subtest: source checkpoint round-trip 1
+    ok 3 - source checkpoint round-trip 1
+      ---
+      duration_ms: 0.073191
+      type: 'test'
+      ...
+    # Subtest: acquisition returns at revision 1
+    ok 4 - acquisition returns at revision 1
+      ---
+      duration_ms: 0.061082
+      type: 'test'
+      ...
+    # Subtest: caller state before assessment at revision 1
+    ok 5 - caller state before assessment at revision 1
+      ---
+      duration_ms: 0.066511
+      type: 'test'
+      ...
+    # Subtest: caller facts before assessment at revision 1
+    ok 6 - caller facts before assessment at revision 1
+      ---
+      duration_ms: 0.089064
+      type: 'test'
+      ...
+    # Subtest: full learning assessment at revision 1
+    ok 7 - full learning assessment at revision 1
+      ---
+      duration_ms: 0.176316
+      type: 'test'
+      ...
+    # Subtest: caller state after acquisition at revision 2
+    ok 8 - caller state after acquisition at revision 2
+      ---
+      duration_ms: 0.14539
+      type: 'test'
+      ...
+    # Subtest: caller facts after acquisition at revision 2
+    ok 9 - caller facts after acquisition at revision 2
+      ---
+      duration_ms: 0.134122
+      type: 'test'
+      ...
+    # Subtest: acquisition returns at revision 2
+    ok 10 - acquisition returns at revision 2
+      ---
+      duration_ms: 0.054382
+      type: 'test'
+      ...
+    # Subtest: caller state before assessment at revision 2
+    ok 11 - caller state before assessment at revision 2
+      ---
+      duration_ms: 0.094973
+      type: 'test'
+      ...
+    # Subtest: caller facts before assessment at revision 2
+    ok 12 - caller facts before assessment at revision 2
+      ---
+      duration_ms: 0.042133
+      type: 'test'
+      ...
+    # Subtest: full learning assessment at revision 2
+    ok 13 - full learning assessment at revision 2
+      ---
+      duration_ms: 0.034872
+      type: 'test'
+      ...
+    # Subtest: caller state after acquisition at revision 3
+    ok 14 - caller state after acquisition at revision 3
+      ---
+      duration_ms: 0.030386
+      type: 'test'
+      ...
+    # Subtest: caller facts after acquisition at revision 3
+    ok 15 - caller facts after acquisition at revision 3
+      ---
+      duration_ms: 0.058028
+      type: 'test'
+      ...
+    1..15
+ok 2 - native common caller: HANO first released prefix
+  ---
+  duration_ms: 830.461792
+  type: 'test'
+  ...
+# Subtest: native common caller: public viewport exploration and acquired frontier
+    # Subtest: initial caller objects
+    ok 1 - initial caller objects
+      ---
+      duration_ms: 0.228694
+      type: 'test'
+      ...
+    # Subtest: initial caller facts
+    ok 2 - initial caller facts
+      ---
+      duration_ms: 0.048383
+      type: 'test'
+      ...
+    # Subtest: source checkpoint round-trip 1
+    ok 3 - source checkpoint round-trip 1
+      ---
+      duration_ms: 0.032529
+      type: 'test'
+      ...
+    # Subtest: actual path guard at revision 1
+    ok 4 - actual path guard at revision 1
+      ---
+      duration_ms: 0.029975
+      type: 'test'
+      ...
+    # Subtest: actual outcome guard at revision 1
+    ok 5 - actual outcome guard at revision 1
+      ---
+      duration_ms: 0.029695
+      type: 'test'
+      ...
+    # Subtest: acquisition returns at revision 1
+    ok 6 - acquisition returns at revision 1
+      ---
+      duration_ms: 0.02633
+      type: 'test'
+      ...
+    # Subtest: caller state before assessment at revision 1
+    ok 7 - caller state before assessment at revision 1
+      ---
+      duration_ms: 0.027031
+      type: 'test'
+      ...
+    # Subtest: caller facts before assessment at revision 1
+    ok 8 - caller facts before assessment at revision 1
+      ---
+      duration_ms: 0.032859
+      type: 'test'
+      ...
+    # Subtest: full learning assessment at revision 1
+    ok 9 - full learning assessment at revision 1
+      ---
+      duration_ms: 0.025368
+      type: 'test'
+      ...
+    # Subtest: caller state after acquisition at revision 2
+    ok 10 - caller state after acquisition at revision 2
+      ---
+      duration_ms: 0.025639
+      type: 'test'
+      ...
+    # Subtest: caller facts after acquisition at revision 2
+    ok 11 - caller facts after acquisition at revision 2
+      ---
+      duration_ms: 0.025498
+      type: 'test'
+      ...
+    # Subtest: source checkpoint round-trip 2
+    ok 12 - source checkpoint round-trip 2
+      ---
+      duration_ms: 0.024898
+      type: 'test'
+      ...
+    # Subtest: actual path guard at revision 2
+    ok 13 - actual path guard at revision 2
+      ---
+      duration_ms: 0.027642
+      type: 'test'
+      ...
+    # Subtest: actual outcome guard at revision 2
+    ok 14 - actual outcome guard at revision 2
+      ---
+      duration_ms: 0.024447
+      type: 'test'
+      ...
+    # Subtest: acquisition returns at revision 2
+    ok 15 - acquisition returns at revision 2
+      ---
+      duration_ms: 0.023536
+      type: 'test'
+      ...
+    # Subtest: caller state before assessment at revision 2
+    ok 16 - caller state before assessment at revision 2
+      ---
+      duration_ms: 0.023896
+      type: 'test'
+      ...
+    # Subtest: caller facts before assessment at revision 2
+    ok 17 - caller facts before assessment at revision 2
+      ---
+      duration_ms: 0.022994
+      type: 'test'
+      ...
+    # Subtest: full learning assessment at revision 2
+    ok 18 - full learning assessment at revision 2
+      ---
+      duration_ms: 0.03306
+      type: 'test'
+      ...
+    # Subtest: caller state after acquisition at revision 3
+    ok 19 - caller state after acquisition at revision 3
+      ---
+      duration_ms: 0.02608
+      type: 'test'
+      ...
+    # Subtest: caller facts after acquisition at revision 3
+    ok 20 - caller facts after acquisition at revision 3
+      ---
+      duration_ms: 0.034672
+      type: 'test'
+      ...
+    # Subtest: source checkpoint round-trip 3
+    ok 21 - source checkpoint round-trip 3
+      ---
+      duration_ms: 0.078558
+      type: 'test'
+      ...
+    # Subtest: actual path guard at revision 3
+    ok 22 - actual path guard at revision 3
+      ---
+      duration_ms: 0.037096
+      type: 'test'
+      ...
+    # Subtest: actual outcome guard at revision 3
+    ok 23 - actual outcome guard at revision 3
+      ---
+      duration_ms: 0.025498
+      type: 'test'
+      ...
+    # Subtest: acquisition returns at revision 3
+    ok 24 - acquisition returns at revision 3
+      ---
+      duration_ms: 0.025389
+      type: 'test'
+      ...
+    # Subtest: caller state before assessment at revision 3
+    ok 25 - caller state before assessment at revision 3
+      ---
+      duration_ms: 0.023475
+      type: 'test'
+      ...
+    # Subtest: caller facts before assessment at revision 3
+    ok 26 - caller facts before assessment at revision 3
+      ---
+      duration_ms: 0.024176
+      type: 'test'
+      ...
+    # Subtest: full learning assessment at revision 3
+    ok 27 - full learning assessment at revision 3
+      ---
+      duration_ms: 0.024998
+      type: 'test'
+      ...
+    # Subtest: caller state after acquisition at revision 4
+    ok 28 - caller state after acquisition at revision 4
+      ---
+      duration_ms: 0.022684
+      type: 'test'
+      ...
+    # Subtest: caller facts after acquisition at revision 4
+    ok 29 - caller facts after acquisition at revision 4
+      ---
+      duration_ms: 0.023004
+      type: 'test'
+      ...
+    1..29
+ok 3 - native common caller: public viewport exploration and acquired frontier
+  ---
+  duration_ms: 393.714136
+  type: 'test'
+  ...
+# Subtest: the real common runtime retains shared state through the opt-in immutable path
+ok 4 - the real common runtime retains shared state through the opt-in immutable path
+  ---
+  duration_ms: 2160.109219
+  type: 'test'
+  ...
+# Subtest: real factory registers the four interfaces in DRM order and executes Word through SRC, WHY/ACT, acquisition and V7 activation
+ok 5 - real factory registers the four interfaces in DRM order and executes Word through SRC, WHY/ACT, acquisition and V7 activation
+  ---
+  duration_ms: 1607.098538
+  type: 'test'
+  ...
+# Subtest: native SRC/service/controller replays public HANO transitions without a Python solver
+ok 6 - native SRC/service/controller replays public HANO transitions without a Python solver
+  ---
+  duration_ms: 40142.946627
+  type: 'test'
+  ...
+# Subtest: native SRC/service/controller replays public SYME transitions without a Python solver
+ok 7 - native SRC/service/controller replays public SYME transitions without a Python solver
+  ---
+  duration_ms: 36294.991937
+  type: 'test'
+  ...
+# Subtest: native SRC/service/controller replays public DNOI transitions without a Python solver
+ok 8 - native SRC/service/controller replays public DNOI transitions without a Python solver
+  ---
+  duration_ms: 25815.078833
+  type: 'test'
+  ...
+# Subtest: native service binds one immutable ticket, preserves it on resume and burns it after the witnessed action
+ok 9 - native service binds one immutable ticket, preserves it on resume and burns it after the witnessed action
+  ---
+  duration_ms: 4.162104
+  type: 'test'
+  ...
+# Subtest: bad outcome identity, timing and animation packets do not consume a native service authorization
+ok 10 - bad outcome identity, timing and animation packets do not consume a native service authorization
+  ---
+  duration_ms: 4.705866
+  type: 'test'
+  ...
+# Subtest: a native backend state failure closes its authority and never resumes from partial evidence
+ok 11 - a native backend state failure closes its authority and never resumes from partial evidence
+  ---
+  duration_ms: 9.823934
+  type: 'test'
+  ...
+# Subtest: native runtime defers family recording until a sealed prefix and ignores paused wall time
+ok 12 - native runtime defers family recording until a sealed prefix and ignores paused wall time
+  ---
+  duration_ms: 20.188437
+  type: 'test'
+  ...
+1..12
+# tests 56
+# suites 0
+# pass 56
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 109987.851022

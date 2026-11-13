@@ -1,0 +1,68 @@
+{
+  "schema": "logos-engine.lot6b.single-replay-terminal-observation.v1",
+  "case": "fogw-051",
+  "game": "FOGW",
+  "startedAt": "2026-11-11T19:19:04.806286+00:00",
+  "finishedAt": "2026-11-11T19:20:58.255130+00:00",
+  "elapsedSeconds": 113.4484505750006,
+  "exitCode": 0,
+  "command": [
+    "flock",
+    "-s",
+    "-n",
+    "/workspace/shared/sra-coordination/performance.lock",
+    "python",
+    "-B",
+    "docs/migration/lot6b-evidence/record-command.py",
+    "--receipt",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/fogw-051/bounded-command.json",
+    "--watch-manifest",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/fogw-051/replay-watch-attempt02.json",
+    "--",
+    "timeout",
+    "--signal=KILL",
+    "630s",
+    "env",
+    "NODE_OPTIONS=--max-old-space-size=1536",
+    "python",
+    "-B",
+    "scripts/run-recorded-public-regressions.py",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/fogw-051/case-manifest.json",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/fogw-051",
+    "--workers",
+    "1",
+    "--timeout-seconds",
+    "600"
+  ],
+  "declaredBy": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-watch-addendum-02.json",
+  "quietSeenDuringCase": [],
+  "nextCaseQueued": false,
+  "passed": true,
+  "boundedReceipt": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/fogw-051/bounded-command.json",
+    "status": "passed",
+    "exitCode": 0,
+    "inputsUnchanged": true,
+    "elapsedSeconds": 112.40135632900274
+  },
+  "regressionSummary": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/fogw-051/regressions/regression-summary.json",
+    "status": "passed",
+    "executionInputsUnchanged": true,
+    "results": [
+      {
+        "case": "fogw-051",
+        "passed": true,
+        "comparisonPassed": true,
+        "comparisonChecks": 17,
+        "failedChecks": [],
+        "nativeSourceBeforeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+        "nativeSourceAfterDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+        "nativeSourceUnchanged": true,
+        "immutableInputsUnchanged": true,
+        "elapsedSeconds": 103.92664741100089,
+        "timedOut": false
+      }
+    ]
+  }
+}

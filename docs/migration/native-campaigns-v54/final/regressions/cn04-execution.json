@@ -1,0 +1,116 @@
+{
+  "game": "CN04",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "scripts/replay-v53-public-regression.mjs",
+    "docs/migration/native-campaigns-v53/attempt7/cn04-campaign.json.gz",
+    "docs/migration/native-campaigns-v53/attempt7/cn04-public-trace.json.gz",
+    "docs/migration/native-campaigns-v54/final/regressions/cn04-replay.json.gz"
+  ],
+  "startedAt": "2026-11-09T12:32:51.987490+00:00",
+  "finishedAt": "2026-11-09T12:34:38.270346+00:00",
+  "elapsedSeconds": 106.28286032399956,
+  "exitCode": 0,
+  "timeoutSeconds": 2400,
+  "timedOut": false,
+  "baseline": {
+    "path": "docs/migration/native-campaigns-v53/attempt7/cn04-campaign.json.gz",
+    "sha256": "1116a50e5642b962964d5f49e51a777f7f7224ac0d85d525ba772b3a65dce6a3",
+    "bytes": 35111
+  },
+  "trace": {
+    "path": "docs/migration/native-campaigns-v53/attempt7/cn04-public-trace.json.gz",
+    "sha256": "f156b22facec2c20cbfe0886b9b51253a1bea9fff2c57f2281708fc9897cc03d",
+    "bytes": 21107
+  },
+  "output": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/cn04-output.log.gz",
+    "sha256": "b48edb5c7db596b9dd07bd46137006819fe66b027b69279231cf43e6512b0255",
+    "bytes": 5599
+  },
+  "passed": true,
+  "memory": {},
+  "report": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/cn04-replay.json.gz",
+    "sha256": "f0b73f0555cf3dbd2ad8cd68d695e47cf67b292b42e68415ac5256b22c9e1b1f",
+    "bytes": 134037
+  },
+  "status": "passed",
+  "actions": 73,
+  "prefixes": 29,
+  "final": {
+    "actions": 73,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 89.02296802700002,
+    "prefixes": 29,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 73,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 147,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 30
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 30
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 30
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 16
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 10
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 32
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology",
+        "attention_parent_return",
+        "acquire_control_for_target"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 73,
+      "resume": 28
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.28.0"
+  },
+  "comparison": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/cn04-comparison.json",
+    "sha256": "c838c70830e1b2596b7190d4e3c4693e121d3799c71f223414d3babb404cc2fe",
+    "bytes": 9092
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "immutableInputsUnchanged": true
+}

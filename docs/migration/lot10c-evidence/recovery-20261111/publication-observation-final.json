@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.lot10c.recovery-publication-observation.v1",
+  "observedAt": "2026-11-11T21:31:19.170Z",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "siteVersion": 103,
+  "nativeVersion": "0.62.0",
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_c8356cd5ad648191a646ac0a9c059a24",
+  "deploymentId": "appgdep_6af49db69234819195c9c093cb79a7da",
+  "publishedCommit": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+  "liveUrl": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "accessMode": "custom",
+  "ownerPrivate": true,
+  "accessRevision": 3,
+  "externalVisitorCount": 0,
+  "allowedUserCount": 1,
+  "observationBasis": "Fresh get_site and list_site_versions. Same published source, deployment, access revision and audience as the prior verified recovery observation; native0.62 comes from that unchanged published source. No version save or deploy performed.",
+  "preparedCandidateVersion": "0.66.0",
+  "candidatePublished": false
+}

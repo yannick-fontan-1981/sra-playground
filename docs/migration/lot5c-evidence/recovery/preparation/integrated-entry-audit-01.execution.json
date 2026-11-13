@@ -1,0 +1,30 @@
+{
+  "schema": "logos-engine.lot5c.command-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T12:44:08.340178+00:00",
+  "command": [
+    "node",
+    "scripts/audit-v6-entry-points.ts"
+  ],
+  "cwd": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "timeoutSeconds": 120.0,
+  "wrapper": {
+    "path": "docs/migration/lot5c-evidence/run-evidence-command.py",
+    "bytes": 3904,
+    "sha256": "99b16a35eac1f12acb3063e43d303ffc020b3339109e22eff1f807d1e87e47db"
+  },
+  "finishedAt": "2026-11-11T12:44:09.113391+00:00",
+  "durationSeconds": 0.770939731999988,
+  "exitCode": 0,
+  "timedOut": false,
+  "log": {
+    "path": "docs/migration/lot5c-evidence/recovery/preparation/integrated-entry-audit-01.log",
+    "bytes": 294,
+    "sha256": "0ecbeca251bc0ee623433bc1800b5e553d5097111d4cbd07bdb8ce6a5d7e19fb"
+  },
+  "compressedLog": {
+    "path": "docs/migration/lot5c-evidence/recovery/preparation/integrated-entry-audit-01.log.gz",
+    "bytes": 180,
+    "sha256": "bf4ad798d388b215e3e32d085bff17bf2afd5b8f9c4c6073c6327dcddb1085d9"
+  }
+}

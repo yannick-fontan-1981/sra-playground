@@ -10,6 +10,8 @@ const architecture = JSON.parse(await readFile(resolve(root, 'content/architectu
 const catalog = JSON.parse(await readFile(resolve(root, 'content/videos.json'), 'utf8'));
 const benchmark = JSON.parse(await readFile(resolve(root, 'content/arc-agi-3.json'), 'utf8'));
 const symbolic = JSON.parse(await readFile(resolve(root, 'content/symbolic-reasoning.json'), 'utf8'));
+const motivation = JSON.parse(await readFile(resolve(root, 'content/motivation.json'), 'utf8'));
+const contact = JSON.parse(await readFile(resolve(root, 'content/contact.json'), 'utf8'));
 const pages = architecture.pages;
 const videos = [...catalog.videos].sort((a, b) => a.episode - b.episode);
 const siteOrigin = 'https://sra-playground.yannick-fontan.chatgpt.site';
@@ -75,11 +77,111 @@ function documentPage({ title, description, path, active, body, script = '/src/r
     <a class="skip-link" href="#content">Skip to content</a>
     ${renderSiteHeader(active)}
     ${body}
-    <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Yannick Fontan</span><div><a href="/">Play the games ${arrow}</a>${externalLink(catalog.channelUrl, 'Yanik_AI')}${externalLink(`${repo}/blob/main/THIRD_PARTY_NOTICES.md`, 'Licenses & notices')}</div></footer>
+    <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Yannick Fontan</span><div><a href="/">Play the games ${arrow}</a><a href="/contact.html">Contact ${arrow}</a>${externalLink(catalog.channelUrl, 'Yanik_AI')}${externalLink(`${repo}/blob/main/THIRD_PARTY_NOTICES.md`, 'Licenses & notices')}</div></footer>
     <script type="module" src="${script}"></script>
   </body>
 </html>
 `;
+}
+function motivationTable(table) {
+  if (!table) return '';
+  return `<div class="motivation-commitments"><table role="table">
+    <caption>${escape(table.caption)}</caption>
+    <thead role="rowgroup"><tr role="row">${table.headers.map(header => `<th scope="col" role="columnheader">${escape(header)}</th>`).join('')}</tr></thead>
+    <tbody role="rowgroup">${table.rows.map(row => `<tr role="row">${row.map((cell, index) => index === 0
+      ? `<th scope="row" role="rowheader">${escape(cell)}</th>`
+      : `<td role="cell"><span class="motivation-cell-label" aria-hidden="true">${escape(table.headers[index])}</span>${escape(cell)}</td>`).join('')}</tr>`).join('')}</tbody>
+  </table></div>`;
+}
+function motivationPath(stages) {
+  if (!stages?.length) return '';
+  return `<ol class="motivation-path">${stages.map((stage, index) => `<li>
+    <span class="motivation-path-number" aria-hidden="true">${number(index + 1)}</span>
+    <div><p class="motivation-path-status">${escape(stage.status)}</p><h4>${escape(stage.title)}</h4>
+      <p>${escape(stage.text)}</p><p class="motivation-path-evidence"><strong>Milestone</strong>${escape(stage.evidence)}</p>
+      ${stage.link ? `<div class="reading-sources"><a href="${escape(stage.link.href)}">${escape(stage.link.label)}${arrow}</a></div>` : ''}
+    </div>
+  </li>`).join('')}</ol>`;
+}
+function renderMotivation() {
+  let stepNumber = 0;
+  const parts = motivation.parts.map(part => ({ ...part, steps: part.steps.map(step => ({ ...step, number: ++stepNumber })) }));
+  return documentPage({title:motivation.title,description:motivation.description,path:'/motivation.html',active:'motivation',body:`
+    <main class="reading-layout motivation-layout wrap">
+      <aside class="reading-sidebar motivation-sidebar">
+        <a class="sidebar-heading" href="#content">Start with Motivation</a>
+        <nav aria-label="Motivation steps">${parts.map(part => `
+          <a class="motivation-nav-part" href="#${escape(part.id)}">${escape(part.label)} · ${escape(part.title)}</a>
+          ${part.steps.map(step => `<a href="#${escape(step.id)}"><span>${number(step.number)}</span>${escape(step.navTitle)}</a>`).join('')}
+        `).join('')}</nav>
+        <a class="sidebar-series" href="/symbolic-reasoning.html">Continue: the method ${arrow}</a>
+      </aside>
+      <article class="reading-article motivation-article" id="content">
+        <header class="reading-header">
+          <p class="reading-breadcrumb">The beginning <span>/</span> ${escape(motivation.breadcrumb)}</p>
+          <h1>${escape(motivation.title)}</h1>
+          <p class="reading-deck">${escape(motivation.deck)}</p>
+          <p class="motivation-byline">A personal statement by ${escape(motivation.author)}</p>
+        </header>
+        <p class="motivation-pitch">${escape(motivation.pitch)}</p>
+        <div class="reading-intro">${paragraphs(motivation.intro)}</div>
+        <nav class="motivation-route" aria-label="The three parts of this motivation">${parts.map(part => `
+          <a href="#${escape(part.id)}"><span>Steps ${number(part.steps[0].number)}–${number(part.steps.at(-1).number)}</span><strong>${escape(part.title)}</strong>${arrow}</a>
+        `).join('')}</nav>
+        ${parts.map(part => `
+          <section class="motivation-part" id="${escape(part.id)}" aria-labelledby="${escape(part.id)}-heading">
+            <header class="motivation-part-heading"><p>${escape(part.label)}</p><h2 id="${escape(part.id)}-heading">${escape(part.title)}</h2><p>${escape(part.description)}</p></header>
+            ${part.steps.map(step => `
+              <section class="motivation-step" id="${escape(step.id)}" aria-labelledby="${escape(step.id)}-heading">
+                <div class="motivation-step-heading"><span class="motivation-step-number" aria-label="Step ${step.number}">${number(step.number)}</span><h3 id="${escape(step.id)}-heading">${escape(step.title)}</h3></div>
+                <div class="motivation-step-body">
+                  ${paragraphs(step.paragraphs)}
+                  ${motivationTable(step.table)}
+                  ${step.items?.length ? `<ul>${step.items.map(item => `<li>${escape(item)}</li>`).join('')}</ul>` : ''}
+                  ${motivationPath(step.stages)}
+                  ${paragraphs(step.after)}
+                  ${step.consequence ? `<div class="motivation-consequence"><p class="motivation-consequence-label">${escape(step.consequenceLabel ?? 'The consequence')}</p><p>${escape(step.consequence)}</p></div>` : ''}
+                  ${sources(step.sources)}
+                  ${step.links?.length ? `<div class="reading-sources">${step.links.map(link => `<a href="${escape(link.href)}">${escape(link.label)}${arrow}</a>`).join('')}</div>` : ''}
+                </div>
+              </section>
+            `).join('')}
+          </section>
+        `).join('')}
+        <section class="motivation-closing" aria-labelledby="motivation-closing-title">
+          <h2 id="motivation-closing-title">${escape(motivation.closing.title)}</h2>
+          <p>${escape(motivation.closing.text)}</p>
+          <nav class="motivation-next" aria-label="Continue exploring SRA">${motivation.closing.links.map(link => `<a href="${escape(link.href)}"><small>${escape(link.label)}</small><span>${escape(link.title)}${arrow}</span></a>`).join('')}</nav>
+          <a class="motivation-back" href="#content">Back to the beginning ↑</a>
+        </section>
+      </article>
+    </main>`});
+}
+function renderContact() {
+  const envelope = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg>';
+  return documentPage({title:contact.title,description:contact.description,path:'/contact.html',active:'contact',body:`
+    <main class="contact-page wrap" id="content">
+      <header class="reading-header contact-header">
+        <p class="reading-breadcrumb">SRA Playground <span>/</span> Get in touch</p>
+        <h1>${escape(contact.title)}</h1>
+        <p class="reading-deck">${escape(contact.deck)}</p>
+      </header>
+      <div class="contact-layout">
+        <section class="contact-about" aria-labelledby="contact-name">
+          <p class="contact-kicker">About me</p>
+          <h2 id="contact-name">${escape(contact.name)}</h2>
+          <p class="contact-role">${escape(contact.role)}</p>
+          ${paragraphs(contact.bio)}
+        </section>
+        <aside class="contact-card" aria-labelledby="contact-email-heading">
+          <p class="contact-kicker">Get in touch</p>
+          <h2 id="contact-email-heading">Let’s talk.</h2>
+          <p>${escape(contact.invitation)}</p>
+          <a class="contact-email" href="mailto:${escape(contact.email)}">${envelope}<span>${escape(contact.email)}</span>${arrow}</a>
+          <div class="contact-links">${externalLink(repo, 'GitHub')}${externalLink(catalog.channelUrl, 'Yanik_AI on YouTube')}</div>
+        </aside>
+      </div>
+    </main>`});
 }
 function chapterNav(current) {
   return `<aside class="reading-sidebar"><a class="sidebar-heading" href="/architecture.html">Architecture</a><nav aria-label="Architecture chapters">${pages.map((page, index) => `<a href="${archPath(page)}"${page.slug === current ? ' class="is-current" aria-current="page"' : ''}><span>${number(index)}</span>${escape(page.navTitle)}</a>`).join('')}</nav><a class="sidebar-series" href="/videos.html">Video series ${arrow}</a></aside>`;
@@ -217,8 +319,10 @@ async function save(path, html) {
   await writeFile(target, html.replace(/[\t ]+$/gm, ''));
 }
 for (const [index,page] of pages.entries()) await save(archPath(page),renderChapter(page,index));
+await save('/motivation.html',renderMotivation());
 await save('/arc-agi-3.html',renderBenchmark());
 await save('/symbolic-reasoning.html',renderSymbolicReasoning());
 await save('/videos.html',renderVideoIndex());
+await save('/contact.html',renderContact());
 for (const [index,video] of videos.entries()) await save(videoPath(video),renderVideo(video,index));
-console.log(`Generated the ARC-AGI-3 and Symbolic Reasoning introductions, ${pages.length} architecture pages, ${videos.length} episode pages, and the video index.`);
+console.log(`Generated Motivation, the ARC-AGI-3 and Symbolic Reasoning introductions, ${pages.length} architecture pages, ${videos.length} episode pages, the video index, and the Contact page.`);

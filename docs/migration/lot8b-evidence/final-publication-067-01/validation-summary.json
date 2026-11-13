@@ -1,0 +1,144 @@
+{
+  "schema": "logos-engine.lot8b.final-publication-qualification.v1",
+  "recordedAt": "2026-11-12T12:52:37.952329+00:00",
+  "status": "published_successfully_and_lease_released",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "siteVersion": 108,
+  "nativeVersion": "0.67.0",
+  "publishedSourceCommit": "8462204043aa368faa7df280d796bb706eb53b38",
+  "nativeDigest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+  "nativeFiles": 331,
+  "registeredEntries": 69,
+  "entryDenominator": 76,
+  "registeredMaterialEntries": 26,
+  "materialDenominator": 33,
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_3d6cb049e7d08191882f1d0a7fed8343",
+  "deploymentId": "appgdep_6af5b61c537c8191b0a7252d3de9a4f9",
+  "deploymentStatus": "succeeded",
+  "access": {
+    "audience": "owner_private",
+    "preserved": true,
+    "mode": "custom",
+    "revision": 3,
+    "allowedUserCount": 1,
+    "allowedGroupCount": 0,
+    "externalVisitorCount": 0,
+    "freshCheckUnderLease": true,
+    "privateBackendEnforcementSucceeded": true
+  },
+  "sourceWorkflow": {
+    "result": {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/live-01/source-workflow-result.json",
+      "bytes": 1461,
+      "sha256": "9a4e03626378e82b7c53a1d5cd5c9c3ab66ddd9246a818fbe016376cd8e6bf44"
+    },
+    "ordinaryPushVerified": true,
+    "forcedPush": false,
+    "sourceHeadMatchedBeforeAndAfterLease": true,
+    "commands": [],
+    "successfulBuildReusedWith2886InputsAnd74FilesUnchanged": true
+  },
+  "archive": {
+    "submitted": {
+      "path": "/tmp/lot8b-final067-publication.tar",
+      "bytes": 14887822,
+      "sha256": "4a2db5fdc00ec78e49197bc24dbde359ef435fb990c9c69ce186b5a288b1966a"
+    },
+    "submittedUnchangedAfterSuccess": true,
+    "localDecompressedTar": {
+      "bytes": 30187520,
+      "sha256": "2c5e5b8a9153febeeddfd65afdbefcd51151f340bb8e4056907db49f7e5e54f4"
+    },
+    "verifiedFiles": 75,
+    "all74BuildFilesExact": true,
+    "hostingManifestSourceBytesExactAtOfficialArchivePath": true,
+    "officialHostingManifestPath": "dist/.openai/hosting.json",
+    "providerRepresentation": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000008940820eaea1471f0975f575",
+      "content_hash": "sha256:56eab1570b1cb343a4b40dbb6359a52bfbffcadb1a973a4601175678e5ed54a0",
+      "size_bytes": 30187520,
+      "file_count": 75
+    },
+    "providerArchiveByteIdentityToSubmittedContainerAsserted": false,
+    "representationQualification": "Native Sites metadata describes an uncompressed tar container. Its byte length equals local decompressed tar and its file count is75; the provider content hash differs from both local container hashes. No byte identity of those container representations is asserted. Publication provenance is the native source/deployment binding and the exact locally supplied verified archive, not an invented matching provider hash."
+  },
+  "retainedVerificationAttempt": {
+    "firstArchiveReaderExpectation": "repository manifest path used instead of official staged archive path",
+    "firstAttemptExitCode": 1,
+    "archiveOrBuildChanged": false,
+    "officialPackageHelperReadBeforeCorrectedVerification": true,
+    "secondVerification": "passed all75 exact files",
+    "archiveRepackaged": false,
+    "nativeExecution": false
+  },
+  "cost": {
+    "officialCostAccepted": true,
+    "baselineSiteVersion": 107,
+    "baselineNativeVersion": "0.66.0",
+    "baselineSourceCommit": "4ff7bf45286a8a19d34401988adca587253ae41e",
+    "STCK_global_relative_increase": -0.006949236586979435,
+    "SMLP_global_relative_increase": -0.018033786710736077,
+    "measuredSessions": 32,
+    "warmupSessions": 8,
+    "excludedSessions": 0,
+    "acceptedLocalRestorationOverruns": 2,
+    "pooledPhaseOverruns": 0,
+    "evidence": {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/validation-summary.json",
+      "bytes": 8781,
+      "sha256": "88b80e302c424ab38f574017a3f0255a11db913e82dfabd6a8be7f8ff0d830f3"
+    }
+  },
+  "publicationLease": {
+    "lease": "lot8b-publication-2-a2a2829740b1",
+    "maximumSeconds": 300,
+    "exclusiveSeconds": 166.524467,
+    "singleNonblockingAcquisition": true,
+    "peerAvailabilityWait": false,
+    "status": "released_by_owner",
+    "finalInputIntegrity": "passed",
+    "descriptorClosed": true,
+    "sameLockFile": true,
+    "lockFileRemoved": false,
+    "lockFileReplaced": false
+  },
+  "evidence": {
+    "lease": {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/live-01/lease.json",
+      "bytes": 2111,
+      "sha256": "06cc10eec335e92cc3e35f8baf9292116d7b01d6392344ee4a9a14318b8b51d0"
+    },
+    "archive": {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/live-01/archive-verification.json",
+      "bytes": 12922,
+      "sha256": "a40d73a5c94de56c0d21c3e4a8d53dbac829cc07875362e8e7cb3f137fc9fc61"
+    },
+    "firstArchiveVerificationFailure": {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/live-01/archive-verification-attempt-01.json",
+      "bytes": 976,
+      "sha256": "e8d7994f5d3a78acbea3627c30562294aefcb08386ae936c4afa8018f8f2c725"
+    },
+    "underLeaseObservation": {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/live-01/under-lease-publication-observation.json",
+      "bytes": 676,
+      "sha256": "99d1179b0e2a8bb9103cdd21403e3870cb9ff429c00ddacdc1ec0214e0c54680"
+    },
+    "deployment": {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/live-01/native-deployment-result.json",
+      "bytes": 1042,
+      "sha256": "ccc9aceaa5b59471dd93d81b97e5e388553384c40062df6b7024c1d6edee054d"
+    },
+    "savedVersion": {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/live-01/saved-version-observation.json",
+      "bytes": 792,
+      "sha256": "4e76c3efb80b4f61368931bba6e68ebdd833ea038512c1853eb7d4cf847668fa"
+    }
+  },
+  "browserVisualInspectionPerformedForPublication": false,
+  "deploymentVerifiedByNativeTerminalSuccess": true,
+  "terminalDeploymentRepollPerformed": false,
+  "nextStep": "Lot11: qualify the positive public64x64 BranchRouting service/tickets/worker path, then restoration and long sessions under a separately declared bounded scope; preserve existing proof limits and all remaining lane ownership.",
+  "LKEY": "permanently_closed"
+}

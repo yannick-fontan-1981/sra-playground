@@ -1,0 +1,28 @@
+{
+  "operation": "pack",
+  "directory": "docs/migration/lot4c-evidence/performance-integrated",
+  "partBytes": 900000,
+  "verified": [
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/owner-graphs-baseline.json.gz",
+      "sha256": "fce5a112c89dabf3c4a45fac08552b167efaf90519ecc2a0e2623625623f6276",
+      "bytes": 5035997,
+      "manifest": "docs/migration/lot4c-evidence/performance-integrated/owner-graphs-baseline.json.gz.parts.json",
+      "parts": 6,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/owner-graphs-candidate.json.gz",
+      "sha256": "7e436a875a38e47a7056a74b22094079e214202aed38043a874cc817e9ffd722",
+      "bytes": 5052386,
+      "manifest": "docs/migration/lot4c-evidence/performance-integrated/owner-graphs-candidate.json.gz.parts.json",
+      "parts": 6,
+      "restored": false
+    }
+  ],
+  "gitignoreEntriesAdded": [
+    "/docs/migration/lot4c-evidence/performance-integrated/owner-graphs-baseline.json.gz",
+    "/docs/migration/lot4c-evidence/performance-integrated/owner-graphs-candidate.json.gz"
+  ],
+  "qualification": "Exact byte transport only; no agent result is regenerated or reinterpreted."
+}

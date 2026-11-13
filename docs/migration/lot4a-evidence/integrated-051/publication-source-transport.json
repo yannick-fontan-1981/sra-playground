@@ -1,0 +1,72 @@
+{
+  "schema": "logos-engine.lot4a-source-transport-resolution.v1",
+  "status": "completed_without_evidence_loss",
+  "recordedAt": "2026-11-10 20:14:10 UTC",
+  "initialFailure": "docs/migration/lot4a-evidence/planning/publication-push-size-incident.json",
+  "plan": "docs/migration/lot4a-evidence/planning/publication-bounded-source-push-plan.json",
+  "successfulHelperCalls": [
+    {
+      "step": 0,
+      "result": {
+        "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+        "checkout_path": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+        "commit_sha": "025b8000265f75441aaf57e62514c0b580b62218",
+        "archive": "/workspace/sites/sra-lot4a-20261110/lot4a-native-051-transport-0.tar"
+      }
+    },
+    {
+      "step": 1,
+      "result": {
+        "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+        "checkout_path": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+        "commit_sha": "e576b5b7010c38bfa10c6fa6d7ebf6678f7a4c53",
+        "archive": "/workspace/sites/sra-lot4a-20261110/lot4a-native-051-transport-1.tar"
+      }
+    },
+    {
+      "step": 2,
+      "result": {
+        "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+        "checkout_path": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+        "commit_sha": "f3d7dbcfaf2120f5f7fd1ae605f1b3d14fa58a4e",
+        "archive": "/workspace/sites/sra-lot4a-20261110/lot4a-native-051-transport-2.tar"
+      }
+    },
+    {
+      "step": 3,
+      "result": {
+        "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+        "checkout_path": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+        "commit_sha": "c96079d645072f49faa60e5a7f2b2de9e097e183",
+        "archive": "/workspace/sites/sra-lot4a-20261110/lot4a-native-051-transport-3.tar"
+      }
+    },
+    {
+      "step": 4,
+      "result": {
+        "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+        "checkout_path": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+        "commit_sha": "a52ef3d8396eb051d6d42d3388072fe0bf2a2d9e",
+        "archive": "/workspace/sites/sra-lot4a-20261110/lot4a-native-051-deploy.tar"
+      }
+    }
+  ],
+  "allExitCodes": 0,
+  "normalFastForwardPushesOnly": true,
+  "forcePush": false,
+  "originalCommitsRetained": [
+    "025b8000265f75441aaf57e62514c0b580b62218",
+    "ef2febda6f62f4e31938b1477567c5379e6aec54",
+    "8fede9d25b61a3bc4006821d1dfb31663cb7cac1"
+  ],
+  "finalCommit": "a52ef3d8396eb051d6d42d3388072fe0bf2a2d9e",
+  "finalTree": "37657cfc02f2bb4c43ef9854e99205f9b8afc070",
+  "retainedTargetTree": "37657cfc02f2bb4c43ef9854e99205f9b8afc070",
+  "finalTreeExactlyEqualToRetainedTarget": true,
+  "originalRawEvidenceRemoved": false,
+  "localExclusionRestored": true,
+  "nativeTestBuildInputsChanged": false,
+  "firstActualSiteDeploymentVersion": 80,
+  "intermediateSiteDeployments": 0,
+  "qualification": "Per-step raw missing-object bounds include all missing ancestry; they are not reported as observed network pack sizes. All standard-helper source pushes/package calls succeeded and verified the remote commit. The original oversized attempt remains failed."
+}

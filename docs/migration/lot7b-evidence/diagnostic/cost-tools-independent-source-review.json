@@ -1,0 +1,146 @@
+{
+  "schema": "logos-engine.lot7b-cost-tools-independent-source-review.v1",
+  "recordedOn": "2026-11-10",
+  "status": "source_review_completed_with_nonblocking_reservations",
+  "reviewer": "/root/merge_feedback_evidence",
+  "arithmeticSecondReader": "/root/merge_feedback_evidence/cost_arithmetic_review",
+  "checkout": "/workspace/sites/sra-lot7b-20261110/.sites-checkout",
+  "scope": "Independent premeasurement source review of the seven lot 7B owner-cost tools; no cost result is evaluated or asserted.",
+  "method": {
+    "sourceReading": true,
+    "textualDiffs": true,
+    "syntaxCheckExecuted": false,
+    "generatorExecuted": false,
+    "testsExecuted": false,
+    "runtimeExecuted": false,
+    "archiveDecoded": false,
+    "fingerprintsRecomputed": false,
+    "measurementExecuted": false,
+    "reviewedToolsModified": false,
+    "nativeSourceModified": false,
+    "coordination": "Read/diff/text only during renewed lot 5A quiet window. This receipt is the sole new file from this review. No active compute process was started.",
+    "sourceBindingLimit": "Tool fingerprints were not recomputed during quiet. The final declaration/contract must pin the exact reviewed tool bytes; line references below identify the text read, not a new frozen execution receipt."
+  },
+  "reviewedFiles": [
+    "docs/migration/lot7b-evidence/prepare-cost-protocol.py",
+    "docs/migration/lot7b-evidence/capture-cost-owner-graphs.mjs",
+    "docs/migration/lot7b-evidence/record-owner-source-inventory.mjs",
+    "docs/migration/lot7b-evidence/qualify-cost-owner-graphs.mjs",
+    "docs/migration/lot7b-evidence/consolidate-owner-costs.mjs",
+    "docs/migration/lot7b-evidence/review-owner-costs.py",
+    "docs/migration/lot7b-evidence/owner-cost-contract.md"
+  ],
+  "comparisonSources": [
+    "The corresponding seven retained files in docs/migration/lot7a-evidence",
+    "docs/migration/lot7a-evidence/consolidate-owner-costs-io-v1.mjs",
+    "docs/migration/lot7a-evidence/review-owner-costs-io-v1.py",
+    "scripts/measure-native-loop-costs.mjs",
+    "src/logos-engine/v6-symbol-transactions.ts",
+    "src/logos-engine/v6-native-state-graph.ts",
+    "src/logos-engine/v6-knowledge-store.ts"
+  ],
+  "findings": [
+    {
+      "id": "protocol_and_exact_frozen_sources",
+      "result": "conforms_by_source_reading",
+      "evidence": ["prepare-cost-protocol.py:194-246", "prepare-cost-protocol.py:249-357"],
+      "detail": "Preparation verifies the real baseline and candidate native inventories against retained manifests, preserves a distinct published baseline checkout, binds the candidate archive, verifies the seven historical tools and exact historical cases, and writes exclusive declaration outputs. It distinguishes a source-byte digest from a Git HEAD that is ancestry only. Published Site identity remains supplied and verified separately by the delivery owner."
+    },
+    {
+      "id": "fixed_sessions_actions_and_warmup_exclusion",
+      "result": "conforms_by_source_reading",
+      "evidence": ["consolidate-owner-costs.mjs:430-436", "consolidate-owner-costs.mjs:508-537", "consolidate-owner-costs.mjs:593-618", "review-owner-costs.py:607-650", "review-owner-costs.py:738-745"],
+      "detail": "Four ABBA executions contain two games, each with one three-action warmup and four measured trials. This gives 32 measured sessions and 400 measured actions: eight STCK sessions at 10 actions and eight SMLP sessions at 15 actions for each version. Only eight warmups and their 24 actions are excluded from measured duration statistics. All warmups remain in the structural and session ledgers. Exact counts and order are asserted before paired iteration; no Python zip truncation was found."
+    },
+    {
+      "id": "pooled_per_game_strict_global_budget",
+      "result": "conforms_by_source_reading",
+      "evidence": ["consolidate-owner-costs.mjs:120-131", "consolidate-owner-costs.mjs:593-619", "review-owner-costs.py:150-153", "review-owner-costs.py:823-850"],
+      "detail": "Each game's eight complete session durations per version are pooled across both cohorts before the median is taken. JS uses decimal rational BigInt comparison and Python uses Decimal to require candidate median strictly less than 1.1 times baseline median. Equality at +10 percent fails. Acceptance requires both games; neither a favorable cohort nor another game compensates for an overrun. No measured outlier is discarded and no owner-cost correction is subtracted."
+    },
+    {
+      "id": "historical_phase_diagnostics_preserved",
+      "result": "conforms_by_source_reading",
+      "evidence": ["consolidate-owner-costs.mjs:288-323", "consolidate-owner-costs.mjs:567-590", "review-owner-costs.py:104-147", "review-owner-costs.py:782-866"],
+      "detail": "The eight historical phases, cohort and pooled distributions, observed dispersion, and phase overruns are reproduced independently. The historical diagnostic phase rule remains <=10 percent; the separate global rule is strictly <10 percent. Empirical nearest-rank p95 is withheld below 20 samples, including the eight session durations. Diffs from 7A and its I/O variants do not change arithmetic, pooling, ledgers, signatures, or thresholds."
+    },
+    {
+      "id": "four_predeclared_functional_forms",
+      "result": "conforms_by_source_reading",
+      "evidence": ["capture-cost-owner-graphs.mjs:128-164", "capture-cost-owner-graphs.mjs:233-268", "consolidate-owner-costs.mjs:189-285", "review-owner-costs.py:375-453"],
+      "detail": "The fixture has exactly STCK warmup, STCK measured, SMLP warmup, and SMLP measured, in this order. Warmups use three actions; measured forms use 10 and 15. Only the measured forms perform three actual terminal inspections. The capture computes each command before supplying the corresponding retained public return. Captures contain 31 functional actions per side; these are preparation evidence, not measured cost sessions."
+    },
+    {
+      "id": "four_counter_paths_exactly_bounded",
+      "result": "conforms_by_source_reading",
+      "evidence": ["consolidate-owner-costs.mjs:138-187", "consolidate-owner-costs.mjs:198-231", "consolidate-owner-costs.mjs:571-575", "review-owner-costs.py:643-711"],
+      "detail": "Each measured trial and warmup must equal its own version's functional shape. Cross-version differences are limited to observations[*].nodeCount, inspection[*].graphNodes, final.nodeCount, and final.graphRevision, and each side must equal its exact captured value. Every such position, including a zero difference, is recorded. No constant +3 node allowance or cycles-based revision formula exists. Final implementation identity is checked against its own version separately."
+    },
+    {
+      "id": "strict_within_version_work",
+      "result": "conforms_by_source_reading",
+      "evidence": ["consolidate-owner-costs.mjs:328-338", "consolidate-owner-costs.mjs:593-607", "review-owner-costs.py:156-166", "review-owner-costs.py:647-650"],
+      "detail": "Within each version, complete work signatures including structural counters must remain identical across repeated trials and both cohorts, with warmups compared separately. Across versions, all other work metadata, including phase placement, pause metadata and memory sample placement, remains exact. The four structural allowances do not weaken within-version checks."
+    },
+    {
+      "id": "baseline_external_attribution_io_predeclared",
+      "result": "conforms_by_source_reading",
+      "evidence": ["consolidate-owner-costs.mjs:38-103", "consolidate-owner-costs.mjs:233-284", "consolidate-owner-costs.mjs:483-484", "review-owner-costs.py:455-491", "review-owner-costs.py:540-541"],
+      "detail": "Before attribution inputs are admitted, the baseline capture receipt is bound by the fixture and verified against its report, source manifest, inventory, inputs, forms and chronology. Absolute attribution inputs must exactly match a path/bytes/SHA-256 tuple in that receipt's inputsBefore. Their realpaths must remain below its distinct baseline checkout, which must equal the measured window baseline checkout. Inputs are rehashed at analysis end. This adapter is part of the declared 7B tools before measurement and does not depend on a 7A postmeasurement correction receipt. General local report readers remain distinct from this bounded external adapter; see reservation R1."
+    },
+    {
+      "id": "real_factory_owner_and_program_inventory",
+      "result": "conforms_by_source_reading",
+      "evidence": ["record-owner-source-inventory.mjs:67-136", "record-owner-source-inventory.mjs:145-190"],
+      "detail": "Both real createNativeV6Runtime factories are loaded from their own checkout and declarations. Their registered families install actual programs into their own NativeKnowledgeStore with a local scope and real factory sourceDigest. Runtime initialization, observation and workflow execution are barred. Owner and program IDs are unique; the candidate must add exactly public_symbol_transaction and v6.symbol_transactions.choose with no removal. Explicit family state and activation IDs are source-derived and are not misrepresented as an initialized game graph."
+    },
+    {
+      "id": "symbols_active_only_and_exact_source_state",
+      "result": "conforms_by_source_reading",
+      "evidence": ["capture-cost-owner-graphs.mjs:165-229", "capture-cost-owner-graphs.mjs:261-267", "qualify-cost-owner-graphs.mjs:119-132", "qualify-cost-owner-graphs.mjs:297-385", "qualify-cost-owner-graphs.mjs:389-408", "qualify-cost-owner-graphs.mjs:473-514"],
+      "detail": "Symbols recordSource is observed only for a selected Symbols proposal, exactly once for its actual return, with proposal/action/index binding. No equality between record calls and all actions is assumed. Separate factory/before/after source snapshots cover proposal or scope changes without inventing passive acquisition. The five owner fields and six nested Interface fields are explicit. Source events and observed_symbol_transactions_state facts require an actual selected return; each persisted owner state delta must match a contemporaneous captured snapshot. No Workshop mode_evidence or mode_methods fields remain in the Symbols validation."
+    },
+    {
+      "id": "graph_reconstruction_and_causal_attribution",
+      "result": "conforms_by_source_reading_with_closed_scope_limit",
+      "evidence": ["qualify-cost-owner-graphs.mjs:268-295", "qualify-cost-owner-graphs.mjs:410-502", "qualify-cost-owner-graphs.mjs:575-615"],
+      "detail": "The qualifier reconstructs all captured nodes from complete ordered Kernel deltas, checks hashes, revisions, origins, scopes, chain and executable digest, and rejects missing nodes or unexplained extra nodes. Extra nodes/deltas are attributed to actual installation, Symbols source states, selected source facts/events, or content-addressed fragments reachable from actual persisted roots. Counts are derived from reconstructed captures. Common delta identity/cause/order and metadata stay strict; private common node values are retained but cross-version value parity is explicitly not claimed. See reservation R2 for a fragment that changes from extra to common at a later point."
+    },
+    {
+      "id": "chronology_integrity_and_canonical_forms",
+      "result": "conforms_by_source_reading",
+      "evidence": ["capture-cost-owner-graphs.mjs:90-95", "capture-cost-owner-graphs.mjs:278-297", "qualify-cost-owner-graphs.mjs:188-236", "qualify-cost-owner-graphs.mjs:580-615", "consolidate-owner-costs.mjs:282-285", "consolidate-owner-costs.mjs:467-488", "review-owner-costs.py:448-452"],
+      "detail": "Capture and qualification refuse an existing readiness/window beside the declared cases and use exclusive outputs. Native inventories, source manifests, generators and other input bytes are checked before and after. The recorded order is capture completion, attribution, fixture, contract, static preflight, readiness, then official window. formsSha256 binds compact recursively sorted JSON without array reordering. Neither the capture nor qualifier reads a future cost report. Failed qualification retains a failure attribution and creates no fixture."
+    },
+    {
+      "id": "historical_failure_and_global_outcome_remain_distinct",
+      "result": "conforms_by_source_reading",
+      "evidence": ["consolidate-owner-costs.mjs:538-562", "consolidate-owner-costs.mjs:622-643", "review-owner-costs.py:754-780", "review-owner-costs.py:870-908", "owner-cost-contract.md:286-365"],
+      "detail": "The actual historical strict failure, nonzero exit, complete log, unchanged ordered inputs and absent historical aggregate are mandatory. Supplemental success never relabels that failure. Arithmetic review completion is distinct from globalAccepted/accepted; a completed review can retain a failed global budget. The documentation preserves the limits of public functional captures, uncaptured private measured graph leaves, component parity, live game behavior and isolation."
+    }
+  ],
+  "concreteBlockingDefectsFound": [],
+  "reservations": [
+    {
+      "id": "R1",
+      "severity": "nonblocking_legacy_reader_asymmetry",
+      "paths": ["consolidate-owner-costs.mjs:45-49", "review-owner-costs.py:198-202"],
+      "detail": "The general JS local-path guard is lexical; the Python local reader resolves realpaths. A local evidence path crossing a symlink outside the candidate checkout could therefore be read by JS but rejected by Python. The newly adapted external-baseline attribution path uses realpath containment in both implementations. No final false acceptance or actual escaped input was observed.",
+      "disposition": "Use physical in-checkout paths for ordinary evidence. Optional symmetric hardening belongs before tool freeze; the independent reviewer already rejects the escaped local path. No tool was changed in this review."
+    },
+    {
+      "id": "R2",
+      "severity": "closed_qualification_scope_to_check_on_final_captures",
+      "paths": ["qualify-cost-owner-graphs.mjs:411-446", "qualify-cost-owner-graphs.mjs:489-492"],
+      "detail": "Extra-node categories are recomputed at each point while ownDeltaCount is cumulative, and common deltas must match point by point. If a fragment first created by Symbols is later created on the baseline side, it becomes common after having been attributed as extra. This currently causes a closed refusal through common-delta or cumulative-revision checks. It cannot silently widen the allowed counters. No occurrence in the future 5A+4B baseline captures has been observed; those captures have not been run as part of this review.",
+      "disposition": "Check the actual final frozen captures before contract/readiness. The tool owner confirmed this intended closed limit. If the case occurs, retain the failed qualification, review any proposed new attribution rule against the real captures, and freeze any revised rule before measurement. Never normalize, drop or reinterpret measured work to make a result pass."
+    }
+  ],
+  "remainingPremeasurementWork": [
+    "Integrate the actually published 5A then 4B predecessor and establish final baseline/candidate freezes and identities.",
+    "After explicit compute release, run the real factory inventory, four functional forms on each side, and their qualification with exclusive outputs; preserve any failure.",
+    "Verify all final tool fingerprints and declaration/contract/static/readiness bindings before the official window. Root owns the final readiness script and its functional/isolation evidence.",
+    "Evaluate costs only after the complete retained ABBA window, pair comparisons, historical strict failure, supplemental JS consolidation and independent Python review exist."
+  ],
+  "conclusion": "Favorable source review of the seven prepared 7B tools for arithmetic, fixed work, premeasurement proof binding, bounded baseline attribution I/O and Symbols active-only acquisition. No concrete blocking defect was found in the reviewed source. R1 and R2 remain explicit nonblocking limitations to resolve or verify before final freeze/capture as appropriate. This is not a functional qualification receipt, readiness authorization, successful cost measurement, global budget acceptance, or publication claim."
+}

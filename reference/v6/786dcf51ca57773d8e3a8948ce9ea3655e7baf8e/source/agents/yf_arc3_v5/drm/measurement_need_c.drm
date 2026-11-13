@@ -1,0 +1,376 @@
+{
+  "module_id": "measurement_need_c",
+  "declarations": [
+    {
+      "id": "policy.morphological_bottleneck_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_dependency_and_falsifiable_model"
+      ],
+      "applicability": [
+        "focused_consumer_measurement_need"
+      ],
+      "invariants": [
+        "missing_enabler_motivates_question_not_unseen_solution",
+        "bounded_route_not_unreachable",
+        "model_assignments_and_goal_contract_retained",
+        "no_physical_transformation_or_action"
+      ],
+      "falsifiers": [
+        "foreign_or_stale_scope",
+        "irrelevant_or_unqualified_dimensions",
+        "missing_or_conflicting_binding",
+        "actual_work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "bottleneck.test_named_enabling_condition",
+        "bottleneck.retain_unqualified_or_unneeded_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.morphological_bottleneck_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "bottleneck.test_named_enabling_condition"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "measurement_semantics_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "required_for_current_consumer",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "condition_gap_observed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "unseen_solution_proved",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "bottleneck.test_named_enabling_condition"
+          }
+        },
+        {
+          "id": "projection.policy.morphological_bottleneck_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "bottleneck.retain_unqualified_or_unneeded_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "bottleneck.retain_unqualified_or_unneeded_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.morphological_bottleneck_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "bottleneck.test_named_enabling_condition"
+            }
+          ],
+          "reason_ref": "reason.current_typed_gap_names_a_falsifiable_enabling_question"
+        },
+        {
+          "id": "tier.policy.morphological_bottleneck_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "bottleneck.retain_unqualified_or_unneeded_question"
+            }
+          ],
+          "reason_ref": "reason.current_typed_gap_names_a_falsifiable_enabling_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.measurement_disposition_not_action_or_catalogue_priority",
+      "reason_refs": [
+        "reason.current_typed_gap_names_a_falsifiable_enabling_question"
+      ]
+    },
+    {
+      "id": "policy.consumer_measurement_need_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_dependency_and_falsifiable_model"
+      ],
+      "applicability": [
+        "focused_consumer_measurement_need"
+      ],
+      "invariants": [
+        "validated_next_path_retained",
+        "only_goal_dependency_or_live_alternative_dimensions",
+        "revalidation_before_memo_reuse",
+        "conflicts_stay_explicit",
+        "existing_family_agenda_only",
+        "frozen_why_and_no_act"
+      ],
+      "falsifiers": [
+        "foreign_or_stale_scope",
+        "irrelevant_or_unqualified_dimensions",
+        "missing_or_conflicting_binding",
+        "actual_work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "measurement_need.continue_validated_path",
+        "measurement_need.reuse_revalidated_geometry",
+        "measurement_need.register_needed_distinction",
+        "measurement_need.retain_unqualified_or_conflicting_need"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.consumer_measurement_need_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "measurement_need.continue_validated_path"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "validated_continuation_can_release",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "measurement_need.continue_validated_path"
+          }
+        },
+        {
+          "id": "projection.policy.consumer_measurement_need_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "measurement_need.reuse_revalidated_geometry"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "request_dimensions_exactly_justified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "needed_dimensions_have_unambiguous_support",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "unique_geometry_memory_refs",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "qualified_geometry_unanimous",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "geometry_conflict_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "measurement_need.reuse_revalidated_geometry"
+          }
+        },
+        {
+          "id": "projection.policy.consumer_measurement_need_c.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "measurement_need.register_needed_distinction"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "request_dimensions_exactly_justified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "needed_dimensions_have_unambiguous_support",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "unique_geometry_memory_refs",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "qualified_geometry_unanimous",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "geometry_conflict_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "measurement_need.register_needed_distinction"
+          }
+        },
+        {
+          "id": "projection.policy.consumer_measurement_need_c.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "measurement_need.retain_unqualified_or_conflicting_need"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "measurement_need.retain_unqualified_or_conflicting_need"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.consumer_measurement_need_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "measurement_need.continue_validated_path"
+            }
+          ],
+          "reason_ref": "reason.current_consumer_need_not_the_catalogue_authorizes_measurement"
+        },
+        {
+          "id": "tier.policy.consumer_measurement_need_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "measurement_need.reuse_revalidated_geometry"
+            }
+          ],
+          "reason_ref": "reason.current_consumer_need_not_the_catalogue_authorizes_measurement"
+        },
+        {
+          "id": "tier.policy.consumer_measurement_need_c.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "measurement_need.register_needed_distinction"
+            }
+          ],
+          "reason_ref": "reason.current_consumer_need_not_the_catalogue_authorizes_measurement"
+        },
+        {
+          "id": "tier.policy.consumer_measurement_need_c.3",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "measurement_need.retain_unqualified_or_conflicting_need"
+            }
+          ],
+          "reason_ref": "reason.current_consumer_need_not_the_catalogue_authorizes_measurement"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.measurement_disposition_not_action_or_catalogue_priority",
+      "reason_refs": [
+        "reason.current_consumer_need_not_the_catalogue_authorizes_measurement"
+      ]
+    }
+  ]
+}

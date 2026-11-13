@@ -1,0 +1,1948 @@
+{
+  "module_id": "metric_stack_image",
+  "declarations": [
+    {
+      "id": "policy.metric_stack_exact_case",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "mechanics.metric_stack_image.input",
+        "mechanics.metric_stack_image.dispatch",
+        "mechanics.metric_stack_image.unmatched",
+        "mechanics.metric_stack_image.unmatched.result"
+      ],
+      "premises": [
+        "current_typed_immutable_metric_packet_and_explicit_scoped_law"
+      ],
+      "applicability": [
+        "exact_metric_stack_operation_and_mode"
+      ],
+      "invariants": [
+        "one_exact_case",
+        "no_action_release_or_canonical_mutation",
+        "unrejected_alternatives_retained"
+      ],
+      "falsifiers": [
+        "signature_or_revision_or_packet_binding_mismatch"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "declared_alternative_refs": [
+        "metric_case.grid_boundaries",
+        "metric_missing_prerequisites.grid_boundaries",
+        "metric_case.stack_control_fit",
+        "metric_missing_prerequisites.stack_control_fit",
+        "metric_case.visible_stack_projection",
+        "metric_missing_prerequisites.visible_stack_projection",
+        "metric_case.target_domain",
+        "metric_missing_prerequisites.target_domain",
+        "metric_case.occurrence_assignment",
+        "metric_missing_prerequisites.occurrence_assignment",
+        "metric_case.exposure_dependencies",
+        "metric_missing_prerequisites.exposure_dependencies",
+        "metric_case.stack_step",
+        "metric_missing_prerequisites.stack_step",
+        "metric_case.transport_schedule",
+        "metric_missing_prerequisites.transport_schedule",
+        "metric_case.sealed_stack_compare",
+        "metric_missing_prerequisites.sealed_stack_compare",
+        "metric_case.transport_lower_bound",
+        "metric_missing_prerequisites.transport_lower_bound",
+        "metric_case.external_primitive",
+        "metric_missing_prerequisites.external_primitive",
+        "metric_case.unmatched"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.metric_case.grid_boundaries",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_case.grid_boundaries"
+            },
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.grid_boundaries"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "MEASURE"
+            },
+            {
+              "field": "has_boundary_samples",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_missing_prerequisites.grid_boundaries",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_missing_prerequisites.grid_boundaries"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.grid_boundaries"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "MEASURE"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_boundary_samples",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_case.stack_control_fit",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_case.stack_control_fit"
+            },
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.stack_control_fit"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "FIT"
+            },
+            {
+              "field": "has_control_samples",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_missing_prerequisites.stack_control_fit",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_missing_prerequisites.stack_control_fit"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.stack_control_fit"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "FIT"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_control_samples",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_case.visible_stack_projection",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_case.visible_stack_projection"
+            },
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.visible_stack_projection"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "PROJECT"
+            },
+            {
+              "field": "has_state",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_missing_prerequisites.visible_stack_projection",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_missing_prerequisites.visible_stack_projection"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.visible_stack_projection"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "PROJECT"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_state",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_case.target_domain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_case.target_domain"
+            },
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.target_domain"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "DOMAIN"
+            },
+            {
+              "field": "has_state",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_target",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_missing_prerequisites.target_domain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_missing_prerequisites.target_domain"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.target_domain"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "DOMAIN"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_state",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_target",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_case.occurrence_assignment",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_case.occurrence_assignment"
+            },
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.occurrence_assignment"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "DOMAIN"
+            },
+            {
+              "field": "has_state",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_missing_prerequisites.occurrence_assignment",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_missing_prerequisites.occurrence_assignment"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.occurrence_assignment"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "DOMAIN"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_state",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_case.exposure_dependencies",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_case.exposure_dependencies"
+            },
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.exposure_dependencies"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "PRECONDITION"
+            },
+            {
+              "field": "has_state",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_missing_prerequisites.exposure_dependencies",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_missing_prerequisites.exposure_dependencies"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.exposure_dependencies"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "PRECONDITION"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_state",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_case.stack_step",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_case.stack_step"
+            },
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.stack_step"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "STEP"
+            },
+            {
+              "field": "has_state",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_law",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_primitive",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "law_dimension_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_missing_prerequisites.stack_step",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_missing_prerequisites.stack_step"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.stack_step"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "STEP"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_state",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_law",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_primitive",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "law_dimension_supported",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_case.transport_schedule",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_case.transport_schedule"
+            },
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.transport_schedule"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "DOMAIN"
+            },
+            {
+              "field": "has_state",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_law",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_target",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "schedule_scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "schedule_inputs_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "schedule_domain_declared",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "schedule_phase_contract_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "schedule_resume_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "law_dimension_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_missing_prerequisites.transport_schedule",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_missing_prerequisites.transport_schedule"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.transport_schedule"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "DOMAIN"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_state",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_law",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_target",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "schedule_scope_current",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "schedule_inputs_current",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "schedule_domain_declared",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "schedule_phase_contract_complete",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "schedule_resume_current",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "law_dimension_supported",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_case.sealed_stack_compare",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_case.sealed_stack_compare"
+            },
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.sealed_stack_compare"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "COMPARE"
+            },
+            {
+              "field": "has_sealed_packet",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "sealed_inventory_comparable",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_missing_prerequisites.sealed_stack_compare",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_missing_prerequisites.sealed_stack_compare"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.sealed_stack_compare"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "COMPARE"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_sealed_packet",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "sealed_inventory_comparable",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_case.transport_lower_bound",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_case.transport_lower_bound"
+            },
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.transport_lower_bound"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "BOUND"
+            },
+            {
+              "field": "has_state",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_law",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_target",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "bound_execution_scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "bound_inventory_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "bound_target_domain_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "law_dimension_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_missing_prerequisites.transport_lower_bound",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_missing_prerequisites.transport_lower_bound"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.transport_lower_bound"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "BOUND"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_state",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_law",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_target",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "bound_execution_scope_current",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "bound_inventory_current",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "bound_target_domain_current",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "law_dimension_supported",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_case.external_primitive",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_case.external_primitive"
+            },
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.external_primitive"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "STEP"
+            },
+            {
+              "field": "has_state",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_law",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_primitive",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_external_ownership",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "external_ownership_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "external_acceptance_law_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "law_dimension_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_missing_prerequisites.external_primitive",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_missing_prerequisites.external_primitive"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.external_primitive"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "STEP"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "kernel_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "return_type_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "packet_binding_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "evidence_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "state_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "law_revision_matches",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_current_evidence",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_state",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_law",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_primitive",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_external_ownership",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "external_ownership_current",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "external_acceptance_law_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "law_dimension_supported",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_case.unmatched",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_case.unmatched"
+            },
+            {
+              "field": "signature_declared",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.metric_stack_descriptive_return",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "mechanics.metric_stack_image.return",
+        "mechanics.metric_stack_image.return.status",
+        "mechanics.metric_stack_image.return.authority"
+      ],
+      "premises": [
+        "current_typed_immutable_metric_packet_and_explicit_scoped_law"
+      ],
+      "applicability": [
+        "exact_metric_stack_operation_and_mode"
+      ],
+      "invariants": [
+        "one_exact_case",
+        "no_action_release_or_canonical_mutation",
+        "unrejected_alternatives_retained"
+      ],
+      "falsifiers": [
+        "signature_or_revision_or_packet_binding_mismatch"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "declared_alternative_refs": [
+        "metric_return.contradiction",
+        "metric_return.bound",
+        "metric_return.unknown",
+        "metric_return.empty",
+        "metric_return.found"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.metric_return.contradiction",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_return.contradiction"
+            },
+            {
+              "field": "model_contradiction",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_return.bound",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_return.bound"
+            },
+            {
+              "field": "model_contradiction",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "bound_reached",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_return.unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_return.unknown"
+            },
+            {
+              "field": "model_contradiction",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_missing_observation",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_return.empty",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_return.empty"
+            },
+            {
+              "field": "model_contradiction",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_missing_observation",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "empty_complete_domain",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.metric_return.found",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_return.found"
+            },
+            {
+              "field": "model_contradiction",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_missing_observation",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "empty_complete_domain",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "any_conditions": [],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ]
+    }
+  ]
+}

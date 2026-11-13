@@ -1,0 +1,25 @@
+{
+  "actualCaseLocalCount": 4,
+  "actualCaseRemoteChangeCount": 62,
+  "caseCount": 16,
+  "fixture": {
+    "bytes": 122470,
+    "path": "tests/fixtures/v6-outline-local-count-reference.json.gz",
+    "sha256": "e1394aaa7a8f3b0bcb9aa7b3adba058bb2732d78d8d9ed99283686fc0a8f243f"
+  },
+  "generator": {
+    "bytes": 9348,
+    "path": "scripts/export-v6-outline-local-count-reference.py",
+    "sha256": "7275200341cd4338120bfd236427365b6edf2d272db6d15e7b489b4f90704028"
+  },
+  "schema": "logos-engine.v53.outline-local-count-original-reference-receipt.v1",
+  "scope": {
+    "gameHostExecuted": false,
+    "nativeExecuted": false,
+    "nativeOutputsUsedAsExpected": false,
+    "semantics": "The unchanged Python generator expression binds b to each after-pixel before evaluating its vertical predicate. These source results are preserved literally, including remote counts that differ from an ordinary exterior-of-bbox count."
+  },
+  "sourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceUnchanged": true,
+  "status": "passed"
+}

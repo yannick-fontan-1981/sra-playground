@@ -1,0 +1,42 @@
+{
+  "schema": "logos-engine.v44.browser-verification.v1",
+  "game": "CATL",
+  "surface": "managed development preview from the frozen checkout",
+  "nativeSourceManifestDigest": "1b30d1f0a80275a1204b44198b5fd62f43439d16b5eccdd768a4357b78986093",
+  "observedUrl": "http://127.0.0.1:4173/?game=CATL&level=6",
+  "mode": "SRA Agent Native TS",
+  "initialLevel": 1,
+  "initialActions": 0,
+  "initialSolvedLevels": 0,
+  "controlsUsed": [
+    "Choose CATL",
+    "SRA Agent Native TS",
+    "Run to next level",
+    "Run to next level",
+    "Run to next level",
+    "Run to next level",
+    "Run to next level"
+  ],
+  "cumulativeActionsAtBoundaries": [
+    8,
+    16,
+    24,
+    32,
+    40
+  ],
+  "solvedLevels": 5,
+  "completedPlans": 40,
+  "finalVisibleLevel": 6,
+  "visibleStatus": "Level completed. V6 acquired the outcome and retained its transfer memory. Continue when ready.",
+  "victoryVisible": false,
+  "inspectionClosedAtStart": true,
+  "inspectionOpenedDuringRun": false,
+  "manualGameActions": 0,
+  "agentSessionResets": 0,
+  "levelJumps": 0,
+  "screenshot": "catl-browser-five-levels.png",
+  "screenshotSha256": "7f0354ffe71c8027642a82711fc9156406800f7f067f2d73eced1092b8c0f470",
+  "finalAccessibilityState": "catl-browser-final-state.txt",
+  "finalAccessibilityStateSha256": "2f3688d123353575262a79cedacccff08ed434e53dd44626d90b0d9aa4c13edd",
+  "qualification": "Actual continuous browser run, one start and four continuations at natural boundaries. The fifth boundary is paused at level 6. No complete-game victory or native sixth-level attempt is claimed."
+}

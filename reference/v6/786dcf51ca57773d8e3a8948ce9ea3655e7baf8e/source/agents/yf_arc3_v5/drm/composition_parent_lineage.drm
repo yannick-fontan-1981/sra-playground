@@ -1,0 +1,40 @@
+{
+  "module_id": "composition_parent_lineage",
+  "declarations": [{
+    "id": "policy.composition_parent_lineage",
+    "kind": "selection_policy",
+    "evaluation": "declared_eligibility_single",
+    "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "premises": ["canonical_parent_context_precedes_the_child"],
+    "applicability": ["inspect_parent_even_when_child_produced_no_candidate"],
+    "invariants": ["unknown_is_not_absence", "lineage_is_not_current_goal_truth", "lineage_never_grants_act"],
+    "falsifiers": ["unqualified_null_is_treated_as_absence", "inspection_invents_an_action"],
+    "reason_refs": ["reason.native_refusal_returns_to_its_parent_without_selecting_a_question_or_action"],
+    "configuration": {"parent_origin_contract": {
+      "action_binding_path": ["transition_phenomenon_request", "action_ref"],
+      "evidence_binding_path": ["evidence_refs"]
+    }},
+    "selection_eligibility_conditions": [{"field": "applicable", "operator": "equals", "expected": true}],
+    "fact_projections": [
+      {"id": "projection.composition_parent_lineage.unknown", "all_conditions": [],
+       "static_facts": {"applicable": true, "parent_lineage_qualification_ref": "parent_lineage.unknown", "parent_lineage_allows_act": false}},
+      {"id": "projection.composition_parent_lineage.qualified_absence", "all_conditions": [
+        {"field": "composition_parent_prior_action_matches", "operator": "equals", "expected": true},
+        {"field": "prior_parent_binding_authoritative", "operator": "equals", "expected": true},
+        {"field": "parent_scope_matches", "operator": "equals", "expected": true},
+        {"field": "prior_lease_intent_matches", "operator": "equals", "expected": true},
+        {"field": "parent_goal_ref", "operator": "is_absent"}
+       ], "static_facts": {"parent_lineage_qualification_ref": "parent_lineage.absent"}},
+      {"id": "projection.composition_parent_lineage.qualified_binding", "all_conditions": [
+        {"field": "composition_parent_prior_action_matches", "operator": "equals", "expected": true},
+        {"field": "prior_parent_binding_authoritative", "operator": "equals", "expected": true},
+        {"field": "parent_scope_matches", "operator": "equals", "expected": true},
+        {"field": "prior_lease_intent_matches", "operator": "equals", "expected": true},
+        {"field": "parent_goal_ref", "operator": "is_present"},
+        {"field": "parent_goal_why_provenance_present", "operator": "equals", "expected": true}
+       ], "static_facts": {"parent_lineage_qualification_ref": "parent_lineage.bound"}}
+    ]
+  }]
+}

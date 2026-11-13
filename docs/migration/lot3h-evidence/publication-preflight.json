@@ -1,0 +1,287 @@
+{
+  "schema": "logos-engine.lot3h.publication-inputs.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T13:48:46.769440-03:00",
+  "displayTimeZone": "UTC-03:00",
+  "generator": {
+    "path": "docs/migration/lot3h-evidence/verify-publication-inputs.py",
+    "bytes": 18211,
+    "sha256": "5e54344a9f40fecf44017c40eaa2f2c7765b336893bf603f6b8dca340dc6b5ed"
+  },
+  "nativeVersion": "0.49.0",
+  "nativeDigest": "d6cb9abdf48a9062936d4647dbd809dc4cee1d1528f85e973fda83c7af8e6054",
+  "baselineSiteVersion": 76,
+  "baselineNativeVersion": "0.48.0",
+  "baselineCommit": "fbbc3fb6b796c0ba359654da7234008767090e1f",
+  "checkedInventories": {
+    "native": 268,
+    "frozenArchiveInputs": 279,
+    "sourceAndTests": 611,
+    "buildInputs": 333,
+    "regressionExecutionInputs": 7
+  },
+  "globalCostAccepted": true,
+  "globalCostStatus": "accepted_under_user_global_rule",
+  "finalFormalTestCounts": {
+    "tests": 2782,
+    "pass": 2782,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "formalTestFiles": 71,
+  "formalValidationDirectory": "docs/migration/lot3h-evidence/final/validation",
+  "gameContributionStatus": "demonstrated_on_actual_selected_own_trajectory_with_component_ablations",
+  "integratedEvidenceKind": "three_cold_controlled_synthetic_common_caller_sessions",
+  "integratedCheckGroups": 23,
+  "syntheticCommonScope": {
+    "synthetic": true,
+    "coldControllerSessions": 3,
+    "controlledReturnedCommands": 17,
+    "ownControlledReturnedCommands": 10,
+    "priorCellPatchControlledReturns": 7,
+    "commonAcquiredTransitions": 17,
+    "furtherReleasedCommandsNotReturned": 3,
+    "liveGameSessions": 0,
+    "liveGameActions": 0,
+    "liveGameLevelCompletions": 0,
+    "liveGameVictories": 0,
+    "sourcePythonAgentExecutions": 0,
+    "learnedCheckpointsInjected": 0,
+    "fullCallerParityClaimed": false,
+    "fullCallerAblationExecuted": false
+  },
+  "weavResolutionStatus": "target_reached",
+  "weavActual": {
+    "actions": 81,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 243.55298556499997,
+    "prefixes": 81,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 81,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 163,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 82
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 82
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 62
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 42
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 7
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 83
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 81,
+      "resume": 80
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.49.0"
+  },
+  "weavCaseClock": {
+    "resumedAt": "2026-11-10T13:19:20.501700-03:00",
+    "workFinishedAt": "2026-11-10T13:32:44.247111-03:00",
+    "previousCumulativeSeconds": 474.037204,
+    "currentIntervalSeconds": 803.745411,
+    "cumulativeSeconds": 1277.782615,
+    "maximumCumulativeSeconds": 2400,
+    "remainingSeconds": 1122.217385,
+    "clockReset": false,
+    "exhausted": false,
+    "furtherWorkThisDelivery": false,
+    "qualification": "Full wall interval from the retained-case resumption includes reference, candidate, source and native comparison, ablations, browser verification and final case review. The earlier474.037204seconds remain charged. Subsequent transport, delivery documentation, integrity and STCK/SMLP timing are release work. Any future WEAV case diagnosis must resume this cumulative value."
+  },
+  "browserStatus": "passed",
+  "optionalIndependentCostReview": {
+    "path": "docs/migration/lot3h-evidence/diagnostic/cost-result-review.json",
+    "bytes": 71088,
+    "sha256": "aa52e7d9c425fe69145205a65cb7f95de57822c3a9e054546bb79e9248c5bc96"
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot3h-evidence/baseline/provenance.json",
+      "bytes": 32657,
+      "sha256": "cce26d48cef702829a639292d0f130d1752d3bca7c2c4fc05eba8717246db1b7"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/source-manifest.json",
+      "bytes": 31765,
+      "sha256": "5ab90c3cbd2f8356ba27025052a1c40cd16e7cb38326a89a48ac6e53cb9b3a24"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/source-archive.json",
+      "bytes": 33396,
+      "sha256": "ecd25dc9ea658bc08bc7361a1455fc3ef040208ae857613857dbce1df17d36f5"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/validation/delta-tests-run.json",
+      "bytes": 112930,
+      "sha256": "3bd20a39d02c3dc431547a64552f58f91975664871941aa0c532dd50ecae82fe"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/validation/checks-run.json",
+      "bytes": 74075,
+      "sha256": "4d7a2b112a3a6c5b92306c5d60b00ff3e54f40be77af5714005cfffa6c18779e"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/regressions/regression-summary.json",
+      "bytes": 91125,
+      "sha256": "858f3d74c91784bd9387e74e1aaaf4e32ba834a6a3ce2c7817193e093c276bd4"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/browser/browser-qa.json",
+      "bytes": 2519,
+      "sha256": "77e9458de5e0a67f1dc8dec13ea62104207fe7b34e0cee51d8c076ee90730879"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/crossed-prefix-common-loop.json.gz",
+      "bytes": 1610258,
+      "sha256": "e46a4025d074fa6bf7dabf94f690bf4bcc8e15c6da5c64995f5d224fb5f25d18"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/crossed-prefix-validation-scope.json",
+      "bytes": 6678,
+      "sha256": "8b9f1ae0986cc8a9572c7d8c5352533702d961b3651d13cae612b77fa8c89233"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/weav-resolution.json",
+      "bytes": 9841,
+      "sha256": "520468fb7872f163713f288cc6c3d1f62137e4bc662bcebe7207fed2435bf0ab"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/delivery-integrity.json",
+      "bytes": 8408,
+      "sha256": "34dd7a0ccc42ea35d4790695960fa82ae5f486e65a82f83519970a404569259b"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/readiness.json",
+      "bytes": 6576,
+      "sha256": "12855882f74c531607234c04cb84ccfc2b2afb7ffbff5cbcf3533779e6c17e64"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/window.json",
+      "bytes": 10159,
+      "sha256": "50db2d4147fd6f7648f6f2080abae1db836e25f0196845063fd0908de33b1eb0"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/global-budget-policy.json",
+      "bytes": 2011,
+      "sha256": "cd36bc36abde70765edbb6dc0c78165c889a7c5fed1c88f8b7c72d650a4652f7"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/global-budget-decision.json",
+      "bytes": 20940,
+      "sha256": "548f938e26cbd85fc5c33376cdbc144dd66c365186c5c80bf3257dd6d9767c97"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/consolidation-review.json",
+      "bytes": 44975,
+      "sha256": "bae3b4c132c3d58a322782f824384fa205bba7bcac2e5342f97fc57639b465cb"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/results.md",
+      "bytes": 31001,
+      "sha256": "71825ed0aaaee27fc264338ab9144f0b115f1e241979c9e4f8a404711c61fa95"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/README.md",
+      "bytes": 12927,
+      "sha256": "d2c7ee7e58bc0af6e0ce52818852941927857149a08230dd820cf0b60fc0bc74"
+    },
+    {
+      "path": "docs/migration/lot3h-crossed-prefix.md",
+      "bytes": 21984,
+      "sha256": "04cc7aee7a0cc03b168a006758cf262c3f11ee1e2255cd950f27f7422ff9df52"
+    },
+    {
+      "path": "docs/migration/lot3h-crossed-prefix-lineage.md",
+      "bytes": 26267,
+      "sha256": "f655c8ed53b30250e09f89ef060d94a1e276561252f7b7f52cfd6a0fb0566996"
+    },
+    {
+      "path": "docs/migration/v6-delivery-roadmap.md",
+      "bytes": 107833,
+      "sha256": "7bb114972f562ed930a5ee6e3080a3990d7bef99ccddcee3903ae970a7bd535e"
+    },
+    {
+      "path": "docs/migration/v6-native-transfer.md",
+      "bytes": 159386,
+      "sha256": "ee16932e74496e8a41b213674793df0ee1e0734d11463a146ff2ab88f13f7aa9"
+    },
+    {
+      "path": "docs/migration/v6-entry-point-progress.json",
+      "bytes": 18345,
+      "sha256": "494c90b9069ff4eab00d13b59a116e3558f33063709493a3c240a641405a553d"
+    },
+    {
+      "path": "docs/migration/lot2b-evidence/final/weav-resolution.json",
+      "bytes": 2964,
+      "sha256": "c7a0d39ff02dbbc5cc30c33ea7fd3b4ccf8fa0e36930283e8a235bf3aa0cf0b9"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/diagnostic/cost-result-review.json",
+      "bytes": 71088,
+      "sha256": "aa52e7d9c425fe69145205a65cb7f95de57822c3a9e054546bb79e9248c5bc96"
+    }
+  ],
+  "qualification": "Final retained-input verification after completed functional, case, browser and timing work. No test, build, game, oracle or cost result is regenerated. Test counts and WEAV outcomes are read from their actual receipts. The three-session 23-group common-loop proof has 17 controlled synthetic returns and zero live game actions; its two ablations are component-scoped. Any actual WEAV contribution remains a separate result with its pre-existing cumulative clock preserved. This integrity receipt does not turn an unmet game target or a rejected cost budget into an acceptance. Source inheritance and full original-caller parity remain qualified independently. Historical failures remain retained in the evidence index."
+}

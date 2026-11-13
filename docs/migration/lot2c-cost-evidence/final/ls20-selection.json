@@ -1,0 +1,15 @@
+{
+  "schema": "logos-engine.native-campaign-selection.v1",
+  "game": "LS20",
+  "targetLevels": 3,
+  "selectedAt": "2026-11-09T21:19:49.429236+00:00",
+  "maximumBlockedSeconds": 2400,
+  "carriedBlockedSeconds": 1251.193258,
+  "priorResolution": "docs/migration/lot2c-evidence/final/ls20-resolution.json",
+  "remainingBlockedSeconds": 1148.806742,
+  "switchDeadline": "2026-11-09T21:38:58.235978+00:00",
+  "nextCandidate": "LS19",
+  "sourceManifestDigest": "ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b",
+  "selectionBasis": "Cold regression revalidation of the published three-level LS20 result after generic cost optimizations. Same public host, no expected command, learned checkpoint, game implementation or solution supplied to the agent.",
+  "clockPolicy": "Retain the full earlier cumulative game clock conservatively. Resolve on the actual completed target; a new block would still switch before 40 cumulative minutes."
+}

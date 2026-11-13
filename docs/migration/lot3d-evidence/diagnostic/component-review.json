@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.lot3d.independent-component-review.v1",
+  "runs": [
+    {
+      "command": "node --import tsx --test tests/v6-rooted-line-observation.test.ts tests/v6-rooted-line-access.test.ts",
+      "exitCode": 1,
+      "path": "docs/migration/lot3d-evidence/diagnostic/component-review-launch-error.tap.gz",
+      "sha256": "c8c02fc737d54ac54c878686a8cdaa830fcb014aceeb18748240439a8acb9e60",
+      "qualification": "Initial invocation did not execute contracts because tsx is not installed; corrected native Node invocation follows."
+    },
+    {
+      "command": "node --test tests/v6-rooted-line-observation.test.ts tests/v6-rooted-line-access.test.ts",
+      "exitCode": 0,
+      "path": "docs/migration/lot3d-evidence/diagnostic/component-review.tap.gz",
+      "sha256": "c1bfb07f8f4a952933e1c8b3433c165a29172846aaa6901c2a451caba22fb405",
+      "qualification": "91 tests passed; zero failures, skipped or cancelled. Independent rerun of own-layer component/source/public projection contracts."
+    }
+  ],
+  "inputs": {
+    "src/logos-engine/v5-piercing-plan.ts": "cba5955f1b29153827f74b0cab854c2d5e899054524f52b85aa3e25765445667",
+    "src/logos-engine/v5-piercing-contracts.ts": "200a9d2efe1b3069b97042c0e54c2d10124e578e1285f2ce122c8c29cec3df7c",
+    "src/logos-engine/v6-rooted-line-observation.ts": "e27bcbd44ef862d49050aabaf1ac5a964a8a77acdda49dc24413acdb1d69b381",
+    "src/logos-engine/v6-rooted-line-mechanics.ts": "58d6c53dd456a1b1340cbebcdcaaca03289224bd83d352844ab69fda88bb0cd1",
+    "src/logos-engine/v6-rooted-line-access.ts": "ae3848d565cb25e32398463649d2af0002e667dbb3c68d7b4cfd3a8dd1dd70e6",
+    "tests/v6-rooted-line-observation.test.ts": "7e7abba231a20203e8f600ed8ba5c456e14700444d6d70708ac8ba852bc91cf2",
+    "tests/v6-rooted-line-access.test.ts": "736c273c50fd53edfb309df4ced0827fe4ea86b9ee37ff1b0b6c95715e0cf30d",
+    "tests/fixtures/v6-rooted-line-reference.json.gz": "39275a93a5db4de49beeba4b789e4a08af000dd5c8f63a02b0d1c0153f58e565",
+    "tests/fixtures/v5-piercing-reference.json.gz": "f36682c8fc491240bebbba10413a6aa4901a2b30db57d72e7a3f6fee320e5f5b"
+  },
+  "conclusion": "Own-layer source parity confirmed; no full inherited caller, game resolution or cost verdict inferred."
+}

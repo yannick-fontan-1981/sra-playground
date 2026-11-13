@@ -1,0 +1,53 @@
+{
+  "declaredAt": "2026-11-11T17:15:35.374849+00:00",
+  "commands": [
+    {
+      "name": "fixture-restore",
+      "argv": [
+        "python",
+        "-B",
+        "scripts/evidence-byte-parts.py",
+        "restore",
+        "tests/fixtures"
+      ],
+      "maximumSeconds": 120
+    },
+    {
+      "name": "runtime-tests",
+      "argv": [
+        "node",
+        "--test",
+        "--test-concurrency=1",
+        "tests/v6-native-runtime.test.ts"
+      ],
+      "maximumSeconds": 120
+    },
+    {
+      "name": "entry-audit",
+      "argv": [
+        "node",
+        "scripts/audit-v6-entry-points.ts"
+      ],
+      "maximumSeconds": 120
+    },
+    {
+      "name": "migration-audit",
+      "argv": [
+        "python",
+        "-B",
+        "scripts/audit-v6-migration.py"
+      ],
+      "maximumSeconds": 120
+    },
+    {
+      "name": "typecheck",
+      "argv": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "maximumSeconds": 120
+    }
+  ],
+  "qualification": "Remaining common-clock regression and source audits on Site103+6B development merge; no game, replay, browser or official cost."
+}

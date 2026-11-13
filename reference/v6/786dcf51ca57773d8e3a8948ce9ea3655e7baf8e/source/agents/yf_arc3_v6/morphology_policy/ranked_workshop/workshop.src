@@ -1,0 +1,11 @@
+MODULE v6.ranked_workshop
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        measured: Any
+        answer: Any
+    STEP measure
+        CALL workshop.measure(request=request) -> measured
+        NEXT choose
+    STEP choose
+        CALL workshop.select(measured=measured) -> answer
+        STOP answer

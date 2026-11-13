@@ -1,0 +1,213 @@
+{
+  "module_id": "search_witness_scope_c",
+  "declarations": [
+    {
+      "id": "policy.search_witness_scope_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "native_search_certificate_bound_to_all_supplied_inputs",
+        "current_explicit_source_witness_authorization"
+      ],
+      "applicability": [
+        "root_strategy_witness_engagement_scope"
+      ],
+      "invariants": [
+        "root_witness_cap_never_truncates_response_domain",
+        "full_policy_branches_are_proof_not_routes",
+        "extra_bounds_need_current_measurement_receipts",
+        "no_action_or_optimality_claim"
+      ],
+      "falsifiers": [
+        "stale_or_partial_certificate",
+        "changed_packet_or_model",
+        "missing_or_ambiguous_bound_receipt"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "witness.retain_authorized_engagement_prefix",
+        "witness.retain_unqualified_certificate"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.search_witness_scope_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "witness.retain_authorized_engagement_prefix"
+            },
+            {
+              "field": "current_request_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "certificate_input_digest_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_search_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "declared_response_domain_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "supported_request_mode",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "explicit_universal_quantifiers",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "one_current_authorized_root_witness",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_declared_bounds_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_native_bound_refs_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "authorized_prefix_primitive_count_fits",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "witness.retain_authorized_engagement_prefix"
+          }
+        },
+        {
+          "id": "projection.search_witness_scope_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "witness.retain_unqualified_certificate"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "current_request_equal",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "certificate_input_digest_equal",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "native_search_complete",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "declared_response_domain_complete",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "supported_request_mode",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "explicit_universal_quantifiers",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "one_current_authorized_root_witness",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "all_declared_bounds_supported",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "all_native_bound_refs_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "authorized_prefix_primitive_count_fits",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "witness.retain_unqualified_certificate"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.search_witness_scope_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "witness.retain_authorized_engagement_prefix"
+            }
+          ],
+          "reason_ref": "reason.current_certificate_and_independent_bounds"
+        },
+        {
+          "id": "tier.search_witness_scope_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "witness.retain_unqualified_certificate"
+            }
+          ],
+          "reason_ref": "reason.current_certificate_and_independent_bounds"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.witness_scope_is_not_act_release",
+      "reason_refs": [
+        "reason.current_certificate_and_independent_bounds"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "version": "1.1-v6",
+  "root": "G_official_completion",
+  "objective_aliases": [
+    "G_protocol_completion"
+  ],
+  "goals": {
+    "alignment_of_homologous_patterns": {
+      "family": "composition.family.geometric_correspondence",
+      "children": {
+        "feature_probe": {
+          "key": "composition.family.geometric_correspondence.compose",
+          "effect_to_check": "test_whether_one_palette_changes_while_the_registered_shapes_and_reference_remain_intact",
+          "requires": {
+            "framed_pair": true,
+            "homologous": true,
+            "control_attested": true,
+            "alignment_refuted": false,
+            "color_relation": "different"
+          }
+        },
+        "modifier": {
+          "key": "composition.family.geometric_correspondence.compose",
+          "effect_to_check": "observe_whether_contact_changes_one_pattern",
+          "requires": {
+            "framed_pair": true,
+            "homologous": true,
+            "asymmetric": true,
+            "control_attested": true,
+            "orientation_relation": "different",
+            "alignment_refuted": false
+          }
+        },
+        "managed_access": {
+          "key": "composition.family.resource_transaction.compose",
+          "effect_to_check": "test_the_next_bound_condition_of_an_orientation_access_and_capacity_composition",
+          "requires": {
+            "framed_pair": true,
+            "homologous": true,
+            "control_attested": true,
+            "alignment_refuted": false,
+            "managed_capacity_bound": true
+          }
+        },
+        "capacity_probe": {
+          "key": "composition.family.resource_transaction.compose",
+          "effect_to_check": "test_whether_entering_a_distinct_mark_restores_the_diminishing_meter",
+          "requires": {
+            "framed_pair": true,
+            "homologous": true,
+            "control_attested": true,
+            "alignment_refuted": false,
+            "capacity_needed": true,
+            "capacity_candidate_bound": true
+          }
+        },
+        "capacity_access_probe": {
+          "key": "composition.family.resource_transaction.compose",
+          "effect_to_check": "test_an_unknown_control_on_the_way_to_a_possible_capacity_source",
+          "requires": {
+            "framed_pair": true,
+            "homologous": true,
+            "control_attested": true,
+            "alignment_refuted": false,
+            "capacity_needed": true,
+            "capacity_candidate_bound": true
+          }
+        },
+        "peer_access_probe": {
+          "key": "composition.priority.information_value",
+          "effect_to_check": "measure_whether_an_uncharacterized_control_opens_access_to_the_peer",
+          "requires": {
+            "framed_pair": true,
+            "homologous": true,
+            "asymmetric": true,
+            "control_attested": true,
+            "orientation_relation": "aligned",
+            "single_pattern_contact_change": true,
+            "alignment_refuted": false,
+            "peer_discrimination_bound": true
+          }
+        },
+        "peer": {
+          "key": "composition.family.geometric_correspondence.reconcile",
+          "effect_to_check": "observe_peer_contact_while_correspondence_is_preserved",
+          "requires": {
+            "framed_pair": true,
+            "homologous": true,
+            "asymmetric": true,
+            "control_attested": true,
+            "orientation_relation": "aligned",
+            "single_pattern_contact_change": true,
+            "alignment_refuted": false
+          }
+        },
+        "entry_rebind": {
+          "key": "composition.family.geometric_correspondence.rebind_axis",
+          "effect_to_check": "compare_public_translations_on_the_revalidated_axis",
+          "requires": {
+            "framed_pair": true,
+            "homologous": true,
+            "alignment_refuted": false,
+            "control_attested": false,
+            "entry_rebind_bound": true
+          }
+        },
+        "entry_probe": {
+          "key": "composition.access.test_unseen_local_transition",
+          "requires": {
+            "framed_pair": true,
+            "homologous": true,
+            "alignment_refuted": false,
+            "entry_probe_bound": true
+          },
+          "effect_to_check": "Measure a single unknown transition after the access child; preserve the parent target and reopen position/control after any nonlocal effect."
+        }
+      }
+    }
+  },
+  "extensions": {
+    "limits": {
+      "max_depth": 2,
+      "max_states": 32,
+      "max_candidates": 4
+    },
+    "parent_family": "composition.family.geometric_correspondence",
+    "residuals": [
+      {
+        "feature": "color",
+        "open": "different",
+        "desired": "equal",
+        "route_key": "feature_probe",
+        "preserve": [
+          "shape",
+          "orientation",
+          "reference_color"
+        ],
+        "falsifier": "a_bound_contact_changes_neither_pigment_or_also_changes_orientation"
+      },
+      {
+        "feature": "orientation",
+        "open": "different",
+        "desired": "aligned",
+        "route_key": "modifier",
+        "preserve": [
+          "shape",
+          "reference_orientation"
+        ],
+        "falsifier": "a_bound_entry_leaves_the_residual_unchanged_or_moves_the_reference"
+      }
+    ]
+  }
+}

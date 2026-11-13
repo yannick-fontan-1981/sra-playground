@@ -1,0 +1,398 @@
+{
+  "case": "craf-055",
+  "game": "CRAF",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "--expose-gc",
+    "--max-old-space-size=1536",
+    "scripts/replay-public-regression-released-baseline.mjs",
+    "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+    "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+    "docs/migration/lot6a-evidence/integrated-final-02/released-recovery/regressions/craf-055-replay.json.gz",
+    "docs/migration/lot6a-evidence/integrated-final-02/released-recovery/regressions/craf-055-host-preparation.json"
+  ],
+  "startedAt": "2026-11-11T12:39:26.019041+00:00",
+  "timeoutSeconds": 600,
+  "baseline": {
+    "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+    "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2",
+    "bytes": 12767727
+  },
+  "trace": {
+    "path": "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+    "sha256": "cf69ad941e80e17f8d6cd66edc0419a0c6ff7aa8d9bbdaf503cb56a49e8c3f98",
+    "bytes": 40777
+  },
+  "expectedActions": 36,
+  "nodeOldSpaceMiB": 1536,
+  "preflight": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/released-recovery/preflight.json",
+    "sha256": "cbc6c70ef272c211f920fe4b3b52e7095f110c967a16cbfc3dd61a4c89572328",
+    "bytes": 1868
+  },
+  "historicalReportProcessExitedBeforeNode": true,
+  "nativeSourceBeforeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+  "executionInputsBefore": {
+    "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+    "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+    "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+    "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+    "tests/helpers/v6-live-game-campaign.ts": "62a29629b68b316dafd2a5a0868fc16409b5805591ad4849888107d94ce0e50a",
+    "docs/migration/lot6a-evidence/integrated-final-02/regression-recovery-cases.json": "9e5a5c26e92f797028cf30b487b32a677bce231b915947de87d9c50f11801f1c",
+    "docs/migration/lot6a-evidence/integrated-final-02/source-manifest.json": "52f3624d419cb8209e6545274b3867b5f150d8630a0daa05369fd7613ed435fe",
+    "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+  },
+  "phase": "completed",
+  "finishedAt": "2026-11-11T12:41:26.081812+00:00",
+  "exitCode": 0,
+  "timedOut": false,
+  "passed": true,
+  "nodeExitObserved": true,
+  "rawOutputPath": "docs/migration/lot6a-evidence/integrated-final-02/released-recovery/regressions/craf-055-output.raw.log",
+  "driverPid": 8,
+  "nodePid": 22,
+  "memorySamples": [
+    {
+      "elapsedSeconds": 0.0019627329998002097,
+      "pid": 22,
+      "VmSize": "110300 kB",
+      "VmHWM": "356 kB",
+      "VmRSS": "356 kB",
+      "Threads": "1"
+    },
+    {
+      "elapsedSeconds": 5.019705857999725,
+      "pid": 22,
+      "VmSize": "10976140 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "946772 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 10.050975941999695,
+      "pid": 22,
+      "VmSize": "10972340 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "968368 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 15.094706252999913,
+      "pid": 22,
+      "VmSize": "10964900 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "967256 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 20.113945220000005,
+      "pid": 22,
+      "VmSize": "10974908 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "982908 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 25.143768982999973,
+      "pid": 22,
+      "VmSize": "10975268 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "984784 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 30.181335281999964,
+      "pid": 22,
+      "VmSize": "10989348 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "1002976 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 35.211665658999664,
+      "pid": 22,
+      "VmSize": "10990348 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "1004100 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 40.25729872199963,
+      "pid": 22,
+      "VmSize": "10985352 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "999328 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 45.29278796299968,
+      "pid": 22,
+      "VmSize": "11016552 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "1030712 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 50.31409610999981,
+      "pid": 22,
+      "VmSize": "11010924 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "1025348 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 55.32835516199975,
+      "pid": 22,
+      "VmSize": "11028868 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "1043524 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 60.354786217999845,
+      "pid": 22,
+      "VmSize": "11162368 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "1176828 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 65.36698831099966,
+      "pid": 22,
+      "VmSize": "11221216 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "1236392 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 70.38345248799988,
+      "pid": 22,
+      "VmSize": "11242880 kB",
+      "VmHWM": "1318656 kB",
+      "VmRSS": "1258032 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 75.39135106899994,
+      "pid": 22,
+      "VmSize": "11313660 kB",
+      "VmHWM": "1401676 kB",
+      "VmRSS": "1329096 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 80.39778981499967,
+      "pid": 22,
+      "VmSize": "11372668 kB",
+      "VmHWM": "1401676 kB",
+      "VmRSS": "1388356 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 85.40552743699982,
+      "pid": 22,
+      "VmSize": "11420936 kB",
+      "VmHWM": "1492792 kB",
+      "VmRSS": "1436392 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 90.41572447399994,
+      "pid": 22,
+      "VmSize": "11408228 kB",
+      "VmHWM": "1496992 kB",
+      "VmRSS": "1429052 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 95.42232638299993,
+      "pid": 22,
+      "VmSize": "11514472 kB",
+      "VmHWM": "1535120 kB",
+      "VmRSS": "1535120 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 100.44588749099967,
+      "pid": 22,
+      "VmSize": "11495108 kB",
+      "VmHWM": "1534492 kB",
+      "VmRSS": "1515816 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 105.45920206799974,
+      "pid": 22,
+      "VmSize": "11476360 kB",
+      "VmHWM": "1573256 kB",
+      "VmRSS": "1497112 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 110.47933912499957,
+      "pid": 22,
+      "VmSize": "11562540 kB",
+      "VmHWM": "1589732 kB",
+      "VmRSS": "1583360 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 115.49467451999999,
+      "pid": 22,
+      "VmSize": "12290736 kB",
+      "VmHWM": "1810960 kB",
+      "VmRSS": "1810960 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 120.04929326199999,
+      "pid": 22,
+      "processPresent": false
+    }
+  ],
+  "lastObservedAt": "2026-11-11T12:41:26.078307+00:00",
+  "elapsedSeconds": 120.05474762699987,
+  "lastProgress": {
+    "status": "passed",
+    "failure": null
+  },
+  "rawOutputBytes": 123412,
+  "outputRaw": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/released-recovery/regressions/craf-055-output.raw.log",
+    "sha256": "15ca7a82937ee5899015efc22f5794ad5a7510c6ef64ef45aa503387afaae1bf",
+    "bytes": 123412
+  },
+  "output": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/released-recovery/regressions/craf-055-output.log.gz",
+    "sha256": "dafd405229de30020628dff8e26ae38c61524c607950deef1d9759afaf8159d6",
+    "bytes": 5768
+  },
+  "startedReceipt": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/released-recovery/regressions/craf-055-execution-started.json",
+    "sha256": "165649b182a3e20e33d3ed75f2bc1f9f6d2f89e7f6a8a584d719dd5c8eb39680",
+    "bytes": 3119
+  },
+  "nodeExitedBeforeComparison": true,
+  "hostPreparation": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/released-recovery/regressions/craf-055-host-preparation.json",
+    "sha256": "98b06ca179f3402950cd499fca6dd6db6e516ab835a539a3c059839263aec21b",
+    "bytes": 9417
+  },
+  "hostPreparationPassed": true,
+  "report": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/released-recovery/regressions/craf-055-replay.json.gz",
+    "sha256": "2e9b49a99ef1d996a67b2b1167b1b65f7714de84b3efb72767a372653cd6abcf",
+    "bytes": 13522358
+  },
+  "status": "passed",
+  "actions": 36,
+  "prefixes": 36,
+  "final": {
+    "actions": 36,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 97.19720060800002,
+    "prefixes": 36,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 36,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 73,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 37
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 37
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 35
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 34
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 31
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 38
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 36,
+      "resume": 35
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.60.0"
+  },
+  "passiveOwnerPresence": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/released-recovery/regressions/craf-055-passive-owner-presence.json",
+    "sha256": "957d79cb67180709acd0a0590ba1700a80b496915d138721b2aa8b6312821f03",
+    "bytes": 1131
+  },
+  "passiveOwnerPresencePassed": true,
+  "passiveOwnerPrefixesChecked": 0,
+  "passiveOwnerPrefixesPassed": 0,
+  "passiveOwnerTransitionsRetained": 0,
+  "comparison": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/released-recovery/regressions/craf-055-comparison.json",
+    "sha256": "3db99e1c5e1e03fd50346fbe9e6632792d4734b013f31ec8697d1505544ed10f",
+    "bytes": 11002
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "nativeSourceAfterDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+  "nativeSourceUnchanged": true,
+  "immutableInputsUnchanged": true,
+  "postprocessingFinishedAt": "2026-11-11T12:41:35.335083+00:00"
+}

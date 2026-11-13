@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.case-work-clock.v1",
+  "game": "SK48",
+  "selectedAt": "2026-11-10T08:44:44.967642+00:00",
+  "deadline": "2026-11-10T09:24:44.967642+00:00",
+  "maximumCumulativeSeconds": 2400,
+  "previousCumulativeSeconds": 0,
+  "reason": "Only admitted scene under unchanged pinned RootedLine projector among99 archived initial public packets, CWSE excluded before projection. No game implementation or solution inspected.",
+  "baselinePlan": {
+    "native": "0.44.0",
+    "targetLevels": 3,
+    "outerActionCap": 16,
+    "qualification": "Bounded development reference, not a full-game verdict"
+  },
+  "candidatePlan": {
+    "native": "0.45.0",
+    "targetLevels": 3,
+    "levelActionCap": 600,
+    "levelActiveSeconds": 360
+  },
+  "CWSE": {
+    "cumulativeSeconds": 2399.683865,
+    "newAttemptAuthorized": false
+  },
+  "qualification": "Elapsed case work is not reset between reference, candidate, diagnostic and browser attempts. At cumulative40minutes switch focus and retain unmet outcome."
+}

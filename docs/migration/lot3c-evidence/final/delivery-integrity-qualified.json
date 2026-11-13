@@ -1,0 +1,385 @@
+{
+  "schema": "logos-engine.native-delivery-integrity-qualified-regressions.v1",
+  "status": "integrity_passed_with_qualified_regression_difference",
+  "recordedAt": "2026-11-10T05:26:30.993569+00:00",
+  "directory": "docs/migration/lot3c-evidence/final",
+  "validationDirectory": "docs/migration/lot3c-evidence/final/validation",
+  "generator": {
+    "path": "scripts/verify-native-delivery-qualified-regressions.py",
+    "sha256": "c8dcb60ec57f5587083d80658646fc8e14c046dc6d9b43a9fa4f306926a43654",
+    "bytes": 16651
+  },
+  "verificationHelpers": [
+    {
+      "path": "scripts/verify-native-delivery.py",
+      "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a",
+      "bytes": 26494
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/diagnostic/check-regression-series-extension.py",
+      "sha256": "b99ae889852540fcab3d2725d763ecc372d776f016344616bcb9dd9ff6daec71",
+      "bytes": 15458
+    },
+    {
+      "path": "scripts/run-v53-campaign-proof.py",
+      "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+      "bytes": 5421
+    },
+    {
+      "path": "scripts/compare-v54-reactive-public-evidence.py",
+      "sha256": "3274acc5ed28a40f91ad0ee2e34c247ab160919ea43855cf514b4fbc22ef6a69",
+      "bytes": 18850
+    },
+    {
+      "path": "scripts/evidence-byte-parts.py",
+      "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+      "bytes": 7210
+    },
+    {
+      "path": "scripts/restore-v53-evidence.py",
+      "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+      "bytes": 3361
+    }
+  ],
+  "nativeSourceDigest": "3e88aa12214fd3d4a4feb8d63b946123b8394cb4a0cbd0a156cc059c37f7b46c",
+  "scope": {
+    "fileIntegrity": true,
+    "losslessEvidenceTransport": true,
+    "qualifiedEmptyObserverExtension": true,
+    "historicalRegressionGatePassed": false,
+    "passiveOwnerCoverageClaimed": false
+  },
+  "replacedContract": {
+    "helper": "scripts/verify-native-delivery.py",
+    "function": "verify_regressions",
+    "originalRequirement": "All historical recorded comparisons passed",
+    "qualifiedRequirement": "Strict failed 32/34 evidence unchanged; supplied empty-extension diagnostic exactly reproduced before and after",
+    "allOtherDeliveryChecksUseUnchangedHelpers": true
+  },
+  "matchedFileInventories": {
+    "native": 251,
+    "archive": 262,
+    "sourceAndTests": 561,
+    "buildInputs": 316,
+    "regressionExecutionInputs": 7
+  },
+  "originalSourceFilesUnchanged": 1786,
+  "originalSourceManifest": {
+    "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+    "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6",
+    "bytes": 424024
+  },
+  "tests": {
+    "tests": 1525,
+    "pass": 1525,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "regressions": {
+    "status": "failed",
+    "passed": 0,
+    "total": 2,
+    "comparisonChecksPassed": 32,
+    "comparisonChecksExpected": 34,
+    "passiveOwnerRequirements": [],
+    "passiveOwnerPrefixesChecked": 0,
+    "passiveOwnerPrefixesPassed": 0,
+    "passiveOwnerTransitionsRetained": 0,
+    "prevalidatedTotals": {
+      "commands": 31,
+      "completePublicPackets": 33,
+      "animationFrames": 336,
+      "prefixes": 19,
+      "requests": 50,
+      "naturalLevelBoundaries": 6
+    }
+  },
+  "regressionQualification": {
+    "verifier": {
+      "path": "docs/migration/lot3c-evidence/diagnostic/check-regression-series-extension.py",
+      "sha256": "b99ae889852540fcab3d2725d763ecc372d776f016344616bcb9dd9ff6daec71",
+      "bytes": 15458
+    },
+    "receipt": {
+      "path": "docs/migration/lot3c-evidence/final/regressions/empty-series-diagnostic-contract.json",
+      "sha256": "ede6af65eb219c25799f29ee41697d4743c2eacf4e63a7b5f5c0cc929c869872",
+      "bytes": 79023
+    },
+    "reproducedBeforeAndAfterTransport": true,
+    "diagnostic": {
+      "status": "qualified_empty_observer_extension",
+      "strictStatus": "failed",
+      "strictCasePasses": 0,
+      "strictCasesExpected": 2,
+      "strictChecksPassed": 32,
+      "strictChecksExpected": 34,
+      "strictChecksExactlyReproduced": true,
+      "sealedPrefixes": 19,
+      "inheritedIntegerCountValuesStrictlyEqual": 551,
+      "newCounterZeroPrefixes": 19,
+      "newAcquiredEventsEmptyPrefixes": 19,
+      "passiveOwnerCoverage": {
+        "requirements": 0,
+        "owners": 0,
+        "prefixesChecked": 0,
+        "transitionsRetained": 0
+      },
+      "declaredNormalization": {
+        "inheritedCounters": "None: all old count keys, integer types and values are strictly equal.",
+        "supplementalInheritedPayload": "Historical comparator.scope normalizes only sra-v6-SESSION:epoch: string prefixes; digest and digestScope are explicitly excluded.",
+        "newFields": {
+          "exposedReceptionEventCount": 0,
+          "exposedReceptionAcquiredEvents": []
+        }
+      },
+      "qualification": "Pure data comparison of retained reports, not a new game, replay, test or performance run. All 34 unchanged historical checks reproduce exactly; the strict result remains 32/34 with two failed cases. The sole failed check in each case compares the complete dictionary of Count-suffixed sharedSeries fields, which now adds exposedReceptionEventCount. Every previous integer counter is strictly equal without normalization. Both newly added fields are exactly zero/empty on every sealed prefix. Raw sharedSeries equality is not asserted: digestScope and digest differ, and retained epoch/event evidence uses fresh session references. A separately identified supplemental comparison normalizes only that namespace and excludes the two digest fields. No passive-owner requirement, owner, prefix or transition was checked; empty owner checks provide no coverage. This qualifies an observer-schema compatibility difference only, without replacing any historical gate, claiming private state/full caller identity, live success, performance, or an Exposed reception contribution."
+    },
+    "inputs": [
+      {
+        "path": "docs/migration/lot3c-evidence/diagnostic/check-regression-series-extension.py",
+        "sha256": "b99ae889852540fcab3d2725d763ecc372d776f016344616bcb9dd9ff6daec71",
+        "bytes": 15458
+      },
+      {
+        "path": "scripts/qualify-empty-series-extension.py",
+        "sha256": "84ecb558abd1f899d4398da5d4deb7907d95cce1554ee777b940bf44a2c15ddb",
+        "bytes": 11821
+      },
+      {
+        "path": "scripts/compare-v54-regressions.py",
+        "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+        "bytes": 18166
+      },
+      {
+        "path": "docs/migration/lot3c-evidence/final/regressions/regression-summary.json",
+        "sha256": "f3808593f18fedaac9232e791e353ed05a203475417d570830bc361f66ac9f26",
+        "bytes": 75765
+      },
+      {
+        "path": "scripts/run-recorded-public-regressions.py",
+        "sha256": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+        "bytes": 20897
+      },
+      {
+        "path": "scripts/replay-v53-public-regression.mjs",
+        "sha256": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+        "bytes": 2447
+      },
+      {
+        "path": "scripts/run-v53-campaign-proof.py",
+        "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+        "bytes": 5421
+      },
+      {
+        "path": "tests/helpers/v6-live-game-campaign.ts",
+        "sha256": "b8be1e877138806d37e62101cbcfcbe202c06afa50f2e577621aa0b40bbd5a0e",
+        "bytes": 60489
+      },
+      {
+        "path": "docs/migration/lot3c-evidence/recorded-regression-cases.json",
+        "sha256": "4470ebf020b7d86f7ca107069b23665ce6781c854ac39e74182501a1fd1c00de",
+        "bytes": 1887
+      },
+      {
+        "path": "docs/migration/lot3c-evidence/final/source-manifest.json",
+        "sha256": "9fc1bf0187cfbddc0ccfcd985c8b2be2187430cc4e8dd9de9ad06c3f1530c7de",
+        "bytes": 29682
+      },
+      {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-campaign.json.gz",
+        "sha256": "e56a0ff8cedbe9881f28ef7f0059f94848dce38c6c81dafc16e9d5ab0891d835",
+        "bytes": 1371861
+      },
+      {
+        "path": "docs/migration/lot3c-evidence/final/regressions/catr-042-replay.json.gz",
+        "sha256": "d93e0d44eb3ed6c496d6745e69abb934ace827b9dbc7c86dc7cb67f870b4b9aa",
+        "bytes": 1372331
+      },
+      {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+        "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816",
+        "bytes": 24340
+      },
+      {
+        "path": "docs/migration/lot3c-evidence/final/regressions/catr-042-comparison.json",
+        "sha256": "186b93adbb4eddbc01b367fa03bcebb30eacc6f3be1467db28a3f0739dba1378",
+        "bytes": 10809
+      },
+      {
+        "path": "docs/migration/lot3c-evidence/final/regressions/catr-042-execution.json",
+        "sha256": "2550f8a54281eba07f043a2f1fa01203d4d8d63853f3330421707fc8727d4674",
+        "bytes": 4993
+      },
+      {
+        "path": "docs/migration/lot3c-evidence/final/regressions/catr-042-passive-owner-presence.json",
+        "sha256": "47204ea791c9cf55fa32426a1bdfc532a1b72c09dec130f84173b37e6e90b2df",
+        "bytes": 1078
+      },
+      {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/regressions/rswp-041-replay.json.gz",
+        "sha256": "66e3281641743a1e678e47fde0beebf5fcfa4a97af72599088f6d2c1a003aa1e",
+        "bytes": 2176342
+      },
+      {
+        "path": "docs/migration/lot3c-evidence/final/regressions/rswp-042-replay.json.gz",
+        "sha256": "b7cbf598456d68f5a383b4d46debeee1bca19a09c1810739e09fb281e082ab8b",
+        "bytes": 2176849
+      },
+      {
+        "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+        "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755",
+        "bytes": 41445
+      },
+      {
+        "path": "docs/migration/lot3c-evidence/final/regressions/rswp-042-comparison.json",
+        "sha256": "cf2767c16e366c38647ac8b7baa2828401c3b4a2445d1eff9e58e3fe96a73d80",
+        "bytes": 10786
+      },
+      {
+        "path": "docs/migration/lot3c-evidence/final/regressions/rswp-042-execution.json",
+        "sha256": "8614d1083c849bf5965548044c011108117dc0c757068c91ef192ef4f3ecad74",
+        "bytes": 4948
+      },
+      {
+        "path": "docs/migration/lot3c-evidence/final/regressions/rswp-042-passive-owner-presence.json",
+        "sha256": "c168945db5a1d77a63c1bd0b4c3dc1ad5d53d922583eeb73c3591042dbcdb20e",
+        "bytes": 1078
+      }
+    ]
+  },
+  "nativeAgentWorker": {
+    "path": "dist/assets/v6-agent-worker-B1OcP6H8.js",
+    "sha256": "15278fe7545b318a81d69e61dd23e2fe6f4d2997f2f4082bc99e91f1e4e7ad65",
+    "bytes": 6378664
+  },
+  "sourceArchiveVerification": {
+    "files": 262,
+    "archive": {
+      "path": "docs/migration/lot3c-evidence/final/source-archive.tar.gz",
+      "sha256": "66a06f72bab5c691a747c4e58d7ba397392e67e20895ca08d41e69492990069e",
+      "bytes": 1641712
+    },
+    "members": 262,
+    "parts": 2,
+    "byteIdentical": true
+  },
+  "byteStorage": {
+    "reports": 3,
+    "parts": 8,
+    "bytes": 5846636,
+    "originalsAbsentBeforeRestore": true,
+    "temporaryRootRemoved": true,
+    "originalsUnchanged": true,
+    "restoredByteIdentical": [
+      {
+        "path": "docs/migration/lot3c-evidence/final/cwse-session/cwse-campaign.json.gz",
+        "sha256": "ecd9797b3c9290041c232df469a3359525b4f9f4fe2c805e0885c05875f8fe88",
+        "bytes": 2297456,
+        "manifest": "docs/migration/lot3c-evidence/final/cwse-session/cwse-campaign.json.gz.parts.json",
+        "parts": 3,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot3c-evidence/final/regressions/catr-042-replay.json.gz",
+        "sha256": "d93e0d44eb3ed6c496d6745e69abb934ace827b9dbc7c86dc7cb67f870b4b9aa",
+        "bytes": 1372331,
+        "manifest": "docs/migration/lot3c-evidence/final/regressions/catr-042-replay.json.gz.parts.json",
+        "parts": 2,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot3c-evidence/final/regressions/rswp-042-replay.json.gz",
+        "sha256": "b7cbf598456d68f5a383b4d46debeee1bca19a09c1810739e09fb281e082ab8b",
+        "bytes": 2176849,
+        "manifest": "docs/migration/lot3c-evidence/final/regressions/rswp-042-replay.json.gz.parts.json",
+        "parts": 3,
+        "restored": true,
+        "byteIdentical": true
+      }
+    ],
+    "generators": [
+      {
+        "path": "scripts/evidence-byte-parts.py",
+        "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+        "bytes": 7210
+      },
+      {
+        "path": "scripts/restore-v53-evidence.py",
+        "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+        "bytes": 3361
+      }
+    ]
+  },
+  "receipts": [
+    {
+      "path": "docs/migration/lot3c-evidence/final/source-manifest.json",
+      "sha256": "9fc1bf0187cfbddc0ccfcd985c8b2be2187430cc4e8dd9de9ad06c3f1530c7de",
+      "bytes": 29682
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/source-archive.json",
+      "sha256": "7cf99a72850bdc11af28edfe59578fb977e9eabd3b1681813cf5d3b7de04b38d",
+      "bytes": 31313
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/source-archive-parts.json",
+      "sha256": "7220bf2c2cdf04f44caf4fdff79c58535ffcad420c4f2259be6332935761987c",
+      "bytes": 791
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/validation/delta-tests-run.json",
+      "sha256": "be525002eadd293a57335d187f1920d2dd2ad0ff74e9afad9de779ba5a53c4eb",
+      "bytes": 101984
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/validation/checks-run.json",
+      "sha256": "8577303875c77317954b3d100b05adb5c9e0e6ce314e2120cd3391874cd9c21b",
+      "bytes": 69872
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/regressions/regression-summary.json",
+      "sha256": "f3808593f18fedaac9232e791e353ed05a203475417d570830bc361f66ac9f26",
+      "bytes": 75765
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/regressions/empty-series-diagnostic-contract.json",
+      "sha256": "ede6af65eb219c25799f29ee41697d4743c2eacf4e63a7b5f5c0cc929c869872",
+      "bytes": 79023
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/cwse-session/execution-cwse.json",
+      "sha256": "647180bd2d523c4fe26eb4b0b8b7d5fb8b1dd8c1c47874b749b7e31bd400e929",
+      "bytes": 63616
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/cwse-session/exposed-contribution.json",
+      "sha256": "7c5b8a874b6845f4aad2f8515b57e967fe0ca9bd1cb27a7a654eed4bbe539d3f",
+      "bytes": 204381
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/browser/browser-qa.json",
+      "sha256": "3c23e1883d3ba4abb9ff8fcfd17563c3c2ab19f2cfcb16e6714beea602db8a5f",
+      "bytes": 3093
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/cwse-resolution.json",
+      "sha256": "4b1e1084eb8c15f7497b3760ac0affbf2b5739816b6627a2b32afd971bacab77",
+      "bytes": 2636
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/cwse-terminal-diagnostic/source-result.json",
+      "sha256": "fab959ef2ac9f9123c5d179524c8cfdd7407cf24d22fe7e0f2c800833c0d7f96",
+      "bytes": 44096
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/cwse-terminal-diagnostic/native-result.json",
+      "sha256": "aff37a6d2d90d054622bc7afdbec2c4f8bdfce8a9f7506b6e632480a52a948dd",
+      "bytes": 2020
+    }
+  ],
+  "qualification": "Post-validation file integrity, lossless evidence transport and the explicitly qualified empty-observer extension diagnostic only. The native inventory, frozen source archive, successful recorded tests/build, 1786 pinned original source files and byte reconstruction use unchanged verify-native-delivery.py helpers. Only that verifier's regression acceptance contract is replaced, visibly in this distinct receipt schema. The unchanged historical regression summary and comparator outputs remain failed: 32/34 checks and zero of two strict case passes. The supplied diagnostic is recomputed before and after transport verification and must exactly match its retained receipt apart from its computation timestamp. It establishes only the documented empty observer-extension compatibility: the new counter is zero and the new event list empty, with original integer counters strictly equal. Supplemental inherited-payload equality uses only the diagnostic's declared namespace normalization and digest exclusions; raw private state or digest equality is not claimed. Empty passive-owner requirements provide zero passive-owner coverage. All native, harness, regression execution and diagnostic inputs are checked unchanged before and after. Additional receipts are fingerprinted only. This is not 34/34 historical regression success, a new campaign, complete source migration, game improvement, a performance verdict or closure of any delivery lot."
+}

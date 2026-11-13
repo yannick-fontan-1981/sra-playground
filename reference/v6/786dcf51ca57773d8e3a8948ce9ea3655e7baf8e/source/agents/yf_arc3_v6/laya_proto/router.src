@@ -1,0 +1,45 @@
+MODULE prototype.laya_router
+
+WORKFLOW route(request: Any) -> Any
+    STATE
+        session: Any
+        prepared: Any
+        navigated: Any
+        choice: Any
+        returned: Any
+    STEP begin
+        CALL prototype.begin(request=request) -> session
+        NEXT navigate
+    STEP navigate
+        WHILE session.pending
+            PROGRESS session.progress
+            STOP WHEN session.done
+            MAX DEPTH 8
+            ON LIMIT DEFER unresolved
+            DO
+                CALL prototype.context(session=session) -> prepared
+                IF prepared.release_phase
+                    IF prepared.release_allowed
+                        CALL prototype.release(session=prepared) -> session
+                    ELSE
+                        CALL prototype.reject(session=prepared) -> session
+                ELSE
+                    IF prepared.can_force
+                        CALL prototype.unique(session=prepared) -> choice
+                    ELSE
+                        IF prepared.code_only
+                            CALL prototype.abstain(session=prepared) -> choice
+                        ELSE
+                            CALL prototype.laya(session=prepared) -> choice
+                    IF prepared.navigation_phase
+                        CALL prototype.navigate(session=prepared,choice=choice) -> navigated
+                        IF navigated.has_continuation
+                            CALL prototype.resume(session=navigated) -> session
+                        ELSE
+                            CALL prototype.complete_navigation(session=navigated) -> session
+                    ELSE
+                        CALL prototype.apply(session=prepared,choice=choice) -> session
+        NEXT finish
+    STEP finish
+        CALL prototype.result(session=session) -> returned
+        STOP returned

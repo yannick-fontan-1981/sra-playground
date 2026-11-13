@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.native-loop-cost-comparison-policy.v1",
+  "relativeBudget": 0.1,
+  "unaffectedCaseIds": [
+    "STCK",
+    "SMLP"
+  ],
+  "stages": [
+    "session_elapsed",
+    "new_decision",
+    "known_prefix_service",
+    "known_prefix_request",
+    "known_prefix_guard",
+    "acquisition_and_persistence",
+    "persistence",
+    "restoration"
+  ],
+  "qualification": "Lot3A common-path controls, publication64/native0.36 baseline versus new Panel integration. Identical public returns, commands, counts and runner. An over-budget result remains unresolved. Added Panel path is measured separately without claiming equal work with a baseline that cannot execute it."
+}

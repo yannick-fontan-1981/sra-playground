@@ -1,0 +1,27 @@
+{
+  "schema": "logos-engine.lot5c-targeted-session-recovery.v1",
+  "status": "no_exploitable_execution_handle_found",
+  "startedAt": "2026-11-11T19:28:29.313827+00:00",
+  "finishedAt": "2026-11-11T19:30:15.890657+00:00",
+  "announcedBudgetSeconds": 180,
+  "elapsedSeconds": 106.57683,
+  "priorNotice": {
+    "path": "docs/migration/lot5c-evidence/recovery/coordination/recovery-02/prior-independent-notice.json",
+    "bytes": 4123,
+    "sha256": "7e288a2e925b2abe742aa25906ec418bf7e0ad37653b21b42683fc2ad28ce358"
+  },
+  "newLeadsChecked": [
+    "Available tool metadata for process/session/terminal lifecycle management: only exec_command/write_stdin apply to this runtime; no central listing/termination API exposed.",
+    "Named helper from independent notice: /tmp/sra-lot8a-push-checkpoint.py. Its input-under-SH defect supplies no current holder identity.",
+    "Only targeted original-opening metadata file names in/tmp: lot8a-open-source-03.py and lot8a-source-opening-attempt3.json. Attempt3 actually opened and ended19:11:05.908171UTC; no older execution handle was recovered.",
+    "Own scratch targeted handle/receipt filename search returned only two already-known checkpoint helpers."
+  ],
+  "holderIdentified": false,
+  "sessionActuallyClosed": false,
+  "processesSignaled": 0,
+  "mutexChanged": false,
+  "procInspectionsRepeated": false,
+  "exclusiveProbesDuringPeerWork": 0,
+  "attribution": "No current holder is attributed to8A or another lane. Shared-work resumption makes current EX contention potentially normal.",
+  "administrativeActionIfSingleFreshAttemptStillBlocked": "The execution-service administrator must inspect active execution/PTY records for the existing performance.lock identity, locate the exact owner execution, verify that it is an idle/abandoned helper rather than useful work, and terminate that exact execution/process group via the supported runtime lifecycle operation. Preserve the existing mutex; then confirm terminal execution and real EX availability."
+}

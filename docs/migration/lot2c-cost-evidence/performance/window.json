@@ -1,0 +1,93 @@
+{
+  "schema": "logos-engine.native-cost-reserved-window.v1",
+  "status": "completed",
+  "startedAt": "2026-11-09T21:29:27.799220+00:00",
+  "protocol": {
+    "path": "docs/migration/lot2c-cost-evidence/performance/README.md",
+    "bytes": 3852,
+    "sha256": "3a5fd6ffc6b935618ab958c39fc1f70b926370f91242ca82df5da7220b98c80b"
+  },
+  "policy": {
+    "path": "docs/migration/lot2c-cost-evidence/performance/comparison-policy.json",
+    "bytes": 798,
+    "sha256": "55e9530209b1b785c27474aa6085b2364995a99e894414078647007d0c0bfefb"
+  },
+  "runner": {
+    "path": "scripts/measure-native-loop-costs.mjs",
+    "bytes": 20670,
+    "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+  },
+  "comparator": {
+    "path": "scripts/compare-native-loop-costs.mjs",
+    "bytes": 9861,
+    "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb"
+  },
+  "caseManifest": {
+    "path": "docs/migration/lot2b-evidence/performance/cases.json",
+    "bytes": 1631,
+    "sha256": "7ca2508da22332eafaea53c1508d7363cec63cb0832cc6ea21713dbe331bace6"
+  },
+  "plannedOrder": [
+    "fresh_v62_baseline",
+    "frozen_0.36_candidate"
+  ],
+  "projectWorkRestriction": "Managed preview stopped; no other project tests, build, campaign, export or browser game during either measured run. Read-only review and light documentation allowed. External shared-host activity is not isolated.",
+  "observedProjectOverlaps": [],
+  "runs": [
+    {
+      "label": "baseline",
+      "cwd": "/workspace/scratch/c4dd29871d33/lot2c-baseline",
+      "command": [
+        "node",
+        "scripts/measure-native-loop-costs.mjs",
+        "docs/migration/lot2b-evidence/performance/cases.json",
+        "docs/migration/lot2c-cost-evidence/performance/baseline.json"
+      ],
+      "startedAt": "2026-11-09T21:29:27.800754+00:00",
+      "exitCode": 0,
+      "finishedAt": "2026-11-09T21:38:21.253261+00:00",
+      "elapsedSeconds": 533.4523318790016,
+      "report": {
+        "path": "docs/migration/lot2c-cost-evidence/performance/baseline.json.gz",
+        "bytes": 81391,
+        "sha256": "9d07a9819748a58d4534b29ab39f3941834224a4717430ba99807fc1b900c9d5"
+      },
+      "nativeSourceDigest": "17252e294212a1563b75037a0b0dd782c2ecbc8cc4e1997a4f2bb2103bdf4e8b",
+      "nativeSourceUnchanged": true,
+      "reportStatus": "passed",
+      "output": {
+        "path": "docs/migration/lot2c-cost-evidence/performance/baseline-output.log.gz",
+        "bytes": 472,
+        "sha256": "8c6de3b66c7a33518aaabe5e9e768b27568799eb0afd4067df4afef05b7655c0"
+      }
+    },
+    {
+      "label": "after",
+      "cwd": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout",
+      "command": [
+        "node",
+        "scripts/measure-native-loop-costs.mjs",
+        "docs/migration/lot2b-evidence/performance/cases.json",
+        "docs/migration/lot2c-cost-evidence/performance/after.json"
+      ],
+      "startedAt": "2026-11-09T21:38:21.253704+00:00",
+      "exitCode": 0,
+      "finishedAt": "2026-11-09T21:47:07.199160+00:00",
+      "elapsedSeconds": 525.9450914839981,
+      "report": {
+        "path": "docs/migration/lot2c-cost-evidence/performance/after.json.gz",
+        "bytes": 81344,
+        "sha256": "11a7629e79add8e6bc4778e8a16c38764daec02524225f00dcd41d55dfb0a77b"
+      },
+      "nativeSourceDigest": "ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b",
+      "nativeSourceUnchanged": true,
+      "reportStatus": "passed",
+      "output": {
+        "path": "docs/migration/lot2c-cost-evidence/performance/after-output.log.gz",
+        "bytes": 465,
+        "sha256": "acad90ed244b0b421b065ee9ec72cc894d057e93be1de04d24e79a0048f5cacd"
+      }
+    }
+  ],
+  "finishedAt": "2026-11-09T21:47:07.199514+00:00"
+}

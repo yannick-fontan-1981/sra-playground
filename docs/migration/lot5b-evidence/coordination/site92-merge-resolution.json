@@ -1,0 +1,14 @@
+{
+  "schema": "logos-engine.integration-merge-resolution.v1",
+  "recordedAt": "2026-11-11T01:48:23.197636+00:00",
+  "predecessorCommit": "d06620d1e4ca2c9758cc693b1ced9eeeddccb7e6",
+  "siteVersion": 92,
+  "nativeVersionPreserved": "0.58.0",
+  "resolutions": [
+    "Runtime version0.58; union includes fields and facets at their existing positions",
+    "Audit explicit aliases include both owners",
+    "Published4C transfer map plus exact three own5B mappings",
+    "Generated entry coverage to be regenerated from merged production runtime"
+  ],
+  "nativeProductionChangesOutsideIntegration": false
+}

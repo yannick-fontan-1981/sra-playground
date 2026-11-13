@@ -1,0 +1,478 @@
+{
+  "module_id": "v6_symbol_transactions",
+  "declarations": [
+    {
+      "id": "schema.symbol_transaction_probe",
+      "kind": "schema",
+      "premises": [
+        "measured_diagram_and_concentric_supports"
+      ],
+      "applicability": [
+        "current_admitted_point_input"
+      ],
+      "invariants": [
+        "no_oracle",
+        "current_guard",
+        "no_fixed_game_coordinates",
+        "roles_are_revisable"
+      ],
+      "falsifiers": [
+        "no_discriminating_change",
+        "different_current_center",
+        "competing_spaced_frames",
+        "unpredicted_change_of_other_compositions",
+        "scope_changed"
+      ],
+      "reason_refs": [
+        "principle.white_frame_opens_strong_competing_instruction_and_selection_suppositions"
+      ],
+      "configuration": {
+        "origin_drm_sha256": "0f9b3aa1585b44a1de01ce0705fc97af3f83979b39c740c5a9837313fcadc197",
+        "palette_white_value": 0,
+        "activation": [
+          {
+            "field": "three_branch_pair_left_row_count",
+            "operator": "greater_than",
+            "expected": 0
+          },
+          {
+            "field": "spaced_rect_palette_white_count",
+            "operator": "equals",
+            "expected": 1
+          }
+        ],
+        "candidate_admission": [
+          {
+            "field": "emphasis_instruction_admissible",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "current_spaced_frame_entity_count",
+            "operator": "equals",
+            "expected": 1
+          }
+        ],
+        "projection_rules": [
+          {
+            "id": "projection.exploration.white_spaced_frame_instruction_test",
+            "all_conditions": [
+              {
+                "field": "spaced_rect_palette_white_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "spaced_rect_point_palette_white_count",
+                "operator": "equals",
+                "expected": 1
+              }
+            ],
+            "static_facts": {
+              "emphasis_instruction_admissible": true,
+              "selection_principle_ref": "principle.white_frame_opens_strong_competing_instruction_and_selection_suppositions"
+            }
+          },
+          {
+            "id": "projection.exploration.test_distinct_spaced_emphasis_center",
+            "all_conditions": [
+              {
+                "field": "emphasis_instruction_admissible",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "static_facts": {
+              "emphasis_action_eligible": true,
+              "dynamic_goal_binding_satisfied": true,
+              "produced_enclosed_region_interaction_eligible": true,
+              "persistent_effectful_control_fragment_eligible": true,
+              "post_focus_transfer_invalidates_pre_reaction_click_frontier": true,
+              "active_goal_ref": "goal.test_indicated_interaction_at_emphasis_center",
+              "remaining_action_bound": 1,
+              "active_terminal_goal_ref": "goal.understand_and_satisfy_observed_requests",
+              "declared_terminal_goal_ref": "goal.understand_and_satisfy_observed_requests",
+              "advances_active_goal_chain": true,
+              "inherited_priority_from_terminal_goal": true,
+              "committed_verified_repetition": false,
+              "committed_plan_ref": null
+            },
+            "templated_facts": {
+              "premise_claim_refs": [
+                "claim.distinct_spaced_rectangular_emphasis.{candidate_ref}"
+              ],
+              "expected_configuration_or_goal_delta_ref": "expectation.indicated_interaction_changes_scene_and_cue.{candidate_ref}",
+              "falsifier_refs": [
+                "falsifier.emphasis_is_selection_or_feedback_only.{candidate_ref}",
+                "falsifier.indicated_interaction_has_no_effect.{candidate_ref}"
+              ],
+              "subgoal_ref": "subgoal.reconcile_indicated_interaction.{candidate_ref}",
+              "goal_dependency_chain_refs": [
+                "goal.understand_and_satisfy_observed_requests",
+                "goal.test_indicated_interaction_at_emphasis_center",
+                "subgoal.reconcile_indicated_interaction.{candidate_ref}"
+              ],
+              "declared_dependency_chain_refs": [
+                "goal.understand_and_satisfy_observed_requests",
+                "goal.test_indicated_interaction_at_emphasis_center",
+                "subgoal.reconcile_indicated_interaction.{candidate_ref}"
+              ],
+              "goal_graph_edge_refs": [
+                "edge.understanding_requires_reconciled_indication.{candidate_ref}"
+              ],
+              "discriminating_experiment_ref": "experiment.indicated_interaction.{candidate_ref}",
+              "reconciliation_checkpoint_ref": "checkpoint.indicated_interaction.{candidate_ref}"
+            }
+          },
+          {
+            "id": "projection.exploration.symbol_diagram_hot_activity",
+            "all_conditions": [
+              {
+                "field": "three_branch_pair_left_row_count",
+                "operator": "greater_than",
+                "expected": 0
+              },
+              {
+                "field": "emphasis_instruction_admissible",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "static_facts": {
+              "hot_workflow_ref": "workflow.hot.revalidated_symbol_recipe_requests",
+              "hot_workflow_activity_ref": "activity.observe_symbol_rules_and_requests",
+              "terminal_objective_contract_ref": "contract.all_observed_symbol_requests_filled_then_official_boundary",
+              "active_terminal_goal_ref": "goal.satisfy_observed_symbol_requests",
+              "declared_terminal_goal_ref": "goal.satisfy_observed_symbol_requests",
+              "symbol_diagram_roles_remain_revisable": true,
+              "symbol_diagram_rule_interpretation": "left_operands_right_results",
+              "symbol_diagram_effect_support": "pending_action_conditioned_evidence"
+            }
+          },
+          {
+            "id": "projection.exploration.symbol_diagram_causal_support",
+            "all_conditions": [
+              {
+                "field": "diagram_left_removal_right_appearance_count",
+                "operator": "greater_than",
+                "expected": 0
+              }
+            ],
+            "static_facts": {
+              "symbol_diagram_effect_support": "observed_operand_removal_and_result_appearance"
+            }
+          },
+          {
+            "id": "projection.exploration.symbol_diagram_select_symbol",
+            "all_conditions": [
+              {
+                "field": "symbol_diagram_roles_remain_revisable",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "diagram_point_full_symbol_count",
+                "operator": "equals",
+                "expected": 1
+              }
+            ],
+            "static_facts": {
+              "active_goal_ref": "goal.acquire_indicated_needed_symbol",
+              "hot_workflow_activity_ref": "activity.select_needed_available_symbol"
+            }
+          },
+          {
+            "id": "projection.exploration.symbol_diagram_load_operand",
+            "all_conditions": [
+              {
+                "field": "symbol_diagram_roles_remain_revisable",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "diagram_point_equal_pair_center_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "diagram_tight_white_center_count",
+                "operator": "equals",
+                "expected": 1
+              }
+            ],
+            "static_facts": {
+              "active_goal_ref": "goal.load_selected_symbol_into_operand_support",
+              "hot_workflow_activity_ref": "activity.load_required_displayed_operands"
+            }
+          },
+          {
+            "id": "projection.exploration.symbol_diagram_apply_transformation",
+            "all_conditions": [
+              {
+                "field": "symbol_diagram_roles_remain_revisable",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "diagram_point_branch_value_square_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "diagram_equal_pair_matches_left_group_count",
+                "operator": "equals",
+                "expected": 1
+              }
+            ],
+            "static_facts": {
+              "active_goal_ref": "goal.test_displayed_transformation_of_loaded_operands",
+              "hot_workflow_activity_ref": "activity.activate_and_verify_displayed_transformation"
+            }
+          },
+          {
+            "id": "projection.exploration.symbol_diagram_deliver_symbol",
+            "all_conditions": [
+              {
+                "field": "symbol_diagram_roles_remain_revisable",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "diagram_point_hollow_matches_tight_value_count",
+                "operator": "equals",
+                "expected": 1
+              }
+            ],
+            "static_facts": {
+              "active_goal_ref": "goal.fill_matching_symbol_request",
+              "hot_workflow_activity_ref": "activity.deliver_available_matching_symbol"
+            }
+          }
+        ],
+        "question": "Test the currently indicated interface contribution, retaining guide, selection, feedback and decoration as competing explanations.",
+        "composition_role": "information_question",
+        "goal": "G_official_completion",
+        "preserve": [
+          "other_loaded_supports",
+          "other_observed_requests",
+          "unselected_occurrences"
+        ],
+        "hypotheses": [
+          "supposition.frame_indicates_instruction",
+          "supposition.frame_indicates_selection",
+          "supposition.frame_indicates_feedback",
+          "supposition.frame_is_decoration"
+        ],
+        "expected_effect": "Observe a current selection, transfer, transformation or request change; do not assume that a halo is an acquired guide.",
+        "falsifiers": [
+          "no_discriminating_change",
+          "different_current_center",
+          "competing_spaced_frames",
+          "unpredicted_change_of_other_compositions",
+          "scope_changed"
+        ],
+        "initial_facts": {
+          "emphasis_instruction_admissible": false,
+          "symbol_diagram_roles_remain_revisable": false,
+          "active_goal_ref": "goal.test_indicated_interaction_at_emphasis_center"
+        },
+        "interface_required_effects": [
+          "select",
+          "load",
+          "transform",
+          "receive"
+        ],
+        "interface_dependency_depth": 2,
+        "interface_operand_relation": "preserve_displayed_left_to_right_order_until_a_permutation_is_observed",
+        "interface_learning_rules": [
+          {
+            "id": "projection.symbol_interface.observed_select",
+            "all_conditions": [
+              {
+                "field": "clicked_solid_preserved_and_tight_added",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "static_facts": {
+              "interface_effect": "select"
+            }
+          },
+          {
+            "id": "projection.symbol_interface.observed_load",
+            "all_conditions": [
+              {
+                "field": "selection_cleared_clicked_pair_takes_value",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "static_facts": {
+              "interface_effect": "load"
+            }
+          },
+          {
+            "id": "projection.symbol_interface.observed_transform",
+            "all_conditions": [
+              {
+                "field": "diagram_transition_count",
+                "operator": "greater_than",
+                "expected": 0
+              }
+            ],
+            "static_facts": {
+              "interface_effect": "transform"
+            }
+          },
+          {
+            "id": "projection.symbol_interface.observed_receive",
+            "all_conditions": [
+              {
+                "field": "selection_cleared_matching_hollow_filled",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "static_facts": {
+              "interface_effect": "receive"
+            }
+          }
+        ],
+        "interface_choice_order": [
+          "receive_selected",
+          "load_selected",
+          "activate_loaded",
+          "select_direct",
+          "select_operand"
+        ],
+        "interface_choice_fields": [
+          "recipe_dependency_depth",
+          "target_y",
+          "target_x",
+          "source_y",
+          "source_x"
+        ],
+        "interface_candidate_admission": [
+          {
+            "field": "interface_candidate_admitted",
+            "operator": "equals",
+            "expected": true
+          }
+        ],
+        "interface_projection_rules": [
+          {
+            "id": "projection.symbol_interface.receive_selected",
+            "all_conditions": [
+              {
+                "field": "interface_method_current",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "offer_kind",
+                "operator": "equals",
+                "expected": "receive_selected"
+              }
+            ],
+            "static_facts": {
+              "interface_candidate_admitted": true,
+              "active_goal_ref": "goal.test_matching_observed_receiver",
+              "selection_principle_ref": "principle.observed_interface_method_revalidated_for_current_typed_demand",
+              "roles_remain_revisable": true
+            }
+          },
+          {
+            "id": "projection.symbol_interface.load_selected",
+            "all_conditions": [
+              {
+                "field": "interface_method_current",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "offer_kind",
+                "operator": "equals",
+                "expected": "load_selected"
+              }
+            ],
+            "static_facts": {
+              "interface_candidate_admitted": true,
+              "active_goal_ref": "goal.test_observed_loading_support",
+              "selection_principle_ref": "principle.observed_interface_method_revalidated_for_current_typed_demand",
+              "roles_remain_revisable": true
+            }
+          },
+          {
+            "id": "projection.symbol_interface.activate_loaded",
+            "all_conditions": [
+              {
+                "field": "interface_method_current",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "offer_kind",
+                "operator": "equals",
+                "expected": "activate_loaded"
+              }
+            ],
+            "static_facts": {
+              "interface_candidate_admitted": true,
+              "active_goal_ref": "goal.test_current_displayed_transformation",
+              "selection_principle_ref": "principle.observed_interface_method_revalidated_for_current_typed_demand",
+              "roles_remain_revisable": true
+            }
+          },
+          {
+            "id": "projection.symbol_interface.select_direct",
+            "all_conditions": [
+              {
+                "field": "interface_method_current",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "offer_kind",
+                "operator": "equals",
+                "expected": "select_direct"
+              }
+            ],
+            "static_facts": {
+              "interface_candidate_admitted": true,
+              "active_goal_ref": "goal.select_available_matching_demand",
+              "selection_principle_ref": "principle.observed_interface_method_revalidated_for_current_typed_demand",
+              "roles_remain_revisable": true
+            }
+          },
+          {
+            "id": "projection.symbol_interface.select_operand",
+            "all_conditions": [
+              {
+                "field": "interface_method_current",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "offer_kind",
+                "operator": "equals",
+                "expected": "select_operand"
+              }
+            ],
+            "static_facts": {
+              "interface_candidate_admitted": true,
+              "active_goal_ref": "goal.select_dependency_of_current_demand",
+              "selection_principle_ref": "principle.observed_interface_method_revalidated_for_current_typed_demand",
+              "roles_remain_revisable": true
+            }
+          }
+        ],
+        "interface_question": "Can the observed interface method satisfy a current receiver contribution, directly or through a displayed dependency, while preserving other requests?",
+        "interface_hypotheses": [
+          "hypothesis.current_interface_controls_reproduce_observed_contrast",
+          "hypothesis.current_displayed_row_predicts_this_untried_transformation",
+          "hypothesis.receipt_contribution_remains_useful_in_new_scope"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "cases": [
+    {
+      "id": "catr-043",
+      "game": "CATR",
+      "baseline": {
+        "path": "docs/migration/lot3c-evidence/final/regressions/catr-042-replay.json.gz",
+        "sha256": "d93e0d44eb3ed6c496d6745e69abb934ace827b9dbc7c86dc7cb67f870b4b9aa"
+      },
+      "trace": {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+        "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816"
+      }
+    },
+    {
+      "id": "rswp-043",
+      "game": "RSWP",
+      "baseline": {
+        "path": "docs/migration/lot3c-evidence/final/regressions/rswp-042-replay.json.gz",
+        "sha256": "b7cbf598456d68f5a383b4d46debeee1bca19a09c1810739e09fb281e082ab8b"
+      },
+      "trace": {
+        "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+        "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755"
+      }
+    }
+  ],
+  "passiveOwnerRequirements": [],
+  "qualification": "Cold command recomputations against retained native0.43 reports from Site71, commit e9fd144112b05a65af5c88e9f05c541f43ed8ed7, digest 3e88aa12214fd3d4a4feb8d63b946123b8394cb4a0cbd0a156cc059c37f7b46c. The historically named catr-042-replay and rswp-042-replay reports contain the actual0.43 recomputed decisions. CATR keeps its actual0.42 public returns:12actions,3levels,8prefixes. RSWP keeps its actual0.38 public returns:19actions,3levels,11prefixes. These original traces are not relabeled as0.43 live traces. Every current command is computed before its recorded return. The unchanged comparator applies17boundedchecks percase, including the complete counter dictionary that already includes the Exposed counter in both0.43 and0.44. This new comparison does not alter the historical0.43-versus0.42 result32/34 or its qualified empty-observer-schema diagnosis. Empty passiveOwnerRequirements adds no passive-owner coverage. Recorded-return regressions only, not new live successes, full state equality, timing evidence or contribution proof."
+}

@@ -1,0 +1,15 @@
+{
+ "module_id":"v6_measured_visual_sequences",
+ "declarations":[{
+  "id":"schema.v6_measured_visual_sequences","kind":"schema",
+  "premises":["measured_indexed_frames_and_current_options"],
+  "applicability":["information_goal"],
+  "invariants":["all_visible_ranks_constrain_every_candidate","preserve_other_card_contents","unique_option_across_retained_models"],
+  "falsifiers":["changed_grid_or_options","competing_predictions","no_local_acceptance"],
+  "reason_refs":["reason.compose_independent_feature_predictions_before_answering"],
+  "configuration":{"maximum_cycle":3,"rotation_steps":[0,1,2,3],"maximum_layers":6,
+   "geometry_families":["mask_cycle","rigid_card_rotation","center_preserving_solid_rectangle","identical_unit_count_on_measured_lattice","shape_and_enclosed_fill"],
+   "numeric_families":["finite_cyclic_value","arithmetic_value","reflected_bounded_value"],
+   "question":"Test the unique currently displayed option compatible with the declared, observed feature relations at the missing original rank."}
+ }]
+}

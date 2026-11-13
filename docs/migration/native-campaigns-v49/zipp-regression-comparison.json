@@ -1,0 +1,373 @@
+{
+  "schema": "logos-engine.v49.public-regression-comparison.v1",
+  "passed": true,
+  "checks": [
+    {
+      "name": "same declared game/target and both results passed",
+      "passed": true
+    },
+    {
+      "name": "same production budgets and original game asset provenance",
+      "passed": true
+    },
+    {
+      "name": "same complete initial public packet",
+      "passed": true
+    },
+    {
+      "name": "same commands, full returned animation packet hashes and primitive boundaries",
+      "passed": true
+    },
+    {
+      "name": "same selected source entries, acquired prefix lengths and observed solver projections",
+      "passed": true
+    },
+    {
+      "name": "same retained source-layer projections and labeled public submission receipts",
+      "passed": true
+    },
+    {
+      "name": "same bounded native predicate composition counts, survivors and reuse",
+      "passed": true
+    },
+    {
+      "name": "same source and preferred entry coordination with current guards",
+      "passed": true
+    },
+    {
+      "name": "same reduction geometry plan and step modes",
+      "passed": true
+    },
+    {
+      "name": "same complete trace plans and latest acquired trace payloads",
+      "passed": true
+    },
+    {
+      "name": "same acquired linked packet counts, complete latest payloads and complete plans",
+      "passed": true
+    },
+    {
+      "name": "same complete queued-field plans and every acquired model event",
+      "passed": true
+    },
+    {
+      "name": "new catalogue layers remain empty and never select these retained trajectories",
+      "passed": true
+    },
+    {
+      "name": "same request outcomes and common caller counters",
+      "passed": true
+    },
+    {
+      "name": "same final public result and retained-session counters",
+      "passed": true
+    },
+    {
+      "name": "source frozen during both runs and no Python agent modules",
+      "passed": true
+    },
+    {
+      "name": "same retained mechanical-domain assessments",
+      "passed": true
+    }
+  ],
+  "independentlyRecomputedReferences": [
+    {
+      "kind": "trace_request",
+      "prefixIndex": 0,
+      "baseline": "trace:df060d614b721bb80473a042248ee2e4007ad003beb8627376bc9053d939226e",
+      "current": "trace:c0156485b53cf10c40726570e28c01d4b6d47080cf51b0ba3b166adb3aa1a054",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 1,
+      "baseline": "trace:c2ad6ab9c5946a9c60e22adf378a56491b9218e4c53439f8cb155814c167f692",
+      "current": "trace:cf9a728244b793d3ed0929ad40f287dfed40513989f6421bd5d011e07526c955",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 2,
+      "baseline": "trace:092423dc0f0df66ce5ee1e4a49b59a7398d70d09bca5f910d76f23097fe4a3b8",
+      "current": "trace:c4643aac326a4097521af2a1722d70b7f46ce40ba235cb3eebe2d305e7a85daf",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 3,
+      "baseline": "trace:3013674b141f0cd998c64f700a8d0a28249175f93a51f023004511070ed00583",
+      "current": "trace:dc13d46c6c46304bb9189217afd01e0dd3c6550ba358b0ac9c9c2d0740430285",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 4,
+      "baseline": "trace:204b0a64bfb075ea57f1d2924cb082090d2420c1c9189da02db94c30a2a11f0e",
+      "current": "trace:7c96d40f894403016fd26d00623087cfed35ed52c201ee24b8f71710449874bd",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 5,
+      "baseline": "trace:ed9961ff7c68e6e078a81fa5a80558f3c58221f5d98ec14619236ec57a8431e3",
+      "current": "trace:34782f028a1fc14977379cd51303a3f203feaaa3ae1a95118c713b9727ce52e8",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 6,
+      "baseline": "trace:461e5ac392071ebf90a11527351f36d8d9f05ab5a2c51e3ca9279f41a6d920e1",
+      "current": "trace:5ab9bf68a25976bec860b5aa46f2222d9e55fe443a2473104d61440586d814d6",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 7,
+      "baseline": "trace:111f44947e088d78e9fcf0ddaa4525c94822d9dd398bc961eb9ea7d60b0c3eed",
+      "current": "trace:7d81878302fdf4896f5888e8db6534713eb3c83c07f32120401155097be0b3ea",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 8,
+      "baseline": "trace:01e975550a12d1970ceeff4ea72daf6cad08b10e403e3570f7963bee6a01b263",
+      "current": "trace:13f5398974bd9bdde82ba8647a868c174969e04fe04d34b2d1766903274b30e6",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 9,
+      "baseline": "trace:0a9828c00f67397ffc28f39c4e0ede6cc129cf496fed0bff337843ddb76ab215",
+      "current": "trace:c51b52808a592738d66c7046f699085c2d58484ef38dc5d21d0dcb8c7fe6b367",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 10,
+      "baseline": "trace:9f088984a00d481b60917fa396d24bdee64d9d90cf0c0dfb6c6b694e14fc79af",
+      "current": "trace:558ad367ebe09b1cc32b80e60c260d4a463bcfe416d70707a09205ed152c8e1f",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 11,
+      "baseline": "trace:e778ce8fa6ac996d3c70fe0c723fd8182c60ff50773b90520e84de6450296b1b",
+      "current": "trace:6038df399093a808c3c08acfe10c804e69c546808351da69963a3d4112decca4",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 12,
+      "baseline": "trace:eb92c35db40644dae4f5d9c6cf319adb04325cd031615c288dfa73b04a1bb75d",
+      "current": "trace:aeb941617f0dcfda2f67196dac59135c8f7aa779e95b2bea0d232f2e1603b1ea",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 13,
+      "baseline": "trace:6c2f763fe0b9616b898250b2b64a4b9ac4c9ff88a1901d72a6878fc73add2ed4",
+      "current": "trace:038c3c5bb66f5cc055881ca481f6e73c54140b12b787489cdb9eb4f6d7ae84b3",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 14,
+      "baseline": "trace:67b93eb72c33a8e12bde25fcaecc4d093c4e89b93d1459ddfdeaac2bf0265f8a",
+      "current": "trace:be46809c4fd51ef1aecc2d7471cd157905a112fc94fb045aa15a3276abf29217",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 15,
+      "baseline": "trace:26457b3ab7c12b98801f9fa5e7084a8297fe22a6e295d54172d36ee5cf54228c",
+      "current": "trace:33b4893a52c3478d2c377532982dba433668f312b1fb0e325b280c53ae4f0ee0",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 16,
+      "baseline": "trace:b4f45cb057324f08a0db9a12cfb71a87811fcb84ebac9126d0de8103aa38e5ce",
+      "current": "trace:db3f57f63a889ac474470a9e4649b1240152d505a8a5f1832925b1636226a96e",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 17,
+      "baseline": "trace:75771ad6435f7c6849a9b2d2ed77ce1e6778a3cdc63fec716faf6f0f93305876",
+      "current": "trace:7e9470267bf16dc8dadd8a0c04071e57c44fefb385e4c90daa8010cb8ae2e1eb",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 18,
+      "baseline": "trace:7e1219caa3810d362826b5553141d70308f3b5609bd4b7cc5f7e5f4fb273ee91",
+      "current": "trace:22fb2b6181b0d74d3137497d27fbef65cfd58506d60d7c6dce18fb6e36e9d9f6",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 19,
+      "baseline": "trace:a0efc53b1c59d2aaf7c4de2131f86a9435f8ec9a12fc0b993f5e05a559ef74ce",
+      "current": "trace:182a1e98bb8dac2d7d7b2e92c514d37e8df030cdd1a0d5a93a6c3171a91062f9",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 20,
+      "baseline": "trace:908954f395e545b4f83813a19892f6995bac8d462d41ee0b5d699ebd361b3666",
+      "current": "trace:acef08a6cf5e69bd0690eac46a6956eae446cf69dec07c7c1a032c4f3c4c892d",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 21,
+      "baseline": "trace:b8ed495ece7fafb31c38c9fc3fdf589fa16c970da6488e4fdfc6fd8749dd27ce",
+      "current": "trace:b9bbab568dba0067412e23bef9967d9ecffddc049e263e7b0ab43102de43cba7",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 22,
+      "baseline": "trace:c3a61abe435b85af37e74f438b3cc219509f17e140abf2447a0c98a377717978",
+      "current": "trace:1a28daf270ecbbb21b1095f92d04e2e0d13c73158b8c1df58788a6e08450ca68",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 23,
+      "baseline": "trace:4beb82d5ad23673216b2dc35a008d2a81138b6956f3e376514dad5cfb3f6add2",
+      "current": "trace:c0e0f7c209ae8da93c8a77245a82e109633ec6f01314361fea24eb7b23daf375",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 24,
+      "baseline": "trace:fe4c1f7eb75d38b0f9bd49564283dbd0af4e7e824486236407ca9ce2d9545317",
+      "current": "trace:8553292d7451d14f18a0c83eface4e22813002327389ff565dc178821d4ca652",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 25,
+      "baseline": "trace:35bc04dbec1991fde6911e0ee91744b49bf43d0bc7f1b9c8b7082badc8dd250c",
+      "current": "trace:bedc32d7ba9572828c15209e198a8f0b1f0d3a8edd1f2e8c8d8cb5be22ff9a8f",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 26,
+      "baseline": "trace:dfad54f19e2157314787d9e17334d03bd146bf403d8b938f853a41f16007172a",
+      "current": "trace:220c5e4accc6f0faab660a79b698e406be73e6a14b75625f62eac1c1009bed14",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 27,
+      "baseline": "trace:654c793c4636be7f6ec6742d06b6d960aa8984566d54b0db689402bc34f5c924",
+      "current": "trace:3c8f9755097d434d123e8bd2d3de115a4161d52a9649e3573ba47de3b286ac32",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 28,
+      "baseline": "trace:bb070e6368459bf43504cf872515611c450b07f62cf3c630ed22efdc3e14692c",
+      "current": "trace:48f3be40cd78d1cee82836022a745562fc17d08183ed8cbe85f25f5600891376",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 29,
+      "baseline": "trace:01627530bb85f751a7740497ad028f3fbf8637198f3a5bfce93cd93829e5a9f2",
+      "current": "trace:de199ddc71c0f2f46fb065e12813fd9f9b20f8180645e0c8c1f67ed4f0e1d549",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 30,
+      "baseline": "trace:7ff4d486dac832df5a06e0473dd5fdfddd09665f1e05903967e700fae5c8f1bd",
+      "current": "trace:1caf8f11121eee42d64ec09371058f86ccdf1259fc77c24e66cd179bf49a09e0",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 31,
+      "baseline": "trace:7584c406d2a4698847c0d415f5a386c6d0595ca1e8a5e4e9f85bf028c79f31eb",
+      "current": "trace:1e03ea5b1e1aacea1ebce2b3817a1c466a4436f59bef4ee75385ee50340319d7",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 32,
+      "baseline": "trace:639975389c267c118ca13ab68de8f2c42cd8da284b6042e1e79f7c1f062bbcb8",
+      "current": "trace:a97d882cfd0f049761f451901caf322bd5e3f558406cac79a344bde4e16a62c4",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 33,
+      "baseline": "trace:8a108160c51721b61f72aa00f53bd0a9754fb9ec725058d00d9b753f2b220112",
+      "current": "trace:f6175f1a03bb0dfef2fc2b4b86e694325de040486b17d1a81c7b6f5b8569368e",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 34,
+      "baseline": "trace:0ec7c5ea2205a45d3f60d38aba1e6efe7fed4becb6f7365326d3dca0f58f1d7a",
+      "current": "trace:8a169bdeaa1304e17302b41539dd1175c4840f4646d9a89c068edb1d6be449bd",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 35,
+      "baseline": "trace:78b806d2412a1646c73e506f69fc14482f61625e87a261ccce97891fa8ec4cc2",
+      "current": "trace:4087a0e45e8258893d54e4630a341557b5966cf1b5028fea59026b3fb63cd120",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 36,
+      "baseline": "trace:1642d775265504d8a909186b2641ff7a3233c651b717ddcd81e4b72a81e9910a",
+      "current": "trace:e7fa5018ce3d7e7bebd5fba82a768f45906a37055b9dc304783aac9fa08759fc",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 37,
+      "baseline": "trace:8a48acce15b35a8a519674b470ac0eba8e67bf0b6bff96ca38fcc7e9f32fa91b",
+      "current": "trace:192895cc62c456ca95526388428fc4613bbfb31282f33fee026dda1186b4ba12",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 38,
+      "baseline": "trace:7b40c7e5067357e9e26b2982fda993f1ad3e2b845bf989a053f6b20a522cdfcb",
+      "current": "trace:b0f35ed09f931123dc433d5eb1d3e99ee4e141c308f7b5a3840caac3fab77adb",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "trace_request",
+      "prefixIndex": 39,
+      "baseline": "trace:9336a6a69ebf7cb7dcb48303bad0771f5053ac9f1eddc515ef384cc728cc50de",
+      "current": "trace:df82ca4abbbcd15baddcff74319838824596f7164269e515968a263955371707",
+      "independentlyRecomputed": true
+    }
+  ],
+  "before": {
+    "path": "docs/migration/native-campaigns-v48/zipp-six-levels.json",
+    "sha256": "98c4fb24013a13e93becf8fba6d3d4be51f2d94305b9bc0d21cc46fd366df5cb",
+    "sourceDigest": "30f078d458bf7771e203f3af194ff0bd89fb8fa233d3d0c14cee32282551ea24"
+  },
+  "after": {
+    "path": "docs/migration/native-campaigns-v49/zipp-recorded-public-replay.json",
+    "sha256": "9c36d2b69b13bb09e536d191694bfdd2e0ff987a4b98f8c115f9aa0ec0b2ef66",
+    "sourceDigest": "e5a7fc15461fd1ddbc9019b3749dad98a2235fc38df40898778d6c089cc13a5a",
+    "mode": "recorded-public-replay"
+  },
+  "compared": {
+    "commands": 101,
+    "completePublicPackets": 102,
+    "prefixes": 40
+  },
+  "qualification": "Exact public commands, complete packet hashes, source selection, prefix/acquisition counts and listed retained projections are compared. Observation session prefixes are normalized. Trace request and Queue model/portable-relation/request identifiers are independently recomputed from complete retained payloads before normalization. Their complete plans and acquired payloads remain compared, including numeric fields. Native graph chain/revision, inherited digest, session-derived observed-program model IDs, full labeled cache and five predicate proof references are outside the retained projection. Coordination source/preferred entries and current guards remain compared; full proposal digest and graph-node references are not asserted equal. Catalogue and catalogue-view own events must remain empty on all five prior trajectories. Linked Packet plans and latest acquired payloads retain complete comparison. Recorded-public replay recomputes commands before supplying prior actual returns and is neither a new live success nor a speed measurement."
+}

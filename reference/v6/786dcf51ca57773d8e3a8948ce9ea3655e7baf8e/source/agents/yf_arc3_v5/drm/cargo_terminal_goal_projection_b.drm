@@ -1,0 +1,524 @@
+{
+  "module_id": "arc3.cargo_terminal_goal_projection_b",
+  "declarations": [
+    {
+      "id": "policy.b_cargo_terminal_goal_projection",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_declared_delivery_goal_implies_released_allowed_pose_for_every_beneficiary_without_promoting_a_goal_or_law"
+      ],
+      "configuration": {
+        "sidecar_source_kind_ref": "cargo.current_terminal_contract.b.v1",
+        "sidecar_support_predicate_ref": "current_source_cargo_terminal_contract_bound",
+        "epistemic_pair_projection": {
+          "proposed/proposed": "proposed",
+          "proposed/supported": "proposed",
+          "proposed/established": "proposed",
+          "supported/proposed": "proposed",
+          "supported/supported": "supported",
+          "supported/established": "supported",
+          "established/proposed": "proposed",
+          "established/supported": "supported",
+          "established/established": "established"
+        },
+        "requirement_ref": "ALL_DECLARED_CARGO_RELEASED_IN_ALLOWED_POSES",
+        "beneficiary_quantifier_ref": "ALL_DECLARED_BENEFICIARIES",
+        "required_goal_scope_fields": [
+          "parent_goal_ref",
+          "scope_ref",
+          "epoch",
+          "input_revision_ref",
+          "level_scope_ref"
+        ],
+        "clause_projection": [
+          {
+            "predicate_map_ref": "delivered",
+            "field_ref": "cargo_by_ref",
+            "suffix_path": [
+              "delivery_acquired"
+            ],
+            "comparison": "EQ",
+            "expected": true,
+            "expected_from_allowed_poses": false
+          },
+          {
+            "predicate_map_ref": "released",
+            "field_ref": "cargo_by_ref",
+            "suffix_path": [
+              "holder_ref"
+            ],
+            "comparison": "EQ",
+            "expected": null,
+            "expected_from_allowed_poses": false
+          },
+          {
+            "predicate_map_ref": "allowed_pose",
+            "field_ref": "cargo_pose_by_ref",
+            "suffix_path": [],
+            "comparison": "IN",
+            "expected": null,
+            "expected_from_allowed_poses": true
+          }
+        ]
+      },
+      "declared_alternative_refs": [
+        "cargo_goal.supported",
+        "cargo_goal.established",
+        "cargo_goal.proposed",
+        "cargo_goal.missing"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "cargo_goal.supported": "rule.b_supported_cargo_terminal_future",
+        "cargo_goal.proposed": "rule.b_proposed_cargo_terminal_future",
+        "cargo_goal.established": "rule.b_established_cargo_terminal_future"
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_goal.supported",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_goal.supported"
+            },
+            {
+              "field": "terminal_contract_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "terminal_goal_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "projection_epistemic_status",
+              "operator": "equals",
+              "expected": "supported"
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_declared_delivery_goal_implies_released_allowed_pose_for_every_beneficiary_without_promoting_a_goal_or_law",
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_goal.established",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_goal.established"
+            },
+            {
+              "field": "terminal_contract_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "terminal_goal_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "projection_epistemic_status",
+              "operator": "equals",
+              "expected": "established"
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_declared_delivery_goal_implies_released_allowed_pose_for_every_beneficiary_without_promoting_a_goal_or_law",
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_goal.proposed",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_goal.proposed"
+            },
+            {
+              "field": "terminal_contract_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "terminal_goal_supported",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_declared_delivery_goal_implies_released_allowed_pose_for_every_beneficiary_without_promoting_a_goal_or_law",
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_goal.missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_goal.missing"
+            },
+            {
+              "field": "terminal_contract_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_declared_delivery_goal_implies_released_allowed_pose_for_every_beneficiary_without_promoting_a_goal_or_law",
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_supported_cargo_terminal_future",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "current_explicit_terminal_goal_contract_or_revalidated_memory",
+        "all_beneficiaries_and_final_poses_declared"
+      ],
+      "applicability": [
+        "cargo_terminal_future_projection"
+      ],
+      "invariants": [
+        "no_goal_inferred_from_repeated_objects",
+        "no_goal_or_law_confirmation_from_supposition",
+        "preserve_principal_goal_and_original_epistemic_strength",
+        "all_declared_beneficiaries_not_all_target_slots"
+      ],
+      "falsifiers": [
+        "terminal_requirement_absent_or_changed",
+        "current_goal_scope_contradiction",
+        "parent_goal_support_changed"
+      ],
+      "reason_refs": [
+        "reason_declared_delivery_goal_implies_released_allowed_pose_for_every_beneficiary_without_promoting_a_goal_or_law"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Current declared terminal cargo future",
+          "required_fields": [
+            "output_term_ref",
+            "goal_ref",
+            "future_payload"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "cargo.current_terminal_future.b.v1",
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "future_digest": "future_digest",
+            "goal_ref": "goal_ref",
+            "goal_term_digest": "goal_term_digest",
+            "goal_claim_digest": "goal_claim_digest",
+            "original_goal_epistemic_status": "original_goal_epistemic_status",
+            "frame_ref": "frame_ref",
+            "value": "future_payload",
+            "terminal_contract_term_ref": "terminal_contract_term_ref",
+            "terminal_contract_support_ref": "terminal_contract_support_ref",
+            "terminal_contract_term_digest": "terminal_contract_term_digest",
+            "terminal_contract_claim_digest": "terminal_contract_claim_digest",
+            "principal_goal_epistemic_status": "principal_goal_epistemic_status",
+            "terminal_contract_epistemic_status": "terminal_contract_epistemic_status",
+            "projection_epistemic_status": "projection_epistemic_status"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_support_claim_ref}",
+          "predicate": "current_declared_cargo_terminal_future_projected",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{goal_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "output_support_claim_ref",
+            "output_term_ref",
+            "goal_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "level_scope_ref": "level_scope_ref",
+            "frame_ref": "frame_ref"
+          },
+          "attribute_bindings": {
+            "goal_term_digest": "goal_term_digest",
+            "goal_claim_digest": "goal_claim_digest",
+            "original_goal_epistemic_status": "original_goal_epistemic_status",
+            "future_digest": "future_digest",
+            "terminal_contract_term_ref": "terminal_contract_term_ref",
+            "terminal_contract_support_ref": "terminal_contract_support_ref",
+            "terminal_contract_term_digest": "terminal_contract_term_digest",
+            "terminal_contract_claim_digest": "terminal_contract_claim_digest",
+            "principal_goal_epistemic_status": "principal_goal_epistemic_status",
+            "terminal_contract_epistemic_status": "terminal_contract_epistemic_status",
+            "projection_epistemic_status": "projection_epistemic_status"
+          },
+          "static_attributes": {
+            "no_physical_truth_promotion": true,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_proposed_cargo_terminal_future",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "current_explicit_terminal_goal_contract_or_revalidated_memory",
+        "all_beneficiaries_and_final_poses_declared"
+      ],
+      "applicability": [
+        "cargo_terminal_future_projection"
+      ],
+      "invariants": [
+        "no_goal_inferred_from_repeated_objects",
+        "no_goal_or_law_confirmation_from_supposition",
+        "preserve_principal_goal_and_original_epistemic_strength",
+        "all_declared_beneficiaries_not_all_target_slots"
+      ],
+      "falsifiers": [
+        "terminal_requirement_absent_or_changed",
+        "current_goal_scope_contradiction",
+        "parent_goal_support_changed"
+      ],
+      "reason_refs": [
+        "reason_declared_delivery_goal_implies_released_allowed_pose_for_every_beneficiary_without_promoting_a_goal_or_law"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Current declared terminal cargo future",
+          "required_fields": [
+            "output_term_ref",
+            "goal_ref",
+            "future_payload"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "cargo.current_terminal_future.b.v1",
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "future_digest": "future_digest",
+            "goal_ref": "goal_ref",
+            "goal_term_digest": "goal_term_digest",
+            "goal_claim_digest": "goal_claim_digest",
+            "original_goal_epistemic_status": "original_goal_epistemic_status",
+            "frame_ref": "frame_ref",
+            "value": "future_payload",
+            "terminal_contract_term_ref": "terminal_contract_term_ref",
+            "terminal_contract_support_ref": "terminal_contract_support_ref",
+            "terminal_contract_term_digest": "terminal_contract_term_digest",
+            "terminal_contract_claim_digest": "terminal_contract_claim_digest",
+            "principal_goal_epistemic_status": "principal_goal_epistemic_status",
+            "terminal_contract_epistemic_status": "terminal_contract_epistemic_status",
+            "projection_epistemic_status": "projection_epistemic_status"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_support_claim_ref}",
+          "predicate": "current_declared_cargo_terminal_future_projected",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{goal_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "output_support_claim_ref",
+            "output_term_ref",
+            "goal_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "level_scope_ref": "level_scope_ref",
+            "frame_ref": "frame_ref"
+          },
+          "attribute_bindings": {
+            "goal_term_digest": "goal_term_digest",
+            "goal_claim_digest": "goal_claim_digest",
+            "original_goal_epistemic_status": "original_goal_epistemic_status",
+            "future_digest": "future_digest",
+            "terminal_contract_term_ref": "terminal_contract_term_ref",
+            "terminal_contract_support_ref": "terminal_contract_support_ref",
+            "terminal_contract_term_digest": "terminal_contract_term_digest",
+            "terminal_contract_claim_digest": "terminal_contract_claim_digest",
+            "principal_goal_epistemic_status": "principal_goal_epistemic_status",
+            "terminal_contract_epistemic_status": "terminal_contract_epistemic_status",
+            "projection_epistemic_status": "projection_epistemic_status"
+          },
+          "static_attributes": {
+            "no_physical_truth_promotion": true,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_established_cargo_terminal_future",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "current_explicit_terminal_goal_contract_or_revalidated_memory",
+        "all_beneficiaries_and_final_poses_declared"
+      ],
+      "applicability": [
+        "cargo_terminal_future_projection"
+      ],
+      "invariants": [
+        "no_goal_inferred_from_repeated_objects",
+        "no_goal_or_law_confirmation_from_supposition",
+        "preserve_principal_goal_and_original_epistemic_strength",
+        "all_declared_beneficiaries_not_all_target_slots"
+      ],
+      "falsifiers": [
+        "terminal_requirement_absent_or_changed",
+        "current_goal_scope_contradiction",
+        "parent_goal_support_changed"
+      ],
+      "reason_refs": [
+        "reason_declared_delivery_goal_implies_released_allowed_pose_for_every_beneficiary_without_promoting_a_goal_or_law"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Current declared terminal cargo future",
+          "required_fields": [
+            "output_term_ref",
+            "goal_ref",
+            "future_payload"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "cargo.current_terminal_future.b.v1",
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "future_digest": "future_digest",
+            "goal_ref": "goal_ref",
+            "goal_term_digest": "goal_term_digest",
+            "goal_claim_digest": "goal_claim_digest",
+            "original_goal_epistemic_status": "original_goal_epistemic_status",
+            "frame_ref": "frame_ref",
+            "value": "future_payload",
+            "terminal_contract_term_ref": "terminal_contract_term_ref",
+            "terminal_contract_support_ref": "terminal_contract_support_ref",
+            "terminal_contract_term_digest": "terminal_contract_term_digest",
+            "terminal_contract_claim_digest": "terminal_contract_claim_digest",
+            "principal_goal_epistemic_status": "principal_goal_epistemic_status",
+            "terminal_contract_epistemic_status": "terminal_contract_epistemic_status",
+            "projection_epistemic_status": "projection_epistemic_status"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_support_claim_ref}",
+          "predicate": "current_declared_cargo_terminal_future_projected",
+          "family": "epistemic",
+          "epistemic_status": "established",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{goal_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "output_support_claim_ref",
+            "output_term_ref",
+            "goal_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "level_scope_ref": "level_scope_ref",
+            "frame_ref": "frame_ref"
+          },
+          "attribute_bindings": {
+            "goal_term_digest": "goal_term_digest",
+            "goal_claim_digest": "goal_claim_digest",
+            "original_goal_epistemic_status": "original_goal_epistemic_status",
+            "future_digest": "future_digest",
+            "terminal_contract_term_ref": "terminal_contract_term_ref",
+            "terminal_contract_support_ref": "terminal_contract_support_ref",
+            "terminal_contract_term_digest": "terminal_contract_term_digest",
+            "terminal_contract_claim_digest": "terminal_contract_claim_digest",
+            "principal_goal_epistemic_status": "principal_goal_epistemic_status",
+            "terminal_contract_epistemic_status": "terminal_contract_epistemic_status",
+            "projection_epistemic_status": "projection_epistemic_status"
+          },
+          "static_attributes": {
+            "no_physical_truth_promotion": true,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    }
+  ]
+}

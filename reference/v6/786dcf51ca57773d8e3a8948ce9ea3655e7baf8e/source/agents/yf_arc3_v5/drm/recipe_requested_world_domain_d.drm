@@ -1,0 +1,62 @@
+{
+  "module_id": "arc3.recipe_requested_world_domain_d",
+  "declarations": [
+    {
+      "id": "policy.recipe_requested_world_domain_d", "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order", "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason.canonical_requested_native_world_domain", "reason.requested_world_projection_missing"],
+      "declared_alternative_refs": ["world_domain.publish_complete", "world_domain.unknown"],
+      "selection_tie_breakers": [{"field": "alternative_ref", "preferred_order": "minimize"}],
+      "canonical_equivalence_tie_break_debt_ref": "debt.world_domain_equivalent_projection",
+      "selection_tiers": [
+        {"id": "tier.world_domain.complete", "reason_ref": "reason.canonical_requested_native_world_domain",
+         "all_conditions": [
+           {"field": "alternative_ref", "operator": "equals", "expected": "world_domain.publish_complete"},
+           {"field": "requested_world_domain_complete", "operator": "equals", "expected": true}
+         ]},
+        {"id": "tier.world_domain.unknown", "reason_ref": "reason.requested_world_projection_missing",
+         "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "world_domain.unknown"}]}
+      ],
+      "meaning_template_ref_by_alternative": {"world_domain.publish_complete": "rule.canonical_requested_world_domain_d"},
+      "configuration": {"closure_predicate_ref": "qualifies_recipe_parent_requested_world_domain",
+                        "domain_source_kind_ref": "recipe.requested_world_domain.v1"}
+    },
+    {
+      "id": "rule.canonical_requested_world_domain_d", "kind": "rule",
+      "evaluation": "project_requested_conclusions", "supported_operators": ["DERIVE"],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic", "reason_refs": ["reason.canonical_requested_native_world_domain"],
+      "invariants": ["dto_not_authority_without_canonical_question_binding", "requested_domain_not_whole_world",
+                     "opaque_goal_map_not_interpreted", "canonical_condition_links_only", "no_action_authority"],
+      "term_templates": [{
+        "id_pattern": "{domain_term_ref}", "kind": "value", "label": "Canonical requested world-variable domain",
+        "required_fields": ["domain_term_ref", "value", "domain_digest", "frame_ref", "observation_record_ref"],
+        "static_attributes": {"source_kind_ref": "recipe.requested_world_domain.v1", "universal_world_closure": false},
+        "attribute_bindings": {"value": "value", "domain_digest": "domain_digest", "frame_ref": "frame_ref",
+                               "observation_record_ref": "observation_record_ref", "raw_input_ref": "raw_input_ref"}
+      }],
+      "claim_templates": [{
+        "id_pattern": "{world_closure_claim_ref}", "predicate": "qualifies_recipe_parent_requested_world_domain",
+        "family": "epistemic", "epistemic_status": "supported",
+        "argument_patterns": ["{parent_goal_ref}", "{world_lattice_ref}"],
+        "required_term_patterns": ["{parent_goal_ref}", "{world_lattice_ref}", "{domain_term_ref}"],
+        "required_fields": ["world_closure_claim_ref", "parent_goal_ref", "world_lattice_ref", "domain_digest", "requested_variable_refs"],
+        "attribute_bindings": {"requested_variable_refs": "requested_variable_refs", "domain_digest": "domain_digest",
+                               "native_request_digest": "native_request_digest", "parent_demand_signature_ref": "parent_demand_signature_ref"},
+        "static_attributes": {"requested_domain_complete": true, "universal_world_closure": false,
+                              "opaque_desired_future_map_interpreted": false, "no_action_authority": true},
+        "scope_bindings": {
+          "frame_ref": "frame_ref", "raw_input_ref": "raw_input_ref", "timeline_ref": "timeline_ref",
+          "observation_record_ref": "observation_record_ref", "parent_goal_ref": "parent_goal_ref",
+          "parent_contribution_ref": "parent_contribution_ref", "consumer_ref": "consumer_ref", "caller_ref": "caller_ref",
+          "scope_ref": "scope_ref", "episode_ref": "episode_ref", "level_scope_ref": "level_scope_ref", "epoch": "epoch",
+          "input_revision_ref": "input_revision_ref", "evidence_revision_ref": "evidence_revision_ref",
+          "model_revision_ref": "model_revision_ref", "event_owner_ref": "event_owner_ref"
+        }
+      }]
+    }
+  ]
+}

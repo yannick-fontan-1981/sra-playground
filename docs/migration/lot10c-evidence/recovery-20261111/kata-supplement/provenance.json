@@ -1,0 +1,140 @@
+{
+  "schema": "logos-engine.lot10c.kata-supplement-provenance.v1",
+  "recordedAt": "2026-11-11T20:44:42.751409+00:00",
+  "status": "prepared_not_executed",
+  "purpose": "Preserve the inherited eleventh KATA regression as a separately declared supplement without altering the ten-case10C manifest, driver, or17-check comparator.",
+  "inputs": {
+    "inheritedElevenCaseDeclaration": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/contract/regression-cases-final.json",
+      "sha256": "612786e95a3cd6c98c7a0ccd4bd5e616ff5b54d1de18f7962aae79d50faf4f36",
+      "bytes": 9035
+    },
+    "unchangedTenCaseDeclaration": {
+      "path": "docs/migration/lot10c-evidence/recorded-regression-cases.json",
+      "sha256": "a16f67724f53def79fe476716c12a61e8064df871911772731983fa2505da3a9",
+      "bytes": 8305
+    },
+    "strictComparator": {
+      "path": "scripts/compare-v54-regressions.py",
+      "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+      "bytes": 18166
+    }
+  },
+  "manifest": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/recorded-regression-case-kata.json",
+    "sha256": "23ddc58b54e5ad3657ada016daa88466244dc951d1a6f57f90aeae9a38717f66",
+    "bytes": 3477
+  },
+  "exactInheritedCaseRowCopied": true,
+  "tenOriginalRowsEqualInheritedFirstTen": true,
+  "tenOriginalDeclarationUnchanged": true,
+  "sameSeventeenCheckNames": true,
+  "comparatorFingerprintVerified": true,
+  "historicalProvenance": {
+    "lot": "6A",
+    "nativeVersion": "0.60.0",
+    "comparisonBasisRetained": "fresh_current_native_self_consistency",
+    "meaningHere": "Comparison against the retained actual0.60 public report and trace; no new self-comparison, original-agent equivalence or live success claimed."
+  },
+  "intendedCandidate": {
+    "nativeVersion": "0.66.0",
+    "fileCount": 329,
+    "digest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+    "qualification": "Previously declared prepared composition identity. This preparation has not rehashed native files; the executing generic replay must verify its actual current freeze before and after."
+  },
+  "coverage": {
+    "coreCases": 10,
+    "coreExpectedChecks": 170,
+    "supplementCases": 1,
+    "supplementExpectedChecks": 17,
+    "combinedDistinctCasesIfBothPass": 11,
+    "combinedChecksIfBothPass": 187,
+    "separateExecutions": true,
+    "successAsserted": false
+  },
+  "coordination": {
+    "lock": "/workspace/shared/sra-coordination/performance.lock",
+    "mode": "shared_nonblocking",
+    "before": [
+      {
+        "path": "/workspace/shared/sra-coordination/lot5c-status.json",
+        "updatedAt": "2026-11-11T20:39:04.511712+00:00",
+        "quietRequested": false,
+        "performanceStarted": false,
+        "performanceCompleted": null
+      },
+      {
+        "path": "/workspace/shared/sra-coordination/lot6b-status.json",
+        "updatedAt": "2026-11-11T20:31:07.200353+00:00",
+        "quietRequested": false,
+        "performanceStarted": false,
+        "performanceCompleted": null
+      },
+      {
+        "path": "/workspace/shared/sra-coordination/lot8a-status.json",
+        "updatedAt": "2026-11-11T20:42:24.934984+00:00",
+        "quietRequested": null,
+        "performanceStarted": false,
+        "performanceCompleted": null
+      }
+    ],
+    "beforeWrite": [
+      {
+        "path": "/workspace/shared/sra-coordination/lot5c-status.json",
+        "updatedAt": "2026-11-11T20:39:04.511712+00:00",
+        "quietRequested": false,
+        "performanceStarted": false,
+        "performanceCompleted": null
+      },
+      {
+        "path": "/workspace/shared/sra-coordination/lot6b-status.json",
+        "updatedAt": "2026-11-11T20:31:07.200353+00:00",
+        "quietRequested": false,
+        "performanceStarted": false,
+        "performanceCompleted": null
+      },
+      {
+        "path": "/workspace/shared/sra-coordination/lot8a-status.json",
+        "updatedAt": "2026-11-11T20:42:24.934984+00:00",
+        "quietRequested": null,
+        "performanceStarted": false,
+        "performanceCompleted": null
+      }
+    ],
+    "after": [
+      {
+        "path": "/workspace/shared/sra-coordination/lot5c-status.json",
+        "updatedAt": "2026-11-11T20:39:04.511712+00:00",
+        "quietRequested": false,
+        "performanceStarted": false,
+        "performanceCompleted": null
+      },
+      {
+        "path": "/workspace/shared/sra-coordination/lot6b-status.json",
+        "updatedAt": "2026-11-11T20:31:07.200353+00:00",
+        "quietRequested": false,
+        "performanceStarted": false,
+        "performanceCompleted": null
+      },
+      {
+        "path": "/workspace/shared/sra-coordination/lot8a-status.json",
+        "updatedAt": "2026-11-11T20:42:24.934984+00:00",
+        "quietRequested": null,
+        "performanceStarted": false,
+        "performanceCompleted": null
+      }
+    ],
+    "isolationClaimed": false,
+    "timingClaimed": false
+  },
+  "verificationScope": {
+    "smallDeclarationAndComparatorFingerprintsOnly": true,
+    "largeReportOrTracePayloadRead": false,
+    "testsExecuted": false,
+    "replayExecuted": false,
+    "liveGameExecuted": false,
+    "nativeSourceModified": false,
+    "existingManifestsModified": false,
+    "pushed": false
+  }
+}

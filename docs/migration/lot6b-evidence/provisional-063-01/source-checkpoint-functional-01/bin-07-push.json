@@ -1,0 +1,29 @@
+{
+  "schema": "logos-engine.lot6b.single-bin-verified-push.v1",
+  "status": "verified",
+  "recordedAt": "2026-11-11T20:50:11.017234+00:00",
+  "bin": "bin-07",
+  "commit": "17d6c1aa3532e4ff74a98a309e4dfb9c3bc4fb59",
+  "parent": "061976486a32626ec044dcd1546d7e6185e63c88",
+  "branch": "lot6b-selected-rigid-checkpoint-20261111",
+  "remoteVerified": true,
+  "remoteHead": "17d6c1aa3532e4ff74a98a309e4dfb9c3bc4fb59",
+  "commitReceipt": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-07-commit.json",
+    "sha256": "67b993803cd29e5b4c789ae435bcbaa8c6a3fbfadc8ac7d586219be5b3c28954",
+    "bytes": 855349
+  },
+  "transport": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-07-transport.json",
+    "sha256": "f203f5a8a4afe5c872b9e35a95aadc231323b584483c2000eb68f6caa266c1ad",
+    "bytes": 30318
+  },
+  "rawBytes": 3059317,
+  "fileCount": 265,
+  "commitChildGroupsReaped": true,
+  "transportGroupAbsent": true,
+  "signals": [],
+  "forcePush": false,
+  "mainPushed": false,
+  "publicationRequested": false
+}

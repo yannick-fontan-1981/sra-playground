@@ -1,0 +1,30 @@
+{
+  "schema": "arc.v7.symbolic_graph.v1",
+  "node_fields": ["id", "kind", "revision", "status", "scope", "origin", "evidence"],
+  "kinds": {
+    "spatial_control": ["palette", "geometry", "confirmed"],
+    "spatial_scene": ["observation_ref", "measurement_digest", "world_body", "camera_shift", "origin_offset", "extent", "new_cells", "body_delta"],
+    "frontier_goal": ["initial_extent", "criterion"],
+    "relational_model": ["action", "axis", "vector", "material", "body_palette", "precondition", "effect", "constraints"],
+    "relational_composition": ["members", "unification", "meaning"],
+    "relational_experience": ["proposal_ref", "intent", "action", "observed_delta", "prediction_matches"],
+    "relational_experiment": ["observation_ref", "intent", "action", "command", "expectation", "composition_ref", "member_index", "application_ref", "binding_origin", "premise_refs", "guard", "basis", "executed"],
+    "goal": ["conditions", "target", "initial_pose", "criterion"],
+    "goal_observation": ["goal_ref", "observation_ref", "context", "satisfied", "pose_catalogue_digest", "shape_count"],
+    "path_composition": ["goal_ref", "members", "conditions", "prediction", "unresolved"],
+    "goal_experiment": ["goal_ref", "path_ref", "hypothesis_ref", "observation_ref", "action", "command", "expected_before", "expected_after", "basis", "executed"],
+    "activation": ["configuration"],
+    "composition_experiment": ["composition_ref", "hypothesis_ref", "observation_ref", "action", "command", "expected_before", "expected_after", "basis", "executed"],
+    "observation": ["values", "observation_ref"],
+    "transition": ["before", "after", "action", "effects"],
+    "question": ["context", "action", "intent", "needs", "predictions"],
+    "hypothesis": ["context", "action", "conditions", "effects", "prediction", "counterexamples"],
+    "composition": ["members", "conditions", "raccord", "unresolved", "counterexamples"],
+    "experiment_option": ["question_ref", "observation_ref", "action", "trial_count", "grounding", "basis"],
+    "experiment": ["question_ref", "option_ref", "observation_ref", "action", "command", "trial_count", "policy_ref", "basis", "executed"]
+  },
+  "statuses": ["achieved", "configured", "observed", "open", "effect_to_explain", "candidate", "contradicted", "suspended", "eligible", "deferred", "proposed"],
+  "fact_domain": "Finite flat maps of typed JSON scalars. Missing is unknown, never false.",
+  "hypothesis_meaning": "An empirical transition candidate in one declared scope and exact observed context; not an acquired general causal law.",
+  "composition_meaning": "A two-contribution candidate with a structural equality raccord. No executable plan or action authorization follows from it."
+}

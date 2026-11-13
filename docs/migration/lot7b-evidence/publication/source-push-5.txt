@@ -1,0 +1,2 @@
+/workspace/sites/sra-lot7b-20261110/lot7b-publish-step-5.tar
+{"project_id":"appgprj_6adbc388d79081918581b93b919d7258","checkout_path":"/workspace/sites/sra-lot7b-20261110/.sites-checkout","commit_sha":"43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7","archive":"/workspace/sites/sra-lot7b-20261110/lot7b-publish-step-5.tar"}

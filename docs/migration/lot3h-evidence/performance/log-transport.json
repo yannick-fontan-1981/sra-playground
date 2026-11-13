@@ -1,0 +1,70 @@
+{
+  "schema": "logos-engine.native-cost-log-transport.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T13:43:09.158573-03:00",
+  "window": {
+    "path": "docs/migration/lot3h-evidence/performance/window.json",
+    "bytes": 10159,
+    "sha256": "50db2d4147fd6f7648f6f2080abae1db836e25f0196845063fd0908de33b1eb0"
+  },
+  "gzipMtime": 0,
+  "logs": [
+    {
+      "series": "A1",
+      "original": {
+        "path": "docs/migration/lot3h-evidence/performance/cohort1/baseline.log",
+        "bytes": 1571,
+        "sha256": "95b3b77b907b99e25f63c288af01e33d4f548c5bc02612319034546085eb260e"
+      },
+      "transport": {
+        "path": "docs/migration/lot3h-evidence/performance/cohort1/baseline.log.gz",
+        "bytes": 436,
+        "sha256": "ec385d9cdfc7e0eb103dfdc926d2a96fd623939c123a2c67a69fce54fcfc9133"
+      },
+      "roundTripBytesEqual": true
+    },
+    {
+      "series": "B1",
+      "original": {
+        "path": "docs/migration/lot3h-evidence/performance/cohort1/after.log",
+        "bytes": 1568,
+        "sha256": "f6f710bebd4655263c94fa3e73b726c401e28ca17fd4f293fb81e9a5dd12c078"
+      },
+      "transport": {
+        "path": "docs/migration/lot3h-evidence/performance/cohort1/after.log.gz",
+        "bytes": 434,
+        "sha256": "48cb4f922e347fc3966effaf3a35c3e5d99a825797d635776d9f37da9d68068d"
+      },
+      "roundTripBytesEqual": true
+    },
+    {
+      "series": "B2",
+      "original": {
+        "path": "docs/migration/lot3h-evidence/performance/cohort2/after.log",
+        "bytes": 1572,
+        "sha256": "b92531f75d3611ea30788bacb2e581a93c510d728980fd05cec11e5219eae233"
+      },
+      "transport": {
+        "path": "docs/migration/lot3h-evidence/performance/cohort2/after.log.gz",
+        "bytes": 433,
+        "sha256": "641ced162522d523d87da1bdd120b0f53fb618f264338482a242bbef5c4b1a71"
+      },
+      "roundTripBytesEqual": true
+    },
+    {
+      "series": "A2",
+      "original": {
+        "path": "docs/migration/lot3h-evidence/performance/cohort2/baseline.log",
+        "bytes": 1557,
+        "sha256": "6184309a877f60b36e6f13fc62508431247d87189cfc40efa7090bb79e296055"
+      },
+      "transport": {
+        "path": "docs/migration/lot3h-evidence/performance/cohort2/baseline.log.gz",
+        "bytes": 427,
+        "sha256": "3e785aa26befda8a51362a8b1224e2d3b4b205efe8b64491b6c849ad22b735a9"
+      },
+      "roundTripBytesEqual": true
+    }
+  ],
+  "qualification": "Exact completed official logs in predeclared order; no timing or result regenerated."
+}

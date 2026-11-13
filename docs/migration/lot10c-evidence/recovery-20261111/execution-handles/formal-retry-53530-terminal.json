@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.executor-command-terminal.v1",
+  "sessionId": 53530,
+  "exitCode": 0,
+  "status": "passed",
+  "receipt": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/validation/delta-tests-run.json",
+    "sha256": "44ba7bf9b2ef3494f5d8870b744b19b64d882a9b7de4f791bc7a1c5424e0bc8c",
+    "bytes": 188221
+  },
+  "counts": {
+    "tests": 1767,
+    "pass": 1767,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  }
+}

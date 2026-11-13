@@ -1,0 +1,136 @@
+{
+  "schema": "logos-engine.v6.motif-access-provisional-composition-component-proof.v1",
+  "status": "passed_bounded_component_and_composed_common_runtime",
+  "recordedAt": "2026-11-11T20:00:03.893770+00:00",
+  "qualification": "Fresh component qualification on actual Site103/native0.62 plus prepared unpublished5C/6B. Not final0.65 qualification, whole-caller parity, official game success, cost acceptance or publication.",
+  "sourceCommit": "a9ef0c67ea4b85d8eb68f57fb144772e162dcf35",
+  "compositionParents": {
+    "own": {
+      "commit": "7c10456a675f0e9a93089a0f679e96677ede03af"
+    },
+    "prepared6B": {
+      "commit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+      "nativeVersion": "0.64.0",
+      "published": false
+    }
+  },
+  "nativeSource": {
+    "fileCount": 324,
+    "digest": "936fa2bf81965272b1ddbab4a5c01f98aeb6a48188c1f7a8c91de226598c5e43"
+  },
+  "nativeFiles": [
+    {
+      "path": "src/logos-engine/v6-motif-access.ts",
+      "sha256": "2302d521959133b39560792d01ae4c2403a3b4b4a333ae10e089359a403394e0",
+      "bytes": 32665
+    },
+    {
+      "path": "src/logos-engine/v6-motif-access-geometry.ts",
+      "sha256": "36d5e1d51a1ebef5c82dea7951c18fe115af2067624447d39e37100c4a9de9b3",
+      "bytes": 15261
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "sha256": "870197141752f4c9e398d3c0a6114accae2ea9d16ccc60b1d8fe82e7f8791ffe",
+      "bytes": 174245
+    },
+    {
+      "path": "src/logos-engine/v6-field-constraints.ts",
+      "sha256": "0d75ae535fb4e37c7e4ee28474e17e341afd5f436d717356a8f9b5617f1ae619",
+      "bytes": 35731
+    }
+  ],
+  "freshDeclaredTests": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-01/tests-run.json",
+    "sha256": "28ede04ed1f558f577333a5c158dc5ac50731fdcb74b51e8af6dd95fe81a926b",
+    "bytes": 1271939
+  },
+  "freshCounts": {
+    "tests": 5606,
+    "pass": 5606,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "freshTestFiles": 145,
+  "motifTestFilesIncluded": [
+    {
+      "path": "tests/v6-motif-access-reference.test.ts",
+      "sha256": "57989c648156c9545bc43f43392886ad01c07d16893ae5bd0e20d061fea0c715",
+      "bytes": 12297
+    },
+    {
+      "path": "tests/v6-motif-access-contract.test.ts",
+      "sha256": "06898e719de4c9291bbdf2fa0ac99e6062c90d391764c6f77d52dddb7d011c98",
+      "bytes": 19736
+    },
+    {
+      "path": "tests/v6-motif-access-kernel.test.ts",
+      "sha256": "a6f21fbdf6305cec8d23a59076c45ef78bbcb5163434ae9151734287dcefee5b",
+      "bytes": 9890
+    }
+  ],
+  "sourceOracle": {
+    "path": "docs/migration/lot8a-evidence/contract/reference-oracle.json",
+    "sha256": "398c868302d0612978dba2ecefef181a28e93d0ebd19c0a5f0fb4dc0714cb098",
+    "bytes": 2061
+  },
+  "initialNativeReference": {
+    "path": "docs/migration/lot8a-evidence/contract/reference-parity.json",
+    "sha256": "32fc45e9233d028690ca327a49041b8cb92786dd3f73ae6ae358fc1af74dc3b1",
+    "bytes": 4990
+  },
+  "oracleScope": {
+    "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "geometryCases": 33,
+    "scenarios": 17,
+    "operations": 100,
+    "sourceFilesVerifiedBeforeAndAfter": [
+      1786,
+      1786
+    ],
+    "sourceModified": false,
+    "qualification": "Unmodified pinned component and independent synthetic geometry only; no game data, live dispatch, original caller integration or solved-level claim."
+  },
+  "fixture": {
+    "path": "tests/fixtures/v6-motif-access-reference.json",
+    "sha256": "627137ede2b5397eddf3d77455a8a7d70cdd88fcec872af8a84236b85a3f985c",
+    "bytes": 433673
+  },
+  "sourceReview": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/contract/composition-review.json",
+    "sha256": "6babc802ae2547419547bb301dc453c7efafb6764ca1f4035c72f69d10070cc5",
+    "bytes": 4465
+  },
+  "historicalDevelopmentProof": {
+    "path": "docs/migration/lot8a-evidence/development/component-proof.json",
+    "sha256": "e762866531acad720320199b2636663b8b79711cc6ba3e1d971e5ba2a30241cc",
+    "bytes": 5019
+  },
+  "historicalQualification": "The oracle and initial182-test comparison are historical and unchanged. Their expectations and all three Motif test modules are freshly exercised by the composed145-file passing suite. No original oracle was rerun.",
+  "contracts": [
+    "Source proposal, bind/before/after/record, geometry, ordering and detached state restoration in the declared synthetic domain.",
+    "One selected-return acquisition through the real common factory, WHY/ACT and common knowledge store; subsequent restored decision uses acquired motion.",
+    "A contrary effect changes the next action; removing only Motif acquisition prevents the learned transition.",
+    "The source symmetry exclusion affects only the final fallback, preserving earlier entries and later groups.",
+    "Bounded native search propagates current deadline/abort and reports incomplete without returning a partial route or unqualified fallback.",
+    "The common runtime retains Binding acquisition ownership and remaining-level action/deadline guards, SelectedRigid passive checkpoint capture without duplicate recording, and selected-only Motif acquisition in one composed source.",
+    "Prepared parent proofs remain historical; this fresh suite does not relabel the failed prior6B142-file run or establish final game/common differential equivalence."
+  ],
+  "limits": {
+    "newLiveGames": 0,
+    "officialLevelsClaimed": 0,
+    "fullCallerParity": false,
+    "finalIntegratedQualification": false,
+    "costAcceptance": false,
+    "sitePublication": false,
+    "search": "8192 states/16384 frontier entries. Stored paths may consume O(S^2) space; these are not byte-memory or universal latency bounds.",
+    "requiredPublishedPredecessors": [
+      "0.63",
+      "0.64"
+    ],
+    "LKEY": "Permanently closed; four loading test modules excluded and no payload/oracle/replay/game activity."
+  },
+  "deliveryGatesAtRecording": "Pending five separate gates; this component proof binds only the completed145-file suite."
+}

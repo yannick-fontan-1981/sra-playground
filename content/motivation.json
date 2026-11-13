@@ -1,0 +1,366 @@
+{
+  "title": "Motivation",
+  "description": "Why I keep building SRA: human dignity, participation in intelligence, the lesson of Erasmus, the commitments behind alignment, and a path from shared understanding to useful capability.",
+  "deck": "What could make a project this difficult worth pursuing?",
+  "breadcrumb": "The reason to keep building",
+  "author": "Yannick Fontan",
+  "pitch": "I want people to help build intelligence with an ordinary computer, no dedicated graphics card, and no budget for extra computing power.",
+  "intro": [
+    "SRA asks me to make explicit things a person can do almost effortlessly: recognize what matters, form a useful concept, connect a reason to an action. Each new capability has to fit with perception, memory, planning, and the knowledge already acquired. A correction can expose another weakness. A more elaborate design can consume more time without producing a better decision.",
+    "What could justify pushing through that complexity? The possibility of turning human understanding into something people can inspect, contribute to, and carry further. A useful idea should have a route into the construction of intelligence, including when its author has an ordinary computer, no research budget, and no dedicated graphics card.",
+    "That ambition explains the technical direction. Following it to its foundations explains the convictions behind the work. Following it into the future explains why I want others to join."
+  ],
+  "parts": [
+    {
+      "id": "the-reason-to-keep-going",
+      "label": "Part I",
+      "title": "The reason to keep going",
+      "description": "A difficult engineering problem is worth solving when it opens a capacity to other people.",
+      "steps": [
+        {
+          "id": "sra-as-an-experiment",
+          "navTitle": "A capability worth building",
+          "title": "From a solved puzzle to a capability someone else can use",
+          "paragraphs": [
+            "Consider what happens when a program fails to pass through a door. The missing element might be the meaning of a key, the condition under which a door opens, or the order in which actions must occur. Fixing that case is useful. Extracting a principle that another person can understand, test, and reuse creates something more durable.",
+            "That is the work I want to do with SRA and Logos Engine: identify concepts, express their relationships, establish when a procedure applies, and compose those pieces into reasoning. The games provide a bounded setting in which an idea has consequences we can observe.",
+            "The difficulty is justified when the result becomes a capability others can acquire. Each piece must earn its place through working examples, counterexamples, and results another person can reproduce. An elegant architecture still has to deliver."
+          ],
+          "consequenceLabel": "The purpose of the effort",
+          "consequence": "Make a difficult achievement become knowledge that another person can understand, challenge, improve, and use.",
+          "links": [
+            {
+              "label": "See the experimental setting",
+              "href": "/arc-agi-3.html"
+            }
+          ]
+        },
+        {
+          "id": "the-people-affected",
+          "navTitle": "The dignity of taking part",
+          "title": "Human dignity includes a place in the work",
+          "paragraphs": [
+            "People already bring understanding to the world: a teacher sees a misconception, a mechanic recognizes a dependency, a player discovers an invariant, a parent explains a sequence. I want a technical structure in which insights of this kind can become explicit contributions.",
+            "Dignity belongs to a person before any contribution or achievement. Respecting that dignity includes giving people meaningful opportunities to learn, judge, create, and transmit. It should be possible to participate at different levels: to offer an example, identify an exception, explain a concept, evaluate a result, or implement a method.",
+            "This is why participation matters to me. The person with a useful distinction should have a route to contribute it. A beginner should be able to progress toward understanding the system. An expert should be able to make that route easier for the next person. The quality of the shared work should grow through those contributions."
+          ]
+        },
+        {
+          "id": "making-reasoning-explicit",
+          "navTitle": "A language we can work with",
+          "title": "Give understanding a language people can work with",
+          "paragraphs": [
+            "Explicit concepts, relations, conditions, and procedures provide a possible working language. A claim can identify what it asserts. A procedure can state its prerequisites. A trace can show which evidence supported a decision. People can then discuss the actual structures used by the program.",
+            "The entry point I want is concrete: observe something, explain it, express a rule, test its limits, and make the result reusable. A contribution might begin with a sentence such as: this action only works after that condition has been established. Turning it into reliable executable knowledge takes further work, but the human insight has a place to enter.",
+            "The current Playground and Reasoning Lab already execute locally in the browser without a dedicated AI GPU or a paid inference API. The project's own code is MIT licensed. These are foundations for participation on ordinary equipment; the computational cost still depends on the task.",
+            "The next barrier is authoring. Today, changing the executable reasoning generally requires working with TypeScript or structured program data. An accessible editor, a simple validation process, and a shared contribution library are capabilities I want to build. My aim is that a person with no additional computing budget can contribute understanding and see it become part of a working intelligence."
+          ],
+          "links": [
+            {
+              "label": "Learn the symbolic method",
+              "href": "/symbolic-reasoning.html"
+            },
+            {
+              "label": "Inspect Logos Engine",
+              "href": "/reasoning-lab.html"
+            }
+          ],
+          "sources": [
+            {
+              "label": "Project code license",
+              "url": "https://github.com/yannick-fontan-1981/sra-playground/blob/main/LICENSE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-foundations-of-the-design",
+      "label": "Part II",
+      "title": "The foundations of the design",
+      "description": "Access to meaning leads to responsibility, and responsibility asks what deserves our commitment.",
+      "steps": [
+        {
+          "id": "erasmus-and-access-to-meaning",
+          "navTitle": "Erasmus and access to meaning",
+          "title": "Erasmus understood the importance of a language people could read",
+          "paragraphs": [
+            "In the Paraclesis that accompanied his 1516 New Testament, the Christian humanist Erasmus called for Scripture to be translated into the languages people understood. He pictured women reading the Gospels, a farmer recalling Scripture at the plough, and a weaver carrying it into daily work. The point was an understanding that could enter a person's life.",
+            "His own edition was a demanding scholarly undertaking: a Greek New Testament with a Latin translation and annotations. He advocated vernacular access while doing the specialized work of recovering, examining, and explaining the text. Wider participation still needed scholarship and teaching.",
+            "I see a parallel in the task of making intelligence understandable. Publishing something is a beginning. People also need a language they can learn, explanations they can examine, and a route from reading to responsible participation. A teacher of the language and a contributor to its foundations both have work to do.",
+            "For SRA, the analogy concerns access to meaning. I want the concepts and reasoning behind a decision to become available for study and construction. The complexity borne by the designer should help reduce the difficulty faced by the next learner. That gives the engineering effort a human purpose."
+          ],
+          "sources": [
+            {
+              "label": "Erasmus, Paraclesis (1516; English translation 1529)",
+              "url": "https://history.hanover.edu/courses/excerpts/346erasmus.html"
+            },
+            {
+              "label": "Henk Jan de Jonge, Erasmus's aim and method",
+              "url": "https://journals.sagepub.com/doi/10.1177/2051677016628243"
+            }
+          ]
+        },
+        {
+          "id": "an-intelligible-creation",
+          "navTitle": "The source of responsibility",
+          "title": "What faith in creation commits me to",
+          "paragraphs": [
+            "Why attach so much importance to the human capacity to understand and create? My answer begins with faith in creation. I believe the world is intended, that intelligence belongs within that creation, and that human beings bear a dignity received from their Creator. Our ability to make things is therefore a responsibility to exercise.",
+            "This is the creationist conviction behind my work. It gives me a reason to search for intelligible structures and to take seriously what people can contribute. It also places demands on the way I design. The following are commitments I draw from that conviction and want the project to satisfy."
+          ],
+          "table": {
+            "caption": "From a conviction about creation to a design commitment",
+            "headers": [
+              "Conviction",
+              "Ethical consequence",
+              "Technical direction"
+            ],
+            "rows": [
+              [
+                "The world is intelligible.",
+                "Seek truth and let observations challenge an explanation.",
+                "Define concepts, connect claims to evidence, test predictions, and retain counterexamples."
+              ],
+              [
+                "Every person bears God's image.",
+                "Recognize dignity before wealth, status, or performance; widen meaningful participation.",
+                "Keep an ordinary-computer entry point, make concepts learnable, and develop tools for contributions at several levels."
+              ],
+              [
+                "Our capacities are entrusted to us.",
+                "Use resources carefully and leave useful knowledge for others.",
+                "Measure execution costs, reuse established knowledge, publish explanations, and maintain portable formats."
+              ],
+              [
+                "A human maker remains responsible for the work.",
+                "Answer for the assumptions, purposes, and consequences introduced into a system.",
+                "Make rules and their origins examinable; connect changes to evidence and identifiable human decisions."
+              ]
+            ]
+          },
+          "after": [
+            "These commitments explain why symbolic intelligence is worth pursuing for me. They set an agenda whose usefulness must be demonstrated in software. They also give a direction to the work when a benchmark score alone cannot decide what should be built."
+          ],
+          "sources": [
+            {
+              "label": "Genesis 1:26–28",
+              "url": "https://www.esv.org/verses/Genesis%201%3A26-28/"
+            },
+            {
+              "label": "Genesis 2:15",
+              "url": "https://www.esv.org/Genesis+2:15/"
+            }
+          ]
+        },
+        {
+          "id": "christ-the-incarnate-logos",
+          "navTitle": "The purpose of our capability",
+          "title": "What Christian faith adds to the specification",
+          "paragraphs": [
+            "My answer becomes specifically Christian in Jesus Christ, the incarnate Logos. In him, I understand the source of creation and meaning as personal. The incarnation places truth within human life. In the Cross, I see self-giving love and reconciliation. Through grace, good work becomes a response to salvation received as a gift.",
+            "These convictions reach into the choices of the builder: what to make possible, which limits to preserve, how to handle failure, and whose understanding should count. The name Logos Engine acknowledges this source of motivation. The engine remains a human design, for which we must answer."
+          ],
+          "table": {
+            "caption": "Christian convictions and their consequences for the work",
+            "headers": [
+              "Conviction",
+              "Ethical consequence",
+              "Technical direction"
+            ],
+            "rows": [
+              [
+                "The Word becomes flesh.",
+                "Take concrete people and the circumstances of their lives seriously.",
+                "Evaluate defined uses, keep representations connected to real observations, and explain consequences in terms people can understand."
+              ],
+              [
+                "Christ places greatness in service.",
+                "Use strength to increase what people can do, with limits on its exercise.",
+                "Distinguish goals from constraints, expose tradeoffs, and give responsible people effective control over consequential uses."
+              ],
+              [
+                "Grace precedes achievement.",
+                "Tell the truth about failure and make repair possible without reducing a person to a score.",
+                "Keep failure evidence, review changes, preserve reversible decisions where possible, and give people a route to report and correct errors."
+              ],
+              [
+                "Different gifts serve a common good.",
+                "Give teaching, judgment, practical knowledge, and technical skill a place in the work.",
+                "Develop contributions through examples, explanations, tests, and code; make provenance, review, and credit part of a shared knowledge library."
+              ]
+            ]
+          },
+          "after": [
+            "This is a demanding program. A conviction becomes credible in this work when it changes decisions, accepts scrutiny, and survives the cost of being put into practice."
+          ],
+          "sources": [
+            {
+              "label": "John 1:1–5, 14",
+              "url": "https://www.esv.org/John+1/"
+            },
+            {
+              "label": "Mark 10:42–45",
+              "url": "https://bible.usccb.org/bible/mark/10"
+            },
+            {
+              "label": "Ephesians 2:8–10",
+              "url": "https://www.esv.org/Ephesians+2:8-10/"
+            },
+            {
+              "label": "1 Corinthians 12:4–7, 12–26",
+              "url": "https://bible.usccb.org/bible/1corinthians/12"
+            }
+          ]
+        },
+        {
+          "id": "the-commitment-behind-alignment",
+          "navTitle": "The commitment behind alignment",
+          "title": "Why I believe alignment needs a believer",
+          "paragraphs": [
+            "Alignment has an engineering question: how can a system reliably follow the purposes and constraints we give it? It also has a question about justification: which purposes deserve to govern the system, and who answers for choosing them? Research on value alignment distinguishes these technical and normative questions. A more effective optimizer still leaves people responsible for the objective.",
+            "The deepest test comes when a commitment becomes costly. Someone must be prepared to say that truth matters when concealment would be convenient; that a person retains worth when treating them as a means would improve the result; that an available use of power should sometimes be refused.",
+            "This is the sense in which I believe alignment needs a believer: a human being committed to a good worthy of allegiance, with obligations that reach beyond the current reward. For the alignment I seek, that commitment is grounded in the Creator and takes its fullest meaning in Christ. The builder must also accept being judged by the principles he proposes for his tools.",
+            "People can ground moral commitments differently. My claim concerns the conviction and accountability that alignment requires, and the Christian foundation I bring to it. A profession of faith creates responsibilities to fulfill. Reliable behavior still requires the engineering, evidence, and human oversight appropriate to the use.",
+            "For SRA, I want that relationship to remain explicit from the human purpose through the rules to the observed result. Readable symbols provide places to express and examine that relationship. Their value will depend on whether the implementation actually preserves it."
+          ],
+          "items": [
+            "State the purpose and the human reason for pursuing it.",
+            "Represent the applicable conditions and limits, including what must happen when they conflict.",
+            "Trace decisions to their evidence and governing rules.",
+            "Give responsible people the means to investigate, correct, and stop the use when necessary."
+          ],
+          "sources": [
+            {
+              "label": "Iason Gabriel, technical and normative questions in alignment",
+              "url": "https://link.springer.com/article/10.1007/s11023-020-09539-2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-future-to-build",
+      "label": "Part III",
+      "title": "The future to build",
+      "description": "Develop the competence, make useful contributions, and build something that can outlast its first author.",
+      "steps": [
+        {
+          "id": "a-call-to-build",
+          "navTitle": "A call to build",
+          "title": "Brothers and sisters, become builders",
+          "paragraphs": [
+            "To my brothers and sisters in Christ: this is a field we should learn to build in. We need people who understand the mathematics, write the software, examine the evidence, teach the concepts, and know the needs of the people a tool is meant to serve. Faith should make that effort more exacting.",
+            "I want Christians to compete seriously and help lead the construction of intelligence. Winning matters when it means producing tools people choose for their quality, training contributors who can surpass their teachers, and sustaining institutions that can carry the work forward. That kind of strength gives us a practical capacity to serve and a voice in decisions about the future.",
+            "The reasons for pursuing it are concrete: wider access to knowledge, greater human agency, tools whose reasoning can be examined, and useful capabilities available to people with modest means. Those purposes should shape both the work and the way success is measured."
+          ],
+          "items": [
+            "Developers: make the structures reliable, efficient, and understandable.",
+            "Teachers and people with practical expertise: contribute examples, distinctions, explanations, and counterexamples.",
+            "Researchers and reviewers: test what transfers, expose failures, and establish what a result really supports.",
+            "Communities and supporters: give people time to learn, finance useful work, and build institutions that can maintain it."
+          ],
+          "after": [
+            "This is an invitation to broad cooperation. People with other convictions can contribute fully to this shared work. My Christian faith explains why I take responsibility for beginning it and why I ask my own community to develop the competence to carry it further."
+          ],
+          "sources": [
+            {
+              "label": "1 Corinthians 12:4–7, 12–26",
+              "url": "https://bible.usccb.org/bible/1corinthians/12"
+            }
+          ]
+        },
+        {
+          "id": "the-horizon",
+          "navTitle": "The horizon",
+          "title": "A shared body of intelligence that people can build on",
+          "paragraphs": [
+            "The horizon extends beyond solving games. I want to investigate whether explicit, reusable reasoning can support tools for learning, planning, checking decisions, and explaining complex processes. Each domain would require its own knowledge, evaluation, and responsibilities.",
+            "Imagine a teacher contributing a better explanation of a dependency; a technician adding a verified diagnostic procedure; a student finding the counterexample that improves a general rule. Imagine those contributions retaining their meaning and evidence as other people combine them into new capabilities.",
+            "If we can establish a reliable way to do that, the result could become a shared body of intelligence: knowledge people can inspect, teach, improve, and carry into new work. An ordinary computer would be a point of entry into its construction. Communities could adapt tools to their languages and needs while keeping a route back to the reasons behind a decision.",
+            "That potential is what makes the project worth pursuing. Reaching it will require proof of generalization, usable authoring tools, careful review, and institutions able to sustain the work. The path should make each of those requirements visible."
+          ]
+        },
+        {
+          "id": "the-golden-path",
+          "navTitle": "The golden path",
+          "title": "The golden path",
+          "paragraphs": [
+            "The route I want to open runs from one person's understanding to a capability others can use. Each stage must leave behind something real: an experiment, a contribution, a verified principle, a useful tool, or another person able to build.",
+            "The Playground is an entry point. The larger contribution system described here is the development direction."
+          ],
+          "stages": [
+            {
+              "title": "Enter through a real example",
+              "status": "Available foundation",
+              "text": "Play a game, observe a mechanism, and follow a reasoning example. Start on an ordinary computer with the tools already provided.",
+              "evidence": "A person can explain one decision and reproduce what happened.",
+              "link": {
+                "label": "Playground",
+                "href": "/"
+              }
+            },
+            {
+              "title": "Turn understanding into a contribution",
+              "status": "Next authoring capability",
+              "text": "Build a guided way to express a concept, condition, rule, or counterexample. Technical contributors can work in the code today; accessible authoring is the next barrier to lower. A first contribution can already be an observed case, a proposed rule, and a counterexample, shared through the contact page.",
+              "evidence": "A newcomer can submit an idea with examples and clear conditions.",
+              "link": {
+                "label": "Share a first contribution",
+                "href": "/contact.html"
+              }
+            },
+            {
+              "title": "Establish what the contribution supports",
+              "status": "Shared validation to build",
+              "text": "Give contributions reproducible tests, counterexamples, provenance, and review. Keep the limits of each claim available with the knowledge.",
+              "evidence": "Another person can verify the result and identify where it applies."
+            },
+            {
+              "title": "Compose knowledge into broader capability",
+              "status": "Core research challenge",
+              "text": "Combine established concepts and procedures, then test them in situations they were not written for. Measure reliability, cost, and what actually transfers.",
+              "evidence": "Reusable knowledge improves new tasks within an explicit resource budget."
+            },
+            {
+              "title": "Put capability into useful service",
+              "status": "Future applications",
+              "text": "Work with educators, practitioners, and communities on defined needs. Evaluate the tools with the people affected and retain meaningful human control.",
+              "evidence": "A real use improves people's work or learning and withstands scrutiny."
+            },
+            {
+              "title": "Make the work outlast its first builders",
+              "status": "Community and institutions",
+              "text": "Teach contributors, translate explanations, maintain shared knowledge, and fund the people doing the work. Make it possible for others to assume responsibility.",
+              "evidence": "New teams can improve, maintain, and transmit the capability."
+            }
+          ],
+          "after": [
+            "This is the race I want us to enter with conviction: build intelligence that is useful, understandable, and open to human contribution; earn trust through the quality of the work; use the resulting strength in service; and leave the next generation more capable than we were."
+          ]
+        }
+      ]
+    }
+  ],
+  "closing": {
+    "title": "Begin with one contribution others can build on.",
+    "text": "Understand one decision. Test one idea. Explain one principle so that someone else can use it. My faith gives this work its direction; shared understanding and disciplined construction can give it reach. That is what makes the complexity worth confronting.",
+    "links": [
+      {
+        "label": "Start with an experiment",
+        "title": "Playground",
+        "href": "/"
+      },
+      {
+        "label": "Study the reasoning",
+        "title": "Logos Engine Lab",
+        "href": "/reasoning-lab.html"
+      },
+      {
+        "label": "Bring an idea or a contribution",
+        "title": "Get in touch",
+        "href": "/contact.html"
+      }
+    ]
+  }
+}

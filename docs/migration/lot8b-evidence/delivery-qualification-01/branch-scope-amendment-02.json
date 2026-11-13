@@ -1,0 +1,109 @@
+{
+  "schema": "logos-engine.lot8b.branch-common-prospective-scope-amendment.v2",
+  "declaredAt": "2026-11-12T05:23:25.600001+00:00",
+  "status": "declared_before_runtime_capture_02",
+  "parentPlan": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/plan.json",
+    "bytes": 5707,
+    "sha256": "48cd44844ff49a3763db6a9b39088c6ddfc8e85d8ceaa922a752789b037e27d4"
+  },
+  "supersededExecutionPlanForThisPhaseOnly": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-execution-plan.json",
+    "bytes": 66064,
+    "sha256": "cefd65a1a79daa6d48a33dd93aa48087e6a46b7e4f0811056baaf86f885af56f"
+  },
+  "retainedFailedAttempt": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/receipt.json",
+    "bytes": 2287,
+    "sha256": "e0de9145ba5cf54d4326cc1a87a44d479d1824e984fc7ec191d510379ecad731"
+  },
+  "diagnosis": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01-diagnosis.json",
+    "bytes": 4341,
+    "sha256": "2663996f626dc8015d5127e2e531e6b14291133f95fe5ba420bc6864955940b4"
+  },
+  "reason": "The first tool selected V6AgentService, whose64x64 input domain excludes the unchanged independent component rasters. Rejection occurred before native factory creation and any public return.",
+  "newEntryBoundary": "Real NativeV6Runtime production API, the boundary already used by the eight validated common integration tests.",
+  "methods": [
+    "initialize",
+    "advance",
+    "resume",
+    "inspectKnowledge",
+    "close"
+  ],
+  "requiredEvidencePreserved": [
+    "one real factory and cold registered owner per chain",
+    "exact unchanged synthetic public packets and independent original event/state expectations",
+    "native command and three-field authorization actually released by the common caller",
+    "current authorizationIdentity graph/program identities checked before advance",
+    "exact native command forwarded without conversion or invented data field",
+    "actual current guards and WHY/ACT selection",
+    "all Kernel graph deltas, hashes, roots, fragments and observed restoration calls",
+    "successful selected source acquisition and next decision",
+    "contrary return and selected acquisition ablation",
+    "two complete unacquired public transitions and terminal incomplete-prefix refusal"
+  ],
+  "nativeAuthorizationFields": [
+    "observation_ref",
+    "decision_revision",
+    "action_index"
+  ],
+  "separateIdentityFields": [
+    "graphChain",
+    "nativeExecutionDigest"
+  ],
+  "methodReturnKinds": {
+    "initialize": "NativeRuntimeYield",
+    "advance": "NativeRuntimeYield",
+    "resume": "NativeRuntimeYield",
+    "inspectKnowledge": "KnowledgeMemory",
+    "close": "undefined with separately observed snapshot"
+  },
+  "sessionAndSequenceMetadata": "Harness bookkeeping except sessionId in initialize and step_index in supplied packets; no service protocol arguments or tickets are fabricated.",
+  "publicServiceQualified": false,
+  "publicWorkerQualified": false,
+  "publicTicketsQualified": false,
+  "publicInputValidationRelaxed": false,
+  "nativeProductionModified": false,
+  "fixtureOrExpectedStatesModified": false,
+  "paddingApplied": false,
+  "originalOracleExecuted": false,
+  "nativeExecution": {
+    "yieldControl": "setTimeout(resolve,0)",
+    "externalClockOrDeadlineInjected": false,
+    "nativeClock": "default performance clock except declared incomplete-case level clock intervention",
+    "DateNowReplaced": false,
+    "nativeBudgetEnforcementPreserved": true
+  },
+  "expectedCounts": {
+    "chains": 5,
+    "physicalReturns": 26,
+    "successfulSourceAcquisitions": 23,
+    "ablatedReturns": 1,
+    "incompleteReturns": 2,
+    "wrapperRecordCalls": 25,
+    "nativeAdapterRecordInvocations": 24,
+    "unexecutedFinalQuestions": 3
+  },
+  "bounds": {
+    "captureSeconds": 300,
+    "readerSeconds": 300,
+    "nodeOldSpaceMiB": 1536,
+    "wholeProcessRSSBoundClaimed": false
+  },
+  "executionOrder": [
+    "freeze new tools and inputs with independent static review",
+    "commit and push new prospective plan",
+    "capture02 under bounded supervision",
+    "reader02 only after a complete successful capture02"
+  ],
+  "otherPhases": {
+    "pairedWorkForms": "already qualified; receipts remain unchanged",
+    "recordedRegressions": "11cases/187projections qualified; receipts remain unchanged"
+  },
+  "officialPerformanceMeasurement": false,
+  "publication": false,
+  "globalLockRequired": false,
+  "LKEYIncluded": false,
+  "qualification": "Native common-caller contribution only. No positive public-service transport, full original-caller parity, official game success or cost acceptance is inferred."
+}

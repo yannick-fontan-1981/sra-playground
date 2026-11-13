@@ -1,0 +1,144 @@
+{
+  "schema": "logos-engine.lot8b.public-boundary-declaration.v2",
+  "scope": "Lot8B followup: public64x64 BranchRouting through unchanged published worker, service, tickets, client and controller",
+  "publishedSourceCommit": "8462204043aa368faa7df280d796bb706eb53b38",
+  "publishedNativeVersion": "0.67.0",
+  "publishedSiteVersion": 108,
+  "candidateNativePath": "docs/migration/lot8b-evidence/final-version-067-01/candidate-native.json",
+  "buildManifestPath": "docs/migration/lot8b-evidence/final-version-067-01/build-manifest.json",
+  "caseIds": [
+    "single-positive",
+    "triple-prefix",
+    "contrary-return"
+  ],
+  "plannedSessions": 3,
+  "plannedPhysicalReturns": 18,
+  "limits": {
+    "rpcTimeoutMs": 45000,
+    "globalTimeoutMs": 360000,
+    "maxRawBytes": 2147483648
+  },
+  "publicBudgets": {
+    "targetLevels": 3,
+    "levelActionCaps": [
+      24,
+      24,
+      24
+    ],
+    "maxActions": 72
+  },
+  "inputs": [
+    "docs/migration/lot8b-evidence/tools/public-boundary/presentation.mjs",
+    "docs/migration/lot8b-evidence/tools/public-boundary/worker-transport.mjs",
+    "docs/migration/lot8b-evidence/tools/public-boundary/worker-bootstrap.mjs",
+    "docs/migration/lot8b-evidence/tools/public-boundary/capture.mjs",
+    "docs/migration/lot8b-evidence/tools/public-boundary/qualify.mjs",
+    "docs/migration/lot8b-evidence/tools/public-boundary/run.py",
+    "tests/fixtures/v6-branch-routing-reference.json",
+    "src/runtime/v6-agent.ts",
+    "src/runtime/v6-agent-client.ts",
+    "src/runtime/v6-agent-protocol.ts",
+    "src/runtime/contracts.ts",
+    "src/runtime/v6-agent-worker.ts",
+    "src/runtime/v6-agent-service.ts",
+    "docs/migration/lot8b-evidence/public-boundary-01/presentation-declared.json",
+    "docs/migration/lot8b-evidence/tools/public-boundary/capture-v2.mjs",
+    "docs/migration/lot8b-evidence/tools/public-boundary/qualify-v2.mjs",
+    "docs/migration/lot8b-evidence/tools/public-boundary/probe-terminal.mjs",
+    "docs/migration/lot8b-evidence/tools/public-boundary/run-v2.py",
+    "docs/migration/lot8b-evidence/tools/public-boundary/prepare-v2.py",
+    "docs/migration/lot8b-evidence/public-boundary-01/capture-01/capture/receipt.json",
+    "docs/migration/lot8b-evidence/public-boundary-01/structural-validation-reservation.json",
+    "docs/migration/lot8b-evidence/public-boundary-01/capture-01/capture/events.jsonl.gz"
+  ],
+  "presentation": {
+    "origin": "Retained synthetic BranchRouting component corpus, unchanged",
+    "padding": "Zero only at right and bottom of every frame; original coordinates retained",
+    "size": [
+      64,
+      64
+    ],
+    "sourceLimit": 14,
+    "publicLimit": 32,
+    "fullOriginalModelIdentityClaimed": false,
+    "mirroredCasesIncluded": false
+  },
+  "negativeProtocolCases": [
+    "wrong_ticket",
+    "wrong_session",
+    "wrong_sequence",
+    "step_index_mismatch",
+    "inconsistent_animation",
+    "negative_execution_duration",
+    "consumed_ticket"
+  ],
+  "pauseCases": [
+    "before_dispatch",
+    "during_engaged_dispatch"
+  ],
+  "assertions": [
+    "Actual commands and positive family selection match the explicitly declared public presentation",
+    "Real service tickets bind current session, frame, observation, graph, executable, decision and prefix action",
+    "Exactly18 valid physical returns are supplied only after the corresponding authorised host dispatch",
+    "Triple action6 is retained as witnessed prefix; caller and owner acquisitions become7 only on action7 sealing",
+    "The seven declared recoverable protocol rejections do not consume the pending valid ticket or change the acquired graph",
+    "Pause preserves an unexecuted ticket; an engaged return is retained before pausing",
+    "Full public graph deltas, nodes, executable digest and owner transitions reconcile independently",
+    "Every created worker is explicitly terminated and every opened session is closed where reachable",
+    "Published production sources, bundle, assets, immutable fixture and frozen tools remain unchanged"
+  ],
+  "officialPerformanceMeasurement": false,
+  "globalLockRequired": false,
+  "newSitePublicationPlanned": false,
+  "realGameEngineExecuted": false,
+  "browserEnvironmentQualified": false,
+  "internalRestoreCallCountClaimed": false,
+  "fullV6ParityClaimed": false,
+  "LKEY": "permanently_closed",
+  "declaredPresentationPath": "docs/migration/lot8b-evidence/public-boundary-01/presentation-declared.json",
+  "priorCapture": {
+    "receiptPath": "docs/migration/lot8b-evidence/public-boundary-01/capture-01/capture/receipt.json",
+    "receiptSha256": "b65d2c045add7bcf4823e0841c6e55c3ab86cb23bff161236a60fa398ec3fd62"
+  },
+  "validationReservation": {
+    "excludedRecoverableCases": [
+      "invalid_frame_dimensions",
+      "invalid_palette"
+    ],
+    "reason": "malformed_shape_or_palette_may_close_service_after_internal_TypeError",
+    "recoveryClaimed": false,
+    "findingPath": "docs/migration/lot8b-evidence/public-boundary-01/structural-validation-reservation.json"
+  },
+  "terminalProbe": {
+    "kind": "invalid_palette",
+    "sessions": 1,
+    "validPhysicalReturns": 0,
+    "expectedError": "internal",
+    "expectedResumeError": "stale",
+    "ticketRecoveryClaimed": false
+  },
+  "scopeRevision": {
+    "id": "public-positive-scope-v2",
+    "previousCaptureReceipt": {
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-01/capture/receipt.json",
+      "bytes": 160331,
+      "sha256": "b65d2c045add7bcf4823e0841c6e55c3ab86cb23bff161236a60fa398ec3fd62"
+    },
+    "previousEvents": {
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-01/capture/events.jsonl.gz",
+      "bytes": 22330445,
+      "sha256": "27337f073a7963a0bb315e23f342cc130d8ee005898245ad4111ac18c557d3ca"
+    },
+    "excludedRecoverableChecks": [
+      "invalid_frame_dimensions",
+      "invalid_palette"
+    ],
+    "originalScopePassed": false,
+    "reason": "structural_frame_errors_are_terminal_in_published_067"
+  },
+  "captureEncoding": {
+    "knowledge": "Content-addressed complete JSON graphs stored losslessly as gzip artifacts; logging references only, actual RPC payloads unmodified",
+    "verification": "Resolve references and verify both uncompressed JSON and compressed artifact hashes and byte counts before semantic assertions",
+    "maxRawBytesMeaning": "Combined JSONL and unique uncompressed graph bytes, not repeated referenced graph content"
+  }
+}

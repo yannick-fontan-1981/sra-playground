@@ -1,0 +1,127 @@
+# Lot 10B : preuves de la reconstruction WindowQuestion
+
+<!-- LOT10B_PUBLICATION_STATUS_START -->
+
+**10B / native 0.62.0 est livré dans [Site 102](recovery-20261111/publication-062/native-publication.json)**, source `1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464`, déploiement réel **`succeeded` le 11 novembre 2026 à 13:50:10.918057 (UTC−03)**. L'audience privée réservée au propriétaire et la révision d'accès **3** sont inchangées. Le natif validé conserve son digest `74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12`, son coût global accepté et sa **réserve HPDL partielle**. La réussite des six niveaux et la parité V6 complète ne sont pas établies.
+
+Cette clôture documentaire réunit les preuves de la publication native et la feuille de route actualisée. **Prochaine étape du lot 10 : 10C / `ordered_recruitment`**, puis 10D / `temporal_selection` et 10E / `invited_endpoints`. Le prédécesseur documentaire Site 101 est déjà intégré par la fusion `866dc5f`.
+
+<!-- LOT10B_PUBLICATION_STATUS_END -->
+
+## Statut courant
+
+Le candidat local porte l'étiquette native **0.62.0**. Il compose WindowQuestion avec les sources réellement publiées de PreviewPacking et Workshop, après réconciliation au commit local `9ef8eec3d899bfb12b9f0b5cbc42e83b6820b991`. La correction d'horloge provient du commit `4e7e4742b997128346e84f62b7a4fb8b5d4e47c5`. Le [manifeste repris](recovery-20261111/integrated-final-02/source-manifest.json) conserve **310 fichiers natifs**, digest `74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12`. Cette étiquette, ces commits et les gels ne sont pas des preuves de publication de 10B.
+
+La reprise a effectivement récupéré **Site 95 / native 0.58.0**, commit `3a70463039768f7114edae7d94d7dd33b7f36aa8`. Depuis, **6A / native 0.60 a été publié dans [Site 96](recovery-20261111/prepared6a-integration-02/published6a-observation.json), puis [Site 97 pour sa clôture documentaire](recovery-20261111/prepared6a-integration-02/published6a-documentation-observation.json)**. Le suivi **7 / native 0.61 est publié dans [Site 98](recovery-20261111/published7-integration-01/native-publication-observation.json)**, au commit `653e40a4f45df8ec8c6bda005004c7cdb8df074a`, et ses octets natifs sont [réconciliés dans le candidat](recovery-20261111/published7-integration-01/source-composition.json). La [publication documentaire Site 100](recovery-20261111/published7-integration-01/documentation100-observation.json), source `5f8ca04cbf69cf2ccf7d2aba64a4cfde2a280613`, est une étape intermédiaire antérieure à la répétition propre du coût de 7. La [clôture documentaire Site 101](recovery-20261111/published7-integration-01/documentation101-observation.json), source `d75a36f0a99bf6c301034523a3138a64d2f6e744`, est réellement publiée le **11 novembre 2026 à 12:43:52 (UTC−03)** avec la même application et le même natif `0.61.0` / `f8d5097…`. Ses sources documentaires sont intégrées par la fusion `866dc5f`, sans modifier le gel natif validé. **10B est publié dans Site 102 ; l’audience privée du propriétaire, révision 3, est conservée.**
+
+La [feuille de route](../v6-delivery-roadmap.md) donne le statut de livraison courant. La [filiation Window](../lot10b-window-question-lineage.md) décrit les contrats source et les adaptations natives. Les résultats ci-dessous gardent leur périmètre et leurs tentatives distincts.
+
+## Provenance et composition
+
+| Pièce | Portée |
+| --- | --- |
+| [Reprise de l'environnement](recovery-20261111/recovery-status.json) | Source publiée réellement récupérée ; anciens commits et preuves locales non retrouvés ; débit HPDL historique conservé. |
+| [Premier import Preview refusé](recovery-20261111/prepared6a-integration/preflight-failure.json) | La copie de travail du harnais avait évolué depuis le gel préparé. Aucun résultat de cette tentative n'est effacé. |
+| [Second import Preview](recovery-20261111/prepared6a-integration-02/source-observation.json) | Octets du gel préparé `ea2b522…`, copies supplémentaires identifiées, trois conflits constatés au moment de l'import. Ce reçu historique n'est pas réécrit après résolution. |
+| [Revue indépendante de résolution](recovery-20261111/prepared6a-integration-02/independent-resolution-review.json) | Résolution du runtime, du harnais et de l'audit ; contexte courant des gardes, propriétaires et acquisitions conservés. |
+| [Attentes du registre composées](recovery-20261111/diagnostic/prepared6a-registry-tests.json) | Deux corrections de tests héritées du commit préparé 6A `c263271…`, puis ajout explicite de Window comme 64e entrée. Aucun test exécuté par ce reçu d'édition. |
+| [Premier gel HPDL](recovery-20261111/hpdl-freeze-01/source-manifest.json) et [archive](recovery-20261111/hpdl-freeze-01/source-archive.json) | 310 fichiers natifs, digest `318153c14c7766c9d007f1b2ede4fa03ce940d62b1369251339e0174af79c306`, au commit `dd4a432`. Archive de l'exécution réelle, pas gel de livraison finale. |
+| [Correction des origines d'horloge](recovery-20261111/diagnostic/clock-origin/review.json) et [manifeste après correction](recovery-20261111/diagnostic/clock-origin/candidate-native.json) | Seul fichier natif modifié par ce correctif : `v6-native-runtime.ts`. La durée restante de l'appelant est convertie sur l'horloge du runtime, puis bornée par le budget actif. Nouveau digest `74143a7…` ; HPDL01 conserve son digest historique `318153c…`. |
+| [Composition sur Site 98](recovery-20261111/published7-integration-01/source-composition.json) et [revue indépendante](recovery-20261111/published7-integration-01/source-composition-review-01.md) | Préservation des propriétaires Preview et Workshop dans le candidat Window ; réconciliation au commit `9ef8eec…` avec la publication native 0.61 réelle. |
+| [Copie de reprise du gel](recovery-20261111/integrated-final-02/freeze-copy-provenance.json) | 768 entrées gelées vérifiées inchangées ; manifeste natif, archive et artefacts de validation copiés exactement de 01 vers 02. Seuls les chemins de transport des nouveaux reçus d'archive sont remappés. |
+| [Observation de la déconnexion](recovery-20261111/integrated-final-01/disconnection-recovery-observation.json) | Tentative 01 conservée : CATR et RSWP passés, FOGW incomplet. Aucun code de sortie final, cause d'arrêt ou succès des dix cas n'est déduit de la session devenue indisponible. |
+
+La composition initiale avec les sources préparées est désormais suivie d'une réconciliation avec les publications effectives de 6A et du suivi 7. Le helper Preview initialement importé depuis l'archive ne contient pas les deux champs de capture ajoutés ultérieurement par 6A ; cette différence historique reste documentée. Le harnais candidat reprend `previewFacts`, `previewPacking.acquired` et `retainedSourceFact`, avec lecture du graphe réel, collecteur Window et garde Symbols conservés. Ces entrées figurent dans le gel de 768 fichiers et dans la validation finale passée. Les dix rejeux ont passé 170/170 comparaisons. HPDL02 est terminé avec trois niveaux et un arrêt à la borne d'activité ; sa comparaison originale PARTIAL et sa QA sont désormais passées, avec leurs limites conservées. Les preuves HPDL01 demeurent inchangées.
+
+## Diagnostics de développement acquis
+
+| Pièce | Observation |
+| --- | --- |
+| [Référence Window](recovery/diagnostic/window-oracle/reference-02.tap) | 173/173 contrôles de composant et de collecteur au stade indiqué par la filiation. |
+| [Métadonnée du collecteur](recovery/diagnostic/window-oracle/capture-contracts-03.tap) | Relance séparée de trois contrats après ajout du champ `episode`. |
+| [Noyau froid](recovery-20261111/diagnostic/kernel-02.log) | Quatre scénarios : acquisition étrangère puis propre, état source, restauration et contexte courant. |
+| [Contrôles communs](recovery-20261111/diagnostic/common-regression-01.tap) | 56/56 sur les quatre fichiers déclarés pour ce diagnostic. |
+| [Composition Preview/Window](recovery-20261111/diagnostic/lot10b-composed-kernel-01.tap) | 61/61, sans échec, annulation, test ignoré ou TODO. |
+| [Trace synthétique froide](recovery/diagnostic/source-call-capture/synthetic-common-runtime-03.json.gz), [paquets publics](recovery/diagnostic/source-call-capture/synthetic-common-runtime-03-public-trace.json.gz) et [comparaison originale](recovery/diagnostic/source-call-capture/synthetic-source-parity-03.json.gz) | Dix appels source, sept restaurations, trois transitions/préfixes et quatre paquets complets ; zéro différence. Les interventions de mémoire restent des contrefactuels de composant. Aucun jeu exécuté. |
+| [Horloge avant correction](recovery-20261111/diagnostic/clock-origin/before-fix.json), [après correction](recovery-20261111/diagnostic/clock-origin/after-fix.json) et [Window après correction](recovery-20261111/diagnostic/clock-origin/window-after-fix.json) | **Deux échecs reproduits avant correction, puis 2/2 tests passés et Window 4/4 passé.** Origines d'horloge inversées, expiration à la garde et au `resume`, identité du signal et acquisition unique du retour conservées. Ces contrôles ciblés ne remplacent pas la validation finale. |
+
+Ces populations se recouvrent et ne sont pas additionnées. Le premier échec de chargement du test, les anciennes comparaisons diagnostiques et leurs correctifs restent conservés. Les preuves originales proviennent de la référence épinglée `786dcf51ca57773d8e3a8948ce9ea3655e7baf8e` ; elles ne sont pas des entrées de décision du moteur de production.
+
+## HPDL : progressions partielles et arrêts conservés
+
+Le [contrat de campagne](hpdl-campaign-contract.md) fixe une session froide visant six niveaux et le cumul maximal de 2 400 secondes. Le [registre](recovery-20261111/hpdl-clock.json) est l'autorité des débits. Les **159,45478678199166 secondes / 40 actions historiques** sont conservées malgré l'absence de leurs anciens journaux bruts.
+
+Le [premier reçu réel](recovery-20261111/hpdl-live-01/execution-hpdl.json) constate **48 retours d'action, trois niveaux terminés, puis le signal externe 9**. Le dernier checkpoint complet contient 47 actions et 47 préfixes ; le 48e paquet observé ne devient pas une acquisition supposée. Aucun rapport final du harnais n'a été créé. Le signal n'est attribué ni au jeu ni à une cause mémoire démontrée. Le débit de **315,682964465 secondes** inclut le lancement et la conservation des preuves.
+
+Le [diagnostic original partiel](recovery/diagnostic/window-oracle/checkpoint-47-first-abstention-01.json) établit, sur la première consultation du niveau 4, que les quinze méthodes transportées correspondent bien à la signature courante. Les 24 configurations sont complètes mais aucune ne couvre les dix rangs avec les trois fenêtres mesurées. Le meilleur résultat couvre huit rangs. Les 27 acquisitions étrangères du niveau 4 présentes dans le checkpoint sont également cohérentes avec l'original. Cela ne démontre ni l'impossibilité du jeu, ni la parité de l'appelant original complet, ni la cause du signal 9.
+
+La [vérification réelle du writer incrémental](recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer-check.json) est **passée** : **177 532 943 octets identiques** directement et après gzip/gunzip, EOF exact, **28 petits cas et 13 erreurs attendues** vérifiés, entrées inchangées. Les champs probants sont conservés. Le parcours du gros checkpoint inclut les comparaisons et la compression ; il ne mesure pas le coût de tous les checkpoints d'une campagne. Le maximum mémoire diagnostique inclut aussi le parsing et ne borne pas la mémoire du processus de production. La cause du signal 9 reste inconnue.
+
+Le [diagnostic combiné01](recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/execution-hpdl-diagnostic.json) conserve ce succès du writer, puis l'interruption de la parité par la borne d'activité commune. La [tentative diagnostique02](recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-02/execution-hpdl-diagnostic.json), limitée à la parité avec une nouvelle borne déclarée, est ensuite **passée**. Son [reçu PARTIAL](recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-02/window-source-parity.PARTIAL.json.gz) compare **111 appels, 94 restaurations, 47 préfixes et 47 actions**, dont **17 acquisitions actives et 30 passives**, avec **zéro divergence et zéro adaptation**. Les quatre ablations de composant donnent **188 interventions, 113 appliquées, 23 changements d'action ou de refus et zéro erreur**.
+
+Cette parité reste liée à l'ancien digest `318153c…` et au checkpoint47 historique. Le 48e retour public reste observé, mais son acquisition n'est pas reconstruite. Aucun rapport final, succès sur six niveaux ou résultat de jeu du nouveau candidat `74143a7…` n'est déduit de ces diagnostics ; la parité de l'appelant original complet reste non établie.
+
+### Essai 02 sur le candidat 741
+
+Le [reçu réel HPDL02](recovery-20261111/hpdl-live-02/execution-hpdl.json) lie cette nouvelle tentative au digest `74143a7…`. L'essai est terminé par **`ACTIVITY_TIMEOUT` à la borne d'activité de 300 secondes** : **39 retours d'action, 40 paquets publics et trois niveaux terminés**, puis niveau 4 `NOT_FINISHED`. Le dernier checkpoint complet 38 conserve **38 actions et 38 préfixes** ; le checkpoint 39 partiel reste conservé. Aucun rapport final de campagne ni trace finale n'a été créé et aucune réussite sur six niveaux n'est déclarée. Cet arrêt ne démontre pas l'impossibilité du jeu.
+
+Le débit réel de HPDL02 est **317,948849055 secondes**, rétention comprise. La comparaison originale PARTIAL et la QA navigateur sont maintenant passées ; elles conservent leurs propres reçus et débits, sans réutiliser la parité historique sur `318153c…` comme preuve du candidat 741.
+
+La [comparaison originale PARTIAL de HPDL02](recovery-20261111/hpdl-analysis-after02/clocked-diagnostic-01/window-source-parity.PARTIAL.json.gz) est **passée sur le candidat `74143a7…`** : **93 appels source** (38 propositions, 38 acquisitions, 17 gardes), **76 restaurations**, **38 actions/préfixes**, **17 acquisitions actives et 21 passives**, **152 ablations dont 95 appliquées et 23 changements d'action ou de refus**, sans divergence, erreur ni adaptation native. Les sources du candidat et les **1 786 fichiers originaux** restent inchangés. Cette comparaison couvre les préfixes scellés de HPDL02 ; les preuves historiques sur `318153c…` restent séparées.
+
+La [QA navigateur](recovery-20261111/hpdl-browser-01/browser-qa.json) est **passée** : pause observée à **2 actions**, action unique portant le compteur à **3**, puis reprise par le bouton « Run 16 actions ». Cette nouvelle session termine naturellement le premier niveau à **7 actions / 1 niveau**, sans convertir les 16 actions proposées par le bouton en 16 actions exécutées. La seconde demande de pause et son attente ont expiré après 30 secondes ; l'observation fraîche était « Level completed ». Aucun second état « Paused » n'est revendiqué.
+
+La [revue cumulative finale HPDL](recovery-20261111/hpdl-final-review-01/hpdl-case-budget-review.json) est **passée**, avec qualification **`partial`**, apport propre **`ownLiveContribution: observed`** et navigateur passé. **La réussite des six niveaux et la parité de l'appelant complet restent non établies.** Le coût officiel de 10B est accepté ; sa publication native est effective dans Site 102.
+
+### Horloge HPDL conservée
+
+Le [registre cumulatif](recovery-20261111/hpdl-clock.json) indique **1 909,1412980339917 secondes débitées** et **490,85870196600837 secondes restantes** sur 2 400, sans intervalle en cours ni remise à zéro.
+
+| Intervalle conservé | Secondes débitées | Qualification |
+| --- | --- | --- |
+| Historique de l'environnement perdu | 159,45478678199166 | 40 actions historiques conservées comme débit ; journaux bruts non récupérés. |
+| HPDL01 et rétention de ses preuves | 315,682964465 | 48 retours publics observés, signal 9 et absence de campagne finale conservés. |
+| [Travail hors jeu](recovery-20261111/hpdl-analysis-after01/hpdl-conservative-case-work.json) | 451 | Débit conservateur d'un intervalle observé ; aucune mesure monotone ou action de jeu inventée. |
+| Diagnostic01 | 149,720413432 | Writer passé, parité interrompue par la borne d'activité partagée ; échec conservé. |
+| Diagnostic02 | 187,486481407 | Parité PARTIAL passée sur le gel historique 318, conservation du reçu comprise. |
+| HPDL02 et rétention de ses preuves | 317,948849055 | Nouveau gel 741 : 39 retours, 40 paquets, trois niveaux ; arrêt `ACTIVITY_TIMEOUT`, dernier checkpoint complet 38 et checkpoint 39 partiel conservés. |
+| Comparaison originale HPDL02 | 158,238133855 | PARTIAL passée sur741 : 93 appels, 76 restaurations, 38 actions/préfixes, zéro divergence. |
+| QA navigateur HPDL | 169,609669038 | Pause, action unique et reprise observées ; premier niveau terminé à 7 actions. Seconde attente de pause expirée conservée. |
+
+Les diagnostics historiques n'ajoutent aucune action HPDL et aucun débit n'est remboursé. HPDL02 conserve ses propres retours observés. La comparaison originale et la QA sont débitées dans ce même registre ; aucun nouveau budget n’est créé.
+
+## Validation et coût acquis, publication native effective
+
+Le [périmètre principal](validation-test-scope.json) et le [complément intégré](integrated-extra-test-scope.json) déclarent **44 fichiers**. Les trois modules qui décodent le cas LKEY clos sont exclus intégralement. Le [reçu original de validation](recovery-20261111/integrated-final-01/validation/delta-tests-run.json) établit **1 205/1 205 tests passés**, sans échec, annulation, omission ou TODO. Le [reçu des cinq contrôles](recovery-20261111/integrated-final-01/validation/checks-run.json) établit **5/5 passés**, dont TypeScript, les deux audits, le contrôle des différences Git et le build. Les [copies reprises dans 02](recovery-20261111/integrated-final-02/freeze-copy-provenance.json) gardent exactement les octets des preuves originales et leur provenance ; elles ne représentent pas de nouvelles exécutions.
+
+Les dix rejeux historiques restent déclarés par le [manifeste de régression](recorded-regression-cases.json). La première tentative est conservée avec **CATR et RSWP réussis, FOGW incomplet**. La [nouvelle tentative complète 02](recovery-20261111/integrated-final-02/regression-launch.json) s'est terminée avec le code **0** le **11 novembre 2026 à 12:49:54 (UTC−03)**. Le [résumé complet](recovery-20261111/integrated-final-02/regressions/regression-summary.json) établit **10/10 cas et 170/170 comparaisons réussis**, sur **357 commandes, 367 paquets publics, 1 676 frames, 275 préfixes, 632 requêtes et 30 frontières naturelles enregistrées**. Il s'agit de rejeux sur des traces conservées, sans nouvelle réussite en jeu direct déduite.
+
+**HPDL02 est terminé avec trois niveaux et un arrêt d'activité**. Sa comparaison originale PARTIAL, sa QA et la revue cumulative sont passées ; la qualification reste partielle et l'apport propre est observé. Aucun rapport/trace final HPDL ni succès des six niveaux n'est établi, et la parité de l'appelant complet reste ouverte. Le coût officiel de 10B est accepté ; sa publication native est effective dans Site 102.
+
+La règle de coût autorisée est la suivante : pour **chaque jeu de référence**, la médiane des sessions complètes du candidat doit rester **strictement sous +10 %** par rapport à la référence réellement publiée et remesurée. Une phase peut dépasser +10 % lorsque ce critère global passe. Les phases, cohortes, sessions, pointes défavorables et éventuels refus du comparateur historique restent visibles ; aucun coût n'est retranché et aucune compensation entre jeux n'est appliquée.
+
+La référence retenue pour le coût de 10B reste **Site 98 / native 0.61.0 / commit `653e40a4f45df8ec8c6bda005004c7cdb8df074a`**. La première fenêtre du suivi 7 est inéligible au verdict de coût isolé après la divulgation des accès disque concurrents ; ses traces et valeurs restent conservées. La coordination du suivi 7 a annoncé le **11 novembre 2026 à 12:33:19 (UTC−03)** l'acceptation d'une répétition complète propre : **STCK −2,924030 %**, **SMLP +0,009074 %**, **32 sessions mesurées / 400 actions**, **8 échauffements / 24 actions d'échauffement conservés séparément**, **231 contrôles arithmétiques**. Le [reçu d'acceptation](recovery-20261111/published7-integration-01/predecessor-clean-repeat-acceptance.json) porte `accepted_from_complete_clean_repeat`. Son [import exact](recovery-20261111/published7-integration-01/predecessor-clean-repeat-acceptance-import.json) conserve les octets d'origine ; les artefacts et la source documentaire terminale sont intégrés par la fusion `866dc5f`, sans revendiquer de nouvelle revue intégrale indépendante. Site 100 est antérieur à cette acceptation ; Site 101 en publie la clôture documentaire, dont les sources sont intégrées ici par la fusion `866dc5f`. Ces valeurs concernent le prédécesseur 0.61 et ne constituent pas un résultat de coût pour 0.62.
+
+Le [protocole de coût de 10B](recovery-20261111/performance-integrated-01/protocol.md) a été réellement déclaré le **11 novembre 2026 à 12:36:53 (UTC−03)**, sur la référence native Site 98 / `653e40a…` et le candidat `74143a7…`, avec `integrated-final-02` comme dossier de livraison. Aucune mesure n'est déduite de cette déclaration. Les captures structurelles, le préflight statique et l’intégrité sont passés ; la fenêtre officielle est désormais clôturée, avec coût global accepté selon la revue ci-dessous. L’accord de calme et son contrôle d’isolation sont conservés. Le reçu réel de publication native est maintenant disponible ; aucun reçu de clôture documentaire futur n’est anticipé. La publication native conserve l’audience privée existante.
+
+La préparation fonctionnelle du coût est terminée : **56/57 propriétaires** et **25/26 programmes** pour référence/candidat, **8 formes structurelles non mesurées et 62 actions**, **64 contrôles d'attribution et 35 différences qualifiées**. Le [préflight statique](recovery-20261111/performance-integrated-01/static-preflight.json) a passé **77/77 contrôles**. Ces captures fonctionnelles ne constituent pas des échantillons de coût.
+
+Le [contrôle d'intégrité de livraison](recovery-20261111/integrated-final-02/delivery-integrity.json) est **passé** : **310 fichiers natifs, 768 entrées d'archive, 717 entrées sources/tests et 375 entrées de build**, **10 rapports, 95 parties et 81 197 034 octets restaurés sans perte**. Le protocole est déclaré ; la fenêtre officielle est clôturée et son coût global accepté. La publication native 0.62 est effective dans Site 102.
+
+
+## Coût global de 10B accepté et publication native effective
+
+Le [rapport complet du coût](recovery-20261111/performance-integrated-01/RESULTS.md) conserve les 32 durées complètes, les diagnostics de chaque cohorte, la dispersion et les p95 disponibles.
+
+La [revue du coût qualifié](recovery-20261111/performance-integrated-01/owner-growth-review.json) est **passée : 10 297/10 297 contrôles**, avec **les deux jeux sous le seuil global strict de +10 %**. La fenêtre complète **A1/B1/B2/A2** s'est déroulée le **11 novembre 2026 de 13:23:45,627421 à 13:33:09,538152 (UTC−03)** : **32 sessions mesurées / 400 actions**, plus **8 échauffements / 24 actions d'échauffement conservés séparément**. La référence reste le natif 0.61 publié dans Site 98 ; le candidat est `74143a7…` / 0.62.
+
+| Jeu | Médiane de session complète référence (ms) | Médiane candidat (ms) | Augmentation relative | Verdict global |
+| --- | ---: | ---: | ---: | --- |
+| STCK | 11295,505846000002 | 11905,527877 | +5,400572929772963 % | Accepté, strictement sous +10 % |
+| SMLP | 18028,853754500007 | 17704,532214999992 | −1,7989027140400675 % | Accepté, strictement sous +10 % |
+
+**15/16 diagnostics agrégés de phase** sont dans leur borne ; la phase de **restauration SMLP augmente de +26,34362955231715 %**. Ce dépassement reste affiché et acceptable selon la règle utilisateur puisque la session complète SMLP respecte le critère global. Aucun temps n'est retranché, aucune session n'est exclue et aucun jeu ne compense l'autre.
+
+L'agrégateur historique strict a réellement terminé avec le **code 1**, message **`Within-cohort work metadata changed`**, sans produire son fichier de résultat. Ce refus reste conservé. L'acceptation est portée séparément par le [contrat déclaré avant mesure](recovery-20261111/performance-integrated-01/owner-growth-contract.json) et la revue qualifiée, avec **432 différences structurelles contrôlées indépendamment** ; le refus historique n'est pas requalifié en succès.
+
+La [revue d'isolation](recovery-20261111/coordination/cost-final-01/isolation-review.json) est **acceptée** : trois confirmations fraîches de lots, états stables et aucune déviation observée ni déclarée. Les preuves immuables restent inchangées. **Le coût de 10B est accepté ; native 0.62 est réellement publiée dans Site 102.** La réserve HPDL reste partielle : trois niveaux, 38 préfixes scellés pour 39 retours publics dans HPDL02, apport propre observé, QA passée, horloge 1 909,1412980339917 secondes débitée et 490,85870196600837 secondes restantes. La réussite des six niveaux et la parité de l'appelant complet ne sont pas établies. La source documentaire Site 101 est intégrée par la fusion `866dc5f` et la publication 0.62 dans Site 102 conserve l’audience privée existante.

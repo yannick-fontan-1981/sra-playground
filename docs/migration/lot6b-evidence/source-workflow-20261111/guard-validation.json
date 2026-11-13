@@ -1,0 +1,88 @@
+{
+  "schema": "logos-engine.lot6b-official-window-guard-validation.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T21:28:22.927973+00:00",
+  "finishedAt": "2026-11-11T21:28:23.192328+00:00",
+  "command": [
+    "timeout",
+    "--signal=KILL",
+    "25s",
+    "node",
+    "--test",
+    "--test-concurrency=1",
+    "--test-reporter=tap",
+    "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/source-workflow-20261111/official-window-guard.test.mjs"
+  ],
+  "limitSeconds": 25,
+  "elapsedSeconds": 0.26326415299990913,
+  "exitCode": 0,
+  "testCounts": {
+    "tests": 38,
+    "suites": 0,
+    "pass": 38,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "guardSha256BeforeCorrection": "da76b88923a92328f62d7708f0b6e32770c8faa8dc385c87d707f2aa23d33209",
+  "inputsBefore": [
+    {
+      "path": "docs/migration/lot6b-evidence/source-workflow-20261111/official-window-guard.mjs",
+      "bytes": 3912,
+      "sha256": "7303615cf7c0c140c7bff9ea797654a0c8df44befb88a0a3860fd32187496a63"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/source-workflow-20261111/official-window-guard.test.mjs",
+      "bytes": 7502,
+      "sha256": "70db98c06b0f0805cd818da5d902f354a052534122a499a2b1dd8c9318b3263b"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/current-work-policy-20261111.md",
+      "bytes": 4550,
+      "sha256": "0d8278ab03de01e8593648b4a3a61b57e209bc6e0901bd2603d8b16e075eb5c5"
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "docs/migration/lot6b-evidence/source-workflow-20261111/official-window-guard.mjs",
+      "bytes": 3912,
+      "sha256": "7303615cf7c0c140c7bff9ea797654a0c8df44befb88a0a3860fd32187496a63"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/source-workflow-20261111/official-window-guard.test.mjs",
+      "bytes": 7502,
+      "sha256": "70db98c06b0f0805cd818da5d902f354a052534122a499a2b1dd8c9318b3263b"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/current-work-policy-20261111.md",
+      "bytes": 4550,
+      "sha256": "0d8278ab03de01e8593648b4a3a61b57e209bc6e0901bd2603d8b16e075eb5c5"
+    }
+  ],
+  "inputsUnchangedDuringTest": true,
+  "stdout": {
+    "path": "docs/migration/lot6b-evidence/source-workflow-20261111/guard-validation.stdout.log",
+    "bytes": 6865,
+    "sha256": "cab702bdd86a2d6e11e5d912f9a74762ed5782af44ee444abd0d1a6f66f3441b"
+  },
+  "stderr": {
+    "path": "docs/migration/lot6b-evidence/source-workflow-20261111/guard-validation.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "globalLockAcquired": false,
+  "realCoordinationStatusesReadByTest": false,
+  "nativeGameBrowserGitNetworkExecuted": false,
+  "sourceCorrections": [
+    "Reject unknown or missing official-window state; only preparing/released/active are recognized, absent/null remains no window.",
+    "Accept Node Z and Python microsecond+00:00 UTC while rejecting coercion, local time and calendar rollover; preserve fractional millisecond deadline.",
+    "Reject all-whitespace active window identifiers."
+  ],
+  "policyReview": "The existing addendum explicitly documents that the guard is not atomic with command start. Root declares bounded activity first; official owners require fresh terminal/all-worker acknowledgments. The guard cannot establish exclusivity or eliminate that coordination race.",
+  "remainingRisks": [
+    "Shared status reads are sequential, not atomic; truthful owner declarations and the documented handoff remain necessary.",
+    "Malformed active or expired windows defer once and require the owner to close them; the guard does not clear an owner descriptor or global lock."
+  ],
+  "policyFileModified": false
+}

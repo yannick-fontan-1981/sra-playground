@@ -1,0 +1,59 @@
+{
+  "schema": "logos-engine.lot3d.publication-inputs.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T09:13:44.510904+00:00",
+  "generator": {
+    "path": "docs/migration/lot3d-evidence/verify-publication-inputs.py",
+    "bytes": 2799,
+    "sha256": "9ebc242c9c859e5b33247670969fcf3f04404021a2a8ca95842540c5e1719db8"
+  },
+  "nativeDigest": "5b5e59e14e4d417d92cacd6e79d21b6e8e833d715c8d05df2b74806bb09b40f3",
+  "checkedInventories": {
+    "native": 256,
+    "sourceAndTests": 574,
+    "buildInputs": 321
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot3d-evidence/final/source-manifest.json",
+      "bytes": 30270,
+      "sha256": "d7c139d6b4da64e6070f044ab49d0a6646b3dbf69bfedaa1434b853df5a5ebb6"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/final/revalidation/validation/delta-tests-run.json",
+      "bytes": 104602,
+      "sha256": "f5c043f855b671bb240b1654e38493a6c5c722d10e2e71f99e5cf79ca3da6aa1"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/final/revalidation/validation/checks-run.json",
+      "bytes": 71059,
+      "sha256": "21b25e5cb12b5005402723b64b0fb3954d40f5e230e4515df1621f338584e0bf"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/final/delivery-integrity.json",
+      "bytes": 7443,
+      "sha256": "da2e22dc2fdf0d05fa875ccc017a7a8c59c708b11d5119d5eaddb1f45bdf302e"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/performance/window.json",
+      "bytes": 10161,
+      "sha256": "c4a66e89defcd2c2b030aabbde57799eb351c28566986a38bbed8ce53857da48"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/performance/global-budget-decision.json",
+      "bytes": 30019,
+      "sha256": "98190821875d425e78a1b9c4e4d09891054f0e7bdeec377b4a8e78ee0c2f6eb8"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/performance/consolidation-review.json",
+      "bytes": 46780,
+      "sha256": "bde0d54859722a051d61a2c6f2ff92cccc0f0acd37a03a219f9fa8b5e0a5e982"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/performance/results.md",
+      "bytes": 19031,
+      "sha256": "a85c434dd5443d2b54784c00ac092e30dfc0d0bad4e1bd9f2ad67e087591e137"
+    }
+  ],
+  "qualification": "Final retained-input check after completed timing. No source, test, build, game or cost result is regenerated. The functional SK48 target remains unmet despite verified contracts and accepted global costs."
+}

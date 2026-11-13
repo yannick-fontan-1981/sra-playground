@@ -1,0 +1,12 @@
+{
+  "schema": "logos-engine.prepared-predecessor-history-reconciliation.v1",
+  "recordedAt": "2026-11-11T13:38:35.120932+00:00",
+  "status": "passed",
+  "previousHead": "9ea7cf814aaa012c551220839a8c18a6110f0a87",
+  "preparedPredecessor": "c263271442b8e8a8084c39c2f9301fd3163e7d29",
+  "mergeCommit": "7c2fb01d06669c0783bad80256fc57bcd2b51c5e",
+  "sourceAndTestFilesUnchanged": 709,
+  "buildInputsUnchanged": 371,
+  "nativeSourceDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+  "qualification": "Normal three-way merge with ours conflict preference for the retained native0.61 follow-up; all source/test and build input bytes were checked before and after. This records actual prepared checkpoint ancestry only; actual Site publication is still required."
+}

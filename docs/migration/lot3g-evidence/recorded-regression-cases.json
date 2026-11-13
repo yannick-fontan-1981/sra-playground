@@ -1,0 +1,55 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "cases": [
+    {
+      "id": "catr-047",
+      "game": "CATR",
+      "baseline": {
+        "path": "docs/migration/lot3f-evidence/final/regressions/catr-046-replay.json.gz",
+        "sha256": "e0386709c716544276453499aceb9b023dda12ed7cf825d730af06066437702d"
+      },
+      "trace": {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+        "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816"
+      }
+    },
+    {
+      "id": "rswp-047",
+      "game": "RSWP",
+      "baseline": {
+        "path": "docs/migration/lot3f-evidence/final/regressions/rswp-046-replay.json.gz",
+        "sha256": "2c272e5e97528e5d99aeb4a8d744115fd2c128ced74cd58f57452315315a5cfa"
+      },
+      "trace": {
+        "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+        "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755"
+      }
+    },
+    {
+      "id": "fogw-047",
+      "game": "FOGW",
+      "baseline": {
+        "path": "docs/migration/lot3f-evidence/final/regressions/fogw-046-replay.json.gz",
+        "sha256": "604c43fd5b2722816b92093f97a643161a9282e1e82139068c51aa5b01a6ed6c"
+      },
+      "trace": {
+        "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+        "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46"
+      }
+    },
+    {
+      "id": "vois-047",
+      "game": "VOIS",
+      "baseline": {
+        "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-campaign.json.gz",
+        "sha256": "1bf068d4e4df1a3739178106d0eb9d9c6c8f0f87a44fdd10b7fc806507b797f9"
+      },
+      "trace": {
+        "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+        "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d"
+      }
+    }
+  ],
+  "passiveOwnerRequirements": [],
+  "qualification": "Cold recorded-return regressions against actual native0.47 reports from Site75 commit08bc35e447d17530a774c146ce4e660b1ef29d9a, digest54d8742300a04dcdf0cb1b038bc62b947d4a1c60f70da4ee80e6971b0f021165. CATR/RSWP/FOGW use recomputed0.47 reports on immutable public traces; VOIS uses its actual0.47 public campaign. Every0.48 command is computed before the recorded return. Same17 unchanged checks per case; new FramedWindow evidence is absent until own selection/acquisition. These are nonregressions, not new live attempts, game successes, full-state equality, speed claims or own FramedWindow contribution. Closed FOGW/VOIS clocks and prior CWSE/SK48 limits remain unchanged."
+}

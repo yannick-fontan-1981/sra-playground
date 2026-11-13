@@ -1,0 +1,153 @@
+{
+  "schema": "logos-engine.facet-example-browser-qa.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T00:58:31.724205+00:00",
+  "previewUrl": "http://127.0.0.1:4173/",
+  "finalUrl": "http://127.0.0.1:4173/?game=ISOS&level=4",
+  "browserTabId": "17",
+  "game": "ISOS",
+  "nativeVersion": "0.57.0",
+  "nativeDigest": "eebd099808672be934389020c8f9061df4fdacab28cd7d60c00cd1b080464c04",
+  "worker": {
+    "path": "dist/assets/v6-agent-worker-C0LUXp35.js",
+    "sha256": "a42ffe6ff42420abbc3ee9d10e88b10286b6d31935a6a6921ac48132bf6d65be",
+    "bytes": 6737589
+  },
+  "previewBuild": {
+    "path": "docs/migration/lot4c-evidence/integrated-final/browser/static-preview-inputs.json",
+    "bytes": 11898,
+    "sha256": "614c2793cfeb259c3b6562390e6ab2f0708c9ef89124b382fd5ef635339b2c48"
+  },
+  "initial": {
+    "level": 1,
+    "actions": 0,
+    "levelsCompleted": 0,
+    "plans": 0
+  },
+  "pauseObserved": true,
+  "pause": {
+    "requestedAfterActions": 1,
+    "settledActions": 1,
+    "settledStatus": "Paused.",
+    "pauseDisabledWhenSettled": true
+  },
+  "oneActionObserved": true,
+  "oneAction": {
+    "beforeActions": 1,
+    "afterActions": 2,
+    "afterPlans": 2,
+    "status": "One action completed."
+  },
+  "sameContinuousSession": true,
+  "newReasoningSessionClicks": 0,
+  "manualLevelJumps": 0,
+  "learnedStateInjected": false,
+  "boundaries": [
+    {
+      "actions": 3,
+      "levelsCompleted": 1,
+      "level": 2,
+      "plans": 3
+    },
+    {
+      "actions": 7,
+      "levelsCompleted": 2,
+      "level": 3,
+      "plans": 7
+    },
+    {
+      "actions": 12,
+      "levelsCompleted": 3,
+      "level": 4,
+      "plans": 12
+    }
+  ],
+  "final": {
+    "actions": 12,
+    "levelsCompleted": 3,
+    "level": 4,
+    "plans": 12,
+    "status": "Level completed."
+  },
+  "targetLevels": 3,
+  "targetMet": true,
+  "liveGameExecuted": true,
+  "evidence": [
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/browser/static-preview-inputs.json",
+      "bytes": 11898,
+      "sha256": "614c2793cfeb259c3b6562390e6ab2f0708c9ef89124b382fd5ef635339b2c48"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/browser/01-native-panel.txt",
+      "bytes": 10071,
+      "sha256": "a9b8f27f4a82f070c40fed9d0f6d54b7c4e5fd65c0ed491b28ae55c1390e5569"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/browser/02-paused.txt",
+      "bytes": 881,
+      "sha256": "313e3b5feccfb176ab99c8df5edd374699aa9afb9f48df9921bd81d6f35bba89"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/browser/03-pause-full-dom.txt",
+      "bytes": 9883,
+      "sha256": "d1d95ef2cb101d3fb67f345d078d0746af7eafd8a94cd15a32fecbdf0408d37a"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/browser/03-pause-settled.txt",
+      "bytes": 716,
+      "sha256": "8a0740c2924a4dda11d263679fe066c993054f3455cb3ce104bde0b43ca3845e"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/browser/04-one-action.txt",
+      "bytes": 794,
+      "sha256": "1099d95e1030b57cfc2816cfae1c1a9b38d2fc0d5229201fef495506d15e333a"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/browser/05-one-action-full-dom.txt",
+      "bytes": 9897,
+      "sha256": "0bc9bce69b1f25f42a57048d38dd985fcdcf32503fb0f913122e69f9bdba0a33"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/browser/05-one-action-settled.txt",
+      "bytes": 749,
+      "sha256": "28c4f7b6905d0ccfe9fdb3f3162d02dd9eca6962b4ae8e310be0d4be3e8208d4"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/browser/06-boundary-one-dom.txt",
+      "bytes": 9892,
+      "sha256": "8394ef962ddbec7ac38e86a532a72a3489f9df992724384bf19bff733fc4a5e0"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/browser/06-boundary-one.txt",
+      "bytes": 810,
+      "sha256": "acac4d93de47ae663ed970241ef8d5fd110463dfb7e702f056aca7b07ae3d5a6"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/browser/07-boundary-two-dom.txt",
+      "bytes": 9892,
+      "sha256": "9fe376cfd11dadde3721196e6050edd41f0aa2b693be1c85f97622e1076fb675"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/browser/07-boundary-two.txt",
+      "bytes": 777,
+      "sha256": "e952078396c43f7830094094489abcba242967c5f57ff48bf3e342769895850f"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/browser/08-boundary-three-dom.txt",
+      "bytes": 9894,
+      "sha256": "627f77c1fe5964101e1a13d51eab16c3df23d39443d9ffdb76d4e036e4f4dc07"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/browser/08-boundary-three.txt",
+      "bytes": 779,
+      "sha256": "baed75644e3165f9bc1f7d6fed5b6089f1bad3508e8a745ea7a19d99ed11f7bc"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/browser/isos-three-levels.png",
+      "bytes": 84419,
+      "sha256": "17f1c51ef8479b8606ee5829e97cade8d5990ff4aeaa7d3499894e6048b6cf8a"
+    }
+  ],
+  "qualification": "Observed through real browser controls on the exact static production build copy. Pause settled at one action; One action advanced exactly to two; three natural boundaries reached without a new reasoning session or manual level jump. Counters and UI transitions establish this continuous browser session; the game has six levels and was not played to completion. No hidden game state or expected command was provided."
+}

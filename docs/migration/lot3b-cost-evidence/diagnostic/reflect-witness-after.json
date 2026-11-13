@@ -1,0 +1,127 @@
+{
+  "schema": "logos-engine.structural-witness-validation.v1",
+  "status": "passed",
+  "command": [
+    "node",
+    "--test",
+    "--test-reporter=tap",
+    "tests/v6-inventory-family-reference.test.ts",
+    "tests/v6-inventory-restoration-cache.test.ts",
+    "tests/v6-native-working-witness.test.ts",
+    "tests/v6-shared-series-native.test.ts",
+    "tests/v6-relational-chamber-integration.test.ts"
+  ],
+  "startedAt": "2026-11-10T01:51:04.646874+00:00",
+  "finishedAt": "2026-11-10T01:51:06.629044+00:00",
+  "elapsedSeconds": 1.9794455200026277,
+  "exitCode": 0,
+  "testCounts": {
+    "tests": 233,
+    "pass": 233,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "inputs": [
+    {
+      "path": "src/logos-engine/v6-native-working-witness.ts",
+      "sha256": "08bca697678eb3a89960ff2ed1c49b9fc0c91082b86952be51edf0f34a1f38fb",
+      "bytes": 5896
+    },
+    {
+      "path": "src/logos-engine/v6-shared-series.ts",
+      "sha256": "21e39cc2cf208da9045973bcd5851aeec5faa4be0a1cf7654f3ca96513c7689d",
+      "bytes": 70617
+    },
+    {
+      "path": "src/logos-engine/v6-observed-inventory.ts",
+      "sha256": "ba67f83a8c8b8457a72ed82fea84221f122acddbd866a691ba44370f03783f69",
+      "bytes": 43333
+    },
+    {
+      "path": "src/logos-engine/v6-native-owned.ts",
+      "sha256": "363201fabc39c04fde4069b410a7b1fcdba89210aabd3671987fde9c6f8ef9c0",
+      "bytes": 3414
+    },
+    {
+      "path": "tests/v6-inventory-family-reference.test.ts",
+      "sha256": "2091f6807c8bbb0549f38f0ae3cd07ece7771cab222a6cf2a84dd56174d1a755",
+      "bytes": 10102
+    },
+    {
+      "path": "tests/v6-inventory-restoration-cache.test.ts",
+      "sha256": "3cbd8db7cad3987f48cc508bf7b264b545ffe642e0639e911786a0eca3c9ad71",
+      "bytes": 14848
+    },
+    {
+      "path": "tests/v6-native-working-witness.test.ts",
+      "sha256": "53e20eca15ed57dc3d9c8247712987d1f8217c2fab853d846d7cef9a0860a1c7",
+      "bytes": 8860
+    },
+    {
+      "path": "tests/v6-shared-series-native.test.ts",
+      "sha256": "3746f7d817f6dc17537089ac9fc430d1620e447ab23ac014e2efdc67a6f8144a",
+      "bytes": 27704
+    },
+    {
+      "path": "tests/v6-relational-chamber-integration.test.ts",
+      "sha256": "fa9195286072ccbbadc774f8737954e1b06799f71a8b95e5574a698d55cb3741",
+      "bytes": 11924
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "src/logos-engine/v6-native-working-witness.ts",
+      "sha256": "08bca697678eb3a89960ff2ed1c49b9fc0c91082b86952be51edf0f34a1f38fb",
+      "bytes": 5896
+    },
+    {
+      "path": "src/logos-engine/v6-shared-series.ts",
+      "sha256": "21e39cc2cf208da9045973bcd5851aeec5faa4be0a1cf7654f3ca96513c7689d",
+      "bytes": 70617
+    },
+    {
+      "path": "src/logos-engine/v6-observed-inventory.ts",
+      "sha256": "ba67f83a8c8b8457a72ed82fea84221f122acddbd866a691ba44370f03783f69",
+      "bytes": 43333
+    },
+    {
+      "path": "src/logos-engine/v6-native-owned.ts",
+      "sha256": "363201fabc39c04fde4069b410a7b1fcdba89210aabd3671987fde9c6f8ef9c0",
+      "bytes": 3414
+    },
+    {
+      "path": "tests/v6-inventory-family-reference.test.ts",
+      "sha256": "2091f6807c8bbb0549f38f0ae3cd07ece7771cab222a6cf2a84dd56174d1a755",
+      "bytes": 10102
+    },
+    {
+      "path": "tests/v6-inventory-restoration-cache.test.ts",
+      "sha256": "3cbd8db7cad3987f48cc508bf7b264b545ffe642e0639e911786a0eca3c9ad71",
+      "bytes": 14848
+    },
+    {
+      "path": "tests/v6-native-working-witness.test.ts",
+      "sha256": "53e20eca15ed57dc3d9c8247712987d1f8217c2fab853d846d7cef9a0860a1c7",
+      "bytes": 8860
+    },
+    {
+      "path": "tests/v6-shared-series-native.test.ts",
+      "sha256": "3746f7d817f6dc17537089ac9fc430d1620e447ab23ac014e2efdc67a6f8144a",
+      "bytes": 27704
+    },
+    {
+      "path": "tests/v6-relational-chamber-integration.test.ts",
+      "sha256": "fa9195286072ccbbadc774f8737954e1b06799f71a8b95e5574a698d55cb3741",
+      "bytes": 11924
+    }
+  ],
+  "inputsUnchanged": true,
+  "output": {
+    "path": "docs/migration/lot3b-cost-evidence/diagnostic/reflect-witness-after-output.tap.gz",
+    "sha256": "8eeb3500cd36ad5841c631696db4e3485d4cffe71cce95864022a85b16ea0bf3",
+    "bytes": 7258
+  },
+  "qualification": "One targeted run after Reflect descriptor traversal and SharedSeries in-call validation deduplication. Existing Kernel first-replay, revised-fragment hydration, direct mutation, detached iterator and atomicity requirements retained. Not an official budget measurement or a complete frozen validation."
+}

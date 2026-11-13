@@ -1,0 +1,262 @@
+{
+  "module_id": "goal_derivation_d",
+  "declarations": [
+    {
+      "id": "policy.conscious_prospective_means",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "conscious_means.already_satisfied",
+        "conscious_means.existing_utility_revalidated",
+        "conscious_means.revise_configuration",
+        "conscious_means.request_application_evidence",
+        "conscious_means.request_model_evidence"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "reason_refs": [
+        "reason.prospective_means_requires_current_goal_comparison_and_discriminating_application_evidence"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.conscious_means.defaults",
+          "static_facts": {
+            "eligible": false,
+            "requires_application_evidence": false,
+            "proposed_configuration_falsified": false,
+            "utility_established": false,
+            "grants_action": false
+          }
+        },
+        {
+          "id": "projection.conscious_means.already_satisfied",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "conscious_means.already_satisfied"
+            },
+            {
+              "field": "current_goal_satisfied",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "requires_application_evidence": false,
+            "proposed_configuration_falsified": false
+          }
+        },
+        {
+          "id": "projection.conscious_means.existing_utility_revalidated",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "conscious_means.existing_utility_revalidated"},
+            {"field": "current_goal_satisfied", "operator": "equals", "expected": false},
+            {"field": "existing_utility_support_current", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "eligible": true,
+            "requires_application_evidence": false,
+            "proposed_configuration_falsified": false
+          }
+        },
+        {
+          "id": "projection.conscious_means.revise_configuration",
+          "all_conditions": [
+            {"field": "existing_utility_support_current", "operator": "not_equals", "expected": true},
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "conscious_means.revise_configuration"
+            },
+            {
+              "field": "current_goal_satisfied",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "proposed_goal_falsified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "proposed_preservation_falsified",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "requires_application_evidence": true,
+            "proposed_configuration_falsified": true
+          }
+        },
+        {
+          "id": "projection.conscious_means.request_application_evidence",
+          "all_conditions": [
+            {"field": "existing_utility_support_current", "operator": "not_equals", "expected": true},
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "conscious_means.request_application_evidence"
+            },
+            {
+              "field": "current_goal_satisfied",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "canonical_means_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {"field": "current_goal_known", "operator": "equals", "expected": true},
+            {
+              "field": "proposed_goal_satisfied",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "proposed_goal_falsified",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "proposed_preservation_falsified",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "proposed_preservation_unknown",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "requires_application_evidence": true,
+            "proposed_configuration_falsified": false
+          }
+        },
+        {
+          "id": "projection.conscious_means.request_model_evidence",
+          "all_conditions": [
+            {"field": "existing_utility_support_current", "operator": "not_equals", "expected": true},
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "conscious_means.request_model_evidence"
+            },
+            {
+              "field": "current_goal_satisfied",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "proposed_goal_falsified",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "proposed_preservation_falsified",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "canonical_means_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {"field": "current_goal_known", "operator": "equals", "expected": false},
+            {
+              "field": "proposed_goal_satisfied",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "proposed_preservation_unknown",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "requires_application_evidence": true,
+            "proposed_configuration_falsified": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.goal_derivation_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": ["exact_canonical_goal_contract_and_current_causal_or_correspondence_support"],
+      "applicability": ["explicit_goal_derivation_review"],
+      "invariants": [
+        "quantification_over_exact_declared_required_domain_only",
+        "process_output_is_result_and_visible_device_is_means",
+        "utility_names_farther_consumer_reason_and_cancelling_counterexample",
+        "missing_type_location_correspondence_or_evidence_retains_goal_and_declared_question",
+        "current_feasibility_is_not_desirability_or_action_release"
+      ],
+      "falsifiers": ["stale_support", "foreign_scope", "unbound_chain", "observed_falsifier", "harmed_open_requirement"],
+      "selection_required_fact_fields": ["alternative_ref"],
+      "declared_alternative_refs": ["derivation.explained_candidate", "derivation.retain_goal_and_information_questions"],
+      "selection_eligibility_conditions": [{"field": "applicable", "operator": "equals", "expected": true}],
+      "fact_projections": [
+        {
+          "id": "projection.goal_derivation_d.explained_candidate",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "derivation.explained_candidate"},
+            {"field": "derivation_contract_current", "operator": "equals", "expected": true},
+            {"field": "falsifier_observed", "operator": "equals", "expected": false},
+            {"field": "falsifier_unknown", "operator": "equals", "expected": false},
+            {"field": "future_open_requirement_harmed", "operator": "equals", "expected": false},
+            {"field": "future_open_requirement_unknown", "operator": "equals", "expected": false},
+            {"field": "missing_requirement_present", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {"applicable": true, "disposition_ref": "derivation.explained_candidate"}
+        },
+        {
+          "id": "projection.goal_derivation_d.keep_missing_questions",
+          "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "derivation.retain_goal_and_information_questions"}],
+          "static_facts": {"applicable": true, "disposition_ref": "derivation.retain_goal_and_information_questions"}
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.goal_derivation_d.current_explanation",
+          "all_conditions": [{"field": "disposition_ref", "operator": "equals", "expected": "derivation.explained_candidate"}],
+          "reason_ref": "reason.exact_supported_result_domain_and_farther_utility"
+        },
+        {
+          "id": "tier.goal_derivation_d.retain_uncertainty",
+          "all_conditions": [{"field": "disposition_ref", "operator": "equals", "expected": "derivation.retain_goal_and_information_questions"}],
+          "reason_ref": "reason.goal_preserved_without_inventing_missing_type_location_or_correspondence"
+        }
+      ],
+      "selection_tie_breakers": [{"field": "alternative_ref", "preferred_order": "minimize"}],
+      "canonical_equivalence_tie_break_debt_ref": "debt.goal_review_is_not_action_executability_or_terminal_confirmation",
+      "reason_refs": ["reason.exact_supported_result_domain_and_farther_utility", "reason.goal_preserved_without_inventing_missing_type_location_or_correspondence"]
+    }
+  ]
+}

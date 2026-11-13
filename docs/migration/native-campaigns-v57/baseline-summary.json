@@ -1,0 +1,161 @@
+{
+  "schema": "logos-engine.v57.smlp-baseline-summary.v1",
+  "receipt": {
+    "path": "docs/migration/native-campaigns-v57/baseline-smlp/execution-smlp.json",
+    "sha256": "9f7d9e034dc6441ceed0bff14f8562200b328ec7b7425ce94adca92d14c0e1b4",
+    "bytes": 58914
+  },
+  "selection": {
+    "path": "docs/migration/native-campaigns-v57/candidates/001-smlp-selection.json",
+    "sha256": "2080e664e32badaf6ad0ee2c38e825fe26320348e8eeaf6100cd745b23ca39c5",
+    "bytes": 1030
+  },
+  "morphology": {
+    "path": "docs/migration/native-campaigns-v57/initial-morphology.json",
+    "sha256": "8e130872225c749aae1872de6541797f3a5064328cb086205c8e36cad1c67b53",
+    "bytes": 46670
+  },
+  "morphologyReproduction": {
+    "generator": {
+      "path": "scripts/select-v57-public-candidate.mjs",
+      "sha256": "cd890afdc0016fcdff48386cd75963765cb6d932cac1d13274814b5c6129fb6e",
+      "bytes": 3933
+    },
+    "rerun": {
+      "path": "docs/migration/native-campaigns-v57/initial-morphology-rerun.json",
+      "sha256": "d92a26f803e2d175f0780955a79b642edfcecf7b1927a54f4f434d5018f6dba2",
+      "bytes": 46670
+    },
+    "allFieldsExactExceptCreatedAt": true
+  },
+  "initial": {
+    "publicPacketSha256": "a3a0ead7013dc3cf94fae4f3988166ec8876d48b9299fcaa15100f4a817ca878",
+    "state": "NOT_FINISHED",
+    "level": 1,
+    "levelsCompleted": 0
+  },
+  "final": {
+    "actions": 15,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 29.470419900999982,
+    "prefixes": 9,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 15,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 32,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 10
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 11
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 10
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 6
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 2
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 3
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 11
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology",
+        "attention_parent_return",
+        "acquire_control_for_target"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 15,
+      "resume": 8
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.30.0"
+  },
+  "source": {
+    "digest": "bade8fd58991e6a127abc84f373d539edeaa70d45ab0da94a84a6751fdc92de5",
+    "unchanged": true,
+    "executionCodeUnchanged": true
+  },
+  "levelResults": [
+    {
+      "completedLevel": 1,
+      "levelActions": 3,
+      "totalActions": 3,
+      "activeSeconds": 9.902748732999997,
+      "cumulativePrefixes": 3,
+      "sessionRetained": true
+    },
+    {
+      "completedLevel": 2,
+      "levelActions": 4,
+      "totalActions": 7,
+      "activeSeconds": 6.106484360999994,
+      "cumulativePrefixes": 5,
+      "sessionRetained": true
+    },
+    {
+      "completedLevel": 3,
+      "levelActions": 8,
+      "totalActions": 15,
+      "activeSeconds": 13.46118680699999,
+      "cumulativePrefixes": 9,
+      "sessionRetained": true
+    }
+  ],
+  "actionFamilies": {
+    "observed_frontier": 1,
+    "configured_arrivals": 13,
+    "public_occurrence_recall": 1
+  },
+  "prefixFamilies": {
+    "observed_frontier": 1,
+    "configured_arrivals": 7,
+    "public_occurrence_recall": 1
+  },
+  "pythonAgentModules": [],
+  "budget": {
+    "levelActionCaps": [
+      600,
+      600,
+      600
+    ],
+    "activeSecondsPerLevel": 360,
+    "clock": "real active compute and native execution"
+  },
+  "elapsedSeconds": 40.15662219200021,
+  "selectionToClosedSeconds": 50.028412,
+  "qualifications": [
+    "Official first three levels only; stopped at entry to level 4 / NOT_FINISHED, not a complete game victory.",
+    "One native common session initialized at level 1, 0 completed, no state imported, no imposed controls or route. Python loads only opaque game host; the report lists no Python agent modules.",
+    "Already successful on unchanged published V56; no V57 capability contribution is claimed.",
+    "All original execution receipts and archives retained byte-identically; relocation may change their containing checkout, never their contents."
+  ]
+}

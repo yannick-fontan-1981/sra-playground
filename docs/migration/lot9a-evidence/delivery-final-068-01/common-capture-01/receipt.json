@@ -1,0 +1,171 @@
+{
+  "schema": "logos-engine.lot9a.functional-command.v1",
+  "key": "common-capture",
+  "attempt": "common-capture-01",
+  "plan": {
+    "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-execution-plan.json",
+    "bytes": 72772,
+    "sha256": "e8ca9501bc5afe4934598886ff7ae3fcfc6c134d149e29099c37da5490caf950"
+  },
+  "command": [
+    "node",
+    "--max-old-space-size=1536",
+    "docs/migration/lot9a-evidence/tools/delivery/chart-common/capture.mjs",
+    "--declaration",
+    "docs/migration/lot9a-evidence/delivery-final-068-01/common-declaration.json",
+    "--output",
+    "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture"
+  ],
+  "cwd": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T14:58:58.002780+00:00",
+  "timeoutSeconds": 300,
+  "budgetKey": "common-capture",
+  "attemptNumber": 1,
+  "priorCumulativeSeconds": 0,
+  "maximumCumulativeSeconds": 600,
+  "correctiveReason": null,
+  "declaredMaximumSessionsThisLaunch": 5,
+  "declaredMaximumReturnsThisLaunch": 9,
+  "generator": {
+    "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/tools/delivery/run-functional-command.py",
+    "bytes": 9355,
+    "sha256": "dcd3d8f56c75c44036a9ab7d14ef92aec367db7eb8c5b30fae59d63dd30a6045"
+  },
+  "derivedFrom": {
+    "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot8b-evidence/tools/final-functional/run-functional-command.py",
+    "bytes": 7698,
+    "sha256": "a49a62551f757750a9598b2ea3a36d0c214ded79f150e3c65bddc74a83103fe9"
+  },
+  "headBefore": "3eddec652362f683738e4226f8bcb1bbd1f1c426",
+  "globalLockAcquired": false,
+  "officialPerformanceMeasurement": false,
+  "gameEngineExecuted": false,
+  "published": false,
+  "status": "passed",
+  "exitCode": 0,
+  "finishedAt": "2026-11-12T14:59:20.046416+00:00",
+  "elapsedSeconds": 22.04100562700114,
+  "inputsUnchanged": true,
+  "changedInputPaths": [],
+  "log": {
+    "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/output.log.gz",
+    "bytes": 170,
+    "sha256": "1da4e73269be4657954f48afd155f362a065d4601101249f220ee6b84499c914"
+  },
+  "childProcessReaped": true,
+  "headAfter": "3eddec652362f683738e4226f8bcb1bbd1f1c426",
+  "headUnchanged": true,
+  "cumulativeSeconds": 22.04100562700114,
+  "outputs": [
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/events.jsonl.gz",
+      "bytes": 2367711,
+      "sha256": "5cec9b86a8d0524bfd6eefeb3222b7b6c4cbc825a71fd6a5f3056d50628b6676"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/graphs/06302abece6be68d91b6e13a974f0c8c5e05ca390ce73acedfde7e0b9260d2cc.json.gz",
+      "bytes": 1132798,
+      "sha256": "c22971de54f3e26fb1c5daecbc4b4ee4d0f02d118f8f199825378ec563bbd1d7"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/graphs/128d474c43d20aaea05fbfc04fc6787c4f028d92bba320d59e62ce0d254d527c.json.gz",
+      "bytes": 1212082,
+      "sha256": "06ae0b434f7d84088d9aad13ebb0d552a9bcf92447fcdc1afb2eafd33bfcb700"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/graphs/12d3af3e0418b89a76fb647e90d9b4207a5aef2f5541e35c7a8561dbfc2165b9.json.gz",
+      "bytes": 1111835,
+      "sha256": "fae814bff9d7e85054ab5f145052bfa1c6df2443e6978de0ac1ea73eeb5c415e"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/graphs/17fb728478aebfd5d14133bedac5b2edafa90dee340ed5bce4b53117465b4866.json.gz",
+      "bytes": 1132772,
+      "sha256": "d4e3dab76fca1a0416e9b39be757299d8fd5deb978b70003c26ee63c90b03973"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/graphs/2728dd8603f586b3ceb0d7cdd7a50fbac8faf06a1e54ec9466be6532ae54129d.json.gz",
+      "bytes": 1141643,
+      "sha256": "011a928729ff7a864e484c082d0329bcd4d8123cac32355751a3bebcf484426a"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/graphs/374b46f8d6fc3fd9200399c0fc24ac3c7ee5fbbca34d41dd396ff26127cc4034.json.gz",
+      "bytes": 1217508,
+      "sha256": "9104ae88df6d231ee440272eae24e3cae33925f894f42ad55cac04dbe7032479"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/graphs/4ce646875e395d83862563f5077a382fc90a1416bcefac2b46436f02baf6a38e.json.gz",
+      "bytes": 1290176,
+      "sha256": "58650338fdf230e15b0df4bfa3990fe8dceca8d1c2750fe811b5a30477c950c0"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/graphs/57ca6632e2ee4941ddfddc749bc863d59940ba6eb46017df59f8fa1d4383254c.json.gz",
+      "bytes": 999356,
+      "sha256": "b7eb2de1aa25bb6e54eb95b38505e0dace7331d041dd78111ec3904e999dcae0"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/graphs/5e2c064fef333c0f4a515d984b7b104dafa822ff6a9f2f5c98e165f2ba370fe2.json.gz",
+      "bytes": 1191794,
+      "sha256": "dec204f6b242d3c2353d1df42f22aca31279307d6d5c2c2f9792ba9f32781a7e"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/graphs/70c09944c8eb9b7c8d03e859e0582506ee0a88685cf08c97269b56214f2696c1.json.gz",
+      "bytes": 1220633,
+      "sha256": "a7e17f2e9e5f69d2cbf488bb18aa87e41334d432db3f2c3b7fd123aeab8f251f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/graphs/730c1b466dc798df1e308362911372b3982903c1acc167e786601d5cada9deb7.json.gz",
+      "bytes": 1132885,
+      "sha256": "bc985037cf83c2aa584c084b583a7032ae6d01d79c6a7522720fb434dbb700b8"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/graphs/91c1bef668e04cb87294044ba16da3014d80a6934f2f9d099c42511a7af55b8f.json.gz",
+      "bytes": 999347,
+      "sha256": "9f2985bd2e7d40dcb43b86c7087f61b6313e78aec17d0d6e608a95714944b9de"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/graphs/992449d0a1ac348b5026689299bc165921c99090e6cc2a010b1138534d65d451.json.gz",
+      "bytes": 1141599,
+      "sha256": "946f46ad6b3089628da55fd42313507af367691d57a0f4e4a8fa389e15fc539f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/graphs/ac8f0dfb01ea4c01ea7ef6d224836a9adbf790fbffc7696aa08beba18bc00442.json.gz",
+      "bytes": 1140805,
+      "sha256": "f2f80a7f01caabab64481a08ab861a6c7c2450a2d20aecf7e9406fd992775381"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/graphs/bace40fad07d938a72d805326468583407b83cf6eac644421f46dc63e32a2c38.json.gz",
+      "bytes": 1132893,
+      "sha256": "7c91793469af8300b42e4784b2a992df13501e108fc53b860529f0569a07b57c"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/graphs/c57c1a31f9500f1c2a0f29ae549d48d0924896ea7838cd1880450970bbeb2d94.json.gz",
+      "bytes": 1132771,
+      "sha256": "a3b4e6c2d33f2f4f236187004c8da6448070bcd32ed312b6f283358d227caf66"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/graphs/d30c31970350b72b751583209c00e415bdec948025287b54ae67fcd66db94961.json.gz",
+      "bytes": 1139771,
+      "sha256": "68ef04e76bdb75ae70a278d25ba8eeab56e93eacdf533cd46571613c135cd348"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/graphs/d3efac99e5954f0c4c973c524dc8e4eb591e5c0f4b9a7a32a65b37915655b9be.json.gz",
+      "bytes": 999354,
+      "sha256": "c0084f3891b227276b60de2ffd6a0828f47e67df05fd726bae93b2f85299bac5"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/graphs/d7294e961ce5f7d8f24a5e2d867a1bd4e776ac89b4ff030c50ffd146379d334c.json.gz",
+      "bytes": 999354,
+      "sha256": "161abc59ee0e550513a0f46189faf0e6a4cb9361ec8265b7d9783653d058db27"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/graphs/e597d89284778cdaa27245a790803804098070bdaa152c5e86b03f8b8509b79e.json.gz",
+      "bytes": 999359,
+      "sha256": "7f17ab6d7addd3d6290f0dbaa5213ec5e0eeb95df0d41e97c73b2d0943685b91"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/graphs/ed09e656aeba82f1c433760d14beea6dd2835448d3d525133d1719d2910e02b6.json.gz",
+      "bytes": 1131983,
+      "sha256": "dd5c3e5e13ea71e55dd9bacf3c903fd13fcf254540d9bd952eeb89db919fbae3"
+    }
+  ]
+}

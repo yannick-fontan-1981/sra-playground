@@ -1,0 +1,50 @@
+{
+  "schema": "logos-engine.lot8b.functional-command.v1",
+  "key": "branch-qualify",
+  "attempt": "branch-qualify-02",
+  "plan": {
+    "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/branch-execution-plan-02.json",
+    "bytes": 70213,
+    "sha256": "0d5a16b191c0bf40b76ad59bf5bb3ed76341fdff20ae0404b6c60b64851aa976"
+  },
+  "command": [
+    "node",
+    "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-02/capture.jsonl.gz",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-02/capture.receipt.json",
+    "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/graph-review.json",
+    "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/work-forms.json"
+  ],
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T05:25:03.223029+00:00",
+  "timeoutSeconds": 300,
+  "headBefore": "4d84045a6e485c412c0114de75edd216c329a90b",
+  "globalLockAcquired": false,
+  "officialPerformanceMeasurement": false,
+  "gameEngineExecuted": false,
+  "published": false,
+  "status": "passed",
+  "exitCode": 0,
+  "finishedAt": "2026-11-12T05:25:12.235555+00:00",
+  "elapsedSeconds": 9.01006227399921,
+  "inputsUnchanged": true,
+  "changedInputPaths": [],
+  "log": {
+    "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/output.log.gz",
+    "bytes": 359,
+    "sha256": "759e0647e076a426ac8cbd9e79ab24c91159dc207be8f5551aad98c15f55285e"
+  },
+  "childProcessReaped": true,
+  "outputs": [
+    {
+      "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/graph-review.json",
+      "bytes": 59736,
+      "sha256": "e65982c42c20ab45387de4c28b6225b4fb889252dd0600c8fdcfb54a882a1044"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/work-forms.json",
+      "bytes": 159888,
+      "sha256": "74eaf26e106a6f5aaec610cf299f8c8b61729a6b519fab7a3e67e68a1c3cd1c5"
+    }
+  ]
+}

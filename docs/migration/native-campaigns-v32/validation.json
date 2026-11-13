@@ -1,0 +1,27 @@
+{
+  "schema": "logos-engine.v32.validation.v1",
+  "nativeSourceDigest": "b72de816a5c707ef0b41515a22fcd52f1ffd797ab006d9f5daa39f15ae2e6710",
+  "componentSuite": {
+    "command": "node --test --test-concurrency=1 --test-skip-pattern='native SRC/service/controller replays' tests/*.test.ts",
+    "exitCode": 0,
+    "tests": 2267,
+    "pass": 2267,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "durationMs": 138811.973872,
+    "qualification": "Three recorded HANO/SYME/DNOI full caller replays are excluded by test selection; this runner does not count them as skipped. Real public-game campaigns are separate integration evidence. This is not an unqualified npm test claim.",
+    "logSha256": "cd99adcaa34f75aab0e63b7964295154c04eff89ac88913deee3baa6f383d9a1"
+  },
+  "typecheck": {
+    "command": "npm run typecheck",
+    "exitCode": 0,
+    "logSha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d"
+  },
+  "diffCheck": {
+    "command": "git diff --check",
+    "exitCode": 0
+  },
+  "fullV6Parity": false
+}

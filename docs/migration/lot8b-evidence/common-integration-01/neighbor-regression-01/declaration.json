@@ -1,0 +1,25 @@
+{
+  "schema": "logos-engine.lot8b.common-functional-command.v1",
+  "status": "running",
+  "kind": "neighbor-regression",
+  "command": [
+    "node",
+    "--test",
+    "--test-concurrency=1",
+    "--test-reporter=tap",
+    "tests/v6-object-binding-common.test.ts",
+    "tests/v6-selected-rigid-integration.test.ts",
+    "tests/v6-motif-access-kernel.test.ts",
+    "tests/v6-program-families.test.ts"
+  ],
+  "timeoutSeconds": 600,
+  "startedAt": "2026-11-12T04:28:03.449805+00:00",
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "headBefore": "b5d34121d6d1e79ae673372b5969d4883dcd9de8",
+  "inputCount": 2447,
+  "globalLockAcquired": false,
+  "officialPerformanceMeasurement": false,
+  "gameExecution": false,
+  "gameReplay": false,
+  "published": false
+}

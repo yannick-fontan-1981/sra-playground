@@ -1,0 +1,133 @@
+{
+  "module_id": "v6.source81.continuity",
+  "declarations": [
+    {
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "selection_tiers": [
+        {
+          "id": "tier.prepare_joint_access_to_observed_peer",
+          "reason_ref": "reason.prepare_complex_composition_by_shortest_jointly_accessible_means"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break",
+      "id": "policy.v6_source81_continuation",
+      "reason_refs": [
+        "reason.continue_revalidated_source81_target_under_current_premises"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.source81.continuation_defaults",
+          "static_facts": {
+            "source81_continuation_eligible": false
+          }
+        },
+        {
+          "id": "projection.source81.revalidated_target_continuation",
+          "all_conditions": [
+            {
+              "field": "retained_target_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "retained_selection_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "parent_question_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "retained_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "retained_subgoal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "retained_expected_effect_class",
+              "operator": "is_present"
+            },
+            {
+              "field": "continuation_evidence_refs",
+              "operator": "is_present"
+            },
+            {
+              "field": "current_parent_peer_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_actor_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_target_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_scope_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "remaining_route_revalidated",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "preservation_constraints_revalidated",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "next_input_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "within_remaining_budget",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pertinent_contradiction",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "source81_continuation_eligible": true,
+            "selection_principle_ref": "reason.continue_revalidated_source81_target_under_current_premises",
+            "release_authority": false,
+            "retain_original_prepared_target": true,
+            "global_selection_repeated": false
+          },
+          "bound_facts": {
+            "active_goal_ref": "retained_goal_ref",
+            "subgoal_ref": "retained_subgoal_ref",
+            "expected_effect_class": "retained_expected_effect_class",
+            "selected_target_ref": "retained_target_ref",
+            "source_selection_ref": "retained_selection_ref",
+            "preserved_parent_question_ref": "parent_question_ref",
+            "continuation_current_evidence_refs": "continuation_evidence_refs"
+          }
+        }
+      ]
+    }
+  ]
+}

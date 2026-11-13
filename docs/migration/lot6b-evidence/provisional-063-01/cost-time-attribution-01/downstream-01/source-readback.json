@@ -1,0 +1,33 @@
+{
+  "schema": "logos-engine.lot6b-downstream-source-readback.v1",
+  "recordedAt": "2026-11-11T19:33:36.241256+00:00",
+  "scope": "Textual readback only; no parser, import, test, qualification, hash or runtime execution",
+  "checks": [
+    {
+      "file": "finalize-owner-cost-contract.py",
+      "localFragmentPresentExactlyOnce": true,
+      "definitionAndOneProductionCall": true,
+      "standardLibraryImportsPresent": true
+    },
+    {
+      "file": "check-cost-static-inputs.py",
+      "localFragmentPresentExactlyOnce": true,
+      "definitionAndOneProductionCall": true,
+      "standardLibraryImportsPresent": true
+    },
+    {
+      "file": "review-owner-costs.py",
+      "localFragmentPresentExactlyOnce": true,
+      "definitionAndOneProductionCall": true,
+      "standardLibraryImportsPresent": true
+    },
+    {
+      "file": "consolidate-owner-costs.mjs",
+      "localFragmentPresentExactlyOnce": true,
+      "definitionAndOneProductionCall": true,
+      "noNewImports": true
+    }
+  ],
+  "testsExecuted": false,
+  "allRecordedTextChecksSatisfied": true
+}

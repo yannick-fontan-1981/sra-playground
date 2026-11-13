@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.lot5a.browser-verification.v1",
+  "status": "unavailable_browser_control",
+  "recordedAt": "2026-11-10T20:53:11.495992+00:00",
+  "nativeSourceManifestDigest": "d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f",
+  "managedPreview": {
+    "url": "http://127.0.0.1:4173/",
+    "status": "started_successfully"
+  },
+  "attempts": [
+    {
+      "operation": "cua.getTab existing CATR tab3",
+      "result": "Emulation.setFocusEmulationEnabled timed out",
+      "durationSeconds": 19.373
+    },
+    {
+      "operation": "browser.tabs.get existing CATR tab3; intended navigation to exact managed-preview URL",
+      "result": "Emulation.setFocusEmulationEnabled timed out",
+      "durationSeconds": 20.565
+    }
+  ],
+  "intermediateHarnessIssue": "One assignment attempt used the handle from the failed first binding and returned lot5Tab is not defined; it performed no page action. The retry declared a new handle and met the same CDP timeout.",
+  "observedCurrentCandidateGameplay": false,
+  "gameSessionStarted": false,
+  "qualification": "Browser inventory and managed preview were available, but tab attachment failed twice before any navigation or gameplay. No browser success, Pause/resume or rendered native0.53 observation is claimed. Controller mixed-path tests and common native-loop contracts remain separate evidence."
+}

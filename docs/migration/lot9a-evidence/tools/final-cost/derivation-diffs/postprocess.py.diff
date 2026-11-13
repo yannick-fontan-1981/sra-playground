@@ -1,0 +1,15 @@
+--- docs/migration/lot8b-evidence/tools/final-cost/postprocess.py
++++ docs/migration/lot9a-evidence/tools/final-cost/postprocess.py
+@@ -40,10 +40,10 @@
+     parser.add_argument('contract', type=Path)
+     args = parser.parse_args()
+     contract = json.loads((ROOT / args.contract).read_bytes())
+-    require(contract['schema'] == 'logos-engine.lot8b-final-cost-contract.v1', 'Invalid contract')
++    require(contract['schema'] == 'logos-engine.lot9a-final-cost-contract.v1', 'Invalid contract')
+     perf = contract['performanceDirectory']
+     directory = (ROOT / perf).resolve(strict=True)
+-    require(directory.is_relative_to(ROOT / 'docs/migration/lot8b-evidence'), 'Invalid output directory')
++    require(directory.is_relative_to(ROOT / 'docs/migration/lot9a-evidence'), 'Invalid output directory')
+     require(fp(Path(__file__)) in contract['inputFingerprints'], 'Postprocessor was not prospectively pinned')
+     window = json.loads((directory / 'window.json').read_bytes())
+     require(window['status'] == 'passed' and window['finalIntegrity'] == 'passed', 'Complete window required')

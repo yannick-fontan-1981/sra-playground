@@ -1,0 +1,249 @@
+{
+  "schema": "logos-engine.lot9a.independent-coordination-preparation-review.v1",
+  "reviewedAt": "2026-11-12T15:30:47.422141+00:00",
+  "status": "favorable_independent_prospective_tools_review",
+  "reviewer": "/root/lot9a_perf_review",
+  "independence": {
+    "controllerAuthor": false,
+    "changedControllerFiles": false,
+    "nativeExecutionPerformed": false,
+    "controllerImportedOrExecuted": false,
+    "lockAcquired": false,
+    "sharedStatusModified": false,
+    "oracleExecuted": false,
+    "gameExecuted": false,
+    "functionalReaderRerun": false
+  },
+  "conclusion": "Les trois contrôleurs prospectifs conservent les algorithmes historiques. Seuls les noms de filière, chemins, schémas et le propriétaire/programme Chart du contrat structurel changent. Aucun avis de mesure passée, de coût accepté ou de publication réussie n’est déduit de cette revue.",
+  "derivationChecks": [
+    {
+      "file": "common.py",
+      "sourceDestinationAndFullDiffHashesVerified": true,
+      "fullUnifiedDiffReproducedExactly": true,
+      "onlyDeclaredLaneAndStructuralContractSubstitutions": true,
+      "pythonAstParsedWithoutImport": true
+    },
+    {
+      "file": "performance.py",
+      "sourceDestinationAndFullDiffHashesVerified": true,
+      "fullUnifiedDiffReproducedExactly": true,
+      "onlyDeclaredLaneAndStructuralContractSubstitutions": true,
+      "pythonAstParsedWithoutImport": true
+    },
+    {
+      "file": "publication.py",
+      "sourceDestinationAndFullDiffHashesVerified": true,
+      "fullUnifiedDiffReproducedExactly": true,
+      "onlyDeclaredLaneAndStructuralContractSubstitutions": true,
+      "pythonAstParsedWithoutImport": true
+    }
+  ],
+  "currentSourceIdentity": {
+    "baseline": {
+      "nativeFiles": 331,
+      "nativeDigest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+      "sourceCommit": "8462204043aa368faa7df280d796bb706eb53b38",
+      "nativeVersion": "0.67.0"
+    },
+    "candidate": {
+      "nativeFiles": 334,
+      "nativeDigest": "e7a94fbc7cdcb19d8704b5d4120f27a858cbcd07e455084711510ee147f4e653",
+      "sourceCommitAtReviewStart": "6f98d0651a6692e9967627ff45ba5b2c7976ac58",
+      "nativeVersion": "0.68.0"
+    },
+    "manifestsRecomputedAndExact": true,
+    "livePublishedSourceReadByReviewer": false
+  },
+  "lockContract": {
+    "ordinaryWorkRequiresGlobalLock": false,
+    "kinds": [
+      "performance",
+      "publication"
+    ],
+    "oneNonblockingAcquisitionPerInvocation": true,
+    "stableInodeCheckedBeforeDuringAndAtRelease": true,
+    "nofollowAndCloexec": true,
+    "lockUnlinkedOrReplaced": false,
+    "onlyOwnedDescriptorUnlockedAndClosedInFinally": true,
+    "contentionExitCode": 75,
+    "automaticRetry": false,
+    "peerAvailabilityWait": false,
+    "peerAcknowledgmentRequired": false,
+    "sharedStatusOwner": "lot9a"
+  },
+  "performanceContract": {
+    "onlyNativeCommand": "scripts/run-native-cost-window.py",
+    "historicalRunnerUnchangedInBothRolesRequired": true,
+    "order": [
+      "A1",
+      "B1",
+      "B2",
+      "A2"
+    ],
+    "games": [
+      "STCK",
+      "SMLP"
+    ],
+    "measuredSessions": 32,
+    "measuredActions": 400,
+    "warmupSessions": 8,
+    "warmupActions": 24,
+    "samplesPerGameAndVersion": 8,
+    "excludedMeasuredSessions": 0,
+    "excludedOutliers": 0,
+    "globalGate": "Median B strictly less than 1.1 times median A for STCK and SMLP independently",
+    "phaseOverrunsMayBeAcceptedWhenBothGlobalsPass": true,
+    "crossGameCompensation": false,
+    "structuralOwner": "public_chart_navigation",
+    "addedPrograms": [
+      "v6.chart_navigation.choose"
+    ],
+    "onlyStructuralPaths": [
+      "observations[*].nodeCount",
+      "inspection[*].graphNodes",
+      "final.nodeCount",
+      "final.graphRevision"
+    ],
+    "structuralValues": "Exact final functional values, not arbitrary tolerances",
+    "unattributedDifferencesAllowed": 0,
+    "successMeans": "completed_pending_independent_analysis",
+    "comparatorsAndReviewAfterLockRelease": true
+  },
+  "boundedSupervision": {
+    "preflightSecondsOutsideLock": 180,
+    "measurementSecondsFromAcquisition": 1800,
+    "terminationGraceSeconds": 10,
+    "killGraceSeconds": 10,
+    "integrityRetentionSeconds": 60,
+    "maximumDeclaredExclusiveSeconds": 1880,
+    "observationIntervalSeconds": 30,
+    "groupAndOwnedEscapedDescendantsClosedAndReaped": true,
+    "identityStartTicksCheckedBeforeIndividualSignal": true,
+    "lockReleaseAttemptedBeforeFinalEvidenceWrite": true,
+    "noncatchableHostFailureNotClaimedHandled": true
+  },
+  "isolationReview": {
+    "establishedByThisReview": false,
+    "flockAloneIsEvidence": false,
+    "acceptedProspectiveScope": "Frozen own candidate/baseline checkouts, closed own commands and agents, fresh visible namespace resource/process observation and periodic monitoring while the nonblocking official mutex is held.",
+    "remainingRootAction": "Create fresh explicit readiness only after preparation commands and agents have actually ended; pin its evidence and acknowledge local scope.",
+    "globalHostQuietClaimed": false,
+    "otherNamespacesProvenIdle": false,
+    "peerStatusUsedAsAck": false,
+    "limitations": [
+      "Namespace snapshots cannot attest activity on another host or namespace.",
+      "CPU/load snapshots and the mutex do not make finite ABBA observations a population confidence interval.",
+      "Thirty-second observation cadence records local instrumentation and may miss shorter unrelated processes outside the two owned checkouts."
+    ]
+  },
+  "publicationContract": {
+    "maximumSeconds": 300,
+    "preflightSeconds": 180,
+    "audience": "owner_private",
+    "helperDoesNotDeployOrPush": true,
+    "rootMustRecheckActualPublishedIdentityVersionCollisionAndAudienceUnderLease": true,
+    "sourceAndArchiveReconciliationRequired": true,
+    "rootMustPreserveExactArchiveUntilSaveSuccess": true,
+    "explicitReleaseOrAbortLineBoundToLease": true,
+    "partialStdinDoesNotBlockDeadline": true,
+    "stdinCloseSignalOrExpiryClosesOwnDescriptor": true,
+    "terminalDeploymentSuccessNeverInferredFromLeaseRelease": true
+  },
+  "retainedReservations": [
+    "Positive Chart public service/worker/ticket coverage remains separate from native common qualification.",
+    "Both work-reader attempts are consumed; no further work reader or recapture is authorized by these tools.",
+    "The first 58-duration-leaf reader failure, its narrow v2 correction, both original oracle-wrapper failures, and old maximumSessions8 ambiguity remain retained.",
+    "LKEY remains permanently closed."
+  ],
+  "blockingObjections": [],
+  "futureRequirements": [
+    "Finalize and independently review the exact Lot9A cost contract.",
+    "Record fresh readiness, source/audience observation and own-work closure immediately before the official attempt.",
+    "After measurement release, retain and independently review all cohorts and comparisons before deciding the strict global budget.",
+    "Under the short publication lease, recheck actual published source and owner-private audience and bind the pushed commit to the unchanged archive."
+  ],
+  "officialPerformanceAccepted": false,
+  "publicationPerformed": false,
+  "evidence": [
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-coordination/common.py",
+      "bytes": 16512,
+      "sha256": "b036da919503dff28cfb6e3cb3a18f73b5c5eb28a26d3d82bfd5d37dbd31fb39"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-coordination/common.py",
+      "bytes": 16496,
+      "sha256": "6dcb18bcdea048949640b590d8178d1a6223c1ea05751df183319d008215d0be"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-coordination/derivation-diffs/common.py.diff",
+      "bytes": 2776,
+      "sha256": "df9f31b200c7f9e69a15edabed69ac3e645b59398d347bfba42d62bdc20ec990"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-coordination/performance.py",
+      "bytes": 32601,
+      "sha256": "40c1418a7b6812e10e432c4f2b3447b8b20b6b6b3faa7767cfbe01d5d604800f"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-coordination/performance.py",
+      "bytes": 32638,
+      "sha256": "ac956ac581931af867c0a138a72709bbbe78186a2c3ef46af9b9a3a00484d6f3"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-coordination/derivation-diffs/performance.py.diff",
+      "bytes": 6321,
+      "sha256": "195e5f06c0c933da5ed0e8a2520653c3c2e7383bb0a454b723a88452d4daa930"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-coordination/publication.py",
+      "bytes": 10505,
+      "sha256": "d955c32bcf8b41bba0823f0d36c71b2962770b8250d9105e2fd6281cb94621f8"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-coordination/publication.py",
+      "bytes": 10505,
+      "sha256": "b7842a837eae6f3aeba7f4e5ca938fa29d7691dc16bade6cb072f10bed9d49d5"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-coordination/derivation-diffs/publication.py.diff",
+      "bytes": 2795,
+      "sha256": "d6961dd08071092a62488d815794eb40da614d5c3f2652d960a1176a279d34f5"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-coordination/README.md",
+      "bytes": 15914,
+      "sha256": "da80a0b838a1206cef3acf550c162f61f33096831bdf603d2036ce410992d8cf"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-coordination/provenance.json",
+      "bytes": 3029,
+      "sha256": "890bc708df57f1cb7e3f00851cef3ad161b17f6e97c7f956c2b1fb0fd5fa2633"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-coordination/syntax-checks.json",
+      "bytes": 846,
+      "sha256": "80c1cca5a2e2c3dfc12363abde86ea9aa521741cc3a7ab47086e36b91f9f7a18"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/final-reconciliation.json",
+      "bytes": 659,
+      "sha256": "fdc95f05df1b29881d4e8e905584671a9b6a3187353881c5de42dcf559469f9f"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/independent-delivery-review.json",
+      "bytes": 41738,
+      "sha256": "264db5ad57e16beab648d819a732f5c0a1df4cf262559160e79818a8fa59ffcb"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/candidate-native.json",
+      "bytes": 39694,
+      "sha256": "10ef61a1b937cbfca47332f7138a4bd1872323434eee2c3b41c0d0fea81f5379"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/baseline-native.json",
+      "bytes": 39333,
+      "sha256": "18fcc15c6e57f1bf6aab33cc62498e6a5a76836d85b890378be957a0e6da1c57"
+    }
+  ]
+}

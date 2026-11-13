@@ -1,0 +1,7 @@
+MODULE v6.invited_endpoints
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        decision: Any
+    STEP select
+        CALL endpoints.select(request=request) -> decision
+        STOP decision

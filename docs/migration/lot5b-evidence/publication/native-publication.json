@@ -1,0 +1,65 @@
+{
+  "schema": "logos-engine.lot5b-private-publication.v1",
+  "status": "published",
+  "recordedAt": "2026-11-11T02:53:54.042Z",
+  "request": {
+    "startedAt": "2026-11-11T02:52:26.755Z",
+    "request": {
+      "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+      "commit_sha": "fbd968f7c194575777965219f64fa78d3460b08e",
+      "archive": "/workspace/sites/sra-lot5b-publication-artifacts-20261111/site-step-5.tar.gz"
+    }
+  },
+  "version": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_f826a84eb8e48191ae2a68e758d656cc",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "version_number": 94,
+    "source": {
+      "commit_sha": "fbd968f7c194575777965219f64fa78d3460b08e"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_0000000072e0820eb2d6ba8c41fc1ac5",
+      "content_hash": "sha256:9f793af6b1a0f94db4f7213ac2e9580a973731172f96efb9df7a7de3d3fa08ad",
+      "size_bytes": 29962240,
+      "file_count": 75
+    },
+    "screenshot_url": null,
+    "deployment_id": "appgdep_6af3d878831081919db4d2fca610ad7d"
+  },
+  "deployment": {
+    "id": "appgdep_6af3d878831081919db4d2fca610ad7d",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "title": "SRA Playground",
+    "version_id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_f826a84eb8e48191ae2a68e758d656cc",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6adbc388d79081918581b93b919d7258",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-11T02:52:58.534517+00:00"
+  },
+  "nativeVersion": "0.58.0",
+  "nativeSourceDigest": "099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4",
+  "sourceVerification": {
+    "path": "docs/migration/lot5b-evidence/publication/final-source-build-verification-02.json",
+    "sha256": "ed133cb763c82312573efdefbf0ad68bb0f17cf0987113d0fe1e347a98b6dff4",
+    "bytes": 410362
+  },
+  "audience": {
+    "access_mode": "custom",
+    "revision": 3,
+    "current_user_role": "owner",
+    "allowed_users": [
+      {
+        "role": "owner"
+      }
+    ],
+    "allowed_groups": 0,
+    "ownerOnlyPreserved": true
+  },
+  "qualification": "Actual Sites version and terminal private deployment response. The five local gzip application archives were compared member by member with the validated build; the server-stored tar provenance above was reported by Sites and was not independently downloaded for a byte comparison. Cost and functional limitations remain unchanged; no new live game result is asserted."
+}

@@ -1,0 +1,8 @@
+{
+  "schema": "logos-engine.lot6b-browser-qa-operator-close.v1",
+  "recordedAt": "2026-11-11T20:17:56.149139+00:00",
+  "tabId": "7",
+  "qaUrl": "http://127.0.0.1:4173/?game=KLOT&level=1",
+  "tabClosedObserved": true,
+  "previewStoppedObserved": true
+}

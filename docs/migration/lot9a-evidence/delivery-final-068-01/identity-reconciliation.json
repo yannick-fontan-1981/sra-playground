@@ -1,0 +1,40 @@
+{
+  "schema": "logos-engine.lot9a.final-identity-reconciliation.v1",
+  "declaredAt": "2026-11-12T14:38:17.397154+00:00",
+  "status": "passed_literal_only",
+  "sourceGenerator": {
+    "path": "docs/migration/lot9a-evidence/tools/prepare-final-identity.py",
+    "sha256": "fc18a3f881c1e8b084fa3433f70a3e93fded5599c37105a2b21f4c5182eb4dc7"
+  },
+  "previousQualifiedDigest": "80173ed808e90e721939070f4d0087cba1d51fd396cc700dede3699333215bb7",
+  "finalCandidateDigest": "e7a94fbc7cdcb19d8704b5d4120f27a858cbcd07e455084711510ee147f4e653",
+  "publishedDigest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+  "nativeFiles": 334,
+  "changedSinceQualified": [
+    "src/logos-engine/v6-native-runtime.ts"
+  ],
+  "inverseLiteralSubstitutionExact": true,
+  "addedSincePublished": [
+    "src/logos-engine/v6-chart-navigation-geometry.ts",
+    "src/logos-engine/v6-chart-navigation-policy.ts",
+    "src/logos-engine/v6-chart-navigation.ts"
+  ],
+  "changedSincePublished": [
+    "src/logos-engine/v6-native-runtime.ts"
+  ],
+  "retainedTests": {
+    "passed": 175,
+    "modules": 8,
+    "newTestExecutions": 0,
+    "qualification": "Historical functional evidence applies to unchanged algorithms. Identity-sensitive delivery graphs will be freshly captured; this is not a rerun or relabeling of the historical tests."
+  },
+  "priorCommonAccounting": {
+    "initializedSessions": 10,
+    "physicalReturns": 14,
+    "registrationOnlyFactories": 2,
+    "reservation": "Old maximumSessions8 did not specify per-launch versus cumulative; retained, not erased."
+  },
+  "nativeCodeExecuted": false,
+  "officialPerformanceMeasured": false,
+  "publicationPerformed": false
+}

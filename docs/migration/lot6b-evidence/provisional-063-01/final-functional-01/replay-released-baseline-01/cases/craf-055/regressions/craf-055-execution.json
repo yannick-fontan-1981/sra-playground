@@ -1,0 +1,390 @@
+{
+  "case": "craf-055",
+  "game": "CRAF",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "--expose-gc",
+    "--max-old-space-size=1536",
+    "scripts/replay-public-regression-released-baseline.mjs",
+    "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+    "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-replay.json.gz",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-host-preparation.json"
+  ],
+  "startedAt": "2026-11-11T19:53:55.967925+00:00",
+  "timeoutSeconds": 600,
+  "baseline": {
+    "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+    "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2",
+    "bytes": 12767727
+  },
+  "trace": {
+    "path": "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+    "sha256": "cf69ad941e80e17f8d6cd66edc0419a0c6ff7aa8d9bbdaf503cb56a49e8c3f98",
+    "bytes": 40777
+  },
+  "expectedActions": 36,
+  "nodeOldSpaceMiB": 1536,
+  "preflight": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/preflight.json",
+    "sha256": "bc9b658e9369d23a4995b87f6cf05f69fefef9cfc198334da3e4249f3d1c75a7",
+    "bytes": 1406
+  },
+  "historicalReportProcessExitedBeforeNode": true,
+  "nativeSourceBeforeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+  "executionInputsBefore": {
+    "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+    "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+    "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+    "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+    "tests/helpers/v6-live-game-campaign.ts": "d0fa63c45126e2c4d21c8c25cd350103785c537a250b2a6903410195b82d16ca",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/case-manifest.json": "425c76171e1c86d1179cc75fd76226f31f156096ca31718ab561e9c328a28d56",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/source-manifest.json": "2098197ea6c45c06bf42983bc1b47cd2dbe15a49f43b2f647d1884e591649f42",
+    "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+  },
+  "phase": "completed",
+  "finishedAt": "2026-11-11T19:55:49.788916+00:00",
+  "exitCode": 0,
+  "timedOut": false,
+  "passed": true,
+  "nodeExitObserved": true,
+  "rawOutputPath": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-output.raw.log",
+  "driverPid": 10,
+  "nodePid": 12,
+  "memorySamples": [
+    {
+      "elapsedSeconds": 0.0012510310007201042,
+      "pid": 12,
+      "VmSize": "106704 kB",
+      "VmHWM": "280 kB",
+      "VmRSS": "280 kB",
+      "Threads": "1"
+    },
+    {
+      "elapsedSeconds": 5.021479168000951,
+      "pid": 12,
+      "VmSize": "10959088 kB",
+      "VmHWM": "1262232 kB",
+      "VmRSS": "958464 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 10.035408043000643,
+      "pid": 12,
+      "VmSize": "10982072 kB",
+      "VmHWM": "1262232 kB",
+      "VmRSS": "993320 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 15.055813259001297,
+      "pid": 12,
+      "VmSize": "10965528 kB",
+      "VmHWM": "1262232 kB",
+      "VmRSS": "977340 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 20.072134722002374,
+      "pid": 12,
+      "VmSize": "10976184 kB",
+      "VmHWM": "1262232 kB",
+      "VmRSS": "988236 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 25.096785754001758,
+      "pid": 12,
+      "VmSize": "10999716 kB",
+      "VmHWM": "1262232 kB",
+      "VmRSS": "1013152 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 30.109727647002728,
+      "pid": 12,
+      "VmSize": "11007004 kB",
+      "VmHWM": "1262232 kB",
+      "VmRSS": "1020396 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 35.12202302800142,
+      "pid": 12,
+      "VmSize": "11004800 kB",
+      "VmHWM": "1262232 kB",
+      "VmRSS": "1018844 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 40.1337483310017,
+      "pid": 12,
+      "VmSize": "11004024 kB",
+      "VmHWM": "1262232 kB",
+      "VmRSS": "1017848 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 45.143999537001946,
+      "pid": 12,
+      "VmSize": "11086364 kB",
+      "VmHWM": "1262232 kB",
+      "VmRSS": "1100188 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 50.16484300600132,
+      "pid": 12,
+      "VmSize": "11191812 kB",
+      "VmHWM": "1262232 kB",
+      "VmRSS": "1205736 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 55.17236205100198,
+      "pid": 12,
+      "VmSize": "11174612 kB",
+      "VmHWM": "1262232 kB",
+      "VmRSS": "1188704 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 60.18389606200071,
+      "pid": 12,
+      "VmSize": "11240988 kB",
+      "VmHWM": "1349220 kB",
+      "VmRSS": "1255400 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 65.19862929500232,
+      "pid": 12,
+      "VmSize": "11302456 kB",
+      "VmHWM": "1349220 kB",
+      "VmRSS": "1317112 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 70.21036357599951,
+      "pid": 12,
+      "VmSize": "11335784 kB",
+      "VmHWM": "1443796 kB",
+      "VmRSS": "1350316 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 75.22094933600238,
+      "pid": 12,
+      "VmSize": "11393540 kB",
+      "VmHWM": "1443796 kB",
+      "VmRSS": "1408200 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 80.23016930700032,
+      "pid": 12,
+      "VmSize": "11399516 kB",
+      "VmHWM": "1458880 kB",
+      "VmRSS": "1414000 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 85.24316962600278,
+      "pid": 12,
+      "VmSize": "11406824 kB",
+      "VmHWM": "1495996 kB",
+      "VmRSS": "1421816 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 90.24934794,
+      "pid": 12,
+      "VmSize": "11472548 kB",
+      "VmHWM": "1495996 kB",
+      "VmRSS": "1487576 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 95.25849576200198,
+      "pid": 12,
+      "VmSize": "11500204 kB",
+      "VmHWM": "1538272 kB",
+      "VmRSS": "1515452 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 100.26827440200213,
+      "pid": 12,
+      "VmSize": "11486792 kB",
+      "VmHWM": "1542116 kB",
+      "VmRSS": "1502156 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 105.28781371900186,
+      "pid": 12,
+      "VmSize": "11480496 kB",
+      "VmHWM": "1546000 kB",
+      "VmRSS": "1495940 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 110.2980286100028,
+      "pid": 12,
+      "VmSize": "12353728 kB",
+      "VmHWM": "2095208 kB",
+      "VmRSS": "2095208 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 113.81680717900235,
+      "pid": 12,
+      "processPresent": false
+    }
+  ],
+  "lastObservedAt": "2026-11-11T19:55:49.786808+00:00",
+  "elapsedSeconds": 113.81917365000118,
+  "lastProgress": {
+    "status": "passed",
+    "failure": null
+  },
+  "rawOutputBytes": 123458,
+  "outputRaw": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-output.raw.log",
+    "sha256": "3684e89f148fa97e9b7fcdb0f5fffda5ad52e364aeef9a3043a8d8c96614ab5c",
+    "bytes": 123458
+  },
+  "output": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-output.log.gz",
+    "sha256": "44f93ab18552c86e34f00f36133a1583d028612ae60dab419a5c8913029eeaaf",
+    "bytes": 5773
+  },
+  "startedReceipt": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-execution-started.json",
+    "sha256": "d1ae5cf02c98d3ac77214f7d0a8acfbb99e4cdbd6a515d977566a4a6d19825d4",
+    "bytes": 3408
+  },
+  "nodeExitedBeforeComparison": true,
+  "hostPreparation": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-host-preparation.json",
+    "sha256": "d51c10e5f33555f69920abd5bce05af12049e6cad09445733fe3d81dd88e4ffb",
+    "bytes": 9417
+  },
+  "hostPreparationPassed": true,
+  "report": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-replay.json.gz",
+    "sha256": "0aaca6f245b3d9bd1e3957f70c4ba2453b4f1ed820fec957ff1de52a9d0ef373",
+    "bytes": 14721207
+  },
+  "status": "passed",
+  "actions": 36,
+  "prefixes": 36,
+  "final": {
+    "actions": 36,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 92.70745107699999,
+    "prefixes": 36,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 36,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 73,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 37
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 37
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 35
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 34
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 31
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 38
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 36,
+      "resume": 35
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.64.0"
+  },
+  "passiveOwnerPresence": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-passive-owner-presence.json",
+    "sha256": "df84294c5ef175588eec26dd91d6888bee9e7ff27e7fe4d43474cc6dc5261d18",
+    "bytes": 1225
+  },
+  "passiveOwnerPresencePassed": true,
+  "passiveOwnerPrefixesChecked": 0,
+  "passiveOwnerPrefixesPassed": 0,
+  "passiveOwnerTransitionsRetained": 0,
+  "comparison": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-comparison.json",
+    "sha256": "ccd3191d53f0cecc54cad8435220ba989c6d191b96e41910f8905160657d0e05",
+    "bytes": 11046
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "nativeSourceAfterDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+  "nativeSourceUnchanged": true,
+  "immutableInputsUnchanged": true,
+  "postprocessingFinishedAt": "2026-11-11T19:56:00.938399+00:00"
+}

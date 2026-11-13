@@ -1,0 +1,220 @@
+{
+  "schema": "logos-engine.lot8b.source-preparation.v1",
+  "status": "source_preparation_only",
+  "recordedAt": "2026-11-11T22:18:34.158985+00:00",
+  "author": "/root/capture_diagnosis",
+  "checkout": "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout",
+  "observedHead": "7c8f43365a277406e95c898165d01a7bf6e19772",
+  "originalCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "registryEntry": {
+    "question": "parallel_branch_routing",
+    "family": null,
+    "status": "pending"
+  },
+  "scopeMatchesRequested8B": true,
+  "group": "factored_material_return",
+  "sourceOrderNeighbors": {
+    "before": "motif_conditioned_access",
+    "entry": "parallel_branch_routing",
+    "after": "conserved_band_transfer"
+  },
+  "originalOwner": {
+    "class": "BranchRouting",
+    "routerProperty": "branches",
+    "module": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_branch_routing.py",
+    "proposalKind": "parallel_branch_routing",
+    "proposalField": "branch_plan",
+    "memoryKeyPrefix": "branches",
+    "diagnosticKey": "branch_routing"
+  },
+  "ownHelpers": [
+    "layout",
+    "bbox",
+    "read_state",
+    "observed_state",
+    "propagated"
+  ],
+  "ownMethods": [
+    "__init__",
+    "propose",
+    "bind",
+    "before",
+    "after",
+    "record"
+  ],
+  "importedFunctions": [
+    {
+      "module": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_multiscale_constraints.py",
+      "functions": [
+        "digest",
+        "projection",
+        "rows_digest"
+      ]
+    }
+  ],
+  "sourceState": {
+    "retainedAcrossEpochs": [
+      "motion",
+      "passed",
+      "events"
+    ],
+    "epochScoped": [
+      "epoch",
+      "model",
+      "verified",
+      "seen",
+      "refs",
+      "finished",
+      "current"
+    ],
+    "coldInitialization": "Only epoch, motion, passed and events exist before the first propose call."
+  },
+  "candidateNativeHook": {
+    "ownerId": "branch_routing",
+    "idStatus": "proposed_not_registered",
+    "wrapper": "subquestionFamily(originalEventFamily(owner), material_access_subquestion, parallel_branch_routing)",
+    "groupRegistration": "factored_material_return ordered position after motifs and before band",
+    "materialEntryPoint": "null for this direct owner; avoid duplicate caller entry",
+    "selectedAcquisitionPrefix": "branches",
+    "checkpoint": "family_state:branch_routing",
+    "existingProgram": "v6.composition_strategy.choose"
+  },
+  "independentProofsToConstruct": [
+    "Original component fixtures for geometry, ambiguous identities, propagation and all source modes, with full original output and state.",
+    "Cold common-caller calibration -> selection -> guarded movement -> propagation -> real synthetic return, plus contrary return and epoch restoration.",
+    "Source-preserving stable tie order and full search parity inside a prospectively bounded complete domain; explicit incomplete result outside that domain.",
+    "Unique selected acquisition, branches memory key, checkpoint restoration, no changed pose continuing stale authority.",
+    "Historical public regressions and untimed work/graph checks, then separate official cost against an actually published predecessor."
+  ],
+  "specificReviewRisks": [
+    "Source observed_state and placement enumeration use unbounded Cartesian products; node/state/deadline bounds must be explicit native adaptations.",
+    "The source keeps absolute-coordinate modulo conditions; arbitrary translation invariance must not be assumed.",
+    "Observed cardinal control readiness is four distinct vectors, not automatically four unit cardinal laws.",
+    "Offscreen exits are reported conditional obligations; visible goal coincidence does not prove official completion.",
+    "A score-increasing record returns an official-boundary result before appending a regular event or changing current motion.",
+    "remaining only directly bounds move prefixes in source; host admission must still enforce actual action budget without silently rewriting component behavior."
+  ],
+  "files": [
+    {
+      "path": "docs/migration/v6-entry-point-progress.json",
+      "sha256": "ec7f466172eb364ead8cb42fec88ca871aed9d07ddd6b4faf74279448e165315",
+      "bytes": 19677,
+      "role": "observed_registry",
+      "inspectionScope": "selected_entry"
+    },
+    {
+      "path": "docs/migration/v6-delivery-roadmap.md",
+      "sha256": "4f0a31d9bc1d228773083a5fcff8f64e9b4b47ef6a073280b4e203a2ad992d65",
+      "bytes": 293879,
+      "role": "scope_and_acceptance",
+      "inspectionScope": "lot8_sections"
+    },
+    {
+      "path": "docs/migration/lot8a-motif-access-lineage.md",
+      "sha256": "6336ca7f712b23d5b05d0e39295df225fe0eabd465866e0ffdddf7d1051ed156",
+      "bytes": 18089,
+      "role": "neighbor_lineage",
+      "inspectionScope": "motif_owner_and_group"
+    },
+    {
+      "path": "migration/v6-transfer-map.json",
+      "sha256": "b487ea74e43953519c61d792e79974b4e2723dc437c63ee5cceed355303a7b7b",
+      "bytes": 436268,
+      "role": "transfer_status_map",
+      "inspectionScope": "source_path_lookup"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_branch_routing.py",
+      "sha256": "b3f6a743e1ebdbf040a06a9c0d42b822c08ec28dff43cd2eb013ef41d0f27567",
+      "bytes": 12911,
+      "role": "original_owner",
+      "inspectionScope": "complete_file_read"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_multiscale_constraints.py",
+      "sha256": "01da7c7f636ed2039a364188c7f4fedb2c4c0a0e8bb6b2ba7f22b1c259eaaf12",
+      "bytes": 16566,
+      "role": "original_helper_dependency",
+      "inspectionScope": "digest_rows_digest_projection_only"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.py",
+      "sha256": "425aca6c30e7abb38a537dfcef38f92c418bc4dfa35201ae52dc42ba4390fa55",
+      "bytes": 34610,
+      "role": "original_selection_and_owner",
+      "inspectionScope": "imports_initialization_material_dispatch"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+      "bytes": 46966,
+      "role": "original_ordered_configuration",
+      "inspectionScope": "factored_material_return_order"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_runtime.py",
+      "sha256": "bcc9bc79d04287c830efedce48b4cc2ab89b5600b8a77fe09782c35d1c05c064",
+      "bytes": 97217,
+      "role": "original_guard_acquisition_diagnostic_caller",
+      "inspectionScope": "branch_plan_dispatch_memory_and_diagnostic_matches"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "sha256": "870197141752f4c9e398d3c0a6114accae2ea9d16ccc60b1d8fe82e7f8791ffe",
+      "bytes": 174245,
+      "role": "candidate_native_integration_surface",
+      "inspectionScope": "group_adapter_acquisition_persistence_sections"
+    },
+    {
+      "path": "src/logos-engine/v6-motif-access.ts",
+      "sha256": "2302d521959133b39560792d01ae4c2403a3b4b4a333ae10e089359a403394e0",
+      "bytes": 32665,
+      "role": "adjacent_owner_pattern",
+      "inspectionScope": "source_bound_lifecycle_and_imports"
+    },
+    {
+      "path": "src/logos-engine/v6-motif-access-geometry.ts",
+      "sha256": "36d5e1d51a1ebef5c82dea7951c18fe115af2067624447d39e37100c4a9de9b3",
+      "bytes": 15261,
+      "role": "candidate_shared_digest",
+      "inspectionScope": "motifRowsDigest_and_bounds"
+    },
+    {
+      "path": "scripts/audit-v6-entry-points.ts",
+      "sha256": "de9cc88475afd4dc7e800117d251b9e0e97fb836d0f4496fb9e41e754ba7d602",
+      "bytes": 7527,
+      "role": "registry_audit_surface",
+      "inspectionScope": "current_mapping_and_count_semantics"
+    }
+  ],
+  "execution": {
+    "nativeExecuted": false,
+    "originalOracleExecuted": false,
+    "gameExecuted": false,
+    "testsExecuted": false,
+    "performanceMeasured": false,
+    "lockAcquired": false,
+    "commitCreated": false,
+    "pushPerformed": false,
+    "publicationPerformed": false
+  },
+  "excluded": {
+    "closedCasePayloadRead": false,
+    "closedCaseGameRead": false,
+    "closedCaseOracleRead": false,
+    "closedCase": "LKEY remains closed; no restart, payload, game, or oracle was consulted or executed."
+  },
+  "claims": {
+    "entryConnected": false,
+    "newTotalClaimed": false,
+    "newGameSuccess": false,
+    "sourceParityEstablished": false
+  },
+  "bindingPolicy": {
+    "scope": "All13 fingerprints identify files at observedHead, verified against exact Git blobs. They are not a claim that every documentation file stays unchanged after preparation.",
+    "contextDocumentUpdatedAfterObservation": "docs/migration/v6-delivery-roadmap.md",
+    "sourceAndNativeInputsStillMatchObservedBytes": true,
+    "currentRoadmapHasOwnQualificationAndEvidenceLinks": true,
+    "reviewedAt": "2026-11-11T22:20:30.658686+00:00"
+  }
+}

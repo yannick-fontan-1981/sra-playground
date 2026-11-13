@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.lot5c.bounded-command-v3-derivation.v1",
+  "recordedAt": "2026-11-11T21:22:22.636969+00:00",
+  "base": {
+    "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/run-bounded-locked-command.py",
+    "bytes": 29004,
+    "sha256": "1cf15ba630657b8fe83bd81c98071b0b67965a93a5caa211a568655df338e3a6"
+  },
+  "derived": {
+    "file": "run-bounded-command.py",
+    "bytes": 28896,
+    "sha256": "cef0c238244e587afa94a822264861c12017cec919608d5a10cfe5610ecc60fe"
+  },
+  "reason": "User removed global mutex requirement for ordinary development, functional work, commits and pushes. Official measurement exclusivity and publication guardian remain separate.",
+  "removed": [
+    "performance mutex path/settings/open/acquisition/release",
+    "refusal solely on prospective quiet request"
+  ],
+  "unchangedFunctionASTs": [
+    "read_hidden_input",
+    "write_receipt",
+    "strict_json",
+    "set_subreaper",
+    "group_exists",
+    "teardown",
+    "safe_result_rows"
+  ],
+  "helperBytesRetainedInV2": true,
+  "officialPerformancePredicate": "official_performance_active boolean wins when provided; otherwise performance_started:true AND quiet_released!=true. Fields omitted/null use compatibility. Prospective quiet, ordinary heavy work and publication pending do not imply official performance.",
+  "productionLocksAcquired": false
+}

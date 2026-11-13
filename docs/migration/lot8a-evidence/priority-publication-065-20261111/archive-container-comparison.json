@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.lot8a.priority065-archive-container-comparison.v1",
+  "status": "containers_differ",
+  "observedAt": "2026-11-12T01:12:43.102432+00:00",
+  "localCompressed": {
+    "path": "/workspace/sites/sra-lot8a-publish065-20261111/sra-native065.tar",
+    "compression": "gzip",
+    "bytes": 14865590,
+    "sha256": "58fa1aae4102cbabc5a41d993f3641269914afc6f525c6f40a239d8c63886fa4"
+  },
+  "localDecompressedTar": {
+    "bytes": 30126080,
+    "sha256": "ca94a087603b9eba1213475af877e5e409e9b9ceecd96ae5c3bcbe198726e6b8"
+  },
+  "backendArchive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_0000000053cc820e84e307cfab1e28c8",
+    "content_hash": "sha256:8b8ed266d65d9a9ca407b87d86a93d97380b7aa8807cc24c7d29e8cb946c0345",
+    "size_bytes": 30115840,
+    "file_count": 75
+  },
+  "byteIdentical": false,
+  "qualification": "The compressed local archive, its tar container and the backend archive have different container hashes. No backend download or byte equality is claimed. Local file-content verification and native publication provenance are recorded separately."
+}

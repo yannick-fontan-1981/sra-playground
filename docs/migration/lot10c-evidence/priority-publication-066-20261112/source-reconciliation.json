@@ -1,0 +1,62 @@
+{
+  "schema": "logos-engine.lot10c.priority066-source-reconciliation.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-12T01:29:24.601942+00:00",
+  "qualified10CCommit": "547025a637ffbfeae23c15d54c96100ad8d3df5f",
+  "actuallyPublished065Commit": "b9555039d60d5d9f771dd96b763c40f389dc62dd",
+  "qualified065CandidateCommit": "c58d82e0da5f0eed6b9ffa8e60f46727514b42d0",
+  "restored10DCheckpoint": "feab56d88718ef3b9ae9fd4798254934c09ad3f3",
+  "profilesCompared": [
+    "src",
+    "tests",
+    "scripts",
+    "public",
+    "content",
+    "reference",
+    ".openai",
+    "package.json",
+    "package-lock.json",
+    "tsconfig.json",
+    "vite.config.ts",
+    "index.html"
+  ],
+  "published065VersusQualified065Differences": [],
+  "candidateVersusQualified10CDifferences": [],
+  "candidateChangesAgainstPublished065": [
+    "scripts/audit-v6-entry-points.ts",
+    "scripts/compare-ordered-recruitment-checkpoint-parity.py",
+    "scripts/compare-ordered-recruitment-public-parity.py",
+    "scripts/export-v6-ordered-recruitment-reference.py",
+    "scripts/test-ordered-recruitment-parity-readers.py",
+    "src/logos-engine/v5-ordered-front-reduction.ts",
+    "src/logos-engine/v6-native-runtime.ts",
+    "src/logos-engine/v6-ordered-recruitment-geometry.ts",
+    "src/logos-engine/v6-ordered-recruitment-policy.ts",
+    "src/logos-engine/v6-ordered-recruitment-projection.ts",
+    "src/logos-engine/v6-ordered-recruitment.ts",
+    "tests/fixtures/v6-ordered-recruitment-reference.json.gz",
+    "tests/helpers/v6-live-game-campaign.ts",
+    "tests/helpers/v6-ordered-recruitment-capture.ts",
+    "tests/v6-ordered-recruitment-kernel.test.ts",
+    "tests/v6-ordered-recruitment-reference.test.ts",
+    "tests/v6-radial-port-integration.test.ts"
+  ],
+  "nativeFileCount": 329,
+  "nativeDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+  "preservedTransferMapMetadataChanges": [
+    "$.mappings[242].notes",
+    "$.mappings[242].proof"
+  ],
+  "newFunctionalTestsExecuted": false,
+  "freshAuditsAndBuild": "build-execution.json",
+  "independentReview": "qualification-reuse-review.json",
+  "officialCostMeasured": false,
+  "officialCostAccepted": false,
+  "fullCallerParity": false,
+  "conflictResolution": {
+    "sourceAndTests": "Keep the exact qualified10C source; differences against actual065 are the declared10C recruitment addition.",
+    "coverage": "Keep qualified10C counts,68/76 and0.66.0.",
+    "transferMap": "Preserve the supplemental8A evidence link and notes from published065.",
+    "roadmap": "Keep10C history and add authoritative current release section; the predecessor roadmap remains in published Git history."
+  }
+}

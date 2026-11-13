@@ -1,0 +1,463 @@
+{
+  "module_id": "packing_acquisition_d",
+  "declarations": [
+    {
+      "id": "policy.d_packing_acquisition_mask",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.packing_acquisition_from_actual_observations",
+        "reason.packing_observed_acquisition_unknown"
+      ],
+      "declared_alternative_refs": [
+        "d_packing_acquisition.mask",
+        "d_packing_acquisition.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.packing_acquisition_equivalent_observed_support",
+      "selection_tiers": [
+        {
+          "id": "tier.packing_acq.mask",
+          "reason_ref": "reason.packing_acquisition_from_actual_observations",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_packing_acquisition.mask"
+            },
+            {
+            "field": "mask_acquisition_complete",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "owner_bindings_current",
+            "operator": "equals",
+            "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.packing_acq.unknown",
+          "reason_ref": "reason.packing_observed_acquisition_unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_packing_acquisition.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "d_packing_acquisition.mask": "rule.d_packing_acquired_display_mask"
+      },
+      "configuration": {
+        "mask_predicate_ref": "qualifies_acquired_packing_display_mask",
+        "identity_predicate_ref": "qualifies_observed_packing_drawing_identity"
+      }
+    },
+    {
+      "id": "policy.d_packing_acquisition_identity",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.packing_acquisition_from_actual_observations",
+        "reason.packing_observed_acquisition_unknown"
+      ],
+      "declared_alternative_refs": [
+        "d_packing_acquisition.identity1",
+        "d_packing_acquisition.identity2",
+        "d_packing_acquisition.identity3",
+        "d_packing_acquisition.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.packing_acquisition_equivalent_observed_support",
+      "selection_tiers": [
+        {
+          "id": "tier.packing_acq.identity1",
+          "reason_ref": "reason.packing_acquisition_from_actual_observations",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_packing_acquisition.identity1"
+            },
+            {
+              "field": "acquisition_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_masks_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "identity_supported_by_observation",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "drawing_count",
+              "operator": "equals",
+              "expected": 1
+            }
+          ]
+        },
+        {
+          "id": "tier.packing_acq.identity2",
+          "reason_ref": "reason.packing_acquisition_from_actual_observations",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_packing_acquisition.identity2"
+            },
+            {
+              "field": "acquisition_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_masks_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "identity_supported_by_observation",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "drawing_count",
+              "operator": "equals",
+              "expected": 2
+            }
+          ]
+        },
+        {
+          "id": "tier.packing_acq.identity3",
+          "reason_ref": "reason.packing_acquisition_from_actual_observations",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_packing_acquisition.identity3"
+            },
+            {
+              "field": "acquisition_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_masks_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "identity_supported_by_observation",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "drawing_count",
+              "operator": "equals",
+              "expected": 3
+            }
+          ]
+        },
+        {
+          "id": "tier.packing_acq.identity_unknown",
+          "reason_ref": "reason.packing_observed_acquisition_unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_packing_acquisition.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "d_packing_acquisition.identity1": "rule.d_packing_acquired_identity1",
+        "d_packing_acquisition.identity2": "rule.d_packing_acquired_identity2",
+        "d_packing_acquisition.identity3": "rule.d_packing_acquired_identity3"
+      },
+      "configuration": {
+        "mask_predicate_ref": "qualifies_acquired_packing_display_mask",
+        "identity_predicate_ref": "qualifies_observed_packing_drawing_identity"
+      }
+    },
+    {
+      "id": "rule.d_packing_acquired_display_mask",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.packing_acquisition_from_actual_observations"
+      ],
+      "invariants": [
+        "mask_is_measured_from_repository_not_request",
+        "collision_support_not_confirmed",
+        "unknown_boundary_never_completed"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{drawing_ref}",
+          "kind": "value",
+          "label": "Acquired packing drawing support",
+          "required_fields": [
+            "drawing_ref",
+            "full_mask",
+            "raw_input_ref"
+          ],
+          "required_term_patterns": [
+            "{piece_identity_ref}"
+          ],
+          "static_attributes": {
+            "projection_contract_ref": "packing.acquired_display_mask.v1"
+          },
+          "attribute_bindings": {
+            "full_mask": "full_mask",
+            "raw_input_ref": "raw_input_ref",
+            "piece_identity_ref": "piece_identity_ref",
+            "frame_ref": "frame_ref",
+            "full_mask_digest": "full_mask_digest"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{mask_claim_ref}",
+          "predicate": "qualifies_acquired_packing_display_mask",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{piece_identity_ref}",
+            "{drawing_ref}"
+          ],
+          "required_term_patterns": [
+            "{piece_identity_ref}",
+            "{drawing_ref}"
+          ],
+          "required_fields": [
+            "mask_claim_ref",
+            "piece_identity_ref",
+            "drawing_ref",
+            "full_mask_digest",
+            "raw_input_ref"
+          ],
+          "attribute_bindings": {
+            "piece_identity_ref": "piece_identity_ref",
+            "drawing_ref": "drawing_ref",
+            "full_mask_digest": "full_mask_digest",
+            "full_mask": "full_mask",
+            "raw_input_ref": "raw_input_ref",
+            "frame_ref": "frame_ref"
+          },
+          "static_attributes": {
+            "physical_collision_mask_not_confirmed": true,
+            "no_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.d_packing_acquired_identity1",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.packing_acquisition_from_actual_observations"
+      ],
+      "invariants": [
+        "actual_acquisition_and_dispatch_evidence_required",
+        "ambiguous_equal_masks_not_collapsed",
+        "no_action_authority"
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{identity_claim_ref}",
+          "predicate": "qualifies_observed_packing_drawing_identity",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{piece_identity_ref}",
+            "{drawing_ref_0}"
+          ],
+          "required_term_patterns": [
+            "{piece_identity_ref}",
+            "{drawing_ref_0}"
+          ],
+          "required_fields": [
+            "identity_claim_ref",
+            "piece_identity_ref",
+            "drawing_refs",
+            "epoch",
+            "scope_ref"
+          ],
+          "scope_bindings": {
+            "epoch": "epoch",
+            "scope_ref": "scope_ref",
+            "parent_goal_ref": "parent_goal_ref"
+          },
+          "attribute_bindings": {
+            "piece_identity_ref": "piece_identity_ref",
+            "drawing_refs": "drawing_refs",
+            "transitions": "transitions"
+          },
+          "static_attributes": {
+            "no_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.d_packing_acquired_identity2",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.packing_acquisition_from_actual_observations"
+      ],
+      "invariants": [
+        "actual_acquisition_and_dispatch_evidence_required",
+        "ambiguous_equal_masks_not_collapsed",
+        "no_action_authority"
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{identity_claim_ref}",
+          "predicate": "qualifies_observed_packing_drawing_identity",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{piece_identity_ref}",
+            "{drawing_ref_0}",
+            "{drawing_ref_1}"
+          ],
+          "required_term_patterns": [
+            "{piece_identity_ref}",
+            "{drawing_ref_0}",
+            "{drawing_ref_1}"
+          ],
+          "required_fields": [
+            "identity_claim_ref",
+            "piece_identity_ref",
+            "drawing_refs",
+            "epoch",
+            "scope_ref"
+          ],
+          "scope_bindings": {
+            "epoch": "epoch",
+            "scope_ref": "scope_ref",
+            "parent_goal_ref": "parent_goal_ref"
+          },
+          "attribute_bindings": {
+            "piece_identity_ref": "piece_identity_ref",
+            "drawing_refs": "drawing_refs",
+            "transitions": "transitions"
+          },
+          "static_attributes": {
+            "no_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.d_packing_acquired_identity3",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.packing_acquisition_from_actual_observations"
+      ],
+      "invariants": [
+        "actual_acquisition_and_dispatch_evidence_required",
+        "ambiguous_equal_masks_not_collapsed",
+        "no_action_authority"
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{identity_claim_ref}",
+          "predicate": "qualifies_observed_packing_drawing_identity",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{piece_identity_ref}",
+            "{drawing_ref_0}",
+            "{drawing_ref_1}",
+            "{drawing_ref_2}"
+          ],
+          "required_term_patterns": [
+            "{piece_identity_ref}",
+            "{drawing_ref_0}",
+            "{drawing_ref_1}",
+            "{drawing_ref_2}"
+          ],
+          "required_fields": [
+            "identity_claim_ref",
+            "piece_identity_ref",
+            "drawing_refs",
+            "epoch",
+            "scope_ref"
+          ],
+          "scope_bindings": {
+            "epoch": "epoch",
+            "scope_ref": "scope_ref",
+            "parent_goal_ref": "parent_goal_ref"
+          },
+          "attribute_bindings": {
+            "piece_identity_ref": "piece_identity_ref",
+            "drawing_refs": "drawing_refs",
+            "transitions": "transitions"
+          },
+          "static_attributes": {
+            "no_action_authority": true
+          }
+        }
+      ]
+    }
+  ]
+}

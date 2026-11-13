@@ -1,0 +1,727 @@
+{
+  "schema": "logos-engine.evidence-git-file-size-check.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T23:45:10.943296+00:00",
+  "coordination": {
+    "lock": "/workspace/shared/sra-coordination/performance.lock",
+    "mode": "shared_nonblocking",
+    "timingClaim": false
+  },
+  "limitBytesExclusive": 33554432,
+  "candidateCommands": [
+    [
+      "git",
+      "ls-files",
+      "--others",
+      "--exclude-standard",
+      "-z"
+    ],
+    [
+      "git",
+      "diff",
+      "--cached",
+      "--name-only",
+      "--diff-filter=A",
+      "-z"
+    ],
+    [
+      "git",
+      "diff",
+      "--name-only",
+      "--diff-filter=A",
+      "-z"
+    ]
+  ],
+  "checkedCandidateFiles": 136,
+  "largestCandidate": {
+    "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-replay.json.gz.part000",
+    "bytes": 900000,
+    "kind": "regular_file"
+  },
+  "filesAtOrAboveLimit": [],
+  "files": [
+    {
+      "path": "docs/migration/lot10a-evidence/coordination/quiet-for-7b-observation.json",
+      "bytes": 913,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/coordination/quiet-for-7b-status.json",
+      "bytes": 4709,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/README-transport.md",
+      "bytes": 5790,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/browser/browser-started.json",
+      "bytes": 845,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/browser/prior-case-clock.json",
+      "bytes": 1573,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/evidence-byte-transport.json",
+      "bytes": 3638,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/preflight.json",
+      "bytes": 4384,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regression-driver-output.log.gz",
+      "bytes": 1820,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regression-launch.json",
+      "bytes": 14309,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regression-log-transport.json",
+      "bytes": 9905,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-comparison.json",
+      "bytes": 11020,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-execution-started.json",
+      "bytes": 3114,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-execution.json",
+      "bytes": 8748,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-host-preparation.json",
+      "bytes": 4212,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-output.log.gz",
+      "bytes": 2665,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-passive-owner-presence.json",
+      "bytes": 1101,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-replay.json.gz.part000",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-replay.json.gz.part001",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-replay.json.gz.part002",
+      "bytes": 131036,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-replay.json.gz.parts.json",
+      "bytes": 859,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-comparison.json",
+      "bytes": 11016,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-execution-started.json",
+      "bytes": 3104,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-execution.json",
+      "bytes": 10021,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-host-preparation.json",
+      "bytes": 6172,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-output.log.gz",
+      "bytes": 4059,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-passive-owner-presence.json",
+      "bytes": 1101,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-replay.json.gz.part000",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-replay.json.gz.part001",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-replay.json.gz.part002",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-replay.json.gz.part003",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-replay.json.gz.part004",
+      "bytes": 411638,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-replay.json.gz.parts.json",
+      "bytes": 1201,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-comparison.json",
+      "bytes": 11009,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-execution-started.json",
+      "bytes": 3090,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-execution.json",
+      "bytes": 12041,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-host-preparation.json",
+      "bytes": 12492,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-output.log.gz",
+      "bytes": 5538,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-passive-owner-presence.json",
+      "bytes": 1101,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-replay.json.gz.part000",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-replay.json.gz.part001",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-replay.json.gz.part002",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-replay.json.gz.part003",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-replay.json.gz.part004",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-replay.json.gz.part005",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-replay.json.gz.part006",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-replay.json.gz.part007",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-replay.json.gz.part008",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-replay.json.gz.part009",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-replay.json.gz.part010",
+      "bytes": 475084,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-replay.json.gz.parts.json",
+      "bytes": 2227,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-comparison.json",
+      "bytes": 11009,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-execution-started.json",
+      "bytes": 3090,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-execution.json",
+      "bytes": 9835,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-host-preparation.json",
+      "bytes": 8348,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-output.log.gz",
+      "bytes": 4313,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-passive-owner-presence.json",
+      "bytes": 1101,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-replay.json.gz.part000",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-replay.json.gz.part001",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-replay.json.gz.part002",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-replay.json.gz.part003",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-replay.json.gz.part004",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-replay.json.gz.part005",
+      "bytes": 492142,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-replay.json.gz.parts.json",
+      "bytes": 1372,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/regression-summary.json",
+      "bytes": 170171,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-comparison.json",
+      "bytes": 11007,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-execution-started.json",
+      "bytes": 3086,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-execution.json",
+      "bytes": 9452,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-host-preparation.json",
+      "bytes": 5725,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-output.log.gz",
+      "bytes": 3158,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-passive-owner-presence.json",
+      "bytes": 1101,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-replay.json.gz.part000",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-replay.json.gz.part001",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-replay.json.gz.part002",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-replay.json.gz.part003",
+      "bytes": 297916,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-replay.json.gz.parts.json",
+      "bytes": 1030,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-comparison.json",
+      "bytes": 11012,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-execution-started.json",
+      "bytes": 3093,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-execution.json",
+      "bytes": 14079,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-host-preparation.json",
+      "bytes": 18598,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-output.log.gz",
+      "bytes": 7629,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-passive-owner-presence.json",
+      "bytes": 1102,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-replay.json.gz.part000",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-replay.json.gz.part001",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-replay.json.gz.part002",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-replay.json.gz.part003",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-replay.json.gz.part004",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-replay.json.gz.part005",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-replay.json.gz.part006",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-replay.json.gz.part007",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-replay.json.gz.part008",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-replay.json.gz.part009",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-replay.json.gz.part010",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-replay.json.gz.part011",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-replay.json.gz.part012",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-replay.json.gz.part013",
+      "bytes": 652513,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-replay.json.gz.parts.json",
+      "bytes": 2741,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-comparison.json",
+      "bytes": 11017,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-execution-started.json",
+      "bytes": 3101,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-execution.json",
+      "bytes": 17614,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-host-preparation.json",
+      "bytes": 19259,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-output.log.gz",
+      "bytes": 10268,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-passive-owner-presence.json",
+      "bytes": 1102,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz.part000",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz.part001",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz.part002",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz.part003",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz.part004",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz.part005",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz.part006",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz.part007",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz.part008",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz.part009",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz.part010",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz.part011",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz.part012",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz.part013",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz.part014",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz.part015",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz.part016",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz.part017",
+      "bytes": 137372,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz.parts.json",
+      "bytes": 3425,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/source-archive-parts.json",
+      "bytes": 1040,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/source-archive.json",
+      "bytes": 36551,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/source-archive.tar.gz.part000",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/source-archive.tar.gz.part001",
+      "bytes": 900000,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/source-archive.tar.gz.part002",
+      "bytes": 13776,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/source-manifest.json",
+      "bytes": 34908,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/validation/build-output.log.gz",
+      "bytes": 1591,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/validation/checks-run.json",
+      "bytes": 200994,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/validation/delta-tests-output.log.gz",
+      "bytes": 46882,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/validation/delta-tests-run.json",
+      "bytes": 166994,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/validation/diff-check-output.log.gz",
+      "bytes": 20,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/validation/entry-audit-output.log.gz",
+      "bytes": 179,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/validation/log-transport.json",
+      "bytes": 4424,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/validation/migration-audit-output.log.gz",
+      "bytes": 205,
+      "kind": "regular_file"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/validation/typecheck-output.log.gz",
+      "bytes": 141,
+      "kind": "regular_file"
+    }
+  ],
+  "selfReceiptIncludedInCandidateSnapshot": false,
+  "selfReceiptPayloadBelowLimit": true,
+  "qualification": "Dated size observation of every new, nonignored Git candidate returned by the recorded commands, including staged additions if present. Regular file payloads and symlink payload lengths are checked without following symlink targets. Existing ignored originals remain local. This receipt is created exclusively after the snapshot; its complete serialized payload is separately checked against the same strict limit before writing. Later additions require their own size check. No files are staged or committed and no agent, replay, test, build, game or native delivery verifier is executed."
+}

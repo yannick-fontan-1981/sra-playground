@@ -1,0 +1,32 @@
+{
+  "schema": "logos-engine.v6.branch-routing-reference-execution.v1",
+  "status": "failed",
+  "startedAt": "2026-11-12T03:33:22.534204+00:00",
+  "timeoutSeconds": 60,
+  "maximumRasterWidth": 32,
+  "maximumRasterHeight": 32,
+  "maximumBars": 3,
+  "maximumLimit": 16,
+  "maximumCartesianCandidatesPerCall": 4096,
+  "maximumStatefulOperations": 100,
+  "globalLockAcquired": false,
+  "performanceMeasurement": false,
+  "nativeImports": false,
+  "gamePayloadsInterpreted": 0,
+  "gameActionsDispatched": 0,
+  "sourceModified": false,
+  "generator": {
+    "path": "scripts/export-v6-branch-routing-reference.py",
+    "bytes": 25788,
+    "sha256": "86cbe935eba50d615cd1d3c1b59d4c63a71acded0fd9878834334b3a82967dce"
+  },
+  "sourceBeforeCount": 1786,
+  "error": {
+    "type": "AssertionError",
+    "message": "",
+    "traceback": "Traceback (most recent call last):\n  File \"/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/scripts/export-v6-branch-routing-reference.py\", line 373, in main\n    corpus = make_corpus()\n             ^^^^^^^^^^^^^\n  File \"/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/scripts/export-v6-branch-routing-reference.py\", line 289, in make_corpus\n    assert triple['steps'][8]['result']['steps'][0]['mode'] == 'select'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  "sourceAfterCount": 1786,
+  "finishedAt": "2026-11-12T03:33:24.012432+00:00",
+  "elapsedSeconds": 1.4778349839998555
+}

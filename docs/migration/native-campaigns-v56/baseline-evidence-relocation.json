@@ -1,0 +1,65 @@
+{
+  "schema": "logos-engine.v56.baseline-evidence-relocation.v1",
+  "originalCheckout": "/workspace/scratch/c4dd29871d33/v56-candidate-baseline",
+  "destinationCheckout": "/workspace/scratch/c4dd29871d33/sra-playground-v56/.sites-checkout",
+  "baseCommit": "4e581c40bfed1d238515f6327758a8e9877ba837",
+  "files": [
+    {
+      "path": "docs/migration/native-campaigns-v56/baseline-glob/execution-glob.json",
+      "sha256": "b6c5e2d875e68aa12f9d27fb2a9d739b3282bcb54c64c794e2ce9cd86a368e2c",
+      "bytes": 54521
+    },
+    {
+      "path": "docs/migration/native-campaigns-v56/baseline-glob/glob-actual-public-journal.jsonl.gz",
+      "sha256": "dd82095ea383de1a51a131c23f5db796f47d9f1a659e28b109a7e7c4d7eb51b3",
+      "bytes": 31255
+    },
+    {
+      "path": "docs/migration/native-campaigns-v56/baseline-glob/glob-campaign.json.gz",
+      "sha256": "0e3301e2a75fb8eea9671a1a25e8c3411c537fca9c9fd8dfeb1ed4ae6188ab77",
+      "bytes": 105596
+    },
+    {
+      "path": "docs/migration/native-campaigns-v56/baseline-glob/glob-output.log.gz",
+      "sha256": "ac0aaa21fd437cd5176c37fb0fc745caddaedf4ce9c4ab4365f6b474691dadfd",
+      "bytes": 3292
+    },
+    {
+      "path": "docs/migration/native-campaigns-v56/baseline-glob/glob-public-trace.json.gz",
+      "sha256": "c2a1bf8d55dc66f333c14919a8f22b714f4f67a1edb7838c538dfa94efac53d7",
+      "bytes": 60688
+    },
+    {
+      "path": "docs/migration/native-campaigns-v56/baseline-glob/source-archive-parts.json",
+      "sha256": "eebaac852cad36115c6195f07c7e7682a5ee3511c41d98e4b1064043c4571d49",
+      "bytes": 833
+    },
+    {
+      "path": "docs/migration/native-campaigns-v56/baseline-glob/source-archive.json",
+      "sha256": "bf243be6a02c78736ceb26fdb680eab5131aaea20248dbe1f4467aec3c054122",
+      "bytes": 26854
+    },
+    {
+      "path": "docs/migration/native-campaigns-v56/baseline-glob/source-archive.tar.gz",
+      "sha256": "a71e59d470bb2ac3ce8a857765e303347f82df1e1b3ef425248baab197c4e696",
+      "bytes": 1501481
+    },
+    {
+      "path": "docs/migration/native-campaigns-v56/baseline-glob/source-archive.tar.gz.part000",
+      "sha256": "895099b6015d4132f790425bdfd9f47d711fa03965480636c7dc114f06b02e7c",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/native-campaigns-v56/baseline-glob/source-archive.tar.gz.part001",
+      "sha256": "cbb310bbbc93f051641798faf004f058471ca361e0e2299a6e46d3206f7be289",
+      "bytes": 601481
+    },
+    {
+      "path": "docs/migration/native-campaigns-v56/baseline-glob/source-manifest.json",
+      "sha256": "6916302960002c81308929be25612c996f275dd777c3a678bd86af1922595a88",
+      "bytes": 25209
+    }
+  ],
+  "allCopiedBytesIdentical": true,
+  "qualification": "Exact byte copies; execution command keeps its original isolated checkout and all relative evidence paths remain unchanged. No source report, trajectory, action, observation, timestamp or archived input is rewritten."
+}

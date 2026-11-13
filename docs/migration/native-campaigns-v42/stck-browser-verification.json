@@ -1,0 +1,35 @@
+{
+  "schema": "logos-engine.v42.browser-verification.v1",
+  "game": "STCK",
+  "surface": "managed development preview from the same frozen checkout",
+  "nativeSourceManifestDigest": "6567be12230880198a7b4b085999ecda9354487599e728ee1ae27455f7056d04",
+  "observedUrl": "http://127.0.0.1:4173/?game=STCK&level=5",
+  "mode": "SRA Agent Native TS",
+  "initialLevel": 1,
+  "initialActions": 0,
+  "initialSolvedLevels": 0,
+  "controlsUsed": [
+    "Choose STCK",
+    "SRA Agent Native TS",
+    "Run to next level (four successive natural boundaries)"
+  ],
+  "cumulativeActionsAtBoundaries": [
+    3,
+    10,
+    35,
+    45
+  ],
+  "solvedLevels": 4,
+  "completedPlans": 25,
+  "finalVisibleLevel": 5,
+  "visibleStatus": "Level completed. V6 acquired the outcome and retained its transfer memory. Continue when ready.",
+  "visibleVictoryHeading": null,
+  "inspectionClosedAtStart": true,
+  "inspectionOpenedDuringRun": false,
+  "manualGameActions": 0,
+  "agentSessionResets": 0,
+  "levelJumps": 0,
+  "screenshot": "stck-browser-four-levels.png",
+  "screenshotSha256": "da4f32b56f1876444f14f1732c9cd767ce2756c43fad13cf4755856bfc828bfd",
+  "qualification": "Observed in the real browser interface on the managed preview. Four levels completed, not a full-game WIN. The UI pauses at each natural boundary with the session retained; the bounded smoke campaign stops at its declared target. Production publication is verified separately by the Sites deployment result."
+}

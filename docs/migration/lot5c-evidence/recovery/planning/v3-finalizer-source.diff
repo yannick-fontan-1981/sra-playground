@@ -1,0 +1,204 @@
+--- docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c-v2.py
++++ docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c-v3.py
+@@ -10,8 +10,8 @@
+ 
+ The historical 10B finalizer and frozen common delivery verifier supply the
+ validation patterns. This new 5C adapter is outside the 867-member source archive;
+-its own fingerprint and the new external v2 controller/orchestrator/process helper are bound in readiness.
+-Historical02 proof remains validated with its original84-check review;03 is a documentary rebinding, not a new functional run.
++its own fingerprint and the new external v3 controller/orchestrator and unchanged v2 process helper are bound in readiness.
++Historical02 proof remains validated with its original84-check review;04 links the retained03 documents without a new functional run.
+ """
+ from __future__ import annotations
+ 
+@@ -34,18 +34,19 @@
+ ROOT = Path(__file__).resolve().parents[5]
+ BASE = ROOT / 'docs/migration/lot5c-evidence'
+ FINAL = BASE / 'recovery/integrated-final-01'
+-PERF = BASE / 'recovery/performance-integrated-03'
+-PRIOR = BASE / 'recovery/performance-integrated-02'
++PERF = BASE / 'recovery/performance-integrated-04'
++PRIOR = BASE / 'recovery/performance-integrated-03'
++SOURCE_PRIOR = BASE / 'recovery/performance-integrated-02'
+ OLD = BASE / 'recovery/performance-integrated-01'
+ COMMON = BASE / 'recovery/common/common-final-01'
+-CONTROLLER = BASE / 'recovery/planning/run-coordinated-cost-5c-v2.py'
+-ORCHESTRATOR = BASE / 'recovery/planning/orchestrate-cost-recovery-02.py'
++CONTROLLER = BASE / 'recovery/planning/run-coordinated-cost-5c-v3.py'
++ORCHESTRATOR = BASE / 'recovery/planning/orchestrate-cost-available-03.py'
+ PROCESS_HELPER = BASE / 'recovery/planning/cost-process-control-v2.py'
+-GLOBAL_REVIEW = BASE / 'recovery/planning/coordination-v2-independent-review.json'
+-COORD = BASE / 'recovery/coordination/cost-final-02'
++GLOBAL_REVIEW = BASE / 'recovery/planning/coordination-v3-independent-review.json'
++COORD = BASE / 'recovery/coordination/cost-final-03'
+ VERIFIER = ROOT / 'scripts/verify-native-delivery.py'
+ BASELINE = Path('/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout')
+-REQUEST = 'lot5c-cost-a33a5f88-recovery-02'
++REQUEST = 'lot5c-cost-a33a5f88-available-03'
+ LANES = {'lot6b', 'lot8a', 'lot10c'}
+ CANDIDATE_DIGEST = 'a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57'
+ BASELINE_DIGEST = '74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12'
+@@ -537,11 +538,11 @@
+     require(prep['schema'] == 'logos-engine.native-cost-protocol-preparation.v1'
+             and prep['status'] == 'source_freezes_verified_not_functional_readiness' and prep['measurementExecuted'] is False
+             and prep['baselineCheckout'] == str(e.baseline) and prep['candidateCheckout'] == str(ROOT)
+-            and prep['baseline'] == declaration['baseline'] and prep['candidate'] == declaration['candidate'], 'Invalid actual03 preparation')
++            and prep['baseline'] == declaration['baseline'] and prep['candidate'] == declaration['candidate'], 'Invalid actual04 preparation')
+     require(static['schema'] == 'logos-engine.native-cost-static-preflight.v1' and static['status'] == 'static_inputs_checked'
+             and static['checkedCount'] == len(static['checks']) == 76 and all(x['satisfied'] is True for x in static['checks'])
+             and static['unsatisfied'] == [] and static['measurementExecuted'] is False
+-            and static['declaration'] == e.keep(perf / 'declaration.json'), 'Actual03 static preflight did not pass all76 checks')
++            and static['declaration'] == e.keep(perf / 'declaration.json'), 'Actual04 static preflight did not pass all76 checks')
+     e.recorded(static); e.fingerprints(prep); e.fingerprints(static)
+     policy = e.read(perf / 'global-budget-policy.json')
+     require(policy['schema'] == 'logos-engine.native-global-cost-policy.v1' and policy['caseIds'] == ['STCK', 'SMLP']
+@@ -568,8 +569,8 @@
+     e.fingerprints(owner)
+     require(instant(policy['declaredAt']) <= instant(declaration['recordedAt']) <= instant(declaration['finalizedAt'])
+             <= instant(owner['declaredAt']) <= instant(static['recordedAt']), 'Preparation chronology is invalid')
+-    original_declaration = e.read(PRIOR / 'declaration.json')
+-    original_owner, original_facts = preparation_02(e, PRIOR, original_declaration, source, baseline_source)
++    original_declaration = e.read(SOURCE_PRIOR / 'declaration.json')
++    original_owner, original_facts = preparation_02(e, SOURCE_PRIOR, original_declaration, source, baseline_source)
+     derivation = e.read(perf / 'coordination-repreparation.json')
+     require(derivation['schema'] == 'logos-engine.lot5c-cost-coordination-repreparation.v1'
+             and derivation['status'] == 'prepared_static_inputs_only_no_readiness'
+@@ -579,18 +580,35 @@
+             and derivation['unchangedFrozenNativeDigests'] == declaration['nativeDigests']
+             and all(derivation[k] is False for k in ('nativeOrBenchmarkSourceChanged', 'newFunctionalProofExecuted',
+                 'newCaptureExecuted', 'newReplayExecuted', 'measurementExecuted', 'readinessAsserted', 'oldReadinessReusedAsActive')),
+-            'Invalid documentary03 preparation; no new functional or measurement proof may be claimed')
++            'Invalid documentary04 preparation; no new functional or measurement proof may be claimed')
+     e.recorded(derivation); e.fingerprints(derivation)
+     preserved = derivation['priorDirectoryPreservation']
+     require(preserved['directory'] == PRIOR.relative_to(ROOT).as_posix()
+-            and preserved['fileCount'] == len(preserved['files']) == 44,
+-            'Historical02 preservation scope differs')
++            and preserved['fileCount'] == len(preserved['files']) == 23,
++            'Historical03 preservation scope differs')
+     e.file_map(preserved['files'], PRIOR)
+     require({p.relative_to(PRIOR).as_posix() for p in PRIOR.rglob('*') if p.is_file()} == set(preserved['files']),
+-            'Historical02 membership changed')
++            'Historical03 membership changed')
++    # Keep the independently reviewed02 source proof as the immutable anchor;
++    #03 is only the immediately preceding documentary directory, never readiness.
++    previous_derivation = e.read(PRIOR / 'coordination-repreparation.json')
++    original_preservation = previous_derivation['priorDirectoryPreservation']
++    require(derivation['priorRepreparation'] == e.keep(PRIOR / 'coordination-repreparation.json')
++            and derivation['original84CheckReview'] == original_facts['independentPreparationReview']
++            and derivation['original02Preservation'] == original_preservation
++            and original_preservation['directory'] == SOURCE_PRIOR.relative_to(ROOT).as_posix()
++            and original_preservation['fileCount'] == len(original_preservation['files']) == 44,
++            'The documentary03-to04 link must retain the original02 proof inventory')
++    e.file_map(original_preservation['files'], SOURCE_PRIOR)
++    require({p.relative_to(SOURCE_PRIOR).as_posix() for p in SOURCE_PRIOR.rglob('*') if p.is_file()}
++            == set(original_preservation['files']), 'Historical02 membership changed')
+     binding = e.read(perf / 'structural-documentary-rebinding.json')
+     old_fixture = e.read(PRIOR / 'owner-structural-fixture.json')
+     fixture = e.read(perf / 'owner-structural-fixture.json')
++    anchor_fixture = e.read(SOURCE_PRIOR / 'owner-structural-fixture.json')
++    expected_prior = json.loads(json.dumps(anchor_fixture))
++    expected_prior['cases']['path'] = old_fixture['cases']['path']
++    require(old_fixture == expected_prior, 'Documentary03 fixture differs from the unchanged02 structural proof')
+     expected = json.loads(json.dumps(old_fixture))
+     expected['cases']['path'] = declaration['cases']['path']
+     require(fixture == expected and fixture['cases'] == declaration['cases']
+@@ -613,7 +631,9 @@
+     e.recorded(binding); e.fingerprints(binding)
+     for name in ('owner-source-inventory.json', 'owner-graph-attribution.json', 'cases.json', 'comparison-policy.json'):
+         left, right = e.keep(PRIOR / name), e.keep(perf / name)
+-        require((left['bytes'], left['sha256']) == (right['bytes'], right['sha256']), 'Reused input changed: ' + name)
++        anchor = e.keep(SOURCE_PRIOR / name)
++        require((left['bytes'], left['sha256']) == (right['bytes'], right['sha256'])
++                == (anchor['bytes'], anchor['sha256']), 'Reused02-to03-to04 input changed: ' + name)
+     def differences(a, b, prefix=''):
+         require(type(a) is type(b), 'Documentary field type changed: ' + prefix)
+         if isinstance(a, dict):
+@@ -636,9 +656,9 @@
+             ('ownerContractDifferences', 'owner-growth-contract.json', owner)]:
+         actual = differences(e.read(PRIOR / name), current)
+         require(actual == derivation[key] and {x['path'] for x in actual} == allowed[key],
+-                'Unexpected03 semantic change: ' + key)
++                'Unexpected04 semantic change: ' + key)
+     require(policy['diagnosticPhasePolicy'] == (perf / 'comparison-policy.json').relative_to(ROOT).as_posix(),
+-            'Diagnostic policy was not simply rebound to03')
++            'Diagnostic policy was not simply rebound to04')
+     for name in ('protocol-preparation.execution.json', 'owner-contract-finalization.execution.json', 'static-preflight-command.execution.json'):
+         execution = e.read(perf / name)
+         require(execution['schema'] == 'logos-engine.lot5c.command-execution.v1' and execution['status'] == 'passed'
+@@ -649,6 +669,7 @@
+         'original02Preparation': original_facts, 'coordinationRepreparation': e.keep(perf / 'coordination-repreparation.json'),
+         'structuralEvidenceQualification': 'reused_structure_new_documentary_binding_only',
+         'fixtureRebinding': e.keep(perf / 'structural-documentary-rebinding.json'),
++        'historical03Preservation': {'fileCount': 23, 'allListedFilesByteIdentical': True},
+         'historical02Preservation': {'fileCount': 44, 'allListedFilesByteIdentical': True},
+         'newCaptureExecuted': False, 'newReplayExecuted': False, 'oldReadinessReusedAsActive': False}
+ 
+@@ -671,7 +692,7 @@
+     require(request['requestId'] == REQUEST and available == requested + timedelta(seconds=600)
+             and latest <= requested <= recorded <= e.deadline < available,
+             'Request must follow all proofs/reviews; isolation/readiness must fit the single600s availability bound')
+-    closure_path = BASE / 'recovery/coordination/recovery-02/own-preparation-closure.json'
++    closure_path = BASE / 'recovery/coordination/recovery-03/own-preparation-closure.json'
+     require(e.keep(closure_path) in value['evidence'], 'Actual own preparation closure must be bound')
+     closure = e.read(closure_path)
+     require(closure['schema'] == 'logos-engine.lot5c-own-cost-quiet-closure.v1'
+@@ -704,7 +725,7 @@
+     require(args.baseline_checkout == BASELINE and args.baseline_checkout.resolve(strict=True) == BASELINE,
+             'Use the exact published Site102 baseline checkout')
+     require(args.final_directory.resolve(strict=True) == FINAL and args.performance_directory.resolve(strict=True) == PERF,
+-            'This finalizer is specific to final-a33 / performance-integrated-03')
++            'This finalizer is specific to final-a33 / performance-integrated-04')
+     regression_directory = args.regression_directory.resolve(strict=True)
+     require(regression_directory.is_relative_to(FINAL), 'Regression evidence must remain inside the final attempt')
+     e = Evidence(BASELINE, started)
+@@ -715,12 +736,12 @@
+     orchestrator, process_helper = e.keep(ORCHESTRATOR), e.keep(PROCESS_HELPER)
+     controller_review_path = GLOBAL_REVIEW
+     controller_review = e.read(controller_review_path)
+-    require(controller_review['schema'] == 'logos-engine.lot5c-coordination-v2-independent-review.v1'
++    require(controller_review['schema'] == 'logos-engine.lot5c-coordination-v3-independent-review.v1'
+             and controller_review['status'] == 'passed'
+             and controller_review['checksPassed'] == controller_review['checksTotal'] == len(controller_review['checks']) > 0
+             and all(item['passed'] is True for item in controller_review['checks'])
+             and all(item in controller_review['subjects'] for item in (generator, controller, orchestrator, process_helper)),
+-            'Global independent review must pass and pin every exact v2 orchestration source')
++            'Global independent review must pass and pin every exact v3 orchestration source')
+     for record in controller_review['subjects']:
+         e.verify(record)
+     coordination_review_at = instant(controller_review['recordedAt'])
+@@ -765,7 +786,7 @@
+     owner_record, prep_facts = preparation(e, PERF, declaration, source, baseline_source)
+     require(all(e.keep(PERF / name) in controller_review['subjects'] for name in
+                 ('coordination-repreparation.json', 'structural-documentary-rebinding.json', 'static-preflight.json')),
+-            'Independent coordination review must pin the exact03 documentary/static preparation')
++            'Independent coordination review must pin the exact04 documentary/static preparation')
+     e.recorded(controller_review)
+     inherited = e.read(ROOT / 'docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/readiness.json')
+     require(inherited['nativeSourceDigest'] == BASELINE_DIGEST and inherited['game']['id'] == 'HPDL'
+@@ -774,7 +795,7 @@
+     e.fingerprints(inherited['game'])
+     latest_pre_window = e.latest.isoformat()
+     isolation = quiet(e, args.isolation_receipt, PERF, declaration)
+-    require(e.keep(args.isolation_receipt)['path'] == (BASE / 'recovery/coordination/cost-final-02/isolation.json').relative_to(ROOT).as_posix(),
++    require(e.keep(args.isolation_receipt)['path'] == (BASE / 'recovery/coordination/cost-final-03/isolation.json').relative_to(ROOT).as_posix(),
+             'Controller and readiness must use the same isolation path')
+     # Close the read/validate/use boundary on all retained bytes and memberships.
+     e.recheck()
+@@ -782,11 +803,13 @@
+             'Native membership changed during readiness')
+     require(verifier.verify_tests(tests, source)[1] == facts['formalTests']
+             and verifier.verify_build(gates, source)[1] == facts['nativeAgentWorker'], 'Final test/build input membership changed')
+-    prior_inventory = e.read(PRIOR / 'prior-attempt-inventory.json')
++    prior_inventory = e.read(SOURCE_PRIOR / 'prior-attempt-inventory.json')
+     require({path.relative_to(OLD).as_posix() for path in OLD.rglob('*') if path.is_file()} == set(prior_inventory['files']),
+             'Prior attempt membership changed during finalization')
+-    historical02 = e.read(PERF / 'coordination-repreparation.json')['priorDirectoryPreservation']
+-    require({p.relative_to(PRIOR).as_posix() for p in PRIOR.rglob('*') if p.is_file()} == set(historical02['files']), 'Historical02 membership changed during readiness')
++    retained = e.read(PERF / 'coordination-repreparation.json')
++    historical03, historical02 = retained['priorDirectoryPreservation'], retained['original02Preservation']
++    require({p.relative_to(PRIOR).as_posix() for p in PRIOR.rglob('*') if p.is_file()} == set(historical03['files']), 'Historical03 membership changed during readiness')
++    require({p.relative_to(SOURCE_PRIOR).as_posix() for p in SOURCE_PRIOR.rglob('*') if p.is_file()} == set(historical02['files']), 'Historical02 membership changed during readiness')
+     e.recheck(); unmeasured(PERF, BASELINE)
+     finalized = datetime.now(timezone.utc)
+     require(started <= finalized and instant(isolation['recordedAt']) <= finalized

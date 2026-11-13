@@ -1,0 +1,58 @@
+{
+  "schema": "logos-engine.retained-merge-whitespace-review.v1",
+  "status": "reviewed_with_inherited_diagnostics",
+  "recordedAt": "2026-11-10T23:12:53.762186+00:00",
+  "checks": [
+    {
+      "label": "all-merged-history",
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exitCode": 2,
+      "stdout": "docs/migration/lot7b-evidence/diagnostic/kernel-attempt1.log:20: trailing whitespace.\n+  \ndocs/migration/lot7b-evidence/diagnostic/kernel-attempt1.log:24: trailing whitespace.\n+  \ndocs/migration/lot7b-evidence/diagnostic/typecheck-after-readonly.log:5: new blank line at EOF.\n",
+      "stderr": ""
+    },
+    {
+      "label": "resolved-source-and-documentation",
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check",
+        "--",
+        ".gitignore",
+        "src",
+        "scripts/audit-v6-entry-points.ts",
+        "tests",
+        "migration",
+        "docs/migration/v6-coverage.json",
+        "docs/migration/v6-entry-point-progress.json",
+        "docs/migration/v6-delivery-roadmap.md",
+        "docs/migration/v6-native-transfer.md",
+        "docs/migration/lot10a-axial-question.md",
+        "docs/migration/lot10a-evidence"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "inheritedFiles": [
+    {
+      "path": "docs/migration/lot7b-evidence/diagnostic/kernel-attempt1.log",
+      "bytes": 1465,
+      "sha256": "02ff20ebab9548a6eee1e2f7644f191a694152d4767200af44bb7907e6386f06",
+      "identicalToPrepared7b": true
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/diagnostic/typecheck-after-readonly.log",
+      "bytes": 149,
+      "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d",
+      "identicalToPrepared7b": true
+    }
+  ],
+  "qualification": "The full staged-history check remains failed on two exact prepared7B historical logs, including a retained kernel failure. They are not rewritten. The resolved source/documentation check passes separately. No actual7B publication or passed global whitespace check is inferred."
+}

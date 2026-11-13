@@ -1,0 +1,40 @@
+{
+  "schema": "logos-engine.lot5c.published6a-remote-provenance.v1",
+  "versions": [
+    {
+      "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_a7a406cef8e88191beac45e5b1bedbe4",
+      "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+      "versionNumber": 96,
+      "source": {
+        "commit_sha": "cdaceea1c8918430a70b95fa427b31fcd22d290c"
+      },
+      "archiveStorage": {
+        "archive_format": "tar",
+        "sediment_file_id": "file_000000008a5c820e804598e6c778ac40",
+        "content_hash": "sha256:1e1fd813bb0c972fc17aae12ace6e7effdc2e8c0f2ae16f0712d3622303a1b93",
+        "size_bytes": 29992960,
+        "file_count": 75
+      },
+      "deploymentId": "appgdep_6af470b6d1948191b31946e4190a17a6"
+    },
+    {
+      "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_3e011b170b888191a9dba77971f30bd2",
+      "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+      "versionNumber": 97,
+      "source": {
+        "commit_sha": "98336fba4e696a51c90ff7f7b37b8bdf95f34847"
+      },
+      "archiveStorage": {
+        "archive_format": "tar",
+        "sediment_file_id": "file_0000000016e4820e900c7d7a39461494",
+        "content_hash": "sha256:1e1fd813bb0c972fc17aae12ace6e7effdc2e8c0f2ae16f0712d3622303a1b93",
+        "size_bytes": 29992960,
+        "file_count": 75
+      },
+      "deploymentId": "appgdep_6af47200fa888191a71af4efc9880d52"
+    }
+  ],
+  "qualification": "Direct Sites get_site_version responses, excluding transient screenshot URLs. Matching server archive content hash for native Site96 and documentation Site97; archive contents not independently downloaded here. Native publication receipt and documentation closure source verification remain separate.",
+  "recordedAt": "2026-11-11T14:33:56.142199+00:00",
+  "observationScope": "Direct tool responses collected during this resumption before source integration."
+}

@@ -1,80 +1,99 @@
-/**
- * Public boundary for a future, genuine SRA Web Worker.
- * This is a protocol, not an agent implementation or a solver.
- */
-import type { PipesObservation } from '../games/pipes.ts';
+/** Public game/agent boundary. Native game state never crosses this interface. */
+import type { GameObservation } from './browser-games.ts';
 
-export const AGENT_STATUS = Object.freeze({
-  available: false,
-  name: 'SRA',
-  status: 'port-pending',
-} as const);
-
-export const PROTOCOL_VERSION = 1 as const;
-export type ActionId = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
+export const AGENT_STATUS = Object.freeze({ available: true, name: 'SRA', status: 'experimental' } as const);
+export const PROTOCOL_VERSION = 2 as const;
+export type ActionId = 1 | 2 | 3 | 4 | 5 | 6 | 7;
+export type SupportedAgentActionId = 1 | 2 | 3 | 4 | 5;
+export type GameState = 'NOT_FINISHED' | 'WIN' | 'GAME_OVER' | 'LEVEL_COMPLETE';
 export type AgentAction =
   | { id: Exclude<ActionId, 6> }
   | { id: 6; data: { x: number; y: number } };
 
-/** Only public pixels, action availability, and progression enter reasoning. */
 export interface AgentObservation {
   protocolVersion: typeof PROTOCOL_VERSION;
-  /** Changes whenever a game, level, or manual session is restarted. */
   sessionId: string;
-  /** Monotonic within a session, including actions that leave pixels unchanged. */
+  /** Advances for every completed native action, even when pixels do not change. */
   sequence: number;
-  /** Row-major, one public palette index (0..15) per pixel; not RGB bytes. */
+  gameCode: string;
   image: { width: 64; height: 64; pixelFormat: 'palette-index-u8'; pixels: Uint8Array };
   availableActionIds: ActionId[];
-  state: 'NOT_FINISHED' | 'WIN';
+  state: GameState;
   level: number;
   levelsCompleted: number;
 }
 
-/**
- * Explicit allowlist: never spread the engine observation into worker messages.
- * Engine boards, masks, connectivity, source coordinates and level fixtures must
- * not be available to the reasoning worker. The image owns a fresh pixel copy.
- */
-export function toAgentObservation(
-  observation: PipesObservation,
-  sessionId: string,
-  sequence: number,
-): AgentObservation {
+export function isTerminalState(state: string): boolean {
+  return state === 'WIN' || state === 'LEVEL_COMPLETE' || state === 'GAME_OVER' || state === 'GAMEOVER';
+}
+
+export function isSupportedAgentActionId(value: unknown): value is SupportedAgentActionId {
+  return typeof value === 'number' && Number.isInteger(value) && value >= 1 && value <= 5;
+}
+
+function integer(value: unknown, minimum: number, label: string): number {
+  if (typeof value !== 'number' || !Number.isSafeInteger(value) || value < minimum) throw new TypeError(`Invalid ${label}.`);
+  return value;
+}
+
+/** An explicit allowlist and fresh pixel copy; no engine object or undo history. */
+export function toAgentObservation(observation: GameObservation, sessionId: string, sequence: number): AgentObservation {
+  if (!sessionId || typeof sessionId !== 'string') throw new TypeError('An agent session identity is required.');
+  integer(sequence, 0, 'observation sequence');
+  if (typeof observation.gameCode !== 'string' || !observation.gameCode) throw new TypeError('A public game code is required.');
+  if (!['NOT_FINISHED', 'WIN', 'GAME_OVER', 'LEVEL_COMPLETE'].includes(observation.state)) throw new TypeError('Unsupported public game state.');
+  if (observation.frame.length !== 64 || observation.frame.some(row => !Array.isArray(row) || row.length !== 64)) throw new TypeError('The public game frame must be 64 × 64.');
+  const pixels = new Uint8Array(4096);
+  for (let y = 0; y < 64; y += 1) for (let x = 0; x < 64; x += 1) {
+    const value = observation.frame[y]![x];
+    if (!Number.isInteger(value) || value! < 0 || value! > 15) throw new TypeError('A public pixel is not a palette index.');
+    pixels[y * 64 + x] = value!;
+  }
+  if (!Array.isArray(observation.availableActionIds) || observation.availableActionIds.some(id => !Number.isInteger(id) || id < 1 || id > 7)
+    || new Set(observation.availableActionIds).size !== observation.availableActionIds.length) throw new TypeError('Invalid public action vocabulary.');
   return {
-    protocolVersion: PROTOCOL_VERSION,
-    sessionId,
-    sequence,
-    image: { width: 64, height: 64, pixelFormat: 'palette-index-u8', pixels: Uint8Array.from(observation.frame.flat()) },
-    availableActionIds: observation.available_action_ids.filter(
-      (id): id is ActionId => Number.isInteger(id) && id >= 0 && id <= 7,
-    ),
-    state: observation.state,
-    level: observation.level,
-    levelsCompleted: observation.levels_completed,
+    protocolVersion: PROTOCOL_VERSION, sessionId, sequence, gameCode: observation.gameCode,
+    image: { width: 64, height: 64, pixelFormat: 'palette-index-u8', pixels },
+    availableActionIds: [...observation.availableActionIds] as ActionId[],
+    state: observation.state as GameState,
+    level: integer(observation.level, 1, 'level'),
+    levelsCompleted: integer(observation.levelsCompleted, 0, 'completed levels'),
   };
 }
 
-export type AgentWorkerRequest =
-  | { type: 'initialize'; protocolVersion: 1; sessionId: string; seed: number }
-  | { type: 'observe'; observation: AgentObservation; budgetMs: number }
-  | { type: 'cancel'; sessionId: string };
+/** Validate copied worker input as well as host input; types are not a runtime gate. */
+export function frameFromAgentObservation(observation: AgentObservation): number[][] {
+  if (observation.protocolVersion !== PROTOCOL_VERSION || observation.image?.width !== 64 || observation.image.height !== 64
+    || observation.image.pixelFormat !== 'palette-index-u8' || !(observation.image.pixels instanceof Uint8Array)
+    || observation.image.pixels.length !== 4096) throw new TypeError('Invalid agent image packet.');
+  const frame = Array.from({ length: 64 }, (_, y) => Array.from(observation.image.pixels.slice(y * 64, (y + 1) * 64)));
+  toAgentObservation({
+    gameCode: observation.gameCode, frame, frames: [], state: observation.state,
+    availableActionIds: observation.availableActionIds, level: observation.level,
+    levelsCompleted: observation.levelsCompleted, levelCount: observation.level,
+    canUndo: false, canSelectLevel: false, defaultFps: 10,
+  }, observation.sessionId, observation.sequence);
+  return frame;
+}
 
-export type AgentWorkerResponse =
-  | { type: 'ready'; sessionId: string; implementationRevision: string }
-  | { type: 'action'; sessionId: string; sequence: number; action: AgentAction }
-  | { type: 'stopped'; sessionId: string; reason: 'cancelled' | 'budget' | 'complete' }
-  | { type: 'error'; sessionId: string; message: string };
+export function matchesPublicObservation(expected: AgentObservation, actual: GameObservation | null): boolean {
+  if (!actual) return false;
+  try {
+    const current = toAgentObservation(actual, expected.sessionId, expected.sequence);
+    return current.gameCode === expected.gameCode && current.level === expected.level
+      && current.levelsCompleted === expected.levelsCompleted && current.state === expected.state
+      && current.availableActionIds.length === expected.availableActionIds.length
+      && current.availableActionIds.every((id, index) => id === expected.availableActionIds[index])
+      && current.image.pixels.every((pixel, index) => pixel === expected.image.pixels[index]);
+  } catch { return false; }
+}
 
-/** Validate at the host boundary; TypeScript types alone do not validate messages. */
 export function isAgentAction(value: unknown): value is AgentAction {
-  if (!value || typeof value !== 'object') return false;
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
   const action = value as Record<string, unknown>;
-  if (typeof action.id !== 'number' || !Number.isInteger(action.id) || action.id < 0 || action.id > 7) return false;
-  if (action.id !== 6) return true;
-  if (!action.data || typeof action.data !== 'object') return false;
+  if (typeof action.id !== 'number' || !Number.isInteger(action.id) || action.id < 1 || action.id > 7) return false;
+  if (action.id !== 6) return Object.keys(action).length === 1;
+  if (Object.keys(action).length !== 2 || !action.data || typeof action.data !== 'object' || Array.isArray(action.data)) return false;
   const data = action.data as Record<string, unknown>;
-  return [data.x, data.y].every(
-    coordinate => typeof coordinate === 'number' && Number.isInteger(coordinate) && coordinate >= 0 && coordinate < 64,
-  );
+  return Object.keys(data).length === 2 && [data.x, data.y].every(coordinate => typeof coordinate === 'number' && Number.isInteger(coordinate) && coordinate >= 0 && coordinate < 64);
 }

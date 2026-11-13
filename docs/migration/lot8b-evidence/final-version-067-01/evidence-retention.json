@@ -1,0 +1,513 @@
+{
+  "schema": "logos-engine.lot8b.final-version-evidence-retention.v1",
+  "recordedAt": "2026-11-12T12:25:33.780497+00:00",
+  "retainedFileCount": 84,
+  "retainedBytes": 31318031,
+  "files": [
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/README.md",
+      "bytes": 6451,
+      "sha256": "c46eb4b163b316ace3a00d3b29cd9457550d934eb0e6c2e336fa490297592b8a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/baseline-native.json",
+      "bytes": 39098,
+      "sha256": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-capture-01/capture.jsonl.gz",
+      "bytes": 5258703,
+      "sha256": "13f801511bea0f3dc7972bb8b843fc19b7865bf654f47155cc6846d612749c2e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-capture-01/capture.receipt.json",
+      "bytes": 130162,
+      "sha256": "deeeb205cc06f2a2115dc614e143bd0c11f47a327d9a7316cc2155805153b6f2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-capture-01/declaration.json",
+      "bytes": 1762,
+      "sha256": "5a8e8f2627748da0e9b65574eed914f3488ddf9ec0ab3ec1cdc77175192fb60b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-capture-01/inputs-after.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-capture-01/inputs-before.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-capture-01/output.log.gz",
+      "bytes": 254,
+      "sha256": "1103ee37df119ee0433e5436671a01ba05540faa59e3bbf11d696b3733aa9318"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-capture-01/receipt.json",
+      "bytes": 2836,
+      "sha256": "467fe1048692e744b666f56dcb015730870e88316cecd3088985ca72210e2973"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-qualify-01/declaration.json",
+      "bytes": 1958,
+      "sha256": "23a973b195abe9d9ada4f2117ee2a3ef669ddd26ad20bdd7f68a4bb40cd3c7b0"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-qualify-01/graph-review.json",
+      "bytes": 60069,
+      "sha256": "96e873da9fd285612f690bd1aa9b6f56a732ad5f2de26605a46e105a66345593"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-qualify-01/inputs-after.json",
+      "bytes": 660638,
+      "sha256": "b2999a6caf4b4d58d66c62448d2f2b372b9a4d3ecaac5afa21b839946c246e2f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-qualify-01/inputs-before.json",
+      "bytes": 660638,
+      "sha256": "b2999a6caf4b4d58d66c62448d2f2b372b9a4d3ecaac5afa21b839946c246e2f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-qualify-01/output.log.gz",
+      "bytes": 359,
+      "sha256": "f6680aa2891d90c619f701488a049fe4f55d58593ec4c6c65ee1ab20d2e5d926"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-qualify-01/receipt.json",
+      "bytes": 3025,
+      "sha256": "859a62d9a08305ea77ff80c1c09170c3be57e500261588e409030af2b3fd659a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-qualify-01/work-forms.json",
+      "bytes": 159878,
+      "sha256": "cf08ae976b038bf0ee503705d4471f588d7324ff26a37e1ea1f56581f65ed3ad"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/build-01/declaration.json",
+      "bytes": 1438,
+      "sha256": "4ec1c695a53ebb80b35aee1c0cba77014db9d06ef8317bf612bcefe0d52e629c"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/build-01/inputs-after.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/build-01/inputs-before.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/build-01/output.log.gz",
+      "bytes": 1593,
+      "sha256": "4dea708ca65224273bf9dc4f9a656029082e60e101d6940f621cfa17ad82c4b8"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/build-01/receipt.json",
+      "bytes": 1919,
+      "sha256": "f489525b237618f620b15d7c8627830f1ffa27292a040b0097cd351bdd26a732"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/build-manifest.json",
+      "bytes": 14948,
+      "sha256": "39065225503db229e2597ae2aa70822e72e05b93735aac2d6e33d70a07cd6d6b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/candidate-native.json",
+      "bytes": 39333,
+      "sha256": "18fcc15c6e57f1bf6aab33cc62498e6a5a76836d85b890378be957a0e6da1c57"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/checkout-recovery.json",
+      "bytes": 585,
+      "sha256": "fa48cf3a73b7315f3bef52b361cd3e6e9fdfa25055ac390e6d1b40ca91576826"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/checkpoint-functional-plan-push-02.json",
+      "bytes": 4254,
+      "sha256": "ec8bb3f4f67083e8ac0abab2c06a4ee53aa93c071c32a562b31e9a8687b114d5"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/checkpoint-reader-correction-push-03.json",
+      "bytes": 1681,
+      "sha256": "730dd53fcebf7247b5f4be17f388993f39ea637ae33dcfb922b966015b767318"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/checkpoint-reader-correction-push-04.json",
+      "bytes": 4255,
+      "sha256": "6dc7a3402baaea4bd6800765cf21a1541e40adc064e1b411bbbdda5986e3494d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/checkpoint-version-push-01.json",
+      "bytes": 4246,
+      "sha256": "ddcf9aa551e52804f8437948dd86f0cc9261dae578b2e9d3f88785bc2a628dfd"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/entry-audit-01/declaration.json",
+      "bytes": 1393,
+      "sha256": "aa15280134e61286f2ec685a492dc54cdd3aa48a20833283c7e47f5cb5038fa7"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/entry-audit-01/inputs-after.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/entry-audit-01/inputs-before.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/entry-audit-01/output.log.gz",
+      "bytes": 180,
+      "sha256": "a9ef7580e0fcd3ce03503e1f8628c4fc5248a4c194b28a72fb7dc9e078f49d9e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/entry-audit-01/receipt.json",
+      "bytes": 1879,
+      "sha256": "0970f580d1c399a77c986b3c5bb36fd688889cf87abf4acf15faf3db2d36073e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/entry-audit-01/v6-entry-point-progress.json",
+      "bytes": 19826,
+      "sha256": "f21867972f27651e73d0238e6742503b10352f8e1278d39f15febf40b44e0625"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/final-coordination-tools-independent-review.json",
+      "bytes": 8443,
+      "sha256": "54128d21f0c69a6cc3953146c260f5c329b9248d1e1f689ab39e508709cb950a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/final-cost-tools-independent-review.json",
+      "bytes": 12019,
+      "sha256": "1824447d27258152c4db24ec626af26349c42d2c8dffe8c42a6d2b696e3dabd8"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/final-functional-independent-review.json",
+      "bytes": 61988,
+      "sha256": "ca7a8b58e77d97210bd984122db621d7ea7cd18c05ceebd9adaa64e17d008712"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/functional-execution-plan.json",
+      "bytes": 672996,
+      "sha256": "d27d40656905b73270c288db27fd925ff4d00fff4e16c285943739160c448008"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/functional-tools-independent-review.json",
+      "bytes": 13660,
+      "sha256": "8be238b888e42672223bc0b14fa155b9c01287c11d40da1bdaabb3778b1d268f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/historical-input-reconciliation.json",
+      "bytes": 916069,
+      "sha256": "0ed6fe4aad163b8c307602812dd1c09c4ca015ff87bd418122f5b1b2ef4dbb9d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/migration-audit-01/declaration.json",
+      "bytes": 1410,
+      "sha256": "c609842d7c28389c9ae1d6c5c1ea134006c9600ea876d7e7614fad6e5db5f41c"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/migration-audit-01/inputs-after.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/migration-audit-01/inputs-before.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/migration-audit-01/output.log.gz",
+      "bytes": 205,
+      "sha256": "1c62c9f17c52806dffb06007d174950019b9ca47a0ce6499be6824b9613145bb"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/migration-audit-01/receipt.json",
+      "bytes": 1899,
+      "sha256": "f9305e1df42d3e442210b11f2b899c2d742464bd15400b293f2ca4b47fb298f7"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/migration-audit-01/v6-coverage.json",
+      "bytes": 2577071,
+      "sha256": "65773bd96ebafb867495d47d1ab008340dcf9386c6d2acef9ac631dcada1c30b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/paired-reader-amendment-independent-review.json",
+      "bytes": 4180,
+      "sha256": "96835f1b18b77c4d7d63a8f60624031318628f0acecb2998e1da6397bd63622e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/paired-reader-amendment.json",
+      "bytes": 2247,
+      "sha256": "009a5f0072bcfcc709555e229b49d780c9b6d22dac90626ac4cd5d92e8f4dcdb"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/paired-reader-execution-plan-02.json",
+      "bytes": 672811,
+      "sha256": "240569116ba8831b4a88d09b00b5dd54914bafedc9b8b908a1a0ce7dd58ec9db"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/paired-reader-v2.diff",
+      "bytes": 1774,
+      "sha256": "5e384ce550e6018b15768726cfd3d9735777cdb68906220bf186db0bc5a18302"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/prior-candidate-native.json",
+      "bytes": 39333,
+      "sha256": "56e7533fca83f222b866ce73478a1f925bddb8c7b7c79718e9b99d0c888dc095"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/publication-observation.json",
+      "bytes": 809,
+      "sha256": "d4230e8d55c30fd6e3d6504276590ba34237a3a5fc04171abddeb3e0b95b3a39"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/recovered-build-inputs.json",
+      "bytes": 3701,
+      "sha256": "30b5a978337689416169c9c0c2318124ce8e67c09b2bf5ee9d7194c91587133f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/source-reconciliation.json",
+      "bytes": 2169,
+      "sha256": "efb4b9f11a768ed0ca6a8a8b77ada59b980b244b96c6abba0a589554a421ef70"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/validation-summary.json",
+      "bytes": 11481,
+      "sha256": "e039d0cc64ef2aad673a8068ca608bf370fb6a583ab6d0040f6b1c4502964f4e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/version-reservation.json",
+      "bytes": 870,
+      "sha256": "3ead6120cb209132b25a49493291a2c62d6608e8401813d35c8be97d48045cc1"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-candidate-01/candidate.json.gz",
+      "bytes": 7261661,
+      "sha256": "3e136eb46b890067306201f4cfa1052eab7e7b1c6bc8db9c56a10bdb173d838c"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-candidate-01/candidate.receipt.json",
+      "bytes": 127538,
+      "sha256": "7baa0809d9c0e82f66e5b2fb2183de5b955aff9a181e6e05bfeec0c9aa5d1ea4"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-candidate-01/declaration.json",
+      "bytes": 1869,
+      "sha256": "a676af635ea259ef3aa8509dbb2107a262f9916868398c7103369a53dfb1d7af"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-candidate-01/inputs-after.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-candidate-01/inputs-before.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-candidate-01/output.log.gz",
+      "bytes": 226,
+      "sha256": "1932af41d336cfcfed7af21ae776687a84cb1368549b8906b673d4f5dc9f9a56"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-candidate-01/receipt.json",
+      "bytes": 2946,
+      "sha256": "ad0e31cf5523ccf021e4e679a432e0b630c2c1a4cd148167302475fd39dfd29a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/declaration.json",
+      "bytes": 1759,
+      "sha256": "8fa4e878440ce0def0ecc20d749bc6dfd3821b07bb05a4b63d2d27d1e924da78"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/inputs-after.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/inputs-before.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/output.log.gz",
+      "bytes": 349,
+      "sha256": "922e0fc9ac4e38b8b2d81e300e4363d1d820e9ab15fc372af9ef4596a56d850d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/owner-source-inventory.json",
+      "bytes": 130694,
+      "sha256": "36e8d72ac6ccd8ec2385b1263e3dda9aa85e88d71e595f476dd5011f479795e9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/receipt.json",
+      "bytes": 2549,
+      "sha256": "bc6d9d7072b928e4a05399f1043896b0644486a3e7b2fd0d9da9ce2329b5dca9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/declaration.json",
+      "bytes": 2270,
+      "sha256": "7b5a91203ec9a5cb5c6a05d97314af7964fdcc32a09c65d2f640c6dbcd9b9a79"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/graph-review.differences.jsonl.gz",
+      "bytes": 20,
+      "sha256": "59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/graph-review.json",
+      "bytes": 16497,
+      "sha256": "58a0d11fd298689f1ce896ac44ded1e6a7923b9cf406ee3bca30b0914adc0a7e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/inputs-after.json",
+      "bytes": 660878,
+      "sha256": "e1c7772ac8e9fc9af558999655269c351d63d382b77462baf70e61c47964c874"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/inputs-before.json",
+      "bytes": 660878,
+      "sha256": "e1c7772ac8e9fc9af558999655269c351d63d382b77462baf70e61c47964c874"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/output.log.gz",
+      "bytes": 458,
+      "sha256": "4ecfb06a433022340a6a9143573a2d3881d6f96f44ea3201a17d02f5a3c2c60d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/receipt.json",
+      "bytes": 3346,
+      "sha256": "0d2f68e09bd7ae339b210d070bb7673f9471dac9f67d419bb5b096a169a02251"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/declaration.json",
+      "bytes": 2279,
+      "sha256": "51dce0f4465e55b5b9f05d9d16224d44ac404a8171e5d5c95d1ab7c79bd2e9eb"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/graph-review.differences.jsonl.gz",
+      "bytes": 723555,
+      "sha256": "713cdea50ebb9ef20fedde5660bf4485b6a1e1ba55c033bd0c08e7fd4e094ae9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/graph-review.json",
+      "bytes": 316284,
+      "sha256": "2ce3d78213d7fe4212c7396b00b1dd2444497c8186641d4cc43fac94ddcc884f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/inputs-after.json",
+      "bytes": 662460,
+      "sha256": "f60a09ba216d2ccf1347010838429de10d25ec686e7e52a56c62836943d3ba66"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/inputs-before.json",
+      "bytes": 662460,
+      "sha256": "f60a09ba216d2ccf1347010838429de10d25ec686e7e52a56c62836943d3ba66"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/output.log.gz",
+      "bytes": 212,
+      "sha256": "1b7922466169098beedbe348f94a229b3bb58d0991abd4d74906570f260be17d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/receipt.json",
+      "bytes": 3638,
+      "sha256": "f14c8ca65e73d48e3d3b9d493a74a93c1bf8f023cba214436c34a5a913b95845"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/work-forms.json",
+      "bytes": 62525,
+      "sha256": "27602bf28ed8bf7d29049d01edb9a0dad41a570142ca8ec7b2dcd5ef99918925"
+    }
+  ],
+  "ignoredRawDuplicateLogs": [
+    {
+      "raw": "docs/migration/lot8b-evidence/final-version-067-01/branch-capture-01/output.raw.log",
+      "retainedCompressed": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-capture-01/output.log.gz",
+        "bytes": 254,
+        "sha256": "1103ee37df119ee0433e5436671a01ba05540faa59e3bbf11d696b3733aa9318"
+      },
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "raw": "docs/migration/lot8b-evidence/final-version-067-01/branch-qualify-01/output.raw.log",
+      "retainedCompressed": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-qualify-01/output.log.gz",
+        "bytes": 359,
+        "sha256": "f6680aa2891d90c619f701488a049fe4f55d58593ec4c6c65ee1ab20d2e5d926"
+      },
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "raw": "docs/migration/lot8b-evidence/final-version-067-01/build-01/output.raw.log",
+      "retainedCompressed": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/build-01/output.log.gz",
+        "bytes": 1593,
+        "sha256": "4dea708ca65224273bf9dc4f9a656029082e60e101d6940f621cfa17ad82c4b8"
+      },
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "raw": "docs/migration/lot8b-evidence/final-version-067-01/entry-audit-01/output.raw.log",
+      "retainedCompressed": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/entry-audit-01/output.log.gz",
+        "bytes": 180,
+        "sha256": "a9ef7580e0fcd3ce03503e1f8628c4fc5248a4c194b28a72fb7dc9e078f49d9e"
+      },
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "raw": "docs/migration/lot8b-evidence/final-version-067-01/migration-audit-01/output.raw.log",
+      "retainedCompressed": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/migration-audit-01/output.log.gz",
+        "bytes": 205,
+        "sha256": "1c62c9f17c52806dffb06007d174950019b9ca47a0ce6499be6824b9613145bb"
+      },
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "raw": "docs/migration/lot8b-evidence/final-version-067-01/work-candidate-01/output.raw.log",
+      "retainedCompressed": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/work-candidate-01/output.log.gz",
+        "bytes": 226,
+        "sha256": "1932af41d336cfcfed7af21ae776687a84cb1368549b8906b673d4f5dc9f9a56"
+      },
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "raw": "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/output.raw.log",
+      "retainedCompressed": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/output.log.gz",
+        "bytes": 349,
+        "sha256": "922e0fc9ac4e38b8b2d81e300e4363d1d820e9ab15fc372af9ef4596a56d850d"
+      },
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "raw": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/output.raw.log",
+      "retainedCompressed": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/output.log.gz",
+        "bytes": 458,
+        "sha256": "4ecfb06a433022340a6a9143573a2d3881d6f96f44ea3201a17d02f5a3c2c60d"
+      },
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "raw": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/output.raw.log",
+      "retainedCompressed": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/output.log.gz",
+        "bytes": 212,
+        "sha256": "1b7922466169098beedbe348f94a229b3bb58d0991abd4d74906570f260be17d"
+      },
+      "byteIdenticalAfterDecompression": true
+    }
+  ],
+  "completeRawOutputPreserved": true,
+  "qualification": "Compressed logs preserve exact raw command bytes. Historicalfailedreader andexpired-credential transport receipt are retained, not relabeled. This index excludes itself."
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.lot5c.command-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T20:56:49.509728+00:00",
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot5c-evidence/recovery/planning/v3-verify-source-and-documentary-bindings.py"
+  ],
+  "cwd": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "timeoutSeconds": 90.0,
+  "wrapper": {
+    "path": "docs/migration/lot5c-evidence/run-evidence-command.py",
+    "bytes": 3904,
+    "sha256": "99b16a35eac1f12acb3063e43d303ffc020b3339109e22eff1f807d1e87e47db"
+  },
+  "finishedAt": "2026-11-11T20:56:49.928656+00:00",
+  "durationSeconds": 0.41764592000254197,
+  "exitCode": 0,
+  "timedOut": false,
+  "log": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/v3-source-documentary-validation-command.log",
+    "bytes": 354,
+    "sha256": "c567ce2b648e3d37517f6e7f46d897775cb23ae370465d0d5fbfa2745aeeec1a"
+  },
+  "compressedLog": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/v3-source-documentary-validation-command.log.gz",
+    "bytes": 264,
+    "sha256": "7ac40978660262d5a0ad5eb1a2ab711cd9d47bef8574627dbfc09aafa5b40aa6"
+  }
+}

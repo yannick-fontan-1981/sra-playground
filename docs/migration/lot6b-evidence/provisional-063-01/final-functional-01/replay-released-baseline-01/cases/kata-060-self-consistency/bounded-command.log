@@ -1,0 +1,8 @@
+{"case": "kata-060-self-consistency", "phase": "node_running", "elapsedSeconds": 0.0, "lastProgress": null, "nodeMemory": {"pid": 12, "VmSize": "112344 kB", "VmHWM": "1728 kB", "VmRSS": "1728 kB", "Threads": "1"}}
+{"case": "kata-060-self-consistency", "nodeProgress": {"phase": "baseline-released"}}
+{"case": "kata-060-self-consistency", "phase": "node_running", "elapsedSeconds": 15.04, "lastProgress": {"phase": "request", "operation": "advance", "sequence": 11}, "nodeMemory": {"pid": 12, "VmSize": "10769472 kB", "VmHWM": "907772 kB", "VmRSS": "759248 kB", "Threads": "11"}}
+{"case": "kata-060-self-consistency", "phase": "node_running", "elapsedSeconds": 30.09, "lastProgress": {"phase": "response", "operation": "advance", "sequence": 25, "kind": "boundary", "actions": 25, "cycles": 12, "level": 3, "levelsCompleted": 2, "family": "preview_packing", "reason": null}, "nodeMemory": {"pid": 12, "VmSize": "11053768 kB", "VmHWM": "1046664 kB", "VmRSS": "1046664 kB", "Threads": "11"}}
+{"case": "kata-060-self-consistency", "phase": "node_running", "elapsedSeconds": 45.11, "lastProgress": {"phase": "response", "operation": "advance", "sequence": 33, "kind": "stopped", "actions": 33, "cycles": 14, "level": 4, "levelsCompleted": 3, "family": "preview_packing", "reason": "target_levels_completed"}, "nodeMemory": {"pid": 12, "VmSize": "11383568 kB", "VmHWM": "1379052 kB", "VmRSS": "1379052 kB", "Threads": "11"}}
+{"case": "kata-060-self-consistency", "phase": "comparison_running", "nodeExitCode": 0}
+{"case": "kata-060-self-consistency", "phase": "completed", "passed": true, "actions": 33, "comparisonChecks": 17, "failedChecks": []}
+{"status": "passed", "passed": 1, "total": 1, "comparisonChecksPassed": 17}

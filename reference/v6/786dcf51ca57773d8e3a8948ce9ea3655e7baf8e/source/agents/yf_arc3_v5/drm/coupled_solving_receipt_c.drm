@@ -1,0 +1,416 @@
+{
+  "module_id": "coupled_solving_receipt_c",
+  "declarations": [
+    {
+      "id": "policy.coupled_solving_receipt_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "actual_current_k23_return"
+      ],
+      "applicability": [
+        "coupled_parent_receipt"
+      ],
+      "invariants": [
+        "exact_return_scope",
+        "preserved_parent_why",
+        "no_global_impossibility",
+        "no_act"
+      ],
+      "falsifiers": [
+        "stale_receipt",
+        "missing_actual_agenda_claim"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "UNBOUND",
+        "NEEDS_EVIDENCE",
+        "BUDGET_REACHED",
+        "NOT_APPLICABLE",
+        "MODEL_CONTRADICTION",
+        "FOUND"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.coupled_receipt.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "UNBOUND"
+            },
+            {
+              "field": "question_bound",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "UNBOUND"
+          }
+        },
+        {
+          "id": "projection.coupled_receipt.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "NEEDS_EVIDENCE"
+            },
+            {
+              "field": "question_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receipt_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "NEEDS_EVIDENCE"
+          }
+        },
+        {
+          "id": "projection.coupled_receipt.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "BUDGET_REACHED"
+            },
+            {
+              "field": "question_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receipt_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_bound_reached",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "BUDGET_REACHED"
+          }
+        },
+        {
+          "id": "projection.coupled_receipt.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "NEEDS_EVIDENCE"
+            },
+            {
+              "field": "question_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receipt_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "native_missing_evidence",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "NEEDS_EVIDENCE"
+          }
+        },
+        {
+          "id": "projection.coupled_receipt.4",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "NOT_APPLICABLE"
+            },
+            {
+              "field": "question_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receipt_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "native_missing_evidence",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "native_signature_supported",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "NOT_APPLICABLE"
+          }
+        },
+        {
+          "id": "projection.coupled_receipt.5",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "MODEL_CONTRADICTION"
+            },
+            {
+              "field": "question_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receipt_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "native_missing_evidence",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "native_signature_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "local_constraint_contradiction",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "MODEL_CONTRADICTION"
+          }
+        },
+        {
+          "id": "projection.coupled_receipt.6",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "FOUND"
+            },
+            {
+              "field": "question_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receipt_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "native_missing_evidence",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "native_signature_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "local_constraint_contradiction",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "native_domain_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "FOUND"
+          }
+        },
+        {
+          "id": "projection.coupled_receipt.7",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "NEEDS_EVIDENCE"
+            },
+            {
+              "field": "question_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receipt_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "native_missing_evidence",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "native_signature_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "local_constraint_contradiction",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "native_domain_complete",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "NEEDS_EVIDENCE"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.coupled_receipt.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "UNBOUND"
+            }
+          ],
+          "reason_ref": "reason.coupled_exact_receipt_keeps_local_counterexample_and_next_item"
+        },
+        {
+          "id": "tier.coupled_receipt.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "NEEDS_EVIDENCE"
+            }
+          ],
+          "reason_ref": "reason.coupled_exact_receipt_keeps_local_counterexample_and_next_item"
+        },
+        {
+          "id": "tier.coupled_receipt.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "BUDGET_REACHED"
+            }
+          ],
+          "reason_ref": "reason.coupled_exact_receipt_keeps_local_counterexample_and_next_item"
+        },
+        {
+          "id": "tier.coupled_receipt.3",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "NOT_APPLICABLE"
+            }
+          ],
+          "reason_ref": "reason.coupled_exact_receipt_keeps_local_counterexample_and_next_item"
+        },
+        {
+          "id": "tier.coupled_receipt.4",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "MODEL_CONTRADICTION"
+            }
+          ],
+          "reason_ref": "reason.coupled_exact_receipt_keeps_local_counterexample_and_next_item"
+        },
+        {
+          "id": "tier.coupled_receipt.5",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "FOUND"
+            }
+          ],
+          "reason_ref": "reason.coupled_exact_receipt_keeps_local_counterexample_and_next_item"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.coupled_receipt_activation_unverified",
+      "reason_refs": [
+        "reason.coupled_exact_receipt_keeps_local_counterexample_and_next_item"
+      ]
+    }
+  ]
+}

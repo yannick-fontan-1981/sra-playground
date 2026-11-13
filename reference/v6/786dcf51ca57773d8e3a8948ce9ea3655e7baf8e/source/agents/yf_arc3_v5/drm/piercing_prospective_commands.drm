@@ -1,0 +1,318 @@
+{
+  "module_id": "piercing_prospective_commands",
+  "declarations": [
+    {
+      "id": "policy.declared_piercing_prospective_commands",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "public_direction_hypotheses_and_source_scoped_observed_or_proposed_quantum"
+      ],
+      "applicability": [
+        "current_scope_command_shape_correspondence"
+      ],
+      "invariants": [
+        "all_supplied_action_effect_roles_are_preserved",
+        "unmeasured_role_is_a_falsifiable_prediction_only",
+        "scene_conditioned_command_never_proves_world_motion_or_whole_influence"
+      ],
+      "falsifiers": [
+        "observed_command_breaks_the_declared_root_and_axis_geometry"
+      ],
+      "configuration": {
+        "measurement_contract": {
+          "model_predicate": "piercing_prospective_command_revision"
+        },
+        "prospective_command_profile": {
+          "action_directions": {
+            "ACTION1": [
+              -1,
+              0
+            ],
+            "ACTION2": [
+              1,
+              0
+            ],
+            "ACTION3": [
+              0,
+              -1
+            ],
+            "ACTION4": [
+              0,
+              1
+            ]
+          },
+          "effectrole_candidates": [
+            "translate_root",
+            "change_axis_extent"
+          ],
+          "coordinate_scope_ref": "coordinate.scene_conditioned",
+          "profile_ref": "profile.public_directional_actions_and_conditional_root_axis_effects",
+          "observation_claim_predicate": "action_conditions_translation",
+          "observation_claim_epistemic_status": "supported",
+          "observation_claim_disposition": "active",
+          "observation_claim_polarity": "positive",
+          "proposed_quantum_candidates": [],
+          "proposed_quantum_source_refs": []
+        }
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.piercing_command.current_shape_effect",
+          "all_conditions": [],
+          "reason_ref": "reason.exact_root_and_axial_shape_change_qualifies_revisable_command"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "command_effect_count",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.exact_command_effect_correspondence",
+          "reason_ref": "reason.exact_root_and_axial_shape_change_qualifies_revisable_command"
+        }
+      ],
+      "reason_refs": [
+        "reason.exact_root_and_axial_shape_change_qualifies_revisable_command"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.piercing_prospective_commands_revision"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.piercing_prospective_commands.unknown",
+          "all_conditions": [],
+          "static_facts": {
+            "applicable": true,
+            "command_effect_needs_commit": false,
+            "typedcommand_effects": [],
+            "measured_command_effects": [],
+            "unmeasured_command_effects": [],
+            "whole_influence_prediction_complete": false,
+            "command_effect_truth": "unknown",
+            "command_effect_class_ref": "command.prospective_profile_or_quantum_unknown"
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "retained_parent_goal_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "command_missing_premise_refs": "command_missing_premise_refs"
+          }
+        },
+        {
+          "id": "projection.piercing_prospective_commands.conditional_hypotheses",
+          "all_conditions": [
+            {
+              "field": "observed_translation_all_rows_joined",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observed_translation_claim_set_matches_rows",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observed_translation_predicate_mismatch_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "observed_translation_status_mismatch_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "observed_translation_disposition_mismatch_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "observed_translation_polarity_mismatch_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "observed_translation_contradiction_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "observed_translation_defeater_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "command_quantum_source_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "command_scope_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "command_observation_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "command_source_root_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prospective_profile_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "command_effect_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "command_effect_needs_commit": true,
+            "command_effect_class_ref": "command.prospective_scene_conditioned_root_or_extent_hypotheses",
+            "command_effect_truth": "proposed_unmeasured_roles",
+            "coordinate_scope_ref": "coordinate.scene_conditioned",
+            "command_condition_ref": "condition.future_same_scene_dynamics",
+            "command_falsifier_refs": [
+              "falsifier.observed_action_rejects_prospective_role",
+              "falsifier.scene_dynamics_or_camera_change_rejects_predicted_geometry",
+              "falsifier.observed_quantum_rejects_proposed_command_magnitude"
+            ]
+          },
+          "bound_facts": {
+            "prospective_command_revision_ref": "prospective_command_revision_ref",
+            "current_frame_ref": "current_frame_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "source_hypothesis_origin_refs": "source_hypothesis_origin_refs",
+            "source_extent_section_origin_refs": "source_extent_section_origin_refs",
+            "calibrated_quanta": "calibrated_quanta",
+            "proposed_quanta": "proposed_quanta",
+            "calibration_evidence_refs": "calibration_evidence_refs",
+            "command_candidate_rows": "raw_command_candidate_rows",
+            "observed_translation_claim_rows": "observed_translation_claim_rows",
+            "retained_parent_goal_ref": "retained_parent_goal_ref",
+            "typedcommand_effects": "raw_typedcommand_effects",
+            "measured_command_effects": "raw_measured_command_effects",
+            "unmeasured_command_effects": "raw_unmeasured_command_effects"
+          }
+        },
+        {
+          "id": "projection.piercing_prospective_commands.already_present",
+          "all_conditions": [
+            {
+              "field": "command_revision_already_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "command_effect_needs_commit": false
+          },
+          "bound_facts": {}
+        }
+      ]
+    },
+    {
+      "id": "rule.piercing_prospective_commands_revision",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "premises": [
+        "public_direction_hypotheses_and_source_scoped_observed_or_proposed_quantum"
+      ],
+      "applicability": [
+        "current_scope_command_shape_correspondence"
+      ],
+      "invariants": [
+        "all_supplied_action_effect_roles_are_preserved",
+        "unmeasured_role_is_a_falsifiable_prediction_only",
+        "scene_conditioned_command_never_proves_world_motion_or_whole_influence"
+      ],
+      "falsifiers": [
+        "observed_command_breaks_the_declared_root_and_axis_geometry"
+      ],
+      "reason_refs": [
+        "reason.exact_root_and_axial_shape_change_qualifies_revisable_command"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{prospective_command_revision_ref}",
+          "kind": "schema",
+          "label": "revisable scoped command shape effect",
+          "required_fields": [
+            "prospective_command_revision_ref"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "action_authorization": false
+          },
+          "attribute_bindings": {}
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{prospective_command_revision_ref}",
+          "predicate": "piercing_prospective_command_revision",
+          "family": "control",
+          "argument_patterns": [
+            "{prospective_command_revision_ref}"
+          ],
+          "epistemic_status": "proposed",
+          "required_fields": [
+            "prospective_command_revision_ref",
+            "typedcommand_effects"
+          ],
+          "static_attributes": {
+            "whole_influence_prediction_complete": false
+          },
+          "attribute_bindings": {
+            "typedcommand_effects": "typedcommand_effects",
+            "command_falsifier_refs": "command_falsifier_refs",
+            "command_effect_truth": "command_effect_truth",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "source_hypothesis_origin_refs": "source_hypothesis_origin_refs",
+            "source_extent_section_origin_refs": "source_extent_section_origin_refs",
+            "calibrated_quanta": "calibrated_quanta",
+            "proposed_quanta": "proposed_quanta",
+            "calibration_evidence_refs": "calibration_evidence_refs",
+            "command_candidate_rows": "command_candidate_rows",
+            "observed_translation_claim_rows": "observed_translation_claim_rows",
+            "current_frame_ref": "current_frame_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "retained_parent_goal_ref": "retained_parent_goal_ref",
+            "coordinate_scope_ref": "coordinate_scope_ref",
+            "command_condition_ref": "command_condition_ref",
+            "measured_command_effects": "measured_command_effects",
+            "unmeasured_command_effects": "unmeasured_command_effects"
+          }
+        }
+      ]
+    }
+  ]
+}

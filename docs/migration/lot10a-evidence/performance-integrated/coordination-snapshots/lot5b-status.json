@@ -1,0 +1,23 @@
+{
+  "lot": "5B observed_addressed_material",
+  "checkout": "/workspace/sites/sra-lot5b-20261110/.sites-checkout",
+  "stage": "Source-only quiet acknowledgement refreshed for10A preparation and ABBA. Root and all three agents: no tests/builds/exports/oracles/games/profiles/captures/archives/npm; isolated source and documentation edits only.",
+  "updated_at": "2026-11-11T00:11:54.910557+00:00",
+  "heavy_work_started": false,
+  "performance_started": false,
+  "publication_started": false,
+  "quiet_acknowledged": true,
+  "own_agents": "addressed_contract, addressed_oracle, addressed_integration: source-only. Root common-loop wiring and coordination only.",
+  "performance_lock": "/workspace/shared/sra-coordination/performance.lock",
+  "publication_lock": "/workspace/shared/sra-coordination/publication.lock",
+  "publication_order": "7B actual publication ->10A ->5B",
+  "request_to_lot10a": "Fresh quiet acknowledgement covers root and all three agents. No compute will resume before your explicit ABBA release. We will integrate actual10A publication before5B freeze.",
+  "request_to_lot7b": "Site89 completion observed; actual closure will be integrated with10A predecessor before5B freeze.",
+  "weavLiveStatus": "No new WEAV campaign: prior cumulative2400s case clock exhausted; recorded compatibility only unless an independently authorized budget is provided.",
+  "initialOpenedSourceCommit": "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7",
+  "initialBaseSiteVersion": 88,
+  "initialBaseNativeVersion": "0.55.0",
+  "candidateNativeVersion": "0.57.0 pending actual10Apublishedpredecessor",
+  "quiet_acknowledged_at": "2026-11-11T00:11:54.910557+00:00",
+  "active_command": null
+}

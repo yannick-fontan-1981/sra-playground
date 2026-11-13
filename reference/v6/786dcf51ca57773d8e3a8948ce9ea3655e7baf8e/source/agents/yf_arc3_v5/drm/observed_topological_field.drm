@@ -1,0 +1,316 @@
+{
+  "module_id": "observed_topological_field",
+  "declarations": [
+    {
+      "id": "policy.observed_topology_measurement_scope",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "complete_current_measured_supports_and_explicit_revisable_reference_interpretation"
+      ],
+      "applicability": [
+        "separate_panes_with_uniform_framed_pigments_and_complete_component_pockets"
+      ],
+      "invariants": [
+        "no_game_palette_coordinates_or_oracle_order",
+        "no_private_target_access",
+        "pockets_are_subordinate_to_their_containing_support",
+        "reference_interpretation_remains_a_hypothesis",
+        "selection_prepares_a_named_support_without_requiring_field_change",
+        "recognition_complement_and_paint_connectivity_are_separate",
+        "existing_point_producer_and_independent_action_permits",
+        "retain_existing_parent_and_validated_continuations"
+      ],
+      "falsifiers": [
+        "ambiguous_pane_or_pocket_correspondence",
+        "clipped_or_incomplete_support",
+        "selection_does_not_relocate_the_distinguished_border",
+        "write_extends_outside_expected_support",
+        "equal_pocket_count_has_incompatible_reference_values"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "observed_topology.measure_current_pockets",
+        "observed_topology.retain_general_measurement"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.observed_topology_interpretation_needs_actual_effect_evidence",
+      "reason_refs": [
+        "reason.current_separated_supports_license_pocket_measurement"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.observed_topology_measurement_scope.admit",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "observed_topology.measure_current_pockets"
+            },
+            {
+              "field": "separate_framed_pane_triples_measured",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "measurement_domain_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "measured_uniform_frame_count",
+              "operator": "greater_than",
+              "expected": 1
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "observed_topology.measure_current_pockets",
+            "goal_ref": "goal.qualify_current_topological_reference",
+            "model_status_ref": "hypothesis.current_complete_raster_supports",
+            "component_connectivity": 4,
+            "pocket_connectivity": 4,
+            "assumption_refs": [
+              "hypothesis.closed_component_complement_is_four_connected"
+            ]
+          }
+        },
+        {
+          "id": "projection.policy.observed_topology_measurement_scope.retain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "observed_topology.retain_general_measurement"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "observed_topology.retain_general_measurement"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.observed_topology_measurement_scope.admit",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "observed_topology.measure_current_pockets"
+            }
+          ],
+          "reason_ref": "reason.current_separated_supports_license_pocket_measurement"
+        },
+        {
+          "id": "tier.policy.observed_topology_measurement_scope.retain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "observed_topology.retain_general_measurement"
+            }
+          ],
+          "reason_ref": "reason.ambiguous_topological_reference_preserves_general_frontier"
+        }
+      ]
+    },
+    {
+      "id": "policy.observed_topological_reference_correspondence",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "complete_current_measured_supports_and_explicit_revisable_reference_interpretation"
+      ],
+      "applicability": [
+        "separate_panes_with_uniform_framed_pigments_and_complete_component_pockets"
+      ],
+      "invariants": [
+        "no_game_palette_coordinates_or_oracle_order",
+        "no_private_target_access",
+        "pockets_are_subordinate_to_their_containing_support",
+        "reference_interpretation_remains_a_hypothesis",
+        "selection_prepares_a_named_support_without_requiring_field_change",
+        "recognition_complement_and_paint_connectivity_are_separate",
+        "existing_point_producer_and_independent_action_permits",
+        "retain_existing_parent_and_validated_continuations"
+      ],
+      "falsifiers": [
+        "ambiguous_pane_or_pocket_correspondence",
+        "clipped_or_incomplete_support",
+        "selection_does_not_relocate_the_distinguished_border",
+        "write_extends_outside_expected_support",
+        "equal_pocket_count_has_incompatible_reference_values"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "observed_topology.admit_reference_correspondence",
+        "observed_topology.retain_unknown_correspondence"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.observed_topology_interpretation_needs_actual_effect_evidence",
+      "reason_refs": [
+        "reason.unique_topological_reference_opens_bounded_palette_and_write_question"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.observed_topological_reference_correspondence.admit",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "observed_topology.admit_reference_correspondence"
+            },
+            {
+              "field": "pocket_correspondence_domain_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pocket_correspondence_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "matched_distinct_exemplar_count",
+              "operator": "greater_than",
+              "expected": 1
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "observed_topology.admit_reference_correspondence",
+            "goal_ref": "goal.reproduce_topological_reference_on_current_supports",
+            "assumption_refs": [
+              "hypothesis.pocket_count_indexes_reference_pigment",
+              "hypothesis.uniform_framed_interiors_select_pigment",
+              "hypothesis.distinguished_border_denotes_current_pigment",
+              "hypothesis.isolated_component_write_preserves_pockets_and_peers"
+            ]
+          }
+        },
+        {
+          "id": "projection.policy.observed_topological_reference_correspondence.retain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "observed_topology.retain_unknown_correspondence"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "observed_topology.retain_unknown_correspondence"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.observed_topological_reference_correspondence.admit",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "observed_topology.admit_reference_correspondence"
+            }
+          ],
+          "reason_ref": "reason.unique_topological_reference_opens_bounded_palette_and_write_question"
+        },
+        {
+          "id": "tier.policy.observed_topological_reference_correspondence.retain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "observed_topology.retain_unknown_correspondence"
+            }
+          ],
+          "reason_ref": "reason.ambiguous_topological_reference_preserves_general_frontier"
+        }
+      ]
+    },
+    {
+      "id": "principle.topological_reference_prepares_shared_pigment",
+      "kind": "principle",
+      "premises": [
+        "unique_complete_revisable_pocket_reference_correspondence",
+        "actual_uniform_framed_pigment_exists",
+        "this_pigment_serves_the_maximum_current_unmatched_support_count"
+      ],
+      "invariants": [
+        "setting_keeps_its_actual_beneficiaries",
+        "selection_is_not_itself_field_completion",
+        "do_not_reselect_a_valid_current_pigment"
+      ],
+      "falsifiers": [
+        "current_selection_or_write_contradicts_expected_support",
+        "reference_relation_no_longer_current",
+        "official_completion_does_not_close_preserved_conjunction"
+      ],
+      "reason_refs": [
+        "reason.topological_reference_is_a_revisable_value_relation_not_a_fixed_silhouette"
+      ]
+    },
+    {
+      "id": "principle.topological_reference_writes_current_support",
+      "kind": "principle",
+      "premises": [
+        "unique_complete_revisable_pocket_reference_correspondence",
+        "current_distinguished_pigment_matches_reference",
+        "current_body_differs_from_its_matched_reference_value"
+      ],
+      "invariants": [
+        "test_actual_whole_support_scope_then_reconcile",
+        "retain_compatible_flood_models_until_discriminated",
+        "preserve_subordinate_pockets_and_other_supports",
+        "same_class_different_silhouette_reuses_the_interaction"
+      ],
+      "falsifiers": [
+        "current_selection_or_write_contradicts_expected_support",
+        "reference_relation_no_longer_current",
+        "official_completion_does_not_close_preserved_conjunction"
+      ],
+      "reason_refs": [
+        "reason.topological_reference_is_a_revisable_value_relation_not_a_fixed_silhouette"
+      ]
+    }
+  ]
+}

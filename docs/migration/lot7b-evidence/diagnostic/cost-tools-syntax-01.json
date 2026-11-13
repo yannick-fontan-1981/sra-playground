@@ -1,0 +1,186 @@
+{
+  "schema": "logos-engine.lot7b-cost-tools-syntax.v1",
+  "status": "passed",
+  "startedAt": "2026-11-10T21:43:50.269621+00:00",
+  "finishedAt": "2026-11-10T21:43:50.606091+00:00",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "sourceInputsBefore": [
+    {
+      "path": "docs/migration/lot7b-evidence/prepare-cost-protocol.py",
+      "bytes": 28789,
+      "sha256": "482cfc5b6cf263705be9a84c798cb0d114099c6cc009f8247a22ce0ac8f32e17"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 22795,
+      "sha256": "d50ec7357a18113a1ca6e0c94690d99fe888f67474da33ff047e912666de4373"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/record-owner-source-inventory.mjs",
+      "bytes": 12789,
+      "sha256": "1b7891ca9b2a3627d7fc10a870861cfb3189d069dbffc30fa59175bb53899295"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 45066,
+      "sha256": "ac08db60893a2a733a00965fc1e2f4a2c14da6f8b6974876b708ca54ec8e16dd"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/consolidate-owner-costs.mjs",
+      "bytes": 52710,
+      "sha256": "1528a23dea6f808c9e9b2528a5cdec4faf3bd4e519ff90982e3eb9e5358ed068"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/review-owner-costs.py",
+      "bytes": 70153,
+      "sha256": "cba93f665d77750769e0e17cd03cd3b3fe228ba7101a1eef4f8c1e68beb6dbec"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/check-cost-static-inputs.py",
+      "bytes": 27602,
+      "sha256": "ab4426eda556decca32950f415483178d7459fab5c2065f37be107b6678f1b18"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/write-cost-results.py",
+      "bytes": 41724,
+      "sha256": "121c3446bd172495ffa2075dadf2c7ac400c7c4feadfe5a400f8b71b895368db"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/finalize-cost-readiness.py",
+      "bytes": 29623,
+      "sha256": "818efd6ad6c99c4c5b9bb0f1b06ec5c29ad9611a6bd0e970b69c0747cf0d3988"
+    }
+  ],
+  "sourceInputsAfter": [
+    {
+      "path": "docs/migration/lot7b-evidence/prepare-cost-protocol.py",
+      "bytes": 28789,
+      "sha256": "482cfc5b6cf263705be9a84c798cb0d114099c6cc009f8247a22ce0ac8f32e17"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 22795,
+      "sha256": "d50ec7357a18113a1ca6e0c94690d99fe888f67474da33ff047e912666de4373"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/record-owner-source-inventory.mjs",
+      "bytes": 12789,
+      "sha256": "1b7891ca9b2a3627d7fc10a870861cfb3189d069dbffc30fa59175bb53899295"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 45066,
+      "sha256": "ac08db60893a2a733a00965fc1e2f4a2c14da6f8b6974876b708ca54ec8e16dd"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/consolidate-owner-costs.mjs",
+      "bytes": 52710,
+      "sha256": "1528a23dea6f808c9e9b2528a5cdec4faf3bd4e519ff90982e3eb9e5358ed068"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/review-owner-costs.py",
+      "bytes": 70153,
+      "sha256": "cba93f665d77750769e0e17cd03cd3b3fe228ba7101a1eef4f8c1e68beb6dbec"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/check-cost-static-inputs.py",
+      "bytes": 27602,
+      "sha256": "ab4426eda556decca32950f415483178d7459fab5c2065f37be107b6678f1b18"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/write-cost-results.py",
+      "bytes": 41724,
+      "sha256": "121c3446bd172495ffa2075dadf2c7ac400c7c4feadfe5a400f8b71b895368db"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/finalize-cost-readiness.py",
+      "bytes": 29623,
+      "sha256": "818efd6ad6c99c4c5b9bb0f1b06ec5c29ad9611a6bd0e970b69c0747cf0d3988"
+    }
+  ],
+  "sourcesUnchanged": true,
+  "checkedCount": 9,
+  "checks": [
+    {
+      "file": "docs/migration/lot7b-evidence/prepare-cost-protocol.py",
+      "method": "Python ast.parse; no import or execution",
+      "passed": true
+    },
+    {
+      "file": "docs/migration/lot7b-evidence/capture-cost-owner-graphs.mjs",
+      "method": "Node --check; no module evaluation",
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot7b-evidence/capture-cost-owner-graphs.mjs"
+      ],
+      "passed": true,
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "docs/migration/lot7b-evidence/record-owner-source-inventory.mjs",
+      "method": "Node --check; no module evaluation",
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot7b-evidence/record-owner-source-inventory.mjs"
+      ],
+      "passed": true,
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "docs/migration/lot7b-evidence/qualify-cost-owner-graphs.mjs",
+      "method": "Node --check; no module evaluation",
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot7b-evidence/qualify-cost-owner-graphs.mjs"
+      ],
+      "passed": true,
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "docs/migration/lot7b-evidence/consolidate-owner-costs.mjs",
+      "method": "Node --check; no module evaluation",
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot7b-evidence/consolidate-owner-costs.mjs"
+      ],
+      "passed": true,
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "docs/migration/lot7b-evidence/review-owner-costs.py",
+      "method": "Python ast.parse; no import or execution",
+      "passed": true
+    },
+    {
+      "file": "docs/migration/lot7b-evidence/check-cost-static-inputs.py",
+      "method": "Python ast.parse; no import or execution",
+      "passed": true
+    },
+    {
+      "file": "docs/migration/lot7b-evidence/write-cost-results.py",
+      "method": "Python ast.parse; no import or execution",
+      "passed": true
+    },
+    {
+      "file": "docs/migration/lot7b-evidence/finalize-cost-readiness.py",
+      "method": "Python ast.parse; no import or execution",
+      "passed": true
+    }
+  ],
+  "costToolsExecuted": false,
+  "runtimeOrGameExecuted": false,
+  "measurementExecuted": false,
+  "qualification": "Syntax only after explicit functional compute release. Five Python source files parsed without imports; four JavaScript source files checked without evaluation. No capture, measurement, test, build, archive or publication."
+}

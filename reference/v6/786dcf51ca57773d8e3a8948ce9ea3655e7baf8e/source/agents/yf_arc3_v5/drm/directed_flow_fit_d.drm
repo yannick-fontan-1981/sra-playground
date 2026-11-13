@@ -1,0 +1,522 @@
+{
+  "module_id": "arc3.directed_flow_fit_d",
+  "declarations": [
+    {
+      "id": "policy.acquired_directed_flow_fit_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.actual_sealed_owned_flow_observations_test_parent_models"
+      ],
+      "configuration": {
+        "operation_modes": {
+          "mechanics.directed_accretive_flow.flow_fit": "FIT",
+          "mechanics.directed_accretive_flow.inverse_routing": "INVERSE_DOMAIN",
+          "mechanics.directed_accretive_flow.recovery": "COMPARE",
+          "mechanics.directed_accretive_flow.configure_successor": "STEP_INTERNAL",
+          "mechanics.directed_accretive_flow.advance": "STEP_INTERNAL",
+          "mechanics.directed_accretive_flow.split": "STEP_INTERNAL",
+          "mechanics.directed_accretive_flow.turn": "STEP_INTERNAL",
+          "mechanics.directed_accretive_flow.multi_source_tick": "STEP_INTERNAL",
+          "mechanics.directed_accretive_flow.successor": "STEP",
+          "mechanics.directed_accretive_flow.capture": "PRECONDITION",
+          "mechanics.directed_accretive_flow.composite_relief": "MEASURE"
+        },
+        "modes_requiring_inverse_inputs": [
+          "INVERSE_DOMAIN"
+        ],
+        "modes_requiring_recovery_inputs": [
+          "COMPARE"
+        ],
+        "failed_release_predicate_ref": "observed_failed_directed_flow_release",
+        "input_cost_predicate_ref": "current_scoped_flow_input_cost",
+        "model_support_predicate_ref": "current_scoped_flow_model_supported",
+        "discovery_risk_predicate_ref": "authorizes_bounded_flow_release_discovery",
+        "modes_requiring_mechanical_inputs": [
+          "MEASURE",
+          "PRECONDITION",
+          "STEP",
+          "STEP_INTERNAL"
+        ],
+        "mechanical_fields_by_operation": {
+          "mechanics.directed_accretive_flow.configure_successor": [
+            "state",
+            "model",
+            "command"
+          ],
+          "mechanics.directed_accretive_flow.advance": [
+            "state",
+            "model",
+            "front_ref"
+          ],
+          "mechanics.directed_accretive_flow.split": [
+            "state",
+            "model",
+            "front_ref"
+          ],
+          "mechanics.directed_accretive_flow.turn": [
+            "state",
+            "model",
+            "front_ref"
+          ],
+          "mechanics.directed_accretive_flow.multi_source_tick": [
+            "state",
+            "model"
+          ],
+          "mechanics.directed_accretive_flow.successor": [
+            "state",
+            "model",
+            "command"
+          ],
+          "mechanics.directed_accretive_flow.capture": [
+            "state",
+            "model",
+            "front_ref"
+          ],
+          "mechanics.directed_accretive_flow.composite_relief": [
+            "state",
+            "model",
+            "collider_input"
+          ]
+        },
+        "model_memory_fit_modes": [
+          "FIT"
+        ],
+        "model_memory_kind_ref": "MODEL_EVIDENCE",
+        "model_memory_operation_ref": "mechanics.directed_accretive_flow.flow_fit"
+      },
+      "declared_alternative_refs": [
+        "directed_fit.calculate",
+        "directed_fit.unknown"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt_equivalent_qualified_flow_measurement",
+      "selection_tiers": [
+        {
+          "id": "tier.flow.current_qualified_calculation",
+          "reason_ref": "reason.actual_sealed_owned_flow_observations_test_parent_models",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "directed_fit.calculate"
+            },
+            {
+              "field": "eligible",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.flow.named_unknown",
+          "reason_ref": "reason.actual_sealed_owned_flow_observations_test_parent_models",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "directed_fit.unknown"
+            }
+          ]
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.directed_fit.calculate",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "directed_fit.calculate"
+            },
+            {
+              "field": "current_acquired_directed_fit_parent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_mode",
+              "operator": "equals",
+              "expected": "FIT"
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.directed_inverse.calculate",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "directed_fit.calculate"
+            },
+            {
+              "field": "current_acquired_directed_fit_parent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_mode",
+              "operator": "equals",
+              "expected": "INVERSE_DOMAIN"
+            },
+            {
+              "field": "inverse_inputs_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "release_risk_requested",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.directed_inverse.funded_supported",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "directed_fit.calculate"
+            },
+            {
+              "field": "current_acquired_directed_fit_parent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_mode",
+              "operator": "equals",
+              "expected": "INVERSE_DOMAIN"
+            },
+            {
+              "field": "inverse_inputs_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "release_risk_requested",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "risk_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "configuration_funded",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "failure_funded",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "model_support_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.directed_inverse.funded_discovery",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "directed_fit.calculate"
+            },
+            {
+              "field": "current_acquired_directed_fit_parent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_mode",
+              "operator": "equals",
+              "expected": "INVERSE_DOMAIN"
+            },
+            {
+              "field": "inverse_inputs_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "release_risk_requested",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "risk_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "configuration_funded",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "failure_funded",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "discovery_risk_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.directed_fit.unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "directed_fit.unknown"
+            },
+            {
+              "field": "current_acquired_directed_fit_parent",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.directed_recovery.calculate",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "directed_fit.calculate"
+            },
+            {
+              "field": "current_acquired_directed_fit_parent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_mode",
+              "operator": "equals",
+              "expected": "COMPARE"
+            },
+            {
+              "field": "recovery_inputs_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.directed_recovery.unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "directed_fit.unknown"
+            },
+            {
+              "field": "requested_mode",
+              "operator": "equals",
+              "expected": "COMPARE"
+            },
+            {
+              "field": "recovery_inputs_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.directed_inverse.unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "directed_fit.unknown"
+            },
+            {
+              "field": "requested_mode",
+              "operator": "equals",
+              "expected": "INVERSE_DOMAIN"
+            },
+            {
+              "field": "inverse_inputs_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.directed_flow.measure",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "directed_fit.calculate"
+            },
+            {
+              "field": "current_acquired_directed_fit_parent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_mode",
+              "operator": "equals",
+              "expected": "MEASURE"
+            },
+            {
+              "field": "mechanical_inputs_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.directed_flow.precondition",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "directed_fit.calculate"
+            },
+            {
+              "field": "current_acquired_directed_fit_parent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_mode",
+              "operator": "equals",
+              "expected": "PRECONDITION"
+            },
+            {
+              "field": "mechanical_inputs_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.directed_flow.step",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "directed_fit.calculate"
+            },
+            {
+              "field": "current_acquired_directed_fit_parent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_mode",
+              "operator": "equals",
+              "expected": "STEP"
+            },
+            {
+              "field": "mechanical_inputs_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.directed_flow.step_internal",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "directed_fit.calculate"
+            },
+            {
+              "field": "current_acquired_directed_fit_parent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_mode",
+              "operator": "equals",
+              "expected": "STEP_INTERNAL"
+            },
+            {
+              "field": "mechanical_inputs_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "invariants": [
+        "actual_sealed_packet_not_caller_sealed_boolean",
+        "exact_dispatched_command_and_payload",
+        "all_supplied_model_alternatives_preserved",
+        "input_ticks_distinct_from_internal_ticks",
+        "current_parent_why_and_native_demand",
+        "no_capture_or_role_confirmation_from_fit_alone",
+        "no_action_authority",
+        "recalled_model_evidence_is_current_fit_candidate_only",
+        "memory_claim_in_frozen_parent_why",
+        "no_old_model_promoted_to_current_law_from_read"
+      ]
+    }
+  ]
+}

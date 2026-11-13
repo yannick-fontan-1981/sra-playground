@@ -1,0 +1,29 @@
+{
+  "schema": "logos-engine.native-restoration-profiler-archive.v1",
+  "status": "preserved",
+  "recordedAt": "2026-11-10T02:02:33.219924+00:00",
+  "originalGenerator": {
+    "path": "scripts/profile-native-restoration-path.mjs",
+    "bytes": 17301,
+    "sha256": "fa0af03af9b2e9ed6e299ee25c9466556ba67db616ccf4bd4a5586f16d72dc6c"
+  },
+  "archivedGenerator": {
+    "path": "docs/migration/lot3b-cost-evidence/diagnostic/profile-native-restoration-path-v1.mjs",
+    "bytes": 17301,
+    "sha256": "fa0af03af9b2e9ed6e299ee25c9466556ba67db616ccf4bd4a5586f16d72dc6c"
+  },
+  "archivedByteIdentical": true,
+  "existingProfiles": [
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-before-stck.json.gz",
+      "bytes": 112956,
+      "sha256": "e17ee82cd69142361e9e6a8014431bc531461924260f73c3ed0450cc3eae4f1f"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-before-smlp.json.gz",
+      "bytes": 143263,
+      "sha256": "ab8608f7a4492a073fe02ff018041bd1453747b7e6a94a4a2aa25c5198566f72"
+    }
+  ],
+  "reason": "The v1 observer wraps source restore on families that also implement restoreNative. A new production method-identity guard requires omitting that wrapper to measure the normal path. V1 receipts remain unchanged and bound to this exact archived generator. V2 uses a separate predeclared four-session diagnostic."
+}

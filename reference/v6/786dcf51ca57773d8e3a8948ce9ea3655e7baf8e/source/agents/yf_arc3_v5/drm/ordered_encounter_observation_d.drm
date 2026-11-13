@@ -1,0 +1,112 @@
+{
+  "module_id": "ordered_encounter_observation_d",
+  "declarations": [
+    {
+      "id": "principle.same_origin_role_meal_contrast_supports_revisable_opportunity_mode",
+      "kind": "principle", "family_ref": "family.interaction_access",
+      "abstraction_level": "causal_variant",
+      "premises": [
+        "the_initial_role_is_revalidated_from_the_exact_exposed_origin",
+        "the_role_changed_appearance_without_its_own_replacement_while_other_tracks_replaced_bodies",
+        "a_different_access_order_can_give_that_role_its_own_replacement",
+        "the_current_question_has_no_committed_plan_or_engaged_route"
+      ],
+      "invariants": [
+        "initial_role_correspondence_is_not_physical_identity_across_reset",
+        "unchanged_observed_material_does_not_exclude_unseen_intermediate_modes",
+        "keep_time_contact_and_competition_as_alternatives_until_discriminated",
+        "replay_a_positive_prefix_only_for_an_untried_continuation",
+        "one_public_input_then_reconcile_without_an_oracle_sequence"
+      ],
+      "falsifiers": [
+        "the_restored_origin_or_role_correspondence_does_not_revalidate",
+        "a_fed_instance_of_the_same_initial_role_changes_in_the_same_observed_way",
+        "the_replayed_prefix_does_not_reproduce_the_recorded_mode_configuration"
+      ],
+      "reason_refs": ["reason.same_origin_role_contrast_conditions_the_next_encounter_experiment"]
+    },
+    {
+      "id": "policy.ordered_encounter_observation_d", "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single", "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "configuration": {
+        "maximum_frames": 512, "maximum_objects": 128, "maximum_area": 64,
+        "maximum_events": 512, "maximum_pixels": 4096,
+        "maximum_occurrences_per_world": 128,
+        "maximum_mode_relation_work": 100000,
+        "observation_predicate_ref": "observes_ordered_encounter_correspondences_d",
+        "claim_id_prefix": "claim.ordered_encounter_observation_d.",
+        "acquisition_alternative_ref": "ordered_encounter.retain_actual_correspondences_d"
+      },
+      "meaning_template_ref_by_alternative": {
+        "ordered_encounter.retain_actual_correspondences_d": "rule.ordered_encounter_observation_d"
+      },
+      "reason_refs": ["reason.ordered_contact_and_mode_evidence_precedes_universal_law"],
+      "fact_projections": [{
+        "id": "projection.ordered_encounter.unknown_causes_preserved_d",
+        "all_conditions": [],
+        "static_facts": {"mode_change_hypothesis_supported": false,
+          "consumption_hypothesis_supported": false,
+          "competition_conditioned_mode_hypothesis_supported": false}
+      }, {
+        "id": "projection.ordered_encounter.stationary_material_change_d",
+        "all_conditions": [{"field": "observed_material_change_count", "operator": "greater_than", "expected": 0}],
+        "static_facts": {"mode_change_hypothesis_supported": true}
+      }, {
+        "id": "projection.ordered_encounter.directed_contact_replacement_d",
+        "all_conditions": [{"field": "observed_directed_replacement_count", "operator": "greater_than", "expected": 0}],
+        "static_facts": {"consumption_hypothesis_supported": true}
+      }, {
+        "id": "projection.ordered_encounter.mode_and_competitor_meal_contrast_d",
+        "all_conditions": [
+          {"field": "observed_material_change_count", "operator": "greater_than", "expected": 0},
+          {"field": "observed_directed_replacement_count", "operator": "greater_than", "expected": 0}
+        ],
+        "static_facts": {"competition_conditioned_mode_hypothesis_supported": true}
+      }, {
+        "id": "projection.ordered_encounter.actual_receipt_d",
+        "all_conditions": [{"field": "has_occurrence", "operator": "equals", "expected": true}],
+        "static_facts": {"eligible": true}
+      }],
+      "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}]
+    },
+    {
+      "id": "rule.ordered_encounter_observation_d", "kind": "rule",
+      "evaluation": "project_requested_conclusions", "supported_operators": ["DERIVE"],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "term_templates": [{
+        "id_pattern": "term.ordered_encounter_observation_d.{occurrence_token}",
+        "kind": "schema", "label": "ordered motion, material change and directed replacement evidence",
+        "required_fields": ["occurrence_token", "occurrence_frame_ref", "occurrence",
+          "mode_change_hypothesis_supported", "consumption_hypothesis_supported", "competition_conditioned_mode_hypothesis_supported"],
+        "static_attributes": {
+          "projection_contract": "yf_arc3_v5.ordered_encounter_observation_d.v1",
+          "canonical_fact_projection_enabled": false,
+          "shape_preserving_appearance_change_supports_revisable_mode": true,
+          "directed_replacement_supports_revisable_consumption": true,
+          "individual_identity_beyond_unique_correspondence_established": false,
+          "universal_predation_or_mode_cause_established": false,
+          "physical_bindings_portable_across_reset": false,
+          "observation_knowledge_retained_across_same_level_reset": true
+        },
+        "attribute_bindings": {"observation": "occurrence", "acquisition_frame_ref": "occurrence_frame_ref",
+          "mode_change_hypothesis_supported": "mode_change_hypothesis_supported",
+          "consumption_hypothesis_supported": "consumption_hypothesis_supported",
+          "competition_conditioned_mode_hypothesis_supported": "competition_conditioned_mode_hypothesis_supported"}
+      }],
+      "claim_templates": [{
+        "id_pattern": "claim.ordered_encounter_observation_d.{occurrence_token}",
+        "predicate": "observes_ordered_encounter_correspondences_d", "family": "epistemic",
+        "epistemic_status": "supported",
+        "argument_patterns": ["term.ordered_encounter_observation_d.{occurrence_token}"],
+        "required_fields": ["occurrence_token", "occurrence_frame_ref"],
+        "static_attributes": {"historical_observation_not_current_binding": true,
+          "unknown_mode_causes_preserved": true},
+        "attribute_bindings": {"acquisition_frame_ref": "occurrence_frame_ref"}
+      }],
+      "reason_refs": ["reason.ordered_contact_and_mode_evidence_precedes_universal_law"]
+    }
+  ]
+}

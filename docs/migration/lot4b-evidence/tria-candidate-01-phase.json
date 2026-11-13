@@ -1,0 +1,69 @@
+{
+  "schema": "logos-engine.relative-arrangement-case-phase.v1",
+  "game": "TRIA",
+  "phase": "candidate-01",
+  "selection": {
+    "path": "docs/migration/lot4b-evidence/tria-case-selection.json",
+    "bytes": 1158,
+    "sha256": "19b689cdaec1747bdd533d48f3aa054227e5866befb23fb7b6c4880d2946c0d5"
+  },
+  "generator": {
+    "path": "docs/migration/lot4b-evidence/run-case-phase.py",
+    "bytes": 3784,
+    "sha256": "88c719847983f0fe34c9bdc5ab0e6db486d6230205dbc522091ca201f245d097"
+  },
+  "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/run-bounded-native-campaign-proof.py",
+    "TRIA",
+    "3",
+    "120",
+    "docs/migration/lot4b-evidence/development/tria-live-01"
+  ],
+  "startedAt": "2026-11-10T20:41:18.656002+00:00",
+  "finishedAt": "2026-11-10T20:42:03.015547+00:00",
+  "elapsedSeconds": 44.359982177003985,
+  "exitCode": 0,
+  "caseDeadlineReached": false,
+  "cumulativeCaseSecondsAtEnd": 44.388499,
+  "output": {
+    "path": "docs/migration/lot4b-evidence/tria-candidate-01-phase.log",
+    "bytes": 2361,
+    "sha256": "7861e9bdd410bb24b3893761ed303d9b8f8128d8dcaf1d09059c7e54eaceef70"
+  },
+  "artifacts": [
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/execution-tria.json",
+      "bytes": 70005,
+      "sha256": "efaaa2b4b358f6577cc506a0f8abc5ddc6049a0782e4451591ad16fe39e46ae5"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/source-manifest.json",
+      "bytes": 32756,
+      "sha256": "0d8527fe8f19b92fed78b38a5e6947b2952ef9dd21d79e00286b6cae0e7bf419"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-actual-public-journal.jsonl.gz",
+      "bytes": 9185,
+      "sha256": "8bc723a62bea09308d6fd905b1c6b3104d61acd5babc726016612d55a43b698c"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+      "bytes": 3161161,
+      "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-output.log.gz",
+      "bytes": 3243,
+      "sha256": "3d57c4cc61a0c2cd7b81ef1cec198ee1fe33bc12d6df35385b0847b9a64e8763"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+      "bytes": 13286,
+      "sha256": "916d0f1cb1dcbfd9b7ba7624e7d3d4648a91ae7ef64583288af4711d2a955ac3"
+    }
+  ],
+  "qualification": "A single cumulative wall-clock deadline covers every attempt and debugging interval for this selected case. The ordinary common agent receives only public game packets. An action-capped baseline is not a complete-game impossibility verdict."
+}

@@ -1,0 +1,41 @@
+{
+  "actualAlternative": [
+    {
+      "action_ref": "ACTION4"
+    }
+  ],
+  "actualNextCommand": {
+    "action_ref": "ACTION1",
+    "data": {}
+  },
+  "counts": {
+    "actualCurrentQuestions": 1,
+    "conditionCases": 744,
+    "projectionCases": 154,
+    "sourceDeclarations": 5
+  },
+  "fixture": {
+    "bytes": 126190,
+    "path": "tests/fixtures/v6-outline-continuation-reference.json.gz",
+    "sha256": "9bd3ff5cde210df3e8476cd1ef7cdc02048075cb5a5b2c75266e789c24f1bd9d"
+  },
+  "generator": {
+    "bytes": 15945,
+    "path": "scripts/export-v6-outline-continuation-reference.py",
+    "sha256": "d77a18114c84ba5a7f4688928c2d85506aae07d6c7a6624158b320f31ab04d35"
+  },
+  "qualification": {
+    "fullV5SelectionParity": false,
+    "fullV6CallerParity": false,
+    "gameHostExecuted": false,
+    "nativeArbitrationExtensionTested": false,
+    "nativeExecuted": false,
+    "nativeOutputsUsedAsExpected": false,
+    "scope": "Unchanged original strict DRM loader, ordered projection evaluator, condition matcher and tier matcher on an explicit source-derived subset. Output eligibility counts belong only to the reduced projection wrapper. They do not certify the complete V5 policy, a common-caller preference, any action release or any game success."
+  },
+  "schema": "logos-engine.v53.outline-continuation-original-reference-receipt.v1",
+  "sourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceUnchanged": true,
+  "status": "passed",
+  "subsetDocumentSha256": "0eb4788851d59715119c025d6cdef43db0029781eb69309e3ee61d4c25372866"
+}

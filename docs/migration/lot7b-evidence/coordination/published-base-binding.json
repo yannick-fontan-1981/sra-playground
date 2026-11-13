@@ -1,0 +1,30 @@
+{
+  "schema": "logos-engine.lot7b-published-baseline.v1",
+  "status": "verified",
+  "verifiedAt": "2026-11-10T23:11:47.609774+00:00",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "siteVersion": 87,
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_792ad6a638988191b945e341ec1e8d22",
+  "commit": "dd355400264b50942486559b8ca56ee6dfc6a3cc",
+  "nativeVersion": "0.54.0",
+  "nativeSourceDigest": "f25d56d1c63dc929b01bb31b3898b84cecc69e6e412d535c0d122170ea401ce9",
+  "nativeFileCount": 286,
+  "deploymentId": "appgdep_6af3a29b9f58819189ef23005349911f",
+  "deploymentStatus": "succeeded",
+  "publicationReceipt": {
+    "path": "docs/migration/lot7b-evidence/coordination/published-4b-site87.json",
+    "sha256": "60635e4656341a31a85b2190d73a85aa646d46ee15eb04b245a764b9bb9ab738",
+    "bytes": 1302
+  },
+  "sourceVerification": {
+    "path": "docs/migration/lot7b-evidence/coordination/published-4b-source-verification.json",
+    "sha256": "f7cf4d09f63177a1149c3f6db4f832bbb0069447976d6854f23ee3fc48daa1a1",
+    "bytes": 35647
+  },
+  "documentationClosure": {
+    "path": "docs/migration/lot7b-evidence/coordination/published-4b-site87-source-closure.json",
+    "sha256": "cff45529dfd51d6931a63d44f8a196f9710979058fb528cf7c890a85335c9d38",
+    "bytes": 1975
+  },
+  "qualification": "Latest actual published4B predecessor after5A and7A. This binding names the frozen reference for the future7B comparison and asserts no7B timing result."
+}

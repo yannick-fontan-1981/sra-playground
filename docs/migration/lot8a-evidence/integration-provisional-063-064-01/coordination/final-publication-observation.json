@@ -1,0 +1,29 @@
+{
+  "schema": "logos-engine.lot8a.current-publication-observation.v1",
+  "observedAt": "2026-11-11T20:03:29.438Z",
+  "provider": "Sites get_site",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "status": "active",
+  "latestVersionNumber": 103,
+  "currentUserRole": "owner",
+  "accessMode": "custom",
+  "accessPolicy": {
+    "revision": 3,
+    "allowedUsers": 1,
+    "allowedGroups": 0,
+    "externalVisitors": 0
+  },
+  "actualPublishedPredecessor": {
+    "version": 103,
+    "nativeVersion": "0.62.0",
+    "commit": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+    "sourceEvidence": "docs/migration/lot8a-evidence/coordination/published10b-site103.json"
+  },
+  "qualification": "Fresh current-version metadata still reports103. Exact source/deployment identity comes from the separately retained actual103 observation; no0.63/0.64/0.65 publication is inferred.",
+  "sitePublicationPerformed": false,
+  "retainedActualPublicationProof": {
+    "path": "docs/migration/lot8a-evidence/coordination/published10b-site103.json",
+    "sha256": "6170e3e6fcad600f5d22b8b03daca1428148492b553a55002075373c734fda26",
+    "bytes": 2495
+  }
+}

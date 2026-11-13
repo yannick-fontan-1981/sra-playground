@@ -1,0 +1,57 @@
+{
+  "schema": "logos-engine.lot7b-published-baseline.v1",
+  "recordedAt": "2026-11-11T13:52:51.874Z",
+  "status": "verified",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "siteVersion": 97,
+  "commit": "98336fba4e696a51c90ff7f7b37b8bdf95f34847",
+  "nativeVersion": "0.60.0",
+  "nativeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+  "nativeFiles": 306,
+  "deploymentStatus": "succeeded",
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_3e011b170b888191a9dba77971f30bd2",
+  "deploymentId": "appgdep_6af47200fa888191a71af4efc9880d52",
+  "deploymentUpdatedAt": "2026-11-11T13:47:58.236930+00:00",
+  "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_0000000016e4820e900c7d7a39461494",
+    "content_hash": "sha256:1e1fd813bb0c972fc17aae12ace6e7effdc2e8c0f2ae16f0712d3622303a1b93",
+    "size_bytes": 29992960,
+    "file_count": 75
+  },
+  "apiEvidence": {
+    "version": {
+      "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+      "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_3e011b170b888191a9dba77971f30bd2",
+      "siteVersion": 97,
+      "source": {
+        "commit_sha": "98336fba4e696a51c90ff7f7b37b8bdf95f34847"
+      },
+      "deploymentId": "appgdep_6af47200fa888191a71af4efc9880d52",
+      "archive": {
+        "archive_format": "tar",
+        "sediment_file_id": "file_0000000016e4820e900c7d7a39461494",
+        "content_hash": "sha256:1e1fd813bb0c972fc17aae12ace6e7effdc2e8c0f2ae16f0712d3622303a1b93",
+        "size_bytes": 29992960,
+        "file_count": 75
+      }
+    },
+    "deployment": {
+      "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+      "id": "appgdep_6af47200fa888191a71af4efc9880d52",
+      "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_3e011b170b888191a9dba77971f30bd2",
+      "status": "succeeded",
+      "updatedAt": "2026-11-11T13:47:58.236930+00:00",
+      "envSetRevision": 0
+    }
+  },
+  "sourceVerification": "docs/migration/lot7b-evidence/followup-recovery/coordination/published-6a-site97-reconciliation.json",
+  "nativePublication": {
+    "siteVersion": 96,
+    "commit": "cdaceea1c8918430a70b95fa427b31fcd22d290c",
+    "sameNativeSource": true,
+    "sameApplicationArchive": true
+  },
+  "qualification": "Actual published documentation closure of native6A; independently retrieved Site version and terminal deployment, exact native manifest and regression declaration reconciled with the prepared snapshot. No historical performance samples are reused."
+}

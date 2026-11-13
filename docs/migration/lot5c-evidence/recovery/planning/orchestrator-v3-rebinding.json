@@ -1,0 +1,88 @@
+{
+  "schema": "logos-engine.lot5c-orchestrator-v3-rebinding.v1",
+  "recordedAt": "2026-11-11T20:52:50.649951+00:00",
+  "old": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/orchestrate-cost-recovery-02.py",
+    "bytes": 22791,
+    "sha256": "747b4ecf6d42b89ffc474b9a35ab87ec2c3e85898f1a824a309964df7318cf99"
+  },
+  "new": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/orchestrate-cost-available-03.py",
+    "bytes": 22795,
+    "sha256": "9cf2dde454d17cc24d0b6e7900e57badbc623d5283a64138c7d6db589ffb6b04"
+  },
+  "exactSubstitutions": [
+    {
+      "old": "coordination/cost-final-02",
+      "new": "coordination/cost-final-03",
+      "occurrences": 1
+    },
+    {
+      "old": "performance-integrated-03",
+      "new": "performance-integrated-04",
+      "occurrences": 1
+    },
+    {
+      "old": "lot5c-cost-a33a5f88-recovery-02",
+      "new": "lot5c-cost-a33a5f88-available-03",
+      "occurrences": 1
+    },
+    {
+      "old": "coordination-v2-independent-review.json",
+      "new": "coordination-v3-independent-review.json",
+      "occurrences": 1
+    },
+    {
+      "old": "coordination/recovery-02/own-preparation-closure.json",
+      "new": "coordination/recovery-03/own-preparation-closure.json",
+      "occurrences": 1
+    },
+    {
+      "old": "finalize-readiness-5c-v2.py",
+      "new": "finalize-readiness-5c-v3.py",
+      "occurrences": 1
+    },
+    {
+      "old": "run-coordinated-cost-5c-v2.py",
+      "new": "run-coordinated-cost-5c-v3.py",
+      "occurrences": 1
+    },
+    {
+      "old": "lot5c-recovery-02-active-children.json",
+      "new": "lot5c-available-03-active-children.json",
+      "occurrences": 1
+    },
+    {
+      "old": "logos-engine.lot5c-coordination-v2-independent-review.v1",
+      "new": "logos-engine.lot5c-coordination-v3-independent-review.v1",
+      "occurrences": 1
+    },
+    {
+      "old": "recovery02_waiting_fresh_all_worker_ack",
+      "new": "available03_waiting_fresh_all_worker_ack",
+      "occurrences": 1
+    },
+    {
+      "old": "recovery02_terminal_",
+      "new": "available03_terminal_",
+      "occurrences": 1
+    }
+  ],
+  "noOtherSourceChanges": true,
+  "runtimeAlgorithmUnchanged": true,
+  "availabilitySeconds": 600,
+  "activeWindowSeconds": 5400,
+  "maximumExclusiveAttempts": 1,
+  "originalTemporaryTestEvidence": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/orchestrator-v2-tests-02.execution.json",
+    "bytes": 3806,
+    "sha256": "6e7496c46726a981244f552588b500a123517d074a0c545650924dfda3725351"
+  },
+  "newTargetedTestPlan": [
+    "legacy01/02 ACK refused for new03",
+    "availability expiry releases and same cycle cannot rerun",
+    "fresh raw ACKs then controller refusal release"
+  ],
+  "nativeOrBenchmarkChanges": false,
+  "newQuietRequested": false
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "logos-engine.lot5c-own-cost-quiet-closure.v1",
+  "status": "all_own_processes_and_workers_idle",
+  "recordedAt": "2026-11-11T18:36:12.285682+00:00",
+  "requestId": "lot5c-cost-a33a5f88-final-01",
+  "ownTrackedComputeEnded": true,
+  "activeCommand": null,
+  "noQueuedCommands": true,
+  "previewStopped": true,
+  "browserTabClosed": true,
+  "rootFunctionalCommandsTerminal": {
+    "finalTests": 0,
+    "fiveChecks": 0,
+    "recordedRegressions": 0,
+    "regressionByteTransport": 0,
+    "checkpointTransport": 0
+  },
+  "workers": [
+    {
+      "agent": "lot5_cost_protocol_audit",
+      "acknowledgedExactRequest": "lot5c-cost-a33a5f88-final-01",
+      "confirmationObservedAfterRequest": true,
+      "activeCommand": null,
+      "noQueuedCommands": true,
+      "toolsAndReadsStoppedUntilExplicitRelease": true
+    },
+    {
+      "agent": "lot5_scope_preview",
+      "acknowledgedExactRequest": "lot5c-cost-a33a5f88-final-01",
+      "confirmationObservedAfterRequest": true,
+      "activeCommand": null,
+      "noQueuedCommands": true,
+      "toolsAndReadsStoppedUntilExplicitRelease": true
+    },
+    {
+      "agent": "lot5_site101_merge_audit",
+      "acknowledgedExactRequest": "lot5c-cost-a33a5f88-final-01",
+      "confirmationObservedAfterRequest": true,
+      "activeCommand": null,
+      "noQueuedCommands": true,
+      "toolsAndReadsStoppedUntilExplicitRelease": true
+    }
+  ],
+  "operationalControllerSha256": "0967fd35e3727c9e7c3354d330665bc601eb8c88fb49af3eeee35879eb2b7e58",
+  "operationalFinalizerSha256": "715b8d1b6a92c2cee3ef9c5049201298468ee6bee55f7ceb2556bf927d98c55e",
+  "costNodeOptionsOverride": null,
+  "qualification": "Each own worker supplied a new text-only acknowledgment after the actual18:34:20.752335 request. No own runtime, replay, test, build, export, archive, Git transport or browser process remains. Root next performs only named coordination and the reviewed readiness/window workflow. No measurement has started."
+}

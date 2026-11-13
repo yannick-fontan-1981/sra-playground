@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.lot5b.weav-case-checkpoint.v1",
+  "recordedAt": "2026-11-11T00:54:15.374300+00:00",
+  "case": "WEAV",
+  "status": "budget_exhausted",
+  "totalBudgetSeconds": 2400,
+  "cumulativeSeconds": 2401.227841,
+  "remainingSeconds": 0,
+  "clockReset": false,
+  "newLiveExecutions": 0,
+  "historicalEvidence": [
+    {
+      "path": "docs/migration/lot5a-evidence/weav/followup-clock.json",
+      "bytes": 930,
+      "sha256": "1af86498796ea26c3f6783a7e93c8c60a243b6e03cf7e88c0501d68b865de11b"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/weav/native050-delta-diagnostic/result.json",
+      "bytes": 1149,
+      "sha256": "f05d1a98cd0170694a305b50929b4d5ca171e9cc552a3911086f812c447b8476"
+    }
+  ],
+  "qualification": "The historical cumulative clock remains authoritative.5B starts no new live WEAV campaign and does not claim level6 completion. Recorded public compatibility replays remain distinct from live game experiments."
+}

@@ -1,0 +1,1219 @@
+{
+  "module_id": "latent_observed_effect_c",
+  "declarations": [
+    {
+      "id": "policy.latent_observed_effect_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "latent.observed.unchanged",
+        "latent.observed.ambiguous",
+        "latent.observed.correction",
+        "latent.observed.other_change",
+        "latent.observed.damage_restore",
+        "latent.observed.damage_resolved",
+        "latent.observed.damage_hypothesis",
+        "latent.observed.appearance_only"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.latent.observed.unchanged",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.observed.unchanged"
+            },
+            {
+              "field": "actual_edit_observed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cell_changed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "appearance_changed",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.latent.observed.ambiguous",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.observed.ambiguous"
+            },
+            {
+              "field": "actual_edit_observed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cell_changed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "reference_cell_agreement",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.latent.observed.correction",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.observed.correction"
+            },
+            {
+              "field": "actual_edit_observed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cell_changed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "reference_cell_agreement",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "before_matches_all_references",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "after_matches_all_references",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.latent.observed.other_change",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.observed.other_change"
+            },
+            {
+              "field": "actual_edit_observed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cell_changed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "reference_cell_agreement",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "before_matches_all_references",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "after_matches_all_references",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.latent.observed.damage_restore",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.observed.damage_restore"
+            },
+            {
+              "field": "actual_edit_observed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cell_changed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "reference_cell_agreement",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "before_matches_all_references",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "after_matches_all_references",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "all_references_established",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_matches_all_references",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.latent.observed.damage_resolved",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.observed.damage_resolved"
+            },
+            {
+              "field": "actual_edit_observed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cell_changed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "reference_cell_agreement",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "before_matches_all_references",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "after_matches_all_references",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "all_references_established",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_matches_all_references",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.latent.observed.damage_hypothesis",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.observed.damage_hypothesis"
+            },
+            {
+              "field": "actual_edit_observed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cell_changed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "reference_cell_agreement",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "before_matches_all_references",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "after_matches_all_references",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "all_references_established",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.latent.observed.appearance_only",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent.observed.appearance_only"
+            },
+            {
+              "field": "actual_edit_observed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cell_changed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "appearance_measured",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "appearance_changed",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "latent.observed.unchanged": "rule.latent_observed_effect_c.unchanged",
+        "latent.observed.ambiguous": "rule.latent_observed_effect_c.ambiguous",
+        "latent.observed.correction": "rule.latent_observed_effect_c.correction",
+        "latent.observed.other_change": "rule.latent_observed_effect_c.other_change",
+        "latent.observed.damage_restore": "rule.latent_observed_effect_c.damage_restore",
+        "latent.observed.damage_resolved": "rule.latent_observed_effect_c.damage_resolved",
+        "latent.observed.damage_hypothesis": "rule.latent_observed_effect_c.damage_hypothesis",
+        "latent.observed.appearance_only": "rule.latent_observed_effect_c.appearance_only"
+      },
+      "premises": [
+        "actual_owned_sealed_interval",
+        "same_preserved_reference_domain"
+      ],
+      "invariants": [
+        "no_post_edit_denoising",
+        "ambiguity_preserved",
+        "restore_under_current_state",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_current_state",
+        "unobserved_cell_or_reference",
+        "reference_changed_without_evidence"
+      ],
+      "reason_refs": [
+        "reason.actual_local_edits_are_compared_to_the_same_prepath_reference"
+      ]
+    },
+    {
+      "id": "rule.latent_observed_effect_c.unchanged",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.latent.observed.{projection_ref}",
+          "kind": "goal",
+          "label": "Retain the unchanged complete field and separate other effects",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_ref": "event_ref",
+            "input_ref": "input_ref",
+            "point": "point",
+            "before_value_ref": "before_value_ref",
+            "after_value_ref": "after_value_ref",
+            "reference_value_refs": "reference_value_refs",
+            "preserved_reference_refs": "preserved_reference_refs",
+            "preserved_reference_digest": "preserved_reference_digest",
+            "actual_after_state": "actual_after_state",
+            "all_references_established": "all_references_established",
+            "current_matches_all_references": "current_matches_all_references",
+            "frozen_why": "frozen_why",
+            "appearance_measured": "appearance_measured",
+            "appearance_changed": "appearance_changed",
+            "appearance_rows": "appearance_rows",
+            "transient_outline_points": "transient_outline_points",
+            "appearance_interval_complete": "appearance_interval_complete"
+          },
+          "static_attributes": {
+            "no_action_authority": true,
+            "principal_goal_changed": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.latent.observed.{projection_ref}",
+          "predicate": "records_latent_observed_unchanged",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.observed.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.observed.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_ref": "event_ref",
+            "input_ref": "input_ref",
+            "point": "point",
+            "before_value_ref": "before_value_ref",
+            "after_value_ref": "after_value_ref",
+            "reference_value_refs": "reference_value_refs",
+            "preserved_reference_refs": "preserved_reference_refs",
+            "preserved_reference_digest": "preserved_reference_digest",
+            "actual_after_state": "actual_after_state",
+            "all_references_established": "all_references_established",
+            "current_matches_all_references": "current_matches_all_references",
+            "frozen_why": "frozen_why",
+            "appearance_measured": "appearance_measured",
+            "appearance_changed": "appearance_changed",
+            "appearance_rows": "appearance_rows",
+            "transient_outline_points": "transient_outline_points",
+            "appearance_interval_complete": "appearance_interval_complete"
+          }
+        }
+      ],
+      "premises": [
+        "actual_owned_sealed_interval",
+        "same_preserved_reference_domain"
+      ],
+      "invariants": [
+        "no_post_edit_denoising",
+        "ambiguity_preserved",
+        "restore_under_current_state",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_current_state",
+        "unobserved_cell_or_reference",
+        "reference_changed_without_evidence"
+      ],
+      "reason_refs": [
+        "reason.actual_local_edits_are_compared_to_the_same_prepath_reference"
+      ]
+    },
+    {
+      "id": "rule.latent_observed_effect_c.ambiguous",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.latent.observed.{projection_ref}",
+          "kind": "goal",
+          "label": "Retain reference ambiguity after the actual edit",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_ref": "event_ref",
+            "input_ref": "input_ref",
+            "point": "point",
+            "before_value_ref": "before_value_ref",
+            "after_value_ref": "after_value_ref",
+            "reference_value_refs": "reference_value_refs",
+            "preserved_reference_refs": "preserved_reference_refs",
+            "preserved_reference_digest": "preserved_reference_digest",
+            "actual_after_state": "actual_after_state",
+            "all_references_established": "all_references_established",
+            "current_matches_all_references": "current_matches_all_references",
+            "frozen_why": "frozen_why",
+            "appearance_measured": "appearance_measured",
+            "appearance_changed": "appearance_changed",
+            "appearance_rows": "appearance_rows",
+            "transient_outline_points": "transient_outline_points",
+            "appearance_interval_complete": "appearance_interval_complete"
+          },
+          "static_attributes": {
+            "no_action_authority": true,
+            "principal_goal_changed": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.latent.observed.{projection_ref}",
+          "predicate": "records_latent_observed_ambiguous",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.observed.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.observed.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_ref": "event_ref",
+            "input_ref": "input_ref",
+            "point": "point",
+            "before_value_ref": "before_value_ref",
+            "after_value_ref": "after_value_ref",
+            "reference_value_refs": "reference_value_refs",
+            "preserved_reference_refs": "preserved_reference_refs",
+            "preserved_reference_digest": "preserved_reference_digest",
+            "actual_after_state": "actual_after_state",
+            "all_references_established": "all_references_established",
+            "current_matches_all_references": "current_matches_all_references",
+            "frozen_why": "frozen_why",
+            "appearance_measured": "appearance_measured",
+            "appearance_changed": "appearance_changed",
+            "appearance_rows": "appearance_rows",
+            "transient_outline_points": "transient_outline_points",
+            "appearance_interval_complete": "appearance_interval_complete"
+          }
+        }
+      ],
+      "premises": [
+        "actual_owned_sealed_interval",
+        "same_preserved_reference_domain"
+      ],
+      "invariants": [
+        "no_post_edit_denoising",
+        "ambiguity_preserved",
+        "restore_under_current_state",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_current_state",
+        "unobserved_cell_or_reference",
+        "reference_changed_without_evidence"
+      ],
+      "reason_refs": [
+        "reason.actual_local_edits_are_compared_to_the_same_prepath_reference"
+      ]
+    },
+    {
+      "id": "rule.latent_observed_effect_c.correction",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.latent.observed.{projection_ref}",
+          "kind": "goal",
+          "label": "Retain the actual correction under the agreed reference relation",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_ref": "event_ref",
+            "input_ref": "input_ref",
+            "point": "point",
+            "before_value_ref": "before_value_ref",
+            "after_value_ref": "after_value_ref",
+            "reference_value_refs": "reference_value_refs",
+            "preserved_reference_refs": "preserved_reference_refs",
+            "preserved_reference_digest": "preserved_reference_digest",
+            "actual_after_state": "actual_after_state",
+            "all_references_established": "all_references_established",
+            "current_matches_all_references": "current_matches_all_references",
+            "frozen_why": "frozen_why",
+            "appearance_measured": "appearance_measured",
+            "appearance_changed": "appearance_changed",
+            "appearance_rows": "appearance_rows",
+            "transient_outline_points": "transient_outline_points",
+            "appearance_interval_complete": "appearance_interval_complete"
+          },
+          "static_attributes": {
+            "no_action_authority": true,
+            "principal_goal_changed": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.latent.observed.{projection_ref}",
+          "predicate": "records_latent_observed_correction",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.observed.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.observed.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_ref": "event_ref",
+            "input_ref": "input_ref",
+            "point": "point",
+            "before_value_ref": "before_value_ref",
+            "after_value_ref": "after_value_ref",
+            "reference_value_refs": "reference_value_refs",
+            "preserved_reference_refs": "preserved_reference_refs",
+            "preserved_reference_digest": "preserved_reference_digest",
+            "actual_after_state": "actual_after_state",
+            "all_references_established": "all_references_established",
+            "current_matches_all_references": "current_matches_all_references",
+            "frozen_why": "frozen_why",
+            "appearance_measured": "appearance_measured",
+            "appearance_changed": "appearance_changed",
+            "appearance_rows": "appearance_rows",
+            "transient_outline_points": "transient_outline_points",
+            "appearance_interval_complete": "appearance_interval_complete"
+          }
+        }
+      ],
+      "premises": [
+        "actual_owned_sealed_interval",
+        "same_preserved_reference_domain"
+      ],
+      "invariants": [
+        "no_post_edit_denoising",
+        "ambiguity_preserved",
+        "restore_under_current_state",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_current_state",
+        "unobserved_cell_or_reference",
+        "reference_changed_without_evidence"
+      ],
+      "reason_refs": [
+        "reason.actual_local_edits_are_compared_to_the_same_prepath_reference"
+      ]
+    },
+    {
+      "id": "rule.latent_observed_effect_c.other_change",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.latent.observed.{projection_ref}",
+          "kind": "goal",
+          "label": "Retain a changed cell outside the agreed reference value",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_ref": "event_ref",
+            "input_ref": "input_ref",
+            "point": "point",
+            "before_value_ref": "before_value_ref",
+            "after_value_ref": "after_value_ref",
+            "reference_value_refs": "reference_value_refs",
+            "preserved_reference_refs": "preserved_reference_refs",
+            "preserved_reference_digest": "preserved_reference_digest",
+            "actual_after_state": "actual_after_state",
+            "all_references_established": "all_references_established",
+            "current_matches_all_references": "current_matches_all_references",
+            "frozen_why": "frozen_why",
+            "appearance_measured": "appearance_measured",
+            "appearance_changed": "appearance_changed",
+            "appearance_rows": "appearance_rows",
+            "transient_outline_points": "transient_outline_points",
+            "appearance_interval_complete": "appearance_interval_complete"
+          },
+          "static_attributes": {
+            "no_action_authority": true,
+            "principal_goal_changed": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.latent.observed.{projection_ref}",
+          "predicate": "records_latent_observed_other_change",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.observed.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.observed.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_ref": "event_ref",
+            "input_ref": "input_ref",
+            "point": "point",
+            "before_value_ref": "before_value_ref",
+            "after_value_ref": "after_value_ref",
+            "reference_value_refs": "reference_value_refs",
+            "preserved_reference_refs": "preserved_reference_refs",
+            "preserved_reference_digest": "preserved_reference_digest",
+            "actual_after_state": "actual_after_state",
+            "all_references_established": "all_references_established",
+            "current_matches_all_references": "current_matches_all_references",
+            "frozen_why": "frozen_why",
+            "appearance_measured": "appearance_measured",
+            "appearance_changed": "appearance_changed",
+            "appearance_rows": "appearance_rows",
+            "transient_outline_points": "transient_outline_points",
+            "appearance_interval_complete": "appearance_interval_complete"
+          }
+        }
+      ],
+      "premises": [
+        "actual_owned_sealed_interval",
+        "same_preserved_reference_domain"
+      ],
+      "invariants": [
+        "no_post_edit_denoising",
+        "ambiguity_preserved",
+        "restore_under_current_state",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_current_state",
+        "unobserved_cell_or_reference",
+        "reference_changed_without_evidence"
+      ],
+      "reason_refs": [
+        "reason.actual_local_edits_are_compared_to_the_same_prepath_reference"
+      ]
+    },
+    {
+      "id": "rule.latent_observed_effect_c.damage_restore",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.latent.observed.{projection_ref}",
+          "kind": "goal",
+          "label": "Restore established-reference damage from the actual current state",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_ref": "event_ref",
+            "input_ref": "input_ref",
+            "point": "point",
+            "before_value_ref": "before_value_ref",
+            "after_value_ref": "after_value_ref",
+            "reference_value_refs": "reference_value_refs",
+            "preserved_reference_refs": "preserved_reference_refs",
+            "preserved_reference_digest": "preserved_reference_digest",
+            "actual_after_state": "actual_after_state",
+            "all_references_established": "all_references_established",
+            "current_matches_all_references": "current_matches_all_references",
+            "frozen_why": "frozen_why",
+            "appearance_measured": "appearance_measured",
+            "appearance_changed": "appearance_changed",
+            "appearance_rows": "appearance_rows",
+            "transient_outline_points": "transient_outline_points",
+            "appearance_interval_complete": "appearance_interval_complete"
+          },
+          "static_attributes": {
+            "no_action_authority": true,
+            "principal_goal_changed": false,
+            "restoration_operation_ref": "repair_candidates",
+            "restoration_mode": "INVERSE_DOMAIN"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.latent.observed.{projection_ref}",
+          "predicate": "records_latent_observed_damage_restore",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.observed.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.observed.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_ref": "event_ref",
+            "input_ref": "input_ref",
+            "point": "point",
+            "before_value_ref": "before_value_ref",
+            "after_value_ref": "after_value_ref",
+            "reference_value_refs": "reference_value_refs",
+            "preserved_reference_refs": "preserved_reference_refs",
+            "preserved_reference_digest": "preserved_reference_digest",
+            "actual_after_state": "actual_after_state",
+            "all_references_established": "all_references_established",
+            "current_matches_all_references": "current_matches_all_references",
+            "frozen_why": "frozen_why",
+            "appearance_measured": "appearance_measured",
+            "appearance_changed": "appearance_changed",
+            "appearance_rows": "appearance_rows",
+            "transient_outline_points": "transient_outline_points",
+            "appearance_interval_complete": "appearance_interval_complete"
+          }
+        }
+      ],
+      "premises": [
+        "actual_owned_sealed_interval",
+        "same_preserved_reference_domain"
+      ],
+      "invariants": [
+        "no_post_edit_denoising",
+        "ambiguity_preserved",
+        "restore_under_current_state",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_current_state",
+        "unobserved_cell_or_reference",
+        "reference_changed_without_evidence"
+      ],
+      "reason_refs": [
+        "reason.actual_local_edits_are_compared_to_the_same_prepath_reference"
+      ]
+    },
+    {
+      "id": "rule.latent_observed_effect_c.damage_resolved",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.latent.observed.{projection_ref}",
+          "kind": "goal",
+          "label": "Retain observed damage already restored in the current state",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_ref": "event_ref",
+            "input_ref": "input_ref",
+            "point": "point",
+            "before_value_ref": "before_value_ref",
+            "after_value_ref": "after_value_ref",
+            "reference_value_refs": "reference_value_refs",
+            "preserved_reference_refs": "preserved_reference_refs",
+            "preserved_reference_digest": "preserved_reference_digest",
+            "actual_after_state": "actual_after_state",
+            "all_references_established": "all_references_established",
+            "current_matches_all_references": "current_matches_all_references",
+            "frozen_why": "frozen_why",
+            "appearance_measured": "appearance_measured",
+            "appearance_changed": "appearance_changed",
+            "appearance_rows": "appearance_rows",
+            "transient_outline_points": "transient_outline_points",
+            "appearance_interval_complete": "appearance_interval_complete"
+          },
+          "static_attributes": {
+            "no_action_authority": true,
+            "principal_goal_changed": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.latent.observed.{projection_ref}",
+          "predicate": "records_latent_observed_damage_resolved",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.observed.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.observed.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_ref": "event_ref",
+            "input_ref": "input_ref",
+            "point": "point",
+            "before_value_ref": "before_value_ref",
+            "after_value_ref": "after_value_ref",
+            "reference_value_refs": "reference_value_refs",
+            "preserved_reference_refs": "preserved_reference_refs",
+            "preserved_reference_digest": "preserved_reference_digest",
+            "actual_after_state": "actual_after_state",
+            "all_references_established": "all_references_established",
+            "current_matches_all_references": "current_matches_all_references",
+            "frozen_why": "frozen_why",
+            "appearance_measured": "appearance_measured",
+            "appearance_changed": "appearance_changed",
+            "appearance_rows": "appearance_rows",
+            "transient_outline_points": "transient_outline_points",
+            "appearance_interval_complete": "appearance_interval_complete"
+          }
+        }
+      ],
+      "premises": [
+        "actual_owned_sealed_interval",
+        "same_preserved_reference_domain"
+      ],
+      "invariants": [
+        "no_post_edit_denoising",
+        "ambiguity_preserved",
+        "restore_under_current_state",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_current_state",
+        "unobserved_cell_or_reference",
+        "reference_changed_without_evidence"
+      ],
+      "reason_refs": [
+        "reason.actual_local_edits_are_compared_to_the_same_prepath_reference"
+      ]
+    },
+    {
+      "id": "rule.latent_observed_effect_c.damage_hypothesis",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.latent.observed.{projection_ref}",
+          "kind": "goal",
+          "label": "Reevaluate the reference hypothesis before declaring established damage",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_ref": "event_ref",
+            "input_ref": "input_ref",
+            "point": "point",
+            "before_value_ref": "before_value_ref",
+            "after_value_ref": "after_value_ref",
+            "reference_value_refs": "reference_value_refs",
+            "preserved_reference_refs": "preserved_reference_refs",
+            "preserved_reference_digest": "preserved_reference_digest",
+            "actual_after_state": "actual_after_state",
+            "all_references_established": "all_references_established",
+            "current_matches_all_references": "current_matches_all_references",
+            "frozen_why": "frozen_why",
+            "appearance_measured": "appearance_measured",
+            "appearance_changed": "appearance_changed",
+            "appearance_rows": "appearance_rows",
+            "transient_outline_points": "transient_outline_points",
+            "appearance_interval_complete": "appearance_interval_complete"
+          },
+          "static_attributes": {
+            "no_action_authority": true,
+            "principal_goal_changed": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.latent.observed.{projection_ref}",
+          "predicate": "records_latent_observed_damage_hypothesis",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.observed.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.observed.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_ref": "event_ref",
+            "input_ref": "input_ref",
+            "point": "point",
+            "before_value_ref": "before_value_ref",
+            "after_value_ref": "after_value_ref",
+            "reference_value_refs": "reference_value_refs",
+            "preserved_reference_refs": "preserved_reference_refs",
+            "preserved_reference_digest": "preserved_reference_digest",
+            "actual_after_state": "actual_after_state",
+            "all_references_established": "all_references_established",
+            "current_matches_all_references": "current_matches_all_references",
+            "frozen_why": "frozen_why",
+            "appearance_measured": "appearance_measured",
+            "appearance_changed": "appearance_changed",
+            "appearance_rows": "appearance_rows",
+            "transient_outline_points": "transient_outline_points",
+            "appearance_interval_complete": "appearance_interval_complete"
+          }
+        }
+      ],
+      "premises": [
+        "actual_owned_sealed_interval",
+        "same_preserved_reference_domain"
+      ],
+      "invariants": [
+        "no_post_edit_denoising",
+        "ambiguity_preserved",
+        "restore_under_current_state",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_current_state",
+        "unobserved_cell_or_reference",
+        "reference_changed_without_evidence"
+      ],
+      "reason_refs": [
+        "reason.actual_local_edits_are_compared_to_the_same_prepath_reference"
+      ]
+    },
+    {
+      "id": "rule.latent_observed_effect_c.appearance_only",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.latent.observed.{projection_ref}",
+          "kind": "goal",
+          "label": "Preserve the unchanged logical field and independently measured outline or flash",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_ref": "event_ref",
+            "input_ref": "input_ref",
+            "point": "point",
+            "before_value_ref": "before_value_ref",
+            "after_value_ref": "after_value_ref",
+            "reference_value_refs": "reference_value_refs",
+            "preserved_reference_refs": "preserved_reference_refs",
+            "preserved_reference_digest": "preserved_reference_digest",
+            "actual_after_state": "actual_after_state",
+            "all_references_established": "all_references_established",
+            "current_matches_all_references": "current_matches_all_references",
+            "frozen_why": "frozen_why",
+            "appearance_measured": "appearance_measured",
+            "appearance_changed": "appearance_changed",
+            "appearance_rows": "appearance_rows",
+            "transient_outline_points": "transient_outline_points",
+            "appearance_interval_complete": "appearance_interval_complete"
+          },
+          "static_attributes": {
+            "no_action_authority": true,
+            "principal_goal_changed": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.latent.observed.{projection_ref}",
+          "predicate": "records_latent_observed_appearance_only",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.observed.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.latent.observed.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "event_ref": "event_ref",
+            "input_ref": "input_ref",
+            "point": "point",
+            "before_value_ref": "before_value_ref",
+            "after_value_ref": "after_value_ref",
+            "reference_value_refs": "reference_value_refs",
+            "preserved_reference_refs": "preserved_reference_refs",
+            "preserved_reference_digest": "preserved_reference_digest",
+            "actual_after_state": "actual_after_state",
+            "all_references_established": "all_references_established",
+            "current_matches_all_references": "current_matches_all_references",
+            "frozen_why": "frozen_why",
+            "appearance_measured": "appearance_measured",
+            "appearance_changed": "appearance_changed",
+            "appearance_rows": "appearance_rows",
+            "transient_outline_points": "transient_outline_points",
+            "appearance_interval_complete": "appearance_interval_complete"
+          }
+        }
+      ],
+      "premises": [
+        "actual_owned_sealed_interval",
+        "same_preserved_reference_domain"
+      ],
+      "invariants": [
+        "no_post_edit_denoising",
+        "ambiguity_preserved",
+        "restore_under_current_state",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_current_state",
+        "unobserved_cell_or_reference",
+        "reference_changed_without_evidence"
+      ],
+      "reason_refs": [
+        "reason.actual_display_channel_change_does_not_change_the_logical_cell_value"
+      ]
+    }
+  ]
+}

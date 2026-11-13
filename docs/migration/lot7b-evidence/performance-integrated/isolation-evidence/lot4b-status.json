@@ -1,0 +1,68 @@
+{
+  "lot": "4B relative_arrangement",
+  "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "branch": "lot4b-final-relative-arrangement",
+  "base": "4dafc40c53ed4406ee7cd148e3e6995a2eb4185e",
+  "baseSiteVersion": 81,
+  "updated_at": "2026-11-10T23:03:50.097808+00:00",
+  "stage": "Completed: first native0.54 publication Site86 and documentation closure Site87 both succeeded privately. Final source dd355400264b50942486559b8ca56ee6dfc6a3cc. All native/test/build/cost inputs unchanged; roadmap current. No further4B execution; releasing publication lock.",
+  "performance_lock": "/workspace/shared/sra-coordination/performance.lock",
+  "publication_lock": "/workspace/shared/sra-coordination/publication.lock",
+  "performance_started": false,
+  "heavy_work_started": false,
+  "publication_started": false,
+  "quiet_acknowledged": true,
+  "own_agents": "All three4B agents complete or stopped; no active compute.",
+  "known_lanes": [
+    "7A delivered Site83",
+    "5A linked_temporal_preparation",
+    "4B relative_arrangement",
+    "7B observed_symbol_transaction"
+  ],
+  "request_to_lot7a": "Releaseacknowledged;4BTRIA3levels17actions. Awaitactual7Apublishedcommit. Proposedafter5A4Bthen7B, or readiness-based4Bbefore5Aonlywithitsack. No4Bofficialcostyet.",
+  "request_to_lot5a": "4B has integrated actual5A Site85 and is now actually published in Site87/native0.54. Final source dd355400264b50942486559b8ca56ee6dfc6a3cc; both global costs accepted. All4B work complete.",
+  "publication_order": "7A Site83 ->5A actual published release ->4B ->7B",
+  "nativeVersion": "0.54.0",
+  "active_command": null,
+  "functional_release": "Explicit 4B compute release: ABBA has finished and shared performance.lock is released. Other lanes may resume functional tests/builds/games. No further 4B measurement planned; publication order remains 4B then7B.",
+  "functional_progress": {
+    "referenceTests": 81,
+    "commonTests": 12,
+    "triaLevels": 3,
+    "triaActions": 17,
+    "triaPrefixes": 17,
+    "sourceCalls": 68
+  },
+  "source_fetch_active": false,
+  "latestPublishedPredecessor": {
+    "siteVersion": 85,
+    "commit": "a009e1f138bb18251d697f49647bacc615ee514f",
+    "nativeVersion": "0.53.0",
+    "status": "succeeded"
+  },
+  "developmentMergedCommit": "d5aa99c3389f6b09d25a07f00c3e1ced110526c5",
+  "developmentMergedNativeDigest": "31850e3a309e51da61980025d333d4936e8ddbba44ed262ebe0330d944e589fe",
+  "request_to_lot7b": "4B is actually published: Site87, native0.54, commit dd355400264b50942486559b8ca56ee6dfc6a3cc. Integrate this real final successor before your final freeze, measures and publication. Receipt: /workspace/shared/sra-coordination/published-4b-site87.json. All4B work is complete; compute and publication lock released immediately after this write.",
+  "nativeFrozenDigest": "f25d56d1c63dc929b01bb31b3898b84cecc69e6e412d535c0d122170ea401ce9",
+  "cost_window_request": "Fresh quiet requested for the next4B ABBA once final tests/replays and untimed graph qualification finish (approximately10minutes). Please acknowledge root and agents quiet: no tests, builds, games, captures, profiling or archive work until explicit4B release. We will not start without completed readiness and acknowledgment. Native0.54f25 versus actual Site85 native0.53d30;32sessions/400actions; no official measurement yet.",
+  "publication_lock_acquired_at": "2026-11-10T22:50:37.528039+00:00",
+  "costVerdict": {
+    "accepted": true,
+    "games": 2,
+    "STCKPercent": -1.8129771577201192,
+    "SMLPPercent": 2.7354611274872553,
+    "phaseDiagnostics": "14/16",
+    "reviewChecks": 3960
+  },
+  "firstActuallyPublishedLot4b": {
+    "siteVersion": 86,
+    "commit": "082ce553ce4dfbac37071a64497bcca129b7ced0",
+    "nativeVersion": "0.54.0",
+    "deployment": "appgdep_6af3a1a4ffb081918113831cbc83ee4d"
+  },
+  "lastActuallyPublishedSiteVersion": 87,
+  "publishedCommit": "dd355400264b50942486559b8ca56ee6dfc6a3cc",
+  "publishedDeployment": "appgdep_6af3a29b9f58819189ef23005349911f",
+  "publishedReceipt": "/workspace/shared/sra-coordination/published-4b-site87.json",
+  "publication_lock_released_at": "2026-11-10T23:03:50.097822+00:00"
+}

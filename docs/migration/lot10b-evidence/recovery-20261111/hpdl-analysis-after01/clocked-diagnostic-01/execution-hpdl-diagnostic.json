@@ -1,0 +1,412 @@
+{
+  "schema": "logos-engine.lot10b.hpdl-clocked-diagnostic.v1",
+  "attemptId": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01",
+  "kind": "case_diagnostic",
+  "game": "HPDL",
+  "startedAt": "2026-11-11T13:32:40.470655+00:00",
+  "captureFinishedAt": "2026-11-11T13:35:10.189461+00:00",
+  "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+  "sameBootAtCapture": true,
+  "monotonicStartedNs": "6404938426992",
+  "monotonicCaptureStoppedNs": "6554657076147",
+  "elapsedSecondsThroughCapture": 149.718649155,
+  "clockBasis": "same_process_monotonic_elapsed",
+  "monotoneMeasurement": true,
+  "activityCeilingSeconds": 180.0,
+  "captureReserveSeconds": 30.0,
+  "childActivityCeilingSeconds": 149.5,
+  "terminationMarginSeconds": 0.5,
+  "terminalRetentionAdmissionHeadroomSeconds": 30.0,
+  "priorCumulativeSeconds": 926.1377512469917,
+  "remainingBeforeSeconds": 1473.8622487530083,
+  "beginReceipt": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/diagnostic-begin.json",
+    "sha256": "8ec154862d2e846b8c499af364714c0f77f41d5a37bdd7919019b052aed0d36b",
+    "bytes": 5244
+  },
+  "priorClock": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/clock-before.json",
+    "sha256": "a45abdc932923c3fcb931f747f0c906fe7a5bbbcaf6c375e0a8ae81a25ffe8b1",
+    "bytes": 3984
+  },
+  "requiredConservativeDebit": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/hpdl-conservative-case-work.json",
+    "sha256": "db9ea8ed4f30e2bb6995424bd730cbf870a0637bde754c0c2fa63c90f5091434",
+    "bytes": 3256
+  },
+  "mode": "writer-parity",
+  "checkoutRoot": "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout",
+  "phasePlan": [
+    {
+      "name": "writer",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--max-old-space-size=1536",
+        "--expose-gc",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/check-stream-evidence-json.mjs",
+        "--checkpoint",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+        "--execution-receipt",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+        "--output",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer-check.json"
+      ],
+      "resultPath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer-check.json",
+      "logPath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer.log"
+    },
+    {
+      "name": "parity",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/scripts/compare-window-question-checkpoint-parity.py",
+        "--checkpoint",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+        "--journal",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl.gz",
+        "--execution-receipt",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+        "--output",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/window-source-parity.PARTIAL.json.gz"
+      ],
+      "resultPath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/window-source-parity.PARTIAL.json.gz",
+      "logPath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/parity.log"
+    }
+  ],
+  "phases": [
+    {
+      "name": "writer",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--max-old-space-size=1536",
+        "--expose-gc",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/check-stream-evidence-json.mjs",
+        "--checkpoint",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+        "--execution-receipt",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+        "--output",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer-check.json"
+      ],
+      "resultPath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer-check.json",
+      "logPath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer.log",
+      "status": "returned",
+      "startedAt": "2026-11-11T13:32:40.695834+00:00",
+      "monotonicStartedNs": "6405163625456",
+      "exitCode": 0,
+      "childSpawnEstablished": true,
+      "termination": null,
+      "pid": 4,
+      "processGroupId": 4,
+      "parentDeathSignal": "SIGKILL",
+      "separateProcessGroup": true,
+      "finishedAt": "2026-11-11T13:33:01.566574+00:00",
+      "monotonicFinishedNs": "6426034375115"
+    },
+    {
+      "name": "parity",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/scripts/compare-window-question-checkpoint-parity.py",
+        "--checkpoint",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+        "--journal",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl.gz",
+        "--execution-receipt",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+        "--output",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/window-source-parity.PARTIAL.json.gz"
+      ],
+      "resultPath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/window-source-parity.PARTIAL.json.gz",
+      "logPath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/parity.log",
+      "status": "activity_timeout",
+      "startedAt": "2026-11-11T13:33:01.569416+00:00",
+      "monotonicStartedNs": "6426037197474",
+      "exitCode": -9,
+      "childSpawnEstablished": true,
+      "termination": {
+        "reason": "shared_preparation_and_child_ceiling",
+        "requestedAt": "2026-11-11T13:35:09.970896+00:00",
+        "requestedElapsedSeconds": 149.500268677,
+        "signal": "SIGKILL",
+        "signalSent": true,
+        "reapedAt": "2026-11-11T13:35:10.043295+00:00",
+        "reapedElapsedSeconds": 149.572671891,
+        "exitCode": -9
+      },
+      "pid": 16,
+      "processGroupId": 16,
+      "parentDeathSignal": "SIGKILL",
+      "separateProcessGroup": true,
+      "finishedAt": "2026-11-11T13:35:10.043348+00:00",
+      "monotonicFinishedNs": "6554511205345"
+    }
+  ],
+  "attemptOutcome": "activity_timeout",
+  "receivedSignals": [],
+  "inputs": {
+    "generator": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/retained-inputs/generator.py",
+      "sha256": "552394fac5d15de668a48b34b2a55f79859d2b40fcaa0de20af3f3c011ea5975",
+      "bytes": 24462
+    },
+    "cumulativeClockReader": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/retained-inputs/cumulativeClockReader.py",
+      "sha256": "e959e8d9b7ed5875bc9843393aeae44586674229fccb951279097c4c75195971",
+      "bytes": 36304
+    },
+    "writerChecker": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/retained-inputs/writerChecker.mjs",
+      "sha256": "0511eb7eebe0313386db269f2cbee2f019d8e3f2a7397728fcdd5500162733eb",
+      "bytes": 19528
+    },
+    "streamWriter": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/retained-inputs/streamWriter.mjs",
+      "sha256": "96ac2ddbaac8cc62126f6674301b2362301895f44ce90e5dbd1dec9fb6fc87ca",
+      "bytes": 6601
+    },
+    "campaignWriterCaller": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/retained-inputs/campaignWriterCaller.mjs",
+      "sha256": "ddb3bf22034b8210303b487c9d0eed9bbef5d5f864e0dc184907b6c2b9538799",
+      "bytes": 8285
+    },
+    "partialComparator": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/retained-inputs/partialComparator.py",
+      "sha256": "44ab7c0be31efb257353733ec443e5f1969e79ace911061fb19d573bcb751e9c",
+      "bytes": 20790
+    },
+    "sharedComparisonCore": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/retained-inputs/sharedComparisonCore.py",
+      "sha256": "0809463252156d4459123e469809222dcd0ead583c57f2003ad9e169f4e662e6",
+      "bytes": 59673
+    },
+    "checkpoint": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+      "sha256": "871f8cd0df7c74f0ce54bbe046f0e54f16d025686adf4fc7bbe8531f71c2fef0",
+      "bytes": 177532943
+    },
+    "diagnosedExecution": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+      "sha256": "f3fc927792b2574c32dd76aaa996b503b33925923051bf207a90f1cac4736e6f",
+      "bytes": 10116
+    },
+    "publicJournal": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl.gz",
+      "sha256": "d3a9535e50a66132e37bb3387bdc2c4c45cd0bd000c2a7bb2b819fa2e7de4a13",
+      "bytes": 38720
+    }
+  },
+  "sourceInputsBefore": {
+    "generator": {
+      "sourcePath": "docs/migration/lot10b-evidence/run-hpdl-clocked-diagnostic.py",
+      "sha256": "552394fac5d15de668a48b34b2a55f79859d2b40fcaa0de20af3f3c011ea5975",
+      "bytes": 24462
+    },
+    "cumulativeClockReader": {
+      "sourcePath": "docs/migration/lot10b-evidence/run-hpdl-clocked-proof.py",
+      "sha256": "e959e8d9b7ed5875bc9843393aeae44586674229fccb951279097c4c75195971",
+      "bytes": 36304
+    },
+    "writerChecker": {
+      "sourcePath": "docs/migration/lot10b-evidence/check-stream-evidence-json.mjs",
+      "sha256": "0511eb7eebe0313386db269f2cbee2f019d8e3f2a7397728fcdd5500162733eb",
+      "bytes": 19528
+    },
+    "streamWriter": {
+      "sourcePath": "docs/migration/lot10b-evidence/stream-evidence-json.mjs",
+      "sha256": "96ac2ddbaac8cc62126f6674301b2362301895f44ce90e5dbd1dec9fb6fc87ca",
+      "bytes": 6601
+    },
+    "campaignWriterCaller": {
+      "sourcePath": "docs/migration/lot10b-evidence/run-hpdl-campaign.mjs",
+      "sha256": "ddb3bf22034b8210303b487c9d0eed9bbef5d5f864e0dc184907b6c2b9538799",
+      "bytes": 8285
+    },
+    "partialComparator": {
+      "sourcePath": "scripts/compare-window-question-checkpoint-parity.py",
+      "sha256": "44ab7c0be31efb257353733ec443e5f1969e79ace911061fb19d573bcb751e9c",
+      "bytes": 20790
+    },
+    "sharedComparisonCore": {
+      "sourcePath": "scripts/compare-window-question-public-parity.py",
+      "sha256": "0809463252156d4459123e469809222dcd0ead583c57f2003ad9e169f4e662e6",
+      "bytes": 59673
+    },
+    "checkpoint": {
+      "sourcePath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+      "sha256": "871f8cd0df7c74f0ce54bbe046f0e54f16d025686adf4fc7bbe8531f71c2fef0",
+      "bytes": 177532943
+    },
+    "diagnosedExecution": {
+      "sourcePath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+      "sha256": "f3fc927792b2574c32dd76aaa996b503b33925923051bf207a90f1cac4736e6f",
+      "bytes": 10116
+    },
+    "publicJournal": {
+      "sourcePath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl.gz",
+      "sha256": "d3a9535e50a66132e37bb3387bdc2c4c45cd0bd000c2a7bb2b819fa2e7de4a13",
+      "bytes": 38720
+    }
+  },
+  "sourceInputsAfter": {
+    "generator": {
+      "sourcePath": "docs/migration/lot10b-evidence/run-hpdl-clocked-diagnostic.py",
+      "sha256": "552394fac5d15de668a48b34b2a55f79859d2b40fcaa0de20af3f3c011ea5975",
+      "bytes": 24462
+    },
+    "cumulativeClockReader": {
+      "sourcePath": "docs/migration/lot10b-evidence/run-hpdl-clocked-proof.py",
+      "sha256": "e959e8d9b7ed5875bc9843393aeae44586674229fccb951279097c4c75195971",
+      "bytes": 36304
+    },
+    "writerChecker": {
+      "sourcePath": "docs/migration/lot10b-evidence/check-stream-evidence-json.mjs",
+      "sha256": "0511eb7eebe0313386db269f2cbee2f019d8e3f2a7397728fcdd5500162733eb",
+      "bytes": 19528
+    },
+    "streamWriter": {
+      "sourcePath": "docs/migration/lot10b-evidence/stream-evidence-json.mjs",
+      "sha256": "96ac2ddbaac8cc62126f6674301b2362301895f44ce90e5dbd1dec9fb6fc87ca",
+      "bytes": 6601
+    },
+    "campaignWriterCaller": {
+      "sourcePath": "docs/migration/lot10b-evidence/run-hpdl-campaign.mjs",
+      "sha256": "ddb3bf22034b8210303b487c9d0eed9bbef5d5f864e0dc184907b6c2b9538799",
+      "bytes": 8285
+    },
+    "partialComparator": {
+      "sourcePath": "scripts/compare-window-question-checkpoint-parity.py",
+      "sha256": "44ab7c0be31efb257353733ec443e5f1969e79ace911061fb19d573bcb751e9c",
+      "bytes": 20790
+    },
+    "sharedComparisonCore": {
+      "sourcePath": "scripts/compare-window-question-public-parity.py",
+      "sha256": "0809463252156d4459123e469809222dcd0ead583c57f2003ad9e169f4e662e6",
+      "bytes": 59673
+    },
+    "checkpoint": {
+      "sourcePath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+      "sha256": "871f8cd0df7c74f0ce54bbe046f0e54f16d025686adf4fc7bbe8531f71c2fef0",
+      "bytes": 177532943
+    },
+    "diagnosedExecution": {
+      "sourcePath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+      "sha256": "f3fc927792b2574c32dd76aaa996b503b33925923051bf207a90f1cac4736e6f",
+      "bytes": 10116
+    },
+    "publicJournal": {
+      "sourcePath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl.gz",
+      "sha256": "d3a9535e50a66132e37bb3387bdc2c4c45cd0bd000c2a7bb2b819fa2e7de4a13",
+      "bytes": 38720
+    }
+  },
+  "sourceInputsUnchanged": true,
+  "allDeclaredPhasesReturnedZero": false,
+  "diagnosedExecutionValidated": true,
+  "allDeclaredOutputsRetained": false,
+  "diagnosticEvidenceComplete": false,
+  "diagnosedNativeSourceManifestDigest": "318153c14c7766c9d007f1b2ede4fa03ce940d62b1369251339e0174af79c306",
+  "gameHostRun": false,
+  "nativeAgentRun": false,
+  "gameplayDurationMeasured": false,
+  "campaignPassedEstablished": false,
+  "observedActions": null,
+  "observedLevelsCompleted": null,
+  "completeActionCountEstablished": false,
+  "errors": [],
+  "artifacts": {
+    "clock-before.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/clock-before.json",
+      "sha256": "a45abdc932923c3fcb931f747f0c906fe7a5bbbcaf6c375e0a8ae81a25ffe8b1",
+      "bytes": 3984
+    },
+    "diagnostic-begin.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/diagnostic-begin.json",
+      "sha256": "8ec154862d2e846b8c499af364714c0f77f41d5a37bdd7919019b052aed0d36b",
+      "bytes": 5244
+    },
+    "inputs-after.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/inputs-after.json",
+      "sha256": "0f6d960111ee7c7dbc01ae0a063ccb7fed88668a0d4215ed3a330b26afa06722",
+      "bytes": 2287
+    },
+    "inputs-before.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/inputs-before.json",
+      "sha256": "f01fcd5aac8cb6c5091170951016c93bdc20e2b224737c255bd6e3e76e5a9bd6",
+      "bytes": 5027
+    },
+    "parity-child.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/parity-child.json",
+      "sha256": "3348f1cd3fbb5bd76793e21da37a876e5c273abbb728d95e83a1b3c23416e406",
+      "bytes": 1567
+    },
+    "parity-phase.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/parity-phase.json",
+      "sha256": "c73c81244a3933286b4b74a71424dfdf4f5715c416545774ecd71c48b11acdca",
+      "bytes": 1987
+    },
+    "parity.log": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/parity.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "retained-inputs/campaignWriterCaller.mjs": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/retained-inputs/campaignWriterCaller.mjs",
+      "sha256": "ddb3bf22034b8210303b487c9d0eed9bbef5d5f864e0dc184907b6c2b9538799",
+      "bytes": 8285
+    },
+    "retained-inputs/cumulativeClockReader.py": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/retained-inputs/cumulativeClockReader.py",
+      "sha256": "e959e8d9b7ed5875bc9843393aeae44586674229fccb951279097c4c75195971",
+      "bytes": 36304
+    },
+    "retained-inputs/generator.py": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/retained-inputs/generator.py",
+      "sha256": "552394fac5d15de668a48b34b2a55f79859d2b40fcaa0de20af3f3c011ea5975",
+      "bytes": 24462
+    },
+    "retained-inputs/partialComparator.py": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/retained-inputs/partialComparator.py",
+      "sha256": "44ab7c0be31efb257353733ec443e5f1969e79ace911061fb19d573bcb751e9c",
+      "bytes": 20790
+    },
+    "retained-inputs/sharedComparisonCore.py": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/retained-inputs/sharedComparisonCore.py",
+      "sha256": "0809463252156d4459123e469809222dcd0ead583c57f2003ad9e169f4e662e6",
+      "bytes": 59673
+    },
+    "retained-inputs/streamWriter.mjs": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/retained-inputs/streamWriter.mjs",
+      "sha256": "96ac2ddbaac8cc62126f6674301b2362301895f44ce90e5dbd1dec9fb6fc87ca",
+      "bytes": 6601
+    },
+    "retained-inputs/writerChecker.mjs": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/retained-inputs/writerChecker.mjs",
+      "sha256": "0511eb7eebe0313386db269f2cbee2f019d8e3f2a7397728fcdd5500162733eb",
+      "bytes": 19528
+    },
+    "writer-check.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer-check.json",
+      "sha256": "4f23d6f17a6de917fbc2c86415667191944a52ec62ea85ed9bb257aea9944ffe",
+      "bytes": 13242
+    },
+    "writer-child.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer-child.json",
+      "sha256": "06cdb93e141075c91108aed7da2340c5d53ff0d3681c208f09b0a045a6d80f28",
+      "bytes": 1389
+    },
+    "writer-phase.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer-phase.json",
+      "sha256": "95d64866d343592a70d3fe182f32940f27336077d83b1097d5ad9cc9266589dc",
+      "bytes": 1481
+    },
+    "writer.log": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer.log",
+      "sha256": "73c6fe5a12226c9ad7253083c1377e677f5f59ef64e3b910fe540b7084bd01b0",
+      "bytes": 2217
+    }
+  },
+  "artifactsWithIncompleteFingerprint": [],
+  "qualification": "Only the two named evidence tools may run. Their exit codes and retained outputs do not establish a game result. The original campaign remains separate and unchanged. Preparation, children, failure, timeout and retention are charged without refund. Helper copies preserve the exact diagnostic inputs even if the current helpers later change. The final debit additionally includes receipt writing and hashing before the atomic ledger update; no elapsed duration is truncated."
+}

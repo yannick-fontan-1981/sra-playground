@@ -1,0 +1,491 @@
+{
+  "module_id": "parameterized_control",
+  "declarations": [
+    {
+      "id": "principle.relative_settings_compose_through_observed_axis_relations",
+      "kind": "principle",
+      "family_ref": "family.interaction_configuration",
+      "abstraction_level": "causal_variant",
+      "general_principle_refs": [
+        "principle.action_conditioned_multiframe_transition_opens_process_supposition"
+      ],
+      "premises": [
+        "relative_population_correspondence_and_current_controls_can_motivate_an_inverse_setting_experiment"
+      ],
+      "invariants": [
+        "preserve_alternative_affectations",
+        "measure_effect_from_current_setting",
+        "unknown_gain_is_not_zero",
+        "source_declared_reference_mask_preserves_all_offsets_and_holes",
+        "overrepresented_value_is_a_revisable_empty_sample_not_a_palette_role",
+        "source_selects_hypotheses_and_witnesses"
+      ],
+      "falsifiers": [
+        "actual_selection_or_setting_response_contradicts_the_model",
+        "current_population_or_completion_contradicts_the_reference_mask"
+      ],
+      "reason_refs": [
+        "reason.current_relative_setting_question_has_bounded_current_means"
+      ]
+    },
+    {
+      "id": "policy.parameterized_control_question",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.program.defaults",
+          "all_conditions": [],
+          "static_facts": {
+            "program_axis_model_admitted": false
+          }
+        },
+        {
+          "id": "projection.program.unknown",
+          "all_conditions": [
+            {
+              "field": "program_unknown",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.program.selection",
+          "all_conditions": [
+            {
+              "field": "program_geometry_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_unique_pair",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_point_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "committed_plan_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "incoming_declared_route_engagement_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "program_selection_ready",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_full_relative_equal",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "program_description_admitted": true,
+            "program_axis_model_admitted": false,
+            "program_question_ref": "question.test_relative_population_through_current_settings",
+            "program_expected_relation_ref": "expectation.current_setting_or_population_response_reconciled",
+            "program_falsifier_refs": [
+              "falsifier.current_marker_or_population_breaks_the_selected_association",
+              "falsifier.observed_axis_prediction_disagrees",
+              "falsifier.relative_pattern_is_not_accepted"
+            ]
+          },
+          "templated_facts": {
+            "program_witness_claim_ref": "claim.parameterized_control.{witness_token}"
+          }
+        },
+        {
+          "id": "projection.program.probe",
+          "all_conditions": [
+            {
+              "field": "program_geometry_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_unique_pair",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_point_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "committed_plan_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "incoming_declared_route_engagement_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "program_probe_ready",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_direction_axis_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "program_description_admitted": true,
+            "program_axis_model_admitted": false,
+            "program_question_ref": "question.test_relative_population_through_current_settings",
+            "program_expected_relation_ref": "expectation.current_setting_or_population_response_reconciled",
+            "program_falsifier_refs": [
+              "falsifier.current_marker_or_population_breaks_the_selected_association",
+              "falsifier.observed_axis_prediction_disagrees",
+              "falsifier.relative_pattern_is_not_accepted"
+            ]
+          },
+          "templated_facts": {
+            "program_witness_claim_ref": "claim.parameterized_control.{witness_token}"
+          }
+        },
+        {
+          "id": "projection.program.population_model",
+          "all_conditions": [
+            {"field": "program_geometry_complete", "operator": "equals", "expected": true},
+            {"field": "program_unique_pair", "operator": "equals", "expected": true},
+            {"field": "program_point_available", "operator": "equals", "expected": true},
+            {"field": "program_population_model_ready", "operator": "equals", "expected": true},
+            {"field": "population_model_observation_consistent", "operator": "equals", "expected": true},
+            {"field": "population_transition_bound", "operator": "equals", "expected": true},
+            {"field": "committed_plan_present", "operator": "equals", "expected": false},
+            {"field": "incoming_declared_route_engagement_present", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {
+            "applicable": true,
+            "program_description_admitted": false,
+            "program_axis_model_admitted": true,
+            "program_population_model_admitted": true,
+            "program_question_ref": "question.test_relative_population_through_current_settings",
+            "program_expected_relation_ref": "expectation.current_setting_or_population_response_reconciled",
+            "program_falsifier_refs": ["falsifier.observed_axis_prediction_disagrees", "falsifier.relative_pattern_is_not_accepted"]
+          },
+          "templated_facts": {"program_witness_claim_ref": "claim.parameterized_control.{witness_token}"}
+        },
+        {
+          "id": "projection.program.axis",
+          "all_conditions": [
+            {
+              "field": "program_geometry_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_unique_pair",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_point_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "committed_plan_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "incoming_declared_route_engagement_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "program_axis_ready",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_full_relative_equal",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "program_description_admitted": false,
+            "program_axis_model_admitted": true,
+            "program_question_ref": "question.test_relative_population_through_current_settings",
+            "program_expected_relation_ref": "expectation.current_setting_or_population_response_reconciled",
+            "program_falsifier_refs": [
+              "falsifier.current_marker_or_population_breaks_the_selected_association",
+              "falsifier.observed_axis_prediction_disagrees",
+              "falsifier.relative_pattern_is_not_accepted"
+            ],
+            "program_fixed_other_members": true,
+            "program_fixed_other_controls": true,
+            "program_unobserved_axes_fixed_at_current": true
+          },
+          "templated_facts": {
+            "program_witness_claim_ref": "claim.parameterized_control.{witness_token}"
+          }
+        },
+        {
+          "id": "projection.program.inverse",
+          "all_conditions": [
+            {
+              "field": "program_geometry_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_unique_pair",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_point_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "committed_plan_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "incoming_declared_route_engagement_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "program_inverse_ready",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_full_relative_equal",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "program_inverse_domain_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "program_description_admitted": true,
+            "program_axis_model_admitted": false,
+            "program_question_ref": "question.test_relative_population_through_current_settings",
+            "program_expected_relation_ref": "expectation.current_setting_or_population_response_reconciled",
+            "program_falsifier_refs": [
+              "falsifier.current_marker_or_population_breaks_the_selected_association",
+              "falsifier.observed_axis_prediction_disagrees",
+              "falsifier.relative_pattern_is_not_accepted"
+            ],
+            "reasoning_tree_node_id": "composition.family.parameterized_program.observed_axis_relative_population_inverse",
+            "reasoning_tree_node_address": "2.13.8",
+            "reasoning_tree_parent_key": "composition.family.parameterized_program",
+            "reasoning_tree_parent_address": "2.13",
+            "reasoning_tree_version": "composition-target-tree_v-1.0",
+            "reasoning_tree_creator_alert": "scoped_inverse_selection_is_not_full_actuator_law_or_terminal_proof"
+          },
+          "templated_facts": {
+            "program_witness_claim_ref": "claim.parameterized_control.{witness_token}"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.program.population_known_inverse_before_further_calibration",
+          "all_conditions": [
+            {"field": "program_population_context", "operator": "equals", "expected": true},
+            {"field": "program_inverse_ready", "operator": "equals", "expected": true},
+            {"field": "program_inverse_domain_complete", "operator": "equals", "expected": true}
+          ],
+          "reason_ref": "reason.current_relative_setting_question_has_bounded_current_means"
+        },
+        {
+          "id": "tier.program.current_question",
+          "all_conditions": [
+            {
+              "field": "program_description_admitted",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.current_relative_setting_question_has_bounded_current_means"
+        },
+        {
+          "id": "tier.program.current_axis_extension",
+          "all_conditions": [
+            {
+              "field": "program_axis_model_admitted",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.actual_axis_response_prepares_a_revisable_inverse_question"
+        },
+        {
+          "id": "tier.program.unknown",
+          "all_conditions": [
+            {
+              "field": "program_unknown",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.preserve_unresolved_setting_hypotheses"
+        }
+      ],
+      "selection_tie_breakers": [
+        {"field": "population_moved_count", "preferred_order": "minimize"},
+        {"field": "population_displacement_sum", "preferred_order": "minimize"},
+        {"field": "population_inverse_cost", "preferred_order": "minimize"},
+        {
+          "field": "member_order",
+          "preferred_order": "minimize"
+        },
+        {
+          "field": "pad_order",
+          "preferred_order": "minimize"
+        },
+        {
+          "field": "direction_order",
+          "preferred_order": "minimize"
+        },
+        {
+          "field": "assignment_order",
+          "preferred_order": "minimize"
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.parameterized_control_witness"
+      },
+      "invariants": [
+        "one_current_question_before_reevaluation",
+        "relative_arrangement_not_fixed_guide",
+        "retain_current_population_assignment_while_geometry_and_identities_revalidate",
+        "completed_contributor_opens_the_next_member_of_the_same_assignment",
+        "geometric_distance_is_not_action_cost_when_gains_are_unknown",
+        "no_unknown_coefficients_filled"
+      ],
+      "reason_refs": [
+        "reason.current_relative_setting_question_has_bounded_current_means"
+      ]
+    },
+    {
+      "id": "rule.parameterized_control_witness",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "relation_family": "structural",
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "premises": [
+        "current_complete_geometry_and_source_selected_revisable_question"
+      ],
+      "invariants": [
+        "roles_and_local_axis_model_remain_revisable",
+        "unknown_axes_remain_unknown",
+        "only_current_settings_vary",
+        "actual_action_authorization_is_independent"
+      ],
+      "falsifiers": [
+        "current_observation_or_axis_response_contradicts_the_question"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "witness.parameterized_control.{witness_token}",
+          "kind": "schema",
+          "label": "current scoped relative setting composition question",
+          "required_fields": [
+            "snapshot",
+            "frame_ref",
+            "program_witness_claim_ref",
+            "program_question_ref"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.parameterized_control_witness.v1",
+            "commitment": "revisable",
+            "action_authorization": false,
+            "canonical_fact_projection_enabled": true,
+            "full_actuator_model_acquired": false,
+            "unobserved_axes_and_other_controls_unqualified": true
+          },
+          "attribute_bindings": {
+            "snapshot": "snapshot",
+            "operational_scene_ref": "frame_ref",
+            "scope_counter": "scope_counter",
+            "question_ref": "program_question_ref",
+            "witness_claim_ref": "program_witness_claim_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.parameterized_control.{witness_token}",
+          "predicate": "current_relative_lattices_support_conditional_setting_question",
+          "family": "structural",
+          "epistemic_status": "supported",
+          "required_fields": [
+            "snapshot",
+            "frame_ref",
+            "program_question_ref"
+          ],
+          "required_term_patterns": [
+            "witness.parameterized_control.{witness_token}"
+          ],
+          "argument_patterns": [
+            "witness.parameterized_control.{witness_token}",
+            "{frame_ref}"
+          ],
+          "static_attributes": {
+            "authorizes_action": false,
+            "universal_world_law": false,
+            "requires_current_revalidation": true
+          },
+          "attribute_bindings": {
+            "operational_scene_ref": "frame_ref",
+            "question_ref": "program_question_ref"
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.current_relative_setting_question_has_bounded_current_means"
+      ]
+    }
+  ]
+}

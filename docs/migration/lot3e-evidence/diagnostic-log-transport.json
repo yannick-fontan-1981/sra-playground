@@ -1,0 +1,48 @@
+{
+  "schema": "logos-engine.diagnostic-log-transport.v1",
+  "files": [
+    {
+      "original": {
+        "path": "diagnostic/fogw-contribution-output.log",
+        "bytes": 451,
+        "sha256": "1a9af6ccb68bb5610d35314ae96e223f1d688c0a6e0704ee95702705bb3632c3"
+      },
+      "compressed": {
+        "path": "diagnostic/fogw-contribution-output.log.gz",
+        "bytes": 269,
+        "sha256": "418235dbcf33479d09fc6a4f6ff71841d811b789f306ae2b8f61792851213d3a"
+      },
+      "gzipMtime": 0,
+      "roundTripBytesEqual": true
+    },
+    {
+      "original": {
+        "path": "diagnostic/fogw-public-native-review.log",
+        "bytes": 1409,
+        "sha256": "1f3fbdf2b0aee29856b0ba25e5ed1ef54e6cb379456b0c4a1ca450f8cee5ef2a"
+      },
+      "compressed": {
+        "path": "diagnostic/fogw-public-native-review.log.gz",
+        "bytes": 666,
+        "sha256": "458937f7d0d2d4522c30ec955187a599b6447a58a383eff05a19fa3af7dae80f"
+      },
+      "gzipMtime": 0,
+      "roundTripBytesEqual": true
+    },
+    {
+      "original": {
+        "path": "diagnostic/fogw-public-source-replay.log",
+        "bytes": 937,
+        "sha256": "26e551acfdc0f845185c8c36bd44889f740546a63896033b262bf0fc917244aa"
+      },
+      "compressed": {
+        "path": "diagnostic/fogw-public-source-replay.log.gz",
+        "bytes": 548,
+        "sha256": "4a91dfc8d3118a6f260dd23d60b04107f8e0f7f370711b60faf74b8a93c403b4"
+      },
+      "gzipMtime": 0,
+      "roundTripBytesEqual": true
+    }
+  ],
+  "qualification": "Lossless deterministic gzip of the three completed diagnostic logs. Local originals are preserved; no command, case or source calculation is rerun."
+}

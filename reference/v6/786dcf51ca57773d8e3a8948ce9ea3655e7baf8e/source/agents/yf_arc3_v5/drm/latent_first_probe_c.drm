@@ -1,0 +1,43 @@
+{
+  "module_id":"latent_first_probe_c",
+  "declarations":[{
+    "id":"policy.latent_first_probe_c","kind":"selection_policy","evaluation":"declared_eligibility_single",
+    "supported_operators":["SELECT"],"input_contract":"yf_arc3_v5.authority_input.selection.v1",
+    "output_contract":"yf_arc3_v5.authority_output.selection.v1",
+    "declared_alternative_refs":["latent.first_probe.question"],"selection_required_fact_fields":["alternative_ref"],
+    "selection_eligibility_conditions":[{"field":"eligible","operator":"equals","expected":true}],
+    "fact_projections":[{"id":"projection.latent.first_probe.question","all_conditions":[
+      {"field":"alternative_ref","operator":"equals","expected":"latent.first_probe.question"},
+      {"field":"edit_law_known","operator":"equals","expected":false}],"static_facts":{"eligible":true}}],
+    "meaning_template_ref_by_alternative":{"latent.first_probe.question":"rule.latent_first_probe_c"},
+    "premises":["current_acquired_control_and_reference_hypothesis"],
+    "invariants":["particularity_is_not_proved_error","bounded_primitive_question","unknown_safety_and_recovery_retained","no_ACT"],
+    "falsifiers":["no_current_input_binding","unexpected_coupled_or_domain_effect"],
+    "reason_refs":["reason.actual_edit_observation_is_needed_before_a_repair_law_can_be_selected"]
+  },{
+    "id":"rule.latent_first_probe_c","kind":"rule","evaluation":"project_requested_conclusions",
+    "supported_operators":["DERIVE"],"input_contract":"yf_arc3_v5.authority_input.derivation.v1",
+    "output_contract":"yf_arc3_v5.authority_output.derivation.v1","relation_family":"epistemic",
+    "term_templates":[{"id_pattern":"question.latent.first_probe.{projection_ref}","kind":"goal",
+      "label":"Observe a bounded edit of a particularity under the same reference alternatives",
+      "required_fields":["projection_ref","parent_goal_ref","input_ref","possible_observed_outcomes"],
+      "attribute_bindings":{"parent_goal_ref":"parent_goal_ref","input_ref":"input_ref","action_ref":"action_ref",
+        "point":"point","payload":"payload","primitive_bound":"primitive_bound","command_cost":"command_cost",
+        "current_input_bound":"current_input_bound","primitive_financed":"primitive_financed",
+        "reference_value_alternatives":"reference_value_alternatives","observed_value_ref":"observed_value_ref",
+        "reference_refs":"reference_refs","frozen_why":"frozen_why","preservation_refs":"preservation_refs",
+        "falsifier_ref":"falsifier_ref","observation_contract":"observation_contract",
+        "possible_observed_outcomes":"possible_observed_outcomes","effect_scope_known":"effect_scope_known",
+        "recovery_cost_known":"recovery_cost_known"},
+      "static_attributes":{"status":"proposed","no_action_authority":true,"edit_law_known":false}}],
+    "claim_templates":[{"id_pattern":"claim.latent.first_probe.{projection_ref}",
+      "predicate":"proposes_bounded_latent_particularity_observation","family":"epistemic","epistemic_status":"proposed",
+      "argument_patterns":["{parent_goal_ref}","question.latent.first_probe.{projection_ref}"],
+      "required_term_patterns":["{parent_goal_ref}","question.latent.first_probe.{projection_ref}"],
+      "required_fields":["projection_ref","parent_goal_ref","input_ref"],
+      "attribute_bindings":{"frozen_why":"frozen_why","possible_observed_outcomes":"possible_observed_outcomes"}}],
+    "premises":["test_the_correspondence_hypothesis_with_actual_full_field_observation"],
+    "invariants":["do_not_promise_correction_or_reversibility","preserve_alternatives"],
+    "falsifiers":["unknown_effect_contradicts_the_hypothesis"],"reason_refs":["reason.a_local_test_completes_missing_causal_evidence"]
+  }]
+}

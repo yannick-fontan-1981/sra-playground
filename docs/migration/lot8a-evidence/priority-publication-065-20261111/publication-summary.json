@@ -1,0 +1,179 @@
+{
+  "schema": "logos-engine.lot8a.priority065-publication-summary.v1",
+  "status": "published_private_with_official_cost_unmeasured",
+  "recordedAt": "2026-11-12T01:13:26.383567+00:00",
+  "publishedAtClientTime": "2026-11-11T22:11:05.691811-03:00",
+  "clientTimezone": "Etc/GMT+3",
+  "nativeVersion": "0.65.0",
+  "siteVersion": 106,
+  "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "publishedSourceCommit": "b9555039d60d5d9f771dd96b763c40f389dc62dd",
+  "candidateNative": {
+    "fileCount": 324,
+    "digest": "936fa2bf81965272b1ddbab4a5c01f98aeb6a48188c1f7a8c91de226598c5e43"
+  },
+  "publishedPredecessor": {
+    "nativeVersion": "0.64.0",
+    "siteVersion": 105,
+    "sourceCommit": "deb9ebbbb06a8a35940b2e8f3fefdbed690ce772",
+    "nativeFileCount": 322,
+    "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+    "sameSourceAsPreparedBaseline": true
+  },
+  "entryCoverage": {
+    "connected": 67,
+    "declared": 76,
+    "percent": 88.2,
+    "groups": [
+      {
+        "id": "goal_access",
+        "connected": 12,
+        "declared": 12
+      },
+      {
+        "id": "window_constraints",
+        "connected": 21,
+        "declared": 21
+      },
+      {
+        "id": "surface",
+        "connected": 10,
+        "declared": 10
+      },
+      {
+        "id": "factored_material_return",
+        "connected": 24,
+        "declared": 33
+      }
+    ],
+    "fullV6Parity": false
+  },
+  "retainedTests": {
+    "files": 145,
+    "tests": 5606,
+    "passed": 5606,
+    "failed": 0,
+    "rerunForPublication": false
+  },
+  "retainedRegressions": {
+    "cases": 11,
+    "comparisons": 187,
+    "reconciledAttempts": true,
+    "newLiveGameClaims": false
+  },
+  "retainedGraphScope": {
+    "checks": 64,
+    "pairedPoints": 58,
+    "unattributedDifferences": 0,
+    "preparedOnly": true,
+    "officialPerformanceEligible": false,
+    "strictCommonGraphParity": false,
+    "sourceProvenanceReconciledToActual064": true
+  },
+  "newBuild": {
+    "status": "passed",
+    "elapsedSeconds": 10.385504197000046,
+    "frozenInputsUnchangedBeforeAndAfter": true,
+    "worker": {
+      "path": "dist/assets/v6-agent-worker-BJf3bINh.js",
+      "bytes": 6952399,
+      "sha256": "df7422df7d174e7e45441e6f13dabe5ca7a8c87f2bda7c6cb05be4634537d552"
+    },
+    "workerIdenticalToPreviouslyValidatedBuild": true
+  },
+  "officialCost": {
+    "measured": false,
+    "accepted": false,
+    "measuredSessions": 0,
+    "deferredByExplicitPriorityPublicationInstruction": true,
+    "futureRule": "Global complete-session median increase strictly below10percent separately for STCK and SMLP; a phase above10percent can pass if both global criteria pass."
+  },
+  "completeMigrationGates": {
+    "allRequiredCapabilitiesTransferred": false,
+    "fullCommonCallerDifferentialParity": false,
+    "allDeclaredFamiliesIntegrated": false,
+    "commonGraphEditingCoversExecutedPrograms": false,
+    "pythonNumericSemanticsCovered": false,
+    "fullCampaignRegression": false
+  },
+  "coordination": {
+    "peerAvailabilityWait": false,
+    "peerQuietAcknowledgementsRequired": false,
+    "ordinaryWorkGlobalLockAcquired": false,
+    "publicationExclusiveSeconds": 62.072281,
+    "publicationLockReleasedByOwner": true,
+    "sameLockFileRetained": true,
+    "performanceLockAcquired": false,
+    "forceGitPushUsed": false
+  },
+  "evidence": {
+    "authorization.json": {
+      "path": "docs/migration/lot8a-evidence/priority-publication-065-20261111/authorization.json",
+      "bytes": 1307,
+      "sha256": "bfdf08be44ad164eaf366f24ade73d11c1bc304097f83321a16755af48da5fe0"
+    },
+    "actual-publication-064-observation.json": {
+      "path": "docs/migration/lot8a-evidence/priority-publication-065-20261111/actual-publication-064-observation.json",
+      "bytes": 3624,
+      "sha256": "2e353d9a06e0692fdd7e26e0d7d57f0d7d183062c6196ce88de633169b913ac4"
+    },
+    "source-reconciliation.json": {
+      "path": "docs/migration/lot8a-evidence/priority-publication-065-20261111/source-reconciliation.json",
+      "bytes": 61529,
+      "sha256": "0fa07befb9d117af195093fce09e3b003d548e57f6ed733f7f39f3b326675535"
+    },
+    "qualification-reuse-review.json": {
+      "path": "docs/migration/lot8a-evidence/priority-publication-065-20261111/qualification-reuse-review.json",
+      "bytes": 53143,
+      "sha256": "132dbd433a1f44eb03874876fb2234cdbbebec5d11d63d0599a6e2544386e533"
+    },
+    "build-preparation.json": {
+      "path": "docs/migration/lot8a-evidence/priority-publication-065-20261111/build-preparation.json",
+      "bytes": 81126,
+      "sha256": "154a02646c62b204f6f1b1ce5aa1ceee878d39b326063104eb7ed9780b2dd439"
+    },
+    "fixture-restoration.json": {
+      "path": "docs/migration/lot8a-evidence/priority-publication-065-20261111/fixture-restoration.json",
+      "bytes": 3432,
+      "sha256": "2128d38851f9a731b12b12e3641a61268e45bc5afdb0b0776fe260520a109479"
+    },
+    "build-execution.json": {
+      "path": "docs/migration/lot8a-evidence/priority-publication-065-20261111/build-execution.json",
+      "bytes": 14093,
+      "sha256": "b5af3b1dc02b4c170819cf8fa1f60e02af978e2c7ddbef2295f9bf8639aeecb7"
+    },
+    "archive-integrity.json": {
+      "path": "docs/migration/lot8a-evidence/priority-publication-065-20261111/archive-integrity.json",
+      "bytes": 12838,
+      "sha256": "1bb39d74d0ce636a6fdb836fbb545ef7c5732bd800fec052faa592e3a11ac7a1"
+    },
+    "archive-container-comparison.json": {
+      "path": "docs/migration/lot8a-evidence/priority-publication-065-20261111/archive-container-comparison.json",
+      "bytes": 1100,
+      "sha256": "111c011bdb33540f001defeacc13034dbefbef4fb700a12dc946aef3e0bcacc2"
+    },
+    "publication-result.json": {
+      "path": "docs/migration/lot8a-evidence/priority-publication-065-20261111/publication-result.json",
+      "bytes": 2065,
+      "sha256": "bfde58652e30d3e0700909633b24c411956a79550638376d7e076eb5fba84e45"
+    },
+    "publication-lock-released.json": {
+      "path": "docs/migration/lot8a-evidence/priority-publication-065-20261111/publication-lock-released.json",
+      "bytes": 804,
+      "sha256": "116405ac052b39a162a1cda98c0ac76984ee94b3e487fad2f91f3edf173c44b3"
+    },
+    "checkpoint-before-publication.json": {
+      "path": "docs/migration/lot8a-evidence/priority-publication-065-20261111/checkpoint-before-publication.json",
+      "bytes": 4226,
+      "sha256": "5f6c148833a0260a18c2bb12ab8bb5a6a02822258edbce9dc82666e254a276f4"
+    }
+  },
+  "historicalQualification": {
+    "path": "docs/migration/lot8a-evidence/integration-published-063-01/summary.json",
+    "bytes": 20717,
+    "sha256": "3b72812508bf5c07200d0122c36e1e013763c0f3304a7fd97add6ad9ef94c262"
+  },
+  "nextOrdinaryWork": "8B parallel_branch_routing: transfer contract and small independent original BranchRouting corpus, then native port on own branch.",
+  "nextPerformanceWork": "Official cost qualification against actual published0.64, separate bounded exclusive measurement window.",
+  "LKEY": "permanently_closed"
+}

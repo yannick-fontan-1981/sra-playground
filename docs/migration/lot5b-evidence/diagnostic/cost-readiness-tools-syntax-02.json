@@ -1,0 +1,45 @@
+{
+  "schema": "logos-engine.lot5b-cost-readiness-tools-syntax.v1",
+  "status": "syntax_passed",
+  "recordedAt": "2026-11-11T01:22:07.704275+00:00",
+  "method": "Python ast.parse of both complete corrected source files only, under the shared performance lock",
+  "performanceLock": {
+    "path": "/workspace/shared/sra-coordination/performance.lock",
+    "mode": "shared"
+  },
+  "coordinatorAuthorization": {
+    "releaseObservedAt": "2026-11-11T01:21:05+00:00",
+    "scope": "Produce syntax receipt 02 only; no other execution"
+  },
+  "previousReceipt": {
+    "path": "docs/migration/lot5b-evidence/diagnostic/cost-readiness-tools-syntax-01.json",
+    "sha256": "93f43dab494d471d0d50b8a0a48aa905971d7d903e5fb404e48ba357a8926fb2",
+    "bytes": 1347
+  },
+  "previousReceiptUnchanged": true,
+  "files": [
+    {
+      "path": "docs/migration/lot5b-evidence/finalize-cost-readiness.py",
+      "sha256": "475551f6f4ce84400c46e549930bfe1ef77afda073302f112fc985ff215ccbb9",
+      "bytes": 82327,
+      "lines": 1142,
+      "topLevelFunctions": 18,
+      "status": "syntax_parsed"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/record-publication-inputs.py",
+      "sha256": "5f59259414ddeb64e54c07456ae50ed205d57d5720129c5ed5975fbbbd096b8f",
+      "bytes": 18979,
+      "lines": 259,
+      "topLevelFunctions": 1,
+      "status": "syntax_parsed"
+    }
+  ],
+  "scriptBodiesExecuted": false,
+  "functionalValidationExecuted": false,
+  "measurementExecuted": false,
+  "readinessWritten": false,
+  "publicationExecuted": false,
+  "correction": "The actual published 4C predecessor is distinct from the candidate archive Git base. The candidate base remains exactly archive.baseCommit and the declared sourceBaseCommit, linked to retained Git identity/ancestry commands and results. The publication-input verifier preserves both identities and the ancestry proof.",
+  "qualification": "Syntax-only verification after the coordinator released the 4C quiet interval. No script body, Git operation, test, build, game, oracle, benchmark or source freeze was executed. The first syntax receipt remains unchanged. Actual 4C publication and final integrated evidence are still required before 5B readiness."
+}

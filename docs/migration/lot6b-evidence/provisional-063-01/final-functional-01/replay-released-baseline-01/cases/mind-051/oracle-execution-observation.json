@@ -1,0 +1,94 @@
+{
+  "schema": "logos-engine.lot6b.single-released-replay-terminal-observation.v1",
+  "case": "mind-051",
+  "game": "MIND",
+  "startedAt": "2026-11-11T19:45:57.830876+00:00",
+  "finishedAt": "2026-11-11T19:46:57.837912+00:00",
+  "elapsedSeconds": 60.006455837999965,
+  "exitCode": 0,
+  "command": [
+    "flock",
+    "-s",
+    "-n",
+    "/workspace/shared/sra-coordination/performance.lock",
+    "python",
+    "-B",
+    "docs/migration/lot6b-evidence/record-command.py",
+    "--receipt",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/bounded-command.json",
+    "--watch-manifest",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/replay-watch.json",
+    "--",
+    "timeout",
+    "--signal=KILL",
+    "630s",
+    "python",
+    "-B",
+    "scripts/run-released-public-regressions-streamlog.py",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/case-manifest.json",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051",
+    "--source-manifest",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/source-manifest.json",
+    "--node-old-space-mib",
+    "1536",
+    "--timeout-seconds",
+    "600"
+  ],
+  "declaredBy": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/execution-declaration.json",
+  "quietSeenDuringCase": [],
+  "nextCaseQueued": false,
+  "passed": true,
+  "boundedReceipt": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/bounded-command.json",
+    "status": "passed",
+    "exitCode": 0,
+    "inputsUnchanged": true,
+    "elapsedSeconds": 58.84340147200055
+  },
+  "preflight": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/preflight.json",
+    "prevalidationProcessExitedBeforeAnyReplay": true
+  },
+  "regressionSummary": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/regressions/regression-summary.json",
+    "status": "passed",
+    "executionInputsUnchanged": true,
+    "results": [
+      {
+        "case": "mind-051",
+        "passed": true,
+        "comparisonPassed": true,
+        "comparisonChecks": 17,
+        "failedChecks": [],
+        "nativeSourceBeforeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+        "nativeSourceAfterDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+        "nativeSourceUnchanged": true,
+        "immutableInputsUnchanged": true,
+        "elapsedSeconds": 53.17519067200192,
+        "timedOut": false,
+        "nodeOldSpaceMiB": 1536,
+        "nodeExitObserved": true,
+        "historicalReportProcessExitedBeforeNode": true,
+        "nodeExitedBeforeComparison": true,
+        "hostPreparationPassed": true,
+        "passiveOwnerPresencePassed": true,
+        "exitCode": 0,
+        "hostPreparation": {
+          "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/regressions/mind-051-host-preparation.json",
+          "sha256": "c4506b12b24d8a93c71aa546a95911553d24b2d52e9040f963994f5842d943a7",
+          "bytes": 8345
+        },
+        "report": {
+          "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/regressions/mind-051-replay.json.gz",
+          "sha256": "80023012f0a10a1c48e12fa0217e6a0affc7858df4f459dddb9efa32075f3d42",
+          "bytes": 6115157
+        },
+        "comparison": {
+          "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/regressions/mind-051-comparison.json",
+          "sha256": "794ffe5a71c48c23ed7108a86a99460b43782f0b47cea7dfb93d6d9496b4d895",
+          "bytes": 11067
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "logos-engine.lot5b-initial-source-opening.v1",
+  "recordedAt": "2026-11-11T00:03:59.229Z",
+  "opening": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot5b-20261110/.sites-checkout",
+    "commit_sha": "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7"
+  },
+  "version": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_f28e4f7179d08191bed4395ca79b6366",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "version_number": 88,
+    "source": {
+      "commit_sha": "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000000e68820eb734f0e08fd0016b",
+      "content_hash": "sha256:edabfe0902bbbe8457cfaa6cef49877c1b0c9400e6f945f053971d69bc7232a8",
+      "size_bytes": 29859840,
+      "file_count": 75
+    },
+    "screenshot_url": null,
+    "deployment_id": "appgdep_6af3aeff18f08191963da329ba10b5a2"
+  },
+  "deployment": {
+    "id": "appgdep_6af3aeff18f08191963da329ba10b5a2",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "title": "SRA Playground",
+    "version_id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_f28e4f7179d08191bed4395ca79b6366",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": "sediment://file_00000000e89481f8ac60f23cb2bc3b7a",
+    "provider_deployment_id": "site---6adbc388d79081918581b93b919d7258",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-10T23:56:02.578047+00:00"
+  },
+  "qualification": "Initial development predecessor only. The final cost baseline and candidate will incorporate actual10Apublication before freezing. This opening does not import unpublished work from another lane."
+}

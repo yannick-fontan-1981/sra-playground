@@ -1,0 +1,60 @@
+{
+  "status": "acknowledged_quiet_before_window",
+  "requestId": "lot7-followup-clean-repeat-f8d5097-final",
+  "announcedAt": "2026-11-11T15:07:59.348713+00:00",
+  "recordedAt": "2026-11-11T15:18:49.068423+00:00",
+  "performanceDirectory": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat",
+  "nativeDigests": {
+    "baseline": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+    "candidate": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279"
+  },
+  "allAgentsToolIdle": true,
+  "ownTrackedComputeEnded": true,
+  "noQueuedCommands": true,
+  "previewStopped": true,
+  "costNodeOptionsOverride": null,
+  "acknowledgments": [
+    {
+      "lane": "lot6b",
+      "requestId": "lot7-followup-clean-repeat-f8d5097-final",
+      "acknowledgedAt": "2026-11-11T15:08:21.385493+00:00",
+      "allAgentsToolIdle": true,
+      "noActiveCommands": true,
+      "noQueuedCommands": true,
+      "statusPath": "/workspace/shared/sra-coordination/lot6b-status.json",
+      "evidence": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/quiet-evidence/lot6b-status.json",
+        "sha256": "8272cd40139e9c6f64a5bd1d72d8392ea9f824f4819602c2b4385a7d29ecd1d3",
+        "bytes": 2909
+      }
+    },
+    {
+      "lane": "lot10b",
+      "requestId": "lot7-followup-clean-repeat-f8d5097-final",
+      "acknowledgedAt": "2026-11-11T15:08:55.842748+00:00",
+      "allAgentsToolIdle": true,
+      "noActiveCommands": true,
+      "noQueuedCommands": true,
+      "statusPath": "/workspace/shared/sra-coordination/lot10b-status.json",
+      "evidence": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/quiet-evidence/lot10b-status.json",
+        "sha256": "8cae2722d7ae4ad653612be530fa2c35ee9fcc2a55ce9d8fa78cb13e3d1ee044",
+        "bytes": 4366
+      }
+    },
+    {
+      "lane": "lot5c",
+      "requestId": "lot7-followup-clean-repeat-f8d5097-final",
+      "acknowledgedAt": "2026-11-11T15:16:27.841372+00:00",
+      "allAgentsToolIdle": true,
+      "noActiveCommands": true,
+      "noQueuedCommands": true,
+      "statusPath": "/workspace/shared/sra-coordination/lot5c-status.json",
+      "evidence": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/quiet-evidence/lot5c-status.json",
+        "sha256": "4a8f17c170ffbca5f8121913818e00ea4af47772890edb47f1a3a714d5d13e51",
+        "bytes": 4826
+      }
+    }
+  ]
+}

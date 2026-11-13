@@ -1,0 +1,43 @@
+{
+  "schema": "logos-engine.lot4b.registration-test-expectation-correction.v1",
+  "recordedAt": "2026-11-10T22:25:37.641382+00:00",
+  "status": "corrected_pending_full_scope_execution",
+  "file": "tests/v6-coupled-pair-planning.test.ts",
+  "before": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/test-expectation-correction/coupled-pair-test-before-correction.ts",
+    "sha256": "49249ef608a431b4728a49a1841635a015a8d426195c8ec3ee85bcb2930ba108",
+    "bytes": 15826
+  },
+  "after": {
+    "path": "tests/v6-coupled-pair-planning.test.ts",
+    "sha256": "d16d0298affca92a9f2fca638b256b0b04cbba528a276ed73db98bcb7ed779f8",
+    "bytes": 15850
+  },
+  "diff": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/test-expectation-correction/coupled-pair-registration.diff",
+    "sha256": "cff829bed313957ab979d78fc26cc2c57c37e0c3e07589eb452c2f42d67a8da0",
+    "bytes": 979
+  },
+  "failedReceipt": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/validation/delta-tests-run.json",
+    "sha256": "046169f7e0e0b7f0ebdd3d384ace79bb36cb8c318c849f82ab34ab981af61626",
+    "bytes": 124571
+  },
+  "nativeSourceUnchanged": true,
+  "scope": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/test-expectation-correction/test-scope.json",
+    "sha256": "b91fdb7d53922b936c8ae82ca624ea5c487ed2fad76913deaf361d6a2c0bfbc7",
+    "bytes": 31143
+  },
+  "unchangedBuildReceiptOriginal": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/validation/checks-run.json",
+    "sha256": "74e6034d12e7cc7fe408a5b23b82bc02763da673f4ac949570f6219dd20bd135",
+    "bytes": 78558
+  },
+  "unchangedBuildReceiptAlias": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/test-expectation-correction/validation/checks-run.json",
+    "sha256": "74e6034d12e7cc7fe408a5b23b82bc02763da673f4ac949570f6219dd20bd135",
+    "bytes": 78558
+  },
+  "qualification": "The single failed assertion is the exhaustive list of registered non-null window entries. The actual new Relative provider is already source-defined and tested. The existing16shared-recall-owner count and all other assertions remain intact. Copied successful build receipt retains original output paths and bytes; no build or browser rerun is inferred."
+}

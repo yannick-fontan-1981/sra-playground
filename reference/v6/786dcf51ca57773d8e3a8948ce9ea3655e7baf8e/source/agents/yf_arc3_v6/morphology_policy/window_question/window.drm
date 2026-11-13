@@ -1,0 +1,101 @@
+{
+  "module_id": "v6_window_question",
+  "declarations": [
+    {
+      "id": "schema.window_question",
+      "kind": "schema",
+      "premises": [
+        "homologous_current_boxes",
+        "observed_field_change",
+        "current_regular_word"
+      ],
+      "applicability": [
+        "conditional_configuration_experiment"
+      ],
+      "invariants": [
+        "no_game_identity",
+        "no_oracle_parameters",
+        "no_claim_of_full_physics",
+        "rank_identity_preserved_in_conditional_calculation"
+      ],
+      "falsifiers": [
+        "field_or_word_changed",
+        "payload_not_current",
+        "unexpected_setting_or_traversal_effect"
+      ],
+      "reason_refs": [
+        "0.1.1-5,19"
+      ],
+      "configuration": {
+        "goal": "G_official_completion",
+        "point_action": "ACTION6",
+        "launch_prior": "ACTION5",
+        "priority": [
+          "traversal_question",
+          "setting_question"
+        ],
+        "kind_meaning": {
+          "setting_question": "prepare_current_fields_for_conditional_homogeneous_word_coverage_then_measure_effect",
+          "traversal_question": "test_prepared_joint_coverage_and_discriminate_unknown_window_mechanics"
+        },
+        "conditions": [
+          {
+            "field": "field_control_observed",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "current_geometry_revalidated",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "conditional_coverage_complete",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "cost_admissible",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "untried_context",
+            "operator": "equals",
+            "expected": true
+          }
+        ],
+        "hypotheses": [
+          "visual_word_denotes_ranked_units",
+          "box_capacity_row_denotes_window_size",
+          "multicolour_patch_may_admit_homogeneous_colors",
+          "boxes_in_reading_order_take_first_matching_window_once",
+          "point_cycles_current_field_forward",
+          "ACTION5_is_traversal_probe_not_guaranteed_success",
+          "central_narrow_marks_may_overlay_fixed_color_field",
+          "second_color_field_may_transform_matching_units_before_later_receivers"
+        ],
+        "model": {
+          "maximal_group_required": false,
+          "one_use_for_run": true,
+          "configuration_bound": 4096,
+          "receiver_order_hypothesis": "visual_reading_order_not_rail_law",
+          "capture_hypothesis": "one_first_homogeneous_window_per_box_no_compaction",
+          "field_cycle_hypothesis": "forward_visible_domain_order",
+          "dual_field_operation_hypothesis": "PAINT",
+          "single_field_operation_hypothesis": "CAPTURE",
+          "dual_field_alternatives": [
+            "second_field_transforms_matching_rank_color",
+            "second_field_unrelated_or_nontransforming",
+            "dependency_not_yet_acquired"
+          ]
+        },
+        "tie_break": [
+          "cost",
+          "current_geometry_enumeration"
+        ],
+        "continuity": "prepared_complete_cover_precedes_alternative_edits"
+      }
+    }
+  ]
+}

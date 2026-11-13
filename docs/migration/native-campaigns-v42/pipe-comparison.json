@@ -1,0 +1,78 @@
+{
+  "schema": "logos-engine.v42.public-regression-comparison.v1",
+  "passed": true,
+  "checks": [
+    {
+      "name": "same game and target, both campaigns passed",
+      "passed": true
+    },
+    {
+      "name": "same production budgets and exact game assets",
+      "passed": true
+    },
+    {
+      "name": "same complete initial public packet hash",
+      "passed": true
+    },
+    {
+      "name": "same physical commands, full animation packet hashes and primitive boundaries",
+      "passed": true
+    },
+    {
+      "name": "same selected source prefix kinds and acquired action counts",
+      "passed": true
+    },
+    {
+      "name": "same previously reported series projection with observation-scope normalization",
+      "passed": true
+    },
+    {
+      "name": "same acquired-preparation deferrals and guards",
+      "passed": true
+    },
+    {
+      "name": "partial current-control access is not required in these previous successful prefixes",
+      "passed": true
+    },
+    {
+      "name": "new quota and relation evidence remains empty in prior successful prefixes",
+      "passed": true
+    },
+    {
+      "name": "same request outcomes and common caller revisions",
+      "passed": true
+    },
+    {
+      "name": "same final public result and retained-session counters",
+      "passed": true
+    },
+    {
+      "name": "source frozen during both campaigns and no Python agent modules",
+      "passed": true
+    },
+    {
+      "name": "same retained mechanical-domain assessments",
+      "passed": true
+    }
+  ],
+  "before": {
+    "path": "docs/migration/native-campaigns-v41/pipe-three-levels.json",
+    "sha256": "cd9a0d30b058420597d59072896188717d434b91929ec7d7270203c44c1952af",
+    "implementation": "logos-engine.typescript.v6.native-migration/0.11.0",
+    "sourceDigest": "377300aa01f2c942b6150033c61520a7c62292871ee62083ec6b78dde1fc6605",
+    "sharedDigestScope": "native_program_discovery_recall_radial_ports_cell_placement_alternating_graph_and_coupled_support_v6"
+  },
+  "after": {
+    "path": "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/docs/migration/native-campaigns-v42/pipe-three-levels.json",
+    "sha256": "0cf5a40384efc7158b340d2c9c33fa712b177af1f1ee49e50a09f614a31fcb42",
+    "implementation": "logos-engine.typescript.v6.native-migration/0.12.0",
+    "sourceDigest": "6567be12230880198a7b4b085999ecda9354487599e728ee1ae27455f7056d04",
+    "sharedDigestScope": "native_program_relations_recall_radial_ports_rooted_quota_cell_placement_alternating_graph_and_coupled_support_v6"
+  },
+  "compared": {
+    "commands": 23,
+    "completePublicPackets": 24,
+    "prefixes": 20
+  },
+  "qualification": "Compares commands, complete public packet hashes, source prefix kinds, acquisition counters and reported series projections. Observation session scope is normalized. Session-derived hashed program model IDs are excluded while their acquisition epochs, normalized evidence and observed/inferred operator counts remain compared. Native graph chains/revisions and shared inherited digests are excluded. Prior acquired-preparation deferrals and guards are compared. New quota/relation projections must remain empty on these prior successful prefixes; prior radial/control-discovery and other series evidence remain compared. No partial-access extension is required in these prefixes. Timings are excluded; this is not a speed comparison or full internal-state parity."
+}

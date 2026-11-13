@@ -1,0 +1,30 @@
+{
+  "schema": "logos-engine.functional-proof-coordination.v1",
+  "recordedAt": "2026-11-11T16:11:29.642507+00:00",
+  "requestId": "lot10b-hpdl02-proof-qa",
+  "scope": "Original-source partial checkpoint comparison, maximum300s total including capture, no new game.",
+  "allOtherLanesAcknowledgedIdle": true,
+  "allOwnAgentsIdle": true,
+  "previewStopped": true,
+  "browserHolderTerminal": true,
+  "priorCaseChargeSeconds": 1750.9031641789918,
+  "remainingCaseSeconds": 649.0968358210083,
+  "retainedPriorCoordinationLimitation": "6B source closure exceeded180s and actual fresh idle ACK arrived16:07:37.711929UTC, after browserclock admission but before HPDLselection16:07:51.135UTC. Original browseradmission does not retroactively claim full quiet.",
+  "snapshots": [
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/hpdl02-proof-qa/original-comparison-admission/lot5c-status.json",
+      "bytes": 6994,
+      "sha256": "0c33c7b01cddf1eda09252254a02b48b316f5e36c28561c06fc3a4911d89b3e1"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/hpdl02-proof-qa/original-comparison-admission/lot6b-status.json",
+      "bytes": 3992,
+      "sha256": "b91b73e61a69a6f64540125d8a4919d0949ed5532b8dc29bcf39621f92a0383d"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/hpdl02-proof-qa/original-comparison-admission/lot8a-status.json",
+      "bytes": 2977,
+      "sha256": "180a2118157215f31422a4c82dd14e2148a6be398cd8ee10ed0fa5603cd1fff5"
+    }
+  ]
+}

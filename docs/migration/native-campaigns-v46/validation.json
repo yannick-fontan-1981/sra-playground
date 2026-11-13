@@ -1,0 +1,102 @@
+{
+  "schema": "logos-engine.v46.release-validation.v1",
+  "status": "passed",
+  "sourceDigest": "793a6b2e57ffbab74e148b1170879cd720387cbe93a2af9977c6303e05c2e731",
+  "nativeSourceFiles": 152,
+  "newActualCampaign": {
+    "game": "ZIPP",
+    "levels": 4,
+    "actions": 53,
+    "prefixes": 12,
+    "completePublicPackets": 54,
+    "animationFramesIncludingInitial": 66,
+    "officialWin": false
+  },
+  "sourceComponentComparison": {
+    "path": "docs/migration/native-campaigns-v46/zipp-original-component-comparison.json",
+    "sha256": "bc007ebd84e23b17c0e5dc133b42f86d6cd508888ab5ecc0143eb100d879e527",
+    "bytes": 52583
+  },
+  "deltaTests": {
+    "receipt": {
+      "path": "docs/migration/native-campaigns-v46/validation/delta-tests-run.json",
+      "sha256": "d2fd46f3165548063c907c707bbe1ebe0bc33d5294a76613b4c41bdee910eed0",
+      "bytes": 76752
+    },
+    "counts": {
+      "tests": 531,
+      "pass": 531,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "testFiles": 13
+  },
+  "regressions": {
+    "summary": {
+      "path": "docs/migration/native-campaigns-v46/regression-summary.json",
+      "sha256": "cbed76e1e40b65f1296eef8c7d27a78b629da3a532a7e739d79a4cba2e10c2ff",
+      "bytes": 7150
+    },
+    "groups": [
+      {
+        "mode": "recorded-public-replay",
+        "runs": 7,
+        "passed": true,
+        "commands": 370,
+        "completePublicPackets": 377,
+        "prefixes": 237,
+        "comparisonChecks": 98,
+        "games": [
+          "MEMO",
+          "STCK",
+          "PIPE",
+          "COMB",
+          "THER",
+          "CATL",
+          "LF52"
+        ]
+      },
+      {
+        "mode": "actual-game-campaign",
+        "runs": 1,
+        "passed": true,
+        "commands": 55,
+        "completePublicPackets": 56,
+        "prefixes": 55,
+        "comparisonChecks": 14,
+        "games": [
+          "TICT"
+        ]
+      }
+    ]
+  },
+  "checks": {
+    "path": "docs/migration/native-campaigns-v46/validation/checks-run.json",
+    "sha256": "0fcd788c1a35951beaf5bcb8e2470d62dc5a2d62712386149fc2475e9c31151f",
+    "bytes": 63550
+  },
+  "nativeAgentWorker": {
+    "path": "dist/assets/v6-agent-worker-DZWWGqAp.js",
+    "sha256": "5708e6161436544133509c0f6d9a83e64418a399dd6da971bcb71d0d684b55ca",
+    "bytes": 5332206
+  },
+  "browser": {
+    "path": "docs/migration/native-campaigns-v46/zipp-browser-verification.json",
+    "sha256": "6295e004555df33cf43981c7fb78d75ccedaf38f47dcc4c81d9031573b01347d",
+    "bytes": 63287
+  },
+  "progress": {
+    "connected": 37,
+    "declared": 76,
+    "percent": 48.7
+  },
+  "completeMigration": false,
+  "generator": {
+    "path": "scripts/validate-v46-release.py",
+    "sha256": "6eff9bdee68aa0e55eb90b0076b1cf9d2e3b29fc8b517570c100e5f40af4c5ca",
+    "bytes": 14349
+  },
+  "scope": "Read-only validation of recorded executions, exact source identities, component evidence, targeted regressions, browser observations and build. It does not run a game or claim complete original-caller parity."
+}

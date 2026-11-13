@@ -1,0 +1,95 @@
+{
+  "schema": "logos-engine.priority064-build-preparation.v1",
+  "at": "2026-11-11T22:48:32.527812+00:00",
+  "predecessorBuildSourceComparison": {
+    "from": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+    "to": "bc53ddf36f0379be24cfc0667f8f8d6fdd650032",
+    "paths": [
+      "src",
+      "scripts",
+      "public",
+      "content",
+      "package.json",
+      "package-lock.json",
+      "tsconfig.json",
+      "vite.config.ts",
+      ".openai/hosting.json",
+      "motivation.html",
+      "reasoning-lab.html",
+      "contact.html",
+      "gallery.html",
+      "architecture.html",
+      "symbolic-reasoning.html",
+      "videos.html",
+      "index.html",
+      "arc-agi-3.html"
+    ],
+    "changedPaths": []
+  },
+  "pyodideAssets": [
+    {
+      "file": "pyodide.mjs",
+      "bytes": 17931,
+      "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109"
+    },
+    {
+      "file": "pyodide.asm.mjs",
+      "bytes": 1250344,
+      "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635"
+    },
+    {
+      "file": "pyodide.asm.wasm",
+      "bytes": 9598218,
+      "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6"
+    },
+    {
+      "file": "python_stdlib.zip",
+      "bytes": 2545637,
+      "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a"
+    },
+    {
+      "file": "pyodide-lock.json",
+      "bytes": 119077,
+      "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010"
+    },
+    {
+      "file": "package.json",
+      "bytes": 2999,
+      "sha256": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b"
+    },
+    {
+      "file": "numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+      "bytes": 2960568,
+      "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf"
+    },
+    {
+      "file": "pydantic-2.12.5-py3-none-any.whl",
+      "bytes": 463578,
+      "sha256": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7"
+    },
+    {
+      "file": "typing_extensions-4.15.0-py3-none-any.whl",
+      "bytes": 44613,
+      "sha256": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29"
+    },
+    {
+      "file": "pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+      "bytes": 1310164,
+      "sha256": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da"
+    },
+    {
+      "file": "annotated_types-0.7.0-py3-none-any.whl",
+      "bytes": 11963,
+      "sha256": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51"
+    },
+    {
+      "file": "typing_inspection-0.4.2-py3-none-any.whl",
+      "bytes": 14610,
+      "sha256": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051"
+    }
+  ],
+  "assetSourceCheckout": "/workspace/sites/sra-lot6b-20261111/.sites-checkout",
+  "nativeSourceCheckoutModified": false,
+  "assetsDownloaded": false,
+  "globalLockAcquired": false
+}

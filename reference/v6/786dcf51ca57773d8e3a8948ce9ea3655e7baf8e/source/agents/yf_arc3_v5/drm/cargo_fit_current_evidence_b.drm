@@ -1,0 +1,223 @@
+{
+  "module_id": "arc3.cargo_fit_current_evidence_b",
+  "declarations": [
+    {
+      "id":"policy.b_observed_cargo_coupling","kind":"selection_policy",
+      "evaluation":"declared_lexicographic_order","supported_operators":["SELECT"],
+      "input_contract":"yf_arc3_v5.authority_input.selection.v1","output_contract":"yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs":["reason_front_preparation_is_not_rigid_coupling_and_rigid_coupling_is_not_delivery"],
+      "declared_alternative_refs":["cargo_pair.rigid_transport","cargo_pair.coupled","cargo_pair.delivered","cargo_pair.front_only","cargo_pair.unresolved"],
+      "selection_eligibility_conditions":[{"field":"eligible","operator":"equals","expected":true}],
+      "fact_projections":[
+        {"id":"projection.b_pair.rigid","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"cargo_pair.rigid_transport"},{"field":"actual_evidence_bound","operator":"equals","expected":true},{"field":"pair_before","operator":"equals","expected":true},{"field":"pair_after","operator":"equals","expected":true},{"field":"same_nonzero_translation","operator":"equals","expected":true},{"field":"relative_offset_preserved","operator":"equals","expected":true},{"field":"locked_face_preserved","operator":"equals","expected":true},{"field":"identity_and_mask_preserved","operator":"equals","expected":true},{"field":"actor_identity_and_mask_preserved","operator":"equals","expected":true}],"static_facts":{"eligible":true,"observed_pair_kind":"rigid_transport","outline_proves_coupling":false,"universal_coupling_law_proven":false,"actual_delivery_proved":false}},
+        {"id":"projection.b_pair.coupled_new","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"cargo_pair.coupled"},{"field":"actual_evidence_bound","operator":"equals","expected":true},{"field":"pair_before","operator":"equals","expected":false},{"field":"pair_after","operator":"equals","expected":true},{"field":"identity_and_mask_preserved","operator":"equals","expected":true}],"static_facts":{"eligible":true,"observed_pair_kind":"active_coupling","outline_proves_coupling":false,"universal_coupling_law_proven":false,"actual_delivery_proved":false}},
+        {"id":"projection.b_pair.coupled_stationary","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"cargo_pair.coupled"},{"field":"actual_evidence_bound","operator":"equals","expected":true},{"field":"pair_before","operator":"equals","expected":true},{"field":"pair_after","operator":"equals","expected":true},{"field":"same_nonzero_translation","operator":"equals","expected":false},{"field":"identity_and_mask_preserved","operator":"equals","expected":true}],"static_facts":{"eligible":true,"observed_pair_kind":"active_coupling","outline_proves_coupling":false,"universal_coupling_law_proven":false,"actual_delivery_proved":false}},
+        {"id":"projection.b_pair.delivery","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"cargo_pair.delivered"},{"field":"actual_evidence_bound","operator":"equals","expected":true},{"field":"pair_after","operator":"equals","expected":false},{"field":"released_after","operator":"equals","expected":true},{"field":"delivery_acquired_after","operator":"equals","expected":true},{"field":"receiver_membership_after","operator":"equals","expected":true},{"field":"identity_and_mask_preserved","operator":"equals","expected":true}],"static_facts":{"eligible":true,"observed_pair_kind":"received_delivery","universal_coupling_law_proven":false,"delivery_actor_attribution_proven":false}},
+        {"id":"projection.b_pair.front_only","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"cargo_pair.front_only"},{"field":"actual_evidence_bound","operator":"equals","expected":true},{"field":"front_before","operator":"equals","expected":true},{"field":"pair_before","operator":"equals","expected":false},{"field":"pair_after","operator":"equals","expected":false},{"field":"delivery_acquired_after","operator":"equals","expected":false},{"field":"identity_and_mask_preserved","operator":"equals","expected":true}],"static_facts":{"eligible":true,"observed_pair_kind":"frontal_preparation_only","full_interaction_readiness_proven":false,"outline_proves_coupling":false,"actual_delivery_proved":false}},
+        {"id":"projection.b_pair.unknown","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"cargo_pair.unresolved"}],"static_facts":{"eligible":true,"observed_pair_kind":"unresolved","full_interaction_readiness_proven":false,"outline_proves_coupling":false,"actual_delivery_proved":false}}
+      ],
+      "selection_tie_breakers":[{"field":"alternative_ref","preferred_order":"minimize"}],
+      "canonical_equivalence_tie_break_debt_ref":"debt.b_pair_classification_not_action_selection",
+      "selection_tiers":[
+        {"id":"tier.b_pair.rigid","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"cargo_pair.rigid_transport"}],"reason_ref":"reason_current_links_offset_locked_face_and_actual_translation_refine_coupling"},
+        {"id":"tier.b_pair.coupled","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"cargo_pair.coupled"}],"reason_ref":"reason_two_current_possession_links_distinguish_coupling_from_front_preparation"},
+        {"id":"tier.b_pair.delivered","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"cargo_pair.delivered"}],"reason_ref":"reason_release_and_complete_receiver_occupancy_distinguish_delivery"},
+        {"id":"tier.b_pair.front","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"cargo_pair.front_only"}],"reason_ref":"reason_front_relation_without_possession_is_only_preparation"},
+        {"id":"tier.b_pair.unknown","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"cargo_pair.unresolved"}],"reason_ref":"reason_unqualified_pair_state_preserves_uncertainty"}
+      ]
+    },
+    {
+      "id": "policy.b_cargo_fit_current_evidence",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_current_actual_sealed_state_pairs_can_qualify_conditional_model_fit_without_universal_law_or_action_authority"
+      ],
+      "configuration": {
+        "operation_ref": "mechanics.oriented_cargo_handoffs.autonomous_fit",
+        "mode_ref": "FIT",
+        "require_current_source_manifest_identity": true,
+        "native_scope_bindings": {
+          "parent_goal_ref": "parent_goal_ref",
+          "scope_ref": "parent_contribution_ref",
+          "epoch": "epoch",
+          "input_revision_ref": "evidence_revision_ref"
+        },
+        "interval_scope_bindings": {
+          "parent_goal_ref": "parent_goal_ref",
+          "scope_ref": "parent_contribution_ref",
+          "epoch": "epoch",
+          "input_revision_ref": "evidence_revision_ref",
+          "event_owner_ref": "event_owner_ref"
+        }
+      },
+      "declared_alternative_refs": [
+        "cargo_fit.current",
+        "cargo_fit.missing"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "cargo_fit.current": "rule.b_current_source_cargo_fit_return"
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_fit.current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_fit.current"
+            },
+            {
+              "field": "fit_current_evidence_bound",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_current_actual_sealed_state_pairs_can_qualify_conditional_model_fit_without_universal_law_or_action_authority",
+            "conditional_model_fit_is_not_universal_law": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_fit.missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_fit.missing"
+            },
+            {
+              "field": "fit_current_evidence_bound",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_current_actual_sealed_state_pairs_can_qualify_conditional_model_fit_without_universal_law_or_action_authority",
+            "conditional_model_fit_is_not_universal_law": true,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_current_source_cargo_fit_return",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "current_canonical_native_request",
+        "actual_sealed_dispatched_input_state_pairs",
+        "exact_native_return_identity"
+      ],
+      "applicability": [
+        "conditional_current_model_fit"
+      ],
+      "invariants": [
+        "existing_native_engine_only",
+        "all_supported_contradicted_unresolved_models_retained",
+        "no_universal_law_or_action_confirmation"
+      ],
+      "falsifiers": [
+        "dispatch_or_states_mismatch",
+        "source_scope_or_input_changed",
+        "new_discriminating_observation_contradicts_model"
+      ],
+      "reason_refs": [
+        "reason_current_actual_sealed_state_pairs_can_qualify_conditional_model_fit_without_universal_law_or_action_authority"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Current conditional cargo FIT return",
+          "required_fields": [
+            "output_term_ref",
+            "normalized_return"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "cargo.current_fit_return.b.v1",
+            "conditional_model_fit_is_not_universal_law": true,
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "normalized_return": "normalized_return",
+            "coupling_observation_rows": "coupling_observation_rows",
+            "coupling_dispositions": "coupling_dispositions",
+            "coupling_pair_questions": "coupling_pair_questions",
+            "normalized_return_digest": "normalized_return_digest",
+            "native_request_digest": "native_request_digest",
+            "source_identity_ref": "source_identity_ref",
+            "request_term_digest": "request_term_digest",
+            "request_claim_digest": "request_claim_digest",
+            "interval_provenance": "interval_provenance",
+            "artifact_provenance": "artifact_provenance",
+            "frame_ref": "frame_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_support_claim_ref}",
+          "predicate": "current_source_cargo_fit_return_bound",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{request_term_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}",
+            "{request_term_ref}"
+          ],
+          "required_fields": [
+            "output_support_claim_ref",
+            "normalized_return"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "frame_ref": "frame_ref"
+          },
+          "attribute_bindings": {
+            "normalized_return": "normalized_return",
+            "normalized_return_digest": "normalized_return_digest",
+            "native_request_digest": "native_request_digest",
+            "source_identity_ref": "source_identity_ref",
+            "request_term_digest": "request_term_digest",
+            "request_claim_digest": "request_claim_digest",
+            "interval_provenance": "interval_provenance",
+            "artifact_provenance": "artifact_provenance",
+            "frame_ref": "frame_ref"
+          },
+          "static_attributes": {
+            "conditional_model_fit_is_not_universal_law": true,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    }
+  ]
+}

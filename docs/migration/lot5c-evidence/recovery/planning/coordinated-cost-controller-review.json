@@ -1,0 +1,303 @@
+{
+  "schema": "logos-engine.lot5c-coordinated-cost-controller-source-review.v1",
+  "status": "passed_source_review",
+  "recordedAt": "2026-11-11T18:17:16.841201+00:00",
+  "reviewer": "independent agent /root/lot5_scope_preview",
+  "controller": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c.py",
+    "bytes": 16154,
+    "sha256": "0967fd35e3727c9e7c3354d330665bc601eb8c88fb49af3eeee35879eb2b7e58"
+  },
+  "activePlanDirectory": "docs/migration/lot5c-evidence/recovery/performance-integrated-02",
+  "requestId": "lot5c-cost-a33a5f88-final-01",
+  "knownLanes": [
+    "lot6b",
+    "lot8a",
+    "lot10c"
+  ],
+  "inputs": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c.py",
+      "bytes": 16154,
+      "sha256": "0967fd35e3727c9e7c3354d330665bc601eb8c88fb49af3eeee35879eb2b7e58"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/declaration.json",
+      "bytes": 5661,
+      "sha256": "b63f8d61f27ce9d6401c0015ecf2888cd947f504bfbdbfb954e799c28f8a7c8e"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-growth-contract.json",
+      "bytes": 6009,
+      "sha256": "08dc46007afbb0b54f219fc519f4bb7b8239a59c9263a2714aa60a61d0537c5f"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/global-budget-policy.json",
+      "bytes": 2348,
+      "sha256": "ad6878f3065ec5fca67f4fda7ed3cfac936795c3ee11a37fec4a42fe1a5ca53b"
+    },
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "bytes": 8933,
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613"
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "bytes": 9861,
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb"
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "bytes": 19460,
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/consolidate-owner-costs.mjs",
+      "bytes": 61449,
+      "sha256": "69957840c81d50e3d7b68dedf4293b5aa9c4072f882fe1fc858f5e03815330b7"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/review-owner-costs.py",
+      "bytes": 81151,
+      "sha256": "452ccf903970230f5855458cd35f2f3f30224307026663ebd865b494986371df"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/write-cost-results.py",
+      "bytes": 50139,
+      "sha256": "16bf3b946dd2d30e582fec814f08a5abf75e8d8200bd3525ee1e466fa85e72a9"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/record-cost-log-transport.py",
+      "bytes": 3879,
+      "sha256": "df0039243dbfaa89351973e7c0d58b8edc0c8e28dd8895f10fe5ff1af272f05f"
+    }
+  ],
+  "checkedCount": 36,
+  "checks": [
+    {
+      "name": "exact_final_source_and_syntax",
+      "passed": true,
+      "detail": "The final 16154-byte controller has SHA0967fd35... and parses as Python AST. It was not imported or executed."
+    },
+    {
+      "name": "repository_root_resolution",
+      "passed": true,
+      "detail": "parents[5] resolves from planning/run-coordinated-cost-5c.py to this checkout; relative output fingerprints remain repository-relative."
+    },
+    {
+      "name": "active_plan02",
+      "passed": true,
+      "detail": "PERF selects performance-integrated-02 and matches the active declaration/owner contract; no superseded01 measurement is selected."
+    },
+    {
+      "name": "actual_published_predecessor",
+      "passed": true,
+      "detail": "BASELINE is the exact Site102/source1019d2e checkout and the declared baseline/candidate manifest arguments match the retained runner CLI."
+    },
+    {
+      "name": "explicit_execution_gate",
+      "passed": true,
+      "detail": "--execute is required and a NODE_OPTIONS override is rejected before any measurement."
+    },
+    {
+      "name": "readiness_guard",
+      "passed": true,
+      "detail": "status ready, measurementAuthorized true and empty pendingRequirements are required; candidate nativeDigest must match declaration."
+    },
+    {
+      "name": "readiness_binding",
+      "passed": true,
+      "detail": "Every readiness input fingerprint is rechecked and the exact isolation receipt and controller must themselves be included."
+    },
+    {
+      "name": "isolation_identity",
+      "passed": true,
+      "detail": "The exact requestId lot5c-cost-a33a5f88-final-01 and acknowledged_quiet_before_window status are required, with ownTrackedComputeEnded and previewStopped true."
+    },
+    {
+      "name": "exact_known_lanes",
+      "passed": true,
+      "detail": "The known-lane set must be exactly lot6b, lot8a and lot10c; retained acknowledgment descriptors are fingerprint-verified."
+    },
+    {
+      "name": "exact_live_acknowledgments",
+      "passed": true,
+      "detail": "Every observed lane must report quiet_acknowledged true and the same exact quiet_request_id."
+    },
+    {
+      "name": "lane_worker_idle_guards",
+      "passed": true,
+      "detail": "Every observed lane must report active_command null, heavy_execution_active false, all_own_subagents_idle true and no_queued_commands true."
+    },
+    {
+      "name": "stable_named_statuses",
+      "passed": true,
+      "detail": "Only updated_at is ignored when comparing current lane payloads to the retained acknowledgments; any other change stops the control block."
+    },
+    {
+      "name": "cooperative_monitor_scope",
+      "passed": true,
+      "detail": "The monitor reads only the three explicitly named lane status files and rejects payloads above100000 bytes; it does not inspect unrelated processes, sources or journals."
+    },
+    {
+      "name": "observations_until_review",
+      "passed": true,
+      "detail": "The controller observes before/after each child, every30seconds while a child is active, before/after log transport, and after all reviews before final snapshots."
+    },
+    {
+      "name": "exclusive_nonblocking_lock",
+      "passed": true,
+      "detail": "LOCK_EX|LOCK_NB is taken before the official window. No measurement is launched while the lock acquisition is pending or refused."
+    },
+    {
+      "name": "no_existing_window_overwrite",
+      "passed": true,
+      "detail": "Existing window.json, controller receipt and observation outputs are rejected; child logs and transport outputs use exclusive creation."
+    },
+    {
+      "name": "abba_cli_schema_and_order",
+      "passed": true,
+      "detail": "The four positional runner arguments match run-native-cost-window.py. Terminal passed/finalIntegrity passed and exact A1/B1/B2/A2 order are required."
+    },
+    {
+      "name": "two_cohort_comparisons",
+      "passed": true,
+      "detail": "Both cohorts receive POLICY BASELINE AFTER OUTPUT in the declared order. No sample is selected, dropped or altered by the controller."
+    },
+    {
+      "name": "phase_overruns_preserved",
+      "passed": true,
+      "detail": "The original cohort comparator exits normally for budget_review_required; the qualified consolidator accepts both passed and budget_review_required. Diagnostic phase overruns are retained for the global rule."
+    },
+    {
+      "name": "strict_aggregate_invocation",
+      "passed": true,
+      "detail": "The historical strict comparator receives its eight positional arguments: policy, three cohort1 files, three cohort2 files, and the declared aggregate output."
+    },
+    {
+      "name": "strict_failure_receipt_shape",
+      "passed": true,
+      "detail": "The retained-tool-failure.v1 receipt contains the exact command, real exit code/timestamps, eight input fingerprints in tool/policy/cohort order, unchanged-input assertion, absent output and log fingerprint."
+    },
+    {
+      "name": "strict_refusal_reason",
+      "passed": true,
+      "detail": "A nonzero exit is accepted only with unchanged strict inputs, no historical aggregate output, and the exact Within-cohort work metadata changed reason."
+    },
+    {
+      "name": "qualified_consolidator_cli",
+      "passed": true,
+      "detail": "The qualified consolidator receives the declared Binding owner contract and new owner-growth-comparison.json output; historical failure remains explicit."
+    },
+    {
+      "name": "independent_reviewer_cli",
+      "passed": true,
+      "detail": "The independent reviewer receives CONTRACT AGGREGATE OUTPUT in its actual argparse order and must finish with exit0."
+    },
+    {
+      "name": "lossless_transport_gap_resolved",
+      "passed": true,
+      "detail": "retain_cost_logs now executes after arithmetic review and before the renderer, producing the previously missing log-transport.json."
+    },
+    {
+      "name": "four_terminal_logs_preserved",
+      "passed": true,
+      "detail": "Transport requires four successful A1/B1/B2/A2 series, log paths within PERF and each original hash matching window.json."
+    },
+    {
+      "name": "deterministic_transport_and_integrity",
+      "passed": true,
+      "detail": "New .gz files use gzip mtime0 and exclusive creation; decompression must equal original bytes, and original logs/window must remain unchanged."
+    },
+    {
+      "name": "transport_schema_provenance",
+      "passed": true,
+      "detail": "The transport receipt schema/status/window/logs fields match renderer requirements, with controller generator and the exact 5B source helper recorded as adaptedFrom."
+    },
+    {
+      "name": "renderer_cli_and_prerequisites",
+      "passed": true,
+      "detail": "--output-directory PERF matches the renderer CLI; its required window, comparisons, review, transport and preparation receipts are generated or are predeclared inputs."
+    },
+    {
+      "name": "global_decision_not_forced",
+      "passed": true,
+      "detail": "The renderer validates actual qualified arithmetic and strict per-game global-budget outcomes. Controller completion means pending root acceptance, not accepted cost."
+    },
+    {
+      "name": "child_process_group_cleanup",
+      "passed": true,
+      "detail": "Each child starts a new session. On catchable control-block interruption or command timeout, the active child group receives SIGTERM then SIGKILL if needed; actual terminal exit and log are retained in the execution row."
+    },
+    {
+      "name": "catchable_signal_handlers",
+      "passed": true,
+      "detail": "SIGINT, SIGTERM and SIGHUP enter the controller exception/finally path via ControllerInterrupted; no runtime signal experiment was performed."
+    },
+    {
+      "name": "bounded_command_and_failure_retention",
+      "passed": true,
+      "detail": "The active-child loop has a3600-second bound, retains failed control-block status/error and leaves actual window/cohort/log outputs intact. No retry or sample replacement is implemented."
+    },
+    {
+      "name": "actual_unlock_timestamp",
+      "passed": true,
+      "detail": "lockReleaseRequestedAt precedes explicit LOCK_UN/close; lockReleasedAt is assigned after actual unlock and then saved."
+    },
+    {
+      "name": "quiet_release_not_claimed",
+      "passed": true,
+      "detail": "Both success and failure retain explicitQuietReleasePerformed false. The controller unlocks but does not edit lane acknowledgments, send messages or announce release on behalf of root."
+    },
+    {
+      "name": "no_source_or_tool_edits",
+      "passed": true,
+      "detail": "The controller orchestrates existing frozen runner/comparison/review tools and writes only declared evidence outputs; no source, policy, comparator or expected value is modified."
+    }
+  ],
+  "resolvedFindings": [
+    {
+      "id": "missing_log_transport_before_renderer",
+      "severity": "blocking_before_measurement",
+      "observedControllerSha256": "4e1913bddd0054e3eeb0c770341b09d8dbf3c80dc6014fd836f2438a3113d5b7",
+      "problem": "The renderer requires log-transport.json; the prior controller never created it and the active plan02 file was absent.",
+      "resolution": "Root added exact four-log deterministic transport under the held EX lock, after independent review and before rendering. The final controller and receipt shape were reread against the renderer and 5B transport source.",
+      "resolvedInSha256": "0967fd35e3727c9e7c3354d330665bc601eb8c88fb49af3eeee35879eb2b7e58"
+    },
+    {
+      "id": "unlock_timestamp_and_catchable_interruption",
+      "severity": "corrected_by_root_before_final_review",
+      "priorControllerSha256": "14d47a76c96fcd33dcd4278418c5fe1bd475073637735750d807aac1947e1558",
+      "resolution": "Root moved lockReleasedAt after explicit unlock and installed catchable signal handlers; the final source retains both corrections."
+    }
+  ],
+  "unresolvedFindings": [],
+  "preMeasurementConditions": [
+    "Finalize readiness with exact current controller and this independent review, active declaration/owner contract, actual completed functional evidence, exact retained isolation/ACK receipts and the5B log-transport provenance source.",
+    "Obtain fresh matching ACKs from all three lanes and explicit terminal/idle acknowledgment for every own worker; current ordinary activity is not a cost acknowledgment.",
+    "The controller relies on ownTrackedComputeEnded and per-lane all_own_subagents_idle/no_queued_commands attestations; root must establish their truth before invocation.",
+    "Keep all unrelated computation and queued work paused until root explicitly releases the isolation request after reviewing the actual terminal result."
+  ],
+  "scopeLimits": [
+    "Static source/CLI/schema review only; no runtime, measurement, replay, game, build, browser or process-signaling experiment was performed.",
+    "Cooperative named-status monitoring is not a continuous operating-system process census and does not establish future isolation.",
+    "No readiness, current ACK acceptance, numerical cost acceptance or publication is asserted by this review.",
+    "Uncatchable process death and host failure are outside the controller catchable-signal guarantee; incomplete outputs remain unaccepted evidence."
+  ],
+  "inputsUnchanged": true,
+  "existingInputsEdited": false,
+  "controllerExecuted": false,
+  "measurementExecuted": false,
+  "nativeRuntimeExecuted": false,
+  "testsExecuted": false,
+  "replaysExecuted": false,
+  "readinessAsserted": false,
+  "isolationAsserted": false,
+  "commandsTerminal": true,
+  "quietCheckAt": "2026-11-11T18:17:16.835701+00:00"
+}

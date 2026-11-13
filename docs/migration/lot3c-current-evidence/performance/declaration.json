@@ -1,0 +1,106 @@
+{
+  "schema": "logos-engine.native-cost-protocol-declaration.v2",
+  "recordedAt": "2026-11-10T07:17:16.220373+00:00",
+  "status": "declared_before_official_window",
+  "protocol": {
+    "path": "docs/migration/lot3c-current-evidence/performance/protocol.md",
+    "sha256": "459aabe0e4f47efb6ab89b9371dfce092eedb688c353529b51adeaa559d3fe61",
+    "bytes": 12082
+  },
+  "cases": {
+    "path": "docs/migration/lot3c-current-evidence/performance/cases.json",
+    "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+    "bytes": 1451
+  },
+  "diagnosticComparisonPolicy": {
+    "path": "docs/migration/lot3c-current-evidence/performance/comparison-policy.json",
+    "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+    "bytes": 991
+  },
+  "globalBudgetPolicy": {
+    "path": "docs/migration/lot3c-current-evidence/performance/global-budget-policy.json",
+    "sha256": "da452c7a5378882ba08e5d4bbe4f4c8539e8711bbf54cbbc84d7e1295a63cd0f",
+    "bytes": 1923
+  },
+  "baselineManifest": {
+    "path": "docs/migration/lot3c-current-evidence/baseline/source-manifest.json",
+    "sha256": "9fc1bf0187cfbddc0ccfcd985c8b2be2187430cc4e8dd9de9ad06c3f1530c7de",
+    "bytes": 29682
+  },
+  "candidateManifest": {
+    "path": "docs/migration/lot3c-current-evidence/final/source-manifest.json",
+    "sha256": "827f90441f353be4f4c0e9b3ec35c5c71cf7dadd923e4fe7d98cf7bd8e0350c3",
+    "bytes": 29682
+  },
+  "candidateArchiveManifest": {
+    "path": "docs/migration/lot3c-current-evidence/final/source-archive.json",
+    "sha256": "fd113abb6bebbc338e1edcf52ada5b7eb1a7c105e9ee05d45db8341d10c57653",
+    "bytes": 31321
+  },
+  "nativeDigests": {
+    "baseline": "3e88aa12214fd3d4a4feb8d63b946123b8394cb4a0cbd0a156cc059c37f7b46c",
+    "candidate": "e914399487992c3f53b3058ee734c470d738594e7344285799203462fac6a255"
+  },
+  "officialTools": [
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613",
+      "bytes": 8933
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+      "bytes": 9861
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4",
+      "bytes": 17810
+    }
+  ],
+  "plannedOrder": [
+    "A1",
+    "B1",
+    "B2",
+    "A2"
+  ],
+  "cohorts": 2,
+  "sessionsPerCaseVersionCohort": 4,
+  "measuredSessions": 32,
+  "measuredActions": 400,
+  "excludedWarmupSessions": 8,
+  "excludedWarmupActions": 24,
+  "globalBudgetCases": 2,
+  "diagnosticMetrics": 16,
+  "relativeGlobalBudget": 0.1,
+  "globalComparison": "strictly_less_than",
+  "phaseOverrunsBlockAcceptance": false,
+  "allCasesMustPass": true,
+  "crossCaseCompensation": false,
+  "inputsByteIdenticalToHistorical": true,
+  "officialToolsByteIdenticalToHistorical": true,
+  "noOfficialWindowAtDeclaration": true,
+  "functionalReadinessNotAnticipated": true,
+  "qualification": "Policy for0.44 declared before its new official window against freshly measured published0.43 from Site71. Exact legacy cases/phase policy and comparators remain diagnostic only. User authorizes a strict complete-session median gate per game, with all measured sessions, phase overruns and p95 retained. No measurement, test, build, campaign or replay was executed while preparing or finalizing this protocol.",
+  "finalizedAt": "2026-11-10T07:19:43.023423+00:00",
+  "globalDecisionTool": {
+    "path": "scripts/review-native-global-cost-window.py",
+    "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940",
+    "bytes": 22204
+  },
+  "globalCalculationTool": {
+    "path": "scripts/review-native-global-cost-budget.py",
+    "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341",
+    "bytes": 8476
+  }
+}

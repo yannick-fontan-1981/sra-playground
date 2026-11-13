@@ -1,0 +1,122 @@
+{
+  "module_id": "axial_solving_c",
+  "declarations": [
+    {
+      "id": "policy.axial_solving_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_stable_axial_arrival_parent_question"
+      ],
+      "applicability": [
+        "K71_requested_operation"
+      ],
+      "invariants": [
+        "grounded_provider_service",
+        "normal_global_closure",
+        "current_full_joint_state",
+        "current_model_event_scope",
+        "no_act"
+      ],
+      "falsifiers": [
+        "unbound_terminal_quantifier",
+        "wrong_stable_service_receipt",
+        "transient_or_guard_cap_arrival"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "axial_solving.native",
+        "axial_solving.missing"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.axial_solving.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "axial_solving.native"
+            },
+            {
+              "field": "current_axial_question",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "axial_solving.native"
+          }
+        },
+        {
+          "id": "projection.axial_solving.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "axial_solving.missing"
+            },
+            {
+              "field": "current_axial_question",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "axial_solving.missing"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.axial_solving.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "axial_solving.native"
+            }
+          ],
+          "reason_ref": "reason.provider_rotation_supplies_normal_stable_arrival"
+        },
+        {
+          "id": "tier.axial_solving.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "axial_solving.missing"
+            }
+          ],
+          "reason_ref": "reason.axial_question_requires_current_evidence"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.axial_solving_activation_unverified",
+      "reason_refs": [
+        "reason.provider_rotation_supplies_normal_stable_arrival",
+        "reason.axial_question_requires_current_evidence"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "cases": [
+    {
+      "id": "rswp-038",
+      "game": "RSWP",
+      "baseline": {
+        "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-campaign.json.gz",
+        "sha256": "e41fea4b37b249041c813c3755ea26a0886f466d9b5d6012940f782106c1889e"
+      },
+      "trace": {
+        "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+        "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755"
+      }
+    }
+  ],
+  "passiveOwnerRequirements": [],
+  "qualification": "One predeclared cold command recomputation against the complete successful0.38 public RSWP return sequence. The current native agent is never initialized from expected commands, solutions or learned states. This checks retention of the previous Panel path; it is not another live-game success."
+}

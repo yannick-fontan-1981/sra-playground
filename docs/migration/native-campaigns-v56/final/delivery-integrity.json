@@ -1,0 +1,226 @@
+{
+  "schema": "logos-engine.v56.final-delivery-integrity.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-09T14:38:37.545509+00:00",
+  "nativeSourceDigest": "bade8fd58991e6a127abc84f373d539edeaa70d45ab0da94a84a6751fdc92de5",
+  "matchedFileInventories": {
+    "native": 232,
+    "archive": 243,
+    "sourceAndTests": 497,
+    "buildInputs": 296,
+    "regressionExecutionInputs": 7
+  },
+  "originalSourceFilesUnchanged": 1786,
+  "tests": {
+    "tests": 702,
+    "pass": 702,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "regressions": {
+    "passed": 12,
+    "total": 12,
+    "comparisonChecksPassed": 204,
+    "comparisonChecksExpected": 204,
+    "passiveOwnerPrefixesChecked": 802,
+    "passiveOwnerPrefixesPassed": 802,
+    "passiveOwnerTransitionsRetained": 1296,
+    "prevalidatedTotals": {
+      "commands": 648,
+      "completePublicPackets": 660,
+      "animationFrames": 1982,
+      "prefixes": 401,
+      "requests": 1049,
+      "naturalLevelBoundaries": 42
+    }
+  },
+  "nativeAgentWorker": {
+    "path": "dist/assets/v6-agent-worker-DTVvHdrM.js",
+    "sha256": "92df3c71f51ad1140e6a929527353198bc9c0530be248e656bb344c40810121d",
+    "bytes": 6203624
+  },
+  "byteStorage": {
+    "reports": 13,
+    "parts": 78,
+    "bytes": 65478127,
+    "originalsAbsentBeforeRestore": true,
+    "temporaryRootRemoved": true,
+    "originalsUnchanged": true,
+    "restoredByteIdentical": [
+      {
+        "path": "docs/migration/native-campaigns-v56/final/glob-campaign.json.gz",
+        "sha256": "9a1f3c9664931c5022ad758a2878a14eb34d1969ee2b4828b7a44c68410df61e",
+        "bytes": 2548385,
+        "manifest": "docs/migration/native-campaigns-v56/final/glob-campaign.json.gz.parts.json",
+        "parts": 3,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/native-campaigns-v56/final/regressions/as66-replay.json.gz",
+        "sha256": "4ebec9b6648db1d47952453bc6257193c41032fe5e43635a2fdff480c058bf6a",
+        "bytes": 1589320,
+        "manifest": "docs/migration/native-campaigns-v56/final/regressions/as66-replay.json.gz.parts.json",
+        "parts": 2,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/native-campaigns-v56/final/regressions/catl-replay.json.gz",
+        "sha256": "af0563e57111de085ef64ffd0a134587b345112dfb0e2125a50397ec2961b4bf",
+        "bytes": 4504954,
+        "manifest": "docs/migration/native-campaigns-v56/final/regressions/catl-replay.json.gz.parts.json",
+        "parts": 6,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/native-campaigns-v56/final/regressions/cn04-replay.json.gz",
+        "sha256": "6323ea6dcc122f6a1558c51819e983cbbfb45f40d1283434e72c8b071e2da2c7",
+        "bytes": 6284993,
+        "manifest": "docs/migration/native-campaigns-v56/final/regressions/cn04-replay.json.gz.parts.json",
+        "parts": 7,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/native-campaigns-v56/final/regressions/colm-replay.json.gz",
+        "sha256": "9c1f5418b03e2f6c0a87c79068aa18cf8e6c07dc530c00375fed1807069e90b2",
+        "bytes": 4237444,
+        "manifest": "docs/migration/native-campaigns-v56/final/regressions/colm-replay.json.gz.parts.json",
+        "parts": 5,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/native-campaigns-v56/final/regressions/gare-replay.json.gz",
+        "sha256": "53b6006115272281d15eba8f7d3081de13c72746e28a598f36a86d87ea459be5",
+        "bytes": 8938099,
+        "manifest": "docs/migration/native-campaigns-v56/final/regressions/gare-replay.json.gz.parts.json",
+        "parts": 10,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/native-campaigns-v56/final/regressions/gril-replay.json.gz",
+        "sha256": "e23a5af9ce1bbf46918571289a246d21d4fc554c2eff4f9e98bf2539ab98f43d",
+        "bytes": 2062848,
+        "manifest": "docs/migration/native-campaigns-v56/final/regressions/gril-replay.json.gz.parts.json",
+        "parts": 3,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/native-campaigns-v56/final/regressions/life-replay.json.gz",
+        "sha256": "508864240f5611eb7e535a3f595548f57cfddf371f784e1def1f5ddb1ac32164",
+        "bytes": 4445077,
+        "manifest": "docs/migration/native-campaigns-v56/final/regressions/life-replay.json.gz.parts.json",
+        "parts": 5,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/native-campaigns-v56/final/regressions/re86-replay.json.gz",
+        "sha256": "037a4eec102a6b500ab2d8784b977817c12ad9787147201d66d959d111226aa6",
+        "bytes": 13420393,
+        "manifest": "docs/migration/native-campaigns-v56/final/regressions/re86-replay.json.gz.parts.json",
+        "parts": 15,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/native-campaigns-v56/final/regressions/sele-replay.json.gz",
+        "sha256": "f9a81e48274a4a7da13e5995674c564e3c48a6f67069c14c39306f8caceb8d13",
+        "bytes": 3452191,
+        "manifest": "docs/migration/native-campaigns-v56/final/regressions/sele-replay.json.gz.parts.json",
+        "parts": 4,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/native-campaigns-v56/final/regressions/stck-replay.json.gz",
+        "sha256": "7d20335d04f37a351038ad8acdaa6328281a4ee73536d20c804d6b284c1328fb",
+        "bytes": 3664278,
+        "manifest": "docs/migration/native-campaigns-v56/final/regressions/stck-replay.json.gz.parts.json",
+        "parts": 5,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/native-campaigns-v56/final/regressions/valv-replay.json.gz",
+        "sha256": "73a23689a3df55d8697447c278ac138e41c815bbce1de353a3a85480f0869810",
+        "bytes": 2701932,
+        "manifest": "docs/migration/native-campaigns-v56/final/regressions/valv-replay.json.gz.parts.json",
+        "parts": 4,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/native-campaigns-v56/final/regressions/zipp-replay.json.gz",
+        "sha256": "68d131764fc8347bb2c354b9cd53fe75fb3fa039658ef34f567cc1fc0ffb5f81",
+        "bytes": 7628213,
+        "manifest": "docs/migration/native-campaigns-v56/final/regressions/zipp-replay.json.gz.parts.json",
+        "parts": 9,
+        "restored": true,
+        "byteIdentical": true
+      }
+    ],
+    "generators": [
+      {
+        "path": "scripts/evidence-byte-parts.py",
+        "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+        "bytes": 7210
+      },
+      {
+        "path": "scripts/restore-v53-evidence.py",
+        "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+        "bytes": 3361
+      }
+    ]
+  },
+  "receipts": [
+    {
+      "path": "docs/migration/native-campaigns-v56/final/source-manifest.json",
+      "sha256": "cc0abc39e125c98c9462c1896b71cd8628ab4c371adb2e7938197f40cf4b23b3",
+      "bytes": 27369
+    },
+    {
+      "path": "docs/migration/native-campaigns-v56/final/source-archive.json",
+      "sha256": "762b435efea0d023d61a1d5979425f65f394c139771a90fe46edf0ff555e4009",
+      "bytes": 29006
+    },
+    {
+      "path": "docs/migration/native-campaigns-v56/final/execution-glob.json",
+      "sha256": "02851d80ba8c29ec7dbba5864aa972f0439adc1816d794b224fead135c6be9b9",
+      "bytes": 58912
+    },
+    {
+      "path": "docs/migration/native-campaigns-v56/final/glob-inventory-original-comparison.json.gz",
+      "sha256": "3246cbbdb8261794a2b9f408aac57bb14933b09e0117785f2a67e8b74974b150",
+      "bytes": 44237
+    },
+    {
+      "path": "docs/migration/native-campaigns-v56/final/glob-browser-verification.json",
+      "sha256": "2a2af33f5018da1f3c30af3ca7f9c490b06fa543cbe832611d23aecc87eb7692",
+      "bytes": 1913
+    },
+    {
+      "path": "docs/migration/native-campaigns-v56/final/validation/delta-tests-run.json",
+      "sha256": "f6a8631dba4df9f8369632813037913f42cc9bf653080f5ae88292066af15e14",
+      "bytes": 89950
+    },
+    {
+      "path": "docs/migration/native-campaigns-v56/final/validation/checks-run.json",
+      "sha256": "6449ab098b8b88e46014b936dc5be491d34f8aa0bdff9d904f8211e78e03467f",
+      "bytes": 65140
+    },
+    {
+      "path": "docs/migration/native-campaigns-v56/final/regressions/regression-summary.json",
+      "sha256": "104103792f0c1fb8a3dc329d0b50ebdad8b2aa1f8631e8d400e355dcc8fe53a7",
+      "bytes": 117910
+    }
+  ],
+  "qualification": "Post-validation file integrity and lossless evidence transport only. Every large original report is restored from checked parts in an initially empty temporary root and compared byte for byte. No game, source comparison or test is rerun or reinterpreted; complete migration remains false. The same frozen native, source/test and production inputs are retained for publication."
+}

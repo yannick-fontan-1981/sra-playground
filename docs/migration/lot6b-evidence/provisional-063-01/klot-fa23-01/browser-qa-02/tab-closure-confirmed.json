@@ -1,0 +1,14 @@
+{
+  "schema": "logos-engine.lot6b-browser-tab-closure-confirmed.v1",
+  "recordedAt": "2026-11-11T20:17:56.148957+00:00",
+  "tabId": "7",
+  "tabClosedObserved": true,
+  "confirmation": "After close() returned, first inventory still showed tab 7. The subsequent browser.tabs.list() returned only tab 2 about:blank; tab 7 was absent.",
+  "remainingTabs": [
+    {
+      "id": "2",
+      "title": "about:blank",
+      "url": "about:blank"
+    }
+  ]
+}

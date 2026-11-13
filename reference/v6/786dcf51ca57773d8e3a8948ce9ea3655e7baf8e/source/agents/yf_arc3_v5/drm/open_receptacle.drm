@@ -1,0 +1,248 @@
+{
+  "module_id": "open_receptacle",
+  "declarations": [{
+    "id": "principle.open_exact_fit_receptacle_and_local_stop_continuation",
+    "kind": "principle",
+    "premises": ["rectangular_empty_core_in_a_connected_armature", "exactly_one_open_face", "continuous_lateral_flanks_and_opposite_closed_face", "body_and_core_extents_are_equal_at_one_measured_scale"],
+    "applicability": ["an_open_occupation_goal_can_be_proposed_from_current_geometry"],
+    "invariants": [
+      "a_receptacle_is_an_armature_plus_empty_core_plus_mouth_plus_opposite_backstop_not_a_filled_shape_peer",
+      "the_core_touches_exactly_one_armature_bbox_face_and_has_no_internal_armature_pixel",
+      "continuous_flanks_bound_the_core_laterally_and_the_opposite_face_bounds_it_in_depth",
+      "the_mouth_is_the_open_face_and_the_entry_direction_points_from_that_face_into_the_core",
+      "rotation_and_translation_preserve_this_topology_no_upward_opening_is_privileged",
+      "exact_fit_proposes_containment_not_acceptance_or_official_completion",
+      "contact_with_an_arm_or_the_mouth_is_not_occupation_of_the_empty_core",
+      "armature_colour_is_not_automatically_a_paint_operator_or_an_acceptance_type",
+      "a_single_receptacle_is_not_the_exclusive_span_between_two_homologous_crevices",
+      "observed_multi_cell_command_distance_is_not_the_local_cell_pitch",
+      "prefer_as_revisable_floor_the_same_connected_surface_that_touches_the_body_and_contains_the_open_core",
+      "do_not_infer_floor_from_black_or_any_fixed_palette_value_surface_role_follows_connectivity_and_observed_underlay",
+      "an_initial_directional_experiment_remains_admissible_a_unique_geometric_exit_is_preferred_not_a_scripted_action",
+      "slide_until_first_blocker_is_a_revisable_explanation_of_an_observed_stable_stop_not_an_assumed_universal_law",
+      "prefer_a_unique_current_nonreturn_progress_continuation_before_global_path_search",
+      "excluding_a_local_inverse_is_not_a_universal_ban_on_backtracking_return_can_become_necessary_under_new_evidence",
+      "a_local_unique_continuation_needs_no_parent_concentration_or_complete_metaplan",
+      "each_released_primitive_retains_current_geometry_expected_stop_and_falsifier",
+      "official_progress_confirms_the_attempted_occupation_goal_retrospection_explains_the_observed_buttes_and_insertion",
+      "screen_padding_is_not_floor_and_unknown_edge_topology_must_not_be_simulated_as_wrap",
+      "no_game_palette_coordinate_witness_sequence_or_hidden_level_data"
+    ],
+    "falsifiers": ["the_core_has_no_open_face_or_several_open_faces", "an_armature_pixel_interrupts_the_core", "the_body_does_not_fit", "the_predicted_local_stop_does_not_match_observation", "another_current_continuation_has_an_evidenced_necessary_service", "occupation_without_official_progress_leaves_acceptance_or_another_terminal_predicate_open"],
+    "reason_refs": ["reason.unique_nonreturn_stop_continues_a_revisable_exact_fit_occupation_test"]
+  },
+  {
+    "id": "policy.conserve_observed_open_receptacle_geometry",
+    "kind": "selection_policy",
+    "evaluation": "declared_eligibility_single",
+    "supported_operators": [
+      "SELECT"
+    ],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "declared_alternative_refs": [
+      "geometry.current_open_receptacle"
+    ],
+    "selection_eligibility_conditions": [
+      {
+        "field": "open_cavity_exact_body_fit_count",
+        "operator": "equals",
+        "expected": 1
+      },
+      {
+        "field": "open_cavity_connecting_surface_present",
+        "operator": "equals",
+        "expected": true
+      }
+    ],
+    "meaning_template_ref_by_alternative": {
+      "geometry.current_open_receptacle": "rule.observed_open_receptacle_geometry_meaning"
+    },
+    "reason_refs": [
+      "reason.observed_stop_and_connecting_surface_are_conserved_before_next_primitive"
+    ]
+  },
+  {
+    "id": "rule.observed_open_receptacle_geometry_meaning",
+    "kind": "rule",
+    "evaluation": "project_requested_conclusions",
+    "supported_operators": [
+      "DERIVE"
+    ],
+    "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+    "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+    "relation_family": "dynamic",
+    "premises": [
+      "open_cavity_exact_body_fit_count",
+      "open_cavity_connecting_surface_present"
+    ],
+    "term_templates": [
+      {
+        "id_pattern": "schema.observed_first_stop.{open_cavity_component_ref}.{open_cavity_observed_action_ref}",
+        "kind": "schema",
+        "label": "revisable command glides to an observed surface stop",
+        "required_fields": [
+          "open_cavity_component_ref",
+          "open_cavity_observed_action_ref",
+          "open_cavity_stop_surface_values",
+          "open_cavity_observed_command_delta"
+        ],
+        "static_attributes": {
+          "commitment": "revisable",
+          "projection_contract": "yf_arc3_v5.observed_surface_stop_method.v1",
+          "memory_scope": "same_game",
+          "scope": "one_observed_command_and_current_local_surface",
+          "local_pitch_is_not_command_distance": true,
+          "surface_blocking_role_status": "revisable",
+          "universal_slide_law_confirmed": false
+        },
+        "attribute_bindings": {
+          "observed_action_ref": "open_cavity_observed_action_ref",
+          "observed_command_delta": "open_cavity_observed_command_delta",
+          "body_bbox": "open_cavity_body_bbox",
+          "local_row_pitch": "open_cavity_local_row_pitch",
+          "local_column_pitch": "open_cavity_local_column_pitch",
+          "stop_surface_values": "open_cavity_stop_surface_values",
+          "connecting_surface_ref": "open_cavity_connecting_surface_ref",
+          "revisable_floor_value": "open_cavity_connecting_surface_value",
+          "repeating_last_action_preserves_current_pose": "open_cavity_last_action_preserves_current_stop"
+        }
+      },
+      {
+        "id_pattern": "schema.open_exact_fit_core.{open_cavity_component_ref}",
+        "kind": "schema",
+        "label": "measured exact-fit open core, mouth and backstop",
+        "required_fields": [
+          "open_cavity_component_ref",
+          "open_cavity_core_bbox",
+          "open_cavity_body_bbox",
+          "open_cavity_inward_cell_delta"
+        ],
+        "static_attributes": {
+          "open_face_count": 1,
+          "continuous_flanks_and_closed_backstop": true,
+          "receptacle_role": "revisable",
+          "acceptance_confirmed": false
+        },
+        "attribute_bindings": {
+          "component_ref": "open_cavity_component_ref",
+          "core_bbox": "open_cavity_core_bbox",
+          "body_bbox": "open_cavity_body_bbox",
+          "inward_delta": "open_cavity_inward_cell_delta"
+        }
+      },
+      {
+        "id_pattern": "schema.connecting_surface_floor_supposition.{open_cavity_connecting_surface_ref}",
+        "kind": "schema",
+        "label": "connecting surface is a revisable floor candidate",
+        "required_fields": [
+          "open_cavity_connecting_surface_ref",
+          "open_cavity_connecting_surface_value"
+        ],
+        "static_attributes": {
+          "role": "floor_supposition",
+          "commitment": "revisable",
+          "basis": "same_connected_region_touches_body_and_contains_open_core",
+          "fixed_palette_role": false
+        },
+        "attribute_bindings": {
+          "surface_ref": "open_cavity_connecting_surface_ref",
+          "observed_value": "open_cavity_connecting_surface_value"
+        }
+      }
+    ],
+    "claim_templates": [
+      {
+        "id_pattern": "claim.observed_first_stop.{open_cavity_component_ref}.{open_cavity_observed_action_ref}",
+        "predicate": "observed_surface_stops_controlled_translation",
+        "family": "dynamic",
+        "argument_patterns": [
+          "schema.observed_first_stop.{open_cavity_component_ref}.{open_cavity_observed_action_ref}"
+        ],
+        "epistemic_status": "supported",
+        "required_fields": [
+          "open_cavity_component_ref",
+          "open_cavity_observed_action_ref",
+          "open_cavity_stop_surface_values",
+          "open_cavity_observed_command_delta"
+        ],
+        "static_attributes": {
+          "commitment": "revisable",
+          "falsifier": "another_current_command_has_an_incompatible_unexplained_stop",
+          "retrospection_precedes_the_next_primitive": true
+        },
+        "attribute_bindings": {
+          "surface_values": "open_cavity_stop_surface_values",
+          "stop_surface_values": "open_cavity_stop_surface_values",
+          "local_row_pitch": "open_cavity_local_row_pitch",
+          "local_column_pitch": "open_cavity_local_column_pitch",
+          "revisable_floor_value": "open_cavity_connecting_surface_value",
+          "last_action_preserves_current_stop": "open_cavity_last_action_preserves_current_stop"
+        }
+      },
+      {
+        "id_pattern": "claim.open_exact_fit_core.{open_cavity_component_ref}",
+        "predicate": "observed_exact_fit_open_core",
+        "family": "dynamic",
+        "epistemic_status": "supported",
+        "argument_patterns": [
+          "schema.open_exact_fit_core.{open_cavity_component_ref}"
+        ],
+        "required_fields": [
+          "open_cavity_component_ref",
+          "open_cavity_core_bbox",
+          "open_cavity_body_bbox",
+          "open_cavity_inward_cell_delta"
+        ],
+        "static_attributes": {
+          "acceptance_is_not_established_by_topology": true
+        }
+      },
+      {
+        "id_pattern": "claim.connecting_surface_floor_supposition.{open_cavity_connecting_surface_ref}",
+        "predicate": "connecting_surface_has_revisable_floor_role",
+        "family": "dynamic",
+        "epistemic_status": "supported",
+        "argument_patterns": [
+          "schema.connecting_surface_floor_supposition.{open_cavity_connecting_surface_ref}"
+        ],
+        "required_fields": [
+          "open_cavity_connecting_surface_ref",
+          "open_cavity_connecting_surface_value"
+        ],
+        "static_attributes": {
+          "commitment": "revisable",
+          "falsifier": "observed_translation_cannot_traverse_the_connecting_region"
+        }
+      },
+      {
+        "id_pattern": "claim.open_exact_fit_core.{open_cavity_component_ref}.{open_cavity_revalidation_frame_ref}",
+        "predicate": "currently_observes_exact_fit_open_core",
+        "family": "dynamic",
+        "epistemic_status": "supported",
+        "argument_patterns": ["schema.open_exact_fit_core.{open_cavity_component_ref}"],
+        "required_fields": ["open_cavity_component_ref", "open_cavity_core_bbox", "open_cavity_body_bbox", "open_cavity_inward_cell_delta", "open_cavity_revalidation_frame_ref"],
+        "static_attributes": {"acceptance_is_not_established_by_topology": true},
+        "attribute_bindings": {
+          "memory_revalidation_observation_ref": "open_cavity_revalidation_frame_ref"
+        }
+      },
+      {
+        "id_pattern": "claim.connecting_surface_floor_supposition.{open_cavity_connecting_surface_ref}.{open_cavity_revalidation_frame_ref}",
+        "predicate": "current_observation_supports_connecting_surface_floor_role",
+        "family": "dynamic",
+        "epistemic_status": "supported",
+        "argument_patterns": ["schema.connecting_surface_floor_supposition.{open_cavity_connecting_surface_ref}"],
+        "required_fields": ["open_cavity_connecting_surface_ref", "open_cavity_connecting_surface_value", "open_cavity_revalidation_frame_ref"],
+        "static_attributes": {"commitment": "revisable", "falsifier": "observed_translation_cannot_traverse_the_connecting_region"},
+        "attribute_bindings": {
+          "memory_revalidation_observation_ref": "open_cavity_revalidation_frame_ref"
+        }
+      }
+    ],
+    "reason_refs": [
+      "reason.observed_stop_and_connecting_surface_are_conserved_before_next_primitive"
+    ]
+  }
+  ]
+}

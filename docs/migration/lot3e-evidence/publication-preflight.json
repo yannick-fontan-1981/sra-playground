@@ -1,0 +1,80 @@
+{
+  "schema": "logos-engine.lot3e.publication-inputs.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T13:14:31.812235+00:00",
+  "generator": {
+    "path": "docs/migration/lot3e-evidence/verify-publication-inputs.py",
+    "bytes": 3966,
+    "sha256": "ad31e5f77845efc7af7aeb9013476797fd7de7da1ca1747265930b5cf49b2389"
+  },
+  "nativeDigest": "5adf58cb9bd0802dd083812e7591c53cb786410ad23c14a29814d870ef67276c",
+  "checkedInventories": {
+    "native": 260,
+    "sourceAndTests": 586,
+    "buildInputs": 325
+  },
+  "globalCostAccepted": true,
+  "inputs": [
+    {
+      "path": "docs/migration/lot3e-evidence/final/source-manifest.json",
+      "bytes": 30770,
+      "sha256": "02ce173c4784af4e4f6bba3c2f7d3f72a2c2dc17cfe5c5ef46c0a2cf35c47238"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/validation/delta-tests-run.json",
+      "bytes": 107247,
+      "sha256": "cb8bc93dffa50aab7a0489ea925e126d9fd591cbd6f68811f4d21b8597ac1e45"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/validation/checks-run.json",
+      "bytes": 72069,
+      "sha256": "78925d2aceae25a29356fef35f59cea12d5148b452644cfd5d4a2054b22aba1b"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/regressions/regression-summary.json",
+      "bytes": 77752,
+      "sha256": "2a0a9303ffb14e8c76f3d5afe1d20b61f3f7de902cc45f847fe90da80e63e04c"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/browser/browser-qa.json",
+      "bytes": 2441,
+      "sha256": "7dc2c8bb79ebbcf89c3731d8a070bfe008d38179ef193fc13fa3e52031eb2b72"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/fogw-resolution.json",
+      "bytes": 4677,
+      "sha256": "832b8c8aa7b57fe9634e52f82d76d06a8808b1cdbccc5e4c96437d929b819f6e"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/delivery-integrity.json",
+      "bytes": 7218,
+      "sha256": "834029db4bfd19311efb88970d6f7c63cf4462ac2cf738e9e63100de6687edc1"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/performance/readiness.json",
+      "bytes": 6168,
+      "sha256": "218e81e424ef762ab2075c026c0f9438146812f6f6eb9227de61be1018afcb12"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/performance/window.json",
+      "bytes": 10161,
+      "sha256": "3109bbc5f3c72d230daf3e06c3ce4110994cd7666fea2938d4deef545f76e3a9"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/performance/global-budget-decision.json",
+      "bytes": 29837,
+      "sha256": "ff55f921d98d75c9256ac4af71a8eff3119eb8ac943016139afb1f353d3d31b8"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/performance/consolidation-review.json",
+      "bytes": 46785,
+      "sha256": "008e371642dc0120c825db7fa2bd394e2b8fbeba8aa095a5dbe94e0ce6af6e8a"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/performance/results.md",
+      "bytes": 27499,
+      "sha256": "b670c02452a42f8771f1646c97e818cf7531ba8fcf132af7b91a829aff52bbdb"
+    }
+  ],
+  "qualification": "Final retained-input check after completed timing. No source, test, build, game or cost result is regenerated. ReceptionService meets the announced three-level FOGW target. Native adaptations, source exception, request-specific continuation limit and prior CWSE/SK48 reservations remain explicit. Cost acceptance is reported independently; this check cannot override it."
+}

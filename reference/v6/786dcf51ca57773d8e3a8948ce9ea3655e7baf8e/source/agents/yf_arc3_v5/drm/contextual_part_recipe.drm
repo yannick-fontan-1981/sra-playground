@@ -1,0 +1,1010 @@
+{
+  "module_id": "contextual_part_recipe",
+  "declarations": [
+    {
+      "id": "policy.revalidate_pending_contextual_part_observation",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "configuration": {
+        "current_binding_measurement": {
+          "projection_contract": "yf_arc3_v5.contextual_part_recipe_binding.v1",
+          "maximum_rows": 64,
+          "required_attributes": {"binding_operational": false},
+          "accepted_observation_phases": ["contextual_change", "pending_configuration_revalidated"],
+          "required_fields": [
+            "recipe_token", "core_entity_ref", "part_entity_ref", "context_epoch",
+            "core_signature", "changed_part_signature", "contact_offset",
+            "recipe_premise_claim_refs", "operator_action_ref", "operator_transition_ref",
+            "original_part_signature", "original_core_bbox", "original_part_bbox"
+          ],
+          "proof_predicate": "observed_contextual_part_recipe_sample",
+          "proof_statuses": ["supported", "established"],
+          "proof_disposition": "active",
+          "proof_polarity": "positive",
+          "require_current_undefeated_proofs": true,
+          "require_common_motion": false,
+          "require_original_pose": true,
+          "revalidated_phase": "pending_configuration_revalidated"
+        }
+      },
+      "reason_refs": ["reason.retain_contextual_part_change_and_following_common_motion_separately"],
+      "invariants": [
+        "only_exact_current_identities_signatures_and_relative_pose_are_revalidated",
+        "revalidation_preserves_an_open_question_and_does_not_infer_attachment",
+        "common_motion_and_action_authority_remain_unacquired"
+      ]
+    },
+    {
+      "id": "policy.capture_contextual_command_assembly_appearance",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "memory_capture.canonical_cursor"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "learning_rows",
+          "operator": "is_present"
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.memory_capture.contextual_command_assembly",
+          "all_conditions": [],
+          "static_facts": {
+            "canonical_learning_projection": {
+              "term_attributes": {
+                "role": "controlled_assembly_supposition",
+                "morphology_mode": "exact_contextual_command_group"
+              },
+              "member_entity_refs_attribute": "member_refs",
+              "require_common_nonzero_member_translation": true,
+              "link_predicate": "proposes_role_candidate",
+              "proof_rule": "rule.observed_contextual_part_recipe",
+              "allowed_link_statuses": [
+                "proposed",
+                "supported",
+                "established"
+              ],
+              "link_disposition": "active",
+              "link_polarity": "positive",
+              "entity_attribute": "entity_ref",
+              "component_attribute": null,
+              "transition_attribute": "transition_ref",
+              "action_attribute": "action_ref",
+              "claim_entity_argument_index": 0,
+              "dedup_entry_id_pattern": "supposition.memory.association.{association_token}",
+              "static_learning_facts": {
+                "causal_role_ref": "role.controlled_assembly_supposition",
+                "mechanism_schema_refs": [
+                  "rule.observed_contextual_part_recipe"
+                ],
+                "disables_source_entity_role_projection": false,
+                "archives_source_role_fact_projection": false,
+                "falsifier_refs": [
+                  "falsifier.member_cotranslation_breaks_rigid_support"
+                ],
+                "action_conditioned_role_evidence_present": true
+              },
+              "alternative_current_pose_proof": {
+                "predicate": "observed_anchored_pose_part_correspondence",
+                "frame_attribute": "operational_scene_ref",
+                "transition_attribute": "observation_transition_ref",
+                "epoch_attribute": "context_epoch",
+                "prior_refs_attribute": "prior_pose_evidence_refs",
+                "prior_predicate": "observed_contextual_part_recipe_sample",
+                "prior_motion_attribute": "common_motion_transition_ref",
+                "statuses": [
+                  "supported",
+                  "established"
+                ],
+                "disposition": "active",
+                "polarity": "positive"
+              }
+            }
+          }
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "memory_capture.canonical_cursor": "rule.captured_canonical_role_appearances"
+      },
+      "premises": [
+        "observed_common_motion_or_unique_current_pose_with_prior_common_motion",
+        "existing_core_control_is_preserved"
+      ],
+      "invariants": [
+        "use_the_shared_role_acquisition_receipt_and_current_revalidation",
+        "members_remain_distinct",
+        "push_and_attachment_remain_revisable",
+        "no_universal_operator_law"
+      ],
+      "falsifiers": [
+        "member_identity_or_relative_motion_contradicts_the_current_support"
+      ],
+      "reason_refs": [
+        "reason.contextual_common_motion_can_supply_a_revisable_assembly_without_replacing_its_control"
+      ]
+    },
+    {
+      "id": "policy.interpret_contextual_part_recipe_observation",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "contextual_part.observed"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "contextual_part.observed": "rule.observed_contextual_part_recipe"
+      },
+      "configuration": {
+        "method_sample_inventory": {
+          "projection_contract": "yf_arc3_v5.contextual_part_recipe_memory.v1",
+          "maximum_rows": 64,
+          "required_attributes": {
+            "memory_scope": "same_game",
+            "observation_phase": "common_motion",
+            "universal_operator_law": false
+          },
+          "required_fields": [
+            "recipe_token",
+            "operator_action_ref",
+            "core_signature",
+            "original_part_signature",
+            "changed_part_signature",
+            "contact_offset",
+            "common_motion_transition_ref",
+            "recipe_premise_claim_refs"
+          ],
+          "evidence_field": "recipe_premise_claim_refs",
+          "proof_predicate": "observed_contextual_part_recipe_sample",
+          "proof_statuses": [
+            "supported",
+            "established"
+          ],
+          "proof_disposition": "active",
+          "proof_polarity": "positive",
+          "transported_fields": [
+            "recipe_token",
+            "operator_action_ref",
+            "core_signature",
+            "original_part_signature",
+            "changed_part_signature",
+            "contact_offset",
+            "common_motion_transition_ref",
+            "recipe_premise_claim_refs"
+          ]
+        },
+        "current_binding_measurement": {
+          "projection_contract": "yf_arc3_v5.contextual_part_recipe_binding.v1",
+          "maximum_rows": 64,
+          "required_attributes": {
+            "binding_operational": true,
+            "canonical_fact_projection_enabled": true
+          },
+          "required_fields": [
+            "recipe_token",
+            "core_entity_ref",
+            "part_entity_ref",
+            "context_epoch",
+            "core_signature",
+            "changed_part_signature",
+            "contact_offset",
+            "recipe_premise_claim_refs"
+          ],
+          "proof_predicate": "observed_contextual_part_recipe_sample",
+          "proof_statuses": [
+            "supported",
+            "established"
+          ],
+          "proof_disposition": "active",
+          "proof_polarity": "positive",
+          "pose_correspondence_proof_predicate": "observed_anchored_pose_part_correspondence"
+        },
+        "pose_observation_measurement": {
+          "maximum_support_pixels": 4096,
+          "pivot_coordinate_basis": "doubled_row_col",
+          "metadata_fields": [
+            "common_motion_transition_ref",
+            "observation_phase",
+            "prior_recipe_token",
+            "prior_pose_evidence_refs",
+            "pose_quarter_turns",
+            "pose_pivot_doubled",
+            "pose_prior_part_entity_ref",
+            "pose_current_part_identity_status",
+            "pose_correspondence_unique",
+            "pose_correspondence_claim_refs",
+            "acquired_part_appearance_value"
+          ],
+          "pending_pose_phases": [
+            "transformed_pose_pending_motion",
+            "transformed_pose_revalidated_pending_motion"
+          ],
+          "maximum_candidate_entities": 4096
+        },
+        "series_confirmation_measurement": {
+          "revalidate_current_origin_from_exact_geometry": true,
+          "projection_contract": "yf_arc3_v5.contextual_part_recipe_binding.v1",
+          "maximum_rows": 64,
+          "required_attributes": {},
+          "accepted_observation_phases": [
+            "contextual_change",
+            "pending_configuration_revalidated",
+            "transformed_pose_pending_motion",
+            "transformed_pose_revalidated_pending_motion"
+          ],
+          "required_fields": [
+            "recipe_token",
+            "core_entity_ref",
+            "part_entity_ref",
+            "context_epoch",
+            "core_signature",
+            "changed_part_signature",
+            "contact_offset",
+            "recipe_premise_claim_refs",
+            "operational_scene_ref",
+            "operator_action_ref",
+            "operator_transition_ref",
+            "original_part_signature",
+            "original_core_bbox",
+            "original_part_bbox"
+          ],
+          "proof_predicate": "observed_contextual_part_recipe_sample",
+          "proof_statuses": [
+            "supported",
+            "established"
+          ],
+          "proof_disposition": "active",
+          "proof_polarity": "positive",
+          "binding_id_pattern": "supposition.contextual_part_recipe_binding.{recipe_token}",
+          "pose_correspondence_proof_predicate": "observed_anchored_pose_part_correspondence"
+        },
+        "effect_sample_inventory": {
+          "projection_contract": "yf_arc3_v5.contextual_part_effect_memory.v1",
+          "maximum_rows": 64,
+          "required_attributes": {
+            "memory_scope": "same_game",
+            "effect_observed": true,
+            "universal_operator_law": false
+          },
+          "required_fields": [
+            "recipe_token",
+            "operator_action_ref",
+            "operator_support_context",
+            "original_part_signature",
+            "changed_part_signature",
+            "recipe_premise_claim_refs"
+          ],
+          "transported_fields": [
+            "recipe_token",
+            "operator_action_ref",
+            "operator_support_context",
+            "original_part_signature",
+            "changed_part_signature",
+            "recipe_premise_claim_refs"
+          ],
+          "evidence_field": "recipe_premise_claim_refs",
+          "proof_predicate": "observed_contextual_part_recipe_sample",
+          "proof_statuses": [
+            "supported",
+            "established"
+          ],
+          "proof_disposition": "active",
+          "proof_polarity": "positive"
+        }
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "recipe_token",
+          "operator": "is_present"
+        }
+      ],
+      "reason_refs": [
+        "reason.retain_contextual_part_change_and_following_common_motion_separately"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.contextual_part.observation_reference",
+          "all_conditions": [],
+          "static_facts": {
+            "declared_recipe_binding_operational": false,
+            "capture_current_recipe_assembly": false,
+            "declared_recipe_context_available": false
+          },
+          "templated_facts": {
+            "recipe_premise_claim_refs": [
+              "claim.contextual_part_recipe.{recipe_token}.{observation_transition_ref}"
+            ]
+          }
+        },
+        {
+          "id": "projection.contextual_part.observed_transformed_pose_pending_motion",
+          "all_conditions": [
+            {
+              "field": "observation_phase",
+              "operator": "equals",
+              "expected": "transformed_pose_observation"
+            }
+          ],
+          "static_facts": {
+            "declared_recipe_binding_operational": false,
+            "capture_current_recipe_assembly": true,
+            "observed_pose_is_pending_common_motion": true,
+            "observation_phase": "transformed_pose_pending_motion",
+            "declared_recipe_context_available": true
+          },
+          "templated_facts": {
+            "pose_correspondence_claim_refs": [
+              "claim.contextual_part_pose_correspondence.{recipe_token}.{observation_transition_ref}"
+            ],
+            "current_recipe_support_requests": [
+              {
+                "bearer_ref": "supposition.controlled_assembly.contextual_recipe.{recipe_token}",
+                "member_entity_refs": {
+                  "$fact": "current_member_entity_refs"
+                },
+                "observation_ref": {
+                  "$fact": "operational_scene_ref"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "projection.contextual_part.revalidated_transformed_pose_pending_motion",
+          "all_conditions": [
+            {
+              "field": "observation_phase",
+              "operator": "equals",
+              "expected": "transformed_pose_revalidation_observation"
+            }
+          ],
+          "static_facts": {
+            "observation_phase": "transformed_pose_revalidated_pending_motion",
+            "declared_recipe_binding_operational": false,
+            "capture_current_recipe_assembly": true,
+            "pending_pose_revalidated_without_new_transform": true,
+            "declared_recipe_context_available": true
+          },
+          "templated_facts": {
+            "pose_correspondence_claim_refs": [
+              "claim.contextual_part_pose_correspondence.{recipe_token}.{observation_transition_ref}"
+            ],
+            "current_recipe_support_requests": [
+              {
+                "bearer_ref": "supposition.controlled_assembly.contextual_recipe.{recipe_token}",
+                "member_entity_refs": {
+                  "$fact": "current_member_entity_refs"
+                },
+                "observation_ref": {
+                  "$fact": "operational_scene_ref"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "projection.contextual_part.captured_series_confirmation",
+          "all_conditions": [
+            {
+              "field": "series_covariance_matches_pending_operator",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "series_moved_sample_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "observation_phase": "common_motion"
+          }
+        },
+        {
+          "id": "projection.contextual_part.common_motion_binding",
+          "all_conditions": [
+            {
+              "field": "observation_phase",
+              "operator": "equals",
+              "expected": "common_motion"
+            }
+          ],
+          "static_facts": {
+            "declared_recipe_binding_operational": true,
+            "declared_recipe_context_available": true
+          }
+        },
+        {
+          "id": "projection.contextual_part.current_command_assembly_acquisition",
+          "all_conditions": [
+            {
+              "field": "observation_phase",
+              "operator": "equals",
+              "expected": "common_motion"
+            },
+            {
+              "field": "action_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "common_motion_transition_ref",
+              "operator": "is_present"
+            }
+          ],
+          "static_facts": {
+            "capture_current_recipe_assembly": true
+          },
+          "templated_facts": {
+            "current_recipe_support_requests": [
+              {
+                "bearer_ref": "supposition.controlled_assembly.contextual_recipe.{recipe_token}",
+                "member_entity_refs": {
+                  "$fact": "current_member_entity_refs"
+                },
+                "observation_ref": {
+                  "$fact": "operational_scene_ref"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "projection.contextual_part.current_revalidation",
+          "all_conditions": [
+            {
+              "field": "observation_phase",
+              "operator": "equals",
+              "expected": "current_configuration_revalidated"
+            },
+            {
+              "field": "prior_common_motion_evidence_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_identities_and_relative_geometry_match",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "declared_recipe_binding_operational": true,
+            "new_common_motion_observed": false,
+            "declared_recipe_context_available": true
+          }
+        }
+      ],
+      "invariants": [
+        "appearance_change_alone_does_not_establish_attachment",
+        "observed_core_identity_is_preserved",
+        "original_part_disposition_is_retained",
+        "a_common_motion_sample_does_not_establish_a_universal_grasp_law",
+        "a_recipe_requires_current_revalidation_before_execution"
+      ]
+    },
+    {
+      "id": "rule.observed_contextual_part_recipe",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "reason_refs": [
+        "reason.retain_contextual_part_change_and_following_common_motion_separately"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "supposition.controlled_assembly.contextual_recipe.{recipe_token}",
+          "kind": "schema",
+          "label": "revisable command assembly from an observed contextual recipe",
+          "all_conditions": [
+            {
+              "field": "capture_current_recipe_assembly",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "required_fields": [
+            "recipe_token",
+            "current_member_entity_refs",
+            "action_ref",
+            "observation_transition_ref"
+          ],
+          "static_attributes": {
+            "role": "controlled_assembly_supposition",
+            "morphology_mode": "exact_contextual_command_group",
+            "commitment": "revisable",
+            "requires_enclosing_anchor": false,
+            "canonical_fact_projection_enabled": false,
+            "universal_operator_law": false
+          },
+          "attribute_bindings": {
+            "member_refs": "current_member_entity_refs",
+            "action_ref": "action_ref",
+            "transition_ref": "observation_transition_ref",
+            "context_epoch": "context_epoch"
+          }
+        },
+        {
+          "id_pattern": "supposition.memory.contextual_part_recipe.{recipe_token}",
+          "kind": "schema",
+          "label": "observed contextual part recipe sample",
+          "required_fields": [
+            "recipe_token",
+            "operator_action_ref",
+            "operator_transition_ref",
+            "core_signature",
+            "original_part_signature",
+            "changed_part_signature",
+            "contact_offset",
+            "original_core_bbox",
+            "original_part_bbox"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.contextual_part_recipe_memory.v1",
+            "memory_scope": "same_game",
+            "canonical_fact_projection_enabled": false,
+            "action_authorization": false,
+            "commitment": "revisable",
+            "universal_operator_law": false
+          },
+          "attribute_bindings": {
+            "recipe_token": "recipe_token",
+            "operator_action_ref": "operator_action_ref",
+            "operator_transition_ref": "operator_transition_ref",
+            "core_signature": "core_signature",
+            "original_part_signature": "original_part_signature",
+            "changed_part_signature": "changed_part_signature",
+            "contact_offset": "contact_offset",
+            "original_core_bbox": "original_core_bbox",
+            "original_part_bbox": "original_part_bbox",
+            "observed_context_epoch": "context_epoch",
+            "observation_phase": "observation_phase",
+            "common_motion_transition_ref": "common_motion_transition_ref",
+            "recipe_premise_claim_refs": "recipe_premise_claim_refs",
+            "acquired_part_appearance_value": "acquired_part_appearance_value"
+          }
+        },
+        {
+          "id_pattern": "supposition.contextual_part_recipe_binding.{recipe_token}",
+          "kind": "schema",
+          "label": "revisable contextual part current binding",
+          "required_fields": [
+            "recipe_token",
+            "core_entity_ref",
+            "part_entity_ref",
+            "context_epoch",
+            "operational_scene_ref",
+            "declared_recipe_binding_operational"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.contextual_part_recipe_binding.v1",
+            "action_authorization": false,
+            "universal_operator_law": false,
+            "assembly_member_binding_comparison": "nonempty_subset"
+          },
+          "attribute_bindings": {
+            "canonical_fact_projection_enabled": "declared_recipe_context_available",
+            "binding_operational": "declared_recipe_binding_operational",
+            "recipe_token": "recipe_token",
+            "core_entity_ref": "core_entity_ref",
+            "part_entity_ref": "part_entity_ref",
+            "core_signature": "core_signature",
+            "original_part_signature": "original_part_signature",
+            "changed_part_signature": "changed_part_signature",
+            "contact_offset": "contact_offset",
+            "original_core_bbox": "original_core_bbox",
+            "original_part_bbox": "original_part_bbox",
+            "operator_action_ref": "operator_action_ref",
+            "operator_transition_ref": "operator_transition_ref",
+            "context_epoch": "context_epoch",
+            "operational_scene_ref": "operational_scene_ref",
+            "observation_phase": "observation_phase",
+            "common_motion_transition_ref": "common_motion_transition_ref",
+            "current_member_entity_refs": "current_member_entity_refs",
+            "recipe_premise_claim_refs": "recipe_premise_claim_refs",
+            "prior_recipe_token": "prior_recipe_token",
+            "prior_pose_evidence_refs": "prior_pose_evidence_refs",
+            "pose_quarter_turns": "pose_quarter_turns",
+            "pose_pivot_doubled": "pose_pivot_doubled",
+            "pose_prior_part_entity_ref": "pose_prior_part_entity_ref",
+            "pose_current_part_identity_status": "pose_current_part_identity_status",
+            "pose_correspondence_unique": "pose_correspondence_unique",
+            "pose_correspondence_claim_refs": "pose_correspondence_claim_refs",
+            "acquired_part_appearance_value": "acquired_part_appearance_value"
+          }
+        },
+        {
+          "id_pattern": "observation.contextual_part_pose.{recipe_token}.{observation_transition_ref}",
+          "kind": "schema",
+          "label": "distinct observed pose of an acquired contextual relation, pending common motion",
+          "all_conditions": [
+            {
+              "field": "observation_phase",
+              "operator": "equals",
+              "expected": "transformed_pose_pending_motion"
+            }
+          ],
+          "required_fields": [
+            "recipe_token",
+            "observation_transition_ref",
+            "prior_recipe_token",
+            "prior_pose_evidence_refs",
+            "pose_quarter_turns",
+            "pose_pivot_doubled"
+          ],
+          "static_attributes": {
+            "role": "observed_contextual_part_pose_transform",
+            "action_authorization": false,
+            "attachment_preserved_proven": false,
+            "pivot_coordinate_basis": "doubled_row_col"
+          },
+          "attribute_bindings": {
+            "prior_recipe_token": "prior_recipe_token",
+            "prior_pose_evidence_refs": "prior_pose_evidence_refs",
+            "pose_quarter_turns": "pose_quarter_turns",
+            "pose_pivot_doubled": "pose_pivot_doubled",
+            "observation_transition_ref": "observation_transition_ref",
+            "core_entity_ref": "core_entity_ref",
+            "pose_prior_part_entity_ref": "pose_prior_part_entity_ref",
+            "part_entity_ref": "part_entity_ref",
+            "pose_current_part_identity_status": "pose_current_part_identity_status"
+          }
+        },
+        {
+          "id_pattern": "memory.contextual_part_effect.{recipe_token}",
+          "kind": "schema",
+          "label": "observed composed operator effect under an exact typed support condition",
+          "required_fields": [
+            "recipe_token",
+            "operator_action_ref",
+            "operator_support_context",
+            "original_part_signature",
+            "changed_part_signature"
+          ],
+          "all_conditions": [
+            {
+              "field": "prior_part_cotranslation_observed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observation_phase",
+              "operator": "equals",
+              "expected": "contextual_change"
+            }
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.contextual_part_effect_memory.v1",
+            "memory_scope": "same_game",
+            "effect_observed": true,
+            "release_confirmed": false,
+            "action_authorization": false,
+            "universal_operator_law": false
+          },
+          "attribute_bindings": {
+            "recipe_token": "recipe_token",
+            "operator_action_ref": "operator_action_ref",
+            "operator_support_context": "operator_support_context",
+            "original_part_signature": "original_part_signature",
+            "changed_part_signature": "changed_part_signature",
+            "recipe_premise_claim_refs": "recipe_premise_claim_refs"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.role.candidate.contextual_recipe_assembly.{recipe_token}.{observation_transition_ref}",
+          "predicate": "proposes_role_candidate",
+          "family": "dynamic",
+          "epistemic_status": "proposed",
+          "all_conditions": [
+            {
+              "field": "capture_current_recipe_assembly",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "required_fields": [
+            "recipe_token",
+            "action_ref",
+            "observation_transition_ref"
+          ],
+          "argument_patterns": [
+            "supposition.controlled_assembly.contextual_recipe.{recipe_token}",
+            "role.controlled_assembly_supposition"
+          ],
+          "required_term_patterns": [
+            "supposition.controlled_assembly.contextual_recipe.{recipe_token}"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "is_frozen_action_contract": false,
+            "universal_operator_law": false
+          },
+          "attribute_bindings": {
+            "action_ref": "action_ref",
+            "transition_ref": "observation_transition_ref"
+          }
+        },
+        {
+          "id_pattern": "claim.contextual_part_recipe.{recipe_token}.{observation_transition_ref}",
+          "predicate": "observed_contextual_part_recipe_sample",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{core_entity_ref}",
+            "{part_entity_ref}",
+            "{operator_action_ref}"
+          ],
+          "required_fields": [
+            "recipe_token",
+            "observation_transition_ref",
+            "core_entity_ref",
+            "part_entity_ref",
+            "operator_action_ref"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "universal_operator_law": false,
+            "action_authorization": false
+          },
+          "attribute_bindings": {
+            "observation_phase": "observation_phase",
+            "operator_transition_ref": "operator_transition_ref",
+            "common_motion_transition_ref": "common_motion_transition_ref",
+            "context_epoch": "context_epoch",
+            "operational_scene_ref": "operational_scene_ref"
+          }
+        },
+        {
+          "id_pattern": "claim.contextual_part_pose_correspondence.{recipe_token}.{observation_transition_ref}",
+          "predicate": "observed_anchored_pose_part_correspondence",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{core_entity_ref}",
+            "{part_entity_ref}"
+          ],
+          "required_fields": [
+            "recipe_token",
+            "observation_transition_ref",
+            "core_entity_ref",
+            "pose_prior_part_entity_ref",
+            "part_entity_ref",
+            "pose_correspondence_unique"
+          ],
+          "all_conditions": [
+            {
+              "field": "pose_correspondence_unique",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "observation_phase",
+              "operator": "equals",
+              "expected": "transformed_pose_pending_motion"
+            },
+            {
+              "field": "observation_phase",
+              "operator": "equals",
+              "expected": "transformed_pose_revalidated_pending_motion"
+            }
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "action_authorization": false,
+            "global_tracking_identity_rewritten": false,
+            "attachment_preserved_proven": false
+          },
+          "attribute_bindings": {
+            "context_epoch": "context_epoch",
+            "operational_scene_ref": "operational_scene_ref",
+            "operator_transition_ref": "operator_transition_ref",
+            "pose_prior_part_entity_ref": "pose_prior_part_entity_ref",
+            "part_entity_ref": "part_entity_ref",
+            "observation_transition_ref": "observation_transition_ref",
+            "prior_pose_evidence_refs": "prior_pose_evidence_refs"
+          }
+        }
+      ],
+      "invariants": [
+        "portable_sample_is_not_current_role_authority",
+        "current_binding_requires_prior_exact_common_motion_and_current_relative_pose",
+        "current_revalidation_never_invents_a_new_motion_or_operator_law",
+        "changed_orientation_or_identity_reopens_revalidation",
+        "an_unchanged_image_does_not_erase_a_currently_revalidated_recipe"
+      ]
+    },
+    {
+      "id": "rule.retain_observed_translation_underlays",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "configuration": {
+        "measurement_contract": {
+          "scope_invalidation_action_refs": [
+            "ACTION7"
+          ],
+          "scope": "same_timeline_epoch_and_consecutive_observed_frames",
+          "hidden_support_validity": "conditional_only"
+        }
+      },
+      "reason_refs": [
+        "reason.unchanged_visible_return_preserves_conditional_observed_supports"
+      ],
+      "invariants": [
+        "retained_observation_is_not_current_observation",
+        "visible_conflicts_remove_affected_samples",
+        "frame_lineage_break_or_epoch_change_discards_previous_carrier",
+        "no_hidden_mutation_absence_or_action_authorization_is_derived"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "memory.observed_underlays.{carrier_token}",
+          "kind": "schema",
+          "label": "conditional retained observed spatial supports",
+          "required_fields": [
+            "carrier_token",
+            "timeline_ref",
+            "context_epoch",
+            "support_samples",
+            "before_frame_ref",
+            "operational_scene_ref",
+            "transition_ref",
+            "retained_sample_count",
+            "new_observed_sample_count",
+            "invalidated_sample_count",
+            "frame_lineage_continuous",
+            "visible_configuration_unchanged",
+            "hidden_mutation_absence_proven",
+            "support_validity_kind",
+            "scope_epoch_unchanged",
+            "scope_invalidation_requested",
+            "scope_discarded_sample_count",
+            "observed_transition_pair_count",
+            "packet_initial_frame_lineage_continuous",
+            "observation_pair_reprocessed"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.retained_observed_underlays.v1",
+            "canonical_fact_projection_enabled": false,
+            "action_authorization": false,
+            "commitment": "revisable"
+          },
+          "attribute_bindings": {
+            "carrier_token": "carrier_token",
+            "timeline_ref": "timeline_ref",
+            "context_epoch": "context_epoch",
+            "support_samples": "support_samples",
+            "before_frame_ref": "before_frame_ref",
+            "operational_scene_ref": "operational_scene_ref",
+            "transition_ref": "transition_ref",
+            "retained_sample_count": "retained_sample_count",
+            "new_observed_sample_count": "new_observed_sample_count",
+            "invalidated_sample_count": "invalidated_sample_count",
+            "frame_lineage_continuous": "frame_lineage_continuous",
+            "visible_configuration_unchanged": "visible_configuration_unchanged",
+            "hidden_mutation_absence_proven": "hidden_mutation_absence_proven",
+            "support_validity_kind": "support_validity_kind",
+            "scope_epoch_unchanged": "scope_epoch_unchanged",
+            "scope_invalidation_requested": "scope_invalidation_requested",
+            "scope_discarded_sample_count": "scope_discarded_sample_count",
+            "observed_transition_pair_count": "observed_transition_pair_count",
+            "packet_initial_frame_lineage_continuous": "packet_initial_frame_lineage_continuous",
+            "observation_pair_reprocessed": "observation_pair_reprocessed"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.conditional_observed_supports.{carrier_token}.{transition_ref}",
+          "predicate": "records_conditional_retained_observed_support_samples",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "memory.observed_underlays.{carrier_token}"
+          ],
+          "required_fields": [
+            "carrier_token",
+            "timeline_ref",
+            "context_epoch",
+            "before_frame_ref",
+            "operational_scene_ref",
+            "transition_ref",
+            "retained_sample_count",
+            "new_observed_sample_count",
+            "invalidated_sample_count",
+            "frame_lineage_continuous",
+            "visible_configuration_unchanged",
+            "hidden_mutation_absence_proven",
+            "support_validity_kind",
+            "scope_epoch_unchanged",
+            "scope_invalidation_requested",
+            "scope_discarded_sample_count"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "canonical_fact_projection_enabled": false,
+            "action_authorization": false,
+            "current_terrain_observation_asserted": false,
+            "hidden_mutation_absence_asserted": false
+          },
+          "attribute_bindings": {
+            "timeline_ref": "timeline_ref",
+            "context_epoch": "context_epoch",
+            "before_frame_ref": "before_frame_ref",
+            "operational_scene_ref": "operational_scene_ref",
+            "transition_ref": "transition_ref",
+            "retained_sample_count": "retained_sample_count",
+            "new_observed_sample_count": "new_observed_sample_count",
+            "invalidated_sample_count": "invalidated_sample_count",
+            "frame_lineage_continuous": "frame_lineage_continuous",
+            "visible_configuration_unchanged": "visible_configuration_unchanged",
+            "hidden_mutation_absence_proven": "hidden_mutation_absence_proven",
+            "support_validity_kind": "support_validity_kind",
+            "scope_epoch_unchanged": "scope_epoch_unchanged",
+            "scope_invalidation_requested": "scope_invalidation_requested",
+            "scope_discarded_sample_count": "scope_discarded_sample_count"
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.retain_observed_translation_underlays",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "support.retain_conditional_observation"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "underlay_observation_domain_valid",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "support.retain_conditional_observation": "rule.retain_observed_translation_underlays"
+      },
+      "configuration": {
+        "measurement_contract": {
+          "scope_invalidation_action_refs": [
+            "ACTION7"
+          ],
+          "scope": "same_timeline_epoch_and_consecutive_observed_frames",
+          "hidden_support_validity": "conditional_only"
+        }
+      },
+      "reason_refs": [
+        "reason.retain_observed_samples_without_asserting_hidden_mutation_absence"
+      ]
+    }
+  ]
+}

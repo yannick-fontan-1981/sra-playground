@@ -1,0 +1,88 @@
+{
+  "schema": "logos-engine.browser-qa-observation.v1",
+  "status": "controls_verified_campaign_target_unmet",
+  "recordedAt": "2026-11-10T05:25:51.715730+00:00",
+  "game": "CWSE",
+  "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.43.0",
+  "nativeSourceDigest": "3e88aa12214fd3d4a4feb8d63b946123b8394cb4a0cbd0a156cc059c37f7b46c",
+  "managedPreview": "http://127.0.0.1:4173/",
+  "finalObservedUrl": "http://127.0.0.1:4173/?game=CWSE&level=3",
+  "method": "CUA visible controls and DOM observations only; no browser internal agent state or game code read.",
+  "steps": [
+    {
+      "action": "Initial cold CWSE agent session",
+      "actions": 0,
+      "levelsSolved": 0,
+      "completedPlans": 0,
+      "level": 1
+    },
+    {
+      "action": "Run then Pause during initialization; Paused observed",
+      "actions": 0,
+      "levelsSolved": 0,
+      "completedPlans": 0,
+      "level": 1
+    },
+    {
+      "action": "One action completed",
+      "actions": 1,
+      "levelsSolved": 0,
+      "completedPlans": 1,
+      "level": 1
+    },
+    {
+      "action": "Run to next level; natural boundary",
+      "actions": 4,
+      "levelsSolved": 1,
+      "completedPlans": 4,
+      "level": 2
+    },
+    {
+      "action": "One action completed after first natural boundary",
+      "actions": 5,
+      "levelsSolved": 1,
+      "completedPlans": 5,
+      "level": 2
+    },
+    {
+      "action": "Run then Pause after engaged actions; Paused observed",
+      "actions": 7,
+      "levelsSolved": 1,
+      "completedPlans": 6,
+      "level": 2
+    },
+    {
+      "action": "Run to next level; second natural boundary",
+      "actions": 12,
+      "levelsSolved": 2,
+      "completedPlans": 11,
+      "level": 3
+    },
+    {
+      "action": "Run to next level; guarded stop at level3 observed",
+      "actions": 21,
+      "levelsSolved": 2,
+      "completedPlans": 13,
+      "level": 3,
+      "reason": "composition_target_unbound_action_set"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "docs/migration/lot3c-evidence/final/browser/cwse-two-levels-and-stop.png",
+      "bytes": 77542,
+      "sha256": "a4c13b537367ed44b2e96b1f6ee0e503c7bd59372bd14d80b051fe587595d168"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/browser/cwse-final-ax.txt",
+      "bytes": 10020,
+      "sha256": "fe8f4a614a73d0b7731ec0e0fb03e4e44f1a9d540b6cafa8a379193040593285"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/browser/cwse-observations.json",
+      "bytes": 85304,
+      "sha256": "308c8f889526bfff245c356b15a4f8e97ccadf669460244c35cec5177788e3b3"
+    }
+  ],
+  "qualification": "One continuous cold source-preview session. Pause observed at0 and7actions, single actions at1 and5, natural boundaries4/1/4 then12/2/11, final21actions/2levels/13plans stopped. Target3levels is unmet, same reason as journaled campaign. Initial attempt to bind the prior CATR tab timed out in focus emulation; a fresh preview tab recovered before any CWSE action. Inspector remained closed. Distinct from compiled-production execution, complete game victory or cost evidence."
+}

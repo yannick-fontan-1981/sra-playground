@@ -1,0 +1,103 @@
+--- record-publication-inputs-before.py
++++ record-publication-inputs.py
+@@ -14,6 +14,7 @@
+ 
+ import argparse
+ from datetime import datetime, timezone
++import gzip
+ import hashlib
+ import importlib.util
+ import json
+@@ -127,15 +128,80 @@
+     require(readiness['measurementAuthorized'] is True and readiness['pendingRequirements'] == []
+             and readiness['nativeSourceDigest'] == source['digest'], 'Completed measurement readiness is required')
+ 
++    validation_binding = {}
++
+     def formal_inputs():
+         require(native_inventory(ROOT) == source and native_inventory(baseline) == baseline_source, 'A frozen native inventory changed')
+         source_tests, test_counts = VERIFY.verify_tests(tests, source)
+         build_count, worker = VERIFY.verify_build(checks, source)
+         regressions, regression_inputs = VERIFY.verify_regressions(final / 'regressions/regression-summary.json', source, True)
+-        require(checks['sourceAndTestInputsUnchanged'] is True and checks['sourceAndTestInputs'] == tests['sourceAndTestInputs'],
+-                'Project checks and tests do not bind the same unchanged inputs')
+-        require(all(row.get('semanticPassed') is True for row in checks['checks'] if row['name'] in {'entry-audit', 'migration-audit'}),
+-                'The final entry and migration audits must pass semantically')
++        snapshot_keys = {'sourceAndTestInputs', 'sourceAndTestInputsUnchanged'}
++        present = snapshot_keys.intersection(checks)
++        checks_only = not present
++        if present:
++            require(present == snapshot_keys and checks['sourceAndTestInputsUnchanged'] is True
++                    and checks['sourceAndTestInputs'] == tests['sourceAndTestInputs'],
++                    'Project checks and tests do not bind the same unchanged inputs')
++        else:
++            # The official --build-script branch records buildInputs only. Its
++            # separate --tests receipt remains mandatory and is verified above.
++            require(set(checks) == {'schema', 'status', 'generator', 'nativeSource', 'nativeSourceManifestDigest',
++                                   'nativeSourceUnchanged', 'checks', 'buildInputs', 'nativeAgentWorker'}
++                    and checks['generator']['path'] == 'scripts/verify-native-delta.py'
++                    and [row['name'] for row in checks['checks']]
++                    == ['typecheck', 'entry-audit', 'migration-audit', 'diff-check', 'build'],
++                    'Only the official five checks-only receipt may omit its source/test snapshot')
++        require({name: digest for name, digest in tests['sourceAndTestInputs'].items() if name.startswith('src/')}
++                == {name: digest for name, digest in checks['buildInputs'].items() if name.startswith('src/')},
++                'Test and build receipts disagree on shared source inputs')
++        binding = {'checksSourceAndTestSnapshot': 'absent_in_official_five_checks_only' if checks_only
++                   else 'present_and_exactly_equal_to_tests',
++                   'testsSnapshotVerifiedAgainstCurrentInputs': True, 'buildInputsVerifiedAgainstCurrentInputs': True,
++                   'sharedSourceInputsExactlyEqual': True, 'audits': {}}
++        for row in checks['checks']:
++            name = row['name']
++            if name not in {'entry-audit', 'migration-audit'}:
++                continue
++            if 'semanticPassed' in row:
++                require(row['semanticPassed'] is True, 'Recorded audit semantic failure: ' + name)
++                binding['audits'][name] = {'mode': 'recorded_semantic_passed', 'semanticPassed': True}
++                continue
++            require(checks_only, 'A richer validation receipt must retain its semantic audit result: ' + name)
++            checked(row['output'])
++            log = VERIFY.confined(ROOT / row['output']['path'], validation)
++            summary = json.loads(gzip.decompress(log.read_bytes()), object_pairs_hook=VERIFY.unique_object,
++                                 parse_constant=VERIFY.invalid_constant)
++            report_path = ROOT / ('docs/migration/v6-entry-point-progress.json' if name == 'entry-audit'
++                                  else 'docs/migration/v6-coverage.json')
++            report = read(report_path)
++            require(report['referenceCommit'] == '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e',
++                    'Current audit report names another original source')
++            if name == 'entry-audit':
++                entries = [(group['id'], entry) for group in report['groups'] for entry in group['entries']
++                           if entry['question'] == 'facet_example']
++                expected = {key: report[key] for key in ('connected', 'declared', 'percent', 'fullV6Parity')}
++                expected['groups'] = [{key: group[key] for key in ('id', 'connected', 'declared')} for group in report['groups']]
++                require(report['schema'] == 'logos-engine.v6.declared-entry-coverage.v1'
++                        and report['implementation'] == 'logos-engine.typescript.v6.native-migration/' + review['nativeVersion']
++                        and report['fullV6Parity'] is False and summary['fullV6Parity'] is False
++                        and len(entries) == 1 and entries[0][0] == 'surface'
++                        and entries[0][1]['family'] == 'facet_examples' and entries[0][1]['status'] == 'connected',
++                        'Entry audit must retain the actual Facet source entry without claiming full V6 parity')
++            else:
++                expected = {'complete': report['complete'], **report['summary'], 'failures': report['failures']}
++                require(report['schema'] == 'logos-engine.native-migration-report.v1'
++                        and report['failures'] == [] and summary['failures'] == []
++                        and report['complete'] is False and summary['complete'] is False,
++                        'Migration audit must have no mapping failures and retain its incomplete migration scope')
++            require(json.dumps(summary, sort_keys=True, allow_nan=False) == json.dumps(expected, sort_keys=True, allow_nan=False),
++                    'Current audit report summary differs from its frozen gate log: ' + name)
++            binding['audits'][name] = {'mode': 'frozen_gate_log_with_current_closure_report', 'semanticPassed': True,
++                'frozenGateLog': row['output'], 'currentClosureReport': keep(report_path), 'summary': summary,
++                'historicalReportFingerprintClaimed': False,
++                'qualification': 'The fingerprinted log is the retained gate output. The detailed report is bound now at closure, '
++                                 'with its exact summary compared to that log; no missing historical report fingerprint is inferred.'}
++        require(not validation_binding or validation_binding == binding, 'Validation bindings changed during recording')
++        validation_binding.update(binding)
+         counts = {'native': len(source['files']), 'archive': VERIFY.check_map(archive['files'], 'publication archive inputs'),
+                   'sourceAndTests': source_tests, 'buildInputs': build_count, 'regressionExecutionInputs': regression_inputs}
+         require(counts == integrity['matchedFileInventories'] and test_counts == integrity['tests']
+@@ -208,6 +274,7 @@
+                         'validation': validation.relative_to(ROOT).as_posix()},
+         'fileInventories': counts, 'nativeAgentWorker': checks['nativeAgentWorker'], 'testFiles': len(tests['testFiles']),
+         'tests': tests['checks'][0]['counts'], 'projectChecks': len(checks['checks']), 'regressions': integrity['regressions'],
++        'validationInputBinding': validation_binding,
+         'costGlobalStatus': review['globalStatus'], 'globalAccepted': review['globalAccepted'],
+         'acceptedCases': review['acceptedCases'], 'totalCases': review['totalCases'], 'costPopulation': population,
+         'historicalStrictPassed': False, 'historicalStrict': historical, 'strictFailureExitCode': failure['exitCode'],

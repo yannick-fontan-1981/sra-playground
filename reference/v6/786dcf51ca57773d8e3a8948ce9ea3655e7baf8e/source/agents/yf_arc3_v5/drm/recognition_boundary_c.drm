@@ -1,0 +1,258 @@
+{
+  "module_id": "recognition_boundary_c",
+  "declarations": [
+    {
+      "id": "policy.recognition_boundary_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_role_context_and_raw_correspondence_rows_bound"
+      ],
+      "applicability": [
+        "appearance_recognition_boundary"
+      ],
+      "invariants": [
+        "reuse_existing_appearance_rank_no_new_score",
+        "incompatible_context_excluded_before_rank",
+        "unknown_context_stays_revisable",
+        "all_best_rank_ties_and_weaker_reserves_preserved",
+        "raw_masks_and_observational_aliases_retained",
+        "observational_equivalence_not_identity_action_or_terminal_acceptance",
+        "no_identifier_tie_break_or_act"
+      ],
+      "falsifiers": [
+        "stale_observation",
+        "role_context_mismatch",
+        "malformed_or_duplicate_binding",
+        "independent_equivalence_inferred_from_appearance"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "recognition.archive_noncurrent_rows",
+        "recognition.retain_unqualified_rows",
+        "recognition.retain_no_compatible_candidates",
+        "recognition.rank_under_existing_contract"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.recognition_boundary_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recognition.archive_noncurrent_rows"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "recognition.archive_noncurrent_rows"
+          }
+        },
+        {
+          "id": "projection.recognition_boundary_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recognition.retain_unqualified_rows"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "role_context_support_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "candidate_refs_unique",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "binding_tokens_unique",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "rows_well_formed",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "recognition.retain_unqualified_rows"
+          }
+        },
+        {
+          "id": "projection.recognition_boundary_c.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recognition.retain_no_compatible_candidates"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "role_context_support_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_refs_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "binding_tokens_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "rows_well_formed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "admitted_candidates_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "recognition.retain_no_compatible_candidates"
+          }
+        },
+        {
+          "id": "projection.recognition_boundary_c.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recognition.rank_under_existing_contract"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "role_context_support_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_refs_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "binding_tokens_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "rows_well_formed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "admitted_candidates_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "recognition.rank_under_existing_contract"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.recognition_boundary_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "recognition.archive_noncurrent_rows"
+            }
+          ],
+          "reason_ref": "reason.current_compatible_appearance_without_inherited_semantic_equivalence"
+        },
+        {
+          "id": "tier.recognition_boundary_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "recognition.retain_unqualified_rows"
+            }
+          ],
+          "reason_ref": "reason.current_compatible_appearance_without_inherited_semantic_equivalence"
+        },
+        {
+          "id": "tier.recognition_boundary_c.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "recognition.retain_no_compatible_candidates"
+            }
+          ],
+          "reason_ref": "reason.current_compatible_appearance_without_inherited_semantic_equivalence"
+        },
+        {
+          "id": "tier.recognition_boundary_c.3",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "recognition.rank_under_existing_contract"
+            }
+          ],
+          "reason_ref": "reason.current_compatible_appearance_without_inherited_semantic_equivalence"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.boundary_disposition_order_not_candidate_identity",
+      "reason_refs": [
+        "reason.current_compatible_appearance_without_inherited_semantic_equivalence"
+      ]
+    }
+  ]
+}

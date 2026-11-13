@@ -1,0 +1,124 @@
+{
+  "module_id": "macro_expansion_c",
+  "declarations": [
+    {
+      "id": "policy.macro_expansion_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_finite_quotient_contract"
+      ],
+      "applicability": [
+        "explicit_macro_expansion_request"
+      ],
+      "invariants": [
+        "full_underlying_states_retained",
+        "one_declared_cost_metric",
+        "relevant_successor_predicates_preserved",
+        "every_member_covered",
+        "no_physical_act"
+      ],
+      "falsifiers": [
+        "unknown_predicate",
+        "different_macro_cost",
+        "hidden_process_changes",
+        "partial_path",
+        "stale_scope"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "macro_expansion.qualified",
+        "macro_expansion.unqualified"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.macro_expansion.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "macro_expansion.qualified"
+            },
+            {
+              "field": "quotient_and_word_qualified",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "macro_expansion.qualified"
+          }
+        },
+        {
+          "id": "projection.macro_expansion.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "macro_expansion.unqualified"
+            },
+            {
+              "field": "quotient_and_word_qualified",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "macro_expansion.unqualified"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.macro_expansion.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "macro_expansion.qualified"
+            }
+          ],
+          "reason_ref": "reason.complete_cost_and_predicate_preserving_quotient_with_exact_primitive_expansion"
+        },
+        {
+          "id": "tier.macro_expansion.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "macro_expansion.unqualified"
+            }
+          ],
+          "reason_ref": "reason.partial_bounded_stale_or_nonconservative_macro_has_no_admissible_word"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.macro_certificate_does_not_attest_physical_transfer",
+      "reason_refs": [
+        "reason.complete_cost_and_predicate_preserving_quotient_with_exact_primitive_expansion",
+        "reason.partial_bounded_stale_or_nonconservative_macro_has_no_admissible_word"
+      ]
+    }
+  ]
+}

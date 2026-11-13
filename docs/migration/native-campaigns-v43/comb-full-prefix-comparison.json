@@ -1,0 +1,70 @@
+{
+  "schema": "logos-engine.v43.comb-full-public-prefix-comparison.v1",
+  "status": "passed",
+  "method": "Read saved reports and full public packets only; no game or agent execution. Commands and complete public packets are compared exactly without normalization. Prefix acquisition fields are compared separately as explicitly listed.",
+  "evidence": {
+    "threeReport": {
+      "path": "docs/migration/native-campaigns-v43/comb-three-levels.json",
+      "sha256": "fbedb3989fcb316319516897d1f1592ec3130757cf5c295a98415f73705357d8"
+    },
+    "sixReport": {
+      "path": "docs/migration/native-campaigns-v43/comb-six-levels.json",
+      "sha256": "b219e3a1dc3c81dbe2b44f8f11530429792f6ebaef28843ee294e70b88cc5b49"
+    },
+    "threePublicTrace": {
+      "path": "docs/migration/native-campaigns-v43/comb-public-trace.json.gz",
+      "sha256": "705558598611dfffeaf3a017560a258ec0355d4d3dcf5a06d6ef8b689bae669c"
+    },
+    "sixPublicTrace": {
+      "path": "docs/migration/native-campaigns-v43/comb-six-level-public-trace.json.gz",
+      "sha256": "50d9e85f84ab64ce8160f8789514be88501e637d7587b294ed056bb2b9fe2110"
+    }
+  },
+  "sourceDigest": "702fd71e5c234d1942dab9685306aa252b68eaa1280def89d9665a3fcbe2a3fb",
+  "sourceFiles": 143,
+  "sourceUnchangedDuringBothRuns": true,
+  "exactFirstThreeLevels": {
+    "commands": 24,
+    "completePublicPacketsIncludingInitial": 25,
+    "animationFramesAfterCommands": 45,
+    "commandsEqual": true,
+    "packetsEqual": true
+  },
+  "prefixAcquisitionComparison": {
+    "prefixes": 16,
+    "equal": true,
+    "comparedFields": [
+      "decisionRevision",
+      "acquiredActions",
+      "family",
+      "operations",
+      "proposalKind",
+      "fieldSubquestion",
+      "productPanelFactors",
+      "productPanelEstimated",
+      "productPanelObservedSteps",
+      "callerAcquiredTransitions"
+    ],
+    "rawGraphAndJournalDigestsEqual": false,
+    "qualification": "Independent cold sessions have distinct observation UUIDs and therefore different evidence and graph digests. Target-three stops at its declared objective; target-six continues after the same third-level boundary. Raw graph hashes and final stopping revision are not asserted equal."
+  },
+  "fullCampaign": {
+    "actions": 104,
+    "levelsCompleted": 6,
+    "state": "WIN",
+    "sessions": 1,
+    "prefixes": 45,
+    "publicPacketsIncludingInitial": 105,
+    "levelActions": [
+      3,
+      7,
+      14,
+      19,
+      30,
+      31
+    ],
+    "acquiredTransitions": 104,
+    "boundaryReplays": 5,
+    "pythonAgentModules": []
+  }
+}

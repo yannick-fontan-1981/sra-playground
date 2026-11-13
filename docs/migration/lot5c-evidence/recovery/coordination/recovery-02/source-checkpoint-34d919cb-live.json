@@ -1,0 +1,64 @@
+{
+  "automaticRetry": false,
+  "childOutputBytes": {
+    "stderr": 0,
+    "stdout": 0
+  },
+  "childStarted": false,
+  "cleanup": {
+    "childStarted": false,
+    "complete": true,
+    "reapedDescendants": 0,
+    "signals": []
+  },
+  "durationSeconds": 45.004802,
+  "exitCode": 124,
+  "finishedAt": "2026-11-11T20:16:19.780244+00:00",
+  "helper": "bounded-checkpoints",
+  "initialCoordination": [
+    {
+      "lane": "lot5c",
+      "quietRequested": false,
+      "statusSha256": "893827819c27792859aeddf91e0f07e1997c2d76662dc9a89a7835927f232c07"
+    },
+    {
+      "lane": "lot6b",
+      "quietRequested": false,
+      "statusSha256": "0d12e825193bd77d17a88b7dec2bbc14e480618cc5212bef98b47f1403c5f47d"
+    },
+    {
+      "lane": "lot8a",
+      "quietRequested": null,
+      "statusSha256": "afd9862ab1e35729961ef530e402cf6565cce998c587b06e21dfca84aefdbc55"
+    },
+    {
+      "lane": "lot10c",
+      "quietRequested": false,
+      "statusSha256": "0944ff0d0e1f2448431470e9dbf8ed23807566b36fbcc2a115e16474fc46317f"
+    }
+  ],
+  "inputBytesRead": 0,
+  "inputEchoDisabled": true,
+  "limits": {
+    "handshakeSeconds": 10.0,
+    "inputBytes": 65536,
+    "inputSeconds": 45.0,
+    "killGraceSeconds": 3.0,
+    "outputBytes": 1048576,
+    "termGraceSeconds": 1.0,
+    "workSeconds": 300.0
+  },
+  "lockAcquired": false,
+  "partialOperationalSideEffectsPossible": false,
+  "rawChildOutputStored": false,
+  "rawInputStored": false,
+  "reason": "input_timeout",
+  "results": [],
+  "schema": "logos-engine.lot5c.bounded-locked-command.v2",
+  "sitePublicationPerformed": false,
+  "startedAt": "2026-11-11T20:15:34.775466+00:00",
+  "status": "failed",
+  "toolSessionBinding": "external_root_record_required",
+  "toolSessionId": null,
+  "wrapperPid": 2
+}

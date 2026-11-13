@@ -1,0 +1,1124 @@
+{
+  "module_id": "v6_ranked_workshop",
+  "declarations": [
+    {
+      "id": "schema.ranked_workshop_reuse",
+      "kind": "schema",
+      "premises": [
+        "ranked_profiles_current",
+        "reference_cuts_current",
+        "public_control_mode_change_observed"
+      ],
+      "applicability": [
+        "factored_material_return"
+      ],
+      "invariants": [
+        "no_game_id_or_oracle_state",
+        "former_DRM_is_conditional_knowledge_not_old_runtime_authority",
+        "equality_is_not_accepted_receipt",
+        "focus_is_not_grasp",
+        "tool_control_and_laws_unacquired",
+        "current_SRC_guard_required"
+      ],
+      "falsifiers": [
+        "scope_changed",
+        "current_geometry_ambiguous",
+        "control_or_selected_relation_contradicted"
+      ],
+      "reason_refs": [
+        "principle.accepted_contribution_enables_next_receiver_without_undoing_profile_preparation",
+        "principle.focus_switch_and_hold_toggle_have_distinct_supports",
+        "principle.profile_equality_prepares_but_does_not_authenticate_receiver",
+        "principle.profile_homology_and_current_mode_license_adjacent_exchange_probe",
+        "principle.current_consumer_justifies_bounded_method_or_transform_question",
+        "principle.prepared_receiver_access_may_traverse_incompatible_intermediate_slots",
+        "principle.consumer_linked_preparation_prefers_observed_support_model"
+      ],
+      "configuration": {
+        "rules": [
+          {
+            "id": "projection.exploration.station_profile_exchange_down",
+            "all_conditions": [
+              {
+                "field": "station_profile_unenclosed_profile_count",
+                "operator": "greater_than",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_receiver_binding_count",
+                "operator": "equals_reference_field",
+                "reference_field": "station_profile_unenclosed_profile_count"
+              },
+              {
+                "field": "station_profile_marked_profile_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_corner_quartet_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "committed_plan_present",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "action_ref",
+                "operator": "equals",
+                "expected": "ACTION2"
+              },
+              {
+                "field": "station_profile_inner_singleton_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_marked_zero_cut_contour_agreement",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "station_profile_marked_profile_equal_same_band_cut",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "station_profile_neighbor_below_equal_marked_cut_count",
+                "operator": "equals",
+                "expected": 1
+              }
+            ],
+            "static_facts": {
+              "station_profile_control_question": true,
+              "station_profile_question_stage": "adjacent_exchange_probe",
+              "peer_after_point_cursor_selection_eligible": true,
+              "candidate_attempt_memory_eligible": true,
+              "candidate_is_general_unscoped_probe": false,
+              "candidate_local_goal_context_declared": true,
+              "dynamic_goal_binding_satisfied": true,
+              "advances_active_goal_chain": true,
+              "expected_effect_class": "effectful_novel",
+              "remaining_action_bound": 1,
+              "goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "active_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "active_terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "release_active_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "release_terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "subgoal_ref": null,
+              "release_subgoal_ref": null,
+              "goal_graph_edge_refs": [],
+              "release_goal_graph_edge_refs": [],
+              "goal_dependency_chain_refs": [
+                "goal.acquire_each_ranked_receiver_acceptance"
+              ],
+              "release_goal_dependency_chain_refs": [
+                "goal.acquire_each_ranked_receiver_acceptance"
+              ],
+              "selection_principle_ref": "principle.profile_homology_and_current_mode_license_adjacent_exchange_probe",
+              "release_selection_principle_ref": "principle.profile_homology_and_current_mode_license_adjacent_exchange_probe",
+              "applied_principle_refs": [
+                "principle.profile_homology_and_current_mode_license_adjacent_exchange_probe"
+              ]
+            },
+            "templated_facts": {
+              "discriminating_experiment_ref": "experiment.adjacent_exchange_probe.{candidate_ref}",
+              "expected_configuration_or_goal_delta_ref": "expectation.adjacent_exchange_probe.{candidate_ref}",
+              "falsifier_refs": [
+                "falsifier.adjacent_exchange_probe_effect_or_preservation_differs.{candidate_ref}"
+              ],
+              "reconciliation_checkpoint_ref": "checkpoint.seal_adjacent_exchange_probe.{candidate_ref}"
+            }
+          },
+          {
+            "id": "projection.exploration.station_profile_exchange_up",
+            "all_conditions": [
+              {
+                "field": "station_profile_unenclosed_profile_count",
+                "operator": "greater_than",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_receiver_binding_count",
+                "operator": "equals_reference_field",
+                "reference_field": "station_profile_unenclosed_profile_count"
+              },
+              {
+                "field": "station_profile_marked_profile_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_corner_quartet_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "committed_plan_present",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "action_ref",
+                "operator": "equals",
+                "expected": "ACTION1"
+              },
+              {
+                "field": "station_profile_inner_singleton_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_marked_zero_cut_contour_agreement",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "station_profile_marked_profile_equal_same_band_cut",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "station_profile_neighbor_above_equal_marked_cut_count",
+                "operator": "equals",
+                "expected": 1
+              }
+            ],
+            "static_facts": {
+              "station_profile_control_question": true,
+              "station_profile_question_stage": "adjacent_exchange_probe",
+              "peer_after_point_cursor_selection_eligible": true,
+              "candidate_attempt_memory_eligible": true,
+              "candidate_is_general_unscoped_probe": false,
+              "candidate_local_goal_context_declared": true,
+              "dynamic_goal_binding_satisfied": true,
+              "advances_active_goal_chain": true,
+              "expected_effect_class": "effectful_novel",
+              "remaining_action_bound": 1,
+              "goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "active_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "active_terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "release_active_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "release_terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "subgoal_ref": null,
+              "release_subgoal_ref": null,
+              "goal_graph_edge_refs": [],
+              "release_goal_graph_edge_refs": [],
+              "goal_dependency_chain_refs": [
+                "goal.acquire_each_ranked_receiver_acceptance"
+              ],
+              "release_goal_dependency_chain_refs": [
+                "goal.acquire_each_ranked_receiver_acceptance"
+              ],
+              "selection_principle_ref": "principle.profile_homology_and_current_mode_license_adjacent_exchange_probe",
+              "release_selection_principle_ref": "principle.profile_homology_and_current_mode_license_adjacent_exchange_probe",
+              "applied_principle_refs": [
+                "principle.profile_homology_and_current_mode_license_adjacent_exchange_probe"
+              ]
+            },
+            "templated_facts": {
+              "discriminating_experiment_ref": "experiment.adjacent_exchange_probe.{candidate_ref}",
+              "expected_configuration_or_goal_delta_ref": "expectation.adjacent_exchange_probe.{candidate_ref}",
+              "falsifier_refs": [
+                "falsifier.adjacent_exchange_probe_effect_or_preservation_differs.{candidate_ref}"
+              ],
+              "reconciliation_checkpoint_ref": "checkpoint.seal_adjacent_exchange_probe.{candidate_ref}"
+            }
+          },
+          {
+            "id": "projection.exploration.station_profile_trial_right",
+            "all_conditions": [
+              {
+                "field": "station_profile_unenclosed_profile_count",
+                "operator": "greater_than",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_receiver_binding_count",
+                "operator": "equals_reference_field",
+                "reference_field": "station_profile_unenclosed_profile_count"
+              },
+              {
+                "field": "station_profile_marked_profile_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_corner_quartet_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "committed_plan_present",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "action_ref",
+                "operator": "equals",
+                "expected": "ACTION4"
+              },
+              {
+                "field": "station_profile_inner_singleton_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_marked_zero_cut_contour_agreement",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "station_profile_marked_profile_equal_same_band_cut",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "station_profile_marked_receiver_horizontal_sign",
+                "operator": "equals",
+                "expected": 1
+              }
+            ],
+            "static_facts": {
+              "station_profile_control_question": true,
+              "station_profile_question_stage": "prepared_receiver_trial",
+              "peer_after_point_cursor_selection_eligible": true,
+              "candidate_attempt_memory_eligible": true,
+              "candidate_is_general_unscoped_probe": false,
+              "candidate_local_goal_context_declared": true,
+              "dynamic_goal_binding_satisfied": true,
+              "advances_active_goal_chain": true,
+              "expected_effect_class": "effectful_novel",
+              "remaining_action_bound": 1,
+              "goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "active_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "active_terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "release_active_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "release_terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "subgoal_ref": null,
+              "release_subgoal_ref": null,
+              "goal_graph_edge_refs": [],
+              "release_goal_graph_edge_refs": [],
+              "goal_dependency_chain_refs": [
+                "goal.acquire_each_ranked_receiver_acceptance"
+              ],
+              "release_goal_dependency_chain_refs": [
+                "goal.acquire_each_ranked_receiver_acceptance"
+              ],
+              "selection_principle_ref": "principle.profile_equality_prepares_but_does_not_authenticate_receiver",
+              "release_selection_principle_ref": "principle.profile_equality_prepares_but_does_not_authenticate_receiver",
+              "applied_principle_refs": [
+                "principle.profile_equality_prepares_but_does_not_authenticate_receiver"
+              ]
+            },
+            "templated_facts": {
+              "discriminating_experiment_ref": "experiment.prepared_receiver_trial.{candidate_ref}",
+              "expected_configuration_or_goal_delta_ref": "expectation.prepared_receiver_trial.{candidate_ref}",
+              "falsifier_refs": [
+                "falsifier.prepared_receiver_trial_effect_or_preservation_differs.{candidate_ref}"
+              ],
+              "reconciliation_checkpoint_ref": "checkpoint.seal_prepared_receiver_trial.{candidate_ref}"
+            }
+          },
+          {
+            "id": "projection.exploration.station_profile_trial_left",
+            "all_conditions": [
+              {
+                "field": "station_profile_unenclosed_profile_count",
+                "operator": "greater_than",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_receiver_binding_count",
+                "operator": "equals_reference_field",
+                "reference_field": "station_profile_unenclosed_profile_count"
+              },
+              {
+                "field": "station_profile_marked_profile_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_corner_quartet_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "committed_plan_present",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "action_ref",
+                "operator": "equals",
+                "expected": "ACTION3"
+              },
+              {
+                "field": "station_profile_inner_singleton_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_marked_zero_cut_contour_agreement",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "station_profile_marked_profile_equal_same_band_cut",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "station_profile_marked_receiver_horizontal_sign",
+                "operator": "equals",
+                "expected": -1
+              }
+            ],
+            "static_facts": {
+              "station_profile_control_question": true,
+              "station_profile_question_stage": "prepared_receiver_trial",
+              "peer_after_point_cursor_selection_eligible": true,
+              "candidate_attempt_memory_eligible": true,
+              "candidate_is_general_unscoped_probe": false,
+              "candidate_local_goal_context_declared": true,
+              "dynamic_goal_binding_satisfied": true,
+              "advances_active_goal_chain": true,
+              "expected_effect_class": "effectful_novel",
+              "remaining_action_bound": 1,
+              "goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "active_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "active_terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "release_active_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "release_terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "subgoal_ref": null,
+              "release_subgoal_ref": null,
+              "goal_graph_edge_refs": [],
+              "release_goal_graph_edge_refs": [],
+              "goal_dependency_chain_refs": [
+                "goal.acquire_each_ranked_receiver_acceptance"
+              ],
+              "release_goal_dependency_chain_refs": [
+                "goal.acquire_each_ranked_receiver_acceptance"
+              ],
+              "selection_principle_ref": "principle.profile_equality_prepares_but_does_not_authenticate_receiver",
+              "release_selection_principle_ref": "principle.profile_equality_prepares_but_does_not_authenticate_receiver",
+              "applied_principle_refs": [
+                "principle.profile_equality_prepares_but_does_not_authenticate_receiver"
+              ]
+            },
+            "templated_facts": {
+              "discriminating_experiment_ref": "experiment.prepared_receiver_trial.{candidate_ref}",
+              "expected_configuration_or_goal_delta_ref": "expectation.prepared_receiver_trial.{candidate_ref}",
+              "falsifier_refs": [
+                "falsifier.prepared_receiver_trial_effect_or_preservation_differs.{candidate_ref}"
+              ],
+              "reconciliation_checkpoint_ref": "checkpoint.seal_prepared_receiver_trial.{candidate_ref}"
+            }
+          },
+          {
+            "id": "projection.exploration.station_profile_release",
+            "all_conditions": [
+              {
+                "field": "station_profile_unenclosed_profile_count",
+                "operator": "greater_than",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_receiver_binding_count",
+                "operator": "equals_reference_field",
+                "reference_field": "station_profile_unenclosed_profile_count"
+              },
+              {
+                "field": "station_profile_marked_profile_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_corner_quartet_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "committed_plan_present",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "action_ref",
+                "operator": "equals",
+                "expected": "ACTION5"
+              },
+              {
+                "field": "station_profile_inner_singleton_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_marked_zero_cut_contour_agreement",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "station_profile_unenclosed_profile_count",
+                "operator": "greater_than_reference_field",
+                "reference_field": "station_profile_zero_cut_contour_agreement_count"
+              }
+            ],
+            "static_facts": {
+              "station_profile_control_question": true,
+              "station_profile_question_stage": "release_after_acceptance",
+              "peer_after_point_cursor_selection_eligible": true,
+              "candidate_attempt_memory_eligible": true,
+              "candidate_is_general_unscoped_probe": false,
+              "candidate_local_goal_context_declared": true,
+              "dynamic_goal_binding_satisfied": true,
+              "advances_active_goal_chain": true,
+              "expected_effect_class": "effectful_novel",
+              "remaining_action_bound": 1,
+              "goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "active_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "active_terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "release_active_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "release_terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "subgoal_ref": null,
+              "release_subgoal_ref": null,
+              "goal_graph_edge_refs": [],
+              "release_goal_graph_edge_refs": [],
+              "goal_dependency_chain_refs": [
+                "goal.acquire_each_ranked_receiver_acceptance"
+              ],
+              "release_goal_dependency_chain_refs": [
+                "goal.acquire_each_ranked_receiver_acceptance"
+              ],
+              "selection_principle_ref": "principle.accepted_contribution_enables_next_receiver_without_undoing_profile_preparation",
+              "release_selection_principle_ref": "principle.accepted_contribution_enables_next_receiver_without_undoing_profile_preparation",
+              "applied_principle_refs": [
+                "principle.accepted_contribution_enables_next_receiver_without_undoing_profile_preparation"
+              ]
+            },
+            "templated_facts": {
+              "discriminating_experiment_ref": "experiment.release_after_acceptance.{candidate_ref}",
+              "expected_configuration_or_goal_delta_ref": "expectation.release_after_acceptance.{candidate_ref}",
+              "falsifier_refs": [
+                "falsifier.release_after_acceptance_effect_or_preservation_differs.{candidate_ref}"
+              ],
+              "reconciliation_checkpoint_ref": "checkpoint.seal_release_after_acceptance.{candidate_ref}"
+            }
+          },
+          {
+            "id": "projection.exploration.station_profile_focus_up",
+            "all_conditions": [
+              {
+                "field": "station_profile_unenclosed_profile_count",
+                "operator": "greater_than",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_receiver_binding_count",
+                "operator": "equals_reference_field",
+                "reference_field": "station_profile_unenclosed_profile_count"
+              },
+              {
+                "field": "station_profile_marked_profile_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_corner_quartet_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "committed_plan_present",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "action_ref",
+                "operator": "equals",
+                "expected": "ACTION1"
+              },
+              {
+                "field": "station_profile_inner_singleton_count",
+                "operator": "equals",
+                "expected": 0
+              },
+              {
+                "field": "station_profile_marked_zero_cut_contour_agreement",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "station_profile_neighbor_above_same_band_equality_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_unenclosed_profile_count",
+                "operator": "greater_than_reference_field",
+                "reference_field": "station_profile_zero_cut_contour_agreement_count"
+              }
+            ],
+            "static_facts": {
+              "station_profile_control_question": true,
+              "station_profile_question_stage": "free_focus_to_next_prepared_receiver",
+              "peer_after_point_cursor_selection_eligible": true,
+              "candidate_attempt_memory_eligible": true,
+              "candidate_is_general_unscoped_probe": false,
+              "candidate_local_goal_context_declared": true,
+              "dynamic_goal_binding_satisfied": true,
+              "advances_active_goal_chain": true,
+              "expected_effect_class": "effectful_novel",
+              "remaining_action_bound": 1,
+              "goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "active_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "active_terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "release_active_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "release_terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "subgoal_ref": null,
+              "release_subgoal_ref": null,
+              "goal_graph_edge_refs": [],
+              "release_goal_graph_edge_refs": [],
+              "goal_dependency_chain_refs": [
+                "goal.acquire_each_ranked_receiver_acceptance"
+              ],
+              "release_goal_dependency_chain_refs": [
+                "goal.acquire_each_ranked_receiver_acceptance"
+              ],
+              "selection_principle_ref": "principle.focus_switch_and_hold_toggle_have_distinct_supports",
+              "release_selection_principle_ref": "principle.focus_switch_and_hold_toggle_have_distinct_supports",
+              "applied_principle_refs": [
+                "principle.focus_switch_and_hold_toggle_have_distinct_supports"
+              ]
+            },
+            "templated_facts": {
+              "discriminating_experiment_ref": "experiment.free_focus_to_next_prepared_receiver.{candidate_ref}",
+              "expected_configuration_or_goal_delta_ref": "expectation.free_focus_to_next_prepared_receiver.{candidate_ref}",
+              "falsifier_refs": [
+                "falsifier.free_focus_to_next_prepared_receiver_effect_or_preservation_differs.{candidate_ref}"
+              ],
+              "reconciliation_checkpoint_ref": "checkpoint.seal_free_focus_to_next_prepared_receiver.{candidate_ref}"
+            }
+          },
+          {
+            "id": "projection.exploration.station_profile_focus_down",
+            "all_conditions": [
+              {
+                "field": "station_profile_unenclosed_profile_count",
+                "operator": "greater_than",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_receiver_binding_count",
+                "operator": "equals_reference_field",
+                "reference_field": "station_profile_unenclosed_profile_count"
+              },
+              {
+                "field": "station_profile_marked_profile_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_corner_quartet_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "committed_plan_present",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "action_ref",
+                "operator": "equals",
+                "expected": "ACTION2"
+              },
+              {
+                "field": "station_profile_inner_singleton_count",
+                "operator": "equals",
+                "expected": 0
+              },
+              {
+                "field": "station_profile_marked_zero_cut_contour_agreement",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "station_profile_neighbor_below_same_band_equality_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_unenclosed_profile_count",
+                "operator": "greater_than_reference_field",
+                "reference_field": "station_profile_zero_cut_contour_agreement_count"
+              }
+            ],
+            "static_facts": {
+              "station_profile_control_question": true,
+              "station_profile_question_stage": "free_focus_to_next_prepared_receiver",
+              "peer_after_point_cursor_selection_eligible": true,
+              "candidate_attempt_memory_eligible": true,
+              "candidate_is_general_unscoped_probe": false,
+              "candidate_local_goal_context_declared": true,
+              "dynamic_goal_binding_satisfied": true,
+              "advances_active_goal_chain": true,
+              "expected_effect_class": "effectful_novel",
+              "remaining_action_bound": 1,
+              "goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "active_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "active_terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "release_active_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "release_terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "subgoal_ref": null,
+              "release_subgoal_ref": null,
+              "goal_graph_edge_refs": [],
+              "release_goal_graph_edge_refs": [],
+              "goal_dependency_chain_refs": [
+                "goal.acquire_each_ranked_receiver_acceptance"
+              ],
+              "release_goal_dependency_chain_refs": [
+                "goal.acquire_each_ranked_receiver_acceptance"
+              ],
+              "selection_principle_ref": "principle.focus_switch_and_hold_toggle_have_distinct_supports",
+              "release_selection_principle_ref": "principle.focus_switch_and_hold_toggle_have_distinct_supports",
+              "applied_principle_refs": [
+                "principle.focus_switch_and_hold_toggle_have_distinct_supports"
+              ]
+            },
+            "templated_facts": {
+              "discriminating_experiment_ref": "experiment.free_focus_to_next_prepared_receiver.{candidate_ref}",
+              "expected_configuration_or_goal_delta_ref": "expectation.free_focus_to_next_prepared_receiver.{candidate_ref}",
+              "falsifier_refs": [
+                "falsifier.free_focus_to_next_prepared_receiver_effect_or_preservation_differs.{candidate_ref}"
+              ],
+              "reconciliation_checkpoint_ref": "checkpoint.seal_free_focus_to_next_prepared_receiver.{candidate_ref}"
+            }
+          },
+          {
+            "id": "projection.exploration.station_profile_grasp_prepared",
+            "all_conditions": [
+              {
+                "field": "station_profile_unenclosed_profile_count",
+                "operator": "greater_than",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_receiver_binding_count",
+                "operator": "equals_reference_field",
+                "reference_field": "station_profile_unenclosed_profile_count"
+              },
+              {
+                "field": "station_profile_marked_profile_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_corner_quartet_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "committed_plan_present",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "action_ref",
+                "operator": "equals",
+                "expected": "ACTION5"
+              },
+              {
+                "field": "station_profile_inner_singleton_count",
+                "operator": "equals",
+                "expected": 0
+              },
+              {
+                "field": "station_profile_marked_zero_cut_contour_agreement",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "station_profile_marked_profile_equal_same_band_cut",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "static_facts": {
+              "station_profile_control_question": true,
+              "station_profile_question_stage": "reacquire_mode_at_prepared_receiver",
+              "peer_after_point_cursor_selection_eligible": true,
+              "candidate_attempt_memory_eligible": true,
+              "candidate_is_general_unscoped_probe": false,
+              "candidate_local_goal_context_declared": true,
+              "dynamic_goal_binding_satisfied": true,
+              "advances_active_goal_chain": true,
+              "expected_effect_class": "effectful_novel",
+              "remaining_action_bound": 1,
+              "goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "active_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "active_terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "release_active_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "release_terminal_goal_ref": "goal.acquire_each_ranked_receiver_acceptance",
+              "subgoal_ref": null,
+              "release_subgoal_ref": null,
+              "goal_graph_edge_refs": [],
+              "release_goal_graph_edge_refs": [],
+              "goal_dependency_chain_refs": [
+                "goal.acquire_each_ranked_receiver_acceptance"
+              ],
+              "release_goal_dependency_chain_refs": [
+                "goal.acquire_each_ranked_receiver_acceptance"
+              ],
+              "selection_principle_ref": "principle.profile_equality_prepares_but_does_not_authenticate_receiver",
+              "release_selection_principle_ref": "principle.profile_equality_prepares_but_does_not_authenticate_receiver",
+              "applied_principle_refs": [
+                "principle.profile_equality_prepares_but_does_not_authenticate_receiver"
+              ]
+            },
+            "templated_facts": {
+              "discriminating_experiment_ref": "experiment.reacquire_mode_at_prepared_receiver.{candidate_ref}",
+              "expected_configuration_or_goal_delta_ref": "expectation.reacquire_mode_at_prepared_receiver.{candidate_ref}",
+              "falsifier_refs": [
+                "falsifier.reacquire_mode_at_prepared_receiver_effect_or_preservation_differs.{candidate_ref}"
+              ],
+              "reconciliation_checkpoint_ref": "checkpoint.seal_reacquire_mode_at_prepared_receiver.{candidate_ref}"
+            }
+          }
+        ],
+        "stem": {
+          "minimum_rank_count": 2,
+          "maximum_rank_count": 12,
+          "maximum_component_count": 512,
+          "maximum_alternatives_per_component": 16,
+          "axis_directions": [
+            "up",
+            "down",
+            "left",
+            "right"
+          ]
+        },
+        "scene": {
+          "maximum_component_count": 512,
+          "maximum_marker_quartets": 16,
+          "maximum_receiver_enclosures": 16,
+          "maximum_receiver_bindings": 64,
+          "maximum_reference_side_margin": 2,
+          "receiver_axis_directions": [
+            "up"
+          ],
+          "maximum_marker_expansions": 8192,
+          "maximum_cut_measurement_requests": 8192,
+          "maximum_reference_packets": 32,
+          "maximum_frame_pixels": 16384
+        },
+        "origin_drm_sha256": "0f9b3aa1585b44a1de01ce0705fc97af3f83979b39c740c5a9837313fcadc197",
+        "activation": [
+          {
+            "field": "public_mode_toggle_contrast_observed",
+            "operator": "equals",
+            "expected": true
+          }
+        ],
+        "question": "Can this current profile preparation produce a persistent receiver acceptance under the observed control mode?",
+        "choice_order": [
+          "revalidate_mode",
+          "access_prepared_receiver",
+          "prepare_observed_receiver",
+          "prepare_unknown_receiver",
+          "probe_transform",
+          "legacy",
+          "access_transform_support"
+        ],
+        "extension_rules": [
+          {
+            "id": "projection.ranked_workshop.revalidate_mode",
+            "all_conditions": [
+              {
+                "field": "option_kind",
+                "operator": "equals",
+                "expected": "revalidate_mode"
+              },
+              {
+                "field": "station_profile_unenclosed_profile_count",
+                "operator": "greater_than",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_receiver_binding_count",
+                "operator": "equals_reference_field",
+                "reference_field": "station_profile_unenclosed_profile_count"
+              },
+              {
+                "field": "station_profile_marked_profile_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_corner_quartet_count",
+                "operator": "equals",
+                "expected": 1
+              }
+            ],
+            "static_facts": {
+              "station_profile_question_stage": "revalidate_mode",
+              "selection_principle_ref": "principle.current_consumer_justifies_bounded_method_or_transform_question"
+            },
+            "falsifiers": [
+              "same_signature_does_not_prove_same_mechanism",
+              "input_may_have_other_context_conditions",
+              "receipt_or_other_profile_changed_unexpectedly"
+            ]
+          },
+          {
+            "id": "projection.ranked_workshop.probe_transform",
+            "all_conditions": [
+              {
+                "field": "option_kind",
+                "operator": "equals",
+                "expected": "probe_transform"
+              },
+              {
+                "field": "station_profile_unenclosed_profile_count",
+                "operator": "greater_than",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_receiver_binding_count",
+                "operator": "equals_reference_field",
+                "reference_field": "station_profile_unenclosed_profile_count"
+              },
+              {
+                "field": "station_profile_marked_profile_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_corner_quartet_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "support_relation_admissible",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "static_facts": {
+              "station_profile_question_stage": "probe_transform",
+              "selection_principle_ref": "principle.current_consumer_justifies_bounded_method_or_transform_question"
+            },
+            "falsifiers": [
+              "same_signature_does_not_prove_same_mechanism",
+              "input_may_have_other_context_conditions",
+              "receipt_or_other_profile_changed_unexpectedly"
+            ]
+          },
+          {
+            "id": "projection.ranked_workshop.access_transform_support",
+            "all_conditions": [
+              {
+                "field": "option_kind",
+                "operator": "equals",
+                "expected": "access_transform_support"
+              },
+              {
+                "field": "station_profile_unenclosed_profile_count",
+                "operator": "greater_than",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_receiver_binding_count",
+                "operator": "equals_reference_field",
+                "reference_field": "station_profile_unenclosed_profile_count"
+              },
+              {
+                "field": "station_profile_marked_profile_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_corner_quartet_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "support_relation_admissible",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "static_facts": {
+              "station_profile_question_stage": "access_transform_support",
+              "selection_principle_ref": "principle.current_consumer_justifies_bounded_method_or_transform_question"
+            },
+            "falsifiers": [
+              "same_signature_does_not_prove_same_mechanism",
+              "input_may_have_other_context_conditions",
+              "receipt_or_other_profile_changed_unexpectedly"
+            ]
+          },
+          {
+            "id": "projection.ranked_workshop.access_prepared_receiver",
+            "all_conditions": [
+              {
+                "field": "option_kind",
+                "operator": "equals",
+                "expected": "access_prepared_receiver"
+              },
+              {
+                "field": "station_profile_receiver_binding_count",
+                "operator": "equals_reference_field",
+                "reference_field": "station_profile_unenclosed_profile_count"
+              },
+              {
+                "field": "station_profile_marked_profile_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_corner_quartet_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_inner_singleton_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "exact_receiver_match",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "held_direction_evidence_present",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "current_same_band_receiver_match",
+                "operator": "equals",
+                "expected": false
+              }
+            ],
+            "static_facts": {
+              "station_profile_question_stage": "access_prepared_receiver",
+              "selection_principle_ref": "principle.prepared_receiver_access_may_traverse_incompatible_intermediate_slots"
+            },
+            "falsifiers": [
+              "held_profile_or_other_identity_changes_unpredicted",
+              "current_direction_or_topology_differs",
+              "receiver_relation_no_longer_current"
+            ]
+          },
+          {
+            "id": "projection.ranked_workshop.prepare_observed_receiver",
+            "all_conditions": [
+              {
+                "field": "option_kind",
+                "operator": "equals",
+                "expected": "prepare_observed_receiver"
+              },
+              {
+                "field": "station_profile_receiver_binding_count",
+                "operator": "equals_reference_field",
+                "reference_field": "station_profile_unenclosed_profile_count"
+              },
+              {
+                "field": "station_profile_marked_profile_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_corner_quartet_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "conditional_preparation_bound",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "remaining_action_cost_admissible",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "static_facts": {
+              "station_profile_question_stage": "prepare_observed_receiver",
+              "selection_principle_ref": "principle.consumer_linked_preparation_prefers_observed_support_model"
+            },
+            "falsifiers": [
+              "held_profile_or_other_identity_changes_unpredicted",
+              "current_direction_or_topology_differs",
+              "receiver_relation_no_longer_current"
+            ]
+          },
+          {
+            "id": "projection.ranked_workshop.prepare_unknown_receiver",
+            "all_conditions": [
+              {
+                "field": "option_kind",
+                "operator": "equals",
+                "expected": "prepare_unknown_receiver"
+              },
+              {
+                "field": "station_profile_receiver_binding_count",
+                "operator": "equals_reference_field",
+                "reference_field": "station_profile_unenclosed_profile_count"
+              },
+              {
+                "field": "station_profile_marked_profile_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "station_profile_corner_quartet_count",
+                "operator": "equals",
+                "expected": 1
+              },
+              {
+                "field": "conditional_preparation_bound",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "remaining_action_cost_admissible",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "static_facts": {
+              "station_profile_question_stage": "prepare_unknown_receiver",
+              "selection_principle_ref": "principle.consumer_linked_preparation_prefers_observed_support_model"
+            },
+            "falsifiers": [
+              "held_profile_or_other_identity_changes_unpredicted",
+              "current_direction_or_topology_differs",
+              "receiver_relation_no_longer_current"
+            ]
+          }
+        ],
+        "option_cost_fields": {
+          "prepare_observed_receiver": [
+            "estimated_actions_to_test"
+          ],
+          "prepare_unknown_receiver": [
+            "estimated_actions_to_test"
+          ]
+        }
+      }
+    }
+  ]
+}

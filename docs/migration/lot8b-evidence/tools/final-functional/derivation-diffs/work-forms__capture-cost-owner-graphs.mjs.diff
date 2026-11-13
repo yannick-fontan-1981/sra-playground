@@ -1,0 +1,62 @@
+--- docs/migration/lot8b-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs
++++ docs/migration/lot8b-evidence/tools/final-functional/work-forms/capture-cost-owner-graphs.mjs
+@@ -1,6 +1,6 @@
+ #!/usr/bin/env node
+-/** 8B functional graph capture against published 0.66; no timing report is read or produced.
+- * CLI: node SCRIPT baseline|candidate CHECKOUT CASES.json SOURCE_MANIFEST.json OUTPUT.json.gz
++/** Final 0.67 candidate functional graph capture against retained published 0.66; no timing report is read or produced.
++ * CLI: node SCRIPT candidate CHECKOUT CASES.json SOURCE_MANIFEST.json OUTPUT.json.gz
+  * Four cold sessions, in case order: warmup then measured form. A measured form
+  * includes the same three real terminal inspections as the unchanged cost harness.
+  */
+@@ -17,7 +17,8 @@
+ 
+ const SCRIPT = fileURLToPath(import.meta.url), ROOT = resolve(dirname(SCRIPT), '../../../../../..');
+ const BASE = resolve(ROOT, 'docs/migration/lot8b-evidence');
+-const DERIVED_FROM = resolve(ROOT, 'docs/migration/lot8a-evidence/tools/work-forms/capture-cost-owner-graphs.mjs');
++const FINAL = resolve(ROOT, 'docs/migration/lot8b-evidence/final-version-067-01');
++const DERIVED_FROM = resolve(ROOT, 'docs/migration/lot8b-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs');
+ const OWNERS = { binding: 'public_observed_binding', selectedRigid: 'selected_rigid', motif: 'motif_access',
+   recruitment: 'public_ordered_recruitment', branchRouting: 'branch_routing' };
+ const WRAPPED_OWNERS = new Set(['motif', 'branchRouting']);
+@@ -29,10 +30,10 @@
+ const REFERENCE = 'reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6';
+ const DECLARATIONS = [`${REFERENCE}/laya_proto/common_frontier_policy.drm.json`, `${REFERENCE}/morphology_policy/strategy.drm`];
+ const SELECTED_RIGID_POLICY = `${REFERENCE}/morphology_policy/strategy.drm`;
+-const VERSIONS = { baseline: '0.66.0', candidate: '0.66.0' };
++const VERSIONS = { baseline: '0.66.0', candidate: '0.67.0' };
+ const EXPECTED = {
+   baseline: { fileCount: 329, digest: 'ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316' },
+-  candidate: { fileCount: 331, digest: '3ff1d9ad56e22aedc0fee3a0da6a3af50a1da0bc14a0ba01cb38272ba85234be' },
++  candidate: { fileCount: 331, digest: 'c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a' },
+ };
+ const OBSERVED_DATE_NOW = Date.now;
+ const HASH = bytes => createHash('sha256').update(bytes).digest('hex');
+@@ -97,14 +98,14 @@
+ 
+ async function main() {
+   const [role, checkoutArgument, casesArgument, manifestArgument, outputArgument] = process.argv.slice(2);
+-  assert.ok(process.argv.length === 7 && ['baseline', 'candidate'].includes(role),
+-    'Usage: node SCRIPT baseline|candidate CHECKOUT CASES.json SOURCE_MANIFEST.json OUTPUT.json.gz');
++  assert.ok(process.argv.length === 7 && role === 'candidate',
++    'Usage: node SCRIPT candidate CHECKOUT CASES.json SOURCE_MANIFEST.json OUTPUT.json.gz');
+   const checkout = await realpath(resolve(checkoutArgument));
+   assert.equal(checkout === await realpath(ROOT), role === 'candidate', 'The candidate is this checkout; the baseline is its distinct frozen predecessor');
+   const casesPath = resolve(ROOT, casesArgument), manifestPath = resolve(ROOT, manifestArgument);
+   const output = resolve(ROOT, outputArgument), receiptPath = output.replace(/\.json\.gz$/, '.receipt.json');
+-  assert.ok(inside(BASE, casesPath) && inside(BASE, output) && output.endsWith('.json.gz'),
+-    'Cases and exclusive capture output must belong to lot8b-evidence');
++  assert.ok(inside(BASE, casesPath) && inside(FINAL, manifestPath) && inside(FINAL, output) && output.endsWith('.json.gz'),
++    'Cases remain retained lot8b inputs; final source manifest and new output must belong to final-version-067-01');
+   for (const path of [output, receiptPath, resolve(dirname(casesPath), 'window.json'), resolve(dirname(casesPath), 'readiness.json')]) await absent(path);
+   await mkdir(dirname(output), { recursive: true });
+   const receiptFile = await open(receiptPath, 'wx'), gzip = createGzip({ level: 6 });
+@@ -157,7 +158,7 @@
+     const runtimeSource = (await input(resolve(checkout, 'src/logos-engine/v6-native-runtime.ts'),
+       before.files['src/logos-engine/v6-native-runtime.ts'])).toString('utf8');
+     const versions = [...runtimeSource.matchAll(/NATIVE_V6_IMPLEMENTATION\s*=\s*['"]logos-engine\.typescript\.v6\.native-migration\/([^'"]+)['"]/g)].map(match => match[1]);
+-    assert.deepEqual(versions, [VERSIONS[role]], 'Published 0.66 and the 8B development candidate share a version literal; their native byte identities must differ');
++    assert.deepEqual(versions, [VERSIONS[role]], 'Published 0.66 and final 8B 0.67 have distinct declared implementation identities');
+     receipt.nativeVersion = versions[0];
+     for (const path of ROLE_VALIDATORS) await input(resolve(checkout, path), before.files[path]);
+     const harness = 'scripts/measure-native-loop-costs.mjs';

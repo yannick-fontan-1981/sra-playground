@@ -1,0 +1,115 @@
+{
+  "schema": "logos-engine.inventory-normalization-regression.v1",
+  "status": "expected_failure_reproduced",
+  "targetTest": "native restoration projects an incomplete tracker before checkpoint certification",
+  "command": [
+    "node",
+    "--test",
+    "--test-reporter=tap",
+    "--test-name-pattern=native restoration projects an incomplete tracker before checkpoint certification",
+    "tests/v6-inventory-restoration-cache.test.ts"
+  ],
+  "startedAt": "2026-11-10T01:57:46.681694+00:00",
+  "finishedAt": "2026-11-10T01:57:47.025605+00:00",
+  "elapsedSeconds": 0.34393671399448067,
+  "exitCode": 1,
+  "testCounts": {
+    "tests": 1,
+    "pass": 0,
+    "fail": 1,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "expectedFailureReproduced": true,
+  "inputs": [
+    {
+      "path": "src/logos-engine/v6-observed-inventory.ts",
+      "bytes": 45269,
+      "sha256": "4571c8c584140a77afbde6b3532d214927512d4e71173deb6ed177520d2c8f09"
+    },
+    {
+      "path": "src/logos-engine/v6-native-working-witness.ts",
+      "bytes": 5896,
+      "sha256": "08bca697678eb3a89960ff2ed1c49b9fc0c91082b86952be51edf0f34a1f38fb"
+    },
+    {
+      "path": "src/logos-engine/v6-native-owned.ts",
+      "bytes": 3414,
+      "sha256": "363201fabc39c04fde4069b410a7b1fcdba89210aabd3671987fde9c6f8ef9c0"
+    },
+    {
+      "path": "src/logos-engine/v6-inventory-project.ts",
+      "bytes": 11045,
+      "sha256": "124bacd0897db9a99a3c1975afb386cafd659c73a6ad3ea290090f4dcd866fe9"
+    },
+    {
+      "path": "src/logos-engine/v6-inventory-caller-context.ts",
+      "bytes": 21023,
+      "sha256": "da6e83d1a7bd9afcc0ad8f2b4124609285dec49dac07f54502b130c867839ff9"
+    },
+    {
+      "path": "tests/v6-inventory-restoration-cache.test.ts",
+      "bytes": 20452,
+      "sha256": "f17376ff75f4d1e70825d305e527df59c8ce0c614d8cd636618dfc79afd5eb11"
+    },
+    {
+      "path": "tests/fixtures/v6-inventory-family-reference.json.gz",
+      "bytes": 147644,
+      "sha256": "6ffb59fd02e8ce1755de8889e13ca9fb9773ba14334a314ef139f4c54ccc816b"
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "src/logos-engine/v6-observed-inventory.ts",
+      "bytes": 45269,
+      "sha256": "4571c8c584140a77afbde6b3532d214927512d4e71173deb6ed177520d2c8f09"
+    },
+    {
+      "path": "src/logos-engine/v6-native-working-witness.ts",
+      "bytes": 5896,
+      "sha256": "08bca697678eb3a89960ff2ed1c49b9fc0c91082b86952be51edf0f34a1f38fb"
+    },
+    {
+      "path": "src/logos-engine/v6-native-owned.ts",
+      "bytes": 3414,
+      "sha256": "363201fabc39c04fde4069b410a7b1fcdba89210aabd3671987fde9c6f8ef9c0"
+    },
+    {
+      "path": "src/logos-engine/v6-inventory-project.ts",
+      "bytes": 11045,
+      "sha256": "124bacd0897db9a99a3c1975afb386cafd659c73a6ad3ea290090f4dcd866fe9"
+    },
+    {
+      "path": "src/logos-engine/v6-inventory-caller-context.ts",
+      "bytes": 21023,
+      "sha256": "da6e83d1a7bd9afcc0ad8f2b4124609285dec49dac07f54502b130c867839ff9"
+    },
+    {
+      "path": "tests/v6-inventory-restoration-cache.test.ts",
+      "bytes": 20452,
+      "sha256": "f17376ff75f4d1e70825d305e527df59c8ce0c614d8cd636618dfc79afd5eb11"
+    },
+    {
+      "path": "tests/fixtures/v6-inventory-family-reference.json.gz",
+      "bytes": 147644,
+      "sha256": "6ffb59fd02e8ce1755de8889e13ca9fb9773ba14334a314ef139f4c54ccc816b"
+    }
+  ],
+  "inputsUnchanged": true,
+  "nativeSourceBefore": {
+    "fileCount": 249,
+    "digest": "e684ea04af37416b15301745725e8d483fdf05052b25e27f95e6a72af5b501b7"
+  },
+  "nativeSourceAfter": {
+    "fileCount": 249,
+    "digest": "e684ea04af37416b15301745725e8d483fdf05052b25e27f95e6a72af5b501b7"
+  },
+  "nativeSourceUnchanged": true,
+  "output": {
+    "path": "docs/migration/lot3b-cost-evidence/diagnostic/inventory-normalization-before.tap.gz",
+    "bytes": 1304,
+    "sha256": "9003dd16ae134379a1f0384625fef4b144c22e7797421c3abf3259a04047b9d3"
+  },
+  "qualification": "An isolated synthetic native restoration with tracker:{} is accepted by the source restorer but must project its default working fields before certification. This pre-correction candidate incorrectly returns the input tracker:{} from its cached nativeState. This is the evolving final-v3 preparation, not the historical final-v2 archive or an official cost measurement."
+}

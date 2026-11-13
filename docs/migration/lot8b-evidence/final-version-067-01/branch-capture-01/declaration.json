@@ -1,0 +1,36 @@
+{
+  "schema": "logos-engine.lot8b.functional-command.v1",
+  "key": "branch-capture",
+  "attempt": "branch-capture-01",
+  "plan": {
+    "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/final-version-067-01/functional-execution-plan.json",
+    "bytes": 672996,
+    "sha256": "d27d40656905b73270c288db27fd925ff4d00fff4e16c285943739160c448008"
+  },
+  "command": [
+    "node",
+    "docs/migration/lot8b-evidence/tools/final-functional/branch-common-capture-v2.mjs",
+    "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+    "docs/migration/lot8b-evidence/final-version-067-01/candidate-native.json",
+    "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/final-version-067-01/branch-capture-01/capture.jsonl.gz"
+  ],
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T12:20:20.803770+00:00",
+  "timeoutSeconds": 300,
+  "generator": {
+    "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/tools/final-functional/run-functional-command.py",
+    "bytes": 7698,
+    "sha256": "a49a62551f757750a9598b2ea3a36d0c214ded79f150e3c65bddc74a83103fe9"
+  },
+  "derivedFrom": {
+    "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/tools/delivery/run-functional-command.py",
+    "bytes": 7291,
+    "sha256": "7d1c35fb1a9fe30f1eb0be80f4c60a0f547f6257dd24ac68e88f0ade0a2514f9"
+  },
+  "headBefore": "022cf5daa7adc88cbe1a64c83322b883cb6814cf",
+  "globalLockAcquired": false,
+  "officialPerformanceMeasurement": false,
+  "gameEngineExecuted": false,
+  "published": false,
+  "status": "running"
+}

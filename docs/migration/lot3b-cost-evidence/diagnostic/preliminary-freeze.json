@@ -1,0 +1,67 @@
+{
+  "schema": "logos-engine.superseded-preliminary-freeze.v1",
+  "status": "superseded_for_additional_cache_invalidation_case",
+  "recordedAt": "2026-11-10T01:11:25.479943+00:00",
+  "initialNativeDigest": "55192314213367a8c35e579b8cba17a022146359e1a76efcc1ae9caf5f6ce9cc",
+  "nativeFiles": 249,
+  "completedTestStatus": "passed",
+  "completedTests": {
+    "tests": 1270,
+    "pass": 1270,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "testFiles": 33,
+  "files": [
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final/release-scope.json",
+      "sha256": "4a15f6b46e76d24148674f8579dd40463769c8ef52b09f578d5f6aeb46eb48fa",
+      "bytes": 2052
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final/source-archive-parts.json",
+      "sha256": "a1e5af459015c30872c436bac6f505d9165f6bb05bbb3f98bb9d2b200aaa0c58",
+      "bytes": 806
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final/source-archive.json",
+      "sha256": "a212a683403950fb4c360618705a4b8c7224a83a15f7e69efacc421be909a47f",
+      "bytes": 31067
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final/source-archive.tar.gz",
+      "sha256": "dc76ed24605f80b9da48c943b0b7c39b7c0e01a839e67a6e382b3d6d5224011b",
+      "bytes": 1627105
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final/source-archive.tar.gz.part000",
+      "sha256": "8e113f69bde3af1d698cecac2ba081e24ce4af67952762ffd4fa93342677c801",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final/source-archive.tar.gz.part001",
+      "sha256": "d6e7639af3cc0f0a4057c72c23e599faae50afdc87e52bbf854c09c2af792ae4",
+      "bytes": 727105
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final/source-manifest.json",
+      "sha256": "500fd3eb8f391a59dce7d044d8b7021a942c0d4cb5c314644b1ddc6890cddbfc",
+      "bytes": 29431
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final/validation/delta-tests-output.log.gz",
+      "sha256": "6d99584a1ffad004b128a09c28f2aa592e00164745f4701573d2f18f32cc7889",
+      "bytes": 33930
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final/validation/delta-tests-run.json",
+      "sha256": "b33dde7d70a00c2efb221dd41d88ebb0fa4a9c9e7a4269676e3f9ce6cfc601fe",
+      "bytes": 99344
+    }
+  ],
+  "reason": "Review found that an object with an inherited custom iterator and a detached Map prototype can evade instanceof Map while its projection depends on a mutable closure. The final correction must classify inherited non-array iterables as untracked, without invoking getters, and retain the source fallback. A targeted before/after test will qualify the concrete case.",
+  "replacementDirectory": "docs/migration/lot3b-cost-evidence/final-v2",
+  "qualification": "The initial freeze, archive, partitions, formal test output and passed receipt remain unchanged. They describe the earlier exact source, not the final corrected source. No official cost cohort has been run for either draft."
+}

@@ -1,0 +1,76 @@
+MODULE prototype.v7_experiment
+
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        memory: Any
+        questions: List<Any>
+        transitions: List<Any>
+        scope_matches: Boolean
+        context_matches: Boolean
+        question_eligible: Boolean
+        binding: Any
+        trials: Any
+        context_trials: Any
+        option: Any
+        found: Boolean
+        replace: Boolean
+        best_question: Any
+        best_binding: Any
+        best_trials: Any
+        best_option: Any
+        rank_key: Any
+        best_rank: Any
+        experiment_disabled: Boolean
+        options_disabled: Boolean
+    STEP availability
+        CALL v7.value(value=request.memory) -> memory
+        CALL v7.contains(items=request.availability.selection.disabled_kinds, value="experiment") -> experiment_disabled
+        IF experiment_disabled
+            STOP memory
+        ELSE
+            NEXT option_availability
+    STEP option_availability
+        CALL v7.contains(items=request.availability.selection.disabled_kinds, value="experiment_option") -> options_disabled
+        IF options_disabled
+            STOP memory
+        ELSE
+            NEXT begin
+    STEP begin
+        CALL v7.value(value=request.memory) -> memory
+        CALL v7.value(value=false) -> found
+        CALL v7.select_active(memory=memory, kind="question", selection=request.availability.selection, dependency_fields=request.availability.dependency_fields) -> questions
+        CALL v7.select_active(memory=memory, kind="transition", selection=request.availability.selection, dependency_fields=request.availability.dependency_fields) -> transitions
+        NEXT rank
+    STEP rank
+        FOR EACH question IN questions
+            CALL v7.equal(left=question.scope, right=request.observation.scope) -> scope_matches
+            IF scope_matches
+                CALL v7.equal(left=question.context, right=request.observation.values) -> context_matches
+                IF context_matches
+                    CALL v7.contains(items=request.policy.eligible_question_statuses, value=question.status) -> question_eligible
+                    IF question_eligible
+                        CALL v7.get(mapping=request.bindings, key=question.action) -> binding
+                        CALL v7.count_matching(items=transitions, selectors=[["scope", question.scope], ["action", question.action]]) -> trials
+                        CALL v7.count_matching(items=transitions, selectors=[["scope", question.scope], ["action", question.action], ["context", question.context]]) -> context_trials
+                        CALL v7.identity(template="experiment_option", bindings=[["observation", request.observation], ["question", question], ["basis", request.basis]]) -> option
+                        IF binding.grounded
+                            CALL v7.emit(memory=memory, template="experiment_option", bindings=[["observation", request.observation], ["question", question], ["basis", request.basis], ["status", "eligible"], ["trials", trials], ["grounding", binding.reason], ["observation_node", request.observation_node]]) -> memory
+                            CALL v7.substitute(pattern=request.policy.order, bindings=[["context_trials", context_trials], ["trials", trials], ["action", question.action]]) -> rank_key
+                            IF found
+                                CALL v7.less(left=rank_key, right=best_rank) -> replace
+                            ELSE
+                                CALL v7.value(value=true) -> replace
+                            IF replace
+                                CALL v7.value(value=question) -> best_question
+                                CALL v7.value(value=binding) -> best_binding
+                                CALL v7.value(value=trials) -> best_trials
+                                CALL v7.value(value=option) -> best_option
+                                CALL v7.value(value=rank_key) -> best_rank
+                                CALL v7.value(value=true) -> found
+                        ELSE
+                            CALL v7.emit(memory=memory, template="experiment_option", bindings=[["observation", request.observation], ["question", question], ["basis", request.basis], ["status", "deferred"], ["trials", trials], ["grounding", binding.reason], ["observation_node", request.observation_node]]) -> memory
+        NEXT propose
+    STEP propose
+        IF found
+            CALL v7.emit(memory=memory, template="experiment", bindings=[["observation", request.observation], ["question", best_question], ["option", best_option], ["binding", best_binding], ["trials", best_trials], ["policy", request.policy], ["basis", request.basis], ["observation_node", request.observation_node]]) -> memory
+        STOP memory

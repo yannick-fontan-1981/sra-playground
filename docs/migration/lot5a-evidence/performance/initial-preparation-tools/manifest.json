@@ -1,0 +1,61 @@
+{
+  "schema": "logos-engine.lot5a-initial-cost-preparation-tools-archive.v1",
+  "recordedAt": "2026-11-10T21:14:45.247534+00:00",
+  "qualification": "Byte-exact source tools retained before the explicit shared-fragment premeasurement supplement. Initial declaration, protocol, captures and failed attribution remain at their original paths. No timing window has started.",
+  "files": [
+    {
+      "originalPath": "docs/migration/lot5a-evidence/record-owner-source-inventory.mjs",
+      "archivedPath": "docs/migration/lot5a-evidence/performance/initial-preparation-tools/record-owner-source-inventory.mjs",
+      "bytes": 12289,
+      "sha256": "e8f4e9ea46e9ab424578045a0a4f80d0537f7c44e5d029d19b12c5d97e03cb57"
+    },
+    {
+      "originalPath": "docs/migration/lot5a-evidence/capture-cost-owner-graphs.mjs",
+      "archivedPath": "docs/migration/lot5a-evidence/performance/initial-preparation-tools/capture-cost-owner-graphs.mjs",
+      "bytes": 20995,
+      "sha256": "e4e2394eedb4aff41f312e5627d262666c38d4e84cbeebb7655ac9866e1e8cdc"
+    },
+    {
+      "originalPath": "docs/migration/lot5a-evidence/qualify-cost-owner-graphs.mjs",
+      "archivedPath": "docs/migration/lot5a-evidence/performance/initial-preparation-tools/qualify-cost-owner-graphs.mjs",
+      "bytes": 41436,
+      "sha256": "99c9ca930f6ca86bb54f7ef1d0e67dbb5af84365b827b9c881b956f6a519f0d7"
+    },
+    {
+      "originalPath": "docs/migration/lot5a-evidence/prepare-cost-protocol.py",
+      "archivedPath": "docs/migration/lot5a-evidence/performance/initial-preparation-tools/prepare-cost-protocol.py",
+      "bytes": 28229,
+      "sha256": "3c012e65df0565761766a2e3bb5f9bd0aeadb2992fcc92d31f0a8a6b8aec1123"
+    },
+    {
+      "originalPath": "docs/migration/lot5a-evidence/finalize-owner-cost-contract.py",
+      "archivedPath": "docs/migration/lot5a-evidence/performance/initial-preparation-tools/finalize-owner-cost-contract.py",
+      "bytes": 9695,
+      "sha256": "d559cd3a89dc6a5aa4d5960c6f5f5387f21d70b93aa4ef02e64cac8907a19d59"
+    },
+    {
+      "originalPath": "docs/migration/lot5a-evidence/check-cost-static-inputs.py",
+      "archivedPath": "docs/migration/lot5a-evidence/performance/initial-preparation-tools/check-cost-static-inputs.py",
+      "bytes": 23360,
+      "sha256": "b85f2a2685b3bafbeed6052aa32c045e88f0f798707821ab107da379bbfe4a0b"
+    },
+    {
+      "originalPath": "docs/migration/lot5a-evidence/consolidate-owner-costs.mjs",
+      "archivedPath": "docs/migration/lot5a-evidence/performance/initial-preparation-tools/consolidate-owner-costs.mjs",
+      "bytes": 50598,
+      "sha256": "9e6112ec83b75bbdc7bdb2a614dd7ce0e860e1ea9b71ba2f74fb37e4f2e74f1e"
+    },
+    {
+      "originalPath": "docs/migration/lot5a-evidence/review-owner-costs.py",
+      "archivedPath": "docs/migration/lot5a-evidence/performance/initial-preparation-tools/review-owner-costs.py",
+      "bytes": 67816,
+      "sha256": "40b6a2068b61652725a55567407a58e54b88cd81056ecbe56755018d7a3d496d"
+    },
+    {
+      "originalPath": "docs/migration/lot5a-evidence/owner-cost-contract.md",
+      "archivedPath": "docs/migration/lot5a-evidence/performance/initial-preparation-tools/owner-cost-contract.md",
+      "bytes": 18430,
+      "sha256": "6fadb0e2988409ecffba68bbee99b12bf258ed16b69058582b1425021237648c"
+    }
+  ]
+}

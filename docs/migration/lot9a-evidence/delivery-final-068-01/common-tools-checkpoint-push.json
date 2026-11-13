@@ -1,0 +1,61 @@
+{
+  "schema": "logos-engine.lot9a-source-checkpoint-transport.v1",
+  "recordedAt": "2026-11-12T14:58:46.692774+00:00",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "ref": "refs/heads/lot9a-chart-navigation-checkpoint-20261112",
+  "expectedCommit": "3eddec652362f683738e4226f8bcb1bbd1f1c426",
+  "expectedRemoteBefore": "007eb3040d8774d0b5d648b6310fe0db28d97562",
+  "status": "pushed_and_verified",
+  "pushCommandStarted": true,
+  "pushSucceeded": true,
+  "ordinaryPush": true,
+  "forceUsed": false,
+  "fetchPerformed": false,
+  "fetchSucceeded": false,
+  "fetchSourceBranchRequested": false,
+  "allowUncommittedWork": true,
+  "worktreeCleanBefore": false,
+  "worktreeCleanAfter": false,
+  "committedCheckpointOnly": true,
+  "uncommittedWorkIncluded": false,
+  "worktreeContentsCompared": false,
+  "checkpointObservations": [
+    {
+      "stage": "local_preflight",
+      "observedAt": "2026-11-12T14:58:47.845412+00:00",
+      "commit": "3eddec652362f683738e4226f8bcb1bbd1f1c426",
+      "worktreeClean": false
+    },
+    {
+      "stage": "remote_before",
+      "observedAt": "2026-11-12T14:58:48.747373+00:00",
+      "commit": "3eddec652362f683738e4226f8bcb1bbd1f1c426",
+      "worktreeClean": false
+    },
+    {
+      "stage": "remote_exact_verification",
+      "observedAt": "2026-11-12T14:58:51.034888+00:00",
+      "commit": "3eddec652362f683738e4226f8bcb1bbd1f1c426",
+      "worktreeClean": false
+    }
+  ],
+  "commitCreated": false,
+  "sitePublicationPerformed": false,
+  "credentialPersisted": false,
+  "inputDeadlineSeconds": 45,
+  "inputWaitHoldsPerformanceLock": false,
+  "globalLockRequired": false,
+  "globalLockAcquired": false,
+  "coordinationPolicy": "Explicit user instruction: ordinary source pushes require no global lock or predecessor publication.",
+  "generatorSha256": "6eedcbd1708243d39010b0966856ce6778e58bcca50afb97629a350efcac63b6",
+  "qualification": "Only expectedCommit, the exact already committed HEAD, is backed up. Uncommitted or untracked work is not included or claimed saved, even when explicitly allowed. Native version, functional gates, cost and Site publication require their own evidence.",
+  "localCommitBefore": "3eddec652362f683738e4226f8bcb1bbd1f1c426",
+  "returnedSourceBranch": "main",
+  "authenticationMode": "http_extra_header",
+  "authenticationTransport": "hidden_stdin_then_process_environment_only",
+  "remoteCommitBefore": "007eb3040d8774d0b5d648b6310fe0db28d97562",
+  "remoteCommitAfter": "3eddec652362f683738e4226f8bcb1bbd1f1c426",
+  "localCommitAfter": "3eddec652362f683738e4226f8bcb1bbd1f1c426",
+  "localCleanAfter": false,
+  "finishedAt": "2026-11-12T14:58:51.034912+00:00"
+}

@@ -1,0 +1,11 @@
+MODULE v6.facet_examples
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        measured: Any
+        answer: Any
+    STEP measure
+        CALL facet.measure(request=request) -> measured
+        NEXT bind
+    STEP bind
+        CALL facet.bind(measured=measured) -> answer
+        STOP answer

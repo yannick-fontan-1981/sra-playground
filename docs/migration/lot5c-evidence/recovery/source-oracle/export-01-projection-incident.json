@@ -1,0 +1,34 @@
+{
+  "schema": "logos-engine.lot5c.oracle-input-projection-incident.v1",
+  "recordedAt": "2026-11-11T12:10:36.886824+00:00",
+  "status": "failed_attempt_preserved",
+  "exportReceipt": "docs/migration/lot5c-evidence/recovery/source-oracle/export-01.json",
+  "parityReceipt": "docs/migration/lot5c-evidence/recovery/source-oracle/parity-01-execution.json",
+  "testOutcome": {
+    "passed": 93,
+    "failed": 5,
+    "total": 98
+  },
+  "preservedFixture": {
+    "path": "docs/migration/lot5c-evidence/recovery/source-oracle/fixture-export-01.json.gz",
+    "bytes": 3453990,
+    "sha256": "8ea3768c3f240707c8c0d6988125fe525709414f008484baa9816174928ea3a8"
+  },
+  "unchangedOriginalExpectation": {
+    "case": "isolated-source-restore-merge",
+    "finding": "Python reset calls __init__ without clearing __dict__; extra_source_key survives. Native source-state reset must retain the extra key. Closed native checkpoints remain separately qualified."
+  },
+  "inputProjectionDefect": {
+    "cases": [
+      "locate-base",
+      "locate-shifted",
+      "locate-recoloured",
+      "locate-odd-body"
+    ],
+    "cause": "Helper construction passed observer mask entries as Python tuples; serialized fixture arguments were JSON lists. Python locate compares lists of lists, so the pre-serialization None result did not describe the serialized argument.",
+    "consumedSourceShape": "BindingTracker.record creates core.offsets explicitly as lists of lists.",
+    "remedy": "Regenerate the four helper calls with explicit lists of lists before invoking immutable Python. No expected output is copied from native results.",
+    "oldFixtureRetained": true
+  },
+  "nextExportStatus": "not_run"
+}

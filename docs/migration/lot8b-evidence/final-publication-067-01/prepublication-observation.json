@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.lot8b.prepublication-observation.v1",
+  "recordedAt": "2026-11-12T12:47:18.359Z",
+  "observationStage": "after official performance and before publication lease",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "latestSiteVersion": 107,
+  "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "currentUserRole": "owner",
+  "access": {
+    "mode": "custom",
+    "revision": 3,
+    "allowedUserCount": 1,
+    "allowedOwnerCount": 1,
+    "allowedGroupCount": 0,
+    "externalVisitorCount": 0,
+    "ownerPrivate": true
+  },
+  "baselineSource": {
+    "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_94f341f3a7188191b79c05be4f3820f1",
+    "commitSha": "4ff7bf45286a8a19d34401988adca587253ae41e",
+    "nativeVersion": "0.66.0"
+  },
+  "mustRecheckUnderLease": true
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.native-loop-cost-comparison-policy.v1",
+  "relativeBudget": 0.1,
+  "unaffectedCaseIds": [
+    "STCK",
+    "SMLP"
+  ],
+  "stages": [
+    "session_elapsed",
+    "new_decision",
+    "known_prefix_service",
+    "known_prefix_request",
+    "known_prefix_guard",
+    "acquisition_and_persistence",
+    "persistence",
+    "restoration"
+  ],
+  "qualification": "Generic lot3B restoration cost correction, freshly measured publication 66/native 0.38 baseline versus frozen native 0.40 correction. Same STCK10 and SMLP15 public returns, commands, counts, unchanged timing runner and sixteen median criteria as retained lot 3B 0.39. Both predeclared four-session cohorts are compared and all eight sessions per case/version are pooled for the final decision. The relative budget remains 10%; every aggregate overrun stays unresolved, including noisy results. Historical 0.39 measurements, its failed 15/16 aggregate and all cohort outcomes remain separate and unchanged."
+}

@@ -1,0 +1,115 @@
+{
+  "module_id": "family_return_collector_d",
+  "declarations": [
+    {
+      "id": "policy.computational_return_collector_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "exact_current_scoped_family_returns_and_blockers"
+      ],
+      "applicability": [
+        "source_requested_current_family_collection"
+      ],
+      "invariants": [
+        "no_act",
+        "all_siblings_retained",
+        "partial_results_not_free_transitions",
+        "same_existing_collector",
+        "bounded_joint_witnesses"
+      ],
+      "falsifiers": [
+        "wrong_parent",
+        "stale_input",
+        "unknown_dependency_erased"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "family_collector.compose_supported",
+        "family_collector.retain_all_returns"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.family_collector.compose",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "family_collector.compose_supported"
+            },
+            {
+              "field": "collector_join_ready",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.family_collector.retain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "family_collector.retain_all_returns"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.family_collector.compose",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "family_collector.compose_supported"
+            }
+          ],
+          "reason_ref": "reason.current_supported_family_contributions_through_existing_collector"
+        },
+        {
+          "id": "tier.family_collector.retain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "family_collector.retain_all_returns"
+            }
+          ],
+          "reason_ref": "reason.retain_exact_measures_partial_results_and_unknown_dependencies"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.family_return_collector_actual_use_unverified",
+      "reason_refs": [
+        "reason.current_supported_family_contributions_through_existing_collector",
+        "reason.retain_exact_measures_partial_results_and_unknown_dependencies"
+      ]
+    }
+  ]
+}

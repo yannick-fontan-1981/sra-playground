@@ -1,0 +1,57 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "declaredAt": "2026-11-11T20:44:42.749903+00:00",
+  "cases": [
+    {
+      "id": "kata-060-self-consistency",
+      "game": "KATA",
+      "baseline": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz",
+        "sha256": "a3318ed5f7d742f63b5923f3e1e46b0d9cfff1d18e767b45c522d61aa354e455"
+      },
+      "trace": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-public-trace.json.gz",
+        "sha256": "c236c95ec0bdcb892a6940940098e4310eb35a6ae11acaf6b74545d09aa22daa"
+      },
+      "comparisonBasis": "fresh_current_native_self_consistency"
+    }
+  ],
+  "passiveOwnerRequirements": [],
+  "inheritedCaseManifest": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/contract/regression-cases-final.json",
+    "sha256": "612786e95a3cd6c98c7a0ccd4bd5e616ff5b54d1de18f7962aae79d50faf4f36",
+    "bytes": 9035
+  },
+  "complementedTenCaseManifest": {
+    "path": "docs/migration/lot10c-evidence/recorded-regression-cases.json",
+    "sha256": "a16f67724f53def79fe476716c12a61e8064df871911772731983fa2505da3a9",
+    "bytes": 8305
+  },
+  "strictComparator": {
+    "path": "scripts/compare-v54-regressions.py",
+    "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "bytes": 18166
+  },
+  "strictComparisonCheckNames": [
+    "both runs passed with the same declared game and target",
+    "same production budgets, source reference and opaque game asset provenance",
+    "same complete initial public packet hash and public state",
+    "every archived public packet independently hashes to the v53 baseline",
+    "every archived host-only command equals its prior baseline command",
+    "same commands, complete returned packet hashes, animation lengths and primitive boundaries",
+    "same selected family/group/kind/subquestion, acquired prefix lengths and retained solver scalars",
+    "same retained coordination source/preferred entries and current guard scope",
+    "same historical epoch anchors with session namespace normalized",
+    "same inherited source-series event counts on every sealed prefix",
+    "same common request outcomes and retained caller acquisition counters",
+    "same natural level boundaries and retained-session caller counters",
+    "same final public result and retained-session operation counts",
+    "same retained mechanical-domain assessments",
+    "both source runs remained unchanged and imported no Python agent module",
+    "current replay used the declared complete frozen native source",
+    "current replay identifies the exact host-only baseline and public trace"
+  ],
+  "expectedChecksPerCase": 17,
+  "expectedComparisonChecks": 17,
+  "qualification": "Separate KATA supplement to the unchanged ten-case Lot10C declaration. The one row is copied exactly from the inherited eleven-case follow-up7 declaration, including the original fresh_current_native_self_consistency comparisonBasis label. That label describes the historical6A/native0.60 evidence provenance; this supplement compares the prepared329-file native0.66 candidate against those retained0.60 public returns. It is not a new self-comparison or a fresh live success. All17 unchanged original scoped comparisons are required. The ten original cases and their170-check run remain separate and unchanged. No LKEY case, live action, RECR clock reset, full caller parity, cost or publication is asserted."
+}

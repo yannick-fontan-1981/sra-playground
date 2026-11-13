@@ -1,0 +1,46 @@
+{
+  "schema": "logos-engine.v56.browser-visible-verification.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-09T14:26:35.729252+00:00",
+  "game": "GLOB",
+  "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.30.0",
+  "previewCheckout": "/workspace/scratch/c4dd29871d33/sra-playground-v56/.sites-checkout",
+  "managedPreviewUrl": "http://127.0.0.1:4173/",
+  "finalVisibleUrl": "http://127.0.0.1:4173/?game=GLOB&level=4",
+  "nativeSourceManifestDigest": "bade8fd58991e6a127abc84f373d539edeaa70d45ab0da94a84a6751fdc92de5",
+  "currentSourceMatchesFrozenCampaign": true,
+  "actions": 20,
+  "levelsCompleted": 3,
+  "completedPlans": 17,
+  "levelActions": [
+    5,
+    11,
+    4
+  ],
+  "actionsAtBoundaries": [
+    5,
+    16,
+    20
+  ],
+  "coldSession": true,
+  "naturalBoundaries": true,
+  "manualGameInputs": 0,
+  "levelJumps": 0,
+  "learnedStateInjected": false,
+  "inspectorOpen": false,
+  "visibleBoardDimensions": {
+    "height": 384,
+    "width": 384
+  },
+  "observation": {
+    "path": "docs/migration/native-campaigns-v56/final/glob-browser-observation.json",
+    "sha256": "f89ca4d4be25c5729a0071e448c21d45a44f683dfec310793afdd6abe7ad2a51",
+    "bytes": 2987
+  },
+  "screenshot": {
+    "path": "docs/migration/native-campaigns-v56/final/glob-browser-three-levels.png",
+    "sha256": "03ca4760eb1da11bcce0adae681d98de84dec8ef06a99c16febba410a67a7d79",
+    "bytes": 79255
+  },
+  "qualification": "Independent visible browser execution through CHOOSE A GAME, SRA Agent and three ordinary Run to next level clicks. DOM-visible counters and actual screenshot show20 actions,3 levels solved and17 completed plans in the same session. Inspector stayed closed. No app internals, game objects, expected commands or learned checkpoints were injected. Current preview checkout fingerprint equals the frozen live campaign; this is visible UI evidence, not full browser-network byte attestation."
+}

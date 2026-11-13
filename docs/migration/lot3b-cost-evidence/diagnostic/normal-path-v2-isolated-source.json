@@ -1,0 +1,56 @@
+{
+  "schema": "logos-engine.native-restoration-isolated-source.v1",
+  "status": "prepared",
+  "recordedAt": "2026-11-10T02:03:53.314912+00:00",
+  "checkout": "/workspace/scratch/c4dd29871d33/lot3b-f0ba-diagnostic",
+  "baseCommit": "81b937373b80e8c92c36856da0ec46b37db38956",
+  "overlayFileCount": 260,
+  "archiveManifest": {
+    "path": "docs/migration/lot3b-cost-evidence/final-v2/source-archive.json",
+    "bytes": 31070,
+    "sha256": "051935e68278c8456497ca0989bd07495fd776b5b3d61073844fb117e1ebec8f"
+  },
+  "archivePartsManifest": {
+    "path": "docs/migration/lot3b-cost-evidence/final-v2/source-archive-parts.json",
+    "bytes": 815,
+    "sha256": "a5382028b9aefdafcc91e9d5934bc9d52a96642dee307efef6389b61b16ff2a0"
+  },
+  "sourceManifest": {
+    "path": "docs/migration/lot3b-cost-evidence/final-v2/source-manifest.json",
+    "bytes": 29431,
+    "sha256": "b9fa471dfea4e4f0ffad22b9cea5dc4eb711d9099eb6408f6d349a9cb73d572e"
+  },
+  "reassembledArchive": {
+    "bytes": 1627199,
+    "sha256": "2b81e76ce02fd65bedf4d10642b6e5ac8401c83f63b43e301276ec019833f0fd"
+  },
+  "nativeSource": {
+    "fileCount": 249,
+    "digest": "f0ba85e80fbe7543f2e2360c6b6e846ae76839cb6ede0e9c022d31b56f46cece"
+  },
+  "allArchivedFilesVerified": true,
+  "copiedGeneratorAndPublicInputs": [
+    {
+      "path": "scripts/profile-native-restoration-path.mjs",
+      "bytes": 18270,
+      "sha256": "9e5e03e2d66cae16060a48aaec392a5874e464738c678cb6daab089580bba570"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    }
+  ],
+  "nodeModulesSymlinkTarget": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/node_modules",
+  "qualification": "Dedicated detached diagnostic checkout. Exactly the final-v2 archived source files overlay baseCommit. Native inventory exactly matches the archived 249-file manifest. Only the v2 diagnostic generator, public trace manifest and public returns are copied from the current checkout; the pending predeclared protocol will be copied after declaration. No baseline checkout is altered and no game implementation is read or executed."
+}

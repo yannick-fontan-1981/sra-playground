@@ -1,0 +1,82 @@
+{
+  "module_id": "b_profile_composition",
+  "declarations": [
+    {
+      "id": "policy.b_profile_composition",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_current_root_owned_exact_composition_retains_full_model_coverage"
+      ],
+      "premises": [
+        "current_family_contribution",
+        "exact_root_owned_composition_input"
+      ],
+      "invariants": [
+        "no_second_physics_or_search_engine",
+        "no_route_search_from_internal_successor",
+        "no_model_or_response_coverage_display_truncation",
+        "no_act_authority"
+      ],
+      "falsifiers": [
+        "different_parent_or_input_revision",
+        "missing_retained_model",
+        "different_return_identity"
+      ],
+      "declared_alternative_refs": [
+        "profile_composition.dispatch",
+        "profile_composition.blocked"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.profile_composition.dispatch",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile_composition.dispatch"
+            },
+            {
+              "field": "composition_ready",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile_composition.blocked",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile_composition.blocked"
+            },
+            {
+              "field": "composition_ready",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ]
+    }
+  ]
+}

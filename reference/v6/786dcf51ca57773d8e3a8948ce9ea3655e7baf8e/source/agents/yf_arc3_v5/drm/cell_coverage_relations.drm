@@ -1,0 +1,273 @@
+{
+  "module_id": "cell_coverage_relations",
+  "declarations": [
+    {
+      "id": "policy.cell_coverage_relation_scope",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_correlated_support_domain_and_unique_congruent_stationary_component"
+      ],
+      "applicability": [
+        "hypothetical_complete_support_word"
+      ],
+      "invariants": [
+        "source_owns_goal_and_planning_constraints",
+        "preserve_observed_support_and_its_order",
+        "no_world_single_visit_or_exit_law",
+        "one_primitive_experiment_not_a_verified_series",
+        "unknown_edges_stay_conditional"
+      ],
+      "falsifiers": [
+        "current_geometry_peer_or_first_step_contradicts_model"
+      ],
+      "declared_alternative_refs": [
+        "coverage_relations.calculate_complete_candidate_words",
+        "coverage_relations.retain_general_agenda"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.coverage_relations.calculate_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coverage_relations.calculate_complete_candidate_words"
+            },
+            {
+              "field": "finite_coverage_receiver_scope_measured",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "committed_plan_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "append_distinct_supports_is_planning_constraint": true,
+            "end_on_congruent_peer_is_goal_hypothesis": true,
+            "avoid_boundary_bars_is_planning_constraint": true,
+            "world_single_visit_law_is_asserted": false,
+            "kernel_ref": "mechanics.bounded_route_search",
+            "operation_ref": "mechanics.bounded_route_search.finite_relations",
+            "mode": "CSP",
+            "caller_ref": "workflow.append_cell_coverage_relations",
+            "cost_metric_ref": "primitive_count",
+            "max_candidates": 65536,
+            "max_states": 4096,
+            "max_depth": 128
+          },
+          "templated_facts": {
+            "parent_contribution_ref": "goal.full_support_coverage_from_growth.{geometry_digest}"
+          }
+        },
+        {
+          "id": "projection.coverage_relations.retain_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coverage_relations.retain_general_agenda"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.coverage_relations.calculate_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coverage_relations.calculate_complete_candidate_words"
+            }
+          ],
+          "reason_ref": "reason.current_support_and_stationary_peer_license_conditional_complete_word"
+        },
+        {
+          "id": "tier.coverage_relations.retain_scope",
+          "all_conditions": [],
+          "reason_ref": "reason.incomplete_scope_keeps_general_agenda"
+        }
+      ],
+      "reason_refs": [
+        "reason.current_support_and_stationary_peer_license_conditional_complete_word"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize",
+          "criterion_ref": "criterion.canonical_alternative_ref"
+        }
+      ]
+    },
+    {
+      "id": "policy.cell_coverage_relation_return",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "sealed_current_finite_relation_result"
+      ],
+      "applicability": [
+        "conditional_coverage_word_or_prefix_review"
+      ],
+      "invariants": [
+        "bounded_is_not_empty_proof",
+        "empty_refutes_only_declared_means_from_prefix",
+        "all_goal_and_mechanic_alternatives_retained",
+        "no_action_selection_in_python"
+      ],
+      "falsifiers": [
+        "result_scope_or_complete_assignment_is_not_current"
+      ],
+      "declared_alternative_refs": [
+        "coverage_relations.admit_complete_word_witness",
+        "coverage_relations.record_complete_empty_model",
+        "coverage_relations.retain_unknown_return"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.coverage_relations.positive_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coverage_relations.admit_complete_word_witness"
+            },
+            {
+              "field": "finite_coverage_return_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "finite_coverage_completion_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "selection_principle_ref": "reason.test_first_step_of_complete_coverage_and_peer_word"
+          },
+          "templated_facts": {
+            "model_ref": "hypothesis.append_new_supports_avoid_boundary_bars_and_finish_at_congruent_peer.{geometry_digest}.{peer_digest}",
+            "subgoal_ref": "subgoal.test_first_step_of_complete_coverage_receiver_word.{geometry_digest}.{peer_digest}"
+          }
+        },
+        {
+          "id": "projection.coverage_relations.empty_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coverage_relations.record_complete_empty_model"
+            },
+            {
+              "field": "finite_coverage_return_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "finite_coverage_completion_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "selection_principle_ref": "reason.query_other_available_controls_to_revise_infeasible_prefix"
+          },
+          "templated_facts": {
+            "model_ref": "hypothesis.append_new_supports_avoid_boundary_bars_and_finish_at_congruent_peer.{geometry_digest}.{peer_digest}",
+            "subgoal_ref": "subgoal.query_available_secondary_control_on_retained_prefix.{geometry_digest}.{peer_digest}"
+          }
+        },
+        {
+          "id": "projection.coverage_relations.unknown_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coverage_relations.retain_unknown_return"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.coverage_relations.positive_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coverage_relations.admit_complete_word_witness"
+            }
+          ],
+          "reason_ref": "reason.complete_finite_model_supports_conditional_word_trial"
+        },
+        {
+          "id": "tier.coverage_relations.empty_return",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coverage_relations.record_complete_empty_model"
+            }
+          ],
+          "reason_ref": "reason.complete_empty_model_opens_prefix_review_only"
+        },
+        {
+          "id": "tier.coverage_relations.unknown_return",
+          "all_conditions": [],
+          "reason_ref": "reason.incomplete_result_preserves_unknowns"
+        }
+      ],
+      "reason_refs": [
+        "reason.complete_finite_model_supports_conditional_word_trial",
+        "reason.complete_empty_model_opens_prefix_review_only"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize",
+          "criterion_ref": "criterion.canonical_alternative_ref"
+        }
+      ]
+    }
+  ]
+}

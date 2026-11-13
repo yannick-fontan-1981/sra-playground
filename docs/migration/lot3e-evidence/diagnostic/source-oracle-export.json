@@ -1,0 +1,48 @@
+{
+  "schema": "logos-engine.v6.reception-service-oracle-export.v1",
+  "status": "passed",
+  "generator": {
+    "path": "scripts/export-v6-reception-service-reference.py",
+    "sha256": "a1593c5015464c17ce1fcdb2f47831d395f3796f3d3fd8a7fc5bdd6b76386b1a"
+  },
+  "fixture": {
+    "path": "tests/fixtures/v6-reception-service-reference.json.gz",
+    "cases": 82,
+    "guards": 26,
+    "sourceExceptions": 2,
+    "sourceAliasCases": 1,
+    "ledgerCases": 10,
+    "residualCases": 12,
+    "bytes": 755239,
+    "sha256": "0542610d8e0e4c495ca9ca7cf28ca4aba29b848724f71f35dc95775f0b0f034d",
+    "originalFilesVerified": 1786,
+    "publicProjectionCases": 98
+  },
+  "operationCounts": {
+    "scene": 22,
+    "carriers": 12,
+    "sides": 3,
+    "path": 7,
+    "propose": 23,
+    "record": 14,
+    "apply_events": 1
+  },
+  "sourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceFiles": {
+    "agents/yf_arc3_v5/capabilities/reception_wait_contracts_d.py": "5ad4e8371e68b2c20b36b49f33cf0f939142b048ee249df87a9330d3b7ddce7b",
+    "agents/yf_arc3_v6/laya_proto/exposed_reception_access.py": "60bfa0fbaf2e4e49acd06a9481f999f5cc541a2162713e909e3cc31292d55d15",
+    "agents/yf_arc3_v6/laya_proto/reception_service_access.py": "2f1f51f92967d10e4fa1e0f2293f2a96b630c7905fa8da9961738095cac7d2e0",
+    "agents/yf_arc3_v6/laya_proto/reception_service_projection.py": "a0f88ac17512319130aa525d08a3744de874f1624a3e700ca6e74eecb32c4f84",
+    "agents/yf_arc3_v6/laya_proto/residual_access.py": "214d0ec5ac0b398aa2777b2befeed3b1a07f7d17dd7fcfc6e599eb24e7f68c19",
+    "agents/yf_arc3_v6/morphology_policy/strategy.drm": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+  },
+  "originalFilesVerifiedBefore": 1786,
+  "originalFilesVerifiedAfter": 1786,
+  "newGameActions": 0,
+  "levelJumps": 0,
+  "excludedGames": [
+    "CWSE",
+    "SK48"
+  ],
+  "qualification": "Unmodified original own-layer component contracts. Source inherited shared reception_events alias, stale epoch acquisition, retained stationary witness, <=128 ledger rejection and exhaustion fallback remain explicit counterexamples. Native separate ownership/current-scope/budget adaptations require their own tests and are not original full-caller parity. No new game actions or level jumps; no engine, specification or solution read."
+}

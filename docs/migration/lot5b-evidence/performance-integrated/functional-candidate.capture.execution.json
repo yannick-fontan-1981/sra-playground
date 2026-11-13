@@ -1,0 +1,16 @@
+{
+  "command": [
+    "node",
+    "docs/migration/lot5b-evidence/capture-cost-owner-graphs.mjs",
+    "candidate",
+    "/workspace/sites/sra-lot5b-20261110/.sites-checkout",
+    "docs/migration/lot5b-evidence/performance-integrated/cases.json",
+    "docs/migration/lot5b-evidence/integrated-final/source-manifest.json",
+    "docs/migration/lot5b-evidence/performance-integrated/functional-candidate.json.gz"
+  ],
+  "startedAt": "2026-11-11T01:53:55.957003+00:00",
+  "finishedAt": "2026-11-11T01:54:35.222966+00:00",
+  "exitCode": 0,
+  "log": "docs/migration/lot5b-evidence/performance-integrated/functional-candidate.capture.log",
+  "officialCostMeasurement": false
+}

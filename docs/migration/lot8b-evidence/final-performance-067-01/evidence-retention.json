@@ -1,0 +1,215 @@
+{
+  "schema": "logos-engine.lot8b.final-cost-evidence-retention.v1",
+  "recordedAt": "2026-11-12T12:46:34.780032+00:00",
+  "retainedFileCount": 41,
+  "retainedBytes": 2578618,
+  "files": [
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/README.md",
+      "bytes": 7067,
+      "sha256": "792f7141dcdd5386be59006ba46ffddcf7ed298c528f7383978e1db22399112c"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/analysis.execution.json",
+      "bytes": 1781,
+      "sha256": "c1356151199a88502a7a3631a8d2203c8ea69d79c8523164551134433afd7322"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/analysis.json",
+      "bytes": 275718,
+      "sha256": "0b893613b621eb140de18894b38a5124a029bfcf593ae1945d33c55de491315e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/analysis.stderr.log.gz",
+      "bytes": 20,
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/analysis.stdout.log.gz",
+      "bytes": 313,
+      "sha256": "a80840293ae3b4c6f091f9ea10066f8a6b12a466f7ea4c61535a9df90b110b36"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort1/after.json",
+      "bytes": 436115,
+      "sha256": "ee8a0a9fbef370696bd1391ab4198964d066681a9edc44171c075cc3e7465258"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort1/after.log",
+      "bytes": 1589,
+      "sha256": "e0e1d279e4c4f9bc93352b7bc8849eea415936f127a278d395f220402656c0fc"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort1/baseline.json",
+      "bytes": 435861,
+      "sha256": "cc17af265d67e5ac1a4de3c8417f7f018ecd9586dcdec28b23622385ee5a5fa2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort1/baseline.log",
+      "bytes": 1578,
+      "sha256": "f2fb40c55e7a6413e83f294e07508ff771ee9f44b12e492b069e7efd091a812e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort1/comparison.json",
+      "bytes": 25404,
+      "sha256": "c75b36a30af33fb9af5aba9b7c21c6196f3a66cb2b3a84764440598ae4144192"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort2/after.json",
+      "bytes": 436141,
+      "sha256": "29c10dcf5ddc2c8ecb2277ae576ca0a548bafeca606f51043d00e3f354ef0f5a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort2/after.log",
+      "bytes": 1564,
+      "sha256": "e99aa8ec98fc9fafe1aa5be22f566530a604e685ffea545e9428d498c6907255"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort2/baseline.json",
+      "bytes": 435908,
+      "sha256": "371ff4eb940478041e97bf587f363a6c404146e00902e62b18fb10ac7d00a0e9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort2/baseline.log",
+      "bytes": 1580,
+      "sha256": "eae3839b3ec601811eb016e52fc9c5a45dff0e0e7c1df958367b548838d49a46"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort2/comparison.json",
+      "bytes": 25378,
+      "sha256": "95d5491241dd73d77a66ccc1468ec29ad99054a2f252a6b0c2e4981964ae15b4"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/contract.json",
+      "bytes": 161021,
+      "sha256": "5c4560add21a3e14b0f570ed72466d1f28bcd603b7e7f596a4ac3e59f9f18ab4"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/expected-forms.json",
+      "bytes": 58685,
+      "sha256": "ea71cd481bbe724dfe1df038d2176644880b18a55a734b71953d9b3c642a1459"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/independent-delivery-cost-review.json",
+      "bytes": 14736,
+      "sha256": "0cb0ab3c1015b20e32622eeb4b6e73c56580b452019e75847edb652c4cb3efc0"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/independent-review.json",
+      "bytes": 152971,
+      "sha256": "a88da4f782af344e76868ff217a25da3713817bb7432facd547da9979ac8918c"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/pair1.execution.json",
+      "bytes": 2115,
+      "sha256": "581bef8bcc56382b83294165a575cddcb4ab404d8a338e7a635837fdfe6f9b7b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/pair1.log.gz",
+      "bytes": 221,
+      "sha256": "4df1f20222e70d7d8c42ac313ec05b0d4af3b90b076c58fd2710328e7856a927"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/pair2.execution.json",
+      "bytes": 2116,
+      "sha256": "ea97787e6321dab41411c30cc1d07b523bcee8f1c2f0995cf933192056a3738b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/pair2.log.gz",
+      "bytes": 221,
+      "sha256": "0ec411d5c7dc7a2151bc24558759176f2bd85877c9e43f4f0fc6fda197b2fe37"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/protocol.md",
+      "bytes": 3504,
+      "sha256": "c9f37243aa75ab2e68996342570a6dcd6b542ac9a86b72b43f38069f2778aaef"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/review.execution.json",
+      "bytes": 1785,
+      "sha256": "792f7af66922105b02839ccfb71f38e042d3a079daa44a591b256f2f7d343c73"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/review.stderr.log.gz",
+      "bytes": 20,
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/review.stdout.log.gz",
+      "bytes": 145,
+      "sha256": "36bf9b587591cf75b54cbb4615c13745748c3199aa1a3489ea7dd3a53eef4fe9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/strict.execution.json",
+      "bytes": 3097,
+      "sha256": "0f634524d15d07e704e925b2b0675556785b579e9ae79fda6fc79f7d5c8012da"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/strict.log.gz",
+      "bytes": 2371,
+      "sha256": "f9d0b3b33836f471c5e2fff913f3203ff4df0b305365c67e4699a22bfa7f7671"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/validation-summary.json",
+      "bytes": 8781,
+      "sha256": "88b80e302c424ab38f574017a3f0255a11db913e82dfabd6a8be7f8ff0d830f3"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/window.json",
+      "bytes": 10958,
+      "sha256": "c82a2660608c7103821bd7d78929945656fc41ae2dd3e69bb9224e421509e5a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-controller-067-01/controller.json",
+      "bytes": 6968,
+      "sha256": "f7443ba964ff60d72ae216f92ae24b838fec9bff9cf16093e588506316b0dd68"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-controller-067-01/controller.started.json",
+      "bytes": 1031,
+      "sha256": "75945649244bae0a28738e45bd8cadd7bb7f11a00bab46e1df068e0d3afb5857"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-controller-067-01/environment-after.json",
+      "bytes": 1273,
+      "sha256": "4358ada00dbbd5029086a3a53dbe9ed5cce58e2c49033e98536dafc085edb6bf"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-controller-067-01/environment-before.json",
+      "bytes": 1268,
+      "sha256": "039637bdcf0b21c51380ce6d389b7aebc5512c8374ff9327a508da72fbc4aa79"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-controller-067-01/environment-during.jsonl",
+      "bytes": 23087,
+      "sha256": "c8f68de78600d533d5a51fbe4c1c3810583d25a9438b29ccbbe6729c28d7f938"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-controller-067-01/independent-controller-review.json",
+      "bytes": 26950,
+      "sha256": "64c8ad8abd691f5c45016c92ac0155235d9716aa36b2d917865dd7dbc1a2724f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-controller-067-01/runner.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-controller-067-01/runner.stdout.log",
+      "bytes": 6835,
+      "sha256": "5d3dfca6240cf7bd757965bf7f71453aa43475ff1130d675a1ed137134d71a7d"
+    }
+  ],
+  "allMeasuredReportsAndObservedLogsRetained": true,
+  "retentionIndexExcludedFromOwnList": true
+}

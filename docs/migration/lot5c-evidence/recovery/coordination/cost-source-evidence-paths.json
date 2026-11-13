@@ -1,0 +1,13 @@
+[
+  "src/logos-engine/v6-native-runtime.ts",
+  "src/logos-engine/v6-observed-binding.ts",
+  "src/logos-engine/v6-observed-binding-state.ts",
+  "src/logos-engine/v6-object-binding-common.ts",
+  "src/logos-engine/v6-object-binding-geometry.ts",
+  "src/logos-engine/v6-object-binding-identity.ts",
+  "src/logos-engine/v6-object-binding-planning.ts",
+  "src/logos-engine/v6-object-binding-reception.ts",
+  "src/logos-engine/v6-object-binding-tracker.ts",
+  "src/logos-engine/v6-knowledge-store.ts",
+  "src/logos-engine/kernel.ts"
+]

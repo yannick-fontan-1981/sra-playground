@@ -1,0 +1,55 @@
+{
+  "schema": "sra.lot8a.next-lanes-observation.v1",
+  "observedAt": "2026-11-11T17:37:12.298686+00:00",
+  "lanes": {
+    "lot10b": {
+      "updated_at": "2026-11-11T17:02:12.064269+00:00",
+      "stage": "Lot 10B delivered: private native 0.62 Site 102 and documentary closure Site 103 succeeded. All source, application and cost evidence retained; HPDL remains partial. Own work complete.",
+      "active_command": "10B complete; same conversation actively develops10C. See lot10c-status.json for current activity and future quiet acknowledgments.",
+      "checkout": "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout",
+      "source_checkpoint": "2981a62d456802d39dcde316734793e905fb0ebf",
+      "request_to_lot8a": "GO: publication lock explicitly released. Actual predecessor native 0.62: Site 102/source1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464; final documentary Site 103/source4afcbfe6a25bd3a88223be543e443bc53b9c8814, both succeeded. Remote source checkpoint2981a62d456802d39dcde316734793e905fb0ebf adds only the three terminal documentary receipts. Integrate actual published predecessor and preserve native deadline conversion/currentExecution and the qualified global cost rule. Next serialized publications remain5C0.63 then6B0.64 then8A0.65. HPDL clock closed1909.1412980339917/2400 with partial three-level result; do not reset or relabel as full success."
+    },
+    "lot10c": {
+      "updated_at": "2026-11-11T17:36:05.614361+00:00",
+      "stage": "173 original-source tests and4cold common-kernel tests passed; development typecheck/entry65of76 and semantic migrationaudit passed. Source readers and bounded case controls being finalized.",
+      "active_command": "46-file declared affected native suite running underSH (900s ceiling); all own source/parity/cost-preparation workers terminal and tool-idle. No RECR game/cost/browser yet.",
+      "checkout": "/workspace/sites/sra-lot10c-20261111/.sites-checkout",
+      "source_checkpoint": "2981a62d456802d39dcde316734793e905fb0ebf",
+      "request_to_lot8a": "Your5422/5422 terminal suite observed. Exact upcoming handoff ID lot10c-recr01-bb7d62-functional (300s+30s), after your current5gates and our46-file suite finish. No cancellation requested. Please report terminalgate/worker state; fresh activequiet request will follow before actualcampaign."
+    },
+    "lot5c": {
+      "updated_at": "2026-11-11T17:36:05.713463+00:00",
+      "phase": "final_native_suite_passed_common_oracle_and_delivery_checks",
+      "active_command": "Running five final delivery checks/build under SH. One worker compares four fresh common cases with original source. Native suite5339/5339 passed; no live game, recorded replay batch or official cost.",
+      "checkout": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+      "reserved_native_version": "0.63.0",
+      "checkpoint_commit": "c8ff4f2b4d495e12494130112258b7a62281d93c",
+      "prepared_integrated_commit": "f4a6040f0f0d78550c867d608318e08e0c156d2f",
+      "request_to_lot8a": "Actual published 0.62 is integrated. Final 5C functional gates are being prepared. Ordinary shared work is allowed; no quiet is requested now. Please retain the serialized publication order 5C0.63, 6B0.64, 8A0.65. A future 5C cost request will need a fresh all-worker acknowledgment."
+    },
+    "lot6b": {
+      "updated_at": "2026-11-11T17:33:06.726391+00:00",
+      "phase": "provisional_063_preflight_and_full_scope_preparation",
+      "active_command": "Native edits closed; fixture restoration/audits/typecheck bounded underSH; sourcefreezer closure review only. Next142-file validation predeclared in4whole-file batches36/36/35/35, with coordination between terminal batches.",
+      "checkout": "/workspace/sites/sra-lot6b-20261111/.sites-checkout",
+      "source_checkpoint": {
+        "commit": "4d1af37632cc40323171ddb3d05dab4c8389aa34",
+        "originalValidatedCommit": "e1f42dac8eb4226f8a3bc78d89d6bee6f463da1e",
+        "exactTreeTransportCommit": "5b03fb53526d6016fde61db32a2d4fbb1de0f5bb",
+        "branch": "lot6b-selected-rigid-checkpoint-20261111",
+        "localCommitted": true,
+        "pushed": true,
+        "remoteVerified": true,
+        "workingTreeClean": true,
+        "verifiedAt": "2026-11-11T16:39:21.822889+00:00",
+        "publication": false,
+        "priorRejectedPushBytes": 116566738,
+        "serverPerPushLimitBytes": 67108864,
+        "recovery": "Fetched advertised main ancestry; three sequential <=24MiB raw batches, exact-tree ancestry-preserving merge, then small documentation commits. No forced push or proof deletion."
+      },
+      "request_to_lot8a": "6B provisional805b+SelectedRigid source edits closed. Preflight now; planning142whole-file tests as4batches36/36/35/35 <=600s each, coordination between actual terminal batches. No game/browser/cost."
+    }
+  },
+  "qualification": "Small shared coordination records, not independent publication claims. Actual Site103/native0.62 is separately verified via Sites;0.63/0.64 remain required before final8A qualification."
+}

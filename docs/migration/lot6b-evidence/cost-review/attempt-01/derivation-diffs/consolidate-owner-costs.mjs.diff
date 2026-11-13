@@ -1,0 +1,125 @@
+--- lot6a/consolidate-owner-costs.mjs
++++ lot6b-before-review/consolidate-owner-costs.mjs
+@@ -1,7 +1,7 @@
+ #!/usr/bin/env node
+ /**
+- * Predeclared lot 6A owner-cost consolidation. No runtime or benchmark executes.
+- * CLI: node docs/migration/lot6a-evidence/consolidate-owner-costs.mjs CONTRACT OUTPUT
++ * Predeclared lot 6B owner-cost consolidation. No runtime or benchmark executes.
++ * CLI: node docs/migration/lot6b-evidence/consolidate-owner-costs.mjs CONTRACT OUTPUT
+  * Arithmetic, workSignature and report checks are identified adaptations of
+  * scripts/compare-native-cost-cohorts.mjs and compare-native-loop-costs.mjs.
+  * Historical tools, failures and raw inputs remain unchanged. This schema never
+@@ -19,7 +19,7 @@
+ import { gunzipSync } from 'node:zlib';
+ 
+ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
+-const EVIDENCE = 'docs/migration/lot6a-evidence/';
++const EVIDENCE = 'docs/migration/lot6b-evidence/';
+ const SELF = EVIDENCE + 'consolidate-owner-costs.mjs';
+ const REVIEWER = EVIDENCE + 'review-owner-costs.py';
+ const HISTORICAL = 'scripts/compare-native-cost-cohorts.mjs';
+@@ -28,20 +28,20 @@
+   'known_prefix_guard', 'acquisition_and_persistence', 'persistence', 'restoration'];
+ const ORDER = ['A1', 'B1', 'B2', 'A2'];
+ const EXPECTATION = {
+-  ownerId: 'preview_packing', programId: null,
+-  installedNodeIds: ['family_state:preview_packing', 'family_activation:preview_packing'],
++  ownerId: 'selected_rigid', programId: null,
++  installedNodeIds: ['family_state:selected_rigid', 'family_activation:selected_rigid'],
+   allowedPaths: ['observations[*].nodeCount', 'inspection[*].graphNodes', 'final.nodeCount', 'final.graphRevision'],
+   mode: 'predeclared_functional_fixture',
+   qualification: 'functional_structure_frozen_before_measurement',
+ };
+-const SOURCE_PATHS = ["src/logos-engine/v6-native-runtime.ts", "src/logos-engine/v6-preview-packing.ts", "src/logos-engine/v6-preview-packing-types.ts", "src/logos-engine/v6-preview-packing-geometry.ts", "src/logos-engine/v6-preview-packing-calculus.ts", "src/logos-engine/v6-knowledge-store.ts", "src/logos-engine/kernel.ts"];
++const SOURCE_PATHS = ["src/logos-engine/v6-native-runtime.ts", "src/logos-engine/v6-selected-rigid.ts", "src/logos-engine/v6-selected-rigid-types.ts", "src/logos-engine/v6-selected-rigid-geometry.ts", "src/logos-engine/v6-selected-rigid-search.ts", "src/logos-engine/v6-knowledge-store.ts", "src/logos-engine/kernel.ts"];
+ const sha = bytes => createHash('sha256').update(bytes).digest('hex');
+ const omit = (value, keys) => Object.fromEntries(Object.entries(value).filter(([key]) => !keys.includes(key)));
+ const touched = new Map();
+ // The lot 7A io-v1 variant (SHA-256
+ // 78ed9ea54051f9f5de6ce7a6659094d33d2729f3cd53075a03c44be3a98f6aac)
+ // exposed an attribution-reader path defect. Here this bounded adapter is part
+-// of the declared 6A tool BEFORE measurement. It takes its exact whitelist from
++// of the declared 6B tool BEFORE measurement. It takes its exact whitelist from
+ // the already-fingerprinted baseline capture, not from a post-measurement receipt.
+ let baselineAttributionAccess = null;
+ function inside(path) {
+@@ -191,7 +191,7 @@
+ async function loadStructuralFixture(contract, declaration, manifests) {
+   await verify(contract.structuralFixture);
+   const fixtureFile = await readEvidence(contract.structuralFixture.path), fixture = fixtureFile.value;
+-  assert.equal(fixture.schema, 'logos-engine.lot6a-owner-cost-structural-fixture.v1');
++  assert.equal(fixture.schema, 'logos-engine.lot6b-owner-cost-structural-fixture.v1');
+   assert.equal(fixture.status, 'qualified_functional_structure');
+   assert.deepEqual(fixture.nativeDigests, declaration.nativeDigests);
+   await verify(fixture.cases); await verify(fixture.captureTool);
+@@ -240,7 +240,7 @@
+     // qualifier reconstructs their node histories; this analyzer reads only receipts.
+     await verify(capture.report); await verify(capture.receipt);
+     const receipt = (await readEvidence(capture.receipt.path)).value;
+-    assert.equal(receipt.schema, 'logos-engine.lot6a-owner-cost-functional-capture-receipt.v1');
++    assert.equal(receipt.schema, 'logos-engine.lot6b-owner-cost-functional-capture-receipt.v1');
+     assert.equal(receipt.status, 'captured_functional_structure'); assert.equal(receipt.role, role);
+     assert.equal(receipt.nativeDigest, fixture.nativeDigests[role]);
+     await verifyCaptureInput(receipt.nativeSourceBefore); await verifyCaptureInput(receipt.nativeSourceAfter);
+@@ -269,7 +269,7 @@
+   }
+   await verify(fixture.attribution);
+   const attribution = (await readEvidence(fixture.attribution.path)).value;
+-  assert.equal(attribution.schema, 'logos-engine.lot6a-owner-cost-structural-attribution.v1');
++  assert.equal(attribution.schema, 'logos-engine.lot6b-owner-cost-structural-attribution.v1');
+   assert.equal(attribution.status, 'qualified_functional_structure'); assert.deepEqual(attribution.nativeDigests, declaration.nativeDigests);
+   await verify(attribution.generator);
+   assert.ok(Number.isSafeInteger(attribution.checkedCount) && attribution.checkedCount > 0);
+@@ -390,12 +390,12 @@
+   const output = inside(outputArg), contractFile = await readEvidence(contractArg), contract = contractFile.value;
+   assert.ok(contractFile.fingerprint.path.startsWith(EVIDENCE));
+   try { await access(output); throw new Error('Output already exists'); } catch (error) { if (error.code !== 'ENOENT') throw error; }
+-  assert.equal(contract.schema, 'logos-engine.lot6a-owner-cost-contract.v2'); assert.equal(contract.lot, '6A');
++  assert.equal(contract.schema, 'logos-engine.lot6b-owner-cost-contract.v2'); assert.equal(contract.lot, '6B');
+   assert.deepEqual(contract.structuralExpectation, EXPECTATION);
+   const perf = relative(ROOT, inside(contract.performanceDirectory));
+   // The chosen directory is bound by the declaration/contract and exclusive
+-  // outputs below. The old 7A isolated-window name is not a 6A restriction.
+-  assert.ok(perf.startsWith(EVIDENCE), 'A declared lot 6A window directory is required');
++  // outputs below. The old 7A isolated-window name is not a 6B restriction.
++  assert.ok(perf.startsWith(EVIDENCE), 'A declared lot 6B window directory is required');
+   assert.equal(dirname(output), inside(perf), 'Write the qualified aggregate beside its own window');
+   const names = suffix => perf + '/' + suffix;
+   assert.equal(contract.declaration.path, names('declaration.json'));
+@@ -405,7 +405,7 @@
+   assert.equal(declaration.status, 'declared_before_official_window');
+   assert.equal(declaration.noOfficialWindowAtDeclaration, true);
+   assert.deepEqual(declaration.ownerCostQualification, {
+-    schema: 'logos-engine.lot6a-owner-cost-qualification.v1', contractPath: contractFile.fingerprint.path, tools: contract.tools,
++    schema: 'logos-engine.lot6b-owner-cost-qualification.v1', contractPath: contractFile.fingerprint.path, tools: contract.tools,
+   });
+   assert.deepEqual(Object.keys(contract.tools).sort(), ['consolidator', 'reviewer']);
+   assert.equal(contract.tools.consolidator.path, SELF); assert.equal(contract.tools.reviewer.path, REVIEWER);
+@@ -455,7 +455,7 @@
+   for (const record of contract.sourceEvidence) { await verify(record); assert.equal(record.sha256, candidate.files[record.path]); }
+   await verify(contract.ownerInventory);
+   const inventory = (await readEvidence(contract.ownerInventory.path)).value;
+-  assert.equal(inventory.schema, 'logos-engine.lot6a-owner-cost-source-inventory.v1');
++  assert.equal(inventory.schema, 'logos-engine.lot6b-owner-cost-source-inventory.v1');
+   assert.equal(inventory.programScope, 'family-installed programs'); assert.deepEqual(inventory.nativeDigests, declaration.nativeDigests);
+   assert.ok(instant(inventory.recordedAt) <= instant(contract.declaredAt));
+   for (const [key, addition] of [['owners', EXPECTATION.ownerId], ['programs', EXPECTATION.programId]]) {
+@@ -624,7 +624,7 @@
+   const unresolved = unresolvedFor(comparisons), globalAccepted = globalCases.every(row => row.accepted);
+   const derivedFrom = [await fingerprint(HISTORICAL), await fingerprint(PAIR)];
+   const report = {
+-    schema: 'logos-engine.lot6a-owner-cost-consolidation.v2', status: 'qualified_consolidation_complete', recordedAt: new Date().toISOString(),
++    schema: 'logos-engine.lot6b-owner-cost-consolidation.v2', status: 'qualified_consolidation_complete', recordedAt: new Date().toISOString(),
+     generator: await fingerprint(SELF), derivedFrom, contract: contractFile.fingerprint, declaration: contract.declaration,
+     inputs: { policy: policyFile.fingerprint, window: windowFile.fingerprint, readiness: readinessFile.fingerprint,
+       staticPreflight: staticFile.fingerprint, sourceInventory: contract.ownerInventory, sourceEvidence: contract.sourceEvidence,
+@@ -658,7 +658,7 @@
+ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+   try { await main(); }
+   catch (error) {
+-    console.error(JSON.stringify({ schema: 'logos-engine.lot6a-owner-cost-analysis-failure.v1', status: 'owner_cost_analysis_blocked',
++    console.error(JSON.stringify({ schema: 'logos-engine.lot6b-owner-cost-analysis-failure.v1', status: 'owner_cost_analysis_blocked',
+       structuralProof: false, historicalStrictPassed: false, outputWritten: false,
+       error: error instanceof Error ? error.message : String(error) }));
+     process.exitCode = 1;

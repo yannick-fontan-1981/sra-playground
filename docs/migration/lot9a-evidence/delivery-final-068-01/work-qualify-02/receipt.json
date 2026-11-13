@@ -1,0 +1,79 @@
+{
+  "schema": "logos-engine.lot9a.functional-command.v1",
+  "key": "work-qualify",
+  "attempt": "work-qualify-02",
+  "plan": {
+    "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/work-reader-amendment-v2.json",
+    "bytes": 76959,
+    "sha256": "ffecee495f5307d430ad07360e46cd3fd93b116b528f252a79049366b268c2bc"
+  },
+  "command": [
+    "node",
+    "--max-old-space-size=1536",
+    "docs/migration/lot9a-evidence/tools/delivery/work-forms/correction-v2/qualify-cost-owner-graphs-v2.mjs",
+    "docs/migration/lot9a-evidence/delivery-final-068-01/work-inventory-01/owner-source-inventory.json",
+    "docs/migration/lot9a-evidence/delivery-final-068-01/work-baseline-01/baseline.json.gz",
+    "docs/migration/lot9a-evidence/delivery-final-068-01/work-baseline-01/baseline.receipt.json",
+    "docs/migration/lot9a-evidence/delivery-final-068-01/work-candidate-01/candidate.json.gz",
+    "docs/migration/lot9a-evidence/delivery-final-068-01/work-candidate-01/candidate.receipt.json",
+    "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-02/graph-review.json",
+    "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-02/work-forms.json"
+  ],
+  "cwd": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T15:04:06.481479+00:00",
+  "timeoutSeconds": 300,
+  "budgetKey": "work-qualify",
+  "attemptNumber": 2,
+  "priorCumulativeSeconds": 50.551226686999144,
+  "maximumCumulativeSeconds": 600,
+  "correctiveReason": "Retained first reader found exactly58 total_ms leaves; v2 proves source creation, actual interval bounds and exact report retention without changing either capture",
+  "declaredMaximumSessionsThisLaunch": 0,
+  "declaredMaximumReturnsThisLaunch": 0,
+  "generator": {
+    "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/tools/delivery/run-functional-command.py",
+    "bytes": 9355,
+    "sha256": "dcd3d8f56c75c44036a9ab7d14ef92aec367db7eb8c5b30fae59d63dd30a6045"
+  },
+  "derivedFrom": {
+    "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot8b-evidence/tools/final-functional/run-functional-command.py",
+    "bytes": 7698,
+    "sha256": "a49a62551f757750a9598b2ea3a36d0c214ded79f150e3c65bddc74a83103fe9"
+  },
+  "headBefore": "af5740a0d8a3d25b444830eff126a574655e25e3",
+  "globalLockAcquired": false,
+  "officialPerformanceMeasurement": false,
+  "gameEngineExecuted": false,
+  "published": false,
+  "status": "passed",
+  "exitCode": 0,
+  "finishedAt": "2026-11-12T15:04:57.689679+00:00",
+  "elapsedSeconds": 51.20615136400011,
+  "inputsUnchanged": true,
+  "changedInputPaths": [],
+  "log": {
+    "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-02/output.log.gz",
+    "bytes": 214,
+    "sha256": "84035df3ab452d7a6c59fb6308a07d17748097ee4f64aaeedbd7edb129de2c93"
+  },
+  "childProcessReaped": true,
+  "headAfter": "af5740a0d8a3d25b444830eff126a574655e25e3",
+  "headUnchanged": true,
+  "cumulativeSeconds": 101.75737805099925,
+  "outputs": [
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-02/graph-review.differences.jsonl.gz",
+      "bytes": 1147656,
+      "sha256": "a938d7038c9dfcecf60e125892f81db509d926b0a16b8dc471dde546e57edc78"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-02/graph-review.json",
+      "bytes": 629755,
+      "sha256": "a75a32907a316b63366c4640c456e8918ece9fda37b545ba5afcf97e394148a4"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-02/work-forms.json",
+      "bytes": 61124,
+      "sha256": "444e916596bd648052c8438909cf3cd2d38e3f337332406b042320d11b4ae3b9"
+    }
+  ]
+}

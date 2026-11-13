@@ -1,0 +1,690 @@
+{
+  "schema": "logos-engine.v6.declared-entry-coverage.v1",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "strategySha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+  "implementation": "logos-engine.typescript.v6.native-migration/0.67.0",
+  "metric": "Connection of the explicit subquestions in the four ordered source DRM lists",
+  "connected": 69,
+  "partiallyConnected": 0,
+  "declared": 76,
+  "percent": 90.8,
+  "groups": [
+    {
+      "id": "goal_access",
+      "declared": 12,
+      "connected": 12,
+      "partiallyConnected": 0,
+      "entries": [
+        {
+          "question": "observed_composition_services",
+          "family": "public_occurrence_recall",
+          "status": "connected"
+        },
+        {
+          "question": "coupled_support_composition",
+          "family": "public_occurrence_recall",
+          "status": "connected"
+        },
+        {
+          "question": "alternating_graph_composition",
+          "family": "public_occurrence_recall",
+          "status": "connected"
+        },
+        {
+          "question": "scored_relation_access",
+          "family": "goal_access",
+          "status": "connected"
+        },
+        {
+          "question": "observed_support_access",
+          "family": "support_navigation",
+          "status": "connected"
+        },
+        {
+          "question": "subset_diagnosis",
+          "family": "subset_diagnosis",
+          "status": "connected"
+        },
+        {
+          "question": "preview_packing",
+          "family": "preview_packing",
+          "status": "connected"
+        },
+        {
+          "question": "selected_rigid",
+          "family": "selected_rigid",
+          "status": "connected"
+        },
+        {
+          "question": "invited_reduction",
+          "family": "invited_reduction",
+          "status": "connected"
+        },
+        {
+          "question": "joint_transport",
+          "family": "joint_transport",
+          "status": "connected"
+        },
+        {
+          "question": "observed_feedback_sequence",
+          "family": "feedback_sequences",
+          "status": "connected"
+        },
+        {
+          "question": "animated_contact",
+          "family": "animated_contact",
+          "status": "connected"
+        }
+      ]
+    },
+    {
+      "id": "window_constraints",
+      "declared": 21,
+      "connected": 21,
+      "partiallyConnected": 0,
+      "entries": [
+        {
+          "question": "occluded_catalogue_composition",
+          "family": "public_occurrence_recall",
+          "status": "connected"
+        },
+        {
+          "question": "queued_field_composition",
+          "family": "public_occurrence_recall",
+          "status": "connected"
+        },
+        {
+          "question": "product_panel_composition",
+          "family": "public_occurrence_recall",
+          "status": "connected"
+        },
+        {
+          "question": "labeled_sequence_composition",
+          "family": "public_occurrence_recall",
+          "status": "connected"
+        },
+        {
+          "question": "linked_packet_composition",
+          "family": "public_occurrence_recall",
+          "status": "connected"
+        },
+        {
+          "question": "trace_field_composition",
+          "family": "public_occurrence_recall",
+          "status": "connected"
+        },
+        {
+          "question": "cell_patch_composition",
+          "family": "public_occurrence_recall",
+          "status": "connected"
+        },
+        {
+          "question": "observed_occurrence_recall",
+          "family": "public_occurrence_recall",
+          "status": "connected"
+        },
+        {
+          "question": "observed_program_composition",
+          "family": "public_occurrence_recall",
+          "status": "connected"
+        },
+        {
+          "question": "typed_material_flow",
+          "family": "public_occurrence_recall",
+          "status": "connected"
+        },
+        {
+          "question": "radial_port_composition",
+          "family": "public_occurrence_recall",
+          "status": "connected"
+        },
+        {
+          "question": "observed_framed_analogy",
+          "family": "public_framed_transfer",
+          "status": "connected"
+        },
+        {
+          "question": "field_service_composition",
+          "family": "public_occurrence_recall",
+          "status": "connected"
+        },
+        {
+          "question": "rooted_quota_composition",
+          "family": "public_occurrence_recall",
+          "status": "connected"
+        },
+        {
+          "question": "framed_window_composition",
+          "family": "public_occurrence_recall",
+          "status": "connected"
+        },
+        {
+          "question": "coupled_prefix_reference",
+          "family": "public_occurrence_recall",
+          "status": "connected"
+        },
+        {
+          "question": "relative_arrangement",
+          "family": "relative_arrangements",
+          "status": "connected"
+        },
+        {
+          "question": "multiscale_constraints",
+          "family": "window_constraints",
+          "status": "connected"
+        },
+        {
+          "question": "recurrent_series",
+          "family": "public_occurrence_recall",
+          "status": "connected"
+        },
+        {
+          "question": "periodic_sums",
+          "family": "periodic_sums",
+          "status": "connected"
+        },
+        {
+          "question": "reflected_cover",
+          "family": "reflected_cover",
+          "status": "connected"
+        }
+      ]
+    },
+    {
+      "id": "surface",
+      "declared": 10,
+      "connected": 10,
+      "partiallyConnected": 0,
+      "entries": [
+        {
+          "question": "facet_example",
+          "family": "facet_examples",
+          "status": "connected"
+        },
+        {
+          "question": "surface_rewrite",
+          "family": "surface_program",
+          "status": "connected"
+        },
+        {
+          "question": "learned_code_program",
+          "family": "code_program",
+          "status": "connected"
+        },
+        {
+          "question": "slot_substitution",
+          "family": "slot_substitution",
+          "status": "connected"
+        },
+        {
+          "question": "typed_word_interface",
+          "family": "word_interface",
+          "status": "connected"
+        },
+        {
+          "question": "rigid_port_assembly",
+          "family": "port_assembly",
+          "status": "connected"
+        },
+        {
+          "question": "controlled_constellation_cover",
+          "family": "constellation_cover",
+          "status": "connected"
+        },
+        {
+          "question": "linked_temporal_preparation",
+          "family": "linked_temporal_preparation",
+          "status": "connected"
+        },
+        {
+          "question": "configured_arrivals",
+          "family": "configured_arrivals",
+          "status": "connected"
+        },
+        {
+          "question": "fixed_origin",
+          "family": "fixed_origin",
+          "status": "connected"
+        }
+      ]
+    },
+    {
+      "id": "factored_material_return",
+      "declared": 33,
+      "connected": 26,
+      "partiallyConnected": 0,
+      "entries": [
+        {
+          "question": "reactive_contact_continuation",
+          "family": "public_reactive_contact",
+          "status": "connected"
+        },
+        {
+          "question": "observed_addressed_material",
+          "family": "public_addressed_material",
+          "status": "connected"
+        },
+        {
+          "question": "observed_rigid_cargo",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "observed_ranked_workshop",
+          "family": "public_ranked_workshop",
+          "status": "connected"
+        },
+        {
+          "question": "observed_symbol_transaction",
+          "family": "public_symbol_transaction",
+          "status": "connected"
+        },
+        {
+          "question": "observed_object_binding",
+          "family": "public_observed_binding",
+          "status": "connected"
+        },
+        {
+          "question": "observed_inventory_composition",
+          "family": "public_observed_inventory",
+          "status": "connected"
+        },
+        {
+          "question": "factored_material_return",
+          "family": "factored_material_return",
+          "status": "connected"
+        },
+        {
+          "question": "motif_conditioned_access",
+          "family": "motif_access",
+          "status": "connected"
+        },
+        {
+          "question": "parallel_branch_routing",
+          "family": "branch_routing",
+          "status": "connected"
+        },
+        {
+          "question": "conserved_band_transfer",
+          "family": "band_transfer",
+          "status": "connected"
+        },
+        {
+          "question": "supported_ternary_reduction",
+          "family": "reduction_transport",
+          "status": "connected"
+        },
+        {
+          "question": "sliding_cavity",
+          "family": "sliding_cavity",
+          "status": "connected"
+        },
+        {
+          "question": "conditional_transit",
+          "family": "conditional_transit",
+          "status": "connected"
+        },
+        {
+          "question": "observed_outline_service",
+          "family": "public_outline_service",
+          "status": "connected"
+        },
+        {
+          "question": "ordered_support_transfer",
+          "family": "ordered_support_transfer",
+          "status": "connected"
+        },
+        {
+          "question": "observed_framed_transfer",
+          "family": "public_framed_transfer",
+          "status": "connected"
+        },
+        {
+          "question": "topological_recolor",
+          "family": "public_topological_recolor",
+          "status": "connected"
+        },
+        {
+          "question": "axial_question",
+          "family": "public_axial_question",
+          "status": "connected"
+        },
+        {
+          "question": "window_question",
+          "family": "public_window_question",
+          "status": "connected"
+        },
+        {
+          "question": "ordered_recruitment",
+          "family": "public_ordered_recruitment",
+          "status": "connected"
+        },
+        {
+          "question": "reactive_contact",
+          "family": "public_reactive_contact",
+          "status": "connected"
+        },
+        {
+          "question": "ordered_reaction",
+          "family": "public_ordered_reaction",
+          "status": "connected"
+        },
+        {
+          "question": "chart_navigation",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "region_intervention",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "temporal_selection",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "invited_endpoints",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "joint_channels",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "shared_settlement",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "oriented_coupling",
+          "family": "oriented_coupling",
+          "status": "connected"
+        },
+        {
+          "question": "metric_composition",
+          "family": "metric_composition",
+          "status": "connected"
+        },
+        {
+          "question": "contextual_compartments",
+          "family": "contextual_compartments",
+          "status": "connected"
+        },
+        {
+          "question": "invited_reduction",
+          "family": "invited_reduction",
+          "status": "connected"
+        }
+      ]
+    }
+  ],
+  "qualification": "Each declared entry has equal weight. This counts actual provider registrations, not code volume, game score, expected success, or complete V6 behavioral parity. An explicitly declared partial entry is reported with its connected and pending internal branches and does not increment the connected total. The common coordinator and direct groups are outside this denominator. Their own differential tests and live campaigns remain separate evidence.",
+  "commonGroups": [
+    {
+      "id": "goal_access",
+      "families": [
+        "public_occurrence_recall",
+        "public_occurrence_recall",
+        "public_occurrence_recall",
+        "goal_access",
+        "support_navigation",
+        "subset_diagnosis",
+        "preview_packing",
+        "selected_rigid",
+        "invited_reduction",
+        "joint_transport",
+        "feedback_sequences",
+        "animated_contact"
+      ],
+      "entryPoints": [
+        "observed_composition_services",
+        "coupled_support_composition",
+        "alternating_graph_composition",
+        null,
+        null,
+        null,
+        "preview_packing",
+        "selected_rigid",
+        null,
+        null,
+        "observed_feedback_sequence",
+        null
+      ]
+    },
+    {
+      "id": "window_constraints",
+      "families": [
+        "public_occurrence_recall",
+        "public_occurrence_recall",
+        "public_occurrence_recall",
+        "public_occurrence_recall",
+        "public_occurrence_recall",
+        "public_occurrence_recall",
+        "public_occurrence_recall",
+        "public_occurrence_recall",
+        "public_occurrence_recall",
+        "public_occurrence_recall",
+        "public_occurrence_recall",
+        "public_framed_transfer",
+        "public_occurrence_recall",
+        "public_occurrence_recall",
+        "public_occurrence_recall",
+        "public_occurrence_recall",
+        "relative_arrangements",
+        "window_constraints",
+        "public_occurrence_recall",
+        "periodic_sums",
+        "reflected_cover",
+        "regular_field_correspondence"
+      ],
+      "entryPoints": [
+        "occluded_catalogue_composition",
+        "queued_field_composition",
+        "product_panel_composition",
+        "labeled_sequence_composition",
+        "linked_packet_composition",
+        "trace_field_composition",
+        "cell_patch_composition",
+        "observed_occurrence_recall",
+        "observed_program_composition",
+        "typed_material_flow",
+        "radial_port_composition",
+        "observed_framed_analogy",
+        "field_service_composition",
+        "rooted_quota_composition",
+        "framed_window_composition",
+        "coupled_prefix_reference",
+        "relative_arrangement",
+        null,
+        "recurrent_series",
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "orbit_constraints",
+      "families": [
+        "orbit_constraints"
+      ]
+    },
+    {
+      "id": "scored_local_rewrite",
+      "families": [
+        "scored_local_rewrite",
+        "visual_sequences"
+      ]
+    },
+    {
+      "id": "containment",
+      "families": [
+        "containment"
+      ]
+    },
+    {
+      "id": "surface",
+      "families": [
+        "facet_examples",
+        "surface_program",
+        "code_program",
+        "slot_substitution",
+        "word_interface",
+        "port_assembly",
+        "constellation_cover",
+        "linked_temporal_preparation",
+        "configured_arrivals",
+        "fixed_origin"
+      ],
+      "entryPoints": [
+        "facet_example",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "pre_score_contact",
+      "families": [
+        "pre_score_contact"
+      ]
+    },
+    {
+      "id": "factored_material_return",
+      "families": [
+        "public_reactive_contact",
+        "public_addressed_material",
+        "public_ranked_workshop",
+        "public_symbol_transaction",
+        "public_observed_binding",
+        "public_observed_inventory",
+        "factored_material_return",
+        "motif_access",
+        "branch_routing",
+        "band_transfer",
+        "reduction_transport",
+        "sliding_cavity",
+        "conditional_transit",
+        "public_outline_service",
+        "ordered_support_transfer",
+        "public_framed_transfer",
+        "public_topological_recolor",
+        "public_axial_question",
+        "public_window_question",
+        "public_ordered_recruitment",
+        "public_reactive_contact",
+        "public_ordered_reaction",
+        "oriented_coupling",
+        "metric_composition",
+        "contextual_compartments",
+        "invited_reduction"
+      ],
+      "entryPoints": [
+        "reactive_contact_continuation",
+        "observed_addressed_material",
+        "observed_ranked_workshop",
+        "observed_symbol_transaction",
+        "observed_object_binding",
+        "observed_inventory_composition",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        "observed_framed_transfer",
+        "topological_recolor",
+        "axial_question",
+        "window_question",
+        "ordered_recruitment",
+        "reactive_contact",
+        "ordered_reaction",
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "morphology",
+      "families": [
+        "morphology"
+      ]
+    },
+    {
+      "id": "attention_parent_return",
+      "families": [
+        "attention_parent_return"
+      ]
+    },
+    {
+      "id": "returned_branch_contrast",
+      "families": [
+        "returned_branch_contrast"
+      ]
+    },
+    {
+      "id": "information_goal",
+      "families": [
+        "visual_sequences",
+        "feedback_sequences",
+        "information_goal"
+      ]
+    },
+    {
+      "id": "acquire_control_for_target",
+      "families": [
+        "acquire_control_for_target"
+      ]
+    },
+    {
+      "id": "view",
+      "families": [
+        "view",
+        "public_occurrence_recall"
+      ]
+    },
+    {
+      "id": "view_continuity",
+      "families": [
+        "view_continuity"
+      ]
+    },
+    {
+      "id": "observed_frontier",
+      "families": [
+        "observed_frontier"
+      ]
+    }
+  ],
+  "pendingSupportSubcompositions": [],
+  "sharedSeriesMemory": "crossed_prefix_single_ancestor_owner_occurrence_recall_ancestors_observed_program_native_relations_typed_material_and_pose_radial_ports_field_service_rooted_quota_native_mark_support_framed_window_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_coupled_support_composition_exposed_reception_relational_chamber_panel_service_rooted_line_reception_service_and_reference_population; observed_composition_services 6/6 declared branches connected; inherited ObservedCompositionConstraint source closure remains partial",
+  "sharedSeriesDigestScope": "native_recurrent_series_crossed_prefix_ancestor_program_relations_recall_typed_material_and_pose_radial_ports_field_service_rooted_quota_mark_support_framed_window_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_coupled_support_exposed_reception_relational_chamber_panel_service_rooted_line_reception_service_and_reference_population_six_observed_compositions_v6",
+  "observedCompositionBranches": {
+    "owner": "public_occurrence_recall",
+    "status": "all_declared_branches_connected",
+    "connectedBranches": [
+      "panel_service_plan",
+      "chamber_relation_plan",
+      "exposed_reception_plan",
+      "rooted_line_plan",
+      "reception_service_plan",
+      "reference_population_plan"
+    ],
+    "pendingBranches": [],
+    "qualification": "Complete declared entry registration; inherited source closure and full original-caller parity remain partial."
+  },
+  "fullV6Parity": false
+}

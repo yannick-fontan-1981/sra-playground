@@ -1,0 +1,48 @@
+{
+  "qualification": "Normal deterministic build-input preparation before integrated freeze; no game or cost",
+  "declaredAt": "2026-11-11T19:19:57.631427+00:00",
+  "command": [
+    "node",
+    "scripts/generate-game-gallery.mjs"
+  ],
+  "generator": {
+    "path": "scripts/generate-game-gallery.mjs",
+    "sha256": "2492ce2c90273ec256b3ff48025747abee039ed20cb4fe8498f9aea957a0dde9",
+    "bytes": 8383
+  },
+  "utility": {
+    "path": "docs/migration/lot8a-evidence/tools/validate-development.py",
+    "sha256": "3a6bef9102fbab20a8ecd31f49f7014f98517c6a1006a1e92fb7b09f068c1bf8",
+    "bytes": 27047
+  },
+  "coordination": {
+    "lot10b": {
+      "path": "/workspace/shared/sra-coordination/lot10b-status.json",
+      "observedRequestId": "lot10b-cost-74143a-final-01",
+      "observedRequestedAt": "2026-11-11T16:19:49.894713+00:00",
+      "observedCostRequestId": "lot10b-cost-74143a-final-01",
+      "observedCostRequestedAt": "2026-11-11T16:19:49.894713+00:00"
+    },
+    "lot10c": {
+      "path": "/workspace/shared/sra-coordination/lot10c-status.json",
+      "observedRequestId": "lot5c-cost-a33a5f88-final-01",
+      "observedRequestedAt": "2026-11-11T17:45:47.557963+00:00",
+      "observedCostRequestId": null,
+      "observedCostRequestedAt": null
+    },
+    "lot5c": {
+      "path": "/workspace/shared/sra-coordination/lot5c-status.json",
+      "observedRequestId": "lot5c-cost-a33a5f88-final-01",
+      "observedRequestedAt": "2026-11-11T18:34:20.752335+00:00",
+      "observedCostRequestId": null,
+      "observedCostRequestedAt": null
+    },
+    "lot6b": {
+      "path": "/workspace/shared/sra-coordination/lot6b-status.json",
+      "observedRequestId": "lot5c-cost-a33a5f88-final-01",
+      "observedRequestedAt": null,
+      "observedCostRequestId": null,
+      "observedCostRequestedAt": null
+    }
+  }
+}

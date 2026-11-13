@@ -1,0 +1,95 @@
+{
+  "schema": "logos-engine.browser-qa-observation.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T03:29:14.017116+00:00",
+  "game": "CATR",
+  "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.41.0",
+  "nativeSourceDigest": "3edffde9b21f4fc8af9dda9a1dbd40707c015d9f7cba8a41460021e39acb7605",
+  "managedPreview": "http://127.0.0.1:4173/",
+  "finalObservedUrl": "http://127.0.0.1:4173/?game=CATR&level=4",
+  "method": "CUA user-visible controls and accessibility observations; native state and game code were not read from the browser",
+  "steps": [
+    {
+      "action": "Initial cold Agent tab",
+      "actions": 0,
+      "levelsSolved": 0,
+      "completedPlans": 0,
+      "level": 1
+    },
+    {
+      "action": "Run then Pause during initialization; observed Paused",
+      "actions": 0,
+      "levelsSolved": 0,
+      "completedPlans": 0,
+      "level": 1
+    },
+    {
+      "action": "One action",
+      "actions": 1,
+      "levelsSolved": 0,
+      "completedPlans": 1,
+      "level": 1
+    },
+    {
+      "action": "One action",
+      "actions": 2,
+      "levelsSolved": 0,
+      "completedPlans": 1,
+      "level": 1
+    },
+    {
+      "action": "Run to next level",
+      "actions": 3,
+      "levelsSolved": 1,
+      "completedPlans": 2,
+      "level": 2
+    },
+    {
+      "action": "One action",
+      "actions": 4,
+      "levelsSolved": 1,
+      "completedPlans": 2,
+      "level": 2
+    },
+    {
+      "action": "Run then Pause; observed Paused at engaged action boundary",
+      "actions": 5,
+      "levelsSolved": 1,
+      "completedPlans": 3,
+      "level": 2
+    },
+    {
+      "action": "Run to next level",
+      "actions": 7,
+      "levelsSolved": 2,
+      "completedPlans": 5,
+      "level": 3
+    },
+    {
+      "action": "Run to next level",
+      "actions": 12,
+      "levelsSolved": 3,
+      "completedPlans": 8,
+      "level": 4
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/browser/catr-three-levels.png",
+      "sha256": "cc4fd2aecf2c1c6e0cf6a7a828f5a03945c76ba3c99859e4a05b909a6795b211",
+      "bytes": 92285
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/browser/catr-three-levels-overview.png",
+      "sha256": "092b651cc7c29c5920ef9481580c58840647d9960e6c1a1a1b6ba0be0a6726fc",
+      "bytes": 85240
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/browser/catr-final-ax.txt",
+      "sha256": "c819162873ae4eead328fce76afc7078d8b6aa71593ec3a430d17185c6e3a5ca",
+      "bytes": 10097
+    }
+  ],
+  "captureIssue": "Initial full-page screenshot timed out after final result was observed. Viewport screenshots then succeeded; no game was rerun for capture.",
+  "qualification": "Manual browser QA of the frozen source in managed development preview. This confirms visible controls and counters, not compiled production execution, complete game victory or performance. Formal cold live campaign and archived-return regressions remain separate."
+}

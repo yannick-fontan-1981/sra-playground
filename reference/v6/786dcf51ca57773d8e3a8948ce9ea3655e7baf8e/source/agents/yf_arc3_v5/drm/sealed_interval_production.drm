@@ -1,0 +1,199 @@
+{
+  "module_id": "sealed_interval_production",
+  "declarations": [
+    {
+      "id": "policy.sealed_interval_production",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_real_dispatch_response_and_canonical_state_precede_sealing"
+      ],
+      "premises": [
+        "complete_current_physical_transaction_population"
+      ],
+      "invariants": [
+        "no_live_world_action",
+        "no_simulation_is_an_observation",
+        "interpretation_qualification_is_separate"
+      ],
+      "falsifiers": [
+        "missing_actual_dispatch_or_response",
+        "different_canonical_state_scope",
+        "packet_reference_collision"
+      ],
+      "declared_alternative_refs": [
+        "sealed_interval.publish",
+        "sealed_interval.already_current",
+        "sealed_interval.blocked"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.sealed_interval.publish",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "sealed_interval.publish"
+            },
+            {
+              "field": "production_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_packet_equal",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.sealed_interval.already_current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "sealed_interval.already_current"
+            },
+            {
+              "field": "production_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_packet_equal",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.sealed_interval.blocked",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "sealed_interval.blocked"
+            },
+            {
+              "field": "production_bindings_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "sealed_interval.publish": "rule.sealed_interval_production"
+      },
+      "configuration": {}
+    },
+    {
+      "id": "rule.sealed_interval_production",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "source_selected_actual_interval"
+      ],
+      "applicability": [
+        "complete_current_physical_transaction_population"
+      ],
+      "invariants": [
+        "no_live_world_action",
+        "no_simulation_is_an_observation",
+        "interpretation_qualification_is_separate"
+      ],
+      "falsifiers": [
+        "missing_actual_dispatch_or_response",
+        "different_canonical_state_scope",
+        "packet_reference_collision"
+      ],
+      "reason_refs": [
+        "reason_real_dispatch_response_and_canonical_state_precede_sealing"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{packet_term_ref}",
+          "kind": "value",
+          "label": "Source sealed actual physical interval",
+          "required_fields": [
+            "packet_term_ref",
+            "packet",
+            "packet_projection_contract_ref"
+          ],
+          "static_attributes": {
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "packet": "packet",
+            "projection_contract_ref": "packet_projection_contract_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.physical_interval.{packet_term_ref}",
+          "predicate": "records_canonical_sealed_physical_interval",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{packet_term_ref}",
+            "{parent_goal_ref}"
+          ],
+          "required_term_patterns": [
+            "{packet_term_ref}",
+            "{parent_goal_ref}"
+          ],
+          "required_fields": [
+            "packet_term_ref",
+            "parent_goal_ref",
+            "packet_digest"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref"
+          },
+          "attribute_bindings": {
+            "packet_digest": "packet_digest",
+            "frame_ref": "current_frame_ref"
+          },
+          "static_attributes": {
+            "no_dispatch_or_action_authority": true,
+            "no_interpretation_qualification": true
+          }
+        }
+      ]
+    }
+  ]
+}

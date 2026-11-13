@@ -1,0 +1,202 @@
+--- before/check-cost-static-inputs.py
++++ docs/migration/lot6b-evidence/check-cost-static-inputs.py
+@@ -15,6 +15,8 @@
+ from datetime import datetime, timezone
+ import hashlib
+ import json
++import struct
++import math
+ from pathlib import Path
+ import re
+ import subprocess
+@@ -53,6 +55,169 @@
+ def git(root, *args):
+     return subprocess.check_output(['git', *args], cwd=root, text=True).strip()
+ 
++
++
++def validate_common_value_attribution(attribution, receipts, fixture):
++    """Validate emitted records; the pinned qualifier owns exhaustive graph traversal."""
++    comparison = 'exact_except_attributed_trace_envelope_created'
++    sources = ['src/logos-engine/v6-reasoning-memory.ts', 'src/logos-engine/v6-native-authority.ts']
++    roles = ('baseline', 'candidate')
++
++    def need(condition, message):
++        if not condition:
++            raise ValueError('Trace-created attribution: ' + message)
++
++    def exact(left, right):
++        if isinstance(left, bool) or isinstance(right, bool):
++            return type(left) is type(right) and left == right
++        if isinstance(left, (int, float)) and isinstance(right, (int, float)):
++            return left == right
++        if type(left) is not type(right):
++            return False
++        if isinstance(left, dict):
++            return left.keys() == right.keys() and all(exact(left[key], right[key]) for key in left)
++        if isinstance(left, list):
++            return len(left) == len(right) and all(exact(a, b) for a, b in zip(left, right))
++        return left == right
++
++    def integer(value, minimum=0):
++        return type(value) is int and minimum <= value <= 9007199254740991
++
++    def millis(value):
++        need(isinstance(value, str), 'timestamp must be a string')
++        parsed = datetime.fromisoformat(value.replace('Z', '+00:00'))
++        need(parsed.tzinfo is not None and parsed.utcoffset().total_seconds() == 0
++             and parsed.isoformat(timespec='milliseconds').replace('+00:00', 'Z') == value,
++             'timestamp must use canonical UTC milliseconds')
++        delta = parsed - datetime(1970, 1, 1, tzinfo=timezone.utc)
++        result = delta.days * 86400000 + delta.seconds * 1000 + delta.microseconds // 1000
++        need(integer(result), 'timestamp must be a nonnegative safe integer')
++        return result
++
++    def fingerprint(record):
++        need(isinstance(record, dict) and set(record) == {'path', 'bytes', 'sha256'}
++             and isinstance(record['path'], str) and bool(record['path'])
++             and integer(record['bytes']) and isinstance(record['sha256'], str)
++             and re.fullmatch(r'[0-9a-f]{64}', record['sha256']) is not None, 'invalid fingerprint')
++
++    need(attribution['schema'] == 'logos-engine.lot6b-owner-cost-structural-attribution.v1'
++         and attribution['status'] == 'qualified_functional_structure'
++         and exact(attribution['failures'], []), 'qualification is not successful')
++    need(set(receipts) == set(roles) and set(fixture['captures']) == set(roles)
++         and exact(attribution['nativeDigests'], fixture['nativeDigests']), 'role/source binding differs')
++    policy = attribution['commonValuePolicy']
++    need(isinstance(policy, dict) and set(policy) == {'comparison', 'permittedMetadataDifference',
++         'identityValueAttributions', 'unattributedDifferencesAllowed', 'traceCreatedAttribution'}, 'policy keys differ')
++    need(exact({key: value for key, value in policy.items() if key != 'traceCreatedAttribution'}, {
++         'comparison': comparison, 'permittedMetadataDifference': 'origin.source_digest',
++         'identityValueAttributions': [], 'unattributedDifferencesAllowed': 0}), 'only the named policy is accepted')
++    temporal = policy['traceCreatedAttribution']
++    need(isinstance(temporal, dict) and set(temporal) == {'nodeComponent', 'path', 'sourceClock', 'sourceFiles',
++         'captureWindows', 'stabilityKey', 'records', 'allOtherFieldsExact'}, 'temporal policy keys differ')
++    need(exact({key: value for key, value in temporal.items() if key not in ('captureWindows', 'records')}, {
++         'nodeComponent': 'native_reasoning_trace', 'path': '/value/root/members/created/bits',
++         'sourceClock': 'Date.now() / 1000', 'sourceFiles': sources,
++         'stabilityKey': ['role', 'sessionId', 'nodeId'], 'allOtherFieldsExact': True}), 'temporal exception was broadened')
++    inputs = attribution['inputs']
++    need(isinstance(inputs, list), 'inputs must be listed')
++    for record in inputs:
++        fingerprint(record)
++    need(len({record['path'] for record in inputs}) == len(inputs), 'duplicate input path')
++    generator = attribution['generator']
++    fingerprint(generator)
++    need(generator['path'] == 'docs/migration/lot6b-evidence/qualify-cost-owner-graphs.mjs'
++         and any(exact(generator, record) for record in inputs), 'qualifier is not bound')
++    forms = fixture['forms']
++    need([(form['case'], form['form']) for form in forms] ==
++         [('STCK', 'warmup'), ('STCK', 'measured'), ('SMLP', 'warmup'), ('SMLP', 'measured')], 'functional forms differ')
++    windows, sessions, expected_points = {}, {}, None
++    for role in roles:
++        receipt = receipts[role]
++        need(receipt['schema'] == 'logos-engine.lot6b-owner-cost-functional-capture-receipt.v1'
++             and receipt['status'] == 'captured_functional_structure' and receipt['role'] == role
++             and receipt['nativeDigest'] == attribution['nativeDigests'][role]
++             and exact(receipt['report'], fixture['captures'][role]['report'])
++             and exact(receipt['generator'], fixture['captureTool']), 'capture role/source/report differs')
++        need(exact(receipt['nativeInventoryBefore'], receipt['nativeInventoryAfter'])
++             and receipt['nativeInventoryBefore']['digest'] == receipt['nativeDigest']
++             and exact(receipt['inputsBefore'], receipt['inputsAfter'])
++             and exact(receipt['generator'], receipt['generatorAfter'])
++             and all(receipt[key] is True for key in ('nativeSourceUnchanged', 'inputsUnchanged', 'generatorUnchanged'))
++             and exact(receipt['failures'], []), 'capture integrity differs')
++        for record in fixture['captures'][role].values():
++            fingerprint(record)
++            need(any(exact(record, item) for item in inputs), 'capture receipt/report is absent from qualifier inputs')
++        for path in sources:
++            source = [record for record in inputs if record['path'] == path]
++            need(len(source) == 1 and source[0]['sha256'] == receipt['nativeInventoryBefore']['files'][path],
++                 'clock source is not bound to both captured native manifests: ' + path)
++        start, finish = millis(receipt['startedAt']), millis(receipt['finishedAt'])
++        need(start <= finish, 'capture interval is reversed')
++        windows[role] = {'startedAt': receipt['startedAt'], 'finishedAt': receipt['finishedAt'],
++                         'startMs': start, 'finishMs': finish}
++        need(integer(receipt['sessionCount'], 1) and receipt['sessionCount'] == len(receipt['sessions']) == len(forms),
++             'capture session count differs')
++        session_map, point_keys = {}, []
++        for session, form in zip(receipt['sessions'], forms):
++            sid = 'lot6b-owner-cost-' + form['case'].lower() + '-' + form['form']
++            need((session['case'], session['form'], session['sessionId']) == (form['case'], form['form'], sid)
++                 and session['status'] == 'captured_functional_structure' and sid not in session_map,
++                 'capture session identity differs')
++            need(integer(session['captures'], 1) and integer(session['terminalInspections'])
++                 and session['captures'] == len(session['shape']['requests'])
++                 and session['terminalInspections'] == len(session['shape']['inspection'])
++                 and exact(session['shape'], form[role]), 'session point counters differ')
++            session_map[sid] = session
++            point_keys.extend((form['case'], form['form'], index)
++                              for index in range(session['captures'] + session['terminalInspections']))
++        sessions[role] = session_map
++        if expected_points is None:
++            expected_points = point_keys
++        need(point_keys == expected_points, 'roles cover different functional points')
++    need(exact(temporal['captureWindows'], windows), 'policy windows differ from bound capture receipts')
++    points = attribution['points']
++    need(isinstance(points, list) and bool(points)
++         and [(point['case'], point['form'], point['pointIndex']) for point in points] == expected_points,
++         'point coverage is empty, omitted, duplicated or reordered')
++    expected_coverage = []
++    for point in points:
++        need(integer(point['pointIndex']) and integer(point['baselineNodeCount'], 1)
++             and integer(point['baselineDeltaCount']), 'common comparison counters are invalid')
++        expected_coverage.append({**{key: point[key] for key in ('case', 'form', 'pointIndex')},
++             'commonNodesCompared': point['baselineNodeCount'], 'commonDeltasCompared': point['baselineDeltaCount'],
++             'comparison': comparison, 'unattributedDifferences': 0})
++    need(exact(attribution['commonValueCoverage'], expected_coverage), 'common values lack exact complete point coverage')
++    records = temporal['records']
++    need(isinstance(records, list) and bool(records), 'temporal record register is empty')
++    seen, pairs, represented = set(), {}, set()
++    for record in records:
++        need(isinstance(record, dict) and set(record) == {'role', 'sessionId', 'nodeId', 'bits', 'seconds',
++             'milliseconds', 'createdAt', 'captureStartedAt', 'captureFinishedAt'}, 'record schema differs')
++        role, sid, node_id = record['role'], record['sessionId'], record['nodeId']
++        need(role in roles and isinstance(sid, str) and sid in sessions[role], 'record role/session is foreign')
++        match = re.fullmatch(r'reasoning:trace:([1-9][0-9]*)', node_id) if isinstance(node_id, str) else None
++        need(match is not None and integer(int(match[1]), 1), 'record does not name a real trace')
++        key = (role, sid, node_id)
++        need(key not in seen, 'duplicate or unstable role/session/trace')
++        seen.add(key); represented.add((role, sid)); pairs.setdefault((sid, node_id), set()).add(role)
++        bits = record['bits']
++        need(isinstance(bits, str) and re.fullmatch(r'[0-9a-f]{16}', bits) is not None, 'invalid float64 bits')
++        seconds = struct.unpack('>d', bytes.fromhex(bits))[0]
++        ms = record['milliseconds']
++        need(type(record['seconds']) in (int, float) and math.isfinite(seconds) and integer(ms)
++             and record['seconds'] == seconds == ms / 1000 and math.floor(seconds * 1000 + 0.5) == ms,
++             'record is not the exact finite millisecond clock encoding')
++        window = windows[role]
++        need(window['startMs'] <= ms <= window['finishMs'] and millis(record['createdAt']) == ms
++             and record['captureStartedAt'] == window['startedAt']
++             and record['captureFinishedAt'] == window['finishedAt'], 'record escapes its role capture interval')
++    need(all(pair == set(roles) for pair in pairs.values()), 'a trace is missing its baseline/candidate pair')
++    need(represented == {(role, sid) for role in roles for sid in sessions[role]}, 'a captured session has no trace records')
++    # No trace-count formula: unique records cannot independently prove that no
++    # trace was omitted. That guarantee remains in the fingerprinted qualifier's
++    # complete common-node/delta traversal; graph bodies, origins, chains and
++    # tickets are not reopened or normalized by this local record validator.
++    return True
+ 
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)
+@@ -319,16 +484,10 @@
+         check('functional_structure_predeclared', datetime.fromisoformat(attribution['recordedAt'])
+               <= datetime.fromisoformat(fixture['recordedAt'])
+               <= datetime.fromisoformat(contract['declaredAt']))
+-        check('common_value_comparison_fully_bound', attribution['failures'] == []
+-              and attribution['commonValuePolicy'] == {'comparison': 'exact',
+-                  'permittedMetadataDifference': 'origin.source_digest',
+-                  'identityValueAttributions': [], 'unattributedDifferencesAllowed': 0}
+-              and len(attribution['commonValueCoverage']) == len(attribution['points']) > 0
+-              and all(row == {**{key: point[key] for key in ('case', 'form', 'pointIndex')},
+-                  'commonNodesCompared': point['baselineNodeCount'],
+-                  'commonDeltasCompared': point['baselineDeltaCount'],
+-                  'comparison': 'exact', 'unattributedDifferences': 0}
+-                  for row, point in zip(attribution['commonValueCoverage'], attribution['points'])))
++        capture_receipts = {'baseline': baseline_capture,
++                            'candidate': read(ROOT / fixture['captures']['candidate']['receipt']['path'])}
++        check('common_value_comparison_fully_bound',
++              validate_common_value_attribution(attribution, capture_receipts, fixture))
+         source_inventory = read(ROOT / contract['ownerInventory']['path'])
+         check('owner_source_inventory_bound', fp(ROOT / contract['ownerInventory']['path']) == contract['ownerInventory']
+               and source_inventory['schema'] == 'logos-engine.lot6b-owner-cost-source-inventory.v1'

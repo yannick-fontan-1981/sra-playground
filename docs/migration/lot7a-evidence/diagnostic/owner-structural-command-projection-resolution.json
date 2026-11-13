@@ -1,0 +1,134 @@
+{
+  "schema": "logos-engine.lot7a-functional-qualification-incident-resolution.v1",
+  "status": "resolved_before_measurement",
+  "recordedAt": "2026-11-10T20:20:41.577186+00:00",
+  "incident": {
+    "path": "docs/migration/lot7a-evidence/diagnostic/owner-structural-command-projection-incident.json",
+    "sha256": "cb6aa6a7adf7bba24db082ca9886256a6db7b77b5ac116e033f9923936fffcd2",
+    "bytes": 2698
+  },
+  "preservedFailureReceipt": {
+    "path": "docs/migration/lot7a-evidence/performance-integrated/owner-structural-attribution.json",
+    "sha256": "42b5f3a6f73d14a8ca273805fc516de1176eef2da85fe888bb06082c54e23ca8",
+    "bytes": 14224
+  },
+  "priorQualifier": {
+    "path": "docs/migration/lot7a-evidence/diagnostic/qualify-cost-owner-graphs-before-command-projection.mjs",
+    "sha256": "27ee57bdef6e345c53698f9ff87f4ab48c388a495b69cbf69e9f0c1795f2ebf7",
+    "bytes": 37629
+  },
+  "correctedQualifier": {
+    "path": "docs/migration/lot7a-evidence/qualify-cost-owner-graphs.mjs",
+    "sha256": "3bb06dfe8ad7d0ab7874dd0bfda219c7639cbc6dd27cf7b517732b40df2902f1",
+    "bytes": 38940
+  },
+  "actualQualification": {
+    "path": "docs/migration/lot7a-evidence/performance-integrated/owner-structural-attribution-02.json",
+    "sha256": "5a25fb7094d72ad6655e893e5f9ec98257f3d905ea86027c39cd4efa7db69531",
+    "bytes": 106622
+  },
+  "structuralFixture": {
+    "path": "docs/migration/lot7a-evidence/performance-integrated/owner-structural-fixture.json",
+    "sha256": "146b702ae04126eb5bc45208c96c8ba190d1d693d050e0e48f41f10303ab49cb",
+    "bytes": 60040
+  },
+  "captureInputsUnchanged": [
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/owner-graphs-baseline.receipt.json",
+      "bytes": 102291,
+      "sha256": "0108e519be6f852a12022c96ad17795d046ae73aa33441456ae47708eb19e24d"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/owner-graphs-baseline.json.gz",
+      "bytes": 4739930,
+      "sha256": "0fc9843376ae50bcdcd92f126696eb0558b39cd203425810723e941f5a4c4f2a"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/owner-graphs-candidate.receipt.json",
+      "bytes": 103274,
+      "sha256": "3443b55f40a40b185ebcd34a6a27937faf30b93af2f9eac5e10069980e8fbd64"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/owner-graphs-candidate.json.gz",
+      "bytes": 4759404,
+      "sha256": "dd178574a72ecaf35a5113486ffd9e03dc8d90d2c846a0e81b07fad07cb43285"
+    }
+  ],
+  "qualificationChecks": 64,
+  "attributedDeltas": 55,
+  "attributionCategories": {
+    "workshop_owner_state": 27,
+    "workshop_installation": 8,
+    "workshop_source_event_fact": 7,
+    "workshop_source_state_fact": 13
+  },
+  "commandBoundaryProjections": 13,
+  "actualForms": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "actions": 3,
+      "cycles": 3,
+      "levelsCompleted": 1,
+      "terminalInspections": 0,
+      "baselineFinalNodeCount": 224,
+      "candidateFinalNodeCount": 229,
+      "nodeCountDelta": 5,
+      "baselineFinalGraphRevision": 472,
+      "candidateFinalGraphRevision": 480,
+      "graphRevisionDelta": 8
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "actions": 10,
+      "cycles": 6,
+      "levelsCompleted": 2,
+      "terminalInspections": 3,
+      "baselineFinalNodeCount": 347,
+      "candidateFinalNodeCount": 353,
+      "nodeCountDelta": 6,
+      "baselineFinalGraphRevision": 851,
+      "candidateFinalGraphRevision": 866,
+      "graphRevisionDelta": 15
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "actions": 3,
+      "cycles": 3,
+      "levelsCompleted": 1,
+      "terminalInspections": 0,
+      "baselineFinalNodeCount": 214,
+      "candidateFinalNodeCount": 219,
+      "nodeCountDelta": 5,
+      "baselineFinalGraphRevision": 477,
+      "candidateFinalGraphRevision": 486,
+      "graphRevisionDelta": 9
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "actions": 15,
+      "cycles": 9,
+      "levelsCompleted": 3,
+      "terminalInspections": 3,
+      "baselineFinalNodeCount": 415,
+      "candidateFinalNodeCount": 422,
+      "nodeCountDelta": 7,
+      "baselineFinalGraphRevision": 1191,
+      "candidateFinalGraphRevision": 1214,
+      "graphRevisionDelta": 23
+    }
+  ],
+  "nativeDigests": {
+    "baseline": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7",
+    "candidate": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb"
+  },
+  "nativeOrCaptureModified": false,
+  "qualificationExecuted": true,
+  "captureOrGameExecuted": false,
+  "officialCostWindowExists": false,
+  "readinessExists": false,
+  "qualification": "Only the local cross-layer command comparison was corrected to the actual V6AgentService data-spread boundary. Raw source omission and exact public commands remain in the captures. Existing failed evidence is retained unchanged. Fresh source-bound qualification passed; no graph count formula was substituted and no timing was used."
+}

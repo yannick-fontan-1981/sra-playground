@@ -1,0 +1,28 @@
+{
+  "module_id": "provisional_method_gate_b",
+  "declarations": [{
+    "id": "policy.b_provisional_method_gate", "kind": "selection_policy",
+    "evaluation": "declared_eligibility_single", "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1", "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "reason_refs": ["reason_source_documented_identity_requires_actual_current_compatible_implementation"],
+    "configuration": {"binding_contract": "memory.provisional_implementation.b.v1",
+      "binding_predicate": "supports_current_provisional_implementation_binding",
+      "provisional_status_field": "implementation_status_ref",
+      "provisional_status_refs": ["PROVISIONAL", "SOURCE_DOCUMENTED_ONLY"],
+      "scope_fields": ["parent_goal_ref", "scope_ref", "epoch", "input_revision_ref"]},
+    "invariants": ["specification_identity_is_not_implementation", "actual_registry_abi_and_source_must_match",
+      "current_support_is_required", "missing_implementation_does_not_erase_inherited_work", "no_dispatch_authority"],
+    "declared_alternative_refs": ["provisional_method.qualified", "provisional_method.missing_implementation"],
+    "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+    "fact_projections": [
+      {"id": "projection.provisional_method.qualified", "all_conditions": [
+        {"field": "alternative_ref", "operator": "equals", "expected": "provisional_method.qualified"},
+        {"field": "binding_current", "operator": "equals", "expected": true}],
+        "static_facts": {"eligible": true, "source_status": "FOUND", "implementation_qualified": true}},
+      {"id": "projection.provisional_method.missing_implementation", "all_conditions": [
+        {"field": "alternative_ref", "operator": "equals", "expected": "provisional_method.missing_implementation"},
+        {"field": "binding_current", "operator": "equals", "expected": false}],
+        "static_facts": {"eligible": true, "source_status": "NEEDS_EVIDENCE", "missing_cause": "MISSING_IMPLEMENTATION", "implementation_qualified": false}}
+    ]
+  }]
+}

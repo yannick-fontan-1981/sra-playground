@@ -1,0 +1,11 @@
+{
+  "schema": "logos-engine.sites-workflow-opening-observation.v1",
+  "recordedAt": "2026-11-11T16:43:26.053214+00:00",
+  "exitCode": 0,
+  "source": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout",
+    "commit_sha": "866dc5f688bb346103636d9fdf33482278509b4a"
+  },
+  "qualification": "Exact JSON returned by the actual official Site workflow opening after predecessor reconciliation. No credentials retained."
+}

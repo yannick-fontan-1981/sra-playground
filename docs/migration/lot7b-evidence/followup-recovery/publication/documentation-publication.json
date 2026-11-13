@@ -1,0 +1,47 @@
+{
+  "schema": "logos-engine.followup-documentation-publication.v1",
+  "recordedAt": "2026-11-11T14:50:48.354Z",
+  "status": "succeeded",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "siteVersion": 99,
+  "nativeVersion": "0.61.0",
+  "nativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+  "nativeFiles": 306,
+  "nativePublishedSiteVersion": 98,
+  "nativePublishedCommit": "653e40a4f45df8ec8c6bda005004c7cdb8df074a",
+  "documentationCommit": "61e176b42234db380f23aaace216e6bd2bfe7491",
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_a924a91e4f948191b84244d927a000da",
+  "deploymentId": "appgdep_6af48081f4308191acf4b8d9cf41439c",
+  "deploymentStatus": "succeeded",
+  "deploymentUpdatedAt": "2026-11-11T14:49:50.757374+00:00",
+  "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_0000000013e0820eae3b0919aca896ac",
+    "content_hash": "sha256:13a7d25939ceb816f8a20db7d398cf6bf3b760785f076f3bc86b07218ad11dbc",
+    "size_bytes": 29992960,
+    "file_count": 75
+  },
+  "access": {
+    "currentUserRole": "owner",
+    "accessMode": "custom",
+    "policyRevision": 3,
+    "allowedUserCount": 1,
+    "allowedGroupCount": 0,
+    "externalVisitorCount": 0
+  },
+  "unchangedValidatedApplication": {
+    "regularMemberCount": 75,
+    "regularMemberBytes": 29929130,
+    "nativeWorkerSha256": "531a5a14739622b50a92b10ffd8daa4dbec9b6a3a3e1314c5dd34949765ac6f1",
+    "hostingArchiveContentHashIdenticalToNativePublication": true
+  },
+  "evidence": {
+    "sourceCheck": "documentation-source-check.json",
+    "remoteBefore": "documentation-remote-before.json",
+    "sourceWorkflow": "documentation-workflow.json",
+    "applicationVerification": "documentation-application-verification.json",
+    "finalRecheck": "documentation-final-recheck.json"
+  },
+  "qualification": "Actual terminal Sites API result, followed by exact saved-version and private-access readback. Documentation-only source delta; no new native tests, build, replay, browser execution or cost measurement. This post-publication receipt is retained separately to avoid anticipating its own publication."
+}

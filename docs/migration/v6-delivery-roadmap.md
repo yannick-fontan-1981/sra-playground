@@ -1,0 +1,2053 @@
+# Feuille de route V5/V6 vers Logos Engine TypeScript
+
+<!-- LOT9A_FINAL068_DELIVERY_START -->
+
+## Lot 9A : livraison fonctionnelle 0.68 qualifiée, coût et publication à suivre
+
+**La qualification des formes de travail et des graphes est terminée sous l’identité finale 0.68.0**, sur le checkout et la branche propres de 9A. Le [bilan de livraison](lot9a-evidence/delivery-final-068-01/README.md), sa [synthèse vérifiable](lot9a-evidence/delivery-final-068-01/validation-summary.json) et la [revue indépendante](lot9a-evidence/delivery-final-068-01/independent-delivery-review.json) fixent ce périmètre.
+
+Le candidat conserve **334 fichiers natifs**, digest `e7a94fbc7cdcb19d8704b5d4120f27a858cbcd07e455084711510ee147f4e653`, et **70/76 entrées raccordées (92,1 %), dont 27/33 matérielles**. Les algorithmes des 175 tests historiques restent inchangés ; seule l’identité 0.67 → 0.68 a changé depuis leur gel. Le build final avec TypeScript passe, ses 74 fichiers sont réconciliés, et l’audit frais du registre confirme le libellé 0.68 et le compteur 70/76.
+
+Les formes STCK3/STCK10/SMLP3/SMLP15 sont fraîchement capturées pour les deux rôles : **8 sessions et 62 retours**. La lecture finale conserve **64 contrôles sur 58 points, 28 279 différences attribuées et zéro inexpliquée**. BranchRouting reste commun aux deux côtés. Les cinq chaînes Chart ajoutent **5 sessions, 9 retours, 52 points et 21 graphes complets**, avec six acquisitions actives, deux passives et une ablation. Les restaurations source et natives sont liées aux états réellement persistés. L’ablation modifie l’offre suivante mais conserve ACTION4.
+
+Le premier lecteur, refusé sur 58 durées `total_ms`, reste en échec conservé. Le correctif prospectif attribue seulement ce scalaire après preuve du producteur, du rapport persistant complet, des bornes réelles de création et de sa rétention exacte. Aucune capture n’est renouvelée. Le registre suivi atteint **23 sessions et 85 retours**, en incluant les dix sessions et quatorze retours communs antérieurs ; l’ancienne réserve de formulation du plafond de huit sessions reste explicite.
+
+**Le publié observé reste Site 108 / native 0.67.0, à 69/76**, source `8462204043aa368faa7df280d796bb706eb53b38`, accès privé au propriétaire. Le coût officiel 0.68 n’est pas encore mesuré ni accepté, et 0.68 n’est pas publiée. Le résultat de coût 0.67 contre 0.66 ne lui est pas attribué.
+
+### Feuille de route actualisée
+
+| Lot ou étape | État établi | Prochaine étape |
+| --- | --- | --- |
+| **Lot 7** | **7A et 7B livrés ; complément Workshop clôturé dans Site 101 ; aucune entrée ouverte au registre** | Conserver les réserves historiques. LKEY reste définitivement fermé. |
+| 8A / 0.65 et 10C / 0.66 | Publiés dans Sites 106 et 107 | Conserver leurs réserves de coût distinctes. |
+| 8B / 0.67 | Publié dans Site 108 ; coût officiel accepté dans son périmètre | Conserver la réserve de récupération après erreur structurelle et les limites de transport navigateur. |
+| **9A : composant et caller** | **175 tests historiques qualifiés ; algorithmes réconciliés sous 0.68** | Conserver le corpus original et les preuves contraires, sans nouvel oracle. |
+| **9A : identité, formes et graphes de livraison** | **Terminés dans le périmètre déclaré : 0.68 réservée, build et registre final passés, zéro différence inexpliquée** | Utiliser ce gel exact pour la préparation de coût. |
+| **9A : coût officiel et publication** | **Prochaine étape ; aucune mesure ni publication 0.68** | Relire le publié réel, mesurer STCK/SMLP sous exclusivité courte, appliquer le seuil global, puis publier en privé sous exclusivité courte. |
+| Complément public positif Chart | Le caller natif et les rasters 64 × 64 sont qualifiés ; service/worker/tickets positifs restent distincts | Qualifier ce trajet sans extrapoler les preuves natives ni revendiquer un succès de nouveau jeu. |
+| **9B / 9C** | `region_intervention` et `joint_channels` restent ouverts | Transférer et qualifier les propriétaires et acquisitions après 9A. `discrete_network` reste hors compteur 76. |
+| 6C / 6D | `observed_rigid_cargo` et `shared_settlement` restent ouverts dans le registre intégré | Poursuivre les branches et qualifications propres ; ne pas assimiler leur travail parallèle à une publication intégrée. |
+| 10D / 10E | `temporal_selection` et `invited_endpoints` restent ouverts dans le registre intégré | Poursuivre leurs qualifications propres. |
+| **Lot 11** | **Consolidation ouverte ; six portes globales toujours fausses** | Parité complète, graphes, restauration, sessions longues, coût et lisibilité, avec les capacités restantes des lots 6, 9 et 10. |
+
+Il reste **six entrées ouvertes dans le candidat**, contre sept dans le publié 0.67. L’audit de migration conservé compte 219 composants vérifiés, 149 transferts partiels, 1 001 modules en attente et zéro module entièrement vérifié. Le raccordement 70/76 ne mesure ni le volume de code ni la parité comportementale complète. Les deux clôtures d’oracle échouées, les autres échecs historiques, la réserve du plafond de sessions et la portée structurelle des checkpoints restent documentés.
+
+**Règle de coût : augmentation de la médiane de session complète strictement inférieure à +10 % pour STCK et pour SMLP séparément. Une phase peut dépasser +10 % si les deux globaux passent, sans exclusion d’échantillon ni compensation entre jeux.** Le travail courant, les commits et les push restent sans verrou global ni attente des autres lots. Seules les mesures officielles et la publication gardent une exclusivité courte, libérée proprement sans supprimer un fichier détenu.
+
+Les sections suivantes conservent les jalons historiques et leurs propres identités, résultats et limites.
+
+<!-- LOT9A_FINAL068_DELIVERY_END -->
+
+<!-- LOT9A_COMMON_QUALIFIED_START -->
+
+## Jalon historique 9A : composant ChartNavigation et raccordement à 70/76
+
+**Le port du composant et son raccordement commun sont qualifiés dans le périmètre synthétique déclaré.** Le [bilan 9A](lot9a-evidence/README.md) et sa [synthèse vérifiable](lot9a-evidence/validation-summary.json) conservent **175 tests passés dans huit modules** : 134 de référence, 11 de frontière native, six du caller commun et 24 régressions affectées. Le build final avec TypeScript et les deux audits passent.
+
+Le candidat est à **70/76 entrées raccordées (92,1 %), dont 27/33 matérielles**. Son code est sauvegardé au commit `9cabf9b98a5421c5541351d94788105f6b442ce2`. Le gel contient **334 fichiers natifs**, digest `80173ed808e90e721939070f4d0087cba1d51fd396cc700dede3699333215bb7`. Trois fichiers Chart sont ajoutés ; seul le runtime commun change parmi les anciens fichiers natifs. Aucun nouveau numéro de publication n'est réservé.
+
+**Le publié observé reste Site 108 / native 0.67.0, à 69/76**, source `8462204043aa368faa7df280d796bb706eb53b38`. Son accès propriétaire privé est conservé. Le coût officiel et la publication de 9A ne sont pas encore acquis ; le résultat 0.67 contre 0.66 ne leur est pas attribué.
+
+Le corpus original indépendant compte **29 observations 64 × 64, 30 cas géométriques, 80 opérations du propriétaire et 15 cas DRM/SRC**. Les 14 champs source, les positions ambiguës, l'inventaire, les permissions locales et les images intermédiaires sont conservés. Le passage commun qualifié comprend **neuf retours physiques : six acquisitions Chart actives, deux passives et une ablatée**. La sélection de production reste dans l'ordre source, sans injection d'état appris. L'ablation retire la continuation apprise et les deux retours étrangers passent par le propriétaire conservé après désactivation de sa sélection. Aucun niveau de jeu résolu n'est revendiqué.
+
+Les deux échecs de clôture de l'oracle, la première tentative du lecteur commun et le premier audit de migration restent conservés. La récupération du corpus a été revue indépendamment, sans troisième oracle. Le libellé `maximumSessions: 8` reste une réserve de protocole : cinq sessions par lancement, dix cumulées, sans réinterprétation rétroactive ; les 14 retours cumulés et les deux délais restent conformes à leurs bornes explicites. La validation des checkpoints reste structurelle, sans garantie d'authenticité ou de bornes supérieures contre une future trame artificiellement incompatible.
+
+### Feuille de route courante
+
+| Lot ou étape | État établi | Prochaine étape |
+| --- | --- | --- |
+| **Lot 7** | **7A et 7B livrés ; complément Workshop clôturé dans Site 101 ; aucune entrée ouverte du lot 7 au registre** | Conserver les réserves historiques. LKEY reste définitivement fermé. |
+| 8A / 0.65 et 10C / 0.66 | Publiés dans Sites 106 et 107 | Conserver leurs réserves de coût historiques distinctes. |
+| 8B / 0.67 | Publié dans Site 108 ; coût officiel accepté ; complément public BranchRouting qualifié dans son périmètre révisé | Conserver la réserve distincte de récupération après erreur structurelle et les limites de transport navigateur. |
+| **9A `chart_navigation` : composant et caller** | **Qualifiés : 175 tests, build, audits ; candidat 70/76** | Conserver le gel, le corpus, les preuves contraires et les réserves de protocole. |
+| **9A : qualification de livraison** | **Prochaine étape** | Qualifier les formes et graphes exécutés, puis réserver l'identité finale distincte. Les plafonds par lancement et cumulés seront explicites. |
+| **9A : coût officiel et publication** | **Non effectués ; aucun coût accepté** | Mesurer contre le véritable publié sous exclusivité courte, appliquer le seuil global, puis publier sous exclusivité courte. |
+| **9B / 9C** | `region_intervention`, `joint_channels` restent ouverts | Transférer et qualifier leurs propriétaires et acquisitions après 9A. `discrete_network` reste hors compteur 76. |
+| 6C / 6D | `observed_rigid_cargo`, `shared_settlement` restent ouverts au registre intégré | Continuer les branches et qualifications propres, sans présumer un avancement parallèle non observé. |
+| 10D / 10E | `temporal_selection`, `invited_endpoints` restent ouverts au registre intégré | Continuer leurs qualifications propres. |
+| **Lot 11** | **Consolidation ouverte ; six portes globales toujours fausses** | Parité complète, graphes, restauration, sessions longues, coût et lisibilité, après les capacités encore ouvertes des lots 6, 9 et 10. |
+
+Il reste **six entrées ouvertes dans le candidat** et sept dans le publié 0.67. L'audit conserve 219 composants vérifiés, 149 transferts partiels, 1 001 modules en attente et zéro module entièrement vérifié. Le compteur de raccordement ne mesure ni le volume de code ni la parité comportementale complète.
+
+**Règle de coût : chaque médiane globale de session complète doit augmenter de strictement moins de +10 %, pour STCK et SMLP séparément. Une phase au-dessus de +10 % est acceptable si les deux globaux passent, sans suppression d'échantillon ni compensation entre jeux.** Développement, tests fonctionnels, commits et push restent sans verrou global ni attente de disponibilité. Une exclusivité courte demeure réservée aux mesures officielles et à la publication, avec libération propre par le détenteur et sans suppression de fichier détenu.
+
+Les sections suivantes conservent les jalons antérieurs et leurs périmètres historiques.
+
+<!-- LOT9A_COMMON_QUALIFIED_END -->
+
+<!-- LOT8B_FINAL067_START -->
+
+## Lot 8B : native 0.67 publiée dans Site 108, coût officiel accepté
+
+Le [gel final 0.67](lot8b-evidence/final-version-067-01/README.md) et sa [synthèse](lot8b-evidence/final-version-067-01/validation-summary.json) conservent **331 fichiers natifs**, digest `c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a`. Le seul changement de production depuis le candidat qualifié est le numéro de version ; les 330 autres fichiers sont identiques. La version 0.67.0 a été publiée avec succès dans **Site 108**, source `8462204043aa368faa7df280d796bb706eb53b38`, à **69/76**. Le prédécesseur réellement mesuré est **Site 107 / native 0.66.0**, source `4ff7bf45286a8a19d34401988adca587253ae41e`, à 68/76. Le [bilan de publication](lot8b-evidence/final-publication-067-01/README.md) conserve le succès natif, la source exacte et le bail libéré.
+
+Les graphes ont été renouvelés sous l'identité finale : **64 contrôles appariés sur 58 points, 22 312 différences attribuées et zéro inexpliquée**, puis **cinq chaînes BranchRouting, 26 retours et 23 acquisitions**, avec une ablation et deux incomplets conservés. La première lecture appariée arrêtée sur la provenance du générateur reste conservée ; la correction déclarée ne change aucune capture ni aucun contrôle sémantique. Les audits et le build final, comprenant TypeScript, passent. Les **524 tests / 23 modules** et **11 cas / 187 projections** sont réconciliés comme preuves historiques, sans nouvelle exécution attribuée.
+
+Le [bilan du coût officiel](lot8b-evidence/final-performance-067-01/README.md) conserve la fenêtre ABBA du 12 novembre 2026 et ses revues indépendantes. Les médianes complètes passent de **9 921,972 à 9 853,022 ms pour STCK (−0,69 %)** et de **15 364,418 à 15 087,339 ms pour SMLP (−1,80 %)**. Les 32 sessions mesurées et huit chauffes sont conservées. Les restaurations de SMLP dans la première paire (**+30,36 %**) et de STCK dans la seconde (**+29,98 %**) restent visibles et sont admises selon la règle globale ; aucune phase regroupée ne dépasse +10 %. Le refus réel du comparateur strict historique reste conservé, avec la lecture complémentaire déclarée avant mesure et vérifiée sur les 40 formes exactes. Le verrou de mesure a été libéré après 481,3 secondes, sans suppression ou remplacement.
+
+### Feuille de route courante
+
+| Étape | État | Suite |
+| --- | --- | --- |
+| **Lot 7 : ateliers et transactions symboliques** | **7A et 7B livrés ; complément Workshop 0.61 terminé et qualifié, clôture publiée dans Site 101** | Conserver les périmètres et réserves historiques ; aucune nouvelle entrée du lot 7 ne reste au registre. LKEY demeure définitivement fermé. |
+| 8A / 0.65 et 10C / 0.66 | Publiés dans Sites 106 et 107 ; réserves de coût historiques conservées | Ne pas les présenter comme des coûts acceptés. |
+| **8B : composant, raccordement et livraison fonctionnelle** | **Acquis dans le périmètre déclaré** | Conserver preuves, cas contraires et limites. |
+| **8B : version finale et gel** | **0.67.0 publiée ; identité finale renouvelée et build qualifié** | Utiliser exactement le gel 331/c234bb40. |
+| **8B : coût officiel** | **Accepté : STCK −0,69 %, SMLP −1,80 %** | ABBA complet, 32 sessions mesurées et huit chauffes conservées ; deux dépassements locaux de restauration admis selon la règle globale. |
+| **8B : publication** | **Réussie : Site 108 / native 0.67, accès propriétaire privé conservé** | Source `8462204043aa368faa7df280d796bb706eb53b38` ; bail de 166,5 secondes libéré proprement. |
+| **Complément 8B : trajet public BranchRouting** | **Qualifié dans son périmètre révisé : 3 sessions, 18 retours/acquisitions, 661 contrôles passés** | [Trajet public 64 × 64, tickets et bundle worker publié](lot8b-evidence/public-boundary-01/README.md), dans de vrais threads Node. Sept refus récupérables et quatre pauses qualifiés ; réserve ouverte sur les erreurs structurelles fermant la session. Le premier échec reste conservé. |
+| 6C / 6D | `observed_rigid_cargo`, `shared_settlement` restent ouverts au registre intégré | Poursuivre leurs branches et qualifications propres. |
+| **Lot 9 : navigation, régions et canaux** | **Trois entrées encore ouvertes dans le publié 0.67** : `chart_navigation`, `region_intervention`, `joint_channels` | **Prochaine étape fonctionnelle : 9A `chart_navigation`**, puis 9B et 9C, en réutilisant leurs workflows déjà compilés. `discrete_network` reste hors compteur 76. Aucun avancement d'une branche parallèle non observée n'est présumé. |
+| 10D / 10E | `temporal_selection`, `invited_endpoints` restent ouverts au registre intégré | Poursuivre leurs qualifications et intégrations propres. |
+| Lot 11 : consolidation globale | Six portes globales encore fausses ; lot non clôturé | Consolider les résultats des lots livrés et des capacités encore ouvertes des lots 6, 9 et 10 : parité complète, graphes, restauration, sessions longues, coût et lisibilité. |
+
+Le publié est à **69/76 entrées (90,8 %), dont 26/33 matérielles** ; sept entrées restent ouvertes. Les formes STCK10 atteignent deux niveaux pour une cible de trois, SMLP15 trois. La preuve native BranchRouting est maintenant complétée par la qualification du trajet public 64 × 64, du service, de ses tickets, du client, du contrôleur et du bundle publié en threads Node : **58 inspections et 2 578 deltas vérifiés**, production inchangée. Cette présentation synthétique agrandit la limite géométrique de 14 à 32 ; elle n'établit ni identité intégrale du modèle original, ni qualification navigateur HTTP/CSP, ni nouveau succès de jeu. La récupération après erreurs structurelles reste réservée.
+
+**Coût : augmentation de la médiane de session complète strictement inférieure à +10 % pour chaque jeu, STCK et SMLP.** Un dépassement de phase est acceptable si les deux globaux passent ; aucun échantillon mesuré n'est écarté et aucune compensation entre jeux n'est admise. Le travail courant continue sans verrou global ni attente de disponibilité. L'exclusivité est limitée aux mesures officielles et à la publication, avec libération propre sans suppression du verrou détenu. **LKEY reste fermé.** Les sections suivantes conservent les jalons antérieurs.
+
+<!-- LOT8B_FINAL067_END -->
+
+<!-- LOT8B_DELIVERY_QUALIFICATION_START -->
+
+## Jalon antérieur 8B : qualification fonctionnelle de livraison acquise
+
+**Les trois volets déclarés sont acquis : formes communes, régressions enregistrées et contribution BranchRouting dans le runtime commun.** Le [bilan de livraison](lot8b-evidence/delivery-qualification-01/README.md) et la [synthèse vérifiable](lot8b-evidence/delivery-qualification-01/validation-summary.json) conservent séparément **64 contrôles sur 58 points appariés**, 22 312 différences toutes attribuées, **11/11 cas et 187/187 projections historiques inchangées**, puis **5 chaînes / 26 retours / 23 acquisitions source réussies**. Le retour ablaté et les deux retours incomplets restent distincts des acquisitions. Le lecteur des chaînes vérifie 64 points, 3 772 deltas et 51 appels réels de restauration. La tentative initiale refusée par la façade 64 × 64, avant toute factory et tout retour, est conservée ; les nouveaux outils utilisent la vraie API native et les rasters originaux inchangés.
+
+Le candidat conserve **69/76 entrées (90,8 %), dont 26/33 entrées matérielles**. La source publiée constatée reste **Site 107 / native 0.66.0**, commit `4ff7bf45286a8a19d34401988adca587253ae41e`, à **68/76**. Aucun nouveau numéro de version n'est réservé et aucun déploiement 8B n'a lieu dans ce jalon. Les **331 fichiers natifs** sont inchangés depuis le code qualifié `2583d81d856c13295040db88f5df8b3a99906bdc`. La [réconciliation des digests](lot8b-evidence/delivery-qualification-01/source-digest-reconciliation.json) relie le digest canonique `3ff1d9ad56e22aedc0fee3a0da6a3af50a1da0bc14a0ba01cb38272ba85234be` au digest historique `76a403016d2b28287194b7498f10e14727b7e3fb3f214d2f79cb0292390d54bf` : seul l'ordre des chemins sérialisés diffère.
+
+Les **524 tests et sous-tests sur 23 modules**, le typage, les audits et le build restent les résultats du raccordement précédent, sans nouvelle exécution ni addition aux nouvelles populations. Les formes STCK à dix actions conservent **deux niveaux pour une cible de trois** ; SMLP à quinze actions en conserve trois. Elles n'ont aucune acquisition sélectionnée BranchRouting. La preuve positive séparée relie le propriétaire réel, les autorisations natives, l'acquisition, la décision suivante et les graphes. Elle ne qualifie pas la façade publique, ses tickets ou le transport worker. Les formes restent `preparedOnly: true`, `officialPerformanceEligible: false`, `strictCommonGraphParity: false`.
+
+### Feuille de route courante du lot 8B
+
+| Étape | État établi | Prochaine action |
+| --- | --- | --- |
+| **8A / 0.65** | **Publiée dans Site 106** ; coût officiel non mesuré et non accepté | Conserver la réserve de coût contre le véritable 0.64. |
+| **10C / 0.66** | **Publiée dans Site 107**, base intégrée à 68/76 | Conserver les preuves et sa réserve distincte de coût. |
+| **8B, composant et raccordement commun** | **524 tests / 23 modules ; typage, audits et build acquis** | Conserver les preuves et leurs limites. |
+| **8B, formes et régressions** | **64 contrôles / 58 points ; 11 cas / 187 projections passés** | Conserver les captures, différences, références et revues indépendantes. |
+| **8B, contribution et graphes BranchRouting** | **5 chaînes qualifiées : 26 retours, 23 acquisitions, 1 ablation et 2 incomplets conservés** | Conserver les graphes complets, les revues et la tentative initiale refusée. |
+| **8B, version et gel final** | **Prochaine étape** | Réserver une version distincte, fixer les métadonnées et réconcilier les preuves avec le gel final. |
+| **8B, coût officiel** | Non mesuré et non accepté | Vérifier le prédécesseur réellement publié, déclarer le protocole puis mesurer sous exclusivité courte. |
+| **8B, publication** | Non effectuée | Après qualification requise, vérifier le publié réel et publier sous exclusivité courte. |
+| 6C / 6D | `observed_rigid_cargo`, `shared_settlement` ouverts | Poursuivre leurs transferts sur leurs branches. |
+| Lot 9 | `chart_navigation`, `region_intervention`, `joint_channels` ouverts | Poursuivre leurs capacités ; `discrete_network` reste hors compteur 76. |
+| 10D / 10E | `temporal_selection`, `invited_endpoints` ouverts | Poursuivre leurs transferts et qualifications. |
+| Lot 11 | Six portes globales encore fausses | Parité complète, graphes, restauration, sessions longues, coût et lisibilité. |
+
+**Règle de coût conservée : la médiane globale des sessions complètes doit augmenter de strictement moins de +10 % pour STCK et pour SMLP séparément.** Une phase peut dépasser +10 % si les deux critères globaux passent, sans compensation entre jeux ; tous les échantillons sont conservés. Les durées des commandes fonctionnelles ne sont pas des mesures officielles.
+
+Développement, tests fonctionnels, commits et push restent **sans verrou global ni attente de disponibilité des autres lots**. Une exclusivité courte est réservée aux mesures officielles et à la publication, libérée par son détenteur sans suppression d'un fichier détenu. **LKEY reste définitivement fermé.** Les sections suivantes conservent les jalons historiques.
+
+<!-- LOT8B_DELIVERY_QUALIFICATION_END -->
+
+<!-- LOT8B_COMMON_INTEGRATION_START -->
+
+## Jalon 8B précédent : raccordement commun qualifié dans le périmètre ciblé
+
+**Le candidat raccorde `parallel_branch_routing` et atteint 69/76 entrées (90,8 %), dont 26/33 entrées matérielles.** Les [preuves du raccordement commun](lot8b-evidence/common-integration-01/README.md) et le [bilan vérifiable](lot8b-evidence/common-integration-01/validation-summary.json) attestent **524/524 tests et sous-tests dans les 23 modules déclarés**, le typage, les deux audits et le build. Les entrées capturées sont restées inchangées pendant chaque commande et correspondent encore aux fichiers de clôture. Il s’agit d’une qualification fonctionnelle ciblée, sans campagne générale ni nouvelle réussite de jeu.
+
+La version **effectivement publiée reste Site 107 / native 0.66**, source `4ff7bf45286a8a19d34401988adca587253ae41e`, à **68/76 entrées**. Le code du présent candidat a été sauvegardé au commit `2583d81d856c13295040db88f5df8b3a99906bdc` sur la branche propre `lot8b-branch-routing-checkpoint-20261112`. Il contient **331 fichiers natifs**, digest `76a403016d2b28287194b7498f10e14727b7e3fb3f214d2f79cb0292390d54bf`. Le littéral de développement demeure `0.66.0` ; le digest, les familles et les extensions distinguent ce candidat du publié. Aucun nouveau numéro de publication n’est réservé et aucun déploiement 8B n’a été effectué.
+
+Le propriétaire unique est placé dans l’ordre source `motif_access → branch_routing → band_transfer`. Le parcours commun utilise un instantané d’entrée copié et figé, conserve l’événement sélectionné `branches:<revision>` et restaure l’état depuis le graphe commun. Les tests couvrent les gardes courantes, la calibration depuis froid, la décision suivante, un effet contraire et une ablation d’acquisition. Une acquisition interrompue conserve le retour public complet, marque les retours suivants du préfixe non acquis et termine sans relance automatique. Les conditions numériques de restauration dérivent de la surface publique totale de 65 536 pixels ; elles n’authentifient pas la provenance des snapshots et ne bornent pas tout l’historique.
+
+L’audit de migration déclare **215 composants vérifiés, 147 transferts partiels, 1 007 modules en attente et zéro module entièrement vérifié**, sans échec final. Ses six portes globales restent `false`. Le premier audit, qui signalait deux archives historiques absentes du checkout, est conservé avec son échec ; le second passe après matérialisation opaque de leurs octets vérifiés. Le corpus original BranchRouting n’a pas été régénéré. Les anciennes suites et les 26 retours synthétiques du parcours commun ne sont pas additionnés à ces 524 tests.
+
+### Feuille de route actualisée après le raccordement commun 8B
+
+| Étape | État établi | Prochaine action |
+| --- | --- | --- |
+| **8A / 0.65** | **Publiée dans Site 106** ; coût officiel non mesuré et non accepté | Conserver cette réserve, à qualifier contre le véritable 0.64. |
+| **10C / 0.66** | **Publiée dans Site 107**, base intégrée à 68/76 | Conserver les preuves et la réserve de coût officiel. |
+| **8B, composant et parcours commun** | **Terminés dans le périmètre déclaré : 524 tests, 23 modules, sept groupes de contrôle passés ; candidat à 69/76** | Préserver le corpus, les preuves négatives, les limites et les retours incomplets. |
+| **8B, qualification de livraison** | **Prochaine étape** | Déclarer les régressions et la campagne intégrée pertinentes, vérifier les formes de travail et les graphes exécutés avec attribution de la contribution, puis qualifier le coût contre le prédécesseur réellement publié. |
+| **8B, publication** | Non effectuée ; version propre encore à réserver | Après qualification, réserver la version, vérifier le publié réel et publier sous une courte exclusivité. |
+| 6C / 6D | `observed_rigid_cargo`, `shared_settlement` restent ouverts au registre | Poursuivre leurs transferts et qualifications sur leurs branches. |
+| Lot 9 | `chart_navigation`, `region_intervention`, `joint_channels` restent ouverts | Poursuivre les capacités propres ; `discrete_network` reste suivi hors compteur 76. |
+| 10D / 10E | `temporal_selection`, `invited_endpoints` restent ouverts au registre | Poursuivre leurs transferts et qualifications. |
+| Lot 11 | Consolidation ouverte ; six portes globales encore fausses | Parité commune complète, graphes, restauration, sessions longues, coût et lisibilité. |
+
+**Coût 8B : non mesuré et non accepté à cette étape.** Le critère conservé est une augmentation de la médiane des sessions complètes **strictement inférieure à +10 % pour STCK et pour SMLP séparément**. Une phase peut dépasser +10 % lorsque les deux globaux passent, sans compensation entre jeux ; tous les échantillons et diagnostics sont conservés. Les temps des commandes fonctionnelles ne constituent pas des mesures officielles.
+
+Le développement, les tests fonctionnels, les commits et les push restent **sans verrou global et sans attente de disponibilité des autres lots**, sur le checkout et la branche propres. Aucune exclusivité n’a été acquise pour ce jalon. Les mesures officielles et la publication conservent uniquement une exclusivité courte, libérée par son détenteur ; aucun fichier de verrou détenu n’est supprimé. **LKEY reste définitivement fermé.** Les sections ci-dessous conservent les jalons historiques et leurs propres limites.
+
+<!-- LOT8B_COMMON_INTEGRATION_END -->
+
+<!-- LOT8B_COMPONENT_STAGE_START -->
+
+## Jalon 8B précédent : composant qualifié avant raccordement commun
+
+Le lot 8B poursuit `parallel_branch_routing` sur une branche et un checkout propres, depuis la **0.66 réellement publiée dans Site 107**, source `4ff7bf45286a8a19d34401988adca587253ae41e`. Le publié raccorde **68/76 entrées (89,5 %)**. La publication précédente 0.65 / Site 106 et son reçu de clôture sont conservés.
+
+Le jalon de **composant générique et de parité originale est terminé** : [contrat](lot8b-branch-routing.md), [filiation](lot8b-branch-routing-lineage.md), corpus original indépendant et deux modules natifs. Le [bilan vérifiable](lot8b-evidence/component-stage-01/README.md) conserve **37 observations, 20 cas géométriques, 12 scénarios et 83 opérations originales**, comparées dans les modes exact et borné complet. Les **249 tests et sous-tests de référence, 17 tests de contrat et le typage passent**, avec entrées inchangées. Le code est sauvegardé au commit `f8624e40839de891a33251b1c13b775ec213eb34` ; les reçus antérieurs, y compris les échecs, restent conservés. Ces populations ne sont pas additionnées aux anciennes suites ou à des réussites de jeu.
+
+`parallel_branch_routing` reste non raccordé au caller commun ; le registre conserve **68/76**, huit entrées ouvertes, et le natif publié **0.66.0**. Aucun nouveau numéro de version n’est réservé. La prochaine étape doit fournir des observations stables, borner la frontière des états restaurés et conserver les retours officiels dont l’acquisition est différée. Elle qualifie ensuite le propriétaire unique, les gardes et l’acquisition `branches:<revision>` dans le parcours commun, avec preuves contraires et ablations. Les bornes de 16 384 affectations d’identité et 65 536 placements ne sont pas une garantie générale de temps ou de mémoire.
+
+### Feuille de route historique après le jalon de composant
+
+| Étape | État établi | Prochaine action |
+| --- | --- | --- |
+| **8A / 0.65** | **Publication réussie dans Site 106**, reçus conservés ; coût officiel non mesuré et non accepté | Traiter ultérieurement la réserve de coût contre le vrai 0.64. |
+| **10C / 0.66** | **Publication réussie dans Site 107**, base intégrée ; registre 68/76 | Conserver les preuves et la réserve de coût officiel de cette publication. |
+| **8B, composant** | **Contrat, corpus indépendant, port et contrôles ciblés terminés** | Conserver ce jalon et ses limites ; aucun raccordement anticipé au registre. |
+| **8B, raccordement commun** | À réaliser | Fermer les limites d’entrée/restauration et d’acquisition différée ; raccorder puis qualifier les gardes, la mémoire, la restitution, les effets contraires et les ablations. |
+| **8B, qualification et livraison** | À réaliser après raccordement | Régressions affectées, formes et graphes, coût contre le publié réel, puis publication propre. |
+| 6C / 6D | `observed_rigid_cargo`, `shared_settlement` restent ouverts au registre | Poursuivre leurs transferts et qualifications sur leurs branches. |
+| Lot 9 | `chart_navigation`, `region_intervention`, `joint_channels` restent ouverts | Poursuivre les capacités propres ; `discrete_network` reste suivi hors compteur 76. |
+| 10D / 10E | `temporal_selection`, `invited_endpoints` restent ouverts au registre | Poursuivre les transferts ; les preuves préparatoires 10D sont conservées dans la base publiée. |
+| Lot 11 | Consolidation ouverte ; six portes globales encore fausses | Parité commune complète, graphes, restauration, sessions longues, coût et lisibilité. |
+
+Développement, contrôles fonctionnels, commits et push restent **sans verrou global**, sans attente de disponibilité des autres lots. Ce jalon n’a acquis aucun verrou et n’a exécuté aucune mesure officielle ni publication. Une exclusivité courte reste réservée aux futures mesures et à la publication ; aucun fichier détenu n’est supprimé. Le coût officiel 8B reste **non mesuré et non accepté** : médiane globale de session complète strictement sous +10 % pour STCK et SMLP séparément, avec une phase au-dessus de +10 % acceptable si les deux globaux passent, sans compensation entre jeux. LKEY demeure définitivement fermé. Les états de publication ci-dessus sont ceux des reçus constatés ; les sections suivantes conservent leurs étapes historiques.
+
+<!-- LOT8B_COMPONENT_STAGE_END -->
+
+<!-- LOT10C_PRIORITY_PUBLICATION_066_BEGIN -->
+
+**Constat actualisé du lot 8B : déploiement réussi dans Site 107, source `4ff7bf45286a8a19d34401988adca587253ae41e`. Le texte de préparation ci-dessous conserve les preuves et réserves 10C ; le coût officiel reste non mesuré et non accepté.**
+## Publication 0.66 constatée : Site 107, base du travail 8B
+
+La demande explicite de l’utilisateur est de publier **0.66 en priorité, sans attendre la disponibilité des autres lots**. Le candidat 10C qualifié `547025a637ffbfeae23c15d54c96100ad8d3df5f` est réconcilié avec **0.65 réellement publiée, Site 106**, source `b9555039d60d5d9f771dd96b763c40f389dc62dd`. Le travail s’effectue dans le checkout propre `/workspace/sites/sra-lot10c-priority066-20261112`, branche `lot10c-priority066-20261112`.
+
+La [réconciliation](lot10c-evidence/priority-publication-066-20261112/source-reconciliation.json) confirme l’identité du code, des tests, des scripts et des autres entrées de compilation avec le candidat qualifié. Le natif reste **329 fichiers**, digest `ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316`, et raccorde **68/76 entrées (89,5 %)**. Les seules métadonnées supplémentaires du plan de transfert sont un lien de preuve et des notes 8A déjà présents dans 0.65. Le [build frais](lot10c-evidence/priority-publication-066-20261112/build-execution.json) et les deux audits passent ; le worker compilé contient bien **0.66.0**.
+
+La [revue indépendante](lot10c-evidence/priority-publication-066-20261112/qualification-reuse-review.json) retrouve **753 entrées source/tests**, **394 entrées de compilation** et **1 786 originaux** sans divergence. Les preuves fonctionnelles 10C conservées restent **1 767/1 767 tests dans 56 modules**, dix rejeux principaux / 170 contrôles et le complément KATA / 17 contrôles, soit **11 jeux distincts / 187 contrôles**. Leur réutilisation repose sur l’identité des entrées, sans présenter ces résultats comme une nouvelle exécution. Les preuves RECR restent attachées à leur gel historique 315, distinct du candidat 329. HPDL reste partiel et LKEY définitivement fermé.
+
+**Le coût officiel 0.66 n’est ni mesuré ni accepté. La publication prioritaire précède cette qualification, conformément à la demande courante.** Le critère futur reste une augmentation de la médiane des sessions complètes strictement inférieure à +10 % pour STCK et SMLP séparément ; une phase peut dépasser +10 % si le global du même jeu passe. Les six portes de migration globale et la parité complète restent ouvertes.
+
+| Étape | État courant avant le déploiement 0.66 | Suite |
+| --- | --- | --- |
+| 5C / 0.63 | Publié, Site 104 | Coût officiel encore ouvert |
+| 6B / 0.64 | Publié, Site 105 | Coût officiel encore ouvert ; développement 6C sur sa branche |
+| 8A / 0.65 | Publié, Site 106 | Coût officiel encore ouvert ; développement 8B sur sa branche |
+| **10C / 0.66** | **Qualification fonctionnelle conservée, réconciliation et build frais passés** | **Publication prioritaire, sans attente de disponibilité** |
+| 10D / TemporalSelection | Référence indépendante de 105 cas, deux générations identiques et sept corruptions rejetées, sauvegardées sur le checkpoint `feab56d88718ef3b9ae9fd4798254934c09ad3f3` | Reprendre le port natif des primitives, de la géométrie et de la politique ; compléter le second locus et le cycle de famille avant raccordement |
+| Autres entrées | Huit restent ouvertes au registre 68/76 | Poursuivre les lots propriétaires et la consolidation globale |
+
+Le développement, les builds, les commits et les sauvegardes de branche avancent sans verrou global. Une fenêtre exclusive courte, non bloquante et bornée protège seulement la publication ; aucun ACK de disponibilité n’est demandé, aucun fichier de verrou détenu n’est supprimé. L’accès privé au propriétaire est conservé. Les reçus sont rassemblés dans le [dossier de publication 0.66](lot10c-evidence/priority-publication-066-20261112).
+
+À ce commit de préparation, aucun succès de déploiement 0.66 n’était encore revendiqué. Le reçu du Site 107 confirme désormais ce succès. **Le tableau ci-dessus conserve l’état de préparation historique ; la section 8B en tête fixe l’état courant observé.**
+
+<!-- LOT10C_PRIORITY_PUBLICATION_066_END -->
+
+<!-- LOT8A_PRIORITY_PUBLICATION_065_START -->
+
+## Lot 8A : 0.65 publiée dans Site 106
+
+**Publication privée réussie le 11/11/2026 à 22:11:05 UTC−03** : [SRA Playground](https://sra-playground.yannick-fontan.chatgpt.site), **Site 106 / native 0.65.0**, source `b9555039d60d5d9f771dd96b763c40f389dc62dd`. La demande explicite de l’utilisateur a été exécutée **en priorité, sans attendre la disponibilité des autres lots**. Le candidat sauvegardé `c58d82e0` est restauré dans un checkout propre, sur la branche `lot8a-priority065-20261111`, puis fusionné avec la **0.64 réellement publiée dans Site 105**, source `deb9ebbbb06a8a35940b2e8f3fefdbed690ce772`.
+
+Le natif 0.65 reste gelé à **324 fichiers / `936fa2bf81965272b1ddbab4a5c01f98aeb6a48188c1f7a8c91de226598c5e43`**. Le publié 0.64 conserve exactement les sources du baseline préparé 6B `a01e6faf`, **322 fichiers / fa23** : la réconciliation préserve donc les preuves fonctionnelles existantes. Les **5 606/5 606 tests sur 145 fichiers**, les **11 régressions réconciliées / 187 contrôles**, les preuves communes et les formes/graphes restent des résultats acquis dans leur périmètre. Les anciens reçus préparatoires sont conservés sans changement ni nouvelle exécution attribuée.
+
+**Le coût officiel 0.65 n’est ni mesuré ni accepté.** La publication prioritaire est autorisée avant cette mesure. Le critère ultérieur reste une augmentation de la médiane globale des sessions complètes **strictement inférieure à 10 % pour STCK et pour SMLP séparément** ; une phase peut dépasser 10 % si ces deux critères globaux sont respectés. Cette livraison ne clôture ni les six portes de migration globale ni la parité stricte des graphes.
+
+Le build 0.65 a réussi dans le checkout propre, avec entrées gelées identiques avant et après. Son worker est identique octet pour octet à celui du build qualifié. Préparation, build, commits et sauvegardes de branche sont restés sans verrou global. La publication a utilisé une exclusivité de **62,072 secondes**, sans ACK de disponibilité des autres lots ; le détenteur a libéré son descripteur et conservé le même fichier de verrou.
+
+Le [reçu de publication](lot8a-evidence/priority-publication-065-20261111/publication-result.json) confirme `succeeded`, Site 106, le commit exact et un accès privé inchangé, révision 3. Le [bilan de livraison](lot8a-evidence/priority-publication-065-20261111/publication-summary.json) conserve la filiation, le build et les réserves. Le registre désormais publié compte **67/76 entrées raccordées, soit 88,2 %, avec neuf restantes**.
+
+Prochain travail courant après publication : **8B `parallel_branch_routing`**, contrat de transfert et petit corpus indépendant issu de `BranchRouting`, puis port natif. Aucune entrée 8B n’est comptée comme raccordée. **LKEY demeure définitivement fermé.**
+
+### Feuille de route courante après Site 106
+
+| Étape | État établi | Prochaine action |
+| --- | --- | --- |
+| 5C / 0.63 | Publiée dans Site 104 ; coût officiel non mesuré et non accepté | Conserver les preuves et traiter la réserve de coût. |
+| 6B / 0.64 | Publiée dans Site 105 ; sources réconciliées dans 0.65 | Conserver la réserve de coût officiel non mesuré et non accepté. |
+| **8A / 0.65** | **Publiée dans Site 106 ; 67/76 entrées, natif 324/936fa2, validation fonctionnelle conservée** | Qualifier ultérieurement le coût officiel contre 0.64, avec le critère global strict sous +10 % par jeu. |
+| **8B** | Préparation source acquise ; aucun raccordement déclaré | **Écrire le contrat BranchRouting et le corpus original indépendant, puis porter le propriétaire.** |
+| 6C / 6D | `observed_rigid_cargo` et `shared_settlement` ouverts | Poursuivre leurs transferts et qualifications dans leurs branches. |
+| Lot 9 | Navigation, interventions régionales et canaux ouverts | Transférer puis qualifier ; `discrete_network` reste hors compteur 76. |
+| 10C / 10D / 10E | Travaux parallèles, sans nouvelle publication attestée par ce lot | Réconcilier désormais le vrai 0.65 publié et poursuivre les capacités propres. |
+| Lot 11 | Consolidation ouverte ; six portes globales encore fausses | Parité complète, graphes, restauration, sessions longues, coûts et lisibilité. |
+
+
+<!-- LOT8A_PRIORITY_PUBLICATION_065_END -->
+
+<!-- CURRENT_WORK_POLICY_START -->
+
+## Règle de travail courant actualisée
+
+À la demande explicite de l’utilisateur, **développement, tests fonctionnels, commits et push se poursuivent sans verrou global**, dans le checkout et la branche propres au lot. Ils n’attendent pas la publication des autres lots. Les sauvegardes distantes sont faites par commits cohérents et vérifiées.
+
+Une **exclusivité courte et bornée** reste réservée aux mesures officielles de performance et à la publication. Chaque détenteur libère ses propres handles ; aucun fichier de verrou encore détenu n’est supprimé ni remplacé. Les anciens plans et reçus restent historiques et immuables ; les nouvelles exécutions suivent la [politique explicite](lot8a-evidence/qualification-provisional-01/contract/current-work-lock-policy.json). Les prédécesseurs réellement publiés restent nécessaires à la référence de coût et à la livraison finale, sans bloquer l’avancement courant.
+
+<!-- CURRENT_WORK_POLICY_END -->
+
+<!-- LOT8A_INTEGRATION_START -->
+
+## Jalon historique 8A avant publication : qualification de la composition préparée
+
+**Cette section conserve le constat antérieur à Site 106. La publication effective et la feuille de route courante figurent en tête ; les anciens états « non publié » et opérations alors prévues restent historiques.**
+
+**Les trois preuves communes sont vérifiées et les 11 régressions enregistrées sont qualifiées, avec 187/187 contrôles. Les quatre formes de travail sont capturées sur chacun des deux rôles puis qualifiées hors chronométrage.** Le [bilan courant réconcilié](lot8a-evidence/integration-published-063-01/summary.json) distingue ces résultats préparatoires de la future qualification contre le véritable 0.64 publié.
+
+Le candidat conserve **324 fichiers natifs**, digest `936fa2bf81965272b1ddbab4a5c01f98aeb6a48188c1f7a8c91de226598c5e43`. La [composition 5C + 6B + 8A](lot8a-evidence/integration-provisional-063-064-01/contract/composition-review.json) et le [gel validé](lot8a-evidence/integration-provisional-063-064-01/validation-summary.json) restent inchangés : **5 606/5 606 tests dans 145 fichiers**, aucun échec, annulation, cas ignoré ni `todo`, et cinq contrôles passés (typage, audit des entrées, audit de migration, diff, compilation). Ces résultats restent attachés à leur exécution déclarée ; ils ne sont pas présentés comme une nouvelle relance des tests. Les enveloppes fonctionnelles récentes vérifient les mêmes entrées gelées, dont les **1 786 fichiers originaux**.
+
+L’[audit du candidat](v6-entry-point-progress.json) conserve **67/76 entrées raccordées (88,2 %), neuf restantes** : `goal_access` 12/12, `window_constraints` 21/21, `surface` 10/10 et `factored_material_return` 24/33. L’[inventaire](v6-coverage.json) conserve 209 composants vérifiés, 147 transferts partiels, 1 013 modules en attente, zéro module entièrement vérifié et aucun échec d’audit. Les **six portes de migration complète restent fausses**.
+
+### Preuves acquises sur le même natif
+
+| Périmètre | Résultat établi | Portée |
+| --- | --- | --- |
+| Binding 5C | **6 818/6 818 comparaisons originales**, quatre scénarios | Positif, réfutation, ambiguïté et frontière ; états, mémoire, acquisition et restauration. |
+| Motif 8A | **20/20 contrôles** du parcours commun | Acquisition sélectionnée et restitution depuis la mémoire commune ; les preuves contraires et d’ablation restent liées à la suite validée. |
+| SelectedRigid 6B | **56 événements comparés sans différence**, 22 ablations, dont sept changent l’action ou le refus | Cinq retours physiques et trois préfixes ; observation terminale conservée sans acquisition inventée. |
+| Régressions enregistrées | **11/11 cas, 187/187 contrôles** | Dix réussites de la série02, puis WEAV03 ; mêmes traces, même comparateur, mêmes octets natifs. |
+
+La [revue commune](lot8a-evidence/qualification-provisional-02/review/common-integrity-review.json) conserve les limites des scénarios synthétiques distincts. La [réconciliation des régressions](lot8a-evidence/qualification-provisional-02/reconciliation-recorded-regressions.json) et sa [revue indépendante](lot8a-evidence/qualification-provisional-02/review/recorded-regression-reconciliation-review.json) vérifient onze identifiants distincts. Ces populations ne sont pas additionnées aux 5 606 tests. Elles n’établissent ni la parité de l’appelant complet ni une nouvelle réussite de jeu réel.
+
+Deux corrections d’outillage rendent les rapports complets disponibles. VOIS termine 78 actions et trois niveaux après passage à l’écriture JSON/gzip par flux. WEAV termine **81 actions, 81 préfixes et trois niveaux** après libération des gros objets de référence avant l’import du moteur, puis séparation des durées de vie de la prévalidation, du moteur et du comparateur. Le **plafond d’old space V8 reste 1 536 MiB** ; le RSS total observé peut le dépasser. Aucun état natif, budget du moteur ou champ du rapport n’est supprimé. La série02 reste conservée au statut `failed`, 10/11 et 170/187 ; la réussite finale est une réconciliation de tentatives, sans réécriture de cet échec. L’interruption antérieure, les diagnostics et les refus de préparation sont conservés.
+
+### Formes de travail et graphes préparatoires
+
+Le parent préparé est le commit **`a01e6faf330d82fa220feac0c9ad4632bb75a9de`**, 322 fichiers natifs, digest `fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886`. Son checkout séparé contient les déclarations exactes de cette source, dont le [JSON matérialisé après l’échec du premier inventaire](lot8a-evidence/qualification-provisional-02/work-forms-01/baseline-support-materialization.json). Il reste **non publié**. L’inventaire et les deux captures utilisent le même HEAD candidat `7c8f43365a277406e95c898165d01a7bf6e19772`.
+
+Les [captures complètes et formes qualifiées](lot8a-evidence/qualification-provisional-02/work-forms-01/work-forms.json) couvrent **huit sessions / 62 actions** : STCK sur trois puis dix actions, SMLP sur trois puis quinze, pour chaque rôle. Les formes complètes conservent trois inspections terminales. L’[inventaire des propriétaires](lot8a-evidence/qualification-provisional-02/work-forms-01/owner-inventory.json) confirme l’ajout du seul `motif_access`, sans retrait de propriétaire ni ajout/retrait de programme installé. Binding et SelectedRigid sont observés dans les deux rôles, Motif dans le candidat.
+
+La [qualification des graphes](lot8a-evidence/qualification-provisional-02/work-forms-01/owner-graph-attribution.json) passe **64 contrôles sur 58 points appariés**. Les **21 956 différences brutes** sont toutes conservées dans le journal : 20 893 différences d’identifiant de source validées par leur Kernel propre, 1 055 différences d’horodatage `created` rattachées à l’horloge source et à leurs véritables intervalles d’appel, et huit ajouts des deux nœuds Motif sur les quatre formes. **Zéro différence ne reste sans attribution.** Les valeurs privées et fragments ne sont pas masqués ; les horloges ne sont pas remplacées.
+
+La [revue indépendante de cette qualification](lot8a-evidence/qualification-provisional-02/review/work-form-qualification-review.json) en précise la portée. Les sorties restent volontairement **`preparedOnly: true`, `officialPerformanceEligible: false` et `strictCommonGraphParity: false`**. Elles ne deviennent pas une preuve de coût ou une autorisation de publication par le seul passage des contrôles.
+
+### Publication, coût et travail courant
+
+Le [constat Sites 104](lot8a-evidence/integration-published-063-01/publication-observation.json) confirme **native 0.63 publiée**, source `bc53ddf36f0379be24cfc0667f8f8d6fdd650032`, déploiement `succeeded`, accès privé au propriétaire et révision 3. Cette [publication prioritaire 5C](lot5c-evidence/recovery/publication-063-priority/authorization.json) conserve explicitement un **coût officiel non mesuré et non accepté** pour STCK et SMLP. Cette exception ne s’étend pas à 8A. **Le véritable 0.63 est réconcilié dans la branche 8A ; 0.64 et 0.65 restent non publiées au constat de cette étape.** Le [bilan de réconciliation](lot8a-evidence/integration-published-063-01/summary.json) vérifie que les fichiers natifs, de tests, de scripts, de compilation et originaux restent exactement ceux du gel qualifié. Les sauvegardes de `lot8a-motif-checkpoint-20261111` demeurent distinctes d’une publication du Site.
+
+Le développement, les tests fonctionnels, les commits et les push continuent **sans verrou global et sans attendre les publications des autres lots**, conformément à la [politique courante](lot8a-evidence/qualification-provisional-01/contract/current-work-lock-policy.json). Une exclusivité courte reste réservée aux mesures officielles et à la publication. Aucun verrou global n’a été acquis pour les présentes qualifications ; aucun fichier de verrou détenu n’a été supprimé.
+
+Le [protocole officiel prospectif](lot8a-evidence/integration-provisional-063-064-01/contract/cost-qualification-plan.json) prévoit 40 essais ABBA : **32 sessions mesurées / 400 actions, plus huit préchauffages / 24 actions exclus**. Le critère reste la médiane des **sessions complètes strictement sous +10 % pour STCK et pour SMLP séparément**. Une phase au-dessus de +10 % est recevable lorsque les deux critères globaux passent. Tous les échantillons, diagnostics et cohortes restent conservés, sans compensation entre jeux. Aucune mesure officielle 8A n’a été exécutée ici.
+
+### Feuille de route actualisée
+
+| Étape | État établi | Prochaine action |
+| --- | --- | --- |
+| 10B / 0.62 | Publié, Site 103 ; réserve HPDL partielle conservée | Conserver le prédécesseur exact et ses limites. |
+| 5C / 0.63 | **Publié prioritairement dans Site 104 ; coût officiel non mesuré et non accepté** | Conserver cette réserve et ses preuves ; la qualification future du coût garde son critère global. |
+| 6B / 0.64 | Préparation sauvegardée, non publiée au constat de cette étape | Intégrer le 0.63 désormais publié, puis fermer la qualification finale et le coût avant sa publication. |
+| **8A / 0.65** | **0.63 publié réconcilié ; natif validé, preuves communes, 11 régressions et formes/graphes préparatoires qualifiés** | Réconcilier le véritable 0.64 publié, vérifier les différences avec le gel préparé et renouveler les qualifications affectées ; mesure officielle puis publication après acceptation. |
+| **8B** | `parallel_branch_routing` reste ouvert ; [préparation source établie](lot8b-evidence/preparation-20261111/README.md) | Écrire le contrat de transfert et le corpus original indépendant, puis porter le propriétaire et ses dépendances consommées, sans attendre la publication pour ce travail courant. |
+| 6C / 6D | `observed_rigid_cargo` et `shared_settlement` ouverts | Transférer puis qualifier leurs capacités dans leurs propres périmètres. |
+| Lot 9 | `chart_navigation`, `region_intervention`, `joint_channels` ouverts | Traiter navigation, régions et canaux ; conserver `discrete_network` hors du compteur 76. |
+| 10C / 10D / 10E | La coordination signale le jalon fonctionnel 10C sauvegardé et une préparation source 10D ; 10E reste ouvert | Poursuivre ces branches sans verrou courant ; réconcilier leurs prédécesseurs réels avant qualification finale et publication. |
+| Lot 11 | Consolidation ouverte ; six portes globales encore fausses | Parité commune complète, graphes, restauration, sessions longues, coûts et lisibilité. |
+
+Les états des autres fils sont issus d’une [observation de coordination](lot8a-evidence/qualification-provisional-02/coordination/lanes-observation-02.json), pas d’une nouvelle certification de leurs preuves dans ce lot. **LKEY reste définitivement fermé**, sans nouveau jeu, rejeu, oracle ou remise à zéro. Les sections historiques suivantes conservent leurs propres dates, gels et limites.
+
+<!-- LOT8A_INTEGRATION_END -->
+
+<!-- LOT8A_START -->
+
+## Jalon 8A antérieur sur Site 103 : développement validé, qualification finale après 0.63 et 0.64
+
+**8A `motif_conditioned_access` est implémenté et validé en développement : 5 422/5 422 tests dans 138 fichiers, cinq contrôles passés, compilation comprise.** Les entrées sont restées inchangées pendant chaque commande ; les sorties complètes et leurs empreintes sont conservées dans le [bilan de validation](lot8a-evidence/development/validation-summary.json). Le candidat porte **0.65.0 réservé** et contient **312 fichiers natifs**, digest `a6ea3e5e8140b14aa260485ebd4192429a86c4d3ec02075f14043f215cc798e1`.
+
+Ce travail est parti du Site 101 / native 0.61, puis a intégré le **Site 103 / native 0.62 effectivement publié**, source `4afcbfe6a25bd3a88223be543e443bc53b9c8814`. Une [observation Sites fraîche](lot8a-evidence/coordination/current-publication-observation.json) confirme le déploiement `succeeded`, l'accès privé au propriétaire et la révision d'accès **3**. **Aucun coût 8A, niveau officiel ni déploiement 0.65 n'est revendiqué.** Les publications effectives **5C / 0.63 → 6B / 0.64** restent à intégrer avant son gel final, ses non-régressions, sa qualification de coût et sa publication.
+
+La [filiation source](lot8a-motif-access-lineage.md) et l'[index des preuves](lot8a-evidence/README.md) décrivent le propriétaire unique, la position source, les gardes courantes, l'acquisition sélectionnée et la restauration. Le parcours froid du moteur commun acquiert une commande, bascule et active un motif, puis utilise le retour pour le choix suivant. Un effet contraire modifie cette décision ; retirer l'acquisition empêche l'enchaînement appris. Les comparaisons originales et ces scénarios sont inclus dans le passage frais ; les **182/182 comparaisons initiales** restent des preuves historiques distinctes, sans addition des populations.
+
+Le [bilan historique de développement](lot8a-evidence/development/validation-summary.json) conserve l’audit de ce candidat sur Site 103 : **65/76 raccordées (85,5 %), 11 restantes**, dont **23/33** pour `factored_material_return`. La publication 0.62 de référence en compte **64/76**. L’inventaire de ce même jalon compte **200 composants vérifiés, 149 transferts partiels et 1 020 modules en attente**, zéro module entièrement vérifié et **aucun échec d’audit**. Ces chiffres historiques ne désignent pas les rapports courants. Les six portes de migration complète restent `false` ; le raccordement n’établit pas une parité complète du moteur.
+
+La recherche bornée déclare l'incomplet après interruption ou dépassement, sans route partielle. Ses bornes de **8 192 états / 16 384 éléments de frontière** ne constituent pas une preuve universelle de mémoire ou de latence : conserver les chemins complets peut coûter **O(S²)** en espace. **8B `parallel_branch_routing` reste à réaliser et le lot 8 entier reste ouvert.**
+
+**Règle de coût confirmée : la médiane des sessions complètes doit augmenter de moins de +10 % pour STCK et pour SMLP séparément.** Une phase dépassant +10 % peut être acceptée lorsque les deux critères globaux passent ; tous les échantillons, diagnostics et cohortes sont conservés. Le coût 8A devra être mesuré contre son prédécesseur effectivement publié. Les coûts acceptés de 0.61 et 0.62 ne sont pas réutilisés comme preuves de 8A. LKEY demeure définitivement fermé, sans nouvel essai ni remise à zéro.
+
+### État historique de la feuille de route au 11 novembre 2026 à 14:37:12 UTC−03
+
+| Étape | État observé à ce jalon historique | Prochaine action alors prévue |
+| --- | --- | --- |
+| 10B / 0.62 | Publié dans Site 102, clôture documentaire Site 103 ; réserve HPDL partielle conservée | Prédécesseur réellement intégré dans 8A |
+| 5C / `observed_object_binding` / 0.63 | Validation du candidat intégré en cours dans son fil | Terminer sa qualification et publier 0.63 |
+| 6B / `selected_rigid` / 0.64 | Jalon de développement acquis ; intégration préparatoire de 5C en cours | Réconcilier la publication réelle 0.63, puis qualifier et publier 0.64 |
+| **8A / `motif_conditioned_access` / 0.65** | **Développement validé : 5 422 tests, cinq contrôles, 65/76 entrées sur la base 103** | Intégrer 0.63/0.64, valider le gel final et son coût, puis publier |
+| 6C / 6D | `observed_rigid_cargo`, `shared_settlement` restent ouverts | Transférer et qualifier chaque capacité |
+| 8B | `parallel_branch_routing` reste à réaliser | Étape suivante du lot 8 après 8A |
+| Lot 9 | `chart_navigation`, `region_intervention`, `joint_channels` restent ouverts | Navigation, régions et canaux ; `discrete_network` reste suivi hors compteur 76 |
+| 10C / 10D / 10E | 10C `ordered_recruitment` en développement parallèle ; `temporal_selection` et `invited_endpoints` à réaliser | Qualifier et coordonner les publications suivantes |
+| Lot 11 | Consolidation finale ouverte | Parité commune, graphes, restauration, sessions longues, coûts et lisibilité |
+
+Les états des autres fils proviennent de la [coordination observée](lot8a-evidence/coordination/next-lanes-observation.json) ; ils ne constituent pas des attestations de publication. Les lots antérieurs conservent ci-dessous leurs périmètres livrés et leurs réserves.
+
+<!-- LOT8A_END -->
+
+<!-- LOT6B_PRIORITY_PUBLICATION_064_START -->
+
+## Publication prioritaire 0.64 demandée le 11 novembre 2026
+
+L'instruction courante demande de publier **0.64 en priorité, sans attendre une
+disponibilité d'autres lots**. La livraison utilise le candidat **SelectedRigid
+6B fa23 / 322 fichiers**, sauvegardé dans `b55fcb8f`, et son prédécesseur
+réellement publié **Site 104 / native 0.63**, source
+`bc53ddf36f0379be24cfc0667f8f8d6fdd650032`. Les développements Cargo 6C restent
+sur leur branche distincte et ne sont pas inclus dans cette publication.
+
+Le code natif et les entrées de construction du prédécesseur publié sont
+identiques à ceux du checkpoint 5C `805b3029` déjà intégré et testé. La fusion
+ajoute l'historique et les preuves documentaires 5C ; elle préserve le natif
+6B fa23. Les 5 405 tests, onze rejeux, preuve froide et QA déjà clos gardent
+leur identité et leur portée, sans nouvelle partie ni nouvelle mesure.
+
+**Le coût officiel 6B n'est pas mesuré ni accepté.** La publication prioritaire
+suit la nouvelle instruction utilisateur ; elle ne transforme pas cette
+absence de mesure en réussite. Le critère reste un surcoût médian de session
+complète strictement inférieur à +10 % pour chaque jeu testé. Une phase peut
+dépasser +10 % si le global de ce jeu passe ; aucune compensation entre jeux.
+
+La sauvegarde et la préparation n'acquièrent aucun verrou global. La poussée
+vers la branche de publication et le déploiement utilisent une exclusivité
+courte, acquise sans attente et libérée par son détenteur. Aucun fichier de
+verrou détenu n'est supprimé. L'état terminal de Sites sera conservé dans le
+[dossier de livraison prioritaire](lot6b-evidence/priority-publication-064-20261111).
+État historique à la création de ce jalon : publication 0.64 demandée. **Constat actualisé du lot 8A : publication 0.64 réussie dans Site 105**, source `deb9ebbb`, avec coût officiel toujours non mesuré et non accepté. Voir le reçu [du prédécesseur réellement publié](lot8a-evidence/priority-publication-065-20261111/actual-publication-064-observation.json).
+
+<!-- LOT6B_PRIORITY_PUBLICATION_064_END -->
+
+<!-- LOT6B_DEVELOPMENT_CURRENT_START -->
+
+## Lot 6B : suite, rejeux, preuve froide et QA navigateur fa23 validés
+
+### Règle de travail prospective du 11 novembre 2026
+
+La nouvelle instruction utilisateur autorise **le développement, les tests
+fonctionnels, les commits et les push sans verrou global**, dans un checkout
+et une branche propres. Les sauvegardes doivent rester régulières, sans
+attendre la publication des autres lots. Cette règle s’applique aux travaux
+nouveaux ; les anciennes attentes, gardes et preuves de coordination demeurent
+des faits historiques et ne sont pas réécrites.
+
+**Seules les mesures officielles de coût et la publication nécessitent une
+courte exclusivité.** Aucun verrou détenu ne doit être supprimé ni remplacé.
+Le développement courant ne requiert ni verrou partagé global ni garde
+d’un ancien silence préparatoire. La publication effective 0.63 reste une
+condition de réconciliation pour l’acceptation finale 6B ; elle ne bloque pas
+la préparation, les tests fonctionnels ou les commits et push courants.
+La règle est explicitée par [addendum prospectif](lot6b-evidence/current-work-policy-20261111.md).
+La [prochaine préparation du contrat de coût](lot6b-evidence/source-workflow-20261111/next-cost-preflight-plan.md)
+précise les commandes et leurs prérequis réels. Les travaux préparatoires restent
+libres de verrou global ; les CLI officiels positifs attendent les identités du
+prédécesseur publié et les mesures réellement acquises.
+
+### Diagnostic source du message d’arrêt signalé
+
+Le [diagnostic de source générique](lot6b-evidence/user-stop-nested-control-01/source-diagnosis.json)
+identifie précisément **`FieldServiceMemory.applyEvent`**, dans
+[v6-field-service-access.ts](../../src/logos-engine/v6-field-service-access.ts).
+Pour un événement `nested_control_response` dont la disposition est différente
+de `local_no_visible_effect`, ce code fixe le motif
+**`nested_control_effect_requires_composition`**. Le chemin générique exige
+alors une composition explicite ; une composition de remplissage reconnue
+peut lever ce motif. Il ne transforme pas ce refus en réussite.
+
+**SelectedRigid est raccordé en amont dans le candidat fa23.** Le Site 103
+exact, commit `4afcbfe6a25bd3a88223be543e443bc53b9c8814`, encore observé
+**à 21:33 UTC**, dans le [nouveau constat d’hébergement](lot6b-evidence/source-workflow-20261111/publication-observation.json), reste en **native 0.62 sans raccordement SelectedRigid**.
+Cette différence est compatible avec le message fourni par l’utilisateur.
+**Le texte seul ne prouve ni la version chargée dans le navigateur, ni le
+niveau, ni l’historique d’actions de sa session.** La session exacte n’a pas
+été reproduite.
+
+Ce diagnostic n’exécute **aucun nouveau jeu ni parcours navigateur** et
+n’apporte **aucune modification native** : le gel demeure **fa23 / 322 fichiers**.
+Les validations fonctionnelles, les rejeux et les preuves KLOT/navigateur
+déjà closes restent inchangés. Après le diagnostic facturé, le compteur
+est **fermé à 1 424,8841320940055 / 2 400 secondes**, avec
+**975,1158679059945 secondes restantes**. Les points de clôture antérieurs,
+dont celui de QA02, restent historiques.
+
+**Après le signalement « KLOT ne réussit pas », la version publiée vérifiée
+est Site 103 / native 0.62 ; SelectedRigid 6B n’y est pas déployé.**
+La session exacte de l’échec signalé n’a pas été reproduite : cette observation
+établit un écart de publication, sans établir une causalité certaine.
+Le [constat de publication vérifié](lot6b-evidence/integration-site103-01/publication-observation.json)
+lie le commit exact `4afcbfe6a25bd3a88223be543e443bc53b9c8814`, le déploiement
+`appgdep_6af49db69234819195c9c093cb79a7da` au statut `succeeded` et l’accès
+privé réservé au propriétaire, revérifiés le **11 novembre 2026 à 14:05:12
+UTC−03 (17:05:12 UTC)**. Dans cette source publiée, `selected_rigid` reste
+absent du registre des fournisseurs et en attente dans l’inventaire.
+L’interface observée ne propose pas de sélecteur d’un autre moteur permettant
+d’activer le candidat local. L’écart entre le gel de développement et le Site
+servi est établi. Cette constatation ne remplace ni une reproduction de
+la session utilisateur ni les preuves propres du candidat fusionné.
+
+**Le gel historique de développement 6B, fondé sur Site 97 / native 0.60, a réussi trois niveaux KLOT en 38 actions et 30 préfixes.** La campagne froide utilise le seul appelant TypeScript, sans plan, état appris ou agent Python fourni à ses décisions. La relecture indépendante du Python original compare **408 événements sans différence**, dont 38 retours sélectionnés, 35 événements acquis, trois retours de frontière de valeur `null` et 98 restaurations. **204 ablations, dont 63 changements d’action ou de refus**, établissent une contribution des connaissances acquises ; les deux corruptions sémantiques contrôlées sont rejetées.
+
+Ce résultat reste attaché au **gel historique de développement fondé sur Site 97 / native 0.60**, avec la version **0.64 réservée**. Les preuves ci-dessous ne sont pas réattribuées au nouveau code en fusion. **Le prédécesseur 10B / 0.62 est réellement publié dans Sites 102–103 et son commit documentaire exact est désormais intégré et vérifié.** 5C / 0.63 reste non publié ; sa livraison effective demeure requise avant le gel et la mesure finale 6B. La fusion des horloges et de la garde courante est vérifiée par les contrôles d’intégration 103 ci-dessous. La fusion du checkpoint 5C reste provisoire. La nouvelle preuve froide fa23, sa relecture originale, les onze rejeux et la QA navigateur Vite sont désormais clos séparément ; le coût officiel et la réconciliation du prédécesseur publié restent ouverts.
+
+| Vérification 6B acquise | Résultat et preuve |
+| --- | --- |
+| Oracle de composant | **1 082 contrôles comportementaux**, plus 2 511 contrôles de provenance ; 18 cas initiaux, sept sessions froides synthétiques, cinq restaurations. [Essai 04](lot6b-evidence/oracle/attempt-04/native-comparison.json). |
+| Intégration ciblée | **10/10 tests**, aucune annulation ni exclusion. Propriétaire unique, cinq refus source, conservation après retour étranger, reprise après Pause et arrêt du budget actif. [Essai 02](lot6b-evidence/integration/attempt-02/execution.json). |
+| Campagne froide KLOT | **3 niveaux / 38 actions / 30 préfixes**, gel de 310 fichiers natifs ; [exécution bornée](lot6b-evidence/development-freeze-01/bounded-execution.json). |
+| Original Python sur KLOT | **408 événements / zéro différence**, 98 restaurations, 204 ablations dont 63 modifient une action ou un refus. [Reçu indépendant](lot6b-evidence/development-freeze-01/source-parity-attempt-01/reader-execution.json). |
+| Qualification du lecteur | **Deux corruptions sémantiques rejetées**, sans nouvelle partie, sans exception ni dépassement valant réussite. [Qualification](lot6b-evidence/development-freeze-01/reader-negative-attempt-01/results/qualification.json). |
+| Budget KLOT à la clôture historique du développement | **350,862154 s / 2 400 s**, avec **2 049,137846 s restantes à cette clôture historique** ; antécédents et diagnostics inclus. Ce point n’est pas le solde courant. [Horloge conservée](lot6b-evidence/klot-case-clock.json). |
+| Inventaire historique du candidat sur base Site 97 | **64/76 entrées raccordées (84,2 %), 12 restantes** ; **198 composants vérifiés**, 148 transferts partiels, 1 023 modules en attente. Zéro module entièrement vérifié et six portes de migration complète encore fausses. |
+
+Le **publié Site 103 / native 0.62 compte 64/76 entrées**, avec WindowQuestion et sans SelectedRigid. Le **candidat historique 6B sur base Site 97 compte lui aussi 64/76**, avec SelectedRigid mais sans WindowQuestion : ces totaux égaux recouvrent des entrées différentes. Le jalon vérifié 103 + 6B atteint **65/76 (85,5 %)**, selon le [nouvel audit exécuté](lot6b-evidence/integration-site103-01/checks-attempt-01/entry-audit.json). Ce jalon historique ne comptait pas encore Binding ; le nouvel audit du candidat fa23, présenté ci-dessous, atteint effectivement 66/76. Les échecs antérieurs **21/22** et **53/54** restent conservés. Le dernier échec portait sur une attente de conservation de Preview antérieure à la création de son cache d’époque ; le test corrigé vérifie l’état exact présent avant le retour étranger.
+
+Le premier passage des cinq commandes techniques a renvoyé zéro, mais l’audit de migration signalait trois références vers **deux fixtures historiques absentes**. Ce succès de processus n’est pas présenté comme une validation sémantique. Le garde générique de l’audit a été corrigé et refuse désormais ces références manquantes ; la [restauration exacte](lot6b-evidence/fixture-restoration/attempt-01/recovery.json) puis le [nouvel audit sémantique](lot6b-evidence/audit-guard/restored-inventory.json) sont réussis, avec zéro erreur. Les autres contrôles et la compilation restent valables sur les mêmes sources natives.
+
+### Validation de l’intégration exacte de Site 103
+
+La fusion avec le publié 103 est maintenant vérifiée sur le
+[gel de développement intégré](lot6b-evidence/integration-site103-01/development-freeze),
+qui comprend **314 fichiers natifs**, digest
+`2e710bd53c5e77d2215f2a6dcb0d2aa5f206debfd793f1b43f91a2c9746d66bd`.
+
+| Contrôle exécuté | Résultat |
+| --- | --- |
+| [Trois fichiers ciblés](lot6b-evidence/integration-site103-01/targeted-attempt-01/execution.json) | **33/33 tests réussis**. |
+| [Runtime commun](lot6b-evidence/integration-site103-01/checks-attempt-01/runtime-tests.json) | **9/9 tests réussis**, dont les rejeux archivés HANO, SYME et DNOI. |
+| [Audit des entrées](lot6b-evidence/integration-site103-01/checks-attempt-01/entry-audit.json) | **65/76 entrées, 85,5 %**, désormais effectivement auditées. |
+| [Audit de migration](lot6b-evidence/integration-site103-01/checks-attempt-01/migration-audit.json) | **202 composants vérifiés, 149 transferts partiels, 1 018 modules en attente ; `failures: []`**. |
+| [TypeScript](lot6b-evidence/integration-site103-01/checks-attempt-01/typecheck.json) | Réussi. |
+
+Les entrées surveillées de ces exécutions sont inchangées. Ces résultats
+qualifient l’intégration exacte 103, y compris le raccordement courant de
+l’horloge et des gardes ; ils ne réattribuent pas l’ancienne campagne KLOT à
+ce nouveau gel. Ces reçus d’intégration 103 n’incluent pas de nouvelle
+preuve KLOT, de navigateur ou de coût ; les preuves ultérieures du candidat
+fa23 sont distinguées ci-dessous.
+
+### Candidat provisoire fa23 : suite, build et structure vérifiés
+
+La fusion du checkpoint 5C **non publié**
+`805b30297dc1b715dbfd9f1197a9a8ba7b361b90` / digest `a33a5f88…` avec 6B
+est réalisée. Le [manifeste du candidat provisoire](lot6b-evidence/provisional-063-01/frozen-candidate/source-manifest.json)
+retient **322 fichiers natifs**, digest
+`fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886`.
+WindowQuestion, Binding et SelectedRigid sont raccordés dans ce candidat ;
+cela ne constitue pas une publication 0.63 ou 0.64.
+
+| Contrôle effectivement acquis sur le candidat ou ses entrées déclarées | Résultat et limite |
+| --- | --- |
+| [Audits préalables](lot6b-evidence/provisional-063-01/preflight-attempt-01/entry-audit.json) et [migration préalable](lot6b-evidence/provisional-063-01/preflight-attempt-01/migration-audit.json) | **66/76 entrées, 86,8 % ; 208 composants vérifiés, 147 transferts partiels, 1 014 modules en attente.** Zéro module entièrement vérifié ; les six portes de migration complète restent fausses. |
+| [Suite de 142 fichiers, tentative 02 conservée](lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-02/summary.json) | **ÉCHEC TERMINAL historique : 5 404/5 405**, un échec, zéro annulation, ignoré ou TODO. Les quatre lots et leurs entrées restent conservés sous cette identité. |
+| [Correction ciblée du contrat d’arrêt](lot6b-evidence/provisional-063-01/stop-contract-targeted-attempt01/execution.json) et [journal](lot6b-evidence/provisional-063-01/stop-contract-targeted-attempt01/execution.log.gz) | Correction **du test seulement**, vérifiée **11/11 en 17,150 s** ; natif fa23 inchangé. |
+| [Suite complète, tentative 03](lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-03/summary.json) | **5 405/5 405 réussis sur les 142 fichiers déclarés**, avec **739 entrées src/tests identiques** entre les quatre groupes et encore actuelles lors de l’agrégation ; fa23/322 inchangé. Cette tentative réussie ne réécrit pas les échecs antérieurs. |
+| [Cinq contrôles de livraison et lecture sémantique](lot6b-evidence/provisional-063-01/final-functional-01/delivery-checks-semantic-summary.json), [commande conservée](lot6b-evidence/provisional-063-01/final-functional-01/delivery-checks-command.json) et [détail des contrôles](lot6b-evidence/provisional-063-01/final-functional-01/validation/checks-run.json) | **TypeScript, audit des entrées, audit de migration, diff et build réussis**, en **32,243 s**. **2 991 enregistrements surveillés inchangés** ; 66/76 entrées et migration **208/147/1 014, `failures: []`**, sans parité V6 complète. |
+| [Binding/common et original indépendant](lot6b-evidence/provisional-063-01/final-functional-01/summary-binding-original.json) | Les **sept tests Binding ont été rejoués** dans la suite de 142 fichiers, tentative 03. Les **huit scénarios, quatre exports et quatre revues originaux**, soit **6 818/6 818 contrôles**, restent les preuves conservées de la tentative 02, à entrées pertinentes inchangées, sans duplication. Ce total n’est pas exclusivement comportemental. |
+| Rejeux déjà clos : [CATR](lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/catr-051/regressions/regression-summary.json), [RSWP](lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/rswp-051/regressions/regression-summary.json), [FOGW](lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/fogw-051/regressions/regression-summary.json), [CONN](lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/conn-050/regressions/regression-summary.json) | **17/17 contrôles par cas**, sans réexécution des quatre réussites. |
+| [Nouvelle reprise VOIS](lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/oracle-execution-observation.json) | **17/17 réussis** avec le harnais 5C exact et **1 536 Mio** ; l’ancien dépassement mémoire reste un **échec conservé**, sans comparaison réussie réattribuée. |
+| [Nouvelle capture froide KLOT fa23](lot6b-evidence/provisional-063-01/klot-fa23-01/capture-readback.json) et [commande facturée](lot6b-evidence/provisional-063-01/klot-fa23-01/capture-case-command.json) | **Départ froid à zéro niveau, cible trois, trois niveaux atteints en 38 actions**, arrêt `target_levels_completed`. Sources natives et code d’exécution inchangés. La [preuve intégrée complète](lot6b-evidence/provisional-063-01/klot-fa23-01/integrated-proof-summary.json) et son [exécution facturée](lot6b-evidence/provisional-063-01/klot-fa23-01/integrated-proof-summary-execution.json) ferment désormais la relecture originale, les ablations et les deux qualifications négatives. |
+
+L’unique échec de la tentative 02 attendait l’ancien motif
+`level_active_time_budget`. Le contrat 5C conserve cette interruption dans la
+preuve du préfixe puis donne priorité au motif public
+`native_acquisition_incomplete` lorsqu’une acquisition Binding bornée demeure
+incomplète. La correction contrôle strictement cette distinction ; la nouvelle
+suite complète est désormais réussie sans modification native. Tous les essais
+antérieurs, dont les résultats incomplets, restent conservés.
+
+Le build produit **`dist/assets/v6-agent-worker-Cpjjo6tG.js`, 6 927 288 octets**,
+SHA-256 `a4f366ad2103b7413a111099827bfa2ba8cf0930b9c8f1e4ebb561aada7daa84`.
+Le [watch de livraison 03](lot6b-evidence/provisional-063-01/final-functional-01/build-watch-attempt03.json)
+conserve les 2 965 entrées d’attempt02 et ajoute 25 entrées nécessaires :
+**2 990 fichiers / 224 563 341 octets**. Le [précontrôle conservé](lot6b-evidence/provisional-063-01/final-functional-01/build-watch-attempt03-preparation.json)
+explicite la fermeture insuffisante d’attempt02 pour ce nouveau groupe :
+carte de transfert, contenus des générateurs, HTML statique et assets publics.
+Les anciens plans et watches restent inchangés.
+
+La [reprise déclarée des sept cas](lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/execution-declaration.json)
+utilise les lignes et pins d’origine, un cas à la fois et le harnais 5C exact
+à 1 536 Mio. L’[agrégat terminal des onze cas](lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/eleven-case-summary.json)
+confirme **11/11 rejeux, 187/187 contrôles et 390 actions**. Les **douze tentatives**
+sont conservées : les onze réussites et l’ancien **OOM VOIS**, qui reste
+un échec distinct. Aucun essai défavorable n’est effacé.
+
+Pour le coût, les [captures fonctionnelles conservées](lot6b-evidence/provisional-063-01/functional-805b/execution-summary.json)
+retiennent quatre formes et 31 actions par rôle, avec passage de 58 à 59
+propriétaires, le seul propriétaire ajouté étant SelectedRigid. Le refus
+initial de la différence `created` et le
+[diagnostic 03 complet mais non qualifiant](lot6b-evidence/provisional-063-01/functional-805b/hypothetical-common-difference-inventory-attempt03-summary.json)
+restent conservés. L’adaptation prospective est maintenant vérifiée par
+[24 tests locaux réussis](lot6b-evidence/provisional-063-01/cost-time-attribution-01/unit-tests-counts-02.json).
+La [qualification structurelle effective](lot6b-evidence/provisional-063-01/cost-time-attribution-01/qualification-result-summary-01.json)
+passe sur **58 points / 64 contrôles / 168 records temporels**, soit 84 par rôle,
+avec `failures: []` et les entrées inchangées.
+
+L’exception porte uniquement sur le float64 de
+`native_reasoning_trace /value/root/members/created/bits`, lié à l’horloge
+`Date.now() / 1000`, à la fenêtre de son rôle et à sa stabilité par session/trace.
+Les autres champs restent exacts ; `origin.source_digest` demeure une
+attribution distincte. Les quatre lecteurs aval passent
+[**204 tests — 51 scénarios × quatre consommateurs — et une compatibilité réelle 4/4**](lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/validation-summary-01.json)
+sur l’attribution, la fixture et les reçus 805b/fa23. Il s’agit de leurs
+validateurs locaux : **aucun parcours CLI complet aval, contrat finalisé,
+précontrôle final ni mesure officielle de coût n’est revendiqué**.
+L’exhaustivité du parcours des graphes, les autres corps, les origines,
+les chaînes et les tickets restent liés au qualificatif et à ses empreintes ;
+aucune formule de nombre de traces ni normalisation générale n’est introduite.
+
+La **nouvelle capture froide KLOT fa23 est réussie**, avec une durée de driver
+de **103,245 s** et une commande encadrée de **103,664 s**. Son rapport conservé
+compte **11 699 122 octets**, SHA-256
+`dd24c51f21bbd382f57056076da7c6af7724d4c4183f458170a77e2dfec8563d`.
+Les trois niveaux historiques sur Site 97 gardent leur identité propre.
+La [preuve intégrée KLOT](lot6b-evidence/provisional-063-01/klot-fa23-01/integrated-proof-summary.json),
+consolidée dans son [intervalle facturé](lot6b-evidence/provisional-063-01/klot-fa23-01/integrated-proof-summary-execution.json),
+est désormais **entièrement close sur fa23** : **30 préfixes**, **408 événements
+originaux dont 340 racines**, **zéro différence**, **35 acquisitions et trois
+retours de frontière `null`**, **98 restaurations — 60 natives et 38 source**.
+Les **204 ablations** comprennent **63 effets**, **198 résultats non vides**
+et **zéro erreur**. Le pin original
+`786dcf51ca57773d8e3a8948ce9ea3655e7baf8e` est inchangé sur **1 786 fichiers**.
+
+Les **deux copies corrompues** sont d’abord acceptées structurellement puis
+rejetées sémantiquement, avec respectivement **14 et 1 118 différences**.
+Aucune interruption ne vaut rejet réussi et la référence positive n’a pas
+été réexécutée. Cette clôture est propre à la capture fa23 ; elle ne modifie
+pas l’identité ni la portée des reçus historiques Site 97.
+
+### QA navigateur KLOT : parcours observé et fermeture vérifiée
+
+La [QA navigateur 02](lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/browser-functional-summary.json)
+est **réellement réussie par observation CUA**, dans un nouvel onglet 7,
+en départ froid au niveau 1. Elle utilise **Vite et son worker TypeScript de
+développement**. Le bundle de production `dist` possède sa preuve de build
+distincte ; ce parcours UI ne prétend pas avoir testé ce bundle.
+
+Pause a été demandée pendant **Preparing agent**. Le message d’arrêt à la
+frontière d’action a été suivi de **Paused, zéro action**. Les deux observations
+à **20:14:54.732 UTC** et **20:15:11.006 UTC** confirment encore zéro action.
+**Run to next level** a ensuite repris réellement le parcours :
+
+| Point observé | Actions cumulées | Niveaux terminés | Plans affichés |
+| --- | ---: | ---: | ---: |
+| Fin du niveau 1 | 12 | 1 | 10 |
+| Fin du niveau 2 | 24 | 2 | 18 |
+| Fin de la cible de trois niveaux | 38 | 3 | 30 |
+
+L’URL finale porte **`level=4`**. La
+[capture d’écran réelle des trois niveaux terminés](lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/three-levels-completed.png)
+est conservée. Cette vérification établit Pause avant le prochain envoi et
+la reprise observée ; elle ne revendique aucune préemption de la recherche
+interne déjà commencée dans le worker.
+
+La fermeture est effectivement vérifiée : le premier inventaire conservait
+encore l’onglet 7, le second constate son absence. Le preview a reçu son arrêt
+et son état est **`stopped`** ; le superviseur **98145** est terminal avec
+**exit 0**, et son groupe est récolté sans orphelin. La
+[relecture finale facturée](lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/root-final-review.json)
+contrôle le lease réel : **`reaped: true`**, aucun signal et aucune erreur.
+Le helper atteste cette exécution et cette fermeture ; le succès UI repose
+sur les observations CUA, pas sur une assertion du helper.
+Les **3 009 entrées surveillées restent inchangées**.
+
+La **cible de 360 secondes a été dépassée** : **418,633882138 s** pour le wrapper
+et **418,475255 s** jusqu’à la fermeture opérateur, sous son seuil de 480 s.
+La borne externe de **600 s** est respectée. Les interactions et le temps de
+compaction sont inclus dans le débit ; aucune correction de temps n’est
+soustraite.
+
+**QA01 reste un échec technique conservé de 60,152 s** : le CLI avait annoncé
+une URL prête puis restait vivant, alors que le helper attendait à tort la
+fin de sa commande. Aucune page n’avait été ouverte ; ce reçu ne décrit pas
+un échec du jeu.
+
+Au point historique suivant QA02 et sa **lecture finale facturée, vers
+20:32 UTC le 11 novembre 2026**, l’horloge était **inactive**, à
+**1 221,0363642830062 secondes cumulées sur 2 400**, avec
+**1 178,9636357169938 secondes restantes**. Ce point remplaçait celui de
+20:19:50 et comprenait la clôture effective du navigateur. Le diagnostic
+source ultérieur porte le dernier compteur fermé à **1 424,8841320940055 s**,
+avec **975,1158679059945 s restantes**, comme indiqué en tête.
+Le parcours final des outils de coût, la mesure officielle, la publication
+effective 0.63 et sa réconciliation, puis la publication 0.64 restent ouverts.
+
+Le [checkpoint de preuves complet, effectivement poussé et vérifié](lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/complete-checkpoint-summary.json)
+est **`41cedc1f6a89b8639c19f0dc45eae24c264ad3c0`**, sur la branche
+`lot6b-selected-rigid-checkpoint-20261111`, confirmé le **11 novembre 2026 à
+20:55:52.559017 UTC**. Son parent est
+`17d6c1aa3532e4ff74a98a309e4dfb9c3bc4fb59`. Le complément réellement poussé
+comprend **78 fichiers supplémentaires / 4 433 894 octets** : QA02 complète
+avec capture et fermetures, horloge finale, trois documents dans leur état
+de clôture et métadonnées. Le natif reste **fa23 / 322 fichiers inchangé**.
+Ce checkpoint de preuves ne constitue pas une publication de Site.
+
+Le [checkpoint principal 17d6c1aa](lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/core-checkpoint-summary.json)
+reste conservé : **sept lots poussés et vérifiés, 356 fichiers /
+154 054 085 octets**, confirmation à **20:51:49.609783 UTC**.
+Le [checkpoint de la règle de travail courante](lot6b-evidence/source-workflow-20261111/policy-checkpoint-summary.json)
+**`2e555ec44e792c4f75d400205ead5de595e95791`** est poussé et vérifié sur la
+branche propre, sans verrou global. Les **38 tests de coordination passent** ;
+le transport direct est terminé, avec son groupe de processus absent.
+Le checkpoint précédent `1372d2df336f9919d7b5892160936d928720c24c` et le
+checkpoint de preuves `41cedc1f6a89b8639c19f0dc45eae24c264ad3c0` restent
+conservés. Cette sauvegarde de source ne publie pas de Site. La clôture
+documentaire qui cite ce nouveau checkpoint fait l’objet du commit suivant.
+
+`a01e6faf330d82fa220feac0c9ad4632bb75a9de`, vérifié à 18:34:56 UTC,
+reste un jalon historique, comme le
+[checkpoint 17bba57a](lot6b-evidence/provisional-063-01/source-checkpoint-17bba57a.json).
+Le jalon antérieur 103 + 6B, **33 + 9 tests et 65/76 entrées**, conserve son
+identité `7696e0c…` / `2e710bd…`.
+
+La publication effective **5C / 0.63** demeure requise et doit être réconciliée
+avec les entrées de `805b3029`. Une identité démontrée des entrées pertinentes
+permettra de conserver les preuves correspondantes ; une différence exigera
+la qualification des contrôles affectés. **Aucun pourcentage de coût 6B ni
+publication 0.64 n’est acquis.**
+La [publication effectivement revérifiée](lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/publication-observation.json)
+à **20:34:24.999 UTC le 11 novembre 2026** reste **Site 103**, commit
+`4afcbfe6a25bd3a88223be543e443bc53b9c8814` / **native 0.62**, en accès
+propriétaire seul. **Ni 0.63 ni 0.64 ne sont publiées.** Ce constat actualisé
+reste distinct du parcours local Vite qualifié.
+
+Le créneau de coordination **`lot5c-cost-a33a5f88-recovery-02`** a été
+explicitement libéré le **11 novembre 2026 à 20:30:25.610691 UTC** :
+`quiet_requested: false`, `quiet_released: true`, motif déclaré
+`failed_or_expired` et `performance_started: false`. Aucune mesure officielle
+5C n’a démarré dans ce créneau. Cette issue ne précise pas sa cause et
+n’entraîne pas de nouvel essai automatique ; elle ne clôt ni 0.63 ni le coût 6B.
+
+La [dernière observation du statut 5C](lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/predecessor-final-status-observation.json)
+rapporte la phase **`cost_unmeasured_publication_pending`**. La cause
+explicitement rapportée pour ce créneau est **600 secondes sans accusés
+d’inactivité frais de 8A et 10C** : **zéro tentative de verrou exclusif,
+zéro échantillon officiel et zéro publication**, sans nouvel essai automatique.
+Ce constat ne diagnostique pas un ancien détenteur de verrou.
+La publication effective 0.63 et le coût officiel 6B restent donc ouverts.
+L’ordre demeure **5C 0.63 → 6B 0.64 → 8A 0.65 → 10C**.
+
+### Suite du lot 6 et critère de coût
+
+| Étape | État actuel | Prochaine opération |
+| --- | --- | --- |
+| 6A `preview_packing` | Livré, Sites 96–97 / native 0.60 | Conserver ses preuves et réserves. |
+| 6B `selected_rigid` | fa23/322 : **5 405/5 405**, cinq gates et worker ; sept tests Binding rejoués et 6 818 contrôles de scénarios conservés ; **11/11 rejeux, 187/187 contrôles, 390 actions** ; structure 58 points, preuve KLOT et **QA navigateur Vite** closes | Préparer les outils et le contrat de coût, poursuivre tests fonctionnels et sauvegardes régulières sans verrou global ; réconcilier le publié 0.63 effectif avant la mesure officielle et la publication 0.64, chacune sous courte exclusivité. |
+| 6C `observed_rigid_cargo` | À transférer | Après la clôture intégrée de 6B. |
+| 6D `shared_settlement` | À transférer | Après 6C, avec les critères communs du lot. |
+
+Le candidat intégré conserve le helper `currentExecution`, le cinquième argument courant de la garde SelectedRigid et le quota `remainingLevelActions`, avec le délai plus court du demandeur après conversion d’origine d’horloge. Ces propriétés et les entrées pertinentes devront être réconciliées avec la publication réelle 0.63. La tentative 03 clôt désormais la suite déclarée sur ce gel provisoire ; les opérations restantes du tableau ne sont pas anticipées.
+
+**Aucun pourcentage de coût 6B n’est encore revendiqué.** Le critère autorisé reste la **médiane de session complète strictement inférieure à +10 % pour chaque jeu testé**. Une phase peut dépasser +10 % lorsque ce critère global passe ; tous les diagnostics et échantillons sont conservés, sans addition de phases imbriquées et sans compensation entre jeux.
+
+Les plafonds de recherche ne bornent pas le journal source complet. Pause ne préempte pas la recherche déjà engagée dans le worker. La revue statique conserve également une réserve sur le chemin asynchrone après autorisation, sans nouvelle garde rafraîchie avant son étape suivante. Ces limites ne sont pas une cause établie du signalement KLOT ; la [filiation source → TypeScript → consommateur → preuve](lot6b-selected-rigid-lineage.md) les distingue de l’écart de publication effectivement constaté.
+
+### Sauvegarde distante du jalon 6B
+
+Le commit validé `e1f42dac8eb4226f8a3bc78d89d6bee6f463da1e` est conservé dans la branche `lot6b-selected-rigid-checkpoint-20261111`. Le commit de transport final `5b03fb53526d6016fde61db32a2d4fbb1de0f5bb` a le même arbre Git et conserve ce commit dans son ascendance. Le [reçu vérifié](lot6b-evidence/source-checkpoint-01/transport-receipt.json) et le [plan de transport](lot6b-evidence/source-checkpoint-01/transport-plan.json) documentent trois lots de 24 Mio bruts au maximum, puis la jonction d’historique. Le premier envoi de 111,2 Mio, refusé par la limite de 64 Mio par envoi, reste consigné. Cette sauvegarde de branche ne crée ni nouvelle version Site ni déploiement ; l’intégration et les portes finales 6B restent ouvertes. La [note de reproduction](lot6b-evidence/source-checkpoint-01/README.md) précise la reconstruction préalable des fixtures héritées sur un checkout neuf. Le contrôle historique effectué après ce transport constatait Site 101 et l’accès privé inchangé. Le constat courant de Site 103 est consigné en tête ; il ne modifie ni les octets ni la portée du checkpoint de développement.
+
+<!-- LOT6B_DEVELOPMENT_CURRENT_END -->
+
+> **Périmètre 5C conservé :** la section suivante reproduit son état au checkpoint
+> `805b30297dc1b715dbfd9f1197a9a8ba7b361b90`, **non publié**. Ses décomptes et
+> preuves qualifient le candidat 5C dans son propre périmètre ; ils ne valent
+> pas un audit neuf de la fusion avec SelectedRigid.
+
+<!-- LOT5C_ROADMAP_CURRENT_START -->
+
+<!-- LOT5C_PRIORITY_PUBLICATION_CURRENT_START -->
+### Publication prioritaire 0.63 explicitement demandée
+
+La [nouvelle instruction utilisateur](lot5c-evidence/recovery/publication-063-priority/authorization.json) autorise la publication prioritaire de **native 0.63 sans attendre la disponibilité ni les ACK de 6B, 8A et 10C**. Elle remplace, pour cette publication, la condition antérieure d’acceptation préalable du coût. Les validations fonctionnelles restent acquises et réutilisées ; **le coût officiel STCK et SMLP reste non mesuré et non accepté**. Le critère futur strictement inférieur à +10 % par jeu et la conservation des dépassements de phase ne changent pas.
+
+Le prédécesseur effectivement publié a été [recontrôlé](lot5c-evidence/recovery/publication-063-priority/predecessor-readback.json) : Site 103 / native 0.62, audience privée propriétaire inchangée. La publication est maintenant prioritaire, sous le seul gardien de publication borné, sans demande de calme aux autres lots. **La réussite effective sera établie par le reçu natif de déploiement.** Les états de blocage et tentatives ci-dessous sont conservés comme historique antérieur à cette décision.
+<!-- LOT5C_PRIORITY_PUBLICATION_CURRENT_END -->
+
+
+## Lot 5C : validé fonctionnellement, coût 0.63 bloqué avant mesure
+
+**Clôture du 11 novembre 2026 à 21:58:17 UTC : le cycle unique `available-03` a expiré faute des ACK frais de 6B, 8A et 10C. La demande de calme est explicitement levée, la session 71059 est terminale et son nettoyage est confirmé. Aucun EX n’a été tenté, aucune readiness 04 ni mesure officielle n’a été produite et 0.63 n’a pas été publiée.** Le [reçu de clôture](lot5c-evidence/recovery/coordination/recovery-03/available03-closure.json) conserve les faits et leurs limites. Le travail courant s’effectue désormais **sans verrou global**, dans le checkout et la branche propres à 5C ; commits et push n’attendent aucune publication étrangère.
+
+**5A et 5B restent livrés. Le candidat 5C intègre les sources réellement publiées de 6A, Sites 96–97 / native 0.60.0, du suivi 7, Sites 98–101 / native 0.61.0, puis de 10B, Sites 102–103 / native 0.62.0.** La [réconciliation 10B](lot5c-evidence/recovery/integration-published-10b/site103-reconciliation.json) prend pour prédécesseur natif exact le Site 102, source `1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464`, et fusionne la clôture documentaire réellement publiée dans le Site 103, source `4afcbfe6a25bd3a88223be543e443bc53b9c8814`. Les **318 fichiers natifs** du candidat restent identiques au gel `a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57` : les 308 fichiers partagés hors runtime/types sont égaux au prédécesseur, les deux différences partagées et les huit fichiers supplémentaires portent Binding. La [revue indépendante](lot5c-evidence/recovery/integration-published-10b/native-integration-independent-review.json) confirme la conservation des correctifs d’horloge 10B et de l’acquisition Binding. Le candidat **0.63.0** conserve **65/76 entrées raccordées, zéro partielle et 11 restantes** ; native 0.62 en raccorde 64/76. **5C n’est pas encore publié et son coût propre n’est pas encore mesuré.**
+
+Le [gel final](lot5c-evidence/recovery/integrated-final-01/source-freeze-binding.json), base source `805b30297dc1b715dbfd9f1197a9a8ba7b361b90`, archive **867 entrées** dont les **318 fichiers natifs et 138 fichiers de tests**. Il est sauvegardé sur la branche de reprise au commit `c8ff4f2b4d495e12494130112258b7a62281d93c`, vérifié à distance. Les preuves fonctionnelles finales et les **106 fragments exacts des rapports de rejeu** ont ensuite été sauvegardés par six envois bornés jusqu’au [checkpoint `722c949e`](lot5c-evidence/recovery/coordination/checkpoint-transport-722c949e.json), également vérifié à distance ; ces envois ne sont pas des publications du site. La préparation complète, le refus du verrou et cette feuille de route sont ensuite conservés dans le [checkpoint `5d6184f7`](lot5c-evidence/recovery/coordination/checkpoint-transport-5d6184f7.json), vérifié à distance, sans publication.
+
+| Porte fraîche sur le gel final | Résultat acquis |
+| --- | --- |
+| [Suite intégrée de 138 fichiers](lot5c-evidence/recovery/integrated-final-01/validation/delta-tests-run.json) | **5 339/5 339 tests**, zéro échec, annulation ou test ignoré ; sources et entrées de test inchangées |
+| [TypeScript, entrées, migration, diff et build](lot5c-evidence/recovery/integrated-final-01/validation/checks-run.json) | **5/5 contrôles**, avec vérification séparée de `failures: []` dans l’audit de migration |
+| [Preuve commune Binding fraîche](lot5c-evidence/recovery/common/common-final-01/summary.json) | **7 tests natifs / 8 scénarios**, puis **6 818/6 818 comparaisons originales** sur quatre chaînes froides séparées : 412 opérations, 80 retours, 80 rétentions et zéro exception source |
+| [Onze rejeux enregistrés](lot5c-evidence/recovery/integrated-final-01/regressions/regression-summary.json) | **11/11 cas et 187/187 comparaisons**, 390 commandes issues des traces retenues, 401 paquets publics complets, 289 préfixes et 679 requêtes ; toutes les entrées et les sources sont inchangées. |
+| [Contrôle du build dans le navigateur](lot5c-evidence/recovery/integrated-final-01/browser-qa/summary.json) | Interface native prête, zéro action d’agent, aucune erreur de l’application observée ; page CASC par défaut initialisée, sans campagne ; onglet et preview fermés |
+| [Qualification structurelle 01](lot5c-evidence/recovery/performance-integrated-01/owner-qualification-independent-review.json) | **64 contrôles du qualificateur et 92 contrôles indépendants**, 58 points et 40 deltas attribués uniquement à Binding |
+| [Précontrôle statique corrigé 02](lot5c-evidence/recovery/performance-integrated-02/static-preflight.json) | **76/76 conditions**, après deux liens de dépendances manquants dans la baseline ; captures fraîches, qualification **64/64** et équivalence de répétition **29/29**. [Revue indépendante de 02](lot5c-evidence/recovery/performance-integrated-02/independent-readiness-input-review.json) : **84/84 contrôles**, aucun échantillon officiel mesuré. |
+| [Préparation complète avant mesure](lot5c-evidence/recovery/performance-integrated-02/readiness.json) | **`ready` obtenu le 11 novembre à 15:57:56 UTC−03**, après rattachement aux preuves terminales et aux trois accusés réels ; cette preuve historique ne vaut ni mesure ni publication. |
+| [Ouverture de la fenêtre de coût](lot5c-evidence/recovery/coordination/cost-final-01/controller-lock-refusal-01.json) | **Refus du verrou exclusif avant tout échantillon** ; zéro session de coût, aucune fenêtre créée. [Blocage et libération](lot5c-evidence/recovery/coordination/cost-final-01/lock-blocker-and-quiet-release.json) : attente des autres lots explicitement libérée à **16:08:34 UTC−03** ; nouvelle isolation et nouvelle préparation exigées avant reprise. |
+| [Reprise coordonnée 02](lot5c-evidence/recovery/coordination/cost-final-02/attempt-result.json) | **Fenêtre de disponibilité expirée après 600 secondes** : ACK frais 6B reçu, 8A/10C manquants ; zéro EX tenté, aucune readiness 03 et aucun coût. Demande explicitement levée à **17:30:25 UTC−03**, session terminée, aucune relance automatique. |
+| [Coordination conforme à la nouvelle règle](lot5c-evidence/recovery/planning/coordination-v4-independent-review.json) | **48/48 contrôles, 122 sujets exacts** ; 7/7 tests ciblés du coût et 4 scénarios / 69 contrôles du wrapper ordinaire. Aucun mutex global pour développement, tests, commits et push ; EX limité à l’ABBA et son intégrité terminale. |
+| [Cycle unique disponible 03](lot5c-evidence/recovery/coordination/cost-final-03/attempt-result.json) | **Expiration après 600 secondes**, sans ACK frais 6B/8A/10C. Libération effective à **21:58:17,652553 UTC**, soit 600,002472 secondes après la demande ; session 71059 terminale, code 124, nettoyage confirmé. Aucun EX, readiness 04, échantillon ou publication ; aucune relance automatique. |
+
+La première [tentative de précontrôle 01](lot5c-evidence/recovery/performance-integrated-01/static-preflight.json) reste intacte avec ses **deux refus sur 76 conditions**. La [réparation](lot5c-evidence/recovery/performance-integrated-02/dependency-repair.json) partage les dépendances déjà présentes avec la copie 0.62, après vérification des manifestes identiques ; aucun octet natif n’a changé. Le contrôle navigateur a duré **270,393 secondes de préparation à fermeture**, au-delà de l’allocation annoncée de 180 secondes ; cet écart est conservé sans lui attribuer une mesure officielle ou une action de jeu.
+
+Le correctif générique d’origine d’horloge pris en charge par 10B est maintenant intégré depuis le commit `4e7e4742b997128346e84f62b7a4fb8b5d4e47c5`, avec ses tests et sa provenance. Le caller calcule la durée restante dans l’horloge de l’appelant, puis la reporte dans celle du runtime. Une échéance expirée ne peut plus être prolongée par un décalage d’origine. Le mécanisme d’acquisition de Binding, qui conserve le niveau du premier retour réel, reste préservé.
+
+| Vérification ciblée antérieure, conservée dans son périmètre | Résultat acquis |
+| --- | --- |
+| [Tests du runtime](lot5c-evidence/recovery/integration-published-6a/native-runtime-tests.execution.json) | **9/9**, dont les deux sens de décalage d’horloge et les rejeux publics HANO, SYME et DNOI déjà enregistrés |
+| [Contrats Window](lot5c-evidence/recovery/integration-published-6a/window-kernel-tests.execution.json) | **4/4** |
+| [Bornes d’acquisition Binding](lot5c-evidence/recovery/integration-published-6a/binding-acquisition-bounds-retry-01.execution.json) | **3/3** : acquisition passive, sélectionnée et échéance du niveau ; les quatre autres tests communs ne sont pas réexécutés dans ce passage ciblé |
+| [Bilan et intégrité](lot5c-evidence/recovery/integration-published-6a/summary.json) | **16/16 tests**, contrôle TypeScript, audit des entrées et audit sémantique de migration réussis ; **318 fichiers natifs inchangés depuis le gel**, digest `a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57` |
+
+Un seul fichier natif diffère du gel `common-02` : `v6-native-runtime.ts`, pour la correction d’horloge. La [parité composant 98/98](lot5c-evidence/recovery/source-oracle/parity-02-execution.json) et la [preuve commune `common-02`](lot5c-evidence/recovery/common/common-02/summary.json), huit scénarios et **6 818/6 818 contrôles Python sur 412 opérations et 80 retours**, conservent leur provenance et leur portée antérieures. Elles ne sont pas réétiquetées comme un nouveau passage complet sur le gel actuel. Les audits maintiennent **205 composants vérifiés, 147 transferts partiels, 1 017 modules en attente et zéro module entièrement vérifié** ; les six portes de migration globale restent fausses.
+
+Les tentatives antérieures restent conservées. L’[erreur initiale de répertoire](lot5c-evidence/recovery/integration-published-6a/bounded-validation-amendment-01.json) a arrêté les trois tests Binding avant le runtime ; le même code passe après correction du seul chemin de sortie. Le premier audit de migration a terminé avec un code 0 mais signalait trois preuves manquantes pour deux fixtures. Leur [reconstitution exacte depuis les fragments publiés](lot5c-evidence/recovery/integration-published-6a/inherited-fixture-materialization.json), vérifiée contre l’inventaire 6A, permet la reprise sans erreur sémantique. Les échecs `common-01` et du premier comparateur groupé `common-02` restent également conservés.
+
+**Mesure du suivi 7 : première fenêtre retirée, répétition complète propre acceptée.** Deux lectures trop volumineuses lancées par les revues 5C ont chevauché sa première fenêtre A1/B1/B2/A2. L’[incident conservé](lot5c-evidence/recovery/coordination/lot7-quiet-io-deviation-20261111.json) a été [reconnu par le fil 7](lot5c-evidence/recovery/coordination/lot7-isolation-withdrawal-observation.json). Les anciens échantillons et résultats numériques restent inchangés, mais leur acceptation comme mesure isolée est retirée.
+
+L’[observation des reçus de la répétition propre](lot5c-evidence/recovery/coordination/lot7-clean-repeat-observation/observation.json) conserve la nouvelle série complète : **32 sessions, 400 actions, 40/40 identités de travail et 231/231 contrôles arithmétiques**, sur le même gel natif 0.61. Le coût global accepté est **STCK −2,924030 % et SMLP +0,009074 %**. Les restaurations **STCK +19,386244 % et SMLP +17,331942 %** restent des dépassements de phase visibles, acceptables selon la règle globale utilisateur. La libération explicite intervient après acceptation. Les six reçus exacts de cette observation sont maintenant complétés par l’intégration de la [clôture réellement publiée dans le Site 101](lot5c-evidence/recovery/integration-published-7/site101/publication-readback.json), source `d75a36f0a99bf6c301034523a3138a64d2f6e744`. Les empreintes des 318 fichiers natifs et les entrées de code, tests et scripts sont inchangées ; cette fusion documentaire ne déclenche aucun nouveau test et ne constitue aucun verdict de coût 5C. Le [point de reprise 5C `2b0ea701`](lot5c-evidence/recovery/coordination/checkpoint-transport-2b0ea701.json) et son rejet de transport antérieur restent conservés.
+
+**Les onze rejeux sont terminés avec succès.** Le [premier arrêt de préparation](lot5c-evidence/recovery/integrated-final-01/regressions-preparation/initial-preflight-failure.json) précède tout rejeu : les onze baselines compressées étaient absentes. Leur [reconstitution exacte](lot5c-evidence/recovery/integrated-final-01/regressions-preparation/pinned-input-materialization.json) utilise 84 fragments identiques aux octets publiés, puis vérifie les **22/22 empreintes** de baselines et traces. Le [lancement de reprise réellement terminé](lot5c-evidence/recovery/integrated-final-01/regressions-preparation/retry-driver-launch.execution.json) conserve le code de sortie 0 et les 187 comparaisons, sans substituer de nouveaux résultats aux références.
+
+**La préparation complète avant mesure a réellement terminé avec le statut `ready`, puis le premier lancement du contrôleur a refusé le verrou exclusif à 15:58:08 UTC−03.** Le refus intervient avant la création de toute fenêtre ou cohorte : **zéro échantillon officiel**, aucun verdict de coût et aucune publication 0.63. Les vérifications bornées de 5C, 6B, 8A et 10C ne trouvent aucun ancien détenteur dans leurs vues de processus limitées. Une ancienne tentative d’outil 8A sans identifiant de session récupéré demeure une piste non confirmée ; elle n’est pas déclarée responsable. Aucun processus inconnu n’a été arrêté et le verrou commun n’a été ni supprimé ni recréé.
+
+La [libération explicite à 16:08:34 UTC−03](lot5c-evidence/recovery/coordination/cost-final-01/lock-blocker-and-quiet-release.json) avait permis la reprise du travail ordinaire sous le même verrou partagé. Cette obligation historique de SH est maintenant supprimée par l’instruction utilisateur ; les preuves de l’ancienne règle restent conservées. La readiness et les premiers accusés restent intacts comme preuves historiques ; **ils ne peuvent pas autoriser une nouvelle fenêtre après cette libération**. Les deux projets d’assouplissement documentaire des attestations ont été retirés sans exécution ; le [dernier retrait](lot5c-evidence/recovery/planning/withdrawn-ack-field-resolution/withdrawal.json) conserve les versions examinées, tandis que les gardes strictes originales sont rétablies.
+
+**Prochaine étape après la clôture de `available-03` :** obtenir une disponibilité contemporaine et des confirmations fraîches de 6B, 8A et 10C, incluant leurs travailleurs, pour une future fenêtre explicitement coordonnée. Aucun cycle supplémentaire n’est lancé automatiquement dans cette reprise. Les demandes 01, 02 et 03 sont levées ; leurs ACK et readiness historiques ne valent pas autorisation future. Le reçu 10C établit seulement la disponibilité EX instantanée du même mutex à 17:42:14 UTC−03, sans identifier l’ancien détenteur. Une nouvelle isolation, une readiness fraîche et une acquisition EX réelle restent obligatoires avant l’ABBA inchangé. La publication 0.63 attend l’acceptation réelle du global de STCK et de SMLP séparément, puis le contrôle du prédécesseur effectivement publié. Le développement, les tests et les sauvegardes de branche continuent indépendamment de cet ordre de publication.
+
+La [revue documentaire de clôture](lot5c-evidence/recovery/coordination/cost-final-01/documentary-closure-review.json) précise une phrase prospective recopiée dans la readiness : les « 187 contrôles prévus » décrivent le contrat au moment du gel. Les reçus terminaux établissent ensuite **187/187 comparaisons effectivement réussies**. Le contrat et la readiness d’origine restent inchangés, avec les réserves KATA et la portée distincte de la preuve Binding.
+
+Le [périmètre final](lot5c-evidence/recovery/integrated-final-01/test-scope.json) conserve **138 fichiers de tests** : les 133 fichiers déclarés du suivi 7, les trois suites Binding et deux suites WindowQuestion supplémentaires, après déduplication avec les 44 fichiers déclarés par le **10B réellement publié**. Les déclarations et leurs empreintes sont identiques aux entrées du [plan prospectif historique](lot5c-evidence/recovery/planning/prospective-final-scope-site101.json), conservé sans réécriture. Ce périmètre a été déclaré avant exécution ; son nouveau passage complet donne les 5 339 résultats ci-dessus. Les quatre exclusions LKEY restent explicites. Les **11 rejeux hérités / 187 contrôles réussis** conservent les mêmes lignes et empreintes, notamment le point de comparaison KATA 0.60. **HPDL n’est pas ajouté comme régression complète** : sa preuve 10B reste partielle, avec 38 préfixes acquis pour 39 retours publics complets et trois niveaux observés. Les horloges closes et les portées distinctes des preuves sont conservées.
+
+L’[outil de restitution du coût 5C](lot5c-evidence/write-cost-results.py) est maintenant préparé, avec [32 contrôles de syntaxe, CLI et cas synthétiques](lot5c-evidence/recovery/planning/cost-renderer-preparation.json), puis une [revue indépendante](lot5c-evidence/recovery/planning/cost-renderer-independent-review.json). Il distingue les branches historique stricte et qualifiée, refuse les preuves manquantes ou contradictoires et conserve les dépassements de phase. Un global exactement à +10 % reste refusé. Aucun rapport de coût réel 5C n’est produit par ces contrôles ; son rendu complet attend les véritables reçus de la future fenêtre. Le protocole précise maintenant l’arrêt de toutes les voies et de leurs travailleurs, avec seuls les petits fichiers de coordination nommés consultables jusqu’à libération explicite.
+
+Le critère de coût reste la médiane groupée de session complète **strictement sous +10 % pour chacun de STCK et SMLP**, contre le prédécesseur réellement publié contenant 6A, le suivi 7 et 10B. Une phase au-delà de +10 % peut être acceptée si ce global passe ; tous les diagnostics et échantillons restent conservés. Les durées fonctionnelles partagées de cette étape ne sont pas des mesures de performance.
+
+Les sessions longues restent un chantier distinct : traitement en delta, compaction démontrée des données devenues inutiles, chemins continus et propagation générique des coups obligatoires. **WEAV niveau 6 reste une réserve**, avec son budget épuisé conservé. Aucun nouveau lancement réel de jeu n’a été effectué dans cette étape.
+
+<!-- LOT5C_RECOVERY02_CURRENT_START -->
+
+### Reprise 02 close : protections vérifiées, disponibilité non obtenue
+
+La [recherche ciblée](lot5c-evidence/recovery/coordination/recovery-02/targeted-recovery.json) a duré **106,577 secondes pour un budget annoncé de 180 secondes**. Aucun identifiant exploitable du détenteur n'a été retrouvé ; **aucune ancienne session n'a été fermée**. Les inspections `/proc` déjà connues n'ont pas été répétées. Le mutex existant, device **27** / inode **1971854**, est préservé. L'hypothèse d'une ancienne commande attendant une saisie reste non confirmée et n'est attribuée à aucun lot.
+
+Les **867 entrées gelées restent inchangées**, ce qui permet la [réutilisation des preuves fonctionnelles](lot5c-evidence/recovery/coordination/recovery-02/functional-proof-reuse-review.json). Le nouvel [auxiliaire borné](lot5c-evidence/recovery/planning/coordination-tools-v2/README.md) reçoit l'entrée avant SH, recontrôle les états après saisie et après acquisition, borne les attentes et le travail, empêche l'héritage du descripteur et termine ses groupes enfants avant libération. Il passe **18/18 scénarios et 239/239 vérifications sur des mutex temporaires**. Les anciens lanceurs Scratch [refusent immédiatement](lot5c-evidence/recovery/coordination/recovery-02/retired-interactive-launchers.json) ; leurs originaux et leurs échecs restent conservés. Ces corrections préviennent une récidive sans fermer une ancienne exécution inaccessible.
+
+Le [contrôleur et son helper](lot5c-evidence/recovery/planning/coordination-v2-preparation-03.json) passent **8/8 scénarios temporaires** ; le [coordinateur parent](lot5c-evidence/recovery/planning/orchestrator-v2-tests-02.execution.json), **13/13**. Ils couvrent notamment expiration, interruption, échec, descendant survivant au leader, non-héritage du verrou et libération malgré une erreur de journal. La [revue indépendante globale](lot5c-evidence/recovery/planning/coordination-v2-independent-review.json) passe **58/58 contrôles**, épingle **52 fichiers** et ajoute **25 assertions indépendantes**. Les premiers échecs de fixtures restent intacts. La [préparation 03](lot5c-evidence/recovery/performance-integrated-03/coordination-repreparation.json) passe **76/76 conditions statiques** : les captures et populations sont réutilisées, seule leur liaison documentaire `cases.path` change. Le protocole ABBA et ses critères sont inchangés.
+
+Le checkpoint initial **`501198d7638c7a56c3b85d357beb917469899402`** est conservé dans l'ascendance. Les corrections et leur revue sont [sauvegardées et vérifiées à distance](lot5c-evidence/recovery/coordination/recovery-02/source-checkpoint-34d919cb-retry01-live.json) au commit **`34d919cb059322bdecc160606faac0bccd23c75b`**, sur la même branche de récupération. Le premier lancement réel du nouvel auxiliaire a expiré après **45,005 secondes avant toute prise de verrou et tout enfant** ; son reçu est conservé. Le transfert suivant a réellement terminé, code 0, groupe enfant fermé et SH libéré. Ces sauvegardes ne publient pas le site.
+
+**L'unique [demande neuve](lot5c-evidence/recovery/coordination/cost-final-02/request.json), `lot5c-cost-a33a5f88-recovery-02`, a été émise le 11 novembre 2026 à 17:20:25,609789 UTC−03, avec une échéance de 600 secondes.** Le lot 6B a fourni son ACK frais à **17:22:15,406525** après fermeture réelle de ses commandes et travailleurs. Les ACK frais de **8A et 10C manquaient à l'échéance** ; leurs anciens états n'ont pas été réutilisés. Le [reçu terminal](lot5c-evidence/recovery/coordination/cost-final-02/attempt-result.json) établit l'expiration `availability_deadline_before_fresh_acks`, la levée explicite à **17:30:25,610691 UTC−03** et le nettoyage confirmé. La session outil **17255** est réellement terminée, code **124**.
+
+| Résultat de la reprise 02 | État effectivement constaté |
+| --- | --- |
+| Nouvelle readiness / fenêtre officielle | **Aucune créée** |
+| Nouvelle tentative de verrou exclusif | **Zéro** : les trois ACK frais n'étaient pas réunis |
+| STCK : médiane de sessions complètes | **Non mesurée, non acceptée** |
+| SMLP : médiane de sessions complètes | **Non mesurée, non acceptée** |
+| Coordination | **Demande explicitement levée ; travaux ordinaires autorisés ; aucune relance automatique** |
+| Publication 5C / 0.63 | **Non effectuée** ; [dernière publication recontrôlée](lot5c-evidence/recovery/coordination/recovery-02/site-readback-after-recovery02.json) : Site 103, même native 0.62 que Site 102 |
+
+La [clôture vérifiée](lot5c-evidence/recovery/coordination/recovery-02/recovery-closure.json) distingue ce manque de confirmations du **refus EX historique de la tentative 01**. Ce nouveau cycle ne prouve pas que le verrou demeure détenu : aucun EX n'a été tenté. Le détenteur ancien reste inconnu, aucun processus non identifié n'a été arrêté, et aucune règle de coût n'a été assouplie.
+
+**Suite prévue lors de la clôture02, désormais réévaluée par le constat de disponibilité ci-dessous :** Les outils disponibles n'exposent pas l'inventaire global des exécutions et ne permettent pas de fermer une session dont le véritable identifiant est perdu. L'administrateur du service d'exécutions doit consulter l'inventaire réel et déterminer s'il subsiste un détenteur du mutex existant. Si un détenteur est identifié, il doit établir si son travail utile est terminé, puis fermer cette exécution précise par le mécanisme de cycle de vie pris en charge seulement lorsque cette fermeture est justifiée, et fournir son reçu terminal. Il faut également obtenir la disponibilité actuelle de 8A et 10C, racines et sous-agents compris. **Le cycle autorisé est clos ; aucune nouvelle fenêtre n'est lancée dans cette reprise.** Après résolution, une coordination fraîche et une readiness nouvelle resteront nécessaires avant ABBA, revue du coût et publication dans l'ordre **5C → 6B → 8A → 10C**.
+
+<!-- LOT5C_RECOVERY02_CURRENT_END -->
+
+<!-- LOT5C_AVAILABLE03_CURRENT_START -->
+
+### Reprise 03 close : préparation revue, disponibilité non confirmée
+
+Un [nouveau reçu du lot 10C](lot5c-evidence/recovery/coordination/recovery-03/lot10c-exclusive-availability-observed.json), observé le **11 novembre 2026 à 17:42:14,650043 UTC−03**, établit une acquisition exclusive suivie d'une libération immédiate du **même mutex, device 27 / inode 1971854**, sans remplacement ni processus tué. La [revue indépendante de ce fait nouveau](lot5c-evidence/recovery/coordination/recovery-03/new-availability-review.json) passe **13/13 contrôles**. L'ancien détenteur reste inconnu ; aucune ancienne session n'est déclarée fermée. Cette disponibilité instantanée ne prouve ni l'isolation future ni un coût accepté. Elle retire toutefois la justification de présenter le verrou comme actuellement bloqué ou d'exiger l'identité de son ancien détenteur avant une nouvelle acquisition effective.
+
+La nouvelle continuation demandée par l'utilisateur reprend depuis le checkpoint vérifié **`37f3dabeaf8807045effb81cc3437da53f10ee97`**, avec conservation de la clôture 02. Le [plan](lot5c-evidence/recovery/coordination/recovery-03/preparation-plan.json) prépare **un seul cycle nouveau** `lot5c-cost-a33a5f88-available-03`, motivé par ce changement matériel. Aucun ACK ni readiness ancien n’a été réutilisé. La durée de disponibilité reste **600 secondes**, avec **une seule EX non bloquante**, puis **5 400 secondes maximum** pour la fenêtre réellement acquise et ses analyses. Les travaux utiles déjà engagés peuvent se terminer normalement ; aucun arrêt de commande étrangère n'est demandé.
+
+La [préparation 04](lot5c-evidence/recovery/planning/coordination-v3-preparation-01.json) passe **76/76 conditions statiques**. Les seules différences de fixture portent sur `cases.path` ; octets des cas, captures, formes, attributions et dates historiques restent identiques. La validation documentaire passe **28/28**, sur **179 entrées**. Les [trois tests ciblés du parent](lot5c-evidence/recovery/planning/orchestrator-v3-targeted-tests.execution.json) passent, avec refus explicite des ACK 01/02, expiration unique et libération après refus du contrôleur, sur mutex temporaires. Les autres preuves des gardes inchangés sont réutilisées.
+
+La [revue globale v3](lot5c-evidence/recovery/planning/coordination-v3-independent-review.json) passe **44/44 contrôles**, sur **93 sujets uniques**. Les corps fonctionnels, l'ABBA, ses populations, ses chauffes et le critère global par jeu restent inchangés. Le [précontrôle de publication](lot5c-evidence/recovery/coordination/recovery-03/publication-preflight.json) confirme toujours **Site 103 / native 0.62**, après Site 102. Cette préparation est conservée comme étape historique. La nouvelle règle ordinaire a ensuite produit les versions v3/v4 décrites ci-dessous.
+
+La [demande fraîche](lot5c-evidence/recovery/coordination/cost-final-03/request.json) a réellement été émise à **21:48:17,650081 UTC**, après fermeture des trois travailleurs propres à 5C et du transfert de sources. Elle a expiré à **21:58:17,650081 UTC** sans les trois ACK requis. Le [résultat terminal](lot5c-evidence/recovery/coordination/cost-final-03/attempt-result.json) conserve `availability_deadline_before_fresh_acks` ; la [session réelle 71059](lot5c-evidence/recovery/coordination/recovery-03/available03-orchestrator-terminal.json) a terminé avec le code 124 et nettoyage confirmé. La libération est enregistrée à **21:58:17,652553 UTC**, soit **2,472 millisecondes** de délai de dispatch après l’échéance, sans prolongation de travail protégé. **Aucune acquisition EX, aucune readiness 04, aucun échantillon et aucune publication n’ont eu lieu.** Les trois messages RELEASE permettent la poursuite du travail ordinaire sans mutex ; aucune nouvelle pause automatique n’est prévue.
+
+<!-- LOT5C_AVAILABLE03_CURRENT_END -->
+
+<!-- LOT5C_ORDINARY_UNLOCKED_CURRENT_START -->
+
+### Nouvelle règle utilisateur : travail courant sans verrou global
+
+L’[instruction explicite conservée](lot5c-evidence/recovery/coordination/recovery-03/ordinary-work-policy.json) retire l’obligation du verrou global pour le développement, les tests fonctionnels, les commits et les push. Le lot 5 travaille dans son checkout dédié et sur **`lot5c-recovery-checkpoint-20261111`** ; ses sauvegardes de branche n’attendent pas les publications des autres lots. Les fichiers de mutex existants restent intacts.
+
+Le nouvel [auxiliaire ordinaire v3](lot5c-evidence/recovery/planning/coordination-tools-v3/README.md) ne prend aucun mutex global dans ses trois modes. Les délais d’entrée/travail, l’assainissement des résultats, les identifiants réels et le nettoyage des enfants sont conservés. **4 scénarios ciblés / 69 contrôles** passent, dont un transport sous mutex temporaire tenu EX, malgré une demande prospective et une publication en attente. Seule une véritable fenêtre officielle de performance active est respectée ; la publication dispose de son gardien distinct.
+
+Le [premier transfert réel sans mutex](lot5c-evidence/recovery/coordination/recovery-03/source-checkpoint-unlocked-v3-live.json) a poussé puis vérifié les commits **`2ada5045fb94c4e34bd68f1ecd6f1f73aa778bd5`** et **`a59abde5a714e566962568f492598a2522562871`** le 11 novembre 2026 à **18:28:14 UTC−03**. La session réelle 96368 est terminale, code 0, nettoyage complet, **`lockAcquired: false`**. Aucune publication de site n’en résulte.
+
+La coordination de coût v4 est **terminée et vérifiée** : [7 tests temporaires sur 7](lot5c-evidence/recovery/planning/v4-coordination-scope-tests-01.execution.json), puis [48 contrôles indépendants sur 48 et 122 sujets exacts](lot5c-evidence/recovery/planning/coordination-v4-independent-review.json). EX et le calme sont réservés à l’**ABBA effectivement mesuré et à son intégrité terminale** ; les transports de preuves, comparaisons, revues et rapports suivent sans mutex global. Le protocole et les preuves antérieurs restent conservés ; l’[amendement explicite](lot5c-evidence/recovery/planning/coordination-v4-policy-amendment.json) remplace la seule prolongation du calme prévue au protocole historique. Les populations, chauffes, commandes ABBA et critères de coût ne changent pas. Ces corrections ont été [poussées et vérifiées](lot5c-evidence/recovery/coordination/recovery-03/source-checkpoint-v4-preparation-live.json) dans **`ed983a15f718bd00fac41c867c1b6b9320c7ea95`**, sans mutex global, puis la fermeture réelle des préparations a précédé le cycle 03. Celui-ci est maintenant **clos et libéré sans coût ni publication**, comme détaillé ci-dessus. La publication conserve son [gardien distinct et borné](lot5c-evidence/recovery/planning/publication-coordination-v1/independent-review.json), qui ne constitue aucun prérequis pour les sauvegardes ordinaires.
+
+<!-- LOT5C_ORDINARY_UNLOCKED_CURRENT_END -->
+
+La [revue indépendante de clôture](lot5c-evidence/recovery/coordination/recovery-03/available03-terminal-independent-review.json) confirme **18/18 contrôles**, dont la session terminale, la libération, l’absence de fenêtre et la conservation des mutex. Sa durée documentaire d’environ **185 secondes pour 90 secondes annoncées** et la correction unique d’une assertion trop stricte sur `null`/`false` restent consignées. Cette revue intervient après la levée du calme, sans test, benchmark ni nouvelle demande.
+
+### État publié et prochaine séquence
+
+Le [recontrôle API final du 11 novembre à 22:00:34 UTC](lot5c-evidence/recovery/coordination/recovery-03/publication-final-observation.json) confirme **Site 103 actif, native 0.62 issue de Site 102**, avec les deux déploiements `succeeded`. La source de Site 103 reste `4afcbfe6a25bd3a88223be543e443bc53b9c8814` ; celle de Site 102 reste `1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464`. L’audience et sa révision 3 sont inchangées. **Les sauvegardes de la branche 5C n’ont publié aucune version du site.**
+
+| Étape | État actuel | Suite nécessaire |
+| --- | --- | --- |
+| 5C, preuves fonctionnelles | **Terminé** : 5 339 tests, cinq contrôles, 6 818 comparaisons communes et onze rejeux / 187 comparaisons | Réutiliser les résultats tant que leurs entrées restent identiques |
+| Travail courant et sauvegardes | **Corrigé, vérifié et appliqué** sans mutex global, checkout et branche dédiés | Continuer les commits cohérents et push indépendamment des publications étrangères |
+| Coordination de mesure | **Préparée et revue ; cycle 03 clos** sans confirmations fraîches suffisantes | Attendre une disponibilité réelle et renouveler explicitement les attestations ; aucune pause automatique restante |
+| Coût officiel 5C | **Non mesuré** pour STCK et SMLP | ABBA inchangé sous EX court ; médiane complète strictement sous +10 % pour chaque jeu, dépassements de phase conservés |
+| Publication 5C / 0.63 | **Non effectuée** | Accepter le coût, recontrôler le prédécesseur réellement publié, publier sous le gardien dédié puis constater `succeeded` |
+| 6B / 0.64, puis 8A / 0.65, puis 10C / 0.66 | **Ordre de publication conservé** | Développement, tests et sauvegardes ordinaires indépendants ; qualification finale et publication contre le prédécesseur effectivement livré |
+
+
+
+<!-- LOT5C_ROADMAP_CURRENT_END -->
+
+<!-- LOT10B_CURRENT_BEGIN -->
+## Jalon 10B livré : Site 102 / native 0.62, coût accepté et réserve HPDL partielle
+
+**10B / native 0.62.0 est livré dans [Site 102](lot10b-evidence/recovery-20261111/publication-062/native-publication.json)**, source `1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464`, déploiement réel **`succeeded` le 11 novembre 2026 à 13:50:10.918057 (UTC−03)**. L'audience privée réservée au propriétaire et la révision d'accès **3** sont inchangées. Le natif validé conserve son digest `74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12`, son coût global accepté et sa **réserve HPDL partielle**. La réussite des six niveaux et la parité V6 complète ne sont pas établies.
+
+Cette clôture documentaire réunit les preuves de la publication native et la feuille de route actualisée. **Prochaine étape du lot 10 : 10C / `ordered_recruitment`**, puis 10D / `temporal_selection` et 10E / `invited_endpoints`. Le prédécesseur documentaire Site 101 est déjà intégré par la fusion `866dc5f`.
+
+Le dépôt initialement récupéré était **Site 95 / native 0.58.0**, commit `3a70463039768f7114edae7d94d7dd33b7f36aa8`. Les travaux locaux non publiés de l'environnement précédent n'ont pas été retrouvés. [La reprise et ses limites](lot10b-evidence/recovery-20261111/recovery-status.json) distinguent donc les observations historiques des nouvelles preuves ; aucun ancien résultat n'est réémis comme preuve de cette reconstruction.
+
+**WindowQuestion a été reconstruit depuis les originaux V6/V5 épinglés, puis composé avec les sources préparées PreviewPacking et Workshop.** Les vérifications de développement donnent **173/173 contrats de référence**, **4/4 scénarios froids communs**, **56/56 contrôles communs**, puis **61/61 contrôles composés Preview/Window** et TypeScript passé. Ces populations se recouvrent et ne sont pas additionnées. La relance distincte des trois contrats du collecteur couvre l'ajout de la métadonnée `episode`. La [filiation](lot10b-window-question-lineage.md) et la [revue de résolution](lot10b-evidence/recovery-20261111/prepared6a-integration-02/independent-resolution-review.json) conservent la portée de ces diagnostics, distincte de la validation finale déclarée ci-dessous.
+
+L'[audit du candidat composé](v6-entry-point-progress.json) raccorde **64/76 entrées**, soit **84,2 %**, avec **12 restantes** : 11/12 pour `goal_access`, 21/21 pour `window_constraints`, 10/10 pour `surface` et 22/33 pour `factored_material_return`. L'[inventaire](v6-coverage.json) compte **199 composants vérifiés, 149 transferts partiels et 1 021 modules en attente**, zéro module entièrement vérifié et aucun échec d'audit. Les six portes de migration complète restent non franchies (`false`).
+
+**HPDL n'est pas déclaré résolu sur ses six niveaux.** Le [premier essai réel](lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json), commencé le 11 novembre 2026 à **09:34:34 UTC−03**, a observé **trois niveaux terminés et 48 retours d'action** avant un arrêt externe du processus enfant par signal 9. La cause de ce signal n'est pas établie. Le dernier checkpoint intégral conserve **47 actions et 47 préfixes** ; le 48e retour public reste séparé, sans acquisition inventée ni rapport final fabriqué. Cette preuve historique reste liée au [gel HPDL01](lot10b-evidence/recovery-20261111/hpdl-freeze-01/source-manifest.json), soit 310 fichiers natifs de digest `318153c14c7766c9d007f1b2ede4fa03ce940d62b1369251339e0174af79c306`, inchangés pendant l'essai.
+
+La [comparaison originale PARTIAL du diagnostic02](lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-02/window-source-parity.PARTIAL.json.gz) est **passée sur ce checkpoint historique** : **111 appels, 94 restaurations, 47 préfixes et 47 actions**, avec **17 acquisitions actives et 30 passives**, zéro divergence et zéro adaptation. Les **188 ablations** comprennent **113 interventions appliquées et 23 changements d'action ou de refus**, sans erreur. Ce résultat porte sur le composant et les acquisitions scellées ; il ne termine pas la campagne et ne démontre pas la parité de l'appelant complet. Le [diagnostic01](lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/execution-hpdl-diagnostic.json), interrompu par sa borne d'activité après le succès du writer, reste conservé.
+
+Le [diagnostic Python partiel du niveau 4](lot10b-evidence/recovery/diagnostic/window-oracle/checkpoint-47-first-abstention-01.json) retrouve les quinze méthodes transportées et la même abstention : la mesure reconnaît trois fenêtres, les 24 configurations sont parcourues complètement, et la meilleure projection couvre huit des dix rangs. Ce constat explique le refus source ; il ne prouve ni l'impossibilité du jeu ni la cause de l'arrêt technique. La correction séparée de la capture conserve tous les champs : le [contrôle réel du writer](lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer-check.json) établit l'identité de **177 532 943 octets**, directement et après gzip/gunzip, ainsi que **28 petits cas et 13 erreurs attendues**. Il ne borne pas la mémoire ou le coût cumulé d'une future campagne.
+
+Le [registre HPDL](lot10b-evidence/recovery-20261111/hpdl-clock.json) est fermé avec **1 909,1412980339917 secondes débitées et 490,85870196600837 secondes restantes** sur 2 400, sans remise à zéro. Tous les anciens intervalles, y compris les échecs, restent conservés. HPDL02 a débité 317,948849055 secondes, sa comparaison originale 158,238133855 secondes et le navigateur 169,609669038 secondes. La [revue cumulative](lot10b-evidence/recovery-20261111/hpdl-final-review-01/hpdl-case-budget-review.json) est passée : qualification `partial`, apport propre observé, navigateur passé.
+
+Le candidat local a ensuite reçu la [correction des origines d'horloge](lot10b-evidence/recovery-20261111/diagnostic/clock-origin/review.json), commit `4e7e4742b997128346e84f62b7a4fb8b5d4e47c5` : deux tests reproduisent le défaut avant correction, puis **2/2 passent après correction**, avec **4/4 scénarios Window froids** également passés. La durée encore disponible pour l'appelant est désormais convertie sur l'horloge du runtime et bornée par le temps actif restant. Le [nouveau manifeste diagnostique](lot10b-evidence/recovery-20261111/diagnostic/clock-origin/candidate-native.json) compte **310 fichiers natifs**, digest `74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12`. La preuve HPDL01 sur l'ancien digest ne constitue pas une validation en jeu de ces nouveaux octets.
+
+Le [gel intégré 10B](lot10b-evidence/recovery-20261111/integrated-final-01/source-manifest.json) conserve ce digest `74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12`, avec **310 fichiers natifs et 768 fichiers dans l'[archive complète](lot10b-evidence/recovery-20261111/integrated-final-01/source-archive.json)**. La [validation déclarée de 44 fichiers](lot10b-evidence/recovery-20261111/integrated-final-01/validation/delta-tests-run.json) est **passée : 1 205/1 205 tests, zéro échec, annulation ou test ignoré**. Les [cinq contrôles du projet](lot10b-evidence/recovery-20261111/integrated-final-01/validation/checks-run.json) sont **tous passés, compilation comprise** ; l'[audit de migration retenu](lot10b-evidence/recovery-20261111/integrated-final-01/validation/migration-audit-output.raw.txt) conserve `failures: []`. Ces résultats valident le gel déclaré. Leur [copie de reprise exacte](lot10b-evidence/recovery-20261111/integrated-final-02/freeze-copy-provenance.json) conserve les 768 entrées inchangées ; la réconciliation native avec Site 98 est réalisée dans `9ef8eec…`. Les [dix rejeux](lot10b-evidence/recovery-20261111/integrated-final-02/regressions/regression-summary.json) ont passé **10/10 cas et 170/170 comparaisons**. La tentative interrompue01 reste conservée.
+
+**6A / native 0.60 est réellement publié dans [Site 96](lot10b-evidence/recovery-20261111/prepared6a-integration-02/published6a-observation.json), puis [Site 97 pour sa clôture documentaire](lot10b-evidence/recovery-20261111/prepared6a-integration-02/published6a-documentation-observation.json). Le suivi 7 / native 0.61 est désormais publié dans [Site 98](lot10b-evidence/recovery-20261111/published7-integration-01/native-publication-observation.json)**, commit `653e40a4f45df8ec8c6bda005004c7cdb8df074a`, déploiement `succeeded` observé le **11 novembre 2026 à 11:39:04.455525 UTC−03**. La réconciliation native est réalisée dans `9ef8eec…`. La [clôture documentaire Site 101](lot10b-evidence/recovery-20261111/published7-integration-01/documentation101-observation.json), source `d75a36f0a99bf6c301034523a3138a64d2f6e744`, est réellement publiée avec la même application 0.61 ; ses sources documentaires sont intégrées par la fusion `866dc5f`. **Les validations fonctionnelles 10B sont acquises avec une réserve HPDL partielle ; son coût officiel est accepté et sa publication native est effective dans Site 102.** La publication réelle de **0.62.0 dans Site 102** est désormais constatée par son reçu. La qualification des mesures 7 conserve la déviation d'entrées/sorties concurrentes divulguée par 5C et détaillée dans son jalon ci-dessous.
+
+La règle acceptée demeure : **pour chaque jeu de référence, la médiane des sessions complètes doit rester strictement sous +10 %**. Une phase dépassant +10 % peut être acceptée lorsque ce global passe ; tous les échantillons et diagnostics de phase restent conservés.
+
+**10B est livré dans son périmètre qualifié. Prochaine étape : 10C / `ordered_recruitment`.** 10D / `temporal_selection` et 10E / `invited_endpoints` restent ensuite à réaliser.
+
+Le nouvel [essai HPDL02](lot10b-evidence/recovery-20261111/hpdl-live-02/execution-hpdl.json) porte sur `74143a7…` : **39 retours, 40 paquets et trois niveaux terminés**, puis niveau 4 `NOT_FINISHED` et `ACTIVITY_TIMEOUT` à 300 secondes. Le checkpoint 38 complet et le checkpoint 39 partiel sont conservés ; aucun rapport/trace final ni succès des six niveaux n’est établi.
+
+La [comparaison originale PARTIAL de HPDL02](lot10b-evidence/recovery-20261111/hpdl-analysis-after02/clocked-diagnostic-01/window-source-parity.PARTIAL.json.gz) est **passée sur le candidat `74143a7…`** : **93 appels source** (38 propositions, 38 acquisitions, 17 gardes), **76 restaurations**, **38 actions/préfixes**, **17 acquisitions actives et 21 passives**, **152 ablations dont 95 appliquées et 23 changements d'action ou de refus**, sans divergence, erreur ni adaptation native. Les sources du candidat et les **1 786 fichiers originaux** restent inchangés. Cette comparaison couvre les préfixes scellés de HPDL02 ; les preuves historiques sur `318153c…` restent séparées.
+
+La [QA navigateur](lot10b-evidence/recovery-20261111/hpdl-browser-01/browser-qa.json) est **passée** : pause observée à **2 actions**, action unique portant le compteur à **3**, puis reprise par le bouton « Run 16 actions ». Cette nouvelle session termine naturellement le premier niveau à **7 actions / 1 niveau**, sans convertir les 16 actions proposées par le bouton en 16 actions exécutées. La seconde demande de pause et son attente ont expiré après 30 secondes ; l'observation fraîche était « Level completed ». Aucun second état « Paused » n'est revendiqué.
+
+La [revue cumulative finale HPDL](lot10b-evidence/recovery-20261111/hpdl-final-review-01/hpdl-case-budget-review.json) est **passée**, avec qualification **`partial`**, apport propre **`ownLiveContribution: observed`** et navigateur passé. **La réussite des six niveaux et la parité de l'appelant complet restent non établies.** Le coût officiel de 10B est accepté ; sa publication native est effective dans Site 102.
+
+La préparation fonctionnelle du coût est terminée : **56/57 propriétaires** et **25/26 programmes** pour référence/candidat, **8 formes structurelles non mesurées et 62 actions**, **64 contrôles d'attribution et 35 différences qualifiées**. Le [préflight statique](lot10b-evidence/recovery-20261111/performance-integrated-01/static-preflight.json) a passé **77/77 contrôles**. Ces captures fonctionnelles ne constituent pas des échantillons de coût.
+
+Le [contrôle d'intégrité de livraison](lot10b-evidence/recovery-20261111/integrated-final-02/delivery-integrity.json) est **passé** : **310 fichiers natifs, 768 entrées d'archive, 717 entrées sources/tests et 375 entrées de build**, **10 rapports, 95 parties et 81 197 034 octets restaurés sans perte**. Le protocole est déclaré ; la fenêtre officielle est clôturée et son coût global accepté. La publication native 0.62 est effective dans Site 102.
+
+## Coût global de 10B accepté et publication native effective
+
+Le [rapport complet du coût](lot10b-evidence/recovery-20261111/performance-integrated-01/RESULTS.md) conserve les 32 durées complètes, les diagnostics de chaque cohorte, la dispersion et les p95 disponibles.
+
+La [revue du coût qualifié](lot10b-evidence/recovery-20261111/performance-integrated-01/owner-growth-review.json) est **passée : 10 297/10 297 contrôles**, avec **les deux jeux sous le seuil global strict de +10 %**. La fenêtre complète **A1/B1/B2/A2** s'est déroulée le **11 novembre 2026 de 13:23:45,627421 à 13:33:09,538152 (UTC−03)** : **32 sessions mesurées / 400 actions**, plus **8 échauffements / 24 actions d'échauffement conservés séparément**. La référence reste le natif 0.61 publié dans Site 98 ; le candidat est `74143a7…` / 0.62.
+
+| Jeu | Médiane de session complète référence (ms) | Médiane candidat (ms) | Augmentation relative | Verdict global |
+| --- | ---: | ---: | ---: | --- |
+| STCK | 11295,505846000002 | 11905,527877 | +5,400572929772963 % | Accepté, strictement sous +10 % |
+| SMLP | 18028,853754500007 | 17704,532214999992 | −1,7989027140400675 % | Accepté, strictement sous +10 % |
+
+**15/16 diagnostics agrégés de phase** sont dans leur borne ; la phase de **restauration SMLP augmente de +26,34362955231715 %**. Ce dépassement reste affiché et acceptable selon la règle utilisateur puisque la session complète SMLP respecte le critère global. Aucun temps n'est retranché, aucune session n'est exclue et aucun jeu ne compense l'autre.
+
+L'agrégateur historique strict a réellement terminé avec le **code 1**, message **`Within-cohort work metadata changed`**, sans produire son fichier de résultat. Ce refus reste conservé. L'acceptation est portée séparément par le [contrat déclaré avant mesure](lot10b-evidence/recovery-20261111/performance-integrated-01/owner-growth-contract.json) et la revue qualifiée, avec **432 différences structurelles contrôlées indépendamment** ; le refus historique n'est pas requalifié en succès.
+
+La [revue d'isolation](lot10b-evidence/recovery-20261111/coordination/cost-final-01/isolation-review.json) est **acceptée** : trois confirmations fraîches de lots, états stables et aucune déviation observée ni déclarée. Les preuves immuables restent inchangées. **Le coût de 10B est accepté ; native 0.62 est réellement publiée dans Site 102.** La réserve HPDL reste partielle : trois niveaux, 38 préfixes scellés pour 39 retours publics dans HPDL02, apport propre observé, QA passée, horloge 1 909,1412980339917 secondes débitée et 490,85870196600837 secondes restantes. La réussite des six niveaux et la parité de l'appelant complet ne sont pas établies. La source documentaire Site 101 est intégrée et la publication 0.62 dans Site 102 conserve l’audience privée existante.
+<!-- LOT10B_CURRENT_END -->
+
+<!-- LOT7_FOLLOWUP_RECOVERY_START -->
+
+## Fil 7 : native 0.61 publié et qualifié après répétition propre du coût
+
+**Le complément Workshop 0.61 est réellement publié dans Site 98**, au commit `653e40a4f45df8ec8c6bda005004c7cdb8df074a`, statut terminal **`succeeded` le 11 novembre 2026 à 11:39:04.455525 UTC−03**. La [publication native](lot7b-evidence/followup-recovery/publication/native-publication.json) confirme l’URL existante et l’accès privé au propriétaire, révision **3**. Le candidat reconstruit a réussi **5 042/5 042 tests**, **5/5 contrôles de livraison avec clôture explicite de l’audit**, **187/187 comparaisons de rejeu** ; ces validations fonctionnelles restent inchangées. **Le complément 0.61 est terminé et qualifié : la répétition propre du coût est acceptée pour STCK et SMLP. La première fenêtre reste intégralement inéligible après les deux incidents d’isolation.** La clôture documentaire est réellement publiée dans **Site 99**, commit `61e176b42234db380f23aaace216e6bd2bfe7491`, statut `succeeded` le **11 novembre 2026 à 11:49:50 UTC−03**. La [correction documentaire Site 100](lot7b-evidence/followup-recovery/publication/clean-repeat-correction-publication.json), commit `5f8ca04cbf69cf2ccf7d2aba64a4cfde2a280613`, est réellement déployée à **12:17:03.733262 UTC−03**, avant la répétition propre. Sa référence de coût reste **Site 97 / native 0.60.0**, clôture documentaire de 6A après sa publication native dans Site 96. La récupération initiale est partie de Site 95 au commit `3a70463039768f7114edae7d94d7dd33b7f36aa8` ; le prédécesseur actuel est le commit publié `98336fba4e696a51c90ff7f7b37b8bdf95f34847`. Les anciens fichiers non publiés et leurs preuves brutes n'ont pas été retrouvés après le remplacement de l'environnement. Le [constat de récupération](lot7b-evidence/followup-recovery/coordination/recovery.json) conserve les observations historiques avec `eligibleForGates: false` : elles ne valident pas les octets reconstruits. L'[index des nouvelles preuves](lot7b-evidence/followup-recovery/README.md) distingue les validations fraîches des observations historiques.
+
+### Comportement et source du complément
+
+Le [contrat du complément](lot7b-evidence/followup-recovery/contract/source-contract.md) porte sur deux fichiers de production : l'appelant natif et le propriétaire RankedWorkshop. Après une invitation de contact acquise comme stationnaire, l'appelant consulte le reste du groupe puis les groupes suivants dans leur ordre déclaré. La première proposition non nulle doit posséder son propre témoin acquis et passer sa garde actuelle. Les refus globaux, les arrêts locaux de groupe, la préservation, la liaison et WHY/ACT conservent leur portée. Le témoin Workshop ne modifie ni les onze champs de sa proposition source ni son état persistant ; il atteste le contexte d'une question dont l'effet reste inconnu. Il s'agit d'une extension native explicite, sans nouvelle entrée ni nouveau propriétaire, et sans revendication de parité de tout l'appelant Python.
+
+Le [gel reconstruit](lot7b-evidence/followup-recovery/integrated-final/source-manifest.json) contient **306 fichiers natifs**, digest `f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279`. Il intègre le [snapshot 6A stabilisé](lot7b-evidence/followup-recovery/coordination/prepared-6a-source-observation.json), dont **304 fichiers natifs restent identiques** ; seules les deux sources du complément diffèrent. Le checkpoint 6A `c263271442b8e8a8084c39c2f9301fd3163e7d29` est disponible. Son [adoption complémentaire](lot7b-evidence/followup-recovery/coordination/prepared-6a-checkpoint-adoption.json) corrige deux attentes de registre et ajoute le vérificateur de présence, sans modifier le code natif ni le programme de rejeu. Le [checkpoint source du complément](lot7b-evidence/followup-recovery/coordination/source-checkpoint-900febf8b165.json) est sauvegardé et vérifié ; il ne constitue pas une publication du Site. La [réconciliation avec Site 97](lot7b-evidence/followup-recovery/coordination/published-6a-site97-reconciliation.json) est réussie : la source préparée et les onze cas déclarés correspondent exactement au prédécesseur publié. Les **709 fichiers source/tests** et les **371 entrées de compilation** du candidat restent identiques aux validations retenues.
+
+### Validation fraîche et limites
+
+Le [périmètre final](lot7b-evidence/followup-recovery/contract/test-scope-final.json) conserve **133 fichiers de tests**, dont les quatre nouveaux contrats 6A et les sept fichiers nouveaux ou affectés par le complément. La [première passe](lot7b-evidence/followup-recovery/integrated-final/validation/delta-tests-run.json) a réussi **5 040 tests sur 5 042** ; les deux échecs étaient des attentes de registre devenues incomplètes. Les corrections exactes de 6A ont été adoptées, puis la même liste de 133 fichiers a été relancée sur le même gel. La [seconde passe](lot7b-evidence/followup-recovery/integrated-final/verification-attempt-02/validation/delta-tests-run.json) a réussi **5 042/5 042 tests**, sans échec, annulation, test ignoré ni TODO. Le premier échec reste conservé. Les [cinq contrôles de livraison](lot7b-evidence/followup-recovery/integrated-final/verification-attempt-02/validation/checks-run.json) sont **réussis**, compilation comprise. Le contrôle de préparation a néanmoins retenu une erreur sémantique dans l’ancien audit : une pièce de preuve 6A absente avant sa publication, malgré le code de sortie 0. Après fusion de Site 97, le [même audit statique relancé](lot7b-evidence/followup-recovery/integrated-final/post-publication-audit/closure.json) a une liste d’erreurs vide. L’ancien résultat reste conservé ; les sources, tests, entrées de compilation et originaux sont inchangés.
+
+Les vérifications ciblées ont réussi **51 nouveaux contrôles et 196 contrôles affectés**. L'oracle Python original traite **24 opérations et six mesures publiques complètes**, sur deux scènes synthétiques indépendantes, avec **1 786 fichiers originaux vérifiés avant et après**. Le chemin froid de l'appelant réel couvre le contact stationnaire, la restauration depuis le magasin commun, la question Workshop, WHY/ACT et l'acquisition unique du retour sans effet. Il ne revendique aucun niveau gagné.
+
+Les [onze régressions publiques déclarées avant rejeu](lot7b-evidence/followup-recovery/contract/regression-cases-final.json) conservent **17 comparaisons strictes par cas, soit 187 attendues**. Les dix premières reprennent les entrées publiées de Site 95 ; KATA reprend la trajectoire fraîche de 6A et conserve cette provenance explicite. La [série complète](lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/regression-summary.json) est **réussie : 11/11 cas et 187/187 comparaisons**. Les trois modules qui chargent la géométrie LKEY historique sont exclus du périmètre frais ; leurs résultats publiés restent historiques. L'[horloge LKEY](lot7b-evidence/followup-recovery/coordination/lkey-closed-clock.json) reste fermée à **2 390,347106991 s cumulées**, sans remise à zéro ni nouvel essai. L'ancien résultat navigateur de trois niveaux en 44 actions n'est pas une preuve du nouveau gel.
+
+### Répétition propre acceptée : coût global et isolation qualifiés
+
+La [nouvelle fenêtre complète](lot7b-evidence/followup-recovery/performance-clean-repeat/window.json) a été exécutée le **11 novembre 2026 de 12:22:07 à 12:31:04 UTC−03**, soit **15:22:07.889158–15:31:04.565927 UTC**, dans l’ordre **A1/B1/B2/A2**. Elle conserve **32 sessions mesurées / 400 actions**, avec seulement **huit chauffes / 24 actions exclues**. La [vérification stricte](lot7b-evidence/followup-recovery/performance-clean-repeat/strict-work-verification.json) retrouve les signatures exactes des **40/40 essais**, chauffes comprises ; aucune forme fonctionnelle n’a été recapturée. La [revue arithmétique indépendante](lot7b-evidence/followup-recovery/performance-clean-repeat/consolidation-review.json) passe **231/231 contrôles**.
+
+La [décision globale](lot7b-evidence/followup-recovery/performance-clean-repeat/global-budget-decision.json) accepte **2/2 jeux** contre **Site 97 / native 0.60**, sur les médianes groupées des huit sessions par jeu et version :
+
+| Jeu | Médiane complète 0.60, ms | Médiane complète 0.61, ms | Variation globale | Décision |
+| --- | ---: | ---: | ---: | --- |
+| STCK | 11 303,262202 | 10 972,7514245 | **−2,924030 %** | Accepté |
+| SMLP | 16 919,6392275 | 16 921,174498 | **+0,009074 %** | Accepté |
+
+Chaque jeu reste **strictement sous +10 %**, sans compensation entre jeux, moyenne de ratios de cohortes ou addition de phases imbriquées. Conformément à la règle utilisateur, les dépassements de phase restent admissibles et visibles : la [comparaison agrégée](lot7b-evidence/followup-recovery/performance-clean-repeat/combined-comparison.json) conserve **14/16 diagnostics dans le seuil**, avec restauration **STCK +19,386244 %** et **SMLP +17,331942 %**. Les trois dépassements de cohorte sont également conservés : cohorte 1, restauration **STCK +19,386244 %** et **SMLP +20,346903 %** ; cohorte 2, restauration **SMLP +32,116928 %**. Le [rapport complet](lot7b-evidence/followup-recovery/performance-clean-repeat/results.md) conserve toutes les sessions, les diagnostics et les p95 disponibles, dont la hausse de p95 de la garde de préfixe SMLP en cohorte 1.
+
+La [requalification d’isolation](lot7b-evidence/followup-recovery/performance-clean-repeat/isolation-revalidation.json), acceptée à **12:31:59 UTC−03**, lie le même commit source `965e2dbe38c1a484a3dc1f5d79e5dcec03d55b03`, le digest natif `f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279` et les preuves fonctionnelles inchangées. Le [verrou exclusif](lot7b-evidence/followup-recovery/performance-clean-repeat/lock-window.json) est resté détenu jusqu’à la vérification stricte des 40 essais. Les états des trois voies actives, au début, à la fin et à l’acceptation, sont identiques hors horodatages. Le calme a été libéré après acceptation. **Seule cette répétition complète fournit le coût isolé éligible : aucune sélection ni mise en commun avec la première fenêtre.**
+
+### Première fenêtre conservée, intégralement inéligible pour le coût isolé
+
+L’[incident de calme déclaré par le lot 5C](lot7b-evidence/followup-recovery/coordination/quiet-deviation-acknowledgment.json) concerne **deux recherches récursives ayant émis environ 175–178 Mo chacune**, dans l’intervalle conservateur **11:19:51–11:22:52.050157 UTC−03**. Il chevauche la fenêtre ABBA ci-dessous. La même pièce conserve l’exception distincte du démarrage 6B, comprenant des lectures Git pendant cette première fenêtre. Aucune ampleur d’effet n’est attribuée à ces exceptions. L’isolation de toute cette première fenêtre reste disqualifiée et son acceptation de livraison retirée, même après réussite de la répétition propre. Les anciens échantillons et reçus restent inchangés ; aucune session ou cohorte n’est soustraite ou mélangée avec la nouvelle fenêtre.
+
+La [fenêtre officielle](lot7b-evidence/followup-recovery/performance/window.json), le **11 novembre 2026 de 11:17:29 à 11:26:42 UTC−03**, a conservé l’ordre **A1/B1/B2/A2**, **32 sessions mesurées et 400 actions**. Seules les **huit chauffes et leurs 24 actions** sont exclues. La [vérification stricte](lot7b-evidence/followup-recovery/performance/strict-work-verification.json) retrouve les quatre formes déclarées dans **40/40 essais**, chauffes comprises, après les huit captures fonctionnelles et leurs 62 actions. Aucune exemption structurelle ni tolérance de bruit supplémentaire n’est introduite.
+
+La [décision globale historique](lot7b-evidence/followup-recovery/performance/global-budget-decision.json) conserve son verdict numérique **2/2 jeux sous le seuil** contre la référence publiée **Site 97 / native 0.60**. Ce reçu n’est pas réécrit, mais ne vaut plus acceptation de coût isolé ni qualification finale de livraison. La [revue arithmétique](lot7b-evidence/followup-recovery/performance/consolidation-review.json) passe **231/231 contrôles**.
+
+| Jeu | Médiane complète 0.60, ms | Médiane complète 0.61, ms | Variation globale |
+| --- | ---: | ---: | ---: |
+| STCK | 11 263,783 | 11 930,440 | **+5,918585 %** |
+| SMLP | 17 008,792 | 17 230,659 | **+1,304421 %** |
+
+**Les résultats numériques de cette première fenêtre restent strictement sous +10 %, mais l’acceptation de coût est retirée faute d’isolation.** La règle utilisateur, appliquée inchangée à la répétition propre acceptée, est la suivante : une phase au-delà de +10 % peut être acceptée si le global passe séparément pour STCK et SMLP. Les médianes des phases imbriquées ne sont pas additionnées, aucun jeu ne compense l’autre et aucun ratio de cohorte n’est moyenné.
+
+Les **16/16 diagnostics agrégés** sont dans le budget observé. Les cohortes conservent **15/16 puis 12/16** : restauration SMLP **+12,905976 %** en cohorte 1 ; restauration STCK **+50,299402 %**, service de préfixe SMLP **+18,203364 %**, requête de préfixe SMLP **+11,296129 %** et acquisition/persistance SMLP **+13,698573 %** en cohorte 2. Ces dépassements, les p95 disponibles et toutes les sessions restent dans le [rapport complet](lot7b-evidence/followup-recovery/performance/results.md). Aucun échantillon mesuré n’est retiré.
+
+L’ancien [reçu de clôture d’isolation](lot7b-evidence/followup-recovery/performance/coordinated-isolation-completion.json) et le [contrôle des entrées de publication](lot7b-evidence/followup-recovery/integrated-final/publication-inputs.json) restent conservés. Le verrou exclusif consigné n’a pas empêché les scans non coordonnés : ces reçus ne suffisent plus à qualifier l’isolation ni l’acceptation de coût. Leur état historique reste inchangé, avec les deux passages B liés au même commit `78220117e6cbd315098c98effd647a07825cc4da`. Le [complément d’audit](lot7b-evidence/followup-recovery/integrated-final/post-publication-audit/closure.json), son [amendement préalable à la mesure](lot7b-evidence/followup-recovery/tools/migration-audit-closure-amendment.json) et sa [revue indépendante](lot7b-evidence/followup-recovery/tools/independent-audit-closure-review.json) conservent la seule alerte initiale et sa résolution vérifiée ; les contrôles du coût restent inchangés.
+
+Ces mesures portent sur la boucle commune de STCK/SMLP. Elles excluent moteur de jeu, réseau de production et rendu navigateur ; elles ne démontrent ni le coût maximal d’une recherche Workshop positive ni la stabilité de sessions de plusieurs heures.
+
+### Publication et clôture documentaire
+
+Le [transport effectif](lot7b-evidence/followup-recovery/publication/source-transport-completion.json) conserve **cinq envois ordinaires de sources**, sans forçage, et **375 comparaisons exactes** des 75 membres applicatifs. Le [dernier contrôle](lot7b-evidence/followup-recovery/publication/final-source-recheck.json) lie le commit publié, le worker validé et le reçu d’acceptation engagé dans Git. Les 97 194 778 octets bruts d’objets nouveaux sont répartis sous la borne déclarée par envoi ; cette mesure n’est pas une taille de transport réseau.
+
+La clôture documentaire **Site 99**, commit `61e176b42234db380f23aaace216e6bd2bfe7491`, est terminée avec le statut `succeeded` à **11:49:50 UTC−03**. Elle conserve le code natif, les tests, les entrées de compilation et les membres applicatifs de **Site 98 / native 0.61**. La correction **Site 100**, commit `5f8ca04cbf69cf2ccf7d2aba64a4cfde2a280613`, a été déployée avec succès à **12:17:03.733262 UTC−03** pour retirer la qualification de la première fenêtre, avec les mêmes sources et membres applicatifs. La répétition propre a ensuite qualifié le coût à **12:31:59 UTC−03**. La clôture documentaire finale est réellement publiée dans **Site 101**, commit `d75a36f0a99bf6c301034523a3138a64d2f6e744`, statut `succeeded` à **12:43:52.515923 UTC−03** ; le [constat de publication](lot10b-evidence/recovery-20261111/published7-integration-01/documentation101-observation.json) conserve ce résultat sans modifier le gel natif 0.61.
+
+### Feuille de route au jalon 7 / 0.61
+
+Le [registre retenu au jalon 7 / 0.61](lot7b-evidence/followup-recovery/integrated-final/verification-attempt-02/validation/entry-audit-output.log.gz) atteint **63/76 entrées raccordées, soit 82,9 %, zéro partielle et 13 restantes** : `goal_access` 11/12, `window_constraints` 21/21, `surface` 10/10 et `factored_material_return` 21/33. Ce gain d'entrée provient de 6A ; le complément Workshop n'en ajoute pas. L'audit du jalon 7 compte **195 composants vérifiés, 148 transferts partiels, 1 026 modules en attente et zéro module entièrement vérifié**, sur 1 369 modules Python et 417 fichiers de données. **Les six portes de migration complète restent fausses.** Ces compteurs décrivent le prédécesseur 0.61 publié dans Site 98, avant l’ajout Window du candidat 10B présenté en tête.
+
+| Voie | État et prochaine étape |
+| --- | --- |
+| **6A / 0.60** | **Livré dans Sites 96–97** et réconcilié ; coût global accepté, STCK **+6,094357 %**, SMLP **+3,262812 %**. Prochaine capacité de ce fil : **6B / `selected_rigid`**, après les priorités sérialisées 10B puis 5C. |
+| **Complément 7 / 0.61** | **Terminé et qualifié** : native publié dans Site 98, documentation dans Sites 99–101 ; répétition propre acceptée, **STCK −2,924030 % / SMLP +0,009074 %**. **5 042 tests**, cinq contrôles avec audit réconcilié et **187 comparaisons** inchangés. Toute la première fenêtre reste inéligible et conservée comme historique. |
+| **10B / 0.62** | **1 205/1 205 tests, 5/5 contrôles, 10/10 rejeux et 170/170 comparaisons passés. Coût global accepté : STCK +5,400573 %, SMLP −1,798903 %.** Restauration SMLP +26,343630 % conservée et acceptable selon la règle globale. HPDL02 : trois niveaux, parité PARTIAL et QA passées, apport propre observé ; six niveaux/full caller non établis. Publication native 0.62 effective dans Site 102. |
+| **5C / 0.63** | `observed_object_binding`, après 10B et les prédécesseurs publiés. Conserver ses preuves de composant distinctes de la future validation intégrée et de son coût. |
+| **Lots 7A/7B et lot 4** | Clos dans leurs périmètres déjà publiés ; aucune preuve historique perdue n'est réattribuée au candidat actuel. |
+| **Lots 8, 9 et 11 ; sessions longues** | Restent planifiés selon leurs contrats. Les réserves de parité complète, de compaction et de latence des sessions longues restent ouvertes. |
+
+La séquence convenue est **6A / 0.60 → complément 7 / 0.61 → 10B / 0.62 → 5C / 0.63 → 6B / `selected_rigid`**, avec publication et fenêtre de coût sérialisées. **6A, native 0.61 et 10B / native 0.62 sont publiés et qualifiés dans leurs périmètres ; les prochaines publications sont 5C / 0.63, puis 6B / 0.64 et 8A / 0.65.** Les sections suivantes conservent les faits des jalons antérieurs dans leurs périmètres propres.
+
+<!-- LOT7_FOLLOWUP_RECOVERY_END -->
+
+<!-- LOT6A_ROADMAP_CURRENT_START -->
+
+## Prédécesseur livré : lot 6A PreviewPacking — Sites 96–97
+
+**`preview_packing` est raccordé au moteur natif 0.60, avec un propriétaire unique, des commandes gardées et une acquisition réservée aux retours réellement sélectionnés.** La [publication privée réelle](lot6a-evidence/publication/native-publication.json) est confirmée **Site 96 / native 0.60.0**, commit `cdaceea1c8918430a70b95fa427b31fcd22d290c`, statut terminal `succeeded`. L’URL existante et l’audience propriétaire seul sont préservées.
+
+Cette livraison est une **reconstruction nouvelle depuis la source originale immuable**, sur la référence publiée [Site 95 / native 0.58](lot6a-evidence/publication/published-baseline-site95.json). Les anciennes preuves 6A perdues ne sont pas réutilisées. Le [gel final](lot6a-evidence/integrated-final-02/source-manifest.json) contient **306 fichiers natifs**, digest `ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229`, et l’[archive](lot6a-evidence/integrated-final-02/source-archive.json) lie **322 fichiers**, dont les adaptateurs passifs réellement exécutés. Le premier gel prétest reste conservé séparément.
+
+| Preuve 6A | Résultat effectivement acquis |
+| --- | --- |
+| [Tests finaux](lot6a-evidence/integrated-final-02/validation-final/validation/delta-tests-run.json) | **4795/4795 tests dans 126 fichiers**, sans échec, annulation, test ignoré ni TODO |
+| [Contrôles du projet](lot6a-evidence/integrated-final-02/validation-final/validation/checks-run.json) | **5/5**, typecheck, audits, diff et compilation compris |
+| [Oracle de composant](lot6a-evidence/recovery/oracle/source-reference-comparison-05.json) | **1 288/1 288 vérifications**, dont 724 empreintes de fichiers consommés ; 1 786 originaux vérifiés avant et après l’export |
+| [Campagne froide KATA](lot6a-evidence/integrated-final-02/execution-kata.json) | **Trois niveaux, 33 actions, 14 préfixes**, un seul appelant natif, aucune décision fournie par Python |
+| [Comparaison originale froide](lot6a-evidence/integrated-final-02/kata-source-parity-execution.json) | **174 événements comparés sans différence** : 113 appels et 61 restaurations ; 56 ablations, dont 17 modifient une action ou un refus |
+| [Navigateur réel](lot6a-evidence/integrated-final-02/browser/browser-qa.json) | **33 actions / 3 niveaux / 14 plans**, Pause acquittée à 9 actions puis une seule action jusqu’à 10, sans nouvelle session |
+| Rejeux publics | **187/187 contrôles** sur dix traces historiques et un rejeu de cohérence KATA du candidat avec lui-même. |
+| [Présence sur les rapports retenus](lot6a-evidence/integrated-final-02/regressions-final/preview-owner-presence.json) | **11/11 cas**, 289 préfixes (14 sélectionnés / 275 étrangers), 390 retours (33 sélectionnés / 357 étrangers), **33 acquisitions sélectionnées / 0 passive**, 611 restaurations (578 natives / 33 source) |
+| [Intégrité finale](lot6a-evidence/integrated-final-02/delivery-integrity.json) | **`passed`**, 703 fichiers source/tests, 371 entrées de build, 13 entrées d’exécution des régressions et 12 rapports restitués à l’identique |
+| [Readiness avant mesure](lot6a-evidence/performance-integrated/readiness.json) | **`ready`**, preuves et conditions préalables liées avant la fenêtre officielle |
+| [Entrées de publication](lot6a-evidence/integrated-final-02/publication-inputs.json) | **`passed`**, coût accepté et octets validés liés ; ce reçu n’exécute pas la publication |
+| [Transport effectivement vérifié](lot6a-evidence/publication/final-source-build-verification.json) | **5 envois de sources**, 75 membres applicatifs par archive et **375 comparaisons exactes**, sans recompilation |
+
+Le [plan de tests](lot6a-evidence/planning/final-test-scope.json) conserve le périmètre initial de 129 fichiers, puis l’exclusion préalable de trois modules qui exécutent le cas LKEY au budget fermé : 122 fichiers hérités plus quatre nouveaux, soit 126. Le [premier passage](lot6a-evidence/integrated-final-02/validation/delta-tests-run.json), **4 793/4 795**, reste échoué ; seules deux attentes de registre obsolètes ont été corrigées avant la reprise complète réussie. Les cinq contrôles finaux sont conservés avec les tests dans `lot6a-evidence/integrated-final-02/validation-final/validation`.
+
+Le [premier bilan des rejeux](lot6a-evidence/integrated-final-02/regressions/regression-summary.json) reste `failed` : neuf résultats réussis et deux échecs d’exécution, WEAV et CRAF. La [première reprise](lot6a-evidence/integrated-final-02/released-recovery/regressions/regression-summary.json) conserve CRAF réussi et un nouvel arrêt de WEAV. Ces **trois sorties `-9` (SIGKILL)** restent attribuées à leurs exécutions réelles ; elles ne prouvent pas à elles seules une cause mémoire. La reprise WEAV à **1 024 Mio** a ensuite échoué par **`-6` après 73 actions**, avec un [diagnostic explicite d’épuisement du tas V8](lot6a-evidence/recovery/weav-memory/diagnostic.json). Ce quatrième échec ne requalifie pas les trois SIGKILL antérieurs. La [reprise finale exclusive à 1 536 Mio](lot6a-evidence/integrated-final-02/released-weav-exclusive-1536/regressions/regression-summary.json) a réussi : **81 actions et 17/17 contrôles**. La composition **9 + 1 + 1** est liée à son [bilan final réussi](lot6a-evidence/integrated-final-02/regressions-final/regression-summary.json), avec provenance de chaque résultat, empreintes et 17 contrôles inchangés par cas. La [première consolidation échouée](lot6a-evidence/recovery/consolidation-attempt-01.json) reste conservée ; la liaison `actual_retained_child_execution_inputs` utilise les entrées réellement enregistrées par le driver enfant, sans inventer un inventaire parent avant lancement. Aucun rejeu n’a été répété pour cette correction.
+
+Le [registre de cette livraison](lot6a-evidence/integrated-final-02/validation-final/validation/checks-run.json) atteint **63/76 entrées raccordées, 82,9 %, zéro partielle et 13 restantes** : `goal_access` 11/12, `window_constraints` 21/21, `surface` 10/10, `factored_material_return` 21/33. L’[audit de cette livraison](lot6a-evidence/integrated-final-02/validation-final/validation/checks-run.json) conserve **195 composants vérifiés, 148 transferts partiels, 1 026 modules en attente et zéro module entièrement vérifié**, sur 1 369 modules Python et 417 fichiers de données. **Les six portes de migration complète restent fausses.**
+
+### Coût global et diagnostics de phase
+
+La [revue indépendante](lot6a-evidence/performance-integrated/owner-growth-review.json) accepte le budget global pour **2/2 jeux**, après **17890 contrôles**. La fenêtre A1/B1/B2/A2 conserve **32 sessions mesurées / 400 actions** ; seules les huit chauffes et leurs 24 actions, déclarées à l’avance, sont séparées.
+
+| Jeu | Médiane Site 95 / 0.58, ms | Médiane 6A / 0.60, ms | Variation globale |
+| --- | ---: | ---: | ---: |
+| STCK | 10953.833 | 11621.399 | **+6.094357 %** |
+| SMLP | 16915.813 | 17467.744 | **+3.262812 %** |
+
+Chaque jeu doit rester **strictement sous +10 % au global**. Les dépassements agrégés de médiane de phase restent visibles : `STCK/new_decision` **+14.980671 %** ; `STCK/acquisition_and_persistence` **+12.324410 %** ; `SMLP/new_decision` **+12.443161 %** ; `SMLP/known_prefix_service` **+11.550136 %** ; `SMLP/known_prefix_request` **+12.686196 %**. Le bilan conserve **11/16 diagnostics chronométriques dans le budget observé** : huit mesures par jeu, dont `session_elapsed`. Les cohortes et p95 gardent leurs propres diagnostics. Aucun temps n’est corrigé, aucun échantillon défavorable n’est retiré et les phases imbriquées ne sont pas additionnées.
+
+Le comparateur historique strict conserve son échec réel sur les métadonnées de travail. L’analyse distincte suit le contrat fermé déclaré avant mesure : ajout d’un propriétaire, sans programme supplémentaire, et seulement quatre chemins de compteurs attribués aux graphes effectivement capturés. Le [rapport complet](lot6a-evidence/performance-integrated/results.md) conserve les deux cohortes, la dispersion, les phases et les réserves. Ces mesures portent sur les chemins communs STCK/SMLP ; elles n’établissent pas le coût d’une recherche positive de partition ni une stabilité sur plusieurs heures.
+
+### Portée et prochaine capacité
+
+La source transférée est la chaîne consommée `PreviewPacking → Donor → Base`, avec les transformations et le calcul résiduel V5 qu’elle appelle. Les quatre champs source, les propositions, les gardes et les vraies restaurations sont comparés. Les états et plans natifs ne servent jamais à initialiser l’oracle froid. Le [rapport 6A](lot6a-preview-packing.md), la [filiation détaillée](lot6a-preview-packing-lineage.md) et l’[index des preuves](lot6a-evidence/README.md) distinguent ces contrats de leurs adaptations natives.
+
+Une recherche bornée incomplète produit un état inconnu bloquant. La limite résiduelle de 2 000 ms ne borne pas toute la proposition. Les contrôles source peuvent subsister après une frontière, le cache négatif reste lié à l’époque et une partition ne prouve pas la fin officielle d’un niveau. La compaction des historiques et une latence maximale de Pause ne sont pas établies. L’[horloge cumulative KATA](lot6a-evidence/case-clock.json) est clôturée dans son budget : **2256.934540 s / 2 400 s**, avec **143.065460 s non consommées**. La charge antérieure et les tentatives restent incluses.
+
+**6A est clôturé dans son périmètre. La prochaine capacité de ce fil est 6B, `selected_rigid`.** Le lot 6 garde ensuite `observed_rigid_cargo` puis `shared_settlement`. Les chantiers 7-followup, 10B et 5C restent séparés et doivent intégrer le prédécesseur effectivement publié. Les réserves CWSE, SK48, FramedWindow, LKEY et WEAV ne sont pas effacées par cette livraison.
+
+<!-- LOT6A_ROADMAP_CURRENT_END -->
+
+
+
+<!-- LOT5B_ROADMAP_HISTORICAL_START -->
+
+## Jalon historique : lot 5B livré dans Site 94 / native 0.58, validation et coût global acceptés
+
+**`observed_addressed_material` est livré dans [Site 94 / native 0.58.0](lot5b-evidence/publication/native-publication.json), avec validation fonctionnelle, budget global accepté et publication privée confirmée.** Le commit `fbd968f7c194575777965219f64fa78d3460b08e` a atteint le statut terminal `succeeded` le **11 novembre 2026 à 02:52:58.534517 UTC** ; l'audience propriétaire seul, révision **3**, et l'URL sont préservées. La livraison intègre le prédécesseur publié **Site 92 / native 0.57.0** puis sa **clôture documentaire Site 93**. Le [reçu de réconciliation](lot5b-evidence/coordination/published-4c-documentation-closure-reconciliation.json) vérifie l'identité des sources natives, tests et entrées de build entre ces publications ; la référence de coût déclarée reste Site 92. Le [gel 5B](lot5b-evidence/integrated-final/source-manifest.json) contient **302 fichiers natifs**, digest `099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4`, avec **313 fichiers dans l'[archive](lot5b-evidence/integrated-final/source-archive.json)**.
+
+Le propriétaire unique `public_addressed_material` transfère la chaîne consommée `AddressedMaterial → AddressedField → FieldStock`. Les retours sélectionnés et passifs acquièrent une seule fois l'état source ; les clics sont liés à l'objet et à l'observation courants, chaque étape d'un chemin est gardée, et les hypothèses retenues doivent être revalidées après une frontière. Les obligations de quantité minimale du stock s'appliquent aussi aux propositions des autres familles. Le [rapport 5B](lot5b-addressed-material.md), sa [filiation](lot5b-addressed-material-lineage.md) et son [index de preuves](lot5b-evidence/README.md) précisent les contrats et leurs limites.
+
+| Preuve finale 5B | Résultat effectivement acquis |
+| --- | --- |
+| [Tests déclarés](lot5b-evidence/integrated-final/validation/delta-tests-run.json) et [contrôles du projet](lot5b-evidence/integrated-final/validation/checks-run.json) | **4 900/4 900 tests dans 125 fichiers ; 5/5 contrôles**, compilation comprise, sans échec, annulation, test ignoré ni TODO |
+| [Dix rejeux publics](lot5b-evidence/integrated-final/regressions/regression-summary.json) | **170/170 contrôles** ; 357 actions, 275 préfixes, 632 requêtes, 30 frontières naturelles, 367 paquets publics complets et 1 676 images d'animation |
+| [Oracle indépendant](lot5b-evidence/diagnostic/source-oracle-export.json) | **14 helpers, 19 chaînes froides, 522 opérations** ; 1 786 fichiers originaux immuables vérifiés avant et après |
+| Comparaisons originales des journaux communs | Navigation [positive **169/169**](lot5b-evidence/integrated-final/common-positive/original-comparison.json), [sans effet **164/164**](lot5b-evidence/integrated-final/common-negative/original-comparison.json), [stock borné **199/199**](lot5b-evidence/integrated-final/common-stock/original-comparison.json) |
+| [Fournisseur et préservation du stock](lot5b-evidence/integrated-final/common-stock/original-preservation-comparison.json) | **835/835 contrôles** ; même proposition originale et mêmes deux refus, recalculés depuis les retours publics |
+| [Navigateur réel](lot5b-evidence/integrated-final/browser/browser-qa.json) | **TRIA : trois niveaux, 17 actions et 17 plans** ; Pause à deux actions, commande unique jusqu'à trois, puis progression naturelle sans remise à zéro de la mémoire |
+
+La preuve commune stock reste bornée à **8/17 étapes, une fusion et un déplacement**, puis au refus de préservation prévu par la source. Les trois tentatives antérieures restent échouées. Le contrat final `stock-preservation-refusal`, déclaré avant son exécution, ne revendique pas une traversée complète. Les comparaisons de composant ne valent pas parité de tout l'appelant original ; les rejeux et la QA TRIA ne constituent pas une nouvelle réussite en jeu ni une contribution propre 5B observée en jeu.
+
+Le [registre au jalon 5B](lot5b-evidence/integrated-final/validation/entry-audit-output.log.gz) atteignait **62/76 entrées raccordées, soit 81,6 %, zéro partielle et 14 restantes** : `goal_access` 10/12, `window_constraints` 21/21, `surface` 10/10 et `factored_material_return` 21/33. L'[audit](v6-coverage.json) conserve **192 composants vérifiés, 147 transferts partiels, 1 030 modules en attente et zéro module entièrement vérifié**, sur 1 369 modules Python et 417 fichiers de données. **Les six portes de migration complète restent fausses.** Les compteurs des publications précédentes restent historiques dans leurs sections propres.
+
+### Coût 5B accepté avec diagnostics et refus strict conservés
+
+La [fenêtre A1/B1/B2/A2](lot5b-evidence/performance-integrated/window.json), le **11 novembre 2026 de 02:18:39 à 02:27:33 UTC**, passe ses quatre séries et son intégrité finale. Elle conserve **32 sessions mesurées / 400 actions**, avec huit chauffes / 24 actions séparées et aucune session mesurée exclue. L'[isolation](lot5b-evidence/performance-integrated/coordinated-isolation-completion.json) confirme le verrou exclusif et les 12 voies connues au calme aux deux bornes. La [revue indépendante](lot5b-evidence/performance-integrated/owner-growth-review.json) passe **11 865/11 865 contrôles** et accepte **2/2 jeux**.
+
+| Jeu | Médiane complète Site 92 / 0.57, ms | Médiane complète 5B / 0.58, ms | Variation globale |
+| --- | --- | --- | --- |
+| STCK | 10 879,140 | 11 290,470 | **+3,780905 %** |
+| SMLP | 17 079,561 | 16 813,765 | **−1,556219 %** |
+
+Chaque médiane groupée reste **strictement sous +10 %**, sans compensation entre jeux, somme de phases imbriquées ni moyenne des ratios de cohortes. Le diagnostic agrégé reste **14/16**, avec **restauration STCK +13,032972 %** et **garde du préfixe connu SMLP +11,650805 %** ; les cohortes gardent **11/16** et **14/16**. Ces dépassements de phase sont acceptables sous le critère global autorisé et restent publiés. Le [rapport complet](lot5b-evidence/performance-integrated/results.md) conserve toutes les sessions, dispersions et pointes de latence défavorables, dont les p95 des gardes.
+
+Le [comparateur strict historique](lot5b-evidence/performance-integrated/aggregation-failure.json) reste **en échec, code 1**, sur l'identité des métadonnées de travail. La consolidation distincte suit le [contrat déclaré avant mesure](lot5b-evidence/performance-integrated/owner-growth-contract.json) et qualifie **432 écarts de compteurs structurels**, appuyés par **64/64 contrôles structurels** et **68/68 contrôles statiques préalables**. Ce nombre ne désigne pas 432 nouveaux deltas du moteur. Aucun temps mesuré n'est corrigé, aucune session défavorable n'est retirée et les compteurs publics ne prouvent pas l'identité des feuilles privées.
+
+### Prochaine étape et coordination courante
+
+| Voie | État courant et prochain travail |
+| --- | --- |
+| **Lot 5** | **5A et 5B livrés ; 5C raccordé, encore non publié.** Publications 6A et suivi 7 intégrées, correctif d’horloge vérifié par **16/16 tests et trois contrôles**. Suite : publication réelle 10B, périmètre et gel finaux, validation, coût puis publication 5C. |
+| **Lot 4** | 4A, 4B et 4C livrés ; lot clos dans ses périmètres annoncés, Sites 92/93 conservés. |
+| **Lot 6** | **6A / `preview_packing` commencé dans une autre conversation** ; aucun résultat de ce chantier n'est attribué au gel 5B. |
+| **Lot 7** | Transferts 7A/7B clos ; **suivi LKEY niveau 3 séparé**, avec sa propre réserve et son horloge. |
+| **Lot 10** | **10A clos ; 10B / `window_question` livré dans Site 102 avec réserve HPDL partielle**, coût global accepté sur les deux jeux, publication native 0.62 effective dans Site 102 ; prédécesseur natif réel intégré. |
+| **Lots 8, 9 et 11** | Planifiés, selon leurs contrats consommés. |
+| **Sessions longues / WEAV** | Compaction prouvée, propagation générique des coups obligatoires et croissance de la latence restent à établir. **WEAV niveau 6 reste une réserve**, sans nouvel essai réel ni remise à zéro du budget épuisé. |
+
+Le budget accepté sur STCK/SMLP n'établit ni une accélération générale ni une latence constante au fil des niveaux. Le reçu terminal réel confirme la publication 5B dans Site 94 ; les chantiers des autres conversations ne sont pas présentés comme intégrés à cette livraison.
+
+### Publication et contrôle du transport
+
+Le [plan de cinq envois sources](lot5b-evidence/publication/lot5b-source-push-plan.json) et la [vérification finale réussie](lot5b-evidence/publication/final-source-build-verification-02.json) conservent **755 fichiers gelés par checkout** et **75 membres applicatifs dans chacune des cinq archives locales**, soit **375 comparaisons exactes**, sans recompilation. Les sources, tests, entrées de build et worker correspondent au gel validé. Le tar du serveur est identifié par Sites ; il n'a pas été téléchargé pour une comparaison indépendante de ses membres.
+
+Le [premier contrôle final](lot5b-evidence/publication/final-source-build-verification.json) reste **échoué, code 1**, avec son [reçu d'exécution](lot5b-evidence/publication/verifier-attempt01-execution.json). Le journal brut `aggregation-failure.log`, ignoré par Git, manquait dans le checkout de publication. Sa [restauration octet pour octet](lot5b-evidence/publication/ignored-proof-restoration.json) a permis le second contrôle sans modifier source, tests, build ni coûts. Cet incident et le refus strict historique restent conservés séparément. La clôture documentaire de ces reçus conserve le moteur livré ; aucune publication ultérieure n'est anticipée.
+
+<!-- LOT5B_ROADMAP_HISTORICAL_END -->
+
+## Prédécesseur publié : FacetExamples livré dans Site 92 / native 0.57 ; lot 4 clos dans ses périmètres annoncés
+
+Cette section conserve les faits du jalon 4C et les prochaines étapes telles qu'elles étaient alors formulées. Sa clôture documentaire Site 93 est désormais publiée et réconciliée dans la livraison 5B décrite ci-dessus ; aucun résultat historique n'est requalifié.
+
+**4A, 4B et 4C sont livrés. Le lot 4 est clos dans ses périmètres annoncés**, avec `facet_example` transféré dans ses branches simples et composées. La [publication réelle Site 92 / native 0.57.0](lot4c-evidence/publication/native-publication.json), source `d06620d1e4ca2c9758cc693b1ced9eeeddccb7e6`, est confirmée `succeeded` le **10 novembre 2026 à 22:45:49 UTC−03**, sur l'URL existante et avec l'audience propriétaire privé révision **3** inchangée. Le [gel natif final](lot4c-evidence/integrated-final/source-manifest.json) est `eebd099808672be934389020c8f9061df4fdacab28cd7d60c00cd1b080464c04`, avec **298 fichiers natifs et 309 entrées d'archive**, commit de gel `6065d67c18b1ad85bd62b60c36c6962f18bfeab3`. Le [rapport 4C](lot4c-facet-examples.md), sa [filiation](lot4c-facet-examples-lineage.md) et l'[index de preuves](lot4c-evidence/README.md) conservent les contrats, les résultats et leurs limites.
+
+Le prédécesseur de cette livraison est **10A / Site 91 / native 0.56.0**, commit `5659ddc9420c7624df4865f0afc628782296a186`, déploiement confirmé le **10 novembre 2026 à 21:42:39 UTC−03**. La [clôture Sites 90–91](lot4c-evidence/planning/published-predecessor-source-closure.json) conserve la provenance de la référence fraîche. **Le coût officiel de 0.57 est accepté pour les deux jeux et sa publication privée est vérifiée.** La présente clôture documentaire consigne cette publication en conservant le même moteur et le même build ; son reçu terminal est communiqué séparément.
+
+Le [transport de source](lot4c-evidence/publication/lot4c-source-push-plan.json) a utilisé **cinq envois ordinaires, sans force ni publication intermédiaire**. La [vérification finale](lot4c-evidence/publication/final-source-build-verification.json) confirme **75 membres applicatifs identiques dans chacune des cinq archives**, soit 375 comparaisons, et **746 entrées gelées par checkout**, sur les deux checkouts. Sources, tests, build et worker sont inchangés. Les 375 comparaisons portent sur les cinq archives gzip locales confrontées au build validé. Le tar du serveur est identifié séparément dans le reçu de publication ; il n'a pas été téléchargé ni comparé membre par membre.
+
+| Preuve finale 4C | Résultat |
+| --- | --- |
+| [Tests déclarés](lot4c-evidence/integrated-final/validation/delta-tests-run.json) et [contrôles du projet](lot4c-evidence/integrated-final/validation/checks-run.json) | **4 838/4 838 tests dans 121 fichiers ; 5/5 contrôles**, build compris |
+| [Dix rejeux stricts](lot4c-evidence/integrated-final/regressions/regression-summary.json) | **170/170 contrôles**, 357 actions, 275 préfixes, 367 paquets publics, 1 676 images, 632 requêtes et 30 frontières naturelles |
+| [LKEY partiel séparé](lot4c-evidence/integrated-final/lkey-partial/qualification.json) | **157/157 contrôles**, 25 actions et deux niveaux ; brut `failed`, troisième niveau arrêté sur `frontier_unknown` |
+| [Comparaison Python froide](lot4c-evidence/integrated-final/isos-facet-source-parity-diagnostic.json) | **48 appels, 24 gardes, douze acquisitions, 36 restaurations, douze préfixes et treize observations ; zéro différence** |
+| Contribution de mémoire dans ce même rapport | **60 ablations** : neuf changements d'action/refus, quatre de métadonnées seulement et 47 propositions inchangées ; 41 interventions sur des champs vides |
+| [Navigateur réel 0.57](lot4c-evidence/integrated-final/browser/browser-qa.json) | **ISOS trois niveaux, douze actions et douze plans** ; Pause à une action, action unique jusqu'à deux, frontières naturelles 3/7/12 ; [PNG conservé](lot4c-evidence/integrated-final/browser/isos-three-levels.png) |
+
+Les rejeux restent distincts de nouveaux jeux exécutés. La comparaison Python reconstruit une mémoire froide sur la capture du rejeu final ISOS ; les 36 restaurations sont réellement observées dans le runtime natif. La suppression de `portable` retire les neuf propositions composées. Les contre-exemples absents de cette trajectoire réussie conservent leur preuve synthétique ; la parité complète de l'appelant et la victoire sur les six niveaux d'ISOS ne sont pas établies. La [référence publiée 0.56](lot4c-evidence/reference-isos-056/reference-case-execution.json) garde **huit actions et zéro niveau sous borne externe**, sans conclusion générale d'incapacité.
+
+L'[horloge ISOS](lot4c-evidence/case-clock.json) est clôturée après l'intervalle 04, le **10 novembre 2026 à 22:02:29 UTC−03**, à **1 259,938444409 secondes sur 2 400**, avec **1 140,061555591 secondes restantes**, sans reset. Les essais, diagnostics, référence bornée, QA et rejeu sont facturés ; le chevauchement des intervalles 02/03 est compté intégralement de manière conservatrice.
+
+Le [registre publié dans Site 92](v6-entry-point-progress.json) atteint **61/76 entrées raccordées, soit 80,3 %, zéro partielle et 15 ouvertes** : `goal_access` 10/12, `window_constraints` 21/21, `surface` 10/10 et `factored_material_return` 20/33. L'[audit](v6-coverage.json) conserve **189 composants vérifiés, 147 transferts partiels, 1 033 modules en attente et zéro module entièrement vérifié**. Les **six portes de migration complète restent fausses** ; les 37 workflows compilés et le raccordement des entrées ne valent pas parité globale. Le prédécesseur 0.56 garde ses compteurs historiques 60/76.
+
+### Coût 4C accepté, diagnostics conservés
+
+La [fenêtre exclusive A1/B1/B2/A2](lot4c-evidence/performance-integrated/window.json), le **10 novembre 2026 de 22:11:49 à 22:20:32 UTC−03**, conserve **32 sessions mesurées / 400 actions**, avec les seules huit chauffes / 24 actions exclues. La [revue indépendante](lot4c-evidence/performance-integrated/owner-growth-review.json) passe **7 630/7 630 contrôles** et accepte **2/2 jeux** contre la référence fraîche réellement publiée 0.56.
+
+| Jeu | Médiane complète 0.56, ms | Médiane complète 0.57, ms | Variation globale |
+| --- | --- | --- | --- |
+| STCK | 11 253,251434999998 | 11 046,9208325 | **−1,833520 %** |
+| SMLP | 16 297,509763000002 | 16 272,070031000007 | **−0,156096 %** |
+
+**Chaque jeu reste strictement sous +10 %.** Une phase dépassant 10 % est acceptée lorsque ce critère global passe, sans modifier son diagnostic. L'agrégat reste **15/16**, avec restauration SMLP **+25,066387 %** ; les cohortes restent **15/16 chacune**, nouvelle décision STCK **+10,782328 %** puis restauration SMLP **+42,839691 %**. Le p95 de restauration STCK augmente de **+13,878385 %** en agrégat et **+22,824004 %** en cohorte 2. Le [rapport complet](lot4c-evidence/performance-integrated/results.md) conserve toutes les sessions, valeurs défavorables, inspections, pauses et mémoires, sans compensation entre jeux, soustraction de coût, somme de phases ni moyenne des ratios.
+
+Le [refus strict historique](lot4c-evidence/performance-integrated/aggregation-failure.json), **code 1**, reste un échec. L'analyse complémentaire conserve **432 écarts sur quatre chemins structurels qualifiés avant mesure**, appuyés par **37 deltas attribués / 64 contrôles fonctionnels non chronométrés**, puis **65/65 contrôles préalables**. Chaque session correspond à sa forme publique déclarée ; les compteurs ne prouvent pas l'identité de toutes les feuilles privées. L'[intégrité de livraison](lot4c-evidence/integrated-final/delivery-integrity.json) et l'[isolation clôturée](lot4c-evidence/performance-integrated/coordinated-isolation-completion.json) sont passées sur les entrées inchangées, avec verrou tenu sur toute la fenêtre. Le [premier essai de préparation post-mesure](lot4c-evidence/performance-integrated/post-window-analysis/preparation-attempt-01.json) conserve l'absence initiale des comparaisons de cohortes ; leur génération par les outils déclarés n'a répété aucune mesure ni modifié d'entrée.
+
+Ces mesures de boucle commune excluent moteur de jeu, réseau de production et rendu navigateur. Elles ne démontrent ni le coût d'une longue composition Facet, ni la stabilité pendant plusieurs heures, ni l'interruption immédiate de toute recherche par Pause, ni la parité de l'appelant complet. Les p95 sous vingt observations restent indisponibles et les variations GC/JIT ou d'ordonnancement ne sont pas annulées par ABBA.
+
+### Clôture documentaire et prochaine étape hors lot 4
+
+La présente clôture documentaire conserve les entrées natives, tests, build et membres applicatifs de **Site 92/native 0.57**. Le déploiement natif et l'accès privé sont vérifiés ; le reçu terminal de cette clôture est communiqué séparément.
+
+Le prochain travail concret est **l'intégration finale de 5B / `observed_addressed_material` / native 0.58**, préparé dans son fil parallèle, en conservant cette clôture. Cette étape est hors du lot 4 ; aucune nouvelle implémentation n'est ajoutée à la livraison 4C. 5C reste sa suite distincte et **10B / WindowQuestion** demeure la prochaine étape du fil 10.
+
+## Prédécesseur publié : AxialQuestion 0.56.0, Sites 90–91, coût accepté
+
+La [première publication native 10A](lot10a-evidence/publication/native-publication.json) confirme **Site 90 / native 0.56.0**, commit `617d1f607d37a6bba1f7ae8ffe1826806e6749a0`, déploiement **`succeeded` le 10 novembre 2026 à 21:37:52.792934 UTC−03**. Sa clôture documentaire est réellement publiée dans [Site 91](lot4c-evidence/planning/published-predecessor-site91.json), commit `5659ddc9420c7624df4865f0afc628782296a186`, sans changement du moteur ni du build. L'accès privé réservé au propriétaire est conservé. Le registre publié 0.56 compte **60/76 entrées raccordées et 16 restantes** ; la publication 4C/Site 92 ci-dessus atteint 61/76 et les compteurs historiques de 7B restent **59/76 et 17**.
+
+Le fil du lot 10 porte `axial_question` depuis la publication réelle **Site 83 / native 0.52**, commit `bed48116585da864dd5c412ed11dd6990a950e8e`, dans une branche isolée. Son [bilan](lot10a-axial-question.md) et sa [filiation](lot10a-axial-question-lineage.md) conservent le choix source, OP18, le propriétaire unique, l'acquisition passive et active, les gardes, les tentatives et les méthodes transportables. **130/130 comparaisons et contrats de composant**, puis **6/6 scénarios du caller commun**, passent. Une sélection acquise par une autre famille rend Axial admissible ; la rotation acquise conduit à `ACTION4`, tandis que l’ablation des seuls reçus de rotation donne `ACTION3` dans le scénario synthétique vérifié. Le passage de frontière impose une nouvelle attestation de sélection avant rappel des méthodes.
+
+Le registre recalculé du gel isolé est **57/76**, soit **19 entrées ouvertes**, avec **37 workflows compilés**. Ces nombres restent ceux de cette branche avant intégration des prédécesseurs. La validation isolée, l'intégration, le coût et la publication gardent des reçus distincts. La réserve de jeu Axial demeure ouverte : le seul cas initial admis, POLA, possède une tentative historique interrompue dont le temps n'est pas reconstructible ; aucun budget de cas n'est remis à zéro.
+
+La [validation isolée](lot10a-evidence/README.md) ajoute **5/5 contrôles du projet**, build compris, et **7/7 rejeux, 119/119 comparaisons sur 292 commandes**. La première suite de 31 fichiers conserve son résultat **866/867** ; l'attente d'adjacence Recolor devenue obsolète est corrigée selon le DRM, puis ses trois tests passent. Le gel natif `cabd056f` demeure distinct du candidat intégré décrit ci-dessous. Ce gel isolé ne constitue pas la preuve de coût ni de publication 10A.
+
+La branche 10A conserve le prédécesseur réellement publié **5A / Site 84 / native 0.53**, commit `51e2813dedb2d71001290f94f100605e0327ead3`, et sa clôture documentaire publiée **Site 85**, commit `a009e1f138bb18251d697f49647bacc615ee514f`, sans changement des entrées natives, tests ou build de 5A. **4B réellement publié dans Site 86 / native 0.54, commit `082ce553ce4dfbac37071a64497bcca129b7ced0`, est intégré.** La clôture documentaire 4B publiée dans **Site 87**, commit `dd355400264b50942486559b8ca56ee6dfc6a3cc`, est également intégrée, avec les mêmes entrées natives, tests et build. La [publication effective de 7B / Site 88](lot10a-evidence/coordination/published-7b-site88.json), commit `43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7`, et sa clôture documentaire **Site 89**, commit `4cea66731c0809f08288ea6f7287ef3dd7a392bd`, sont intégrées. **Site 88 / native 0.55.0 est la référence réelle du coût 10A accepté** ; la clôture Site 89 conserve le même build.
+
+Le [diagnostic de la fusion 4B + Axial](lot10a-evidence/diagnostic/post4b-inventory-run.json), terminé à **20:01:51 UTC−03**, donne **59/76 entrées raccordées** : `goal_access` **10/12**, `window_constraints` **21/21**, `surface` **9/10**, `factored_material_return` **19/33**. L'audit recense **181 composants vérifiés, 146 transferts partiels, 1 042 modules en attente et zéro module entièrement vérifié**, avec une liste d'échecs vide. L'étiquette native **0.54** reste héritée et provisoire. Ce diagnostic intermédiaire garde sa portée distincte des preuves isolées, de la validation intégrée et du coût final décrits ci-dessous ; il ne constitue pas une publication 10A.
+
+Le candidat de validation **0.56.0** a été composé avant publication avec le gel préparé **7B / 0.55.0**, commit `28f3f388e18bad21a186795f965102a83e6b53d7`, digest `ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b`. La [déclaration de source préparée](lot10a-evidence/coordination/prepared-7b-source-observation.json) conserve cette provenance historique. La [réconciliation après fusion des Sites 88 et 89](lot10a-evidence/coordination/published-7b-sites88-89-reconciliation.json) vérifie l'identité octet pour octet pour les **294 fichiers natifs, 676 entrées source/tests, 359 entrées de build, 11 entrées de rejeu et le worker final** du candidat. Les entrées source, tests, scripts, public, contenu et build de 7B sont identiques entre le gel préparé, Site 88 et Site 89. Le coût global 10A est accepté ; sa publication privée est confirmée dans **Site 90**.
+
+La validation de ce candidat, exécutée avant publication de 7B au commit `19f3116c95e8e8ce99aff067de113ae23fc634d6` et digest natif `be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a`, passe **1 538/1 538 tests dans 45 fichiers**, les **5/5 contrôles du projet**, puis **7/7 rejeux et 119/119 comparaisons**. Le driver a terminé le **10 novembre 2026 à 20:25:37 UTC−03**, avec sources et entrées d'exécution inchangées. Les rejeux couvrent **292 commandes, 210 préfixes, 299 paquets publics, 1 405 images d'animation, 502 requêtes et 21 frontières naturelles**. Leurs durées fonctionnelles concurrentes ne sont pas des mesures de performance.
+
+L'[audit du candidat](lot10a-evidence/integrated-final/validation/checks-run.json) recense **60/76 entrées raccordées**, soit **16 ouvertes** : `goal_access` **10/12**, `window_constraints` **21/21**, `surface` **9/10**, `factored_material_return` **20/33**. Il compte **185 composants vérifiés, 147 transferts partiels, 1 037 modules en attente et zéro module entièrement vérifié**, sur **1 369 modules Python et 417 fichiers de données**, sans échec sémantique. Les **37 workflows compilés**, les **6/6 branches de façade observées** et les six portes de migration globale encore ouvertes conservent leurs portées distinctes. Ces résultats, acquis avant publication de 7B, sont conservés après vérification de l'identité des entrées lors de la fusion des Sites 88 et 89 ; ils ne déclarent aucune publication 10A.
+
+La [QA navigateur TRIA](lot10a-evidence/integrated-final/browser/browser-qa.json) passe sur ce gel en une session froide continue : **trois niveaux, 17 actions, 17 plans**. Pause est confirmée à **4 actions**, puis une seule action mène à **5**. L'[observation intermédiaire](lot10a-evidence/integrated-final/browser/observed-states.json) où l'URL affiche déjà le niveau 4 garde les compteurs **16/2/16** avant scellement ; le résultat final confirmé est **17/3/17**. L'[horloge cumulée](lot10a-evidence/integrated-final/browser/case-clock-continuation.json) atteint **895,795295 secondes**, sans remise à zéro, et le preview est arrêté. Il s'agit d'une régression UI sur un cas existant, sans preuve d'apport propre Axial. L'identité du gel est vérifiée après fusion de 7B / Sites 88 et 89 ; la publication privée 10A est confirmée dans Site 90 après acceptation du coût global.
+
+### Coût 10A accepté et publication privée confirmée
+
+La [fenêtre officielle](lot10a-evidence/performance-integrated/window.json) du **10 novembre 2026, 21:14:54.378751 → 21:23:30.797609 UTC−03**, conserve l'ordre A1/B1/B2/A2, **32 sessions mesurées et 400 actions**. Les **huit chauffes et leurs 24 actions** sont les seules exclusions. La [revue indépendante](lot10a-evidence/performance-integrated/owner-growth-review.json) passe **7 688 contrôles** ; `accepted` et `globalAccepted` sont vrais pour **2/2 jeux**.
+
+| Jeu | Médiane complète Site 88 / 0.55, ms | Médiane complète 10A / 0.56, ms | Écart |
+| --- | ---: | ---: | ---: |
+| STCK | 10 713,182300500002 | 10 754,6912595 | **+0,387457 %** |
+| SMLP | 16 364,226173000006 | 16 386,577008 | **+0,136584 %** |
+
+Chaque jeu reste strictement sous **+10 %** sur les médianes des sessions complètes regroupées, sans soustraction de coût ni compensation entre jeux. Les **16/16 diagnostics de phase agrégés** passent ; chaque cohorte conserve **15/16**, avec garde de préfixe SMLP **+15,31 %** dans la première et acquisition/persistance SMLP **+13,99 %** dans la seconde. Le [refus strict](lot10a-evidence/performance-integrated/aggregation-failure.json), code **1**, `Within-cohort work metadata changed`, reste en échec. La qualification structurelle fixée avant mesure passe **64 contrôles**, la consolidation vérifie **432 deltas**, et le contrôle statique préalable passe **77 contrôles**. Le [rapport complet](lot10a-evidence/performance-integrated/RESULTS.md) conserve toutes les sessions et les limites de cette acceptation globale.
+
+L'[intégrité de livraison](lot10a-evidence/integrated-final/delivery-integrity.json) et les [entrées de publication](lot10a-evidence/integrated-final/publication-inputs.json) sont **passées**, sur les sources et le worker inchangés. **10A est publié en privé dans Site 90 ; 10B est désormais la prochaine étape de ce fil, hors de cette livraison.** Le coût STCK/SMLP ne caractérise pas un long historique de rotations Axial. Les réserves POLA, l'attribution prudente des images aux frontières et la parité complète de l'appelant restent explicites ; aucune contribution propre en jeu n'est déduite du coût ou de la QA TRIA.
+
+<!-- LOT7B_CURRENT_START -->
+
+## Jalon publié : Symbols 0.55 dans Site 88, coût global accepté
+
+Le gel **7B / native 0.55.0** intègre le prédécesseur réellement publié **4B / Site 87 / native 0.54.0**, commit `dd355400264b50942486559b8ca56ee6dfc6a3cc`, avec 5A, 7A, 4A et 3I. Le [raccordement à la publication réelle](lot7b-evidence/coordination/published-base-binding.json) et le [contrôle de la clôture Site 87](lot7b-evidence/coordination/published-4b-site87-source-closure.json) préservent exactement les entrées d'exécution du Site 86. Le gel `ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b` contient **291 fichiers natifs**, dans une archive de **302 fichiers**.
+
+**7B raccorde `observed_symbol_transaction` à `v6.symbol_transactions.choose`, avec son propriétaire distinct `public_symbol_transaction`.** Le guide mesuré et l'interface acquise gardent leurs conditions source de repli, leur ordre DRM et leurs alternatives. La garde lie la transaction au cadre, à l'entité qui possède le point, à l'action exacte et à la situation courante. Seul le retour sélectionné de Symbols alimente son acquisition ; Workshop conserve séparément son chemin actif et passif unique.
+
+La [validation finale](lot7b-evidence/integrated-final/validation/delta-tests-run.json) passe **4 327/4 327 tests dans 112 fichiers**, avec les [cinq contrôles du projet](lot7b-evidence/integrated-final/validation/checks-run.json). Les [huit régressions strictes](lot7b-evidence/integrated-final/regressions/regression-summary.json) passent **136/136 comparaisons**, sur **309 actions, 317 paquets publics, 227 préfixes et 24 frontières**. Le [rejeu LKEY séparé](lot7b-evidence/integrated-final/lkey-partial/qualification.json) conserve **157/157 contrôles**, **deux niveaux et 25 actions**, avec état brut `failed` et arrêt `frontier_unknown` au troisième niveau.
+
+La campagne froide finale CRAF et le [navigateur réel](lot7b-evidence/integrated-final/browser/browser-qa.json) réussissent chacun **trois niveaux en 36 actions**. Le navigateur vérifie Pause après une action, le passage exact à deux actions avec le pas unique et les frontières naturelles à **9, 20 et 36 actions**. La [comparaison Python froide](lot7b-evidence/integrated-final/original/craf-public-parity.json) vérifie **144/144 appels et 432/432 comparaisons exactes**, puis **36/36 préfixes acquis et restaurations natives réellement observées, avec 252/252 contrôles**. L'observateur relève 72 appels natifs de restauration au total ; les 36 appels observés en fin de préfixe sont liés aux retours sélectionnés, y compris au dernier retour. Python reconstruit son propre état, sans injection d'état appris natif.
+
+Les **36 retours sélectionnés** sont acquis une seule fois, sans retour étranger. Retirer les méthodes acquises supprime les **27 propositions d'interface** des niveaux suivants ; retirer la liaison courante en supprime **18**, sans additionner ces deux effectifs comme des décisions distinctes. Quatre ablations du compteur changent les preuves pour la même décision. Ces contrefactuels comparent des propositions dans une situation publique fixe ; ils ne sont pas des campagnes de jeu supplémentaires. L'[horloge CRAF](lot7b-evidence/integrated-final/craf-case-checkpoint-final.json) conserve **1 646,100543 secondes cumulées**, avec **753,899457 secondes restantes**, sans remise à zéro.
+
+L'[intégrité de livraison](lot7b-evidence/integrated-final/delivery-integrity.json) vérifie **291 fichiers natifs, 302 membres d'archive, 670 entrées source/tests, 356 entrées de build et 1 786 originaux inchangés**. Le [rapport 7B](lot7b-symbol-transactions.md) et sa [filiation](lot7b-symbol-transactions-lineage.md) conservent les contrats, adaptations natives, preuves, échecs de préparation et limites.
+
+<!-- LOT7B_COST_FINAL_START -->
+
+### Coût officiel 7B : accepté sur les deux jeux
+
+La [fenêtre exclusive](lot7b-evidence/performance-integrated/window.json) conserve **A1/B1/B2/A2, 32 sessions et 400 actions**. Seules les huit chauffes/24 actions pré-déclarées sont exclues ; aucune session mesurée, valeur extrême ou cohorte n'est écartée. La [revue arithmétique indépendante](lot7b-evidence/performance-integrated/owner-growth-review.json) passe **3 927/3 927 contrôles** et accepte les deux jeux sur leurs huit durées complètes par version, avec une hausse **strictement inférieure à +10 % pour chacun**.
+
+| Jeu | Médiane complète 0.54, ms | Médiane complète 0.55, ms | Variation globale |
+| --- | ---: | ---: | ---: |
+| STCK | 10 885,500044 | 10 643,0299425 | **−2,227459 %** |
+| SMLP | 16 007,482053 | 16 123,439359 | **+0,724394 %** |
+
+Les **16/16 diagnostics agrégés** passent. Chaque cohorte conserve **15/16** : la garde de préfixe STCK dépasse **+13,614846 %** dans la première, et la nouvelle décision SMLP **+15,024264 %** dans la seconde. Les trois p95 agrégés défavorables de SMLP restent visibles : service de préfixe **+16,264866 %**, garde **+12,644657 %**, acquisition/persistance **+13,016930 %**. Aucune phase imbriquée n'est additionnée et aucun jeu ne compense l'autre. Le [rapport complet](lot7b-evidence/performance-integrated/results.md) conserve toutes les sessions, phases, p95 disponibles, dispersions, pauses et observations de mémoire.
+
+Le [refus historique strict](lot7b-evidence/performance-integrated/aggregation-failure.json) reste en échec sur l'identité des métadonnées de travail. Le protocole, les deux analyseurs, la qualification structurelle **64/64**, sa [revue préalable](lot7b-evidence/diagnostic/final-cost-qualification-independent-review.json) **44/44** et les **68 contrôles statiques** ont été fixés avant mesure, au commit `ab0829f9c74c009aa881f7d25819b58ac01407ab`. La consolidation vérifie les **432 différences de compteurs** contre les quatre formes réellement capturées. Seuls les quatre chemins de compteurs annoncés sont qualifiés ; les autres métadonnées restent exactes et les signatures de travail sont strictes au sein de chaque version. Les valeurs privées des sessions mesurées ne sont pas déduites de ces compteurs.
+
+Les captures fonctionnelles STCK/SMLP comportent **35 deltas attribués**, soit 27 états du propriétaire et huit installations. Aucun retour Symbols n'est sélectionné sur ces parcours : ils mesurent son surcoût dans la boucle commune, sans établir le coût d'une trajectoire Symbols active sur CRAF. Aucun temps, outil, règle ou effectif n'est corrigé après mesure. L'[isolation clôturée](lot7b-evidence/performance-integrated/coordinated-isolation-completion.json) conserve les cinq statuts des autres fils à octets identiques ; le verrou a été libéré après la dernière série. Le [contrôle des entrées de publication](lot7b-evidence/integrated-final/publication-inputs.json) est passé sur les mêmes sources, tests et worker.
+
+<!-- LOT7B_COST_FINAL_END -->
+
+<!-- LOT7B_PUBLICATION_FINAL_START -->
+
+**La première publication native 7B est confirmée dans Site 88**, moteur **0.55.0**, avec état terminal `succeeded` le **10 novembre 2026 à 20:56:02 UTC−03**. Le [reçu effectif](lot7b-evidence/publication/native-publication.json) lie le commit publié `43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7`, l'arbre validé `63299a0dfe2b0901d80b1e851d4bd0250813605e` et le worker compilé. La cible `93ec798a017febbeca8aec3f705bc04d9ebe26c4` reste son parent direct. Le [transport borné](lot7b-evidence/publication/source-transport.json) conserve l'histoire et les preuves, avec cinq envois ordinaires sans déploiement intermédiaire ; les [75 fichiers du build](lot7b-evidence/publication/source-archive-equality.json) sont identiques à chaque étape. L'accès privé reste inchangé. La clôture documentaire qui consigne ce résultat réutilise le même build et ne constitue pas un nouveau gel natif.
+
+La [vérification indépendante de Site 88](lot10a-evidence/coordination/published-7b-site88.json) confirme l'accès privé réservé au propriétaire. La clôture documentaire est réellement publiée dans **Site 89**, commit `4cea66731c0809f08288ea6f7287ef3dd7a392bd`, avec la même archive et un déploiement `succeeded` le **10 novembre 2026 à 21:02:01.902393 UTC−03**. Le prédécesseur de la livraison 7B reste **Site 87 / native 0.54.0**. Ces publications ne constituent pas celle de 10A.
+
+<!-- LOT7B_PUBLICATION_FINAL_END -->
+
+Le registre intégré atteint **59/76 entrées raccordées**, zéro partielle et **17 ouvertes** : `goal_access` **10/12**, `window_constraints` **21/21**, `surface` **9/10**, `factored_material_return` **19/33**. L'audit recense **181 composants vérifiés, 146 transferts partiels, 1 042 modules en attente et zéro module entièrement vérifié**. Ces compteurs ne prouvent ni la parité de tout l'appelant Python ni la migration complète ; les six conditions globales restent ouvertes.
+
+<!-- LOT7B_CURRENT_END -->
+
+<!-- LOT4B_CURRENT_START -->
+
+## Jalon publié précédent : RelativeArrangements 0.54, Site 86 puis Site 87
+
+Le moteur **0.54.0**, publié dans **Site 86**, intègre le prédécesseur réellement publié **5A / Site 85 / native 0.53.0**, commit `a009e1f138bb18251d697f49647bacc615ee514f`, ainsi que 7A, 4A et 3I. Le [reçu de clôture du prédécesseur](lot4b-evidence/integrated-baseline/published-closure85.json) confirme que Site 85 conserve les entrées d'exécution du Site 84. Le gel 4B `f25d56d1c63dc929b01bb31b3898b84cecc69e6e412d535c0d122170ea401ce9` contient **286 fichiers natifs**, dans une archive de **297 fichiers**.
+
+**4B raccorde `relative_arrangement` au workflow existant `v6.relative_arrangements.choose`.** L'acquisition porte uniquement sur une proposition sélectionnée, sa commande exacte et son observation initiale liée. Les modèles, les essais refusés et `selection_ref` restent dans un propriétaire distinct. Une interface non reconnue permet les replis ; une interface reconnue sans expérience admissible clôt le reste de `window_constraints`, symétrie comprise, puis les autres groupes continuent. Les deux parcours de préférence du runtime respectent cet arrêt avant la proposition et l'admission d'un fournisseur tardif. La continuation acquise peut auparavant consulter son témoin et sa corroboration Kernel ; cette lecture ne confère aucune autorité à une offre bloquée.
+
+La [validation finale](lot4b-evidence/integrated-final/test-expectation-correction/validation/delta-tests-run.json) passe **4 048/4 048 tests dans 108 fichiers**, avec les [cinq contrôles du projet](lot4b-evidence/integrated-final/test-expectation-correction/validation/checks-run.json). L'échec initial **4 047/4 048** reste conservé : seule une attente de liste exhaustive a reçu l'entrée nouvellement raccordée ; le moteur gelé n'a pas changé. Les [huit rejeux stricts](lot4b-evidence/integrated-final/regressions/regression-summary.json) passent **136/136 contrôles**, sur **309 actions, 317 paquets publics, 227 préfixes, 536 requêtes et 24 frontières naturelles**. Le [contrôle LKEY séparé](lot4b-evidence/integrated-final/lkey-partial/qualification.json) conserve **157/157 contrôles**, deux niveaux et 25 actions, avec campagne brute `failed` et arrêt `frontier_unknown` au troisième niveau.
+
+TRIA a atteint trois niveaux en **17 actions et 17 préfixes** dans la campagne froide de développement. Sur le gel final, le rejeu conserve ce parcours et la [comparaison Python froide](lot4b-evidence/integrated-final/tria-relative-arrangement-source-parity.json.gz) concorde sur **68/68 appels**, **34 gardes**, **17 acquisitions sélectionnées**, **17 restaurations**, **18 observations publiques et 16 choix ultérieurs**, sans différence et sans amorcer Python depuis un état natif. Les 51 ablations restent visibles : deux interventions changent l'action au **même appel 44**, quatre changent seulement les métadonnées et 45 laissent la proposition entière inchangée. `failed` est vide aux 17 choix de ce parcours ; son effet est établi dans les preuves synthétiques, pas dans ce jeu.
+
+Le [contrôle navigateur final](lot4b-evidence/integrated-final/browser/browser-qa-test-correction-binding.json) a observé une session TRIA froide continue, **trois niveaux et 17 actions**, avec Pause et une action. La preuve est une transcription structurée des états d'accessibilité observés, sans capture d'écran revendiquée. Le [reçu de continuation](lot4b-evidence/integrated-final/browser/browser-qa-continuation-test-correction-binding.json) ajoute **389,595754 s** aux **374,140910 s** de la résolution initiale : **763,736664 s cumulées**, sans remise à zéro du plafond de 2 400 s.
+
+L'[intégrité fonctionnelle](lot4b-evidence/integrated-final/delivery-integrity.json) vérifie **286 fichiers natifs, 297 membres d'archive, 657 entrées source/tests, 351 entrées de build et 1 786 originaux inchangés**. Le protocole de coût est déclaré avant mesure, avec **65/65 contrôles statiques** et une qualification structurelle préalable de **64/64 contrôles**. Le premier contrôle statique échoué sur deux liens de dépendances absents reste archivé, puis le même outil inchangé a réellement vérifié leur préparation. La mesure officielle est terminée et son verdict accepté est détaillé ci-dessous ; la première publication est confirmée dans Site 86.
+
+<!-- LOT4B_COST_FINAL_START -->
+
+### Coût officiel 4B : accepté sur les deux jeux
+
+La [fenêtre exclusive](lot4b-evidence/performance-integrated/window.json) conserve **A1/B1/B2/A2, 32 sessions et 400 actions**, avec huit chauffes/24 actions exclues selon la déclaration préalable. Aucune session mesurée ni valeur extrême n’est écartée. La [revue indépendante](lot4b-evidence/performance-integrated/owner-growth-review.json) passe **3 960/3 960 contrôles** et accepte les deux jeux sur la médiane groupée de session complète **strictement sous +10 % pour chacun**. Les phases imbriquées ne sont pas additionnées et aucun jeu ne compense l’autre.
+
+| Jeu | Médiane complète 0.53, ms | Médiane complète 0.54, ms | Variation globale |
+| --- | ---: | ---: | ---: |
+| STCK | 10 986,992674 | 10 787,8010065 | **−1,812977 %** |
+| SMLP | 16 041,944504 | 16 480,765660 | **+2,735461 %** |
+
+Les diagnostics agrégés restent **14/16**, et les deux cohortes **15/16 chacune**. Les dépassements agrégés SMLP sont conservés : **garde de préfixe +12,069030 %** et **restauration +29,830670 %**. Les p95 défavorables restent également visibles : service/requête de préfixe STCK **+32,773109 % / +26,838601 %**, garde de préfixe SMLP **+23,351327 %** et acquisition/persistance SMLP **+12,278213 %**. Leur maintien ne réintroduit pas un veto de phase lorsque le critère global autorisé est satisfait. Le [rapport complet](lot4b-evidence/performance-integrated/results.md) conserve tous les échantillons, cohortes, pauses et observations de mémoire.
+
+Le [contrôle historique strict](lot4b-evidence/performance-integrated/aggregation-failure.json) reste en échec sur l’identité des métadonnées de travail, du fait du propriétaire ajouté. La qualification structurelle, ses captures et ses règles ont été fixées **avant mesure** : 64 contrôles, 58 points appariés/116 graphes et 37 deltas attribués aux trois nœuds RelativeArrangements. Les 432 différences structurelles des sessions mesurées sont vérifiées contre leurs formes déclarées ; les autres métadonnées de travail restent exactes, et les signatures complètes restent exactes au sein de chaque version. Les feuilles privées des sessions mesurées ne sont pas déduites de leurs seuls compteurs. Aucune durée, règle, population ou outil n’est corrigé après mesure. Le [contrôle des entrées de publication](lot4b-evidence/integrated-final/publication-inputs.json) lie ces coûts acceptés au même gel fonctionnel et au build déjà vérifié.
+
+Les autres fils sont restés dans leur engagement de repos pendant la fenêtre. Une première assertion de clôture exigeant des octets de statut identiques a échoué sur deux notes textuelles de préparation de 7B ; cet [échec de suivi](lot4b-evidence/performance-integrated/isolation-completion-attempt1.json) et la [clôture qualifiée](lot4b-evidence/performance-integrated/coordinated-isolation-completion.json) conservent précisément les changements, sans charge déclarée, mesure écartée ou nouvelle fenêtre.
+
+<!-- LOT4B_COST_FINAL_END -->
+
+### Publication 4B vérifiée
+
+La [première publication](lot4b-evidence/integrated-final/publication-site86.json) est **Site 86 / native 0.54.0**, commit **`082ce553ce4dfbac37071a64497bcca129b7ced0`**, déploiement **`succeeded` le 10 novembre 2026 à 19:59:03 UTC−03**, accès privé conservé. La version et le statut ont été relus après l’appel de publication. Le [transport](lot4b-evidence/integrated-final/publication-source-transport.json) conserve cinq envois ordinaires, sans publication intermédiaire ni envoi forcé ; le commit original de livraison est un parent direct de l’envoi final avec exactement le même arbre. Les 75 contenus des archives de déploiement et le worker compilé restent identiques. La clôture documentaire de ces reçus conserve ce moteur et ce build.
+
+Le registre du gel 4B publié atteint **58/76 entrées raccordées**, zéro partielle et **18 ouvertes** : `goal_access` **10/12**, `window_constraints` **21/21**, `surface` **9/10**, `factored_material_return` **18/33**. L'audit recense **177 composants vérifiés, 145 transferts partiels, 1 047 modules en attente et zéro module entièrement vérifié**. Ces compteurs ne mesurent ni la réussite générale en jeu ni la parité complète de l'appelant Python.
+
+**Au jalon 4B, 4C, `facet_example`, restait à transférer.** Son transfert fonctionnel 0.57 et ses deux étapes de clôture encore ouvertes sont désormais décrits en tête de cette feuille de route. Le [rapport 4B](lot4b-relative-arrangements.md) et sa [filiation](lot4b-relative-arrangements-lineage.md) conservent les contrats de composant, le routage synthétique et la contribution observée de ce jalon historique. La migration globale reste ouverte.
+
+<!-- LOT4B_CURRENT_END -->
+
+<!-- LOT5A_CURRENT_START -->
+
+## Jalon publié précédent : lot 5A, Site 84 puis Site 85, moteur 0.53 et coût global accepté
+
+Le moteur **0.53.0** est publié dans **Site 84**, au commit `51e2813dedb2d71001290f94f100605e0327ead3`. Il intègre les publications réelles **Site 82 puis Site 83 / 7A / native 0.52**, en conservant 4A et 3I. Le [reçu de réconciliation](lot5a-evidence/final/published-predecessor-reconciliation.json) vérifie les deux ascendances et l'absence de différence d'entrées d'exécution entre 82 et 83. La référence de coût reste donc le Site 82 annoncé avant mesure. Le gel 5A publié contient **283 fichiers natifs**, digest `d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f`, dans une archive de **294 fichiers**.
+
+**5A raccorde `linked_temporal_preparation`** à sa position source, avec un propriétaire unique, des retours sélectionnés ou passifs acquis une fois, des chemins de touches bornés et une restauration contrôlée. Les contrats effectivement consommés de LinkedPreparation et LinkedContact sont transférés ; les politiques autonomes de PhaseRelations et PhaseTransfer restent partielles. Le [rapport 5A](lot5a-linked-temporal-preparation.md) et sa [filiation](lot5a-linked-temporal-lineage.md) conservent ces limites. **5B, `observed_addressed_material`, puis 5C, `observed_object_binding`, restent ouverts.** Les lots 4 et 7 poursuivent leurs travaux dans leurs propres fils.
+
+Les changements communs regroupent les écritures du Kernel par point de sauvegarde, partagent les branches immuables de Frontier, suppriment des copies retenues en double et reconnaissent l'optimum exact sans recoloration dans CrossedPrefix. Ils préservent les retours, les gardes, les causes, l'ordre et la restauration. Les tests couvrent également un chemin mixte touche/clic/touche, Pause et reprise. Cette preuve de transport ne crée pas une politique de chemins multiples pour WEAV. Le raccourci sans recoloration ne constitue pas encore une propagation générale de tous les coups obligatoires.
+
+La [validation finale](lot5a-evidence/final/test-expectation-correction/validation/delta-tests-run.json) passe **3 835/3 835 tests dans 102 fichiers**, ainsi que les [cinq contrôles](lot5a-evidence/final/test-expectation-correction/validation/checks-run.json). L'échec initial **3 834/3 835** et la correction de l'attente de compteur 56/57 restent conservés ; le moteur n'a pas changé. La [preuve de boucle commune](lot5a-evidence/final/linked-temporal-common-loop.json.gz) passe **16/16 contrôles**, avec deux branches froides, 12 retours et deux préfixes propres de deux touches ; l'effet du retour positif ou négatif modifie la décision suivante. Les [sept rejeux](lot5a-evidence/final/regressions/regression-summary.json) passent **119/119 comparaisons**, **292 actions et 210 préfixes**, dont les 81 actions WEAV déjà enregistrées.
+
+**WEAV niveau 6 reste non résolu.** Le [diagnostic antérieur isolé](lot5a-evidence/weav/native050-delta-diagnostic/result.json), limité aux premières optimisations sur 0.50, s'arrête au quatrième niveau après trois niveaux acquis et 105 actions lorsque l'horloge cumulative atteint sa limite. Il n'inclut ni le partage Frontier final ni le propriétaire 5A ; il ne prouve pas leur gain en jeu. Aucune nouvelle tentative ne remet cette horloge à zéro. Le graphe et ses journaux historiques restent conservés : certaines copies de tables restent proportionnelles à l'historique. Une compaction future doit prouver quelles données ne sont plus consommées et préserver connaissances, réfutations et obligations. Le [contrôle navigateur](lot5a-evidence/final/browser/browser-qa.json) n'a pas pu s'attacher à l'onglet après deux timeouts CDP ; aucun succès UI 0.53 n'est revendiqué.
+
+Le registre du gel 5A publié atteint **57/76 entrées raccordées, zéro partielle et 19 ouvertes**. Son audit compte **174 composants vérifiés, 145 transferts partiels, 1 050 modules en attente et zéro module entièrement vérifié** ; les six portes de migration globale restent ouvertes. La [fenêtre officielle](lot5a-evidence/performance/window.json) est terminée : **A1/B1/B2/A2, 32 sessions mesurées et 400 actions**, avec huit chauffes et 24 actions exclues comme annoncé. La [revue indépendante Python](lot5a-evidence/performance/owner-growth-review.json) passe **4 669/4 669 contrôles**. Le coût global est **accepté sur 2/2 jeux** sous la règle déclarée. Ces compteurs et ce verdict décrivent 5A avant l'intégration de 10A.
+
+<!-- LOT5A_COST_FINAL_START -->
+
+| Jeu | Médiane complète 0.52 | Médiane complète 0.53 | Variation |
+| --- | ---: | ---: | ---: |
+| STCK | 9 872,1555235 ms | 10 821,7052375 ms | **+9,618464 %** |
+| SMLP | 16 573,0271895 ms | 17 346,1554400 ms | **+4,664979 %** |
+
+Chaque jeu reste **strictement sous +10 %**, sans compensation entre jeux, somme de phases imbriquées ou moyenne des ratios de cohortes. STCK ne garde que **0,381536 point de marge**, soit environ **37,666 ms** sur la médiane du candidat avant le seuil ; la seconde cohorte STCK est à **+11,673421 %** et reste conservée. Les diagnostics agrégés passent **10/16**, les cohortes **10/16 puis 9/16**. Les six dépassements portent sur les nouvelles décisions, la persistance et la restauration : respectivement **+22,74 %, +18,97 %, +99,40 % pour STCK**, **+12,61 %, +26,68 %, +69,50 % pour SMLP**. Les p95 de restauration augmentent de **+192,94 % STCK** et **+134,56 % SMLP**. Cette version ajoute une capacité en respectant le budget autorisé ; les sessions globales mesurées restent plus longues. L'acquisition avec persistance SMLP diminue de **7,99 %**, sans compenser artificiellement un autre critère.
+
+La qualification structurelle **préalable** passe 64/64 contrôles et sa [revue indépendante](lot5a-evidence/performance/diagnostic/shared-fragment-independent-review.json) confirme les 14 premiers créateurs, 70 deltas supplémentaires B et 58 équilibres de révisions. Le [refus historique strict](lot5a-evidence/performance/aggregation-failure.json) reste en échec. Une [réparation de lecteur distincte et postérieure à la mesure](lot5a-evidence/performance/diagnostic/owner-cost-directory-correction-v1.json) corrige uniquement le rejet du dossier exact pourtant déclaré avant la fenêtre ; outils gelés, échec initial, données brutes, règles, formules et populations sont conservés. Les variantes réellement exécutées sont identifiées séparément. Cette acceptation qualifiée garde les réserves WEAV6, navigateur et migration globale.
+
+L'[intégrité de livraison](lot5a-evidence/final/delivery-integrity.json) vérifie **283 fichiers natifs, 294 membres d'archive, 647 entrées source/tests et 348 entrées de build**, ainsi que les **1 786 références originales inchangées**. Les archives et les grands rapports restent reconstruisibles octet pour octet.
+
+<!-- LOT5A_COST_FINAL_END -->
+
+<!-- LOT5A_PUBLICATION_FINAL_START -->
+
+**La première publication 5A est confirmée dans Site 84**, moteur **0.53.0**, commit **`51e2813dedb2d71001290f94f100605e0327ead3`**, déploiement **`succeeded` le 10 novembre 2026 à 19:11:55 UTC−03**, accès privé conservé. Le [reçu Sites](lot5a-evidence/final/publication-site84.json) identifie la version, le commit et l'archive déclarée par le serveur. Une clôture documentaire ultérieure conserve exactement ce moteur et son build.
+
+Le [reçu de transport](lot5a-evidence/final/publication-source-transport.json) conserve trois envois initiaux réussis, le refus d'un objet de 39 817 093 octets dépassant la limite de 32 Mio, puis quatre envois correctifs réussis. Aucun Site intermédiaire n'a été déployé. Le JSON est reconstruit depuis 45 morceaux ; le commit complet original et les commits du premier plan restent récupérables dans un bundle Git incrémental exact de 609 621 octets. L'historique natif et les sources déjà envoyées sont conservés dans l'ascendance publiée, sans envoi forcé. La [procédure et la preuve de reconstruction](lot5a-evidence/final/transport/README.md) distinguent cette conservation du transport initial des neuf gzip en 75 parties. Les 75 fichiers des sept archives de déploiement ont des contenus identiques.
+
+**Prochain périmètre de ce fil : 5B, `observed_addressed_material`, puis 5C, `observed_object_binding`.** La réduction du travail historique et la propagation générique des coups obligatoires restent à poursuivre avec des preuves distinctes ; WEAV niveau 6 n'est pas clôturé. Les lots 4 et 7 restent pris en charge dans leurs autres conversations.
+
+<!-- LOT5A_PUBLICATION_FINAL_END -->
+
+<!-- LOT5A_CURRENT_END -->
+
+## Jalon publié précédent : Workshop 0.52
+
+Le candidat **7A / native 0.52.0** intègre la publication réelle **4A / Site 81**, commit `4dafc40c53ed4406ee7cd148e3e6995a2eb4185e`, après **3I / Site 79**. Son gel `f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb` contient **279 fichiers natifs** et une archive de **290 fichiers**. La réconciliation conserve l'ordre des familles, leurs propriétaires et l'acquisition unique des retours. Le registre courant est **56/76**, avec **20 entrées ouvertes**, 37 workflows compilés et une façade 6/6.
+
+La [revue fonctionnelle intégrée](lot7a-evidence/integrated-final/functional-findings.md) confirme **3 745/3 745 tests dans 97 fichiers**, **5/5 contrôles**, **7/7 régressions et 119/119 comparaisons sur 292 commandes**, puis **49/49 appels source et 147/147 comparaisons exactes** depuis un propriétaire Python froid. Les 25 acquisitions LKEY sont uniques : 14 actives et 11 passives. Les preuves isolées, le premier échec du test d'inventaire et l'erreur de chemin du helper de build restent conservés.
+
+LKEY atteint **deux niveaux**, puis s'arrête à 25 actions sur `frontier_unknown` au troisième. Le [navigateur intégré](lot7a-evidence/integrated-final/browser/browser-qa.json) confirme Pause, une action unique, les deux frontières naturelles et cette réserve. L'[horloge cumulative](lot7a-evidence/integrated-final/lkey-case-checkpoint.json) retient **1 341,622742 secondes utilisées**, **1 058,377258 restantes**, sans remise à zéro. Le diagnostic source hors exécution proposerait une revalidation, mais le caller commun s'arrête sur une famille antérieure ; aucune modification de priorité n'a été introduite pour ce cas.
+
+Les [bilan](lot7a-ranked-workshop.md) et [filiation](lot7a-ranked-workshop-lineage.md) restent les références du périmètre. La [fenêtre officielle de coût](lot7a-evidence/performance-integrated/window.json) est terminée : **A1/B1/B2/A2, 32 sessions et 400 actions**, avec intégrité vérifiée. Les captures fonctionnelles, la qualification structurelle et les règles précèdent la mesure. Le refus de l'agrégateur historique est conservé ; la consolidation complémentaire et sa revue indépendante sont terminées, avec la correction de lecture des chemins de référence explicitement séparée. La première publication est confirmée dans Site 82. La demande de continuer engage **7B** dans un checkout distinct, à partir de ce commit réellement publié ; le moteur 0.52 reste gelé.
+
+<!-- LOT7A_COST_FINAL_START -->
+
+**Le coût global 7A est accepté sur 2/2 jeux sous la règle structurelle déclarée avant mesure**, selon la [revue indépendante](lot7a-evidence/performance-integrated/owner-growth-review.json), **3 866/3 866 contrôles**. La [fenêtre exclusive](lot7a-evidence/performance-integrated/window.json) conserve **A1/B1/B2/A2, 32 sessions et 400 actions**, référence fraîche Site 81/native 0.51 contre native 0.52 :
+
+| Jeu | Médiane complète 0.51 | Médiane complète 0.52 | Variation |
+| --- | ---: | ---: | ---: |
+| STCK | 9 821,3656235 ms | 9 865,8814085 ms | **+0,453255 %** |
+| SMLP | 16 545,1855975 ms | 16 310,572066 ms | **−1,418017 %** |
+
+Les huit sessions par jeu/version sont toutes retenues. Chaque médiane groupée reste **strictement sous +10 %**, sans compensation entre jeux, somme de phases, moyenne de ratios ou exclusion de valeur mesurée. Seules les huit chauffes annoncées, 24 actions, sont exclues. Les phases groupées passent **16/16** ; les cohortes conservent **15/16 puis 16/16**, avec **restauration SMLP +12,133996 %** dans la première. Les p95 groupés augmentent de **+10,534805 % pour la nouvelle décision STCK** et **+50,326822 % pour la restauration SMLP**. Toutes les phases, dispersions, inspections, mesures Pause et mémoire figurent dans le [rapport complet](lot7a-evidence/performance-integrated/results.md).
+
+**L’agrégateur historique strict demeure en échec**, avec son [reçu réel](lot7a-evidence/performance-integrated/aggregation-failure.json). Les **432 différences de signature** correspondent aux quatre chemins structurels et aux formes fonctionnelles fixées avant mesure ; tous les autres champs restent exacts. Les captures fonctionnelles n'exposent pas rétroactivement les feuilles privées des sessions mesurées. Une [correction E/S séparée, après mesure](lot7a-evidence/performance-integrated/diagnostic/owner-cost-io-correction-v1.json), traite uniquement cinq chemins de référence déjà fingerprintés ; l’échec initial et les outils gelés sont conservés. Les outils exécutés sont identifiés séparément, sans changement des règles, calculs, captures, données, seuils ni populations. Cette acceptation qualifiée conserve la réserve LKEY et ne vaut pas parité complète de l’appelant.
+
+L’[intégrité des entrées de publication](lot7a-evidence/integrated-final/publication-inputs.json) confirme les **279 fichiers natifs, 290 membres d’archive, 638 entrées source/tests et 344 entrées du build**, sans nouvelle exécution ni modification du worker déjà compilé.
+
+<!-- LOT7A_COST_FINAL_END -->
+
+<!-- LOT7A_PUBLICATION_FINAL_START -->
+
+**La première publication 7A est confirmée dans Site 82**, moteur **0.52.0**, commit **`0ca36b0a6a358e1e89420753bbcec4a33f028e0a`**, déploiement **`succeeded`** et accès privé conservé. Le [reçu Sites](lot7a-evidence/integrated-final/publication-site82.json) lie le commit, la version et l'archive déclarée par le serveur. Le [transport des sources](lot7a-evidence/integrated-final/publication-source-transport.json) conserve tous les commits et l'arbre final exact ; les cinq pushes normaux n'ont produit aucun déploiement intermédiaire. Les 75 fichiers du build ont un contenu identique dans les cinq archives locales, dont les identités de conteneur restent distinctes. Une clôture documentaire ultérieure garde ce même moteur.
+
+<!-- LOT7A_PUBLICATION_FINAL_END -->
+
+## Jalon publié : Feedback 0.51, coût accepté avec qualification structurelle
+
+La livraison **0.51.0**, gel **`c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7`**, réunit **4A, `observed_feedback_sequence`**, et la livraison **3I effectivement publiée dans Site 79**, commit `6d03c2adda9f60b1c97304f5491a428cfbec7a6c`. Il contient **273 fichiers natifs**, avec une archive de **284 fichiers**. Le registre atteint **55/76 entrées raccordées**, sans entrée partielle ; **21 entrées restent ouvertes**. La façade observée reste **6/6**, avec **37 workflows compilés**. Le [rapport 4A](lot4a-feedback-sequences.md) et sa [filiation source](lot4a-feedback-sequences-lineage.md) délimitent ce transfert. Le premier candidat isolé 4A, provisoirement étiqueté 0.50, demeure une preuve historique distincte de la référence publiée 3I/0.50 et du candidat intégré 0.51.
+
+**La première publication 4A est confirmée dans Site 80**, au commit `a52ef3d8396eb051d6d42d3388072fe0bf2a2d9e`, avec un déploiement **`succeeded` le 10 novembre 2026 à 17:13:29 UTC−03** et le même accès privé. Le [reçu de publication](lot4a-evidence/integrated-051/publication-site80.json) identifie cette livraison native ; une publication documentaire ultérieure conserve le même moteur. Le [transport fractionné](lot4a-evidence/integrated-051/publication-source-transport.json) conserve le rejet initial de taille et tous les octets des preuves.
+
+Une seule instance Feedback et une seule mémoire servent `goal_access` et `information_goal`, selon l’ordre et la configuration originaux. L’acquisition sélectionnée et l’acquisition passive restent distinctes et uniques par retour. Les gardes vérifient les points, valeurs, palettes compactées et préfixes actuels. La méthode d’entrée persiste après effacement de `layout` à une frontière, avec revalidation conditionnelle dans l’époque suivante. La recherche interrompue conserve son incomplétude, sans recommandation ni réfutation acquise.
+
+Le [périmètre formel intégré](lot4a-evidence/integrated-051/validation/delta-tests-run.json) passe **3 566/3 566 tests dans 90 fichiers**, sans échec, annulation, test ignoré ni TODO. Les [5/5 contrôles](lot4a-evidence/integrated-051/validation/checks-run.json), compilation comprise, et les [cinq régressions](lot4a-evidence/integrated-051/regressions/regression-summary.json), **85/85 comparaisons sur 240 actions et 169 préfixes**, passent sur ce même gel. Les originaux V5/V6 restent inchangés.
+
+**MIND atteint trois niveaux naturels dans une session froide : 31 actions, 20 préfixes, arrivée au niveau 4.** La [preuve intégrée](lot4a-evidence/integrated-051/feedback-live-contribution.json) rapproche la campagne réellement exécutée, ses retours publics, l’acquisition unique et les vingt états retenus. La [parité de famille originale](lot4a-evidence/integrated-051/mind-live-01/mind-feedback-source-parity.json.gz) passe **51/51 appels**, soit vingt propositions et trente et une acquisitions. Retirer uniquement l’historique acquis change **trois choix sur huit** ; les cinq choix inchangés sont conservés. Les **2 053 assertions de jointure** en sept groupes sont distinctes du nombre de tests. L’horloge MIND se clôt à **886,070349 secondes cumulées**, sans remise à zéro, avec **1 513,929651 secondes restantes**. Le résultat `NOT_FINISHED / target_levels_completed` ne signifie pas que tout le jeu est terminé ; l’ablation de l’appelant hérité complet reste hors de cette preuve.
+
+Le [contrôle navigateur](lot4a-evidence/integrated-051/browser/browser-qa.json) reste **bloqué par l’infrastructure** : zéro action, aucun comportement d’interface 0.51 vérifié. Le [preview est arrêté](lot4a-evidence/integrated-051/browser/preview-stopped.json). L’[intégrité de livraison](lot4a-evidence/integrated-051/delivery-integrity.json) vérifie les inventaires de source, tests et build ainsi que la reconstruction exacte des six rapports retenus.
+
+<!-- LOT4A_COST_FINAL_START -->
+**Le coût global 4A est accepté sur 2/2 jeux avec une qualification structurelle distincte**, selon la [décision qualifiée](lot4a-evidence/performance-integrated/owner-qualified-global-budget-decision.json). La [fenêtre officielle exclusive](lot4a-evidence/performance-integrated/window.json) conserve **A1/B1/B2/A2, 32 sessions et 400 actions**, référence **Site 79 / native 0.50 fraîche** contre **0.51** :
+
+| Jeu | Médiane de session 0.50 fraîche | Médiane de session 0.51 | Variation globale |
+| --- | ---: | ---: | ---: |
+| STCK | 10 800,922617 ms | 9 818,725429 ms | **−9,093642 %** |
+| SMLP | 16 603,995727 ms | 17 368,032281 ms | **+4,601522 %** |
+
+Chaque médiane groupée des huit sessions par jeu/version reste **strictement sous +10 %**, sans compensation entre jeux, exclusion de session mesurée, somme de phases ou moyenne de ratios. Seules les huit chauffes préannoncées, soit 24 actions, sont exclues. Le diagnostic groupé reste **15/16** : **acquisition/persistance SMLP +11,646641 %**, accepté selon la règle globale autorisée. Les cohortes conservent **16/16 puis 13/16**, avec les dépassements de la seconde : **nouvelle décision STCK +11,793130 %, acquisition/persistance SMLP +16,035659 %, restauration SMLP +10,190083 %**. Les p95 groupés SMLP de service et de requête de préfixe augmentent de **15,739873 % et 16,204141 %**. Tous les résultats défavorables, dispersions, contrôles Pause et mémoire restent dans le [rapport de coût complet](lot4a-evidence/performance-integrated/results-qualified.md).
+
+**L’agrégation stricte demeure en échec**, avec son [reçu original](lot4a-evidence/performance-integrated/aggregation-failure-reproduced.json). Elle exige l’égalité du graphe alors que Feedback ajoute trois nœuds obligatoires et leurs révisions de provenance. Les 432 différences de signature de travail sont exhaustivement attribuées ; tous les autres champs hors durées sont exacts. La [qualification séparée](lot4a-evidence/performance-integrated/owner-addition-qualification.json), **déclarée après mesure**, passe **315 920 contrôles** sur huit sessions de capture distinctes, 62 actions et 104 points. Elle ne prouve pas rétroactivement les feuilles privées non capturées dans la fenêtre. La [revue arithmétique indépendante](lot4a-evidence/performance-integrated/owner-qualified-cost-review.json) passe **274 contrôles**, avec seuils, outils officiels, population, code et durées inchangés ; **tout le coût du nouveau propriétaire reste inclus**. Aucun agrégat strict réussi ni parité intégrale des graphes n’est revendiqué.
+
+L’[intégrité des entrées de publication](lot4a-evidence/integrated-051/publication-inputs-owner-qualified.json) vérifie le gel fonctionnel, les preuves, les calculs qualifiés et la reconstruction exacte des captures. Cette acceptation qualifiée permet la livraison du périmètre 4A ; elle conserve la réserve de navigateur et ne clôt pas la migration entière.
+<!-- LOT4A_COST_FINAL_END -->
+
+L’audit intégré compte **166 composants vérifiés, 142 transferts partiels et 1 061 modules en attente**, zéro module entièrement vérifié ; les six portes de migration complète restent ouvertes. **À ce jalon historique 4A, la suite prévue était 4B, `relative_arrangement`, puis 4C, `facet_example`.** Ces deux sous-lots n’étaient pas implémentés par 4A ; l’état courant 4B figure en tête de cette feuille de route. À ce jalon historique, la préparation 7A devait intégrer la publication effective 4A avant sa validation et sa publication ultérieures.
+
+## Jalon historique : RecurrentSeries 0.50, coût global accepté et Site 79 publié
+
+Le moteur **0.50.0**, gel **`e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87`**, raccorde **3I, `recurrent_series`**, et les deux couches consommées RepeatedLine/SupportedLine dans le propriétaire commun. Le gel contient **270 fichiers natifs**, avec une archive de **281 fichiers**. Le registre atteint **54/76 entrées raccordées**, sans entrée partielle ; **22 entrées restent ouvertes**. La façade observée demeure **6/6**, avec **37 workflows compilés**. Le [rapport 3I](lot3i-recurrent-series.md), la [filiation](lot3i-recurrent-series-lineage.md) et l’[index des preuves](lot3i-evidence/README.md) délimitent le transfert et ses réserves. **3I est clôturé dans son périmètre annoncé, coût compris.** La publication effective est confirmée dans **Site 79**, au commit `6d03c2adda9f60b1c97304f5491a428cfbec7a6c`, avec un déploiement `succeeded`.
+
+Le [périmètre formel](lot3i-evidence/final/validation/delta-tests-run.json) passe **3 225/3 225 tests dans 76 fichiers**, sans échec, annulation, test ignoré ni TODO. Les [5/5 contrôles du projet](lot3i-evidence/final/validation/checks-run.json), compilation comprise, passent avec la [résolution séparée de l’audit](lot3i-evidence/final/validation/migration-audit-resolution.json) ; le premier journal est conservé. L’intégration préserve **19 checkpoints publiés 0.49**. La [boucle commune synthétique](lot3i-evidence/final/recurrent-series-common-loop.json.gz) vérifie **18 groupes dans deux sessions froides**, distinctes d’une campagne en jeu.
+
+**CONN atteint trois niveaux en une session froide : 21 actions, 21 préfixes, arrivée au niveau 4.** Le [navigateur](lot3i-evidence/final/browser/browser-qa.json) confirme **21 actions/trois niveaux/21 plans** après Pause, action isolée et reprise. La [comparaison indépendante](lot3i-evidence/diagnostic/conn-public-parity.json) passe **1 361 contrôles** depuis des mémoires froides : 14 préfixes propres sélectionnés, 21 retours, 34 événements propres et 35 restaurations. Les **84 ablations de composant** conservent **33 changements d’action/refus et 51 résultats négatifs ou inchangés** ; les 35 changements de projection de décision sont un compteur distinct. La parité et l’ablation de l’appelant hérité complet restent hors de cette preuve.
+
+La [résolution CONN](lot3i-evidence/final/conn-resolution.json) conserve **1 014,763812 secondes cumulées**, avec **1 385,236188 secondes restantes**, sans pause ni remise à zéro depuis le scan initial. La référence publiée **Site 78 / native 0.49**, commit `8fa6b261b8b23ac8d232e60c9c179e2f3407d82f`, est plafonnée aux huit actions annoncées et reste à zéro niveau ; ce résultat borné ne démontre pas une incapacité complète. Les horloges antérieures CWSE, SK48, FOGW, VOIS et WEAV restent inchangées.
+
+Les [cinq rejeux](lot3i-evidence/final/regressions/regression-summary.json) passent **5/5 et 85/85 contrôles**, préservant **240 actions et 169 préfixes**. La [récupération WEAV](lot3i-evidence/regression-recovery.json) conserve trois invocations non achevées : SIGKILL après 67 actions, cause non établie ; épuisement explicite du heap à 768 Mio ; identifiant de processus devenu indisponible sans statut final, cause non établie. La quatrième invocation passe **81 actions et 17/17 contrôles**. L’hôte libère la référence avant le harnais inchangé et le driver conserve le journal pendant l’exécution ; code natif, tests, retours publics et comparateur restent inchangés. Les quatre autres réussites sont réutilisées à l’identique.
+
+L’[intégrité de livraison](lot3i-evidence/final/delivery-integrity.json) vérifie le gel, **619 entrées source/tests**, **335 entrées de build**, **22 entrées d’exécution des régressions** et **1 786 originaux inchangés**. **Six rapports, quarante parties et 32 899 809 octets** sont reconstruits exactement. Ces résultats ne constituent pas une nouvelle campagne ni une publication.
+
+<!-- LOT3I_COST_FINAL_START -->
+**Le coût global 0.50 est accepté sur 2/2 jeux**, selon la [décision officielle](lot3i-evidence/performance/global-budget-decision.json), contre Site 78 / native 0.49 fraîche :
+
+| Jeu | Médiane de session 0.49 fraîche | Médiane de session 0.50 | Variation globale |
+| --- | ---: | ---: | ---: |
+| STCK | 11 041,932350 ms | 10 885,015557 ms | **−1,421099 %** |
+| SMLP | 17 831,7418305 ms | 18 222,719469 ms | **+2,192594 %** |
+
+La [fenêtre complète](lot3i-evidence/performance/window.json) conserve **A1/B1/B2/A2, 32 sessions mesurées et 400 actions**, sans exclusion de session mesurée ni de valeur extrême. Seules les **huit chauffes déclarées, soit 24 actions**, sont exclues. Chaque médiane groupée des huit sessions par jeu/version reste **strictement sous +10 %**, sans compensation entre jeux, somme de phases imbriquées ou moyenne des ratios de cohortes.
+
+L’[agrégat](lot3i-evidence/performance/combined-comparison.json) passe **16/16 critères** et la [revue indépendante](lot3i-evidence/performance/consolidation-review.json) **231/231 contrôles**. Les cohortes restent **16/16 puis 9/16**. La seconde conserve notamment une hausse globale STCK de **+11,480161 %** ; elle reste intégralement incluse dans la décision groupée préannoncée. Les p95 STCK augmentent pour la **garde : 0,384598 → 1,172827 ms (+204,948804 %)**, la **persistance : 348,460772 → 385,246448 ms (+10,556619 %)** et la **restauration : 50,753334 → 66,683994 ms (+31,388401 %)**. Tous les diagnostics, dispersions et résultats défavorables restent dans le [rapport de coût](lot3i-evidence/performance/results.md).
+
+**3I est clôturé dans son périmètre annoncé, fonctionnel, contribution, intégrité et coût compris.** La mesure porte sur la boucle commune rejouant les retours publics ; elle ne garantit ni la latence en jeu réel, ni toute session longue, ni la parité de l’appelant hérité complet.
+<!-- LOT3I_COST_FINAL_END -->
+
+L’audit courant compte **163 composants vérifiés, 141 transferts partiels et 1 065 modules en attente**, zéro module entièrement vérifié et six portes globales encore ouvertes. Le lot 3 ne conserve **aucune entrée ouverte au registre** ; ses réserves CWSE/SK48, contribution FramedWindow, revalidation Population/Reception et héritage complet restent distinctes. Le préfiltre géométrique n’est pas préempté à chaque opération ; la borne de 250 000 nœuds et l’échéance Supported ne garantissent pas la latence de toute la question. Les digests propres suivent le tri Unicode Python, les digests partagés le tri UTF-16 historique, concordants pour les identifiants hexadécimaux produits et qualifiés séparément pour les clés opaques artificielles.
+
+Au jalon 3I/0.50, la prochaine entrée était **`observed_feedback_sequence`**. Le gel 4A/0.51 présenté en tête de ce document intègre désormais cette entrée après publication de 3I ; il conserve les preuves et réserves de ce jalon historique. 7A reste une préparation séparée.
+
+## Jalon historique : CrossedPrefix 0.49, trois niveaux WEAV réussis
+
+Le moteur **0.49.0**, gel **`d6cb9abdf48a9062936d4647dbd809dc4cee1d1528f85e973fda83c7af8e6054`**, raccorde **3H, `coupled_prefix_reference`**, dans le propriétaire commun. Le gel contient **268 fichiers natifs**, avec une archive de **279 fichiers**. Le registre atteint **53/76 entrées raccordées**, sans entrée partielle ; **23 entrées restent ouvertes**. La façade observée reste **6/6**, avec **37 workflows compilés**. Le [rapport du lot](lot3h-crossed-prefix.md), la [filiation](lot3h-crossed-prefix-lineage.md) et la [portée vérifiée](lot3h-evidence/final/crossed-prefix-validation-scope.json) délimitent cette livraison.
+
+La validation passe **2 782/2 782 tests dans 71 fichiers**, les **5/5 contrôles du projet**, compilation comprise, et les **68/68 contrôles de non-régression** CATR/RSWP/FOGW/VOIS. Les onze checkpoints réellement exportés de 0.48 restent compatibles. La boucle commune synthétique passe **23 groupes de contrôles dans trois sessions froides**, avec **17 retours acquis**, dont dix propres à CrossedPrefix et sept relevant de la priorité CellPatch conservée.
+
+**WEAV réussit trois niveaux en 81 actions et 81 préfixes**, avec arrivée naturelle au niveau 4. Le navigateur confirme **81 actions, trois niveaux et 81 plans** après Pause, action isolée et reprise. Le contrôle indépendant passe **3 596/3 596 vérifications** de la trajectoire propre depuis une mémoire froide : 81 propositions, 81 retours et 159 événements. Les **324 ablations** conservent **191 changements d’action/refus** et **133 résultats négatifs ou inchangés**. Elles démontrent une contribution de composant ; la parité et l’ablation de l’appelant complet restent hors de cette preuve.
+
+L’[horloge WEAV](lot3h-evidence/final/weav-resolution.json) se clôture à **1 277,782615 secondes cumulées**, dont **474,037204 secondes** du cas historique, avec **1 122,217385 secondes restantes**. Aucun échec antérieur ni compteur n’est effacé. La référence 0.48 est limitée aux huit actions annoncées, sans niveau atteint ; elle ne démontre pas une incapacité complète du jeu.
+
+**Coût global 0.49 accepté sur les deux jeux**, contre Site 76 / native 0.48 fraîche : **STCK −1,666021 %**, **SMLP +2,663966 %**. Les 32 sessions/400 actions sont conservées dans l’ordre A1/B1/B2/A2, sans exclusion mesurée ; la revue passe **231/231**. Le diagnostic agrégé reste **15/16**, cohortes **14/16 puis 12/16**. L’acquisition/persistance SMLP **+15,162882 %** est acceptée selon votre règle, avec ses diagnostics et tous les p95 dans le [rapport de coût](lot3h-evidence/performance/results.md). **3H est clôturé dans son périmètre annoncé.**
+
+**Prochaine entrée autonome : `recurrent_series`**, dernière entrée encore ouverte du lot 3. Les réserves FramedWindow en jeu, de préemption du préfiltre, de revalidation Population/Reception et de modèle RootedLine restent explicites. Les horloges **CWSE 2 399,683865 s**, **SK48 667,35444 s**, **FOGW 951,320275 s** et **VOIS 1 017,469531 s** restent inchangées. L’audit compte **161 composants vérifiés, 143 transferts partiels et 1 065 modules en attente**, zéro module entièrement vérifié et six portes globales encore ouvertes.
+
+## Jalon précédent : FramedWindow 0.48, contribution en jeu encore ouverte
+
+Le moteur **0.48.0**, gel **`fce8dfc3e6861742649203161b3bf55b6480462e44c77d8015453ce55b724a26`**, raccorde **3G, `framed_window_composition`** après RootedQuota dans l’ordre source. Le gel contient **266 fichiers natifs**, avec une archive de **277 fichiers**. Le registre passe à **52/76 entrées raccordées**, sans entrée partielle ; **24 entrées restent ouvertes**. La façade observée reste **6/6**, avec **37 workflows compilés**. Le [rapport du lot](lot3g-framed-window.md) et la [filiation](lot3g-framed-window-lineage.md) définissent la portée propre, le noyau V5 consommé et les adaptations natives.
+
+La validation finale passe **2 566/2 566 tests dans 68 fichiers**, les **5/5 contrôles du projet** et **68/68 contrôles de non-régression** sur CATR, RSWP, FOGW et VOIS : **159 actions, 88 préfixes et 12 frontières naturelles**. Le premier passage **2 564/2 566** est conservé ; deux attentes de registre anciennes ont été corrigées, puis les 68 fichiers rejoués sur le même code natif. CATR confirme aussi **12 actions, 3 niveaux et 8 plans** dans le navigateur après Pause, action isolée et reprise. Les neuf checkpoints réellement exportés de 0.47 restent exacts.
+
+La boucle complète FramedWindow passe **15 groupes de contrôles dans deux sessions synthétiques froides** : sélection à la vraie place, liaison, WHY/ACT, retour, acquisition unique, restauration et décision suivante. L’ablation séparée de l’événement négatif acquis change le refus en proposition au même contexte. **Ce résultat n’est pas une contribution démontrée dans un jeu.** Les scans publics conservent 96 vues initiales sans admission, puis 909 vues sur 30 traces avec 11 admissions. Cinq propositions diffèrent des commandes archivées ; six autres vues n’offrent pas le pointage. Aucun retour réel n’est donc acquis pour FramedWindow dans ce corpus, et aucun nouveau jeu cible ou compteur n’est inventé. Cette réserve reste ouverte, sans bloquer la préparation de l’entrée autonome suivante.
+
+La portée V5 est limitée à `exact_candidates`. Le préfiltre garde une exploration exhaustive sans échéance interne, dans le domaine commun de 65 536 pixels ; sa latence maximale n’est pas garantie. L’interruption d’une comparaison de pixels retourne un reçu incomplet natif à la place de l’exception originale archivée. La garde propre ne certifie pas à elle seule tout le plan ou son reçu ; l’autorité commune reste distincte. La parité héritée complète et les six portes globales restent ouvertes. L’audit compte **160 composants vérifiés, 144 transferts partiels et 1 065 modules en attente**, avec zéro module entièrement vérifié.
+
+**Coût global 0.48 accepté sur 2/2 jeux**, contre Site 75 / native 0.47 fraîche : **STCK +1,654959 %**, **SMLP +6,641217 %**. Les 32 sessions/400 actions sont conservées dans l’ordre A1/B1/B2/A2, sans exclusion mesurée ; la revue passe 231/231. Le diagnostic agrégé reste **12/16**, cohortes **10/16 puis 13/16**. Les dépassements agrégés sont le service, la requête et la garde de préfixe STCK (**+14,718825 % / +13,306563 % / +11,457232 %**) et la garde SMLP (**+13,181611 %**). Ils sont acceptés selon la règle globale autorisée, tout en restant signalés avec les p95 dans le [rapport de coût](lot3g-evidence/performance/results.md). **3G est livré dans son périmètre technique ; la contribution propre en jeu reste ouverte.**
+
+**Prochaine entrée autonome : `coupled_prefix_reference`**, puis **`recurrent_series`**. La contribution FramedWindow en jeu, la borne temporelle de son préfiltre, les suivis Population/Reception et le modèle RootedLine gardent leurs réserves. Les horloges restent **CWSE 2 399,683865 s**, **SK48 667,35444 s**, **FOGW 951,320275 s**, **VOIS 1 017,469531 s**, sans remise à zéro. Les rejeux FOGW/VOIS sont des contrôles de non-régression, pas de nouvelles tentatives.
+
+## Jalon précédent : ReferencePopulation 0.47, trois niveaux VOIS réussis
+
+Le moteur **0.47.0**, gel **`54d8742300a04dcdf0cb1b038bc62b947d4a1c60f70da4ee80e6971b0f021165`**, raccorde **3F, `reference_population_plan`**, au propriétaire commun. La livraison contient **263 fichiers natifs et une archive de 274 fichiers**. Population publique, appariement injectif, sélection expérimentale, contrôles acquis, gardes, acquisition et restauration sont vérifiés dans le périmètre du [rapport du lot](lot3f-reference-population.md) et de sa [filiation](lot3f-reference-population-lineage.md). Les six branches déclarées de la façade observée sont maintenant raccordées : **6/6**. Le registre passe à **51/76 entrées complètes**, sans entrée partiellement raccordée ; **25 entrées restent à transférer**, avec **37 workflows compilés**.
+
+Le périmètre formel passe **2 086/2 086 tests dans 60 fichiers**, les **cinq contrôles du projet, compilation comprise**, et les trois rejeux **CATR/RSWP/FOGW, 51/51 contrôles**, contre la référence publiée 0.46. Il s'agit du périmètre affecté déclaré, pas de toute la suite historique. Les oracles de composant et de gardes, les huit états réellement exportés de 0.46 et les **97 images publiques initiales** complètent ces vérifications. Les **1 786 fichiers originaux** restent inchangés.
+
+La campagne froide VOIS réussit **trois niveaux en 78 actions et 42 préfixes**, avec arrivée naturelle au niveau 4 dans la même session. La référence 0.46 s'arrête après **une action et zéro niveau**, par `frontier_unknown`, avant la borne externe. Le navigateur confirme **78 actions, trois niveaux et 42 plans**, après Pause, action isolée et reprise. Les trois niveaux consomment respectivement **14/22/42 actions** et **9/12/21 plans**. L'[horloge du cas](lot3f-evidence/final/vois-resolution.json) est clôturée à **1 017,469531 secondes cumulées**, soit **1 382,530469 secondes restantes**, sans remise à zéro.
+
+La [comparaison originale indépendante](lot3f-evidence/diagnostic/vois-public-parity.json) passe **3 434/3 434 contrôles**, sans écart sur la trajectoire propre : **42 préfixes, 78 retours, 75 événements acquis et 43 restaurations**. Le rejeu part à froid et ne s'amorce pas avec une mémoire native de proposition. La [preuve de contribution](lot3f-evidence/final/vois-population-session/reference-population-contribution.json.gz) conserve **252 ablations**, dont **100 changements d'action ou de refus** ; 46 écarts de proposition stricte seuls ne sont pas comptés comme contribution aux décisions. Aucun effet d'action n'est démontré pour `tried`. **La parité complète de l'appelant Python n'est pas revendiquée.**
+
+Les limites source restent visibles : le cadre de réception n'est pas entièrement reconstruit à chaque continuation, un contrôle contrarié n'est pas automatiquement révoqué, les contrôles retenus entre époques ne sont pas une loi universelle, et les lois complètes d'apparence ou de terminaison restent inconnues. La présence sur les cibles ne constitue pas seule un succès officiel. Les bornes finies de travail natives sont explicites ; un calcul interrompu conserve un refus inconnu et bloquant. La fermeture EphemeralMap et l'appelant hérité restent partiellement transférés.
+
+**Coût 0.47 accepté sur les deux jeux** contre **0.46 fraîche**, selon la [décision globale officielle](lot3f-evidence/performance/global-budget-decision.json) :
+
+| Jeu | Médiane de session 0.46 fraîche | Médiane de session 0.47 | Variation |
+| --- | ---: | ---: | ---: |
+| STCK | 10 051,918945 ms | 10 011,144032 ms | **−0,405643 %** |
+| SMLP | 17 016,049866 ms | 16 711,519103 ms | **−1,789668 %** |
+
+Les **32 sessions et 400 actions mesurées** sont conservées dans l’ordre A1/B1/B2/A2. La revue indépendante passe **231/231 contrôles**. Les **16 critères agrégés** passent ; les cohortes restent **16/16 puis 14/16**, avec les deux dépassements de restauration de la seconde cohorte, **STCK +19,466359 % et SMLP +23,450648 %**, conservés. Les p95 STCK de service/requête/garde augmentent respectivement de **75,844832 % / 52,682126 % / 19,780402 %** ; le p95 de garde SMLP en cohorte 2 passe de **0,883444 à 9,265536 ms**. Tous figurent dans le [rapport de coût](lot3f-evidence/performance/results.md), sans exclusion ni attribution causale. La règle autorisée exige une médiane de session complète **strictement sous +10 % pour chaque jeu** ; les phases au-dessus restent diagnostiques sous cette condition. **3F est clôturé dans son périmètre annoncé, fonctionnel, intégrité et coût compris.**
+
+Les résultats antérieurs restent historiques, sans fournir les nouveaux temps de référence : **3E / 0.46 est clôturé**, FOGW trois niveaux / 50 actions / 27 plans, coût global **STCK +4,992188 %, SMLP +0,144738 %**, diagnostic **13/16**. **3B reste clôturé** selon son [acceptation globale](lot3b-global-budget-acceptance.md). Les **3C/CWSE** et **3D/SK48** conservent leurs cibles non atteintes et leurs limites de modèle ; aucune réussite VOIS ne les efface.
+
+Les horloges précédentes ne changent pas : **CWSE 2 399,683865 s**, budget épuisé sans nouvel essai ni diagnostic ; **SK48 667,35444 s**, avec **1 732,64556 s restantes** ; **FOGW 951,320275 s**, clos pour sa livraison. La non-régression FOGW utilise uniquement sa trace publique conservée.
+
+**Prochain transfert autonome : `framed_window_composition`**, puis `coupled_prefix_reference` et `recurrent_series`. **3F est clôturé dans son périmètre annoncé.** Les suivis génériques de revalidation Population, de continuation Reception et de modèle RootedLine gardent leurs limites propres ; ils ne réinitialisent aucune horloge de cas.
+
+## Contrat et historique des décisions
+
+Cette feuille de route reprend le plan demandé le 9 novembre 2026. Le chantier doit retrouver progressivement les capacités V5/V6 dans le runtime TypeScript commun, avec une mémoire persistante, une décision compréhensible et des temps de réponse maîtrisés. Une connaissance doit provenir d'une observation, influer sur une décision, puis être révisée à partir du retour réel.
+
+La **base historique du plan est la publication 58**, commit `b946570afa44714424e2a1d67de338c4a7bd6c12`. La **base effective du lot 1 est la publication 59**, commit `f7b9a56af5488c8d4cebd5d912262a541f4fe403`. La mise à jour intermédiaire porte sur Motivation, sa génération et sa documentation ; elle est conservée. Le jalon natif V57 et ses preuves publiés dans V58 gardent leur identité.
+
+L'[audit du registre](v6-entry-point-progress.json), le [bilan de migration](v6-native-transfer.md) et le [rapport du jalon V57](v57-topological-recolor-and-motion-questions.md) établissent le point de départ suivant :
+
+| Élément | État vérifié à l'ouverture du lot 1 |
+| --- | --- |
+| Quatre listes d'entrées DRM | **50 raccordées sur 76**, 26 restantes |
+| `topological_recolor` | Déjà raccordé, mémoire et contrats source conservés |
+| Questions de contraste de mouvement | Déjà raccordées au chemin commun des questions d'information |
+| Bundle V6 | **37 workflows compilés** ; compilation et consommation effective restent deux mesures distinctes |
+| `morphology`, `attention_parent_return`, `acquire_control_for_target` | Fournisseurs communs encore incomplets, hors du dénominateur 76 |
+| `OP01` à `OP31` | Implémentations présentes ; leur utilité est à établir par leurs producteurs et consommateurs réels |
+| Migration globale | En cours ; aucune annonce de parité complète |
+
+Le mandat initial autorisait **la livraison du lot 1 uniquement**, publiée en version **60**, commit `9be3d0434f6f8ff91236d61a51eafa4017c3a082`. Les continuations ont livré **2A** en publication **61**, commit `b288fef0f6ec7898e6e6ea6de56c3e2af2d5cf19`, puis **2B** en publication **62**, commit `e56118da8b5f596b9727ca78a037e930bc333860`. Le **fonctionnel du lot 2C, moteur `0.35.0`, a été publié en V63**, commit `1193377f1d574451740a7409a4102833ef868310`, avec réserve de coût. La correction générique **`0.36.0`** est maintenant gelée, vérifiée fonctionnellement et **conforme au budget officiel sur les 16/16 médianes STCK/SMLP annoncées**. Le sous-lot **2C est clôturé dans ce périmètre**, avec ses dépassements historiques conservés. Les trois premiers niveaux de LS20 restent réussis dans une même session. Le **lot 3A, moteur `0.37.0`**, transfère maintenant `panel_service_plan`, une des six branches d’`observed_composition_services`, dans le propriétaire commun. RSWP réussit trois niveaux en **19 actions et 11 préfixes**, résultat également confirmé au navigateur. Le fonctionnel 3A a été publié en **V65**. La correction générique **`0.38.0`** valide maintenant **16/16 médianes agrégées** sur huit sessions par jeu/version, conserve les trois niveaux RSWP et clôt **3A dans son périmètre annoncé**. Le **fonctionnel 3B, moteur `0.39.0`**, a raccordé `chamber_relation_plan` et son noyau fini V5 consommé : CATR a réussi **trois niveaux en 12 actions et huit préfixes**, dans une session. Ses **1 077/1 077 tests**, 29 fichiers, et son coût non conforme **15/16, restauration STCK +18,686 %**, restent conservés.
+
+La correction générique **`0.40.0`**, gel **`391a279` dans `final-v3/`**, est maintenant validée sur **1 322/1 322 tests dans 35 fichiers**, avec typage, audits et build réussis. CATR conserve **12 actions, trois niveaux et huit préfixes**, également confirmés au navigateur ; les rejeux CATR/RSWP passent **34/34 contrôles**. Le premier essai de correction, gel **`f0ba`**, conserve son échec officiel **14/16**, restauration STCK **+66,160 %** et SMLP **+21,511 %**. La nouvelle fenêtre de coût **`performance-v2` est terminée** sur `391a279` contre une référence 0.38 fraîche : **14/16 critères conformes**, statut **`budget_review_required`**. La restauration STCK rentre dans le seuil agrégé (**+4,218 %**), mais SMLP conserve deux dépassements : **acquisition/persistance +11,642 %** et **restauration +14,989 %**. **0.40.0 est fonctionnellement validée avec réserve de coût ; 3B reste ouvert et 3C, `exposed_reception_plan`, attend sa clôture.** Le [rapport de correction](lot3b-cost-correction.md) distingue chaque gel et ses preuves. Le lot 3 et la migration complète restent ouverts.
+
+La **correction générique `0.41.0`** du chemin commun SMLP est **fonctionnellement validée avec réserve de coût**. Son gel **`3edffde9b21f4fc8af9dda9a1dbd40707c015d9f7cba8a41460021e39acb7605`** contient **249 fichiers natifs**, avec une archive de **260 fichiers**. Le périmètre formel passe **1 379/1 379 tests dans 41 fichiers**, sans échec, annulation, test ignoré ni TODO, sources et tests inchangés. Les ciblages **194/194 Inventory** et **57/57 hydratation/persistance** restent conservés ; les **cinq contrôles du projet passent**, CATR froid et navigateur confirment **12 actions, trois niveaux et huit préfixes/plans**, et les rejeux CATR/RSWP passent **2/2 cas, 34/34 contrôles**. Le budget officiel est terminé : **14/16 critères conformes, `budget_review_required`**, avec **persistance STCK +14,269890 %** et **restauration SMLP +11,220692 %** non résolues. Dans cette fenêtre contre 0.38 fraîche, l’acquisition/persistance SMLP baisse de **10,647038 %** et la restauration STCK de **15,575460 %** ; ces baisses ne compensent pas les deux critères hors budget. Les résultats historiques 0.39/0.40 restent inchangés. **3B reste ouvert et 3C attend sa clôture.**
+
+La **correction `0.42.0`, publiée avant le présent port**, gel **`2de70025`**, est **fonctionnellement validée avec réserve de coût 14/16**. Elle réduit les allocations de validation et les copies des états possédés par le moteur, sans ajouter de règle de jeu. Les **1 396/1 396 tests dans 42 fichiers**, contrôles **5/5**, CATR froid/navigateur **12 actions, trois niveaux, huit plans** et rejeux CATR/RSWP **34/34** sont acquis. Dans sa fenêtre officielle contre 0.38 fraîche, les deux points précédents rentrent dans le seuil : **persistance STCK −8,261037 %** et **restauration SMLP +6,223866 %**. Deux critères restent hors budget : **service de préfixe connu STCK +27,720363 %** et **requête correspondante +26,350748 %**. La revue indépendante passe **231 contrôles**, sans changer le verdict. **3B reste ouvert ; la priorité devient ce chemin commun de continuation, puis 3C après clôture du coût.** Le [rapport 0.42](lot3b-state-cost-correction.md) conserve toutes les qualifications, dont les pointes de latence SMLP.
+
+## Priorités, dépendances et statuts
+
+Une dépendance désigne un contrat réellement consommé. Les numéros indiquent la priorité proposée, pas une obligation de terminer tous les lots précédents. Les familles autonomes peuvent être préparées dès que leurs propres contrats sont disponibles.
+
+Les entrées restantes du tableau se réfèrent au **publié constaté Site 108 / native 0.67 : 69/76 entrées raccordées, sept restantes**. Le **lot 8B est publié et son coût officiel est accepté** dans le périmètre déclaré. Son complément de qualification publique reste distinct de la consolidation globale du lot 11. Les branches de développement parallèles conservent leurs propres compteurs ; ils ne sont pas additionnés à ceux de la version publiée. Les anciennes publications et leurs compteurs restent décrits dans les sections historiques.
+
+| Lot | Résultat attendu | Entrées restantes | Dépendance nécessaire | Statut courant |
+| --- | --- | ---: | --- | --- |
+| 1 | Cible conservée, sous-question, retour et reprise | Hors compteur | Runtime commun et familles existantes | **Livré, moteur `0.32.0`** |
+| 2 | Stratégie morphologique et fournisseurs communs | Hors compteur | Cycle validé du lot 1, mesures et mémoire courantes | **2A et 2B livrés ; 2C clôturé dans son périmètre annoncé, coût validé avec `0.36.0`** ; fermeture de domaine et parité globale ouvertes |
+| 3 | Mémoire commune et compositions | **0 au registre** | Propriétaire commun, acquisition et contrats de continuation | **3A, 3B, 3E, 3F, 3H et 3I clôturés dans leurs périmètres.** 3C/3D conservent CWSE/SK48 ; 3G garde sa réserve de contribution propre en jeu. **3I / 0.50 : RecurrentSeries et son repli SupportedLine, CONN trois niveaux/21 actions, validation formelle, cinq rejeux, intégrité et coût global acceptés.** Publication confirmée : Site 79. Façade à six branches sur six ; aucune réserve historique effacée. |
+| 4 | Exemples, correspondances et retours discriminants | **0 au registre** | Observations, callbacks SRC, gardes et mémoire propre | **4A, 4B et 4C livrés ; lot 4 clos dans ses périmètres annoncés**, 4C publié dans Site 92/native 0.57, branches simples et composées, ISOS trois niveaux/douze actions. **Coût global accepté et publication privée confirmée.** |
+| 5 | Temps, adressage et liaisons | **0 au registre publié** | Historique public ; contrat de conservation pour les consommateurs concernés | **5A et 5B livrés ; 5C / native 0.63 publié prioritairement dans Site 104**, avec coût officiel non mesuré et non accepté. La validation fonctionnelle est conservée ; les sessions longues et WEAV6 restent réservés. |
+| 6 | Pièces rigides, cargaisons et stabilisation commune | **2 ouvertes au registre publié** | Géométrie, contrôles, recherche bornée et interruption | **6A livré ; 6B `selected_rigid` publié prioritairement dans Site 105 / native 0.64**, source `deb9ebbb`, 322 fichiers/fa23 et 66/76 entrées. Ses sources sont identiques au baseline préparé des preuves 8A. Le coût officiel demeure non mesuré et non accepté. Puis 6C `observed_rigid_cargo` et 6D `shared_settlement`. |
+| 7 | Ateliers et transactions symboliques | **0 au registre** | Interfaces mesurées, SRC et mémoire des méthodes | **Transferts 7A/7B clos** : 7A Sites 82–83/native 0.52, 7B Sites 88–89/native 0.55, coûts acceptés et propriétaires distincts. **Complément Workshop 0.61 terminé et qualifié**, publié dans Site 98 puis clôturé dans Site 101 après répétition propre du coût. **LKEY définitivement fermé**, sans nouvelle partie, rejeu, oracle ni remise à zéro ; les réserves historiques sont conservées. |
+| 8 | Accès conditionné et routage de branches | **0 au registre publié** | Calibration des commandes et préfixes gardés | **8A `motif_conditioned_access` publié dans Site 106 / native 0.65**, réserve de coût officiel conservée. **8B `parallel_branch_routing` publié dans Site 108 / native 0.67 à 69/76**, livraison et graphes qualifiés dans leur périmètre, coût officiel accepté. Le complément public est qualifié sur trois sessions et 18 acquisitions via le bundle publié en threads Node ; récupération après erreurs structurelles réservée, preuves natives et limites navigateur distinctes. |
+| 9 | Navigation, régions et canaux | **3 ouvertes au registre publié** | Graphes, retours publics et budgets courants | **À transférer et qualifier** : `chart_navigation`, `region_intervention`, `joint_channels`. Recolor déjà acquis ; `discrete_network` suivi séparément hors compteur 76. |
+| 10 | Questions d’axe, de fenêtre, d’ordre et de temps | **2 ouvertes au registre publié** | Observations, séquences et méthodes revalidées | **10C `ordered_recruitment` publié dans Site 107 / native 0.66**, après 10A/10B. Le coût officiel 10C reste non mesuré et non accepté. 10D `temporal_selection` et 10E `invited_endpoints` restent ouverts. HPDL conserve sa réserve partielle. |
+| 11 | Consolidation, couverture et lisibilité | Hors compteur | Résultats et preuves des lots précédents, y compris les capacités encore ouvertes des lots 6, 9 et 10 | **Ouvert ; six portes globales non satisfaites.** Le complément public BranchRouting relève du suivi 8B et ne signifie ni clôture des lots 6/9/10 ni priorité générale du lot 11. |
+
+La réconciliation initiale avec le registre de la base 59 conserve **26 noms planifiés, 26 noms distincts, aucun nom absent et aucun nom supplémentaire**. Depuis 3F, `observed_composition_services` est raccordé ; 3G ajoute `framed_window_composition`, 3H `coupled_prefix_reference`, 3I `recurrent_series`, 4A `observed_feedback_sequence`, 7A `observed_ranked_workshop`, 5A `linked_temporal_preparation`, 4B `relative_arrangement` et 7B `observed_symbol_transaction`. **17 noms restaient ouverts** dans le gel historique 7B publié Site 88 / native 0.55, répartis dans les lots 4 à 10 : **1 + 2 + 4 + 0 + 2 + 3 + 5**. Le gel 10A / 0.56 publié dans Site 90 raccorde en plus `axial_question` : **60/76 entrées et 16 ouvertes**, réparties **1 + 2 + 4 + 0 + 2 + 3 + 4**. L'identité octet pour octet de ses entrées gelées est vérifiée après fusion des Sites 88 et 89. 4C publié raccorde ensuite `facet_example`, puis 5B publié dans Site 94 raccorde `observed_addressed_material` : **62/76 entrées et 14 ouvertes**, réparties **0 + 1 + 4 + 0 + 2 + 3 + 4**. Sa publication distincte est confirmée dans Site 94. Le gel 6A raccorde ensuite `preview_packing` : **63/76 entrées et 13 ouvertes**, réparties **0+1+3+0+2+3+4**. Le 10B réellement publié dans Site 102 ajoute `window_question` : **64/76 et 12 ouvertes**, réparties **0+1+3+0+2+3+3**. Le 5C publié dans Site 104 ajoute `observed_object_binding` : **65/76 et 11 ouvertes**, réparties **0+0+3+0+2+3+3**, avec réserve de coût officiel non mesuré. Les entrées sont détaillées ci-dessous. Les chemins directs et les fournisseurs communs gardent leur propre bilan hors registre.
+
+## Règles communes de livraison
+
+Les sources originales de référence restent celles du commit `786dcf51ca57773d8e3a8948ce9ea3655e7baf8e`. Réutiliser les mesures, états, callbacks, SRC/DRM et acquisitions existants lorsque leur contrat convient. Conserver les priorités, alternatives et refus de la source. Une amélioration de coordination propre au TypeScript doit être nommée comme extension native et justifiée par une observation.
+
+Chaque état métier possède un propriétaire. Chaque transition lui est acquise une fois, dans l'ordre prévu par son contrat. Une acquisition passive n'est pas assimilée à une acquisition réservée à la proposition sélectionnée. Une méthode historique reste conditionnelle ; son usage exige les preuves et les gardes du contexte courant. Les décisions du moteur ne peuvent dépendre d'un nom de jeu, numéro de niveau, rôle de couleur fixé, coordonnée préparée ou solution enregistrée.
+
+Un lot peut comprendre des sous-lots techniques vérifiables. Il reste ouvert tant que tous ses critères annoncés ne sont pas satisfaits. Une dépendance partagée est transférée au niveau effectivement consommé, avec ses limites explicites.
+
+Chaque comportement ajouté exige un cas de contribution positive, un cas contraire/ambigu/hors portée et une vérification de la connaissance conservée puis consommée. Lorsque pertinent, les attentes proviennent des originaux Python inchangés et restent séparées des entrées du moteur de production. L'intégration doit couvrir sélection, gardes, autorisation, action, acquisition, restauration et décision suivante.
+
+Une campagne intégrée pertinente est prévue par lot, de préférence sur plusieurs niveaux. Un nouveau jeu de trois niveaux par entrée n'est plus obligatoire. Une campagne déjà réussie avant la modification prouve une non-régression ; elle ne suffit pas à attribuer le succès à la nouvelle capacité. Utiliser les traces de contribution et une ablation ciblée lorsque nécessaire. Un blocage de jeu conserve son identité, son diagnostic et son horloge : après 40 minutes, passer à un autre cas sans remettre artificiellement le compteur à zéro.
+
+## Lot 1 : conserver la cible et consommer le retour
+
+**Périmètre :** une boucle complète dans l'appelant commun : cible conservée → condition manquante → sous-question → expérience → retour réel → révision → reprise ou suspension du parent.
+
+Le chemin retenu est `typed_pose_dependency` de `typed_material_flow`. Ses mesures, propositions de pose, connaissances et retours existent déjà dans le [jalon V50](v50-typed-material-and-returned-inquiries.md). La reproduction a isolé une lacune de conservation de la requête parent : un retour étranger déplaçant cette requête permet au composant V59 de proposer une nouvelle cible tout en gardant son contexte de pose acquis. Le lot reste limité à cette boucle.
+
+Le [diagnostic reproductible](lot1-evidence/ablation/parent-scope-gap.json.gz), produit par [prove-native-parent-scope-gap.mjs](../../scripts/prove-native-parent-scope-gap.mjs), exécute le composant V59 immuable après **34 préfixes et 34 actions acquis à froid** depuis les paquets publics archivés. Il lui fournit ensuite un retour étranger explicitement contrefactuel, avec une commande `ACTION6` copiée du contrôle actuellement mesuré, disponible et admis. La cible change ; le garde, le témoin de connaissance et la liaison de contribution restent admis ; les événements de réponse pose restent à **1 avant et 1 après**, sans modification de l'état matériel. C'est une preuve de composant, pas un échec de jeu live ni une action libérée par tout l'appelant commun.
+
+L'implémentation est gelée sous **`logos-engine.typescript.v6.native-migration/0.32.0`**, inventaire natif SHA-256 **`8a67b57947364dab988c7081e35eb6a923beee2305eb4b8a8a89c2fc86ebea57`**. L'extension native nommée `retained_typed_material_request_parent` réutilise l'attention de composition existante. Elle conserve l'identité de la requête, l'occurrence enfant, le contrôle et le modèle de comparaison ; elle référence les retours déjà acquis par `SharedSeries.material`, puis consomme leur résultat dans la question suivante. La sélection de famille reste à sa position source ; la nouvelle façade contraint la question matérielle à la requête retenue. Les gardes de famille, de point et WHY/ACT restent obligatoires.
+
+Le même diagnostic contient un **contrat séparé du nouveau module**, utilisant les mêmes états acquis et le même retour étranger : l'identité du parent et sa requête sont conservées, et la reprise est suspendue avec `parent_request_changed_or_ambiguous`. Aucun réducteur matériel n'est appelé une seconde fois. Le témoin de marquage local issu du vrai retour de sélection est également conservé comme condition de liaison courante : sa disparition invalide la reprise. La [filiation du lot 1](lot1-composition-return-lineage.md) détaille les producteurs, consommateurs et limites de ces ajouts.
+
+Conserver l'identité du parent, son propriétaire, sa portée, ses preuves et son manque précis. Relier la question enfant à ce manque. L'expérience doit passer par les propositions, gardes et autorisations communes. Le propriétaire existant acquiert le retour réel ; la décision suivante consomme cette révision. Une trace courte doit rendre la chaîne compréhensible. L'attention de mouvement et l'attention de composition gardent leurs statuts et conditions distincts.
+
+**Critères de fin vérifiés dans le périmètre annoncé :**
+
+1. Une exécution du runtime commun montre toute la chaîne jusqu'à la décision qui suit le retour.
+2. Deux retours différents conduisent à deux suites pertinentes différentes.
+3. Une contradiction, une preuve périmée ou une identité ambiguë empêche une reprise injustifiée.
+4. Interruption, restauration et frontière de niveau conservent ou invalident correctement cible et autorisations.
+5. Connaissances et contre-exemples restent conservés, sans propriétaire ni acquisition en double.
+6. Les coûts avant/après sont mesurés sur le chemin modifié et sur des chemins habituels non concernés.
+
+Le compteur demeure **50/76, avec 26 entrées restantes** : aucune entrée de registre supplémentaire n'est revendiquée par cette extension de coordination. Ce lot ne complète pas les fournisseurs `morphology`, `attention_parent_return` et `acquire_control_for_target`. **Le lot 1 est livré avec le moteur `0.32.0`**, sur la base V59 confirmée et l'inventaire natif indiqué ci-dessus.
+
+### Preuves de livraison du lot 1
+
+| Vérification | Résultat et portée | Reçu |
+| --- | --- | --- |
+| Tests ciblés du changement | **241/241**, huit fichiers ; boucle parent, références matérielles, Kernel, attention, caller, autorité, intégration et contrôleur | [Exécution des tests](lot1-evidence/final/validation/delta-tests-run.json) |
+| Contrôles du projet | Typecheck, audit des entrées, audit de migration, contrôle du diff et build réussis ; source native inchangée | [Contrôles](lot1-evidence/final/validation/checks-run.json) |
+| Boucle parent commune | Deux parents suivis sur 49 actions et trois niveaux ; état restauré depuis le graphe ; acquisition unique et décision suivante liée au retour | [Contrat positif](lot1-evidence/final/contracts/common-positive.json) |
+| Retours différents et refus | Retour de pose à 270° menant à deux contrôles supplémentaires ; demande inaccessible suspendue ; contradiction conservée et parent réfuté | [Retour alternatif](lot1-evidence/final/contracts/common-alternative.json), [suspension](lot1-evidence/final/contracts/unreachable-parent.json), [réfutation](lot1-evidence/final/contracts/refuted-parent.json) |
+| Campagne LIFE réelle | Une session froide, trois niveaux naturels en **15 + 15 + 19 = 49 actions**, 47 préfixes, 49 acquisitions et deux reprises de frontière ; arrivée au niveau 4 en `NOT_FINISHED` | [Exécution](lot1-evidence/final/execution-life.json), [trace publique](lot1-evidence/final/life-public-trace.json.gz), [rapport fractionné](lot1-evidence/final/life-campaign.json.gz.parts.json) |
+| Contrôle navigateur | Session continue : 49 actions, trois niveaux, 47 plans ; Pause initiale à zéro action, arrêts aux actions 46 et 47 puis reprise du préfixe | [Reçu navigateur](lot1-evidence/final/life-browser-verification.json), [capture](lot1-evidence/final/life-browser.png) |
+| Coût des chemins non concernés | **16 métriques STCK/SMLP dans le budget observé de +10 %**, maximum +6,43 % ; comparaison `passed`, aucun dépassement non résolu | [Comparaison avant/après](lot1-evidence/performance/comparison.json) |
+
+LIFE avait déjà été résolu historiquement : cette campagne établit l'intégration et la non-régression, et ne constitue pas une première résolution ni la preuve que chaque action dépend du nouveau parent. Le retour à 270° produisait déjà la même suite pertinente en V59 ; le nouvel apport comprend sa filiation explicite. Le déplacement de requête reproduit séparément la différence de conservation du parent. La campagne réelle a terminé **231,44 secondes après la sélection du cas**, avant l'échéance de 40 minutes conservée dans le [reçu de sélection](lot1-evidence/campaign-selection.json).
+
+### Coûts et limites mesurés
+
+Les médianes de session sur trois répétitions passent de **13,721 à 12,642 s** pour STCK, de **30,941 à 29,066 s** pour SMLP et de **141,865 à 138,513 s** pour LIFE. Le budget annoncé s'applique aux chemins non concernés STCK/SMLP. Sur LIFE, qui contient la nouvelle validation de parent, certains coûts augmentent :
+
+| Mesure du chemin LIFE | Avant | Après | Variation et effectif |
+| --- | ---: | ---: | --- |
+| Garde de continuation | 13,64 ms | 30,49 ms | +123,52 %, 6 échantillons |
+| Continuation complète du service | 60,03 ms | 67,51 ms | +12,46 %, 6 échantillons |
+| Nouvelle décision de pose sélectionnée | 828,98 ms | 873,21 ms | +5,34 %, 12 échantillons |
+| Restauration des familles, toutes décisions LIFE | 8,78 ms | 10,76 ms | +22,56 %, 282 échantillons ; dispersion entre répétitions élevée après modification |
+
+Ces hausses font partie du bilan du chemin modifié. Les médianes globales plus faibles ne les annulent pas. La [méthode](lot1-evidence/performance/README.md) retient les échantillons, les extrêmes et le bruit observé ; les mesures imbriquées ne s'additionnent pas. Aucun p95 n'est annoncé sous 20 échantillons. L'inspection mesurée concerne service et transport, sans acceptation/clonage du contrôleur ni rendu de l'inspecteur. Pause est mesurée aux deux points initiaux du protocole ; le contrôle navigateur ajoute une interruption de préfixe, sans établir de borne de préemption pour toute recherche. La session LIFE reste finie et ne prouve pas une stabilité de mémoire sur plusieurs heures.
+
+## Lot 2 : stratégie morphologique et mesures réelles
+
+**Dépendances :** cycle du lot 1, observations, historique des transitions et contrats de mesure. Organiser le travail en **2A**, producteurs de mesures/paires/routes/prévisions ; **2B**, état de décision `morph.last` et raccord de `acquire_control_for_target`/`attention_parent_return` ; **2C**, continuation, réarmement et extension de cible requis par le périmètre source annoncé.
+
+### Sous-lot 2A livré
+
+**Sous-lot 2A livré, moteur `0.33.0`, sur la base V60, puis publié en V61.** Les producteurs morphologiques alimentent la politique existante au rang source du chemin commun. Le domaine comprend les mesures courantes, les paires, les routes, les expériences d'accès et les prédictions d'une station réellement acquise, avec `station_method` absent. Une méthode non nulle, courante ou historique, reste explicitement hors domaine. Ce raccord reste le socle du lot 2B et ne clôt pas les critères du lot global 2.
+
+Le [rapport du lot 2A](lot2a-current-morphology.md) et sa [filiation](lot2a-morphology-lineage.md) établissent les producteurs, propriétaires, gardes, acquisitions et limites. Le delta gelé passe **532 tests**. Les originaux inchangés concordent sur **291 appels morphologiques réels**, 678 appels de contexte et 82 checkpoints de LS20. Ce jeu réussit son premier niveau en 28 actions, dont les 11 dernières viennent de la nouvelle morphologie, puis échoue au niveau 2 après 144 actions. Le passage à TR87 intervient après moins de huit minutes ; TR87 réussit ses **trois premiers niveaux en 105 actions et 30 préfixes** par `word_interface`, sans attribution de ce succès à la morphologie. Les contrôles navigateur, mesures de coûts et reçus complets sont détaillés dans le rapport.
+
+### Sous-lot 2B livré
+
+L'implémentation est gelée sous **`logos-engine.typescript.v6.native-migration/0.34.0`**, avec **240 fichiers natifs** et l'inventaire SHA-256 **`17252e294212a1563b75037a0b0dd782c2ecbc8cc4e1997a4f2bb2103bdf4e8b`**. Le [reçu de validation](lot2b-evidence/final/validation/delta-tests-run.json) confirme **623 tests réussis sur 623**, sans modification des sources ni des entrées de test pendant l'exécution. Il s'agit du delta de contrats et d'intégration explicitement sélectionné, pas de toute la suite historique.
+
+La décision `morph.last` est transmise aux consommateurs du choix courant, y compris lorsqu'elle conserve une composition sans proposer de route. Elle est recalculée à chaque sélection. Les groupes `acquire_control_for_target` et `attention_parent_return` sont raccordés dans l'ordre source. Les trois expériences de contrôle sont consommées : réplication d'une translation depuis une autre origine, essai d'une commande encore inutilisée et réplication après blocage contextuel. L'admission des questions d'information conserve le parent, les témoins à préserver et les deux motifs de report de la source.
+
+L'histoire reste chez GoalAccess, l'attention chez `AttentionMemory`, et les prévisions/collectes chez leur propriétaire courant. Les propositions passent par le frontier, les gardes et WHY/ACT communs. Les mesures V5/V6 déjà transférées sont réutilisées ; aucun identifiant de jeu, niveau, rôle de couleur ou trajet préparé ne décide à la place des observations. La [filiation du lot 2B](lot2b-control-attention-lineage.md) décrit ces contrats, leur portée et la qualification de l'ordre Python des rôles lors d'un retour mixte à plusieurs participants.
+
+| Preuve disponible du lot 2B | Résultat vérifié | Portée |
+| --- | --- | --- |
+| Appelant et attention, originaux inchangés | **38 cas, 44 choix, 17 scènes** ; [références source](../../tests/fixtures/v6-control-attention-reference.json.gz) | Priorités, refus, rappel, partage d'expérience et retour unique ; dépendances non ciblées remplacées par des doubles explicites de frontière |
+| Translation après blocage, original inchangé | **45 cas, dont 21 positifs, 101 rasters** ; [références source](../../tests/fixtures/v6-contextual-translation-reference.json.gz) | Géométrie publique, empreinte remplie, surfaces, témoins, époques et cas contraires ; aucune solution de jeu injectée |
+| Delta formel gelé | **623/623**, zéro échec ; [exécution](lot2b-evidence/final/validation/delta-tests-run.json) | Contrats et intégration du chemin commun, dont acquisition d'une vraie transition synthétique puis réplication liée au retour |
+| Campagne LS20 et contribution réelle | Premier niveau en **17 actions**, contre 28 au lot 2A ; puis **`GAME_OVER` au niveau 2**, bilan **133 actions, 79 préfixes, un niveau réussi** ; [résolution](lot2b-evidence/final/ls20-resolution.json) | **14 préfixes `acquire_control_for_target` et 2 `attention_parent_return`** réellement sélectionnés ; [attribution](lot2b-evidence/final/ls20-control-attention/ls20-control-attention-attribution.json). La contribution observée ne transforme pas cet échec en réussite de trois niveaux |
+| Comparaison source sur LS20 | **277 appels morphologiques et 636 appels de contexte** concordants avec les originaux inchangés ; [comparaison](lot2b-evidence/final/ls20-control-attention/ls20-morphology-original-comparison.json.gz) | Vérification des appels effectivement observés dans cette campagne ; aucune parité globale déduite de ces effectifs |
+| Campagne SYME froide et navigateur | **Trois niveaux, 36 actions et 14 préfixes**, en une session ; L1 **9 actions / 6 préfixes**, L2 **12 / 3**, L3 **15 / 5** ; [résolution](lot2b-evidence/final/syme-resolution.json) et [contrôle navigateur](lot2b-evidence/final/browser/syme-verification.json) | Navigateur arrivé naturellement au niveau 4 avec **36 actions / 3 niveaux / 14 plans**. Réussite historiquement connue, confirmant la non-régression de `regular_field_correspondence` ; aucune attribution aux nouveaux fournisseurs de contrôle |
+| Audits et contrôles du projet | Contrôles réussis ; **151 composants vérifiés, 126 partiels, 1 092 en attente, aucun transfert complet** ; [reçu](lot2b-evidence/final/validation/checks-run.json) | Compteurs de migration distincts des **50/76 entrées** et **37 workflows**, inchangés |
+| Coûts avant/après | **16 médianes STCK/SMLP dans le budget +10 %**, maximum observé **+8,72 %** ; [comparaison](lot2b-evidence/performance/comparison.json) | 222 actions mesurées par version ; hausses de p95 et d'inspection STCK conservées, six cas absolus des nouveaux consommateurs et limites détaillés dans les [résultats](lot2b-evidence/performance/results.md) |
+| Intégrité de livraison | **Vérifiée** ; [reçu final](lot2b-evidence/final/delivery-integrity.json) | 240 fichiers natifs, 522 entrées source/tests, 305 entrées de build, 1 786 fichiers originaux inchangés ; trois rapports restaurés octet pour octet depuis 60 parties |
+
+Les exporteurs vérifient les **1 786 fichiers originaux** avant et après génération. Les contrats synthétiques complètent les campagnes réelles ; leurs effectifs ne sont pas des niveaux de jeu réussis. Le [rapport du lot 2B](lot2b-control-attention.md) consigne les résultats, les échecs, les coûts et les limites de la livraison. Les compteurs de raccordement restent **50/76 entrées** et **37 workflows** : ce sous-lot porte sur les fournisseurs communs hors du dénominateur 76.
+
+Les autres essais de cette livraison restent au bilan avec leurs résultats propres. Les changements de cas conservent leurs reçus de sélection, leurs horloges et la limite de 40 minutes de blocage ; une absence de solution ou un diagnostic incomplet n'est pas assimilé à une impossibilité de jeu.
+
+| Cas conservé | Résultat observé | Limite et preuve disponible |
+| --- | --- | --- |
+| CATR | **1 action, aucun niveau**, arrêt `frontier_unknown` | Connaissance insuffisante conservée comme inconnue ; [résolution](lot2b-evidence/final/catr-resolution.json) |
+| MOTO | **109 actions, aucun niveau**, arrêt au budget de temps actif à **363,584 s** | Le processus Node a ensuite épuisé sa mémoire pendant la clôture du diagnostic. Le rapport complet n'a pas été produit ; le reçu d'exécution, la sortie et le journal public restent conservés dans la [résolution](lot2b-evidence/final/moto-resolution.json) |
+| WEAV | **97 actions, aucun niveau**, arrêt au budget de temps actif à **363,434 s** | Rapport de campagne produit et conservé ; [exécution](lot2b-evidence/final/weav-control-attention/execution-weav.json), [rapport fractionné](lot2b-evidence/final/weav-control-attention/weav-campaign.json.gz.parts.json) |
+
+### Sous-lot 2C fonctionnel historique : moteur 0.35.0, publication V63
+
+Le moteur **`0.35.0`** raccorde les méthodes de station et d'entrée, `entry_access_return`, la réassociation conditionnelle, la reprise de sonde, les capacités gérées et les consommateurs d'extension de cible. Le [rapport du lot 2C](lot2c-method-continuation.md) et sa [filiation](lot2c-method-continuation-lineage.md) décrivent les producteurs, propriétaires, gardes et qualifications.
+
+La méthode est acquise par le caller à une frontière officielle après effet sélectif vérifié et accès au pair accompli. Son hypothèse de station exige une unique entrée acquise, dans l'époque source, correspondant à cet effet et préservant le pair. `station_method` et `entry_method` sont des vues de ce propriétaire existant. Les retours d'accès restent dans le journal morphologique. La géométrie, l'historique, le contour, les commandes et la ressource sont revalidés avant une reprise. Le checkpoint v2 accepte les anciens v1 avec retour nul et vérifie la reconstruction du journal avant restauration.
+
+| Preuve du lot 2C | Résultat | Portée |
+| --- | --- | --- |
+| Gel natif | **242 fichiers**, digest `3cd17565b114a40ed71870bf8d7875a1b91102440b92d14a9258bfa98d4f7779` ; [archive](lot2c-evidence/final/source-archive.json) | Octets de code effectivement exécutés, conservés dans des parties vérifiables |
+| Contrats d'entrée | **48 approches, 37 reprises et 8 contours**, 106 scènes publiques synthétiques | Transformations, commandes opaques, deux origines, prévisions source et refus ; aucune réussite de jeu déduite de ces cas |
+| Méthode et adaptateur | **15 frontières, 7 rappels**, chaîne originale approche → retour → sonde ; gardes, refus et restauration | Acquisition de station par retour réel de composant ; fragment de frontière original et doubles de mémoire/router déclarés |
+| Capacité gérée | **45 recherches, 35 projections, 18 intégrations** | Ordre des plans exact ; seul `uncertain_edges`, issu d'un ensemble Python, est comparé comme multiensemble |
+| Delta de validation | **859/859 tests**, 17 fichiers ; [reçu](lot2c-evidence/final/validation/delta-tests-run.json) | Sources et tests inchangés pendant l'exécution ; périmètre affecté, pas suite historique complète |
+| Nouveau résultat LS20 | **Trois niveaux, 142 actions et 58 préfixes**, une session ; L1 **17/11**, L2 **67/28**, L3 **58/19** actions/préfixes ; [résolution](lot2c-evidence/final/ls20-resolution.json) | Arrêt naturel au niveau 4 ; V62 n'avait réussi que le niveau 1 avant `GAME_OVER` au niveau 2 |
+| Contribution observée | **2 `entry_rebind`, 1 `entry_probe` et 14 `managed_access`** sélectionnés ; une méthode de station acquise et consommée dans 47 appels ; [attribution](lot2c-evidence/final/ls20-method-continuation/ls20-method-continuation-attribution-v2.json) | Chaîne d'entrée liée au journal et à l'observation courante ; les compteurs ne prouvent pas une causalité unique |
+| Comparaison originale | **312 appels morphologiques, 600 appels de contexte, 58 checkpoints**, 143 paquets publics ; [reçu](lot2c-evidence/final/ls20-method-continuation/ls20-morphology-original-comparison.json.gz) | Contacts/essais/retours et propriétaires de ressource rejoués depuis zéro ; vue de méthode du caller capturée, sans revendication du caller historique complet |
+| Comparaison V62 | **25 commandes communes**, divergence à la 26e action cumulée, pendant le niveau 2 ; [reçu](lot2c-evidence/final/ls20-method-continuation/v62-first-command-divergence.json) | Arrêt avant toute réponse correspondant à la commande différente |
+| Audits et build | **Réussis** ; [reçu](lot2c-evidence/final/validation/checks-run.json) | 151 composants vérifiés, 130 partiels, 1 088 en attente ; 50/76 entrées et 37 workflows inchangés |
+| Intégrité de livraison | **Réussie** ; [reçu](lot2c-evidence/final/delivery-integrity.json) | Natif, sources/test/build inchangés ; rapport de campagne reconstruit depuis 26 parties, sans changement de statut des coûts |
+| Coûts communs | **Budget non validé** : 14/16 médianes initiales conformes, puis cinq dépassements sur huit au suivi STCK frais ; [résultats](lot2c-evidence/performance/results.md) | Service +25,74 %, requête +25,27 %, garde +13,61 %, persistance +20,67 %, restauration +16,45 % ; cause non isolée, seuil +10 % inchangé |
+| Coûts des nouvelles branches | **Douze cas, 240 appels mesurés**, attentes source exactes ; [rapport](lot2c-evidence/performance/managed-component-results.md) | Coûts absolus de composants chauds avec prémisses déclarées ; ne remplacent pas le budget du chemin commun |
+
+Les extensions de cible conservent leur statut conditionnel. Sur 42 extensions observées, 16 sont actuellement liées ; six de celles-ci accompagnent malgré tout une abstention. Toutes conservent `release_authority=false`. La sonde d'entrée porte une extension `remaining_alignment` non liée. Seuls le chemin commun de sélection, les gardes et WHY/ACT autorisent une action.
+
+L'horloge LS20 conserve les essais précédents et totalise **1 251,193 s**, environ **20 min 51 s**, à la clôture de cette sélection réussie. La limite de 40 minutes est respectée sans réinitialisation. Les preuves navigateur, coûts et intégrité finale sont détaillées dans le rapport de livraison.
+
+### Correction générique 0.36.0 : budget validé, clôture du sous-lot 2C
+
+La correction conserve les logiques transférées de V5/V6 et réduit du travail répété dans les chemins communs. Le store réemploie un payload immuable seulement après égalité canonique exacte ; le cache de restauration vérifie aussi le type, la portée et l'identité de tous les fragments. Le service lit l'identité d'autorisation courante sans construire un snapshot complet supplémentaire ; les traces déjà détenues et figées sont partagées dans une nouvelle liste. L'observateur encode directement le seul enregistrement géométrique interne dont l'ordre canonique et le domaine sont établis, avec les mêmes octets et le refus de `-0` conservé. Le digest public générique, les acquisitions, les gardes et les restaurations de familles gardent leurs contrats. Ces changements n'ajoutent aucune règle propre à un jeu ni aucune entrée au registre.
+
+Le [diagnostic de coût](lot2c-cost-evidence/diagnostic/results.md) et celui des [signatures de l'observateur](lot2c-cost-evidence/diagnostic/observer-results.md) établissent le travail répété et les gains locaux observés. Ils gardent leurs conditions et leurs limites : une session instrumentée et des micro-mesures ne suffisent pas à valider le budget officiel ni à attribuer toute la hausse V62 → V63 à une cause unique.
+
+| Preuve de la correction 0.36.0 | Résultat et portée | Reçu |
+| --- | --- | --- |
+| Gel natif | **242 fichiers**, inventaire SHA-256 **`ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b`** | [Archive source](lot2c-cost-evidence/final/source-archive.json) |
+| Delta formel de validation | **947/947 tests**, **26 fichiers** ; contrats 2C conservés, invalidation des caches, identité d'autorisation, snapshots et signatures de l'observateur ; périmètre affecté, pas suite historique complète | [Périmètre](lot2c-cost-evidence/final/release-scope.json), [exécution](lot2c-cost-evidence/final/validation/delta-tests-run.json) |
+| Contrôles du projet | Typecheck, audits, contrôle du diff et build réussis | [Contrôles](lot2c-cost-evidence/final/validation/checks-run.json) |
+| LS20, session froide | **Trois niveaux, 142 actions et 58 préfixes** ; actions par niveau **17 / 67 / 58**, préfixes **11 / 28 / 19**. Les 142 commandes et les 143 paquets publics restent exactement identiques à V63 ; la différence de `sourceDigest` de la trace complète est conservée | [Résolution](lot2c-cost-evidence/final/ls20-resolution.json), [comparaison publique](lot2c-cost-evidence/final/ls20-regression/public-comparison.json), [résultats](lot2c-cost-evidence/final/ls20-regression/results.md) |
+| STCK au navigateur | **Trois niveaux, 35 actions et 15 plans**, même session de raisonnement, arrivée naturelle au niveau 4 ; non-régression fonctionnelle, sans nouvelle capacité de jeu revendiquée | [Contrôle navigateur](lot2c-cost-evidence/final/browser/stck-verification.json) |
+| Contrôle sémantique STCK10 | Dix commandes et quatre états de propriétaires identiques ; **344 nœuds, 842 deltas et 24 traces** vérifiés. Zéro différence métier non qualifiée ; seuls les champs d'horloge et de durée observés et les identités de version/chaîne recalculées sont qualifiés. Les deux comparaisons strictes restent `strict_identity_failed`, avec leurs différences intégrales | [Qualification séparée](lot2c-cost-evidence/diagnostic/semantic-qualification.json), [comparaison stricte des profils](lot2c-cost-evidence/diagnostic/comparison.json), [comparaison stricte des captures complètes](lot2c-cost-evidence/diagnostic/semantic-comparison.json.gz) |
+| Coût officiel | **16/16 médianes STCK/SMLP dans le budget +10 %**, comparaison `passed`, aucun dépassement non résolu (`unresolved: []`). Référence V62 fraîche puis correction 0.36 gelée, fenêtre terminée le 9 novembre 2026 à 18:47:07 UTC−03 | [Comparaison](lot2c-cost-evidence/performance/comparison.json), [résultats et limites](lot2c-cost-evidence/performance/results.md), [fenêtre d'exécution](lot2c-cost-evidence/performance/window.json) |
+
+Les variations de médianes de la comparaison officielle sont les suivantes. Le service de continuation désigne le chemin du préfixe connu ; les temps de session et de service restent des mesures distinctes.
+
+| Cas | Session | Service de continuation | Statut de cette mesure |
+| --- | ---: | ---: | --- |
+| STCK | **−11,662 %** | **−40,175 %** | Chemin non concerné ; huit médianes conformes au budget |
+| SMLP | **−0,986 %** | **−56,810 %** | Chemin non concerné ; huit médianes conformes au budget |
+| LIFE | **+3,387 %** | **−22,494 %** | Diagnostic du chemin modifié ; hors des 16 critères STCK/SMLP |
+
+La restauration SMLP augmente de **+1,649 %**, maximum des 16 variations soumises au budget. Les hausses du diagnostic LIFE restent au bilan : nouvelle décision **+2,607 %**, acquisition/persistance **+1,030 %** et persistance seule **+1,012 %**, en plus du coût de session. Les [résultats complets](lot2c-cost-evidence/performance/results.md) conservent les effectifs, la dispersion et les limites de mesure. Cette comparaison valide le périmètre annoncé ; elle ne transforme pas le diagnostic LIFE ni les mesures locales de l'observateur en critères supplémentaires réussis, et elle conserve intégralement l'échec historique de coût du moteur 0.35.
+
+**État du lot 2 :** 2A et 2B sont livrés dans leurs périmètres ; le fonctionnel 2C reste publié en V63 et la correction générique 0.36 valide maintenant le budget de coût annoncé. **Le sous-lot 2C est clôturé dans son périmètre ; le lot 3 est engagé avec 3A, décrit ci-dessous.** La fermeture du domaine morphologique et la parité globale restent ouvertes. La source `morphology` reste classée partielle : les contrats couverts, leurs qualifications et les branches hors de leurs preuves ne deviennent pas une parité générale.
+
+## Lot 3 : mémoire commune et compositions
+
+**Entrées :** `observed_composition_services`, `framed_window_composition`, `coupled_prefix_reference` et `recurrent_series` sont raccordées. **Zéro entrée du lot 3 reste ouverte au registre**, sans clôture de ses réserves fonctionnelles ni de l’héritage complet. **3I est clôturé dans son périmètre, avec coût global accepté, et publié dans Site 79**.
+
+**Sous-lot 3A clôturé dans son périmètre :** `panel_service_plan`, fonctionnel **`0.37.0`** puis correction générique **`0.38.0`** validant le coût annoncé. Les mesures, correspondances directes, réécritures, paramètres de salle, gardes, retours et refus V6 sont transférés dans `SharedSeriesConstraint`. La sélection confirmée permet des préfixes plus longs ; les contre-exemples interdisent de répéter le même essai. Acquisition unique, anciens checkpoints et restauration atomique restent vérifiés. Le [rapport fonctionnel 3A](lot3a-observed-panel.md), sa [filiation](lot3a-observed-panel-lineage.md) et la [correction du coût](lot3a-cost-correction.md) définissent leurs portées respectives.
+
+| Preuve de 3A | Résultat vérifié |
+| --- | --- |
+| Gel et contrats historiques 0.37 | 245 fichiers natifs ; 58 tests de parité Panel ; **548/548 tests** dans le delta formel de 18 fichiers ; typecheck, audits et build réussis |
+| Nouvelle campagne RSWP | **Trois niveaux, 19 actions (3/8/8), 11 préfixes**, une session ; arrivée au niveau 4 en `NOT_FINISHED` |
+| Contribution | Onze propositions reproduites depuis les seuls événements antérieurs ; 19 acquisitions uniques ; quatre ablations du seul `selection_observed` réduisent le préfixe de trois actions à une |
+| Navigateur historique 0.37 | Même résultat 19/3/11 ; Pause à zéro puis à cinq actions, reprise du préfixe conservé |
+| Horloge | Réussite **7 min 28 s** après la sélection, préparation comprise ; limite de 40 minutes respectée |
+| Référence 0.36 | 93 actions, aucun niveau ; arrêt au budget actif puis OOM pendant l’export du diagnostic ; journal et limites conservés |
+| Coût historique 0.37 | **12/16 médianes dans le budget +10 %**, quatre dépassements conservés (STCK continuation/garde, SMLP décision/continuation), dans les [résultats historiques](lot3a-evidence/performance/results.md) |
+| Correction 0.38 | **16/16 médianes agrégées dans le budget +10 %**, huit sessions par jeu/version, ordre ABBA déclaré ; **964/964 tests**, 26 fichiers ; RSWP conserve les 19 commandes et 20 paquets publics exacts, trois niveaux et 11 préfixes ; [rapport](lot3a-cost-correction.md) |
+
+La correction reprend l'encodage exact des motifs périodiques déjà présent en V5, réduit les allocations du parcours géométrique V6 et réutilise les copies détachées de diagnostics profondément immuables. Le gel natif contient **245 fichiers**, digest `f0d8b2b0a746f19036076010025fffa1ad532d5751caa176f7efcccff7bc4aff`. Les propriétaires, acquisitions et gardes restent conservés. La [comparaison officielle](lot3a-cost-evidence/performance/combined-comparison.json) est `passed`, avec `unresolved: []`. La médiane de session évolue de **+0,851 % sur STCK** et **−28,209 % sur SMLP** ; les continuations de service baissent de **−10,649 %** et **−16,386 %**. La hausse agrégée maximale, acquisition/persistance STCK **+6,050 %**, respecte le budget.
+
+Les deux cohortes, toutes leurs sessions et les quatre dépassements historiques 0.37 restent conservés. La seconde cohorte de la correction garde deux dépassements STCK, **+11,028 %** en acquisition/persistance et **+13,234 %** en persistance ; les [résultats complets](lot3a-cost-evidence/performance/results.md) les exposent avec les dispersions et les hausses de p95. La règle de clôture était définie à l'avance sur l'agrégat des huit sessions, sans exclusion ni augmentation du seuil. Ce résultat clôt le coût annoncé, sans établir la stabilité de toute session longue.
+
+### Sous-lot 3B fonctionnel historique : 0.39.0, réserve de coût
+
+Le [rapport 3B](lot3b-relational-chamber.md) et sa [filiation](lot3b-relational-chamber-lineage.md) décrivent le transfert de `chamber_relation_plan`, des tables relationnelles observées et des fonctions V5 `_network_domain` et `_indexed_combination` réellement consommées. Le propriétaire partagé, l’ordre source, les gardes, l’acquisition unique et les anciens checkpoints sont conservés. Les contradictions ne remplacent pas silencieusement une ligne acquise ; elles suspendent les contextes concernés.
+
+| Preuve historique 3B en 0.39 | Résultat vérifié et portée |
+| --- | --- |
+| Gel natif | **248 fichiers**, digest `49648e72cf7d3d719addfe4a6bebd8c29842a0f618664a45ef3929a5d17132b1` |
+| Validation formelle | **1 077/1 077 tests**, **29 fichiers** ; typecheck, audits et build réussis ; [reçus](lot3b-evidence/final/validation/delta-tests-run.json) |
+| Référence CATR 0.38 | **Une action, aucun niveau**, arrêt naturel `frontier_unknown` ; [résumé conservé](lot3b-evidence/baseline/catr-reference/summary.json) |
+| Nouvelle campagne CATR | **Trois niveaux, 12 actions (3/4/5), huit préfixes (2/3/3), une session** ; arrivée naturelle au niveau 4 en `NOT_FINISHED` ; [exécution](lot3b-evidence/final/catr-session/execution-catr.json) |
+| Contribution | **Huit plans et douze acquisitions exactement reconstruits** ; 24 ablations conservées, dont huit modifient une commande ou un refus et dix gardent la projection de décision ; [preuve limitée](lot3b-evidence/final/catr-session/chamber-contribution.json) |
+| Horloge CATR | **1 030,691727 s**, environ **17 min 10,7 s**, avec les 107,399326 s héritées et la préparation ; réussite avant quarante minutes |
+| Navigateur CATR | **12 actions, trois niveaux, huit plans**, même session ; Pause initiale, préfixe partiel conservé, Pause à cinq actions puis reprises aux frontières 7 et 12 ; [reçu](lot3b-evidence/final/browser/browser-verification.json) |
+| RSWP enregistré | **19 actions, trois niveaux, onze préfixes**, mêmes 19 commandes, 20 paquets publics et 221 images ; strict **16/17, `failed`** conservé ; ajout du compteur Chamber zéro qualifié séparément sur les onze préfixes, sans plan ni acquisition Chamber ; [qualification](lot3b-evidence/final/regressions/empty-series-extension-qualification.json) |
+| Coût 3B | **Budget non validé : 15/16 médianes agrégées conformes** ; restauration STCK **9,104383 → 10,805602 ms, +18,686 %** ; première cohorte 15/16, seconde 16/16, toutes les sessions conservées, seuil +10 % inchangé ; [résultats](lot3b-evidence/performance/results.md) |
+
+Le fonctionnel 3B et le navigateur sont vérifiés ; la trajectoire RSWP est conservée avec l’extension d’observation vide qualifiée séparément. Le contrôle strict reste **16/17 en échec**, sans remplacement par 17/17. **Ce coût historique conserve une métrique agrégée non résolue et laissait le sous-lot 3B ouvert.** La restauration STCK augmente de 1,701219 ms sur 96 échantillons par version, sans cause établie ni dépassement effacé par la dispersion. Le p95 de restauration SMLP monte de 22,611702 à 29,389767 ms, environ +29,98 %, limite conservée hors du budget des médianes. L’identité des champs géométriques flottants Python est conservée par un encodage local typé ; le digest commun reste inchangé. Les tables partielles et les cibles de la grammaire demeurent des hypothèses conditionnelles, sans loi physique ou terminale fournie.
+
+### Correction générique historique de 3B : 0.40.0, gel `391a279`, fonctionnel validé avec réserve de coût
+
+Le [rapport de correction](lot3b-cost-correction.md) distingue les essais successifs. Le premier essai officiel **`f0ba85e80fbe7543f2e2360c6b6e846ae76839cb6ede0e9c022d31b56f46cece`**, conservé dans `final-v2/`, passe ses **1 272/1 272 tests dans 33 fichiers**, mais échoue au coût : **14/16 médianes conformes**, restauration STCK **+66,160 %**, SMLP **+21,511 %**. Son [agrégat](lot3b-cost-evidence/performance/combined-comparison.json), ses 32 sessions et ses contrôles restent inchangés.
+
+La correction suivante réduit les allocations des témoins structurels, les vérifications répétées du même certificat, les validations et les copies redondantes du tracker. Elle prépare l’état avant publication et certifie les propriétaires après validation de leur projection réelle, y compris lorsque la restauration ajoute des valeurs par défaut ou déduplique une Map. Identités, ordre des clés, mutations directes, itérateurs personnalisés, anciens checkpoints, acquisition unique et restauration atomique restent contrôlés. Les logiques V5/V6 et le domaine fonctionnel de Panel/Chamber sont conservés ; aucune nouvelle branche n’est revendiquée.
+
+| Preuve historique 0.40, gel `391a279` | Résultat vérifié et portée |
+| --- | --- |
+| Source native et archive | **249 fichiers natifs**, digest **`391a2797414c0090fa632a2fc13736c7806c1f5fceceafa34e1583dd4ef9e3a9`**, archive de 260 fichiers ; [manifeste](lot3b-cost-evidence/final-v3/source-manifest.json) |
+| Validation formelle | **1 322/1 322 tests dans 35 fichiers**, périmètre affecté et intégrations ; [reçu](lot3b-cost-evidence/final-v3/validation/delta-tests-run.json) |
+| Contrôles du projet | Typage, audit des entrées, audit de migration, contrôle du diff et build réussis ; [reçu](lot3b-cost-evidence/final-v3/validation/checks-run.json) |
+| CATR live | **12 actions, trois niveaux, huit préfixes**, une session froide et arrivée naturelle au niveau 4 en `NOT_FINISHED` ; [exécution](lot3b-cost-evidence/final-v3/catr-cost-v3-session/execution-catr.json) |
+| Navigateur CATR | **12 actions, trois niveaux, huit plans**, pauses initiale et à cinq actions, reprise du préfixe partiel ; prévisualisation des sources gelées, distincte du worker compilé ; [reçu](lot3b-cost-evidence/final-v3/browser/browser-verification.json) |
+| Rejeux CATR et RSWP | **34/34 contrôles**, deux références 0.39 ; CATR 12/3/8 et RSWP 19/3/11 en actions/niveaux/préfixes ; [résumé](lot3b-cost-evidence/final-v3/regressions/regression-summary.json) |
+| Coût officiel du nouveau gel | **14/16, `budget_review_required`** ; deux dépassements SMLP, acquisition/persistance **+11,642 %** et restauration **+14,989 %** ; huit sessions par cas/version, 32 sessions et 400 actions, seuil **+10 % sur chacune des seize médianes** ; [agrégat `performance-v2`](lot3b-cost-evidence/performance-v2/combined-comparison.json) |
+
+Les confirmations CATR et RSWP établissent une non-régression de cette correction générique. Elles ne constituent pas une nouvelle capacité de jeu ni une victoire complète. Les 34 contrôles contre 0.39 n’effacent pas l’ancien échec strict RSWP 0.38 → 0.39 à **16/17**, qualifié séparément. **Le sous-lot 3B reste ouvert : la validation fonctionnelle de 0.40.0 conserve une réserve de coût.**
+
+Le [résultat officiel `performance-v2`](lot3b-cost-evidence/performance-v2/combined-comparison.json) distingue les phases suivantes, sur les huit sessions annoncées par cas/version :
+
+| Phase | Médiane 0.38 fraîche | Médiane 0.40, `391a279` | Variation | Décision agrégée |
+| --- | ---: | ---: | ---: | --- |
+| Restauration STCK, 96 échantillons par version | 11,0582455 ms | 11,5247265 ms | **+4,218400 %** | Conforme au seuil +10 % |
+| Acquisition/persistance SMLP, 72 échantillons par version | 987,2867115 ms | 1 102,223294 ms | **+11,641662 %** | **Non résolu** |
+| Restauration SMLP, 144 échantillons par version | 4,871004 ms | 5,601095 ms | **+14,988512 %** | **Non résolu** |
+
+Les deux critères SMLP restent `over_budget_with_noise_unresolved`. La cohorte 1 conserve **14/16**, la cohorte 2 **13/16**, avec toutes leurs sessions ; leurs résultats ne sont pas remplacés par l’agrégat. Les dépassements STCK par cohorte restent visibles : **restauration +10,266 % dans la première**, **garde de continuation +11,078 % dans la seconde**. Leur cause n’est pas établie par ces mesures. La [revue indépendante](lot3b-cost-evidence/performance-v2/consolidation-review.json) passe **231 contrôles** et confirme les **32 sessions uniques, 400 actions et le même budget non conforme**. Le seuil reste celui du [protocole préalable](lot3b-cost-evidence/performance-v2/protocol.md), sans tolérance ajoutée pour le bruit. Le [bilan complet](lot3b-cost-evidence/performance-v2/results.md) conserve distributions, p95 et limites. Ces phases s’imbriquent ; leurs durées ne s’additionnent pas. Les causes précises des deux hausses restent à isoler dans le chemin commun.
+
+### Correction générique SMLP : 0.41.0, gel `3edffde`, fonctionnel validé avec réserve de coût
+
+Le [nouveau manifeste gelé](lot3b-smlp-cost-evidence/final/source-manifest.json) contient **249 fichiers natifs**, digest **`3edffde9b21f4fc8af9dda9a1dbd40707c015d9f7cba8a41460021e39acb7605`**. L’[archive](lot3b-smlp-cost-evidence/final/source-archive.json) conserve **260 fichiers** et le [périmètre formel déclaré](lot3b-smlp-cost-evidence/final/release-scope.json) comprend **41 fichiers de tests**. Ce candidat n’ajoute aucune branche ou politique de jeu ; il conserve les logiques V5/V6 déjà transférées.
+
+La réutilisation du décodage est limitée aux fragments sans référence, reconnus comme profondément immuables par leur propriétaire canonique. Une nouvelle hydratation lit toujours le fragment courant dans le store ; la même identité et le même id peuvent réutiliser leur preuve de hash validée. Les fragments composites sont redécodés et leurs dépendances transitives relues. Les objets étrangers, même gelés, et toute identité ou adresse différente repassent par la validation complète. Le cache est borné à **256 résultats et 8 MiB de poids structurel** ; son éviction abandonne une valeur recalculable et ne supprime aucune révision de connaissance.
+
+Les copies Inventory restituent directement les primitives clonables et continuent de détacher les objets. Les valeurs numériques particulières, `bigint`, `undefined` et le rejet des fonctions/symboles gardent leur sémantique source. La copie externe du tracker est évitée seulement lorsque la méthode réellement récupérée est le restaurateur standard, qui détache déjà son entrée. Les restaurateurs personnalisés, y compris un getter qui modifie le prototype pendant la lecture, reçoivent leur copie mutable. La normalisation, les snapshots publics détachés, les anciens checkpoints et l’atomicité restent dans le périmètre des contrats ; aucune nouvelle politique d’égalité des checkpoints n’est introduite.
+
+La hauteur transitive complète est conservée dans les caches local et persistant. Cela ferme aussi un **contournement préexistant du seuil de profondeur 512**, qualifié séparément par la [comparaison synthétique](lot3b-smlp-cost-evidence/diagnostic/repeated-reference-depth-comparison.json) : 0.40 refuse une première occurrence à profondeur **513**, mais l’accepte après une occurrence moins profonde de la même référence. Le candidat refuse les deux formes hors limite et continue d’accepter **512**. Ce correctif structurel ne modifie ni le format des états encodés ni la politique de jeu.
+
+| Vérification de la correction 0.41 | État et portée |
+| --- | --- |
+| Contrats ciblés Inventory | **194/194 réussis**, dont six nouveaux contrats de copie/restaurateur ; [reçu](lot3b-smlp-cost-evidence/diagnostic/inventory-copy-getter-tests.json) |
+| Contrats ciblés d’hydratation, persistance et cache canonique | **57/57 réussis**, dont douze nouveaux contrats d’hydratation ; [reçu](lot3b-smlp-cost-evidence/diagnostic/hydration-cache-tests.json) |
+| Validation formelle sur gel | **1 379/1 379 tests réussis dans 41 fichiers**, sans échec, annulation, test ignoré ni TODO ; sources et tests inchangés ; périmètre affecté et intégrations, distincts de toute la suite historique ; [reçu](lot3b-smlp-cost-evidence/final/validation/delta-tests-run.json) |
+| Contrôles du projet | **5/5 réussis** : typage, audit des entrées, audit de migration, contrôle du diff et build ; source native inchangée ; [reçu](lot3b-smlp-cost-evidence/final/validation/checks-run.json) |
+| CATR live | **12 actions, trois niveaux, huit préfixes**, une session froide en 0.41, arrivée naturelle au niveau 4 en `NOT_FINISHED` ; source et entrées d’exécution inchangées ; [exécution](lot3b-smlp-cost-evidence/final/catr-smlp-cost-session/execution-catr.json) |
+| Rejeux CATR et RSWP | **2/2 cas, 34/34 contrôles historiques** contre 0.40 ; **12/3/8** et **19/3/11** en actions/niveaux/préfixes ; [résumé](lot3b-smlp-cost-evidence/final/regressions/regression-summary.json) |
+| Confirmation navigateur | **12 actions, trois niveaux, huit plans**, arrivée au niveau 4 dans la même session ; pauses à zéro et cinq actions, reprise du préfixe partiel ; prévisualisation de développement des sources gelées, distincte de l’exécution du worker compilé ; [reçu](lot3b-smlp-cost-evidence/final/browser/browser-qa.json) |
+| Budget officiel STCK/SMLP | **14/16, `budget_review_required`** ; persistance STCK **+14,269890 %** et restauration SMLP **+11,220692 %** non résolues contre une référence 0.38 fraîche, seuil **+10 % sur chacune des seize médianes** inchangé ; [agrégat](lot3b-smlp-cost-evidence/performance/combined-comparison.json) |
+
+La première tentative des deux rejeux a échoué **avant toute commande** : le build concurrent n’avait pas encore produit le module Pyodide nécessaire. Les résumés et journaux d’échec restent intacts dans [`prebuild-failed/regressions/`](lot3b-smlp-cost-evidence/prebuild-failed/regressions/regression-summary.json) ; le [reçu de déplacement](lot3b-smlp-cost-evidence/prebuild-failed/relocation.json) conserve leur raison et leurs empreintes. La reprise réussie utilise la même source gelée et les mêmes entrées publiques après disponibilité du prérequis. Les 34 contrôles portent sur les commandes, paquets publics, frontières, champs de sélection et compteurs nommés du comparateur historique. Ils n’établissent pas l’égalité globale des états ou des payloads complets. Le reçu déclare `passiveOwnerRequirements: []` et **zéro préfixe de propriétaire passif contrôlé** ; aucune validation de ces propriétaires n’est déduite du statut global.
+
+La vérification navigateur utilise les contrôles visibles dans une session continue : Pause initiale, actions unitaires 1 et 2, frontière **3/1/2**, action unitaire 4, Pause à **5/1/3**, puis reprises jusqu’à **7/2/5** et **12/3/8** en actions/niveaux/plans terminés. Le premier essai de capture pleine page a expiré ; les captures de viewport et l’arbre d’accessibilité complet ont ensuite été conservés, sans rejouer la partie. Cette prévisualisation des sources confirme les contrôles et compteurs visibles ; elle ne constitue pas une exécution de production compilée ou une mesure de coût.
+
+La [fenêtre officielle](lot3b-smlp-cost-evidence/performance/combined-comparison.json) est terminée. Elle conserve les deux cohortes déclarées dans l’ordre **A1/B1/B2/A2**, **huit sessions par cas/version**, **32 sessions mesurées et 400 actions**, sans exclusion d’essai ou d’extrême. Le [protocole préalable](lot3b-smlp-cost-evidence/performance/protocol.md) maintient les mêmes phases et le seuil **+10 % sur chacune des seize médianes**. Le bruit n’ajoute aucune tolérance.
+
+| Phase | Médiane 0.38 fraîche | Médiane 0.41, `3edffde` | Variation | Décision agrégée |
+| --- | ---: | ---: | ---: | --- |
+| Persistance STCK, 104 échantillons par version | 169,327983 ms | 193,490900 ms | **+14,269890 %** | **Non résolu** |
+| Restauration SMLP, 144 échantillons par version | 4,907037 ms | 5,4576405 ms | **+11,220692 %** | **Non résolu** |
+| Acquisition/persistance SMLP, 72 échantillons par version | 1 046,0816115 ms | 934,704901 ms | **−10,647038 %** | Conforme au seuil +10 % |
+| Restauration STCK, 96 échantillons par version | 9,9928605 ms | 8,4364265 ms | **−15,575460 %** | Conforme au seuil +10 % |
+
+Les deux dépassements conservent le statut `over_budget_with_noise_unresolved`. Les médianes de session évoluent de **+0,169604 % sur STCK** et **+0,330178 % sur SMLP** ; ces totaux et les baisses de certaines phases ne compensent pas les deux critères individuels hors budget. Les variations de cette table comparent 0.41 à sa référence 0.38 fraîche dans cette fenêtre ; elles ne comparent pas directement les temps de fenêtres historiques distinctes.
+
+Les deux cohortes originales restent chacune à **14/16**. La première conserve **persistance STCK +20,788833 %** et **restauration SMLP +21,227162 %** ; la seconde conserve **garde de continuation STCK +11,226586 %** et **SMLP +25,651441 %**. Ces échecs restent visibles même lorsque la médiane agrégée rentre dans le seuil. Le p95 de garde de continuation STCK passe aussi de **0,302587 à 6,544347 ms**, malgré une médiane agrégée conforme : cette hausse de queue est une limite distincte du budget des médianes. Les phases sont imbriquées et non additives ; les échantillons d’une même session sont corrélés. Ce résultat fini sur retours enregistrés ne prouve ni vitesse de jeu live ni stabilité sur plusieurs heures, et n’établit pas la cause des deux hausses restantes.
+
+La [revue indépendante de consolidation](lot3b-smlp-cost-evidence/performance/consolidation-review.json) passe **231 contrôles**, confirme le décompte des sessions et l’arithmétique, et conserve le même verdict **`budget_review_required`, 14/16**. Une revue arithmétique réussie ne valide pas le budget de coût.
+
+**Le bilan historique 0.41.0 est fonctionnellement validé avec réserve de coût 14/16.** Il fixait comme suite le diagnostic puis la réduction générique de la **persistance STCK** et de la **restauration SMLP**. La correction 0.42 ci-dessous traite cette étape sur un nouveau gel et une nouvelle fenêtre préalablement déclarée contre 0.38 fraîche. Aucune répétition officielle du gel `3edffde` inchangé ne remplace ce résultat. Les échecs **0.39 à 15/16**, **0.40 `f0ba` à 14/16** et **0.40 `391a279` à 14/16**, toutes leurs sessions et leurs limites, restent conservés avec leurs propres identités. CATR confirme une non-régression sur trois niveaux ; ce résultat ne revendique ni victoire complète ni nouvelle capacité de jeu transférée.
+
+### Correction des états communs : 0.42.0, gel `2de70025`, deux coûts ciblés conformes et budget global ouvert
+
+Le [rapport détaillé](lot3b-state-cost-correction.md) et son [index de preuves](lot3b-state-cost-evidence/README.md) relient les **249 fichiers natifs**, l'archive de **260 fichiers**, les **1 396 tests dans 42 fichiers**, les **cinq contrôles de projet**, CATR froid/navigateur **12/3/8** et les régressions CATR/RSWP **2/2 cas, 34/34 contrôles**. Les sources et tests restent ceux du gel `2de70025ae08845efd491929416e091e9dc9e8e4b473440b9c6a86838e0b3d19`. Les sources V5/V6 originales sont inchangées.
+
+Les validateurs évitent des allocations de descripteurs tout en capturant le parent avant ses enfants et en conservant les contrats de Proxy, d'accesseurs et d'ordre. Les copies directes restent limitées aux valeurs possédées par le module canonique ou construites par l'hydratation, via une provenance privée non attribuable par l'appelant. Les autres entrées gardent `structuredClone`. Les alias internes, les copies mutables détachées, les restaurateurs personnalisés, les limites et les contrôles de dépendance restent couverts. Le refus désormais systématique des trous dans un graphe brut est un **durcissement explicite d'entrée malformée**, pas une équivalence revendiquée sur tout JavaScript.
+
+La [fenêtre officielle](lot3b-state-cost-evidence/performance/combined-comparison.json) conserve **32 sessions, 400 actions et les deux cohortes A1/B1/B2/A2**, seuil **+10 %** inchangé, aucune session ni valeur extrême supprimée. Son résultat est **`budget_review_required`, 14/16**. La [revue indépendante](lot3b-state-cost-evidence/performance/consolidation-review.json) passe **231/231 contrôles** et confirme ce verdict.
+
+| Critère | Variation face à 0.38 fraîche | État agrégé |
+| --- | ---: | --- |
+| Persistance STCK | **−8,261037 %** | Conforme ; ancienne cible de 0.41 |
+| Restauration SMLP | **+6,223866 %** | Conforme ; ancienne cible de 0.41 |
+| Service de préfixe connu STCK | **+27,720363 %** | **Non résolu** |
+| Requête de préfixe connu STCK | **+26,350748 %** | **Non résolu** |
+| Session complète STCK | **−17,795781 %** | Conforme ; ne compense aucun critère individuel |
+| Session complète SMLP | **−13,442302 %** | Conforme ; ne compense aucun critère individuel |
+
+Les cohortes restent **14/16 et 13/16** ; la seconde ajoute le garde STCK **+13,578554 %**, malgré son agrégat conforme. Les deux dépassements service/requête existent dans les deux cohortes. Le p95 du garde SMLP monte de **0,756828 à 7,512366 ms**, celui de nouvelle décision SMLP de **800,527360 à 892,998337 ms**. Le [bilan des coûts](lot3b-state-cost-evidence/performance/results.md) conserve les seize critères et toutes les distributions. Les diagnostics instrumentés contre 0.41 passent chacun six critères comportementaux bornés, mais ne prouvent pas l'égalité complète des états et ne permettent pas une attribution causale des temps : leur réserve d'isolation est conservée. Cette limite n'est pas appliquée comme une tolérance au budget officiel distinct.
+
+**Décision historique de 0.42 avant la nouvelle règle : fonctionnel validé, réserve de coût et 3B ouvert.** La suite doit traiter le service et la requête d'un préfixe connu dans le moteur commun, sans court-circuiter gardes, témoins, détachement ni acquisition. Une nouvelle mesure officielle exige une correction matérielle et un nouveau gel ; les résultats du gel présent restent conservés. Les chiffres des anciennes fenêtres ne sont pas utilisés comme une comparaison temporelle directe avec celle-ci.
+
+Au jalon **3F**, l'entrée `observed_composition_services` a atteint **6/6 branches raccordées**, portant alors le compteur des entrées déclarées à **51/76**, sans entrée partiellement raccordée, avec **25 entrées ouvertes**. Le jalon **3G** a ensuite raccordé `framed_window_composition`, portant le compteur à **52/76**, avec **24 entrées ouvertes**. **3H** a raccordé `coupled_prefix_reference` : **53/76**, avec **23 entrées alors ouvertes**. **3I** raccorde `recurrent_series` et portait le compteur à **54/76**, avec **22 entrées alors ouvertes** ; **4A** ajoute `observed_feedback_sequence` dans le gel intégré 0.51, soit **55/76** et **21 entrées ouvertes** ; la façade observée reste à **6/6**. Cette complétude de façade et la fin du raccordement des entrées du lot 3 ne clôturent ni les réserves fonctionnelles, ni les dépendances héritées, ni la parité comportementale de l'appelant complet.
+
+| Branche interne | Statut courant | Suite identifiée |
+| --- | --- | --- |
+| `panel_service_plan` | **3A clôturé dans son périmètre**, coût validé en 0.38 | Conserver les contrats et les trajectoires RSWP pendant les ports suivants |
+| `chamber_relation_plan` | **3B clôturé dans son périmètre selon la règle globale autorisée**, sur 0.42 | Conserver CATR et RSWP ; les dépassements historiques et leurs p95 restent diagnostiques |
+| `exposed_reception_plan` | **3C / 0.44 : transfert et preuve courante vérifiés ; capacité fonctionnelle restante ouverte** | Contrat corrigé, 19 préfixes propres restaurés et contribution vérifiée ; cible CWSE trois niveaux non atteinte, horloge consommée, aucun nouvel essai sur ce gel |
+| `rooted_line_plan` | **3D / 0.45 : transfert et contrats vérifiés ; cible SK48 ouverte** | 12 actions, zéro niveau, cinq préfixes ; 126 contrôles de rejeu source conformes, contre-exemple et refus conservés. Suivi générique du modèle, horloge 667,35444 s sans remise à zéro |
+| `reception_service_plan` | **3E / 0.46 : clôturé dans son périmètre annoncé, coût accepté** | FOGW trois niveaux / 50 actions / 27 préfixes et navigateur ; propriété native distincte, époque et registre d’attente vérifiés. Exception originale et limite de continuation sur l’identité de demande conservées |
+| `reference_population_plan` | **3F / 0.47 : clôturé dans son périmètre, coût global accepté** | VOIS trois niveaux / 78 actions / 42 préfixes, navigateur identique, parité propre 3 434/3 434, 100 ablations contributives sur 252. Limites de cadre, contrôle, loi d’apparence et héritage conservées |
+
+**Le suivi de preuve courante 0.44 et le transfert propre RootedLine 0.45 restent vérifiés ; Reception 0.46 est clôturé dans son périmètre annoncé, coût accepté. ReferencePopulation 0.47 est clôturé dans son périmètre annoncé, coût accepté. FramedWindow 0.48 est raccordé avec sa réserve de contribution en jeu ; CrossedPrefix 0.49 apporte trois niveaux WEAV et une contribution propre vérifiée. RecurrentSeries 0.50 apporte trois niveaux CONN et sa contribution propre vérifiée ; son périmètre est clôturé avec coût global accepté et publication confirmée dans Site 79. Feedback 4A est livré dans native 0.51. RelativeArrangements 4B est publié dans Site 86 en native 0.54 ; sa validation fonctionnelle et son coût global sont acceptés. 4C, `facet_example`, est livré dans Site 92/native 0.57 ; son fonctionnel, son coût global et sa publication privée sont vérifiés.** Le [rapport 0.45](lot3d-rooted-line.md) conserve le contre-exemple SK48, la correspondance exacte avec les originaux et la cible non atteinte. Une révision du modèle sera générique et soumise aux contrats et cas contraires ; aucun numéro de jeu, couleur fixe ou séquence préparée ne peut la déterminer. Ce suivi ne réinitialise ni SK48 ni CWSE et ne transforme pas une validation de transfert en résolution de jeu.
+
+Le [suivi de continuation STCK](lot3b-state-cost-evidence/diagnostic/known-prefix-followup.md) reste conservé comme diagnostic de performance. Ses dépassements de phase ne bloquent plus seuls la clôture de 3B, puisque les deux sessions complètes satisfont la règle autorisée. La mesure 0.43 utilise 0.42 fraîche ; aucune durée d'une autre fenêtre n'est recyclée comme référence.
+
+Le port 3C conserve les effets mesurés comme conditionnels, les refus d'appariement ambigu et les bornes de préparation/expansion/recherche. Sa fermeture héritée EphemeralMap complète reste partielle ; le diagnostic terminal ne prouve pas que cette dépendance explique le refus. La branche `reference_population_plan` est maintenant raccordée et vérifiée dans le périmètre 3F ; `framed_window_composition` est raccordée dans 3G avec validation en jeu encore ouverte ; `coupled_prefix_reference` est raccordée dans 3H avec trois niveaux WEAV ; `recurrent_series` est raccordée dans 3I avec les deux couches consommées RepeatedLine/SupportedLine et trois niveaux CONN. Ces résultats n’achèvent pas tout l’appelant hérité.
+
+La sélection CATR du lot 3B conserve **1 030,691727 secondes cumulées**. CWSE conserve sa propre [horloge sans remise à zéro](lot3c-current-evidence/final/cwse-resolution.json), **2 399,683865 secondes**, dont **1 527,448427** avant cette continuation. La limite est consommée ; aucun nouvel essai ou diagnostic sur ce gel. Passer à un autre cas pertinent, sans transformer le suivi documentaire ou les mesures STCK/SMLP en nouvelles tentatives CWSE.
+
+SK48 conserve séparément **667,35444 secondes cumulées**, soit **1 732,64556 secondes restantes**. Son diagnostic s'est arrêté après confirmation du même contre-exemple par les originaux, avant épuisement du budget. Les validations de livraison et mesures STCK/SMLP ultérieures ne sont pas de nouvelles tentatives SK48.
+
+FOGW conserve **951,320275 secondes cumulées** ; VOIS conserve **1 017,469531 secondes**, avec **1 382,530469 secondes restantes**. Les deux cibles de trois niveaux sont acquises dans leurs campagnes respectives. Les comparaisons de livraison et les mesures de coûts ne sont pas de nouvelles tentatives sur ces cas.
+
+**Dépendances :** mémoire commune existante, événements, restauration et continuation. Étendre le propriétaire déjà employé ; réutiliser programmes, supports, occurrences et services acquis. Le lot n'attend pas les lots 4 à 10. `observed_composition_services` conserve des branches internes distinctes.
+
+**Critères de fin :** chaque entrée contribue à une sélection ou continuation pertinente ; confirmation soutenant la composition et contradiction mémorisée la révisant/suspendant ; références et préfixes revalidés ; restauration préservant les autres acquis du propriétaire partagé ; preuves adaptées à chaque branche interne revendiquée.
+
+### Sous-lot 3G : FramedWindow, moteur 0.48
+
+La branche est raccordée à sa place source après RootedQuota. Mesure de la fenêtre exacte, certificat V5, point courant, gardes, mémoire locale des essais et restauration sont vérifiés sur les contrats originaux et dans une boucle complète du contrôleur. Le [rapport 3G](lot3g-framed-window.md) conserve les **2 566 tests**, **68 contrôles de rejeu**, **15 groupes de contrôles synthétiques**, neuf checkpoints 0.47 et toutes les limites de l’oracle. Les diagnostics publics ne permettent aucune acquisition réelle propre ; la contribution en jeu reste explicitement ouverte. Le budget global est traité par son reçu séparé et ne clôt pas cette réserve. Le lot 3 entier demeure ouvert.
+
+### Sous-lot 3I : RecurrentSeries, moteur 0.50
+
+Les mesures de champs répétés, la continuation expérimentale RepeatedLine, le témoin scoré, les insertions passives et l’ordre public des paquets alimentent le repli SupportedLine réellement consommé. Un propriétaire unique conserve les six projections et les deux emplacements de digest ancestraux. Les gardes dynamiques communes, le court-circuit RootedQuota et l’acquisition indépendante du paquet restent à leur place source. Le [rapport 3I](lot3i-recurrent-series.md) conserve **3 225 tests/76 fichiers**, **85 contrôles de rejeu**, **18 groupes synthétiques/deux sessions**, **19 checkpoints 0.49**, la contribution CONN et les limites de calcul et d’héritage.
+
+CONN atteint **trois niveaux/21 actions/21 préfixes**, également confirmés au navigateur ; **1 361 contrôles** et **84 ablations** dont 33 changements d’action/refus et 51 résultats négatifs ou inchangés établissent sa contribution propre. Son horloge s’arrête à **1 014,763812 secondes cumulées**. La récupération WEAV préserve les trois invocations non achevées et passe finalement les dix-sept comparaisons sur 81 actions. L’intégrité est acquise. **3I est clôturé dans son périmètre : coût global accepté STCK −1,421099 % et SMLP +2,192594 %, agrégat 16/16, revue 231/231.** Les cohortes 16/16 puis 9/16, leurs valeurs défavorables et les p95 restent conservés ; la publication effective est confirmée dans Site 79, sans réécriture des verdicts historiques.
+
+## Lot 4 : exemples et retours discriminants
+
+**Entrées :** `observed_feedback_sequence`, `relative_arrangement`, `facet_example`.
+
+**État intégré :** 4A est livré dans Sites 80–81 et 4B dans Sites 86–87 / 0.54, avec coût accepté. **4C, `facet_example`, est livré dans Site 92/native 0.57**, après intégration de 10A réellement publié dans Sites 90–91. **4A, 4B et 4C sont livrés ; le lot 4 est clos dans ses périmètres annoncés**, avec zéro entrée ouverte au registre publié, sans clôture de la migration globale.
+
+**Dépendances :** mesures d'interface, callbacks natifs, SRC et retours. Le lot 3 complet n'est pas requis. Raccorder les workflows déjà compilés à leurs producteurs et consommateurs effectifs.
+
+| Sous-lot | Entrée et workflow existant | État et preuve | Prochain travail concret |
+| --- | --- | --- | --- |
+| **4A** | `observed_feedback_sequence` / `v6.feedback_sequences.choose` | **Livré dans Site 80, moteur intégré 0.51 ; transfert, contribution et coût qualifié vérifiés.** Même instance dans `goal_access` et `information_goal`, acquisition sélectionnée/passive sans doublon, gardes de palette et préfixe, méthode conservée sans `layout`, restauration et rappel conditionnel. MIND : trois niveaux, 31 actions, 20 préfixes ; 51/51 appels de famille exacts, trois choix changés et cinq inchangés sur huit ablations. **3 566/3 566 tests dans 90 fichiers, 5/5 contrôles et 85/85 comparaisons de régression.** | Périmètre livré. Conserver l’échec strict de comparabilité, sa qualification distincte et la réserve de contrôle navigateur de ce jalon ; le suivi 4B est documenté dans sa ligne propre. |
+| **4B** | `relative_arrangement` / `v6.relative_arrangements.choose` | **Livré dans Site 86 / native 0.54, validation fonctionnelle et coût global accepté sous qualification préalable.** Acquisition sélectionnée et initialement liée, propriétaire propre, arrêt local et restauration vérifiés. TRIA trois niveaux/17 actions ; comparaison froide finale 68/68 appels, deux ablations d'action sur une décision distincte. **4 048/4 048 tests, 5/5 contrôles, 8/8 rejeux et 136/136 comparaisons**, LKEY partiel séparé. | Périmètre livré ; conserver les réserves de parité de l'appelant et d'accumulation. Rapport : [RelativeArrangements](lot4b-relative-arrangements.md). |
+| **4C** | `facet_example` / `v6.facet_examples.choose` | **Livré dans Site 92/native 0.57, fonctionnel validé et coût global accepté.** Branches simples et composées, propriétaire unique, acquisition sélectionnée et restauration ; 4 838 tests, cinq contrôles, dix rejeux/170 comparaisons. ISOS navigateur trois niveaux/douze actions/douze plans ; 48 appels Python froids et 36 restaurations sans différence ; neuf propositions composées dépendent de `portable`. | Périmètre livré ; cette clôture documentaire conserve les mêmes sources et build. Coût STCK −1,833520 % / SMLP −0,156096 %, revue 7 630/7 630. Rapport : [FacetExamples](lot4c-facet-examples.md). |
+
+Le [rapport 4A](lot4a-feedback-sequences.md), sa [filiation](lot4a-feedback-sequences-lineage.md) et le [reçu de contribution live intégré](lot4a-evidence/integrated-051/feedback-live-contribution.json) séparent raccordement, couverture des contrats, contribution observée et parité de famille. Les deux chemins et le passif sont exercés dans l'appelant commun synthétique ; la campagne MIND sélectionne Feedback par `goal_access`. Elle ne prouve pas la parité de l'appelant Python complet. Le [reçu du candidat isolé](lot4a-evidence/final/feedback-public-contribution.json) reste historique et distinct.
+
+La recherche finie coopérative conserve explicitement l'incomplétude en cas d'annulation ou d'échéance ; elle ne transforme pas une interruption en réfutation. L'horloge MIND, les essais d'initialisation, la référence 0.49 et tous les résultats d'ablation sont conservés. Le code de production ne sélectionne aucune règle par identifiant de jeu, niveau, couleur préparée ou solution.
+
+Les preuves de développement gardent leur portée propre : **81 tests différentiels de composant**, **12 cas synthétiques dans le caller commun** et **120 tests hérités de priorité sur quatre fichiers**. Ils ne sont pas additionnés aux 4 048 tests du périmètre final. La référence TRIA Site 81 / native 0.51 conserve son essai borné à **huit actions et zéro niveau terminé**, sans verdict général d’impossibilité. La contribution de 4B est établie par les retours sélectionnés, les modèles acquis, la décision suivante et les ablations locales décrites dans le rapport.
+
+**Le lot 4 est livré dans ses périmètres annoncés ; sa clôture documentaire est publiée dans Site 93.** La chaîne correspondance mesurée → expérience sélectionnée → méthode acquise → retour → choix suivant → restauration est vérifiée pour les branches simples et composées. Les refus synthétiques, les 60 ablations y compris celles sans effet, LKEY partiel et l'horloge ISOS restent conservés. Les lots 3, 5, 7 et 10 gardent leurs fils et réserves ; 5B/native 0.58 publié dans Site 94 conserve désormais cette clôture documentaire dans son intégration validée. Aucun de ces sous-lots ne clôt la migration globale.
+
+## Lot 5 : temps, adressage et objets
+
+**État de ce fil :** 5A et 5B restent publiés dans leurs périmètres. **5C a intégré et réconcilié les publications réelles 6A, suivi 7 et 10B, jusqu’aux Sites 102–103 / native 0.62.** Le candidat 0.63 conserve **65/76 entrées raccordées**, contre **64/76 dans le prédécesseur publié 0.62**. Son gel final passe **5 339 tests dans 138 fichiers, cinq contrôles, la preuve commune fraîche à 6 818 comparaisons et onze rejeux à 187 comparaisons**. La readiness préalable est conservée, mais le verrou exclusif a été refusé avant toute mesure. La reprise 02 a ensuite expiré après 600 secondes faute d’ACK frais de 8A et 10C, sans nouvel EX ; elle est explicitement levée. Les protections de coordination sont corrigées et revues. Le reçu10C de17:42:14 UTC−03 a ensuite établi une disponibilité exclusive du même mutex. La préparation04 est revue44/44 ; un seul cycle nouveau est préparé après cette nouvelle continuation, sans ancien ACK ni mesure déjà acquise. **5C reste non publié.** La première mesure du suivi 7 reste retirée des preuves de coût isolées ; sa [répétition complète propre est acceptée](lot5c-evidence/recovery/coordination/lot7-clean-repeat-observation/observation.json), **STCK −2,924030 % et SMLP +0,009074 %**, avec les dépassements de phase conservés.
+
+| Sous-lot | Périmètre | État et prochaine étape |
+| --- | --- | --- |
+| **5A** | `linked_temporal_preparation` | Propriétaire unique, contact lié, acquisition passive des phases, chemins bornés, restauration et influence du retour vérifiés. Qualification des graphes, fenêtre officielle et revue du coût terminées ; publication privée confirmée dans Site 84. |
+| **5B** | `observed_addressed_material` | **Livré dans Site 94, validé techniquement et au coût global.** 4 900 tests/125 fichiers, cinq contrôles, dix rejeux/170 comparaisons, TRIA trois niveaux/17 actions/17 plans. Source 522 opérations ; stock commun 8/17 étapes, une fusion/un déplacement puis refus préservé. Global STCK +3,780905 % / SMLP −1,556219 %, revue 11 865/11 865, diagnostics 14/16 conservés. |
+| **5C** | `observed_object_binding` | **Publié prioritairement dans Site 104 / native 0.63, avec coût officiel non mesuré et non accepté.** Le gel conserve 5 339 tests / 138 fichiers, cinq contrôles, 6 818 comparaisons communes et 11 régressions / 187 comparaisons. Les fenêtres de coût interrompues ou abandonnées restent conservées ; cette publication exceptionnelle ne fournit aucun échantillon ni verdict de coût et ne change pas le critère global futur. |
+| **Sessions longues** | Delta, mémoire active et coups obligatoires | Les premières copies répétées sont corrigées, 5B conserve ses snapshots selon la révision et les optimisations déjà livrées sont préservées. Restent les coûts proportionnels à l’historique, la compaction démontrée des données devenues inutiles et la propagation générale des domaines réduits à un seul choix. **WEAV niveau 6 reste réservé**, sans nouvel essai réel ni reset du budget épuisé ; le coût global accepté des lots précédents ne prouve pas une latence stable au fil des niveaux. |
+
+**Entrées :** `linked_temporal_preparation`, `observed_addressed_material`, `observed_object_binding`.
+
+**Dépendances :** transitions, phases et identités publiques. `observed_object_binding` consomme le contrat de conservation/retour de composition du lot 1. Mutualiser seulement les observations compatibles ; un helper partagé ne crée pas une dépendance à tout un moteur temporel.
+
+**Critères de fin :** reprise depuis la phase observée et arrêt sur divergence ; adressage lié à l'objet/contexte courants ; ancienne liaison invalidée par ambiguïté, déplacement pertinent ou nouvelle portée ; parent conservé jusqu'à effet attesté, réfutation ou frontière, avec effet sur la décision suivante ; interruption/restauration préservant connaissances et obligations.
+
+## Lot 6 : pièces rigides, cargaisons et stabilisation
+
+**Mise à jour 6B :** le candidat provisoire 805b + 6B reste gelé fa23/322, audité à 66/76 entrées (86,8 %), avec 208 composants vérifiés, 147 transferts partiels et 1 014 modules en attente ; zéro module entièrement vérifié et six portes complètes encore fausses. La tentative 03 de la suite de 142 fichiers réussit **5 405/5 405**. Les **11/11 rejeux, 187/187 contrôles et 390 actions** sont agrégés, avec les douze tentatives conservées, dont l’ancien OOM VOIS. Les sept tests Binding ont été rejoués ; les huit scénarios et leurs **6 818 contrôles** restent les preuves conservées de la tentative 02 à entrées pertinentes inchangées, sans duplication. La nouvelle preuve froide KLOT fa23 atteint **trois niveaux, 38 actions et 30 préfixes**, avec relecture originale sans différence, ablations et deux rejets sémantiques qualifiés. **QA02 est réellement réussie via CUA sur Vite et le worker TypeScript de développement**, avec Pause, reprise et fermeture vérifiées ; elle ne prétend pas tester le bundle de production. La structure de coût est qualifiée sur **64 contrôles, 58 points et 168 records temporels**, mais aucun parcours CLI complet aval ni coût officiel n’est acquis. Après le diagnostic source générique ultérieur, le compteur est fermé à **1 424,8841320940055/2 400 secondes**, avec **975,1158679059945 secondes restantes** ; les clôtures QA antérieures restent historiques. Le Site 103 exact encore observé **à 21:33 UTC**, dans le [nouveau constat d’hébergement](lot6b-evidence/source-workflow-20261111/publication-observation.json) reste en **native 0.62**, sans SelectedRigid ; le diagnostic du message d’arrêt reste une lecture de source, sans reproduction de la session utilisateur. Le coût officiel, la réconciliation du publié 0.63 et la publication 0.64 restent ouverts. Les reçus, limites et prochaines opérations font autorité dans le jalon 6B courant en tête.
+
+**Entrées :** `preview_packing`, `selected_rigid`, `observed_rigid_cargo`, `shared_settlement`.
+
+**6A `preview_packing` livré dans Sites 96–97 / native 0.60 ; 6B `selected_rigid` publié dans Site 105 / native 0.64.** Deux entrées restent ouvertes : 6C `observed_rigid_cargo` et 6D `shared_settlement`. La publication prioritaire 6B conserve sa réserve de coût officiel non mesuré et non accepté. Les critères ci-dessous restent des exigences pour le lot entier.
+
+**Dépendances :** géométrie, commandes acquises, effets vérifiés, primitives V5 consommées et recherche interruptible. Le lot 5 peut fournir des contrats, sans constituer un prérequis global.
+
+**Critères de fin :** chaque moteur influence une décision à partir des mesures/contrôles actuels ; méthodes historiques éprouvées ; écart de pose/collision/cargaison/préservation interrompant le préfixe et révisant la connaissance ; recherche interrompue conservée comme inconnue/différée et jamais comme impossibilité prouvée ; plusieurs pièces mesurées avec mémoire maîtrisée et Pause réactive.
+
+## Lot 7 : ateliers et transactions
+
+**Les transferts 7A/7B et le complément commun 0.61 sont clos dans leurs périmètres annoncés.** Le suivi 0.61 est réellement publié dans Site 98, avec clôture finale Site 101 et coût accepté après répétition propre. **LKEY reste définitivement fermé** ; ses anciens résultats partiels, refus et horloges sont conservés, sans nouvel essai ni réétiquetage en parcours complet.
+
+**7A :** `observed_ranked_workshop` intégré, vérifié et publié dans Site 82 puis Site 83/native 0.52 ; **7B :** `observed_symbol_transaction` intégré, vérifié et publié dans Site 88/native 0.55, avec son propre propriétaire et sans extension passive implicite. Son coût global est accepté.
+
+Le propriétaire `public_ranked_workshop` consomme réellement `v6.ranked_workshop.choose`, `workshop.measure`, `workshop.select` et les règles DRM. L’acquisition passive d’une action étrangère peut rendre l’atelier admissible à la décision suivante. Son retour propre est traité une seule fois et n’est pas réenregistré passivement. Les méthodes transportées doivent être revalidées après changement de portée ; caches de projection et autorisations courantes restent séparés des huit champs de connaissances sauvegardés.
+
+Le [rapport 7A](lot7a-ranked-workshop.md) et la [filiation source → TypeScript → consommateur → preuve](lot7a-ranked-workshop-lineage.md) distinguent fidélité, raccordement, contribution et succès officiel. L'intégration 0.52 conserve la publication réelle 4A/Site 81 et passe 3 745 tests, cinq contrôles, sept régressions et 147 comparaisons source exactes. Le résultat actuel est de deux niveaux LKEY, avec une réserve explicite de préemption au troisième niveau. La fenêtre de coût est terminée et son verdict global est accepté après revue indépendante et la publication est confirmée dans Site 82. La parité de tout l’appelant original et une latence maximale de Pause ne sont pas revendiquées.
+
+**7B livré dans Site 88 :** après la publication 7A/Site 83, les publications effectives 5A/Sites 84–85 et 4B/Sites 86–87 ont été intégrées. Le gel final 0.55 passe **4 327 tests dans 112 fichiers, cinq contrôles, huit régressions et 136 comparaisons strictes**. CRAF réussit **trois niveaux en 36 actions**, dans la campagne froide et le navigateur. Les **144 appels / 432 contrôles Python** sont complétés par **36 états acquis et restaurations natives effectivement observées / 252 contrôles**. Une méthode réellement acquise permet les 27 propositions d’interface des niveaux suivants ; la liaison courante contribue à 18 propositions. Le [rapport 7B](lot7b-symbol-transactions.md) sépare ces contributions et conserve les limites. L’horloge CRAF est suspendue à **1 646,100543 secondes**, avec **753,899457 secondes restantes**. Le coût officiel est accepté pour les deux jeux ; le [reçu terminal Site 88](lot7b-evidence/publication/native-publication.json) atteste la publication native 0.55. Le diagnostic de priorité LKEY reste séparé du port fidèle de l’atelier ; le rejeu final conserve deux niveaux et son blocage au troisième.
+
+**Dépendances :** interfaces, SRC/DRM, gardes exactes et mémoire des méthodes. Les lots de transport/routage ne sont pas des prérequis globaux. Garder les propriétaires distincts lorsque la source les distingue.
+
+**Critères de fin :** mode observé ou méthode revalidée donnant une proposition sélectionnée ; transaction liée à l'entité/point courants ; retour révisant méthode/conditions/réfutation et décision suivante ; absence d'effet ou contexte changé empêchant la répétition aveugle ; méthodes transportables conservées aux frontières avec autorisations renouvelées.
+
+## Lot 8 : accès conditionné et branches
+
+**État courant :** 8A `motif_conditioned_access` est publié dans **Site 106 / native 0.65**, avec ses preuves fonctionnelles et sa réserve de coût officiel. La base intégrée du présent travail est **Site 107 / native 0.66**, à 68/76 entrées. **8B `parallel_branch_routing` possède désormais son composant et son raccordement commun**, qualifiés sur **524/524 tests et sous-tests dans 23 modules**, typage, audits et build passés ; le candidat atteint **69/76**. Les [preuves communes](lot8b-evidence/common-integration-01/README.md) précisent les acquisitions, les gardes, la restauration et les refus incomplets. **8B reste ouvert pour la qualification de livraison, les graphes, le coût officiel et sa publication ; le lot 8 entier reste ouvert.** Les suites antérieures de 5 606 et 5 422 tests restent des jalons historiques séparés, sans nouvelle exécution ni addition au résultat courant. Voir la [filiation 8B](lot8b-branch-routing-lineage.md).
+
+**Entrées :** `motif_conditioned_access`, `parallel_branch_routing`.
+
+**Dépendances :** calibration, géométrie, préfixes gardés, acquisition et persistance. Le workflow de stratégie peut appeler leur logique native sans invention d'un workflow supplémentaire.
+
+**Critères de fin :** relation motif/commande/effet acquise servant l'accès ; contributeurs et branches terminales source pris en compte ; pose/effet changé invalidant la continuation ; recherche combinatoire bornée et interruptible avec qualification de l'incomplet ; plausibilité géométrique et accomplissement officiel conservés séparément.
+
+## Lot 9 : navigation, régions et canaux
+
+**Entrées restantes :** `chart_navigation`, `region_intervention`, `joint_channels`.
+
+**État vérifié dans Site 108 / native 0.67 :** les trois entrées restent `pending`, sans propriétaire enregistré, dans le [registre publié](v6-entry-point-progress.json). Les workflows DRM/SRC correspondants figurent déjà parmi les 37 programmes compilés dans [programs.json](../../src/logos-engine/v6/programs.json). Le travail restant porte sur les propriétaires TypeScript, leurs callbacks, l'acquisition et le raccordement commun. La vérification locale n'atteste aucun travail parallèle du lot 9.
+
+| Sous-lot | Propriétaire et workflow existant | Travail prévu |
+| --- | --- | --- |
+| **9A, prochaine étape fonctionnelle** | `ChartNavigation` / `v6.chart_navigation.choose` | Figer les sources et cas consommés ; transférer géométrie et propriétaire, fournir `chart.select`, puis qualifier proposition, acquisition, persistance et restauration. |
+| 9B | `RegionIntervention` / `v6.region_intervention.choose` | Fournir `region.select`, mesurer les régions touchées, acquérir les effets et conserver les contradictions. |
+| 9C | `JointChannels` / `v6.joint_channels.choose` | Fournir `channels.select`, préserver les affectations réfutées, la recherche bornée et la portée des prévisions. |
+| Suivi distinct hors 76 | `DiscreteNetwork` / `v6.discrete_network.choose` | Fournir `network.measure` et `network.bind` au repli source de `scored_local_rewrite`, sans l'ajouter au compteur matériel. |
+
+L'ordre 9A → 9B → 9C est un découpage de livraison, pas une dépendance de code imposée. Les positions source restent 24, 25 et 28 dans le groupe matériel ; l'acquisition passive conserve son ordre distinct **channels → regions → chart → recolor**, avec une seule acquisition par propriétaire. Pour 9A, transférer uniquement le chemin V5 consommé de `inventory_gated_navigation.py` (`ChartNode`, `ChartLink`, `ChartFragment`, `_chart_decode`) et les contrats mécaniques associés ; garder les positions alternatives, les coordonnées rationnelles et les liens effectivement observés.
+
+**Dépendances :** cartes, régions, transitions, images intermédiaires pertinentes et budgets. `topological_recolor` est acquis à la base V58 et doit rester vérifié sur les contrats affectés. Traiter aussi `discrete_network` s'il demeure absent de l'appelant commun, **hors compteur 76**, à sa position source. Une prévision de canaux absente ou périmée conserve le comportement source prévu.
+
+**Critères de fin :** transition révisant positions/chemins/affectations possibles ; intervention mesurant régions touchées et conservant les effets contraires ; affectation réfutée modifiant le plan ; prévisions limitées à leur portée valide ; contribution réelle, restauration et recherche bornée de chaque chemin ; non-régression de Recolor.
+
+## Lot 10 : axe, fenêtre, ordre et temps
+
+**Entrées :** `axial_question`, `window_question`, `ordered_recruitment`, `temporal_selection`, `invited_endpoints`.
+
+| Sous-lot | Entrée et workflow | État dans le fil 10 |
+| --- | --- | --- |
+| 10A | `axial_question` / `v6.axial_question.choose` | Publié dans Sites 90–91 / 0.56, intégré et fonctionnel vérifié : 1 538 tests, 5 contrôles, 119 comparaisons et QA TRIA trois niveaux/17 actions/17 plans ; publications 7B/Sites 88–89 réconciliées, coût global accepté et entrées de publication vérifiées ; publication privée confirmée, contribution propre en partie ouverte |
+| 10B | `window_question` / `v6.window_question.choose` | **Livré dans Site 102 / native 0.62, avec réserve HPDL partielle** : 310 natifs/ 768 entrées gelées, digest `74143a7…`, registre 64/76 ; 1 205 tests, 5 contrôles, 10 rejeux/ 170 comparaisons passés. HPDL02 : 3 niveaux, 39 retours, arrêt 300 s ; PARTIAL 93 appels/ 76 restaurations/ 38 préfixes sans divergence, 152 ablations dont 95 appliquées et 23 changements. QA pause 2/action 3/reprise jusqu’à 7 actions et 1 niveau ; seconde attente de pause expirée conservée. Apport propre observé, réussite six niveaux et full caller non établis. Horloge 1 909,1412980339917 s débités / 490,85870196600837 s restants. Structure 8 formes/ 62 actions, préflight 77/77 et intégrité passés ; **coût global accepté : STCK +5,400572929772963 %, SMLP −1,7989027140400675 %**, revue 10 297/10 297 passée. Phase restauration SMLP +26,34362955231715 % conservée ; agrégateur historique strict sorti 1 et qualification déclarée distincte. Publication native 0.62 effective dans Site 102. Prochaine étape : 10C / `ordered_recruitment`, puis 10D / `temporal_selection` et 10E / `invited_endpoints`. |
+| 10C | `ordered_recruitment` / `v6.ordered_recruitment.choose` | **Publié dans Site 107 / native 0.66**, source `4ff7bf45286a8a19d34401988adca587253ae41e`, puis intégré à 0.67. Réserve de coût officiel propre à 10C conservée : non mesuré et non accepté. |
+| 10D | `temporal_selection` / `v6.temporal_selection.choose` | À réaliser |
+| 10E | `invited_endpoints` / `v6.invited_endpoints.choose` | À réaliser |
+
+**Dépendances :** observations, commandes, retours de séquence, méthodes revalidées et contrats communs. La [lecture des dépendances et contrats des cinq sous-lots](lot10-source-dependencies.md) identifie les primitives V5 effectivement consommées, les choix distincts et les conditions source de sauvegarde. La ressemblance des noms n'établit pas une dépendance : `window_question` n'attend pas automatiquement `framed_window_composition`.
+
+**Critères de fin :** questions dérivées des mesures et retours modifiant méthode/proposition ; recrutement déterminé par marqueurs/files/relations observés ; changement d'ordre/configuration invalidant la continuation ; sélection temporelle distinguant sélection, arrangement et lancement avec images attribuées aux bons niveaux ; invitations courantes et arrivée vérifiée ; tentatives, méthodes et réfutations restaurées sans permis périmé.
+
+## Lot 11 : consolidation et lisibilité
+
+**Dépendances :** résultats intégrés des lots 1 à 10. Réconcilier positions, propriétaires, branches et preuves ; bilan séparé des fournisseurs communs et chemins hors registre ; situation des 31 opérations ; correspondance entre chemins, workflows et arbre ; régressions, restauration, sessions longues et coûts.
+
+**Point concret issu du lot 2B :** borner le coût de clôture des diagnostics et vérifier leur export progressif. La campagne instrumentée MOTO a acquis son arrêt normal après 109 actions, puis a épuisé la mémoire avant de produire son rapport complet. Le journal public et le reçu externe sont disponibles. Ce constat porte sur ce processus instrumenté ; il ne suffit ni à conclure à une fuite du moteur en production ni à déclarer les longues sessions stables. Le lot 3A retrouve cette limite dans la référence RSWP 0.36 : arrêt au budget actif après 93 actions, puis OOM d’export ; les 94 paquets publics et le reçu restent disponibles dans le [résumé conservé](lot3a-evidence/baseline/summary.json). L’export progressif et borné devient un contrôle concret commun à ces deux diagnostics.
+
+**Critères de fin :** chaque entrée annoncée possède producteur, consommateur et preuve de contribution ; couverture adaptée à chaque capacité revendiquée ; bilan propre des chemins hors registre ; écarts bloquants corrigés et vérifiés ; contrôles de migration complète cohérents avec les preuves ; trace humaine expliquant cible, manque, hypothèse, expérience, retour et suite, avec détails accessibles à la demande ; budgets de performance respectés.
+
+**76/76 clôt le raccordement du registre.** La parité globale V5/V6 exige les contrôles portant sur tout le comportement requis.
+
+## Opérations, arbre et performances
+
+Pour chaque opération touchée, documenter entrées, producteur, appel, consommateur, décision influencée et limites. Le lot 1 examine `OP03`, `OP08`, `OP12`, `OP26` lorsqu'une dépendance mesurée les justifie et réutilise `OP18`, `OP28`, `OP29`, `OP30`, `OP31` selon les chemins réellement parcourus. Aucune obligation de tout appeler à chaque décision ; liste vide, donnée absente et impossibilité prouvée restent distinctes. Vérifier consommateurs, compatibilité et sémantique avant suppression/remplacement.
+
+La correspondance conservée est : **référence de raisonnement → contrat/workflow source → TypeScript → décision → preuve d'exécution**. Les références documentaires, wrappers, calculs, choix stratégiques et workflows effectivement appelés ne sont pas assimilés. La [filiation du lot 1](lot1-composition-return-lineage.md) note aussi les inventaires historiques demandés mais absents du snapshot local ; leur inventaire complet ne bloque pas ce lot borné.
+
+Avant modification, mesurer continuation connue, nouvelle décision, acquisition/persistance, restauration, session prolongée et Pause. Après modification, reprendre les mêmes conditions, séparer calcul agent/jeu/inspection et donner médiane et percentile élevé lorsque l'effectif le permet. **Règle courante autorisée le 10 novembre : médiane de session complète strictement inférieure à +10 % pour chaque jeu testé ; les dépassements de phase sont acceptables sous cette condition et restent publiés.** Les phases imbriquées ne sont pas additionnées, les ratios de cohortes ne sont pas moyennés et un jeu ne compense pas un autre. Le protocole est fixé avant la mesure ; toutes les sessions mesurées sont conservées, sans tolérance de bruit ajoutée. Les verdicts des anciennes fenêtres restent inchangés sous leur règle initiale. Calculs à la demande, mesures encore valides, invalidation par dépendances/révisions, deltas et traces compactes doivent préserver preuves, contre-exemples, gardes et transactions. Un arrêt de calcul conserve son statut incomplet.
+
+## Journal et prochain lot
+
+| Étape | État | Preuve ou condition |
+| --- | --- | --- |
+| Plan préparé sur V58 | Conservé | Commit historique indiqué ci-dessus ; jalon natif V57 |
+| Réconciliation sur V59 | Acquise | 26/26 entrées restantes concordantes ; groupes communs incomplets conservés |
+| Lacune du lot 1 | Reproduite sur V59 immuable | [Ablation ciblée](lot1-evidence/ablation/parent-scope-gap.json.gz) : requête remplacée avec garde admis sans nouvelle réponse pose acquise |
+| Implémentation du lot 1 | Gelée, version native `0.32.0` | Extension `retained_typed_material_request_parent` ; digest natif indiqué ci-dessus ; même retour refusé par le contrat séparé du parent |
+| Livraison du lot 1 | **Livré, moteur `0.32.0`** | 241 tests, contrôles du projet, campagne LIFE et navigateur, coût des 16 métriques non concernées validés ; limites du chemin modifié documentées |
+| Lot 2A | **Livré dans le domaine courant, moteur `0.33.0`** | Producteurs réels raccordés ; 532 tests, comparaison source des appels réels, contribution LS20 et trois niveaux TR87 confirmés au navigateur ; 16 médianes STCK/SMLP dans le budget +10 %, limites et hausses de p95 conservées dans le [rapport](lot2a-current-morphology.md) |
+| Implémentation du lot 2B | **Gelée, moteur `0.34.0`** | 240 fichiers natifs ; digest indiqué ci-dessus ; décision courante, contrôle, attention et admission des questions raccordés |
+| Livraison du lot 2B | **Livré, moteur `0.34.0`** | 623/623 tests ; contrats source et audits réconciliés ; contribution LS20 puis échec conservé au niveau 2 ; trois niveaux SYME en 36 actions/14 préfixes confirmés au navigateur ; CATR, MOTO et WEAV conservés avec leurs limites ; 16 médianes dans le budget +10 %, six cas de coûts absolus et intégrité finale validés |
+| Lot 2C historique | **Fonctionnel publié en V63, coût ouvert, moteur `0.35.0`** | Méthode acquise à frontière, station unique, retour et reprise d’entrée, capacités gérées ; 859/859 tests ; trois niveaux LS20 en 142 actions et 58 préfixes ; cinq métriques STCK hors budget au suivi frais |
+| Correction générique de 2C | **Gelée et vérifiée, moteur `0.36.0`** | 947/947 tests dans 26 fichiers ; LS20 conserve 142 actions/58 préfixes/trois niveaux et les mêmes retours publics ; STCK navigateur confirme trois niveaux en 35 actions/15 plans ; qualification STCK10 sans différence métier non qualifiée, échecs stricts conservés |
+| Clôture de 2C | **Acquise dans le périmètre annoncé** | Référence V62 fraîche puis correction 0.36 ; **16/16 médianes STCK/SMLP dans le budget +10 %**, comparaison `passed`, aucun dépassement non résolu ; hausses LIFE et échec historique 0.35 conservés |
+| Lot 3A fonctionnel | **Publié en V65, moteur `0.37.0`** | Panel, une branche sur six ; 548/548 tests ; RSWP trois niveaux en 19 actions/11 préfixes, navigateur et contribution acquise vérifiés ; réserve historique de coût conservée |
+| Coût 3A | **Clôturé dans le périmètre annoncé, moteur `0.38.0`** | 964/964 tests, 26 fichiers ; RSWP identique ; **16/16 médianes agrégées conformes** sur huit sessions par jeu/version, aucun dépassement agrégé non résolu ; deux dépassements de cohorte 2 conservés |
+| Lot 3B historique | **Fonctionnel validé, moteur `0.39.0` ; réserve de coût 15/16** | 1 077 tests, 29 fichiers ; CATR trois niveaux, 12 actions, huit préfixes ; contribution, navigateur et conservation vérifiés ; RSWP strict 16/17 avec extension vide qualifiée séparément ; horloge cumulée respectée |
+| Premier essai de correction 3B | **0.40.0, gel `f0ba`, échec de coût conservé** | 1 272 tests, 33 fichiers ; **14/16 médianes conformes**, restauration STCK +66,160 %, SMLP +21,511 % ; tous les reçus restent dans `final-v2/` et `performance/` |
+| Correction générique publiée de 3B | **0.40.0, gel `391a279`, fonctionnel validé avec réserve de coût 14/16** | **1 322/1 322 tests, 35 fichiers** ; CATR live/navigateur 12/3/8 ; rejeux CATR/RSWP **34/34** ; STCK restauration +4,218 % conforme ; acquisition/persistance SMLP +11,642 % et restauration +14,989 % restent conservées |
+| Correction générique SMLP 3B | **0.41.0, gel `3edffde`, fonctionnel validé avec réserve de coût 14/16** | 249 fichiers natifs, archive de 260 fichiers ; **1 379/1 379 tests, 41 fichiers**, contrôles **5/5**, CATR froid/navigateur **12/3/8**, rejeux **2/2 et 34/34**, échec initial de prérequis Pyodide conservé ; **persistance STCK +14,269890 % et restauration SMLP +11,220692 %** non résolues ; revue arithmétique **231 contrôles**, sans clôture du budget |
+| Correction des états communs 3B | **0.42.0, gel `2de70025`, fonctionnel validé avec réserve de coût 14/16** | **1 396/1 396 tests, 42 fichiers**, contrôles **5/5**, CATR froid/navigateur **12/3/8**, rejeux **34/34** ; persistance STCK **−8,261037 %** et restauration SMLP **+6,223866 %** conformes ; service/requête STCK **+27,720363 % / +26,350748 %** non résolus ; revue **231/231** ; limites de p95 conservées |
+| Acceptation de 3B | **Clôturé selon la nouvelle règle autorisée** | Session STCK **−17,795781 %**, SMLP **−13,442302 %** ; 32 sessions/400 actions relues, ancien **14/16** et p95 conservés ; décision rétrospective explicite, distincte du protocole historique |
+| Lot 3C, historique 0.43 | **Port vérifié, suivi alors ouvert** | **1 525 tests / 45 fichiers**, **5/5** contrôles, projection **347/347** ; CWSE **2 niveaux / 21 actions / 13 préfixes**, contribution et navigateur vérifiés ; arrêt source/native expliqué. CATR/RSWP strict **32/34** avec extension vide qualifiée. Coût global **2/2 accepté**, ancien classement **15/16** conservé ; requête STCK **+11,602583 %** acceptée sous la règle globale. |
+| Suivi 3C | **0.44, contrat courant corrigé, capacité CWSE restante ouverte** | **1 536 tests / 46 fichiers**, **5/5** contrôles, **34/34** rejeux stricts ; CWSE **2 niveaux /107 actions / 93 préfixes**, arrêt temporel ; contribution propre vérifiée, navigateur borné 46/2/32. Horloge cumulée 2 399,683865 s ; 3D alors identifié comme suite indépendante. Coût global accepté 2/2, phase 14/16 conservée. |
+| Lot 3D | **0.45, transfert RootedLine et contrats vérifiés ; capacité SK48 ouverte** | **1 724/1 724 tests / 50 fichiers**, **5/5** contrôles, **34/34** rejeux ; quatre branches observées sur six. SK48 **0/3 niveau, 12 actions, cinq préfixes**, modèle réfuté ; **126/126** contrôles source/natif, douze acquisitions, six restaurations, dix ablations contributives sur vingt-six. Horloge **667,35444 s** conservée. Coût global accepté : **STCK +9,609248 %, SMLP −2,535940 %** ; diagnostic **12/16**, cohorte 2 STCK +15,844198 % et p95 conservés ; revue **231/231**. |
+| Lot 3E | **0.46, Reception clôturé dans son périmètre annoncé, coût accepté** | **1 904/1 904 tests / 56 fichiers**, **5/5 contrôles, compilation comprise**, **34/34** rejeux ; cinq branches sur six. FOGW **trois niveaux, 50 actions, 27 préfixes**, navigateur identique après Pause/reprise ; horloge clôturée à **951,320275 s**. **1 112** contrôles de comparaison : **255** exacts jusqu’à l’exception source à la révision 16, **849** avec adaptations natives et **huit** communs. Coût global accepté : **STCK +4,992188 %, SMLP +0,144738 %**, diagnostic **13/16**, revue **231/231**. Limite de continuation spécifique à la demande et héritage incomplet conservés. |
+| Lot 3F | **0.47, ReferencePopulation clôturé dans son périmètre, coût accepté** | **2 086/2 086 tests / 60 fichiers**, **5/5 contrôles**, **51/51** rejeux CATR/RSWP/FOGW ; six branches sur six, registre **51/76**. VOIS trois niveaux / 78 actions / 42 préfixes, navigateur identique ; horloge **1 017,469531 s**. Parité propre **3 434/3 434**, 75 acquisitions, 43 restaurations ; **100 changements d’action ou de refus sur 252 ablations**. Intégrité acquise ; coût global **STCK −0,405643 %, SMLP −1,789668 %**, agrégat **16/16**, revue **231/231** ; cohorte 2 **14/16** et p95 conservés. Limites source et parité complète non revendiquée. |
+| Lot 3G / FramedWindow | **Transfert technique livré, moteur 0.48 ; contribution en jeu ouverte** | 2 566/2 566 tests dans 68 fichiers, 5/5 contrôles, 68/68 régressions, 15 groupes de contrôles synthétiques, neuf checkpoints 0.47 ; 52/76 entrées. Coût global accepté STCK +1,654959 % / SMLP +6,641217 %, diagnostic 12/16 et revue 231/231. Aucun nouveau jeu ni compteur de cas ; limites et échecs de préparation conservés. |
+| Lot 3H / CrossedPrefix | **Clôturé dans son périmètre, moteur 0.49 ; coût global accepté** | 2 782/2 782 tests dans 71 fichiers, 5/5 contrôles, 68/68 régressions, onze checkpoints 0.48 ; 53/76 entrées. WEAV trois niveaux / 81 actions, navigateur identique ; parité propre 3 596/3 596, 191 effets d’action/refus sur 324 ablations. Horloge 1 277,782615 s sans remise à zéro. Coût STCK −1,666021 % / SMLP +2,663966 %, phases 15/16 et revue 231/231. |
+| Lot 3I / RecurrentSeries | **Clôturé dans son périmètre, moteur 0.50 ; coût global accepté** | 3 225/3 225 tests dans 76 fichiers, 5/5 contrôles et audit résolu ; 5/5 rejeux, 85/85 contrôles, 240 actions/169 préfixes ; 19 checkpoints 0.49 ; 18 groupes synthétiques/deux sessions. CONN 21 actions/trois niveaux/21 plans ; 1 361 contrôles, 84 ablations dont 33 changements et 51 inchangées. Horloge 1 014,763812 s. Trois invocations WEAV non achevées conservées avant réussite 81 actions/17 contrôles. Registre 54/76, audit 163/141/1 065 ; six rapports reconstruits exactement. Coût STCK −1,421099 % / SMLP +2,192594 %, agrégat 16/16, cohortes 16/16 puis 9/16, revue 231/231 ; publication confirmée dans Site 79. |
+| Lot 4A / Feedback | **Livré dans Site 80, moteur 0.51 ; coût qualifié accepté** | 3 566/3 566 tests dans 90 fichiers, 5/5 contrôles, 85/85 régressions. MIND trois niveaux/31 actions/20 préfixes ; 51/51 appels source, trois choix changés et cinq inchangés sur huit ablations. Horloge cumulée 886,070349 s ; navigateur bloqué par infrastructure. |
+| Lot 7A / RankedWorkshop | **Livré dans Site 82/native 0.52 ; fonctionnel vérifié et coût qualifié accepté, réserve LKEY L3** | 3 745/3 745 tests dans 97 fichiers, 5/5 contrôles, 7/7 régressions et 119/119 comparaisons. LKEY deux niveaux/25 actions/25 préfixes ; 49 appels source et 147 comparaisons exactes ; 14 acquisitions actives et 11 passives uniques. Horloge cumulée 1 341,622742 s, réserve L3 conservée. |
+| Lot 5A / LinkedTemporalPreparation | **Livré dans Site 84 puis Site 85, moteur 0.53 ; coût global qualifié accepté** | 3 835/3 835 tests dans 102 fichiers, cinq contrôles, sept rejeux et 119 comparaisons. Boucle commune 16/16 ; référence effective du présent 4B : Site 85, commit `a009e1f138bb18251d697f49647bacc615ee514f`. Le gel publié conserve 57/76 entrées et ses réserves WEAV niveau 6, navigateur 0.53, phases autonomes et coût diagnostique. |
+| Lot 4B / RelativeArrangements | **Livré dans Site 86 / native 0.54, coût global qualifié accepté** | 4 048/4 048 tests dans 108 fichiers, cinq contrôles, huit rejeux et 136 comparaisons. TRIA trois niveaux/17 actions ; comparaison source froide 68/68 ; navigateur final trois niveaux/17 actions et horloge cumulée 763,736664 s. LKEY partiel 157/157, réserve du troisième niveau conservée. |
+| Lot 7B / SymbolTransactions | **Livré dans Site 88/native 0.55, fonctionnel vérifié et coût global accepté** | 4 327/4 327 tests dans 112 fichiers, cinq contrôles, huit rejeux et 136 comparaisons. CRAF trois niveaux/36 actions en campagne froide et navigateur ; 144 appels/432 contrôles source, 36 préfixes restaurés/252 contrôles. LKEY partiel 157/157, réserve L3 conservée. |
+| Lot 10A / AxialQuestion, gel isolé | **Gel isolé historique, fonctionnel ciblé vérifié** | 130 contrats et six scénarios communs passés, 5/5 contrôles du projet et 119/119 comparaisons sur sept rejeux. Le premier résultat 866/867 et la correction ciblée 3/3 restent conservés. La contribution propre en jeu demeure ouverte. |
+| Lot 10A / AxialQuestion, Sites 90–91 / 0.56 | **Publié en privé ; fonctionnel intégré vérifié et coût global accepté** | 1 538/1 538 tests dans 45 fichiers, 5/5 contrôles et 119/119 comparaisons sur sept rejeux ; TRIA navigateur trois niveaux/17 actions/17 plans, Pause 4→5 et horloge 895,795295 s sans reset. Registre publié 0.56 : 60/76, 16 ouvertes ; coût STCK +0,387457 % et SMLP +0,136584 %, revue 7 688/7 688, intégrité et entrées de publication passées ; réserve d’apport propre Axial conservée. |
+| Lot 4C / FacetExamples, Site 92/native 0.57 | **Livré en privé ; fonctionnel intégré validé et coût accepté** | 4 838/4 838 tests dans 121 fichiers, 5/5 contrôles, dix rejeux/170 comparaisons. ISOS navigateur trois niveaux/douze actions/douze plans ; 48 appels et 36 restaurations source sans différence ; 60 ablations. LKEY partiel 157/157 et horloge ISOS 1 259,938444409 s conservés. Coût STCK −1,833520 % / SMLP −0,156096 %, revue 7 630/7 630 ; diagnostic 15/16 et p95 conservés. |
+| Lot 5B / AddressedMaterial, Site 94 / native 0.58 | **Livré en privé, validé techniquement et au coût global** | 4 900/4 900 tests dans 125 fichiers, cinq contrôles, dix rejeux/170 comparaisons ; TRIA trois niveaux/17 actions/17 plans ; comparaisons communes 169/164/199 et préservation 835. Stock commun borné à 8/17 étapes. Global STCK +3,780905 % / SMLP −1,556219 %, revue 11 865/11 865, diagnostics 14/16 et refus strict conservés. |
+| Lot 6A / PreviewPacking, Site 96 / native 0.60 | **Livré en privé, validation et coût global acceptés** | 4 795/4 795 tests dans 126 fichiers, cinq contrôles, 187/187 comparaisons sur onze rapports ; KATA et navigateur trois niveaux/33 actions/14 plans ; 1 288 vérifications de composant, 174 événements source sans différence. Global STCK +6,094357 % / SMLP +3,262812 %, revue 17 890 contrôles, cinq dépassements de phase acceptés. Registre 63/76, 13 entrées restantes ; prochaine capacité 6B. |
+| Lots 4 à 10 | **Sept entrées restantes dans Site 108 / native 0.67** | Le [bilan final 8B](lot8b-evidence/final-version-067-01/validation-summary.json) et la [publication réelle](lot8b-evidence/final-publication-067-01/README.md) attestent le gel publié à **69/76**. Le coût officiel 8B est accepté ; les réserves historiques des publications prioritaires 0.63 à 0.66 restent distinctes. 6C/6D, les trois entrées du lot 9 et 10D/10E restent à transférer et qualifier. Le complément public 8B et la consolidation globale du lot 11 sont suivis séparément. |
+
+Les lots **1, 2A, 2B, 2C, 3A, 3B, 3E, 3F, 3H, 3I, 4A, 7A, 5A, 4B, 7B, 10A, 4C, 5B et 6A sont livrés ou clôturés dans leurs périmètres annoncés** ; le complément 7/0.61 et 10B/0.62 sont également livrés avec leurs réserves explicites. Les publications prioritaires **5C/0.63, 6B/0.64, 8A/0.65 et 10C/0.66** conservent leurs réserves de coût officiel. **8B/0.67 est publié dans Site 108, à 69/76 entrées, avec coût officiel accepté.** Les **215 composants vérifiés, 147 transferts partiels, 1 007 modules en attente et zéro module entièrement vérifié** ne clôturent aucune des six portes de migration complète. Les formes appariées, les onze régressions enregistrées et les cinq chaînes BranchRouting restent qualifiées dans leurs périmètres ; le complément du trajet public suit une déclaration séparée. Les verdicts et réserves historiques sont conservés.
+
+L’audit historique du gel 7B publié recense **181 composants vérifiés**, **146 transferts partiels**, **1 042 modules en attente** et **aucun module déclaré complètement vérifié**, dans le périmètre de **1 369 modules Python et 417 fichiers de données**. Les six conditions de migration complète restent fausses. Ces catégories restent distinctes du compteur des 76 entrées, des 37 workflows et des contributions réellement observées en jeu. Les lots 3 et 7 comptent zéro entrée ouverte au registre, sans effacer leurs réserves fonctionnelles ni établir la parité de tout l’appelant. Le prédécesseur 10A publié dans Sites 90–91 conserve **60/76 entrées, 16 ouvertes, 185 composants vérifiés, 147 transferts partiels et 1 037 modules en attente** ; son coût global contre Site 88/native 0.55 est accepté. La publication 4C/Site 92/native 0.57 atteint **61/76 entrées, 15 ouvertes, 189 composants vérifiés, 147 transferts partiels et 1 033 modules en attente**, avec zéro module entièrement vérifié et six portes globales toujours fausses. Le coût global 4C est accepté séparément pour 2/2 jeux et sa publication privée est confirmée ; la clôture documentaire conserve ces mêmes entrées.
+
+**Séquence historique avant les Sites 105 à 107 : 6B/0.64 → 8A/0.65**, le véritable 5C/0.63 étant maintenant publié dans Site 104 et intégré à cette branche. Les [preuves préparatoires 8A](lot8a-evidence/qualification-provisional-02/qualification-summary.json) conservent les trois propriétaires, les 11 régressions et les formes/graphes qualifiés ; le [bilan de réconciliation](lot8a-evidence/integration-published-063-01/summary.json) vérifie l’identité de tous les profils gelés après intégration documentaire. À ce jalon antérieur restaient le véritable 0.64, le renouvellement des qualifications affectées, le coût officiel 8A et sa publication. Les publications effectives ultérieures 0.64 à 0.67 sont consignées dans le bilan courant en tête de document. **6C/6D, le lot 9, 10D/10E et la consolidation 11 restent ouverts dans Site 108** ; 8B poursuit son complément de qualification publique. La publication prioritaire 0.63 ne vaut pas acceptation de son coût et ne dispense pas 8A de son critère. Les suivis Population, Reception, RootedLine, les sessions longues et HPDL partiel restent explicites ; LKEY demeure définitivement fermé.
+
+**Les horloges suivantes conservent leurs jalons historiques ; elles n'autorisent aucune remise à zéro.** Le contre-exemple SK48 et **1 732,64556 secondes restantes** sont conservés, sans remise à zéro. La cible CWSE non atteinte et ses **2 399,683865 secondes** restent consignées, sans nouvel essai sur ce gel. FOGW, VOIS, WEAV et CONN gardent leurs campagnes réussies et leurs horloges cumulées ; MIND ajoute sa réussite de trois niveaux avec **886,070349 secondes cumulées**. TRIA ajoute les trois niveaux de 4B avec **763,736664 secondes cumulées**, résolution initiale et QA finale incluses sans remise à zéro. La QA navigateur 10A porte ensuite le cumul TRIA à **895,795295 secondes**, sans remise à zéro ni preuve d’apport propre Axial. CRAF ajoute trois niveaux en 36 actions avec **1 646,100543 secondes cumulées** et **753,899457 secondes restantes**. LKEY conserve au jalon 7A **1 341,622742 secondes cumulées** et sa réserve L3 ; son suivi ultérieur maintient sa propre horloge cumulative, sans réinterpréter ce reçu. Le diagnostic WEAV du lot 5 reste distinct des rejeux bornés de 7A ; son budget épuisé reste inchangé dans 5B, sans nouvel essai réel. ISOS ajoute la validation fonctionnelle 4C et sa QA réelle de trois niveaux/douze actions ; son horloge reste à **1 259,938444409 secondes cumulées sur 2 400**, sans reset. La réserve de contribution FramedWindow demeure ouverte. Aucun de ces résultats ne clôt la parité complète de l’appelant ou la migration globale.

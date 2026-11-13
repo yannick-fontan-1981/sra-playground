@@ -1,0 +1,56 @@
+--- docs/migration/lot8b-evidence/tools/final-coordination/common.py
++++ docs/migration/lot9a-evidence/tools/final-coordination/common.py
+@@ -1,4 +1,4 @@
+-"""Bounded, prospective Lot 8B coordination primitives; import acquires no lock."""
++"""Bounded, prospective Lot 9A coordination primitives; import acquires no lock."""
+ from __future__ import annotations
+ 
+ import ctypes
+@@ -16,9 +16,9 @@
+ import uuid
+ 
+ ROOT = Path(__file__).resolve().parents[5]
+-EVIDENCE = ROOT / 'docs/migration/lot8b-evidence'
++EVIDENCE = ROOT / 'docs/migration/lot9a-evidence'
+ COORDINATION = Path('/workspace/shared/sra-coordination')
+-OWN_STATUS = COORDINATION / 'lot8a-status.json'
++OWN_STATUS = COORDINATION / 'lot9a-status.json'
+ HEX = re.compile(r'^[0-9a-f]{64}$')
+ COMMIT = re.compile(r'^[0-9a-f]{40}$')
+ VERSION = re.compile(r'^\d+\.\d+\.\d+$')
+@@ -76,7 +76,7 @@
+     require(isinstance(value, str), 'Baseline path must be a string')
+     path = canonical(Path(value), Path('/workspace/sites'))
+     first = path.relative_to('/workspace/sites').parts[0]
+-    require(first.startswith('sra-lot8b-baseline'), 'Only an owned Lot 8B baseline checkout is allowed')
++    require(first.startswith('sra-lot9a-baseline'), 'Only an owned Lot 9A baseline checkout is allowed')
+     require(path != ROOT and path.is_dir(), 'Baseline must be a distinct existing checkout')
+     return path
+ 
+@@ -209,7 +209,7 @@
+ def own_idle_status():
+     canonical(OWN_STATUS, COORDINATION)
+     data = read_json(OWN_STATUS)
+-    require(data.get('owner') in {'lot8a', 'lot8b'}, 'Unexpected owner of Lot 8 status')
++    require(data.get('owner') in {'lot9a'}, 'Unexpected owner of Lot 9A status')
+     for key in ('active_execution_session', 'active_command'):
+         require(key in data and data[key] is None, 'Own work has not closed: ' + key)
+     require(data.get('active_workers') == [], 'Own active workers must be empty')
+@@ -224,7 +224,7 @@
+     require(kind in {'performance', 'publication'}, 'Unsupported own status operation')
+     canonical(OWN_STATUS, COORDINATION)
+     data = read_json(OWN_STATUS)
+-    require(data.get('owner') in {'lot8a', 'lot8b'}, 'Unexpected owner of Lot 8 status')
++    require(data.get('owner') in {'lot9a'}, 'Unexpected owner of Lot 9A status')
+     key = kind + 'Lease'
+     if active:
+         require(not data.get(kind + '_started') and not data.get(kind + '_lock_held'),
+@@ -238,7 +238,7 @@
+     data[kind + '_started'] = active
+     data[kind + '_lock_held'] = active
+     data[key] = lease if active else None
+-    data['current_phase'] = 'lot8b_' + kind + ('_active' if active else '_released')
++    data['current_phase'] = 'lot9a_' + kind + ('_active' if active else '_released')
+     data['phase'] = data['current_phase']
+     if extra:
+         data.update(extra)

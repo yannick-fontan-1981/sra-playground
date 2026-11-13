@@ -1,0 +1,49 @@
+{
+  "schema": "logos-engine.native-global-cost-policy.v1",
+  "declaredAt": "2026-11-10T08:45:52.105995+00:00",
+  "authorization": {
+    "source": "explicit user message before the lot 3D official window",
+    "date": "2026-11-10",
+    "verbatim": "si le global reste en dessous de 10% d'augmentation alors une phase qui dépasse 10% peut être accepté."
+  },
+  "globalStage": "session_elapsed",
+  "statistic": "pooled median of complete measured-session durations per tested case",
+  "caseIds": [
+    "STCK",
+    "SMLP"
+  ],
+  "relativeIncreaseLimit": 0.1,
+  "comparison": "strictly_less_than",
+  "allCasesMustPass": true,
+  "crossCaseCompensation": false,
+  "phaseOverrunsMayBeAccepted": true,
+  "phasesAndP95RemainVisible": true,
+  "diagnosticPhasePolicy": "docs/migration/lot3d-evidence/performance/comparison-policy.json",
+  "plannedOrder": [
+    "A1",
+    "B1",
+    "B2",
+    "A2"
+  ],
+  "cohorts": 2,
+  "sessionsPerCaseVersionCohort": 4,
+  "measuredSessions": 32,
+  "measuredActions": 400,
+  "excludedWarmupSessions": 8,
+  "excludedWarmupActions": 24,
+  "excludedMeasuredSessions": 0,
+  "excludedOutliers": 0,
+  "baseline": {
+    "nativeVersion": "0.44.0",
+    "siteVersion": 72,
+    "commit": "a39997bffdca1ce080879d967d3f5eb95a88d544",
+    "nativeDigest": "e914399487992c3f53b3058ee734c470d738594e7344285799203462fac6a255",
+    "nativeFiles": 251
+  },
+  "candidate": {
+    "nativeVersion": "0.45.0",
+    "nativeDigest": "5b5e59e14e4d417d92cacd6e79d21b6e8e833d715c8d05df2b74806bb09b40f3",
+    "nativeFiles": 256
+  },
+  "qualification": "Declared before the new lot 3D official window against freshly measured published 0.44 from Site 72. Native 0.45 is frozen and identified by its manifest. Global means the complete session for each case, not a sum of nested phases or compensation across games. Every phase result and p95 remains visible; functional, integration and contribution evidence are separate. Historical timing data and comparators remain unchanged."
+}

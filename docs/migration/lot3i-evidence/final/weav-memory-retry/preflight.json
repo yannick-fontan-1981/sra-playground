@@ -1,0 +1,43 @@
+{
+  "schema": "logos-engine.released-baseline-replay-preflight.v1",
+  "status": "passed",
+  "caseManifest": {
+    "path": "docs/migration/lot3i-evidence/weav-memory-recovery-cases.json",
+    "sha256": "b93a819dc3554aa0d3d9e951e4d7cfb95fd1f7da02987fdc91cd60243b43ed1b",
+    "bytes": 1193
+  },
+  "cases": [
+    {
+      "id": "weav-049-memory-efficient",
+      "game": "WEAV",
+      "baseline": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-campaign.json.gz",
+      "trace": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+      "counts": {
+        "commands": 81,
+        "completePublicPackets": 82,
+        "animationFrames": 105,
+        "prefixes": 81,
+        "requests": 162,
+        "naturalLevelBoundaries": 3
+      },
+      "targetLevels": 3
+    }
+  ],
+  "totals": {
+    "commands": 81,
+    "completePublicPackets": 82,
+    "animationFrames": 105,
+    "prefixes": 81,
+    "requests": 162,
+    "naturalLevelBoundaries": 3
+  },
+  "passiveOwnerRequirements": [],
+  "prevalidator": {
+    "path": "scripts/run-recorded-public-regressions.py",
+    "sha256": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "bytes": 20897
+  },
+  "replaysExecuted": 0,
+  "prevalidationProcessExitedBeforeAnyReplay": true,
+  "nativeSourceDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87"
+}

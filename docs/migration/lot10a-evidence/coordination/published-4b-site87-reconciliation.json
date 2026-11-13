@@ -1,0 +1,85 @@
+{
+  "schema": "logos-engine.published-documentation-closure-reconciliation.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T23:05:48.266192+00:00",
+  "fromPublishedCommit": "082ce553ce4dfbac37071a64497bcca129b7ced0",
+  "toPublishedCommit": "dd355400264b50942486559b8ca56ee6dfc6a3cc",
+  "fromSiteVersion": 86,
+  "toSiteVersion": 87,
+  "command": [
+    "git",
+    "diff",
+    "--name-only",
+    "082ce553ce4dfbac37071a64497bcca129b7ced0",
+    "dd355400264b50942486559b8ca56ee6dfc6a3cc",
+    "--",
+    "src",
+    "tests",
+    "public",
+    "content",
+    "package.json",
+    "package-lock.json",
+    "vite.config.ts",
+    "tsconfig.json",
+    "index.html",
+    ".openai/hosting.json",
+    "scripts/prepare-python.mjs",
+    "scripts/python-runtime-assets.json",
+    "scripts/generate-content-pages.mjs",
+    "scripts/generate-game-gallery.mjs"
+  ],
+  "executionInputDifferences": [],
+  "roadmapConflictResolutions": [
+    {
+      "block": 1,
+      "choice": "theirs",
+      "oursFirstLine": "## Jalon publié : lot 4B, Site 86, RelativeArrangements 0.54 et coût global accepté"
+    },
+    {
+      "block": 2,
+      "choice": "theirs",
+      "oursFirstLine": "L'[intégrité fonctionnelle](lot4b-evidence/integrated-final/delivery-integrity.json) vérifie **286 fichiers natifs, 297 membres d'archive, 657 entrées source/tests, 351 entrées de build et 1 786 originaux inchangés**. Le protocole de coût est déclaré avant mesure, avec **65/65 contrôles statiques** et une qualification structurelle préalable de **64/64 contrôles**. Le premier contrôle statique échoué sur deux liens de dépendances absents reste archivé, puis le même outil inchangé a réellement vérifié leur préparation. La mesure officielle est terminée et son verdict accepté est détaillé ci-dessous ; la publication est confirmée dans Site 86."
+    },
+    {
+      "block": 3,
+      "choice": "theirs",
+      "oursFirstLine": "Le registre du gel 4B publié atteint **58/76 entrées raccordées**, zéro partielle et **18 ouvertes** : `goal_access` **10/12**, `window_constraints` **21/21**, `surface` **9/10**, `factored_material_return` **18/33**. L'audit recense **177 composants vérifiés, 145 transferts partiels, 1 047 modules en attente et zéro module entièrement vérifié**. Ces compteurs ne mesurent ni la réussite générale en jeu ni la parité complète de l'appelant Python."
+    },
+    {
+      "block": 4,
+      "choice": "theirs",
+      "oursFirstLine": "| 4 | Exemples, correspondances et retours discriminants | 1 | Observations, callbacks SRC, gardes et mémoire propre | **4A livré dans Site 80 puis Site 81 ; 4B publié dans Site 86 en native 0.54, validation intégrée et contribution TRIA vérifiées.** Coût global accepté sur 2/2 jeux. **4C, `facet_example`, reste non implémenté et constitue la suite de ce fil.** |"
+    },
+    {
+      "block": 5,
+      "choice": "ours",
+      "oursFirstLine": "**Le suivi de preuve courante 0.44 et le transfert propre RootedLine 0.45 restent vérifiés ; Reception 0.46 est clôturé dans son périmètre annoncé, coût accepté. ReferencePopulation 0.47 est clôturé dans son périmètre annoncé, coût accepté. FramedWindow 0.48 est raccordé avec sa réserve de contribution en jeu ; CrossedPrefix 0.49 apporte trois niveaux WEAV et une contribution propre vérifiée. RecurrentSeries 0.50 apporte trois niveaux CONN et sa contribution propre vérifiée ; son périmètre est clôturé avec coût global accepté et publication confirmée dans Site 79. Feedback 4A est livré dans native 0.51. RelativeArrangements 4B est publié dans Site 86 en native 0.54 ; sa validation fonctionnelle et son coût global sont acceptés. La suite du lot 4 est `facet_example`, en 4C.** Le [rapport 0.45](lot3d-rooted-line.md) conserve le contre-exemple SK48, la correspondance exacte avec les originaux et la cible non atteinte. Une révision du modèle sera générique et soumise aux contrats et cas contraires ; aucun numéro de jeu, couleur fixe ou séquence préparée ne peut la déterminer. Ce suivi ne réinitialise ni SK48 ni CWSE et ne transforme pas une validation de transfert en résolution de jeu."
+    },
+    {
+      "block": 6,
+      "choice": "theirs",
+      "oursFirstLine": "**État intégré :** 4A est livré dans Site 80 puis Site 81. 4B est publié dans Site 86 en native 0.54 après intégration du Site 85 / 5A réellement publié ; sa validation fonctionnelle est vérifiée et son coût global est accepté sur 2/2 jeux. **Suite du lot : 4C, `facet_example`, encore non implémenté.**"
+    },
+    {
+      "block": 7,
+      "choice": "theirs",
+      "oursFirstLine": "| **4B** | `relative_arrangement` / `v6.relative_arrangements.choose` | **Publié dans Site 86, gel 0.54 fonctionnellement vérifié, coût global accepté.** Acquisition sélectionnée et initialement liée, propriétaire propre, arrêt local et restauration vérifiés. TRIA trois niveaux/17 actions ; comparaison froide finale 68/68 appels, deux ablations d'action sur une décision distincte. **4 048/4 048 tests, 5/5 contrôles, 8/8 rejeux et 136/136 comparaisons**, LKEY partiel séparé. | Conserver les réserves de parité de l'appelant et d'accumulation ; poursuivre avec 4C. Rapport : [RelativeArrangements](lot4b-relative-arrangements.md). |"
+    },
+    {
+      "block": 8,
+      "choice": "theirs",
+      "oursFirstLine": "**Suite de ce fil : 4C, `facet_example`, après la publication 4B dans Site 86.** Partir de la première entrée `program_construction` du groupe `surface`, réutiliser le workflow compilé et transférer les branches simples **et composées activées dans la configuration source**. La chaîne de preuve sera : correspondance mesurée → expérience sélectionnée → méthode conditionnelle acquise → retour de confirmation ou de réfutation → choix suivant → restauration et revalidation de portée. Une éventuelle séparation entre simple et composé devra annoncer deux périmètres et deux statuts explicites. Les lots 3, 5 et 7 restent pilotés dans leurs fils ; 5B/5C et 7B ne sont pas ajoutés à cette livraison. Aucun de ces sous-lots ne clôt la migration globale."
+    },
+    {
+      "block": 9,
+      "choice": "ours",
+      "oursFirstLine": "| Lot 5A / LinkedTemporalPreparation | **Livré dans Site 84 puis Site 85, moteur 0.53 ; coût global qualifié accepté** | 3 835/3 835 tests dans 102 fichiers, cinq contrôles, sept rejeux et 119 comparaisons. Boucle commune 16/16 ; référence effective du présent 4B : Site 85, commit `a009e1f138bb18251d697f49647bacc615ee514f`. Le gel publié conserve 57/76 entrées et ses réserves WEAV niveau 6, navigateur 0.53, phases autonomes et coût diagnostique. |"
+    },
+    {
+      "block": 10,
+      "choice": "ours",
+      "oursFirstLine": "**Le transfert en cours du fil des ateliers est 7B, `observed_symbol_transaction`, depuis la publication 7A vérifiée.** Le fil du lot 4 a publié 4B et prendra **4C, `facet_example`**, seul sous-lot restant du lot 4. Le lot 5 a publié 5A dans Sites 84/85 et conserve 5B puis 5C comme suites distinctes. Le fil 10A intègre 4B / Site 86 et attend la publication effective de 7B avant de fixer sa version finale et son gel. Les mesures et décisions qualifiées suivent le critère global indiqué en tête du document ; les échecs stricts demeurent conservés. Les suivis de revalidation du cadre Population, de réfutation des contrôles, de continuation Reception et de modèle RootedLine restent explicites. Le contre-exemple SK48 et **1 732,64556 secondes restantes** sont conservés, sans remise à zéro. La cible CWSE non atteinte et ses **2 399,683865 secondes** restent consignées, sans nouvel essai sur ce gel. FOGW, VOIS, WEAV et CONN gardent leurs campagnes réussies et leurs horloges cumulées ; MIND ajoute sa réussite de trois niveaux avec **886,070349 secondes cumulées**. TRIA ajoute les trois niveaux de 4B avec **763,736664 secondes cumulées**, résolution initiale et QA finale incluses sans remise à zéro. LKEY conserve **1 341,622742 secondes cumulées** et sa réserve L3 ; le diagnostic WEAV du lot 5 reste distinct des rejeux bornés de 7A. La réserve de contribution FramedWindow demeure ouverte. Aucun de ces résultats ne clôt la parité complète de l’appelant ou la migration globale."
+    }
+  ],
+  "qualification": "Actual published documentation closure preserves native, source/test and build-input paths. Intermediate4B plus Axial inventory remains applicable; no final7B source, final10A validation, cost or publication is inferred."
+}

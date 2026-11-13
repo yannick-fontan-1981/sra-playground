@@ -1,0 +1,1358 @@
+{
+  "module_id": "v6.reactive_contact.source81",
+  "declarations": [
+    {
+      "id": "policy.prepare_observed_peer_composition_access",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "selection_eligibility_conditions": [
+        {
+          "field": "composition_access_admissible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_required_fact_fields": [
+        "composition_relation_count",
+        "total_primitive_distance",
+        "access_distance",
+        "direct_single_input_previously_executed",
+        "conditional_peer_response_exit_upper_bound"
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break",
+      "selection_tiers": [
+        {
+          "id": "tier.prepare_joint_access_to_observed_peer",
+          "reason_ref": "reason.prepare_complex_composition_by_shortest_jointly_accessible_means"
+        }
+      ],
+      "selection_precedence_criteria": [
+        {
+          "field": "composition_relation_count",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.most_complex_accessible_composition",
+          "reason_ref": "reason.prepare_complex_composition_by_shortest_jointly_accessible_means"
+        },
+        {
+          "field": "conditional_peer_response_exit_upper_bound",
+          "preferred_order": "minimize",
+          "criterion_ref": "criterion.restrict_peer_exits_under_stationary_or_one_cell_responses",
+          "reason_ref": "reason.prepare_complex_composition_by_shortest_jointly_accessible_means"
+        },
+        {
+          "field": "total_primitive_distance",
+          "preferred_order": "minimize",
+          "criterion_ref": "criterion.shortest_total_access_to_composition",
+          "reason_ref": "reason.prepare_complex_composition_by_shortest_jointly_accessible_means"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "access_distance",
+          "preferred_order": "minimize"
+        },
+        {
+          "field": "direct_single_input_previously_executed",
+          "preferred_order": "minimize"
+        },
+        {
+          "field": "grip_row",
+          "preferred_order": "minimize"
+        },
+        {
+          "field": "grip_col",
+          "preferred_order": "minimize"
+        },
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "reason_refs": [
+        "reason.prepare_complex_composition_by_shortest_jointly_accessible_means"
+      ],
+      "invariants": [
+        "observe_counteracted_approach_before_selecting_a_composed_means",
+        "current_exact_identities_join_the_retained_question_to_geometry",
+        "carrier_part_and_carried_part_peer_contact_are_two_distinct_relations",
+        "maximize_distinct_accessible_relations_then_restrict_local_peer_responses_then_minimize_total_primitive_cost",
+        "equal_geometry_cost_uses_one_declared_row_then_column_traversal_witness_not_a_hash_preference",
+        "attachment_is_a_revisable_experiment_not_an_acquired_law_or_act_permit",
+        "one_straight_obstacle_translation_is_counterfactual_and_each_push_is_reconciled_before_continuation",
+        "translation_cost_includes_contact_access_all_push_primitives_and_remaining_access_to_the_same_complex_composition",
+        "the_observed_reactive_peer_does_not_count_as_a_competing_stationary_part",
+        "contact_with_the_peer_does_not_guarantee_which_body_an_unknown_operator_changes",
+        "no_palette_position_or_creator_action_sequence_selects_the_part",
+        "stationary_part_must_remove_an_exit_and_independent_actor_must_close_the_remaining_domain",
+        "inverse_operator_and_independence_are_experiments_not_acquired_physics",
+        "a_contact_in_a_closed_geometric_domain_remains_an_unknown_terminal_probe",
+        "among_equal_complexity_and_shortest_access_cost_prefer_a_direct_input_not_yet_executed_in_the_same_configuration",
+        "peer_response_contrast_keeps_stationary_and_every_free_one_cell_response_possible_not_a_committed_evasion_law"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.observed_composition_access.defaults",
+          "static_facts": {
+            "composition_access_admissible": false,
+            "composition_relation_count": 0,
+            "conditional_peer_response_exit_upper_bound": 0
+          }
+        },
+        {
+          "id": "projection.observed_composition_access.joint_witness",
+          "all_conditions": [
+            {
+              "field": "question_already_retained",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_identity_binding",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "composition_inventory_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "controlled_approach",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "distance_delta",
+              "operator": "greater_than",
+              "expected": -1
+            },
+            {
+              "field": "shared_translation",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "contact_group_count_excluding_peer",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "joint_distance",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "question_evidence_refs",
+              "operator": "is_present"
+            }
+          ],
+          "static_facts": {
+            "composition_access_admissible": true,
+            "acquisition_parent_admissible": true,
+            "composition_relation_count": 2,
+            "prospective_grasp_hypothesis_ref": "hypothesis.rigid_attachment_at_current_contact"
+          }
+        },
+        {
+          "id": "projection.observed_composition_access.bounded_peer_response_contrast",
+          "all_conditions": [
+            {
+              "field": "composition_access_admissible",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_bound_pair_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "one_cell_response_exit_count_upper_bound",
+              "operator": "is_present"
+            }
+          ],
+          "bound_facts": {
+            "conditional_peer_response_exit_upper_bound": "one_cell_response_exit_count_upper_bound"
+          }
+        },
+        {
+          "id": "projection.observed_composition_access.connected_escape_partition",
+          "all_conditions": [
+            {
+              "field": "composition_access_admissible",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_bound_pair_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "coupling_claim_refs",
+              "operator": "is_present"
+            },
+            {
+              "field": "peer_extra_partition_loss",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "composition_relation_count": 3
+          }
+        },
+        {
+          "id": "projection.observed_composition_access.closed_peer_exit_domain",
+          "all_conditions": [
+            {
+              "field": "composition_access_admissible",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_bound_pair_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "coupling_claim_refs",
+              "operator": "is_present"
+            },
+            {
+              "field": "peer_exit_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "composition_relation_count": 4
+          }
+        },
+        {
+          "id": "projection.observed_composition_access.useful_stationary_part",
+          "all_conditions": [
+            {
+              "field": "question_already_retained",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_identity_binding",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "composition_inventory_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_bound_pair_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "coupling_claim_refs",
+              "operator": "is_present"
+            },
+            {
+              "field": "prepared_constraint_contract",
+              "operator": "is_present"
+            },
+            {
+              "field": "stationary_part_neighbor_loss",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "peer_exit_count_after_independent_actor",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "joint_terminal_reachable",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "independent_access_distance",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "composition_access_admissible": true,
+            "acquisition_parent_admissible": true,
+            "composition_relation_count": 4,
+            "useful_separation_candidate": true,
+            "prospective_grasp_hypothesis_ref": "hypothesis.inverse_operator_may_preserve_a_stationary_constraint"
+          },
+          "templated_facts": {
+            "prepared_constraint_operator_experiment_ref": "experiment.prepared_constraint_inverse.{prepared_constraint_ref}",
+            "prepared_constraint_claim_ref": "claim.{prepared_constraint_ref}"
+          }
+        },
+        {
+          "id": "projection.observed_composition_access.independent_closure",
+          "all_conditions": [
+            {
+              "field": "question_already_retained",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_identity_binding",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "composition_inventory_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "independent_motion_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "proposal_operator_observation_refs",
+              "operator": "is_present"
+            },
+            {
+              "field": "prepared_constraint_contract",
+              "operator": "is_present"
+            },
+            {
+              "field": "stationary_part_neighbor_loss",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "peer_exit_count_after_independent_actor",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "composition_access_admissible": true,
+            "acquisition_parent_admissible": true,
+            "composition_relation_count": 4,
+            "prospective_grasp_hypothesis_ref": "hypothesis.independent_actor_closes_peer_domain_while_part_stays"
+          },
+          "any_conditions": [
+            {
+              "field": "conditional_peer_contact",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "actor_translation_with_part_stationary_observed",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "schema.source81_publication",
+      "kind": "selection_policy",
+      "fact_projections": [
+        {
+          "id": "projection.exploration.prepare_largest_reachable_composed_grasp",
+          "all_conditions": [
+            {
+              "field": "contact_pattern_route_inquiry_declared",
+              "operator": "not_equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_is_body_perimeter_marker_rejoin_route_first_action",
+              "operator": "not_equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_matches_compact_body_hollow_perimeter_marker_direction",
+              "operator": "not_equals",
+              "expected": true
+            },
+            {
+              "field": "selection_principle_ref",
+              "operator": "not_equals",
+              "expected": "principle.current_translation_pair_supports_complementary_control_probe"
+            },
+            {
+              "field": "prospective_grasp_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prospective_grasp_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prospective_grasp_ready",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "bounded_zone_state_graph_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "bounded_zone_state_enclosure_maximum_area_candidate_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "candidate_is_bounded_zone_state_route_first_action",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "bounded_zone_state_route_length",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "incoming_declared_route_engagement_present",
+              "operator": "not_equals",
+              "expected": true
+            },
+            {
+              "field": "attempted_without_effect_in_current_context",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "temporal_service_route_inquiry_declared",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "temporal_service_route_inquiry_declared",
+              "operator": "is_absent"
+            }
+          ],
+          "static_facts": {
+            "committed_verified_repetition": true,
+            "declared_deterministic_series_authorized": false,
+            "declared_conditional_series_authorized": true,
+            "replan_after_each_primitive_declared": false,
+            "series_motion_reconciliation_declared": true,
+            "series_terminal_shape_residual_remeasurement_declared": true,
+            "continuation_interaction_measurement_kind": "morphological_route_repetition",
+            "plan_kind": "bounded_zone_state_route",
+            "goal_ref": "goal.reveal_action_conditioned_structure",
+            "active_goal_ref": "goal.reveal_action_conditioned_structure",
+            "active_terminal_goal_ref": "goal.reveal_action_conditioned_structure",
+            "subgoal_ref": "subgoal.prepare_reachable_composed_grasp",
+            "candidate_is_general_unscoped_probe": false,
+            "committed_plan_ref": "plan.prepare_reachable_composed_grasp",
+            "discriminating_experiment_ref": null,
+            "standard_bfs_target_reached_on_cursor_end": true,
+            "goal_dependency_chain_refs": [
+              "goal.reveal_action_conditioned_structure",
+              "subgoal.prepare_reachable_composed_grasp"
+            ],
+            "goal_graph_edge_refs": [
+              "edge.composed_experiment_requires_mobile_grasp"
+            ],
+            "advances_active_goal_chain": true,
+            "selection_principle_ref": "principle.prefer_largest_reachable_composition_under_explicit_grasp_hypothesis",
+            "expected_effect_class": "effectful_known",
+            "expected_configuration_or_goal_delta_ref": "expectation.reach_mobile_grasp_contact",
+            "falsifier_refs": [
+              "falsifier.current_movement_or_contact_differs_from_grasp_preparation"
+            ],
+            "reconciliation_checkpoint_ref": "checkpoint.reconcile_bounded_zone_bfs_after_sealing",
+            "executed_verified_step_count": 0,
+            "checkpoint_on_world_projection_change": false,
+            "selection_precondition_support_required": true,
+            "current_measured_precondition_fields": [
+              "prospective_grasp_origin_bbox_tuples",
+              "prospective_grasp_present",
+              "prospective_grasp_complete",
+              "prospective_grasp_target_position",
+              "prospective_grasp_part_cell_count",
+              "prospective_grasp_reachable_pose_count",
+              "prospective_grasp_future_support_position",
+              "prospective_grasp_hypothesis_ref",
+              "bounded_zone_state_graph_present",
+              "bounded_zone_state_enclosure_maximum_area_candidate_count"
+            ],
+            "premise_claim_refs": [
+              "claim.route_uses_current_assembly_under_revisable_enclosure_model"
+            ]
+          },
+          "bound_facts": {
+            "series_observation_origin_bbox_tuples": "prospective_grasp_origin_bbox_tuples",
+            "remaining_step_count": "bounded_zone_state_route_length",
+            "remaining_action_bound": "bounded_zone_state_route_length",
+            "release_remaining_action_bound": "bounded_zone_state_route_length",
+            "verified_repetition_action_refs": "bounded_zone_state_route_action_refs",
+            "verified_repetition_action_payloads": "bounded_zone_state_route_action_payloads",
+            "expected_step_delta_row": "bounded_zone_state_route_first_delta_row",
+            "expected_step_delta_col": "bounded_zone_state_route_first_delta_col"
+          },
+          "sequence_compositions": [
+            {
+              "output_field": "premise_claim_refs",
+              "source_fields": [
+                "premise_claim_refs",
+                "canonical_premise_claim_refs",
+                "prospective_grasp_matching_effect_method_claim_refs"
+              ],
+              "max_items": 128,
+              "unique_items": true
+            },
+            {
+              "output_field": "release_premise_claim_refs",
+              "source_fields": [
+                "release_premise_claim_refs",
+                "premise_claim_refs",
+                "canonical_premise_claim_refs"
+              ],
+              "max_items": 128,
+              "unique_items": true
+            }
+          ]
+        },
+        {
+          "id": "projection.exploration.prepare_shorter_obstacle_translation_contact",
+          "all_conditions": [
+            {
+              "field": "prospective_grasp_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prospective_grasp_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prospective_grasp_ready",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "bounded_zone_state_graph_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "bounded_zone_state_enclosure_maximum_area_candidate_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "candidate_is_bounded_zone_state_route_first_action",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "bounded_zone_state_route_length",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "incoming_declared_route_engagement_present",
+              "operator": "not_equals",
+              "expected": true
+            },
+            {
+              "field": "attempted_without_effect_in_current_context",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "prospective_grasp_conditional_translation_access",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prospective_grasp_translation_contact_now",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "prospective_grasp_observed_question_ref",
+              "operator": "is_present"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "temporal_service_route_inquiry_declared",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "temporal_service_route_inquiry_declared",
+              "operator": "is_absent"
+            }
+          ],
+          "static_facts": {
+            "committed_verified_repetition": true,
+            "declared_deterministic_series_authorized": false,
+            "declared_conditional_series_authorized": true,
+            "replan_after_each_primitive_declared": false,
+            "series_motion_reconciliation_declared": true,
+            "series_terminal_shape_residual_remeasurement_declared": true,
+            "continuation_interaction_measurement_kind": "morphological_route_repetition",
+            "plan_kind": "bounded_zone_state_route",
+            "goal_ref": "goal.reveal_action_conditioned_structure",
+            "active_goal_ref": "goal.reveal_action_conditioned_structure",
+            "active_terminal_goal_ref": "goal.reveal_action_conditioned_structure",
+            "subgoal_ref": "subgoal.test_shorter_access_to_composed_experiment",
+            "candidate_is_general_unscoped_probe": false,
+            "committed_plan_ref": "plan.prepare_reachable_composed_grasp",
+            "discriminating_experiment_ref": null,
+            "standard_bfs_target_reached_on_cursor_end": true,
+            "goal_dependency_chain_refs": [
+              "goal.reveal_action_conditioned_structure",
+              "subgoal.test_shorter_access_to_composed_experiment"
+            ],
+            "goal_graph_edge_refs": [
+              "edge.composed_experiment_can_require_conditional_obstacle_translation"
+            ],
+            "advances_active_goal_chain": true,
+            "selection_principle_ref": "reason.prepare_complex_composition_by_shortest_jointly_accessible_means",
+            "expected_effect_class": "effectful_known",
+            "expected_configuration_or_goal_delta_ref": "expectation.approach_measured_contact_for_shorter_composition_access",
+            "falsifier_refs": [
+              "falsifier.current_movement_does_not_approach_measured_obstacle_contact"
+            ],
+            "reconciliation_checkpoint_ref": "checkpoint.reconcile_bounded_zone_bfs_after_sealing",
+            "executed_verified_step_count": 0,
+            "checkpoint_on_world_projection_change": false,
+            "selection_precondition_support_required": true,
+            "current_measured_precondition_fields": [
+              "prospective_grasp_origin_bbox_tuples",
+              "prospective_grasp_present",
+              "prospective_grasp_complete",
+              "prospective_grasp_target_position",
+              "prospective_grasp_part_cell_count",
+              "prospective_grasp_reachable_pose_count",
+              "prospective_grasp_future_support_position",
+              "prospective_grasp_hypothesis_ref",
+              "bounded_zone_state_graph_present",
+              "bounded_zone_state_enclosure_maximum_area_candidate_count",
+              "prospective_grasp_conditional_translation_access",
+              "prospective_grasp_translation_contact_now",
+              "prospective_grasp_observed_question_ref",
+              "prospective_grasp_translated_cell_origin"
+            ],
+            "premise_claim_refs": [
+              "claim.route_uses_current_assembly_under_revisable_enclosure_model"
+            ],
+            "conditional_composition_access_experiment": true
+          },
+          "bound_facts": {
+            "series_observation_origin_bbox_tuples": "prospective_grasp_origin_bbox_tuples",
+            "remaining_step_count": "bounded_zone_state_route_length",
+            "remaining_action_bound": "bounded_zone_state_route_length",
+            "release_remaining_action_bound": "bounded_zone_state_route_length",
+            "verified_repetition_action_refs": "bounded_zone_state_route_action_refs",
+            "verified_repetition_action_payloads": "bounded_zone_state_route_action_payloads",
+            "expected_step_delta_row": "bounded_zone_state_route_first_delta_row",
+            "expected_step_delta_col": "bounded_zone_state_route_first_delta_col"
+          },
+          "sequence_compositions": [
+            {
+              "output_field": "premise_claim_refs",
+              "source_fields": [
+                "premise_claim_refs",
+                "canonical_premise_claim_refs",
+                "prospective_grasp_matching_effect_method_claim_refs"
+              ],
+              "max_items": 128,
+              "unique_items": true
+            },
+            {
+              "output_field": "release_premise_claim_refs",
+              "source_fields": [
+                "release_premise_claim_refs",
+                "premise_claim_refs",
+                "canonical_premise_claim_refs"
+              ],
+              "max_items": 128,
+              "unique_items": true
+            }
+          ]
+        },
+        {
+          "id": "projection.exploration.test_shorter_obstacle_translation_access",
+          "all_conditions": [
+            {
+              "field": "prospective_grasp_conditional_translation_access",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prospective_grasp_observed_question_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "candidate_is_bounded_zone_state_route_first_action",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "attempted_without_effect_in_current_context",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "prospective_grasp_translation_contact_now",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "candidate_local_goal_context_declared": true,
+            "candidate_is_general_unscoped_probe": false,
+            "candidate_attempt_memory_eligible": true,
+            "goal_ref": "goal.reveal_action_conditioned_structure",
+            "active_goal_ref": "goal.reveal_action_conditioned_structure",
+            "active_terminal_goal_ref": "goal.reveal_action_conditioned_structure",
+            "subgoal_ref": "subgoal.test_shorter_access_to_composed_experiment",
+            "declared_terminal_goal_ref": "goal.reveal_action_conditioned_structure",
+            "goal_dependency_chain_refs": [
+              "goal.reveal_action_conditioned_structure",
+              "subgoal.test_shorter_access_to_composed_experiment"
+            ],
+            "goal_graph_edge_refs": [
+              "edge.composed_experiment_can_require_conditional_obstacle_translation"
+            ],
+            "advances_active_goal_chain": true,
+            "plan_kind": null,
+            "committed_plan_ref": null,
+            "committed_verified_repetition": false,
+            "declared_complete_plan_present": false,
+            "declared_complete_series_authorized": false,
+            "declared_conditional_series_authorized": false,
+            "declared_deterministic_series_authorized": false,
+            "replan_after_each_primitive_declared": true,
+            "standard_bfs_target_reached_on_cursor_end": false,
+            "remaining_step_count": 1,
+            "remaining_action_bound": 1,
+            "release_remaining_action_bound": 1,
+            "verified_repetition_action_refs": [],
+            "verified_repetition_action_payloads": [],
+            "expected_effect_class": "experimental_unknown",
+            "expected_configuration_or_goal_delta_ref": "expectation.approach_measured_contact_for_shorter_composition_access",
+            "mechanism_question_ref": "question.can_current_access_prepare_the_shorter_obstacle_translation_experiment",
+            "hypothesis_refs": [
+              "hypothesis.measured_contact_access_remains_traversable",
+              "hypothesis.current_scene_change_invalidates_contact_access"
+            ],
+            "information_outcome_refs": [
+              "outcome.actor_approaches_or_reaches_measured_obstacle_contact",
+              "outcome.current_access_geometry_is_refuted"
+            ],
+            "mechanism_effect_observation_required": true,
+            "mechanism_outcomes_are_predictions": true,
+            "selection_principle_ref": "reason.prepare_complex_composition_by_shortest_jointly_accessible_means",
+            "falsifier_refs": [
+              "falsifier.current_movement_does_not_approach_measured_obstacle_contact"
+            ],
+            "selection_precondition_support_required": true,
+            "current_measured_precondition_fields": [
+              "prospective_grasp_conditional_translation_access",
+              "prospective_grasp_observed_question_ref",
+              "prospective_grasp_translated_cell_origin",
+              "prospective_grasp_translated_cell_destination",
+              "prospective_grasp_origin_bbox_tuples",
+              "prospective_grasp_target_position",
+              "prospective_grasp_total_primitive_distance",
+              "bounded_zone_state_route_first_delta_row",
+              "bounded_zone_state_route_first_delta_col"
+            ],
+            "committed_plan_present": false,
+            "declared_plan_ref": null,
+            "declared_plan_stage_refs": [],
+            "declared_plan_current_stage_ref": null,
+            "release_goal_ref": "goal.reveal_action_conditioned_structure",
+            "release_expected_effect_class": "experimental_unknown",
+            "terminal_residual_action_eligible_in_current_control_context": true,
+            "terminal_control_context_candidate_eligible": true,
+            "conditional_composition_access_experiment": true
+          },
+          "templated_facts": {
+            "discriminating_experiment_ref": "experiment.shorter_composition_access.{candidate_ref}",
+            "reconciliation_checkpoint_ref": "checkpoint.shorter_composition_access.{candidate_ref}",
+            "release_discriminating_experiment_ref": "experiment.shorter_composition_access.{candidate_ref}"
+          },
+          "sequence_compositions": [
+            {
+              "output_field": "premise_claim_refs",
+              "source_fields": [
+                "premise_claim_refs",
+                "canonical_premise_claim_refs"
+              ],
+              "max_items": 128,
+              "unique_items": true
+            },
+            {
+              "output_field": "canonical_premise_claim_refs",
+              "source_fields": [
+                "canonical_premise_claim_refs"
+              ],
+              "max_items": 128,
+              "unique_items": true
+            },
+            {
+              "output_field": "release_premise_claim_refs",
+              "source_fields": [
+                "release_premise_claim_refs",
+                "premise_claim_refs",
+                "canonical_premise_claim_refs"
+              ],
+              "max_items": 128,
+              "unique_items": true
+            }
+          ]
+        },
+        {
+          "id": "projection.exploration.observe_loaded_approach_to_retained_peer",
+          "all_conditions": [
+            {
+              "field": "prospective_grasp_bound_pair_motion",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prospective_grasp_coupling_claim_refs",
+              "operator": "is_present"
+            },
+            {
+              "field": "prospective_grasp_observed_question_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "candidate_is_bounded_zone_state_route_first_action",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "bound_peer_composition_experiment": true,
+            "candidate_local_goal_context_declared": true,
+            "candidate_is_general_unscoped_probe": false,
+            "candidate_attempt_memory_eligible": true,
+            "goal_ref": "goal.reveal_action_conditioned_structure",
+            "active_goal_ref": "goal.reveal_action_conditioned_structure",
+            "active_terminal_goal_ref": "goal.reveal_action_conditioned_structure",
+            "subgoal_ref": "subgoal.measure_loaded_approach_to_observed_peer",
+            "declared_terminal_goal_ref": "goal.reveal_action_conditioned_structure",
+            "goal_dependency_chain_refs": [
+              "goal.reveal_action_conditioned_structure",
+              "subgoal.measure_loaded_approach_to_observed_peer"
+            ],
+            "goal_graph_edge_refs": [
+              "edge.loaded_approach_returns_to_observed_escape_question"
+            ],
+            "advances_active_goal_chain": true,
+            "plan_kind": null,
+            "committed_plan_ref": null,
+            "committed_verified_repetition": false,
+            "declared_complete_plan_present": false,
+            "declared_complete_series_authorized": false,
+            "declared_conditional_series_authorized": false,
+            "declared_deterministic_series_authorized": false,
+            "replan_after_each_primitive_declared": true,
+            "standard_bfs_target_reached_on_cursor_end": false,
+            "remaining_step_count": 1,
+            "remaining_action_bound": 1,
+            "release_remaining_action_bound": 1,
+            "verified_repetition_action_refs": [],
+            "verified_repetition_action_payloads": [],
+            "expected_effect_class": "experimental_unknown",
+            "expected_configuration_or_goal_delta_ref": "expectation.loaded_approach_tests_peer_escape_constraint",
+            "mechanism_question_ref": "question.does_loaded_approach_reduce_observed_peer_escapes",
+            "hypothesis_refs": [
+              "hypothesis.loaded_approach_constrains_peer_escape",
+              "hypothesis.peer_evades_the_proposed_constraint",
+              "hypothesis.current_joint_motion_model_is_refuted"
+            ],
+            "information_outcome_refs": [
+              "outcome.peer_escape_domain_is_reduced",
+              "outcome.peer_evades_and_requires_replanning",
+              "outcome.proposed_joint_motion_is_blocked"
+            ],
+            "mechanism_effect_observation_required": true,
+            "mechanism_outcomes_are_predictions": true,
+            "selection_principle_ref": "reason.prepare_complex_composition_by_shortest_jointly_accessible_means",
+            "falsifier_refs": [
+              "falsifier.loaded_approach_does_not_preserve_joint_motion_or_constrain_peer"
+            ],
+            "selection_precondition_support_required": true,
+            "current_measured_precondition_fields": [
+              "prospective_grasp_bound_pair_motion",
+              "prospective_grasp_coupling_claim_refs",
+              "prospective_grasp_observed_question_ref",
+              "prospective_grasp_peer_component_ref",
+              "prospective_grasp_peer_cell",
+              "prospective_grasp_origin_bbox_tuples",
+              "prospective_grasp_target_position",
+              "bounded_zone_state_route_first_delta_row",
+              "bounded_zone_state_route_first_delta_col"
+            ],
+            "committed_plan_present": false,
+            "declared_plan_ref": null,
+            "declared_plan_stage_refs": [],
+            "declared_plan_current_stage_ref": null,
+            "release_goal_ref": "goal.reveal_action_conditioned_structure",
+            "release_expected_effect_class": "experimental_unknown",
+            "terminal_residual_action_eligible_in_current_control_context": true,
+            "terminal_control_context_candidate_eligible": true
+          },
+          "templated_facts": {
+            "discriminating_experiment_ref": "experiment.loaded_peer_constraint.{candidate_ref}",
+            "reconciliation_checkpoint_ref": "checkpoint.loaded_peer_constraint.{candidate_ref}",
+            "release_discriminating_experiment_ref": "experiment.loaded_peer_constraint.{candidate_ref}"
+          },
+          "sequence_compositions": [
+            {
+              "output_field": "premise_claim_refs",
+              "source_fields": [
+                "premise_claim_refs",
+                "canonical_premise_claim_refs",
+                "prospective_grasp_coupling_claim_refs"
+              ],
+              "max_items": 128,
+              "unique_items": true
+            },
+            {
+              "output_field": "canonical_premise_claim_refs",
+              "source_fields": [
+                "canonical_premise_claim_refs",
+                "prospective_grasp_coupling_claim_refs"
+              ],
+              "max_items": 128,
+              "unique_items": true
+            },
+            {
+              "output_field": "release_premise_claim_refs",
+              "source_fields": [
+                "release_premise_claim_refs",
+                "premise_claim_refs",
+                "canonical_premise_claim_refs"
+              ],
+              "max_items": 128,
+              "unique_items": true
+            }
+          ]
+        },
+        {
+          "id": "projection.exploration.test_useful_inverse_before_independent_access",
+          "all_conditions": [
+            {
+              "field": "candidate_is_prepared_inverse_operator",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prospective_grasp_prepared_constraint_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "prospective_grasp_prepared_constraint_claim_refs",
+              "operator": "is_present"
+            },
+            {
+              "field": "prospective_grasp_coupling_claim_refs",
+              "operator": "is_present"
+            }
+          ],
+          "static_facts": {
+            "bound_peer_composition_experiment": true,
+            "candidate_local_goal_context_declared": true,
+            "candidate_is_general_unscoped_probe": false,
+            "candidate_attempt_memory_eligible": true,
+            "goal_ref": "goal.reveal_action_conditioned_structure",
+            "active_goal_ref": "goal.reveal_action_conditioned_structure",
+            "active_terminal_goal_ref": "goal.reveal_action_conditioned_structure",
+            "subgoal_ref": "subgoal.useful_inverse_returns_to_observed_peer",
+            "declared_terminal_goal_ref": "goal.reveal_action_conditioned_structure",
+            "goal_dependency_chain_refs": [
+              "goal.reveal_action_conditioned_structure",
+              "subgoal.useful_inverse_returns_to_observed_peer"
+            ],
+            "goal_graph_edge_refs": [
+              "edge.useful_inverse_returns_to_observed_peer"
+            ],
+            "advances_active_goal_chain": true,
+            "plan_kind": null,
+            "committed_plan_ref": null,
+            "committed_verified_repetition": false,
+            "declared_complete_plan_present": false,
+            "declared_complete_series_authorized": false,
+            "declared_conditional_series_authorized": false,
+            "declared_deterministic_series_authorized": false,
+            "replan_after_each_primitive_declared": true,
+            "standard_bfs_target_reached_on_cursor_end": false,
+            "remaining_step_count": 1,
+            "remaining_action_bound": 1,
+            "release_remaining_action_bound": 1,
+            "verified_repetition_action_refs": [],
+            "verified_repetition_action_payloads": [],
+            "expected_effect_class": "experimental_unknown",
+            "expected_configuration_or_goal_delta_ref": "expectation.useful_inverse_revalidated_after_one_primitive",
+            "mechanism_question_ref": "question.useful_inverse_preserves_constraint_and_access",
+            "hypothesis_refs": [
+              "hypothesis.inverse_operator_releases_part",
+              "hypothesis.binding_is_preserved",
+              "hypothesis.peer_escapes_proposed_constraint"
+            ],
+            "information_outcome_refs": [
+              "outcome.independent_motion_observed",
+              "outcome.common_motion_or_block_observed",
+              "outcome.peer_domain_requires_replanning"
+            ],
+            "mechanism_effect_observation_required": true,
+            "mechanism_outcomes_are_predictions": true,
+            "selection_principle_ref": "reason.useful_separation_preserves_constraint_and_opens_independent_access",
+            "falsifier_refs": [
+              "falsifier.stationary_part_or_independent_access_not_preserved"
+            ],
+            "selection_precondition_support_required": true,
+            "current_measured_precondition_fields": [
+              "prospective_grasp_prepared_constraint_ref",
+              "prospective_grasp_part_cells",
+              "prospective_grasp_peer_cell",
+              "prospective_grasp_peer_component_ref",
+              "prospective_grasp_origin_bbox_tuples",
+              "prospective_grasp_target_position",
+              "candidate_is_prepared_inverse_operator"
+            ],
+            "committed_plan_present": false,
+            "declared_plan_ref": null,
+            "declared_plan_stage_refs": [],
+            "declared_plan_current_stage_ref": null,
+            "release_goal_ref": "goal.reveal_action_conditioned_structure",
+            "release_expected_effect_class": "experimental_unknown",
+            "prepared_constraint_experiment": true,
+            "terminal_residual_action_eligible_in_current_control_context": true,
+            "terminal_control_context_candidate_eligible": true
+          },
+          "templated_facts": {
+            "discriminating_experiment_ref": "experiment.prepared_constraint_inverse.{prospective_grasp_prepared_constraint_ref}",
+            "release_discriminating_experiment_ref": "experiment.prepared_constraint_inverse.{prospective_grasp_prepared_constraint_ref}",
+            "reconciliation_checkpoint_ref": "checkpoint.useful_inverse.{candidate_ref}"
+          },
+          "sequence_compositions": [
+            {
+              "output_field": "premise_claim_refs",
+              "source_fields": [
+                "premise_claim_refs",
+                "canonical_premise_claim_refs",
+                "prospective_grasp_prepared_constraint_claim_refs"
+              ],
+              "max_items": 128,
+              "unique_items": true
+            },
+            {
+              "output_field": "canonical_premise_claim_refs",
+              "source_fields": [
+                "canonical_premise_claim_refs",
+                "prospective_grasp_prepared_constraint_claim_refs"
+              ],
+              "max_items": 128,
+              "unique_items": true
+            },
+            {
+              "output_field": "release_premise_claim_refs",
+              "source_fields": [
+                "release_premise_claim_refs",
+                "premise_claim_refs",
+                "canonical_premise_claim_refs"
+              ],
+              "max_items": 128,
+              "unique_items": true
+            }
+          ]
+        },
+        {
+          "id": "projection.exploration.test_independent_closure_with_stationary_part",
+          "all_conditions": [
+            {
+              "field": "prospective_grasp_independent_motion",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_is_bounded_zone_state_route_first_action",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prospective_grasp_prepared_constraint_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "prospective_grasp_operator_observation_refs",
+              "operator": "is_present"
+            },
+            {
+              "field": "prospective_grasp_prepared_constraint_claim_refs",
+              "operator": "is_present"
+            }
+          ],
+          "static_facts": {
+            "bound_peer_composition_experiment": true,
+            "candidate_local_goal_context_declared": true,
+            "candidate_is_general_unscoped_probe": false,
+            "candidate_attempt_memory_eligible": true,
+            "goal_ref": "goal.reveal_action_conditioned_structure",
+            "active_goal_ref": "goal.reveal_action_conditioned_structure",
+            "active_terminal_goal_ref": "goal.reveal_action_conditioned_structure",
+            "subgoal_ref": "subgoal.independent_closure_returns_to_observed_peer",
+            "declared_terminal_goal_ref": "goal.reveal_action_conditioned_structure",
+            "goal_dependency_chain_refs": [
+              "goal.reveal_action_conditioned_structure",
+              "subgoal.independent_closure_returns_to_observed_peer"
+            ],
+            "goal_graph_edge_refs": [
+              "edge.independent_closure_returns_to_observed_peer"
+            ],
+            "advances_active_goal_chain": true,
+            "plan_kind": null,
+            "committed_plan_ref": null,
+            "committed_verified_repetition": false,
+            "declared_complete_plan_present": false,
+            "declared_complete_series_authorized": false,
+            "declared_conditional_series_authorized": false,
+            "declared_deterministic_series_authorized": false,
+            "replan_after_each_primitive_declared": true,
+            "standard_bfs_target_reached_on_cursor_end": false,
+            "remaining_step_count": 1,
+            "remaining_action_bound": 1,
+            "release_remaining_action_bound": 1,
+            "verified_repetition_action_refs": [],
+            "verified_repetition_action_payloads": [],
+            "expected_effect_class": "experimental_unknown",
+            "expected_configuration_or_goal_delta_ref": "expectation.independent_closure_revalidated_after_one_primitive",
+            "mechanism_question_ref": "question.independent_closure_preserves_constraint_and_access",
+            "hypothesis_refs": [
+              "hypothesis.inverse_operator_releases_part",
+              "hypothesis.binding_is_preserved",
+              "hypothesis.peer_escapes_proposed_constraint"
+            ],
+            "information_outcome_refs": [
+              "outcome.independent_motion_observed",
+              "outcome.common_motion_or_block_observed",
+              "outcome.peer_domain_requires_replanning"
+            ],
+            "mechanism_effect_observation_required": true,
+            "mechanism_outcomes_are_predictions": true,
+            "selection_principle_ref": "reason.useful_separation_preserves_constraint_and_opens_independent_access",
+            "falsifier_refs": [
+              "falsifier.stationary_part_or_independent_access_not_preserved"
+            ],
+            "selection_precondition_support_required": true,
+            "current_measured_precondition_fields": [
+              "prospective_grasp_prepared_constraint_ref",
+              "prospective_grasp_part_cells",
+              "prospective_grasp_peer_cell",
+              "prospective_grasp_peer_component_ref",
+              "prospective_grasp_origin_bbox_tuples",
+              "prospective_grasp_target_position",
+              "prospective_grasp_operator_observation_refs"
+            ],
+            "committed_plan_present": false,
+            "declared_plan_ref": null,
+            "declared_plan_stage_refs": [],
+            "declared_plan_current_stage_ref": null,
+            "release_goal_ref": "goal.reveal_action_conditioned_structure",
+            "release_expected_effect_class": "experimental_unknown",
+            "prepared_constraint_experiment": true,
+            "terminal_residual_action_eligible_in_current_control_context": true,
+            "terminal_control_context_candidate_eligible": true
+          },
+          "templated_facts": {
+            "discriminating_experiment_ref": "experiment.independent_constraint.{prospective_grasp_prepared_constraint_ref}",
+            "release_discriminating_experiment_ref": "experiment.independent_constraint.{prospective_grasp_prepared_constraint_ref}",
+            "reconciliation_checkpoint_ref": "checkpoint.independent_closure.{candidate_ref}"
+          },
+          "sequence_compositions": [
+            {
+              "output_field": "premise_claim_refs",
+              "source_fields": [
+                "premise_claim_refs",
+                "canonical_premise_claim_refs",
+                "prospective_grasp_prepared_constraint_claim_refs"
+              ],
+              "max_items": 128,
+              "unique_items": true
+            },
+            {
+              "output_field": "canonical_premise_claim_refs",
+              "source_fields": [
+                "canonical_premise_claim_refs",
+                "prospective_grasp_prepared_constraint_claim_refs"
+              ],
+              "max_items": 128,
+              "unique_items": true
+            },
+            {
+              "output_field": "release_premise_claim_refs",
+              "source_fields": [
+                "release_premise_claim_refs",
+                "premise_claim_refs",
+                "canonical_premise_claim_refs"
+              ],
+              "max_items": 128,
+              "unique_items": true
+            }
+          ]
+        },
+        {
+          "id": "projection.exploration.test_contact_after_stationary_constraint_closure",
+          "all_conditions": [
+            {
+              "field": "prepared_constraint_experiment",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prospective_grasp_independent_motion",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prospective_grasp_conditional_peer_contact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prospective_grasp_peer_exit_count_after_independent_actor",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "prospective_grasp_stationary_part_neighbor_loss",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "prospective_grasp_independence_observed",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "subgoal_ref": "subgoal.test_contact_with_geometrically_closed_peer",
+            "goal_dependency_chain_refs": [
+              "goal.reveal_action_conditioned_structure",
+              "subgoal.test_contact_with_geometrically_closed_peer"
+            ],
+            "goal_graph_edge_refs": [
+              "edge.constrained_peer_contact_returns_to_observed_approach_question"
+            ],
+            "mechanism_question_ref": "question.does_contact_with_closed_peer_complete_the_parent",
+            "expected_effect_class": "experimental_unknown",
+            "expected_configuration_or_goal_delta_ref": "expectation.observe_official_terminal_or_refute_contact_hypothesis",
+            "hypothesis_refs": [
+              "hypothesis.closed_peer_contact_completes_parent",
+              "hypothesis.contact_is_blocked_or_has_other_effect"
+            ],
+            "information_outcome_refs": [
+              "outcome.official_parent_completion_observed",
+              "outcome.contact_does_not_complete_parent"
+            ],
+            "falsifier_refs": [
+              "falsifier.no_official_completion_after_closed_peer_contact"
+            ],
+            "current_measured_precondition_fields": [
+              "prospective_grasp_prepared_constraint_ref",
+              "prospective_grasp_operator_observation_refs",
+              "prospective_grasp_peer_cell",
+              "prospective_grasp_part_cells",
+              "prospective_grasp_conditional_peer_contact",
+              "prospective_grasp_peer_exit_count_after_independent_actor",
+              "prospective_grasp_stationary_part_neighbor_loss",
+              "prospective_grasp_independence_observed"
+            ]
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.prepare_complex_composition_by_shortest_jointly_accessible_means"
+      ],
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "selection_tiers": [
+        {
+          "id": "tier.prepare_joint_access_to_observed_peer",
+          "reason_ref": "reason.prepare_complex_composition_by_shortest_jointly_accessible_means"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break"
+    },
+    {
+      "id": "schema.source81_scope",
+      "kind": "selection_policy",
+      "reason_refs": [
+        "reason.prepare_complex_composition_by_shortest_jointly_accessible_means"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.source81.physical_budget_refusal",
+          "all_conditions": [
+            {
+              "field": "within_remaining_budget",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "composition_access_admissible": false,
+            "source81_scope_refusal": "total_composition_distance_outside_current_physical_budget"
+          }
+        }
+      ],
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "selection_tiers": [
+        {
+          "id": "tier.prepare_joint_access_to_observed_peer",
+          "reason_ref": "reason.prepare_complex_composition_by_shortest_jointly_accessible_means"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break"
+    }
+  ]
+}

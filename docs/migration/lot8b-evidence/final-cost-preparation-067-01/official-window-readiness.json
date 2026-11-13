@@ -1,0 +1,95 @@
+{
+  "schema": "logos-engine.lot8b.official-performance-readiness.v1",
+  "recordedAt": "2026-11-12T12:32:23.160006+00:00",
+  "measurementAuthorized": true,
+  "pendingRequirements": [],
+  "baselineCommit": "4ff7bf45286a8a19d34401988adca587253ae41e",
+  "candidateCommit": "2cd4e7e557cb15034849da8c2794fa612cdbff18",
+  "contract": {
+    "role": "candidate",
+    "path": "docs/migration/lot8b-evidence/final-performance-067-01/contract.json",
+    "bytes": 161021,
+    "sha256": "5c4560add21a3e14b0f570ed72466d1f28bcd603b7e7f596a4ac3e59f9f18ab4"
+  },
+  "ownWorkClosed": {
+    "allPreparationCommandsTerminal": true,
+    "activeExecutionSessions": [],
+    "activeCommands": [],
+    "activeWorkers": []
+  },
+  "isolation": {
+    "established": true,
+    "basis": "Dedicated owned candidate and published baseline checkouts with all native bytes and declared inputs frozen; all own functional/build/review workers and execution commands terminated; fresh current-namespace process/resource observation shows only this finite declaration writer and its ancestors in the owned checkouts. The official controller performs a single nonblocking acquisition of the current shared performance mutex, rechecks source and visible own work, serializes all four series in one supervised group, and retains 30-second namespace observations.",
+    "scope": "Prospectively scoped official ABBA comparison within this owned execution window and the currently shared performance mutex. No universal host or cross-namespace quiet claim.",
+    "evidence": [
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/environment-before-declaration.json",
+        "bytes": 1551,
+        "sha256": "847640990637b9f9359a8fb7eacfd153057f1722903da66a65fe71cc096ccffa"
+      },
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/own-work-closure.json",
+        "bytes": 1245,
+        "sha256": "1bf04567945c82254d9569551472f1ba637fedb49863e27b8c9fdff79466d151"
+      },
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/own-status-before-window.json",
+        "bytes": 6422,
+        "sha256": "3afaea10431b7b03a3cda067f35295713482e8b7ff6d0cc0633aa1c277256ae4"
+      },
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/publication-observation.json",
+        "bytes": 1100,
+        "sha256": "4021a890f7982d3b91578409c31ea6119f34deb22115e38997a9fd9eee7bb0a7"
+      },
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/contract-independent-review.json",
+        "bytes": 10862,
+        "sha256": "889b22ff11050add3eaa1848fc65fac11aa77035df9358ac5d1249468cdbc4b8"
+      }
+    ],
+    "limitations": [
+      "Ordinary concurrent work in other execution namespaces or on the host is not observable from this namespace and is not asserted absent.",
+      "No peer availability or historical epoch acknowledgment is required. The mutex serializes holders of its current inode; it does not suspend ordinary work.",
+      "CPU affinity and load are observed rather than assigned as exclusive CPU resources. Periodic controller observations are retained measurement instrumentation.",
+      "session_elapsed covers the harness controller through final acquired return, including pause/resume; worker startup, begin, terminal inspection, close, live game engine, network and browser rendering are excluded."
+    ],
+    "flockAloneIsEvidence": false
+  },
+  "qualification": {
+    "functionalReview": {
+      "role": "candidate",
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/final-functional-independent-review.json",
+      "bytes": 61988,
+      "sha256": "ca7a8b58e77d97210bd984122db621d7ea7cd18c05ceebd9adaa64e17d008712"
+    },
+    "contractReview": {
+      "role": "candidate",
+      "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/contract-independent-review.json",
+      "bytes": 10862,
+      "sha256": "889b22ff11050add3eaa1848fc65fac11aa77035df9358ac5d1249468cdbc4b8"
+    },
+    "finalNativeAndBuildEvidence": {
+      "role": "candidate",
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/validation-summary.json",
+      "bytes": 11481,
+      "sha256": "e039d0cc64ef2aad673a8068ca608bf370fb6a583ab6d0040f6b1c4502964f4e"
+    },
+    "userGlobalRule": {
+      "authorization": "si le global reste en dessous de 10% d'augmentation alors une phase qui dépasse 10% peut être accepté.",
+      "stage": "session_elapsed",
+      "relativeIncreaseLimit": 0.1,
+      "comparison": "strictly_less_than",
+      "allCasesMustPass": true,
+      "crossCaseCompensation": false,
+      "phaseOverrunsMayBeAccepted": true
+    },
+    "historicalPreparedOnlyEvidenceUnchanged": true,
+    "publicationAccepted": false
+  }
+}

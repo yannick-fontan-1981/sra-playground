@@ -1,0 +1,179 @@
+{
+  "automaticRetry": false,
+  "childCloseFds": true,
+  "childExitCode": 0,
+  "childHandshakeAt": "2026-11-11T21:28:09.755122+00:00",
+  "childInputDeliveredAt": "2026-11-11T21:28:09.755232+00:00",
+  "childOutputBytes": {
+    "stderr": 54,
+    "stdout": 1434
+  },
+  "childPid": 5,
+  "childProcessGroup": 5,
+  "childPtyEchoDisabled": true,
+  "childStarted": true,
+  "childStartedAt": "2026-11-11T21:28:09.707505+00:00",
+  "cleanup": {
+    "childStarted": true,
+    "complete": true,
+    "leaderExitCode": 0,
+    "processGroup": 5,
+    "reapedDescendants": 0,
+    "signals": []
+  },
+  "dependencies": [],
+  "durationSeconds": 5.794488,
+  "exitCode": 0,
+  "finishedAt": "2026-11-11T21:28:14.002806+00:00",
+  "helper": "bounded-checkpoints",
+  "helperFingerprint": {
+    "bytes": 7201,
+    "file": "push_lot5_checkpoints_bounded.mjs",
+    "sha256": "84e8727e4b86a1a5e3d66bc843c4f3718a3d716c498fd232a810aab627665e04"
+  },
+  "initialCoordination": [
+    {
+      "lane": "lot5c",
+      "officialPerformanceActive": false,
+      "prospectiveQuietRequested": false,
+      "signal": "legacy_started_without_release",
+      "statusSha256": "b1369d33d9e03467184d2951626f97fd641e7fcab2706777bc13ab591428dcee"
+    },
+    {
+      "lane": "lot6b",
+      "officialPerformanceActive": false,
+      "prospectiveQuietRequested": false,
+      "signal": "legacy_started_without_release",
+      "statusSha256": "d16e2c4c2974b2a568d99b23ffea57c3f03237b7acd5a50730a8bbc4f9af09a6"
+    },
+    {
+      "lane": "lot8a",
+      "officialPerformanceActive": false,
+      "prospectiveQuietRequested": false,
+      "signal": "legacy_started_without_release",
+      "statusSha256": "b51fab4ed74b7e36592986ce803c9a7f69bb450bc96c0e85c3f925e35690114c"
+    },
+    {
+      "lane": "lot10c",
+      "officialPerformanceActive": false,
+      "prospectiveQuietRequested": false,
+      "signal": "legacy_started_without_release",
+      "statusSha256": "b3f36eeeba8e1663a79d358a1dd0bc28344b8f166968faa205a011bdb72a5bcd"
+    }
+  ],
+  "inputBytesRead": 751,
+  "inputCompletedAt": "2026-11-11T21:28:09.705376+00:00",
+  "inputEchoDisabled": true,
+  "limits": {
+    "handshakeSeconds": 10.0,
+    "inputBytes": 65536,
+    "inputSeconds": 45.0,
+    "killGraceSeconds": 3.0,
+    "outputBytes": 1048576,
+    "termGraceSeconds": 1.0,
+    "workSeconds": 300.0
+  },
+  "lockAcquired": false,
+  "partialOperationalSideEffectsPossible": false,
+  "performanceMutexAccessed": false,
+  "postInputCoordination": [
+    {
+      "lane": "lot5c",
+      "officialPerformanceActive": false,
+      "prospectiveQuietRequested": false,
+      "signal": "legacy_started_without_release",
+      "statusSha256": "b1369d33d9e03467184d2951626f97fd641e7fcab2706777bc13ab591428dcee"
+    },
+    {
+      "lane": "lot6b",
+      "officialPerformanceActive": false,
+      "prospectiveQuietRequested": false,
+      "signal": "legacy_started_without_release",
+      "statusSha256": "d16e2c4c2974b2a568d99b23ffea57c3f03237b7acd5a50730a8bbc4f9af09a6"
+    },
+    {
+      "lane": "lot8a",
+      "officialPerformanceActive": false,
+      "prospectiveQuietRequested": false,
+      "signal": "legacy_started_without_release",
+      "statusSha256": "b51fab4ed74b7e36592986ce803c9a7f69bb450bc96c0e85c3f925e35690114c"
+    },
+    {
+      "lane": "lot10c",
+      "officialPerformanceActive": false,
+      "prospectiveQuietRequested": false,
+      "signal": "legacy_started_without_release",
+      "statusSha256": "b3f36eeeba8e1663a79d358a1dd0bc28344b8f166968faa205a011bdb72a5bcd"
+    }
+  ],
+  "preLaunchCoordination": [
+    {
+      "lane": "lot5c",
+      "officialPerformanceActive": false,
+      "prospectiveQuietRequested": false,
+      "signal": "legacy_started_without_release",
+      "statusSha256": "b1369d33d9e03467184d2951626f97fd641e7fcab2706777bc13ab591428dcee"
+    },
+    {
+      "lane": "lot6b",
+      "officialPerformanceActive": false,
+      "prospectiveQuietRequested": false,
+      "signal": "legacy_started_without_release",
+      "statusSha256": "d16e2c4c2974b2a568d99b23ffea57c3f03237b7acd5a50730a8bbc4f9af09a6"
+    },
+    {
+      "lane": "lot8a",
+      "officialPerformanceActive": false,
+      "prospectiveQuietRequested": false,
+      "signal": "legacy_started_without_release",
+      "statusSha256": "b51fab4ed74b7e36592986ce803c9a7f69bb450bc96c0e85c3f925e35690114c"
+    },
+    {
+      "lane": "lot10c",
+      "officialPerformanceActive": false,
+      "prospectiveQuietRequested": false,
+      "signal": "legacy_started_without_release",
+      "statusSha256": "b3f36eeeba8e1663a79d358a1dd0bc28344b8f166968faa205a011bdb72a5bcd"
+    }
+  ],
+  "publicationMutexManagedHere": false,
+  "rawChildOutputStored": false,
+  "rawInputStored": false,
+  "results": [
+    {
+      "commit": "2ada5045fb94c4e34bd68f1ecd6f1f73aa778bd5",
+      "objects": 68,
+      "previousRemote": "37f3dabeaf8807045effb81cc3437da53f10ee97",
+      "rawNewObjectBytes": 837799,
+      "remoteHead": "2ada5045fb94c4e34bd68f1ecd6f1f73aa778bd5",
+      "sitePublicationPerformed": false,
+      "sourceCheckoutHead": "a59abde5a714e566962568f492598a2522562871",
+      "status": "bounded_checkpoint_pushed_and_verified"
+    },
+    {
+      "commit": "a59abde5a714e566962568f492598a2522562871",
+      "objects": 15,
+      "previousRemote": "2ada5045fb94c4e34bd68f1ecd6f1f73aa778bd5",
+      "rawNewObjectBytes": 93070,
+      "remoteHead": "a59abde5a714e566962568f492598a2522562871",
+      "sitePublicationPerformed": false,
+      "sourceCheckoutHead": "a59abde5a714e566962568f492598a2522562871",
+      "status": "bounded_checkpoint_pushed_and_verified"
+    },
+    {
+      "branch": "refs/heads/lot5c-recovery-checkpoint-20261111",
+      "commit": "a59abde5a714e566962568f492598a2522562871",
+      "fetchedMain": "2981a62d456802d39dcde316734793e905fb0ebf",
+      "remoteHead": "a59abde5a714e566962568f492598a2522562871",
+      "sitePublicationPerformed": false,
+      "status": "pushed_and_verified"
+    }
+  ],
+  "schema": "logos-engine.lot5c.bounded-command.v3",
+  "sitePublicationPerformed": false,
+  "startedAt": "2026-11-11T21:28:08.208338+00:00",
+  "status": "passed",
+  "toolSessionBinding": "external_root_record_required",
+  "toolSessionId": null,
+  "wrapperPid": 2
+}

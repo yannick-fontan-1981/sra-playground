@@ -1,0 +1,66 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "fogw-051-replay.json.gz",
+    "sha256": "eb0794f621fcf3b2c283a8862f14ed2c497efe6ce84c6c4f0489221ad0cb5631",
+    "bytes": 9454322
+  },
+  "parts": [
+    {
+      "file": "fogw-051-replay.json.gz.part000",
+      "sha256": "4614c44d2818c3530ebfb49e5675603cb2124a4cdd09505bb6b1db8e4ea5d478",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-051-replay.json.gz.part001",
+      "sha256": "ca54d6af2b379507c7aa6276811e342745758701ffd505442b00cc5b425de185",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-051-replay.json.gz.part002",
+      "sha256": "b38af0131b3f2b51118a09bcfb73d4763d23c57987a1cd7af07b05b29052bd49",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-051-replay.json.gz.part003",
+      "sha256": "6efe9d77ef1798e0024b3f355fae7fc5e6472fb9972d77e6a09dfcb7c3bb87e6",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-051-replay.json.gz.part004",
+      "sha256": "4ce575584776e29796d993d6d143fef3ba6a0a01a5ab9a8d53819d92203202c6",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-051-replay.json.gz.part005",
+      "sha256": "efa418ddd7c7fc224ac45bb9b99cfb5ce73de9b5d531cc04e6c4458ff2fdc135",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-051-replay.json.gz.part006",
+      "sha256": "8acf4f3d76d433de2b159c6fa7cbddd1bd2981fd5754ced48081d6596e3bab2a",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-051-replay.json.gz.part007",
+      "sha256": "8d9e4f49e36c9734f5d9c1b0e61d38d35c49bdb2c19792dd0d4ee01bebc797a6",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-051-replay.json.gz.part008",
+      "sha256": "1ec9c4898bdb17a70618bc25f9b4f1c24f0f38ac43550186ba897451d85c37ed",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-051-replay.json.gz.part009",
+      "sha256": "a4894040369727b50eb2c0337297ac36a976dd71ad0d70760fd190749e7f6116",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-051-replay.json.gz.part010",
+      "sha256": "6c552e2105131f2d06a092fbeb73da52c3f7a75befd4cedb2aee75ab8587984c",
+      "bytes": 454322
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

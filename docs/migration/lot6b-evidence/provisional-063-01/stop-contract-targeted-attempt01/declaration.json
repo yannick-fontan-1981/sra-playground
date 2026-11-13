@@ -1,0 +1,13 @@
+{
+  "declaredAt": "2026-11-11T18:26:40.232119+00:00",
+  "command": [
+    "node",
+    "--test",
+    "--test-concurrency=1",
+    "--test-reporter=tap",
+    "tests/v6-selected-rigid-integration.test.ts"
+  ],
+  "maximumSeconds": 90,
+  "watchManifest": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/functional-watch-attempt02.json",
+  "qualification": "Full affected11-test module before a new142-file attempt. No newgame or cost; previous5404/5405 suite remains failed."
+}

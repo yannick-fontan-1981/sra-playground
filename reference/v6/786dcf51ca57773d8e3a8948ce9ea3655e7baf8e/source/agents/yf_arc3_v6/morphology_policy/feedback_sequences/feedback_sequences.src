@@ -1,0 +1,21 @@
+MODULE v6.feedback_sequences
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        session: Any
+        trial: Any
+    STEP open
+        CALL sequences.begin(request=request) -> session
+        NEXT examine
+    STEP examine
+        WHILE session.pending
+            PROGRESS session.progress
+            STOP WHEN session.done
+            MAX DEPTH 4
+            ON LIMIT DEFER unresolved
+            DO
+                CALL sequences.offer(session=session) -> trial
+                IF trial.selected
+                    CALL sequences.finish(session=session, trial=trial) -> session
+                ELSE
+                    CALL sequences.advance(session=session) -> session
+        STOP session

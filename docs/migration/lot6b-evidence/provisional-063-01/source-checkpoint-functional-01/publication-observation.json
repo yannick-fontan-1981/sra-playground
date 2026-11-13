@@ -1,0 +1,20 @@
+{
+  "schema": "logos-engine.lot6b.actual-publication-observation.v1",
+  "observedAt": "2026-11-11T20:34:24.999Z",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "siteStatus": "active",
+  "latestVersionNumber": 103,
+  "liveUrl": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_c8356cd5ad648191a646ac0a9c059a24",
+  "sourceCommit": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+  "deploymentId": "appgdep_6af49db69234819195c9c093cb79a7da",
+  "access": {
+    "mode": "custom",
+    "revision": 3,
+    "allowedUserCount": 1,
+    "externalVisitorCount": 0,
+    "groupsCount": 0,
+    "ownerOnly": true
+  },
+  "qualification": "Saved-version source and current live metadata observed. Native version0.62 follows prior source reconciliation of this exact commit; no0.63 or0.64 publication is claimed."
+}

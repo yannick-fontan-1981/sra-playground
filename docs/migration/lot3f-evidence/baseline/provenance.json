@@ -1,0 +1,10 @@
+{
+  "siteVersion": 74,
+  "nativeVersion": "0.46.0",
+  "commit": "a6edbb838670785733155262ae95f69892a236fc",
+  "checkout": "/workspace/sites/sra-published-046",
+  "nativeDigest": "5adf58cb9bd0802dd083812e7591c53cb786410ad23c14a29814d870ef67276c",
+  "nativeFiles": 260,
+  "verified": true,
+  "qualification": "Actual immutable published source; dependency inputs unchanged and prepared runtime assets copied without inspecting games."
+}

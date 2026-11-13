@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.lot5b-owner-tools-syntax-check.v1",
+  "qualification": "Syntax only under the shared performance lock. No capture, factory inventory, qualifier, finalizer, cost script, game or archive was executed.",
+  "checks": [
+    {
+      "command": "flock -s /workspace/shared/sra-coordination/performance.lock node --check docs/migration/lot5b-evidence/capture-cost-owner-graphs.mjs",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": "flock -s /workspace/shared/sra-coordination/performance.lock node --check docs/migration/lot5b-evidence/qualify-cost-owner-graphs.mjs",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": "flock -s /workspace/shared/sra-coordination/performance.lock node --check docs/migration/lot5b-evidence/record-owner-source-inventory.mjs",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": "flock -s /workspace/shared/sra-coordination/performance.lock python -B -c 'import ast; from pathlib import Path; ast.parse(Path(\"docs/migration/lot5b-evidence/finalize-owner-cost-contract.py\").read_text())'",
+      "exitCode": 0,
+      "output": ""
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.lot8a.selected-capture-initial-failure.v1",
+  "recordedAt": "2026-11-11T21:12:36.915496+00:00",
+  "failedReceipt": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/stages/selected-rigid-capture-01/receipt.json",
+    "sha256": "2fb20ace8ffabc0e455603bcb3a4afb31640ba0a6fe743f18cc2fcf433ea230c",
+    "bytes": 1160201
+  },
+  "failedReport": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/selected-rigid/common-report-01.json",
+    "sha256": "f0a810584d3ebe04568bc1a7079def50b99430c35856a6ab0f964f7ef69f6acd",
+    "bytes": 124003
+  },
+  "cause": "The new exporter incorrectly required every declared synthetic fixture step to have at least one physical return. A terminal no-return step is part of the existing scenario.",
+  "nativeRuntimeCreated": false,
+  "actualActions": 0,
+  "capturedOwnerEvents": 0,
+  "nativeInputsUnchanged": true,
+  "previousValidated145FileSuiteUnchanged": true,
+  "resolution": "A new exporter filename and a separate prospective retry declaration are required; preserve the first failed report and original frozen plan/tool. Do not delete terminal fixture steps or invent returns."
+}

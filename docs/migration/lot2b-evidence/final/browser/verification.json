@@ -1,0 +1,30 @@
+{
+  "schema": "logos-engine.native-browser-verification.v1",
+  "observedAt": "2026-11-09T19:25:04.948336+00:00",
+  "environment": "managed Sites preview, real browser workers and public game engine",
+  "url": "http://127.0.0.1:4173/?game=LS20&level=2",
+  "nativeSourceManifestDigest": "17252e294212a1563b75037a0b0dd782c2ecbc8cc4e1997a4f2bb2103bdf4e8b",
+  "game": "LS20",
+  "startedAtLevel": 1,
+  "observedLevel": 2,
+  "levelsSolved": 1,
+  "actions": 17,
+  "completedPlans": 11,
+  "statusText": "Level completed.",
+  "inspectorExpanded": false,
+  "manualGameActions": 0,
+  "levelJumps": 0,
+  "sessionResetsDuringRun": 0,
+  "steps": [
+    "Selected LS20 in the visible game chooser",
+    "Selected SRA Agent Native TS",
+    "Clicked Run to next level once",
+    "Observed natural completion with Pause disabled and controls ready"
+  ],
+  "screenshot": {
+    "path": "docs/migration/lot2b-evidence/final/browser/ls20-first-level.png",
+    "bytes": 96456,
+    "sha256": "b76dc0f3333e04bc69b717dc89b1ef11bcf8fb396ef3528f975653616fc386d1"
+  },
+  "qualification": "Independent browser confirmation of the first LS20 level. This is neither a three-level completion nor an authenticated production-site game session."
+}

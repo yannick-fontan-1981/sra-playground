@@ -1,0 +1,223 @@
+Browser tab: 6, Title: "SRA Playground · STCK — Symbolic Reasoning Agent", URL: "http://127.0.0.1:4173/?game=STCK&level=4".
+1 AXWebArea SRA Playground · STCK — Symbolic Reasoning Agent, URL: 127.0.0.1:4173/?game=STCK&level=4
+	2 container app
+		3 link Description: Skip to the games, Value: 127.0.0.1:4173/?game=STCK&level=4#game-select
+		4 container
+			5 link Description: SRA Playground — Symbolic Reasoning Agent home, Value: 127.0.0.1:4173/
+			6 text Yannick Fontan INTERACTIVE GAMES / INDEPENDENT RESEARCH
+			7 container Main navigation
+				8 link Description: MOTIVATION, Value: 127.0.0.1:4173/motivation.html
+				9 link Description: PLAYGROUND, Value: 127.0.0.1:4173/?game=STCK&level=4#playground
+				10 link Description: 75 NEW GAMES, Value: 127.0.0.1:4173/gallery.html
+				11 link Description: REASONING LAB, Value: 127.0.0.1:4173/reasoning-lab.html
+				12 link Description: What is ARC-AGI-3?, Value: 127.0.0.1:4173/arc-agi-3.html
+				13 link Description: SYMBOLIC REASONING, Value: 127.0.0.1:4173/symbolic-reasoning.html
+				14 link Description: ARCHITECTURE, Value: 127.0.0.1:4173/architecture.html
+				15 link Description: VIDEOS, Value: 127.0.0.1:4173/videos.html
+				16 link Description: CONTACT, Value: 127.0.0.1:4173/contact.html
+				17 link Description: SRA Playground source code on GitHub, Value: github.com/yannick-fontan-1981/sra-playground
+		18 container
+			19 container SRA Playground
+				20 heading SRA Playground, Value: 1, ID: page-title
+					21 text SRA Playground
+				22 text Symbolic Reasoning Agent
+				23 container
+					24 text Toward  Understandable Intelligence.
+				25 link Description: Explore 75 New Games, followed by 25 official games, Value: 127.0.0.1:4173/gallery.html
+			26 container DESIGN PREMISE
+				27 heading DESIGN PREMISE, Value: 2, ID: design-premise-title
+					28 text DESIGN PREMISE
+				29 container
+					30 text The design of artificial intelligence should begin with ethical principles.  Symbolic reasoning makes deliberate design possible through explicit concepts, relations, and reasoning structures rooted in human intelligence. SRA draws its meaning and purpose from this human source, enabling us to take responsibility for the intelligence we build and thereby fulfill the ethical principle that guides its design.
+				31 link Description: Start here: Motivation, Value: 127.0.0.1:4173/motivation.html
+			32 container ARC AGI 3, ID: playground
+				33 heading ARC AGI 3, Value: 2, ID: playground-title
+					34 text ARC AGI  3
+				35 link Description: What is ARC-AGI-3?, Value: 127.0.0.1:4173/arc-agi-3.html
+				36 link Description: 75 New Games and 25 official games: browse all 100 games, Value: 127.0.0.1:4173/gallery.html
+				37 text 75 new custom games
+				38 text created or compiled by  Yannick Fontan.
+				39 container
+					198 text STCK
+					41 heading Card Stack, Value: 2, ID: game-title
+						199 text Card Stack
+					200 text CUSTOM · WAVE 1
+					44 text CHOOSE A GAME
+					45 container game-availability
+						252 text Ready
+					47 pop up button (collapsed, settable) CHOOSE A GAME, Value: STCK — Card Stack, ID: game-select, Secondary Actions: Expand
+						48 menu
+							49 container Custom · Wave 1
+								50 CASC — Cascade Routing
+								51 CLRS — RGB Glass
+								52 CONN — Connect Four
+								53 CRAF — Crafting Console
+								54 DNOI — Pattern Denoising
+								55 ESCT — Patrol Escort
+								56 FITE — Arena Survival
+								57 FOGW — Hidden Motion
+								58 GORI — Ballistic Aim
+								59 HANO — Tower of Hanoi
+								60 KEYD — Keys and Doors
+								61 LIFE — Life and Lineage
+								62 LOGI — Logic Circuits
+								63 LS19 — Shape Alignment (Legacy)
+								64 MEMO — Memory Recall
+								65 MIND — Code Breaker
+								66 PORT — Portal Topology
+								67 REGN — Gauge Balance
+								68 SEQN — Symbol Sequences
+								69 SIGN — Signal Seals
+								70 SKBN — Sokoban
+								71 (selected) STCK — Card Stack
+								72 SWCH — Switch Rooms
+								73 SYME — Symmetry Repair
+								74 VALV — Valve Flow
+							75 container Custom · Wave 2
+								76 AS66 — Always Sliding
+								77 CGWL — Cabbage, Goat and Wolf
+								78 COLM — Falling Columns
+								79 COMB — Combina
+								80 ELAS — Elastic Grid
+								81 ETAG — Multi-floor Maze
+								82 FUIT — Fleeing Stones
+								83 GABA — Cargo Clearance
+								84 GARE — Rail Transfer
+								85 GLOB — Globe Track
+								86 GMAP — Engraved Map
+								87 GRAV — Gravity Box
+								88 HOLE — Nested Colour Palette
+								89 ISOS — Isometric Sketch
+								90 KATA — Pentomino Packing
+								91 LKEY — Lock and Key
+								92 POLA — Polarity
+								93 REWI — Rewind
+								94 SELE — Selene
+								95 SERI — Sequence Lab
+								96 TEQU — Tower Equilibrium
+								97 TICT — Tic-tac-toe
+								98 TRIA — Triade
+								99 VOIS — Neighbour Cubes
+								100 WEAV — Weave
+							101 container Custom · Wave 3
+								102 AMZE — Arrow Maze
+								103 CATL — Caterpillar Logic
+								104 CATR — Configured Attraction
+								105 CAVA — Knight Maze
+								106 CWSE — Catching Without Seeing
+								107 DAME — Checkers Solitaire
+								108 DICO — Dichotomy
+								109 EVAS — Escape
+								110 GIGO — Nested Rooms
+								111 GRIL — Grille
+								112 HPDL — Homogeneous Pair Deletion
+								113 KLOT — Klotski
+								114 MOTO — Moto Orbit
+								115 ONDE — Wave Alignment
+								116 PIPE — Pipes
+								117 PRTL — Portal Chambers
+								118 RECR — Recruit Army
+								119 RSWP — Role Swap
+								120 SMLP — Same Length Path
+								121 SNAR — Sonar Maze
+								122 SPOR — Spore Lab
+								123 THER — Thermometers
+								124 TRCP — Tracing Path
+								125 UPST — Upset
+								126 ZIPP — Zip
+							127 container Official ARC-AGI-3
+								128 AR25 — Official ARC-AGI-3 game
+								129 BP35 — Official ARC-AGI-3 game
+								130 CD82 — Official ARC-AGI-3 game
+								131 CN04 — Official ARC-AGI-3 game
+								132 DC22 — Official ARC-AGI-3 game
+								133 FT09 — Official ARC-AGI-3 game
+								134 G50T — Official ARC-AGI-3 game
+								135 KA59 — Official ARC-AGI-3 game
+								136 LF52 — Official ARC-AGI-3 game
+								137 LP85 — Official ARC-AGI-3 game
+								138 LS20 — Official ARC-AGI-3 game
+								139 M0R0 — Official ARC-AGI-3 game
+								140 R11L — Official ARC-AGI-3 game
+								141 RE86 — Official ARC-AGI-3 game
+								142 S5I5 — Official ARC-AGI-3 game
+								143 SB26 — Official ARC-AGI-3 game
+								144 SC25 — Official ARC-AGI-3 game
+								145 SK48 — Official ARC-AGI-3 game
+								146 SP80 — Official ARC-AGI-3 game
+								147 SU15 — Official ARC-AGI-3 game
+								148 TN36 — Official ARC-AGI-3 game
+								149 TR87 — Official ARC-AGI-3 game
+								150 TU93 — Official ARC-AGI-3 game
+								151 VC33 — Official ARC-AGI-3 game
+								152 WA30 — Official ARC-AGI-3 game
+					202 text STCK selected.
+					154 tab group Play mode
+						155 tab (selectable, settable, boolean) Manual, Value: 0, ID: manual-tab
+						156 tab (selected, settable, boolean) SRA Agent Native TS, Value: 1, ID: agent-tab
+					157 text In your browser
+					158 button Description: Expand game board, ID: fullscreen-button
+					203 container Description: STCK game board. Use the arrow keys, Space, or click to interact., ID: game-canvas
+						204 text Your browser must support canvas to play.
+					205 container Description: SRA Agent Native TS, ID: agent-panel
+						206 heading Solve with SRA., Value: 3
+							207 text Solve with SRA.
+						253 text Level completed.
+						209 button Run to next level, ID: agent-run
+						210 button Run 16 actions, ID: agent-batch
+						211 button One action, ID: agent-step
+						212 button (disabled) Pause, ID: agent-pause
+						213 container Agent session
+							254 text 35
+							215 text actions
+							255 text 3
+							217 text levels solved
+							256 text 15
+							219 text completed plans
+						220 button New reasoning session, ID: agent-new-session
+						221 button Return to Manual, ID: return-manual
+					222 container Description: Agent reasoning, ID: agent-inspection
+						223 button (expanded) Inspect reasoning Open to display the current plan, trace and memory, Secondary Actions: Collapse
+							224 AXListMarker ▾ 
+							225 text Inspect reasoning
+							226 text Open to display the current plan, trace and memory
+						232 text LIVE REASONING
+						233 heading The current action sequence, Value: 3
+							234 text The current action sequence
+						235 link Description: V7 Reasoning Lab, Value: 127.0.0.1:4173/reasoning-lab.html
+						257 text 35 actions · 3 completed levels · 15 completed plans · 49.7 s active solving
+						258 text Level completed. V6 acquired the outcome and retained its transfer memory. Continue when ready.
+						259 text public_occurrence_recall
+						239 container agent-plan
+							260 text compose_phase_observed_operators
+							261 content list
+								262 container
+									263 AXListMarker 1. 
+									264 text ACTION5 {"collection":[9,8,8,8,9],"scope":"conditional public program projection"}
+							265 text Selected by V6 from the current public observations. Each action is checked against its retained conditions before execution.
+						246 button (collapsed) Inspect the V6 reasoning trace (128 events), Secondary Actions: Expand
+							247 text Inspect the V6 reasoning trace 
+							266 text (128 events)
+						249 button (collapsed) Inspect and edit the live reasoning graph, Secondary Actions: Expand
+							250 text Inspect and edit the live reasoning graph
+						251 text The agent runs entirely in TypeScript, using the common SRC interpreter from V7. Pause preserves the pending action sequence. The complete V6 migration is in progress; verified paths currently include ordered-support transfers and repairs of regular visual fields.
+			180 container About SRA, ID: about
+				181 text THE PROJECT
+				182 heading About SRA, Value: 2, ID: about-title
+					183 text About SRA
+				184 link Description: Motivation, Value: 127.0.0.1:4173/motivation.html
+				185 link Description: Architecture, Value: 127.0.0.1:4173/architecture.html
+				186 link Description: Video series, Value: 127.0.0.1:4173/videos.html
+				187 container
+					188 text Symbolic Reasoning Agent  is Yannick Fontan’s research project for interactive games. The agent uses explicit representations of observations, mechanisms, and goals to organize its reasoning.
+				189 container
+					190 text The 100 games on this page run locally in your browser. The ongoing SRA Agent migration transfers V6 capabilities into native TypeScript and the common V7 reasoning architecture. Coordinate inputs, guarded action sequences and memory across levels are connected. The original Python game engines remain isolated from the agent. Explore the shared reasoning syntax in the 
+					191 link Description: Logos Engine Reasoning Lab, Value: 127.0.0.1:4173/reasoning-lab.html
+					192 text .
+		193 container
+			194 text SRA Playground / Independent research by Yannick Fontan
+			195 link Description: Contact, Value: 127.0.0.1:4173/contact.html
+			196 link Description: ARC Prize, Value: arcprize.org/arc-agi/3
+			197 link Description: Licenses & notices, Value: github.com/yannick-fontan-1981/sra-playground/blob/main/THIRD_PARTY_NOTICES.md
+
+The focused UI element is 223 button (expanded) Inspect reasoning Open to display the current plan, trace and memory, Secondary Actions: Collapse

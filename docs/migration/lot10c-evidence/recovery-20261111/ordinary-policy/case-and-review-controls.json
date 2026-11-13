@@ -1,0 +1,28 @@
+{
+  "schema": "logos-engine.lot10c.ordinary-case-policy-controls.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T21:26:30.295089+00:00",
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot10c-evidence/test-ordinary-case-and-review.py"
+  ],
+  "exitCode": 0,
+  "output": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/ordinary-policy/case-and-review-controls.txt",
+    "sha256": "2535613f888676c97f878f7d6e2a43758c0e0f78998b0784fd5d6cc33890df98",
+    "bytes": 1202
+  },
+  "simulatedFunctionalChecks": 8,
+  "nativeExecution": false,
+  "realCaseLedgerTouched": false,
+  "globalLockAcquired": false,
+  "onlyCaseScopedLockSimulated": true,
+  "inputs": {
+    "docs/migration/lot10-ordinary-case-work-policy.md": "aa1d6cfcd75c0f8412f10c1fd69562d2a9f737ff84bc3d309bc34f3474e52d3c",
+    "docs/migration/lot10c-evidence/run-ordinary-clocked-proof.py": "f8bb7a215a8ee8b41db11c9a9f05e71cfd885b895c02229c8dbac692dbfa5019",
+    "docs/migration/lot10c-evidence/review-ordinary-test-batches.py": "852fc9e936228cd8e66d8548e7a2bb5f5713a9cf223e4f0cd89f881afc3ce43b",
+    "docs/migration/lot10c-evidence/test-ordinary-case-and-review.py": "5eafbcba948dfa851b453d8a5243d1934a07c424ac690f36d64d5377d8f9914f"
+  },
+  "qualification": "Short simulated coordination and accounting controls. No actual campaign, replay, budget debit, global lock, timing sample or publication."
+}

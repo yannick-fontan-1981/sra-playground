@@ -1,0 +1,14 @@
+{
+  "schema": "logos-engine.managed-preview-stop.v1",
+  "recordedAt": "2026-11-10T19:27:20.692190+00:00",
+  "command": [
+    "sites-preview",
+    "stop"
+  ],
+  "exitCode": 0,
+  "observedOutput": "Sites preview stopped",
+  "previewStopped": true,
+  "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "nativeSourceDigest": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7",
+  "qualification": "Observed managed CLI result after the blocked browser QA and before cost readiness."
+}

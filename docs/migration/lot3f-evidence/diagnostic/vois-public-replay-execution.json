@@ -1,0 +1,95 @@
+{
+  "schema": "logos-engine.lot3f.reference-population-public-replay-execution.v1",
+  "status": "passed",
+  "commands": [
+    [
+      "python",
+      "-B",
+      "docs/migration/lot3f-evidence/diagnostic/replay-reference-population-public.py",
+      "docs/migration/lot3f-evidence/final/vois-population-session"
+    ],
+    [
+      "node",
+      "docs/migration/lot3f-evidence/diagnostic/check-reference-population-public-parity.mjs",
+      "docs/migration/lot3f-evidence/diagnostic/vois-public-source-replay.json.gz"
+    ]
+  ],
+  "exitCodes": [
+    0,
+    0
+  ],
+  "scripts": [
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/replay-reference-population-public.py",
+      "sha256": "a670588f943dc1e746a450cf41133c1a2ed3d0edf4c474d4be21f3cb0e8436c2",
+      "bytes": 25779
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/check-reference-population-public-parity.mjs",
+      "sha256": "8b686eb5676f10636bc95908c51f109747f667c694da1a35595797441be00f79",
+      "bytes": 17502
+    }
+  ],
+  "logs": [
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/vois-public-source-replay.log",
+      "sha256": "67d871884e48328f90310b5aa7681c8b2fcf46babcad12b1209620de699debc6",
+      "bytes": 381
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/vois-public-native-review.log",
+      "sha256": "08da430d8bac9a3021d3d138319a6cc3a980216b1d4ddc41793b3be839e215a4",
+      "bytes": 452
+    }
+  ],
+  "results": [
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/vois-public-source-replay.json.gz",
+      "sha256": "18093ea707a630131180c8139b1e902f47a70099194f5a398ffcf154dee0b909",
+      "bytes": 103723
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/vois-public-parity.json",
+      "sha256": "efe91899f50702823537eefb06041455d1f29761056c80523baf886f639597f1",
+      "bytes": 214774
+    }
+  ],
+  "originalSourceReplay": {
+    "path": "docs/migration/lot3f-evidence/diagnostic/vois-public-source-replay.json.gz",
+    "status": "passed",
+    "bytes": 103723,
+    "sha256": "18093ea707a630131180c8139b1e902f47a70099194f5a398ffcf154dee0b909",
+    "prefixes": 42,
+    "returns": 78,
+    "ownEvents": 75,
+    "sourceRestorations": 43,
+    "stop": null,
+    "differences": 0,
+    "originalFilesVerifiedBefore": 1786,
+    "originalFilesVerifiedAfter": 1786
+  },
+  "nativeReview": {
+    "path": "docs/migration/lot3f-evidence/diagnostic/vois-public-parity.json",
+    "status": "passed",
+    "checks": 3434,
+    "failed": 0,
+    "exactOriginal": {
+      "prefixes": 42,
+      "returns": 78,
+      "ownEvents": 75,
+      "emptyReturns": 3,
+      "restorations": 43,
+      "sourceStop": null,
+      "differences": 0,
+      "coldStart": true,
+      "primedFromCapturedProposalMemory": false,
+      "completeSelectedOwnTrajectoryParity": true,
+      "fullInheritedCallerParity": false
+    },
+    "originalFilesVerifiedBefore": 1786,
+    "originalFilesVerifiedAfter": 1786
+  },
+  "newGameActions": 0,
+  "levelJumps": 0,
+  "qualification": "Two completed read-only executions after explicit campaign authorization. Both own memories start empty and progress solely through newly computed acquisitions on captured actual public returns. No native plan.state initialization, original-source edit, native-source edit, new case attempt or wall-cost comparison. Exact selected own-layer trajectory parity is qualified separately from full inherited-caller parity, which remains false."
+}

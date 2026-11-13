@@ -1,0 +1,7 @@
+MODULE v6.region_intervention
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        decision: Any
+    STEP select
+        CALL region.select(request=request) -> decision
+        STOP decision

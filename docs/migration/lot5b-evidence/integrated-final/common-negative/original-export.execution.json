@@ -1,0 +1,46 @@
+{
+  "schema": "logos-engine.functional-command-execution.v1",
+  "startedAt": "2026-11-11T01:54:58.520341+00:00",
+  "finishedAt": "2026-11-11T01:54:59.099828+00:00",
+  "workingDirectory": "/workspace/sites/sra-lot5b-20261110/.sites-checkout",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/export-v6-addressed-material-reference.py",
+    "--journal",
+    "docs/migration/lot5b-evidence/integrated-final/common-negative/actual-operations.json",
+    "--fixture",
+    "docs/migration/lot5b-evidence/integrated-final/common-negative/original-replay.json.gz",
+    "--receipt",
+    "docs/migration/lot5b-evidence/integrated-final/common-negative/original-export.json"
+  ],
+  "exitCode": 0,
+  "lock": {
+    "path": "/workspace/shared/sra-coordination/performance.lock",
+    "mode": "shared"
+  },
+  "nativeSourceDigest": "099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4",
+  "log": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/common-negative/original-export.execution.log",
+    "bytes": 345,
+    "sha256": "8bf864171b3ba2f2ded5119d5fa04a69097ef19ec2ca1c1f7f7349efbd335cfa"
+  },
+  "gzipLog": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/common-negative/original-export.execution.log.gz",
+    "bytes": 260,
+    "sha256": "04d3932661ee17cef30f910fafa723f8b4d1b6681746b58499e16bfd5965dd1d"
+  },
+  "gzipUncompressedSha256": "8bf864171b3ba2f2ded5119d5fa04a69097ef19ec2ca1c1f7f7349efbd335cfa",
+  "outputs": [
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/common-negative/original-replay.json.gz",
+      "bytes": 56794,
+      "sha256": "435cf79fee602b0095304668c85b1c76ad0842f0e8861d8fc775dbecdf16b45a"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/common-negative/original-export.json",
+      "bytes": 7871,
+      "sha256": "488dcff195fcce641010c2942fa38832d307e78aa7f408c64282d7c7096ff07a"
+    }
+  ]
+}

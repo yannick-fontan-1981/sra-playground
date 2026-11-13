@@ -1,0 +1,125 @@
+{
+  "game": "MEMO",
+  "targetLevels": 3,
+  "command": [
+    "node",
+    "scripts/run-v44-campaign.mjs",
+    "MEMO",
+    "3",
+    "docs/migration/native-campaigns-v45/memo-three-levels.json"
+  ],
+  "startedAt": "2026-11-08T19:55:09.993141+00:00",
+  "finishedAt": "2026-11-08T19:55:56.011998+00:00",
+  "exitCode": 0,
+  "output": {
+    "path": "docs/migration/native-campaigns-v45/logs/regression-memo.log.gz",
+    "sha256": "2ea87a32969caddb664716dd2a0a3d31df1d43a00a4664ec73e09491b4fa23c9",
+    "bytes": 4361
+  },
+  "report": {
+    "path": "docs/migration/native-campaigns-v45/memo-three-levels.json",
+    "sha256": "7d332d506290f554f2f33640d2585aa67c68cbfb60ef85b40e64825303b0eb75",
+    "bytes": 259130
+  },
+  "status": "passed",
+  "final": {
+    "actions": 30,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 39.588892201000014,
+    "prefixes": 30,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 30,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 61,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 31
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 31
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 31
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 28
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 31
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 32
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology",
+        "attention_parent_return",
+        "acquire_control_for_target"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 30,
+      "resume": 29
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.15.0"
+  },
+  "sourceDigest": "1278235f269085c057e4dfea619c5a65587bfd90998505858caeef067319640c",
+  "nativeSourceFiles": 149,
+  "nativeSourceMatchesInitialFiles": true,
+  "sourceUnchangedDuringRun": true,
+  "pythonAgentModules": [],
+  "comparison": {
+    "command": [
+      "node",
+      "scripts/compare-v44-regressions.mjs",
+      "docs/migration/native-campaigns-v44/memo-three-levels.json",
+      "docs/migration/native-campaigns-v45/memo-three-levels.json",
+      "docs/migration/native-campaigns-v45/memo-comparison.json"
+    ],
+    "startedAt": "2026-11-08T19:55:56.015537+00:00",
+    "finishedAt": "2026-11-08T19:55:56.080015+00:00",
+    "exitCode": 0,
+    "output": {
+      "path": "docs/migration/native-campaigns-v45/logs/comparison-memo.log.gz",
+      "sha256": "12405435e3fd4fca45c79c06faac088059bcdf55673ea703b80a66f3eff02713",
+      "bytes": 110
+    },
+    "path": "docs/migration/native-campaigns-v45/memo-comparison.json",
+    "sha256": "98cab1ad0f5f9427a46a44db04153c8eea96f38804c8a077624919324da81dfc",
+    "bytes": 3497,
+    "passed": true,
+    "checks": 13,
+    "compared": {
+      "commands": 30,
+      "completePublicPackets": 31,
+      "prefixes": 30
+    },
+    "failedChecks": []
+  },
+  "nativeSourceUnchangedAfterComparison": true,
+  "passed": true
+}

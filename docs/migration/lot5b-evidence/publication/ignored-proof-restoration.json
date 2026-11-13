@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.publication-ignored-proof-restoration.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T02:51:37.727168+00:00",
+  "source": {
+    "path": "docs/migration/lot5b-evidence/performance-integrated/aggregation-failure.log",
+    "bytes": 204711,
+    "sha256": "4c85f9d40eaa4fee7e239abf0073540b14f58988be6994a1d9d758020090dd54"
+  },
+  "restoredTo": "/workspace/sites/sra-lot5b-publication-20261111/.sites-checkout/docs/migration/lot5b-evidence/performance-integrated/aggregation-failure.log",
+  "reason": "Final verifier demanded the real strict refusal log in both checkouts. The original raw .log is ignored by Git and was not in the five frozen execution-input inventories copied during preparation.",
+  "sourceUnchanged": true,
+  "copiedByteIdentical": true,
+  "worktreeClean": true,
+  "additionalLosslessTransport": {
+    "path": "/workspace/sites/sra-lot5b-publication-artifacts-20261111/aggregation-failure.log.gz",
+    "bytes": 4031,
+    "sha256": "44b58442d7ba86037d8fac497e704087b0d727169bca0a0c41ea3d97c6628b69",
+    "restoredBytes": 204711,
+    "restoredSha256": "4c85f9d40eaa4fee7e239abf0073540b14f58988be6994a1d9d758020090dd54"
+  },
+  "retainedFailure": "final-source-build-verification.json",
+  "noNativeTestBuildOrTimingChanged": true
+}

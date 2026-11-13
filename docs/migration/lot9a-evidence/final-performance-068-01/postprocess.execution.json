@@ -1,0 +1,37 @@
+{
+  "schema": "logos-engine.lot9a.cost-analysis-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-12T15:42:14.572877+00:00",
+  "command": [
+    "python",
+    "-B",
+    "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/tools/final-cost/postprocess.py",
+    "docs/migration/lot9a-evidence/final-performance-068-01/contract.json"
+  ],
+  "timeoutSeconds": 390,
+  "contract": {
+    "path": "docs/migration/lot9a-evidence/final-performance-068-01/contract.json",
+    "bytes": 182234,
+    "sha256": "53058883838c3ac9d3c384db528bb687b6ecadf605f514682ecd7f4932776e6b"
+  },
+  "generator": {
+    "path": "docs/migration/lot9a-evidence/tools/final-cost/postprocess.py",
+    "bytes": 5810,
+    "sha256": "747c5509bfe491ed51607cd27b0cd86b94c69aa64a6167051c12ad3dadb18ead"
+  },
+  "nativeExecutionPerformed": false,
+  "measurementPerformed": false,
+  "globalLockAcquired": false,
+  "automaticRetry": false,
+  "finishedAt": "2026-11-12T15:42:15.043778+00:00",
+  "elapsedSeconds": 0.4693347819993505,
+  "exitCode": 0,
+  "error": null,
+  "childProcessReaped": true,
+  "generatorUnchanged": true,
+  "log": {
+    "path": "docs/migration/lot9a-evidence/final-performance-068-01/postprocess.execution.log.gz",
+    "bytes": 311,
+    "sha256": "3dec00dc2095a0bfb06ea63de7749b4533513cb6f20bc3cbb7c94e0ae4928506"
+  }
+}

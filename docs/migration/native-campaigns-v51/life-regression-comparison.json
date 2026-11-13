@@ -1,0 +1,3524 @@
+{
+  "schema": "logos-engine.v51.public-regression-comparison.v1",
+  "passed": true,
+  "checks": [
+    {
+      "name": "same declared game/target and both results passed",
+      "passed": true
+    },
+    {
+      "name": "same production budgets and original game asset provenance",
+      "passed": true
+    },
+    {
+      "name": "same complete initial public packet",
+      "passed": true
+    },
+    {
+      "name": "same commands, full returned animation packet hashes and primitive boundaries",
+      "passed": true
+    },
+    {
+      "name": "same selected source entries, acquired prefix lengths and observed solver projections",
+      "passed": true
+    },
+    {
+      "name": "same retained source-layer projections and labeled public submission receipts",
+      "passed": true
+    },
+    {
+      "name": "same bounded native predicate composition counts, survivors and reuse",
+      "passed": true
+    },
+    {
+      "name": "same source and preferred entry coordination with current guards",
+      "passed": true
+    },
+    {
+      "name": "same reduction geometry plan and step modes",
+      "passed": true
+    },
+    {
+      "name": "same complete trace plans and latest acquired trace payloads",
+      "passed": true
+    },
+    {
+      "name": "same acquired linked packet counts, complete latest payloads and complete plans",
+      "passed": true
+    },
+    {
+      "name": "same complete queued-field plans and every acquired model event",
+      "passed": true
+    },
+    {
+      "name": "same complete catalogue plans, latest payloads and every acquired catalogue or view event",
+      "passed": true
+    },
+    {
+      "name": "new field-service layers remain empty and never select the retained regression trajectory",
+      "passed": true
+    },
+    {
+      "name": "same complete material provider envelopes, every acquired receipt and independently reconstructed own layers",
+      "passed": true
+    },
+    {
+      "name": "same request outcomes and common caller counters",
+      "passed": true
+    },
+    {
+      "name": "same final public result and retained-session counters",
+      "passed": true
+    },
+    {
+      "name": "source frozen during both runs and no Python agent modules",
+      "passed": true
+    },
+    {
+      "name": "same retained mechanical-domain assessments",
+      "passed": true
+    }
+  ],
+  "independentlyRecomputedReferences": [
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 0,
+      "baseline": "5c9b297173c354c946d421c998cb9b38f6cabd04882ec013542366f331e3335e",
+      "current": "5c9b297173c354c946d421c998cb9b38f6cabd04882ec013542366f331e3335e",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 1,
+      "baseline": "f01fb444b02b5d01694dee73167fc851010b6fd96446b4cd08e13390ff7a58c9",
+      "current": "f01fb444b02b5d01694dee73167fc851010b6fd96446b4cd08e13390ff7a58c9",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 2,
+      "baseline": "67272dbe1b8badc79aed11842c94fa7802c8a6ac0e02fb241d9c31981684cd25",
+      "current": "67272dbe1b8badc79aed11842c94fa7802c8a6ac0e02fb241d9c31981684cd25",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 3,
+      "baseline": "459562d6ee2beb16df6a2dda8f3ae1a532b56b794204c3dbbf964ebefd23d518",
+      "current": "459562d6ee2beb16df6a2dda8f3ae1a532b56b794204c3dbbf964ebefd23d518",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 4,
+      "baseline": "34ec64398e4e1f52528cc7da1443d864d4c25fae5bfb7475563899906fb72955",
+      "current": "34ec64398e4e1f52528cc7da1443d864d4c25fae5bfb7475563899906fb72955",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 5,
+      "baseline": "bed67946af0bed2de72e153888cc236fc7928e057f4f76e6c7c133bc5c2b9d94",
+      "current": "bed67946af0bed2de72e153888cc236fc7928e057f4f76e6c7c133bc5c2b9d94",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 6,
+      "baseline": "567440b1035185188920d633394f8340b2e85dab305c8a589f19afe00b7b8ffc",
+      "current": "567440b1035185188920d633394f8340b2e85dab305c8a589f19afe00b7b8ffc",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 7,
+      "baseline": "20403372c5db7ef02d9c76f8d94b8d3c786fb96a3d4009a920521fcfd71f203f",
+      "current": "20403372c5db7ef02d9c76f8d94b8d3c786fb96a3d4009a920521fcfd71f203f",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 8,
+      "baseline": "470e84cd136a52faba3445a0f016099670582e19cd91fda28b4b98a58f9648bf",
+      "current": "470e84cd136a52faba3445a0f016099670582e19cd91fda28b4b98a58f9648bf",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 9,
+      "baseline": "fe04cec8a7949b44e2523a3dc5a475afbfe4f4bb3c84d6536d44a867a3603ea6",
+      "current": "fe04cec8a7949b44e2523a3dc5a475afbfe4f4bb3c84d6536d44a867a3603ea6",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 10,
+      "baseline": "3a3f118e80a5acefc15c93186612b86c14b26a4b63b89cccbf1268c7ea4129a9",
+      "current": "3a3f118e80a5acefc15c93186612b86c14b26a4b63b89cccbf1268c7ea4129a9",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 11,
+      "baseline": "e66b56b5324a307ed7adc7867cd1d9f0f70fad15823a46db61e4c0779fde583f",
+      "current": "e66b56b5324a307ed7adc7867cd1d9f0f70fad15823a46db61e4c0779fde583f",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 12,
+      "baseline": "9cf0321c97cd4ec754393e834b157de7e7cde599fe0974595ae4ffdba7d8ab3c",
+      "current": "9cf0321c97cd4ec754393e834b157de7e7cde599fe0974595ae4ffdba7d8ab3c",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:35",
+        "typed_carrier_access.py:41",
+        "typed_carrier_access.py:48"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 13,
+      "baseline": "59d9c785379267f0c6050485824545a7dfc0616f8a87549b869265ba6c62c94f",
+      "current": "9a9772a326f92dbbc90f66c4fd5904a8b084b8e75c13055e2ac576bf0a79c2c0",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:41"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 14,
+      "baseline": "0b446b60518b3c553455d152c1c2a6b20b8ed652da82afef41b177dd68e88b0c",
+      "current": "0b446b60518b3c553455d152c1c2a6b20b8ed652da82afef41b177dd68e88b0c",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 15,
+      "baseline": "e6a043398400623d1d31c55c03f9ac3eefa8fc87541d0ad361f2c34162d7712e",
+      "current": "e6a043398400623d1d31c55c03f9ac3eefa8fc87541d0ad361f2c34162d7712e",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 16,
+      "baseline": "32ef0cbee9899a1b5a8c42e448e575d852478fc10a9428d6e743137d9698757e",
+      "current": "8569be91e95601e3265ce5bcc1a47f68bfc07d9f9035de2a1d6fb223d81a8c5b",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:41"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 17,
+      "baseline": "56245e01455090460957700b9154c8c5d49de07f27fe16f6394d17a0efc81284",
+      "current": "56245e01455090460957700b9154c8c5d49de07f27fe16f6394d17a0efc81284",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:35",
+        "typed_carrier_access.py:59",
+        "typed_carrier_access.py:32",
+        "typed_carrier_access.py:41",
+        "typed_carrier_access.py:48"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 18,
+      "baseline": "e4fbda10066b0fbd991adc00bdcb8846035b7d9eb121d21e6ddd43a08857f054",
+      "current": "9dca34ffc2303215ce3521793e09972153dc942dd0c0f009372fe7695a98dd2c",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:41"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 19,
+      "baseline": "5a62e2412ae38e937ec67b167d6a5f33261e6e91e304f0fa0b7e26ce0ad0ddce",
+      "current": "5a62e2412ae38e937ec67b167d6a5f33261e6e91e304f0fa0b7e26ce0ad0ddce",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 20,
+      "baseline": "f0c1615d1b94fe961f625f762233ed882cd9000f6762d30533353a1cd2c0aee4",
+      "current": "f0c1615d1b94fe961f625f762233ed882cd9000f6762d30533353a1cd2c0aee4",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 21,
+      "baseline": "fac29c0c53137b37ae359661a6a5747d2cd272fda111b8d30f6775d9a217a0e3",
+      "current": "fac29c0c53137b37ae359661a6a5747d2cd272fda111b8d30f6775d9a217a0e3",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:35",
+        "typed_carrier_access.py:63",
+        "typed_carrier_access.py:32",
+        "typed_carrier_access.py:41",
+        "typed_carrier_access.py:48"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 22,
+      "baseline": "6d1af9c2a394c6a52985ccf30c96290c4095fc7a71344355915e2535c65a976d",
+      "current": "e8fb025327498ff34ee1c17b519ddb04a095edeb140ace16d764f72a01839509",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:57"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 23,
+      "baseline": "25d2c331e323419e87b17f0f3169d2f2c7820b7ebc6c6ceef850b6ce8b4c6cfa",
+      "current": "25d2c331e323419e87b17f0f3169d2f2c7820b7ebc6c6ceef850b6ce8b4c6cfa",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:57"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 24,
+      "baseline": "a9f5be882708591070d21faccbc91970f555185f2c1fdb24343a34de90371257",
+      "current": "111b967fcd2eef61c8c922d2a632d916233e6d351ee6ea463292efefbb1a6a79",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:41"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 25,
+      "baseline": "664d6d87ddaf19322a4664a510746af1994eb910a97384e1918817badb9d6f70",
+      "current": "886f83627645eb3a90c54a5e4f521aac4ee3cf3fa26ad1af46435b7ffb82178d",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 26,
+      "baseline": "45b92f251e3a9536617750f0cedc17f091c5eb0ef6ab33c316cb8d3245291a0d",
+      "current": "820b0ca12bc94bfa44186e9a65cf88fd96080b4fa1dda55b8cf5bfad16c681b8",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 27,
+      "baseline": "688f1dc8e840191981fc7addee57013b0e285e7177f7cac6419854d53b9072a0",
+      "current": "688f1dc8e840191981fc7addee57013b0e285e7177f7cac6419854d53b9072a0",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:35",
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 28,
+      "baseline": "de647af3209ef64d3174cc99983b38be9aa3395473e17d328f8dbc819f608517",
+      "current": "2c67520622abdd3cf8bb92444a73b72e6fa0cc57c26e6adc57ce8db35ef94430",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:21"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 29,
+      "baseline": "d32c058f2bb92aa018c30fc19a3ae48e59112d480b9191d63735d72f17e2f34f",
+      "current": "ea6a696d09e0be4d3de726471ecb839e5668f0b9b30dced1230af8ab6005de9a",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:21"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 30,
+      "baseline": "4c53814e3bac9cfb740d060013dbc88ee56da256790ad3678140d57309a24212",
+      "current": "4c53814e3bac9cfb740d060013dbc88ee56da256790ad3678140d57309a24212",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:28"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 31,
+      "baseline": "f2ad31bc876d5db03e9cd1d5f13b9f7f70bb86bb3230344d542f9a5e7b227f3d",
+      "current": "f2ad31bc876d5db03e9cd1d5f13b9f7f70bb86bb3230344d542f9a5e7b227f3d",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:28"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 32,
+      "baseline": "a4989311541b223af3e08b5f43e27b87d8c6fb4a945ce0a6f59f7381349f5a74",
+      "current": "a4989311541b223af3e08b5f43e27b87d8c6fb4a945ce0a6f59f7381349f5a74",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 33,
+      "baseline": "fc914b89a931a4a7424d9ce0592edd9acc3c34140cc2cfb8c3aca0a3115c5f01",
+      "current": "fc914b89a931a4a7424d9ce0592edd9acc3c34140cc2cfb8c3aca0a3115c5f01",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 34,
+      "baseline": "335785dfb0948cb4d5b0b761316e4199f0892739fc93689a2c7e163bfcfa3d68",
+      "current": "335785dfb0948cb4d5b0b761316e4199f0892739fc93689a2c7e163bfcfa3d68",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 35,
+      "baseline": "a15bd29f43b5f0254fe951862e23d5e97d6e35e7c8422e4532138ee5c6ef299b",
+      "current": "a15bd29f43b5f0254fe951862e23d5e97d6e35e7c8422e4532138ee5c6ef299b",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 36,
+      "baseline": "ae8630514f8c08b2d4f0c090953bd50227c70258b90cff03b1c4b7d7cf0d665c",
+      "current": "a0a41217edfa92329f2f638eeeb13f663fcc4fd648f50cf96956a5b24ee789b2",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 37,
+      "baseline": "281e45fb19126a7fd72d0087e223ab6e1a6ace2475dab6b54acc185384594840",
+      "current": "6761b4f4c6d152cb552d74a668c653372a147a2624bc1339a8fd3f2532a7a88b",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 38,
+      "baseline": "9919aaba205af3b2a120710c3193ea1cefede94a2dfd54573180568b4629ea67",
+      "current": "b24e68138e8c1297821f1bb7f94e86e526c140d2e68e1314cdbdd4412ff0c8f4",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 39,
+      "baseline": "13a34cbb674ceb6308c5bba2b6a4bd2eebda4eb71f124a80868d22800bb81c3a",
+      "current": "13a34cbb674ceb6308c5bba2b6a4bd2eebda4eb71f124a80868d22800bb81c3a",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 40,
+      "baseline": "a5711d943287e1396f317ee4081f9d89bacce3b6cc45068cdcafbff04cc5d88f",
+      "current": "f7317cf62cfcf2a4bb16000f8aab9f92d71f95fd1a895803e698b66cb9d380c0",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 41,
+      "baseline": "45e165b1548b18f88ec8433dc909a3ee68ba07a48c44456973740eecf7d017d5",
+      "current": "9500d991f871b44113d6de7c4e3201e3a0f90036753c3d6c4cd4c390146c715b",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 42,
+      "baseline": "4a21633d6c71786959a1ce8ddb8bf39c6ef80764c375e869c43a6d41ae0c9829",
+      "current": "89f205c817b73f9a5e6805fb0e008fab24374e35e342e17a7b1d92c881bc5662",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 43,
+      "baseline": "14048333521ab8ddab2628fc6e9a96edc1cc846f37bcbfbd53ae1a34bea664a9",
+      "current": "14048333521ab8ddab2628fc6e9a96edc1cc846f37bcbfbd53ae1a34bea664a9",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 44,
+      "baseline": "0580014210046388e002bef18eb540886bb696486aa9774f8df4118af0567f3f",
+      "current": "a71961933effcd97b029e159eea5ae646399018fc0ec6368d8aa211db9db0af6",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 45,
+      "baseline": "0fccc0eae58f30e770993c7872522ae425ed93ee90220d8dece04ee7d087f21a",
+      "current": "5e3eb165e566f3ab726169ee8f4d084c94ed4ee400ee810d95d9a4fbb1581ab0",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 46,
+      "baseline": "40f9473237b846fb6296ef7b057bf414e64c7471b4f2294d76ecd4f77d9ffdb2",
+      "current": "ac082ace56d064e68952ca9c779df38d15c082f461349e90d05c086179e7bbd6",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 47,
+      "baseline": "2e9d9f22415322078a80bbde01540bee890a60401a7642cc86d95f88d7fcc621",
+      "current": "2e9d9f22415322078a80bbde01540bee890a60401a7642cc86d95f88d7fcc621",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 48,
+      "baseline": "c4fe01e45a850c742e69b9749288820e071208e780c97f6a84055a9e6fc57a3d",
+      "current": "d11cab43b351ef9a6620f1659be30f8094b02739cd3f68764cc6935cdcfb52da",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 49,
+      "baseline": "5e660567ae4c9068093a98429bf37cb1d75050a2262bdee167b26aaba82101f6",
+      "current": "9addfd91d8969e7cef4bba4e3b0e21892e4810afedb7dbf5569fc868a21b87dc",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 50,
+      "baseline": "ecbf36312b2258269f667de52a0a73bb70f831854067b0f24d6930acb7c05d55",
+      "current": "b96c6b98e4093abee2b3201910d2a32ce15bcd06919aa9ded7e71e35c91a3842",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 51,
+      "baseline": "e39e08b3441b4a9c9c14b6a2b01c6aaae0305fe278de078270679870568be20d",
+      "current": "e39e08b3441b4a9c9c14b6a2b01c6aaae0305fe278de078270679870568be20d",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:35",
+        "typed_carrier_access.py:41",
+        "typed_carrier_access.py:48"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 52,
+      "baseline": "f7995045b1ca0c6620ec65a8a4b4db78ca7cad147d0ea2e36fee61fa7c9f529f",
+      "current": "d4d1dcbe2cf39f01b67f28f53cc61e66ccd25bd01afd4793579f02f2240b6ed4",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:41"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 53,
+      "baseline": "255945ce9f3bb3ce4341278d3479657e2bb9d467e67a31dd69268b360f0189f9",
+      "current": "255945ce9f3bb3ce4341278d3479657e2bb9d467e67a31dd69268b360f0189f9",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 54,
+      "baseline": "bb45fe041ab21809f8b06b5a327c7e36ecf77dbbda27422cc185c30751d810a8",
+      "current": "bb45fe041ab21809f8b06b5a327c7e36ecf77dbbda27422cc185c30751d810a8",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 55,
+      "baseline": "637458ce545806d46dcd61084d43ee5e544c0586d1b0e9f91b05b10abe7b0576",
+      "current": "637458ce545806d46dcd61084d43ee5e544c0586d1b0e9f91b05b10abe7b0576",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:35",
+        "typed_carrier_access.py:59",
+        "typed_carrier_access.py:32",
+        "typed_carrier_access.py:41",
+        "typed_carrier_access.py:48"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 56,
+      "baseline": "159040f1669463283dbc8deb7a21cbdd5fb06ca32c700ce842fb3d3465d2cfc2",
+      "current": "4520b67ca875172a612f49d4bb6145311852f24edacd710aed841e647835bbb8",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:41"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 57,
+      "baseline": "6ea95f9e5052930615a185c8f86168c5edd16a2771c96acdf8aa68507e6f532c",
+      "current": "6ea95f9e5052930615a185c8f86168c5edd16a2771c96acdf8aa68507e6f532c",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 58,
+      "baseline": "47cf1f3329da36abd6f28d3a8c3bfa110e318f88419a6ec741e76e25cfdf2e4f",
+      "current": "47cf1f3329da36abd6f28d3a8c3bfa110e318f88419a6ec741e76e25cfdf2e4f",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 59,
+      "baseline": "36d03f1ac2f29e3a40222dd03beaa2059699d013d19a3d62f2bf212a5c99c4d5",
+      "current": "c35c42b15a4c5fdc5a2acf265ea06a1ca454a1d421bbceadd02880564c407147",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:57"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 60,
+      "baseline": "f70c0267bc662cce8bf8ba4da9b307ce0dafd984751c1f678e2e0a0710babd4c",
+      "current": "f70c0267bc662cce8bf8ba4da9b307ce0dafd984751c1f678e2e0a0710babd4c",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:57"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 61,
+      "baseline": "d99cb2656e7e25a6dcc1794467d3a94fdf52186d9dddf1ca83f86fe633d58654",
+      "current": "d99cb2656e7e25a6dcc1794467d3a94fdf52186d9dddf1ca83f86fe633d58654",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:63",
+        "typed_carrier_access.py:29",
+        "typed_carrier_access.py:32",
+        "typed_carrier_access.py:41",
+        "typed_carrier_access.py:48"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 62,
+      "baseline": "6d878c15e24b32ad10569b247e5d44d7d81572c5fa3894d6bcac665f5127d0ea",
+      "current": "c604ec75efbfb0f648f3a0bce727cff8eea33bd01f846ce45b8e8e4fc1ac213a",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:41"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 63,
+      "baseline": "dba50c09a2324bbc13289e606020fa750e59fa2f5267eed5d7212d59cfc3d4bd",
+      "current": "1a8407ea414d5d565b96492c51c3d62d7df57a71dd6132321ec28e898dd222e9",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 64,
+      "baseline": "df9b478f15c4a9b60de1e6a159b9f39fd7e6a4364cba9803e6ba466127b48705",
+      "current": "c1bec74b2efd623fd6a3b10f516829759da07170188fc26f1f97409075d3fcec",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 65,
+      "baseline": "5e573b34d5217d22b5405b8c5cdd0a69269745f60c05e1400e7b61e429414d61",
+      "current": "dcffba63f2dfff0be77696a26e4b821fb8a4a57716b828204de2848fa5be8687",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:21"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 66,
+      "baseline": "91d53890fe7115d9ed3bb3b9ab5faba76008561691b86243406302a514aad7ca",
+      "current": "a1ff0abcd96b278c5fc610f7d813c984a65e80dc3a4ad2b0e38c2e90f11cc9af",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:21"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 67,
+      "baseline": "6ffbe12dad97c84ac5aed8311563af34647c92d6c8321580bd2ec71c737aeb59",
+      "current": "6ffbe12dad97c84ac5aed8311563af34647c92d6c8321580bd2ec71c737aeb59",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:28"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 68,
+      "baseline": "c2ade2dd556358d659036adb46c3b64f87c83ca0344a91b634f70cc8eebf8581",
+      "current": "c2ade2dd556358d659036adb46c3b64f87c83ca0344a91b634f70cc8eebf8581",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:28"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 69,
+      "baseline": "74c0c78d531d3b38eda003c4e3ca80d6d2591f977b331c4601f0a9fedbc311c5",
+      "current": "74c0c78d531d3b38eda003c4e3ca80d6d2591f977b331c4601f0a9fedbc311c5",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 70,
+      "baseline": "3e00e8bdecae99a6e88b60707e5f7c9486759fefa222c10d5b25d23246950268",
+      "current": "1d5bc5ca5541762925e259d8f24aea3831b218d62bfbdfb1b1a2431161a25d22",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 71,
+      "baseline": "7d9a4d642f394efc831dba7a81e9cb5c8e6416bec707eef8f5848792dc6510e9",
+      "current": "d82438fc4bfbae9eea3ff22c6d85bfef2e9fb75a9b597bc51645c5e53cdba8c5",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 72,
+      "baseline": "dc632b3e0e2a92c134f25c91cf22f21c320062511a83edaf0827824985fb79c8",
+      "current": "273d6b1e9837c9cab6000aaf62dc84fb40dc918acd59e6da4eed3b336fa3b3e5",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 73,
+      "baseline": "5c6e6f32b8c72a1ca0b25c6f303fb41ef1c1d6bd9a63800d35e1c18d22dc6934",
+      "current": "5c6e6f32b8c72a1ca0b25c6f303fb41ef1c1d6bd9a63800d35e1c18d22dc6934",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 74,
+      "baseline": "947673b619edbfafdeb2ab88a515da811511b52536c48df3bf0627338fa8acbc",
+      "current": "29fc2f511799a10a656e338bc82490e9926ec91b1c37a514fd82908b65937b4a",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 75,
+      "baseline": "d3e6919a072f098edf57af082ef2a96949cdb37a432570ab107d9ee1a036063d",
+      "current": "d1ff0d120b04ca6bfdebd5d3e143713d514c47af49e070b282e7459f88c721b6",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 76,
+      "baseline": "e8ebc3a8e9490c78d8b688b830738cc885b42a59cfc2dff44caeb370b3cf13c4",
+      "current": "bbc3139f6623238e783c2ee38520fab8ef21b32502968515ff70cf9bc2678f5c",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 77,
+      "baseline": "5ea8fd0bde0792e4f8e9356cb7dd08e92ec97d180f74373f2e7803b5cafd50a6",
+      "current": "5ea8fd0bde0792e4f8e9356cb7dd08e92ec97d180f74373f2e7803b5cafd50a6",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 78,
+      "baseline": "5889295fa208a411d4253a06c8f69b996d6bd56f85f5e52fbd07afabc231e247",
+      "current": "db716c3894baf82e0d670e47bb53c9b2f4596f9df5445f4df0b8936e35058bb5",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 79,
+      "baseline": "fa1d977101797e7c1d1a288718266dffa5ee58fc6c85463f4ba1b5bedad9ffc2",
+      "current": "596140a94b8ae1c3a47dfbd7f38bbcd99c5b4bcc4294cc94224a0368cc0d3ff6",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 80,
+      "baseline": "90774196de6c109ea42af7e85d38dc88f17f6847722763823876274c0d4b1bb0",
+      "current": "6e8175f372502134a3038fd83225c1fde6eb2af869c44db3ce2537d7f818b15b",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 81,
+      "baseline": "ae4db12bb1a067642519ee0abe66458dac3144c688020644d9976ce03bd2254b",
+      "current": "ae4db12bb1a067642519ee0abe66458dac3144c688020644d9976ce03bd2254b",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 82,
+      "baseline": "cceba9e2da25e280011f65607c617c5667457e09b6090e20c90ec470cfb564b8",
+      "current": "07a3c43e5935b07059a39ead94c8329ac75e045a232faf8e4cdf8cbb4c3bc1f8",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 83,
+      "baseline": "8b1bb2c248c5e8495f97787e7799342613b2c12fdd2b14228b84b23cc6ba6cb2",
+      "current": "772dd495762c9d13acb270f4217d545ef5f19fa102de559d0897a42ceb242aea",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 84,
+      "baseline": "451ca65b54ab6ffb5b78640b79d285f9f5b5ee06e8c1276e4e4349a08fc7d67c",
+      "current": "0903a6850034e1ecd07c81228fa3af91997ad089d596162b1cfb7927e7dfb9ba",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 85,
+      "baseline": "c68d740a24f0e6a5d0598c94ac8cbda54bf40e3757da4e3881bfeae965309c92",
+      "current": "c68d740a24f0e6a5d0598c94ac8cbda54bf40e3757da4e3881bfeae965309c92",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17",
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 86,
+      "baseline": "46736e029032e3a27713dd8b030616d37bc66aa6c74cb36ee4f1d3e3c1ca93c0",
+      "current": "46736e029032e3a27713dd8b030616d37bc66aa6c74cb36ee4f1d3e3c1ca93c0",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17",
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 87,
+      "baseline": "a97e385ed4db3854b853556f771c6573d7cad203643f2dcea7f74de771ff195b",
+      "current": "a97e385ed4db3854b853556f771c6573d7cad203643f2dcea7f74de771ff195b",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17",
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 88,
+      "baseline": "03c53103e76955111cc6da4b484717abd955150045c5c57a033689fc9c8763a1",
+      "current": "03c53103e76955111cc6da4b484717abd955150045c5c57a033689fc9c8763a1",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17",
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 89,
+      "baseline": "ccd76cac3da21e4bea4770e0884d2eeaa8c891cba68a22c90c0b7ac663a2123a",
+      "current": "ccd76cac3da21e4bea4770e0884d2eeaa8c891cba68a22c90c0b7ac663a2123a",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17",
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 90,
+      "baseline": "149719f0c33742099856edc2d9ae506ae0c9a8ec2e1fe5840a7da3625cab87fc",
+      "current": "149719f0c33742099856edc2d9ae506ae0c9a8ec2e1fe5840a7da3625cab87fc",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 91,
+      "baseline": "d31fbbed48f811ba2dfd42fbacc03a5405b4ed86a53a683e96ce56eb99ba48c7",
+      "current": "d31fbbed48f811ba2dfd42fbacc03a5405b4ed86a53a683e96ce56eb99ba48c7",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 92,
+      "baseline": "cb4720c72671e6619ebd21db78b1e78b74595e9d5a3d2d0d12da8fb530992d4b",
+      "current": "cb4720c72671e6619ebd21db78b1e78b74595e9d5a3d2d0d12da8fb530992d4b",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 93,
+      "baseline": "a1be90bff9a2d20e62c87b71c8284509a5e1e4bd205ca265a22f19b683d6681e",
+      "current": "a1be90bff9a2d20e62c87b71c8284509a5e1e4bd205ca265a22f19b683d6681e",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 94,
+      "baseline": "c33e8922bd90715f9dd88caf63bf6987d8b8401b1f5febae2de587990d9e25ca",
+      "current": "c33e8922bd90715f9dd88caf63bf6987d8b8401b1f5febae2de587990d9e25ca",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 95,
+      "baseline": "ee0be61a3d10a71f7c339878e3790fc12b2661bfcf81fd4d4770880da5400e08",
+      "current": "ee0be61a3d10a71f7c339878e3790fc12b2661bfcf81fd4d4770880da5400e08",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 96,
+      "baseline": "f9b43f470690bd25ce25871d945b96129454e028ec91beac46625115ad778b7b",
+      "current": "f9b43f470690bd25ce25871d945b96129454e028ec91beac46625115ad778b7b",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 97,
+      "baseline": "e3f7d761a9733c80177f1b272722b7c354161888c45d14db30347de9c5b296b4",
+      "current": "e3f7d761a9733c80177f1b272722b7c354161888c45d14db30347de9c5b296b4",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 98,
+      "baseline": "27cdbbc006ca09a051f0a3dc55e7939dc306e4c142ddcece05c5c014216ee367",
+      "current": "27cdbbc006ca09a051f0a3dc55e7939dc306e4c142ddcece05c5c014216ee367",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 99,
+      "baseline": "f0c3bf586c728a460af0c181997987674e1cf3200f2c474be6760a3c5efe8be2",
+      "current": "f0c3bf586c728a460af0c181997987674e1cf3200f2c474be6760a3c5efe8be2",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17",
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 100,
+      "baseline": "6f712280273cac494d0dcc14d9b4ae41f016f4dd4adf24625965d817cda9edf1",
+      "current": "6f712280273cac494d0dcc14d9b4ae41f016f4dd4adf24625965d817cda9edf1",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 101,
+      "baseline": "fbc2faf1f5d60ba6bc24773e207a63ace0ffba71868448f2fbe79f033f35482e",
+      "current": "fbc2faf1f5d60ba6bc24773e207a63ace0ffba71868448f2fbe79f033f35482e",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17",
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 102,
+      "baseline": "679183c6a46a29e5b26e2fcf03796cee8fcc663a94deb3b01187a44277f5d159",
+      "current": "679183c6a46a29e5b26e2fcf03796cee8fcc663a94deb3b01187a44277f5d159",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17",
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 103,
+      "baseline": "9cbcf66ba7f8b97378d7d3c7aef33549dc687ef6badba0603fc2a6d74ad48792",
+      "current": "9cbcf66ba7f8b97378d7d3c7aef33549dc687ef6badba0603fc2a6d74ad48792",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17",
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 104,
+      "baseline": "e66cf670f273ac4b2ba1a69a2c6dc402d01250667f84c5113f19802408a0eea2",
+      "current": "e66cf670f273ac4b2ba1a69a2c6dc402d01250667f84c5113f19802408a0eea2",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17",
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 105,
+      "baseline": "955f344805936739ac24ef5ab82b63b319257e9424bf905ba3d26056220a4142",
+      "current": "955f344805936739ac24ef5ab82b63b319257e9424bf905ba3d26056220a4142",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17",
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 106,
+      "baseline": "c62b9c8893b4071fcd5c8f54a63ca15a8c9ffc22d9335fd238248ec2be92a497",
+      "current": "c62b9c8893b4071fcd5c8f54a63ca15a8c9ffc22d9335fd238248ec2be92a497",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:17",
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 107,
+      "baseline": "5f75430506ac5cff2aeb35e7a5d67d8dd14beecb2195c445fcca12e1c4cb89ea",
+      "current": "5f75430506ac5cff2aeb35e7a5d67d8dd14beecb2195c445fcca12e1c4cb89ea",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 108,
+      "baseline": "987f86fb2338de9e37dcc9986e16b2460c9947819deb194d0e3d6881fbb8eaa4",
+      "current": "987f86fb2338de9e37dcc9986e16b2460c9947819deb194d0e3d6881fbb8eaa4",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 109,
+      "baseline": "ab42e8118be8a11e87bb3d44ca2eed1513b97fc1898f628019abc59b5c599b56",
+      "current": "ab42e8118be8a11e87bb3d44ca2eed1513b97fc1898f628019abc59b5c599b56",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 110,
+      "baseline": "1a6e3c15f7c706be22c121661506cc6cf5a883702ddd51919b3956b401017ed2",
+      "current": "1a6e3c15f7c706be22c121661506cc6cf5a883702ddd51919b3956b401017ed2",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 111,
+      "baseline": "6503700ce136a4aed314779e60b0a47af0126294478bc03981ec7ccfc599d5fc",
+      "current": "6503700ce136a4aed314779e60b0a47af0126294478bc03981ec7ccfc599d5fc",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:35",
+        "typed_carrier_access.py:41",
+        "typed_carrier_access.py:48"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 112,
+      "baseline": "07957b2e2ab6126f84178107a90c80f9f174a6ee5b97d832d855eb6e2c667ca4",
+      "current": "07957b2e2ab6126f84178107a90c80f9f174a6ee5b97d832d855eb6e2c667ca4",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 113,
+      "baseline": "c3614d05b5de179ebf53c5e02283184a55fad86a6e2c69e618349dc57d26d8fd",
+      "current": "c3614d05b5de179ebf53c5e02283184a55fad86a6e2c69e618349dc57d26d8fd",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 114,
+      "baseline": "c13fee55eee3fcb3cf386ba13592e00ed07fa771e05272b0bc6822bc322c9dc9",
+      "current": "c13fee55eee3fcb3cf386ba13592e00ed07fa771e05272b0bc6822bc322c9dc9",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 115,
+      "baseline": "60c71fc042d769380156ce78d28da21e3393e9956953f808429d3aa83b2aa65b",
+      "current": "60c71fc042d769380156ce78d28da21e3393e9956953f808429d3aa83b2aa65b",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 116,
+      "baseline": "d62f6c863ff93726d613b28d5a4e030798adad3cc24809e8e4d31541ea55729f",
+      "current": "d62f6c863ff93726d613b28d5a4e030798adad3cc24809e8e4d31541ea55729f",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 117,
+      "baseline": "70c4cbde3b18f0b79175c25b56098ecbaea493110614c0af324143f3cf9cfc2d",
+      "current": "70c4cbde3b18f0b79175c25b56098ecbaea493110614c0af324143f3cf9cfc2d",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 118,
+      "baseline": "2d462b4c5ab60b34b11ab9014c1ef8f1d80807d58dcf9ac9ba88764005cfc195",
+      "current": "2d462b4c5ab60b34b11ab9014c1ef8f1d80807d58dcf9ac9ba88764005cfc195",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 119,
+      "baseline": "5593f690700de1f396e3d8b25392206bacceaca7b9431323912227989a438bb5",
+      "current": "5593f690700de1f396e3d8b25392206bacceaca7b9431323912227989a438bb5",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 120,
+      "baseline": "e762ed8a8aa2eda5087b899e0b18e7f2ce884fc4f70eeedaf3fff8e15ca0e00a",
+      "current": "e762ed8a8aa2eda5087b899e0b18e7f2ce884fc4f70eeedaf3fff8e15ca0e00a",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 121,
+      "baseline": "930d57f6cd31b773b283ce845c24871c8e2b58c9c02fac84a32d7e3c2f62223b",
+      "current": "930d57f6cd31b773b283ce845c24871c8e2b58c9c02fac84a32d7e3c2f62223b",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 122,
+      "baseline": "7c03c574fda9d3f4e1db1d3fe0910254aad10742e1c2917ff6024cdfdd7def58",
+      "current": "7c03c574fda9d3f4e1db1d3fe0910254aad10742e1c2917ff6024cdfdd7def58",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 123,
+      "baseline": "999bbd22e69bdc497f67e4f7ad3a26e624d7e766793a6eceef89b96045e46f35",
+      "current": "999bbd22e69bdc497f67e4f7ad3a26e624d7e766793a6eceef89b96045e46f35",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 124,
+      "baseline": "c1aee9e5347c869c75c2819276ea02a914cc5ff75b51d41b4c780c3adcaa3a1a",
+      "current": "c1aee9e5347c869c75c2819276ea02a914cc5ff75b51d41b4c780c3adcaa3a1a",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 125,
+      "baseline": "db1c42cbea74992c7aaf375e7f053829e133d8a1b2761b4c790cbe3f5e1d6fb0",
+      "current": "db1c42cbea74992c7aaf375e7f053829e133d8a1b2761b4c790cbe3f5e1d6fb0",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 126,
+      "baseline": "3d151f029aca3a883d5e378eaf1c3d3a108d979e2b83423ddbfcceb971babf28",
+      "current": "3d151f029aca3a883d5e378eaf1c3d3a108d979e2b83423ddbfcceb971babf28",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 127,
+      "baseline": "fa689cd6b2422010a896d8d84871809d7dcc2b91fbe8e6fcb1d5692f45fb1a5f",
+      "current": "fa689cd6b2422010a896d8d84871809d7dcc2b91fbe8e6fcb1d5692f45fb1a5f",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 128,
+      "baseline": "6016d0380b115c23070965a920378e8a16c8aa77c1e831923c55a0def2dc95e7",
+      "current": "16862af35b02830a359895157b529c4c79491e7bd3a5e592bb928dd5315f267d",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:41"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 129,
+      "baseline": "d9312570c4f1833b3aebe281ac1c951d49e979e12e06f33199970ed0dfef6093",
+      "current": "d9312570c4f1833b3aebe281ac1c951d49e979e12e06f33199970ed0dfef6093",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 130,
+      "baseline": "c6c5db6442d303934a49e90b3e10e609e7150b2feca6e8f6aa397fa8a8ac72e1",
+      "current": "c6c5db6442d303934a49e90b3e10e609e7150b2feca6e8f6aa397fa8a8ac72e1",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 131,
+      "baseline": "b628647eae98535b929797aa8aa5b2180ade5004a5e5091d080eec8a1571a2d4",
+      "current": "893866edbc04cfefd8354f2d028d35104479335ec0ac37b88b642a8f310342fd",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:41"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 132,
+      "baseline": "06a7719fa5f56ff250deb2b51d0f8f1ed93dbbf3444861ef959400d5d07f1472",
+      "current": "06a7719fa5f56ff250deb2b51d0f8f1ed93dbbf3444861ef959400d5d07f1472",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:35",
+        "typed_carrier_access.py:59",
+        "typed_carrier_access.py:32",
+        "typed_carrier_access.py:41",
+        "typed_carrier_access.py:48"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 133,
+      "baseline": "7ededf525e1f3b5c2aae71d5fe1ece8af55b1f2ce1e78a8c24d38034b27ed587",
+      "current": "a6cef571b5db2245e67d663751a0d92b27bf847c665dc00034735f0bb597802a",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:41"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 134,
+      "baseline": "35d43df5d95b8c4fc10dc232ec6e58abdd856e74732928ac430ce3db2d7783a5",
+      "current": "35d43df5d95b8c4fc10dc232ec6e58abdd856e74732928ac430ce3db2d7783a5",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 135,
+      "baseline": "f524cd8fcdd6212670278d192b2fd20c474eb6b6e8e981a62ae3d8f3e3325d85",
+      "current": "f524cd8fcdd6212670278d192b2fd20c474eb6b6e8e981a62ae3d8f3e3325d85",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 136,
+      "baseline": "9867cb552f5725d59d01c0f1905cdbd40ae4d48859cd91197bac9c1eb94ab0a7",
+      "current": "9867cb552f5725d59d01c0f1905cdbd40ae4d48859cd91197bac9c1eb94ab0a7",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:35",
+        "typed_carrier_access.py:63",
+        "typed_carrier_access.py:32",
+        "typed_carrier_access.py:41",
+        "typed_carrier_access.py:48"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 137,
+      "baseline": "68516eb28d3a934e63479f0591fe4c38a7490bc3fe8ce0dab3ebcfe0f78104bd",
+      "current": "0730623df37bb2e6a34137d26fd98e6eb235ed7cd06cf2921b2b14d40446053b",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:57"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 138,
+      "baseline": "cbd5d5eb2ef8c45da839c90143cf74343f7f020c031479be4fadacb6b604b43d",
+      "current": "cbd5d5eb2ef8c45da839c90143cf74343f7f020c031479be4fadacb6b604b43d",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:57"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 139,
+      "baseline": "eecf6c47b8f43077f22d6074678940c59ae0cc0089fd324b7dc5f5434225e6be",
+      "current": "92d9b584beb8b135b4adf8d8d0f20cf52a47144eb57b91434c46221312ee2e26",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:41"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 140,
+      "baseline": "5dab8a6ec2110589badb5a75edd43f44567a38854254b902211f29df72314411",
+      "current": "c5a9705f5b64cac58838160592ddb04d6eb0d58e2ffad3271a1bcb4b2115825d",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 141,
+      "baseline": "6b35bf2bb7d0f8225c4ccee38cb606442c0ad8e1e5d55af466f0d67d109748c1",
+      "current": "2e0b07fc4b92050260166d95f32367051f17f6554adac7cddd18582a69883d5b",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 142,
+      "baseline": "fbdb1aba2e8ab3430bdf6d134f1c751abb904597dacf89892dac696874d9b8c2",
+      "current": "fbdb1aba2e8ab3430bdf6d134f1c751abb904597dacf89892dac696874d9b8c2",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:35",
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 143,
+      "baseline": "15149a135b923b66f967f9c8dc7c8d29a3d80e58ae2c05d300151b9f7a17c67f",
+      "current": "01c538801144fa0a25244446b7e0a8278d019e0099177408c550cae727edec96",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:21"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 144,
+      "baseline": "b4b3f315f7df8b938f0f92dde95cd1c0224ea873345f1001de44cb670d316bea",
+      "current": "9f80d83b5c89f543cfd991254980858e2d92cf05385b816b1087b40b117588be",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:21"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 145,
+      "baseline": "f0de143e9b7359de2c5ad87787bd7896f75d41d49d8fd9bc97c55d48449486ea",
+      "current": "51bb9e6080a152857aac1b4e7f1d45bc3c4fe8b8a86167287a6cf077046d5a61",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 146,
+      "baseline": "2dad21a6ccf6bc0f3b632b687d29500b2d3b05349454a2d8f45f41385ba66779",
+      "current": "0cb53a4a52ebab02dbf800e0cc7c111749d7319fca01358b36ba75ab7f041fe3",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 147,
+      "baseline": "57709e5edd5cf73f2f011f2cbbd17b31d49a7c9318f1c41983c72cd28d0c96d5",
+      "current": "c2a42130d5f514b89b014af2092ddce038eb1bee4b79c7a7849bbd3453c373a6",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 148,
+      "baseline": "c4d26cd223b4b73a66e9fe774fe9b199ce2bd4e6379e41b25c78d6f4d444f0b9",
+      "current": "c4d26cd223b4b73a66e9fe774fe9b199ce2bd4e6379e41b25c78d6f4d444f0b9",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 149,
+      "baseline": "592b80e8aee324c016411774f45f6c9050402fe90376d75a8102a17753af0a5c",
+      "current": "fb3cdb0d911b3618f71192b4d986f314229239be7de5089abd66a0593281d8fb",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 150,
+      "baseline": "11b33f05961023d7262b9045623ba255f8b3357af5dd62c3f74b83e972d03daa",
+      "current": "dcc50bf75fe30a6f3adfe0d8ef35e67efe6348b0f6967e19e207f9466546ce53",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 151,
+      "baseline": "ab5a46b58676725e2b815dd27d125ddb1dd9f586188654cc3065fc1191c9fff5",
+      "current": "c801e31703d30f244814c2ed82744d229f58afacd04935fb5f7b5f2ff6b37708",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 152,
+      "baseline": "dd61abeb389388da4e23475af0bb49546904096a659fedce2536a3803c9fab0e",
+      "current": "dd61abeb389388da4e23475af0bb49546904096a659fedce2536a3803c9fab0e",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 153,
+      "baseline": "f1cf9c89e4b447493cf75dabe2e3524afee2677345ee34cf098ab438e0051910",
+      "current": "48a619da33b905271d12a3b45b322430e3b7bf0acbf6ed7e26ce498bd9e88459",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 154,
+      "baseline": "c459e5a37433a718fdeb688315de21ae259717c8535d2fcb399258c235e5eee1",
+      "current": "23a399a7a082a07008921edf130b26e82115668e7c7ddf443a4480c0e7dbab65",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 155,
+      "baseline": "e4f60db5dcfa012e859a8081d30dda04c1b429f03c0fc1faea7a691c41119a25",
+      "current": "d453ca4d76670694ed71f510e655dd5194b1577636a11b2e64eb711a86195f9f",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 156,
+      "baseline": "4e30bc8e7c1ed1467cf01c94429fd9e8c79d118c819e7df1511b36655fe6c789",
+      "current": "4e30bc8e7c1ed1467cf01c94429fd9e8c79d118c819e7df1511b36655fe6c789",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 157,
+      "baseline": "9be366d02648645dc8e94e7a492ea07132856f2692b2da964ef06a3c0df4b1a6",
+      "current": "e72efbf1345d6d5ff5bc2fceb5092559e7f53c48b784148c6514577ad70758ff",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 158,
+      "baseline": "ddb616281b0a9d73b2e934c6ee47e2915fd14e06643f0987604fd10d90a434b2",
+      "current": "c4a7ca63d64ebf7851283c664ea519b182fe94311b89c5557ea9ef3471dd0d70",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 159,
+      "baseline": "ec38c666d7f40cf78cbf70bcf923d926d47d4134704943c84192a784f64e4ed9",
+      "current": "755d1db4b93442341a8832655edd2e51ec70140ca545cc04d99bcfaeb100a2ba",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 160,
+      "baseline": "38c44a172a8a8cb5c8e928f989ddf14715c01d798b19c0ff078e43568f69642f",
+      "current": "38c44a172a8a8cb5c8e928f989ddf14715c01d798b19c0ff078e43568f69642f",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:35",
+        "typed_carrier_access.py:41",
+        "typed_carrier_access.py:48"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 161,
+      "baseline": "ff7ab6685603f68dde3c41f499f0b1ed1eea4a2a450d38b870696c402b3ab3e9",
+      "current": "2f19d68ccdf628fa2d7e0d73123c06c7905b6b03719fbe54936b58d1ea450632",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:41"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 162,
+      "baseline": "82e3a3cae9b0211e9c444eb65ace9e47430a284ed6619f8436316b72e1d62a61",
+      "current": "82e3a3cae9b0211e9c444eb65ace9e47430a284ed6619f8436316b72e1d62a61",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 163,
+      "baseline": "0bd8462313d07b2ef711abe449d4a2acac03d637855c1a5c122dd44d858c9a71",
+      "current": "0bd8462313d07b2ef711abe449d4a2acac03d637855c1a5c122dd44d858c9a71",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 164,
+      "baseline": "1229d6fe3442606d3453f2ab9b8fbaedc97703266e4e2229e52872bf70af6645",
+      "current": "1229d6fe3442606d3453f2ab9b8fbaedc97703266e4e2229e52872bf70af6645",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:35",
+        "typed_carrier_access.py:59",
+        "typed_carrier_access.py:32",
+        "typed_carrier_access.py:41",
+        "typed_carrier_access.py:48"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 165,
+      "baseline": "94ad03d644305e67b7be0e459ee8005322cf10fb869ba97f9bdae4a2f94f1e32",
+      "current": "8f44bed4975c3a82151fd65e78ab16bdcbf99cfb9c7f13544604527a3846e1cb",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:41"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 166,
+      "baseline": "e4274bfff3893c45386540d19e72703d3eec511b728cffa2419979de59c6f523",
+      "current": "e4274bfff3893c45386540d19e72703d3eec511b728cffa2419979de59c6f523",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 167,
+      "baseline": "695ce5d24cdfbd6391cd790e7fea34735728fb8f291957f2dba0ccce868a8223",
+      "current": "695ce5d24cdfbd6391cd790e7fea34735728fb8f291957f2dba0ccce868a8223",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 168,
+      "baseline": "5b4e442ddf7bbc9be5f4d14067e9d655277aefb27d36fe7d6acbd85af8915326",
+      "current": "dda75ce408029b74c2cbf7dc4847a8388495f26a9e9b7e2256ff65a0a0802a6b",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:57"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 169,
+      "baseline": "92178c3950288203dacbe9dcf58bec206ada1203ffbd6c2f707da61e1b7033c8",
+      "current": "92178c3950288203dacbe9dcf58bec206ada1203ffbd6c2f707da61e1b7033c8",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:57"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 170,
+      "baseline": "114dd06ed3779bb4595803abd1a249b27765c582a6c6d34fcb4456ff50b26b87",
+      "current": "114dd06ed3779bb4595803abd1a249b27765c582a6c6d34fcb4456ff50b26b87",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:63",
+        "typed_carrier_access.py:29",
+        "typed_carrier_access.py:32",
+        "typed_carrier_access.py:41",
+        "typed_carrier_access.py:48"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 171,
+      "baseline": "4bfc7450c367bd5776ad1f8bc6a4d9d3eed1d0c3c6b6178656fb4c65f93c3b6e",
+      "current": "f0eada0a6b4e7a6e34877be35054f386535d321695bdfba089d967ab0e681dcd",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:41"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 172,
+      "baseline": "b2ec76379862fcc20a147bc266c7b3ca92441bff2e0cc1bf6dadfe7507937813",
+      "current": "6e39f3b46912ef41325bcb07b002ca14c2f0d1a8a1b6b8a3c65ad507bab2d655",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 173,
+      "baseline": "cbc60f19a23cb93847fbe2869e2d86b52a586fecebdbccb725a12d824f2986cb",
+      "current": "ce76d8d5f0031ed1a776418d9f94ed8e1867a2e6945efc7f5d2f255d2fd21fbe",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 174,
+      "baseline": "13f3a4d52265dfa23f3468092b42980d7ad5c3750278493fd7a7e115ed5d0ac0",
+      "current": "e2801411407a9792f8142aae649e2fdea44732ef627e36e54064137fdb896fb0",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:21"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 175,
+      "baseline": "440adc0c6969de28fd0c5a80584205a1b8154135a460513ead280588aec558b7",
+      "current": "c17bbca2eafba8e202597713680c95ed03f911b1b064330d7231b60adeb7437a",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:21"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 176,
+      "baseline": "81efceafb3cd43162d824151ea3e0ac30c232fe61b80a2a7fc5c235ed32c8390",
+      "current": "81efceafb3cd43162d824151ea3e0ac30c232fe61b80a2a7fc5c235ed32c8390",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 177,
+      "baseline": "24b3ee722e6d15afcb1f62a66693a214ddeaa339c14cc782351788d5ddfa745b",
+      "current": "48a48ed8506fe5b87977424ad2be51870fc4caa3530afbfe29fd63d5b24649e5",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 178,
+      "baseline": "84d117f51e7b1d020eb633a31d7d9a0a6de0fba60c36c8b6886fe7ea73061c94",
+      "current": "3c09eabb5ce559815fed5baf8f5fc1e3cb90d15e5a703af22d321826837b0b5a",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 179,
+      "baseline": "bacec29c208b44792a4d9177ffb250db2cf0b2261d6d29290f8bd4faa7735636",
+      "current": "67521e7f0f954570a7fa511340b2c30ed049e363f2d9cd88ebe00dd7a955b161",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 180,
+      "baseline": "97ebe4b6c997c9178c836130128cd8dca2ac4fb1ed4a084083f7a445b16a4a59",
+      "current": "97ebe4b6c997c9178c836130128cd8dca2ac4fb1ed4a084083f7a445b16a4a59",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 181,
+      "baseline": "c0a16dd2e46dbaf7e7b1d53ca1572ea6c9917c891e7bd33532b13a6c30b98eca",
+      "current": "d5a593b171cc3d923ef24806fe35c6760aede015ef4379f8504eb2fc56233eb4",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 182,
+      "baseline": "a21a3ad5acfd60db901a03f8005e3d767e44bd28b5a6e520284b03f967faa5a3",
+      "current": "a1b3c2c652d45e3c85c274b89bc0fdb76a890daf437b100c2519f9365c2b303e",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 183,
+      "baseline": "f4a3b2227784a5258e3f1415565dbb8b8c359b52dd220a79b4e4f3d755d311f0",
+      "current": "a42b32fb884e353f110badcdd672ea6cf50414ec33b5ee023399bfd879da49d1",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 184,
+      "baseline": "307f3787470c7c66762c42d11ab9472dd43f0f8c9920e5e68d1da9e5cc3cd251",
+      "current": "307f3787470c7c66762c42d11ab9472dd43f0f8c9920e5e68d1da9e5cc3cd251",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 185,
+      "baseline": "e0821a78dbdb84e1f83b2439ea8c56125dc85c0d038a63dd95594fbfe135f937",
+      "current": "904f606f896c311a07486bf9a0c8f9acd27dd2deb826d5edeae83db9f982fabd",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 186,
+      "baseline": "4cdb7d3905784257fb27dd348824a5421f8b7e1510906248ff83723d71d22c48",
+      "current": "4e726d56f58113bf1b37c86640bc95ead0ec8424c6c5ef20625dff7435f6e604",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 187,
+      "baseline": "441645f3ce505df4f851677ea42f579e512ea73940eaaa9b1c1cd53dab63958d",
+      "current": "630bde217c137b17421975be9c88f22a491c8ec68d95f738e8af9b66a0d04717",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 188,
+      "baseline": "bd3a1c3d8ba1527bc7da042d57c4fc170eeac9b7e562a6f901f6e6854f312cc2",
+      "current": "bd3a1c3d8ba1527bc7da042d57c4fc170eeac9b7e562a6f901f6e6854f312cc2",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 189,
+      "baseline": "ad638506387e5e61b5291efbb4898038a97422112adeb1ebe535d7ad54af75dd",
+      "current": "9e9e9bce24c635662a3466e5ef0c71ffc578b8a71780bf33d6e10daab3225633",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 190,
+      "baseline": "0ed1a38b98b12bb844bb342ebd3d1c769a335fc4b49ba60e70a3590ad4632207",
+      "current": "03d0c169bb2ca7636d18cc02d5336f112d38172e64bdb63e157997fd1f3e8e1f",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 191,
+      "baseline": "1a7a4b011f6915ac12fbe4437514ef8aa64ca95efca1ff5d4bd5afc9e251c858",
+      "current": "f3df223d086d8ac4c4bfb9e540655afa8bde2422bcaf312bbeb122ec913c5ce2",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 192,
+      "baseline": "1a7149d94de70cf2d8b57617dc2f0e22f5a34c676d2f0091a28a35c7ed4a1ab4",
+      "current": "1a7149d94de70cf2d8b57617dc2f0e22f5a34c676d2f0091a28a35c7ed4a1ab4",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 193,
+      "baseline": "e352387762ab7852a128804b396280e579b821ee40c241c8b4baadce851e562c",
+      "current": "e352387762ab7852a128804b396280e579b821ee40c241c8b4baadce851e562c",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 194,
+      "baseline": "e01958950efc6e8ac3181b2f1ba650d64013c51cd059c424d48e423971e6934d",
+      "current": "e01958950efc6e8ac3181b2f1ba650d64013c51cd059c424d48e423971e6934d",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 195,
+      "baseline": "82c28003097ad9a45ecb172f3d3e85ed9098e9ab1432fb99effd57d3c36ea076",
+      "current": "82c28003097ad9a45ecb172f3d3e85ed9098e9ab1432fb99effd57d3c36ea076",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 196,
+      "baseline": "02f5634f33bb2c87ba314bae30bac9c0e014b8d69d8a07f2165934d8f68794e2",
+      "current": "02f5634f33bb2c87ba314bae30bac9c0e014b8d69d8a07f2165934d8f68794e2",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 197,
+      "baseline": "7978b68385a22d496d2c8c36c30bd175bfb6dd934f578f2a37a3770b4e15cc5f",
+      "current": "7978b68385a22d496d2c8c36c30bd175bfb6dd934f578f2a37a3770b4e15cc5f",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:35",
+        "typed_carrier_access.py:41",
+        "typed_carrier_access.py:48"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 198,
+      "baseline": "43c404ec0129519721c08ccd2e67c8675e196328740ea44b9aab0cca8910eaec",
+      "current": "43c404ec0129519721c08ccd2e67c8675e196328740ea44b9aab0cca8910eaec",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 199,
+      "baseline": "6f2cc62871135eb02fc3e777b125409074ff33d386344d5c2a8555626c56c833",
+      "current": "6f2cc62871135eb02fc3e777b125409074ff33d386344d5c2a8555626c56c833",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 200,
+      "baseline": "8118f60dea8a8642defdc1556229c12770b194c397779e70c872119318be5783",
+      "current": "8118f60dea8a8642defdc1556229c12770b194c397779e70c872119318be5783",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 201,
+      "baseline": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6",
+      "current": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 202,
+      "baseline": "2a230c36e371ddb0ea3786dd8f4a34992427aac9823374b75313c5c5d8b9ef47",
+      "current": "2a230c36e371ddb0ea3786dd8f4a34992427aac9823374b75313c5c5d8b9ef47",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 203,
+      "baseline": "e07a25c67774e48873e9861e99f2ad27fa3eedae453e557ab79e689612a9e335",
+      "current": "e07a25c67774e48873e9861e99f2ad27fa3eedae453e557ab79e689612a9e335",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 204,
+      "baseline": "1411db8e836f2e15ae6b979a03d2b23d23744070001b1514e7f250309deaa229",
+      "current": "1411db8e836f2e15ae6b979a03d2b23d23744070001b1514e7f250309deaa229",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 205,
+      "baseline": "9c40dcc7fded90b120c0964af63ec1a1a23c9b0865e48baf88ffffec7ddc3f85",
+      "current": "9c40dcc7fded90b120c0964af63ec1a1a23c9b0865e48baf88ffffec7ddc3f85",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 206,
+      "baseline": "64dc78d3c59d0b7daa887fb8f7efb35fd44831e97ab2bd5de233f0e18c6230e1",
+      "current": "64dc78d3c59d0b7daa887fb8f7efb35fd44831e97ab2bd5de233f0e18c6230e1",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 207,
+      "baseline": "489fbcff0cd466d996946619d04b60b5015ff247168649fcbc4102e5fe1bcb36",
+      "current": "489fbcff0cd466d996946619d04b60b5015ff247168649fcbc4102e5fe1bcb36",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 208,
+      "baseline": "44e11d0ae8c92488bd77b314c202761ab53a09900671f0adf4216c57616d326c",
+      "current": "44e11d0ae8c92488bd77b314c202761ab53a09900671f0adf4216c57616d326c",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 209,
+      "baseline": "72bfb75f45c0375607bb8aae9cafe46ba5551ac84bfd62767befd24622619cfc",
+      "current": "72bfb75f45c0375607bb8aae9cafe46ba5551ac84bfd62767befd24622619cfc",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 210,
+      "baseline": "d5b06dee14fcc6a5cc5ff6eb63255869087cf99ac85aee5334ef8828c61daa60",
+      "current": "d5b06dee14fcc6a5cc5ff6eb63255869087cf99ac85aee5334ef8828c61daa60",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 211,
+      "baseline": "8c83b28cabee930c6305c42259286d711d4c0b158854506fb8b7b89e10ed9799",
+      "current": "8c83b28cabee930c6305c42259286d711d4c0b158854506fb8b7b89e10ed9799",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 212,
+      "baseline": "3711a0cb74573707c7b42c9f5b4c17f0beff26241ffeca9c0bd6c6079c5012a5",
+      "current": "3711a0cb74573707c7b42c9f5b4c17f0beff26241ffeca9c0bd6c6079c5012a5",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20",
+        "typed_pose_observations.py:17"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 213,
+      "baseline": "e6d675856e8e7a30948571b62137d486e1c042550ab73268b7e7a344d6438760",
+      "current": "37f7c576f28cb149d346218a6b921cd2657948275a43284797ba7e1a9da96024",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:41"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 214,
+      "baseline": "622de12142e5a220597dd1a208ec85bcef8795ecec0a5d65167b08c91eea3ddd",
+      "current": "c37bde6a1077cdb32b5d554f6f2b77feb22159e847acfbb8ed8dc6a77ff78639",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 215,
+      "baseline": "14e85920ae57ec213085821cbcbb6117e8e7a96e6a7da69688445823c4419bb5",
+      "current": "fd2e549a95ddaa99c5e9018b1fce462544e23b3f582c50ba64059887df9cfab6",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 216,
+      "baseline": "59bab7eb600f6b26d7cf6b3a6b3434d7e80ad39ed05274dd65bd94551ad6f120",
+      "current": "37032601a4c03a690443f19c429ba46d6032dfe63f8b336ad8cc7e981a6eb787",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:41"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 217,
+      "baseline": "e0e17f4b0c30494f744865566f2c1e5cc9ced1a9ad0172d6d2aab2e0987eee46",
+      "current": "e0e17f4b0c30494f744865566f2c1e5cc9ced1a9ad0172d6d2aab2e0987eee46",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:35",
+        "typed_carrier_access.py:59",
+        "typed_carrier_access.py:32",
+        "typed_carrier_access.py:41",
+        "typed_carrier_access.py:48"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 218,
+      "baseline": "ee9a720e9fd4fcd94fdf1cd0351c502e0ffc2915f27ec633413a3dc4812f48f2",
+      "current": "ebcf2b0a8e58cef41223bb8b2e91f35ea2360cf5bc5f74a463f2e5d928c331fe",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:41"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 219,
+      "baseline": "aac409b089a80503a48ca38126357f73288df29f519f588efa1d4de8679f5014",
+      "current": "aac409b089a80503a48ca38126357f73288df29f519f588efa1d4de8679f5014",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 220,
+      "baseline": "23d236998c03d3031fea3ff0e0369cf93040900b6267589e8d99f7bc37ba8aab",
+      "current": "23d236998c03d3031fea3ff0e0369cf93040900b6267589e8d99f7bc37ba8aab",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 221,
+      "baseline": "d86ad79a3b93d210ab93374779969e4d9e7eb99082ab74a15de4a615a523f407",
+      "current": "d86ad79a3b93d210ab93374779969e4d9e7eb99082ab74a15de4a615a523f407",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:35",
+        "typed_carrier_access.py:63",
+        "typed_carrier_access.py:32",
+        "typed_carrier_access.py:41",
+        "typed_carrier_access.py:48"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 222,
+      "baseline": "4dc4cd3110cedc69dbdf15550df7d7c6ab5167cb1d200a333c937d1ab6624d10",
+      "current": "161fb9c58b2198e05f4c8a7ed86539a7ca3dfaa347efd1743b6bb75e139d64ad",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:57"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 223,
+      "baseline": "71d388828e47ef7696a7170667ce5dede2f5bdd6dc18d0fbc844444a549cf8ae",
+      "current": "71d388828e47ef7696a7170667ce5dede2f5bdd6dc18d0fbc844444a549cf8ae",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:57"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 224,
+      "baseline": "eae134a8c5c4b6255b3e03fbc3a839450f49abcd7ccf0c2b0118dbd97cebfc6e",
+      "current": "c6f0e7a8652701a5b6fe9f0f8699d01a9cadf78aabf392a4ec81fef7ec440ac5",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:41"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 225,
+      "baseline": "becc38daebf7d888d59d4f64c8071314f7c45c3c8ce5e9e18db1b483f524f69a",
+      "current": "972b07531dc4608ee391331d6a45d446b8f9d031e96134fd5c96b89a46b6e1c0",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 226,
+      "baseline": "4b84250693a17dc8457e6638cf3b58128fb942943255f372055be2307a6703bd",
+      "current": "68b7a1cea1d7c2002dab809b37a161489a20274a6d4bec7a0631448f845193b6",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 227,
+      "baseline": "af5454cac73bd5bdfeed24ed937782ca3c28f2a8c680fe417158f1d268fc2813",
+      "current": "af5454cac73bd5bdfeed24ed937782ca3c28f2a8c680fe417158f1d268fc2813",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:35",
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 228,
+      "baseline": "2f2f961026da1e16ff16d04294595b9bd936943ec64025b7eff266015334179b",
+      "current": "3775fb59a518b85f32e01326f4c383e533aaadb16134503080d676ffc28bccd2",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:21"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 229,
+      "baseline": "f870030b3a6de80695edc7f758872031a1e4d8137fae05bc99ab04b7d83fc0dc",
+      "current": "ba93e8bc271ab539f73941c662ac3f4dfe84f245792e3c5c67101ac2bca5b06c",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:21"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 230,
+      "baseline": "2577e42a01e6f8eb19e9a323e291c4698d35e89feba29720fb4680761d12e5b4",
+      "current": "2577e42a01e6f8eb19e9a323e291c4698d35e89feba29720fb4680761d12e5b4",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:28"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 231,
+      "baseline": "18ea8c7d149d31c26e9e36bc99a5c4cb01323e30b6f7e42a5c1ff8578a912a43",
+      "current": "123087e5ae0582196a647e833e31169e42ed7733bbf1b48b7acfcc378b17d0a6",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 232,
+      "baseline": "d6c561170919473c98a6f4a4d0c0333cec5355d0217faee1d6ce08ac6715c1ef",
+      "current": "18315b300c9e7c0ffa03b32979f1595f4705845184e87787dc72a8ffef3ea62e",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 233,
+      "baseline": "86b929e04985be7900221c26bfbac21a48b453c1fae92a62b0eb53cca4ef365a",
+      "current": "fba836025ab71f056b95a5e13c054b3bae4339094c91db6f098d2bbe6573d318",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 234,
+      "baseline": "a45b39c38e487907f12d6e196ecb96e2a093997c0cfe9950fea2a7d6a0223756",
+      "current": "a45b39c38e487907f12d6e196ecb96e2a093997c0cfe9950fea2a7d6a0223756",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 235,
+      "baseline": "dd03680545413d92303fe9929d0bd73d9cafa7344d533d3e669bce27c322af2f",
+      "current": "63fa172866dfc2cfef4916ea63192cb81f673fa7c64a36d4e4ea0b880e11d710",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 236,
+      "baseline": "6485a1f84da2a6e5c269fc9182a066cbf8d32356af3dd314afaa4f82a92adcfb",
+      "current": "caaabba446648f536f433ab370f6ea7d32f38d6986f3ea42c4211e1ecf4bb242",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 237,
+      "baseline": "374b0f0ea42fa19888df5642bb76e908d3b138321c58c06558170816983750dd",
+      "current": "a46a9b3f95179b21ca62c59d93fa264f23d21594d183ca9682c26905a70a99c9",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 238,
+      "baseline": "fdde58a4801f71e70121a7ee09b98c5150de278a12456dd476c416af401899db",
+      "current": "fdde58a4801f71e70121a7ee09b98c5150de278a12456dd476c416af401899db",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_access.py:55",
+        "typed_pose_access.py:61"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 239,
+      "baseline": "0ae292d19474facc28fcb7cf0724524d6e2b366a6a7e06178bb826063bf3894f",
+      "current": "0ae292d19474facc28fcb7cf0724524d6e2b366a6a7e06178bb826063bf3894f",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 240,
+      "baseline": "b18cac42ea0b5b70a2c65d3b9972ab3a107ce5a339c003ed83a7f5eb00d327ce",
+      "current": "df4a404ee836f29cd2b8b96eca080eb2c4800f61accf81237615acbee51d4303",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_access.py:55"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 241,
+      "baseline": "dbe278df60fd1a0e93f39376502f2d3605a8750d6729f1932d23d7415bddf218",
+      "current": "45d9942e371b600f0b5dc7bca2a291701715e93f6e8c34a0b3efe5e553e06e1a",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 242,
+      "baseline": "0c4162ccd3be3a940fe0695d0de37adda2f0ec0e7258d51366425e670cb3e8d8",
+      "current": "5c854b5dd85ea9c8312c9733d1e12583268162f7545edee04411e70e0db1dcda",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 243,
+      "baseline": "f216bc8af2019d7946c6a93fbafcb531772e5eab6ab11d01754100915c4e38d8",
+      "current": "f216bc8af2019d7946c6a93fbafcb531772e5eab6ab11d01754100915c4e38d8",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_access.py:55",
+        "typed_pose_access.py:61"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 244,
+      "baseline": "dcfea9d12db9b137bf66f0b94684ca7dc5b7e8f731100d8b88bdff15ac284b03",
+      "current": "dcfea9d12db9b137bf66f0b94684ca7dc5b7e8f731100d8b88bdff15ac284b03",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 245,
+      "baseline": "f582378c8511b9ca7bbdc70e2ff4f4c85d4f51f91a54d96b1bc85d2f2178926a",
+      "current": "5160970b802e5903969f1a80ff4061c36721471af36c0097f7cb78b1c4faf5e5",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_access.py:55"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 246,
+      "baseline": "8d34271b56ba17721ab9d0afc8ba49cf9ba2e8c52fa64651b0fc6be77d94847d",
+      "current": "9fecdd14e43eed7c46fb6b0c319407176ec38e5b238777e59bdbd617dd998ac0",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 247,
+      "baseline": "7d7f3c5bbb0d9d7fb24c2c17851490162b3e6e3cf1a2c9d21316c9592de44952",
+      "current": "0b815a5520960a8ddeef9a4d5624a2ff37c7403879a6a8555b7afe9952cc87c4",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 248,
+      "baseline": "e537d9350bccbc71cf78b855802f9ba8d34970f017f2d7e8af6f83dfb3fa3461",
+      "current": "e537d9350bccbc71cf78b855802f9ba8d34970f017f2d7e8af6f83dfb3fa3461",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 249,
+      "baseline": "aa21b12033cc0ec12448f9554c44bcc29d8417beb8b2678fb1a372ec0a7f62b1",
+      "current": "10304de8fdbd58ab1db1f45dea16ad9465bc322df6a70bb23085fba867d4b2db",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 250,
+      "baseline": "6151a2703c20d632275d4541b743dd490cee7e486daaa5e6cbb27b236e59d5fd",
+      "current": "544d31b580e2c1885e65a451f58aca38c249a095d9e339de1fe7065eaf1c1d9f",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 251,
+      "baseline": "41cfeab60f79dc351f915ad9788d1fae65963df53c7087834f10a8c9a5ced527",
+      "current": "607e3f58e23a85ad5c28d555c8b0e3bb64b9d7139bca761a177b5f90f631956b",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 252,
+      "baseline": "f96028143c04ecbbf29b52fdd07ff172b35177976a0cab8d8fd22704a94d7275",
+      "current": "f96028143c04ecbbf29b52fdd07ff172b35177976a0cab8d8fd22704a94d7275",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:35",
+        "typed_carrier_access.py:41",
+        "typed_carrier_access.py:48"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 253,
+      "baseline": "8d400a9b561843a87ded8d81dadb57ec60ca3af3a388850a8a1332b018642a7c",
+      "current": "bb215fefccd7c3cd35acbbc7d36e199c86296bcb536354fd8644803a90944677",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:41"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 254,
+      "baseline": "eee31a8cfb53a58f6b477507cf10f1d93c3f4e0159b6dd562a960787783f63d1",
+      "current": "eee31a8cfb53a58f6b477507cf10f1d93c3f4e0159b6dd562a960787783f63d1",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 255,
+      "baseline": "110242a5ee5c3483b519da44e933a71e41ff77946775a4564678a610eac97363",
+      "current": "110242a5ee5c3483b519da44e933a71e41ff77946775a4564678a610eac97363",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 256,
+      "baseline": "b124867ba33d5f80250c86470b8b9a883432d4cb5a1325821aec389ae93dd99a",
+      "current": "b124867ba33d5f80250c86470b8b9a883432d4cb5a1325821aec389ae93dd99a",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:35",
+        "typed_carrier_access.py:59",
+        "typed_carrier_access.py:32",
+        "typed_carrier_access.py:41",
+        "typed_carrier_access.py:48"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 257,
+      "baseline": "0ab186203944a3e6062e519f59828f9886deb1bfec3b73bf50a44a1a689edd81",
+      "current": "bdd6a6a69dbae1148b6e0518551bfcbfd18e59e489127a715e505a0df83f874a",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:41"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 258,
+      "baseline": "595ef8946ce1638d722cbbb74cc99d779abfee891c22bb2c067b941cc6188fb1",
+      "current": "6ec971db3eb93fd43a7b139cf718e620185c33451f6c9ad758facb701dcdecd0",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 259,
+      "baseline": "6cd57e36aaf061b562c858a9f8daf62be76bb200dc39b52bc480a70a42b731bd",
+      "current": "b189428ec21c6172883520a5908433102a57bbf48b6d3bd1b41ca710bb6149f4",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 260,
+      "baseline": "d6107fe147295b0de95f86cf59473da7b864d9055dd8b5940ab059ed516d00f3",
+      "current": "36f209c6d47df413b54346796b3f353ff50f453d1fad15de7e0e6f8291f9f0db",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:57"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 261,
+      "baseline": "3b7179939586cde19868a8642cb3516e0aa9a36726a7af4a9350205d7a18c5c3",
+      "current": "3b7179939586cde19868a8642cb3516e0aa9a36726a7af4a9350205d7a18c5c3",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:57"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 262,
+      "baseline": "8de6cb72e43c3b78507e57d68dacb31f0d3bf55fddcb434c25065ec0aec34f6b",
+      "current": "8de6cb72e43c3b78507e57d68dacb31f0d3bf55fddcb434c25065ec0aec34f6b",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:63",
+        "typed_carrier_access.py:29",
+        "typed_carrier_access.py:32",
+        "typed_carrier_access.py:41",
+        "typed_carrier_access.py:48"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 263,
+      "baseline": "e767248105ce419c584fb15e5b97bf6aafa8d8ee12ecad7c7d448bdd6fd65d94",
+      "current": "b03d265c5d929b5300fc301e0beee7b5e7c08660b277872ee1a821cfdac92f3d",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_access.py:41"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 264,
+      "baseline": "4b84e7c38dda70b6bc2b4c43229827c9abf3a66ec1d43ea70d09f123eb22ae2e",
+      "current": "5c370c6bdaac44f6c8c3cc8a1507a9fc722a41d2e78fd8d87999315df43866e6",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 265,
+      "baseline": "5cc6ab2d1eeff0fc5ca4e040e9cbff0e28ffd23fca19832c8668a839639b6172",
+      "current": "8111a2c804409afb54e90a49d930629cf37774ca16d39e39d4430e7f282f37eb",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 266,
+      "baseline": "1cec1f79a4528f11599c960970c1d5512d67b17dd2322e7ccd67fa2ccb6bb3a9",
+      "current": "52a4df3fe17f5ec2944fc100bbc250b6f71c4ef1ab3a4c1fcfa8e5b2c801ae0d",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:21"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 267,
+      "baseline": "d019af6a385e1977e5167041d93e559e3a3bd6f348b67a78fa0f18998e7a3ec3",
+      "current": "a1e21b77d246a62fcccb92cf1ee37a998e8ebcc5dfaca8ffc9f9d65a1114caee",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:21"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 268,
+      "baseline": "21e8ebc99e2e0e60ab9c3491535329229be16d879aa204e03614043193516f14",
+      "current": "21e8ebc99e2e0e60ab9c3491535329229be16d879aa204e03614043193516f14",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 269,
+      "baseline": "e70264e760aabb3763ba5d0ff7884d04dcf9f258fc76ec3b195165c082c90c4e",
+      "current": "dfb4069234635c38b5eb8485221bbc1a8910144e719c25c48e3df5ecf0528164",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 270,
+      "baseline": "8015fac2623270a1b5051f7ad3a76004ddcbe8cdb4aa3e7a987796de5a4f682d",
+      "current": "8cdbc0c9784fe881a64dcf6c1f0dd245dc12931667c93b9ecf11973bfb4c5451",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 271,
+      "baseline": "ff2f45805861ffc43f177538fd4ce1ab4d3315ed21b90b34440f1bf23ed3afd5",
+      "current": "77a8715cae080edc93591f27a922c9ed8242002f7ea0f797238f3e4225929281",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 272,
+      "baseline": "70dcc5fc54886a30944c05c183ee80f38c4df8ec6e2944fec0b4228c6d7370e1",
+      "current": "70dcc5fc54886a30944c05c183ee80f38c4df8ec6e2944fec0b4228c6d7370e1",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 273,
+      "baseline": "691e23ec144204e7dbedd23f9823ceaf566bd5fe71642416fa10d22594b122df",
+      "current": "e730751affeff65fda178235b884cb481a761b7947394bc796c4bc791b087606",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 274,
+      "baseline": "9df802cddaa791e3512b22c24e7e75ba2c713f2686ddaa51f06322f0719e01de",
+      "current": "c01484a5833a6aac7cf5a85a55d9f28e782ef4580a61aaec6b62dd3d05c65f74",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 275,
+      "baseline": "55a8e01e4b09f59fb8d57ce1cf823ff676d1942d5d68e2f9bb97b72ddabbebc0",
+      "current": "9625c4ba5f793715e8aba5da4551d967a636c8b872a11e498937dd1b0274ca0c",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 276,
+      "baseline": "ba19485200744b50f3e76200f48b5be6eb4f3fc912cf3733ecf63bc7df2d1f67",
+      "current": "ba19485200744b50f3e76200f48b5be6eb4f3fc912cf3733ecf63bc7df2d1f67",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_access.py:55",
+        "typed_pose_access.py:61"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 277,
+      "baseline": "7fc9c46a278ca878e4736b5cdc647800b53af31722c2b5277ae7189c9a36fb9c",
+      "current": "7fc9c46a278ca878e4736b5cdc647800b53af31722c2b5277ae7189c9a36fb9c",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 278,
+      "baseline": "d36414d13095cb8df6624c343b295be38a2c83c9bd084203a05b0647a297bfdd",
+      "current": "2af3daa238bb5617327106faa19c8d7b82cc51bfaf572546e219d7c6e8e34493",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_access.py:55"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 279,
+      "baseline": "7dc0609ad5205f69a2c9dff6a3c2c16cf5694c584898bdb8e70173c079e78566",
+      "current": "f9a4501aac5edae0b5f982758ece3a327ff267021dde28f9dd066cf143bed5f6",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 280,
+      "baseline": "12c7845b9a80a4b15e646dc79b83828fac22b8efb0634ee0b845d4583bd7b536",
+      "current": "ccf04b9ee3f788d1feda23557ebd7798d01c9fc6b325c438bc0b4a96872d450e",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 281,
+      "baseline": "a505e123a5d8ad7aaa541deb9e9a2d0615b906a3b07b076106bf1b66c5b8b7ed",
+      "current": "a505e123a5d8ad7aaa541deb9e9a2d0615b906a3b07b076106bf1b66c5b8b7ed",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_access.py:55",
+        "typed_pose_access.py:61"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 282,
+      "baseline": "8c43eff490706d19d2a395db5a6e203ac496898fd70a36d7d3caead5631ffe92",
+      "current": "8c43eff490706d19d2a395db5a6e203ac496898fd70a36d7d3caead5631ffe92",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 283,
+      "baseline": "72e553a1cfa65fdba0bacf84c80e8cc2685479927c7d2a10a0002584a3f2bbca",
+      "current": "558a45f2cdfab6b2c0227ae10b25cfb649acc7e34664b1c76093e9698eae8aa4",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_access.py:55"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 284,
+      "baseline": "451ac2ef42fd080f9a5d9c076c399876168822fe73d2c11f0420104681aedab3",
+      "current": "b8e56ce7c6f8d7c0019d606b52c182495bc1943e9a4afefc586ca832dbdf35f4",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 285,
+      "baseline": "e7e2c700a74620031f33b8a69138c370929a8ac64b58bfb8868155d4882abeca",
+      "current": "9a9f73a97eba9cf57986bab612f2a89114dc7a6ee0d77061ec8893e436d0acbe",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 286,
+      "baseline": "cd21f2912bf3e36d6cc14b8b774c6ef71be890f02527e33b2ad5a3207a14fe2b",
+      "current": "cd21f2912bf3e36d6cc14b8b774c6ef71be890f02527e33b2ad5a3207a14fe2b",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_access.py:89"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 287,
+      "baseline": "ac0b7256aaf4d1e7beb73e84d1a90217b9339ff8972b438649ed7e3e846d4550",
+      "current": "ac0b7256aaf4d1e7beb73e84d1a90217b9339ff8972b438649ed7e3e846d4550",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_access.py:89"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 288,
+      "baseline": "1a08689dc719cfce1b99a59aa9492a75a4b0904bfe279aed55ae21b2cacaa1b7",
+      "current": "1a08689dc719cfce1b99a59aa9492a75a4b0904bfe279aed55ae21b2cacaa1b7",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37",
+        "typed_material_flow.py:42"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 289,
+      "baseline": "940a16e0eef12d58487a84823d231af459e07784dd4ca2e4720cab4cea98add4",
+      "current": "9d79ba2e3fb3fac55d5157bebd454834b16c21741fd235171219c21046032c1b",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_flow.py:37"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 290,
+      "baseline": "adc1723a03c8e37bb00ceb24ce6a494e060a116ffea1f2cdbeda5b3dc54533eb",
+      "current": "53473eee38a9beb18722eda565554ba2e0fda7a97e7ebe136ab66b6b2f7e3fe4",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 291,
+      "baseline": "a5259cf4bcc57aa2c1696a2733fd5bb7f9de5c7c87557c34fb77e0660179280d",
+      "current": "7b95316e483cf0de3cbbfdd98c9f8165a4d5d1dac6f663bd5cb64e892e5fabf1",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "common_typed_material_flow.py:18"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 292,
+      "baseline": "54ac5593da9f0e8eb972558d051dba8339178be870c062012e8a17f15a8510f0",
+      "current": "54ac5593da9f0e8eb972558d051dba8339178be870c062012e8a17f15a8510f0",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 293,
+      "baseline": "6001ae8b69d9d5f86603280c781d61f2e27e289524388cd441b8a0006871e167",
+      "current": "6001ae8b69d9d5f86603280c781d61f2e27e289524388cd441b8a0006871e167",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 294,
+      "baseline": "aff2bb8696554d844318b7e975a3e4948aafbcdefa788ddbf933517d4efbf106",
+      "current": "aff2bb8696554d844318b7e975a3e4948aafbcdefa788ddbf933517d4efbf106",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 295,
+      "baseline": "95f22b86b605d15dc13b2b50d5d1961867fd57334d481556c4e5d13d83219529",
+      "current": "95f22b86b605d15dc13b2b50d5d1961867fd57334d481556c4e5d13d83219529",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 296,
+      "baseline": "8f1e5cf01fe1873183df10491a3f923a4caf8148731a9e5b5d509864874e5522",
+      "current": "8f1e5cf01fe1873183df10491a3f923a4caf8148731a9e5b5d509864874e5522",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 297,
+      "baseline": "b54dc2b00bd1ad3aeba6b8797bb19e817bb3a9f7bf99e9ea886c2e359af4aafa",
+      "current": "b54dc2b00bd1ad3aeba6b8797bb19e817bb3a9f7bf99e9ea886c2e359af4aafa",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 298,
+      "baseline": "ec033d5baa86642146fd1e8bb986ec5848cc843683c73660aca399e7d9b7432c",
+      "current": "ec033d5baa86642146fd1e8bb986ec5848cc843683c73660aca399e7d9b7432c",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 299,
+      "baseline": "0346b9b7d9ff75a07c3eb9f50c42928681dd51598fe273c0efb1e6e4633c8853",
+      "current": "0346b9b7d9ff75a07c3eb9f50c42928681dd51598fe273c0efb1e6e4633c8853",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 300,
+      "baseline": "a8f610864ab3280116c625454e843a5731225b3d775c748d0ba99d10e2de4ce6",
+      "current": "a8f610864ab3280116c625454e843a5731225b3d775c748d0ba99d10e2de4ce6",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 301,
+      "baseline": "38202bf5a2f1e1e70a74f6c35c9a563edfd4911fbd870fb4f6ba3cf3a216a5fc",
+      "current": "38202bf5a2f1e1e70a74f6c35c9a563edfd4911fbd870fb4f6ba3cf3a216a5fc",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:31"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 302,
+      "baseline": "e9cedd4e5d73dd27d211dc1230a2a8321148e45427661e09f27d86daa04b1d55",
+      "current": "e9cedd4e5d73dd27d211dc1230a2a8321148e45427661e09f27d86daa04b1d55",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_carrier_scene.py:35"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 303,
+      "baseline": "fabc8ac375a80077b96d5e3ba86bea919ee12fa31445e65623c09c9ff07c0040",
+      "current": "fabc8ac375a80077b96d5e3ba86bea919ee12fa31445e65623c09c9ff07c0040",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 304,
+      "baseline": "2d1a483c85af75bd45799e6a2be2edb840749bb30b51ba07bb9b463d129cdf01",
+      "current": "2d1a483c85af75bd45799e6a2be2edb840749bb30b51ba07bb9b463d129cdf01",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 305,
+      "baseline": "3740708d6dfd327567f4cb4f3afea66dee43849309e7b88a4a45ea581600f465",
+      "current": "3740708d6dfd327567f4cb4f3afea66dee43849309e7b88a4a45ea581600f465",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 306,
+      "baseline": "79025e03f04b26a0e364ab429ea5e623b9bdab5ff4068928c226ac3329832d7c",
+      "current": "79025e03f04b26a0e364ab429ea5e623b9bdab5ff4068928c226ac3329832d7c",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 307,
+      "baseline": "e7fbd424ea350ca5f2790b8de3bc8177db7b57df1c037f3bfd2199e5a4ad7701",
+      "current": "e7fbd424ea350ca5f2790b8de3bc8177db7b57df1c037f3bfd2199e5a4ad7701",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 308,
+      "baseline": "07355670a6609992d99beb63d677e5d1bf6104e38923958b0642aa199615ddee",
+      "current": "07355670a6609992d99beb63d677e5d1bf6104e38923958b0642aa199615ddee",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_material_observations.py:46"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 309,
+      "baseline": "53a314b469b86b285378904469af2831afafb13851ae8bdf33f730c4887e17d2",
+      "current": "53a314b469b86b285378904469af2831afafb13851ae8bdf33f730c4887e17d2",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 310,
+      "baseline": "06828f02bcb2de63b4e6bdbbf1a02fc9e62d531a89a5f523510de0e8390640bd",
+      "current": "06828f02bcb2de63b4e6bdbbf1a02fc9e62d531a89a5f523510de0e8390640bd",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 311,
+      "baseline": "d9aa884eee755f612db97c7c629d503f19115bfa93036efcf6e1c869a71008b8",
+      "current": "d9aa884eee755f612db97c7c629d503f19115bfa93036efcf6e1c869a71008b8",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 312,
+      "baseline": "b813afd63c029452d2957bf5d3730f3f92bba7162df137e54c7405f6039d2403",
+      "current": "b813afd63c029452d2957bf5d3730f3f92bba7162df137e54c7405f6039d2403",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 313,
+      "baseline": "7c6cf4f7a06839197c001bed90492657895a48b34b43421d8da9a9529b698962",
+      "current": "7c6cf4f7a06839197c001bed90492657895a48b34b43421d8da9a9529b698962",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 314,
+      "baseline": "0ebfc1a93dece480eafa8aeb00e1cd11c3ca1252d5243261242b1465c9bac458",
+      "current": "0ebfc1a93dece480eafa8aeb00e1cd11c3ca1252d5243261242b1465c9bac458",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 315,
+      "baseline": "4a8dac7fd29dc7bc0a0122723d10cdfc8769f1b5fa7f6e3ff0473818e8e6a635",
+      "current": "4a8dac7fd29dc7bc0a0122723d10cdfc8769f1b5fa7f6e3ff0473818e8e6a635",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 316,
+      "baseline": "66e64cf6bc42576a87a2aa69a54a1093b0f79d292291dcbc0a5ec8766bfc117b",
+      "current": "66e64cf6bc42576a87a2aa69a54a1093b0f79d292291dcbc0a5ec8766bfc117b",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 317,
+      "baseline": "7ec1a0eac5338fd3bd042529cfef49623a5334be015b5b22b1a69c6727a75f05",
+      "current": "7ec1a0eac5338fd3bd042529cfef49623a5334be015b5b22b1a69c6727a75f05",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 318,
+      "baseline": "8b6b0cf82d61611473bcb95d37f65e921eb38ed0a16a5c5e2ce08f72eaa18e87",
+      "current": "8b6b0cf82d61611473bcb95d37f65e921eb38ed0a16a5c5e2ce08f72eaa18e87",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 319,
+      "baseline": "8002b219b24b785e38402bd05cf0921cd7911c096e192b5710e640c6c6d9611c",
+      "current": "8002b219b24b785e38402bd05cf0921cd7911c096e192b5710e640c6c6d9611c",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 320,
+      "baseline": "904dd651d05967e71e77374a88631a6bea493360fc3ea5279f8134bfa5baa278",
+      "current": "904dd651d05967e71e77374a88631a6bea493360fc3ea5279f8134bfa5baa278",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 321,
+      "baseline": "588ecf6a730b28faf6463b77ca26981b5cbb06e32f7fcea54a783996370ea89e",
+      "current": "588ecf6a730b28faf6463b77ca26981b5cbb06e32f7fcea54a783996370ea89e",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 322,
+      "baseline": "dda6a14a554d0989ee0430d55f64147737c6a47f39b5d3835a982bc651b60bc7",
+      "current": "dda6a14a554d0989ee0430d55f64147737c6a47f39b5d3835a982bc651b60bc7",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 323,
+      "baseline": "ab0d8a45156718a6802ce80532ac2058a556f99ad5e3f3f1486e4ac193467b8b",
+      "current": "ab0d8a45156718a6802ce80532ac2058a556f99ad5e3f3f1486e4ac193467b8b",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 324,
+      "baseline": "9a2963ef500a5102e1d6e76d978c8db907b5669244741a822c64c9039b95e6fa",
+      "current": "9a2963ef500a5102e1d6e76d978c8db907b5669244741a822c64c9039b95e6fa",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 325,
+      "baseline": "cb00d824383df0c0d7052927669787116ad263db05601e946ea2f56593ed3792",
+      "current": "cb00d824383df0c0d7052927669787116ad263db05601e946ea2f56593ed3792",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 326,
+      "baseline": "ce3f469b758dde5d90cfd2999514cfe5d52fe7c32b3c16c2956c7565581db2fb",
+      "current": "ce3f469b758dde5d90cfd2999514cfe5d52fe7c32b3c16c2956c7565581db2fb",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20"
+      ]
+    },
+    {
+      "kind": "typed_material_recipe",
+      "recipeIndex": 327,
+      "baseline": "82bf672c55402fcaaf7312158a53c4e6bdf795c6f88bf751d9a1456a48b16d94",
+      "current": "82bf672c55402fcaaf7312158a53c4e6bdf795c6f88bf751d9a1456a48b16d94",
+      "independentlyRecomputed": true,
+      "sourceCallers": [
+        "typed_pose_observations.py:20"
+      ]
+    }
+  ],
+  "typedMaterialComparison": {
+    "recipes": {
+      "path": "docs/migration/native-campaigns-v50/life-material-identity-recipes.json.gz",
+      "sha256": "9f584098c09f837f5b594263dc9ec6b3bf592c3cbba3d905c3d9993d52c9c128",
+      "verified": 328,
+      "uniqueNativeInputs": 328
+    },
+    "before": {
+      "proposals": 44,
+      "events": 68,
+      "explicitNegativeZeroPaths": 14
+    },
+    "after": {
+      "proposals": 44,
+      "events": 68,
+      "explicitNegativeZeroPaths": 14
+    },
+    "qualification": "All three own material layers are reconstructed independently from the complete recorded event journal at every acquired prefix. Complete provider envelopes, point bindings, unknown-effect declarations, every acquired event, latest receipt, counts and all retained own state fields are compared, including restored negative zero. Session-dependent IDs are related only through the retained independently checked source/native recipes; both native recipe hashes and proposal IDs are recomputed. The four common-caller wrapper fields composition_target_tree, field_subquestion, morphology and strategy_receipt are outside this own-layer projection. Existing caller selection/coordination checks remain separate; no full inherited state or graph-chain equality is asserted."
+  },
+  "before": {
+    "path": "docs/migration/native-campaigns-v50/life-three-levels-final.json",
+    "sha256": "b704dde9b4e3347cabc252c6655dbf9dcd85e9027535d7b7d0c2d98ff68c28b8",
+    "sourceDigest": "66529083d89d420f9d198e99c8639ee174f1d829380d0d71eb86432ad184a94f"
+  },
+  "after": {
+    "path": "docs/migration/native-campaigns-v51/life-recorded-public-replay.json",
+    "sha256": "910ebe12ef24d28b6905fc2b2085973ec0bc150e4266276da33e2857533296c2",
+    "sourceDigest": "d0ec90ead65d412cf5e90c2610466a15c1a06994d40fb92a1d3772684e8cf78c",
+    "mode": "recorded-public-replay"
+  },
+  "compared": {
+    "commands": 49,
+    "completePublicPackets": 50,
+    "prefixes": 47
+  },
+  "qualification": "Exact public commands, complete packet hashes, source selection, prefix/acquisition counts and listed retained projections are compared. Observation session prefixes are normalized. Trace request, Queue model/portable-relation/request, and Catalogue supporting-event/projection-request/projection-model identifiers are independently recomputed from complete retained payloads before normalization. Catalogue support recipes use only prior catalogue observation/response events in the matching field; current acquired events are accumulated afterward. Complete Trace, Linked Packet and Queue plans and their declared acquired payloads remain compared, including numeric fields. Complete Catalogue plans, every acquired catalogue or view event, the latest payload, counts and state-node label remain compared; absent baseline layers are explicitly normalized to zero/null/empty. Its full caller proposal envelope is outside the retained projection. Native graph chain/revision, inherited digest, session-derived observed-program model IDs, full labeled cache and five predicate proof references are also outside that projection. Coordination source/preferred entries and current guards remain compared; full proposal digest and graph-node references are not asserted equal. Field Service own counts, latest payload, acquisitions, negative-zero paths and selected plans must remain empty on all seven retained trajectories. Typed Material remains empty on the six trajectories before LIFE. LIFE compares all three reconstructed own material layers, complete provider envelopes and every acquired receipt with explicit signed-zero restoration and independently recomputed identity recipes; its exact limits are in typedMaterialComparison. Execution durations and final implementation labels are excluded. Recorded-public replay recomputes commands before supplying prior actual returns and is neither a new live success nor a speed measurement."
+}

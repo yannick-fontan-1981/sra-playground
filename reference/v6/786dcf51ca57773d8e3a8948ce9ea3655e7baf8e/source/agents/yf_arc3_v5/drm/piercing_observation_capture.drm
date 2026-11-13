@@ -1,0 +1,394 @@
+{
+  "module_id": "piercing_observation_capture",
+  "declarations": [
+    {
+      "id": "policy.declared_piercing_observation_capture",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "canonical_dispatched_observed_acquired_records_and_native_returned_frame_inventory"
+      ],
+      "applicability": [
+        "current_scope_command_shape_correspondence"
+      ],
+      "invariants": [
+        "causal_endpoint_is_not_animation_or_body_completeness",
+        "returned_response_capture_is_not_world_settlement",
+        "missing_body_or_viewport_proof_remains_unknown",
+        "no_capture_fact_authorizes_ACT_or_WHO"
+      ],
+      "falsifiers": [
+        "observed_command_breaks_the_declared_root_and_axis_geometry"
+      ],
+      "configuration": {
+        "measurement_contract": {
+          "model_predicate": "piercing_observation_capture_revision",
+          "body_manifest_predicate": "piercing_local_body_manifest_revision",
+          "viewport_predicate": "piercing_viewport_translation_revision"
+        },
+        "capture_seal_scope_ref": "seal.returned_action_response"
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.piercing_command.current_shape_effect",
+          "all_conditions": [],
+          "reason_ref": "reason.exact_native_action_response_capture_qualified"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "capture_returned_frame_count",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.native_capture_inventory",
+          "reason_ref": "reason.exact_native_action_response_capture_qualified"
+        }
+      ],
+      "reason_refs": [
+        "reason.exact_native_action_response_capture_qualified"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.piercing_observation_capture_revision"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.piercing_capture.unknown",
+          "all_conditions": [],
+          "static_facts": {
+            "applicable": true,
+            "observation_capture_needs_commit": false,
+            "capture_qualification_class_ref": "capture.causal_or_completeness_proof_missing",
+            "causal_endpoint_linked": false,
+            "returned_action_response_capture_closed": false,
+            "observation_sealed": false,
+            "observation_complete": false,
+            "observed_supports_complete": false,
+            "viewport_world_known": false,
+            "viewport_translation": null,
+            "viewport_translation_evidence_refs": [],
+            "whole_influence_prediction_complete": false,
+            "requires_revalidation": true,
+            "missing_premise_refs": [
+              "premise.canonical_action_response_capture",
+              "premise.source_closed_local_body_manifest"
+            ]
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "retained_parent_goal_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "capture_revision_ref": "capture_revision_ref",
+            "current_frame_ref": "current_frame_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref"
+          }
+        },
+        {
+          "id": "projection.piercing_capture.endpoint",
+          "all_conditions": [
+            {
+              "field": "capture_endpoint_link_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_current_frame_matches",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "causal_endpoint_linked": true,
+            "observation_capture_needs_commit": true,
+            "capture_qualification_class_ref": "capture.causal_endpoint_body_or_interval_unknown"
+          },
+          "bound_facts": {}
+        },
+        {
+          "id": "projection.piercing_capture.returned_response",
+          "all_conditions": [
+            {
+              "field": "capture_endpoint_link_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_current_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_response_digest_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_returned_frame_count_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_frame_shapes_match",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "returned_action_response_capture_closed": true,
+            "observation_sealed": true,
+            "observation_seal_scope_ref": "seal.returned_action_response",
+            "capture_qualification_class_ref": "capture.returned_response_closed_body_manifest_unknown",
+            "animation_physically_settled": false
+          },
+          "bound_facts": {}
+        },
+        {
+          "id": "projection.piercing_capture.local_body_manifest",
+          "all_conditions": [
+            {
+              "field": "capture_endpoint_link_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_current_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_response_digest_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_returned_frame_count_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_frame_shapes_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_configuration_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_configuration_frames_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_body_manifest_closed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_body_manifest_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_body_manifest_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_missing_body_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "capture_required_body_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "capture_body_manifest_disposition",
+              "operator": "equals",
+              "expected": "active"
+            },
+            {
+              "field": "capture_body_manifest_polarity",
+              "operator": "equals",
+              "expected": "positive"
+            },
+            {
+              "field": "capture_body_manifest_contradiction_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "capture_body_manifest_defeated_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "observation_complete": true,
+            "capture_qualification_class_ref": "capture.closed_returned_interval_and_source_local_body_manifest",
+            "requires_revalidation": false,
+            "missing_premise_refs": []
+          },
+          "bound_facts": {}
+        },
+        {
+          "id": "projection.piercing_capture.viewport",
+          "all_conditions": [
+            {
+              "field": "capture_viewport_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_viewport_translation_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_viewport_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_viewport_world_qualified",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "viewport_world_known": true
+          },
+          "bound_facts": {
+            "viewport_translation": "raw_viewport_translation",
+            "viewport_translation_evidence_refs": "raw_viewport_evidence_refs"
+          }
+        },
+        {
+          "id": "projection.piercing_capture.already_present",
+          "all_conditions": [
+            {
+              "field": "capture_revision_already_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "observation_capture_needs_commit": false
+          },
+          "bound_facts": {}
+        }
+      ]
+    },
+    {
+      "id": "rule.piercing_observation_capture_revision",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "premises": [
+        "canonical_dispatched_observed_acquired_records_and_native_returned_frame_inventory"
+      ],
+      "applicability": [
+        "current_scope_command_shape_correspondence"
+      ],
+      "invariants": [
+        "causal_endpoint_is_not_animation_or_body_completeness",
+        "returned_response_capture_is_not_world_settlement",
+        "missing_body_or_viewport_proof_remains_unknown",
+        "no_capture_fact_authorizes_ACT_or_WHO"
+      ],
+      "falsifiers": [
+        "observed_command_breaks_the_declared_root_and_axis_geometry"
+      ],
+      "reason_refs": [
+        "reason.exact_native_action_response_capture_qualified"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{capture_revision_ref}",
+          "kind": "schema",
+          "label": "native captured response and local-body proof revision",
+          "required_fields": [
+            "capture_revision_ref"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "action_authorization": false
+          },
+          "attribute_bindings": {}
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{capture_revision_ref}",
+          "predicate": "piercing_observation_capture_revision",
+          "family": "control",
+          "argument_patterns": [
+            "{capture_revision_ref}"
+          ],
+          "epistemic_status": "proposed",
+          "required_fields": [
+            "capture_revision_ref"
+          ],
+          "static_attributes": {
+            "whole_influence_prediction_complete": false
+          },
+          "attribute_bindings": {
+            "retained_parent_goal_ref": "retained_parent_goal_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "capture_revision_ref": "capture_revision_ref",
+            "current_frame_ref": "current_frame_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "capture_qualification_class_ref": "capture_qualification_class_ref",
+            "causal_endpoint_linked": "causal_endpoint_linked",
+            "returned_action_response_capture_closed": "returned_action_response_capture_closed",
+            "observation_sealed": "observation_sealed",
+            "observation_seal_scope_ref": "observation_seal_scope_ref",
+            "observation_complete": "observation_complete",
+            "observed_supports_complete": "observed_supports_complete",
+            "viewport_world_known": "viewport_world_known",
+            "viewport_translation": "viewport_translation",
+            "viewport_translation_evidence_refs": "viewport_translation_evidence_refs",
+            "requires_revalidation": "requires_revalidation",
+            "missing_premise_refs": "missing_premise_refs"
+          }
+        }
+      ]
+    }
+  ]
+}

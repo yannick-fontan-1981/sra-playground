@@ -1,0 +1,9 @@
+{"name":"accept_cold_original_control","passed":true,"comparisonPassed":true,"exactParityPassed":true,"stop":null}
+{"name":"reject_stale_before","passed":true,"comparisonPassed":false,"exactParityPassed":false,"stop":{"callIndex":4,"error":{"name":"ValueError","message":"Acquisition must consume the current public packet and its immediate actual successor"}}}
+{"name":"reject_future_proposal","passed":true,"comparisonPassed":false,"exactParityPassed":false,"stop":{"callIndex":0,"error":{"name":"ValueError","message":"Proposal must use the current acquired public packet, never a past/future return"}}}
+{"name":"reject_future_guard","passed":true,"comparisonPassed":false,"exactParityPassed":false,"stop":{"callIndex":3,"error":{"name":"ValueError","message":"Before guard must use the current acquired public packet"}}}
+{"name":"reject_altered_selected_after","passed":true,"comparisonPassed":false,"exactParityPassed":false,"stop":null}
+{"name":"reject_extra_selected_after_field","passed":true,"comparisonPassed":false,"exactParityPassed":false,"stop":null}
+{"name":"reject_missing_seventh_state_field","passed":true,"comparisonPassed":false,"exactParityPassed":false,"stop":{"callIndex":3,"error":{"name":"ValueError","message":"Expected exactly the seven original Recruitment owner fields"}}}
+{"name":"reject_additional_state_field","passed":true,"comparisonPassed":false,"exactParityPassed":false,"stop":{"callIndex":1,"error":{"name":"ValueError","message":"Expected exactly the seven original Recruitment owner fields"}}}
+{"name":"reject_altered_restore_input","passed":true,"comparisonPassed":false,"exactParityPassed":false,"stop":null}

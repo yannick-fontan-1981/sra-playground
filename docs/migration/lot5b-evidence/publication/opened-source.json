@@ -1,0 +1,9 @@
+{
+  "recordedAt": "2026-11-11T02:39:46.822Z",
+  "result": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot5b-publication-20261111/.sites-checkout",
+    "commit_sha": "74fb966a87a561af357630fae18e3dd71547483c"
+  },
+  "rawOutput": "{\"project_id\":\"appgprj_6adbc388d79081918581b93b919d7258\",\"checkout_path\":\"/workspace/sites/sra-lot5b-publication-20261111/.sites-checkout\",\"commit_sha\":\"74fb966a87a561af357630fae18e3dd71547483c\"}\r\n"
+}

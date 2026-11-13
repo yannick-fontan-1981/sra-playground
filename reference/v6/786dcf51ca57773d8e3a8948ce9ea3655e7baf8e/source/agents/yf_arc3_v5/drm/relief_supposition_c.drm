@@ -1,0 +1,166 @@
+{
+  "module_id": "relief_supposition_c",
+  "declarations": [
+    {
+      "id": "policy.relief_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_selected_consumer_and_independent_layer_completion"
+      ],
+      "applicability": [
+        "provisional_relief_writing_question"
+      ],
+      "invariants": [
+        "reference_and_surface_homology_independent",
+        "missing_contour_explained_by_occlusion_not_physical_depth",
+        "relation_and_order_caps_stay_open",
+        "original_masks_and_all_hypotheses_retained",
+        "no_causal_law_or_action"
+      ],
+      "falsifiers": [
+        "foreign_scope",
+        "unsupported_completion",
+        "cycle_or_work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "relief.retain_provisional_layered_writing",
+        "relief.retain_unqualified_reference_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.relief_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "relief.retain_provisional_layered_writing"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "completion_support_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "unique_layer_refs",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "separated_reference_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "mutable_surface_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "homologous_surface_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "measured_occlusion_relations_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "layer_order_candidates_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "cycle_detected",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "missing_measurement",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "relief.retain_provisional_layered_writing"
+          }
+        },
+        {
+          "id": "projection.policy.relief_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "relief.retain_unqualified_reference_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "relief.retain_unqualified_reference_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.relief_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "relief.retain_provisional_layered_writing"
+            }
+          ],
+          "reason_ref": "reason.visible_truncation_motivates_scoped_layered_application_not_physical_depth"
+        },
+        {
+          "id": "tier.policy.relief_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "relief.retain_unqualified_reference_question"
+            }
+          ],
+          "reason_ref": "reason.visible_truncation_motivates_scoped_layered_application_not_physical_depth"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.relief_disposition_not_unique_order_or_palette_role",
+      "reason_refs": [
+        "reason.visible_truncation_motivates_scoped_layered_application_not_physical_depth"
+      ]
+    }
+  ]
+}

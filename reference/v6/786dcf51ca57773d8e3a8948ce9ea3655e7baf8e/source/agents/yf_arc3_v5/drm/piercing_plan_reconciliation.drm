@@ -1,0 +1,426 @@
+{
+  "module_id": "piercing_plan_reconciliation",
+  "declarations": [
+    {
+      "id": "policy.declared_piercing_plan_reconciliation",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "canonical_sealed_observation_reconciles_source_declared_conditional_models"
+      ],
+      "applicability": [
+        "current_source_qualified_parent_transition"
+      ],
+      "invariants": [
+        "intersection_or_comotion_alone_never_confirms_support",
+        "missing_observation_never_erases_a_member",
+        "restoration_disposition_is_not_action_permission"
+      ],
+      "falsifiers": [
+        "a_later_sealed_observation_contradicts_the_retained_model"
+      ],
+      "configuration": {
+        "measurement_contract": {
+          "model_predicate": "piercing_plan_reconciliation",
+          "current_scope_required": true,
+          "current_frame_required": true
+        },
+        "existing_recovery_policy_ref": "policy.declared_bounded_recovery_restoration_scope"
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.piercing_plan_reconciliation.current_transition",
+          "all_conditions": [],
+          "reason_ref": "reason.mismatch_preserves_parent_and_compares_supported_recovery_costs"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "source_revision",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.current_causal_revision",
+          "reason_ref": "reason.mismatch_preserves_parent_and_compares_supported_recovery_costs"
+        }
+      ],
+      "reason_refs": [
+        "reason.mismatch_preserves_parent_and_compares_supported_recovery_costs"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.piercing_plan_reconciliation"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.piercing_plan.unknown",
+          "all_conditions": [],
+          "static_facts": {
+            "applicable": true,
+            "plan_reconciliation_class_ref": "plan.observation_or_recovery_unknown",
+            "plan_reconciliation_needs_commit": false,
+            "plan_requires_replanning": true,
+            "recovery_disposition_ref": "recovery.causal_revalidation",
+            "recovery_allows_act": false,
+            "whole_influence_prediction_complete": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "qualified_parent_goal_ref"
+          }
+        },
+        {
+          "id": "projection.piercing_plan.mismatch",
+          "all_conditions": [
+            {
+              "field": "observation_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observation_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observation_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "qualified_parent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prediction_matches_observation",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "plan_reconciliation_class_ref": "plan.successor_mismatch_replan_same_parent",
+            "plan_reconciliation_needs_commit": true,
+            "recovery_disposition_ref": "recovery.current_state_path"
+          },
+          "bound_facts": {}
+        },
+        {
+          "id": "projection.piercing_plan.match",
+          "all_conditions": [
+            {
+              "field": "observation_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observation_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observation_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "qualified_parent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prediction_matches_observation",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observed_domain_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "plan_reconciliation_class_ref": "plan.predicted_successor_observed",
+            "plan_reconciliation_needs_commit": true,
+            "plan_requires_replanning": false,
+            "recovery_disposition_ref": "recovery.continue_current_plan"
+          },
+          "bound_facts": {}
+        },
+        {
+          "id": "projection.piercing_plan.repair",
+          "all_conditions": [
+            {
+              "field": "observation_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observation_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observation_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "qualified_parent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "repair_plan_preserves_parent_constraints",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "repair_cost_known",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "repair_cost_not_greater_than_restart_total",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prediction_matches_observation",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "plan_reconciliation_class_ref": "plan.repair_preferred_to_restart",
+            "plan_requires_replanning": true,
+            "recovery_disposition_ref": "recovery.current_state_path"
+          },
+          "bound_facts": {}
+        },
+        {
+          "id": "projection.piercing_plan.restart",
+          "all_conditions": [
+            {
+              "field": "observation_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observation_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observation_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "qualified_parent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "restart_affordance_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "failure_knowledge_preserved",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "replay_plan_preserves_parent_constraints",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "reacquisition_plan_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "repair_cost_known",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "restart_total_cost_known",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "restart_total_cost_less_than_repair",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prediction_matches_observation",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "plan_reconciliation_class_ref": "plan.restart_replay_reacquisition_preferred",
+            "plan_requires_replanning": true,
+            "recovery_disposition_ref": "recovery.exposed_restart_checkpoint"
+          },
+          "bound_facts": {}
+        },
+        {
+          "id": "projection.piercing_plan.gap",
+          "all_conditions": [
+            {
+              "field": "observation_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observation_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observation_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "qualified_parent_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "repair_plan_preserves_parent_constraints",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "restart_affordance_qualified",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "prediction_matches_observation",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "plan_reconciliation_class_ref": "plan.repair_and_restart_affordance_gap",
+            "recovery_disposition_ref": "recovery.causal_revalidation"
+          },
+          "bound_facts": {}
+        },
+        {
+          "id": "projection.piercing_plan.reused",
+          "all_conditions": [
+            {
+              "field": "reconciliation_revision_already_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "plan_reconciliation_needs_commit": false
+          },
+          "bound_facts": {}
+        }
+      ]
+    },
+    {
+      "id": "rule.piercing_plan_reconciliation",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "premises": [
+        "retained_parent_goal_ref",
+        "source_observation_origin_refs"
+      ],
+      "applicability": [
+        "source_selected_sealed_observation_revision"
+      ],
+      "invariants": [
+        "intersection_or_comotion_alone_never_confirms_support",
+        "missing_observation_never_erases_a_member",
+        "restoration_disposition_is_not_action_permission"
+      ],
+      "falsifiers": [
+        "a_later_sealed_observation_contradicts_the_retained_model"
+      ],
+      "reason_refs": [
+        "reason.mismatch_preserves_parent_and_compares_supported_recovery_costs"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{plan_reconciliation_ref}",
+          "kind": "schema",
+          "label": "revisable Source piercing observation revision",
+          "required_fields": [
+            "plan_reconciliation_ref"
+          ],
+          "static_attributes": {
+            "commitment": "revisable"
+          },
+          "attribute_bindings": {}
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{plan_reconciliation_ref}",
+          "predicate": "piercing_plan_reconciliation",
+          "family": "control",
+          "argument_patterns": [
+            "{plan_reconciliation_ref}"
+          ],
+          "epistemic_status": "proposed",
+          "required_fields": [
+            "plan_reconciliation_ref",
+            "retained_parent_goal_ref"
+          ],
+          "static_attributes": {
+            "whole_influence_prediction_complete": false
+          },
+          "attribute_bindings": {
+            "plan_reconciliation_ref": "plan_reconciliation_ref",
+            "retained_parent_goal_ref": "retained_parent_goal_ref",
+            "prior_plan_version_ref": "prior_plan_version_ref",
+            "observed_configuration_ref": "observed_configuration_ref",
+            "source_revision": "source_revision",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "current_frame_ref": "current_frame_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "plan_reconciliation_class_ref": "plan_reconciliation_class_ref",
+            "plan_requires_replanning": "plan_requires_replanning",
+            "recovery_disposition_ref": "recovery_disposition_ref",
+            "recovery_allows_act": "recovery_allows_act",
+            "repair_plan_ref": "repair_plan_ref",
+            "restart_affordance_ref": "restart_affordance_ref",
+            "replay_plan_ref": "replay_plan_ref",
+            "reacquisition_goal_refs": "reacquisition_goal_refs",
+            "repair_resource_cost": "repair_resource_cost",
+            "restart_replay_reacquisition_resource_cost": "restart_replay_reacquisition_resource_cost",
+            "reconciliation_falsifier_refs": "reconciliation_falsifier_refs"
+          }
+        }
+      ]
+    }
+  ]
+}

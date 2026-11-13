@@ -1,0 +1,546 @@
+{
+  "schema": "logos-engine.lot8a.provisional-063-064-test-scope.v1",
+  "declaredAt": "2026-11-11T19:15:16.767972+00:00",
+  "status": "prospective_scope_only_no_execution",
+  "qualification": "Provisional composition of immutable5C/6B source checkpoints with8A; no actual0.63/0.64 publication, current145-file success, final0.65 qualification, cost or publication is claimed.",
+  "inputDeclarations": {
+    "eightA": {
+      "commit": "7c10456a675f0e9a93089a0f679e96677ede03af",
+      "path": "docs/migration/lot8a-evidence/contract/development-validation-plan.json",
+      "sha256": "242a2ce36f8c901972923132b7af755241462ee3d663e1644d804d12927dd6ec",
+      "bytes": 48672
+    },
+    "sixB": {
+      "commit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/validation-scope-plan.json",
+      "sha256": "19cb0b2380f202c0762b24734c07773e1a6c3ac5cca4f5a468a48483624e0558",
+      "bytes": 24505
+    }
+  },
+  "provisionalLineage": {
+    "eightADevelopmentBaseSite": 103,
+    "eightADevelopmentBaseNative": "0.62.0",
+    "eightADevelopmentCheckpoint": "7c10456a675f0e9a93089a0f679e96677ede03af",
+    "incomingSixBCheckpoint": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+    "fiveCIncludedCheckpoint": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+    "actual063And064PublicationReconciliation": "pending; compare actual source/test/harness bytes later and retain these original identities and dates without relabeling results"
+  },
+  "testFiles": [
+    "tests/bounded-weak-cache.test.ts",
+    "tests/canonical-cache.test.ts",
+    "tests/kernel-batch.test.ts",
+    "tests/v5-finite-relation-domain.test.ts",
+    "tests/v5-piercing-native.test.ts",
+    "tests/v5-reception-wait-contracts.test.ts",
+    "tests/v5-reference-population-calculus.test.ts",
+    "tests/v5-temporal-fragment-match.test.ts",
+    "tests/v6-acquired-continuation-priority.test.ts",
+    "tests/v6-addressed-material-kernel.test.ts",
+    "tests/v6-addressed-material-reference.test.ts",
+    "tests/v6-addressed-material.test.ts",
+    "tests/v6-agent.test.ts",
+    "tests/v6-alternating-graph-access.test.ts",
+    "tests/v6-alternating-graph-integration.test.ts",
+    "tests/v6-animated-contact.test.ts",
+    "tests/v6-auxiliary-support.test.ts",
+    "tests/v6-axial-question-kernel.test.ts",
+    "tests/v6-axial-question-reference.test.ts",
+    "tests/v6-caller-integration.test.ts",
+    "tests/v6-cell-placement-integration.test.ts",
+    "tests/v6-cell-placement.test.ts",
+    "tests/v6-configured-arrivals.test.ts",
+    "tests/v6-control-attention-reference.test.ts",
+    "tests/v6-coupled-pair-planning.test.ts",
+    "tests/v6-crossed-prefix-access.test.ts",
+    "tests/v6-crossed-prefix-integration.test.ts",
+    "tests/v6-crossed-prefix-observation.test.ts",
+    "tests/v6-drm-projector.test.ts",
+    "tests/v6-exposed-current-evidence.test.ts",
+    "tests/v6-exposed-reception-integration.test.ts",
+    "tests/v6-exposed-reception-observation.test.ts",
+    "tests/v6-exposed-reception.test.ts",
+    "tests/v6-facet-examples-foreign-acquisition.test.ts",
+    "tests/v6-facet-examples-integration.test.ts",
+    "tests/v6-facet-examples.test.ts",
+    "tests/v6-feedback-sequences-integration.test.ts",
+    "tests/v6-feedback-sequences-reference.test.ts",
+    "tests/v6-field-stock.test.ts",
+    "tests/v6-framed-transfer-kernel.test.ts",
+    "tests/v6-framed-window-access.test.ts",
+    "tests/v6-framed-window-integration.test.ts",
+    "tests/v6-framed-window-observation.test.ts",
+    "tests/v6-frontier-native-snapshot.test.ts",
+    "tests/v6-goal-attention.test.ts",
+    "tests/v6-incremental-memory.test.ts",
+    "tests/v6-interface-families.test.ts",
+    "tests/v6-inventory-copy-cost.test.ts",
+    "tests/v6-inventory-family-reference.test.ts",
+    "tests/v6-inventory-kernel.test.ts",
+    "tests/v6-inventory-restoration-cache.test.ts",
+    "tests/v6-knowledge-store.test.ts",
+    "tests/v6-learned-preparation-priority.test.ts",
+    "tests/v6-linked-temporal-preparation.test.ts",
+    "tests/v6-linked-temporal-reference.test.ts",
+    "tests/v6-material-recovery-priority.test.ts",
+    "tests/v6-motif-access-contract.test.ts",
+    "tests/v6-motif-access-kernel.test.ts",
+    "tests/v6-motif-access-reference.test.ts",
+    "tests/v6-motion-caller-integration.test.ts",
+    "tests/v6-motion-contrast.test.ts",
+    "tests/v6-native-authority.test.ts",
+    "tests/v6-native-caller.test.ts",
+    "tests/v6-native-checkpoint-integration.test.ts",
+    "tests/v6-native-copy.test.ts",
+    "tests/v6-native-family-registration.test.ts",
+    "tests/v6-native-hydration-cache.test.ts",
+    "tests/v6-native-interface-families.test.ts",
+    "tests/v6-native-mixed-path.test.ts",
+    "tests/v6-native-observer.test.ts",
+    "tests/v6-native-persistence.test.ts",
+    "tests/v6-native-runtime.test.ts",
+    "tests/v6-native-snapshot-identity.test.ts",
+    "tests/v6-native-state-graph.test.ts",
+    "tests/v6-native-transition-domain-integration.test.ts",
+    "tests/v6-native-transition-domain.test.ts",
+    "tests/v6-native-working-witness.test.ts",
+    "tests/v6-object-binding-common.test.ts",
+    "tests/v6-observed-binding-reference.test.ts",
+    "tests/v6-observed-binding.test.ts",
+    "tests/v6-occluded-catalogue-kernel.test.ts",
+    "tests/v6-occluded-catalogue-reference.test.ts",
+    "tests/v6-ordered-reaction-kernel.test.ts",
+    "tests/v6-outline-arbitration.test.ts",
+    "tests/v6-outline-kernel.test.ts",
+    "tests/v6-panel-service.test.ts",
+    "tests/v6-periodic-pattern-counts.test.ts",
+    "tests/v6-point-display.test.ts",
+    "tests/v6-point-set.test.ts",
+    "tests/v6-preview-capture.test.ts",
+    "tests/v6-preview-packing-integration.test.ts",
+    "tests/v6-preview-packing-native.test.ts",
+    "tests/v6-preview-packing-reference.test.ts",
+    "tests/v6-program-control-discovery-integration.test.ts",
+    "tests/v6-radial-port-integration.test.ts",
+    "tests/v6-ranked-workshop-grounded-inquiry.test.ts",
+    "tests/v6-reactive-contact-kernel.test.ts",
+    "tests/v6-reception-residual-evidence.test.ts",
+    "tests/v6-reception-service-access.test.ts",
+    "tests/v6-reception-service-integration.test.ts",
+    "tests/v6-reception-service-native-contracts.test.ts",
+    "tests/v6-reception-service-observation.test.ts",
+    "tests/v6-recurrent-series-access.test.ts",
+    "tests/v6-recurrent-series-integration.test.ts",
+    "tests/v6-recurrent-series-native.test.ts",
+    "tests/v6-recurrent-series-observation.test.ts",
+    "tests/v6-reference-population-access.test.ts",
+    "tests/v6-reference-population-integration.test.ts",
+    "tests/v6-reference-population-observation.test.ts",
+    "tests/v6-relational-chamber-integration.test.ts",
+    "tests/v6-relational-chamber.test.ts",
+    "tests/v6-relative-arrangements-integration.test.ts",
+    "tests/v6-relative-arrangements-reference.test.ts",
+    "tests/v6-rooted-line-access.test.ts",
+    "tests/v6-rooted-line-integration.test.ts",
+    "tests/v6-rooted-line-observation.test.ts",
+    "tests/v6-rooted-quota-mark-support.test.ts",
+    "tests/v6-rooted-quota-parity.test.ts",
+    "tests/v6-select-reference.test.ts",
+    "tests/v6-selected-rigid-capture.test.ts",
+    "tests/v6-selected-rigid-integration.test.ts",
+    "tests/v6-selected-rigid-native.test.ts",
+    "tests/v6-selected-rigid-reference.test.ts",
+    "tests/v6-service-snapshot-reuse.test.ts",
+    "tests/v6-shared-series-native.test.ts",
+    "tests/v6-shared-series.test.ts",
+    "tests/v6-source-entry-routing.test.ts",
+    "tests/v6-src-program.test.ts",
+    "tests/v6-stationary-contact-continuation.test.ts",
+    "tests/v6-support-caller-integration.test.ts",
+    "tests/v6-support-extensions.test.ts",
+    "tests/v6-support-navigation.test.ts",
+    "tests/v6-support-procedures.test.ts",
+    "tests/v6-symbol-geometry-reference.test.ts",
+    "tests/v6-symbol-interface-reference.test.ts",
+    "tests/v6-symbol-transactions-reference.test.ts",
+    "tests/v6-topological-recolor-kernel.test.ts",
+    "tests/v6-topological-recolor-reference.test.ts",
+    "tests/v6-typed-material-kernel.test.ts",
+    "tests/v6-visual-sequences.test.ts",
+    "tests/v6-window-question-kernel.test.ts",
+    "tests/v6-window-question-reference.test.ts",
+    "tests/v6-workshop-cold-caller-continuation.test.ts",
+    "tests/v6-workshop-followup-source.test.ts",
+    "tests/v7-kernel.test.ts"
+  ],
+  "testFileCount": 145,
+  "testFileOrder": "lexicographic_repository_relative_path",
+  "scopeDerivation": {
+    "eightAFiles": 138,
+    "sixBFiles": 142,
+    "overlap": 135,
+    "union": 145,
+    "addedToEightA": [
+      "tests/v6-object-binding-common.test.ts",
+      "tests/v6-observed-binding-reference.test.ts",
+      "tests/v6-observed-binding.test.ts",
+      "tests/v6-selected-rigid-capture.test.ts",
+      "tests/v6-selected-rigid-integration.test.ts",
+      "tests/v6-selected-rigid-native.test.ts",
+      "tests/v6-selected-rigid-reference.test.ts"
+    ],
+    "onlyEightA": [
+      "tests/v6-motif-access-reference.test.ts",
+      "tests/v6-motif-access-contract.test.ts",
+      "tests/v6-motif-access-kernel.test.ts"
+    ]
+  },
+  "wholeModuleExclusions": [
+    "tests/v6-ranked-workshop-reference.test.ts",
+    "tests/v6-ranked-workshop-kernel.test.ts",
+    "tests/v6-symbol-transactions-kernel.test.ts",
+    "tests/v6-framed-transfer-reference.test.ts"
+  ],
+  "exclusionQualification": "Exclude entire eager-loading modules before import; no test-name filter, LKEY payload, oracle, replay, game or historical pass credit.",
+  "expectedEntryCoverage": {
+    "connected": 67,
+    "declared": 76,
+    "groups": [
+      {
+        "id": "goal_access",
+        "connected": 12,
+        "declared": 12
+      },
+      {
+        "id": "window_constraints",
+        "connected": 21,
+        "declared": 21
+      },
+      {
+        "id": "surface",
+        "connected": 10,
+        "declared": 10
+      },
+      {
+        "id": "factored_material_return",
+        "connected": 24,
+        "declared": 33
+      }
+    ],
+    "status": "prospective_assertions_not_an_executed_audit"
+  },
+  "radialConflictResolution": {
+    "path": "tests/v6-radial-port-integration.test.ts",
+    "sha256": "2ee08ae05e736c1d71bf6e5d598c4147e5be942b355d8e29f21ca47df9f949ad",
+    "changes": "Resolve only the two count/title conflicts to the union67/76 and groups12/12,21/21,10/10,24/33. All remaining assertions and both Binding/Motif aliases retained.",
+    "testsExecuted": false
+  },
+  "strictInheritedTestCorrections": [
+    {
+      "path": "tests/v6-coupled-pair-planning.test.ts",
+      "identicalToCommit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+      "sha256": "7479a94953f6a56b332a207e280df224ee48ec9604d298fa45aa5367f00cdb20",
+      "bytes": 15887,
+      "strictSourceAssertionsPresent": [
+        "'preview_packing', 'selected_rigid', 'observed_feedback_sequence'"
+      ],
+      "executed": false
+    },
+    {
+      "path": "tests/v6-selected-rigid-integration.test.ts",
+      "identicalToCommit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+      "sha256": "48da34d9c164b6462471c0f4b6a735757412d69d10fe3c367a0a043e2495d211",
+      "bytes": 31541,
+      "strictSourceAssertionsPresent": [
+        "result.reason, 'native_acquisition_incomplete'",
+        "sealed.composed_reconciliation.interruption, 'level_active_time_budget'",
+        "incomplete.length, 2",
+        "binding.state(), bindingStateBefore",
+        "result.authorization, null"
+      ],
+      "executed": false
+    }
+  ],
+  "prospectiveTestCommand": [
+    "node",
+    "--test",
+    "--test-concurrency=1",
+    "--test-reporter=tap",
+    "tests/bounded-weak-cache.test.ts",
+    "tests/canonical-cache.test.ts",
+    "tests/kernel-batch.test.ts",
+    "tests/v5-finite-relation-domain.test.ts",
+    "tests/v5-piercing-native.test.ts",
+    "tests/v5-reception-wait-contracts.test.ts",
+    "tests/v5-reference-population-calculus.test.ts",
+    "tests/v5-temporal-fragment-match.test.ts",
+    "tests/v6-acquired-continuation-priority.test.ts",
+    "tests/v6-addressed-material-kernel.test.ts",
+    "tests/v6-addressed-material-reference.test.ts",
+    "tests/v6-addressed-material.test.ts",
+    "tests/v6-agent.test.ts",
+    "tests/v6-alternating-graph-access.test.ts",
+    "tests/v6-alternating-graph-integration.test.ts",
+    "tests/v6-animated-contact.test.ts",
+    "tests/v6-auxiliary-support.test.ts",
+    "tests/v6-axial-question-kernel.test.ts",
+    "tests/v6-axial-question-reference.test.ts",
+    "tests/v6-caller-integration.test.ts",
+    "tests/v6-cell-placement-integration.test.ts",
+    "tests/v6-cell-placement.test.ts",
+    "tests/v6-configured-arrivals.test.ts",
+    "tests/v6-control-attention-reference.test.ts",
+    "tests/v6-coupled-pair-planning.test.ts",
+    "tests/v6-crossed-prefix-access.test.ts",
+    "tests/v6-crossed-prefix-integration.test.ts",
+    "tests/v6-crossed-prefix-observation.test.ts",
+    "tests/v6-drm-projector.test.ts",
+    "tests/v6-exposed-current-evidence.test.ts",
+    "tests/v6-exposed-reception-integration.test.ts",
+    "tests/v6-exposed-reception-observation.test.ts",
+    "tests/v6-exposed-reception.test.ts",
+    "tests/v6-facet-examples-foreign-acquisition.test.ts",
+    "tests/v6-facet-examples-integration.test.ts",
+    "tests/v6-facet-examples.test.ts",
+    "tests/v6-feedback-sequences-integration.test.ts",
+    "tests/v6-feedback-sequences-reference.test.ts",
+    "tests/v6-field-stock.test.ts",
+    "tests/v6-framed-transfer-kernel.test.ts",
+    "tests/v6-framed-window-access.test.ts",
+    "tests/v6-framed-window-integration.test.ts",
+    "tests/v6-framed-window-observation.test.ts",
+    "tests/v6-frontier-native-snapshot.test.ts",
+    "tests/v6-goal-attention.test.ts",
+    "tests/v6-incremental-memory.test.ts",
+    "tests/v6-interface-families.test.ts",
+    "tests/v6-inventory-copy-cost.test.ts",
+    "tests/v6-inventory-family-reference.test.ts",
+    "tests/v6-inventory-kernel.test.ts",
+    "tests/v6-inventory-restoration-cache.test.ts",
+    "tests/v6-knowledge-store.test.ts",
+    "tests/v6-learned-preparation-priority.test.ts",
+    "tests/v6-linked-temporal-preparation.test.ts",
+    "tests/v6-linked-temporal-reference.test.ts",
+    "tests/v6-material-recovery-priority.test.ts",
+    "tests/v6-motif-access-contract.test.ts",
+    "tests/v6-motif-access-kernel.test.ts",
+    "tests/v6-motif-access-reference.test.ts",
+    "tests/v6-motion-caller-integration.test.ts",
+    "tests/v6-motion-contrast.test.ts",
+    "tests/v6-native-authority.test.ts",
+    "tests/v6-native-caller.test.ts",
+    "tests/v6-native-checkpoint-integration.test.ts",
+    "tests/v6-native-copy.test.ts",
+    "tests/v6-native-family-registration.test.ts",
+    "tests/v6-native-hydration-cache.test.ts",
+    "tests/v6-native-interface-families.test.ts",
+    "tests/v6-native-mixed-path.test.ts",
+    "tests/v6-native-observer.test.ts",
+    "tests/v6-native-persistence.test.ts",
+    "tests/v6-native-runtime.test.ts",
+    "tests/v6-native-snapshot-identity.test.ts",
+    "tests/v6-native-state-graph.test.ts",
+    "tests/v6-native-transition-domain-integration.test.ts",
+    "tests/v6-native-transition-domain.test.ts",
+    "tests/v6-native-working-witness.test.ts",
+    "tests/v6-object-binding-common.test.ts",
+    "tests/v6-observed-binding-reference.test.ts",
+    "tests/v6-observed-binding.test.ts",
+    "tests/v6-occluded-catalogue-kernel.test.ts",
+    "tests/v6-occluded-catalogue-reference.test.ts",
+    "tests/v6-ordered-reaction-kernel.test.ts",
+    "tests/v6-outline-arbitration.test.ts",
+    "tests/v6-outline-kernel.test.ts",
+    "tests/v6-panel-service.test.ts",
+    "tests/v6-periodic-pattern-counts.test.ts",
+    "tests/v6-point-display.test.ts",
+    "tests/v6-point-set.test.ts",
+    "tests/v6-preview-capture.test.ts",
+    "tests/v6-preview-packing-integration.test.ts",
+    "tests/v6-preview-packing-native.test.ts",
+    "tests/v6-preview-packing-reference.test.ts",
+    "tests/v6-program-control-discovery-integration.test.ts",
+    "tests/v6-radial-port-integration.test.ts",
+    "tests/v6-ranked-workshop-grounded-inquiry.test.ts",
+    "tests/v6-reactive-contact-kernel.test.ts",
+    "tests/v6-reception-residual-evidence.test.ts",
+    "tests/v6-reception-service-access.test.ts",
+    "tests/v6-reception-service-integration.test.ts",
+    "tests/v6-reception-service-native-contracts.test.ts",
+    "tests/v6-reception-service-observation.test.ts",
+    "tests/v6-recurrent-series-access.test.ts",
+    "tests/v6-recurrent-series-integration.test.ts",
+    "tests/v6-recurrent-series-native.test.ts",
+    "tests/v6-recurrent-series-observation.test.ts",
+    "tests/v6-reference-population-access.test.ts",
+    "tests/v6-reference-population-integration.test.ts",
+    "tests/v6-reference-population-observation.test.ts",
+    "tests/v6-relational-chamber-integration.test.ts",
+    "tests/v6-relational-chamber.test.ts",
+    "tests/v6-relative-arrangements-integration.test.ts",
+    "tests/v6-relative-arrangements-reference.test.ts",
+    "tests/v6-rooted-line-access.test.ts",
+    "tests/v6-rooted-line-integration.test.ts",
+    "tests/v6-rooted-line-observation.test.ts",
+    "tests/v6-rooted-quota-mark-support.test.ts",
+    "tests/v6-rooted-quota-parity.test.ts",
+    "tests/v6-select-reference.test.ts",
+    "tests/v6-selected-rigid-capture.test.ts",
+    "tests/v6-selected-rigid-integration.test.ts",
+    "tests/v6-selected-rigid-native.test.ts",
+    "tests/v6-selected-rigid-reference.test.ts",
+    "tests/v6-service-snapshot-reuse.test.ts",
+    "tests/v6-shared-series-native.test.ts",
+    "tests/v6-shared-series.test.ts",
+    "tests/v6-source-entry-routing.test.ts",
+    "tests/v6-src-program.test.ts",
+    "tests/v6-stationary-contact-continuation.test.ts",
+    "tests/v6-support-caller-integration.test.ts",
+    "tests/v6-support-extensions.test.ts",
+    "tests/v6-support-navigation.test.ts",
+    "tests/v6-support-procedures.test.ts",
+    "tests/v6-symbol-geometry-reference.test.ts",
+    "tests/v6-symbol-interface-reference.test.ts",
+    "tests/v6-symbol-transactions-reference.test.ts",
+    "tests/v6-topological-recolor-kernel.test.ts",
+    "tests/v6-topological-recolor-reference.test.ts",
+    "tests/v6-typed-material-kernel.test.ts",
+    "tests/v6-visual-sequences.test.ts",
+    "tests/v6-window-question-kernel.test.ts",
+    "tests/v6-window-question-reference.test.ts",
+    "tests/v6-workshop-cold-caller-continuation.test.ts",
+    "tests/v6-workshop-followup-source.test.ts",
+    "tests/v7-kernel.test.ts"
+  ],
+  "nativeFreeze": {
+    "status": "pending_root_integrated_freeze",
+    "fileCount": null,
+    "digest": null
+  },
+  "fixtureAndProofExistencePreflight": {
+    "namedNewTestsRead": 7,
+    "uniqueReferencedPaths": 57,
+    "presentPaths": 45,
+    "missingPaths": [
+      {
+        "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+        "referencedBy": [
+          "6B validation-scope-plan:path"
+        ],
+        "namedPartManifestsPresent": [
+          "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz.parts.json"
+        ]
+      },
+      {
+        "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+        "referencedBy": [
+          "6B validation-scope-plan:path"
+        ],
+        "namedPartManifestsPresent": [
+          "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.parts.json"
+        ]
+      },
+      {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+        "referencedBy": [
+          "6B validation-scope-plan:path"
+        ],
+        "namedPartManifestsPresent": [
+          "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz.parts.json"
+        ]
+      },
+      {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+        "referencedBy": [
+          "6B validation-scope-plan:path"
+        ],
+        "namedPartManifestsPresent": [
+          "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.parts.json"
+        ]
+      },
+      {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+        "referencedBy": [
+          "6B validation-scope-plan:path"
+        ],
+        "namedPartManifestsPresent": [
+          "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz.parts.json"
+        ]
+      },
+      {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+        "referencedBy": [
+          "6B validation-scope-plan:path"
+        ],
+        "namedPartManifestsPresent": [
+          "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.parts.json"
+        ]
+      },
+      {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+        "referencedBy": [
+          "6B validation-scope-plan:path"
+        ],
+        "namedPartManifestsPresent": [
+          "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.parts.json"
+        ]
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+        "referencedBy": [
+          "6B validation-scope-plan:path"
+        ],
+        "namedPartManifestsPresent": [
+          "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz.parts.json"
+        ]
+      },
+      {
+        "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+        "referencedBy": [
+          "6B validation-scope-plan:path"
+        ],
+        "namedPartManifestsPresent": [
+          "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz.parts.json"
+        ]
+      },
+      {
+        "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01",
+        "referencedBy": [
+          "6B validation-scope-plan:sourceEvidenceDirectory"
+        ],
+        "namedPartManifestsPresent": []
+      },
+      {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz",
+        "referencedBy": [
+          "6B validation-scope-plan:path"
+        ],
+        "namedPartManifestsPresent": [
+          "docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz.parts.json"
+        ]
+      },
+      {
+        "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+        "referencedBy": [
+          "6B validation-scope-plan:path"
+        ],
+        "namedPartManifestsPresent": [
+          "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz.parts.json"
+        ]
+      }
+    ],
+    "dynamicExpressionsNotResolved": [],
+    "qualification": "Named TypeScript and plan metadata read; filesystem existence only. No fixture/proof payload decoded or copied. Future execution must resolve missing required inputs."
+  },
+  "executedResultsClaimed": false,
+  "testsExecuted": 0,
+  "gatesExecuted": 0,
+  "originalOraclesExecuted": 0,
+  "replaysExecuted": 0,
+  "preparationObservation": "The initial relative-path read ran in the default scratch cwd and failed before any file modification; subsequent commands used the explicit checkout path.",
+  "requiredBeforeFinalAcceptance": [
+    "Freeze the actual composed native/source/test/build inputs",
+    "Run the newly declared complete145-file scope with retained outcomes and no failed-result reclassification",
+    "Qualify Binding, SelectedRigid and Motif common-runtime proofs separately",
+    "Reconcile actual published0.63 and0.64 source bytes before final qualification and cost"
+  ]
+}

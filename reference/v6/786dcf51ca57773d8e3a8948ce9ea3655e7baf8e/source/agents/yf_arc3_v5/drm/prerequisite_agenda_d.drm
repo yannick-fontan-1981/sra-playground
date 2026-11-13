@@ -1,0 +1,274 @@
+{
+  "module_id": "prerequisite_agenda_d",
+  "declarations": [
+    {
+      "id": "policy.prerequisite_agenda_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_full_required_dependency_agenda"
+      ],
+      "applicability": [
+        "explicit_source_declared_outer_question_scheduler"
+      ],
+      "invariants": [
+        "no_act",
+        "no_internal_recursive_search",
+        "no_required_family_erasure",
+        "validated_continuation_before_metaplan"
+      ],
+      "falsifiers": [
+        "stale_model",
+        "pending_prerequisite",
+        "unknown_as_free_transition"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "prerequisite.no_current_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.prerequisite.descriptive",
+          "all_conditions": [
+            {
+              "field": "agenda_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_blocked",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_question_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DESCRIPTIVE"
+            },
+            {
+              "field": "question_unvisited",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.prerequisite.deterministic",
+          "all_conditions": [
+            {
+              "field": "agenda_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_blocked",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_question_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DETERMINISTIC"
+            },
+            {
+              "field": "model_evidence_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "model_status_ref",
+              "operator": "equals",
+              "expected": "ACTIVE"
+            },
+            {
+              "field": "question_unvisited",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.prerequisite.conditional",
+          "all_conditions": [
+            {
+              "field": "agenda_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_blocked",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_question_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "CONDITIONAL"
+            },
+            {
+              "field": "model_evidence_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "retained_model_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "question_unvisited",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.prerequisite.blocked",
+          "all_conditions": [
+            {
+              "field": "source_blocked",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.prerequisite.continuation",
+          "all_conditions": [
+            {
+              "field": "source_blocked",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "continuation_named",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.resume_current_validated_admissible_continuation"
+        },
+        {
+          "id": "tier.prerequisite.measure_first",
+          "all_conditions": [
+            {
+              "field": "source_blocked",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "required_by_root",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "descriptive_question",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.acquire_required_model_before_dependent_question"
+        },
+        {
+          "id": "tier.prerequisite.required",
+          "all_conditions": [
+            {
+              "field": "source_blocked",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "required_by_root",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.answer_current_required_prerequisite_satisfied_operation"
+        },
+        {
+          "id": "tier.prerequisite.other",
+          "all_conditions": [
+            {
+              "field": "source_blocked",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "reason_ref": "reason.preserve_independent_declared_question_order"
+        },
+        {
+          "id": "tier.prerequisite.blocked",
+          "all_conditions": [
+            {
+              "field": "source_blocked",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.required_dependency_has_no_current_admissible_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "ordinal",
+          "preferred_order": "minimize"
+        },
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.prerequisite_agenda_actual_use_unverified",
+      "reason_refs": [
+        "reason.resume_current_validated_admissible_continuation",
+        "reason.acquire_required_model_before_dependent_question",
+        "reason.answer_current_required_prerequisite_satisfied_operation",
+        "reason.preserve_independent_declared_question_order",
+        "reason.required_dependency_has_no_current_admissible_question"
+      ]
+    }
+  ]
+}

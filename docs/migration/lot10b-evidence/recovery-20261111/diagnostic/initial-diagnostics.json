@@ -1,0 +1,22 @@
+{
+  "recordedAt": "2026-11-11T12:10:46.771800+00:00",
+  "qualification": "Development diagnostics, before the final source freeze. The first kernel attempt failed before loading tests because Node strip-only does not support TypeScript parameter properties; the code was corrected and the second attempt passed. No historical unpublished test count is reused.",
+  "diagnostics": [
+    {
+      "path": "typecheck-01.log",
+      "exitCode": 0
+    },
+    {
+      "path": "kernel-01.log",
+      "exitCode": 1,
+      "reason": "Node ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX before test loading"
+    },
+    {
+      "path": "kernel-02.log",
+      "exitCode": 0,
+      "tests": 4,
+      "pass": 4,
+      "fail": 0
+    }
+  ]
+}

@@ -1,0 +1,308 @@
+--- immutable-6a/qualify-cost-owner-graphs.mjs
++++ 6b-reviewed/qualify-cost-owner-graphs.mjs
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env node
+-/** Qualify premeasurement PreviewPacking graph captures and freeze their actual shapes.
++/** Qualify premeasurement SelectedRigid graph captures and freeze their actual shapes.
+  * CLI: node SCRIPT BASELINE.gz BASELINE.receipt.json CANDIDATE.gz CANDIDATE.receipt.json ATTRIBUTION.json FIXTURE.json
+  * Reads functional captures only. No runtime, replay, game or timing report runs.
+  */
+@@ -19,15 +19,15 @@
+ import { V6_NATIVE_PROGRAM_REFERENCE } from '../../../src/logos-engine/v6-src-program.ts';
+ 
+ const SCRIPT = fileURLToPath(import.meta.url), ROOT = resolve(dirname(SCRIPT), '../../..');
+-const BASE = resolve(ROOT, 'docs/migration/lot6a-evidence');
++const BASE = resolve(ROOT, 'docs/migration/lot6b-evidence');
+ const CAPTURE_TOOL = resolve(BASE, 'capture-cost-owner-graphs.mjs');
+-const DERIVED_FROM = resolve(ROOT, 'docs/migration/lot5b-evidence/qualify-cost-owner-graphs.mjs');
+-const CAPTURE_DERIVATION = resolve(ROOT, 'docs/migration/lot5b-evidence/capture-cost-owner-graphs.mjs');
+-const POLICY_PATH = 'reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/preview_packing/preview.drm';
+-const OWNER = 'preview_packing';
++const DERIVED_FROM = resolve(ROOT, 'docs/migration/lot6a-evidence/qualify-cost-owner-graphs.mjs');
++const CAPTURE_DERIVATION = resolve(ROOT, 'docs/migration/lot6a-evidence/capture-cost-owner-graphs.mjs');
++const POLICY_PATH = 'reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm';
++const OWNER = 'selected_rigid';
+ const IDS = [`family_state:${OWNER}`, `family_activation:${OWNER}`];
+ const IDSET = new Set(IDS);
+-const SOURCE_PROOFS = ["src/logos-engine/v6-native-runtime.ts", "src/logos-engine/v6-preview-packing.ts", "src/logos-engine/v6-preview-packing-types.ts", "src/logos-engine/v6-preview-packing-geometry.ts", "src/logos-engine/v6-preview-packing-calculus.ts", "src/logos-engine/v6-knowledge-store.ts", "src/logos-engine/kernel.ts"];
++const SOURCE_PROOFS = ["src/logos-engine/v6-native-runtime.ts", "src/logos-engine/v6-selected-rigid.ts", "src/logos-engine/v6-selected-rigid-types.ts", "src/logos-engine/v6-selected-rigid-geometry.ts", "src/logos-engine/v6-selected-rigid-search.ts", "src/logos-engine/v6-knowledge-store.ts", "src/logos-engine/kernel.ts"];
+ const ROLE_VALIDATORS = ['src/logos-engine/kernel.ts', 'src/logos-engine/v6-knowledge-store.ts'];
+ const COMMON_VALIDATORS = ['src/logos-engine/canonical.ts',
+   'src/logos-engine/v6-native-state-graph.ts', 'src/logos-engine/v6-hash.ts', 'src/logos-engine/v6-src-program.ts', 'src/logos-engine/v6/programs.json',
+@@ -126,7 +126,11 @@
+ function commonNode(a, b, digestA, digestB) {
+   assert.deepEqual(Object.keys(a).sort(), Object.keys(b).sort(), 'Common node fields changed');
+   for (const key of Object.keys(a)) {
+-    if (key === 'value') continue; // Original private values stay retained; no value-parity claim.
++    // The 6A qualifier explicitly made no common-value parity claim. The
++    // stronger 6B contract refuses any unqualified common-value difference.
++    // A future observed identity difference needs its own bounded derivation
++    // before measurement; do not normalize arbitrary strings or subtrees.
++    if (key === 'value') { assert.deepEqual(a.value, b.value, `Unattributed common node value changed: ${a.id}`); continue; }
+     if (key === 'origin') {
+       assert.deepEqual(Object.keys(a.origin).sort(), Object.keys(b.origin).sort());
+       for (const name of Object.keys(a.origin)) {
+@@ -153,9 +157,11 @@
+ class Qualification {
+   constructor(paths) {
+     this.paths = paths; this.inputs = new Map(); this.forms = []; this.traces = new Map(); this.receipts = {}; this.stores = {};
+-    this.result = { schema: 'logos-engine.lot6a-owner-cost-structural-attribution.v1',
++    this.result = { schema: 'logos-engine.lot6b-owner-cost-structural-attribution.v1',
+       status: 'functional_structure_qualification_failed', startedAt: new Date().toISOString(),
+-      checks: [], nodeAttributions: [], points: [], failures: [], commandBoundaryProjections: [], sourceFactCoverage: [] };
++      checks: [], nodeAttributions: [], points: [], failures: [], commandBoundaryProjections: [], sourceFactCoverage: [],
++      commonValueCoverage: [], commonValuePolicy: { comparison: 'exact', permittedMetadataDifference: 'origin.source_digest',
++        identityValueAttributions: [], unattributedDifferencesAllowed: 0 } };
+   }
+   async input(path) {
+     const record = await fingerprint(path), previous = this.inputs.get(record.path);
+@@ -180,10 +186,11 @@
+     for (const role of ['baseline', 'candidate']) {
+       const receiptPath = this.paths[role + 'Receipt']; await this.input(receiptPath);
+       const receipt = await read(receiptPath); this.receipts[role] = receipt;
+-      assert.equal(receipt.schema, 'logos-engine.lot6a-owner-cost-functional-capture-receipt.v1');
++      assert.equal(receipt.schema, 'logos-engine.lot6b-owner-cost-functional-capture-receipt.v1');
+       assert.equal(receipt.status, 'captured_functional_structure'); assert.equal(receipt.role, role);
+       assert.equal(receipt.ownerId, OWNER); assert.equal(receipt.acquisitionMode, 'selected_only_source_owner_no_passive_returns');
+       assert.equal(receipt.nativeDigest, receipt.nativeInventoryBefore.digest);
++      assert.equal(receipt.nativeVersion, role === 'baseline' ? '0.63.0' : '0.64.0');
+       assert.deepEqual(receipt.nativeInventoryBefore, receipt.nativeInventoryAfter);
+       assert.deepEqual(receipt.nativeSourceBefore, receipt.nativeSourceAfter);
+       assert.deepEqual(receipt.inputsBefore, receipt.inputsAfter); assert.deepEqual(receipt.generator, receipt.generatorAfter);
+@@ -203,10 +210,10 @@
+       }
+       const policyInput = receipt.inputsBefore.find(record => resolve(ROOT, record.path) === resolve(receipt.checkout, POLICY_PATH));
+       assert.ok(policyInput, 'The actual source policy is absent from the capture');
+-      const policy = (await read(policyInput.path)).declarations[0].configuration.preview_packing_question;
+-      assert.ok(policy, 'Pinned PreviewPacking policy is missing');
+-      if (this.previewPolicy) assert.deepEqual(policy, this.previewPolicy, 'Pinned PreviewPacking policy changed between roles');
+-      else this.previewPolicy = policy;
++      const policy = (await read(policyInput.path)).declarations[0].configuration.selected_rigid_question;
++      assert.ok(policy, 'Pinned SelectedRigid policy is missing');
++      if (this.selectedRigidPolicy) assert.deepEqual(policy, this.selectedRigidPolicy, 'Pinned SelectedRigid policy changed between roles');
++      else this.selectedRigidPolicy = policy;
+     }
+     assert.deepEqual(this.receipts.baseline.cases, this.receipts.candidate.cases);
+     this.casesRecord = this.receipts.candidate.cases; this.cases = await read(this.casesRecord.path);
+@@ -245,7 +252,7 @@
+   }
+   start(role, row, ordinal) {
+     const item = this.cases.cases[Math.floor(ordinal / 2)], form = ordinal % 2 ? 'measured' : 'warmup';
+-    assert.deepEqual([row.case, row.form, row.sessionId], [item.id, form, `lot6a-owner-cost-${item.id.toLowerCase()}-${form}`]);
++    assert.deepEqual([row.case, row.form, row.sessionId], [item.id, form, `lot6b-owner-cost-${item.id.toLowerCase()}-${form}`]);
+     assert.equal(row.actionsLimit, form === 'warmup' ? item.warmupActions : item.actions);
+     assert.deepEqual(row.budgets, { targetLevels: item.targetLevels, levelActionCaps: Array(item.targetLevels).fill(600) });
+     assert.equal(row.nativeDigest, this.receipts[role].nativeDigest); assert.equal(row.coldKnowledge, true); assert.equal(row.checkpointSupplied, false);
+@@ -283,6 +290,8 @@
+       assert.equal(delta.source_digest, state.runtimeDigest); state.kernel.validateNode(delta.node);
+       assert.equal(delta.node.scope, row.sessionId); assert.equal(delta.node.origin.source_digest, state.runtimeDigest);
+       assert.equal(delta.node.origin.store_profile, NATIVE_STORE_PROFILE);
++      if (delta.node.kind === 'state_fragment') assert.equal(delta.node.id,
++        `state_fragment:${symbolicDigest(delta.node.value, false)}`, 'Fragment content and identifier differ');
+       const prior = state.nodes[delta.node.id]; assert.equal(delta.node.revision, (prior?.revision ?? 0) + 1);
+       if (prior) {
+         assert.equal(delta.node.kind, prior.kind); assert.deepEqual(delta.node.origin, prior.origin);
+@@ -292,6 +301,7 @@
+         cause: delta.cause, source_digest: delta.source_digest }), delta.digest, 'Invalid Kernel delta hash');
+       state.nodes[delta.node.id] = delta.node; state.chain = delta.digest;
+     }
++    for (const delta of graph.deltasAdded) if (isNativeStateGraph(delta.node.value)) nodeValue(delta.node, state.nodes);
+     assert.deepEqual([graph.chain, graph.toRevision, graph.nodeCount], [state.chain, state.revision, Object.keys(state.nodes).length]);
+     assert.deepEqual([snapshot.graphChain, snapshot.graphRevision, snapshot.nodeCount], [state.chain, state.revision, Object.keys(state.nodes).length]);
+     const executable = Object.values(state.nodes).filter(node => ['program', 'family_activation'].includes(node.kind))
+@@ -305,14 +315,18 @@
+   }
+   async point(state, row) {
+     const request = row.request, inspection = row.type === 'terminal_inspection';
++    assert.deepEqual(row.selectedRigidOwnerBinding, { registeredInstances: state.role === 'candidate' ? 1 : 0,
++      acquisitionMatchesRegisteredOwner: state.role === 'candidate' ? true : null });
++    assert.deepEqual(row.selectedRigidSourceState, state.role === 'candidate' ? this.coldState() : null,
++      'Every actual functional point must bind the exact empty source journal');
+     assert.equal(row.pointIndex, state.point++); assert.equal(request.sessionId, state.start.sessionId);
+     assert.equal(request.sequence, state.commands); assert.equal(row.snapshot.actions, state.commands);
+     assert.equal(row.snapshot.whyAct.enabled, true); assert.equal(row.snapshot.caller.enabled, true);
+     if (inspection) {
+       assert.equal(request.type, 'inspect'); assert.equal(state.start.form, 'measured');
+       assert.equal(state.commands, state.start.actionsLimit); assert.equal(state.pending, null);
+-      assert.equal(row.knowledge.deltasAdded.length, 0); assert.deepEqual(row.previewPackingCalls, []);
+-      assert.deepEqual(row.previewPackingCheckpoints, []); assert.deepEqual(row.previewPackingProposals, []);
++      assert.equal(row.knowledge.deltasAdded.length, 0); assert.deepEqual(row.selectedRigidCalls, []);
++      assert.deepEqual(row.selectedRigidCheckpoints, []); assert.deepEqual(row.selectedRigidProposals, []);
+     } else if (request.type === 'init') {
+       assert.equal(row.pointIndex, 0); assert.deepEqual(request.budgets, state.start.budgets);
+       assert.equal(row.checkedCommandRecord, null);
+@@ -328,32 +342,31 @@
+       assert.deepEqual(row.publicPacket, state.trace.packets[state.commands].packet);
+       assert.deepEqual(request.observation, publicObservation(row.publicPacket));
+     }
+-    assert.deepEqual(row.previewPackingCalls, [], 'PreviewPacking has no passive acquisition; fixed cost traces select other owners');
+-    for (const call of row.previewPackingProposals) {
++    assert.deepEqual(row.selectedRigidCalls, [], 'SelectedRigid has no passive acquisition; fixed cost traces select other owners');
++    for (const call of row.selectedRigidProposals) {
+       assert.equal(state.role, 'candidate'); assert.equal(call.index, state.proposals.length);
+       const packet = state.trace.packets[state.commands].packet;
+-      assert.deepEqual(call.rows, packet.frame_rows, 'Preview proposal must use the current public raster');
++      assert.deepEqual(call.rows, packet.frame_rows, 'SelectedRigid proposal must use the current public raster');
+       assert.deepEqual([call.observation.level_epoch, call.observation.levels_completed], [packet.level, packet.levels_completed]);
+       assert.equal(call.observation.revision, state.commands + 1);
+-      assert.equal(call.returnValue, null, 'The fixed common-loop traces must remain outside PreviewPacking');
+-      assert.deepEqual(call.sourceBefore, state.latestSource, 'Preview negative proposals must form one complete source-state chain');
+-      const cache = { ...call.sourceBefore._packing_scene_cache };
++      assert.equal(call.returnValue, null, 'The fixed common-loop traces must remain outside SelectedRigid');
++      assert.deepEqual(call.sourceBefore, state.latestSource, 'SelectedRigid negative proposals must form one complete source-state chain');
+       assert.ok(Number.isSafeInteger(call.remaining) && call.remaining >= 0);
+-      if (call.remaining >= 1 && !own(cache, call.observation.level_epoch)) cache[call.observation.level_epoch] = null;
+-      const expected = this.coldState(cache);
+-      assert.deepEqual(call.sourceAfter, expected, 'Only a measured null scene cache entry may change in the fixed cost cases');
++      const expected = this.coldState();
++      assert.deepEqual(call.sourceBefore, expected, 'Foreign fixed-cost traces must start with an empty rigid event journal');
++      assert.deepEqual(call.sourceAfter, expected, 'A negative rigid proposal cannot acquire state or add a scene cache');
+       state.latestSource = call.sourceAfter; state.sourceStates.push(call.sourceAfter); state.proposals.push(call);
+     }
+-    for (const checkpoint of row.previewPackingCheckpoints) {
++    for (const checkpoint of row.selectedRigidCheckpoints) {
+       assert.equal(state.role, 'candidate'); assert.equal(checkpoint.index, state.checkpoints.length);
+-      assert.equal(checkpoint.state.schema, 'native.preview_packing.v1');
+-      assert.deepEqual(Object.keys(checkpoint.state).sort(), ['schema', 'packing_events', 'packing_model', 'packing_controls', '_packing_scene_cache'].sort());
++      assert.equal(checkpoint.state.schema, 'native.selected_rigid.v1');
++      assert.deepEqual(Object.keys(checkpoint.state).sort(), ['schema', 'format', 'events'].sort());
+       const { schema, ...source } = checkpoint.state;
+       assert.ok(state.sourceStates.some(known => isDeepStrictEqual(known, source)),
+-        'Preview checkpoint is not the cold state or an actual captured negative proposal state');
++        'SelectedRigid checkpoint is not the exact cold source state');
+       state.checkpoints.push(checkpoint);
+     }
+-    assert.equal(state.calls.length, 0, 'No Preview record call is admissible in the declared fixed cost traces');
++    assert.equal(state.calls.length, 0, 'No SelectedRigid record call is admissible in the declared fixed cost traces');
+     await this.graph(state, row);
+     if (inspection) state.shape.inspection.push({ graphNodes: row.snapshot.nodeCount });
+     else {
+@@ -364,20 +377,20 @@
+     }
+     state.last = row;
+   }
+-  coldState(cache = {}) {
+-    return { packing_events: [], packing_model: null, packing_controls: {}, _packing_scene_cache: cache };
++  coldState() {
++    return { format: 'selected_rigid_events.v1', events: [] };
+   }
+   async attribute(left, right, a, b) {
+     const extraIds = Object.keys(right.nodes).filter(id => !own(left.nodes, id)).sort(compareUnicode);
+     assert.deepEqual(Object.keys(left.nodes).filter(id => !own(right.nodes, id)), [], 'An existing node disappeared');
+-    for (const id of IDS) assert.ok(extraIds.includes(id), 'PreviewPacking installation node is missing');
++    for (const id of IDS) assert.ok(extraIds.includes(id), 'SelectedRigid installation node is missing');
+     const categories = new Map();
+     for (const id of extraIds) {
+       const node = right.nodes[id];
+-      if (IDSET.has(id)) categories.set(id, { category: id === IDS[0] ? 'previewPacking_owner_state' : 'previewPacking_installation' });
+-      else assert.equal(node.kind, 'state_fragment', 'A foreign owner must not create Preview source-event facts or unrelated nodes');
+-    }
+-    // Trace each extra fragment through a real persisted Preview owner root,
++      if (IDSET.has(id)) categories.set(id, { category: id === IDS[0] ? 'selectedRigid_owner_state' : 'selectedRigid_installation' });
++      else assert.equal(node.kind, 'state_fragment', 'A foreign owner must not create SelectedRigid source-event facts or unrelated nodes');
++    }
++    // Trace each extra fragment through a real persisted SelectedRigid owner root,
+     // including a superseded root retained in an earlier delta. No arbitrary
+     // node-count allowance or removal of a subtree is used.
+     for (const delta of b.knowledge.deltasAdded) {
+@@ -390,14 +403,14 @@
+       }
+     }
+     for (const id of extraIds) if (right.nodes[id].kind === 'state_fragment') {
+-      assert.ok(references.has(id), 'New fragment has no PreviewPacking owner checkpoint provenance: ' + id);
++      assert.ok(references.has(id), 'New fragment has no SelectedRigid owner checkpoint provenance: ' + id);
+       // Hydration validates referenced fragment hash and encoding. The fragment
+       // content itself is also compared to the content-addressed node identity.
+       assert.equal(id, `state_fragment:${symbolicDigest(right.nodes[id].value, false)}`);
+-      categories.set(id, { category: 'previewPacking_referenced_state_fragment', parentNodes: [...references.get(id)].sort(compareUnicode) });
++      categories.set(id, { category: 'selectedRigid_referenced_state_fragment', parentNodes: [...references.get(id)].sort(compareUnicode) });
+     }
+     assert.equal(categories.size, extraIds.length, 'A new graph node remains unattributed');
+-    assert.equal(right.calls.length, 0, 'The cost traces must not acquire Preview source returns');
++    assert.equal(right.calls.length, 0, 'The cost traces must not acquire SelectedRigid source returns');
+     this.result.sourceFactCoverage.push({ case: b.case, form: b.form, pointIndex: b.pointIndex,
+       acquiredReturns: 0, persistedSourceFacts: 0, sourceCallIndices: [],
+       capturedNegativeProposals: right.proposals.length });
+@@ -410,6 +423,9 @@
+         'Common delta identities, causes or order changed');
+       commonNode(x.node, y.node, left.runtimeDigest, right.runtimeDigest);
+     }
++    this.result.commonValueCoverage.push({ case: b.case, form: b.form, pointIndex: b.pointIndex,
++      commonNodesCompared: Object.keys(left.nodes).length, commonDeltasCompared: common.length,
++      comparison: 'exact', unattributedDifferences: 0 });
+     for (const delta of b.knowledge.deltasAdded.filter(item => categories.has(item.node.id))) {
+       const node = delta.node; let explanation = categories.get(node.id);
+       if (IDSET.has(node.id)) {
+@@ -421,15 +437,14 @@
+           } else { assert.equal(node.id, IDS[1]); assert.deepEqual(nodeValue(node, right.nodes), { enabled: true }); }
+         } else { assert.equal(node.id, IDS[0]); assert.equal(delta.cause.workflow, 'v6.composition_strategy.choose'); }
+         if (node.id === IDS[0]) {
+-          const envelope = nodeValue(node, right.nodes); assert.equal(envelope.schema, 'native.preview_packing.v1');
++          const envelope = nodeValue(node, right.nodes); assert.equal(envelope.schema, 'native.selected_rigid.v1');
+           const checkpoint = right.checkpoints.find(item => isDeepStrictEqual(item.state, envelope));
+-          assert.ok(checkpoint, 'A Preview owner root must equal an actual immutable checkpoint returned during this session');
++          assert.ok(checkpoint, 'A SelectedRigid owner root must equal an actual immutable checkpoint returned during this session');
+           explanation = { ...explanation, checkpointIndex: checkpoint.index, sourceStateSha256: canonicalHash(envelope),
+-            negativeSceneEpochs: Object.keys(envelope._packing_scene_cache), retainedEventCount: envelope.packing_events.length };
+-          assert.deepEqual(envelope.packing_events, []); assert.equal(envelope.packing_model, null);
+-          assert.deepEqual(envelope.packing_controls, {});
++            retainedEventCount: envelope.events.length };
++          assert.deepEqual(envelope, { schema: 'native.selected_rigid.v1', ...this.coldState() });
+         }
+-      } else assert.equal(node.kind, 'state_fragment', 'Unattributed Preview source fact is forbidden');
++      } else assert.equal(node.kind, 'state_fragment', 'Unattributed SelectedRigid source fact is forbidden');
+       this.result.nodeAttributions.push({ case: b.case, form: b.form, pointIndex: b.pointIndex, request: b.request.type,
+         requestSequence: b.request.sequence, deltaSequence: delta.sequence, nodeId: node.id, kind: node.kind,
+         revision: node.revision, cause: delta.cause, evidence: node.evidence, nodeSha256: await digest(node), ...explanation });
+@@ -440,8 +455,9 @@
+     this.result.points.push({ case: b.case, form: b.form, pointIndex: b.pointIndex, request: b.request.type,
+       sequence: b.request.sequence, baselineNodeCount: a.snapshot.nodeCount, candidateNodeCount: b.snapshot.nodeCount,
+       baselineGraphRevision: left.revision, candidateGraphRevision: right.revision,
++      baselineDeltaCount: a.knowledge.deltasAdded.length, candidateDeltaCount: b.knowledge.deltasAdded.length,
+       addedNodeIds: extraIds, attributedCumulativeDeltas: right.ownDeltaCount,
+-      officialBoundarySourceCalls: b.previewPackingCalls.filter(call => call.before.level_epoch !== call.after.level_epoch || call.before.levels_completed !== call.after.levels_completed).map(call => call.index) });
++      officialBoundarySourceCalls: b.selectedRigidCalls.filter(call => call.before.level_epoch !== call.after.level_epoch || call.before.levels_completed !== call.after.levels_completed).map(call => call.index) });
+   }
+   end(state, row, ordinal) {
+     const receipt = this.receipts[state.role].sessions[ordinal];
+@@ -450,12 +466,14 @@
+     assert.equal(state.shape.actions, state.start.actionsLimit); assert.equal(state.shape.final.acquiredTransitions, state.shape.actions);
+     assert.equal(state.shape.inspection.length, state.start.form === 'measured' ? 3 : 0);
+     assert.equal(row.terminalInspections, state.shape.inspection.length); assert.equal(row.captures, state.shape.requests.length);
+-    assert.equal(row.previewPackingRecordCalls, state.calls.length);
+-    assert.equal(row.previewPackingCheckpoints, state.checkpoints.length);
++    assert.equal(row.selectedRigidRecordCalls, state.calls.length);
++    assert.equal(row.selectedRigidCheckpoints, state.checkpoints.length);
+     assert.equal(state.calls.length, 0);
+-    assert.equal(row.previewPackingProposalCalls, state.proposals.length);
++    assert.equal(row.selectedRigidProposalCalls, state.proposals.length);
++    assert.deepEqual(receipt.selectedRigidOwnerBinding, { registeredInstances: state.role === 'candidate' ? 1 : 0,
++      acquisitionMatchesRegisteredOwner: state.role === 'candidate' ? true : null });
+     assert.deepEqual(row.shape, state.shape); assert.deepEqual(receipt.shape, state.shape);
+-    for (const key of ['case', 'form', 'sessionId', 'status', 'commands', 'captures', 'terminalInspections', 'previewPackingRecordCalls', 'previewPackingProposalCalls', 'previewPackingCheckpoints']) assert.deepEqual(row[key], receipt[key]);
++    for (const key of ['case', 'form', 'sessionId', 'status', 'commands', 'captures', 'terminalInspections', 'selectedRigidRecordCalls', 'selectedRigidProposalCalls', 'selectedRigidCheckpoints']) assert.deepEqual(row[key], receipt[key]);
+   }
+   async captures() {
+     const streams = [streamCapture(this.paths.baseline), streamCapture(this.paths.candidate)];
+@@ -469,7 +487,7 @@
+           for (const [role, row] of [['baseline', a.value], ['candidate', b.value]]) {
+             const receipt = this.receipts[role];
+             if (a.type === '$header') {
+-              assert.equal(row.schema, 'logos-engine.lot6a-owner-cost-functional-capture.v1');
++              assert.equal(row.schema, 'logos-engine.lot6b-owner-cost-functional-capture.v1');
+               assert.equal(row.role, role); assert.equal(row.checkout, receipt.checkout); assert.equal(row.startedAt, receipt.startedAt);
+             } else { assert.equal(row.status, receipt.status); assert.equal(row.finishedAt, receipt.finishedAt); }
+           }
+@@ -537,10 +555,10 @@
+   audit.result.recordedAt = new Date().toISOString(); audit.result.inputs = [...audit.inputs.values()];
+   audit.result.checkedCount = audit.result.checks.length;
+   audit.result.formsSha256 = canonicalHash(audit.forms);
+-  audit.result.qualification = 'Every captured graph reconstructs from its exact complete Kernel delta chain using the validator bound to its own source freeze and identical value codecs. Added candidate nodes/deltas receive explicit installation, actual PreviewPacking checkpoint or reachable-fragment attribution, with zero source record calls or source-event facts in these foreign-owner cost traces. Common node identities/metadata and common delta identity/cause/order remain exact apart from their declared runtime source digest; private value equality across versions is not asserted. Structural counts come from the captures, without an added-node or cycle formula. The forms are fixed before any cost window and every future raw trial must match its own form exactly. No cost values, timing correction, future-run success or full graph/caller semantic parity is inferred.';
++  audit.result.qualification = 'Every captured graph reconstructs from its exact complete Kernel delta chain using the validator bound to its own source freeze and identical value codecs. Every fragment identifier is checked against its content and every changed native graph root is hydrated. Added candidate nodes/deltas receive explicit installation, actual SelectedRigid checkpoint or reachable-fragment attribution, with zero source record calls or source-event facts and the exact empty source journal at every actual point in these foreign-owner cost traces. The observed acquisition owner is the registered family instance. Common node values are compared exactly; common metadata differs only at the explicitly bound origin.source_digest. Common delta identity/cause/order remains exact. Any further computed identity difference inside a value is refused pending a specific premeasurement attribution. This stricter 6B scope does not amend the historical 6A qualification. Structural counts come from the captures, without an added-node or cycle formula. The forms are fixed before any cost window and every future raw trial must match its own form exactly. No cost values, timing correction, future-run success, uncaptured measured-graph values or full caller semantic parity is inferred.';
+   await writeFile(attribution, JSON.stringify(audit.result, null, 2) + '\n', { flag: 'wx' });
+   if (audit.result.status === 'qualified_functional_structure') {
+-    const value = { schema: 'logos-engine.lot6a-owner-cost-structural-fixture.v1', status: 'qualified_functional_structure',
++    const value = { schema: 'logos-engine.lot6b-owner-cost-structural-fixture.v1', status: 'qualified_functional_structure',
+       recordedAt: new Date().toISOString(), nativeDigests: audit.result.nativeDigests, cases: audit.casesRecord,
+       captureTool: audit.captureTool, captures: {
+         baseline: { report: await fingerprint(baseline), receipt: await fingerprint(baselineReceipt) },

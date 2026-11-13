@@ -1,0 +1,151 @@
+{
+  "schema": "logos-engine.coordinated-cost-isolation.v1",
+  "status": "acknowledged_quiet_before_window",
+  "requestedAt": "2026-11-11T12:43:59.135468+00:00",
+  "recordedAt": "2026-11-11T13:20:37.431261+00:00",
+  "quietRequestId": "lot6a-reconstruction-ea2b5228-final-window",
+  "otherLaneAcknowledged": true,
+  "ownTrackedComputeEnded": true,
+  "previewStopped": true,
+  "costNodeOptionsOverride": null,
+  "requiredQuietLanes": [
+    "7-followup",
+    "10B",
+    "5C"
+  ],
+  "laneAcknowledgements": [
+    {
+      "lot": "7-followup",
+      "observedAt": "2026-11-11T13:18:39.306438+00:00",
+      "acknowledgedAt": "2026-11-11T12:59:07.412337+00:00",
+      "acknowledgementTimestampField": "quiet_acknowledged_at",
+      "activeCommand": null,
+      "executionStopped": true,
+      "terminalRelease": false,
+      "evidence": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/isolation/quiet-lot7-followup-status.json",
+        "bytes": 5214,
+        "sha256": "5eec737fe109b9676cf48045991669e18d90fd62cc8f0faaf502c5f4fbd84043"
+      }
+    },
+    {
+      "lot": "10B",
+      "observedAt": "2026-11-11T13:18:39.307164+00:00",
+      "acknowledgedAt": "2026-11-11T12:47:20.858378+00:00",
+      "acknowledgementTimestampField": "quiet_acknowledged_at",
+      "activeCommand": null,
+      "executionStopped": true,
+      "terminalRelease": false,
+      "evidence": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/isolation/quiet-lot10b-status.json",
+        "bytes": 4309,
+        "sha256": "68f81342afe2cdfa0dd0fa91b24bd9f510c4cbc7fb73101576fa13f7a5f9eba1"
+      }
+    },
+    {
+      "lot": "5C",
+      "observedAt": "2026-11-11T13:18:39.307469+00:00",
+      "acknowledgedAt": "2026-11-11T13:18:04.811641+00:00",
+      "acknowledgementTimestampField": "updated_at of the observed status asserting quiet",
+      "activeCommand": null,
+      "executionStopped": true,
+      "terminalRelease": false,
+      "evidence": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/isolation/quiet-lot5c-status.json",
+        "bytes": 4124,
+        "sha256": "ba604fb0a74e5ec52bc42913b5e4a95635f05bfa40e163afc1444b4a1519d92f"
+      }
+    }
+  ],
+  "trackedAgentIds": [
+    "/root/preview_rebuild_component",
+    "/root/preview_rebuild_oracle",
+    "/root/recover_6a_files"
+  ],
+  "ownAgents": [
+    {
+      "id": "/root/preview_rebuild_component",
+      "stoppedAt": "2026-11-11T13:19:41+00:00",
+      "activeCommand": null,
+      "executionStopped": true,
+      "evidence": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/isolation/own-agent-status-03.json",
+        "bytes": 1450,
+        "sha256": "ee80549a5788a73ca6c9f1a84d2af263e90143d8ea953c54b0b8a858faa4c92b"
+      },
+      "timestampBasis": "actual observation of terminal status"
+    },
+    {
+      "id": "/root/preview_rebuild_oracle",
+      "stoppedAt": "2026-11-11T13:19:41+00:00",
+      "activeCommand": null,
+      "executionStopped": true,
+      "evidence": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/isolation/own-agent-status-03.json",
+        "bytes": 1450,
+        "sha256": "ee80549a5788a73ca6c9f1a84d2af263e90143d8ea953c54b0b8a858faa4c92b"
+      },
+      "timestampBasis": "actual observation of terminal status"
+    },
+    {
+      "id": "/root/recover_6a_files",
+      "stoppedAt": "2026-11-11T13:19:41+00:00",
+      "activeCommand": null,
+      "executionStopped": true,
+      "evidence": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/isolation/own-agent-status-03.json",
+        "bytes": 1450,
+        "sha256": "ee80549a5788a73ca6c9f1a84d2af263e90143d8ea953c54b0b8a858faa4c92b"
+      },
+      "timestampBasis": "actual observation of terminal status"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs/migration/lot6a-evidence/performance-integrated/isolation/owner-quiet-request.json",
+      "bytes": 3384,
+      "sha256": "d0d037192d9658c94f1dcb200701d9d0534721dff807c6057ae097ae69f5ffc9"
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/performance-integrated/isolation/lane-observations.json",
+      "bytes": 1759,
+      "sha256": "e28f0f1899c902bffee8e1726b4f9d9d790e6a349c850ba10f3cef5f74c4a5d8"
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/performance-integrated/isolation/quiet-lot7-followup-status.json",
+      "bytes": 5214,
+      "sha256": "5eec737fe109b9676cf48045991669e18d90fd62cc8f0faaf502c5f4fbd84043"
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/performance-integrated/isolation/quiet-lot10b-status.json",
+      "bytes": 4309,
+      "sha256": "68f81342afe2cdfa0dd0fa91b24bd9f510c4cbc7fb73101576fa13f7a5f9eba1"
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/performance-integrated/isolation/quiet-lot5c-status.json",
+      "bytes": 4124,
+      "sha256": "ba604fb0a74e5ec52bc42913b5e4a95635f05bfa40e163afc1444b4a1519d92f"
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/performance-integrated/isolation/own-agent-status-03.json",
+      "bytes": 1450,
+      "sha256": "ee80549a5788a73ca6c9f1a84d2af263e90143d8ea953c54b0b8a858faa4c92b"
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/performance-integrated/isolation/preview-stopped-02.json",
+      "bytes": 382,
+      "sha256": "e755ada5ee5442ef91b9acb0208be107982de0ac16a921e9d25462736c21771d"
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/integrated-final-02/released-weav-exclusive-1536-execution.json",
+      "bytes": 962,
+      "sha256": "20c14a21b9d78c79506cc576514af42d9fafbf4febd2296a30e1cba7640c24ae"
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/integrated-final-02/delivery-integrity.json",
+      "bytes": 12680,
+      "sha256": "077cce15f41bf48d2d5871b03027f54ea8b72e5fe2891602bf835dd3ea80b07c"
+    }
+  ],
+  "qualification": "Freshly observed quiet acknowledgements from all three known concurrent lanes, ended own agents, actual stopped preview and completed functional proof work. Active lane status rechecked before recording. The subsequent official ABBA runner will acquire performance.lock exclusively and recheck quiet status; no performance result is claimed here."
+}

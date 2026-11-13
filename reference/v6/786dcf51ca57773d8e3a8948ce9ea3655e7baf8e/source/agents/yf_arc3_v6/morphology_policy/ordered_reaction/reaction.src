@@ -1,0 +1,7 @@
+MODULE v6.ordered_reaction
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        decision: Any
+    STEP select
+        CALL reaction.select(request=request) -> decision
+        STOP decision

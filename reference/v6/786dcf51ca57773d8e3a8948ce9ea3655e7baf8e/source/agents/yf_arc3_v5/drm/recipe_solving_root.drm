@@ -1,0 +1,730 @@
+{
+  "module_id": "recipe_solving_root",
+  "declarations": [
+    {
+      "id": "policy.recipe_solving_root",
+      "configuration": {
+        "body_effect_supported_status_refs": ["supported", "established"],
+        "body_original_status_fields": [
+          "original_role_epistemic_status", "original_pose_epistemic_status", "original_epistemic_status",
+          "claim_original_role_epistemic_status", "claim_original_pose_epistemic_status", "claim_original_epistemic_status",
+          "value_original_role_epistemic_status", "value_original_pose_epistemic_status", "value_original_epistemic_status"
+        ],
+        "body_effect_required_default_fields": ["body_role", "occupancy_rule", "anchor_rule"],
+        "body_effect_required_fields_by_kind": {
+          "RESIZE": ["body_role", "occupancy_rule", "anchor_rule", "size", "heading"],
+          "TRANSPORT": ["body_role", "occupancy_rule", "anchor_rule", "heading"]
+        }
+      },
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_canonical_parent_agenda_and_exact_native_request"
+      ],
+      "applicability": [
+        "goal_owned_recipe_question"
+      ],
+      "invariants": [
+        "input_goal_is_instrumental",
+        "tutorial_is_not_real_world",
+        "separate_effect_subjects",
+        "all_transport_models",
+        "exact_parent_why_and_next_item",
+        "no_action_authority"
+      ],
+      "falsifiers": [
+        "stale_agenda_or_native_request",
+        "unsupported_world_operator",
+        "missing_current_morphology_premise"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "recipe_solving.missing",
+        "recipe_solving.pattern",
+        "recipe_solving.edit",
+        "recipe_solving.resize",
+        "recipe_solving.projectile",
+        "recipe_solving.transport",
+        "recipe_solving.resource",
+        "recipe_solving.compose",
+        "recipe_solving.demo_transfer",
+        "recipe_solving.demonstration",
+        "recipe_solving.world_continuation"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.recipe_solving.pattern",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.pattern"
+            },
+            {
+              "field": "current_recipe_owner",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "input_goal_instrumental",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "supported_operator_named",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_question",
+              "operator": "equals",
+              "expected": "PATTERN"
+            },
+            {
+              "field": "requested_operation",
+              "operator": "equals",
+              "expected": "mechanics.recipe_operator_compilation.pattern_difference"
+            },
+            {
+              "field": "requested_mode",
+              "operator": "equals",
+              "expected": "MEASURE"
+            },
+            {
+              "field": "pattern_payload_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "example_input_mapping_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_entered_pattern_matches",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "recipe_solving.pattern"
+          }
+        },
+        {
+          "id": "projection.recipe_solving.edit",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.edit"
+            },
+            {
+              "field": "current_recipe_owner",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "input_goal_instrumental",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "supported_operator_named",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_question",
+              "operator": "equals",
+              "expected": "EDIT"
+            },
+            {
+              "field": "requested_operation",
+              "operator": "equals",
+              "expected": "mechanics.recipe_operator_compilation.recipe_successor"
+            },
+            {
+              "field": "requested_mode",
+              "operator": "equals",
+              "expected": "SUCCESSOR"
+            },
+            {
+              "field": "edit_payload_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_edit_lifecycle_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "automatic_trigger_evidenced",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "recipe_solving.edit"
+          }
+        },
+        {
+          "id": "projection.recipe_solving.resize",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.resize"
+            },
+            {
+              "field": "current_recipe_owner",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "input_goal_instrumental",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "supported_operator_named",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_question",
+              "operator": "equals",
+              "expected": "RESIZE"
+            },
+            {
+              "field": "requested_operation",
+              "operator": "equals",
+              "expected": "mechanics.recipe_operator_compilation.resize_successor"
+            },
+            {
+              "field": "requested_mode",
+              "operator": "equals",
+              "expected": "SUCCESSOR"
+            },
+            {
+              "field": "resize_payload_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "passage_clearance_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "size_movement_evidence_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "resize_reference_and_reanchor_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "recipe_solving.resize"
+          }
+        },
+        {
+          "id": "projection.recipe_solving.projectile",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.projectile"
+            },
+            {
+              "field": "current_recipe_owner",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "input_goal_instrumental",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "supported_operator_named",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_question",
+              "operator": "equals",
+              "expected": "PROJECTILE"
+            },
+            {
+              "field": "requested_operation",
+              "operator": "equals",
+              "expected": "mechanics.recipe_operator_compilation.projectile_successor"
+            },
+            {
+              "field": "requested_mode",
+              "operator": "equals",
+              "expected": "SUCCESSOR"
+            },
+            {
+              "field": "projectile_payload_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "firing_pose_and_direction_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "recipe_solving.projectile"
+          }
+        },
+        {
+          "id": "projection.recipe_solving.transport",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.transport"
+            },
+            {
+              "field": "current_recipe_owner",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "input_goal_instrumental",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "supported_operator_named",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_question",
+              "operator": "equals",
+              "expected": "TRANSPORT"
+            },
+            {
+              "field": "requested_operation",
+              "operator": "equals",
+              "expected": "mechanics.recipe_operator_compilation.transport_candidates"
+            },
+            {
+              "field": "requested_mode",
+              "operator": "equals",
+              "expected": "INVERSE_DOMAIN"
+            },
+            {
+              "field": "transport_payload_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "all_transport_models_declared",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "recipe_solving.transport"
+          }
+        },
+        {
+          "id": "projection.recipe_solving.resource",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.resource"
+            },
+            {
+              "field": "current_recipe_owner",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "input_goal_instrumental",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "supported_operator_named",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_question",
+              "operator": "equals",
+              "expected": "RESOURCE"
+            },
+            {
+              "field": "requested_operation",
+              "operator": "equals",
+              "expected": "mechanics.recipe_operator_compilation.resource_order"
+            },
+            {
+              "field": "requested_mode",
+              "operator": "equals",
+              "expected": "PRECONDITION"
+            },
+            {
+              "field": "resource_payload_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "recipe_solving.resource"
+          }
+        },
+        {
+          "id": "projection.recipe_solving.compose",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.compose"
+            },
+            {
+              "field": "current_recipe_owner",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "input_goal_instrumental",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "supported_operator_named",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_question",
+              "operator": "equals",
+              "expected": "COMPOSE"
+            },
+            {
+              "field": "requested_operation",
+              "operator": "equals",
+              "expected": "mechanics.recipe_operator_compilation.compose"
+            },
+            {
+              "field": "requested_mode",
+              "operator": "equals",
+              "expected": "SUCCESSOR"
+            },
+            {
+              "field": "compose_payload_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "recipe_solving.compose"
+          }
+        },
+        {
+          "id": "projection.recipe_solving.demo_transfer",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.demo_transfer"
+            },
+            {
+              "field": "current_recipe_owner",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "input_goal_instrumental",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_question",
+              "operator": "equals",
+              "expected": "DEMONSTRATION"
+            },
+            {
+              "field": "demonstrated_grammar_evidence_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "real_world_transfer_evidence_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "recipe_solving.demo_transfer"
+          }
+        },
+        {
+          "id": "projection.recipe_solving.demonstration",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.demonstration"
+            },
+            {
+              "field": "current_recipe_owner",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "input_goal_instrumental",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_question",
+              "operator": "equals",
+              "expected": "DEMONSTRATION"
+            },
+            {
+              "field": "demonstrated_grammar_evidence_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "recipe_solving.demonstration"
+          }
+        },
+        {
+          "id": "projection.recipe_solving.world_continuation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.world_continuation"
+            },
+            {
+              "field": "current_recipe_owner",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "input_goal_instrumental",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_question",
+              "operator": "equals",
+              "expected": "WORLD_CONTINUATION"
+            },
+            {
+              "field": "sealed_world_interval_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "actual_effect_rows_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "actual_effect_subjects_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_world_evidence_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "recipe_solving.world_continuation"
+          }
+        },
+        {
+          "id": "projection.recipe_solving.missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.missing"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "recipe_solving.missing"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.recipe_solving.pattern",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.pattern"
+            }
+          ],
+          "reason_ref": "reason.recipe_instrumental_pattern_serves_supported_world_condition"
+        },
+        {
+          "id": "tier.recipe_solving.edit",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.edit"
+            }
+          ],
+          "reason_ref": "reason.recipe_instrumental_pattern_serves_supported_world_condition"
+        },
+        {
+          "id": "tier.recipe_solving.resize",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.resize"
+            }
+          ],
+          "reason_ref": "reason.recipe_instrumental_pattern_serves_supported_world_condition"
+        },
+        {
+          "id": "tier.recipe_solving.projectile",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.projectile"
+            }
+          ],
+          "reason_ref": "reason.recipe_instrumental_pattern_serves_supported_world_condition"
+        },
+        {
+          "id": "tier.recipe_solving.transport",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.transport"
+            }
+          ],
+          "reason_ref": "reason.recipe_instrumental_pattern_serves_supported_world_condition"
+        },
+        {
+          "id": "tier.recipe_solving.resource",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.resource"
+            }
+          ],
+          "reason_ref": "reason.recipe_instrumental_pattern_serves_supported_world_condition"
+        },
+        {
+          "id": "tier.recipe_solving.compose",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.compose"
+            }
+          ],
+          "reason_ref": "reason.recipe_instrumental_pattern_serves_supported_world_condition"
+        },
+        {
+          "id": "tier.recipe_solving.demo_transfer",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.demo_transfer"
+            }
+          ],
+          "reason_ref": "reason.recipe_instrumental_pattern_serves_supported_world_condition"
+        },
+        {
+          "id": "tier.recipe_solving.demonstration",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.demonstration"
+            }
+          ],
+          "reason_ref": "reason.recipe_instrumental_pattern_serves_supported_world_condition"
+        },
+        {
+          "id": "tier.recipe_solving.world_continuation",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.world_continuation"
+            }
+          ],
+          "reason_ref": "reason.recipe_instrumental_pattern_serves_supported_world_condition"
+        },
+        {
+          "id": "tier.recipe_solving.missing",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "recipe_solving.missing"
+            }
+          ],
+          "reason_ref": "reason.recipe_missing_current_world_or_morphology_premise"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.recipe_solving_activation_and_transfer_unverified",
+      "reason_refs": [
+        "reason.recipe_instrumental_pattern_serves_supported_world_condition",
+        "reason.recipe_missing_current_world_or_morphology_premise"
+      ]
+    }
+  ]
+}

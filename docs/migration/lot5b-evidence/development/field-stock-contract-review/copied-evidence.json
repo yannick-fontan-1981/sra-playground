@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.lot5b-field-stock-review-evidence.v1",
+  "qualification": "Existing diagnostics copied without reexecution. Contract addendum distinguishes component tests, failed common traversal, and the new unexecuted final reviewer.",
+  "files": [
+    {
+      "path": "docs/migration/lot5b-evidence/development/field-stock-contract-review/field-stock-tests-initial.log",
+      "bytes": 1461,
+      "sha256": "75c7efecae0ab7b02c8c5071c55e5cf102e49d20b3bc0ff04230080016189580",
+      "source": "/workspace/sites/sra-lot5b-20261110/field-stock-tests-initial.log"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/development/field-stock-contract-review/owner-cost-tools-syntax.json",
+      "bytes": 1155,
+      "sha256": "36e5869b805c7de95473e4e638fa830d095a44176661c445a03a9fada1a5c85e",
+      "source": "/workspace/sites/sra-lot5b-20261110/owner-cost-tools-syntax.json"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/addressed-source-contract.md",
+      "bytes": 18493,
+      "sha256": "70f78a68d0852807f1b88682b9d100e70d5dc5826c4c146f768b773dd3b9d693",
+      "source": "Initial source audit plus explicit implementation/diagnostic addendum"
+    }
+  ]
+}

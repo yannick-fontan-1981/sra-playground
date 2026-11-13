@@ -1,0 +1,11 @@
+MODULE v6.observed_station_cargo
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        measured: Any
+        answer: Any
+    STEP measure
+        CALL cargo.measure(request=request) -> measured
+        NEXT choose
+    STEP choose
+        CALL cargo.bind(measured=measured) -> answer
+        STOP answer

@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.native-campaign-selection.v1",
+  "game": "RSWP",
+  "targetLevels": 3,
+  "selectedAt": "2026-11-09T22:30:12+00:00",
+  "maximumBlockedSeconds": 2400,
+  "carriedBlockedSeconds": 0,
+  "priorResolution": null,
+  "remainingBlockedSeconds": 2400,
+  "switchDeadline": "2026-11-09T23:10:12+00:00",
+  "nextCandidate": "CATR",
+  "nextCandidateCarriedSeconds": 107.399326,
+  "baseNativeSourceManifestDigest": "ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b",
+  "selectionBasis": "Original pure public-scene projection recognizes three panels with unique direct current material/receiver correspondences in the archived initial public raster. No source game, oracle, route or acquired state is supplied to production.",
+  "clockPolicy": "Clock starts at explicit game selection, includes implementation preparation conservatively, and is retained across attempts. Switch if unresolved at forty cumulative minutes."
+}

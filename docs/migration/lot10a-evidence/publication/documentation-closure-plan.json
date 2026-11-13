@@ -1,0 +1,20 @@
+{
+  "schema": "logos-engine.documentation-publication-closure-plan.v1",
+  "recordedAt": "2026-11-11T00:41:10.105391+00:00",
+  "firstPublishedSiteVersion": 90,
+  "firstPublishedCommit": "617d1f607d37a6bba1f7ae8ffe1826806e6749a0",
+  "nativeVersion": "0.56.0",
+  "nativeDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+  "sourcePurpose": "Record actual successful publication, its transport/archive receipts and final roadmap status",
+  "postPublicationIntegrity": {
+    "path": "docs/migration/lot10a-evidence/publication/post-publication-input-integrity.json",
+    "sha256": "414b30157137f0ab7d223abbf4b669128bebac338910e5043b2c38a5ac441d71",
+    "bytes": 2280
+  },
+  "frozenInputFingerprintsChecked": 933,
+  "nativeTestBuildChanges": [],
+  "newBuildRequired": false,
+  "nativeVersionChanged": false,
+  "publicationAudience": "unchanged owner-private",
+  "qualification": "Prospective documentation closure. The next exact source commit is created after this plan; no future Site number or deployment success is asserted. The standard workflow packages the unchanged validated application build after the documentation commit is pushed."
+}

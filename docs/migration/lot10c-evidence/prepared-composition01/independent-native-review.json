@@ -1,0 +1,19 @@
+{
+  "schema": "lot10c.prepared-native-composition-review.v1",
+  "recordedAt": "2026-11-11T19:31:34.460649+00:00",
+  "reviewer": "/root/baseline_prepare",
+  "sourceCommit": "dd864cc645b1e9789e51d1a6c1498f4d0b18aa6f",
+  "status": "no_blocking_discrepancy_found",
+  "scope": "Independent static source composition review only; no functional, game or cost claim.",
+  "findings": [
+    "Recruitment selected/passive/state keys and full frame packet preserved, passive section exact10C.",
+    "Workshop -> Recruitment -> SelectedRigid state -> Preview order; no duplicate selected/passive acquisition.",
+    "Binding passive section exact5C; after Workshop state, before Feedback. Incomplete acquisition blocks publication/replay as before.",
+    "Acquisition time attributed to prefix first-return level with caller/native clock conversion and minimum deadlines.",
+    "currentExecution, remainingLevelActions, SelectedRigid adapter/WeakMap and block_unrelated_probe sections exact6B.",
+    "Motif specialized wrapper exact8A, execution/refusal retained; observed interface exclusion limited to final SymmetricField fallback.",
+    "Native types exact6B and field constraints exact8A. Both independent capture helpers exact originals; combined harness preserves real args/frames/promises."
+  ],
+  "testsExecuted": false,
+  "sourceEditedByReviewer": false
+}

@@ -1,0 +1,27 @@
+{
+  "schema": "logos-engine.lot8b.recorded-process.v1",
+  "name": "prevalidation",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/run-released-public-regressions.py",
+    "--prepare-manifest",
+    "docs/migration/lot8b-evidence/tools/delivery/regressions/cases.json"
+  ],
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T04:56:22.521646+00:00",
+  "phaseTimeoutSeconds": 300,
+  "effectiveTimeoutSeconds": 300,
+  "environment": {
+    "NODE_OPTIONS": "--max-old-space-size=1536",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONHASHSEED": "0"
+  },
+  "status": "started",
+  "pid": null,
+  "processGroup": null,
+  "exitCode": null,
+  "timedOut": false,
+  "interrupted": false,
+  "automaticRetry": false
+}

@@ -1,0 +1,264 @@
+{
+  "schema": "logos-engine.lot5c-new-lock-availability-independent-review.v1",
+  "status": "passed_documentary_review",
+  "reviewer": "lot5_site101_merge_audit",
+  "firstObservedAt": "2026-11-11T20:49:56.358998+00:00",
+  "subjects": [
+    {
+      "path": "/workspace/shared/sra-coordination/lot10c-recovery-lock-available-20261111.json",
+      "bytes": 3156,
+      "sha256": "0a9bc98d80d78f9a1c1de4abcf6b7f0718f89e7a6558ee9c70c010ab23677b00"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/coordination/cost-final-02/request.json",
+      "bytes": 2260,
+      "sha256": "8dfeeb1657be09764a45d5503cc5ff78c014f6e1bbfaf0fd566305ce6b12285c"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/coordination/cost-final-02/attempt-result.json",
+      "bytes": 806,
+      "sha256": "3f6d2083d6dc6afc515b42aa6518ac9defce9fa06b4b5974f4c213fbb2dc23a4"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/coordination/recovery-02/terminal-independent-review.json",
+      "bytes": 14736,
+      "sha256": "a0be86344fcb91cd83350319e92d28de219cdd84b32c8bb1c9d08107a01dcda6"
+    }
+  ],
+  "initialQuietCheck": {
+    "lot5c": {
+      "fingerprint": {
+        "path": "/workspace/shared/sra-coordination/lot5c-status.json",
+        "bytes": 18247,
+        "sha256": "73e1f5296ab33b66f499b4bae303c2a84e5966e96564fdbe88f4e8bcc816e6d4"
+      },
+      "quiet_requested": false,
+      "updated_at": "2026-11-11T20:39:04.511712+00:00",
+      "quiet_request_id": "lot5c-cost-a33a5f88-recovery-02"
+    },
+    "lot6b": {
+      "fingerprint": {
+        "path": "/workspace/shared/sra-coordination/lot6b-status.json",
+        "bytes": 12935,
+        "sha256": "31e94059f9373fca5254126e33de50123d0aef3bfa1e184c64f92a2d21330adf"
+      },
+      "quiet_requested": false,
+      "updated_at": "2026-11-11T20:31:07.200353+00:00",
+      "quiet_request_id": "lot5c-cost-a33a5f88-recovery-02"
+    },
+    "lot8a": {
+      "fingerprint": {
+        "path": "/workspace/shared/sra-coordination/lot8a-status.json",
+        "bytes": 16520,
+        "sha256": "81afa601be7d965e97b5139ea5d661f5edb917023f87ab76c5dbc1f5c75a2fc5"
+      },
+      "quiet_requested": null,
+      "updated_at": "2026-11-11T20:42:24.934984+00:00",
+      "quiet_request_id": "lot5c-cost-a33a5f88-final-01"
+    },
+    "lot10c": {
+      "fingerprint": {
+        "path": "/workspace/shared/sra-coordination/lot10c-status.json",
+        "bytes": 3407,
+        "sha256": "71e12744281577aaaa733331c15af376fc39fb905bdadb71eafd5c1f20ee5117"
+      },
+      "quiet_requested": false,
+      "updated_at": "2026-11-11T20:49:15.013014+00:00",
+      "quiet_request_id": null
+    }
+  },
+  "checkpoint": {
+    "commit": "37f3dabeaf8807045effb81cc3437da53f10ee97",
+    "parent": "34d919cb059322bdecc160606faac0bccd23c75b",
+    "tree": "ee89a5b52bc3828d3223008acc79de4ea125a0ff",
+    "subject": "docs(lot5c): close bounded recovery without cost or publication",
+    "localHeadMatches": true,
+    "terminalReviewExistsInCheckpoint": true,
+    "remoteReverificationPerformed": false
+  },
+  "checks": [
+    {
+      "id": "new_receipt_exact_schema",
+      "passed": true
+    },
+    {
+      "id": "same_existing_mutex_identity",
+      "passed": true
+    },
+    {
+      "id": "documented_ex_acquired_and_immediately_released",
+      "passed": true
+    },
+    {
+      "id": "new_observation_after_recovery02_release",
+      "passed": true
+    },
+    {
+      "id": "receipt_expressly_limits_claim",
+      "passed": true
+    },
+    {
+      "id": "availability_receipt_did_not_issue_cost_request",
+      "passed": true
+    },
+    {
+      "id": "recovery02_timeout_and_release_retained",
+      "passed": true
+    },
+    {
+      "id": "recovery02_review_bytes_unchanged",
+      "passed": true
+    },
+    {
+      "id": "local_checkpoint_is_head",
+      "passed": true
+    },
+    {
+      "id": "no_named_quiet_request_is_true",
+      "passed": true
+    },
+    {
+      "id": "checkpoint_exact_blob:docs/migration/lot5c-evidence/recovery/coordination/cost-final-02/request.json",
+      "passed": true
+    },
+    {
+      "id": "checkpoint_exact_blob:docs/migration/lot5c-evidence/recovery/coordination/cost-final-02/attempt-result.json",
+      "passed": true
+    },
+    {
+      "id": "checkpoint_exact_blob:docs/migration/lot5c-evidence/recovery/coordination/recovery-02/terminal-independent-review.json",
+      "passed": true
+    }
+  ],
+  "findings": [],
+  "materialNewFact": {
+    "observedBy": "lot10c",
+    "observedAt": "2026-11-11T20:42:14.650043+00:00",
+    "receiptSchema": "logos-engine.lot10c.recovery-lock-availability.v1",
+    "mutex": {
+      "path": "/workspace/shared/sra-coordination/performance.lock",
+      "device": 27,
+      "inode": 1971854
+    },
+    "exclusiveAcquired": true,
+    "releasedImmediately": true,
+    "basis": "The exact new peer receipt, not an EX probe by this reviewer.",
+    "unchangedMutexIdentityObservedDuringThisReview": true,
+    "receiptStatesNoHolderKilled": true,
+    "receiptStatesNoLockDeletedOrReplaced": true,
+    "newCostRequestIssuedByReceipt": false,
+    "implication": "A successful instantaneous acquisition is new evidence of availability after the closed recovery02 attempt. The historical diagnosis no longer establishes a currently blocked mutex.",
+    "doesNotProve": [
+      "Future EX availability",
+      "All-peer isolation",
+      "A fresh exact ACK set",
+      "A current readiness receipt",
+      "Cause of historical contention or identity/closure of its former holder",
+      "Cost samples, cost acceptance or publication eligibility"
+    ]
+  },
+  "historicalClosure": {
+    "requestId": "lot5c-cost-a33a5f88-recovery-02",
+    "status": "failed_or_expired",
+    "failureReason": "availability_deadline_before_fresh_acks",
+    "releaseAt": "2026-11-11T20:30:25.610691+00:00",
+    "sessionId": 17255,
+    "terminalExitCode": 124,
+    "exclusiveAttempts": 0,
+    "officialCostSamples": 0,
+    "historicalReceiptsUnchanged": true,
+    "oldAcknowledgmentsReusable": false,
+    "oldReadinessReusable": false,
+    "reinterpretedAsSuccess": false,
+    "qualification": "The later successful probe does not change the factual failure, expiry, zero-EX path or explicit release of recovery02."
+  },
+  "futureAttemptConditions": [
+    {
+      "condition": "New scope and preserved history",
+      "detail": "The new user continuation and new availability fact support preparing a separately identified, single bounded attempt. Preserve all01/02 receipts and existing preparation; this review itself starts no request, readiness or execution."
+    },
+    {
+      "condition": "Minimal reviewed coordination copies",
+      "detail": "Pin exact bytes, hashes and dates for minimal v3 orchestration/controller/finalizer changes and their independent review before the new request. Preserve native inputs, cost runner, ABBA order, populations, comparison rules and acceptance thresholds."
+    },
+    {
+      "condition": "Reuse only valid functional evidence",
+      "detail": "Reuse completed functional/structural proofs only after their bound input identities are confirmed unchanged. This documentary review does not revalidate those inputs or rerun the proofs."
+    },
+    {
+      "condition": "Ordinary peer work finishes normally",
+      "detail": "Peers may continue ordinary work now. A later request must let useful work finish normally and obtain genuine fresh exact acknowledgments after actual root/worker closure; historical idle declarations are not substitutes."
+    },
+    {
+      "condition": "Fresh three-lane ACK and own closure",
+      "detail": "Require new-ID ACKs for6B,8A,10C after the new request, with no active command, no heavy execution, all own workers idle and no queued commands, plus actual current5Cclosure. Never rewrite a peer snapshot or infer an ACK from availability."
+    },
+    {
+      "condition": "Fresh isolation and readiness",
+      "detail": "Create fresh isolation and readiness bound to the new request, exact ACK snapshots, current scripts/reviews and retained valid proofs. Do not reuse earlier ACKs/readiness or retime historical functional evidence."
+    },
+    {
+      "condition": "Bounded acquisition",
+      "detail": "At most600seconds for availability/ACK/isolation/readiness/acquisition; a single EX|NB attempt on the same existing device27/inode1971854, no retry or lock replacement. Release any preparation SH before acquisition."
+    },
+    {
+      "condition": "Bounded real window",
+      "detail": "Only real EX acquisition opens the measurement lease; preserve the5400second global window maximum and3600second child bound. Preserve owner-group cleanup, actual terminal execution handles and automatic release on error/refusal/expiry."
+    },
+    {
+      "condition": "Unchanged acceptance",
+      "detail": "Each game's complete-session global median must be strictly below+10%. Phase overruns can be accepted when that game's global passes; retain full populations, per-phase results and tails, with no exclusion or cross-game compensation."
+    },
+    {
+      "condition": "No automatic repeat",
+      "detail": "A failed or expired future attempt closes and releases; it does not automatically create another request. A new failure may motivate a separately scoped administrative investigation, but the old holder search is not a prerequisite inferred from a now-historical diagnosis."
+    }
+  ],
+  "limits": [
+    "Read-only metadata and bounded Git object inspection under the existing nonblocking shared mutex, followed by one new documentary receipt write.",
+    "No new EX probe, /proc inspection, holder search, process signal, source opening, native read/change, test, replay, game, benchmark or readiness execution.",
+    "Availability is time-local. SH acquired for this review does not validate future EX availability.",
+    "8A has no quiet_requested field in the observed status; it is recorded as absent, not falsely converted into false or into an ACK. None of the four observed quiet_requested values is true.",
+    "The receipt reports a10C source opening and publication-lock probe; this review does not independently validate that source opening, publication readiness or network state.",
+    "The checkpoint is locally verified; no remote fetch, network operation or current Site readback was performed."
+  ],
+  "newRequestIssued": false,
+  "readinessCreated": false,
+  "measurementExecuted": false,
+  "existingFilesModified": false,
+  "commandBudgetSeconds": 60,
+  "checksPassed": 13,
+  "checksTotal": 13,
+  "finalQuietCheck": [
+    {
+      "lane": "lot5c",
+      "path": "/workspace/shared/sra-coordination/lot5c-status.json",
+      "bytes": 18247,
+      "sha256": "73e1f5296ab33b66f499b4bae303c2a84e5966e96564fdbe88f4e8bcc816e6d4",
+      "quiet_requested": false
+    },
+    {
+      "lane": "lot6b",
+      "path": "/workspace/shared/sra-coordination/lot6b-status.json",
+      "bytes": 12935,
+      "sha256": "31e94059f9373fca5254126e33de50123d0aef3bfa1e184c64f92a2d21330adf",
+      "quiet_requested": false
+    },
+    {
+      "lane": "lot8a",
+      "path": "/workspace/shared/sra-coordination/lot8a-status.json",
+      "bytes": 16520,
+      "sha256": "81afa601be7d965e97b5139ea5d661f5edb917023f87ab76c5dbc1f5c75a2fc5",
+      "quiet_requested": null
+    },
+    {
+      "lane": "lot10c",
+      "path": "/workspace/shared/sra-coordination/lot10c-status.json",
+      "bytes": 3414,
+      "sha256": "4e7929906c1bd549a65da4da17324b5d69ecaed9c71ef568b06ff4ca9b1dea13",
+      "quiet_requested": false
+    }
+  ],
+  "recordedAt": "2026-11-11T20:51:02.401264+00:00",
+  "allReviewCommandsTerminalAfterWrite": true
+}

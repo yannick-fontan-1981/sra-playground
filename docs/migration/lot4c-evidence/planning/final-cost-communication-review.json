@@ -1,0 +1,210 @@
+{
+  "schema": "logos-engine.lot4c.final-cost-communication-review.v1",
+  "recordedAt": "2026-11-11T01:25:21.344818+00:00",
+  "status": "passed",
+  "mode": "Read-only existing evidence arithmetic and text review; no measurement, benchmark, test, result edit or persisted script",
+  "inputs": [
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/results.md",
+      "bytes": 33779,
+      "sha256": "dbc843029b6ba59f86d5b66cade4aa7e9f34c107218f6f1c4cc513acca50cb1b"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/cohort1/baseline.json",
+      "bytes": 431557,
+      "sha256": "3a88dfc71fd5bca0be354f24754f5617dab100436b449fdb72f42d149bfbd8d1"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/cohort1/after.json",
+      "bytes": 432067,
+      "sha256": "23a3809c233007715a84a98343b9972b00e36ea57854df1b80688e6afe754a55"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/cohort2/after.json",
+      "bytes": 432122,
+      "sha256": "1a611e3631255261129be86c8b13d9593919c2534c6c582765c48be813922433"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/cohort2/baseline.json",
+      "bytes": 431595,
+      "sha256": "1156cdbd8869e60055384717fc28a024bcbdf6922542d738fcd78d951b086fcb"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/owner-growth-comparison.json",
+      "bytes": 244725,
+      "sha256": "b54c20c1e2da76ed05c8100400ff90d1524e721899b64ad35679bd4d36d7d3d7"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/owner-growth-review.json",
+      "bytes": 1266654,
+      "sha256": "2a672ee1a2809805e3b06f75f1506634bf6e8ffc1f681bd2d0d89223c9bc09bb"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/aggregation-failure.json",
+      "bytes": 4677,
+      "sha256": "83eceaf19e4f4a27d3b62f50c7b34a95e0bd344afc90653c0c458e4d56878ee8"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/aggregation-failure.log",
+      "bytes": 204711,
+      "sha256": "91f742a17edbc4131dfc8ad64f2851c501aea997ac2b6b9d9e8368f77bdc5e47"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/isos-facet-source-parity.json.gz",
+      "bytes": 80222,
+      "sha256": "4171b8bff1050ae05ee613351883ededfc199713da01b5996fc132d776a559f7"
+    }
+  ],
+  "verifiedDistributions": 96,
+  "verifiedMarkdownMetricRows": 48,
+  "verifiedMarkdownDispersionRows": 48,
+  "globalCasesFromRawTrials": [
+    {
+      "scope": "aggregate",
+      "case": "STCK",
+      "stage": "session_elapsed",
+      "beforeMedianMs": 11253.251434999998,
+      "afterMedianMs": 11046.9208325,
+      "medianIncreasePercent": -1.8335198826026977,
+      "result": "within_observed_budget"
+    },
+    {
+      "scope": "aggregate",
+      "case": "SMLP",
+      "stage": "session_elapsed",
+      "beforeMedianMs": 16297.509763000002,
+      "afterMedianMs": 16272.070031000007,
+      "medianIncreasePercent": -0.15609582304255296,
+      "result": "within_observed_budget"
+    }
+  ],
+  "cohortGlobalsFromRawTrials": [
+    {
+      "scope": "cohort1",
+      "case": "STCK",
+      "stage": "session_elapsed",
+      "beforeMedianMs": 11394.980295,
+      "afterMedianMs": 11075.497522500002,
+      "medianIncreasePercent": -2.803715006336461,
+      "result": "within_observed_budget"
+    },
+    {
+      "scope": "cohort1",
+      "case": "SMLP",
+      "stage": "session_elapsed",
+      "beforeMedianMs": 16280.912208999998,
+      "afterMedianMs": 16214.259110000006,
+      "medianIncreasePercent": -0.40939413065040947,
+      "result": "within_observed_budget"
+    },
+    {
+      "scope": "cohort2",
+      "case": "STCK",
+      "stage": "session_elapsed",
+      "beforeMedianMs": 10971.7803885,
+      "afterMedianMs": 11046.9208325,
+      "medianIncreasePercent": 0.6848518776292546,
+      "result": "within_observed_budget"
+    },
+    {
+      "scope": "cohort2",
+      "case": "SMLP",
+      "stage": "session_elapsed",
+      "beforeMedianMs": 16297.509763000002,
+      "afterMedianMs": 16486.934473000005,
+      "medianIncreasePercent": 1.1622923548114763,
+      "result": "within_observed_budget"
+    }
+  ],
+  "medianOverrunsFromRawTrials": [
+    {
+      "scope": "aggregate",
+      "case": "SMLP",
+      "stage": "restoration",
+      "beforeMedianMs": 8.0213175000099,
+      "afterMedianMs": 10.031972000004316,
+      "medianIncreasePercent": 25.066387161360147,
+      "result": "over_budget_with_noise_unresolved"
+    },
+    {
+      "scope": "cohort1",
+      "case": "STCK",
+      "stage": "new_decision",
+      "beforeMedianMs": 328.99971850000156,
+      "afterMedianMs": 364.47354799999994,
+      "medianIncreasePercent": 10.782328222569044,
+      "result": "over_budget_with_noise_unresolved"
+    },
+    {
+      "scope": "cohort2",
+      "case": "SMLP",
+      "stage": "restoration",
+      "beforeMedianMs": 7.263733499996306,
+      "afterMedianMs": 10.375494500000059,
+      "medianIncreasePercent": 42.839691186431,
+      "result": "over_budget_with_noise_unresolved"
+    }
+  ],
+  "p95OverrunsFromRawTrials": [
+    {
+      "scope": "aggregate",
+      "case": "STCK",
+      "stage": "restoration",
+      "beforeP95Ms": 150.92734100000234,
+      "afterP95Ms": 171.87361899999814,
+      "p95IncreasePercent": 13.878385361599577
+    },
+    {
+      "scope": "cohort2",
+      "case": "STCK",
+      "stage": "restoration",
+      "beforeP95Ms": 140.17643499999758,
+      "afterP95Ms": 172.1703099999977,
+      "p95IncreasePercent": 22.82400390622052
+    }
+  ],
+  "populationFromRawTrials": {
+    "measuredSessions": 32,
+    "measuredActions": 400,
+    "excludedWarmupSessions": 8,
+    "excludedWarmupActions": 24
+  },
+  "independentReviewChecks": 7630,
+  "historicalStrictFailurePreservedAndVisible": true,
+  "ablationsSeparateFromCosts": {
+    "total": 60,
+    "executed": 60,
+    "expected": 60,
+    "errors": 0,
+    "actionOrRefusalChanged": 9,
+    "actionOrRefusalUnchanged": 51,
+    "metadataOnlyChanged": 4,
+    "fullProposalUnchanged": 47,
+    "interventionApplied": 19,
+    "emptyIntervention": 41
+  },
+  "environment": {
+    "node": "v24.22.1",
+    "platform": "linux",
+    "release": "6.18.57",
+    "cpuModel": "AMD EPYC 9V74 80-Core Processor",
+    "logicalCpus": 9
+  },
+  "materialLimits": [
+    "Acceptance is per game strictly below+10%; nested phases are not summed and cohort ratios are not averaged.",
+    "Historical full-work identity remains failed(exit1); acceptance is the separate predeclared owner contract. No unfavorable duration was removed or adjusted.",
+    "Phase and tail overruns remain visible; eight sessions per game/version give no reported session p95. Phase empirical p95 requires at least20 samples. Correlated observations do not provide a confidence interval or hardware-independent speed claim.",
+    "STCK/SMLP measure common replay, not a dedicated FacetExamples workload. Live game, production network and browser rendering are excluded.",
+    "STCK actually completes2 levels/10 actions; SMLP3 levels/15 actions.",
+    "Separate ISOS component ablations:9 action/refusal changes,4 metadata-only changes,47 full proposals unchanged, including41 empty interventions. This is not a whole-game causal ablation.",
+    "Pause covers initial planning and first engaged action, not arbitrary long-search preemption. Finite memory samples do not prove hours-long stability."
+  ],
+  "preliminaryReadOnlyDiagnosticFailure": {
+    "preserved": true,
+    "resultFilesChanged": false,
+    "reason": "First inline arithmetic query assumed numeric cohort labels; actual labels are cohort_1 and cohort_2. Corrected only the query label mapping.",
+    "actualOutput": "Traceback (most recent call last):\n  File \"<stdin>\", line 41, in <module>\n  File \"<stdin>\", line 27, in dist\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/statistics.py\", line 617, in median\n    raise StatisticsError(\"no median for empty data\")\nstatistics.StatisticsError: no median for empty data\n",
+    "exitCode": 1
+  },
+  "failures": []
+}

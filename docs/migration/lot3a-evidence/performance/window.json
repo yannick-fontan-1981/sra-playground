@@ -1,0 +1,57 @@
+{
+  "schema": "logos-engine.native-loop-cost-window.v1",
+  "startedAt": "2026-11-09T22:45:53.246785+00:00",
+  "isolation": "All tests, builds, source exports, browser preview and game campaigns completed before this window. Sequential baseline, after, then added-path diagnostic. Only documentation/read-only review may continue.",
+  "runs": [
+    {
+      "name": "baseline",
+      "checkout": "/workspace/scratch/c4dd29871d33/lot3a-baseline",
+      "command": [
+        "node",
+        "scripts/measure-native-loop-costs.mjs",
+        "docs/migration/lot3a-evidence/performance/cases.json",
+        "docs/migration/lot3a-evidence/performance/baseline.json"
+      ],
+      "startedAt": "2026-11-09T22:45:53.246794+00:00",
+      "finishedAt": "2026-11-09T22:48:03.630193+00:00",
+      "elapsedSeconds": 130.38341222899908,
+      "exitCode": 0,
+      "report": "docs/migration/lot3a-evidence/performance/baseline.json",
+      "log": "docs/migration/lot3a-evidence/performance/baseline.log.gz"
+    },
+    {
+      "name": "after",
+      "checkout": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout",
+      "command": [
+        "node",
+        "scripts/measure-native-loop-costs.mjs",
+        "docs/migration/lot3a-evidence/performance/cases.json",
+        "docs/migration/lot3a-evidence/performance/after.json"
+      ],
+      "startedAt": "2026-11-09T22:48:03.630302+00:00",
+      "finishedAt": "2026-11-09T22:50:16.651190+00:00",
+      "elapsedSeconds": 133.0209022179988,
+      "exitCode": 0,
+      "report": "docs/migration/lot3a-evidence/performance/after.json",
+      "log": "docs/migration/lot3a-evidence/performance/after.log.gz"
+    },
+    {
+      "name": "panel",
+      "checkout": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout",
+      "command": [
+        "node",
+        "scripts/measure-native-loop-costs.mjs",
+        "docs/migration/lot3a-evidence/performance/panel-cases.json",
+        "docs/migration/lot3a-evidence/performance/panel.json"
+      ],
+      "startedAt": "2026-11-09T22:50:16.651976+00:00",
+      "finishedAt": "2026-11-09T22:51:38.677614+00:00",
+      "elapsedSeconds": 82.02565084199887,
+      "exitCode": 0,
+      "report": "docs/migration/lot3a-evidence/performance/panel.json",
+      "log": "docs/migration/lot3a-evidence/performance/panel.log.gz"
+    }
+  ],
+  "finishedAt": "2026-11-09T22:51:38.677718+00:00",
+  "status": "passed"
+}

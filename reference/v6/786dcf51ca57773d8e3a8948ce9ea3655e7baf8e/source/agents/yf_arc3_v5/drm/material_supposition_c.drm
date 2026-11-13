@@ -1,0 +1,387 @@
+{
+  "module_id": "material_supposition_c",
+  "declarations": [
+    {
+      "id": "policy.word_transduction_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_with_independent_interface_evidence"
+      ],
+      "applicability": [
+        "revisable_material_interface_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_law",
+        "focus_not_edit",
+        "aperture_not_boundary_color",
+        "transient_not_persistent_production",
+        "bounded_pair_domain_stays_open",
+        "raw_examples_and_unknowns_retained"
+      ],
+      "falsifiers": [
+        "foreign_scope",
+        "unqualified_roles_or_identity",
+        "partial_packet",
+        "work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "word_transduction.retain_transduction_and_edit_domain_question",
+        "word_transduction.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.word_transduction_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "word_transduction.retain_transduction_and_edit_domain_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "visible_connector_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "matching_cross_region_alphabet_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "word_transduction.retain_transduction_and_edit_domain_question"
+          }
+        },
+        {
+          "id": "projection.policy.word_transduction_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "word_transduction.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "word_transduction.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.word_transduction_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "word_transduction.retain_transduction_and_edit_domain_question"
+            }
+          ],
+          "reason_ref": "reason.retain_transduction_and_edit_domain_question"
+        },
+        {
+          "id": "tier.policy.word_transduction_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "word_transduction.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_transduction_and_edit_domain_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.material_disposition_not_execution_or_world_goal_choice",
+      "reason_refs": [
+        "reason.retain_transduction_and_edit_domain_question"
+      ]
+    },
+    {
+      "id": "policy.directed_flow_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_with_independent_interface_evidence"
+      ],
+      "applicability": [
+        "revisable_material_interface_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_law",
+        "focus_not_edit",
+        "aperture_not_boundary_color",
+        "transient_not_persistent_production",
+        "bounded_pair_domain_stays_open",
+        "raw_examples_and_unknowns_retained"
+      ],
+      "falsifiers": [
+        "foreign_scope",
+        "unqualified_roles_or_identity",
+        "partial_packet",
+        "work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "directed_flow.retain_configure_release_aperture_question",
+        "directed_flow.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.directed_flow_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "directed_flow.retain_configure_release_aperture_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_cap_seed_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "configurable_colliders_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiving_aperture_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "directed_flow.retain_configure_release_aperture_question"
+          }
+        },
+        {
+          "id": "projection.policy.directed_flow_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "directed_flow.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "directed_flow.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.directed_flow_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "directed_flow.retain_configure_release_aperture_question"
+            }
+          ],
+          "reason_ref": "reason.retain_configure_release_aperture_question"
+        },
+        {
+          "id": "tier.policy.directed_flow_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "directed_flow.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_configure_release_aperture_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.material_disposition_not_execution_or_world_goal_choice",
+      "reason_refs": [
+        "reason.retain_configure_release_aperture_question"
+      ]
+    },
+    {
+      "id": "policy.local_field_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_with_independent_interface_evidence"
+      ],
+      "applicability": [
+        "revisable_material_interface_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_law",
+        "focus_not_edit",
+        "aperture_not_boundary_color",
+        "transient_not_persistent_production",
+        "bounded_pair_domain_stays_open",
+        "raw_examples_and_unknowns_retained"
+      ],
+      "falsifiers": [
+        "foreign_scope",
+        "unqualified_roles_or_identity",
+        "partial_packet",
+        "work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "local_field.retain_production_before_transport_question",
+        "local_field.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.local_field_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "local_field.retain_production_before_transport_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "click_centered_field_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "compatible_movable_target_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "repeated_type_different_morphology_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "local_field.retain_production_before_transport_question"
+          }
+        },
+        {
+          "id": "projection.policy.local_field_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "local_field.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "local_field.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.local_field_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "local_field.retain_production_before_transport_question"
+            }
+          ],
+          "reason_ref": "reason.retain_production_before_transport_question"
+        },
+        {
+          "id": "tier.policy.local_field_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "local_field.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_production_before_transport_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.material_disposition_not_execution_or_world_goal_choice",
+      "reason_refs": [
+        "reason.retain_production_before_transport_question"
+      ]
+    }
+  ]
+}

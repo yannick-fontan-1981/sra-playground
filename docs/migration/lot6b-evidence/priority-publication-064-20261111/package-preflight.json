@@ -1,0 +1,15 @@
+{
+  "schema": "logos-engine.priority064-package-preflight.v1",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "static": {
+    "directory": "dist"
+  },
+  "distIndexExists": true,
+  "distSymlinks": [],
+  "artifactMetadataCompatible": true,
+  "releaseContainsPublishedPredecessor": true,
+  "nativeWorkerSha256": "a4f366ad2103b7413a111099827bfa2ba8cf0930b9c8f1e4ebb561aada7daa84",
+  "archiveDestination": "/workspace/sites/sra-lot6b-release-064-20261111/artifacts/site-064.tar.gz",
+  "officialCostMeasured": false,
+  "mainPushForced": false
+}

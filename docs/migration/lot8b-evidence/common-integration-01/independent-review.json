@@ -1,0 +1,251 @@
+{
+  "schema": "logos-engine.lot8b.common-independent-review.v1",
+  "recordedDate": "2026-11-12",
+  "reviewer": "branch_routing_source",
+  "reviewerIndependence": {
+    "role": "Read-only reviewer of the common caller integration and public-domain restoration changes.",
+    "notAuthorOfReviewedNativeChanges": true,
+    "otherContributionsDisclosed": "The reviewer authored the independent Python component corpus/exporter, prior evidence reviews and the separately owned audit alias/transfer-map update. This is not an external audit."
+  },
+  "status": "no_concrete_contradiction_found_in_reviewed_scopes",
+  "blockingContradictionsFound": 0,
+  "reviewQualification": {
+    "method": "Read pinned original source, native source/diff, the seven public-boundary test definitions and existing parent execution receipts; check file fingerprints and reconcile receipt inventories.",
+    "originalOrExporterExecutions": 0,
+    "nativeComponentExecutions": 0,
+    "testExecutions": 0,
+    "typecheckExecutions": 0,
+    "auditExecutions": 0,
+    "buildExecutions": 0,
+    "gameExecutionsOrReplays": 0,
+    "performanceMeasurements": 0,
+    "locksAcquired": 0,
+    "sourceChanges": 0,
+    "onlyNewArtifact": "docs/migration/lot8b-evidence/common-integration-01/independent-review.json",
+    "priorWrittenContract": "docs/migration/lot8b-evidence/common-integration-01/contract-review.md"
+  },
+  "sourceContext": {
+    "originalCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "initialReviewHead": "343fabef30fcbd1fa55b5d472f463816a6dc87b1",
+    "parentValidatedHead": "b5d34121d6d1e79ae673372b5969d4883dcd9de8",
+    "implementationRetainedDuringDevelopment": "logos-engine.typescript.v6.native-migration/0.66.0",
+    "candidateIdentity": "The changed sourceDigest, registered families and declared native extensions distinguish the development candidate. Retaining the implementation number is not a claim that this candidate is the already published artifact.",
+    "originalSourcesRead": [
+      "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_branch_routing.py",
+      "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_runtime.py",
+      "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.py",
+      "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm"
+    ]
+  },
+  "validatedInputFingerprints": {
+    "origin": "Existing parent branch-01/inputs-before.json and typecheck-01/inputs-before.json, not executions performed by this reviewer.",
+    "currentBytesCheckedAgainstBranchReceipt": [
+      {
+        "path": "src/logos-engine/v6-native-runtime.ts",
+        "bytes": 180119,
+        "sha256": "cfa07cd87b939e528696c07486777ef597ca3e5033f80d5333e78ab6b1e0868e",
+        "matches": true
+      },
+      {
+        "path": "src/logos-engine/v6-native-types.ts",
+        "bytes": 13322,
+        "sha256": "725fb4b241549a070197f81d719f99c0dd002b2643206b9d93a8374b86269361",
+        "matches": true
+      },
+      {
+        "path": "src/logos-engine/v6-branch-routing.ts",
+        "bytes": 26244,
+        "sha256": "2b9bd172c977b1590d5293b4bca69510ad2e8190dd973df7872050f1367d15ca",
+        "matches": true
+      },
+      {
+        "path": "src/logos-engine/v6-branch-routing-geometry.ts",
+        "bytes": 16046,
+        "sha256": "dd1e5a472ca8f417651bb4178c27fc522816de767619495da8de09f7cfc6b522",
+        "matches": true
+      },
+      {
+        "path": "tests/v6-branch-routing-public-boundary.test.ts",
+        "bytes": 9998,
+        "sha256": "3dd057d705a5e3c5b1c6fcc236cd68abdb5325426500c45c8e2ed088f57270a9",
+        "matches": true
+      },
+      {
+        "path": "tests/v6-branch-routing-kernel.test.ts",
+        "bytes": 29235,
+        "sha256": "e64632ee71195f528a8f19dbec4d0cc25695925fdae5de3865a9092ff8537fea",
+        "matches": true
+      }
+    ],
+    "otherComparisonInputsFromParentManifest": [
+      {
+        "path": "tests/v6-branch-routing-reference.test.ts",
+        "sha256": "8c36fa7f6473c92b3a9c5f5fcbeab465f7831e3e6c56e0ed8d332301b47c87db"
+      },
+      {
+        "path": "tests/v6-branch-routing-contract.test.ts",
+        "sha256": "5fa48696501956145076cd9fade45ecd1db7779dd64ef46ea63270bbac4de324"
+      },
+      {
+        "path": "tests/fixtures/v6-branch-routing-reference.json",
+        "sha256": "e6ae197b7b982bd41f561b9df8e458436d7ce0797f39bbf86d972e55472b6769"
+      }
+    ],
+    "sharedNativeAndFixtureFingerprintsMatchBetweenParentRuns": true
+  },
+  "callerIntegrationReview": {
+    "status": "statically_consistent_with_selected_terminal_incompletion_design",
+    "findings": [
+      {
+        "id": "single_direct_owner_and_order",
+        "source": "morphology_policy/strategy.py, strategy.drm; v6-native-runtime.ts factory and group assembly",
+        "finding": "One branch_routing owner is registered at parallel_branch_routing, immediately after motif_conditioned_access and before conserved_band_transfer. The aligned entryPoints slot is null. The wrapper preserves material_access_subquestion without inventing a shared-subquestion evaluator."
+      },
+      {
+        "id": "selected_source_memory",
+        "source": "common_frontier_runtime.py selected constraint record; retainSelectedAcquisition",
+        "finding": "Successful selected acquisitions retain the single source event at branches:<before.revision>, with after.observation_ref and after.revision. BranchRouting has no added passive record path or second business-state owner. family_state:branch_routing remains the separate native checkpoint."
+      },
+      {
+        "id": "current_proposal_refusal",
+        "source": "branchRoutingFamily and retainProposalRefusal",
+        "finding": "The wrapper owns a detached frozen input snapshot and forwards current execution. An incomplete current proposal gains block_unrelated_probe:true; a completed source null remains a completed abstention. The refusal stays bound to the observation and owner state."
+      },
+      {
+        "id": "typed_acquisition_boundary",
+        "source": "BranchRouting.record; branchRoutingFamily.record; seal",
+        "finding": "Only BranchRoutingIncomplete is converted into events:[] and native_acquisition_incomplete. The refusal binds the actual after observation and has status:unknown, release_authority:false and frontier.complete:false. Other errors are not disguised as computation limits. acquisitionExecution reaches BranchRouting without changing historical argument lists for unrelated owners."
+      },
+      {
+        "id": "no_lost_public_return",
+        "source": "acquisitionIncompletionReceipt; prefix_evidence persistence",
+        "finding": "A BranchRouting incomplete receipt carries acquired:false, release_authority:false, proposal_ref and a detached complete WitnessedTransition, including before/after measurements, first/second public packets, command, index and outcome. It is retained in the authoritative prefix evidence, not only in the bounded trace."
+      },
+      {
+        "id": "ordered_unacquired_suffix",
+        "source": "seal branchAcquisitionBarrier",
+        "finding": "The first incomplete selected return creates a per-prefix barrier. Subsequent BranchRouting returns receive earlier_selected_acquisition_incomplete receipts with source_record_attempted:false and are not passed to the owner. Each actual public return is retained. Other common/passive owners keep their single acquisition pass."
+      },
+      {
+        "id": "explicit_terminal_completion",
+        "source": "seal stopReason; resume",
+        "finding": "The integration closes the prefix and stops with native_acquisition_incomplete, subject to the existing precedence of official completion. resume does not restart a stopped run. No automatic reacquisition, physical redispatch or replay of already acquired passive owners is promised."
+      },
+      {
+        "id": "official_score_and_diagnostics",
+        "source": "BranchRouting.record; original caller branch_routing diagnostic",
+        "finding": "An ordinary increased-score return remains prior to identity enumeration, events and finished. passed/events retain the source diagnostic meanings; finished alone is not a level victory. If an earlier incomplete return already suspends the owner, later official returns still require explicit non-acquired receipts."
+      }
+    ],
+    "counterQualification": "acquiredRecords and caller.acquiredTransitions are common callback/reconciliation counters, including incomplete markers. They are not by themselves the number of successful BranchRouting source acquisitions; source events and non-acquired receipts provide that distinction."
+  },
+  "publicDomainReview": {
+    "sourceOfPublicDomain": "src/logos-engine/v6-native-observer.ts: validateRows",
+    "assumption": "Nonempty measured public rasters with W*H <= 65536, rectangular connected components supplied by the public observer, and ordinary source proposal/guard/acquisition flow. Arbitrary fabricated observation entities or arbitrary calls to record are not authenticated by restore.",
+    "method": "Deduction from pinned source control flow and measured-component constraints, plus read-only review of seven test definitions; no numerical enumeration or component execution.",
+    "findings": [
+      {
+        "id": "square_sources_count_once",
+        "finding": "The original source loop appends each measured unit-square source at most once because it breaks after a matching cap. These measured components are distinct even when their tangent ranks coincide. sources.length*unit^2 <= 65536 is therefore necessary, and repeated sorted ranks remain permitted."
+      },
+      {
+        "id": "initial_unit_limit",
+        "finding": "unit*limit equals unit*floor(initial tangent extent/unit), no greater than the actual initial extent. Aligned bars and cavities have unit-multiple origins and lengths, so their full tangent bounds fit within this truncated extent. Combining it with retained normal positions gives a necessary initial public surface condition."
+      },
+      {
+        "id": "distinct_measured_bar_area",
+        "finding": "Initial bars are distinct full rectangular measured components. Their aggregate area and count must fit the surface budget. Quotient checks precede the relevant geometry products, avoiding unsafe large intermediate products."
+      },
+      {
+        "id": "current_shape_independent",
+        "finding": "current is validated as complete measured boxes in its own possible public rectangle, independently of the initial model rectangle. A public width/height change within an epoch is not rejected solely because it differs from the original layout shape."
+      },
+      {
+        "id": "partial_predicted_slices",
+        "finding": "seen and event.before validate nonnegative origins rather than requiring complete predicted boxes. This preserves original read_state acceptance of a uniform nonempty partial slice. Future predictions that never pass a before guard are not acquired states."
+      },
+      {
+        "id": "history_not_current_model",
+        "finding": "Each historical before/after state is checked independently. Historical bar counts, orientation and unit are not compared with the new model. Acquired axial motion may be non-unit and survives model-free or differently shaped epochs."
+      },
+      {
+        "id": "negative_helper_scope",
+        "finding": "The pure read_state helper keeps Python negative-slice semantics. Nonnegative retained origins are consistent with source-generated guarded trajectories, which start from measured nonnegative poses and move toward nonnegative placement targets. The broader pure-helper domain is not treated as arbitrary acquired-state provenance."
+      }
+    ],
+    "reviewedTestPath": "tests/v6-branch-routing-public-boundary.test.ts",
+    "reviewedTestCount": 7,
+    "testQualification": "The new tests explicitly use generic counterfactual checkpoints for necessary public numeric constraints. They do not claim that restore authenticates an originally acquired policy.",
+    "residualLimits": [
+      "The conditions are necessary, not a full realization or provenance proof. Some checkpoints satisfying them can still describe arrangements that no original layout observation produced.",
+      "Per-state surface constraints do not impose a total quota on cumulative events, seen entries, references, action keys or their validation/copy cost.",
+      "The snapshot does not retain historical models/frame dimensions; historical validation deliberately uses independent necessary origin-domain bounds rather than reconstructing missing provenance."
+    ]
+  },
+  "parentExecutionEvidence": {
+    "attribution": "The following commands were executed by the root agent. This reviewer only read the retained receipts/inventories and does not claim these as reviewer executions.",
+    "receipts": [
+      {
+        "path": "docs/migration/lot8b-evidence/common-integration-01/branch-01/receipt.json",
+        "status": "passed",
+        "exitCode": 0,
+        "tests": 281,
+        "pass": 281,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0,
+        "elapsedSeconds": 13.498214327999449,
+        "inputCount": 2447,
+        "beforeAndAfterInventoriesComparedEqual": true,
+        "changedInputPaths": [],
+        "log": {
+          "path": "docs/migration/lot8b-evidence/common-integration-01/branch-01/output.log.gz",
+          "sha256FromReceipt": "99ad246e6258326705659e92f3ccebb3b54a7e5c9fee068376112b6ab9805d3a"
+        }
+      },
+      {
+        "path": "docs/migration/lot8b-evidence/common-integration-01/typecheck-01/receipt.json",
+        "status": "passed",
+        "exitCode": 0,
+        "command": [
+          "node",
+          "node_modules/typescript/bin/tsc",
+          "--noEmit"
+        ],
+        "elapsedSeconds": 9.006518691001475,
+        "inputCount": 2443,
+        "beforeAndAfterInventoriesComparedEqual": true,
+        "changedInputPaths": [],
+        "testCounts": {},
+        "log": {
+          "path": "docs/migration/lot8b-evidence/common-integration-01/typecheck-01/output.log.gz",
+          "sha256FromReceipt": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+        }
+      }
+    ],
+    "testCountInterpretation": {
+      "referenceTestsAndSubtests": 249,
+      "nativeContractTests": 17,
+      "publicBoundaryTests": 7,
+      "commonKernelTests": 8,
+      "total": 281,
+      "originalStatefulOperations": 83,
+      "warning": "249 includes parent tests and nested operation subtests, with each original operation compared in two native modes. Neither 249 nor 281 is a count of independent original scenarios. Typecheck contributes no additional test cases."
+    },
+    "nineteenFileRegressionRun": "Reported by the parent as in progress when this review was requested; not examined or certified by this review.",
+    "gameExecution": false,
+    "officialPerformanceMeasurement": false,
+    "publication": false
+  },
+  "preservedLimits": [
+    "This read-only review and the parent's synthetic functional receipts do not establish complete original common-caller or strategic selection parity.",
+    "The retained original component corpus distinguishes cold acquisition, exact retained acquisition and declared counterfactual motion seeds; those provenance categories remain unchanged.",
+    "The restoration validator checks necessary public representability, shape and coherence; it does not authenticate physical acquisition provenance.",
+    "Cumulative history size, copying, layout work and overall latency are not globally bounded by the two enumeration ceilings or by per-state public surface checks.",
+    "Incomplete selected acquisitions end in a terminal stop with complete non-acquired public witnesses. No automatic retry or resumable exactly-once acquisition protocol is claimed.",
+    "Official completion and common callback counts must not be reported as successful BranchRouting acquisition of returns marked acquired:false.",
+    "Connection coverage, static source inventory, broader regression results, official performance acceptance and publication require their own receipts.",
+    "No game payload, LKEY execution, reset, replay or oracle was introduced or interpreted by these reviews."
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "logos-engine.v44.actual-targeted-test-execution.v1",
+  "command": [
+    "node",
+    "--test",
+    "--test-reporter=tap",
+    "tests/v6-radial-port-integration.test.ts"
+  ],
+  "exitCode": 0,
+  "startedAt": "2026-11-08T18:55:24.062692+00:00",
+  "finishedAt": "2026-11-08T18:55:55.003228+00:00",
+  "testFiles": [
+    "tests/v6-radial-port-integration.test.ts"
+  ],
+  "testFileSha256": {
+    "tests/v6-radial-port-integration.test.ts": "76be49f8ff380b595ba2228bb289e20499d71f4e89a01fdbefcbe390501df385"
+  },
+  "testFilesUnchanged": true,
+  "nativeSourceManifestDigest": "1b30d1f0a80275a1204b44198b5fd62f43439d16b5eccdd768a4357b78986093",
+  "nativeSourceUnchanged": true,
+  "nativeSourceFileCount": 146,
+  "output": {
+    "path": "docs/migration/native-campaigns-v44/validation/topology-recheck-output.log.gz",
+    "sha256": "be8dadab2b9c7e15cfe1b417ecb379a20d0fac6e9149c305dace406d84336f19",
+    "bytes": 916
+  },
+  "correction": {
+    "file": "tests/v6-radial-port-integration.test.ts",
+    "beforeSha256": "cf7fe6cf1b3bafb7169ccd93a6963b034091933abcd5028586b2e4849175f2b6",
+    "afterSha256": "76be49f8ff380b595ba2228bb289e20499d71f4e89a01fdbefcbe390501df385",
+    "originalTestName": "the product, radial and rooted entries preserve declared order with exactly 34 of 76 source entries connected",
+    "updatedTestName": "the product, labeled, radial and rooted entries preserve declared order with exactly 35 of 76 source entries connected",
+    "change": "Only two stale aggregate count expectations and their descriptive test title: window entries 9/21 to 10/21, total 34/76 to 35/76. Explicit source order and labeled alias were already present. No production change."
+  },
+  "qualification": "One test file rerun after the full 85-file suite reported one obsolete count expectation. The full-suite receipt and log remain unchanged; this targeted run does not count as new distinct coverage."
+}

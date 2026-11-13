@@ -1,0 +1,86 @@
+{
+  "schema": "logos-engine.lot8b.branch-capture-diagnosis.v1",
+  "recordedAt": "2026-11-12T05:16:19.990130+00:00",
+  "status": "tool_domain_mismatch_diagnosed_before_native_factory",
+  "attempt": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/receipt.json",
+    "bytes": 2287,
+    "sha256": "e0de9145ba5cf54d4326cc1a87a44d479d1824e984fc7ec191d510379ecad731"
+  },
+  "captureReceipt": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/capture.receipt.json",
+    "bytes": 90621,
+    "sha256": "30b8fe8dc5ca2369981d9e271834913e94f5da1ffc395eb5494993fa732d90a5"
+  },
+  "failure": {
+    "name": "TypeError",
+    "message": "The public game frame must be 64 × 64.",
+    "stack": "TypeError: The public game frame must be 64 × 64.\n    at toAgentObservation (file:///workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/src/runtime/contracts.ts:45:121)\n    at toV6PublicObservation (file:///workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/src/runtime/v6-agent-protocol.ts:133:3)\n    at validateV6PublicObservation (file:///workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/src/runtime/v6-agent-protocol.ts:191:22)\n    at V6AgentService.handle (file:///workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/src/runtime/v6-agent-service.ts:188:30)\n    at handle (file:///workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/tools/delivery/branch-common-capture.mjs:241:40)\n    at main (file:///workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/tools/delivery/branch-common-capture.mjs:273:22)\n    at async file:///workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/tools/delivery/branch-common-capture.mjs:340:1"
+  },
+  "factoryCalls": 0,
+  "physicalReturns": 0,
+  "nativeSourceUnchanged": true,
+  "inputsUnchanged": true,
+  "headUnchanged": true,
+  "childProcessReaped": true,
+  "fixtureFrameDimensionsAndCounts": {
+    "26x28": 35,
+    "28x26": 2
+  },
+  "fixture": {
+    "path": "tests/fixtures/v6-branch-routing-reference.json",
+    "bytes": 542660,
+    "sha256": "e6ae197b7b982bd41f561b9df8e458436d7ce0797f39bbf86d972e55472b6769"
+  },
+  "frozenInputs": 353,
+  "publicServiceContract": "V6AgentService validates a64x64 public frame before invoking the native factory. The independent component corpus has26x28 or28x26 frames.",
+  "evidenceInspected": [
+    {
+      "path": "src/runtime/contracts.ts",
+      "bytes": 5967,
+      "sha256": "7e3bbd9e7951b1249622961bc801bdf789fb3538a85a7fb4fdc4befccf0e48bc"
+    },
+    {
+      "path": "src/runtime/v6-agent-protocol.ts",
+      "bytes": 9389,
+      "sha256": "597b4d4ab19882a37048e1fa9caeaebea2112b66e25f6294f428bb7916818aa4"
+    },
+    {
+      "path": "src/runtime/v6-agent-service.ts",
+      "bytes": 18195,
+      "sha256": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96"
+    },
+    {
+      "path": "tests/v6-branch-routing-kernel.test.ts",
+      "bytes": 29235,
+      "sha256": "e64632ee71195f528a8f19dbec4d0cc25695925fdae5de3865a9092ff8537fea"
+    }
+  ],
+  "classification": "Instrumentation boundary choice, not an observed native owner/acquisition failure. The native factory was never called.",
+  "chosenCorrection": {
+    "newFilesOnly": true,
+    "runtime": "Real NativeV6Runtime production factory and initialize/advance/resume/inspectKnowledge/close, as in the validated common tests.",
+    "originalRastersAndExpectedStatesPreserved": true,
+    "nativeProductionAndFixtureChanges": false,
+    "padding": false,
+    "publicValidationBypassedOrRelaxed": false,
+    "publicServicePositiveQualification": false,
+    "nativeAuthorizationAndGraphIdentityMustBeChecked": true,
+    "fakeServiceTicketsForbidden": true,
+    "unchangedExpectedPopulation": {
+      "chains": 5,
+      "returns": 26,
+      "successfulSourceAcquisitions": 23,
+      "ablated": 1,
+      "incomplete": 2,
+      "wrapperRecordCalls": 25,
+      "adapterInvocations": 24,
+      "unexecutedFinalQuestions": 3
+    },
+    "newProspectivePlanAndIndependentReviewRequiredBeforeExecution": true
+  },
+  "attemptRetained": true,
+  "oldToolsAndPlanUnchanged": true,
+  "officialPerformanceMeasured": false,
+  "LKEYIncluded": false
+}

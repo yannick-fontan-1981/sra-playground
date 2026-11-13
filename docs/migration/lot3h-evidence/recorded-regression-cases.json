@@ -1,0 +1,55 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "cases": [
+    {
+      "id": "catr-048",
+      "game": "CATR",
+      "baseline": {
+        "path": "docs/migration/lot3g-evidence/final/regressions/catr-047-replay.json.gz",
+        "sha256": "de685608b631f98a4305a79e445b65f6ae121a2ac09f14cb2dbad2c41cc094b6"
+      },
+      "trace": {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+        "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816"
+      }
+    },
+    {
+      "id": "rswp-048",
+      "game": "RSWP",
+      "baseline": {
+        "path": "docs/migration/lot3g-evidence/final/regressions/rswp-047-replay.json.gz",
+        "sha256": "cd63fa5687f98c0ac05515d61fea87c1e783b4b196fddce77933ca4f62518f68"
+      },
+      "trace": {
+        "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+        "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755"
+      }
+    },
+    {
+      "id": "fogw-048",
+      "game": "FOGW",
+      "baseline": {
+        "path": "docs/migration/lot3g-evidence/final/regressions/fogw-047-replay.json.gz",
+        "sha256": "24a94ce9ce9ffad78bcb290cdc1547d5d7207f7e72fcaa7d10efaef0e51fc3bb"
+      },
+      "trace": {
+        "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+        "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46"
+      }
+    },
+    {
+      "id": "vois-048",
+      "game": "VOIS",
+      "baseline": {
+        "path": "docs/migration/lot3g-evidence/final/regressions/vois-047-replay.json.gz",
+        "sha256": "43ac8970c3af2b63e781bf40dcc62f53dc01e1e338ae6cd690df752ea99ba74d"
+      },
+      "trace": {
+        "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+        "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d"
+      }
+    }
+  ],
+  "passiveOwnerRequirements": [],
+  "qualification": "Cold recorded-return regressions against actual native0.48 reports from Site76 commit fbbc3fb6b796c0ba359654da7234008767090e1f, digest fce8dfc3e6861742649203161b3bf55b6480462e44c77d8015453ce55b724a26. Every native0.49 command is computed before its recorded public return. Same17 unchanged checks per case. New CrossedPrefix passive evidence is absent until own selection/acquisition. These are nonregressions, not new live attempts, game successes, full-state equality or new-capability contribution. Prior CWSE/SK48/FOGW/VOIS case clocks are unchanged."
+}

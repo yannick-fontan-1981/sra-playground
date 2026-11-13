@@ -1,0 +1,14 @@
+{
+  "schema": "logos-engine.coordination-observation.v1",
+  "recordedAt": "2026-11-10T23:36:11.791587+00:00",
+  "lot": "10A",
+  "status": "quiet_continues",
+  "quietAcknowledgedAt": "2026-11-10T23:28:08.969468+00:00",
+  "ownReplayEndedAt": "2026-11-10T23:25:37.152744+00:00",
+  "ownStatusSnapshot": {
+    "path": "docs/migration/lot10a-evidence/coordination/quiet-for-7b-status.json",
+    "sha256": "8e55c9c25d280b33d080e97d20609117a6180967f3ac882c8c45aabddb40316d",
+    "bytes": 4709
+  },
+  "qualification": "Exact retained 10A status was acknowledged before the 7B cost window. Root and all 10A agents remain quiet; no native computation, tests, games, browser, captures, packing or archives are running. Reading and text only. The 7B initial isolation receipt names older lanes but omits 10A; this separate observation documents that omission without editing another lane or changing any measurement input."
+}

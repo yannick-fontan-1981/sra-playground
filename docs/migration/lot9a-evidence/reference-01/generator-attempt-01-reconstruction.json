@@ -1,0 +1,12 @@
+{
+  "schema": "logos-engine.v6.chart-navigation-generator-reconstruction.v1",
+  "status": "exact_recorded_bytes_reconstructed",
+  "method": "Reverse the documented attempt-02 patch and require byte SHA equality with the unchanged failed attempt-01 receipt before saving.",
+  "executionPerformed": false,
+  "captureAtOriginalExecution": false,
+  "expectedSha256": "e417bf07dae07cb7dd76b654001975f22cff03d9c642e63c26e59d75a4a21eb3",
+  "actualSha256": "e417bf07dae07cb7dd76b654001975f22cff03d9c642e63c26e59d75a4a21eb3",
+  "bytes": 33246,
+  "path": "docs/migration/lot9a-evidence/reference-01/export-reference-attempt-01.py",
+  "currentGeneratorUnchangedSha256": "30bc414e1ab6c7be209d0c726f7a3df47f8208ea1c708f2cf2804fc9677182ef"
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.native-profile-environment-qualification.v1",
+  "recordedAt": "2026-11-09T21:08:18.776604+00:00",
+  "execution": "docs/migration/lot2c-cost-evidence/diagnostic/baseline-execution.json",
+  "profileStartedAt": "2026-11-09T21:07:48.339Z",
+  "profileFinishedAt": "2026-11-09T21:08:00.709Z",
+  "concurrentTaskReportedByRoot": {
+    "task": "typecheck in main checkout",
+    "startedAt": "2026-11-09T21:07:40+00:00",
+    "finishedAtApproximate": "2026-11-09T21:07:49+00:00",
+    "exitCode": 0
+  },
+  "qualification": "The baseline process began at 21:07:47.663511 UTC and briefly overlapped the reported typecheck. Diagnostic output and timing are retained, not rerun or selected for favorable ratios. These instrumented one-session timings locate work and establish no cost-budget acceptance. Counts and semantic facts remain checked.",
+  "copiedByteIdentical": [
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/baseline.json.gz",
+      "bytes": 121381,
+      "sha256": "d8bd2f3b4b85270ab5c9e82807f369b5ffb0fce407bfe5e0642098d5dd7b71fa"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/baseline-execution.json",
+      "bytes": 795,
+      "sha256": "a9cd73cc646067d8c2c3ba96e124b6f641a262b3cf860a06a06f0ce687852a68"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/baseline-attempt-01.log.gz",
+      "bytes": 353,
+      "sha256": "04e55c78482e91009dd5796fbc1991aa99a1ba4186cd1d0d3f71a51df73d2054"
+    }
+  ]
+}

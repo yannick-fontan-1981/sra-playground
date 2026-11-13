@@ -1,0 +1,114 @@
+{
+  "schema": "logos-engine.lot4c-publication-tools-source-review.v1",
+  "recordedAt": "2026-11-11T01:13:46+00:00",
+  "status": "static_review_passed_with_explicit_scope_limits",
+  "reviewer": "facet_source_audit",
+  "scope": "Source reading, small fingerprints and textual comparison only. Neither publication tool, verifier, cost tool, Python import, syntax checker, Git command, archive, transport nor publication was executed. No production or frozen script was modified.",
+  "adaptationReceipt": {
+    "path": "docs/migration/lot4c-evidence/planning/publication-tools-adaptation.json",
+    "sha256": "f616fe232624a2f6c9315b94eea161ce2be5f70a6c2714c2ec5daf071374b897"
+  },
+  "tools": [
+    {
+      "path": "docs/migration/lot4c-evidence/record-publication-inputs.py",
+      "bytes": 17876,
+      "sha256": "bd8070cc153351d59914ef3a3d9f72b9f5040ac5f23380dc5b95fb196de64c91",
+      "source": {
+        "path": "docs/migration/lot10a-evidence/record-publication-inputs.py",
+        "bytes": 17885,
+        "sha256": "b2fd1c374ea57b73db70eea12677c70de719859fe1b0a190d4a17b62f21bae24"
+      },
+      "literalReplacementDiffExitCode": 0
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/plan-bounded-source-transport.py",
+      "bytes": 31356,
+      "sha256": "7bc08600b0b1a46cea1629e86158a762462c0cbcecf5ab07b5e9b4a7671b5e97",
+      "source": {
+        "path": "docs/migration/lot10a-evidence/plan-bounded-source-transport.py",
+        "bytes": 31366,
+        "sha256": "384d76d90e648468844813ccc8f68cba4e674c08a77aac55f2892ba2ee375421"
+      },
+      "literalReplacementDiffExitCode": 0
+    }
+  ],
+  "literalTransformations": [{"from": "lot10a", "to": "lot4c"}, {"from": "10A", "to": "4C"}],
+  "adaptationConclusion": "Both current files are byte-identical to the named 10A originals after only the two literal replacements. No remaining old lot namespace or hard-coded 0.56/0.57 version was found in either adapted file. The adaptation adds no weakened gate or phase veto. The syntax result in the prior adaptation receipt belongs to its producer; this review did not execute a syntax check.",
+  "comparedSchemaProducers": [
+    {
+      "path": "docs/migration/lot4c-evidence/consolidate-owner-costs.mjs",
+      "bytes": 52839,
+      "sha256": "b3e6349cbc52076b2e6782f107dc89c0feb466a946a69390b1d62511749bf807"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/review-owner-costs.py",
+      "bytes": 70741,
+      "sha256": "ac2b4d5478144736986d2c1a6e141cf823f547590acbe365822e4c77b7a26ab1"
+    },
+    {
+      "path": "scripts/verify-native-delivery.py",
+      "bytes": 26494,
+      "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a"
+    }
+  ],
+  "recorderReview": {
+    "requiredPositionalArguments": [
+      "/workspace/sites/sra-lot4c-reference-056",
+      "docs/migration/lot4c-evidence/integrated-final",
+      "docs/migration/lot4c-evidence/performance-integrated",
+      "docs/migration/lot4c-evidence/integrated-final/validation"
+    ],
+    "optionalArguments": ["--browser-evidence FILE", "--game-evidence FILE", "--contribution-reserve FILE"],
+    "output": "docs/migration/lot4c-evidence/integrated-final/publication-inputs.json",
+    "outputSchema": "logos-engine.lot4c-publication-inputs.v1",
+    "schemaCompatibility": [
+      "Owner contract: logos-engine.lot4c-owner-cost-contract.v2, lot=4C, matching reviewer/consolidator fingerprints.",
+      "Consolidator: logos-engine.lot4c-owner-cost-consolidation.v2, status=qualified_consolidation_complete, sources.baseline/after with digest and fileCount.",
+      "Reviewer: logos-engine.lot4c-owner-cost-review.v2, status=qualified_owner_cost_review_passed; checkedCount/checks, inputs/watchedExternalInputs, globalCases, accepted flags, physical ledgers and historicalStrict match actual producer fields.",
+      "Delivery verifier: native-delivery-integrity.v1 uses generator, directory, validationDirectory, nativeSourceDigest, matchedFileInventories, tests, regressions, nativeAgentWorker, receipts, verificationHelpers and originalSourceManifest, all consumed with their actual field names.",
+      "Window: native-cost-window.v1 uses plannedOrder, executions, nativeDigests.baseline/correction, baselineCheckout, correctionCheckout, inputs and report/log fingerprints. Versions are inferred from measured implementations."
+    ],
+    "retainedGates": [
+      "The distinct baseline must be an absolute canonical checkout; local inputs are confined and retained fingerprints are checked again.",
+      "Formal source/test/build/regression verification and exact compiled worker are rebound to the passed delivery-integrity receipt without rerunning tests or builds.",
+      "Both global cases must be accepted by the independent review and agree with consolidation. The recorder does not require phaseStatus=passed and introduces no independent phase veto.",
+      "ABBA must be complete and unchanged with exact order A1/B1/B2/A2. Physical sessions must total 32 measured/400 actions and 8 excluded warmups/24 actions; both complete ledgers must match.",
+      "The historical strict result remains failed, its actual nonzero exit receipt and log are rebound, and its absent aggregate must remain absent.",
+      "Input receipt output is exclusive; failures are reported with nonzero exit and cannot produce a passed receipt."
+    ],
+    "limits": [
+      "This is release input integrity, not a fresh source-parity, live-game or browser validation. Optional evidence is fingerprinted only and no result is promoted.",
+      "It does not independently validate the coordinated-isolation completion receipt. The separate cost-results/isolation closure remains necessary evidence and must retain its own scope.",
+      "Its accepted-cost gate is stronger than the planner's window-only gate. Execute the recorder only after the completed independent review and preserve the external caller's stdout/stderr/exit on failure."
+    ]
+  },
+  "plannerReview": {
+    "outputSchema": "logos-engine.bounded-source-push-plan.v2",
+    "successfulStatus": "planned_not_pushed",
+    "defaultWindow": "docs/migration/lot4c-evidence/performance-integrated/window.json",
+    "baseArgument": "Full actual published predecessor commit, currently declared as 5659ddc9420c7624df4865f0afc628782296a186; the caller must verify it is still the remote predecessor at execution.",
+    "targetArgument": "HEAD or its full commit, required to be the actual clean original HEAD after final delivery commit.",
+    "outputArgument": "New absolute JSON path in an existing directory outside the checkout.",
+    "retainedGates": [
+      "passed_window verifies a completed past, integrity-passed four-run ABBA receipt before any Git operation.",
+      "Preparation rejects redirected, shallow or promisor Git repositories, active Git operations, grafts, dirty tracked/untracked state and cross-project base/target.",
+      "Every newly reachable target/history object is inventoried before commit creation. Any object of at least 33554432 bytes is rejected; all types and ancestry are included.",
+      "Each step includes at most 41943040 bytes of newly reachable raw object contents against its exact preceding planned commit. Trees, commits and all parents count; raw bounds are not asserted to equal wire pack size.",
+      "Only eligible regular proof data under docs/migration/lot4c-evidence may be deferred. All other final target paths, including source, tests and build inputs, are complete from the first step.",
+      "Every accepted step is a normal fast-forward from its predecessor. Final tree equals the original target exactly and original HEAD is a direct parent; all target and base ancestry objects remain reachable.",
+      "Temporary-index tree/commit objects are created by actual execution, but no branch, real index, worktree, credentials, remote, push or Site deployment is changed by the planner.",
+      "After output reservation, planning errors retain an unusable plan; final snapshot verifies checkout/refs/index, generator and window are unchanged. A plan is usable only with status=planned_not_pushed and checkoutUnchanged=true."
+    ],
+    "limits": [
+      "The planner is not a read-only command because it creates Git tree/commit objects. It must remain unexecuted during the official isolation window.",
+      "It checks the completed window, not cost acceptance or publication-inputs.json; it cannot replace the independent review, publication recorder or isolation closure.",
+      "The caller supplies the actual published base. Same-project checking does not perform remote verification, and ignored raw proof files are enumerated but not added.",
+      "Precondition rejection before output reservation reports stderr/exit without a plan file. Retain these caller execution records; do not claim every early refusal creates planning_failed JSON.",
+      "The 40 MiB raw object bound is headroom below the recorded backend limit, not a guarantee of network pack size. No intermediate Site deployment, force push or remote mutation is performed."
+    ]
+  },
+  "materialAdaptationDefectsFound": [],
+  "codeChangesRecommended": false,
+  "executionEvidence": "No tool execution, cost outcome, transport result or publication outcome is claimed by this source review.",
+  "changedFiles": ["docs/migration/lot4c-evidence/planning/publication-tools-source-review.json"]
+}

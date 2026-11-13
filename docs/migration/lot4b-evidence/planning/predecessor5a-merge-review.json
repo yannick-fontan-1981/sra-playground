@@ -1,0 +1,893 @@
+{
+  "schema": "logos-engine.lot4b.predecessor-5a-static-merge-review.v1",
+  "createdAt": "2026-11-10T21:13:04.648683+00:00",
+  "status": "static_review_complete_pending_published_5a",
+  "executable": false,
+  "scope": "Revue de texte du runtime, des propriétaires, du routage et des captures. Aucun merge, fetch, import natif, test, oracle, build, rejeu, jeu ou capture exécuté. Aucun fichier de production ou de test modifié.",
+  "deliveryOrder": [
+    "7A actual Site83 already integrated in the 4B HEAD per parent",
+    "5A publication to verify",
+    "4B final merge and validation",
+    "possible 7B after 4B"
+  ],
+  "inputs": {
+    "ours": {
+      "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+      "head": "dbb3349a012c38b71581851439922f1f292fe946",
+      "qualification": "4B + Site83 selon le contexte root; empreintes des textes réellement lus ci-dessous.",
+      "cleanWorkingTreeWithinCheckedPaths": [
+        "src/logos-engine/v6-native-runtime.ts",
+        "src/logos-engine/v6-native-types.ts",
+        "tests/helpers/v6-live-game-campaign.ts",
+        "tests/v6-radial-port-integration.test.ts",
+        "tests/v6-relative-arrangements-integration.test.ts"
+      ],
+      "files": [
+        {
+          "path": "src/logos-engine/v6-native-runtime.ts",
+          "sha256": "fd7cd01e4b35db37886f910d710dbabda99e0a40a729dadf2ae9e1f43bbd0aa8",
+          "bytes": 145046,
+          "anchors": {
+            "private retainProposalRefusal": [
+              551
+            ],
+            "private retainSourceGroupStop": [
+              565
+            ],
+            "private async sourceGroupAllowsEntry": [
+              585
+            ],
+            "sourceStops:": [
+              204,
+              457
+            ],
+            "if (enabled && !proposal)": [],
+            "if (!proposal) this.retainProposalRefusal": [
+              498
+            ],
+            "await this.sourceGroupAllowsEntry": [
+              718,
+              789
+            ],
+            "private async preferCurrentRequiredService": [
+              706
+            ],
+            "private async preferAcquiredContinuation": [
+              765
+            ],
+            "acquisitionFamilies?:": [
+              159,
+              173
+            ],
+            "private acquiredRecordCount": [],
+            "private records:": [
+              195
+            ],
+            "private compositionIds": [],
+            "private compositions =": [
+              196
+            ],
+            "private retainSelectedAcquisition": [
+              1182
+            ],
+            "private async acquirePassiveFamilies": [
+              1225
+            ],
+            "private restoreFamilies": [
+              1377
+            ],
+            "private async persistFamilies": [
+              1388
+            ],
+            "export function relativeArrangementFamily": [
+              1664
+            ],
+            "const preparations = new LinkedTemporalPreparation": [],
+            "const families: NativeFamily[]": [
+              1775
+            ],
+            "relative_arrangement: arrangements": [
+              1781
+            ],
+            "linked_temporal_preparation: linkedTemporal": [],
+            "entryPoints: [...windowEntries": [
+              1829
+            ],
+            "preparations && selectedId !== preparations.id": [],
+            "relative_arrangement_state": [
+              1205
+            ],
+            "linked_preparation_event:": [],
+            "NATIVE_V6_IMPLEMENTATION": [
+              69,
+              1470,
+              1835
+            ],
+            "blocking_current_proposal_refusal_preserves_selection_order": []
+          }
+        },
+        {
+          "path": "src/logos-engine/v6-native-types.ts",
+          "sha256": "6fbb3e98ba8350e4a9ec82fb4d155e635887a8a83c53a9603f8f3e7d075d0b07",
+          "bytes": 13052,
+          "anchors": {
+            "sourceGroupStop?": [
+              142
+            ],
+            "currentProposalRefusal?": [
+              139
+            ]
+          }
+        },
+        {
+          "path": "tests/helpers/v6-live-game-campaign.ts",
+          "sha256": "93b824b078ccf259827be897e8143dc59fc0479d6f765f3a437cc95b2f4472c1",
+          "bytes": 73454,
+          "anchors": {
+            "relativeArrangementSourceCalls:": [
+              92
+            ],
+            "const arrangements =": [
+              234
+            ],
+            "relativeArrangement: {": [
+              506
+            ],
+            "const workshop =": [
+              176
+            ],
+            "feedbackSourceCalls:": [
+              92
+            ]
+          }
+        },
+        {
+          "path": "src/logos-engine/v6-relative-arrangements.ts",
+          "sha256": "4e283c8a8cba9f48740ae59b83edf2821f6fa505591e4d699a8c9cce9fd3917c",
+          "bytes": 13576,
+          "anchors": {
+            "recognizedCurrentInterface": [
+              89
+            ],
+            "attachPrograms": [
+              66
+            ],
+            "state():": [
+              160
+            ],
+            "restore(state:": [
+              166
+            ]
+          }
+        },
+        {
+          "path": "tests/v6-relative-arrangements-integration.test.ts",
+          "sha256": "9f413be4fb48c72872bb584b8919e9b331935ba4179156ef93aae052ceed88d9",
+          "bytes": 32659,
+          "anchors": {
+            "source recognition barrier": [
+              237
+            ],
+            "native current-service look-ahead": [
+              281
+            ],
+            "native acquired-continuation look-ahead": [
+              326
+            ]
+          }
+        },
+        {
+          "path": "tests/v6-radial-port-integration.test.ts",
+          "sha256": "d471de7ac2cc4844be26ff69e8557d78d47e141e9d9516c8053d796b2a648c8f",
+          "bytes": 28209,
+          "anchors": {
+            "assert.deepEqual(counts": [
+              381
+            ],
+            "const explicitEntry": [
+              375
+            ]
+          }
+        }
+      ]
+    },
+    "fiveA": {
+      "checkout": "/workspace/sites/sra-lot5-20261110/.sites-checkout",
+      "head": "bc19974c910711f20385d9a40168a0927ec22057",
+      "publicationVerified": false,
+      "sourceIsProvisional": true,
+      "cleanWorkingTreeWithinCheckedPaths": [
+        "src/logos-engine/v6-native-runtime.ts",
+        "src/logos-engine/v6-native-types.ts",
+        "tests/helpers/v6-live-game-campaign.ts"
+      ],
+      "observedModifiedPaths": [
+        "tests/v6-radial-port-integration.test.ts"
+      ],
+      "qualification": "Le test radial lu inclut un changement de travail non commis. Ni ce HEAD ni ses fichiers provisoires ne sont une attestation de publication finale.",
+      "files": [
+        {
+          "path": "src/logos-engine/v6-native-runtime.ts",
+          "sha256": "3dd8ff07f3b0e82c6059f825295e15d9e49af47d4aebb850aa9cb8fac90ed2e4",
+          "bytes": 141662,
+          "anchors": {
+            "private retainProposalRefusal": [
+              567
+            ],
+            "private retainSourceGroupStop": [],
+            "private async sourceGroupAllowsEntry": [],
+            "sourceStops:": [],
+            "if (enabled && !proposal)": [
+              505
+            ],
+            "if (!proposal) this.retainProposalRefusal": [],
+            "await this.sourceGroupAllowsEntry": [],
+            "private async preferCurrentRequiredService": [
+              679
+            ],
+            "private async preferAcquiredContinuation": [
+              737
+            ],
+            "acquisitionFamilies?:": [
+              162,
+              176
+            ],
+            "private acquiredRecordCount": [
+              201
+            ],
+            "private records:": [],
+            "private compositionIds": [
+              202
+            ],
+            "private compositions =": [],
+            "private retainSelectedAcquisition": [
+              1156
+            ],
+            "private async acquirePassiveFamilies": [
+              1203
+            ],
+            "private restoreFamilies": [
+              1362
+            ],
+            "private async persistFamilies": [
+              1373
+            ],
+            "export function relativeArrangementFamily": [],
+            "const preparations = new LinkedTemporalPreparation": [
+              1713
+            ],
+            "const families: NativeFamily[]": [
+              1732
+            ],
+            "relative_arrangement: arrangements": [],
+            "linked_temporal_preparation: linkedTemporal": [
+              1756
+            ],
+            "entryPoints: [...windowEntries": [
+              1786
+            ],
+            "preparations && selectedId !== preparations.id": [
+              1226
+            ],
+            "relative_arrangement_state": [],
+            "linked_preparation_event:": [
+              1169,
+              1228
+            ],
+            "NATIVE_V6_IMPLEMENTATION": [
+              68,
+              1455,
+              1792
+            ],
+            "blocking_current_proposal_refusal_preserves_selection_order": [
+              74
+            ]
+          }
+        },
+        {
+          "path": "src/logos-engine/v6-native-types.ts",
+          "sha256": "a400b8664370be04950ee721ea4503774a245300251624bf632376ad489b668b",
+          "bytes": 12773,
+          "anchors": {
+            "currentProposalRefusal?": [
+              139
+            ]
+          }
+        },
+        {
+          "path": "tests/helpers/v6-live-game-campaign.ts",
+          "sha256": "a33b59fc84bb2007a6c80842e9cc395836270bc3ddd90eece606f1dcce04261a",
+          "bytes": 70789,
+          "anchors": {
+            "workshopSourceCalls:": [
+              92
+            ],
+            "const workshop =": [
+              176
+            ],
+            "feedbackSourceCalls:": [
+              92
+            ]
+          }
+        },
+        {
+          "path": "src/logos-engine/v6-linked-temporal-preparation.ts",
+          "sha256": "c85464b1162352f7c6cb329f2d2f9b6cbcc74baae616be3d643d1ac1b646aeed",
+          "bytes": 24845,
+          "anchors": {
+            "readonly id =": [
+              164
+            ],
+            "currentProposalRefusal(": [
+              199
+            ],
+            "recordSource(": [
+              212,
+              221
+            ],
+            "record(before:": [
+              220
+            ],
+            "nativeState():": [
+              225
+            ],
+            "restoreNative(": [
+              233,
+              234
+            ]
+          }
+        },
+        {
+          "path": "tests/v6-source-entry-routing.test.ts",
+          "sha256": "c9e5e5036f15dc3151bcc2afec5dde4ba73c2a0efd2c8849fa75ea0d90154b15",
+          "bytes": 7690,
+          "anchors": {
+            "current bounded-search witness": [
+              71
+            ],
+            "blocking witness cannot": [
+              101
+            ]
+          }
+        },
+        {
+          "path": "tests/v6-radial-port-integration.test.ts",
+          "sha256": "41aeb040cc64bd9e1bece99b45a72e69747c99813618cd3116d922bf4c1799aa",
+          "bytes": 28096,
+          "anchors": {
+            "assert.deepEqual(counts": [
+              380
+            ],
+            "const explicitEntry": [
+              374
+            ]
+          }
+        },
+        {
+          "path": "docs/migration/lot5a-linked-temporal-lineage.md",
+          "sha256": "d1d429b2fda2d96bc8666e90f7762eea9ef2421101cf42d4de770c4c272bd640",
+          "bytes": 31494,
+          "anchors": {
+            "ne passe pas par les aides de préférence": [
+              117
+            ],
+            "preuve de tous les chemins": [
+              117
+            ]
+          }
+        },
+        {
+          "path": "scripts/prove-linked-temporal-common-loop.mjs",
+          "sha256": "77121c45a3366b5eb057ce83f2d5fd624ffb11a4c3a43d5dc614adda5df0d46a",
+          "bytes": 22325,
+          "anchors": {
+            "const OWNER": [
+              24
+            ],
+            "const runtime = await createNativeV6Runtime": [
+              161
+            ],
+            "cold_shared_owner_registered_once": [
+              185
+            ]
+          }
+        },
+        {
+          "path": "docs/migration/lot5a-evidence/capture-cost-owner-graphs.mjs",
+          "sha256": "e4e2394eedb4aff41f312e5627d262666c38d4e84cbeebb7655ac9866e1e8cdc",
+          "bytes": 20995,
+          "anchors": {
+            "runtime.acquisitionFamilies?.preparations": [
+              163
+            ],
+            "owner.nativeState =": [
+              169
+            ],
+            "owner.recordSource =": [
+              178
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "findings": [
+    {
+      "id": "selection_null_branch",
+      "priority": "high",
+      "classification": "concrete_merge_conflict",
+      "paths": [
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "observed": "Notre branche null retient un refus puis applique sourceGroupStop. 5A donne une valeur de retour R|null à retainProposalRefusal et transforme un refus courant block_unrelated_probe===true en offre unknown sans actions, avant toute aide de préférence.",
+      "risk": "Choisir notre hunk seul rétablit le passage à des sondes malgré la borne 5A; choisir le hunk 5A seul supprime le court-circuit local RelativeArrangement. Transformer notre sourceGroupStop en block_unrelated_probe arrêterait aussi les groupes extérieurs, ce qui contredit son contrat source.",
+      "preserve": [
+        "retainProposalRefusal retourne le refus cloné validé ou null, avec observation_ref/level_epoch/frame_hash courants et release_authority=false.",
+        "Une famille désactivée ne publie pas de refus ni de barrière.",
+        "Le blocage 5A reste une offre unknown avec actions=[] et steps=[]; il termine la sélection et mène à frontier_unknown avant toute autorisation physique.",
+        "Le stop 4B est consulté seulement après une proposition null. Il termine uniquement la boucle du groupe window_constraints sans créer une offre; les groupes suivants restent accessibles."
+      ],
+      "proposedResolution": {
+        "applied": false,
+        "ordering": [
+          "Sous enabled && !proposal, appeler retainProposalRefusal une fois.",
+          "Si le refus a block_unrelated_probe===true, conserver exactement la branche 5A offered unknown puis break.",
+          "Sinon, consulter retainSourceGroupStop; si vrai, break du seul groupe sans modifier offered.",
+          "Conserver ensuite les gardes et les deux aides de préférence existantes pour les propositions non null."
+        ]
+      }
+    },
+    {
+      "id": "source_stop_type_cache_and_lookahead",
+      "priority": "high",
+      "classification": "concrete_merge_loss_if_theirs_replaces_ours",
+      "paths": [
+        "src/logos-engine/v6-native-runtime.ts",
+        "src/logos-engine/v6-native-types.ts"
+      ],
+      "observed": "5A ne contient pas sourceGroupStop, planning.sourceStops, retainSourceGroupStop, sourceGroupAllowsEntry ni leurs appels dans preferCurrentRequiredService et preferAcquiredContinuation.",
+      "risk": "Restaurer seulement la branche ordinaire laisse les deux chemins de priorité proposer et sélectionner une entrée tardive du groupe malgré une interface Relative reconnue sans offre.",
+      "preserve": [
+        "La méthode optionnelle NativeFamily.sourceGroupStop et sa transmission par subquestionFamily.",
+        "Le cache sourceStops créé à chaque nouvelle sélection et détruit avec planning; clé group/family/entry inchangée.",
+        "La vérification du stop_group, source_entry, observation_ref, level_epoch, frame_hash et release_authority=false.",
+        "sourceGroupAllowsEntry évalue paresseusement les seuls fournisseurs de barrière antérieurs et réutilise entryOffers.",
+        "Son appel avant la proposition de service dans preferCurrentRequiredService.",
+        "Son appel après la corroboration Kernel réelle et avant la proposition candidate dans preferAcquiredContinuation."
+      ],
+      "proposedResolution": {
+        "applied": false,
+        "edit": "Conserver les méthodes, le champ et les deux appels 4B, en plus du retour R|null introduit par 5A. Ne pas faire de return global ni déplacer la barrière avant une proposition encore inconnue."
+      }
+    },
+    {
+      "id": "priority_claim_boundary",
+      "priority": "medium",
+      "classification": "scope_limit_not_a_demonstrated_5a_bug",
+      "paths": [
+        "src/logos-engine/v6-native-runtime.ts",
+        "src/logos-engine/v6-linked-temporal-preparation.ts",
+        "docs/migration/lot5a-linked-temporal-lineage.md"
+      ],
+      "observed": "Dans les deux aides de préférence 5A, un candidat null peut encore appeler retainProposalRefusal sans exploiter sa valeur de retour. LinkedTemporalPreparation ne déclare ni currentRequiredServiceWitness ni retainedSuccessWitness/acquiredContinuationWitness. La filiation 5A limite explicitement sa preuve de blocage au chemin ordonné.",
+      "risk": "Une résolution de fusion ou une description trop large pourrait prétendre que le nouveau blocage est prouvé sur tous les chemins de coordination.",
+      "preserve": [
+        "Conserver les contrôles de priorité et de contribution Kernel existants, sans nouvelle autorité obtenue du simple refus.",
+        "Ne pas généraliser sourceGroupAllowsEntry à toutes les familles: cela provoquerait des appels précoces non déclarés et changerait la sélection.",
+        "Ne pas présenter les tests ordinaires 5A comme une preuve de tous les chemins de priorité."
+      ],
+      "proposedResolution": {
+        "applied": false,
+        "edit": "Pas de correctif supplémentaire proposé faute de contradiction exécutée. Préserver les limites déclarées 5A et les tests de bypass 4B; qualifier un éventuel cas croisé séparément après release."
+      }
+    },
+    {
+      "id": "factory_union_and_exact_entries",
+      "priority": "high",
+      "classification": "concrete_registration_conflicts",
+      "paths": [
+        "src/logos-engine/v6-native-runtime.ts",
+        "tests/v6-radial-port-integration.test.ts"
+      ],
+      "observed": "La liste families et les maps de fournisseurs diffèrent: RelativeArrangements figure seulement dans notre HEAD; LinkedTemporalPreparation seulement dans 5A. Les deux tests affichent 57/76 mais leurs groupes couverts diffèrent.",
+      "risk": "Un choix global de côté peut omettre un propriétaire tout en conservant artificiellement le même total 57. Omettre arrangements dans les entryPoints fait perdre le contrat exact de sourceGroupStop.",
+      "preserve": [
+        "Un seul relativeArrangementFamily(), id relative_arrangements, groupe window_constraints et entrée exacte relative_arrangement.",
+        "Ordre DRM: relative_arrangement entre coupled_prefix_reference et multiscale_constraints; SymmetricField reste après toutes les entrées déclarées.",
+        "Un seul new LinkedTemporalPreparation(policy.linked_contact,{boundedSearch:LINKED_TEMPORAL_NATIVE_SEARCH_BOUNDS}); le wrapper de sélection et acquisitionFamilies.preparations ferment sur cette même instance.",
+        "Entrée surface linked_temporal_preparation dans son ordre DRM, après controlled_constellation_cover et avant configured_arrivals.",
+        "Inclure arrangements parmi les propriétaires nécessitant un entryPoint explicite, avec recall et framed; préserver les entrées Feedback et Workshop déjà intégrées.",
+        "Ne déplacer ni RelativeArrangements dans les acquisitions passives, ni LinkedTemporalPreparation dans SupportNavigation/SharedSeries."
+      ],
+      "staticCountExpectation": {
+        "ours": [
+          [
+            10,
+            12
+          ],
+          [
+            21,
+            21
+          ],
+          [
+            8,
+            10
+          ],
+          [
+            18,
+            33
+          ]
+        ],
+        "fiveAWorkingText": [
+          [
+            10,
+            12
+          ],
+          [
+            20,
+            21
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            18,
+            33
+          ]
+        ],
+        "mergedUnionIfNoOtherChange": [
+          [
+            10,
+            12
+          ],
+          [
+            21,
+            21
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            18,
+            33
+          ]
+        ],
+        "mergedConnectedTotalIfNoOtherChange": 58,
+        "declaredTotal": 76,
+        "qualification": "Projection statique de l’union des deux ajouts indépendants, pas résultat de factory ou de test. À recalculer sur la publication 5A finale."
+      },
+      "proposedResolution": {
+        "applied": false,
+        "edit": "Faire l’union des deux imports, créations, wrappers, propriétaires et maps. Préserver les vérifications exact-entry et les assertions d’ordre, puis adapter les comptes aux groupes réellement fusionnés seulement après release."
+      }
+    },
+    {
+      "id": "selected_passive_acquisition_envelopes",
+      "priority": "high",
+      "classification": "concrete_adjacent_hunks_with_distinct_owner_contracts",
+      "paths": [
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "observed": "Notre retainSelectedAcquisition conserve relative_arrangement_event et relative_arrangement_state. 5A ajoute un traitement distinct de linked_preparation_event avec la liste entière record.events, puis un recordSource passif avant SharedSeries quand selectedId diffère.",
+      "risk": "Mettre LinkedTemporal dans singleEventKeys tronquerait son enveloppe à events[0]. L’ajouter passivement sans le test selectedId provoquerait une double acquisition. Ajouter Relative dans ce chemin inventerait des acquisitions étrangères.",
+      "preserve": [
+        "Relative sélectionnée: un événement source sous relative_arrangement_event:<revision>, état sous relative_arrangement_state et checkpoint family_state:relative_arrangements.",
+        "LinkedTemporal sélectionnée: conserver toute la liste record.events, y compris la liste vide, sans second record passif.",
+        "LinkedTemporal étrangère: recordSource exactement une fois, après les propriétaires support et avant recall; le fait événementiel est écrit seulement si events.length.",
+        "Feedback, Workshop, RecurrentSeries et les propriétaires déjà livrés gardent leurs propres protections contre la double acquisition et leur ordre actuel.",
+        "Les états des deux nouveaux propriétaires restent persistés/restaurés par les chemins génériques existants."
+      ],
+      "proposedResolution": {
+        "applied": false,
+        "edit": "Conserver notre clé/mirror Relative et le bloc spécialisé LinkedTemporal 5A côte à côte. Ajouter preparations aux deux types acquisitionFamilies, au contrôle de constructeur, au destructuring et à la factory finale; ne pas ajouter arrangements à acquisitionFamilies."
+      }
+    },
+    {
+      "id": "persistence_and_runtime_counters",
+      "priority": "medium",
+      "classification": "preserve_incoming_5a_behavior_no_direct_owner_collision_found",
+      "paths": [
+        "src/logos-engine/v6-native-runtime.ts",
+        "src/logos-engine/v6-linked-temporal-preparation.ts",
+        "src/logos-engine/v6-relative-arrangements.ts"
+      ],
+      "observed": "5A remplace les copies cumulatives records/compositions par acquiredRecordCount/compositionIds. familyCheckpoint, restoreFamilies et persistFamilies gardent le dispatch nativeState/restoreNative ou state/restore. LinkedTemporal expose un checkpoint natif immuable; Relative conserve ses cinq champs source et ses transitoires hors état.",
+      "risk": "Un choix du runtime 4B entier réintroduirait les rétentions supprimées en 5A. Un patch hybride qui garde les anciens accès records.length/compositions.size serait incohérent avec les nouveaux champs.",
+      "preserve": [
+        "La totalité du changement de compteurs 5A: déclarations, incrément unique par acquisition, enregistrement des ids de composition et lectures du snapshot.",
+        "L’acquisition et les compositions autoritaires restent dans le graphe, pas dans les compteurs.",
+        "Le wrapper LinkedTemporal conserve nativeState et restoreNative; le wrapper Relative continue state/restore et son programme attaché.",
+        "Un family_state et une family_activation par id; programme v6.relative_arrangements.choose conservé. Aucun programme supplémentaire LinkedTemporal n’est déclaré dans ce port.",
+        "Ne pas modifier les schémas historiques des checkpoints au cours de cette résolution."
+      ],
+      "proposedResolution": {
+        "applied": false,
+        "edit": "Conserver les remplacements de compteurs 5A intégralement; ajouter uniquement le propriétaire et les raccordements Relative nécessaires. Aucune contradiction directe de restauration n’a été trouvée dans ces méthodes par lecture."
+      }
+    },
+    {
+      "id": "harness_capture_retention",
+      "priority": "high",
+      "classification": "concrete_evidence_loss_if_harness_replaced",
+      "paths": [
+        "tests/helpers/v6-live-game-campaign.ts",
+        "scripts/prove-linked-temporal-common-loop.mjs",
+        "docs/migration/lot5a-evidence/capture-cost-owner-graphs.mjs"
+      ],
+      "observed": "Sur les textes examinés, le diff du helper common est limité aux trois ajouts 4B: tableau relativeArrangementSourceCalls, observateur des cinq méthodes de l’adapter, et état/proposition Relative par préfixe. Les captures Workshop/Feedback sont présentes des deux côtés. 5A observe LinkedTemporal dans ses outils de preuve et de coût séparés, sans nouveau tableau dans ce helper.",
+      "risk": "Remplacer le helper par sa copie 5A perdrait les appels qui permettent la parité source et les jointures 4B, même si les commandes publiques restent identiques. Copier un observateur de diagnostic 5A dans le helper modifierait inutilement son contrat d’exécution.",
+      "preserve": [
+        "relativeArrangementSourceCalls et les interceptions propose/proposeInSubquestion/before/after/record avec retour original et erreurs réémises.",
+        "La projection record.events[0] uniquement pour Relative, conforme à son adapter d’événement unique; ne pas réutiliser cette projection pour LinkedTemporal.",
+        "Le stateNode family_state:relative_arrangements, sourceCallsThrough et la proposition arrangement_plan dans chaque préfixe.",
+        "Les captures Workshop, Feedback, Morphology et caller existantes; aucun observateur ne fournit de décision ou d’état appris.",
+        "Les outils 5A historiques et leurs reçus restent inchangés; les nouveaux fingerprints finaux identifient le helper réellement fusionné."
+      ],
+      "proposedResolution": {
+        "applied": false,
+        "edit": "Si le helper publié 5A reste identique au texte examiné, conserver notre helper avec ses trois ajouts. Sinon réexaminer seulement les nouveaux hunks de la publication finale; ne pas importer les captures de coût dans le harnais public."
+      }
+    },
+    {
+      "id": "implementation_and_publication_binding",
+      "priority": "medium",
+      "classification": "provisional_metadata_not_a_final_merge_input",
+      "paths": [
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "observed": "Notre runtime porte encore le label hérité0.52; le runtime provisoire5A porte0.53 et ajoute plusieurs extensions natives de recherche, checkpoint et refus.",
+      "risk": "Une fusion immédiate du checkout provisoire ou le maintien d’un label/digest ancien ferait porter des preuves sur le mauvais candidat.",
+      "preserve": [
+        "Attendre le commit effectivement publié 5A et son reçu terminal, puis comparer les fichiers publiés aux empreintes de cette revue.",
+        "Conserver les extensions 5A vérifiées; le numéro de version final et le gel complet appartiennent à root.",
+        "L’ordre de livraison confirmé reste Site83/7A, puis5A, puis4B; aucune dépendance7B anticipée."
+      ],
+      "proposedResolution": {
+        "applied": false,
+        "finalVersion": null,
+        "finalNativeDigest": null,
+        "edit": "Reprendre cette liste de résolutions sur le vrai commit publié5A seulement, puis geler le candidat réuni avant toute nouvelle validation."
+      }
+    }
+  ],
+  "futureValidationAfterExplicitRelease": {
+    "performed": false,
+    "checks": [
+      "Rejouer les contrats de tests/v6-source-entry-routing.test.ts pour true/false/absent, refus périmé et autorité interdite.",
+      "Rejouer tests/v6-relative-arrangements-integration.test.ts: sélection et acquisition, restauration, reconnaissance sans offre, ACTION6 absente, groupes extérieurs et les deux bypass de priorité.",
+      "Vérifier la factory unifiée et les exact-entry guards avec tests/v6-radial-port-integration.test.ts sur les groupes réellement enregistrés.",
+      "Préserver les preuves LinkedTemporal de selected/passive acquisition unique et de restauration; ne pas convertir un comptage ou une capture en preuve de parité de caller.",
+      "Refaire les régressions prévues et la preuve partielleLKEY sur le seul candidat final gelé, avec nouveaux reçus et conservation des échecs.",
+      "Vérifier les fingerprints du helper et des outils de capture avant/après les exécutions finales."
+    ],
+    "qualification": "Liste de contrôles futurs uniquement. Aucun succès nouveau, aucun merge simulé et aucune prédiction de performance."
+  },
+  "conclusion": "Les modifications se combinent sans collision d’id de propriétaire visible. Le risque réel est une résolution de côté unique dans la branche null, la liste des propriétaires, les acquisitions ou le helper: elle effacerait un contrat déjà présent sur l’autre branche. Les barrières locale4B et globale5A doivent rester distinctes. Les limites de priorité5A sont explicites et ne constituent pas, à elles seules, un défaut démontré.",
+  "affectedTestSelectionAddendum": {
+    "recordedAt": "2026-11-10T21:24:46.708898+00:00",
+    "status": "static_selection_only_not_executed",
+    "scope": "Sélection ciblée de contrats de routage affectés par les deux barrières 4B et par leur fusion avec le refus null bloquant 5A. Lecture de texte et métadonnées seulement pendant le silence 5A ; aucun import, test, oracle, jeu, rejeu, build ou décompression de campagne.",
+    "provisionalInheritedScope": {
+      "receipt": {
+        "path": "/workspace/sites/sra-lot5-20261110/.sites-checkout/docs/migration/lot7a-evidence/integrated-final/validation/delta-tests-run.json",
+        "sha256": "eb5e186bd8cc576c96b75d5f33c1639a5964bbce314f78b910974b76ad9422d7",
+        "bytes": 120188
+      },
+      "inheritedCount": 97,
+      "driver": {
+        "path": "/workspace/sites/sra-lot5-20261110/.sites-checkout/docs/migration/lot5a-evidence/run-release-checks.py",
+        "sha256": "d5eea023260c995f6dc39ec1ac0a600a23741ab963902c2ad1608f3c0d492430",
+        "bytes": 12363
+      },
+      "driverDeclaredAdditions": [
+        "tests/kernel-batch.test.ts",
+        "tests/v6-frontier-native-snapshot.test.ts",
+        "tests/v6-linked-temporal-preparation.test.ts",
+        "tests/v6-linked-temporal-reference.test.ts",
+        "tests/v6-native-mixed-path.test.ts",
+        "tests/v6-source-entry-routing.test.ts"
+      ],
+      "computedUnique5aFiles": 102,
+      "actualPublished5aScopeVerified": false,
+      "qualification": "102 est la composition statique du reçu 7A et de la liste ADDITIONS du checkout 5A provisoire. La publication, les octets et le reçu 5A réellement livrés doivent être revérifiés avant de fixer le périmètre final."
+    },
+    "alreadyPlannedRelativeTests": [
+      "tests/v6-relative-arrangements-reference.test.ts",
+      "tests/v6-relative-arrangements-integration.test.ts"
+    ],
+    "recommendedExtraTestFiles": [
+      "tests/v6-acquired-continuation-priority.test.ts",
+      "tests/v6-learned-preparation-priority.test.ts",
+      "tests/v6-material-recovery-priority.test.ts",
+      "tests/v6-outline-arbitration.test.ts"
+    ],
+    "selection": [
+      {
+        "path": "tests/v6-acquired-continuation-priority.test.ts",
+        "decision": "include",
+        "relationship": "direct_modified_helper",
+        "runtimeAnchors": [
+          "src/logos-engine/v6-native-runtime.ts:765 preferAcquiredContinuation",
+          "src/logos-engine/v6-native-runtime.ts:789 sourceGroupAllowsEntry after acquiredContribution"
+        ],
+        "testAnchors": [
+          "173: acquired candidate and distinct source cursor",
+          "227: owner/entry cache isolation",
+          "371: exact acquired entry only",
+          "423: disabled provider",
+          "432: selected hard refusal",
+          "442-500: WHY/ACT, preservation, budget and cancellation"
+        ],
+        "reason": "Exerce le vrai runtime/caller avec une acquisition Kernel réelle avant la préférence. Préserve l’identité propriétaire/entrée, la provenance courante, les gardes et les refus lorsque le nouveau précontrôle de groupe est inséré. Complète les cas de barrière Relative, sans remplacer leur couverture de reconnaissance."
+      },
+      {
+        "path": "tests/v6-learned-preparation-priority.test.ts",
+        "decision": "include_after_exact_registration_assertion_refresh",
+        "relationship": "adjacent_shared_source_order_and_entry_cache",
+        "runtimeAnchors": [
+          "src/logos-engine/v6-native-runtime.ts:840 deferUnlearnedInvitation",
+          "src/logos-engine/v6-native-runtime.ts:853 entryOffers"
+        ],
+        "testAnchors": [
+          "80: six actual acquired public returns and seventh ordinary recall choice",
+          "100: exact visited entry call sequence",
+          "104-105: outdated full registered entry list",
+          "154: current guard veto",
+          "176: earlier unsupported window cannot borrow later witness"
+        ],
+        "reason": "Exerce la factory complète, le cache d’offres et l’ordre réel window_constraints utilisés dans la même sélection. Il ne teste pas directement sourceGroupStop. Le helper s’arrête au premier propriétaire dépourvu de learnedPreparationWitness : Relative ne peut donc pas être traversé par ce chemin pour emprunter une preuve ultérieure.",
+        "concretePreparationIssue": {
+          "kind": "static_stale_expected_registration_list",
+          "location": "tests/v6-learned-preparation-priority.test.ts:104-105",
+          "missingRegisteredEntries": [
+            "framed_window_composition",
+            "coupled_prefix_reference",
+            "relative_arrangement",
+            "recurrent_series"
+          ],
+          "expectedNonNullEntriesFromCurrentDeclarationsAndFactory": [
+            "occluded_catalogue_composition",
+            "queued_field_composition",
+            "product_panel_composition",
+            "labeled_sequence_composition",
+            "linked_packet_composition",
+            "trace_field_composition",
+            "cell_patch_composition",
+            "observed_occurrence_recall",
+            "observed_program_composition",
+            "typed_material_flow",
+            "radial_port_composition",
+            "observed_framed_analogy",
+            "field_service_composition",
+            "rooted_quota_composition",
+            "framed_window_composition",
+            "coupled_prefix_reference",
+            "relative_arrangement",
+            "recurrent_series"
+          ],
+          "resolution": "Root pourra actualiser uniquement la liste exhaustive des entrées enregistrées, à partir du DRM immuable et de la factory finale. Préserver les huit appels réellement visités, les commandes, les témoins, les gardes et toutes les assertions comportementales. Aucun changement effectué ici ; aucun échec de test prétendu observé."
+        }
+      },
+      {
+        "path": "tests/v6-material-recovery-priority.test.ts",
+        "decision": "include",
+        "relationship": "adjacent_non_null_refusal_scope_preservation",
+        "runtimeAnchors": [
+          "src/logos-engine/v6-native-runtime.ts:946 scopeReturnedContactRefusal",
+          "5A src/logos-engine/v6-native-runtime.ts:506 enabled && !proposal blocking refusal branch"
+        ],
+        "testAnchors": [
+          "50: actual returned transient contact releases independent measured material question",
+          "95: boundary counterfactuals refuse recovery",
+          "134: acquired/current evidence and scope conditions",
+          "236: earlier unsupported window cannot borrow later material witness"
+        ],
+        "reason": "La fusion doit maintenir le blocage global 5A seulement pour le refus retourné après une proposition null, et préserver le traitement local existant d’une proposition AnimatedContact non-null avec block_unrelated_probe. Ce fichier fournit un vrai retour public retenu, des contre-exemples et les gardes courantes ; il détecterait une résolution trop large supprimant cette exception. Aucun succès du jeu historique échoué n’est inféré."
+      },
+      {
+        "path": "tests/v6-acquired-continuation.test.ts",
+        "decision": "exclude_by_default",
+        "relationship": "pure_witness_module_unchanged",
+        "testAnchors": [
+          "imports: v6-acquired-continuation.ts witness functions only",
+          "19-159: Cell/Reduction witness fields, refs and provenance"
+        ],
+        "reason": "N’instancie ni le runtime ni ses préférences ; ne couvre ni sourceGroupStop, ni cache d’entrée, ni sélection. Le module de témoins et ce fichier sont identiques octet par octet aux deux checkouts examinés. Ajouter seulement si la fusion finale modifie effectivement ce module ou son contrat de provenance/codec.",
+        "unchangedModule": {
+          "path": "src/logos-engine/v6-acquired-continuation.ts",
+          "sha256": "f076b5e04b3656470dd445d12b5a85d74f29c1f4f82880d83f26e7f0624dda97",
+          "bytes": 20283
+        }
+      },
+      {
+        "path": "tests/v6-outline-arbitration.test.ts",
+        "decision": "include",
+        "relationship": "direct_other_modified_helper_missing_from_provisional_scope",
+        "runtimeAnchors": [
+          "src/logos-engine/v6-native-runtime.ts:706 preferCurrentRequiredService",
+          "src/logos-engine/v6-native-runtime.ts:718 sourceGroupAllowsEntry"
+        ],
+        "testAnchors": [
+          "133: actual common caller and eight witnessed returns",
+          "193: current-service priority negative modes",
+          "257: every public protocol field revalidated",
+          "331: acquired trial removes priority",
+          "470: ordinary current-service gate without preemption"
+        ],
+        "reason": "Complément limité découvert en cherchant la couverture de la seconde aide modifiée : ce fichier est aussi absent du périmètre 97+5. Il exerce les contrats de service et les refus du véritable caller. Les deux tests Relative couvrent déjà les branches reconnue/non reconnue de la nouvelle barrière ; ce fichier préserve les conditions de service héritées autour de cette insertion."
+      }
+    ],
+    "staticTestInputs": [
+      {
+        "path": "tests/v6-acquired-continuation-priority.test.ts",
+        "sha256": "aac67dd3a18f20d55467fd9d3db328470413bdd75b6b3d1b06eb0a93ea7b2984",
+        "bytes": 33145,
+        "sameBytesIn5aProvisional": true
+      },
+      {
+        "path": "tests/v6-learned-preparation-priority.test.ts",
+        "sha256": "32556af0bb3f2aec66a4e1ae58b6a161ca0d9449b9bc812683807dc455e0d345",
+        "bytes": 22007,
+        "sameBytesIn5aProvisional": true
+      },
+      {
+        "path": "tests/v6-material-recovery-priority.test.ts",
+        "sha256": "9290ed25edf4d4ed7ef6d8151406ef17d564305bea93a4ce50e519158134419a",
+        "bytes": 18631,
+        "sameBytesIn5aProvisional": true
+      },
+      {
+        "path": "tests/v6-outline-arbitration.test.ts",
+        "sha256": "328b946fef040604d971af6886bdc8c55412da40e7011ff2d334f3e62d961e1f",
+        "bytes": 39375,
+        "sameBytesIn5aProvisional": true
+      },
+      {
+        "path": "tests/v6-acquired-continuation.test.ts",
+        "sha256": "75a1bc0f8dd3dbbd38b2ce5c863b9e6339dc7bcd46c3302073f37dbb42e53cf4",
+        "bytes": 10140,
+        "sameBytesIn5aProvisional": true
+      }
+    ],
+    "evidenceAvailability": [
+      {
+        "path": "tests/fixtures/v6-occurrence-reference.json",
+        "materialized": true,
+        "bytes": 6525592,
+        "decompressed": false
+      },
+      {
+        "path": "docs/migration/native-campaigns-v50/life-public-trace.json.gz",
+        "materialized": true,
+        "bytes": 1351,
+        "decompressed": false
+      },
+      {
+        "path": "docs/migration/native-campaigns-v53/diagnostics/original-caller-prefix1/bounded-public-trace.json.gz",
+        "materialized": true,
+        "bytes": 11122,
+        "decompressed": false
+      },
+      {
+        "path": "docs/migration/native-campaigns-v53/diagnostics/original-caller-lean1/decisions.jsonl.gz",
+        "materialized": true,
+        "bytes": 18653,
+        "decompressed": false
+      },
+      {
+        "path": "docs/migration/native-campaigns-v53/attempt2/esct-public-trace.json.gz",
+        "materialized": true,
+        "bytes": 136280,
+        "decompressed": false
+      }
+    ],
+    "projectedFinalUniqueFiles": 108,
+    "projectionQualification": "108 fichiers projetés = 102 provisoires 5A + 2 Relative + 3 retenus parmi les 4 demandés + 1 contrat direct de service Outline. Ceci n’est ni un manifeste exécuté ni un reçu de succès. Dédupliquer de nouveau contre le reçu réellement publié et les octets du candidat final ; ne pas élargir aux 198 tests historiques par défaut.",
+    "productionOrTestChanges": false,
+    "executedTests": 0,
+    "replays": 0,
+    "nativeImports": 0
+  }
+}

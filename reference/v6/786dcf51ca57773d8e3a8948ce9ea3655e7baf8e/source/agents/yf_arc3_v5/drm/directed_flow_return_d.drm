@@ -1,0 +1,56 @@
+{
+  "module_id": "arc3.directed_flow_return_d",
+  "declarations": [
+    {
+      "id": "policy.directed_flow_return_d", "kind": "selection_policy", "evaluation": "declared_eligibility_single",
+      "supported_operators": ["SELECT"], "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1", "reason_refs": ["reason.exact_flow_return_preserves_parent_why"],
+      "configuration": {"return_predicate_ref": "supports_exact_acquired_directed_flow_computational_return"},
+      "declared_alternative_refs": ["flow_return.publish", "flow_return.unknown"],
+      "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+      "fact_projections": [
+        {"id": "projection.flow_return.publish", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "flow_return.publish"},
+          {"field": "flow_return_complete", "operator": "equals", "expected": true}
+        ], "static_facts": {"eligible": true}},
+        {"id": "projection.flow_return.unknown", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "flow_return.unknown"},
+          {"field": "flow_return_complete", "operator": "equals", "expected": false}
+        ], "static_facts": {"eligible": true}}
+      ],
+      "meaning_template_ref_by_alternative": {"flow_return.publish": "rule.directed_flow_return_d"},
+      "invariants": ["actual_k31_normalized_return", "current_parent_why_and_demand", "preserve_alternatives_and_siblings", "no_action_authority", "no_physical_goal_confirmation"]
+    },
+    {
+      "id": "rule.directed_flow_return_d", "kind": "rule", "evaluation": "project_requested_conclusions",
+      "supported_operators": ["DERIVE"], "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1", "relation_family": "epistemic",
+      "reason_refs": ["reason.exact_flow_return_preserves_parent_why"], "term_templates": [],
+      "claim_templates": [{"id_pattern": "{return_claim_ref}", "predicate": "supports_exact_acquired_directed_flow_computational_return",
+        "family": "epistemic", "epistemic_status": "supported", "argument_patterns": ["{parent_goal_ref}", "{consumer_ref}", "{request_ref}"],
+        "required_term_patterns": ["{parent_goal_ref}", "{agenda_ref}"],
+        "required_fields": ["return_claim_ref", "exact_demand", "normalized_return", "record_digest"],
+        "attribute_bindings": {"exact_demand": "exact_demand", "normalized_return": "normalized_return", "record_digest": "record_digest"},
+        "scope_bindings": {"parent_goal_ref": "parent_goal_ref", "epoch": "epoch", "episode_ref": "episode_ref",
+          "level_scope_ref": "level_scope_ref", "input_revision_ref": "input_revision_ref", "scope_ref": "scope_ref"},
+        "static_attributes": {"no_action_authority": true, "no_physical_goal_confirmation": true}}]
+    },
+    {
+      "id": "policy.directed_flow_receipt_d", "kind": "selection_policy", "evaluation": "declared_eligibility_single",
+      "supported_operators": ["SELECT"], "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1", "reason_refs": ["reason.current_flow_return_enters_ordinary_agenda"],
+      "declared_alternative_refs": ["flow_receipt.publish", "flow_receipt.unknown"],
+      "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+      "fact_projections": [
+        {"id": "projection.flow_receipt.publish", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "flow_receipt.publish"},
+          {"field": "flow_receipt_complete", "operator": "equals", "expected": true}
+        ], "static_facts": {"eligible": true}},
+        {"id": "projection.flow_receipt.unknown", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "flow_receipt.unknown"},
+          {"field": "flow_receipt_complete", "operator": "equals", "expected": false}
+        ], "static_facts": {"eligible": true}}
+      ], "invariants": ["canonical_return_reread", "exact_agenda_receipt", "shared_root_owns_parent_refresh", "no_physical_action"]
+    }
+  ]
+}

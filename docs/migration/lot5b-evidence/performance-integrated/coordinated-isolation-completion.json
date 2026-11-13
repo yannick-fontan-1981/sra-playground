@@ -1,0 +1,47 @@
+{
+  "schema": "logos-engine.coordinated-cost-isolation-completion.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T02:27:33.373289+00:00",
+  "windowCommand": [
+    "python",
+    "-B",
+    "scripts/run-native-cost-window.py",
+    "/workspace/sites/sra-lot5b-reference-057",
+    "docs/migration/lot5b-evidence/performance-integrated",
+    "docs/migration/lot5b-evidence/baseline-published-057/source-manifest.json",
+    "docs/migration/lot5b-evidence/integrated-final/source-manifest.json"
+  ],
+  "windowStartedAt": "2026-11-11T02:18:39.880757+00:00",
+  "windowFinishedAt": "2026-11-11T02:27:33.369470+00:00",
+  "windowExitCode": 0,
+  "exclusiveLockHeldAcrossRunner": true,
+  "beforeSharedProbeExitCode": 1,
+  "afterSharedProbeExitCode": 1,
+  "before": {
+    "path": "docs/migration/lot5b-evidence/performance-integrated/window-isolation-before.json",
+    "sha256": "a020147cab4b5b275fab655dd81a9fcf85333141befb7c31dc2fcabae1d724af",
+    "bytes": 4492
+  },
+  "after": {
+    "path": "docs/migration/lot5b-evidence/performance-integrated/window-isolation-after.json",
+    "sha256": "158cd78ffbaca500b26dda5a2104856072d1f3580c61a0b60fec81cfc37510d9",
+    "bytes": 4480
+  },
+  "readiness": {
+    "path": "docs/migration/lot5b-evidence/performance-integrated/readiness.json",
+    "sha256": "8e8c37674bf85ab95541fb75d3c0251657aaf30d36743218db00607ed8ff7568",
+    "bytes": 464568
+  },
+  "initialIsolation": {
+    "path": "docs/migration/lot5b-evidence/performance-integrated/coordinated-isolation.json",
+    "sha256": "37d990f0d46b1dacba753a8d1dd9f433e81166556ad428dbef98b11eddf418c7",
+    "bytes": 15113
+  },
+  "knownLanePopulationUnchanged": true,
+  "nonQuietLanes": [],
+  "statusFilesChanged": [
+    "lot10b-status.json",
+    "lot7-followup-status.json"
+  ],
+  "qualification": "Actual exclusive flock held for the complete unchanged runner; all12known cooperative lanes are quiet at both boundaries. Full status snapshots retain text/timestamp updates. This does not claim absence of unobservable external host variation."
+}

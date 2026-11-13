@@ -1,0 +1,160 @@
+{
+  "schema": "logos-engine.lot8b.official-performance-controller.v1",
+  "status": "completed_pending_independent_analysis",
+  "startedAt": "2026-11-12T12:32:56.509286+00:00",
+  "plan": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/official-window-plan.json",
+  "limits": {
+    "preflightSeconds": 180,
+    "measurementSeconds": 1800,
+    "terminationGraceSeconds": 10,
+    "killGraceSeconds": 10,
+    "retentionSeconds": 60,
+    "observationIntervalSeconds": 30
+  },
+  "lease": "lot8b-performance-2-35ff8c2a869d",
+  "automaticRetry": false,
+  "peerAvailabilityWait": false,
+  "peerAcknowledgmentsRequired": false,
+  "measurementStarted": true,
+  "officialCostAcceptedByController": false,
+  "globalQuietInferredFromLock": false,
+  "processArgumentsCollected": false,
+  "processEnvironmentsCollected": false,
+  "lock": {
+    "path": "/workspace/shared/sra-coordination/performance.lock",
+    "attempts": 1,
+    "blocking": false,
+    "lockFileRemoved": false,
+    "lockFileReplaced": false,
+    "descriptorClosed": true,
+    "pathExistedBeforeOpen": false,
+    "identity": {
+      "device": 27,
+      "inode": 2621834
+    },
+    "status": "released",
+    "acquiredAt": "2026-11-12T12:32:57.002516+00:00",
+    "finalIdentity": {
+      "device": 27,
+      "inode": 2621834
+    },
+    "sameLockFile": true,
+    "releasedAt": "2026-11-12T12:40:58.299381+00:00"
+  },
+  "cleanup": {
+    "group": {
+      "processGroup": 238,
+      "adoptedChildrenReaped": [],
+      "directChildReaped": true,
+      "processGroupStopped": true,
+      "remainingOwnedDescendants": [],
+      "exitCode": 0
+    }
+  },
+  "planFingerprint": {
+    "bytes": 172788,
+    "sha256": "146d6b0392e3344109ea3790ef48a190a97a9132c965c0154bb8c02f75a4aa48"
+  },
+  "executionHead": "05dcb0fbfbddeb6c3963452dc6191b2bf1b9a441",
+  "ownWorkCheck": {
+    "passed": true,
+    "allowedControllerAncestors": [
+      1,
+      2
+    ],
+    "scope": "visible_process_cwd_plus_explicit_own_status_not_cross_namespace_proof"
+  },
+  "isolationDeclaration": {
+    "established": true,
+    "basis": "Dedicated owned candidate and published baseline checkouts with all native bytes and declared inputs frozen; all own functional/build/review workers and execution commands terminated; fresh current-namespace process/resource observation shows only this finite declaration writer and its ancestors in the owned checkouts. The official controller performs a single nonblocking acquisition of the current shared performance mutex, rechecks source and visible own work, serializes all four series in one supervised group, and retains 30-second namespace observations.",
+    "scope": "Prospectively scoped official ABBA comparison within this owned execution window and the currently shared performance mutex. No universal host or cross-namespace quiet claim.",
+    "evidence": [
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/environment-before-declaration.json",
+        "bytes": 1551,
+        "sha256": "847640990637b9f9359a8fb7eacfd153057f1722903da66a65fe71cc096ccffa"
+      },
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/own-work-closure.json",
+        "bytes": 1245,
+        "sha256": "1bf04567945c82254d9569551472f1ba637fedb49863e27b8c9fdff79466d151"
+      },
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/own-status-before-window.json",
+        "bytes": 6422,
+        "sha256": "3afaea10431b7b03a3cda067f35295713482e8b7ff6d0cc0633aa1c277256ae4"
+      },
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/publication-observation.json",
+        "bytes": 1100,
+        "sha256": "4021a890f7982d3b91578409c31ea6119f34deb22115e38997a9fd9eee7bb0a7"
+      },
+      {
+        "role": "candidate",
+        "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/contract-independent-review.json",
+        "bytes": 10862,
+        "sha256": "889b22ff11050add3eaa1848fc65fac11aa77035df9358ac5d1249468cdbc4b8"
+      }
+    ],
+    "limitations": [
+      "Ordinary concurrent work in other execution namespaces or on the host is not observable from this namespace and is not asserted absent.",
+      "No peer availability or historical epoch acknowledgment is required. The mutex serializes holders of its current inode; it does not suspend ordinary work.",
+      "CPU affinity and load are observed rather than assigned as exclusive CPU resources. Periodic controller observations are retained measurement instrumentation.",
+      "session_elapsed covers the harness controller through final acquired return, including pause/resume; worker startup, begin, terminal inspection, close, live game engine, network and browser rendering are excluded."
+    ],
+    "flockAloneIsEvidence": false
+  },
+  "preflightFinishedAt": "2026-11-12T12:32:57.002332+00:00",
+  "measurementDeadlineSecondsFromAcquisition": 1800,
+  "maximumExclusiveSecondsIncludingCleanupAndRetention": 1880,
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/run-native-cost-window.py",
+    "/workspace/sites/sra-lot8b-baseline066-20261112",
+    "docs/migration/lot8b-evidence/final-performance-067-01",
+    "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/final-version-067-01/baseline-native.json",
+    "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/final-version-067-01/candidate-native.json"
+  ],
+  "childPid": 238,
+  "processGroup": 238,
+  "executionStartedAt": "2026-11-12T12:32:57.606811+00:00",
+  "lastObservedAt": "2026-11-12T12:40:28.534011+00:00",
+  "elapsedMeasurementSeconds": 451.53063114099996,
+  "stdoutBytes": 6057,
+  "stderrBytes": 0,
+  "exitCode": 0,
+  "adoptedChildrenReaped": [],
+  "finalInputIntegrity": "passed",
+  "window": {
+    "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/final-performance-067-01/window.json",
+    "bytes": 10958,
+    "sha256": "c82a2660608c7103821bd7d78929945656fc41ae2dd3e69bb9224e421509e5a2"
+  },
+  "statusRelease": {
+    "updated": true,
+    "path": "/workspace/shared/sra-coordination/lot8a-status.json"
+  },
+  "subreaperRestored": true,
+  "retainedLogs": {
+    "runner.stdout.log": {
+      "bytes": 6835,
+      "sha256": "5d3dfca6240cf7bd757965bf7f71453aa43475ff1130d675a1ed137134d71a7d"
+    },
+    "runner.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "environment-during.jsonl": {
+      "bytes": 23087,
+      "sha256": "c8f68de78600d533d5a51fbe4c1c3810583d25a9438b29ccbbe6729c28d7f938"
+    }
+  },
+  "finishedAt": "2026-11-12T12:40:58.303087+00:00",
+  "elapsedSeconds": 481.79383154499965,
+  "controllerExitCode": 0
+}

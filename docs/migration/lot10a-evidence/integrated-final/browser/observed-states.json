@@ -1,0 +1,117 @@
+{
+  "schema": "logos-engine.browser-accessibility-observations.v1",
+  "recordedAt": "2026-11-10T23:44:37.115000+00:00",
+  "captureMethod": "Structured transcription of actual cua_repl accessibility outputs observed by root, with two original screenshots retained. No hidden state inspected or injected.",
+  "game": "TRIA",
+  "previewUrl": "http://127.0.0.1:4173/",
+  "learnedStateInjected": false,
+  "newReasoningSessionsDuringRun": 0,
+  "manualBoardActions": 0,
+  "levelJumps": 0,
+  "states": [
+    {
+      "stage": "cold-selection",
+      "url": "http://127.0.0.1:4173/?game=TRIA&level=1",
+      "message": "TRIA selected.",
+      "level": 1
+    },
+    {
+      "stage": "agent-cold",
+      "message": "Ready to run from level 1.",
+      "actions": 0,
+      "levels": 0,
+      "plans": 0
+    },
+    {
+      "stage": "first-run",
+      "control": "Run to next level",
+      "message": "Preparing the agent…",
+      "actions": 0,
+      "levels": 0,
+      "plans": 0,
+      "pauseEnabled": true
+    },
+    {
+      "stage": "first-boundary",
+      "url": "http://127.0.0.1:4173/?game=TRIA&level=2",
+      "message": "Level completed.",
+      "actions": 2,
+      "levels": 1,
+      "plans": 2
+    },
+    {
+      "stage": "resume-batch",
+      "control": "Run 16 actions",
+      "message": "Reading the board and planning…",
+      "actions": 2,
+      "levels": 1,
+      "plans": 2,
+      "pauseEnabled": true
+    },
+    {
+      "stage": "pause-requested",
+      "control": "Pause",
+      "message": "Pausing after the engaged action and its real outcome…",
+      "actions": 4,
+      "levels": 1,
+      "plans": 3
+    },
+    {
+      "stage": "pause-confirmed",
+      "message": "Paused.",
+      "actions": 4,
+      "levels": 1,
+      "plans": 4,
+      "pauseEnabled": false
+    },
+    {
+      "stage": "one-action-confirmed",
+      "control": "One action",
+      "message": "One action completed.",
+      "actions": 5,
+      "levels": 1,
+      "plans": 5
+    },
+    {
+      "stage": "second-boundary",
+      "control": "Run to next level",
+      "url": "http://127.0.0.1:4173/?game=TRIA&level=3",
+      "message": "Level completed.",
+      "actions": 13,
+      "levels": 2,
+      "plans": 13
+    },
+    {
+      "stage": "third-boundary-before-seal",
+      "control": "Run to next level",
+      "url": "http://127.0.0.1:4173/?game=TRIA&level=4",
+      "message": "Applying the next action…",
+      "actions": 16,
+      "levels": 2,
+      "plans": 16,
+      "qualification": "URL had advanced while the last return was still being acquired. The first screenshot showed Reading the board and planning… and the same 16/2/16 counters; it is retained as an intermediate observation, not the completed result."
+    },
+    {
+      "stage": "third-boundary-sealed",
+      "url": "http://127.0.0.1:4173/?game=TRIA&level=4",
+      "message": "Level completed.",
+      "actions": 17,
+      "levels": 3,
+      "plans": 17,
+      "pauseEnabled": false
+    }
+  ],
+  "retainedObservationErrors": [],
+  "screenshots": [
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/browser/tria-boundary-in-progress.png",
+      "sha256": "8c739ce9e3f807a1d4f704624d7318c6bcb411394403d7c7ca5f3686e4d71412",
+      "bytes": 76221
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/browser/tria-three-levels.png",
+      "sha256": "a4eddfa8dcdaa41fdc49275e554b16854939e486def72a0f1900bf2e4ce6ef23",
+      "bytes": 76362
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "schema": "logos-engine.native-restoration-preflight.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T02:06:30.758737+00:00",
+  "inputs": [
+    {
+      "path": "scripts/profile-native-restoration-path.mjs",
+      "bytes": 18270,
+      "sha256": "9e5e03e2d66cae16060a48aaec392a5874e464738c678cb6daab089580bba570",
+      "identicalInBothCheckouts": true
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+      "identicalInBothCheckouts": true
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-protocol.md",
+      "bytes": 12102,
+      "sha256": "9acd1ea4afc772e973032993607d0e8da7a601df8208ed8a81514f94bd5ad037",
+      "identicalInBothCheckouts": true
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f",
+      "identicalInBothCheckouts": true
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+      "identicalInBothCheckouts": true
+    },
+    {
+      "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+      "identicalInBothCheckouts": true
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+      "identicalInBothCheckouts": true
+    }
+  ],
+  "sources": {
+    "before": {
+      "checkout": "/workspace/scratch/c4dd29871d33/lot3b-f0ba-diagnostic",
+      "fileCount": 249,
+      "digest": "f0ba85e80fbe7543f2e2360c6b6e846ae76839cb6ede0e9c022d31b56f46cece"
+    },
+    "after": {
+      "checkout": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout",
+      "fileCount": 249,
+      "digest": "391a2797414c0090fa632a2fc13736c7806c1f5fceceafa34e1583dd4ef9e3a9"
+    }
+  },
+  "executionOrder": [
+    "before:STCK:10",
+    "before:SMLP:15",
+    "after:STCK:10",
+    "after:SMLP:15"
+  ],
+  "sessionsAlreadyExecuted": 0,
+  "qualification": "Protocol, generator, declarations, manifest and public traces are byte-identical before any v2 session. Frozen native inventories match both declared sources; the dedicated diagnostic checkout is distinct from the untouched official 0.38 baseline."
+}

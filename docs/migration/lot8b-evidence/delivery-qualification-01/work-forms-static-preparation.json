@@ -1,0 +1,51 @@
+{
+  "schema": "logos-engine.lot8b.static-tool-checks.v1",
+  "recordedAt": "2026-11-12T04:51:49.482373+00:00",
+  "checks": [
+    {
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot8b-evidence/tools/delivery/work-forms/record-owner-source-inventory.mjs"
+      ],
+      "sha256": "073cec941143449697c06d979c07675d177d53fafd0d7d82abfeb6c446c41eb9",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot8b-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs"
+      ],
+      "sha256": "def20965d488ff15cf225961f407853b29cee0eb22e9119cfe9f1611dcc73a3a",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot8b-evidence/tools/delivery/work-forms/qualify-cost-owner-graphs.mjs"
+      ],
+      "sha256": "56c73ed40f8b88ce9c7f02300cf4acede74eb37bacfdc94b9542c4a2a21bb662",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "ast.parse",
+        "docs/migration/lot8b-evidence/tools/delivery/run-functional-command.py"
+      ],
+      "sha256": "7d1c35fb1a9fe30f1eb0be80f4c60a0f547f6257dd24ac68e88f0ade0a2514f9",
+      "exitCode": 0,
+      "nativeImportsExecuted": false
+    }
+  ],
+  "nativeExecution": false,
+  "officialPerformance": false,
+  "globalLockAcquired": false
+}

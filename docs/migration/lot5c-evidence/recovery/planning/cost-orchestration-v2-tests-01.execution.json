@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.lot5c.command-execution.v1",
+  "status": "failed",
+  "startedAt": "2026-11-11T19:54:54.243990+00:00",
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot5c-evidence/recovery/planning/test-cost-orchestration-v2.py"
+  ],
+  "cwd": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "timeoutSeconds": 90.0,
+  "wrapper": {
+    "path": "docs/migration/lot5c-evidence/run-evidence-command.py",
+    "bytes": 3904,
+    "sha256": "99b16a35eac1f12acb3063e43d303ffc020b3339109e22eff1f807d1e87e47db"
+  },
+  "finishedAt": "2026-11-11T19:54:55.015230+00:00",
+  "durationSeconds": 0.7684602619992802,
+  "exitCode": 1,
+  "timedOut": false,
+  "log": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/cost-orchestration-v2-tests-01.log",
+    "bytes": 2344,
+    "sha256": "72fe67b16e1f28f6d63119262a2254757cbc5043c136774f70950e8f23245087"
+  },
+  "compressedLog": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/cost-orchestration-v2-tests-01.log.gz",
+    "bytes": 618,
+    "sha256": "86d3b0ed59350521a66f2fe89a0939332d559a975c2bd54a4d88cea9e91d48c1"
+  }
+}

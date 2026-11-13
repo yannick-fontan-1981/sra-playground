@@ -1,0 +1,20 @@
+{
+  "schema": "logos-engine.lot6b.bounded-proof-summary-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T19:53:44.024700+00:00",
+  "finishedAt": "2026-11-11T19:53:44.115747+00:00",
+  "elapsedSeconds": 0.09104729599857819,
+  "maximumShellSeconds": 60,
+  "failure": null,
+  "clockCloseExitCode": 0,
+  "chargedInterval": {
+    "label": "klot-fa23-integrated-proof-summary",
+    "startedAt": "2026-11-11T19:53:44.019092+00:00",
+    "startedMonotonic": 29268.486875631,
+    "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+    "finishedAt": "2026-11-11T19:53:44.108006+00:00",
+    "elapsedSeconds": 0.08889625200026785
+  },
+  "chargedSeconds": 712.3153484740079,
+  "remainingSeconds": 1687.6846515259922
+}

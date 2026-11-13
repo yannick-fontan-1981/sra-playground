@@ -1,0 +1,49 @@
+{
+  "schema": "logos-engine.native-global-cost-policy.v1",
+  "declaredAt": "2026-11-10T13:37:04.837725+00:00",
+  "authorization": {
+    "source": "explicit user message before the lot 3F official window",
+    "date": "2026-11-10",
+    "verbatim": "si le global reste en dessous de 10% d'augmentation alors une phase qui dépasse 10% peut être accepté."
+  },
+  "globalStage": "session_elapsed",
+  "statistic": "pooled median of complete measured-session durations per tested case",
+  "caseIds": [
+    "STCK",
+    "SMLP"
+  ],
+  "relativeIncreaseLimit": 0.1,
+  "comparison": "strictly_less_than",
+  "allCasesMustPass": true,
+  "crossCaseCompensation": false,
+  "phaseOverrunsMayBeAccepted": true,
+  "phasesAndP95RemainVisible": true,
+  "diagnosticPhasePolicy": "docs/migration/lot3f-evidence/performance/comparison-policy.json",
+  "plannedOrder": [
+    "A1",
+    "B1",
+    "B2",
+    "A2"
+  ],
+  "cohorts": 2,
+  "sessionsPerCaseVersionCohort": 4,
+  "measuredSessions": 32,
+  "measuredActions": 400,
+  "excludedWarmupSessions": 8,
+  "excludedWarmupActions": 24,
+  "excludedMeasuredSessions": 0,
+  "excludedOutliers": 0,
+  "baseline": {
+    "nativeVersion": "0.46.0",
+    "siteVersion": 74,
+    "commit": "a6edbb838670785733155262ae95f69892a236fc",
+    "nativeDigest": "5adf58cb9bd0802dd083812e7591c53cb786410ad23c14a29814d870ef67276c",
+    "nativeFiles": 260
+  },
+  "candidate": {
+    "nativeVersion": "0.47.0",
+    "nativeDigest": "54d8742300a04dcdf0cb1b038bc62b947d4a1c60f70da4ee80e6971b0f021165",
+    "nativeFiles": 263
+  },
+  "qualification": "Declared before the new lot3F official window against freshly measured published0.46 from Site74. Native0.47 is frozen and identified by its manifest. Global means the complete session separately for each case, not a sum of nested phases or compensation across games. Every measured session, phase result and available p95 remains visible; functional, integration and contribution evidence are separate. Historical timing data and comparators remain unchanged."
+}

@@ -1,0 +1,1170 @@
+{
+  "schema": "logos-engine.lot9a-reader-correction-analysis.v1",
+  "createdAt": "2026-11-12T15:02:38.758458+00:00",
+  "method": "Read preserved report/receipt and stream existing differences only; no functional reader, engine, oracle or capture invocation.",
+  "retainedFailure": [
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-01/receipt.json",
+      "bytes": 3744,
+      "sha256": "dce4f63d46e3ff4c921193e5a7d9a5d52c4865858779eb0de468b2db385d742c"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-01/graph-review.json",
+      "bytes": 374380,
+      "sha256": "64c4d4b2b982d362eb01e9b791252aff70f0e0367647f7ca368d743dd647ca6a"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-01/graph-review.differences.jsonl.gz",
+      "bytes": 1033137,
+      "sha256": "dd76a98e456c2a0cddfa3944b79a301562360112e72453883ef6feae6ca4de4c"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-01/output.log.gz",
+      "bytes": 270,
+      "sha256": "f712c6ecddefe305a40f1931ec8517e7613a929e449e97a5539429c11e8a4466"
+    }
+  ],
+  "differenceCount": 28279,
+  "unattributedDifferenceCount": 58,
+  "onlyUnattributedScope": "full_snapshot",
+  "onlyUnattributedPath": "/whyAct/decision/total_ms",
+  "perForm": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "count": 6
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "count": 19
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "count": 6
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "count": 27
+    }
+  ],
+  "unattributedRows": [
+    {
+      "index": 489,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 5.864651999999751
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 5.808690000000297
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 926,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 1,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 5.864651999999751
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 5.808690000000297
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 1259,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 2,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.473055000000386
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.3857950000001438
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 1724,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 3,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.473055000000386
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.3857950000001438
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 2092,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 4,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.465360999999575
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.222310999999536
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 2587,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.465360999999575
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.222310999999536
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 3077,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 3.4322610000008353
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 3.7655240000003687
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 3514,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 1,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 3.4322610000008353
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 3.7655240000003687
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 3847,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 2,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.5111780000006547
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 3.198398000000452
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 4312,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 3,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.5111780000006547
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 3.198398000000452
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 4676,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 4,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.13838399999986
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.550756000000547
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 5169,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.13838399999986
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.550756000000547
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 5568,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 6,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.531068000000232
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.7121960000004037
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 6096,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 7,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.531068000000232
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.7121960000004037
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 6524,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 8,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 3.0866249999999127
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.8400299999993877
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 6940,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 9,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 3.0866249999999127
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.8400299999993877
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 7356,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 10,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 3.0866249999999127
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.8400299999993877
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 7772,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 11,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 3.0866249999999127
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.8400299999993877
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 8188,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 12,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 3.0866249999999127
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.8400299999993877
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 8870,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 13,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 3.0866249999999127
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.8400299999993877
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 9389,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 14,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.5388889999994717
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.679039999999077
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 10038,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 15,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.5388889999994717
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.679039999999077
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 10571,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 16,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.5388889999994717
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.679039999999077
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 11104,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 17,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.5388889999994717
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.679039999999077
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 11637,
+      "scope": "full_snapshot",
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 18,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.5388889999994717
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.679039999999077
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 12165,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 4.449491999999736
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 4.211967000002915
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 12584,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 1,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 4.449491999999736
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 4.211967000002915
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 12912,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 2,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.8005400000001828
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 4.371813999998267
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 13357,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 3,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.8005400000001828
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 4.371813999998267
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 13709,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 4,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 5.491847000001144
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 6.154062000001431
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 14196,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 5,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 5.491847000001144
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 6.154062000001431
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 14724,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 3.5563790000014706
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 3.5957409999973606
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 15143,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 1,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 3.5563790000014706
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 3.5957409999973606
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 15471,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 2,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.976641000001109
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.862292999998317
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 15916,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 3,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.976641000001109
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.862292999998317
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 16268,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 4,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 5.4710959999974875
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 5.697095999999874
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 16755,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 5,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 5.4710959999974875
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 5.697095999999874
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 17154,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 6,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.2475610000001325
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.3421589999998105
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 17655,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 7,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.2475610000001325
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.3421589999998105
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 18065,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 8,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 4.915934000000561
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 4.898253999999724
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 18464,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 9,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 4.915934000000561
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 4.898253999999724
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 18863,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 10,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 4.915934000000561
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 4.898253999999724
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 19461,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 11,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 4.915934000000561
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 4.898253999999724
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 19932,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 12,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.374160999999731
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.4003839999968477
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 20526,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 13,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.374160999999731
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.4003839999968477
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 21031,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 14,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.7202150000011898
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.746790000001056
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 21651,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 15,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 2.7202150000011898
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 2.746790000001056
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 22176,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 16,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 5.049800000000687
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 3.5192950000055134
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 22690,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 17,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 5.049800000000687
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 3.5192950000055134
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 23372,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 18,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 5.049800000000687
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 3.5192950000055134
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 23941,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 19,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 4.0765360000004875
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 4.001701000001049
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 24499,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 20,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 4.0765360000004875
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 4.001701000001049
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 25057,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 21,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 4.0765360000004875
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 4.001701000001049
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 25615,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 22,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 4.0765360000004875
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 4.001701000001049
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 26400,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 23,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 4.0765360000004875
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 4.001701000001049
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 27026,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 24,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 4.0765360000004875
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 4.001701000001049
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 27652,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 25,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 4.0765360000004875
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 4.001701000001049
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    },
+    {
+      "index": 28278,
+      "scope": "full_snapshot",
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 26,
+      "path": "/whyAct/decision/total_ms",
+      "baseline": {
+        "present": true,
+        "kind": "number",
+        "value": 4.0765360000004875
+      },
+      "candidate": {
+        "present": true,
+        "kind": "number",
+        "value": 4.001701000001049
+      },
+      "classification": "unattributed_full_snapshot_difference"
+    }
+  ],
+  "budget": {
+    "budgetKey": "work-qualify",
+    "priorAttemptNumber": 1,
+    "priorElapsedSeconds": 50.551226686999144,
+    "maximumAttempts": 2,
+    "remainingAttempts": 1,
+    "maximumCumulativeSeconds": 600,
+    "remainingCumulativeSeconds": 549.4487733130009,
+    "maximumSecondsPerAttempt": 300,
+    "newSessions": 0,
+    "newPhysicalReturns": 0,
+    "secondFunctionalReadExecuted": false
+  }
+}

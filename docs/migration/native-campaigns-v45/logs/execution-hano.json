@@ -1,0 +1,125 @@
+{
+  "game": "HANO",
+  "targetLevels": 4,
+  "command": [
+    "node",
+    "scripts/run-v44-campaign.mjs",
+    "HANO",
+    "4",
+    "docs/migration/native-campaigns-v45/hano-four-levels.json"
+  ],
+  "startedAt": "2026-11-08T19:55:56.111022+00:00",
+  "finishedAt": "2026-11-08T19:57:51.427484+00:00",
+  "exitCode": 0,
+  "output": {
+    "path": "docs/migration/native-campaigns-v45/logs/regression-hano.log.gz",
+    "sha256": "63efb2b747cc47e48b60e6c6210299522c62aaa66901dd891fad2c29c21f82ab",
+    "bytes": 5834
+  },
+  "report": {
+    "path": "docs/migration/native-campaigns-v45/hano-four-levels.json",
+    "sha256": "a7a3d81446149a7977b25bd596d892db2878be5c0eda3a40c17b02d2854c1614",
+    "bytes": 319104
+  },
+  "status": "passed",
+  "final": {
+    "actions": 60,
+    "levelsCompleted": 4,
+    "level": 4,
+    "state": "WIN",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 72.53111677200005,
+    "prefixes": 30,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 60,
+      "boundaryReplays": 3,
+      "goalEvents": 4,
+      "frontierDeltas": 121,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 31
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 31
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 31
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 31
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 1
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 32
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology",
+        "attention_parent_return",
+        "acquire_control_for_target"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 60,
+      "resume": 29
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.15.0"
+  },
+  "sourceDigest": "1278235f269085c057e4dfea619c5a65587bfd90998505858caeef067319640c",
+  "nativeSourceFiles": 149,
+  "nativeSourceMatchesInitialFiles": true,
+  "sourceUnchangedDuringRun": true,
+  "pythonAgentModules": [],
+  "comparison": {
+    "command": [
+      "node",
+      "scripts/compare-v44-regressions.mjs",
+      "docs/migration/native-campaigns-v44/hano-four-levels.json",
+      "docs/migration/native-campaigns-v45/hano-four-levels.json",
+      "docs/migration/native-campaigns-v45/hano-comparison.json"
+    ],
+    "startedAt": "2026-11-08T19:57:51.431063+00:00",
+    "finishedAt": "2026-11-08T19:57:51.503980+00:00",
+    "exitCode": 0,
+    "output": {
+      "path": "docs/migration/native-campaigns-v45/logs/comparison-hano.log.gz",
+      "sha256": "35f282c03fe431f5686a2b2b3385be96c9be0adb426809c22258bd274dbc8aff",
+      "bytes": 112
+    },
+    "path": "docs/migration/native-campaigns-v45/hano-comparison.json",
+    "sha256": "9a03982492b9a73ee167d56d2713e186de06a0966b2691f80ca24f98429b0dd1",
+    "bytes": 3495,
+    "passed": true,
+    "checks": 13,
+    "compared": {
+      "commands": 60,
+      "completePublicPackets": 61,
+      "prefixes": 30
+    },
+    "failedChecks": []
+  },
+  "nativeSourceUnchangedAfterComparison": true,
+  "passed": true
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "logos-engine.v57.candidate-selection-ledger.v1",
+  "baseCommit": "54b6057c5c53490a2dea5929003992551f442099",
+  "maximumBlockedWallMinutesPerCandidate": 40,
+  "candidates": [
+    {
+      "selection": {
+        "path": "docs/migration/native-campaigns-v57/candidates/001-smlp-selection.json",
+        "sha256": "2080e664e32badaf6ad0ee2c38e825fe26320348e8eeaf6100cd745b23ca39c5",
+        "bytes": 1030
+      },
+      "game": "SMLP",
+      "selectedAt": "2026-11-09T15:05:58.388528+00:00",
+      "blockedDeadline": "2026-11-09T15:45:58.388528+00:00",
+      "baselineStatus": "passed_three_levels",
+      "baselineClosedAt": "2026-11-09T15:06:48.416940+00:00",
+      "selectionToBaselineClosedSeconds": 50.028412,
+      "baselineDirectory": "docs/migration/native-campaigns-v57/baseline-smlp",
+      "finalV57Status": "pending_frozen_source_rerun"
+    }
+  ],
+  "excludedPreviouslyQualifiedGames": [
+    "HANO",
+    "SYME",
+    "DNOI",
+    "TU93",
+    "MEMO",
+    "PIPE",
+    "STCK",
+    "TICT",
+    "THER",
+    "COMB",
+    "CATL",
+    "LF52",
+    "ZIPP",
+    "SELE",
+    "COLM",
+    "GRIL",
+    "LIFE",
+    "VALV",
+    "GARE",
+    "CN04",
+    "RE86",
+    "ELAS",
+    "ONDE",
+    "DICO",
+    "M0R0",
+    "SKBN",
+    "DAME",
+    "AS66",
+    "GLOB"
+  ],
+  "qualification": "One candidate selected. The three official level target completed on unchanged V56 in 50.03 seconds from selection. No further baseline campaign launched. A separate frozen final V57 campaign is required."
+}

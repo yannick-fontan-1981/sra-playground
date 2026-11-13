@@ -1,0 +1,40 @@
+{
+  "module_id":"device_edit_compiler_c",
+  "declarations":[{
+    "id":"policy.device_edit_compiler_c","kind":"selection_policy","evaluation":"declared_eligibility_single",
+    "supported_operators":["SELECT"],"input_contract":"yf_arc3_v5.authority_input.selection.v1",
+    "output_contract":"yf_arc3_v5.authority_output.selection.v1",
+    "declared_alternative_refs":["device_edits.propose","device_edits.domain"],"selection_required_fact_fields":["alternative_ref"],
+    "selection_eligibility_conditions":[{"field":"eligible","operator":"equals","expected":true}],
+    "fact_projections":[{"id":"projection.device_edits.propose","all_conditions":[
+      {"field":"alternative_ref","operator":"equals","expected":"device_edits.propose"},
+      {"field":"compiler_bound","operator":"equals","expected":true}],"static_facts":{"eligible":true}},
+      {"id":"projection.device_edits.domain","all_conditions":[
+      {"field":"alternative_ref","operator":"equals","expected":"device_edits.domain"},
+      {"field":"edit_domain_bound","operator":"equals","expected":true}],"static_facts":{"eligible":true}}],
+    "meaning_template_ref_by_alternative":{"device_edits.propose":"rule.device_edit_compiler_c","device_edits.domain":"rule.device_edit_compiler_c"},
+    "premises":["exact_complete_K28_program_differences","current_supported_trait_transition_and_click_payload"],
+    "invariants":["include_off_and_suffix_erasure","no_independent_bit_instruction_semantics","no_ACT"],
+    "falsifiers":["stale_hit_domain","unsupported_transition","unresolved_competing_payloads"],
+    "reason_refs":["reason.only_current_program_differences_need_current_causal_click_proposals"]
+  },{
+    "id":"rule.device_edit_compiler_c","kind":"rule","evaluation":"project_requested_conclusions",
+    "supported_operators":["DERIVE"],"input_contract":"yf_arc3_v5.authority_input.derivation.v1",
+    "output_contract":"yf_arc3_v5.authority_output.derivation.v1","relation_family":"epistemic",
+    "term_templates":[{"id_pattern":"proposal.device.edits.{projection_ref}","kind":"goal","label":"Current complete program edit proposal",
+      "required_fields":["projection_ref","parent_goal_ref","edit_groups","primitive_proposals","frozen_why"],
+      "attribute_bindings":{"parent_goal_ref":"parent_goal_ref","edit_groups":"edit_groups","primitive_proposals":"primitive_proposals",
+        "primitive_count":"primitive_count","frozen_why":"frozen_why","source_click_domain_bound":"source_click_domain_bound",
+        "edit_alternative_domains":"edit_alternative_domains","minimum_command_selection_required":"minimum_command_selection_required",
+        "edit_domain_bound":"edit_domain_bound","compiler_bound":"compiler_bound"},
+      "static_attributes":{"status":"proposed","no_action_authority":true}}],
+    "claim_templates":[{"id_pattern":"claim.device.edits.{projection_ref}","predicate":"proposes_current_device_program_edits",
+      "family":"epistemic","epistemic_status":"proposed","argument_patterns":["{parent_goal_ref}","proposal.device.edits.{projection_ref}"],
+      "required_term_patterns":["{parent_goal_ref}","proposal.device.edits.{projection_ref}"],
+      "required_fields":["projection_ref","parent_goal_ref"],"attribute_bindings":{"edit_groups":"edit_groups","primitive_proposals":"primitive_proposals","frozen_why":"frozen_why",
+        "edit_alternative_domains":"edit_alternative_domains","minimum_command_selection_required":"minimum_command_selection_required",
+        "edit_domain_bound":"edit_domain_bound","compiler_bound":"compiler_bound"}}],
+    "premises":["current_native_difference_and_trait_actuator_license"],"invariants":["physical_release_requires_existing_guards"],
+    "falsifiers":["program_or_hit_domain_changed"],"reason_refs":["reason.scoped_edit_proposal_preserves_parent_why"]
+  }]
+}

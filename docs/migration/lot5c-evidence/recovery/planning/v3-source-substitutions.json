@@ -1,0 +1,68 @@
+{
+  "schema": "logos-engine.lot5c-v3-source-substitution-plan.v1",
+  "controllerLiteralSubstitutions": [
+    {
+      "before": "REQUEST = 'lot5c-cost-a33a5f88-recovery-02'",
+      "after": "REQUEST = 'lot5c-cost-a33a5f88-available-03'",
+      "occurrences": 1
+    },
+    {
+      "before": "PERF = ROOT / 'docs/migration/lot5c-evidence/recovery/performance-integrated-03'",
+      "after": "PERF = ROOT / 'docs/migration/lot5c-evidence/recovery/performance-integrated-04'",
+      "occurrences": 1
+    },
+    {
+      "before": "COORD = ROOT / 'docs/migration/lot5c-evidence/recovery/coordination/cost-final-02'",
+      "after": "COORD = ROOT / 'docs/migration/lot5c-evidence/recovery/coordination/cost-final-03'",
+      "occurrences": 1
+    },
+    {
+      "before": "REGISTRY_PATH = SHARED / 'lot5c-recovery-02-active-children.json'",
+      "after": "REGISTRY_PATH = SHARED / 'lot5c-available-03-active-children.json'",
+      "occurrences": 1
+    }
+  ],
+  "finalizerLiteralSubstitutions": [
+    {
+      "before": "PERF = BASE / 'recovery/performance-integrated-03'",
+      "after": "PERF = BASE / 'recovery/performance-integrated-04'"
+    },
+    {
+      "before": "PRIOR = BASE / 'recovery/performance-integrated-02'",
+      "after": "PRIOR = BASE / 'recovery/performance-integrated-03'\nSOURCE_PRIOR = BASE / 'recovery/performance-integrated-02'"
+    },
+    {
+      "before": "run-coordinated-cost-5c-v2.py",
+      "after": "run-coordinated-cost-5c-v3.py"
+    },
+    {
+      "before": "orchestrate-cost-recovery-02.py",
+      "after": "orchestrate-cost-available-03.py"
+    },
+    {
+      "before": "coordination-v2-independent-review.json",
+      "after": "coordination-v3-independent-review.json"
+    },
+    {
+      "before": "logos-engine.lot5c-coordination-v2-independent-review.v1",
+      "after": "logos-engine.lot5c-coordination-v3-independent-review.v1"
+    },
+    {
+      "before": "REQUEST = 'lot5c-cost-a33a5f88-recovery-02'",
+      "after": "REQUEST = 'lot5c-cost-a33a5f88-available-03'"
+    },
+    {
+      "before": "recovery/coordination/cost-final-02",
+      "after": "recovery/coordination/cost-final-03"
+    },
+    {
+      "before": "recovery/coordination/recovery-02/own-preparation-closure.json",
+      "after": "recovery/coordination/recovery-03/own-preparation-closure.json"
+    },
+    {
+      "before": "specific to final-a33 / performance-integrated-03",
+      "after": "specific to final-a33 / performance-integrated-04"
+    }
+  ],
+  "finalizerDocumentaryDelta": "PRIOR points to03; SOURCE_PRIOR retains02 original84-check proof. Preserve23 documentary03 files and the existing44-file02 inventory. Fixtures differ only by cases.path across02/03/04; source inventory, attribution and case/policy bytes remain identical. No functional reader or benchmark body is changed."
+}

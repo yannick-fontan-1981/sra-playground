@@ -1,0 +1,33 @@
+{
+  "schema": "logos-engine.v40.browser-verification.v1",
+  "game": "MEMO",
+  "surface": "managed development preview from the same frozen checkout",
+  "observedUrl": "http://127.0.0.1:4173/?game=MEMO&level=4",
+  "mode": "SRA Agent Native TS",
+  "initialLevel": 1,
+  "initialActions": 0,
+  "initialSolvedLevels": 0,
+  "controlsUsed": [
+    "Choose MEMO",
+    "SRA Agent Native TS",
+    "Run to next level (three successive natural boundaries)"
+  ],
+  "cumulativeActionsAtBoundaries": [
+    10,
+    20,
+    30
+  ],
+  "solvedLevels": 3,
+  "completedPlans": 30,
+  "finalVisibleLevel": 4,
+  "visibleStatus": "Level completed. V6 acquired the outcome and retained its transfer memory. Continue when ready.",
+  "visibleVictoryHeading": null,
+  "inspectionClosedAtStart": true,
+  "inspectionOpenedDuringRun": false,
+  "manualGameActions": 0,
+  "agentSessionResets": 0,
+  "levelJumps": 0,
+  "screenshot": "memo-browser-three-levels.png",
+  "screenshotSha256": "1ce6653883e1a22263ad15c09bb9c549655e8b63a35c3079907b15c8e297f822",
+  "qualification": "Observed in the real browser interface on the managed preview. Three levels completed, not a full-game WIN. The UI pauses at each natural level boundary with the session retained; the bounded smoke campaign stops at its declared target. Production publication is verified separately by the Sites deployment result."
+}

@@ -1,0 +1,40 @@
+{
+  "schema": "logos-engine.v43.actual-test-execution.v1",
+  "command": [
+    "node",
+    "--test",
+    "--test-reporter=tap",
+    "--test-concurrency=2",
+    "tests/v6-coupled-pair-planning.test.ts",
+    "tests/v6-learned-preparation-priority.test.ts",
+    "tests/v6-program-composition-integration.test.ts",
+    "tests/v6-program-control-discovery-integration.test.ts",
+    "tests/v6-radial-port-integration.test.ts"
+  ],
+  "testFiles": [
+    "tests/v6-coupled-pair-planning.test.ts",
+    "tests/v6-learned-preparation-priority.test.ts",
+    "tests/v6-program-composition-integration.test.ts",
+    "tests/v6-program-control-discovery-integration.test.ts",
+    "tests/v6-radial-port-integration.test.ts"
+  ],
+  "testFileSha256": {
+    "tests/v6-coupled-pair-planning.test.ts": "2801b0cff3ac2dc7591bba39357cbcc985f3f7d7570d9e2576498a4df641962f",
+    "tests/v6-learned-preparation-priority.test.ts": "6ae10a8622b125ed6bb229458572165afb13c110d07069c5c13fdf50750c5562",
+    "tests/v6-program-composition-integration.test.ts": "4b3c409ec7efc0d0d133da44f86b24f4c9bcb735924075e63101ddaba7c1bd8d",
+    "tests/v6-program-control-discovery-integration.test.ts": "9094789a0355a5de0cc1422c47420f91f7a97a80df2269652472edb7667ee21c",
+    "tests/v6-radial-port-integration.test.ts": "1f76729d506954b76a5b54c555367ae8603a3ecf16a37d236f3ad016df4c847d"
+  },
+  "testFilesUnchanged": true,
+  "exitCode": 0,
+  "startedAt": "2026-11-08T18:17:46.009908+00:00",
+  "finishedAt": "2026-11-08T18:19:00.042040+00:00",
+  "nativeSourceManifestDigest": "702fd71e5c234d1942dab9685306aa252b68eaa1280def89d9665a3fcbe2a3fb",
+  "nativeSourceUnchanged": true,
+  "reason": "Six old count/order assertions expected five registered shared window entries and omitted the new first product entry. Only these assertions in five test files changed; production files and test definitions stayed fixed. The failed initial receipt is retained.",
+  "output": {
+    "path": "docs/migration/native-campaigns-v43/topology-recheck-output.log.gz",
+    "sha256": "ce246d09400cd168e7072c4f6ad38b4e58c50d83f4bf4f823818b1d6eff74eb3",
+    "bytes": 5240
+  }
+}

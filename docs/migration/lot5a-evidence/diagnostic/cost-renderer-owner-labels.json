@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.lot5a-renderer-label-correction.v1",
+  "recordedAt": "2026-11-10T21:40:59.089758+00:00",
+  "before": {
+    "path": "docs/migration/lot5a-evidence/diagnostic/write-cost-results-before-owner-labels.py",
+    "bytes": 43028,
+    "sha256": "041543e7b5763d5a914863ee19874d6959240070750c51d7100a9d05cda91b1e"
+  },
+  "after": {
+    "path": "docs/migration/lot5a-evidence/write-cost-results.py",
+    "bytes": 43040,
+    "sha256": "1aa2dbcfe96c2c3aa47f388732a92d29a69fcbded3dc644857647fb28a685b9d"
+  },
+  "substitutions": [
+    {
+      "from": "l’atelier à profils ordonnés",
+      "to": "la préparation temporelle liée"
+    },
+    {
+      "from": "de l’atelier, de revalidation source ou de parité",
+      "to": "de WEAV, des politiques de phase encore partielles ou de parité"
+    }
+  ],
+  "rendererPreviouslyExecuted": false,
+  "arithmeticOrRulesChanged": false
+}

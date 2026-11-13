@@ -1,0 +1,148 @@
+{
+  "schema": "logos-engine.native-campaign-evidence-index.v1",
+  "recordedAt": "2026-11-09T21:49:00.683054+00:00",
+  "nativeSourceDigest": "ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b",
+  "campaigns": [
+    {
+      "game": "LS20",
+      "kind": "cold_regression",
+      "targetStatus": "target_reached",
+      "levelsCompleted": 3,
+      "actions": 142,
+      "prefixes": 58,
+      "officialState": "NOT_FINISHED",
+      "completeGameWinClaimed": false,
+      "executionExitCode": 0,
+      "completeReportAvailable": true,
+      "levels": [
+        {
+          "completedLevel": 1,
+          "nativeLevel": 2,
+          "levelsCompleted": 1,
+          "levelActions": 17,
+          "totalActions": 17,
+          "levelActiveSeconds": 15.687467557000002,
+          "activeSeconds": 15.687467557000002,
+          "prefixCount": 11,
+          "graphChain": "310d494f768d43555a61ca6f8c1a15db41b7792076157e366ba0d5bfc1c9645d",
+          "graphRevision": 1321,
+          "nodeCount": 394,
+          "levelPrefixes": 11
+        },
+        {
+          "completedLevel": 2,
+          "nativeLevel": 3,
+          "levelsCompleted": 2,
+          "levelActions": 67,
+          "totalActions": 84,
+          "levelActiveSeconds": 75.07149864999992,
+          "activeSeconds": 90.75896620699993,
+          "prefixCount": 39,
+          "graphChain": "9c9192f4973454547ffef4172384ea283674567592313dd306602b39b92df148",
+          "graphRevision": 4458,
+          "nodeCount": 1169,
+          "levelPrefixes": 28
+        },
+        {
+          "completedLevel": 3,
+          "nativeLevel": 4,
+          "levelsCompleted": 3,
+          "levelActions": 58,
+          "totalActions": 142,
+          "levelActiveSeconds": 79.19025703999995,
+          "activeSeconds": 169.94922324699988,
+          "prefixCount": 58,
+          "graphChain": "3e74784deac1f0b5c3c4af394197bd9ac3711da68e2809f1705610d0f0e6aa49",
+          "graphRevision": 6745,
+          "nodeCount": 1876,
+          "levelPrefixes": 19
+        }
+      ],
+      "execution": {
+        "path": "docs/migration/lot2c-cost-evidence/final/ls20-regression/execution-ls20.json",
+        "bytes": 61463,
+        "sha256": "d1ea8abe6bee0ab1093f62c874a7a3b077ebbc111a482425cfca62d4c14ce9b9"
+      },
+      "selection": {
+        "path": "docs/migration/lot2c-cost-evidence/final/ls20-selection.json",
+        "bytes": 948,
+        "sha256": "d9fc2d8405f0a6795abceb9732efd4188d7d1eda2d5f31e09849f1fb81a99ef4"
+      },
+      "resolution": {
+        "path": "docs/migration/lot2c-cost-evidence/final/ls20-resolution.json",
+        "bytes": 1305,
+        "sha256": "2b978e331785d5f5eb77c8803c721477a5915b40aa54eed1e21e6af1b71114f3"
+      },
+      "artifacts": [
+        {
+          "path": "docs/migration/lot2c-cost-evidence/final/ls20-regression/execution-ls20.json",
+          "bytes": 61463,
+          "sha256": "d1ea8abe6bee0ab1093f62c874a7a3b077ebbc111a482425cfca62d4c14ce9b9"
+        },
+        {
+          "path": "docs/migration/lot2c-cost-evidence/final/ls20-regression/ls20-actual-public-journal.jsonl.gz",
+          "bytes": 26168,
+          "sha256": "da62e7f0c02939e7b638219aaa9f1adf7564a4561ed6e63fe986b2505f0ca245"
+        },
+        {
+          "path": "docs/migration/lot2c-cost-evidence/final/ls20-regression/ls20-campaign.json.gz",
+          "bytes": 23168358,
+          "sha256": "a7ee4b2d51ab5843d4731100804bee193e05945f84cf92bf55cc0abb3d1a326f"
+        },
+        {
+          "path": "docs/migration/lot2c-cost-evidence/final/ls20-regression/ls20-campaign.json.gz.parts.json",
+          "bytes": 4658,
+          "sha256": "8884cfb49f793091abd8b8c3ef86edc08a16644f7b1efa07939f236f32dfc579"
+        },
+        {
+          "path": "docs/migration/lot2c-cost-evidence/final/ls20-regression/ls20-output.log.gz",
+          "bytes": 11523,
+          "sha256": "36c3abba463ca71b2bfda2d44014ff7e93fd4c2f289a4445c235067420032ff2"
+        },
+        {
+          "path": "docs/migration/lot2c-cost-evidence/final/ls20-regression/ls20-public-trace.json.gz",
+          "bytes": 44542,
+          "sha256": "d3dc4caa52d873fdbfcf0f392dc5ee866a2f46a237e807eee72a4b3e339a2b29"
+        },
+        {
+          "path": "docs/migration/lot2c-cost-evidence/final/ls20-regression/public-comparison.json",
+          "bytes": 2932,
+          "sha256": "002e19c200c74b4dcd520afa2b42ad41b137cdb924aba4d5e94eae73ac7c1d86"
+        },
+        {
+          "path": "docs/migration/lot2c-cost-evidence/final/ls20-regression/results.md",
+          "bytes": 2213,
+          "sha256": "42350b6eace2d3225d6f8ee77c39aa93c000c0b65cbf0c2c4ae5c023260c0fa0"
+        },
+        {
+          "path": "docs/migration/lot2c-cost-evidence/final/ls20-regression/source-manifest.json",
+          "bytes": 28569,
+          "sha256": "c668d40bfe2e8dbc563d4d7ca5051c48416d3cc1282b19ed9931664bb8a0602a"
+        },
+        {
+          "path": "docs/migration/lot2c-cost-evidence/final/ls20-regression/summary.json",
+          "bytes": 4952,
+          "sha256": "fd191c072c5e2526b3ba83b7b78cab35b5792390d19bb7b05c75836f3f676373"
+        }
+      ]
+    }
+  ],
+  "browser": [
+    {
+      "path": "docs/migration/lot2c-cost-evidence/final/browser/lot2c-cost-stck-three-levels-ax.txt",
+      "bytes": 11559,
+      "sha256": "b80dfe6f92656437a3e49f98c80ebe9afb69adeef52ed70c9a9a4d29211193f0"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/final/browser/lot2c-cost-stck-three-levels.jpg",
+      "bytes": 84448,
+      "sha256": "867741e565c15d9746c62c3ee6b97140bffa354ff90974c96eab753bb0739566"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/final/browser/stck-verification.json",
+      "bytes": 1919,
+      "sha256": "981eb672c01291cec497331613e83700a134c327ae7a4491f21fb9e7adda7eb0"
+    }
+  ],
+  "qualification": "Completed cold LS20 regression and independent managed-browser STCK three-level functional check. LS20 public commands and packets equal the prior 0.35 trajectory; complete trace sourceDigest differs. No new game capability, whole-game WIN or full original-caller parity claimed. Raw campaign bytes are reconstructible from ordered parts; cost acceptance is separately indexed."
+}

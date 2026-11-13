@@ -1,0 +1,22 @@
+{
+  "schema": "logos-engine.lot4b.published-predecessor.v1",
+  "siteVersion": 83,
+  "source": {
+    "commit_sha": "bed48116585da864dd5c412ed11dd6990a950e8e"
+  },
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_000000007c4c820ebf54585a58c72f94",
+    "content_hash": "sha256:95d1d9780bdb75c1eda9fe36ad66f3cab2e9277306722bea087592c19dab83c9",
+    "size_bytes": 29747200,
+    "file_count": 75
+  },
+  "deployment": {
+    "id": "appgdep_6af3859669708191a724098872b5c7d4",
+    "status": "succeeded",
+    "version_id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_56ab94a2e69081918fc923b11c4484b9",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "updated_at": "2026-11-10T20:59:14.979903+00:00"
+  },
+  "qualification": "Actual Sites source provenance and terminal deployment observed independently by the4B owner. Source helper fetched the exact commit; ordinary merges preserve both histories. This is the7A predecessor, not the future5A baseline or a4B publication."
+}

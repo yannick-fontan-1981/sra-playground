@@ -1,0 +1,59 @@
+{
+  "schema": "logos-engine.lot5c.publication-guardian-implementation.v1",
+  "status": "pid_namespace_fix_targeted_test_passed_pending_independent_review",
+  "recordedAt": "2026-11-11T21:10:52.285447+00:00",
+  "scope": "Only remove cross-exec PID liveness inference; keep diagnostic PID and require root to check the actual tool session. Heartbeat/request/deadline checks retained.",
+  "guardian": {
+    "file": "publication-guard.py",
+    "bytes": 20084,
+    "sha256": "cab500c5aa0495af077e5961ce15a2c56f2c2ba650ffb4d9605c615f454198b9"
+  },
+  "previousSourcePreserved": {
+    "file": "publication-guard-before-pid-namespace-fix.py",
+    "bytes": 19869,
+    "sha256": "0cb8b31989e167a5776206fc89c3efb8031688a1c539c569dc9169d674876deb"
+  },
+  "previousImplementationReceiptPreserved": {
+    "file": "implementation-receipt.json",
+    "bytes": 1897,
+    "sha256": "2107cd8987b8022bdab58bb786809d20b55f2d0d013e639d581792e254c1a5c3"
+  },
+  "previousTenCaseTestsPreserved": {
+    "file": "test-execution-01.json",
+    "bytes": 20030,
+    "sha256": "616174b67063b5902c868dec142d3cab93b4710ea066a7b9d6776092f7289194"
+  },
+  "previousTenCaseTestsReexecuted": false,
+  "targetedTest": {
+    "file": "test-execution-02.json",
+    "bytes": 2025,
+    "sha256": "239d2c95cef2f919df93b36cc9b209dc88bcb17b9982a5c186bf4f0c36487626"
+  },
+  "targetedChecksPassed": 8,
+  "targetedChecksTotal": 8,
+  "toolResult": {
+    "sessionId": null,
+    "completedWithoutYield": true,
+    "chunkId": "244b30",
+    "exitCode": 0
+  },
+  "documentation": [
+    {
+      "file": "README.md",
+      "bytes": 10378,
+      "sha256": "246a47078cc0dc9c15bde246dc18f451c1ef198d1d2c6e0e1dcbaf3224b9ad6d"
+    },
+    {
+      "file": "operator-contract.json",
+      "bytes": 2773,
+      "sha256": "dcc1106d48f8c43d0d1d3f6c81b1129abb1444ad754fe30815e5d9f681ef4f89"
+    }
+  ],
+  "guardProcessesLaunched": 0,
+  "actualPidProbesOrSignals": 0,
+  "processNamespaceInspection": false,
+  "productionExclusiveLockAcquired": false,
+  "actualProviderCalls": 0,
+  "oldCostNativeAndTransportWrapperModified": false,
+  "remainingWork": "Independent review of this exact narrow correction; then root checks actual tool-session liveness at every production phase."
+}

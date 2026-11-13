@@ -1,0 +1,1297 @@
+{
+  "schema": "logos-engine.v52.evidence-storage.v1",
+  "evidenceDirectory": "docs/migration/native-campaigns-v52",
+  "selection": {
+    "suffix": ".json",
+    "strictlyLargerThanBytes": 1048576
+  },
+  "compression": {
+    "format": "gzip",
+    "level": 9,
+    "mtime": 0,
+    "filename": ""
+  },
+  "files": [
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/attempt7/gare-three-levels.json",
+        "sha256": "8b86ac7632d2660668981437e25f182c98735e34bc0710919f02d12a968421b0",
+        "bytes": 129637379
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/attempt7/gare-three-levels.json.gz",
+        "sha256": "197e63138439f7c49543c443a73d15026569eb56691b0c8fdd827651f2db7347",
+        "bytes": 8127094
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/attempt8/gare-three-levels.json",
+        "sha256": "cf8679afe1da9542ed84a2eea9ba2dee2aefb2d1d05992d3a1508e485e5c9576",
+        "bytes": 100746524
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/attempt8/gare-three-levels.json.gz",
+        "sha256": "a57d5464d2f5f1b2f89a1780e421c720a2b03a94dadc322dff68f755a0914181",
+        "bytes": 6972448
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/catl-recorded-public-replay.json",
+        "sha256": "dd1c38de414d9c08623ffcaef6f55bc40f81962171c3a8ead0d0ba9ec53f1146",
+        "bytes": 4085954
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/catl-recorded-public-replay.json.gz",
+        "sha256": "b6469e8347231ed97dba0a529686c9ba21af73f64be38d12b4afc6e83b1cb7cb",
+        "bytes": 247576
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/colm-recorded-public-replay.json",
+        "sha256": "b2ca8e96463c98a2bda7395ee2920cd3f4fd1f84b631462232a01b481f8d3274",
+        "bytes": 1566155
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/colm-recorded-public-replay.json.gz",
+        "sha256": "67d45923658397f5c3c26dd3f24e875a3bef18e32d15e98e2fa828c3b8735b5e",
+        "bytes": 123894
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/framed-transfer-original-comparison.json",
+        "sha256": "089f8f9b0e289b3c4f067324f4b0a2721bf2f65bd8378aa2a16aeb7606759090",
+        "bytes": 5001592
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/framed-transfer-original-comparison.json.gz",
+        "sha256": "668316c13a38e7971de5a79a8c21406bf055a47b96c4b6e479c75e7660427164",
+        "bytes": 328137
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/gare-three-levels.json",
+        "sha256": "5f7e53a53a439851be3cb60fcb5d79d28c781ad49c968ded63efa479be6088f3",
+        "bytes": 52318713
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/gare-three-levels.json.gz",
+        "sha256": "ba5d0652e3f0d34fb18f5f9c804964feb38fc171899281c7c4a36bba73b28135",
+        "bytes": 3775917
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/gril-recorded-public-replay.json",
+        "sha256": "b4d42ed118bb8d3e336c3b8f3c846bc6183b8e5b5649dd292d51493d90e75f4e",
+        "bytes": 5923181
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/gril-recorded-public-replay.json.gz",
+        "sha256": "1a8ae7b2d75c1be607070dd3df3fdd88e0cda48261e053e2d1baee4cfa6f2d87",
+        "bytes": 172996
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/life-recorded-public-replay.json",
+        "sha256": "3e95beecbf915d7cb127d36c9dadba216892bc9ad0c403d216dcab52442679f1",
+        "bytes": 3454718
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/life-recorded-public-replay.json.gz",
+        "sha256": "6c605911111588f1b6a437e23ec9fd4f6092b06e1bd8a8ea6483380380fdadc1",
+        "bytes": 347694
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/sele-recorded-public-replay.json",
+        "sha256": "1511f9839bdfaf7bf34a61a389d490d43e185fb8078d72e64f15396db7a08412",
+        "bytes": 4114785
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/sele-recorded-public-replay.json.gz",
+        "sha256": "518679db16fd6e6badb7b292ba60c6bcd94a267f2bb3c3c8f39e7f47768c6eea",
+        "bytes": 360570
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/valv-recorded-public-replay.json",
+        "sha256": "0fda1b30607cf20513867ad2b453770409d1c169664c667fe1b5ce537b678598",
+        "bytes": 2740615
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/valv-recorded-public-replay.json.gz",
+        "sha256": "be7413a4e04cd9254c12c0c48b540952bd163becf2402dc5b6e0979f4f013580",
+        "bytes": 228135
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/zipp-recorded-public-replay.json",
+        "sha256": "d7d4bac5c09758dfc4b74984f935b8760e13ed09f8db5aa9796188521c862cb9",
+        "bytes": 2819954
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/zipp-recorded-public-replay.json.gz",
+        "sha256": "c55801594ef6a8b707e10be01c3b05aed15e0c3a73ea9abec581b5bb66b85760",
+        "bytes": 253369
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/catl-recorded-public-replay.json",
+        "sha256": "ea33a0cc77c3171d63618e5b6f5d5dac5a60df04be96ed6ad67087ec028df437",
+        "bytes": 3949698
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/catl-recorded-public-replay.json.gz",
+        "sha256": "6aa27e080b575a1cf6bdf04846c53198c6be0070eb923503b4b530a79d201e7f",
+        "bytes": 226220
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/colm-recorded-public-replay.json",
+        "sha256": "18b72d9e40b4d119dcbc787dc74314c60baaee37248caa7ed69c861c16a78631",
+        "bytes": 1551635
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/colm-recorded-public-replay.json.gz",
+        "sha256": "3c17ffee3691967998d317495b8e11f378aa1341780be552dcdca37cd87e2a99",
+        "bytes": 121002
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/final/gare-three-levels.json",
+        "sha256": "e4e6ca1c54798c923ede7b822c821064fda2b71f9fe642d601ff33c606ce3881",
+        "bytes": 97906617
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/final/gare-three-levels.json.gz",
+        "sha256": "64c87ac2dc9db6a38a5791a267e84e7d58f32b0cddab6621539672ec15b688e0",
+        "bytes": 6288096
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/final/lkey-three-levels.json",
+        "sha256": "9e1f9a4ca5adeb08eef5acb15cea78573d14968d608c1c2fdefc773cde7cebb0",
+        "bytes": 19410174
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/final/lkey-three-levels.json.gz",
+        "sha256": "bde08edfa8ee744db29d4373cbb67a1958987535e8a0632f1cca3ff66f27e50a",
+        "bytes": 1948647
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/gare-attempt4-original-component-comparison.json",
+        "sha256": "f1b44af1fc67b1d9f925e3e226e854917d3dbb37c55e5ed248d00f5b72157388",
+        "bytes": 2382073
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/gare-attempt4-original-component-comparison.json.gz",
+        "sha256": "75b496cd1c2d959954425771a2bc52c7b3a5e2f86fd9b0769e1d9aa149f2e651",
+        "bytes": 113163
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/gare-three-levels-attempt2.json",
+        "sha256": "197324672c850eae558f667cbd0ad1eb2c3435d2185831b299e715f3928d31c1",
+        "bytes": 3230715
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/gare-three-levels-attempt2.json.gz",
+        "sha256": "d16dc5ec4252690c6d59c6a935ac9eccfd506954c0ea5933b25860114316c5b3",
+        "bytes": 286680
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/gare-three-levels.json",
+        "sha256": "9442003a153e87447b746927ea0b91379bdfa82f5b7ad3883c44cd24f56f55a7",
+        "bytes": 49097421
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/gare-three-levels.json.gz",
+        "sha256": "0d5bd59355ed15c2a9ef5d0702cee82883f1b708da2a0dedc259e0f7e8e91ce2",
+        "bytes": 3438171
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/gril-recorded-public-replay.json",
+        "sha256": "ea543a71185cbb177632743623e856b4a469be76f94173d6e0433abdb05a914f",
+        "bytes": 5883406
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/gril-recorded-public-replay.json.gz",
+        "sha256": "8afcfd30b51f5f6620b94cb867bf95d281ad05f3ced0bb26f8236c8b86abd2bc",
+        "bytes": 167143
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/life-recorded-public-replay.json",
+        "sha256": "1ed4c0f28758b278677622d42eb03635f4c061c21dbbd5aeba3ee7256343fdde",
+        "bytes": 3315295
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/life-recorded-public-replay.json.gz",
+        "sha256": "85f4eb4bebce28fb5fc664e0a6fc5cd282a554a14fc32360b0775a1cbac2add0",
+        "bytes": 326793
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/sele-recorded-public-replay.json",
+        "sha256": "d4ed39349fa3cab8164f9e35c391e326e67a8a78e019f64f4cd9ae24dc425859",
+        "bytes": 4021865
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/sele-recorded-public-replay.json.gz",
+        "sha256": "659db19ec93da31d4d973acd44f004804aac797aff354a1e0f93184eb244117e",
+        "bytes": 342688
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/valv-recorded-public-replay.json",
+        "sha256": "d790ce44a3a4eb2908cdba666fb0d38bc86cf92507f9854ddf68bcc49772b62e",
+        "bytes": 2661162
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/valv-recorded-public-replay.json.gz",
+        "sha256": "f0b472769fb8db8983398e0553c58e8644c4fd2a1bf9a05eff25200881912902",
+        "bytes": 212876
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/verified/gare-three-levels.json",
+        "sha256": "8cc72eeaea6625e0a16e0a2aee89467cc3fee3e3f1de0d219b95699314df25cc",
+        "bytes": 100266106
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/verified/gare-three-levels.json.gz",
+        "sha256": "de682b6829b8b21ea5572474a9eb06de3f26c26c71d803f770b20350d3b3a07e",
+        "bytes": 6973701
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/native-campaigns-v52/zipp-recorded-public-replay.json",
+        "sha256": "3d4907ebf13c589b427ed72cf0ab91bcd84cca70c09769b1916c23feeadbfd7d",
+        "bytes": 2623749
+      },
+      "gzip": {
+        "path": "docs/migration/native-campaigns-v52/zipp-recorded-public-replay.json.gz",
+        "sha256": "e009a494331b9aaa4492987d8ae30bc037d43ffd1b7dfa0364fb46e0c8e24720",
+        "bytes": 226804
+      }
+    }
+  ],
+  "totals": {
+    "files": 24,
+    "originalBytes": 608709486,
+    "gzipBytes": 41609814
+  },
+  "preservedEvidenceFiles": [
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt7/execution-gare.json",
+      "sha256": "291d5d7fb99d7da241a470d6723bbd76e426684c17cfececa964cda226b764ff",
+      "bytes": 44177
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt7/gare-output.log.gz",
+      "sha256": "56c78a215ecf00da2f249e795ff4273dd144e69e448acbc97140486cdf0cce28",
+      "bytes": 11772
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt7/gare-public-trace.json.gz",
+      "sha256": "8544a825690a4dd14d526edc7675b760de4d0e1eedb8bbedf45e3551fee470d3",
+      "bytes": 69370
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt7/gare-three-levels.json",
+      "sha256": "8b86ac7632d2660668981437e25f182c98735e34bc0710919f02d12a968421b0",
+      "bytes": 129637379
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt7/source-manifest.json",
+      "sha256": "bfd648fca08dff9dee39f8c24fd9f508171e96eeea8573bdeed0acded15e4a00",
+      "bytes": 20945
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt8/execution-gare.json",
+      "sha256": "3a8d02602d4a9cb293156c60583d4efa2548037db238a0ec41c7ec6465fca643",
+      "bytes": 45580
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt8/gare-actual-public-journal.jsonl.gz",
+      "sha256": "f018c85caffda9b55404d7101eba8f9876f98ec7eed15239b68e3d1511caf208",
+      "bytes": 38087
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt8/gare-output.log.gz",
+      "sha256": "0ce6a47366e2932daf074473e418030232a6e75d379080d0858ebf607d6203a1",
+      "bytes": 10239
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt8/gare-public-trace.json.gz",
+      "sha256": "edc1cd8b522bbec40da200e837a449df2104553d10e5ab53d770dbaf19222a42",
+      "bytes": 54714
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt8/gare-three-levels.json",
+      "sha256": "cf8679afe1da9542ed84a2eea9ba2dee2aefb2d1d05992d3a1508e485e5c9576",
+      "bytes": 100746524
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt8/source-manifest.json",
+      "sha256": "f65e4c76cfdd782484b2ff7bb5bcb1b7c9b3c45cd3af69ff37c44bf450e2cceb",
+      "bytes": 20945
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/catl-recorded-public-replay.json",
+      "sha256": "dd1c38de414d9c08623ffcaef6f55bc40f81962171c3a8ead0d0ba9ec53f1146",
+      "bytes": 4085954
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/catl-regression-comparison.json",
+      "sha256": "c4a74fad7cdeb8016eb1c6fddcefa01948829802fd766952a23a80f69e2d3f58",
+      "bytes": 5313
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/colm-recorded-public-replay.json",
+      "sha256": "b2ca8e96463c98a2bda7395ee2920cd3f4fd1f84b631462232a01b481f8d3274",
+      "bytes": 1566155
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/colm-regression-comparison.json",
+      "sha256": "8256958f68f3d762b44065e523f9f951f4b8929c7ada3d02c8b8acb0d0fd572c",
+      "bytes": 16310
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/directed-composition-contract-comparison.json",
+      "sha256": "1554ece897c34e371897906aaa5e71aa56312c85792a01c7431885c643ad494d",
+      "bytes": 106678
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/directed-composition-contract-native.json.gz",
+      "sha256": "01515b058ad3ecfdf891f827f1c5652074aa28c2c6a22620aef25380be7c6cc5",
+      "bytes": 190490
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/directed-composition-contract-reference.json.gz",
+      "sha256": "ae74daf2222d2078a09feaca57155154adf2fbc2bf9cc01ae50ec0e9cab8376c",
+      "bytes": 335544
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/execution-gare.json",
+      "sha256": "9da201b5791e7ecd4fc32c983e2dde15976b0fc7167820c8c76215e888c81f2e",
+      "bytes": 46102
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/framed-transfer-identity-recipes.json.gz",
+      "sha256": "7b85296f7bedfc3bdcb69bfa55ba0504d50823aa2d23598703f42fc5c07abaa1",
+      "bytes": 776369
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/framed-transfer-original-comparison.json",
+      "sha256": "089f8f9b0e289b3c4f067324f4b0a2721bf2f65bd8378aa2a16aeb7606759090",
+      "bytes": 5001592
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/gare-actual-public-journal.jsonl.gz",
+      "sha256": "15ba8fffb1d571f3f53fee9d1158c045a7987dd2a655654546ef7dfe505d8ed3",
+      "bytes": 28213
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/gare-browser-layout-measures.json",
+      "sha256": "6e12a92ed32de914e25087d0dc9f4ff2c6f511c5326b1289d92159a3648bbee3",
+      "bytes": 6128
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/gare-browser-three-levels-ax.txt",
+      "sha256": "9da05a4274ed281c41bc8ed0581dbb1f7362d287a4a28a59ef5d44a745018f20",
+      "bytes": 9969
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/gare-browser-three-levels.jpg",
+      "sha256": "6151cfc62b69d37141f8d0e6c0c9affae6f476f6479dae12fda693d299e62aeb",
+      "bytes": 88821
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/gare-browser-verification.json",
+      "sha256": "c6cdaba9f65713eeced536e2fe9a2a0f1b6965bf8e440ac0ef3a22af851914a0",
+      "bytes": 9959
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/gare-output.log.gz",
+      "sha256": "e96cff54ac5afc305d493b7679007f9b476a4096bcb1ede98d0baea80cc4c216",
+      "bytes": 7013
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/gare-public-trace.json.gz",
+      "sha256": "f903e2211a211e203b18356ddc12b29a1e63e0b8ab25cedfe3f7b42e6cd2a7f5",
+      "bytes": 39254
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/gare-three-levels.json",
+      "sha256": "5f7e53a53a439851be3cb60fcb5d79d28c781ad49c968ded63efa479be6088f3",
+      "bytes": 52318713
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/gril-recorded-public-replay.json",
+      "sha256": "b4d42ed118bb8d3e336c3b8f3c846bc6183b8e5b5649dd292d51493d90e75f4e",
+      "bytes": 5923181
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/gril-regression-comparison.json",
+      "sha256": "f2a8eff7c60925e42754206f1ee2d6570bc0679997c3ac7c001c32d98b21d4e9",
+      "bytes": 29339
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/life-recorded-public-replay.json",
+      "sha256": "3e95beecbf915d7cb127d36c9dadba216892bc9ad0c403d216dcab52442679f1",
+      "bytes": 3454718
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/life-regression-comparison.json",
+      "sha256": "13723a2577e742fb25241f787640f8e8bbd30e61caa263b14fadcbb5e993393b",
+      "bytes": 129585
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/comparison-catl-receipt.json",
+      "sha256": "2e7ab8a8269ec27e5f3bd1ee7da1eb8e8c6d9f9465c7e109f5d98808b7b92a3e",
+      "bytes": 46589
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/comparison-colm-receipt.json",
+      "sha256": "5d073abd4ad504f170842b2a9096fc9df17f4c93508862ccefe135a02bf84555",
+      "bytes": 46595
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/comparison-gril-receipt.json",
+      "sha256": "8a72b8325ccee6a10402d1f8a922da5ae6e10a3b8fdfee3a5a15b0d32b735117",
+      "bytes": 46594
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/comparison-life-receipt.json",
+      "sha256": "0f8b905f30e45748237f67abdf1d8df3515396f9338fe80cec0857fa09ba8277",
+      "bytes": 46607
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/comparison-sele-receipt.json",
+      "sha256": "3bb3fc1e18764f78f2fc14437046d1f705f25934d420658a940de2a9ce415114",
+      "bytes": 46593
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/comparison-stck-receipt.json",
+      "sha256": "98d08587ef9eece8a66f88c6dba8f0ac56aba1de4f210d0f27ebebe278d74e15",
+      "bytes": 46591
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/comparison-valv-receipt.json",
+      "sha256": "7aeb663519076848df5d195d63b6a097cc6441afefd7ae7ae2ad1ca7f6b2157b",
+      "bytes": 46594
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/comparison-zipp-receipt.json",
+      "sha256": "cafca9a4787beeaadedfe71e40ddcfc3b30eeb46b8b739c91449569e9296036c",
+      "bytes": 46592
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-catl-output.log.gz",
+      "sha256": "438a762ac3e5193427fa134768190e034f3416c1b6661650cb9e1fdde5ffb506",
+      "bytes": 6133
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-catl-receipt.json",
+      "sha256": "9d5412eb17e8a152327511798d216a71dd14d20aa6b731a2b894e90dd574acaf",
+      "bytes": 98448
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-colm-output.log.gz",
+      "sha256": "061fd3e0938c9e015ca45f0fc8054571bbccf808d1fb9c3fc514d3c9e1fa7a41",
+      "bytes": 4113
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-colm-receipt.json",
+      "sha256": "b68afcba37b2b4097fc1b19b5d00d32d4f984eeca005bb43fac65f40dca917b8",
+      "bytes": 98466
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-comparison-catl-output.log.gz",
+      "sha256": "fc27f0f262503e6fc72d9bd8e8c5b607b7377f4c789ca854559c687d74063bdd",
+      "bytes": 109
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-comparison-colm-output.log.gz",
+      "sha256": "a2d84dd57cab6bf79e4281beac54c01d6b72e587c0548de932a1e6c6b64945c3",
+      "bytes": 112
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-comparison-gril-output.log.gz",
+      "sha256": "6753b3532e09f4f36830774b45d809e752239cb12ae727fef2665b34116ffa2c",
+      "bytes": 107
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-comparison-life-output.log.gz",
+      "sha256": "c319ae40c46d568383e5af1f2d2257d742381b49a7896a25c34fa9e54c2f580f",
+      "bytes": 111
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-comparison-sele-output.log.gz",
+      "sha256": "e70b8fcb7ea84594a44f0a11b0b37d271a0cf5ce42976af506bbddc0fcea1e7a",
+      "bytes": 110
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-comparison-stck-output.log.gz",
+      "sha256": "69bf498c036047c7daac76879e71bf1526cd3917bfadd05d961976b07c6e598e",
+      "bytes": 111
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-comparison-valv-output.log.gz",
+      "sha256": "17c641f98345b2484ca158379fea884e5312c83c3155e53f44c5f43ab48f6115",
+      "bytes": 109
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-comparison-zipp-output.log.gz",
+      "sha256": "af459b8a73cbd9ae8251c3ecc7a9604906f276e28f43bbb8d0751855ed9adecb",
+      "bytes": 112
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-gril-output.log.gz",
+      "sha256": "710b0946741ddad3d3b5c5f20ab471f659dd5b44b2ebb82bfe057df7b5f6bf66",
+      "bytes": 3095
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-gril-receipt.json",
+      "sha256": "261763c248dde981a47f21931a4b6e58980e6185f71a798189e831653f021cef",
+      "bytes": 98466
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-life-output.log.gz",
+      "sha256": "68c3a782762331a88404738f0c53e1bd00f714e1811efd8d65fc02f6e01afe73",
+      "bytes": 6005
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-life-receipt.json",
+      "sha256": "2a13d3238dd3c94f0ec2e395affce04c0f23d1d66d2cb19f115c5509aca5c6df",
+      "bytes": 98504
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-sele-output.log.gz",
+      "sha256": "db5965715dc31b7d985ee31c0469c105be9b2409fe1f3bddcf73893aab16056b",
+      "bytes": 5384
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-sele-receipt.json",
+      "sha256": "e30d9a18113b79751f79285806932260251d5a9c3da3e2acacee39ee15679305",
+      "bytes": 98463
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-stck-output.log.gz",
+      "sha256": "dfbf2ee6270587477710de737cb95585a3694e13172c1135753a200ab7ab0be0",
+      "bytes": 3425
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-stck-receipt.json",
+      "sha256": "6883778a3d7fc717526a5c4d28ede10111aa0b80a1f540cf8c8b70bfb0396488",
+      "bytes": 98459
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-valv-output.log.gz",
+      "sha256": "72ceb0e581f4659f7684841dca56fdddf90dc239b889a73d791572304624adb2",
+      "bytes": 3933
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-valv-receipt.json",
+      "sha256": "243f1a33b3b79ae95aba973be585c126af832c55aca73bedd7556f434ecf08e2",
+      "bytes": 98465
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-zipp-output.log.gz",
+      "sha256": "a1b3273019d4ea6ca33c2bb87665eece3f37f22cda759f6782c08a38b058211b",
+      "bytes": 7823
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/logs/regression-zipp-receipt.json",
+      "sha256": "6af5b46197ec92230ba6849b99bbaa0d64208cf216e0ac6fb4af4d01632bd0c6",
+      "bytes": 98455
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/phased-reception-contract-comparison.json",
+      "sha256": "d5d5df4025ef633f09db35e8ee015bdcc2202f68e5163f1267d755ac92e38b80",
+      "bytes": 100798
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/phased-reception-contract-native.json.gz",
+      "sha256": "58b1db158f579303551fdb955d16f559c8d7a6b6ad17be230045f1ff56b088f5",
+      "bytes": 5194
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/phased-reception-contract-reference.json.gz",
+      "sha256": "30a3b51f768b774299d0670f0c2ddde571ef7c885011cb27216b0ec4243c3d75",
+      "bytes": 31116
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/regression-plan.json",
+      "sha256": "a957fea00ad14fb2a20738e3bc46d2d2bda005f86b3de28ba8d01044f5b25c26",
+      "bytes": 14976
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/regression-summary.json",
+      "sha256": "18cd23d3c4c5d636bf99ec51c04906230f8ea36393d9d9b9a79da1e7b03c1ded",
+      "bytes": 7388
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/regression-verification.json",
+      "sha256": "cb1b23dafd49d0410df1f438ea20382a437ea551f8374d31d0c22d48b16887e6",
+      "bytes": 862967
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/sele-recorded-public-replay.json",
+      "sha256": "1511f9839bdfaf7bf34a61a389d490d43e185fb8078d72e64f15396db7a08412",
+      "bytes": 4114785
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/sele-regression-comparison.json",
+      "sha256": "5e56b5238e89ae0d73a1eeeaa838ff40c44149c3d31a3ad2c96509cc88dfd281",
+      "bytes": 5315
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/source-manifest.json",
+      "sha256": "41fc0e92d5dff6eb786807e676661819810fdc87839e8dafb03a459d9ad40de4",
+      "bytes": 21203
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/stck-recorded-public-replay.json",
+      "sha256": "aec0c0bccb2efadd382b52cc251d22de8b93eeb0d847cc581e7680b9668ee858",
+      "bytes": 275349
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/stck-regression-comparison.json",
+      "sha256": "fabba5ac4b92ce9c30da7f8141daf339d93d10bc3d74868204ccaf51cb4f049f",
+      "bytes": 5315
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/validation.json",
+      "sha256": "d437c47ccb0d7859f2e3a54399f839bd61edbffcf8ac79f3c7eb50f1c1a08a7c",
+      "bytes": 106996
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/validation/build-output.log.gz",
+      "sha256": "6c23aff296c251ee0333d2577f47d45f99602f70d38d48f17f192db24a0c4b53",
+      "bytes": 1562
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/validation/checks-run.json",
+      "sha256": "bdfcf84a162ad326fdfc08dbd41059d49ac695fbed69499af7b80452ce618ace",
+      "bytes": 74326
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/validation/delta-tests-output.log.gz",
+      "sha256": "81f673b53c16e888c0d7c248aa7df17e515d42d8d2332d582c52b1663128665f",
+      "bytes": 21094
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/validation/delta-tests-run.json",
+      "sha256": "4e94da9460225d135c15e63dbf43608de4b9733695f69138a2bdf533eca0d88a",
+      "bytes": 94283
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/validation/diff-check-output.log.gz",
+      "sha256": "2504107468390505ce6fdb1159cba03d3da1233d8faf91c6ae532fb2fe81caed",
+      "bytes": 20
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/validation/entry-audit-output.log.gz",
+      "sha256": "cab74a327633866cddd2bcf414e113c2ca0607a1876cf44fbbfdde829d139084",
+      "bytes": 179
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/validation/migration-audit-output.log.gz",
+      "sha256": "54fa7cc6cc2c35f0dfeb376dd25a51879855a031c9dbd8b99c9217436d2ab52f",
+      "bytes": 203
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/validation/typecheck-output.log.gz",
+      "sha256": "df1db05500228c173da796304fe2f407b5452504ca77b74bee3a3ab7362c4a16",
+      "bytes": 141
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/valv-recorded-public-replay.json",
+      "sha256": "0fda1b30607cf20513867ad2b453770409d1c169664c667fe1b5ce537b678598",
+      "bytes": 2740615
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/valv-regression-comparison.json",
+      "sha256": "0141eb21a207d17817ddfe1a38dc06941b8ebcd1bc5dc899e86879ad8f26d442",
+      "bytes": 5196
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/valv-service-identity-recipes.json.gz",
+      "sha256": "c9850c305177b79bbe8f8edf08c2460a9069805af6426d702a0efc3bd1b0744a",
+      "bytes": 461152
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/valv-service-original-component-comparison.json",
+      "sha256": "cb7b26911d930f13962cf239c9b9c86efcbb7ca563cdc0ca57f67f576adc47b0",
+      "bytes": 167253
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/zipp-recorded-public-replay.json",
+      "sha256": "d7d4bac5c09758dfc4b74984f935b8760e13ed09f8db5aa9796188521c862cb9",
+      "bytes": 2819954
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/zipp-regression-comparison.json",
+      "sha256": "b2f4c3bc5be1b748a6d8290685bdedf8b8be1dd6f1be5334fae6821392f3a18c",
+      "bytes": 16907
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/candidate-selection.json",
+      "sha256": "cab4e692688a63ee402f30fbbd74a5e63cd81e718bd1d3e556e214a7ff63f57a",
+      "bytes": 406645
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/catl-recorded-public-replay.json",
+      "sha256": "ea33a0cc77c3171d63618e5b6f5d5dac5a60df04be96ed6ad67087ec028df437",
+      "bytes": 3949698
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/catl-regression-comparison.json",
+      "sha256": "24449d9d04a2efdcccab224c49087f1293273041f057a19173f575e34416377b",
+      "bytes": 5304
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/cold-start-v51.json",
+      "sha256": "e3d9ce2cb48cdef81f0020c1125938ba0095b5374f2cdeeb814f7dc6bdab6b03",
+      "bytes": 237581
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/colm-recorded-public-replay.json",
+      "sha256": "18b72d9e40b4d119dcbc787dc74314c60baaee37248caa7ed69c861c16a78631",
+      "bytes": 1551635
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/colm-regression-comparison.json",
+      "sha256": "b5383015d6ca506ec10ff6ad2dd45e7e264bbf59fef800c37597349ee410ac3b",
+      "bytes": 16301
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/diagnostic-memory/actual-output.log.gz",
+      "sha256": "5cb7ad6d3fb01597e5d17f3c4beab0572769ece87fd4ff0486d0cc6fb8950783",
+      "bytes": 27645
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/diagnostic-memory/actual-public-journal.jsonl.gz",
+      "sha256": "bbf53f5b99c2a81f6d40a66204024f27a1e068c8d6ab59ca3c502f1d09b8757a",
+      "bytes": 14346
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/diagnostic-memory/execution.json",
+      "sha256": "335f2e3d0519dccc6ee7e3eca4960fc13567379a30545a06eab083701996719c",
+      "bytes": 44367
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/diagnostic-memory/last-completed-prefix.json.gz",
+      "sha256": "4b2586293c2841e6e5a67e4517dad8a4de033bbdc1ee9d79b6b85f1fe304d96d",
+      "bytes": 296471
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/diagnostic-memory/reduction-scene-original.json",
+      "sha256": "afa63fbf7bd9bb18a0c0e59bcc6e051f8b9f9a1058b5b097f9fa587a73ebb496",
+      "bytes": 164348
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/final/gare-public-trace.json.gz",
+      "sha256": "dcee9fc15e36e962f33c09853c794b19c4c8bec1fca472a23e233b3c82b8388a",
+      "bytes": 51259
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/final/gare-three-levels.json",
+      "sha256": "e4e6ca1c54798c923ede7b822c821064fda2b71f9fe642d601ff33c606ce3881",
+      "bytes": 97906617
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/final/lkey-public-trace.json.gz",
+      "sha256": "37a6929fc500d2230b01c32ada069cae2926a8beca4507839ed8d39bc73c6e90",
+      "bytes": 32637
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/final/lkey-three-levels.json",
+      "sha256": "9e1f9a4ca5adeb08eef5acb15cea78573d14968d608c1c2fdefc773cde7cebb0",
+      "bytes": 19410174
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/final/logs/execution-gare.json",
+      "sha256": "f7b73c798885434c3b7d8bdbf4d123d015880d9e50086d4204d815aac288430e",
+      "bytes": 43915
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/final/logs/execution-lkey.json",
+      "sha256": "17e940ec7f6b30e45ec63f497801d5a4c7f36469c03118c576794fc3ead9f183",
+      "bytes": 43916
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/final/logs/gare-output.log.gz",
+      "sha256": "1b32c244d9fda2c1ca78b43b7b69a132e66ed7f6bad2f1eb611fdb71dd4a3570",
+      "bytes": 9760
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/final/logs/lkey-output.log.gz",
+      "sha256": "922c6d52ed0c70baf9faf42d5b15fc61187a7550dec85bac6bad94d6b37dc78f",
+      "bytes": 10969
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/final/source-manifest.json",
+      "sha256": "2cc28c36dbce4fe9cc1b3ec323256c627c3c7e2cc8661d6a20bae910fc451d37",
+      "bytes": 20822
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/gare-attempt4-framed-identity-recipes.json.gz",
+      "sha256": "58571aa75fdb311cde7fdfbd614b4e72c842d05af4bf99467bf7f91e068b6d13",
+      "bytes": 574881
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/gare-attempt4-original-component-comparison.json",
+      "sha256": "f1b44af1fc67b1d9f925e3e226e854917d3dbb37c55e5ed248d00f5b72157388",
+      "bytes": 2382073
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/gare-public-trace-attempt1.json.gz",
+      "sha256": "cd287c56e2035321eaff75f564cbdc43e33708f9cf8862dff25fc6f99c64c68e",
+      "bytes": 681
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/gare-public-trace-attempt2.json.gz",
+      "sha256": "24440da44daf386377fe826af3e0ee9a0d32e1078daa3dc9187b532c0fbbc26f",
+      "bytes": 13783
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/gare-public-trace.json.gz",
+      "sha256": "634e01d9b47b4a381e4f519f8a6685ad46ffbcc3ad55406b281f0aa349843d29",
+      "bytes": 50664
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/gare-strict-attempt-comparison.json",
+      "sha256": "16769d10ef8c0c067ce5bc3a9bddff0b37caad7b3b4725a9d70fee4586e6deed",
+      "bytes": 1321
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/gare-three-levels-attempt1.json",
+      "sha256": "50f66dd6e77d3aeaa03a195c4f60aba8bf6971b2a7fb82e9b59fc69fd06964e8",
+      "bytes": 22774
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/gare-three-levels-attempt2.json",
+      "sha256": "197324672c850eae558f667cbd0ad1eb2c3435d2185831b299e715f3928d31c1",
+      "bytes": 3230715
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/gare-three-levels.json",
+      "sha256": "9442003a153e87447b746927ea0b91379bdfa82f5b7ad3883c44cd24f56f55a7",
+      "bytes": 49097421
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/gril-recorded-public-replay.json",
+      "sha256": "ea543a71185cbb177632743623e856b4a469be76f94173d6e0433abdb05a914f",
+      "bytes": 5883406
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/gril-regression-comparison.json",
+      "sha256": "4d967e6b6a8e4319626a9f2835e67842932d0296ae7215f742edbe5536b7b4ca",
+      "bytes": 29330
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/history/0fb602-source-test-code.json",
+      "sha256": "60a7f73112feb85411927e52ad90143a81dceb5f066360719ad3898376779974",
+      "bytes": 60078
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/history/0fb602-source-test-code.tar.gz",
+      "sha256": "ff4f3835aee1d8f073c1ff5f8965c5e20d37853c25a06dbb1b01a287d8a959c1",
+      "bytes": 2350537
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/history/2d1295-source-test-code.json",
+      "sha256": "f4f71e0df01866caa598075818f52472c97a28e2b051d8e1ebe3a349d32e5996",
+      "bytes": 60095
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/history/2d1295-source-test-code.tar.gz",
+      "sha256": "f6aa8137edbedd86f363ec8358ab9c19af4177ab3ce595e5737c9db45db3bf45",
+      "bytes": 2346813
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/history/686159-source-test-code.json",
+      "sha256": "4c312a174ec068501092827a354224c2d9731850435fc6ad0aea4578213bb3b5",
+      "bytes": 81990
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/history/686159-source-test-code.tar.gz",
+      "sha256": "a28f6a38117d871d3205654526e7526a8f04b36a16edfe206dffc266c9bfa215",
+      "bytes": 2298374
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/history/a076-source-test-code.json",
+      "sha256": "35404020bc7374563bf94ce3966952d26a4021161c4a5f6f37ed859f7fe1cf94",
+      "bytes": 59853
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/history/a076-source-test-code.tar.gz",
+      "sha256": "0b30d279cbef4169a5336e7e3bd95dad560a71d38c0a41cea5c6d222fd6f7957",
+      "bytes": 2336324
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/history/c227-source-test-code.json",
+      "sha256": "e23444e454140e651fa7ba50d330a50254218824b1faf3a58b724ca36ac84346",
+      "bytes": 81351
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/history/c227-source-test-code.tar.gz",
+      "sha256": "346c4db7453c19508d5e28634d6a0409aa0f2059c93be7e6f699bca1cba2365f",
+      "bytes": 2277053
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/life-recorded-public-replay.json",
+      "sha256": "1ed4c0f28758b278677622d42eb03635f4c061c21dbbd5aeba3ee7256343fdde",
+      "bytes": 3315295
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/life-regression-comparison.json",
+      "sha256": "1e6a5626f31f604e02934ece91c7175bb98ef369c7490cee3e1d9159aabdd2b0",
+      "bytes": 129576
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/comparison-catl-receipt.json",
+      "sha256": "1d09f96a3e3b5ceaae6dacec041f2f9d4abd1b4350f576cf9a1f13d397564f9b",
+      "bytes": 45485
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/comparison-colm-receipt.json",
+      "sha256": "19d0d97b169d942ab4294df5a344048baf91ce6676bfc6e58ee447db46b132bd",
+      "bytes": 45490
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/comparison-gril-receipt.json",
+      "sha256": "4f27f0d7c7c013a2061a87a683621d01384e8278beaf9724030e43e8480fe1f0",
+      "bytes": 45490
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/comparison-life-receipt.json",
+      "sha256": "3db6ff91355738599d14b02d35c8e09673398099a1464d65dddd6b1280bd977d",
+      "bytes": 45502
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/comparison-sele-receipt.json",
+      "sha256": "338ce7d92b48916da3fb6649fbf1d5b3ff5af11c19b3dcdc47b00950a999d281",
+      "bytes": 45488
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/comparison-stck-receipt.json",
+      "sha256": "c0ee8e1ae904e7a9fa32a807f2e0a9ad8b24c97a4a6532825533093a867ba583",
+      "bytes": 45487
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/comparison-valv-receipt.json",
+      "sha256": "495dfe424149e9f07deea6bf97a565990204a9a29daf8742dff8ffcab5091e82",
+      "bytes": 45489
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/comparison-zipp-receipt.json",
+      "sha256": "d79332a831ca9376990256959d2ea8d9b99290d8b14a91e2010cec3681d6469d",
+      "bytes": 45488
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/execution-gare-attempt1.json",
+      "sha256": "ecfbb2edfd4ccd70574b21a099012b5361facee7bcc23d8c66c0d5522f144a7c",
+      "bytes": 43655
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/execution-gare-attempt2.json",
+      "sha256": "0b4c91009b99ea94ece170816ed05979ed392a785c8242596154262dc0d84f2f",
+      "bytes": 43661
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/execution-gare-attempt3.json",
+      "sha256": "6c4d899a092420f1f4bece8d49bff5986f6e34f753cd9fe07617a5a342934584",
+      "bytes": 43251
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/execution-gare.json",
+      "sha256": "3d676d7c8b153d10353a3576a63bbe32e5253ecc698a1eddbc02c654984c5eb1",
+      "bytes": 43616
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/gare-attempt1-output.log.gz",
+      "sha256": "3a6f81fd69bfc13d7c93751292477f9a7c9340c87beb7b70a0a353354471c520",
+      "bytes": 496
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/gare-attempt2-output.log.gz",
+      "sha256": "95a575ce3ae1a2e89faf34a50bdf686db25c9811231da944513b596d5777bf3e",
+      "bytes": 2363
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/gare-attempt3-output.log.gz",
+      "sha256": "78aca1d61394644d7e371bac6691557730c1b6818b3091a2cda9730c8248378c",
+      "bytes": 2826
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/gare-output.log.gz",
+      "sha256": "1025f8efb5e1a95d9f334a53c8a66e0bd5527e25740b1d41c3eaa597af94d51d",
+      "bytes": 9348
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-catl-output.log.gz",
+      "sha256": "c065c1f95fff188cf8489a38a5a2308de66e555af1e0cedf102abce37b50eb14",
+      "bytes": 6147
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-catl-receipt.json",
+      "sha256": "62899942a92d93917d5cab100e984c97d9a41070904c10fd6eff3c6940432bb5",
+      "bytes": 96195
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-colm-output.log.gz",
+      "sha256": "a107262ccfef98ff6e93460d862149c687d417d939a03ea24548d4ba52c1214c",
+      "bytes": 4095
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-colm-receipt.json",
+      "sha256": "6168c0a000c337e65a3de33c02f9778e5973a38c897ef3de2326781acf4e89db",
+      "bytes": 96217
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-comparison-catl-output.log.gz",
+      "sha256": "fc27f0f262503e6fc72d9bd8e8c5b607b7377f4c789ca854559c687d74063bdd",
+      "bytes": 109
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-comparison-colm-output.log.gz",
+      "sha256": "a2d84dd57cab6bf79e4281beac54c01d6b72e587c0548de932a1e6c6b64945c3",
+      "bytes": 112
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-comparison-gril-output.log.gz",
+      "sha256": "6753b3532e09f4f36830774b45d809e752239cb12ae727fef2665b34116ffa2c",
+      "bytes": 107
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-comparison-life-output.log.gz",
+      "sha256": "c319ae40c46d568383e5af1f2d2257d742381b49a7896a25c34fa9e54c2f580f",
+      "bytes": 111
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-comparison-sele-output.log.gz",
+      "sha256": "e70b8fcb7ea84594a44f0a11b0b37d271a0cf5ce42976af506bbddc0fcea1e7a",
+      "bytes": 110
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-comparison-stck-output.log.gz",
+      "sha256": "69bf498c036047c7daac76879e71bf1526cd3917bfadd05d961976b07c6e598e",
+      "bytes": 111
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-comparison-valv-output.log.gz",
+      "sha256": "17c641f98345b2484ca158379fea884e5312c83c3155e53f44c5f43ab48f6115",
+      "bytes": 109
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-comparison-zipp-output.log.gz",
+      "sha256": "af459b8a73cbd9ae8251c3ecc7a9604906f276e28f43bbb8d0751855ed9adecb",
+      "bytes": 112
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-gril-output.log.gz",
+      "sha256": "8f307f20a797de1a031a09f8b9fd43cb5bcc6c37d516fd39286679da3abd4b49",
+      "bytes": 3071
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-gril-receipt.json",
+      "sha256": "168ad8b3c6ebe8ea839f7903984412eae13acee56600b38943fbe0f130d34de1",
+      "bytes": 96217
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-life-output.log.gz",
+      "sha256": "8229de6a4060f5c7bf1738d29421451dd10d9c63c84714d9361e0c6254eec032",
+      "bytes": 6036
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-life-receipt.json",
+      "sha256": "366df73b8a60014bcd92189df99e7292e5074edacaaa3cbdcb5df077ca1e910b",
+      "bytes": 96254
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-sele-output.log.gz",
+      "sha256": "2d61a52e9e17ecea97f6d665cf74f499875f05a5d8e13e2967696c8eba54da81",
+      "bytes": 5401
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-sele-receipt.json",
+      "sha256": "c9bc3a9e431a2bc21f1615837ff234ce461283fb458aee3b82f68e6092301e04",
+      "bytes": 96209
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-stck-output.log.gz",
+      "sha256": "aa06aa58507f4df798013dbd697ca07777ae4e2023b7afde332362af940a0102",
+      "bytes": 3400
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-stck-receipt.json",
+      "sha256": "db42ddd4786c1824ce27f48857b9efef1199a9d52dea5749bf15ea5ca673246a",
+      "bytes": 96212
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-valv-output.log.gz",
+      "sha256": "2cd21018b7d6720ce89775e43b4609f5399a3ed86a2202674e42a445763f896e",
+      "bytes": 3920
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-valv-receipt.json",
+      "sha256": "7ecd1760ed1e808aef484489823750159220cf13baad5a8b4eaf1c7ea1d8a002",
+      "bytes": 96216
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-zipp-output.log.gz",
+      "sha256": "38a279c4d828597130dce2f45876f3d7c723c8863e458576045517bed5099ec8",
+      "bytes": 7875
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/logs/regression-zipp-receipt.json",
+      "sha256": "fbacfc1edb253591add8b7afd6852e6d5b32018dc0e53b50252d20eb680e0a54",
+      "bytes": 96207
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/regression-plan.json",
+      "sha256": "86a4b1e71dcc539c1acb80526abd35b72dac714b00368727ded8bc5adfb20713",
+      "bytes": 14529
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/regression-summary.json",
+      "sha256": "0a21e0a56968ed72ddecc80b572d48bb78d6f424d1d6d65563eefd59915fe97c",
+      "bytes": 7226
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/regression-verification.json",
+      "sha256": "216d19e90814c9924b93498ba371bf19e958affff56698602e144a643fa928bf",
+      "bytes": 843399
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/sele-recorded-public-replay.json",
+      "sha256": "d4ed39349fa3cab8164f9e35c391e326e67a8a78e019f64f4cd9ae24dc425859",
+      "bytes": 4021865
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/sele-regression-comparison.json",
+      "sha256": "fcb7695b22a8e82a270ed30effad372450d1ad6539d9be706357a30506a08069",
+      "bytes": 5306
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/source-manifest-attempt1.json",
+      "sha256": "1be9777d0d63c86781acc714fad2d1a9bc2103dd58d80d4979a6762a43d9a0aa",
+      "bytes": 20690
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/source-manifest-attempt2.json",
+      "sha256": "07746bc75f4d8c37e90cd5923de9d7979bdc5da54f5ece50f156a8c63db6ad06",
+      "bytes": 20690
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/source-manifest-attempt3.json",
+      "sha256": "96968fafdcc2289a68eb198a8a2edf24679b3062bf9534981b7d7086aaac924d",
+      "bytes": 20690
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/source-manifest.json",
+      "sha256": "9d086b81fa6f783407626b443ab3c0ac3cbe4cfcc0cb550df3f2510b77712f42",
+      "bytes": 20690
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/stck-recorded-public-replay.json",
+      "sha256": "8331fe6e8c302c9484583117a0db865dc32ddf001d395b8c16cb594e20232eeb",
+      "bytes": 215944
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/stck-regression-comparison.json",
+      "sha256": "1ac8d7adf2b0c617d74da7a04c853b68e6f377012e66b622bf2efc66cac9878a",
+      "bytes": 5306
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/validation/delta-tests-output.log.gz",
+      "sha256": "e2af2aebc8eafde2b4cf7bb71dfcad4faec42d3724d019c76d963ebd0ebcc927",
+      "bytes": 18907
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/validation/delta-tests-run.json",
+      "sha256": "b168b60d2b1286ff713b2beb243ad7cd7e2d59cefd267d28e0ce81bc610a3133",
+      "bytes": 91054
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/valv-recorded-public-replay.json",
+      "sha256": "d790ce44a3a4eb2908cdba666fb0d38bc86cf92507f9854ddf68bcc49772b62e",
+      "bytes": 2661162
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/valv-regression-comparison.json",
+      "sha256": "dd836902ff3394c294822c38b314c15e718486649002c5260af487d46300ce57",
+      "bytes": 5187
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/verified/execution-gare.json",
+      "sha256": "9c5ebc7ed87d590f6f817ec4b1ab4d91c6dd70bd1edc59161fe1664724bf8358",
+      "bytes": 44176
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/verified/gare-output.log.gz",
+      "sha256": "c7a69382ad5aff196ae41ead897073bfa5eb77375b0f9272234117546e808654",
+      "bytes": 10389
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/verified/gare-public-trace.json.gz",
+      "sha256": "4172c891d3f40728dff9164c086034e13dc27ac5b837c07dca485b81ac7ea46c",
+      "bytes": 49131
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/verified/gare-three-levels.json",
+      "sha256": "8cc72eeaea6625e0a16e0a2aee89467cc3fee3e3f1de0d219b95699314df25cc",
+      "bytes": 100266106
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/verified/source-manifest.json",
+      "sha256": "dffc5948c5f8386d031721e829925f0a8142b195f333572e908896e4efe3e433",
+      "bytes": 20945
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/zipp-recorded-public-replay.json",
+      "sha256": "3d4907ebf13c589b427ed72cf0ab91bcd84cca70c09769b1916c23feeadbfd7d",
+      "bytes": 2623749
+    },
+    {
+      "path": "docs/migration/native-campaigns-v52/zipp-regression-comparison.json",
+      "sha256": "935ebea0465e00d4365ac43243becf5fa5376e4f26d79c4bf239471d20de04a2",
+      "bytes": 16898
+    }
+  ],
+  "generator": {
+    "path": "scripts/restore-v52-evidence.py",
+    "sha256": "39cfac47a439d5fc2cf478c9943c02cdbba168f9ce2d43afc0633c066a3a81af",
+    "bytes": 22180
+  },
+  "qualification": "Storage only. Original evidence bytes, paths, success and failure claims remain unchanged. Restore before using historical validators; no game, native agent or test suite is run."
+}

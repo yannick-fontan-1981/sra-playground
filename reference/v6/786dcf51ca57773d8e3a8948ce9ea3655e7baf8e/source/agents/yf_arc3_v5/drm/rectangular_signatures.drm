@@ -1,0 +1,299 @@
+{
+  "module_id":"rectangular_signatures",
+  "declarations":[
+    {
+      "id":"principle.signature_receipt_test_requires_current_creation_scope","kind":"principle",
+      "premises":["observed_creation_operator","currently_intact_signature_contributors","current_outline_contact_and_frame_bounds"],
+      "invariants":["one_bounded_creation_test_then_observe","receipt_and_stability_are_unverified_until_response","preserve_actual_resource_and_release_guards"],
+      "falsifiers":["creation_refused_or_changes_other_material","combined_signatures_not_received","construction_unstable"],
+      "reason_refs":["reason.current_observed_creation_scope_is_explicit_grounding_not_a_generic_effect_probe"]
+    },
+    {
+      "id":"policy.current_signature_contributor_probe_presence","kind":"selection_policy",
+      "evaluation":"declared_eligibility_single","supported_operators":["SELECT"],
+      "input_contract":"yf_arc3_v5.authority_input.selection.v1",
+      "output_contract":"yf_arc3_v5.authority_output.selection.v1",
+      "selection_eligibility_conditions":[{"field":"active_goal_ref","operator":"equals","expected":"goal.provide_compound_signature_contributors"},{"field":"signature_query_eligible","operator":"equals","expected":true}],
+      "reason_refs":["reason.observed_partial_receipt_opens_explicit_missing_contributor_child"]
+    },
+    {
+      "id":"principle.signature_goal_requires_created_marker_and_disjoint_source_evidence",
+      "kind":"principle","reason_refs":["reason.partial_marker_receipt_opens_missing_contributor_question"],
+      "invariants":["palette_correspondence_is_a_revisable_goal_hypothesis","no_contact_load_or_completion_law_implied"]
+    },
+    {
+  "id": "policy.acquire_created_signature_goal",
+  "kind": "selection_policy",
+  "evaluation": "declared_lexicographic_order",
+  "supported_operators": [
+    "SELECT"
+  ],
+  "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+  "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+  "declared_alternative_refs": [
+    "signature.retained_goal_supposition",
+    "signature.goal_supposition",
+    "signature.unqualified"
+  ],
+  "reason_refs": [
+    "reason.partial_marker_receipt_opens_missing_contributor_question"
+  ],
+  "fact_projections": [
+    {
+      "id": "projection.signature.current_supported_question_retained",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "signature.retained_goal_supposition"
+        },
+        {
+          "field": "same_context_epoch",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "signature_correspondence_count",
+          "operator": "equals",
+          "expected": 1
+        },
+        {
+          "field": "signature_correspondence_domain_complete",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "signature_received_count",
+          "operator": "greater_than",
+          "expected": 0
+        },
+        {
+          "field": "signature_positive_overlap_count",
+          "operator": "equals",
+          "expected": 1
+        },
+        {
+          "field": "current_created_signature_goal_claim_count",
+          "operator": "greater_than",
+          "expected": 0
+        }
+      ],
+      "static_facts": {
+        "applicable": true,
+        "signature_case": "retained_question"
+      }
+    },
+    {
+      "id": "projection.signature.partial_receipt",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "signature.goal_supposition"
+        },
+        {
+          "field": "same_context_epoch",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "signature_correspondence_count",
+          "operator": "equals",
+          "expected": 1
+        },
+        {
+          "field": "signature_correspondence_domain_complete",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "signature_received_count",
+          "operator": "greater_than",
+          "expected": 0
+        },
+        {
+          "field": "signature_positive_overlap_count",
+          "operator": "equals",
+          "expected": 1
+        },
+        {
+          "field": "current_created_signature_goal_claim_count",
+          "operator": "equals",
+          "expected": 0
+        }
+      ],
+      "static_facts": {
+        "applicable": true,
+        "signature_case": "partial_receipt"
+      }
+    },
+    {
+      "id": "projection.signature.unqualified",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "signature.unqualified"
+        }
+      ],
+      "static_facts": {
+        "applicable": true,
+        "signature_case": "unqualified"
+      }
+    }
+  ],
+  "selection_tiers": [
+    {
+      "id": "tier.signature.current_supported_question",
+      "all_conditions": [
+        {
+          "field": "signature_case",
+          "operator": "equals",
+          "expected": "retained_question"
+        }
+      ],
+      "reason_ref": "reason.observed_created_marker_is_more_than_static_similarity"
+    },
+    {
+      "id": "tier.signature.partial",
+      "all_conditions": [
+        {
+          "field": "signature_case",
+          "operator": "equals",
+          "expected": "partial_receipt"
+        }
+      ],
+      "reason_ref": "reason.observed_created_marker_is_more_than_static_similarity"
+    },
+    {
+      "id": "tier.signature.unknown",
+      "all_conditions": [
+        {
+          "field": "signature_case",
+          "operator": "equals",
+          "expected": "unqualified"
+        }
+      ],
+      "reason_ref": "reason.unqualified_correspondence_cannot_bind_a_construction_goal"
+    }
+  ],
+  "selection_tie_breakers": [
+    {
+      "field": "signature_case",
+      "preferred_order": "minimize"
+    }
+  ],
+  "meaning_template_ref_by_alternative": {
+    "signature.goal_supposition": "rule.created_signature_goal_supposition"
+  },
+  "configuration": {
+    "source_canonical_claim_join_projection": true,
+    "canonical_claim_join_projections": [
+      {
+        "output_field": "current_created_signature_goal_claim_refs",
+        "count_output_field": "current_created_signature_goal_claim_count",
+        "maximum_computed_joins": 16,
+        "fact_equalities": {
+          "same_context_epoch": true,
+          "signature_correspondence_domain_complete": true
+        },
+        "input_fields": [
+          "context_epoch",
+          "signature_geometry_token",
+          "signature_reference_bbox",
+          "signature_values",
+          "signature_source_bboxes"
+        ],
+        "join": {
+          "max_candidates_per_stage": 256,
+          "max_comparisons": 2048,
+          "max_rows": 16,
+          "stages": [
+            {
+              "predicate": "created_marker_supports_compound_reference_goal_supposition",
+              "proof_rules": [
+                "rule.created_signature_goal_supposition"
+              ],
+              "statuses": [
+                "supported",
+                "established"
+              ],
+              "constraints": [
+                {
+                  "field": "term_argument.0.attributes.projection_contract",
+                  "operator": "equals",
+                  "operand": {
+                    "literal": "yf_arc3_v5.created_signature_goal.v1"
+                  }
+                },
+                {
+                  "field": "term_argument.0.attributes.context_epoch",
+                  "operator": "equals",
+                  "operand": {
+                    "fact": "context_epoch"
+                  }
+                },
+                {
+                  "field": "term_argument.0.attributes.signature_geometry_token",
+                  "operator": "equals",
+                  "operand": {
+                    "fact": "signature_geometry_token"
+                  }
+                },
+                {
+                  "field": "term_argument.0.attributes.signature_reference_bbox",
+                  "operator": "equals",
+                  "operand": {
+                    "fact": "signature_reference_bbox"
+                  }
+                },
+                {
+                  "field": "term_argument.0.attributes.signature_values",
+                  "operator": "equals",
+                  "operand": {
+                    "fact": "signature_values"
+                  }
+                },
+                {
+                  "field": "term_argument.0.attributes.signature_source_bboxes",
+                  "operator": "equals",
+                  "operand": {
+                    "fact": "signature_source_bboxes"
+                  }
+                }
+              ],
+              "bindings": {
+                "goal_ref": "arguments.0"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+},
+    {
+      "id":"rule.created_signature_goal_supposition","kind":"rule",
+      "evaluation":"project_requested_conclusions","supported_operators":["DERIVE"],
+      "input_contract":"yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract":"yf_arc3_v5.authority_output.derivation.v1","relation_family":"dynamic",
+      "reason_refs":["reason.partial_marker_receipt_opens_missing_contributor_question"],
+      "premises":["created_patch_repeats_one_external_signature","reference_region_contains_multiple_external_signatures"],
+      "invariants":["reference_goal_and_signature_inheritance_remain_hypotheses","stable_geometry_is_not_a_load_certificate"],
+      "falsifiers":["marks_do_not_follow_geometric_contributors","combined_receipt_is_not_accepted","current_reference_or_sources_changed"],
+      "term_templates":[{
+        "id_pattern":"supposition.created_signature_goal.{context_epoch}.{signature_geometry_token}",
+        "kind":"goal","label":"provide the reference signature set through observed created contributors",
+        "required_fields":["context_epoch","signature_geometry_token","signature_reference_bbox","signature_values","signature_source_bboxes","signature_positive_overlap_rows","signature_created_bbox"],
+        "static_attributes":{"projection_contract":"yf_arc3_v5.created_signature_goal.v1","commitment":"revisable","acceptance_law_established":false,"stability_law_established":false},
+        "attribute_bindings":{"context_epoch":"context_epoch","signature_geometry_token":"signature_geometry_token","signature_reference_bbox":"signature_reference_bbox","signature_values":"signature_values","signature_source_bboxes":"signature_source_bboxes","signature_positive_overlap_rows":"signature_positive_overlap_rows","signature_created_bbox":"signature_created_bbox"}
+      }],
+      "claim_templates":[{
+        "id_pattern":"claim.created_signature_goal.{context_epoch}.{signature_geometry_token}",
+        "predicate":"created_marker_supports_compound_reference_goal_supposition","family":"dynamic","epistemic_status":"supported",
+        "argument_patterns":["supposition.created_signature_goal.{context_epoch}.{signature_geometry_token}"],
+        "required_fields":["context_epoch","signature_geometry_token"]
+      }]
+    }
+  ]
+}

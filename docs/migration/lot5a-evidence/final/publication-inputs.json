@@ -1,0 +1,129 @@
+{
+  "schema": "logos-engine.lot5a-publication-inputs.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T21:49:25.699467+00:00",
+  "generator": {
+    "path": "docs/migration/lot5a-evidence/record-publication-inputs.py",
+    "bytes": 7013,
+    "sha256": "db03a3cca13b2f7bbab61498c2c4eedbe3c734f5ee0efd5f1f6a91156fb26e35"
+  },
+  "nativeVersion": "0.53.0",
+  "nativeSourceDigest": "d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f",
+  "fileInventories": {
+    "native": 283,
+    "archiveMembers": 294,
+    "sourceAndTests": 647,
+    "buildInputs": 348
+  },
+  "nativeAgentWorker": {
+    "path": "dist/assets/v6-agent-worker-DyiW3O_3.js",
+    "sha256": "21232c488700e1572c68185b0a8835b178308f34ce945b70b40f2e232b583673",
+    "bytes": 6641334
+  },
+  "costGlobalStatus": "accepted_under_predeclared_owner_cost_rule",
+  "historicalStrictPassed": false,
+  "postMeasurementIoCorrection": true,
+  "receipts": [
+    {
+      "path": "docs/migration/lot5a-evidence/final/source-manifest.json",
+      "bytes": 33584,
+      "sha256": "631951d71c675e5c29f712e92724f17e446915807570581c049357bb97bf46b3"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/source-archive.json",
+      "bytes": 35215,
+      "sha256": "f7aadc6d78c1139dff907b4a4f378cc92aad4b95e6b1bcbc1fb1cdcda44397be"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/test-expectation-correction/validation/delta-tests-run.json",
+      "bytes": 122235,
+      "sha256": "b214a95000c34933cceb10ab1aa395ed1116d86da94f3e5df475ad018ddd6cd7"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/test-expectation-correction/validation/checks-run.json",
+      "bytes": 77881,
+      "sha256": "71ef39a74a4829d27ce86903af76498a7f599b7610b0b68ad8197a8a2096466f"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/delivery-integrity.json",
+      "bytes": 8880,
+      "sha256": "aa30b0571a72d49a102b592de3d8bddc5b68ad33a77e9676b00e94ff957ec1ff"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/readiness.json",
+      "bytes": 121997,
+      "sha256": "85a1ab694c88cca9f216ed7ca5e731377ee6eaea8d14e784d47bd15d89a88952"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/window.json",
+      "bytes": 10145,
+      "sha256": "0be3eceb2139347ffa5efa0200fc1f68c98544517d0c521f3eee71b468401c5c"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/owner-growth-contract.json",
+      "bytes": 3799,
+      "sha256": "f48f3289cd31b150cfcf7aaaf3dc1386f22e2731b7934a1a431bd5a0bafea1c1"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/owner-growth-comparison.json",
+      "bytes": 249277,
+      "sha256": "7340d02ad452a84ebcc24a334670f275d2871c34655225694dced2e100cd56f8"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/owner-growth-review.json",
+      "bytes": 866984,
+      "sha256": "5419d66e691fd44a66c6398da917aec12e48fd4f104c79dc5f3041ff7dfebbef"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/aggregation-failure.json",
+      "bytes": 2989,
+      "sha256": "2e8b075f458def3b670acd5306fe9db438b8fa65ba73341d0a6d75f92331e623"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/aggregation-failure.log",
+      "bytes": 204708,
+      "sha256": "be915a192d40ad5cf02969f7c0f0f11d400e2219c75071e5008573d25a79351e"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/log-transport.json",
+      "bytes": 2781,
+      "sha256": "fce0a0bd61063a80490bf6131c4924c89caf70fb4271972c1f6044d105020090"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/results.md",
+      "bytes": 36942,
+      "sha256": "c91450642b408008d9297e37b9e9a363b379608603afcdd08252c9389e143e28"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/results-render.json",
+      "bytes": 72483,
+      "sha256": "5e70adadd7d4bab803db3d5d0f68ff1fdf0bbe28e740b66314b45f8798f0a564"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/published-predecessor-reconciliation.json",
+      "bytes": 1777,
+      "sha256": "3f93e4a01c0beabfc4dc38f48b8a13b08421e71a8ce0d818deb133611a850563"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/browser/browser-qa.json",
+      "bytes": 1371,
+      "sha256": "cf43075fcba25875951dfc9fd7b87c35d16a37fb336550441870d93642c2ca69"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/diagnostic/final-cost-independent-review.json",
+      "bytes": 28493,
+      "sha256": "ba8c9513f66b089b1c6c4fbba822369c95684a1d7b7211a11dfe25c8582132c1"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/evidence-byte-transport.json",
+      "bytes": 3778,
+      "sha256": "6f42893496e225e02579745dcd81a9b2c3ddd907a61781297c9a7aa7e3aa03ca"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/diagnostic/owner-cost-directory-correction-v1.json",
+      "bytes": 16360,
+      "sha256": "95aed6b270a5ed97ec1dc0b4882250f188dc059588b6aea1a30c80a0af7c3a4e"
+    }
+  ],
+  "qualification": "File integrity and release provenance only. No test, build, game or cost sample rerun. The already compiled worker and every recorded source/test/build input are unchanged. All 32 measured sessions and eight declared warmups remain in the four original reports. The historical strict failure remains failed; the independently reviewed supplementary decision retains its premeasurement structural rule and explicit postmeasurement I/O repair. This receipt does not assert publication, full caller parity, a sixth WEAV level, or a bound on arbitrary long-session latency or memory."
+}

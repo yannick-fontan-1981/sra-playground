@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.lot8b.recorded-regression-launch.v1",
+  "declaredAt": "2026-11-12T04:56:22.202702+00:00",
+  "sourceCheckpoint": "82c2229ce0c712d279b9422703cb3c820e4ae7e1",
+  "validatedNativeCode": "2583d81d856c13295040db88f5df8b3a99906bdc",
+  "command": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=15s",
+    "2475s",
+    "python",
+    "-B",
+    "docs/migration/lot8b-evidence/tools/delivery/regressions/run.py",
+    "--source-manifest",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/candidate-native.json",
+    "--output",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01"
+  ],
+  "parentPlan": "plan.json",
+  "nativeCanonicalDigest": "3ff1d9ad56e22aedc0fee3a0da6a3af50a1da0bc14a0ba01cb38272ba85234be",
+  "officialPerformanceMeasurement": false,
+  "globalLockAcquired": false,
+  "peerAvailabilityWait": false,
+  "LKEYIncluded": false,
+  "workingTreeOtherUncommittedPreparationsExcludedFromNativeInputs": true
+}

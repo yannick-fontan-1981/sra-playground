@@ -1,0 +1,35 @@
+{
+  "schema": "logos-engine.v42.browser-verification.v1",
+  "game": "THER",
+  "surface": "managed development preview from the same frozen checkout",
+  "nativeSourceManifestDigest": "6567be12230880198a7b4b085999ecda9354487599e728ee1ae27455f7056d04",
+  "observedUrl": "http://127.0.0.1:4173/?game=THER&level=5",
+  "mode": "SRA Agent Native TS",
+  "initialLevel": 1,
+  "initialActions": 0,
+  "initialSolvedLevels": 0,
+  "controlsUsed": [
+    "Choose THER",
+    "SRA Agent Native TS",
+    "Run to next level (four successive natural boundaries)"
+  ],
+  "cumulativeActionsAtBoundaries": [
+    4,
+    7,
+    11,
+    15
+  ],
+  "solvedLevels": 4,
+  "completedPlans": 6,
+  "finalVisibleLevel": 5,
+  "visibleStatus": "Level completed. V6 acquired the outcome and retained its transfer memory. Continue when ready.",
+  "visibleVictoryHeading": null,
+  "inspectionClosedAtStart": true,
+  "inspectionOpenedDuringRun": false,
+  "manualGameActions": 0,
+  "agentSessionResets": 0,
+  "levelJumps": 0,
+  "screenshot": "ther-browser-four-levels.png",
+  "screenshotSha256": "66f0db7c355c83b2a5e66836e20a2d1cb15eb5473e8d3c6f6cceb11d5fcbc811",
+  "qualification": "Observed in the real browser interface on the managed preview. Four levels completed, not a full-game WIN. The UI pauses at each natural boundary with the session retained; the bounded smoke campaign stops at its declared target. Production publication is verified separately by the Sites deployment result."
+}

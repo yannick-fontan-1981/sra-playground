@@ -1,0 +1,27 @@
+{
+  "schema": "logos-engine.lot7a-cumulative-case-execution.v1",
+  "status": "failed",
+  "startedAt": "2026-11-10T20:06:33.686678+00:00",
+  "priorCumulativeSeconds": 1120.6761759909998,
+  "declaredTimeoutSeconds": 1200,
+  "clockReset": false,
+  "commands": [
+    {
+      "command": [
+        "python",
+        "-B",
+        "scripts/run-v53-campaign-proof.py",
+        "LKEY",
+        "3",
+        "docs/migration/lot7a-evidence/integrated-final"
+      ],
+      "exitCode": 1,
+      "timedOut": false
+    }
+  ],
+  "error": "Case command failed with 1",
+  "finishedAt": "2026-11-10T20:07:24.863405+00:00",
+  "chargedElapsedSeconds": 51.176727,
+  "cumulativeSeconds": 1171.8529029909998,
+  "remainingSeconds": 1228.1470970090002
+}

@@ -1,0 +1,79 @@
+{
+  "schema": "logos-engine.native-cost-protocol-preparation.v1",
+  "preparedAt": "2026-11-10T15:17:30.775572-03:00",
+  "status": "source_freezes_verified_not_functional_readiness",
+  "measurementExecuted": false,
+  "baselineCheckout": "/workspace/sites/sra-lot7a-base78",
+  "candidateCheckout": "/workspace/sites/sra-lot7a-20261110/.sites-checkout",
+  "baseline": {
+    "nativeVersion": "0.49.0",
+    "siteVersion": 78,
+    "commit": "8fa6b261b8b23ac8d232e60c9c179e2f3407d82f",
+    "nativeDigest": "d6cb9abdf48a9062936d4647dbd809dc4cee1d1528f85e973fda83c7af8e6054",
+    "nativeFiles": 268
+  },
+  "candidate": {
+    "nativeVersion": "0.50.0",
+    "nativeDigest": "8492388162915bd01be1279d645870d366f0fd306e4f31ea47e8b65aafebac7e",
+    "nativeFiles": 274,
+    "sourceBaseCommit": "7c4c34797bf0bc374b448c985d0dee2fadfb81ca",
+    "checkoutHead": "7c4c34797bf0bc374b448c985d0dee2fadfb81ca",
+    "nativeSourceCommit": "7c4c34797bf0bc374b448c985d0dee2fadfb81ca",
+    "nativeWorktreeChanges": [],
+    "siteVersion": null,
+    "qualification": "The frozen digest and archive identify candidate bytes. A null source commit means the checkout HEAD is ancestry only. No candidate publication is asserted."
+  },
+  "baselineManifest": {
+    "path": "docs/migration/lot7a-evidence/baseline/source-manifest.json",
+    "sha256": "5ab90c3cbd2f8356ba27025052a1c40cd16e7cb38326a89a48ac6e53cb9b3a24",
+    "bytes": 31765
+  },
+  "candidateManifest": {
+    "path": "docs/migration/lot7a-evidence/final/source-manifest.json",
+    "sha256": "0d4b4d98847322eda2a3c1d431cca503416815a97c55627e62d6ba6d8522b7cc",
+    "bytes": 32481
+  },
+  "candidateArchiveManifest": {
+    "path": "docs/migration/lot7a-evidence/final/source-archive.json",
+    "sha256": "3474f65aef3f358b779f7b945a0f31b3c51b65353f26c6c697dfe5c31adce818",
+    "bytes": 34112
+  },
+  "retainedTools": [
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613",
+      "bytes": 8933
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+      "bytes": 9861
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4",
+      "bytes": 17810
+    },
+    {
+      "path": "scripts/review-native-global-cost-window.py",
+      "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940",
+      "bytes": 22204
+    },
+    {
+      "path": "scripts/review-native-global-cost-budget.py",
+      "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341",
+      "bytes": 8476
+    }
+  ],
+  "qualification": "Local source identities verified. No tests, builds, game, browser, benchmark, readiness or isolation claims are produced."
+}
