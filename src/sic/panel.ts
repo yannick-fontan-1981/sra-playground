@@ -1260,6 +1260,11 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
         ['Configured search limits', `${recoveryDecision.maxDepth} moves · ${recoveryDecision.maxNodes} states`]);
       if (recoveryDecision.objective) factsList.push(['Recovery objective', recoveryDecision.objective.label]);
       if (recoveryDecision.packDigest) factsList.push(['Pack revision', recoveryDecision.packDigest.slice(0, 12)]);
+      const recoveryNeed = last.nativeCheck?.recoveryNeed;
+      if (recoveryNeed?.status === 'assigned') factsList.push(['Need status', 'Assigned · the engine checked this step and continues the search.']);
+      if (recoveryNeed?.status === 'satisfied') factsList.push(['Need status', 'Satisfied · the game confirmed progression.']);
+      if (recoveryNeed?.status === 'refuted') factsList.push(['Need status', 'Refuted · the revised projection disagreed with the return.']);
+      if (recoveryNeed?.status === 'expired') factsList.push(['Need status', 'Expired · the current evidence can no longer authorize recovery.']);
     }
     for (const [name, description] of factsList) {
       const term = document.createElement('dt'), value = document.createElement('dd');

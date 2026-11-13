@@ -1,5 +1,5 @@
 import { cropReturn } from '../logos-engine/v6-public-return-visuals.ts';
-import { rootedRecoveryStrategy } from './active-recovery.ts';
+import { rootedRecoveryStrategy, type ContactRecoveryNeed } from './active-recovery.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 
 export interface NativeStep {
@@ -61,7 +61,8 @@ export interface NativeResolution {
   readonly pending: boolean;
   readonly steps: readonly NativeStep[];
   readonly nextIndex: number | null;
-  readonly outcome: { readonly family: string; readonly matched: boolean | null; readonly reason: string | null } | null;
+  readonly outcome: { readonly family: string; readonly matched: boolean | null; readonly reason: string | null;
+    readonly recoveryNeed?: { readonly id: string; readonly status: ContactRecoveryNeed['status'] } } | null;
   readonly history: readonly { readonly sequence: number; readonly level: number; readonly family: string;
     readonly matched: boolean | null; readonly reason: string | null }[];
 }
@@ -246,6 +247,11 @@ export function readNativeResolution(agent: {
     ? { strategy: rootedRecoveryStrategy.label, need: rootedRecoveryStrategy.need, objective: recoveryObjective,
       maxDepth, maxNodes, packDigest: typeof sic.packDigest === 'string' && /^[a-f0-9]{64}$/.test(sic.packDigest) ? sic.packDigest : null }
     : undefined;
+  const returnedNeed = record(result?.sic_need);
+  const needStatus = returnedNeed?.status;
+  const recoveryNeed = typeof returnedNeed?.id === 'string' && /^sic-need:[a-f0-9]{64}$/.test(returnedNeed.id)
+    && (needStatus === 'assigned' || needStatus === 'satisfied' || needStatus === 'refuted' || needStatus === 'expired')
+    ? { id: returnedNeed.id, status: needStatus } : undefined;
   const previousProjection = routeIndex > 0 && Array.isArray(rooted?.predictions) ? record(rooted.predictions[routeIndex - 1]) : null;
   const rootBox = bounds(previousProjection?.root ?? rootedScene?.root);
   if (rootBox) subjects.push({ label: 'Controlled root', box: rootBox });
@@ -290,7 +296,7 @@ export function readNativeResolution(agent: {
     guard: label(guard?.reason),
     nextIndex: pending && guard && Number.isSafeInteger(guard.index) ? Number(guard.index) : null, steps,
     history, outcome: outcomeFamily && (result?.matched === null || typeof result?.matched === 'boolean')
-      ? { family: outcomeFamily, matched: result.matched, reason: label(result.reason) } : null };
+      ? { family: outcomeFamily, matched: result.matched, reason: label(result.reason), ...(recoveryNeed ? { recoveryNeed } : {}) } : null };
 }
 export interface DecisionSprites {
   readonly family: string | null;

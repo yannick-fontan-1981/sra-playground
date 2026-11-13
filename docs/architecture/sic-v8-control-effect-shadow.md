@@ -144,4 +144,6 @@ La configuration de récupération s’exporte en JSON avec l’identifiant de c
 
 La stratégie de récupération émet le sous-objectif stable « trouver un accès qui remet les pièces dans l’ordre de référence », relié au but natif de terminer le niveau. Il apparaît dans Objectifs et Plans d’actions pendant la résolution. Passé conserve le sous-objectif après la frontière et relie l’épisode à la stratégie et à ses preuves.
 
+Le journal natif conserve le besoin de récupération dès le retour 12. Son identité lie le sujet, l’époque, le but parent, le contrat de satisfaction et le retour d’origine. Les six retours suivants conservent l’affectation du même besoin. Le retour 19 satisfait son contrat par la progression officielle. Stratégies affiche ces états depuis les retours natifs. Une contradiction le réfute et la perte de portée le fait expirer. Le test ciblé vérifie également la restauration du besoin depuis un événement du journal.
+
 Le résumé natif est construit après la décision, hors de la mesure du temps actif. L’affichage est différé au prochain rendu du navigateur après la fin d’une opération. Les tests couvrent la matrice, la révision, la portée, le fallback, l’ambiguïté, les retours natifs et la parité du transport V6 jusqu’à un retour terminal.

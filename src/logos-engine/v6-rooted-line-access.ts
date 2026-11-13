@@ -7,7 +7,7 @@ import { measureRootedLine, physicalRootedLine, projectedRootedLine } from './v6
 import { rootedLineEffect, planRootedLine } from './v6-rooted-line-mechanics.ts';
 import { planCellPush, witnessedCellPush } from './v6-rooted-line-revision.ts';
 import { resolveRootedRecovery } from './v6-rooted-line-recovery-operations.ts';
-import { defaultRecoveryPack, rootedRecoveryStrategy } from '../sic/active-recovery.ts';
+import { admitContactRecoveryNeed, defaultRecoveryPack, rootedRecoveryStrategy, type ContactRecoveryNeed } from '../sic/active-recovery.ts';
 import { recoveryRevision } from '../sic/recovery-pack.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
 import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts';
@@ -38,7 +38,14 @@ export function rootedLineAfter(proposal: R, index: number, _rows: NativeRows, l
   if (!truth(plan)) throw new TypeError('Rooted line outcome requires rooted_line_plan');
   const scene = measureRootedLine(later), boundary = !equal([meta.epoch, meta.score], [plan.epoch, plan.score]), expected = plan.predictions[index];
   const matched = boundary || expected === null || scene === null ? null : equal(physicalRootedLine(scene), expected);
-  return { matched, seal_prefix: boundary || matched !== true, reason: matched ? 'rooted_line_projection' : 'rooted_line_unknown_or_refuted' };
+  const need = plan.search?.sic_decision?.needId;
+  const status = need ? recoveryStatus(meta.score > plan.score, boundary, matched) : null;
+  return { matched, seal_prefix: boundary || matched !== true, reason: matched ? 'rooted_line_projection' : 'rooted_line_unknown_or_refuted',
+    ...(need ? { sic_need: { id: need, status } } : {}) };
+}
+
+function recoveryStatus(advanced: boolean, boundary: boolean, matched: boolean | null): ContactRecoveryNeed['status'] {
+  return advanced ? 'satisfied' : boundary ? 'expired' : matched === true ? 'assigned' : matched === false ? 'refuted' : 'expired';
 }
 
 export class RootedLineMemory {
@@ -74,7 +81,8 @@ export class RootedLineMemory {
     const memory = structuredClone(this.lineMemory);
     if (memory.epoch !== observation.level_epoch) { memory.current = null; memory.tried = []; memory.epoch = observation.level_epoch; }
     const refutations = memory.refuted.filter((item: R) => item.epoch === observation.level_epoch);
-    const revision = resolveRootedRecovery(config.sic_recovery ?? defaultRecoveryPack, refutations, scene.layout, observation.observation_ref);
+    const revision = resolveRootedRecovery(config.sic_recovery ?? defaultRecoveryPack, refutations, scene.layout, observation.observation_ref,
+      memory.sic_recovery_need);
     if (revision.status === 'unresolved') {
       return { status: 'unknown', reason: 'conditional_contact_model_refuted', block_unrelated_probe: true };
     }
@@ -162,12 +170,28 @@ export class RootedLineMemory {
               && witnessedCellPush(first, second, plan.predictions[index], memory.controls[command.action_ref])) {
             counterexample.cell_push_witness = true;
             counterexample.layout = first.layout;
+            const need = admitContactRecoveryNeed({
+              before: counterexample.before, after: counterexample.after, layout: first.layout, cell_push_witness: true,
+            }, first.layout);
+            if (need) memory.sic_recovery_need = need;
           }
           memory.refuted.push(counterexample);
         }
       }
     }
     if (boundary) { memory.current = null; memory.epoch = after.level_epoch; memory.tried = []; }
+    const need = memory.sic_recovery_need as ContactRecoveryNeed | undefined;
+    if (need && (need.status === 'admitted' || need.status === 'assigned')) {
+      const bound = plan.search?.sic_decision?.needId === need.id;
+      if (bound) {
+        const advanced = Number.isSafeInteger(before.levels_completed) && Number.isSafeInteger(after.levels_completed)
+          && after.levels_completed > before.levels_completed;
+        const status = recoveryStatus(advanced, boundary, detail.matched);
+        memory.sic_recovery_need = { ...need, status, outcomeRef: after.observation_ref };
+      } else if (boundary) {
+        memory.sic_recovery_need = { ...need, status: 'expired', outcomeRef: after.observation_ref };
+      }
+    }
     memory.evidence = [...new Set([...memory.evidence, before.observation_ref, after.observation_ref])];
     const event = structuredClone({ kind: 'observed_rooted_line', memory, detail }); this.applyEvent(event); return [event];
   }

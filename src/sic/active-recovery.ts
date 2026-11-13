@@ -1,4 +1,6 @@
-/** The first executable SIC capability. Configuration cannot supply actions or evidence. */
+import { symbolicDigest } from '../logos-engine/v6-hash.ts';
+
+/** Validated settings for the contact-recovery capability. */
 export interface RecoveryPack {
   readonly version: 1;
   readonly mode: 'active' | 'shadow';
@@ -29,6 +31,7 @@ export function compileRecoveryPack(input: unknown = defaultRecoveryPack): Recov
 export const rootedRecoveryStrategy = Object.freeze({
   id: 'revise_rooted_contact',
   label: 'Revise the contact projection',
+  needKind: 'restore_rooted_contact_projection',
   need: 'Restore a projection that accounts for the contact chain',
   objective: { id: 'find_ordered_contact_access', label: 'Find an access that puts the pieces in the reference order' },
 });
@@ -44,6 +47,18 @@ type ReturnWitness = {
   readonly layout?: string;
 };
 
+export interface ContactRecoveryNeed {
+  readonly id: string;
+  readonly kind: typeof rootedRecoveryStrategy.needKind;
+  readonly subject: string;
+  readonly scope: string;
+  readonly parentObjective: 'G_official_completion';
+  readonly satisfactionContract: 'official_progress_under_guarded_access';
+  readonly evidence: readonly [string, string];
+  readonly status: 'admitted' | 'assigned' | 'satisfied' | 'refuted' | 'expired';
+  readonly outcomeRef?: string;
+}
+
 function readObservationRef(value: string) {
   const match = /^(.+:epoch:[1-9]\d*):revision:([1-9]\d*):frame:.+$/.exec(value);
   if (!match) return null;
@@ -51,18 +66,30 @@ function readObservationRef(value: string) {
   return Number.isSafeInteger(revision) ? { scope: match[1], revision } : null;
 }
 
-export function selectRootedRecovery(pack: RecoveryPack, refutations: readonly ReturnWitness[], layout: string, observationRef: string) {
+export function admitContactRecoveryNeed(witness: ReturnWitness, layout: string): ContactRecoveryNeed | null {
+  const before = readObservationRef(witness.before), after = readObservationRef(witness.after);
+  if (!before || !after || before.scope !== after.scope || before.revision + 1 !== after.revision
+    || !layout || witness.layout !== layout || witness.cell_push_witness !== true) return null;
+  const parentObjective = 'G_official_completion', satisfactionContract = 'official_progress_under_guarded_access';
+  return {
+    id: 'sic-need:' + symbolicDigest([rootedRecoveryStrategy.needKind, [layout], after.scope, satisfactionContract, parentObjective, witness.after]),
+    kind: rootedRecoveryStrategy.needKind, subject: layout, scope: after.scope, parentObjective, satisfactionContract,
+    evidence: [witness.before, witness.after], status: 'admitted',
+  };
+}
+
+export function selectRootedRecovery(pack: RecoveryPack, refutations: readonly ReturnWitness[], layout: string, observationRef: string,
+  retained?: ContactRecoveryNeed) {
   const [witness] = refutations;
   if (!witness) return { status: 'unneeded' } as const;
-  const current = readObservationRef(observationRef), before = readObservationRef(witness.before), after = readObservationRef(witness.after);
-  const applicable = refutations.length === 1 && witness.cell_push_witness === true && witness.layout === layout
-    && current && before && after && before.scope === current.scope && after.scope === current.scope
-    && before.revision + 1 === after.revision && after.revision <= current.revision;
+  const need = admitContactRecoveryNeed(witness, layout);
+  const current = readObservationRef(observationRef), after = readObservationRef(witness.after);
+  const applicable = refutations.length === 1 && need && current && after
+    && need.scope === current.scope && after.revision <= current.revision;
   if (!applicable) return { status: 'unresolved' } as const;
-  const needId = JSON.stringify([rootedRecoveryStrategy.id, current.scope, witness.after]);
-  const evidence = [witness.before, witness.after];
+  if (retained?.id === need.id && retained.status !== 'admitted' && retained.status !== 'assigned') return { status: 'unresolved' } as const;
   return {
     status: pack.mode === 'active' ? 'selected' : 'shadow',
-    strategy: rootedRecoveryStrategy.id, needId, evidence, configuration: pack,
+    strategy: rootedRecoveryStrategy.id, needId: need.id, evidence: need.evidence, configuration: pack,
   } as const;
 }

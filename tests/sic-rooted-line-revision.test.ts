@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { gunzipSync } from 'node:zlib';
-import { RootedLineMemory, rootedLineBefore } from '../src/logos-engine/v6-rooted-line-access.ts';
+import { RootedLineMemory, rootedLineAfter, rootedLineBefore } from '../src/logos-engine/v6-rooted-line-access.ts';
 import { planCellPush } from '../src/logos-engine/v6-rooted-line-revision.ts';
 import { measureRootedLine } from '../src/logos-engine/v6-rooted-line-observation.ts';
 import { readNativeResolution } from '../src/sic/native-resolution.ts';
@@ -31,6 +31,10 @@ test('an observed push chain unblocks rooted-line search, retaining its estimate
   const last = packets.length - 1, current = observation(last), rows = packets[last].packet.frame_rows;
   const state = memory.currentState().line_memory;
   assert.equal(state.refuted[0]?.cell_push_witness, true);
+  assert.equal(state.sic_recovery_need?.status, 'admitted');
+  const restored = new RootedLineMemory();
+  restored.applyEvent({ kind: 'observed_rooted_line', memory: state });
+  assert.deepEqual(restored.currentState().line_memory.sic_recovery_need, state.sic_recovery_need);
   const shadow = compileRecoveryPack({ ...defaultRecoveryPack, mode: 'shadow' });
   const ignored = memory.propose(current, rows, [], 16, { ...config, sic_recovery: shadow });
   assert.equal(ignored?.reason, 'sic_recovery_shadow');
@@ -66,6 +70,13 @@ test('an observed push chain unblocks rooted-line search, retaining its estimate
   assert.equal(rootedLineBefore(revised, 0, rows, {
     epoch: 1, score: 0, observation_ref: current.observation_ref, available: current.available_action_refs,
   }).admitted, true);
+  assert.equal(revised.rooted_line_plan.search.sic_decision.needId, state.sic_recovery_need.id);
+  const after = { ...current, observation_ref: 'local:epoch:2:revision:14:frame:return', level_epoch: 2, levels_completed: 1 };
+  assert.equal(rootedLineAfter(revised, 0, rows, rows, { epoch: 2, score: 1 }).sic_need.status, 'satisfied');
+  restored.record(current, revised.actions[0], after, rows, rows, revised, 0);
+  assert.deepEqual(restored.currentState().line_memory.sic_recovery_need, {
+    ...state.sic_recovery_need, status: 'satisfied', outcomeRef: after.observation_ref,
+  });
   assert.equal(planCellPush(measureRootedLine(rows)!, state.controls, 1, 1000, () => false), null);
   assert.equal(planCellPush(measureRootedLine(rows)!, state.controls, 20, 1000, () => true), null);
 });
