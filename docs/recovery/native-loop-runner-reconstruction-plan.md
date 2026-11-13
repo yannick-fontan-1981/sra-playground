@@ -170,3 +170,51 @@ Tests:
 Remaining blocker:
 a native `createSession` implementation bound to the durable custom-games
 archive, followed by execution/recording on real STCK and SMLP.
+
+
+## Reconstruction progress — A/STCK explicit runner
+
+The first explicit runner path has now been reconstructed at the durable
+`game_bridge` contract boundary.
+
+Files:
+- `scripts/native-loop-game-bridge-session.mjs`
+- `scripts/native-loop-explicit-runners.mjs`
+- `tests/native-loop-explicit-runners.test.mjs`
+
+A/STCK identity enforced by the runner:
+- variant: `A`
+- game code: `STCK`
+- game id: `stck-c0000001`
+- backend: `python-wasm`
+- corpus: `native-public-action-corpus-v1`
+- seed: `0`
+- start level: `1`
+- sourceRef: required explicitly from the caller
+
+The session adapter uses only the durable `game_bridge` request contract:
+- initial request: `{ type: "load", code: "STCK", level: 1 }`
+- actions: `{ type: "action", actionId, data? }`
+- every returned public observation is revalidated against STCK/gameId/backend;
+- no alternate backend or runner fallback exists.
+
+Targeted contract tests executed in a minimal Node environment:
+**4/4 passed**.
+
+What this proves:
+- the explicit A/STCK runner wiring is deterministic and identity-checked;
+- the public corpus can drive the exact requested STCK action count through
+  the recovered bridge boundary;
+- backend/game identity drift fails closed.
+
+What this does not yet prove:
+- actual Pyodide loading of `public/python/custom-games.zip`;
+- real STCK engine execution through the browser worker;
+- historical corpus identity;
+- timing validity on the native runtime.
+
+Therefore A/STCK is currently:
+
+**reconstructed contract, pending real native execution qualification**.
+
+No official ABBA benchmark is authorized yet.
