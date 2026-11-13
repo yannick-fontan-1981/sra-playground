@@ -6,15 +6,12 @@ Dernière consolidation : 12 novembre 2026.
 
 - Dépôt : `yannick-fontan-1981/sra-playground`
 - Branche canonique cible : `recovery/site109-reconstruction-20261112`
-- Baseline canonique au début de cette étape :
-  `87a538a1c776fb974a1767f30fea735aac28ded9`
-- Baseline canonique réconciliée avant qualification finale :
-  `6304bec8c99a05b0023692f8fe7f432394acaa11`
-- Commit de réconciliation de la branche de travail :
-  `ed032442acdeb7c703e8f40917099184aa459ada`
-- Branche de travail : `op01-op31-common-campaign-owner-20261112`
+- Baseline canonique de la tranche hôte navigateur :
+  `8cc510e0a0d09704eb508b3aa2216b4d63482af4`
+- Branche de travail :
+  `op01-op31-browser-campaign-host-20261112`
 - Donneur OP01–OP31 : `op01-op31-c0-c7-audit`
-- Plan : `docs/migration/op01-op31-verification-plan.md`
+- Plan stable : `docs/migration/op01-op31-verification-plan.md`
 - Historique détaillé antérieur à la première consolidation :
   `docs/migration/op01-op31-progress-history-through-b093f406.md`
 - Reprise Lot 6 et seam Worker :
@@ -25,9 +22,12 @@ Dernière consolidation : 12 novembre 2026.
   `docs/recovery/op01-op31-lot5-op18-reconciliation-20261112.md`
 - Propriétaire commun et retour corrélé :
   `docs/recovery/op01-op31-common-campaign-owner-20261112.md`
+- Hôte produit/browser et acquisition avant présentation :
+  `docs/recovery/op01-op31-browser-campaign-host-20261112.md`
 
-Le présent fichier est l’état courant consolidé. L’ancien suivi intégral a été
-conservé dans Git afin de ne perdre aucune preuve, mesure ou décision antérieure.
+Le présent fichier est l’état courant consolidé. Les versions précédentes
+restent disponibles dans Git afin de conserver toutes les preuves, mesures et
+décisions antérieures.
 
 ## Règle de qualification
 
@@ -44,301 +44,299 @@ Les niveaux restent distincts :
 5. contribution démontrée ;
 6. coût qualifié.
 
-Un compteur d’appels, un import ou une trace sans consommateur ne suffisent pas.
-Aucune OP n’est ajoutée uniquement pour atteindre 31 appels.
+Un compteur, un import ou une trace sans consommateur ne suffisent pas. Aucune
+opération n’est ajoutée pour atteindre artificiellement 31 appels.
 
 ## Provenance et limites historiques
 
-Le fichier actuel `src/runtime/v6-agent-worker.ts` est une reconstruction. La
-source officielle historique du worker Site 109 et le runtime/campaign complet
-historiquement utilisé n’ont pas été retrouvés. Aucune identité ou parité avec
-cet ancien worker n’est revendiquée.
+Le worker et plusieurs composants runtime présents dans la reconstruction ne
+prouvent pas une identité binaire avec le Site 109 historique. La provenance et
+les limites sont conservées dans les documents de recovery.
 
-Les composants Lot 5 `FieldStock` et matériaux adressés sont également une
-reconstruction qualifiée à partir des sources donneuses et des contrats publics.
-Ils ne prouvent pas une parité binaire avec l’ancien Site 109.
+Les composants FieldStock et matériaux adressés sont des reconstructions
+qualifiées à partir des sources donneuses, des contrats publics et des tests de
+parité disponibles.
 
-Le benchmark officiel historique n’est pas restauré sous une forme permettant
-de qualifier les quatre runners natifs A/STCK, A/SMLP, B/STCK et B/SMLP. Les
-diagnostics synthétiques ou ciblés restent informatifs uniquement.
+La campagne commune, le seam navigateur et les tests actuels démontrent des
+contrats dans le runtime reconstruit. Ils ne prouvent pas une parité totale avec
+V5, V6 ou V7 historiques.
 
-Statut performance global :
+Le benchmark officiel complet n’est pas encore restauré sous une forme
+permettant de clore les quatre mesures A/STCK, A/SMLP, B/STCK et B/SMLP.
 
-**fonctionnellement qualifié, performance officielle à confirmer**.
+Statut global :
 
-## Composants runtime pertinents
+**intégration fonctionnelle qualifiée sur les seams reconstruits, coût officiel
+à confirmer.**
 
-### Transport, dispatch et Worker
+## Architecture runtime pertinente
 
-- `src/runtime/browser-games.ts` et `game-worker.ts` : transport jeu et retour
-  public réel ;
-- `src/runtime/contracts.ts` : protocole public `AgentObservation` / `AgentAction` ;
-- `src/runtime/v6-agent-worker-core.ts` : budget, annulation, séquence et validation ;
-- `src/runtime/v6-agent-worker.ts` : enveloppe Worker reconstruite ;
-- `src/agent-product-dispatch.ts` : dispatch produit et retour du jeu ;
-- `src/runtime/v6-browser-agent-observation.ts` : adaptation stricte
-  `GameObservation → AgentObservation` sans état caché.
+### Transport public et présentation
 
-### Matériaux adressés et FieldStock
+- `src/runtime/browser-games.ts` : transport jeu navigateur et retour public ;
+- `src/runtime/contracts.ts` : protocole `AgentObservation` / `AgentAction` ;
+- `src/runtime/v6-browser-agent-observation.ts` : conversion stricte du cadre
+  public 64 × 64 et séquences monotones ;
+- `src/agent-product-dispatch.ts` : disponibilité, génération, `busy`, timing,
+  ACTION6 et erreur ;
+- `src/product-presentation-effects.ts` : présentation et effets DOM bornés ;
+- `src/runtime/v6-browser-common-campaign-host.ts` : couture entre campagne
+  commune, dispatch physique, acquisition du retour et présentation.
 
-- `src/runtime/observed-addressed-material-runtime.ts` : propriétaire de
-  rétention, frontière, revalidation et stock courant ;
-- `src/logos-engine/addressed-field-*.ts` : acquisition, réponse, garde,
-  rétention et fit adressés ;
-- `src/logos-engine/field-stock.ts` : producteur borné de question, plan,
-  préservation, actions coordonnées et bundle OP18 ;
-- `src/logos-engine/linked-preparation.ts` et
-  `observed-object-binding.ts` : liaisons publiques et préparation.
+### Autorité Logos et campagne commune
 
-### Appels Logos et campagne commune
-
-- `src/logos-engine/v6-public-single-action-port.ts` : producteur OP28 limité au
-  seul cas où une action simple non-RESET est publiquement unique et complète ;
+- `src/logos-engine/v6-native-authority.ts` : besoin, exécution et admission ;
 - `src/logos-engine/v6-neutral-common-caller.ts` : collecte neutre,
   ambiguïté, routage et déduplication ;
 - `src/logos-engine/v6-common-campaign-owner.ts` : propriété de la décision,
-  autorisation Logos, attente et corrélation du retour ;
-- `src/logos-engine/v6-public-single-action-caller-adapter.ts` : exposition du
-  fallback OP28 au caller commun ;
-- `src/logos-engine/v6-field-stock-caller-adapter.ts` : exposition de FieldStock
-  OP18 et retour spécialisé au caller commun.
+  release, attente et corrélation du retour ;
+- `src/logos-engine/v6-public-single-action-caller-adapter.ts` : fallback OP28
+  strict ;
+- `src/logos-engine/v6-field-stock-caller-adapter.ts` : propriétaire OP18 et
+  retour spécialisé FieldStock.
+
+### Modèles spécialisés
+
+- `src/runtime/observed-addressed-material-runtime.ts` : rétention et
+  revalidation du matériau adressé ;
+- `src/logos-engine/field-stock.ts` : question, plan borné, ACTION6,
+  préservation et bundle OP18 ;
+- composants Region : apprentissage spécialisé, acquisition, déduplication et
+  effet sur les propositions futures, sans contrat physique commun complet.
 
 ## État courant C0 à C7
 
 | Lot | État courant | Preuve acquise | Dette suivante |
 | --- | --- | --- | --- |
 | C0 | **terminé** | 31 calculs inventoriés, dispositions et provenance conservées | maintenir les statuts par besoin, pas par compteur |
-| C1 | **propriétaire commun fonctionnel dans la bibliothèque runtime** | collecte bornée, ambiguïté conservée, release OP18/OP28, action en attente, retour corrélé au même `needId` | instancier cette campagne dans l’hôte produit/browser |
-| C2 | **OP18 démontrée jusqu’à la décision suivante ; OP28 jusqu’au retour corrélé** | FieldStock compare et enregistre le retour puis produit une action suivante différente | raccorder le dispatch produit réel et attribuer OP31 à un propriétaire réel |
-| C3 | **calculs et recouvrements qualifiés** | OP03/08/12/14/26 couvertes au niveau noyau ; spécialisations donneuses identifiées | appeler uniquement lorsqu’un producteur runtime réel établit le besoin |
+| C1 | **campagne commune et seam produit/browser qualifiés** | collecte bornée, ambiguïté, release, attente, même `needId`, acquisition avant présentation | créer le contrôleur explicite du mode Agent et mesurer son activation |
+| C2 | **OP18 jusqu’à la décision suivante ; OP28 jusqu’au retour physique acquis** | FieldStock modifie la proposition suivante ; OP28 traverse observation, dispatch et retour | constructeur de contexte produit FieldStock et propriétaire OP31 |
+| C3 | **calculs et recouvrements qualifiés** | OP03/04/08/09/11/12/14/26 auditables ; spécialisations identifiées | appeler uniquement depuis un producteur runtime réel |
 | C4 | **audit complet, usages génériques non démontrés** | OP01/02/05/10/15/25 calculables | ne pas activer sans producteur et consommateur réels |
-| C5 | **retours spécialisés préservés** | FieldStock et Region couvrent des besoins OP06/29/30 avec effet futur | donner à Region un vrai bundle/action Logos avant enregistrement commun |
-| C6 | **audit complet** | inconnue, échec borné et impossibilité restent distincts | aucun raccordement sans preuve de blocage/reprise/variante |
-| C7 | **ouvert** | garde-fous, diagnostics ciblés et corpus/runners candidats disponibles | runners natifs qualifiés, manifeste complet et STCK/SMLP séparés < +10 % |
+| C5 | **retours spécialisés préservés** | FieldStock et Region couvrent notamment OP06/29/30 avec effet futur | donner à Region un bundle/action Logos complet ; raccorder les autres besoins réels |
+| C6 | **audit complet** | inconnue, échec borné et impossibilité restent distincts | aucun raccordement sans preuve de blocage, reprise ou variante |
+| C7 | **ouvert** | régressions, diagnostics et runners candidats disponibles | manifeste complet, quatre runners et médianes par jeu strictement sous +10 % |
 
-## Chaîne complète reconstruite OP18 : FieldStock
+## Chaîne OP18 reconstruite : FieldStock
 
-### Besoin identifié
+### Besoin
 
-Un stock adressé a été retenu puis revalidé dans la scène courante. Une demande
-typée manque dans une zone officielle et l’action adressée ACTION6 est
-publiquement disponible.
+Un stock adressé retenu a été revalidé dans la scène courante. Une demande typée
+reste insatisfaite et ACTION6 est publiquement disponible.
 
-### Données produites
+### Production
 
 `FieldStock.propose()` produit :
 
 - une question ouverte mesurable ;
 - une composition non observée ;
-- un plan borné à 16 pas ;
-- des actions ACTION6 avec coordonnées mesurées ;
-- des obligations de préservation ;
+- un plan borné ;
+- des actions ACTION6 coordonnées ;
 - les faits et preuves de scène ;
-- un `bundle_template.operation_key = OP18` avec outcome guard.
+- des obligations de préservation ;
+- un bundle OP18 avec garde de résultat.
 
-### Appel et garde
+### Appel, retour et décision suivante
 
-`FieldStockCallerOwnerAdapter` revalide d’abord la scène avec `beforeStock()`.
-Le propriétaire commun conserve la proposition uniquement si elle est la seule
-proposition du domaine courant.
+`FieldStockCallerOwnerAdapter` exécute `beforeStock()` avant exposition. La
+campagne commune conserve une proposition unique, produit le besoin, exécute
+OP18 et consomme son résultat dans `operationAdmission()`.
 
-`releaseBundle()` émet le besoin `exploration-question`, appelle OP18 et reçoit
-la référence de la composition lorsque le contrat est cohérent.
-`operationAdmission()` consomme ce résultat et autorise la release uniquement si
-l’outcome guard correspond.
+Le même `needId` est conservé jusqu’au retour. Le retour est routé uniquement à
+FieldStock :
 
-### Retour et effet sur la décision suivante
-
-Le propriétaire commun conserve session, propriétaire, proposition, bundle,
-action et `needId` jusqu’au retour.
-
-Le retour est routé uniquement à FieldStock :
-
-- `afterStock()` compare le résultat attendu ;
+- `afterStock()` compare le résultat ;
 - `recordStock()` confirme, apprend, enregistre un échec ou réfute ;
-- un retour déjà acquis est dédupliqué ;
-- un retour avec un autre besoin ou une révision non croissante est rejeté.
+- un doublon exact est ignoré ;
+- une autre révision ou un autre besoin est rejeté.
 
 Scénario démontré :
 
-1. matériau de type 2 en `(1,1)` ;
-2. première action ACTION6 vers `(3,1)` ;
+1. matériau type 2 en `(1,1)` ;
+2. ACTION6 vers `(3,1)` ;
 3. retour confirmé et déplacement enregistré ;
-4. prochaine proposition ACTION6 vers `(4,1)`.
+4. proposition suivante vers `(4,1)`.
 
-Disposition OP18 : **chaîne complète démontrée jusqu’au consommateur spécialisé
-et à la décision suivante dans le runtime reconstruit.**
+Disposition OP18 : **chaîne complète démontrée en bibliothèque jusqu’au
+consommateur spécialisé et à la décision suivante.**
 
-## Chaîne commune OP28 : action publique unique
+Le nouveau seam navigateur peut transporter cette famille, mais le constructeur
+qui dérive un vrai `FieldStockCampaignContext` de chaque observation produit
+n’est pas encore raccordé.
 
-Pour le seul contrat où l’observation publique expose exactement une action
+## Chaîne OP28 produit/browser
+
+Pour le contrat strict où l’observation publique expose exactement une action
 simple distincte hors RESET :
 
-1. l’adaptateur public produit une observation validée ;
-2. l’adaptateur de caller construit le bundle OP28 ;
-3. le propriétaire commun vérifie session, révision et action disponible ;
-4. `releaseBundle()` appelle OP28 ;
-5. `operationAdmission()` consomme le résultat ;
-6. l’action reste en attente jusqu’au retour portant le même `needId` ;
-7. le retour est routé au propriétaire OP28 exact.
+1. `BrowserAgentObservationStream` produit l’observation agent ;
+2. le transport OP28 fournit le contexte au propriétaire ;
+3. la campagne construit et fait admettre le bundle ;
+4. `dispatchProductAction()` exécute l’action par le runtime navigateur ;
+5. la réponse est convertie en observation agent suivante ;
+6. le retour est acquis avec le même `needId` ;
+7. l’acquisition précède la présentation ;
+8. la décision suivante utilise l’observation acquise.
 
-Actions admises : ACTION1, ACTION2, ACTION3, ACTION4, ACTION5 et ACTION7.
-ACTION6 seule ne déclenche rien car ses coordonnées restent inconnues. Plusieurs
-choix publics restent explicitement ambigus et ne déclenchent aucune OP.
+ACTION6 seule ne produit rien dans ce fallback car ses coordonnées sont
+inconnues. Plusieurs actions publiques restent sans proposition. Aucune
+perception ou planification générale n’est revendiquée.
 
-Disposition OP28 : **chaîne commune démontrée sous condition stricte ; aucune
-perception ou planification générale n’est revendiquée.**
+Disposition OP28 : **chaîne produit/browser complète démontrée sous condition
+stricte.**
 
-## Neutralité et ambiguïté
+## Neutralité et autorité
 
-`CommonCampaignOwner` ne choisit pas entre plusieurs propriétaires :
+`BrowserCommonCampaignHost` ne classe pas les propositions et ne fabrique aucun
+bundle :
 
 - zéro proposition → `none` ;
 - une proposition → validation puis autorité Logos ;
 - plusieurs propositions → `ambiguous` ;
 - bundle refusé → `blocked` ;
-- action libérée → `action`, puis `pending` jusqu’au retour.
+- action autorisée → dispatch puis attente du retour ;
+- retour physique → acquisition propriétaire avant présentation.
 
-Aucune OP n’est appelée dans les cas `none` ou `ambiguous`.
+Le host exige une correspondance exacte entre propriétaires et transports. Il
+refuse une observation copiée mais périmée, annule une décision non réglée sur
+échec ou obsolescence et invalide une réponse d’une session remplacée.
 
-Le caller neutre conserve deux contrats :
+Les clics Manual ne traversent pas ce host. `main.ts` ne l’instancie pas encore.
+L’onglet Agent ne revendique donc pas prématurément une boucle SRA active.
 
-- `collect()/select()` : propositions détachées et copiées ;
-- `collectOwned()/selectOwned()` : transfert explicite d’une proposition neuve
-  au propriétaire commun.
+## Disposition des 31 opérations
 
-Le second évite de recopier plusieurs fois bundle, état symbolique et
-corrélation. Les résultats publics n’exposent que l’identité de proposition.
+| OP | Disposition courante | Producteur/consommateur démontré ou dette précise |
+| --- | --- | --- |
+| OP01 | calcul qualifié, usage produit non démontré | aucun regroupement structurel consommé par le runtime courant |
+| OP02 | calcul qualifié, usage produit non démontré | aucun domaine complet de chemins équivalents produit et consommé |
+| OP03 | producteur générique manquant | les préconditions spécialisées restent dans leurs gardes familiales |
+| OP04 | calcul qualifié, usage produit non démontré | aucun réseau d’ouvertures commun consommé par une stratégie réelle |
+| OP05 | calcul qualifié, usage produit non démontré | l’ambiguïté de campagne est structurelle, sans appel artificiel à OP05 |
+| OP06 | fonction spécialisée démontrée | contradictions FieldStock/Region révisent ou bloquent les propositions futures |
+| OP07 | producteur runtime manquant | aucune frontière commune reliée à un objectif ouvert n’est produite |
+| OP08 | manquante ou recouverte familialement | pas de graphe transversal fiable `effect → requires` consommé |
+| OP09 | calcul qualifié, usage produit non démontré | aucune preuve de domaine complet d’alternatives dans le runtime courant |
+| OP10 | calcul qualifié, usage produit non démontré | aucun propriétaire de buts terminaux ne consomme son résultat |
+| OP11 | calcul qualifié, usage produit non démontré | aucun réseau commun de déblocages n’est produit puis choisi |
+| OP12 | manquante ou recouverte familialement | les inconnues spécialisées sont traitées sans chaîne générique démontrée |
+| OP13 | calcul qualifié, consommateur générique absent | la portée reste spécialisée et bornée par les modèles de famille |
+| OP14 | admission bridge présente, release native absente | aucun besoin produit ne justifie encore son autorité physique |
+| OP15 | calcul qualifié, usage produit non démontré | aucun sélecteur réel d’objectif intermédiaire ne le consomme |
+| OP16 | calcul qualifié, usage produit non démontré | aucun producteur de blocage global prouvé |
+| OP17 | calcul qualifié, usage produit non démontré | aucune reprise autorisée avec préservation complète n’est produite |
+| OP18 | **chaîne complète FieldStock démontrée** | besoin, bundle, admission, action, retour spécialisé et décision suivante |
+| OP19 | calcul qualifié, usage produit non démontré | aucun préfixe forcé prouvé n’est produit par le runtime actuel |
+| OP20 | calcul qualifié, usage produit non démontré | aucune question d’utilité d’objet liée à une stratégie active |
+| OP21 | calcul qualifié, usage produit non démontré | aucune question d’utilité d’espace liée à un objectif actif |
+| OP22 | calcul qualifié, usage produit non démontré | aucun effet distant attribué et consommé transversalement |
+| OP23 | calcul qualifié, usage produit non démontré | aucun cycle autonome prouvé n’alimente un plan réel |
+| OP24 | calcul qualifié, usage produit non démontré | aucun générateur de chemins alternatifs vérifiés n’est raccordé |
+| OP25 | calcul qualifié, usage produit non démontré | non-réfutation conservée sans fausse preuve de faisabilité |
+| OP26 | manquante ou recouverte familialement | aucun domaine commun de plusieurs accès vérifiés vers une cible |
+| OP27 | calcul qualifié, usage produit non démontré | aucune permutation avec preuves complètes de préservation |
+| OP28 | **chaîne produit/browser stricte démontrée** | bundle admis, dispatch physique, même `needId`, acquisition avant présentation |
+| OP29 | fonction spécialisée démontrée | `afterStock()` et analyses Region comparent les retours utiles |
+| OP30 | fonction spécialisée démontrée | `recordStock()` et Region modifient durablement les propositions futures |
+| OP31 | appel générique disponible, contribution absente | aucun propriétaire d’objectif produit ne maintient, suspend ou réoriente la suite |
 
-## Region
+## Tests et qualification
 
-Region possède déjà une boucle spécialisée avec acquisition passive ou
-sélectionnée, déduplication, snapshot et effet sur les propositions futures.
+Tranche hôte navigateur :
 
-Region n’est pas encore enregistré dans le propriétaire commun, car son
-adaptateur actuel ne produit pas encore le contrat physique complet
-`AgentAction + CompositionBundle + état symbolique + identity` attendu par
-`releaseBundle()`.
+- `src/runtime/v6-browser-common-campaign-host.ts` ;
+- `tests/v6-browser-common-campaign-host.test.ts`.
 
-Aucun bundle artificiel ni autorité implicite n’est ajouté pour contourner cette
-absence.
+Preuves ajoutées :
 
-## Statut des opérations prioritaires
+- même `needId` de la release à l’acquisition ;
+- acquisition avant présentation ;
+- aucune double décision pendant une attente ;
+- ACTION6 conserve aussi les coordonnées nulles en valeur ;
+- absence de besoin lorsque le produit n’est pas prêt ;
+- refus d’une observation périmée ;
+- ambiguïté sans dispatch ;
+- annulation sur obsolescence ou échec ;
+- invalidation d’une réponse d’ancienne session ;
+- correspondance exacte propriétaire/transport ;
+- décision suivante fondée sur le retour acquis.
 
-| OP | Statut exact | Producteur | Consommateur | Contribution démontrée |
-| --- | --- | --- | --- | --- |
-| OP18 | **chaîne complète démontrée pour FieldStock** | `FieldStock.propose()` après revalidation courante | `operationAdmission()`, puis `afterStock()/recordStock()` | garde l’action et modifie la proposition suivante |
-| OP28 | **chaîne commune démontrée sous condition stricte** | adaptateur action publique unique | `operationAdmission()`, puis propriétaire OP28 | garde l’action et corrèle son retour |
-| OP29 | **assuré par fonctions spécialisées** pour FieldStock/Region ; générique sans consommateur produit | retour avant/après spécialisé | modèle spécialisé | comparaison peut invalider ou sceller la suite |
-| OP30 | **assuré par fonctions spécialisées** pour FieldStock/Region ; générique `persisted_only` | observation de rewrite/effet | règle, échec ou réfutation spécialisée | propositions futures modifiées |
-| OP31 | **appel existant sans consommateur démontré** | postAnalysis générique disponible | aucun propriétaire d’objectif produit | non démontrée |
-| OP03 | **bloqué par producteur générique manquant** | aucune production tri-état générale depuis le produit | admission/plan potentiel | non |
-| OP08 | **bloqué ou recouvert familialement** | pas de graphe transversal effect→requires produit | stratégie potentielle | non générique |
-| OP12 | **bloqué ou recouvert familialement** | inconnues d’accès spécialisées seulement | acquisition spécialisée | non générique |
-| OP26 | **bloqué ou recouvert familialement** | admissions spécialisées, pas de domaine multi-accès commun | garde spécialisée | non générique |
-| OP06 | **déjà assuré par fonctions spécialisées** | retour Region/FieldStock | modèle spécialisé | contradiction change la suite |
-| OP14 | **admission bridge présente, routage natif absent** | aucun besoin produit dans l’autorité actuelle | garde bridge | non en produit |
-| autres OP | **hors périmètre actuel** | aucun nouveau besoin runtime établi | selon audits C3–C6 | non revendiquée |
+Qualification GitHub Actions :
 
-## Tests et qualification finale réconciliée
-
-Nouveaux tests de cette étape :
-
-- `tests/v6-common-campaign-owner.test.ts` ;
-- `tests/v6-field-stock-common-campaign.test.ts` ;
-- `tests/v6-neutral-common-caller-owned.test.ts`.
-
-Preuves couvertes :
-
-- aucune proposition → aucune OP ;
-- une proposition → besoin, opération, consommation et action ;
-- plusieurs propositions → ambiguïté sans classement ni appel ;
-- même `needId` de la release au retour ;
-- une seule action en attente par session ;
-- bundle refusé → aucune action en attente ;
-- retour exact dédupliqué ;
-- retour contradictoire rejeté ;
-- FieldStock `before()` avant release ;
-- FieldStock `after()/record()` après retour ;
-- action adressée absente → aucun proposal et aucun appel ;
-- époque ou révision incohérente → rejet ;
-- retour FieldStock confirmé → prochaine action différente ;
-- transfert propriétaire sans fuite du payload dans le résultat public.
-
-Qualification GitHub Actions sur l’arbre contenant les derniers apports Lot 6C
-et Region :
-
-- run : `43346791891` ;
-- job : `131627959298` ;
-- commit qualifié : `d5fc07b9c825078c7a241d6511eb91287befbc7f` ;
+- run : `43348635198` ;
+- job : `131633987557` ;
+- commit qualifié : `8a73045e594bac9892f8846564b76c367c5fcccd` ;
+- baseline canonique : `8cc510e0a0d09704eb508b3aa2216b4d63482af4` ;
 - Node : `22.18.0` ;
 - `npm ci` : réussi ;
 - `npm run typecheck` : réussi ;
-- régression TypeScript complète : **286/286 tests réussis** ;
-- diagnostic de coût : réussi.
+- régression complète : **300/300 tests réussis** ;
+- câblage : `logos-product-wiring-present`.
 
-Le workflow temporaire est supprimé avant intégration.
+Le workflow de qualification est temporaire et doit être supprimé avant
+intégration canonique.
+
+Deux vulnérabilités de dépendances de sévérité haute préexistantes sont signalées
+par `npm ci`. Cette tranche ne les introduit ni ne les corrige.
 
 ## Performance
 
-La première version détachée du transport commun mesurait environ :
+Critère conservé : pour chaque jeu de référence, la médiane de session complète
+doit augmenter de strictement moins de 10 %. STCK et SMLP restent séparés ; un
+jeu ne compense pas l’autre.
 
-- release OP28 directe : `4,07 µs/cycle` ;
-- campagne commune avec retour : `61,90 µs/cycle`.
+Le host n’est pas instancié dans `main.ts` et ne s’exécute dans aucune session
+utilisateur actuelle. Cette tranche de bibliothèque n’ajoute donc pas de coût au
+chemin actif. Un micro-benchmark isolé ne remplacerait pas la qualification de
+session complète requise.
 
-Après transfert propriétaire unique, sur l’arbre réconcilié :
+Verdict : **fonctionnellement qualifié, coût d’activation à confirmer**.
 
-- aucun besoin direct : `0,233 µs/cycle` ;
-- aucun besoin via campagne : `0,349 µs/cycle` ;
-- release OP28 directe : `2,337 µs/cycle` ;
-- campagne commune avec retour corrélé : `6,894 µs/cycle` ;
-- surcoût absolu restant : `4,557 µs/cycle` ;
-- réduction du coût du chemin commun : environ `88,9 %`.
+La qualification officielle doit suivre l’activation d’un contrôleur Agent et
+des vrais contextes propriétaires, sur les quatre runners du manifeste C7.
 
-Cette mesure comprend propriété, état en attente, acheminement du retour et
-déduplication, alors que la référence directe ne fait que préparer et libérer
-l’action.
+## Limites encore ouvertes
 
-Ce diagnostic ne remplace pas le benchmark officiel. Les règles de clôture C7
-restent :
+- aucun contrôleur Agent ne possède encore la boucle produit ;
+- `main.ts` ne crée pas le host ;
+- FieldStock n’a pas de constructeur de contexte depuis l’observation produit ;
+- Region n’a pas de contrat physique commun complet ;
+- les acquisitions passives multi-propriétaires ne sont pas orchestrées par le
+  host ;
+- les actions communes en attente n’ont pas de snapshot/restauration ;
+- aucun propriétaire OP31 n’est raccordé ;
+- les états non représentables par le protocole agent restent refusés ;
+- la performance officielle C7 reste ouverte ;
+- aucune publication Site n’est effectuée.
 
-- STCK global strictement inférieur à +10 % ;
-- SMLP global strictement inférieur à +10 % ;
-- jeux séparés ;
-- aucune compensation ;
-- phases internes informatives si le global du jeu reste conforme.
+## Feuille de route actualisée
 
-Statut :
+### Étape immédiate : contrôleur Agent explicite
 
-**fonctionnellement qualifié, performance officielle à confirmer**.
+1. créer une session `BrowserCommonCampaignHost` après chargement du jeu ;
+2. l’exécuter uniquement lorsque le mode Agent est explicitement actif ;
+3. conserver le chemin Manual totalement séparé ;
+4. exécuter au plus une campagne à la fois ;
+5. arrêter sur `none`, `ambiguous`, `blocked`, terminal ou erreur ;
+6. ne jamais substituer une action par défaut à l’absence de proposition.
 
-## Besoins encore sans traitement
+### Étape suivante : producteurs réels
 
-- hôte navigateur commun créant la campagne et les contextes propriétaires ;
-- dispatch réel de l’action autorisée vers `BrowserGameRuntime` ;
-- conservation du `needId` à travers `AgentProductDispatch` ;
-- acquisition du retour avant demande de la décision suivante ;
-- contrat bundle/action Logos pour Region ;
-- acquisition passive orchestrée pour des propriétaires non sélectionnés ;
-- snapshot/restauration des décisions communes en attente ;
-- propriétaire d’objectif consommant OP31 ;
-- lecture future de la connaissance générique OP30 ;
-- transport borné des traces/compteurs vers le produit ou le harness ;
-- perception et planification générales pour les situations à plusieurs actions ;
-- quatre runners natifs qualifiés et mesures STCK/SMLP officielles.
+1. construire `FieldStockCampaignContext` depuis les observations publiques et
+   les connaissances déjà revalidées ;
+2. raccorder FieldStock au transport navigateur générique ;
+3. compléter le contrat physique Region avant son enregistrement ;
+4. identifier un vrai propriétaire d’objectif avant toute activation OP31.
 
-## Prochaine étape concrète
+### Qualification et publication
 
-Construire l’hôte produit/browser qui :
+1. exécuter les régressions fonctionnelles ;
+2. compléter le manifeste des quatre runners ;
+3. mesurer A/STCK, A/SMLP, B/STCK et B/SMLP séparément ;
+4. conserver strictement moins de +10 % de médiane par jeu ;
+5. intégrer sur la branche canonique GitHub ;
+6. publier le Site seulement lorsque le code correspondant est durablement sur
+   GitHub ;
+7. vérifier ensuite GitHub ↔ Site.
 
-1. reçoit chaque `GameObservation` ;
-2. construit l’observation agent et les observations spécialisées ;
-3. alimente seulement les propriétaires applicables ;
-4. conserve l’ambiguïté plutôt que choisir arbitrairement ;
-5. dispatch l’action autorisée ;
-6. conserve `needId`, propriétaire et proposition pendant le dispatch ;
-7. acquiert le retour avant la prochaine demande de décision ;
-8. présente ensuite la nouvelle observation.
-
-Aucun Site ne doit être publié avant intégration durable du code correspondant
-sur GitHub et vérification GitHub ↔ Site.
+Aucune publication Site n’appartient à la tranche courante.
