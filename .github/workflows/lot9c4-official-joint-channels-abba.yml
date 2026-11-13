@@ -8,7 +8,7 @@ on:
 
 concurrency:
   group: lot9c4-official-strict-joint-channels-abba
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -41,6 +41,7 @@ jobs:
           node --experimental-transform-types --test \
             tests/v6-public-addressed-joint-channels.test.ts \
             tests/v6-public-stck-joint-channels.test.ts \
+            tests/v6-joint-channel-zero-copy-contract.test.ts \
             tests/native-loop-joint-channel-official-hook.test.ts
       - name: Requalify real public SMLP and strict STCK corpora
         run: |
