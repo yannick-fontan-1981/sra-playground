@@ -2,6 +2,7 @@ import type { GameObservation } from './browser-games.ts';
 import type { AgentAction } from './contracts.ts';
 import { isAgentAction, toAgentObservation } from './contracts.ts';
 import type { NativeGraphEdit } from '../logos-engine/v6-native-types.ts';
+import type { NativeClickReturn } from '../logos-engine/v6-native-click-return.ts';
 import type { KnowledgeMemory } from '../logos-engine/kernel.ts';
 
 export type { NativeGraphEdit } from '../logos-engine/v6-native-types.ts';
@@ -68,6 +69,7 @@ export interface V6BackendSnapshot {
   graphChain?: string;
   graphRevision?: number;
   nativeExecutionDigest?: string;
+  lastClickReturn?: NativeClickReturn;
 }
 
 export type V6Phase = 'authorised_not_executed' | 'sealed_prefix' | 'stopped';

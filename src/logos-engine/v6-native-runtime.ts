@@ -77,6 +77,7 @@ import type { DeltaCause, KnowledgeMemory } from './kernel.ts';
 import type { JsonValue } from './ir.ts';
 import { NativeEditRejected } from './v6-native-types.ts';
 import { NativeCompositionAuthority } from './v6-native-authority.ts';
+import { projectNativeClickReturn, type NativeClickReturn } from './v6-native-click-return.ts';
 import type {
   NativeAfterResult, NativeBudgets, NativeCommand, NativeExecution, NativeFamily, NativeInitialize, NativeObservation, NativeRows, NativeOutcome, NativeRecordResult,
   NativeAuthorizationIdentity, NativeGraphEdit, NativeProposal, NativePublicObservation, NativeRecord, NativeRuntimeSnapshot, NativeRuntimeYield, NativeV6Backend,
@@ -222,6 +223,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private budgets: NativeBudgets | null = null;
   private current: NativePublicObservation | null = null;
   private observation: MeasuredObservation | null = null;
+  private lastClickReturn: NativeClickReturn | null = null;
   private prefix: Prefix | null = null;
   private actions = 0;
   private revision = 0;
@@ -1220,6 +1222,13 @@ export class NativeV6Runtime implements NativeV6Backend {
       if (result.seal_prefix || boundary || prefix.index >= prefix.proposal.actions.length || this.budgetReason()) await this.seal(execution);
       else if (!await this.authorize(execution)) await this.seal(execution);
     });
+    // Read-only diagnostic after the native decision, outside its active clock.
+    this.lastClickReturn = null;
+    try {
+      this.lastClickReturn = projectNativeClickReturn(outcome.command, before, this.observation!, this.current!.frame_rows);
+    } catch {
+      // A diagnostic failure cannot change the completed transition or its reply.
+    }
     return this.output();
   }
 
@@ -1784,6 +1793,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       // detached copies; worker transport still copies each complete response.
       activeSeconds: (this.elapsedMs + this.runningMs()) / 1000, lastDecision: this.lastFamily, trace: this.trace.slice(), reason: this.reason,
       sourceCommit: this.sourceCommit, sourceDigest: this.sourceDigest, proposal: this.prefix?.proposal ?? null,
+      ...(this.lastClickReturn ? { lastClickReturn: this.lastClickReturn } : {}),
       implementation: NATIVE_V6_IMPLEMENTATION, coverage: { status: 'in_progress', registeredFamilies: this.families.map(f => f.id),
         sourceGroups: this.groups, emptySourceGroups: this.groups.filter(group => !group.families.length).map(group => group.id),
         partialEntryPoints: {},

@@ -47,6 +47,40 @@ function actionLabel(action: AgentAction): string {
   return action.id === 6 ? `Click at (${action.data.x}, ${action.data.y})` : commands[action.id]!;
 }
 
+function clickDetails(receipt: ShadowView['clickReturn']): {
+  control: string; effect: string; uncertainty: string;
+} {
+  if (!receipt) return {
+    control: 'No addressed return for this board yet.',
+    effect: 'Waiting for a measured click return.',
+    uncertainty: '',
+  };
+  const [x, y] = receipt.point;
+  const size = receipt.target?.pixels;
+  const control = `Click at (${x}, ${y})` + (size ? ` on a visible region of ${size} ${size === 1 ? 'pixel' : 'pixels'}.` : '.');
+  if (receipt.boundary) return {
+    control,
+    effect: receipt.fromLevel !== receipt.toLevel
+      ? `The game advanced from level ${receipt.fromLevel} to level ${receipt.toLevel}.`
+      : 'The game reported a boundary after the click.',
+    uncertainty: 'The boundary leaves the local effect of the click uncertain.',
+  };
+  const count = receipt.changedTargetPixels;
+  const effect = !receipt.target ? 'V6 could not identify a visible region at the click point.'
+    : receipt.sameSupport && receipt.atPointAfter?.palette !== receipt.target.palette
+      ? 'The clicked region changed color and kept its position and shape.'
+      : count > 0
+        ? `${count} of ${size} pixels in the clicked region changed.`
+        : 'The clicked region kept the same visible pixels.';
+  return {
+    control,
+    effect,
+    uncertainty: receipt.target
+      ? 'The region is visible. Its role in the game and whether the change repeats are still uncertain.'
+      : 'The subject of the click and its effect are still uncertain.',
+  };
+}
+
 export function renderSicPanel(panel: HTMLElement, view: ShadowView | null): void {
   panel.querySelector<HTMLElement>('[data-sic-context]')!.textContent = view
     ? `${view.gameCode} · Level ${view.frame.scope.level} · Last settled board` : '';
@@ -56,6 +90,12 @@ export function renderSicPanel(panel: HTMLElement, view: ShadowView | null): voi
     : view ? 'No command available.' : 'Waiting for the board.';
   panel.querySelector<HTMLElement>('[data-sic-next]')!.textContent = view?.nextAction
     ? actionLabel(view.nextAction) : 'No pending action to show.';
+  const detailsOfClick = clickDetails(view?.clickReturn ?? null);
+  panel.querySelector<HTMLElement>('[data-sic-control]')!.textContent = detailsOfClick.control;
+  panel.querySelector<HTMLElement>('[data-sic-effect]')!.textContent = detailsOfClick.effect;
+  const uncertainty = panel.querySelector<HTMLElement>('[data-sic-uncertainty]')!;
+  uncertainty.textContent = detailsOfClick.uncertainty;
+  uncertainty.hidden = !detailsOfClick.uncertainty;
   const check = view?.returnCheck;
   panel.querySelector<HTMLElement>('[data-sic-return]')!.textContent = !check ? 'No checked return for this board.'
     : check.matched === true ? 'The return matched the V6 plan’s expectation.'

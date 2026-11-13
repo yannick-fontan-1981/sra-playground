@@ -3,6 +3,7 @@ import type { ObservedInputDomain } from './v6-native-observer.ts';
 import type { KnowledgeMemory } from './kernel.ts';
 import type { ExecutionOptions, JsonObject, JsonValue, Primitive } from './ir.ts';
 import type { NativeSrcReceipt } from './v6-src-program.ts';
+import type { NativeClickReturn } from './v6-native-click-return.ts';
 export type NativeRows = readonly (readonly number[])[];
 export type NativePoint = readonly [x: number, y: number];
 export type NativeBox = readonly [left: number, top: number, right: number, bottom: number];
@@ -211,6 +212,7 @@ export interface NativeRuntimeSnapshot extends NativeRecord {
   readonly graphChain?: string;
   readonly graphRevision?: number;
   readonly nativeExecutionDigest?: string;
+  readonly lastClickReturn?: NativeClickReturn;
 }
 
 export interface NativeAuthorization {

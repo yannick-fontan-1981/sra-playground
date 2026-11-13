@@ -186,12 +186,15 @@ app.innerHTML = `
               <dl>
                 <dt>Available commands</dt><dd data-sic-commands>Waiting for the board.</dd>
                 <dt>Next action from V6</dt><dd data-sic-next>No pending action to show.</dd>
-                <dt>Last checked return</dt><dd data-sic-return>No checked return for this board.</dd>
+                <dt>Last observed command</dt><dd data-sic-control>No addressed return for this board yet.</dd>
+                <dt>Visible effect</dt><dd data-sic-effect>Waiting for a checked return.</dd>
+                <dt>V6 check</dt><dd data-sic-return>No checked return for this board.</dd>
               </dl>
             </div>
             <div class="sic-card sic-question">
               <h4>Can we verify the effect?</h4>
               <p class="sic-summary" data-sic-summary>Waiting for the board.</p>
+              <p data-sic-uncertainty hidden></p>
               <p data-sic-evidence></p>
             </div>
           </div>

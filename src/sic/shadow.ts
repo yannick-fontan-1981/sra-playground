@@ -1,11 +1,12 @@
 import type { GameObservation } from '../runtime/browser-games.ts';
 import { isTerminalState, type AgentAction } from '../runtime/contracts.ts';
 import type { V6AgentSnapshot } from '../runtime/v6-agent.ts';
+import type { NativeClickReturn } from '../logos-engine/v6-native-click-return.ts';
 import { evaluateControlEffect, type ControlEffectResolution } from './know-control-effect.ts';
 import type { EvidenceRef, SituationFrame } from './situation.ts';
 
 type ShadowBoard = Pick<GameObservation, 'gameCode' | 'level' | 'state' | 'availableActionIds'>;
-type ShadowAgent = Pick<V6AgentSnapshot, 'sessionId' | 'sequence' | 'status' | 'busy' | 'trace' | 'pendingAction' | 'level'>;
+type ShadowAgent = Pick<V6AgentSnapshot, 'sessionId' | 'sequence' | 'status' | 'busy' | 'trace' | 'pendingAction' | 'level' | 'lastClickReturn'>;
 
 export interface ShadowView {
   readonly gameCode: string;
@@ -13,6 +14,7 @@ export interface ShadowView {
   readonly commands: readonly number[];
   readonly nextAction: AgentAction | null;
   readonly returnCheck: { readonly matched: boolean | null; readonly evidence: EvidenceRef } | null;
+  readonly clickReturn: NativeClickReturn | null;
   readonly resolution: ControlEffectResolution;
 }
 
@@ -30,10 +32,19 @@ function findReturn(agent: ShadowAgent, board: ShadowBoard): ShadowView['returnC
   return null;
 }
 
+function bindClickReturn(agent: ShadowAgent, board: ShadowBoard, returnRef: string): NativeClickReturn | null {
+  const receipt = agent.lastClickReturn;
+  if (!receipt || receipt.toLevel !== board.level || receipt.afterRef !== returnRef) return null;
+  const beforePrefix = `${agent.sessionId}:epoch:${receipt.fromLevel}:revision:${agent.sequence}:frame:`;
+  return receipt.beforeRef.startsWith(beforePrefix) ? receipt : null;
+}
+
 /** Project a settled public snapshot. No commands, graph reads or writes go back to V6. */
 export function readControlEffectShadow(board: ShadowBoard, agent: ShadowAgent | null, boardRevision: number): ShadowView | null {
   if (agent?.busy) return null;
   const current = agent?.sessionId && agent.level === board.level ? agent : null;
+  const returnCheck = current ? findReturn(current, board) : null;
+  const clickReturn = current && returnCheck ? bindClickReturn(current, board, returnCheck.evidence.ref) : null;
   const scope = { session: current?.sessionId ?? `board:${board.gameCode}:${boardRevision}`, level: board.level };
   const revision = current?.sequence ?? boardRevision;
   const phase = isTerminalState(board.state) ? 'terminal' : 'observation';
@@ -53,9 +64,9 @@ export function readControlEffectShadow(board: ShadowBoard, agent: ShadowAgent |
     frame,
     commands,
     nextAction: hasCommand ? nextAction : null,
-    returnCheck: current ? findReturn(current, board) : null,
-    // The browser protocol exposes a command and a return, but has no SIC contract
-    // that certifies the controlled subject or attributes a causal effect to it.
+    returnCheck,
+    clickReturn,
+    // The receipt describes a past click. It cannot bind the next command's subject.
     resolution: evaluateControlEffect({
       scope,
       controlRef: hasCommand && nextAction ? JSON.stringify(nextAction) : null,

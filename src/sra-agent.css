@@ -37,6 +37,7 @@
 .sic-question{border-inline-start:3px solid var(--accent)}
 .sic-question p{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
 .sic-question .sic-summary{color:var(--ink);font-size:17px;font-weight:600;margin-bottom:6px}
+.sic-question p[data-sic-uncertainty]:not([hidden]){margin-bottom:8px}
 .sic-details{margin-top:10px}
 .sic-details summary{padding:10px 0;cursor:pointer;color:var(--accent-hover);font-size:14px;width:fit-content}
 .sic-details ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
