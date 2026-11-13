@@ -14,14 +14,19 @@ import {
   sameTemporalMeasuredBoundary,
   type TemporalReturnMeasurement,
 } from './v6-temporal-return-contract.ts';
+import {
+  validateTemporalSourceDecisionReceipt,
+  type TemporalSourceDecisionReceipt,
+} from './v6-temporal-decision-receipt.ts';
 
 export interface ExternalTemporalSelectionResult {
-  selectedRef: string | null;
+  decisionReceipt: TemporalSourceDecisionReceipt;
   consumeReturn?: TemporalReturnMeasurement;
 }
 
 export interface TemporalSelectionConsumption {
   decision: TemporalSelectionContractResult;
+  decisionReceipt: TemporalSourceDecisionReceipt;
   state: TemporalObservationState;
   consumedReturn: boolean;
   actAuthorized: false;
@@ -47,11 +52,11 @@ function selectedEvidence(decision: TemporalSelectionContractResult): readonly s
 }
 
 /**
- * Consume an externally supplied Source/DRM selection result.
+ * Consume a fully attributed Source/DRM selection receipt.
  *
- * This adapter never chooses a candidate. It only projects the selected ref
- * through the reconstructed Source contract, optionally consumes one exact
- * already-qualified return boundary, and preserves ACT=false.
+ * This adapter never chooses a candidate. It validates the external receipt
+ * against the current Source envelope and observation, then projects its
+ * selected ref through the reconstructed selection contract.
  */
 export function consumeExternalTemporalSelection(
   state: TemporalObservationState,
@@ -59,10 +64,16 @@ export function consumeExternalTemporalSelection(
   external: ExternalTemporalSelectionResult,
 ): TemporalSelectionConsumption {
   const request = requestFromState(state);
-  const decision = projectTemporalSelectionDecision(request, authority, external.selectedRef);
+  validateTemporalSourceDecisionReceipt(external.decisionReceipt, request, authority);
 
-  if (decision.actAuthorized !== false) {
-    throw new Error('temporal selection projection unexpectedly carried ACT authority');
+  const decision = projectTemporalSelectionDecision(
+    request,
+    authority,
+    external.decisionReceipt.selectedRef,
+  );
+
+  if (decision.actAuthorized !== false || external.decisionReceipt.actAuthorized !== false) {
+    throw new Error('temporal selection unexpectedly carried ACT authority');
   }
 
   let next = structuredClone(state);
@@ -92,6 +103,7 @@ export function consumeExternalTemporalSelection(
 
   return {
     decision,
+    decisionReceipt: structuredClone(external.decisionReceipt),
     state: next,
     consumedReturn,
     actAuthorized: false,
