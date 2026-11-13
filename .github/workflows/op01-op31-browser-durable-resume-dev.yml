@@ -10,9 +10,9 @@ permissions:
   contents: read
 
 jobs:
-  validate-core:
+  qualify-durable-resume:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -33,8 +33,12 @@ jobs:
           tests/browser-game-worker-transport.test.ts
           tests/main-browser-durable-session-integration.test.ts
           tests/main-browser-agent-controller-integration.test.ts
-      - name: Prepare pinned browser Python assets
-        run: node scripts/prepare-python.mjs
+      - name: Full TypeScript regression
+        run: node --experimental-transform-types --test tests/*.test.ts
+      - name: Verify current V6 evidence registry
+        run: node scripts/check-v6-entry-point-progress.mjs
+      - name: Production build
+        run: npm run build
       - name: Real Chrome and Pyodide reload qualification
         # Executes two page lifetimes in one fresh Chrome profile.
         run: node scripts/qualify-op01-op31-browser-durable-resume.mjs
