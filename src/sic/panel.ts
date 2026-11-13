@@ -10,7 +10,7 @@ import ls20Directions from './ls20-direction-review.json';
 import ls20ShapeExit from './ls20-review-evidence.json';
 import { captureDecisionSprites, type NativeResolution } from './native-resolution.ts';
 import { compareRecoveryRoute, firstRecovery, isLevelCompletion, recoveryContinuation, type PursuedObjective } from './recovery.ts';
-import { explainDecision, type Decision } from './decision-configurations.ts';
+import { explainDecision, strategyEpisodes, strategyOutcome, type Decision } from './decision-configurations.ts';
 import compositionOperations from './composition-operations.json';
 import type { GameObservation } from '../runtime/browser-games.ts';
 import { compareAboveColors, contrastClickContexts, describeClickContext, type ClickEffectCount } from './click-evidence.ts';
@@ -873,6 +873,9 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
   const native = view?.native;
   const lastPlan = [...returns].reverse().find(item => item.fromLevel === board?.level && item.decision)?.decision;
   const planSource = native?.pending ? native : lastPlan ?? (native?.steps.length ? native : null);
+  const strategyBody = panel.querySelector('[data-sic-strategy-body]')!;
+  const expanded = new Map([...strategyBody.querySelectorAll<HTMLDetailsElement>('details[data-strategy-choice]')]
+    .map(details => [details.dataset.strategyChoice, details.open] as const));
   describe('[data-sic-strategy-body]', [
     view?.native?.family ? `Native 0.68 · Selected method: ${nativeLabel(view.native.family)}.`
       : repeated.length ? `Observed patterns: ${repeated.map(group => `${commands[group.command]} (${group.moved} matching translations)`).join(', ')}.`
@@ -882,6 +885,7 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
         : 'No solving strategy established. Compare conditions before generalizing a return.',
   ]);
   const strategies = panel.querySelector('[data-sic-strategy-body]')!;
+  renderStrategyEpisodes(strategies, returns, native?.pending ? native : null, board?.level, palette, expanded);
   if (planSource) renderDecisionConfigurations(strategies, planSource, 'strategy');
   const operation = planSource?.operation;
   const catalog = document.createElement('details');
@@ -1122,7 +1126,7 @@ function renderRecovery(container: Element, returns: readonly DirectionalReturn[
 
 function renderDecisionConfigurations(container: Element, decision: Decision, kind?: 'strategy' | 'objective'): void {
   for (const configuration of explainDecision(decision)) {
-    if (kind && configuration.kind !== kind) continue;
+    if ((kind && configuration.kind !== kind) || (kind === 'strategy' && configuration.title)) continue;
     const details = document.createElement('details');
     details.className = 'sic-details';
     const title = document.createElement('summary');
@@ -1139,6 +1143,94 @@ function renderDecisionConfigurations(container: Element, decision: Decision, ki
     details.append(title, facts);
     container.append(details);
   }
+}
+
+function renderStrategyEpisodes(container: Element, returns: readonly DirectionalReturn[], pending: NativeResolution | null,
+  level: number | undefined, palette: readonly string[], expanded: ReadonlyMap<string | undefined, boolean>): void {
+  const last = returns.at(-1);
+  const episodes = last ? strategyEpisodes(returns, last.sessionId) : [];
+  const current = pending ? explainDecision(pending).filter(rule => rule.title) : [];
+  const priorLevel = episodes.filter(item => item.first.fromLevel !== level).at(-1)?.first.fromLevel;
+  const visible = episodes.filter(item => item.first.fromLevel === level || item.first.fromLevel === priorLevel).slice(-16);
+  const section = document.createElement('section');
+  section.className = 'sic-strategy-configurations';
+  const heading = document.createElement('h5');
+  heading.textContent = 'Strategy configurations';
+  const intro = document.createElement('p');
+  intro.textContent = visible.length || current.length ? 'What the engine needed, what it chose, and what the game returned.'
+    : 'No strategy configuration matched the native evidence captured so far.';
+  section.append(heading, intro);
+  const important = new Set(['colorContact', 'reserveContact', 'reserveAndColor']);
+  for (const configuration of current) {
+    if (visible.some(item => item.configuration.when === configuration.when && item.last.decision?.proposalRef === pending?.proposalRef)) continue;
+    const active = document.createElement('p');
+    active.textContent = `Proposed · ${configuration.title}: ${configuration.need}. ${configuration.choice}`;
+    section.append(active);
+  }
+  for (const { configuration, first, last: end } of visible) {
+    const start = first.decision!, decision = end.decision!;
+    const strategy = start.context?.strategy;
+    const details = document.createElement('details'), title = document.createElement('summary');
+    details.className = 'sic-details';
+    details.dataset.strategyChoice = `${first.sessionId}:${first.sequence}:${configuration.when}`;
+    details.open = expanded.get(details.dataset.strategyChoice) ?? (important.has(configuration.when)
+      && !visible.some(other => other.configuration.when === configuration.when && other.first.sequence > first.sequence));
+    const actions = first.sequence === end.sequence ? `action ${first.sequence}` : `actions ${first.sequence}–${end.sequence}`;
+    title.textContent = `L${first.fromLevel} · ${actions} · ${configuration.title}`;
+    const facts = document.createElement('dl');
+    const evidence = [
+      strategy?.color === 'different' && (configuration.when === 'colorContact' || configuration.when === 'reserveAndColor')
+        ? 'The compared motifs had different colors.' : null,
+      strategy?.meter ? `At selection: about ${strategy.meter.steps} moves before the gauge ran out at the observed rate.` : null,
+      strategy?.directCost != null && strategy.capacityNeeded
+        ? `The direct route needed at least ${strategy.directCost} moves.` : null,
+      strategy?.totalCost != null && strategy.plannedCharges > 0
+        ? `The engine projected ${strategy.totalCost} moves with ${strategy.plannedCharges} recharge ${strategy.plannedCharges === 1 ? 'stop' : 'stops'}.` : null,
+      strategy?.colorWitness != null ? `The engine reused the color effect seen at action ${strategy.colorWitness}.` : null,
+    ].filter(Boolean).join(' ');
+    const meter = decision.strategyMeter;
+    const measured = meter?.unitsAfter != null ? ` Gauge length: ${meter.unitsBefore} → ${meter.unitsAfter} pixels.` : '';
+    const factsList = [
+      ['Need', configuration.need],
+      ['Situation', [configuration.situation, evidence].filter(Boolean).join(' ')],
+      ['Choice', configuration.choice],
+      ['Return', strategyOutcome(configuration, end) + measured],
+    ] as const;
+    for (const [name, description] of factsList) {
+      const term = document.createElement('dt'), value = document.createElement('dd');
+      term.textContent = name; value.textContent = description;
+      facts.append(term, value);
+    }
+    details.append(title, facts);
+    const frames = () => {
+      if (!details.open || details.querySelector('.sic-sprites')) return;
+      const target = decision.strategyTarget ?? start.strategyTarget;
+      const terminal = decision.remainingSteps === 1 && decision.stepIndex != null;
+      if (target) details.append(renderFrames([['Planned tile · before', target.before],
+        ['Planned tile · after the last step', terminal ? target.after : null]], palette));
+      if (configuration.when === 'colorContact' || configuration.when === 'reserveAndColor') {
+        for (const [index, sprite] of decision.sprites.filter(sprite => sprite.label.startsWith('Pattern compared')).entries()) {
+          details.append(renderFrames([[`Motif ${index + 1} · before`, sprite.before],
+            [`Motif ${index + 1} · after`, sprite.after]], palette));
+        }
+      }
+      if (meter || start.strategyMeter) {
+        const gaugeFrames = renderFrames(meter ? [['Gauge · before the last step', meter.before],
+          ['Gauge · after the last step', meter.after]] : [['Gauge · at selection', start.strategyMeter!.before]], palette);
+        gaugeFrames.classList.add('sic-strategy-gauge');
+        for (const canvas of gaugeFrames.querySelectorAll('canvas')) {
+          const scale = Math.min(3, 168 / canvas.width, 72 / canvas.height);
+          canvas.style.width = `${canvas.width * scale}px`;
+          canvas.style.height = `${canvas.height * scale}px`;
+        }
+        details.append(gaugeFrames);
+      }
+    };
+    details.addEventListener('toggle', frames);
+    section.append(details);
+    frames();
+  }
+  container.append(section);
 }
 
 function renderRecoveryContinuation(section: HTMLElement, first: DirectionalReturn,

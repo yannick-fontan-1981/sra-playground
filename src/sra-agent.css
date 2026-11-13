@@ -69,6 +69,13 @@
 .sic-route figcaption{font-size:12px;margin-top:5px}
 .sic-recovery-timeline{padding-left:1.5rem}
 .sic-recovery-timeline>li{margin-bottom:6px}
+.sic-strategy-configurations{margin-top:14px;padding-top:10px;border-top:1px solid var(--line)}
+.sic-strategy-configurations h5{margin:0 0 6px;font-size:14px}
+.sic-strategy-configurations details{margin-top:4px}
+.sic-strategy-configurations dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0 0 8px;font-size:13px}
+.sic-strategy-configurations dt{font-weight:600}
+.sic-strategy-configurations dd{margin:0;color:var(--subtle)}
+.sic-strategy-gauge .sic-sprite canvas{max-width:168px;max-height:72px}
 [data-sic-direction-select]{max-width:100%;min-height:34px;color:var(--ink);background:var(--surface-muted);border:1px solid var(--control-border);border-radius:4px}
 .sic-observations details{margin-top:8px}
 .sic-observations summary{cursor:pointer;color:var(--accent-hover);font-size:13px}

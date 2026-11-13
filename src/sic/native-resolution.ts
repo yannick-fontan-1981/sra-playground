@@ -15,6 +15,21 @@ export interface NativePlanContext {
   readonly entryDelta: number | null;
   readonly entryStatus: string | null;
   readonly entryActions: readonly number[];
+  readonly strategy?: NativeStrategyContext;
+}
+
+type MeterStrip = readonly [axis: 'x' | 'y', line: number, color: number, anchor: 'lo' | 'hi', edge: number];
+
+interface NativeStrategyContext {
+  readonly route: string | null;
+  readonly color: 'equal' | 'different' | null;
+  readonly capacityNeeded: boolean;
+  readonly directCost: number | null;
+  readonly totalCost: number | null;
+  readonly plannedCharges: number;
+  readonly colorWitness: number | null;
+  readonly meter: { readonly strip: MeterStrip | null; readonly steps: number; readonly units: number;
+    readonly rate: number; readonly capacity: number | null } | null;
 }
 
 export interface NativeResolution {
@@ -44,6 +59,7 @@ export interface NativeResolution {
 const record = (value: unknown): Record<string, unknown> | null =>
   value !== null && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : null;
 const label = (value: unknown) => typeof value === 'string' && value.length <= 320 ? value : null;
+const natural = (value: unknown) => typeof value === 'number' && Number.isSafeInteger(value) && value >= 0 ? value : null;
 const actions: Record<string, string> = { ACTION1: 'Up', ACTION2: 'Down', ACTION3: 'Left', ACTION4: 'Right',
   ACTION5: 'Space', ACTION6: 'Click', ACTION7: 'Action 7' };
 
@@ -118,13 +134,25 @@ export function readNativeResolution(agent: {
   const facts = record(record(proposal?.morphology)?.measured_facts);
   const orientation = facts?.orientation_relation;
   const quarterTurns = (value: unknown) => typeof value === 'number' && Number.isInteger(value) && value >= 0 && value < 4 ? value : null;
-  const entryActions = Array.isArray(entry?.evidence) ? entry.evidence.slice(0, 16).flatMap(ref => {
+  const priorAction = (ref: unknown): number | null => {
     const prefix = `${scope}${agent.level}:revision:`;
-    if (typeof ref !== 'string' || !ref.startsWith(prefix) || ref === activeRef || ref === entry?.observation_ref) return [];
+    if (typeof ref !== 'string' || !ref.startsWith(prefix)) return null;
     const match = /^(\d+):frame:/.exec(ref.slice(prefix.length));
     const sequence = match ? Number(match[1]) - 1 : 0;
-    return sequence > 0 && sequence <= agent.sequence ? [sequence] : [];
+    return sequence > 0 && sequence <= agent.sequence ? sequence : null;
+  };
+  const entryActions = Array.isArray(entry?.evidence) ? entry.evidence.slice(0, 16).flatMap(ref => {
+    const action = ref === activeRef || ref === entry?.observation_ref ? null : priorAction(ref);
+    return action === null ? [] : [action];
   }) : [];
+  const forecast = record(facts?.meter_forecast);
+  const strip = forecast?.measured_strip;
+  const meterStrip: MeterStrip | null = Array.isArray(strip) && strip.length === 5
+    && (strip[0] === 'x' || strip[0] === 'y') && natural(strip[1]) !== null && natural(strip[2]) !== null
+    && (strip[3] === 'lo' || strip[3] === 'hi') && natural(strip[4]) !== null
+    ? [strip[0], strip[1], strip[2], strip[3], strip[4]] : null;
+  const meterSteps = natural(forecast?.steps_before_empty), meterUnits = natural(forecast?.current_units), meterRate = natural(forecast?.loss_per_step);
+  const color = facts?.color_relation;
   const context: NativePlanContext | null = morphology ? {
     obligation: label(morphology.obligation),
     access: label(morphology.access_phase),
@@ -134,6 +162,17 @@ export function readNativeResolution(agent: {
     entryDelta: quarterTurns(entry?.entry_delta),
     entryStatus: label(entry?.status),
     entryActions: [...new Set(entryActions)],
+    strategy: {
+      route: label(morphology.route_key),
+      color: color === 'equal' || color === 'different' ? color : null,
+      capacityNeeded: facts?.capacity_needed === true,
+      directCost: natural(facts?.direct_goal_cost_lower_bound),
+      totalCost: natural(morphology.total_cost),
+      plannedCharges: Array.isArray(morphology.charge_order) ? morphology.charge_order.length : 0,
+      colorWitness: priorAction(record(facts?.feature_reaccess)?.effect_after),
+      meter: meterSteps !== null && meterUnits !== null && meterRate
+        ? { strip: meterStrip, steps: meterSteps, units: meterUnits, rate: meterRate, capacity: natural(forecast?.capacity_steps) } : null,
+    },
   } : null;
   const pair = record(morphology?.pair);
   const subjects: NativeResolution['subjects'][number][] = [];
@@ -195,7 +234,40 @@ export interface DecisionSprites {
   readonly stepIndex?: number | null;
   readonly context?: NativePlanContext | null;
   readonly destinationSprite?: NativeRows;
+  readonly strategyTarget?: { readonly before: NativeRows; readonly after: NativeRows | null };
+  readonly strategyMeter?: { readonly before: NativeRows; readonly after: NativeRows | null;
+    readonly unitsBefore: number; readonly unitsAfter: number | null };
   readonly sprites: readonly { readonly label: string; readonly before: NativeRows; readonly after: NativeRows | null }[];
+}
+
+function captureMeter(meter: NonNullable<NativeStrategyContext['meter']>, before: NativeRows, after: NativeRows | null,
+  firstStep: boolean): DecisionSprites['strategyMeter'] {
+  if (!meter.strip) return undefined;
+  const [axis, line, color, anchor, edge] = meter.strip;
+  const getLine = (rows: NativeRows) => axis === 'x' ? rows[line] : rows[0]?.[line] === undefined ? undefined : rows.map(row => row[line]!);
+  const length = (rows: NativeRows): number | null => {
+    const values = getLine(rows);
+    if (!values || edge > values.length) return null;
+    let start = anchor === 'lo' ? edge : edge - 1;
+    const direction = anchor === 'lo' ? 1 : -1;
+    let count = 0;
+    while (values[start] === color) { count++; start += direction; }
+    // A shifted anchor or another run is not the same strip measured by 0.68.
+    if (values[anchor === 'lo' ? edge - 1 : edge] === color || values.filter(value => value === color).length !== count) return null;
+    return count;
+  };
+  const unitsBefore = length(before);
+  if (unitsBefore === null || (firstStep && unitsBefore !== meter.units)) return undefined;
+  const unitsAfter = after ? length(after) : null;
+  const extent = getLine(before)!.length;
+  const width = Math.max(unitsBefore, unitsAfter ?? 0, (meter.capacity ?? 0) * meter.rate);
+  const lo = anchor === 'lo' ? edge : Math.max(0, edge - width);
+  const hi = anchor === 'lo' ? Math.min(extent, edge + width) : edge;
+  if (hi <= lo) return undefined;
+  // Keep both bar ends and the full strip so before/after can be compared.
+  const other = Math.min(line + 1, (axis === 'x' ? before.length : before[0]!.length) - 1);
+  const box: NativeBox = axis === 'x' ? [lo, line, hi - 1, other] : [line, lo, other, hi - 1];
+  return { before: cropReturn(before, box, 1), after: after && unitsAfter !== null ? cropReturn(after, box, 1) : null, unitsBefore, unitsAfter };
 }
 
 export function captureDecisionSprites(decision: NativeResolution, before: NativeRows, after: NativeRows | null): DecisionSprites {
@@ -214,8 +286,21 @@ export function captureDecisionSprites(decision: NativeResolution, before: Nativ
     && right < (after[0]?.length ?? 0) && bottom < after.length
     ? cropReturn(after, [next[0], next[1], right, bottom], Math.max(1, Math.ceil(Math.max(right - next[0] + 1, bottom - next[1] + 1) / 20)))
     : undefined;
+  const target = decision.route.at(-1), context = decision.context;
+  const strategy = context?.strategy;
+  const strategyMeter = strategy?.meter ? captureMeter(strategy.meter, before, after, decision.nextIndex === 0) : undefined;
+  const targetRight = target && box ? target[0] + box[2] - box[0] : -1;
+  const targetBottom = target && box ? target[1] + box[3] - box[1] : -1;
+  let strategyTarget: DecisionSprites['strategyTarget'];
+  if (strategy && target && target[0] >= 0 && target[1] >= 0 && targetRight >= target[0] && targetBottom >= target[1]
+      && targetRight < (before[0]?.length ?? 0) && targetBottom < before.length) {
+    const region: NativeBox = [target[0], target[1], targetRight, targetBottom];
+    const stride = Math.max(1, Math.ceil(Math.max(targetRight - target[0] + 1, targetBottom - target[1] + 1) / 20));
+    strategyTarget = { before: cropReturn(before, region, stride),
+      after: after && targetRight < (after[0]?.length ?? 0) && targetBottom < after.length ? cropReturn(after, region, stride) : null };
+  }
   return { family: decision.family, objective: decision.objective, objectiveSource: decision.objectiveSource,
     operation: decision.operation, composition: decision.composition, question: decision.question,
     proposalRef: decision.proposalRef, route: decision.route, steps: decision.steps.slice(decision.nextIndex ?? 0),
-    remainingSteps: decision.remainingSteps, stepIndex: decision.nextIndex, context: decision.context, destinationSprite, sprites };
+    remainingSteps: decision.remainingSteps, stepIndex: decision.nextIndex, context, destinationSprite, strategyTarget, strategyMeter, sprites };
 }
