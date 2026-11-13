@@ -1,0 +1,37 @@
+name: Lot 9B performance qualification proof
+
+on:
+  push:
+    branches:
+      - recovery/lot9b-official-performance-qualified-20261112
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18.0'
+          cache: npm
+      - name: Install Node dependencies
+        run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Verify official result and manifest
+        run: |
+          node --test tests/lot9b-official-performance-proof.test.mjs
+          node scripts/verify-native-loop-runner-manifest.mjs
+      - name: Targeted Lot 9B regression
+        run: |
+          node --test \
+            tests/native-loop-cost-harness.test.mjs \
+            tests/native-loop-session-adapter.test.mjs \
+            tests/native-loop-region-candidate-hook.test.mjs \
+            tests/native-loop-public-corpus-runner.test.mjs \
+            tests/native-loop-region-benchmark-runners.test.mjs
