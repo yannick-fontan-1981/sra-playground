@@ -1,0 +1,58 @@
+name: Reconcile OP01-OP31 live resume evidence
+
+on:
+  push:
+    branches:
+      - op01-op31-live-resume-evidence-reconcile-20261113
+    paths:
+      - '.github/workflows/op01-op31-reconcile-live-resume-evidence.yml'
+      - 'scripts/recovery/apply-op01-op31-live-resume-evidence.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reconcile-live-resume-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18.0'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Show browser runtime
+        run: |
+          command -v google-chrome-stable || command -v google-chrome || command -v chromium || command -v chromium-browser
+          (google-chrome-stable --version || google-chrome --version || chromium --version || chromium-browser --version)
+      - name: Build production bundle and prepare Pyodide assets
+        run: npm run build
+      - name: Qualify real Chrome Worker and Pyodide session continuity
+        env:
+          OP01_OP31_LIVE_SMLP_SESSION_RESUME_REPORT: op01-op31-live-smlp-session-resume-report.json
+        run: node scripts/qualify-op01-op31-live-smlp-session-resume.mjs
+      - name: Reconcile qualified evidence with the current canonical registry
+        run: node scripts/recovery/apply-op01-op31-live-resume-evidence.mjs op01-op31-live-smlp-session-resume-report.json
+      - name: Run complete TypeScript regression suite
+        run: node --experimental-transform-types --test tests/*.test.ts
+      - name: Test live resume report contract
+        run: node --test tests/op01-op31-live-smlp-session-resume-contract.test.mjs
+      - name: Validate reconstructed V6 registry
+        run: node scripts/check-v6-entry-point-progress.mjs
+      - name: Check patch hygiene
+        run: git diff --check
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: op01-op31-live-resume-evidence-reconciled
+          path: |
+            op01-op31-live-smlp-session-resume-report.json
+            docs/migration/op01-op31-progress.md
+            docs/migration/v6-entry-point-progress.json
+            docs/recovery/op01-op31-live-smlp-session-resume-20261113.md
+            docs/recovery/op01-op31-live-smlp-session-resume-qualified.json
+            tests/v6-entry-point-live-resume-evidence.test.ts
+          if-no-files-found: warn
