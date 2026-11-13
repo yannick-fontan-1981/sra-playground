@@ -294,12 +294,12 @@ export class TemporalActionBoundaryDispatchRefusedError
   readonly redeliveryPermitted = false as const;
   readonly reconciliationRequired = true as const;
   readonly transportAttempted = false as const;
+  readonly reason: TemporalActionBoundaryDispatchRefusalReason;
 
-  constructor(
-    readonly reason: TemporalActionBoundaryDispatchRefusalReason,
-  ) {
+  constructor(reason: TemporalActionBoundaryDispatchRefusalReason) {
     super(`temporal ActionBoundary refused before transport: ${reason}`);
     this.name = 'TemporalActionBoundaryDispatchRefusedError';
+    this.reason = reason;
   }
 }
 
@@ -308,17 +308,23 @@ export class TemporalActionBoundaryUncertainError
   readonly outcomeStatus = 'unknown' as const;
   readonly redeliveryPermitted = false as const;
   readonly reconciliationRequired = true as const;
+  readonly dispatchRef: string;
+  readonly requestDigest: string;
+  readonly journal: TemporalActionBoundaryJournal;
 
   constructor(
-    readonly dispatchRef: string,
-    readonly requestDigest: string,
-    readonly journal: TemporalActionBoundaryJournal,
+    dispatchRef: string,
+    requestDigest: string,
+    journal: TemporalActionBoundaryJournal,
     cause?: unknown,
   ) {
     super(
       `dispatch outcome is unknown for ${dispatchRef}; redelivery is forbidden until external reconciliation`,
     );
     this.name = 'TemporalActionBoundaryUncertainError';
+    this.dispatchRef = dispatchRef;
+    this.requestDigest = requestDigest;
+    this.journal = structuredClone(journal);
     if (cause !== undefined) {
       (this as Error & { cause?: unknown }).cause = cause;
     }
