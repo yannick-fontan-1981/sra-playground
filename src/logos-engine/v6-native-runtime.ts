@@ -204,6 +204,7 @@ export interface NativeV6RuntimeConfiguration {
   authorityPolicy?: { provided_objective: { definition: string } };
   /** Same source policy drives the native common caller's retained components. */
   callerStrategy?: R;
+  sicFrontier?: import('../sic/frontier-configuration.ts').FrontierConfiguration;
   /** The same registered instances acquire passive evidence in source order. */
   acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; inventory?: ObservedInventory; reaction?: OrderedReaction; reactive?: ReactiveContact; chart?: ChartNavigation; recolor?: TopologicalRecolor; axial?: AxialQuestion; window?: WindowQuestion; recruitment?: OrderedRecruitment; workshop?: RankedWorkshop; symbols?: SymbolTransactions; morphology?: NativeMorphologyFamily; feedback?: NativeFeedbackFamily; fields?: AddressedMaterial; binding?: ObservedBinding; preparations?: LinkedTemporalPreparation; preview?: NativePreviewPacking; selectedRigid?: NativeSelectedRigid };
 }
@@ -219,6 +220,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private authority: NativeCompositionAuthority | null = null;
   private caller: NativeCallerCoordinator | null = null;
   private readonly callerStrategy?: R;
+  private readonly sicFrontier?: import('../sic/frontier-configuration.ts').FrontierConfiguration;
   private readonly acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; inventory?: ObservedInventory; reaction?: OrderedReaction; reactive?: ReactiveContact; chart?: ChartNavigation; recolor?: TopologicalRecolor; axial?: AxialQuestion; window?: WindowQuestion; recruitment?: OrderedRecruitment; workshop?: RankedWorkshop; symbols?: SymbolTransactions; morphology?: NativeMorphologyFamily; feedback?: NativeFeedbackFamily; fields?: AddressedMaterial; binding?: ObservedBinding; preparations?: LinkedTemporalPreparation; preview?: NativePreviewPacking; selectedRigid?: NativeSelectedRigid };
   private callerAcquisitions = 0;
   private callerBoundaryReplays = 0;
@@ -264,6 +266,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       || configuration.families.some(f => typeof f.restore !== 'function')) throw new TypeError('A native implementation identity and distinct state-restorable families are required');
     this.sourceDigest = configuration.sourceDigest;
     this.callerStrategy = configuration.callerStrategy ? structuredClone(configuration.callerStrategy) : undefined;
+    this.sicFrontier = configuration.sicFrontier;
     this.acquisitionFamilies = configuration.acquisitionFamilies;
     if (this.callerStrategy && !configuration.authorityPolicy) throw new TypeError('The common caller requires native WHY/ACT authority');
     this.families = [...configuration.families, ...(this.callerStrategy ? nativeCallerFamilies(() => {
@@ -410,7 +413,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       }
       if (this.callerStrategy) {
         this.caller = new NativeCallerCoordinator(this.authority!.memory, { targetLevels: input.budgets.targetLevels,
-          domain: this.domain, strategy: this.callerStrategy, informationGoal: 'accessible_view_frontier' });
+          domain: this.domain, strategy: this.callerStrategy, informationGoal: 'accessible_view_frontier', sicFrontier: this.sicFrontier });
         await this.caller.initialize(this.observation);
         await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'initialize', statement: 'caller.install' }, this.authority!.checkpointWrites());
       }
@@ -2388,6 +2391,6 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     fullV6Parity: false };
   const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
   const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
-  return new NativeV6Runtime({ sourceDigest, families, groups, authorityPolicy: loaded.common, callerStrategy: configuration, acquisitionFamilies: { supports, recall, framed, outline: outlineOwner, inventory, reaction, reactive, chart, recolor, axial, window, recruitment, workshop, symbols, morphology, feedback, fields, binding, preparations, preview: previewOwner, selectedRigid: selectedRigidOwner },
+  return new NativeV6Runtime({ sourceDigest, families, groups, authorityPolicy: loaded.common, callerStrategy: configuration, sicFrontier: recovery.frontier, acquisitionFamilies: { supports, recall, framed, outline: outlineOwner, inventory, reaction, reactive, chart, recolor, axial, window, recruitment, workshop, symbols, morphology, feedback, fields, binding, preparations, preview: previewOwner, selectedRigid: selectedRigidOwner },
     maxPointOccurrences: loaded.common.input_domain.max_point_occurrences, ...(options.now ? { now: options.now } : {}) });
 }

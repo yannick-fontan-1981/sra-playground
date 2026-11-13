@@ -21,6 +21,7 @@ import type { ShadowView } from './shadow.ts';
 import type { SituationKey } from './situation.ts';
 import { contactRecoveryStrategies, isContactStrategy } from './active-recovery.ts';
 import type { AgendaEntry } from './strategy-agenda.ts';
+import { frontierInputOrders } from './frontier-configuration.ts';
 
 const commands: Readonly<Record<number, string>> = {
   1: 'Up', 2: 'Down', 3: 'Left', 4: 'Right', 5: 'Space', 6: 'Click', 7: 'Action 7',
@@ -900,6 +901,12 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
     strategyEditors.set(panel, editor);
   }
   const timeline = strategyTimeline(returns, editor.activeRules);
+  panel.querySelector('[data-sic-recovery-settings]')!.dispatchEvent(new CustomEvent('sic-frontier-choices', {
+    detail: timeline.flatMap(({ first }) => {
+      const frontier = first.decision?.frontierStrategy;
+      return frontier?.inputOrder && frontier.choices ? [{ sequence: first.sequence, order: frontier.inputOrder, choices: frontier.choices }] : [];
+    }),
+  }));
   const shown = selectTimelineEpisodes(timeline, board?.level);
   const agentActions = mode === 'agent' ? returns.length : 0;
   editor.update(board?.gameCode ?? null, timeline, shown, agentActions, (item, caption) => strategyEvidenceFrames(item, palette, caption),
@@ -1255,7 +1262,14 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
     if (searchOperation) factsList.push(['Access search', `${searchOperation.key} · ${searchOperation.description}`]);
     if (operation) factsList.push(['Native composition operation', `${operation.key} · ${operation.description}`]);
     const frontierStrategy = first.decision?.frontierStrategy;
-    if (frontierStrategy) factsList.push(['Frontier strategy', frontierStrategy.title], ['Information objective', frontierStrategy.objective.label]);
+    if (frontierStrategy) {
+      factsList.push(['Frontier strategy', frontierStrategy.title], ['Information objective', frontierStrategy.objective.label]);
+      if (frontierStrategy.inputOrder) factsList.push(['Experiment priority', frontierInputOrders[frontierStrategy.inputOrder]]);
+      if (frontierStrategy.choices && frontierStrategy.choices.least_tried !== frontierStrategy.choices.command_order) {
+        const { least_tried, command_order } = frontierStrategy.choices;
+        factsList.push(['Choice on this board', `Least-used: ${least_tried} · Stable order: ${command_order}`]);
+      }
+    }
     if (!operation && first.decision?.question) factsList.push(['What the engine is trying', nativeLabel(first.decision.question)]);
     factsList.push(['Plan', planText(first)], ['Return', `${last.sequence} · ${action(last)} · ${statuses[status]}${expected ? ` · Expected: ${expected}` : ''}.`]);
     if (check && status === 'contradicted') factsList.push(['Native check', nativeLabel(check)]);

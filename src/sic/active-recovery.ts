@@ -1,5 +1,6 @@
 import { symbolicDigest } from '../logos-engine/v6-hash.ts';
 import { evaluateStrategyGuards, type StrategyFact, type StrategyGuard } from './strategy-agenda.ts';
+import { compileFrontierConfiguration, defaultFrontierConfiguration, type FrontierConfiguration } from './frontier-configuration.ts';
 
 export const contactRecoveryStrategies = Object.freeze({
   revise_rooted_contact: 'Revise the contact projection',
@@ -19,6 +20,7 @@ export interface RecoveryPack {
   readonly maxDepth: number;
   readonly maxNodes: number;
   readonly strategyOrder?: readonly ContactStrategy[];
+  readonly frontier?: FrontierConfiguration;
 }
 
 export const defaultRecoveryPack: RecoveryPack = Object.freeze({
@@ -27,9 +29,9 @@ export const defaultRecoveryPack: RecoveryPack = Object.freeze({
 
 export function compileRecoveryPack(input: unknown = defaultRecoveryPack): RecoveryPack {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new TypeError('Expected a recovery configuration.');
-  const fields = Object.keys(input).sort().join(',');
-  if (fields !== 'maxDepth,maxNodes,mode,version' && fields !== 'maxDepth,maxNodes,mode,strategyOrder,version') {
-    throw new TypeError('Recovery configuration accepts version, mode, maxDepth, maxNodes and optional strategyOrder.');
+  const fields = Object.keys(input);
+  if (fields.some(field => !['version', 'mode', 'maxDepth', 'maxNodes', 'strategyOrder', 'frontier'].includes(field))) {
+    throw new TypeError('The SIC pack contains an unrecognized field.');
   }
   const pack = input as Record<string, unknown>;
   if (pack.version !== 1) throw new TypeError('Unsupported recovery configuration version.');
@@ -44,8 +46,10 @@ export function compileRecoveryPack(input: unknown = defaultRecoveryPack): Recov
     || !contactRecoveryOrder.every(id => order.includes(id)))) {
     throw new TypeError('Recovery strategy order must contain each registered strategy exactly once.');
   }
+  const frontier = Object.hasOwn(pack, 'frontier') ? compileFrontierConfiguration(pack.frontier) : defaultFrontierConfiguration;
   return Object.freeze({ version: 1, mode: pack.mode, maxDepth: pack.maxDepth, maxNodes: pack.maxNodes,
-    ...(Array.isArray(order) && order[0] !== contactRecoveryOrder[0] ? { strategyOrder: Object.freeze([...order]) } : {}) });
+    ...(Array.isArray(order) && order[0] !== contactRecoveryOrder[0] ? { strategyOrder: Object.freeze([...order]) } : {}),
+    ...(frontier.inputOrder !== defaultFrontierConfiguration.inputOrder ? { frontier } : {}) });
 }
 
 export const rootedRecoveryStrategy = Object.freeze({

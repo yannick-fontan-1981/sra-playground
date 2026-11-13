@@ -293,9 +293,9 @@ app.innerHTML = `
             <section class="sic-card">
               <h4>Ways to solve the situation</h4>
               <details class="sic-details sic-strategy-editor">
-                <summary>Contact recovery in the engine</summary>
+                <summary>Active SIC settings</summary>
                 <form data-sic-recovery-settings>
-                  <p>Applies after a new agent session starts. Shadow mode records the counterexample and stops at that decision.</p>
+                  <p>Changes apply to new agent sessions. Contact recovery in shadow stops at its counterexample.</p>
                   <label for="sic-recovery-mode">Recovery mode</label>
                   <select id="sic-recovery-mode" name="mode"><option value="active">Active</option><option value="shadow">Shadow</option></select>
                   <label for="sic-recovery-priority">First contact-recovery strategy</label>
@@ -303,10 +303,13 @@ app.innerHTML = `
                   <p data-sic-recovery-fallback></p>
                   <label>Maximum search depth <input name="maxDepth" type="number" required min="1" max="88" step="1"></label>
                   <label>Maximum states <input name="maxNodes" type="number" required min="1" max="1000" step="1"></label>
-                  <button type="submit">Save recovery settings</button>
+                  <label for="sic-frontier-input-order">Priority among equally supported experiments</label>
+                  <select id="sic-frontier-input-order" name="frontierInputOrder"></select>
+                  <p data-sic-frontier-preview></p>
+                  <button type="submit">Save SIC settings</button>
                   <button type="button" data-sic-recovery-rollback>Restore previous revision</button>
                   <details class="sic-details">
-                    <summary>Import or export a recovery pack</summary>
+                    <summary>Import or export SIC settings</summary>
                     <label for="sic-recovery-pack">Pack JSON</label>
                     <textarea id="sic-recovery-pack" name="pack" rows="6" maxlength="32768" spellcheck="false"></textarea>
                     <button type="button" data-sic-recovery-export>Show saved pack</button>

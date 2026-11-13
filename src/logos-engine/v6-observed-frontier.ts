@@ -7,6 +7,7 @@ import type { DrmCondition } from './v6-drm-projector.ts';
 import { predictCandidateRule } from './v6-transition-learning.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
 import { selectFrontierStrategy } from '../sic/frontier-strategy.ts';
+import { defaultFrontierConfiguration, type FrontierConfiguration } from '../sic/frontier-configuration.ts';
 
 type R = Record<string, any>;
 export const FRONTIER_SCHEMA = 'prototype.observed_frontier.v1';
@@ -48,6 +49,7 @@ export interface FrontierProposeOptions {
   prefix_evidence?: readonly R[]; experimental_probes?: readonly R[]; control_probe?: R | null;
   control_acquisition?: R | null; curiosity?: R | null; return_episode?: readonly (readonly [R, string, R])[] | null;
   sic_agenda?: boolean;
+  sic_frontier?: FrontierConfiguration;
 }
 
 /** Internal checkpoint ownership. The default source-compatible object remains
@@ -269,23 +271,34 @@ export class ObservedFrontier {
       hypothesis_refs: basis.slice(0, 8).map(r => r.rule_id), authority_transferred: false, input_trials_at_context: node.attempts[key]?.count ?? 0,
       candidate_applicability: checks.slice(0, 8), candidate_applicability_total: checks.length, current_candidate_prediction_admitted: !!candidates.length };
   }
-  async open(index: string): Promise<R[]> {
+  async open(index: string, order: FrontierConfiguration['inputOrder'] = 'least_tried',
+    comparePriority?: (leastTried: R | undefined, commandOrder: R | undefined) => void): Promise<R[]> {
     const node = this.nodes[index]; if (terminal(node.protocol.state)) return [];
     const questions: R[] = [];
     for (const key of Object.keys(node.actions)) if (!own(node.attempts, key)) questions.push(await this.question(index, key));
     const counts = new Map<R, number>();
-    for (const q of questions) counts.set(q, this.action_counts[`${node.protocol.level_epoch}:${await frontierActionKey(q.action)}`] ?? 0);
-    return questions.sort((a, b) => a.priority - b.priority || counts.get(a)! - counts.get(b)! || compareUnicode(canonical(a.action), canonical(b.action)));
+    if (order === 'least_tried' || comparePriority) {
+      for (const q of questions) counts.set(q, this.action_counts[`${node.protocol.level_epoch}:${await frontierActionKey(q.action)}`] ?? 0);
+    }
+    const byCommand = (a: R, b: R) => a.priority - b.priority || compareUnicode(canonical(a.action), canonical(b.action));
+    const byUse = (a: R, b: R) => a.priority - b.priority || (counts.get(a) ?? 0) - (counts.get(b) ?? 0) || byCommand(a, b);
+    const ranked = questions.sort(order === 'least_tried' ? byUse : byCommand);
+    if (comparePriority) {
+      const [first] = ranked, alternate = ranked.reduce<R | undefined>((best, current) =>
+        !best || (order === 'least_tried' ? byCommand : byUse)(current, best) < 0 ? current : best, undefined);
+      comparePriority(order === 'least_tried' ? first : alternate, order === 'command_order' ? first : alternate);
+    }
+    return ranked;
   }
   async canProbeHere(observation: R, command: R): Promise<boolean> {
     const node = this.nodes[await frontierIndex(observation)];
     return observation.available_action_refs.includes(command.action_ref) && (!node || !own(node.attempts, await frontierActionKey(command)));
   }
-  async access(start: string): Promise<readonly [R[] | null, R | null]> {
+  async access(start: string, order?: FrontierConfiguration['inputOrder']): Promise<readonly [R[] | null, R | null]> {
     const epoch = this.nodes[start].protocol.level_epoch, queue: [string, R[]][] = [[start, []]], seen = new Set([start]); let head = 0;
     while (head < queue.length && head < 2048) {
       const [index, path] = queue[head++]!;
-      if (path.length) for (const question of await this.open(index)) {
+      if (path.length) for (const question of await this.open(index, order)) {
         const first = path[0]!, trial = await digest([start, first.action_key, question.question_ref]);
         if ((this.navigation_trials[trial] ?? 0) < 2) return [path, question];
       }
@@ -302,8 +315,14 @@ export class ObservedFrontier {
   async propose(observation: R, actionCandidates: readonly R[], options: FrontierProposeOptions = {}): Promise<R | null> {
     const current = await this.observe(observation, actionCandidates), index = current.observation_index, protocol = frontierProtocol(observation);
     if (protocol.levels_completed >= this.target_levels || terminal(protocol.state)) return { status: 'terminal', actions: [], official_levels_completed: protocol.levels_completed, goal_satisfied: protocol.levels_completed >= this.target_levels, protocol_state: protocol.state };
-    let questions = await this.open(index);
     const curiosity = options.curiosity ?? null, acquisition = options.control_acquisition ?? null;
+    const usesAgenda = options.sic_agenda === true && options.return_episode == null && curiosity === null && acquisition === null;
+    const order = (usesAgenda ? options.sic_frontier : undefined)?.inputOrder ?? defaultFrontierConfiguration.inputOrder;
+    const choices: { least_tried?: R; command_order?: R } = {};
+    let questions = await this.open(index, order, usesAgenda ? (leastTried, commandOrder) => {
+      choices.least_tried = leastTried?.action;
+      choices.command_order = commandOrder?.action;
+    } : undefined);
     if (curiosity !== null) {
       if (curiosity.observation_ref !== frontierRef(observation) || curiosity.level_epoch !== protocol.level_epoch) throw new TypeError('Information goal belongs to another public state');
       questions = questions.filter(q => same(frontierAction(q.action), frontierAction(curiosity.action))).map(q => ({ ...q, curiosity, reason: curiosity.question, hypothesis_refs: curiosity.evidence }));
@@ -337,8 +356,7 @@ export class ObservedFrontier {
       const q = questions.find(q => same(frontierAction(q.action), frontierAction(bound.action)));
       if (q) questions = [{ ...q, reason: 'test_control_after_observed_local_change', priority: -1, hypothesis_refs: [control!.rule_ref], control_experiment: copy(control) }, ...questions.filter(other => other !== q)];
     }
-    const agenda = options.sic_agenda === true && options.return_episode == null && curiosity === null && acquisition === null
-      ? selectFrontierStrategy(questions[0], frontierRef(observation)) : null;
+    const agenda = usesAgenda ? selectFrontierStrategy(questions[0], frontierRef(observation)) : null;
     let path: R[], question: R, kind: string;
     if (options.return_episode != null) {
       const contrast = await closedReturnContrast(this, options.return_episode, index, this.max_prefix);
@@ -347,7 +365,7 @@ export class ObservedFrontier {
       path = []; question = agenda?.selected?.plan.question ?? questions[0]!; kind = 'experiment';
     }
     else {
-      const accessed = await this.access(index);
+      const accessed = await this.access(index, order);
       if (accessed[0] === null) return { status: 'frontier_exhausted', actions: [], reason: 'no_untried_admitted_input_or_observed_access_within_current_epoch_and_replay_bound',
         unresolved_multiple_outcomes: Object.values(this.nodes).reduce((sum, n) => sum + Object.values(n.attempts).filter((a: any) => Object.keys(a.outcomes).length > 1).length, 0),
         qualification: 'not_a_proof_of_game_impossibility; richer_observables_or_new_experiment_domain_may_be_required' };
@@ -391,7 +409,9 @@ export class ObservedFrontier {
     const proposalId = `proposal:${await digest([index, question.question_ref, steps, this.sequence])}`;
     const binding = { observation_ref: frontierRef(observation), level_epoch: protocol.level_epoch, levels_completed: protocol.levels_completed, knowledge_revision: this.knowledge_revision };
     await this.commit('proposal', { proposal_id: proposalId, kind, question_ref: question.question_ref, steps, binding });
-    const sicFrontier = agenda?.selected ? { strategy: agenda.selected.id, agenda: agenda.entries,
+    const inputRanked = !own(question, 'experiment') && !own(question, 'control_experiment');
+    const sicFrontier = agenda?.selected ? { strategy: agenda.selected.id, agenda: agenda.entries, inputOrder: order, inputRanked,
+      ...(inputRanked && kind === 'experiment' && choices.least_tried && choices.command_order ? { choices } : {}),
       objective: { id: question.question_ref, label: 'Observe the effect of the selected untried input', parent: goal } } : null;
     return { status: 'proposed', proposal_id: proposalId, kind, actions, steps, facts, compositions, bundle_template: template, binding, question, route_refs: routeRefs, planned_access_length: path.length, conditional_prefix_length: steps.length,
       ...(sicFrontier ? { sic_frontier_decision: sicFrontier } : {}),

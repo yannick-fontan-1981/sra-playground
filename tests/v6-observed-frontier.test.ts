@@ -81,6 +81,21 @@ test('the production agenda preserves frontier commands and declares why it prob
   assert.ok(choices.has('reach_open_input'));
 });
 
+test('the SIC input order breaks ties between equally supported commands on the same board', async () => {
+  const graph = new ObservedFrontier();
+  const board = { observation_ref: 'frontier-test:epoch:1:revision:1:frame:test', frame_hash: 'test',
+    level_epoch: 1, levels_completed: 0, state: 'NOT_FINISHED', available_action_refs: ['ACTION1', 'ACTION2'], entities: [] };
+  const commands = [{ action_ref: 'ACTION1' }, { action_ref: 'ACTION2' }];
+  graph.action_counts[`1:${await frontierActionKey(commands[0]!)}`] = 3;
+  const stable = new ObservedFrontier(3, 16, graph.snapshot());
+  const normal = await graph.propose(board, commands, { sic_agenda: true });
+  const alternate = await stable.propose(board, commands, { sic_agenda: true, sic_frontier: { inputOrder: 'command_order' } });
+  assert.deepEqual(normal?.actions, [commands[1]]);
+  assert.deepEqual(alternate?.actions, [commands[0]]);
+  assert.deepEqual(normal?.sic_frontier_decision.choices, alternate?.sic_frontier_decision.choices);
+  assert.equal((await stable.guard(alternate!, board)).admitted, true);
+});
+
 test('V6 frontier rejects tampered, duplicate or reordered retained events without replacing its chain', async () => {
   const scenario = fixture.scenarios[0], first = scenario.steps.flatMap((step: any) => step.deltas)[0];
   const graph = new ObservedFrontier();

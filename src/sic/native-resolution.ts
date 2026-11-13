@@ -3,6 +3,7 @@ import { contactRecoveryStrategies, isContactStrategy, isRecoveryStop, rootedRec
   type ContactRecoveryNeed, type ContactStrategy } from './active-recovery.ts';
 import type { AgendaEntry } from './strategy-agenda.ts';
 import { frontierStrategies } from './frontier-strategy.ts';
+import { isFrontierInputOrder, type FrontierInputOrder } from './frontier-configuration.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 
 export interface NativeStep {
@@ -59,7 +60,8 @@ export interface NativeResolution {
   readonly proposalRef: string | null;
   readonly planRevision?: number;
   readonly releasedPlan?: { readonly family: string; readonly planned: number; readonly objective: string | null };
-  readonly frontierStrategy?: { readonly title: string; readonly objective: SicObjective };
+  readonly frontierStrategy?: { readonly title: string; readonly objective: SicObjective; readonly inputOrder: FrontierInputOrder | null;
+    readonly choices?: Readonly<Record<FrontierInputOrder, string>> };
   readonly remainingSteps: number;
   readonly footprint: NativeBox | null;
   readonly context: NativePlanContext | null;
@@ -186,9 +188,13 @@ export function readNativeResolution(agent: {
   const nativeObjective = label(template?.objective_ref);
   const frontier = record(proposal?.sic_frontier_decision), frontierTarget = record(frontier?.objective);
   const frontierId = label(frontier?.strategy), frontierObjectiveId = label(frontierTarget?.id), frontierObjectiveLabel = label(frontierTarget?.label);
+  const frontierChoices = record(frontier?.choices);
+  const leastTried = actionName(frontierChoices?.least_tried), commandOrder = actionName(frontierChoices?.command_order);
   const frontierStrategy = nativeObjective && frontierObjectiveId && frontierObjectiveLabel && frontierTarget?.parent === nativeObjective
     && (frontierId === 'test_local_input' || frontierId === 'reach_open_input')
-    ? { title: frontierStrategies[frontierId], objective: { id: frontierObjectiveId, label: frontierObjectiveLabel, parent: nativeObjective } }
+    ? { title: frontierStrategies[frontierId], objective: { id: frontierObjectiveId, label: frontierObjectiveLabel, parent: nativeObjective },
+      inputOrder: frontier?.inputRanked === true && isFrontierInputOrder(frontier.inputOrder) ? frontier.inputOrder : null,
+      ...(leastTried && commandOrder ? { choices: { least_tried: leastTried, command_order: commandOrder } } : {}) }
     : undefined;
   const objectiveSource = nativeObjective ? 'native' : steps.length && question ? 'question' : steps.length ? 'unpublished' : null;
   const morphology = record(proposal?.morphology_plan);

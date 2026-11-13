@@ -48,7 +48,7 @@ export function measureStrategyCoverage(samples: readonly StrategySample[], rule
     active += guided(sample.actionsByFacts);
     shownActive += guided(sample.shownActionsByFacts);
     activeConfigurable += sample.actionsByFacts.reduce((total, group) =>
-      total + (group.facts.has('activeRecovery') ? group.count : 0), 0);
+      total + (group.facts.has('activeRecovery') || group.facts.has('configurableFrontier') ? group.count : 0), 0);
   }
   return { actions, configurable, shown, shownConfigurable, active, shownActive, activeConfigurable, measured };
 }

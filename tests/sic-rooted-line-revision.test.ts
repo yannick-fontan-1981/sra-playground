@@ -106,11 +106,17 @@ test('the recovery pack accepts only the native capability and bounded search li
   assert.throws(() => compileRecoveryPack({ ...defaultRecoveryPack, maxNodes: 1001 }), RangeError);
   assert.throws(() => compileRecoveryPack({ ...defaultRecoveryPack, strategyOrder: [contactRecoveryOrder[0], contactRecoveryOrder[0]] }), TypeError);
   assert.deepEqual(compileRecoveryPack({ ...defaultRecoveryPack, strategyOrder: contactRecoveryOrder }), defaultRecoveryPack);
+  assert.throws(() => compileRecoveryPack({ ...defaultRecoveryPack, frontier: { inputOrder: 'invented' } }), TypeError);
+  assert.deepEqual(compileRecoveryPack({ ...defaultRecoveryPack, frontier: { inputOrder: 'least_tried' } }), defaultRecoveryPack);
 });
 
 test('portable recovery packs validate content and preserve the last distinct revision', () => {
   const active = recoveryRevision(defaultRecoveryPack);
   const shadow = recoveryRevision({ ...defaultRecoveryPack, mode: 'shadow' });
+  const frontier = recoveryRevision({ ...defaultRecoveryPack, frontier: { inputOrder: 'command_order' } });
+  assert.equal(frontier.schemaVersion, 2);
+  assert.deepEqual(readRecoveryRevision(JSON.parse(JSON.stringify(frontier))), frontier);
+  assert.throws(() => readRecoveryRevision({ ...active, configuration: frontier.configuration }), /schema version disagree/);
   assert.notEqual(active.digest, shadow.digest);
   const exported = JSON.parse(JSON.stringify(shadow));
   assert.deepEqual(readRecoveryRevision(exported), shadow);

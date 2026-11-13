@@ -38,6 +38,7 @@ export interface NativeCallerConfiguration {
   strategy: R;
   /** The original default mode. The disabled mode is also an explicit source option. */
   informationGoal?: 'accessible_view_frontier' | 'open_questions';
+  sicFrontier?: import('../sic/frontier-configuration.ts').FrontierConfiguration;
 }
 export interface NativeCallerState {
   goal: R; frontier: R; view: R | null; attention: R; points: R; displays: R;
@@ -308,6 +309,7 @@ export class NativeCallerCoordinator {
     const control = await this.controls.offer(observation, inputs, this.registry());
     const proposal = await this.frontier.propose(observation, inputs, {
       prefix_evidence: [], experimental_probes: offer ? [offer] : [], control_probe: control, sic_agenda: true,
+      sic_frontier: this.configuration.sicFrontier,
     });
     this.persistDeltas(observation); return proposal;
   }
