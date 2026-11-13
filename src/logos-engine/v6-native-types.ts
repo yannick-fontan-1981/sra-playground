@@ -283,4 +283,4 @@ export interface NativeV6Backend {
   close(reason: string): NativeMaybePromise<void>;
 }
 
-export type NativeBackendFactory = () => NativeMaybePromise<NativeV6Backend>;
+export type NativeBackendFactory = (recovery?: import('../sic/active-recovery.ts').RecoveryPack) => NativeMaybePromise<NativeV6Backend>;

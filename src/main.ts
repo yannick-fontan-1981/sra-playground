@@ -5,12 +5,14 @@ import { BrowserGameRuntime, type GameObservation } from './runtime/browser-game
 import { AGENT_STATUS } from './runtime/contracts';
 import { BrowserV6Agent, type V6AgentSnapshot } from './runtime/v6-agent.ts';
 import { bindSicPerspectives, renderSicPanel } from './sic/panel.ts';
+import { bindRecoverySettings } from './sic/recovery-settings.ts';
 import { as66Contradiction, type ContradictionReview } from './sic/contradiction-review.ts';
 import { readControlEffectShadow } from './sic/shadow.ts';
 import { observeSpace, type SpaceReturn } from './sic/space-return.ts';
 import { compareStckRank, type StckRankTrial } from './sic/stck-stack.ts';
 import { matchObservedRotation, observeDirectionalReturn, samplePublicAnimation, type DirectionalReturn } from './sic/directional-return.ts';
 import { captureDecisionSprites, readNativeResolution, type NativeResolution } from './sic/native-resolution.ts';
+import { isRecoveryStop } from './sic/active-recovery.ts';
 import { observeLs20Restart, recordPursuedObjective, type PursuedObjective } from './sic/recovery.ts';
 import ls20ReviewEvidence from './sic/ls20-review-evidence.json';
 import { GAME_CATALOG, getGameByCode, type GameCatalogEntry } from './games/catalog';
@@ -290,6 +292,18 @@ app.innerHTML = `
           <div id="sic-strategies" role="tabpanel" aria-labelledby="sic-strategies-tab" tabindex="0" hidden>
             <section class="sic-card">
               <h4>Ways to solve the situation</h4>
+              <details class="sic-details sic-strategy-editor">
+                <summary>Contact recovery in the engine</summary>
+                <form data-sic-recovery-settings>
+                  <p>Applies after a new agent session starts. Shadow mode records the counterexample and stops at that decision.</p>
+                  <label for="sic-recovery-mode">Recovery mode</label>
+                  <select id="sic-recovery-mode" name="mode"><option value="active">Active</option><option value="shadow">Shadow</option></select>
+                  <label>Maximum search depth <input name="maxDepth" type="number" required min="1" max="88" step="1"></label>
+                  <label>Maximum states <input name="maxNodes" type="number" required min="1" max="1000" step="1"></label>
+                  <button type="submit">Save recovery settings</button>
+                  <p role="status" data-sic-recovery-status></p>
+                </form>
+              </details>
               <div data-sic-strategy-editor></div>
               <div data-sic-strategy-body></div>
             </section>
@@ -353,6 +367,7 @@ let agentState: V6AgentSnapshot | null = null;
 let contradictionReview: ContradictionReview | null = null;
 const sicPanel = element<HTMLElement>('#sic-panel');
 bindSicPerspectives(sicPanel);
+const recoveryConfiguration = bindRecoverySettings(sicPanel);
 let sicRenderPending = false;
 let lastSicBoard: GameObservation | null = null;
 let lastSicState: V6AgentSnapshot | null = null;
@@ -392,6 +407,7 @@ function recordPublicReturn(history: readonly DirectionalReturn[], sessionId: st
 const agent = new BrowserV6Agent({
   getObservation: () => observation,
   canDispatch: () => ready() && mode === 'agent',
+  recoveryConfiguration,
   dispatch: async action => {
     if (!ready() || mode !== 'agent' || !observation?.availableActionIds.includes(action.id)) {
       throw new Error('The game changed before the action could be sent.');
@@ -517,15 +533,19 @@ function updateAgentInterface(): void {
   element('#agent-sic-review').hidden = selectedGame.code !== 'AS66';
   const reviewToggle = element<HTMLInputElement>('#agent-sic-pause');
   reviewToggle.disabled = reviewing || Boolean(state?.busy);
-  element('[data-sic-mode]').textContent = mode === 'agent' && selectedGame.code === 'AS66' && reviewToggle.checked
-    ? 'Pause for review enabled' : 'Read-only preview';
+  const recoveryStop = mode === 'agent' && state?.status === 'stopped' && isRecoveryStop(state.reason) ? state.reason : null;
+  element('[data-sic-mode]').textContent = recoveryStop === 'sic_recovery_shadow' ? 'Contact recovery observed in shadow'
+    : recoveryStop ? 'Contact recovery limited'
+    : mode === 'agent' && selectedGame.code === 'AS66' && reviewToggle.checked ? 'Pause for review enabled'
+    : mode === 'agent' && state?.sessionId ? 'Native agent and SIC'
+    : 'Read-only preview';
   const confirm = element<HTMLButtonElement>('#agent-sic-resume');
   confirm.hidden = !reviewing;
   confirm.disabled = !reviewing || !available || !state?.canRun;
   element<HTMLButtonElement>('#agent-pause').disabled = !state?.busy;
   element<HTMLButtonElement>('#agent-new-session').disabled = !ready() || Boolean(state?.busy);
   element<HTMLButtonElement>('#agent-restart').disabled = !ready() || Boolean(state?.busy);
-  element('#agent-unsupported').hidden = !needsRestart;
+  element('#agent-unsupported').hidden = !needsRestart && !recoveryStop;
   const pausedMessage = state?.message.startsWith('Level completed.') ? 'Level completed.'
     : state?.message.startsWith('One action completed.') ? 'One action completed.'
     : state?.message.startsWith('Batch limit reached:') ? `${state.message.split('. ')[0]}.`
@@ -543,6 +563,8 @@ function updateAgentInterface(): void {
     : state?.message ?? 'Ready to run from level 1.';
   element('#agent-message').textContent = contradictionReview
     ? `SIC paused after action ${contradictionReview.sequence}. The return contradicted the prediction. Confirm to continue toward the next level.`
+    : recoveryStop === 'sic_recovery_shadow' ? 'SIC recorded the contact counterexample. This session uses shadow recovery.'
+    : recoveryStop === 'rooted_cell_access_unresolved' ? 'SIC found no access within the current contact-recovery limits.'
     : message ?? '';
   element('#agent-message').setAttribute('data-status', state?.status ?? 'idle');
   element('#agent-action-count').textContent = String(state?.actionCount ?? 0);

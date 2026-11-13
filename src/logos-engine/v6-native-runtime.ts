@@ -31,6 +31,7 @@ import { AxialQuestion } from './v6-axial-question.ts';
 import { WindowQuestion } from './v6-window-question.ts';
 import { OrderedRecruitment } from './v6-ordered-recruitment.ts';
 import { RankedWorkshop } from './v6-ranked-workshop.ts';
+import { compileRecoveryPack, isRecoveryStop } from '../sic/active-recovery.ts';
 import { SymbolTransactions } from './v6-symbol-transactions.ts';
 import { AddressedMaterial, ADDRESSED_NATIVE_SEARCH_BOUNDS } from './v6-addressed-material.ts';
 import { ObservedBinding, OBSERVED_BINDING_NATIVE_SEARCH_BOUNDS } from './v6-observed-binding.ts';
@@ -456,6 +457,10 @@ export class NativeV6Runtime implements NativeV6Backend {
       const { family } = selected; let { proposal } = selected;
       if (proposal.status !== 'proposed') {
         await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'selection', statement: 'source.refusal' }, this.authority?.checkpointWrites() ?? []);
+        if (proposal.release_authority === false && proposal.block_unrelated_probe === true && isRecoveryStop(proposal.reason)) {
+          this.stop(proposal.reason);
+          return;
+        }
         // SelectedRigid's source caller stops on its current blocking reason
         // before any lower-priority question can dispatch an unrelated probe.
         const sourceStop = rawNativeSelectedRigid(family) && proposal.kind === 'native_current_proposal_refusal'
@@ -2194,7 +2199,9 @@ export async function loadNativeV6Declarations(): Promise<NativeV6Declarations> 
   const [common, strategy] = await Promise.all([load(commonUrl), load(strategyUrl)]); return { common, strategy };
 }
 /** Identifies native declarations/version, not a Python runtime or source binary. */
-export async function createNativeV6Runtime(declarations?: NativeV6Declarations, options: { now?: () => number } = {}): Promise<NativeV6Runtime> {
+export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
+  options: { now?: () => number; recovery?: import('../sic/active-recovery.ts').RecoveryPack } = {}): Promise<NativeV6Runtime> {
+  const recovery = compileRecoveryPack(options.recovery);
   const loaded = declarations ?? await loadNativeV6Declarations();
   const symmetry = loaded.strategy.declarations[0]?.configuration.regular_field_correspondence;
   if (!symmetry || !loaded.common.ordered_support_transfer || !loaded.common.input_domain) throw new Error('Incomplete native V6 declarations');
@@ -2272,7 +2279,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     (configuration.window_constraints as R).trace_field_composition, (configuration.window_constraints as R).linked_packet_composition,
     (configuration.window_constraints as R).queued_field_composition, (configuration.window_constraints as R).occluded_catalogue_composition,
     (configuration.window_constraints as R).typed_material_flow, (configuration.window_constraints as R).field_service_composition,
-    configuration.observed_composition_services, (configuration.window_constraints as R).framed_window_composition,
+    { ...configuration.observed_composition_services, sic_recovery: recovery }, (configuration.window_constraints as R).framed_window_composition,
     configuration.window_constraints as R, configuration.window_constraints as R);
   const policy = loaded.common as R;
   const fields = new AddressedMaterial(policy.addressed_field, { boundedSearch: ADDRESSED_NATIVE_SEARCH_BOUNDS });
@@ -2367,7 +2374,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const manifest = { sourceEncoding: 'json-stringify-v1', implementation: NATIVE_V6_IMPLEMENTATION, referenceCommit: NATIVE_V6_REFERENCE_COMMIT,
     declarations: loaded, families: [...families.map(f => f.id), ...CALLER_PROVIDERS], groups, authority: 'native_original_why_act', caller: 'native_common_coordinator',
     selectionProgram: nativeProgramDescriptions().find(program => program.id === 'v6.composition_strategy.choose')?.transitiveSourceHash ?? null,
-    nativeCallerExtensions: NATIVE_CALLER_EXTENSIONS,
+    nativeCallerExtensions: NATIVE_CALLER_EXTENSIONS, sicRecovery: recovery,
     fullV6Parity: false };
   const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
   const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');

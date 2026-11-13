@@ -1242,6 +1242,12 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
         ? 'The return invalidates the prediction for this step. It does not establish why the prediction failed.'
         : 'The next plan was different; the engine did not report that this return refuted the previous plan.']);
     }
+    const recoveryDecision = first.decision?.recoveryDecision;
+    if (recoveryDecision) {
+      factsList.push(['SIC need', recoveryDecision.need], ['Active strategy', recoveryDecision.strategy],
+        ['Recovery objective', recoveryDecision.objective],
+        ['Configured search limits', `${recoveryDecision.maxDepth} moves · ${recoveryDecision.maxNodes} states`]);
+    }
     for (const [name, description] of factsList) {
       const term = document.createElement('dt'), value = document.createElement('dd');
       term.textContent = name; value.textContent = description; facts.append(term, value);

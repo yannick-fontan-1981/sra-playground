@@ -1,4 +1,5 @@
 import { cropReturn } from '../logos-engine/v6-public-return-visuals.ts';
+import { rootedRecoveryStrategy } from './active-recovery.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 
 export interface NativeStep {
@@ -44,6 +45,7 @@ export interface NativeResolution {
   readonly operation: string | null;
   readonly searchOperation?: string;
   readonly recoveryOperations?: readonly { key: string; finding: string }[];
+  readonly recoveryDecision?: { readonly strategy: string; readonly need: string; readonly objective: string; readonly maxDepth: number; readonly maxNodes: number };
   readonly recoveryAction?: number;
   readonly composition: string | null;
   readonly compositions: readonly { readonly id: string; readonly role: string | null; readonly observed: boolean | null }[];
@@ -226,6 +228,12 @@ export function readNativeResolution(agent: {
     return key && finding && ['OP03', 'OP12', 'OP08', 'OP26'].includes(key) ? [{ key, finding }] : [];
   }) : [];
   const recoveryAction = Array.isArray(search?.recovery_evidence) ? priorAction(search.recovery_evidence[1]) : null;
+  const sic = record(search?.sic_decision), recoveryPack = record(sic?.configuration);
+  const maxDepth = natural(recoveryPack?.maxDepth), maxNodes = natural(recoveryPack?.maxNodes);
+  const recoveryDecision = sic?.strategy === rootedRecoveryStrategy.id && recoveryPack?.mode === 'active'
+    && maxDepth !== null && maxNodes !== null
+    ? { strategy: rootedRecoveryStrategy.label, need: rootedRecoveryStrategy.need, objective: rootedRecoveryStrategy.objective, maxDepth, maxNodes }
+    : undefined;
   const previousProjection = routeIndex > 0 && Array.isArray(rooted?.predictions) ? record(rooted.predictions[routeIndex - 1]) : null;
   const rootBox = bounds(previousProjection?.root ?? rootedScene?.root);
   if (rootBox) subjects.push({ label: 'Controlled root', box: rootBox });
@@ -262,6 +270,7 @@ export function readNativeResolution(agent: {
     operation: op && /^OP(?:0[1-9]|[12]\d|3[01])$/.test(op) ? op : null,
     searchOperation: searchOperation === 'OP26' ? searchOperation : undefined,
     recoveryOperations: recoveryOperations.length ? recoveryOperations : undefined,
+    recoveryDecision,
     recoveryAction: recoveryAction ?? undefined,
     composition: label(template?.composition_ref), compositions, subjects, route, proposalRef: label(proposal?.proposal_id),
     planRevision: natural(release?.decision_revision) ?? undefined,
@@ -278,6 +287,7 @@ export interface DecisionSprites {
   readonly operation: string | null;
   readonly searchOperation?: string;
   readonly recoveryOperations?: readonly { key: string; finding: string }[];
+  readonly recoveryDecision?: NativeResolution['recoveryDecision'];
   readonly recoveryAction?: number;
   readonly composition: string | null;
   readonly question: string | null;
@@ -364,6 +374,7 @@ export function captureDecisionSprites(decision: NativeResolution, before: Nativ
   }
   return { family: decision.family, objective: decision.objective, objectiveSource: decision.objectiveSource,
     operation: decision.operation, searchOperation: decision.searchOperation, recoveryOperations: decision.recoveryOperations,
+    recoveryDecision: decision.recoveryDecision,
     recoveryAction: decision.recoveryAction, composition: decision.composition, question: decision.question,
     proposalRef: decision.proposalRef, planRevision: decision.planRevision, route: decision.route, steps: decision.steps.slice(decision.nextIndex ?? 0),
     remainingSteps: decision.remainingSteps, stepIndex: decision.nextIndex, context, destinationSprite, strategyTarget, strategyMeter, sprites };

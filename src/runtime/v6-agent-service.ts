@@ -3,6 +3,7 @@ import type {
   NativeRuntimeSnapshot, NativeRuntimeYield, NativeV6Backend,
 } from '../logos-engine/v6-native-types.ts';
 import { NativeEditRejected } from '../logos-engine/v6-native-types.ts';
+import { compileRecoveryPack } from '../sic/active-recovery.ts';
 import {
   nativeV6Action, validateV6PublicObservation, v6FrameHash, V6AgentError, V6_REFERENCE_COMMIT,
 } from './v6-agent-protocol.ts';
@@ -192,7 +193,13 @@ export class V6AgentService {
         const limits = budgets(operation.budgets);
         const observation = await nativeObservation(publicPacket);
         this.checkSignal(signal);
-        const backend = await this.factory();
+        let recovery;
+        try {
+          recovery = operation.recovery === undefined ? undefined : compileRecoveryPack(operation.recovery);
+        } catch (error) {
+          throw new V6AgentError('invalid', (error as Error).message);
+        }
+        const backend = await this.factory(recovery);
         if (backend.sourceCommit !== V6_REFERENCE_COMMIT || typeof backend.sourceDigest !== 'string' || !backend.sourceDigest) {
           throw new V6AgentError('invalid', 'The native solver implementation requires explicit source provenance.');
         }

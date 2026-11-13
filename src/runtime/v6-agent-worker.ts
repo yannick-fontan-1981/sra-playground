@@ -8,7 +8,7 @@ const scope = self as unknown as {
   addEventListener(type: 'message', callback: (event: MessageEvent<V6WorkerRequest>) => void): void;
   postMessage(message: V6WorkerResponse): void;
 };
-const service = new V6AgentService(() => createNativeV6Runtime());
+const service = new V6AgentService(recovery => createNativeV6Runtime(undefined, { recovery }));
 let active = false;
 scope.addEventListener('message', event => {
   const { id, operation } = event.data;

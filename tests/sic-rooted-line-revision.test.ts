@@ -6,6 +6,7 @@ import { RootedLineMemory, rootedLineBefore } from '../src/logos-engine/v6-roote
 import { planCellPush } from '../src/logos-engine/v6-rooted-line-revision.ts';
 import { measureRootedLine } from '../src/logos-engine/v6-rooted-line-observation.ts';
 import { readNativeResolution } from '../src/sic/native-resolution.ts';
+import { compileRecoveryPack, defaultRecoveryPack, selectRootedRecovery } from '../src/sic/active-recovery.ts';
 
 const trace = new URL('../docs/migration/lot3d-evidence/final/sk48-rooted-session/sk48-public-trace.json.gz', import.meta.url);
 const policy = new URL('../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm', import.meta.url);
@@ -29,6 +30,19 @@ test('an observed push chain unblocks rooted-line search, retaining its estimate
   const last = packets.length - 1, current = observation(last), rows = packets[last].packet.frame_rows;
   const state = memory.currentState().line_memory;
   assert.equal(state.refuted[0]?.cell_push_witness, true);
+  const shadow = compileRecoveryPack({ ...defaultRecoveryPack, mode: 'shadow' });
+  const ignored = memory.propose(current, rows, [], 16, { ...config, sic_recovery: shadow });
+  assert.equal(ignored?.reason, 'sic_recovery_shadow');
+  assert.equal(ignored?.actions, undefined);
+  assert.equal(ignored?.block_unrelated_probe, true);
+  assert.equal(ignored?.release_authority, false);
+  const narrow = compileRecoveryPack({ ...defaultRecoveryPack, maxDepth: 1 });
+  const limited = memory.propose(current, rows, [], 16, { ...config, sic_recovery: narrow });
+  assert.equal(limited?.reason, 'rooted_cell_access_unresolved');
+  assert.equal(limited?.actions, undefined);
+  const offScope = current.observation_ref.replace(':epoch:1:', ':epoch:2:');
+  assert.equal(selectRootedRecovery(defaultRecoveryPack, state.refuted, state.refuted[0].layout, offScope).status, 'unresolved');
+  assert.equal(selectRootedRecovery(defaultRecoveryPack, state.refuted, state.refuted[0].layout, observation(last - 1).observation_ref).status, 'unresolved');
   const revised = memory.propose(current, rows, [], 16, config)!;
   assert.equal(revised.rooted_line_plan.search.operation, 'OP26');
   assert.deepEqual(revised.rooted_line_plan.search.recovery_operations.map((operation: { key: string }) => operation.key),
@@ -41,6 +55,8 @@ test('an observed push chain unblocks rooted-line search, retaining its estimate
     proposal: revised, phase: 'authorised_not_executed',
   });
   assert.equal(view?.recoveryAction, 12);
+  assert.equal(view?.recoveryDecision?.strategy, 'Revise the contact projection');
+  assert.equal(view?.recoveryDecision?.maxDepth, 88);
   assert.equal(view?.operation, 'OP18');
   assert.deepEqual(view?.recoveryOperations?.map(operation => operation.key), ['OP03', 'OP12', 'OP08', 'OP26']);
   assert.equal(rootedLineBefore(revised, 0, rows, {
@@ -48,4 +64,11 @@ test('an observed push chain unblocks rooted-line search, retaining its estimate
   }).admitted, true);
   assert.equal(planCellPush(measureRootedLine(rows)!, state.controls, 1, 1000, () => false), null);
   assert.equal(planCellPush(measureRootedLine(rows)!, state.controls, 20, 1000, () => true), null);
+});
+
+test('the recovery pack accepts only the native capability and bounded search limits', () => {
+  assert.deepEqual(compileRecoveryPack(), defaultRecoveryPack);
+  assert.throws(() => compileRecoveryPack({ ...defaultRecoveryPack, action: 'ACTION3' }), TypeError);
+  assert.throws(() => compileRecoveryPack({ ...defaultRecoveryPack, version: 2 }), TypeError);
+  assert.throws(() => compileRecoveryPack({ ...defaultRecoveryPack, maxNodes: 1001 }), RangeError);
 });

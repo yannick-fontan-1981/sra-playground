@@ -7,6 +7,7 @@ import { measureRootedLine, physicalRootedLine, projectedRootedLine } from './v6
 import { rootedLineEffect, planRootedLine } from './v6-rooted-line-mechanics.ts';
 import { planCellPush, witnessedCellPush } from './v6-rooted-line-revision.ts';
 import { resolveRootedRecovery } from './v6-rooted-line-recovery-operations.ts';
+import { defaultRecoveryPack } from '../sic/active-recovery.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
 import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
@@ -72,7 +73,7 @@ export class RootedLineMemory {
     const memory = structuredClone(this.lineMemory);
     if (memory.epoch !== observation.level_epoch) { memory.current = null; memory.tried = []; memory.epoch = observation.level_epoch; }
     const refutations = memory.refuted.filter((item: R) => item.epoch === observation.level_epoch);
-    const revision = resolveRootedRecovery(refutations, scene.layout);
+    const revision = resolveRootedRecovery(config.sic_recovery ?? defaultRecoveryPack, refutations, scene.layout, observation.observation_ref);
     if (revision.status === 'unresolved') {
       return { status: 'unknown', reason: 'conditional_contact_model_refuted', block_unrelated_probe: true };
     }
@@ -81,17 +82,24 @@ export class RootedLineMemory {
       && !Object.hasOwn(memory.controls, action) && !memory.tried.includes(action));
     let actions: R[] = [], predictions: (R | null)[] = [], configurations: (R | null)[] = [], search: R | null = null;
     let why: string, kind: string;
-    if (revision.status === 'ready') {
+    if (revision.status === 'shadow') {
+      return { status: 'unknown', reason: 'sic_recovery_shadow', block_unrelated_probe: true,
+        release_authority: false, recovery_operations: revision.operations, recovery_evidence: revision.evidence };
+    }
+    if (revision.status === 'selected') {
       const effects = Object.fromEntries(Object.entries(memory.controls).filter(([action]) => available.has(action)));
-      const plan = planCellPush(scene, effects, Math.min(cfg.max_depth, config.remaining_level_actions ?? cfg.max_depth),
-        cfg.max_nodes, () => !!budget.shouldStop?.() || (budget.now ?? (() => performance.now()))() >= (budget.deadlineMs ?? Infinity));
-      if (!plan || limit < 1) return { status: 'unknown', reason: 'rooted_cell_access_unresolved', block_unrelated_probe: true };
+      const bounds = revision.configuration;
+      const plan = planCellPush(scene, effects, Math.min(bounds.maxDepth, cfg.max_depth, config.remaining_level_actions ?? cfg.max_depth),
+        Math.min(bounds.maxNodes, cfg.max_nodes), () => !!budget.shouldStop?.() || (budget.now ?? (() => performance.now()))() >= (budget.deadlineMs ?? Infinity));
+      if (!plan || limit < 1) return { status: 'unknown', reason: 'rooted_cell_access_unresolved',
+        block_unrelated_probe: true, release_authority: false };
       actions = [{ action_ref: plan.command }];
       predictions = [plan.prediction];
       configurations = [null];
       search = { operation: 'OP26', predicted_goal_distance: plan.predictedGoalDistance, model: 'conditional_cell_push_after_counterexample',
         recovery_operations: [...revision.operations, { key: 'OP26', finding: `Find a conditional access of ${plan.predictedGoalDistance} moves and check its first command.` }],
-        recovery_evidence: revision.evidence };
+        recovery_evidence: revision.evidence,
+        sic_decision: { strategy: revision.strategy, needId: revision.needId, configuration: bounds } };
       why = 'Find an ordered access from the measured return using the witnessed whole-cell push. Verify the root, tip and every piece after this step.';
       kind = 'cell_push_revision';
     } else if (unmeasured.length) {

@@ -41,6 +41,7 @@ export interface V6AgentSnapshot extends V6BackendSnapshot {
 export interface V6AgentHost {
   getObservation(): GameObservation | null;
   canDispatch(): boolean;
+  recoveryConfiguration?(): import('../sic/active-recovery.ts').RecoveryPack;
   /** Serialize one native command and await its final public visual observation. */
   dispatch(action: AgentAction): Promise<V6DispatchResult>;
   onState(snapshot: V6AgentSnapshot): void;
@@ -273,9 +274,10 @@ export class BrowserV6Agent {
     const sessionId = `sra-v6-${crypto.randomUUID()}`;
     const observation = toV6PublicObservation(current, 0);
     const budgets = this.budgets(current);
+    const recovery = this.host.recoveryConfiguration?.();
     this.sessionId = sessionId; this.gameCode = current.gameCode; this.observed = observation;
     this.phase = 'initializing'; this.state('preparing', 'Loading the native SRA runtime and reading the public game frames…');
-    return (await this.request({ type: 'init', sessionId, sequence: 0, observation, budgets }, epoch)) !== null;
+    return (await this.request({ type: 'init', sessionId, sequence: 0, observation, budgets, ...(recovery ? { recovery } : {}) }, epoch)) !== null;
   }
 
   private async validateAction(result: V6AgentResult, expected: V6PublicObservation): Promise<AgentAction> {
