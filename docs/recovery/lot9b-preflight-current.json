@@ -23,13 +23,16 @@
   "public_delta_path": "src/logos-engine/v6-public-observation-delta.ts",
   "region_public_evidence_path": "src/logos-engine/v6-region-public-evidence.ts",
   "live_campaign_helper_path": "tests/helpers/v6-live-game-campaign.ts",
+  "cost_harness_path": "scripts/measure-native-loop-costs.mjs",
   "worker_transport_qualified": true,
   "worker_default_decision_port": "reconstruction-pending-perception",
   "worker_default_produces_actions": false,
   "public_observation_delta_qualified": true,
   "public_observation_delta_infers_method_ref": false,
   "generic_live_campaign_helper_qualified": true,
-  "historical_stck_smlp_campaign_reconstructed": false,
+  "cost_protocol_orchestrator_qualified": true,
+  "historical_stck_smlp_native_runner_reconstructed": false,
+  "official_cost_measurement_executed": false,
   "functional_test_evidence": {
     "v6_core": { "tests": 27, "passed": 27, "failed": 0 },
     "region_component_and_owner": { "tests": 19, "passed": 19, "failed": 0 },
@@ -37,23 +40,23 @@
     "worker_core_and_shell": { "tests": 14, "passed": 14, "failed": 0 },
     "public_observation_delta_and_region_evidence": { "tests": 12, "passed": 12, "failed": 0 },
     "generic_live_campaign_helper": { "tests": 7, "passed": 7, "failed": 0 },
-    "total_unique_targeted_tests": 91,
-    "total_unique_targeted_passed": 91,
+    "cost_protocol_orchestrator": { "tests": 8, "passed": 8, "failed": 0 },
+    "total_unique_targeted_tests": 99,
+    "total_unique_targeted_passed": 99,
     "total_unique_targeted_failed": 0
   },
   "official_069_prerequisites": {
     "missing_files": [
-      "scripts/measure-native-loop-costs.mjs",
       "docs/migration/v6-delivery-roadmap.md"
     ],
     "missing_capabilities": [
       "justified methodRef producer/binder for public Region evidence",
       "worker decision port that connects public perception to owner contexts",
-      "historical/official STCK and SMLP campaign fixtures or ports",
-      "official performance harness"
+      "historical/official STCK and SMLP native runSession implementation and corpus",
+      "official performance measurement"
     ]
   },
   "ready_for_official_069_benchmark": false,
-  "status": "fonctionnellement qualifié pour noyau V6, Region, owner, caller neutre, transport worker, delta public et helper de campagne générique; campagnes STCK/SMLP et performance officielle à confirmer",
-  "note": "The reconstructed campaign helper is generic and bounded. It is not claimed to reproduce the historical STCK/SMLP campaign corpus."
+  "status": "fonctionnellement qualifié pour noyau V6, Region, owner, caller neutre, transport worker, delta public, helper de campagne et protocole ABBA; runner natif STCK/SMLP et performance officielle à confirmer",
+  "note": "The cost harness reconstructs the recovered ABBA protocol and arithmetic only. It does not invent historical CLI options, checkout paths, STCK/SMLP fixtures, or official measurements."
 }
