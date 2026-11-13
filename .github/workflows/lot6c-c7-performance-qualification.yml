@@ -1,0 +1,42 @@
+name: Lot 6C C7 performance qualification
+
+on:
+  push:
+    branches:
+      - recovery/lot6c-c7-performance-qualification-20261113
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18.0'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build production bundle
+        run: npm run build
+      - name: Run complete TypeScript regression suite
+        run: node --experimental-transform-types --test tests/*.test.ts
+      - name: Verify retained official performance proof
+        run: node --test tests/lot9b-official-performance-proof.test.mjs
+      - name: Verify manifest lifecycle and source identities
+        run: node scripts/verify-native-loop-runner-manifest.mjs
+      - name: Verify C7 performance readiness
+        run: node scripts/check-op01-op31-c7-readiness.mjs
+      - name: Run targeted native benchmark contracts
+        run: |
+          node --test \
+            tests/native-loop-cost-harness.test.mjs \
+            tests/native-loop-session-adapter.test.mjs \
+            tests/native-loop-region-candidate-hook.test.mjs \
+            tests/native-loop-public-corpus-runner.test.mjs \
+            tests/native-loop-region-benchmark-runners.test.mjs \
+            tests/native-loop-region-source-refs.test.mjs
