@@ -5,7 +5,9 @@ import type { SpaceReturn } from './space-return.ts';
 import type { StckRankTrial } from './stck-stack.ts';
 import stckCardComparisons from './stck-card-comparison.json';
 import stckTowerEffects from './stck-tower-effects.json';
-import { summarizeDirections, type DirectionalReturn } from './directional-return.ts';
+import { compareDirectionTargets, summarizeDirections, type DirectionalReturn } from './directional-return.ts';
+import ls20Directions from './ls20-direction-review.json';
+import ls20ShapeExit from './ls20-review-evidence.json';
 import type { GameObservation } from '../runtime/browser-games.ts';
 import { compareAboveColors, contrastClickContexts, describeClickContext, type ClickEffectCount } from './click-evidence.ts';
 import type { Applicability, ControlEffectResolution } from './know-control-effect.ts';
@@ -189,22 +191,23 @@ function openInformation(panel: HTMLElement, subtab: string): void {
   selected.focus();
 }
 
-function renderUnderstoodControls(panel: HTMLElement, groups: ReturnType<typeof summarizeDirections>): void {
-  const container = panel.querySelector<HTMLElement>('[data-sic-understood]')!;
+function renderMechanisms(panel: HTMLElement, groups: ReturnType<typeof summarizeDirections>,
+  returns: readonly DirectionalReturn[], palette: readonly string[]): void {
+  const container = panel.querySelector<HTMLElement>('[data-sic-mechanisms]')!;
   const title = document.createElement('h4');
-  title.textContent = 'What these controls do';
+  title.textContent = 'Mechanisms observed in this session';
   const intro = document.createElement('p');
   const repeated = groups.filter(group => group.repeated);
-  intro.textContent = repeated.length ? 'Repeated in this session. Object roles and general rules are still open.'
-    : 'No repeated control effect yet. Compare returns from the current session to build evidence.';
+  intro.textContent = repeated.length ? 'Matching returns support these effects. Object roles and general rules are still open.'
+    : 'No repeated mechanism yet. Effects are built from the current session’s returns.';
   container.replaceChildren(title, intro);
-  for (const group of repeated) {
+  for (const group of groups) {
     const block = document.createElement('div');
     block.className = 'sic-effect-row';
     const label = document.createElement('strong');
-    label.textContent = `${commands[group.command]} · Repeated translation`;
+    label.textContent = `${commands[group.command]} · ${group.repeated ? 'Repeated translation' : 'Observed returns'}`;
     const effect = document.createElement('p');
-    effect.textContent = `${group.moved} matching translations of (${group.shift}) px; ${group.stationary} stationary and ${group.unresolved} unresolved.`;
+    effect.textContent = `${group.moved} translations${group.repeated ? ` of (${group.shift}) px` : ''}; ${group.stationary} stationary and ${group.unresolved} unresolved.`;
     const link = document.createElement('button');
     link.type = 'button';
     link.className = 'sic-evidence-link';
@@ -213,6 +216,108 @@ function renderUnderstoodControls(panel: HTMLElement, groups: ReturnType<typeof 
     block.append(label, effect, link);
     container.append(block);
   }
+  const targets = compareDirectionTargets(returns);
+  const targetSection = panel.querySelector<HTMLElement>('[data-sic-targets]')!;
+  targetSection.hidden = !targets.length;
+  targetSection.replaceChildren();
+  if (!targets.length) return;
+  const heading = document.createElement('h4');
+  heading.textContent = 'Where movement succeeds or stays blocked';
+  const note = document.createElement('p');
+  note.textContent = 'Grouped by the colors visible in the target before the command. This comparison does not by itself establish a rule.';
+  targetSection.append(heading, note);
+  for (const group of targets.slice(0, 6)) {
+    const block = document.createElement('div');
+    const label = document.createElement('p');
+    label.textContent = `Colors ${group.colors.join(', ')} · ${group.moved} moved · ${group.stationary} stationary`;
+    block.append(label, renderFrames([
+      ['Target before movement', group.movedExample?.translation?.targetBefore ?? null],
+      ['Target before no movement', group.stationaryExample?.stationary?.ahead ?? null],
+    ], palette));
+    targetSection.append(block);
+  }
+}
+
+function renderRoles(panel: HTMLElement, returns: readonly DirectionalReturn[], palette: readonly string[]): void {
+  const container = panel.querySelector<HTMLElement>('[data-sic-roles]')!;
+  const title = document.createElement('h4');
+  title.textContent = 'Roles under discovery';
+  const latest = [...returns].reverse().find(item => item.translation || item.stationary);
+  const note = document.createElement('p');
+  note.textContent = latest ? 'These roles describe what the sprites did in the observed return. Their game-specific meaning is still open.'
+    : 'No role assigned yet. Roles start from the observed behavior of sprites.';
+  container.replaceChildren(title, note);
+  if (!latest) return;
+  container.append(renderFrames([
+    ['Tracked sprite', latest.translation?.sprite ?? latest.stationary?.sprite ?? null],
+    ['Approached area', latest.translation?.targetBefore ?? latest.stationary?.ahead ?? null],
+    ['Other changed region', latest.changes?.samples[0]?.after ?? null],
+  ], palette));
+}
+
+function renderOfflineReview(panel: HTMLElement, isLs20: boolean, palette: readonly string[]): void {
+  const mechanisms = panel.querySelector<HTMLElement>('[data-sic-mechanism-review]')!;
+  const roles = panel.querySelector<HTMLElement>('[data-sic-role-review]')!;
+  const key = isLs20 ? palette.join(',') : 'hidden';
+  if (mechanisms.dataset.review === key) return;
+  mechanisms.dataset.review = key;
+  mechanisms.replaceChildren();
+  roles.replaceChildren();
+  if (!isLs20) return;
+  const review = (title: string) => {
+    const box = document.createElement('details');
+    box.className = 'sic-observations';
+    const label = document.createElement('summary');
+    label.textContent = title;
+    const source = document.createElement('p');
+    source.textContent = 'Offline evidence from earlier LS20 runs and controlled trials. It does not initialize the current discovery session.';
+    box.append(label, source);
+    return box;
+  };
+  const mechanismReview = review('Offline review · Directions and shape matching');
+  const directions = document.createElement('ul');
+  const words: Record<number, string> = { 1: 'up', 2: 'down', 3: 'left', 4: 'right' };
+  for (const item of ls20Directions.commands) {
+    const row = document.createElement('li');
+    row.textContent = `${commands[item.command]}: 5 px ${words[item.command]} when matched · ${item.moved} moves, ${item.stationary} stationary, ${item.unresolved} unresolved or boundary.`;
+    directions.append(row);
+  }
+  const contrast = document.createElement('p');
+  const open = ls20Directions.targets.find(group => group.colors.length === 1 && group.colors[0] === 3);
+  const closed = ls20Directions.targets.find(group => group.colors.length === 1 && group.colors[0] === 4);
+  contrast.textContent = `${ls20Directions.count} directional returns. A plain color-3 target moved in ${open?.moved} cases; a plain color-4 target was stationary in ${closed?.stationary} cases. The cropped examples are two consecutive Up returns on level ${ls20Directions.example.level}.`;
+  const shape = document.createElement('p');
+  shape.textContent = `The shape changer modifies the player’s shape without changing color or orientation (level ${ls20ShapeExit.summary.shapeLevel}). At the tested exit (level ${ls20ShapeExit.summary.exitLevel}), the same Up action advanced with the matching shape and stayed blocked when only shape was changed. Color and orientation were held fixed.`;
+  mechanismReview.append(directions, contrast, renderFrames([
+    ['Tracked sprite', ls20Directions.example.sprite], ['Target · moved', ls20Directions.example.movedTarget],
+    ['Target · no movement', ls20Directions.example.blockedTarget],
+  ], palette), shape);
+  const roleReview = review('Offline review · Shape changer, target and exit');
+  const sprites = ls20ShapeExit.sprites;
+  const link = document.createElement('button');
+  link.type = 'button';
+  link.className = 'sic-evidence-link';
+  link.textContent = 'See the shape matching mechanism';
+  link.addEventListener('click', () => { openInformation(panel, 'sic-mechanisms'); mechanismReview.open = true; });
+  const roleCards = document.createElement('ul');
+  for (const [name, description, previews] of [
+    ['Moving sprite', 'Moves in the direction requested if the next position allows it.', [['Observed sprite', sprites.mover]]],
+    ['Shape changer', 'Crossing this tile changes the shape shown in the indicator.', [
+      ['Tile', sprites.plate], ['Indicator before', sprites.before], ['Indicator after', sprites.after]]],
+    ['Exit and required shape', 'The exit tests the matching shape, color and orientation. The shape changer can supply the shape part of that match.', [
+      ['Exit', sprites.exit], ['Required shape', sprites.target]]],
+  ] as const) {
+    const row = document.createElement('li');
+    const label = document.createElement('strong');
+    label.textContent = name;
+    const copy = document.createElement('p');
+    copy.textContent = description;
+    row.append(label, copy, renderFrames(previews, palette));
+    roleCards.append(row);
+  }
+  roleReview.append(roleCards, link);
+  mechanisms.append(mechanismReview);
+  roles.append(roleReview);
 }
 
 function renderCardComparisons(panel: HTMLElement, palette: readonly string[], stck: boolean): void {
@@ -699,7 +804,7 @@ function renderBoardAndDirection(panel: HTMLElement, board: NativeRows | null, p
     body.replaceChildren(summary);
     if (item.translation) body.append(renderFrames([
       [`Before ${coordinates(item.translation.from)}`, item.translation.sprite],
-      [`After ${coordinates(item.translation.to)}`, item.translation.sprite],
+      [`After ${coordinates(item.translation.to)}`, item.translation.sprite], ['Target before the move', item.translation.targetBefore],
     ], palette));
     if (item.stationary) body.append(renderFrames([
       ['Sprite before', item.stationary.sprite], ['Sprite after', item.stationary.sprite], ['Area in requested direction', item.stationary.ahead],
@@ -782,7 +887,9 @@ export function renderSicPanel(panel: HTMLElement, view: ShadowView | null, pale
   renderBoardAndDirection(panel, board?.frame ?? null, palette, needsRestart, returns);
   renderDiscoveryPerspectives(panel, view, board, mode, returns, groups, palette);
   renderGameInformation(panel, view?.gameCode === 'STCK', ranks, view, groups, returns);
-  renderUnderstoodControls(panel, groups);
+  renderMechanisms(panel, groups, returns, palette);
+  renderRoles(panel, returns, palette);
+  renderOfflineReview(panel, view?.gameCode === 'LS20', palette);
   renderCardComparisons(panel, palette, view?.gameCode === 'STCK');
   renderTowerEffects(panel, palette, view?.gameCode === 'STCK');
   const check = view?.returnCheck;

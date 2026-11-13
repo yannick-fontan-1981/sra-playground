@@ -222,12 +222,19 @@ app.innerHTML = `
           <div id="sic-information" role="tabpanel" aria-labelledby="sic-information-tab" tabindex="0" hidden>
             <div class="sic-tabs sic-subtabs" role="tablist" aria-label="Types of information" data-sic-tabs>
               <button type="button" id="sic-effects-tab" role="tab" aria-selected="true" aria-controls="sic-effects">Command effects</button>
-              <button type="button" id="sic-understood-tab" role="tab" aria-selected="false" aria-controls="sic-understood" tabindex="-1">Understood controls</button>
+              <button type="button" id="sic-mechanisms-tab" role="tab" aria-selected="false" aria-controls="sic-mechanisms" tabindex="-1">Mechanisms</button>
+              <button type="button" id="sic-roles-tab" role="tab" aria-selected="false" aria-controls="sic-roles" tabindex="-1">Roles</button>
               <button type="button" id="sic-animations-tab" role="tab" aria-selected="false" aria-controls="sic-animations" tabindex="-1">Animations</button>
               <button type="button" id="sic-game-model-tab" role="tab" aria-selected="false" aria-controls="sic-game-model" tabindex="-1">Game model</button>
             </div>
-            <div id="sic-understood" role="tabpanel" aria-labelledby="sic-understood-tab" tabindex="0" hidden>
-              <section class="sic-card" data-sic-understood></section>
+            <div id="sic-mechanisms" role="tabpanel" aria-labelledby="sic-mechanisms-tab" tabindex="0" hidden>
+              <section class="sic-card" data-sic-mechanisms></section>
+              <section class="sic-observations" data-sic-targets hidden></section>
+              <div data-sic-mechanism-review></div>
+            </div>
+            <div id="sic-roles" role="tabpanel" aria-labelledby="sic-roles-tab" tabindex="0" hidden>
+              <section class="sic-card" data-sic-roles></section>
+              <div data-sic-role-review></div>
             </div>
             <div id="sic-animations" role="tabpanel" aria-labelledby="sic-animations-tab" tabindex="0" hidden>
               <section class="sic-observations" aria-labelledby="sic-card-test-title" data-sic-card-test hidden>

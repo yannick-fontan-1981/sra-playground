@@ -10,7 +10,8 @@ export interface DirectionalReturn {
   readonly frameCount?: number;
   readonly animation?: readonly { readonly index: number; readonly rows: NativeRows }[];
   readonly changes: ReturnType<typeof previewChangedRegions> | null;
-  readonly translation: { readonly from: NativeBox; readonly to: NativeBox; readonly sprite: NativeRows } | null;
+  readonly translation: { readonly from: NativeBox; readonly to: NativeBox; readonly sprite: NativeRows;
+    readonly targetBefore: NativeRows } | null;
   readonly stationary: { readonly box: NativeBox; readonly sprite: NativeRows; readonly step: number;
     readonly ahead: NativeRows | null } | null;
 }
@@ -63,9 +64,27 @@ function translationIn(command: number, before: NativeRows, after: NativeRows,
     if (nr - nx !== right - x || nb - ny !== bottom - y
         || (axis[0] === 0 ? dx !== 0 || dy * axis[1] <= 0 : dy !== 0 || dx * axis[0] <= 0)) continue;
     if (!equalAt(after, sprite, nx, ny) || equalAt(before, sprite, nx, ny) || equalAt(after, sprite, x, y)) continue;
-    candidates.set(`${from}:${to}`, { from, to, sprite });
+    candidates.set(`${from}:${to}`, { from, to, sprite, targetBefore: cropReturn(before, to, 1) });
   }
   return candidates.size === 1 ? candidates.values().next().value! : null;
+}
+
+/** Compare the approached patches before input; retain one sprite sample per outcome. */
+export function compareDirectionTargets(returns: readonly DirectionalReturn[]) {
+  const groups = new Map<string, { moved: number; stationary: number; movedExample?: DirectionalReturn;
+    stationaryExample?: DirectionalReturn }>();
+  for (const item of returns) {
+    const target = item.translation?.targetBefore ?? item.stationary?.ahead;
+    if (!target) continue;
+    const colors = [...new Set(target.flat())].sort((a, b) => a - b);
+    const key = colors.join(',');
+    const group = groups.get(key) ?? { moved: 0, stationary: 0 };
+    if (item.translation) { group.moved++; group.movedExample ??= item; }
+    else { group.stationary++; group.stationaryExample ??= item; }
+    groups.set(key, group);
+  }
+  return [...groups].map(([key, evidence]) => ({ colors: key.split(',').map(Number), ...evidence }))
+    .sort((a, b) => b.stationary + b.moved - a.stationary - a.moved);
 }
 
 function stationaryIn(command: number, before: NativeRows, after: NativeRows, reference: DirectionalReturn | undefined,

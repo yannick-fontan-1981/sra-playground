@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { observeDirectionalReturn, summarizeDirections } from '../src/sic/directional-return.ts';
+import { compareDirectionTargets, observeDirectionalReturn, summarizeDirections } from '../src/sic/directional-return.ts';
 
 test('directional observations retain public changes and stop at level transitions', () => {
   const scope = { sessionId: 'session', sequence: 1, command: 1, fromLevel: 1, toLevel: 1 };
@@ -15,6 +15,20 @@ test('directional observations retain public changes and stop at level transitio
   ]);
   assert.equal(observeDirectionalReturn({ ...scope, toLevel: 2 }, before, after, true).changes, null);
   assert.equal(observeDirectionalReturn(scope, before, [[0]], false).changes, null);
+});
+
+test('target comparison preserves both outcomes when the visible colors agree', () => {
+  const base = { sessionId: 's', sequence: 1, command: 1, fromLevel: 1, toLevel: 1, changes: null };
+  const target = [[1, 2], [1, 1]];
+  const moved = { ...base, stationary: null, translation: {
+    from: [2, 4, 3, 5] as const, to: [2, 2, 3, 3] as const, sprite: target, targetBefore: target,
+  } };
+  const stayed = { ...base, sequence: 2, translation: null, stationary: {
+    box: [2, 2, 3, 3] as const, sprite: target, step: 2, ahead: [[2, 1], [2, 1]],
+  } };
+  assert.deepEqual(compareDirectionTargets([moved, stayed]), [
+    { colors: [1, 2], moved: 1, stationary: 1, movedExample: moved, stationaryExample: stayed },
+  ]);
 });
 
 test('touching sprite footprints are separated from a parallel change, and a following attempt can stay in place', () => {
