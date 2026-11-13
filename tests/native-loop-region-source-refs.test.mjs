@@ -79,6 +79,7 @@ test('runtime component contract includes transport, corpus, protocol and Region
     'scripts/measure-native-loop-costs.mjs',
     'scripts/native-loop-region-action6-corpus.mjs',
     'scripts/native-loop-session-adapter.mjs',
+    'src/benchmarks/native-region-official-config.ts',
     'src/runtime/browser-games.ts',
     'src/runtime/game-worker.ts',
   ]) {
