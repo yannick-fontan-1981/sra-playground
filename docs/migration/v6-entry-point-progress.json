@@ -936,18 +936,23 @@
         "tests/v6-neutral-common-caller-owned.test.ts",
         "tests/v6-common-campaign-owner.test.ts",
         "tests/v6-common-campaign-session-continuity.test.ts",
-        "tests/v6-browser-session-resume.test.ts"
+        "tests/v6-browser-session-resume.test.ts",
+        "tests/browser/op01-op31-live-smlp-session-resume.ts",
+        "tests/op01-op31-live-smlp-session-resume-contract.test.mjs"
       ],
       "proofs": [
         "docs/recovery/op01-op31-common-campaign-owner-20261112.md",
         "docs/recovery/op01-op31-session-continuity-core-20261113.md",
         "docs/recovery/op01-op31-session-continuity-core-qualified.json",
         "docs/recovery/op01-op31-browser-session-resume-20261113.md",
-        "docs/recovery/op01-op31-browser-session-resume-qualified.json"
+        "docs/recovery/op01-op31-browser-session-resume-qualified.json",
+        "docs/recovery/op01-op31-live-smlp-session-resume-20261113.md",
+        "docs/recovery/op01-op31-live-smlp-session-resume-qualified.json"
       ],
       "limits": [
         "Aucune priorité implicite entre propriétaires indépendants.",
-        "La reprise n'est admise qu'aux frontières réglées ou physiquement envoyées et corrélées."
+        "La reprise n'est admise qu'aux frontières réglées ou physiquement envoyées et corrélées.",
+        "La continuité en mémoire est qualifiée sous Chrome avec le vrai Worker/Pyodide ; la persistance après rechargement ou nouveau processus reste ouverte."
       ],
       "historicalMapping": null,
       "historicalCountDisposition": "unmapped"
@@ -984,20 +989,27 @@
         "tests/v6-common-campaign-session-continuity.test.ts",
         "tests/v6-common-campaign-owner.test.ts",
         "tests/v6-neutral-common-caller.test.ts",
-        "tests/v6-browser-session-resume.test.ts"
+        "tests/v6-browser-session-resume.test.ts",
+        "tests/browser/op01-op31-live-smlp-session-resume.ts",
+        "tests/op01-op31-live-smlp-session-resume-contract.test.mjs"
       ],
       "proofs": [
         "docs/recovery/op01-op31-session-continuity-core-20261113.md",
         "docs/recovery/op01-op31-session-continuity-core-qualified.json",
         "docs/migration/op01-op31-progress.md",
         "docs/recovery/op01-op31-browser-session-resume-20261113.md",
-        "docs/recovery/op01-op31-browser-session-resume-qualified.json"
+        "docs/recovery/op01-op31-browser-session-resume-qualified.json",
+        "docs/recovery/op01-op31-live-smlp-session-resume-20261113.md",
+        "docs/recovery/op01-op31-live-smlp-session-resume-qualified.json"
       ],
       "limits": [
         "Checkpoint détenu en mémoire; aucun stockage IndexedDB, localStorage ou externe n'est qualifié.",
         "Aucune conservation pagehide, crash ou nouveau processus n'est démontrée.",
         "La reprise Chrome réelle et le coût de snapshot/restauration ne sont pas encore qualifiés.",
-        "La capture automatique pendant un appel physique encore en vol reste portée par le host, pas par le contrôleur."
+        "La capture automatique pendant un appel physique encore en vol reste portée par le host, pas par le contrôleur.",
+        "Le checkpoint actif est qualifié pour une restauration en mémoire sous Chrome/Worker/Pyodide.",
+        "Aucun stockage durable ni reprise après rechargement de page ou nouveau processus n’est encore qualifié.",
+        "Le coût de snapshot, restauration et acquisition reprise n’est pas mesuré séparément."
       ],
       "historicalMapping": null,
       "historicalCountDisposition": "unmapped"
@@ -1278,17 +1290,23 @@
         "tests/v6-browser-field-stock-campaign-host.test.ts",
         "tests/v6-browser-public-unique-action6-host.test.ts",
         "tests/v6-public-product-action6-producers.test.ts",
-        "tests/v6-browser-session-resume.test.ts"
+        "tests/v6-browser-session-resume.test.ts",
+        "tests/browser/op01-op31-live-smlp-session-resume.ts",
+        "tests/op01-op31-live-smlp-session-resume-contract.test.mjs"
       ],
       "proofs": [
         "docs/recovery/op01-op31-browser-agent-controller-combined-qualification-20261112.md",
         "docs/recovery/op01-op31-browser-public-action6-owner-20261113.md",
         "docs/recovery/op01-op31-browser-session-resume-20261113.md",
-        "docs/recovery/op01-op31-browser-session-resume-qualified.json"
+        "docs/recovery/op01-op31-browser-session-resume-qualified.json",
+        "docs/recovery/op01-op31-live-smlp-session-resume-20261113.md",
+        "docs/recovery/op01-op31-live-smlp-session-resume-qualified.json"
       ],
       "limits": [
         "La reprise est qualifiée dans les contrats TypeScript avec host frais, pas encore via une réactivation Chrome persistée.",
-        "Aucun stockage durable, pagehide, crash ou nouveau processus n'est couvert."
+        "Aucun stockage durable, pagehide, crash ou nouveau processus n'est couvert.",
+        "La reprise d’un retour déjà envoyé est qualifiée sous Chrome/Worker/Pyodide sans replay ni seconde présentation.",
+        "La persistance au-delà du cycle de vie de la page reste non qualifiée."
       ],
       "historicalMapping": null,
       "historicalCountDisposition": "unmapped"
@@ -1317,16 +1335,22 @@
       "tests": [
         "tests/v6-browser-agent-controller.test.ts",
         "tests/main-browser-agent-controller-integration.test.ts",
-        "tests/v6-browser-session-resume.test.ts"
+        "tests/v6-browser-session-resume.test.ts",
+        "tests/browser/op01-op31-live-smlp-session-resume.ts",
+        "tests/op01-op31-live-smlp-session-resume-contract.test.mjs"
       ],
       "proofs": [
         "docs/recovery/op01-op31-browser-agent-controller-20261112.md",
         "docs/recovery/op01-op31-browser-session-resume-20261113.md",
-        "docs/recovery/op01-op31-browser-session-resume-qualified.json"
+        "docs/recovery/op01-op31-browser-session-resume-qualified.json",
+        "docs/recovery/op01-op31-live-smlp-session-resume-20261113.md",
+        "docs/recovery/op01-op31-live-smlp-session-resume-qualified.json"
       ],
       "limits": [
         "Le checkpoint reste en mémoire et dispose() l'invalide volontairement.",
-        "Aucune désactivation/réactivation Chrome avec stockage durable n'est encore démontrée."
+        "Aucune désactivation/réactivation Chrome avec stockage durable n'est encore démontrée.",
+        "L’arrêt Manual puis la réactivation Agent sont qualifiés via le seam contrôleur dans Chrome avec le vrai Worker/Pyodide.",
+        "La séquence DOM publique complète et la reprise après rechargement de page ou nouveau processus restent non qualifiées."
       ],
       "historicalMapping": null,
       "historicalCountDisposition": "unmapped"
@@ -1472,7 +1496,7 @@
       "blocks": [
         "cross-page-product-continuity"
       ],
-      "reason": "La reprise dans un host frais est qualifiée en TypeScript, mais aucun stockage durable, pagehide, crash, nouveau processus ou cycle Chrome réel n'est encore démontré."
+      "reason": "La réactivation en mémoire du contrôleur et la reprise d’un retour déjà envoyé sont qualifiées dans Chrome avec le vrai Worker/Pyodide. Le gate reste ouvert pour un stockage durable versionné, la restauration après rechargement de page ou nouveau processus et la séquence DOM publique complète."
     },
     {
       "id": "op31-objective-owner",
@@ -1512,6 +1536,6 @@
     "historicalRegistryRecovered": false,
     "historicalCountClaimed": false,
     "sitePublished": false,
-    "nextStep": "persist the active browser checkpoint with an expiration policy, qualify pagehide and real Chrome reactivation without replay or needId loss, measure snapshot/restore overhead, and continue searching durable evidence for the historical 76-slot schema"
+    "nextStep": "persist the active browser checkpoint with an explicit schema version and expiry policy, prove page-reload or new-process recovery without physical replay, exercise the complete public Manual-to-Agent DOM sequence, measure snapshot and restore costs separately, and continue searching durable evidence for the historical 76-slot schema"
   }
 }
