@@ -55,6 +55,15 @@ test('diagonal-only changes remain separate under 4-connectivity', () => {
   assert.deepEqual(delta.regions.map(region => [region.minX, region.minY]), [[1, 1], [2, 2]]);
 });
 
+test('horizontal frame edges never wrap into one connected component', () => {
+  const delta = comparePublicObservations(
+    observation(0),
+    observation(1, [[63, 0, 2], [0, 1, 2]]),
+  );
+  assert.equal(delta.changedPixelCount, 2);
+  assert.deepEqual(delta.regions.map(region => [region.minX, region.minY]), [[63, 0], [0, 1]]);
+});
+
 test('region ordering and effect signature are deterministic', () => {
   const first = comparePublicObservations(
     observation(0),
@@ -75,6 +84,35 @@ test('mixed palette transitions are counted independently', () => {
     { from: 1, to: 3, count: 1 },
     { from: 2, to: 3, count: 1 },
   ]);
+});
+
+test('transition ordering remains ascending across the bounded palette domain', () => {
+  const before = observation(0, [[0, 0, 9], [1, 0, 2], [2, 0, 1]]);
+  const after = observation(1, [[0, 0, 1], [1, 0, 3], [3, 0, 15]]);
+  const delta = comparePublicObservations(before, after);
+  assert.deepEqual(delta.regions[0]?.transitions, [
+    { from: 0, to: 15, count: 1 },
+    { from: 1, to: 0, count: 1 },
+    { from: 2, to: 3, count: 1 },
+    { from: 9, to: 1, count: 1 },
+  ]);
+});
+
+test('a dense full-frame transition remains one bounded measured region', () => {
+  const after = observation(1);
+  after.image.pixels.fill(5);
+  const delta = comparePublicObservations(observation(0), after);
+  assert.equal(delta.changedPixelCount, 64 * 64);
+  assert.equal(delta.regions.length, 1);
+  assert.deepEqual(delta.regions[0], {
+    ref: 'delta:0,0-63,63:4096:0>5x4096',
+    minX: 0,
+    minY: 0,
+    maxX: 63,
+    maxY: 63,
+    pixelCount: 4096,
+    transitions: [{ from: 0, to: 5, count: 4096 }],
+  });
 });
 
 test('session mismatch and non-increasing sequence are rejected', () => {
