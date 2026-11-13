@@ -445,7 +445,6 @@ export class BrowserAgentController {
       const hasPendingDispatch = Boolean(hostCheckpoint.session.pendingReturn);
       const actionsDispatched = this.#actionsDispatched
         + (hasPendingDispatch && !this.#activePendingCounted ? 1 : 0);
-      if (hasPendingDispatch) this.#activePendingCounted = true;
       return parseBrowserAgentControllerCheckpoint({
         version: 1,
         host: hostCheckpoint,
