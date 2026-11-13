@@ -1,0 +1,34 @@
+name: Apply V6 browser reactivation typing fix
+
+on:
+  push:
+    branches:
+      - recovery/v6-browser-session-reactivation-20261113
+    paths:
+      - scripts/fix-v6-browser-session-reactivation-typing.mjs
+      - .github/workflows/v6-browser-session-reactivation-typing-fix.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.18.0
+      - name: Apply source typing fix
+        run: node scripts/fix-v6-browser-session-reactivation-typing.mjs
+      - name: Commit source fix
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add src/runtime/v6-browser-common-campaign-host.ts
+          if git diff --cached --quiet; then
+            echo "No typing changes"
+          else
+            git commit -m "Accept typed public pixel buffers in session continuity"
+            git push origin HEAD:${GITHUB_REF_NAME}
+          fi
