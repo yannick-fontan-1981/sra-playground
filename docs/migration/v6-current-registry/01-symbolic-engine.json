@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "kind": "current-v6-reconstruction-entry-fragment",
+  "category": "symbolic-engine",
+  "entries": [
+    {
+      "id": "RC001",
+      "name": "OP01-OP31 operation catalogue and dispatcher",
+      "category": "symbolic-engine",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-operations.test.ts",
+        "docs/migration/op01-op31-progress.md"
+      ],
+      "aggregation": {
+        "key": "op01-op31-catalogue",
+        "operationsRepresented": 31
+      },
+      "limitations": [
+        "The 31 operations are one aggregate current capability here; they are not counted as 31 historical V6 entry points."
+      ]
+    },
+    {
+      "id": "RC002",
+      "name": "Composition bundle validation and execution",
+      "category": "symbolic-engine",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-composition-engine.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-composition-engine.test.ts"
+      ]
+    },
+    {
+      "id": "RC003",
+      "name": "Native Logos release authority",
+      "category": "symbolic-engine",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-native-authority.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-native-authority.test.ts"
+      ],
+      "limitations": [
+        "Only explicitly routed physical operations receive release authority."
+      ]
+    },
+    {
+      "id": "RC004",
+      "name": "Target binding lifecycle",
+      "category": "symbolic-engine",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-target-binding.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-target-binding.test.ts"
+      ]
+    },
+    {
+      "id": "RC005",
+      "name": "Bounded operation trace",
+      "category": "symbolic-engine",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-operation-trace.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-operation-trace.test.ts"
+      ]
+    },
+    {
+      "id": "RC006",
+      "name": "Dependency-keyed operation result cache",
+      "category": "symbolic-engine",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-operation-cache.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-operation-cache.test.ts"
+      ]
+    },
+    {
+      "id": "RC007",
+      "name": "Operation return and post-analysis cycle",
+      "category": "symbolic-engine",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-operation-cycle.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-operation-cycle.test.ts"
+      ]
+    },
+    {
+      "id": "RC008",
+      "name": "Neutral common caller selection and return routing",
+      "category": "symbolic-engine",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-neutral-common-caller.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-neutral-common-caller.test.ts",
+        "tests/v6-neutral-common-caller-owned.test.ts"
+      ]
+    },
+    {
+      "id": "RC009",
+      "name": "Common campaign owner",
+      "category": "symbolic-engine",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-common-campaign-owner.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-common-campaign-owner.test.ts"
+      ]
+    },
+    {
+      "id": "RC010",
+      "name": "Common campaign decision port",
+      "category": "symbolic-engine",
+      "activation": "worker-runtime",
+      "implementationPaths": [
+        "src/runtime/v6-common-campaign-decision-port.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-common-campaign-decision-port.test.ts"
+      ]
+    },
+    {
+      "id": "RC011",
+      "name": "Joint-channel action contract",
+      "category": "symbolic-engine",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-joint-channel-action.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-joint-channel-owner.test.ts",
+        "tests/v6-joint-channel-zero-copy-contract.test.ts"
+      ]
+    },
+    {
+      "id": "RC012",
+      "name": "Joint-channel owner and correlated acquisition",
+      "category": "symbolic-engine",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-joint-channel-owner.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-joint-channel-owner.test.ts",
+        "tests/v6-joint-channel-zero-copy-contract.test.ts"
+      ]
+    }
+  ]
+}
