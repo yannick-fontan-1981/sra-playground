@@ -156,7 +156,7 @@ Status:
 
 **generic bounded joint owner functionally qualified.**
 
-#### 9C2 real public producers
+#### 9C2 real public SMLP producers
 
 Real qualified producers:
 
@@ -194,11 +194,60 @@ GitHub Actions evidence:
 
 Status:
 
-**9C2 functionally qualified on a real public SMLP corpus; official 9C performance remains open.**
+**9C2 functionally qualified on a real public SMLP corpus.**
 
 Proof:
 
 `docs/recovery/lot9c2-public-addressed-joint-channels.md`
+
+#### 9C3 real public STCK producers
+
+Real qualified producers:
+
+1. `public_stck_action_availability_v1`
+   - contributes only current ACTION6 admissibility;
+   - contributes no card or shop geometry.
+2. `public_stck_visible_target_v1`
+   - reproduces the current card or shop target from the public STCK frame;
+   - contributes the addressed coordinates and a revision-bound target identity;
+   - rejects stale or pixel-incompatible context.
+
+The target producer follows the already qualified 9B public boundary: an active
+shop segment must be visible, the lowest visible stack card is selected while a
+card remains, and the first visible shop segment is selected after the visible
+stack is empty.
+
+Real corpus qualification:
+
+- archive: `public/python/custom-games.zip`;
+- game: STCK `stck-c0000001`;
+- seed: 0;
+- selected action: `ACTION6(x=4, y=52)`;
+- selected target kind: `stack_card`;
+- changed public pixels after return: `211`;
+- the next target is remesured from the next public revision;
+- removing either producer yields no action;
+- selected return acquired by both channels.
+
+GitHub Actions evidence:
+
+- successful run `43363393229`;
+- job `131681943602`;
+- source-qualified head `50b8eb855ac941cdbed78b0004d09e7742611ebb`;
+- production build: PASS;
+- targeted 9C3 tests: **7/7 PASS**;
+- real archive qualifier: PASS;
+- complete TypeScript regression suite: **358/358 PASS**;
+- failures, cancellations, skipped tests and TODOs: `0`.
+
+Status:
+
+**9C3 functionally qualified on a real public STCK corpus; the two-game functional prerequisite for official 9C performance is complete.**
+
+Proofs:
+
+- `docs/recovery/lot9c3-stck-joint-performance-boundary.md`;
+- `docs/recovery/lot9c3-public-stck-joint-report.json`.
 
 ## 5. Performance contract
 
@@ -218,10 +267,9 @@ The strict official protocol remains:
 
 9B has passed this protocol.
 
-9C has not yet run an official performance comparison because the current real
-functional corpus proves the two-producer joint only on SMLP. A comparable STCK
-joint path or an explicit evidence-backed disposition is still required before
-an official two-game ABBA run.
+9C now has real, causally qualified public joint paths for both SMLP and STCK.
+Official performance remains open because the A/B source identities, runner
+manifest and timed joint-channel scope have not yet been frozen and executed.
 
 ## 6. Immediate roadmap
 
@@ -233,7 +281,8 @@ an official two-game ABBA run.
 | 9C0 historical audit | complete | preserve unresolved identity |
 | 9C1 bounded joint owner | complete | preserve neutral ambiguity |
 | 9C2 real SMLP producers | complete | preserve causal removal proof |
-| **9C3 second corpus/performance boundary** | **open** | **qualify STCK joint path or record evidence-backed non-applicability, then define A/B timing** |
+| 9C3 real STCK producers | complete | preserve archive and durable report parity |
+| **9C4 official A/B performance** | **open** | **freeze A/B source refs and runners, then execute strict two-game ABBA** |
 | current reconstruction registry | open | rebuild before count claims |
 | Site publication | blocked | only from an integrated GitHub-qualified SHA |
 
@@ -278,10 +327,12 @@ The project must not claim exact Site 109 parity until all of these are true:
 
 ## 9. Next step
 
-**Continue with Lot 9C3.**
+**Continue with Lot 9C4.**
 
-Qualify a second real, nonredundant public joint-channel path for STCK, or
-produce a durable evidence-backed disposition explaining why STCK is not a
-valid `joint_channels` exercise. Only then define the 9C A/B source identities,
-timing scope and official ABBA execution. Do not fabricate a STCK channel,
-benchmark corpus or historical count.
+Freeze one reference A path without the joint-channel candidate and one candidate
+B path with the qualified joint channels. Give every path a durable `sourceRef`,
+create explicit STCK and SMLP runners that exercise the real 9C2 and 9C3 public
+corpora, and define the timed boundary before measuring. Execute the full ABBA
+protocol with no measured sample removal. Accept only when each game's complete
+session median remains strictly below `+10.000%`. Do not infer historical parity,
+restore a registry count or publish Site from the functional qualification alone.
