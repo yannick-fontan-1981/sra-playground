@@ -148,17 +148,21 @@ export class V6AgentModeController {
     });
   }
 
-  stop(reason: Extract<AgentModeStopReason, 'manual' | 'game-change' | 'cancelled'> = 'cancelled'): boolean {
+  stop(
+    reason: Extract<AgentModeStopReason, 'manual' | 'game-change' | 'cancelled'> = 'cancelled',
+  ): boolean {
     if (this.#phase === 'disposed') return false;
     const hadSession = this.#sessionId !== null
       || this.#phase === 'ready'
       || this.#phase === 'running';
+    if (!hadSession) return false;
+
     this.#epoch += 1;
     this.#host.cancel();
     this.#sessionId = null;
     this.#stopReason = reason;
-    this.#phase = hadSession ? 'stopped' : 'idle';
-    return hadSession;
+    this.#phase = 'stopped';
+    return true;
   }
 
   dispose(): void {
