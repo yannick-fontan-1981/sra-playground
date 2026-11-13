@@ -38,6 +38,8 @@ Dernière consolidation : 13 novembre 2026.
   `docs/recovery/op01-op31-live-smlp-product-campaign-20261113.md`
 - Noyau de continuité de session :
   `docs/recovery/op01-op31-session-continuity-core-20261113.md`
+- Raccord navigateur de la continuité :
+  `docs/recovery/op01-op31-browser-session-resume-20261113.md`
 - Lot 9C2 public conjoint :
   `docs/recovery/lot9c2-public-addressed-joint-channels.md`
 - Qualification officielle C7 :
@@ -91,6 +93,8 @@ La campagne commune possède maintenant :
 - un noyau de checkpoint versionné pour la campagne, son `needId` en attente,
   sa déduplication et l'état complet FieldStock ;
 - une restauration atomique avec rollback en cas de refus d'un participant ;
+- un raccord qualifié du checkpoint au host produit et au contrôleur Agent ;
+- une reprise host d'un retour physiquement envoyé sans rejouer l'action ;
 - une qualification C7 officielle du hook Region natif sur STCK et SMLP.
 
 Le contrôleur produit utilise uniquement le seam navigateur direct. Le Worker
@@ -103,11 +107,12 @@ Statut global :
 SMLP et une carte STCK publique unique ; OP18 est transportée et consommée avec
 un stock revalidé ; les retours ACTION6 sélectionnés traversent l’acquisition du
 propriétaire puis l’observation passive FieldStock ; C7 reste clos pour le
-protocole Region STCK/SMLP. Le noyau de continuité sait maintenant restaurer le
-`needId`, l'action en attente, la déduplication et FieldStock sans double
-acquisition. Son raccord au host et au contrôleur navigateur, une campagne de
-résolution produit complète, le coût ciblé de la nouvelle composition et OP31
-restent ouverts.**
+protocole Region STCK/SMLP. Le noyau de continuité restaure le `needId`, l'action en attente, la
+déduplication et FieldStock sans double acquisition. Le host et le contrôleur
+restaurent désormais une frontière réglée dans une instance fraîche ; le host
+peut aussi acquérir un retour physiquement envoyé sans rejouer l'action. Le
+stockage durable, la preuve Chrome réelle, une campagne de résolution produit
+complète, le coût ciblé de la nouvelle composition et OP31 restent ouverts.**
 
 Cette reconstruction ne prouve ni une identité binaire avec Site 109, ni une
 parité totale V5/V6/V7, ni la présence d’un registre canonique complet des 76
@@ -140,7 +145,9 @@ points d’entrée V6.
 - `src/logos-engine/v6-common-campaign-checkpoint.ts` : checkpoint atomique de
   campagne et participants avec rollback ;
 - `src/runtime/observed-addressed-material-checkpoint.ts` : participant
-  explicite du runtime FieldStock.
+  explicite du runtime FieldStock ;
+- `src/runtime/v6-browser-campaign-checkpoint.ts` : identité et validation du
+  checkpoint produit, y compris la frontière physique déjà envoyée.
 
 ### Seam Worker conservé
 
@@ -174,7 +181,7 @@ produit actuel.
 | Lot | État courant | Preuve acquise | Dette suivante |
 | --- | --- | --- | --- |
 | C0 | **terminé** | 31 calculs inventoriés et dispositions explicites | maintenir les statuts par besoin |
-| C1 | **contrôleur produit actif ; noyau de checkpoint qualifié** | campagne unique, même `needId`, acquisition sélectionnée avant observation passive ; snapshot/restauration de la campagne, du retour en attente, de la déduplication et de FieldStock ; rollback atomique | raccorder le checkpoint au host et au contrôleur, puis qualifier une désactivation/réactivation navigateur réelle |
+| C1 | **checkpoint raccordé au host et au contrôleur dans les contrats produit** | reprise d'une session réglée dans un host frais ; même `sessionId` et compteur ; rejet stale ; retour physiquement envoyé acquis avec le même `needId` sans replay ni seconde présentation | stockage durable et désactivation/réactivation réelle dans Chrome/Pyodide |
 | C2 | **OP18 et OP28 actives ; premières ACTION6 produit qualifiées** | SMLP joint consomme deux contributions et traverse Pyodide sur trois retours réels ; STCK produit une coordonnée bornée ; retour acquis avant observation passive | campagne de résolution produit complète, raccord STCK conjoint et propriétaire OP31 |
 | C3 | **calculs et recouvrements qualifiés** | OP03/04/08/09/11/12/14/26 auditables | appeler uniquement depuis un producteur réel |
 | C4 | **audit complet, usages génériques non démontrés** | OP01/02/05/10/15/25 calculables | aucun raccord artificiel |
@@ -201,7 +208,11 @@ Il garantit :
 - acquisition avant décision suivante ;
 - transfert Agent vers Manual après règlement du retour en vol ;
 - priorité du remplacement de jeu sur une simple demande Manual ;
-- fermeture `disposed` stable pendant `pagehide`.
+- fermeture `disposed` stable pendant `pagehide` ;
+- conservation en mémoire d'un checkpoint aux frontières sûres ;
+- restauration dans un host frais avant toute nouvelle décision ;
+- refus d'une observation réglée obsolète ;
+- statut `resumed` sans nouvelle action physique pour un retour déjà envoyé.
 
 Le mode Manual reste direct et n’appelle aucune campagne Agent.
 
@@ -422,27 +433,30 @@ composition produit.
 - aucune campagne de résolution complète SMLP/STCK qualifiée dans le produit ;
 - le propriétaire conjoint STCK qualifié n'est pas encore le propriétaire actif
   du host produit ;
-- le noyau de persistance du modèle, du prior et du stock n'est pas encore appelé
-  entre deux activations Agent ;
-- snapshot/restauration de la campagne, des propriétaires, du `needId` et de
-  l’action en attente non raccordés au host et au contrôleur produit ;
+- le checkpoint du contrôleur reste en mémoire et n'est pas conservé lors de
+  `pagehide`, d'un crash ou d'un nouveau processus ;
+- le host qualifie la frontière d'une action déjà envoyée, mais le contrôleur
+  gracieux attend encore le retour en vol avant de s'arrêter ;
+- aucune désactivation/réactivation réelle dans Chrome n'est encore qualifiée ;
 - Region n’est pas encore un propriétaire physique du contrôleur produit ;
 - aucun propriétaire OP31 ;
-- registre canonique des 76 points d’entrée V6 absent ;
+- registre courant V6 reconstruit, mais inventaire canonique complet des 76
+  points d'entrée non démontré ;
 - coût ciblé de la nouvelle composition produit non mesuré séparément ;
 - aucune publication Site dans cette tranche.
 
 ## Feuille de route actualisée
 
-### Étape immédiate : raccorder la continuité au navigateur
+### Étape immédiate : persistance durable et fixture navigateur réelle
 
-1. faire posséder le coordinateur de checkpoint par le host produit ;
-2. exposer snapshot et restauration sans dupliquer la politique de campagne ;
-3. recréer un host et un runtime FieldStock frais lors de la réactivation Agent ;
-4. restaurer avant toute nouvelle décision et vérifier l'observation courante ;
-5. reprendre un retour en attente sans rejouer l'action ;
-6. prouver dans une fixture navigateur réelle l'absence de perte de `needId`,
-   de double acquisition et de double ACTION6.
+1. définir un stockage durable versionné avec politique d'expiration ;
+2. lier le checkpoint au jeu et à la génération produit courante ;
+3. conserver une frontière sûre lors de `pagehide` sans annuler un retour déjà
+   physiquement envoyé ;
+4. exécuter une désactivation/réactivation réelle dans Chrome contre Pyodide ;
+5. vérifier l'absence de perte de `needId`, de double acquisition, de double
+   présentation et de double ACTION6 ;
+6. mesurer ensuite le coût de la continuité active.
 
 ### Étape suivante : STCK conjoint produit
 
@@ -486,8 +500,34 @@ Résultats :
 La preuve durable est
 `docs/recovery/op01-op31-session-continuity-core-20261113.md`.
 
-Cette qualification porte sur le noyau. Le host et le contrôleur navigateur ne
-l'appellent pas encore, et aucune surcharge produit n'est revendiquée.
+Cette qualification initiale porte sur le noyau. Son raccord produit est
+désormais qualifié par la section suivante. Aucune surcharge produit n'est
+revendiquée.
+
+## Qualification du raccord navigateur C1
+
+Le raccord a été requalifié après intégration du canonique `97ba156fd0ffb8359cb84514c91f1504d84e928c`
+par le run `43431242149`, job `131904989533`.
+
+Résultats :
+
+- tests ciblés continuité navigateur : **25/25** ;
+- régression TypeScript complète : **396/396** ;
+- échecs, annulations, ignorés et TODO : `0` ;
+- build de production : réussi ;
+- modules transformés : `66` ;
+- galerie : `100` jeux, `636` prévisualisations,
+  `4` atlas ;
+- même session restaurée dans un host frais sans nouvelle action ;
+- checkpoint obsolète refusé avant réutilisation ;
+- même `needId` acquis après un retour physiquement envoyé ;
+- aucune répétition de l'action ni de la présentation dans cette reprise.
+
+Preuve durable :
+`docs/recovery/op01-op31-browser-session-resume-20261113.md`.
+
+La preuve reste contractuelle sous Node. Le stockage durable et la fixture Chrome
+réelle restent ouverts.
 
 ## Requalification C7 du contrat de configuration canonique
 

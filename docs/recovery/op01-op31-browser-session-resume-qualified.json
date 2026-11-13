@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "qualification": "op01-op31-browser-session-resume",
+  "date": "2026-11-13",
+  "repository": "yannick-fontan-1981/sra-playground",
+  "branch": "op01-op31-browser-session-resume-20261113",
+  "canonical_branch": "recovery/site109-reconstruction-20261112",
+  "reconciled_source_parent": "9bc69001ac697f8a6f6cc50911b8de4696ce32f8",
+  "canonical_commit_included": "97ba156fd0ffb8359cb84514c91f1504d84e928c",
+  "qualification_trigger_commit": "3f7b90fd2a929b029b2f535872e9567842fe815b",
+  "github_actions": {
+    "run_id": 43431242149,
+    "job_id": 131904989533,
+    "node": "v22.18.0"
+  },
+  "targeted_tests": {
+    "tests": 25,
+    "pass": 25,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "full_typescript_regression": {
+    "tests": 396,
+    "pass": 396,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "production_build": {
+    "passed": true,
+    "modulesTransformed": 66,
+    "games": 100,
+    "levelPreviews": 636,
+    "nativeAtlases": 4
+  },
+  "causal_proofs": {
+    "settled_session_restored_into_fresh_host": true,
+    "same_session_id_preserved": true,
+    "action_count_preserved": true,
+    "stale_checkpoint_rejected": true,
+    "dispatched_pending_need_id_preserved": true,
+    "dispatched_pending_return_acquired_once": true,
+    "physical_action_replayed_on_resume": false,
+    "returned_observation_presented_twice": false,
+    "unchanged_live_observation_keeps_pending": true,
+    "field_stock_runtime_restored_atomically": true,
+    "field_stock_transport_context_restored": true
+  },
+  "proof_boundary": {
+    "actual_chrome_reactivation": false,
+    "durable_pagehide_storage": false,
+    "cross_process_recovery": false,
+    "automatic_controller_capture_during_unsettled_dispatch": false,
+    "product_performance_qualified": false,
+    "site_published": false
+  }
+}
