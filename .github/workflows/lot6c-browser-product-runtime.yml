@@ -37,7 +37,7 @@ jobs:
       - name: Build production bundle
         run: npm run build
       - name: Run complete regression suite
-        run: npm test
+        run: node --experimental-transform-types --test tests/*.test.ts
       - name: Test browser report contract
         run: node --test tests/lot6c-browser-product-runtime-contract.test.mjs
       - name: Qualify compiled browser product path
