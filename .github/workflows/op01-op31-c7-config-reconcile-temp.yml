@@ -3,7 +3,7 @@ name: OP01-OP31 canonical C7 config reconciliation
 on:
   push:
     branches:
-      - recovery/op01-op31-c7-config-reconcile-canonical-20261113
+      - recovery/op01-op31-c7-config-reconcile-canonical-staging-disabled
 
 concurrency:
   group: op01-op31-c7-config-reconcile-canonical-20261113
@@ -84,6 +84,8 @@ jobs:
           C7_ARTIFACT_ID: ${{ steps.measurement_artifact.outputs.artifact-id }}
           C7_ARTIFACT_DIGEST: ${{ steps.measurement_artifact.outputs.artifact-digest }}
         run: node scripts/reconcile-canonical-c7-config-temp.mjs finalize
+      - name: Retain the rejected canonical measurement
+        run: node scripts/retain-c7-failed-attempt-temp.mjs
       - name: Verify final proof, manifest and C7 readiness
         run: |
           node --test tests/lot9b-official-performance-proof.test.mjs
