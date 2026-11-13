@@ -1,10 +1,10 @@
 import type { ProductReadinessState } from '../agent-product-dispatch.ts';
 import type { GameObservation } from './browser-games.ts';
-import {
-  createFieldStockAndPublicSingleActionBrowserCampaignHost,
-  type BrowserCampaignDispatchPorts,
-  type BrowserCampaignHostResult,
-  type BrowserCommonCampaignHost,
+import { createFieldStockAndPublicSingleActionBrowserCampaignHost } from './v6-browser-product-campaign-host.ts';
+import type {
+  BrowserCampaignDispatchPorts,
+  BrowserCampaignHostResult,
+  BrowserCommonCampaignHost,
 } from './v6-browser-common-campaign-host.ts';
 
 /**
