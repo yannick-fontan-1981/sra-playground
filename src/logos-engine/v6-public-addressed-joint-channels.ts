@@ -16,6 +16,7 @@ import type {
 export const PUBLIC_ACTION_AVAILABILITY_CHANNEL_ID = 'public_action_availability_v1';
 export const PUBLIC_VISIBLE_TARGET_CHANNEL_ID = 'public_visible_target_v1';
 export const PUBLIC_SMLP_GATE_PRODUCER_ID = 'public_smlp_gate_target_v1';
+export const PUBLIC_STCK_TARGET_PRODUCER_ID = 'public_stck_stack_shop_target_v1';
 
 export interface PublicSmlpGateCandidate {
   version: 1;
@@ -28,6 +29,22 @@ export interface PublicSmlpGateCandidate {
   action: Extract<AgentAction, { id: 6 }>;
   evidenceRefs: string[];
 }
+
+export interface PublicStckTargetCandidate {
+  version: 1;
+  producerId: typeof PUBLIC_STCK_TARGET_PRODUCER_ID;
+  observationRef: string;
+  jointRef: string;
+  targetRef: string;
+  patchSignature: string;
+  targetKind: 'stack_card_remove' | 'shop_button_add';
+  action: Extract<AgentAction, { id: 6 }>;
+  evidenceRefs: string[];
+}
+
+export type PublicAddressedTargetCandidate =
+  | PublicSmlpGateCandidate
+  | PublicStckTargetCandidate;
 
 export interface PublicAddressedJointChannelReceipt {
   acquired: true;
@@ -49,6 +66,13 @@ interface GateMatch {
   patchSignature: string;
 }
 
+interface StckTargetMatch {
+  x: number;
+  y: number;
+  targetKind: PublicStckTargetCandidate['targetKind'];
+  patchSignature: string;
+}
+
 function observationRef(observation: AgentObservation): string {
   return `public-observation:${observation.sessionId}:${observation.sequence}`;
 }
@@ -61,10 +85,10 @@ function validatePublicImage(observation: AgentObservation): Uint8Array {
     || !(observation.image.pixels instanceof Uint8Array)
     || observation.image.pixels.length !== 64 * 64
   ) {
-    throw new RangeError('public SMLP gate producer requires one 64x64 palette-index frame');
+    throw new RangeError('public addressed target producer requires one 64x64 palette-index frame');
   }
   for (const value of observation.image.pixels) {
-    if (value > 15) throw new RangeError('public SMLP gate producer received an invalid palette index');
+    if (value > 15) throw new RangeError('public addressed target producer received an invalid palette index');
   }
   return observation.image.pixels;
 }
@@ -192,16 +216,125 @@ export function producePublicSmlpGateCandidate(
   };
 }
 
+const STCK_CARD_COLORS = new Set([7, 8, 9, 10, 11, 14]);
+
+function firstVisibleStckShopButton(pixels: Uint8Array): StckTargetMatch | undefined {
+  const active: boolean[] = [];
+  for (let x = 0; x < 64; x += 1) {
+    let nonBlack = 0;
+    for (let y = 54; y <= 58; y += 1) {
+      if (pixel(pixels, x, y) !== 5) nonBlack += 1;
+    }
+    active.push(nonBlack >= 2);
+  }
+
+  let start = -1;
+  for (let x = 0; x <= 64; x += 1) {
+    const on = x < 64 ? active[x] : false;
+    if (on && start < 0) start = x;
+    if (!on && start >= 0) {
+      const end = x - 1;
+      if (end - start + 1 >= 5) {
+        const values: number[] = [];
+        for (let y = 54; y <= 58; y += 1) {
+          for (let xx = start; xx <= end; xx += 1) {
+            values.push(pixel(pixels, xx, y));
+          }
+        }
+        return {
+          x: Math.floor((start + end) / 2),
+          y: 56,
+          targetKind: 'shop_button_add',
+          patchSignature: `${start}-${end}:${values.join(',')}`,
+        };
+      }
+      start = -1;
+    }
+  }
+  return undefined;
+}
+
+function firstVisibleStckStackCard(pixels: Uint8Array): StckTargetMatch | undefined {
+  for (let y = 53; y >= 0; y -= 1) {
+    const centerColor = pixel(pixels, 4, y);
+    if (!STCK_CARD_COLORS.has(centerColor)) continue;
+    const interior: number[] = [];
+    for (let x = 2; x < 8; x += 1) interior.push(pixel(pixels, x, y));
+    if (!interior.every(value => value === centerColor)) continue;
+    const signature: number[] = [];
+    for (let yy = Math.max(0, y - 1); yy <= Math.min(53, y + 1); yy += 1) {
+      for (let x = 1; x < 9; x += 1) signature.push(pixel(pixels, x, yy));
+    }
+    return {
+      x: 4,
+      y,
+      targetKind: 'stack_card_remove',
+      patchSignature: `${centerColor}:${signature.join(',')}`,
+    };
+  }
+  return undefined;
+}
+
+/**
+ * Public STCK target producer for Lot 9C3.
+ *
+ * A visible active shop button proves that the public frame is currently in an
+ * addressed shop interaction state. While that state is visible, the producer
+ * chooses the lowest visible stack-card face for removal; when no card face is
+ * visible it chooses the first active shop button. This exactly mirrors the
+ * already qualified public Region corpus without reading `at_shop`, stack data,
+ * button ids or any other hidden engine field.
+ */
+export function producePublicStckTargetCandidate(
+  observation: AgentObservation,
+): PublicStckTargetCandidate | undefined {
+  if (observation.state !== 'NOT_FINISHED') return undefined;
+  const pixels = validatePublicImage(observation);
+  const shopButton = firstVisibleStckShopButton(pixels);
+  if (!shopButton) return undefined;
+  const match = firstVisibleStckStackCard(pixels) ?? shopButton;
+
+  const currentObservationRef = observationRef(observation);
+  const targetRef = [
+    'public-stck-target',
+    currentObservationRef,
+    match.targetKind,
+    match.x,
+    match.y,
+    match.patchSignature,
+  ].join(':');
+  const action: Extract<AgentAction, { id: 6 }> = {
+    id: 6,
+    data: { x: match.x, y: match.y },
+  };
+  return {
+    version: 1,
+    producerId: PUBLIC_STCK_TARGET_PRODUCER_ID,
+    observationRef: currentObservationRef,
+    jointRef: `public-addressed-joint:${targetRef}:ACTION6`,
+    targetRef,
+    patchSignature: match.patchSignature,
+    targetKind: match.targetKind,
+    action,
+    evidenceRefs: [
+      currentObservationRef,
+      targetRef,
+      `producer:${PUBLIC_STCK_TARGET_PRODUCER_ID}`,
+    ],
+  };
+}
+
 function candidateContext(
   request: JointChannelContributionRequest,
-): PublicSmlpGateCandidate | undefined {
+): PublicAddressedTargetCandidate | undefined {
   if (!request.context || typeof request.context !== 'object' || Array.isArray(request.context)) {
     return undefined;
   }
-  const candidate = request.context as Partial<PublicSmlpGateCandidate>;
+  const candidate = request.context as Partial<PublicAddressedTargetCandidate>;
   if (
     candidate.version !== 1
-    || candidate.producerId !== PUBLIC_SMLP_GATE_PRODUCER_ID
+    || (candidate.producerId !== PUBLIC_SMLP_GATE_PRODUCER_ID
+      && candidate.producerId !== PUBLIC_STCK_TARGET_PRODUCER_ID)
     || candidate.observationRef !== observationRef(request.observation)
     || typeof candidate.jointRef !== 'string'
     || candidate.jointRef.length === 0
@@ -215,23 +348,59 @@ function candidateContext(
   ) {
     return undefined;
   }
-  return candidate as PublicSmlpGateCandidate;
+  if (
+    candidate.producerId === PUBLIC_SMLP_GATE_PRODUCER_ID
+    && !['closed_vertical', 'closed_horizontal', 'open_horizontal', 'open_vertical']
+      .includes((candidate as Partial<PublicSmlpGateCandidate>).orientation ?? '')
+  ) {
+    return undefined;
+  }
+  if (
+    candidate.producerId === PUBLIC_STCK_TARGET_PRODUCER_ID
+    && !['stack_card_remove', 'shop_button_add']
+      .includes((candidate as Partial<PublicStckTargetCandidate>).targetKind ?? '')
+  ) {
+    return undefined;
+  }
+  return candidate as PublicAddressedTargetCandidate;
+}
+
+function reproduceTargetCandidate(
+  observation: AgentObservation,
+  candidate: PublicAddressedTargetCandidate,
+): PublicAddressedTargetCandidate | undefined {
+  return candidate.producerId === PUBLIC_SMLP_GATE_PRODUCER_ID
+    ? producePublicSmlpGateCandidate(observation)
+    : producePublicStckTargetCandidate(observation);
 }
 
 function verifiedTargetCandidate(
   request: JointChannelContributionRequest,
-): PublicSmlpGateCandidate | undefined {
+): PublicAddressedTargetCandidate | undefined {
   const candidate = candidateContext(request);
   if (!candidate) return undefined;
-  const reproduced = producePublicSmlpGateCandidate(request.observation);
-  if (!reproduced) return undefined;
+  const reproduced = reproduceTargetCandidate(request.observation, candidate);
+  if (!reproduced || reproduced.producerId !== candidate.producerId) return undefined;
   if (
     reproduced.targetRef !== candidate.targetRef
     || reproduced.patchSignature !== candidate.patchSignature
-    || reproduced.orientation !== candidate.orientation
     || reproduced.action.data.x !== candidate.action.data.x
     || reproduced.action.data.y !== candidate.action.data.y
     || reproduced.jointRef !== candidate.jointRef
+  ) {
+    return undefined;
+  }
+  if (
+    candidate.producerId === PUBLIC_SMLP_GATE_PRODUCER_ID
+    && reproduced.producerId === PUBLIC_SMLP_GATE_PRODUCER_ID
+    && reproduced.orientation !== candidate.orientation
+  ) {
+    return undefined;
+  }
+  if (
+    candidate.producerId === PUBLIC_STCK_TARGET_PRODUCER_ID
+    && reproduced.producerId === PUBLIC_STCK_TARGET_PRODUCER_ID
+    && reproduced.targetKind !== candidate.targetKind
   ) {
     return undefined;
   }
@@ -263,7 +432,7 @@ abstract class PublicAddressedJointChannelBase implements JointChannel {
 
   protected contribution(
     request: JointChannelContributionRequest,
-    candidate: PublicSmlpGateCandidate,
+    candidate: PublicAddressedTargetCandidate,
     contributionRef: string,
   ): JointChannelContribution | undefined {
     const payload = prepareJointChannelActionPayload(
@@ -297,7 +466,7 @@ export class PublicActionAvailabilityJointChannel extends PublicAddressedJointCh
   }
 }
 
-/** Contributes the revalidated visible gate target and its addressed coordinates. */
+/** Contributes the revalidated visible target and its addressed coordinates. */
 export class PublicVisibleTargetJointChannel extends PublicAddressedJointChannelBase {
   readonly id = PUBLIC_VISIBLE_TARGET_CHANNEL_ID;
 
@@ -319,11 +488,30 @@ export function createPublicSmlpAddressedJointChannels(): readonly JointChannel[
   ];
 }
 
-/** Build the explicit per-channel context expected by V6CommonCampaignDecisionPort. */
+export function createPublicStckAddressedJointChannels(): readonly JointChannel[] {
+  return [
+    new PublicActionAvailabilityJointChannel(),
+    new PublicVisibleTargetJointChannel(),
+  ];
+}
+
+/** Build the explicit per-channel SMLP context expected by the decision port. */
 export function publicSmlpAddressedJointContext(
   observation: AgentObservation,
 ): Readonly<Record<string, unknown>> {
   const candidate = producePublicSmlpGateCandidate(observation);
+  if (!candidate) return {};
+  return {
+    [PUBLIC_ACTION_AVAILABILITY_CHANNEL_ID]: structuredClone(candidate),
+    [PUBLIC_VISIBLE_TARGET_CHANNEL_ID]: structuredClone(candidate),
+  };
+}
+
+/** Build the explicit per-channel STCK context expected by the decision port. */
+export function publicStckAddressedJointContext(
+  observation: AgentObservation,
+): Readonly<Record<string, unknown>> {
+  const candidate = producePublicStckTargetCandidate(observation);
   if (!candidate) return {};
   return {
     [PUBLIC_ACTION_AVAILABILITY_CHANNEL_ID]: structuredClone(candidate),
