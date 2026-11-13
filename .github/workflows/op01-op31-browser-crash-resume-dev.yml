@@ -16,6 +16,8 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22.18.0
@@ -40,7 +42,7 @@ jobs:
         run: npm run build
       - name: Real Chrome SIGKILL and Pyodide crash recovery
         env:
-          OP01_OP31_BROWSER_CRASH_RESUME_REPORT: op01-op31-browser-crash-resume-report.json
+          OP01_OP31_BROWSER_CRASH_RESUME_REPORT: docs/recovery/op01-op31-browser-crash-resume-qualified.json
         run: node scripts/qualify-op01-op31-browser-crash-resume.mjs
       - name: Verify current V6 evidence registry
         run: node scripts/check-v6-entry-point-progress.mjs
@@ -50,13 +52,14 @@ jobs:
         if: always()
         with:
           name: op01-op31-browser-crash-resume
-          path: op01-op31-browser-crash-resume-report.json
+          path: docs/recovery/op01-op31-browser-crash-resume-qualified.json
           if-no-files-found: warn
-      - name: Commit qualified autosave wiring
+      - name: Commit qualified crash-resume implementation and proof
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/main.ts
+          git add -A
           git diff --cached --quiet && exit 0
-          git commit -m "Activate crash-safe browser autosave boundaries"
-          git push origin HEAD:${GITHUB_REF_NAME}
+          git commit -m "Activate and qualify crash-safe browser autosave boundaries"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin HEAD:"${GITHUB_REF_NAME}"
