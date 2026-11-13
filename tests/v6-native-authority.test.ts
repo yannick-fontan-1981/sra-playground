@@ -18,12 +18,12 @@ function baseState() {
   };
 }
 
-function bundle(op: 'OP18' | 'OP28'): CompositionBundle {
+function bundle(op: 'OP14' | 'OP18' | 'OP28'): CompositionBundle {
   return {
     id: 'bundle', operation_key: op, composition_ref: 'B', objective_ref: 'G', preserve_refs: ['A'],
     observation_revision: 1, kind: op === 'OP18' ? 'probe' : 'realize', actions: ['ACTION1'],
     purpose: 'current release need', preconditions: { free: true }, evidence: ['obs-1'],
-    preservation_evidence: { A: 'proof' }, outcome_guard: { path: ['value'], contains: op === 'OP18' ? 'B' : 'bundle' },
+    preservation_evidence: { A: 'proof' }, outcome_guard: { path: ['value'], contains: op === 'OP28' ? 'bundle' : 'B' },
   };
 }
 
@@ -76,4 +76,17 @@ test('OP18 treats an empty container question as absent like the Python donor', 
   const outcome = releaseBundle(bundle('OP18'), state, identity, trace);
   assert.equal(outcome.need.status, 'not_required');
   assert.equal(trace.snapshot().events.some(event => event.kind === 'operation' && event.mode === 'executed'), false);
+});
+
+
+test('OP14 admission exists at bridge level but native authority does not route it yet', () => {
+  const trace = new OperationTraceSink();
+  const outcome = releaseBundle(bundle('OP14'), baseState(), identity, trace);
+  assert.equal(outcome.need.status, 'not_required');
+  assert.equal(outcome.releaseAllowed, false);
+  assert.equal(outcome.result, undefined);
+  const operations = trace.snapshot().events.filter(event => event.kind === 'operation');
+  assert.equal(operations.length, 1);
+  assert.equal(operations[0]?.kind === 'operation' && operations[0].mode, 'not_required');
+  assert.equal(operations[0]?.kind === 'operation' && operations[0].op, 'OP14');
 });
