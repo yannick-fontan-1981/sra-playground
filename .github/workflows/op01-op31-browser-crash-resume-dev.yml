@@ -1,0 +1,77 @@
+name: OP01-OP31 browser crash resume dev
+
+on:
+  push:
+    branches:
+      - op01-op31-browser-crash-resume-20261113
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  qualify-crash-resume:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.18.0
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Apply strict crash-safe persistence wiring
+        run: |
+          node scripts/apply-op01-op31-browser-crash-autosave.mjs
+          node --input-type=module <<'NODE'
+          import { readFile, writeFile } from 'node:fs/promises';
+          const path = 'scripts/apply-op01-op31-browser-crash-indexeddb.mjs';
+          let source = await readFile(path, 'utf8');
+          source = source.replace(
+            "console.log(JSON.stringify({\\n  status: 'strict-indexeddb-crash-checkpoint-wired',\\n  files: [mainPath, fixturePath],\\n}, null, 2));",
+            "console.log(JSON.stringify({\n  status: 'strict-indexeddb-crash-checkpoint-wired',\n  files: [mainPath, fixturePath],\n}, null, 2));",
+          );
+          await writeFile(path, source);
+          NODE
+          node scripts/apply-op01-op31-browser-crash-indexeddb.mjs
+          node scripts/apply-op01-op31-browser-crash-app-launch.mjs
+          node scripts/apply-op01-op31-browser-crash-return-presentation.mjs
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Targeted crash-resume tests
+        run: >-
+          node --experimental-transform-types --test
+          tests/v6-browser-durable-autosave.test.ts
+          tests/v6-browser-durable-session.test.ts
+          tests/v6-browser-agent-live-capture.test.ts
+          tests/browser-game-runtime-checkpoint.test.ts
+          tests/main-browser-crash-autosave-integration.test.ts
+          tests/main-browser-durable-session-integration.test.ts
+          tests/op01-op31-browser-crash-resume-contract.test.mjs
+      - name: Production build
+        run: npm run build
+      - name: Real Chrome SIGKILL and Pyodide crash recovery
+        env:
+          OP01_OP31_BROWSER_CRASH_RESUME_REPORT: docs/recovery/op01-op31-browser-crash-resume-qualified.json
+        run: node scripts/qualify-op01-op31-browser-crash-resume.mjs
+      - name: Verify current V6 evidence registry
+        run: node scripts/check-v6-entry-point-progress.mjs
+      - name: Full TypeScript regression
+        run: node --experimental-transform-types --test tests/*.test.ts
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: op01-op31-browser-crash-resume
+          path: docs/recovery/op01-op31-browser-crash-resume-qualified.json
+          if-no-files-found: warn
+      - name: Commit qualified crash-resume implementation and proof
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && exit 0
+          git commit -m "Activate and qualify crash-safe browser autosave boundaries"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin HEAD:"${GITHUB_REF_NAME}"
