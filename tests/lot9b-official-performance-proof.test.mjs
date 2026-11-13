@@ -77,3 +77,21 @@ test('official proof retains all Region acquisitions', async () => {
     methods: 126,
   });
 });
+
+test('official proof retains the rejected first canonical requalification attempt', async () => {
+  const proof = JSON.parse(await readFile(proofPath, 'utf8'));
+  const attempt = proof.failedRequalificationAttempts?.find(
+    item => item.runId === 43364040206 && item.jobId === 131684105998,
+  );
+  assert.ok(attempt, 'rejected run 43364040206 must remain in the proof');
+  assert.equal(attempt.accepted, false);
+  assert.equal(attempt.retainedSamples, true);
+  assert.equal(attempt.retriesWithinRun, 0);
+  assert.equal(attempt.games.STCK.accepted, true);
+  assert.equal(attempt.games.SMLP.accepted, false);
+  assertApproximatelyEqual(
+    attempt.games.SMLP.relativeIncreasePercent,
+    11.379529561353618,
+    'rejected SMLP delta',
+  );
+});
