@@ -28,10 +28,11 @@
     },
     {
       "id": "G004",
-      "name": "Atomic product campaign persistence across activations",
-      "reason": "Campaign, owner, model, prior, stock, pending need and return restoration are not wired as one product transaction.",
+      "name": "Browser host/controller checkpoint wiring across activations",
+      "reason": "The atomic checkpoint core, pending need identity, return dedupe and exact FieldStock state are qualified, but the browser host and Agent controller do not yet invoke them during deactivation and reactivation.",
       "evidencePaths": [
-        "docs/migration/op01-op31-progress.md"
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-session-continuity-core-20261113.md"
       ]
     },
     {
