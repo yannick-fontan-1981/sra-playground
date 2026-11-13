@@ -52,15 +52,16 @@ Branches intégrées/préparées :
 - ce caller ne départage jamais plusieurs propositions : 0 -> none, 1 -> selected, >1 -> ambiguous ;
 - l'adaptateur `src/logos-engine/v6-region-caller-adapter.ts` relie Region au caller sans modifier le coeur Region ;
 - caller neutre + intégration Region passent **12/12 tests** ;
-- total unique ciblé observé pour noyau V6 + Region + owner + caller + worker + delta public : **84/84 tests réussis** ;
+- total unique ciblé observé pour noyau V6 + Region + owner + caller + worker + delta public + campagne générique : **91/91 tests réussis** ;
 - le dispatch produit/UI reste distinct du caller agent ;
 - le transport worker public est reconstruit dans `src/runtime/v6-agent-worker-core.ts` + `src/runtime/v6-agent-worker.ts` et passe **14/14 tests** ; son port par défaut reste `reconstruction-pending-perception` et ne produit aucune action inventée ;
 - la couche `observation publique -> delta visible` est reconstruite dans `src/logos-engine/v6-public-observation-delta.ts` et `src/logos-engine/v6-region-public-evidence.ts` ; elle passe **12/12 tests** et ne déduit jamais de `methodRef` à partir de la ressemblance visuelle ;
-- la production justifiée du `methodRef`, le branchement du worker vers les contextes owners, la campagne live et le harness officiel de coût restent absents ;
+- le helper de campagne générique et borné est reconstruit dans `tests/helpers/v6-live-game-campaign.ts` et passe **7/7 tests** ; il conserve ACTION6, borne les pas, valide session/séquence et propage les erreurs worker sans dispatch caché ;
+- la production justifiée du `methodRef`, le branchement du worker vers les contextes owners, les scénarios/corpus historiques STCK/SMLP et le harness officiel de coût restent absents ;
 - aucun compteur historique 70/76 ou candidat 71/76 n'est promu au statut de la reconstruction actuelle.
 
 Statut Lot 9 :
-**noyau V6, coeur Region, owner, caller neutre, transport worker et delta public fonctionnellement qualifiés dans leurs périmètres ; liaison methodRef, campagne live et performance officielle à confirmer.**
+**noyau V6, coeur Region, owner, caller neutre, transport worker, delta public et helper de campagne générique fonctionnellement qualifiés dans leurs périmètres ; campagnes STCK/SMLP et performance officielle à confirmer.**
 
 ## Branches de récupération conservées
 
