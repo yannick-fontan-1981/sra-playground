@@ -1393,3 +1393,30 @@ Plan :
 
 Statut :
 **fonctionnellement qualifié, performance officielle à confirmer**.
+
+
+## C7 — runner de session candidat public-only
+
+Ajout :
+`scripts/native-loop-public-corpus-runner.mjs`.
+
+Le runner candidat :
+- applique le corpus public V1 ;
+- exécute exactement le nombre d'actions du descriptor ;
+- fixe `sourceRef`, seed et timing scope ;
+- expose phases policy / hook candidat / action jeu ;
+- possède un hook A/B sans imposer de mécanisme OP.
+
+Validation :
+- 5/5 tests du corpus ;
+- 6/6 tests du runner ;
+- orchestration complète 40 invocations / 400 actions via l'adapter ABBA restauré.
+
+Limite :
+le `createSession` natif vers `custom-games.zip` n'est pas encore reconstruit.
+Les tests utilisent des ports factices uniquement.
+
+Aucun manifeste officiel n'est créé.
+
+Statut :
+**fonctionnellement qualifié, performance officielle à confirmer**.
