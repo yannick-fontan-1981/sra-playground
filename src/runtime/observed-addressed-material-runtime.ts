@@ -36,6 +36,29 @@ export class ObservedAddressedMaterialRuntime {
     return stock ? 'revalidated_stock' : 'retained_not_applicable';
   }
 
+  /**
+   * Demote a currently applicable stock to its compact prior before a new public
+   * browser session is allowed to use it.
+   *
+   * This is deliberately not an official-level boundary and grants no score or
+   * new evidence. It only removes applicability so the current visible scene
+   * must re-establish the stock through `revalidate()`.
+   */
+  suspendStockForRevalidation(boundary: string): boolean {
+    if (!boundary) throw new TypeError('stock suspension boundary must be non-empty');
+    const stock = this.field.stock;
+    if (!stock || stock.invalid) return false;
+    this.field.prior = stock.retained(boundary);
+    this.field.stock = null;
+    this.field.model = null;
+    this.field.epoch = null;
+    this.field.events.push({
+      kind: 'active_stock_suspended_for_public_revalidation',
+      boundary,
+    });
+    return true;
+  }
+
   proposeStock(
     observation: PublicObservationLike,
     rows: readonly (readonly number[])[],
