@@ -1,14 +1,27 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { PROTOCOL_VERSION, type AgentObservation, type AgentWorkerResponse } from '../src/runtime/contracts.ts';
-import { installAgentWorker, isAgentWorkerRequest } from '../src/runtime/v6-agent-worker.ts';
+import {
+  PROTOCOL_VERSION,
+  type AgentObservation,
+  type AgentWorkerResponse,
+} from '../src/runtime/contracts.ts';
+import {
+  AGENT_WORKER_IMPLEMENTATION_REVISION,
+  installAgentWorker,
+  isAgentWorkerRequest,
+} from '../src/runtime/v6-agent-worker.ts';
 
 function observation(overrides: Partial<AgentObservation> = {}): AgentObservation {
   return {
     protocolVersion: PROTOCOL_VERSION,
     sessionId: 'session-1',
     sequence: 0,
-    image: { width: 64, height: 64, pixelFormat: 'palette-index-u8', pixels: new Uint8Array(64 * 64) },
+    image: {
+      width: 64,
+      height: 64,
+      pixelFormat: 'palette-index-u8',
+      pixels: new Uint8Array(64 * 64),
+    },
     availableActionIds: [1, 6],
     state: 'NOT_FINISHED',
     level: 1,
@@ -20,9 +33,18 @@ function observation(overrides: Partial<AgentObservation> = {}): AgentObservatio
 class FakeScope {
   listener: ((event: MessageEvent<unknown>) => void) | undefined;
   messages: AgentWorkerResponse[] = [];
-  addEventListener(_type: 'message', callback: (event: MessageEvent<unknown>) => void) { this.listener = callback; }
-  postMessage(message: AgentWorkerResponse) { this.messages.push(message); }
-  emit(data: unknown) { this.listener?.({ data } as MessageEvent<unknown>); }
+  addEventListener(
+    _type: 'message',
+    callback: (event: MessageEvent<unknown>) => void,
+  ) {
+    this.listener = callback;
+  }
+  postMessage(message: AgentWorkerResponse) {
+    this.messages.push(message);
+  }
+  emit(data: unknown) {
+    this.listener?.({ data } as MessageEvent<unknown>);
+  }
 }
 
 async function flush() {
@@ -30,15 +52,28 @@ async function flush() {
 }
 
 test('runtime request validation accepts exact public protocol shapes', () => {
-  assert.equal(isAgentWorkerRequest({ type: 'initialize', protocolVersion: 1, sessionId: 's', seed: 1 }), true);
+  assert.equal(isAgentWorkerRequest({
+    type: 'initialize',
+    protocolVersion: 1,
+    sessionId: 's',
+    seed: 1,
+  }), true);
   assert.equal(isAgentWorkerRequest({ type: 'cancel', sessionId: 's' }), true);
-  assert.equal(isAgentWorkerRequest({ type: 'observe', observation: observation(), budgetMs: 20 }), true);
+  assert.equal(isAgentWorkerRequest({
+    type: 'observe',
+    observation: observation(),
+    budgetMs: 20,
+  }), true);
 });
 
 test('runtime request validation rejects malformed observation pixels', () => {
   const invalid = observation();
   invalid.image = { ...invalid.image, pixels: new Uint8Array(3) };
-  assert.equal(isAgentWorkerRequest({ type: 'observe', observation: invalid, budgetMs: 20 }), false);
+  assert.equal(isAgentWorkerRequest({
+    type: 'observe',
+    observation: invalid,
+    budgetMs: 20,
+  }), false);
 });
 
 test('invalid worker request yields explicit error response', () => {
@@ -52,18 +87,72 @@ test('invalid worker request yields explicit error response', () => {
   }]);
 });
 
-test('default worker announces pending-perception revision and takes no invented action', async () => {
+test('default worker keeps ambiguity unresolved and takes no invented action', async () => {
   const scope = new FakeScope();
   installAgentWorker(scope);
-  scope.emit({ type: 'initialize', protocolVersion: 1, sessionId: 'session-1', seed: 4 });
+  scope.emit({
+    type: 'initialize',
+    protocolVersion: 1,
+    sessionId: 'session-1',
+    seed: 4,
+  });
   await flush();
   assert.deepEqual(scope.messages[0], {
     type: 'ready',
     sessionId: 'session-1',
-    implementationRevision: 'reconstruction-pending-perception',
+    implementationRevision: AGENT_WORKER_IMPLEMENTATION_REVISION,
   });
 
   scope.emit({ type: 'observe', observation: observation(), budgetMs: 20 });
+  await flush();
+  assert.deepEqual(scope.messages[1], {
+    type: 'stopped',
+    sessionId: 'session-1',
+    reason: 'budget',
+  });
+});
+
+test('default worker releases the sole public simple action through OP28', async () => {
+  const scope = new FakeScope();
+  installAgentWorker(scope);
+  scope.emit({
+    type: 'initialize',
+    protocolVersion: 1,
+    sessionId: 'session-1',
+    seed: 4,
+  });
+  await flush();
+
+  scope.emit({
+    type: 'observe',
+    observation: observation({ availableActionIds: [4] }),
+    budgetMs: 20,
+  });
+  await flush();
+  assert.deepEqual(scope.messages[1], {
+    type: 'action',
+    sessionId: 'session-1',
+    sequence: 0,
+    action: { id: 4 },
+  });
+});
+
+test('default worker does not invent ACTION6 coordinates', async () => {
+  const scope = new FakeScope();
+  installAgentWorker(scope);
+  scope.emit({
+    type: 'initialize',
+    protocolVersion: 1,
+    sessionId: 'session-1',
+    seed: 4,
+  });
+  await flush();
+
+  scope.emit({
+    type: 'observe',
+    observation: observation({ availableActionIds: [6] }),
+    budgetMs: 20,
+  });
   await flush();
   assert.deepEqual(scope.messages[1], {
     type: 'stopped',
