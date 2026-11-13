@@ -1236,3 +1236,27 @@ fait désormais échouer le contrôle tant qu'elle n'est pas explicitement quali
 
 Objectif :
 empêcher l'ajout d'appels OP artificiels destinés à augmenter un compteur.
+
+
+## C3 — reachability OP14 corrigée
+
+Une distinction supplémentaire est maintenant prouvée dans le noyau TypeScript reconstruit :
+
+- `operationAdmission()` possède bien un contrat OP14 ;
+- `executeBundleOperation()` peut traiter OP14 lorsqu'il est appelé directement ;
+- mais `v6-native-authority.releaseBundle()` ne produit aucun besoin OP14 et retourne
+  `not_required` avant tout calcul.
+
+Test ajouté :
+`OP14 admission exists at bridge level but native authority does not route it yet`.
+
+Suite locale après ajout :
+**66/66 tests passent**, typecheck strict OK.
+
+Disposition OP14 mise à jour :
+- donneur Python : consommation de garde démontrée ;
+- reconstruction TypeScript : admission disponible au bridge ;
+- autorité native actuelle : **aucun routage OP14** ;
+- producteur/besoin runtime : **non démontré**.
+
+Aucun appel OP14 n'est ajouté artificiellement.
