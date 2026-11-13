@@ -39,20 +39,20 @@ export interface ProductPresentationEffectResult {
 /**
  * Execute the effectful presentation sequence behind explicit ports.
  *
- * Dispatch timing has already stopped before this function starts. The busy
- * flag remains owned by the dispatch generation until presentation and the
- * final interface update are complete.
+ * The ordering mirrors the historical main.ts flow: accept the observation,
+ * synchronize location and controls, paint animation frames, paint the final
+ * frame, optionally release busy, then publish terminal feedback.
  */
 export async function presentProductObservation(
-  observation: GameObservation,
-  selectionGeneration: number,
+  next: GameObservation,
+  selectedGeneration: number,
   ports: ProductPresentationEffectPorts,
   options: ProductPresentationEffectOptions,
 ): Promise<ProductPresentationEffectResult> {
   if (!isPresentationCurrent(
-    selectionGeneration,
+    selectedGeneration,
     ports.currentSelectionGeneration(),
-    observation.gameCode,
+    next.gameCode,
     ports.selectedGameCode(),
   )) {
     return {
@@ -64,49 +64,49 @@ export async function presentProductObservation(
     };
   }
 
-  ports.setObservation(observation);
-  ports.setLoading(false);
-  ports.setFailed(false);
-  ports.syncLocation(observation);
-  ports.updateInterface();
-
   const presentationGeneration = ports.nextPresentationGeneration();
-  const frames = presentationFrames(observation);
-  const delayMs = presentationFrameDurationMs(observation);
+  const palette = next.palette ?? options.fallbackPalette;
   let animationFramesPainted = 0;
 
-  if (frames.length > 1) {
-    for (const frame of frames) {
-      if (!isPresentationLoopCurrent(
+  ports.setObservation(next);
+  ports.setLoading(false);
+  ports.setFailed(false);
+  ports.syncLocation(next);
+  ports.updateInterface();
+
+  const frames = presentationFrames(next);
+  for (let frameIndex = 0; frameIndex < frames.length; frameIndex += 1) {
+    if (!isPresentationLoopCurrent(
+      presentationGeneration,
+      ports.currentPresentationGeneration(),
+      selectedGeneration,
+      ports.currentSelectionGeneration(),
+    )) {
+      return {
+        accepted: false,
+        stale: true,
         presentationGeneration,
-        ports.currentPresentationGeneration(),
-        selectionGeneration,
-        ports.currentSelectionGeneration(),
-        observation.gameCode,
-        ports.selectedGameCode(),
-      )) {
-        return {
-          accepted: true,
-          stale: true,
-          presentationGeneration,
-          animationFramesPainted,
-          finalFramePainted: false,
-        };
-      }
-      ports.paint(frame, observation.palette ?? options.fallbackPalette);
-      animationFramesPainted += 1;
-      if (delayMs > 0) await ports.wait(delayMs);
+        animationFramesPainted,
+        finalFramePainted: false,
+      };
+    }
+
+    ports.paint(frames[frameIndex]!, palette);
+    animationFramesPainted += 1;
+
+    if (frameIndex < frames.length - 1) {
+      await ports.wait(presentationFrameDurationMs(next, frameIndex));
     }
   }
 
-  if (!isPresentationCurrent(
-    selectionGeneration,
+  if (!isPresentationLoopCurrent(
+    presentationGeneration,
+    ports.currentPresentationGeneration(),
+    selectedGeneration,
     ports.currentSelectionGeneration(),
-    observation.gameCode,
-    ports.selectedGameCode(),
   )) {
     return {
-      accepted: true,
+      accepted: false,
       stale: true,
       presentationGeneration,
       animationFramesPainted,
@@ -114,10 +114,15 @@ export async function presentProductObservation(
     };
   }
 
-  ports.paint(observation.frame, observation.palette ?? options.fallbackPalette);
-  const feedback = presentationFeedback(observation);
+  ports.paint(next.frame, palette);
+
+  if (options.releaseBusy ?? true) {
+    ports.setBusy(false);
+    ports.updateInterface();
+  }
+
+  const feedback = presentationFeedback(next);
   if (feedback) ports.setFeedback(feedback);
-  if (options.releaseBusy !== false) ports.setBusy(false);
 
   return {
     accepted: true,
