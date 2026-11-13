@@ -1,4 +1,5 @@
 import { evaluateStrategyGuards, runStrategyAgenda, type StrategyFact, type StrategyGuard } from './strategy-agenda.ts';
+import { sicNeedId } from './need-identity.ts';
 
 export const frontierStrategies = {
   test_local_input: 'Test an untried input on the current board',
@@ -6,6 +7,11 @@ export const frontierStrategies = {
 } as const;
 
 type FrontierStrategy = keyof typeof frontierStrategies;
+export function frontierInformationNeed(scope: string, subject: string, parentObjective: string, evidence: readonly string[]) {
+  const identity = { kind: 'observe_untried_input_effect', scope, subjects: [subject], parentObjective,
+    satisfactionContract: 'acquire_the_selected_input_return' } as const;
+  return { ...identity, id: sicNeedId(identity), evidence, status: 'assigned' } as const;
+}
 const guards = {
   test_local_input: [{ fact: 'openInputHere', expected: true, label: 'An admitted input remains untried on this board' }],
   reach_open_input: [{ fact: 'openInputHere', expected: false, label: 'The admitted inputs on this board have all been tried' }],

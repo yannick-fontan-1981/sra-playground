@@ -1,6 +1,7 @@
 import { symbolicDigest } from '../logos-engine/v6-hash.ts';
 import { evaluateStrategyGuards, type StrategyFact, type StrategyGuard } from './strategy-agenda.ts';
 import { compileFrontierConfiguration, defaultFrontierConfiguration, type FrontierConfiguration } from './frontier-configuration.ts';
+import { sicNeedId } from './need-identity.ts';
 
 export const contactRecoveryStrategies = Object.freeze({
   revise_rooted_contact: 'Revise the contact projection',
@@ -129,7 +130,7 @@ export function admitContactRecoveryNeed(witness: ReturnWitness, layout: string)
     || !layout || witness.layout !== layout || witness.cell_push_witness !== true) return null;
   const parentObjective = 'G_official_completion', satisfactionContract = 'official_progress_under_guarded_access';
   return {
-    id: 'sic-need:' + symbolicDigest([rootedRecoveryStrategy.needKind, [layout], after.scope, satisfactionContract, parentObjective, witness.after]),
+    id: sicNeedId({ kind: rootedRecoveryStrategy.needKind, subjects: [layout, witness.after], scope: after.scope, satisfactionContract, parentObjective }),
     kind: rootedRecoveryStrategy.needKind, subject: layout, scope: after.scope, parentObjective, satisfactionContract,
     evidence: [witness.before, witness.after], status: 'admitted',
   };

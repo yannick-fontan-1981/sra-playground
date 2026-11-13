@@ -6,7 +6,7 @@ import { factConditionHolds } from './v6-drm-projector.ts';
 import type { DrmCondition } from './v6-drm-projector.ts';
 import { predictCandidateRule } from './v6-transition-learning.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
-import { selectFrontierStrategy } from '../sic/frontier-strategy.ts';
+import { frontierInformationNeed, selectFrontierStrategy } from '../sic/frontier-strategy.ts';
 import { defaultFrontierConfiguration, type FrontierConfiguration } from '../sic/frontier-configuration.ts';
 
 type R = Record<string, any>;
@@ -58,7 +58,7 @@ export interface NativeFrontierOptions { nativeOwned?: boolean }
 
 function sicFrontierOutcome(decision: R | undefined, expected: R | null, actual: R) {
   const status = expected === null ? 'observed' : !same(actual, expected) ? 'access_interrupted' : null;
-  return decision && status ? { objective: decision.objective.id, status } : null;
+  return decision && status ? { objective: decision.objective.id, status, ...(decision.need ? { need: decision.need.id } : {}) } : null;
 }
 
 export class ObservedFrontier {
@@ -426,6 +426,8 @@ export class ObservedFrontier {
     const inputRanked = !own(question, 'experiment') && !own(question, 'control_experiment');
     const sicFrontier = agenda?.selected ? { strategy: agenda.selected.id, agenda: agenda.entries, inputOrder: order, inputRanked,
       ...(inputRanked && kind === 'experiment' && choices.least_tried && choices.command_order ? { choices } : {}),
+      need: frontierInformationNeed(frontierRef(observation).split(':revision:', 1)[0]!, question.question_ref, goal,
+        [frontierRef(observation), ...routeRefs]),
       objective: { id: question.question_ref, label: 'Observe the effect of the selected untried input', parent: goal } } : null;
     await this.commit('proposal', { proposal_id: proposalId, kind, question_ref: question.question_ref, steps, binding,
       ...(sicFrontier ? { sic_frontier: sicFrontier } : {}) });
