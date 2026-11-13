@@ -24,6 +24,23 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
+      - name: Repair temporary generator quoting
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('scripts/apply-op01-op31-browser-session-resume.mjs')
+          source = path.read_text()
+          source = source.replace(
+              "?? ((observation, ordinal) => `browser-agent:${observation.gameCode}:${ordinal}`);",
+              "?? ((observation, ordinal) => ['browser-agent', observation.gameCode, ordinal].join(':'));",
+          )
+          source = source.replace(
+              "return `fresh-session:${ordinal}`;",
+              "return ['fresh-session', ordinal].join(':');",
+          )
+          path.write_text(source)
+          PY
+          node --check scripts/apply-op01-op31-browser-session-resume.mjs
       - name: Apply browser session resume patch
         run: node scripts/apply-op01-op31-browser-session-resume.mjs
       - name: Targeted browser continuity tests
