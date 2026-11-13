@@ -21,8 +21,8 @@ if (!fixture.includes("const requestedPhase = Number(new URLSearchParams(window.
 
   fixture = replaceOnce(
     fixture,
-    `  const store = new BrowserDurableSessionStore(window.localStorage);\n  const settled = await waitFor(() => {\n`,
-    `  const store = new BrowserDurableSessionStore(window.localStorage);\n  const retainedBeforeSettlement = store.load(Date.now(), GAME_CODE);\n  assert(\n    retainedBeforeSettlement.status === 'ready',\n    \`hard-crash durable checkpoint is unavailable: \${retainedBeforeSettlement.status}\`,\n  );\n  const settled = await waitFor(() => {\n`,
+    `async function phaseTwo(evidence: PhaseOneEvidence): Promise<void> {\n  status('phase 2: restoring product session after hard Chrome termination');\n  assert(window.localStorage.getItem(PAGEHIDE_KEY) === null, 'pagehide fired before the hard crash');\n  await import('../../src/main.ts');\n\n  const store = new BrowserDurableSessionStore(window.localStorage);\n`,
+    `async function phaseTwo(evidence: PhaseOneEvidence): Promise<void> {\n  status('phase 2: restoring product session after hard Chrome termination');\n  assert(window.localStorage.getItem(PAGEHIDE_KEY) === null, 'pagehide fired before the hard crash');\n  const store = new BrowserDurableSessionStore(window.localStorage);\n  const retainedBeforeRestore = store.load(Date.now(), GAME_CODE);\n  assert(\n    retainedBeforeRestore.status === 'ready',\n    \`hard-crash durable checkpoint is unavailable before restore: \${retainedBeforeRestore.status}\`,\n  );\n  assert(\n    retainedBeforeRestore.checkpoint.runtime.pending?.sequence === 2,\n    'hard-crash durable checkpoint lost its pending runtime request before restore',\n  );\n  assert(\n    retainedBeforeRestore.checkpoint.agent.host.session?.pendingReturn !== null,\n    'hard-crash durable checkpoint lost its pending Agent return before restore',\n  );\n  await import('../../src/main.ts');\n\n`,
     'phase-two retained checkpoint assertion',
   );
 
@@ -55,45 +55,28 @@ if (!qualifier.includes('function pageUrl(phase)')) {
 
   qualifier = replaceOnce(
     qualifier,
-    `function launchChrome(executable, profile, label) {\n`,
-    `function launchChrome(executable, profile, label, phase) {\n`,
-    'phase-aware Chrome launcher',
-  );
-  qualifier = replaceOnce(
-    qualifier,
-    `    PAGE_URL,\n`,
-    `    pageUrl(phase),\n`,
-    'phase-aware Chrome page',
-  );
-  qualifier = replaceOnce(
-    qualifier,
-    `  const phaseOne = deferred();\n  const phaseTwo = deferred();\n`,
-    `  const phaseOne = deferred();\n  const phaseTwo = deferred();\n  let phaseOneEvidence = null;\n`,
-    'server-retained phase-one evidence',
-  );
-  qualifier = replaceOnce(
-    qualifier,
-    `          const target = request.url?.split('?', 1)[0];\n          const sink = target === '/__op01-op31-browser-crash-resume-phase-one'\n`,
-    `          const target = request.url?.split('?', 1)[0];\n          if (\n            target === '/__op01-op31-browser-crash-resume-phase-one-evidence'\n            && request.method === 'GET'\n          ) {\n            if (!phaseOneEvidence) {\n              response.statusCode = 404;\n              response.end();\n              return undefined;\n            }\n            response.statusCode = 200;\n            response.setHeader('content-type', 'application/json');\n            response.end(JSON.stringify(phaseOneEvidence));\n            return undefined;\n          }\n          const sink = target === '/__op01-op31-browser-crash-resume-phase-one'\n`,
+    `          const target = request.url?.split('?', 1)[0];\n          if (target === '/__op01-op31-browser-crash-resume-phase-two-bootstrap'\n`,
+    `          const target = request.url?.split('?', 1)[0];\n          if (\n            target === '/__op01-op31-browser-crash-resume-phase-one-evidence'\n            && request.method === 'GET'\n          ) {\n            if (!phaseOneEvidence) {\n              response.statusCode = 404;\n              response.end();\n              return undefined;\n            }\n            response.statusCode = 200;\n            response.setHeader('content-type', 'application/json');\n            response.end(JSON.stringify(phaseOneEvidence));\n            return undefined;\n          }\n          if (target === '/__op01-op31-browser-crash-resume-phase-two-bootstrap'\n`,
     'phase-one evidence endpoint',
   );
+
   qualifier = replaceOnce(
     qualifier,
-    `            const payload = await readJsonRequest(request);\n            sink.resolve(payload);\n`,
-    `            const payload = await readJsonRequest(request);\n            if (target === '/__op01-op31-browser-crash-resume-phase-one') {\n              phaseOneEvidence = payload?.evidence ?? null;\n            }\n            sink.resolve(payload);\n`,
-    'phase-one evidence retention',
-  );
-  qualifier = replaceOnce(
-    qualifier,
-    `    firstChrome = launchChrome(chromeExecutable, profile, 'phase-one Chrome');\n`,
-    `    firstChrome = launchChrome(chromeExecutable, profile, 'phase-one Chrome', 1);\n`,
+    `    firstChrome = launchChrome(chromeExecutable, profile, 'phase-one Chrome', PAGE_URL);\n`,
+    `    firstChrome = launchChrome(chromeExecutable, profile, 'phase-one Chrome', pageUrl(1));\n`,
     'phase-one Chrome routing',
   );
+
   qualifier = replaceOnce(
     qualifier,
-    `    secondChrome = launchChrome(chromeExecutable, profile, 'phase-two Chrome');\n    const secondPayload = await withTimeout(phaseTwo.promise, 'phase-two crash recovery');\n`,
-    `    secondChrome = launchChrome(chromeExecutable, profile, 'phase-two Chrome', 2);\n    const secondPayload = await withTimeout(\n      Promise.race([\n        phaseTwo.promise,\n        new Promise((_, reject) => {\n          secondChrome.child.once('exit', (code, signal) => {\n            reject(new Error(\n              \`phase-two Chrome exited before reporting: code=\${code} signal=\${signal}\\n\${secondChrome.stderr().slice(-6000)}\`,\n            ));\n          });\n        }),\n      ]),\n      'phase-two crash recovery',\n    );\n`,
+    `    secondChrome = launchChrome(chromeExecutable, profile, 'phase-two Chrome', BOOTSTRAP_URL);\n    let secondPayload;\n    try {\n      secondPayload = await withTimeout(\n        phaseTwo.promise,\n        'phase-two crash recovery',\n        240_000,\n      );\n`,
+    `    secondChrome = launchChrome(chromeExecutable, profile, 'phase-two Chrome', pageUrl(2));\n    let secondPayload;\n    try {\n      secondPayload = await withTimeout(\n        Promise.race([\n          phaseTwo.promise,\n          new Promise((_, reject) => {\n            secondChrome.child.once('exit', (code, signal) => {\n              reject(new Error(\n                \`phase-two Chrome exited before reporting: code=\${code} signal=\${signal}\\n\${secondChrome.stderr().slice(-6000)}\`,\n              ));\n            });\n          }),\n        ]),\n        'phase-two crash recovery',\n        240_000,\n      );\n`,
     'phase-two Chrome routing and exit diagnostics',
+  );
+
+  qualifier = qualifier.replace(
+    'phaseIdentityInjectedByBootstrap: true,',
+    'phaseIdentityInjectedByBootstrap: false,\n        phaseIdentitySelectedByUrl: true,',
   );
 
   await writeFile(QUALIFIER, qualifier);
