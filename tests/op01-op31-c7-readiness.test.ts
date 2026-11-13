@@ -30,6 +30,8 @@ function validManifest() {
         variant,
         game,
         runnerRef: `runner:${key}`,
+        sourceRef: `source:${variant}`,
+        seed: 0,
         corpusRef: `corpus:${game}`,
         timingScope: 'complete native session around the qualified action loop',
         evidenceRefs: [`evidence:${key}`],
