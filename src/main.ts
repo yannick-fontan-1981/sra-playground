@@ -4,6 +4,12 @@ import { BrowserGameRuntime, type GameObservation } from './runtime/browser-game
 import { AGENT_STATUS } from './runtime/contracts';
 import { GAME_CATALOG, PUBLIC_SOURCE_BASE, getGameByCode, type GameCatalogEntry } from './games/catalog';
 import {
+  isPresentationCurrent,
+  presentationFeedback,
+  presentationFrameDurationMs,
+  presentationFrames,
+} from './product-presentation';
+import {
   dispatchProductAction,
   ready as productReady,
   type ProductReadinessState,
@@ -279,7 +285,7 @@ function updateInterface(): void {
 }
 
 async function present(next: GameObservation, selectedGeneration: number, releaseBusy = true): Promise<void> {
-  if (selectedGeneration !== selectionGeneration || next.gameCode !== selectedGame.code) return;
+  if (!isPresentationCurrent(selectedGeneration, selectionGeneration, next.gameCode, selectedGame.code)) return;
   const generation = ++presentationGeneration;
   observation = next;
   loading = false;
@@ -289,15 +295,13 @@ async function present(next: GameObservation, selectedGeneration: number, releas
   url.searchParams.set('level', String(next.level));
   if (url.href !== window.location.href) window.history.replaceState(null, '', url);
   updateInterface();
-  const frames = next.frames.length ? next.frames : [next.frame];
-  const frameDuration = 1000 / Math.max(1, Math.min(60, next.defaultFps || 10));
+  const frames = presentationFrames(next);
   for (let i = 0; i < frames.length; i += 1) {
     if (generation !== presentationGeneration || selectedGeneration !== selectionGeneration) return;
     paint(frames[i]!, next.palette ?? fallbackPalette);
-    const requestedDuration = next.frameDurationsMs?.[i];
-    const duration = requestedDuration !== undefined && Number.isFinite(requestedDuration) && requestedDuration >= 0
-      ? requestedDuration : frameDuration;
-    if (i < frames.length - 1) await new Promise<void>(resolve => window.setTimeout(resolve, duration));
+    if (i < frames.length - 1) {
+      await new Promise<void>(resolve => window.setTimeout(resolve, presentationFrameDurationMs(next, i)));
+    }
   }
   if (generation !== presentationGeneration || selectedGeneration !== selectionGeneration) return;
   paint(next.frame, next.palette ?? fallbackPalette);
@@ -305,8 +309,8 @@ async function present(next: GameObservation, selectedGeneration: number, releas
     busy = false;
     updateInterface();
   }
-  if (next.state === 'WIN' || next.state === 'LEVEL_COMPLETE') element('#game-feedback').textContent = `Level ${next.level} complete.`;
-  else if (next.state === 'GAME_OVER' || next.state === 'GAMEOVER') element('#game-feedback').textContent = 'Game over. Undo or reset to continue.';
+  const feedback = presentationFeedback(next);
+  if (feedback) element('#game-feedback').textContent = feedback;
 }
 
 function showFailure(error: unknown, generation: number): void {
