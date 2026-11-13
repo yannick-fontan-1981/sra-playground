@@ -1291,3 +1291,30 @@ Détail :
 
 Statut :
 **fonctionnellement qualifié au contrat Worker, performance officielle à confirmer**.
+
+
+## C7 — diagnostic ABBA restauré sur noyau synthétique
+
+Le protocole historique restauré est maintenant exécuté sur un runner synthétique
+Logos avec A=trace OFF et B=`counters`.
+
+Résultat local :
+- 40 invocations ;
+- 32 sessions mesurées ;
+- 400 actions mesurées ;
+- STCK-label : **+95,44 %** ;
+- SMLP-label : **+54,48 %**.
+
+Ces labels utilisent les paramètres d'action STCK/SMLP du protocole mais **pas
+les vrais jeux**. Le rapport est explicitement
+`officialPerformanceQualification=false`.
+
+Conclusion :
+le coût fixe de `counters` mérite optimisation sur chemins très courts.
+Aucun verdict officiel STCK/SMLP n'est tiré de ce diagnostic.
+
+Détail :
+`docs/recovery/op01-op31-protocol-shaped-cost-status.md`.
+
+Statut :
+**fonctionnellement qualifié, performance officielle à confirmer**.
