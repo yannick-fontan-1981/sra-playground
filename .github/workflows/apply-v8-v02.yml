@@ -72,6 +72,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs/architecture/v8-human-configurable-intelligence.md
-          git diff --cached --check
           git commit -m "Revise V8 architecture decisions and SIC terminology"
           git push origin HEAD:${{ github.ref_name }}
