@@ -1,0 +1,52 @@
+name: Lot 6C browser product runtime
+
+on:
+  push:
+    branches:
+      - recovery/lot6c-browser-product-runtime-20261112
+    paths:
+      - '.github/workflows/lot6c-browser-product-runtime.yml'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tsconfig.json'
+      - 'vite.config.ts'
+      - 'src/**'
+      - 'scripts/**'
+      - 'tests/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-product-runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18.0'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Show browser runtime
+        run: |
+          command -v google-chrome-stable || command -v google-chrome || command -v chromium || command -v chromium-browser
+          (google-chrome-stable --version || google-chrome --version || chromium --version || chromium-browser --version)
+      - name: Build production bundle
+        run: npm run build
+      - name: Run complete regression suite
+        run: node --experimental-transform-types --test tests/*.test.ts
+      - name: Test browser report contract
+        run: node --test tests/lot6c-browser-product-runtime-contract.test.mjs
+      - name: Qualify compiled browser product path
+        env:
+          LOT6C_BROWSER_PRODUCT_REPORT: lot6c-browser-product-runtime-report.json
+        run: node scripts/qualify-lot6c-browser-product-runtime.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lot6c-browser-product-runtime
+          path: lot6c-browser-product-runtime-report.json
+          if-no-files-found: warn
