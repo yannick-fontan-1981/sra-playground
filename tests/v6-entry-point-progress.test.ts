@@ -52,7 +52,7 @@ test('official performance status is limited to the two qualified reconstructed 
   ]);
 });
 
-test('qualified checkpoint core is active without claiming durable browser persistence', async () => {
+test('qualified checkpoint core persists and replays one bounded browser session without a performance claim', async () => {
   const registry = await loadRegistry(registryPath);
   const checkpoint = registry.capabilities.find(
     (capability: { id: string }) => capability.id === 'runtime.campaign-checkpoint-core',
@@ -63,15 +63,19 @@ test('qualified checkpoint core is active without claiming durable browser persi
   assert.ok(checkpoint.implementation.includes('src/runtime/v6-browser-campaign-checkpoint.ts'));
   assert.ok(checkpoint.implementation.includes('src/runtime/v6-browser-common-campaign-host.ts'));
   assert.ok(checkpoint.implementation.includes('src/runtime/v6-browser-agent-controller.ts'));
-  assert.ok(checkpoint.tests.includes('tests/v6-browser-session-resume.test.ts'));
-  assert.ok(checkpoint.proofs.includes('docs/recovery/op01-op31-browser-session-resume-20261113.md'));
-  assert.ok(checkpoint.proofs.includes('docs/recovery/op01-op31-browser-session-resume-qualified.json'));
+  assert.ok(checkpoint.implementation.includes('src/runtime/browser-games.ts'));
+  assert.ok(checkpoint.implementation.includes('src/runtime/v6-browser-durable-session.ts'));
+  assert.ok(checkpoint.tests.includes('tests/browser-game-runtime-checkpoint.test.ts'));
+  assert.ok(checkpoint.tests.includes('tests/v6-browser-durable-session.test.ts'));
+  assert.ok(checkpoint.tests.includes('tests/v6-browser-agent-live-capture.test.ts'));
+  assert.ok(checkpoint.proofs.includes('docs/recovery/op01-op31-browser-durable-resume-20261113.md'));
+  assert.ok(checkpoint.proofs.includes('docs/recovery/op01-op31-browser-durable-resume-qualified.json'));
   assert.equal(
-    registry.openGates.some((gate: { id: string }) => gate.id === 'browser-session-reactivation'),
+    registry.openGates.some((gate: { id: string }) => gate.id === 'browser-checkpoint-persistence'),
     false,
   );
   assert.equal(
-    registry.openGates.find((gate: { id: string }) => gate.id === 'browser-checkpoint-persistence').status,
+    registry.openGates.find((gate: { id: string }) => gate.id === 'browser-checkpoint-crash-recovery').status,
     'open',
   );
   assert.equal(registry.summary.capabilitiesProductActive, 8);

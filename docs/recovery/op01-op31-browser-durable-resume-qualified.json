@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "qualification": "op01-op31-browser-durable-resume",
+  "date": "2026-11-13",
+  "repository": "yannick-fontan-1981/sra-playground",
+  "branch": "op01-op31-browser-durable-resume-20261113",
+  "canonical_branch": "recovery/site109-reconstruction-20261112",
+  "canonical_commit_included": "549c06dc5ff4d23ecfea92ecfd260896a2a533f3",
+  "reconciliation_merge": "1bd7b8646876ae92ace1215222537b542b688b76",
+  "qualification_trigger_commit": "89979158c27c2b3519ad7157b551189abd0edb12",
+  "github_actions": {
+    "run_id": 43442779150,
+    "job_id": 131944377229,
+    "node": "v22.18.0"
+  },
+  "targeted_tests": {
+    "tests": 34,
+    "pass": 34,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "full_typescript_regression": {
+    "tests": 413,
+    "pass": 413,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "reconstructed_v6_registry": {
+    "valid": true,
+    "operation_records": 31,
+    "capability_records": 16,
+    "historical_slots_mapped": 0
+  },
+  "production_build": {
+    "passed": true,
+    "modules_transformed": 67,
+    "games": 100,
+    "level_previews": 636,
+    "native_atlases": 4
+  },
+  "browser_reload": {
+    "version": 1,
+    "status": "browser-durable-session-reload-qualified",
+    "qualification": "functional-real-chrome-pyodide-reload-not-official-performance",
+    "browser": {
+      "version": 1,
+      "status": "browser-durable-session-reload-qualified",
+      "runtime": "chrome-reload-browser-game-runtime-pyodide",
+      "replayPolicy": "deterministic-command-journal",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36",
+      "game": "SMLP",
+      "backend": "python-wasm",
+      "phaseOne": {
+        "version": 1,
+        "needId": "need:op01-op31-durable-smlp-session:op01-op31-durable-smlp-session:level:1:public-observation:op01-op31-durable-smlp-session:0:OP28:joint-bundle:op01-op31-durable-smlp-session:level:1:0:public-addressed-joint:public-smlp-gate:public-observation:op01-op31-durable-smlp-session:0:open_horizontal:32:26:2,12,2,2,3,2,2,12,2:ACTION6:ACTION6",
+        "proposalRef": "joint:public-addressed-joint:public-smlp-gate:public-observation:op01-op31-durable-smlp-session:0:open_horizontal:32:26:2,12,2,2,3,2,2,12,2:ACTION6:op01-op31-durable-smlp-session:0:public_action_availability_v1+public_visible_target_v1",
+        "action": {
+          "id": 6,
+          "x": 32,
+          "y": 26
+        },
+        "initialIdentity": "browser-game-observation:fa5933e7e1596c024f0b2604af357608",
+        "returnedIdentity": "browser-game-observation:3c5cdb881c067061f797c1c76007f7bf",
+        "changedPixelCount": 9,
+        "phaseOnePostedRequests": [
+          {
+            "type": "load",
+            "code": "SMLP",
+            "level": 1
+          },
+          {
+            "type": "action",
+            "actionId": 6,
+            "data": {
+              "x": 32,
+              "y": 26
+            }
+          }
+        ],
+        "runtimeCommittedEntries": 1,
+        "runtimePendingSequence": 2,
+        "controllerActionsDispatched": 1
+      },
+      "phaseTwo": {
+        "replayedEntries": 1,
+        "replayedPending": true,
+        "reconstructionRequests": [
+          {
+            "type": "load",
+            "code": "SMLP",
+            "level": 1
+          },
+          {
+            "type": "action",
+            "actionId": 6,
+            "data": {
+              "x": 32,
+              "y": 26
+            }
+          }
+        ],
+        "reconstructedIdentity": "browser-game-observation:3c5cdb881c067061f797c1c76007f7bf",
+        "controllerActionCalls": 0,
+        "presentationCalls": 0,
+        "acquisition": {
+          "needId": "need:op01-op31-durable-smlp-session:op01-op31-durable-smlp-session:level:1:public-observation:op01-op31-durable-smlp-session:0:OP28:joint-bundle:op01-op31-durable-smlp-session:level:1:0:public-addressed-joint:public-smlp-gate:public-observation:op01-op31-durable-smlp-session:0:open_horizontal:32:26:2,12,2,2,3,2,2,12,2:ACTION6:ACTION6",
+          "ownerId": "joint_channels_v1",
+          "proposalRef": "joint:public-addressed-joint:public-smlp-gate:public-observation:op01-op31-durable-smlp-session:0:open_horizontal:32:26:2,12,2,2,3,2,2,12,2:ACTION6:op01-op31-durable-smlp-session:0:public_action_availability_v1+public_visible_target_v1",
+          "routed": true,
+          "duplicate": false
+        },
+        "controller": {
+          "seam": "browser-common-campaign",
+          "phase": "stopped",
+          "sessionId": "op01-op31-durable-smlp-session",
+          "stopReason": "manual",
+          "campaignStatus": "resumed",
+          "actionsDispatched": 1
+        }
+      },
+      "causalProofs": {
+        "pageReloadOccurred": true,
+        "freshWorkerCreated": true,
+        "pyodideJournalReplayed": true,
+        "pendingPhysicalActionReplayedOnceToReconstructState": true,
+        "sameNeedIdAcquired": true,
+        "acquisitionRoutedOnce": true,
+        "agentPhysicalActionReplayedAfterRestore": false,
+        "returnedObservationPresentedTwice": false,
+        "actionCountPreserved": true,
+        "sessionIdPreserved": true,
+        "changedPixels": 9
+      },
+      "proofBoundary": {
+        "rawPythonHeapSnapshot": false,
+        "deterministicReplayRequired": true,
+        "localStorageUsed": true,
+        "crossBrowserQualified": false,
+        "crashWithoutPagehideQualified": false,
+        "performanceQualified": false,
+        "sitePublished": false
+      }
+    },
+    "verification": {
+      "game": "SMLP",
+      "backend": "python-wasm",
+      "action": {
+        "id": 6,
+        "x": 32,
+        "y": 26
+      },
+      "needId": "need:op01-op31-durable-smlp-session:op01-op31-durable-smlp-session:level:1:public-observation:op01-op31-durable-smlp-session:0:OP28:joint-bundle:op01-op31-durable-smlp-session:level:1:0:public-addressed-joint:public-smlp-gate:public-observation:op01-op31-durable-smlp-session:0:open_horizontal:32:26:2,12,2,2,3,2,2,12,2:ACTION6:ACTION6",
+      "changedPixelCount": 9,
+      "phaseOneRequests": 2,
+      "reconstructionRequests": 2,
+      "controllerActionCalls": 0,
+      "presentationCalls": 0,
+      "actionsDispatched": 1
+    },
+    "timingDisposition": "not_measured_for_acceptance",
+    "performanceScope": "C7 Region remains unchanged; durable resume overhead is not qualified here",
+    "sitePublished": false
+  },
+  "causal_proofs": {
+    "local_storage_checkpoint_versioned": true,
+    "pagehide_saved_before_dispose": true,
+    "fresh_worker_created_after_reload": true,
+    "deterministic_runtime_journal_replayed": true,
+    "every_settled_observation_verified": true,
+    "pending_action_replayed_once_to_reconstruct_runtime": true,
+    "same_need_id_acquired": true,
+    "agent_action_calls_after_restore": 0,
+    "returned_observation_second_presentations": 0,
+    "action_count_preserved": true,
+    "session_id_preserved": true,
+    "field_stock_and_campaign_restored_atomically": true
+  },
+  "proof_boundary": {
+    "raw_python_heap_snapshot": false,
+    "deterministic_replay_required": true,
+    "default_ttl_hours": 12,
+    "maximum_ttl_hours": 24,
+    "maximum_storage_bytes": 4500000,
+    "crash_without_pagehide_qualified": false,
+    "cross_browser_qualified": false,
+    "all_games_qualified": false,
+    "cross_device_qualified": false,
+    "performance_qualified": false,
+    "site_published": false
+  }
+}

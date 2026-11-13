@@ -5,7 +5,7 @@
   "baseline": {
     "repository": "yannick-fontan-1981/sra-playground",
     "canonicalBranch": "recovery/site109-reconstruction-20261112",
-    "canonicalCommit": "68cdddc92b4b7f0214a2d7e5a5f0ffe6c94e7216",
+    "canonicalCommit": "549c06dc5ff4d23ecfea92ecfd260896a2a533f3",
     "sourcePolicy": "GitHub canonical; evidence before count"
   },
   "purpose": "Inventory durable reconstructed operations and runtime capabilities without projecting them onto the unrecovered historical 76-slot registry.",
@@ -961,43 +961,54 @@
       "performanceStatus": "not-measured-separately",
       "producers": [
         "BrowserCommonCampaignHost checkpoint capture",
-        "CommonCampaignOwner snapshot",
-        "ObservedAddressedMaterialCheckpointParticipant snapshot",
-        "BrowserAgentController safe-boundary ownership"
+        "BrowserAgentController live safe-boundary capture",
+        "BrowserGameRuntime deterministic command journal",
+        "BrowserDurableSessionStore pagehide persistence",
+        "CommonCampaignOwner and FieldStock participant snapshots"
       ],
       "consumers": [
+        "fresh BrowserGameRuntime deterministic replay",
         "BrowserCommonCampaignHost restore",
-        "BrowserAgentController reactivation",
+        "BrowserAgentController startup reactivation",
         "fresh CommonCampaignOwner and FieldStock runtime"
       ],
-      "decisionEffect": "Préserve atomiquement la campagne, le needId, l’action en attente, la déduplication et FieldStock; reprend dans un host frais, acquiert un retour déjà envoyé sans rejouer l’action ni la présentation, et rejette les observations obsolètes.",
+      "decisionEffect": "Préserve atomiquement la campagne, le needId, l’action en attente, la déduplication et FieldStock; persiste une frontière versionnée dans localStorage; reconstruit un runtime Pyodide frais par journal vérifié; puis acquiert le même retour sans nouvel envoi Agent ni seconde présentation.",
       "implementation": [
         "src/logos-engine/v6-common-campaign-checkpoint.ts",
         "src/logos-engine/field-stock-snapshot.ts",
         "src/logos-engine/v6-common-campaign-owner.ts",
         "src/runtime/observed-addressed-material-checkpoint.ts",
+        "src/runtime/browser-games.ts",
         "src/runtime/v6-browser-campaign-checkpoint.ts",
         "src/runtime/v6-browser-common-campaign-host.ts",
-        "src/runtime/v6-browser-agent-controller.ts"
+        "src/runtime/v6-browser-agent-controller.ts",
+        "src/runtime/v6-browser-durable-session.ts",
+        "src/main.ts"
       ],
       "tests": [
         "tests/v6-common-campaign-session-continuity.test.ts",
         "tests/v6-common-campaign-owner.test.ts",
         "tests/v6-neutral-common-caller.test.ts",
-        "tests/v6-browser-session-resume.test.ts"
+        "tests/v6-browser-session-resume.test.ts",
+        "tests/browser-game-runtime-checkpoint.test.ts",
+        "tests/v6-browser-durable-session.test.ts",
+        "tests/v6-browser-agent-live-capture.test.ts",
+        "tests/main-browser-durable-session-integration.test.ts"
       ],
       "proofs": [
         "docs/recovery/op01-op31-session-continuity-core-20261113.md",
         "docs/recovery/op01-op31-session-continuity-core-qualified.json",
         "docs/migration/op01-op31-progress.md",
         "docs/recovery/op01-op31-browser-session-resume-20261113.md",
-        "docs/recovery/op01-op31-browser-session-resume-qualified.json"
+        "docs/recovery/op01-op31-browser-session-resume-qualified.json",
+        "docs/recovery/op01-op31-browser-durable-resume-20261113.md",
+        "docs/recovery/op01-op31-browser-durable-resume-qualified.json"
       ],
       "limits": [
-        "Checkpoint détenu en mémoire; aucun stockage IndexedDB, localStorage ou externe n'est qualifié.",
-        "Aucune conservation pagehide, crash ou nouveau processus n'est démontrée.",
-        "La reprise Chrome réelle et le coût de snapshot/restauration ne sont pas encore qualifiés.",
-        "La capture automatique pendant un appel physique encore en vol reste portée par le host, pas par le contrôleur."
+        "La persistance qualifiée reconstruit le runtime par replay déterministe; elle ne capture pas le tas Python brut.",
+        "Le scénario réel qualifié porte sur Chrome, SMLP et une frontière ACTION6 envoyée; la portée multi-navigateurs et tous jeux reste ouverte.",
+        "Un crash sans pagehide, la pression de stockage d’un journal long et la récupération inter-appareils ne sont pas qualifiés.",
+        "Le coût de sérialisation, stockage, replay Pyodide et restauration Agent n’est pas encore qualifié sous le seuil de performance."
       ],
       "historicalMapping": null,
       "historicalCountDisposition": "unmapped"
@@ -1267,7 +1278,7 @@
         "passive FieldStock observation",
         "presentation"
       ],
-      "decisionEffect": "Impose l'ordre action → acquisition sélectionnée → observation passive → présentation → décision suivante, et restaure une frontière sûre avant toute nouvelle décision sans replay physique.",
+      "decisionEffect": "Impose l’ordre action → acquisition sélectionnée → observation passive → présentation → décision suivante; restaure une frontière sûre avant toute nouvelle décision; après reconstruction déterministe du runtime, acquiert le même retour envoyé sans nouvel appel Agent ni seconde présentation.",
       "implementation": [
         "src/runtime/v6-browser-common-campaign-host.ts",
         "src/runtime/v6-browser-product-campaign-host.ts",
@@ -1278,17 +1289,21 @@
         "tests/v6-browser-field-stock-campaign-host.test.ts",
         "tests/v6-browser-public-unique-action6-host.test.ts",
         "tests/v6-public-product-action6-producers.test.ts",
-        "tests/v6-browser-session-resume.test.ts"
+        "tests/v6-browser-session-resume.test.ts",
+        "tests/browser-game-runtime-checkpoint.test.ts",
+        "tests/v6-browser-agent-live-capture.test.ts"
       ],
       "proofs": [
         "docs/recovery/op01-op31-browser-agent-controller-combined-qualification-20261112.md",
         "docs/recovery/op01-op31-browser-public-action6-owner-20261113.md",
         "docs/recovery/op01-op31-browser-session-resume-20261113.md",
-        "docs/recovery/op01-op31-browser-session-resume-qualified.json"
+        "docs/recovery/op01-op31-browser-session-resume-qualified.json",
+        "docs/recovery/op01-op31-browser-durable-resume-20261113.md",
+        "docs/recovery/op01-op31-browser-durable-resume-qualified.json"
       ],
       "limits": [
-        "La reprise est qualifiée dans les contrats TypeScript avec host frais, pas encore via une réactivation Chrome persistée.",
-        "Aucun stockage durable, pagehide, crash ou nouveau processus n'est couvert."
+        "La reconstruction inter-page exige que le journal public se rejoue à l’identique; toute divergence invalide la reprise et provoque un chargement frais.",
+        "La preuve réelle porte sur Chrome/Pyodide SMLP; le crash brutal, les autres navigateurs et le coût restent ouverts."
       ],
       "historicalMapping": null,
       "historicalCountDisposition": "unmapped"
@@ -1308,25 +1323,33 @@
         "browser campaign host",
         "main.ts product ports"
       ],
-      "decisionEffect": "Possède une seule campagne bornée, capture un checkpoint aux frontières sûres, restaure avant toute décision, conserve sessionId et compteur d'actions, et repart proprement si le checkpoint est obsolète.",
+      "decisionEffect": "Possède une seule campagne bornée, capture une frontière sûre y compris pendant un envoi physique, persiste avec le journal runtime, restaure le même sessionId et compteur après rechargement Chrome, puis acquiert le même needId sans nouvel envoi Agent.",
       "implementation": [
         "src/runtime/v6-browser-agent-controller.ts",
         "src/main.ts",
-        "src/runtime/v6-browser-campaign-checkpoint.ts"
+        "src/runtime/v6-browser-campaign-checkpoint.ts",
+        "src/runtime/browser-games.ts",
+        "src/runtime/v6-browser-durable-session.ts"
       ],
       "tests": [
         "tests/v6-browser-agent-controller.test.ts",
         "tests/main-browser-agent-controller-integration.test.ts",
-        "tests/v6-browser-session-resume.test.ts"
+        "tests/v6-browser-session-resume.test.ts",
+        "tests/browser-game-runtime-checkpoint.test.ts",
+        "tests/v6-browser-durable-session.test.ts",
+        "tests/v6-browser-agent-live-capture.test.ts",
+        "tests/main-browser-durable-session-integration.test.ts"
       ],
       "proofs": [
         "docs/recovery/op01-op31-browser-agent-controller-20261112.md",
         "docs/recovery/op01-op31-browser-session-resume-20261113.md",
-        "docs/recovery/op01-op31-browser-session-resume-qualified.json"
+        "docs/recovery/op01-op31-browser-session-resume-qualified.json",
+        "docs/recovery/op01-op31-browser-durable-resume-20261113.md",
+        "docs/recovery/op01-op31-browser-durable-resume-qualified.json"
       ],
       "limits": [
-        "Le checkpoint reste en mémoire et dispose() l'invalide volontairement.",
-        "Aucune désactivation/réactivation Chrome avec stockage durable n'est encore démontrée."
+        "La persistance V1 utilise localStorage avec expiration, taille maximale et invalidation stricte; elle n’est pas un snapshot du processus Pyodide.",
+        "Le crash sans pagehide, la portée multi-navigateurs, les journaux longs et le coût de replay restent non qualifiés."
       ],
       "historicalMapping": null,
       "historicalCountDisposition": "unmapped"
@@ -1467,12 +1490,14 @@
       "reason": "Le SHA/source exact de Site 109 reste non résolu."
     },
     {
-      "id": "browser-checkpoint-persistence",
+      "id": "browser-checkpoint-crash-recovery",
       "status": "open",
       "blocks": [
-        "cross-page-product-continuity"
+        "crash-without-pagehide-continuity",
+        "cross-browser-continuity",
+        "long-journal-continuity"
       ],
-      "reason": "La reprise dans un host frais est qualifiée en TypeScript, mais aucun stockage durable, pagehide, crash, nouveau processus ou cycle Chrome réel n'est encore démontré."
+      "reason": "La persistance localStorage sur pagehide et le rechargement Chrome/Pyodide SMLP sont qualifiés. Restent ouverts le crash sans pagehide, les autres navigateurs, les autres jeux non déterministes, la pression de stockage d’un journal long et la récupération inter-appareils."
     },
     {
       "id": "op31-objective-owner",
@@ -1512,6 +1537,6 @@
     "historicalRegistryRecovered": false,
     "historicalCountClaimed": false,
     "sitePublished": false,
-    "nextStep": "persist the active browser checkpoint with an expiration policy, qualify pagehide and real Chrome reactivation without replay or needId loss, measure snapshot/restore overhead, and continue searching durable evidence for the historical 76-slot schema"
+    "nextStep": "measure durable resume overhead separately, qualify crash-without-pagehide and cross-browser boundaries, bound long-journal storage or migrate to IndexedDB when necessary, connect the joint STCK product owner, add the Region product owner, identify a real OP31 objective owner, and continue searching durable evidence for the historical 76-slot schema"
   }
 }

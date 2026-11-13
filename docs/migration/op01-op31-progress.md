@@ -40,6 +40,8 @@ Dernière consolidation : 13 novembre 2026.
   `docs/recovery/op01-op31-session-continuity-core-20261113.md`
 - Raccord navigateur de la continuité :
   `docs/recovery/op01-op31-browser-session-resume-20261113.md`
+- Persistance navigateur et rechargement Chrome/Pyodide :
+  `docs/recovery/op01-op31-browser-durable-resume-20261113.md`
 - Lot 9C2 public conjoint :
   `docs/recovery/lot9c2-public-addressed-joint-channels.md`
 - Qualification officielle C7 :
@@ -95,6 +97,9 @@ La campagne commune possède maintenant :
 - une restauration atomique avec rollback en cas de refus d'un participant ;
 - un raccord qualifié du checkpoint au host produit et au contrôleur Agent ;
 - une reprise host d'un retour physiquement envoyé sans rejouer l'action ;
+- un journal runtime déterministe qui lie chaque commande à l'identité de son observation publique ;
+- un checkpoint durable V1 dans `localStorage`, borné par expiration et taille ;
+- un cycle réel `pagehide → rechargement Chrome → worker Pyodide frais → replay vérifié → même needId acquis` ;
 - une qualification C7 officielle du hook Region natif sur STCK et SMLP.
 
 Le contrôleur produit utilise uniquement le seam navigateur direct. Le Worker
@@ -103,16 +108,7 @@ par `main.ts`.
 
 Statut global :
 
-**OP28 est active dans le produit pour une action simple, une décision conjointe
-SMLP et une carte STCK publique unique ; OP18 est transportée et consommée avec
-un stock revalidé ; les retours ACTION6 sélectionnés traversent l’acquisition du
-propriétaire puis l’observation passive FieldStock ; C7 reste clos pour le
-protocole Region STCK/SMLP. Le noyau de continuité restaure le `needId`, l'action en attente, la
-déduplication et FieldStock sans double acquisition. Le host et le contrôleur
-restaurent désormais une frontière réglée dans une instance fraîche ; le host
-peut aussi acquérir un retour physiquement envoyé sans rejouer l'action. Le
-stockage durable, la preuve Chrome réelle, une campagne de résolution produit
-complète, le coût ciblé de la nouvelle composition et OP31 restent ouverts.**
+**OP28 est active dans le produit pour une action simple, une décision conjointe SMLP et une carte STCK publique unique ; OP18 est transportée et consommée avec un stock revalidé ; les retours ACTION6 sélectionnés traversent l’acquisition du propriétaire puis l’observation passive FieldStock ; C7 reste clos pour le protocole Region STCK/SMLP. Le noyau de continuité restaure le `needId`, l'action en attente, la déduplication et FieldStock. Le produit persiste maintenant une frontière versionnée sur `pagehide`, reconstruit un worker Pyodide frais par replay déterministe, valide chaque observation, puis acquiert le même retour avec le même `needId` sans nouvel envoi Agent ni seconde présentation. Le crash sans `pagehide`, la portée multi-navigateurs et tous jeux, la croissance du journal, le coût de continuité, une campagne de résolution complète et OP31 restent ouverts.**
 
 Cette reconstruction ne prouve ni une identité binaire avec Site 109, ni une
 parité totale V5/V6/V7, ni la présence d’un registre canonique complet des 76
@@ -123,7 +119,8 @@ points d’entrée V6.
 ### Produit navigateur actif
 
 - `src/main.ts` : sélection Manual / Agent et ports produits ;
-- `src/runtime/browser-games.ts` : transport jeu navigateur ;
+- `src/runtime/browser-games.ts` : transport jeu navigateur, journal déterministe et replay validé ;
+- `src/runtime/v6-browser-durable-session.ts` : codec V1, expiration, liaison runtime/Agent et stockage borné ;
 - `src/agent-product-dispatch.ts` : disponibilité, génération, `busy`, timing,
   ACTION6 et erreurs ;
 - `src/product-presentation-effects.ts` : présentation et effets DOM ;
@@ -181,7 +178,7 @@ produit actuel.
 | Lot | État courant | Preuve acquise | Dette suivante |
 | --- | --- | --- | --- |
 | C0 | **terminé** | 31 calculs inventoriés et dispositions explicites | maintenir les statuts par besoin |
-| C1 | **checkpoint raccordé au host et au contrôleur dans les contrats produit** | reprise d'une session réglée dans un host frais ; même `sessionId` et compteur ; rejet stale ; retour physiquement envoyé acquis avec le même `needId` sans replay ni seconde présentation | stockage durable et désactivation/réactivation réelle dans Chrome/Pyodide |
+| C1 | **continuité durable navigateur qualifiée sur Chrome/Pyodide SMLP** | checkpoint V1 `localStorage`, `pagehide`, worker frais, replay `load + ACTION6`, observation vérifiée, même `sessionId`, compteur et `needId`, zéro nouvel envoi Agent et zéro seconde présentation | crash sans `pagehide`, multi-navigateurs/tous jeux, journaux longs et coût |
 | C2 | **OP18 et OP28 actives ; premières ACTION6 produit qualifiées** | SMLP joint consomme deux contributions et traverse Pyodide sur trois retours réels ; STCK produit une coordonnée bornée ; retour acquis avant observation passive | campagne de résolution produit complète, raccord STCK conjoint et propriétaire OP31 |
 | C3 | **calculs et recouvrements qualifiés** | OP03/04/08/09/11/12/14/26 auditables | appeler uniquement depuis un producteur réel |
 | C4 | **audit complet, usages génériques non démontrés** | OP01/02/05/10/15/25 calculables | aucun raccord artificiel |
@@ -209,10 +206,11 @@ Il garantit :
 - transfert Agent vers Manual après règlement du retour en vol ;
 - priorité du remplacement de jeu sur une simple demande Manual ;
 - fermeture `disposed` stable pendant `pagehide` ;
-- conservation en mémoire d'un checkpoint aux frontières sûres ;
-- restauration dans un host frais avant toute nouvelle décision ;
-- refus d'une observation réglée obsolète ;
-- statut `resumed` sans nouvelle action physique pour un retour déjà envoyé.
+- capture idempotente d'un checkpoint aux frontières sûres, y compris pendant un envoi physique ;
+- persistance V1 dans `localStorage` avec expiration de 12 h, plafond de 24 h et limite de 4,5 Mo ;
+- restauration du runtime par journal vérifié avant restauration de l'Agent ;
+- refus et effacement d'un état expiré, incompatible, surdimensionné ou divergent ;
+- statut `resumed`, même `sessionId`, même compteur et même `needId` sans nouvel envoi Agent ni seconde présentation.
 
 Le mode Manual reste direct et n’appelle aucune campagne Agent.
 
@@ -431,34 +429,27 @@ composition produit.
 ## Limites ouvertes
 
 - aucune campagne de résolution complète SMLP/STCK qualifiée dans le produit ;
-- le propriétaire conjoint STCK qualifié n'est pas encore le propriétaire actif
-  du host produit ;
-- le checkpoint du contrôleur reste en mémoire et n'est pas conservé lors de
-  `pagehide`, d'un crash ou d'un nouveau processus ;
-- le host qualifie la frontière d'une action déjà envoyée, mais le contrôleur
-  gracieux attend encore le retour en vol avant de s'arrêter ;
-- aucune désactivation/réactivation réelle dans Chrome n'est encore qualifiée ;
+- le propriétaire conjoint STCK qualifié n'est pas encore le propriétaire actif du host produit ;
+- la continuité durable repose sur un replay déterministe, pas sur un snapshot du tas Python ;
+- le crash sans `pagehide`, la portée multi-navigateurs, les autres jeux non déterministes et la récupération inter-appareils ne sont pas qualifiés ;
+- un journal de session long peut dépasser la limite `localStorage` de 4,5 Mo ; une migration IndexedDB reste possible ;
 - Region n’est pas encore un propriétaire physique du contrôleur produit ;
 - aucun propriétaire OP31 ;
-- registre courant V6 reconstruit, mais inventaire canonique complet des 76
-  points d'entrée non démontré ;
-- coût ciblé de la nouvelle composition produit non mesuré séparément ;
+- registre courant V6 reconstruit, mais inventaire canonique complet des 76 points d'entrée non démontré ;
+- coût du stockage, du replay Pyodide et de la composition produit non mesuré séparément ;
 - aucune publication Site dans cette tranche.
 
 ## Feuille de route actualisée
 
-### Étape immédiate : persistance durable et fixture navigateur réelle
+### Étape immédiate : durcir la continuité et mesurer son coût
 
-1. définir un stockage durable versionné avec politique d'expiration ;
-2. lier le checkpoint au jeu et à la génération produit courante ;
-3. conserver une frontière sûre lors de `pagehide` sans annuler un retour déjà
-   physiquement envoyé ;
-4. exécuter une désactivation/réactivation réelle dans Chrome contre Pyodide ;
-5. vérifier l'absence de perte de `needId`, de double acquisition, de double
-   présentation et de double ACTION6 ;
-6. mesurer ensuite le coût de la continuité active.
+1. qualifier le comportement lors d'un crash sans événement `pagehide` ;
+2. vérifier au moins un second navigateur et distinguer les jeux déterministes des jeux qui doivent refuser le replay ;
+3. borner la croissance du journal, compacter aux frontières sûres ou migrer vers IndexedDB lorsque 4,5 Mo ne suffisent plus ;
+4. mesurer séparément sérialisation, écriture, reconstruction Pyodide et restauration Agent avec protocole ABBA ;
+5. conserver un fallback frais obligatoire à la première divergence.
 
-### Étape suivante : STCK conjoint produit
+### Étape suivante : STCK conjoint produit### Étape suivante : STCK conjoint produit
 
 1. remplacer le propriétaire STCK autonome par le propriétaire conjoint qualifié ;
 2. conserver les deux contributions causales et leurs preuves d'ablation ;
@@ -526,8 +517,31 @@ Résultats :
 Preuve durable :
 `docs/recovery/op01-op31-browser-session-resume-20261113.md`.
 
-La preuve reste contractuelle sous Node. Le stockage durable et la fixture Chrome
-réelle restent ouverts.
+Cette preuve contractuelle reste la fondation du raccord host/contrôleur. La persistance et le rechargement réel sont qualifiés séparément ci-dessous.
+
+## Qualification de la continuité durable C1
+
+La tranche durable inclut le canonique `549c06dc5ff4d23ecfea92ecfd260896a2a533f3` via le merge de réconciliation `1bd7b8646876ae92ace1215222537b542b688b76`.
+
+Résultats de qualification :
+
+- tests ciblés continuité durable : **34/34** ;
+- régression TypeScript complète : **413/413** ;
+- registre V6 reconstruit : valide ;
+- build production : réussi, **67** modules, 100 jeux, 636 prévisualisations et 4 atlas ;
+- Chrome headless et Pyodide : SMLP niveau 1, ACTION6 `(32,26)`, delta réel de 9 pixels ;
+- rechargement complet de page et création d'un worker frais ;
+- replay vérifié de `load + ACTION6` pour reconstruire le runtime ;
+- même observation retournée, même `sessionId`, même compteur et même `needId` ;
+- acquisition routée une fois, sans nouvel appel Agent à `action()` et sans seconde présentation ;
+- aucune publication Site et aucune qualification de performance revendiquée.
+
+Preuves durables :
+
+- `docs/recovery/op01-op31-browser-durable-resume-20261113.md` ;
+- `docs/recovery/op01-op31-browser-durable-resume-qualified.json`.
+
+La reconstruction inter-page est volontairement explicite : le tas Python n'est pas sérialisé. Le runtime est rejoué dans un worker neuf et chaque observation réglée est comparée à son identité publique avant que l'Agent puisse reprendre.
 
 ## Requalification C7 du contrat de configuration canonique
 
