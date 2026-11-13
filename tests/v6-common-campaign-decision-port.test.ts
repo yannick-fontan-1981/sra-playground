@@ -4,6 +4,7 @@ import {
   PROTOCOL_VERSION,
   type AgentObservation,
 } from '../src/runtime/contracts.ts';
+import { AgentWorkerCore } from '../src/runtime/v6-agent-worker-core.ts';
 import { V6CommonCampaignDecisionPort } from '../src/runtime/v6-common-campaign-decision-port.ts';
 import {
   FieldStock,
@@ -159,6 +160,77 @@ test('worker campaign acquires the previous OP28 return before the next decision
   assert.notEqual(port.pendingDecision?.needId, firstPending?.needId);
   assert.deepEqual(trace.snapshot().events.map(event => event.kind), [
     'need', 'operation', 'consumption',
+    'need', 'operation', 'consumption',
+  ]);
+});
+
+test('terminal observation settles the pending OP28 return without another decision', async () => {
+  const trace = new OperationTraceSink();
+  const port = new V6CommonCampaignDecisionPort({ trace });
+  const core = new AgentWorkerCore(port, { implementationRevision: 'terminal-return-test' });
+  await core.handle({
+    type: 'initialize',
+    protocolVersion: PROTOCOL_VERSION,
+    sessionId: 'campaign-worker-session',
+    seed: 23,
+  });
+
+  const first = await core.handle({
+    type: 'observe',
+    observation: observation(0, blankRows(), [4]),
+    budgetMs: 50,
+  });
+  assert.equal(first.type, 'action');
+  const pendingNeedId = port.pendingDecision?.needId;
+  assert.ok(pendingNeedId);
+
+  const terminal = observation(1, blankRows(), [], 3, 2);
+  terminal.state = 'WIN';
+  assert.deepEqual(await core.handle({ type: 'observe', observation: terminal, budgetMs: 50 }), {
+    type: 'stopped',
+    sessionId: 'campaign-worker-session',
+    reason: 'complete',
+  });
+  assert.equal(port.lastAcquisition?.needId, pendingNeedId);
+  assert.equal(port.lastAcquisition?.routed, true);
+  assert.equal(port.pendingDecision, undefined);
+  assert.equal(port.lastPrepare, undefined);
+  assert.deepEqual(trace.snapshot().events.map(event => event.kind), [
+    'need', 'operation', 'consumption',
+  ]);
+});
+
+test('zero decision budget still settles the pending return before stopping', async () => {
+  const trace = new OperationTraceSink();
+  const port = new V6CommonCampaignDecisionPort({ trace });
+  const core = new AgentWorkerCore(port, { implementationRevision: 'zero-budget-return-test' });
+  await core.handle({
+    type: 'initialize',
+    protocolVersion: PROTOCOL_VERSION,
+    sessionId: 'campaign-worker-session',
+    seed: 29,
+  });
+  await core.handle({
+    type: 'observe',
+    observation: observation(0, blankRows(), [4]),
+    budgetMs: 50,
+  });
+  const pendingNeedId = port.pendingDecision?.needId;
+  assert.ok(pendingNeedId);
+
+  assert.deepEqual(await core.handle({
+    type: 'observe',
+    observation: observation(1, blankRows(), [2]),
+    budgetMs: 0,
+  }), {
+    type: 'stopped',
+    sessionId: 'campaign-worker-session',
+    reason: 'budget',
+  });
+  assert.equal(port.lastAcquisition?.needId, pendingNeedId);
+  assert.equal(port.pendingDecision, undefined);
+  assert.equal(port.lastPrepare, undefined);
+  assert.deepEqual(trace.snapshot().events.map(event => event.kind), [
     'need', 'operation', 'consumption',
   ]);
 });

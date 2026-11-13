@@ -45,18 +45,19 @@ export type AddressedBoundaryReceipt = ReturnType<ObservedAddressedMaterialRunti
 /**
  * Persistent worker-side host for the canonical CommonCampaignOwner.
  *
- * The next public observation first settles the previously released action,
- * preserving the same needId. Only after that return is consumed does this host
- * cross an official boundary, revalidate retained FieldStock knowledge and ask
- * for the next proposal. It never ranks ambiguous proposals and never invents
- * ACTION6 coordinates.
+ * Every validated public observation is consumed before the worker applies its
+ * terminal or decision-budget stop. This lets the host settle the previously
+ * released action with the same needId, cross an official boundary and retain
+ * knowledge even when no next action may be requested. Non-terminal observations
+ * are then revalidated before the next proposal. The host never ranks ambiguous
+ * proposals and never invents ACTION6 coordinates.
  */
 export class V6CommonCampaignDecisionPort implements AgentDecisionPort {
   readonly options: V6CommonCampaignDecisionPortOptions;
   #campaign!: CommonCampaignOwner;
   #fieldRuntime!: ObservedAddressedMaterialRuntime;
   #sessionId: string | null = null;
-  #previous: PublicCampaignObservation | undefined;
+  #current: PublicCampaignObservation | undefined;
   #lastPrepare: CampaignPrepareResult | undefined;
   #lastAcquisition: CampaignReturnReceipt | undefined;
   #lastBoundary: AddressedBoundaryReceipt | undefined;
@@ -74,7 +75,7 @@ export class V6CommonCampaignDecisionPort implements AgentDecisionPort {
   initialize(sessionId: string, _seed: number): void {
     if (!sessionId) throw new TypeError('common campaign session id must be non-empty');
     this.#sessionId = sessionId;
-    this.#previous = undefined;
+    this.#current = undefined;
     this.#lastPrepare = undefined;
     this.#lastAcquisition = undefined;
     this.#lastBoundary = undefined;
@@ -85,24 +86,22 @@ export class V6CommonCampaignDecisionPort implements AgentDecisionPort {
   cancel(sessionId: string): void {
     if (this.#sessionId !== sessionId) return;
     this.#campaign.cancel(sessionId);
-    this.#previous = undefined;
+    this.#current = undefined;
     this.#sessionId = null;
   }
 
-  decide(
-    observation: AgentObservation,
-    _budgetMs: number,
-    signal: AbortSignal,
-  ): AgentAction | undefined {
-    if (signal.aborted) return undefined;
-    if (!this.#sessionId || observation.sessionId !== this.#sessionId) {
-      throw new Error('common campaign observation does not belong to the initialized session');
+  observe(observation: AgentObservation): void {
+    this.#assertSession(observation);
+    if (this.#current?.agent.sequence === observation.sequence) return;
+    if (this.#current && observation.sequence < this.#current.agent.sequence) {
+      throw new Error('common campaign observation sequence moved backwards');
     }
 
+    const previous = this.#current;
     let current = measurePublicCampaignObservation(observation);
     const pending = this.#campaign.pending(observation.sessionId);
     if (pending) {
-      if (!this.#previous) {
+      if (!previous) {
         throw new Error('common campaign has a pending action without its prior public observation');
       }
       this.#lastAcquisition = this.#campaign.acquire({
@@ -118,13 +117,20 @@ export class V6CommonCampaignDecisionPort implements AgentDecisionPort {
       this.#lastAcquisition = undefined;
     }
 
-    if (this.#previous) {
+    if (previous) {
       this.#lastBoundary = this.#fieldRuntime.boundary(
-        this.#previous.observation,
+        previous.observation,
         current.observation,
       );
     } else {
       this.#lastBoundary = undefined;
+    }
+
+    if (observation.state === 'WIN') {
+      this.#lastRevalidation = this.#fieldRuntime.status();
+      this.#current = current;
+      this.#lastPrepare = undefined;
+      return;
     }
 
     if (this.#fieldRuntime.status() === 'retained_pending_revalidation') {
@@ -134,9 +140,23 @@ export class V6CommonCampaignDecisionPort implements AgentDecisionPort {
       current.observation,
       current.rows,
     );
-    this.#previous = current;
+    this.#current = current;
+    this.#lastPrepare = undefined;
+  }
 
+  decide(
+    observation: AgentObservation,
+    _budgetMs: number,
+    signal: AbortSignal,
+  ): AgentAction | undefined {
     if (signal.aborted) return undefined;
+    this.#assertSession(observation);
+    if (this.#current?.agent.sequence !== observation.sequence) {
+      this.observe(observation);
+    }
+    const current = this.#current;
+    if (!current || current.agent.state === 'WIN' || signal.aborted) return undefined;
+
     const extraContexts = this.options.additionalContextByOwner?.(current) ?? {};
     const prepared = this.#campaign.prepare(current.agent, {
       ...extraContexts,
@@ -183,6 +203,12 @@ export class V6CommonCampaignDecisionPort implements AgentDecisionPort {
 
   get lastRevalidation(): AddressedKnowledgeStatus | undefined {
     return this.#lastRevalidation;
+  }
+
+  #assertSession(observation: AgentObservation): void {
+    if (!this.#sessionId || observation.sessionId !== this.#sessionId) {
+      throw new Error('common campaign observation does not belong to the initialized session');
+    }
   }
 
   #rebuildCampaign(): void {
