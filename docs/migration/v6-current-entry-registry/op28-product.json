@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "kind": "v6-current-reconstruction-entry-fragment",
+  "name": "op28-product",
+  "domains": [
+    "op28-product"
+  ],
+  "entries": [
+    {
+      "id": "op28.public-single-action",
+      "title": "Simple public OP28 owner",
+      "domain": "op28-product",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Release one simple non-addressed public action when it is the only admissible action and no competing owner resolves independently.",
+      "implementationPaths": [
+        "src/logos-engine/v6-public-single-action-port.ts",
+        "src/logos-engine/v6-public-single-action-caller-adapter.ts"
+      ],
+      "consumerPaths": [
+        "src/runtime/v6-browser-product-campaign-host.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-public-observation-op28-slice-20261112.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "ACTION6 without coordinates is never synthesized by this fallback."
+      ]
+    },
+    {
+      "id": "op28.smlp-joint-action6",
+      "title": "SMLP joint ACTION6 owner",
+      "domain": "op28-product",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Require current ACTION6 availability and one revalidated visible SMLP gate to agree on the same addressed action before OP28 release.",
+      "implementationPaths": [
+        "src/logos-engine/v6-public-addressed-joint-channels.ts",
+        "src/logos-engine/v6-joint-channel-owner.ts",
+        "src/logos-engine/v6-joint-channel-action.ts"
+      ],
+      "consumerPaths": [
+        "src/runtime/v6-browser-product-campaign-host.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/lot9c2-public-addressed-joint-channels.md",
+        "docs/recovery/op01-op31-live-smlp-product-campaign-20261113.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "The browser product requires exactly one qualified gate and preserves ambiguity when several are visible."
+      ]
+    },
+    {
+      "id": "op28.stck-unique-action6",
+      "title": "STCK strict unique-card ACTION6 owner",
+      "domain": "op28-product",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Release ACTION6 only when public pixels prove exactly one stack card, without ranking several cards or inventing a shop fallback.",
+      "implementationPaths": [
+        "src/logos-engine/v6-public-unique-stck-action6-port.ts",
+        "src/logos-engine/v6-public-unique-stck-action6-caller-adapter.ts"
+      ],
+      "consumerPaths": [
+        "src/runtime/v6-browser-product-campaign-host.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-browser-public-action6-owner-20261113.md",
+        "docs/migration/op01-op31-progress.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "The active product uses the strict autonomous STCK owner; the two-channel STCK owner remains separately qualified outside the product host."
+      ]
+    },
+    {
+      "id": "product.four-peer-owner-composition",
+      "title": "Active four-peer browser campaign composition",
+      "domain": "op28-product",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Compose FieldStock OP18, SMLP joint OP28, strict STCK OP28, and simple public OP28 as peers under one ambiguity-preserving campaign.",
+      "implementationPaths": [
+        "src/runtime/v6-browser-product-campaign-host.ts"
+      ],
+      "consumerPaths": [
+        "src/runtime/v6-browser-agent-controller.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-live-smlp-product-campaign-20261113.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "No implicit priority is granted.",
+        "The official cost of the complete active product composition remains open."
+      ]
+    }
+  ]
+}

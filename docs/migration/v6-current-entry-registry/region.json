@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "kind": "v6-current-reconstruction-entry-fragment",
+  "name": "region",
+  "domains": [
+    "region"
+  ],
+  "entries": [
+    {
+      "id": "region.bounded-owner",
+      "title": "Bounded Region intervention model and owner",
+      "domain": "region",
+      "status": "qualified-library",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": false
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Learn one explicitly identified intervention method from affected regions, preserve contradictions, propose only within scope, and restore bounded state.",
+      "implementationPaths": [
+        "src/logos-engine/v6-region-intervention.ts",
+        "src/logos-engine/v6-region-intervention-owner.ts",
+        "src/logos-engine/v6-region-caller-adapter.ts"
+      ],
+      "consumerPaths": [
+        "scripts/native-loop-region-candidate-hook.mjs"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/lot9b-region-reconstruction-contract.md",
+        "docs/recovery/op01-op31-region-specialized-proof.md"
+      ],
+      "performanceProofPaths": [
+        "docs/recovery/lot9b-official-abba-performance-qualified.md"
+      ],
+      "limitations": [
+        "New evidence-bounded reconstruction; no identity claim with the lost 0.69 implementation."
+      ]
+    },
+    {
+      "id": "region.public-evidence-binding",
+      "title": "Public Region evidence and method binding",
+      "domain": "region",
+      "status": "qualified-library",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": false
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Bind public pixel deltas to an explicit methodRef, separator, action, affected-region set, revision, and level scope without similarity-based invention.",
+      "implementationPaths": [
+        "src/logos-engine/v6-region-public-evidence.ts"
+      ],
+      "consumerPaths": [
+        "scripts/native-loop-region-public-action6-probe.mjs",
+        "scripts/native-loop-region-candidate-hook.mjs"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/lot9b-region-action6-corpus-qualification.md",
+        "docs/recovery/op01-op31-region-specialized-proof.md"
+      ],
+      "performanceProofPaths": [
+        "docs/recovery/lot9b-official-abba-performance-qualified.md"
+      ],
+      "limitations": [
+        "Region does not infer equivalence between unrelated separators."
+      ]
+    }
+  ]
+}

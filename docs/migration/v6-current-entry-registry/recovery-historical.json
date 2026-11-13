@@ -1,0 +1,163 @@
+{
+  "version": 1,
+  "kind": "v6-current-reconstruction-entry-fragment",
+  "name": "recovery-historical",
+  "domains": [
+    "recovery",
+    "historical"
+  ],
+  "entries": [
+    {
+      "id": "delivery.site-publication-from-canonical",
+      "title": "Site publication linked to a canonical GitHub SHA",
+      "domain": "recovery",
+      "status": "open",
+      "current": {
+        "implemented": false,
+        "consumed": false,
+        "functionallyQualified": false,
+        "performanceQualified": false,
+        "productActive": false
+      },
+      "historicalIdentity": "not-applicable",
+      "contract": "Publish only after a qualified canonical GitHub commit exists, then verify the deployed Site revision against that exact commit.",
+      "implementationPaths": [],
+      "consumerPaths": [],
+      "functionalProofPaths": [
+        "docs/migration/git-site-sync-policy.md",
+        "docs/migration/v6-delivery-roadmap.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "No Site publication is included in this registry tranche."
+      ]
+    },
+    {
+      "id": "historical.chart-navigation",
+      "title": "Historical chart_navigation entry",
+      "domain": "historical",
+      "status": "historical-only",
+      "current": {
+        "implemented": false,
+        "consumed": false,
+        "functionallyQualified": false,
+        "performanceQualified": false,
+        "productActive": false
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Preserve durable evidence that chart_navigation existed historically without claiming a recovered current implementation.",
+      "implementationPaths": [],
+      "consumerPaths": [],
+      "functionalProofPaths": [
+        "docs/migration/v6-delivery-roadmap.md",
+        "docs/recovery/site109-reconstruction-status.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "Exact source and current implementation remain unresolved."
+      ]
+    },
+    {
+      "id": "recovery.historical-entry-point-mapping",
+      "title": "Historical 70/76 entry-point mapping",
+      "domain": "recovery",
+      "status": "open",
+      "current": {
+        "implemented": false,
+        "consumed": false,
+        "functionallyQualified": false,
+        "performanceQualified": false,
+        "productActive": false
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Recover or reevaluate the historical denominator and map historical entry identities to current capabilities without automatic equivalence.",
+      "implementationPaths": [],
+      "consumerPaths": [],
+      "functionalProofPaths": [
+        "docs/recovery/site109-reconstruction-status.md",
+        "docs/recovery/op01-op31-official-readiness-status.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "The current capability count is deliberately incomparable with 70/76 and 71/76."
+      ]
+    },
+    {
+      "id": "recovery.op31-goal-owner",
+      "title": "Physical OP31 goal owner",
+      "domain": "recovery",
+      "status": "open",
+      "current": {
+        "implemented": false,
+        "consumed": false,
+        "functionallyQualified": false,
+        "performanceQualified": false,
+        "productActive": false
+      },
+      "historicalIdentity": "not-applicable",
+      "contract": "Provide a real runtime owner that consumes OP31 information and changes goal selection.",
+      "implementationPaths": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "consumerPaths": [],
+      "functionalProofPaths": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-live-smlp-product-campaign-20261113.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "The OP31 calculation is available, but no physical goal owner is demonstrated."
+      ]
+    },
+    {
+      "id": "recovery.session-continuity",
+      "title": "Common campaign snapshot and restoration",
+      "domain": "recovery",
+      "status": "open",
+      "current": {
+        "implemented": false,
+        "consumed": false,
+        "functionallyQualified": false,
+        "performanceQualified": false,
+        "productActive": false
+      },
+      "historicalIdentity": "not-applicable",
+      "contract": "Persist and restore owner order, pending need, acquisition deduplication, FieldStock state, and joint-channel state across Agent activations.",
+      "implementationPaths": [],
+      "consumerPaths": [],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-live-smlp-product-campaign-20261113.md",
+        "docs/migration/op01-op31-progress.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "Region has its own bounded snapshot, but the active common browser campaign does not yet expose a qualified cross-owner snapshot."
+      ]
+    },
+    {
+      "id": "recovery.site109-parity",
+      "title": "Exact Site 109 and native 0.68 parity",
+      "domain": "recovery",
+      "status": "open",
+      "current": {
+        "implemented": false,
+        "consumed": false,
+        "functionallyQualified": false,
+        "performanceQualified": false,
+        "productActive": false
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Establish exact published capability and source parity with the unresolved historical Site 109/native 0.68 target.",
+      "implementationPaths": [],
+      "consumerPaths": [],
+      "functionalProofPaths": [
+        "docs/recovery/site109-reconstruction-status.md",
+        "docs/migration/v6-delivery-roadmap.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "Historical source SHA d90ce5b64fffa53cca201e2a6a49450fd123f299 remains unresolved."
+      ]
+    }
+  ]
+}

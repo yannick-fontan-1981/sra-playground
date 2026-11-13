@@ -1,0 +1,281 @@
+{
+  "version": 1,
+  "kind": "v6-current-reconstruction-entry-fragment",
+  "name": "runtime",
+  "domains": [
+    "runtime"
+  ],
+  "entries": [
+    {
+      "id": "runtime.browser-agent-controller",
+      "title": "Bounded browser Agent controller",
+      "domain": "runtime",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Own exactly one browser campaign session, dispatch no local fallback action, and stop on ambiguity, blocking, staleness, terminal state, error, or the hard action bound.",
+      "implementationPaths": [
+        "src/runtime/v6-browser-agent-controller.ts"
+      ],
+      "consumerPaths": [
+        "src/main.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-browser-agent-controller-combined-qualification-20261112.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "Default hard bound is 64 actions.",
+        "Worker campaign seam remains available but is not instantiated by this controller."
+      ]
+    },
+    {
+      "id": "runtime.browser-common-campaign-host",
+      "title": "Browser common campaign host",
+      "domain": "runtime",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Convert live browser observations, prepare one common campaign decision, dispatch it, acquire the selected return, run passive FieldStock observation, and present in order.",
+      "implementationPaths": [
+        "src/runtime/v6-browser-common-campaign-host.ts"
+      ],
+      "consumerPaths": [
+        "src/runtime/v6-browser-agent-controller.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-browser-campaign-host-20261112.md",
+        "docs/recovery/op01-op31-live-smlp-product-campaign-20261113.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "The host preserves ambiguity instead of choosing between peer owners."
+      ]
+    },
+    {
+      "id": "runtime.browser-worker-pyodide-transport",
+      "title": "Browser Worker and Pyodide game transport",
+      "domain": "runtime",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Load the public game archive through BrowserGameRuntime, game-worker.ts, Pyodide, and game_bridge.py and return protocol-compatible observations.",
+      "implementationPaths": [
+        "src/runtime/browser-games.ts",
+        "src/runtime/game-worker.ts"
+      ],
+      "consumerPaths": [
+        "src/main.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/lot6c-worker-transport-status.md",
+        "docs/recovery/op01-op31-live-smlp-product-campaign-20261113.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "Transport qualification does not imply a general solver for the hosted games."
+      ]
+    },
+    {
+      "id": "runtime.manual-agent-mode-separation",
+      "title": "Manual and Agent ownership separation",
+      "domain": "runtime",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Keep Manual dispatch outside the Agent campaign and transfer ownership only after an in-flight Agent return is settled.",
+      "implementationPaths": [
+        "src/main.ts",
+        "src/runtime/v6-browser-agent-controller.ts"
+      ],
+      "consumerPaths": [
+        "src/main.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-browser-agent-controller-combined-qualification-20261112.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "A replacement request outranks a simple Manual stop while preserving the settled return."
+      ]
+    },
+    {
+      "id": "runtime.product-dispatch",
+      "title": "Product action dispatch",
+      "domain": "runtime",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Apply readiness, busy, ACTION6 coordinate, stale-result, timing, and error contracts to physical browser actions.",
+      "implementationPaths": [
+        "src/agent-product-dispatch.ts"
+      ],
+      "consumerPaths": [
+        "src/main.ts",
+        "src/runtime/v6-browser-common-campaign-host.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/lot6c-browser-product-runtime-status.md",
+        "docs/recovery/lot6c-end-to-end-bridge-status.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "Dispatch qualification is functional; product-composition cost is tracked separately."
+      ]
+    },
+    {
+      "id": "runtime.product-presentation",
+      "title": "Product presentation and DOM effects",
+      "domain": "runtime",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Present accepted observations after acquisition, update the canvas and terminal feedback, and keep DOM effects separate from reasoning ownership.",
+      "implementationPaths": [
+        "src/product-presentation.ts",
+        "src/product-presentation-effects.ts"
+      ],
+      "consumerPaths": [
+        "src/main.ts",
+        "src/runtime/v6-browser-common-campaign-host.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/lot6c-presentation-effects-integration-status.md",
+        "docs/recovery/lot6c-browser-product-runtime-status.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "Presentation does not authorize actions."
+      ]
+    },
+    {
+      "id": "runtime.public-observation-conversion",
+      "title": "Public browser observation conversion",
+      "domain": "runtime",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Convert the live 64 by 64 palette frame, available actions, state, level, and score into the revision-bound Agent observation contract.",
+      "implementationPaths": [
+        "src/runtime/v6-browser-agent-observation.ts",
+        "src/runtime/contracts.ts"
+      ],
+      "consumerPaths": [
+        "src/runtime/v6-browser-common-campaign-host.ts",
+        "src/runtime/v6-common-campaign-decision-port.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-public-observation-op28-slice-20261112.md",
+        "docs/migration/op01-op31-progress.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "Only public observation data is admitted."
+      ]
+    },
+    {
+      "id": "runtime.public-observation-measurement",
+      "title": "Public observation measurement and delta",
+      "domain": "runtime",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Measure public pixel changes and delayed component identities for correlated return learning without reading hidden game state.",
+      "implementationPaths": [
+        "src/runtime/v6-public-observation-measurement.ts",
+        "src/logos-engine/v6-public-observation-delta.ts"
+      ],
+      "consumerPaths": [
+        "src/runtime/v6-browser-common-campaign-host.ts",
+        "src/runtime/v6-agent-worker-core.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-browser-addressed-acquisition-20261113.md",
+        "docs/recovery/op01-op31-worker-common-campaign-20261112.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "Measurements remain evidence; they do not become knowledge until the addressed guards succeed."
+      ]
+    },
+    {
+      "id": "runtime.worker-common-campaign",
+      "title": "Worker common campaign seam",
+      "domain": "runtime",
+      "status": "qualified-library",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": false
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Run the common campaign contract inside the SRA Worker, including terminal and no-budget return acquisition.",
+      "implementationPaths": [
+        "src/runtime/v6-common-campaign-decision-port.ts",
+        "src/runtime/v6-agent-worker-core.ts",
+        "src/runtime/v6-agent-worker.ts"
+      ],
+      "consumerPaths": [
+        "tests/helpers/v6-live-game-campaign.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-worker-common-campaign-20261112.md",
+        "docs/recovery/op01-op31-worker-campaign-proof.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "The active browser product deliberately uses the direct browser seam instead."
+      ]
+    }
+  ]
+}

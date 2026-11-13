@@ -1,0 +1,163 @@
+{
+  "version": 1,
+  "kind": "v6-current-reconstruction-entry-fragment",
+  "name": "field-stock",
+  "domains": [
+    "field-stock"
+  ],
+  "entries": [
+    {
+      "id": "fieldstock.addressed-material-chain",
+      "title": "Addressed material fit, response, guard, and retention",
+      "domain": "field-stock",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Fit an addressed material model from strict public evidence, reconcile responses, preserve contradictions, retain only at an official boundary, and require revalidation before reuse.",
+      "implementationPaths": [
+        "src/logos-engine/addressed-material.ts",
+        "src/logos-engine/addressed-field-fit.ts",
+        "src/logos-engine/addressed-field-guard.ts",
+        "src/logos-engine/addressed-field-response.ts",
+        "src/logos-engine/addressed-field-retention.ts",
+        "src/logos-engine/linked-preparation.ts",
+        "src/logos-engine/observed-object-binding.ts"
+      ],
+      "consumerPaths": [
+        "src/runtime/observed-addressed-material-runtime.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/lot5-5b-integration-qualification.md",
+        "docs/recovery/op01-op31-browser-addressed-acquisition-20261113.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "Retention is not applicability; a retained prior must be revalidated in the current scene."
+      ]
+    },
+    {
+      "id": "fieldstock.browser-transport",
+      "title": "Browser FieldStock OP18 transport",
+      "domain": "field-stock",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Expose a revalidated FieldStock proposal to the browser campaign, dispatch its OP18 action, acquire the return, and record the changed stock.",
+      "implementationPaths": [
+        "src/runtime/v6-browser-common-campaign-host.ts"
+      ],
+      "consumerPaths": [
+        "src/runtime/v6-browser-product-campaign-host.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-browser-field-stock-transport-20261112.md",
+        "docs/migration/op01-op31-progress.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "No proposal exists without a current revalidated stock."
+      ]
+    },
+    {
+      "id": "fieldstock.observed-runtime",
+      "title": "Observed addressed material runtime",
+      "domain": "field-stock",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Hold local acquisition, calibration, retention, revalidation, stock, and passive-return state for the browser campaign.",
+      "implementationPaths": [
+        "src/runtime/observed-addressed-material-runtime.ts"
+      ],
+      "consumerPaths": [
+        "src/runtime/v6-browser-product-campaign-host.ts",
+        "src/runtime/v6-browser-common-campaign-host.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-browser-addressed-acquisition-20261113.md",
+        "docs/recovery/op01-op31-live-smlp-product-campaign-20261113.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "An insufficient public return leaves knowledge empty."
+      ]
+    },
+    {
+      "id": "fieldstock.op18-owner",
+      "title": "FieldStock OP18 campaign owner",
+      "domain": "field-stock",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Adapt a typed revalidated FieldStock need into one common-caller proposal and make the acquired return affect the next proposal.",
+      "implementationPaths": [
+        "src/logos-engine/field-stock.ts",
+        "src/logos-engine/v6-field-stock-caller-adapter.ts"
+      ],
+      "consumerPaths": [
+        "src/runtime/v6-browser-product-campaign-host.ts",
+        "src/runtime/v6-common-campaign-decision-port.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-lot5-op18-reconciliation-20261112.md",
+        "docs/recovery/lot5-5b-integration-qualification.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "OP18 remains unavailable when the stock is stale, contradicted, or not linked to the current observation."
+      ]
+    },
+    {
+      "id": "fieldstock.public-addressed-learning",
+      "title": "Public addressed-field learning",
+      "domain": "field-stock",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Derive strict residual motion, stationary witness, target, enclosure, and ACTION6 dependencies from correlated public returns.",
+      "implementationPaths": [
+        "src/runtime/v6-public-addressed-field-learning.ts"
+      ],
+      "consumerPaths": [
+        "src/runtime/v6-browser-common-campaign-host.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-browser-addressed-acquisition-20261113.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "Ambiguous residual matches remain unresolved."
+      ]
+    }
+  ]
+}

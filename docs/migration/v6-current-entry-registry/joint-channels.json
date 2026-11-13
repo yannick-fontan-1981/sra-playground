@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "kind": "v6-current-reconstruction-entry-fragment",
+  "name": "joint-channels",
+  "domains": [
+    "joint-channels"
+  ],
+  "entries": [
+    {
+      "id": "joint.bounded-owner-and-action",
+      "title": "Bounded joint-channel owner and OP28 action",
+      "domain": "joint-channels",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Require at least two compatible explicit contributions, preserve incompatibility, create one canonical OP28 payload, and reject a missing contribution.",
+      "implementationPaths": [
+        "src/logos-engine/v6-joint-channel-owner.ts",
+        "src/logos-engine/v6-joint-channel-action.ts"
+      ],
+      "consumerPaths": [
+        "src/runtime/v6-browser-product-campaign-host.ts",
+        "scripts/native-loop-joint-channel-official-hook.mjs"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/lot9c1-functional-qualification.md",
+        "docs/recovery/lot9c1-bounded-joint-channel-contract.md"
+      ],
+      "performanceProofPaths": [
+        "docs/recovery/lot9c4-official-abba-performance-qualified.md"
+      ],
+      "limitations": [
+        "New bounded reconstruction; exact historical implementation is unresolved."
+      ]
+    },
+    {
+      "id": "joint.return-routing-and-detachment",
+      "title": "Joint selected-return routing and generic detachment",
+      "domain": "joint-channels",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Route a selected return once to every contributing channel, share immutable data only for explicitly readonly channels, and retain detached clones for generic channels.",
+      "implementationPaths": [
+        "src/logos-engine/v6-joint-channel-owner.ts",
+        "src/logos-engine/v6-joint-channel-action.ts"
+      ],
+      "consumerPaths": [
+        "src/runtime/v6-browser-common-campaign-host.ts",
+        "scripts/native-loop-joint-channel-official-hook.mjs"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/lot9c4-official-abba-performance-qualified.md"
+      ],
+      "performanceProofPaths": [
+        "docs/recovery/lot9c4-official-abba-performance-qualified.md"
+      ],
+      "limitations": [
+        "Cloned, external, or stale contexts still receive full revalidation."
+      ]
+    },
+    {
+      "id": "joint.smlp-public-producer-pair",
+      "title": "Public SMLP two-channel producer pair",
+      "domain": "joint-channels",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Combine distinct public ACTION6-availability and visible-gate evidence into one exact addressed release contract.",
+      "implementationPaths": [
+        "src/logos-engine/v6-public-addressed-joint-channels.ts"
+      ],
+      "consumerPaths": [
+        "src/runtime/v6-browser-product-campaign-host.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/lot9c2-public-addressed-joint-channels.md",
+        "docs/recovery/op01-op31-live-smlp-product-campaign-20261113.md"
+      ],
+      "performanceProofPaths": [
+        "docs/recovery/lot9c4-official-abba-performance-qualified.md"
+      ],
+      "limitations": [
+        "The product variant preserves ambiguity by requiring exactly one gate."
+      ]
+    },
+    {
+      "id": "joint.stck-public-producer-pair",
+      "title": "Public STCK two-channel producer pair",
+      "domain": "joint-channels",
+      "status": "qualified-library",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": false
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Combine distinct public ACTION6-availability and unique-visible-card evidence into one exact addressed release contract.",
+      "implementationPaths": [
+        "src/logos-engine/v6-public-stck-joint-channels.ts"
+      ],
+      "consumerPaths": [
+        "scripts/native-loop-joint-channel-official-hook.mjs"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/lot9c3-stck-joint-performance-boundary.md"
+      ],
+      "performanceProofPaths": [
+        "docs/recovery/lot9c4-official-abba-performance-qualified.md"
+      ],
+      "limitations": [
+        "Functionally and performance qualified in the strict native benchmark seam, not yet substituted for the autonomous STCK owner in the product host."
+      ]
+    }
+  ]
+}

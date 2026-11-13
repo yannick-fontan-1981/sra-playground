@@ -1,0 +1,200 @@
+{
+  "version": 1,
+  "kind": "v6-current-reconstruction-entry-fragment",
+  "name": "qualification",
+  "domains": [
+    "qualification"
+  ],
+  "entries": [
+    {
+      "id": "qualification.joint-official-abba",
+      "title": "Joint-channel official ABBA qualification",
+      "domain": "qualification",
+      "status": "qualified-harness",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": true,
+        "productActive": false
+      },
+      "historicalIdentity": "not-applicable",
+      "contract": "Execute A1-B1-B2-A2 on strict STCK and SMLP public corpora, retain every sample, and accept only when each game stays strictly below plus 10 percent.",
+      "implementationPaths": [
+        "scripts/run-native-joint-channel-official-benchmark.mjs",
+        "scripts/native-loop-joint-channel-official-runners.mjs",
+        "scripts/native-loop-joint-channel-official-hook.mjs"
+      ],
+      "consumerPaths": [
+        "tests/lot9c4-official-joint-channels-performance-proof.test.mjs"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/lot9c4-official-joint-channels-performance-qualified.md"
+      ],
+      "performanceProofPaths": [
+        "docs/recovery/lot9c4-official-abba-performance-qualified.json",
+        "docs/recovery/lot9c4-official-abba-performance-qualified.md"
+      ],
+      "limitations": [
+        "Qualifies the reconstructed strict joint seam, not historical Site identity."
+      ]
+    },
+    {
+      "id": "qualification.joint-real-corpora",
+      "title": "Joint-channel real public corpus qualification",
+      "domain": "qualification",
+      "status": "qualified-harness",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": false
+      },
+      "historicalIdentity": "not-applicable",
+      "contract": "Verify causal two-channel decisions and acquisitions on real SMLP and strict STCK public archive states.",
+      "implementationPaths": [
+        "scripts/qualify-lot9c2-public-addressed-joint.mjs",
+        "scripts/native-loop-joint-channel-official-hook.mjs"
+      ],
+      "consumerPaths": [
+        "scripts/run-native-joint-channel-official-benchmark.mjs"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/lot9c2-public-addressed-joint-channels.md",
+        "docs/recovery/lot9c3-stck-joint-performance-boundary.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "Corpus qualification is not a general-game solve claim."
+      ]
+    },
+    {
+      "id": "qualification.live-smlp-product-pyodide",
+      "title": "Live SMLP product campaign under Pyodide",
+      "domain": "qualification",
+      "status": "qualified-harness",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": false
+      },
+      "historicalIdentity": "not-applicable",
+      "contract": "Compare three real Browser/Pyodide SMLP ACTION6 cycles with CPython while checking owner identity, need correlation, both acquisitions, FieldStock passivity, and presentation order.",
+      "implementationPaths": [
+        "scripts/qualify-op01-op31-live-smlp-product-campaign.mjs",
+        "tests/browser/op01-op31-live-smlp-product-campaign.ts"
+      ],
+      "consumerPaths": [
+        "docs/recovery/op01-op31-live-smlp-product-campaign-qualified.json"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-live-smlp-product-campaign-20261113.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "Three cycles provide functional parity, not official product-composition performance."
+      ]
+    },
+    {
+      "id": "qualification.native-source-identities-and-runners",
+      "title": "Native source identities and explicit runners",
+      "domain": "qualification",
+      "status": "qualified-harness",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": false
+      },
+      "historicalIdentity": "not-applicable",
+      "contract": "Pin common and candidate component digests, declare explicit A/B by game runners, and keep the measurement transport and scope reproducible.",
+      "implementationPaths": [
+        "scripts/native-loop-region-source-refs.mjs",
+        "scripts/native-loop-joint-channel-official-source-refs.mjs",
+        "scripts/native-loop-explicit-runners.mjs",
+        "scripts/native-loop-session-adapter.mjs"
+      ],
+      "consumerPaths": [
+        "scripts/run-native-region-official-benchmark.mjs",
+        "scripts/run-native-joint-channel-official-benchmark.mjs"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/native-loop-source-refs.json",
+        "docs/recovery/native-loop-runner-manifest.json",
+        "docs/recovery/op01-op31-official-readiness-status.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "Source identities prove the measured reconstruction, not identity with lost historical source."
+      ]
+    },
+    {
+      "id": "qualification.region-official-abba",
+      "title": "Region official ABBA qualification",
+      "domain": "qualification",
+      "status": "qualified-harness",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": true,
+        "productActive": false
+      },
+      "historicalIdentity": "not-applicable",
+      "contract": "Execute the strict sequential ABBA protocol on STCK and SMLP with Region disabled in A and enabled in B, no removed samples, and independent per-game acceptance.",
+      "implementationPaths": [
+        "scripts/measure-native-loop-costs.mjs",
+        "scripts/run-native-region-official-benchmark.mjs",
+        "scripts/native-loop-region-benchmark-runners.mjs"
+      ],
+      "consumerPaths": [
+        "scripts/check-op01-op31-c7-readiness.mjs"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-official-readiness-status.md"
+      ],
+      "performanceProofPaths": [
+        "docs/recovery/lot9b-official-abba-performance-qualified.json",
+        "docs/recovery/lot9b-official-abba-performance-qualified.md"
+      ],
+      "limitations": [
+        "Qualifies the native Region hook, not the complete active browser product composition."
+      ]
+    },
+    {
+      "id": "qualification.region-real-corpora-parity",
+      "title": "Region real-corpus and Worker/Pyodide parity",
+      "domain": "qualification",
+      "status": "qualified-harness",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": false
+      },
+      "historicalIdentity": "not-applicable",
+      "contract": "Run public ACTION6 Region evidence on STCK and SMLP and preserve matching Worker/Pyodide behavior.",
+      "implementationPaths": [
+        "scripts/native-loop-region-action6-corpus.mjs",
+        "scripts/native-loop-region-public-action6-probe.mjs",
+        "scripts/native-loop-region-candidate-hook.mjs"
+      ],
+      "consumerPaths": [
+        "scripts/native-loop-region-benchmark-runners.mjs"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/lot9b-region-action6-corpus-qualification.md",
+        "docs/recovery/lot9b-worker-pyodide-parity.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "Parity is bounded to the declared public corpus and transport."
+      ]
+    }
+  ]
+}

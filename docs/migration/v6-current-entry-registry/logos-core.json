@@ -1,0 +1,250 @@
+{
+  "version": 1,
+  "kind": "v6-current-reconstruction-entry-fragment",
+  "name": "logos-core",
+  "domains": [
+    "logos-core"
+  ],
+  "entries": [
+    {
+      "id": "logos.common-campaign-owner",
+      "title": "Common campaign owner",
+      "domain": "logos-core",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Collect peer owner proposals, preserve ambiguity, authorize one selected OP18/OP28 action, and route one correlated return.",
+      "implementationPaths": [
+        "src/logos-engine/v6-common-campaign-owner.ts"
+      ],
+      "consumerPaths": [
+        "src/runtime/v6-browser-common-campaign-host.ts",
+        "src/runtime/v6-common-campaign-decision-port.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-common-campaign-owner-20261112.md",
+        "docs/migration/op01-op31-progress.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "No implicit priority between independent owners."
+      ]
+    },
+    {
+      "id": "logos.composition-engine",
+      "title": "Composition engine",
+      "domain": "logos-core",
+      "status": "qualified-library",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": false
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Build bounded composition bundles while preserving explicit objectives, evidence, preconditions, actions, and protected references.",
+      "implementationPaths": [
+        "src/logos-engine/v6-composition-engine.ts"
+      ],
+      "consumerPaths": [
+        "src/logos-engine/v6-native-authority.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-core-coverage-status.md",
+        "docs/migration/op01-op31-progress.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "A calculable composition is not counted as a product call unless a consumer is separately proven."
+      ]
+    },
+    {
+      "id": "logos.native-authority",
+      "title": "Native Logos authority",
+      "domain": "logos-core",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Validate the observation identity and release only an admitted OP18 or OP28 bundle whose action remains available and whose guards hold.",
+      "implementationPaths": [
+        "src/logos-engine/v6-native-authority.ts"
+      ],
+      "consumerPaths": [
+        "src/logos-engine/v6-common-campaign-owner.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-official-readiness-status.md",
+        "docs/migration/op01-op31-progress.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "Authority qualification does not imply every operation family is active in the product."
+      ]
+    },
+    {
+      "id": "logos.neutral-common-caller",
+      "title": "Neutral common caller",
+      "domain": "logos-core",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Ask explicit owners for proposals without hidden ranking and preserve none, pending, blocked, and ambiguous outcomes.",
+      "implementationPaths": [
+        "src/logos-engine/v6-neutral-common-caller.ts"
+      ],
+      "consumerPaths": [
+        "src/logos-engine/v6-common-campaign-owner.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-common-campaign-owner-20261112.md",
+        "docs/migration/op01-op31-progress.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "No owner receives a default priority."
+      ]
+    },
+    {
+      "id": "logos.op01-op31-family",
+      "title": "OP01 to OP31 calculation family",
+      "domain": "logos-core",
+      "status": "qualified-library",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": false
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Expose all 31 operation calculations with conservative unknown, incomplete, refuted, and blocked semantics.",
+      "implementationPaths": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "consumerPaths": [
+        "src/logos-engine/v6-composition-engine.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-core-coverage-status.md",
+        "docs/migration/op01-op31-progress.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "Counted once as one calculation family, not as 31 active product entry points.",
+        "Does not prove that every operation is called or decision-relevant."
+      ]
+    },
+    {
+      "id": "logos.operation-cache-cycle-trace",
+      "title": "Operation cache, cycle, and trace diagnostics",
+      "domain": "logos-core",
+      "status": "qualified-library",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": false
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Provide bounded operation memoization, cycle handling, and diagnostic trace facilities without enabling expensive tracing globally.",
+      "implementationPaths": [
+        "src/logos-engine/v6-operation-cache.ts",
+        "src/logos-engine/v6-operation-cycle.ts",
+        "src/logos-engine/v6-operation-trace.ts"
+      ],
+      "consumerPaths": [
+        "scripts/measure-op01-op31-core-costs.mjs",
+        "scripts/check-op01-op31-call-sites.mjs"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-fast-counters-status.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "Detailed trace is diagnostic and is not enabled in the normal product loop.",
+        "A cache without a demonstrated hit is not treated as a product speedup."
+      ]
+    },
+    {
+      "id": "logos.selected-return-correlation",
+      "title": "Selected-return correlation and acquisition",
+      "domain": "logos-core",
+      "status": "product-active",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": true
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Bind the physical return to the selected need and proposal, reject duplicates, and settle acquisition before the next decision.",
+      "implementationPaths": [
+        "src/logos-engine/v6-common-campaign-owner.ts",
+        "src/logos-engine/v6-joint-channel-owner.ts"
+      ],
+      "consumerPaths": [
+        "src/runtime/v6-browser-common-campaign-host.ts",
+        "src/runtime/v6-common-campaign-decision-port.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-browser-addressed-acquisition-20261113.md",
+        "docs/recovery/op01-op31-live-smlp-product-campaign-20261113.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "Correlation proves routing, not historical source identity."
+      ]
+    },
+    {
+      "id": "logos.target-binding",
+      "title": "Target binding",
+      "domain": "logos-core",
+      "status": "qualified-library",
+      "current": {
+        "implemented": true,
+        "consumed": true,
+        "functionallyQualified": true,
+        "performanceQualified": false,
+        "productActive": false
+      },
+      "historicalIdentity": "unresolved",
+      "contract": "Bind a candidate target and action to the current observation revision without inventing equivalence or access.",
+      "implementationPaths": [
+        "src/logos-engine/v6-target-binding.ts"
+      ],
+      "consumerPaths": [
+        "src/logos-engine/v6-native-authority.ts"
+      ],
+      "functionalProofPaths": [
+        "docs/recovery/op01-op31-core-coverage-status.md",
+        "docs/migration/op01-op31-progress.md"
+      ],
+      "performanceProofPaths": [],
+      "limitations": [
+        "Product use remains limited to the consumers explicitly recorded in the operation audit."
+      ]
+    }
+  ]
+}

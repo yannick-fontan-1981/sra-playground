@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "kind": "v6-current-reconstruction-entry-registry",
+  "generatedOn": "2026-11-13",
+  "repository": "yannick-fontan-1981/sra-playground",
+  "canonicalBranch": "recovery/site109-reconstruction-20261112",
+  "auditedBaseCommit": "fa76f1223d9d732a1f37a7f3bf1a8934b383e5c6",
+  "legacyRegistry": {
+    "path": "docs/migration/v6-entry-point-progress.json",
+    "presentInAuditedBase": false,
+    "recreatedAsHistoricalEquivalent": false
+  },
+  "historicalReference": {
+    "site": 109,
+    "nativeVersion": "0.68",
+    "publishedQualifiedCount": 70,
+    "publishedTotalCount": 76,
+    "formerCandidateVersion": "0.69",
+    "formerCandidateQualifiedCount": 71,
+    "unresolvedSourceSha": "d90ce5b64fffa53cca201e2a6a49450fd123f299",
+    "mappingStatus": "unresolved",
+    "comparableToCurrentRegistry": false
+  },
+  "countPolicy": {
+    "unit": "independently consumed current capability boundary",
+    "currentCapabilityStatuses": [
+      "product-active",
+      "qualified-library"
+    ],
+    "qualificationHarnessStatus": "qualified-harness",
+    "excludedStatuses": [
+      "historical-only",
+      "open"
+    ],
+    "historicalComparisonAllowed": false,
+    "notes": [
+      "OP01 to OP31 are counted once as a calculation family; individual calculations are not promoted to entry points without independent consumers.",
+      "Qualification harnesses are tracked separately from current capabilities.",
+      "Historical identity is independent from current functional qualification.",
+      "The current capability count must never be presented as a numerator over the historical denominator 76."
+    ]
+  },
+  "entryFiles": [
+    "docs/migration/v6-current-entry-registry/field-stock.json",
+    "docs/migration/v6-current-entry-registry/joint-channels.json",
+    "docs/migration/v6-current-entry-registry/logos-core.json",
+    "docs/migration/v6-current-entry-registry/op28-product.json",
+    "docs/migration/v6-current-entry-registry/qualification.json",
+    "docs/migration/v6-current-entry-registry/recovery-historical.json",
+    "docs/migration/v6-current-entry-registry/region.json",
+    "docs/migration/v6-current-entry-registry/runtime.json"
+  ],
+  "summary": {
+    "totalEntries": 44,
+    "currentCapabilityEntries": 32,
+    "productActiveEntries": 24,
+    "qualifiedLibraryEntries": 8,
+    "qualificationHarnessEntries": 6,
+    "performanceQualifiedEntries": 2,
+    "historicalOnlyEntries": 1,
+    "openEntries": 5,
+    "historicalIdentityResolvedEntries": 0
+  }
+}
