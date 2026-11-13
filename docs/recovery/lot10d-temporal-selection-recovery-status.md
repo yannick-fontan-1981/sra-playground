@@ -7,7 +7,7 @@ Date : 2026-11-13
 - Lot : **10D / TemporalSelection**
 - Branche : `recovery/lot10d-temporal-selection-rebased-20261112`
 - Baseline de report : `recovery/site109-reconstruction-20261112` au commit `24fcdbb16c93de59489a6bb0392cc709b7a75d14`
-- Tête canonique parallèle observée après ce jalon : `d7ba12eef7063cf86dfa55f43879c29bc1dfa87d`
+- Tête canonique parallèle observée après ce jalon : `90cb819f028aea315fdbba9774a22fb345bcfb81`
 
 La divergence parallèle n'est pas une intégration. Aucune parité complète avec Site 109 / native 0.68 n'est revendiquée.
 
@@ -38,129 +38,156 @@ Les briques présentes sont maintenant :
 9. audit des gates d'éligibilité ACT ;
 10. binding attribué d'un candidat `AgentAction` préparé ;
 11. permis ACT ordinaire lié à une lease de concentration validée ;
-12. consommation ACT ordinaire, transition de lease et révocation terminale.
+12. consommation ACT ordinaire, transition de lease et révocation terminale ;
+13. `ActionBoundary` durable jusqu'au dispatch enregistré et à l'observation acquise.
 
 Derniers fichiers ajoutés :
 
-- `src/runtime/v6-temporal-act-consumption.ts`
-- `tests/v6-temporal-act-consumption.test.ts`
-- `docs/recovery/lot10d-temporal-act-consumption.md`
+- `src/runtime/v6-temporal-action-boundary.ts`
+- `tests/v6-temporal-action-boundary.test.ts`
+- `docs/recovery/lot10d-temporal-action-boundary.md`
 
-## Consommation ACT ordinaire reconstruite
+## Chaîne publique qualifiée
 
-La chaîne publique qualifiée atteint désormais :
+La chaîne reconstruite atteint désormais :
 
-`TemporalSelection -> intent préparé -> binding action -> audit ACT -> permis -> consommation ACT`
+`TemporalSelection -> intent préparé -> binding action -> audit ACT -> permis -> consommation ACT -> checkpoint suspendu -> tentative durable -> transport -> dispatch durable`
 
-Le module de consommation relit et revalide :
+Le worker public n'utilise pas encore cette chaîne par défaut.
 
-- le binding préparé ;
-- la lease ;
-- le permis ;
-- la décision TemporalSelection ;
-- l'intent et l'audit ACT ;
-- Source et workflow ;
-- le run/session ;
-- la timeline ;
-- la frame ;
-- la révision et l'identité temporelle ;
-- la séquence et l'empreinte de l'observation publique ;
-- le snapshot pré-action ;
-- les empreintes canoniques courantes du permis et de la lease ;
-- la lease encore validée et non expirée ;
-- l'action encore disponible ;
-- les supports non retirés ;
-- la responsabilité ;
-- les preuves de consommation du but ;
-- la continuation parent ;
-- le transport des contributions ;
-- le contexte canonique d'exécution.
+## `ActionBoundary` reconstruite
 
-Le mapping public courant est explicite :
+Le nouveau composant reçoit uniquement un `ActOutput` déjà consommé et une lease déjà passée à `released`.
 
-- `runRef = sessionId` ;
-- `timelineRef = episodeId` ;
-- `frameRef = observationId` ;
-- `stateRevision = observationRevision` ;
-- le snapshot courant est l'empreinte exacte de l'`AgentObservation`.
+Avant toute tentative ou tout appel externe, il revalide :
 
-Ce mapping ne prétend pas être la sérialisation historique octet pour octet.
+- le fingerprint du binding préparé ;
+- le fingerprint de la lease ;
+- le fingerprint du permis ;
+- le fingerprint du reçu ACT et de sa transition ;
+- l'identité exacte de l'intent, du permis, du reçu ACT et de l'action ;
+- Source, workflow et instance de workflow ;
+- session, timeline, frame et révision ;
+- identité temporelle et snapshot pré-action ;
+- disponibilité courante de l'action ;
+- lease encore `released` ;
+- checkpoint encore suspendu et courant ;
+- responsabilité encore courante ;
+- contexte monde encore courant ;
+- adaptateur environnemental encore courant.
 
-## Issue consommée
+Une divergence provoque un refus avant transport :
 
-Lorsque toutes les revalidations réussissent :
+`not_dispatched_release_refused`
 
-- la lease passe de `validated` à `released` ;
-- le permis devient terminal et non réutilisable ;
-- un `ActOutput` minimal est produit ;
-- le reçu conserve `actionReleased: true`.
+Dans ce cas, aucune tentative n'est persistée et l'adaptateur externe n'est pas appelé.
 
-Dans cette reconstruction, `actionReleased: true` signifie uniquement que l'identité de l'action est relâchée vers la future frontière environnementale.
+## Requête et digest de transport
 
-Le `ActOutput` transporte seulement :
+La requête scelle :
 
-- `actionRef` ;
-- `actionIntentRef` ;
-- `actionReleasePermitRef` ;
-- `dispatchStatus: pending_environment_boundary`.
+- l'adaptateur environnemental ;
+- le checkpoint ;
+- le workflow et son instance ;
+- Source ;
+- session, timeline, frame et révision ;
+- intent, permis et reçu ACT ;
+- identité et payload normalisé de l'action ;
+- séquence d'observation ;
+- snapshot pré-action ;
+- contexte monde.
 
-Il ne contient ni `AgentAction`, ni coordonnées, ni cible exécutable.
+Le `AgentAction` n'est réhydraté qu'au moment de construire cette requête. Il n'est pas ajouté au reçu ACT ni au reçu durable de dispatch.
 
-Le reçu conserve donc :
+## Ordre durable qualifié
 
-- `actionPayloadPresent: false` ;
-- `environmentDispatchAuthorized: false` ;
-- `actAuthorized: false` après consommation terminale.
+L'ordre suivant est imposé :
 
-## Révocation terminale
+1. construire la requête ;
+2. construire la tentative ;
+3. persister la tentative ;
+4. relire et valider la tentative persistée ;
+5. appeler le transport externe ;
+6. valider la réponse ;
+7. construire le dispatch ;
+8. persister le dispatch ;
+9. relire et valider le dispatch persisté.
 
-Une divergence courante produit un reçu terminal de révocation, avec transition :
+La tentative existe donc durablement avant le premier appel externe.
 
-- `validated -> invalidated` ;
-- ou `validated -> expired` lorsque la fenêtre est écoulée.
+## Résultat inconnu et interdiction de redélivrer
 
-Les causes qualifiées incluent notamment :
+Une tentative existante sans dispatch durable est classée :
 
-- Source, run, timeline ou frame modifiés ;
-- révision, identité temporelle, séquence ou snapshot modifiés ;
-- permis ou lease non canoniques ;
-- expiration ;
-- lease qui n'est plus validée ;
-- action indisponible ;
-- support retiré ;
-- responsabilité, consommation du but, continuation parent, contribution ou contexte d'exécution non courants.
+`unknown`
 
-Une révocation persistée reste terminale même si un appel ultérieur présente de nouveau des faits valides.
+Dans cet état :
 
-## Journal d'unicité
+- `redeliveryPermitted: false` ;
+- `reconciliationRequired: true` ;
+- aucun second appel de transport n'est effectué ;
+- le journal de tentative est conservé ;
+- aucun faux succès n'est produit.
 
-Le journal de consommation ACT est borné et fail-closed :
+Cette règle couvre notamment :
+
+- l'erreur ou la perte de connexion du transport ;
+- le crash après un possible effet externe ;
+- une réponse aux identités modifiées ;
+- une observation invalide ;
+- le crash avant persistance du dispatch ;
+- l'échec de persistance du dispatch.
+
+La reconstruction est donc qualifiée pour l'envoi **au plus une fois** et l'absence de redélivrance automatique. La garantie historique complète dite « exactly-once » reste incomplète tant que la réconciliation externe d'un résultat `unknown` n'est pas reconstruite.
+
+## Dispatch durable et observation acquise
+
+Lorsqu'une réponse valide est persistée :
+
+- une tentative et un dispatch exacts sont liés ;
+- les digests de requête et de réponse sont conservés ;
+- l'événement environnemental, l'intent, le permis et le reçu ACT restent liés ;
+- l'observation acquise et son fingerprint sont conservés ;
+- `redeliveryPermitted` reste `false` ;
+- `causalResumeAuthorized` reste `false` ;
+- `workflowResumed` reste `false`.
+
+Rejouer la même demande réutilise le dispatch déjà enregistré :
+
+- aucun nouvel appel externe ;
+- aucune nouvelle tentative ;
+- aucune nouvelle persistance ;
+- même résultat durable.
+
+L'observation est donc acquise comme donnée durable, mais elle n'est pas encore qualifiée pour reprendre causalement le workflow.
+
+## Journal `ActionBoundary`
+
+Le journal est borné et fail-closed :
 
 - capacité par défaut : 128 ;
 - maximum configurable : 1024 ;
-- une seule identité terminale par permis ;
-- le replay exact retourne le même reçu sans second `ActOutput` ;
-- le même `permitRef` avec une autre empreinte est refusé ;
-- aucun reçu n'est supprimé silencieusement lorsque le journal est plein ;
-- les snapshots restaurés refusent doublons et altérations.
+- identités de tentative, dispatch et digest uniques ;
+- aucune éviction silencieuse ;
+- restauration avec validation des fingerprints ;
+- rejet d'une observation acquise altérée ;
+- rejet d'un dispatch sans tentative exacte ;
+- rejet d'une tentative réutilisée avec un autre contexte monde ou une autre lignée.
 
-Cette unicité couvre la consommation ACT du permis. Elle ne remplace pas l'envoi exactement une fois de l'environnement.
+## Séparation des autorités conservée
 
-## Séparation avec `ActionBoundary`
+Le jalon distingue toujours :
 
-Le jalon courant ne transporte aucune action au jeu.
+1. le permis ACT ;
+2. la consommation ACT et la transition de lease ;
+3. le checkpoint suspendu ;
+4. la tentative durable ;
+5. l'appel externe ;
+6. le dispatch durable ;
+7. la qualification causale de l'observation ;
+8. la reprise du workflow.
 
-Restent distincts :
-
-1. le checkpoint suspendu exact ;
-2. la revalidation scheduler avant transport ;
-3. le digest de requête couvrant intent, permis, contexte et adaptateur ;
-4. la tentative durable persistée avant l'appel externe ;
-5. l'envoi exactement une fois ;
-6. le résultat incertain qui interdit toute redélivrance automatique ;
-7. le dispatch enregistré et réutilisable ;
-8. l'acquisition de l'observation ;
-9. la reprise et la réconciliation causales.
+Les six premières frontières sont maintenant reconstruites pour le chemin ordinaire à action unique. Les deux dernières restent ouvertes.
 
 Le worker public reste :
 
@@ -170,31 +197,33 @@ Le port continue à retourner `undefined`. Le statut global reste donc :
 
 `action_withheld`
 
-jusqu'à qualification de toute la frontière environnementale.
+jusqu'à qualification de la reprise causale et du consommateur runtime final.
 
 ## Qualification GitHub CI
 
-Commit de code et de donneurs qualifié :
+Commit qualifié sur un workflow propre :
 
-`ad3437f87f8ea490b1bf1575fe0a1ffba5b1ef70`
+`858250b6c4ed0a5586da4e000f34611e64293049`
 
 Run GitHub Actions :
 
-`43359714683`
+`43364028953`
 
 Résultat :
 
-- **225 tests** ;
-- **225 réussis** ;
+- **240 tests** ;
+- **240 réussis** ;
 - **0 échec** ;
 - 0 annulé, ignoré ou todo ;
-- typecheck TypeScript strict réussi.
+- typecheck TypeScript strict réussi ;
+- aucune étape de migration automatique ;
+- aucune permission GitHub d'écriture dans la CI de qualification.
 
-Le jalon ajoute au précédent total de 202 :
+Le jalon ajoute au précédent total de 225 :
 
-- 20 tests fonctionnels de consommation et révocation ACT ;
-- 3 contrôles anti-dérive supplémentaires des donneurs ;
-- le typecheck strict du nouveau module.
+- 15 tests fonctionnels de `ActionBoundary` ;
+- le typecheck strict du nouveau module ;
+- les régressions worker, runtime V6, Logos et TemporalSelection existantes.
 
 `npm ci` signale toujours deux vulnérabilités de sévérité élevée dans les dépendances de la baseline. Aucune correction forcée n'a été appliquée dans ce lot, car elle toucherait un périmètre partagé qui exige une qualification séparée.
 
@@ -206,11 +235,12 @@ Ne sont toujours pas reconstruits ou qualifiés :
 - l'ancien state machine Site 109 ;
 - le producteur public des domaines et candidats ;
 - le producteur historique exact du mapping `selectedRef -> AgentAction` ;
-- `ActionBoundary` et son checkpoint suspendu ;
-- le journal de tentative de transport ;
-- l'envoi environnemental exactement une fois ;
-- la récupération d'un résultat de transport incertain ;
-- l'acquisition et la reprise causale ;
+- la réconciliation externe d'une tentative `unknown` ;
+- la preuve externe qu'un effet incertain a ou n'a pas eu lieu ;
+- la qualification causale de l'observation acquise ;
+- la reprise du checkpoint suspendu ;
+- la réconciliation du workflow après dispatch ;
+- le consommateur runtime final ;
 - les séries pré-déclarées ;
 - l'acquisition différée de concentration ;
 - la position dans le runtime commun ;
@@ -232,16 +262,20 @@ Critère conservé :
 
 ## Prochaine étape
 
-Reconstruire `ActionBoundary` à partir du `ActOutput` minimal :
+Reconstruire la reprise causale à partir d'un dispatch durable :
 
-1. relire le checkpoint suspendu et les mêmes intent, permis et reçu ACT ;
-2. revalider Source, révision, snapshot, responsabilité et lease libérée ;
-3. construire le digest exact de la requête de transport ;
-4. persister la tentative avant l'appel externe ;
-5. interdire une redélivrance après résultat inconnu ;
-6. réutiliser un dispatch déjà enregistré ;
-7. valider la réponse contre les identités de dispatch, intent et permis ;
-8. acquérir l'observation causale ;
-9. reprendre et réconcilier le workflow sans faux succès.
+`dispatch durable -> observation acquise -> qualification causale -> reprise du checkpoint -> réconciliation du workflow`
+
+La prochaine qualification devra :
+
+1. relire la tentative et le dispatch exacts ;
+2. préserver dispatch, événement environnemental, intent, permis et reçu ACT ;
+3. vérifier l'identité, la chronologie et le fingerprint de l'observation acquise ;
+4. prouver que l'observation appartient à l'effet du dispatch courant ;
+5. autoriser une seule reprise du checkpoint ;
+6. empêcher une double consommation de l'observation ;
+7. reprendre le workflow avec la même chaîne causale ;
+8. maintenir une tentative `unknown` hors du chemin de succès ;
+9. ne jamais convertir une absence de preuve externe en succès par défaut.
 
 Le worker restera en `action_withheld` tant que cette chaîne n'est pas entièrement qualifiée.
