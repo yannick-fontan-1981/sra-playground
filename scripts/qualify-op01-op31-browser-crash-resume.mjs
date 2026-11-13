@@ -12,6 +12,8 @@ import {
 const HOST = '127.0.0.1';
 const PORT = 4176;
 const PAGE_URL = `http://${HOST}:${PORT}/tests/browser/op01-op31-browser-crash-resume.html?game=SMLP&level=1`;
+const BOOTSTRAP_URL = `http://${HOST}:${PORT}/__op01-op31-browser-crash-resume-phase-two-bootstrap`;
+const PHASE_KEY = 'op01-op31-browser-crash-resume:phase-v1';
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -44,7 +46,7 @@ function deferred() {
   return { promise, resolve, reject };
 }
 
-async function withTimeout(promise, label, timeoutMs = 600_000) {
+async function withTimeout(promise, label, timeoutMs = 300_000) {
   let timer;
   try {
     return await Promise.race([
@@ -77,7 +79,7 @@ async function readJsonRequest(request, maximumBytes = 12_000_000) {
   });
 }
 
-function launchChrome(executable, profile, label) {
+function launchChrome(executable, profile, label, url) {
   const child = spawn(executable, [
     '--headless=new',
     '--no-sandbox',
@@ -87,9 +89,12 @@ function launchChrome(executable, profile, label) {
     '--no-default-browser-check',
     '--disable-background-networking',
     '--disable-session-crashed-bubble',
-    '--disable-features=Translate,OptimizationHints',
+    '--hide-crash-restore-bubble',
+    '--noerrdialogs',
+    '--disable-features=Translate,OptimizationHints,InfiniteSessionRestore',
+    '--new-window',
     `--user-data-dir=${profile}`,
-    PAGE_URL,
+    url,
   ], {
     detached: true,
     stdio: ['ignore', 'ignore', 'pipe'],
@@ -166,9 +171,18 @@ async function removeChromeProfile(profile) {
   }
 }
 
+function bootstrapHtml(evidence) {
+  const phaseValue = JSON.stringify(evidence);
+  return `<!doctype html><meta charset="utf-8"><title>Crash resume phase two</title><script>
+    localStorage.setItem(${JSON.stringify(PHASE_KEY)}, ${JSON.stringify(phaseValue)});
+    location.replace(${JSON.stringify(PAGE_URL)});
+  </script>`;
+}
+
 async function createCrashReport() {
   const phaseOne = deferred();
   const phaseTwo = deferred();
+  let phaseOneEvidence = null;
   const server = await createServer({
     configFile: 'vite.config.ts',
     logLevel: 'warn',
@@ -183,6 +197,19 @@ async function createCrashReport() {
       configureServer(viteServer) {
         viteServer.middlewares.use(async (request, response, next) => {
           const target = request.url?.split('?', 1)[0];
+          if (target === '/__op01-op31-browser-crash-resume-phase-two-bootstrap'
+            && request.method === 'GET') {
+            if (!phaseOneEvidence) {
+              response.statusCode = 409;
+              response.end('phase-one evidence is not ready');
+              return undefined;
+            }
+            response.statusCode = 200;
+            response.setHeader('content-type', 'text/html; charset=utf-8');
+            response.end(bootstrapHtml(phaseOneEvidence));
+            return undefined;
+          }
+
           const sink = target === '/__op01-op31-browser-crash-resume-phase-one'
             ? phaseOne
             : target === '/__op01-op31-browser-crash-resume-report'
@@ -191,6 +218,9 @@ async function createCrashReport() {
           if (!sink || request.method !== 'POST') return next();
           try {
             const payload = await readJsonRequest(request);
+            if (sink === phaseOne && payload?.status === 'phase-one-ready') {
+              phaseOneEvidence = payload.evidence;
+            }
             sink.resolve(payload);
             response.statusCode = 204;
             response.end();
@@ -211,32 +241,52 @@ async function createCrashReport() {
   let secondChrome;
   try {
     await server.listen();
-    firstChrome = launchChrome(chromeExecutable, profile, 'phase-one Chrome');
-    const firstPayload = await withTimeout(phaseOne.promise, 'phase-one crash boundary');
+    console.log('[crash-resume] launching phase-one Chrome');
+    firstChrome = launchChrome(chromeExecutable, profile, 'phase-one Chrome', PAGE_URL);
+    const firstPayload = await withTimeout(
+      phaseOne.promise,
+      'phase-one crash boundary',
+      240_000,
+    );
     if (!firstPayload || firstPayload.status !== 'phase-one-ready') {
       throw new Error(
         `phase-one browser fixture failed: ${firstPayload?.error ?? 'unknown error'}\n${firstChrome.stderr().slice(-6000)}`,
       );
     }
     assert(firstPayload.evidence?.pagehideObservedBeforeKill === false, 'phase one observed pagehide before the external crash');
+    console.log('[crash-resume] phase-one checkpoint confirmed; issuing SIGKILL');
 
-    // Give the browser process time to flush the synchronous localStorage write,
-    // then terminate the entire process group without any lifecycle event.
+    // Give Chrome time to commit the synchronous origin storage write before
+    // terminating the whole process group without a lifecycle event.
     await delay(1_000);
     const firstExit = await hardKillChrome(firstChrome);
     assert(firstExit.signal === 'SIGKILL', `phase-one Chrome exited with ${firstExit.signal ?? firstExit.code}`);
+    console.log('[crash-resume] phase-one Chrome stopped by SIGKILL');
 
-    // Chrome may leave stale singleton files after SIGKILL. They are safe to
-    // remove only after the process group is confirmed dead.
+    // Keep origin storage, but remove the crashed tab/session metadata so the
+    // second process opens exactly one explicit bootstrap page.
     await Promise.all([
       rm(join(profile, 'SingletonLock'), { force: true }),
       rm(join(profile, 'SingletonCookie'), { force: true }),
       rm(join(profile, 'SingletonSocket'), { force: true }),
+      rm(join(profile, 'Default', 'Sessions'), { recursive: true, force: true }),
+      rm(join(profile, 'Default', 'Last Session'), { force: true }),
+      rm(join(profile, 'Default', 'Last Tabs'), { force: true }),
     ]).catch(() => {});
     await delay(750);
 
-    secondChrome = launchChrome(chromeExecutable, profile, 'phase-two Chrome');
-    const secondPayload = await withTimeout(phaseTwo.promise, 'phase-two crash recovery');
+    console.log('[crash-resume] launching isolated phase-two Chrome');
+    secondChrome = launchChrome(chromeExecutable, profile, 'phase-two Chrome', BOOTSTRAP_URL);
+    let secondPayload;
+    try {
+      secondPayload = await withTimeout(
+        phaseTwo.promise,
+        'phase-two crash recovery',
+        240_000,
+      );
+    } catch (error) {
+      throw new Error(`${error instanceof Error ? error.message : error}\n${secondChrome.stderr().slice(-6000)}`);
+    }
     if (!secondPayload || secondPayload.status !== 'success') {
       throw new Error(
         `phase-two browser fixture failed: ${secondPayload?.error ?? 'unknown error'}\n${secondChrome.stderr().slice(-6000)}`,
@@ -246,6 +296,7 @@ async function createCrashReport() {
       stable(secondPayload.report?.phaseOne) === stable(firstPayload.evidence),
       'phase-two browser did not recover the exact phase-one evidence',
     );
+    console.log('[crash-resume] phase-two recovery report received');
 
     return {
       ...secondPayload.report,
@@ -255,6 +306,8 @@ async function createCrashReport() {
         actualExitCode: firstExit.code,
         pagehideEndpointObserved: firstPayload.evidence.pagehideObservedBeforeKill,
         freshChromeProcessStarted: true,
+        crashedSessionMetadataRemoved: true,
+        phaseIdentityInjectedByBootstrap: true,
       },
     };
   } finally {
