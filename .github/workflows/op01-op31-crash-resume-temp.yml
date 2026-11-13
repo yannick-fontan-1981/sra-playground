@@ -40,6 +40,79 @@ jobs:
               compile(source, str(patch_file), 'exec'),
               {'__file__': str(patch_file), '__name__': '__main__'},
           )
+
+          qualifier_path = Path('scripts/qualify-op01-op31-browser-crash-resume.mjs')
+          qualifier = qualifier_path.read_text(encoding='utf-8')
+
+          old = "  const phaseReady = deferred();\n  const finalReport = deferred();\n"
+          new = """  const phaseReady = deferred();
+            const repeatedPhaseReady = deferred();
+            const finalReport = deferred();
+            let phaseReadyCount = 0;
+            const phaseReadyTarget = {
+              resolve(payload) {
+                phaseReadyCount += 1;
+                if (phaseReadyCount === 1) phaseReady.resolve(payload);
+                else repeatedPhaseReady.resolve(payload);
+              },
+              reject(error) {
+                phaseReady.reject(error);
+                repeatedPhaseReady.reject(error);
+              },
+            };
+          """
+          assert qualifier.count(old) == 1
+          qualifier = qualifier.replace(old, new)
+
+          old = "        viteServer.middlewares.use(PHASE_READY_PATH, bodyEndpoint(phaseReady));\n"
+          new = "        viteServer.middlewares.use(PHASE_READY_PATH, bodyEndpoint(phaseReadyTarget));\n"
+          assert qualifier.count(old) == 1
+          qualifier = qualifier.replace(old, new)
+
+          old = "    assert(firstPayload?.dispatchCheckpointSaved === true, 'phase one did not persist at physical dispatch');\n\n    await killProcessGroup(firstChrome);\n"
+          new = """    assert(firstPayload?.dispatchCheckpointSaved === true, 'phase one did not persist at physical dispatch');
+              // localStorage is synchronous in the renderer, but Chrome's profile database flush is asynchronous.
+              // Keep the tab alive briefly, without navigation or pagehide, before the deliberate process crash.
+              await delay(3_000);
+
+              await killProcessGroup(firstChrome);
+          """
+          assert qualifier.count(old) == 1
+          qualifier = qualifier.replace(old, new)
+
+          old = """    secondChrome = spawnChrome(profile, stderr);
+              const payload = await Promise.race([
+                finalReport.promise,
+                delay(600_000).then(() => {
+                  throw new Error(`phase-two crash reconstruction timed out\\n${stderr.join('').slice(-6000)}`);
+                }),
+              ]);
+              if (!payload || payload.status !== 'success') {
+          """
+          new = """    secondChrome = spawnChrome(profile, stderr);
+              const phaseTwoOutcome = await Promise.race([
+                finalReport.promise.then(payload => ({ kind: 'report', payload })),
+                repeatedPhaseReady.promise.then(payload => ({ kind: 'restarted-phase-one', payload })),
+                delay(600_000).then(() => {
+                  throw new Error(`phase-two crash reconstruction timed out\\n${stderr.join('').slice(-6000)}`);
+                }),
+              ]);
+              if (phaseTwoOutcome.kind === 'restarted-phase-one') {
+                throw new Error(
+                  `second Chrome restarted phase one instead of restoring durable state: ${JSON.stringify(phaseTwoOutcome.payload)}`,
+                );
+              }
+              const payload = phaseTwoOutcome.payload;
+              if (!payload || payload.status !== 'success') {
+          """
+          assert qualifier.count(old) == 1
+          qualifier = qualifier.replace(old, new)
+
+          old = "    '--disable-background-networking',\n"
+          new = "    '--disable-background-networking',\n    '--disable-session-crashed-bubble',\n"
+          assert qualifier.count(old) == 1
+          qualifier = qualifier.replace(old, new)
+          qualifier_path.write_text(qualifier, encoding='utf-8')
           PY
       - name: Build production bundle
         run: npm run build
