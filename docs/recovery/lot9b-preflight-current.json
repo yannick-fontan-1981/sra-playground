@@ -80,22 +80,29 @@
       "passed": 8,
       "failed": 0
     },
-    "total_unique_targeted_tests": 99,
-    "total_unique_targeted_passed": 99,
-    "total_unique_targeted_failed": 0
+    "total_unique_targeted_tests": 108,
+    "total_unique_targeted_passed": 108,
+    "total_unique_targeted_failed": 0,
+    "native_session_adapter": {
+      "tests": 9,
+      "passed": 9,
+      "failed": 0
+    }
   },
   "official_069_prerequisites": {
     "missing_files": [],
     "missing_capabilities": [
       "justified methodRef producer/binder for public Region evidence",
       "worker decision port that connects public perception to owner contexts",
-      "historical/official STCK and SMLP native runSession implementation and corpus",
+      "four explicit native runners A/STCK, A/SMLP, B/STCK, B/SMLP with durable corpus and qualified timing scope",
       "official performance measurement"
     ]
   },
   "ready_for_official_069_benchmark": false,
-  "status": "fonctionnellement qualifié pour noyau V6, Region, owner, caller neutre, transport worker, delta public, helper de campagne et protocole ABBA; runner natif STCK/SMLP et performance officielle à confirmer",
-  "note": "The cost harness and reconstruction roadmap are durable on GitHub. Official STCK/SMLP runSession/corpus and current entry-point registry remain unqualified.",
+  "status": "fonctionnellement qualifié jusqu'au protocole ABBA et à l'adaptateur runSession explicite; quatre runners natifs STCK/SMLP et performance officielle à confirmer",
+  "note": "The native session adapter owns neither timing nor corpus and has no fallback. Official measurement remains blocked on explicit A/B × STCK/SMLP runners.",
   "roadmap_path": "docs/migration/v6-delivery-roadmap.md",
-  "roadmap_reconstructed": true
+  "roadmap_reconstructed": true,
+  "native_session_adapter_path": "scripts/native-loop-session-adapter.mjs",
+  "native_session_adapter_qualified": true
 }
