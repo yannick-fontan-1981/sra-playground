@@ -15,13 +15,14 @@ import { slotTransferId } from './slot-transfer.ts';
 import { remoteSupportRouteId } from './remote-support-route.ts';
 import { occurrenceRecallId } from './occurrence-recall.ts';
 import { slotPermutationId } from './slot-permutation.ts';
+import { surfaceCopyId } from './surface-copy.ts';
 
 export const standalonePlanningGroups = [
   { id: 'repair_visible_field', families: [fieldRepairId, orderedContactId, supportTransferId] },
   { id: 'inspect_candidate_relations', families: [subsetExperimentId, framedContactId, transportContactId] },
   { id: 'coordinate_visible_motion', families: [bandAlignmentId, sharedArrivalId, outlineServiceId] },
   { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId] },
-  { id: 'apply_learned_relations', families: [remoteSupportRouteId, occurrenceRecallId, slotPermutationId] },
+  { id: 'apply_learned_relations', families: [remoteSupportRouteId, occurrenceRecallId, slotPermutationId, surfaceCopyId] },
   { id: 'explore_available_inputs', families: [cavityAccessId, publicInputExplorationId] },
 ] as const;
 
