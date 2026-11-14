@@ -66,6 +66,7 @@ import { nestedPassageId } from './nested-passage.ts';
 import { translateCoupledPiecesId } from './translate-coupled-pieces.ts';
 import { stagedMarksId } from './staged-marks.ts';
 import { moveMaskedPiecesId } from './move-masked-pieces.ts';
+import { linkOpeningsId } from './link-openings.ts';
 import { learnCorrespondenceId, learnCorrespondenceStrategies } from './learn-correspondence.ts';
 import { glyphEditingId, glyphEditingStrategies } from './glyph-editing.ts';
 import { fieldIsolationId, fieldIsolationStrategies } from './field-isolation.ts';
@@ -483,7 +484,7 @@ export function readNativeResolution(agent: {
                                         : family === traceCoverageId ? traceCoverageStrategies : family === radialConnectionId ? radialConnectionStrategies
                                           : family === invitedCaptureId ? invitedCaptureStrategies : family === branchAlignmentId ? branchAlignmentStrategies
                                             : family === feedbackTrialId ? feedbackTrialStrategies : family === catalogueComparisonId ? catalogueComparisonStrategies
-                                              : family === receptionAccessId ? receptionAccessStrategies : family === markerCoverageId ? markerCoverageStrategies : family === framedReceptionId ? framedReceptionStrategies : family === windowRelationId ? windowRelationStrategies : family === animationContactId ? animationContactStrategies : family === reflectedPlacementId ? reflectedPlacementStrategies : family === materialAssemblyId ? materialAssemblyStrategies : family === coupledMotionId ? coupledMotionStrategies : family === materialRouteId ? materialRouteStrategies : family === inventoryAccessId || family === replayAccessId || family === orientedDeliveryId || family === indicatedJumpId || family === highlightedRouteId || family === pairedPassageId || family === seatedContactId || family === switchedSurfaceId || family === markedGaugeId || family === reactiveTargetId || family === pairedChannelsId || family === pointReachId || family === linkedMidpointId || family === excavateDescentId || family === gatedCascadeId || family === layeredFitId || family === litRouteId || family === pivotCargoId || family === nestedPassageId || family === translateCoupledPiecesId || family === stagedMarksId || family === moveMaskedPiecesId ? inventoryAccessStrategies : family === learnCorrespondenceId ? learnCorrespondenceStrategies : null;
+                                              : family === receptionAccessId ? receptionAccessStrategies : family === markerCoverageId ? markerCoverageStrategies : family === framedReceptionId ? framedReceptionStrategies : family === windowRelationId ? windowRelationStrategies : family === animationContactId ? animationContactStrategies : family === reflectedPlacementId ? reflectedPlacementStrategies : family === materialAssemblyId ? materialAssemblyStrategies : family === coupledMotionId ? coupledMotionStrategies : family === materialRouteId ? materialRouteStrategies : family === inventoryAccessId || family === replayAccessId || family === orientedDeliveryId || family === indicatedJumpId || family === highlightedRouteId || family === pairedPassageId || family === seatedContactId || family === switchedSurfaceId || family === markedGaugeId || family === reactiveTargetId || family === pairedChannelsId || family === pointReachId || family === linkedMidpointId || family === excavateDescentId || family === gatedCascadeId || family === layeredFitId || family === litRouteId || family === pivotCargoId || family === nestedPassageId || family === translateCoupledPiecesId || family === stagedMarksId || family === moveMaskedPiecesId || family === linkOpeningsId ? inventoryAccessStrategies : family === learnCorrespondenceId ? learnCorrespondenceStrategies : null;
   const card = planReceipt?.authority === 'sicOnly' && labels ? record(proposal?.sicSituationCard) : null;
   const isSituationStrategy = (id: unknown): id is keyof typeof situationStrategies =>
     typeof id === 'string' && !!labels && Object.hasOwn(labels, id);
@@ -742,6 +743,16 @@ export function readNativeResolution(agent: {
     for (const [field, label] of [['target', 'Cell under test'], ['source', 'Cell supporting the prediction']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
+    }
+  }
+  if (situationCard && family === linkOpeningsId) {
+    for (const [field, label] of [['actor', 'Moving sprite'], ['target', 'Current target'], ['exit', 'Exit']] as const) {
+      const box = bounds(card?.[field]);
+      if (box) subjects.push({ label, box });
+    }
+    if (Array.isArray(card?.openings)) for (const opening of card.openings) {
+      const box = bounds(opening);
+      if (box) subjects.push({ label: 'Linked opening', box });
     }
   }
   if (situationCard && family === moveMaskedPiecesId) {
