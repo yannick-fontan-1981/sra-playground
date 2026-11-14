@@ -2,6 +2,7 @@ import { correspondences, measuredFields, periodicHypotheses, symmetryEvidence, 
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { fieldConsensus } from './field-consensus.ts';
 import { sicNeedId } from './need-identity.ts';
 import { independentPredictionSupport, type PredictionTrial } from './independent-prediction.ts';
 
@@ -76,7 +77,7 @@ function hypotheses(field: RegularField, marker: number) {
   return inferred;
 }
 
-function corroboratedDisagreements(field: RegularField): Map<string, Candidate[]> {
+function corroboratedDisagreements(field: RegularField, prior: State | null): Map<string, Candidate[]> {
   const symmetry = transforms.flatMap(name => {
     const model = symmetryEvidence(field, name);
     return model ? [[name, model[0]] as const] : [];
@@ -87,7 +88,14 @@ function corroboratedDisagreements(field: RegularField): Map<string, Candidate[]
     const [x, y] = address.split(',').map(Number);
     return [x!, y!];
   };
-  for (const [name, table] of [...symmetry, ...periodic]) {
+  const previousConsensus = prior?.hypotheses.some(name => name.includes('-majority:')) ?? false;
+  const basic = [...symmetry, ...periodic];
+  const useConsensus = previousConsensus || !prior && basic.length === 0;
+  const consensus = useConsensus ? fieldConsensus(field, transforms) : [];
+  const minimum = Math.min(...consensus.map(fit => fit.table.size));
+  const selectedConsensus = consensus.filter(fit => prior ? prior.hypotheses.includes(fit.relation) : fit.table.size === minimum);
+  const options = useConsensus ? selectedConsensus.map(({ relation, table }) => [relation, table] as const) : basic;
+  for (const [name, table] of options) {
     const candidates = [...table].flatMap(([address, cell]) => {
       const [expected] = cell.eq, [source] = cell.sources;
       return cell.eq.size === 1 && expected !== undefined && source !== undefined && expected !== cell.actual
@@ -106,10 +114,10 @@ function nominate(field: RegularField, prior: State | null, epoch: number) {
   const ordered = [...counts].sort((a, b) => a[1] - b[1]);
   const rare = ordered[0];
   let marker = prior ? prior.marker : ordered.length >= 3 && rare && rare[1] * 2 < ordered[1]![1] ? rare[0] : null;
-  let models = marker === null ? corroboratedDisagreements(field) : hypotheses(field, marker);
+  let models = marker === null ? corroboratedDisagreements(field, prior) : hypotheses(field, marker);
   if (!prior && marker !== null && !models.size) {
     marker = null;
-    models = corroboratedDisagreements(field);
+    models = corroboratedDisagreements(field, prior);
   }
   const admissible = [...models.keys()].filter(name => !prior || prior.hypotheses.includes(name));
   if (!admissible.length) return null;

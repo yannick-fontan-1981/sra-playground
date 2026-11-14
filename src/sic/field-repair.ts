@@ -1,10 +1,11 @@
-import { correspondences, measuredFields, periodicHypotheses, symmetryEvidence, type ConstraintTable,
-  type RegularField, type SymmetryPolicy } from '../logos-engine/v6-field-constraints.ts';
+import { measuredFields, periodicHypotheses, symmetryEvidence, type ConstraintTable,
+  type SymmetryPolicy } from '../logos-engine/v6-field-constraints.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { resolveStrategyGraph, compileStrategyGraph } from './strategy-agenda.ts';
 import { sicNeedId } from './need-identity.ts';
 import { independentPredictionSupport } from './independent-prediction.ts';
+import { fieldConsensus } from './field-consensus.ts';
 import type { SicNeed } from './need-registry.ts';
 
 export const fieldRepairId = 'sic_field_repair';
@@ -24,74 +25,6 @@ type Repair = { point: NativePoint; size: NativePoint; before: number; expected:
 type Fit = { table: ConstraintTable; unchanged: number };
 type ObservedRepair = { point: NativePoint; before: number; expected: number; ref: string };
 
-function repeatedValues(field: RegularField, groups: Iterable<string[]>): Fit | null {
-  const table: ConstraintTable = new Map();
-  const targetValues = new Set<number>();
-  let unchanged = 0;
-  for (const cells of groups) {
-    const values = new Map<number, string[]>();
-    for (const cell of cells) {
-      const value = field.values.get(cell)!;
-      const matching = values.get(value) ?? [];
-      matching.push(cell);
-      values.set(value, matching);
-    }
-    const majority = [...values].find(([, sites]) => sites.length >= 2 && sites.length * 2 > cells.length);
-    if (!majority) return null;
-    const [expected, sites] = majority;
-    unchanged += sites.length;
-    targetValues.add(expected);
-    for (const cell of cells) {
-      const actual = field.values.get(cell)!;
-      if (actual !== expected) table.set(cell, { actual, eq: new Set([expected]), ne: new Set(), sources: new Set(sites) });
-    }
-  }
-  return table.size > 0 && targetValues.size > 1 && table.size * 3 < unchanged ? { table, unchanged } : null;
-}
-
-function periodicConsensus(field: RegularField): Fit[] {
-  const options: Fit[] = [];
-  for (let width = 1; width * 2 <= field.xs.length; width++) {
-    for (let height = 1; height * 2 <= field.ys.length; height++) {
-      const groups = new Map<string, string[]>();
-      for (const [xIndex, x] of field.xs.entries()) {
-        for (const [yIndex, y] of field.ys.entries()) {
-          const key = [xIndex % width, yIndex % height].join(',');
-          const group = groups.get(key) ?? [];
-          group.push([x, y].join(','));
-          groups.set(key, group);
-        }
-      }
-      const fit = repeatedValues(field, groups.values());
-      if (fit) options.push(fit);
-    }
-  }
-  return options;
-}
-
-function reflectionConsensus(field: RegularField, isometries: readonly string[]): Fit[] {
-  const { xs, ys, values } = field;
-  const key = ([x, y]: NativePoint) => [xs[x], ys[y]].join(',');
-  const supported = isometries.map(name => correspondences(xs.length, ys.length, name).map(([a, b]) => [key(a), key(b)]))
-    .filter(pairs => pairs.length && pairs.filter(([a, b]) => values.get(a!) !== values.get(b!)).length * 3 < pairs.length);
-  const options: Fit[] = [];
-  for (const [index, first] of supported.entries()) {
-    for (const second of supported.slice(index + 1)) {
-      const orbits = new Map([...values.keys()].map(cell => [cell, [cell]]));
-      for (const [a, b] of [...first, ...second]) {
-        const left = orbits.get(a!)!, right = orbits.get(b!)!;
-        if (left === right) continue;
-        left.push(...right);
-        for (const cell of right) orbits.set(cell, left);
-      }
-      // A point fixed by both transformations contributes no independent observation.
-      const groups = [...new Set(orbits.values())].filter(group => group.length > 1);
-      const fit = repeatedValues(field, groups);
-      if (fit) options.push(fit);
-    }
-  }
-  return options;
-}
 type FieldProposal = NativeProposal & { repair: Repair; sicLocalDecision: {
   strategy: string; objective: { id: string; label: string; parent: string }; need: SicNeed;
 } };
@@ -106,7 +39,7 @@ function repairs(observation: Parameters<NativeFamily['propose']>[0], policy: Sy
     const periodic: Fit[] = Array.from(periodicHypotheses(field, policy.maximum_hypothetically_omitted_values ?? 0),
       ([, table, evidence]) => ({ table, unchanged: Number(evidence.unchanged_pairs) }));
     const hypotheses = [...symmetry, ...periodic];
-    const consensus = [...periodicConsensus(field), ...reflectionConsensus(field, policy.isometries)];
+    const consensus: Fit[] = fieldConsensus(field, policy.isometries);
     const fits = hypotheses.length ? [...hypotheses, ...consensus.filter(fit => hypotheses.every(other =>
       fit.table.size < other.table.size))] : consensus;
     const undominated = fits.filter(fit => !fits.some(other => other !== fit && other.table.size < fit.table.size
