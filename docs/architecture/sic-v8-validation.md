@@ -42,6 +42,8 @@ Sur SK48, SIC mesure les effets de déplacement (actions 1 à 4), teste un traje
 
 En complément, la première campagne complète de 100 jeux, à `fe9bd63f`, a retrouvé les deux victoires. TRIA a reçu un clic SIC et s’est arrêté à zéro niveau. Les 97 autres jeux se sont arrêtés avant la première action. La campagne s’est terminée sans erreur de chargement ou d’attribution de plan.
 
+La seconde campagne complète de 100 jeux, à `3e50e61f`, reproduit les deux victoires et confirme SK48. TRIA reçoit un clic sans gagner de niveau. Les 96 autres jeux s’arrêtent avant toute commande. Tous les contrôles d’autorité et d’exécution réussissent.
+
 Le rejeu de non-régression compare les commandes et tous les retours publics entre le parcours de référence, le mode shadow et l’agenda actif. Aucun écart sur SK48 (19 actions, 1 niveau), AS66 (19, 3), SYME (9, 1), LKEY (44, 3) et CASC (1, 0, arrêt `frontier_unknown`). Ces parcours utilisent le mode habituel du Playground.
 
 La référence 0.65 relancée sur la même machine donne 11,173 s pour STCK et 22,456 s pour SMLP. Comparée à la première fenêtre du candidat, elle donne +10,47 % et −22,05 %. Les commandes et les niveaux attendus concordent. L’écart STCK reste au-dessus du seuil dans cette comparaison indicative. La qualification finale demande des séries alternées sans campagnes concurrentes.
