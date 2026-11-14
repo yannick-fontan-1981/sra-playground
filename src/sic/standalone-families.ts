@@ -39,7 +39,7 @@ import { framedSearchId } from './framed-search.ts';
 import { framedReceptionId } from './framed-reception.ts';
 import { windowRelationId } from './window-relation.ts';
 import { glyphEditingId } from './glyph-editing.ts';
-import { fieldIsolationId } from './field-isolation.ts';
+import { fieldIsolationId, learnFieldIsolationId } from './field-isolation.ts';
 import { directionalReceptionId } from './directional-reception.ts';
 import { windowCoverageId } from './window-coverage.ts';
 import { panelMatchingId } from './panel-matching.ts';
@@ -98,7 +98,7 @@ export const standalonePlanningGroups = [
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, facetGrowthId] },
   { id: 'visit_marked_surface', families: [traceCoverageId, markedLatticeId] },
   { id: 'place_incoming_groups', families: [queuedPlacementId, gatedCascadeId] },
-  { id: 'explore_available_inputs', families: [displayCouplingId, fieldIsolationId, cavityAccessId, learnCorrespondenceId, markedGaugeId, pairedChannelsId, learnGridAccessId, learnSelectedAccessId, publicInputExplorationId] },
+  { id: 'explore_available_inputs', families: [displayCouplingId, fieldIsolationId, learnFieldIsolationId, cavityAccessId, learnCorrespondenceId, markedGaugeId, pairedChannelsId, learnGridAccessId, learnSelectedAccessId, publicInputExplorationId] },
 ] as const;
 
 export const standalonePlanningFamilies: readonly string[] = Object.freeze(standalonePlanningGroups.flatMap(group => group.families));

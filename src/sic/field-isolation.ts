@@ -6,6 +6,15 @@ import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const fieldIsolationId = 'sic_field_isolation';
+export const learnFieldIsolationId = 'sic_learn_field_isolation';
+
+export type ClickFieldEvidence = { readonly point: NativePoint; readonly family: string; readonly beforeRef: string; readonly afterRef: string;
+  readonly levelEpoch: number; readonly fields: readonly Field[]; readonly before: Snapshot; readonly after: Snapshot };
+
+export function measureClickFields(before: NativeRows, after: NativeRows, context: Omit<ClickFieldEvidence, 'fields' | 'before' | 'after'>): ClickFieldEvidence | null {
+  const fields = acquireFields(before, after, [context.beforeRef, context.afterRef]);
+  return fields.length >= 2 && fields.length <= 6 ? { ...context, fields, before: fieldStates(before, fields), after: fieldStates(after, fields) } : null;
+}
 export const fieldIsolationStrategies = {
   test_compact_control: 'Test the uniquely smallest framed control',
   compare_repeated_field_effect: 'Repeat the control and compare the field changes',
@@ -57,20 +66,26 @@ function isolatedGate(local: State, rows: NativeRows) {
   return gate ? { gate, other: other[0]!.id as string } : null;
 }
 
-export function createSicFieldIsolation(): NativeFamily<Proposal> {
+export function createSicFieldIsolation(family = fieldIsolationId): NativeFamily<Proposal> {
+  const learns = family === learnFieldIsolationId;
   let state: State | null = null;
   return {
-    id: fieldIsolationId,
-    async propose(observation, rows, _inputs, remaining) {
+    id: family,
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || observation.available_action_refs.some(action => /^ACTION[1-5]$/.test(action)) ||
         !observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior?.stopped || (prior?.count ?? 0) >= 20) return null;
+      const click = learns && !prior ? execution?.readClickFields?.() : null;
+      if (learns && !prior && (click?.afterRef !== observation.observation_ref || click.levelEpoch !== observation.level_epoch)) return null;
       const patterns = framedPatterns(rows, geometricComponents(rows));
       const forward = prior?.forward ?? firstControl(patterns, rows);
       if (!forward || !patterns.some(pattern => same(pattern.bbox, forward.bbox) && same(pattern.center, forward.point))) return null;
-      const local: State = prior ?? { epoch: observation.level_epoch, phase: 'discover', forward, inverse: null, gate: null,
-        fields: [], history: [], other: null, count: 0, stopped: false, evidence: [] };
+      if (click && !click.point.every((value, axis) => value >= forward.bbox[axis]! && value <= forward.bbox[axis + 2]!)) return null;
+      if (click && !matches(fieldStates(rows, click.fields), click.after)) return null;
+      const local: State = prior ?? { epoch: observation.level_epoch, phase: click ? 'repeat' : 'discover', forward, inverse: null, gate: null,
+        fields: click ? [...click.fields] : [], history: click ? [click.before, click.after] : [], other: null, count: 0, stopped: false,
+        evidence: click ? [click.beforeRef, click.afterRef] : [] };
       const { phase } = local;
       const contrast = phase === 'discover' || phase === 'reverse' ? patterns.filter(pattern => !same(pattern.bbox, forward.bbox) &&
         same(extent(pattern.bbox), extent(forward.bbox)) && pattern.mask.length > 1) : [];
@@ -90,13 +105,13 @@ export function createSicFieldIsolation(): NativeFamily<Proposal> {
       const strategy = selected.id, label = fieldIsolationStrategies[strategy], parent = 'G_official_completion';
       const objective = { kind: 'change_one_linked_field', scope: ref.split(':revision:', 1)[0]!, subjects: ['framed_controls', 'observed_fields'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_preserving_the_isolated_field' };
-      const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = `field-isolation:${need.id}`;
+      const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = `${learns ? family : 'field-isolation'}:${need.id}`;
       const actions = [command], binding = await ObservedInputDomain.makeLocusWitness(observation, rows, target.point, { reason: label, evidence });
-      return { status: 'proposed', kind: fieldIsolationId, actions, local, target, needId: need.id,
+      return { status: 'proposed', kind: family, actions, local, target, needId: need.id,
         steps: [{ action: command, expected_after: null, point_binding: binding }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: { strategy, need: 'Change the useful field while preserving the other field',
           mode: phase === 'serve' ? 'solving' : 'exploration', situation: label, agenda: entries, evidence, control: target.bbox,
-          fields: local.fields.map(field => field.bbox) },
+          fields: local.fields.map(field => field.bbox), ...(click ? { clickSource: click.family, observedPoint: click.point } : {}) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },

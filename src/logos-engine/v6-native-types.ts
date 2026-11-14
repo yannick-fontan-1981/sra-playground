@@ -132,6 +132,7 @@ export interface NativeExecution {
   readonly reasoningMode?: import('../sic/reasoning-mode.ts').ReasoningMode;
   readonly observedControlledMotion?: import('../sic/public-input-exploration.ts').ControlledMotion;
   readonly readDirectionalMotion?: () => import('../sic/observed-translation.ts').DirectionalMotion | null;
+  readonly readClickFields?: () => import('../sic/field-isolation.ts').ClickFieldEvidence | null;
 }
 
 export interface NativeProgramHandle {

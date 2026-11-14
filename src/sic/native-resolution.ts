@@ -75,7 +75,7 @@ import { learnSupportMovesId } from './learn-support-moves.ts';
 import { learnScopeEffectsId } from './learn-scope-effects.ts';
 import { learnCorrespondenceId, learnCorrespondenceStrategies } from './learn-correspondence.ts';
 import { glyphEditingId, glyphEditingStrategies } from './glyph-editing.ts';
-import { fieldIsolationId, fieldIsolationStrategies } from './field-isolation.ts';
+import { fieldIsolationId, learnFieldIsolationId, fieldIsolationStrategies } from './field-isolation.ts';
 import { directionalReceptionId, directionalReceptionStrategies } from './directional-reception.ts';
 import { windowCoverageId, windowCoverageStrategies } from './window-coverage.ts';
 import { panelMatchingId, panelMatchingStrategies } from './panel-matching.ts';
@@ -487,7 +487,7 @@ export function readNativeResolution(agent: {
                             : family === chartRouteId ? chartRouteStrategies : family === populationPlacementId ? populationPlacementStrategies
                               : family === carryToFrameId ? carryToFrameStrategies : family === portPairingId ? portPairingStrategies
                                 : family === displayCouplingId ? displayCouplingStrategies : family === framedSearchId ? framedSearchStrategies
-                                  : family === glyphEditingId ? glyphEditingStrategies : family === fieldIsolationId ? fieldIsolationStrategies
+                                  : family === glyphEditingId ? glyphEditingStrategies : (family === fieldIsolationId || family === learnFieldIsolationId) ? fieldIsolationStrategies
                                     : family === directionalReceptionId ? directionalReceptionStrategies : family === windowCoverageId ? windowCoverageStrategies
                                       : family === panelMatchingId ? panelMatchingStrategies : family === crossingRowsId ? crossingRowsStrategies
                                         : family === traceCoverageId ? traceCoverageStrategies : family === radialConnectionId ? radialConnectionStrategies
@@ -741,7 +741,7 @@ export function readNativeResolution(agent: {
       }
     }
   }
-  if (situationCard && family === fieldIsolationId) {
+  if (situationCard && (family === fieldIsolationId || family === learnFieldIsolationId)) {
     const control = bounds(card?.control);
     if (control) subjects.push({ label: 'Control tested', box: control });
     if (Array.isArray(card?.fields)) for (const field of card.fields) {
