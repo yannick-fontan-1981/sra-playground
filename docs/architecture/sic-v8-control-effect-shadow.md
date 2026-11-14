@@ -205,6 +205,8 @@ Le rejeu navigateur `tests/sic-qualification.html?coverage` retrouve les cinq r�
 
 L’agenda d’exploration porte maintenant le trajet admissible jusqu’à la question ouverte. Si le plateau est épuisé et qu’aucun trajet observé n’est admissible, la branche de recherche d’accès rend `no_plan` et Stratégies présente cet arrêt. Le rejeu des cas de référence vérifie les mêmes commandes et les mêmes pas pour le test local et le trajet. Un plateau resté identique après sa seule commande vérifie le refus sans action supplémentaire.
 
+Avancement global estimé à 93 %. L’atelier a produit une règle exécutable et la comparaison sur cinq jeux a établi son effet en actif et en shadow. Les principales familles passent encore par la sélection SRC. La prochaine migration doit porter sur une famille native entière, en commençant par l’accès à une autre vue, puis être comparée aux commandes et retours de référence. Le budget STCK/SMLP reste à vérifier sur le nouveau code actif.
+
 | Série | SHA-256 du reçu brut de la seconde fenêtre |
 | --- | --- |
 | A1 | `5919c1547cb8cd18aacd9e2043a10e921300884fc0163e743248b644c16ab2f0` |
