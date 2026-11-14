@@ -1,9 +1,11 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 
 export const linkOpeningsId = 'sic_link_openings';
+export const learnLinkOpeningsId = 'sic_test_visible_opening_controls';
 
 type Part = ReturnType<typeof geometricComponents>[number];
 type Endpoint = { box: NativeBox; point: NativePoint; button: NativeBox; color: number };
@@ -121,10 +123,15 @@ function checked({ local, choice, actor: first }: Proposal, before: NativeRows, 
   return Math.sign(dx) === choice.direction ? 'approach_displacement_observed' : null;
 }
 
-export function createSicLinkOpenings(): NativeFamily<Proposal> {
+export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Proposal> {
+  const learns = family === learnLinkOpeningsId;
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: linkOpeningsId,
+    id: family,
+    async attachPrograms(registry) {
+      if (learns) decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !['ACTION3', 'ACTION4', 'ACTION6'].every(id => observation.available_action_refs.includes(id))) return null;
       const parts = geometricComponents(rows);
@@ -146,9 +153,13 @@ export function createSicLinkOpenings(): NativeFamily<Proposal> {
       const offer = { input: choice.input, expected: center(choice.target), evidence };
       const reuse = choice.kind === 'walk' && local.walkRef !== null;
       const crossing = reuse && choice.target !== scene.goal && !local.crossed;
-      const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence,
-        probe: reuse && !crossing ? null : offer, access: reuse && !crossing ? offer : null, interaction: null });
-      if (!selected) return null;
+      const routeSupported = reuse && !crossing;
+      const facts = { eligibleProbe: !routeSupported, routeSupported, knownInteraction: false, mode };
+      const decision = learns ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : null;
+      const navigation = learns ? null : resolveNavigationPrimitives({ mode, evidence,
+        probe: routeSupported ? null : offer, access: routeSupported ? offer : null, interaction: null });
+      const strategy = decision?.result ?? navigation?.selected?.id;
+      if (strategy !== (routeSupported ? 'P07' : 'P05')) return null;
       const witness = choice.point ? await ObservedInputDomain.makeLocusWitness(observation, rows, choice.point, { reason: choice.reason, evidence }) : null;
       if (choice.point && !witness) return null;
       const parent = 'G_official_completion';
@@ -158,14 +169,17 @@ export function createSicLinkOpenings(): NativeFamily<Proposal> {
       const id = linkOpeningsId + ':' + need.id;
       const action: NativeCommand = { action_ref: choice.input, data: choice.point ? { x: choice.point[0], y: choice.point[1] } : {} };
       return {
-        status: 'proposed', kind: linkOpeningsId, local, choice, actor: controlled, needId: need.id, attempt,
+        status: 'proposed', kind: family, local, choice, actor: controlled, needId: need.id, attempt,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
         steps: [{ action, expected_after: choice.target, ...(witness ? { point_binding: witness } : {}) }],
-        sicSituationCard: { strategy: selected.id, need: 'Link the two openings and reach the exit', situation: choice.reason, evidence, agenda: entries, mode,
-          triggerCard: card, actor: controlled, target: choice.target, exit: scene.goal, openings: scene.endpoints.map(endpoint => endpoint.box) },
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
+        sicSituationCard: { strategy, need: 'Link the two openings and reach the exit', situation: choice.reason, evidence,
+          agenda: navigation?.entries ?? [], mode, triggerCard: navigation?.card ?? decision?.receipt.workflow,
+          actor: controlled, target: choice.target, exit: scene.goal, openings: scene.endpoints.map(endpoint => endpoint.box) },
         question: { reason: choice.reason, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: choice.reason, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
+        sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: choice.reason,
           preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
       };

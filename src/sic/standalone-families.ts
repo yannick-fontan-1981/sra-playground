@@ -79,7 +79,7 @@ import { nestedPassageId, learnNestedPassageId } from './nested-passage.ts';
 import { learnContactAccessId, translateCoupledPiecesId } from './translate-coupled-pieces.ts';
 import { stagedMarksId } from './staged-marks.ts';
 import { learnSelectedAccessId, moveMaskedPiecesId } from './move-masked-pieces.ts';
-import { linkOpeningsId } from './link-openings.ts';
+import { learnLinkOpeningsId, linkOpeningsId } from './link-openings.ts';
 import { learnAnimatedCueId, reproduceCueId } from './reproduce-cue.ts';
 import { navigateRevealedGridId } from './navigate-revealed-grid.ts';
 import { learnGridAccessId } from './learn-grid-access.ts';
@@ -90,7 +90,7 @@ import { materialAssemblyId } from './material-assembly.ts';
 export const standalonePlanningGroups = [
   { id: 'repair_visible_field', families: [reproduceCueId, learnAnimatedCueId, fieldRepairId, orderedContactId, supportTransferId, learnSupportMovesId] },
   { id: 'inspect_candidate_relations', families: [crossingRowsId, invitedCaptureId, subsetExperimentId, learnScopeEffectsId, framedContactId, learnPatternAccessId, transportContactId, learnTransportAccessId, stagedMarksId, materialAssemblyId, animationContactId, learnAnimationContactId] },
-  { id: 'coordinate_visible_motion', families: [bandAlignmentId, sharedArrivalId, outlineServiceId, carryToFrameId, learnCarryToFrameId, directionalReceptionId, learnDirectionalReceptionId, branchAlignmentId, receptionAccessId, learnReceptionAccessId, markerCoverageId, reflectedPlacementId, coordinateObservedMotionId, pivotCargoId, moveMaskedPiecesId, translateCoupledPiecesId, learnContactAccessId, coupledMotionId, materialRouteId, inventoryAccessId, replayAccessId, orientedDeliveryId, indicatedJumpId, learnIndicatedJumpId, highlightedRouteId, learnHighlightedRouteId, pairedPassageId, seatedContactId, switchedSurfaceId, reactiveTargetId, pointReachId, linkedMidpointId, excavateDescentId, litRouteId, learnLitRouteId, nestedPassageId, learnNestedPassageId, linkOpeningsId, navigateRevealedGridId, arrangeTurnPostsId] },
+  { id: 'coordinate_visible_motion', families: [bandAlignmentId, sharedArrivalId, outlineServiceId, carryToFrameId, learnCarryToFrameId, directionalReceptionId, learnDirectionalReceptionId, branchAlignmentId, receptionAccessId, learnReceptionAccessId, markerCoverageId, reflectedPlacementId, coordinateObservedMotionId, pivotCargoId, moveMaskedPiecesId, translateCoupledPiecesId, learnContactAccessId, coupledMotionId, materialRouteId, inventoryAccessId, replayAccessId, orientedDeliveryId, indicatedJumpId, learnIndicatedJumpId, highlightedRouteId, learnHighlightedRouteId, pairedPassageId, seatedContactId, switchedSurfaceId, reactiveTargetId, pointReachId, linkedMidpointId, excavateDescentId, litRouteId, learnLitRouteId, nestedPassageId, learnNestedPassageId, linkOpeningsId, learnLinkOpeningsId, navigateRevealedGridId, arrangeTurnPostsId] },
   { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId, visualPatternId, framedSearchId, feedbackTrialId, catalogueComparisonId, revealedExampleId, windowRelationId, layeredFitId, learnLayeredFitId] },
   { id: 'apply_learned_relations', families: [remoteSupportRouteId, learnRemoteAccessId, occurrenceRecallId, slotPermutationId, surfaceCopyId, chartRouteId, learnChartRouteId] },
   { id: 'construct_executable_program', families: [codeRouteId, programOriginId, learnProgramOriginId, glyphEditingId, windowCoverageId, panelMatchingId] },
