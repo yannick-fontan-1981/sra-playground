@@ -44,7 +44,7 @@ Les essais couvrent 18 jeux distincts. Les autres jeux restent à mesurer avec r
 
 ## Familles observées dans les quatre parties complètes
 
-Rejeu en configuration normale du commit `100d5c43`. Une famille figure dans ce tableau dès qu’une de ses commandes est autorisée.
+Rejeu en configuration normale du commit `07e5e687`. Les 104 trajectoires et leurs attributions sont identiques au rejeu de référence. Une famille figure dans ce tableau dès qu’une de ses commandes est autorisée.
 
 | Jeu | Niveaux gagnés | Familles et commandes |
 | --- | ---: | --- |

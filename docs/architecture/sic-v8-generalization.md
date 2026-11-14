@@ -77,3 +77,7 @@ Sur DICO niveau 1, la première commande change le groupe visible et conserve le
 Avec retrait vérifié de la famille d’essais de sous-ensembles, DICO termine ses six niveaux en **71 commandes**. La voie d’apprentissage choisit toutes les commandes avec P05 (46), P07 (9) et P02 (16). Elle réutilise la mesure géométrique des groupes et leur animation, puis sépare les retours de navigation, qui préservent les hypothèses, des retours locaux ou globaux, qui les filtrent. Une réponse incompatible avec l’hypothèse d’un seul candidat influent ferme cette voie pour la situation courante.
 
 Dans un essai de transfert sur LF52, le niveau 1 passe en 31 commandes avec la même famille retirée. L’apprentissage choisit trois commandes et l’exploration publique en choisit 28. La voie garde la priorité existante pour les parties normales en attendant une comparaison de coût.
+
+## Passage à la campagne des niveaux 2
+
+Les quatre jeux de référence disposent d’une voie de résolution vérifiée avec leur famille habituelle retirée. Les 100 niveaux 1 et les quatre parties complètes repassent avec les mêmes commandes, retours et attributions dans la configuration normale du commit `07e5e687`. Le premier tour des niveaux 2 part de parties neuves. Il conserve les acquis du niveau 1 en cours de partie et vérifie l’autorité de chaque commande. Les essais de retrait sur le reste du catalogue prolongent le chantier de généralisation.
