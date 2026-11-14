@@ -253,6 +253,10 @@ Le réglage **Opening curiosity** s’applique à une nouvelle session au premie
 
 Sur les onze ouvertures de CONN, TICT, DAME, DICO, LIFE, GMAP, KATA, POLA, HOLE, MIND et CLRS, le shadow conserve la première commande et le retour public exacts. DICO fournit une cible alternative avec douze relations distinctes. Le clic natif (1, 3) est conservé en shadow. En actif, le clic (25, 36) ouvre le niveau 2 dès la première action et Stratégies montre le sujet et quatre voisins. Les dix autres ouvertures ne présentent pas de candidat qualifié pour cette stratégie dans cet essai. L’impact de l’option sur les campagnes complètes reste à mesurer avant d’en changer le réglage par défaut.
 
+La campagne sur les six niveaux de DICO, exécutée dans le navigateur sur `450057d8`, atteint la victoire dans les trois modes. L’ordre natif termine en 62 actions, avec les fins de niveau aux actions 7, 13, 21, 31, 46 et 62. Le shadow conserve la séquence complète et les empreintes des retours publics. En mode actif, les fins de niveau se produisent aux actions 1, 9, 17, 27, 42 et 58. L’ouverture économise six actions sur le premier niveau. Le deuxième en prend deux de plus. Les durées en actions des niveaux 3 à 6 concordent.
+
+Sur ce même commit, SK48 atteint le niveau 2 en 19 actions, AS66 termine trois niveaux en 19, SYME un en 9 et LKEY trois en 44. CASC conserve son arrêt `frontier_unknown` après une commande. Les 92 commandes, les empreintes des retours publics et les fins de niveau concordent avec curiosité native, shadow et active. La suite générale lancée sur `d6797ce3` a passé 16 132 tests. La promotion du réglage d’arbitrage sur `450057d8` a passé les 169 tests ciblés.
+
 | Série | SHA-256 du reçu brut de la seconde fenêtre |
 | --- | --- |
 | A1 | `5919c1547cb8cd18aacd9e2043a10e921300884fc0163e743248b644c16ab2f0` |
