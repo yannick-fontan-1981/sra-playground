@@ -6,6 +6,7 @@ import { BrowserGameRuntime, type GameObservation } from './runtime/browser-game
 import { AGENT_STATUS, type AgentAction } from './runtime/contracts';
 import { BrowserV6Agent, type V6AgentSnapshot } from './runtime/v6-agent.ts';
 import { bindSicPerspectives, renderSicPanel } from './sic/panel.ts';
+import { bindSrcStrategyEditor } from './sic/src-strategy-editor.ts';
 import { bindRecoverySettings, renderActionCoverage } from './sic/recovery-settings.ts';
 import { as66Contradiction, type ContradictionReview } from './sic/contradiction-review.ts';
 import { readControlEffectShadow } from './sic/shadow.ts';
@@ -351,6 +352,7 @@ app.innerHTML = `
                   <p role="status" data-sic-recovery-status></p>
                 </form>
               </details>
+              <div data-sic-src-editor></div>
               <div data-sic-strategy-editor></div>
               <div data-sic-strategy-body></div>
             </section>
@@ -508,9 +510,11 @@ const agent = new BrowserV6Agent({
       last.acquired = state;
     }
     agentState = state;
+    refreshSrcEditor(state);
     updateInterface();
   },
 });
+const refreshSrcEditor = bindSrcStrategyEditor(sicPanel.querySelector<HTMLElement>('[data-sic-src-editor]')!, agent);
 
 function projectAgentReturn({ sessionId, sequence, action, before, next, decision: nativeSnapshot, acquired }: AgentReturnDraft): void {
   let decision: NativeResolution | null = null;

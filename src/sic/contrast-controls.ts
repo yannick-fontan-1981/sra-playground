@@ -76,10 +76,12 @@ export function createSicContrastControls(id = contrastControlsId): NativeFamily
       if (initialProbe) candidates.sort((a, b) => a.controls[0]![1] - b.controls[0]![1]);
       const { controls, receivers, source, receipt, tried, changedControls, changedIndicators, previousControlsUniform, options } = candidates[0]!;
       const mode = execution?.reasoningMode ?? 'exploration';
-      const { result, receipt: src } = await program.run({
-        situation: { mode, need: contrastNeed, pointOnChangedControl: true, previousControlsUniform, changedControls, changedIndicators,
-          continuing: !!prior, initialProbe, options },
-      }, { signal: execution?.signal });
+      const situation = { mode, need: contrastNeed, pointOnChangedControl: true, previousControlsUniform, changedControls, changedIndicators,
+        continuing: !!prior, initialProbe, options: options.map(option => {
+          const [x, y] = center(controls[option.index]!);
+          return { ...option, x, y };
+        }) };
+      const { result, receipt: src } = await program.run({ situation }, { signal: execution?.signal });
       if (!isJsonObject(result) || result.need !== contrastNeed || result.primitive !== contrastPrimitive ||
         result.check !== contrastCheck || typeof result.minimumChanges !== 'number' ||
         !Number.isSafeInteger(result.minimumChanges) || result.minimumChanges < 1 || result.minimumChanges > receivers.length) return null;
@@ -101,7 +103,7 @@ export function createSicContrastControls(id = contrastControlsId): NativeFamily
         sicSituationCard: { strategy, need: 'Compare how two controls affect the same indicators', situation: label, evidence, mode,
           agenda: [], control: controls[target], source: receipt ? controls[source] : null, receivers },
         sicSrcDecision: { workflow: src.workflow, hash: src.src_hash, instructions: src.instructions, edited: 'edited' in src && src.edited === true,
-          check: result.check, minimumChanges: result.minimumChanges },
+          check: result.check, minimumChanges: result.minimumChanges, situation },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id: planId, observed: false, open_question: label, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id: planId, label, parent }, need },

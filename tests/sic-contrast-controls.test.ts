@@ -3,7 +3,7 @@ import test from 'node:test';
 import { NativeKnowledgeStore } from '../src/logos-engine/v6-knowledge-store.ts';
 import type { CompiledModule, IrExpression } from '../src/logos-engine/ir.ts';
 import { contrastCheck, contrastControlOperations, contrastControlsModule, contrastControlsWorkflow,
-  contrastNeed, contrastPrimitive, contrastReturnWorkflow } from '../src/sic/contrast-controls-card.ts';
+  contrastNeed, contrastPrimitive, contrastReturnWorkflow, readContrastCardSettings } from '../src/sic/contrast-controls-card.ts';
 
 test('an edited SIC workflow changes which observed candidate it selects', async () => {
   const store = new NativeKnowledgeStore('sic-test-source', 'sic-test-session');
@@ -36,4 +36,18 @@ test('an edited SIC workflow changes which observed candidate it selects', async
   assert.deepEqual(second.result, { ...expected, target: options[0] });
   assert.equal(second.receipt.edited, true);
   assert.notEqual(first.receipt.native_execution_hash, second.receipt.native_execution_hash);
+});
+
+test('strategy editor settings compile to an executable trigger and return contract', async () => {
+  const settings = { minimumRemoteChanges: 2, order: 'smallest', minimumChanges: 3 } as const;
+  const module = await contrastControlsModule(settings);
+  assert.deepEqual(readContrastCardSettings(module), settings);
+  const store = new NativeKnowledgeStore('sic-card-source', 'sic-card-session');
+  const program = await store.registerProgram(contrastControlsWorkflow, contrastControlOperations, module);
+  const options = [{ index: 0, separation: 4, x: 15, y: 12 }, { index: 1, separation: 8, x: 31, y: 12 }];
+  const situation = { mode: 'exploration', need: contrastNeed, pointOnChangedControl: true,
+    previousControlsUniform: true, changedControls: 1, changedIndicators: 1, initialProbe: false, options };
+  assert.equal((await program.run({ situation })).result, null);
+  assert.deepEqual((await program.run({ situation: { ...situation, changedIndicators: 2 } })).result,
+    { need: contrastNeed, primitive: contrastPrimitive, target: options[0], check: contrastCheck, minimumChanges: 3 });
 });

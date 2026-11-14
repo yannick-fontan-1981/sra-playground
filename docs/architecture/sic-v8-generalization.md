@@ -261,3 +261,9 @@ Le fournisseur TypeScript reconnaît encore les rangées et protège l’exécut
 Avec l’exploration publique active, TICT gagne en cinq commandes. L’exploration fournit les trois premières, dont le clic qui change une case locale et une case distante. La carte SRC utilise ce retour pour choisir les deux dernières. Le retrait vérifie l’autonomie de la carte sur ce parcours. En configuration normale, l’agenda garde l’exploration active et consulte la carte dès que les faits justifient son intervention.
 
 Les 100 niveaux 1 repassent en configuration normale. TICT reste à cinq commandes et les 99 autres conservent leurs commandes et retours. DICO, DNOI, HANO et SYME terminent avec et sans retrait en conservant leurs traces. Sur les 330 commandes des 23 victoires après retrait, le SRC en choisit quatre, une sur LOGI et trois sur TICT.
+
+### Éditer une carte exécutable depuis Stratégies
+
+Le panneau Stratégies expose le seuil de déclenchement, l’ordre de choix des cibles et le seuil de vérification de la carte de comparaison. L’aperçu exécute la carte active et le brouillon sur les faits du dernier choix SRC enregistré. Il indique le clic et le critère de vérification, ou l’abstention. L’application met à jour le programme du graphe de la session entre deux commandes. Si le graphe change après l’aperçu, il faut relancer la comparaison.
+
+Sur TICT dans le navigateur, avec SIC seul et l’exploration publique active, relever le seuil de un à deux changements distants fait passer l’aperçu du clic à l’abstention. L’interface enregistre ensuite la révision du graphe. Un rejeu par le même service applique les paramètres de l’éditeur après les trois premières commandes. Au quatrième choix, la carte d’origine exécute le clic à droite. Avec le nouveau seuil, l’exploration publique reprend la main. Le réglage s’applique à la session courante.

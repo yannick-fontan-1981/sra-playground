@@ -9,6 +9,12 @@ export const contrastPrimitive = 'contrast_observed_controls';
 export const contrastCheck = 'remote_indicator_changes';
 const step = contrastControlsWorkflow + '.decide';
 const returnStep = contrastReturnWorkflow + '.verify';
+export type ContrastCardSettings = {
+  readonly minimumRemoteChanges: number;
+  readonly order: 'largest' | 'smallest';
+  readonly minimumChanges: number;
+};
+export const defaultContrastCardSettings: ContrastCardSettings = { minimumRemoteChanges: 1, order: 'largest', minimumChanges: 1 };
 const reference = (value: string): IrExpression => ({ kind: 'reference', value });
 const literal = (value: string): IrExpression => ({ kind: 'string', value });
 const integer = (value: number): IrExpression => ({ kind: 'integer', value });
@@ -18,7 +24,9 @@ const call = (value: string, args: Record<string, IrExpression>): IrExpression =
   kind: 'call', value, arguments: Object.entries(args).map(([name, value]) => ({ name, value })),
 });
 
-export async function contrastControlsModule(): Promise<CompiledModule> {
+export async function contrastControlsModule(settings: ContrastCardSettings = defaultContrastCardSettings): Promise<CompiledModule> {
+  if (![settings.minimumRemoteChanges, settings.minimumChanges].every(value => Number.isInteger(value) && value >= 1 && value <= 8)
+    || !['largest', 'smallest'].includes(settings.order)) throw new RangeError('Choose an order and thresholds from 1 to 8.');
   const workflows: CompiledModule['workflows'] = [{
     id: contrastControlsWorkflow, entry_step_id: step,
     inputs: [{ name: 'situation', type_spec: { name: 'Map', arguments: [] } }],
@@ -26,14 +34,14 @@ export async function contrastControlsModule(): Promise<CompiledModule> {
     steps: [{ id: step, statements: [
       { id: step + '.eligible', kind: 'IF', expression: call('sic.matches_observed_situation', {
         situation: reference('situation'), need: literal(contrastNeed),
-        modes: list(literal('exploration'), literal('assimilation'), literal('solving')), minimumRemoteChanges: integer(1),
+        modes: list(literal('exploration'), literal('assimilation'), literal('solving')), minimumRemoteChanges: integer(settings.minimumRemoteChanges),
       }), body: [
         { id: step + '.contrast', kind: 'STOP', expression: call('sic.bind_candidate_experiment', {
           need: literal(contrastNeed), primitive: literal(contrastPrimitive),
           target: call('sic.rank_observed_candidates', {
-            options: reference('situation.options'), measure: literal('separation'), order: literal('largest'),
+            options: reference('situation.options'), measure: literal('separation'), order: literal(settings.order),
           }),
-          check: literal(contrastCheck), minimumChanges: integer(1),
+          check: literal(contrastCheck), minimumChanges: integer(settings.minimumChanges),
         }) },
       ] },
       { id: step + '.initial_probe', kind: 'IF', expression: reference('situation.initialProbe'), body: [
@@ -42,7 +50,7 @@ export async function contrastControlsModule(): Promise<CompiledModule> {
           target: call('sic.rank_observed_candidates', {
             options: reference('situation.options'), measure: literal('separation'), order: literal('smallest'),
           }),
-          check: literal(contrastCheck), minimumChanges: integer(1),
+          check: literal(contrastCheck), minimumChanges: integer(settings.minimumChanges),
         }) },
       ] },
       { id: step + '.abstain', kind: 'STOP', expression: abstain },
@@ -60,6 +68,18 @@ export async function contrastControlsModule(): Promise<CompiledModule> {
   }];
   const hash = await digest(workflows);
   return { module_id: moduleId, source_name: 'src/sic/contrast-controls-card.ts', source_hash: hash, semantic_hash: hash, imports: [], workflows };
+}
+
+export function readContrastCardSettings(module: CompiledModule): ContrastCardSettings | null {
+  const statements = module.workflows.find(workflow => workflow.id === contrastControlsWorkflow)?.steps[0]?.statements;
+  const argument = (expression: IrExpression | null | undefined, name: string) =>
+    expression?.arguments?.find(arg => arg.name === name)?.value;
+  const minimumRemoteChanges = argument(statements?.[0]?.expression, 'minimumRemoteChanges')?.value;
+  const experiment = statements?.[0]?.body?.[0]?.expression;
+  const order = argument(argument(experiment, 'target'), 'order')?.value;
+  const minimumChanges = argument(experiment, 'minimumChanges')?.value;
+  if (typeof minimumRemoteChanges !== 'number' || typeof minimumChanges !== 'number' || (order !== 'largest' && order !== 'smallest')) return null;
+  return { minimumRemoteChanges, order, minimumChanges };
 }
 
 const rankObservedCandidates: Primitive = ({ options, measure, order }): JsonValue => {
