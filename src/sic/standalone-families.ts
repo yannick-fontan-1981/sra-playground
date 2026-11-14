@@ -30,6 +30,7 @@ import { facetGrowthId } from './facet-growth.ts';
 import { chartRouteId } from './chart-route.ts';
 import { populationPlacementId } from './population-placement.ts';
 import { carryToFrameId } from './carry-to-frame.ts';
+import { portPairingId } from './port-pairing.ts';
 
 export const standalonePlanningGroups = [
   { id: 'repair_visible_field', families: [fieldRepairId, orderedContactId, supportTransferId] },
@@ -38,7 +39,7 @@ export const standalonePlanningGroups = [
   { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId, visualPatternId] },
   { id: 'apply_learned_relations', families: [remoteSupportRouteId, occurrenceRecallId, slotPermutationId, surfaceCopyId, chartRouteId] },
   { id: 'construct_executable_program', families: [codeRouteId, programOriginId] },
-  { id: 'fit_profiles_into_receivers', families: [profileTransferId] },
+  { id: 'fit_profiles_into_receivers', families: [profileTransferId, portPairingId] },
   { id: 'preserve_ordered_team', families: [orderedReplenishmentId] },
   { id: 'fill_visible_partition', families: [previewPlacementId, populationPlacementId] },
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, facetGrowthId] },
