@@ -18,6 +18,7 @@ import { slotPermutationId } from './slot-permutation.ts';
 import { surfaceCopyId } from './surface-copy.ts';
 import { codeRouteId } from './code-route.ts';
 import { profileTransferId } from './profile-transfer.ts';
+import { orderedReplenishmentId } from './ordered-replenishment.ts';
 
 export const standalonePlanningGroups = [
   { id: 'repair_visible_field', families: [fieldRepairId, orderedContactId, supportTransferId] },
@@ -27,6 +28,7 @@ export const standalonePlanningGroups = [
   { id: 'apply_learned_relations', families: [remoteSupportRouteId, occurrenceRecallId, slotPermutationId, surfaceCopyId] },
   { id: 'construct_executable_program', families: [codeRouteId] },
   { id: 'fit_profiles_into_receivers', families: [profileTransferId] },
+  { id: 'preserve_ordered_team', families: [orderedReplenishmentId] },
   { id: 'explore_available_inputs', families: [cavityAccessId, publicInputExplorationId] },
 ] as const;
 

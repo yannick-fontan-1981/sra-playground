@@ -22,6 +22,7 @@ import { slotPermutationId, slotPermutationStrategies } from './slot-permutation
 import { surfaceCopyId, surfaceCopyStrategies } from './surface-copy.ts';
 import { codeRouteId, codeRouteStrategies } from './code-route.ts';
 import { profileTransferId, profileTransferStrategies } from './profile-transfer.ts';
+import { orderedReplenishmentId, orderedReplenishmentStrategies } from './ordered-replenishment.ts';
 import { frontierStrategies, isFrontierStrategy, type FrontierStrategy } from './frontier-strategy.ts';
 import { isViewStrategy, viewStrategies, type ViewStrategy } from './view-strategy.ts';
 import { informationStrategies, isInformationStrategy, type InformationStrategy } from './information-strategy.ts';
@@ -33,7 +34,8 @@ import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-nati
 const situationStrategies = { ...orderedContactStrategies, ...cavityStrategies, ...publicInputStrategies, ...framedContactStrategies,
   ...transportContactStrategies, ...bandAlignmentStrategies, ...sharedArrivalStrategies, ...outlineServiceStrategies,
   ...labeledSequenceStrategies, ...markedCollectionStrategies, ...slotTransferStrategies, ...remoteSupportRouteStrategies,
-  ...occurrenceRecallStrategies, ...slotPermutationStrategies, ...surfaceCopyStrategies, ...codeRouteStrategies, ...profileTransferStrategies };
+  ...occurrenceRecallStrategies, ...slotPermutationStrategies, ...surfaceCopyStrategies, ...codeRouteStrategies, ...profileTransferStrategies,
+  ...orderedReplenishmentStrategies };
 
 export interface NativeStep {
   readonly action: string;
@@ -408,7 +410,7 @@ export function readNativeResolution(agent: {
             : family === slotTransferId ? slotTransferStrategies : family === remoteSupportRouteId ? remoteSupportRouteStrategies
               : family === occurrenceRecallId ? occurrenceRecallStrategies : family === slotPermutationId ? slotPermutationStrategies
                 : family === surfaceCopyId ? surfaceCopyStrategies : family === codeRouteId ? codeRouteStrategies
-                  : family === profileTransferId ? profileTransferStrategies : null;
+                  : family === profileTransferId ? profileTransferStrategies : family === orderedReplenishmentId ? orderedReplenishmentStrategies : null;
   const card = planReceipt?.authority === 'sicOnly' && labels ? record(proposal?.sicSituationCard) : null;
   const isSituationStrategy = (id: unknown): id is keyof typeof situationStrategies =>
     typeof id === 'string' && !!labels && Object.hasOwn(labels, id);
@@ -520,6 +522,12 @@ export function readNativeResolution(agent: {
     for (const [field, label] of [['marker', 'Current focus marker'], ['profile', 'Matching profile'], ['receiver', 'Receiver to fill']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
+    }
+  }
+  if (situationCard && family === orderedReplenishmentId) {
+    for (const [field, name] of [['encounter', 'Current encounter'], ['nextEncounter', 'Next encounter'], ['control', 'Reinforcement control']] as const) {
+      const box = bounds(card?.[field]);
+      if (box) subjects.push({ label: name, box });
     }
   }
   if (situationCard && family === cavityAccessId) {

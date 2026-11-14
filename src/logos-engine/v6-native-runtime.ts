@@ -53,6 +53,7 @@ import { createSicSlotPermutation } from '../sic/slot-permutation.ts';
 import { createSicSurfaceCopy } from '../sic/surface-copy.ts';
 import { createSicCodeRoute } from '../sic/code-route.ts';
 import { createSicProfileTransfer } from '../sic/profile-transfer.ts';
+import { createSicOrderedReplenishment } from '../sic/ordered-replenishment.ts';
 import { standalonePlanningGroups } from '../sic/standalone-families.ts';
 import { decidePlanContinuation } from '../sic/plan-step.ts';
 import { retainMissingControlTrial } from '../sic/missing-control-strategy.ts';
@@ -2384,7 +2385,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const sequence = (configuration.window_constraints as R).labeled_sequence_composition.labeled_sequence_question;
     const groups = standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 28, groups, symmetry, policy, sequence, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 29, groups, symmetry, policy, sequence, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
@@ -2393,7 +2394,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       createSicSharedArrival(), createSicOutlineService(), createSicLabeledSequence(sequence, options.now ?? (() => performance.now())),
       createSicMarkedCollection(), createSicSlotTransfer(), createSicRemoteSupportRoute(), createSicOccurrenceRecall(),
       createSicSlotPermutation(), createSicSurfaceCopy(), createSicCodeRoute(), createSicProfileTransfer(),
-      createSicCavityAccess(), createSicPublicInputExploration(),
+      createSicOrderedReplenishment(), createSicCavityAccess(), createSicPublicInputExploration(),
     ],
       authorityPolicy: loaded.common, familyAgenda: 'active', maxPointOccurrences: loaded.common.input_domain.max_point_occurrences,
       ...(options.now ? { now: options.now } : {}) });
