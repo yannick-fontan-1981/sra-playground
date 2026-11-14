@@ -12,7 +12,7 @@ test('matching sides locate a slot whether its interior contains a piece or bare
       if (y === 4 || y === 5) return fill;
       if (y === 6 || y === 7) return peer;
     }
-    return x >= 7 && x <= 8 && y >= 4 && y <= 5 ? 9 : 0;
+    return x >= 8 && x <= 9 && y >= 4 && y <= 5 ? 9 : 0;
   }));
   assert.deepEqual(pairedOpenings(board(0, 6)), [[3, 4, 4, 5]]);
   assert.deepEqual(pairedOpenings(board(9, 6)), [[3, 4, 4, 5]]);
