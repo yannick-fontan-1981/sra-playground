@@ -2362,7 +2362,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   if (recovery.solver === 'sic') {
     const policy = loaded.strategy.declarations[0]!.configuration.observed_composition_services.rooted_line_question;
     const groups = [{ id: fieldRepairId, families: [fieldRepairId] }, { id: orderedContactId, families: [orderedContactId] }];
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 2, groups, symmetry, policy, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 3, groups, symmetry, policy, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [createSicFieldRepair(symmetry), createSicOrderedContact(policy, recovery)],
