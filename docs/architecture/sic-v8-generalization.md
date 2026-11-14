@@ -2,6 +2,8 @@
 
 Le commit `d322509d` couvre les 100 premiers niveaux, attestés par les qualifications successives. Le chantier prend ces 100 entrées et les parcours complets de DICO, DNOI, HANO et SYME comme référence. Le rejeu intégral lancé au départ vérifie que les résultats coexistent sur le même moteur.
 
+[Inventaire observé des 100 jeux et des familles de remplacement](sic-v8-family-inventory.md).
+
 ## Mesurer les dépendances
 
 - Pour chaque partie, relever les familles et les primitives qui ont effectivement choisi une commande, les conditions qui les ont départagées et le résultat de la vérification au retour. Consigner une seule durée de résolution par niveau.
