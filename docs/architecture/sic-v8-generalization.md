@@ -375,3 +375,9 @@ Avec `sic_ordered_replenishment` retirée, **RECR gagne en trois commandes SIC s
 Le nom neutre et la palette permutée conservent le gain de RECR. Sur GIGO, le deuxième essai public déplace les éléments contenus dans la pièce dans le même sens et du même pas. Un prototype rattache ce déplacement à la pièce sélectionnée et choisit cinq commandes supplémentaires avec la carte SRC. Le niveau gagne en sept commandes avec la famille habituelle retirée. Le résultat tient avec un nom neutre et une palette permutée et reste à qualifier sur le catalogue.
 
 La campagne commune COLM et RECR confirme **36/100** niveaux 1 après retrait, en 427 commandes SIC seul, dont 90 choisies par le SRC. Les 100 premiers niveaux en usage normal, les 34 victoires précédentes après retrait et les quatre jeux complets avec et sans retrait gardent leurs commandes et leurs retours de référence.
+
+### Relier des ouvertures après un déplacement mesuré
+
+Avec `sic_nested_passage` retirée, **GIGO gagne en sept commandes SIC seul**. Le premier essai public est bloqué. Le deuxième fait bouger la pièce sélectionnée et son contenu. Le fournisseur associe le reçu au contour de la pièce et vérifie que le déplacement mesuré correspond au pas de la grille. La carte SRC choisit ensuite cinq commandes P07 ou P05 pour rapprocher les ouvertures et tester le changement de sélection. Le fournisseur TypeScript partagé calcule les alignements et vérifie les murs après chaque mouvement.
+
+Le niveau gagne aussi avec un nom neutre et une palette permutée. Désactiver P07 après les deux essais publics laisse l’exploration choisir les cinq commandes suivantes et maintient le niveau ouvert. La trajectoire après retrait ajoute un essai bloqué aux six commandes de référence. Empreinte `48b27b2033f9321ea8a90d6eacd08c7b4e530231021287357bc0195e3ca92240`.
