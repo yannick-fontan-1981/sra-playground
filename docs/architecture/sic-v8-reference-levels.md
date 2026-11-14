@@ -49,7 +49,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | HANO | 4 | [4](../../docs/migration/native-campaigns-v32/before-memory-fix/hano.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/HANO/LVL1/good_run_pseudocode.md) | [3](../../docs/migration/v6-baseline-parity.json) | — | 4 | 4 | 4 · WIN |
 | HOLE | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 1 |
 | HPDL | 6 | — | — | — | — | — | — | — |
-| ISOS | 6 | — | — | — | — | — | — | — |
+| ISOS | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 1 |
 | KA59 | 7 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/KA59/LVL1/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | — |
 | KATA | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/KATA/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 1 |
 | KEYD | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/KEYD/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | — |
