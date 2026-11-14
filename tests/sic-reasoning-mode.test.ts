@@ -4,6 +4,7 @@ import { selectStrategyFamily } from '../src/sic/family-agenda.ts';
 import { reasoningGroupOrder, selectReasoningMode, type ReasoningSituation } from '../src/sic/reasoning-mode.ts';
 import { defaultRecoveryPack } from '../src/sic/active-recovery.ts';
 import { readRecoveryRevision, recoveryRevision } from '../src/sic/recovery-pack.ts';
+import { controlEffectTrigger, readControlEffectTrigger } from '../src/sic/control-effect-trigger.ts';
 
 test('fresh level entry, refuted and supported plans select different reasoning cards and a different next offer', async () => {
   const start: ReasoningSituation = { level: 1, levelsCompleted: 0, targetLevels: 3, levelActions: 0, remainingActions: 9,
@@ -33,4 +34,21 @@ test('adaptive reasoning is an explicit pack policy and survives export', () => 
   assert.equal(recoveryRevision(defaultRecoveryPack).schemaVersion, 1);
   assert.throws(() => recoveryRevision({ ...defaultRecoveryPack, reasoningMode: 'adaptive', familyAgenda: 'native' }),
     /requires the active SIC agenda/);
+});
+
+test('the same P05 offer uses a different trigger only when its supporting evidence is present', () => {
+  const facts = { current: 'current', priorEffect: 'earlier-effect', planDependency: 'retained-plan',
+    evidence: ['current', 'earlier-effect', 'retained-plan'] };
+  const assimilation = controlEffectTrigger('assimilation', facts);
+  assert.equal(assimilation.id, 'revalidate_control');
+  assert.deepEqual(assimilation.evidence, ['current', 'earlier-effect']);
+  const solving = controlEffectTrigger('solving', facts);
+  assert.equal(solving.id, 'unblock_plan_control');
+  assert.deepEqual(solving.evidence, ['current', 'retained-plan']);
+  assert.equal(controlEffectTrigger('exploration', facts).id, 'explore_control');
+  assert.equal(controlEffectTrigger('assimilation', { ...facts, evidence: ['current'] }).id, 'explore_control');
+  assert.equal(controlEffectTrigger('solving', { ...facts, planDependency: 'current' }).id, 'explore_control');
+  assert.deepEqual(readControlEffectTrigger(solving, 'current'), solving);
+  assert.equal(readControlEffectTrigger({ ...solving, evidence: ['current'] }, 'current'), undefined);
+  assert.equal(readControlEffectTrigger(solving, 'next'), undefined);
 });

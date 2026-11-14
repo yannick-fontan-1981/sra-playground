@@ -1,6 +1,7 @@
 import type { NativeObservation, NativeProposal, SicActionCoverage } from '../logos-engine/v6-native-types.ts';
 import { readSicNeed } from './need-registry.ts';
 import { missingControlWitness } from './missing-control-strategy.ts';
+import type { ReasoningMode } from './reasoning-mode.ts';
 
 export interface StrategyObjective {
   readonly strategy: string;
@@ -12,7 +13,7 @@ export interface StrategyObjective {
 const nonEmpty = (value: unknown) => typeof value === 'string' && value.trim() ? value : null;
 
 /** Bind the selected strategy's stated aim to the plan and the observation that authorized it. */
-export function nativePlanReceipt(family: string, proposal: NativeProposal, observation: NativeObservation, index: number) {
+export function nativePlanReceipt(family: string, proposal: NativeProposal, observation: NativeObservation, index: number, mode?: ReasoningMode) {
   const template = proposal.bundle_template;
   const rooted = proposal.rooted_line_plan;
   const recovery = objectField(objectField(rooted, 'search'), 'sic_decision');
@@ -36,7 +37,7 @@ export function nativePlanReceipt(family: string, proposal: NativeProposal, obse
   }
   const command = proposal.actions[index];
   if (!command) throw new TypeError('A release receipt requires a command in the selected plan.');
-  const missingControl = missingControlWitness(proposal, command.action_ref, observation.observation_ref);
+  const missingControl = missingControlWitness(proposal, command.action_ref, observation.observation_ref, mode);
   const need = readSicNeed(objectField(decision, 'need'));
   const prerequisite = readSicNeed(objectField(decision, 'prerequisite'));
   return {

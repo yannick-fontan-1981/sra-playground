@@ -1285,6 +1285,7 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
     if (missingControl) factsList.push(['Sub-strategy', missingControlLabel],
       ['Command under study', commands[Number(missingControl.action.slice(6))] ?? missingControl.action]);
     if (missingControl?.agenda) factsList.push(['Why this test applies', missingControl.agenda.reason]);
+    if (missingControl?.trigger) factsList.push(['Trigger card', `${nativeLabel(missingControl.trigger.mode)} · ${missingControl.trigger.reason}`]);
     if (operation && rule) factsList.push(['SIC strategy rule', rule.title]);
     if (rule) factsList.push(['Need', rule.need], ['Situation', rule.situation]);
     if (searchOperation) factsList.push(['Access search', `${searchOperation.key} · ${searchOperation.description}`]);

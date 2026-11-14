@@ -1282,7 +1282,9 @@ export class NativeV6Runtime implements NativeV6Backend {
         native_gate: this.authority !== null, graph_chain: this.knowledge?.graphChain ?? null });
     }
     if (!this.prefix.sicPlan) {
-      const receipt = nativePlanReceipt(family.id, proposal, this.observation, index);
+      const reasoning = this.familyAgendaReceipt?.reasoning;
+      const receipt = nativePlanReceipt(family.id, proposal, this.observation, index,
+        reasoning?.observationRef === this.observation.observation_ref ? reasoning.mode : undefined);
       this.prefix.sicPlan = freeze(receipt);
       this.note({ kind: 'sic_native_plan', ...this.prefix.sicPlan });
     }

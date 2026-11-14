@@ -1,6 +1,7 @@
 import { cropReturn } from '../logos-engine/v6-public-return-visuals.ts';
 import type { StrategyObjective } from './native-plan-receipt.ts';
 import { missingControlNeed, missingControlStrategy, type MissingControlWitness } from './missing-control-strategy.ts';
+import { readControlEffectTrigger } from './control-effect-trigger.ts';
 import { contactRecoveryStrategies, isContactStrategy, isRecoveryStop, rootedRecoveryStrategy,
   type ContactRecoveryNeed, type ContactStrategy } from './active-recovery.ts';
 import type { AgendaEntry } from './strategy-agenda.ts';
@@ -222,11 +223,13 @@ export function readNativeResolution(agent: {
   const controlAction = label(control?.action);
   const controlEvidence = Array.isArray(control?.evidence) ? control.evidence.slice(0, 8).filter((ref): ref is string => typeof ref === 'string') : [];
   const controlAgenda = readAgenda([control?.agenda], (value): value is typeof missingControlStrategy => value === missingControlStrategy)[0];
+  const controlTrigger = typeof control?.observationRef === 'string' ? readControlEffectTrigger(control.trigger, control.observationRef) : undefined;
   const missingControl: MissingControlWitness | undefined = control?.id === missingControlStrategy && control.need === missingControlNeed
     && controlAction && typeof control.observationRef === 'string' && control.observationRef === planReceipt?.observationRef
     && controlEvidence.includes(control.observationRef)
     ? { id: missingControlStrategy, need: missingControlNeed, observationRef: control.observationRef, action: controlAction, evidence: controlEvidence,
-      ...(controlAgenda?.result === 'selected' && controlAgenda.applicability === 'applicable' ? { agenda: controlAgenda } : {}) } : undefined;
+      ...(controlAgenda?.result === 'selected' && controlAgenda.applicability === 'applicable' ? { agenda: controlAgenda } : {}),
+      ...(controlTrigger ? { trigger: controlTrigger } : {}) } : undefined;
   const traced = proposalAt >= 0 && result && proposalAt < entries.indexOf(result) && result.family === family
     ? entries[proposalAt] : null;
   const stepList = Array.isArray(proposal?.steps) ? proposal.steps : [];

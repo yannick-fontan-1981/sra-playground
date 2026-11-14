@@ -41,6 +41,7 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number | '
     preference?: NonNullable<NativeResolution['informationStrategy']>['preference'] }[] = [];
   let opening: NonNullable<NativeResolution['frontierStrategy']>['opening'];
   const modes: { sequence: number; level: number; mode: string; card: string; selected: string | null }[] = [];
+  const controlCards: { sequence: number; level: number; mode: string | null; card: string }[] = [];
   let observedStrategy: ObservedStrategy | undefined;
   const agent = new BrowserV6Agent({
     getObservation: () => board,
@@ -66,6 +67,8 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number | '
       if (mode && (modes.at(-1)?.card !== mode.card || modes.at(-1)?.level !== mode.level)) {
         modes.push({ sequence: trace.length + 1, level: mode.level, mode: mode.mode, card: mode.card, selected: selection.selected });
       }
+      if (decision?.missingControl?.trigger) controlCards.push({ sequence: trace.length + 1, level: board.level,
+        mode: mode?.mode ?? null, card: decision.missingControl.trigger.id });
       if (onStrategy && decision?.family && decision.proposalKind && state) {
         const bundle = state.proposal as Record<string, unknown> | null;
         const entry = bundle?.material_access_subquestion ?? bundle?.program_subquestion ?? bundle?.field_subquestion
@@ -103,7 +106,7 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number | '
       if (board.levelsCompleted <= level || state?.status === 'stopped') break;
     }
     return { actions: trace.length, levels: board.levelsCompleted, stop: state?.reason ?? null, trace, targetLevels, boardState: board.state,
-      coverage: state?.sicActionCoverage, selection: state?.sicFamilySelection, information, opening, modes };
+      coverage: state?.sicActionCoverage, selection: state?.sicFamilySelection, information, opening, modes, controlCards };
   } finally {
     agent.dispose();
   }
@@ -290,7 +293,8 @@ async function qualifyReasoningModes(gameFilter: string | null) {
       const baseline = await run(runtime, game, target, defaultRecoveryPack, 50);
       const adaptive = await run(runtime, game, target, { ...defaultRecoveryPack, reasoningMode: 'adaptive' }, 50);
       results.push({ game, baseline: [baseline.actions, baseline.levels, baseline.stop], adaptive: [adaptive.actions, adaptive.levels, adaptive.stop],
-        ...compare(baseline, adaptive), modeChanges: adaptive.modes.slice(0, 8), totalModeChanges: adaptive.modes.length });
+        ...compare(baseline, adaptive), modeChanges: adaptive.modes.slice(0, 8), totalModeChanges: adaptive.modes.length,
+        controlCards: adaptive.controlCards.slice(0, 8), totalControlCards: adaptive.controlCards.length });
     }
     output.textContent = JSON.stringify({ status: 'completed', results }, null, 2);
   } finally {
