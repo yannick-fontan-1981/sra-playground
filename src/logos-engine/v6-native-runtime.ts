@@ -37,6 +37,7 @@ import { createSicFieldRepair } from '../sic/field-repair.ts';
 import { createSicOrderedContact } from '../sic/ordered-contact.ts';
 import { createSicSupportTransfer } from '../sic/support-transfer.ts';
 import { createSicSubsetExperiment } from '../sic/subset-experiment.ts';
+import { createSicCavityAccess } from '../sic/cavity-access.ts';
 import { standalonePlanningFamilies } from '../sic/standalone-families.ts';
 import { decidePlanContinuation } from '../sic/plan-step.ts';
 import { retainMissingControlTrial } from '../sic/missing-control-strategy.ts';
@@ -2366,12 +2367,12 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const policy = loaded.strategy.declarations[0]!.configuration.observed_composition_services.rooted_line_question;
     const groups = standalonePlanningFamilies.map(id => ({ id, families: [id] }));
     const support = loaded.common.ordered_support_transfer;
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 5, groups, symmetry, policy, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 6, groups, symmetry, policy, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
       createSicFieldRepair(symmetry), createSicOrderedContact(policy, recovery), createSicSupportTransfer(support),
-      createSicSubsetExperiment(),
+      createSicSubsetExperiment(), createSicCavityAccess(),
     ],
       authorityPolicy: loaded.common, familyAgenda: 'active', maxPointOccurrences: loaded.common.input_domain.max_point_occurrences,
       ...(options.now ? { now: options.now } : {}) });
