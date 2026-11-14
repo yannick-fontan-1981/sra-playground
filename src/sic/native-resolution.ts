@@ -48,7 +48,7 @@ import { materialRouteId, materialRouteStrategies } from './material-route.ts';
 import { inventoryAccessId, inventoryAccessStrategies } from './inventory-access.ts';
 import { replayAccessId } from './replay-access.ts';
 import { orientedDeliveryId } from './oriented-delivery.ts';
-import { indicatedJumpId } from './indicated-jump.ts';
+import { indicatedJumpId, learnIndicatedJumpId } from './indicated-jump.ts';
 import { highlightedRouteId, learnHighlightedRouteId } from './highlighted-route.ts';
 import { pairedPassageId } from './paired-passage.ts';
 import { seatedContactId } from './seated-contact.ts';
@@ -936,7 +936,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && family === indicatedJumpId) {
+  if (situationCard && (family === indicatedJumpId || family === learnIndicatedJumpId)) {
     for (const [field, label] of [['actor', 'Current direction indicator'], ['focus', 'Selected jump destination'],
       ['destination', 'Candidate goal marker']] as const) {
       const box = bounds(card?.[field]);

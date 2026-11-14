@@ -1,9 +1,11 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 
 export const indicatedJumpId = 'sic_indicated_jump';
+export const learnIndicatedJumpId = 'sic_learn_indicated_jump';
 
 type Component = ReturnType<typeof geometricComponents>[number];
 type Arrow = { point: NativePoint; box: NativeBox; face: NativePoint; color: number };
@@ -87,10 +89,15 @@ function pathLength(scene: Scene, start: NativePoint): number {
   return Infinity;
 }
 
-export function createSicIndicatedJump(): NativeFamily<Proposal> {
+export function createSicIndicatedJump(family = indicatedJumpId): NativeFamily<Proposal> {
+  const learns = family === learnIndicatedJumpId;
   let state: State | null = null;
+  let choose: NativeProgramHandle | undefined;
   return {
-    id: indicatedJumpId,
+    id: family,
+    async attachPrograms(registry) {
+      if (learns) choose = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')
         || observation.available_action_refs.some(action => /^ACTION[1-5]$/.test(action))) return null;
@@ -118,13 +125,16 @@ export function createSicIndicatedJump(): NativeFamily<Proposal> {
       if (!point) return null;
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.refs.filter(value => value !== ref)];
       const mode = execution?.reasoningMode ?? 'exploration', offer = { input: 'ACTION6', expected: point, evidence };
-      const { selected, entries, card } = resolveNavigationPrimitives({
+      const facts = { routeSupported: local.refs.length > 0, eligibleProbe: local.refs.length === 0 && !!unique, mode };
+      const decision = learns ? await choose?.run({ situation: facts }, { signal: execution?.signal }) : null;
+      const navigation = learns ? null : resolveNavigationPrimitives({
         mode, evidence, access: local.refs.length ? offer : null, probe: local.refs.length ? null : offer, interaction: null,
       });
-      if (!selected) return null;
+      const strategy = decision?.result ?? navigation?.selected?.id;
+      if (strategy !== 'P05' && strategy !== 'P07') return null;
       const pointBinding = await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: 'Current indicated destination', evidence });
       if (!pointBinding) return null;
-      const strategy = selected.id, parent = 'G_official_completion', label = navigationPrimitives[strategy];
+      const parent = 'G_official_completion', label = navigationPrimitives[strategy];
       const objective = { kind: 'follow_visible_direction_indicators', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['current_indicator', 'candidate_jump', 'terminal_marker'], parentObjective: parent,
         satisfactionContract: 'official_progress_after_revalidated_indicated_jumps' };
@@ -133,11 +143,14 @@ export function createSicIndicatedJump(): NativeFamily<Proposal> {
       const focus = [...scene.arrows].find(arrow => same(arrow.point, point))?.box ?? [point[0], point[1], point[0], point[1]];
       const [x, y] = scene.terminal;
       const situation = strategy === 'P05' ? 'Test one marked destination along the current arrow' : 'Use the measured jump effect and the current arrows to choose the next destination';
-      return { status: 'proposed', kind: indicatedJumpId, actions, local: { ...local, highlight: unique?.[0] ?? local.highlight }, scene, point, needId: need.id,
+      return { status: 'proposed', kind: family, actions, local: { ...local, highlight: unique?.[0] ?? local.highlight }, scene, point, needId: need.id,
         attempt: attempt(point), binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         steps: [{ action, expected_after: local.refs.length ? point : null, point_binding: pointBinding }],
-        sicSituationCard: { strategy, need: 'Reach the distinct marker by following the visible arrows', situation, evidence, agenda: entries, mode,
-          triggerCard: card, actor: scene.actor.box, focus, destination: [x - 2, y - 2, x + 2, y + 2] },
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
+        sicSituationCard: { strategy, need: 'Reach the distinct marker by following the visible arrows', situation, evidence,
+          agenda: navigation?.entries ?? [], mode, triggerCard: navigation?.card ?? decision?.receipt.workflow,
+          actor: scene.actor.box, focus, destination: [x - 2, y - 2, x + 2, y + 2] },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },
