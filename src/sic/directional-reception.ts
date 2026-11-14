@@ -1,11 +1,14 @@
 import { freshReceptionModels, pathToReceptions } from '../logos-engine/v6-exposed-reception-access.ts';
 import { measureExposedReception } from '../logos-engine/v6-exposed-reception-observation.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
+import { motionIntoFootprint } from './observed-translation.ts';
+import { chooseReception, receptionMotionModule } from './reception-motion-card.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const directionalReceptionId = 'sic_directional_reception';
+export const learnDirectionalReceptionId = 'sic_learn_reception_from_motion';
 export const directionalReceptionStrategies = {
   measure_reception_displacement: 'Measure a direction that could move the pieces toward their receivers',
   approach_reception_slots: 'Use the measured displacement toward the matching receivers',
@@ -40,10 +43,15 @@ function pointScore(vector: NativePoint, direction: NativePoint) {
   return (vector[0] * direction[0] + vector[1] * direction[1]) / Math.hypot(...vector);
 }
 
-export function createSicDirectionalReception(): NativeFamily<Proposal> {
+export function createSicDirectionalReception(family = directionalReceptionId): NativeFamily<Proposal> {
+  const learns = family === learnDirectionalReceptionId;
   let state: State | null = null;
+  let choose: NativeProgramHandle | undefined;
   return {
-    id: directionalReceptionId,
+    id: family,
+    async attachPrograms(registry) {
+      if (learns) choose = await registry.registerProgram(chooseReception, {}, await receptionMotionModule());
+    },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const keys = observation.available_action_refs.filter(action => hints[action]);
@@ -51,9 +59,14 @@ export function createSicDirectionalReception(): NativeFamily<Proposal> {
       const scene = measureExposedReception(rows) as Scene | null;
       if (!scene || scene.bodies.length > 4 || scene.size[0] * scene.size[1] > 256) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
+      const receipt = learns && !prior ? execution?.readDirectionalMotion?.() : null;
+      const movement = receipt?.afterRef === observation.observation_ref && receipt.levelEpoch === observation.level_epoch
+        ? motionIntoFootprint(receipt, cellBox(scene, scene.actor)) : null;
+      const delta = movement ? [movement[0] / scene.pitch, movement[1] / scene.pitch] as NativePoint : null;
+      if (learns && !prior && (!delta || Math.abs(delta[0]) + Math.abs(delta[1]) !== 1)) return null;
       const local: State = prior?.layout === scene.layout ? prior : {
-        epoch: observation.level_epoch, layout: scene.layout, directions: prior?.directions ?? {},
-        coupled: [], tried: [], evidence: prior?.evidence ?? [], count: prior?.count ?? 0,
+        epoch: observation.level_epoch, layout: scene.layout, directions: prior?.directions ?? (receipt && delta ? { [receipt.command]: delta } : {}),
+        coupled: [], tried: [], evidence: prior?.evidence ?? (receipt ? [receipt.beforeRef] : []), count: prior?.count ?? 0,
       };
       if (local.count >= 32) return null;
       const key = (action: NativeCommand) => JSON.stringify([observation.frame_hash, action]);
@@ -83,23 +96,31 @@ export function createSicDirectionalReception(): NativeFamily<Proposal> {
         if (probe) trial = command(probe);
       }
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
+      const situation = { test: !!trial, route: !!route, orientation: !!orientation, mode: execution?.reasoningMode ?? 'exploration' };
+      const decision = learns ? await choose?.run({ situation }, { signal: execution?.signal }) : null;
+      const evaluated = learns ? null : resolveStrategyGraph({ graph, mode: 'active', facts: {
         test: { value: !!trial, evidence }, route: { value: !!route, evidence }, orientation: { value: !!orientation, evidence },
       }, planners: { measure_reception_displacement: () => trial, approach_reception_slots: () => route,
         orient_toward_mismatched_piece: () => orientation } });
-      if (!selected) return null;
-      const strategy = selected.id, choice = selected.plan, label = directionalReceptionStrategies[strategy], parent = 'G_official_completion';
+      const choices = { measure_reception_displacement: trial, approach_reception_slots: route, orient_toward_mismatched_piece: orientation };
+      const requested = decision?.result ?? evaluated?.selected?.id;
+      if (typeof requested !== 'string' || !Object.hasOwn(choices, requested)) return null;
+      const strategy = requested as keyof typeof choices, choice = choices[strategy];
+      if (!choice) return null;
+      const label = directionalReceptionStrategies[strategy], parent = 'G_official_completion';
       const goal = { kind: 'match_occupied_receivers', scope: ref.split(':revision:', 1)[0]!, subjects: ['controlled_body', 'receivers'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_matching_the_occupied_receivers' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence }, id = `directional-reception:${need.id}`;
       const actions = [choice.command];
       const binding = choice.dial && await ObservedInputDomain.makeLocusWitness(observation, rows, choice.dial.point, { reason: label, evidence });
-      return { status: 'proposed', kind: directionalReceptionId, actions, local, scene, choice, attempt: key(choice.command), needId: need.id,
+      return { status: 'proposed', kind: family, actions, local, scene, choice, attempt: key(choice.command), needId: need.id,
         steps: [{ action: choice.command, expected_after: null, ...(binding ? { point_binding: binding } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation } } : {}),
         sicSituationCard: { strategy, need: 'Bring the pieces and the receivers into agreement', mode: route ? 'solving' : 'exploration',
           situation: choice.dial ? 'The piece is in the receiver but has a different color. Test the nearby direction on the dial.' : label,
-          agenda: entries, evidence, actor: cellBox(scene, scene.actor),
+          agenda: evaluated?.entries ?? [], evidence, actor: cellBox(scene, scene.actor),
           pieces: (choice.target ? [choice.target] : scene.bodies).map(body => cellBox(scene, body.pos)),
           receivers: scene.slots.map(slot => cellBox(scene, slot.pos)),
           dial: choice.dial ? [...choice.dial.point, ...choice.dial.point] : null },

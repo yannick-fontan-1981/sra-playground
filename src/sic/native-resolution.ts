@@ -77,7 +77,7 @@ import { learnScopeEffectsId } from './learn-scope-effects.ts';
 import { learnCorrespondenceId, learnCorrespondenceStrategies } from './learn-correspondence.ts';
 import { glyphEditingId, glyphEditingStrategies } from './glyph-editing.ts';
 import { fieldIsolationId, learnFieldIsolationId, fieldIsolationStrategies } from './field-isolation.ts';
-import { directionalReceptionId, directionalReceptionStrategies } from './directional-reception.ts';
+import { directionalReceptionId, directionalReceptionStrategies, learnDirectionalReceptionId } from './directional-reception.ts';
 import { windowCoverageId, windowCoverageStrategies } from './window-coverage.ts';
 import { panelMatchingId, panelMatchingStrategies } from './panel-matching.ts';
 import { crossingRowsId, crossingRowsStrategies } from './crossing-rows.ts';
@@ -489,7 +489,7 @@ export function readNativeResolution(agent: {
                               : (family === carryToFrameId || family === learnCarryToFrameId) ? carryToFrameStrategies : family === portPairingId ? portPairingStrategies
                                 : (family === contrastControlsId || family === contrastProbeId) ? contrastControlsStrategies : family === displayCouplingId ? displayCouplingStrategies : family === framedSearchId ? framedSearchStrategies
                                   : family === glyphEditingId ? glyphEditingStrategies : (family === fieldIsolationId || family === learnFieldIsolationId) ? fieldIsolationStrategies
-                                    : family === directionalReceptionId ? directionalReceptionStrategies : family === windowCoverageId ? windowCoverageStrategies
+                                    : (family === directionalReceptionId || family === learnDirectionalReceptionId) ? directionalReceptionStrategies : family === windowCoverageId ? windowCoverageStrategies
                                       : family === panelMatchingId ? panelMatchingStrategies : family === crossingRowsId ? crossingRowsStrategies
                                         : family === traceCoverageId ? traceCoverageStrategies : family === radialConnectionId ? radialConnectionStrategies
                                           : family === invitedCaptureId ? invitedCaptureStrategies : family === branchAlignmentId ? branchAlignmentStrategies
@@ -733,7 +733,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label: 'Configurable receiver', box });
     }
   }
-  if (situationCard && family === directionalReceptionId) {
+  if (situationCard && (family === directionalReceptionId || family === learnDirectionalReceptionId)) {
     for (const [field, label] of [['actor', 'Controlled body'], ['dial', 'Orientation control']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
