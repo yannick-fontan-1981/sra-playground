@@ -133,6 +133,7 @@ export interface NativeExecution {
   readonly observedControlledMotion?: import('../sic/public-input-exploration.ts').ControlledMotion;
   readonly readDirectionalMotion?: () => import('../sic/observed-translation.ts').DirectionalMotion | null;
   readonly readClickFields?: () => import('../sic/field-isolation.ts').ClickFieldEvidence | null;
+  readonly readAnimatedCells?: (points: readonly NativePoint[]) => import('../sic/observed-animation.ts').AnimatedCellEvidence | null;
 }
 
 export interface NativeProgramHandle {

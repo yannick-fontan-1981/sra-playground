@@ -171,3 +171,13 @@ Le runtime fournit à la demande un reçu du dernier clic qui modifie les champs
 VALV gagne le niveau 1 en 25 commandes et 17,80 s avec `sic_field_isolation` retirée. À la commande 16, `sic_public_input_exploration` modifie les champs en cliquant sur le bord du contrôle compact. `sic_learn_field_isolation` reprend ce retour, répète l’effet, vérifie le contrôle inverse, puis isole le champ non contributif. Les 16 premières commandes et les neuf suivantes relèvent exclusivement de SIC. Les deux familles d’isolation partagent les mesures de champ et les vérifications de réversibilité. Empreinte `ae953580daeb85198af62abb5833f0d6288d757913fbf7ea1b8fd045e5bd3ece`.
 
 Le rejeu avec permutation de palette et nom neutre conserve le gain en 25 commandes. DC22 conserve son gain après retrait. STCK et SC25 restent bloqués au budget de 40 commandes. Sur SC25, une démonstration transitoire peut disparaître de l’image finale du clic. Le test suivant doit vérifier si la même transmission entre familles peut porter sur les images intermédiaires de l’animation.
+
+### Transmettre les changements temporaires d’une animation
+
+Un comparateur commun mesure les cellules qui changent dans les images intermédiaires puis retrouvent leur valeur de départ. Il exige qu’une image montre l’ensemble des cellules vues en train de changer. La famille consommatrice choisit les points à examiner. Le reçu indique la commande, sa famille et les observations qui l’encadrent. Il expire au retour suivant et ne traverse pas les niveaux.
+
+SC25 gagne le niveau 1 en 17 commandes et 7,94 s avec `sic_reproduce_cue` retirée. La flèche initiale de `sic_cavity_access` déclenche une animation de 22 images. Quatre cellules s’allument puis retrouvent leur couleur de départ. `sic_learn_animated_cue` reprend ce retour, utilise P02 pour reproduire les quatre cellules, puis P05 et P07 pour mesurer et exploiter le déplacement du mobile. Les 17 commandes relèvent de SIC seul. Empreinte `b6f368973d4616b4cf6ddb47406d4ccfc6804c44b96c8ec7d6a01eb911206d69`.
+
+Les 17 commandes suffisent également sous une palette permutée avec un nom de jeu neutre. La détection du panneau et le planificateur de préparation et d’accès restent partagés avec la famille retirée. L’essai atteste le passage de la preuve d’animation entre familles sur SC25.
+
+Sur STCK, le rejeu avec `sic_marked_collection` retirée reste à zéro après 40 commandes. Un contre-essai hors agent vérifie que les deux éditions observées dans le rejeu normal suivies de Space gagnent depuis le plateau initial ou après un premier Space. Après le premier clic d’exploration qui retire une carte non marquée, la même suite ne gagne plus. Le prochain repli doit donc mieux choisir l’expérience d’édition avant de modifier la collection.

@@ -78,7 +78,7 @@ import { learnContactAccessId, translateCoupledPiecesId } from './translate-coup
 import { stagedMarksId } from './staged-marks.ts';
 import { learnSelectedAccessId, moveMaskedPiecesId } from './move-masked-pieces.ts';
 import { linkOpeningsId } from './link-openings.ts';
-import { reproduceCueId } from './reproduce-cue.ts';
+import { learnAnimatedCueId, reproduceCueId } from './reproduce-cue.ts';
 import { navigateRevealedGridId } from './navigate-revealed-grid.ts';
 import { learnGridAccessId } from './learn-grid-access.ts';
 import { arrangeTurnPostsId } from './arrange-turn-posts.ts';
@@ -86,7 +86,7 @@ import { learnCorrespondenceId } from './learn-correspondence.ts';
 import { materialAssemblyId } from './material-assembly.ts';
 
 export const standalonePlanningGroups = [
-  { id: 'repair_visible_field', families: [reproduceCueId, fieldRepairId, orderedContactId, supportTransferId, learnSupportMovesId] },
+  { id: 'repair_visible_field', families: [reproduceCueId, learnAnimatedCueId, fieldRepairId, orderedContactId, supportTransferId, learnSupportMovesId] },
   { id: 'inspect_candidate_relations', families: [crossingRowsId, invitedCaptureId, subsetExperimentId, learnScopeEffectsId, framedContactId, learnPatternAccessId, transportContactId, learnTransportAccessId, stagedMarksId, materialAssemblyId, animationContactId] },
   { id: 'coordinate_visible_motion', families: [bandAlignmentId, sharedArrivalId, outlineServiceId, carryToFrameId, directionalReceptionId, branchAlignmentId, receptionAccessId, learnReceptionAccessId, markerCoverageId, reflectedPlacementId, pivotCargoId, moveMaskedPiecesId, translateCoupledPiecesId, learnContactAccessId, coupledMotionId, materialRouteId, inventoryAccessId, replayAccessId, orientedDeliveryId, indicatedJumpId, highlightedRouteId, pairedPassageId, seatedContactId, switchedSurfaceId, reactiveTargetId, pointReachId, linkedMidpointId, excavateDescentId, litRouteId, nestedPassageId, linkOpeningsId, navigateRevealedGridId, arrangeTurnPostsId] },
   { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId, visualPatternId, framedSearchId, feedbackTrialId, catalogueComparisonId, windowRelationId, layeredFitId] },
