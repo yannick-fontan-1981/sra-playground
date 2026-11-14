@@ -61,7 +61,8 @@ export function createSicContrastControls(id = contrastControlsId): NativeFamily
             previousControlsUniform: true, options: controls.map((_, index) => ({ index, separation: index })) }];
         }
         const receipt = execution?.readClickRegionChanges?.([...controls, ...receivers]);
-        if (!receipt || receipt.afterRef !== observation.observation_ref || receipt.levelEpoch !== observation.level_epoch) return [];
+        if (!receipt || receipt.predictionContradicted || receipt.afterRef !== observation.observation_ref ||
+          receipt.levelEpoch !== observation.level_epoch) return [];
         const count = controls.length, before = receipt.beforeUniform.slice(0, count);
         const changed = receipt.changed.slice(0, count), remote = receipt.changed.slice(count);
         const source = changed.findIndex((value, index) => value && inside(controls[index]!, receipt.point));

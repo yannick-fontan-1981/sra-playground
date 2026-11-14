@@ -18,6 +18,7 @@ export type ClickMarkerEvidence = Omit<ClickRegionEvidence, 'before' | 'after'> 
 export type ClickRegionChanges = Omit<ClickRegionEvidence, 'before' | 'after'> & {
   readonly changed: readonly boolean[];
   readonly beforeUniform: readonly (number | null)[];
+  readonly predictionContradicted?: true;
 };
 
 export function regionChanged(before: NativeRows, after: NativeRows, [left, top, right, bottom]: NativeBox) {
