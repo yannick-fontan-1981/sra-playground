@@ -7,17 +7,19 @@ import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts
 export const publicInputExplorationId = 'sic_public_input_exploration';
 export const publicInputStrategies = {
   recheck_controls_after_change: 'Recheck directional controls after an interface change',
+  test_repeated_marker: 'Test a small marker in a repeated arrangement',
   compare_public_input: 'Test an available command on this board',
   revisit_input_frontier: 'Revisit a board with an untested command',
 } as const;
-const order = ['recheck_controls_after_change', 'compare_public_input', 'revisit_input_frontier'] as const;
-const graph = compileStrategyGraph({ id: 'understand_public_controls', version: 2, order: 'FALLBACK', priorities: order,
+const order = ['recheck_controls_after_change', 'test_repeated_marker', 'compare_public_input', 'revisit_input_frontier'] as const;
+const graph = compileStrategyGraph({ id: 'understand_public_controls', version: 3, order: 'FALLBACK', priorities: order,
   strategies: {
     recheck_controls_after_change: [{ fact: 'changedControlContext', expected: true, label: 'Previously stationary directions can be rechecked after a visible interface change' }],
+    test_repeated_marker: [{ fact: 'repeatedMarker', expected: true, label: 'Several equal square arrangements of isolated markers are visible, and this marker is untested on this board' }],
     compare_public_input: [{ fact: 'untestedHere', expected: true, label: 'An available illustrated input has no return on this board' }],
     revisit_input_frontier: [{ fact: 'observedRoute', expected: true, label: 'Previously observed returns lead to an untested input' }],
   },
-}, ['changedControlContext', 'untestedHere', 'observedRoute']);
+}, ['changedControlContext', 'repeatedMarker', 'untestedHere', 'observedRoute']);
 const explorationLimit = 40;
 const clickLimit = 30;
 const completion = 'G_official_completion';
@@ -35,19 +37,59 @@ const opposite: Readonly<Record<string, string>> = {
   ACTION1: 'ACTION2', ACTION2: 'ACTION1', ACTION3: 'ACTION4', ACTION4: 'ACTION3',
 };
 
+function repeatedInteriorMarkers(parts: ReturnType<typeof geometricComponents>, width: number, height: number) {
+  const byColor = new Map<number, NativePoint[]>();
+  for (const { area, bbox: [x, y], color } of parts) {
+    if (area !== 1 || x === 0 || x === width - 1 || y === 0 || y === height - 1) continue;
+    const group = byColor.get(color) ?? [];
+    group.push([x, y]);
+    byColor.set(color, group);
+  }
+  const markers = new Set<string>();
+  for (const group of byColor.values()) {
+    if (group.length < 8 || group.length > clickLimit) continue;
+    const occupied = new Set(group.map(point => point.join(',')));
+    const squares = new Map<number, string[][]>();
+    for (const [x, y] of group) for (const [right, otherY] of group) {
+      if (otherY !== y || right <= x) continue;
+      const span = right - x, bottom = y + span;
+      if (!occupied.has(`${x},${bottom}`) || !occupied.has(`${right},${bottom}`)) continue;
+      const corners = [`${x},${y}`, `${right},${y}`, `${x},${bottom}`, `${right},${bottom}`];
+      const matching = squares.get(span) ?? [];
+      matching.push(corners);
+      squares.set(span, matching);
+    }
+    for (const matching of squares.values()) {
+      for (const corners of matching) {
+        if (matching.some(other => corners.every(corner => !other.includes(corner)))) {
+          for (const corner of corners) markers.add(corner);
+        }
+      }
+    }
+  }
+  return markers;
+}
+
 function visibleInputs(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[]) {
   const candidates = new Map(inputs.filter(command => /^ACTION[1-5]$/.test(command.action_ref))
-    .map(command => [commandKey(command), { command, box: null as NativeBox | null }]));
+    .map(command => [commandKey(command), { command, box: null as NativeBox | null, marker: false }]));
   if (!observation.available_action_refs.includes('ACTION6')) return candidates;
-  const area = rows.length * rows[0]!.length;
-  const parts = geometricComponents(rows).filter(component => component.area >= 2 && component.area * 4 < area)
-    .sort((a, b) => b.area - a.area);
-  for (const { bbox, mask } of parts.slice(0, clickLimit)) {
+  const width = rows[0]!.length, height = rows.length;
+  const components = geometricComponents(rows);
+  const markers = repeatedInteriorMarkers(components, width, height);
+  const isMarker = ({ area, bbox: [x, y] }: typeof components[number]) => area === 1 && markers.has(`${x},${y}`);
+  const toCenter = ({ bbox: [left, top, right, bottom] }: typeof components[number]) =>
+    Math.abs(left + right - width + 1) + Math.abs(top + bottom - height + 1);
+  const parts = components.filter(component => isMarker(component) || (component.area >= 2 && component.area * 4 < width * height))
+    .sort((a, b) => Number(isMarker(b)) - Number(isMarker(a))
+      || (isMarker(a) && isMarker(b) ? toCenter(a) - toCenter(b) : b.area - a.area));
+  for (const part of parts.slice(0, clickLimit)) {
+    const { bbox, mask } = part;
     const [left, top, right, bottom] = bbox;
     const distance = ([x, y]: NativePoint) => Math.abs(2 * x + left - right) + Math.abs(2 * y + top - bottom);
     const [x, y] = mask.reduce((best, point) => distance(point) < distance(best) ? point : best);
     const command = { action_ref: 'ACTION6', data: { x: x + left, y: y + top } };
-    candidates.set(commandKey(command), { command, box: bbox });
+    candidates.set(commandKey(command), { command, box: bbox, marker: isMarker(part) });
   }
   return candidates;
 }
@@ -79,9 +121,11 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         ...(deferred && lastChange ? [lastChange.evidence] : []), ...(measuredControls && recheck ? recheck.evidence : [])];
       const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
         changedControlContext: { value: !!measuredControls, evidence: proof },
+        repeatedMarker: { value: frontier.depth === 0 && offer.marker, evidence: proof },
         untestedHere: { value: frontier.depth === 0, evidence: proof },
         observedRoute: { value: frontier.depth > 0, evidence: proof },
-      }, planners: { recheck_controls_after_change: () => offer, compare_public_input: () => offer, revisit_input_frontier: () => offer } });
+      }, planners: { recheck_controls_after_change: () => offer, test_repeated_marker: () => offer,
+        compare_public_input: () => offer, revisit_input_frontier: () => offer } });
       if (!selected) return null;
       const strategy = selected.id;
       const { command, box } = selected.plan;
