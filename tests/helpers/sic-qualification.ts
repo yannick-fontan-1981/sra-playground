@@ -134,11 +134,14 @@ async function qualifyActionCoverage() {
   }
 }
 
-async function qualifyFamilyAgenda() {
+async function qualifyFamilyAgenda(gameFilter: string | null) {
   const runtime = new BrowserGameRuntime();
   try {
     const results = [];
-    for (const fixture of cases) {
+    const requested = gameFilter?.split(',');
+    const selected = requested ? cases.filter(fixture => requested.includes(fixture.game)) : cases;
+    if (!selected.length) throw new Error('No matching qualification game.');
+    for (const fixture of selected) {
       output.textContent = JSON.stringify({ status: 'running', game: fixture.game, results }, null, 2);
       const baseline = await run(runtime, fixture.game, fixture.target, defaultRecoveryPack);
       const shadow = await run(runtime, fixture.game, fixture.target, { ...defaultRecoveryPack, familyAgenda: 'shadow' });
@@ -177,7 +180,7 @@ start.addEventListener('click', async () => {
   start.disabled = true;
   try {
     const parameters = new URLSearchParams(location.search);
-    await (parameters.has('information') ? findInformationExperiments() : parameters.has('family') ? qualifyFamilyAgenda() : parameters.has('coverage') ? qualifyActionCoverage()
+    await (parameters.has('information') ? findInformationExperiments() : parameters.has('family') ? qualifyFamilyAgenda(parameters.get('games')) : parameters.has('coverage') ? qualifyActionCoverage()
       : parameters.has('authored') ? qualifyAuthoredRule() : qualify());
   } catch (error) {
     output.textContent = JSON.stringify({ status: 'failed', error: error instanceof Error ? error.message : String(error) });
