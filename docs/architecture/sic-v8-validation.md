@@ -59,3 +59,9 @@ Mesure locale du moteur `3e50e61f` sur un i7-10700F. Le même contrôleur de par
 | DNOI · 3 | 17 | 26,30 s | 7,05 s | 3,73× |
 
 Résultats individuels dans l’ordre des quatre sessions, en secondes. SK48 25,345 / 12,186 / 11,321 / 21,845. SYME 38,851 / 21,994 / 21,901 / 38,544. DNOI 26,330 / 7,146 / 6,950 / 26,273. Sous SIC, le premier envoi intervient après 0,62 à 0,74 s en médiane par jeu. Le temps consacré au moteur de jeu est proche entre les deux modes et représente de 0,11 à 0,21 s par parcours. Les mesures couvrent deux fournisseurs de plans SIC, avec deux essais par mode et par jeu.
+
+### Coût du panneau SIC
+
+Au commit `3191c592`, quatre sessions neuves dans le même onglet du Playground ont rejoué SK48 niveau 1 avec SIC seul. Le panneau est désactivé, visible dans Stratégies, visible puis désactivé. Les quatre essais ont gagné le niveau en 19 commandes. Les durées bouton à fin de résolution sont 12,411 s, 11,667 s, 11,937 s et 11,938 s. La médiane donne 11,80 s avec le panneau et 12,17 s panneau désactivé. La mesure ne montre pas de ralentissement. Les cartes, les sprites et les comparaisons d’animation sont calculés après la fin du lot. Durant le lot, l’interface garde au plus 96 retours publics par référence.
+
+Le sélecteur Planning du Playground donne accès à SIC seul. Dans Stratégies, les cartes montrent la situation attestée, le besoin, les sprites avant et après et le retour. L’accordéon Strategy order affiche l’ordre effectivement examiné, le choix et les conditions qui écartent les autres stratégies. Les cartes de SK48 restent liées à la partie démarrée au niveau 1.
