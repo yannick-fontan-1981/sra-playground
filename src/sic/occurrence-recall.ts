@@ -29,6 +29,16 @@ type Prediction = { key: string; candidates: string[]; minimum: number };
 type Proposal = NativeProposal & { local: State; scene: Scene; chosen: Occurrence; predictions: Prediction[]; needId: string };
 const empty = (epoch = 0): State => ({ epoch, context: null, seen: [], rules: {}, calibration: null, visited: [], stopped: false });
 
+function hasMeter(scene: Scene) {
+  const [first, second] = scene.indicators;
+  if (!first || !second || scene.indicators.length < 3) return false;
+  const [left, top, right, bottom] = first.bbox;
+  const pitch = second.bbox[0] - left, width = right - left + 1, height = bottom - top + 1;
+  return height > 1 && width > height && pitch >= width && pitch <= 2 * width
+    && scene.indicators.every(({ bbox: [x, y, r, b] }, i) => x === left + i * pitch && r - x + 1 === width
+      && y === top && b === bottom);
+}
+
 function predict(scene: Scene, state: State): Prediction[] {
   const context = state.context;
   if (!context) return [];
@@ -62,11 +72,12 @@ export function createSicOccurrenceRecall(): NativeFamily<Proposal> {
   return {
     id: occurrenceRecallId,
     async propose(observation, rows, _inputs, remaining) {
-      if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
+      if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')
+        || observation.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))) return null;
       const local = state.epoch === observation.level_epoch ? state : empty(observation.level_epoch);
       if (local.stopped || local.visited.length >= 48) return null;
       const scene = measureOccurrenceScene(rows, observation, local.calibration) as Scene | null;
-      if (!scene || scene.indicators.length < 3 || scene.occurrences.length > 16 || local.visited.includes(scene.key)) return null;
+      if (!scene || !hasMeter(scene) || scene.occurrences.length > 16 || local.visited.includes(scene.key)) return null;
       const marked = scene.occurrences.filter(part => part.marked);
       const predictions = predict(scene, local);
       const supported = predictions.filter(({ key, minimum, candidates }) => candidates.length === 1
