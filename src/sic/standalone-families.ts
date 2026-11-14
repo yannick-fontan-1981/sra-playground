@@ -25,12 +25,13 @@ import { symbolContributionId } from './symbol-contribution.ts';
 import { markedLatticeId } from './marked-lattice.ts';
 import { queuedPlacementId } from './queued-placement.ts';
 import { legendRecolorId } from './legend-recolor.ts';
+import { visualPatternId } from './visual-pattern.ts';
 
 export const standalonePlanningGroups = [
   { id: 'repair_visible_field', families: [fieldRepairId, orderedContactId, supportTransferId] },
   { id: 'inspect_candidate_relations', families: [subsetExperimentId, framedContactId, transportContactId] },
   { id: 'coordinate_visible_motion', families: [bandAlignmentId, sharedArrivalId, outlineServiceId] },
-  { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId] },
+  { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId, visualPatternId] },
   { id: 'apply_learned_relations', families: [remoteSupportRouteId, occurrenceRecallId, slotPermutationId, surfaceCopyId] },
   { id: 'construct_executable_program', families: [codeRouteId, programOriginId] },
   { id: 'fit_profiles_into_receivers', families: [profileTransferId] },

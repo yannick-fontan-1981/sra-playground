@@ -230,6 +230,11 @@ export async function explainVisual(rasters: readonly (Raster | null)[], index: 
   return { decomposition: 'independent_observed_palette_layers', layers };
 }
 
+export function visualSequenceConfiguration(): Configuration {
+  const source = (V6_DECLARATIVE_SOURCES as unknown as Record<string, { text: string }>)['agents/yf_arc3_v6/morphology_policy/visual_sequences/visual_sequences.drm']!;
+  return JSON.parse(source.text).declarations[0].configuration as Configuration;
+}
+
 export class VisualSequences {
   readonly id = 'visual_sequences';
   private readonly config: Configuration;
@@ -241,8 +246,7 @@ export class VisualSequences {
   private selected: { action: NativeCommand; key: string; option: Layout['options'][number]; inference: Inference } | null = null;
   last: Inference | null = null;
   constructor() {
-    const source = (V6_DECLARATIVE_SOURCES as unknown as Record<string, { text: string }>)['agents/yf_arc3_v6/morphology_policy/visual_sequences/visual_sequences.drm']!;
-    this.config = JSON.parse(source.text).declarations[0].configuration as Configuration;
+    this.config = visualSequenceConfiguration();
     this.src = NativeSrcProgram.create('v6.visual_sequences.choose', this.callbacks());
   }
   private callbacks() {
