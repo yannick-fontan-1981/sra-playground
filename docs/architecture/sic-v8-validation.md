@@ -25,7 +25,7 @@ LKEY termine également le rejeu de `33f0fb3b` avec les mêmes 44 commandes, ret
 
 ## Mesurer le remplacement effectif
 
-Le commit `e1947e92` atteint **4 jeux gagnés sur les 100 du catalogue (4 %)** et **24 niveaux gagnés** sur les parties qualifiées. La [référence par jeu](sic-v8-reference-levels.md) retient les maxima attestés pour le natif, V5, V6 et V7. Le score à dépasser se calcule sur les parcours partis du niveau 1, dans une partie continue.
+Le commit `904df879` atteint **4 jeux gagnés sur les 100 du catalogue (4 %)** et **25 niveaux gagnés** sur les parties qualifiées. La [référence par jeu](sic-v8-reference-levels.md) retient les maxima attestés pour le natif, V5, V6 et V7. Le score à dépasser se calcule sur les parcours partis du niveau 1, dans une partie continue.
 
 | Jeu | Maximum historique retrouvé | SIC seul | Seuil dépassé à l’action | Fin des niveaux |
 | --- | ---: | ---: | ---: | --- |
@@ -34,6 +34,7 @@ Le commit `e1947e92` atteint **4 jeux gagnés sur les 100 du catalogue (4 %)** e
 | HANO | 4 | 4 sur 4 · WIN | Plafond atteint | 6, 16, 30, 60 |
 | DICO | 6 | 6 sur 6 · WIN | Plafond atteint | 5, 11, 19, 27, 34, 71 |
 | SK48 | 2 | 2 sur 8 · entrée au niveau 3 | — | 19, 56 |
+| AS66 | 3 | 1 sur 9 · entrée au niveau 2 | — | 4 |
 | CASC | 1 | 0 sur 6 · aucun plan applicable | — | — |
 
 Le rejeu charge la partie neuve et le pack `solver: 'sic'` dans le worker normal. Il enregistre les seuls fournisseurs SIC de réparation par correspondance et d’alignement par contact. Le navigateur vérifie avant chaque commande le fournisseur, l’autorité `sicOnly`, le sous-objectif et la stratégie. L’observation, les opérateurs géométriques, les fonctions de recherche, l’exécution et le garde WHY/ACT sont partagés. La réparation combine des correspondances mesurées et, lorsque plusieurs observations indépendantes concordent, des votes dans les groupes formés par les symétries ou les répétitions. Elle teste un clic avec **OP18** et vérifie la cellule cible, la conservation du reste du champ et le nombre de pixels modifiés en périphérie. Les changements de niveau et la victoire proviennent du retour du jeu.
@@ -81,3 +82,5 @@ Au troisième tour, SYME gagne trois niveaux en 36 commandes et DNOI en 17. SK48
 Avec le transfert ordonné, le tour du niveau 1 à `d8e78990` fait passer la couverture à **4 sur 100**. SK48, HANO, DNOI et SYME atteignent le niveau 2. Les 100 parties ont terminé le contrôle d’attribution des plans. HANO a aussi été rejoué jusqu’à sa victoire officielle.
 
 Au commit `e1947e92`, le rejeu du niveau 1 sur les 100 jeux porte le total à **5 sur 100** avec DICO. Le prochain besoin examiné est le déplacement jusqu’à une cavité sur AS66. Les premiers contrastes publics distinguent la pièce mobile du décor et montrent que le trajet dépend des obstacles et des arrêts observés.
+
+Le nouveau fournisseur SIC a franchi AS66 au quatrième retour, après avoir constaté la translation d’un corps compatible avec la cavité et retrouvé l’arrêt suivant. OP18 a autorisé chaque action. SIC a testé quatre directions au niveau 2 et s’est arrêté sans route attestée. Le même fournisseur a joué quatre directions sur CASC et s’est arrêté sans corps compatible confirmé ni niveau gagné. La qualification navigateur d’AS66 est `a54fbb6b99788e9b4418f5bcbcff71cf72f48ca2ac8faf8faa6eb49c285632bf`.
