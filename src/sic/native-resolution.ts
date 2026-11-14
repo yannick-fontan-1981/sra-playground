@@ -28,7 +28,7 @@ import { learnProgramOriginId, programOriginId, programOriginStrategies } from '
 import { previewPlacementId, previewPlacementStrategies } from './preview-placement.ts';
 import { symbolContributionId, symbolContributionStrategies } from './symbol-contribution.ts';
 import { markedLatticeId, markedLatticeStrategies } from './marked-lattice.ts';
-import { queuedPlacementId, queuedPlacementStrategies } from './queued-placement.ts';
+import { learnQueuedPlacementId, queuedPlacementId, queuedPlacementStrategies } from './queued-placement.ts';
 import { legendRecolorId, legendRecolorStrategies, matchExampleId } from './legend-recolor.ts';
 import { visualPatternId, visualPatternStrategies } from './visual-pattern.ts';
 import { facetGrowthId, facetGrowthStrategies, learnFacetGrowthId } from './facet-growth.ts';
@@ -485,7 +485,7 @@ export function readNativeResolution(agent: {
                   : family === profileTransferId ? profileTransferStrategies : family === orderedReplenishmentId ? orderedReplenishmentStrategies
                     : (family === programOriginId || family === learnProgramOriginId) ? programOriginStrategies : family === previewPlacementId ? previewPlacementStrategies
                       : family === symbolContributionId ? symbolContributionStrategies : family === markedLatticeId ? markedLatticeStrategies
-                        : family === queuedPlacementId ? queuedPlacementStrategies : (family === legendRecolorId || family === matchExampleId) ? legendRecolorStrategies
+                        : (family === queuedPlacementId || family === learnQueuedPlacementId) ? queuedPlacementStrategies : (family === legendRecolorId || family === matchExampleId) ? legendRecolorStrategies
                           : family === visualPatternId ? visualPatternStrategies : (family === facetGrowthId || family === learnFacetGrowthId) ? facetGrowthStrategies
                             : (family === chartRouteId || family === learnChartRouteId) ? chartRouteStrategies : family === populationPlacementId ? populationPlacementStrategies
                               : (family === carryToFrameId || family === learnCarryToFrameId) ? carryToFrameStrategies : family === portPairingId ? portPairingStrategies
@@ -652,7 +652,7 @@ export function readNativeResolution(agent: {
     if (cursor) subjects.push({ label: 'Current cursor', box: cursor });
     if (target) subjects.push({ label: 'Unvisited marker', box: target });
   }
-  if (situationCard && family === queuedPlacementId) {
+  if (situationCard && (family === queuedPlacementId || family === learnQueuedPlacementId)) {
     const group = bounds(card?.activeGroup), field = bounds(card?.field);
     if (group) subjects.push({ label: 'Active group', box: group });
     if (field) subjects.push({ label: 'Receiving field', box: field });

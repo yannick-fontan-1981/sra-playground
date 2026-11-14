@@ -131,6 +131,7 @@ export interface NativeExecution {
   readonly remainingLevelActions?: number;
   readonly reasoningMode?: import('../sic/reasoning-mode.ts').ReasoningMode;
   readonly observedControlledMotion?: import('../sic/public-input-exploration.ts').ControlledMotion;
+  readonly observedQueue?: ReturnType<typeof import('./v6-queued-field-models.ts').acquireQueuedField>;
   readonly readDirectionalMotion?: () => import('../sic/observed-translation.ts').DirectionalMotion | null;
   readonly readDirectionalView?: (field: NativeBox, focus: number, references: readonly NativeBox[]) => {
     readonly beforeRef: string;

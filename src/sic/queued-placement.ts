@@ -2,11 +2,13 @@ import { symbolicDigest } from '../logos-engine/v6-hash.ts';
 import { acquireQueuedField, activeQueueMemberCount } from '../logos-engine/v6-queued-field-models.ts';
 import { measureQueuedField, queuedFieldGrid } from '../logos-engine/v6-queued-field-observation.ts';
 import { chooseQueuedField } from '../logos-engine/v6-queued-field-search.ts';
-import type { NativeCommand, NativeFamily, NativeProposal, NativeRecord } from '../logos-engine/v6-native-types.ts';
+import type { NativeCommand, NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const queuedPlacementId = 'sic_queued_placement';
+export const learnQueuedPlacementId = 'sic_place_after_observed_queue_controls';
 export const queuedPlacementStrategies = {
   test_queue_control: 'Test what this input does to the active group',
   prepare_queued_group: 'Prepare the active group for the projected placement',
@@ -26,15 +28,23 @@ type Grid = number[][];
 type Proposal = NativeProposal & { model: Model; geometry: NativeRecord; expected: Grid | null; needId: string };
 const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 
-export function createSicQueuedPlacement(): NativeFamily<Proposal> {
+export function createSicQueuedPlacement(family = queuedPlacementId): NativeFamily<Proposal> {
+  const learns = family === learnQueuedPlacementId;
   let state: Model = null;
+  let choose: NativeProgramHandle | undefined;
   return {
-    id: queuedPlacementId,
-    propose(observation, rows, inputs, remaining, execution) {
+    id: family,
+    async attachPrograms(registry) {
+      if (learns) choose = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || observation.available_action_refs.includes('ACTION6')) return null;
       const available = inputs.filter(command => /^ACTION[1-5]$/.test(command.action_ref)).map(command => command.action_ref).sort();
       if (available.length < 3) return null;
-      const local = state?.epoch === observation.level_epoch ? state : null;
+      const prior = state?.epoch === observation.level_epoch ? state : null;
+      const acquired = execution?.observedQueue?.epoch === observation.level_epoch ? execution.observedQueue : null;
+      const local = prior ?? (learns ? acquired : null);
+      if (learns && !local) return null;
       const scene = measureQueuedField(rows, local?.geometry ?? null, activeQueueMemberCount(local));
       if (!scene?.mark || (!local && !scene.preview_alternatives.length)) return null;
       const controls = local?.controls ?? {};
@@ -44,6 +54,7 @@ export function createSicQueuedPlacement(): NativeFamily<Proposal> {
         && laws.some(law => law.kind === 'receive')
         && (laws.some(law => law.kind === 'reorder' && law.permutations?.length === 1) || new Set(scene.mark.values).size === 1)
         && move.some(law => law.delta! < 0) && move.some(law => law.delta! > 0);
+      if (learns && !prior && !complete) return null;
       const now = execution?.now ?? (() => performance.now());
       const plan = complete ? chooseQueuedField(scene, local, Math.min(remaining, 16),
         Math.min(execution?.deadlineMs ?? Infinity, now() + 1200), 24000, 3, now) : null;
@@ -58,11 +69,17 @@ export function createSicQueuedPlacement(): NativeFamily<Proposal> {
       const evidence: [string, ...string[]] = [ref, ...new Set<string>((local?.evidence ?? []).slice(-10).filter((item: string) => item !== ref))];
       const command: NativeCommand = { action_ref, data: {} };
       const receive = controls[action_ref]?.kind === 'receive';
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
+      const facts = { eligibleProbe: !first, routeSupported: !!first && !receive,
+        knownInteraction: !!first && receive, mode: execution?.reasoningMode ?? 'exploration' };
+      const decision = learns ? await choose?.run({ situation: facts }, { signal: execution?.signal }) : null;
+      const resolved = learns ? null : resolveStrategyGraph({ graph, mode: 'active', facts: {
         probe: { value: !first, evidence }, prepare: { value: !!first && !receive, evidence }, receive: { value: !!first && receive, evidence },
       }, planners: { test_queue_control: () => command, prepare_queued_group: () => command, receive_queued_group: () => command } });
-      if (!selected) return null;
-      const strategy = selected.id, label = queuedPlacementStrategies[strategy], parent = 'G_official_completion';
+      const strategy = learns ? decision?.result === 'P05' && facts.eligibleProbe ? 'test_queue_control'
+        : decision?.result === 'P07' && facts.routeSupported ? 'prepare_queued_group'
+        : decision?.result === 'P02' && facts.knownInteraction ? 'receive_queued_group' : null : resolved?.selected?.id;
+      if (!strategy) return null;
+      const label = queuedPlacementStrategies[strategy], parent = 'G_official_completion';
       const goal = { kind: 'contribute_active_group_to_field', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['active_group_and_receiving_field'], parentObjective: parent, satisfactionContract: 'observe_official_progress_after_group_receptions' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
@@ -82,10 +99,12 @@ export function createSicQueuedPlacement(): NativeFamily<Proposal> {
       const [left, top] = scene.geometry.origin, [width, height] = scene.geometry.shape;
       const [dx, dy] = scene.geometry.pitch, [cellWidth, cellHeight] = scene.geometry.size;
       const field = [left, top, left + (width - 1) * dx + cellWidth - 1, top + (height - 1) * dy + cellHeight - 1];
-      return { status: 'proposed', kind: queuedPlacementId, actions, model: local, geometry: scene.geometry, expected, needId: need.id,
+      return { status: 'proposed', kind: family, actions, model: local, geometry: scene.geometry, expected, needId: need.id,
         steps: [{ action: command, expected_after: null }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: { strategy, need: 'Place each incoming group where it contributes to the field', mode: first ? 'solving' : 'exploration',
-          situation: label, agenda: entries, evidence, field, activeGroup: mark.bbox },
+          situation: label, agenda: resolved?.entries ?? [], evidence, field, activeGroup: mark.bbox },
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },

@@ -362,4 +362,8 @@ Le rejeu gagne avec un nom neutre et une palette permutée. Désactiver P02 apr�
 
 La campagne commune REGN et CASC confirme **34/100** niveaux 1 après retrait en 404 commandes SIC seul, dont 74 choisies par le SRC. Les 100 niveaux 1, les 32 victoires précédentes après retrait et les quatre jeux complets avec et sans retrait gardent leurs commandes et retours de référence.
 
-Sur COLM, un prototype sépare l’acquisition des contrôles et leur utilisation. Après retrait de `sic_queued_placement`, les six premiers retours de l’exploration permettent au fournisseur de mesurer les deux translations, la permutation et la direction du dépôt. La carte SRC reprend les commandes et gagne en 14 actions supplémentaires, soit 20 au total. Ce résultat ciblé reste à qualifier sur le catalogue.
+### Placer des groupes après mesure des contrôles
+
+Avec `sic_queued_placement` retirée, **COLM gagne en 20 commandes SIC seul**. Les six premiers retours de l’exploration mesurent les deux translations, réduisent la permutation à une seule hypothèse et établissent le sens du dépôt à partir d’une image intermédiaire. Après chaque retour, le modèle est associé à l’observation qui vient de le produire. La carte SRC choisit ensuite neuf préparations P07 et cinq dépôts P02. Le calcul des placements et l’observation de leurs effets restent partagés avec le fournisseur TypeScript d’origine. Le trajet après retrait diffère du trajet habituel, qui gagne en 17 commandes. Empreinte après retrait `ecd46ae97f9d95dd39739e82e071b5bae820aa1f22db4c50d721996a10ff8fe7`.
+
+Le nom neutre et la palette permutée conservent les 20 commandes et le gain. Désactiver P02 au passage entre l’exploration et la carte empêche le gain en 20 commandes.
