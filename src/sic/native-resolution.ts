@@ -16,7 +16,7 @@ import { outlineServiceId, outlineServiceStrategies } from './outline-service.ts
 import { labeledSequenceId, labeledSequenceStrategies } from './labeled-sequence.ts';
 import { markedCollectionId, markedCollectionStrategies } from './marked-collection.ts';
 import { slotTransferId, slotTransferStrategies } from './slot-transfer.ts';
-import { remoteSupportRouteId, remoteSupportRouteStrategies } from './remote-support-route.ts';
+import { learnRemoteAccessId, remoteSupportRouteId, remoteSupportRouteStrategies } from './remote-support-route.ts';
 import { occurrenceRecallId, occurrenceRecallStrategies } from './occurrence-recall.ts';
 import { slotPermutationId, slotPermutationStrategies } from './slot-permutation.ts';
 import { surfaceCopyId, surfaceCopyStrategies } from './surface-copy.ts';
@@ -472,7 +472,7 @@ export function readNativeResolution(agent: {
   const labels = family === orderedContactId ? orderedContactStrategies : family === cavityAccessId ? cavityStrategies
     : family === publicInputExplorationId ? publicInputStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId ? inventoryAccessStrategies
-    : family === framedContactId ? framedContactStrategies : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId ? inventoryAccessStrategies
+    : family === framedContactId ? framedContactStrategies : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
       : family === transportContactId ? transportContactStrategies : family === bandAlignmentId ? bandAlignmentStrategies
         : family === sharedArrivalId ? sharedArrivalStrategies : family === outlineServiceId ? outlineServiceStrategies
           : family === labeledSequenceId ? labeledSequenceStrategies : family === markedCollectionId ? markedCollectionStrategies
@@ -575,7 +575,7 @@ export function readNativeResolution(agent: {
     if (source) subjects.push({ label: 'Matching token', box: source });
     if (destination) subjects.push({ label: 'Slot to fill', box: destination });
   }
-  if (situationCard && family === remoteSupportRouteId) {
+  if (situationCard && (family === remoteSupportRouteId || family === learnRemoteAccessId)) {
     for (const [field, label] of [['actor', 'Moving piece'], ['target', 'Target piece'], ['control', 'Remote control'],
       ['landing', 'Proposed next cell'], ['affectedSupport', 'Support that may change']] as const) {
       const box = bounds(card?.[field]);

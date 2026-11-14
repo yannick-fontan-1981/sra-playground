@@ -2,8 +2,10 @@ import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-nat
 import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 
 export const remoteSupportRouteId = 'sic_remote_support_route';
+export const learnRemoteAccessId = 'sic_learn_remote_access';
 export const remoteSupportRouteStrategies = {
   test_supported_translation: 'Identify which piece moves across the visible support',
   test_remote_support_control: 'Test whether the control changes a distant passage',
@@ -26,7 +28,7 @@ type Control = { box: NativeBox; color: number };
 type Edit = readonly [x: number, y: number, before: number, after: number];
 type Scene = { arena: NativeBox; pitch: number; candidates: Piece[]; controls: Control[]; supports: number[] };
 type State = { epoch: number; scene: Scene; actor: Piece | null; target: Piece | null; effects: (Edit[] | null)[];
-  evidence: string[]; stopped: boolean; count: number };
+  evidence: string[]; effectRefs?: (string | null)[]; stopped: boolean; count: number };
 type Move = { command: NativeCommand; landing: NativePoint | null; floor: number | null; control: number | null };
 type Proposal = NativeProposal & { strategy: Strategy; local: State; move: Move; needId: string };
 const directions = [
@@ -192,18 +194,30 @@ function motionTrial(rows: NativeRows, scene: Scene, inputs: readonly NativeComm
   return choices[0] ?? null;
 }
 
-export function createSicRemoteSupportRoute(): NativeFamily<Proposal> {
+export function createSicRemoteSupportRoute(family = remoteSupportRouteId): NativeFamily<Proposal> {
+  const learns = family === learnRemoteAccessId;
   let state: State | null = null;
   return {
-    id: remoteSupportRouteId,
-    async propose(observation, rows, inputs, remaining) {
+    id: family,
+    async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior?.stopped || (prior?.count ?? 0) >= 64) return null;
+      if (learns && !prior && !execution?.readDirectionalMotion) return null;
       const scene = prior?.scene ?? measureScene(rows);
       if (!scene) return null;
-      const local = prior ?? { epoch: observation.level_epoch, scene, actor: null, target: null,
+      let local: State = prior ?? { epoch: observation.level_epoch, scene, actor: null, target: null,
         effects: scene.controls.map(() => null), evidence: [], stopped: false, count: 0 };
+      if (learns && !prior) {
+        const motion = execution?.readDirectionalMotion?.();
+        if (motion?.afterRef !== observation.observation_ref || motion.levelEpoch !== observation.level_epoch) return null;
+        const candidates = scene.candidates.filter(piece => motion.translations.some(({ to, displacement, color }) =>
+          color === piece.color && same(piece.at, origin(to)) && width(to) === scene.pitch && height(to) === scene.pitch
+          && (displacement[0] === 0 || displacement[1] === 0) && Math.abs(displacement[0]) + Math.abs(displacement[1]) === scene.pitch));
+        if (candidates.length !== 1) return null;
+        local = { ...local, actor: candidates[0]!, target: scene.candidates.find(piece => piece !== candidates[0])!,
+          evidence: [motion.beforeRef, motion.afterRef], effectRefs: scene.controls.map(() => null) };
+      }
       const { actor, target } = local;
       if (actor && target && (!atPiece(rows, actor, scene.pitch) || !atPiece(rows, target, scene.pitch))) return null;
       const probe = local.effects.findIndex(effect => effect === null);
@@ -212,18 +226,24 @@ export function createSicRemoteSupportRoute(): NativeFamily<Proposal> {
         ? { command: controlCommand(scene.controls[probe]!), landing: null, floor: null, control: probe } : null;
       const route = actor && target && probe === -1 ? searchRoute(rows, local, inputs, Math.min(remaining, 64 - local.count)) : null;
       const ref = observation.observation_ref;
-      const evidence: [string, ...string[]] = [ref, ...local.evidence.filter(item => item !== ref)];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
+      const effectRef = route?.control == null ? null : local.effectRefs?.[route.control];
+      const evidence: [string, ...string[]] = [ref, ...new Set([...local.evidence, ...(effectRef ? [effectRef] : [])].filter(item => item !== ref))];
+      const normal = resolveStrategyGraph({ graph, mode: 'active', facts: {
         trial: { value: !!trial, evidence }, probe: { value: !!question, evidence },
         move: { value: !!route?.landing, evidence }, switch: { value: route?.control != null, evidence },
       }, planners: { test_supported_translation: () => trial, test_remote_support_control: () => question,
         follow_supported_route: () => route, change_support_to_continue: () => route } });
-      if (!selected) return null;
-      const strategy = selected.id, move = selected.plan, label = remoteSupportRouteStrategies[strategy], parent = 'G_official_completion';
+      if (!normal.selected) return null;
+      const move = normal.selected.plan, label = remoteSupportRouteStrategies[normal.selected.id], parent = 'G_official_completion';
+      const mode = execution?.reasoningMode ?? 'exploration';
+      const offer = { input: move.command.action_ref, expected: move.landing, evidence };
+      const primitive = learns ? resolveNavigationPrimitives({ mode, evidence, probe: route ? null : offer,
+        access: route?.landing ? offer : null, interaction: route?.control != null ? offer : null }) : null;
+      const strategy = primitive?.selected?.id ?? normal.selected.id;
       const goal = { kind: 'reach_target_on_switchable_support', scope: ref.split(':revision:', 1)[0]!, subjects: ['visible_support_and_controls'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_after_supported_navigation' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
-      const id = `remote-support:${need.id}`, actions = [move.command];
+      const id = `${learns ? family : 'remote-support'}:${need.id}`, actions = [move.command];
       const control = move.control === null ? null : scene.controls[move.control]!;
       const edits = move.control === null ? null : local.effects[move.control];
       const affectedSupport = edits?.length ? [
@@ -231,16 +251,16 @@ export function createSicRemoteSupportRoute(): NativeFamily<Proposal> {
         Math.max(...edits.map(edit => edit[0])), Math.max(...edits.map(edit => edit[1])),
       ] : null;
       const pointBinding = control ? await ObservedInputDomain.makeLocusWitness(observation, rows, center(control.box), { reason: label, evidence }) : null;
-      return { status: 'proposed', kind: remoteSupportRouteId, actions, strategy, local, move, needId: need.id,
+      return { status: 'proposed', kind: family, actions, strategy: normal.selected.id, local, move, needId: need.id,
         steps: [{ action: move.command, expected_after: null, ...(pointBinding ? { point_binding: pointBinding } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Reach the other piece by finding connected support', mode: route ? 'solving' : 'exploration',
-          situation: label, agenda: entries, evidence, actor: actor ? cell(actor.at, scene.pitch) : null,
+        sicSituationCard: { strategy, need: 'Reach the other piece by finding connected support', mode: learns ? mode : route ? 'solving' : 'exploration',
+          situation: label, agenda: primitive?.entries ?? normal.entries, evidence, actor: actor ? cell(actor.at, scene.pitch) : null,
           target: target ? cell(target.at, scene.pitch) : null, control: control?.box ?? null,
           landing: move.landing ? cell(move.landing, scene.pitch) : null, affectedSupport },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
-        sicLocalDecision: { strategy, objective: { id, label, parent }, need },
+        sicLocalDecision: { strategy, objective: { id, label: primitive?.selected ? navigationPrimitives[primitive.selected.id] : label, parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
@@ -258,6 +278,10 @@ export function createSicRemoteSupportRoute(): NativeFamily<Proposal> {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const update = observeReturn(proposal, first, second);
       state = { ...update, count: update.count + 1, evidence: [...update.evidence.slice(-5), after.observation_ref] };
+      const { control } = proposal.move;
+      if (state.effectRefs && control !== null && !proposal.local.effects[control] && update.effects[control]) {
+        state.effectRefs = state.effectRefs.map((ref, i) => i === control ? after.observation_ref : ref);
+      }
       return { events: [] };
     },
     state: () => ({ state }),

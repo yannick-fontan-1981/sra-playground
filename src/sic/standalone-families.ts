@@ -15,7 +15,7 @@ import { outlineServiceId } from './outline-service.ts';
 import { labeledSequenceId } from './labeled-sequence.ts';
 import { markedCollectionId } from './marked-collection.ts';
 import { slotTransferId } from './slot-transfer.ts';
-import { remoteSupportRouteId } from './remote-support-route.ts';
+import { learnRemoteAccessId, remoteSupportRouteId } from './remote-support-route.ts';
 import { occurrenceRecallId } from './occurrence-recall.ts';
 import { slotPermutationId } from './slot-permutation.ts';
 import { surfaceCopyId } from './surface-copy.ts';
@@ -90,7 +90,7 @@ export const standalonePlanningGroups = [
   { id: 'inspect_candidate_relations', families: [crossingRowsId, invitedCaptureId, subsetExperimentId, learnScopeEffectsId, framedContactId, learnPatternAccessId, transportContactId, learnTransportAccessId, stagedMarksId, materialAssemblyId, animationContactId] },
   { id: 'coordinate_visible_motion', families: [bandAlignmentId, sharedArrivalId, outlineServiceId, carryToFrameId, directionalReceptionId, branchAlignmentId, receptionAccessId, learnReceptionAccessId, markerCoverageId, reflectedPlacementId, pivotCargoId, moveMaskedPiecesId, translateCoupledPiecesId, learnContactAccessId, coupledMotionId, materialRouteId, inventoryAccessId, replayAccessId, orientedDeliveryId, indicatedJumpId, highlightedRouteId, pairedPassageId, seatedContactId, switchedSurfaceId, reactiveTargetId, pointReachId, linkedMidpointId, excavateDescentId, litRouteId, nestedPassageId, linkOpeningsId, navigateRevealedGridId, arrangeTurnPostsId] },
   { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId, visualPatternId, framedSearchId, feedbackTrialId, catalogueComparisonId, windowRelationId, layeredFitId] },
-  { id: 'apply_learned_relations', families: [remoteSupportRouteId, occurrenceRecallId, slotPermutationId, surfaceCopyId, chartRouteId] },
+  { id: 'apply_learned_relations', families: [remoteSupportRouteId, learnRemoteAccessId, occurrenceRecallId, slotPermutationId, surfaceCopyId, chartRouteId] },
   { id: 'construct_executable_program', families: [codeRouteId, programOriginId, glyphEditingId, windowCoverageId, panelMatchingId] },
   { id: 'fit_profiles_into_receivers', families: [profileTransferId, portPairingId, radialConnectionId, framedReceptionId] },
   { id: 'preserve_ordered_team', families: [orderedReplenishmentId] },
