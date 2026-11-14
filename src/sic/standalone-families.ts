@@ -40,6 +40,7 @@ import { windowCoverageId } from './window-coverage.ts';
 import { panelMatchingId } from './panel-matching.ts';
 import { crossingRowsId } from './crossing-rows.ts';
 import { traceCoverageId } from './trace-coverage.ts';
+import { radialConnectionId } from './radial-connection.ts';
 
 export const standalonePlanningGroups = [
   { id: 'repair_visible_field', families: [fieldRepairId, orderedContactId, supportTransferId] },
@@ -48,7 +49,7 @@ export const standalonePlanningGroups = [
   { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId, visualPatternId, framedSearchId] },
   { id: 'apply_learned_relations', families: [remoteSupportRouteId, occurrenceRecallId, slotPermutationId, surfaceCopyId, chartRouteId] },
   { id: 'construct_executable_program', families: [codeRouteId, programOriginId, glyphEditingId, windowCoverageId, panelMatchingId] },
-  { id: 'fit_profiles_into_receivers', families: [profileTransferId, portPairingId] },
+  { id: 'fit_profiles_into_receivers', families: [profileTransferId, portPairingId, radialConnectionId] },
   { id: 'preserve_ordered_team', families: [orderedReplenishmentId] },
   { id: 'fill_visible_partition', families: [previewPlacementId, populationPlacementId] },
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, facetGrowthId] },
