@@ -16,3 +16,7 @@ Le plan V8 de référence est conservé dans `docs/architecture/v8-human-configu
 | Les principales familles ont migré | La matrice relie les choix observés à des primitives génériques. P04, P05 et P11 ont des éléments communs intégrés. | Faire porter les choix des familles principales par des graphes SIC et comparer chaque voie à sa référence. |
 | Les performances restent conformes | La fenêtre précédente qualifie `90d002a4` face à 0.65. Le code actuel demande une mesure propre. | Qualifier séparément STCK et SMLP sous +10 %, sur le commit à déclarer, avec commandes et résultats identiques. |
 | Les anciennes voies directes sont inventoriées | Les familles enregistrées et les épisodes exécutés sont inspectables. | Lister chaque voie directe conservée, sa condition d’entrée, son autorité et le cas qui l’exerce. |
+
+## Qualification des modes adaptatifs
+
+Sur `33f0fb3b`, SK48, AS66, SYME et CASC reproduisent 48 commandes et les mêmes retours publics, ainsi que les mêmes résultats. SK48 ouvre le niveau 2 à l’action 19. AS66 termine trois niveaux en 19 actions, SYME un en neuf, et CASC conserve son arrêt `frontier_unknown` après une commande. LOGI conserve 16 commandes et deux niveaux. Le navigateur montre deux cartes P05 exploratoires au niveau 2 d’AS66, aux actions 6 et 7. Sur DC22, l’action 1 est un test qui relève de l’exploration pendant que l’agenda assimile l’entrée du niveau. Les tests de contrat vérifient les cartes d’assimilation et de résolution avec des preuves appropriées. Leur déclenchement en partie réelle reste à attester.
