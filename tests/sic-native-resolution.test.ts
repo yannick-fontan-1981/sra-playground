@@ -1,6 +1,29 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { captureDecisionSprites, readNativeResolution } from '../src/sic/native-resolution.ts';
+import { bindMissingControlTrial, missingControlWitness } from '../src/sic/missing-control-strategy.ts';
+import type { NativeProposal } from '../src/logos-engine/v6-native-types.ts';
+
+test('the missing-control decision relies on the need and current evidence across unrelated plan types', () => {
+  const ref = 'current-observation';
+  const proposal = (kind: string): NativeProposal => ({ kind, status: 'proposed', actions: [{ action_ref: 'ACTION1', data: {} }],
+    binding: { observation_ref: ref } });
+  const situation = { observationRef: ref, availableActions: ['ACTION1'], objectiveSupported: true,
+    effectKnown: false, triedInContext: false, evidence: [ref, 'retained-objective'] };
+  const first = proposal('unrelated-first'), second = proposal('unrelated-second');
+  assert.equal(missingControlWitness(proposal('cavity_direction_question'), 'ACTION1', ref), undefined);
+  bindMissingControlTrial(first, situation);
+  bindMissingControlTrial(second, situation);
+  const witness = missingControlWitness(first, 'ACTION1', ref);
+  assert.equal(witness?.need, 'establish_control_effect_for_current_objective');
+  assert.deepEqual(missingControlWitness(second, 'ACTION1', ref), witness);
+  for (const changes of [{ objectiveSupported: false }, { effectKnown: true }, { triedInContext: true },
+    { availableActions: [] }, { evidence: ['stale'] }, { observationRef: 'stale' }]) {
+    const rejected = proposal('unrelated-first');
+    bindMissingControlTrial(rejected, { ...situation, ...changes });
+    assert.equal(missingControlWitness(rejected, 'ACTION1', ref), undefined);
+  }
+});
 import { explainDecision, orientationAfter, strategyEpisodes, strategyLinks, strategyOutcome } from '../src/sic/decision-configurations.ts';
 import type { DirectionalReturn } from '../src/sic/directional-return.ts';
 

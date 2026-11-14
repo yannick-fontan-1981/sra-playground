@@ -9,6 +9,7 @@ import { compareDirectionTargets, summarizeDirections, type DirectionalReturn } 
 import ls20Directions from './ls20-direction-review.json';
 import ls20ShapeExit from './ls20-review-evidence.json';
 import { captureDecisionSprites, type NativeResolution } from './native-resolution.ts';
+import { missingControlLabel } from './missing-control-strategy.ts';
 import { compareRecoveryRoute, firstRecovery, isLevelCompletion, recoveryContinuation, type PursuedObjective } from './recovery.ts';
 import { explainDecision, orientationAfter, strategyEpisodes, strategyLinks, strategyOutcome, type Decision, type StrategyLink } from './decision-configurations.ts';
 import { strategyTimeline } from './strategy-timeline.ts';
@@ -1280,6 +1281,9 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
     const expected = last.decision?.steps[0]?.expected;
     const check = last.nativeCheck?.reason;
     const factsList: [string, string][] = [];
+    const missingControl = first.decision?.missingControl;
+    if (missingControl) factsList.push(['Sub-strategy', missingControlLabel],
+      ['Command under study', commands[Number(missingControl.action.slice(6))] ?? missingControl.action]);
     if (operation && rule) factsList.push(['SIC strategy rule', rule.title]);
     if (rule) factsList.push(['Need', rule.need], ['Situation', rule.situation]);
     if (searchOperation) factsList.push(['Access search', `${searchOperation.key} · ${searchOperation.description}`]);

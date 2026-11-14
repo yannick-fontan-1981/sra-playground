@@ -58,6 +58,10 @@ test('real morphology, common strategy and WHY/ACT acquire unused control then r
   assert.equal(proposal.morphology.reason, 'control_not_currently_attested');
   assert.equal(proposal.morphology.route_key, null);
   assert.equal(proposal.question.control_acquisition.experiment, 'sample_unused_control');
+  const released = (result.snapshot.trace as R[]).find(event => event.kind === 'sic_native_plan');
+  assert.equal(released?.missingControl?.id, 'test_missing_control');
+  assert.equal(released?.missingControl?.action, proposal.actions[0].action_ref);
+  assert.ok(released?.missingControl?.evidence.includes(proposal.binding.observation_ref));
   assert.equal(proposal.question.control_acquisition.pair_ref, proposal.morphology.measured_facts.pair_ref);
   assert.equal((result.snapshot.whyAct as R).decision.decision.status, 'action_set_released');
   assert.deepEqual((result.snapshot.whyAct as R).decision.decision.model_calls, []);

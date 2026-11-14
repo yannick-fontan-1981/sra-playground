@@ -4,6 +4,14 @@ Chaque entrée correspond à une commande envoyée au jeu puis à un retour enre
 
 Le résultat du témoin qualifie la prédiction associée à cette commande. « Confirmée » et « Contredite » reprennent le contrôle du moteur. « Sans prédiction vérifiée » couvre notamment les commandes d’exploration. Le passage de niveau constitue une observation distincte. Les codes OP restent des opérations de composition attachées aux plans.
 
+## Comment le moteur choisit
+
+Le code du jeu sert au Playground à charger le plateau et à vérifier que la commande revient dans la même session. Le [paquet transmis au moteur](../../src/runtime/v6-agent-protocol.ts) contient les images publiques, les commandes disponibles, le numéro de niveau et le résultat public. Le moteur applique le même [ordre de familles](../../src/logos-engine/v6-native-runtime.ts) à ces observations et à la mémoire acquise pendant la partie. Les identifiants du tableau indiquent le fournisseur et la démarche qui ont effectivement libéré une commande. Le jeu du témoin indique où on l’a observée.
+
+Certaines conditions sont étroites. `subset_diagnosis` cherche une grille régulière de carrés et des commandes qui désignent des sous-ensembles. `sliding_cavity` demande une forme compatible avec une cavité et un effet d’arrêt mesuré pour proposer un trajet. Un autre jeu présentant ces faits peut solliciter ces mêmes familles. Une famille prioritaire peut aussi proposer un autre plan avant qu’elles soient sélectionnées. L’éligibilité repose sur les motifs prévus par le code et la sélection réelle dépend aussi des retours acquis.
+
+Le Playground emploie le code du jeu dans quelques fonctions de présentation et de session. La mise en pause de revue AS66, les redémarrages LS20 et certaines vues STCK suivent ce chemin. Ces fonctions sont distinctes de la sélection des commandes par le moteur.
+
 ## Reproduire l’inventaire
 
 Ouvrir `/tests/sic-qualification.html?strategy-inventory&actions=16` sur le serveur de développement et lancer la comparaison. La campagne part du niveau 1 de chaque jeu jouable avec les réglages usuels du Playground. Les paramètres `shards` et `shard` répartissent le catalogue. Le paramètre `games` accepte une liste de codes et `curious` active la curiosité d’ouverture pour une campagne ciblée. Le rapport donne par jeu le nombre de commandes, le nombre de preuves associées, les niveaux terminés et le motif d’arrêt. Il conserve par démarche un témoin, les jeux où elle apparaît et le nombre de commandes.

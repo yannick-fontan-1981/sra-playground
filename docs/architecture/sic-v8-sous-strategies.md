@@ -40,6 +40,8 @@ Commencer par **vérifier un contrôle manquant**, **choisir une expérience dis
 
 Pour le contrôle manquant, AS66 mémorise l’essai par niveau, géométrie de la cavité, corps et direction. G50T le mémorise par position et commande, puis utilise le déplacement observé. La sous-stratégie commune peut recevoir la commande candidate, une clé de contexte fournie par la famille et les observations à comparer. Le résultat distingue un effet mesuré, un retour encore indéterminé et la sortie du contexte courant. La famille reste responsable de la mesure de l’effet et de son périmètre de validité.
 
+Le contrat mis en œuvre identifie le besoin d’établir l’effet d’une commande pour l’objectif courant. Il vérifie que la situation est liée à l’observation courante, que l’objectif a un appui, que la commande est disponible et que son effet reste inconnu dans ce contexte sans essai préalable. Les trois producteurs alimentent ce même contrat avec leurs preuves. SIC publie la sous-stratégie seulement si le plan est effectivement libéré. Les vérifications du retour restent assurées par le producteur qui sait mesurer cet effet. Les anciens détecteurs spécialisés restent des producteurs d’indices à migrer.
+
 La généralisation de la curiosité et de la reprise complète après contradiction demande un second témoin. Les autres entrées de l’inventaire restent à décomposer avec leurs modules source et leurs retours.
 
 ## Réglage d’une expérience discriminante

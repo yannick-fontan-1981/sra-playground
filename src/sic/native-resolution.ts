@@ -1,5 +1,6 @@
 import { cropReturn } from '../logos-engine/v6-public-return-visuals.ts';
 import type { StrategyObjective } from './native-plan-receipt.ts';
+import { missingControlNeed, missingControlStrategy, type MissingControlWitness } from './missing-control-strategy.ts';
 import { contactRecoveryStrategies, isContactStrategy, isRecoveryStop, rootedRecoveryStrategy,
   type ContactRecoveryNeed, type ContactStrategy } from './active-recovery.ts';
 import type { AgendaEntry } from './strategy-agenda.ts';
@@ -52,6 +53,7 @@ export interface NativeResolution {
   readonly objective: string | null;
   readonly objectiveSource: 'native' | 'question' | 'unpublished' | null;
   readonly strategyObjective?: StrategyObjective;
+  readonly missingControl?: MissingControlWitness;
   readonly operation: string | null;
   readonly searchOperation?: string;
   readonly recoveryOperations?: readonly { key: string; finding: string }[];
@@ -216,6 +218,13 @@ export function readNativeResolution(agent: {
   const strategyObjective = objectiveStrategy && receiptRef && receiptRef === planReceipt?.observationRef
     && objectiveStrategy === planReceipt?.strategy && receiptParent === planReceipt?.objective && (receiptParent || receiptAim)
     ? { strategy: objectiveStrategy, parent: receiptParent, aim: receiptAim, observationRef: receiptRef } : undefined;
+  const control = record(planReceipt?.missingControl);
+  const controlAction = label(control?.action);
+  const controlEvidence = Array.isArray(control?.evidence) ? control.evidence.slice(0, 8).filter((ref): ref is string => typeof ref === 'string') : [];
+  const missingControl: MissingControlWitness | undefined = control?.id === missingControlStrategy && control.need === missingControlNeed
+    && controlAction && typeof control.observationRef === 'string' && control.observationRef === planReceipt?.observationRef
+    && controlEvidence.includes(control.observationRef)
+    ? { id: missingControlStrategy, need: missingControlNeed, observationRef: control.observationRef, action: controlAction, evidence: controlEvidence } : undefined;
   const traced = proposalAt >= 0 && result && proposalAt < entries.indexOf(result) && result.family === family
     ? entries[proposalAt] : null;
   const stepList = Array.isArray(proposal?.steps) ? proposal.steps : [];
@@ -463,6 +472,7 @@ export function readNativeResolution(agent: {
     proposalKind: label(proposal?.kind), question,
     objective: nativeObjective ?? (objectiveSource === 'question' ? question : null), objectiveSource,
     strategyObjective,
+    missingControl,
     operation: op && /^OP(?:0[1-9]|[12]\d|3[01])$/.test(op) ? op : null,
     searchOperation: searchOperation === 'OP26' ? searchOperation : undefined,
     recoveryOperations: recoveryOperations.length ? recoveryOperations : undefined,
@@ -487,6 +497,7 @@ export interface DecisionSprites {
   readonly objective: NativeResolution['objective'];
   readonly objectiveSource: NativeResolution['objectiveSource'];
   readonly strategyObjective?: StrategyObjective;
+  readonly missingControl?: MissingControlWitness;
   readonly operation: string | null;
   readonly searchOperation?: string;
   readonly recoveryOperations?: readonly { key: string; finding: string }[];
@@ -580,6 +591,7 @@ export function captureDecisionSprites(decision: NativeResolution, before: Nativ
   }
   return { family: decision.family, objective: decision.objective, objectiveSource: decision.objectiveSource,
     strategyObjective: decision.strategyObjective,
+    missingControl: decision.missingControl,
     operation: decision.operation, searchOperation: decision.searchOperation, recoveryOperations: decision.recoveryOperations,
     recoveryDecision: decision.recoveryDecision,
     frontierStrategy: decision.frontierStrategy,

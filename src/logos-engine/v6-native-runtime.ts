@@ -33,6 +33,7 @@ import { OrderedRecruitment } from './v6-ordered-recruitment.ts';
 import { RankedWorkshop } from './v6-ranked-workshop.ts';
 import { compileRecoveryPack, isRecoveryStop } from '../sic/active-recovery.ts';
 import { nativePlanReceipt } from '../sic/native-plan-receipt.ts';
+import { retainMissingControlTrial } from '../sic/missing-control-strategy.ts';
 import { defaultFrontierConfiguration } from '../sic/frontier-configuration.ts';
 import { selectStrategyFamily, type FamilyAgendaMode, type FamilyAgendaReceipt, type FamilyTrial } from '../sic/family-agenda.ts';
 import { needCheckpoint, readSicNeed, type SicNeed } from '../sic/need-registry.ts';
@@ -552,7 +553,9 @@ export class NativeV6Runtime implements NativeV6Backend {
         if (!target.admitted) { this.stop(`composition_target_${target.reason}`); return; }
       }
       this.revision = this.observation.revision;
-      this.prefix = { family, proposal: freeze(structuredClone(proposal)), revision: this.revision, index: 0, witnessed: [], released: false, interruption: null, nativeBindings: [] };
+      const frozenProposal = freeze(structuredClone(proposal));
+      retainMissingControlTrial(proposal, frozenProposal);
+      this.prefix = { family, proposal: frozenProposal, revision: this.revision, index: 0, witnessed: [], released: false, interruption: null, nativeBindings: [] };
       this.lastFamily = family.id;
       for (const composition of proposal.compositions ?? []) if (typeof composition.id === 'string') this.compositionIds.add(composition.id);
       this.note({ kind: 'proposal', family: family.id, revision: this.revision, actions: proposal.actions, question: proposal.question ?? null });
@@ -1472,6 +1475,7 @@ export class NativeV6Runtime implements NativeV6Backend {
           id: prefix.sicPlan.id, family: prefix.sicPlan.family, strategy: prefix.sicPlan.strategy, authority: prefix.sicPlan.authority,
           objective: prefix.sicPlan.objective, subObjective: prefix.sicPlan.subObjective,
           ...(prefix.sicPlan.strategyObjective ? { strategyObjective: prefix.sicPlan.strategyObjective } : {}),
+          ...(prefix.sicPlan.missingControl ? { missingControl: prefix.sicPlan.missingControl } : {}),
           observationRef: prefix.sicPlan.observationRef, index: prefix.sicPlan.index, planned: prefix.sicPlan.planned,
           ...(prefix.sicPlan.need ? { need: prefix.sicPlan.need } : {}),
           ...(prefix.sicPlan.prerequisite ? { prerequisite: prefix.sicPlan.prerequisite } : {}),

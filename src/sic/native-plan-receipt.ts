@@ -1,5 +1,6 @@
 import type { NativeObservation, NativeProposal, SicActionCoverage } from '../logos-engine/v6-native-types.ts';
 import { readSicNeed } from './need-registry.ts';
+import { missingControlWitness } from './missing-control-strategy.ts';
 
 export interface StrategyObjective {
   readonly strategy: string;
@@ -35,12 +36,14 @@ export function nativePlanReceipt(family: string, proposal: NativeProposal, obse
   }
   const command = proposal.actions[index];
   if (!command) throw new TypeError('A release receipt requires a command in the selected plan.');
+  const missingControl = missingControlWitness(proposal, command.action_ref, observation.observation_ref);
   const need = readSicNeed(objectField(decision, 'need'));
   const prerequisite = readSicNeed(objectField(decision, 'prerequisite'));
   return {
     id: `sic-plan:${observation.observation_ref}`, family, strategy, objective, authority,
     subObjective: typeof subObjective === 'string' ? subObjective : null,
     ...(strategyObjective ? { strategyObjective } : {}),
+    ...(missingControl ? { missingControl } : {}),
     ...(need?.status === 'assigned' ? { need } : {}),
     ...(need?.status === 'assigned' && need.kind === 'observe_untried_input_effect'
       && prerequisite?.status === 'assigned' && prerequisite.kind === 'find_observable_frontier_access'

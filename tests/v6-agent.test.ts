@@ -115,6 +115,7 @@ test('V6 observation retains every public animation frame, clones inputs and exc
   const native = Object.assign(board(1), { secret: ['native-state'], history: ['undo'] });
   native.frames = [board(2).frame, native.frame];
   const projected = toV6PublicObservation(native, 19);
+  assert.deepEqual(toV6PublicObservation({ ...native, gameCode: 'RENAMED' }, 19), projected);
   assert.deepEqual(Object.keys(projected).sort(), ['frame', 'frames', 'availableActionIds', 'state', 'level', 'levelsCompleted', 'stepIndex'].sort());
   assert.equal(projected.stepIndex, 19);
   assert.equal(projected.frames[0]![10]![10], 2);

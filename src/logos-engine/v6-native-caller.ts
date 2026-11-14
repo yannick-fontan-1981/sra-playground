@@ -18,6 +18,7 @@ import { CoupledDisplays } from './v6-coupled-displays.ts';
 import { ControlDependencies, bindPreservation, checkPreservation } from './v6-transition-learning.ts';
 import { electInformationGoals, pointGoal, reconcileInformationGoal } from './v6-information-goals.ts';
 import { informationNeed, informationStrategies, isInformationStrategy, selectInformationStrategy } from '../sic/information-strategy.ts';
+import { bindMissingControlTrial, retainMissingControlTrial } from '../sic/missing-control-strategy.ts';
 import type { OpeningCuriosityMode } from '../sic/opening-curiosity.ts';
 import { motionOffers } from './v6-motion-contrast.ts';
 import { contextualTranslationExposures } from './v6-contextual-translation.ts';
@@ -392,6 +393,10 @@ export class NativeCallerCoordinator {
       }
       if (this.attention.matches(acquisition, observation)) acquisition.attention_ref = this.attention.item!.id;
       const proposal = await this.frontier.propose(observation, inputs, { control_acquisition: acquisition });
+      if (proposal && experiment === 'sample_unused_control') bindMissingControlTrial(proposal as Parameters<typeof bindMissingControlTrial>[0], {
+        observationRef: observation.observation_ref, availableActions: commands, objectiveSupported: active.status === policy.requires_status,
+        effectKnown: pairs.length > 0, triedInContext: pairs.length > 0, evidence,
+      });
       this.persistDeltas(observation); if (proposal) return proposal;
     }
     return null;
@@ -493,7 +498,9 @@ export class NativeCallerCoordinator {
 
   bind(proposal: NativeProposal): void { this.configuration.domain.bindProposal(proposal as unknown as Parameters<ObservedInputDomain['bindProposal']>[0]); }
   protect(proposal: R, obligations: readonly R[], observation: NativeObservation, rows: NativeRows): readonly [R, R[]] {
-    return bindPreservation(proposal, obligations, observation, rows);
+    const checked = bindPreservation(proposal, obligations, observation, rows);
+    retainMissingControlTrial(proposal, checked[0]);
+    return checked;
   }
   before(proposal: NativeProposal, index: number, packet: NativePublicObservation, observation: NativeObservation): Promise<R> | R {
     if (['goal_access_plan', 'effect_plan', 'factor_plan', 'rewrite_plan', 'passage_plan'].some(key => Object.hasOwn(proposal, key))) {
