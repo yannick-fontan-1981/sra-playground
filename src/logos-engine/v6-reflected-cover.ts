@@ -56,6 +56,14 @@ export function matchesReflectedWorld(w:R,s:R|null):boolean{
 export const encodeReflectedWorld=(w:R):R=>({...Object.fromEntries(Object.entries(w).filter(([k])=>!['bodies','targets'].includes(k))),bodies:w.bodies.map(sortedPoints),targets:sortedPoints(w.targets)});
 export const decodeReflectedWorld=(w:R):R=>({...copy(w),bodies:w.bodies.map(pointSet),targets:pointSet(w.targets)});
 
+export function solveReflectedPlacement(w:R, axisMovable:boolean):any[]|null{
+  let best:any[]|null=null;const axes=axisMovable||w.focus==='axis'?range(w.dim===0?w.nx:w.ny):[w.axis];
+  for(const a of axes){const options:[number[],Set<string>,Set<string>][][]=[];
+   for(const body of w.bodies as Set<string>[]){const choices=new Map<string,[number[],Set<string>,Set<string>]>();for(const t of sortedPoints(w.targets))for(const p of sortedPoints(body))for(const target of [t,point([...reflectCoverPoints(pointSet([t]),a,w.dim)][0]!)]){const d=[target[0]!-p[0]!,target[1]!-p[1]!],direct=shiftReflectionPoints(body,d),image=reflectCoverPoints(direct,a,w.dim);if([...union([direct,image])].some(p=>{const [x,y]=point(p);return x!<0||x!>=w.nx||y!<0||y!>=w.ny;}))continue;const covered=new Set([...union([direct,image])].filter(p=>w.targets.has(p)));if(covered.size>=body.size)choices.set(key(d),[d,direct,covered]);}options.push([...choices.values()]);}
+   const visit=(i:number,selected:[number[],Set<string>,Set<string>][])=>{if(i<options.length){for(const option of options[i]!)visit(i+1,[...selected,option]);return;}if(!equals(union(selected.map(v=>v[2])),w.targets)||selected.some((v,i)=>selected.slice(0,i).some(u=>intersects(v[1],u[1]))))return;const cost=Math.abs(a-w.axis)+selected.reduce((n,v)=>n+Math.abs(v[0][0]!)+Math.abs(v[0][1]!),0),deltas=selected.map(v=>v[0]),k=[cost,a,deltas];if(best===null||compare(k,best[0])<0)best=[k,a,deltas];};visit(0,[]);
+  }return best;
+ }
+
 export class ReflectedCover implements NativeFamily<any>{
  readonly id='reflected_cover';readonly config:R;
  epoch:number|null=null;world:R|null=null;effects=new Map<string,number[]>();current_known=new Set<string>();ready=false;axis_movable=false;prior_color:number|null=null;prior_marker:number|null=null;prior_image:number|null=null;refs:string[]=[];events:R[]=[];axes_seen=new Set<number>();audit:R|null=null;
@@ -76,13 +84,7 @@ export class ReflectedCover implements NativeFamily<any>{
   }else if(new_focus!==owner){this.current_known.clear();this.refs.push(after.observation_ref);this.events=[{kind:'reflected_control_transfer',old_owner:owner,new_owner:new_focus,command,evidence:after.observation_ref}];}
   this.world=next;this.prior_color=next.direct;this.prior_marker=next.marker_value;this.prior_image=next.image;return{status:'reflected_cover_response',events:this.events};
  }
- solve(w:R):any[]|null{
-  let best:any[]|null=null;const axes=this.axis_movable||w.focus==='axis'?range(w.dim===0?w.nx:w.ny):[w.axis];
-  for(const a of axes){const options:[number[],Set<string>,Set<string>][][]=[];
-   for(const body of w.bodies as Set<string>[]){const choices=new Map<string,[number[],Set<string>,Set<string>]>();for(const t of sortedPoints(w.targets))for(const p of sortedPoints(body))for(const target of [t,point([...reflectCoverPoints(pointSet([t]),a,w.dim)][0]!)]){const d=[target[0]!-p[0]!,target[1]!-p[1]!],direct=shiftReflectionPoints(body,d),image=reflectCoverPoints(direct,a,w.dim);if([...union([direct,image])].some(p=>{const [x,y]=point(p);return x!<0||x!>=w.nx||y!<0||y!>=w.ny;}))continue;const covered=new Set([...union([direct,image])].filter(p=>w.targets.has(p)));if(covered.size>=body.size)choices.set(key(d),[d,direct,covered]);}options.push([...choices.values()]);}
-   const visit=(i:number,selected:[number[],Set<string>,Set<string>][])=>{if(i<options.length){for(const option of options[i]!)visit(i+1,[...selected,option]);return;}if(!equals(union(selected.map(v=>v[2])),w.targets)||selected.some((v,i)=>selected.slice(0,i).some(u=>intersects(v[1],u[1]))))return;const cost=Math.abs(a-w.axis)+selected.reduce((n,v)=>n+Math.abs(v[0][0]!)+Math.abs(v[0][1]!),0),deltas=selected.map(v=>v[0]),k=[cost,a,deltas];if(best===null||compare(k,best[0])<0)best=[k,a,deltas];};visit(0,[]);
-  }return best;
- }
+ solve(w:R):any[]|null{return solveReflectedPlacement(w,this.axis_movable);}
  async propose(obs:R,rows:NativeRows,_inputs:readonly any[],remaining:number):Promise<any>{
   if(!this.config.enabled||!this.ready)return null;let s=measureReflectedLattice(rows,this.world);if(this.epoch!==obs.level_epoch||this.world===null)s=this.enter(obs,rows);const w=this.world;if(!w||!matchesReflectedWorld(w,s))return null;w.focus=reflectedFocus(w,s!,true);const solution=this.solve(w);if(solution===null)return null;
   if(this.audit===null){const a=measureReflectionAudit(rows,{quantum:w.pitch,row_phase:w.phase[1],col_phase:w.phase[0],support_component_ref:null,support_palette_value:w.target,completed_cells:sortedPoints(w.targets).map(([x,y])=>[y,x]),carrier_palette_value:w.axis_color,carrier_row_axis_coordinate_twice:w.dim===1?2*w.axis:null,carrier_col_axis_coordinate_twice:w.dim===0?2*w.axis:null,direct_body_palette_values:[w.direct]});this.audit={consumer:'V5 reflection_structure.measure_orthogonal_reflection_lattice_object_audit',returned_fields:Object.keys(a).length,declared_roles:'public covariance and current marker associations; not supplied by V5 or creator'};}
