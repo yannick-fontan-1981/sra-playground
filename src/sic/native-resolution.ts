@@ -46,6 +46,7 @@ import { crossingRowsId, crossingRowsStrategies } from './crossing-rows.ts';
 import { traceCoverageId, traceCoverageStrategies } from './trace-coverage.ts';
 import { radialConnectionId, radialConnectionStrategies } from './radial-connection.ts';
 import { invitedCaptureId, invitedCaptureStrategies } from './invited-capture.ts';
+import { branchAlignmentId, branchAlignmentStrategies } from './branch-alignment.ts';
 import { frontierStrategies, isFrontierStrategy, type FrontierStrategy } from './frontier-strategy.ts';
 import { isViewStrategy, viewStrategies, type ViewStrategy } from './view-strategy.ts';
 import { informationStrategies, isInformationStrategy, type InformationStrategy } from './information-strategy.ts';
@@ -59,7 +60,7 @@ const situationStrategies = { ...orderedContactStrategies, ...cavityStrategies, 
   ...labeledSequenceStrategies, ...markedCollectionStrategies, ...slotTransferStrategies, ...remoteSupportRouteStrategies,
   ...occurrenceRecallStrategies, ...slotPermutationStrategies, ...surfaceCopyStrategies, ...codeRouteStrategies, ...profileTransferStrategies,
   ...orderedReplenishmentStrategies, ...programOriginStrategies, ...previewPlacementStrategies, ...symbolContributionStrategies, ...markedLatticeStrategies,
-  ...queuedPlacementStrategies, ...legendRecolorStrategies, ...visualPatternStrategies, ...facetGrowthStrategies, ...chartRouteStrategies, ...populationPlacementStrategies, ...carryToFrameStrategies, ...portPairingStrategies, ...displayCouplingStrategies, ...framedSearchStrategies, ...glyphEditingStrategies, ...fieldIsolationStrategies, ...directionalReceptionStrategies, ...windowCoverageStrategies, ...panelMatchingStrategies, ...crossingRowsStrategies, ...traceCoverageStrategies, ...radialConnectionStrategies, ...invitedCaptureStrategies };
+  ...queuedPlacementStrategies, ...legendRecolorStrategies, ...visualPatternStrategies, ...facetGrowthStrategies, ...chartRouteStrategies, ...populationPlacementStrategies, ...carryToFrameStrategies, ...portPairingStrategies, ...displayCouplingStrategies, ...framedSearchStrategies, ...glyphEditingStrategies, ...fieldIsolationStrategies, ...directionalReceptionStrategies, ...windowCoverageStrategies, ...panelMatchingStrategies, ...crossingRowsStrategies, ...traceCoverageStrategies, ...radialConnectionStrategies, ...invitedCaptureStrategies, ...branchAlignmentStrategies };
 
 export interface NativeStep {
   readonly action: string;
@@ -446,7 +447,7 @@ export function readNativeResolution(agent: {
                                     : family === directionalReceptionId ? directionalReceptionStrategies : family === windowCoverageId ? windowCoverageStrategies
                                       : family === panelMatchingId ? panelMatchingStrategies : family === crossingRowsId ? crossingRowsStrategies
                                         : family === traceCoverageId ? traceCoverageStrategies : family === radialConnectionId ? radialConnectionStrategies
-                                          : family === invitedCaptureId ? invitedCaptureStrategies : null;
+                                          : family === invitedCaptureId ? invitedCaptureStrategies : family === branchAlignmentId ? branchAlignmentStrategies : null;
   const card = planReceipt?.authority === 'sicOnly' && labels ? record(proposal?.sicSituationCard) : null;
   const isSituationStrategy = (id: unknown): id is keyof typeof situationStrategies =>
     typeof id === 'string' && !!labels && Object.hasOwn(labels, id);
@@ -590,6 +591,14 @@ export function readNativeResolution(agent: {
     const group = bounds(card?.activeGroup), field = bounds(card?.field);
     if (group) subjects.push({ label: 'Active group', box: group });
     if (field) subjects.push({ label: 'Receiving field', box: field });
+  }
+  if (situationCard && family === branchAlignmentId) {
+    const contributor = bounds(card?.contributor);
+    if (contributor) subjects.push({ label: 'Selected contributor', box: contributor });
+    if (Array.isArray(card?.goals)) for (const goal of card.goals) {
+      const box = bounds(goal);
+      if (box) subjects.push({ label: 'Receiving opening', box });
+    }
   }
   if (situationCard && family === invitedCaptureId) {
     for (const [field, label] of [['focus', 'Selected piece'], ['target', 'Next cell'], ['victim', 'Piece to capture']] as const) {
