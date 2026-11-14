@@ -5,11 +5,14 @@ import {
 } from '../logos-engine/v6-reflected-cover.ts';
 import { sortedPoints, supportKey } from '../logos-engine/v6-support-measurements.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
+import type { DirectionalMotion } from './observed-translation.ts';
+import { checkObservedMotion, chooseObservedMotion, observedMotionModule } from './reflected-motion-card.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const reflectedPlacementId = 'sic_reflected_placement';
+export const coordinateObservedMotionId = 'sic_coordinate_observed_motion';
 export const reflectedPlacementStrategies = {
   test_reflected_displacement: 'Test a direction and compare the piece with its reflection',
   select_reflected_contributor: 'Select the piece or axis that still needs to move',
@@ -33,6 +36,7 @@ type World = {
 };
 type Scene = { axis: number; cells: Map<string, number>; families: Map<number, Set<string>> };
 type Control = { action: string; role: 'axis' | 'piece'; delta: NativePoint };
+type Strategy = keyof typeof reflectedPlacementStrategies;
 type State = { epoch: number; world: NativeRecord; controls: Control[]; tested: string[]; evidence: string[]; stopped: boolean };
 type Plan = { action: NativeCommand; after: NativeRecord | null; attempt: string };
 type Proposal = NativeProposal & { local: State; plan: Plan; needId: string };
@@ -83,6 +87,23 @@ function measureChange(world: World, scene: Scene): { world: World; delta: Nativ
   return result;
 }
 
+function acquireControl(world: World, motion: DirectionalMotion | null): Control | null {
+  if (!motion || typeof world.focus !== 'number') return null;
+  const body = world.bodies[world.focus]!;
+  const piece = box(world, body);
+  const reflection = box(world, reflectCoverPoints(body, world.axis, world.dim));
+  if (!piece || !reflection) return null;
+  const within = (inner: NativeBox, outer: NativeBox) =>
+    inner[0] >= outer[0] && inner[1] >= outer[1] && inner[2] <= outer[2] && inner[3] <= outer[3];
+  const direct = motion.translations.filter(part => part.color === world.direct && within(part.to, piece));
+  const images = motion.translations.filter(part => part.color === world.image && within(part.to, reflection));
+  if (direct.length !== 1 || images.length !== 1) return null;
+  const displacement = direct[0]!.displacement;
+  if (!displacement.some(Boolean) || displacement.some(value => value % world.pitch !== 0) ||
+    !images[0]!.displacement.every((value, axis) => value === displacement[axis]! * (axis === world.dim ? -1 : 1))) return null;
+  return { action: motion.command, role: 'piece', delta: [displacement[0] / world.pitch, displacement[1] / world.pitch] };
+}
+
 function coveragePlan(world: World, scene: Scene, controls: readonly Control[], keys: readonly string[], canPoint: boolean): { move: Plan | null; select: Plan | null } {
   const solution = solveReflectedPlacement(world, controls.some(control => control.role === 'axis'));
   if (!solution) return { move: null, select: null };
@@ -108,14 +129,24 @@ function coveragePlan(world: World, scene: Scene, controls: readonly Control[], 
     attempt: JSON.stringify([world.focus, control.action]) } : null };
 }
 
-export function createSicReflectedPlacement(): NativeFamily<Proposal> {
+export function createSicReflectedPlacement(family = reflectedPlacementId): NativeFamily<Proposal> {
+  const declarative = family === coordinateObservedMotionId;
   let state: State | null = null;
+  let choose: NativeProgramHandle | undefined;
+  let verify: NativeProgramHandle | undefined;
   return {
-    id: reflectedPlacementId,
-    async propose(observation, rows, _inputs, remaining) {
+    id: family,
+    async attachPrograms(registry) {
+      if (!declarative) return;
+      const module = await observedMotionModule();
+      choose = await registry.registerProgram(chooseObservedMotion, {}, module);
+      verify = await registry.registerProgram(checkObservedMotion, {}, module);
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       const keys = observation.available_action_refs.filter(action => ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'].includes(action));
       if (remaining < 1 || keys.length < 2 || !rows.length) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
+      if (declarative && (!choose || (!prior && !execution?.readDirectionalMotion))) return null;
       if (prior?.stopped || (prior?.tested.length ?? 0) >= 72) return null;
       const retained = prior ? decodeReflectedWorld(prior.world) as World : null;
       const scene = measureReflectedLattice(rows, retained) as Scene | null;
@@ -123,8 +154,13 @@ export function createSicReflectedPlacement(): NativeFamily<Proposal> {
       const world = retained ?? initializeReflectedWorld(scene) as World | null;
       if (!world || world.bodies.length > 5 || world.targets.size > 40 || !matchesReflectedWorld(world, scene)) return null;
       world.focus = reflectedFocus(world, scene, true) as Owner;
+      const motion = declarative && !prior ? execution?.readDirectionalMotion?.() ?? null : null;
+      const acquired = motion?.afterRef === observation.observation_ref && motion.levelEpoch === observation.level_epoch
+        ? acquireControl(world, motion) : null;
+      if (declarative && !prior && !acquired) return null;
       const local: State = prior ? { ...prior, world: encodeReflectedWorld(world) } : {
-        epoch: observation.level_epoch, world: encodeReflectedWorld(world), controls: [], tested: [], evidence: [], stopped: false,
+        epoch: observation.level_epoch, world: encodeReflectedWorld(world), controls: acquired ? [acquired] : [],
+        tested: [], evidence: acquired && motion ? [motion.beforeRef] : [], stopped: false,
       };
       const ref = observation.observation_ref;
       const known = local.controls.filter(control => control.role === 'piece');
@@ -135,14 +171,22 @@ export function createSicReflectedPlacement(): NativeFamily<Proposal> {
         && !local.controls.some(control => control.role === role(world.focus) && control.action === key));
       const evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
       const eligibleSelection = select && !local.tested.includes(select.attempt) ? select : null;
-      const { selected, entries } = resolveStrategyGraph({
+      const choices = { place_reflected_contributor: move, select_reflected_contributor: eligibleSelection,
+        test_reflected_displacement: probe ? { action: plain(probe), after: null, attempt: attempt(probe) } : null };
+      const situation = { move: !!move, select: !!eligibleSelection, test: !!probe, measuredDirections: known.length,
+        mode: execution?.reasoningMode ?? 'exploration' };
+      const decision = declarative ? await choose?.run({ situation }, { signal: execution?.signal }) : null;
+      const evaluated = declarative ? null : resolveStrategyGraph({
         graph, mode: 'active',
-        facts: { move: { value: !!move, evidence }, select: { value: !!eligibleSelection, evidence }, test: { value: !!probe, evidence } },
+        facts: { move: { value: situation.move, evidence }, select: { value: situation.select, evidence }, test: { value: situation.test, evidence } },
         planners: { place_reflected_contributor: () => move, select_reflected_contributor: () => eligibleSelection,
-          test_reflected_displacement: () => probe ? { action: plain(probe), after: null, attempt: attempt(probe) } : null },
+          test_reflected_displacement: () => choices.test_reflected_displacement },
       });
-      if (!selected) return null;
-      const strategy = selected.id, plan: Plan = selected.plan, label = reflectedPlacementStrategies[strategy], parent = 'G_official_completion';
+      const requested = decision?.result ?? evaluated?.selected?.id;
+      if (typeof requested !== 'string' || !Object.hasOwn(choices, requested)) return null;
+      const strategy = requested as Strategy, plan = choices[strategy];
+      if (!plan) return null;
+      const label = reflectedPlacementStrategies[strategy], parent = 'G_official_completion';
       const objective = { kind: 'cover_targets_with_correlated_reflections', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['current_piece', 'reflected_piece', 'target_cells'], parentObjective: parent,
         satisfactionContract: 'official_progress_after_observed_reflected_coverage' };
@@ -152,10 +196,13 @@ export function createSicReflectedPlacement(): NativeFamily<Proposal> {
       const binding = x !== undefined && y !== undefined ? await ObservedInputDomain.makeLocusWitness(observation, rows, [x, y], { reason: label, evidence }) : null;
       if (plan.action.action_ref === 'ACTION6' && !binding) return null;
       const body = typeof world.focus === 'number' ? world.bodies[world.focus]! : null;
-      return { status: 'proposed', kind: reflectedPlacementId, actions, local, plan, needId: need.id,
+      return { status: 'proposed', kind: family, actions, local, plan, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         steps: [{ action: plan.action, expected_after: plan.after, ...(binding ? { point_binding: binding } : {}) }],
-        sicSituationCard: { strategy, need: 'Cover the marked cells with pieces and their reflected copies', situation: label, evidence, agenda: entries,
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation } } : {}),
+        sicSituationCard: { strategy, need: 'Cover the marked cells with pieces and their reflected copies', situation: label, evidence,
+          agenda: evaluated?.entries ?? [],
           mode: plan.after ? 'solving' : 'exploration', body: body ? box(world, body) : null,
           reflection: body ? box(world, reflectCoverPoints(body, world.axis, world.dim)) : null, target: box(world, world.targets) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
@@ -168,12 +215,18 @@ export function createSicReflectedPlacement(): NativeFamily<Proposal> {
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'current_pieces_and_mirror_bound' : 'pieces_or_mirror_context_changed' };
     },
-    after(proposal, _index, before, after, _first, rows) {
+    async after(proposal, _index, before, after, _first, rows) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       const expected = proposal.plan.after && decodeReflectedWorld(proposal.plan.after) as World | null;
       const scene = expected ? measureReflectedLattice(rows, expected) : null;
       const matched = expected ? matchesReflectedWorld(expected, scene) && reflectedFocus(expected, scene!, true) === expected.focus : null;
+      if (verify) {
+        const checked = await verify.run({ outcome: { matched } });
+        return { matched: typeof checked.result === 'boolean' ? checked.result : null, seal_prefix: true,
+          reason: 'compare_reflected_placement_return',
+          src_check: { workflow: checked.receipt.workflow, hash: checked.receipt.src_hash, matched } };
+      }
       return { matched, seal_prefix: true, reason: 'compare_reflected_placement_return' };
     },
     record(before, after, command, _first, rows, proposal) {
