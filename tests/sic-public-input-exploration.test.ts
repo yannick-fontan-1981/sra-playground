@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
 import { createSicPublicInputExploration, currentControlledMotion } from '../src/sic/public-input-exploration.ts';
-import { measureComponentTranslations } from '../src/sic/observed-translation.ts';
+import { measureComponentTranslations, motionIntoFootprint, type DirectionalMotion } from '../src/sic/observed-translation.ts';
 
 test('SIC probes repeated interior markers while requiring independent visible arrangements', async () => {
   const board = (secondSquare: boolean) => Array.from({ length: 14 }, (_, y) =>
@@ -35,6 +35,19 @@ test('motion measurement reports unique component translations and rejects ambig
     [from.bbox, to.bbox, displacement]), [[[2, 2, 3, 3], [5, 2, 6, 3], [3, 0]]]);
   assert.deepEqual(measureComponentTranslations(before, frame([5, 10]), pieces), []);
   assert.deepEqual(measureComponentTranslations(before, before, pieces), []);
+});
+
+test('component motion stays ambiguous when parts entering the same footprint disagree', () => {
+  const receipt: DirectionalMotion = { command: 'ACTION4', family: 'probe', beforeRef: 'before', afterRef: 'after', levelEpoch: 1,
+    translations: [
+      { from: [0, 2, 2, 4], to: [4, 2, 6, 4], displacement: [4, 0], area: 8, color: 2 },
+      { from: [1, 3, 1, 3], to: [5, 3, 5, 3], displacement: [4, 0], area: 1, color: 3 },
+    ] };
+  assert.deepEqual(motionIntoFootprint(receipt, [4, 2, 7, 5]), [4, 0]);
+  assert.equal(motionIntoFootprint(receipt, [9, 9, 11, 11]), null);
+  assert.equal(motionIntoFootprint({ ...receipt, translations: [...receipt.translations,
+    { from: [5, 1, 5, 1], to: [5, 2, 5, 2], displacement: [0, 1], area: 1, color: 4 },
+  ] }, [4, 2, 7, 5]), null);
 });
 
 test('SIC tests a direction after a click changes a piece and binds the observed translation to that click', async () => {

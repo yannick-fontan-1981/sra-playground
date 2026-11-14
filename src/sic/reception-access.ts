@@ -2,8 +2,10 @@ import { measureReceptionService, receptionServiceCarriers, receptionServicePath
 import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
+import { motionIntoFootprint } from './observed-translation.ts';
 
 export const receptionAccessId = 'sic_reception_access';
+export const learnReceptionAccessId = 'sic_learn_reception_access';
 export const receptionAccessStrategies = navigationPrimitives;
 type Scene = { pitch: number; cells: NativePoint[]; target: { anchor: NativePoint }; counterparts: { request_bbox: NativeBox; body_bbox: NativeBox }[] };
 type State = { epoch: number; count: number; scene: Scene; controls: Record<string, NativePoint>; trials: string[]; waits: number;
@@ -21,10 +23,10 @@ function carrier(rows: NativeRows, scene: Scene): NativePoint | null {
   return bodies.length === 1 ? bodies[0]!.anchor as NativePoint : null;
 }
 
-export function createSicReceptionAccess(): NativeFamily<Proposal> {
+export function createSicReceptionAccess(family = receptionAccessId): NativeFamily<Proposal> {
   let state: State | null = null;
   return {
-    id: receptionAccessId,
+    id: family,
     propose(observation, rows, _inputs, remaining, execution) {
       const keys = observation.available_action_refs.filter(action => hints[action]);
       if (remaining < 1 || keys.length < 2 || observation.available_action_refs.includes('ACTION6')) return null;
@@ -32,9 +34,20 @@ export function createSicReceptionAccess(): NativeFamily<Proposal> {
       if (prior?.stopped || (prior?.count ?? 0) >= 48) return null;
       const scene = measureReceptionService(rows, prior?.scene ?? null) as Scene | null;
       if (!scene || scene.counterparts.length !== 1 || scene.cells.length > 196) return null;
-      const local: State = prior ? { ...prior, scene } : { epoch: observation.level_epoch, count: 0, scene,
+      let local: State = prior ? { ...prior, scene } : { epoch: observation.level_epoch, count: 0, scene,
         controls: {}, trials: [], waits: 0, last: null, evidence: [], stopped: false };
       const from = carrier(rows, scene), target = scene.target.anchor, atTarget = equal(from, target);
+      if (family === learnReceptionAccessId && !prior) {
+        const receipt = execution?.readDirectionalMotion?.();
+        const current = receipt?.afterRef === observation.observation_ref && receipt.levelEpoch === observation.level_epoch && keys.includes(receipt.command);
+        if (!from && !current) return null;
+        if (current) {
+          const displacement = from ? motionIntoFootprint(receipt, box(from, scene.pitch)) : null;
+          if (displacement && !displacement.every(Boolean) && distance(displacement, [0, 0]) === scene.pitch) {
+            local = { ...local, controls: { [receipt.command]: displacement }, evidence: [receipt.beforeRef, receipt.afterRef] };
+          } else if (!from) local = { ...local, last: { action: receipt.command, from: null }, evidence: [receipt.beforeRef, receipt.afterRef] };
+        }
+      }
       const key = (action: string) => JSON.stringify([from, target, action]);
       const tested = (action: string) => local.trials.includes(key(action));
       const moves = Object.fromEntries(keys.flatMap(action => local.controls[action] && !tested(action) ? [[action, local.controls[action]]] : []));
@@ -65,9 +78,9 @@ export function createSicReceptionAccess(): NativeFamily<Proposal> {
         : 'Measure a direction toward the candidate support';
       const objective = { kind: 'reach_support_for_visible_request', scope: ref.split(':revision:', 1)[0]!, subjects: ['visible_request', 'carrier', 'distinct_support'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_arrival_at_the_candidate_support' };
-      const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = `reception-access:${need.id}`;
+      const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = `${family === receptionAccessId ? 'reception-access' : family}:${need.id}`;
       const command = { action_ref: choice.action, data: {} }, actions = [command];
-      return { status: 'proposed', kind: receptionAccessId, actions, local, choice, attempt: key(choice.action), from,
+      return { status: 'proposed', kind: family, actions, local, choice, attempt: key(choice.action), from,
         wait: strategy === 'P02', needId: need.id,
         steps: [{ action: command, expected_after: null }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: { strategy, need: 'Bring the carrier to the support for the visible request', mode, triggerCard: card,

@@ -9,7 +9,7 @@ import { orderedContactId, orderedContactStrategies } from './ordered-contact.ts
 import { cavityAccessId, cavityStrategies } from './cavity-access.ts';
 import { publicInputExplorationId, publicInputStrategies } from './public-input-exploration.ts';
 import { framedContactId, framedContactStrategies, learnPatternAccessId } from './framed-contact.ts';
-import { transportContactId, transportContactStrategies } from './transport-contact.ts';
+import { learnTransportAccessId, transportContactId, transportContactStrategies } from './transport-contact.ts';
 import { bandAlignmentId, bandAlignmentStrategies } from './band-alignment.ts';
 import { sharedArrivalId, sharedArrivalStrategies } from './shared-arrival.ts';
 import { outlineServiceId, outlineServiceStrategies } from './outline-service.ts';
@@ -86,7 +86,7 @@ import { invitedCaptureId, invitedCaptureStrategies } from './invited-capture.ts
 import { branchAlignmentId, branchAlignmentStrategies } from './branch-alignment.ts';
 import { feedbackTrialId, feedbackTrialStrategies } from './feedback-trial.ts';
 import { catalogueComparisonId, catalogueComparisonStrategies } from './catalogue-comparison.ts';
-import { receptionAccessId, receptionAccessStrategies } from './reception-access.ts';
+import { learnReceptionAccessId, receptionAccessId, receptionAccessStrategies } from './reception-access.ts';
 import { markerCoverageId, markerCoverageStrategies } from './marker-coverage.ts';
 import { frontierStrategies, isFrontierStrategy, type FrontierStrategy } from './frontier-strategy.ts';
 import { isViewStrategy, viewStrategies, type ViewStrategy } from './view-strategy.ts';
@@ -472,7 +472,7 @@ export function readNativeResolution(agent: {
   const labels = family === orderedContactId ? orderedContactStrategies : family === cavityAccessId ? cavityStrategies
     : family === publicInputExplorationId ? publicInputStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId ? inventoryAccessStrategies
-    : family === framedContactId ? framedContactStrategies : family === learnPatternAccessId ? inventoryAccessStrategies
+    : family === framedContactId ? framedContactStrategies : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId ? inventoryAccessStrategies
       : family === transportContactId ? transportContactStrategies : family === bandAlignmentId ? bandAlignmentStrategies
         : family === sharedArrivalId ? sharedArrivalStrategies : family === outlineServiceId ? outlineServiceStrategies
           : family === labeledSequenceId ? labeledSequenceStrategies : family === markedCollectionId ? markedCollectionStrategies
@@ -525,7 +525,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label: 'Motif compared by SIC', box });
     }
   }
-  if (situationCard && family === transportContactId && Array.isArray(card?.subjects)) {
+  if (situationCard && (family === transportContactId || family === learnTransportAccessId) && Array.isArray(card?.subjects)) {
     for (const [i, subject] of card.subjects.entries()) {
       const box = bounds(subject);
       if (box) subjects.push({ label: i ? 'Body or target on the transport route' : 'Controlled piece', box });
@@ -656,7 +656,7 @@ export function readNativeResolution(agent: {
       }
     }
   }
-  if (situationCard && family === receptionAccessId) {
+  if (situationCard && (family === receptionAccessId || family === learnReceptionAccessId)) {
     for (const [field, label] of [['actor', 'Current carrier'], ['target', 'Candidate support'], ['request', 'Visible request']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });

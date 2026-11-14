@@ -2,8 +2,11 @@ import { exactJointPath, jointLayers, jointStatePair, measureJointTransport, typ
 import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
+import { motionIntoFootprint } from './observed-translation.ts';
 
 export const transportContactId = 'sic_transport_contact';
+export const learnTransportAccessId = 'sic_learn_transport_access';
 export const transportContactStrategies = {
   prepare_push: 'Move to a position from which to push',
   push_toward_matching_sites: 'Push a body toward the matching sites',
@@ -40,10 +43,11 @@ const sprite = ({ scale, offset: [ox, oy] }: Geometry, [x, y]: NativePoint): Nat
   return [left, top, left + scale - 1, top + scale - 1];
 };
 
-export function createSicTransportContact(): NativeFamily<Proposal> {
+export function createSicTransportContact(family = transportContactId): NativeFamily<Proposal> {
+  const learns = family === learnTransportAccessId;
   let state = empty();
   return {
-    id: transportContactId,
+    id: family,
     propose(observation, rows, inputs, remaining, execution) {
       const local = state.epoch === observation.level_epoch ? state : empty(observation.level_epoch);
       const actions = inputs.filter(input => Object.hasOwn(directions, input.action_ref));
@@ -52,6 +56,11 @@ export function createSicTransportContact(): NativeFamily<Proposal> {
       if (!scene || scene.floor.size > 100 || scene.boxes.size > 5) return null;
       const geometry = layers(scene), current = jointStatePair(scene), context = JSON.stringify([geometry.scale, geometry.offset, geometry.floor, geometry.targets, current]);
       if (local.refuted.includes(context) || (local.geometry && !sameGeometry(local.geometry, geometry))) return null;
+      const receipt = learns && !local.geometry ? execution?.readDirectionalMotion?.() : null;
+      const observed = receipt?.afterRef === observation.observation_ref && receipt.levelEpoch === observation.level_epoch ? receipt : null;
+      const motion = observed && motionIntoFootprint(observed, sprite(geometry, current[0]));
+      const direction = observed ? directions[observed.command] : null;
+      const established = !!direction && !!motion && motion.every((delta, axis) => delta === direction[axis]! * geometry.scale);
       const clock = execution?.now ?? (() => performance.now());
       const deadline = Math.min(clock() + 150, execution?.deadlineMs ?? Infinity) / 1000;
       let route: ReturnType<typeof exactJointPath>['path'];
@@ -62,31 +71,40 @@ export function createSicTransportContact(): NativeFamily<Proposal> {
       }
       if (!route.length || route.length > remaining) return null;
       const [action, push, [player, positions]] = route[0]!;
+      // A first measurement is allowed only if the projected move leaves all
+      // bodies in place. This preserves the current transport options.
+      if (learns && !local.geometry && !established && push) return null;
       const command = actions.find(input => input.action_ref === action)!;
       const predicted: Occupancy = [player, [...positions].map(key => key.split(',').map(Number) as [number, number])
         .sort(([ax, ay], [bx, by]) => ax - bx || ay - by)];
       const ref = observation.observation_ref;
-      const evidence: [string, ...string[]] = [ref, ...local.evidence];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active',
+      const evidence: [string, ...string[]] = [ref, ...local.evidence, ...(established && observed ? [observed.beforeRef] : [])];
+      const normal = resolveStrategyGraph({ graph, mode: 'active',
         facts: { pushNext: { value: push, evidence } },
         planners: { prepare_push: () => command, push_toward_matching_sites: () => command } });
-      if (!selected) return null;
-      const strategy = selected.id, label = transportContactStrategies[strategy], objective = 'G_official_completion';
+      if (!normal.selected) return null;
+      const mode = execution?.reasoningMode ?? 'exploration';
+      const offer = { input: action, expected: player, evidence };
+      const trial = push || (!local.geometry && !established);
+      const primitive = learns ? resolveNavigationPrimitives({ mode, evidence, probe: trial ? offer : null,
+        access: trial ? null : offer, interaction: null }) : null;
+      const strategy = primitive?.selected?.id ?? normal.selected.id;
+      const label = transportContactStrategies[normal.selected.id], objective = 'G_official_completion';
       const goal = { kind: 'test_transport_to_matching_sites', scope: ref.split(':revision:', 1)[0]!,
         subjects: geometry.targets.map(point => point.join(',')), parentObjective: objective,
         satisfactionContract: 'observe_official_progress_after_joint_occupation' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
-      const id = `transport:${need.id}`, commands = [command];
-      return { status: 'proposed', kind: transportContactId, actions: commands, geometry, predicted, context, needId: need.id,
+      const id = `${learns ? family : 'transport'}:${need.id}`, commands = [command];
+      return { status: 'proposed', kind: family, actions: commands, geometry, predicted, context, needId: need.id,
         steps: [{ action: command, expected_after: predicted }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: { strategy, need: 'Test whether the bodies can occupy the matching sites',
-          mode: local.evidence.length ? 'solving' : 'exploration', situation: label, agenda: entries, evidence, distance: route.length,
+          mode: learns ? mode : local.evidence.length ? 'solving' : 'exploration', situation: label, agenda: primitive?.entries ?? normal.entries, evidence, distance: route.length,
           subjects: [sprite(geometry, current[0]), ...current[1].slice(0, 4).map(point => sprite(geometry, point)),
             ...geometry.targets.slice(0, 4).map(point => sprite(geometry, point))] },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${objective}`] }],
-        sicLocalDecision: { strategy, objective: { id, label, parent: objective }, need },
+        sicLocalDecision: { strategy, objective: { id, label: primitive?.selected ? navigationPrimitives[primitive.selected.id] : label, parent: objective }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: objective, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions: commands, outcome_guard: { path: ['value'], contains: id } } };
     },

@@ -7,6 +7,14 @@ export type DirectionalMotion = { readonly command: string; readonly family: str
   readonly levelEpoch: number; readonly translations: readonly ComponentTranslation[] };
 export type ComponentTranslation = { readonly from: NativeBox; readonly to: NativeBox; readonly displacement: NativePoint; readonly area: number; readonly color: number };
 
+/** Parts nested in the footprint can express the same motion. Conflicting
+ * translations inside the footprint leave the command effect unresolved. */
+export function motionIntoFootprint(receipt: DirectionalMotion, [left, top, right, bottom]: NativeBox): NativePoint | null {
+  const within = receipt.translations.filter(({ to: [l, t, r, b] }) => l >= left && t >= top && r <= right && b <= bottom);
+  const displacement = within[0]?.displacement;
+  return displacement && within.every(part => part.displacement.every((delta, axis) => delta === displacement[axis])) ? displacement : null;
+}
+
 /** Produce a compact receipt only when a planning consumer asks for it. */
 export function measureDirectionalMotion(before: NativeRows, after: NativeRows, context: Omit<DirectionalMotion, 'translations'>): DirectionalMotion {
   const area = before.length * before[0]!.length;

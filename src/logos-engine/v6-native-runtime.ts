@@ -43,7 +43,7 @@ import { createSicCavityAccess } from '../sic/cavity-access.ts';
 import { createSicPublicInputExploration, currentControlledMotion, publicInputExplorationId } from '../sic/public-input-exploration.ts';
 import { createSicFramedContact, learnPatternAccessId } from '../sic/framed-contact.ts';
 import { measureDirectionalMotion, type DirectionalMotion } from '../sic/observed-translation.ts';
-import { createSicTransportContact } from '../sic/transport-contact.ts';
+import { createSicTransportContact, learnTransportAccessId } from '../sic/transport-contact.ts';
 import { createSicBandAlignment } from '../sic/band-alignment.ts';
 import { createSicSharedArrival } from '../sic/shared-arrival.ts';
 import { createSicOutlineService } from '../sic/outline-service.ts';
@@ -118,7 +118,7 @@ import { createSicInvitedCapture } from '../sic/invited-capture.ts';
 import { createSicBranchAlignment } from '../sic/branch-alignment.ts';
 import { createSicFeedbackTrial } from '../sic/feedback-trial.ts';
 import { createSicCatalogueComparison } from '../sic/catalogue-comparison.ts';
-import { createSicReceptionAccess } from '../sic/reception-access.ts';
+import { createSicReceptionAccess, learnReceptionAccessId } from '../sic/reception-access.ts';
 import { createSicMarkerCoverage } from '../sic/marker-coverage.ts';
 import { standalonePlanningGroups } from '../sic/standalone-families.ts';
 import { decidePlanContinuation } from '../sic/plan-step.ts';
@@ -2465,13 +2465,13 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const sequence = (configuration.window_constraints as R).labeled_sequence_composition.labeled_sequence_question;
     const groups = standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 105, groups, symmetry, policy, sequence, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 106, groups, symmetry, policy, sequence, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
       createSicFieldRepair(symmetry), createSicOrderedContact(policy, recovery), createSicSupportTransfer(support), createSicLearnSupportMoves(),
       createSicLearnGridAccess(), createSicMoveMaskedPieces(learnSelectedAccessId), createSicTranslateCoupledPieces(learnContactAccessId),
-      createSicSubsetExperiment(), createSicLearnScopeEffects(), createSicFramedContact(), createSicFramedContact(learnPatternAccessId), createSicStagedMarks(), createSicTransportContact(), createSicBandAlignment(),
+      createSicSubsetExperiment(), createSicLearnScopeEffects(), createSicFramedContact(), createSicFramedContact(learnPatternAccessId), createSicReceptionAccess(learnReceptionAccessId), createSicTransportContact(learnTransportAccessId), createSicStagedMarks(), createSicTransportContact(), createSicBandAlignment(),
       createSicSharedArrival(), createSicOutlineService(), createSicLabeledSequence(sequence, options.now ?? (() => performance.now())),
       createSicMarkedCollection(), createSicSlotTransfer(), createSicRemoteSupportRoute(), createSicOccurrenceRecall(),
       createSicSlotPermutation(), createSicSurfaceCopy(), createSicCodeRoute(), createSicProgramOrigin(), createSicProfileTransfer(),
