@@ -37,6 +37,8 @@ La factorisation commence par les contrats récurrents effectivement observés, 
 
 L’exploration après un clic et l’accès à un motif utilisent maintenant la même [mesure des translations](../../src/sic/observed-translation.ts). Elle associe deux composants uniquement si leur masque et leur valeur correspondent de façon unique, puis renvoie les deux positions et le déplacement. Les familles choisissent la zone à observer et interprètent le résultat selon la situation. Le premier lot factorise la mesure. La publication d’une preuve de mouvement indépendante du fournisseur et son utilisation par un autre planificateur restent à mettre en œuvre pour LS19 et LS20.
 
+Sur les retours directionnels hors changement de niveau du rejeu normal, la mesure retrouve des translations dans 4 retours sur 4 sur LS19, 14 sur 14 sur LS20 et 5 sur 9 sur KLOT. Sur KA59, elle s’abstient sur les 11 retours directionnels lorsque les deux pièces de même masque et de même valeur restent indiscernables dans la mesure globale. L’association doit alors être contrainte par la sélection, la position ou la relation de contact. KLOT et KA59 continuent à gagner avec retrait. LS19 et LS20 gagnent en configuration normale avec les mêmes commandes et retours que la référence, mais s’arrêtent à 40 commandes après retrait.
+
 ## Premiers retours
 
 Sur le moteur de référence, le navigateur confirme les quatre victoires intégrales sous SIC seul. HANO gagne 4 niveaux en 60 commandes, DNOI 6 en 59, DICO 6 en 71 et SYME 6 en 78. La réparation du champ est la seule famille commune à deux de ces parcours, DNOI et SYME.
