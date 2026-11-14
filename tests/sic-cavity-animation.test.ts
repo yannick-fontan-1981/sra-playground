@@ -3,6 +3,21 @@ import test from 'node:test';
 import { animationSlideDirection } from '../src/sic/cavity-access.ts';
 import { acquireTemporalOpening, movingOpeningMask } from '../src/sic/temporal-cavity.ts';
 import { observedCommandFrontier, rememberCommandReturn, type ObservedCommandGraph } from '../src/sic/observed-command-frontier.ts';
+import { pairedOpenings } from '../src/sic/paired-opening.ts';
+
+test('matching sides locate a slot whether its interior contains a piece or bare floor', () => {
+  const board = (fill: number, peer: number) => Array.from({ length: 10 }, (_, y) => Array.from({ length: 12 }, (_, x) => {
+    if (x >= 3 && x <= 4) {
+      if (y === 2 || y === 3) return 6;
+      if (y === 4 || y === 5) return fill;
+      if (y === 6 || y === 7) return peer;
+    }
+    return x >= 7 && x <= 8 && y >= 4 && y <= 5 ? 9 : 0;
+  }));
+  assert.deepEqual(pairedOpenings(board(0, 6)), [[3, 4, 4, 5]]);
+  assert.deepEqual(pairedOpenings(board(9, 6)), [[3, 4, 4, 5]]);
+  assert.deepEqual(pairedOpenings(board(9, 8)), []);
+});
 
 test('slide direction follows local steps across a wrap even if overall displacement reverses', () => {
   assert.deepEqual(animationSlideDirection([[26, 48], [22, 48], [18, 48], [6, 48], [50, 48], [46, 48]], 4, 4), [-1, 0]);

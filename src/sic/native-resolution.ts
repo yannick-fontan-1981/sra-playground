@@ -396,6 +396,10 @@ export function readNativeResolution(agent: {
     const obstacle = bounds(card?.movingObstacle), actor = bounds(card?.controlledPiece);
     if (obstacle) subjects.push({ label: 'Moving obstacle before the action', box: obstacle });
     if (actor) subjects.push({ label: 'Controlled piece before the action', box: actor });
+    if (Array.isArray(card?.slots)) for (const slot of card.slots.slice(0, 4)) {
+      const box = bounds(slot);
+      if (box) subjects.push({ label: 'Candidate slot between matching sides', box });
+    }
   }
   const searchOperation = label(record(rooted?.search)?.operation);
   const search = record(rooted?.search);
