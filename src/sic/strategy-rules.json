@@ -15,9 +15,9 @@
   },
   {
     "id": "probe",
-    "title": "Test an open question",
-    "need": "Reduce uncertainty before committing to further steps",
-    "situation": "The engine published a question and selected an action to try.",
+    "title": "Observe the effect of the selected command",
+    "need": "Acquire a public return for the current command",
+    "situation": "The engine published an observation question bound to this action.",
     "when": ["publishedQuestion"]
   }
 ]

@@ -241,6 +241,16 @@ Avancement global estimé à 95 %. La mesure STCK/SMLP en mode d’arbitrage act
 
 Quand la récupération de contact ou l’exploration refuse de libérer une commande, le graphe conserve le besoin ouvert et son témoin. Objectifs → Présent le montre avec l’absence de plan disponible. Un trajet d’exploration lie le besoin d’observer l’effet à un besoin d’accès distinct. Trouver un trajet admissible satisfait la recherche d’accès, tandis que l’effet reste à observer. Sur un plateau stationnaire, le service conserve le besoin ouvert sans émettre de ticket supplémentaire.
 
+La fenêtre A1/B1/B2/A2 d’arbitrage actif (`90d002a4`) contre la 0.65 (`b9555039`) reproduit les commandes et les résultats attendus sur huit sessions par jeu et version. STCK passe de 10,940 s à 11,964 s (+9,36 %) et SMLP de 17,876 s à 17,704 s (−0,96 %). Les médianes restent dans le seuil de +10 %. La marge sur STCK est de 0,64 point. Cette fenêtre précède la curiosité d’ouverture.
+
+### Curiosité en ouverture et opérations de composition
+
+Le catalogue OP01–OP31 se trouve dans Informations → Modèle du jeu. Dans Stratégies, les codes effectivement publiés restent visibles dans le détail ou comme repère sur la ligne d’un épisode. Le titre de l’épisode reprend la stratégie ou la question observée. Une description d’opération ne sert plus de nom de stratégie.
+
+Le réglage **Opening curiosity** s’applique à une nouvelle session au premier choix de chaque niveau. Pour les expériences à prédictions, il donne la priorité au nombre de relations distinctes testées dans le groupe qui satisfait déjà la préservation et la réserve. Pour une exploration qui ouvre par un clic, il compare les cibles de même priorité et compte les relations de voisinage distinctes par côté, forme et couleur. Il conserve les expériences ciblées préexistantes et l’admission native de la commande. La géométrie sert d’indice de complexité. Les relations causales restent à vérifier par les retours. Le mode shadow affiche la cible qu’il privilégierait. Le mode actif peut la choisir et affiche les sprites du sujet et de ses voisins observés.
+
+Sur les onze ouvertures de CONN, TICT, DAME, DICO, LIFE, GMAP, KATA, POLA, HOLE, MIND et CLRS, le shadow conserve la première commande et le retour public exacts. DICO fournit une cible alternative avec douze relations distinctes. Le clic natif (1, 3) est conservé en shadow. En actif, le clic (25, 36) ouvre le niveau 2 dès la première action et Stratégies montre le sujet et quatre voisins. Les dix autres ouvertures ne présentent pas de candidat qualifié pour cette stratégie dans cet essai. L’impact de l’option sur les campagnes complètes reste à mesurer avant d’en changer le réglage par défaut.
+
 | Série | SHA-256 du reçu brut de la seconde fenêtre |
 | --- | --- |
 | A1 | `5919c1547cb8cd18aacd9e2043a10e921300884fc0163e743248b644c16ab2f0` |

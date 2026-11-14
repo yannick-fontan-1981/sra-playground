@@ -6,6 +6,7 @@ import { frontierStrategies, isFrontierStrategy, type FrontierStrategy } from '.
 import { isViewStrategy, viewStrategies, type ViewStrategy } from './view-strategy.ts';
 import { informationStrategies, isInformationStrategy, type InformationStrategy } from './information-strategy.ts';
 import { openNeedLabels, readSicNeed } from './need-registry.ts';
+import { openingCuriosityLabel } from './opening-curiosity.ts';
 import { isFrontierInputOrder, type FrontierChoiceEvidence, type FrontierInputOrder, type FrontierLocalRule } from './frontier-configuration.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 
@@ -66,12 +67,13 @@ export interface NativeResolution {
   readonly frontierStrategy?: { readonly title: string; readonly objective: SicObjective; readonly inputOrder: FrontierInputOrder | null;
     readonly choices?: Readonly<Record<FrontierInputOrder, string>>; readonly agenda: readonly AgendaEntry<FrontierStrategy>[];
     readonly viewContinuity?: true;
+    readonly opening?: { readonly mode: 'active' | 'shadow'; readonly command: string; readonly baseline: string; readonly relations: number };
     readonly ruleEvidence?: FrontierChoiceEvidence;
     readonly localRule?: { readonly title: string; readonly matched: boolean; readonly mode: FrontierLocalRule['mode']; readonly reason: string } };
   readonly viewStrategy?: { readonly title: string; readonly objective: SicObjective; readonly agenda: readonly AgendaEntry<ViewStrategy>[];
     readonly expectedPixels: number | null; readonly agendaEvidence: Readonly<Partial<Record<ViewStrategy, readonly number[]>>> };
   readonly informationStrategy?: { readonly title: string; readonly objective: SicObjective; readonly agenda: readonly AgendaEntry<InformationStrategy>[];
-    readonly distinctOutcomes: number | null };
+    readonly distinctOutcomes: number | null; readonly openingComplexity?: number; readonly openingShadow?: { readonly command: string; readonly relations: number } };
   readonly remainingSteps: number;
   readonly footprint: NativeBox | null;
   readonly context: NativePlanContext | null;
@@ -227,12 +229,17 @@ export function readNativeResolution(agent: {
   const usageGap = natural(frontierEvidence?.usageGap);
   const rule = record(frontier?.localRule), ruleName = label(rule?.title), ruleReason = label(rule?.reason), ruleMode = rule?.mode;
   const baseOrder = frontier?.inputRanked === true && isFrontierInputOrder(frontier.inputOrder) ? frontier.inputOrder : null;
+  const opening = record(frontier?.openingCuriosity), openingEvidence = record(opening?.evidence);
+  const openingCommand = actionName(opening?.command), baselineCommand = actionName(opening?.baseline);
+  const openingRelations = natural(openingEvidence?.distinctRelations), openingMode = opening?.mode;
   const frontierStrategy: NativeResolution['frontierStrategy'] = nativeObjective && frontierObjectiveId && frontierObjectiveLabel && frontierTarget?.parent === nativeObjective
     && isFrontierStrategy(frontierId)
-    ? { title: frontierStrategies[frontierId], objective: { id: frontierObjectiveId, label: frontierObjectiveLabel, parent: nativeObjective },
+    ? { title: openingMode === 'active' ? openingCuriosityLabel : frontierStrategies[frontierId], objective: { id: frontierObjectiveId, label: frontierObjectiveLabel, parent: nativeObjective },
       inputOrder: baseOrder && isFrontierInputOrder(frontier?.effectiveOrder) ? frontier.effectiveOrder : baseOrder,
       agenda: readAgenda(frontier?.agenda, isFrontierStrategy),
       ...(frontier?.purpose === 'view_continuity' ? { viewContinuity: true as const } : {}),
+      ...(openingCommand && baselineCommand && openingRelations !== null && (openingMode === 'shadow' || openingMode === 'active')
+        ? { opening: { mode: openingMode, command: openingCommand, baseline: baselineCommand, relations: openingRelations } } : {}),
       ...(leastRef && stableRef && usageGap !== null ? { ruleEvidence: { candidateRefs: { least_tried: leastRef, command_order: stableRef }, usageGap } } : {}),
       ...(ruleName && ruleReason && typeof rule?.matched === 'boolean' && (ruleMode === 'active' || ruleMode === 'shadow')
         ? { localRule: { title: ruleName, reason: ruleReason, mode: ruleMode, matched: rule.matched } } : {}),
@@ -243,10 +250,16 @@ export function readNativeResolution(agent: {
   const viewObjective = label(viewTarget?.id), viewKind = viewDecision?.strategy;
   const information = record(proposal?.sic_information_decision), informationTarget = record(information?.objective);
   const informationObjective = label(informationTarget?.id), informationKind = information?.strategy;
+  const complexity = natural(information?.openingComplexity);
+  const shadow = record(information?.openingShadow);
+  const shadowCommand = actionName(shadow?.action), shadowRelations = natural(shadow?.relations);
   const informationStrategy: NativeResolution['informationStrategy'] = information?.mode === 'active' && nativeObjective && informationObjective
     && informationTarget?.parent === nativeObjective && isInformationStrategy(informationKind) ? {
-      title: informationStrategies[informationKind], objective: { id: informationObjective, label: informationStrategies[informationKind], parent: nativeObjective },
+      title: complexity === null ? informationStrategies[informationKind] : openingCuriosityLabel,
+      objective: { id: informationObjective, label: informationStrategies[informationKind], parent: nativeObjective },
       distinctOutcomes: natural(record(information.evidence)?.distinctOutcomes),
+      ...(complexity !== null ? { openingComplexity: complexity } : {}),
+      ...(shadowCommand && shadowRelations !== null ? { openingShadow: { command: shadowCommand, relations: shadowRelations } } : {}),
       agenda: Array.isArray(information.considered) ? information.considered.slice(0, 12).flatMap(value => {
         const attempt = record(value), id = attempt?.strategy, result = attempt?.result;
         return isInformationStrategy(id) && (result === 'selected' || result === 'no_plan') ? [{ id, result, applicability: 'applicable' as const,
@@ -395,6 +408,14 @@ export function readNativeResolution(agent: {
     if (box) subjects.push({ label: `Material ${label(material?.type) ?? ''}`.trim(), box });
   }
   const route: NativePoint[] = [];
+  if (routeIndex === 0 && openingEvidence) {
+    const target = bounds(openingEvidence.box);
+    if (target) subjects.push({ label: openingMode === 'shadow' ? 'Curiosity candidate in shadow' : 'Composition investigated', box: target });
+    for (const related of Array.isArray(openingEvidence.related) ? openingEvidence.related.slice(0, 4) : []) {
+      const box = bounds(record(related)?.box);
+      if (box) subjects.push({ label: 'Related visible element', box });
+    }
+  }
   if (viewStrategy && routeIndex === 0 && Array.isArray(viewDecision?.subjects)) {
     for (const subject of viewDecision.subjects.slice(0, 8)) {
       const measured = record(subject), name = label(measured?.label), box = bounds(measured?.box);

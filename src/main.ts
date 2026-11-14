@@ -264,6 +264,7 @@ app.innerHTML = `
             </div>
             <div id="sic-game-model" role="tabpanel" aria-labelledby="sic-game-model-tab" tabindex="0" hidden>
               <section class="sic-card" data-sic-game-content></section>
+              <div data-sic-operation-catalog></div>
             </div>
             <div id="sic-effects" role="tabpanel" aria-labelledby="sic-effects-tab" tabindex="0">
             <p data-sic-direction-effect hidden></p>
@@ -308,6 +309,8 @@ app.innerHTML = `
                   <p data-sic-frontier-preview></p>
                   <label for="sic-family-agenda">Selection across strategy families</label>
                   <select id="sic-family-agenda" name="familyAgenda"><option value="native">Native selection</option><option value="shadow">Compare SIC in shadow</option><option value="active">Use the SIC agenda</option></select>
+                  <label for="sic-opening-curiosity">Opening curiosity</label>
+                  <select id="sic-opening-curiosity" name="openingCuriosity"><option value="native">Native order</option><option value="shadow">Compare the richest composition in shadow</option><option value="active">Investigate the richest composition first</option></select>
                   <details class="sic-details">
                     <summary>Create a local exploration rule</summary>
                     <label>Rule name <input name="localRuleTitle" maxlength="80" placeholder="Leave blank to disable the rule"></label>

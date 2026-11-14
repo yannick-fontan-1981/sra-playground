@@ -28,6 +28,7 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number, pa
   const trace: { action: AgentAction; packet: string }[] = [];
   const information: { sequence: number; strategy: string; predictions: number | null;
     result?: NonNullable<NativeResolution['outcome']>['informationOutcome'] }[] = [];
+  let opening: NonNullable<NativeResolution['frontierStrategy']>['opening'];
   const agent = new BrowserV6Agent({
     getObservation: () => board,
     canDispatch: () => true,
@@ -39,7 +40,9 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number, pa
     },
     ...(maxActions === undefined ? {} : { maxSessionActions: maxActions }),
     dispatch: async action => {
-      const strategy = state ? readNativeResolution(state)?.informationStrategy : undefined;
+      const decision = state ? readNativeResolution(state) : null;
+      const strategy = decision?.informationStrategy;
+      if (!trace.length) opening = decision?.frontierStrategy?.opening;
       if (strategy) information.push({ sequence: trace.length + 1, strategy: strategy.title, predictions: strategy.distinctOutcomes });
       const started = performance.now();
       board = await runtime.action(action.id, action.id === 6 ? action.data : undefined);
@@ -56,7 +59,7 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number, pa
       if (board.levelsCompleted <= level || state?.status === 'stopped') break;
     }
     return { actions: trace.length, levels: board.levelsCompleted, stop: state?.reason ?? null, trace,
-      coverage: state?.sicActionCoverage, selection: state?.sicFamilySelection, information };
+      coverage: state?.sicActionCoverage, selection: state?.sicFamilySelection, information, opening };
   } finally {
     agent.dispose();
   }
@@ -177,11 +180,31 @@ async function findInformationExperiments() {
   }
 }
 
+async function qualifyOpeningCuriosity() {
+  const runtime = new BrowserGameRuntime();
+  const results = [];
+  try {
+    for (const game of ['CONN', 'TICT', 'DAME', 'DICO', 'LIFE', 'GMAP', 'KATA', 'POLA', 'HOLE', 'MIND', 'CLRS']) {
+      output.textContent = JSON.stringify({ status: 'running', game, results }, null, 2);
+      const baseline = await run(runtime, game, 1, defaultRecoveryPack, 1);
+      const shadow = await run(runtime, game, 1, { ...defaultRecoveryPack, openingCuriosity: 'shadow' }, 1);
+      const active = shadow.opening ? await run(runtime, game, 1, { ...defaultRecoveryPack, openingCuriosity: 'active' }, 1) : null;
+      results.push({ game, baseline: baseline.trace[0]?.action, shadowIdentical: compare(baseline, shadow).divergence === null,
+        candidate: shadow.opening, active: active?.trace[0]?.action, activeCandidate: active?.opening });
+      if (results.filter(row => row.candidate).length >= 2) break;
+    }
+    output.textContent = JSON.stringify({ status: 'completed', results }, null, 2);
+  } finally {
+    runtime.dispose();
+  }
+}
+
 start.addEventListener('click', async () => {
   start.disabled = true;
   try {
     const parameters = new URLSearchParams(location.search);
-    await (parameters.has('information') ? findInformationExperiments() : parameters.has('family') ? qualifyFamilyAgenda(parameters.get('games')) : parameters.has('coverage') ? qualifyActionCoverage()
+    await (parameters.has('opening') ? qualifyOpeningCuriosity() : parameters.has('information') ? findInformationExperiments()
+      : parameters.has('family') ? qualifyFamilyAgenda(parameters.get('games')) : parameters.has('coverage') ? qualifyActionCoverage()
       : parameters.has('authored') ? qualifyAuthoredRule() : qualify());
   } catch (error) {
     output.textContent = JSON.stringify({ status: 'failed', error: error instanceof Error ? error.message : String(error) });

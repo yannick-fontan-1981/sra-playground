@@ -18,6 +18,7 @@ import { CoupledDisplays } from './v6-coupled-displays.ts';
 import { ControlDependencies, bindPreservation, checkPreservation } from './v6-transition-learning.ts';
 import { electInformationGoals, pointGoal, reconcileInformationGoal } from './v6-information-goals.ts';
 import { informationNeed, informationStrategies, isInformationStrategy, selectInformationStrategy } from '../sic/information-strategy.ts';
+import type { OpeningCuriosityMode } from '../sic/opening-curiosity.ts';
 import { motionOffers } from './v6-motion-contrast.ts';
 import { contextualTranslationExposures } from './v6-contextual-translation.ts';
 import { ObservedInputDomain } from './v6-native-observer.ts';
@@ -42,6 +43,7 @@ export interface NativeCallerConfiguration {
   sicFrontier?: import('../sic/frontier-configuration.ts').FrontierConfiguration;
   sicView?: 'shadow' | 'active';
   sicInformation?: 'shadow' | 'active';
+  openingCuriosity?: OpeningCuriosityMode;
 }
 export interface NativeCallerState {
   goal: R; frontier: R; view: R | null; attention: R; points: R; displays: R;
@@ -316,6 +318,8 @@ export class NativeCallerCoordinator {
     const proposal = await this.frontier.propose(observation, inputs, {
       prefix_evidence: [], experimental_probes: offer ? [offer] : [], control_probe: control,
       ...(this.configuration.sicFrontier ? { sic_agenda: true, sic_frontier: this.configuration.sicFrontier } : {}),
+      ...(this.configuration.openingCuriosity && !this.goal.memory.episode.some(([before]) => before.epoch === observation.level_epoch)
+        ? { sic_opening_curiosity: this.configuration.openingCuriosity } : {}),
     });
     this.persistDeltas(observation); return proposal;
   }
@@ -446,7 +450,10 @@ export class NativeCallerCoordinator {
       this.persistDeltas(observation);
       return proposal;
     };
-    const ordered = electInformationGoals(offers, observation, remaining, options.meter, policy);
+    const opening = !this.goal.memory.episode.some(([before]) => before.epoch === observation.level_epoch)
+      ? this.configuration.openingCuriosity : undefined;
+    const ordered = electInformationGoals(offers, observation, remaining, options.meter, policy, opening === 'active');
+    const alternate = opening === 'shadow' ? electInformationGoals(offers, observation, remaining, options.meter, policy, true).next().value?.[1] : null;
     const publish = (proposal: R | null, considered: Awaited<ReturnType<typeof selectInformationStrategy>>['considered']) => {
       const receipt = proposal?.question?.curiosity;
       const strategy: unknown = receipt?.source;
@@ -456,7 +463,9 @@ export class NativeCallerCoordinator {
         proposal.sic_information_decision = { mode: this.configuration.sicInformation, strategy, considered,
           objective: { id: proposal.bundle_template.information_target, label: informationStrategies[strategy], parent },
           need: informationNeed(observation.observation_ref, parent, subjects, receipt.evidence),
-          evidence: { observations: receipt.evidence, distinctOutcomes: receipt.distinct_outcomes, admissibleOffers: receipt.admissible_offers } };
+          evidence: { observations: receipt.evidence, distinctOutcomes: receipt.distinct_outcomes, admissibleOffers: receipt.admissible_offers },
+          ...(receipt.opening_complexity ? { openingComplexity: receipt.opening_complexity } : {}),
+          ...(alternate?.opening_complexity ? { openingShadow: { action: alternate.action, relations: alternate.opening_complexity } } : {}) };
       }
       return proposal;
     };

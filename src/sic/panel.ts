@@ -922,8 +922,11 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
     () => renderDiscoveryPerspectives(panel, view, board, mode, returns, groups, palette, objectives));
   renderGenericTimeline(panel, strategies, shown, palette, expandedMethods);
   const operation = planSource?.operation;
+  const catalogHost = panel.querySelector('[data-sic-operation-catalog]')!;
+  const wasOpen = catalogHost.querySelector('details')?.open ?? false;
   const catalog = document.createElement('details');
   catalog.className = 'sic-details';
+  catalog.open = wasOpen;
   const catalogTitle = document.createElement('summary');
   catalogTitle.textContent = operation ? `Composition operations · ${operation} in this plan` : 'Composition operations · OP01–OP31';
   const distinction = document.createElement('p');
@@ -935,7 +938,7 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
     entries.append(row);
   }
   catalog.append(catalogTitle, distinction, entries);
-  strategies.append(catalog);
+  catalogHost.replaceChildren(catalog);
   const composition = native?.compositions.find(item => item.id === planSource?.composition);
   if (planSource?.composition) {
     const line = document.createElement('p');
@@ -1262,9 +1265,9 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
     const viewStrategy = first.decision?.viewStrategy;
     const informationStrategy = first.decision?.informationStrategy;
     const chosen = first.decision?.recoveryDecision?.strategy ?? first.decision?.frontierStrategy?.title ?? viewStrategy?.title ?? informationStrategy?.title;
-    const method = [operations, chosen ?? (first.decision?.question ? nativeLabel(first.decision.question)
-      : operation?.description ?? rule?.title ?? 'Observe an action return')].filter(Boolean).join(' · ');
-    title.textContent = `L${first.fromLevel} · ${actions} · ${method} · ${statuses[status]}`;
+    const method = chosen ?? rule?.title;
+    const subject = method ?? (first.decision?.question ? nativeLabel(first.decision.question) : 'Observe an action return');
+    title.textContent = `L${first.fromLevel} · ${actions} · ${subject} · ${statuses[status]}${badge}`;
     details.append(title);
     const facts = document.createElement('dl');
     const planText = (item: DirectionalReturn) => (item.decision?.steps.slice(0, 5).map(step => step.action).join(' → ') || action(item))
@@ -1280,6 +1283,8 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
     if (frontierStrategy) {
       factsList.push(['Frontier strategy', frontierStrategy.title], ['Information objective', frontierStrategy.objective.label]);
       if (frontierStrategy.viewContinuity) factsList.push(['Situation', 'An obstruction or a newly revealed portion of the board left a question about how to continue.']);
+      const opening = frontierStrategy.opening;
+      if (opening) factsList.push(['Opening curiosity', `${opening.mode === 'active' ? 'Selected' : 'Shadow candidate'} ${opening.command}. ${opening.relations} distinct neighboring relations. Native order selected ${opening.baseline}.`]);
       const learned = last.nativeCheck?.frontierOutcome;
       if (learned?.objective === frontierStrategy.objective.id) factsList.push(['Information outcome', learned.status === 'observed'
         ? 'The untried input was executed and its public return was acquired.'
@@ -1302,6 +1307,9 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
     if (informationStrategy) {
       factsList.push(['Need', 'Tell apart explanations consistent with earlier observations'], ['Information objective', informationStrategy.objective.label]);
       if (informationStrategy.distinctOutcomes !== null) factsList.push(['Distinct predicted returns', String(informationStrategy.distinctOutcomes)]);
+      if (informationStrategy.openingComplexity !== undefined) factsList.push(['Opening curiosity', `${informationStrategy.openingComplexity} distinct relations tested.`]);
+      if (informationStrategy.openingShadow) factsList.push(['Opening curiosity in shadow',
+        `${informationStrategy.openingShadow.command} tests ${informationStrategy.openingShadow.relations} distinct relations.`]);
       const returned = last.nativeCheck?.informationOutcome;
       if (returned?.objective === informationStrategy.objective.id) factsList.push(['Prediction checks',
         `${returned.matched} matched · ${returned.contradicted} contradicted · ${returned.unknown} unresolved`]);
@@ -1395,7 +1403,8 @@ function strategyEvidenceFrames(item: DirectionalReturn, palette: readonly strin
     ?? item.decision?.sprites.find(sprite => sprite.label.startsWith('Controlled footprint'));
   if (subject) frames.push([`${prefix} · ${subject.label} before`, subject.before], [`${prefix} · same area after`, subject.after]);
   for (const sprite of item.decision?.sprites ?? []) {
-    if (sprite.label === 'Controlled root' || sprite.label.startsWith('Material ')) {
+    if (sprite.label === 'Controlled root' || sprite.label.startsWith('Material ') || sprite.label === 'Composition investigated'
+      || sprite.label === 'Curiosity candidate in shadow' || sprite.label === 'Related visible element') {
       frames.push([`${prefix} · ${sprite.label} before`, sprite.before], [`${prefix} · same area after`, sprite.after]);
     }
   }

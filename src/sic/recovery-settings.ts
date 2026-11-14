@@ -19,6 +19,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
   const priority = form.elements.namedItem('priority') as HTMLSelectElement;
   const inputOrder = form.elements.namedItem('frontierInputOrder') as HTMLSelectElement;
   const familyAgenda = form.elements.namedItem('familyAgenda') as HTMLSelectElement;
+  const openingCuriosity = form.elements.namedItem('openingCuriosity') as HTMLSelectElement;
   const ruleTitle = form.elements.namedItem('localRuleTitle') as HTMLInputElement;
   const ruleCommands = form.elements.namedItem('localRuleCommands') as HTMLSelectElement;
   const ruleGap = form.elements.namedItem('localRuleGap') as HTMLInputElement;
@@ -102,6 +103,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
     priority.value = (pack.strategyOrder ?? contactRecoveryOrder)[0]!;
     inputOrder.value = (pack.frontier ?? defaultFrontierConfiguration).inputOrder;
     familyAgenda.value = pack.familyAgenda ?? 'native';
+    openingCuriosity.value = pack.openingCuriosity ?? 'native';
     const rule: FrontierLocalRule | undefined = pack.frontier?.localRule;
     ruleTitle.value = rule?.title ?? '';
     ruleCommands.value = rule?.commands ?? 'directions';
@@ -132,6 +134,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
       const localRule = readLocalRule();
       const candidate = compileRecoveryPack({ version: 1, mode: mode.value, maxDepth: depth.valueAsNumber, maxNodes: nodes.valueAsNumber, strategyOrder,
         ...(familyAgenda.value !== 'native' ? { familyAgenda: familyAgenda.value } : {}),
+        ...(openingCuriosity.value !== 'native' ? { openingCuriosity: openingCuriosity.value } : {}),
         frontier: { inputOrder: inputOrder.value, ...(localRule ? { localRule } : {}) } });
       save(nextRecoveryRevision(saved.current, saved.previous, recoveryRevision(candidate)));
       status.textContent = 'SIC settings saved for the next agent session.';
@@ -164,6 +167,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
       const differences = [
         current.mode === draft.configuration.mode ? null : `mode ${current.mode} → ${draft.configuration.mode}`,
         current.familyAgenda === draft.configuration.familyAgenda ? null : `family selection → ${draft.configuration.familyAgenda ?? 'native'}`,
+        current.openingCuriosity === draft.configuration.openingCuriosity ? null : `opening curiosity → ${draft.configuration.openingCuriosity ?? 'native'}`,
         current.maxDepth === draft.configuration.maxDepth ? null : `depth ${current.maxDepth} → ${draft.configuration.maxDepth}`,
         current.maxNodes === draft.configuration.maxNodes ? null : `states ${current.maxNodes} → ${draft.configuration.maxNodes}`,
         currentFirst === draftFirst ? null : `first strategy → ${contactRecoveryStrategies[draftFirst]}`,

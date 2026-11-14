@@ -152,6 +152,28 @@ test('view continuity reuses the frontier agenda and preserves the native comman
   }
 });
 
+test('opening curiosity ranks admissible clicks by measured neighboring relations and shadows without changing the command', async () => {
+  const entity = (id: string, x: number, y: number, palette_value: number) => ({ id, signature: 'pixel', position: [x, y],
+    bbox: [x, y, x, y], area: 1, mask: [[0, 0]], palette_value });
+  const board = { observation_ref: 'curiosity:epoch:1:revision:1:frame:initial', frame_hash: 'initial', level_epoch: 1,
+    levels_completed: 0, state: 'NOT_FINISHED', available_action_refs: ['ACTION6'],
+    entities: [entity('simple', 2, 2, 3), entity('subject', 10, 10, 3), entity('above', 10, 9, 4), entity('left', 9, 10, 5)] };
+  const simple = { action_ref: 'ACTION6', data: { x: 2, y: 2 } }, rich = { action_ref: 'ACTION6', data: { x: 10, y: 10 } };
+  const graph = new ObservedFrontier();
+  graph.action_counts[`1:${await frontierActionKey(rich)}`] = 1;
+  for (const mode of ['shadow', 'active'] as const) {
+    const candidate = new ObservedFrontier(3, 16, graph.snapshot());
+    const proposal = await candidate.propose(board, [simple, rich], { sic_agenda: true, sic_opening_curiosity: mode });
+    assert.deepEqual(proposal?.actions, [mode === 'active' ? rich : simple]);
+    const opening = proposal?.sic_frontier_decision.openingCuriosity;
+    assert.equal(opening.mode, mode);
+    assert.equal(opening.evidence.distinctRelations, 2);
+    assert.deepEqual(opening.evidence.related.map((relation: { entity: string }) => relation.entity).sort(), ['above', 'left']);
+    assert.deepEqual(opening.baseline, simple);
+    assert.equal((await candidate.guard(proposal!, board)).admitted, true);
+  }
+});
+
 test('an authored frontier rule can observe, apply, or decline the same choice', async () => {
   const graph = new ObservedFrontier();
   const board = { observation_ref: 'author:epoch:1:revision:1:frame:test', frame_hash: 'test',

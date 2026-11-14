@@ -7,6 +7,7 @@ import type { DrmCondition } from './v6-drm-projector.ts';
 import { predictCandidateRule } from './v6-transition-learning.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
 import { frontierAccessNeed, frontierInformationNeed, frontierStrategyGraph, selectFrontierStrategy } from '../sic/frontier-strategy.ts';
+import { openingClickTargets, openingCuriosityLabel, type OpeningCuriosityMode } from '../sic/opening-curiosity.ts';
 import { evaluateFrontierLocalRule, defaultFrontierConfiguration, type FrontierConfiguration, type FrontierChoiceEvidence } from '../sic/frontier-configuration.ts';
 
 type R = Record<string, any>;
@@ -51,6 +52,7 @@ export interface FrontierProposeOptions {
   sic_agenda?: boolean;
   sic_frontier?: FrontierConfiguration;
   sic_view_continuity?: { evidence: readonly string[]; mode: 'shadow' | 'active' };
+  sic_opening_curiosity?: OpeningCuriosityMode;
 }
 
 /** Internal checkpoint ownership. The default source-compatible object remains
@@ -386,7 +388,17 @@ export class ObservedFrontier {
     const customQuestion = ruleResult?.matched && localRule?.mode === 'active'
       ? localRule.prefer === 'least_tried' ? ranked?.leastTried : ranked?.commandOrder
       : undefined;
-    const localQuestion = customQuestion ?? questions[0];
+    const normalQuestion = customQuestion ?? questions[0];
+    let opening: { question: R; evidence: NonNullable<ReturnType<typeof openingClickTargets>[number]> } | null = null;
+    if (usesAgenda && options.sic_opening_curiosity && !fixedExperiment && normalQuestion?.action?.action_ref === 'ACTION6') {
+      const eligible = [normalQuestion, ...questions.filter(question => question !== normalQuestion
+        && question.priority === normalQuestion.priority && question.action.action_ref === 'ACTION6')];
+      const targets = openingClickTargets(observation.entities, eligible.map(({ action }) => [action.data.x, action.data.y]));
+      for (const [i, target] of targets.entries()) if (target && (!opening || target.distinctRelations > opening.evidence.distinctRelations)) {
+        opening = { question: eligible[i]!, evidence: target };
+      }
+    }
+    const localQuestion = options.sic_opening_curiosity === 'active' && opening ? opening.question : normalQuestion;
     const access = !localQuestion && options.return_episode == null ? await this.access(index, order) : null;
     const route = access?.[0] ? { path: access[0], question: access[1] } : null;
     const agenda = usesAgenda ? selectFrontierStrategy(localQuestion, route, frontierRef(observation)) : null;
@@ -450,9 +462,12 @@ export class ObservedFrontier {
       ...(ruleResult && localRule ? { localRule: { ...ruleResult, title: localRule.title, mode: localRule.mode, prefer: localRule.prefer },
         effectiveOrder: customQuestion ? localRule.prefer : order } : {}),
       ...(continuity ? { purpose: 'view_continuity' } : {}),
+      ...(opening ? { openingCuriosity: { mode: options.sic_opening_curiosity, selected: options.sic_opening_curiosity === 'active',
+        command: opening.question.action, baseline: normalQuestion!.action, evidence: opening.evidence } } : {}),
       need: frontierInformationNeed(scope, question.question_ref, goal, [observationRef, ...new Set([...(continuity?.evidence ?? []), ...routeRefs])]),
       ...(path.length ? { prerequisite: frontierAccessNeed(scope, index, [observationRef, ...routeRefs], 'assigned') } : {}),
-      objective: { id: question.question_ref, label: continuity ? 'Observe a way to continue from the current view'
+      objective: { id: question.question_ref, label: opening && options.sic_opening_curiosity === 'active' ? openingCuriosityLabel
+        : continuity ? 'Observe a way to continue from the current view'
         : 'Observe the effect of the selected untried input', parent: goal } } : null;
     await this.commit('proposal', { proposal_id: proposalId, kind, question_ref: question.question_ref, steps, binding,
       ...(sicFrontier ? { sic_frontier: sicFrontier } : {}) });

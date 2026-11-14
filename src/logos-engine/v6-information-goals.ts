@@ -24,7 +24,8 @@ function fraction(n: number, d: number): Fraction {
 }
 
 /** Python Fraction ordering is kept exact; no rounded entropy proxy is introduced. */
-export function* electInformationGoals(offers: readonly R[], obs: R, remaining: number, meter: R | null, policy: R): Generator<readonly [R, R]> {
+export function* electInformationGoals(offers: readonly R[], obs: R, remaining: number, meter: R | null, policy: R,
+  openingComplexity = false): Generator<readonly [R, R]> {
   type Candidate = { offer: R; relations: Set<string>; split: Fraction };
   let candidates: Candidate[] = [];
   const declined: Record<string, number> = {}, decline = (reason: string) => { declined[reason] = (declined[reason] ?? 0) + 1; };
@@ -47,6 +48,7 @@ export function* electInformationGoals(offers: readonly R[], obs: R, remaining: 
     const tier = pool.filter(row => same(safety(row), safe));
     const maximal = tier.filter(row => !tier.some(other => row.relations.size < other.relations.size && [...row.relations].every(r => other.relations.has(r)) && compareFraction(row.split, other.split) <= 0));
     const order = (a: Candidate, b: Candidate): number => {
+      if (openingComplexity && !engaged.length && a.relations.size !== b.relations.size) return b.relations.size - a.relations.size;
       for (const criterion of policy.order as string[]) {
         let result: number;
         if (criterion === 'worst_case_separation') result = -compareFraction(a.split, b.split);
@@ -61,7 +63,8 @@ export function* electInformationGoals(offers: readonly R[], obs: R, remaining: 
     const picked = [...maximal].sort(order)[0]!, offer = picked.offer;
     const receipt = { ...Object.fromEntries(Object.entries(offer).filter(([key]) => key !== 'native_probe')), tree_key: 'composition.priority.information_value',
       relation_count: picked.relations.size, distinct_outcomes: new Set(Object.values(offer.predictions).map(comparable)).size,
-      worst_case_separation: [Number(picked.split.n), Number(picked.split.d)], admissible_offers: candidates.length, rejected: { ...declined }, primitive_cost: 1 };
+      worst_case_separation: [Number(picked.split.n), Number(picked.split.d)], admissible_offers: candidates.length, rejected: { ...declined }, primitive_cost: 1,
+      ...(openingComplexity && !engaged.length ? { opening_complexity: picked.relations.size } : {}) };
     yield [offer, receipt]; candidates = candidates.filter(row => row.offer !== offer);
   }
 }

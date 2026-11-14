@@ -7,6 +7,21 @@ import { AttentionMemory } from '../src/logos-engine/v6-attention-memory.ts';
 import { NativeReasoningMemory } from '../src/logos-engine/v6-reasoning-memory.ts';
 import { pointGoal, electInformationGoals, reconcileInformationGoal } from '../src/logos-engine/v6-information-goals.ts';
 
+test('opening curiosity ranks richer compositions first within the admitted safety tier', () => {
+  const observation = { observation_ref: 'start', level_epoch: 1 };
+  const base = { ...observation, evidence: ['witness'], risks: [], return_steps: 0, source: 'motion_contrast' };
+  const simple = { ...base, action: { action_ref: 'ACTION1' }, predictions: { a: 1, b: 2 }, relations: [['a', 'observes', 'b']] };
+  const rich = { ...base, action: { action_ref: 'ACTION2' }, predictions: { a: 1, b: 1, c: 2 },
+    relations: [['c', 'observes', 'b'], ['d', 'touches', 'c']] };
+  const unavailable = { ...rich, action: { action_ref: 'ACTION3' }, return_steps: 20, relations: [...rich.relations, ['e', 'touches', 'd']] };
+  const policy = { excluded_risks: [], continue_observed_parent: true, order: ['worst_case_separation', 'stable_binding'] };
+  assert.deepEqual(electInformationGoals([simple, rich, unavailable], observation, 5, null, policy).next().value?.[0], simple);
+  const [offer, receipt] = electInformationGoals([simple, rich, unavailable], observation, 5, null, policy, true).next().value!;
+  assert.deepEqual(offer, rich);
+  assert.equal(receipt.opening_complexity, 2);
+  assert.deepEqual(electInformationGoals([{ ...simple, engaged_parent: true }, rich], observation, 5, null, policy, true).next().value?.[0].action, simple.action);
+});
+
 const reference = JSON.parse(await readFile(new URL('./fixtures/v6-goal-attention-reference.json', import.meta.url), 'utf8'));
 const composition = JSON.parse(await readFile(new URL('./fixtures/v6-composition-reference.json', import.meta.url), 'utf8'));
 for (const sample of reference.goals) test(`V6 goal access adapter original parity: ${sample.id}`, async () => {
