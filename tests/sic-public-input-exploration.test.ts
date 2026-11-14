@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
-import { createSicPublicInputExploration } from '../src/sic/public-input-exploration.ts';
+import { createSicPublicInputExploration, currentControlledMotion } from '../src/sic/public-input-exploration.ts';
 
 test('SIC probes repeated interior markers while requiring independent visible arrangements', async () => {
   const board = (secondSquare: boolean) => Array.from({ length: 14 }, (_, y) =>
@@ -53,4 +53,8 @@ test('SIC tests a direction after a click changes a piece and binds the observed
   const result = await family.record(observation, next, probe.actions[0]!, rows, nextRows, probe, 0, [nextRows]);
   assert.deepEqual(result.events.map(event => [event.kind, event.from, event.to, event.evidence]),
     [['sic_selected_piece_motion', [3, 4, 5, 6], [5, 4, 7, 6], [observation.observation_ref, next.observation_ref]]]);
+  const checkpoint = family.state();
+  assert.equal(currentControlledMotion(checkpoint, next)?.command, probe.actions[0]!.action_ref);
+  assert.equal(currentControlledMotion(checkpoint, { ...next, observation_ref: 'later' }), undefined);
+  assert.equal(currentControlledMotion(checkpoint, { ...next, level_epoch: next.level_epoch + 1 }), undefined);
 });

@@ -40,7 +40,7 @@ import { createSicLearnSupportMoves } from '../sic/learn-support-moves.ts';
 import { createSicSubsetExperiment } from '../sic/subset-experiment.ts';
 import { createSicLearnScopeEffects } from '../sic/learn-scope-effects.ts';
 import { createSicCavityAccess } from '../sic/cavity-access.ts';
-import { createSicPublicInputExploration } from '../sic/public-input-exploration.ts';
+import { createSicPublicInputExploration, currentControlledMotion, publicInputExplorationId } from '../sic/public-input-exploration.ts';
 import { createSicFramedContact } from '../sic/framed-contact.ts';
 import { createSicTransportContact } from '../sic/transport-contact.ts';
 import { createSicBandAlignment } from '../sic/band-alignment.ts';
@@ -98,7 +98,7 @@ import { createSicPivotCargo } from '../sic/pivot-cargo.ts';
 import { createSicNestedPassage } from '../sic/nested-passage.ts';
 import { createSicTranslateCoupledPieces } from '../sic/translate-coupled-pieces.ts';
 import { createSicStagedMarks } from '../sic/staged-marks.ts';
-import { createSicMoveMaskedPieces } from '../sic/move-masked-pieces.ts';
+import { createSicMoveMaskedPieces, learnSelectedAccessId } from '../sic/move-masked-pieces.ts';
 import { createSicLinkOpenings } from '../sic/link-openings.ts';
 import { createSicReproduceCue } from '../sic/reproduce-cue.ts';
 import { createSicNavigateRevealedGrid } from '../sic/navigate-revealed-grid.ts';
@@ -715,7 +715,10 @@ export class NativeV6Runtime implements NativeV6Backend {
       acquiredInformation: this.latestInformationLevel === level, observationRef: this.observation.observation_ref,
     } : null;
     const reasoning = situation ? { ...situation, ...selectReasoningMode(situation) } : null;
-    this.planning = { execution: { ...this.currentExecution(execution), ...(reasoning ? { reasoningMode: reasoning.mode } : {}) },
+    const motionState = this.adaptiveReasoning && this.knowledge?.memory.nodes[`family_state:${publicInputExplorationId}`];
+    const motion = motionState ? currentControlledMotion(objectValue(this.knowledge!.value(motionState.id)), this.observation) : undefined;
+    this.planning = { execution: { ...this.currentExecution(execution), ...(reasoning ? { reasoningMode: reasoning.mode } : {}),
+      ...(motion ? { observedControlledMotion: motion } : {}) },
       inputs, offers: new Map(), entryOffers: new Map(), sourceStops: new Map(), coordination: [], refusals: [], observedTrials: new Map() };
     try {
       if (!this.knowledge) throw new Error('Native knowledge store is not initialized');
@@ -2450,12 +2453,12 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const sequence = (configuration.window_constraints as R).labeled_sequence_composition.labeled_sequence_question;
     const groups = standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 102, groups, symmetry, policy, sequence, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 103, groups, symmetry, policy, sequence, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
       createSicFieldRepair(symmetry), createSicOrderedContact(policy, recovery), createSicSupportTransfer(support), createSicLearnSupportMoves(),
-      createSicLearnGridAccess(),
+      createSicLearnGridAccess(), createSicMoveMaskedPieces(learnSelectedAccessId),
       createSicSubsetExperiment(), createSicLearnScopeEffects(), createSicFramedContact(), createSicStagedMarks(), createSicTransportContact(), createSicBandAlignment(),
       createSicSharedArrival(), createSicOutlineService(), createSicLabeledSequence(sequence, options.now ?? (() => performance.now())),
       createSicMarkedCollection(), createSicSlotTransfer(), createSicRemoteSupportRoute(), createSicOccurrenceRecall(),

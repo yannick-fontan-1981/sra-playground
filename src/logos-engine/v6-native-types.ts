@@ -130,6 +130,7 @@ export interface NativeExecution {
   /** Current level quota, separate from the remaining session/prefix allowance. */
   readonly remainingLevelActions?: number;
   readonly reasoningMode?: import('../sic/reasoning-mode.ts').ReasoningMode;
+  readonly observedControlledMotion?: import('../sic/public-input-exploration.ts').ControlledMotion;
 }
 
 export interface NativeProgramHandle {

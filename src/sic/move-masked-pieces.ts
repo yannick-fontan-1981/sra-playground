@@ -7,6 +7,7 @@ import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-
 import { sicNeedId } from './need-identity.ts';
 
 export const moveMaskedPiecesId = 'sic_move_masked_pieces';
+export const learnSelectedAccessId = 'sic_learn_selected_access';
 
 const inputs = ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'] as const;
 const permutations = (values: readonly NativePoint[]): NativePoint[][] => values.length
@@ -78,18 +79,38 @@ function boxFor(scene: SelectedRigidScene, position: NativePoint, mask: NativePo
     oy + (y + 1 + Math.max(...mask.map(p => p[1]))) * q - 1];
 }
 
-export function createSicMoveMaskedPieces(): NativeFamily<Proposal> {
+export function createSicMoveMaskedPieces(id = moveMaskedPiecesId): NativeFamily<Proposal> {
   let state: State | null = null;
   return {
-    id: moveMaskedPiecesId,
+    id,
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !['ACTION6', ...inputs].every(id => observation.available_action_refs.includes(id))) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
+      const motion = execution?.observedControlledMotion;
+      if (id === learnSelectedAccessId && !prior && !motion) return null;
       const scene = selectedRigidScene(rows, prior?.scene);
       if (!scene) return null;
       const continuous = prior && samePoses(selectedRigidPoses(prior.scene), selectedRigidPoses(scene));
       const local: State = continuous ? { ...prior, scene } : { epoch: observation.level_epoch, scene, active: null,
         models: prior?.models ?? controlModels, route: null, refs: prior?.refs ?? [] };
+      if (id === learnSelectedAccessId && !prior && motion) {
+        const q = scene.geometry.q;
+        const dx = (motion.to[0] - motion.from[0]) / q, dy = (motion.to[1] - motion.from[1]) / q;
+        const inputIndex = inputs.findIndex(input => input === motion.command);
+        const [x, y] = scene.geometry.origin;
+        const points = scene.bodies.flatMap((body, index) => body.mask.some(([cx, cy]) => {
+          const left = x + (body.position[0] + cx) * q, top = y + (body.position[1] + cy) * q;
+          return left <= motion.to[2] && top <= motion.to[3] && left + q - 1 >= motion.to[0] && top + q - 1 >= motion.to[1];
+        }) ? [index] : []);
+        if (points.length !== 1 || inputIndex < 0 || Math.abs(dx) + Math.abs(dy) !== 1) return null;
+        const active = points[0]!;
+        const poses = selectedRigidPoses(scene);
+        const previous = selectedRigidMoved(scene, poses, active, [-dx, -dy]);
+        if (samePoses(poses, previous) || !samePoses(poses, selectedRigidMoved(scene, previous, active, [dx, dy]))) return null;
+        local.active = active;
+        local.models = controlModels.filter(model => same(model[inputIndex]!, [dx, dy]));
+        local.refs = [...motion.evidence];
+      }
       const choice = await choose(local, execution);
       if (!choice) return null;
       const ref = observation.observation_ref;
@@ -110,20 +131,20 @@ export function createSicMoveMaskedPieces(): NativeFamily<Proposal> {
       const objective = { kind: 'fit_selected_piece_through_opening', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['selected_piece', 'movable_obstacles', 'matching_opening'], parentObjective: parent, satisfactionContract: 'official_progress_at_matching_opening' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = moveMaskedPiecesId + ':' + need.id, action = choice.action;
+      const composition = id + ':' + need.id, action = choice.action;
       const focus = scene.bodies[choice.index]!, goal = scene.receptacle;
       return {
-        status: 'proposed', kind: moveMaskedPiecesId, local, choice, needId: need.id,
+        status: 'proposed', kind: id, local, choice, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
         steps: [{ action, expected_after: choice.kind === 'move' ? next[2] : null, ...(witness ? { point_binding: witness } : {}) }],
         sicSituationCard: { strategy: selected.id, need: 'Clear a route for the piece that fits the opening', situation, evidence, agenda: entries, mode,
           triggerCard: card, focus: boxFor(scene, focus.position, focus.mask), target: boxFor(scene, goal.position, goal.mask),
           destination: boxFor(scene, next[2][choice.index]!, focus.mask), compatibleControls: local.models.length },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
-        compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
-        bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
-          preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
+        compositions: [{ id: composition, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
+        sicLocalDecision: { strategy: selected.id, objective: { id: composition, label: navigationPrimitives[selected.id], parent }, need },
+        bundle_template: { operation_key: 'OP18', composition_ref: composition, objective_ref: parent, purpose: situation,
+          preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: composition } },
       };
     },
     before(proposal, index, _packet, current) {
@@ -146,10 +167,25 @@ export function createSicMoveMaskedPieces(): NativeFamily<Proposal> {
         return { events: [] };
       }
       const poses = selectedRigidPoses(scene), stationary = samePoses(poses, selectedRigidPoses(local.scene));
-      const models = choice.kind === 'select' ? local.models : choice.variants.filter(v => samePoses(v.poses, poses)).map(v => v.model);
+      let models = choice.kind === 'select' ? local.models : choice.variants.filter(v => samePoses(v.poses, poses)).map(v => v.model);
+      let active: number | null = choice.index;
+      if (id === learnSelectedAccessId && !models.length && choice.kind !== 'select') {
+        const priorPoses = selectedRigidPoses(local.scene);
+        const moved = poses.flatMap((position, index) => same(position, priorPoses[index]!) ? [] : [index]);
+        const command = inputs.findIndex(input => input === choice.action.action_ref);
+        if (moved.length === 1 && command >= 0) {
+          active = moved[0]!;
+          const from = priorPoses[active]!, to = poses[active]!;
+          models = local.models.filter(model => same(model[command]!, [to[0] - from[0], to[1] - from[1]]));
+        }
+        if (!models.length) {
+          models = local.models;
+          active = null;
+        }
+      }
       const advanced = choice.route[0] && samePoses(poses, choice.route[0][2]);
-      state = { ...local, scene, active: choice.index, models,
-        route: stationary ? choice.route : advanced ? choice.route.slice(1) : null,
+      state = { ...local, scene, active, models,
+        route: active === null ? null : stationary ? choice.route : advanced ? choice.route.slice(1) : null,
         refs: [...local.refs.slice(-4), after.observation_ref] };
       return { events: [] };
     },

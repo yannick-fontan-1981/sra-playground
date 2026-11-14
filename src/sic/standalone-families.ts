@@ -76,7 +76,7 @@ import { pivotCargoId } from './pivot-cargo.ts';
 import { nestedPassageId } from './nested-passage.ts';
 import { translateCoupledPiecesId } from './translate-coupled-pieces.ts';
 import { stagedMarksId } from './staged-marks.ts';
-import { moveMaskedPiecesId } from './move-masked-pieces.ts';
+import { learnSelectedAccessId, moveMaskedPiecesId } from './move-masked-pieces.ts';
 import { linkOpeningsId } from './link-openings.ts';
 import { reproduceCueId } from './reproduce-cue.ts';
 import { navigateRevealedGridId } from './navigate-revealed-grid.ts';
@@ -98,7 +98,7 @@ export const standalonePlanningGroups = [
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, facetGrowthId] },
   { id: 'visit_marked_surface', families: [traceCoverageId, markedLatticeId] },
   { id: 'place_incoming_groups', families: [queuedPlacementId, gatedCascadeId] },
-  { id: 'explore_available_inputs', families: [displayCouplingId, fieldIsolationId, cavityAccessId, learnCorrespondenceId, markedGaugeId, pairedChannelsId, learnGridAccessId, publicInputExplorationId] },
+  { id: 'explore_available_inputs', families: [displayCouplingId, fieldIsolationId, cavityAccessId, learnCorrespondenceId, markedGaugeId, pairedChannelsId, learnGridAccessId, learnSelectedAccessId, publicInputExplorationId] },
 ] as const;
 
 export const standalonePlanningFamilies: readonly string[] = Object.freeze(standalonePlanningGroups.flatMap(group => group.families));

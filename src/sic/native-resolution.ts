@@ -65,7 +65,7 @@ import { pivotCargoId } from './pivot-cargo.ts';
 import { nestedPassageId } from './nested-passage.ts';
 import { translateCoupledPiecesId } from './translate-coupled-pieces.ts';
 import { stagedMarksId } from './staged-marks.ts';
-import { moveMaskedPiecesId } from './move-masked-pieces.ts';
+import { learnSelectedAccessId, moveMaskedPiecesId } from './move-masked-pieces.ts';
 import { linkOpeningsId } from './link-openings.ts';
 import { reproduceCueId } from './reproduce-cue.ts';
 import { navigateRevealedGridId } from './navigate-revealed-grid.ts';
@@ -470,7 +470,8 @@ export function readNativeResolution(agent: {
   const rooted = record(proposal?.rooted_line_plan);
   const rootedScene = record(rooted?.scene);
   const labels = family === orderedContactId ? orderedContactStrategies : family === cavityAccessId ? cavityStrategies
-    : family === publicInputExplorationId ? publicInputStrategies : family === learnGridAccessId ? inventoryAccessStrategies
+    : family === publicInputExplorationId ? publicInputStrategies
+    : family === learnGridAccessId || family === learnSelectedAccessId ? inventoryAccessStrategies
     : family === framedContactId ? framedContactStrategies
       : family === transportContactId ? transportContactStrategies : family === bandAlignmentId ? bandAlignmentStrategies
         : family === sharedArrivalId ? sharedArrivalStrategies : family === outlineServiceId ? outlineServiceStrategies
@@ -810,7 +811,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label: 'Linked opening', box });
     }
   }
-  if (situationCard && family === moveMaskedPiecesId) {
+  if (situationCard && (family === moveMaskedPiecesId || family === learnSelectedAccessId)) {
     for (const [field, label] of [['focus', 'Selected piece'], ['destination', 'Next position'], ['target', 'Matching opening']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });

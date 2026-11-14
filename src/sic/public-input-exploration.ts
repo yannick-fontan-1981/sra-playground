@@ -28,7 +28,7 @@ const clickLimit = 30;
 const completion = 'G_official_completion';
 
 type ClickedControl = { box: NativeBox; point: NativePoint; remaining: string[]; evidence: string; destination: string };
-type ControlledMotion = { from: NativeBox; to: NativeBox; command: string; evidence: readonly [string, string]; destination: string };
+export type ControlledMotion = { from: NativeBox; to: NativeBox; command: string; evidence: readonly [string, string]; destination: string };
 type State = { epoch: number; experiments: number; transitions: ObservedCommandGraph; options: Record<string, string[]>;
   lastChange: { destination: string; action: string; evidence: string } | null;
   clickedControl?: ClickedControl;
@@ -41,6 +41,13 @@ type Proposal = NativeProposal & { source: string; candidates: string[]; expecte
 const initial = (epoch = 0): State => ({ epoch, experiments: 0, transitions: {}, options: {}, lastChange: null, recheck: null });
 const interfaceKey = (observation: NativeObservation) =>
   `${observation.frame_hash}:${[...observation.available_action_refs].sort().join(',')}`;
+
+export function currentControlledMotion(state: NativeRecord, observation: NativeObservation): ControlledMotion | undefined {
+  const exploration = state as State;
+  const motion = exploration.controlledPiece;
+  return exploration.epoch === observation.level_epoch && motion?.evidence[1] === observation.observation_ref
+    && motion.destination === interfaceKey(observation) ? motion : undefined;
+}
 const commandKey = (command: NativeCommand) => command.action_ref === 'ACTION6'
   ? `ACTION6:${command.data.x},${command.data.y}` : command.action_ref;
 const opposite: Readonly<Record<string, string>> = {
