@@ -143,3 +143,5 @@ Les **29 premiers niveaux acquis** sont rejoués dans le navigateur en **385 com
 Les **31 premiers niveaux acquis** sont rejoués dans le navigateur en **396 commandes SIC seul** sur le commit `3abba8df`.
 
 **SB26** gagne son premier niveau en **9 commandes SIC seul**, contre 12 dans le parcours natif comparé. SIC mesure la correspondance entre la séquence de référence, les emplacements et les jetons disponibles. Il vérifie qu’un jeton est sélectionné, puis que son dépôt remplit l’emplacement attendu et consomme le jeton. La soumission devient applicable quand toute la séquence visible correspond. L’empreinte navigateur est `d36500ce5cd46c00e99991e46b5a5312d29384ce57dbdb3cce10bd9058757f18`. La couverture atteint **32 premiers niveaux** et **55 niveaux attestés**, dont quatre jeux terminés.
+
+Les **32 premiers niveaux acquis** sont rejoués en **405 commandes SIC seul** dans le navigateur. Sur SB26, deux essais affiché et masqué gardent les mêmes commandes, et le panneau projette les trois cartes de situation après la partie, sans mutation ni projection durant les commandes.
