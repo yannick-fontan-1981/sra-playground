@@ -1,10 +1,12 @@
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeExecution, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { blockedRouteStep, rememberRouteRefusal, type RouteRefusals } from './route-refusals.ts';
 import { sicNeedId } from './need-identity.ts';
 
 export const switchedSurfaceId = 'sic_switched_surface';
+export const learnSwitchedSurfaceId = 'sic_follow_observed_surface_change';
 const directions = [['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], ['ACTION4', 1, 0]] as const;
 type Direction = typeof directions[number];
 type Part = ReturnType<typeof geometricComponents>[number];
@@ -72,6 +74,20 @@ function sceneFor(rows: NativeRows, prior: Model | null, epoch: number): Scene |
   return { model, actor: a, peer: peer.length ? asMark(peer[0]!) : null, context: peer.length ? 'target-visible' : 'target-hidden', ground: model.ground };
 }
 
+function acquiredScene(rows: NativeRows, ref: string, epoch: number, execution: NativeExecution | undefined): Scene | null {
+  const receipt = execution?.readPriorDirectionalScene?.(prior => sceneFor(prior, null, epoch));
+  if (!receipt || receipt.afterRef !== ref || receipt.levelEpoch !== epoch || !receipt.scene.peer) return null;
+  const { scene: before } = receipt;
+  const step = directions.find(([command]) => command === receipt.command);
+  if (!step) return null;
+  const next = sceneFor(rows, before.model, epoch);
+  if (!next || next.peer || !equal(next.actor.point, shift(before.actor.point, step, before.model.pitch))
+    || !before.model.gates.some(gate => equal(gate, next.actor.point))) return null;
+  const model: Model = { ...before.model, refs: [receipt.beforeRef, ref], count: 1,
+    entry: { gate: next.actor.point, outside: before.actor.point } };
+  return { ...next, model };
+}
+
 function pickStep(rows: NativeRows, scene: Scene): Step | null {
   const { model, actor, peer, ground, context } = scene;
   const { pitch, blocked } = model;
@@ -112,30 +128,42 @@ function pickStep(rows: NativeRows, scene: Scene): Step | null {
     || Number(b.floor) - Number(a.floor) || towardExit(a.at) - towardExit(b.at))[0] ?? null;
 }
 
-export function createSicSwitchedSurface(): NativeFamily<Proposal> {
+export function createSicSwitchedSurface(family = switchedSurfaceId): NativeFamily<Proposal> {
+  const learns = family === learnSwitchedSurfaceId;
   let model: Model | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: switchedSurfaceId,
-    propose(observation, rows, _inputs, remaining, execution): Proposal | null {
+    id: family,
+    async attachPrograms(registry) {
+      if (learns) decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !directions.every(([ref]) => observation.available_action_refs.includes(ref))
         || observation.available_action_refs.includes('ACTION6')) return null;
       const prior = model?.epoch === observation.level_epoch ? model : null;
-      const scene = sceneFor(rows, prior, observation.level_epoch);
+      const ref = observation.observation_ref;
+      const scene = learns && !prior ? acquiredScene(rows, ref, observation.level_epoch, execution)
+        : sceneFor(rows, prior, observation.level_epoch);
       if (!scene || scene.model.count >= 24) return null;
       const step = pickStep(rows, scene);
       if (!step) return null;
-      const ref = observation.observation_ref;
       const memory = scene.model;
       const evidence: [string, ...string[]] = [ref, ...memory.refs.filter(value => value !== ref)];
       const mode = execution?.reasoningMode ?? 'exploration';
       const action = { action_ref: step.direction[0], data: {} };
       const offer = { input: action.action_ref, expected: step.at, evidence };
       const contact = !!scene.peer && equal(step.at, scene.peer.point);
-      const { selected, entries, card } = resolveNavigationPrimitives({
+      const routeSupported = memory.refs.length > 0 && step.floor && !contact;
+      const facts = { eligibleProbe: !routeSupported, routeSupported, knownInteraction: false, mode };
+      const decision = learns ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : null;
+      const primitive = routeSupported ? 'P07' : 'P05';
+      if (learns && decision?.result !== primitive) return null;
+      const navigation = learns ? null : resolveNavigationPrimitives({
         mode, evidence, probe: !memory.refs.length || !step.floor && !contact ? offer : null,
         access: memory.refs.length && step.floor && !contact ? offer : null, interaction: contact ? offer : null,
       });
-      if (!selected) return null;
+      const strategy = learns ? primitive : navigation?.selected?.id;
+      if (!strategy) return null;
       const parent = 'G_official_completion';
       const objective = { kind: 'reach_peer_across_alternate_surface', scope: ref.split(':revision:', 1)[0]!,
         subjects: [key(memory.peer.point)], parentObjective: parent, satisfactionContract: 'official_progress_after_peer_contact' };
@@ -143,16 +171,19 @@ export function createSicSwitchedSurface(): NativeFamily<Proposal> {
       const id = switchedSurfaceId + ':' + need.id;
       const [x, y] = step.at;
       const situation = contact ? 'Test contact with the visible target'
-        : selected.id === 'P05' ? 'Test access through the visible opening'
+        : strategy === 'P05' ? 'Test access through the visible opening'
           : 'Use the current surface to reach the last observed target position';
       return {
-        status: 'proposed', kind: switchedSurfaceId, scene, step, needId: need.id,
+        status: 'proposed', kind: family, scene, step, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action], steps: [{ action, expected_after: step.at }],
-        sicSituationCard: { strategy: selected.id, need: 'Reach the target through the available surface', situation, evidence, agenda: entries,
-          mode, triggerCard: card, actor: scene.actor.box, focus: scene.peer?.box ?? null, landing: [x, y, x + 1, y + 1] },
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
+        sicSituationCard: { strategy, need: 'Reach the target through the available surface', situation, evidence, agenda: navigation?.entries ?? [],
+          mode, triggerCard: navigation?.card ?? decision?.receipt.workflow, actor: scene.actor.box, focus: scene.peer?.box ?? null,
+          landing: [x, y, x + 1, y + 1] },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
+        sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
           preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
       };

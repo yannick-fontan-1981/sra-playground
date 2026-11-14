@@ -415,3 +415,9 @@ Les commandes et retours reproduisent la référence, empreinte `f8a01c6e6c57dab
 Avec `sic_port_pairing` retirée, **CN04 gagne en 18 commandes SIC seul**. La première commande vient de la famille d’accès et déplace une pièce d’une maille. Le fournisseur vérifie qu’une seule pièce correspond au déplacement et que la position précédente reconstruite reproduit la vue avant la commande. La même carte SRC choisit quatre essais P05 pour les trois directions restantes et la rotation, puis 13 réutilisations P02. L’assembleur de ports partagé calcule les raccordements compatibles et contrôle les poses. Les commandes et retours reproduisent la référence, empreinte `2ca5cca4d493d40e38003380887a1cb178c887d645fdde548434b2a37b708205`.
 
 Le nom neutre et la palette permutée conservent le gain. Désactiver P02 après le premier quart de tour laisse le niveau ouvert au même budget. Les commandes suivantes proviennent de la famille d’accès et de nouveaux essais P05.
+
+### Retrouver la cible après un changement de surface
+
+Avec `sic_switched_surface` retirée, **ETAG gagne en sept commandes SIC seul**. Une commande de la famille d’accès déplace la pièce d’un pas dans une ouverture et la cible cesse d’être visible. SIC reconstitue l’entrée en comparant les deux observations et conserve la dernière position mesurée de la cible. La carte SRC `sic.follow_observed_landings.choose` choisit quatre déplacements P07 vers l’ouverture de sortie, puis deux essais P05 pour vérifier la sortie et le contact. La mesure des ouvertures et la recherche du trajet restent dans le fournisseur TypeScript partagé.
+
+Les commandes et retours reproduisent la référence, empreinte `fa59891322e73aeb1069b27230f36be95d4245bd53e3f195965b5f93c5ec4eaf`. Le nom neutre et la palette permutée conservent le gain. Désactiver P07 après le changement de surface laisse le niveau ouvert à la septième commande.
