@@ -331,6 +331,8 @@ app.innerHTML = `
                     <summary>Import or export SIC settings</summary>
                     <label for="sic-recovery-pack">Pack JSON</label>
                     <textarea id="sic-recovery-pack" name="pack" rows="6" maxlength="32768" spellcheck="false"></textarea>
+                    <label for="sic-recovery-signer">Trusted signer fingerprint (for signed packs)</label>
+                    <input id="sic-recovery-signer" name="trustedSigner" maxlength="64" spellcheck="false" autocomplete="off">
                     <button type="button" data-sic-recovery-export>Show saved pack</button>
                     <button type="button" data-sic-recovery-import>Preview pack settings</button>
                     <p data-sic-recovery-revision></p>

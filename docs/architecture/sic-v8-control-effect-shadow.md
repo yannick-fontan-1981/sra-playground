@@ -257,6 +257,10 @@ La campagne sur les six niveaux de DICO, exécutée dans le navigateur sur `4500
 
 Sur ce même commit, SK48 atteint le niveau 2 en 19 actions, AS66 termine trois niveaux en 19, SYME un en 9 et LKEY trois en 44. CASC conserve son arrêt `frontier_unknown` après une commande. Les 92 commandes, les empreintes des retours publics et les fins de niveau concordent avec curiosité native, shadow et active. La suite générale lancée sur `d6797ce3` a passé 16 132 tests. La promotion du réglage d’arbitrage sur `450057d8` a passé les 169 tests ciblés.
 
+### Vérification des packs de stratégies
+
+`node scripts/sign-sic-pack.mjs saved-pack.json p256-private-key.pem` écrit le pack signé sur la sortie standard. L’empreinte SHA-256 de la clé publique figure sur la sortie d’erreur et se communique par un canal convenu avec le destinataire. Dans **Strategies → Active SIC settings → Import or export SIC settings**, coller le pack et saisir cette empreinte permet de vérifier la signature, puis d’apercevoir les réglages avant de les enregistrer. La sauvegarde conserve la révision signée exacte. Le réexport vérifie sa provenance et la restauration retrouve le pack précédent. Les packs locaux des schémas 1 à 5 restent lisibles. Dans le navigateur, une empreinte de test erronée a été refusée, puis l’empreinte exacte a permis l’aperçu, la sauvegarde, le réexport et le retour à la révision initiale.
+
 | Série | SHA-256 du reçu brut de la seconde fenêtre |
 | --- | --- |
 | A1 | `5919c1547cb8cd18aacd9e2043a10e921300884fc0163e743248b644c16ab2f0` |

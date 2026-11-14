@@ -1,5 +1,6 @@
 import { compileRecoveryPack, contactRecoveryGraph, contactRecoveryOrder, contactRecoveryStrategies, defaultRecoveryPack, isContactStrategy, type RecoveryPack } from './active-recovery.ts';
-import { nextRecoveryRevision, readRecoveryRevision, recoveryRevision } from './recovery-pack.ts';
+import { nextRecoveryRevision, readRecoveryRevision, recoveryRevision, type RecoveryRevision } from './recovery-pack.ts';
+import { verifySignedRecoveryPack, type SignedRecoveryPack } from './pack-signature.ts';
 import { evaluateFrontierLocalRule, compileFrontierLocalRule, defaultFrontierConfiguration, frontierInputOrders,
   isFrontierInputOrder, type FrontierChoiceEvidence, type FrontierInputOrder, type FrontierLocalRule } from './frontier-configuration.ts';
 import { frontierStrategies, frontierStrategyGraph } from './frontier-strategy.ts';
@@ -10,6 +11,11 @@ import type { V6BackendSnapshot } from '../runtime/v6-agent-protocol.ts';
 
 const storageKey = 'sra.sic.contact-recovery.revisions.v1';
 const legacyKey = 'sra.sic.contact-recovery.v1';
+type PackProvenance = { readonly pack: SignedRecoveryPack; readonly signer: string };
+type SavedRevisions = ReturnType<typeof nextRecoveryRevision> & {
+  readonly currentProvenance?: PackProvenance;
+  readonly previousProvenance?: PackProvenance;
+};
 
 export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
   const form = panel.querySelector<HTMLFormElement>('[data-sic-recovery-settings]')!;
@@ -84,13 +90,18 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
   const depth = form.elements.namedItem('maxDepth') as HTMLInputElement;
   const nodes = form.elements.namedItem('maxNodes') as HTMLInputElement;
   const json = form.elements.namedItem('pack') as HTMLTextAreaElement;
-  let saved: ReturnType<typeof nextRecoveryRevision> = { current: recoveryRevision(defaultRecoveryPack), previous: null };
+  const trustedSigner = form.elements.namedItem('trustedSigner') as HTMLInputElement;
+  const importButton = form.querySelector<HTMLButtonElement>('[data-sic-recovery-import]')!;
+  let previewed: { revision: RecoveryRevision; formDigest: string; text: string; provenance?: PackProvenance } | null = null;
+  let savedFormDigest: string;
+  let saved: SavedRevisions = { current: recoveryRevision(defaultRecoveryPack), previous: null };
   try {
     const revisions = localStorage.getItem(storageKey);
     const legacy = localStorage.getItem(legacyKey);
     if (revisions !== null) {
       const record = JSON.parse(revisions);
-      saved = { current: readRecoveryRevision(record.current), previous: record.previous === null ? null : readRecoveryRevision(record.previous) };
+      saved = { current: readRecoveryRevision(record.current), previous: record.previous === null ? null : readRecoveryRevision(record.previous),
+        currentProvenance: record.currentProvenance, previousProvenance: record.previousProvenance };
     } else if (legacy !== null) {
       saved.current = recoveryRevision(compileRecoveryPack(JSON.parse(legacy)));
     }
@@ -119,26 +130,42 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
     const suffix = saved.previous ? ` · Previous ${saved.previous.digest.slice(0, 12)}` : '';
     revision.textContent = `Saved revision ${saved.current.digest.slice(0, 12)}${suffix}`;
     rollback.disabled = saved.previous === null;
+    savedFormDigest = readForm().digest;
   }
-  function save(next: ReturnType<typeof nextRecoveryRevision>) {
+  function save(next: SavedRevisions) {
     localStorage.setItem(storageKey, JSON.stringify(next));
     saved = next;
+    previewed = null;
     showDraft(saved.current.configuration);
     showSaved();
+  }
+  function readForm() {
+    const strategyOrder = [priority.value, ...contactRecoveryOrder.filter(id => id !== priority.value)];
+    const localRule = readLocalRule();
+    return recoveryRevision(compileRecoveryPack({ version: 1, mode: mode.value, maxDepth: depth.valueAsNumber, maxNodes: nodes.valueAsNumber,
+      strategyOrder, familyAgenda: familyAgenda.value,
+      ...(openingCuriosity.value !== 'native' ? { openingCuriosity: openingCuriosity.value } : {}),
+      frontier: { inputOrder: inputOrder.value, ...(localRule ? { localRule } : {}) } }));
   }
   showDraft(saved.current.configuration);
   showSaved();
   form.addEventListener('submit', event => {
     event.preventDefault();
     try {
-      const strategyOrder = [priority.value, ...contactRecoveryOrder.filter(id => id !== priority.value)];
-      const localRule = readLocalRule();
-      const candidate = compileRecoveryPack({ version: 1, mode: mode.value, maxDepth: depth.valueAsNumber, maxNodes: nodes.valueAsNumber, strategyOrder,
-        familyAgenda: familyAgenda.value,
-        ...(openingCuriosity.value !== 'native' ? { openingCuriosity: openingCuriosity.value } : {}),
-        frontier: { inputOrder: inputOrder.value, ...(localRule ? { localRule } : {}) } });
-      save(nextRecoveryRevision(saved.current, saved.previous, recoveryRevision(candidate)));
-      status.textContent = 'SIC settings saved for the next agent session.';
+      const formRevision = readForm();
+      const imported = previewed?.formDigest === formRevision.digest ? previewed : null;
+      if (imported?.provenance && (json.value !== imported.text
+        || trustedSigner.value.trim().toLowerCase() !== imported.provenance.signer)) {
+        throw new TypeError('The signed pack or signer changed. Preview the pack again before saving.');
+      }
+      const candidate = imported?.revision ?? (formRevision.digest === savedFormDigest ? saved.current : formRevision);
+      const next = nextRecoveryRevision(saved.current, saved.previous, candidate);
+      const sameRevision = next.current.digest === saved.current.digest;
+      save({ ...next, currentProvenance: imported?.provenance ?? (sameRevision ? saved.currentProvenance : undefined),
+        previousProvenance: sameRevision ? saved.previousProvenance : saved.currentProvenance });
+      status.textContent = imported?.provenance
+        ? `Verified revision ${imported.revision.digest.slice(0, 12)} saved for the next agent session.`
+        : 'SIC settings saved for the next agent session.';
     } catch (error) {
       status.textContent = error instanceof Error ? error.message : 'SIC settings could not be saved.';
     }
@@ -146,21 +173,51 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
   rollback.addEventListener('click', () => {
     if (!saved.previous) return;
     try {
-      save({ current: saved.previous, previous: saved.current });
+      save({ current: saved.previous, previous: saved.current, currentProvenance: saved.previousProvenance,
+        previousProvenance: saved.currentProvenance });
       status.textContent = 'Previous SIC revision restored for the next agent session.';
     } catch {
       status.textContent = 'The previous revision could not be restored.';
     }
   });
-  form.querySelector('[data-sic-recovery-export]')!.addEventListener('click', () => {
-    json.value = JSON.stringify(saved.current, null, 2);
-    json.focus();
-    json.select();
-  });
-  form.querySelector('[data-sic-recovery-import]')!.addEventListener('click', () => {
+  const exportButton = form.querySelector<HTMLButtonElement>('[data-sic-recovery-export]')!;
+  exportButton.addEventListener('click', async () => {
+    const current = saved;
+    const provenance = current.currentProvenance;
+    exportButton.disabled = true;
     try {
-      const draft = readRecoveryRevision(JSON.parse(json.value));
+      const signed = provenance ? await verifySignedRecoveryPack(provenance.pack, provenance.signer) : null;
+      if (saved !== current) return;
+      if (signed && signed.revision.digest !== current.current.digest) throw new TypeError('The signature belongs to a different SIC revision.');
+      json.value = JSON.stringify(signed ?? current.current, null, 2);
+      json.focus();
+      json.select();
+    } catch (error) {
+      status.textContent = error instanceof Error ? error.message : 'SIC pack could not be exported.';
+    } finally {
+      exportButton.disabled = false;
+    }
+  });
+  importButton.addEventListener('click', async () => {
+    const currentRevision = saved.current;
+    const packageText = json.value;
+    const fingerprint = trustedSigner.value.trim().toLowerCase();
+    const controlsBeforePreview = new FormData(form);
+    previewed = null;
+    importButton.disabled = true;
+    try {
+      const parsed = JSON.parse(packageText);
+      const signed = parsed !== null && typeof parsed === 'object' && Object.hasOwn(parsed, 'signature')
+        ? await verifySignedRecoveryPack(parsed, fingerprint) : null;
+      const draft = signed?.revision ?? readRecoveryRevision(parsed);
+      const currentControls = new FormData(form);
+      if (saved.current !== currentRevision || [...controlsBeforePreview].some(([name, value]) => currentControls.get(name) !== value)) {
+        status.textContent = 'The settings changed during verification. Preview the pack again.';
+        return;
+      }
       showDraft(draft.configuration);
+      previewed = { revision: draft, formDigest: readForm().digest, text: packageText,
+        ...(signed ? { provenance: { pack: signed, signer: fingerprint } } : {}) };
       const current = saved.current.configuration;
       const currentFirst = (current.strategyOrder ?? contactRecoveryOrder)[0]!;
       const draftFirst = (draft.configuration.strategyOrder ?? contactRecoveryOrder)[0]!;
@@ -177,11 +234,13 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
         JSON.stringify(current.frontier?.localRule) === JSON.stringify(draft.configuration.frontier?.localRule) ? null
           : `exploration rule → ${draft.configuration.frontier?.localRule?.title ?? 'removed'}`,
       ].filter(Boolean);
-      status.textContent = differences.length
-        ? `Preview ${draft.digest.slice(0, 12)} · ${differences.join(' · ')}. Save SIC settings to apply it next session.`
-        : 'This pack matches the saved SIC settings.';
+      const verification = signed ? `Verified signer ${fingerprint.slice(0, 12)} · ` : '';
+      const changes = differences.length ? ` · ${differences.join(' · ')}` : ' · settings match the saved configuration';
+      status.textContent = `${verification}Preview ${draft.digest.slice(0, 12)}${changes}. Save SIC settings to apply it next session.`;
     } catch (error) {
       status.textContent = error instanceof Error ? error.message : 'SIC pack could not be opened.';
+    } finally {
+      importButton.disabled = false;
     }
   });
   return () => saved.current.configuration;
