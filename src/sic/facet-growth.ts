@@ -3,8 +3,10 @@ import { facetBox, facetInside, facetProject, facetShape, type FacetProjection }
 import type { NativeFamily, NativeObservation, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { countChangesInside } from './workspace-click.ts';
 
 export const facetGrowthId = 'sic_facet_growth';
+export const learnFacetGrowthId = 'sic_learn_facet_growth';
 export const facetGrowthStrategies = {
   test_matching_surface: 'Test a bounded area that matches the example',
   measure_visible_extension: 'Test whether the top moves and the sides extend',
@@ -24,9 +26,7 @@ const sameShape = (a: FacetProjection['offer']['support'], b: FacetProjection['o
   JSON.stringify(facetShape(a)) === JSON.stringify(facetShape(b));
 
 function observedRise({ projection, local }: Proposal, before: NativeObservation, after: NativeObservation, first: NativeRows, second: NativeRows) {
-  const [l, t, r, b] = projection.world;
-  const outsidePreserved = first.every((row, y) => row.every((value, x) => (l < x && x < r && t < y && y < b) || second[y]?.[x] === value));
-  if (!outsidePreserved || before.frame_hash === after.frame_hash) return null;
+  if (before.frame_hash === after.frame_hash || !countChangesInside(first, second, projection.world)) return null;
   const next = facetProject(after, second);
   if (!next || next.scope_ref !== projection.scope_ref || next.offer.kind !== 'probe_visible_cap') return null;
   const oldTop = projection.offer.support, top = next.offer.support;
@@ -45,16 +45,23 @@ function observedRise({ projection, local }: Proposal, before: NativeObservation
   return rise;
 }
 
-export function createSicFacetGrowth(): NativeFamily<Proposal> {
+export function createSicFacetGrowth(family = facetGrowthId): NativeFamily<Proposal> {
+  const learns = family === learnFacetGrowthId;
   let state: State | null = null;
   return {
-    id: facetGrowthId,
-    async propose(observation, rows, _inputs, remaining) {
+    id: family,
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
+      if (learns && !state && !execution?.readWorkspaceClick) return null;
       const projection = facetProject(observation, rows);
       if (!projection) return null;
-      const local = state?.scope === projection.scope_ref ? state
-        : { scope: projection.scope_ref, count: 0, stopped: false, rise: null, evidence: [] };
+      const prior = state?.scope === projection.scope_ref ? state : null;
+      const click = learns && !prior && projection.offer.kind === 'probe_visible_cap'
+        ? execution?.readWorkspaceClick?.(projection.world) : null;
+      if (learns && !prior && (!click || click.afterRef !== observation.observation_ref || click.levelEpoch !== observation.level_epoch
+        || !facetInside([...click.point, ...click.point], projection.offer.support.bbox))) return null;
+      const local = prior ?? { scope: projection.scope_ref, count: 0, stopped: false, rise: null,
+        evidence: click ? [click.beforeRef, click.afterRef] : [] };
       if (local.stopped || local.count >= 16) return null;
       const empty = projection.offer.kind === 'probe_congruent_empty_face';
       const repeat = !empty && local.rise !== null;
@@ -70,7 +77,7 @@ export function createSicFacetGrowth(): NativeFamily<Proposal> {
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `facet-growth:${need.id}`, actions = [command];
       const binding = await ObservedInputDomain.makeLocusWitness(observation, rows, [x, y], { reason: label, evidence });
-      return { status: 'proposed', kind: facetGrowthId, actions, local, projection, needId: need.id,
+      return { status: 'proposed', kind: family, actions, local, projection, needId: need.id,
         steps: [{ action: command, expected_after: null, point_binding: binding }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: { strategy, need: 'Match the proportions of the separate reference', mode: repeat ? 'solving' : 'exploration',

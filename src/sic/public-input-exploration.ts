@@ -7,6 +7,7 @@ import { observedCommandFrontier, rememberCommandReturn, type ObservedCommandGra
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 import { matchesCollectionEdit, proposeCollectionTrial, type CollectionTrial } from './collection-experiment.ts';
 import { repeatedInputTargets } from './repeated-input-targets.ts';
+import { countChangesInside, workspaceClickCandidate } from './workspace-click.ts';
 
 export const publicInputExplorationId = 'sic_public_input_exploration';
 export const publicInputStrategies = {
@@ -14,24 +15,27 @@ export const publicInputStrategies = {
   test_marked_edit: 'Test the edit suggested by the visible marks',
   test_edited_collection: 'Test the effect of the verified edit',
   test_repeated_target: 'Test a target from a repeated group',
+  test_workspace_target: 'Test a target in the work area while preserving the example',
   recheck_controls_after_change: 'Recheck directional controls after an interface change',
   test_repeated_marker: 'Test a small marker in a repeated arrangement',
   compare_public_input: 'Test an available command on this board',
   revisit_input_frontier: 'Revisit a board with an untested command',
 } as const;
-const order = ['P05', 'recheck_controls_after_change', 'test_marked_edit', 'test_edited_collection', 'test_repeated_marker', 'test_repeated_target', 'compare_public_input', 'revisit_input_frontier'] as const;
-const graph = compileStrategyGraph({ id: 'understand_public_controls', version: 6, order: 'FALLBACK', priorities: order,
+const order = ['P05', 'recheck_controls_after_change', 'test_marked_edit', 'test_edited_collection', 'test_workspace_target',
+  'test_repeated_marker', 'test_repeated_target', 'compare_public_input', 'revisit_input_frontier'] as const;
+const graph = compileStrategyGraph({ id: 'understand_public_controls', version: 7, order: 'FALLBACK', priorities: order,
   strategies: {
     P05: [{ fact: 'clickedControl', expected: true, label: 'A click changed a piece after directional commands failed to move it' }],
     recheck_controls_after_change: [{ fact: 'changedControlContext', expected: true, label: 'Previously stationary directions can be rechecked after a visible interface change' }],
     test_marked_edit: [{ fact: 'markedEdit', expected: true, label: 'A visible mark suggests a testable change to the collection' }],
     test_edited_collection: [{ fact: 'verifiedEdit', expected: true, label: 'The expected edit occurred and no mark requests another change' }],
+    test_workspace_target: [{ fact: 'workspaceTarget', expected: true, label: 'A bounded work area offers a candidate matching the separate example' }],
     test_repeated_marker: [{ fact: 'repeatedMarker', expected: true, label: 'Several equal square arrangements of isolated markers are visible, and this marker is untested on this board' }],
     test_repeated_target: [{ fact: 'repeatedTarget', expected: true, label: 'The available non-point command and several clicks left the board unchanged, and a repeated group offers a distinct test' }],
     compare_public_input: [{ fact: 'untestedHere', expected: true, label: 'An available illustrated input has no return on this board' }],
     revisit_input_frontier: [{ fact: 'observedRoute', expected: true, label: 'Previously observed returns lead to an untested input' }],
   },
-}, ['clickedControl', 'changedControlContext', 'markedEdit', 'verifiedEdit', 'repeatedMarker', 'repeatedTarget', 'untestedHere', 'observedRoute']);
+}, ['clickedControl', 'changedControlContext', 'markedEdit', 'verifiedEdit', 'workspaceTarget', 'repeatedMarker', 'repeatedTarget', 'untestedHere', 'observedRoute']);
 const explorationLimit = 40;
 const clickLimit = 30;
 const completion = 'G_official_completion';
@@ -47,7 +51,7 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   collectionEdit?: readonly [string, string];
   recheck: { until: number; evidence: readonly string[] } | null };
 type Proposal = NativeProposal & { source: string; candidates: string[]; expected?: string; selectedBox?: NativeBox;
-  clickedControl?: ClickedControl; collectionTrial?: CollectionTrial; needId: string };
+  clickedControl?: ClickedControl; collectionTrial?: CollectionTrial; workspaceTrial?: NativeBox; needId: string };
 const initial = (epoch = 0): State => ({ epoch, experiments: 0, transitions: {}, options: {}, lastChange: null, recheck: null });
 const interfaceKey = (observation: NativeObservation) =>
   `${observation.frame_hash}:${[...observation.available_action_refs].sort().join(',')}`;
@@ -160,6 +164,13 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         ? proposeCollectionTrial(rows, named.map(key => candidates.get(key)!.command), !!verifiedEdit) : null;
       const trialKey = trial && commandKey(trial.command);
       if (trial && trialKey) candidates.set(trialKey, { command: trial.command, box: trial.box, marker: false, repeated: false });
+      const workspace = observation.available_action_refs.includes('ACTION6') && !nonPoint.length
+        ? workspaceClickCandidate(observation, rows) : null;
+      const workspaceCommand = workspace && { action_ref: 'ACTION6', data: { x: workspace.point[0], y: workspace.point[1] } };
+      const workspaceKey = workspaceCommand && commandKey(workspaceCommand);
+      if (workspace && workspaceCommand && workspaceKey) {
+        candidates.set(workspaceKey, { command: workspaceCommand, box: workspace.box, marker: false, repeated: false });
+      }
       const keys = [...candidates.keys()];
       const clickedControl = local.clickedControl?.destination === source ? local.clickedControl : undefined;
       const controlledPiece = local.controlledPiece?.destination === source ? local.controlledPiece : undefined;
@@ -173,12 +184,15 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         ? observedCommandFrontier(local.transitions, source, named, 1, () => named, deferred) : null;
       const preferred = trialKey && (trial?.expected === null || !local.transitions[source]?.some(edge => edge.action === trialKey))
         ? { action: trialKey, probe: trialKey, depth: 0, first: null } : null;
+      const workspaceProbe = workspaceKey && !local.transitions[source]?.some(edge => edge.action === workspaceKey)
+        ? { action: workspaceKey, probe: workspaceKey, depth: 0, first: null } : null;
       const frontier = probe ? { action: probe, probe, depth: 0, first: null }
-        : measuredControls ?? preferred ?? observedCommandFrontier(local.transitions, source, keys, budget,
+        : measuredControls ?? preferred ?? workspaceProbe ?? observedCommandFrontier(local.transitions, source, keys, budget,
           board => board === source ? keys : local.options[board] ?? [], deferred);
       const offer = frontier && candidates.get(frontier.action);
       if (!offer) return null;
       const collectionTrial = frontier === preferred ? trial : null;
+      const workspaceTrial = frontier === workspaceProbe ? workspace : null;
       const repeatedTarget = frontier.depth === 0 && offer.repeated;
       const proof: [string, ...string[]] = [ref, ...(frontier.first ? [frontier.first.evidence] : []),
         ...(repeatedTarget && stationaryCommand ? [stationaryCommand.evidence, ...stationaryClicks.slice(-4).map(edge => edge.evidence)] : []),
@@ -191,12 +205,13 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         changedControlContext: { value: !!measuredControls, evidence: proof },
         markedEdit: { value: !!collectionTrial?.expected, evidence: proof },
         verifiedEdit: { value: collectionTrial?.expected === null, evidence: proof },
+        workspaceTarget: { value: !!workspaceTrial, evidence: proof },
         repeatedMarker: { value: frontier.depth === 0 && offer.marker, evidence: proof },
         repeatedTarget: { value: repeatedTarget, evidence: proof },
         untestedHere: { value: frontier.depth === 0, evidence: proof },
         observedRoute: { value: frontier.depth > 0, evidence: proof },
       }, planners: { P05: () => offer, recheck_controls_after_change: () => offer, test_marked_edit: () => offer,
-        test_edited_collection: () => offer, test_repeated_marker: () => offer, test_repeated_target: () => offer,
+        test_edited_collection: () => offer, test_workspace_target: () => offer, test_repeated_marker: () => offer, test_repeated_target: () => offer,
         compare_public_input: () => offer, revisit_input_frontier: () => offer } });
       if (!selected) return null;
       const strategy = selected.id;
@@ -213,6 +228,7 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         status: 'proposed', kind: publicInputExplorationId, actions, source, candidates: keys, needId: need.id,
         ...(clickedControl && probe ? { clickedControl } : {}), ...(box && !offer.marker ? { selectedBox: box } : {}),
         ...(collectionTrial ? { collectionTrial } : {}),
+        ...(workspaceTrial ? { workspaceTrial: workspaceTrial.workspace } : {}),
         ...(frontier.first?.destination ? { expected: frontier.first.destination } : {}),
         steps: [{ action: command, expected_after: null, ...(witness ? { point_binding: witness } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
@@ -221,6 +237,7 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
             ? 'The last direction changed the board. Test another input before trying its opposite.'
             : label, agenda: entries, evidence: proof, ...(box ? { addressedRegion: box } : {}),
           ...(clickedControl && probe ? { focus: clickedControl.box } : {}),
+          ...(workspaceTrial ? { workspace: workspaceTrial.workspace, example: workspaceTrial.example } : {}),
           ...(controlledPiece ? { lastControlledMotion: controlledPiece } : {}) },
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${completion}`] }],
         question: { reason: label, hypothesis_refs: proof }, route_refs: proof,
@@ -234,13 +251,15 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'current_public_input_bound' : 'public_input_scope_changed' };
     },
-    after(proposal, _index, before, after, _rows, afterRows) {
+    after(proposal, _index, before, after, rows, afterRows) {
       const scored = after.levels_completed > before.levels_completed;
       const expected = proposal.collectionTrial?.expected;
       const matched = !scored && expected ? matchesCollectionEdit(afterRows, expected)
+        : !scored && proposal.workspaceTrial ? !!countChangesInside(rows, afterRows, proposal.workspaceTrial)
         : !scored && proposal.expected ? proposal.expected === interfaceKey(after) : null;
       return { matched, seal_prefix: true, reason: scored ? 'official_boundary'
         : expected ? (matched ? 'collection_edit_confirmed' : 'collection_edit_contradicted')
+          : proposal.workspaceTrial ? (matched ? 'workspace_changed_with_example_preserved' : 'workspace_change_unconfirmed')
           : matched === false ? 'public_transition_contradicted' : 'observed_public_input_return',
         ...(scored ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
     },

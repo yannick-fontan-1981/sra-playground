@@ -30,7 +30,7 @@ import { markedLatticeId, markedLatticeStrategies } from './marked-lattice.ts';
 import { queuedPlacementId, queuedPlacementStrategies } from './queued-placement.ts';
 import { legendRecolorId, legendRecolorStrategies } from './legend-recolor.ts';
 import { visualPatternId, visualPatternStrategies } from './visual-pattern.ts';
-import { facetGrowthId, facetGrowthStrategies } from './facet-growth.ts';
+import { facetGrowthId, facetGrowthStrategies, learnFacetGrowthId } from './facet-growth.ts';
 import { chartRouteId, chartRouteStrategies } from './chart-route.ts';
 import { populationPlacementId, populationPlacementStrategies } from './population-placement.ts';
 import { carryToFrameId, carryToFrameStrategies } from './carry-to-frame.ts';
@@ -483,7 +483,7 @@ export function readNativeResolution(agent: {
                     : (family === programOriginId || family === learnProgramOriginId) ? programOriginStrategies : family === previewPlacementId ? previewPlacementStrategies
                       : family === symbolContributionId ? symbolContributionStrategies : family === markedLatticeId ? markedLatticeStrategies
                         : family === queuedPlacementId ? queuedPlacementStrategies : family === legendRecolorId ? legendRecolorStrategies
-                          : family === visualPatternId ? visualPatternStrategies : family === facetGrowthId ? facetGrowthStrategies
+                          : family === visualPatternId ? visualPatternStrategies : (family === facetGrowthId || family === learnFacetGrowthId) ? facetGrowthStrategies
                             : family === chartRouteId ? chartRouteStrategies : family === populationPlacementId ? populationPlacementStrategies
                               : family === carryToFrameId ? carryToFrameStrategies : family === portPairingId ? portPairingStrategies
                                 : family === displayCouplingId ? displayCouplingStrategies : family === framedSearchId ? framedSearchStrategies
@@ -512,6 +512,9 @@ export function readNativeResolution(agent: {
   if (situationCard && family === publicInputExplorationId) {
     const region = bounds(card?.addressedRegion);
     if (region) subjects.push({ label: 'Visible region tested by the click', box: region });
+    const workspace = bounds(card?.workspace), example = bounds(card?.example);
+    if (workspace) subjects.push({ label: 'Work area', box: workspace });
+    if (example) subjects.push({ label: 'Example to preserve', box: example });
     const focus = bounds(card?.focus), moved = bounds(record(card?.lastControlledMotion)?.to);
     if (focus) subjects.push({ label: 'Piece whose control is being tested', box: focus });
     if (moved) subjects.push({ label: 'Piece moved by the tested direction', box: moved });
@@ -1049,7 +1052,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label: 'Observed inventory slot', box });
     }
   }
-  if (situationCard && family === facetGrowthId) {
+  if (situationCard && (family === facetGrowthId || family === learnFacetGrowthId)) {
     for (const [field, label] of [['support', 'Clicked surface'], ['example', 'Visible example'], ['reference', 'Target proportions']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });

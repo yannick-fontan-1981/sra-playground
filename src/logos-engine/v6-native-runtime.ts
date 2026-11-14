@@ -64,7 +64,7 @@ import { createSicMarkedLattice } from '../sic/marked-lattice.ts';
 import { createSicQueuedPlacement } from '../sic/queued-placement.ts';
 import { createSicLegendRecolor } from '../sic/legend-recolor.ts';
 import { createSicVisualPattern } from '../sic/visual-pattern.ts';
-import { createSicFacetGrowth } from '../sic/facet-growth.ts';
+import { createSicFacetGrowth, learnFacetGrowthId } from '../sic/facet-growth.ts';
 import { createSicChartRoute } from '../sic/chart-route.ts';
 import { createSicPopulationPlacement } from '../sic/population-placement.ts';
 import { createSicCarryToFrame } from '../sic/carry-to-frame.ts';
@@ -104,6 +104,7 @@ import { createSicLinkOpenings } from '../sic/link-openings.ts';
 import { createSicReproduceCue, learnAnimatedCueId } from '../sic/reproduce-cue.ts';
 import { measureAnimatedCells, measureAnimatedContact, type AnimatedContactEvidence } from '../sic/observed-animation.ts';
 import { singleChangedPoint, solidRegionValue, type ClickMarkerEvidence } from '../sic/observed-click-regions.ts';
+import { countChangesInside } from '../sic/workspace-click.ts';
 import { createSicNavigateRevealedGrid } from '../sic/navigate-revealed-grid.ts';
 import { createSicLearnGridAccess } from '../sic/learn-grid-access.ts';
 import { createSicArrangeTurnPosts } from '../sic/arrange-turn-posts.ts';
@@ -368,6 +369,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private readClickFields?: NativeExecution['readClickFields'];
   private readClickRegions?: NativeExecution['readClickRegions'];
   private readClickMarker?: NativeExecution['readClickMarker'];
+  private readWorkspaceClick?: NativeExecution['readWorkspaceClick'];
   private readAnimatedCells?: NativeExecution['readAnimatedCells'];
   private readAnimatedContact?: NativeExecution['readAnimatedContact'];
   private latestInformationLevel: number | null = null;
@@ -732,6 +734,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       ...(this.readClickFields ? { readClickFields: this.readClickFields } : {}),
       ...(this.readClickRegions ? { readClickRegions: this.readClickRegions } : {}),
       ...(this.readClickMarker ? { readClickMarker: this.readClickMarker } : {}),
+      ...(this.readWorkspaceClick ? { readWorkspaceClick: this.readWorkspaceClick } : {}),
       ...(this.readAnimatedCells ? { readAnimatedCells: this.readAnimatedCells } : {}),
       ...(this.readAnimatedContact ? { readAnimatedContact: this.readAnimatedContact } : {}) },
       inputs, offers: new Map(), entryOffers: new Map(), sourceStops: new Map(), coordination: [], refusals: [], observedTrials: new Map() };
@@ -1421,6 +1424,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       this.readClickFields = undefined;
       this.readClickRegions = undefined;
       this.readClickMarker = undefined;
+      this.readWorkspaceClick = undefined;
       this.readAnimatedCells = undefined;
       this.readAnimatedContact = undefined;
       if (authority === 'sicOnly' && !publicBoundary && /^ACTION[1-4]$/.test(outcome.command.action_ref)) {
@@ -1435,6 +1439,11 @@ export class NativeV6Runtime implements NativeV6Backend {
         const rows = this.current!.frame_rows;
         const context = { point: [outcome.command.data.x!, outcome.command.data.y!] as const, family: prefix.family.id,
           beforeRef: before.observation_ref, afterRef: after.observation_ref, levelEpoch: after.level_epoch };
+        this.readWorkspaceClick = workspace => {
+          if (this.observation?.observation_ref !== context.afterRef) return null;
+          const changedInside = countChangesInside(first.frame_rows, rows, workspace);
+          return changedInside ? freeze({ ...context, changedInside }) : null;
+        };
         this.readClickRegions = boxes => this.observation?.observation_ref === context.afterRef ? freeze({ ...context,
           before: boxes.map(box => solidRegionValue(first.frame_rows, box)), after: boxes.map(box => solidRegionValue(rows, box)),
         }) : null;
@@ -2530,7 +2539,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const sequence = (configuration.window_constraints as R).labeled_sequence_composition.labeled_sequence_question;
     const groups = standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 113, groups, symmetry, policy, sequence, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 114, groups, symmetry, policy, sequence, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
@@ -2541,7 +2550,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       createSicMarkedCollection(), createSicSlotTransfer(), createSicRemoteSupportRoute(), createSicRemoteSupportRoute(learnRemoteAccessId), createSicOccurrenceRecall(),
       createSicSlotPermutation(), createSicSurfaceCopy(), createSicCodeRoute(), createSicProgramOrigin(), createSicProgramOrigin(learnProgramOriginId), createSicProfileTransfer(),
       createSicOrderedReplenishment(), createSicPreviewPlacement(), createSicSymbolContribution(), createSicMarkedLattice(),
-      createSicQueuedPlacement(), createSicLegendRecolor(), createSicVisualPattern(), createSicFacetGrowth(), createSicChartRoute(), createSicPopulationPlacement(), createSicCarryToFrame(), createSicPortPairing(), createSicFramedSearch(), createSicGlyphEditing(), createSicDisplayCoupling(), createSicFieldIsolation(), createSicFieldIsolation(learnFieldIsolationId), createSicDirectionalReception(), createSicWindowCoverage(), createSicPanelMatching(), createSicCrossingRows(), createSicTraceCoverage(), createSicRadialConnection(), createSicInvitedCapture(), createSicBranchAlignment(), createSicFeedbackTrial(), createSicCatalogueComparison(), createSicReceptionAccess(), createSicMarkerCoverage(), createSicFramedReception(), createSicWindowRelation(), createSicAnimationContact(), createSicAnimationContact(learnAnimationContactId), createSicReflectedPlacement(), createSicMaterialAssembly(), createSicTranslateCoupledPieces(), createSicCoupledMotion(), createSicMaterialRoute(), createSicInventoryAccess(), createSicReplayAccess(), createSicOrientedDelivery(), createSicIndicatedJump(), createSicHighlightedRoute(), createSicPairedPassage(), createSicSeatedContact(), createSicSwitchedSurface(), createSicMarkedGauge(), createSicReactiveTarget(), createSicPairedChannels(), createSicPointReach(), createSicLinkedMidpoint(), createSicExcavateDescent(), createSicGatedCascade(), createSicLayeredFit(), createSicLayeredFit(learnLayeredFitId), createSicLitRoute(), createSicPivotCargo(), createSicMoveMaskedPieces(), createSicNestedPassage(), createSicLinkOpenings(), createSicReproduceCue(), createSicReproduceCue(learnAnimatedCueId), createSicNavigateRevealedGrid(), createSicArrangeTurnPosts(), createSicCavityAccess(), createSicLearnCorrespondence(), createSicPublicInputExploration(),
+      createSicQueuedPlacement(), createSicLegendRecolor(), createSicVisualPattern(), createSicFacetGrowth(), createSicFacetGrowth(learnFacetGrowthId), createSicChartRoute(), createSicPopulationPlacement(), createSicCarryToFrame(), createSicPortPairing(), createSicFramedSearch(), createSicGlyphEditing(), createSicDisplayCoupling(), createSicFieldIsolation(), createSicFieldIsolation(learnFieldIsolationId), createSicDirectionalReception(), createSicWindowCoverage(), createSicPanelMatching(), createSicCrossingRows(), createSicTraceCoverage(), createSicRadialConnection(), createSicInvitedCapture(), createSicBranchAlignment(), createSicFeedbackTrial(), createSicCatalogueComparison(), createSicReceptionAccess(), createSicMarkerCoverage(), createSicFramedReception(), createSicWindowRelation(), createSicAnimationContact(), createSicAnimationContact(learnAnimationContactId), createSicReflectedPlacement(), createSicMaterialAssembly(), createSicTranslateCoupledPieces(), createSicCoupledMotion(), createSicMaterialRoute(), createSicInventoryAccess(), createSicReplayAccess(), createSicOrientedDelivery(), createSicIndicatedJump(), createSicHighlightedRoute(), createSicPairedPassage(), createSicSeatedContact(), createSicSwitchedSurface(), createSicMarkedGauge(), createSicReactiveTarget(), createSicPairedChannels(), createSicPointReach(), createSicLinkedMidpoint(), createSicExcavateDescent(), createSicGatedCascade(), createSicLayeredFit(), createSicLayeredFit(learnLayeredFitId), createSicLitRoute(), createSicPivotCargo(), createSicMoveMaskedPieces(), createSicNestedPassage(), createSicLinkOpenings(), createSicReproduceCue(), createSicReproduceCue(learnAnimatedCueId), createSicNavigateRevealedGrid(), createSicArrangeTurnPosts(), createSicCavityAccess(), createSicLearnCorrespondence(), createSicPublicInputExploration(),
     ],
       authorityPolicy: loaded.common, familyAgenda: 'active', adaptiveReasoning: true, maxPointOccurrences: loaded.common.input_domain.max_point_occurrences,
       ...(options.now ? { now: options.now } : {}) });

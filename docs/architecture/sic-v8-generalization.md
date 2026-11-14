@@ -223,3 +223,9 @@ Sans `sic_animation_contact`, **GORI gagne en 15 commandes et 10,82 s**. L’ani
 Les 20 victoires après retrait sont confirmées. Les 100 niveaux 1 et les quatre parcours complets, avec et sans retrait pour ces derniers, conservent leurs commandes et retours. Le transfert ne débloque pas le niveau 1 de MEMO. FOGW conserve son gain après retrait avec son repli existant.
 
 Sur ISOS, un contre-essai distingue la zone de travail de l’exemple affiché. Le clic dans la zone de travail modifie 76 pixels à l’intérieur et préserve l’exemple. La première modification de l’exploration touche 60 pixels dans l’exemple et aucun dans la zone de travail. La séquence qui gagne depuis l’état initial échoue après ce clic. Deux autres clics testés dans la rangée du bas préservent l’exemple et la séquence reste gagnante. La prochaine expérience doit donc privilégier une cible qui agit dans la zone de travail tout en vérifiant que l’exemple reste disponible.
+
+### Vérifier une modification dans la zone de travail
+
+Quand une zone vierge bornée contient une cible de même forme qu’une partie de l’exemple, l’exploration peut la tester. La carte montre la cible, la zone de travail et l’exemple. Le retour est accepté si des pixels changent à l’intérieur seulement. Cette mesure est accessible à la famille qui examine ensuite la forme apparue.
+
+Sans `sic_facet_growth`, **ISOS gagne en 3 commandes et 2,61 s**. L’exploration produit le premier retour, qui change 76 pixels dans la zone de travail. `sic_learn_facet_growth` vérifie l’effet à la commande suivante, puis réapplique l’extension et atteint le prochain niveau. Le trajet et les retours correspondent au rejeu normal. Le rejeu avec palette permutée et nom neutre conserve la victoire en trois commandes. La détection de la géométrie de l’exemple et le calcul de la cible restent partagés avec la famille retirée. Empreinte `cfa123ebda88519e2a5678023784a2449be6381ccec41e40b4ade48ef515d39a`.
