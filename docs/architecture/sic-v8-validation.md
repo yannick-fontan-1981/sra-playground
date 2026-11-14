@@ -57,6 +57,10 @@ La référence 0.65 relancée sur la même machine donne 11,173 s pour STCK et 2
 
 ## Rapidité de SIC seul
 
+Chaque qualification navigateur SIC consigne une seule durée par niveau gagné, du lancement du lot à la fin de sa résolution. La mesure est prise en conditions normales, en un seul passage par jeu. Les contrôles de non-régression de l’interface peuvent vérifier que le rendu est différé, sans lancer de campagne comparative.
+
+### Mesures historiques
+
 Mesure locale du moteur `3e50e61f` sur un i7-10700F. Le même contrôleur de partie lance quatre sessions neuves par jeu dans l’ordre natif, SIC, SIC, natif. Les jeux s’exécutent dans Pyodide et le service de résolution est appelé en processus Node, hors rendu et transport du navigateur. Le chronomètre démarre après le chargement du jeu et inclut la création de la session, les décisions, les actions et leurs retours. Les commandes et les retours publics sont identiques pour les quatre sessions de chaque jeu.
 
 | Jeu et niveaux gagnés | Commandes | Natif 0.68 · temps médian | SIC seul · temps médian | Accélération |
@@ -67,7 +71,7 @@ Mesure locale du moteur `3e50e61f` sur un i7-10700F. Le même contrôleur de par
 
 Résultats individuels dans l’ordre des quatre sessions, en secondes. SK48 25,345 / 12,186 / 11,321 / 21,845. SYME 38,851 / 21,994 / 21,901 / 38,544. DNOI 26,330 / 7,146 / 6,950 / 26,273. Sous SIC, le premier envoi intervient après 0,62 à 0,74 s en médiane par jeu. Le temps consacré au moteur de jeu est proche entre les deux modes et représente de 0,11 à 0,21 s par parcours. Les mesures couvrent deux fournisseurs de plans SIC, avec deux essais par mode et par jeu.
 
-### Coût du panneau SIC
+### Mesures historiques du coût du panneau SIC
 
 Au commit `3191c592`, quatre sessions neuves dans le même onglet du Playground ont rejoué SK48 niveau 1 avec SIC seul. Le panneau est désactivé, visible dans Stratégies, visible puis désactivé. Les quatre essais ont gagné le niveau en 19 commandes. Les durées bouton à fin de résolution sont 12,411 s, 11,667 s, 11,937 s et 11,938 s. La médiane donne 11,80 s avec le panneau et 12,17 s panneau désactivé. La mesure ne montre pas de ralentissement. Les cartes, les sprites et les comparaisons d’animation sont calculés après la fin du lot. Durant le lot, l’interface garde au plus 96 retours publics par référence.
 
