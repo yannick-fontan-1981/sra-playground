@@ -6,24 +6,27 @@ import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts
 
 export const publicInputExplorationId = 'sic_public_input_exploration';
 export const publicInputStrategies = {
+  recheck_controls_after_change: 'Recheck directional controls after an interface change',
   compare_public_input: 'Test an available command on this board',
   revisit_input_frontier: 'Revisit a board with an untested command',
 } as const;
-const order = ['compare_public_input', 'revisit_input_frontier'] as const;
-const graph = compileStrategyGraph({ id: 'understand_public_controls', version: 1, order: 'FALLBACK', priorities: order,
+const order = ['recheck_controls_after_change', 'compare_public_input', 'revisit_input_frontier'] as const;
+const graph = compileStrategyGraph({ id: 'understand_public_controls', version: 2, order: 'FALLBACK', priorities: order,
   strategies: {
+    recheck_controls_after_change: [{ fact: 'changedControlContext', expected: true, label: 'Previously stationary directions can be rechecked after a visible interface change' }],
     compare_public_input: [{ fact: 'untestedHere', expected: true, label: 'An available illustrated input has no return on this board' }],
     revisit_input_frontier: [{ fact: 'observedRoute', expected: true, label: 'Previously observed returns lead to an untested input' }],
   },
-}, ['untestedHere', 'observedRoute']);
+}, ['changedControlContext', 'untestedHere', 'observedRoute']);
 const explorationLimit = 40;
 const clickLimit = 30;
 const completion = 'G_official_completion';
 
 type State = { epoch: number; experiments: number; transitions: ObservedCommandGraph; options: Record<string, string[]>;
-  lastChange: { destination: string; action: string; evidence: string } | null };
+  lastChange: { destination: string; action: string; evidence: string } | null;
+  recheck: { until: number; evidence: readonly string[] } | null };
 type Proposal = NativeProposal & { source: string; candidates: string[]; expected?: string; needId: string };
-const initial = (epoch = 0): State => ({ epoch, experiments: 0, transitions: {}, options: {}, lastChange: null });
+const initial = (epoch = 0): State => ({ epoch, experiments: 0, transitions: {}, options: {}, lastChange: null, recheck: null });
 const interfaceKey = (observation: NativeObservation) =>
   `${observation.frame_hash}:${[...observation.available_action_refs].sort().join(',')}`;
 const commandKey = (command: NativeCommand) => command.action_ref === 'ACTION6'
@@ -64,16 +67,21 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         || (keys.some(key => key === 'ACTION1' || key === 'ACTION2') && keys.some(key => key === 'ACTION3' || key === 'ACTION4'));
       const lastChange = local.lastChange?.destination === source && canDiversifyDirection ? local.lastChange : null;
       const deferred = lastChange ? opposite[lastChange.action] : undefined;
-      const frontier = observedCommandFrontier(local.transitions, source, keys, budget,
+      const recheck = local.recheck && local.experiments < local.recheck.until ? local.recheck : null;
+      const named = keys.filter(key => /^ACTION[1-5]$/.test(key));
+      const measuredControls = recheck && keys.length > named.length
+        ? observedCommandFrontier(local.transitions, source, named, 1, () => named, deferred) : null;
+      const frontier = measuredControls ?? observedCommandFrontier(local.transitions, source, keys, budget,
         board => board === source ? keys : local.options[board] ?? [], deferred);
       const offer = frontier && candidates.get(frontier.action);
       if (!offer) return null;
       const proof: [string, ...string[]] = [ref, ...(frontier.first ? [frontier.first.evidence] : []),
-        ...(deferred && lastChange ? [lastChange.evidence] : [])];
+        ...(deferred && lastChange ? [lastChange.evidence] : []), ...(measuredControls && recheck ? recheck.evidence : [])];
       const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
+        changedControlContext: { value: !!measuredControls, evidence: proof },
         untestedHere: { value: frontier.depth === 0, evidence: proof },
         observedRoute: { value: frontier.depth > 0, evidence: proof },
-      }, planners: { compare_public_input: () => offer, revisit_input_frontier: () => offer } });
+      }, planners: { recheck_controls_after_change: () => offer, compare_public_input: () => offer, revisit_input_frontier: () => offer } });
       if (!selected) return null;
       const strategy = selected.id;
       const { command, box } = selected.plan;
@@ -118,6 +126,14 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       state.experiments++;
       state.options[proposal.source] = proposal.candidates;
       const destination = interfaceKey(after), action = commandKey(command);
+      if (!state.recheck && action === 'ACTION5' && destination !== proposal.source) {
+        const directions = proposal.candidates.filter(key => /^ACTION[1-4]$/.test(key));
+        const receipts = (state.transitions[proposal.source] ?? []).filter(edge =>
+          directions.includes(edge.action) && edge.destination === proposal.source);
+        if (directions.length >= 2 && receipts.length === directions.length) state.recheck = {
+          until: state.experiments + directions.length * 3, evidence: [...receipts.map(edge => edge.evidence), after.observation_ref],
+        };
+      }
       rememberCommandReturn(state.transitions, proposal.source, destination, action, after.observation_ref);
       state.lastChange = destination === proposal.source ? null : { destination, action, evidence: after.observation_ref };
       return { events: [] };
