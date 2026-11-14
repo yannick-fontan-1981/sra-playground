@@ -75,6 +75,17 @@ Un passage par moteur sur une partie neuve du même banc local Node/Pyodide. Le 
 
 Sur ces parcours, le temps cumulé est divisé par 1,94 sur SK48, 1,49 sur SYME et 3,43 sur DNOI. Les sept niveaux représentent un échantillon du catalogue.
 
+#### Où se situe le gain
+
+Un passage instrumenté par moteur sur les deux niveaux 2 conserve les mêmes commandes et retours publics. Pour SYME, l’exécution du jeu prend 63 ms en natif et 64 ms sous SIC seul. Pour DNOI, elle prend 37 et 36 ms. L’écart se forme dans le traitement côté agent.
+
+| Niveau 2 | Planification natif → SIC seul | Traitement des retours natif → SIC seul | Acquisition passive native |
+| --- | ---: | ---: | ---: |
+| SYME | 1,30 → 0,61 s | 7,59 → 5,80 s | 3,56 s |
+| DNOI | 2,44 → 0,20 s | 5,20 → 1,74 s | 1,79 s |
+
+L’acquisition passive et la persistance sont des sous-phases du moteur. La colonne acquisition passive est incluse dans le traitement des retours. Le relevé instrumenté retrouve des rapports de 1,35× et 3,69×. Le gain supérieur sur DNOI s’accompagne d’une économie de 2,24 s de planification et d’un coût résiduel de traitement des retours plus faible. La mesure porte sur ces deux trajectoires.
+
 ### Mesures historiques
 
 Mesure locale du moteur `3e50e61f` sur un i7-10700F. Le même contrôleur de partie lance quatre sessions neuves par jeu dans l’ordre natif, SIC, SIC, natif. Les jeux s’exécutent dans Pyodide et le service de résolution est appelé en processus Node, hors rendu et transport du navigateur. Le chronomètre démarre après le chargement du jeu et inclut la création de la session, les décisions, les actions et leurs retours. Les commandes et les retours publics sont identiques pour les quatre sessions de chaque jeu.

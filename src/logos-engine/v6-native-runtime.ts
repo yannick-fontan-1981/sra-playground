@@ -36,6 +36,7 @@ import { nativePlanReceipt } from '../sic/native-plan-receipt.ts';
 import { createSicFieldRepair } from '../sic/field-repair.ts';
 import { createSicOrderedContact } from '../sic/ordered-contact.ts';
 import { createSicSupportTransfer } from '../sic/support-transfer.ts';
+import { createSicLearnSupportMoves } from '../sic/learn-support-moves.ts';
 import { createSicSubsetExperiment } from '../sic/subset-experiment.ts';
 import { createSicCavityAccess } from '../sic/cavity-access.ts';
 import { createSicPublicInputExploration } from '../sic/public-input-exploration.ts';
@@ -2447,11 +2448,11 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const sequence = (configuration.window_constraints as R).labeled_sequence_composition.labeled_sequence_question;
     const groups = standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 97, groups, symmetry, policy, sequence, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 98, groups, symmetry, policy, sequence, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
-      createSicFieldRepair(symmetry), createSicOrderedContact(policy, recovery), createSicSupportTransfer(support),
+      createSicFieldRepair(symmetry), createSicOrderedContact(policy, recovery), createSicSupportTransfer(support), createSicLearnSupportMoves(),
       createSicSubsetExperiment(), createSicFramedContact(), createSicStagedMarks(), createSicTransportContact(), createSicBandAlignment(),
       createSicSharedArrival(), createSicOutlineService(), createSicLabeledSequence(sequence, options.now ?? (() => performance.now())),
       createSicMarkedCollection(), createSicSlotTransfer(), createSicRemoteSupportRoute(), createSicOccurrenceRecall(),
