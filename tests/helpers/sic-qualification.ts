@@ -1,6 +1,6 @@
 import { BrowserGameRuntime } from '../../src/runtime/browser-games.ts';
 import { BrowserV6Agent, type V6AgentSnapshot } from '../../src/runtime/v6-agent.ts';
-import { readNativeResolution } from '../../src/sic/native-resolution.ts';
+import { readNativeResolution, type NativeResolution } from '../../src/sic/native-resolution.ts';
 import { defaultRecoveryPack, type RecoveryPack } from '../../src/sic/active-recovery.ts';
 import { recoveryRevision } from '../../src/sic/recovery-pack.ts';
 import type { AgentAction } from '../../src/runtime/contracts.ts';
@@ -26,17 +26,18 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number, pa
   let board = await runtime.load(code, 1);
   let state: V6AgentSnapshot | undefined;
   const trace: { action: AgentAction; packet: string }[] = [];
-  const information: { sequence: number; strategy: string; predictions: number | null; result?: NonNullable<ReturnType<typeof readNativeResolution>>['outcome'] }[] = [];
+  const information: { sequence: number; strategy: string; predictions: number | null;
+    result?: NonNullable<NativeResolution['outcome']>['informationOutcome'] }[] = [];
   const agent = new BrowserV6Agent({
     getObservation: () => board,
     canDispatch: () => true,
     recoveryConfiguration: () => pack,
-    onState: snapshot => { state = snapshot; },
-    ...(maxActions === undefined ? {} : { maxSessionActions: maxActions }),
-    onAcquired: snapshot => {
+    onState: snapshot => {
+      state = snapshot;
       const last = information.at(-1);
-      if (last?.sequence === snapshot.sequence) last.result = readNativeResolution(snapshot)?.outcome;
+      if (last?.sequence === snapshot.sequence && !last.result) last.result = readNativeResolution(snapshot)?.outcome?.informationOutcome;
     },
+    ...(maxActions === undefined ? {} : { maxSessionActions: maxActions }),
     dispatch: async action => {
       const strategy = state ? readNativeResolution(state)?.informationStrategy : undefined;
       if (strategy) information.push({ sequence: trace.length + 1, strategy: strategy.title, predictions: strategy.distinctOutcomes });
@@ -167,8 +168,8 @@ async function findInformationExperiments() {
     for (const game of ['LS20', 'AR25', 'LP85', 'TR87', 'CATR', 'SMLP']) {
       output.textContent = JSON.stringify({ status: 'running', game, results }, null, 2);
       const { actions, levels, information } = await run(runtime, game, 2, defaultRecoveryPack, 32);
-      results.push({ game, actions, levels, information: information.map(({ result, ...item }) => ({ ...item, outcome: result?.informationOutcome })) });
-      if (information.some(item => item.result?.informationOutcome)) break;
+      results.push({ game, actions, levels, information });
+      if (information.some(item => item.result)) break;
     }
     output.textContent = JSON.stringify({ status: 'completed', results }, null, 2);
   } finally {
