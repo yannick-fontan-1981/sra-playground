@@ -330,4 +330,10 @@ Après retrait de `sic_highlighted_route`, **CAVA gagne en sept clics SIC seul e
 
 Désactiver la règle P07 après le premier clic laisse l’exploration publique choisir les six commandes suivantes. Le niveau reste ouvert. La carte accepte aussi un reçu d’arrivée produit par l’exploration si le clic se trouve sur le sprite arrivé et que sa région a changé.
 
+Sur le lot CAVA, les 100 trajectoires de référence et les quatre parcours complets avec et sans retrait sont identiques. Le premier rejeu de KLOT après retrait, mené en parallèle, a continué l’exploration jusqu’au budget de 40. Le rejeu ciblé avec le même code retrouve la trajectoire de référence en 30 commandes. La sensibilité de KLOT à la charge reste à reproduire avec un compteur de recherche.
+
 Sur **AMZE**, la même carte SRC choisit un essai P05 puis deux sauts P07 avec `sic_indicated_jump` retirée. Le fournisseur mesure des flèches et leur alignement avec la cible. Après chaque essai, il relit le sprite arrivé et ses indications. Les trois commandes et retours sont identiques à ceux de la famille habituelle, empreinte `db4094d0ff20d649c2877073e36ae0aa7be871f4a140e53509627af3801dfd69`. Les deux jeux gagnent aussi avec un nom neutre et une palette permutée. Sur AMZE, désactiver P07 après le premier clic rend la main à l’exploration et laisse le niveau ouvert à la troisième commande.
+
+La campagne commune CAVA et AMZE confirme **30/100** niveaux 1 après retrait, en 388 commandes SIC seul, dont 58 choisies par le SRC. Elle retrouve aussi KLOT en 30 commandes. Les 100 premiers niveaux en usage normal, les 28 victoires précédentes après retrait et les quatre parcours complets avec et sans retrait conservent leurs commandes et leurs retours.
+
+Le prototype EVAS réutilise ce même programme avec une troisième mesure, celle des trajets et de l’exposition à la lumière. Avec sa famille retirée, le rejeu ciblé gagne en trois clics SIC seul. La permutation de palette conserve le gain. Désactiver P07 après le premier arrêt laisse le niveau ouvert après trois commandes. Le prototype reste à qualifier sur le catalogue.
