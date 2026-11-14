@@ -6,7 +6,7 @@ import type { NativeV6Declarations } from '../src/logos-engine/v6-native-runtime
 import { V6AgentService } from '../src/runtime/v6-agent-service.ts';
 import { BrowserV6Agent } from '../src/runtime/v6-agent.ts';
 import { defaultRecoveryPack } from '../src/sic/active-recovery.ts';
-import { fieldRepairId } from '../src/sic/field-repair.ts';
+import { standalonePlanningFamilies } from '../src/sic/ordered-contact.ts';
 import type { GameObservation } from '../src/runtime/browser-games.ts';
 import { emptyV6Snapshot, toV6PublicObservation, V6_REFERENCE_COMMIT, v6FrameHash } from '../src/runtime/v6-agent-protocol.ts';
 import type { V6AgentOperation, V6AgentTransport } from '../src/runtime/v6-agent-protocol.ts';
@@ -97,7 +97,7 @@ test('SIC-only service earns a public level with a witnessed SIC plan for every 
   let sequence = 0;
   while (current.levels_completed === 0) {
     const { after, command } = steps[sequence];
-    assert.deepEqual(result.snapshot.coverage?.registeredFamilies, [fieldRepairId]);
+    assert.deepEqual(result.snapshot.coverage?.registeredFamilies, standalonePlanningFamilies);
     const receipt = result.snapshot.trace.findLast(value => (value as { kind: string }).kind === 'sic_native_plan') as
       { authority: string; objective: string; subObjective: string; strategy: string };
     assert.equal(receipt.authority, 'sicOnly');

@@ -2,7 +2,7 @@ import type { NativeObservation, NativeProposal, SicActionCoverage } from '../lo
 import { readSicNeed } from './need-registry.ts';
 import { missingControlWitness } from './missing-control-strategy.ts';
 import type { ReasoningMode } from './reasoning-mode.ts';
-import { fieldRepairId } from './field-repair.ts';
+import { standalonePlanningFamilies } from './ordered-contact.ts';
 
 export interface StrategyObjective {
   readonly strategy: string;
@@ -20,7 +20,7 @@ export function nativePlanReceipt(family: string, proposal: NativeProposal, obse
   const recovery = objectField(objectField(rooted, 'search'), 'sic_decision');
   const view = objectField(proposal.sic_view_decision, 'mode') === 'active' ? proposal.sic_view_decision : undefined;
   const information = objectField(proposal.sic_information_decision, 'mode') === 'active' ? proposal.sic_information_decision : undefined;
-  const standalone = family === fieldRepairId ? proposal.sicLocalDecision : undefined;
+  const standalone = standalonePlanningFamilies.includes(family) ? proposal.sicLocalDecision : undefined;
   const decision = standalone ?? recovery ?? proposal.sic_frontier_decision ?? view ?? information;
   const sicStrategy = objectField(decision, 'strategy'), sicTarget = objectField(decision, 'objective');
   const nativeTarget = objectField(template, 'objective_ref');

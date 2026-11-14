@@ -34,6 +34,7 @@ import { RankedWorkshop } from './v6-ranked-workshop.ts';
 import { compileRecoveryPack, isRecoveryStop } from '../sic/active-recovery.ts';
 import { nativePlanReceipt } from '../sic/native-plan-receipt.ts';
 import { createSicFieldRepair, fieldRepairId } from '../sic/field-repair.ts';
+import { createSicOrderedContact, orderedContactId } from '../sic/ordered-contact.ts';
 import { decidePlanContinuation } from '../sic/plan-step.ts';
 import { retainMissingControlTrial } from '../sic/missing-control-strategy.ts';
 import { defaultFrontierConfiguration } from '../sic/frontier-configuration.ts';
@@ -2359,11 +2360,12 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const symmetry = loaded.strategy.declarations[0]?.configuration.regular_field_correspondence;
   if (!symmetry || !loaded.common.ordered_support_transfer || !loaded.common.input_domain) throw new Error('Incomplete native V6 declarations');
   if (recovery.solver === 'sic') {
-    const groups = [{ id: fieldRepairId, families: [fieldRepairId] }];
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 1, groups, policy: symmetry };
+    const policy = loaded.strategy.declarations[0]!.configuration.observed_composition_services.rooted_line_question;
+    const groups = [{ id: fieldRepairId, families: [fieldRepairId] }, { id: orderedContactId, families: [orderedContactId] }];
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 2, groups, symmetry, policy, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
-    return new NativeV6Runtime({ sourceDigest, groups, families: [createSicFieldRepair(symmetry)],
+    return new NativeV6Runtime({ sourceDigest, groups, families: [createSicFieldRepair(symmetry), createSicOrderedContact(policy, recovery)],
       authorityPolicy: loaded.common, familyAgenda: 'active', maxPointOccurrences: loaded.common.input_domain.max_point_occurrences,
       ...(options.now ? { now: options.now } : {}) });
   }

@@ -6,7 +6,7 @@ import { recoveryRevision } from '../../src/sic/recovery-pack.ts';
 import type { AgentAction } from '../../src/runtime/contracts.ts';
 import { GAME_CATALOG } from '../../src/games/catalog.ts';
 import { compileInformationPreference } from '../../src/sic/information-preference.ts';
-import { fieldRepairId } from '../../src/sic/field-repair.ts';
+import { standalonePlanningFamilies } from '../../src/sic/ordered-contact.ts';
 
 const cases = [
   { game: 'SK48', target: 1, baseline: [19, 1], alternate: [19, 1], divergence: null },
@@ -70,7 +70,7 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number | '
       }) as Record<string, unknown> | undefined;
       if (pack.solver === 'sic') {
         const families = state?.coverage?.registeredFamilies;
-        if (families?.length !== 1 || families[0] !== fieldRepairId || release?.authority !== 'sicOnly'
+        if (!exclusiveFamilies(families) || release?.authority !== 'sicOnly'
           || !release.objective || !release.subObjective || !release.strategy) {
           throw new Error('No exclusive SIC receipt for the pending command.');
         }
@@ -122,6 +122,10 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number | '
   }
 }
 
+function exclusiveFamilies(families: readonly string[] | undefined) {
+  return families?.length === standalonePlanningFamilies.length && standalonePlanningFamilies.every(family => families.includes(family));
+}
+
 async function qualifySicOnly(parameters: URLSearchParams) {
   const games = parameters.get('games')?.split(',') ?? GAME_CATALOG.filter(game => game.availability === 'playable').map(game => game.code);
   const maxActions = Number(parameters.get('actions') ?? 600);
@@ -134,13 +138,18 @@ async function qualifySicOnly(parameters: URLSearchParams) {
       output.textContent = JSON.stringify({ status: 'running', game, results }, null, 2);
       try {
         const operations = new Set<string>();
+        const strategies = new Map<string, { commands: number; contradictedAt: number[] }>();
         const result = await run(runtime, game, 'complete', pack, maxActions, row => {
           if (row.operation) operations.add(row.operation);
+          const entry = strategies.get(row.strategy) ?? { commands: 0, contradictedAt: [] };
+          entry.commands++;
+          if (row.result === false) entry.contradictedAt.push(row.sequence);
+          strategies.set(row.strategy, entry);
         });
-        const qualified = result.families?.length === 1 && result.families[0] === fieldRepairId
+        const qualified = exclusiveFamilies(result.families)
           && (result.coverage?.sicOnly ?? 0) === result.actions;
         results.push({ game, qualified, levels: result.levels, total: result.targetLevels, actions: result.actions,
-          state: result.boardState, stop: result.stop, operations: [...operations],
+          state: result.boardState, stop: result.stop, operations: [...operations], strategies: Object.fromEntries(strategies),
           levelEnds: result.trace.flatMap((entry, index) => entry.levelsCompleted > (result.trace[index - 1]?.levelsCompleted ?? 0) ? [index + 1] : []),
           traceDigest: await hash(result.trace),
           ...(result.stop === 'no_admissible_prefix' ? { guard: result.guard } : {}) });
