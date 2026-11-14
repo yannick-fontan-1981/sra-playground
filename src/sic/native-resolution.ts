@@ -45,6 +45,7 @@ import { materialAssemblyId, materialAssemblyStrategies } from './material-assem
 import { coupledMotionId, coupledMotionStrategies } from './coupled-motion.ts';
 import { materialRouteId, materialRouteStrategies } from './material-route.ts';
 import { inventoryAccessId, inventoryAccessStrategies } from './inventory-access.ts';
+import { replayAccessId } from './replay-access.ts';
 import { glyphEditingId, glyphEditingStrategies } from './glyph-editing.ts';
 import { fieldIsolationId, fieldIsolationStrategies } from './field-isolation.ts';
 import { directionalReceptionId, directionalReceptionStrategies } from './directional-reception.ts';
@@ -461,7 +462,7 @@ export function readNativeResolution(agent: {
                                         : family === traceCoverageId ? traceCoverageStrategies : family === radialConnectionId ? radialConnectionStrategies
                                           : family === invitedCaptureId ? invitedCaptureStrategies : family === branchAlignmentId ? branchAlignmentStrategies
                                             : family === feedbackTrialId ? feedbackTrialStrategies : family === catalogueComparisonId ? catalogueComparisonStrategies
-                                              : family === receptionAccessId ? receptionAccessStrategies : family === markerCoverageId ? markerCoverageStrategies : family === framedReceptionId ? framedReceptionStrategies : family === windowRelationId ? windowRelationStrategies : family === animationContactId ? animationContactStrategies : family === reflectedPlacementId ? reflectedPlacementStrategies : family === materialAssemblyId ? materialAssemblyStrategies : family === coupledMotionId ? coupledMotionStrategies : family === materialRouteId ? materialRouteStrategies : family === inventoryAccessId ? inventoryAccessStrategies : null;
+                                              : family === receptionAccessId ? receptionAccessStrategies : family === markerCoverageId ? markerCoverageStrategies : family === framedReceptionId ? framedReceptionStrategies : family === windowRelationId ? windowRelationStrategies : family === animationContactId ? animationContactStrategies : family === reflectedPlacementId ? reflectedPlacementStrategies : family === materialAssemblyId ? materialAssemblyStrategies : family === coupledMotionId ? coupledMotionStrategies : family === materialRouteId ? materialRouteStrategies : family === inventoryAccessId || family === replayAccessId ? inventoryAccessStrategies : null;
   const card = planReceipt?.authority === 'sicOnly' && labels ? record(proposal?.sicSituationCard) : null;
   const isSituationStrategy = (id: unknown): id is keyof typeof situationStrategies =>
     typeof id === 'string' && !!labels && Object.hasOwn(labels, id);
@@ -714,6 +715,17 @@ export function readNativeResolution(agent: {
     for (const [field, label] of [['source', 'Source symbols'], ['editable', 'Editable symbols'], ['active', 'Focused symbol']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
+    }
+  }
+  if (situationCard && family === replayAccessId) {
+    for (const [field, label] of [['actor', 'Current carrier'], ['target', 'Current destination'],
+      ['remote', 'Distant linked region']] as const) {
+      const box = bounds(card?.[field]);
+      if (box) subjects.push({ label, box });
+    }
+    if (Array.isArray(card?.slots)) for (const candidate of card.slots) {
+      const box = bounds(candidate);
+      if (box) subjects.push({ label: 'Replay slot', box });
     }
   }
   if (situationCard && family === inventoryAccessId) {
