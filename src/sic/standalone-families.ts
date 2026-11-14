@@ -43,7 +43,7 @@ import { windowRelationId } from './window-relation.ts';
 import { glyphEditingId } from './glyph-editing.ts';
 import { fieldIsolationId, learnFieldIsolationId } from './field-isolation.ts';
 import { directionalReceptionId, learnDirectionalReceptionId } from './directional-reception.ts';
-import { windowCoverageId } from './window-coverage.ts';
+import { learnWindowCoverageId, windowCoverageId } from './window-coverage.ts';
 import { panelMatchingId } from './panel-matching.ts';
 import { crossingRowsId } from './crossing-rows.ts';
 import { traceCoverageId } from './trace-coverage.ts';
@@ -93,7 +93,7 @@ export const standalonePlanningGroups = [
   { id: 'coordinate_visible_motion', families: [bandAlignmentId, sharedArrivalId, outlineServiceId, carryToFrameId, learnCarryToFrameId, directionalReceptionId, learnDirectionalReceptionId, branchAlignmentId, receptionAccessId, learnReceptionAccessId, markerCoverageId, reflectedPlacementId, coordinateObservedMotionId, pivotCargoId, moveMaskedPiecesId, translateCoupledPiecesId, learnContactAccessId, coupledMotionId, materialRouteId, inventoryAccessId, replayAccessId, orientedDeliveryId, indicatedJumpId, learnIndicatedJumpId, highlightedRouteId, learnHighlightedRouteId, pairedPassageId, seatedContactId, switchedSurfaceId, reactiveTargetId, pointReachId, linkedMidpointId, excavateDescentId, litRouteId, learnLitRouteId, nestedPassageId, learnNestedPassageId, linkOpeningsId, learnLinkOpeningsId, navigateRevealedGridId, arrangeTurnPostsId] },
   { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId, visualPatternId, framedSearchId, feedbackTrialId, catalogueComparisonId, revealedExampleId, windowRelationId, layeredFitId, learnLayeredFitId] },
   { id: 'apply_learned_relations', families: [remoteSupportRouteId, learnRemoteAccessId, occurrenceRecallId, slotPermutationId, surfaceCopyId, chartRouteId, learnChartRouteId] },
-  { id: 'construct_executable_program', families: [codeRouteId, programOriginId, learnProgramOriginId, glyphEditingId, windowCoverageId, panelMatchingId] },
+  { id: 'construct_executable_program', families: [codeRouteId, programOriginId, learnProgramOriginId, glyphEditingId, windowCoverageId, learnWindowCoverageId, panelMatchingId] },
   { id: 'fit_profiles_into_receivers', families: [profileTransferId, portPairingId, radialConnectionId, learnRadialConnectionId, framedReceptionId] },
   { id: 'preserve_ordered_team', families: [orderedReplenishmentId, learnOrderedReplenishmentId] },
   { id: 'fill_visible_partition', families: [previewPlacementId, populationPlacementId] },

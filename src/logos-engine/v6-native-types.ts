@@ -134,6 +134,13 @@ export interface NativeExecution {
   readonly observedQueue?: ReturnType<typeof import('./v6-queued-field-models.ts').acquireQueuedField>;
   readonly readEncounterTransition?: () => { readonly beforeRef: string; readonly afterRef: string } | null;
   readonly readDirectionalMotion?: () => import('../sic/observed-translation.ts').DirectionalMotion | null;
+  readonly readPriorDirectionalScene?: <T>(project: (rows: NativeRows) => T | null) => {
+    readonly beforeRef: string;
+    readonly afterRef: string;
+    readonly levelEpoch: number;
+    readonly command: string;
+    readonly scene: T;
+  } | null;
   readonly readDirectionalView?: (field: NativeBox, focus: number, references: readonly NativeBox[]) => {
     readonly beforeRef: string;
     readonly afterRef: string;
