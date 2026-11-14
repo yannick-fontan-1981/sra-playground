@@ -38,10 +38,11 @@ import { fieldIsolationId } from './field-isolation.ts';
 import { directionalReceptionId } from './directional-reception.ts';
 import { windowCoverageId } from './window-coverage.ts';
 import { panelMatchingId } from './panel-matching.ts';
+import { crossingRowsId } from './crossing-rows.ts';
 
 export const standalonePlanningGroups = [
   { id: 'repair_visible_field', families: [fieldRepairId, orderedContactId, supportTransferId] },
-  { id: 'inspect_candidate_relations', families: [subsetExperimentId, framedContactId, transportContactId] },
+  { id: 'inspect_candidate_relations', families: [crossingRowsId, subsetExperimentId, framedContactId, transportContactId] },
   { id: 'coordinate_visible_motion', families: [bandAlignmentId, sharedArrivalId, outlineServiceId, carryToFrameId, directionalReceptionId] },
   { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId, visualPatternId, framedSearchId] },
   { id: 'apply_learned_relations', families: [remoteSupportRouteId, occurrenceRecallId, slotPermutationId, surfaceCopyId, chartRouteId] },

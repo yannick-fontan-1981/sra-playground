@@ -106,7 +106,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | VC33 | 7 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/VC33/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 1 |
 | VOIS | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 1 |
 | WA30 | 9 | [1](../../docs/migration/native-campaigns-v54/baseline-wa30/wa30-campaign.json.gz) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/WA30/LVL2/good_run_pseudocode.md) | 1 (archive locale) | — | 2 | 3 | — |
-| WEAV | 6 | — | — | — | — | — | — | — |
+| WEAV | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 1 |
 | ZIPP | 6 | [6](../../docs/migration/native-campaigns-v48/zipp-six-levels.json) | — | — | — | 6 | 6 | — |
 
 Les victoires et les résultats SIC seul de la campagne sont détaillés dans la [validation SIC V8](sic-v8-validation.md). Pour les traces locales de V6, les sources sont indiquées ci-dessous.
