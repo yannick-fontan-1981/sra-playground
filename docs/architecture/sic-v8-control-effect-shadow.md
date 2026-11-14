@@ -181,4 +181,13 @@ La fenêtre indicative de performance a exécuté les quatre séries A1/B1/B2/A2
 | B2 | `ea9b4afda3629b195d5c62eeba54a2346fc2109ae8e6a32ba16dcde1d328c770` |
 | A2 | `cb97015885d86406812492f1dd5726a825871a782660f6b95b86f5f4d8ddd097` |
 
+La fenêtre suivante A1/B1/B2/A2 a comparé la 0.65 publiée (`b9555039`) à `6180e29f`, sans lancer la suite de tests en parallèle. Les 32 sessions mesurées ont reproduit les trajectoires, soit huit sessions par jeu et par version. Les médianes groupées passent chacune le seuil strict de +10 %. STCK passe de 11,090 s à 11,255 s (+1,48 %) et SMLP de 17,544 s à 17,367 s (−1,01 %). Elles mesurent le contrôleur, le service natif et le rejeu des retours publics, hors moteur de jeu et rendu. Cette preuve porte sur `6180e29f` et ses réglages par défaut.
+
+| Série | SHA-256 du reçu brut de la seconde fenêtre |
+| --- | --- |
+| A1 | `5919c1547cb8cd18aacd9e2043a10e921300884fc0163e743248b644c16ab2f0` |
+| B1 | `cfb00b74315472afb3a3e49dae6a300f3aa757a7ea654449dab09291c3a9bfc6` |
+| B2 | `361261a3265b82615b537d4e8ba2b1482a720ea5bd2f8fe404f94c5c06116b39` |
+| A2 | `217e01b8bb8775bf00f24f0f1c64380f7e61704b5648bbd3a376398e20402d28` |
+
 Le résumé natif est construit après la décision, hors de la mesure du temps actif. L’affichage est différé au prochain rendu du navigateur après la fin d’une opération. Les tests couvrent la matrice, la révision, la portée, le fallback, l’ambiguïté, les retours natifs et la parité du transport V6 jusqu’à un retour terminal.
