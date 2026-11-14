@@ -59,6 +59,22 @@ La référence 0.65 relancée sur la même machine donne 11,173 s pour STCK et 2
 
 Chaque qualification navigateur SIC consigne une seule durée par niveau gagné, du lancement du lot à la fin de sa résolution. La mesure est prise en conditions normales, en un seul passage par jeu. Les contrôles de non-régression de l’interface peuvent vérifier que le rendu est différé, sans lancer de campagne comparative.
 
+### Comparaison à `dfbbe9b5`
+
+Un passage par moteur sur une partie neuve du même banc local Node/Pyodide. Le temps couvre les commandes et leurs retours, après chargement du jeu. Sur les sept niveaux comparés, les empreintes des commandes et des retours publics concordent intégralement. Les tests de qualification du catalogue étaient en cours sur la même machine.
+
+| Jeu | Niveau | Natif 0.68 | SIC seul | Facteur |
+| --- | ---: | ---: | ---: | ---: |
+| SK48 | 1 | 24,34 s | 12,52 s | 1,94× |
+| SYME | 1 | 11,26 s | 4,15 s | 2,71× |
+| SYME | 2 | 10,39 s | 7,39 s | 1,41× |
+| SYME | 3 | 16,88 s | 14,26 s | 1,18× |
+| DNOI | 1 | 4,22 s | 1,46 s | 2,90× |
+| DNOI | 2 | 8,47 s | 2,24 s | 3,79× |
+| DNOI | 3 | 13,32 s | 3,90 s | 3,42× |
+
+Sur ces parcours, le temps cumulé est divisé par 1,94 sur SK48, 1,49 sur SYME et 3,43 sur DNOI. Les sept niveaux représentent un échantillon du catalogue.
+
 ### Mesures historiques
 
 Mesure locale du moteur `3e50e61f` sur un i7-10700F. Le même contrôleur de partie lance quatre sessions neuves par jeu dans l’ordre natif, SIC, SIC, natif. Les jeux s’exécutent dans Pyodide et le service de résolution est appelé en processus Node, hors rendu et transport du navigateur. Le chronomètre démarre après le chargement du jeu et inclut la création de la session, les décisions, les actions et leurs retours. Les commandes et les retours publics sont identiques pour les quatre sessions de chaque jeu.
