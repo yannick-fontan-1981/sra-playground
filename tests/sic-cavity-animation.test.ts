@@ -50,3 +50,14 @@ test('stop replaying a measured transition when identical public appearances pro
   rememberCommandReturn(graph, 'current', 'other-phase', 'ACTION1', 'counterexample');
   assert.equal(observedCommandFrontier(graph, 'current', ['ACTION1', 'ACTION2'], 2), null);
 });
+
+test('frontier replay considers only the visible inputs witnessed on each board', () => {
+  const graph: ObservedCommandGraph = {};
+  rememberCommandReturn(graph, 'start', 'different-controls', 'ACTION1', 'return');
+  const available = (key: string) => key === 'start' ? ['ACTION1'] : ['ACTION6:9,2'];
+  const next = observedCommandFrontier(graph, 'start', ['ACTION1'], 2, available);
+  assert.equal(next?.action, 'ACTION1');
+  assert.equal(next?.probe, 'ACTION6:9,2');
+  rememberCommandReturn(graph, 'different-controls', 'different-controls', 'ACTION6:9,2', 'return-2');
+  assert.equal(observedCommandFrontier(graph, 'start', ['ACTION1'], 2, available), null);
+});

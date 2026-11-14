@@ -14,7 +14,8 @@ export function rememberCommandReturn(graph: ObservedCommandGraph, source: strin
 }
 
 /** Follow only witnessed transitions to a state with an untried command. */
-export function observedCommandFrontier(graph: ObservedCommandGraph, current: string, actions: readonly string[], budget: number) {
+export function observedCommandFrontier(graph: ObservedCommandGraph, current: string, actions: readonly string[], budget: number,
+  actionsAt: (state: string) => readonly string[] = () => actions) {
   type Route = { state: string; first: Transition | null; depth: number };
   const queue: Route[] = [{ state: current, first: null, depth: 0 }];
   const seen = new Set([current]);
@@ -26,10 +27,10 @@ export function observedCommandFrontier(graph: ObservedCommandGraph, current: st
   for (const route of queue) {
     if (route.depth >= budget || (best && route.depth > best.depth)) break;
     const edges = graph[route.state] ?? [];
-    for (const action of actions) {
+    for (const action of actionsAt(route.state)) {
       const edge = edges.find(candidate => candidate.action === action);
       if (!edge) {
-        if (!best || attempts.get(action)! < attempts.get(best.probe)!) {
+        if (!best || (attempts.get(action) ?? 0) < (attempts.get(best.probe) ?? 0)) {
           best = { action: route.first?.action ?? action, probe: action, depth: route.depth, first: route.first };
         }
       } else if (edge.destination && !seen.has(edge.destination)) {

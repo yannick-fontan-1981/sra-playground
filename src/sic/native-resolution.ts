@@ -7,8 +7,7 @@ import { contactRecoveryStrategies, isContactStrategy, isRecoveryStop, rootedRec
 import type { AgendaEntry } from './strategy-agenda.ts';
 import { orderedContactId, orderedContactStrategies } from './ordered-contact.ts';
 import { cavityAccessId, cavityStrategies } from './cavity-access.ts';
-
-const situationStrategies = { ...orderedContactStrategies, ...cavityStrategies };
+import { publicInputExplorationId, publicInputStrategies } from './public-input-exploration.ts';
 import { frontierStrategies, isFrontierStrategy, type FrontierStrategy } from './frontier-strategy.ts';
 import { isViewStrategy, viewStrategies, type ViewStrategy } from './view-strategy.ts';
 import { informationStrategies, isInformationStrategy, type InformationStrategy } from './information-strategy.ts';
@@ -16,6 +15,8 @@ import { openNeedLabels, readSicNeed } from './need-registry.ts';
 import { openingCuriosityLabel } from './opening-curiosity.ts';
 import { isFrontierInputOrder, type FrontierChoiceEvidence, type FrontierInputOrder, type FrontierLocalRule } from './frontier-configuration.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
+
+const situationStrategies = { ...orderedContactStrategies, ...cavityStrategies, ...publicInputStrategies };
 
 export interface NativeStep {
   readonly action: string;
@@ -382,7 +383,8 @@ export function readNativeResolution(agent: {
   const op = label(template?.operation_key);
   const rooted = record(proposal?.rooted_line_plan);
   const rootedScene = record(rooted?.scene);
-  const labels = family === orderedContactId ? orderedContactStrategies : family === cavityAccessId ? cavityStrategies : null;
+  const labels = family === orderedContactId ? orderedContactStrategies : family === cavityAccessId ? cavityStrategies
+    : family === publicInputExplorationId ? publicInputStrategies : null;
   const card = planReceipt?.authority === 'sicOnly' && labels ? record(proposal?.sicSituationCard) : null;
   const isSituationStrategy = (id: unknown): id is keyof typeof situationStrategies =>
     typeof id === 'string' && !!labels && Object.hasOwn(labels, id);
@@ -392,6 +394,10 @@ export function readNativeResolution(agent: {
     agenda: readAgenda(card.agenda, isSituationStrategy), distance: natural(card.distance),
     evidenceActions: Array.isArray(card.evidence) ? [...new Set(card.evidence.flatMap(ref => priorAction(ref) ?? []))] : [],
   } : undefined;
+  if (situationCard && family === publicInputExplorationId) {
+    const region = bounds(card?.addressedRegion);
+    if (region) subjects.push({ label: 'Visible region tested by the click', box: region });
+  }
   if (situationCard && family === cavityAccessId) {
     const obstacle = bounds(card?.movingObstacle), actor = bounds(card?.controlledPiece);
     if (obstacle) subjects.push({ label: 'Moving obstacle before the action', box: obstacle });
