@@ -1,6 +1,6 @@
-import { occurrenceCollectionScene } from '../logos-engine/v6-occurrence-program-observer.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord } from '../logos-engine/v6-native-types.ts';
+import { collectionValues, matchesCollectionEdit, measureCollection } from './collection-experiment.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
@@ -19,21 +19,10 @@ const graph = compileStrategyGraph({ id: 'test_effect_of_editing_a_collection', 
   },
 }, ['pairedMarks', 'markedControl', 'editedCollection']);
 
-type Part = { bbox: NativeBox; color: number };
-type Scene = { members: Part[]; marked_members: Part[]; marked_controls: Part[] };
 type Strategy = keyof typeof markedCollectionStrategies;
 type State = { epoch: number; edit: string | null; stopped: boolean; count: number };
 type Proposal = NativeProposal & { strategy: Strategy; expected: number[] | null; needId: string };
 const empty = (epoch = 0): State => ({ epoch, edit: null, stopped: false, count: 0 });
-const measure = (rows: NativeRows) => occurrenceCollectionScene(rows) as Scene | null;
-const memberColors = (scene: Scene) => scene.members.map(member => member.color);
-const sortedColors = (colors: readonly number[]) => [...colors].sort((a, b) => a - b);
-
-function observedEdit(rows: NativeRows, expected: readonly number[]) {
-  const scene = measure(rows);
-  if (!scene || scene.members.length !== expected.length) return false;
-  return sortedColors(memberColors(scene)).every((color, index) => color === expected[index]);
-}
 
 export function createSicMarkedCollection(): NativeFamily<Proposal> {
   let state = empty();
@@ -43,7 +32,7 @@ export function createSicMarkedCollection(): NativeFamily<Proposal> {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const local = state.epoch === observation.level_epoch ? state : empty(observation.level_epoch);
       if (local.stopped || local.count >= 12) return null;
-      const scene = measure(rows);
+      const scene = measureCollection(rows);
       if (!scene) return null;
       const member = scene.marked_members[0] ?? null, contribution = scene.marked_controls[0] ?? null;
       const edits = contribution ? member ?? contribution : null;
@@ -62,8 +51,8 @@ export function createSicMarkedCollection(): NativeFamily<Proposal> {
       const point: NativePoint = [Math.floor((left + right) / 2), Math.floor((top + bottom) / 2)];
       const command: NativeCommand = edited ? { action_ref: 'ACTION6', data: { x: point[0], y: point[1] } } : nonPoint[0]!;
       const expected = strategy === 'remove_marked_member'
-        ? sortedColors(memberColors(scene).filter((_, index) => index !== scene.members.indexOf(member!)))
-        : edited ? sortedColors([...memberColors(scene), edited.color]) : null;
+        ? collectionValues(scene.members.filter(part => part !== member).map(part => part.color))
+        : edited ? collectionValues([...scene.members.map(part => part.color), edited.color]) : null;
       const goal = { kind: 'test_observed_collection_edit', scope: ref.split(':revision:', 1)[0]!, subjects: ['marked_collection'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_after_verified_edit' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
@@ -87,14 +76,14 @@ export function createSicMarkedCollection(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const matched = proposal.expected ? observedEdit(second, proposal.expected) : null;
+      const matched = proposal.expected ? matchesCollectionEdit(second, proposal.expected) : null;
       return { matched, seal_prefix: true, reason: matched === null ? 'observe_edited_collection_effect'
         : matched ? 'collection_edit_confirmed' : 'collection_edit_contradicted' };
     },
     record(before, after, _command, _first, second, proposal) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const local = state.epoch === before.level_epoch ? state : empty(before.level_epoch);
-      const confirmed = proposal.expected !== null && observedEdit(second, proposal.expected);
+      const confirmed = proposal.expected !== null && matchesCollectionEdit(second, proposal.expected);
       state = { ...local, edit: confirmed ? after.observation_ref : null, stopped: !confirmed, count: local.count + 1 };
       return { events: [] };
     },

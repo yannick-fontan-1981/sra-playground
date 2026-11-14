@@ -183,3 +183,9 @@ Les 17 commandes suffisent également sous une palette permutée avec un nom de 
 Les 100 niveaux 1 repassent en configuration normale avec les mêmes 1 250 commandes et les mêmes retours. Les 16 victoires avec retrait sont vérifiées sur ce runtime. DICO, DNOI, HANO et SYME terminent avec et sans retrait. Avec retrait, leurs commandes et retours sont identiques à la référence correspondante.
 
 Sur STCK, le rejeu avec `sic_marked_collection` retirée reste à zéro après 40 commandes. Un contre-essai hors agent vérifie que les deux éditions observées dans le rejeu normal suivies de Space gagnent depuis le plateau initial ou après un premier Space. Après le premier clic d’exploration qui retire une carte non marquée, la même suite ne gagne plus. Le prochain repli doit donc mieux choisir l’expérience d’édition avant de modifier la collection.
+
+### Tester une édition indiquée par le plateau
+
+La famille habituelle et l’exploration publique partagent la mesure d’une collection et la vérification d’une édition. Deux marques concordantes permettent de proposer un retrait à vérifier. L’ajout devient candidat après confirmation du retrait. Quand le dernier ajout est confirmé et que les marques ont disparu, le lancement du programme devient un essai distinct. Les cartes sont réévaluées après chaque commande et un retour stationnaire contredit l’édition attendue.
+
+STCK gagne le niveau 1 après retrait de `sic_marked_collection` en trois commandes et 2,55 s. `sic_public_input_exploration` choisit les deux clics puis Space, qui obtient le progrès officiel après 21 images. Le rejeu avec palette permutée et nom neutre conserve la victoire en trois commandes. Le repli réutilise le détecteur de collection existant. Empreinte `f9726f143394f14c8e9b761ac54f0a956db11222209e899d938afcdb117e6b97`.

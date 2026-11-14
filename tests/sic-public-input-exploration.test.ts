@@ -1,8 +1,29 @@
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
 import { createSicPublicInputExploration, currentControlledMotion } from '../src/sic/public-input-exploration.ts';
 import { measureComponentTranslations, motionIntoFootprint, type DirectionalMotion } from '../src/sic/observed-translation.ts';
+import type { NativePublicObservation } from '../src/logos-engine/v6-native-types.ts';
+
+test('SIC prioritizes a marked edit and checks that it changed the collection', async () => {
+  const fixtures = JSON.parse(await readFile(new URL('./fixtures/v6-occurrence-reference.json', import.meta.url), 'utf8'));
+  const packet: NativePublicObservation = fixtures.scenes['stck:initial'].public;
+  const family = createSicPublicInputExploration();
+  const inputs = [{ action_ref: 'ACTION5', data: {} }];
+  const before = await measureNativeObservation(packet, 1);
+  const proposal = await family.propose(before, packet.frame_rows, inputs, 20);
+  assert.ok(proposal);
+  assert.equal(proposal.sicSituationCard.strategy, 'test_marked_edit');
+  assert.deepEqual(proposal.steps?.[0]?.point_binding?.point, [4, 50]);
+  const stationary = await measureNativeObservation({ ...packet, step_index: 1 }, 2);
+  const verdict = await family.after(proposal, 0, before, stationary, packet.frame_rows, packet.frame_rows);
+  assert.equal(verdict.matched, false);
+  await family.record(before, stationary, proposal.actions[0]!, packet.frame_rows, packet.frame_rows, proposal, 0, []);
+  const next = await family.propose(stationary, packet.frame_rows, inputs, 20);
+  assert.notEqual(next?.sicSituationCard.strategy, 'test_edited_collection');
+  assert.notDeepEqual(next?.actions[0], proposal.actions[0]);
+});
 
 test('SIC probes repeated interior markers while requiring independent visible arrangements', async () => {
   const board = (secondSquare: boolean) => Array.from({ length: 14 }, (_, y) =>
