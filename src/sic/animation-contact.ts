@@ -19,7 +19,7 @@ const graph = compileStrategyGraph({
   strategies: {
     test_transient_contact: [{ fact: 'contact', expected: true, label: 'The measured path and the stationary piece give a current contact projection' }],
     refine_transient_path: [{ fact: 'disclosure', expected: true, label: 'The observed path suggests a different input that could distinguish the remaining possibilities' }],
-    observe_transient_motion: [{ fact: 'invitation', expected: true, label: 'A distinct point and two comparable compact pieces support a first motion experiment' }],
+    observe_transient_motion: [{ fact: 'invitation', expected: true, label: 'A distinct point lies above the gap of one pair of comparable pieces, with lateral controls available' }],
   },
 }, ['contact', 'disclosure', 'invitation']);
 
@@ -27,14 +27,15 @@ type State = { epoch: number; frameHash: string; evidence: string[]; tried: Nati
   contact: NativePoint | null; disclosure: NativePoint | null; source: NativeBox | null; peer: NativeBox | null; frames: number };
 type Proposal = NativeProposal & { local: State; target: NativePoint; needId: string };
 const samePoint = (a: NativePoint, b: NativePoint) => a[0] === b[0] && a[1] === b[1];
-function hasComparablePieces(entities: readonly NativeEntity[]): boolean {
+function hasUniquePairBelowAim(entities: readonly NativeEntity[], [x, y]: NativePoint): boolean {
   const compact = entities.flatMap(({ bbox: [l, t, r, b], area }) => {
     const width = r - l + 1, height = b - t + 1;
     return Math.min(width, height) >= 3 && Math.max(width, height) <= 2 * Math.min(width, height)
-      && area >= width * height / 2 ? [{ area, extent: Math.max(width, height), l, r }] : [];
+      && area >= width * height / 2 ? [{ area, extent: Math.max(width, height), l, t, r }] : [];
   });
-  return compact.some((a, i) => compact.slice(i + 1).some(b => Math.abs(a.area - b.area) <= Math.max(a.extent, b.extent)
-    && (a.r < b.l || b.r < a.l)));
+  const pairs = compact.flatMap((a, i) => compact.slice(i + 1).filter(b => Math.abs(a.area - b.area) <= Math.max(a.extent, b.extent)
+    && y < Math.min(a.t, b.t) && (a.r < x && x < b.l || b.r < x && x < a.l)));
+  return pairs.length === 1;
 }
 function measuredBox(facts: NativeRecord, prefix: string): NativeBox | null {
   const x = facts[prefix + '_center_column_twice'], y = facts[prefix + '_center_row_twice'];
@@ -60,8 +61,10 @@ export function createSicAnimationContact(): NativeFamily<Proposal> {
         evidence: [], tried: [], contact: null, disclosure: null, source: null, peer: null, frames: 0 };
       const fresh = (candidate: NativePoint | null) => candidate && !local.tried.some(point => samePoint(candidate, point)) ? candidate : null;
       const contact = fresh(local.contact), disclosure = fresh(local.disclosure);
-      const offer = !prior && hasComparablePieces(observation.entities) ? animatedCrossInvitation(observation) : null;
-      const invitation: NativePoint | null = offer ? [offer.point.x, offer.point.y] : null;
+      const canCompareLaterally = ['ACTION3', 'ACTION4'].every(input => observation.available_action_refs.includes(input));
+      const offer = !prior && canCompareLaterally ? animatedCrossInvitation(observation) : null;
+      const point: NativePoint | null = offer ? [offer.point.x, offer.point.y] : null;
+      const invitation = point && hasUniquePairBelowAim(observation.entities, point) ? point : null;
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
       const { selected, entries } = resolveStrategyGraph({
         graph, mode: 'active',

@@ -64,6 +64,7 @@ import { animationContactStrategies } from './animation-contact.ts';
 import { reflectedPlacementStrategies } from './reflected-placement.ts';
 import { materialAssemblyStrategies } from './material-assembly.ts';
 import { coupledMotionStrategies } from './coupled-motion.ts';
+import { materialRouteStrategies } from './material-route.ts';
 import { glyphEditingStrategies } from './glyph-editing.ts';
 import { fieldIsolationStrategies } from './field-isolation.ts';
 import { directionalReceptionStrategies } from './directional-reception.ts';
@@ -1295,7 +1296,7 @@ function renderSituationCards(container: Element, returns: readonly DirectionalR
     ...labeledSequenceStrategies, ...markedCollectionStrategies, ...slotTransferStrategies, ...remoteSupportRouteStrategies,
     ...occurrenceRecallStrategies, ...slotPermutationStrategies, ...surfaceCopyStrategies, ...codeRouteStrategies, ...profileTransferStrategies,
     ...orderedReplenishmentStrategies, ...programOriginStrategies, ...previewPlacementStrategies, ...symbolContributionStrategies, ...markedLatticeStrategies,
-    ...queuedPlacementStrategies, ...legendRecolorStrategies, ...visualPatternStrategies, ...facetGrowthStrategies, ...chartRouteStrategies, ...populationPlacementStrategies, ...carryToFrameStrategies, ...portPairingStrategies, ...displayCouplingStrategies, ...framedSearchStrategies, ...glyphEditingStrategies, ...fieldIsolationStrategies, ...directionalReceptionStrategies, ...windowCoverageStrategies, ...panelMatchingStrategies, ...crossingRowsStrategies, ...traceCoverageStrategies, ...radialConnectionStrategies, ...invitedCaptureStrategies, ...branchAlignmentStrategies, ...feedbackTrialStrategies, ...catalogueComparisonStrategies, ...receptionAccessStrategies, ...markerCoverageStrategies, ...framedReceptionStrategies, ...windowRelationStrategies, ...animationContactStrategies, ...reflectedPlacementStrategies, ...materialAssemblyStrategies, ...coupledMotionStrategies };
+    ...queuedPlacementStrategies, ...legendRecolorStrategies, ...visualPatternStrategies, ...facetGrowthStrategies, ...chartRouteStrategies, ...populationPlacementStrategies, ...carryToFrameStrategies, ...portPairingStrategies, ...displayCouplingStrategies, ...framedSearchStrategies, ...glyphEditingStrategies, ...fieldIsolationStrategies, ...directionalReceptionStrategies, ...windowCoverageStrategies, ...panelMatchingStrategies, ...crossingRowsStrategies, ...traceCoverageStrategies, ...radialConnectionStrategies, ...invitedCaptureStrategies, ...branchAlignmentStrategies, ...feedbackTrialStrategies, ...catalogueComparisonStrategies, ...receptionAccessStrategies, ...markerCoverageStrategies, ...framedReceptionStrategies, ...windowRelationStrategies, ...animationContactStrategies, ...reflectedPlacementStrategies, ...materialAssemblyStrategies, ...coupledMotionStrategies, ...materialRouteStrategies };
   const cards = new Map<string, DirectionalReturn>();
   for (const item of returns) {
     const card = item.decision?.situationCard;
