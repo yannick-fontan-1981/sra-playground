@@ -368,3 +368,5 @@ Le premier tour part de parties neuves. Le navigateur vérifie l’autorité SIC
 **SP80** gagne le niveau 2 en **11 commandes** et **7,76 s**, soit 19 commandes sur la partie continue. SIC déplace la pièce sélectionnée pour aligner les embranchements avec les ouvertures et vérifie les nouvelles positions. Autorité SIC sur chaque commande. Empreinte `1efc63efe3c3a014147b6e5f2aece7afe4ffbddc2069b08534ec6167307955f6`.
 
 Le cumul atteint **9/100 niveaux 2** et **126/636 niveaux attestés**.
+
+**SB26** gagne le niveau 2 en **15 commandes** et **8,99 s**, soit 24 commandes sur la partie continue. SIC mesure les emplacements et les jetons, puis vérifie les transferts sous OP18. La famille de transfert vers un emplacement fournit les 24 commandes. Empreinte de la partie `d26873d0560b96f09fa1ab05aeac3c6e4330246fc06c98230b298cd349410875`. Le cumul atteint **10/100 niveaux 2** et **127/636 niveaux attestés**.
