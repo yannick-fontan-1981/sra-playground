@@ -323,3 +323,9 @@ Avec `sic_directional_reception` retirée, **CWSE gagne en six commandes SIC seu
 Les 100 niveaux 1, les 26 précédentes victoires après retrait et les quatre parcours complets avec et sans retrait conservent leurs commandes et leurs retours. Avec CGWL et CWSE, **28/100** premiers niveaux gagnent après retrait, en 378 commandes SIC seul, dont 48 choisies par le SRC.
 
 Sur CAVA, le premier clic utile arrive à la commande 19 de l’exploration publique. Il produit le même plateau qu’un clic au centre de la case d’arrivée. Un prototype reprend ce retour avec la famille habituelle retirée et gagne après six clics supplémentaires. En rejouant uniquement les sept clics qui modifient le plateau, le niveau gagne aussi. Le prochain travail porte sur le choix de ce premier essai, sur la comparaison de cibles du même type et sur l’intégration de la carte de navigation.
+
+### Passer de l’essai au trajet après un saut confirmé
+
+Après retrait de `sic_highlighted_route`, **CAVA gagne en sept clics SIC seul et 4,02 s**. La carte SRC `sic.follow_observed_landings.choose` choisit un essai P05 parmi deux cases à distance égale de la cible. Le premier retour place le sprite sur la case visée et renouvelle les cases mises en évidence. La carte choisit ensuite six commandes P07, une à la fois. Le fournisseur TypeScript mesure toujours les cases et classe les trajets admissibles. Les sept commandes et leurs retours sont identiques à ceux de la famille habituelle, empreinte `0fbbe16a8f1b47ec732708f4ab9132037bcc972efb781160f952d2143f34a1ad`.
+
+Désactiver la règle P07 après le premier clic laisse l’exploration publique choisir les six commandes suivantes. Le niveau reste ouvert. La carte accepte aussi un reçu d’arrivée produit par l’exploration si le clic se trouve sur le sprite arrivé et que sa région a changé.

@@ -1,9 +1,11 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 
 export const highlightedRouteId = 'sic_highlighted_route';
+export const learnHighlightedRouteId = 'sic_learn_highlighted_route';
 
 type Part = ReturnType<typeof geometricComponents>[number];
 type Tile = { box: NativeBox; point: NativePoint; color: number };
@@ -79,10 +81,15 @@ function distances(scene: Scene): Map<Tile, number> {
   return reachable;
 }
 
-export function createSicHighlightedRoute(): NativeFamily<Proposal> {
+export function createSicHighlightedRoute(family = highlightedRouteId): NativeFamily<Proposal> {
+  const learns = family === learnHighlightedRouteId;
   let state: Memory | null = null;
+  let choose: NativeProgramHandle | undefined;
   return {
-    id: highlightedRouteId,
+    id: family,
+    async attachPrograms(registry) {
+      if (learns) choose = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')
         || observation.available_action_refs.some(action => /^ACTION[1-5]$/.test(action))) return null;
@@ -90,7 +97,13 @@ export function createSicHighlightedRoute(): NativeFamily<Proposal> {
       const measured = measure(rows, prior);
       if (!measured) return null;
       const { scene, ground, highlight } = measured;
-      const memory = prior ?? { epoch: observation.level_epoch, ground, highlight, evidence: [], blocked: [] };
+      const arrival = learns && !prior ? execution?.readClickRegionChanges?.([scene.actor.box]) : null;
+      const [left, top, right, bottom] = scene.actor.box;
+      const witnessedArrival = arrival?.afterRef === observation.observation_ref && arrival.levelEpoch === observation.level_epoch &&
+        arrival.changed[0] && !arrival.predictionContradicted &&
+        arrival.point[0] >= left && arrival.point[0] <= right && arrival.point[1] >= top && arrival.point[1] <= bottom;
+      const memory = prior ?? { epoch: observation.level_epoch, ground, highlight,
+        evidence: witnessedArrival ? [arrival.beforeRef, arrival.afterRef] : [], blocked: [] };
       const distance = distances(scene);
       const attemptFor = (tile: Tile) => [key(scene.actor.point), key(tile.point), key(scene.offsets)].join('/');
       const options = scene.moves.filter(p => distance.has(p) && !memory.blocked.includes(attemptFor(p)));
@@ -102,10 +115,15 @@ export function createSicHighlightedRoute(): NativeFamily<Proposal> {
       const evidence: [string, ...string[]] = [ref, ...memory.evidence.filter(value => value !== ref)];
       const mode = execution?.reasoningMode ?? 'exploration';
       const offer = { input: 'ACTION6', expected: target.point, evidence };
-      const { selected, entries, card } = resolveNavigationPrimitives({
+      const eligibleProbe = memory.evidence.length === 0 && scene.moves.length >= 2;
+      const facts = { routeSupported: memory.evidence.length > 0, eligibleProbe,
+        visibleLandings: scene.moves.length, reachableLandings: options.length, mode };
+      const decision = learns ? await choose?.run({ situation: facts }, { signal: execution?.signal }) : null;
+      const navigation = learns ? null : resolveNavigationPrimitives({
         mode, evidence, probe: memory.evidence.length ? null : offer, access: memory.evidence.length ? offer : null, interaction: null,
       });
-      if (!selected) return null;
+      const strategy = decision?.result ?? navigation?.selected?.id;
+      if (strategy !== 'P05' && strategy !== 'P07') return null;
       const pointBinding = await ObservedInputDomain.makeLocusWitness(observation, rows, target.point, { reason: 'Currently highlighted landing', evidence });
       if (!pointBinding) return null;
       const parent = 'G_official_completion';
@@ -113,20 +131,22 @@ export function createSicHighlightedRoute(): NativeFamily<Proposal> {
         subjects: ['current_piece', 'highlighted_landing', 'framed_marker'], parentObjective: parent,
         satisfactionContract: 'official_progress_after_highlighted_jump' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = highlightedRouteId + ':' + need.id;
+      const id = family + ':' + need.id;
       const action = { action_ref: 'ACTION6', data: { x: target.point[0], y: target.point[1] } };
-      const situation = selected.id === 'P05'
+      const situation = strategy === 'P05'
         ? 'Check whether clicking a highlighted square moves the piece there'
         : 'Choose a highlighted square on a shortest candidate route, then verify the landing and the new highlights';
       return {
-        status: 'proposed', kind: highlightedRouteId, scene, target, memory, attempt: attemptFor(target), needId: need.id,
+        status: 'proposed', kind: family, scene, target, memory, attempt: attemptFor(target), needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
         steps: [{ action, expected_after: target.point, point_binding: pointBinding }],
-        sicSituationCard: { strategy: selected.id, need: 'Reach the framed marker', situation, evidence, agenda: entries, mode,
-          triggerCard: card, actor: scene.actor.box, focus: target.box, destination: scene.goal.box },
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
+        sicSituationCard: { strategy, need: 'Reach the framed marker', situation, evidence, agenda: navigation?.entries ?? [], mode,
+          triggerCard: navigation?.card ?? decision?.receipt.workflow, actor: scene.actor.box, focus: target.box, destination: scene.goal.box },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
+        sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
           preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
       };

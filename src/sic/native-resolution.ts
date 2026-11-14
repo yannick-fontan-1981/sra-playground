@@ -49,7 +49,7 @@ import { inventoryAccessId, inventoryAccessStrategies } from './inventory-access
 import { replayAccessId } from './replay-access.ts';
 import { orientedDeliveryId } from './oriented-delivery.ts';
 import { indicatedJumpId } from './indicated-jump.ts';
-import { highlightedRouteId } from './highlighted-route.ts';
+import { highlightedRouteId, learnHighlightedRouteId } from './highlighted-route.ts';
 import { pairedPassageId } from './paired-passage.ts';
 import { seatedContactId } from './seated-contact.ts';
 import { switchedSurfaceId } from './switched-surface.ts';
@@ -930,7 +930,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label: 'Remote indicator', box });
     }
   }
-  if (situationCard && family === highlightedRouteId) {
+  if (situationCard && (family === highlightedRouteId || family === learnHighlightedRouteId)) {
     for (const [field, label] of [['actor', 'Current piece'], ['focus', 'Highlighted landing'], ['destination', 'Framed marker']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
