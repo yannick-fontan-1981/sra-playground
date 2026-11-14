@@ -231,6 +231,14 @@ La fenêtre A1/B1/B2/A2 a comparé la 0.65 publiée (`b9555039`) au commit d’a
 
 Les stratégies actives de récupération, d’exploration, de vue et d’information portent maintenant le besoin canonique dans leur reçu de plan. Après une exécution, le graphe natif conserve avec le préfixe une seule entrée par identité de besoin, le premier plan, le dernier plan et le retour qui motive la révision. Un changement de niveau expire un besoin encore ouvert. Un retour qui tranche une hypothèse ou enregistre la vue est conservé comme observation. Le test d’intégration relit le besoin de vue et son reçu depuis le graphe du service natif. Le registre couvre les besoins effectivement portés par ces stratégies. Les besoins non assignés et les dépendances entre familles restent à raccorder.
 
+### Qualification de l’arbitrage SIC
+
+Le navigateur a comparé quinze sessions natives, shadow et actives avec le moteur issu de `c384ca1d`. Les commandes, les empreintes des retours publics et le résultat de chaque jeu concordent. SK48 atteint le niveau 2 en 19 actions, AS66 termine trois niveaux en 19, SYME un niveau en 9 et LKEY trois niveaux en 44. CASC conserve son arrêt `frontier_unknown` après une commande. Le choix dans une stratégie réglable couvre 17 des 92 commandes. Les 92 passent par l’arbitrage entre familles lorsque ce réglage est actif. Une édition native du workflow continue de reprendre la main à la frontière suivante. La suite complète de `c384ca1d` passe 16 129 tests sur 16 129.
+
+Le banc expérimental a parcouru 137 commandes au total sur LS20, AR25, LP85, TR87, CATR et SMLP. Aucun épisode n’a sélectionné une expérience du groupe SIC `information_goal` dans ces limites. Les preuves de classement, de préservation de l’attention et de traitement des retours proviennent des cas contrôlés de référence. Une activation en partie réelle reste à observer.
+
+Avancement global estimé à 95 %. La mesure STCK/SMLP en mode d’arbitrage actif reste en cours. Les étapes restantes incluent la promotion du réglage global après qualification, les besoins ouverts et leurs dépendances, et la validation des familles dont les offres sont encore produites par le moteur natif.
+
 | Série | SHA-256 du reçu brut de la seconde fenêtre |
 | --- | --- |
 | A1 | `5919c1547cb8cd18aacd9e2043a10e921300884fc0163e743248b644c16ab2f0` |
