@@ -6,7 +6,7 @@ import { factConditionHolds } from './v6-drm-projector.ts';
 import type { DrmCondition } from './v6-drm-projector.ts';
 import { predictCandidateRule } from './v6-transition-learning.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
-import { frontierInformationNeed, frontierStrategyGraph, selectFrontierStrategy } from '../sic/frontier-strategy.ts';
+import { frontierAccessNeed, frontierInformationNeed, frontierStrategyGraph, selectFrontierStrategy } from '../sic/frontier-strategy.ts';
 import { evaluateFrontierLocalRule, defaultFrontierConfiguration, type FrontierConfiguration, type FrontierChoiceEvidence } from '../sic/frontier-configuration.ts';
 
 type R = Record<string, any>;
@@ -397,7 +397,8 @@ export class ObservedFrontier {
     } else {
       const candidate = agenda && !continuityShadow ? agenda.selected?.plan : localQuestion ? { path: [], question: localQuestion } : route;
       if (!candidate) return { status: 'frontier_exhausted', actions: [], reason: 'no_untried_admitted_input_or_observed_access_within_current_epoch_and_replay_bound',
-        ...(agenda && !continuityShadow ? { sic_frontier_refusal: { graph: frontierStrategyGraph.id, agenda: agenda.entries } } : {}),
+        ...(agenda && !continuityShadow ? { sic_frontier_refusal: { graph: frontierStrategyGraph.id, agenda: agenda.entries,
+          need: frontierAccessNeed(frontierRef(observation).split(':revision:', 1)[0]!, index, [frontierRef(observation), ...(continuity?.evidence ?? [])]) } } : {}),
         ...(agenda && continuityShadow ? { sic_view_continuity_shadow: agenda.entries } : {}),
         unresolved_multiple_outcomes: Object.values(this.nodes).reduce((sum, n) => sum + Object.values(n.attempts).filter((a: any) => Object.keys(a.outcomes).length > 1).length, 0),
         qualification: 'not_a_proof_of_game_impossibility; richer_observables_or_new_experiment_domain_may_be_required' };
@@ -442,14 +443,15 @@ export class ObservedFrontier {
     const proposalId = `proposal:${await digest([index, question.question_ref, steps, this.sequence])}`;
     const binding = { observation_ref: frontierRef(observation), level_epoch: protocol.level_epoch, levels_completed: protocol.levels_completed, knowledge_revision: this.knowledge_revision };
     const inputRanked = usesConfigurableOrder && !own(question, 'experiment') && !own(question, 'control_experiment');
+    const observationRef = frontierRef(observation), scope = observationRef.split(':revision:', 1)[0]!;
     const sicFrontier = agenda?.selected && !continuityShadow ? { strategy: agenda.selected.id, agenda: agenda.entries, inputOrder: order, inputRanked,
       ...(inputRanked && ranked && kind === 'experiment' ? { ruleEvidence,
         choices: { least_tried: ranked.leastTried.action, command_order: ranked.commandOrder.action } } : {}),
       ...(ruleResult && localRule ? { localRule: { ...ruleResult, title: localRule.title, mode: localRule.mode, prefer: localRule.prefer },
         effectiveOrder: customQuestion ? localRule.prefer : order } : {}),
       ...(continuity ? { purpose: 'view_continuity' } : {}),
-      need: frontierInformationNeed(frontierRef(observation).split(':revision:', 1)[0]!, question.question_ref, goal,
-        [frontierRef(observation), ...new Set([...(continuity?.evidence ?? []), ...routeRefs])]),
+      need: frontierInformationNeed(scope, question.question_ref, goal, [observationRef, ...new Set([...(continuity?.evidence ?? []), ...routeRefs])]),
+      ...(path.length ? { prerequisite: frontierAccessNeed(scope, index, [observationRef, ...routeRefs], 'assigned') } : {}),
       objective: { id: question.question_ref, label: continuity ? 'Observe a way to continue from the current view'
         : 'Observe the effect of the selected untried input', parent: goal } } : null;
     await this.commit('proposal', { proposal_id: proposalId, kind, question_ref: question.question_ref, steps, binding,

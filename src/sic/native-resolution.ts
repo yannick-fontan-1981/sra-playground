@@ -5,6 +5,7 @@ import type { AgendaEntry } from './strategy-agenda.ts';
 import { frontierStrategies, isFrontierStrategy, type FrontierStrategy } from './frontier-strategy.ts';
 import { isViewStrategy, viewStrategies, type ViewStrategy } from './view-strategy.ts';
 import { informationStrategies, isInformationStrategy, type InformationStrategy } from './information-strategy.ts';
+import { openNeedLabels, readSicNeed } from './need-registry.ts';
 import { isFrontierInputOrder, type FrontierChoiceEvidence, type FrontierInputOrder, type FrontierLocalRule } from './frontier-configuration.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 
@@ -125,6 +126,17 @@ export function readFrontierRefusal(agent: Parameters<typeof readRecoveryRefusal
   const refusal = agent.trace.slice(-128).reverse().map(record).find(event =>
     event?.kind === 'sic_frontier_refusal' && typeof event.observation_ref === 'string' && event.observation_ref.startsWith(scope));
   return readAgenda(record(refusal?.decision)?.agenda, isFrontierStrategy);
+}
+
+export function readOpenNeed(agent: Parameters<typeof readRecoveryRefusal>[0]) {
+  if (!agent.sessionId) return null;
+  const scope = `${agent.sessionId}:epoch:${agent.level}:revision:${agent.sequence + 1}:frame:`;
+  const refusal = agent.trace.slice(-128).reverse().map(record).find(event =>
+    (event?.kind === 'sic_frontier_refusal' || event?.kind === 'sic_recovery_refusal')
+    && typeof event.observation_ref === 'string' && event.observation_ref.startsWith(scope));
+  const need = readSicNeed(record(refusal?.decision)?.need);
+  if (need?.status !== 'open' || !Object.hasOwn(openNeedLabels, need.kind)) return null;
+  return { label: openNeedLabels[need.kind as keyof typeof openNeedLabels] };
 }
 
 const actions: Record<string, string> = { ACTION1: 'Up', ACTION2: 'Down', ACTION3: 'Left', ACTION4: 'Right',

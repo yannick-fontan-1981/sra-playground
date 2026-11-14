@@ -5,7 +5,7 @@ import { createNativeV6Runtime } from '../src/logos-engine/v6-native-runtime.ts'
 import type { NativeV6Declarations } from '../src/logos-engine/v6-native-runtime.ts';
 import { hydrateNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
 import { V6AgentService } from '../src/runtime/v6-agent-service.ts';
-import { readNativeResolution } from '../src/sic/native-resolution.ts';
+import { readNativeResolution, readOpenNeed } from '../src/sic/native-resolution.ts';
 
 const source = new URL('../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/', import.meta.url);
 const declarations = {
@@ -122,4 +122,29 @@ test('the live service releases a SIC view plan and binds its measured return to
   assert.equal(view?.status, 'observed');
   assert.ok(typeof view?.firstPlan === 'string' && view.firstPlan === view.latestPlan);
   assert.equal(values.filter(value => value.id === view?.id).length, 1);
+});
+
+test('a stationary public board retains an open need without issuing another ticket', async () => {
+  const runtime = await createNativeV6Runtime(declarations, { now: () => 0 });
+  const service = new V6AgentService(() => runtime);
+  const frame = Array.from({ length: 64 }, () => Array<number>(64).fill(0));
+  const observation = { frame, frames: [frame],
+    availableActionIds: [1], state: 'NOT_FINISHED', level: 1, levelsCompleted: 0, stepIndex: 0 };
+  const sessionId = 'frontier-open-need';
+  const started = await service.handle({ type: 'init', sessionId, sequence: 0, observation, budgets: { targetLevels: 1, levelActionCaps: [12] } });
+  assert.equal(started.command?.actionRef, 'ACTION1');
+  const boundary = await service.handle({ type: 'advance', sessionId, sequence: 1, ticketId: started.ticket!.id,
+    observation: { ...observation, stepIndex: 1 }, executionMs: 0 });
+  assert.equal(boundary.kind, 'boundary');
+  const stopped = await service.handle({ type: 'resume', sessionId, sequence: 1 });
+  assert.equal(stopped.reason, 'frontier_frontier_exhausted');
+  assert.equal(stopped.ticket, null);
+  assert.equal(readOpenNeed({ ...stopped.snapshot, sessionId, sequence: 1 })?.label, 'Find an admissible input or an observed route to one');
+  const graph = runtime.inspectKnowledge();
+  const needs = Object.values(graph.nodes).filter(node => node.component === 'sic_need')
+    .map(node => hydrateNativeState(node.value!, id => graph.nodes[id]!.value) as Record<string, unknown>);
+  const unresolved = needs.find(need => need.kind === 'find_observable_frontier_access');
+  assert.equal(unresolved?.status, 'open');
+  assert.equal(unresolved?.firstPlan, null);
+  assert.equal(unresolved?.latestPlan, null);
 });

@@ -15,6 +15,12 @@ export function frontierInformationNeed(scope: string, subject: string, parentOb
     satisfactionContract: 'acquire_the_selected_input_return' } as const;
   return { ...identity, id: sicNeedId(identity), evidence, status: 'assigned' } as const;
 }
+
+export function frontierAccessNeed(scope: string, context: string, evidence: readonly string[], status: 'open' | 'assigned' = 'open') {
+  const identity = { kind: 'find_observable_frontier_access', scope, subjects: [context], parentObjective: 'G_protocol_completion',
+    satisfactionContract: 'find_an_admissible_input_or_an_observed_route_to_one' } as const;
+  return { ...identity, id: sicNeedId(identity), evidence, status } as const;
+}
 export const frontierStrategyGraph = compileStrategyGraph<FrontierStrategy, 'openInputHere'>({
   id: 'frontier-information', version: 1, order: 'FALLBACK', priorities: ['test_local_input', 'reach_open_input'],
   strategies: {

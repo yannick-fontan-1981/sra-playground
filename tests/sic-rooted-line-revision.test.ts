@@ -38,6 +38,8 @@ test('an observed push chain unblocks rooted-line search, retaining its estimate
   const shadow = compileRecoveryPack({ ...defaultRecoveryPack, mode: 'shadow' });
   const ignored = memory.propose(current, rows, [], 16, { ...config, sic_recovery: shadow });
   assert.equal(ignored?.reason, 'sic_recovery_shadow');
+  assert.equal(ignored?.sic_decision.need.status, 'open');
+  assert.equal(ignored?.sic_decision.need.id, state.sic_recovery_need?.id);
   assert.equal(ignored?.actions, undefined);
   assert.equal(ignored?.block_unrelated_probe, true);
   assert.equal(ignored?.release_authority, false);

@@ -944,7 +944,7 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
     strategies.append(line);
   }
   const progress = board ? `Public progress: ${board.levelsCompleted} completed · current level ${board.level} of ${board.levelCount}.` : 'Waiting for the board.';
-  renderObjectives(panel, progress, board, native?.pending ? native : lastPlan, objectives, timeline);
+  renderObjectives(panel, progress, board, native?.pending ? native : lastPlan, objectives, timeline, view?.openNeed);
   const objectiveTimeline = panel.querySelector('#sic-objective-evidence')!;
   const expanded = new Map([...objectiveTimeline.querySelectorAll<HTMLDetailsElement>('details[data-strategy-choice]')]
     .map(details => [details.dataset.strategyChoice, details.open] as const));
@@ -1081,22 +1081,22 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
 function renderObjectives(panel: HTMLElement, progress: string, board: GameObservation | null,
   current: Pick<NativeResolution, 'objective' | 'objectiveSource' | 'question' | 'recoveryDecision' | 'frontierStrategy' | 'viewStrategy' | 'informationStrategy'>
     & Partial<Pick<NativeResolution, 'context'>> | null | undefined,
-  entries: readonly PursuedObjective[], timeline: ReturnType<typeof strategyTimeline>): void {
+  entries: readonly PursuedObjective[], timeline: ReturnType<typeof strategyTimeline>, openNeed?: ShadowView['openNeed']): void {
   const paragraph = (value: string) => { const p = document.createElement('p'); p.textContent = value; return p; };
   panel.querySelector('[data-sic-objective-progress]')!.textContent = progress;
   const active = panel.querySelector('#sic-present')!;
   active.replaceChildren();
   active.append(paragraph(board?.state === 'WIN' ? 'The game reports victory.'
-    : describePlanObjective(current) ?? 'No current native objective observed.'));
+    : openNeed ? `${openNeed.label}. No plan is currently available.` : describePlanObjective(current) ?? 'No current native objective observed.'));
   const currentSubObjective = current?.recoveryDecision?.objective ?? current?.frontierStrategy?.objective
     ?? current?.viewStrategy?.objective ?? current?.informationStrategy?.objective;
-  if (currentSubObjective) {
+  if (currentSubObjective && !openNeed) {
     active.append(paragraph(`SIC sub-objective: ${currentSubObjective.label}.`));
   }
-  if (current?.objectiveSource === 'native' && current.question) {
+  if (!openNeed && current?.objectiveSource === 'native' && current.question) {
     active.append(paragraph(`Immediate aim: ${nativeLabel(current.question).replace(/[.!?]$/, '')}.`));
   }
-  if (current) renderDecisionConfigurations(active, current, 'objective');
+  if (current && !openNeed) renderDecisionConfigurations(active, current, 'objective');
   const past = panel.querySelector('#sic-past')!;
   past.replaceChildren();
   if (!entries.length) past.append(paragraph('No objective has been recorded in this session.'));

@@ -239,6 +239,8 @@ Le banc expérimental a parcouru 137 commandes au total sur LS20, AR25, LP85, TR
 
 Avancement global estimé à 95 %. La mesure STCK/SMLP en mode d’arbitrage actif reste en cours. Les étapes restantes incluent la promotion du réglage global après qualification, les besoins ouverts et leurs dépendances, et la validation des familles dont les offres sont encore produites par le moteur natif.
 
+Quand la récupération de contact ou l’exploration refuse de libérer une commande, le graphe conserve le besoin ouvert et son témoin. Objectifs → Présent le montre avec l’absence de plan disponible. Un trajet d’exploration lie le besoin d’observer l’effet à un besoin d’accès distinct. Trouver un trajet admissible satisfait la recherche d’accès, tandis que l’effet reste à observer. Sur un plateau stationnaire, le service conserve le besoin ouvert sans émettre de ticket supplémentaire.
+
 | Série | SHA-256 du reçu brut de la seconde fenêtre |
 | --- | --- |
 | A1 | `5919c1547cb8cd18aacd9e2043a10e921300884fc0163e743248b644c16ab2f0` |

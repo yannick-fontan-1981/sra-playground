@@ -120,7 +120,7 @@ export class RootedLineMemory {
         agenda: agenda.entries, visited };
       if (!agenda.selected) return { status: 'unknown', reason: revision.status === 'shadow' ? 'sic_recovery_shadow' : 'rooted_cell_access_unresolved',
         block_unrelated_probe: true, release_authority: false, recovery_operations: revision.operations,
-        recovery_evidence: revision.evidence, sic_decision: receipt };
+        recovery_evidence: revision.evidence, sic_decision: { ...receipt, need: { ...revision.need, status: 'open' } } };
       const { id: strategy, plan } = agenda.selected;
       actions = [{ action_ref: plan.command }];
       predictions = [plan.prediction];

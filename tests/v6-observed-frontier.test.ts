@@ -72,6 +72,11 @@ test('the production agenda preserves frontier commands and declares why it prob
         assert.deepEqual(proposal.actions, row.expected.actions);
         assert.deepEqual(proposal.steps, row.expected.steps);
         assert.equal(receipt.objective.parent, proposal.bundle_template.objective_ref);
+        if (receipt.strategy === 'reach_open_input') {
+          assert.equal(receipt.prerequisite?.kind, 'find_observable_frontier_access');
+          assert.equal(receipt.prerequisite.parentObjective, receipt.need.parentObjective);
+          assert.notEqual(receipt.prerequisite.id, receipt.need.id);
+        }
       }
       const result = await runOperation(source, row, saved);
       if (row.save) saved.set(row.save, structuredClone(result));
@@ -93,6 +98,9 @@ test('an exhausted public board records the absence of a plan without releasing 
   assert.equal(refused?.status, 'frontier_exhausted');
   assert.deepEqual(refused?.actions, []);
   assert.deepEqual(refused?.sic_frontier_refusal.agenda.map((entry: { result: string }) => entry.result), ['skipped', 'no_plan']);
+  assert.equal(refused?.sic_frontier_refusal.need.status, 'open');
+  const repeated = await graph.propose({ ...unchanged, observation_ref: 'frontier-empty:epoch:1:revision:3:frame:unchanged' }, [command], { sic_agenda: true });
+  assert.equal(repeated?.sic_frontier_refusal.need.id, refused?.sic_frontier_refusal.need.id);
 });
 
 test('the SIC input order breaks ties between equally supported commands on the same board', async () => {

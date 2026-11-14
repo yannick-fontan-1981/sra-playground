@@ -35,7 +35,7 @@ import { compileRecoveryPack, isRecoveryStop } from '../sic/active-recovery.ts';
 import { nativePlanReceipt } from '../sic/native-plan-receipt.ts';
 import { defaultFrontierConfiguration } from '../sic/frontier-configuration.ts';
 import { selectStrategyFamily, type FamilyAgendaMode, type FamilyAgendaReceipt, type FamilyTrial } from '../sic/family-agenda.ts';
-import { needCheckpoint } from '../sic/need-registry.ts';
+import { needCheckpoint, readSicNeed, type SicNeed } from '../sic/need-registry.ts';
 import { SymbolTransactions } from './v6-symbol-transactions.ts';
 import { AddressedMaterial, ADDRESSED_NATIVE_SEARCH_BOUNDS } from './v6-addressed-material.ts';
 import { ObservedBinding, OBSERVED_BINDING_NATIVE_SEARCH_BOUNDS } from './v6-observed-binding.ts';
@@ -474,7 +474,11 @@ export class NativeV6Runtime implements NativeV6Backend {
     if (selected) {
       const { family } = selected; let { proposal } = selected;
       if (proposal.status !== 'proposed') {
-        await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'selection', statement: 'source.refusal' }, this.authority?.checkpointWrites() ?? []);
+        const decision = (proposal.sic_decision ?? proposal.sic_frontier_refusal) as R | undefined;
+        const need = readSicNeed(decision?.need);
+        const checkpoint = need?.status === 'open' ? [needCheckpoint(need, 'open', this.observation.observation_ref, null, this.previousSicNeed(need))] : [];
+        await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'selection', statement: 'source.refusal' },
+          [...checkpoint, ...(this.authority?.checkpointWrites() ?? [])]);
         if (proposal.release_authority === false && proposal.block_unrelated_probe === true && isRecoveryStop(proposal.reason)) {
           this.note({ kind: 'sic_recovery_refusal', observation_ref: this.observation.observation_ref, reason: proposal.reason,
             decision: proposal.sic_decision, evidence: proposal.recovery_evidence });
@@ -1429,13 +1433,14 @@ export class NativeV6Runtime implements NativeV6Backend {
       const outcome = lastReturn.outcome as R;
       const boundary = lastReturn.before.level_epoch !== lastReturn.after.level_epoch || lastReturn.before.levels_completed !== lastReturn.after.levels_completed;
       const established = (outcome.sic_need?.id === need.id ? outcome.sic_need.status : outcome.sic_frontier_outcome?.status) as unknown;
-      const previous = this.knowledge.memory.nodes[need.id] ? objectValue(this.knowledge.stateValue(need.id)) : null;
+      const previous = this.previousSicNeed(need);
       const status = established === 'satisfied' || established === 'observed' || established === 'refuted' || established === 'expired'
         ? established : observedInformation || observedView || previous?.status === 'observed' ? 'observed' : boundary ? 'expired'
           : established === 'access_interrupted' || outcome.matched === false ? 'refuted' : 'assigned';
-      needWrites.push(needCheckpoint(need, status, lastReturn.after.observation_ref, plan.id,
-        previous && typeof previous.firstPlan === 'string' ? { firstPlan: previous.firstPlan,
-          evidence: Array.isArray(previous.evidence) ? previous.evidence.filter((ref): ref is string => typeof ref === 'string') : [] } : null));
+      const prerequisite = plan.prerequisite;
+      if (prerequisite) needWrites.push(needCheckpoint(prerequisite, 'satisfied', plan.observationRef, plan.id,
+        this.previousSicNeed(prerequisite)));
+      needWrites.push(needCheckpoint(need, status, lastReturn.after.observation_ref, plan.id, previous, prerequisite?.id));
     }
     const contactScope: NativeStoreWrite[] = [];
     if (prefix.family.id === 'animated_contact' && prefix.proposal.kind === 'measured_animated_contact' && prefix.witnessed.length === 1) {
@@ -1452,7 +1457,7 @@ export class NativeV6Runtime implements NativeV6Backend {
           qualification: 'The complete public packet distinguishes stationary, transient-returned and changed outcomes. No hidden-state equivalence or understood effect is inferred.' },
         relations: [{ relation: 'witnesses', target: `reasoning:transition:${transition.before.revision}` }] });
     }
-    await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'sealed_prefix', statement: 'outcome.acquire' }, [{
+    await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'sealed_prefix', statement: 'outcome.acquire' }, [...needWrites, {
       id: evidenceId, kind: 'prefix_evidence', family: prefix.family.id, status: 'observed',
       value: { decision_revision: prefix.revision, proposal: prefix.proposal, selection: this.selectionReceipt,
         ...(this.familyAgendaReceipt ? { sic_family_selection: this.familyAgendaReceipt } : {}),
@@ -1461,6 +1466,7 @@ export class NativeV6Runtime implements NativeV6Backend {
           objective: prefix.sicPlan.objective, subObjective: prefix.sicPlan.subObjective,
           observationRef: prefix.sicPlan.observationRef, index: prefix.sicPlan.index, planned: prefix.sicPlan.planned,
           ...(prefix.sicPlan.need ? { need: prefix.sicPlan.need } : {}),
+          ...(prefix.sicPlan.prerequisite ? { prerequisite: prefix.sicPlan.prerequisite } : {}),
         } } : {}),
         ...(prefix.nativeBindings.length ? { native_bindings: prefix.nativeBindings } : {}),
         ...(compositionReturns.length ? { composition_dependency_returns: compositionReturns } : {}),
@@ -1471,7 +1477,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       relations: [{ relation: 'records', target: `family_state:${prefix.family.id}` },
         ...(this.selectionReceipt ? [{ relation: 'selected_by', target: `program:${SELECTION_PROGRAM}` }] : []),
         ...needWrites.map(write => ({ relation: 'addresses', target: write.id }))],
-    }, ...needWrites, ...contactScope, ...(this.authority?.checkpointWrites() ?? [])], evidenceId);
+    }, ...contactScope, ...(this.authority?.checkpointWrites() ?? [])], evidenceId);
     this.restoreFamilies();
     this.kind = 'boundary'; this.reason = null;
     const reason = stopReason ?? this.budgetReason(); if (reason) this.stop(reason);
@@ -1839,6 +1845,14 @@ export class NativeV6Runtime implements NativeV6Backend {
   inspectKnowledge(): KnowledgeMemory {
     if (!this.knowledge) throw new Error('Native knowledge store is not initialized');
     return this.knowledge.memory;
+  }
+
+  private previousSicNeed(need: SicNeed) {
+    if (!this.knowledge?.memory.nodes[need.id]) return null;
+    const previous = objectValue(this.knowledge.stateValue(need.id));
+    return { firstPlan: typeof previous.firstPlan === 'string' ? previous.firstPlan : undefined,
+      latestPlan: typeof previous.latestPlan === 'string' ? previous.latestPlan : undefined, status: previous.status,
+      evidence: Array.isArray(previous.evidence) ? previous.evidence.filter((ref): ref is string => typeof ref === 'string') : [] };
   }
 
   /** Validate the whole transaction before changing a single executable node. */
