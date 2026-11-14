@@ -1,9 +1,9 @@
-import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import { morphologyPairs } from '../logos-engine/v6-morphology-measurements.ts';
 import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 import { measureInsetContact } from './inset-contact.ts';
+import { measureComponentTranslations } from './observed-translation.ts';
 
 export const framedContactId = 'sic_framed_contact';
 export const framedContactStrategies = {
@@ -48,25 +48,12 @@ function sameLanding(first: NativeRows, second: NativeRows, { at, pitch, floor, 
 }
 
 function measureTranslation(first: NativeRows, second: NativeRows, action: Direction, evidence: string): Body | null {
-  const parts = (rows: NativeRows) => geometricComponents(rows).filter(part => part.area > 1 && part.area * 4 < rows.length * rows[0]!.length);
-  const group = (rows: NativeRows) => {
-    const byShape = new Map<string, ReturnType<typeof parts>>();
-    for (const part of parts(rows)) {
-      const key = JSON.stringify([part.color, part.mask]);
-      const matches = byShape.get(key) ?? [];
-      matches.push(part);
-      byShape.set(key, matches);
-    }
-    return byShape;
-  };
-  const from = group(first), to = group(second);
+  const area = first.length * first[0]!.length;
+  const matches = measureComponentTranslations(first, second, part => part.area > 1 && part.area * 4 < area);
   const [dx, dy] = directionVectors[action];
-  const moving = [...from].flatMap(([key, old]) => {
-    const next = to.get(key);
-    if (old.length !== 1 || next?.length !== 1) return [];
-    const a = old[0]!, b = next[0]!;
-    const pitch = (b.bbox[0] - a.bbox[0]) * dx + (b.bbox[1] - a.bbox[1]) * dy;
-    return pitch > 1 && b.bbox[0] === a.bbox[0] + dx * pitch && b.bbox[1] === a.bbox[1] + dy * pitch ? [{ a, pitch }] : [];
+  const moving = matches.flatMap(({ from: a, displacement: [x, y] }) => {
+    const pitch = x * dx + y * dy;
+    return pitch > 1 && x === dx * pitch && y === dy * pitch ? [{ a, pitch }] : [];
   });
   const fits = new Map<string, Body>();
   for (const { a, pitch } of moving) {

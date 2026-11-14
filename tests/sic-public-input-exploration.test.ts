@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
 import { createSicPublicInputExploration, currentControlledMotion } from '../src/sic/public-input-exploration.ts';
+import { measureComponentTranslations } from '../src/sic/observed-translation.ts';
 
 test('SIC probes repeated interior markers while requiring independent visible arrangements', async () => {
   const board = (secondSquare: boolean) => Array.from({ length: 14 }, (_, y) =>
@@ -23,6 +24,17 @@ test('SIC probes repeated interior markers while requiring independent visible a
     assert.equal(proposed.sicSituationCard.strategy, repeated ? 'test_repeated_marker' : 'compare_public_input');
     assert.equal(rows[proposed.actions[0]!.data.y!]![proposed.actions[0]!.data.x!], repeated ? 7 : 3);
   }
+});
+
+test('motion measurement reports unique component translations and rejects ambiguous destination masks', () => {
+  const frame = (origins: number[]) => Array.from({ length: 8 }, (_, y) =>
+    Array.from({ length: 16 }, (_, x) => y >= 2 && y <= 3 && origins.some(left => x >= left && x <= left + 1) ? 7 : 0));
+  const pieces = (part: { color: number }) => part.color === 7;
+  const before = frame([2]), after = frame([5]);
+  assert.deepEqual(measureComponentTranslations(before, after, pieces).map(({ from, to, displacement }) =>
+    [from.bbox, to.bbox, displacement]), [[[2, 2, 3, 3], [5, 2, 6, 3], [3, 0]]]);
+  assert.deepEqual(measureComponentTranslations(before, frame([5, 10]), pieces), []);
+  assert.deepEqual(measureComponentTranslations(before, before, pieces), []);
 });
 
 test('SIC tests a direction after a click changes a piece and binds the observed translation to that click', async () => {

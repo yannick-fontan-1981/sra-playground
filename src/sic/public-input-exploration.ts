@@ -2,6 +2,7 @@ import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-nat
 import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { measureComponentTranslations } from './observed-translation.ts';
 import { observedCommandFrontier, rememberCommandReturn, type ObservedCommandGraph } from './observed-command-frontier.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
@@ -61,16 +62,10 @@ function changedWithin(before: NativeRows, after: NativeRows, [l, t, r, b]: Nati
 
 function translatedPiece(before: NativeRows, after: NativeRows, { point: [x, y], box: [l, t, r, b] }: ClickedControl) {
   const coversClick = ([left, top, right, bottom]: NativeBox) => x >= left && x <= right && y >= top && y <= bottom;
-  const bodies = geometricComponents(before).filter(part => part.area >= 6 && coversClick(part.bbox));
-  const later = geometricComponents(after);
-  const moves = bodies.flatMap(part => {
-    const signature = JSON.stringify(part.mask);
-    const matches = later.filter(candidate => candidate.color === part.color && candidate.area === part.area
-      && JSON.stringify(candidate.mask) === signature);
-    if (matches.length !== 1) return [];
-    const from = part.bbox, to = matches[0]!.bbox;
-    const dx = to[0] - from[0], dy = to[1] - from[1];
-    return (!!dx === !!dy || Math.max(Math.abs(dx), Math.abs(dy)) > Math.max(r - l + 1, b - t + 1)) ? [] : [{ from, to, vector: `${dx},${dy}` }];
+  const matches = measureComponentTranslations(before, after, part => part.area >= 6 && coversClick(part.bbox), part => part.area >= 6);
+  const moves = matches.flatMap(({ from, to, displacement: [dx, dy] }) => {
+    return (!!dx === !!dy || Math.max(Math.abs(dx), Math.abs(dy)) > Math.max(r - l + 1, b - t + 1)) ? []
+      : [{ from: from.bbox, to: to.bbox, vector: `${dx},${dy}` }];
   });
   if (!moves.length || moves.some(move => move.vector !== moves[0]!.vector)) return null;
   return moves.reduce((a, b) => (b.from[2] - b.from[0] + 1) * (b.from[3] - b.from[1] + 1) >

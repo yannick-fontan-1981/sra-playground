@@ -35,6 +35,8 @@ Le test de transfert conserve le même code, les mêmes cartes et les mêmes par
 
 La factorisation commence par les contrats récurrents effectivement observés, notamment mesurer un déplacement, vérifier l’objet contrôlé, apprendre un effet de contact, chercher un accès ou distinguer des candidats par un test. Les familles fournissent les observations et les opérations adaptées à leur scène. Les cartes choisissent une primitive selon le besoin, la situation et le mode de réflexion. Une preuve commune doit pouvoir être publiée par plusieurs familles et consommée dans le même format. Le runtime peut ensuite réévaluer la prochaine carte dans l’agenda ou via un workflow SRC. La première extraction utile porte sur la mesure du mouvement avant et après une commande et sa publication sous un format commun, à vérifier sur les retraits KLOT, KA59, LS19 et LS20.
 
+L’exploration après un clic et l’accès à un motif utilisent maintenant la même [mesure des translations](../../src/sic/observed-translation.ts). Elle associe deux composants uniquement si leur masque et leur valeur correspondent de façon unique, puis renvoie les deux positions et le déplacement. Les familles choisissent la zone à observer et interprètent le résultat selon la situation. Le premier lot factorise la mesure. La publication d’une preuve de mouvement indépendante du fournisseur et son utilisation par un autre planificateur restent à mettre en œuvre pour LS19 et LS20.
+
 ## Premiers retours
 
 Sur le moteur de référence, le navigateur confirme les quatre victoires intégrales sous SIC seul. HANO gagne 4 niveaux en 60 commandes, DNOI 6 en 59, DICO 6 en 71 et SYME 6 en 78. La réparation du champ est la seule famille commune à deux de ces parcours, DNOI et SYME.
