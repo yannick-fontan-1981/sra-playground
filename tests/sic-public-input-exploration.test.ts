@@ -47,27 +47,28 @@ test('SIC probes repeated interior markers while requiring independent visible a
   }
 });
 
-test('stationary clicks give a smaller repeated target a turn before other large components', async () => {
+test('stationary clicks and a stationary non-point command give a smaller repeated target a turn', async () => {
   const rows = Array.from({ length: 31 }, (_, y) => Array.from({ length: 61 }, (_, x) => {
     if (y >= 2 && y <= 3 && [2, 6, 10, 14, 18].some(left => left <= x && x <= left + 1)) return 7;
     if (y >= 7 && (y - 7) % 6 < 4 && x % 6 < 4) return 2;
     return 0;
   }));
   const family = createSicPublicInputExploration();
+  const inputs = [{ action_ref: 'ACTION5', data: {} }];
   const observe = (step: number) => measureNativeObservation({
     frame_rows: rows, frame_hash: 'same board', level: 1, levels_completed: 0,
-    available_action_refs: ['ACTION6'], state: 'NOT_FINISHED',
+    available_action_refs: ['ACTION5', 'ACTION6'], state: 'NOT_FINISHED',
   }, step);
   let before = await observe(1);
-  for (let step = 2; step <= 5; step++) {
-    const trial = await family.propose(before, rows, [], 20);
+  for (let step = 2; step <= 6; step++) {
+    const trial = await family.propose(before, rows, inputs, 20);
     assert.ok(trial);
     assert.equal(trial.sicSituationCard.strategy, 'compare_public_input');
     const after = await observe(step);
     await family.record(before, after, trial.actions[0]!, rows, rows, trial, 0, [rows]);
     before = after;
   }
-  const trial = await family.propose(before, rows, [], 20);
+  const trial = await family.propose(before, rows, inputs, 20);
   assert.ok(trial);
   assert.equal(trial.sicSituationCard.strategy, 'test_repeated_target');
   assert.equal(rows[trial.actions[0]!.data.y!]![trial.actions[0]!.data.x!], 7);

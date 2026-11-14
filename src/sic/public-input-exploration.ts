@@ -27,7 +27,7 @@ const graph = compileStrategyGraph({ id: 'understand_public_controls', version: 
     test_marked_edit: [{ fact: 'markedEdit', expected: true, label: 'A visible mark suggests a testable change to the collection' }],
     test_edited_collection: [{ fact: 'verifiedEdit', expected: true, label: 'The expected edit occurred and no mark requests another change' }],
     test_repeated_marker: [{ fact: 'repeatedMarker', expected: true, label: 'Several equal square arrangements of isolated markers are visible, and this marker is untested on this board' }],
-    test_repeated_target: [{ fact: 'repeatedTarget', expected: true, label: 'Larger targets were stationary and a repeated group offers a visually distinct test' }],
+    test_repeated_target: [{ fact: 'repeatedTarget', expected: true, label: 'The available non-point command and several clicks left the board unchanged, and a repeated group offers a distinct test' }],
     compare_public_input: [{ fact: 'untestedHere', expected: true, label: 'An available illustrated input has no return on this board' }],
     revisit_input_frontier: [{ fact: 'observedRoute', expected: true, label: 'Previously observed returns lead to an untested input' }],
   },
@@ -114,7 +114,7 @@ function repeatedInteriorMarkers(parts: ReturnType<typeof geometricComponents>, 
   return markers;
 }
 
-function visibleInputs(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], stationaryClicks: number) {
+function visibleInputs(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], includeRepeated: boolean) {
   const candidates = new Map(inputs.filter(command => /^ACTION[1-5]$/.test(command.action_ref))
     .map(command => [commandKey(command), { command, box: null as NativeBox | null, marker: false, repeated: false }]));
   if (!observation.available_action_refs.includes('ACTION6')) return candidates;
@@ -128,7 +128,7 @@ function visibleInputs(observation: NativeObservation, rows: NativeRows, inputs:
     .sort((a, b) => Number(isMarker(b)) - Number(isMarker(a))
       || (isMarker(a) && isMarker(b) ? toCenter(a) - toCenter(b) : b.area - a.area));
   const usual = new Set(parts.slice(0, clickLimit));
-  const repeated = new Set(stationaryClicks >= 4 ? repeatedInputTargets(parts, usual, 6) : []);
+  const repeated = new Set(includeRepeated ? repeatedInputTargets(parts, usual, 6) : []);
   for (const part of new Set([...parts.filter(isMarker).slice(0, clickLimit), ...repeated, ...usual])) {
     const { bbox, mask } = part;
     const [left, top, right, bottom] = bbox;
@@ -150,7 +150,10 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       if (budget < 1) return null;
       const source = interfaceKey(observation), ref = observation.observation_ref;
       const stationaryClicks = (local.transitions[source] ?? []).filter(edge => edge.destination === source && edge.action.startsWith('ACTION6:'));
-      const candidates = visibleInputs(observation, rows, inputs, stationaryClicks.length);
+      const nonPoint = inputs.filter(command => /^ACTION[1-5]$/.test(command.action_ref));
+      const stationaryCommand = nonPoint.length === 1
+        ? local.transitions[source]?.find(edge => edge.action === nonPoint[0]!.action_ref && edge.destination === source) : undefined;
+      const candidates = visibleInputs(observation, rows, inputs, !!stationaryCommand && stationaryClicks.length >= 4);
       const named = [...candidates.keys()].filter(key => /^ACTION[1-5]$/.test(key));
       const verifiedEdit = local.collectionEdit?.[1] === ref ? local.collectionEdit : undefined;
       const trial = observation.available_action_refs.includes('ACTION6') && named.length === 1
@@ -178,7 +181,7 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       const collectionTrial = frontier === preferred ? trial : null;
       const repeatedTarget = frontier.depth === 0 && offer.repeated;
       const proof: [string, ...string[]] = [ref, ...(frontier.first ? [frontier.first.evidence] : []),
-        ...(repeatedTarget ? stationaryClicks.slice(-4).map(edge => edge.evidence) : []),
+        ...(repeatedTarget && stationaryCommand ? [stationaryCommand.evidence, ...stationaryClicks.slice(-4).map(edge => edge.evidence)] : []),
         ...(clickedControl && probe ? [clickedControl.evidence] : []),
         ...(collectionTrial && verifiedEdit ? [verifiedEdit[0]] : []),
         ...(controlledPiece ? controlledPiece.evidence.filter(item => item !== ref) : []),
