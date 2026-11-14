@@ -2,7 +2,7 @@
 import { geometricComponents } from './v6-native-observer.ts';
 import { framedPatterns } from './v6-geometric-scene.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
-import type { NativeRows } from './v6-native-types.ts';
+import type { NativeBox, NativeRows } from './v6-native-types.ts';
 
 type R = Record<string, any>;
 type P = readonly [number, number];
@@ -88,7 +88,11 @@ export function fitOccludedCatalogue(rows: NativeRows, scene: R, backgrounds: re
 }
 
 export function exposedCatalogueValues(before: NativeRows, after: NativeRows, scene: R): number[] {
-  const [l, t, r, b] = scene.field, color = scene.palette, departed = new Set<number>(), entered = new Set<number>();
+  return exposedViewValues(before, after, scene.field, scene.palette);
+}
+
+export function exposedViewValues(before: NativeRows, after: NativeRows, [l, t, r, b]: NativeBox, color: number): number[] {
+  const departed = new Set<number>(), entered = new Set<number>();
   for (let y = t + 1; y < b; y++) for (let x = l + 1; x < r; x++) {
     if (before[y]![x] === color && after[y]![x] !== color) departed.add(after[y]![x]!);
     if (after[y]![x] === color && before[y]![x] !== color) entered.add(before[y]![x]!);

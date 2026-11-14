@@ -1,11 +1,14 @@
 import { catalogueFieldPixels, catalogueStructure, exposedCatalogueValues, fitOccludedCatalogue,
   measureOccludedCatalogue } from '../logos-engine/v6-occluded-catalogue-observation.ts';
+import type { JsonObject } from '../logos-engine/ir.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
+import { checkRevealedExample, chooseRevealedExample, revealedExampleModule, revealedExampleOperations } from './revealed-example-card.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const catalogueComparisonId = 'sic_catalogue_comparison';
+export const revealedExampleId = 'sic_resolve_observed_ambiguity';
 export const catalogueComparisonStrategies = {
   seek_distinguishing_view: 'Change the view to distinguish possible shapes',
   test_unique_catalogue_match: 'Select the only compatible shape',
@@ -25,7 +28,8 @@ type Scene = { field: NativeBox; palette: number; cards: Card[]; controls: Contr
 type State = { epoch: number; field: NativeBox; backgrounds: number[]; submitted: number[]; candidates: Record<string, number[]>;
   views: string[]; tried: string[]; stopped: boolean; evidence: string[] };
 type Choice = { action: NativeCommand; sprite: NativeBox | null; target: number | null };
-type Proposal = NativeProposal & { local: State; scene: Scene; asked: Choice; attempt: string; strategy: keyof typeof catalogueComparisonStrategies; needId: string };
+type Strategy = keyof typeof catalogueComparisonStrategies;
+type Proposal = NativeProposal & { local: State; scene: Scene; asked: Choice; attempt: string; strategy: Strategy; needId: string; candidateCount: number };
 const key = (value: unknown) => JSON.stringify(value);
 const same = (a: unknown, b: unknown) => key(a) === key(b);
 const directions = ['ACTION3', 'ACTION4', 'ACTION1', 'ACTION2'];
@@ -38,17 +42,35 @@ function fits(rows: NativeRows, scene: Scene, state: State) {
     .filter(id => !prior || prior.includes(id));
 }
 
-export function createSicCatalogueComparison(): NativeFamily<Proposal> {
+export function createSicCatalogueComparison(family = catalogueComparisonId): NativeFamily<Proposal> {
+  const declarative = family === revealedExampleId;
   let state: State | null = null;
+  let choose: NativeProgramHandle | undefined;
+  let verify: NativeProgramHandle | undefined;
   return {
-    id: catalogueComparisonId,
+    id: family,
+    async attachPrograms(registry) {
+      if (!declarative) return;
+      const module = await revealedExampleModule();
+      choose = await registry.registerProgram(chooseRevealedExample, revealedExampleOperations, module);
+      verify = await registry.registerProgram(checkRevealedExample, revealedExampleOperations, module);
+    },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6') || execution?.signal?.aborted) return null;
+      if (declarative && (!choose || (!state && !execution?.readDirectionalView))) return null;
       const scene = measureOccludedCatalogue(rows) as Scene | null;
       if (!scene || scene.cards.length > 8) return null;
       const prior = state?.epoch === observation.level_epoch && same(state.field, scene.field) ? state : null;
+      const acquisition = declarative && !prior ? execution?.readDirectionalView?.(scene.field, scene.palette,
+        [...scene.cards.map(card => card.bbox), ...scene.controls.map(control => control.bbox)]) : null;
+      if (declarative && !prior && !acquisition?.exposed.length) return null;
       const local: State = prior ?? { epoch: observation.level_epoch, field: scene.field, backgrounds: [], submitted: [],
         candidates: {}, views: [], tried: [], stopped: false, evidence: [] };
+      if (acquisition?.exposed.length) {
+        local.backgrounds = [...acquisition.exposed];
+        local.views = [acquisition.command];
+        local.evidence = [acquisition.beforeRef];
+      }
       if (local.stopped || local.tried.length >= 24) return null;
       const context = (action: NativeCommand) => key([observation.frame_hash, action]);
       const seen = (action: NativeCommand) => local.tried.includes(context(action));
@@ -64,23 +86,33 @@ export function createSicCatalogueComparison(): NativeFamily<Proposal> {
         ? { action: point(answer.point), sprite: answer.bbox, target: scene.palette } : null;
       const select: Choice | null = selector ? { action: point(selector.point), sprite: selector.bbox, target: selector.palette } : null;
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
-        views: { value: !!view, evidence }, unique: { value: !!answerChoice, evidence }, next: { value: !!select, evidence },
+      const choices = { seek_distinguishing_view: view, test_unique_catalogue_match: answerChoice, change_catalogue_subject: select };
+      const situation = { views: !!view, unique: !!answerChoice, next: !!select, candidateCount: ids.length,
+        mode: execution?.reasoningMode ?? 'exploration' };
+      const decision = declarative ? await choose?.run({ situation }, { signal: execution?.signal }) : null;
+      const evaluated = declarative ? null : resolveStrategyGraph({ graph, mode: 'active', facts: {
+        views: { value: situation.views, evidence }, unique: { value: situation.unique, evidence }, next: { value: situation.next, evidence },
       }, planners: { seek_distinguishing_view: () => view, test_unique_catalogue_match: () => answerChoice, change_catalogue_subject: () => select } });
-      if (!selected) return null;
-      const strategy = selected.id, asked = selected.plan, label = catalogueComparisonStrategies[strategy], parent = 'G_official_completion';
+      const requested = decision?.result ?? evaluated?.selected?.id;
+      if (typeof requested !== 'string' || !Object.hasOwn(choices, requested)) return null;
+      const strategy = requested as Strategy, asked = choices[strategy];
+      if (!asked) return null;
+      const label = catalogueComparisonStrategies[strategy], parent = 'G_official_completion';
       const objective = { kind: 'identify_visible_shape_from_catalogue', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['partial_field', 'catalogue_shapes'], parentObjective: parent, satisfactionContract: 'official_progress_after_submitting_compatible_shapes' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = `catalogue-comparison:${need.id}`;
       const actions = [asked.action];
       const binding = asked.target !== null && await ObservedInputDomain.makeLocusWitness(observation, rows,
         [asked.action.data.x!, asked.action.data.y!], { reason: label, evidence });
-      return { status: 'proposed', kind: catalogueComparisonId, actions, local, scene, asked, attempt: context(asked.action), strategy, needId: need.id,
+      return { status: 'proposed', kind: family, actions, local, scene, asked, attempt: context(asked.action), strategy,
+        needId: need.id, candidateCount: ids.length,
         steps: [{ action: asked.action, expected_after: null, ...(binding ? { point_binding: binding } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation } } : {}),
         sicSituationCard: { strategy, need: 'Identify the shape that is partly hidden', mode: answer ? 'solving' : 'exploration',
           situation: local.submitted.includes(scene.palette) ? label : `${ids.length} visible cards still fit the measured evidence. ${label}.`,
-          agenda: entries, evidence, field: scene.field, choice: asked.sprite, cards: ids.map(index => scene.cards[index]!.bbox).slice(0, 4) },
+          agenda: evaluated?.entries ?? [], evidence, field: scene.field, choice: asked.sprite, cards: ids.map(index => scene.cards[index]!.bbox).slice(0, 4) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },
@@ -91,9 +123,25 @@ export function createSicCatalogueComparison(): NativeFamily<Proposal> {
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'catalogue_and_field_bound' : 'catalogue_view_changed' };
     },
-    after(proposal, _index, before, after) {
+    async after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (verify && proposal.strategy !== 'test_unique_catalogue_match') {
+        const { local, scene } = proposal;
+        const returned = measureOccludedCatalogue(second) as Scene | null;
+        const comparable = !!returned && same(scene.field, returned.field);
+        const outcome: JsonObject = proposal.strategy === 'change_catalogue_subject'
+          ? { comparable, subjectSelected: returned?.palette === proposal.asked.target }
+          : returned && comparable && same(catalogueStructure(scene), catalogueStructure(returned)) ? {
+            comparable, beforeCount: proposal.candidateCount,
+            afterCount: fits(second, returned, { ...local, backgrounds: [...new Set([...local.backgrounds, ...exposedCatalogueValues(first, second, scene)])] }).length,
+          } : { comparable: false };
+        const checked = await verify.run({ outcome });
+        const matched = typeof checked.result === 'boolean' ? checked.result : null;
+        return { matched, seal_prefix: true, reason: matched === true ? 'compared_view_supported' : matched === false
+          ? 'compared_view_contradicted' : 'compared_view_unverified',
+          src_check: { workflow: checked.receipt.workflow, hash: checked.receipt.src_hash, ...outcome } };
+      }
       return { matched: null, seal_prefix: true, reason: 'compare_partial_view_and_catalogue' };
     },
     record(before, after, issued, first, second, proposal) {

@@ -86,7 +86,7 @@ import { radialConnectionId, radialConnectionStrategies } from './radial-connect
 import { invitedCaptureId, invitedCaptureStrategies } from './invited-capture.ts';
 import { branchAlignmentId, branchAlignmentStrategies } from './branch-alignment.ts';
 import { feedbackTrialId, feedbackTrialStrategies } from './feedback-trial.ts';
-import { catalogueComparisonId, catalogueComparisonStrategies } from './catalogue-comparison.ts';
+import { catalogueComparisonId, catalogueComparisonStrategies, revealedExampleId } from './catalogue-comparison.ts';
 import { learnReceptionAccessId, receptionAccessId, receptionAccessStrategies } from './reception-access.ts';
 import { markerCoverageId, markerCoverageStrategies } from './marker-coverage.ts';
 import { frontierStrategies, isFrontierStrategy, type FrontierStrategy } from './frontier-strategy.ts';
@@ -493,7 +493,8 @@ export function readNativeResolution(agent: {
                                       : family === panelMatchingId ? panelMatchingStrategies : family === crossingRowsId ? crossingRowsStrategies
                                         : family === traceCoverageId ? traceCoverageStrategies : family === radialConnectionId ? radialConnectionStrategies
                                           : family === invitedCaptureId ? invitedCaptureStrategies : family === branchAlignmentId ? branchAlignmentStrategies
-                                            : family === feedbackTrialId ? feedbackTrialStrategies : family === catalogueComparisonId ? catalogueComparisonStrategies
+                                            : family === feedbackTrialId ? feedbackTrialStrategies
+                                            : family === catalogueComparisonId || family === revealedExampleId ? catalogueComparisonStrategies
                                               : family === receptionAccessId ? receptionAccessStrategies : family === markerCoverageId ? markerCoverageStrategies : family === framedReceptionId ? framedReceptionStrategies : family === windowRelationId ? windowRelationStrategies : (family === animationContactId || family === learnAnimationContactId) ? animationContactStrategies : family === reflectedPlacementId ? reflectedPlacementStrategies : family === materialAssemblyId ? materialAssemblyStrategies : family === coupledMotionId ? coupledMotionStrategies : family === materialRouteId ? materialRouteStrategies : family === inventoryAccessId || family === replayAccessId || family === orientedDeliveryId || family === indicatedJumpId || family === highlightedRouteId || family === pairedPassageId || family === seatedContactId || family === switchedSurfaceId || family === markedGaugeId || family === reactiveTargetId || family === pairedChannelsId || family === pointReachId || family === linkedMidpointId || family === excavateDescentId || family === gatedCascadeId || family === layeredFitId || family === learnLayeredFitId || family === litRouteId || family === pivotCargoId || family === nestedPassageId || family === translateCoupledPiecesId || family === stagedMarksId || family === moveMaskedPiecesId || family === linkOpeningsId || family === reproduceCueId || family === learnAnimatedCueId || family === navigateRevealedGridId || family === arrangeTurnPostsId || family === learnSupportMovesId || family === learnScopeEffectsId ? inventoryAccessStrategies : family === learnCorrespondenceId ? learnCorrespondenceStrategies : null;
   const card = planReceipt?.authority === 'sicOnly' && labels ? record(proposal?.sicSituationCard) : null;
   const isSituationStrategy = (id: unknown): id is keyof typeof situationStrategies =>
@@ -666,7 +667,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && family === catalogueComparisonId) {
+  if (situationCard && (family === catalogueComparisonId || family === revealedExampleId)) {
     for (const [field, label] of [['field', 'Partial view'], ['choice', 'Current choice']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });

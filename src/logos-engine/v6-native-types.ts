@@ -132,6 +132,12 @@ export interface NativeExecution {
   readonly reasoningMode?: import('../sic/reasoning-mode.ts').ReasoningMode;
   readonly observedControlledMotion?: import('../sic/public-input-exploration.ts').ControlledMotion;
   readonly readDirectionalMotion?: () => import('../sic/observed-translation.ts').DirectionalMotion | null;
+  readonly readDirectionalView?: (field: NativeBox, focus: number, references: readonly NativeBox[]) => {
+    readonly beforeRef: string;
+    readonly afterRef: string;
+    readonly command: string;
+    readonly exposed: readonly number[];
+  } | null;
   readonly readClickFields?: () => import('../sic/field-isolation.ts').ClickFieldEvidence | null;
   readonly readClickRegions?: (boxes: readonly NativeBox[]) => import('../sic/observed-click-regions.ts').ClickRegionEvidence | null;
   readonly readClickRegionChanges?: (boxes: readonly NativeBox[]) => import('../sic/observed-click-regions.ts').ClickRegionChanges | null;

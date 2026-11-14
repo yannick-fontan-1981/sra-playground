@@ -122,7 +122,8 @@ import { createSicRadialConnection } from '../sic/radial-connection.ts';
 import { createSicInvitedCapture } from '../sic/invited-capture.ts';
 import { createSicBranchAlignment } from '../sic/branch-alignment.ts';
 import { createSicFeedbackTrial } from '../sic/feedback-trial.ts';
-import { createSicCatalogueComparison } from '../sic/catalogue-comparison.ts';
+import { createSicCatalogueComparison, revealedExampleId } from '../sic/catalogue-comparison.ts';
+import { exposedViewValues } from './v6-occluded-catalogue-observation.ts';
 import { createSicReceptionAccess, learnReceptionAccessId } from '../sic/reception-access.ts';
 import { createSicMarkerCoverage } from '../sic/marker-coverage.ts';
 import { standalonePlanningGroups } from '../sic/standalone-families.ts';
@@ -179,7 +180,7 @@ import { NativeEditRejected } from './v6-native-types.ts';
 import { NativeCompositionAuthority } from './v6-native-authority.ts';
 import { projectNativeClickReturn, type NativeClickReturn } from './v6-native-click-return.ts';
 import type {
-  NativeAfterResult, NativeBudgets, NativeCommand, NativeExecution, NativeFamily, NativeInitialize, NativeObservation, NativeRows, NativeOutcome, NativeRecordResult,
+  NativeAfterResult, NativeBox, NativeBudgets, NativeCommand, NativeExecution, NativeFamily, NativeInitialize, NativeObservation, NativeRows, NativeOutcome, NativeRecordResult,
   NativeAuthorizationIdentity, NativeGraphEdit, NativeProposal, NativePublicObservation, NativeRecord, NativeRuntimeSnapshot, NativeRuntimeYield, NativeSelectionGroup, NativeV6Backend, SicActionCoverage,
 } from './v6-native-types.ts';
 
@@ -368,6 +369,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private familyAgendaReceipt: FamilyAgendaReceipt | null = null;
   private latestReasoningReturn: { level: number; matched: boolean | null } | null = null;
   private readDirectionalMotion?: NativeExecution['readDirectionalMotion'];
+  private readDirectionalView?: NativeExecution['readDirectionalView'];
   private readClickFields?: NativeExecution['readClickFields'];
   private readClickRegions?: NativeExecution['readClickRegions'];
   private readClickRegionChanges?: NativeExecution['readClickRegionChanges'];
@@ -735,6 +737,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.planning = { execution: { ...this.currentExecution(execution), ...(reasoning ? { reasoningMode: reasoning.mode } : {}),
       ...(motion ? { observedControlledMotion: motion } : {}),
       ...(this.readDirectionalMotion ? { readDirectionalMotion: this.readDirectionalMotion } : {}),
+      ...(this.readDirectionalView ? { readDirectionalView: this.readDirectionalView } : {}),
       ...(this.readClickFields ? { readClickFields: this.readClickFields } : {}),
       ...(this.readClickRegions ? { readClickRegions: this.readClickRegions } : {}),
       ...(this.readClickRegionChanges ? { readClickRegionChanges: this.readClickRegionChanges } : {}),
@@ -1428,6 +1431,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       let result = await prefix.family.after(prefix.proposal, prefix.index, before, after, first.frame_rows, this.current!.frame_rows);
       const publicBoundary = first.level !== this.current!.level || first.levels_completed !== this.current!.levels_completed || ['WIN', 'GAME_OVER'].includes(this.current!.state);
       this.readDirectionalMotion = undefined;
+      this.readDirectionalView = undefined;
       this.readClickFields = undefined;
       this.readClickRegions = undefined;
       this.readClickRegionChanges = undefined;
@@ -1443,6 +1447,15 @@ export class NativeV6Runtime implements NativeV6Backend {
         let receipt: DirectionalMotion | undefined;
         this.readDirectionalMotion = () => this.observation?.observation_ref === context.afterRef
           ? receipt ??= freeze(measureDirectionalMotion(first.frame_rows, rows, context)) : null;
+        this.readDirectionalView = (field, focus, references) => {
+          const [left, top, right, bottom] = field;
+          const stableRegions: NativeBox[] = [[left, top, right, top], [left, bottom, right, bottom],
+            [left, top, left, bottom], [right, top, right, bottom], ...references];
+          if (this.observation?.observation_ref !== context.afterRef ||
+            stableRegions.some(box => regionChanged(first.frame_rows, rows, box))) return null;
+          return freeze({ beforeRef: context.beforeRef, afterRef: context.afterRef, command: context.command,
+            exposed: exposedViewValues(first.frame_rows, rows, field, focus) });
+        };
       }
       if (authority === 'sicOnly' && !publicBoundary && outcome.command.action_ref === 'ACTION6' && first.frame_hash !== this.current!.frame_hash) {
         const rows = this.current!.frame_rows;
@@ -2554,7 +2567,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const sequence = (configuration.window_constraints as R).labeled_sequence_composition.labeled_sequence_question;
     const groups = standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 119, groups, symmetry, policy, sequence, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 120, groups, symmetry, policy, sequence, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
@@ -2565,7 +2578,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       createSicMarkedCollection(), createSicSlotTransfer(), createSicRemoteSupportRoute(), createSicRemoteSupportRoute(learnRemoteAccessId), createSicOccurrenceRecall(),
       createSicSlotPermutation(), createSicSurfaceCopy(), createSicCodeRoute(), createSicProgramOrigin(), createSicProgramOrigin(learnProgramOriginId), createSicProfileTransfer(),
       createSicOrderedReplenishment(), createSicPreviewPlacement(), createSicSymbolContribution(), createSicMarkedLattice(),
-      createSicQueuedPlacement(), createSicLegendRecolor(), createSicLegendRecolor(matchExampleId), createSicVisualPattern(), createSicFacetGrowth(), createSicFacetGrowth(learnFacetGrowthId), createSicChartRoute(), createSicPopulationPlacement(), createSicCarryToFrame(), createSicPortPairing(), createSicFramedSearch(), createSicGlyphEditing(), createSicDisplayCoupling(), createSicContrastControls(), createSicFieldIsolation(), createSicFieldIsolation(learnFieldIsolationId), createSicDirectionalReception(), createSicWindowCoverage(), createSicPanelMatching(), createSicCrossingRows(), createSicTraceCoverage(), createSicRadialConnection(), createSicInvitedCapture(), createSicBranchAlignment(), createSicFeedbackTrial(), createSicCatalogueComparison(), createSicReceptionAccess(), createSicMarkerCoverage(), createSicFramedReception(), createSicWindowRelation(), createSicAnimationContact(), createSicAnimationContact(learnAnimationContactId), createSicReflectedPlacement(), createSicMaterialAssembly(), createSicTranslateCoupledPieces(), createSicCoupledMotion(), createSicMaterialRoute(), createSicInventoryAccess(), createSicReplayAccess(), createSicOrientedDelivery(), createSicIndicatedJump(), createSicHighlightedRoute(), createSicPairedPassage(), createSicSeatedContact(), createSicSwitchedSurface(), createSicMarkedGauge(), createSicReactiveTarget(), createSicPairedChannels(), createSicPointReach(), createSicLinkedMidpoint(), createSicExcavateDescent(), createSicGatedCascade(), createSicLayeredFit(), createSicLayeredFit(learnLayeredFitId), createSicLitRoute(), createSicPivotCargo(), createSicMoveMaskedPieces(), createSicNestedPassage(), createSicLinkOpenings(), createSicReproduceCue(), createSicReproduceCue(learnAnimatedCueId), createSicNavigateRevealedGrid(), createSicArrangeTurnPosts(), createSicCavityAccess(), createSicLearnCorrespondence(), createSicPublicInputExploration(), createSicContrastControls(contrastProbeId),
+      createSicQueuedPlacement(), createSicLegendRecolor(), createSicLegendRecolor(matchExampleId), createSicVisualPattern(), createSicFacetGrowth(), createSicFacetGrowth(learnFacetGrowthId), createSicChartRoute(), createSicPopulationPlacement(), createSicCarryToFrame(), createSicPortPairing(), createSicFramedSearch(), createSicGlyphEditing(), createSicDisplayCoupling(), createSicContrastControls(), createSicFieldIsolation(), createSicFieldIsolation(learnFieldIsolationId), createSicDirectionalReception(), createSicWindowCoverage(), createSicPanelMatching(), createSicCrossingRows(), createSicTraceCoverage(), createSicRadialConnection(), createSicInvitedCapture(), createSicBranchAlignment(), createSicFeedbackTrial(), createSicCatalogueComparison(), createSicCatalogueComparison(revealedExampleId), createSicReceptionAccess(), createSicMarkerCoverage(), createSicFramedReception(), createSicWindowRelation(), createSicAnimationContact(), createSicAnimationContact(learnAnimationContactId), createSicReflectedPlacement(), createSicMaterialAssembly(), createSicTranslateCoupledPieces(), createSicCoupledMotion(), createSicMaterialRoute(), createSicInventoryAccess(), createSicReplayAccess(), createSicOrientedDelivery(), createSicIndicatedJump(), createSicHighlightedRoute(), createSicPairedPassage(), createSicSeatedContact(), createSicSwitchedSurface(), createSicMarkedGauge(), createSicReactiveTarget(), createSicPairedChannels(), createSicPointReach(), createSicLinkedMidpoint(), createSicExcavateDescent(), createSicGatedCascade(), createSicLayeredFit(), createSicLayeredFit(learnLayeredFitId), createSicLitRoute(), createSicPivotCargo(), createSicMoveMaskedPieces(), createSicNestedPassage(), createSicLinkOpenings(), createSicReproduceCue(), createSicReproduceCue(learnAnimatedCueId), createSicNavigateRevealedGrid(), createSicArrangeTurnPosts(), createSicCavityAccess(), createSicLearnCorrespondence(), createSicPublicInputExploration(), createSicContrastControls(contrastProbeId),
     ],
       authorityPolicy: loaded.common, familyAgenda: 'active', adaptiveReasoning: true, maxPointOccurrences: loaded.common.input_domain.max_point_occurrences,
       ...(options.now ? { now: options.now } : {}) });
