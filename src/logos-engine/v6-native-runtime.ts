@@ -1434,7 +1434,8 @@ export class NativeV6Runtime implements NativeV6Backend {
         ? established : observedInformation || observedView || previous?.status === 'observed' ? 'observed' : boundary ? 'expired'
           : established === 'access_interrupted' || outcome.matched === false ? 'refuted' : 'assigned';
       needWrites.push(needCheckpoint(need, status, lastReturn.after.observation_ref, plan.id,
-        previous && typeof previous.firstPlan === 'string' ? { firstPlan: previous.firstPlan } : null));
+        previous && typeof previous.firstPlan === 'string' ? { firstPlan: previous.firstPlan,
+          evidence: Array.isArray(previous.evidence) ? previous.evidence.filter((ref): ref is string => typeof ref === 'string') : [] } : null));
     }
     const contactScope: NativeStoreWrite[] = [];
     if (prefix.family.id === 'animated_contact' && prefix.proposal.kind === 'measured_animated_contact' && prefix.witnessed.length === 1) {

@@ -23,8 +23,9 @@ export function assignedNeed(value: unknown): AssignedNeed | null {
 /** The native graph owns the need through the same commit as the witnessed
  * plan. Repeated assignments revise a single node with a stable identity. */
 export function needCheckpoint(need: AssignedNeed, status: Status, observation: string, plan: string,
-  previous: { readonly firstPlan?: string } | null): NativeStoreWrite {
+  previous: { readonly firstPlan?: string; readonly evidence?: readonly string[] } | null): NativeStoreWrite {
+  const evidence = [...new Set([...(previous?.evidence ?? []).slice(0, 1), ...need.evidence, observation])];
   return { id: need.id, kind: 'component_state', component: 'sic_need', status: status === 'assigned' ? 'active' : 'observed',
-    evidence: [...new Set([...need.evidence, observation])],
-    value: { ...need, status, firstPlan: previous?.firstPlan ?? plan, latestPlan: plan, latestObservation: observation } };
+    evidence,
+    value: { ...need, evidence, status, firstPlan: previous?.firstPlan ?? plan, latestPlan: plan, latestObservation: observation } };
 }
