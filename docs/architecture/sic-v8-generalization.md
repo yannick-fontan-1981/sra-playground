@@ -394,13 +394,15 @@ La campagne commune GIGO et PRTL confirme **38/100** niveaux 1 après retrait. L
 
 Avec `sic_radial_connection` retirée et l’exploration publique active, **PIPE gagne en quatre clics SIC seul**. La carte SRC `sic.verify_observed_interaction.choose` choisit P05 pour mesurer le sens du quart de tour sur une tuile qui distingue les deux sens. Elle choisit P02 pour les trois clics suivants. Le calcul des dispositions connectées reste dans l’assembleur de ports TypeScript partagé. Chaque retour confirme les ouvertures attendues sur la tuile et vérifie les ouvertures des voisines, ou établit le gain officiel. Les commandes et retours reproduisent la référence, empreinte `9537f4eff9c22c027b3376d3a93cf17b4eb40cbbcb908ddecf23691b0d277c0a`.
 
-Le gain en quatre clics tient avec un nom neutre et une palette permutée. Désactiver P02 dans le graphe après le premier clic laisse une autre famille SIC choisir trois entrées directionnelles. Le niveau reste ouvert au même budget. Cette vérification porte sur PIPE. Le transfert de la carte à une autre interaction reste à démontrer.
+Le gain en quatre clics tient avec un nom neutre et une palette permutée. Désactiver P02 dans le graphe après le premier clic laisse une autre famille SIC choisir trois entrées directionnelles. Le niveau reste ouvert au même budget.
 
 ### Réutiliser une commande observée pour régler une capacité
 
 Avec `sic_window_coverage` retirée, **HPDL gagne en sept commandes SIC seul**. Les trois premières viennent de l’exploration de la famille d’accès. Les deux premières n’affectent pas les réglages. Au troisième retour, une commande directionnelle fait passer la capacité du premier récepteur de 1 à 4. La séquence, les domaines et les autres réglages se conservent. La carte SRC `sic.verify_observed_interaction.choose`, déjà utilisée dans PIPE, choisit P02 pour deux nouveaux essais. Les capacités prévues de 3 puis 2 sont confirmées. P05 teste ensuite le filtre du second récepteur et lance le programme. Le fournisseur TypeScript partagé calcule les réglages compatibles avec la séquence et vérifie chaque modification.
 
 Le nom neutre et la palette permutée conservent le gain. Désactiver P02 après l’acquisition rend les deux décisions suivantes à la famille d’accès. Le parcours change et gagne également en sept commandes. Le parcours de référence gagne en trois commandes. Empreinte après retrait `b53d1e97bb943284ec2969334245d6bba994f0647dc3aac4106ede8e423c4b0b`.
+
+Les campagnes PIPE et HPDL portent le total qualifié à **40/100 niveaux 1** après retrait, en 451 commandes SIC seul, dont 109 choisies par le SRC. L’exploration publique reste active dans 38 de ces 40 essais. REGN et TICT conservent leur gain dans les essais où l’exploration est retirée. Les 100 niveaux 1 en usage normal et les quatre jeux complets avec et sans retrait reproduisent leurs commandes et retours de référence.
 
 ### Apprendre séparément la sélection et le dépôt
 
