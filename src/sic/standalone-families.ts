@@ -7,5 +7,5 @@ import { publicInputExplorationId } from './public-input-exploration.ts';
 import { framedContactId } from './framed-contact.ts';
 
 export const standalonePlanningFamilies: readonly string[] = Object.freeze([
-  fieldRepairId, orderedContactId, supportTransferId, subsetExperimentId, cavityAccessId, framedContactId, publicInputExplorationId,
+  fieldRepairId, orderedContactId, supportTransferId, subsetExperimentId, framedContactId, cavityAccessId, publicInputExplorationId,
 ]);
