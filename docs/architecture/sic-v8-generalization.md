@@ -180,4 +180,6 @@ SC25 gagne le niveau 1 en 17 commandes et 7,94 s avec `sic_reproduce_cue` retir�
 
 Les 17 commandes suffisent également sous une palette permutée avec un nom de jeu neutre. La détection du panneau et le planificateur de préparation et d’accès restent partagés avec la famille retirée. L’essai atteste le passage de la preuve d’animation entre familles sur SC25.
 
+Les 100 niveaux 1 repassent en configuration normale avec les mêmes 1 250 commandes et les mêmes retours. Les 16 victoires avec retrait sont vérifiées sur ce runtime. DICO, DNOI, HANO et SYME terminent avec et sans retrait. Avec retrait, leurs commandes et retours sont identiques à la référence correspondante.
+
 Sur STCK, le rejeu avec `sic_marked_collection` retirée reste à zéro après 40 commandes. Un contre-essai hors agent vérifie que les deux éditions observées dans le rejeu normal suivies de Space gagnent depuis le plateau initial ou après un premier Space. Après le premier clic d’exploration qui retire une carte non marquée, la même suite ne gagne plus. Le prochain repli doit donc mieux choisir l’expérience d’édition avant de modifier la collection.
