@@ -1,5 +1,6 @@
 import { BrowserGameRuntime } from '../../src/runtime/browser-games.ts';
 import { BrowserV6Agent, type V6AgentSnapshot } from '../../src/runtime/v6-agent.ts';
+import { readNativeResolution } from '../../src/sic/native-resolution.ts';
 import { defaultRecoveryPack, type RecoveryPack } from '../../src/sic/active-recovery.ts';
 import { recoveryRevision } from '../../src/sic/recovery-pack.ts';
 import type { AgentAction } from '../../src/runtime/contracts.ts';
@@ -21,16 +22,24 @@ async function hash(value: unknown) {
   return Array.from(new Uint8Array(bytes), byte => byte.toString(16).padStart(2, '0')).join('');
 }
 
-async function run(runtime: BrowserGameRuntime, code: string, target: number, pack: RecoveryPack) {
+async function run(runtime: BrowserGameRuntime, code: string, target: number, pack: RecoveryPack, maxActions?: number) {
   let board = await runtime.load(code, 1);
   let state: V6AgentSnapshot | undefined;
   const trace: { action: AgentAction; packet: string }[] = [];
+  const information: { sequence: number; strategy: string; predictions: number | null; result?: NonNullable<ReturnType<typeof readNativeResolution>>['outcome'] }[] = [];
   const agent = new BrowserV6Agent({
     getObservation: () => board,
     canDispatch: () => true,
     recoveryConfiguration: () => pack,
     onState: snapshot => { state = snapshot; },
+    ...(maxActions === undefined ? {} : { maxSessionActions: maxActions }),
+    onAcquired: snapshot => {
+      const last = information.at(-1);
+      if (last?.sequence === snapshot.sequence) last.result = readNativeResolution(snapshot)?.outcome;
+    },
     dispatch: async action => {
+      const strategy = state ? readNativeResolution(state)?.informationStrategy : undefined;
+      if (strategy) information.push({ sequence: trace.length + 1, strategy: strategy.title, predictions: strategy.distinctOutcomes });
       const started = performance.now();
       board = await runtime.action(action.id, action.id === 6 ? action.data : undefined);
       const executionMs = performance.now() - started;
@@ -46,7 +55,7 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number, pa
       if (board.levelsCompleted <= level || state?.status === 'stopped') break;
     }
     return { actions: trace.length, levels: board.levelsCompleted, stop: state?.reason ?? null, trace,
-      coverage: state?.sicActionCoverage, selection: state?.sicFamilySelection };
+      coverage: state?.sicActionCoverage, selection: state?.sicFamilySelection, information };
   } finally {
     agent.dispose();
   }
@@ -148,11 +157,27 @@ async function qualifyFamilyAgenda() {
   }
 }
 
+async function findInformationExperiments() {
+  const runtime = new BrowserGameRuntime();
+  const results = [];
+  try {
+    for (const game of ['LS20', 'AR25', 'LP85', 'TR87', 'CATR', 'SMLP']) {
+      output.textContent = JSON.stringify({ status: 'running', game, results }, null, 2);
+      const { actions, levels, information } = await run(runtime, game, 2, defaultRecoveryPack, 32);
+      results.push({ game, actions, levels, information: information.map(({ result, ...item }) => ({ ...item, outcome: result?.informationOutcome })) });
+      if (information.some(item => item.result?.informationOutcome)) break;
+    }
+    output.textContent = JSON.stringify({ status: 'completed', results }, null, 2);
+  } finally {
+    runtime.dispose();
+  }
+}
+
 start.addEventListener('click', async () => {
   start.disabled = true;
   try {
     const parameters = new URLSearchParams(location.search);
-    await (parameters.has('family') ? qualifyFamilyAgenda() : parameters.has('coverage') ? qualifyActionCoverage()
+    await (parameters.has('information') ? findInformationExperiments() : parameters.has('family') ? qualifyFamilyAgenda() : parameters.has('coverage') ? qualifyActionCoverage()
       : parameters.has('authored') ? qualifyAuthoredRule() : qualify());
   } catch (error) {
     output.textContent = JSON.stringify({ status: 'failed', error: error instanceof Error ? error.message : String(error) });
