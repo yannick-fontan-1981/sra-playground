@@ -79,3 +79,5 @@ Le deuxième tour a validé le niveau 2 pour chacun des trois jeux admissibles. 
 Au troisième tour, SYME gagne trois niveaux en 36 commandes et DNOI en 17. SK48 s’arrête au niveau 3 après 63 commandes, avec deux niveaux gagnés.
 
 Avec le transfert ordonné, le tour du niveau 1 à `d8e78990` fait passer la couverture à **4 sur 100**. SK48, HANO, DNOI et SYME atteignent le niveau 2. Les 100 parties ont terminé le contrôle d’attribution des plans. HANO a aussi été rejoué jusqu’à sa victoire officielle.
+
+Au commit `e1947e92`, le rejeu du niveau 1 sur les 100 jeux porte le total à **5 sur 100** avec DICO. Le prochain besoin examiné est le déplacement jusqu’à une cavité sur AS66. Les premiers contrastes publics distinguent la pièce mobile du décor et montrent que le trajet dépend des obstacles et des arrêts observés.
