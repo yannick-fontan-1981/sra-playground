@@ -111,12 +111,30 @@ function nextCell(local: State) {
       queue.push({ at: from, cost: nextCost });
     }
   }
+  const measured = Object.values(effects).map(effect => effect.vector.join(','));
+  const conventional = directions.every(([input, dx, dy]) => !effects[input] || effects[input].vector.join(',') === `${dx},${dy}`);
+  const penalty = cost.get(reading.at) ?? grid.count;
+  const hazard = movingObstacle(reading, grid);
   const options = directions.flatMap(([input, dx, dy]) => {
-    const effect = effects[input], target = advance(grid, reading.at, effect?.vector ?? [dx, dy]);
-    if (target === null || !cost.has(target) || refused.includes(`${reading.at}:${input}`)) return [];
-    return [{ input, target, effect, cost: cost.get(target)! + (terrain[target] ? 0 : 2) + (risk.includes(target) ? 8 : 0) }];
+    if (refused.includes(`${reading.at}:${input}`)) return [];
+    const effect = effects[input];
+    const preferred: NativePoint = [dx, dy];
+    const possible = effect ? [effect.vector] : directions.flatMap(([, x, y]) => measured.includes(`${x},${y}`) ? [] : [[x, y] as NativePoint]);
+    const trials = possible.map(vector => {
+      const target = advance(grid, reading.at, vector);
+      const score = target !== null && cost.has(target) ? cost.get(target)! + (terrain[target] ? 0 : 2) + (risk.includes(target) ? 8 : 0) : penalty + 3;
+      return { target, score, preferred: vector.join(',') === preferred.join(',') };
+    });
+    const reachable = trials.filter((trial): trial is typeof trial & { target: number } => trial.target !== null && cost.has(trial.target));
+    if (!reachable.length) return [];
+    const nominal = conventional && reachable.find(trial => trial.preferred);
+    const target = (nominal || reachable.sort((a, b) => a.score - b.score)[0]!).target;
+    const average = trials.reduce((sum, trial) => sum + trial.score + (trial.target === hazard && hazard !== null ? 12 : 0), 0) / trials.length;
+    const score = nominal ? nominal.score : !effect && (cost.get(target) ?? Infinity) < penalty
+      ? Math.min(average, reachable[0]!.score + 1) : average;
+    return [{ input, target, effect, score }];
   });
-  return options.sort((a, b) => a.cost - b.cost)[0] ?? null;
+  return options.sort((a, b) => a.score - b.score)[0] ?? null;
 }
 
 function choose(local: State, canReveal: boolean): Choice | null {
