@@ -45,7 +45,7 @@ export function bindMissingControlTrial(proposal: TrialProposal, situation: Miss
     action: command.action_ref, observationRef: situation.observationRef, evidence: assessment.evidence ?? [], agenda: assessment });
 }
 
-export function evaluateMissingControl(proposal: TrialProposal, action: string, situation: MissingControlSituation) {
+export function evaluateMissingControl(proposal: TrialProposal, action: string, situation: MissingControlSituation): AgendaEntry<typeof missingControlStrategy> {
   const current = proposal.binding?.observation_ref === situation.observationRef && situation.evidence.includes(situation.observationRef);
   const evidence: [string, ...string[]] = [situation.observationRef, ...situation.evidence.filter(ref => ref !== situation.observationRef)];
   const fact = (value: boolean): StrategyFact => current ? { value, evidence } : { value: 'unknown' };
