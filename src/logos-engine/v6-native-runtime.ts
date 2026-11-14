@@ -73,6 +73,7 @@ import { createSicWindowRelation } from '../sic/window-relation.ts';
 import { createSicAnimationContact } from '../sic/animation-contact.ts';
 import { createSicReflectedPlacement } from '../sic/reflected-placement.ts';
 import { createSicMaterialAssembly } from '../sic/material-assembly.ts';
+import { createSicCoupledMotion } from '../sic/coupled-motion.ts';
 import { createSicGlyphEditing } from '../sic/glyph-editing.ts';
 import { createSicFieldIsolation } from '../sic/field-isolation.ts';
 import { createSicDirectionalReception } from '../sic/directional-reception.ts';
@@ -2418,7 +2419,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const sequence = (configuration.window_constraints as R).labeled_sequence_composition.labeled_sequence_question;
     const groups = standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 64, groups, symmetry, policy, sequence, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 65, groups, symmetry, policy, sequence, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
@@ -2428,7 +2429,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       createSicMarkedCollection(), createSicSlotTransfer(), createSicRemoteSupportRoute(), createSicOccurrenceRecall(),
       createSicSlotPermutation(), createSicSurfaceCopy(), createSicCodeRoute(), createSicProgramOrigin(), createSicProfileTransfer(),
       createSicOrderedReplenishment(), createSicPreviewPlacement(), createSicSymbolContribution(), createSicMarkedLattice(),
-      createSicQueuedPlacement(), createSicLegendRecolor(), createSicVisualPattern(), createSicFacetGrowth(), createSicChartRoute(), createSicPopulationPlacement(), createSicCarryToFrame(), createSicPortPairing(), createSicFramedSearch(), createSicGlyphEditing(), createSicDisplayCoupling(), createSicFieldIsolation(), createSicDirectionalReception(), createSicWindowCoverage(), createSicPanelMatching(), createSicCrossingRows(), createSicTraceCoverage(), createSicRadialConnection(), createSicInvitedCapture(), createSicBranchAlignment(), createSicFeedbackTrial(), createSicCatalogueComparison(), createSicReceptionAccess(), createSicMarkerCoverage(), createSicFramedReception(), createSicWindowRelation(), createSicAnimationContact(), createSicReflectedPlacement(), createSicMaterialAssembly(), createSicCavityAccess(), createSicPublicInputExploration(),
+      createSicQueuedPlacement(), createSicLegendRecolor(), createSicVisualPattern(), createSicFacetGrowth(), createSicChartRoute(), createSicPopulationPlacement(), createSicCarryToFrame(), createSicPortPairing(), createSicFramedSearch(), createSicGlyphEditing(), createSicDisplayCoupling(), createSicFieldIsolation(), createSicDirectionalReception(), createSicWindowCoverage(), createSicPanelMatching(), createSicCrossingRows(), createSicTraceCoverage(), createSicRadialConnection(), createSicInvitedCapture(), createSicBranchAlignment(), createSicFeedbackTrial(), createSicCatalogueComparison(), createSicReceptionAccess(), createSicMarkerCoverage(), createSicFramedReception(), createSicWindowRelation(), createSicAnimationContact(), createSicReflectedPlacement(), createSicMaterialAssembly(), createSicCoupledMotion(), createSicCavityAccess(), createSicPublicInputExploration(),
     ],
       authorityPolicy: loaded.common, familyAgenda: 'active', maxPointOccurrences: loaded.common.input_domain.max_point_occurrences,
       ...(options.now ? { now: options.now } : {}) });

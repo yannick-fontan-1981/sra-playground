@@ -42,6 +42,7 @@ import { windowRelationId, windowRelationStrategies } from './window-relation.ts
 import { animationContactId, animationContactStrategies } from './animation-contact.ts';
 import { reflectedPlacementId, reflectedPlacementStrategies } from './reflected-placement.ts';
 import { materialAssemblyId, materialAssemblyStrategies } from './material-assembly.ts';
+import { coupledMotionId, coupledMotionStrategies } from './coupled-motion.ts';
 import { glyphEditingId, glyphEditingStrategies } from './glyph-editing.ts';
 import { fieldIsolationId, fieldIsolationStrategies } from './field-isolation.ts';
 import { directionalReceptionId, directionalReceptionStrategies } from './directional-reception.ts';
@@ -69,7 +70,7 @@ const situationStrategies = { ...orderedContactStrategies, ...cavityStrategies, 
   ...labeledSequenceStrategies, ...markedCollectionStrategies, ...slotTransferStrategies, ...remoteSupportRouteStrategies,
   ...occurrenceRecallStrategies, ...slotPermutationStrategies, ...surfaceCopyStrategies, ...codeRouteStrategies, ...profileTransferStrategies,
   ...orderedReplenishmentStrategies, ...programOriginStrategies, ...previewPlacementStrategies, ...symbolContributionStrategies, ...markedLatticeStrategies,
-  ...queuedPlacementStrategies, ...legendRecolorStrategies, ...visualPatternStrategies, ...facetGrowthStrategies, ...chartRouteStrategies, ...populationPlacementStrategies, ...carryToFrameStrategies, ...portPairingStrategies, ...displayCouplingStrategies, ...framedSearchStrategies, ...glyphEditingStrategies, ...fieldIsolationStrategies, ...directionalReceptionStrategies, ...windowCoverageStrategies, ...panelMatchingStrategies, ...crossingRowsStrategies, ...traceCoverageStrategies, ...radialConnectionStrategies, ...invitedCaptureStrategies, ...branchAlignmentStrategies, ...feedbackTrialStrategies, ...catalogueComparisonStrategies, ...receptionAccessStrategies, ...markerCoverageStrategies, ...framedReceptionStrategies, ...windowRelationStrategies, ...animationContactStrategies, ...reflectedPlacementStrategies, ...materialAssemblyStrategies };
+  ...queuedPlacementStrategies, ...legendRecolorStrategies, ...visualPatternStrategies, ...facetGrowthStrategies, ...chartRouteStrategies, ...populationPlacementStrategies, ...carryToFrameStrategies, ...portPairingStrategies, ...displayCouplingStrategies, ...framedSearchStrategies, ...glyphEditingStrategies, ...fieldIsolationStrategies, ...directionalReceptionStrategies, ...windowCoverageStrategies, ...panelMatchingStrategies, ...crossingRowsStrategies, ...traceCoverageStrategies, ...radialConnectionStrategies, ...invitedCaptureStrategies, ...branchAlignmentStrategies, ...feedbackTrialStrategies, ...catalogueComparisonStrategies, ...receptionAccessStrategies, ...markerCoverageStrategies, ...framedReceptionStrategies, ...windowRelationStrategies, ...animationContactStrategies, ...reflectedPlacementStrategies, ...materialAssemblyStrategies, ...coupledMotionStrategies };
 
 export interface NativeStep {
   readonly action: string;
@@ -458,7 +459,7 @@ export function readNativeResolution(agent: {
                                         : family === traceCoverageId ? traceCoverageStrategies : family === radialConnectionId ? radialConnectionStrategies
                                           : family === invitedCaptureId ? invitedCaptureStrategies : family === branchAlignmentId ? branchAlignmentStrategies
                                             : family === feedbackTrialId ? feedbackTrialStrategies : family === catalogueComparisonId ? catalogueComparisonStrategies
-                                              : family === receptionAccessId ? receptionAccessStrategies : family === markerCoverageId ? markerCoverageStrategies : family === framedReceptionId ? framedReceptionStrategies : family === windowRelationId ? windowRelationStrategies : family === animationContactId ? animationContactStrategies : family === reflectedPlacementId ? reflectedPlacementStrategies : family === materialAssemblyId ? materialAssemblyStrategies : null;
+                                              : family === receptionAccessId ? receptionAccessStrategies : family === markerCoverageId ? markerCoverageStrategies : family === framedReceptionId ? framedReceptionStrategies : family === windowRelationId ? windowRelationStrategies : family === animationContactId ? animationContactStrategies : family === reflectedPlacementId ? reflectedPlacementStrategies : family === materialAssemblyId ? materialAssemblyStrategies : family === coupledMotionId ? coupledMotionStrategies : null;
   const card = planReceipt?.authority === 'sicOnly' && labels ? record(proposal?.sicSituationCard) : null;
   const isSituationStrategy = (id: unknown): id is keyof typeof situationStrategies =>
     typeof id === 'string' && !!labels && Object.hasOwn(labels, id);
@@ -710,6 +711,14 @@ export function readNativeResolution(agent: {
     for (const [field, label] of [['source', 'Source symbols'], ['editable', 'Editable symbols'], ['active', 'Focused symbol']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
+    }
+  }
+  if (situationCard && family === coupledMotionId) {
+    for (const [field, label] of [['members', 'Controlled piece'], ['nextMembers', 'Projected position']] as const) {
+      if (Array.isArray(card?.[field])) for (const [index, current] of card[field].entries()) {
+        const box = bounds(current);
+        if (box) subjects.push({ label: label + ' ' + (index + 1), box });
+      }
     }
   }
   if (situationCard && family === materialAssemblyId) {
