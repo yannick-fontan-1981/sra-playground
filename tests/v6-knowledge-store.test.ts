@@ -200,6 +200,7 @@ test('the family agenda shadows multiple decisions and an active session honors 
   assert.equal(active.first.snapshot.sicFamilySelection?.mode, 'active');
   assert.equal((active.first.snapshot as Record<string, unknown>).srcDecision, null);
   const boundary = await advance(active.service, active.first);
+  assert.equal(boundary.snapshot.sicFamilyActions, 1);
   await active.service.handle({ type: 'edit', sessionId: 'store-test', sequence: 1, edit: {
     expectedGraphChain: boundary.snapshot.graphChain!, reason: 'Run the replacement selection workflow',
     changes: [{ type: 'replace_program', programId: WORKFLOW, module: editedModule() }],

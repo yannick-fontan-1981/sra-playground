@@ -223,6 +223,8 @@ Dans le groupe `information_goal`, l’agenda SIC essaie les expériences de cli
 
 Le réglage **Selection across strategy families** permet de comparer l’agenda SIC en shadow ou de lui confier l’arbitrage d’une nouvelle session. L’agenda consomme les offres dans l’ordre déclaré et s’arrête sur la première offre admise ou sur un refus qui protège une question bloquante. Il utilise les mêmes fournisseurs, gardes et priorités de continuation. En shadow, il compare le résultat et l’ordre de visite en relisant les essais du workflow SRC. Aucun fournisseur ne travaille deux fois. En actif, le reçu est lié au préfixe dans la mémoire native. Une édition explicite du workflow SRC reste exécutable et reprend la main à la prochaine frontière. Le réglage natif reste la valeur par défaut pendant cette qualification.
 
+Le compteur des commandes dont SIC a choisi la famille est distinct du compteur des commandes choisies à l’intérieur d’une stratégie réglable. Une commande peut relever des deux compteurs. Le test de frontière vérifie qu’une édition du workflow reprend la main et conserve le total terrain déjà exécuté.
+
 La fenêtre A1/B1/B2/A2 a comparé la 0.65 publiée (`b9555039`) au commit d’accès à la vue `29d074db`. Sur huit sessions chronométrées par jeu et version, toutes reproduisent les trajectoires publiques attendues. STCK passe de 11,187 s à 11,169 s (−0,17 %), pour 10 actions et deux niveaux. SMLP passe de 18,194 s à 17,505 s (−3,79 %), pour 15 actions et trois niveaux. Les deux médianes passent le seuil de +10 %. Cette fenêtre ne mesure pas l’arbitrage entre familles ajouté par `c384ca1d`.
 
 ### Besoins conservés avec les plans

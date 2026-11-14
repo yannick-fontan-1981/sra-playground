@@ -191,7 +191,7 @@ function graphCoverage<Id extends string, Key extends string>(title: string, gra
 }
 
 export function renderActionCoverage(container: HTMLElement,
-  state: Pick<V6BackendSnapshot, 'sourceDigest' | 'coverage' | 'sicActionCoverage' | 'sicFamilySelection'> | null) {
+  state: Pick<V6BackendSnapshot, 'sourceDigest' | 'coverage' | 'sicActionCoverage' | 'sicFamilySelection' | 'sicFamilyActions'> | null) {
   let counts = container.querySelector('p');
   if (!counts) counts = container.appendChild(document.createElement('p'));
   const sample = state?.sicActionCoverage;
@@ -205,7 +205,9 @@ export function renderActionCoverage(container: HTMLElement,
   const group = selection?.selected?.replaceAll('_', ' ');
   const arbitration = selection?.mode === 'active' ? ` The SIC family agenda ${group ? `selected ${group}` : 'found no offer'} after checking ${selection.visited.length} groups.`
     : selection?.mode === 'shadow' ? ` Shadow family comparison ${selection.matchesSource ? 'agrees with native selection' : 'differs from native selection'}.` : '';
-  counts.textContent = coverage + arbitration;
+  const familyCount = total && state?.sicFamilyActions !== undefined
+    ? ` SIC selected the family for ${state.sicFamilyActions}/${total} executed commands.` : '';
+  counts.textContent = coverage + familyCount + arbitration;
   const oldRoutes = container.querySelector('details');
   if (oldRoutes?.dataset.source === state?.sourceDigest) return;
   oldRoutes?.remove();

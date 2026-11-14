@@ -235,6 +235,7 @@ export interface NativeRuntimeSnapshot extends NativeRecord {
   readonly coverage?: { readonly sourceGroups: readonly NativeSelectionGroup[]; readonly [key: string]: unknown };
   readonly sicActionCoverage?: SicActionCoverage;
   readonly sicFamilySelection?: FamilyAgendaReceipt;
+  readonly sicFamilyActions?: number;
 }
 
 export interface NativeAuthorization {

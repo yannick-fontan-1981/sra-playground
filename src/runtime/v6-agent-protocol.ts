@@ -75,6 +75,7 @@ export interface V6BackendSnapshot {
   coverage?: NativeRuntimeSnapshot['coverage'];
   sicActionCoverage?: NativeRuntimeSnapshot['sicActionCoverage'];
   sicFamilySelection?: NativeRuntimeSnapshot['sicFamilySelection'];
+  sicFamilyActions?: number;
 }
 
 export type V6Phase = 'authorised_not_executed' | 'sealed_prefix' | 'stopped';

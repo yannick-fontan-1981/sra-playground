@@ -236,6 +236,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private omittedClickReturns = 0;
   private prefix: Prefix | null = null;
   private actions = 0;
+  private sicFamilyActions = 0;
   private readonly sicActionCoverage: Record<keyof SicActionCoverage, number> = {
     contactRecovery: 0, configurableFrontier: 0, fixedFrontier: 0, viewAccess: 0, information: 0, native: 0,
   };
@@ -1266,6 +1267,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     if (!Number.isFinite(outcome.executionMs) || outcome.executionMs < 0) throw new Error('Invalid native execution time');
     this.elapsedMs += outcome.executionMs; this.levelMs.set(first.level, (this.levelMs.get(first.level) ?? 0) + outcome.executionMs);
     this.sicActionCoverage[prefix.sicPlan.authority] += 1;
+    if (this.familyAgendaReceipt?.mode === 'active') this.sicFamilyActions += 1;
     this.actions += 1; this.levelActions.set(first.level, (this.levelActions.get(first.level) ?? 0) + 1); this.current = freeze(structuredClone(outcome.observation));
     await this.timed(first.level, async () => {
       this.observation = freeze(await measureNativeObservation(this.current!, this.actions + 1, this.sessionId));
@@ -1919,6 +1921,7 @@ export class NativeV6Runtime implements NativeV6Backend {
         supportSubcompositionsPending: this.acquisitionFamilies?.supports.pendingSubcompositions ?? null, fullV6Parity: false },
       srcDecision: this.selectionReceipt,
       ...(this.familyAgendaReceipt ? { sicFamilySelection: this.familyAgendaReceipt } : {}),
+      ...(this.familyAgenda ? { sicFamilyActions: this.sicFamilyActions } : {}),
       whyAct: this.authority?.snapshot() ?? { enabled: false, scope: 'injected_family_test_runtime' },
       caller: this.caller ? { enabled: true, acquiredTransitions: this.callerAcquisitions, boundaryReplays: this.callerBoundaryReplays,
         goalEvents: this.caller.goalEventCount, frontierDeltas: this.caller.deltaSequence,
