@@ -28,7 +28,7 @@ import { previewPlacementId, previewPlacementStrategies } from './preview-placem
 import { symbolContributionId, symbolContributionStrategies } from './symbol-contribution.ts';
 import { markedLatticeId, markedLatticeStrategies } from './marked-lattice.ts';
 import { queuedPlacementId, queuedPlacementStrategies } from './queued-placement.ts';
-import { legendRecolorId, legendRecolorStrategies } from './legend-recolor.ts';
+import { legendRecolorId, legendRecolorStrategies, matchExampleId } from './legend-recolor.ts';
 import { visualPatternId, visualPatternStrategies } from './visual-pattern.ts';
 import { facetGrowthId, facetGrowthStrategies, learnFacetGrowthId } from './facet-growth.ts';
 import { chartRouteId, chartRouteStrategies } from './chart-route.ts';
@@ -483,7 +483,7 @@ export function readNativeResolution(agent: {
                   : family === profileTransferId ? profileTransferStrategies : family === orderedReplenishmentId ? orderedReplenishmentStrategies
                     : (family === programOriginId || family === learnProgramOriginId) ? programOriginStrategies : family === previewPlacementId ? previewPlacementStrategies
                       : family === symbolContributionId ? symbolContributionStrategies : family === markedLatticeId ? markedLatticeStrategies
-                        : family === queuedPlacementId ? queuedPlacementStrategies : family === legendRecolorId ? legendRecolorStrategies
+                        : family === queuedPlacementId ? queuedPlacementStrategies : (family === legendRecolorId || family === matchExampleId) ? legendRecolorStrategies
                           : family === visualPatternId ? visualPatternStrategies : (family === facetGrowthId || family === learnFacetGrowthId) ? facetGrowthStrategies
                             : family === chartRouteId ? chartRouteStrategies : family === populationPlacementId ? populationPlacementStrategies
                               : family === carryToFrameId ? carryToFrameStrategies : family === portPairingId ? portPairingStrategies
@@ -1070,7 +1070,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label: 'Observed card', box });
     }
   }
-  if (situationCard && family === legendRecolorId) {
+  if (situationCard && (family === legendRecolorId || family === matchExampleId)) {
     for (const [field, label] of [['region', 'Region to recolor'], ['legend', 'Visible color legend'], ['swatch', 'Color selector']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });

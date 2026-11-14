@@ -27,7 +27,7 @@ import { previewPlacementId } from './preview-placement.ts';
 import { symbolContributionId } from './symbol-contribution.ts';
 import { markedLatticeId } from './marked-lattice.ts';
 import { queuedPlacementId } from './queued-placement.ts';
-import { legendRecolorId } from './legend-recolor.ts';
+import { legendRecolorId, matchExampleId } from './legend-recolor.ts';
 import { visualPatternId } from './visual-pattern.ts';
 import { facetGrowthId, learnFacetGrowthId } from './facet-growth.ts';
 import { chartRouteId } from './chart-route.ts';
@@ -96,7 +96,7 @@ export const standalonePlanningGroups = [
   { id: 'fit_profiles_into_receivers', families: [profileTransferId, portPairingId, radialConnectionId, framedReceptionId] },
   { id: 'preserve_ordered_team', families: [orderedReplenishmentId] },
   { id: 'fill_visible_partition', families: [previewPlacementId, populationPlacementId] },
-  { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, facetGrowthId, learnFacetGrowthId] },
+  { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, matchExampleId, facetGrowthId, learnFacetGrowthId] },
   { id: 'visit_marked_surface', families: [traceCoverageId, markedLatticeId] },
   { id: 'place_incoming_groups', families: [queuedPlacementId, gatedCascadeId] },
   { id: 'explore_available_inputs', families: [displayCouplingId, contrastControlsId, fieldIsolationId, learnFieldIsolationId, cavityAccessId, learnCorrespondenceId, markedGaugeId, pairedChannelsId, learnGridAccessId, learnSelectedAccessId, publicInputExplorationId, contrastProbeId] },

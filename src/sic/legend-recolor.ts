@@ -1,10 +1,13 @@
 import { measure } from '../logos-engine/v6-topological-recolor-geometry.ts';
+import { isJsonObject } from '../logos-engine/canonical.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { checkExampleWorkflow, matchExampleModule, matchExampleOperations, matchExampleWorkflow } from './legend-recolor-card.ts';
 
 export const legendRecolorId = 'sic_legend_recolor';
+export const matchExampleId = 'sic_match_visible_example';
 export const legendRecolorStrategies = {
   acquire_legend_pigment: 'Select the color indicated by the legend',
   apply_legend_pigment: 'Apply the selected color to the matching region',
@@ -42,11 +45,21 @@ function activePigment(rows: NativeRows, wells: Region[]) {
   return active.length === 1 ? active[0]!.value : null;
 }
 
-export function createSicLegendRecolor(): NativeFamily<Proposal> {
+export function createSicLegendRecolor(family = legendRecolorId): NativeFamily<Proposal> {
+  const declarative = family === matchExampleId;
   let state: State | null = null;
+  let choose: NativeProgramHandle | undefined;
+  let verify: NativeProgramHandle | undefined;
+  let lastVerified: { ref: string; matched: boolean } | undefined;
   return {
-    id: legendRecolorId,
-    async propose(observation, rows, _inputs, remaining) {
+    id: family,
+    async attachPrograms(registry) {
+      if (!declarative) return;
+      const module = await matchExampleModule();
+      choose = await registry.registerProgram(matchExampleWorkflow, matchExampleOperations, module);
+      verify = await registry.registerProgram(checkExampleWorkflow, matchExampleOperations, module);
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior?.stopped || (prior?.count ?? 0) >= 32) return null;
@@ -56,9 +69,29 @@ export function createSicLegendRecolor(): NativeFamily<Proposal> {
       const active = activePigment(rows, scene.wells);
       const pending = scene.bodies.filter(body => !body.cells.every(point => at(rows, point) === body.target));
       if (pending.some(body => visibleColors(rows, body).size !== 1)) return null;
-      const body = pending.find(body => body.target === local.active && active === local.active) ?? pending[0];
-      if (!body) return null;
-      const selecting = local.active !== body.target || active !== body.target;
+      let body: Body | undefined;
+      let strategy: keyof typeof legendRecolorStrategies;
+      let srcDecision: NativeRecord | undefined;
+      if (declarative) {
+        if (!choose || !pending.length) return null;
+        const candidates = pending.map(candidate => ({ index: scene.bodies.indexOf(candidate), color: candidate.target }));
+        const ready = candidates.filter(candidate => candidate.color === active);
+        const { result, receipt } = await choose.run({ situation: { hasReadyRegion: ready.length > 0, ready, pending: candidates } },
+          { signal: execution?.signal });
+        if (!isJsonObject(result) || !isJsonObject(result.candidate)) return null;
+        const requested = result.candidate.index;
+        const selected = pending.find(candidate => scene.bodies.indexOf(candidate) === requested);
+        if (!selected || result.strategy !== 'apply_legend_pigment' && result.strategy !== 'acquire_legend_pigment') return null;
+        body = selected;
+        strategy = result.strategy;
+        if (strategy === 'apply_legend_pigment' && active !== body.target) return null;
+        srcDecision = { workflow: receipt.workflow, hash: receipt.src_hash, instructions: receipt.instructions, edited: 'edited' in receipt && receipt.edited === true };
+      } else {
+        body = pending.find(body => body.target === local.active && active === local.active) ?? pending[0];
+        if (!body) return null;
+        strategy = local.active !== body.target || active !== body.target ? 'acquire_legend_pigment' : 'apply_legend_pigment';
+      }
+      const selecting = strategy === 'acquire_legend_pigment';
       const site = selecting ? scene.wells.find(well => well.value === body.target) : body;
       if (!site || !site.cells.length) return null;
       const [l, t, r, b] = site.bbox;
@@ -67,19 +100,19 @@ export function createSicLegendRecolor(): NativeFamily<Proposal> {
       const [x, y] = point, command = { action_ref: 'ACTION6', data: { x, y } };
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
+      const entries = declarative ? [] : resolveStrategyGraph({ graph, mode: 'active', facts: {
         needsColor: { value: selecting, evidence }, ready: { value: !selecting, evidence },
-      }, planners: { acquire_legend_pigment: () => command, apply_legend_pigment: () => command } });
-      if (!selected) return null;
-      const strategy = selected.id, label = legendRecolorStrategies[strategy], parent = 'G_official_completion';
+      }, planners: { acquire_legend_pigment: () => command, apply_legend_pigment: () => command } }).entries;
+      const label = legendRecolorStrategies[strategy], parent = 'G_official_completion';
       const goal = { kind: 'match_visible_legend_colors', scope: ref.split(':revision:', 1)[0]!, subjects: ['legend_and_regions'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_after_matching_regions' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `legend-recolor:${need.id}`, actions = [command];
       const binding = await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: label, evidence });
-      return { status: 'proposed', kind: legendRecolorId, actions, local, body, selecting, needId: need.id,
+      return { status: 'proposed', kind: family, actions, local, body, selecting, needId: need.id,
         steps: [{ action: command, expected_after: null, point_binding: binding }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+        ...(srcDecision ? { sicSrcDecision: srcDecision } : {}),
         sicSituationCard: { strategy, need: 'Give each region the color of its matching example', mode: selecting ? 'exploration' : 'solving',
           situation: `The region has ${body.pocket_count} enclosed pockets. ${label}.`, agenda: entries, evidence,
           region: body.bbox, legend: scene.legend, swatch: selecting ? site.bbox : null },
@@ -93,16 +126,22 @@ export function createSicLegendRecolor(): NativeFamily<Proposal> {
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'legend_recolor_bound' : 'legend_recolor_changed' };
     },
-    after(proposal, _index, before, after, first, second) {
+    async after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const matched = returned(proposal, first, second);
-      return { matched, seal_prefix: true, reason: matched ? 'legend_color_effect_observed' : 'legend_color_effect_contradicted' };
+      const facts = measureReturn(proposal, first, second);
+      const checked = await verify?.run({ outcome: facts });
+      const matched = checked ? checked.result === true : facts.preserved && facts.expectedValueObserved;
+      lastVerified = { ref: after.observation_ref, matched };
+      return { matched, seal_prefix: true, reason: matched ? 'legend_color_effect_observed' : 'legend_color_effect_contradicted',
+        ...(checked ? { src_check: { workflow: checked.receipt.workflow, hash: checked.receipt.src_hash, ...facts } } : {}) };
     },
     record(before, after, _command, first, second, proposal) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, body } = proposal;
-      state = { ...local, active: body.target, count: local.count + 1, stopped: !returned(proposal, first, second),
+      const matched = lastVerified?.ref === after.observation_ref ? lastVerified.matched : returned(proposal, first, second);
+      lastVerified = undefined;
+      state = { ...local, active: body.target, count: local.count + 1, stopped: !matched,
         evidence: [...local.evidence.slice(-4), after.observation_ref] };
       return { events: [] };
     },
@@ -111,13 +150,19 @@ export function createSicLegendRecolor(): NativeFamily<Proposal> {
   };
 }
 
-function returned({ local, body, selecting }: Proposal, first: NativeRows, second: NativeRows) {
+function measureReturn({ local, body, selecting }: Proposal, first: NativeRows, second: NativeRows) {
   const [l, t, r, b] = local.scene.field;
   const painted = new Set(selecting ? [] : body.cells.map(point => point.join(',')));
-  if (selecting && activePigment(second, local.scene.wells) !== body.target) return false;
+  let preserved = true, expectedValueObserved = selecting
+    ? activePigment(second, local.scene.wells) === body.target : true;
   for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) {
-    const expected = painted.has(`${x},${y}`) ? body.target : first[y]![x];
-    if (second[y]?.[x] !== expected) return false;
+    if (painted.has(`${x},${y}`)) expectedValueObserved &&= second[y]?.[x] === body.target;
+    else preserved &&= second[y]?.[x] === first[y]![x];
   }
-  return true;
+  return { preserved, expectedValueObserved };
+}
+
+function returned(proposal: Proposal, first: NativeRows, second: NativeRows) {
+  const facts = measureReturn(proposal, first, second);
+  return facts.preserved && facts.expectedValueObserved;
 }
