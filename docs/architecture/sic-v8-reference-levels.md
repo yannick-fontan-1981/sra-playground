@@ -25,7 +25,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | CONN | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CONN/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 1 |
 | CRAF | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CRAF/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 1 |
 | CWSE | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 1 |
-| DAME | 6 | — | — | 3 (archive locale) | — | 3 | 4 | — |
+| DAME | 6 | 1 (rejeu local 0.68) | — | 3 (archive locale) | — | 3 | 4 | 1 |
 | DC22 | 6 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/DC22/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 1 |
 | DICO | 6 | [6](../../docs/migration/native-campaigns-v35/dico.json) | — | 3 (archive locale) | — | 6 | 6 | 6 · WIN |
 | DNOI | 6 | [3](../../docs/migration/native-campaigns/dnoi.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/DNOI/LVL1/good_run_pseudocode.md) | [3](../../docs/migration/v6-baseline-parity.json) | — | 3 | 4 | 6 · WIN |
