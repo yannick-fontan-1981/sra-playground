@@ -182,6 +182,28 @@ test('retained focus, recalled directions and single-use parent returns preserve
   for (const sample of cases) assert.deepEqual(await runCase(sample, true), sample.expected.map(projection), sample.id);
 });
 
+test('the assimilation card changes the command offered to the guarded frontier when an earlier effect can be revalidated', async () => {
+  const args = fixture.cases.find((sample: R) => sample.id === 'recalled_unmeasured_axis_precedes_parallel').args;
+  const observation = obs(args.current);
+  const strategy = { ...configuration.strategy, acquire_control_for_target: {
+    ...configuration.strategy.acquire_control_for_target, recall: 'source_order',
+  } };
+  async function choose(assimilate: boolean, decline: string[] = []) {
+    const caller = new NativeCallerCoordinator(new NativeReasoningMemory(), { ...configuration, strategy });
+    caller.targetMethod = structuredClone(args.target_method);
+    delete caller.targetMethod!.motion_examples.ACTION2;
+    caller.goal.memory.episode = args.history.map(([before, command, after]: string[]) => [snapshot(before!), command!, snapshot(after!)]);
+    connectBoundaries(caller, { ...args, frontier: { ...args.frontier, decline_control: decline } }, []);
+    caller.prepare(observation, args.remaining);
+    if (assimilate) caller.reasoningMode = 'assimilation';
+    return (await caller.acquireControlForTarget(observation, scene(args.current).rows, args.inputs, args.decision))
+      ?.question.control_acquisition.action_ref;
+  }
+  assert.equal(await choose(false), 'ACTION2');
+  assert.equal(await choose(true), 'ACTION3');
+  assert.equal(await choose(true, ['ACTION3']), 'ACTION2');
+});
+
 test('source witnesses cover both information refusals, shared questions, all return outcomes and exact group order', () => {
   const byId: Record<string, R> = Object.fromEntries(fixture.cases.map((row: R) => [row.id, row]));
   const first = (id: string): R => byId[id]!.expected[0];

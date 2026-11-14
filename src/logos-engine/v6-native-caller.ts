@@ -19,6 +19,8 @@ import { ControlDependencies, bindPreservation, checkPreservation } from './v6-t
 import { electInformationGoals, pointGoal, reconcileInformationGoal } from './v6-information-goals.ts';
 import { informationNeed, informationStrategies, isInformationStrategy, selectInformationStrategy } from '../sic/information-strategy.ts';
 import { bindMissingControlTrial, retainMissingControlTrial } from '../sic/missing-control-strategy.ts';
+import { orderControlTrials } from '../sic/control-effect-trigger.ts';
+import type { ReasoningMode } from '../sic/reasoning-mode.ts';
 import type { OpeningCuriosityMode } from '../sic/opening-curiosity.ts';
 import { motionOffers } from './v6-motion-contrast.ts';
 import { contextualTranslationExposures } from './v6-contextual-translation.ts';
@@ -77,6 +79,7 @@ export class NativeCallerCoordinator {
   goalReason: string | null = null;
   returnedAttention: R | null = null;
   targetMethod: R | null = null;
+  reasoningMode: ReasoningMode | undefined;
   private deferred: R[] = [];
   get deferredCuriosity(): R[] { return structuredClone(this.deferred); }
   private restoredValues: readonly unknown[] | null = null;
@@ -360,7 +363,16 @@ export class NativeCallerCoordinator {
       commands.sort((first, second) => Number(first !== focus.action_ref) - Number(second !== focus.action_ref));
       experiments.sort((first, second) => Number(first !== focus.experiment) - Number(second !== focus.experiment));
     }
-    for (const experiment of experiments) for (const command of commands) {
+    const unusedControls = this.reasoningMode ? orderControlTrials(commands, this.reasoningMode, command => {
+      const priorEffect = Object.hasOwn(recalled, command) ? this.targetMethod?.scoring_observation : undefined;
+      const pending = !trials.get(command)!.length && this.attention.matches({
+        action_ref: command, pair_ref: facts.pair_ref, experiment: 'sample_unused_control', observation_ref: current.ref,
+      }, observation) ? focus?.id : undefined;
+      return { current: current.ref, priorEffect, planDependency: pending,
+        evidence: [current.ref, ...[priorEffect, pending].filter(ref => typeof ref === 'string')] };
+    }, focus?.status === 'pending' && focus.opened_at === observation.observation_ref && same(focus.pair_ref, facts.pair_ref)
+      && focus.experiment === 'sample_unused_control' ? focus.action_ref : undefined) : commands;
+    for (const experiment of experiments) for (const command of experiment === 'sample_unused_control' ? unusedControls : commands) {
       const pairs = trials.get(command)!;
       let evidence: string[] = [current.ref], contrast: R | null = null, expectedMotion: R | null = null;
       if (experiment === 'replicate_after_contextual_block') {

@@ -4,7 +4,7 @@ import { selectStrategyFamily } from '../src/sic/family-agenda.ts';
 import { reasoningGroupOrder, selectReasoningMode, type ReasoningSituation } from '../src/sic/reasoning-mode.ts';
 import { defaultRecoveryPack } from '../src/sic/active-recovery.ts';
 import { readRecoveryRevision, recoveryRevision } from '../src/sic/recovery-pack.ts';
-import { controlEffectTrigger, readControlEffectTrigger } from '../src/sic/control-effect-trigger.ts';
+import { controlEffectTrigger, orderControlTrials, readControlEffectTrigger } from '../src/sic/control-effect-trigger.ts';
 
 test('fresh level entry, refuted and supported plans select different reasoning cards and a different next offer', async () => {
   const start: ReasoningSituation = { level: 1, levelsCompleted: 0, targetLevels: 3, levelActions: 0, remainingActions: 9,
@@ -51,4 +51,19 @@ test('the same P05 offer uses a different trigger only when its supporting evide
   assert.deepEqual(readControlEffectTrigger(solving, 'current'), solving);
   assert.equal(readControlEffectTrigger({ ...solving, evidence: ['current'] }, 'current'), undefined);
   assert.equal(readControlEffectTrigger(solving, 'next'), undefined);
+});
+
+test('trigger cards can change the first control offered and preserve an engaged trial', () => {
+  const commands = ['ACTION1', 'ACTION2', 'ACTION3'];
+  const factsFor = (command: string) => ({
+    current: 'current',
+    priorEffect: command === 'ACTION2' ? 'earlier-effect' : undefined,
+    planDependency: command === 'ACTION3' ? 'retained-plan' : undefined,
+    evidence: ['current', 'earlier-effect', 'retained-plan'],
+  });
+  assert.deepEqual(orderControlTrials(commands, 'assimilation', factsFor), ['ACTION2', 'ACTION1', 'ACTION3']);
+  assert.deepEqual(orderControlTrials(commands, 'solving', factsFor), ['ACTION3', 'ACTION1', 'ACTION2']);
+  assert.deepEqual(orderControlTrials(commands, 'exploration', factsFor), commands);
+  assert.deepEqual(orderControlTrials(commands, 'assimilation', factsFor, 'ACTION3'), ['ACTION3', 'ACTION2', 'ACTION1']);
+  assert.deepEqual(orderControlTrials(commands, 'assimilation', command => ({ ...factsFor(command), evidence: ['current'] })), commands);
 });

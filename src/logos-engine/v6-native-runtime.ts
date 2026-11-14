@@ -725,6 +725,7 @@ export class NativeV6Runtime implements NativeV6Backend {
           acquiredInformation: this.latestInformationLevel === level, observationRef: this.observation.observation_ref,
         } : null;
         const reasoning = situation ? { ...situation, ...selectReasoningMode(situation) } : null;
+        if (this.caller) this.caller.reasoningMode = reasoning?.mode;
         const ranking = reasoning ? reasoningGroupOrder(this.groups, reasoning.mode, reasoning.remainingActions) : null;
         const agenda = await selectStrategyFamily(this.groups, offer, ranking?.order);
         result = agenda;
@@ -760,7 +761,10 @@ export class NativeV6Runtime implements NativeV6Backend {
           ?? { status: 'not_evaluated', reason: 'prior_family_selected' };
       }
       return offered;
-    } finally { this.planning = null; }
+    } finally {
+      if (this.caller) this.caller.reasoningMode = undefined;
+      this.planning = null;
+    }
   }
 
   /** Retain a current computation limit without turning it into a refutation. */

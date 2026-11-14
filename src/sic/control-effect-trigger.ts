@@ -28,6 +28,19 @@ export function controlEffectTrigger(mode: ReasoningMode, facts: ControlEffectTr
   return { id, ...cards[id], evidence: proof ? [...new Set([facts.current, proof])] : [facts.current] };
 }
 
+/** Keep source order on ties. An already engaged command keeps priority. */
+export function orderControlTrials(commands: readonly string[], mode: ReasoningMode,
+  factsFor: (command: string) => ControlEffectTriggerFacts, engagedCommand?: string): readonly string[] {
+  if (mode === 'exploration' || commands.length < 2) return commands;
+  const preferred: string[] = [], fallback: string[] = [];
+  for (const command of commands) {
+    if (command === engagedCommand) continue;
+    if (controlEffectTrigger(mode, factsFor(command)).mode === mode) preferred.push(command);
+    else fallback.push(command);
+  }
+  return engagedCommand && commands.includes(engagedCommand) ? [engagedCommand, ...preferred, ...fallback] : [...preferred, ...fallback];
+}
+
 export function isControlEffectTriggerId(value: unknown): value is ControlEffectTrigger['id'] {
   return typeof value === 'string' && Object.hasOwn(cards, value);
 }
