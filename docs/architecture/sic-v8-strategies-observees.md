@@ -91,7 +91,7 @@ Sur le commit `8ce7ee35`, les 100 parties ont produit 1 519 commandes avec un re
 | Tester la quantité requise autour d’un point d’appui | `public_occurrence_recall` / `rooted_quota_composition` / `rooted_quota_experiment` | THER · N1 · 1 · `ACTION6` | Sans prédiction vérifiée | 16 |
 | Préparer un appui pour compléter une ligne | `public_occurrence_recall` / `recurrent_series` / `supported_line_preparation` | CONN · N3 · 13 · `ACTION6` | Confirmée | 4 |
 | Vérifier la relation entre la trace laissée et le champ visible | `public_occurrence_recall` / `trace_field_composition` / `trace_field_experiment` | ZIPP · N1 · 1 · `ACTION6` | Confirmée | 8 |
-| Suivre puis sélectionner les éléments produits par un transfert | `public_occurrence_recall` / `typed_material_flow` / `typed_carrier_experiment` | LIFE · N1 · 2 · `ACTION6` | Sans prédiction vérifiée | 6 |
+| Tester l’effet d’une commande sur un porteur repéré | `public_occurrence_recall` / `typed_material_flow` / `typed_carrier_experiment` | LIFE · N1 · 2 · `ACTION6` | Sans prédiction vérifiée | 6 |
 | Suivre puis sélectionner les éléments produits par un transfert | `public_occurrence_recall` / `typed_material_flow` | LIFE · N1 · 5 · `ACTION6` | Sans prédiction vérifiée | 8 |
 | Recruter des éléments dans l’ordre observé | `public_ordered_recruitment` / `ordered_recruitment` | RECR · N1 · 2 · `ACTION6` | Sans prédiction vérifiée | 8 |
 | Utiliser un contour mesuré pour préparer un accès | `public_outline_service` / `observed_outline_service` | ZIPP · N2 · 14 · `ACTION5` | Sans prédiction vérifiée | 11 |

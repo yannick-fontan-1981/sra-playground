@@ -2,6 +2,8 @@
 
 La décomposition part de l’[inventaire des stratégies exécutées](sic-v8-strategies-observees.md). Une sous-stratégie répond à un besoin qui peut apparaître dans plusieurs jeux. Elle a un déclencheur, un résultat observable et une condition d’arrêt. Les opérations OP peuvent soutenir plusieurs sous-stratégies.
 
+La [matrice des 98 démarches](sic-v8-composition-des-98-strategies.md) propose une composition pour chaque entrée de l’inventaire.
+
 ## Premières sous-stratégies à isoler
 
 | Sous-stratégie | Situation qui la déclenche | Résultat observable attendu | Témoins |
