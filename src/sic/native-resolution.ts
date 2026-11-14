@@ -8,7 +8,7 @@ import type { AgendaEntry } from './strategy-agenda.ts';
 import { orderedContactId, orderedContactStrategies } from './ordered-contact.ts';
 import { cavityAccessId, cavityStrategies } from './cavity-access.ts';
 import { publicInputExplorationId, publicInputStrategies } from './public-input-exploration.ts';
-import { framedContactId, framedContactStrategies } from './framed-contact.ts';
+import { framedContactId, framedContactStrategies, learnPatternAccessId } from './framed-contact.ts';
 import { transportContactId, transportContactStrategies } from './transport-contact.ts';
 import { bandAlignmentId, bandAlignmentStrategies } from './band-alignment.ts';
 import { sharedArrivalId, sharedArrivalStrategies } from './shared-arrival.ts';
@@ -472,7 +472,7 @@ export function readNativeResolution(agent: {
   const labels = family === orderedContactId ? orderedContactStrategies : family === cavityAccessId ? cavityStrategies
     : family === publicInputExplorationId ? publicInputStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId ? inventoryAccessStrategies
-    : family === framedContactId ? framedContactStrategies
+    : family === framedContactId ? framedContactStrategies : family === learnPatternAccessId ? inventoryAccessStrategies
       : family === transportContactId ? transportContactStrategies : family === bandAlignmentId ? bandAlignmentStrategies
         : family === sharedArrivalId ? sharedArrivalStrategies : family === outlineServiceId ? outlineServiceStrategies
           : family === labeledSequenceId ? labeledSequenceStrategies : family === markedCollectionId ? markedCollectionStrategies
@@ -516,7 +516,7 @@ export function readNativeResolution(agent: {
     if (focus) subjects.push({ label: 'Piece whose control is being tested', box: focus });
     if (moved) subjects.push({ label: 'Piece moved by the tested direction', box: moved });
   }
-  if (situationCard && family === framedContactId) {
+  if (situationCard && (family === framedContactId || family === learnPatternAccessId)) {
     const region = bounds(card?.addressedRegion), actor = bounds(card?.controlledPiece);
     if (actor) subjects.push({ label: 'Controlled piece', box: actor });
     if (region) subjects.push({ label: 'Proposed contact surface', box: region });

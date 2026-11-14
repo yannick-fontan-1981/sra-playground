@@ -41,7 +41,8 @@ import { createSicSubsetExperiment } from '../sic/subset-experiment.ts';
 import { createSicLearnScopeEffects } from '../sic/learn-scope-effects.ts';
 import { createSicCavityAccess } from '../sic/cavity-access.ts';
 import { createSicPublicInputExploration, currentControlledMotion, publicInputExplorationId } from '../sic/public-input-exploration.ts';
-import { createSicFramedContact } from '../sic/framed-contact.ts';
+import { createSicFramedContact, learnPatternAccessId } from '../sic/framed-contact.ts';
+import { measureDirectionalMotion, type DirectionalMotion } from '../sic/observed-translation.ts';
 import { createSicTransportContact } from '../sic/transport-contact.ts';
 import { createSicBandAlignment } from '../sic/band-alignment.ts';
 import { createSicSharedArrival } from '../sic/shared-arrival.ts';
@@ -361,6 +362,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private selectionReceipt: NativeSrcReceipt | null = null;
   private familyAgendaReceipt: FamilyAgendaReceipt | null = null;
   private latestReasoningReturn: { level: number; matched: boolean | null } | null = null;
+  private readDirectionalMotion?: NativeExecution['readDirectionalMotion'];
   private latestInformationLevel: number | null = null;
   private planning: { execution: NativeExecution; inputs: readonly NativeCommand[];
     offers: Map<string, { family: NativeFamily; proposal: NativeProposal } | null>;
@@ -718,7 +720,8 @@ export class NativeV6Runtime implements NativeV6Backend {
     const motionState = this.adaptiveReasoning && this.knowledge?.memory.nodes[`family_state:${publicInputExplorationId}`];
     const motion = motionState ? currentControlledMotion(objectValue(this.knowledge!.value(motionState.id)), this.observation) : undefined;
     this.planning = { execution: { ...this.currentExecution(execution), ...(reasoning ? { reasoningMode: reasoning.mode } : {}),
-      ...(motion ? { observedControlledMotion: motion } : {}) },
+      ...(motion ? { observedControlledMotion: motion } : {}),
+      ...(this.readDirectionalMotion ? { readDirectionalMotion: this.readDirectionalMotion } : {}) },
       inputs, offers: new Map(), entryOffers: new Map(), sourceStops: new Map(), coordination: [], refusals: [], observedTrials: new Map() };
     try {
       if (!this.knowledge) throw new Error('Native knowledge store is not initialized');
@@ -1402,6 +1405,15 @@ export class NativeV6Runtime implements NativeV6Backend {
       const after = this.observation;
       let result = await prefix.family.after(prefix.proposal, prefix.index, before, after, first.frame_rows, this.current!.frame_rows);
       const publicBoundary = first.level !== this.current!.level || first.levels_completed !== this.current!.levels_completed || ['WIN', 'GAME_OVER'].includes(this.current!.state);
+      this.readDirectionalMotion = undefined;
+      if (authority === 'sicOnly' && !publicBoundary && /^ACTION[1-4]$/.test(outcome.command.action_ref)) {
+        const rows = this.current!.frame_rows;
+        const context = { command: outcome.command.action_ref, family: prefix.family.id, beforeRef: before.observation_ref,
+          afterRef: after.observation_ref, levelEpoch: after.level_epoch };
+        let receipt: DirectionalMotion | undefined;
+        this.readDirectionalMotion = () => this.observation?.observation_ref === context.afterRef
+          ? receipt ??= freeze(measureDirectionalMotion(first.frame_rows, rows, context)) : null;
+      }
       const preserved = this.caller?.preservation(prefix.proposal, this.current!, after, true, publicBoundary);
       if (preserved && !preserved.admitted) result = { matched: false, seal_prefix: true, reason: preserved.reason };
       if (this.adaptiveReasoning) this.latestReasoningReturn = { level: before.level_epoch, matched: result.matched };
@@ -2453,13 +2465,13 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const sequence = (configuration.window_constraints as R).labeled_sequence_composition.labeled_sequence_question;
     const groups = standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 104, groups, symmetry, policy, sequence, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 105, groups, symmetry, policy, sequence, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
       createSicFieldRepair(symmetry), createSicOrderedContact(policy, recovery), createSicSupportTransfer(support), createSicLearnSupportMoves(),
       createSicLearnGridAccess(), createSicMoveMaskedPieces(learnSelectedAccessId), createSicTranslateCoupledPieces(learnContactAccessId),
-      createSicSubsetExperiment(), createSicLearnScopeEffects(), createSicFramedContact(), createSicStagedMarks(), createSicTransportContact(), createSicBandAlignment(),
+      createSicSubsetExperiment(), createSicLearnScopeEffects(), createSicFramedContact(), createSicFramedContact(learnPatternAccessId), createSicStagedMarks(), createSicTransportContact(), createSicBandAlignment(),
       createSicSharedArrival(), createSicOutlineService(), createSicLabeledSequence(sequence, options.now ?? (() => performance.now())),
       createSicMarkedCollection(), createSicSlotTransfer(), createSicRemoteSupportRoute(), createSicOccurrenceRecall(),
       createSicSlotPermutation(), createSicSurfaceCopy(), createSicCodeRoute(), createSicProgramOrigin(), createSicProfileTransfer(),

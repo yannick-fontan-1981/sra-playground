@@ -137,3 +137,11 @@ Avec `sic_translate_coupled_pieces` retirée, KA59 gagne son niveau 1 en 15 comm
 Le retour de la septième commande montre l’autre pièce passer du rectangle `[30,30,32,32]` au rectangle `[45,30,47,32]`. La famille mémorise l’effet et le reçu du retour. Les cartes suivantes montrent la zone d’arrivée du contact. Le planificateur peut préférer ce déplacement lors d’un nouveau contact compatible. La victoire du niveau 1 vérifie l’acquisition de cet effet et la réutilisation des directions ordinaires. Une autre situation doit encore vérifier la réutilisation du contact. Le repli consomme ses propres preuves de sélection dans cette partie.
 
 Les commandes et les retours publics de KA59 sont identiques au rejeu normal de référence. Le rejeu avec un nom neutre et une palette permutée gagne également en 15 commandes. LS19 garde son blocage après retrait au bout de 40 commandes. Ses observations demandent un modèle de contact avec un cadre.
+
+### Réutiliser un déplacement observé par une autre famille
+
+Le runtime rend disponible, à la demande, un reçu compact du dernier retour directionnel SIC. Il contient la commande, la famille qui l’a proposée, les références avant et après, la portée du niveau et les translations mesurées. La mesure ne s’exécute que lorsqu’une famille demande le reçu. Le reçu cesse d’être recevable après une autre observation ou un changement de niveau.
+
+Avec `sic_framed_contact` retirée, `sic_learn_pattern_access` reprend la translation mesurée après la première commande. Sur LS19, cette commande provient de `sic_coupled_motion`. Sur LS20, elle provient de `sic_public_input_exploration`. Le planificateur rattache les composants qui bougent ensemble à un mobile sur la grille du motif. P07 propose les pas d’approche et P05 vérifie le passage sur le motif. Le calcul de trajet et les mesures de motif sont partagés avec la famille retirée. Le transfert mesuré porte sur la preuve du contrôle du mobile et son utilisation par un autre fournisseur.
+
+LS19 gagne en 5 commandes et 1,93 s, dont deux P07 et deux P05 émis par le repli. Empreinte `873ad01cc34d5b61e4b7435c6da535142bb5a7c785a4a97d88d548b252313c6c`. LS20 gagne en 18 commandes et 6,59 s, dont onze P07 et trois P05 émis par le repli. Empreinte `28755dc6ddc8ba6922dcd8899d2d3970033e38e916f6df6ab7c4aecf6f471a74`. Les 23 commandes sont exclusivement SIC.

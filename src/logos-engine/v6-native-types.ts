@@ -131,6 +131,7 @@ export interface NativeExecution {
   readonly remainingLevelActions?: number;
   readonly reasoningMode?: import('../sic/reasoning-mode.ts').ReasoningMode;
   readonly observedControlledMotion?: import('../sic/public-input-exploration.ts').ControlledMotion;
+  readonly readDirectionalMotion?: () => import('../sic/observed-translation.ts').DirectionalMotion | null;
 }
 
 export interface NativeProgramHandle {

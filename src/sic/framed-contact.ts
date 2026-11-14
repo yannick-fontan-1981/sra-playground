@@ -3,9 +3,11 @@ import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 import { measureInsetContact } from './inset-contact.ts';
-import { measureComponentTranslations } from './observed-translation.ts';
+import { measureDirectionalMotion, type DirectionalMotion } from './observed-translation.ts';
+import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 
 export const framedContactId = 'sic_framed_contact';
+export const learnPatternAccessId = 'sic_learn_pattern_access';
 export const framedContactStrategies = {
   locate_rigid_control: 'Identify the piece that moves with a direction',
   test_pattern_change: 'Test a contact that might change the motif',
@@ -29,7 +31,7 @@ type State = { epoch: number; body: Body | null; target: NativeBox | null; surfa
   trials: Direction[]; blocked: string[]; tested: string[]; crossed: string[]; count: number };
 type Plan = { command: Direction; landing: NativePoint; target: NativePoint; contact: boolean };
 type Proposal = NativeProposal & { action: Direction; plan: Plan | null; target: NativeBox | null; surface: NativeBox | null;
-  inset: Inset | null; beneath?: number[]; needId: string };
+  inset: Inset | null; beneath?: number[]; adoptedBody?: Body; needId: string };
 const empty = (epoch = 0): State => ({ epoch, body: null, target: null, surface: null, inset: null, beneath: null,
   trials: [], blocked: [], tested: [], crossed: [], count: 0 });
 const pointKey = (point: NativePoint) => point.join(',');
@@ -47,27 +49,26 @@ function sameLanding(first: NativeRows, second: NativeRows, { at, pitch, floor, 
   return vacancy.every((pixel, index) => pixel === (beneath?.[index] ?? floor)) && endpoint.some(pixel => colors.includes(pixel));
 }
 
-function measureTranslation(first: NativeRows, second: NativeRows, action: Direction, evidence: string): Body | null {
-  const area = first.length * first[0]!.length;
-  const matches = measureComponentTranslations(first, second, part => part.area > 1 && part.area * 4 < area);
-  const [dx, dy] = directionVectors[action];
-  const moving = matches.flatMap(({ from: a, displacement: [x, y] }) => {
+function bindTranslation({ command, translations, afterRef }: DirectionalMotion, rows: NativeRows): Body | null {
+  if (!Object.hasOwn(directionVectors, command)) return null;
+  const [dx, dy] = directionVectors[command as Direction];
+  const moving = translations.flatMap(({ displacement: [x, y], from, area, color }) => {
     const pitch = x * dx + y * dy;
-    return pitch > 1 && x === dx * pitch && y === dy * pitch ? [{ a, pitch }] : [];
+    return pitch > 1 && x === dx * pitch && y === dy * pitch ? [{ box: from, area, color, pitch }] : [];
   });
   const fits = new Map<string, Body>();
-  for (const { a, pitch } of moving) {
-    for (const { a: peer, pitch: length } of moving) {
+  for (const { box: a, pitch } of moving) {
+    for (const { box: peer, pitch: length } of moving) {
       if (length !== pitch) continue;
-      const x = Math.min(a.bbox[0], peer.bbox[0]), y = Math.min(a.bbox[1], peer.bbox[1]);
+      const x = Math.min(a[0], peer[0]), y = Math.min(a[1], peer[1]);
       const box = footprint([x, y], pitch);
-      const enclosed = moving.filter(item => item.pitch === pitch && item.a.bbox[0] >= x && item.a.bbox[1] >= y
-        && item.a.bbox[2] <= box[2] && item.a.bbox[3] <= box[3]);
-      if (enclosed.reduce((sum, item) => sum + item.a.area, 0) !== pitch * pitch) continue;
-      const exposed = new Set(pixelsAt(second, [x, y], pitch));
+      const enclosed = moving.filter(item => item.pitch === pitch && item.box[0] >= x && item.box[1] >= y
+        && item.box[2] <= box[2] && item.box[3] <= box[3]);
+      if (enclosed.reduce((sum, item) => sum + item.area, 0) !== pitch * pitch) continue;
+      const exposed = new Set(pixelsAt(rows, [x, y], pitch));
       if (exposed.size !== 1) continue;
-      const floor = [...exposed][0]!, colors = [...new Set(enclosed.map(item => item.a.color))];
-      if (!colors.includes(floor)) fits.set(pointKey([x, y]), { at: [x + dx * pitch, y + dy * pitch], pitch, floor, colors, evidence });
+      const floor = [...exposed][0]!, colors = [...new Set(enclosed.map(item => item.color))];
+      if (!colors.includes(floor)) fits.set(pointKey([x, y]), { at: [x + dx * pitch, y + dy * pitch], pitch, floor, colors, evidence: afterRef });
     }
   }
   return fits.size === 1 ? [...fits.values()][0]! : null;
@@ -113,18 +114,27 @@ function route(rows: NativeRows, body: Body, surface: NativeBox, directions: rea
   return candidates[0]?.plan ?? null;
 }
 
-export function createSicFramedContact(): NativeFamily<Proposal> {
+export function createSicFramedContact(family = framedContactId): NativeFamily<Proposal> {
+  const fallback = family === learnPatternAccessId;
   let state = empty();
   return {
-    id: framedContactId,
-    async propose(observation, rows, inputs, remaining) {
-      const local = state.epoch === observation.level_epoch ? state : empty(observation.level_epoch);
+    id: family,
+    async propose(observation, rows, inputs, remaining, execution) {
+      let local = state.epoch === observation.level_epoch ? state : empty(observation.level_epoch);
       const available = inputs.map(input => input.action_ref).filter((key): key is Direction => Object.hasOwn(directionVectors, key));
       if (remaining < 1 || local.count >= 32 || available.length !== 4) return null;
+      if (fallback && !local.body && !execution?.readDirectionalMotion) return null;
       const [pairs, parts] = await morphologyPairs(rows);
       const pair = !local.inset && pairs.length === 1 && pairs[0]!.quarter_turns !== null ? pairs[0]! : null;
       const inset = !pair ? local.inset ?? (!local.body ? measureInsetContact(rows, parts) : null) : null;
       if (!pair && !inset) return null;
+      const motion = fallback && !local.body ? execution?.readDirectionalMotion?.() : null;
+      if (fallback && !local.body) {
+        if (!motion || motion.afterRef !== observation.observation_ref || motion.levelEpoch !== observation.level_epoch) return null;
+        const measured = bindTranslation(motion, rows);
+        if (!measured || (inset && measured.pitch !== inset.body[2] - inset.body[0] + 1)) return null;
+        local = { ...local, body: measured };
+      }
       const body = local.body, ref = observation.observation_ref;
       const surface = inset?.surface ?? (body ? local.surface ?? parts.filter(part => part.color === body.floor
         && overlaps([body.at[0] - 1, body.at[1] - 1, body.at[0] + body.pitch, body.at[1] + body.pitch], part.bbox))
@@ -140,26 +150,34 @@ export function createSicFramedContact(): NativeFamily<Proposal> {
       const command = inputs.find(input => input.action_ref === (plan?.command ?? trial));
       if (!command) return null;
       const action = command.action_ref as Direction;
-      const evidence: [string, ...string[]] = body ? [ref, body.evidence] : [ref];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
+      const evidence: [string, ...string[]] = [ref, ...new Set([body?.evidence, motion?.beforeRef].filter((value): value is string => !!value && value !== ref))];
+      const native = resolveStrategyGraph({ graph, mode: 'active', facts: {
         canReachPeer: { value: plan?.contact === true && !inset, evidence },
         canReachInset: { value: plan?.contact === true && !!inset, evidence },
         canReachContrast: { value: !!plan && !plan.contact, evidence },
         controlTrial: { value: !!trial, evidence },
       }, planners: { reach_matching_pattern: () => command, reach_inlaid_pattern: () => command,
         test_pattern_change: () => command, locate_rigid_control: () => command } });
-      if (!selected) return null;
-      const strategy = selected.id, label = framedContactStrategies[strategy], objective = 'G_official_completion';
+      const mode = execution?.reasoningMode ?? 'exploration';
+      const offer = { input: action, expected: plan?.landing ?? null, evidence };
+      const reachesTest = !!plan && pointKey(plan.landing) === pointKey(plan.target);
+      const primitive = fallback ? resolveNavigationPrimitives({ mode, evidence, probe: reachesTest ? offer : null,
+        access: reachesTest ? null : offer, interaction: null }) : null;
+      const selected = primitive?.selected ?? native.selected;
+      if (!selected || !native.selected) return null;
+      const strategy = selected.id, label = framedContactStrategies[native.selected.id], objective = 'G_official_completion';
       const goal = { kind: 'test_access_to_visible_motif', scope: ref.split(':revision:', 1)[0]!, subjects: sites.map(site => site.join(',')),
         parentObjective: objective, satisfactionContract: 'observe_public_contact_and_official_progress' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `framed-contact:${need.id}`, actions = [command];
-      return { status: 'proposed', kind: framedContactId, actions, action, plan, target, surface, inset, needId: need.id,
+      return { status: 'proposed', kind: family, actions, action, plan, target, surface, inset, needId: need.id,
+        ...(fallback && body ? { adoptedBody: body } : {}),
         ...(body && plan && inset ? { beneath: pixelsAt(rows, plan.landing, body.pitch) } : {}),
         steps: [{ action: command, expected_after: null }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: { strategy, mode: plan?.contact ? 'solving' : 'exploration',
           need: inset ? 'Test what happens on reaching the inlaid motif' : 'Find how to reach the matching motif',
-          situation: label, evidence, agenda: entries, motifs: sites,
+          situation: label, evidence, agenda: primitive?.entries ?? native.entries, motifs: sites,
+          ...(motion ? { motionSource: motion.family, motionBefore: motion.beforeRef } : {}),
           ...(body ? { controlledPiece: footprint(body.at, body.pitch) } : {}),
           ...(body && plan ? { addressedRegion: footprint(plan.target, body.pitch) } : {}) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
@@ -174,7 +192,7 @@ export function createSicFramedContact(): NativeFamily<Proposal> {
     },
     after(proposal, _index, before, after, first, second) {
       const scored = after.levels_completed > before.levels_completed;
-      const body = state.body;
+      const body = fallback ? proposal.adoptedBody : state.body;
       const matched = !scored && proposal.plan && body ? sameLanding(first, second, body, proposal.plan.landing, state.beneath) : null;
       return { matched, seal_prefix: true, reason: scored ? 'official_boundary' : matched === false ? 'predicted_piece_did_not_leave'
         : 'observe_the_contact_or_displacement',
@@ -183,13 +201,15 @@ export function createSicFramedContact(): NativeFamily<Proposal> {
     record(before, after, _command, first, second, proposal) {
       if (after.level_epoch !== before.level_epoch || after.state !== before.state) return { events: [] };
       if (state.epoch !== before.level_epoch) state = empty(before.level_epoch);
+      if (fallback && !state.body && proposal.adoptedBody) state.body = proposal.adoptedBody;
       state.count++;
       state.target = proposal.target;
       state.surface = proposal.surface;
       state.inset = proposal.inset;
       if (!state.body) {
         state.trials.push(proposal.action);
-        state.body = measureTranslation(first, second, proposal.action, after.observation_ref);
+        state.body = bindTranslation(measureDirectionalMotion(first, second, { command: proposal.action, family,
+          beforeRef: before.observation_ref, afterRef: after.observation_ref, levelEpoch: after.level_epoch }), second);
         if (state.body && proposal.inset && state.body.pitch !== proposal.inset.body[2] - proposal.inset.body[0] + 1) state.body = null;
       } else if (proposal.plan) {
         const { plan } = proposal, { at, pitch } = state.body;
