@@ -16,7 +16,7 @@ import { sharedArrivalId, sharedArrivalStrategies } from './shared-arrival.ts';
 import { outlineServiceId, outlineServiceStrategies } from './outline-service.ts';
 import { labeledSequenceId, labeledSequenceStrategies } from './labeled-sequence.ts';
 import { markedCollectionId, markedCollectionStrategies } from './marked-collection.ts';
-import { slotTransferId, slotTransferStrategies } from './slot-transfer.ts';
+import { learnSlotTransferId, slotTransferId, slotTransferStrategies } from './slot-transfer.ts';
 import { learnRemoteAccessId, remoteSupportRouteId, remoteSupportRouteStrategies } from './remote-support-route.ts';
 import { occurrenceRecallId, occurrenceRecallStrategies } from './occurrence-recall.ts';
 import { slotPermutationId, slotPermutationStrategies } from './slot-permutation.ts';
@@ -479,7 +479,7 @@ export function readNativeResolution(agent: {
       : family === transportContactId ? transportContactStrategies : family === bandAlignmentId ? bandAlignmentStrategies
         : family === sharedArrivalId ? sharedArrivalStrategies : family === outlineServiceId ? outlineServiceStrategies
           : family === labeledSequenceId ? labeledSequenceStrategies : family === markedCollectionId ? markedCollectionStrategies
-            : family === slotTransferId ? slotTransferStrategies : family === remoteSupportRouteId ? remoteSupportRouteStrategies
+            : (family === slotTransferId || family === learnSlotTransferId) ? slotTransferStrategies : family === remoteSupportRouteId ? remoteSupportRouteStrategies
               : family === occurrenceRecallId ? occurrenceRecallStrategies : family === slotPermutationId ? slotPermutationStrategies
                 : family === surfaceCopyId ? surfaceCopyStrategies : family === codeRouteId ? codeRouteStrategies
                   : family === profileTransferId ? profileTransferStrategies : (family === orderedReplenishmentId || family === learnOrderedReplenishmentId) ? orderedReplenishmentStrategies
@@ -581,7 +581,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label: 'Member in the visible collection', box });
     }
   }
-  if (situationCard && family === slotTransferId) {
+  if (situationCard && (family === slotTransferId || family === learnSlotTransferId)) {
     const source = bounds(card?.source), destination = bounds(card?.destination);
     if (source) subjects.push({ label: 'Matching token', box: source });
     if (destination) subjects.push({ label: 'Slot to fill', box: destination });
