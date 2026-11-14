@@ -69,3 +69,5 @@ Le sélecteur Planning du Playground donne accès à SIC seul. Dans Stratégies,
 La campagne de qualification accepte une profondeur de rejeu via `?sic-only&level=1`. Le premier tour a proposé une partie neuve à chaque jeu du catalogue. DNOI, SK48 et SYME ont terminé le niveau 1, soit **3 sur 100**. Les tours plus profonds rejouent la partie depuis le niveau 1 pour vérifier le transfert des acquis. Le compteur de victoires complètes reste celui de la campagne intégrale.
 
 Le deuxième tour a validé le niveau 2 pour chacun des trois jeux admissibles. Les deux niveaux cumulés ont demandé 56 commandes sur SK48, 21 sur SYME et 9 sur DNOI. Le rendu réel de SK48 conserve la contradiction du niveau 1 et montre l’assimilation au démarrage du niveau 2. À l’action 20, les conditions écartent les deux premières règles. La réutilisation du contact observé est sélectionnée et la construction d’un nouveau trajet de contact reste en repli.
+
+Au troisième tour, SYME gagne trois niveaux en 36 commandes et DNOI en 17. SK48 s’arrête au niveau 3 après 63 commandes, avec deux niveaux gagnés.
