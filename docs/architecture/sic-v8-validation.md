@@ -362,3 +362,9 @@ Avec la réparation de champ retirée sur SYME et DNOI, une autre famille formul
 Le premier tour part de parties neuves. Le navigateur vérifie l’autorité SIC de chaque commande. Les passages du niveau 1 au niveau 2 se font dans la même partie.
 
 **CD82** gagne le niveau 2 en **12 commandes** et **17,18 s** dans le rejeu navigateur. La partie atteint deux niveaux en 21 commandes, toutes sous OP18 et fournies par la copie de surface. Le fournisseur mesure la nouvelle référence visuelle et vérifie les effets de pose, de couleur et de marquage. Empreinte de la partie continue `75e7d3a60fa6813257abc9559701b35157048929e8af725a315f62f1df4e703a`. Ce gain porte le niveau 2 à **7/100** et le cumul à **124/636**.
+
+**RE86** gagne le niveau 2 en **47 commandes** et **48,71 s**, soit 73 commandes sur la partie continue. SIC aligne les repères visibles et vérifie leur couverture après chaque commande. Autorité SIC sur chaque commande. Empreinte `5b844a4f2eff19acf790a9ad385732c270f368579ee0fa3ddcd6fd368c6fe586`.
+
+**SP80** gagne le niveau 2 en **11 commandes** et **7,76 s**, soit 19 commandes sur la partie continue. SIC déplace la pièce sélectionnée pour aligner les embranchements avec les ouvertures et vérifie les nouvelles positions. Autorité SIC sur chaque commande. Empreinte `1efc63efe3c3a014147b6e5f2aece7afe4ffbddc2069b08534ec6167307955f6`.
+
+Le cumul atteint **9/100 niveaux 2** et **126/636 niveaux attestés**.
