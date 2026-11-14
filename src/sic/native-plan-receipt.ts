@@ -1,4 +1,5 @@
 import type { NativeObservation, NativeProposal, SicActionCoverage } from '../logos-engine/v6-native-types.ts';
+import { assignedNeed } from './need-registry.ts';
 
 /** Project the selected native plan at its release boundary. */
 export function nativePlanReceipt(family: string, proposal: NativeProposal, observation: NativeObservation, index: number) {
@@ -22,9 +23,11 @@ export function nativePlanReceipt(family: string, proposal: NativeProposal, obse
   }
   const command = proposal.actions[index];
   if (!command) throw new TypeError('A release receipt requires a command in the selected plan.');
+  const need = assignedNeed(objectField(decision, 'need'));
   return {
     id: `sic-plan:${observation.observation_ref}`, family, strategy, objective, authority,
     subObjective: typeof subObjective === 'string' ? subObjective : null,
+    ...(need ? { need } : {}),
     observationRef: observation.observation_ref, index, planned: proposal.actions.length,
     command, commands: proposal.actions,
   };

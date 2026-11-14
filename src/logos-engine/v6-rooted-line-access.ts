@@ -128,7 +128,7 @@ export class RootedLineMemory {
       search = { operation: 'OP26', predicted_goal_distance: plan.predictedGoalDistance, model: 'conditional_cell_push_after_counterexample',
         recovery_operations: [...revision.operations, { key: 'OP26', finding: `Find a conditional access of ${plan.predictedGoalDistance} moves and check its first command.` }],
         recovery_evidence: revision.evidence,
-        sic_decision: { ...receipt, strategy,
+        sic_decision: { ...receipt, strategy, need: { ...revision.need, status: 'assigned' },
           objective: { ...rootedRecoveryStrategy.objective, parent: 'G_official_completion' } } };
       why = strategy === reposition
         ? 'Begin the access with a measured root translation. Verify the root, tip and every piece after this step.'

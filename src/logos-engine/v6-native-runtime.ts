@@ -35,6 +35,7 @@ import { compileRecoveryPack, isRecoveryStop } from '../sic/active-recovery.ts';
 import { nativePlanReceipt } from '../sic/native-plan-receipt.ts';
 import { defaultFrontierConfiguration } from '../sic/frontier-configuration.ts';
 import { selectStrategyFamily, type FamilyAgendaMode, type FamilyAgendaReceipt, type FamilyTrial } from '../sic/family-agenda.ts';
+import { needCheckpoint } from '../sic/need-registry.ts';
 import { SymbolTransactions } from './v6-symbol-transactions.ts';
 import { AddressedMaterial, ADDRESSED_NATIVE_SEARCH_BOUNDS } from './v6-addressed-material.ts';
 import { ObservedBinding, OBSERVED_BINDING_NATIVE_SEARCH_BOUNDS } from './v6-observed-binding.ts';
@@ -1319,6 +1320,8 @@ export class NativeV6Runtime implements NativeV6Backend {
       deadlineMs: acquisitionNow + Math.min(remainingActiveMs, callerRemainingMs) };
     const compositionReturns: R[] = [];
     const nativeAcquisitionsIncomplete: R[] = [];
+    let observedInformation = false;
+    let observedView = false;
     // An unacquired BranchRouting return leaves a gap in this owner's ordered
     // history. Keep every later physical return, but do not apply its suffix
     // over that gap. Other source owners still reconcile their own returns once.
@@ -1374,9 +1377,13 @@ export class NativeV6Runtime implements NativeV6Backend {
             if (events.length) this.authority!.memory.put(EPISODE, `collection_events:${transition.before.revision}`, events, transition.after.observation_ref, transition.after.revision);
             this.acquisitionFamilies?.inventory?.observeCallerContext(transition.after, transition.second.frame_rows);
           });
-          if (acquisition.view_result?.sic_view_return) this.note({ kind: 'sic_view_return', ...acquisition.view_result.sic_view_return });
+          if (acquisition.view_result?.sic_view_return) {
+            observedView ||= acquisition.view_result.sic_view_return.status !== 'unregistered';
+            this.note({ kind: 'sic_view_return', ...acquisition.view_result.sic_view_return });
+          }
           const information = prefix.proposal.sic_information_decision as R | undefined;
           if (information?.mode === 'active' && acquisition.information_goal_result) {
+            observedInformation ||= Object.values(acquisition.information_goal_result.hypothesis_checks ?? {}).some(check => check === 'matched' || check === 'contradicted');
             this.note({ kind: 'sic_information_return', evidence: transition.after.observation_ref,
               objective: information.objective.id,
               checks: acquisition.information_goal_result.hypothesis_checks });
@@ -1414,6 +1421,19 @@ export class NativeV6Runtime implements NativeV6Backend {
     }
     this.note({ kind: 'sealed_prefix', family: prefix.family.id, revision: prefix.revision, acquired_actions: prefix.witnessed.length });
     const evidenceId = `prefix_evidence:${prefix.revision}`;
+    const needWrites: NativeStoreWrite[] = [];
+    const plan = prefix.sicPlan, need = plan?.need, lastReturn = prefix.witnessed.at(-1);
+    if (plan && need && lastReturn && this.knowledge) {
+      const outcome = lastReturn.outcome as R;
+      const boundary = lastReturn.before.level_epoch !== lastReturn.after.level_epoch || lastReturn.before.levels_completed !== lastReturn.after.levels_completed;
+      const established = (outcome.sic_need?.id === need.id ? outcome.sic_need.status : outcome.sic_frontier_outcome?.status) as unknown;
+      const previous = this.knowledge.memory.nodes[need.id] ? objectValue(this.knowledge.stateValue(need.id)) : null;
+      const status = established === 'satisfied' || established === 'observed' || established === 'refuted' || established === 'expired'
+        ? established : observedInformation || observedView || previous?.status === 'observed' ? 'observed' : boundary ? 'expired'
+          : established === 'access_interrupted' || outcome.matched === false ? 'refuted' : 'assigned';
+      needWrites.push(needCheckpoint(need, status, lastReturn.after.observation_ref, plan.id,
+        previous && typeof previous.firstPlan === 'string' ? { firstPlan: previous.firstPlan } : null));
+    }
     const contactScope: NativeStoreWrite[] = [];
     if (prefix.family.id === 'animated_contact' && prefix.proposal.kind === 'measured_animated_contact' && prefix.witnessed.length === 1) {
       const transition = prefix.witnessed[0]!, first = transition.first, second = transition.second;
@@ -1437,6 +1457,7 @@ export class NativeV6Runtime implements NativeV6Backend {
           id: prefix.sicPlan.id, family: prefix.sicPlan.family, strategy: prefix.sicPlan.strategy, authority: prefix.sicPlan.authority,
           objective: prefix.sicPlan.objective, subObjective: prefix.sicPlan.subObjective,
           observationRef: prefix.sicPlan.observationRef, index: prefix.sicPlan.index, planned: prefix.sicPlan.planned,
+          ...(prefix.sicPlan.need ? { need: prefix.sicPlan.need } : {}),
         } } : {}),
         ...(prefix.nativeBindings.length ? { native_bindings: prefix.nativeBindings } : {}),
         ...(compositionReturns.length ? { composition_dependency_returns: compositionReturns } : {}),
@@ -1445,8 +1466,9 @@ export class NativeV6Runtime implements NativeV6Backend {
         transitions: prefix.witnessed.map(transition => ({ command: transition.command,
           before: transition.before.observation_ref, after: transition.after.observation_ref, outcome: transition.outcome })) },
       relations: [{ relation: 'records', target: `family_state:${prefix.family.id}` },
-        ...(this.selectionReceipt ? [{ relation: 'selected_by', target: `program:${SELECTION_PROGRAM}` }] : [])],
-    }, ...contactScope, ...(this.authority?.checkpointWrites() ?? [])], evidenceId);
+        ...(this.selectionReceipt ? [{ relation: 'selected_by', target: `program:${SELECTION_PROGRAM}` }] : []),
+        ...needWrites.map(write => ({ relation: 'addresses', target: write.id }))],
+    }, ...needWrites, ...contactScope, ...(this.authority?.checkpointWrites() ?? [])], evidenceId);
     this.restoreFamilies();
     this.kind = 'boundary'; this.reason = null;
     const reason = stopReason ?? this.budgetReason(); if (reason) this.stop(reason);

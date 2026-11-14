@@ -148,7 +148,7 @@ export function selectRootedRecovery(pack: RecoveryPack, refutations: readonly R
   if (retained?.id === need.id && retained.status !== 'admitted' && retained.status !== 'assigned') return { status: 'unresolved' } as const;
   return {
     status: pack.mode === 'active' ? 'selected' : 'shadow',
-    needId: need.id, evidence: need.evidence, configuration: pack,
+    needId: need.id, need: { ...need, subjects: [layout, witness.after] }, evidence: need.evidence, configuration: pack,
     assignmentRef: retained?.id === need.id && retained.status === 'assigned' ? retained.outcomeRef ?? observationRef : null,
   } as const;
 }

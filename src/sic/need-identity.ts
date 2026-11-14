@@ -1,6 +1,6 @@
 import { symbolicDigest } from '../logos-engine/v6-hash.ts';
 
-interface NeedIdentity {
+export interface NeedIdentity {
   readonly kind: string;
   readonly scope: string;
   readonly subjects: readonly string[];

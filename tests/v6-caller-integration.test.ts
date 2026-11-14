@@ -115,4 +115,11 @@ test('the live service releases a SIC view plan and binds its measured return to
   const projected = readNativeResolution({ ...result.snapshot, sessionId, sequence: returns.length, phase: result.phase });
   assert.equal(projected?.outcome?.viewOutcome?.objective, viewObjective);
   assert.equal(projected?.outcome?.viewOutcome?.status, 'expanded');
+  const graph = runtime.inspectKnowledge();
+  const needs = Object.values(graph.nodes).filter(node => node.component === 'sic_need');
+  const values = needs.map(node => hydrateNativeState(node.value!, id => graph.nodes[id]!.value) as Record<string, unknown>);
+  const view = values.find(value => value.kind === 'observe_view_access');
+  assert.equal(view?.status, 'observed');
+  assert.ok(typeof view?.firstPlan === 'string' && view.firstPlan === view.latestPlan);
+  assert.equal(values.filter(value => value.id === view?.id).length, 1);
 });
