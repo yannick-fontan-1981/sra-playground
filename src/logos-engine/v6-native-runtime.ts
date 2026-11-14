@@ -83,7 +83,7 @@ import { NativeCompositionAuthority } from './v6-native-authority.ts';
 import { projectNativeClickReturn, type NativeClickReturn } from './v6-native-click-return.ts';
 import type {
   NativeAfterResult, NativeBudgets, NativeCommand, NativeExecution, NativeFamily, NativeInitialize, NativeObservation, NativeRows, NativeOutcome, NativeRecordResult,
-  NativeAuthorizationIdentity, NativeGraphEdit, NativeProposal, NativePublicObservation, NativeRecord, NativeRuntimeSnapshot, NativeRuntimeYield, NativeV6Backend,
+  NativeAuthorizationIdentity, NativeGraphEdit, NativeProposal, NativePublicObservation, NativeRecord, NativeRuntimeSnapshot, NativeRuntimeYield, NativeSelectionGroup, NativeV6Backend, SicActionCoverage,
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
@@ -185,12 +185,7 @@ interface Prefix {
   nativeBindings: NativeRecord[];
   sicPlan?: ReturnType<typeof nativePlanReceipt>;
 }
-export interface NativeSelectionGroup {
-  readonly id: string;
-  readonly families: readonly string[];
-  /** Aligned with families, without adding duplicate memory/activation owners. */
-  readonly entryPoints?: readonly (string | null)[];
-}
+export type { NativeSelectionGroup } from './v6-native-types.ts';
 /** Feedback alone admits source passive returns without a selected proposal. */
 export interface NativeFeedbackFamily extends NativeFamily {
   record(before: NativeObservation, after: NativeObservation, command: NativeCommand,
@@ -234,6 +229,9 @@ export class NativeV6Runtime implements NativeV6Backend {
   private omittedClickReturns = 0;
   private prefix: Prefix | null = null;
   private actions = 0;
+  private readonly sicActionCoverage: Record<keyof SicActionCoverage, number> = {
+    contactRecovery: 0, configurableFrontier: 0, fixedFrontier: 0, native: 0,
+  };
   private revision = 0;
   private cycles = 0;
   private levelActions = new Map<number, number>();
@@ -1218,10 +1216,11 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.check(execution);
     if (this.editing) throw new Error('A native graph edit is in progress');
     const prefix = this.prefix, first = this.current, before = this.observation;
-    if (this.kind !== 'action' || !prefix || !first || !before || v6Canonical(outcome.command) !== v6Canonical(prefix.proposal.actions[prefix.index])
+    if (this.kind !== 'action' || !prefix?.sicPlan || !first || !before || v6Canonical(outcome.command) !== v6Canonical(prefix.proposal.actions[prefix.index])
       || outcome.observation.step_index !== first.step_index + 1) throw new Error('Native outcome does not match the released prefix command');
     if (!Number.isFinite(outcome.executionMs) || outcome.executionMs < 0) throw new Error('Invalid native execution time');
     this.elapsedMs += outcome.executionMs; this.levelMs.set(first.level, (this.levelMs.get(first.level) ?? 0) + outcome.executionMs);
+    this.sicActionCoverage[prefix.sicPlan.authority] += 1;
     this.actions += 1; this.levelActions.set(first.level, (this.levelActions.get(first.level) ?? 0) + 1); this.current = freeze(structuredClone(outcome.observation));
     await this.timed(first.level, async () => {
       this.observation = freeze(await measureNativeObservation(this.current!, this.actions + 1, this.sessionId));
@@ -1380,7 +1379,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       id: evidenceId, kind: 'prefix_evidence', family: prefix.family.id, status: 'observed',
       value: { decision_revision: prefix.revision, proposal: prefix.proposal, selection: this.selectionReceipt,
         ...(prefix.sicPlan ? { sic_plan: {
-          id: prefix.sicPlan.id, family: prefix.sicPlan.family, strategy: prefix.sicPlan.strategy,
+          id: prefix.sicPlan.id, family: prefix.sicPlan.family, strategy: prefix.sicPlan.strategy, authority: prefix.sicPlan.authority,
           objective: prefix.sicPlan.objective, subObjective: prefix.sicPlan.subObjective,
           observationRef: prefix.sicPlan.observationRef, index: prefix.sicPlan.index, planned: prefix.sicPlan.planned,
         } } : {}),
@@ -1818,6 +1817,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   snapshot(): NativeRuntimeSnapshot {
     return freeze({
       actions: this.actions, cycles: this.cycles, nodeCount: this.knowledge?.nodeCount ?? null, hypothesisCount: null, compositionCount: this.compositionIds.size,
+      sicActionCoverage: { ...this.sicActionCoverage },
       levelsCompleted: this.current?.levels_completed ?? 0, level: this.current?.level ?? 1,
       // note() owns and deeply freezes every entry. A fresh list preserves old
       // snapshots while sharing those immutable values. The service keeps its

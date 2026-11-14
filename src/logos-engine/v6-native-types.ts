@@ -10,6 +10,20 @@ export type NativeBox = readonly [left: number, top: number, right: number, bott
 export type NativeRecord = Record<string, unknown>;
 export type NativeMaybePromise<T> = T | Promise<T>;
 
+export interface NativeSelectionGroup {
+  readonly id: string;
+  readonly families: readonly string[];
+  /** Aligned with families, without adding duplicate memory/activation owners. */
+  readonly entryPoints?: readonly (string | null)[];
+}
+
+export interface SicActionCoverage {
+  readonly contactRecovery: number;
+  readonly configurableFrontier: number;
+  readonly fixedFrontier: number;
+  readonly native: number;
+}
+
 /** Public transport attributes retain the original V6 spelling and meaning. */
 export interface NativePublicObservation {
   readonly frame_rows: NativeRows;
@@ -215,6 +229,8 @@ export interface NativeRuntimeSnapshot extends NativeRecord {
   readonly lastClickReturn?: NativeClickReturn;
   readonly clickReturns?: readonly NativeClickReturn[];
   readonly omittedClickReturns?: number;
+  readonly coverage?: { readonly sourceGroups: readonly NativeSelectionGroup[]; readonly [key: string]: unknown };
+  readonly sicActionCoverage?: SicActionCoverage;
 }
 
 export interface NativeAuthorization {

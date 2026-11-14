@@ -5,7 +5,7 @@ import { BrowserGameRuntime, type GameObservation } from './runtime/browser-game
 import { AGENT_STATUS } from './runtime/contracts';
 import { BrowserV6Agent, type V6AgentSnapshot } from './runtime/v6-agent.ts';
 import { bindSicPerspectives, renderSicPanel } from './sic/panel.ts';
-import { bindRecoverySettings } from './sic/recovery-settings.ts';
+import { bindRecoverySettings, renderActionCoverage } from './sic/recovery-settings.ts';
 import { as66Contradiction, type ContradictionReview } from './sic/contradiction-review.ts';
 import { readControlEffectShadow } from './sic/shadow.ts';
 import { observeSpace, type SpaceReturn } from './sic/space-return.ts';
@@ -318,6 +318,7 @@ app.innerHTML = `
                   <details class="sic-details">
                     <summary>Strategy graph coverage</summary>
                     <div data-sic-graph-coverage></div>
+                    <div data-sic-action-coverage></div>
                   </details>
                   <button type="submit">Save SIC settings</button>
                   <button type="button" data-sic-recovery-rollback>Restore previous revision</button>
@@ -396,6 +397,7 @@ let contradictionReview: ContradictionReview | null = null;
 const sicPanel = element<HTMLElement>('#sic-panel');
 bindSicPerspectives(sicPanel);
 const recoveryConfiguration = bindRecoverySettings(sicPanel);
+const sicActionCoverage = sicPanel.querySelector<HTMLElement>('[data-sic-action-coverage]')!;
 let sicRenderPending = false;
 let lastSicBoard: GameObservation | null = null;
 let lastSicState: V6AgentSnapshot | null = null;
@@ -533,6 +535,7 @@ function updateSicPanel(): void {
     lastSicReturns = history;
     lastSicMode = mode;
     const state = agentState;
+    renderActionCoverage(sicActionCoverage, mode === 'agent' && board && state?.sessionId ? state : null);
     const visible = <T extends { sessionId: string; sequence: number }>(entries: readonly T[]) =>
       board?.gameCode === 'STCK' && state && state.status !== 'error'
         ? entries.filter(item => item.sessionId === state.sessionId && item.sequence <= state.sequence)

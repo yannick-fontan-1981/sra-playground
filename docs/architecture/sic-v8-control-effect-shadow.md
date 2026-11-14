@@ -183,6 +183,26 @@ La fenêtre indicative de performance a exécuté les quatre séries A1/B1/B2/A2
 
 La fenêtre suivante A1/B1/B2/A2 a comparé la 0.65 publiée (`b9555039`) à `6180e29f`, sans lancer la suite de tests en parallèle. Les 32 sessions mesurées ont reproduit les trajectoires, soit huit sessions par jeu et par version. Les médianes groupées passent chacune le seuil strict de +10 %. STCK passe de 11,090 s à 11,255 s (+1,48 %) et SMLP de 17,544 s à 17,367 s (−1,01 %). Elles mesurent le contrôleur, le service natif et le rejeu des retours publics, hors moteur de jeu et rendu. Cette preuve porte sur `6180e29f` et ses réglages par défaut.
 
+### Qualification d’une règle créée dans l’atelier
+
+Le commit `5caa8d5f` permet de créer une règle qui départage des commandes de même priorité native. L’essai utilise les directions, un écart d’au moins une utilisation sur le plateau courant et l’ordre stable des commandes. L’atelier indique, sur les retours déjà collectés, où le classement changerait. L’admission et les gardes du moteur s’appliquent ensuite à la commande retenue. La configuration est figée pour la durée d’une session.
+
+Le rejeu navigateur `tests/sic-qualification.html?authored` compare, par jeu, les réglages par défaut, la règle en shadow et la même règle active. Les cinq trajectoires shadow reproduisent chaque commande et chaque empreinte de retour public des sessions par défaut.
+
+| Jeu | Défaut, actions / niveaux | Règle active, actions / niveaux | Premier écart de commande |
+| --- | ---: | ---: | --- |
+| SK48 | 19 / 1 | 19 / 1 | Aucun |
+| AS66 | 19 / 3 | 23 / 3 | Action 2, bas → haut |
+| SYME | 9 / 1 | 9 / 1 | Aucun |
+| LKEY | 44 / 3 | 40 / 2 | Action 8, gauche → haut. Arrêt `frontier_unknown` |
+| CASC | 1 / 0 | 1 / 0 | Aucun. Arrêt `frontier_unknown` dans les trois modes |
+
+La règle sert à qualifier l’atelier et la détection de régressions. Elle reste optionnelle. LKEY fournit un cas où le changement du classement fait perdre un niveau et AS66 fournit un cas où il augmente le coût du trajet.
+
+Dans Stratégies, la mesure de couverture compte les commandes exécutées, y compris les commandes intermédiaires d’un trajet. Le numérateur configurable couvre la reprise de contact et l’exploration ordonnée par les paramètres SIC. Les expériences à commande imposée déjà admises par un agenda apparaissent dans la couverture de l’agenda. Les autres commandes ont un reçu du plan natif. Un parcours configurable peut garder exactement les mêmes commandes sous plusieurs réglages. La liste des routes en dessous est issue des groupes et entrées du sélecteur natif de la session. Elle sert à repérer les accès encore à migrer.
+
+Le rejeu navigateur `tests/sic-qualification.html?coverage` retrouve les cinq résultats officiels par défaut et compte 17 commandes sur 92 (18,5 %) issues d’un agenda SIC configurable. SK48 en fournit 7/19, AS66 4/19, LKEY 6/44, SYME 0/9 et CASC 0/1. Toutes les commandes ont un reçu de plan. Les 16 groupes du sélecteur sont consultables dans le panneau, avec les deux points d’entrée partiellement pilotés par SIC. Ce taux décrit les parcours mesurés. Le pourcentage d’avancement de V8 suit les critères d’architecture.
+
 | Série | SHA-256 du reçu brut de la seconde fenêtre |
 | --- | --- |
 | A1 | `5919c1547cb8cd18aacd9e2043a10e921300884fc0163e743248b644c16ab2f0` |

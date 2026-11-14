@@ -1,7 +1,7 @@
 import type { GameObservation } from './browser-games.ts';
 import type { AgentAction } from './contracts.ts';
 import { isAgentAction, toAgentObservation } from './contracts.ts';
-import type { NativeGraphEdit } from '../logos-engine/v6-native-types.ts';
+import type { NativeGraphEdit, NativeRuntimeSnapshot } from '../logos-engine/v6-native-types.ts';
 import type { NativeClickReturn } from '../logos-engine/v6-native-click-return.ts';
 import type { KnowledgeMemory } from '../logos-engine/kernel.ts';
 
@@ -72,6 +72,8 @@ export interface V6BackendSnapshot {
   lastClickReturn?: NativeClickReturn;
   clickReturns?: readonly NativeClickReturn[];
   omittedClickReturns?: number;
+  coverage?: NativeRuntimeSnapshot['coverage'];
+  sicActionCoverage?: NativeRuntimeSnapshot['sicActionCoverage'];
 }
 
 export type V6Phase = 'authorised_not_executed' | 'sealed_prefix' | 'stopped';

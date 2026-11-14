@@ -105,6 +105,7 @@ function assertAcquiredOnce(state: ReturnType<typeof harness>, count: number): v
   assert.deepEqual(state.records.map(record => record.command), state.commands.slice(0, count));
   assert.equal(state.operations.filter(operation => operation.type === 'advance').length, count);
   assert.equal(state.runtime.snapshot().actions, count);
+  assert.deepEqual(state.agent.snapshot.sicActionCoverage, { contactRecovery: 0, configurableFrontier: 0, fixedFrontier: 0, native: count });
   assert.equal(state.runtime.snapshot().cycles, 1);
   assert.equal(trace(state).filter(event => event.kind === 'actual_outcome').length, count);
   const released = trace(state).filter(event => event.kind === 'sic_native_plan');

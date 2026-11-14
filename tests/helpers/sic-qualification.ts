@@ -45,7 +45,7 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number, pa
       if (state?.status === 'error') throw new Error(`${code}: ${state.message}`);
       if (board.levelsCompleted <= level || state?.status === 'stopped') break;
     }
-    return { actions: trace.length, levels: board.levelsCompleted, stop: state?.reason ?? null, trace };
+    return { actions: trace.length, levels: board.levelsCompleted, stop: state?.reason ?? null, trace, coverage: state?.sicActionCoverage };
   } finally {
     agent.dispose();
   }
@@ -107,10 +107,28 @@ async function qualifyAuthoredRule() {
   }
 }
 
+async function qualifyActionCoverage() {
+  const runtime = new BrowserGameRuntime();
+  try {
+    const results = [];
+    for (const fixture of cases) {
+      output.textContent = JSON.stringify({ status: 'running', game: fixture.game, results }, null, 2);
+      const { coverage, actions, levels } = await run(runtime, fixture.game, fixture.target, defaultRecoveryPack);
+      if (!coverage || Object.values(coverage).reduce((sum, count) => sum + count, 0) !== actions
+        || actions !== fixture.baseline[0] || levels !== fixture.baseline[1]) throw new Error(`${fixture.game}: command coverage or outcome differs from its expected total.`);
+      results.push({ game: fixture.game, actions, levels, coverage });
+    }
+    output.textContent = JSON.stringify({ status: 'passed', results }, null, 2);
+  } finally {
+    runtime.dispose();
+  }
+}
+
 start.addEventListener('click', async () => {
   start.disabled = true;
   try {
-    await (new URLSearchParams(location.search).has('authored') ? qualifyAuthoredRule() : qualify());
+    const parameters = new URLSearchParams(location.search);
+    await (parameters.has('coverage') ? qualifyActionCoverage() : parameters.has('authored') ? qualifyAuthoredRule() : qualify());
   } catch (error) {
     output.textContent = JSON.stringify({ status: 'failed', error: error instanceof Error ? error.message : String(error) });
   } finally {

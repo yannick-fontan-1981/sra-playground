@@ -4,6 +4,7 @@ import { evaluateFrontierLocalRule, compileFrontierLocalRule, defaultFrontierCon
   isFrontierInputOrder, type FrontierChoiceEvidence, type FrontierInputOrder, type FrontierLocalRule } from './frontier-configuration.ts';
 import { frontierStrategies, frontierStrategyGraph } from './frontier-strategy.ts';
 import { auditStrategyGraph, type StrategyGraph } from './strategy-agenda.ts';
+import type { V6BackendSnapshot } from '../runtime/v6-agent-protocol.ts';
 
 const storageKey = 'sra.sic.contact-recovery.revisions.v1';
 const legacyKey = 'sra.sic.contact-recovery.v1';
@@ -181,4 +182,44 @@ function graphCoverage<Id extends string, Key extends string>(title: string, gra
   const winners = matches.map(row => `${labels[row.id]} ranked first in ${row.first}.`);
   result.textContent = `${title} · Guards cover ${covered}/${combinations} possible fact combinations, including ${overlapping} with several applicable strategies. ${winners.join(' ')}`;
   return result;
+}
+
+export function renderActionCoverage(container: HTMLElement,
+  state: Pick<V6BackendSnapshot, 'sourceDigest' | 'coverage' | 'sicActionCoverage'> | null) {
+  let counts = container.querySelector('p');
+  if (!counts) counts = container.appendChild(document.createElement('p'));
+  const sample = state?.sicActionCoverage;
+  const configurable = (sample?.contactRecovery ?? 0) + (sample?.configurableFrontier ?? 0);
+  const agenda = configurable + (sample?.fixedFrontier ?? 0);
+  const total = agenda + (sample?.native ?? 0);
+  counts.textContent = total
+    ? `${configurable}/${total} executed commands (${Math.round(100 * configurable / total)}%) came from a SIC strategy with editable settings. ${agenda}/${total} came from a SIC agenda. All ${total} commands have a plan record.`
+    : 'Execute a command to measure which part of this session uses configurable SIC strategies.';
+  const oldRoutes = container.querySelector('details');
+  if (oldRoutes?.dataset.source === state?.sourceDigest) return;
+  oldRoutes?.remove();
+  const groups = state?.coverage?.sourceGroups;
+  if (!groups || !state) return;
+  const routes = document.createElement('details');
+  routes.className = 'sic-details';
+  routes.dataset.source = state.sourceDigest;
+  routes.appendChild(document.createElement('summary')).textContent = 'Native routes and SIC decision points';
+  routes.appendChild(document.createElement('p')).textContent = 'The native selector still ranks these groups. Some routes invoke a SIC agenda after selection.';
+  const list = routes.appendChild(document.createElement('ul'));
+  for (const group of groups) {
+    const item = list.appendChild(document.createElement('li'));
+    item.appendChild(document.createElement('strong')).textContent = group.id.replaceAll('_', ' ');
+    if (!group.families.length) item.append(' · no registered provider');
+    else {
+      const entries = item.appendChild(document.createElement('ul'));
+      for (const [index, family] of group.families.entries()) {
+        const entry = group.entryPoints?.[index];
+        let authority = 'native';
+        if (group.id === 'observed_frontier' && family === 'observed_frontier') authority = 'SIC for untried inputs and access to them';
+        else if (group.id === 'goal_access' && entry === 'observed_composition_services') authority = 'SIC for contact recovery after a contradicted prediction';
+        entries.appendChild(document.createElement('li')).textContent = `${family.replaceAll('_', ' ')}${entry ? ` · ${entry.replaceAll('_', ' ')}` : ''} · ${authority}`;
+      }
+    }
+  }
+  container.append(routes);
 }
