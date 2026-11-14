@@ -50,7 +50,7 @@ export function compileRecoveryPack(input: unknown = defaultRecoveryPack): Recov
   const frontier = Object.hasOwn(pack, 'frontier') ? compileFrontierConfiguration(pack.frontier) : defaultFrontierConfiguration;
   return Object.freeze({ version: 1, mode: pack.mode, maxDepth: pack.maxDepth, maxNodes: pack.maxNodes,
     ...(Array.isArray(order) && order[0] !== contactRecoveryOrder[0] ? { strategyOrder: Object.freeze([...order]) } : {}),
-    ...(frontier.inputOrder !== defaultFrontierConfiguration.inputOrder ? { frontier } : {}) });
+    ...(frontier.localRule || frontier.inputOrder !== defaultFrontierConfiguration.inputOrder ? { frontier } : {}) });
 }
 
 export const rootedRecoveryStrategy = Object.freeze({

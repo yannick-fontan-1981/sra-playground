@@ -7,7 +7,7 @@ import type { DrmCondition } from './v6-drm-projector.ts';
 import { predictCandidateRule } from './v6-transition-learning.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
 import { frontierInformationNeed, selectFrontierStrategy } from '../sic/frontier-strategy.ts';
-import { defaultFrontierConfiguration, type FrontierConfiguration } from '../sic/frontier-configuration.ts';
+import { evaluateFrontierLocalRule, defaultFrontierConfiguration, type FrontierConfiguration, type FrontierChoiceEvidence } from '../sic/frontier-configuration.ts';
 
 type R = Record<string, any>;
 export const FRONTIER_SCHEMA = 'prototype.observed_frontier.v1';
@@ -287,7 +287,7 @@ export class ObservedFrontier {
       candidate_applicability: checks.slice(0, 8), candidate_applicability_total: checks.length, current_candidate_prediction_admitted: !!candidates.length };
   }
   async open(index: string, order: FrontierConfiguration['inputOrder'] = 'least_tried',
-    comparePriority?: (leastTried: R | undefined, commandOrder: R | undefined) => void): Promise<R[]> {
+    comparePriority?: (leastTried: R | undefined, commandOrder: R | undefined, usageGap: number) => void): Promise<R[]> {
     const node = this.nodes[index]; if (terminal(node.protocol.state)) return [];
     const questions: R[] = [];
     for (const key of Object.keys(node.actions)) if (!own(node.attempts, key)) questions.push(await this.question(index, key));
@@ -301,7 +301,8 @@ export class ObservedFrontier {
     if (comparePriority) {
       const [first] = ranked, alternate = ranked.reduce<R | undefined>((best, current) =>
         !best || (order === 'least_tried' ? byCommand : byUse)(current, best) < 0 ? current : best, undefined);
-      comparePriority(order === 'least_tried' ? first : alternate, order === 'command_order' ? first : alternate);
+      const leastTried = order === 'least_tried' ? first : alternate, commandOrder = order === 'command_order' ? first : alternate;
+      comparePriority(leastTried, commandOrder, leastTried && commandOrder ? (counts.get(commandOrder) ?? 0) - (counts.get(leastTried) ?? 0) : 0);
     }
     return ranked;
   }
@@ -333,10 +334,9 @@ export class ObservedFrontier {
     const curiosity = options.curiosity ?? null, acquisition = options.control_acquisition ?? null;
     const usesAgenda = options.sic_agenda === true && options.return_episode == null && curiosity === null && acquisition === null;
     const order = (usesAgenda ? options.sic_frontier : undefined)?.inputOrder ?? defaultFrontierConfiguration.inputOrder;
-    const choices: { least_tried?: R; command_order?: R } = {};
-    let questions = await this.open(index, order, usesAgenda ? (leastTried, commandOrder) => {
-      choices.least_tried = leastTried?.action;
-      choices.command_order = commandOrder?.action;
+    const comparison: { ranked?: { leastTried: R; commandOrder: R; usageGap: number } } = {};
+    let questions = await this.open(index, order, usesAgenda ? (leastTried, commandOrder, usageGap) => {
+      if (leastTried && commandOrder) comparison.ranked = { leastTried, commandOrder, usageGap };
     } : undefined);
     if (curiosity !== null) {
       if (curiosity.observation_ref !== frontierRef(observation) || curiosity.level_epoch !== protocol.level_epoch) throw new TypeError('Information goal belongs to another public state');
@@ -371,7 +371,18 @@ export class ObservedFrontier {
       const q = questions.find(q => same(frontierAction(q.action), frontierAction(bound.action)));
       if (q) questions = [{ ...q, reason: 'test_control_after_observed_local_change', priority: -1, hypothesis_refs: [control!.rule_ref], control_experiment: copy(control) }, ...questions.filter(other => other !== q)];
     }
-    const agenda = usesAgenda ? selectFrontierStrategy(questions[0], frontierRef(observation)) : null;
+    const fixedExperiment = questions[0] && (own(questions[0], 'experiment') || own(questions[0], 'control_experiment'));
+    const ranked = comparison.ranked;
+    const ruleEvidence: FrontierChoiceEvidence | null = ranked ? { usageGap: ranked.usageGap,
+      candidateRefs: { least_tried: ranked.leastTried.action.action_ref, command_order: ranked.commandOrder.action.action_ref } } : null;
+    const localRule = options.sic_frontier?.localRule;
+    const ruleResult = usesAgenda && localRule && ruleEvidence && !fixedExperiment
+      ? evaluateFrontierLocalRule(localRule, ruleEvidence)
+      : null;
+    const customQuestion = ruleResult?.matched && localRule?.mode === 'active'
+      ? localRule.prefer === 'least_tried' ? ranked?.leastTried : ranked?.commandOrder
+      : undefined;
+    const agenda = usesAgenda ? selectFrontierStrategy(customQuestion ?? questions[0], frontierRef(observation)) : null;
     let path: R[], question: R, kind: string;
     if (options.return_episode != null) {
       const contrast = await closedReturnContrast(this, options.return_episode, index, this.max_prefix);
@@ -425,7 +436,10 @@ export class ObservedFrontier {
     const binding = { observation_ref: frontierRef(observation), level_epoch: protocol.level_epoch, levels_completed: protocol.levels_completed, knowledge_revision: this.knowledge_revision };
     const inputRanked = !own(question, 'experiment') && !own(question, 'control_experiment');
     const sicFrontier = agenda?.selected ? { strategy: agenda.selected.id, agenda: agenda.entries, inputOrder: order, inputRanked,
-      ...(inputRanked && kind === 'experiment' && choices.least_tried && choices.command_order ? { choices } : {}),
+      ...(inputRanked && ranked && kind === 'experiment' ? { ruleEvidence,
+        choices: { least_tried: ranked.leastTried.action, command_order: ranked.commandOrder.action } } : {}),
+      ...(ruleResult && localRule ? { localRule: { ...ruleResult, title: localRule.title, mode: localRule.mode, prefer: localRule.prefer },
+        effectiveOrder: customQuestion ? localRule.prefer : order } : {}),
       need: frontierInformationNeed(frontierRef(observation).split(':revision:', 1)[0]!, question.question_ref, goal,
         [frontierRef(observation), ...routeRefs]),
       objective: { id: question.question_ref, label: 'Observe the effect of the selected untried input', parent: goal } } : null;

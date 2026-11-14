@@ -12,6 +12,7 @@ const cases = [
   { game: 'CASC', target: 1, baseline: [1, 0], alternate: [1, 0], divergence: null, baselineStop: 'frontier_unknown', alternateStop: 'frontier_unknown' },
 ] as const;
 const alternativePack: RecoveryPack = { ...defaultRecoveryPack, frontier: { inputOrder: 'command_order' } };
+const authoredRule = { title: 'Study recurring directions', commands: 'directions', minimumUsageGap: 1, prefer: 'command_order' } as const;
 const start = document.querySelector<HTMLButtonElement>('#qualify')!;
 const output = document.querySelector<HTMLElement>('#report')!;
 
@@ -50,6 +51,12 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number, pa
   }
 }
 
+function compare(baseline: Awaited<ReturnType<typeof run>>, alternate: Awaited<ReturnType<typeof run>>) {
+  const mismatch = baseline.trace.findIndex((entry, index) => JSON.stringify(entry) !== JSON.stringify(alternate.trace[index]));
+  const divergence = mismatch < 0 ? baseline.actions === alternate.actions ? null : baseline.actions + 1 : mismatch + 1;
+  return { divergence, changedCommand: divergence ? [baseline.trace[divergence - 1]?.action, alternate.trace[divergence - 1]?.action] : null };
+}
+
 async function qualify() {
   const runtime = new BrowserGameRuntime();
   const results = [];
@@ -59,9 +66,7 @@ async function qualify() {
       const baseline = await run(runtime, fixture.game, fixture.target, defaultRecoveryPack);
       const alternate = await run(runtime, fixture.game, fixture.target, alternativePack);
       const promoted = await run(runtime, fixture.game, fixture.target, defaultRecoveryPack);
-      const common = baseline.trace.findIndex((entry, index) => JSON.stringify(entry) !== JSON.stringify(alternate.trace[index]));
-      const divergence = common < 0 ? baseline.actions === alternate.actions ? null : baseline.actions + 1 : common + 1;
-      const firstDifferentCommand = divergence ? [baseline.trace[divergence - 1]?.action, alternate.trace[divergence - 1]?.action] : null;
+      const { divergence, changedCommand: firstDifferentCommand } = compare(baseline, alternate);
       const rollbackMatches = JSON.stringify(promoted) === JSON.stringify(baseline);
       const passed = baseline.actions === fixture.baseline[0] && baseline.levels === fixture.baseline[1]
         && alternate.actions === fixture.alternate[0] && alternate.levels === fixture.alternate[1] && divergence === fixture.divergence
@@ -80,10 +85,32 @@ async function qualify() {
   }
 }
 
+async function qualifyAuthoredRule() {
+  const runtime = new BrowserGameRuntime();
+  try {
+    const results = [];
+    for (const fixture of cases) {
+      output.textContent = JSON.stringify({ status: 'running', game: fixture.game, results }, null, 2);
+      const pack = (mode: 'shadow' | 'active'): RecoveryPack => ({ ...defaultRecoveryPack,
+        frontier: { inputOrder: 'least_tried', localRule: { ...authoredRule, mode } } });
+      const baseline = await run(runtime, fixture.game, fixture.target, defaultRecoveryPack);
+      const shadow = await run(runtime, fixture.game, fixture.target, pack('shadow'));
+      const active = await run(runtime, fixture.game, fixture.target, pack('active'));
+      results.push({ game: fixture.game, baseline: { actions: baseline.actions, levels: baseline.levels },
+        active: { actions: active.actions, levels: active.levels, stop: active.stop },
+        ...compare(baseline, active), matchedShadow: JSON.stringify(shadow) === JSON.stringify(baseline) });
+    }
+    output.textContent = JSON.stringify({ status: results.every(row => row.matchedShadow) ? 'passed' : 'failed',
+      activePreservesProgress: results.every(row => row.active.levels >= row.baseline.levels), results }, null, 2);
+  } finally {
+    runtime.dispose();
+  }
+}
+
 start.addEventListener('click', async () => {
   start.disabled = true;
   try {
-    await qualify();
+    await (new URLSearchParams(location.search).has('authored') ? qualifyAuthoredRule() : qualify());
   } catch (error) {
     output.textContent = JSON.stringify({ status: 'failed', error: error instanceof Error ? error.message : String(error) });
   } finally {

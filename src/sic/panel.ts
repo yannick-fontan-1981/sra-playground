@@ -905,7 +905,8 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
   panel.querySelector('[data-sic-recovery-settings]')!.dispatchEvent(new CustomEvent('sic-frontier-choices', {
     detail: timeline.flatMap(({ first }) => {
       const frontier = first.decision?.frontierStrategy;
-      return frontier?.inputOrder && frontier.choices ? [{ sequence: first.sequence, order: frontier.inputOrder, choices: frontier.choices }] : [];
+      return frontier?.inputOrder && frontier.choices ? [{ sequence: first.sequence, order: frontier.inputOrder, choices: frontier.choices,
+        ruleEvidence: frontier.ruleEvidence }] : [];
     }),
   }));
   const shown = selectTimelineEpisodes(timeline, board?.level);
@@ -1270,6 +1271,8 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
         ? 'The untried input was executed and its public return was acquired.'
         : 'The observed route was interrupted before the untried input.']);
       if (frontierStrategy.inputOrder) factsList.push(['Experiment priority', frontierInputOrders[frontierStrategy.inputOrder]]);
+      const localRule = frontierStrategy.localRule;
+      if (localRule) factsList.push([localRule.title, `${localRule.matched ? localRule.mode === 'active' ? 'Applied' : 'Matched in shadow' : 'Did not match'}. ${localRule.reason}`]);
       if (frontierStrategy.choices && frontierStrategy.choices.least_tried !== frontierStrategy.choices.command_order) {
         const { least_tried, command_order } = frontierStrategy.choices;
         factsList.push(['Choice on this board', `Least-used: ${least_tried} · Stable order: ${command_order}`]);

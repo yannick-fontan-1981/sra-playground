@@ -115,6 +115,14 @@ test('portable recovery packs validate content and preserve the last distinct re
   const shadow = recoveryRevision({ ...defaultRecoveryPack, mode: 'shadow' });
   const frontier = recoveryRevision({ ...defaultRecoveryPack, frontier: { inputOrder: 'command_order' } });
   assert.equal(frontier.schemaVersion, 2);
+  const custom = recoveryRevision({ ...defaultRecoveryPack, frontier: { inputOrder: 'least_tried', localRule: {
+    title: 'Compare directions', commands: 'directions', minimumUsageGap: 2, mode: 'shadow', prefer: 'command_order',
+  } } });
+  assert.equal(custom.schemaVersion, 3);
+  assert.deepEqual(readRecoveryRevision(JSON.parse(JSON.stringify(custom))), custom);
+  assert.throws(() => recoveryRevision({ ...defaultRecoveryPack, frontier: { ...custom.configuration.frontier!,
+    localRule: { ...custom.configuration.frontier!.localRule!, minimumUsageGap: 0 },
+  } }), TypeError);
   assert.deepEqual(readRecoveryRevision(JSON.parse(JSON.stringify(frontier))), frontier);
   assert.throws(() => readRecoveryRevision({ ...active, configuration: frontier.configuration }), /schema version disagree/);
   assert.notEqual(active.digest, shadow.digest);

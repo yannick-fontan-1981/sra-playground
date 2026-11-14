@@ -103,6 +103,30 @@ test('the SIC input order breaks ties between equally supported commands on the 
   assert.equal(restored.pending?.sic_outcome.need, alternate?.sic_frontier_decision.need.id);
 });
 
+test('an authored frontier rule can observe, apply, or decline the same choice', async () => {
+  const graph = new ObservedFrontier();
+  const board = { observation_ref: 'author:epoch:1:revision:1:frame:test', frame_hash: 'test',
+    level_epoch: 1, levels_completed: 0, state: 'NOT_FINISHED', available_action_refs: ['ACTION1', 'ACTION2'], entities: [] };
+  const commands = [{ action_ref: 'ACTION1' }, { action_ref: 'ACTION2' }];
+  graph.action_counts[`1:${await frontierActionKey(commands[0]!)}`] = 2;
+  const localRule = { title: 'Study recurring directions', mode: 'active', commands: 'directions', minimumUsageGap: 2, prefer: 'command_order' } as const;
+  const run = (rule: typeof localRule | { mode: 'shadow' } | { minimumUsageGap: 3 } | { commands: 'clicks' }) =>
+    new ObservedFrontier(3, 16, graph.snapshot()).propose(board, commands, {
+      sic_agenda: true, sic_frontier: { inputOrder: 'least_tried', localRule: { ...localRule, ...rule } },
+    });
+  const [active, shadow, belowThreshold, outsideDomain] = await Promise.all([
+    run(localRule), run({ mode: 'shadow' }), run({ minimumUsageGap: 3 }), run({ commands: 'clicks' }),
+  ]);
+  assert.deepEqual(active?.actions, [commands[0]]);
+  assert.deepEqual(shadow?.actions, [commands[1]]);
+  assert.deepEqual(belowThreshold?.actions, shadow?.actions);
+  assert.deepEqual(outsideDomain?.actions, shadow?.actions);
+  assert.equal(active?.sic_frontier_decision.effectiveOrder, 'command_order');
+  assert.equal(shadow?.sic_frontier_decision.localRule.matched, true);
+  assert.equal(belowThreshold?.sic_frontier_decision.localRule.matched, false);
+  assert.equal(outsideDomain?.sic_frontier_decision.localRule.matched, false);
+});
+
 test('V6 frontier rejects tampered, duplicate or reordered retained events without replacing its chain', async () => {
   const scenario = fixture.scenarios[0], first = scenario.steps.flatMap((step: any) => step.deltas)[0];
   const graph = new ObservedFrontier();

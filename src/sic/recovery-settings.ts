@@ -1,6 +1,7 @@
 import { compileRecoveryPack, contactRecoveryGraph, contactRecoveryOrder, contactRecoveryStrategies, defaultRecoveryPack, isContactStrategy, type RecoveryPack } from './active-recovery.ts';
 import { nextRecoveryRevision, readRecoveryRevision, recoveryRevision } from './recovery-pack.ts';
-import { defaultFrontierConfiguration, frontierInputOrders, isFrontierInputOrder, type FrontierInputOrder } from './frontier-configuration.ts';
+import { evaluateFrontierLocalRule, compileFrontierLocalRule, defaultFrontierConfiguration, frontierInputOrders,
+  isFrontierInputOrder, type FrontierChoiceEvidence, type FrontierInputOrder, type FrontierLocalRule } from './frontier-configuration.ts';
 import { frontierStrategies, frontierStrategyGraph } from './frontier-strategy.ts';
 import { auditStrategyGraph, type StrategyGraph } from './strategy-agenda.ts';
 
@@ -15,11 +16,39 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
   const mode = form.elements.namedItem('mode') as HTMLSelectElement;
   const priority = form.elements.namedItem('priority') as HTMLSelectElement;
   const inputOrder = form.elements.namedItem('frontierInputOrder') as HTMLSelectElement;
+  const ruleTitle = form.elements.namedItem('localRuleTitle') as HTMLInputElement;
+  const ruleCommands = form.elements.namedItem('localRuleCommands') as HTMLSelectElement;
+  const ruleGap = form.elements.namedItem('localRuleGap') as HTMLInputElement;
+  const rulePreference = form.elements.namedItem('localRulePreference') as HTMLSelectElement;
+  const ruleMode = form.elements.namedItem('localRuleMode') as HTMLSelectElement;
+  const rulePreview = form.querySelector<HTMLElement>('[data-sic-local-rule-preview]')!;
   inputOrder.replaceChildren(...Object.entries(frontierInputOrders).map(([id, title]) => new Option(title, id)));
+  rulePreference.replaceChildren(...Object.entries(frontierInputOrders).map(([id, title]) => new Option(title, id)));
   const fallback = form.querySelector<HTMLElement>('[data-sic-recovery-fallback]')!;
   const coverage = form.querySelector<HTMLElement>('[data-sic-graph-coverage]')!;
   const priorityPreview = form.querySelector<HTMLElement>('[data-sic-frontier-preview]')!;
-  let comparedChoices: readonly { sequence: number; order: FrontierInputOrder; choices: Readonly<Record<FrontierInputOrder, string>> }[] = [];
+  let comparedChoices: readonly { sequence: number; order: FrontierInputOrder; choices: Readonly<Record<FrontierInputOrder, string>>;
+    ruleEvidence?: FrontierChoiceEvidence }[] = [];
+  const readLocalRule = () => ruleTitle.value.trim() ? compileFrontierLocalRule({
+    title: ruleTitle.value, mode: ruleMode.value, commands: ruleCommands.value,
+    minimumUsageGap: ruleGap.valueAsNumber, prefer: rulePreference.value,
+  }) : undefined;
+  const renderRulePreview = () => {
+    rulePreview.textContent = '';
+    try {
+      const rule = readLocalRule();
+      if (!rule || !isFrontierInputOrder(inputOrder.value)) return;
+      const order = inputOrder.value;
+      const comparable = comparedChoices.flatMap(item => item.ruleEvidence ? [{ ...item, ruleEvidence: item.ruleEvidence }] : []);
+      const matches = comparable.filter(({ ruleEvidence }) => evaluateFrontierLocalRule(rule, ruleEvidence).matched);
+      const changed = matches.filter(item => item.choices[rule.prefer] !== item.choices[order]);
+      const examples = changed.slice(0, 4).map(item => `action ${item.sequence} (${item.choices[order]} → ${item.choices[rule.prefer]})`);
+      rulePreview.textContent = comparable.length ? `${matches.length}/${comparable.length} retained boards match. ${changed.length} would change command when active${examples.length
+        ? ` · ${examples.join(' · ')}` : ''}.` : 'Run the agent to test this rule on observed boards.';
+    } catch (error) {
+      rulePreview.textContent = error instanceof Error ? error.message : 'Invalid rule.';
+    }
+  };
   const renderPriorityPreview = () => {
     if (!isFrontierInputOrder(inputOrder.value)) return;
     const draft = inputOrder.value;
@@ -30,9 +59,12 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
       : 'Run the agent to compare the priorities on observed boards.';
   };
   inputOrder.addEventListener('change', renderPriorityPreview);
+  inputOrder.addEventListener('change', renderRulePreview);
+  for (const field of [ruleTitle, ruleCommands, ruleGap, rulePreference, ruleMode]) field.addEventListener('input', renderRulePreview);
   form.addEventListener('sic-frontier-choices', event => {
     comparedChoices = (event as CustomEvent<typeof comparedChoices>).detail;
     renderPriorityPreview();
+    renderRulePreview();
   });
   priority.replaceChildren(...contactRecoveryOrder.map(id => new Option(contactRecoveryStrategies[id], id)));
   const showFallback = () => {
@@ -57,7 +89,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
       saved.current = recoveryRevision(compileRecoveryPack(JSON.parse(legacy)));
     }
   } catch {
-    status.textContent = 'Using defaults because the saved recovery settings could not be read.';
+    status.textContent = 'Using defaults because the saved SIC settings could not be read.';
   }
   function showDraft(pack: RecoveryPack) {
     mode.value = pack.mode;
@@ -65,7 +97,14 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
     nodes.value = String(pack.maxNodes);
     priority.value = (pack.strategyOrder ?? contactRecoveryOrder)[0]!;
     inputOrder.value = (pack.frontier ?? defaultFrontierConfiguration).inputOrder;
+    const rule: FrontierLocalRule | undefined = pack.frontier?.localRule;
+    ruleTitle.value = rule?.title ?? '';
+    ruleCommands.value = rule?.commands ?? 'directions';
+    ruleGap.value = String(rule?.minimumUsageGap ?? 1);
+    rulePreference.value = rule?.prefer ?? 'command_order';
+    ruleMode.value = rule?.mode ?? 'shadow';
     renderPriorityPreview();
+    renderRulePreview();
     showFallback();
   }
   function showSaved() {
@@ -85,12 +124,13 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
     event.preventDefault();
     try {
       const strategyOrder = [priority.value, ...contactRecoveryOrder.filter(id => id !== priority.value)];
+      const localRule = readLocalRule();
       const candidate = compileRecoveryPack({ version: 1, mode: mode.value, maxDepth: depth.valueAsNumber, maxNodes: nodes.valueAsNumber, strategyOrder,
-        frontier: { inputOrder: inputOrder.value } });
+        frontier: { inputOrder: inputOrder.value, ...(localRule ? { localRule } : {}) } });
       save(nextRecoveryRevision(saved.current, saved.previous, recoveryRevision(candidate)));
       status.textContent = 'SIC settings saved for the next agent session.';
     } catch (error) {
-      status.textContent = error instanceof Error ? error.message : 'Recovery settings could not be saved.';
+      status.textContent = error instanceof Error ? error.message : 'SIC settings could not be saved.';
     }
   });
   rollback.addEventListener('click', () => {
@@ -121,12 +161,14 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
         current.maxNodes === draft.configuration.maxNodes ? null : `states ${current.maxNodes} → ${draft.configuration.maxNodes}`,
         currentFirst === draftFirst ? null : `first strategy → ${contactRecoveryStrategies[draftFirst]}`,
         (current.frontier ?? defaultFrontierConfiguration).inputOrder === draftOrder ? null : `experiment priority → ${frontierInputOrders[draftOrder]}`,
+        JSON.stringify(current.frontier?.localRule) === JSON.stringify(draft.configuration.frontier?.localRule) ? null
+          : `exploration rule → ${draft.configuration.frontier?.localRule?.title ?? 'removed'}`,
       ].filter(Boolean);
       status.textContent = differences.length
         ? `Preview ${draft.digest.slice(0, 12)} · ${differences.join(' · ')}. Save SIC settings to apply it next session.`
         : 'This pack matches the saved SIC settings.';
     } catch (error) {
-      status.textContent = error instanceof Error ? error.message : 'Recovery pack could not be opened.';
+      status.textContent = error instanceof Error ? error.message : 'SIC pack could not be opened.';
     }
   });
   return () => saved.current.configuration;

@@ -307,6 +307,15 @@ app.innerHTML = `
                   <select id="sic-frontier-input-order" name="frontierInputOrder"></select>
                   <p data-sic-frontier-preview></p>
                   <details class="sic-details">
+                    <summary>Create a local exploration rule</summary>
+                    <label>Rule name <input name="localRuleTitle" maxlength="80" placeholder="Leave blank to disable the rule"></label>
+                    <label>Command domain <select name="localRuleCommands"><option value="directions">Directional commands</option><option value="clicks">Clicks</option><option value="any">Any command</option></select></label>
+                    <label>Minimum difference in prior uses <input name="localRuleGap" type="number" min="1" max="600" value="1"></label>
+                    <label>Priority when the rule matches <select name="localRulePreference"></select></label>
+                    <label>Rule mode <select name="localRuleMode"><option value="shadow">Observe in shadow</option><option value="active">Apply in new sessions</option></select></label>
+                    <p data-sic-local-rule-preview></p>
+                  </details>
+                  <details class="sic-details">
                     <summary>Strategy graph coverage</summary>
                     <div data-sic-graph-coverage></div>
                   </details>

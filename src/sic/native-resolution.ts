@@ -3,7 +3,7 @@ import { contactRecoveryStrategies, isContactStrategy, isRecoveryStop, rootedRec
   type ContactRecoveryNeed, type ContactStrategy } from './active-recovery.ts';
 import type { AgendaEntry } from './strategy-agenda.ts';
 import { frontierStrategies, isFrontierStrategy, type FrontierStrategy } from './frontier-strategy.ts';
-import { isFrontierInputOrder, type FrontierInputOrder } from './frontier-configuration.ts';
+import { isFrontierInputOrder, type FrontierChoiceEvidence, type FrontierInputOrder, type FrontierLocalRule } from './frontier-configuration.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 
 export interface NativeStep {
@@ -61,7 +61,9 @@ export interface NativeResolution {
   readonly planRevision?: number;
   readonly releasedPlan?: { readonly family: string; readonly planned: number; readonly objective: string | null };
   readonly frontierStrategy?: { readonly title: string; readonly objective: SicObjective; readonly inputOrder: FrontierInputOrder | null;
-    readonly choices?: Readonly<Record<FrontierInputOrder, string>>; readonly agenda: readonly AgendaEntry<FrontierStrategy>[] };
+    readonly choices?: Readonly<Record<FrontierInputOrder, string>>; readonly agenda: readonly AgendaEntry<FrontierStrategy>[];
+    readonly ruleEvidence?: FrontierChoiceEvidence;
+    readonly localRule?: { readonly title: string; readonly matched: boolean; readonly mode: FrontierLocalRule['mode']; readonly reason: string } };
   readonly remainingSteps: number;
   readonly footprint: NativeBox | null;
   readonly context: NativePlanContext | null;
@@ -191,11 +193,19 @@ export function readNativeResolution(agent: {
   const frontierId = frontier?.strategy, frontierObjectiveId = label(frontierTarget?.id), frontierObjectiveLabel = label(frontierTarget?.label);
   const frontierChoices = record(frontier?.choices);
   const leastTried = actionName(frontierChoices?.least_tried), commandOrder = actionName(frontierChoices?.command_order);
-  const frontierStrategy = nativeObjective && frontierObjectiveId && frontierObjectiveLabel && frontierTarget?.parent === nativeObjective
+  const frontierEvidence = record(frontier?.ruleEvidence), candidateRefs = record(frontierEvidence?.candidateRefs);
+  const leastRef = label(candidateRefs?.least_tried), stableRef = label(candidateRefs?.command_order);
+  const usageGap = natural(frontierEvidence?.usageGap);
+  const rule = record(frontier?.localRule), ruleName = label(rule?.title), ruleReason = label(rule?.reason), ruleMode = rule?.mode;
+  const baseOrder = frontier?.inputRanked === true && isFrontierInputOrder(frontier.inputOrder) ? frontier.inputOrder : null;
+  const frontierStrategy: NativeResolution['frontierStrategy'] = nativeObjective && frontierObjectiveId && frontierObjectiveLabel && frontierTarget?.parent === nativeObjective
     && isFrontierStrategy(frontierId)
     ? { title: frontierStrategies[frontierId], objective: { id: frontierObjectiveId, label: frontierObjectiveLabel, parent: nativeObjective },
-      inputOrder: frontier?.inputRanked === true && isFrontierInputOrder(frontier.inputOrder) ? frontier.inputOrder : null,
+      inputOrder: baseOrder && isFrontierInputOrder(frontier?.effectiveOrder) ? frontier.effectiveOrder : baseOrder,
       agenda: readAgenda(frontier?.agenda, isFrontierStrategy),
+      ...(leastRef && stableRef && usageGap !== null ? { ruleEvidence: { candidateRefs: { least_tried: leastRef, command_order: stableRef }, usageGap } } : {}),
+      ...(ruleName && ruleReason && typeof rule?.matched === 'boolean' && (ruleMode === 'active' || ruleMode === 'shadow')
+        ? { localRule: { title: ruleName, reason: ruleReason, mode: ruleMode, matched: rule.matched } } : {}),
       ...(leastTried && commandOrder ? { choices: { least_tried: leastTried, command_order: commandOrder } } : {}) }
     : undefined;
   const objectiveSource = nativeObjective ? 'native' : steps.length && question ? 'question' : steps.length ? 'unpublished' : null;
