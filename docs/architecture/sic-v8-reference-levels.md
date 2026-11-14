@@ -64,7 +64,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | M0R0 | 6 | [3](../../docs/migration/native-campaigns-v35/m0r0-before-native-checkpoint.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/M0R0/LVL1/good_run_pseudocode.md) | — | — | 3 | 4 | 1 |
 | MEMO | 6 | [3](../../docs/migration/native-campaigns-v40/memo-three-levels.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/MEMO/LVL1/good_run_pseudocode.md) | — | — | 3 | 4 | 1 |
 | MIND | 6 | 1 (rejeu local 0.68), [0](../../docs/migration/lot4a-evidence/baseline/mind-native049/mind-campaign.json.gz) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/MIND/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 1 |
-| MOTO | 6 | — | — | — | — | — | — | — |
+| MOTO | 6 | — | — | — | — | — | — | 1 |
 | ONDE | 6 | [6](../../docs/migration/native-campaigns-v32/before-memory-fix/onde.json) | — | 3 (archive locale) | — | 6 | 6 | 1 |
 | PIPE | 6 | [3](../../docs/migration/native-campaigns-v41/pipe-three-levels.json) | — | — | — | 3 | 4 | 1 |
 | POLA | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/POLA/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 1 |
