@@ -47,3 +47,15 @@ La seconde campagne complète de 100 jeux, à `3e50e61f`, reproduit les deux vic
 Le rejeu de non-régression compare les commandes et tous les retours publics entre le parcours de référence, le mode shadow et l’agenda actif. Aucun écart sur SK48 (19 actions, 1 niveau), AS66 (19, 3), SYME (9, 1), LKEY (44, 3) et CASC (1, 0, arrêt `frontier_unknown`). Ces parcours utilisent le mode habituel du Playground.
 
 La référence 0.65 relancée sur la même machine donne 11,173 s pour STCK et 22,456 s pour SMLP. Comparée à la première fenêtre du candidat, elle donne +10,47 % et −22,05 %. Les commandes et les niveaux attendus concordent. L’écart STCK reste au-dessus du seuil dans cette comparaison indicative. La qualification finale demande des séries alternées sans campagnes concurrentes.
+
+## Rapidité de SIC seul
+
+Mesure locale du moteur `3e50e61f` sur un i7-10700F. Le même contrôleur de partie lance quatre sessions neuves par jeu dans l’ordre natif, SIC, SIC, natif. Les jeux s’exécutent dans Pyodide et le service de résolution est appelé en processus Node, hors rendu et transport du navigateur. Le chronomètre démarre après le chargement du jeu et inclut la création de la session, les décisions, les actions et leurs retours. Les commandes et les retours publics sont identiques pour les quatre sessions de chaque jeu.
+
+| Jeu et niveaux gagnés | Commandes | Natif 0.68 · temps médian | SIC seul · temps médian | Accélération |
+| --- | ---: | ---: | ---: | ---: |
+| SK48 · 1 | 19 | 23,60 s | 11,75 s | 2,01× |
+| SYME · 3 | 36 | 38,70 s | 21,95 s | 1,76× |
+| DNOI · 3 | 17 | 26,30 s | 7,05 s | 3,73× |
+
+Résultats individuels dans l’ordre des quatre sessions, en secondes. SK48 25,345 / 12,186 / 11,321 / 21,845. SYME 38,851 / 21,994 / 21,901 / 38,544. DNOI 26,330 / 7,146 / 6,950 / 26,273. Sous SIC, le premier envoi intervient après 0,62 à 0,74 s en médiane par jeu. Le temps consacré au moteur de jeu est proche entre les deux modes et représente de 0,11 à 0,21 s par parcours. Les mesures couvrent deux fournisseurs de plans SIC, avec deux essais par mode et par jeu.
