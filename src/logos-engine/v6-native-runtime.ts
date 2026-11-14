@@ -2404,7 +2404,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const manifest = { sourceEncoding: 'json-stringify-v1', implementation: NATIVE_V6_IMPLEMENTATION, referenceCommit: NATIVE_V6_REFERENCE_COMMIT,
     declarations: loaded, families: [...families.map(f => f.id), ...CALLER_PROVIDERS], groups, authority: 'native_original_why_act', caller: 'native_common_coordinator',
     selectionProgram: nativeProgramDescriptions().find(program => program.id === 'v6.composition_strategy.choose')?.transitiveSourceHash ?? null,
-    nativeCallerExtensions: NATIVE_CALLER_EXTENSIONS, sicRecovery: recovery, sicView: 'active',
+    nativeCallerExtensions: NATIVE_CALLER_EXTENSIONS, sicRecovery: recovery, sicView: { access: 'active', continuity: 'active' },
     fullV6Parity: false };
   const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
   const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');

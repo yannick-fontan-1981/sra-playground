@@ -79,6 +79,10 @@ export class ViewFrontier {
   }
   hasObservedViewQuestion(): boolean { return !!this.block || this.reveals.length > 0; }
 
+  continuityEvidence(): readonly string[] {
+    return [...new Set<string>([...(this.block?.refs ?? []), ...(this.reveals.length ? [this.reveals.at(-1)!.source] : [])])];
+  }
+
   static async movement(rule: R, obs: R): Promise<readonly [R, R[], P, Cells] | null> {
     const action = rule.conditions?.action ?? {};
     if (!truth(action.action_ref) || truth(action.data)) return null;

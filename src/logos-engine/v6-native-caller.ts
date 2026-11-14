@@ -302,7 +302,10 @@ export class NativeCallerCoordinator {
     if (!this.view?.hasObservedViewQuestion()) return null;
     const plain = inputs.filter(action => !truth(action.data));
     if (!plain.length) return { status: 'unknown_no_observed_view_access', actions: [] };
-    const proposal = await this.frontier.propose(observation, plain, { prefix_evidence: [] });
+    const proposal = await this.frontier.propose(observation, plain, { prefix_evidence: [],
+      ...(this.configuration.sicView ? { sic_agenda: true,
+        sic_view_continuity: { evidence: this.view.continuityEvidence(), mode: this.configuration.sicView } } : {}),
+    });
     this.persistDeltas(observation); return proposal;
   }
   async frontierOffer(observation: NativeObservation, inputs: readonly NativeCommand[]): Promise<R | null> {

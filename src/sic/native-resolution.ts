@@ -63,6 +63,7 @@ export interface NativeResolution {
   readonly releasedPlan?: { readonly family: string; readonly planned: number; readonly objective: string | null };
   readonly frontierStrategy?: { readonly title: string; readonly objective: SicObjective; readonly inputOrder: FrontierInputOrder | null;
     readonly choices?: Readonly<Record<FrontierInputOrder, string>>; readonly agenda: readonly AgendaEntry<FrontierStrategy>[];
+    readonly viewContinuity?: true;
     readonly ruleEvidence?: FrontierChoiceEvidence;
     readonly localRule?: { readonly title: string; readonly matched: boolean; readonly mode: FrontierLocalRule['mode']; readonly reason: string } };
   readonly viewStrategy?: { readonly title: string; readonly objective: SicObjective; readonly agenda: readonly AgendaEntry<ViewStrategy>[];
@@ -215,6 +216,7 @@ export function readNativeResolution(agent: {
     ? { title: frontierStrategies[frontierId], objective: { id: frontierObjectiveId, label: frontierObjectiveLabel, parent: nativeObjective },
       inputOrder: baseOrder && isFrontierInputOrder(frontier?.effectiveOrder) ? frontier.effectiveOrder : baseOrder,
       agenda: readAgenda(frontier?.agenda, isFrontierStrategy),
+      ...(frontier?.purpose === 'view_continuity' ? { viewContinuity: true as const } : {}),
       ...(leastRef && stableRef && usageGap !== null ? { ruleEvidence: { candidateRefs: { least_tried: leastRef, command_order: stableRef }, usageGap } } : {}),
       ...(ruleName && ruleReason && typeof rule?.matched === 'boolean' && (ruleMode === 'active' || ruleMode === 'shadow')
         ? { localRule: { title: ruleName, reason: ruleReason, mode: ruleMode, matched: rule.matched } } : {}),

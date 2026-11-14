@@ -117,6 +117,33 @@ test('the SIC input order breaks ties between equally supported commands on the 
   assert.equal(restored.pending?.sic_outcome.need, alternate?.sic_frontier_decision.need.id);
 });
 
+test('view continuity reuses the frontier agenda and preserves the native command order', async () => {
+  const graph = new ObservedFrontier();
+  const board = { observation_ref: 'view-continuity:epoch:1:revision:2:frame:current', frame_hash: 'current',
+    level_epoch: 1, levels_completed: 0, state: 'NOT_FINISHED', available_action_refs: ['ACTION1', 'ACTION2'], entities: [] };
+  const commands = [{ action_ref: 'ACTION1' }, { action_ref: 'ACTION2' }];
+  graph.action_counts[`1:${await frontierActionKey(commands[0]!)}`] = 3;
+  const original = await new ObservedFrontier(3, 16, graph.snapshot()).propose(board, commands);
+  const evidence = ['view-continuity:epoch:1:revision:1:frame:previous'];
+  for (const mode of ['shadow', 'active'] as const) {
+    const candidate = new ObservedFrontier(3, 16, graph.snapshot());
+    const result = await candidate.propose(board, commands, { sic_agenda: true, sic_frontier: { inputOrder: 'command_order' },
+      sic_view_continuity: { mode, evidence } });
+    assert.deepEqual(result?.actions, [commands[1]]);
+    assert.deepEqual(result?.steps, original?.steps);
+    assert.equal((await candidate.guard(result!, board)).admitted, true);
+    if (mode === 'shadow') {
+      assert.equal(result?.sic_view_continuity_shadow?.[0].result, 'selected');
+      assert.equal(result?.sic_frontier_decision, undefined);
+    } else {
+      const decision = result?.sic_frontier_decision;
+      assert.equal(decision.inputRanked, false);
+      assert.equal(decision.purpose, 'view_continuity');
+      assert.ok(decision.need.evidence.includes(evidence[0]));
+    }
+  }
+});
+
 test('an authored frontier rule can observe, apply, or decline the same choice', async () => {
   const graph = new ObservedFrontier();
   const board = { observation_ref: 'author:epoch:1:revision:1:frame:test', frame_hash: 'test',

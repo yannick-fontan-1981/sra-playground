@@ -219,6 +219,7 @@ export function renderActionCoverage(container: HTMLElement,
         let authority = 'native';
         if (group.id === 'observed_frontier' && family === 'observed_frontier') authority = 'SIC for untried inputs and access to them';
         else if (group.id === 'view' && family === 'view') authority = 'SIC for guarded access to a different view';
+        else if (group.id === 'view_continuity' && family === 'view_continuity') authority = 'SIC for learning how to continue when the view is unresolved';
         else if (group.id === 'goal_access' && entry === 'observed_composition_services') authority = 'SIC for contact recovery after a contradicted prediction';
         entries.appendChild(document.createElement('li')).textContent = `${family.replaceAll('_', ' ')}${entry ? ` · ${entry.replaceAll('_', ' ')}` : ''} · ${authority}`;
       }

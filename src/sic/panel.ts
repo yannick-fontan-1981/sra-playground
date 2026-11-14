@@ -1274,6 +1274,7 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
     const frontierStrategy = first.decision?.frontierStrategy;
     if (frontierStrategy) {
       factsList.push(['Frontier strategy', frontierStrategy.title], ['Information objective', frontierStrategy.objective.label]);
+      if (frontierStrategy.viewContinuity) factsList.push(['Situation', 'An obstruction or a newly revealed portion of the board left a question about how to continue.']);
       const learned = last.nativeCheck?.frontierOutcome;
       if (learned?.objective === frontierStrategy.objective.id) factsList.push(['Information outcome', learned.status === 'observed'
         ? 'The untried input was executed and its public return was acquired.'
