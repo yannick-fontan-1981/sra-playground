@@ -86,7 +86,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | SK48 | 8 | [1](../../docs/architecture/sic-v8-validation.md) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/SK48/LVL2/good_run_pseudocode.md) | — | — | 2 | 3 | 2 |
 | SKBN | 6 | [3](../../docs/migration/native-campaigns-v32/before-memory-fix/skbn.json) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/SKBN/LVL2/good_run_pseudocode.md) | 0 (archive locale) | — | 3 | 4 | 1 |
 | SMLP | 6 | — | — | 3 (archive locale) | — | 3 | 4 | 1 |
-| SNAR | 6 | — | — | — | — | — | — | — |
+| SNAR | 6 | — | — | — | — | — | — | 1 |
 | SP80 | 6 | 1 (rejeu local 0.68) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/SP80/LVL1/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 1 |
 | SPOR | 6 | — | — | 3 (archive locale) | — | 3 | 4 | 1 |
 | STCK | 6 | [4](../../docs/migration/native-campaigns-v42/diagnostics/stck-relation-six-level-attempt.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/STCK/LVL1/good_run_pseudocode.md) | — | — | 4 | 5 | 1 |
