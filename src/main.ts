@@ -306,6 +306,8 @@ app.innerHTML = `
                   <label for="sic-frontier-input-order">Priority among equally supported experiments</label>
                   <select id="sic-frontier-input-order" name="frontierInputOrder"></select>
                   <p data-sic-frontier-preview></p>
+                  <label for="sic-family-agenda">Selection across strategy families</label>
+                  <select id="sic-family-agenda" name="familyAgenda"><option value="native">Native selection</option><option value="shadow">Compare SIC in shadow</option><option value="active">Use the SIC agenda</option></select>
                   <details class="sic-details">
                     <summary>Create a local exploration rule</summary>
                     <label>Rule name <input name="localRuleTitle" maxlength="80" placeholder="Leave blank to disable the rule"></label>

@@ -4,6 +4,7 @@ import type { KnowledgeMemory } from './kernel.ts';
 import type { ExecutionOptions, JsonObject, JsonValue, Primitive } from './ir.ts';
 import type { NativeSrcReceipt } from './v6-src-program.ts';
 import type { NativeClickReturn } from './v6-native-click-return.ts';
+import type { FamilyAgendaReceipt } from '../sic/family-agenda.ts';
 export type NativeRows = readonly (readonly number[])[];
 export type NativePoint = readonly [x: number, y: number];
 export type NativeBox = readonly [left: number, top: number, right: number, bottom: number];
@@ -233,6 +234,7 @@ export interface NativeRuntimeSnapshot extends NativeRecord {
   readonly omittedClickReturns?: number;
   readonly coverage?: { readonly sourceGroups: readonly NativeSelectionGroup[]; readonly [key: string]: unknown };
   readonly sicActionCoverage?: SicActionCoverage;
+  readonly sicFamilySelection?: FamilyAgendaReceipt;
 }
 
 export interface NativeAuthorization {

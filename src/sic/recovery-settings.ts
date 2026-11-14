@@ -18,6 +18,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
   const mode = form.elements.namedItem('mode') as HTMLSelectElement;
   const priority = form.elements.namedItem('priority') as HTMLSelectElement;
   const inputOrder = form.elements.namedItem('frontierInputOrder') as HTMLSelectElement;
+  const familyAgenda = form.elements.namedItem('familyAgenda') as HTMLSelectElement;
   const ruleTitle = form.elements.namedItem('localRuleTitle') as HTMLInputElement;
   const ruleCommands = form.elements.namedItem('localRuleCommands') as HTMLSelectElement;
   const ruleGap = form.elements.namedItem('localRuleGap') as HTMLInputElement;
@@ -100,6 +101,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
     nodes.value = String(pack.maxNodes);
     priority.value = (pack.strategyOrder ?? contactRecoveryOrder)[0]!;
     inputOrder.value = (pack.frontier ?? defaultFrontierConfiguration).inputOrder;
+    familyAgenda.value = pack.familyAgenda ?? 'native';
     const rule: FrontierLocalRule | undefined = pack.frontier?.localRule;
     ruleTitle.value = rule?.title ?? '';
     ruleCommands.value = rule?.commands ?? 'directions';
@@ -129,6 +131,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
       const strategyOrder = [priority.value, ...contactRecoveryOrder.filter(id => id !== priority.value)];
       const localRule = readLocalRule();
       const candidate = compileRecoveryPack({ version: 1, mode: mode.value, maxDepth: depth.valueAsNumber, maxNodes: nodes.valueAsNumber, strategyOrder,
+        ...(familyAgenda.value !== 'native' ? { familyAgenda: familyAgenda.value } : {}),
         frontier: { inputOrder: inputOrder.value, ...(localRule ? { localRule } : {}) } });
       save(nextRecoveryRevision(saved.current, saved.previous, recoveryRevision(candidate)));
       status.textContent = 'SIC settings saved for the next agent session.';
@@ -160,6 +163,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
       const draftOrder = (draft.configuration.frontier ?? defaultFrontierConfiguration).inputOrder;
       const differences = [
         current.mode === draft.configuration.mode ? null : `mode ${current.mode} → ${draft.configuration.mode}`,
+        current.familyAgenda === draft.configuration.familyAgenda ? null : `family selection → ${draft.configuration.familyAgenda ?? 'native'}`,
         current.maxDepth === draft.configuration.maxDepth ? null : `depth ${current.maxDepth} → ${draft.configuration.maxDepth}`,
         current.maxNodes === draft.configuration.maxNodes ? null : `states ${current.maxNodes} → ${draft.configuration.maxNodes}`,
         currentFirst === draftFirst ? null : `first strategy → ${contactRecoveryStrategies[draftFirst]}`,
@@ -187,16 +191,21 @@ function graphCoverage<Id extends string, Key extends string>(title: string, gra
 }
 
 export function renderActionCoverage(container: HTMLElement,
-  state: Pick<V6BackendSnapshot, 'sourceDigest' | 'coverage' | 'sicActionCoverage'> | null) {
+  state: Pick<V6BackendSnapshot, 'sourceDigest' | 'coverage' | 'sicActionCoverage' | 'sicFamilySelection'> | null) {
   let counts = container.querySelector('p');
   if (!counts) counts = container.appendChild(document.createElement('p'));
   const sample = state?.sicActionCoverage;
   const configurable = (sample?.contactRecovery ?? 0) + (sample?.configurableFrontier ?? 0);
   const agenda = configurable + (sample?.fixedFrontier ?? 0) + (sample?.viewAccess ?? 0) + (sample?.information ?? 0);
   const total = agenda + (sample?.native ?? 0);
-  counts.textContent = total
+  const coverage = total
     ? `${configurable}/${total} executed commands (${Math.round(100 * configurable / total)}%) came from a SIC strategy with editable settings. ${agenda}/${total} came from a SIC agenda. All ${total} commands have a plan record.`
     : 'Execute a command to measure which part of this session uses configurable SIC strategies.';
+  const selection = state?.sicFamilySelection;
+  const group = selection?.selected?.replaceAll('_', ' ');
+  const arbitration = selection?.mode === 'active' ? ` The SIC family agenda ${group ? `selected ${group}` : 'found no offer'} after checking ${selection.visited.length} groups.`
+    : selection?.mode === 'shadow' ? ` Shadow family comparison ${selection.matchesSource ? 'agrees with native selection' : 'differs from native selection'}.` : '';
+  counts.textContent = coverage + arbitration;
   const oldRoutes = container.querySelector('details');
   if (oldRoutes?.dataset.source === state?.sourceDigest) return;
   oldRoutes?.remove();
@@ -206,7 +215,7 @@ export function renderActionCoverage(container: HTMLElement,
   routes.className = 'sic-details';
   routes.dataset.source = state.sourceDigest;
   routes.appendChild(document.createElement('summary')).textContent = 'Native routes and SIC decision points';
-  routes.appendChild(document.createElement('p')).textContent = 'The native selector still ranks these groups. Some routes invoke a SIC agenda after selection.';
+  routes.appendChild(document.createElement('p')).textContent = 'These groups follow the declared family order. Some routes also invoke a dedicated SIC agenda inside the selected family.';
   const list = routes.appendChild(document.createElement('ul'));
   for (const group of groups) {
     const item = list.appendChild(document.createElement('li'));

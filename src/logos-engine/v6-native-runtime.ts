@@ -34,6 +34,7 @@ import { RankedWorkshop } from './v6-ranked-workshop.ts';
 import { compileRecoveryPack, isRecoveryStop } from '../sic/active-recovery.ts';
 import { nativePlanReceipt } from '../sic/native-plan-receipt.ts';
 import { defaultFrontierConfiguration } from '../sic/frontier-configuration.ts';
+import { selectStrategyFamily, type FamilyAgendaMode, type FamilyAgendaReceipt, type FamilyTrial } from '../sic/family-agenda.ts';
 import { SymbolTransactions } from './v6-symbol-transactions.ts';
 import { AddressedMaterial, ADDRESSED_NATIVE_SEARCH_BOUNDS } from './v6-addressed-material.ts';
 import { ObservedBinding, OBSERVED_BINDING_NATIVE_SEARCH_BOUNDS } from './v6-observed-binding.ts';
@@ -77,7 +78,6 @@ import { arrayValue, immutableJson, objectValue, stringValue } from './canonical
 import { NativeKnowledgeStore, NATIVE_STORE_PROFILE } from './v6-knowledge-store.ts';
 import type { NativeStoreWrite, StoredNativeProgram } from './v6-knowledge-store.ts';
 import type { DeltaCause, KnowledgeMemory } from './kernel.ts';
-import type { JsonValue } from './ir.ts';
 import { NativeEditRejected } from './v6-native-types.ts';
 import { NativeCompositionAuthority } from './v6-native-authority.ts';
 import { projectNativeClickReturn, type NativeClickReturn } from './v6-native-click-return.ts';
@@ -203,6 +203,7 @@ export interface NativeV6RuntimeConfiguration {
   sicFrontier?: import('../sic/frontier-configuration.ts').FrontierConfiguration;
   sicView?: 'shadow' | 'active';
   sicInformation?: 'shadow' | 'active';
+  familyAgenda?: FamilyAgendaMode;
   /** The same registered instances acquire passive evidence in source order. */
   acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; inventory?: ObservedInventory; reaction?: OrderedReaction; reactive?: ReactiveContact; chart?: ChartNavigation; recolor?: TopologicalRecolor; axial?: AxialQuestion; window?: WindowQuestion; recruitment?: OrderedRecruitment; workshop?: RankedWorkshop; symbols?: SymbolTransactions; morphology?: NativeMorphologyFamily; feedback?: NativeFeedbackFamily; fields?: AddressedMaterial; binding?: ObservedBinding; preparations?: LinkedTemporalPreparation; preview?: NativePreviewPacking; selectedRigid?: NativeSelectedRigid };
 }
@@ -221,6 +222,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private readonly sicFrontier?: import('../sic/frontier-configuration.ts').FrontierConfiguration;
   private readonly sicView?: 'shadow' | 'active';
   private readonly sicInformation?: 'shadow' | 'active';
+  private readonly familyAgenda?: FamilyAgendaMode;
   private readonly acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; inventory?: ObservedInventory; reaction?: OrderedReaction; reactive?: ReactiveContact; chart?: ChartNavigation; recolor?: TopologicalRecolor; axial?: AxialQuestion; window?: WindowQuestion; recruitment?: OrderedRecruitment; workshop?: RankedWorkshop; symbols?: SymbolTransactions; morphology?: NativeMorphologyFamily; feedback?: NativeFeedbackFamily; fields?: AddressedMaterial; binding?: ObservedBinding; preparations?: LinkedTemporalPreparation; preview?: NativePreviewPacking; selectedRigid?: NativeSelectedRigid };
   private callerAcquisitions = 0;
   private callerBoundaryReplays = 0;
@@ -259,9 +261,11 @@ export class NativeV6Runtime implements NativeV6Backend {
   private executionDigest: string | null = null;
   private selectionProgram: StoredNativeProgram | null = null;
   private selectionReceipt: NativeSrcReceipt | null = null;
+  private familyAgendaReceipt: FamilyAgendaReceipt | null = null;
   private planning: { execution: NativeExecution; inputs: readonly NativeCommand[];
     offers: Map<string, { family: NativeFamily; proposal: NativeProposal } | null>;
-    entryOffers: Map<string, NativeProposal | null>; sourceStops: Map<string, NativeRecord | null>; coordination: R[]; refusals: R[] } | null = null;
+    entryOffers: Map<string, NativeProposal | null>; sourceStops: Map<string, NativeRecord | null>;
+    coordination: R[]; refusals: R[]; observedTrials: Map<number, FamilyTrial> } | null = null;
 
   constructor(configuration: NativeV6RuntimeConfiguration) {
     if (!configuration.sourceDigest || !configuration.families.length
@@ -272,6 +276,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.sicFrontier = configuration.sicFrontier;
     this.sicView = configuration.sicView;
     this.sicInformation = configuration.sicInformation;
+    this.familyAgenda = configuration.familyAgenda;
     this.acquisitionFamilies = configuration.acquisitionFamilies;
     if (this.callerStrategy && !configuration.authorityPolicy) throw new TypeError('The common caller requires native WHY/ACT authority');
     this.families = [...configuration.families, ...(this.callerStrategy ? nativeCallerFamilies(() => {
@@ -586,82 +591,91 @@ export class NativeV6Runtime implements NativeV6Backend {
       remainingLevelActions: this.remainingLevelActions() };
   }
 
-  /** Original V6 family-selection SRC tree, interpreted by the V7 TS engine. */
+  /** SIC and the stored SRC workflow share the actual family admission and ownership. */
   private async selectFamily(execution: NativeExecution, inputs: readonly NativeCommand[]): Promise<{ family: NativeFamily; proposal: NativeProposal } | null> {
     if (!this.current || !this.observation) throw new Error('Missing current selection context');
     this.caller?.prepare(this.observation, this.remaining());
     this.acquisitionFamilies?.morphology?.beginDecision();
     this.planning = { execution: this.currentExecution(execution),
-      inputs, offers: new Map(), entryOffers: new Map(), sourceStops: new Map(), coordination: [], refusals: [] };
+      inputs, offers: new Map(), entryOffers: new Map(), sourceStops: new Map(), coordination: [], refusals: [], observedTrials: new Map() };
     try {
       if (!this.knowledge) throw new Error('Native knowledge store is not initialized');
+      const offer = async (index: unknown): Promise<FamilyTrial> => {
+      if (typeof index !== 'number' || !Number.isSafeInteger(index) || index < 0 || index >= this.groups.length || !this.planning || !this.current || !this.observation) throw new Error('Invalid native family selection cursor');
+      const group = this.groups[index]!;
+      this.check(this.planning.execution); await this.planning.execution.yieldControl(); this.check(this.planning.execution);
+      let offered: { family: NativeFamily; proposal: NativeProposal } | null = null;
+      for (const [entryIndex, id] of group.families.entries()) {
+        const family = this.families.find(candidate => candidate.id === id)!;
+        const enabled = objectValue(this.knowledge!.value(`family_activation:${family.id}`)).enabled === true;
+        const entry = group.entryPoints?.[entryIndex];
+        const entryKey = `${group.id}:${family.id}:${entry}`;
+        let proposal = !enabled ? null : this.planning.entryOffers.has(entryKey)
+          ? this.planning.entryOffers.get(entryKey)! : entry
+          ? await family.proposeInSubquestion!(group.id, entry, this.observation, this.current.frame_rows,
+            this.planning.inputs, this.remaining(), this.planning.execution)
+          : family.proposeInGroup
+          ? await family.proposeInGroup(group.id, this.observation, this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution)
+          : await family.propose(this.observation, this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution);
+        if (proposal?.requires_current_service_witness === true) {
+          const admitted = await this.admitCurrentRequiredService(family, proposal);
+          if (!admitted) {
+            const refusal = { family: family.id, group: group.id, entry: entry ?? null,
+              source_state_ref: `family_state:${family.id}`, refusal: {
+                rule: 'current_required_service_witness_on_every_selection_path',
+                observation_ref: this.observation.observation_ref, level_epoch: this.observation.level_epoch,
+                frame_hash: this.observation.frame_hash, status: 'unknown', release_authority: false,
+                reason: 'current_service_trial_or_guard_not_admitted' } };
+            this.planning.refusals.push(refusal); this.note({ kind: 'native_proposal_refusal', ...refusal });
+            continue;
+          }
+          proposal = admitted.proposal;
+        }
+        if (family.id === 'morphology') {
+          const measured = this.acquisitionFamilies?.morphology?.currentMeasurementReceipt(this.observation);
+          if (measured) this.note({ kind: 'morphology_measurement', ...measured });
+        }
+        if (enabled && !proposal) {
+          const refusal = this.retainProposalRefusal(family, group.id, entry ?? null);
+          if (refusal?.block_unrelated_probe === true) {
+            // The current owner explicitly retained an unanswered bounded
+            // question. Preserve its place in source order: lower-priority
+            // probes cannot turn that unknown result into action authority.
+            offered = { family, proposal: { ...refusal, status: 'unknown',
+              kind: 'native_current_proposal_refusal', actions: [], steps: [] } };
+            break;
+          }
+          // Recognition closes only this source group. Other strategy
+          // groups still run; no global blocking refusal is invented.
+          if (this.retainSourceGroupStop(family, group.id, entry ?? null)) break;
+        }
+        if (proposal && group.id === 'goal_access'
+          && (await this.deferUnlearnedInvitation(proposal) || await this.scopeStationaryContactRefusal(family, proposal, index, entryIndex)
+            || await this.scopeReturnedContactRefusal(family, proposal))) continue;
+        if (proposal) {
+          const preferred = await this.preferCurrentRequiredService(index, entryIndex, family, proposal)
+            ?? await this.preferAcquiredContinuation(index, entryIndex, family, proposal);
+          if (preferred) {
+            this.planning.offers.set(preferred.group, preferred.offer);
+            return { family: preferred.group, selected: true, source_trigger_group: group.id };
+          }
+          offered = { family, proposal }; break;
+        }
+      }
+      this.planning.offers.set(group.id, offered);
+      return { family: group.id, selected: offered !== null };
+      };
+      const readShadow = () => selectStrategyFamily(this.groups, async index => {
+        const trial = this.planning?.observedTrials.get(index);
+        return trial ?? null;
+      });
       this.selectionProgram ??= await this.knowledge.registerProgram(SELECTION_PROGRAM, {
         'families.begin': () => ({ pending: true, done: false, index: 0, progress: 0, visited: [] }),
-        'families.offer': async (args): Promise<JsonValue> => {
-          const session = objectValue(args.session), index = session.index;
-          if (typeof index !== 'number' || !Number.isSafeInteger(index) || index < 0 || index >= this.groups.length || !this.planning || !this.current || !this.observation) throw new Error('Invalid native family selection cursor');
-          const group = this.groups[index]!;
-          this.check(this.planning.execution); await this.planning.execution.yieldControl(); this.check(this.planning.execution);
-          let offered: { family: NativeFamily; proposal: NativeProposal } | null = null;
-          for (const [entryIndex, id] of group.families.entries()) {
-            const family = this.families.find(candidate => candidate.id === id)!;
-            const enabled = objectValue(this.knowledge!.value(`family_activation:${family.id}`)).enabled === true;
-            const entry = group.entryPoints?.[entryIndex];
-            const entryKey = `${group.id}:${family.id}:${entry}`;
-            let proposal = !enabled ? null : this.planning.entryOffers.has(entryKey)
-              ? this.planning.entryOffers.get(entryKey)! : entry
-              ? await family.proposeInSubquestion!(group.id, entry, this.observation, this.current.frame_rows,
-                this.planning.inputs, this.remaining(), this.planning.execution)
-              : family.proposeInGroup
-              ? await family.proposeInGroup(group.id, this.observation, this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution)
-              : await family.propose(this.observation, this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution);
-            if (proposal?.requires_current_service_witness === true) {
-              const admitted = await this.admitCurrentRequiredService(family, proposal);
-              if (!admitted) {
-                const refusal = { family: family.id, group: group.id, entry: entry ?? null,
-                  source_state_ref: `family_state:${family.id}`, refusal: {
-                    rule: 'current_required_service_witness_on_every_selection_path',
-                    observation_ref: this.observation.observation_ref, level_epoch: this.observation.level_epoch,
-                    frame_hash: this.observation.frame_hash, status: 'unknown', release_authority: false,
-                    reason: 'current_service_trial_or_guard_not_admitted' } };
-                this.planning.refusals.push(refusal); this.note({ kind: 'native_proposal_refusal', ...refusal });
-                continue;
-              }
-              proposal = admitted.proposal;
-            }
-            if (family.id === 'morphology') {
-              const measured = this.acquisitionFamilies?.morphology?.currentMeasurementReceipt(this.observation);
-              if (measured) this.note({ kind: 'morphology_measurement', ...measured });
-            }
-            if (enabled && !proposal) {
-              const refusal = this.retainProposalRefusal(family, group.id, entry ?? null);
-              if (refusal?.block_unrelated_probe === true) {
-                // The current owner explicitly retained an unanswered bounded
-                // question. Preserve its place in source order: lower-priority
-                // probes cannot turn that unknown result into action authority.
-                offered = { family, proposal: { ...refusal, status: 'unknown',
-                  kind: 'native_current_proposal_refusal', actions: [], steps: [] } };
-                break;
-              }
-              // Recognition closes only this source group. Other strategy
-              // groups still run; no global blocking refusal is invented.
-              if (this.retainSourceGroupStop(family, group.id, entry ?? null)) break;
-            }
-            if (proposal && group.id === 'goal_access'
-              && (await this.deferUnlearnedInvitation(proposal) || await this.scopeStationaryContactRefusal(family, proposal, index, entryIndex)
-                || await this.scopeReturnedContactRefusal(family, proposal))) continue;
-            if (proposal) {
-              const preferred = await this.preferCurrentRequiredService(index, entryIndex, family, proposal)
-                ?? await this.preferAcquiredContinuation(index, entryIndex, family, proposal);
-              if (preferred) {
-                this.planning.offers.set(preferred.group, preferred.offer);
-                return { family: preferred.group, selected: true, source_trigger_group: group.id };
-              }
-              offered = { family, proposal }; break;
-            }
-          }
-          this.planning.offers.set(group.id, offered);
-          return { family: group.id, selected: offered !== null };
+        'families.offer': async args => {
+          const index = objectValue(args.session).index;
+          const trial = await offer(index);
+          if (this.familyAgenda === 'shadow' && typeof index === 'number') this.planning?.observedTrials.set(index, trial);
+          return trial;
         },
         'families.finish': args => {
           const session = objectValue(args.session), trial = objectValue(args.trial);
@@ -675,18 +689,37 @@ export class NativeV6Runtime implements NativeV6Backend {
         },
       });
       this.executionDigest ??= await this.knowledge.executionDigest();
-      const selected = await this.selectionProgram.run({ request: this.observation.observation_ref }, { signal: execution.signal });
-      this.selectionReceipt = selected.receipt;
-      this.note({ kind: 'src_selection', workflow: selected.receipt.workflow, src_hash: selected.receipt.src_hash,
-        source_definition_hash: selected.receipt.source_definition_hash, native_execution_hash: selected.receipt.native_execution_hash,
-        graph_chain: this.knowledge.graphChain, edited: selected.receipt.edited,
-        instructions: selected.receipt.instructions, executed_statements: selected.receipt.executed_statements });
-      const result = objectValue(selected.result);
+      const editedProgram = objectValue(this.knowledge.value(`program:${SELECTION_PROGRAM}`)).edited === true;
+      this.familyAgendaReceipt = null;
+      let result: { selected: unknown; visited: unknown };
+      if (this.familyAgenda === 'active' && !editedProgram) {
+        const agenda = await selectStrategyFamily(this.groups, offer);
+        result = agenda;
+        this.selectionReceipt = null;
+        this.familyAgendaReceipt = freeze({ selected: agenda.selected, visited: agenda.visited, mode: 'active',
+          observationRef: this.observation.observation_ref });
+      } else {
+        const selected = await this.selectionProgram.run({ request: this.observation.observation_ref }, { signal: execution.signal });
+        this.selectionReceipt = selected.receipt;
+        this.note({ kind: 'src_selection', workflow: selected.receipt.workflow, src_hash: selected.receipt.src_hash,
+          source_definition_hash: selected.receipt.source_definition_hash, native_execution_hash: selected.receipt.native_execution_hash,
+          graph_chain: this.knowledge.graphChain, edited: selected.receipt.edited,
+          instructions: selected.receipt.instructions, executed_statements: selected.receipt.executed_statements });
+        const source = objectValue(selected.result);
+        result = { selected: source.selected, visited: source.visited };
+        if (this.familyAgenda === 'shadow' && !editedProgram) {
+          const agenda = await readShadow();
+          this.familyAgendaReceipt = freeze({ selected: agenda.selected, visited: agenda.visited, mode: 'shadow',
+            observationRef: this.observation.observation_ref, matchesSource: agenda.complete
+              && (source.selected ?? null) === agenda.selected && v6Canonical(source.visited) === v6Canonical(agenda.visited) });
+        }
+      }
       if (typeof result.selected !== 'string') return null;
       const offered = this.planning.offers.get(result.selected);
-      if (!offered) throw new Error('The SRC selection does not bind an offered native family');
+      if (!offered) throw new Error('The selection does not bind an offered native family');
       if (this.caller) {
-        offered.proposal.strategy_receipt = { ...selected.receipt, visited: result.visited, selected: result.selected, deferred_curiosity: this.caller.deferredCuriosity,
+        offered.proposal.strategy_receipt = { ...this.selectionReceipt, visited: result.visited, selected: result.selected, deferred_curiosity: this.caller.deferredCuriosity,
+          ...(this.familyAgendaReceipt ? { agenda: this.familyAgendaReceipt } : {}),
           ...(this.planning.coordination.length ? { native_coordination: this.planning.coordination } : {}),
           ...(this.planning.refusals.length ? { native_proposal_refusals: this.planning.refusals } : {}),
           ...(this.caller.returnedAttention ? { attention_return: Object.fromEntries(['id', 'status', 'parent', 'pair_ref', 'returned_at'].map(key => [key, this.caller!.returnedAttention![key]])) } : {}) };
@@ -1399,6 +1432,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'sealed_prefix', statement: 'outcome.acquire' }, [{
       id: evidenceId, kind: 'prefix_evidence', family: prefix.family.id, status: 'observed',
       value: { decision_revision: prefix.revision, proposal: prefix.proposal, selection: this.selectionReceipt,
+        ...(this.familyAgendaReceipt ? { sic_family_selection: this.familyAgendaReceipt } : {}),
         ...(prefix.sicPlan ? { sic_plan: {
           id: prefix.sicPlan.id, family: prefix.sicPlan.family, strategy: prefix.sicPlan.strategy, authority: prefix.sicPlan.authority,
           objective: prefix.sicPlan.objective, subObjective: prefix.sicPlan.subObjective,
@@ -1410,7 +1444,8 @@ export class NativeV6Runtime implements NativeV6Backend {
         composed_reconciliation: composed, caller_transfer: transfer,
         transitions: prefix.witnessed.map(transition => ({ command: transition.command,
           before: transition.before.observation_ref, after: transition.after.observation_ref, outcome: transition.outcome })) },
-      relations: [{ relation: 'records', target: `family_state:${prefix.family.id}` }, { relation: 'selected_by', target: `program:${SELECTION_PROGRAM}` }],
+      relations: [{ relation: 'records', target: `family_state:${prefix.family.id}` },
+        ...(this.selectionReceipt ? [{ relation: 'selected_by', target: `program:${SELECTION_PROGRAM}` }] : [])],
     }, ...contactScope, ...(this.authority?.checkpointWrites() ?? [])], evidenceId);
     this.restoreFamilies();
     this.kind = 'boundary'; this.reason = null;
@@ -1861,6 +1896,7 @@ export class NativeV6Runtime implements NativeV6Backend {
         nativeCallerExtensions: NATIVE_CALLER_EXTENSIONS,
         supportSubcompositionsPending: this.acquisitionFamilies?.supports.pendingSubcompositions ?? null, fullV6Parity: false },
       srcDecision: this.selectionReceipt,
+      ...(this.familyAgendaReceipt ? { sicFamilySelection: this.familyAgendaReceipt } : {}),
       whyAct: this.authority?.snapshot() ?? { enabled: false, scope: 'injected_family_test_runtime' },
       caller: this.caller ? { enabled: true, acquiredTransitions: this.callerAcquisitions, boundaryReplays: this.callerBoundaryReplays,
         goalEvents: this.caller.goalEventCount, frontierDeltas: this.caller.deltaSequence,
@@ -2420,6 +2456,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
   return new NativeV6Runtime({ sourceDigest, families, groups, authorityPolicy: loaded.common, callerStrategy: configuration,
     sicFrontier: recovery.frontier ?? defaultFrontierConfiguration, sicView: 'active', sicInformation: 'active',
+    familyAgenda: recovery.familyAgenda,
     acquisitionFamilies: { supports, recall, framed, outline: outlineOwner, inventory, reaction, reactive, chart, recolor, axial, window, recruitment, workshop, symbols, morphology, feedback, fields, binding, preparations, preview: previewOwner, selectedRigid: selectedRigidOwner },
     maxPointOccurrences: loaded.common.input_domain.max_point_occurrences, ...(options.now ? { now: options.now } : {}) });
 }

@@ -45,7 +45,8 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number, pa
       if (state?.status === 'error') throw new Error(`${code}: ${state.message}`);
       if (board.levelsCompleted <= level || state?.status === 'stopped') break;
     }
-    return { actions: trace.length, levels: board.levelsCompleted, stop: state?.reason ?? null, trace, coverage: state?.sicActionCoverage };
+    return { actions: trace.length, levels: board.levelsCompleted, stop: state?.reason ?? null, trace,
+      coverage: state?.sicActionCoverage, selection: state?.sicFamilySelection };
   } finally {
     agent.dispose();
   }
@@ -124,11 +125,35 @@ async function qualifyActionCoverage() {
   }
 }
 
+async function qualifyFamilyAgenda() {
+  const runtime = new BrowserGameRuntime();
+  try {
+    const results = [];
+    for (const fixture of cases) {
+      output.textContent = JSON.stringify({ status: 'running', game: fixture.game, results }, null, 2);
+      const baseline = await run(runtime, fixture.game, fixture.target, defaultRecoveryPack);
+      const shadow = await run(runtime, fixture.game, fixture.target, { ...defaultRecoveryPack, familyAgenda: 'shadow' });
+      const active = await run(runtime, fixture.game, fixture.target, { ...defaultRecoveryPack, familyAgenda: 'active' });
+      const equalResult = (candidate: typeof active) => compare(baseline, candidate).divergence === null
+        && candidate.levels === baseline.levels && candidate.stop === baseline.stop;
+      results.push({ game: fixture.game, actions: active.actions, levels: active.levels, stop: active.stop,
+        traceDigest: await hash(active.trace), coverage: active.coverage,
+        matchesShadow: equalResult(shadow) && shadow.selection?.matchesSource === true,
+        matchesActive: equalResult(active) && active.selection?.mode === 'active',
+        baselineExpected: baseline.actions === fixture.baseline[0] && baseline.levels === fixture.baseline[1] });
+    }
+    output.textContent = JSON.stringify({ status: results.every(row => row.matchesShadow && row.matchesActive && row.baselineExpected) ? 'passed' : 'failed', results }, null, 2);
+  } finally {
+    runtime.dispose();
+  }
+}
+
 start.addEventListener('click', async () => {
   start.disabled = true;
   try {
     const parameters = new URLSearchParams(location.search);
-    await (parameters.has('coverage') ? qualifyActionCoverage() : parameters.has('authored') ? qualifyAuthoredRule() : qualify());
+    await (parameters.has('family') ? qualifyFamilyAgenda() : parameters.has('coverage') ? qualifyActionCoverage()
+      : parameters.has('authored') ? qualifyAuthoredRule() : qualify());
   } catch (error) {
     output.textContent = JSON.stringify({ status: 'failed', error: error instanceof Error ? error.message : String(error) });
   } finally {

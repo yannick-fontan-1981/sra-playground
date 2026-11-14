@@ -219,6 +219,10 @@ Quand un obstacle ou une portion nouvellement révélée pose encore une questio
 
 Dans le groupe `information_goal`, l’agenda SIC essaie les expériences de clic, de mouvement et de réponse couplée des affichages dans l’ordre qualifié par les retours antérieurs. Les gardes de réserve, de préservation et de retour à l’objectif parent restent actives. Une expérience qui échoue à l’admission laisse essayer la suivante. Stratégies affiche le nombre de retours prédits différents, les essais admis ou refusés et combien de prédictions le retour confirme, contredit ou laisse sans verdict. Le test différentiel compare le mode natif, shadow et actif sur les cas de garde et d’attention de la référence. Les autres fournisseurs du groupe SRC `information_goal`, notamment les séquences visuelles et les retours dédiés, gardent leur sélection native.
 
+### Arbitrage entre familles
+
+Le réglage **Selection across strategy families** permet de comparer l’agenda SIC en shadow ou de lui confier l’arbitrage d’une nouvelle session. L’agenda consomme les offres dans l’ordre déclaré et s’arrête sur la première offre admise ou sur un refus qui protège une question bloquante. Il utilise les mêmes fournisseurs, gardes et priorités de continuation. En shadow, il compare le résultat et l’ordre de visite en relisant les essais du workflow SRC. Aucun fournisseur ne travaille deux fois. En actif, le reçu est lié au préfixe dans la mémoire native. Une édition explicite du workflow SRC reste exécutable et reprend la main à la prochaine frontière. Le réglage natif reste la valeur par défaut pendant cette qualification.
+
 | Série | SHA-256 du reçu brut de la seconde fenêtre |
 | --- | --- |
 | A1 | `5919c1547cb8cd18aacd9e2043a10e921300884fc0163e743248b644c16ab2f0` |

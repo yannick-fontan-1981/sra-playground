@@ -144,9 +144,9 @@ function board(pixel = 0): GameObservation {
     level: 1, levelCount: 3, levelsCompleted: 0, canUndo: false, canSelectLevel: true, defaultFps: 10 };
 }
 
-async function setup(prefixLength = 1) {
+async function setup(prefixLength = 1, familyAgenda?: 'active' | 'shadow') {
   const family = new CounterFamily(prefixLength);
-  const runtime = new NativeV6Runtime({ sourceDigest: 'native-store-reference', families: [family], maxPointOccurrences: 250, now: () => 0 });
+  const runtime = new NativeV6Runtime({ sourceDigest: 'native-store-reference', families: [family], maxPointOccurrences: 250, now: () => 0, familyAgenda });
   const service = new V6AgentService(() => runtime);
   const first = await service.handle({ type: 'init', sessionId: 'store-test', sequence: 0, observation: toV6PublicObservation(board()), budgets: { targetLevels: 3, levelActionCaps: [600, 600, 600] } });
   return { family, runtime, service, first };
@@ -183,6 +183,31 @@ test('family state is read from the Kernel graph before the next real plan', asy
   assert.equal(family.fraction, 0.25);
   assert.equal(next.ticket!.graphChain, graph.chain);
   assert.equal(next.ticket!.nativeExecutionDigest, next.snapshot.nativeExecutionDigest);
+});
+
+test('the family agenda shadows multiple decisions and an active session honors a stored SRC replacement', async () => {
+  const shadow = await setup(1, 'shadow');
+  for (let sequence = 0, result = shadow.first; sequence < 2; sequence++) {
+    assert.equal(result.snapshot.sicFamilySelection?.matchesSource, true);
+    assert.equal(result.snapshot.sicFamilySelection?.selected, 'counter');
+    if (sequence === 0) {
+      await advance(shadow.service, result);
+      result = await shadow.service.handle({ type: 'resume', sessionId: 'store-test', sequence: 1 });
+    }
+  }
+  const active = await setup(1, 'active');
+  assert.deepEqual(active.first.command, shadow.first.command);
+  assert.equal(active.first.snapshot.sicFamilySelection?.mode, 'active');
+  assert.equal((active.first.snapshot as Record<string, unknown>).srcDecision, null);
+  const boundary = await advance(active.service, active.first);
+  await active.service.handle({ type: 'edit', sessionId: 'store-test', sequence: 1, edit: {
+    expectedGraphChain: boundary.snapshot.graphChain!, reason: 'Run the replacement selection workflow',
+    changes: [{ type: 'replace_program', programId: WORKFLOW, module: editedModule() }],
+  } });
+  const result = await active.service.handle({ type: 'resume', sessionId: 'store-test', sequence: 1 });
+  assert.equal(result.kind, 'stopped');
+  assert.equal(result.snapshot.sicFamilySelection, undefined);
+  assert.equal((result.snapshot as Record<string, any>).srcDecision.edited, true);
 });
 
 test('edits reject an active prefix even when its caller is paused', async () => {
