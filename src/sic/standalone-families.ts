@@ -20,6 +20,7 @@ import { codeRouteId } from './code-route.ts';
 import { profileTransferId } from './profile-transfer.ts';
 import { orderedReplenishmentId } from './ordered-replenishment.ts';
 import { programOriginId } from './program-origin.ts';
+import { previewPlacementId } from './preview-placement.ts';
 
 export const standalonePlanningGroups = [
   { id: 'repair_visible_field', families: [fieldRepairId, orderedContactId, supportTransferId] },
@@ -30,6 +31,7 @@ export const standalonePlanningGroups = [
   { id: 'construct_executable_program', families: [codeRouteId, programOriginId] },
   { id: 'fit_profiles_into_receivers', families: [profileTransferId] },
   { id: 'preserve_ordered_team', families: [orderedReplenishmentId] },
+  { id: 'fill_visible_partition', families: [previewPlacementId] },
   { id: 'explore_available_inputs', families: [cavityAccessId, publicInputExplorationId] },
 ] as const;
 

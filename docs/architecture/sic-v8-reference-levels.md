@@ -51,7 +51,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | HPDL | 6 | — | — | — | — | — | — | — |
 | ISOS | 6 | — | — | — | — | — | — | — |
 | KA59 | 7 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/KA59/LVL1/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | — |
-| KATA | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/KATA/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | — |
+| KATA | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/KATA/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 1 |
 | KEYD | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/KEYD/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | — |
 | KLOT | 6 | [3](../../docs/migration/lot6b-evidence/development-freeze-01/klot-campaign.json.gz) | — | — | — | 3 | 4 | — |
 | LF52 | 10 | [3](../../docs/migration/native-campaigns-v45/lf52-three-levels.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/LF52/LVL1/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 1 |
