@@ -11,7 +11,7 @@ const read = (path: string) => readFileSync(new URL(path, root));
 // These are already retained actual returns of the earlier cold campaign, not
 // a game host, a proposed trajectory or expected results from the new helper.
 const directory = 'docs/migration/native-campaigns-v52/';
-const campaign = JSON.parse(read(`${directory}gare-three-levels.json`).toString());
+const campaign = JSON.parse(gunzipSync(read(`${directory}gare-three-levels.json.gz`)).toString());
 const trace = JSON.parse(gunzipSync(read(`${directory}gare-public-trace.json.gz`)).toString());
 const prefix = campaign.prefixes[16], proposal = prefix.framedTransfer.proposal;
 const seed = campaign.prefixes[15].framedAcquisition.sourceState;

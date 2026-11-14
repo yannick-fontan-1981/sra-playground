@@ -11,7 +11,7 @@ const root = new URL('../', import.meta.url);
 const read = (path: string) => readFileSync(new URL(path, root));
 // Frozen actual returns from the earlier failed campaign. No host is accessed.
 const directory = 'docs/migration/native-campaigns-v52/';
-const campaign = JSON.parse(read(`${directory}gare-three-levels.json`).toString());
+const campaign = JSON.parse(gunzipSync(read(`${directory}gare-three-levels.json.gz`)).toString());
 const trace = JSON.parse(gunzipSync(read(`${directory}gare-public-trace.json.gz`)).toString());
 const proposal = campaign.prefixes[16].framedTransfer.proposal;
 const session = proposal.binding.observation_ref.split(':epoch:')[0];
