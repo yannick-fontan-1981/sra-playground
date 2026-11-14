@@ -23,14 +23,18 @@ const values = (rows: NativeRows, boxes: NativeBox[]) => {
   const measured = boxes.map(box => value(rows, box));
   return measured.some(color => color === null) ? null : measured as number[];
 };
-const widthHeight = ([l, t, r, b]: NativeBox) => `${r - l},${b - t}`;
 
 function measure(observation: NativeObservation, rows: NativeRows): State | null {
   const groups = framedRows(observation, rows);
   const candidates = groups.flatMap(controls => {
     const initial = values(rows, controls);
     if (controls.length < 3 || !initial || new Set(initial).size !== 1) return [];
-    return groups.filter(receivers => receivers !== controls && widthHeight(controls[0]!) !== widthHeight(receivers[0]!)
+    const rowWidth = ([l, , r]: NativeBox) => r - l + 1;
+    const rowHeight = ([, t, , b]: NativeBox) => b - t + 1;
+    return groups.filter(receivers => receivers !== controls && receivers.length === controls.length
+      && rowHeight(receivers[0]!) === rowHeight(controls[0]!)
+      && rowWidth(receivers[0]!) > rowWidth(controls[0]!)
+      && Math.abs(receivers[0]![1] - controls[0]![1]) >= 4 * rowHeight(controls[0]!)
       && new Set(values(rows, receivers)).size >= 2).map(receivers => ({ controls, receivers, initial: initial[0]! }));
   });
   return candidates.length === 1 ? { ...candidates[0]!, epoch: observation.level_epoch, attempts: [], inert: [],

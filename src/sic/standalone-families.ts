@@ -34,6 +34,7 @@ import { portPairingId } from './port-pairing.ts';
 import { displayCouplingId } from './display-coupling.ts';
 import { framedSearchId } from './framed-search.ts';
 import { glyphEditingId } from './glyph-editing.ts';
+import { fieldIsolationId } from './field-isolation.ts';
 
 export const standalonePlanningGroups = [
   { id: 'repair_visible_field', families: [fieldRepairId, orderedContactId, supportTransferId] },
@@ -48,7 +49,7 @@ export const standalonePlanningGroups = [
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, facetGrowthId] },
   { id: 'visit_marked_surface', families: [markedLatticeId] },
   { id: 'place_incoming_groups', families: [queuedPlacementId] },
-  { id: 'explore_available_inputs', families: [displayCouplingId, cavityAccessId, publicInputExplorationId] },
+  { id: 'explore_available_inputs', families: [displayCouplingId, fieldIsolationId, cavityAccessId, publicInputExplorationId] },
 ] as const;
 
 export const standalonePlanningFamilies: readonly string[] = Object.freeze(standalonePlanningGroups.flatMap(group => group.families));
