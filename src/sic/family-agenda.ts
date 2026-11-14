@@ -1,4 +1,6 @@
 export type FamilyAgendaMode = 'shadow' | 'active';
+export type FamilyAgendaSetting = FamilyAgendaMode | 'native';
+export const defaultBrowserFamilyAgenda: FamilyAgendaSetting = 'active';
 
 export type FamilyTrial = {
   readonly family: string;

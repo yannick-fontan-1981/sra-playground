@@ -121,6 +121,9 @@ test('portable recovery packs validate content and preserve the last distinct re
     title: 'Compare directions', commands: 'directions', minimumUsageGap: 2, mode: 'shadow', prefer: 'command_order',
   } } });
   assert.equal(custom.schemaVersion, 3);
+  const nativeSelection = recoveryRevision({ ...defaultRecoveryPack, familyAgenda: 'native' });
+  assert.equal(nativeSelection.schemaVersion, 4);
+  assert.deepEqual(readRecoveryRevision(JSON.parse(JSON.stringify(nativeSelection))), nativeSelection);
   assert.deepEqual(readRecoveryRevision(JSON.parse(JSON.stringify(custom))), custom);
   assert.throws(() => recoveryRevision({ ...defaultRecoveryPack, frontier: { ...custom.configuration.frontier!,
     localRule: { ...custom.configuration.frontier!.localRule!, minimumUsageGap: 0 },

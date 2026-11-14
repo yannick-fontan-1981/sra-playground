@@ -2499,7 +2499,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
   return new NativeV6Runtime({ sourceDigest, families, groups, authorityPolicy: loaded.common, callerStrategy: configuration,
     sicFrontier: recovery.frontier ?? defaultFrontierConfiguration, sicView: 'active', sicInformation: 'active',
-    familyAgenda: recovery.familyAgenda,
+    familyAgenda: recovery.familyAgenda === 'native' ? undefined : recovery.familyAgenda,
     openingCuriosity: recovery.openingCuriosity,
     acquisitionFamilies: { supports, recall, framed, outline: outlineOwner, inventory, reaction, reactive, chart, recolor, axial, window, recruitment, workshop, symbols, morphology, feedback, fields, binding, preparations, preview: previewOwner, selectedRigid: selectedRigidOwner },
     maxPointOccurrences: loaded.common.input_domain.max_point_occurrences, ...(options.now ? { now: options.now } : {}) });

@@ -3,6 +3,7 @@ import { nextRecoveryRevision, readRecoveryRevision, recoveryRevision } from './
 import { evaluateFrontierLocalRule, compileFrontierLocalRule, defaultFrontierConfiguration, frontierInputOrders,
   isFrontierInputOrder, type FrontierChoiceEvidence, type FrontierInputOrder, type FrontierLocalRule } from './frontier-configuration.ts';
 import { frontierStrategies, frontierStrategyGraph } from './frontier-strategy.ts';
+import { defaultBrowserFamilyAgenda } from './family-agenda.ts';
 import { viewStrategies, viewStrategyGraph } from './view-strategy.ts';
 import { auditStrategyGraph, type StrategyGraph } from './strategy-agenda.ts';
 import type { V6BackendSnapshot } from '../runtime/v6-agent-protocol.ts';
@@ -102,7 +103,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
     nodes.value = String(pack.maxNodes);
     priority.value = (pack.strategyOrder ?? contactRecoveryOrder)[0]!;
     inputOrder.value = (pack.frontier ?? defaultFrontierConfiguration).inputOrder;
-    familyAgenda.value = pack.familyAgenda ?? 'native';
+    familyAgenda.value = pack.familyAgenda ?? defaultBrowserFamilyAgenda;
     openingCuriosity.value = pack.openingCuriosity ?? 'native';
     const rule: FrontierLocalRule | undefined = pack.frontier?.localRule;
     ruleTitle.value = rule?.title ?? '';
@@ -133,7 +134,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
       const strategyOrder = [priority.value, ...contactRecoveryOrder.filter(id => id !== priority.value)];
       const localRule = readLocalRule();
       const candidate = compileRecoveryPack({ version: 1, mode: mode.value, maxDepth: depth.valueAsNumber, maxNodes: nodes.valueAsNumber, strategyOrder,
-        ...(familyAgenda.value !== 'native' ? { familyAgenda: familyAgenda.value } : {}),
+        familyAgenda: familyAgenda.value,
         ...(openingCuriosity.value !== 'native' ? { openingCuriosity: openingCuriosity.value } : {}),
         frontier: { inputOrder: inputOrder.value, ...(localRule ? { localRule } : {}) } });
       save(nextRecoveryRevision(saved.current, saved.previous, recoveryRevision(candidate)));
@@ -166,7 +167,8 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
       const draftOrder = (draft.configuration.frontier ?? defaultFrontierConfiguration).inputOrder;
       const differences = [
         current.mode === draft.configuration.mode ? null : `mode ${current.mode} → ${draft.configuration.mode}`,
-        current.familyAgenda === draft.configuration.familyAgenda ? null : `family selection → ${draft.configuration.familyAgenda ?? 'native'}`,
+        (current.familyAgenda ?? defaultBrowserFamilyAgenda) === (draft.configuration.familyAgenda ?? defaultBrowserFamilyAgenda)
+          ? null : `family selection → ${draft.configuration.familyAgenda ?? defaultBrowserFamilyAgenda}`,
         current.openingCuriosity === draft.configuration.openingCuriosity ? null : `opening curiosity → ${draft.configuration.openingCuriosity ?? 'native'}`,
         current.maxDepth === draft.configuration.maxDepth ? null : `depth ${current.maxDepth} → ${draft.configuration.maxDepth}`,
         current.maxNodes === draft.configuration.maxNodes ? null : `states ${current.maxNodes} → ${draft.configuration.maxNodes}`,

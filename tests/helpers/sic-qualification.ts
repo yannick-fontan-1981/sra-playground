@@ -22,10 +22,11 @@ async function hash(value: unknown) {
   return Array.from(new Uint8Array(bytes), byte => byte.toString(16).padStart(2, '0')).join('');
 }
 
-async function run(runtime: BrowserGameRuntime, code: string, target: number, pack: RecoveryPack, maxActions?: number) {
+async function run(runtime: BrowserGameRuntime, code: string, target: number | 'complete', pack: RecoveryPack, maxActions?: number) {
   let board = await runtime.load(code, 1);
+  const targetLevels = target === 'complete' ? board.levelCount : target;
   let state: V6AgentSnapshot | undefined;
-  const trace: { action: AgentAction; packet: string }[] = [];
+  const trace: { action: AgentAction; packet: string; level: number; levelsCompleted: number }[] = [];
   const information: { sequence: number; strategy: string; predictions: number | null;
     result?: NonNullable<NativeResolution['outcome']>['informationOutcome'] }[] = [];
   let opening: NonNullable<NativeResolution['frontierStrategy']>['opening'];
@@ -48,17 +49,17 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number, pa
       board = await runtime.action(action.id, action.id === 6 ? action.data : undefined);
       const executionMs = performance.now() - started;
       const packet = await hash([board.frame, board.frames, board.availableActionIds, board.level, board.levelsCompleted, board.state]);
-      trace.push({ action, packet });
+      trace.push({ action, packet, level: board.level, levelsCompleted: board.levelsCompleted });
       return { observation: board, executionMs };
     },
   });
   try {
-    for (let level = 0; level < target; level++) {
+    for (let level = 0; level < targetLevels; level++) {
       await agent.run(600);
       if (state?.status === 'error') throw new Error(`${code}: ${state.message}`);
       if (board.levelsCompleted <= level || state?.status === 'stopped') break;
     }
-    return { actions: trace.length, levels: board.levelsCompleted, stop: state?.reason ?? null, trace,
+    return { actions: trace.length, levels: board.levelsCompleted, stop: state?.reason ?? null, trace, targetLevels, boardState: board.state,
       coverage: state?.sicActionCoverage, selection: state?.sicFamilySelection, information, opening };
   } finally {
     agent.dispose();
@@ -147,7 +148,7 @@ async function qualifyFamilyAgenda(gameFilter: string | null) {
     if (!selected.length) throw new Error('No matching qualification game.');
     for (const fixture of selected) {
       output.textContent = JSON.stringify({ status: 'running', game: fixture.game, results }, null, 2);
-      const baseline = await run(runtime, fixture.game, fixture.target, defaultRecoveryPack);
+      const baseline = await run(runtime, fixture.game, fixture.target, { ...defaultRecoveryPack, familyAgenda: 'native' });
       const shadow = await run(runtime, fixture.game, fixture.target, { ...defaultRecoveryPack, familyAgenda: 'shadow' });
       const active = await run(runtime, fixture.game, fixture.target, { ...defaultRecoveryPack, familyAgenda: 'active' });
       const equalResult = (candidate: typeof active) => compare(baseline, candidate).divergence === null
@@ -199,11 +200,41 @@ async function qualifyOpeningCuriosity() {
   }
 }
 
+async function qualifyOpeningCampaigns(gameFilter: string | null) {
+  const requested = gameFilter?.split(',');
+  const scenarios = [{ game: 'DICO', target: 'complete' as const }, ...cases];
+  const selected = requested ? scenarios.filter(row => requested.includes(row.game)) : scenarios;
+  if (!selected.length) throw new Error('No matching opening campaign.');
+  const runtime = new BrowserGameRuntime();
+  const results = [];
+  try {
+    for (const { game, target } of selected) {
+      output.textContent = JSON.stringify({ status: 'running', game, phase: 'baseline', results }, null, 2);
+      const baseline = await run(runtime, game, target, defaultRecoveryPack);
+      output.textContent = JSON.stringify({ status: 'running', game, phase: 'shadow', results }, null, 2);
+      const shadow = await run(runtime, game, target, { ...defaultRecoveryPack, openingCuriosity: 'shadow' });
+      output.textContent = JSON.stringify({ status: 'running', game, phase: 'active', results }, null, 2);
+      const active = await run(runtime, game, target, { ...defaultRecoveryPack, openingCuriosity: 'active' });
+      const digestCampaign = async (campaign: typeof active) => ({ actions: campaign.actions, levels: campaign.levels,
+        state: campaign.boardState, stop: campaign.stop, digest: await hash(campaign.trace), opening: campaign.opening,
+        levelEnds: campaign.trace.flatMap((entry, index) => entry.levelsCompleted > (campaign.trace[index - 1]?.levelsCompleted ?? 0) ? [index + 1] : []) });
+      results.push({ game, target: baseline.targetLevels, baseline: await digestCampaign(baseline), active: await digestCampaign(active),
+        shadowIdentical: compare(baseline, shadow).divergence === null && baseline.stop === shadow.stop && baseline.boardState === shadow.boardState,
+        ...compare(baseline, active) });
+      output.textContent = JSON.stringify({ status: 'running', game, phase: 'completed', results }, null, 2);
+    }
+    output.textContent = JSON.stringify({ status: 'completed', results }, null, 2);
+  } finally {
+    runtime.dispose();
+  }
+}
+
 start.addEventListener('click', async () => {
   start.disabled = true;
   try {
     const parameters = new URLSearchParams(location.search);
-    await (parameters.has('opening') ? qualifyOpeningCuriosity() : parameters.has('information') ? findInformationExperiments()
+    await (parameters.has('opening-campaign') ? qualifyOpeningCampaigns(parameters.get('games'))
+      : parameters.has('opening') ? qualifyOpeningCuriosity() : parameters.has('information') ? findInformationExperiments()
       : parameters.has('family') ? qualifyFamilyAgenda(parameters.get('games')) : parameters.has('coverage') ? qualifyActionCoverage()
       : parameters.has('authored') ? qualifyAuthoredRule() : qualify());
   } catch (error) {

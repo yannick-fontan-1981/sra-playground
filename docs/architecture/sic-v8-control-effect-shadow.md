@@ -243,6 +243,8 @@ Quand la récupération de contact ou l’exploration refuse de libérer une com
 
 La fenêtre A1/B1/B2/A2 d’arbitrage actif (`90d002a4`) contre la 0.65 (`b9555039`) reproduit les commandes et les résultats attendus sur huit sessions par jeu et version. STCK passe de 10,940 s à 11,964 s (+9,36 %) et SMLP de 17,876 s à 17,704 s (−0,96 %). Les médianes restent dans le seuil de +10 %. La marge sur STCK est de 0,64 point. Cette fenêtre précède la curiosité d’ouverture.
 
+Après la comparaison des cinq témoins et la mesure de coût, l’arbitrage SIC devient le réglage par défaut des nouvelles sessions du Playground. L’atelier peut enregistrer explicitement le mode natif ou shadow. Les packs existants conservent leurs choix explicites et les packs sans choix d’arbitrage suivent le nouveau réglage par défaut. La curiosité d’ouverture garde son réglage distinct. Les scripts qui construisent directement le runtime continuent de pouvoir choisir leur mode.
+
 ### Curiosité en ouverture et opérations de composition
 
 Le catalogue OP01–OP31 se trouve dans Informations → Modèle du jeu. Dans Stratégies, les codes effectivement publiés restent visibles dans le détail ou comme repère sur la ligne d’un épisode. Le titre de l’épisode reprend la stratégie ou la question observée. Une description d’opération ne sert plus de nom de stratégie.

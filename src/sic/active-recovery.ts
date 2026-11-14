@@ -2,7 +2,7 @@ import { symbolicDigest } from '../logos-engine/v6-hash.ts';
 import { compileStrategyGraph, type StrategyFact } from './strategy-agenda.ts';
 import { compileFrontierConfiguration, defaultFrontierConfiguration, type FrontierConfiguration } from './frontier-configuration.ts';
 import { sicNeedId } from './need-identity.ts';
-import type { FamilyAgendaMode } from './family-agenda.ts';
+import type { FamilyAgendaSetting } from './family-agenda.ts';
 import type { OpeningCuriosityMode } from './opening-curiosity.ts';
 
 export const contactRecoveryStrategies = Object.freeze({
@@ -24,7 +24,7 @@ export interface RecoveryPack {
   readonly maxNodes: number;
   readonly strategyOrder?: readonly ContactStrategy[];
   readonly frontier?: FrontierConfiguration;
-  readonly familyAgenda?: FamilyAgendaMode;
+  readonly familyAgenda?: FamilyAgendaSetting;
   readonly openingCuriosity?: OpeningCuriosityMode;
 }
 
@@ -54,12 +54,12 @@ export function compileRecoveryPack(input: unknown = defaultRecoveryPack): Recov
   const frontier = Object.hasOwn(pack, 'frontier') ? compileFrontierConfiguration(pack.frontier) : defaultFrontierConfiguration;
   const familyAgenda = pack.familyAgenda;
   const openingCuriosity = pack.openingCuriosity;
-  if (Object.hasOwn(pack, 'familyAgenda') && familyAgenda !== 'shadow' && familyAgenda !== 'active') throw new TypeError('Invalid family agenda mode.');
+  if (Object.hasOwn(pack, 'familyAgenda') && familyAgenda !== 'shadow' && familyAgenda !== 'active' && familyAgenda !== 'native') throw new TypeError('Invalid family agenda mode.');
   if (Object.hasOwn(pack, 'openingCuriosity') && openingCuriosity !== 'shadow' && openingCuriosity !== 'active') throw new TypeError('Invalid opening curiosity mode.');
   return Object.freeze({ version: 1, mode: pack.mode, maxDepth: pack.maxDepth, maxNodes: pack.maxNodes,
     ...(Array.isArray(order) && order[0] !== contactRecoveryOrder[0] ? { strategyOrder: Object.freeze([...order]) } : {}),
     ...(frontier.localRule || frontier.inputOrder !== defaultFrontierConfiguration.inputOrder ? { frontier } : {}),
-    ...(familyAgenda === 'shadow' || familyAgenda === 'active' ? { familyAgenda } : {}),
+    ...(familyAgenda === 'shadow' || familyAgenda === 'active' || familyAgenda === 'native' ? { familyAgenda } : {}),
     ...(openingCuriosity === 'shadow' || openingCuriosity === 'active' ? { openingCuriosity } : {}) });
 }
 
