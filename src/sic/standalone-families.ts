@@ -31,6 +31,7 @@ import { chartRouteId } from './chart-route.ts';
 import { populationPlacementId } from './population-placement.ts';
 import { carryToFrameId } from './carry-to-frame.ts';
 import { portPairingId } from './port-pairing.ts';
+import { displayCouplingId } from './display-coupling.ts';
 
 export const standalonePlanningGroups = [
   { id: 'repair_visible_field', families: [fieldRepairId, orderedContactId, supportTransferId] },
@@ -45,7 +46,7 @@ export const standalonePlanningGroups = [
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, facetGrowthId] },
   { id: 'visit_marked_surface', families: [markedLatticeId] },
   { id: 'place_incoming_groups', families: [queuedPlacementId] },
-  { id: 'explore_available_inputs', families: [cavityAccessId, publicInputExplorationId] },
+  { id: 'explore_available_inputs', families: [displayCouplingId, cavityAccessId, publicInputExplorationId] },
 ] as const;
 
 export const standalonePlanningFamilies: readonly string[] = Object.freeze(standalonePlanningGroups.flatMap(group => group.families));
