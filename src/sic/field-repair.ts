@@ -4,6 +4,7 @@ import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { resolveStrategyGraph, compileStrategyGraph } from './strategy-agenda.ts';
 import { sicNeedId } from './need-identity.ts';
+import { independentPredictionSupport } from './independent-prediction.ts';
 import type { SicNeed } from './need-registry.ts';
 
 export const fieldRepairId = 'sic_field_repair';
@@ -163,9 +164,13 @@ export function createSicFieldRepair(policy: SymmetryPolicy): NativeFamily<Field
         if (bound.length !== 1) continue;
         const command = bound[0]!;
         const analogous = measured.filter(example => example.before === repair.before);
-        const effectKnown = new Set(analogous.map(example => example.point.join(','))).size >= 2
-          && analogous.some(example => example.expected === repair.expected);
-        const proof: [string, ...string[]] = [ref, ...analogous.map(example => example.ref)];
+        const hypothesis = 'observed_local_rewrite';
+        const support = independentPredictionSupport([hypothesis], analogous.map(example => ({
+          address: example.point.join(','), ref: example.ref, expected: example.expected,
+          actual: example.expected, hypotheses: [hypothesis],
+        })))[0]!.matches;
+        const effectKnown = support.length >= 2 && support.some(example => example.expected === repair.expected);
+        const proof: [string, ...string[]] = [ref, ...support.map(example => example.ref)];
         const { selected } = resolveStrategyGraph({ graph, mode: 'active',
           facts: { unanimousTarget: { value: true, evidence: [ref] }, effectKnown: { value: effectKnown, evidence: proof } },
           planners: { test_local_repair: () => command, apply_local_repair: () => command } });

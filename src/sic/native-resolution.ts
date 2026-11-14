@@ -143,7 +143,8 @@ export interface NativeResolution {
   readonly strategyObjective?: StrategyObjective;
   readonly situationCard?: { readonly strategy: keyof typeof situationStrategies; readonly need: string; readonly mode: string;
     readonly situation: string; readonly triggerCard?: string; readonly agenda: readonly AgendaEntry<keyof typeof situationStrategies>[];
-    readonly evidenceActions: readonly number[]; readonly distance: number | null };
+    readonly evidenceActions: readonly number[]; readonly distance: number | null;
+    readonly predictionSupport?: { readonly actions: readonly number[]; readonly compatibleRelations: number } };
   readonly missingControl?: MissingControlWitness;
   readonly operation: string | null;
   readonly searchOperation?: string;
@@ -497,6 +498,10 @@ export function readNativeResolution(agent: {
     strategy: cardStrategy, need: cardNeed, mode: cardMode, situation: cardSituation,
     ...(typeof card?.triggerCard === 'string' ? { triggerCard: card.triggerCard } : {}),
     agenda: readAgenda(card?.agenda, isSituationStrategy), distance: natural(card?.distance),
+    ...(Array.isArray(card?.predictionSupport) && natural(card.compatibleRelations) !== null ? {
+      predictionSupport: { actions: [...new Set(card.predictionSupport.flatMap(ref => priorAction(ref) ?? []))],
+        compatibleRelations: natural(card.compatibleRelations)! },
+    } : {}),
     evidenceActions: Array.isArray(card?.evidence) ? [...new Set(card.evidence.flatMap(ref => priorAction(ref) ?? []))] : [],
   } : undefined;
   if (situationCard && family === publicInputExplorationId) {

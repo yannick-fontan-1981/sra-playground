@@ -3,6 +3,7 @@ import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 import { sicNeedId } from './need-identity.ts';
+import { independentPredictionSupport, type PredictionTrial } from './independent-prediction.ts';
 
 export const learnCorrespondenceId = 'sic_learn_correspondence';
 export const learnCorrespondenceStrategies = {
@@ -19,8 +20,7 @@ const graph = compileStrategyGraph({ id: 'acquire_field_correspondence_from_retu
 }, ['prediction', 'replicated']);
 
 const transforms = ['horizontal', 'vertical', 'half_turn', 'diagonal', 'antidiagonal'] as const;
-type Sample = { address: string; expected: number; actual: number | null; ref: string; hypotheses: string[] };
-type State = { epoch: number; field: string; marker: number; hypotheses: string[]; samples: Sample[] };
+type State = { epoch: number; field: string; marker: number; hypotheses: string[]; samples: PredictionTrial<number>[] };
 type Candidate = { point: NativePoint; source: NativePoint; expected: number; hypotheses: string[] };
 type Proposal = NativeProposal & { local: State; candidate: Candidate; box: NativeBox; field: NativeBox; needId: string };
 const key = (point: NativePoint) => point.join(',');
@@ -117,9 +117,8 @@ export function createSicLearnCorrespondence(): NativeFamily<Proposal> {
       if (offers.length !== 1) return null;
       const { field, local, candidate } = offers[0]!;
       const ref = observation.observation_ref;
-      const support = candidate.hypotheses.map(name => local.samples.filter(sample => sample.actual === sample.expected && sample.hypotheses.includes(name)));
-      support.sort((a, b) => b.length - a.length);
-      const matches = support[0] ?? [];
+      const support = independentPredictionSupport(candidate.hypotheses, local.samples);
+      const matches = support[0]?.matches ?? [];
       const evidence: [string, ...string[]] = [ref, ...matches.map(sample => sample.ref)];
       const { selected, entries } = resolveStrategyGraph({
         graph, mode: 'active',
@@ -143,7 +142,9 @@ export function createSicLearnCorrespondence(): NativeFamily<Proposal> {
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: { strategy, need: 'Find the relationship that predicts what a marked cell should become',
           situation: label, evidence, agenda: entries, mode: matches.length >= 2 ? 'assimilation' : 'exploration',
-          target, source },
+          target, source, triggerCard: graph.id,
+          predictionSupport: matches.map(sample => sample.ref),
+          compatibleRelations: candidate.hypotheses.length },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },

@@ -1327,6 +1327,13 @@ function renderSituationCards(container: Element, returns: readonly DirectionalR
     const evidence = card.evidenceActions.filter(action => action > 0);
     need.textContent = evidence.length ? `${card.need} · evidence from action ${evidence.at(-1)}` : card.need;
     article.append(header, situation, need);
+    if (card.predictionSupport) {
+      const proof = document.createElement('p');
+      const { actions, compatibleRelations } = card.predictionSupport;
+      const returns = actions.length ? ` · actions ${actions.join(', ')}` : '';
+      proof.textContent = `${actions.length} supporting returns${returns} · ${compatibleRelations} compatible relations`;
+      article.append(proof);
+    }
     if (item) {
       const command = commands[item.command] ?? item.decision?.steps[0]?.action ?? 'Command';
       const result = document.createElement('p');
