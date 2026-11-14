@@ -29,7 +29,7 @@ async function nativeInventory() {
     const full = resolve(path, item.name); if (item.isDirectory()) await walk(full);
     else if (item.isFile() && /\.(ts|json|drm)$/.test(item.name)) names.push(relative(ROOT, full));
   } }
-  for (const folder of ['src/logos-engine', 'src/runtime']) await walk(resolve(ROOT, folder));
+  for (const folder of ['src/logos-engine', 'src/runtime', 'src/sic']) await walk(resolve(ROOT, folder));
   const files = {}; for (const name of names.sort()) files[name] = hash(await readFile(resolve(ROOT, name)));
   return { fileCount: names.length, digest: hash(JSON.stringify(files)), files };
 }
@@ -50,6 +50,8 @@ async function workerMain() {
   const [{ createNativeV6Runtime }, { V6AgentService }] = await Promise.all([
     import('../src/logos-engine/v6-native-runtime.ts'), import('../src/runtime/v6-agent-service.ts'),
   ]);
+  const familyAgenda = process.env.SIC_COST_FAMILY_AGENDA;
+  if (familyAgenda !== undefined && !['native', 'shadow', 'active'].includes(familyAgenda)) throw new Error('Invalid SIC cost family agenda');
   const declarations = { common: JSON.parse(await readFile(resolve(ROOT, DECLARATIONS[0]))),
     strategy: JSON.parse(await readFile(resolve(ROOT, DECLARATIONS[1]))) };
   let service, runtime, rows = [], sequence = 0;
@@ -74,7 +76,10 @@ async function workerMain() {
       if (message.type === 'begin') {
         rows = []; runtime = undefined;
         service = new V6AgentService(async () => {
-          const started = performance.now(); runtime = await createNativeV6Runtime(declarations);
+          const started = performance.now();
+          runtime = await createNativeV6Runtime(declarations, familyAgenda === undefined ? undefined : {
+            recovery: { version: 1, mode: 'active', maxDepth: 88, maxNodes: 1000, familyAgenda },
+          });
           rows.push({ stage: 'runtime_creation', elapsedMs: performance.now() - started, sequence: 0, actionBefore: 0, actionAfter: 0 });
           observe(runtime, 'plan', 'new_decision');
           observe(runtime, 'authorize', 'known_prefix_guard', object => (object.prefix?.index ?? 0) > 0);
@@ -268,7 +273,7 @@ async function main() {
     gitHead: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: ROOT, encoding: 'utf8' }).trim(), checkout: ROOT,
     generator, inputs: inputFiles, nativeSource: sourceBefore, nativeSourceUnchanged: true,
     environment: { node: process.version, platform: platform(), release: release(), cpuModel: cpus()[0]?.model ?? null, logicalCpus: cpus().length },
-    manifest, cases,
+    manifest, cases, ...(process.env.SIC_COST_FAMILY_AGENDA ? { sicFamilyAgenda: process.env.SIC_COST_FAMILY_AGENDA } : {}),
     qualifications: [
       'Actual common native runtime, service and BrowserV6Agent controller; one separate Node worker per case, limited warmup then three or more cold sessions.',
       'Only recorded public returns enter the solver after its own command matches; no game implementation, oracle, imported learned state or expected route is supplied to decisions.',
