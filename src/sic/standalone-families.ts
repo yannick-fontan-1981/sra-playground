@@ -9,8 +9,9 @@ import { transportContactId } from './transport-contact.ts';
 import { bandAlignmentId } from './band-alignment.ts';
 import { sharedArrivalId } from './shared-arrival.ts';
 import { outlineServiceId } from './outline-service.ts';
+import { labeledSequenceId } from './labeled-sequence.ts';
 
 export const standalonePlanningFamilies: readonly string[] = Object.freeze([
   fieldRepairId, orderedContactId, supportTransferId, subsetExperimentId, framedContactId, transportContactId,
-  bandAlignmentId, sharedArrivalId, outlineServiceId, cavityAccessId, publicInputExplorationId,
+  bandAlignmentId, sharedArrivalId, outlineServiceId, labeledSequenceId, cavityAccessId, publicInputExplorationId,
 ]);

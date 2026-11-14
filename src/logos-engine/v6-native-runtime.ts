@@ -44,6 +44,7 @@ import { createSicTransportContact } from '../sic/transport-contact.ts';
 import { createSicBandAlignment } from '../sic/band-alignment.ts';
 import { createSicSharedArrival } from '../sic/shared-arrival.ts';
 import { createSicOutlineService } from '../sic/outline-service.ts';
+import { createSicLabeledSequence } from '../sic/labeled-sequence.ts';
 import { standalonePlanningFamilies } from '../sic/standalone-families.ts';
 import { decidePlanContinuation } from '../sic/plan-step.ts';
 import { retainMissingControlTrial } from '../sic/missing-control-strategy.ts';
@@ -2370,16 +2371,19 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const symmetry = loaded.strategy.declarations[0]?.configuration.regular_field_correspondence;
   if (!symmetry || !loaded.common.ordered_support_transfer || !loaded.common.input_domain) throw new Error('Incomplete native V6 declarations');
   if (recovery.solver === 'sic') {
-    const policy = loaded.strategy.declarations[0]!.configuration.observed_composition_services.rooted_line_question;
+    const configuration = loaded.strategy.declarations[0]!.configuration;
+    const policy = configuration.observed_composition_services.rooted_line_question;
+    const sequence = (configuration.window_constraints as R).labeled_sequence_composition.labeled_sequence_question;
     const groups = standalonePlanningFamilies.map(id => ({ id, families: [id] }));
     const support = loaded.common.ordered_support_transfer;
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 18, groups, symmetry, policy, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 19, groups, symmetry, policy, sequence, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
       createSicFieldRepair(symmetry), createSicOrderedContact(policy, recovery), createSicSupportTransfer(support),
       createSicSubsetExperiment(), createSicFramedContact(), createSicTransportContact(), createSicBandAlignment(),
-      createSicSharedArrival(), createSicOutlineService(), createSicCavityAccess(), createSicPublicInputExploration(),
+      createSicSharedArrival(), createSicOutlineService(), createSicLabeledSequence(sequence, options.now ?? (() => performance.now())),
+      createSicCavityAccess(), createSicPublicInputExploration(),
     ],
       authorityPolicy: loaded.common, familyAgenda: 'active', maxPointOccurrences: loaded.common.input_domain.max_point_occurrences,
       ...(options.now ? { now: options.now } : {}) });

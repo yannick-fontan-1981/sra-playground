@@ -13,6 +13,7 @@ import { transportContactId, transportContactStrategies } from './transport-cont
 import { bandAlignmentId, bandAlignmentStrategies } from './band-alignment.ts';
 import { sharedArrivalId, sharedArrivalStrategies } from './shared-arrival.ts';
 import { outlineServiceId, outlineServiceStrategies } from './outline-service.ts';
+import { labeledSequenceId, labeledSequenceStrategies } from './labeled-sequence.ts';
 import { frontierStrategies, isFrontierStrategy, type FrontierStrategy } from './frontier-strategy.ts';
 import { isViewStrategy, viewStrategies, type ViewStrategy } from './view-strategy.ts';
 import { informationStrategies, isInformationStrategy, type InformationStrategy } from './information-strategy.ts';
@@ -22,7 +23,7 @@ import { isFrontierInputOrder, type FrontierChoiceEvidence, type FrontierInputOr
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 
 const situationStrategies = { ...orderedContactStrategies, ...cavityStrategies, ...publicInputStrategies, ...framedContactStrategies,
-  ...transportContactStrategies, ...bandAlignmentStrategies, ...sharedArrivalStrategies, ...outlineServiceStrategies };
+  ...transportContactStrategies, ...bandAlignmentStrategies, ...sharedArrivalStrategies, ...outlineServiceStrategies, ...labeledSequenceStrategies };
 
 export interface NativeStep {
   readonly action: string;
@@ -392,7 +393,8 @@ export function readNativeResolution(agent: {
   const labels = family === orderedContactId ? orderedContactStrategies : family === cavityAccessId ? cavityStrategies
     : family === publicInputExplorationId ? publicInputStrategies : family === framedContactId ? framedContactStrategies
       : family === transportContactId ? transportContactStrategies : family === bandAlignmentId ? bandAlignmentStrategies
-        : family === sharedArrivalId ? sharedArrivalStrategies : family === outlineServiceId ? outlineServiceStrategies : null;
+        : family === sharedArrivalId ? sharedArrivalStrategies : family === outlineServiceId ? outlineServiceStrategies
+          : family === labeledSequenceId ? labeledSequenceStrategies : null;
   const card = planReceipt?.authority === 'sicOnly' && labels ? record(proposal?.sicSituationCard) : null;
   const isSituationStrategy = (id: unknown): id is keyof typeof situationStrategies =>
     typeof id === 'string' && !!labels && Object.hasOwn(labels, id);
@@ -441,6 +443,16 @@ export function readNativeResolution(agent: {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
+  }
+  if (situationCard && family === labeledSequenceId) {
+    const panels = Array.isArray(card?.examples) ? card.examples : [];
+    for (const panel of panels) {
+      const box = bounds(panel);
+      if (box) subjects.push({ label: 'Labeled examples', box });
+    }
+    const query = bounds(card?.query), control = bounds(card?.addressedRegion);
+    if (query) subjects.push({ label: 'Current sequence', box: query });
+    if (control) subjects.push({ label: 'Selected label control', box: control });
   }
   if (situationCard && family === cavityAccessId) {
     const obstacle = bounds(card?.movingObstacle), actor = bounds(card?.controlledPiece);
