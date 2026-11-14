@@ -215,6 +215,10 @@ Le test différentiel rejoue les quatre méthodes en shadow puis en actif avec l
 
 Quand un obstacle ou une portion nouvellement révélée pose encore une question de vue, `view_continuity` utilise le même agenda que l’exploration. Il conserve le domaine des commandes sans coordonnées et l’ordre natif des expériences. Le besoin cite les retours à l’origine de la question et l’objectif décrit la continuité de la vue. La comparaison contrôlée exécute les chemins natif, shadow et actif sur le même état, avec une priorité d’exploration alternative, et vérifie la même commande, les mêmes pas et la même garde. Les recherches de vues des autres familles restent soumises à leur propre sélection native.
 
+### Expériences qui départagent plusieurs hypothèses
+
+Dans le groupe `information_goal`, l’agenda SIC essaie les expériences de clic, de mouvement et de réponse couplée des affichages dans l’ordre qualifié par les retours antérieurs. Les gardes de réserve, de préservation et de retour à l’objectif parent restent actives. Une expérience qui échoue à l’admission laisse essayer la suivante. Stratégies affiche le nombre de retours prédits différents, les essais admis ou refusés et combien de prédictions le retour confirme, contredit ou laisse sans verdict. Le test différentiel compare le mode natif, shadow et actif sur les cas de garde et d’attention de la référence. Les autres fournisseurs du groupe SRC `information_goal`, notamment les séquences visuelles et les retours dédiés, gardent leur sélection native.
+
 | Série | SHA-256 du reçu brut de la seconde fenêtre |
 | --- | --- |
 | A1 | `5919c1547cb8cd18aacd9e2043a10e921300884fc0163e743248b644c16ab2f0` |

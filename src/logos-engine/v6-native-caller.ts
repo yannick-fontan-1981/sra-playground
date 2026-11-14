@@ -17,6 +17,7 @@ import { PointExperimentMemory } from './v6-point-contrasts.ts';
 import { CoupledDisplays } from './v6-coupled-displays.ts';
 import { ControlDependencies, bindPreservation, checkPreservation } from './v6-transition-learning.ts';
 import { electInformationGoals, pointGoal, reconcileInformationGoal } from './v6-information-goals.ts';
+import { informationNeed, informationStrategies, isInformationStrategy, selectInformationStrategy } from '../sic/information-strategy.ts';
 import { motionOffers } from './v6-motion-contrast.ts';
 import { contextualTranslationExposures } from './v6-contextual-translation.ts';
 import { ObservedInputDomain } from './v6-native-observer.ts';
@@ -40,6 +41,7 @@ export interface NativeCallerConfiguration {
   informationGoal?: 'accessible_view_frontier' | 'open_questions';
   sicFrontier?: import('../sic/frontier-configuration.ts').FrontierConfiguration;
   sicView?: 'shadow' | 'active';
+  sicInformation?: 'shadow' | 'active';
 }
 export interface NativeCallerState {
   goal: R; frontier: R; view: R | null; attention: R; points: R; displays: R;
@@ -417,13 +419,13 @@ export class NativeCallerCoordinator {
     if (options.currentMotion) offers.push(...await this.currentMotionOffers(observation, rows, inputs, remaining, options.meter));
     const active = options.morphologyDecision ?? {};
     const pending = offers.length ? await this.acquireControlForTarget(observation, rows, inputs, active, { inspectOnly: true }) : null;
-    for (const [candidate, receipt] of electInformationGoals(offers, observation, remaining, options.meter, policy)) {
+    const plan = async (candidate: R, receipt: R) => {
       const sameControl = pending !== null && same(receipt.action, { action_ref: pending.action_ref });
       const preserveExposure = pending !== null && policy.preserve_current_exposures.includes(pending.experiment);
       if (policy.preserve_unbound_parent && receipt.return_steps === null && active.status === 'retained'
         && active.reason === this.configuration.strategy.acquire_control_for_target?.requires_reason && !sameControl && !preserveExposure) {
         this.deferred.push({ reason: 'unbound_return_from_the_current_role_acquisition_goal', proposed_action: receipt.action, parent: active.composition ?? null });
-        continue;
+        return null;
       }
       if (pending !== null) {
         if (!sameControl && receipt.return_steps === null && preserveExposure) {
@@ -431,7 +433,7 @@ export class NativeCallerCoordinator {
           if (focus && this.attention.matches(pending, observation)) {
             this.deferred.push({ reason: 'would_abandon_current_control_witness_without_bound_return', proposed_action: receipt.action,
               attention_ref: focus.id, preserved: pending });
-            continue;
+            return null;
           }
         }
         if (sameControl) {
@@ -439,9 +441,40 @@ export class NativeCallerCoordinator {
           if (this.attention.matches(pending, observation)) receipt.also_tests_current_control.attention_ref = this.attention.item!.id;
         }
       }
-      if (options.admit && !await options.admit(candidate, receipt)) continue;
+      if (options.admit && !await options.admit(candidate, receipt)) return null;
       const proposal = await this.frontier.propose(observation, inputs, { curiosity: receipt, experimental_probes: candidate.native_probe ? [candidate.native_probe] : [] });
-      this.persistDeltas(observation); if (proposal) return proposal;
+      this.persistDeltas(observation);
+      return proposal;
+    };
+    const ordered = electInformationGoals(offers, observation, remaining, options.meter, policy);
+    const publish = (proposal: R | null, considered: Awaited<ReturnType<typeof selectInformationStrategy>>['considered']) => {
+      const receipt = proposal?.question?.curiosity;
+      const strategy: unknown = receipt?.source;
+      if (proposal?.bundle_template?.information_target && isInformationStrategy(strategy)) {
+        const parent = proposal.bundle_template.objective_ref;
+        const subjects = receipt.relations.map((relation: [string, string, string]) => JSON.stringify(relation));
+        proposal.sic_information_decision = { mode: this.configuration.sicInformation, strategy, considered,
+          objective: { id: proposal.bundle_template.information_target, label: informationStrategies[strategy], parent },
+          need: informationNeed(observation.observation_ref, parent, subjects, receipt.evidence),
+          evidence: { observations: receipt.evidence, distinctOutcomes: receipt.distinct_outcomes, admissibleOffers: receipt.admissible_offers } };
+      }
+      return proposal;
+    };
+    if (this.configuration.sicInformation === 'active') {
+      const selection = await selectInformationStrategy(ordered, plan);
+      return publish(selection.plan, selection.considered);
+    }
+    const attempted: [R, R][] = [];
+    for (const [candidate, receipt] of ordered) {
+      if (this.configuration.sicInformation === 'shadow') attempted.push([candidate, receipt]);
+      const proposal = await plan(candidate, receipt);
+      if (!proposal) continue;
+      if (this.configuration.sicInformation === 'shadow') {
+        const replay = await selectInformationStrategy(attempted, async (offer, measured) =>
+          candidate === offer && receipt === measured ? proposal : null);
+        return publish(proposal, replay.considered);
+      }
+      return proposal;
     }
     return null;
   }

@@ -202,6 +202,7 @@ export interface NativeV6RuntimeConfiguration {
   callerStrategy?: R;
   sicFrontier?: import('../sic/frontier-configuration.ts').FrontierConfiguration;
   sicView?: 'shadow' | 'active';
+  sicInformation?: 'shadow' | 'active';
   /** The same registered instances acquire passive evidence in source order. */
   acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; inventory?: ObservedInventory; reaction?: OrderedReaction; reactive?: ReactiveContact; chart?: ChartNavigation; recolor?: TopologicalRecolor; axial?: AxialQuestion; window?: WindowQuestion; recruitment?: OrderedRecruitment; workshop?: RankedWorkshop; symbols?: SymbolTransactions; morphology?: NativeMorphologyFamily; feedback?: NativeFeedbackFamily; fields?: AddressedMaterial; binding?: ObservedBinding; preparations?: LinkedTemporalPreparation; preview?: NativePreviewPacking; selectedRigid?: NativeSelectedRigid };
 }
@@ -219,6 +220,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private readonly callerStrategy?: R;
   private readonly sicFrontier?: import('../sic/frontier-configuration.ts').FrontierConfiguration;
   private readonly sicView?: 'shadow' | 'active';
+  private readonly sicInformation?: 'shadow' | 'active';
   private readonly acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; inventory?: ObservedInventory; reaction?: OrderedReaction; reactive?: ReactiveContact; chart?: ChartNavigation; recolor?: TopologicalRecolor; axial?: AxialQuestion; window?: WindowQuestion; recruitment?: OrderedRecruitment; workshop?: RankedWorkshop; symbols?: SymbolTransactions; morphology?: NativeMorphologyFamily; feedback?: NativeFeedbackFamily; fields?: AddressedMaterial; binding?: ObservedBinding; preparations?: LinkedTemporalPreparation; preview?: NativePreviewPacking; selectedRigid?: NativeSelectedRigid };
   private callerAcquisitions = 0;
   private callerBoundaryReplays = 0;
@@ -232,7 +234,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private prefix: Prefix | null = null;
   private actions = 0;
   private readonly sicActionCoverage: Record<keyof SicActionCoverage, number> = {
-    contactRecovery: 0, configurableFrontier: 0, fixedFrontier: 0, viewAccess: 0, native: 0,
+    contactRecovery: 0, configurableFrontier: 0, fixedFrontier: 0, viewAccess: 0, information: 0, native: 0,
   };
   private revision = 0;
   private cycles = 0;
@@ -269,6 +271,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.callerStrategy = configuration.callerStrategy ? structuredClone(configuration.callerStrategy) : undefined;
     this.sicFrontier = configuration.sicFrontier;
     this.sicView = configuration.sicView;
+    this.sicInformation = configuration.sicInformation;
     this.acquisitionFamilies = configuration.acquisitionFamilies;
     if (this.callerStrategy && !configuration.authorityPolicy) throw new TypeError('The common caller requires native WHY/ACT authority');
     this.families = [...configuration.families, ...(this.callerStrategy ? nativeCallerFamilies(() => {
@@ -415,7 +418,8 @@ export class NativeV6Runtime implements NativeV6Backend {
       }
       if (this.callerStrategy) {
         this.caller = new NativeCallerCoordinator(this.authority!.memory, { targetLevels: input.budgets.targetLevels,
-          domain: this.domain, strategy: this.callerStrategy, informationGoal: 'accessible_view_frontier', sicFrontier: this.sicFrontier, sicView: this.sicView });
+          domain: this.domain, strategy: this.callerStrategy, informationGoal: 'accessible_view_frontier',
+          sicFrontier: this.sicFrontier, sicView: this.sicView, sicInformation: this.sicInformation });
         await this.caller.initialize(this.observation);
         await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'initialize', statement: 'caller.install' }, this.authority!.checkpointWrites());
       }
@@ -1338,6 +1342,12 @@ export class NativeV6Runtime implements NativeV6Backend {
             this.acquisitionFamilies?.inventory?.observeCallerContext(transition.after, transition.second.frame_rows);
           });
           if (acquisition.view_result?.sic_view_return) this.note({ kind: 'sic_view_return', ...acquisition.view_result.sic_view_return });
+          const information = prefix.proposal.sic_information_decision as R | undefined;
+          if (information?.mode === 'active' && acquisition.information_goal_result) {
+            this.note({ kind: 'sic_information_return', evidence: transition.after.observation_ref,
+              objective: information.objective.id,
+              checks: acquisition.information_goal_result.hypothesis_checks });
+          }
           return acquisition;
         },
         recordAssessment: (transition, assessment) => this.caller!.recordAssessment(transition, assessment),
@@ -2404,12 +2414,12 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const manifest = { sourceEncoding: 'json-stringify-v1', implementation: NATIVE_V6_IMPLEMENTATION, referenceCommit: NATIVE_V6_REFERENCE_COMMIT,
     declarations: loaded, families: [...families.map(f => f.id), ...CALLER_PROVIDERS], groups, authority: 'native_original_why_act', caller: 'native_common_coordinator',
     selectionProgram: nativeProgramDescriptions().find(program => program.id === 'v6.composition_strategy.choose')?.transitiveSourceHash ?? null,
-    nativeCallerExtensions: NATIVE_CALLER_EXTENSIONS, sicRecovery: recovery, sicView: { access: 'active', continuity: 'active' },
+    nativeCallerExtensions: NATIVE_CALLER_EXTENSIONS, sicRecovery: recovery, sicView: { access: 'active', continuity: 'active' }, sicInformation: 'active',
     fullV6Parity: false };
   const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
   const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
   return new NativeV6Runtime({ sourceDigest, families, groups, authorityPolicy: loaded.common, callerStrategy: configuration,
-    sicFrontier: recovery.frontier ?? defaultFrontierConfiguration, sicView: 'active',
+    sicFrontier: recovery.frontier ?? defaultFrontierConfiguration, sicView: 'active', sicInformation: 'active',
     acquisitionFamilies: { supports, recall, framed, outline: outlineOwner, inventory, reaction, reactive, chart, recolor, axial, window, recruitment, workshop, symbols, morphology, feedback, fields, binding, preparations, preview: previewOwner, selectedRigid: selectedRigidOwner },
     maxPointOccurrences: loaded.common.input_domain.max_point_occurrences, ...(options.now ? { now: options.now } : {}) });
 }

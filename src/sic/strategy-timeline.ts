@@ -10,6 +10,7 @@ export const strategyFacts = {
   activeRecovery: 'SIC contact recovery selected the guarded action',
   activeFrontier: 'The SIC frontier agenda selected how to investigate an untried command',
   activeView: 'The SIC view agenda selected how to investigate access to another view',
+  activeInformation: 'The SIC agenda selected a guarded experiment to separate predictions',
   configurableFrontier: 'An editable priority ranked the frontier experiments',
 } as const;
 export type StrategyFact = keyof typeof strategyFacts;
@@ -83,6 +84,7 @@ export function strategyTimeline(returns: readonly DirectionalReturn[], configur
     if (first.decision!.recoveryDecision?.objective) facts.add('activeRecovery');
     if (first.decision!.frontierStrategy) facts.add('activeFrontier');
     if (first.decision!.viewStrategy) facts.add('activeView');
+    if (first.decision!.informationStrategy) facts.add('activeInformation');
     if (first.decision!.frontierStrategy?.inputOrder) facts.add('configurableFrontier');
     const status = last.nativeCheck?.matched === false ? 'contradicted' : last.toLevel > last.fromLevel ? 'advanced'
       : next && last.decision!.remainingSteps > 1 && replaces(last, next) ? 'replaced'

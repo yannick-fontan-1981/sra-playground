@@ -48,6 +48,7 @@ function connectBoundaries(caller: NativeCallerCoordinator, args: R, calls: R[])
       const value = sourceOptions.curiosity;
       if ((args.frontier.decline_curiosity ?? []).includes(value.action.action_ref)) return null;
       return { status: 'proposed', actions: [structuredClone(value.action)],
+        ...(args.sicInformation ? { bundle_template: { information_target: 'C_information_reference', objective_ref: 'G_protocol_completion' } } : {}),
         question: { curiosity: structuredClone(value) }, contract_boundary: 'frontier' };
     }
     return { status: 'unknown_contract_frontier', actions: [], contract_boundary: 'frontier' };
@@ -60,10 +61,11 @@ function connectBoundaries(caller: NativeCallerCoordinator, args: R, calls: R[])
 /** The native source SRC scheduler visits the actual DRM inventory. Untargeted
  * families are explicit null dependencies, matching the reference generator.
  */
-async function runCase(sample: R, restore: boolean): Promise<R[]> {
+async function runCase(sample: R, restore: boolean, sicInformation?: 'shadow' | 'active'): Promise<R[]> {
   const args = sample.args, current = obs(args.current), rows = scene(args.current).rows;
   const memory = new NativeReasoningMemory();
-  let caller = new NativeCallerCoordinator(memory, configuration);
+  const options = { ...configuration, sicInformation };
+  let caller = new NativeCallerCoordinator(memory, options);
   caller.goal.memory.episode = args.history.map(([before, command, after]: string[]) => [snapshot(before!), command!, snapshot(after!)]);
   caller.targetMethod = structuredClone(args.target_method);
   const setupResults = [];
@@ -81,12 +83,12 @@ async function runCase(sample: R, restore: boolean): Promise<R[]> {
   for (let index = 0; index < args.repeat; index++) {
     if (restore) {
       const state = caller.state();
-      caller = new NativeCallerCoordinator(memory, configuration);
+      caller = new NativeCallerCoordinator(memory, options);
       caller.restore(state);
       assert.deepEqual(caller.state(), state, 'Current evidence and attention survive caller restoration');
     }
     const calls: R[] = [];
-    connectBoundaries(caller, args, calls);
+    connectBoundaries(caller, { ...args, sicInformation }, calls);
     caller.prepare(current, args.remaining);
     let last: R | null = null;
     const offers = new Map<string, R | null>(), order: string[] = fixture.configuration.families;
@@ -147,6 +149,27 @@ test('control/attention reference executes the unchanged strategy source with de
   for (const sample of fixture.cases) for (const expected of sample.expected) {
     assert.ok(expected.morphology_reset_observed.every((value: boolean) => value === true), sample.id);
   }
+});
+
+test('the information agenda preserves native choices, resource guards and deferred attention', async () => {
+  let selections = 0;
+  for (const sample of fixture.cases) for (const mode of ['shadow', 'active'] as const) {
+    const actual = await runCase(sample, false, mode);
+    for (const row of actual) {
+      if (row.proposal?.sic_information_decision) {
+        const decision = row.proposal.sic_information_decision;
+        assert.equal(decision.mode, mode);
+        assert.equal(decision.objective.id, row.proposal.bundle_template.information_target);
+        assert.equal(decision.considered.at(-1)?.result, 'selected');
+        assert.match(decision.need.id, /^sic-need:/);
+        selections++;
+        delete row.proposal.sic_information_decision;
+      }
+      if (row.proposal?.question?.curiosity) delete row.proposal.bundle_template;
+    }
+    assert.deepEqual(actual, sample.expected.map(projection), `${sample.id} ${mode}`);
+  }
+  assert.ok(selections > 0);
 });
 
 for (const sample of fixture.cases) test(`original V6 control/attention consumer parity: ${sample.id}`, async () => {
