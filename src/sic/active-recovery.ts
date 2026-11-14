@@ -28,6 +28,7 @@ export interface RecoveryPack {
   readonly familyAgenda?: FamilyAgendaSetting;
   readonly openingCuriosity?: OpeningCuriosityMode;
   readonly informationPreference?: InformationPreference;
+  readonly reasoningMode?: 'adaptive';
 }
 
 export const defaultRecoveryPack: RecoveryPack = Object.freeze({
@@ -37,7 +38,7 @@ export const defaultRecoveryPack: RecoveryPack = Object.freeze({
 export function compileRecoveryPack(input: unknown = defaultRecoveryPack): RecoveryPack {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new TypeError('Expected a recovery configuration.');
   const fields = Object.keys(input);
-  if (fields.some(field => !['version', 'mode', 'maxDepth', 'maxNodes', 'strategyOrder', 'frontier', 'familyAgenda', 'openingCuriosity', 'informationPreference'].includes(field))) {
+  if (fields.some(field => !['version', 'mode', 'maxDepth', 'maxNodes', 'strategyOrder', 'frontier', 'familyAgenda', 'openingCuriosity', 'informationPreference', 'reasoningMode'].includes(field))) {
     throw new TypeError('The SIC pack contains an unrecognized field.');
   }
   const pack = input as Record<string, unknown>;
@@ -56,6 +57,10 @@ export function compileRecoveryPack(input: unknown = defaultRecoveryPack): Recov
   const frontier = Object.hasOwn(pack, 'frontier') ? compileFrontierConfiguration(pack.frontier) : defaultFrontierConfiguration;
   const familyAgenda = pack.familyAgenda;
   const openingCuriosity = pack.openingCuriosity;
+  if (Object.hasOwn(pack, 'reasoningMode') && pack.reasoningMode !== 'adaptive') throw new TypeError('Invalid reasoning mode policy.');
+  if (pack.reasoningMode === 'adaptive' && familyAgenda !== undefined && familyAgenda !== 'active') {
+    throw new TypeError('Adaptive reasoning requires the active SIC agenda.');
+  }
   const informationPreference = Object.hasOwn(pack, 'informationPreference') ? compileInformationPreference(pack.informationPreference) : undefined;
   if (Object.hasOwn(pack, 'familyAgenda') && familyAgenda !== 'shadow' && familyAgenda !== 'active' && familyAgenda !== 'native') throw new TypeError('Invalid family agenda mode.');
   if (Object.hasOwn(pack, 'openingCuriosity') && openingCuriosity !== 'shadow' && openingCuriosity !== 'active') throw new TypeError('Invalid opening curiosity mode.');
@@ -64,7 +69,8 @@ export function compileRecoveryPack(input: unknown = defaultRecoveryPack): Recov
     ...(frontier.localRule || frontier.inputOrder !== defaultFrontierConfiguration.inputOrder ? { frontier } : {}),
     ...(familyAgenda === 'shadow' || familyAgenda === 'active' || familyAgenda === 'native' ? { familyAgenda } : {}),
     ...(openingCuriosity === 'shadow' || openingCuriosity === 'active' ? { openingCuriosity } : {}),
-    ...(informationPreference ? { informationPreference } : {}) });
+    ...(informationPreference ? { informationPreference } : {}),
+    ...(pack.reasoningMode === 'adaptive' ? { reasoningMode: pack.reasoningMode } : {}) });
 }
 
 export const rootedRecoveryStrategy = Object.freeze({

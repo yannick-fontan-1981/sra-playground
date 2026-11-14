@@ -1,0 +1,36 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { selectStrategyFamily } from '../src/sic/family-agenda.ts';
+import { reasoningGroupOrder, selectReasoningMode, type ReasoningSituation } from '../src/sic/reasoning-mode.ts';
+import { defaultRecoveryPack } from '../src/sic/active-recovery.ts';
+import { readRecoveryRevision, recoveryRevision } from '../src/sic/recovery-pack.ts';
+
+test('fresh level entry, refuted and supported plans select different reasoning cards and a different next offer', async () => {
+  const start: ReasoningSituation = { level: 1, levelsCompleted: 0, targetLevels: 3, levelActions: 0, remainingActions: 9,
+    latestReturn: 'unknown', acquiredInformation: false, observationRef: 'entry' };
+  const ids = ['goal_access', 'information_goal', 'acquire_control_for_target', 'view', 'view_continuity', 'observed_frontier'];
+  const groups = ids.map(id => ({ id }));
+  async function choice(changes: Partial<ReasoningSituation>, required = false) {
+    const situation = { ...start, ...changes };
+    const mode = selectReasoningMode(situation).mode;
+    const { card, order } = reasoningGroupOrder(groups, mode, situation.remainingActions);
+    const agenda = await selectStrategyFamily(groups, async index => ({ family: ids[index]!, selected: required || index > 0 }), order);
+    return [mode, card, agenda.selected];
+  }
+  assert.deepEqual(await choice({}), ['assimilation', 'revalidate-needed-control', 'acquire_control_for_target']);
+  assert.deepEqual(await choice({ levelActions: 2, latestReturn: 'contradicted' }), ['exploration', 'explore-grounded-question', 'information_goal']);
+  assert.deepEqual(await choice({ levelActions: 2, latestReturn: 'contradicted', remainingActions: 1 }),
+    ['exploration', 'explore-with-limited-reserve', 'view']);
+  assert.deepEqual(await choice({ levelActions: 3, latestReturn: 'matched' }), ['solving', 'resume-objective-access', 'view']);
+  assert.deepEqual(await choice({ levelActions: 3, latestReturn: 'matched' }, true), ['solving', 'resume-objective-access', 'goal_access']);
+  assert.deepEqual(await choice({ level: 2, levelsCompleted: 1 }), ['assimilation', 'revalidate-needed-control', 'acquire_control_for_target']);
+});
+
+test('adaptive reasoning is an explicit pack policy and survives export', () => {
+  const pack = recoveryRevision({ ...defaultRecoveryPack, reasoningMode: 'adaptive' });
+  assert.equal(pack.schemaVersion, 7);
+  assert.deepEqual(readRecoveryRevision(JSON.parse(JSON.stringify(pack))), pack);
+  assert.equal(recoveryRevision(defaultRecoveryPack).schemaVersion, 1);
+  assert.throws(() => recoveryRevision({ ...defaultRecoveryPack, reasoningMode: 'adaptive', familyAgenda: 'native' }),
+    /requires the active SIC agenda/);
+});

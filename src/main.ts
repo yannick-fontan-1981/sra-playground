@@ -309,6 +309,7 @@ app.innerHTML = `
                   <p data-sic-frontier-preview></p>
                   <label for="sic-family-agenda">Selection across strategy families</label>
                   <select id="sic-family-agenda" name="familyAgenda"><option value="native">Native selection</option><option value="shadow">Compare SIC in shadow</option><option value="active">Use the SIC agenda</option></select>
+                  <label><input type="checkbox" name="adaptiveReasoning"> Adaptive reasoning modes</label>
                   <label for="sic-opening-curiosity">Opening curiosity</label>
                   <select id="sic-opening-curiosity" name="openingCuriosity"><option value="native">Native order</option><option value="shadow">Compare the richest composition in shadow</option><option value="active">Investigate the richest composition first</option></select>
                   <details class="sic-details">

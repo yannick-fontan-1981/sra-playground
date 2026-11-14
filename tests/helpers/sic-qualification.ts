@@ -40,6 +40,7 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number | '
     result?: NonNullable<NativeResolution['outcome']>['informationOutcome'];
     preference?: NonNullable<NativeResolution['informationStrategy']>['preference'] }[] = [];
   let opening: NonNullable<NativeResolution['frontierStrategy']>['opening'];
+  const modes: { sequence: number; level: number; mode: string; card: string; selected: string | null }[] = [];
   let observedStrategy: ObservedStrategy | undefined;
   const agent = new BrowserV6Agent({
     getObservation: () => board,
@@ -61,6 +62,10 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number | '
     ...(maxActions === undefined ? {} : { maxSessionActions: maxActions }),
     dispatch: async action => {
       const decision = state ? readNativeResolution(state) : null;
+      const selection = state?.sicFamilySelection, mode = selection?.reasoning;
+      if (mode && (modes.at(-1)?.card !== mode.card || modes.at(-1)?.level !== mode.level)) {
+        modes.push({ sequence: trace.length + 1, level: mode.level, mode: mode.mode, card: mode.card, selected: selection.selected });
+      }
       if (onStrategy && decision?.family && decision.proposalKind && state) {
         const bundle = state.proposal as Record<string, unknown> | null;
         const entry = bundle?.material_access_subquestion ?? bundle?.program_subquestion ?? bundle?.field_subquestion
@@ -98,7 +103,7 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number | '
       if (board.levelsCompleted <= level || state?.status === 'stopped') break;
     }
     return { actions: trace.length, levels: board.levelsCompleted, stop: state?.reason ?? null, trace, targetLevels, boardState: board.state,
-      coverage: state?.sicActionCoverage, selection: state?.sicFamilySelection, information, opening };
+      coverage: state?.sicActionCoverage, selection: state?.sicFamilySelection, information, opening, modes };
   } finally {
     agent.dispose();
   }
@@ -274,6 +279,25 @@ async function qualifyFamilyAgenda(gameFilter: string | null) {
   }
 }
 
+async function qualifyReasoningModes(gameFilter: string | null) {
+  const runtime = new BrowserGameRuntime();
+  const results = [];
+  try {
+    const requested = gameFilter?.split(',') ?? ['SK48', 'AS66', 'SYME', 'LKEY', 'CASC', 'LOGI', 'DC22'];
+    for (const game of requested) {
+      output.textContent = JSON.stringify({ status: 'running', game, results });
+      const target = cases.find(item => item.game === game)?.target ?? 2;
+      const baseline = await run(runtime, game, target, defaultRecoveryPack, 50);
+      const adaptive = await run(runtime, game, target, { ...defaultRecoveryPack, reasoningMode: 'adaptive' }, 50);
+      results.push({ game, baseline: [baseline.actions, baseline.levels, baseline.stop], adaptive: [adaptive.actions, adaptive.levels, adaptive.stop],
+        ...compare(baseline, adaptive), modeChanges: adaptive.modes.slice(0, 8), totalModeChanges: adaptive.modes.length });
+    }
+    output.textContent = JSON.stringify({ status: 'completed', results }, null, 2);
+  } finally {
+    runtime.dispose();
+  }
+}
+
 async function findInformationExperiments() {
   const runtime = new BrowserGameRuntime();
   const results = [];
@@ -344,6 +368,7 @@ start.addEventListener('click', async () => {
     const parameters = new URLSearchParams(location.search);
     await (parameters.has('strategy-inventory') ? inventoryStrategies(parameters)
       : parameters.has('information-priority') ? qualifyInformationPriority(parameters)
+      : parameters.has('reasoning-modes') ? qualifyReasoningModes(parameters.get('games'))
       : parameters.has('opening-campaign') ? qualifyOpeningCampaigns(parameters.get('games'))
       : parameters.has('opening') ? qualifyOpeningCuriosity() : parameters.has('information') ? findInformationExperiments()
       : parameters.has('family') ? qualifyFamilyAgenda(parameters.get('games')) : parameters.has('coverage') ? qualifyActionCoverage()

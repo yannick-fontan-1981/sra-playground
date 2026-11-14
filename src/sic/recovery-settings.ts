@@ -28,6 +28,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
   const priority = form.elements.namedItem('priority') as HTMLSelectElement;
   const inputOrder = form.elements.namedItem('frontierInputOrder') as HTMLSelectElement;
   const familyAgenda = form.elements.namedItem('familyAgenda') as HTMLSelectElement;
+  const adaptiveReasoning = form.elements.namedItem('adaptiveReasoning') as HTMLInputElement;
   const openingCuriosity = form.elements.namedItem('openingCuriosity') as HTMLSelectElement;
   const informationStrategy = form.elements.namedItem('informationStrategy') as HTMLSelectElement;
   const informationOutcomes = form.elements.namedItem('informationOutcomes') as HTMLInputElement;
@@ -122,6 +123,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
     priority.value = (pack.strategyOrder ?? contactRecoveryOrder)[0]!;
     inputOrder.value = (pack.frontier ?? defaultFrontierConfiguration).inputOrder;
     familyAgenda.value = pack.familyAgenda ?? defaultBrowserFamilyAgenda;
+    adaptiveReasoning.checked = pack.reasoningMode === 'adaptive';
     openingCuriosity.value = pack.openingCuriosity ?? 'native';
     informationStrategy.value = pack.informationPreference?.strategy ?? 'point_contrast';
     informationOutcomes.value = String(pack.informationPreference?.minimumOutcomes ?? 2);
@@ -154,6 +156,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
     const localRule = readLocalRule();
     return recoveryRevision(compileRecoveryPack({ version: 1, mode: mode.value, maxDepth: depth.valueAsNumber, maxNodes: nodes.valueAsNumber,
       strategyOrder, familyAgenda: familyAgenda.value,
+      ...(adaptiveReasoning.checked ? { reasoningMode: 'adaptive' } : {}),
       ...(openingCuriosity.value !== 'native' ? { openingCuriosity: openingCuriosity.value } : {}),
       ...(informationMode.value !== 'native' ? { informationPreference: { strategy: informationStrategy.value,
         mode: informationMode.value, minimumOutcomes: informationOutcomes.valueAsNumber } } : {}),
@@ -239,6 +242,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
         (current.familyAgenda ?? defaultBrowserFamilyAgenda) === (draft.configuration.familyAgenda ?? defaultBrowserFamilyAgenda)
           ? null : `family selection → ${draft.configuration.familyAgenda ?? defaultBrowserFamilyAgenda}`,
         current.openingCuriosity === draft.configuration.openingCuriosity ? null : `opening curiosity → ${draft.configuration.openingCuriosity ?? 'native'}`,
+        current.reasoningMode === draft.configuration.reasoningMode ? null : `reasoning modes → ${draft.configuration.reasoningMode ?? 'standard'}`,
         JSON.stringify(current.informationPreference) === JSON.stringify(draft.configuration.informationPreference) ? null
           : `information priority → ${draft.configuration.informationPreference
             ? `${informationStrategies[draft.configuration.informationPreference.strategy]} (≥ ${draft.configuration.informationPreference.minimumOutcomes} returns, ${draft.configuration.informationPreference.mode})`
@@ -288,7 +292,9 @@ export function renderActionCoverage(container: HTMLElement,
     : selection?.mode === 'shadow' ? ` Shadow family comparison ${selection.matchesSource ? 'agrees with native selection' : 'differs from native selection'}.` : '';
   const familyCount = total && state?.sicFamilyActions !== undefined
     ? ` SIC selected the family for ${state.sicFamilyActions}/${total} executed commands.` : '';
-  counts.textContent = coverage + familyCount + arbitration;
+  const reasoning = selection?.reasoning;
+  const activity = reasoning ? ` Reasoning mode · ${reasoning.mode} · Level ${reasoning.level} · ${reasoning.levelsCompleted}/${reasoning.targetLevels} levels completed · ${reasoning.reason}` : '';
+  counts.textContent = coverage + familyCount + arbitration + activity;
   const oldRoutes = container.querySelector('details');
   if (oldRoutes?.dataset.source === state?.sourceDigest) return;
   oldRoutes?.remove();

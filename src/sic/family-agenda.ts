@@ -14,13 +14,17 @@ export interface FamilyAgendaReceipt {
   readonly selected: string | null;
   readonly visited: readonly string[];
   readonly matchesSource?: boolean;
+  readonly reasoning?: import('./reasoning-mode.ts').ReasoningSituation
+    & ReturnType<typeof import('./reasoning-mode.ts').selectReasoningMode> & { readonly card: string };
 }
 
 /** Evaluate the declared family order lazily. A refusal that blocks unrelated
  * exploration is an offer and stops the agenda exactly like a bound plan. */
-export async function selectStrategyFamily(groups: readonly { readonly id: string }[], offer: (index: number) => Promise<FamilyTrial | null>) {
+export async function selectStrategyFamily(groups: readonly { readonly id: string }[], offer: (index: number) => Promise<FamilyTrial | null>,
+  order: readonly number[] = groups.map((_, index) => index)) {
   const visited: string[] = [];
-  for (const [index, group] of groups.entries()) {
+  for (const index of order) {
+    const group = groups[index]!;
     const trial = await offer(index);
     if (!trial) return { selected: null, visited, complete: false };
     visited.push(trial.selected ? trial.source_trigger_group ?? group.id : group.id);

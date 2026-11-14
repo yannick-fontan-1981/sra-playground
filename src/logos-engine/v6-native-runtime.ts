@@ -37,6 +37,7 @@ import { decidePlanContinuation } from '../sic/plan-step.ts';
 import { retainMissingControlTrial } from '../sic/missing-control-strategy.ts';
 import { defaultFrontierConfiguration } from '../sic/frontier-configuration.ts';
 import { selectStrategyFamily, type FamilyAgendaMode, type FamilyAgendaReceipt, type FamilyTrial } from '../sic/family-agenda.ts';
+import { reasoningGroupOrder, selectReasoningMode, type ReasoningSituation } from '../sic/reasoning-mode.ts';
 import { needCheckpoint, readSicNeed, type SicNeed } from '../sic/need-registry.ts';
 import { SymbolTransactions } from './v6-symbol-transactions.ts';
 import { AddressedMaterial, ADDRESSED_NATIVE_SEARCH_BOUNDS } from './v6-addressed-material.ts';
@@ -207,6 +208,7 @@ export interface NativeV6RuntimeConfiguration {
   sicView?: 'shadow' | 'active';
   sicInformation?: 'shadow' | 'active';
   familyAgenda?: FamilyAgendaMode;
+  adaptiveReasoning?: boolean;
   openingCuriosity?: import('../sic/opening-curiosity.ts').OpeningCuriosityMode;
   informationPreference?: import('../sic/information-preference.ts').InformationPreference;
   /** The same registered instances acquire passive evidence in source order. */
@@ -228,6 +230,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private readonly sicView?: 'shadow' | 'active';
   private readonly sicInformation?: 'shadow' | 'active';
   private readonly familyAgenda?: FamilyAgendaMode;
+  private readonly adaptiveReasoning: boolean;
   private readonly openingCuriosity?: import('../sic/opening-curiosity.ts').OpeningCuriosityMode;
   private readonly informationPreference?: import('../sic/information-preference.ts').InformationPreference;
   private readonly acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; inventory?: ObservedInventory; reaction?: OrderedReaction; reactive?: ReactiveContact; chart?: ChartNavigation; recolor?: TopologicalRecolor; axial?: AxialQuestion; window?: WindowQuestion; recruitment?: OrderedRecruitment; workshop?: RankedWorkshop; symbols?: SymbolTransactions; morphology?: NativeMorphologyFamily; feedback?: NativeFeedbackFamily; fields?: AddressedMaterial; binding?: ObservedBinding; preparations?: LinkedTemporalPreparation; preview?: NativePreviewPacking; selectedRigid?: NativeSelectedRigid };
@@ -270,6 +273,8 @@ export class NativeV6Runtime implements NativeV6Backend {
   private selectionProgram: StoredNativeProgram | null = null;
   private selectionReceipt: NativeSrcReceipt | null = null;
   private familyAgendaReceipt: FamilyAgendaReceipt | null = null;
+  private latestReasoningReturn: { level: number; matched: boolean | null } | null = null;
+  private latestInformationLevel: number | null = null;
   private planning: { execution: NativeExecution; inputs: readonly NativeCommand[];
     offers: Map<string, { family: NativeFamily; proposal: NativeProposal } | null>;
     entryOffers: Map<string, NativeProposal | null>; sourceStops: Map<string, NativeRecord | null>;
@@ -285,6 +290,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.sicView = configuration.sicView;
     this.sicInformation = configuration.sicInformation;
     this.familyAgenda = configuration.familyAgenda;
+    this.adaptiveReasoning = configuration.adaptiveReasoning === true;
     this.openingCuriosity = configuration.openingCuriosity;
     this.informationPreference = configuration.informationPreference;
     this.acquisitionFamilies = configuration.acquisitionFamilies;
@@ -710,11 +716,21 @@ export class NativeV6Runtime implements NativeV6Backend {
       this.familyAgendaReceipt = null;
       let result: { selected: unknown; visited: unknown };
       if (this.familyAgenda === 'active' && !editedProgram) {
-        const agenda = await selectStrategyFamily(this.groups, offer);
+        const level = this.observation.level_epoch;
+        const matched = this.latestReasoningReturn?.level === level ? this.latestReasoningReturn.matched : null;
+        const situation: ReasoningSituation | null = this.adaptiveReasoning ? {
+          level, levelsCompleted: this.observation.levels_completed, targetLevels: this.budgets!.targetLevels,
+          levelActions: this.levelActions.get(level) ?? 0, remainingActions: this.remaining(),
+          latestReturn: matched === true ? 'matched' : matched === false ? 'contradicted' : 'unknown',
+          acquiredInformation: this.latestInformationLevel === level, observationRef: this.observation.observation_ref,
+        } : null;
+        const reasoning = situation ? { ...situation, ...selectReasoningMode(situation) } : null;
+        const ranking = reasoning ? reasoningGroupOrder(this.groups, reasoning.mode, reasoning.remainingActions) : null;
+        const agenda = await selectStrategyFamily(this.groups, offer, ranking?.order);
         result = agenda;
         this.selectionReceipt = null;
         this.familyAgendaReceipt = freeze({ selected: agenda.selected, visited: agenda.visited, mode: 'active',
-          observationRef: this.observation.observation_ref });
+          observationRef: this.observation.observation_ref, ...(reasoning && ranking ? { reasoning: { ...reasoning, card: ranking.card } } : {}) });
       } else {
         const selected = await this.selectionProgram.run({ request: this.observation.observation_ref }, { signal: execution.signal });
         this.selectionReceipt = selected.receipt;
@@ -1291,6 +1307,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       const publicBoundary = first.level !== this.current!.level || first.levels_completed !== this.current!.levels_completed || ['WIN', 'GAME_OVER'].includes(this.current!.state);
       const preserved = this.caller?.preservation(prefix.proposal, this.current!, after, true, publicBoundary);
       if (preserved && !preserved.admitted) result = { matched: false, seal_prefix: true, reason: preserved.reason };
+      if (this.adaptiveReasoning) this.latestReasoningReturn = { level: before.level_epoch, matched: result.matched };
       prefix.witnessed.push({ command: freeze(structuredClone(outcome.command)), before, after, first, second: this.current!, index: prefix.index, outcome: freeze(structuredClone(result)) });
       this.note({ kind: 'actual_outcome', family: prefix.family.id, index: prefix.index, ...result, observation_ref: after.observation_ref,
         ...(prefix.sicPlan ? { sic_plan: prefix.sicPlan.id } : {}) });
@@ -1410,6 +1427,7 @@ export class NativeV6Runtime implements NativeV6Backend {
           (method, witness) => this.acquisitionFamilies?.morphology?.stationHypothesisFor(method, witness) ?? null),
       } : undefined) : null;
     this.cycles += 1;
+    if (this.adaptiveReasoning && (observedInformation || observedView)) this.latestInformationLevel = prefix.witnessed.at(-1)?.before.level_epoch ?? null;
     // common_frontier_runtime.py checks observed program refutations after
     // OP29/30/31 and before replaying a natural boundary. Official completion
     // and GAME_OVER take precedence over an experimental stop request.
@@ -2507,7 +2525,8 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
   return new NativeV6Runtime({ sourceDigest, families, groups, authorityPolicy: loaded.common, callerStrategy: configuration,
     sicFrontier: recovery.frontier ?? defaultFrontierConfiguration, sicView: 'active', sicInformation: 'active',
-    familyAgenda: recovery.familyAgenda === 'native' ? undefined : recovery.familyAgenda,
+    familyAgenda: recovery.reasoningMode === 'adaptive' ? 'active' : recovery.familyAgenda === 'native' ? undefined : recovery.familyAgenda,
+    adaptiveReasoning: recovery.reasoningMode === 'adaptive',
     openingCuriosity: recovery.openingCuriosity,
     informationPreference: recovery.informationPreference,
     acquisitionFamilies: { supports, recall, framed, outline: outlineOwner, inventory, reaction, reactive, chart, recolor, axial, window, recruitment, workshop, symbols, morphology, feedback, fields, binding, preparations, preview: previewOwner, selectedRigid: selectedRigidOwner },
