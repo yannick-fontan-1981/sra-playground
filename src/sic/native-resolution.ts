@@ -25,6 +25,7 @@ import { profileTransferId, profileTransferStrategies } from './profile-transfer
 import { orderedReplenishmentId, orderedReplenishmentStrategies } from './ordered-replenishment.ts';
 import { programOriginId, programOriginStrategies } from './program-origin.ts';
 import { previewPlacementId, previewPlacementStrategies } from './preview-placement.ts';
+import { symbolContributionId, symbolContributionStrategies } from './symbol-contribution.ts';
 import { frontierStrategies, isFrontierStrategy, type FrontierStrategy } from './frontier-strategy.ts';
 import { isViewStrategy, viewStrategies, type ViewStrategy } from './view-strategy.ts';
 import { informationStrategies, isInformationStrategy, type InformationStrategy } from './information-strategy.ts';
@@ -37,7 +38,7 @@ const situationStrategies = { ...orderedContactStrategies, ...cavityStrategies, 
   ...transportContactStrategies, ...bandAlignmentStrategies, ...sharedArrivalStrategies, ...outlineServiceStrategies,
   ...labeledSequenceStrategies, ...markedCollectionStrategies, ...slotTransferStrategies, ...remoteSupportRouteStrategies,
   ...occurrenceRecallStrategies, ...slotPermutationStrategies, ...surfaceCopyStrategies, ...codeRouteStrategies, ...profileTransferStrategies,
-  ...orderedReplenishmentStrategies, ...programOriginStrategies, ...previewPlacementStrategies };
+  ...orderedReplenishmentStrategies, ...programOriginStrategies, ...previewPlacementStrategies, ...symbolContributionStrategies };
 
 export interface NativeStep {
   readonly action: string;
@@ -413,7 +414,8 @@ export function readNativeResolution(agent: {
               : family === occurrenceRecallId ? occurrenceRecallStrategies : family === slotPermutationId ? slotPermutationStrategies
                 : family === surfaceCopyId ? surfaceCopyStrategies : family === codeRouteId ? codeRouteStrategies
                   : family === profileTransferId ? profileTransferStrategies : family === orderedReplenishmentId ? orderedReplenishmentStrategies
-                    : family === programOriginId ? programOriginStrategies : family === previewPlacementId ? previewPlacementStrategies : null;
+                    : family === programOriginId ? programOriginStrategies : family === previewPlacementId ? previewPlacementStrategies
+                      : family === symbolContributionId ? symbolContributionStrategies : null;
   const card = planReceipt?.authority === 'sicOnly' && labels ? record(proposal?.sicSituationCard) : null;
   const isSituationStrategy = (id: unknown): id is keyof typeof situationStrategies =>
     typeof id === 'string' && !!labels && Object.hasOwn(labels, id);
@@ -542,6 +544,10 @@ export function readNativeResolution(agent: {
     const piece = bounds(card?.currentPiece), target = bounds(card?.target);
     if (piece) subjects.push({ label: 'Movable piece', box: piece });
     if (target) subjects.push({ label: 'Place in the partition', box: target });
+  }
+  if (situationCard && family === symbolContributionId) {
+    const guide = bounds(card?.guide);
+    if (guide) subjects.push({ label: 'Indicated symbol or operand', box: guide });
   }
   if (situationCard && family === cavityAccessId) {
     const obstacle = bounds(card?.movingObstacle), actor = bounds(card?.controlledPiece);

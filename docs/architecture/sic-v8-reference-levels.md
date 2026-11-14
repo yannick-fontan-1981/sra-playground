@@ -23,7 +23,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | COLM | 6 | [3](../../docs/migration/native-campaigns-v48/colm-three-levels.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/COLM/LVL1/good_run_pseudocode.md) | — | — | 3 | 4 | — |
 | COMB | 6 | [6](../../docs/migration/native-campaigns-v43/comb-six-levels.json) | — | — | — | 6 | 6 | 1 |
 | CONN | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CONN/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 1 |
-| CRAF | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CRAF/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | — |
+| CRAF | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CRAF/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 1 |
 | CWSE | 6 | — | — | — | — | — | — | — |
 | DAME | 6 | — | — | 3 (archive locale) | — | 3 | 4 | — |
 | DC22 | 6 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/DC22/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 1 |
