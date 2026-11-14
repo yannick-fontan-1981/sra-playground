@@ -39,6 +39,7 @@ import { directionalReceptionId } from './directional-reception.ts';
 import { windowCoverageId } from './window-coverage.ts';
 import { panelMatchingId } from './panel-matching.ts';
 import { crossingRowsId } from './crossing-rows.ts';
+import { traceCoverageId } from './trace-coverage.ts';
 
 export const standalonePlanningGroups = [
   { id: 'repair_visible_field', families: [fieldRepairId, orderedContactId, supportTransferId] },
@@ -51,7 +52,7 @@ export const standalonePlanningGroups = [
   { id: 'preserve_ordered_team', families: [orderedReplenishmentId] },
   { id: 'fill_visible_partition', families: [previewPlacementId, populationPlacementId] },
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, facetGrowthId] },
-  { id: 'visit_marked_surface', families: [markedLatticeId] },
+  { id: 'visit_marked_surface', families: [traceCoverageId, markedLatticeId] },
   { id: 'place_incoming_groups', families: [queuedPlacementId] },
   { id: 'explore_available_inputs', families: [displayCouplingId, fieldIsolationId, cavityAccessId, publicInputExplorationId] },
 ] as const;
