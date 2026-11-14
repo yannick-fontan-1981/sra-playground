@@ -30,7 +30,7 @@ import { queuedPlacementId } from './queued-placement.ts';
 import { legendRecolorId, matchExampleId } from './legend-recolor.ts';
 import { visualPatternId } from './visual-pattern.ts';
 import { facetGrowthId, learnFacetGrowthId } from './facet-growth.ts';
-import { chartRouteId } from './chart-route.ts';
+import { chartRouteId, learnChartRouteId } from './chart-route.ts';
 import { populationPlacementId } from './population-placement.ts';
 import { carryToFrameId, learnCarryToFrameId } from './carry-to-frame.ts';
 import { portPairingId } from './port-pairing.ts';
@@ -91,7 +91,7 @@ export const standalonePlanningGroups = [
   { id: 'inspect_candidate_relations', families: [crossingRowsId, invitedCaptureId, subsetExperimentId, learnScopeEffectsId, framedContactId, learnPatternAccessId, transportContactId, learnTransportAccessId, stagedMarksId, materialAssemblyId, animationContactId, learnAnimationContactId] },
   { id: 'coordinate_visible_motion', families: [bandAlignmentId, sharedArrivalId, outlineServiceId, carryToFrameId, learnCarryToFrameId, directionalReceptionId, learnDirectionalReceptionId, branchAlignmentId, receptionAccessId, learnReceptionAccessId, markerCoverageId, reflectedPlacementId, coordinateObservedMotionId, pivotCargoId, moveMaskedPiecesId, translateCoupledPiecesId, learnContactAccessId, coupledMotionId, materialRouteId, inventoryAccessId, replayAccessId, orientedDeliveryId, indicatedJumpId, learnIndicatedJumpId, highlightedRouteId, learnHighlightedRouteId, pairedPassageId, seatedContactId, switchedSurfaceId, reactiveTargetId, pointReachId, linkedMidpointId, excavateDescentId, litRouteId, learnLitRouteId, nestedPassageId, linkOpeningsId, navigateRevealedGridId, arrangeTurnPostsId] },
   { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId, visualPatternId, framedSearchId, feedbackTrialId, catalogueComparisonId, revealedExampleId, windowRelationId, layeredFitId, learnLayeredFitId] },
-  { id: 'apply_learned_relations', families: [remoteSupportRouteId, learnRemoteAccessId, occurrenceRecallId, slotPermutationId, surfaceCopyId, chartRouteId] },
+  { id: 'apply_learned_relations', families: [remoteSupportRouteId, learnRemoteAccessId, occurrenceRecallId, slotPermutationId, surfaceCopyId, chartRouteId, learnChartRouteId] },
   { id: 'construct_executable_program', families: [codeRouteId, programOriginId, learnProgramOriginId, glyphEditingId, windowCoverageId, panelMatchingId] },
   { id: 'fit_profiles_into_receivers', families: [profileTransferId, portPairingId, radialConnectionId, framedReceptionId] },
   { id: 'preserve_ordered_team', families: [orderedReplenishmentId] },

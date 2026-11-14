@@ -1,10 +1,12 @@
 import { chartEdgeKey, chartInventory, chartPointKey, chartScene, measureChart, routeChart,
   type ChartEdge, type ChartPoint, type MeasuredChart } from '../logos-engine/v6-chart-navigation-geometry.ts';
-import type { NativeCommand, NativeFamily, NativeObservation, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeCommand, NativeFamily, NativeObservation, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const chartRouteId = 'sic_chart_route';
+export const learnChartRouteId = 'sic_follow_observed_links';
 export const chartRouteStrategies = {
   visit_visible_prerequisite: 'Test the node whose color matches a link',
   follow_shared_chart_direction: 'Take the direction shared by the remaining chart routes',
@@ -38,11 +40,16 @@ function boundaryAdmission(edge: ChartEdge, color: number, chart: MeasuredChart,
   });
 }
 
-export function createSicChartRoute(): NativeFamily<Proposal> {
+export function createSicChartRoute(family = chartRouteId): NativeFamily<Proposal> {
+  const learns = family === learnChartRouteId;
   let state: Local | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: chartRouteId,
-    async propose(observation, rows, _inputs, remaining) {
+    id: family,
+    async attachPrograms(registry) {
+      if (learns) decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !Object.keys(directions).some(action => observation.available_action_refs.includes(action))) return null;
       const retained = state?.chart.epoch === observation.level_epoch && state.frame === observation.frame_hash ? state : null;
       const fresh = retained ? null : measureChart(rows, observation);
@@ -75,19 +82,30 @@ export function createSicChartRoute(): NativeFamily<Proposal> {
       const prerequisite = offers.find(offer => offer.target !== goals[0]);
       const destination = offers.find(offer => offer.target === goals[0]);
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
+      const facts = { eligibleProbe: !!prerequisite, routeSupported: !prerequisite && !!destination,
+        mode: execution?.reasoningMode ?? 'exploration' };
+      const decision = learns ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : null;
+      const navigation = learns ? null : resolveStrategyGraph({ graph, mode: 'active', facts: {
         prerequisite: { value: !!prerequisite, evidence }, destination: { value: !!destination, evidence },
       }, planners: { visit_visible_prerequisite: () => prerequisite ?? null, follow_shared_chart_direction: () => destination ?? null } });
-      if (!selected) return null;
-      const strategy = selected.id, offer = selected.plan, label = chartRouteStrategies[strategy], parent = 'G_official_completion';
+      const strategy = learns
+        ? decision?.result === 'P05' ? 'visit_visible_prerequisite' : decision?.result === 'P07' ? 'follow_shared_chart_direction' : null
+        : navigation?.selected?.id;
+      if (!strategy) return null;
+      const offer = strategy === 'visit_visible_prerequisite' ? prerequisite : destination;
+      if (!offer) return null;
+      const label = chartRouteStrategies[strategy], parent = 'G_official_completion';
       const goal = { kind: 'reach_corresponding_chart_marker', scope: chart.evidence[0]!, subjects: ['linked_nodes', 'matching_marker'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_following_visible_links' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `chart-route:${need.id}`, actions = [offer.action];
-      return { status: 'proposed', kind: chartRouteId, actions, local, edges: offer.edges, attempt: offer.attempt, needId: need.id,
+      return { status: 'proposed', kind: family, actions, local, edges: offer.edges, attempt: offer.attempt, needId: need.id,
         steps: [{ action: offer.action, expected_after: null }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
         sicSituationCard: { strategy, need: 'Reach the marker that matches the starting one',
-          mode: strategy === 'visit_visible_prerequisite' ? 'exploration' : 'solving', agenda: entries, evidence, distance: offer.distance,
+          mode: strategy === 'visit_visible_prerequisite' ? 'exploration' : 'solving', agenda: navigation?.entries ?? [],
+          evidence, distance: offer.distance,
           situation: fresh ? label : [
             positions.length === 1 ? 'The next move uses the inferred map location.' : `The return leaves ${positions.length} plausible map locations.`,
             held.length ? 'A visible slot now contains a matching color.' : local.open.length ? 'An animation showed the matching color disappear at a boundary.' : '',

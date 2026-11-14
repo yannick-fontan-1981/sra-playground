@@ -31,7 +31,7 @@ import { queuedPlacementId, queuedPlacementStrategies } from './queued-placement
 import { legendRecolorId, legendRecolorStrategies, matchExampleId } from './legend-recolor.ts';
 import { visualPatternId, visualPatternStrategies } from './visual-pattern.ts';
 import { facetGrowthId, facetGrowthStrategies, learnFacetGrowthId } from './facet-growth.ts';
-import { chartRouteId, chartRouteStrategies } from './chart-route.ts';
+import { chartRouteId, chartRouteStrategies, learnChartRouteId } from './chart-route.ts';
 import { populationPlacementId, populationPlacementStrategies } from './population-placement.ts';
 import { carryToFrameId, carryToFrameStrategies, learnCarryToFrameId } from './carry-to-frame.ts';
 import { portPairingId, portPairingStrategies } from './port-pairing.ts';
@@ -485,7 +485,7 @@ export function readNativeResolution(agent: {
                       : family === symbolContributionId ? symbolContributionStrategies : family === markedLatticeId ? markedLatticeStrategies
                         : family === queuedPlacementId ? queuedPlacementStrategies : (family === legendRecolorId || family === matchExampleId) ? legendRecolorStrategies
                           : family === visualPatternId ? visualPatternStrategies : (family === facetGrowthId || family === learnFacetGrowthId) ? facetGrowthStrategies
-                            : family === chartRouteId ? chartRouteStrategies : family === populationPlacementId ? populationPlacementStrategies
+                            : (family === chartRouteId || family === learnChartRouteId) ? chartRouteStrategies : family === populationPlacementId ? populationPlacementStrategies
                               : (family === carryToFrameId || family === learnCarryToFrameId) ? carryToFrameStrategies : family === portPairingId ? portPairingStrategies
                                 : (family === contrastControlsId || family === contrastProbeId) ? contrastControlsStrategies : family === displayCouplingId ? displayCouplingStrategies : family === framedSearchId ? framedSearchStrategies
                                   : family === glyphEditingId ? glyphEditingStrategies : (family === fieldIsolationId || family === learnFieldIsolationId) ? fieldIsolationStrategies
@@ -1048,7 +1048,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && family === chartRouteId) {
+  if (situationCard && (family === chartRouteId || family === learnChartRouteId)) {
     const marker = bounds(card?.marker);
     if (marker) subjects.push({ label: 'Candidate chart marker', box: marker });
     if (Array.isArray(card?.slots)) for (const slot of card.slots.slice(0, 3)) {
