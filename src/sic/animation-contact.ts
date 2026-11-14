@@ -1,12 +1,12 @@
 import { animatedCrossInvitation } from '../logos-engine/v6-animated-contact.ts';
-import { symbolicDigest } from '../logos-engine/v6-hash.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import { orderedTransientComponentPathFacts } from '../logos-engine/v6-transient-measurements.ts';
-import type { NativeBox, NativeEntity, NativeFamily, NativePoint, NativeProposal, NativeRecord } from '../logos-engine/v6-native-types.ts';
+import type { NativeEntity, NativeFamily, NativePoint, NativeProposal, NativeRecord } from '../logos-engine/v6-native-types.ts';
+import { measureAnimatedContact, type AnimatedContact } from './observed-animation.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const animationContactId = 'sic_animation_contact';
+export const learnAnimationContactId = 'sic_learn_animation_contact';
 export const animationContactStrategies = {
   observe_transient_motion: 'Test an input and follow what moves through the animation',
   refine_transient_path: 'Test a new point to clarify the observed path',
@@ -23,8 +23,7 @@ const graph = compileStrategyGraph({
   },
 }, ['contact', 'disclosure', 'invitation']);
 
-type State = { epoch: number; frameHash: string; evidence: string[]; tried: NativePoint[];
-  contact: NativePoint | null; disclosure: NativePoint | null; source: NativeBox | null; peer: NativeBox | null; frames: number };
+type State = AnimatedContact & { epoch: number; frameHash: string; evidence: string[]; tried: NativePoint[] };
 type Proposal = NativeProposal & { local: State; target: NativePoint; needId: string };
 const samePoint = (a: NativePoint, b: NativePoint) => a[0] === b[0] && a[1] === b[1];
 function hasUniquePairBelowAim(entities: readonly NativeEntity[], [x, y]: NativePoint): boolean {
@@ -37,25 +36,21 @@ function hasUniquePairBelowAim(entities: readonly NativeEntity[], [x, y]: Native
     && y < Math.min(a.t, b.t) && (a.r < x && x < b.l || b.r < x && x < a.l)));
   return pairs.length === 1;
 }
-function measuredBox(facts: NativeRecord, prefix: string): NativeBox | null {
-  const x = facts[prefix + '_center_column_twice'], y = facts[prefix + '_center_row_twice'];
-  const width = facts[prefix + '_bbox_width'], height = facts[prefix + '_bbox_height'];
-  if (typeof x !== 'number' || typeof y !== 'number' || typeof width !== 'number' || typeof height !== 'number') return null;
-  const left = (x - width + 1) / 2, top = (y - height + 1) / 2;
-  return [left, top, left + width - 1, top + height - 1];
-}
-function measuredPoint(facts: NativeRecord, prefix: string): NativePoint | null {
-  const x = facts[prefix + '_column'], y = facts[prefix + '_row'];
-  return facts[prefix + '_present'] === true && typeof x === 'number' && typeof y === 'number' ? [x, y] : null;
-}
-
-export function createSicAnimationContact(): NativeFamily<Proposal> {
+export function createSicAnimationContact(family = animationContactId): NativeFamily<Proposal> {
+  const learns = family === learnAnimationContactId;
   let state: State | null = null;
   return {
-    id: animationContactId,
-    async propose(observation, rows, _inputs, remaining) {
+    id: family,
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
-      const prior = state?.epoch === observation.level_epoch ? state : null;
+      const previous = state?.epoch === observation.level_epoch ? state : null;
+      const receipt = learns && previous?.evidence.at(-1) !== observation.observation_ref ? execution?.readAnimatedContact?.() : null;
+      const prior: State | null = receipt?.afterRef === observation.observation_ref && receipt.levelEpoch === observation.level_epoch
+        ? { epoch: observation.level_epoch, frameHash: observation.frame_hash, evidence: [receipt.beforeRef, receipt.afterRef],
+          tried: (previous?.tried ?? []).some(point => samePoint(point, receipt.point)) ? previous!.tried : [...(previous?.tried ?? []), receipt.point],
+          contact: receipt.contact, disclosure: receipt.disclosure, source: receipt.source, peer: receipt.peer, frames: receipt.frames }
+        : previous;
+      if (learns && !prior) return null;
       if (prior && (observation.frame_hash !== prior.frameHash || prior.tried.length >= 8)) return null;
       const local = prior ?? { epoch: observation.level_epoch, frameHash: observation.frame_hash,
         evidence: [], tried: [], contact: null, disclosure: null, source: null, peer: null, frames: 0 };
@@ -81,7 +76,7 @@ export function createSicAnimationContact(): NativeFamily<Proposal> {
         satisfactionContract: 'official_progress_after_testing_projected_contact' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = 'animation-contact:' + need.id;
-      return { status: 'proposed', kind: animationContactId, local, target, actions, needId: need.id,
+      return { status: 'proposed', kind: family, local, target, actions, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, steps: [{ action, point_binding: pointBinding, expected_after: null }],
         sicSituationCard: { strategy, need: 'Find whether the moving piece can reach a stationary piece', situation: label, evidence, agenda: entries,
           mode: strategy === 'test_transient_contact' ? 'solving' : 'exploration',
@@ -104,14 +99,8 @@ export function createSicAnimationContact(): NativeFamily<Proposal> {
     record(before, after, command, first, second, proposal, _index, frames) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, target } = proposal;
-      const intermediate = frames.length && symbolicDigest(frames.at(-1)!) === symbolicDigest(second) ? frames.slice(0, -1) : frames;
-      const facts = intermediate.length ? orderedTransientComponentPathFacts(first, intermediate, second, command.action_ref, command.data) : {};
-      const heights = { ...facts, unique_transient_path_source_peer_bbox_height: facts.unique_transient_path_source_morphology_peer_bbox_height,
-        unique_transient_path_source_peer_bbox_width: facts.unique_transient_path_source_morphology_peer_bbox_width };
-      state = { ...local, frameHash: after.frame_hash, tried: [...local.tried, target], frames: frames.length,
-        evidence: [...local.evidence.slice(-4), before.observation_ref, after.observation_ref],
-        contact: measuredPoint(facts, 'ballistic_contact_solution'), disclosure: measuredPoint(facts, 'ballistic_curve_disclosure'),
-        source: measuredBox(facts, 'unique_transient_path_source'), peer: measuredBox(heights, 'unique_transient_path_source_peer') };
+      state = { ...local, ...measureAnimatedContact(first, second, frames, command), frameHash: after.frame_hash, tried: [...local.tried, target],
+        evidence: [...local.evidence.slice(-4), before.observation_ref, after.observation_ref] };
       return { events: [] };
     },
     state: () => ({ state }),

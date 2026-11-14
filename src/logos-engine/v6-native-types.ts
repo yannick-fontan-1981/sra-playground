@@ -136,6 +136,7 @@ export interface NativeExecution {
   readonly readClickRegions?: (boxes: readonly NativeBox[]) => import('../sic/observed-click-regions.ts').ClickRegionEvidence | null;
   readonly readClickMarker?: () => import('../sic/observed-click-regions.ts').ClickMarkerEvidence | null;
   readonly readAnimatedCells?: (points: readonly NativePoint[]) => import('../sic/observed-animation.ts').AnimatedCellEvidence | null;
+  readonly readAnimatedContact?: () => import('../sic/observed-animation.ts').AnimatedContactEvidence | null;
 }
 
 export interface NativeProgramHandle {

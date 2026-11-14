@@ -213,3 +213,9 @@ CLRS gagne le niveau 1 sans `sic_layered_fit` en **17 commandes et 9,25 s**. Apr
 Le rejeu confirme les 19 victoires après retrait. Les 100 niveaux 1 et les quatre parcours de référence avec et sans retrait conservent leurs commandes et retours.
 
 Les retraits testés sur ISOS, AR25, BP35 et GORI n’ajoutent aucune victoire. Sur GORI, l’exploration produit 22 animations en 40 commandes après retrait de `sic_animation_contact`. Le comparateur de trajectoires donne une expérience de clarification à la commande 13 et un point de contact à la commande 19. Un contre-essai hors agent reprend les 19 premières commandes et applique le clic calculé à partir du dernier retour. Ce clic gagne après 30 images. Ce résultat isole la preuve à transmettre entre familles.
+
+### Transmettre une trajectoire avant le prochain clic
+
+SIC mesure à la demande la trajectoire dans les images intermédiaires d’un clic. Le reçu contient les observations avant et après, le point testé, la famille et les régions qui motivent une proposition. Le repli l’admet sur le retour courant. Il compare un point de contact projeté et un point susceptible de préciser la trajectoire, en écartant les points déjà essayés dans ce contexte.
+
+Sans `sic_animation_contact`, **GORI gagne en 15 commandes et 10,82 s**. L’animation de la commande 13 suggère un clic de clarification. Les 26 images de ce clic donnent ensuite le point de contact. Les 13 premières commandes viennent de l’exploration publique, les deux dernières de `sic_learn_animation_contact`. La même victoire tient en 15 commandes avec palette permutée et nom neutre. Le comparateur de trajectoires et la projection du contact restent partagés avec la famille retirée. Empreinte `df11bb6c94d9325a9a689a254ef621916f1c5277cb0dd7ad598e96437bf31242`.
