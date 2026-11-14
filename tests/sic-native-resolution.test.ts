@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { captureDecisionSprites, readNativeResolution } from '../src/sic/native-resolution.ts';
-import { bindMissingControlTrial, missingControlWitness } from '../src/sic/missing-control-strategy.ts';
+import { bindMissingControlTrial, evaluateMissingControl, missingControlWitness } from '../src/sic/missing-control-strategy.ts';
 import type { NativeProposal } from '../src/logos-engine/v6-native-types.ts';
 
 test('the missing-control decision relies on the need and current evidence across unrelated plan types', () => {
@@ -16,6 +16,9 @@ test('the missing-control decision relies on the need and current evidence acros
   bindMissingControlTrial(second, situation);
   const witness = missingControlWitness(first, 'ACTION1', ref);
   assert.equal(witness?.need, 'establish_control_effect_for_current_objective');
+  assert.equal(witness?.agenda?.result, 'selected');
+  assert.equal(evaluateMissingControl(first, 'ACTION1', { ...situation, evidence: [] }).applicability, 'undetermined');
+  assert.equal(evaluateMissingControl(first, 'ACTION1', { ...situation, effectKnown: true }).applicability, 'inapplicable');
   assert.deepEqual(missingControlWitness(second, 'ACTION1', ref), witness);
   for (const changes of [{ objectiveSupported: false }, { effectKnown: true }, { triedInContext: true },
     { availableActions: [] }, { evidence: ['stale'] }, { observationRef: 'stale' }]) {

@@ -7,6 +7,7 @@ import { evaluateFrontierLocalRule, compileFrontierLocalRule, defaultFrontierCon
 import { frontierStrategies, frontierStrategyGraph } from './frontier-strategy.ts';
 import { defaultBrowserFamilyAgenda } from './family-agenda.ts';
 import { viewStrategies, viewStrategyGraph } from './view-strategy.ts';
+import { missingControlGraph, missingControlStrategies } from './missing-control-graph.ts';
 import { auditStrategyGraph, type StrategyGraph } from './strategy-agenda.ts';
 import type { V6BackendSnapshot } from '../runtime/v6-agent-protocol.ts';
 
@@ -89,7 +90,8 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
     if (!isContactStrategy(priority.value) || !next) return;
     coverage.replaceChildren(graphCoverage('Contact recovery', contactRecoveryGraph, contactRecoveryStrategies, [priority.value, next]),
       graphCoverage('Exploration', frontierStrategyGraph, frontierStrategies, frontierStrategyGraph.priorities),
-      graphCoverage('View access', viewStrategyGraph, viewStrategies, viewStrategyGraph.priorities));
+      graphCoverage('View access', viewStrategyGraph, viewStrategies, viewStrategyGraph.priorities),
+      graphCoverage('Missing control', missingControlGraph, missingControlStrategies, missingControlGraph.priorities));
   };
   priority.addEventListener('change', showFallback);
   const depth = form.elements.namedItem('maxDepth') as HTMLInputElement;

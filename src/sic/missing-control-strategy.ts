@@ -1,8 +1,7 @@
 import type { NativeProposal } from '../logos-engine/v6-native-types.ts';
-
-export const missingControlLabel = 'Test an input needed by the retained method';
-export const missingControlStrategy = 'test_missing_control';
-export const missingControlNeed = 'establish_control_effect_for_current_objective';
+import { missingControlGraph, missingControlNeed, missingControlStrategy } from './missing-control-graph.ts';
+import { resolveStrategyGraph, type AgendaEntry, type StrategyFact } from './strategy-agenda.ts';
+export { missingControlLabel, missingControlNeed, missingControlStrategy } from './missing-control-graph.ts';
 
 export interface MissingControlSituation {
   readonly observationRef: string;
@@ -19,6 +18,7 @@ export interface MissingControlWitness {
   readonly observationRef: string;
   readonly action: string;
   readonly evidence: readonly string[];
+  readonly agenda?: AgendaEntry<typeof missingControlStrategy>;
 }
 
 type TrialProposal = { readonly actions: readonly { readonly action_ref: string }[];
@@ -35,11 +35,24 @@ const trials = new WeakMap<object, MissingControlWitness>();
 /** Families supply observations that establish the same need in their current context. */
 export function bindMissingControlTrial(proposal: TrialProposal, situation: MissingControlSituation): void {
   const [command] = proposal.actions;
-  if (proposal.actions.length !== 1 || !command || !situation.objectiveSupported
-    || situation.effectKnown || situation.triedInContext || !situation.availableActions.includes(command.action_ref)
-    || proposal.binding?.observation_ref !== situation.observationRef || !situation.evidence.includes(situation.observationRef)) return;
-  trials.set(proposal, { id: missingControlStrategy, need: missingControlNeed, action: command.action_ref,
-    observationRef: situation.observationRef, evidence: [...new Set(situation.evidence)] });
+  if (proposal.actions.length !== 1 || !command) return;
+  const assessment = evaluateMissingControl(proposal, command.action_ref, situation);
+  if (assessment.result === 'selected') trials.set(proposal, { id: missingControlStrategy, need: missingControlNeed,
+    action: command.action_ref, observationRef: situation.observationRef, evidence: assessment.evidence ?? [], agenda: assessment });
+}
+
+export function evaluateMissingControl(proposal: TrialProposal, action: string, situation: MissingControlSituation) {
+  const current = proposal.binding?.observation_ref === situation.observationRef && situation.evidence.includes(situation.observationRef);
+  const evidence: [string, ...string[]] = [situation.observationRef, ...situation.evidence.filter(ref => ref !== situation.observationRef)];
+  const fact = (value: boolean): StrategyFact => current ? { value, evidence } : { value: 'unknown' };
+  const assessment = resolveStrategyGraph({
+    graph: missingControlGraph, mode: 'active',
+    facts: { currentObservation: current ? { value: true, evidence } : { value: 'unknown' },
+      supportedObjective: fact(situation.objectiveSupported), availableControl: fact(situation.availableActions.includes(action)),
+      knownEffect: fact(situation.effectKnown), alreadyTried: fact(situation.triedInContext) },
+    planners: { [missingControlStrategy]: () => true },
+  });
+  return assessment.entries[0]!;
 }
 
 export function missingControlWitness(proposal: NativeProposal, action: string, observationRef: string): MissingControlWitness | undefined {
