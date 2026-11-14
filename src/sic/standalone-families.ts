@@ -7,8 +7,9 @@ import { publicInputExplorationId } from './public-input-exploration.ts';
 import { framedContactId } from './framed-contact.ts';
 import { transportContactId } from './transport-contact.ts';
 import { bandAlignmentId } from './band-alignment.ts';
+import { sharedArrivalId } from './shared-arrival.ts';
 
 export const standalonePlanningFamilies: readonly string[] = Object.freeze([
   fieldRepairId, orderedContactId, supportTransferId, subsetExperimentId, framedContactId, transportContactId,
-  bandAlignmentId, cavityAccessId, publicInputExplorationId,
+  bandAlignmentId, sharedArrivalId, cavityAccessId, publicInputExplorationId,
 ]);
