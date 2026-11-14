@@ -25,19 +25,22 @@ LKEY termine également le rejeu de `33f0fb3b` avec les mêmes 44 commandes, ret
 
 ## Mesurer le remplacement effectif
 
-Le commit `fe9bd63f` porte le compteur à **2 jeux gagnés sur les 100 du catalogue (2 %)** et **12 niveaux gagnés**. La [référence par jeu](sic-v8-reference-levels.md) retient les maxima attestés pour le natif, V5, V6 et V7. Le score à dépasser se calcule sur les parcours partis du niveau 1, dans une partie continue.
+Le commit `3e50e61f` atteint **2 jeux gagnés sur les 100 du catalogue (2 %)** et **13 niveaux gagnés**. La [référence par jeu](sic-v8-reference-levels.md) retient les maxima attestés pour le natif, V5, V6 et V7. Le score à dépasser se calcule sur les parcours partis du niveau 1, dans une partie continue.
 
 | Jeu | Maximum historique retrouvé | SIC seul | Seuil dépassé à l’action | Fin des niveaux |
 | --- | ---: | ---: | ---: | --- |
 | SYME | 3 | 6 sur 6 · WIN | 44 | 9, 21, 36, 44, 58, 78 |
 | DNOI | 3 | 6 sur 6 · WIN | 29 | 3, 9, 17, 29, 47, 59 |
+| SK48 | 2 | 1 sur 8 · entrée au niveau 2 | — | 19 |
 | CASC | 1 | 0 sur 6 · aucun plan applicable | — | — |
 
-Le rejeu charge la partie neuve et le pack `solver: 'sic'` dans le worker normal. Le seul fournisseur de plans enregistré est `sic_field_repair`. Le navigateur vérifie avant chaque clic le fournisseur, l’autorité `sicOnly`, le sous-objectif et la stratégie. L’observation, l’exécution et le garde WHY/ACT restent communs. La réparation combine des correspondances mesurées et, lorsque plusieurs observations indépendantes concordent, des votes dans les groupes formés par les symétries ou les répétitions. Elle teste un clic avec **OP18** et vérifie la cellule cible, la conservation du reste du champ et le nombre de pixels modifiés en périphérie. Les changements de niveau et la victoire proviennent du retour du jeu.
+Le rejeu charge la partie neuve et le pack `solver: 'sic'` dans le worker normal. Il enregistre les seuls fournisseurs SIC de réparation par correspondance et d’alignement par contact. Le navigateur vérifie avant chaque commande le fournisseur, l’autorité `sicOnly`, le sous-objectif et la stratégie. L’observation, les opérateurs géométriques, les fonctions de recherche, l’exécution et le garde WHY/ACT sont partagés. La réparation combine des correspondances mesurées et, lorsque plusieurs observations indépendantes concordent, des votes dans les groupes formés par les symétries ou les répétitions. Elle teste un clic avec **OP18** et vérifie la cellule cible, la conservation du reste du champ et le nombre de pixels modifiés en périphérie. Les changements de niveau et la victoire proviennent du retour du jeu.
 
 Empreintes SHA-256 de la suite des commandes et des retours publics agrégés. SYME `e6d71fdf0471b4c27f1f8d0baad16a7d44dc2f9a2d8220105d66d10ad515a603`. DNOI `82425afb37b8c38d0d348cd2744f8595b38ad294914fecbb0b96c077f50c5182`.
 
-La campagne complète de 100 jeux a retrouvé les deux victoires. TRIA a reçu un clic SIC et s’est arrêté sans gagner de niveau. Les 97 autres jeux se sont arrêtés avant la première action. La campagne s’est terminée sans erreur de chargement ou d’attribution de plan. Sur SK48, un essai de la composition déplacement, contact et ordre de référence sur le vrai jeu a retrouvé la contradiction à l’action 12 et a ouvert le niveau 2 à l’action 19. Cet essai direct des opérateurs reste hors du compteur SIC seul. La projection courante du niveau 2 demande de distinguer une poussée, une entrée et un maintien durant la rétraction.
+Sur SK48, SIC mesure les effets de déplacement (actions 1 à 4), teste un trajet vers l’ordre de référence (5 à 12) et recalcule le trajet après avoir observé que plusieurs pièces se déplacent ensemble au retour de l’action 12 (13 à 19). **OP18** autorise chacune de ces commandes. La projection courante du niveau 2 demande de distinguer une poussée, une entrée et un maintien durant la rétraction.
+
+En complément, la première campagne complète de 100 jeux, à `fe9bd63f`, a retrouvé les deux victoires. TRIA a reçu un clic SIC et s’est arrêté à zéro niveau. Les 97 autres jeux se sont arrêtés avant la première action. La campagne s’est terminée sans erreur de chargement ou d’attribution de plan.
 
 Le rejeu de non-régression compare les commandes et tous les retours publics entre le parcours de référence, le mode shadow et l’agenda actif. Aucun écart sur SK48 (19 actions, 1 niveau), AS66 (19, 3), SYME (9, 1), LKEY (44, 3) et CASC (1, 0, arrêt `frontier_unknown`). Ces parcours utilisent le mode habituel du Playground.
 
