@@ -21,7 +21,7 @@ Le commit `d322509d` couvre les 100 premiers niveaux, attestés par les qualific
 
 Le passage au composant commun demande un rejeu avec retrait de la famille ciblée, les 100 niveaux 1 et les quatre parcours intégraux sous SIC seul. Comparer les gains, les commandes, les contradictions, l’autorité de décision et la durée par niveau. Une modification des commandes est acceptable lorsque les preuves et les résultats restent vérifiables. Garder la première divergence et le nombre de jeux où la primitive contribue réellement.
 
-Les niveaux 1 restent prioritaires. Le critère de passage à la campagne systématique des niveaux 2 est un rejeu des 100 niveaux 1 sous SIC seul, avec retrait de la famille habituelle et preuve du mécanisme de repli. La campagne des niveaux 3 suit celle des niveaux 2.
+Les niveaux 1 restent prioritaires. La campagne systématique des niveaux 2 reprend quand les 100 niveaux 1 sont gagnés sous SIC seul après retrait de la famille habituelle, avec preuves du repli par des familles et primitives réutilisables. La référence de retrait est figée sur le rejeu normal du runtime `07e5e687` pour suivre les gains sans faire changer la famille retirée au fil des mises à jour. La campagne des niveaux 3 suit celle des niveaux 2.
 
 ## Premiers retours
 
@@ -85,3 +85,9 @@ Les quatre jeux de référence disposent d’une voie de résolution vérifiée 
 Le retrait systématique donne **6/100 niveaux 1 gagnés**. Ce chiffre mesure les victoires après retrait. La reconstruction par apprentissage se vérifie dans les retours et se compte séparément. L’[inventaire](sic-v8-family-inventory.md#retrait-de-la-famille-principale-sur-les-100-niveaux-1) rapporte les familles qui émettent des commandes et la diversité des familles retirées auxquelles elles succèdent.
 
 Les niveaux 2 déjà attestés restent dans le référentiel. La campagne suivante se concentre sur les arrêts sans proposition et sur les essais où l’exploration produit des retours mais ne trouve pas de plan. Les premiers lots doivent isoler le fait qui manque pour passer d’un retour d’exploration à une décision de résolution, faire porter chaque décision par une carte de primitive réévaluée après le retour, puis vérifier la même carte sur des jeux tenus à l’écart de sa mise au point. Chaque gain est ensuite rejoué avec retrait et en configuration normale.
+
+### Premier écart sur les déplacements
+
+Le rejeu du runtime de référence gagne KLOT, KA59 et SNAR en 14, 15 et 16 commandes. Avec retrait, les trois parties atteignent 40 commandes sans gain. Sur KLOT, les quatre premières commandes directionnelles modifient seulement deux pixels chacune. La référence sélectionne d’abord une pièce. Sur KA59, les directions déplacent déjà des éléments pendant le repli, mais les premiers clics modifient au plus un pixel. La référence identifie d’abord la pièce contrôlée, puis constate un contact couplé dans une animation. Sur SNAR, le repli diffuse bien une commande de révélation. Les cellules découvertes doivent rester accessibles au planificateur après la disparition de l’écho.
+
+Les premiers faits à publier sont donc la sélection effective d’un mobile, l’effet directionnel lié à cette sélection et les cellules praticables confirmées. Une carte d’exploration doit pouvoir produire ces faits avec P05. Une carte d’accès P07 doit les reprendre dans la même partie et vérifier son prochain déplacement. Le SRC peut choisir entre les offres admissibles à partir de ces preuves. Un [test SIC seul](../../tests/v6-native-runtime.test.ts#L129) vérifie déjà le chemin d’exécution d’un SRC de sélection remplacé en cours de session.

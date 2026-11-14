@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { createNativeV6Runtime, NativeV6Runtime } from '../src/logos-engine/v6-native-runtime.ts';
 import type { NativeV6Declarations } from '../src/logos-engine/v6-native-runtime.ts';
+import { nativeProgramDescriptions } from '../src/logos-engine/v6-src-program.ts';
 import { V6AgentService } from '../src/runtime/v6-agent-service.ts';
 import { BrowserV6Agent } from '../src/runtime/v6-agent.ts';
 import { defaultRecoveryPack } from '../src/sic/active-recovery.ts';
@@ -100,7 +101,9 @@ for (const scenario of [
   let sequence = 0;
   while (current.levels_completed === 0) {
     const { after, command } = steps[sequence];
-    assert.deepEqual(result.snapshot.coverage?.registeredFamilies, standalonePlanningFamilies);
+    const registered = result.snapshot.coverage?.registeredFamilies;
+    assert.equal(registered?.length, standalonePlanningFamilies.length);
+    assert.deepEqual(new Set(registered), new Set(standalonePlanningFamilies));
     const receipt = result.snapshot.trace.findLast(value => (value as { kind: string }).kind === 'sic_native_plan') as
       { authority: string; objective: string; subObjective: string; strategy: string };
     assert.equal(receipt.authority, 'sicOnly');
@@ -121,6 +124,38 @@ for (const scenario of [
   assert.equal(result.snapshot.levelsCompleted, 1);
   assert.equal(result.snapshot.sicActionCoverage?.sicOnly, actions);
   assert.equal(result.snapshot.sicActionCoverage?.native, 0);
+});
+
+test('a SIC-only session can execute a replaced SRC selection workflow at a sealed boundary', async () => {
+  const fixture = fields.cases.find((item: { game: string }) => item.game === 'SYME');
+  const service = new V6AgentService(recovery => createNativeV6Runtime(declarations, { recovery, now: () => 0 }));
+  const sessionId = 'sic-only-src-selection';
+  const first = await service.handle({ type: 'init', sessionId, sequence: 0,
+    observation: toV6PublicObservation(gamePacket(fixture.initial.public, 'UNSEEN'), 0),
+    budgets: { targetLevels: 1, levelActionCaps: [600] }, recovery: { ...defaultRecoveryPack, solver: 'sic' } });
+  assert.equal(first.kind, 'action');
+  assert.equal(first.snapshot.sicFamilySelection?.mode, 'active');
+  const boundary = await service.handle({ type: 'advance', sessionId, sequence: 1, ticketId: first.ticket!.id,
+    observation: toV6PublicObservation(gamePacket(fixture.transitions[0].steps[0].afterPublic, 'UNSEEN'), 1), executionMs: 0 });
+  assert.equal(boundary.kind, 'boundary');
+
+  const programId = 'v6.composition_strategy.choose';
+  const module = structuredClone(nativeProgramDescriptions().find(program => program.id === programId)!.module);
+  const step = module.workflows[0]!.steps[0]!;
+  step.statements[1] = { ...step.statements[1]!, kind: 'STOP',
+    expression: { kind: 'reference', value: 'session', arguments: [], items: [] } };
+  await service.handle({ type: 'edit', sessionId, sequence: 1, edit: {
+    expectedGraphChain: boundary.snapshot.graphChain!, reason: 'Test SRC abstention before consulting any SIC family',
+    changes: [{ type: 'replace_program', programId, module }],
+  } });
+  const result = await service.handle({ type: 'resume', sessionId, sequence: 1 });
+  assert.equal(result.kind, 'stopped');
+  assert.equal(result.command, null);
+  assert.equal(result.snapshot.sicActionCoverage?.sicOnly, 1);
+  assert.equal(result.snapshot.sicActionCoverage?.native, 0);
+  const receipt = result.snapshot.srcDecision as { edited: boolean; executed_statements: string[] };
+  assert.equal(receipt.edited, true);
+  assert.deepEqual(receipt.executed_statements, [`${programId}.open.s0000`, `${programId}.open.s0001`]);
 });
 
 class RecordingBackend implements NativeV6Backend {
