@@ -35,6 +35,7 @@ import { chartRouteId, chartRouteStrategies } from './chart-route.ts';
 import { populationPlacementId, populationPlacementStrategies } from './population-placement.ts';
 import { carryToFrameId, carryToFrameStrategies } from './carry-to-frame.ts';
 import { portPairingId, portPairingStrategies } from './port-pairing.ts';
+import { contrastControlsId, contrastControlsStrategies } from './contrast-controls.ts';
 import { displayCouplingId, displayCouplingStrategies } from './display-coupling.ts';
 import { framedSearchId, framedSearchStrategies } from './framed-search.ts';
 import { framedReceptionId, framedReceptionStrategies } from './framed-reception.ts';
@@ -486,7 +487,7 @@ export function readNativeResolution(agent: {
                           : family === visualPatternId ? visualPatternStrategies : (family === facetGrowthId || family === learnFacetGrowthId) ? facetGrowthStrategies
                             : family === chartRouteId ? chartRouteStrategies : family === populationPlacementId ? populationPlacementStrategies
                               : family === carryToFrameId ? carryToFrameStrategies : family === portPairingId ? portPairingStrategies
-                                : family === displayCouplingId ? displayCouplingStrategies : family === framedSearchId ? framedSearchStrategies
+                                : family === contrastControlsId ? contrastControlsStrategies : family === displayCouplingId ? displayCouplingStrategies : family === framedSearchId ? framedSearchStrategies
                                   : family === glyphEditingId ? glyphEditingStrategies : (family === fieldIsolationId || family === learnFieldIsolationId) ? fieldIsolationStrategies
                                     : family === directionalReceptionId ? directionalReceptionStrategies : family === windowCoverageId ? windowCoverageStrategies
                                       : family === panelMatchingId ? panelMatchingStrategies : family === crossingRowsId ? crossingRowsStrategies
@@ -1018,9 +1019,11 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && family === displayCouplingId) {
+  if (situationCard && (family === displayCouplingId || family === contrastControlsId)) {
     const control = bounds(card?.control);
     if (control) subjects.push({ label: 'Switch tested', box: control });
+    const source = bounds(card?.source);
+    if (source) subjects.push({ label: 'Previously tested switch', box: source });
     if (Array.isArray(card?.receivers)) for (const indicator of card.receivers) {
       const box = bounds(indicator);
       if (box) subjects.push({ label: 'Separate indicator', box });

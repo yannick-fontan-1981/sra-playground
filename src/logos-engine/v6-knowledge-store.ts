@@ -185,14 +185,17 @@ export class NativeKnowledgeStore {
     } finally { this.busy = false; }
   }
 
-  async registerProgram(id: string, callbacks: Readonly<Record<string, Primitive>>): Promise<StoredNativeProgram> {
-    const registered = await NativeSrcProgram.create(id, callbacks);
+  async registerProgram(id: string, callbacks: Readonly<Record<string, Primitive>>, localModule?: CompiledModule): Promise<StoredNativeProgram> {
+    const registered = localModule
+      ? { module: validateCompiledModule(localModule, callbacks), transitiveSourceHash: await digest(localModule) }
+      : await NativeSrcProgram.create(id, callbacks);
+    const reference = localModule ? 'sic' : V6_NATIVE_PROGRAM_REFERENCE;
     this.callbacks.set(id, Object.freeze({ ...callbacks }));
     const nodeId = `program:${id}`;
     if (!this.state.nodes[nodeId]) {
       const executionHash = await digest({ profile: 'native-stored-ir.v1', module: registered.module });
       await this.commit([{ id: nodeId, kind: 'program', status: 'active', value: { module: registered.module, executionHash, edited: false },
-        definition: { reference_commit: V6_NATIVE_PROGRAM_REFERENCE, source_hash: registered.module.source_hash,
+        definition: { reference_commit: reference, source_hash: registered.module.source_hash,
           semantic_hash: registered.module.semantic_hash, transitive_source_hash: registered.transitiveSourceHash },
       }], { workflow: id, step: 'native_store', statement: 'program.install' });
     }
@@ -207,7 +210,7 @@ export class NativeKnowledgeStore {
         workflow: id, src_hash: edited ? executionHash : stringValue(definition.transitive_source_hash), src_status: 'completed',
         executed_statements: executed.slice(-finalSliceLength), all_executed_statements: executed,
         instruction_quantum: 128, instructions: result.instructions, trace: result.trace,
-        execution_engine: 'logos-engine.typescript', reference_commit: V6_NATIVE_PROGRAM_REFERENCE,
+        execution_engine: 'logos-engine.typescript', reference_commit: reference,
         reference_semantic_hash: stringValue(definition.semantic_hash),
         native_execution_hash: executionHash, source_definition_hash: stringValue(definition.transitive_source_hash), edited,
       } };

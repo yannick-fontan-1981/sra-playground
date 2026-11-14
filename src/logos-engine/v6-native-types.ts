@@ -147,7 +147,8 @@ export interface NativeProgramHandle {
 
 /** Runtime injection: every run reads its actual IR from one common store. */
 export interface NativeProgramRegistry {
-  registerProgram(workflowId: string, callbacks: Readonly<Record<string, Primitive>>): Promise<NativeProgramHandle>;
+  registerProgram(workflowId: string, callbacks: Readonly<Record<string, Primitive>>,
+    localModule?: import('./ir.ts').CompiledModule): Promise<NativeProgramHandle>;
 }
 
 /**
