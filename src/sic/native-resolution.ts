@@ -38,6 +38,7 @@ import { portPairingId, portPairingStrategies } from './port-pairing.ts';
 import { displayCouplingId, displayCouplingStrategies } from './display-coupling.ts';
 import { framedSearchId, framedSearchStrategies } from './framed-search.ts';
 import { framedReceptionId, framedReceptionStrategies } from './framed-reception.ts';
+import { windowRelationId, windowRelationStrategies } from './window-relation.ts';
 import { glyphEditingId, glyphEditingStrategies } from './glyph-editing.ts';
 import { fieldIsolationId, fieldIsolationStrategies } from './field-isolation.ts';
 import { directionalReceptionId, directionalReceptionStrategies } from './directional-reception.ts';
@@ -65,7 +66,7 @@ const situationStrategies = { ...orderedContactStrategies, ...cavityStrategies, 
   ...labeledSequenceStrategies, ...markedCollectionStrategies, ...slotTransferStrategies, ...remoteSupportRouteStrategies,
   ...occurrenceRecallStrategies, ...slotPermutationStrategies, ...surfaceCopyStrategies, ...codeRouteStrategies, ...profileTransferStrategies,
   ...orderedReplenishmentStrategies, ...programOriginStrategies, ...previewPlacementStrategies, ...symbolContributionStrategies, ...markedLatticeStrategies,
-  ...queuedPlacementStrategies, ...legendRecolorStrategies, ...visualPatternStrategies, ...facetGrowthStrategies, ...chartRouteStrategies, ...populationPlacementStrategies, ...carryToFrameStrategies, ...portPairingStrategies, ...displayCouplingStrategies, ...framedSearchStrategies, ...glyphEditingStrategies, ...fieldIsolationStrategies, ...directionalReceptionStrategies, ...windowCoverageStrategies, ...panelMatchingStrategies, ...crossingRowsStrategies, ...traceCoverageStrategies, ...radialConnectionStrategies, ...invitedCaptureStrategies, ...branchAlignmentStrategies, ...feedbackTrialStrategies, ...catalogueComparisonStrategies, ...receptionAccessStrategies, ...markerCoverageStrategies, ...framedReceptionStrategies };
+  ...queuedPlacementStrategies, ...legendRecolorStrategies, ...visualPatternStrategies, ...facetGrowthStrategies, ...chartRouteStrategies, ...populationPlacementStrategies, ...carryToFrameStrategies, ...portPairingStrategies, ...displayCouplingStrategies, ...framedSearchStrategies, ...glyphEditingStrategies, ...fieldIsolationStrategies, ...directionalReceptionStrategies, ...windowCoverageStrategies, ...panelMatchingStrategies, ...crossingRowsStrategies, ...traceCoverageStrategies, ...radialConnectionStrategies, ...invitedCaptureStrategies, ...branchAlignmentStrategies, ...feedbackTrialStrategies, ...catalogueComparisonStrategies, ...receptionAccessStrategies, ...markerCoverageStrategies, ...framedReceptionStrategies, ...windowRelationStrategies };
 
 export interface NativeStep {
   readonly action: string;
@@ -454,7 +455,7 @@ export function readNativeResolution(agent: {
                                         : family === traceCoverageId ? traceCoverageStrategies : family === radialConnectionId ? radialConnectionStrategies
                                           : family === invitedCaptureId ? invitedCaptureStrategies : family === branchAlignmentId ? branchAlignmentStrategies
                                             : family === feedbackTrialId ? feedbackTrialStrategies : family === catalogueComparisonId ? catalogueComparisonStrategies
-                                              : family === receptionAccessId ? receptionAccessStrategies : family === markerCoverageId ? markerCoverageStrategies : family === framedReceptionId ? framedReceptionStrategies : null;
+                                              : family === receptionAccessId ? receptionAccessStrategies : family === markerCoverageId ? markerCoverageStrategies : family === framedReceptionId ? framedReceptionStrategies : family === windowRelationId ? windowRelationStrategies : null;
   const card = planReceipt?.authority === 'sicOnly' && labels ? record(proposal?.sicSituationCard) : null;
   const isSituationStrategy = (id: unknown): id is keyof typeof situationStrategies =>
     typeof id === 'string' && !!labels && Object.hasOwn(labels, id);
@@ -706,6 +707,14 @@ export function readNativeResolution(agent: {
     for (const [field, label] of [['source', 'Source symbols'], ['editable', 'Editable symbols'], ['active', 'Focused symbol']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
+    }
+  }
+  if (situationCard && family === windowRelationId) {
+    const cell = bounds(card?.cell);
+    if (cell) subjects.push({ label: 'Cell that disagrees with the examples', box: cell });
+    if (Array.isArray(card?.references)) for (const reference of card.references) {
+      const box = bounds(reference);
+      if (box) subjects.push({ label: 'Example window', box });
     }
   }
   if (situationCard && family === framedReceptionId) {
