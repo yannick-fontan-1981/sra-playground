@@ -47,6 +47,7 @@ import { orderedReplenishmentStrategies } from './ordered-replenishment.ts';
 import { programOriginStrategies } from './program-origin.ts';
 import { previewPlacementStrategies } from './preview-placement.ts';
 import { symbolContributionStrategies } from './symbol-contribution.ts';
+import { markedLatticeStrategies } from './marked-lattice.ts';
 
 const commands: Readonly<Record<number, string>> = {
   1: 'Up', 2: 'Down', 3: 'Left', 4: 'Right', 5: 'Space', 6: 'Click', 7: 'Action 7',
@@ -1263,7 +1264,7 @@ function renderSituationCards(container: Element, returns: readonly DirectionalR
     ...transportContactStrategies, ...bandAlignmentStrategies, ...sharedArrivalStrategies, ...outlineServiceStrategies,
     ...labeledSequenceStrategies, ...markedCollectionStrategies, ...slotTransferStrategies, ...remoteSupportRouteStrategies,
     ...occurrenceRecallStrategies, ...slotPermutationStrategies, ...surfaceCopyStrategies, ...codeRouteStrategies, ...profileTransferStrategies,
-    ...orderedReplenishmentStrategies, ...programOriginStrategies, ...previewPlacementStrategies, ...symbolContributionStrategies };
+    ...orderedReplenishmentStrategies, ...programOriginStrategies, ...previewPlacementStrategies, ...symbolContributionStrategies, ...markedLatticeStrategies };
   const cards = new Map<string, DirectionalReturn>();
   for (const item of returns) {
     const card = item.decision?.situationCard;

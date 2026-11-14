@@ -26,6 +26,7 @@ import { orderedReplenishmentId, orderedReplenishmentStrategies } from './ordere
 import { programOriginId, programOriginStrategies } from './program-origin.ts';
 import { previewPlacementId, previewPlacementStrategies } from './preview-placement.ts';
 import { symbolContributionId, symbolContributionStrategies } from './symbol-contribution.ts';
+import { markedLatticeId, markedLatticeStrategies } from './marked-lattice.ts';
 import { frontierStrategies, isFrontierStrategy, type FrontierStrategy } from './frontier-strategy.ts';
 import { isViewStrategy, viewStrategies, type ViewStrategy } from './view-strategy.ts';
 import { informationStrategies, isInformationStrategy, type InformationStrategy } from './information-strategy.ts';
@@ -38,7 +39,7 @@ const situationStrategies = { ...orderedContactStrategies, ...cavityStrategies, 
   ...transportContactStrategies, ...bandAlignmentStrategies, ...sharedArrivalStrategies, ...outlineServiceStrategies,
   ...labeledSequenceStrategies, ...markedCollectionStrategies, ...slotTransferStrategies, ...remoteSupportRouteStrategies,
   ...occurrenceRecallStrategies, ...slotPermutationStrategies, ...surfaceCopyStrategies, ...codeRouteStrategies, ...profileTransferStrategies,
-  ...orderedReplenishmentStrategies, ...programOriginStrategies, ...previewPlacementStrategies, ...symbolContributionStrategies };
+  ...orderedReplenishmentStrategies, ...programOriginStrategies, ...previewPlacementStrategies, ...symbolContributionStrategies, ...markedLatticeStrategies };
 
 export interface NativeStep {
   readonly action: string;
@@ -415,7 +416,7 @@ export function readNativeResolution(agent: {
                 : family === surfaceCopyId ? surfaceCopyStrategies : family === codeRouteId ? codeRouteStrategies
                   : family === profileTransferId ? profileTransferStrategies : family === orderedReplenishmentId ? orderedReplenishmentStrategies
                     : family === programOriginId ? programOriginStrategies : family === previewPlacementId ? previewPlacementStrategies
-                      : family === symbolContributionId ? symbolContributionStrategies : null;
+                      : family === symbolContributionId ? symbolContributionStrategies : family === markedLatticeId ? markedLatticeStrategies : null;
   const card = planReceipt?.authority === 'sicOnly' && labels ? record(proposal?.sicSituationCard) : null;
   const isSituationStrategy = (id: unknown): id is keyof typeof situationStrategies =>
     typeof id === 'string' && !!labels && Object.hasOwn(labels, id);
@@ -548,6 +549,11 @@ export function readNativeResolution(agent: {
   if (situationCard && family === symbolContributionId) {
     const guide = bounds(card?.guide);
     if (guide) subjects.push({ label: 'Indicated symbol or operand', box: guide });
+  }
+  if (situationCard && family === markedLatticeId) {
+    const cursor = bounds(card?.cursor), target = bounds(card?.target);
+    if (cursor) subjects.push({ label: 'Current cursor', box: cursor });
+    if (target) subjects.push({ label: 'Unvisited marker', box: target });
   }
   if (situationCard && family === cavityAccessId) {
     const obstacle = bounds(card?.movingObstacle), actor = bounds(card?.controlledPiece);

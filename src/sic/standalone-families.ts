@@ -22,6 +22,7 @@ import { orderedReplenishmentId } from './ordered-replenishment.ts';
 import { programOriginId } from './program-origin.ts';
 import { previewPlacementId } from './preview-placement.ts';
 import { symbolContributionId } from './symbol-contribution.ts';
+import { markedLatticeId } from './marked-lattice.ts';
 
 export const standalonePlanningGroups = [
   { id: 'repair_visible_field', families: [fieldRepairId, orderedContactId, supportTransferId] },
@@ -34,6 +35,7 @@ export const standalonePlanningGroups = [
   { id: 'preserve_ordered_team', families: [orderedReplenishmentId] },
   { id: 'fill_visible_partition', families: [previewPlacementId] },
   { id: 'follow_symbol_diagram', families: [symbolContributionId] },
+  { id: 'visit_marked_surface', families: [markedLatticeId] },
   { id: 'explore_available_inputs', families: [cavityAccessId, publicInputExplorationId] },
 ] as const;
 
