@@ -44,6 +44,7 @@ export interface NativeCallerConfiguration {
   sicView?: 'shadow' | 'active';
   sicInformation?: 'shadow' | 'active';
   openingCuriosity?: OpeningCuriosityMode;
+  informationPreference?: import('../sic/information-preference.ts').InformationPreference;
 }
 export interface NativeCallerState {
   goal: R; frontier: R; view: R | null; attention: R; points: R; displays: R;
@@ -452,8 +453,9 @@ export class NativeCallerCoordinator {
     };
     const opening = !this.goal.memory.episode.some(([before]) => before.epoch === observation.level_epoch)
       ? this.configuration.openingCuriosity : undefined;
-    const ordered = electInformationGoals(offers, observation, remaining, options.meter, policy, opening === 'active');
-    const alternate = opening === 'shadow' ? electInformationGoals(offers, observation, remaining, options.meter, policy, true).next().value?.[1] : null;
+    const preference = this.configuration.informationPreference;
+    const ordered = electInformationGoals(offers, observation, remaining, options.meter, policy, opening === 'active', preference);
+    const alternate = opening === 'shadow' ? electInformationGoals(offers, observation, remaining, options.meter, policy, true, preference).next().value?.[1] : null;
     const publish = (proposal: R | null, considered: Awaited<ReturnType<typeof selectInformationStrategy>>['considered']) => {
       const receipt = proposal?.question?.curiosity;
       const strategy: unknown = receipt?.source;
@@ -464,6 +466,7 @@ export class NativeCallerCoordinator {
           objective: { id: proposal.bundle_template.information_target, label: informationStrategies[strategy], parent },
           need: informationNeed(observation.observation_ref, parent, subjects, receipt.evidence),
           evidence: { observations: receipt.evidence, distinctOutcomes: receipt.distinct_outcomes, admissibleOffers: receipt.admissible_offers },
+          ...(receipt.sic_preference ? { preference: receipt.sic_preference } : {}),
           ...(receipt.opening_complexity ? { openingComplexity: receipt.opening_complexity } : {}),
           ...(alternate?.opening_complexity ? { openingShadow: { action: alternate.action, relations: alternate.opening_complexity } } : {}) };
       }

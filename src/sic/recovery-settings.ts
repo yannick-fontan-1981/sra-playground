@@ -1,6 +1,7 @@
 import { compileRecoveryPack, contactRecoveryGraph, contactRecoveryOrder, contactRecoveryStrategies, defaultRecoveryPack, isContactStrategy, type RecoveryPack } from './active-recovery.ts';
 import { nextRecoveryRevision, readRecoveryRevision, recoveryRevision, type RecoveryRevision } from './recovery-pack.ts';
 import { verifySignedRecoveryPack, type SignedRecoveryPack } from './pack-signature.ts';
+import { informationStrategies } from './information-strategy.ts';
 import { evaluateFrontierLocalRule, compileFrontierLocalRule, defaultFrontierConfiguration, frontierInputOrders,
   isFrontierInputOrder, type FrontierChoiceEvidence, type FrontierInputOrder, type FrontierLocalRule } from './frontier-configuration.ts';
 import { frontierStrategies, frontierStrategyGraph } from './frontier-strategy.ts';
@@ -27,6 +28,10 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
   const inputOrder = form.elements.namedItem('frontierInputOrder') as HTMLSelectElement;
   const familyAgenda = form.elements.namedItem('familyAgenda') as HTMLSelectElement;
   const openingCuriosity = form.elements.namedItem('openingCuriosity') as HTMLSelectElement;
+  const informationStrategy = form.elements.namedItem('informationStrategy') as HTMLSelectElement;
+  const informationOutcomes = form.elements.namedItem('informationOutcomes') as HTMLInputElement;
+  const informationMode = form.elements.namedItem('informationMode') as HTMLSelectElement;
+  informationStrategy.replaceChildren(...Object.entries(informationStrategies).map(([id, title]) => new Option(title, id)));
   const ruleTitle = form.elements.namedItem('localRuleTitle') as HTMLInputElement;
   const ruleCommands = form.elements.namedItem('localRuleCommands') as HTMLSelectElement;
   const ruleGap = form.elements.namedItem('localRuleGap') as HTMLInputElement;
@@ -116,6 +121,9 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
     inputOrder.value = (pack.frontier ?? defaultFrontierConfiguration).inputOrder;
     familyAgenda.value = pack.familyAgenda ?? defaultBrowserFamilyAgenda;
     openingCuriosity.value = pack.openingCuriosity ?? 'native';
+    informationStrategy.value = pack.informationPreference?.strategy ?? 'point_contrast';
+    informationOutcomes.value = String(pack.informationPreference?.minimumOutcomes ?? 2);
+    informationMode.value = pack.informationPreference?.mode ?? 'native';
     const rule: FrontierLocalRule | undefined = pack.frontier?.localRule;
     ruleTitle.value = rule?.title ?? '';
     ruleCommands.value = rule?.commands ?? 'directions';
@@ -145,6 +153,8 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
     return recoveryRevision(compileRecoveryPack({ version: 1, mode: mode.value, maxDepth: depth.valueAsNumber, maxNodes: nodes.valueAsNumber,
       strategyOrder, familyAgenda: familyAgenda.value,
       ...(openingCuriosity.value !== 'native' ? { openingCuriosity: openingCuriosity.value } : {}),
+      ...(informationMode.value !== 'native' ? { informationPreference: { strategy: informationStrategy.value,
+        mode: informationMode.value, minimumOutcomes: informationOutcomes.valueAsNumber } } : {}),
       frontier: { inputOrder: inputOrder.value, ...(localRule ? { localRule } : {}) } }));
   }
   showDraft(saved.current.configuration);
@@ -227,6 +237,10 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
         (current.familyAgenda ?? defaultBrowserFamilyAgenda) === (draft.configuration.familyAgenda ?? defaultBrowserFamilyAgenda)
           ? null : `family selection → ${draft.configuration.familyAgenda ?? defaultBrowserFamilyAgenda}`,
         current.openingCuriosity === draft.configuration.openingCuriosity ? null : `opening curiosity → ${draft.configuration.openingCuriosity ?? 'native'}`,
+        JSON.stringify(current.informationPreference) === JSON.stringify(draft.configuration.informationPreference) ? null
+          : `information priority → ${draft.configuration.informationPreference
+            ? `${informationStrategies[draft.configuration.informationPreference.strategy]} (≥ ${draft.configuration.informationPreference.minimumOutcomes} returns, ${draft.configuration.informationPreference.mode})`
+            : 'current order'}`,
         current.maxDepth === draft.configuration.maxDepth ? null : `depth ${current.maxDepth} → ${draft.configuration.maxDepth}`,
         current.maxNodes === draft.configuration.maxNodes ? null : `states ${current.maxNodes} → ${draft.configuration.maxNodes}`,
         currentFirst === draftFirst ? null : `first strategy → ${contactRecoveryStrategies[draftFirst]}`,

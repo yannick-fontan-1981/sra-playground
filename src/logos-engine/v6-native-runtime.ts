@@ -206,6 +206,7 @@ export interface NativeV6RuntimeConfiguration {
   sicInformation?: 'shadow' | 'active';
   familyAgenda?: FamilyAgendaMode;
   openingCuriosity?: import('../sic/opening-curiosity.ts').OpeningCuriosityMode;
+  informationPreference?: import('../sic/information-preference.ts').InformationPreference;
   /** The same registered instances acquire passive evidence in source order. */
   acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; inventory?: ObservedInventory; reaction?: OrderedReaction; reactive?: ReactiveContact; chart?: ChartNavigation; recolor?: TopologicalRecolor; axial?: AxialQuestion; window?: WindowQuestion; recruitment?: OrderedRecruitment; workshop?: RankedWorkshop; symbols?: SymbolTransactions; morphology?: NativeMorphologyFamily; feedback?: NativeFeedbackFamily; fields?: AddressedMaterial; binding?: ObservedBinding; preparations?: LinkedTemporalPreparation; preview?: NativePreviewPacking; selectedRigid?: NativeSelectedRigid };
 }
@@ -226,6 +227,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private readonly sicInformation?: 'shadow' | 'active';
   private readonly familyAgenda?: FamilyAgendaMode;
   private readonly openingCuriosity?: import('../sic/opening-curiosity.ts').OpeningCuriosityMode;
+  private readonly informationPreference?: import('../sic/information-preference.ts').InformationPreference;
   private readonly acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; inventory?: ObservedInventory; reaction?: OrderedReaction; reactive?: ReactiveContact; chart?: ChartNavigation; recolor?: TopologicalRecolor; axial?: AxialQuestion; window?: WindowQuestion; recruitment?: OrderedRecruitment; workshop?: RankedWorkshop; symbols?: SymbolTransactions; morphology?: NativeMorphologyFamily; feedback?: NativeFeedbackFamily; fields?: AddressedMaterial; binding?: ObservedBinding; preparations?: LinkedTemporalPreparation; preview?: NativePreviewPacking; selectedRigid?: NativeSelectedRigid };
   private callerAcquisitions = 0;
   private callerBoundaryReplays = 0;
@@ -282,6 +284,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.sicInformation = configuration.sicInformation;
     this.familyAgenda = configuration.familyAgenda;
     this.openingCuriosity = configuration.openingCuriosity;
+    this.informationPreference = configuration.informationPreference;
     this.acquisitionFamilies = configuration.acquisitionFamilies;
     if (this.callerStrategy && !configuration.authorityPolicy) throw new TypeError('The common caller requires native WHY/ACT authority');
     this.families = [...configuration.families, ...(this.callerStrategy ? nativeCallerFamilies(() => {
@@ -429,7 +432,8 @@ export class NativeV6Runtime implements NativeV6Backend {
       if (this.callerStrategy) {
         this.caller = new NativeCallerCoordinator(this.authority!.memory, { targetLevels: input.budgets.targetLevels,
           domain: this.domain, strategy: this.callerStrategy, informationGoal: 'accessible_view_frontier',
-          sicFrontier: this.sicFrontier, sicView: this.sicView, sicInformation: this.sicInformation, openingCuriosity: this.openingCuriosity });
+          sicFrontier: this.sicFrontier, sicView: this.sicView, sicInformation: this.sicInformation, openingCuriosity: this.openingCuriosity,
+          informationPreference: this.informationPreference });
         await this.caller.initialize(this.observation);
         await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'initialize', statement: 'caller.install' }, this.authority!.checkpointWrites());
       }
@@ -2502,6 +2506,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     sicFrontier: recovery.frontier ?? defaultFrontierConfiguration, sicView: 'active', sicInformation: 'active',
     familyAgenda: recovery.familyAgenda === 'native' ? undefined : recovery.familyAgenda,
     openingCuriosity: recovery.openingCuriosity,
+    informationPreference: recovery.informationPreference,
     acquisitionFamilies: { supports, recall, framed, outline: outlineOwner, inventory, reaction, reactive, chart, recolor, axial, window, recruitment, workshop, symbols, morphology, feedback, fields, binding, preparations, preview: previewOwner, selectedRigid: selectedRigidOwner },
     maxPointOccurrences: loaded.common.input_domain.max_point_occurrences, ...(options.now ? { now: options.now } : {}) });
 }

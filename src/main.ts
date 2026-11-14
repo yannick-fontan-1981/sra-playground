@@ -312,6 +312,13 @@ app.innerHTML = `
                   <label for="sic-opening-curiosity">Opening curiosity</label>
                   <select id="sic-opening-curiosity" name="openingCuriosity"><option value="native">Native order</option><option value="shadow">Compare the richest composition in shadow</option><option value="active">Investigate the richest composition first</option></select>
                   <details class="sic-details">
+                    <summary>Information experiment priority</summary>
+                    <label>Preferred strategy <select name="informationStrategy"></select></label>
+                    <label>Minimum distinct predicted returns <input name="informationOutcomes" type="number" min="2" max="64" value="2"></label>
+                    <label>Priority mode <select name="informationMode"><option value="native">Keep the current order</option><option value="shadow">Preview on new decisions</option><option value="active">Apply in new sessions</option></select></label>
+                    <p>Compares experiments that already satisfy the current preservation and action limits.</p>
+                  </details>
+                  <details class="sic-details">
                     <summary>Create a local exploration rule</summary>
                     <label>Rule name <input name="localRuleTitle" maxlength="80" placeholder="Leave blank to disable the rule"></label>
                     <label>Command domain <select name="localRuleCommands"><option value="directions">Directional commands</option><option value="clicks">Clicks</option><option value="any">Any command</option></select></label>

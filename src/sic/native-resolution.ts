@@ -75,7 +75,9 @@ export interface NativeResolution {
   readonly viewStrategy?: { readonly title: string; readonly objective: SicObjective; readonly agenda: readonly AgendaEntry<ViewStrategy>[];
     readonly expectedPixels: number | null; readonly agendaEvidence: Readonly<Partial<Record<ViewStrategy, readonly number[]>>> };
   readonly informationStrategy?: { readonly title: string; readonly objective: SicObjective; readonly agenda: readonly AgendaEntry<InformationStrategy>[];
-    readonly distinctOutcomes: number | null; readonly openingComplexity?: number; readonly openingShadow?: { readonly command: string; readonly relations: number } };
+    readonly distinctOutcomes: number | null; readonly openingComplexity?: number; readonly openingShadow?: { readonly command: string; readonly relations: number };
+    readonly preference?: { readonly mode: 'shadow' | 'active'; readonly strategy: InformationStrategy; readonly minimumOutcomes: number;
+      readonly baseline: string; readonly preferred: string | null; readonly preferredOutcomes: number | null } };
   readonly remainingSteps: number;
   readonly footprint: NativeBox | null;
   readonly context: NativePlanContext | null;
@@ -261,6 +263,8 @@ export function readNativeResolution(agent: {
   const complexity = natural(information?.openingComplexity);
   const shadow = record(information?.openingShadow);
   const shadowCommand = actionName(shadow?.action), shadowRelations = natural(shadow?.relations);
+  const preference = record(information?.preference);
+  const baseline = actionName(preference?.baseline), minimumOutcomes = natural(preference?.minimumOutcomes);
   const informationStrategy: NativeResolution['informationStrategy'] = information?.mode === 'active' && nativeObjective && informationObjective
     && informationTarget?.parent === nativeObjective && isInformationStrategy(informationKind) ? {
       title: complexity === null ? informationStrategies[informationKind] : openingCuriosityLabel,
@@ -268,6 +272,11 @@ export function readNativeResolution(agent: {
       distinctOutcomes: natural(record(information.evidence)?.distinctOutcomes),
       ...(complexity !== null ? { openingComplexity: complexity } : {}),
       ...(shadowCommand && shadowRelations !== null ? { openingShadow: { command: shadowCommand, relations: shadowRelations } } : {}),
+      ...(baseline && minimumOutcomes !== null && isInformationStrategy(preference?.strategy)
+        && (preference?.mode === 'shadow' || preference?.mode === 'active') ? {
+          preference: { mode: preference.mode, strategy: preference.strategy, minimumOutcomes, baseline,
+            preferred: actionName(preference.preferred), preferredOutcomes: natural(preference.preferredOutcomes) },
+        } : {}),
       agenda: Array.isArray(information.considered) ? information.considered.slice(0, 12).flatMap(value => {
         const attempt = record(value), id = attempt?.strategy, result = attempt?.result;
         return isInformationStrategy(id) && (result === 'selected' || result === 'no_plan') ? [{ id, result, applicability: 'applicable' as const,

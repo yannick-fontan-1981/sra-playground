@@ -5,6 +5,7 @@ import { defaultRecoveryPack, type RecoveryPack } from '../../src/sic/active-rec
 import { recoveryRevision } from '../../src/sic/recovery-pack.ts';
 import type { AgentAction } from '../../src/runtime/contracts.ts';
 import { GAME_CATALOG } from '../../src/games/catalog.ts';
+import { compileInformationPreference } from '../../src/sic/information-preference.ts';
 
 const cases = [
   { game: 'SK48', target: 1, baseline: [19, 1], alternate: [19, 1], divergence: null },
@@ -36,7 +37,8 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number | '
   let state: V6AgentSnapshot | undefined;
   const trace: { action: AgentAction; packet: string; level: number; levelsCompleted: number }[] = [];
   const information: { sequence: number; strategy: string; predictions: number | null;
-    result?: NonNullable<NativeResolution['outcome']>['informationOutcome'] }[] = [];
+    result?: NonNullable<NativeResolution['outcome']>['informationOutcome'];
+    preference?: NonNullable<NativeResolution['informationStrategy']>['preference'] }[] = [];
   let opening: NonNullable<NativeResolution['frontierStrategy']>['opening'];
   let observedStrategy: ObservedStrategy | undefined;
   const agent = new BrowserV6Agent({
@@ -78,7 +80,8 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number | '
       }
       const strategy = decision?.informationStrategy;
       if (!trace.length) opening = decision?.frontierStrategy?.opening;
-      if (strategy) information.push({ sequence: trace.length + 1, strategy: strategy.title, predictions: strategy.distinctOutcomes });
+      if (strategy) information.push({ sequence: trace.length + 1, strategy: strategy.title, predictions: strategy.distinctOutcomes,
+        preference: strategy.preference });
       const started = performance.now();
       board = await runtime.action(action.id, action.id === 6 ? action.data : undefined);
       if (observedStrategy) observedStrategy.advanced = board.level > observedStrategy.level || board.state === 'WIN';
@@ -148,6 +151,34 @@ function compare(baseline: Awaited<ReturnType<typeof run>>, alternate: Awaited<R
   const mismatch = baseline.trace.findIndex((entry, index) => JSON.stringify(entry) !== JSON.stringify(alternate.trace[index]));
   const divergence = mismatch < 0 ? baseline.actions === alternate.actions ? null : baseline.actions + 1 : mismatch + 1;
   return { divergence, changedCommand: divergence ? [baseline.trace[divergence - 1]?.action, alternate.trace[divergence - 1]?.action] : null };
+}
+
+async function qualifyInformationPriority(parameters: URLSearchParams) {
+  const games = parameters.get('games')?.split(',') ?? ['LOGI', 'REWI', 'GLOB', 'EVAS', 'UPST', 'ONDE'];
+  const cap = Number(parameters.get('actions') ?? 16);
+  if (!Number.isSafeInteger(cap) || cap < 1 || cap > 600) throw new Error('Expected an action limit from 1 to 600.');
+  const preference = compileInformationPreference({ mode: 'shadow',
+    strategy: parameters.get('prefer') ?? 'point_contrast', minimumOutcomes: Number(parameters.get('outcomes') ?? 2) });
+  const runtime = new BrowserGameRuntime();
+  const results = [];
+  try {
+    for (const game of games) {
+      output.textContent = JSON.stringify({ status: 'running', game, results });
+      const baseline = await run(runtime, game, 'complete', defaultRecoveryPack, cap);
+      const shadow = await run(runtime, game, 'complete', { ...defaultRecoveryPack, informationPreference: preference }, cap);
+      const active = await run(runtime, game, 'complete', { ...defaultRecoveryPack, informationPreference: { ...preference, mode: 'active' } }, cap);
+      const summary = (value: typeof baseline) => ({ actions: value.actions, levels: value.levels, stop: value.stop, state: value.boardState,
+        experiments: value.information.length, matching: value.information.filter(item => item.preference?.preferred).length,
+        differentOffers: value.information.filter(item => item.preference?.preferred && item.preference.preferred !== item.preference.baseline)
+          .map(({ sequence, preference }) => ({ sequence, ...preference })) });
+      results.push({ game, baseline: summary(baseline), shadow: summary(shadow), active: summary(active),
+        sameShadow: compare(baseline, shadow).divergence === null && baseline.stop === shadow.stop && baseline.boardState === shadow.boardState,
+        ...compare(baseline, active) });
+    }
+    output.textContent = JSON.stringify({ status: results.every(row => row.sameShadow) ? 'passed' : 'failed', preference, results }, null, 2);
+  } finally {
+    runtime.dispose();
+  }
 }
 
 async function qualify() {
@@ -312,6 +343,7 @@ start.addEventListener('click', async () => {
   try {
     const parameters = new URLSearchParams(location.search);
     await (parameters.has('strategy-inventory') ? inventoryStrategies(parameters)
+      : parameters.has('information-priority') ? qualifyInformationPriority(parameters)
       : parameters.has('opening-campaign') ? qualifyOpeningCampaigns(parameters.get('games'))
       : parameters.has('opening') ? qualifyOpeningCuriosity() : parameters.has('information') ? findInformationExperiments()
       : parameters.has('family') ? qualifyFamilyAgenda(parameters.get('games')) : parameters.has('coverage') ? qualifyActionCoverage()

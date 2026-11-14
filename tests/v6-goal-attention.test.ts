@@ -6,6 +6,9 @@ import { GoalAccessAdapter } from '../src/logos-engine/v6-goal-access.ts';
 import { AttentionMemory } from '../src/logos-engine/v6-attention-memory.ts';
 import { NativeReasoningMemory } from '../src/logos-engine/v6-reasoning-memory.ts';
 import { pointGoal, electInformationGoals, reconcileInformationGoal } from '../src/logos-engine/v6-information-goals.ts';
+import { compileInformationPreference } from '../src/sic/information-preference.ts';
+import { defaultRecoveryPack } from '../src/sic/active-recovery.ts';
+import { readRecoveryRevision, recoveryRevision } from '../src/sic/recovery-pack.ts';
 
 test('opening curiosity ranks richer compositions first within the admitted safety tier', () => {
   const observation = { observation_ref: 'start', level_epoch: 1 };
@@ -20,6 +23,36 @@ test('opening curiosity ranks richer compositions first within the admitted safe
   assert.deepEqual(offer, rich);
   assert.equal(receipt.opening_complexity, 2);
   assert.deepEqual(electInformationGoals([{ ...simple, engaged_parent: true }, rich], observation, 5, null, policy, true).next().value?.[0].action, simple.action);
+});
+
+test('information priority can change the order inside a preservation tier and shadows without changing the baseline', () => {
+  const observation = { observation_ref: 'current', level_epoch: 1 };
+  const base = { ...observation, evidence: ['witness'], risks: [], return_steps: 0, predictions: { a: 1, b: 2 } };
+  const first = { ...base, source: 'coupled_displays', action: { action_ref: 'ACTION1' }, relations: [['a', 'tests', 'b']] };
+  const second = { ...base, source: 'point_contrast', action: { action_ref: 'ACTION6', data: { x: 4, y: 5 } }, relations: [['c', 'tests', 'd']] };
+  const offers = [first, second];
+  const policy = { excluded_risks: ['protected'], continue_observed_parent: true, order: ['stable_binding'] };
+  const preference = compileInformationPreference({ mode: 'shadow', strategy: 'point_contrast', minimumOutcomes: 2 });
+  const choose = (candidates: typeof offers, setting = preference, opening = false) =>
+    electInformationGoals(candidates, observation, 5, null, policy, opening, setting).next().value;
+  const alternate = choose(offers)!;
+  assert.equal(alternate[0], first);
+  assert.deepEqual(alternate[1].sic_preference.preferred, second.action);
+  assert.equal(alternate[1].sic_preference.preferredOutcomes, 2);
+  const active = { ...preference, mode: 'active' } as const;
+  assert.deepEqual([...electInformationGoals(offers, observation, 5, null, policy, false, active)].map(([offer]) => offer), [second, first]);
+  for (const blocked of [{ ...second, risks: ['protected'] }, { ...second, return_steps: 5 }, { ...second, level_epoch: 2 }]) {
+    const result = choose([first, blocked], active)!;
+    assert.equal(result[0], first);
+    assert.equal(result[1].sic_preference.preferred, null);
+  }
+  assert.equal(choose([{ ...first, engaged_parent: true }, second], active)?.[0].source, first.source);
+  assert.equal(choose([{ ...first, relations: [...first.relations, ['e', 'tests', 'f']] }, second], active, true)?.[0].source, first.source);
+  assert.equal(choose(offers, { ...active, minimumOutcomes: 3 })?.[0], first);
+  assert.throws(() => compileInformationPreference({ ...preference, minimumOutcomes: 1 }), /2–64/);
+  const revision = recoveryRevision({ ...defaultRecoveryPack, informationPreference: preference });
+  assert.equal(revision.schemaVersion, 6);
+  assert.deepEqual(readRecoveryRevision(JSON.parse(JSON.stringify(revision))), revision);
 });
 
 const reference = JSON.parse(await readFile(new URL('./fixtures/v6-goal-attention-reference.json', import.meta.url), 'utf8'));

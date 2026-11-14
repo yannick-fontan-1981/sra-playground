@@ -4,6 +4,7 @@ import { compileFrontierConfiguration, defaultFrontierConfiguration, type Fronti
 import { sicNeedId } from './need-identity.ts';
 import type { FamilyAgendaSetting } from './family-agenda.ts';
 import type { OpeningCuriosityMode } from './opening-curiosity.ts';
+import { compileInformationPreference, type InformationPreference } from './information-preference.ts';
 
 export const contactRecoveryStrategies = Object.freeze({
   revise_rooted_contact: 'Revise the contact projection',
@@ -26,6 +27,7 @@ export interface RecoveryPack {
   readonly frontier?: FrontierConfiguration;
   readonly familyAgenda?: FamilyAgendaSetting;
   readonly openingCuriosity?: OpeningCuriosityMode;
+  readonly informationPreference?: InformationPreference;
 }
 
 export const defaultRecoveryPack: RecoveryPack = Object.freeze({
@@ -35,7 +37,7 @@ export const defaultRecoveryPack: RecoveryPack = Object.freeze({
 export function compileRecoveryPack(input: unknown = defaultRecoveryPack): RecoveryPack {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new TypeError('Expected a recovery configuration.');
   const fields = Object.keys(input);
-  if (fields.some(field => !['version', 'mode', 'maxDepth', 'maxNodes', 'strategyOrder', 'frontier', 'familyAgenda', 'openingCuriosity'].includes(field))) {
+  if (fields.some(field => !['version', 'mode', 'maxDepth', 'maxNodes', 'strategyOrder', 'frontier', 'familyAgenda', 'openingCuriosity', 'informationPreference'].includes(field))) {
     throw new TypeError('The SIC pack contains an unrecognized field.');
   }
   const pack = input as Record<string, unknown>;
@@ -54,13 +56,15 @@ export function compileRecoveryPack(input: unknown = defaultRecoveryPack): Recov
   const frontier = Object.hasOwn(pack, 'frontier') ? compileFrontierConfiguration(pack.frontier) : defaultFrontierConfiguration;
   const familyAgenda = pack.familyAgenda;
   const openingCuriosity = pack.openingCuriosity;
+  const informationPreference = Object.hasOwn(pack, 'informationPreference') ? compileInformationPreference(pack.informationPreference) : undefined;
   if (Object.hasOwn(pack, 'familyAgenda') && familyAgenda !== 'shadow' && familyAgenda !== 'active' && familyAgenda !== 'native') throw new TypeError('Invalid family agenda mode.');
   if (Object.hasOwn(pack, 'openingCuriosity') && openingCuriosity !== 'shadow' && openingCuriosity !== 'active') throw new TypeError('Invalid opening curiosity mode.');
   return Object.freeze({ version: 1, mode: pack.mode, maxDepth: pack.maxDepth, maxNodes: pack.maxNodes,
     ...(Array.isArray(order) && order[0] !== contactRecoveryOrder[0] ? { strategyOrder: Object.freeze([...order]) } : {}),
     ...(frontier.localRule || frontier.inputOrder !== defaultFrontierConfiguration.inputOrder ? { frontier } : {}),
     ...(familyAgenda === 'shadow' || familyAgenda === 'active' || familyAgenda === 'native' ? { familyAgenda } : {}),
-    ...(openingCuriosity === 'shadow' || openingCuriosity === 'active' ? { openingCuriosity } : {}) });
+    ...(openingCuriosity === 'shadow' || openingCuriosity === 'active' ? { openingCuriosity } : {}),
+    ...(informationPreference ? { informationPreference } : {}) });
 }
 
 export const rootedRecoveryStrategy = Object.freeze({

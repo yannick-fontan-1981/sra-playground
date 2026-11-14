@@ -1,6 +1,8 @@
 /** Native composition_curiosity.py: compare measured information questions, not game scores. */
 import { compareUnicode } from './canonical.ts';
 import { canonical as comparable, pythonEqual as same, pythonTruthy as truth } from './v6-operations.ts';
+import { isInformationStrategy } from '../sic/information-strategy.ts';
+import { informationPriority, type InformationPreference } from '../sic/information-preference.ts';
 type R = Record<string, any>;
 export { comparable };
 const sorted = (values: Iterable<string>) => [...values].sort(compareUnicode);
@@ -25,8 +27,8 @@ function fraction(n: number, d: number): Fraction {
 
 /** Python Fraction ordering is kept exact; no rounded entropy proxy is introduced. */
 export function* electInformationGoals(offers: readonly R[], obs: R, remaining: number, meter: R | null, policy: R,
-  openingComplexity = false): Generator<readonly [R, R]> {
-  type Candidate = { offer: R; relations: Set<string>; split: Fraction };
+  openingComplexity = false, preference?: InformationPreference): Generator<readonly [R, R]> {
+  type Candidate = { offer: R; relations: Set<string>; split: Fraction; distinctOutcomes: number };
   let candidates: Candidate[] = [];
   const declined: Record<string, number> = {}, decline = (reason: string) => { declined[reason] = (declined[reason] ?? 0) + 1; };
   for (const offer of offers) {
@@ -39,7 +41,7 @@ export function* electInformationGoals(offers: readonly R[], obs: R, remaining: 
     const spare = offer.return_steps, bound = truth(meter) ? Math.min(remaining, meter!.steps_before_empty) : remaining;
     if (bound < 1 + (spare || 0) || (truth(meter) && spare === null && bound <= 1)) { decline('insufficient_action_or_resource_margin'); continue; }
     const n = [...outcomes.values()].reduce((sum, value) => sum + value, 0), split = fraction(n - Math.max(...outcomes.values()), n);
-    candidates.push({ offer, relations, split });
+    candidates.push({ offer, relations, split, distinctOutcomes: outcomes.size });
   }
   while (candidates.length) {
     const engaged = candidates.filter(row => truth(row.offer.engaged_parent)), pool = engaged.length && truth(policy.continue_observed_parent) ? engaged : candidates;
@@ -60,11 +62,21 @@ export function* electInformationGoals(offers: readonly R[], obs: R, remaining: 
       }
       return 0;
     };
-    const picked = [...maximal].sort(order)[0]!, offer = picked.offer;
+    const ranked = [...maximal].sort(order);
+    const baseline = ranked[0]!;
+    // An editable priority only compares maximal offers in the same preservation tier.
+    const preferred = preference ? ranked.find(row => isInformationStrategy(row.offer.source)
+      && informationPriority({ strategy: row.offer.source, distinctOutcomes: row.distinctOutcomes }, preference)
+      && (!openingComplexity || engaged.length || row.relations.size === baseline.relations.size)) : undefined;
+    const picked = preference?.mode === 'active' && preferred ? preferred : baseline;
+    const offer = picked.offer;
     const receipt = { ...Object.fromEntries(Object.entries(offer).filter(([key]) => key !== 'native_probe')), tree_key: 'composition.priority.information_value',
-      relation_count: picked.relations.size, distinct_outcomes: new Set(Object.values(offer.predictions).map(comparable)).size,
+      relation_count: picked.relations.size, distinct_outcomes: picked.distinctOutcomes,
       worst_case_separation: [Number(picked.split.n), Number(picked.split.d)], admissible_offers: candidates.length, rejected: { ...declined }, primitive_cost: 1,
-      ...(openingComplexity && !engaged.length ? { opening_complexity: picked.relations.size } : {}) };
+      ...(openingComplexity && !engaged.length ? { opening_complexity: picked.relations.size } : {}),
+      ...(preference ? { sic_preference: { mode: preference.mode, strategy: preference.strategy, minimumOutcomes: preference.minimumOutcomes,
+        baseline: baseline.offer.action, baselineStrategy: baseline.offer.source,
+        preferred: preferred?.offer.action ?? null, preferredOutcomes: preferred?.distinctOutcomes ?? null } } : {}) };
     yield [offer, receipt]; candidates = candidates.filter(row => row.offer !== offer);
   }
 }

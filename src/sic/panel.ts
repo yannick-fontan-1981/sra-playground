@@ -1312,6 +1312,11 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
     if (informationStrategy) {
       factsList.push(['Need', 'Tell apart explanations consistent with earlier observations'], ['Information objective', informationStrategy.objective.label]);
       if (informationStrategy.distinctOutcomes !== null) factsList.push(['Distinct predicted returns', String(informationStrategy.distinctOutcomes)]);
+      const preference = informationStrategy.preference;
+      if (preference) factsList.push(['Information priority', `${informationStrategies[preference.strategy]} · at least ${preference.minimumOutcomes} distinct predicted returns.
+        ${preference.preferred
+          ? `${preference.mode === 'shadow' ? 'Shadow comparison' : 'Active comparison'} · usual order ${preference.baseline} · preferred ${preference.preferred} (${preference.preferredOutcomes} predicted returns).`
+          : 'No candidate matching this preference reached the same preservation tier.'}`]);
       if (informationStrategy.openingComplexity !== undefined) factsList.push(['Opening curiosity', `${informationStrategy.openingComplexity} distinct relations tested.`]);
       if (informationStrategy.openingShadow) factsList.push(['Opening curiosity in shadow',
         `${informationStrategy.openingShadow.command} tests ${informationStrategy.openingShadow.relations} distinct relations.`]);
