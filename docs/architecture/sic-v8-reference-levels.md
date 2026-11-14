@@ -103,7 +103,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | TU93 | 9 | [3](../../docs/migration/native-campaigns-v36/tu93-three-levels.json) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/TU93/LVL2/good_run_pseudocode.md) | — | — | 3 | 4 | 1 |
 | UPST | 6 | — | — | — | — | — | — | 1 |
 | VALV | 6 | [3](../../docs/migration/native-campaigns-v51/valv-three-levels.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/VALV/LVL1/good_run_pseudocode.md) | — | — | 3 | 4 | 1 |
-| VC33 | 7 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/VC33/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 1 |
+| VC33 | 7 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/VC33/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 2 |
 | VOIS | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 1 |
 | WA30 | 9 | [1](../../docs/migration/native-campaigns-v54/baseline-wa30/wa30-campaign.json.gz) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/WA30/LVL2/good_run_pseudocode.md) | 1 (archive locale) | — | 2 | 3 | 1 |
 | WEAV | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 1 |

@@ -370,3 +370,7 @@ Le premier tour part de parties neuves. Le navigateur vérifie l’autorité SIC
 Le cumul atteint **9/100 niveaux 2** et **126/636 niveaux attestés**.
 
 **SB26** gagne le niveau 2 en **15 commandes** et **8,99 s**, soit 24 commandes sur la partie continue. SIC mesure les emplacements et les jetons, puis vérifie les transferts sous OP18. La famille de transfert vers un emplacement fournit les 24 commandes. Empreinte de la partie `d26873d0560b96f09fa1ab05aeac3c6e4330246fc06c98230b298cd349410875`. Le cumul atteint **10/100 niveaux 2** et **127/636 niveaux attestés**.
+
+**VC33** gagne le niveau 2 en **9 commandes** et **7,68 s**, soit 14 commandes sur la partie continue. L’alignement de bandes fournit toutes les commandes, autorisées sous OP18. Empreinte `16fbe8032c602c6373998bc509f6f5e4386dfb0311bace94578e0c164d95885d`. Le cumul atteint **11/100 niveaux 2** et **128/636 niveaux attestés**.
+
+Sur **BP35** niveau 2, le premier clic d’excavation déplace le décor de six pixels. Le sprite revient à la même position à l’écran avec un nouveau support. Un second clic dans la même colonne ouvre une chute dont l’animation atteint le motif de danger déjà visible. Un trajet de contrôle, construit hors agent à partir de la disposition du niveau, puis rejoué avec les commandes ordinaires du jeu, atteint le niveau 3 en 40 commandes depuis l’entrée du niveau 2. La recherche SIC doit encore choisir des détours à partir des seules zones visibles et reconnaître la continuité du terrain pendant les mouvements de caméra.
