@@ -9,6 +9,7 @@ export async function landingModule(): Promise<CompiledModule> {
   const workflows = [situationChoiceWorkflow(chooseLanding, [
     { situation: 'routeSupported', strategy: 'P07' },
     { situation: 'eligibleProbe', strategy: 'P05' },
+    { situation: 'knownInteraction', strategy: 'P02' },
   ])];
   const hash = await digest(workflows);
   return { module_id: moduleId, source_name: 'src/sic/highlighted-route-card.ts', source_hash: hash, semantic_hash: hash, imports: [], workflows };

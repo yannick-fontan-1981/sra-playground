@@ -353,3 +353,9 @@ La campagne commune EVAS et GMAP confirme **32/100** premiers niveaux après ret
 Avec `sic_public_input_exploration` retirée pour le test, **REGN gagne en deux commandes SIC seul**. La carte `sic.compare_available_controls.choose` teste une des deux commandes directionnelles disponibles. L’animation déplace un seul composant apparié sur les deux axes. Ce retour fournit une raison de comparer l’autre commande pendant que le premier effet est visible. La carte laisse le statut ouvert jusqu’au retour officiel. Les deux commandes et leurs retours reproduisent le trajet de l’exploration publique, empreinte `b00a56adad8180b9427c0ca84381383b025d051ab96a5c8ec1e9f01a1090c26c`.
 
 Désactiver la règle de comparaison après le premier retour laisse le niveau ouvert après une commande. Le gain avec la carte active tient aussi avec un nom neutre et une palette permutée. Sur les 100 premiers niveaux, REGN est le seul départ qui présente exactement deux commandes directionnelles hors réinitialisation.
+
+### Répéter une interaction dont l’effet est observé
+
+Avec `sic_gated_cascade` retirée, **CASC gagne en six commandes SIC seul**. La carte de navigation partagée choisit un essai P05 et deux déplacements P07 pour placer le curseur. Elle choisit ensuite une impulsion P05. Le retour montre une propagation qui continue alors que le curseur reste sur la case attendue. P02 choisit de répéter l’impulsion et vérifie chaque retour. La sixième commande donne le gain officiel. Le fournisseur TypeScript partagé mesure le point de blocage, la propagation et les positions du curseur. Les commandes et retours sont identiques à la référence, empreinte `63fea697ab7a9cf49ec307c8e414721b652088f33255fb132c6a7a600579e1e8`.
+
+Le rejeu gagne avec un nom neutre et une palette permutée. Désactiver P02 après la première propagation rend la main à l’exploration au cinquième choix et laisse le niveau ouvert après six commandes.

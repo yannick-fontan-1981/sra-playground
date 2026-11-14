@@ -1,9 +1,11 @@
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 
 export const gatedCascadeId = 'sic_gated_cascade';
+export const learnCascadeId = 'sic_reuse_propagation';
 const moves = [['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], ['ACTION4', 1, 0]] as const;
 type Domino = { point: NativePoint; dx: number; dy: number; color: number };
 type Layout = { pitch: number; cells: NativePoint[]; cursorColor: number; gate: NativePoint; junction: NativePoint;
@@ -108,11 +110,16 @@ function nextMove(scene: Scene) {
   return null;
 }
 
-export function createSicGatedCascade(): NativeFamily<Proposal> {
+export function createSicGatedCascade(family = gatedCascadeId): NativeFamily<Proposal> {
+  const learns = family === learnCascadeId;
   let state: Memory | null = null;
+  let choose: NativeProgramHandle | undefined;
   return {
-    id: gatedCascadeId,
-    propose(observation, rows, _inputs, remaining, execution): Proposal | null {
+    id: family,
+    async attachPrograms(registry) {
+      if (learns) choose = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || ![...moves.map(([ref]) => ref), 'ACTION5'].every(ref => observation.available_action_refs.includes(ref))) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior?.failed) return null;
@@ -129,9 +136,12 @@ export function createSicGatedCascade(): NativeFamily<Proposal> {
       const mode = execution?.reasoningMode ?? 'exploration';
       const offer = { input: step.ref, expected: step.at, evidence };
       const known = launch ? local.burstRef : local.routeRef;
-      const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence,
+      const facts = { eligibleProbe: !known, routeSupported: !launch && !!known, knownInteraction: launch && !!known, mode };
+      const decision = learns ? await choose?.run({ situation: facts }, { signal: execution?.signal }) : null;
+      const navigation = learns ? null : resolveNavigationPrimitives({ mode, evidence,
         probe: known ? null : offer, access: !launch && known ? offer : null, interaction: launch && known ? offer : null });
-      if (!selected) return null;
+      const strategy = decision?.result ?? navigation?.selected?.id;
+      if (strategy !== 'P05' && strategy !== 'P07' && strategy !== 'P02') return null;
       const parent = 'G_official_completion';
       const objective = { kind: 'control_cascade_at_shared_junction', scope: ref.split(':revision:', 1)[0]!,
         subjects: [key(layout.junction), key(layout.target)], parentObjective: parent, satisfactionContract: 'official_progress_after_directional_cascade' };
@@ -141,14 +151,17 @@ export function createSicGatedCascade(): NativeFamily<Proposal> {
         : 'Move the cursor to block the shorter path into the shared junction';
       const action = { action_ref: step.ref, data: {} };
       return {
-        status: 'proposed', kind: gatedCascadeId, local, scene, next: step.at, launch, needId: need.id,
+        status: 'proposed', kind: family, local, scene, next: step.at, launch, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
         steps: [{ action, expected_after: launch ? null : step.at }],
-        sicSituationCard: { strategy: selected.id, need: 'Keep the cascade going toward the target', situation, evidence, agenda: entries,
-          mode, triggerCard: card, actor: square(scene.cursor), gate: square(layout.gate), junction: square(layout.junction), target: square(layout.target) },
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
+        sicSituationCard: { strategy, need: 'Keep the cascade going toward the target', situation, evidence, agenda: navigation?.entries ?? [],
+          mode, triggerCard: navigation?.card ?? decision?.receipt.workflow,
+          actor: square(scene.cursor), gate: square(layout.gate), junction: square(layout.junction), target: square(layout.target) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
+        sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
           preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
       };

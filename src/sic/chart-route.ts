@@ -82,7 +82,7 @@ export function createSicChartRoute(family = chartRouteId): NativeFamily<Proposa
       const prerequisite = offers.find(offer => offer.target !== goals[0]);
       const destination = offers.find(offer => offer.target === goals[0]);
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
-      const facts = { eligibleProbe: !!prerequisite, routeSupported: !prerequisite && !!destination,
+      const facts = { eligibleProbe: !!prerequisite, routeSupported: !prerequisite && !!destination, knownInteraction: false,
         mode: execution?.reasoningMode ?? 'exploration' };
       const decision = learns ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : null;
       const navigation = learns ? null : resolveStrategyGraph({ graph, mode: 'active', facts: {

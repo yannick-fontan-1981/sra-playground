@@ -116,7 +116,7 @@ export function createSicHighlightedRoute(family = highlightedRouteId): NativeFa
       const mode = execution?.reasoningMode ?? 'exploration';
       const offer = { input: 'ACTION6', expected: target.point, evidence };
       const eligibleProbe = memory.evidence.length === 0 && scene.moves.length >= 2;
-      const facts = { routeSupported: memory.evidence.length > 0, eligibleProbe,
+      const facts = { routeSupported: memory.evidence.length > 0, eligibleProbe, knownInteraction: false,
         visibleLandings: scene.moves.length, reachableLandings: options.length, mode };
       const decision = learns ? await choose?.run({ situation: facts }, { signal: execution?.signal }) : null;
       const navigation = learns ? null : resolveNavigationPrimitives({

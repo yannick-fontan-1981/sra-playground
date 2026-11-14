@@ -131,7 +131,7 @@ export function createSicLitRoute(family = litRouteId): NativeFamily<Proposal> {
       const evidence: [string, ...string[]] = [ref, ...local.refs.filter(v => v !== ref)];
       const mode = execution?.reasoningMode ?? 'exploration';
       const offer = { input: 'ACTION6', expected: plan.target, evidence };
-      const facts = { routeSupported: local.refs.length > 0, eligibleProbe: local.refs.length === 0 && plan.lit === 0, mode };
+      const facts = { routeSupported: local.refs.length > 0, eligibleProbe: local.refs.length === 0 && plan.lit === 0, knownInteraction: false, mode };
       const decision = learns ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : null;
       const navigation = learns ? null : resolveNavigationPrimitives({ mode, evidence, probe: local.refs.length ? null : offer,
         access: local.refs.length ? offer : null, interaction: null });

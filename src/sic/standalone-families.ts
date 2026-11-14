@@ -71,7 +71,7 @@ import { pairedChannelsId } from './paired-channels.ts';
 import { pointReachId } from './point-reach.ts';
 import { linkedMidpointId } from './linked-midpoint.ts';
 import { excavateDescentId } from './excavate-descent.ts';
-import { gatedCascadeId } from './gated-cascade.ts';
+import { gatedCascadeId, learnCascadeId } from './gated-cascade.ts';
 import { layeredFitId, learnLayeredFitId } from './layered-fit.ts';
 import { litRouteId, learnLitRouteId } from './lit-route.ts';
 import { pivotCargoId } from './pivot-cargo.ts';
@@ -99,7 +99,7 @@ export const standalonePlanningGroups = [
   { id: 'fill_visible_partition', families: [previewPlacementId, populationPlacementId] },
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, matchExampleId, facetGrowthId, learnFacetGrowthId] },
   { id: 'visit_marked_surface', families: [traceCoverageId, markedLatticeId] },
-  { id: 'place_incoming_groups', families: [queuedPlacementId, gatedCascadeId] },
+  { id: 'place_incoming_groups', families: [queuedPlacementId, gatedCascadeId, learnCascadeId] },
   { id: 'explore_available_inputs', families: [displayCouplingId, contrastControlsId, fieldIsolationId, learnFieldIsolationId, cavityAccessId, learnCorrespondenceId, markedGaugeId, pairedChannelsId, learnGridAccessId, learnSelectedAccessId, contrastProbeId, compareAvailableControlsId, publicInputExplorationId] },
 ] as const;
 

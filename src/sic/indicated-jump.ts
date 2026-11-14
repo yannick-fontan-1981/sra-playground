@@ -125,7 +125,7 @@ export function createSicIndicatedJump(family = indicatedJumpId): NativeFamily<P
       if (!point) return null;
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.refs.filter(value => value !== ref)];
       const mode = execution?.reasoningMode ?? 'exploration', offer = { input: 'ACTION6', expected: point, evidence };
-      const facts = { routeSupported: local.refs.length > 0, eligibleProbe: local.refs.length === 0 && !!unique, mode };
+      const facts = { routeSupported: local.refs.length > 0, eligibleProbe: local.refs.length === 0 && !!unique, knownInteraction: false, mode };
       const decision = learns ? await choose?.run({ situation: facts }, { signal: execution?.signal }) : null;
       const navigation = learns ? null : resolveNavigationPrimitives({
         mode, evidence, access: local.refs.length ? offer : null, probe: local.refs.length ? null : offer, interaction: null,
