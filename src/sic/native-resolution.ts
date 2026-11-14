@@ -48,6 +48,7 @@ import { radialConnectionId, radialConnectionStrategies } from './radial-connect
 import { invitedCaptureId, invitedCaptureStrategies } from './invited-capture.ts';
 import { branchAlignmentId, branchAlignmentStrategies } from './branch-alignment.ts';
 import { feedbackTrialId, feedbackTrialStrategies } from './feedback-trial.ts';
+import { catalogueComparisonId, catalogueComparisonStrategies } from './catalogue-comparison.ts';
 import { frontierStrategies, isFrontierStrategy, type FrontierStrategy } from './frontier-strategy.ts';
 import { isViewStrategy, viewStrategies, type ViewStrategy } from './view-strategy.ts';
 import { informationStrategies, isInformationStrategy, type InformationStrategy } from './information-strategy.ts';
@@ -61,7 +62,7 @@ const situationStrategies = { ...orderedContactStrategies, ...cavityStrategies, 
   ...labeledSequenceStrategies, ...markedCollectionStrategies, ...slotTransferStrategies, ...remoteSupportRouteStrategies,
   ...occurrenceRecallStrategies, ...slotPermutationStrategies, ...surfaceCopyStrategies, ...codeRouteStrategies, ...profileTransferStrategies,
   ...orderedReplenishmentStrategies, ...programOriginStrategies, ...previewPlacementStrategies, ...symbolContributionStrategies, ...markedLatticeStrategies,
-  ...queuedPlacementStrategies, ...legendRecolorStrategies, ...visualPatternStrategies, ...facetGrowthStrategies, ...chartRouteStrategies, ...populationPlacementStrategies, ...carryToFrameStrategies, ...portPairingStrategies, ...displayCouplingStrategies, ...framedSearchStrategies, ...glyphEditingStrategies, ...fieldIsolationStrategies, ...directionalReceptionStrategies, ...windowCoverageStrategies, ...panelMatchingStrategies, ...crossingRowsStrategies, ...traceCoverageStrategies, ...radialConnectionStrategies, ...invitedCaptureStrategies, ...branchAlignmentStrategies, ...feedbackTrialStrategies };
+  ...queuedPlacementStrategies, ...legendRecolorStrategies, ...visualPatternStrategies, ...facetGrowthStrategies, ...chartRouteStrategies, ...populationPlacementStrategies, ...carryToFrameStrategies, ...portPairingStrategies, ...displayCouplingStrategies, ...framedSearchStrategies, ...glyphEditingStrategies, ...fieldIsolationStrategies, ...directionalReceptionStrategies, ...windowCoverageStrategies, ...panelMatchingStrategies, ...crossingRowsStrategies, ...traceCoverageStrategies, ...radialConnectionStrategies, ...invitedCaptureStrategies, ...branchAlignmentStrategies, ...feedbackTrialStrategies, ...catalogueComparisonStrategies };
 
 export interface NativeStep {
   readonly action: string;
@@ -449,7 +450,7 @@ export function readNativeResolution(agent: {
                                       : family === panelMatchingId ? panelMatchingStrategies : family === crossingRowsId ? crossingRowsStrategies
                                         : family === traceCoverageId ? traceCoverageStrategies : family === radialConnectionId ? radialConnectionStrategies
                                           : family === invitedCaptureId ? invitedCaptureStrategies : family === branchAlignmentId ? branchAlignmentStrategies
-                                            : family === feedbackTrialId ? feedbackTrialStrategies : null;
+                                            : family === feedbackTrialId ? feedbackTrialStrategies : family === catalogueComparisonId ? catalogueComparisonStrategies : null;
   const card = planReceipt?.authority === 'sicOnly' && labels ? record(proposal?.sicSituationCard) : null;
   const isSituationStrategy = (id: unknown): id is keyof typeof situationStrategies =>
     typeof id === 'string' && !!labels && Object.hasOwn(labels, id);
@@ -593,6 +594,16 @@ export function readNativeResolution(agent: {
     const group = bounds(card?.activeGroup), field = bounds(card?.field);
     if (group) subjects.push({ label: 'Active group', box: group });
     if (field) subjects.push({ label: 'Receiving field', box: field });
+  }
+  if (situationCard && family === catalogueComparisonId) {
+    for (const [field, label] of [['field', 'Partial view'], ['choice', 'Current choice']] as const) {
+      const box = bounds(card?.[field]);
+      if (box) subjects.push({ label, box });
+    }
+    if (Array.isArray(card?.cards)) for (const candidate of card.cards) {
+      const box = bounds(candidate);
+      if (box) subjects.push({ label: 'Compatible shape', box });
+    }
   }
   if (situationCard && family === feedbackTrialId) {
     const palette = bounds(card?.palette);
