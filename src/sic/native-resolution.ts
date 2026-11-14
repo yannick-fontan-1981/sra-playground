@@ -3,6 +3,7 @@ import { contactRecoveryStrategies, isContactStrategy, isRecoveryStop, rootedRec
   type ContactRecoveryNeed, type ContactStrategy } from './active-recovery.ts';
 import type { AgendaEntry } from './strategy-agenda.ts';
 import { frontierStrategies, isFrontierStrategy, type FrontierStrategy } from './frontier-strategy.ts';
+import { isViewStrategy, viewStrategies, type ViewStrategy } from './view-strategy.ts';
 import { isFrontierInputOrder, type FrontierChoiceEvidence, type FrontierInputOrder, type FrontierLocalRule } from './frontier-configuration.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 
@@ -64,6 +65,8 @@ export interface NativeResolution {
     readonly choices?: Readonly<Record<FrontierInputOrder, string>>; readonly agenda: readonly AgendaEntry<FrontierStrategy>[];
     readonly ruleEvidence?: FrontierChoiceEvidence;
     readonly localRule?: { readonly title: string; readonly matched: boolean; readonly mode: FrontierLocalRule['mode']; readonly reason: string } };
+  readonly viewStrategy?: { readonly title: string; readonly objective: SicObjective; readonly agenda: readonly AgendaEntry<ViewStrategy>[];
+    readonly expectedPixels: number | null; readonly agendaEvidence: Readonly<Partial<Record<ViewStrategy, readonly number[]>>> };
   readonly remainingSteps: number;
   readonly footprint: NativeBox | null;
   readonly context: NativePlanContext | null;
@@ -73,6 +76,7 @@ export interface NativeResolution {
   readonly nextIndex: number | null;
   readonly outcome: { readonly family: string; readonly matched: boolean | null; readonly reason: string | null;
     readonly frontierOutcome?: { readonly objective: string; readonly status: 'observed' | 'access_interrupted' };
+    readonly viewOutcome?: { readonly objective: string; readonly status: 'expanded' | 'no_new_area' | 'unregistered'; readonly newPixels: number | null };
     readonly recoveryNeed?: { readonly id: string; readonly status: ContactRecoveryNeed['status'] } } | null;
   readonly history: readonly { readonly sequence: number; readonly level: number; readonly family: string;
     readonly matched: boolean | null; readonly reason: string | null }[];
@@ -217,6 +221,8 @@ export function readNativeResolution(agent: {
       ...(leastTried && commandOrder ? { choices: { least_tried: leastTried, command_order: commandOrder } } : {}) }
     : undefined;
   const objectiveSource = nativeObjective ? 'native' : steps.length && question ? 'question' : steps.length ? 'unpublished' : null;
+  const viewDecision = record(proposal?.sic_view_decision), viewTarget = record(viewDecision?.objective);
+  const viewObjective = label(viewTarget?.id), viewKind = viewDecision?.strategy;
   const morphology = record(proposal?.morphology_plan);
   const entry = record(morphology?.entry_model);
   const facts = record(record(proposal?.morphology)?.measured_facts);
@@ -314,12 +320,25 @@ export function readNativeResolution(agent: {
   const agendaEvidence = Object.fromEntries(agenda.map(entry => [entry.id,
     [...new Set((entry.evidence ?? []).flatMap(ref => priorAction(ref) ?? []))].sort((a, b) => a - b),
   ]));
+  const viewAgenda = readAgenda(viewDecision?.agenda, isViewStrategy);
+  const viewStrategy: NativeResolution['viewStrategy'] = viewDecision?.mode === 'active' && nativeObjective && viewObjective
+    && viewTarget?.parent === nativeObjective && isViewStrategy(viewKind) ? {
+      title: viewStrategies[viewKind], objective: { id: viewObjective, label: viewStrategies[viewKind], parent: nativeObjective },
+      agenda: viewAgenda, expectedPixels: natural(record(record(proposal?.view_plan)?.details)?.conditional_new_viewport_pixels),
+      agendaEvidence: Object.fromEntries(viewAgenda.map(entry => [entry.id,
+        [...new Set((entry.evidence ?? []).flatMap(ref => priorAction(ref) ?? []))].sort((a, b) => a - b),
+      ])),
+    } : undefined;
   const recoveryDecision = isContactStrategy(sic?.strategy) && recoveryPack?.mode === 'active'
     && maxDepth !== null && maxNodes !== null
     ? { strategy: contactRecoveryStrategies[sic.strategy], need: rootedRecoveryStrategy.need, objective: recoveryObjective, agenda, situationAction, agendaEvidence,
       maxDepth, maxNodes, packDigest: typeof sic.packDigest === 'string' && /^[a-f0-9]{64}$/.test(sic.packDigest) ? sic.packDigest : null }
     : undefined;
   const returnedNeed = record(result?.sic_need);
+  const viewReturn = reverse.find(event => event?.kind === 'sic_view_return' && typeof event.evidence === 'string' && event.evidence.startsWith(currentRef));
+  const viewStatus = viewReturn?.status, viewReturnObjective = label(viewReturn?.objective);
+  const viewOutcome = viewReturnObjective && (viewStatus === 'expanded' || viewStatus === 'no_new_area' || viewStatus === 'unregistered')
+    ? { objective: viewReturnObjective, status: viewStatus, newPixels: natural(viewReturn?.newPixels) } as const : undefined;
   const frontierResult = record(result?.sic_frontier_outcome);
   const frontierOutcome: NonNullable<NativeResolution['outcome']>['frontierOutcome'] =
     typeof frontierResult?.objective === 'string' && /^Q_[a-f0-9]{20}$/.test(frontierResult.objective)
@@ -340,6 +359,12 @@ export function readNativeResolution(agent: {
     if (box) subjects.push({ label: `Material ${label(material?.type) ?? ''}`.trim(), box });
   }
   const route: NativePoint[] = [];
+  if (viewStrategy && routeIndex === 0 && Array.isArray(viewDecision?.subjects)) {
+    for (const subject of viewDecision.subjects.slice(0, 8)) {
+      const measured = record(subject), name = label(measured?.label), box = bounds(measured?.box);
+      if (name && box) subjects.push({ label: name, box });
+    }
+  }
   const pointAt = (value: unknown): NativePoint | null => Array.isArray(value) && value.length === 2
     && value.every(Number.isSafeInteger) ? [value[0], value[1]] : null;
   const command = record(plan[routeIndex]), click = record(command?.data);
@@ -372,12 +397,13 @@ export function readNativeResolution(agent: {
     planRevision: natural(release?.decision_revision) ?? undefined,
     releasedPlan,
     frontierStrategy,
+    viewStrategy,
     remainingSteps: Math.max(0, plan.length - routeIndex), footprint, context,
     guard: label(guard?.reason),
     nextIndex: pending && guard && Number.isSafeInteger(guard.index) ? Number(guard.index) : null, steps,
     history, outcome: outcomeFamily && (result?.matched === null || typeof result?.matched === 'boolean')
       ? { family: outcomeFamily, matched: result.matched, reason: label(result.reason),
-        ...(recoveryNeed ? { recoveryNeed } : {}), ...(frontierOutcome ? { frontierOutcome } : {}) } : null };
+        ...(recoveryNeed ? { recoveryNeed } : {}), ...(frontierOutcome ? { frontierOutcome } : {}), ...(viewOutcome ? { viewOutcome } : {}) } : null };
 }
 export interface DecisionSprites {
   readonly family: string | null;
@@ -388,6 +414,7 @@ export interface DecisionSprites {
   readonly recoveryOperations?: readonly { key: string; finding: string }[];
   readonly recoveryDecision?: NativeResolution['recoveryDecision'];
   readonly frontierStrategy?: NativeResolution['frontierStrategy'];
+  readonly viewStrategy?: NativeResolution['viewStrategy'];
   readonly recoveryAction?: number;
   readonly composition: string | null;
   readonly question: string | null;
@@ -476,6 +503,7 @@ export function captureDecisionSprites(decision: NativeResolution, before: Nativ
     operation: decision.operation, searchOperation: decision.searchOperation, recoveryOperations: decision.recoveryOperations,
     recoveryDecision: decision.recoveryDecision,
     frontierStrategy: decision.frontierStrategy,
+    viewStrategy: decision.viewStrategy,
     recoveryAction: decision.recoveryAction, composition: decision.composition, question: decision.question,
     proposalRef: decision.proposalRef, planRevision: decision.planRevision, route: decision.route, steps: decision.steps.slice(decision.nextIndex ?? 0),
     remainingSteps: decision.remainingSteps, stepIndex: decision.nextIndex, context, destinationSprite, strategyTarget, strategyMeter, sprites };

@@ -37,7 +37,7 @@ export function measureStrategyCoverage(samples: readonly StrategySample[], rule
   const classified = (groups: readonly FactGroup[]) => groups.reduce((total, group) =>
     total + (rules.some(rule => matchesStrategyRule(group.facts, rule)) ? group.count : 0), 0);
   const guided = (groups: readonly FactGroup[]) => groups.reduce((total, group) =>
-    total + (group.facts.has('activeRecovery') || group.facts.has('activeFrontier') ? group.count : 0), 0);
+    total + (group.facts.has('activeRecovery') || group.facts.has('activeFrontier') || group.facts.has('activeView') ? group.count : 0), 0);
   for (const sample of samples) {
     if (sample.actions === null || sample.shownActions === null || !sample.actionsByFacts || !sample.shownActionsByFacts) continue;
     measured++;

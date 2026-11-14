@@ -21,6 +21,7 @@ export interface SicActionCoverage {
   readonly contactRecovery: number;
   readonly configurableFrontier: number;
   readonly fixedFrontier: number;
+  readonly viewAccess: number;
   readonly native: number;
 }
 

@@ -207,6 +207,12 @@ L’agenda d’exploration porte maintenant le trajet admissible jusqu’à la q
 
 Avancement global estimé à 93 %. L’atelier a produit une règle exécutable et la comparaison sur cinq jeux a établi son effet en actif et en shadow. Les principales familles passent encore par la sélection SRC. La prochaine migration doit porter sur une famille native entière, en commençant par l’accès à une autre vue, puis être comparée aux commandes et retours de référence. Le budget STCK/SMLP reste à vérifier sur le nouveau code actif.
 
+### Accès à une autre vue
+
+Le graphe `view-access` distingue quatre situations. Un mouvement mesuré peut mener vers un bord présentant une zone inconnue. Un premier arrêt permet de répéter le mouvement, des arrêts répétés permettent de tester un changement de l’obstacle si un seul clic lui correspond, et un changement observé permet de réessayer le passage. Le besoin est identifié par époque et segment de vue. La stratégie fixe un objectif d’information et soumet les pas au même contrôle OP18. Le retour mesure l’aire découverte ou retient l’incertitude si le recalage échoue. Stratégies expose l’aire prévue sous condition, les retours qui motivent le choix et les sprites mesurés lorsqu’ils sont identifiables. Les reçus séparent les actions de vue actives des actions issues d’un réglage éditable.
+
+Le test différentiel rejoue les quatre méthodes en shadow puis en actif avec les mêmes commandes, gardes, retours et états acquis que les références. Le rejeu du service natif avec trois commandes Space exerce l’accès au bord, son reçu d’objectif et l’aire réellement découverte. Cette suite de trois retours utilise un plateau synthétique. Dans le navigateur, SK48, AS66, SYME, LKEY et CASC reproduisent les mêmes nombres d’actions et de niveaux avec les réglages par défaut. GRIL confirme trois niveaux en 19 actions et ne sollicite pas la nouvelle branche d’accès au bord dans ce parcours. `view_continuity` et les recherches de vues proposées par d’autres familles restent à inventorier pour leur propre migration.
+
 | Série | SHA-256 du reçu brut de la seconde fenêtre |
 | --- | --- |
 | A1 | `5919c1547cb8cd18aacd9e2043a10e921300884fc0163e743248b644c16ab2f0` |

@@ -5,6 +5,7 @@ import { createNativeV6Runtime } from '../src/logos-engine/v6-native-runtime.ts'
 import type { NativeV6Declarations } from '../src/logos-engine/v6-native-runtime.ts';
 import { hydrateNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
 import { V6AgentService } from '../src/runtime/v6-agent-service.ts';
+import { readNativeResolution } from '../src/sic/native-resolution.ts';
 
 const source = new URL('../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/', import.meta.url);
 const declarations = {
@@ -86,4 +87,32 @@ test('the live common caller acquires a real released prefix once and matches ev
   assert.equal(result.snapshot.familyStates, undefined, 'Per-action snapshots do not retransmit every family state');
   assert.ok((result.snapshot.familyStateRefs as any).ordered_support_transfer.id);
   assert.equal((result.snapshot.coverage as any).fullV6Parity, false);
+});
+
+test('the live service releases a SIC view plan and binds its measured return to the published objective', async () => {
+  const capture = JSON.parse(await readFile(new URL('./fixtures/v6-native-caller/viewport-three-prefixes.json', import.meta.url), 'utf8'));
+  const runtime = await createNativeV6Runtime(declarations, { now: () => 0 });
+  const service = new V6AgentService(() => runtime);
+  const [start, ...returns] = capture.publicProtocol.events;
+  const sessionId = 'view-sic-production';
+  let result = await service.handle({ type: 'init', sessionId, sequence: 0, observation: start.observation, budgets: capture.budgets });
+  let viewObjective: string | null = null;
+  for (const [index, row] of returns.entries()) {
+    if (result.kind === 'boundary') result = await service.handle({ type: 'resume', sessionId, sequence: index });
+    assert.equal(result.kind, 'action');
+    assert.deepEqual(result.command, row.command);
+    if (index === 2) {
+      const projected = readNativeResolution({ ...result.snapshot, sessionId, sequence: index, phase: result.phase });
+      assert.equal(projected?.viewStrategy?.agenda.find(item => item.result === 'selected')?.id, 'approach_view_edge');
+      assert.equal(projected?.operation, 'OP18');
+      assert.ok(projected?.viewStrategy?.objective.id);
+      viewObjective = projected.viewStrategy.objective.id;
+    }
+    result = await service.handle({ type: 'advance', sessionId, sequence: index + 1, ticketId: result.ticket!.id,
+      observation: row.observation, executionMs: 0 });
+  }
+  assert.equal(result.snapshot.sicActionCoverage?.viewAccess, 1);
+  const projected = readNativeResolution({ ...result.snapshot, sessionId, sequence: returns.length, phase: result.phase });
+  assert.equal(projected?.outcome?.viewOutcome?.objective, viewObjective);
+  assert.equal(projected?.outcome?.viewOutcome?.status, 'expanded');
 });

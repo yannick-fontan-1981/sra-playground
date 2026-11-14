@@ -3,6 +3,7 @@ import { nextRecoveryRevision, readRecoveryRevision, recoveryRevision } from './
 import { evaluateFrontierLocalRule, compileFrontierLocalRule, defaultFrontierConfiguration, frontierInputOrders,
   isFrontierInputOrder, type FrontierChoiceEvidence, type FrontierInputOrder, type FrontierLocalRule } from './frontier-configuration.ts';
 import { frontierStrategies, frontierStrategyGraph } from './frontier-strategy.ts';
+import { viewStrategies, viewStrategyGraph } from './view-strategy.ts';
 import { auditStrategyGraph, type StrategyGraph } from './strategy-agenda.ts';
 import type { V6BackendSnapshot } from '../runtime/v6-agent-protocol.ts';
 
@@ -73,7 +74,8 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
     fallback.textContent = next ? `Then try ${contactRecoveryStrategies[next]} if it applies and no plan was found.` : '';
     if (!isContactStrategy(priority.value) || !next) return;
     coverage.replaceChildren(graphCoverage('Contact recovery', contactRecoveryGraph, contactRecoveryStrategies, [priority.value, next]),
-      graphCoverage('Exploration', frontierStrategyGraph, frontierStrategies, frontierStrategyGraph.priorities));
+      graphCoverage('Exploration', frontierStrategyGraph, frontierStrategies, frontierStrategyGraph.priorities),
+      graphCoverage('View access', viewStrategyGraph, viewStrategies, viewStrategyGraph.priorities));
   };
   priority.addEventListener('change', showFallback);
   const depth = form.elements.namedItem('maxDepth') as HTMLInputElement;
@@ -190,7 +192,7 @@ export function renderActionCoverage(container: HTMLElement,
   if (!counts) counts = container.appendChild(document.createElement('p'));
   const sample = state?.sicActionCoverage;
   const configurable = (sample?.contactRecovery ?? 0) + (sample?.configurableFrontier ?? 0);
-  const agenda = configurable + (sample?.fixedFrontier ?? 0);
+  const agenda = configurable + (sample?.fixedFrontier ?? 0) + (sample?.viewAccess ?? 0);
   const total = agenda + (sample?.native ?? 0);
   counts.textContent = total
     ? `${configurable}/${total} executed commands (${Math.round(100 * configurable / total)}%) came from a SIC strategy with editable settings. ${agenda}/${total} came from a SIC agenda. All ${total} commands have a plan record.`
@@ -216,6 +218,7 @@ export function renderActionCoverage(container: HTMLElement,
         const entry = group.entryPoints?.[index];
         let authority = 'native';
         if (group.id === 'observed_frontier' && family === 'observed_frontier') authority = 'SIC for untried inputs and access to them';
+        else if (group.id === 'view' && family === 'view') authority = 'SIC for guarded access to a different view';
         else if (group.id === 'goal_access' && entry === 'observed_composition_services') authority = 'SIC for contact recovery after a contradicted prediction';
         entries.appendChild(document.createElement('li')).textContent = `${family.replaceAll('_', ' ')}${entry ? ` · ${entry.replaceAll('_', ' ')}` : ''} · ${authority}`;
       }

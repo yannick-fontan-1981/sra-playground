@@ -39,6 +39,7 @@ export interface NativeCallerConfiguration {
   /** The original default mode. The disabled mode is also an explicit source option. */
   informationGoal?: 'accessible_view_frontier' | 'open_questions';
   sicFrontier?: import('../sic/frontier-configuration.ts').FrontierConfiguration;
+  sicView?: 'shadow' | 'active';
 }
 export interface NativeCallerState {
   goal: R; frontier: R; view: R | null; attention: R; points: R; displays: R;
@@ -291,7 +292,7 @@ export class NativeCallerCoordinator {
     return await this.goal.proposePassageOptions(observation, rows, inputs, remaining, { ...config.pre_score_contact, ...config.conditional_transit }) as NativeProposal | null;
   }
   async viewOffer(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number): Promise<NativeProposal | null> {
-    return this.view ? await this.view.propose(observation, rows, inputs, this.registry(), remaining) as NativeProposal | null : null;
+    return this.view ? await this.view.propose(observation, rows, inputs, this.registry(), remaining, this.configuration.sicView) as NativeProposal | null : null;
   }
   async returnedBranchOffer(observation: NativeObservation, inputs: readonly NativeCommand[]): Promise<R | null> {
     const proposal = await this.frontier.propose(observation, inputs, { return_episode: this.goal.memory.episode });

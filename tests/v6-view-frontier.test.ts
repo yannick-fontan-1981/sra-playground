@@ -28,11 +28,11 @@ for (const row of fixture.cases) test(`V6 public view helper original parity: ${
   else assert.deepEqual(await helper(row), row.expected);
 });
 
-async function step(view: ViewFrontier, row: any, saved: Map<string, any>): Promise<any> {
+async function step(view: ViewFrontier, row: any, saved: Map<string, any>, authority?: 'shadow' | 'active'): Promise<any> {
   const a = row.args;
   if (row.operation === 'initialize') { const s = fixture.scenes[a[0]]; return view.initialize(s.observation, s.rows); }
   if (row.operation === 'has_question') return view.hasObservedViewQuestion();
-  if (row.operation === 'propose') { const s = fixture.scenes[a[0]]; return view.propose(s.observation, s.rows, a[1], a[2], a[3]); }
+  if (row.operation === 'propose') { const s = fixture.scenes[a[0]]; return view.propose(s.observation, s.rows, a[1], a[2], a[3], authority); }
   if (row.operation === 'before') {
     const s = fixture.scenes[a[2]], o = s.observation;
     return view.before(saved.get(a[0]), a[1], { level: o.level_epoch, levels_completed: o.levels_completed, available_action_refs: o.available_action_refs } as any, o);
@@ -50,6 +50,42 @@ for (const scenario of fixture.scenarios) test(`V6 public view original sequence
     assert.deepEqual(view.state(), row.state, `${label} complete memory`);
     const state = view.state(); view = new ViewFrontier(); view.restore(state); assert.deepEqual(view.state(), state, `${label} restored`);
   }
+});
+
+test('view-access shadow and active preserve original steps, guards and acquired state', async () => {
+  const strategies = new Set<string>();
+  for (const mode of ['shadow', 'active'] as const) {
+    for (const scenario of fixture.scenarios) {
+      const view = new ViewFrontier(), saved = new Map<string, any>();
+      for (const row of scenario.steps) {
+        if (row.error) {
+          await assert.rejects(() => step(view, row, saved, mode), (error: Error) => error.message === row.error);
+          continue;
+        }
+        const result = await step(view, row, saved, mode);
+        if (result && row.operation === 'propose') {
+          const { sic_view_decision: decision, ...proposal } = result;
+          assert.equal(decision.mode, mode);
+          assert.equal(decision.strategy, proposal.view_plan.kind);
+          assert.equal(decision.objective.parent, proposal.bundle_template.objective_ref);
+          assert.match(decision.need.id, /^sic-need:/);
+          assert.ok(decision.need.evidence.includes(proposal.binding.observation_ref));
+          assert.deepEqual(proposal, row.expected);
+          strategies.add(decision.strategy);
+        } else if (result?.sic_view_return) {
+          const { sic_view_return: returned, ...record } = result;
+          assert.equal(mode, 'active');
+          assert.equal(returned.evidence, record.after_ref);
+          assert.equal(returned.newPixels, row.expected.new_viewport_pixels);
+          assert.deepEqual(record, row.expected);
+        } else assert.deepEqual(result ?? null, row.expected);
+        if (row.save) saved.set(row.save, structuredClone(result));
+        assert.deepEqual(view.state(), row.state);
+      }
+    }
+  }
+  assert.deepEqual([...strategies].sort(), ['approach_view_edge', 'confirm_access_obstruction',
+    'test_change_of_witnessed_obstruction', 'test_reopened_access']);
 });
 test('V6 public view source remains pinned and observational', async () => {
   for (const [path, expected] of Object.entries(fixture.sourceHashes)) {

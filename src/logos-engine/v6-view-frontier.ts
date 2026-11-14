@@ -4,9 +4,11 @@ import { v6Digest } from './v6-native-observer.ts';
 import { compareUnicode } from './canonical.ts';
 import { pythonEqual as same, pythonTruthy as truth } from './v6-operations.ts';
 import type { NativeRows, NativePublicObservation } from './v6-native-types.ts';
+import { selectViewStrategy, viewStrategies, viewStrategyGraph, type ViewNeedSituation, type ViewStrategy } from '../sic/view-strategy.ts';
 type R = Record<string, any>;
 type P = readonly [number, number];
 type Cells = Map<string, P>;
+type ViewOffer = { actions: R[]; steps: R[]; details: R; reason: string };
 const key = (value: unknown) => JSON.stringify(value);
 const copy = <T>(value: T): T => structuredClone(value);
 const cmp = (a: P, b: P) => a[0] - b[0] || a[1] - b[1];
@@ -104,13 +106,46 @@ export class ViewFrontier {
       question: { reason, hypothesis_refs: details.evidence_refs ?? [], terminal_role: 'unknown' }, binding: { level_epoch: obs.level_epoch, levels_completed: obs.levels_completed, observation_ref: obs.observation_ref },
       bundle_template: bundle, route_refs: details.evidence_refs ?? [] };
   }
-  async propose(obs: R, rows: NativeRows, inputs: readonly R[], rules: readonly R[], remaining: number): Promise<R | null> {
+  async propose(obs: R, rows: NativeRows, inputs: readonly R[], rules: readonly R[], remaining: number,
+    authority: 'native' | 'shadow' | 'active' = 'native'): Promise<R | null> {
     this.initialize(obs, rows); const height = rows.length, width = rows[0]!.length, current = uniqueViewEntities(obs);
+    const offers: Partial<Record<ViewStrategy, ViewOffer>> = {};
+    const situation: ViewNeedSituation = { observationRef: obs.observation_ref, segment: this.segment,
+      reopened: null, obstruction: null, edgeAccess: null };
+    const propose = async (current: ViewNeedSituation) => {
+      const resolution = authority === 'native' ? null : selectViewStrategy(current, {
+        test_reopened_access: () => offers.test_reopened_access ?? null,
+        confirm_access_obstruction: () => offers.confirm_access_obstruction ?? null,
+        test_change_of_witnessed_obstruction: () => offers.test_change_of_witnessed_obstruction ?? null,
+        approach_view_edge: () => offers.approach_view_edge ?? null,
+      });
+      const active = authority === 'active';
+      const selected = active ? resolution?.selected : null;
+      const strategy = active ? selected?.id : viewStrategyGraph.priorities.find(id => offers[id]);
+      const offer = active ? selected?.plan : strategy ? offers[strategy] : null;
+      if (!strategy || !offer) return null;
+      const proposal = await this.form(obs, strategy, offer.actions, offer.steps, offer.details, offer.reason);
+      if (resolution) {
+        const movers = offer.details.receiver_poses ?? Object.keys(offer.steps[0]?.expected_poses_before ?? {}).map(signature => ({ signature }));
+        const subjects = [...movers.map((mover: R) => ({ ...mover, label: 'Measured mover' })),
+          ...(offer.details.carrier ? [{ ...offer.details.carrier, label: 'Observed obstruction' }] : [])].flatMap(witness => {
+          const entity = obs.entities.find((item: R) => item.signature === witness.signature && (!witness.position || same(item.position, witness.position)));
+          return entity?.bbox ? [{ label: witness.label, box: entity.bbox }] : [];
+        }).slice(0, 8);
+        proposal.sic_view_decision = { mode: authority, strategy: resolution.selected?.id ?? null,
+          agenda: resolution.entries, need: resolution.need, situation: resolution.situation, subjects,
+          objective: resolution.selected ? { id: proposal.bundle_template.composition_ref, label: viewStrategies[resolution.selected.id],
+            parent: proposal.bundle_template.objective_ref } : null };
+      }
+      return proposal;
+    };
     if (this.followup) {
       const f = this.followup;
       if (f.source === obs.observation_ref && Object.entries(f.poses).every(([k, v]) => Object.hasOwn(current, k) && same(current[k].position, v))) {
         const step = { action: f.command, expected_poses_before: f.poses, expected_after: f.expected, expected_before: { level_epoch: this.epoch, frame_hash: obs.frame_hash } };
-        return this.form(obs, 'test_reopened_access', [f.command], [step], { evidence_refs: f.refs, exclusive_cause_established: false }, 'test_access_after_measured_support_change');
+        offers.test_reopened_access = { actions: [f.command], steps: [step], details: { evidence_refs: f.refs, exclusive_cause_established: false },
+          reason: 'test_access_after_measured_support_change' };
+        return propose({ ...situation, reopened: f.refs });
       }
       this.followup = null;
     }
@@ -118,14 +153,20 @@ export class ViewFrontier {
       const block = this.block, witness = obs.entities.find((e: R) => e.signature === block.signature && same(e.position, block.position));
       const posesOk = Object.entries(block.poses).every(([k, v]) => Object.hasOwn(current, k) && same(current[k].position, v));
       if (witness && posesOk && same(this.origin, block.origin) && !this.tested.has(block.key)) {
-        let command: R, kind: string;
+        let command: R | undefined, kind: ViewStrategy;
         if (block.fail_count === 1) { command = block.command; kind = 'confirm_access_obstruction'; }
         else {
           const candidates = inputs.filter(a => truth(a.data) && support(witness).has(key([a.data.x ?? null, a.data.y ?? null])));
-          if (candidates.length !== 1) return null; command = candidates[0]!; kind = 'test_change_of_witnessed_obstruction';
+          if (candidates.length === 1) command = candidates[0]!;
+          kind = 'test_change_of_witnessed_obstruction';
         }
-        const step = { action: command, expected_before: { level_epoch: this.epoch, frame_hash: obs.frame_hash }, expected_after: null };
-        return this.form(obs, kind, [command], [step], { evidence_refs: block.refs, obstruction_key: block.key, carrier: { signature: block.signature, position: block.position }, previous_clear_entry: true, stationary_trials: block.fail_count, exclusive_blocking_cause: false }, kind);
+        if (command) {
+          const step = { action: command, expected_before: { level_epoch: this.epoch, frame_hash: obs.frame_hash }, expected_after: null };
+          offers[kind] = { actions: [command], steps: [step], reason: kind, details: { evidence_refs: block.refs,
+            obstruction_key: block.key, carrier: { signature: block.signature, position: block.position },
+            previous_clear_entry: true, stationary_trials: block.fail_count, exclusive_blocking_cause: false } };
+        }
+        return propose({ ...situation, obstruction: { refs: block.refs, repeated: block.fail_count !== 1 } });
       }
       this.block = null;
     }
@@ -159,15 +200,17 @@ export class ViewFrontier {
     if (!candidates.length) return null;
     this.engaged = true; candidates.sort((a, b) => b.area - a.area || a.cost - b.cost || compareUnicode(a.command.action_ref, b.command.action_ref) || compareUnicode(a.rule, b.rule));
     const best = candidates[0]!, ties = candidates.filter(c => c.area === best.area && c.cost === best.cost).map(c => ({ action_ref: c.command.action_ref, vector: [...c.vector], rule: c.rule }));
-    return this.form(obs, 'approach_view_edge', best.steps.map(() => best.command), best.steps, {
-      evidence_refs: [best.rule, ...best.rule_refs, ...points(this.offsetSet(best.command.action_ref)).map(t => this.offsetSource.get(key([best.command.action_ref, t]))!)],
+    const evidence = [best.rule, ...best.rule_refs, ...points(this.offsetSet(best.command.action_ref)).map(t => this.offsetSource.get(key([best.command.action_ref, t]))!)];
+    offers.approach_view_edge = { actions: best.steps.map(() => best.command), steps: best.steps, details: {
+      evidence_refs: evidence,
       receiver_poses: best.actors, access_vector: [...best.vector], steps_to_projected_screen_edge: best.cost, conditional_new_viewport_pixels: best.area,
       view_shift_previously_seen_for_input: best.seen, camera_hypotheses: best.alternatives, tied_accesses: ties,
       other_accesses: candidates.slice(1).map(c => ({ input: c.command.action_ref, area: c.area, steps: c.cost })), unmodeled_inputs: obs.available_action_refs.filter((a: string) => !candidates.some(c => c.command.action_ref === a)),
       newest_visible_candidates: this.reveals.length ? this.reveals[this.reveals.length - 1]!.new_signature_count : 0,
       retained_visible_hypotheses: [...this.visibleHypotheses].filter(([sig]) => Object.hasOwn(current, sig)).slice(0, 8).map(([sig, ref]) => ({ source_ref: ref, signature: sig, current_entity_ref: current[sig].id, terminal_role: 'unestablished' })),
       qualification: 'projected access and potential screen area; unknown terrain, physical traversability and terminal role',
-    }, 'approach_accessible_border_with_largest_conditional_unseen_view');
+    }, reason: 'approach_accessible_border_with_largest_conditional_unseen_view' };
+    return propose({ ...situation, edgeAccess: evidence });
   }
   before(proposal: R, index: number, publicPacket: NativePublicObservation, observation: R): R {
     const bound = proposal.binding, step = proposal.steps[index];
@@ -244,8 +287,11 @@ export class ViewFrontier {
         }
       }
     }
+    const decision = proposal.sic_view_decision;
     return { status: registration.status, registration, source_ref: before.observation_ref, after_ref: after.observation_ref, segment: this.segment, previous_origin: [...priorOrigin], registered_origin: [...this.origin],
       new_viewport_pixels: fresh, coverage_pixels: this.coverage.size, newly_visible_distinct_occurrences: found, blockage_question: this.block === null ? null : { key: this.block.key, stationary_trials: this.block.fail_count },
+      ...(decision?.mode === 'active' ? { sic_view_return: { need: decision.need.id, objective: decision.objective.id,
+        status: fresh === null ? 'unregistered' : fresh > 0 ? 'expanded' : 'no_new_area', newPixels: fresh, evidence: after.observation_ref } } : {}),
       qualification: 'screen-coverage estimate; foreground and fixed overlays can contribute' };
   }
   state(): R {

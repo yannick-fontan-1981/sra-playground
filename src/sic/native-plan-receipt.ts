@@ -5,7 +5,8 @@ export function nativePlanReceipt(family: string, proposal: NativeProposal, obse
   const template = proposal.bundle_template;
   const rooted = proposal.rooted_line_plan;
   const recovery = objectField(objectField(rooted, 'search'), 'sic_decision');
-  const decision = recovery ?? proposal.sic_frontier_decision;
+  const view = objectField(proposal.sic_view_decision, 'mode') === 'active' ? proposal.sic_view_decision : undefined;
+  const decision = recovery ?? proposal.sic_frontier_decision ?? view;
   const sicStrategy = objectField(decision, 'strategy'), sicTarget = objectField(decision, 'objective');
   const nativeTarget = objectField(template, 'objective_ref');
   const objective = typeof nativeTarget === 'string' && nativeTarget.length > 0 ? nativeTarget : null;
@@ -14,6 +15,7 @@ export function nativePlanReceipt(family: string, proposal: NativeProposal, obse
   let authority: keyof SicActionCoverage = 'native';
   if (typeof sicStrategy === 'string') {
     if (recovery) authority = 'contactRecovery';
+    else if (view) authority = 'viewAccess';
     else authority = objectField(decision, 'inputRanked') === true ? 'configurableFrontier' : 'fixedFrontier';
   }
   const command = proposal.actions[index];

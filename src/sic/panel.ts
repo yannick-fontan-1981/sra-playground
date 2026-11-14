@@ -21,6 +21,7 @@ import type { ShadowView } from './shadow.ts';
 import type { SituationKey } from './situation.ts';
 import { contactRecoveryStrategies } from './active-recovery.ts';
 import { frontierStrategies } from './frontier-strategy.ts';
+import { viewStrategies } from './view-strategy.ts';
 import type { AgendaEntry } from './strategy-agenda.ts';
 import { frontierInputOrders } from './frontier-configuration.ts';
 
@@ -961,7 +962,7 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
     line.textContent = objective;
     plan.append(line);
   }
-  const planRecovery = planSource?.recoveryDecision?.objective ?? planSource?.frontierStrategy?.objective;
+  const planRecovery = planSource?.recoveryDecision?.objective ?? planSource?.frontierStrategy?.objective ?? planSource?.viewStrategy?.objective;
   if (planRecovery) {
     const line = document.createElement('p');
     line.textContent = `SIC sub-objective: ${planRecovery.label}.`;
@@ -1076,7 +1077,7 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
 }
 
 function renderObjectives(panel: HTMLElement, progress: string, board: GameObservation | null,
-  current: Pick<NativeResolution, 'objective' | 'objectiveSource' | 'question' | 'recoveryDecision' | 'frontierStrategy'>
+  current: Pick<NativeResolution, 'objective' | 'objectiveSource' | 'question' | 'recoveryDecision' | 'frontierStrategy' | 'viewStrategy'>
     & Partial<Pick<NativeResolution, 'context'>> | null | undefined,
   entries: readonly PursuedObjective[], timeline: ReturnType<typeof strategyTimeline>): void {
   const paragraph = (value: string) => { const p = document.createElement('p'); p.textContent = value; return p; };
@@ -1085,7 +1086,7 @@ function renderObjectives(panel: HTMLElement, progress: string, board: GameObser
   active.replaceChildren();
   active.append(paragraph(board?.state === 'WIN' ? 'The game reports victory.'
     : describePlanObjective(current) ?? 'No current native objective observed.'));
-  const currentSubObjective = current?.recoveryDecision?.objective ?? current?.frontierStrategy?.objective;
+  const currentSubObjective = current?.recoveryDecision?.objective ?? current?.frontierStrategy?.objective ?? current?.viewStrategy?.objective;
   if (currentSubObjective) {
     active.append(paragraph(`SIC sub-objective: ${currentSubObjective.label}.`));
   }
@@ -1111,9 +1112,10 @@ function renderObjectives(panel: HTMLElement, progress: string, board: GameObser
       if (entry.sic) row.append(paragraph(`SIC sub-objective: ${entry.sic.label}.`));
       const method = timeline.find(item => item.first.fromLevel === entry.level
         && item.last.sequence >= entry.first && item.first.sequence <= entry.last
-        && (item.rule || item.first.decision?.recoveryDecision || item.first.decision?.frontierStrategy)
+        && (item.rule || item.first.decision?.recoveryDecision || item.first.decision?.frontierStrategy || item.first.decision?.viewStrategy)
         && panel.querySelector(`[data-sic-method="${item.first.sequence}"]`));
-      const strategy = method?.first.decision?.recoveryDecision?.strategy ?? method?.first.decision?.frontierStrategy?.title ?? method?.rule?.title;
+      const strategy = method?.first.decision?.recoveryDecision?.strategy ?? method?.first.decision?.frontierStrategy?.title
+        ?? method?.first.decision?.viewStrategy?.title ?? method?.rule?.title;
       if (method && strategy) row.append(perspectiveJump(panel, 'strategies', `[data-sic-method="${method.first.sequence}"]`, `Strategy: ${strategy}`));
       list.append(row);
     }
@@ -1253,7 +1255,8 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
     details.dataset.sicMethod = String(first.sequence);
     details.dataset.strategyChoice = key(first.sequence);
     details.open = expanded.get(details.dataset.sicMethod) ?? episode === lastContradiction;
-    const chosen = first.decision?.recoveryDecision?.strategy ?? first.decision?.frontierStrategy?.title;
+    const viewStrategy = first.decision?.viewStrategy;
+    const chosen = first.decision?.recoveryDecision?.strategy ?? first.decision?.frontierStrategy?.title ?? viewStrategy?.title;
     const method = [operations, chosen ?? (first.decision?.question ? nativeLabel(first.decision.question)
       : operation?.description ?? rule?.title ?? 'Observe an action return')].filter(Boolean).join(' · ');
     title.textContent = `L${first.fromLevel} · ${actions} · ${method} · ${statuses[status]}`;
@@ -1282,6 +1285,13 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
         const { least_tried, command_order } = frontierStrategy.choices;
         factsList.push(['Choice on this board', `Least-used: ${least_tried} · Stable order: ${command_order}`]);
       }
+    }
+    if (viewStrategy) {
+      factsList.push(['Need', 'Observe access to more of the board'], ['Information objective', viewStrategy.objective.label]);
+      if (viewStrategy.expectedPixels !== null) factsList.push(['Potential new screen area', `${viewStrategy.expectedPixels} pixels if the forecast screen shift occurs.`]);
+      const returned = last.nativeCheck?.viewOutcome;
+      if (returned?.objective === viewStrategy.objective.id) factsList.push(['Observed screen return', returned.status === 'unregistered'
+        ? 'The two views could not be aligned reliably.' : returned.status === 'expanded' ? `${returned.newPixels} newly visible pixels.` : 'No new area was measured.']);
     }
     if (!operation && first.decision?.question) factsList.push(['What the engine is trying', nativeLabel(first.decision.question)]);
     factsList.push(['Plan', planText(first)], ['Return', `${last.sequence} · ${action(last)} · ${statuses[status]}${expected ? ` · Expected: ${expected}` : ''}.`]);
@@ -1324,6 +1334,7 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
       details.append(context, renderAgenda('Contact recovery priority', contactRecoveryStrategies, recoveryDecision.agenda, recoveryDecision.agendaEvidence));
     }
     if (frontierStrategy?.agenda.length) details.append(renderAgenda('Exploration strategy priority', frontierStrategies, frontierStrategy.agenda));
+    if (viewStrategy?.agenda.length) details.append(renderAgenda('View access strategies', viewStrategies, viewStrategy.agenda, viewStrategy.agendaEvidence));
     const recoveryOperations = first.decision?.recoveryOperations;
     if (recoveryOperations?.length) {
       const recovery = document.createElement('ol');
