@@ -29,6 +29,7 @@ export interface RecoveryPack {
   readonly openingCuriosity?: OpeningCuriosityMode;
   readonly informationPreference?: InformationPreference;
   readonly reasoningMode?: 'adaptive';
+  readonly solver?: 'sic';
 }
 
 export const defaultRecoveryPack: RecoveryPack = Object.freeze({
@@ -38,7 +39,7 @@ export const defaultRecoveryPack: RecoveryPack = Object.freeze({
 export function compileRecoveryPack(input: unknown = defaultRecoveryPack): RecoveryPack {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new TypeError('Expected a recovery configuration.');
   const fields = Object.keys(input);
-  if (fields.some(field => !['version', 'mode', 'maxDepth', 'maxNodes', 'strategyOrder', 'frontier', 'familyAgenda', 'openingCuriosity', 'informationPreference', 'reasoningMode'].includes(field))) {
+  if (fields.some(field => !['version', 'mode', 'maxDepth', 'maxNodes', 'strategyOrder', 'frontier', 'familyAgenda', 'openingCuriosity', 'informationPreference', 'reasoningMode', 'solver'].includes(field))) {
     throw new TypeError('The SIC pack contains an unrecognized field.');
   }
   const pack = input as Record<string, unknown>;
@@ -48,6 +49,13 @@ export function compileRecoveryPack(input: unknown = defaultRecoveryPack): Recov
     typeof value === 'number' && Number.isSafeInteger(value) && value >= 1 && value <= maximum;
   if (!bounded(pack.maxDepth, defaultRecoveryPack.maxDepth) || !bounded(pack.maxNodes, defaultRecoveryPack.maxNodes)) {
     throw new RangeError('Recovery limits must be 1–88 moves and 1–1000 states.');
+  }
+  if (Object.hasOwn(pack, 'solver')) {
+    if (pack.solver !== 'sic' || pack.mode !== 'active'
+      || fields.some(field => !['version', 'mode', 'maxDepth', 'maxNodes', 'solver'].includes(field))) {
+      throw new TypeError('SIC-only resolution requires an active standalone pack.');
+    }
+    return Object.freeze({ version: 1, mode: pack.mode, maxDepth: pack.maxDepth, maxNodes: pack.maxNodes, solver: 'sic' });
   }
   const order = pack.strategyOrder;
   if (Object.hasOwn(pack, 'strategyOrder') && (!Array.isArray(order) || order.length !== contactRecoveryOrder.length

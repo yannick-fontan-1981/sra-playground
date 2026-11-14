@@ -5,6 +5,8 @@ import { createNativeV6Runtime, NativeV6Runtime } from '../src/logos-engine/v6-n
 import type { NativeV6Declarations } from '../src/logos-engine/v6-native-runtime.ts';
 import { V6AgentService } from '../src/runtime/v6-agent-service.ts';
 import { BrowserV6Agent } from '../src/runtime/v6-agent.ts';
+import { defaultRecoveryPack } from '../src/sic/active-recovery.ts';
+import { fieldRepairId } from '../src/sic/field-repair.ts';
 import type { GameObservation } from '../src/runtime/browser-games.ts';
 import { emptyV6Snapshot, toV6PublicObservation, V6_REFERENCE_COMMIT, v6FrameHash } from '../src/runtime/v6-agent-protocol.ts';
 import type { V6AgentOperation, V6AgentTransport } from '../src/runtime/v6-agent-protocol.ts';
@@ -81,6 +83,42 @@ for (const fixture of [ordered.session, ...fields.cases.filter((item: any) => it
     if (!fixture.actions) assert.equal(agent.snapshot.reason, 'no_applicable_transferred_family');
   });
 }
+
+test('SIC-only service earns a public level with a witnessed SIC plan for every action', async () => {
+  const fixture = fields.cases.find((item: { game: string }) => item.game === 'SYME');
+  const service = new V6AgentService(recovery => createNativeV6Runtime(declarations, { recovery, now: () => 0 }));
+  let current = fixture.initial.public as NativePublicObservation;
+  const sessionId = 'sic-only-replay';
+  let result = await service.handle({ type: 'init', sessionId, sequence: 0,
+    observation: toV6PublicObservation(gamePacket(current, 'UNSEEN'), 0),
+    budgets: { targetLevels: 1, levelActionCaps: [600] }, recovery: { ...defaultRecoveryPack, solver: 'sic' } });
+  const steps = fixture.transitions.flatMap((prefix: { steps: any[]; proposal: { actions: NativeCommand[] } }) =>
+    prefix.steps.map((step, index) => ({ after: step.afterPublic, command: prefix.proposal.actions[index] })));
+  let sequence = 0;
+  while (current.levels_completed === 0) {
+    const { after, command } = steps[sequence];
+    assert.deepEqual(result.snapshot.coverage?.registeredFamilies, [fieldRepairId]);
+    const receipt = result.snapshot.trace.findLast(value => (value as { kind: string }).kind === 'sic_native_plan') as
+      { authority: string; objective: string; subObjective: string; strategy: string };
+    assert.equal(receipt.authority, 'sicOnly');
+    assert.equal(receipt.objective, 'G_official_completion');
+    assert.ok(receipt.subObjective);
+    assert.ok(['test_local_repair', 'apply_local_repair'].includes(receipt.strategy));
+    assert.equal(result.kind, 'action');
+    assert.deepEqual(result.command, { actionRef: command.action_ref, data: command.data });
+    current = after;
+    sequence++;
+    result = await service.handle({ type: 'advance', sessionId, sequence, ticketId: result.ticket!.id,
+      observation: toV6PublicObservation(gamePacket(current, 'UNSEEN'), sequence), executionMs: 0 });
+    if (current.levels_completed === 0 && result.kind === 'boundary') {
+      result = await service.handle({ type: 'resume', sessionId, sequence });
+    }
+  }
+  assert.equal(sequence, 9);
+  assert.equal(result.snapshot.levelsCompleted, 1);
+  assert.equal(result.snapshot.sicActionCoverage?.sicOnly, 9);
+  assert.equal(result.snapshot.sicActionCoverage?.native, 0);
+});
 
 class RecordingBackend implements NativeV6Backend {
   readonly sourceCommit = V6_REFERENCE_COMMIT;

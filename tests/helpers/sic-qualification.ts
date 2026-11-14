@@ -6,6 +6,7 @@ import { recoveryRevision } from '../../src/sic/recovery-pack.ts';
 import type { AgentAction } from '../../src/runtime/contracts.ts';
 import { GAME_CATALOG } from '../../src/games/catalog.ts';
 import { compileInformationPreference } from '../../src/sic/information-preference.ts';
+import { fieldRepairId } from '../../src/sic/field-repair.ts';
 
 const cases = [
   { game: 'SK48', target: 1, baseline: [19, 1], alternate: [19, 1], divergence: null },
@@ -63,6 +64,17 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number | '
     ...(maxActions === undefined ? {} : { maxSessionActions: maxActions }),
     dispatch: async action => {
       const decision = state ? readNativeResolution(state) : null;
+      const release = state?.trace.findLast(value => {
+        const event = value as Record<string, unknown> | null;
+        return event?.kind === 'sic_native_plan' && event.family === decision?.family;
+      }) as Record<string, unknown> | undefined;
+      if (pack.solver === 'sic') {
+        const families = state?.coverage?.registeredFamilies;
+        if (families?.length !== 1 || families[0] !== fieldRepairId || release?.authority !== 'sicOnly'
+          || !release.objective || !release.subObjective || !release.strategy) {
+          throw new Error('No exclusive SIC receipt for the pending command.');
+        }
+      }
       const selection = state?.sicFamilySelection, mode = selection?.reasoning;
       if (mode && (modes.at(-1)?.card !== mode.card || modes.at(-1)?.level !== mode.level)) {
         modes.push({ sequence: trace.length + 1, level: mode.level, mode: mode.mode, card: mode.card, selected: selection.selected });
@@ -73,10 +85,6 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number | '
         const bundle = state.proposal as Record<string, unknown> | null;
         const entry = bundle?.material_access_subquestion ?? bundle?.program_subquestion ?? bundle?.field_subquestion
           ?? bundle?.goal_access_subquestion ?? bundle?.strategy_subquestion;
-        const release = [...state.trace].reverse().find(value => {
-          const event = value as Record<string, unknown> | null;
-          return event?.kind === 'sic_native_plan' && event.family === decision.family;
-        }) as Record<string, unknown> | undefined;
         if (typeof release?.strategy === 'string' && typeof release.authority === 'string') {
           const strategy = decision.frontierStrategy?.opening?.mode === 'active'
             && decision.frontierStrategy.opening.command !== decision.frontierStrategy.opening.baseline
@@ -106,9 +114,43 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number | '
       if (board.levelsCompleted <= level || state?.status === 'stopped') break;
     }
     return { actions: trace.length, levels: board.levelsCompleted, stop: state?.reason ?? null, trace, targetLevels, boardState: board.state,
-      coverage: state?.sicActionCoverage, selection: state?.sicFamilySelection, information, opening, modes, controlCards };
+      coverage: state?.sicActionCoverage, families: state?.coverage?.registeredFamilies,
+      guard: state?.trace.findLast(value => (value as { kind?: string } | null)?.kind === 'before_guard'),
+      selection: state?.sicFamilySelection, information, opening, modes, controlCards };
   } finally {
     agent.dispose();
+  }
+}
+
+async function qualifySicOnly(parameters: URLSearchParams) {
+  const games = parameters.get('games')?.split(',') ?? GAME_CATALOG.filter(game => game.availability === 'playable').map(game => game.code);
+  const maxActions = Number(parameters.get('actions') ?? 600);
+  if (!Number.isSafeInteger(maxActions) || maxActions < 1 || maxActions > 600) throw new Error('Expected an action limit from 1 to 600.');
+  const runtime = new BrowserGameRuntime();
+  const results = [];
+  const pack: RecoveryPack = { ...defaultRecoveryPack, solver: 'sic' };
+  try {
+    for (const game of games) {
+      output.textContent = JSON.stringify({ status: 'running', game, results }, null, 2);
+      try {
+        const operations = new Set<string>();
+        const result = await run(runtime, game, 'complete', pack, maxActions, row => {
+          if (row.operation) operations.add(row.operation);
+        });
+        const qualified = result.families?.length === 1 && result.families[0] === fieldRepairId
+          && (result.coverage?.sicOnly ?? 0) === result.actions;
+        results.push({ game, qualified, levels: result.levels, total: result.targetLevels, actions: result.actions,
+          state: result.boardState, stop: result.stop, operations: [...operations],
+          levelEnds: result.trace.flatMap((entry, index) => entry.levelsCompleted > (result.trace[index - 1]?.levelsCompleted ?? 0) ? [index + 1] : []),
+          traceDigest: await hash(result.trace),
+          ...(result.stop === 'no_admissible_prefix' ? { guard: result.guard } : {}) });
+      } catch (error) {
+        results.push({ game, error: error instanceof Error ? error.message : String(error) });
+      }
+    }
+    output.textContent = JSON.stringify({ status: 'completed', results }, null, 2);
+  } finally {
+    runtime.dispose();
   }
 }
 
@@ -370,7 +412,8 @@ start.addEventListener('click', async () => {
   start.disabled = true;
   try {
     const parameters = new URLSearchParams(location.search);
-    await (parameters.has('strategy-inventory') ? inventoryStrategies(parameters)
+    await (parameters.has('sic-only') ? qualifySicOnly(parameters)
+      : parameters.has('strategy-inventory') ? inventoryStrategies(parameters)
       : parameters.has('information-priority') ? qualifyInformationPriority(parameters)
       : parameters.has('reasoning-modes') ? qualifyReasoningModes(parameters.get('games'))
       : parameters.has('opening-campaign') ? qualifyOpeningCampaigns(parameters.get('games'))

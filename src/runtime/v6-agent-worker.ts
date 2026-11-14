@@ -11,7 +11,7 @@ const scope = self as unknown as {
   postMessage(message: V6WorkerResponse): void;
 };
 const service = new V6AgentService((recovery = defaultRecoveryPack) => createNativeV6Runtime(undefined, {
-  recovery: { ...recovery, familyAgenda: recovery.familyAgenda ?? defaultBrowserFamilyAgenda },
+  recovery: recovery.solver === 'sic' ? recovery : { ...recovery, familyAgenda: recovery.familyAgenda ?? defaultBrowserFamilyAgenda },
 }));
 let active = false;
 scope.addEventListener('message', event => {

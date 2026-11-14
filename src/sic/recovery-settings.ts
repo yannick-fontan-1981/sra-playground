@@ -281,9 +281,12 @@ export function renderActionCoverage(container: HTMLElement,
   if (!counts) counts = container.appendChild(document.createElement('p'));
   const sample = state?.sicActionCoverage;
   const configurable = (sample?.contactRecovery ?? 0) + (sample?.configurableFrontier ?? 0);
-  const agenda = configurable + (sample?.fixedFrontier ?? 0) + (sample?.viewAccess ?? 0) + (sample?.information ?? 0);
+  const standalone = sample?.sicOnly ?? 0;
+  const agenda = standalone + configurable + (sample?.fixedFrontier ?? 0) + (sample?.viewAccess ?? 0) + (sample?.information ?? 0);
   const total = agenda + (sample?.native ?? 0);
-  const coverage = total
+  const coverage = standalone
+    ? `${standalone}/${total} executed commands came from an exclusive SIC plan.`
+    : total
     ? `${configurable}/${total} executed commands (${Math.round(100 * configurable / total)}%) came from a SIC strategy with editable settings. ${agenda}/${total} came from a SIC agenda. All ${total} commands have a plan record.`
     : 'Execute a command to measure which part of this session uses configurable SIC strategies.';
   const selection = state?.sicFamilySelection;

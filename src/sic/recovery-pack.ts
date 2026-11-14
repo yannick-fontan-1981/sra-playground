@@ -6,7 +6,8 @@ const combinedPackId = 'sic.native-strategies';
 
 export function recoveryRevision(configuration: RecoveryPack) {
   const checked = compileRecoveryPack(configuration);
-  const manifest = checked.reasoningMode ? { id: combinedPackId, schemaVersion: 7, configuration: checked }
+  const manifest = checked.solver === 'sic' ? { id: combinedPackId, schemaVersion: 8, configuration: checked }
+    : checked.reasoningMode ? { id: combinedPackId, schemaVersion: 7, configuration: checked }
     : checked.informationPreference ? { id: combinedPackId, schemaVersion: 6, configuration: checked }
     : checked.openingCuriosity ? { id: combinedPackId, schemaVersion: 5, configuration: checked }
     : checked.familyAgenda ? { id: combinedPackId, schemaVersion: 4, configuration: checked } : checked.frontier
@@ -24,7 +25,7 @@ export function readRecoveryRevision(input: unknown): RecoveryRevision {
   }
   const envelope = input as Record<string, unknown>;
   if (!((envelope.id === packId && envelope.schemaVersion === 1)
-    || (envelope.id === combinedPackId && [2, 3, 4, 5, 6, 7].includes(envelope.schemaVersion as number)))) {
+    || (envelope.id === combinedPackId && [2, 3, 4, 5, 6, 7, 8].includes(envelope.schemaVersion as number)))) {
     throw new TypeError('Unsupported SIC pack or schema version.');
   }
   if (!Object.hasOwn(envelope, 'configuration') || envelope.configuration === undefined) {

@@ -386,7 +386,7 @@ export function measuredFields(observation: FieldObservation): RegularField[] {
   }
   return result;
 }
-function correspondences(width: number, height: number, family: string): [Point, Point][] {
+export function correspondences(width: number, height: number, family: string): [Point, Point][] {
   const transforms: Record<string, (x: number, y: number) => Point> = {
     horizontal: (x, y) => [width - 1 - x, y], vertical: (x, y) => [x, height - 1 - y], half_turn: (x, y) => [width - 1 - x, height - 1 - y],
   };

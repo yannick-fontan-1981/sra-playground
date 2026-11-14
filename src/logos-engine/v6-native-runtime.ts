@@ -33,6 +33,7 @@ import { OrderedRecruitment } from './v6-ordered-recruitment.ts';
 import { RankedWorkshop } from './v6-ranked-workshop.ts';
 import { compileRecoveryPack, isRecoveryStop } from '../sic/active-recovery.ts';
 import { nativePlanReceipt } from '../sic/native-plan-receipt.ts';
+import { createSicFieldRepair, fieldRepairId } from '../sic/field-repair.ts';
 import { decidePlanContinuation } from '../sic/plan-step.ts';
 import { retainMissingControlTrial } from '../sic/missing-control-strategy.ts';
 import { defaultFrontierConfiguration } from '../sic/frontier-configuration.ts';
@@ -246,7 +247,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private prefix: Prefix | null = null;
   private actions = 0;
   private sicFamilyActions = 0;
-  private readonly sicActionCoverage: Record<keyof SicActionCoverage, number> = {
+  private readonly sicActionCoverage: Record<Exclude<keyof SicActionCoverage, 'sicOnly'>, number> & { sicOnly?: number } = {
     contactRecovery: 0, configurableFrontier: 0, fixedFrontier: 0, viewAccess: 0, information: 0, native: 0,
   };
   private revision = 0;
@@ -1303,7 +1304,8 @@ export class NativeV6Runtime implements NativeV6Backend {
       || outcome.observation.step_index !== first.step_index + 1) throw new Error('Native outcome does not match the released prefix command');
     if (!Number.isFinite(outcome.executionMs) || outcome.executionMs < 0) throw new Error('Invalid native execution time');
     this.elapsedMs += outcome.executionMs; this.levelMs.set(first.level, (this.levelMs.get(first.level) ?? 0) + outcome.executionMs);
-    this.sicActionCoverage[prefix.sicPlan.authority] += 1;
+    const authority = prefix.sicPlan.authority;
+    this.sicActionCoverage[authority] = (this.sicActionCoverage[authority] ?? 0) + 1;
     if (this.familyAgendaReceipt?.mode === 'active') this.sicFamilyActions += 1;
     this.actions += 1; this.levelActions.set(first.level, (this.levelActions.get(first.level) ?? 0) + 1); this.current = freeze(structuredClone(outcome.observation));
     await this.timed(first.level, async () => {
@@ -2356,6 +2358,15 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const loaded = declarations ?? await loadNativeV6Declarations();
   const symmetry = loaded.strategy.declarations[0]?.configuration.regular_field_correspondence;
   if (!symmetry || !loaded.common.ordered_support_transfer || !loaded.common.input_domain) throw new Error('Incomplete native V6 declarations');
+  if (recovery.solver === 'sic') {
+    const groups = [{ id: fieldRepairId, families: [fieldRepairId] }];
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 1, groups, policy: symmetry };
+    const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
+    const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
+    return new NativeV6Runtime({ sourceDigest, groups, families: [createSicFieldRepair(symmetry)],
+      authorityPolicy: loaded.common, familyAgenda: 'active', maxPointOccurrences: loaded.common.input_domain.max_point_occurrences,
+      ...(options.now ? { now: options.now } : {}) });
+  }
   // Each selected proposal is returned only to the family that created it.
   const configuration = loaded.strategy.declarations[0]!.configuration;
   const ordered = subquestionFamily(new OrderedSupportTransfer(loaded.common.ordered_support_transfer) as unknown as NativeFamily,

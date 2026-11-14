@@ -25,6 +25,7 @@ export interface SicActionCoverage {
   readonly viewAccess: number;
   readonly information: number;
   readonly native: number;
+  readonly sicOnly?: number;
 }
 
 /** Public transport attributes retain the original V6 spelling and meaning. */
