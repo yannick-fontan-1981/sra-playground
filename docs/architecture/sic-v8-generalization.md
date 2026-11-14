@@ -25,6 +25,16 @@ Le passage au composant commun demande un rejeu avec retrait de la famille cibl�
 
 Les niveaux 1 restent prioritaires. La campagne systématique des niveaux 2 reprend quand les 100 niveaux 1 sont gagnés sous SIC seul après retrait de la famille habituelle, avec preuves du repli par des familles et primitives réutilisables. La référence de retrait est figée sur le rejeu normal du runtime `07e5e687` pour suivre les gains sans faire changer la famille retirée au fil des mises à jour. La campagne des niveaux 3 suit celle des niveaux 2.
 
+## Mesurer la généralité
+
+Le retrait d’une famille mesure la redondance disponible dans le runtime. Le transfert sur un jeu tenu à l’écart de la mise au point mesure la réutilisation. Retirer à la fois la famille et son modèle de scène ou son planificateur mesure la dépendance à cette connaissance. Les trois résultats sont utiles. Un gain avec la famille retirée et le même planificateur compte parmi les replis vérifiés. La preuve de généralité doit préciser quelle connaissance a été retrouvée pendant la partie et quelle connaissance était déjà fournie.
+
+Le test de transfert conserve le même code, les mêmes cartes et les mêmes paramètres sur plusieurs jeux. Il relève le fait qui déclenche la primitive, le retour qui l’établit, la commande qui le réutilise et les cas où le repli s’abstient. Les permutations de palette et de commandes complètent le test. Un motif visuel sert à produire une hypothèse. Un retour distinct doit pouvoir la confirmer ou la réfuter.
+
+`sic_public_input_exploration` conserve le choix final d’une expérience disponible, le budget et la mémoire des tentatives. Les mesures et producteurs d’offres ont vocation à être réutilisables indépendamment. Le graphe des commandes observées est déjà un module commun. La reconnaissance de marqueurs répétés et la recherche de mouvement après un clic sont encore dans la famille d’exploration. La présence de carrés de marqueurs, l’ordre initial des commandes et l’absence de changement avant un clic portent chacun une hypothèse qui doit être testée sur plusieurs jeux. Une famille distincte est utile lorsqu’elle conserve un modèle vérifiable entre plusieurs décisions, comme des cases découvertes ou une relation entre une commande et un mobile.
+
+La factorisation commence par les contrats récurrents effectivement observés, notamment mesurer un déplacement, vérifier l’objet contrôlé, apprendre un effet de contact, chercher un accès ou distinguer des candidats par un test. Les familles fournissent les observations et les opérations adaptées à leur scène. Les cartes choisissent une primitive selon le besoin, la situation et le mode de réflexion. Une preuve commune doit pouvoir être publiée par plusieurs familles et consommée dans le même format. Le runtime peut ensuite réévaluer la prochaine carte dans l’agenda ou via un workflow SRC. La première extraction utile porte sur la mesure du mouvement avant et après une commande et sa publication sous un format commun, à vérifier sur les retraits KLOT, KA59, LS19 et LS20.
+
 ## Premiers retours
 
 Sur le moteur de référence, le navigateur confirme les quatre victoires intégrales sous SIC seul. HANO gagne 4 niveaux en 60 commandes, DNOI 6 en 59, DICO 6 en 71 et SYME 6 en 78. La réparation du champ est la seule famille commune à deux de ces parcours, DNOI et SYME.
