@@ -35,7 +35,7 @@ import { facetGrowthId, facetGrowthStrategies, learnFacetGrowthId } from './face
 import { chartRouteId, chartRouteStrategies, learnChartRouteId } from './chart-route.ts';
 import { populationPlacementId, populationPlacementStrategies } from './population-placement.ts';
 import { carryToFrameId, carryToFrameStrategies, learnCarryToFrameId } from './carry-to-frame.ts';
-import { portPairingId, portPairingStrategies } from './port-pairing.ts';
+import { learnPortPairingId, portPairingId, portPairingCardStrategies } from './port-pairing.ts';
 import { contrastControlsId, contrastControlsStrategies, contrastProbeId } from './contrast-controls.ts';
 import { displayCouplingId, displayCouplingStrategies } from './display-coupling.ts';
 import { framedSearchId, framedSearchStrategies } from './framed-search.ts';
@@ -103,7 +103,7 @@ const situationStrategies = { ...orderedContactStrategies, ...cavityStrategies, 
   ...labeledSequenceStrategies, ...markedCollectionStrategies, ...slotTransferStrategies, ...remoteSupportRouteStrategies,
   ...occurrenceRecallStrategies, ...slotPermutationStrategies, ...surfaceCopyStrategies, ...codeRouteStrategies, ...profileTransferStrategies,
   ...orderedReplenishmentStrategies, ...programOriginStrategies, ...previewPlacementStrategies, ...symbolContributionStrategies, ...markedLatticeStrategies,
-  ...queuedPlacementStrategies, ...legendRecolorStrategies, ...visualPatternStrategies, ...facetGrowthStrategies, ...chartRouteStrategies, ...populationPlacementStrategies, ...carryToFrameStrategies, ...portPairingStrategies, ...displayCouplingStrategies, ...framedSearchStrategies, ...glyphEditingStrategies, ...fieldIsolationStrategies, ...directionalReceptionStrategies, ...windowCoverageStrategies, ...panelMatchingStrategies, ...crossingRowsStrategies, ...traceCoverageStrategies, ...radialConnectionStrategies, ...invitedCaptureStrategies, ...branchAlignmentStrategies, ...feedbackTrialStrategies, ...catalogueComparisonStrategies, ...receptionAccessStrategies, ...markerCoverageStrategies, ...framedReceptionStrategies, ...windowRelationStrategies, ...animationContactStrategies, ...reflectedPlacementStrategies, ...materialAssemblyStrategies, ...coupledMotionStrategies, ...materialRouteStrategies, ...inventoryAccessStrategies, ...learnCorrespondenceStrategies };
+  ...queuedPlacementStrategies, ...legendRecolorStrategies, ...visualPatternStrategies, ...facetGrowthStrategies, ...chartRouteStrategies, ...populationPlacementStrategies, ...carryToFrameStrategies, ...portPairingCardStrategies, ...displayCouplingStrategies, ...framedSearchStrategies, ...glyphEditingStrategies, ...fieldIsolationStrategies, ...directionalReceptionStrategies, ...windowCoverageStrategies, ...panelMatchingStrategies, ...crossingRowsStrategies, ...traceCoverageStrategies, ...radialConnectionStrategies, ...invitedCaptureStrategies, ...branchAlignmentStrategies, ...feedbackTrialStrategies, ...catalogueComparisonStrategies, ...receptionAccessStrategies, ...markerCoverageStrategies, ...framedReceptionStrategies, ...windowRelationStrategies, ...animationContactStrategies, ...reflectedPlacementStrategies, ...materialAssemblyStrategies, ...coupledMotionStrategies, ...materialRouteStrategies, ...inventoryAccessStrategies, ...learnCorrespondenceStrategies };
 
 export interface NativeStep {
   readonly action: string;
@@ -488,7 +488,7 @@ export function readNativeResolution(agent: {
                         : (family === queuedPlacementId || family === learnQueuedPlacementId) ? queuedPlacementStrategies : (family === legendRecolorId || family === matchExampleId) ? legendRecolorStrategies
                           : family === visualPatternId ? visualPatternStrategies : (family === facetGrowthId || family === learnFacetGrowthId) ? facetGrowthStrategies
                             : (family === chartRouteId || family === learnChartRouteId) ? chartRouteStrategies : family === populationPlacementId ? populationPlacementStrategies
-                              : (family === carryToFrameId || family === learnCarryToFrameId) ? carryToFrameStrategies : family === portPairingId ? portPairingStrategies
+                              : (family === carryToFrameId || family === learnCarryToFrameId) ? carryToFrameStrategies : (family === portPairingId || family === learnPortPairingId) ? portPairingCardStrategies
                                 : (family === contrastControlsId || family === contrastProbeId) ? contrastControlsStrategies : family === displayCouplingId ? displayCouplingStrategies : family === framedSearchId ? framedSearchStrategies
                                   : family === glyphEditingId ? glyphEditingStrategies : (family === fieldIsolationId || family === learnFieldIsolationId) ? fieldIsolationStrategies
                                     : (family === directionalReceptionId || family === learnDirectionalReceptionId) ? directionalReceptionStrategies : (family === windowCoverageId || family === learnWindowCoverageId) ? windowCoverageStrategies
@@ -1036,7 +1036,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label: 'Separate indicator', box });
     }
   }
-  if (situationCard && family === portPairingId && Array.isArray(card?.pieces)) {
+  if (situationCard && (family === portPairingId || family === learnPortPairingId) && Array.isArray(card?.pieces)) {
     for (const part of card.pieces) {
       const box = bounds(part);
       if (box) subjects.push({ label: 'Piece with connection points', box });

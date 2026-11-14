@@ -34,7 +34,7 @@ import { facetGrowthId, learnFacetGrowthId } from './facet-growth.ts';
 import { chartRouteId, learnChartRouteId } from './chart-route.ts';
 import { populationPlacementId } from './population-placement.ts';
 import { carryToFrameId, learnCarryToFrameId } from './carry-to-frame.ts';
-import { portPairingId } from './port-pairing.ts';
+import { learnPortPairingId, portPairingId } from './port-pairing.ts';
 import { displayCouplingId } from './display-coupling.ts';
 import { contrastControlsId, contrastProbeId } from './contrast-controls.ts';
 import { framedSearchId } from './framed-search.ts';
@@ -94,7 +94,7 @@ export const standalonePlanningGroups = [
   { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId, learnSlotTransferId, visualPatternId, framedSearchId, feedbackTrialId, catalogueComparisonId, revealedExampleId, windowRelationId, layeredFitId, learnLayeredFitId] },
   { id: 'apply_learned_relations', families: [remoteSupportRouteId, learnRemoteAccessId, occurrenceRecallId, slotPermutationId, surfaceCopyId, chartRouteId, learnChartRouteId] },
   { id: 'construct_executable_program', families: [codeRouteId, programOriginId, learnProgramOriginId, glyphEditingId, windowCoverageId, learnWindowCoverageId, panelMatchingId] },
-  { id: 'fit_profiles_into_receivers', families: [profileTransferId, portPairingId, radialConnectionId, learnRadialConnectionId, framedReceptionId] },
+  { id: 'fit_profiles_into_receivers', families: [profileTransferId, portPairingId, learnPortPairingId, radialConnectionId, learnRadialConnectionId, framedReceptionId] },
   { id: 'preserve_ordered_team', families: [orderedReplenishmentId, learnOrderedReplenishmentId] },
   { id: 'fill_visible_partition', families: [previewPlacementId, populationPlacementId] },
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, matchExampleId, facetGrowthId, learnFacetGrowthId] },
