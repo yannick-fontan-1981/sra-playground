@@ -14,9 +14,15 @@ import { markedCollectionId } from './marked-collection.ts';
 import { slotTransferId } from './slot-transfer.ts';
 import { remoteSupportRouteId } from './remote-support-route.ts';
 import { occurrenceRecallId } from './occurrence-recall.ts';
+import { slotPermutationId } from './slot-permutation.ts';
 
-export const standalonePlanningFamilies: readonly string[] = Object.freeze([
-  fieldRepairId, orderedContactId, supportTransferId, subsetExperimentId, framedContactId, transportContactId,
-  bandAlignmentId, sharedArrivalId, outlineServiceId, labeledSequenceId, markedCollectionId, slotTransferId, remoteSupportRouteId,
-  occurrenceRecallId, cavityAccessId, publicInputExplorationId,
-]);
+export const standalonePlanningGroups = [
+  { id: 'repair_visible_field', families: [fieldRepairId, orderedContactId, supportTransferId] },
+  { id: 'inspect_candidate_relations', families: [subsetExperimentId, framedContactId, transportContactId] },
+  { id: 'coordinate_visible_motion', families: [bandAlignmentId, sharedArrivalId, outlineServiceId] },
+  { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId] },
+  { id: 'apply_learned_relations', families: [remoteSupportRouteId, occurrenceRecallId, slotPermutationId] },
+  { id: 'explore_available_inputs', families: [cavityAccessId, publicInputExplorationId] },
+] as const;
+
+export const standalonePlanningFamilies: readonly string[] = Object.freeze(standalonePlanningGroups.flatMap(group => group.families));
