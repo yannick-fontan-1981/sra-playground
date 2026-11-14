@@ -21,7 +21,7 @@ Le commit `d322509d` couvre les 100 premiers niveaux, attestés par les qualific
 
 Le passage au composant commun demande un rejeu avec retrait de la famille ciblée, les 100 niveaux 1 et les quatre parcours intégraux sous SIC seul. Comparer les gains, les commandes, les contradictions, l’autorité de décision et la durée par niveau. Une modification des commandes est acceptable lorsque les preuves et les résultats restent vérifiables. Garder la première divergence et le nombre de jeux où la primitive contribue réellement.
 
-Le chantier se déroule avant la campagne systématique des niveaux 2. La campagne des niveaux 3 suit celle des niveaux 2.
+Les niveaux 1 restent prioritaires. Le critère de passage à la campagne systématique des niveaux 2 est un rejeu des 100 niveaux 1 sous SIC seul, avec retrait de la famille habituelle et preuve du mécanisme de repli. La campagne des niveaux 3 suit celle des niveaux 2.
 
 ## Premiers retours
 
@@ -78,6 +78,10 @@ Avec retrait vérifié de la famille d’essais de sous-ensembles, DICO termine 
 
 Dans un essai de transfert sur LF52, le niveau 1 passe en 31 commandes avec la même famille retirée. L’apprentissage choisit trois commandes et l’exploration publique en choisit 28. La voie garde la priorité existante pour les parties normales en attendant une comparaison de coût.
 
-## Passage à la campagne des niveaux 2
+## Campagne de retrait sur le catalogue des niveaux 1
 
-Les quatre jeux de référence disposent d’une voie de résolution vérifiée avec leur famille habituelle retirée. Les 100 niveaux 1 et les quatre parties complètes repassent avec les mêmes commandes, retours et attributions dans la configuration normale du commit `07e5e687`. Le premier tour des niveaux 2 part de parties neuves. Il conserve les acquis du niveau 1 en cours de partie et vérifie l’autorité de chaque commande. Les essais de retrait sur le reste du catalogue prolongent le chantier de généralisation.
+Les quatre jeux de référence disposent d’une voie de résolution vérifiée avec leur famille habituelle retirée. Les 100 niveaux 1 et les quatre parties complètes repassent avec les mêmes commandes, retours et attributions dans la configuration normale du commit `07e5e687`.
+
+Le retrait systématique donne **6/100 niveaux 1 gagnés**. Ce chiffre mesure les victoires après retrait. La reconstruction par apprentissage se vérifie dans les retours et se compte séparément. L’[inventaire](sic-v8-family-inventory.md#retrait-de-la-famille-principale-sur-les-100-niveaux-1) rapporte les familles qui émettent des commandes et la diversité des familles retirées auxquelles elles succèdent.
+
+Les niveaux 2 déjà attestés restent dans le référentiel. La campagne suivante se concentre sur les arrêts sans proposition et sur les essais où l’exploration produit des retours mais ne trouve pas de plan. Les premiers lots doivent isoler le fait qui manque pour passer d’un retour d’exploration à une décision de résolution, faire porter chaque décision par une carte de primitive réévaluée après le retour, puis vérifier la même carte sur des jeux tenus à l’écart de sa mise au point. Chaque gain est ensuite rejoué avec retrait et en configuration normale.

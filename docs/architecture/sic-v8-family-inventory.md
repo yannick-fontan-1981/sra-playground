@@ -1,16 +1,16 @@
 # Familles actives dans SIC seul
 
-Une famille est un module de résolution enregistré dans le runtime. Elle lit une observation, propose une action ou un préfixe, vérifie les conditions avant exécution, interprète le retour et conserve les faits nécessaires aux prochaines décisions. L’agenda appelle les familles selon leur ordre et le garde commun autorise la commande. Le contrat est défini par [NativeFamily](../../src/logos-engine/v6-native-types.ts#L149) et le registre SIC seul se trouve dans [standalone-families.ts](../../src/sic/standalone-families.ts).
+Une famille est un module de résolution enregistré dans le runtime. Elle lit une observation, propose une action ou une courte suite de commandes, vérifie les conditions avant exécution, interprète le retour et conserve les faits nécessaires aux prochaines décisions. Elle peut s’abstenir si les preuves lui manquent. L’agenda consulte les familles selon son ordre de sélection et le garde commun autorise la commande. Le contrat est défini par [NativeFamily](../../src/logos-engine/v6-native-types.ts#L149) et le registre SIC seul se trouve dans [standalone-families.ts](../../src/sic/standalone-families.ts).
 
 Une primitive exprime un choix réutilisable à l’intérieur d’une famille. Par exemple, dans la voie d’apprentissage de HANO, P05 mesure l’effet d’un clic, P07 poursuit l’accès et P02 reprend une interaction confirmée. La famille fournit les faits et les actions admissibles pour chacun de ces choix. Elle emploie aussi les mesures de supports et les contraintes d’empilement. Les trois primitives sont réévaluées après chaque retour.
 
 ## Ce qu’un utilisateur peut créer
 
-L’atelier Stratégies permet d’éditer le besoin, la situation, les conditions et la priorité de règles qui classent les épisodes. D’autres réglages SIC modifient les paramètres de workflows existants. Déclarer une nouvelle famille exécutable demande aujourd’hui du TypeScript, son enregistrement dans le runtime et des essais sur les retours réels. Voir [l’atelier de stratégies](../../src/sic/strategy-editor.ts) et la [validation des packs](../../src/sic/active-recovery.ts).
+L’atelier Stratégies permet d’éditer le besoin, la situation, les conditions et la priorité de règles qui classent les épisodes. D’autres réglages SIC modifient les paramètres de workflows existants. Créer une nouvelle famille qui peut agir demande aujourd’hui du TypeScript, son enregistrement dans le runtime et des essais sur les retours réels. Voir [l’atelier de stratégies](../../src/sic/strategy-editor.ts), la [validation des packs](../../src/sic/active-recovery.ts) et le [point d’enregistrement](../../src/logos-engine/v6-native-runtime.ts#L2450).
 
-Un atelier de création de familles devrait pouvoir assembler des primitives déjà enregistrées à partir de conditions, de cibles observables et de vérifications configurables. Un effet nouveau demanderait encore une mesure ou un opérateur disponible dans le runtime. La qualification avec retrait permettrait ensuite de voir quelle famille choisit effectivement les commandes.
+Un futur atelier pourrait permettre d’écrire une carte par décision avec un mode de réflexion, un besoin, une situation observable, une primitive, une cible et un effet attendu. Après chaque retour, le runtime réévaluerait les cartes éligibles. Par exemple, une carte proposerait de tester une sélection quand la pièce contrôlée reste inconnue. Une autre proposerait de déposer cette pièce dès que la sélection est confirmée et qu’un support compatible est visible. L’utilisateur pourrait essayer ces cartes sur des parties enregistrées et comparer les commandes proposées et les effets observés. Une mesure ou un opérateur absent du runtime demanderait encore du code.
 
-## Familles observées après retrait
+## Essais ciblés après retrait
 
 Le banc enlève l’identifiant demandé du registre et de l’agenda avant l’initialisation de la partie. Le tableau donne les fournisseurs qui ont libéré des commandes. Une partie arrêtée à zéro niveau documente les stratégies essayées et leur limite dans le budget de l’essai. La référence AMZE est décrite dans le [journal SIC](sic-v8-validation.md).
 
@@ -40,7 +40,137 @@ Le banc enlève l’identifiant demandé du registre et de l’agenda avant l’
 | DICO | 07e5e687 | `sic_subset_experiment` | `sic_learn_scope_effects` × 71 | 6 / 6 |
 | LF52 | 07e5e687 | `sic_subset_experiment` | `sic_public_input_exploration` × 28, `sic_learn_scope_effects` × 3 | 1 / 1 |
 
-Les essais couvrent 18 jeux distincts. Les autres jeux restent à mesurer avec retrait.
+Ces essais couvrent 18 jeux distincts. Les retraits y ciblent des familles précises et certains essais poursuivent la partie sur plusieurs niveaux. Le tableau du catalogue applique le même critère de retrait et le même budget à chaque niveau 1.
+
+## Retrait de la famille principale sur les 100 niveaux 1
+
+Campagne SIC seul sur le runtime de `07e5e687`. Pour chaque jeu, le banc prend la famille qui a émis le plus de commandes dans le rejeu de référence, la retire du registre et de l’agenda avant de lancer une nouvelle partie, puis laisse jusqu’à 40 commandes pour gagner le niveau 1. Les 100 références gagnent en configuration normale. Les reçus de toutes les commandes du retrait les attribuent à SIC seul. Plusieurs familles peuvent agir dans une même partie. Les effectifs ci-dessous comptent des jeux distincts pour chaque famille.
+
+**Bilan du retrait : 6/100 niveaux gagnés**, 73 essais au budget de 40 commandes, 20 arrêts faute de nouvelle proposition et une défaite. Quinze essais se sont arrêtés sans aucune commande. Le tableau distingue la fréquence de repli, la diversité des familles retirées et le succès observé. Une victoire avec plusieurs familles indique leur participation au parcours. Elle ne prouve pas que chacune était nécessaire.
+
+| Famille de repli | Jeux où elle agit | Familles retirées distinctes | Victoires auxquelles elle participe | Victoires où elle émet toutes les commandes |
+| --- | ---: | ---: | ---: | ---: |
+| `sic_public_input_exploration` | 72 | 71 | 2 | 1 |
+| `sic_cavity_access` | 18 | 18 | 0 | 0 |
+| `sic_coupled_motion` | 6 | 6 | 0 | 0 |
+| `sic_field_repair` | 2 | 2 | 1 | 0 |
+| `sic_learn_correspondence` | 2 | 1 | 2 | 2 |
+| `sic_learn_scope_effects` | 2 | 2 | 1 | 1 |
+| `sic_framed_contact` | 1 | 1 | 0 | 0 |
+| `sic_framed_reception` | 1 | 1 | 0 | 0 |
+| `sic_learn_support_moves` | 1 | 1 | 1 | 1 |
+| `sic_subset_experiment` | 1 | 1 | 0 | 0 |
+
+DNOI et SYME transfèrent la même famille d’apprentissage sur deux jeux et six niveaux par jeu. HANO réévalue P05, P07 et P02 sur les retours de sélection et de dépôt. DICO alterne P05 et P02 pour mesurer puis réutiliser un test de groupe. Les gains d’AS66 et de TRIA incluent l’exploration des commandes publiques. Les familles d’apprentissage utilisent encore des mesures de scène codées dans le runtime. Ces résultats attestent des transferts observés sur ce catalogue.
+
+La famille d’exploration est elle-même la famille principale de 16 jeux. LF52 s’arrête sans commande lorsqu’on la retire. Dans l’essai ciblé qui retire plutôt `sic_subset_experiment`, l’exploration et `sic_learn_scope_effects` gagnent ensemble en 31 commandes, ce qui confirme un deuxième jeu pour l’apprentissage des effets de groupe. Deux références normales dépassent 40 commandes, FUIT et GABA. Avec un budget d’essai élargi à 60, le retrait s’arrête respectivement après 39 et 44 commandes sans gain. L’exploration a son propre budget interne.
+
+### Résultats par jeu
+
+Les fournisseurs sont présentés dans leur ordre de première intervention, avec le nombre total de commandes de chacun. Le tableau compte le retrait de la famille principale et le résultat de ce seul retrait pour chaque jeu. Les essais ciblés ci-dessus documentent d’autres retraits.
+
+| Jeu | Famille retirée | Familles intervenues et commandes | Résultat |
+| --- | --- | --- | --- |
+| AMZE | `sic_indicated_jump` | `sic_public_input_exploration` × 40 | Budget atteint |
+| AR25 | `sic_reflected_placement` | `sic_public_input_exploration` × 40 | Budget atteint |
+| AS66 | `sic_cavity_access` | `sic_public_input_exploration` × 11 | **Gagné** |
+| BP35 | `sic_excavate_descent` | `sic_public_input_exploration` × 40 | Budget atteint |
+| CASC | `sic_gated_cascade` | `sic_public_input_exploration` × 40 | Budget atteint |
+| CATL | `sic_labeled_sequence` | `sic_public_input_exploration` × 40 | Budget atteint |
+| CATR | `sic_public_input_exploration` | Aucune commande | Aucune proposition restante |
+| CAVA | `sic_highlighted_route` | `sic_public_input_exploration` × 40 | Budget atteint |
+| CD82 | `sic_surface_copy` | `sic_public_input_exploration` × 40 | Budget atteint |
+| CGWL | `sic_carry_to_frame` | `sic_public_input_exploration` × 40 | Budget atteint |
+| CLRS | `sic_layered_fit` | `sic_cavity_access` × 4, `sic_public_input_exploration` × 36 | Budget atteint |
+| CN04 | `sic_port_pairing` | `sic_cavity_access` × 40 | Budget atteint |
+| COLM | `sic_queued_placement` | `sic_public_input_exploration` × 40 | Budget atteint |
+| COMB | `sic_public_input_exploration` | Aucune commande | Aucune proposition restante |
+| CONN | `sic_public_input_exploration` | Aucune commande | Aucune proposition restante |
+| CRAF | `sic_symbol_contribution` | `sic_public_input_exploration` × 30 | Aucune proposition restante |
+| CWSE | `sic_directional_reception` | `sic_public_input_exploration` × 40 | Budget atteint |
+| DAME | `sic_invited_capture` | `sic_public_input_exploration` × 40 | Budget atteint |
+| DC22 | `sic_remote_support_route` | `sic_cavity_access` × 40 | Budget atteint |
+| DICO | `sic_subset_experiment` | `sic_learn_scope_effects` × 5 | **Gagné** |
+| DNOI | `sic_field_repair` | `sic_learn_correspondence` × 3 | **Gagné** |
+| ELAS | `sic_public_input_exploration` | Aucune commande | Aucune proposition restante |
+| ESCT | `sic_outline_service` | `sic_cavity_access` × 40 | Budget atteint |
+| ETAG | `sic_switched_surface` | `sic_cavity_access` × 4, `sic_public_input_exploration` × 36 | Budget atteint |
+| EVAS | `sic_lit_route` | `sic_public_input_exploration` × 40 | Budget atteint |
+| FITE | `sic_public_input_exploration` | Aucune commande | Aucune proposition restante |
+| FOGW | `sic_reception_access` | `sic_cavity_access` × 39, `sic_coupled_motion` × 1 | Budget atteint |
+| FT09 | `sic_window_relation` | `sic_public_input_exploration` × 40 | Budget atteint |
+| FUIT | `sic_reactive_target` | `sic_public_input_exploration` × 39 | Aucune proposition restante |
+| G50T | `sic_replay_access` | `sic_public_input_exploration` × 40 | Budget atteint |
+| GABA | `sic_pivot_cargo` | `sic_coupled_motion` × 4, `sic_public_input_exploration` × 36 | Budget atteint |
+| GARE | `sic_framed_reception` | `sic_public_input_exploration` × 40 | Budget atteint |
+| GIGO | `sic_nested_passage` | `sic_public_input_exploration` × 40 | Budget atteint |
+| GLOB | `sic_program_origin` | `sic_public_input_exploration` × 31 | Aucune proposition restante |
+| GMAP | `sic_chart_route` | `sic_public_input_exploration` × 40 | Budget atteint |
+| GORI | `sic_animation_contact` | `sic_public_input_exploration` × 40 | Budget atteint |
+| GRAV | `sic_public_input_exploration` | Aucune commande | Aucune proposition restante |
+| GRIL | `sic_catalogue_comparison` | `sic_public_input_exploration` × 40 | Budget atteint |
+| HANO | `sic_ordered_support_transfer` | `sic_learn_support_moves` × 6 | **Gagné** |
+| HOLE | `sic_legend_recolor` | `sic_public_input_exploration` × 40 | Budget atteint |
+| HPDL | `sic_window_coverage` | `sic_cavity_access` × 30, `sic_public_input_exploration` × 10 | Budget atteint |
+| ISOS | `sic_facet_growth` | `sic_public_input_exploration` × 40 | Budget atteint |
+| KA59 | `sic_translate_coupled_pieces` | `sic_public_input_exploration` × 36, `sic_coupled_motion` × 4 | Budget atteint |
+| KATA | `sic_preview_placement` | `sic_public_input_exploration` × 40 | Budget atteint |
+| KEYD | `sic_inventory_access` | `sic_public_input_exploration` × 40 | Budget atteint |
+| KLOT | `sic_move_masked_pieces` | `sic_public_input_exploration` × 40 | Budget atteint |
+| LF52 | `sic_public_input_exploration` | Aucune commande | Aucune proposition restante |
+| LIFE | `sic_material_assembly` | `sic_public_input_exploration` × 40 | Budget atteint |
+| LKEY | `sic_profile_transfer` | `sic_framed_reception` × 3, `sic_public_input_exploration` × 37 | Budget atteint |
+| LOGI | `sic_display_coupling` | `sic_public_input_exploration` × 40 | Budget atteint |
+| LP85 | `sic_slot_permutation` | `sic_public_input_exploration` × 40 | Budget atteint |
+| LS19 | `sic_framed_contact` | `sic_coupled_motion` × 4, `sic_cavity_access` × 36 | Budget atteint |
+| LS20 | `sic_framed_contact` | `sic_public_input_exploration` × 40 | Budget atteint |
+| M0R0 | `sic_coupled_motion` | `sic_public_input_exploration` × 40 | Budget atteint |
+| MEMO | `sic_occurrence_recall` | `sic_public_input_exploration` × 40 | Budget atteint |
+| MIND | `sic_feedback_trial` | `sic_public_input_exploration` × 40 | Budget atteint |
+| MOTO | `sic_arrange_turn_posts` | `sic_public_input_exploration` × 35 | Aucune proposition restante |
+| ONDE | `sic_public_input_exploration` | Aucune commande | Aucune proposition restante |
+| PIPE | `sic_radial_connection` | `sic_cavity_access` × 4, `sic_public_input_exploration` × 36 | Budget atteint |
+| POLA | `sic_public_input_exploration` | Aucune commande | Aucune proposition restante |
+| PORT | `sic_paired_passage` | `sic_cavity_access` × 40 | Budget atteint |
+| PRTL | `sic_link_openings` | `sic_public_input_exploration` × 40 | Budget atteint |
+| R11L | `sic_linked_midpoint` | `sic_public_input_exploration` × 40 | Budget atteint |
+| RE86 | `sic_marker_coverage` | `sic_public_input_exploration` × 40 | Budget atteint |
+| RECR | `sic_ordered_replenishment` | `sic_public_input_exploration` × 40 | Budget atteint |
+| REGN | `sic_public_input_exploration` | Aucune commande | Aucune proposition restante |
+| REWI | `sic_framed_search` | `sic_cavity_access` × 2, `sic_public_input_exploration` × 38 | Budget atteint |
+| RSWP | `sic_panel_matching` | `sic_public_input_exploration` × 40 | Budget atteint |
+| S5I5 | `sic_marked_gauge` | `sic_public_input_exploration` × 40 | Budget atteint |
+| SB26 | `sic_slot_transfer` | `sic_public_input_exploration` × 40 | Budget atteint |
+| SC25 | `sic_reproduce_cue` | `sic_cavity_access` × 4, `sic_public_input_exploration` × 30, `sic_field_repair` × 6 | Budget atteint |
+| SELE | `sic_public_input_exploration` | Aucune commande | Aucune proposition restante |
+| SEQN | `sic_public_input_exploration` | Aucune commande | Aucune proposition restante |
+| SERI | `sic_visual_pattern` | `sic_public_input_exploration` × 36, `sic_coupled_motion` × 4 | Budget atteint |
+| SIGN | `sic_marked_lattice` | `sic_public_input_exploration` × 40 | Budget atteint |
+| SK48 | `sic_ordered_contact` | `sic_public_input_exploration` × 40 | Budget atteint |
+| SKBN | `sic_transport_contact` | `sic_cavity_access` × 40 | Budget atteint |
+| SMLP | `sic_shared_arrival` | `sic_public_input_exploration` × 40 | Budget atteint |
+| SNAR | `sic_navigate_revealed_grid` | `sic_public_input_exploration` × 40 | Budget atteint |
+| SP80 | `sic_branch_alignment` | `sic_cavity_access` × 4, `sic_public_input_exploration` × 26 | Défaite |
+| SPOR | `sic_public_input_exploration` | Aucune commande | Aucune proposition restante |
+| STCK | `sic_marked_collection` | `sic_public_input_exploration` × 8, `sic_subset_experiment` × 22, `sic_learn_scope_effects` × 10 | Budget atteint |
+| SU15 | `sic_point_reach` | `sic_public_input_exploration` × 40 | Budget atteint |
+| SWCH | `sic_seated_contact` | `sic_public_input_exploration` × 40 | Budget atteint |
+| SYME | `sic_field_repair` | `sic_learn_correspondence` × 9 | **Gagné** |
+| TEQU | `sic_staged_marks` | `sic_coupled_motion` × 4, `sic_public_input_exploration` × 36 | Budget atteint |
+| THER | `sic_public_input_exploration` | `sic_cavity_access` × 4 | Aucune proposition restante |
+| TICT | `sic_public_input_exploration` | Aucune commande | Aucune proposition restante |
+| TN36 | `sic_code_route` | `sic_public_input_exploration` × 40 | Budget atteint |
+| TR87 | `sic_glyph_editing` | `sic_framed_contact` × 4, `sic_public_input_exploration` × 36 | Budget atteint |
+| TRCP | `sic_paired_channels` | `sic_public_input_exploration` × 40 | Budget atteint |
+| TRIA | `sic_cavity_access` | `sic_field_repair` × 1, `sic_public_input_exploration` × 38 | **Gagné** |
+| TU93 | `sic_material_route` | `sic_cavity_access` × 40 | Budget atteint |
+| UPST | `sic_public_input_exploration` | Aucune commande | Aucune proposition restante |
+| VALV | `sic_field_isolation` | `sic_public_input_exploration` × 40 | Budget atteint |
+| VC33 | `sic_band_alignment` | `sic_public_input_exploration` × 40 | Budget atteint |
+| VOIS | `sic_population_placement` | `sic_public_input_exploration` × 40 | Budget atteint |
+| WA30 | `sic_oriented_delivery` | `sic_public_input_exploration` × 40 | Budget atteint |
+| WEAV | `sic_crossing_rows` | `sic_cavity_access` × 19, `sic_public_input_exploration` × 21 | Budget atteint |
+| ZIPP | `sic_trace_coverage` | `sic_public_input_exploration` × 39, `sic_cavity_access` × 1 | Budget atteint |
 
 ## Familles observées dans les quatre parties complètes
 
