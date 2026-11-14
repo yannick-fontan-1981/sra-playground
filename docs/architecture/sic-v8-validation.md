@@ -1,0 +1,18 @@
+# Critères de validation de SIC V8
+
+Le plan V8 de référence est conservé dans `docs/architecture/v8-human-configurable-intelligence.md` au commit `b23381aaddc65e152be68315fdecf662f74f34d0`. Le tableau suit les conditions de déclaration de sa phase V8-12. Les observations historiques figurent dans le [journal SIC](sic-v8-control-effect-shadow.md) et les démarches à migrer dans la [matrice des 98 démarches](sic-v8-composition-des-98-strategies.md).
+
+| Condition de déclaration | État du lot `83474c04` | Preuve de clôture attendue |
+| --- | --- | --- |
+| L’agenda est l’autorité principale | Actif par défaut dans le Playground. Les workflows SRC édités peuvent reprendre la sélection. | Rejeu des voies restantes, avec auteur du choix enregistré à chaque libération. |
+| Les stratégies émettent les objectifs | Le plan libéré conserve la stratégie et le but qu’elle a déclaré. Des propositions natives fournissent encore le but global ou leur question sous l’ancien contrat. | Vérifier l’émission et la filiation des objectifs sur toutes les voies actives. |
+| Les plans portent toutes les actions | Une commande libérée a un reçu de plan. La boucle commune contrôle les retours, la garde et la clôture. | Audit des traces de toutes les voies, y compris reprises et changements de niveau. |
+| Les besoins sont canoniques et persistants | Le registre persiste les besoins migrés et leurs dépendances. | Vérifier révision, restauration, expiration et déduplication pour chaque besoin de la liste finale. |
+| Les situations sont révisables et fondées sur des preuves | Les stratégies migrées utilisent des faits liés aux observations. Les anciens fournisseurs gardent leurs conditions locales. | Vérifier qu’une observation nouvelle révise les faits concernés sans recréer le besoin et que l’explication conserve le témoin. |
+| Chaque besoin polymorphe a un graphe qualifié | La récupération, l’exploration et la vue ont des graphes. La composition des autres démarches est proposée. | Identifier chaque besoin polymorphe et rejouer ses conditions, replis et refus. |
+| Les chevauchements et trous sont contrôlés | La couverture des graphes actuels et les règles toujours devancées sont visibles. | Auditer tous les graphes actifs et examiner les trous, recouvrements et dépendances avec des retours réels. |
+| L’interface expose les cinq perspectives | Perceptions, Informations, Stratégies, Objectifs et Plans d’action sont présentes. | Vérifier les cinq perspectives sur les familles migrées, y compris après une contradiction. |
+| L’atelier produit une capacité utile sans code spécifique | Une règle d’exploration locale peut être créée, sauvegardée et rejouée. Les packs de réglages sont vérifiables par signature. | Conserver un exemple complet et mesurer ses effets sur les jeux témoins après la migration. |
+| Les principales familles ont migré | La matrice relie les choix observés à des primitives génériques. P04, P05 et P11 ont des éléments communs intégrés. | Faire porter les choix des familles principales par des graphes SIC et comparer chaque voie à sa référence. |
+| Les performances restent conformes | La fenêtre précédente qualifie `90d002a4` face à 0.65. Le code actuel demande une mesure propre. | Qualifier séparément STCK et SMLP sous +10 %, sur le commit à déclarer, avec commandes et résultats identiques. |
+| Les anciennes voies directes sont inventoriées | Les familles enregistrées et les épisodes exécutés sont inspectables. | Lister chaque voie directe conservée, sa condition d’entrée, son autorité et le cas qui l’exerce. |

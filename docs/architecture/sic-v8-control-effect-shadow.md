@@ -233,6 +233,8 @@ Les stratégies actives de récupération, d’exploration, de vue et d’inform
 
 ### Qualification de l’arbitrage SIC
 
+Le [tableau de validation V8](sic-v8-validation.md) relie les critères de déclaration aux preuves acquises et aux vérifications restantes.
+
 Le navigateur a comparé quinze sessions natives, shadow et actives avec le moteur issu de `c384ca1d`. Les commandes, les empreintes des retours publics et le résultat de chaque jeu concordent. SK48 atteint le niveau 2 en 19 actions, AS66 termine trois niveaux en 19, SYME un niveau en 9 et LKEY trois niveaux en 44. CASC conserve son arrêt `frontier_unknown` après une commande. Le choix dans une stratégie réglable couvre 17 des 92 commandes. Les 92 passent par l’arbitrage entre familles lorsque ce réglage est actif. Une édition native du workflow continue de reprendre la main à la frontière suivante. La suite complète de `c384ca1d` passe 16 129 tests sur 16 129.
 
 Le banc expérimental a parcouru 137 commandes au total sur LS20, AR25, LP85, TR87, CATR et SMLP. Aucun épisode n’a sélectionné une expérience du groupe SIC `information_goal` dans ces limites. Les preuves de classement, de préservation de l’attention et de traitement des retours proviennent des cas contrôlés de référence. Une activation en partie réelle reste à observer.
