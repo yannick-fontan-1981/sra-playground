@@ -1,6 +1,6 @@
 import { measureOpenCavityStopGeometry, rectangularOpenComplements } from '../logos-engine/v6-cavity-measurements.ts';
 import { supportParts, supportResidualCorrespondences } from '../logos-engine/v6-support-measurements.ts';
-import type { NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 import { sicNeedId } from './need-identity.ts';
 
@@ -13,11 +13,44 @@ const graph = compileStrategyGraph({ id: 'understand_access_to_open_cavity', ver
     learn_slide_control: [{ fact: 'untestedDirection', expected: true, label: 'An available direction remains unmeasured' }],
   },
 }, ['conditionalRoute', 'untestedDirection']);
+// Directions and animation offsets use row/column order.
 type Displacement = { action: string; delta: NativePoint; ref: string };
+type Stop = { claim_ref: string; local_row_pitch: number; local_column_pitch: number; revisable_floor_value: number; stop_surface_values: number[] };
 type State = { epoch: number; body: readonly [number, number, number] | null; floor: number | null;
-  directions: Record<string, Displacement>; recent: Displacement | null; tried: string[]; packet: readonly NativeRows[] };
+  directions: Record<string, Displacement>; recent: Displacement | null; tried: string[]; packet: readonly NativeRows[]; stop: Stop | null };
 type Proposal = NativeProposal & { key: string; needId: string };
-const empty: State = { epoch: 0, body: null, floor: null, directions: {}, recent: null, tried: [], packet: [] };
+const empty: State = { epoch: 0, body: null, floor: null, directions: {}, recent: null, tried: [], packet: [], stop: null };
+
+function matchingBodies(rows: NativeRows, [color, width, height]: NonNullable<State['body']>) {
+  return supportParts(rows).filter(part => part.area === width * height && part.value === color
+    && part.bbox.width === width && part.bbox.height === height);
+}
+
+export function animationSlideDirection(positions: readonly NativePoint[], width: number, height: number): NativePoint | null {
+  const directions = new Map<string, NativePoint>();
+  for (const [i, [row, column]] of positions.slice(1).entries()) {
+    const [previousRow, previousColumn] = positions[i]!;
+    const dr = row - previousRow, dc = column - previousColumn;
+    if ((dr === 0) === (dc === 0) || Math.abs(dr) > height || Math.abs(dc) > width) continue;
+    const direction = [Math.sign(dr), Math.sign(dc)] as const;
+    directions.set(direction.join(','), direction);
+  }
+  return directions.size === 1 ? [...directions.values()][0]! : null;
+}
+
+function measureAccess(state: State, observation: NativeObservation, rows: NativeRows, bbox: NativeRecord) {
+  const options = observation.available_action_refs.filter(action => /^ACTION[1-4]$/.test(action));
+  return measureOpenCavityStopGeometry({
+    frame: { rows }, components: { components: supportParts(rows) }, available_action_refs: observation.available_action_refs,
+    current_observed_frame: { rows }, current_observation_frame_ref: observation.observation_ref,
+    input_aligned_entity_bboxes: [bbox], current_input_aligned_underlay_values: [state.floor],
+    interface_action_translation_deltas: Object.values(state.directions).map(d => [d.action, ...d.delta]),
+    known_action_translation_deltas: state.recent ? [[state.recent.action, ...state.recent.delta]] : [],
+    last_action_ref: state.recent?.action, canonical_surface_stop_facts: state.stop ? [state.stop] : [],
+    canonical_screen_wrap_facts: [], latest_ordered_action_frames: state.packet.map(frame => ({ rows: frame })),
+    route_generation_policy: { open_cavity_action_order: options, open_cavity_search_state_bound: 256 },
+  });
+}
 
 export function createSicCavityAccess(): NativeFamily<Proposal> {
   let state: State = structuredClone(empty);
@@ -31,20 +64,10 @@ export function createSicCavityAccess(): NativeFamily<Proposal> {
       if (!openings.some(box => components.some(part => part.area === box.width * box.height
         && part.bbox.width === box.width && part.bbox.height === box.height))) return null;
       const local = state.epoch === observation.level_epoch ? state : empty;
-      const body = local.body && components.filter(part => part.area === local.body![1] * local.body![2]
-        && part.value === local.body![0] && part.bbox.width === local.body![1] && part.bbox.height === local.body![2]);
+      const body = local.body && matchingBodies(rows, local.body);
       const ref = observation.observation_ref;
       const directions = Object.values(local.directions);
-      const measured = body?.length === 1 && local.floor !== null ? measureOpenCavityStopGeometry({
-        frame: { rows }, components: { components }, available_action_refs: observation.available_action_refs,
-        current_observed_frame: { rows }, current_observation_frame_ref: ref,
-        input_aligned_entity_bboxes: [body[0]!.bbox], current_input_aligned_underlay_values: [local.floor],
-        interface_action_translation_deltas: directions.map(d => [d.action, ...d.delta.map(Math.sign)]),
-        known_action_translation_deltas: local.recent ? [[local.recent.action, ...local.recent.delta]] : [],
-        last_action_ref: local.recent?.action, canonical_surface_stop_facts: [], canonical_screen_wrap_facts: [],
-        latest_ordered_action_frames: local.packet.map(rows => ({ rows })),
-        route_generation_policy: { open_cavity_action_order: options.map(action => action.action_ref), open_cavity_search_state_bound: 256 },
-      }) : null;
+      const measured = body?.length === 1 && local.floor !== null ? measureAccess(local, observation, rows, body[0]!.bbox) : null;
       const path: string[] = measured?.open_cavity_conditional_route_action_refs?.length ? measured.open_cavity_conditional_route_action_refs
         : measured?.open_cavity_next_stop_equals_core ? measured.open_cavity_nonreturn_first_action_refs ?? [] : [];
       const key = (action: string) => `${observation.frame_hash}:${action}`;
@@ -54,7 +77,7 @@ export function createSicCavityAccess(): NativeFamily<Proposal> {
         ?? (body?.length === 1 && local.floor !== null
           ? options.find(command => !Object.hasOwn(local.directions, command.action_ref) && !local.tried.includes(key(command.action_ref)))
           : undefined);
-      const proof: [string, ...string[]] = [ref, ...new Set(directions.map(direction => direction.ref))];
+      const proof: [string, ...string[]] = [ref, ...new Set([...directions.map(direction => direction.ref), ...(local.stop ? [local.stop.claim_ref] : [])])];
       const { selected } = resolveStrategyGraph({ graph, mode: 'active', facts: {
         conditionalRoute: { value: !!known, evidence: proof }, untestedDirection: { value: !!untested, evidence: [ref] },
       }, planners: { follow_measured_slide: () => known ?? null, learn_slide_control: () => untested ?? null } });
@@ -102,9 +125,21 @@ export function createSicCavityAccess(): NativeFamily<Proposal> {
       for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) floor.add(second[y]![x]!);
       if (floor.size === 1 && !floor.has(to.palette_value)) state.floor = [...floor][0]!;
       state.recent = { action: command.action_ref, delta, ref: after.observation_ref };
-      state.directions[command.action_ref] = state.recent;
       state.packet = [first, ...(frames.length ? frames : [second])];
-      return { events: [{ kind: 'sic_observed_slide', command: command.action_ref, delta, observation: after.observation_ref }] };
+      const [, width, height] = state.body;
+      const positions: NativePoint[] = state.packet.flatMap(frame => {
+        const bodies = matchingBodies(frame, state.body!);
+        return bodies.length === 1 ? [[bodies[0]!.bbox.top, bodies[0]!.bbox.left]] : [];
+      });
+      const direction = animationSlideDirection(positions, width, height);
+      if (direction) state.directions[command.action_ref] = { ...state.recent, delta: direction };
+      const body = matchingBodies(second, state.body);
+      const checked = body.length === 1 && state.floor !== null ? measureAccess(state, after, second, body[0]!.bbox) : null;
+      if (checked?.open_cavity_observed_first_stop_matches && state.floor !== null && !state.stop) {
+        state.stop = { claim_ref: after.observation_ref, local_row_pitch: height, local_column_pitch: width,
+          revisable_floor_value: state.floor, stop_surface_values: checked.open_cavity_stop_surface_values ?? [] };
+      }
+      return { events: [{ kind: 'sic_observed_slide', command: command.action_ref, delta, direction, observation: after.observation_ref }] };
     },
     state: () => ({ ...state }),
     restore(value: NativeRecord) { state = structuredClone(value as State); },
