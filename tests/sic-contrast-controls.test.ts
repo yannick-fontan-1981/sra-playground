@@ -12,13 +12,15 @@ test('an edited SIC workflow changes which observed candidate it selects', async
   const verification = await store.registerProgram(contrastReturnWorkflow, contrastControlOperations, original);
   const options = [{ index: 1, separation: 20 }, { index: 2, separation: 40 }];
   const situation = { mode: 'exploration', need: contrastNeed, pointOnChangedControl: true,
-    previousControlsUniform: true, changedControls: 1, changedIndicators: 2, options };
+    previousControlsUniform: true, changedControls: 1, changedIndicators: 2, initialProbe: false, options };
   const first = await program.run({ situation });
   const expected = { need: contrastNeed, primitive: contrastPrimitive, target: options[1], check: contrastCheck, minimumChanges: 1 };
   assert.deepEqual(first.result, expected);
   assert.equal(first.receipt.edited, false);
-  assert.equal((await program.run({ situation: { ...situation, mode: 'solving' } })).result, null);
-  assert.equal((await program.run({ situation: { ...situation, changedIndicators: 1 } })).result, null);
+  assert.equal((await program.run({ situation: { ...situation, mode: 'unknown' } })).result, null);
+  assert.equal((await program.run({ situation: { ...situation, changedIndicators: 0 } })).result, null);
+  assert.deepEqual((await program.run({ situation: { ...situation, mode: 'solving', previousControlsUniform: false, continuing: true,
+    changedIndicators: 1 } })).result, expected);
   const outcome = { check: contrastCheck, minimumChanges: expected.minimumChanges };
   for (const [changes, verdict] of [[0, false], [1, true], [null, null]] as const) {
     assert.equal((await verification.run({ outcome: { ...outcome, changes } })).result, verdict);

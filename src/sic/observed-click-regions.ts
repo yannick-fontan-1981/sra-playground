@@ -15,6 +15,18 @@ export type ClickMarkerEvidence = Omit<ClickRegionEvidence, 'before' | 'after'> 
   readonly value: number;
 };
 
+export type ClickRegionChanges = Omit<ClickRegionEvidence, 'before' | 'after'> & {
+  readonly changed: readonly boolean[];
+  readonly beforeUniform: readonly (number | null)[];
+};
+
+export function regionChanged(before: NativeRows, after: NativeRows, [left, top, right, bottom]: NativeBox) {
+  for (let y = top; y <= bottom; y++) for (let x = left; x <= right; x++) {
+    if (before[y]?.[x] !== after[y]?.[x]) return true;
+  }
+  return false;
+}
+
 export function singleChangedPoint(before: NativeRows, after: NativeRows): NativePoint | null {
   let point: NativePoint | null = null;
   for (let y = 0; y < after.length; y++) for (let x = 0; x < after[y]!.length; x++) {

@@ -134,6 +134,8 @@ export interface NativeExecution {
   readonly readDirectionalMotion?: () => import('../sic/observed-translation.ts').DirectionalMotion | null;
   readonly readClickFields?: () => import('../sic/field-isolation.ts').ClickFieldEvidence | null;
   readonly readClickRegions?: (boxes: readonly NativeBox[]) => import('../sic/observed-click-regions.ts').ClickRegionEvidence | null;
+  readonly readClickRegionChanges?: (boxes: readonly NativeBox[]) => import('../sic/observed-click-regions.ts').ClickRegionChanges | null;
+  readonly readPriorFramedRows?: () => NativeBox[][] | null;
   readonly readClickMarker?: () => import('../sic/observed-click-regions.ts').ClickMarkerEvidence | null;
   readonly readWorkspaceClick?: (workspace: NativeBox) => import('../sic/workspace-click.ts').WorkspaceClickEvidence | null;
   readonly readAnimatedCells?: (points: readonly NativePoint[]) => import('../sic/observed-animation.ts').AnimatedCellEvidence | null;

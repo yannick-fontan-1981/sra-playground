@@ -35,7 +35,7 @@ import { chartRouteId, chartRouteStrategies } from './chart-route.ts';
 import { populationPlacementId, populationPlacementStrategies } from './population-placement.ts';
 import { carryToFrameId, carryToFrameStrategies } from './carry-to-frame.ts';
 import { portPairingId, portPairingStrategies } from './port-pairing.ts';
-import { contrastControlsId, contrastControlsStrategies } from './contrast-controls.ts';
+import { contrastControlsId, contrastControlsStrategies, contrastProbeId } from './contrast-controls.ts';
 import { displayCouplingId, displayCouplingStrategies } from './display-coupling.ts';
 import { framedSearchId, framedSearchStrategies } from './framed-search.ts';
 import { framedReceptionId, framedReceptionStrategies } from './framed-reception.ts';
@@ -487,7 +487,7 @@ export function readNativeResolution(agent: {
                           : family === visualPatternId ? visualPatternStrategies : (family === facetGrowthId || family === learnFacetGrowthId) ? facetGrowthStrategies
                             : family === chartRouteId ? chartRouteStrategies : family === populationPlacementId ? populationPlacementStrategies
                               : family === carryToFrameId ? carryToFrameStrategies : family === portPairingId ? portPairingStrategies
-                                : family === contrastControlsId ? contrastControlsStrategies : family === displayCouplingId ? displayCouplingStrategies : family === framedSearchId ? framedSearchStrategies
+                                : (family === contrastControlsId || family === contrastProbeId) ? contrastControlsStrategies : family === displayCouplingId ? displayCouplingStrategies : family === framedSearchId ? framedSearchStrategies
                                   : family === glyphEditingId ? glyphEditingStrategies : (family === fieldIsolationId || family === learnFieldIsolationId) ? fieldIsolationStrategies
                                     : family === directionalReceptionId ? directionalReceptionStrategies : family === windowCoverageId ? windowCoverageStrategies
                                       : family === panelMatchingId ? panelMatchingStrategies : family === crossingRowsId ? crossingRowsStrategies
@@ -1019,7 +1019,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && (family === displayCouplingId || family === contrastControlsId)) {
+  if (situationCard && (family === displayCouplingId || family === contrastControlsId || family === contrastProbeId)) {
     const control = bounds(card?.control);
     if (control) subjects.push({ label: 'Switch tested', box: control });
     const source = bounds(card?.source);

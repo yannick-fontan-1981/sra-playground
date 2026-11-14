@@ -26,12 +26,21 @@ export async function contrastControlsModule(): Promise<CompiledModule> {
     steps: [{ id: step, statements: [
       { id: step + '.eligible', kind: 'IF', expression: call('sic.matches_observed_situation', {
         situation: reference('situation'), need: literal(contrastNeed),
-        modes: list(literal('exploration'), literal('assimilation')), minimumRemoteChanges: integer(2),
+        modes: list(literal('exploration'), literal('assimilation'), literal('solving')), minimumRemoteChanges: integer(1),
       }), body: [
         { id: step + '.contrast', kind: 'STOP', expression: call('sic.bind_candidate_experiment', {
           need: literal(contrastNeed), primitive: literal(contrastPrimitive),
           target: call('sic.rank_observed_candidates', {
             options: reference('situation.options'), measure: literal('separation'), order: literal('largest'),
+          }),
+          check: literal(contrastCheck), minimumChanges: integer(1),
+        }) },
+      ] },
+      { id: step + '.initial_probe', kind: 'IF', expression: reference('situation.initialProbe'), body: [
+        { id: step + '.sample', kind: 'STOP', expression: call('sic.bind_candidate_experiment', {
+          need: literal(contrastNeed), primitive: literal(contrastPrimitive),
+          target: call('sic.rank_observed_candidates', {
+            options: reference('situation.options'), measure: literal('separation'), order: literal('smallest'),
           }),
           check: literal(contrastCheck), minimumChanges: integer(1),
         }) },
@@ -70,8 +79,8 @@ const rankObservedCandidates: Primitive = ({ options, measure, order }): JsonVal
 };
 
 const matchesObservedSituation: Primitive = ({ situation, need, modes, minimumRemoteChanges }) =>
-  isJsonObject(situation) && situation.need === need && Array.isArray(modes) && modes.includes(situation.mode ?? null)
-  && situation.pointOnChangedControl === true && situation.previousControlsUniform === true
+  isJsonObject(situation) && situation.initialProbe !== true && situation.need === need && Array.isArray(modes) && modes.includes(situation.mode ?? null)
+  && situation.pointOnChangedControl === true && (situation.previousControlsUniform === true || situation.continuing === true)
   && situation.changedControls === 1 && typeof situation.changedIndicators === 'number'
   && typeof minimumRemoteChanges === 'number' && situation.changedIndicators >= minimumRemoteChanges;
 
