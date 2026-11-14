@@ -25,7 +25,7 @@ LKEY termine également le rejeu de `33f0fb3b` avec les mêmes 44 commandes, ret
 
 ## Mesurer le remplacement effectif
 
-Le commit `904df879` atteint **4 jeux gagnés sur les 100 du catalogue (4 %)** et **25 niveaux gagnés** sur les parties qualifiées. La [référence par jeu](sic-v8-reference-levels.md) retient les maxima attestés pour le natif, V5, V6 et V7. Le score à dépasser se calcule sur les parcours partis du niveau 1, dans une partie continue.
+Le commit `d7c95678` atteint **4 jeux gagnés sur les 100 du catalogue (4 %)** et **26 niveaux gagnés** sur les parties qualifiées. La [référence par jeu](sic-v8-reference-levels.md) retient les maxima attestés pour le natif, V5, V6 et V7. Le score à dépasser se calcule sur les parcours partis du niveau 1, dans une partie continue.
 
 | Jeu | Maximum historique retrouvé | SIC seul | Seuil dépassé à l’action | Fin des niveaux |
 | --- | ---: | ---: | ---: | --- |
@@ -34,7 +34,7 @@ Le commit `904df879` atteint **4 jeux gagnés sur les 100 du catalogue (4 %)** e
 | HANO | 4 | 4 sur 4 · WIN | Plafond atteint | 6, 16, 30, 60 |
 | DICO | 6 | 6 sur 6 · WIN | Plafond atteint | 5, 11, 19, 27, 34, 71 |
 | SK48 | 2 | 2 sur 8 · entrée au niveau 3 | — | 19, 56 |
-| AS66 | 3 | 1 sur 9 · entrée au niveau 2 | — | 4 |
+| AS66 | 3 | 2 sur 9 · entrée au niveau 3 | — | 4, 13 |
 | CASC | 1 | 0 sur 6 · aucun plan applicable | — | — |
 
 Le rejeu charge la partie neuve et le pack `solver: 'sic'` dans le worker normal. Il enregistre les seuls fournisseurs SIC de réparation par correspondance et d’alignement par contact. Le navigateur vérifie avant chaque commande le fournisseur, l’autorité `sicOnly`, le sous-objectif et la stratégie. L’observation, les opérateurs géométriques, les fonctions de recherche, l’exécution et le garde WHY/ACT sont partagés. La réparation combine des correspondances mesurées et, lorsque plusieurs observations indépendantes concordent, des votes dans les groupes formés par les symétries ou les répétitions. Elle teste un clic avec **OP18** et vérifie la cellule cible, la conservation du reste du champ et le nombre de pixels modifiés en périphérie. Les changements de niveau et la victoire proviennent du retour du jeu.
@@ -86,3 +86,7 @@ Au commit `e1947e92`, le rejeu du niveau 1 sur les 100 jeux porte le total à **
 Le nouveau fournisseur SIC a franchi AS66 au quatrième retour, après avoir constaté la translation d’un corps compatible avec la cavité et retrouvé l’arrêt suivant. OP18 a autorisé chaque action. SIC a testé quatre directions au niveau 2 et s’est arrêté sans route attestée. Le même fournisseur a joué quatre directions sur CASC et s’est arrêté sans corps compatible confirmé ni niveau gagné. La qualification navigateur d’AS66 est `a54fbb6b99788e9b4418f5bcbcff71cf72f48ca2ac8faf8faa6eb49c285632bf`.
 
 Le tour suivant couvre les 100 jeux et valide **6 premiers niveaux**. DNOI en 3 commandes, AS66 en 4, DICO en 5, HANO en 6, SYME en 9 et SK48 en 19. Le rejeu natif au commit `e1947e92` reproduit intégralement les cinq témoins. Le fournisseur de glissement ajouté ensuite est enregistré uniquement dans le runtime SIC seul.
+
+La lecture des déplacements élémentaires dans l’animation a validé le niveau 2 d’AS66 à `d7c95678`. Au retour d’une commande, la pièce peut ressortir de l’autre côté du plateau. SIC conserve la direction observée dans les déplacements intermédiaires, puis mémorise une règle d’arrêt après l’avoir comparée à un retour réel. Les deux niveaux sont gagnés en 13 commandes, aux actions 4 et 13, sous **OP18**. L’empreinte du rejeu navigateur est `18f45f4b1e8f8af98d55af97a6e76fe3c11785d9387a035b37b801f8ab5dd9c6`.
+
+Le deuxième tour en partie continue qualifie les six jeux ayant gagné leur premier niveau. Commandes cumulées : AS66 13, SK48 56, HANO 16, DNOI 9, SYME 21, DICO 11. CASC reste à zéro niveau après quatre commandes. Au niveau 3 d’AS66, un élément composite se déplace pendant les essais directionnels. Un diagnostic séparé sur le jeu a trouvé un accès en sept commandes. Ce diagnostic établit l’existence d’un trajet. La stratégie SIC doit encore apprendre à distinguer et anticiper le déplacement de cet élément.
