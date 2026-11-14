@@ -140,9 +140,11 @@ async function qualifySicOnly(parameters: URLSearchParams) {
       output.textContent = JSON.stringify({ status: 'running', ...(round ? { round } : {}), game, results }, null, 2);
       try {
         const operations = new Set<string>();
+        const familyActions = new Map<string, number>();
         const strategies = new Map<string, { commands: number; contradictedAt: number[] }>();
         const result = await run(runtime, game, round ?? 'complete', pack, maxActions, row => {
           if (row.operation) operations.add(row.operation);
+          familyActions.set(row.family, (familyActions.get(row.family) ?? 0) + 1);
           const entry = strategies.get(row.strategy) ?? { commands: 0, contradictedAt: [] };
           entry.commands++;
           if (row.result === false) entry.contradictedAt.push(row.sequence);
@@ -151,7 +153,7 @@ async function qualifySicOnly(parameters: URLSearchParams) {
         const qualified = exclusiveFamilies(result.families)
           && (result.coverage?.sicOnly ?? 0) === result.actions;
         results.push({ game, qualified, levels: result.levels, total: result.targetLevels, actions: result.actions,
-          state: result.boardState, stop: result.stop, operations: [...operations], strategies: Object.fromEntries(strategies),
+          state: result.boardState, stop: result.stop, operations: [...operations], familyActions: Object.fromEntries(familyActions), strategies: Object.fromEntries(strategies),
           levelEnds: result.trace.flatMap((entry, index) => entry.levelsCompleted > (result.trace[index - 1]?.levelsCompleted ?? 0) ? [index + 1] : []),
           traceDigest: await hash(result.trace),
           ...(result.stop === 'no_admissible_prefix' ? { guard: result.guard } : {}) });
