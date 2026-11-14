@@ -98,7 +98,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | TICT | 6 | [6](../../docs/migration/native-campaigns-v38/tict-six-levels.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/TICT/LVL1/good_run_pseudocode.md) | — | — | 6 | 6 | 1 |
 | TN36 | 7 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/TN36/LVL1/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 1 |
 | TR87 | 6 | 1 (rejeu local 0.68) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/TR87/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 1 |
-| TRCP | 6 | — | — | — | — | — | — | — |
+| TRCP | 6 | — | — | — | — | — | — | 1 |
 | TRIA | 6 | — | — | — | — | — | — | 1 |
 | TU93 | 9 | [3](../../docs/migration/native-campaigns-v36/tu93-three-levels.json) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/TU93/LVL2/good_run_pseudocode.md) | — | — | 3 | 4 | 1 |
 | UPST | 6 | — | — | — | — | — | — | 1 |

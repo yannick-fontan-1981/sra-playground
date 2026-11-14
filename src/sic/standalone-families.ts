@@ -63,6 +63,7 @@ import { seatedContactId } from './seated-contact.ts';
 import { switchedSurfaceId } from './switched-surface.ts';
 import { markedGaugeId } from './marked-gauge.ts';
 import { reactiveTargetId } from './reactive-target.ts';
+import { pairedChannelsId } from './paired-channels.ts';
 import { learnCorrespondenceId } from './learn-correspondence.ts';
 import { materialAssemblyId } from './material-assembly.ts';
 
@@ -79,7 +80,7 @@ export const standalonePlanningGroups = [
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, facetGrowthId] },
   { id: 'visit_marked_surface', families: [traceCoverageId, markedLatticeId] },
   { id: 'place_incoming_groups', families: [queuedPlacementId] },
-  { id: 'explore_available_inputs', families: [displayCouplingId, fieldIsolationId, cavityAccessId, learnCorrespondenceId, markedGaugeId, publicInputExplorationId] },
+  { id: 'explore_available_inputs', families: [displayCouplingId, fieldIsolationId, cavityAccessId, learnCorrespondenceId, markedGaugeId, pairedChannelsId, publicInputExplorationId] },
 ] as const;
 
 export const standalonePlanningFamilies: readonly string[] = Object.freeze(standalonePlanningGroups.flatMap(group => group.families));
