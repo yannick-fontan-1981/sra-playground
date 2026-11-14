@@ -395,6 +395,7 @@ export class NativeCallerCoordinator {
       const proposal = await this.frontier.propose(observation, inputs, { control_acquisition: acquisition });
       if (proposal && experiment === 'sample_unused_control') bindMissingControlTrial(proposal as Parameters<typeof bindMissingControlTrial>[0], {
         observationRef: observation.observation_ref, availableActions: commands, objectiveSupported: active.status === policy.requires_status,
+        subjectBound: Boolean(facts.pair_ref),
         effectKnown: pairs.length > 0, triedInContext: pairs.length > 0, evidence,
       });
       this.persistDeltas(observation); if (proposal) return proposal;

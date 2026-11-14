@@ -2,13 +2,37 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { captureDecisionSprites, readNativeResolution } from '../src/sic/native-resolution.ts';
 import { bindMissingControlTrial, evaluateMissingControl, missingControlWitness } from '../src/sic/missing-control-strategy.ts';
+import { chooseControlEffectPrimitive } from '../src/sic/control-effect-next.ts';
+import type { StrategyFact } from '../src/sic/strategy-agenda.ts';
 import type { NativeProposal } from '../src/logos-engine/v6-native-types.ts';
+
+test('the control-effect need chooses one primitive from the current evidence on each decision', () => {
+  const fact = (value: boolean): StrategyFact => ({ value, evidence: ['obs'] });
+  const base = { currentObservation: fact(true), objectiveDependsOnEffect: fact(true), subjectBound: fact(true),
+    effectKnown: fact(false), commandAvailable: fact(true), alreadyTried: fact(false) };
+  const called: string[] = [];
+  const offer = (id: string) => () => { called.push(id); return id; };
+  const offers = { P01: offer('P01'), P02: offer('P02'), P05: offer('P05'), P07: offer('P07') };
+  const decide = (changes: Partial<Parameters<typeof chooseControlEffectPrimitive>[0]> = {}) => {
+    called.length = 0;
+    const { selected } = chooseControlEffectPrimitive({ ...base, ...changes }, offers);
+    assert.deepEqual(called, selected ? [selected.id] : []);
+    return selected?.id;
+  };
+  assert.equal(decide({ subjectBound: fact(false) }), 'P01');
+  assert.equal(decide({ effectNeedsRevalidation: fact(true) }), 'P02');
+  assert.equal(decide({ effectKnown: fact(true) }), undefined);
+  assert.equal(decide({ commandAvailable: fact(false), accessCanBeSought: fact(true) }), 'P07');
+  assert.equal(decide(), 'P05');
+  assert.equal(decide({ alreadyTried: fact(true) }), undefined);
+  assert.equal(decide({ subjectBound: { value: 'unknown' } }), undefined);
+});
 
 test('the missing-control decision relies on the need and current evidence across unrelated plan types', () => {
   const ref = 'current-observation';
   const proposal = (kind: string): NativeProposal => ({ kind, status: 'proposed', actions: [{ action_ref: 'ACTION1', data: {} }],
     binding: { observation_ref: ref } });
-  const situation = { observationRef: ref, availableActions: ['ACTION1'], objectiveSupported: true,
+  const situation = { observationRef: ref, availableActions: ['ACTION1'], objectiveSupported: true, subjectBound: true,
     effectKnown: false, triedInContext: false, evidence: [ref, 'retained-objective'] };
   const first = proposal('unrelated-first'), second = proposal('unrelated-second');
   assert.equal(missingControlWitness(proposal('cavity_direction_question'), 'ACTION1', ref), undefined);

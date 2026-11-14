@@ -296,7 +296,7 @@ export class LinkedTemporalContact {
       const proposal = this.bundle(observation, unresolved, position, null, 'Measure an unresolved input needed by the visible access path.', 'binding');
       bindMissingControlTrial(proposal as Parameters<typeof bindMissingControlTrial>[0], {
         observationRef: observation.observation_ref, availableActions: available,
-        objectiveSupported: route.length > 0, effectKnown: this.vectors.has(unresolved),
+        objectiveSupported: route.length > 0, subjectBound: this.body !== null && this.selected !== null, effectKnown: this.vectors.has(unresolved),
         triedInContext: this.tested.has(key([position, unresolved])), evidence: proposal.question.hypothesis_refs,
       });
       return proposal;

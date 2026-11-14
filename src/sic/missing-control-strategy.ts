@@ -1,12 +1,16 @@
 import type { NativeProposal } from '../logos-engine/v6-native-types.ts';
-import { missingControlGraph, missingControlNeed, missingControlStrategy } from './missing-control-graph.ts';
-import { resolveStrategyGraph, type AgendaEntry, type StrategyFact } from './strategy-agenda.ts';
-export { missingControlLabel, missingControlNeed, missingControlStrategy } from './missing-control-graph.ts';
+import { chooseControlEffectPrimitive } from './control-effect-next.ts';
+import type { AgendaEntry, StrategyFact } from './strategy-agenda.ts';
+
+export const missingControlStrategy = 'test_missing_control';
+export const missingControlNeed = 'establish_control_effect_for_current_objective';
+export const missingControlLabel = 'Test an input needed by the retained method';
 
 export interface MissingControlSituation {
   readonly observationRef: string;
   readonly availableActions: readonly string[];
   readonly objectiveSupported: boolean;
+  readonly subjectBound: boolean;
   readonly effectKnown: boolean;
   readonly triedInContext: boolean;
   readonly evidence: readonly string[];
@@ -45,14 +49,13 @@ export function evaluateMissingControl(proposal: TrialProposal, action: string, 
   const current = proposal.binding?.observation_ref === situation.observationRef && situation.evidence.includes(situation.observationRef);
   const evidence: [string, ...string[]] = [situation.observationRef, ...situation.evidence.filter(ref => ref !== situation.observationRef)];
   const fact = (value: boolean): StrategyFact => current ? { value, evidence } : { value: 'unknown' };
-  const assessment = resolveStrategyGraph({
-    graph: missingControlGraph, mode: 'active',
-    facts: { currentObservation: current ? { value: true, evidence } : { value: 'unknown' },
-      supportedObjective: fact(situation.objectiveSupported), availableControl: fact(situation.availableActions.includes(action)),
-      knownEffect: fact(situation.effectKnown), alreadyTried: fact(situation.triedInContext) },
-    planners: { [missingControlStrategy]: () => true },
-  });
-  return assessment.entries[0]!;
+  const assessment = chooseControlEffectPrimitive({
+    currentObservation: fact(true), objectiveDependsOnEffect: fact(situation.objectiveSupported), subjectBound: fact(situation.subjectBound),
+    commandAvailable: fact(situation.availableActions.includes(action)), effectKnown: fact(situation.effectKnown),
+    alreadyTried: fact(situation.triedInContext),
+  }, { P05: () => proposal });
+  const entry = assessment.entries.find(candidate => candidate.id === 'P05')!;
+  return { ...entry, id: missingControlStrategy };
 }
 
 export function missingControlWitness(proposal: NativeProposal, action: string, observationRef: string): MissingControlWitness | undefined {
