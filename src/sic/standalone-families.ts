@@ -80,6 +80,7 @@ import { moveMaskedPiecesId } from './move-masked-pieces.ts';
 import { linkOpeningsId } from './link-openings.ts';
 import { reproduceCueId } from './reproduce-cue.ts';
 import { navigateRevealedGridId } from './navigate-revealed-grid.ts';
+import { learnGridAccessId } from './learn-grid-access.ts';
 import { arrangeTurnPostsId } from './arrange-turn-posts.ts';
 import { learnCorrespondenceId } from './learn-correspondence.ts';
 import { materialAssemblyId } from './material-assembly.ts';
@@ -97,7 +98,7 @@ export const standalonePlanningGroups = [
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, facetGrowthId] },
   { id: 'visit_marked_surface', families: [traceCoverageId, markedLatticeId] },
   { id: 'place_incoming_groups', families: [queuedPlacementId, gatedCascadeId] },
-  { id: 'explore_available_inputs', families: [displayCouplingId, fieldIsolationId, cavityAccessId, learnCorrespondenceId, markedGaugeId, pairedChannelsId, publicInputExplorationId] },
+  { id: 'explore_available_inputs', families: [displayCouplingId, fieldIsolationId, cavityAccessId, learnCorrespondenceId, markedGaugeId, pairedChannelsId, learnGridAccessId, publicInputExplorationId] },
 ] as const;
 
 export const standalonePlanningFamilies: readonly string[] = Object.freeze(standalonePlanningGroups.flatMap(group => group.families));

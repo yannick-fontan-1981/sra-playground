@@ -102,6 +102,7 @@ import { createSicMoveMaskedPieces } from '../sic/move-masked-pieces.ts';
 import { createSicLinkOpenings } from '../sic/link-openings.ts';
 import { createSicReproduceCue } from '../sic/reproduce-cue.ts';
 import { createSicNavigateRevealedGrid } from '../sic/navigate-revealed-grid.ts';
+import { createSicLearnGridAccess } from '../sic/learn-grid-access.ts';
 import { createSicArrangeTurnPosts } from '../sic/arrange-turn-posts.ts';
 import { createSicLearnCorrespondence } from '../sic/learn-correspondence.ts';
 import { createSicGlyphEditing } from '../sic/glyph-editing.ts';
@@ -2449,11 +2450,12 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const sequence = (configuration.window_constraints as R).labeled_sequence_composition.labeled_sequence_question;
     const groups = standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 99, groups, symmetry, policy, sequence, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 100, groups, symmetry, policy, sequence, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
       createSicFieldRepair(symmetry), createSicOrderedContact(policy, recovery), createSicSupportTransfer(support), createSicLearnSupportMoves(),
+      createSicLearnGridAccess(),
       createSicSubsetExperiment(), createSicLearnScopeEffects(), createSicFramedContact(), createSicStagedMarks(), createSicTransportContact(), createSicBandAlignment(),
       createSicSharedArrival(), createSicOutlineService(), createSicLabeledSequence(sequence, options.now ?? (() => performance.now())),
       createSicMarkedCollection(), createSicSlotTransfer(), createSicRemoteSupportRoute(), createSicOccurrenceRecall(),

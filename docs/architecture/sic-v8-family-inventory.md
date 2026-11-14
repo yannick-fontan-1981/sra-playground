@@ -46,9 +46,11 @@ Ces essais couvrent 18 jeux distincts. Les retraits y ciblent des familles préc
 
 ## Retrait de la famille principale sur les 100 niveaux 1
 
-Campagne SIC seul sur le runtime de `07e5e687`. Pour chaque jeu, le banc prend la famille qui a émis le plus de commandes dans le rejeu de référence, la retire du registre et de l’agenda avant de lancer une nouvelle partie, puis laisse jusqu’à 40 commandes pour gagner le niveau 1. Les 100 références gagnent en configuration normale. Les reçus de toutes les commandes du retrait les attribuent à SIC seul. Plusieurs familles peuvent agir dans une même partie. Les effectifs ci-dessous comptent des jeux distincts pour chaque famille.
+Campagne SIC seul sur le runtime de `07e5e687`. Pour chaque jeu, le banc prend la famille qui a émis le plus de commandes dans le rejeu de référence, la retire du registre et de l’agenda avant de lancer une nouvelle partie, puis laisse jusqu’à 40 commandes pour gagner le niveau 1. Les 100 références gagnent en configuration normale. Les reçus de toutes les commandes du retrait les attribuent à SIC seul. Plusieurs familles peuvent agir dans une même partie. Les effectifs ci-dessous comptent des jeux distincts pour chaque famille. Le tableau conserve la première campagne comme référence de comparaison.
 
-**Bilan du retrait : 6/100 niveaux gagnés**, 73 essais au budget de 40 commandes, 20 arrêts faute de nouvelle proposition et une défaite. Quinze essais se sont arrêtés sans aucune commande. Le tableau distingue la fréquence de repli, la diversité des familles retirées et le succès observé. Une victoire avec plusieurs familles indique leur participation au parcours. Elle ne prouve pas que chacune était nécessaire.
+**Premier bilan du retrait, 6/100 niveaux gagnés.** 73 essais ont atteint le budget de 40 commandes, 20 se sont arrêtés faute de nouvelle proposition et un s’est terminé par une défaite. Quinze essais se sont arrêtés sans aucune commande. Le tableau distingue la fréquence de repli, la diversité des familles retirées et le succès observé. Une victoire avec plusieurs familles indique leur participation au parcours. Elle ne prouve pas que chacune était nécessaire.
+
+**Suivi des gains, 7/100.** SNAR gagne désormais en 17 commandes avec `sic_navigate_revealed_grid` retirée. `sic_learn_grid_access` fournit les 17 commandes. Les résultats de la première campagne demeurent visibles dans le tableau ci-dessous. Voir le [rejeu de SNAR](sic-v8-generalization.md#apprendre-un-trajet-sur-des-cases-révélées).
 
 | Famille de repli | Jeux où elle agit | Familles retirées distinctes | Victoires auxquelles elle participe | Victoires où elle émet toutes les commandes |
 | --- | ---: | ---: | ---: | ---: |
