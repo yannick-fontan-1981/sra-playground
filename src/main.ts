@@ -576,7 +576,9 @@ function updateSicPanel(): void {
       mode === 'agent' && objectiveLedger && objectiveLedger.sessionId === state?.sessionId && state.status !== 'error'
         ? objectiveLedger.entries.filter(item => item.last <= state.sequence) : []);
   };
-  if (typeof window.requestIdleCallback === 'function') window.requestIdleCallback(deadline => renderWhenIdle(deadline.timeRemaining()));
+  if (typeof window.requestIdleCallback === 'function') {
+    window.requestIdleCallback(deadline => renderWhenIdle(deadline.didTimeout ? 2 : deadline.timeRemaining()), { timeout: 250 });
+  }
   else window.requestAnimationFrame(() => renderWhenIdle(5));
 }
 
