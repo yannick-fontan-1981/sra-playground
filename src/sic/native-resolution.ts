@@ -8,6 +8,7 @@ import type { AgendaEntry } from './strategy-agenda.ts';
 import { orderedContactId, orderedContactStrategies } from './ordered-contact.ts';
 import { cavityAccessId, cavityStrategies } from './cavity-access.ts';
 import { publicInputExplorationId, publicInputStrategies } from './public-input-exploration.ts';
+import { compareAvailableControlsId, compareAvailableControlsStrategies } from './compare-available-controls.ts';
 import { framedContactId, framedContactStrategies, learnPatternAccessId } from './framed-contact.ts';
 import { learnTransportAccessId, transportContactId, transportContactStrategies } from './transport-contact.ts';
 import { bandAlignmentId, bandAlignmentStrategies } from './band-alignment.ts';
@@ -97,7 +98,7 @@ import { openingCuriosityLabel } from './opening-curiosity.ts';
 import { isFrontierInputOrder, type FrontierChoiceEvidence, type FrontierInputOrder, type FrontierLocalRule } from './frontier-configuration.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 
-const situationStrategies = { ...orderedContactStrategies, ...cavityStrategies, ...publicInputStrategies, ...framedContactStrategies,
+const situationStrategies = { ...orderedContactStrategies, ...cavityStrategies, ...publicInputStrategies, ...compareAvailableControlsStrategies, ...framedContactStrategies,
   ...transportContactStrategies, ...bandAlignmentStrategies, ...sharedArrivalStrategies, ...outlineServiceStrategies,
   ...labeledSequenceStrategies, ...markedCollectionStrategies, ...slotTransferStrategies, ...remoteSupportRouteStrategies,
   ...occurrenceRecallStrategies, ...slotPermutationStrategies, ...surfaceCopyStrategies, ...codeRouteStrategies, ...profileTransferStrategies,
@@ -472,6 +473,7 @@ export function readNativeResolution(agent: {
   const rootedScene = record(rooted?.scene);
   const labels = family === orderedContactId ? orderedContactStrategies : family === cavityAccessId ? cavityStrategies
     : family === publicInputExplorationId ? publicInputStrategies
+    : family === compareAvailableControlsId ? compareAvailableControlsStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId ? inventoryAccessStrategies
     : family === framedContactId ? framedContactStrategies : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
       : family === transportContactId ? transportContactStrategies : family === bandAlignmentId ? bandAlignmentStrategies
@@ -511,6 +513,10 @@ export function readNativeResolution(agent: {
     } : {}),
     evidenceActions: Array.isArray(card?.evidence) ? [...new Set(card.evidence.flatMap(ref => priorAction(ref) ?? []))] : [],
   } : undefined;
+  if (situationCard && family === compareAvailableControlsId) {
+    const subject = bounds(card?.subject);
+    if (subject) subjects.push({ label: 'Piece moved by the previous control', box: subject });
+  }
   if (situationCard && family === publicInputExplorationId) {
     const region = bounds(card?.addressedRegion);
     if (region) subjects.push({ label: 'Visible region tested by the click', box: region });

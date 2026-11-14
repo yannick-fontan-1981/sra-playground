@@ -347,3 +347,9 @@ Après retrait de `sic_chart_route`, **GMAP gagne en cinq commandes SIC seul** a
 Sur REGN, la famille de référence est l’exploration publique elle-même. Hors agent, chacune des deux commandes disponibles hors réinitialisation anime le déplacement d’un sprite distinct. Répéter la même commande restitue exactement le plateau initial. Exécuter les deux commandes différentes donne le gain dans les deux ordres. Un prochain transfert pourra partir de la différence observée entre les deux retours pour apprendre la complémentarité des commandes et la réversibilité de la répétition.
 
 La campagne commune EVAS et GMAP confirme **32/100** premiers niveaux après retrait, en 396 commandes SIC seul, dont 66 choisies par le SRC. Les 100 niveaux 1 en usage normal, les 30 victoires précédentes après retrait et les quatre jeux complets avec et sans retrait gardent leurs commandes et retours de référence.
+
+### Comparer deux commandes disponibles
+
+Avec `sic_public_input_exploration` retirée pour le test, **REGN gagne en deux commandes SIC seul**. La carte `sic.compare_available_controls.choose` teste une des deux commandes directionnelles disponibles. L’animation déplace un seul composant apparié sur les deux axes. Ce retour fournit une raison de comparer l’autre commande pendant que le premier effet est visible. La carte laisse le statut ouvert jusqu’au retour officiel. Les deux commandes et leurs retours reproduisent le trajet de l’exploration publique, empreinte `b00a56adad8180b9427c0ca84381383b025d051ab96a5c8ec1e9f01a1090c26c`.
+
+Désactiver la règle de comparaison après le premier retour laisse le niveau ouvert après une commande. Le gain avec la carte active tient aussi avec un nom neutre et une palette permutée. Sur les 100 premiers niveaux, REGN est le seul départ qui présente exactement deux commandes directionnelles hors réinitialisation.

@@ -29,6 +29,7 @@ import { frontierInputOrders } from './frontier-configuration.ts';
 import { orderedContactStrategies } from './ordered-contact.ts';
 import { cavityStrategies } from './cavity-access.ts';
 import { publicInputStrategies } from './public-input-exploration.ts';
+import { compareAvailableControlsStrategies } from './compare-available-controls.ts';
 import { framedContactStrategies } from './framed-contact.ts';
 import { transportContactStrategies } from './transport-contact.ts';
 import { bandAlignmentStrategies } from './band-alignment.ts';
@@ -1293,7 +1294,7 @@ function followsContradiction(item: ReturnType<typeof strategyTimeline>[number])
 
 function renderSituationCards(container: Element, returns: readonly DirectionalReturn[], pending: NativeResolution | null | undefined,
   palette: readonly string[], openRankings: ReadonlySet<string | undefined>) {
-  const labels = { ...orderedContactStrategies, ...cavityStrategies, ...publicInputStrategies, ...framedContactStrategies,
+  const labels = { ...orderedContactStrategies, ...cavityStrategies, ...publicInputStrategies, ...compareAvailableControlsStrategies, ...framedContactStrategies,
     ...transportContactStrategies, ...bandAlignmentStrategies, ...sharedArrivalStrategies, ...outlineServiceStrategies,
     ...labeledSequenceStrategies, ...markedCollectionStrategies, ...slotTransferStrategies, ...remoteSupportRouteStrategies,
     ...occurrenceRecallStrategies, ...slotPermutationStrategies, ...surfaceCopyStrategies, ...codeRouteStrategies, ...profileTransferStrategies,
