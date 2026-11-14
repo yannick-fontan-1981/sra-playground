@@ -27,7 +27,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | CWSE | 6 | — | — | — | — | — | — | — |
 | DAME | 6 | — | — | 3 (archive locale) | — | 3 | 4 | — |
 | DC22 | 6 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/DC22/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | — |
-| DICO | 6 | [6](../../docs/migration/native-campaigns-v35/dico.json) | — | 3 (archive locale) | — | 6 | 6 | — |
+| DICO | 6 | [6](../../docs/migration/native-campaigns-v35/dico.json) | — | 3 (archive locale) | — | 6 | 6 | 6 · WIN |
 | DNOI | 6 | [3](../../docs/migration/native-campaigns/dnoi.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/DNOI/LVL1/good_run_pseudocode.md) | [3](../../docs/migration/v6-baseline-parity.json) | — | 3 | 4 | 6 · WIN |
 | ELAS | 6 | [3](../../docs/migration/native-campaigns-v37/elas-three-levels.json) | — | 3 (archive locale) | — | 3 | 4 | — |
 | ESCT | 6 | [1](../../docs/migration/native-campaigns-v53/attempt3/esct-campaign.json.gz) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/ESCT/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | — |
