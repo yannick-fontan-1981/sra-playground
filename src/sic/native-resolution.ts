@@ -6,6 +6,9 @@ import { contactRecoveryStrategies, isContactStrategy, isRecoveryStop, rootedRec
   type ContactRecoveryNeed, type ContactStrategy } from './active-recovery.ts';
 import type { AgendaEntry } from './strategy-agenda.ts';
 import { orderedContactId, orderedContactStrategies } from './ordered-contact.ts';
+import { cavityAccessId, cavityStrategies } from './cavity-access.ts';
+
+const situationStrategies = { ...orderedContactStrategies, ...cavityStrategies };
 import { frontierStrategies, isFrontierStrategy, type FrontierStrategy } from './frontier-strategy.ts';
 import { isViewStrategy, viewStrategies, type ViewStrategy } from './view-strategy.ts';
 import { informationStrategies, isInformationStrategy, type InformationStrategy } from './information-strategy.ts';
@@ -55,8 +58,8 @@ export interface NativeResolution {
   readonly objective: string | null;
   readonly objectiveSource: 'native' | 'question' | 'unpublished' | null;
   readonly strategyObjective?: StrategyObjective;
-  readonly situationCard?: { readonly strategy: keyof typeof orderedContactStrategies; readonly need: string; readonly mode: string;
-    readonly situation: string; readonly agenda: readonly AgendaEntry<keyof typeof orderedContactStrategies>[];
+  readonly situationCard?: { readonly strategy: keyof typeof situationStrategies; readonly need: string; readonly mode: string;
+    readonly situation: string; readonly agenda: readonly AgendaEntry<keyof typeof situationStrategies>[];
     readonly evidenceActions: readonly number[]; readonly distance: number | null };
   readonly missingControl?: MissingControlWitness;
   readonly operation: string | null;
@@ -379,15 +382,21 @@ export function readNativeResolution(agent: {
   const op = label(template?.operation_key);
   const rooted = record(proposal?.rooted_line_plan);
   const rootedScene = record(rooted?.scene);
-  const card = planReceipt?.authority === 'sicOnly' && family === orderedContactId ? record(proposal?.sicSituationCard) : null;
-  const isOrderedStrategy = (id: unknown): id is keyof typeof orderedContactStrategies =>
-    typeof id === 'string' && Object.hasOwn(orderedContactStrategies, id);
+  const labels = family === orderedContactId ? orderedContactStrategies : family === cavityAccessId ? cavityStrategies : null;
+  const card = planReceipt?.authority === 'sicOnly' && labels ? record(proposal?.sicSituationCard) : null;
+  const isSituationStrategy = (id: unknown): id is keyof typeof situationStrategies =>
+    typeof id === 'string' && !!labels && Object.hasOwn(labels, id);
   const cardNeed = label(card?.need), cardMode = label(card?.mode), cardSituation = label(card?.situation);
-  const situationCard = isOrderedStrategy(card?.strategy) && card?.strategy === planReceipt?.strategy && cardNeed && cardMode && cardSituation ? {
+  const situationCard = isSituationStrategy(card?.strategy) && card?.strategy === planReceipt?.strategy && cardNeed && cardMode && cardSituation ? {
     strategy: card.strategy, need: cardNeed, mode: cardMode, situation: cardSituation,
-    agenda: readAgenda(card.agenda, isOrderedStrategy), distance: natural(card.distance),
+    agenda: readAgenda(card.agenda, isSituationStrategy), distance: natural(card.distance),
     evidenceActions: Array.isArray(card.evidence) ? [...new Set(card.evidence.flatMap(ref => priorAction(ref) ?? []))] : [],
   } : undefined;
+  if (situationCard && family === cavityAccessId) {
+    const obstacle = bounds(card?.movingObstacle), actor = bounds(card?.controlledPiece);
+    if (obstacle) subjects.push({ label: 'Moving obstacle before the action', box: obstacle });
+    if (actor) subjects.push({ label: 'Controlled piece before the action', box: actor });
+  }
   const searchOperation = label(record(rooted?.search)?.operation);
   const search = record(rooted?.search);
   const recoveryOperations = Array.isArray(search?.recovery_operations) ? search.recovery_operations.slice(0, 4).flatMap(value => {

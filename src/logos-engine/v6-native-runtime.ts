@@ -2367,7 +2367,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const policy = loaded.strategy.declarations[0]!.configuration.observed_composition_services.rooted_line_question;
     const groups = standalonePlanningFamilies.map(id => ({ id, families: [id] }));
     const support = loaded.common.ordered_support_transfer;
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 7, groups, symmetry, policy, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 8, groups, symmetry, policy, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [

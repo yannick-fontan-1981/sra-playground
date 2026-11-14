@@ -27,6 +27,7 @@ import { informationStrategies } from './information-strategy.ts';
 import type { AgendaEntry } from './strategy-agenda.ts';
 import { frontierInputOrders } from './frontier-configuration.ts';
 import { orderedContactStrategies } from './ordered-contact.ts';
+import { cavityStrategies } from './cavity-access.ts';
 
 const commands: Readonly<Record<number, string>> = {
   1: 'Up', 2: 'Down', 3: 'Left', 4: 'Right', 5: 'Space', 6: 'Click', 7: 'Action 7',
@@ -1239,6 +1240,7 @@ function followsContradiction(item: ReturnType<typeof strategyTimeline>[number])
 
 function renderSituationCards(container: Element, returns: readonly DirectionalReturn[], pending: NativeResolution | null | undefined,
   palette: readonly string[], openRankings: ReadonlySet<string | undefined>) {
+  const labels = { ...orderedContactStrategies, ...cavityStrategies };
   const cards = new Map<string, DirectionalReturn>();
   for (const item of returns) {
     const card = item.decision?.situationCard;
@@ -1259,7 +1261,7 @@ function renderSituationCards(container: Element, returns: readonly DirectionalR
     article.className = 'sic-situation-card';
     const header = document.createElement('header'), mode = document.createElement('span'), title = document.createElement('h6');
     mode.textContent = `${stamp} · ${card.mode}`;
-    title.textContent = orderedContactStrategies[card.strategy];
+    title.textContent = labels[card.strategy];
     header.append(mode, title);
     const situation = document.createElement('p');
     situation.textContent = card.situation;
@@ -1277,7 +1279,7 @@ function renderSituationCards(container: Element, returns: readonly DirectionalR
     }
     const ranking = document.createElement('details'), summary = document.createElement('summary');
     summary.textContent = 'Strategy order';
-    ranking.append(summary, renderAgenda('Strategy order', orderedContactStrategies, card.agenda));
+    ranking.append(summary, renderAgenda('Strategy order', labels, card.agenda));
     ranking.dataset.sicSituationOrder = stamp;
     ranking.open = openRankings.has(stamp);
     article.append(ranking);
