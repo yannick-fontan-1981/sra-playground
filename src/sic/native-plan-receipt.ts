@@ -2,7 +2,7 @@ import type { NativeObservation, NativeProposal, SicActionCoverage } from '../lo
 import { readSicNeed } from './need-registry.ts';
 import { missingControlWitness } from './missing-control-strategy.ts';
 import type { ReasoningMode } from './reasoning-mode.ts';
-import { standalonePlanningFamilies } from './ordered-contact.ts';
+import { standalonePlanningFamilies } from './standalone-families.ts';
 
 export interface StrategyObjective {
   readonly strategy: string;

@@ -6,7 +6,7 @@ import type { NativeV6Declarations } from '../src/logos-engine/v6-native-runtime
 import { V6AgentService } from '../src/runtime/v6-agent-service.ts';
 import { BrowserV6Agent } from '../src/runtime/v6-agent.ts';
 import { defaultRecoveryPack } from '../src/sic/active-recovery.ts';
-import { standalonePlanningFamilies } from '../src/sic/ordered-contact.ts';
+import { standalonePlanningFamilies } from '../src/sic/standalone-families.ts';
 import type { GameObservation } from '../src/runtime/browser-games.ts';
 import { emptyV6Snapshot, toV6PublicObservation, V6_REFERENCE_COMMIT, v6FrameHash } from '../src/runtime/v6-agent-protocol.ts';
 import type { V6AgentOperation, V6AgentTransport } from '../src/runtime/v6-agent-protocol.ts';
@@ -84,8 +84,11 @@ for (const fixture of [ordered.session, ...fields.cases.filter((item: any) => it
   });
 }
 
-test('SIC-only service earns a public level with a witnessed SIC plan for every action', async () => {
-  const fixture = fields.cases.find((item: { game: string }) => item.game === 'SYME');
+for (const scenario of [
+  { fixture: fields.cases.find((item: { game: string }) => item.game === 'SYME'), actions: 9, strategies: ['test_local_repair', 'apply_local_repair'] },
+  { fixture: ordered.session, actions: 6, strategies: ['transfer_exposed_member'] },
+]) test(`SIC-only service earns a public ${scenario.fixture.game} level with an exclusive plan for every action`, async () => {
+  const { fixture, actions, strategies } = scenario;
   const service = new V6AgentService(recovery => createNativeV6Runtime(declarations, { recovery, now: () => 0 }));
   let current = fixture.initial.public as NativePublicObservation;
   const sessionId = 'sic-only-replay';
@@ -103,7 +106,7 @@ test('SIC-only service earns a public level with a witnessed SIC plan for every 
     assert.equal(receipt.authority, 'sicOnly');
     assert.equal(receipt.objective, 'G_official_completion');
     assert.ok(receipt.subObjective);
-    assert.ok(['test_local_repair', 'apply_local_repair'].includes(receipt.strategy));
+    assert.ok(strategies.includes(receipt.strategy));
     assert.equal(result.kind, 'action');
     assert.deepEqual(result.command, { actionRef: command.action_ref, data: command.data });
     current = after;
@@ -114,9 +117,9 @@ test('SIC-only service earns a public level with a witnessed SIC plan for every 
       result = await service.handle({ type: 'resume', sessionId, sequence });
     }
   }
-  assert.equal(sequence, 9);
+  assert.equal(sequence, actions);
   assert.equal(result.snapshot.levelsCompleted, 1);
-  assert.equal(result.snapshot.sicActionCoverage?.sicOnly, 9);
+  assert.equal(result.snapshot.sicActionCoverage?.sicOnly, actions);
   assert.equal(result.snapshot.sicActionCoverage?.native, 0);
 });
 

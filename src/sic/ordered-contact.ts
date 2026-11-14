@@ -7,11 +7,9 @@ import type { NativeCommand, NativeFamily, NativeObservation, NativeProposal, Na
 import type { RecoveryPack } from './active-recovery.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
-import { fieldRepairId } from './field-repair.ts';
 import { planOrderedLattice } from './contact-lattice.ts';
 
 export const orderedContactId = 'sic_ordered_contact';
-export const standalonePlanningFamilies: readonly string[] = [fieldRepairId, orderedContactId];
 type EvidenceRow = NonNullable<ReturnType<typeof rootedLineEffect>>;
 type Projection = ReturnType<typeof physicalRootedLine>;
 type Configuration = Parameters<typeof projectedRootedLine>[0];

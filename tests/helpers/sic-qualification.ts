@@ -6,7 +6,7 @@ import { recoveryRevision } from '../../src/sic/recovery-pack.ts';
 import type { AgentAction } from '../../src/runtime/contracts.ts';
 import { GAME_CATALOG } from '../../src/games/catalog.ts';
 import { compileInformationPreference } from '../../src/sic/information-preference.ts';
-import { standalonePlanningFamilies } from '../../src/sic/ordered-contact.ts';
+import { standalonePlanningFamilies } from '../../src/sic/standalone-families.ts';
 
 const cases = [
   { game: 'SK48', target: 1, baseline: [19, 1], alternate: [19, 1], divergence: null },
