@@ -29,6 +29,7 @@ import { frontierInputOrders } from './frontier-configuration.ts';
 import { orderedContactStrategies } from './ordered-contact.ts';
 import { cavityStrategies } from './cavity-access.ts';
 import { publicInputStrategies } from './public-input-exploration.ts';
+import { framedContactStrategies } from './framed-contact.ts';
 
 const commands: Readonly<Record<number, string>> = {
   1: 'Up', 2: 'Down', 3: 'Left', 4: 'Right', 5: 'Space', 6: 'Click', 7: 'Action 7',
@@ -1241,7 +1242,7 @@ function followsContradiction(item: ReturnType<typeof strategyTimeline>[number])
 
 function renderSituationCards(container: Element, returns: readonly DirectionalReturn[], pending: NativeResolution | null | undefined,
   palette: readonly string[], openRankings: ReadonlySet<string | undefined>) {
-  const labels = { ...orderedContactStrategies, ...cavityStrategies, ...publicInputStrategies };
+  const labels = { ...orderedContactStrategies, ...cavityStrategies, ...publicInputStrategies, ...framedContactStrategies };
   const cards = new Map<string, DirectionalReturn>();
   for (const item of returns) {
     const card = item.decision?.situationCard;
