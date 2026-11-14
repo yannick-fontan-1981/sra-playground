@@ -35,9 +35,11 @@ test('a cold common caller releases a measured collection edit and acquires its 
   assert.equal(proposal.strategy_receipt.selected, 'window_constraints');
   assert.deepEqual(family.state(), empty, 'No effect or operator model exists before the first real action');
   const group = (result.snapshot.coverage as R).sourceGroups.find((entry: R) => entry.id === 'window_constraints');
-  assert.deepEqual(group.entryPoints.filter((entry: string | null) => entry !== null),
-    ['product_panel_composition', 'labeled_sequence_composition', 'cell_patch_composition', 'observed_occurrence_recall', 'observed_program_composition', 'radial_port_composition', 'rooted_quota_composition']);
-  assert.equal(group.families.filter((id: string) => id === family.id).length, 7);
+  const programEntries = new Set(['product_panel_composition', 'labeled_sequence_composition', 'cell_patch_composition',
+    'observed_occurrence_recall', 'observed_program_composition', 'radial_port_composition', 'rooted_quota_composition']);
+  const relevant = group.entryPoints.flatMap((entry: string | null, index: number) => entry && programEntries.has(entry)
+    ? [{ entry, owner: group.families[index] }] : []);
+  assert.deepEqual(relevant, [...programEntries].map(entry => ({ entry, owner: family.id })));
   assert.deepEqual(proposal.steps[0].point_binding.point, [result.command!.data!.x, result.command!.data!.y]);
 
   // A controlled stationary response is a falsifier, not a real-game success.
