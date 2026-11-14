@@ -11,8 +11,9 @@ import { sharedArrivalId } from './shared-arrival.ts';
 import { outlineServiceId } from './outline-service.ts';
 import { labeledSequenceId } from './labeled-sequence.ts';
 import { markedCollectionId } from './marked-collection.ts';
+import { slotTransferId } from './slot-transfer.ts';
 
 export const standalonePlanningFamilies: readonly string[] = Object.freeze([
   fieldRepairId, orderedContactId, supportTransferId, subsetExperimentId, framedContactId, transportContactId,
-  bandAlignmentId, sharedArrivalId, outlineServiceId, labeledSequenceId, markedCollectionId, cavityAccessId, publicInputExplorationId,
+  bandAlignmentId, sharedArrivalId, outlineServiceId, labeledSequenceId, markedCollectionId, slotTransferId, cavityAccessId, publicInputExplorationId,
 ]);

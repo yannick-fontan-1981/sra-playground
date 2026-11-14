@@ -15,6 +15,7 @@ import { sharedArrivalId, sharedArrivalStrategies } from './shared-arrival.ts';
 import { outlineServiceId, outlineServiceStrategies } from './outline-service.ts';
 import { labeledSequenceId, labeledSequenceStrategies } from './labeled-sequence.ts';
 import { markedCollectionId, markedCollectionStrategies } from './marked-collection.ts';
+import { slotTransferId, slotTransferStrategies } from './slot-transfer.ts';
 import { frontierStrategies, isFrontierStrategy, type FrontierStrategy } from './frontier-strategy.ts';
 import { isViewStrategy, viewStrategies, type ViewStrategy } from './view-strategy.ts';
 import { informationStrategies, isInformationStrategy, type InformationStrategy } from './information-strategy.ts';
@@ -25,7 +26,7 @@ import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-nati
 
 const situationStrategies = { ...orderedContactStrategies, ...cavityStrategies, ...publicInputStrategies, ...framedContactStrategies,
   ...transportContactStrategies, ...bandAlignmentStrategies, ...sharedArrivalStrategies, ...outlineServiceStrategies,
-  ...labeledSequenceStrategies, ...markedCollectionStrategies };
+  ...labeledSequenceStrategies, ...markedCollectionStrategies, ...slotTransferStrategies };
 
 export interface NativeStep {
   readonly action: string;
@@ -396,7 +397,8 @@ export function readNativeResolution(agent: {
     : family === publicInputExplorationId ? publicInputStrategies : family === framedContactId ? framedContactStrategies
       : family === transportContactId ? transportContactStrategies : family === bandAlignmentId ? bandAlignmentStrategies
         : family === sharedArrivalId ? sharedArrivalStrategies : family === outlineServiceId ? outlineServiceStrategies
-          : family === labeledSequenceId ? labeledSequenceStrategies : family === markedCollectionId ? markedCollectionStrategies : null;
+          : family === labeledSequenceId ? labeledSequenceStrategies : family === markedCollectionId ? markedCollectionStrategies
+            : family === slotTransferId ? slotTransferStrategies : null;
   const card = planReceipt?.authority === 'sicOnly' && labels ? record(proposal?.sicSituationCard) : null;
   const isSituationStrategy = (id: unknown): id is keyof typeof situationStrategies =>
     typeof id === 'string' && !!labels && Object.hasOwn(labels, id);
@@ -463,6 +465,11 @@ export function readNativeResolution(agent: {
       const box = bounds(member);
       if (box) subjects.push({ label: 'Member in the visible collection', box });
     }
+  }
+  if (situationCard && family === slotTransferId) {
+    const source = bounds(card?.source), destination = bounds(card?.destination);
+    if (source) subjects.push({ label: 'Matching token', box: source });
+    if (destination) subjects.push({ label: 'Slot to fill', box: destination });
   }
   if (situationCard && family === cavityAccessId) {
     const obstacle = bounds(card?.movingObstacle), actor = bounds(card?.controlledPiece);
