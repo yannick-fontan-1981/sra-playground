@@ -67,6 +67,7 @@ import { pairedChannelsId } from './paired-channels.ts';
 import { pointReachId } from './point-reach.ts';
 import { linkedMidpointId } from './linked-midpoint.ts';
 import { excavateDescentId } from './excavate-descent.ts';
+import { gatedCascadeId } from './gated-cascade.ts';
 import { learnCorrespondenceId } from './learn-correspondence.ts';
 import { materialAssemblyId } from './material-assembly.ts';
 
@@ -82,7 +83,7 @@ export const standalonePlanningGroups = [
   { id: 'fill_visible_partition', families: [previewPlacementId, populationPlacementId] },
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, facetGrowthId] },
   { id: 'visit_marked_surface', families: [traceCoverageId, markedLatticeId] },
-  { id: 'place_incoming_groups', families: [queuedPlacementId] },
+  { id: 'place_incoming_groups', families: [queuedPlacementId, gatedCascadeId] },
   { id: 'explore_available_inputs', families: [displayCouplingId, fieldIsolationId, cavityAccessId, learnCorrespondenceId, markedGaugeId, pairedChannelsId, publicInputExplorationId] },
 ] as const;
 

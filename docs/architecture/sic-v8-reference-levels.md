@@ -12,7 +12,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | AR25 | 8 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/AR25/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 1 |
 | AS66 | 9 | [3](../../docs/migration/native-campaigns-v55/baseline-as66/as66-campaign.json.gz) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/AS66/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 5 |
 | BP35 | 9 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/BP35/LVL1/good_run_pseudocode.md) | 0 (archive locale) | — | 1 | 2 | 1 |
-| CASC | 6 | [0](../../docs/migration/native-campaigns-v55/baseline-casc/casc-campaign.json.gz) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CASC/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 0 |
+| CASC | 6 | [0](../../docs/migration/native-campaigns-v55/baseline-casc/casc-campaign.json.gz) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CASC/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 1 |
 | CATL | 6 | [6](../../docs/migration/native-campaigns-v45/before-continuation-coordination/catl-six-levels.json) | — | — | — | 6 | 6 | 1 |
 | CATR | 6 | [0](../../docs/migration/lot2b-evidence/final/catr-control-attention/catr-campaign.json.gz) | — | — | — | 0 | 1 | 1 |
 | CAVA | 6 | — | — | — | — | — | — | 1 |
