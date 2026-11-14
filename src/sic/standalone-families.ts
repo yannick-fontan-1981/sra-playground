@@ -5,6 +5,7 @@ import { subsetExperimentId } from './subset-experiment.ts';
 import { cavityAccessId } from './cavity-access.ts';
 import { publicInputExplorationId } from './public-input-exploration.ts';
 import { framedContactId } from './framed-contact.ts';
+import { animationContactId } from './animation-contact.ts';
 import { transportContactId } from './transport-contact.ts';
 import { bandAlignmentId } from './band-alignment.ts';
 import { sharedArrivalId } from './shared-arrival.ts';
@@ -52,7 +53,7 @@ import { markerCoverageId } from './marker-coverage.ts';
 
 export const standalonePlanningGroups = [
   { id: 'repair_visible_field', families: [fieldRepairId, orderedContactId, supportTransferId] },
-  { id: 'inspect_candidate_relations', families: [crossingRowsId, invitedCaptureId, subsetExperimentId, framedContactId, transportContactId] },
+  { id: 'inspect_candidate_relations', families: [crossingRowsId, invitedCaptureId, subsetExperimentId, framedContactId, transportContactId, animationContactId] },
   { id: 'coordinate_visible_motion', families: [bandAlignmentId, sharedArrivalId, outlineServiceId, carryToFrameId, directionalReceptionId, branchAlignmentId, receptionAccessId, markerCoverageId] },
   { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId, visualPatternId, framedSearchId, feedbackTrialId, catalogueComparisonId, windowRelationId] },
   { id: 'apply_learned_relations', families: [remoteSupportRouteId, occurrenceRecallId, slotPermutationId, surfaceCopyId, chartRouteId] },
