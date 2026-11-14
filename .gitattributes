@@ -1,6 +1,9 @@
 # Exact binary evidence fragments must never receive text conversion or merging.
 *.part[0-9][0-9][0-9] binary
 
+# The original game-host provenance receipts hash the checked-out source bytes.
+public/python/*.py text eol=lf
+
 # Retained proof patches and browser transcripts preserve original whitespace.
 docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-snapshot-correction.patch whitespace=-blank-at-eol
 docs/migration/lot4c-evidence/publication-preflight/record-publication-inputs-compatibility.patch whitespace=-blank-at-eol

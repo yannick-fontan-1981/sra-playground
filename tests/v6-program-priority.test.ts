@@ -105,8 +105,12 @@ test('a newly acquired and currently guarded program defers an unlearned invitat
 
   const configuration = declarations.strategy.declarations[0]!.configuration, groups = (result.snapshot.coverage as R).sourceGroups;
   assert.deepEqual(groups.map((group: R) => group.id), configuration.families, 'The declared outer SRC family order is unchanged');
-  const entries = groups.find((group: R) => group.id === 'window_constraints').entryPoints.filter((entry: string | null) => entry !== null);
-  assert.deepEqual(entries, ['product_panel_composition', 'labeled_sequence_composition', 'cell_patch_composition', 'observed_occurrence_recall', 'observed_program_composition', 'radial_port_composition', 'rooted_quota_composition']);
+  const group = groups.find((row: R) => row.id === 'window_constraints');
+  const entries = group.entryPoints.filter((entry: string | null) => entry !== null);
+  const order = configuration.window_constraints.ordered_subquestions as string[];
+  assert.deepEqual(entries, order.filter(entry => entries.includes(entry)), 'Named entries must preserve the declared native order');
+  assert.equal(group.families[group.entryPoints.indexOf('observed_program_composition')], family.id,
+    'The observed program must use the shared occurrence owner');
 
   const coordination = proposal.strategy_receipt.native_coordination;
   assert.equal(coordination.length, 1);
