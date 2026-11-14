@@ -33,6 +33,7 @@ import { carryToFrameId } from './carry-to-frame.ts';
 import { portPairingId } from './port-pairing.ts';
 import { displayCouplingId } from './display-coupling.ts';
 import { framedSearchId } from './framed-search.ts';
+import { framedReceptionId } from './framed-reception.ts';
 import { glyphEditingId } from './glyph-editing.ts';
 import { fieldIsolationId } from './field-isolation.ts';
 import { directionalReceptionId } from './directional-reception.ts';
@@ -55,7 +56,7 @@ export const standalonePlanningGroups = [
   { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId, visualPatternId, framedSearchId, feedbackTrialId, catalogueComparisonId] },
   { id: 'apply_learned_relations', families: [remoteSupportRouteId, occurrenceRecallId, slotPermutationId, surfaceCopyId, chartRouteId] },
   { id: 'construct_executable_program', families: [codeRouteId, programOriginId, glyphEditingId, windowCoverageId, panelMatchingId] },
-  { id: 'fit_profiles_into_receivers', families: [profileTransferId, portPairingId, radialConnectionId] },
+  { id: 'fit_profiles_into_receivers', families: [profileTransferId, portPairingId, radialConnectionId, framedReceptionId] },
   { id: 'preserve_ordered_team', families: [orderedReplenishmentId] },
   { id: 'fill_visible_partition', families: [previewPlacementId, populationPlacementId] },
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, facetGrowthId] },
