@@ -69,6 +69,7 @@ import { moveMaskedPiecesId } from './move-masked-pieces.ts';
 import { linkOpeningsId } from './link-openings.ts';
 import { reproduceCueId } from './reproduce-cue.ts';
 import { navigateRevealedGridId } from './navigate-revealed-grid.ts';
+import { learnGridAccessId } from './learn-grid-access.ts';
 import { arrangeTurnPostsId } from './arrange-turn-posts.ts';
 import { learnSupportMovesId } from './learn-support-moves.ts';
 import { learnScopeEffectsId } from './learn-scope-effects.ts';
@@ -469,7 +470,8 @@ export function readNativeResolution(agent: {
   const rooted = record(proposal?.rooted_line_plan);
   const rootedScene = record(rooted?.scene);
   const labels = family === orderedContactId ? orderedContactStrategies : family === cavityAccessId ? cavityStrategies
-    : family === publicInputExplorationId ? publicInputStrategies : family === framedContactId ? framedContactStrategies
+    : family === publicInputExplorationId ? publicInputStrategies : family === learnGridAccessId ? inventoryAccessStrategies
+    : family === framedContactId ? framedContactStrategies
       : family === transportContactId ? transportContactStrategies : family === bandAlignmentId ? bandAlignmentStrategies
         : family === sharedArrivalId ? sharedArrivalStrategies : family === outlineServiceId ? outlineServiceStrategies
           : family === labeledSequenceId ? labeledSequenceStrategies : family === markedCollectionId ? markedCollectionStrategies
@@ -509,6 +511,9 @@ export function readNativeResolution(agent: {
   if (situationCard && family === publicInputExplorationId) {
     const region = bounds(card?.addressedRegion);
     if (region) subjects.push({ label: 'Visible region tested by the click', box: region });
+    const focus = bounds(card?.focus), moved = bounds(record(card?.lastControlledMotion)?.to);
+    if (focus) subjects.push({ label: 'Piece whose control is being tested', box: focus });
+    if (moved) subjects.push({ label: 'Piece moved by the tested direction', box: moved });
   }
   if (situationCard && family === framedContactId) {
     const region = bounds(card?.addressedRegion), actor = bounds(card?.controlledPiece);
@@ -779,7 +784,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label: 'Turning post', box });
     }
   }
-  if (situationCard && family === navigateRevealedGridId) {
+  if (situationCard && (family === navigateRevealedGridId || family === learnGridAccessId)) {
     for (const [field, label] of [['actor', 'Moving sprite'], ['target', 'Next cell'], ['obstacle', 'Moving obstacle'], ['exit', 'Exit']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });

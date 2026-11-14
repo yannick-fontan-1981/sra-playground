@@ -24,3 +24,33 @@ test('SIC probes repeated interior markers while requiring independent visible a
     assert.equal(rows[proposed.actions[0]!.data.y!]![proposed.actions[0]!.data.x!], repeated ? 7 : 3);
   }
 });
+
+test('SIC tests a direction after a click changes a piece and binds the observed translation to that click', async () => {
+  const family = createSicPublicInputExploration();
+  const directions = [1, 2, 3, 4].map(id => ({ action_ref: `ACTION${id}`, data: {} }));
+  const available_action_refs = [...directions.map(command => command.action_ref), 'ACTION6'];
+  const board = (left: number, color: number, tick: number) => Array.from({ length: 12 }, (_, y) =>
+    Array.from({ length: 12 }, (_, x) => y === 0 && x === tick ? 7 :
+      y >= 4 && y <= 6 && x >= left && x <= left + 2 ? color : 0));
+  let revision = 0;
+  const observe = (frame_rows: number[][]) => measureNativeObservation({ frame_rows, frame_hash: String(revision),
+    level: 1, levels_completed: 0, available_action_refs, state: 'NOT_FINISHED' }, ++revision);
+  let rows = board(3, 2, 0), observation = await observe(rows);
+  for (let tick = 1; tick <= 5; tick++) {
+    const proposal = await family.propose(observation, rows, directions, 20);
+    assert.ok(proposal);
+    const command = proposal.actions[0]!;
+    assert.equal(command.action_ref === 'ACTION6', tick === 5);
+    const nextRows = board(3, tick === 5 ? 5 : 2, tick), next = await observe(nextRows);
+    await family.record(observation, next, command, rows, nextRows, proposal, 0, [nextRows]);
+    rows = nextRows;
+    observation = next;
+  }
+  const probe = await family.propose(observation, rows, directions, 20);
+  assert.ok(probe);
+  assert.equal(probe.sicSituationCard.strategy, 'P05');
+  const nextRows = board(5, 5, 6), next = await observe(nextRows);
+  const result = await family.record(observation, next, probe.actions[0]!, rows, nextRows, probe, 0, [nextRows]);
+  assert.deepEqual(result.events.map(event => [event.kind, event.from, event.to, event.evidence]),
+    [['sic_selected_piece_motion', [3, 4, 5, 6], [5, 4, 7, 6], [observation.observation_ref, next.observation_ref]]]);
+});
