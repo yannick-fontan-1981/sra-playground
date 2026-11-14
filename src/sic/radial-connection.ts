@@ -1,12 +1,17 @@
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { assemblePorts, type PortModel } from '../logos-engine/v6-port-assembly.ts';
 import { measureRadialPorts, radialAssemblyModel, radialAtGeometry, rotateRadialPorts } from '../logos-engine/v6-radial-port-observation.ts';
 import { sicNeedId } from './need-identity.ts';
+import { navigationPrimitives } from './navigation-primitives.ts';
+import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const radialConnectionId = 'sic_radial_connection';
+export const learnRadialConnectionId = 'sic_verify_tile_rotation';
 export const radialConnectionStrategies = {
+  P02: navigationPrimitives.P02,
+  P05: navigationPrimitives.P05,
   measure_tile_rotation: 'Test the rotation of an unmatched tile',
   rotate_to_match_ports: 'Rotate the tile toward a connected arrangement',
 } as const;
@@ -32,11 +37,16 @@ function returnedTurn(proposal: Proposal, rows: NativeRows) {
   return rotations.length === 1 ? rotations[0]! : null;
 }
 
-export function createSicRadialConnection(): NativeFamily<Proposal> {
+export function createSicRadialConnection(family = radialConnectionId): NativeFamily<Proposal> {
+  const learns = family === learnRadialConnectionId;
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: radialConnectionId,
-    async propose(observation, rows, _inputs, remaining) {
+    id: family,
+    async attachPrograms(registry) {
+      if (learns) decide = await registry.registerProgram(chooseInteraction, {}, await interactionModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const scene = measureRadialPorts(rows) as Scene | null;
       if (!scene || scene.cells.length > 16) return null;
@@ -48,24 +58,35 @@ export function createSicRadialConnection(): NativeFamily<Proposal> {
       const cell = target?.findIndex(([rotation]) => rotation !== 0) ?? -1;
       if (cell < 0) return null;
       const focus = scene.cells[cell]!, [x, y] = focus.point;
+      if (learns && local.turn === null && equal(rotateRadialPorts(focus.ports, 1), rotateRadialPorts(focus.ports, 3))) return null;
       const command = { action_ref: 'ACTION6', data: { x, y } };
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
+      const mode = execution?.reasoningMode ?? 'exploration';
+      const facts = { probeNeededInteraction: local.turn === null, repeatSupportedInteraction: local.turn !== null, mode };
+      const decision = learns ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : null;
+      const primitive = facts.probeNeededInteraction ? 'P05' : 'P02';
+      if (learns && decision?.result !== primitive) return null;
+      const agenda = learns ? null : resolveStrategyGraph({ graph, mode: 'active', facts: {
         known: { value: local.turn !== null, evidence },
       }, planners: { measure_tile_rotation: () => command, rotate_to_match_ports: () => command } });
-      if (!selected) return null;
-      const strategy = selected.id, label = radialConnectionStrategies[strategy], parent = 'G_official_completion';
+      const strategy = learns ? primitive : agenda?.selected?.id;
+      if (!strategy) return null;
+      const label = radialConnectionStrategies[strategy], parent = 'G_official_completion';
       const objective = { kind: 'make_connected_port_arrangement', scope: scene.geometry_ref, subjects: ['fixed_tiles', 'neighboring_ports'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_connecting_the_ports' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = `radial-connection:${need.id}`;
       const actions = [command], binding = await ObservedInputDomain.makeLocusWitness(observation, rows, focus.point, { reason: label, evidence });
-      return { status: 'proposed', kind: radialConnectionId, actions, local, scene, cell, needId: need.id,
+      return { status: 'proposed', kind: family, actions, local, scene, cell, needId: need.id,
         steps: [{ action: command, expected_after: null, point_binding: binding }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Connect neighboring tiles by matching their openings', mode: local.turn === null ? 'exploration' : 'solving',
+        sicSituationCard: { strategy, need: 'Connect neighboring tiles by matching their openings',
+          mode: learns ? mode : local.turn === null ? 'exploration' : 'solving',
           situation: local.turn === null ? 'The layout suggests a tile to turn. Test what the click changes.' :
             'The observed rotation gives a route to a connected layout. Verify the changed openings after the click.',
-          agenda: entries, evidence, tile: focus.bbox, neighbors: scene.cells.filter((_, i) => i !== cell).slice(0, 3).map(item => item.bbox) },
+          agenda: agenda?.entries ?? [], evidence, tile: focus.bbox, neighbors: scene.cells.filter((_, i) => i !== cell).slice(0, 3).map(item => item.bbox),
+          ...(decision ? { triggerCard: decision.receipt.workflow, rotation: local.turn } : {}) },
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },

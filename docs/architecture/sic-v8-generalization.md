@@ -389,3 +389,9 @@ Avec `sic_link_openings` retirée, **PRTL gagne en six commandes SIC seul**. La 
 Le nom neutre et la palette permutée conservent le gain. Désactiver P05 après le premier clic rend la main à l’exploration et laisse le niveau ouvert à la sixième commande.
 
 La campagne commune GIGO et PRTL confirme **38/100** niveaux 1 après retrait. Les 440 commandes de ces victoires relèvent de SIC seul, dont 101 choisies par le SRC. Les 100 niveaux 1 en usage normal, les 36 victoires précédentes après retrait et les quatre jeux complets DICO, DNOI, HANO et SYME avec et sans retrait reproduisent leurs commandes et retours de référence.
+
+### Mesurer un quart de tour puis vérifier sa réutilisation
+
+Avec `sic_radial_connection` retirée et l’exploration publique active, **PIPE gagne en quatre clics SIC seul**. La carte SRC `sic.verify_observed_interaction.choose` choisit P05 pour mesurer le sens du quart de tour sur une tuile qui distingue les deux sens. Elle choisit P02 pour les trois clics suivants. Le calcul des dispositions connectées reste dans l’assembleur de ports TypeScript partagé. Chaque retour confirme les ouvertures attendues sur la tuile et vérifie les ouvertures des voisines, ou établit le gain officiel. Les commandes et retours reproduisent la référence, empreinte `9537f4eff9c22c027b3376d3a93cf17b4eb40cbbcb908ddecf23691b0d277c0a`.
+
+Le gain en quatre clics tient avec un nom neutre et une palette permutée. Désactiver P02 dans le graphe après le premier clic laisse une autre famille SIC choisir trois entrées directionnelles. Le niveau reste ouvert au même budget. Cette vérification porte sur PIPE. Le transfert de la carte à une autre interaction reste à démontrer.

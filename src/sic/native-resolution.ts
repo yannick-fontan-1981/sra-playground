@@ -83,7 +83,7 @@ import { windowCoverageId, windowCoverageStrategies } from './window-coverage.ts
 import { panelMatchingId, panelMatchingStrategies } from './panel-matching.ts';
 import { crossingRowsId, crossingRowsStrategies } from './crossing-rows.ts';
 import { traceCoverageId, traceCoverageStrategies } from './trace-coverage.ts';
-import { radialConnectionId, radialConnectionStrategies } from './radial-connection.ts';
+import { learnRadialConnectionId, radialConnectionId, radialConnectionStrategies } from './radial-connection.ts';
 import { invitedCaptureId, invitedCaptureStrategies } from './invited-capture.ts';
 import { branchAlignmentId, branchAlignmentStrategies } from './branch-alignment.ts';
 import { feedbackTrialId, feedbackTrialStrategies } from './feedback-trial.ts';
@@ -493,7 +493,7 @@ export function readNativeResolution(agent: {
                                   : family === glyphEditingId ? glyphEditingStrategies : (family === fieldIsolationId || family === learnFieldIsolationId) ? fieldIsolationStrategies
                                     : (family === directionalReceptionId || family === learnDirectionalReceptionId) ? directionalReceptionStrategies : family === windowCoverageId ? windowCoverageStrategies
                                       : family === panelMatchingId ? panelMatchingStrategies : family === crossingRowsId ? crossingRowsStrategies
-                                        : family === traceCoverageId ? traceCoverageStrategies : family === radialConnectionId ? radialConnectionStrategies
+                                        : family === traceCoverageId ? traceCoverageStrategies : (family === radialConnectionId || family === learnRadialConnectionId) ? radialConnectionStrategies
                                           : family === invitedCaptureId ? invitedCaptureStrategies : family === branchAlignmentId ? branchAlignmentStrategies
                                             : family === feedbackTrialId ? feedbackTrialStrategies
                                             : family === catalogueComparisonId || family === revealedExampleId ? catalogueComparisonStrategies
@@ -705,7 +705,7 @@ export function readNativeResolution(agent: {
       if (box && !subjects.some(subject => subject.box.every((value, i) => value === box[i]))) subjects.push({ label, box });
     }
   }
-  if (situationCard && family === radialConnectionId) {
+  if (situationCard && (family === radialConnectionId || family === learnRadialConnectionId)) {
     const tile = bounds(card?.tile);
     if (tile) subjects.push({ label: 'Tile to rotate', box: tile });
     if (Array.isArray(card?.neighbors)) for (const neighbor of card.neighbors) {
