@@ -26,6 +26,7 @@ import { viewStrategies } from './view-strategy.ts';
 import { informationStrategies } from './information-strategy.ts';
 import type { AgendaEntry } from './strategy-agenda.ts';
 import { frontierInputOrders } from './frontier-configuration.ts';
+import { orderedContactStrategies } from './ordered-contact.ts';
 
 const commands: Readonly<Record<number, string>> = {
   1: 'Up', 2: 'Down', 3: 'Left', 4: 'Right', 5: 'Space', 6: 'Click', 7: 'Action 7',
@@ -882,6 +883,8 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
   };
   const repeated = groups.filter(group => group.repeated);
   const native = view?.native;
+  const openRankings = new Set(Array.from(panel.querySelectorAll<HTMLDetailsElement>('[data-sic-situation-order][open]'),
+    details => details.dataset.sicSituationOrder));
   const lastPlan = [...returns].reverse().find(item => item.fromLevel === board?.level && item.decision)?.decision;
   const planSource = native?.pending ? native : lastPlan ?? (native?.steps.length ? native : null);
   const expandedMethods = new Map([...panel.querySelectorAll<HTMLDetailsElement>('[data-sic-method]')]
@@ -921,6 +924,7 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
   const agentActions = mode === 'agent' ? returns.length : 0;
   editor.update(board?.gameCode ?? null, timeline, shown, agentActions, (item, caption) => strategyEvidenceFrames(item, palette, caption),
     () => renderDiscoveryPerspectives(panel, view, board, mode, returns, groups, palette, objectives));
+  renderSituationCards(strategies, returns, native, palette, openRankings);
   renderGenericTimeline(panel, strategies, shown, palette, expandedMethods);
   const operation = planSource?.operation;
   const catalogHost = panel.querySelector('[data-sic-operation-catalog]')!;
@@ -1231,6 +1235,57 @@ function selectTimelineEpisodes(timeline: ReturnType<typeof strategyTimeline>, l
 
 function followsContradiction(item: ReturnType<typeof strategyTimeline>[number]) {
   return item.facts.has('previousPredictionFailed') && item.facts.has('differentPlan');
+}
+
+function renderSituationCards(container: Element, returns: readonly DirectionalReturn[], pending: NativeResolution | null | undefined,
+  palette: readonly string[], openRankings: ReadonlySet<string | undefined>) {
+  const cards = new Map<string, DirectionalReturn>();
+  for (const item of returns) {
+    const card = item.decision?.situationCard;
+    if (!card) continue;
+    const key = `${item.fromLevel}:${card.strategy}`;
+    const retained = cards.get(key);
+    if (retained?.nativeCheck?.matched === false) continue;
+    if (!retained || item.nativeCheck?.matched === false) cards.set(key, item);
+  }
+  if (!cards.size && !pending?.situationCard) return;
+  const section = document.createElement('section');
+  section.className = 'sic-situation-cards';
+  const heading = document.createElement('h5');
+  heading.textContent = 'Situation cards';
+  section.append(heading);
+  const render = (card: NonNullable<NativeResolution['situationCard']>, stamp: string, item?: DirectionalReturn) => {
+    const article = document.createElement('article');
+    article.className = 'sic-situation-card';
+    const header = document.createElement('header'), mode = document.createElement('span'), title = document.createElement('h6');
+    mode.textContent = `${stamp} · ${card.mode}`;
+    title.textContent = orderedContactStrategies[card.strategy];
+    header.append(mode, title);
+    const situation = document.createElement('p');
+    situation.textContent = card.situation;
+    const need = document.createElement('p');
+    const evidence = card.evidenceActions.filter(action => action > 0);
+    need.textContent = evidence.length ? `${card.need} · evidence from action ${evidence.at(-1)}` : card.need;
+    article.append(header, situation, need);
+    if (item) {
+      const command = commands[item.command] ?? item.decision?.steps[0]?.action ?? 'Command';
+      const result = document.createElement('p');
+      result.textContent = `${command} · ${item.toLevel > item.fromLevel ? 'Level completed'
+        : item.nativeCheck?.matched === true ? 'Prediction matched'
+          : item.nativeCheck?.matched === false ? 'Prediction contradicted' : 'Return observed'}`;
+      article.append(result, ...strategyEvidenceFrames(item, palette, 'Action ' + item.sequence));
+    }
+    const ranking = document.createElement('details'), summary = document.createElement('summary');
+    summary.textContent = 'Strategy order';
+    ranking.append(summary, renderAgenda('Strategy order', orderedContactStrategies, card.agenda));
+    ranking.dataset.sicSituationOrder = stamp;
+    ranking.open = openRankings.has(stamp);
+    article.append(ranking);
+    section.append(article);
+  };
+  if (pending?.situationCard && pending.pending) render(pending.situationCard, 'Next action');
+  for (const item of cards.values()) render(item.decision!.situationCard!, `Level ${item.fromLevel} · action ${item.sequence}`, item);
+  container.append(section);
 }
 
 function renderGenericTimeline(panel: HTMLElement, container: Element, selected: ReturnType<typeof strategyTimeline>,

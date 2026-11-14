@@ -21,12 +21,18 @@ type Plan = { command: NativeCommand; prediction: Projection | null; distance: n
 type ContactProposal = NativeProposal & { contact: Plan; strategy: string; needId: string };
 const empty: Memory = { epoch: 0, tried: [], effects: {}, counterexample: [], retained: null, refused: false, transferableContact: [] };
 const objective = 'G_official_completion';
-const titles = {
+export const orderedContactStrategies = {
   learn_command_displacement: 'Measure which part moves when this command is applied',
   order_components_by_contact: 'Test a route that aligns the components with the visible reference order',
   revise_contact_chain: 'Replan using the observed displacement of the contact chain',
   revalidate_contact_composition: 'Test whether the observed contact can construct the current reference order',
 };
+const situations = {
+  learn_command_displacement: ['Exploration', 'An available command has no measured effect on the support.'],
+  order_components_by_contact: ['Solving', 'The controls are measured and the visible reference gives an order to reproduce.'],
+  revise_contact_chain: ['Exploration', 'The last model missed a displacement that affected several pieces.'],
+  revalidate_contact_composition: ['Assimilation', 'An observed contact effect can be tested against the new board and reference order.'],
+} as const;
 const graph = compileStrategyGraph({
   id: 'follow_reference_order', version: 1, order: 'FALLBACK',
   priorities: ['learn_command_displacement', 'revise_contact_chain', 'revalidate_contact_composition', 'order_components_by_contact'],
@@ -72,7 +78,7 @@ export function createSicOrderedContact(policy: Parameters<typeof rootedLineMode
         return command ? { command, prediction, distance, configuration } : null;
       };
       const depth = Math.min(limits.maxDepth, remaining, execution?.remainingLevelActions ?? remaining);
-      const { selected } = resolveStrategyGraph({ graph, mode: 'active',
+      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active',
         facts: {
           unmeasuredInput: { value: !!unmeasured, evidence: [ref] },
           contactChain: { value: !!counterexample.length, evidence: [ref, ...counterexample] },
@@ -111,8 +117,13 @@ export function createSicOrderedContact(policy: Parameters<typeof rootedLineMode
         parentObjective: objective, satisfactionContract: strategy === 'learn_command_displacement'
           ? 'observe_displacement_in_public_return' : 'observe_game_advance_after_alignment' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence: proof };
-      const id = `contact:${need.id}`, label = titles[strategy], actions = [plan.command];
+      const id = `contact:${need.id}`, label = orderedContactStrategies[strategy], actions = [plan.command];
+      const [mode, situation] = situations[strategy];
       return { status: 'proposed', kind: orderedContactId, strategy, contact: plan, needId: need.id, actions,
+        rooted_line_plan: { scene: { root: scene.root, pieces: scene.pieces.slice(0, 8) } },
+        sicSituationCard: { strategy, need: goal.kind === 'measure_control_effect' ? 'Understand a command' : 'Reproduce the visible reference order',
+          mode, situation, agenda: entries, evidence: strategy === 'revise_contact_chain' ? counterexample
+            : strategy === 'revalidate_contact_composition' ? transferableContact : [], distance: plan.distance },
         steps: [{ action: plan.command, expected_after: plan.prediction }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${objective}`] }],

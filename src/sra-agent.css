@@ -73,6 +73,13 @@
 .sic-recovery-timeline{padding-left:1.5rem}
 .sic-recovery-timeline>li{margin-bottom:6px}
 .sic-strategy-configurations{margin-top:14px;padding-top:10px;border-top:1px solid var(--line)}
+.sic-situation-cards{display:grid;gap:10px;margin-block:12px}
+.sic-situation-cards h5,.sic-situation-card h6,.sic-situation-card p{margin:0}
+.sic-situation-card{display:grid;gap:7px;min-width:0;border:1px solid var(--line);border-radius:8px;padding:12px;background:var(--surface)}
+.sic-situation-card header span{color:var(--subtle);font-size:12px}
+.sic-situation-card h6{font-size:14px}
+.sic-situation-card p,.sic-situation-card details{font-size:13px}
+.sic-situation-card summary{cursor:pointer;font-weight:600}
 .sic-strategy-configurations h5{margin:0 0 6px;font-size:14px}
 .sic-strategy-configurations details{margin-top:4px}
 .sic-strategy-configurations dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0 0 8px;font-size:13px}

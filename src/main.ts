@@ -1,8 +1,9 @@
+/// <reference types="vite/client" />
 import './styles.css';
 import './sra-agent.css';
 import { renderSiteHeader } from './site-header';
 import { BrowserGameRuntime, type GameObservation } from './runtime/browser-games';
-import { AGENT_STATUS } from './runtime/contracts';
+import { AGENT_STATUS, type AgentAction } from './runtime/contracts';
 import { BrowserV6Agent, type V6AgentSnapshot } from './runtime/v6-agent.ts';
 import { bindSicPerspectives, renderSicPanel } from './sic/panel.ts';
 import { bindRecoverySettings, renderActionCoverage } from './sic/recovery-settings.ts';
@@ -12,7 +13,7 @@ import { observeSpace, type SpaceReturn } from './sic/space-return.ts';
 import { compareStckRank, type StckRankTrial } from './sic/stck-stack.ts';
 import { matchObservedRotation, observeDirectionalReturn, samplePublicAnimation, type DirectionalReturn } from './sic/directional-return.ts';
 import { captureDecisionSprites, readNativeResolution, type NativeResolution } from './sic/native-resolution.ts';
-import { isRecoveryStop } from './sic/active-recovery.ts';
+import { defaultRecoveryPack, isRecoveryStop } from './sic/active-recovery.ts';
 import { observeLs20Restart, recordPursuedObjective, type PursuedObjective } from './sic/recovery.ts';
 import ls20ReviewEvidence from './sic/ls20-review-evidence.json';
 import { GAME_CATALOG, getGameByCode, type GameCatalogEntry } from './games/catalog';
@@ -166,6 +167,8 @@ app.innerHTML = `
             <div id="agent-panel" role="tabpanel" aria-labelledby="agent-tab" data-agent-status="${AGENT_STATUS.status}" data-agent-available="${AGENT_STATUS.available}">
               <h3>Solve with SRA.</h3>
               <p id="agent-message" class="agent-message" role="status" aria-live="polite" aria-atomic="true" tabindex="0">Ready to run from level 1.</p>
+              <label for="agent-planning">Planning</label>
+              <select id="agent-planning"><option value="native">SRA AgentNative TS</option><option value="sic">SIC only</option></select>
               <div class="agent-run-controls">
                 <button id="agent-run" type="button" class="primary-button">Run to next level</button>
                 <button id="agent-batch" type="button" class="secondary-button">Run 16 actions</button>
@@ -419,6 +422,11 @@ let lastSicState: V6AgentSnapshot | null = null;
 let spaceReturns: readonly SpaceReturn[] = [];
 let stckRankReturns: readonly (StckRankTrial & { sessionId: string; sequence: number })[] = [];
 let agentReturns: readonly DirectionalReturn[] = [];
+type AgentReturnDraft = { sessionId: string; sequence: number; action: AgentAction; before: GameObservation;
+  next: GameObservation; decision: V6AgentSnapshot | null; acquired?: V6AgentSnapshot };
+const pendingSicReturns: AgentReturnDraft[] = [];
+const sicDisplayEnabled = new URLSearchParams(window.location.search).get('sicDisplay') !== 'off';
+sicPanel.hidden = !sicDisplayEnabled;
 let objectiveLedger: { sessionId: string; entries: readonly PursuedObjective[] } | null = null;
 let manualReturns: readonly DirectionalReturn[] = [];
 let manualSequence = 0;
@@ -452,7 +460,8 @@ function recordPublicReturn(history: readonly DirectionalReturn[], sessionId: st
 const agent = new BrowserV6Agent({
   getObservation: () => observation,
   canDispatch: () => ready() && mode === 'agent',
-  recoveryConfiguration,
+  recoveryConfiguration: () => element<HTMLSelectElement>('#agent-planning').value === 'sic'
+    ? { ...defaultRecoveryPack, solver: 'sic' } : recoveryConfiguration(),
   dispatch: async action => {
     if (!ready() || mode !== 'agent' || !observation?.availableActionIds.includes(action.id)) {
       throw new Error('The game changed before the action could be sent.');
@@ -472,40 +481,9 @@ const agent = new BrowserV6Agent({
       if (generation !== selectionGeneration || next.gameCode !== selectedGame.code) {
         throw new Error('The action belongs to an earlier game session.');
       }
-      if (action.id === 5 && before.gameCode === 'STCK' && sessionId && sessionId === agentState?.sessionId) {
-        try {
-          const entry = observeSpace({ sessionId, sequence, fromLevel: before.level, toLevel: next.level },
-            before.frame, next.frames.length ? next.frames : [next.frame]);
-          spaceReturns = [...spaceReturns.filter(item => item.sessionId === sessionId).slice(-2), entry];
-        } catch {
-          // An unavailable preview cannot affect the executed action or its return.
-        }
-      }
-      if (action.id === 6 && before.gameCode === 'STCK' && before.level === next.level
-          && before.state === next.state && sessionId && sessionId === agentState?.sessionId) {
-        try {
-          const trial = compareStckRank(before.frame, next.frame, [action.data.x, action.data.y], before.level);
-          if (trial) stckRankReturns = [...stckRankReturns.filter(item => item.sessionId === sessionId).slice(-31),
-            { ...trial, sessionId, sequence }];
-        } catch {
-          // Rank evidence is optional and cannot affect the executed action.
-        }
-      }
-      if (sessionId && sessionId === agentState?.sessionId) {
-        let decision: NativeResolution | null = null;
-        try {
-          if (nativeSnapshot?.level === before.level && nativeSnapshot.phase === 'authorised_not_executed') {
-            decision = readNativeResolution(nativeSnapshot);
-          }
-        } catch {
-          // Explanations never affect dispatch.
-        }
-        agentReturns = recordPublicReturn(agentReturns, sessionId, sequence, action.id, before, next, decision);
-        const receipt = agentReturns.at(-1);
-        if (receipt?.sessionId === sessionId && receipt.sequence === sequence) {
-          const entries = objectiveLedger?.sessionId === sessionId ? objectiveLedger.entries : [];
-          objectiveLedger = { sessionId, entries: recordPursuedObjective(entries, receipt) };
-        }
+      if (sicDisplayEnabled && sessionId && sessionId === agentState?.sessionId) {
+        pendingSicReturns.push({ sessionId, sequence, action, before, next, decision: nativeSnapshot });
+        if (pendingSicReturns.length > 96) pendingSicReturns.shift();
       }
       return { observation: next, executionMs };
     } catch (error) {
@@ -522,26 +500,55 @@ const agent = new BrowserV6Agent({
   },
   onState: state => {
     if (contradictionReview?.sessionId !== state.sessionId) contradictionReview = null;
-    const last = agentReturns.at(-1);
-    if (last && !last.nativeCheck && last.sessionId === state.sessionId && last.sequence === state.sequence) {
-      try {
-        const outcome = readNativeResolution(state)?.outcome;
-        if (outcome) agentReturns = [...agentReturns.slice(0, -1), { ...last, nativeCheck: outcome }];
-      } catch {
-        // A missed display receipt does not change the native session.
-      }
+    const last = pendingSicReturns.at(-1);
+    if (last && last.sessionId !== state.sessionId) pendingSicReturns.length = 0;
+    else if (last && !last.acquired && last.sequence === state.sequence && state.actions === last.sequence && state.status !== 'error') {
+      last.acquired = state;
     }
     agentState = state;
     updateInterface();
   },
 });
 
+function projectAgentReturn({ sessionId, sequence, action, before, next, decision: nativeSnapshot, acquired }: AgentReturnDraft): void {
+  let decision: NativeResolution | null = null;
+  if (nativeSnapshot?.level === before.level && nativeSnapshot.phase === 'authorised_not_executed') {
+    try { decision = readNativeResolution(nativeSnapshot); } catch { /* An optional explanation was unavailable. */ }
+  }
+  agentReturns = recordPublicReturn(agentReturns, sessionId, sequence, action.id, before, next, decision);
+  const receipt = agentReturns.at(-1);
+  if (receipt?.sessionId === sessionId && receipt.sequence === sequence) {
+    const outcome = acquired ? readNativeResolution(acquired)?.outcome : null;
+    if (outcome) agentReturns = [...agentReturns.slice(0, -1), { ...receipt, nativeCheck: outcome }];
+    const entries = objectiveLedger?.sessionId === sessionId ? objectiveLedger.entries : [];
+    objectiveLedger = { sessionId, entries: recordPursuedObjective(entries, receipt) };
+  }
+  if (before.gameCode !== 'STCK') return;
+  if (action.id === 5) {
+    const entry = observeSpace({ sessionId, sequence, fromLevel: before.level, toLevel: next.level },
+      before.frame, next.frames.length ? next.frames : [next.frame]);
+    spaceReturns = [...spaceReturns.filter(item => item.sessionId === sessionId).slice(-2), entry];
+  }
+  if (action.id === 6 && before.level === next.level && before.state === next.state) {
+    const trial = compareStckRank(before.frame, next.frame, [action.data.x, action.data.y], before.level);
+    if (trial) stckRankReturns = [...stckRankReturns.filter(item => item.sessionId === sessionId).slice(-31),
+      { ...trial, sessionId, sequence }];
+  }
+}
+
 function updateSicPanel(): void {
-  if (sicPanel.hidden || sicRenderPending || busy || agentState?.busy) return;
+  if (!sicDisplayEnabled || sicPanel.hidden || sicRenderPending || busy || agentState?.busy) return;
   sicRenderPending = true;
   window.requestAnimationFrame(() => {
     sicRenderPending = false;
     if (sicPanel.hidden || busy || agentState?.busy) return;
+    const deadline = performance.now() + 5;
+    while (pendingSicReturns.length && performance.now() < deadline) {
+      const entry = pendingSicReturns.shift()!;
+      if (entry.sessionId !== agentState?.sessionId) continue;
+      try { projectAgentReturn(entry); } catch { /* Display evidence is optional. */ }
+    }
+    if (pendingSicReturns.length) { updateSicPanel(); return; }
     const board = loading || failed ? null : observation;
     const history = mode === 'agent' ? agentReturns : manualReturns;
     if (board === lastSicBoard && agentState === lastSicState && history === lastSicReturns && mode === lastSicMode) return;
@@ -572,6 +579,8 @@ function updateAgentInterface(): void {
   const grounded = Boolean(observation?.availableActionIds.some(id => id >= 1 && id <= 7));
   const needsRestart = Boolean(observation && !state?.sessionId && (observation.level !== 1 || observation.levelsCompleted !== 0));
   const available = mode === 'agent' && ready() && !terminal && grounded && !needsRestart;
+  const planning = element<HTMLSelectElement>('#agent-planning');
+  planning.disabled = Boolean(state?.busy) || busy || loading;
   const reviewing = Boolean(contradictionReview);
   element<HTMLButtonElement>('#agent-step').disabled = reviewing || !available || !(state?.canStep ?? true);
   element<HTMLButtonElement>('#agent-run').disabled = reviewing || !available || !(state?.canRun ?? true);
@@ -582,6 +591,7 @@ function updateAgentInterface(): void {
   const recoveryStop = mode === 'agent' && state?.status === 'stopped' && isRecoveryStop(state.reason) ? state.reason : null;
   element('[data-sic-mode]').textContent = recoveryStop === 'sic_recovery_shadow' ? 'Contact recovery observed in shadow'
     : recoveryStop ? 'Contact recovery limited'
+    : mode === 'agent' && planning.value === 'sic' ? 'SIC only'
     : mode === 'agent' && selectedGame.code === 'AS66' && reviewToggle.checked ? 'Pause for review enabled'
     : mode === 'agent' && state?.sessionId ? 'Native agent and SIC'
     : 'Read-only preview';
@@ -783,7 +793,7 @@ function setMode(next: 'manual' | 'agent', focusTab = false): void {
   element('#manual-panel').hidden = !manual;
   element('#agent-panel').hidden = manual;
   element('.player').classList.toggle('is-agent-mode', !manual);
-  sicPanel.hidden = false;
+  sicPanel.hidden = !sicDisplayEnabled;
   agent.refresh();
   updateInterface();
   if (focusTab) (manual ? manualTab : agentTab).focus();
@@ -840,7 +850,16 @@ element('#manual-tab').addEventListener('click', () => setMode('manual'));
 element('#agent-tab').addEventListener('click', () => setMode('agent'));
 element('#return-manual').addEventListener('click', () => { setMode('manual'); focusCanvas(); });
 element('#agent-step').addEventListener('click', () => { if (!contradictionReview) void agent.step(); });
-element('#agent-run').addEventListener('click', () => { if (!contradictionReview) void agent.run(600); });
+element('#agent-planning').addEventListener('change', () => {
+  agent.invalidate('Planning selection changed. Start a new reasoning session on the current board.');
+});
+element('#agent-run').addEventListener('click', () => {
+  if (contradictionReview) return;
+  const start = performance.now();
+  void agent.run(600).finally(() => {
+    if (import.meta.env.DEV) element('#agent-panel').dataset.lastRunMilliseconds = String(Math.round(performance.now() - start));
+  });
+});
 element('#agent-batch').addEventListener('click', () => { if (!contradictionReview) void agent.run(16); });
 element('#agent-pause').addEventListener('click', () => agent.pause());
 element('#agent-sic-pause').addEventListener('change', updateAgentInterface);

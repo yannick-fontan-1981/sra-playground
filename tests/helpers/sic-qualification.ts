@@ -34,7 +34,7 @@ async function hash(value: unknown) {
 async function run(runtime: BrowserGameRuntime, code: string, target: number | 'complete', pack: RecoveryPack, maxActions?: number,
   onStrategy?: (row: ObservedStrategy) => void) {
   let board = await runtime.load(code, 1);
-  const targetLevels = target === 'complete' ? board.levelCount : target;
+  const targetLevels = target === 'complete' ? board.levelCount : Math.min(target, board.levelCount);
   let state: V6AgentSnapshot | undefined;
   const trace: { action: AgentAction; packet: string; level: number; levelsCompleted: number }[] = [];
   const information: { sequence: number; strategy: string; predictions: number | null;
@@ -129,17 +129,19 @@ function exclusiveFamilies(families: readonly string[] | undefined) {
 async function qualifySicOnly(parameters: URLSearchParams) {
   const games = parameters.get('games')?.split(',') ?? GAME_CATALOG.filter(game => game.availability === 'playable').map(game => game.code);
   const maxActions = Number(parameters.get('actions') ?? 600);
+  const round = parameters.has('level') ? Number(parameters.get('level')) : null;
+  if (round !== null && (!Number.isSafeInteger(round) || round < 1)) throw new Error('Expected a positive level number.');
   if (!Number.isSafeInteger(maxActions) || maxActions < 1 || maxActions > 600) throw new Error('Expected an action limit from 1 to 600.');
   const runtime = new BrowserGameRuntime();
   const results = [];
   const pack: RecoveryPack = { ...defaultRecoveryPack, solver: 'sic' };
   try {
     for (const game of games) {
-      output.textContent = JSON.stringify({ status: 'running', game, results }, null, 2);
+      output.textContent = JSON.stringify({ status: 'running', ...(round ? { round } : {}), game, results }, null, 2);
       try {
         const operations = new Set<string>();
         const strategies = new Map<string, { commands: number; contradictedAt: number[] }>();
-        const result = await run(runtime, game, 'complete', pack, maxActions, row => {
+        const result = await run(runtime, game, round ?? 'complete', pack, maxActions, row => {
           if (row.operation) operations.add(row.operation);
           const entry = strategies.get(row.strategy) ?? { commands: 0, contradictedAt: [] };
           entry.commands++;
@@ -157,7 +159,8 @@ async function qualifySicOnly(parameters: URLSearchParams) {
         results.push({ game, error: error instanceof Error ? error.message : String(error) });
       }
     }
-    output.textContent = JSON.stringify({ status: 'completed', results }, null, 2);
+    output.textContent = JSON.stringify({ status: 'completed', ...(round ? { round,
+      reached: results.filter(row => row.qualified && row.levels >= round).length } : {}), results }, null, 2);
   } finally {
     runtime.dispose();
   }

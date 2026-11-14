@@ -5,6 +5,7 @@ import { readControlEffectTrigger } from './control-effect-trigger.ts';
 import { contactRecoveryStrategies, isContactStrategy, isRecoveryStop, rootedRecoveryStrategy,
   type ContactRecoveryNeed, type ContactStrategy } from './active-recovery.ts';
 import type { AgendaEntry } from './strategy-agenda.ts';
+import { orderedContactId, orderedContactStrategies } from './ordered-contact.ts';
 import { frontierStrategies, isFrontierStrategy, type FrontierStrategy } from './frontier-strategy.ts';
 import { isViewStrategy, viewStrategies, type ViewStrategy } from './view-strategy.ts';
 import { informationStrategies, isInformationStrategy, type InformationStrategy } from './information-strategy.ts';
@@ -54,6 +55,9 @@ export interface NativeResolution {
   readonly objective: string | null;
   readonly objectiveSource: 'native' | 'question' | 'unpublished' | null;
   readonly strategyObjective?: StrategyObjective;
+  readonly situationCard?: { readonly strategy: keyof typeof orderedContactStrategies; readonly need: string; readonly mode: string;
+    readonly situation: string; readonly agenda: readonly AgendaEntry<keyof typeof orderedContactStrategies>[];
+    readonly evidenceActions: readonly number[]; readonly distance: number | null };
   readonly missingControl?: MissingControlWitness;
   readonly operation: string | null;
   readonly searchOperation?: string;
@@ -375,6 +379,15 @@ export function readNativeResolution(agent: {
   const op = label(template?.operation_key);
   const rooted = record(proposal?.rooted_line_plan);
   const rootedScene = record(rooted?.scene);
+  const card = planReceipt?.authority === 'sicOnly' && family === orderedContactId ? record(proposal?.sicSituationCard) : null;
+  const isOrderedStrategy = (id: unknown): id is keyof typeof orderedContactStrategies =>
+    typeof id === 'string' && Object.hasOwn(orderedContactStrategies, id);
+  const cardNeed = label(card?.need), cardMode = label(card?.mode), cardSituation = label(card?.situation);
+  const situationCard = isOrderedStrategy(card?.strategy) && card?.strategy === planReceipt?.strategy && cardNeed && cardMode && cardSituation ? {
+    strategy: card.strategy, need: cardNeed, mode: cardMode, situation: cardSituation,
+    agenda: readAgenda(card.agenda, isOrderedStrategy), distance: natural(card.distance),
+    evidenceActions: Array.isArray(card.evidence) ? [...new Set(card.evidence.flatMap(ref => priorAction(ref) ?? []))] : [],
+  } : undefined;
   const searchOperation = label(record(rooted?.search)?.operation);
   const search = record(rooted?.search);
   const recoveryOperations = Array.isArray(search?.recovery_operations) ? search.recovery_operations.slice(0, 4).flatMap(value => {
@@ -477,6 +490,7 @@ export function readNativeResolution(agent: {
     proposalKind: label(proposal?.kind), question,
     objective: nativeObjective ?? (objectiveSource === 'question' ? question : null), objectiveSource,
     strategyObjective,
+    situationCard,
     missingControl,
     operation: op && /^OP(?:0[1-9]|[12]\d|3[01])$/.test(op) ? op : null,
     searchOperation: searchOperation === 'OP26' ? searchOperation : undefined,
@@ -502,6 +516,7 @@ export interface DecisionSprites {
   readonly objective: NativeResolution['objective'];
   readonly objectiveSource: NativeResolution['objectiveSource'];
   readonly strategyObjective?: StrategyObjective;
+  readonly situationCard?: NativeResolution['situationCard'];
   readonly missingControl?: MissingControlWitness;
   readonly operation: string | null;
   readonly searchOperation?: string;
@@ -596,6 +611,7 @@ export function captureDecisionSprites(decision: NativeResolution, before: Nativ
   }
   return { family: decision.family, objective: decision.objective, objectiveSource: decision.objectiveSource,
     strategyObjective: decision.strategyObjective,
+    situationCard: decision.situationCard,
     missingControl: decision.missingControl,
     operation: decision.operation, searchOperation: decision.searchOperation, recoveryOperations: decision.recoveryOperations,
     recoveryDecision: decision.recoveryDecision,
