@@ -159,8 +159,7 @@ function decodeModel(model: ConstellationRecord | null): ConstellationModel | nu
   return model && { ...model, targets: new Map(model.targets.map(([color, points]: any) => [color, PointSet.restore(points)])), marker_rows: new Map(model.marker_rows), excluded: PointSet.restore(model.excluded), boundary_overlay: PointSet.restore(model.boundary_overlay),
     marker_raster: new Map(model.marker_raster.map(([point, value]: any) => [pointKey(point), { point, value }])), focus_occlusion: PointSet.restore(model.focus_occlusion) } as ConstellationModel;
 }
-export class ConstellationCover {
-  readonly id = 'constellation_cover'; readonly familyId = 'constellation_cover';
+export class ConstellationEvidence {
   epoch: number | null = null; passed: ConstellationRecord[] = []; events: ConstellationRecord[] = [];
   model: ConstellationModel | null | undefined; motion = new Map<string, Point>(); tried = new Set<string>(); selector: string | null = null; bodies: ConstellationBody[] = []; poses: Point[] = [];
   active: number | null = null; samples: ConstellationSample[] = []; complete = false; retired = false; refs = new Map<string, string>(); boundaryObserved = new Set<number>();
@@ -180,72 +179,6 @@ export class ConstellationCover {
     this.samples = (value.samples ?? []).map((sample: any) => ({ focus: sample.focus, material: new Map(sample.material.map(([color, points]: any) => [color, PointSet.restore(points)])) }));
     this.complete = value.complete ?? false; this.retired = value.retired ?? false; this.refs = new Map(value.refs ?? []); this.boundaryObserved = new Set(value.boundary_observed ?? []); this.persistedBodies = value.persisted_bodies ?? 0;
     this.firstObservation = value.first_observation; this.unownedSeen = new Set(value.unowned_seen ?? []);
-  }
-  async propose(observation: ConstellationObservation, rows: NativeRows, inputs: readonly ConstellationCommand[], remaining: number): Promise<ConstellationRecord | null> {
-    const plain = inputs.filter(action => !addressed(action) && action.action_ref !== 'ACTION7').map(action => action.action_ref); if (plain.length < 3) return null;
-    if (this.epoch !== observation.level_epoch) {
-      this.epoch = observation.level_epoch; this.model = measureConstellationLayout(observation, rows); this.motion.clear(); this.tried.clear(); this.selector = null; this.bodies = []; this.poses = []; this.active = null; this.samples = []; this.complete = false; this.retired = false; this.refs.clear(); this.boundaryObserved.clear(); this.persistedBodies = 0; this.firstObservation = observation.observation_ref; this.unownedSeen.clear();
-    }
-    const model = this.model; if (!model || this.retired) return null;
-    let cursor = constellationFocus(rows, model); if (cursor === null && this.complete && constellationCursorAt(rows, model, this.poses[this.active!]!, this.bodies, this.poses, this.active)) cursor = this.poses[this.active!]!;
-    if (cursor === null) return null; if (!this.samples.length) this.samples = [{ focus: cursor, material: constellationMaterial(rows, model) }];
-    if (this.active === null) { const learned = acquireConstellation(this.samples, model); if (learned) { this.bodies.push(learned); this.poses.push(cursor); this.active = this.bodies.length - 1; } }
-    let steps: ConstellationRecord[] = [];
-    if (!this.complete) {
-      let acquisitionProjection: Point | null = null, key: string | null = null, mode: string;
-      if (this.active === null) {
-        const unknown = plain.filter(key => !this.motion.has(key) && !this.tried.has(keyOf([key, cursor])) && key !== this.selector);
-        if (unknown.length) key = unknown[0]!;
-        else {
-          const origin = this.samples[0]!.focus, offsets = this.samples.map(sample => constellationMinus(sample.focus, origin)), candidates: { score: number[]; key: string; point: Point }[] = []; let order = 0;
-          for (const [candidate, vector] of this.motion) {
-            const point = constellationPlus(cursor, vector), [x, y] = point, ordinal = order++; if (this.tried.has(keyOf([candidate, cursor])) || constellationOutside(new PointSet([point]), model).size) continue;
-            if (this.bodies.some((body, i) => constellationBodyPixels(body, this.poses[i]!).has(point))) continue;
-            const independent = offsets.some(offset => vector[0] * offset[1] !== vector[1] * offset[0]), exposed = rows[y]![x] === model.background;
-            candidates.push({ score: [Number(!independent), Number(!exposed), ordinal], key: candidate, point });
-          }
-          candidates.sort((a, b) => compare(a.score, b.score) || compareUnicode(a.key, b.key) || comparePoints(a.point, b.point));
-          if (candidates.length) { key = candidates[0]!.key; acquisitionProjection = candidates[0]!.point; }
-        }
-        mode = 'acquire';
-      } else if (this.motion.size < 4) {
-        key = plain.find(k => !this.motion.has(k) && !this.tried.has(keyOf([k, cursor])) && k !== this.selector) ?? null; mode = 'calibrate';
-        if (key === null) key = [...this.motion].find(([k, v]) => ![...this.motion.values()].some(other => same(other, [-v[0], -v[1]])) && !this.tried.has(keyOf([k, cursor])))?.[0] ?? null;
-      } else { key = this.selector || plain.find(k => !this.motion.has(k)) || null; mode = 'cycle'; }
-      if (key === null) return null; steps = [{ action: { action_ref: key }, mode, cursor, expected_after: null }]; if (acquisitionProjection !== null) steps[0]!.acquisition_focus_projection = acquisitionProjection;
-    } else {
-      if (!constellationAgreement(rows, model, this.bodies, this.poses, cursor, this.active)) return null;
-      const quantum = [...this.motion.values()].flat().filter(Boolean).reduce((result, v) => gcd(result, Math.abs(v)), 0);
-      const options = await constellationMechanicalPoseOptions(observation, rows, this.bodies, this.poses, model, quantum), goal = constellationJointGoal(this.bodies, this.poses, model, quantum, options); if (goal === null) return null;
-      const wrong = this.poses.flatMap((pose, i) => !same(pose, goal[i]) ? [i] : []); if (!wrong.length) return null;
-      if (!wrong.includes(this.active!)) { if (!this.selector) return null; steps = [{ action: { action_ref: this.selector }, mode: 'cycle', cursor, poses: [...this.poses], expected_after: null }]; }
-      else {
-        let poses = [...this.poses]; const target = goal[this.active!]!;
-        while (!same(poses[this.active!], target) && steps.length < Math.min(16, remaining)) {
-          const current = poses[this.active!]!, delta = constellationMinus(target, current), options = [...this.motion].filter(([, vector]) => Math.abs(delta[0] - vector[0]) + Math.abs(delta[1] - vector[1]) < Math.abs(delta[0]) + Math.abs(delta[1]));
-          if (!options.length) break; const [key, vector] = options[0]!, next = [...poses]; next[this.active!] = constellationPlus(current, vector);
-          const hidden = constellationOutside(constellationBodyPixels(this.bodies[this.active!]!, next[this.active!]!), model);
-          steps.push({ action: { action_ref: key }, mode: 'move', cursor: current, poses, expected_after: next, unobserved_support_pixels: hidden.size }); poses = next;
-          if (hidden.size && !this.boundaryObserved.has(this.active!)) break;
-        }
-      }
-    }
-    if (!steps.length) return null;
-    const refs = [observation.observation_ref, ...this.refs.values()], actions = steps.map(step => step.action), ref = `C_constellation_${(await v6Digest([refs, actions])).slice(0, 16)}`;
-    steps.forEach((step, i) => { step.expected_before = { level_epoch: this.epoch, frame_hash: i === 0 ? observation.frame_hash : null }; });
-    let why = 'Acquire controlled supports by registering independent displacements on the focus, then jointly cover the measured marker constellations.';
-    const info: ConstellationRecord = { acquired_bodies: this.bodies.length, ownership_complete: this.complete, active: this.active, control_vectors: Object.fromEntries(this.motion), selector: this.selector,
-      scope: 'Rigid support and joint marker coverage remain hypotheses; coincident palette values retain distinct controlled owners.',
-      focus_visibility: constellationFocus(rows, model) !== null ? 'visible' : 'retained_under_known_owner',
-      support_scope: 'Focus-interior pixels and measured boundary-band occlusions remain conditional until exposed in the observable field.', censored_boundary_pixels: model.boundary_overlay.size };
-    if (steps[0]!.acquisition_focus_projection != null) { info.acquisition_focus_projection = steps[0]!.acquisition_focus_projection;
-      why += ' Keep its predicted focus outside known peer supports while acquiring independent displacements; unregistered owners remain uncertain.'; }
-    info.offscreen_support_scope = 'Retain the acquired full support and compare its visible projection. Hidden pixels remain unobserved. Seal the first boundary crossing per owner.';
-    const facts = { repeated_framed_markers: true, bound_visible_or_peer_occluded_focus: true, ownership_question: true };
-    return { status: 'proposed', kind: 'controlled_constellation_cover', constellation_plan: info, actions, steps, facts,
-      compositions: [{ id: ref, role: 'information_question', observed: false, open_question: why, properties: info, relations: ['contributes_to:G_official_completion'] }],
-      question: { reason: why, hypothesis_refs: refs }, route_refs: refs, binding: { observation_ref: observation.observation_ref, level_epoch: this.epoch, levels_completed: observation.levels_completed },
-      bundle_template: { operation_key: 'OP18', composition_ref: ref, objective_ref: 'G_official_completion', preserve_refs: [], purpose: why, preconditions: facts, evidence: refs, actions, outcome_guard: { path: ['value'], contains: ref } } };
   }
   bind(_proposal: ConstellationRecord, _domain: unknown): void {}
   before(proposal: ConstellationRecord, index: number, publicPacket: NativePublicObservation, observation: ConstellationObservation): ConstellationRecord {
@@ -321,5 +254,75 @@ export class ConstellationCover {
         support_scope: 'Focus-interior pixels and measured boundary-band occlusions remain conditional until exposed.', evidence_refs: [...new Set([this.firstObservation!, ...this.refs.values(), ref])] }] : []); this.persistedBodies = this.bodies.length;
     }
     event.owner_poses = [...this.poses]; this.events.push(event); return event;
+  }
+}
+
+export class ConstellationCover extends ConstellationEvidence {
+  readonly id = 'constellation_cover'; readonly familyId = 'constellation_cover';
+  async propose(observation: ConstellationObservation, rows: NativeRows, inputs: readonly ConstellationCommand[], remaining: number): Promise<ConstellationRecord | null> {
+    const plain = inputs.filter(action => !addressed(action) && action.action_ref !== 'ACTION7').map(action => action.action_ref); if (plain.length < 3) return null;
+    if (this.epoch !== observation.level_epoch) {
+      this.epoch = observation.level_epoch; this.model = measureConstellationLayout(observation, rows); this.motion.clear(); this.tried.clear(); this.selector = null; this.bodies = []; this.poses = []; this.active = null; this.samples = []; this.complete = false; this.retired = false; this.refs.clear(); this.boundaryObserved.clear(); this.persistedBodies = 0; this.firstObservation = observation.observation_ref; this.unownedSeen.clear();
+    }
+    const model = this.model; if (!model || this.retired) return null;
+    let cursor = constellationFocus(rows, model); if (cursor === null && this.complete && constellationCursorAt(rows, model, this.poses[this.active!]!, this.bodies, this.poses, this.active)) cursor = this.poses[this.active!]!;
+    if (cursor === null) return null; if (!this.samples.length) this.samples = [{ focus: cursor, material: constellationMaterial(rows, model) }];
+    if (this.active === null) { const learned = acquireConstellation(this.samples, model); if (learned) { this.bodies.push(learned); this.poses.push(cursor); this.active = this.bodies.length - 1; } }
+    let steps: ConstellationRecord[] = [];
+    if (!this.complete) {
+      let acquisitionProjection: Point | null = null, key: string | null = null, mode: string;
+      if (this.active === null) {
+        const unknown = plain.filter(key => !this.motion.has(key) && !this.tried.has(keyOf([key, cursor])) && key !== this.selector);
+        if (unknown.length) key = unknown[0]!;
+        else {
+          const origin = this.samples[0]!.focus, offsets = this.samples.map(sample => constellationMinus(sample.focus, origin)), candidates: { score: number[]; key: string; point: Point }[] = []; let order = 0;
+          for (const [candidate, vector] of this.motion) {
+            const point = constellationPlus(cursor, vector), [x, y] = point, ordinal = order++; if (this.tried.has(keyOf([candidate, cursor])) || constellationOutside(new PointSet([point]), model).size) continue;
+            if (this.bodies.some((body, i) => constellationBodyPixels(body, this.poses[i]!).has(point))) continue;
+            const independent = offsets.some(offset => vector[0] * offset[1] !== vector[1] * offset[0]), exposed = rows[y]![x] === model.background;
+            candidates.push({ score: [Number(!independent), Number(!exposed), ordinal], key: candidate, point });
+          }
+          candidates.sort((a, b) => compare(a.score, b.score) || compareUnicode(a.key, b.key) || comparePoints(a.point, b.point));
+          if (candidates.length) { key = candidates[0]!.key; acquisitionProjection = candidates[0]!.point; }
+        }
+        mode = 'acquire';
+      } else if (this.motion.size < 4) {
+        key = plain.find(k => !this.motion.has(k) && !this.tried.has(keyOf([k, cursor])) && k !== this.selector) ?? null; mode = 'calibrate';
+        if (key === null) key = [...this.motion].find(([k, v]) => ![...this.motion.values()].some(other => same(other, [-v[0], -v[1]])) && !this.tried.has(keyOf([k, cursor])))?.[0] ?? null;
+      } else { key = this.selector || plain.find(k => !this.motion.has(k)) || null; mode = 'cycle'; }
+      if (key === null) return null; steps = [{ action: { action_ref: key }, mode, cursor, expected_after: null }]; if (acquisitionProjection !== null) steps[0]!.acquisition_focus_projection = acquisitionProjection;
+    } else {
+      if (!constellationAgreement(rows, model, this.bodies, this.poses, cursor, this.active)) return null;
+      const quantum = [...this.motion.values()].flat().filter(Boolean).reduce((result, v) => gcd(result, Math.abs(v)), 0);
+      const options = await constellationMechanicalPoseOptions(observation, rows, this.bodies, this.poses, model, quantum), goal = constellationJointGoal(this.bodies, this.poses, model, quantum, options); if (goal === null) return null;
+      const wrong = this.poses.flatMap((pose, i) => !same(pose, goal[i]) ? [i] : []); if (!wrong.length) return null;
+      if (!wrong.includes(this.active!)) { if (!this.selector) return null; steps = [{ action: { action_ref: this.selector }, mode: 'cycle', cursor, poses: [...this.poses], expected_after: null }]; }
+      else {
+        let poses = [...this.poses]; const target = goal[this.active!]!;
+        while (!same(poses[this.active!], target) && steps.length < Math.min(16, remaining)) {
+          const current = poses[this.active!]!, delta = constellationMinus(target, current), options = [...this.motion].filter(([, vector]) => Math.abs(delta[0] - vector[0]) + Math.abs(delta[1] - vector[1]) < Math.abs(delta[0]) + Math.abs(delta[1]));
+          if (!options.length) break; const [key, vector] = options[0]!, next = [...poses]; next[this.active!] = constellationPlus(current, vector);
+          const hidden = constellationOutside(constellationBodyPixels(this.bodies[this.active!]!, next[this.active!]!), model);
+          steps.push({ action: { action_ref: key }, mode: 'move', cursor: current, poses, expected_after: next, unobserved_support_pixels: hidden.size }); poses = next;
+          if (hidden.size && !this.boundaryObserved.has(this.active!)) break;
+        }
+      }
+    }
+    if (!steps.length) return null;
+    const refs = [observation.observation_ref, ...this.refs.values()], actions = steps.map(step => step.action), ref = `C_constellation_${(await v6Digest([refs, actions])).slice(0, 16)}`;
+    steps.forEach((step, i) => { step.expected_before = { level_epoch: this.epoch, frame_hash: i === 0 ? observation.frame_hash : null }; });
+    let why = 'Acquire controlled supports by registering independent displacements on the focus, then jointly cover the measured marker constellations.';
+    const info: ConstellationRecord = { acquired_bodies: this.bodies.length, ownership_complete: this.complete, active: this.active, control_vectors: Object.fromEntries(this.motion), selector: this.selector,
+      scope: 'Rigid support and joint marker coverage remain hypotheses; coincident palette values retain distinct controlled owners.',
+      focus_visibility: constellationFocus(rows, model) !== null ? 'visible' : 'retained_under_known_owner',
+      support_scope: 'Focus-interior pixels and measured boundary-band occlusions remain conditional until exposed in the observable field.', censored_boundary_pixels: model.boundary_overlay.size };
+    if (steps[0]!.acquisition_focus_projection != null) { info.acquisition_focus_projection = steps[0]!.acquisition_focus_projection;
+      why += ' Keep its predicted focus outside known peer supports while acquiring independent displacements; unregistered owners remain uncertain.'; }
+    info.offscreen_support_scope = 'Retain the acquired full support and compare its visible projection. Hidden pixels remain unobserved. Seal the first boundary crossing per owner.';
+    const facts = { repeated_framed_markers: true, bound_visible_or_peer_occluded_focus: true, ownership_question: true };
+    return { status: 'proposed', kind: 'controlled_constellation_cover', constellation_plan: info, actions, steps, facts,
+      compositions: [{ id: ref, role: 'information_question', observed: false, open_question: why, properties: info, relations: ['contributes_to:G_official_completion'] }],
+      question: { reason: why, hypothesis_refs: refs }, route_refs: refs, binding: { observation_ref: observation.observation_ref, level_epoch: this.epoch, levels_completed: observation.levels_completed },
+      bundle_template: { operation_key: 'OP18', composition_ref: ref, objective_ref: 'G_official_completion', preserve_refs: [], purpose: why, preconditions: facts, evidence: refs, actions, outcome_guard: { path: ['value'], contains: ref } } };
   }
 }
