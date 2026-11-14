@@ -28,6 +28,7 @@ import { legendRecolorId } from './legend-recolor.ts';
 import { visualPatternId } from './visual-pattern.ts';
 import { facetGrowthId } from './facet-growth.ts';
 import { chartRouteId } from './chart-route.ts';
+import { populationPlacementId } from './population-placement.ts';
 
 export const standalonePlanningGroups = [
   { id: 'repair_visible_field', families: [fieldRepairId, orderedContactId, supportTransferId] },
@@ -38,7 +39,7 @@ export const standalonePlanningGroups = [
   { id: 'construct_executable_program', families: [codeRouteId, programOriginId] },
   { id: 'fit_profiles_into_receivers', families: [profileTransferId] },
   { id: 'preserve_ordered_team', families: [orderedReplenishmentId] },
-  { id: 'fill_visible_partition', families: [previewPlacementId] },
+  { id: 'fill_visible_partition', families: [previewPlacementId, populationPlacementId] },
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, facetGrowthId] },
   { id: 'visit_marked_surface', families: [markedLatticeId] },
   { id: 'place_incoming_groups', families: [queuedPlacementId] },
