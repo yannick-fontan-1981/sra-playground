@@ -29,11 +29,12 @@ import { visualPatternId } from './visual-pattern.ts';
 import { facetGrowthId } from './facet-growth.ts';
 import { chartRouteId } from './chart-route.ts';
 import { populationPlacementId } from './population-placement.ts';
+import { carryToFrameId } from './carry-to-frame.ts';
 
 export const standalonePlanningGroups = [
   { id: 'repair_visible_field', families: [fieldRepairId, orderedContactId, supportTransferId] },
   { id: 'inspect_candidate_relations', families: [subsetExperimentId, framedContactId, transportContactId] },
-  { id: 'coordinate_visible_motion', families: [bandAlignmentId, sharedArrivalId, outlineServiceId] },
+  { id: 'coordinate_visible_motion', families: [bandAlignmentId, sharedArrivalId, outlineServiceId, carryToFrameId] },
   { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId, visualPatternId] },
   { id: 'apply_learned_relations', families: [remoteSupportRouteId, occurrenceRecallId, slotPermutationId, surfaceCopyId, chartRouteId] },
   { id: 'construct_executable_program', families: [codeRouteId, programOriginId] },

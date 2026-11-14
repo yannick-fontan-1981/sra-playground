@@ -33,6 +33,7 @@ import { visualPatternId, visualPatternStrategies } from './visual-pattern.ts';
 import { facetGrowthId, facetGrowthStrategies } from './facet-growth.ts';
 import { chartRouteId, chartRouteStrategies } from './chart-route.ts';
 import { populationPlacementId, populationPlacementStrategies } from './population-placement.ts';
+import { carryToFrameId, carryToFrameStrategies } from './carry-to-frame.ts';
 import { frontierStrategies, isFrontierStrategy, type FrontierStrategy } from './frontier-strategy.ts';
 import { isViewStrategy, viewStrategies, type ViewStrategy } from './view-strategy.ts';
 import { informationStrategies, isInformationStrategy, type InformationStrategy } from './information-strategy.ts';
@@ -46,7 +47,7 @@ const situationStrategies = { ...orderedContactStrategies, ...cavityStrategies, 
   ...labeledSequenceStrategies, ...markedCollectionStrategies, ...slotTransferStrategies, ...remoteSupportRouteStrategies,
   ...occurrenceRecallStrategies, ...slotPermutationStrategies, ...surfaceCopyStrategies, ...codeRouteStrategies, ...profileTransferStrategies,
   ...orderedReplenishmentStrategies, ...programOriginStrategies, ...previewPlacementStrategies, ...symbolContributionStrategies, ...markedLatticeStrategies,
-  ...queuedPlacementStrategies, ...legendRecolorStrategies, ...visualPatternStrategies, ...facetGrowthStrategies, ...chartRouteStrategies, ...populationPlacementStrategies };
+  ...queuedPlacementStrategies, ...legendRecolorStrategies, ...visualPatternStrategies, ...facetGrowthStrategies, ...chartRouteStrategies, ...populationPlacementStrategies, ...carryToFrameStrategies };
 
 export interface NativeStep {
   readonly action: string;
@@ -426,7 +427,8 @@ export function readNativeResolution(agent: {
                       : family === symbolContributionId ? symbolContributionStrategies : family === markedLatticeId ? markedLatticeStrategies
                         : family === queuedPlacementId ? queuedPlacementStrategies : family === legendRecolorId ? legendRecolorStrategies
                           : family === visualPatternId ? visualPatternStrategies : family === facetGrowthId ? facetGrowthStrategies
-                            : family === chartRouteId ? chartRouteStrategies : family === populationPlacementId ? populationPlacementStrategies : null;
+                            : family === chartRouteId ? chartRouteStrategies : family === populationPlacementId ? populationPlacementStrategies
+                              : family === carryToFrameId ? carryToFrameStrategies : null;
   const card = planReceipt?.authority === 'sicOnly' && labels ? record(proposal?.sicSituationCard) : null;
   const isSituationStrategy = (id: unknown): id is keyof typeof situationStrategies =>
     typeof id === 'string' && !!labels && Object.hasOwn(labels, id);
@@ -570,6 +572,12 @@ export function readNativeResolution(agent: {
     const group = bounds(card?.activeGroup), field = bounds(card?.field);
     if (group) subjects.push({ label: 'Active group', box: group });
     if (field) subjects.push({ label: 'Receiving field', box: field });
+  }
+  if (situationCard && family === carryToFrameId) {
+    for (const [field, label] of [['actor', 'Controlled body'], ['object', 'Object to transport'], ['frame', 'Matching frame']] as const) {
+      const box = bounds(card?.[field]);
+      if (box) subjects.push({ label, box });
+    }
   }
   if (situationCard && family === populationPlacementId) {
     for (const [field, label] of [['piece', 'Selected piece'], ['target', 'Receiving position'], ['reference', 'Visible reference']] as const) {

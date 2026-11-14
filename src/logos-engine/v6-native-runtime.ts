@@ -64,6 +64,7 @@ import { createSicVisualPattern } from '../sic/visual-pattern.ts';
 import { createSicFacetGrowth } from '../sic/facet-growth.ts';
 import { createSicChartRoute } from '../sic/chart-route.ts';
 import { createSicPopulationPlacement } from '../sic/population-placement.ts';
+import { createSicCarryToFrame } from '../sic/carry-to-frame.ts';
 import { standalonePlanningGroups } from '../sic/standalone-families.ts';
 import { decidePlanContinuation } from '../sic/plan-step.ts';
 import { retainMissingControlTrial } from '../sic/missing-control-strategy.ts';
@@ -2395,7 +2396,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const sequence = (configuration.window_constraints as R).labeled_sequence_composition.labeled_sequence_question;
     const groups = standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 39, groups, symmetry, policy, sequence, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 40, groups, symmetry, policy, sequence, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
@@ -2405,7 +2406,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       createSicMarkedCollection(), createSicSlotTransfer(), createSicRemoteSupportRoute(), createSicOccurrenceRecall(),
       createSicSlotPermutation(), createSicSurfaceCopy(), createSicCodeRoute(), createSicProgramOrigin(), createSicProfileTransfer(),
       createSicOrderedReplenishment(), createSicPreviewPlacement(), createSicSymbolContribution(), createSicMarkedLattice(),
-      createSicQueuedPlacement(), createSicLegendRecolor(), createSicVisualPattern(), createSicFacetGrowth(), createSicChartRoute(), createSicPopulationPlacement(), createSicCavityAccess(), createSicPublicInputExploration(),
+      createSicQueuedPlacement(), createSicLegendRecolor(), createSicVisualPattern(), createSicFacetGrowth(), createSicChartRoute(), createSicPopulationPlacement(), createSicCarryToFrame(), createSicCavityAccess(), createSicPublicInputExploration(),
     ],
       authorityPolicy: loaded.common, familyAgenda: 'active', maxPointOccurrences: loaded.common.input_domain.max_point_occurrences,
       ...(options.now ? { now: options.now } : {}) });
