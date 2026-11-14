@@ -387,3 +387,5 @@ Le niveau gagne aussi avec un nom neutre et une palette permutée. Désactiver P
 Avec `sic_link_openings` retirée, **PRTL gagne en six commandes SIC seul**. La carte de navigation commune commence par des essais P05 liés aux repères des deux ouvertures. Elle conserve chaque effet confirmé, teste le franchissement puis choisit P07 vers la sortie après le passage observé. Les mesures des repères et les vérifications du franchissement restent dans le fournisseur TypeScript partagé. Les commandes et retours reproduisent la référence, empreinte `2d4f52bd81c100ce13b0cafc0e2ee2561d106f0a78bef9b84468d3d4b3ef5682`.
 
 Le nom neutre et la palette permutée conservent le gain. Désactiver P05 après le premier clic rend la main à l’exploration et laisse le niveau ouvert à la sixième commande.
+
+La campagne commune GIGO et PRTL confirme **38/100** niveaux 1 après retrait. Les 440 commandes de ces victoires relèvent de SIC seul, dont 101 choisies par le SRC. Les 100 niveaux 1 en usage normal, les 36 victoires précédentes après retrait et les quatre jeux complets DICO, DNOI, HANO et SYME avec et sans retrait reproduisent leurs commandes et retours de référence.
