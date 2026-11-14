@@ -10,7 +10,7 @@ import type { NativeRows } from './v6-native-types.ts';
 type R = Record<string, any>;
 type Frame = { bbox: readonly [number, number, number, number]; palette: number; area: number };
 
-export function measureFramedWindow(rows: NativeRows): R | null {
+export function measureFramedWindow(rows: NativeRows, includeUnmatched = false): R | null {
   const frames: Frame[] = [];
   for (const part of geometricComponents(rows)) {
     const [left, top, right, bottom] = part.bbox, width = right - left + 1, height = bottom - top + 1;
@@ -50,11 +50,14 @@ export function measureFramedWindow(rows: NativeRows): R | null {
       if (same) matches.push([x, y]);
     }
     total += examined;
-    if (matches.length) compatible.push({ reference, image, reference_box: [...small.bbox], image_box: [...large.bbox],
+    if (matches.length || includeUnmatched) compatible.push({ reference, image, reference_box: [...small.bbox], image_box: [...large.bbox],
       matches, examined_windows: examined, hypothesis: 'smaller_disjoint_same_border_frame_as_reference_larger_as_search_domain' });
   }
-  if (compatible.length !== 1 || compatible[0]!.matches.length !== 1) return null;
-  return { ...compatible[0], frame_pair_candidates: pairs.length, all_pair_windows_examined: total };
+  const exact = compatible.filter(candidate => candidate.matches.length > 0);
+  const candidates = exact.length || !includeUnmatched ? exact : compatible.filter(candidate =>
+    candidate.reference.length * candidate.reference[0].length === Math.max(...compatible.map(other => other.reference.length * other.reference[0].length)));
+  if (candidates.length !== 1 || (!includeUnmatched && candidates[0]!.matches.length !== 1)) return null;
+  return { ...candidates[0], frame_pair_candidates: pairs.length, all_pair_windows_examined: total };
 }
 
 /** The source deadline/perf_counter seconds become native monotonic milliseconds.

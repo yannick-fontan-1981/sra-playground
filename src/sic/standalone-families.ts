@@ -32,12 +32,13 @@ import { populationPlacementId } from './population-placement.ts';
 import { carryToFrameId } from './carry-to-frame.ts';
 import { portPairingId } from './port-pairing.ts';
 import { displayCouplingId } from './display-coupling.ts';
+import { framedSearchId } from './framed-search.ts';
 
 export const standalonePlanningGroups = [
   { id: 'repair_visible_field', families: [fieldRepairId, orderedContactId, supportTransferId] },
   { id: 'inspect_candidate_relations', families: [subsetExperimentId, framedContactId, transportContactId] },
   { id: 'coordinate_visible_motion', families: [bandAlignmentId, sharedArrivalId, outlineServiceId, carryToFrameId] },
-  { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId, visualPatternId] },
+  { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId, visualPatternId, framedSearchId] },
   { id: 'apply_learned_relations', families: [remoteSupportRouteId, occurrenceRecallId, slotPermutationId, surfaceCopyId, chartRouteId] },
   { id: 'construct_executable_program', families: [codeRouteId, programOriginId] },
   { id: 'fit_profiles_into_receivers', families: [profileTransferId, portPairingId] },
