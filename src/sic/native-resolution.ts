@@ -110,6 +110,14 @@ export function readRecoveryRefusal(agent: { sessionId: string | null; sequence:
   return agenda.length ? { reason: refusal.reason, agenda } : null;
 }
 
+export function readFrontierRefusal(agent: Parameters<typeof readRecoveryRefusal>[0]) {
+  if (!agent.sessionId) return [];
+  const scope = `${agent.sessionId}:epoch:${agent.level}:revision:${agent.sequence + 1}:frame:`;
+  const refusal = agent.trace.slice(-128).reverse().map(record).find(event =>
+    event?.kind === 'sic_frontier_refusal' && typeof event.observation_ref === 'string' && event.observation_ref.startsWith(scope));
+  return readAgenda(record(refusal?.decision)?.agenda, isFrontierStrategy);
+}
+
 const actions: Record<string, string> = { ACTION1: 'Up', ACTION2: 'Down', ACTION3: 'Left', ACTION4: 'Right',
   ACTION5: 'Space', ACTION6: 'Click', ACTION7: 'Action 7' };
 

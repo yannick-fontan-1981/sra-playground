@@ -81,6 +81,20 @@ test('the production agenda preserves frontier commands and declares why it prob
   assert.ok(choices.has('reach_open_input'));
 });
 
+test('an exhausted public board records the absence of a plan without releasing a command', async () => {
+  const graph = new ObservedFrontier();
+  const board = { observation_ref: 'frontier-empty:epoch:1:revision:1:frame:unchanged', frame_hash: 'unchanged',
+    level_epoch: 1, levels_completed: 0, state: 'NOT_FINISHED', available_action_refs: ['ACTION1'], entities: [] };
+  const command = { action_ref: 'ACTION1' };
+  assert.deepEqual((await graph.propose(board, [command], { sic_agenda: true }))?.actions, [command]);
+  const unchanged = { ...board, observation_ref: 'frontier-empty:epoch:1:revision:2:frame:unchanged' };
+  await graph.recordTransition(board, command, unchanged);
+  const refused = await graph.propose(unchanged, [command], { sic_agenda: true });
+  assert.equal(refused?.status, 'frontier_exhausted');
+  assert.deepEqual(refused?.actions, []);
+  assert.deepEqual(refused?.sic_frontier_refusal.agenda.map((entry: { result: string }) => entry.result), ['skipped', 'no_plan']);
+});
+
 test('the SIC input order breaks ties between equally supported commands on the same board', async () => {
   const graph = new ObservedFrontier();
   const board = { observation_ref: 'frontier-test:epoch:1:revision:1:frame:test', frame_hash: 'test',

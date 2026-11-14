@@ -5,7 +5,7 @@ import type { NativeClickReturn } from '../logos-engine/v6-native-click-return.t
 import { compareClickReturns, type ClickEvidence } from './click-evidence.ts';
 import { evaluateControlEffect, type ControlEffectResolution } from './know-control-effect.ts';
 import type { EvidenceRef, SituationFrame } from './situation.ts';
-import { readNativeResolution, readRecoveryRefusal, type NativeResolution } from './native-resolution.ts';
+import { readFrontierRefusal, readNativeResolution, readRecoveryRefusal, type NativeResolution } from './native-resolution.ts';
 
 type ShadowBoard = Pick<GameObservation, 'gameCode' | 'level' | 'state' | 'availableActionIds'>;
 type ShadowAgent = Pick<V6AgentSnapshot, 'sessionId' | 'sequence' | 'status' | 'busy' | 'trace' | 'pendingAction'
@@ -23,6 +23,7 @@ export interface ShadowView {
   readonly resolution: ControlEffectResolution;
   readonly native: NativeResolution | null;
   readonly recoveryRefusal?: ReturnType<typeof readRecoveryRefusal>;
+  readonly frontierRefusal?: ReturnType<typeof readFrontierRefusal>;
 }
 
 function findReturn(agent: ShadowAgent, board: ShadowBoard): ShadowView['returnCheck'] {
@@ -85,6 +86,7 @@ export function readControlEffectShadow(board: ShadowBoard, agent: ShadowAgent |
     clickReturn,
     clickEvidence: current && current.status !== 'error' ? readClickEvidence(current) : null,
     recoveryRefusal: current?.status === 'stopped' ? readRecoveryRefusal(current) : null,
+    frontierRefusal: current?.status === 'stopped' ? readFrontierRefusal(current) : undefined,
     native: current && current.status !== 'error' ? readNativeResolution({
       ...current, lastDecision: current.lastDecision ?? null, proposal: current.proposal ?? null, phase: current.phase ?? null,
     }) : null,

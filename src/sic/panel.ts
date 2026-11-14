@@ -896,6 +896,11 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
       : 'The contact-recovery agenda found no admissible plan within the current limits.';
     strategies.append(summary, renderAgenda('Contact recovery priority', contactRecoveryStrategies, view.recoveryRefusal.agenda));
   }
+  if (view?.frontierRefusal?.length) {
+    const summary = document.createElement('p');
+    summary.textContent = 'There is no untried input here, and the observed routes have no admissible access to one.';
+    strategies.append(summary, renderAgenda('Exploration strategy priority', frontierStrategies, view.frontierRefusal));
+  }
   let editor = strategyEditors.get(panel);
   if (!editor) {
     editor = new StrategyEditor(panel.querySelector<HTMLElement>('[data-sic-strategy-editor]')!);

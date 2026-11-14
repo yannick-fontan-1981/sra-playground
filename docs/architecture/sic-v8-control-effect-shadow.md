@@ -203,6 +203,8 @@ Dans Stratégies, la mesure de couverture compte les commandes exécutées, y co
 
 Le rejeu navigateur `tests/sic-qualification.html?coverage` retrouve les cinq résultats officiels par défaut et compte 17 commandes sur 92 (18,5 %) issues d’un agenda SIC configurable. SK48 en fournit 7/19, AS66 4/19, LKEY 6/44, SYME 0/9 et CASC 0/1. Toutes les commandes ont un reçu de plan. Les 16 groupes du sélecteur sont consultables dans le panneau, avec les deux points d’entrée partiellement pilotés par SIC. Ce taux décrit les parcours mesurés. Le pourcentage d’avancement de V8 suit les critères d’architecture.
 
+L’agenda d’exploration porte maintenant le trajet admissible jusqu’à la question ouverte. Si le plateau est épuisé et qu’aucun trajet observé n’est admissible, la branche de recherche d’accès rend `no_plan` et Stratégies présente cet arrêt. Le rejeu des cas de référence vérifie les mêmes commandes et les mêmes pas pour le test local et le trajet. Un plateau resté identique après sa seule commande vérifie le refus sans action supplémentaire.
+
 | Série | SHA-256 du reçu brut de la seconde fenêtre |
 | --- | --- |
 | A1 | `5919c1547cb8cd18aacd9e2043a10e921300884fc0163e743248b644c16ab2f0` |

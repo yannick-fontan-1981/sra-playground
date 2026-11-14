@@ -6,7 +6,7 @@ import { factConditionHolds } from './v6-drm-projector.ts';
 import type { DrmCondition } from './v6-drm-projector.ts';
 import { predictCandidateRule } from './v6-transition-learning.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
-import { frontierInformationNeed, selectFrontierStrategy } from '../sic/frontier-strategy.ts';
+import { frontierInformationNeed, frontierStrategyGraph, selectFrontierStrategy } from '../sic/frontier-strategy.ts';
 import { evaluateFrontierLocalRule, defaultFrontierConfiguration, type FrontierConfiguration, type FrontierChoiceEvidence } from '../sic/frontier-configuration.ts';
 
 type R = Record<string, any>;
@@ -310,7 +310,7 @@ export class ObservedFrontier {
     const node = this.nodes[await frontierIndex(observation)];
     return observation.available_action_refs.includes(command.action_ref) && (!node || !own(node.attempts, await frontierActionKey(command)));
   }
-  async access(start: string, order?: FrontierConfiguration['inputOrder']): Promise<readonly [R[] | null, R | null]> {
+  async access(start: string, order?: FrontierConfiguration['inputOrder']): Promise<readonly [R[], R] | readonly [null, null]> {
     const epoch = this.nodes[start].protocol.level_epoch, queue: [string, R[]][] = [[start, []]], seen = new Set([start]); let head = 0;
     while (head < queue.length && head < 2048) {
       const [index, path] = queue[head++]!;
@@ -382,20 +382,22 @@ export class ObservedFrontier {
     const customQuestion = ruleResult?.matched && localRule?.mode === 'active'
       ? localRule.prefer === 'least_tried' ? ranked?.leastTried : ranked?.commandOrder
       : undefined;
-    const agenda = usesAgenda ? selectFrontierStrategy(customQuestion ?? questions[0], frontierRef(observation)) : null;
+    const localQuestion = customQuestion ?? questions[0];
+    const access = !localQuestion && options.return_episode == null ? await this.access(index, order) : null;
+    const route = access?.[0] ? { path: access[0], question: access[1] } : null;
+    const agenda = usesAgenda ? selectFrontierStrategy(localQuestion, route, frontierRef(observation)) : null;
     let path: R[], question: R, kind: string;
     if (options.return_episode != null) {
       const contrast = await closedReturnContrast(this, options.return_episode, index, this.max_prefix);
       if (contrast === null) return null; [path, question] = contrast; kind = 'access';
-    } else if (agenda?.selected?.id === 'test_local_input' || (!agenda && questions.length)) {
-      path = []; question = agenda?.selected?.plan.question ?? questions[0]!; kind = 'experiment';
-    }
-    else {
-      const accessed = await this.access(index, order);
-      if (accessed[0] === null) return { status: 'frontier_exhausted', actions: [], reason: 'no_untried_admitted_input_or_observed_access_within_current_epoch_and_replay_bound',
+    } else {
+      const candidate = agenda ? agenda.selected?.plan : localQuestion ? { path: [], question: localQuestion } : route;
+      if (!candidate) return { status: 'frontier_exhausted', actions: [], reason: 'no_untried_admitted_input_or_observed_access_within_current_epoch_and_replay_bound',
+        ...(agenda ? { sic_frontier_refusal: { graph: frontierStrategyGraph.id, agenda: agenda.entries } } : {}),
         unresolved_multiple_outcomes: Object.values(this.nodes).reduce((sum, n) => sum + Object.values(n.attempts).filter((a: any) => Object.keys(a.outcomes).length > 1).length, 0),
         qualification: 'not_a_proof_of_game_impossibility; richer_observables_or_new_experiment_domain_may_be_required' };
-      path = accessed[0]; question = accessed[1]!; kind = 'access';
+      ({ path, question } = candidate);
+      kind = path.length ? 'access' : 'experiment';
     }
     const steps: R[] = [];
     for (const edge of path) {

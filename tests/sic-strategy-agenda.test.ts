@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { auditStrategyGraph, compileStrategyGraph, resolveStrategyGraph } from '../src/sic/strategy-agenda.ts';
+import { selectFrontierStrategy } from '../src/sic/frontier-strategy.ts';
 
 const dimensions = ['contact', 'room'] as const;
 const graph = compileStrategyGraph<'direct' | 'detour', typeof dimensions[number]>({
@@ -43,4 +44,15 @@ test('the declarative audit counts each situation once and exposes fallback over
     dimensions, combinations: 4, covered: 3, uncovered: 1, overlapping: 1,
     matches: [{ id: 'direct', applicable: 2, first: 2 }, { id: 'detour', applicable: 2, first: 1 }],
   });
+});
+
+test('frontier access needs a witnessed route before its agenda can select a plan', () => {
+  const exhausted = selectFrontierStrategy<string, string>(undefined, null, 'return:1');
+  assert.equal(exhausted.selected, null);
+  assert.equal(exhausted.entries.find(entry => entry.id === 'reach_open_input')?.result, 'no_plan');
+  const route = { path: ['edge:1'], question: 'probe:1' };
+  assert.deepEqual(selectFrontierStrategy(undefined, route, 'return:2').selected,
+    { id: 'reach_open_input', plan: route });
+  assert.deepEqual(selectFrontierStrategy('probe:2', route, 'return:3').selected,
+    { id: 'test_local_input', plan: { path: [], question: 'probe:2' } });
 });

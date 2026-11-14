@@ -23,15 +23,16 @@ export const frontierStrategyGraph = compileStrategyGraph<FrontierStrategy, 'ope
   },
 }, ['openInputHere']);
 
-export function selectFrontierStrategy<T>(firstQuestion: T | undefined, observationRef: string) {
+export function selectFrontierStrategy<Question, Edge>(firstQuestion: Question | undefined,
+  access: { path: Edge[]; question: Question } | null, observationRef: string) {
   const facts: Record<'openInputHere', StrategyFact> = {
     openInputHere: { value: firstQuestion !== undefined, evidence: [observationRef] },
   };
-  return resolveStrategyGraph<FrontierStrategy, 'openInputHere', { question: T | null }>({
+  return resolveStrategyGraph<FrontierStrategy, 'openInputHere', { path: Edge[]; question: Question }>({
     graph: frontierStrategyGraph, facts, mode: 'active',
     planners: {
-      test_local_input: () => firstQuestion === undefined ? null : { question: firstQuestion },
-      reach_open_input: () => ({ question: null }),
+      test_local_input: () => firstQuestion === undefined ? null : { path: [], question: firstQuestion },
+      reach_open_input: () => access,
     },
   });
 }

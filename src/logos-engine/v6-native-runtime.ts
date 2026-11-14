@@ -467,6 +467,10 @@ export class NativeV6Runtime implements NativeV6Backend {
           this.stop(proposal.reason);
           return;
         }
+        if (proposal.status === 'frontier_exhausted' && proposal.sic_frontier_refusal) {
+          this.note({ kind: 'sic_frontier_refusal', observation_ref: this.observation.observation_ref,
+            decision: proposal.sic_frontier_refusal });
+        }
         // SelectedRigid's source caller stops on its current blocking reason
         // before any lower-priority question can dispatch an unrelated probe.
         const sourceStop = rawNativeSelectedRigid(family) && proposal.kind === 'native_current_proposal_refusal'
