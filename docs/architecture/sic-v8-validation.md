@@ -25,18 +25,21 @@ LKEY termine également le rejeu de `33f0fb3b` avec les mêmes 44 commandes, ret
 
 ## Mesurer le remplacement effectif
 
-Le commit `e77bd210` atteint **2 jeux gagnés sur les 100 du catalogue (2 %)** et **14 niveaux gagnés**. La [référence par jeu](sic-v8-reference-levels.md) retient les maxima attestés pour le natif, V5, V6 et V7. Le score à dépasser se calcule sur les parcours partis du niveau 1, dans une partie continue.
+Le commit `d8e78990` atteint **3 jeux gagnés sur les 100 du catalogue (3 %)** et **18 niveaux gagnés** sur les parties qualifiées. La [référence par jeu](sic-v8-reference-levels.md) retient les maxima attestés pour le natif, V5, V6 et V7. Le score à dépasser se calcule sur les parcours partis du niveau 1, dans une partie continue.
 
 | Jeu | Maximum historique retrouvé | SIC seul | Seuil dépassé à l’action | Fin des niveaux |
 | --- | ---: | ---: | ---: | --- |
 | SYME | 3 | 6 sur 6 · WIN | 44 | 9, 21, 36, 44, 58, 78 |
 | DNOI | 3 | 6 sur 6 · WIN | 29 | 3, 9, 17, 29, 47, 59 |
+| HANO | 4 | 4 sur 4 · WIN | Plafond atteint | 6, 16, 30, 60 |
 | SK48 | 2 | 2 sur 8 · entrée au niveau 3 | — | 19, 56 |
 | CASC | 1 | 0 sur 6 · aucun plan applicable | — | — |
 
 Le rejeu charge la partie neuve et le pack `solver: 'sic'` dans le worker normal. Il enregistre les seuls fournisseurs SIC de réparation par correspondance et d’alignement par contact. Le navigateur vérifie avant chaque commande le fournisseur, l’autorité `sicOnly`, le sous-objectif et la stratégie. L’observation, les opérateurs géométriques, les fonctions de recherche, l’exécution et le garde WHY/ACT sont partagés. La réparation combine des correspondances mesurées et, lorsque plusieurs observations indépendantes concordent, des votes dans les groupes formés par les symétries ou les répétitions. Elle teste un clic avec **OP18** et vérifie la cellule cible, la conservation du reste du champ et le nombre de pixels modifiés en périphérie. Les changements de niveau et la victoire proviennent du retour du jeu.
 
 Empreintes SHA-256 de la suite des commandes et des retours publics agrégés. SYME `e6d71fdf0471b4c27f1f8d0baad16a7d44dc2f9a2d8220105d66d10ad515a603`. DNOI `82425afb37b8c38d0d348cd2744f8595b38ad294914fecbb0b96c077f50c5182`.
+
+Sur HANO, SIC mesure les supports, l’ordre des pièces et la référence d’arrivée. Il associe chaque clic au support visible, vérifie l’indice de sélection avant le second clic et compare le transfert au retour avant de recalculer. Le fournisseur natif de plans reste absent. Les 60 commandes portent un reçu exclusif SIC et sont autorisées par **OP18**. Le navigateur atteste la victoire, avec l’empreinte `d25c15ec18fead5e607aed899eea65c6ba46aca4c3662c079aa83d28ed53b962`.
 
 Sur SK48, SIC mesure les effets de déplacement (actions 1 à 4), teste un trajet vers l’ordre de référence (5 à 12) et recalcule le trajet après avoir observé que plusieurs pièces se déplacent ensemble au retour de l’action 12 (13 à 19). Au niveau 2, il revalide le contact en partant du nouvel ordre visible et teste 37 commandes qui écartent, rapprochent et ordonnent les pièces. **OP18** autorise chacune de ces commandes. La victoire de niveau est reconnue à l’action 56. Au niveau 3, l’action 63 contredit la projection : la tige s’étend et la pièce au contact reste en place. Le moteur arrête ce trajet. L’empreinte de la trajectoire navigateur est `da937eb5cdd964e21737c4c5a19458e9ab3583e0268f5f916d9490371bbfaa4f`.
 
