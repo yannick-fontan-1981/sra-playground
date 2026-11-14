@@ -25,8 +25,16 @@ LKEY termine également le rejeu de `33f0fb3b` avec les mêmes 44 commandes, ret
 
 ## Mesurer le remplacement effectif
 
-Le nombre de jeux dont la résolution est qualifiée avec SIC seul est **0 sur les 100 jeux du catalogue**. Le runtime continue d’utiliser l’autorité native WHY/ACT et plusieurs fournisseurs construisent directement leurs plans. Le réglage actif mesure la sélection de la famille. Sur les cinq témoins, l’agenda SIC l’a sélectionnée pour 92 commandes sur 92. Cette sélection peut appeler un planificateur natif.
+Le commit `fe9bd63f` porte le compteur à **2 jeux gagnés sur les 100 du catalogue (2 %)** et **12 niveaux gagnés**. La [référence par jeu](sic-v8-reference-levels.md) retient les maxima attestés pour le natif, V5, V6 et V7. Le score à dépasser se calcule sur les parcours partis du niveau 1, dans une partie continue.
 
-Le compteur des stratégies SIC avec réglages éditables donne **17 commandes sur 92 (18,5 %)** sur les cinq parcours qualifiés. SK48 en fournit 7/19, AS66 4/19, SYME 0/9, LKEY 6/44 et CASC 0/1. Ce compteur porte sur les stratégies locales de récupération et d’exploration configurables. Il ne mesure pas l’ensemble des actions dont un réglage pourrait changer la sélection. CASC n’a acquis aucun niveau dans ce test. Les 98 démarches de l’inventaire représentent des comportements attestés à décomposer et à migrer. Le jalon de remplacement d’une démarche exige le choix de la primitive, l’émission de l’objectif, la formation et la vérification du plan par les contrats SIC, puis un rejeu avec les chemins de planification natifs correspondants désactivés.
+| Jeu | Maximum historique retrouvé | SIC seul | Seuil dépassé à l’action | Fin des niveaux |
+| --- | ---: | ---: | ---: | --- |
+| SYME | 3 | 6 sur 6 · WIN | 44 | 9, 21, 36, 44, 58, 78 |
+| DNOI | 3 | 6 sur 6 · WIN | 29 | 3, 9, 17, 29, 47, 59 |
+| CASC | 1 | 0 sur 6 · aucun plan applicable | — | — |
+
+Le rejeu charge la partie neuve et le pack `solver: 'sic'` dans le worker normal. Le seul fournisseur de plans enregistré est `sic_field_repair`. Le navigateur vérifie avant chaque clic le fournisseur, l’autorité `sicOnly`, le sous-objectif et la stratégie. L’observation, l’exécution et le garde WHY/ACT restent communs. La réparation combine des correspondances mesurées et, lorsque plusieurs observations indépendantes concordent, des votes dans les groupes formés par les symétries ou les répétitions. Elle teste un clic avec **OP18** et vérifie la cellule cible, la conservation du reste du champ et le nombre de pixels modifiés en périphérie. Les changements de niveau et la victoire proviennent du retour du jeu.
+
+Empreintes SHA-256 de la suite des commandes et des retours publics agrégés. SYME `e6d71fdf0471b4c27f1f8d0baad16a7d44dc2f9a2d8220105d66d10ad515a603`. DNOI `82425afb37b8c38d0d348cd2744f8595b38ad294914fecbb0b96c077f50c5182`.
 
 La référence 0.65 relancée sur la même machine donne 11,173 s pour STCK et 22,456 s pour SMLP. Comparée à la première fenêtre du candidat, elle donne +10,47 % et −22,05 %. Les commandes et les niveaux attendus concordent. L’écart STCK reste au-dessus du seuil dans cette comparaison indicative. La qualification finale demande des séries alternées sans campagnes concurrentes.
