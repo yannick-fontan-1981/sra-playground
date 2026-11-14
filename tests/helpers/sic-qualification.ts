@@ -107,13 +107,16 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number | '
       return { observation: board, executionMs };
     },
   });
+  const levelDurationsMs: number[] = [];
   try {
     for (let level = 0; level < targetLevels; level++) {
+      const started = performance.now();
       await agent.run(600);
       if (state?.status === 'error') throw new Error(`${code}: ${state.message}`);
+      if (board.levelsCompleted > level) levelDurationsMs.push(Math.round(performance.now() - started));
       if (board.levelsCompleted <= level || state?.status === 'stopped') break;
     }
-    return { actions: trace.length, levels: board.levelsCompleted, stop: state?.reason ?? null, trace, targetLevels, boardState: board.state,
+    return { actions: trace.length, levels: board.levelsCompleted, stop: state?.reason ?? null, trace, targetLevels, levelDurationsMs, boardState: board.state,
       coverage: state?.sicActionCoverage, families: state?.coverage?.registeredFamilies,
       guard: state?.trace.findLast(value => (value as { kind?: string } | null)?.kind === 'before_guard'),
       selection: state?.sicFamilySelection, information, opening, modes, controlCards };
@@ -155,6 +158,7 @@ async function qualifySicOnly(parameters: URLSearchParams) {
         results.push({ game, qualified, levels: result.levels, total: result.targetLevels, actions: result.actions,
           state: result.boardState, stop: result.stop, operations: [...operations], familyActions: Object.fromEntries(familyActions), strategies: Object.fromEntries(strategies),
           levelEnds: result.trace.flatMap((entry, index) => entry.levelsCompleted > (result.trace[index - 1]?.levelsCompleted ?? 0) ? [index + 1] : []),
+          levelDurationsMs: result.levelDurationsMs,
           traceDigest: await hash(result.trace),
           ...(result.stop === 'no_admissible_prefix' ? { guard: result.guard } : {}) });
       } catch (error) {
