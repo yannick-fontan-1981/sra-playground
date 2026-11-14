@@ -190,4 +190,6 @@ La famille habituelle et l’exploration publique partagent la mesure d’une co
 
 STCK gagne le niveau 1 après retrait de `sic_marked_collection` en trois commandes et 2,55 s. `sic_public_input_exploration` choisit les deux clics puis Space, qui obtient le progrès officiel après 21 images. Le rejeu avec palette permutée et nom neutre conserve la victoire en trois commandes. Le repli réutilise le détecteur de collection existant. Empreinte `f9726f143394f14c8e9b761ac54f0a956db11222209e899d938afcdb117e6b97`.
 
+Le rejeu confirme les 17 victoires après retrait. Les 100 niveaux 1 en configuration normale et les quatre parcours complets de référence avec et sans retrait conservent leurs commandes et retours.
+
 Les essais de retrait sur GLOB, CLRS et COMB ne gagnent pas leur niveau 1. Sur GLOB, les 31 commandes de repli ne modifient pas le plateau. Aucun des 34 nœuds du programme ne figure dans les 30 cibles de clic classées par surface. Un contre-essai place le mobile sur un nœud puis lance le programme. Les 66 images fournissent des observations pour les deux types d’instruction affichés. Le premier écart se situe dans le choix des cibles à essayer.
