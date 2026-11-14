@@ -22,7 +22,7 @@ import { slotPermutationId } from './slot-permutation.ts';
 import { surfaceCopyId } from './surface-copy.ts';
 import { codeRouteId } from './code-route.ts';
 import { profileTransferId } from './profile-transfer.ts';
-import { orderedReplenishmentId } from './ordered-replenishment.ts';
+import { orderedReplenishmentId, learnOrderedReplenishmentId } from './ordered-replenishment.ts';
 import { learnProgramOriginId, programOriginId } from './program-origin.ts';
 import { previewPlacementId } from './preview-placement.ts';
 import { symbolContributionId } from './symbol-contribution.ts';
@@ -95,7 +95,7 @@ export const standalonePlanningGroups = [
   { id: 'apply_learned_relations', families: [remoteSupportRouteId, learnRemoteAccessId, occurrenceRecallId, slotPermutationId, surfaceCopyId, chartRouteId, learnChartRouteId] },
   { id: 'construct_executable_program', families: [codeRouteId, programOriginId, learnProgramOriginId, glyphEditingId, windowCoverageId, panelMatchingId] },
   { id: 'fit_profiles_into_receivers', families: [profileTransferId, portPairingId, radialConnectionId, framedReceptionId] },
-  { id: 'preserve_ordered_team', families: [orderedReplenishmentId] },
+  { id: 'preserve_ordered_team', families: [orderedReplenishmentId, learnOrderedReplenishmentId] },
   { id: 'fill_visible_partition', families: [previewPlacementId, populationPlacementId] },
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, matchExampleId, facetGrowthId, learnFacetGrowthId] },
   { id: 'visit_marked_surface', families: [traceCoverageId, markedLatticeId] },

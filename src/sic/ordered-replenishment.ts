@@ -1,11 +1,13 @@
 import { measureOrderedRecruitment } from '../logos-engine/v6-ordered-recruitment-geometry.ts';
 import { orderedRecruitmentAlternativesCooperative, orderedRecruitmentSummary } from '../logos-engine/v6-ordered-recruitment-projection.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const orderedReplenishmentId = 'sic_ordered_replenishment';
+export const learnOrderedReplenishmentId = 'sic_prepare_ordered_encounters';
 export const orderedReplenishmentStrategies = {
   test_ordered_encounter: 'Test the visible encounter and compare the surviving order',
   recruit_for_next_encounter: 'Choose reinforcement that can survive the visible encounters',
@@ -33,20 +35,30 @@ type Encounter = { room: number; phase: string; quota: number | null; queue: num
 type Step = { action: { action_ref: string; data?: { x: number; y: number } }; kind: 'assign' | 'engage';
   projected_context: Encounter | null };
 type Plan = { steps: Step[]; cost: number; survivors: number };
-type State = { epoch: number; order: NativeBox[] | null; count: number; stopped: boolean; evidence: string[] };
-type Proposal = NativeProposal & { order: NativeBox[]; prediction: Encounter | null; needId: string; local: State };
+type State = { epoch: number; order: NativeBox[] | null; count: number; stopped: boolean; evidence: string[]; interactionRef?: string };
+type Proposal = NativeProposal & { order: NativeBox[]; prediction: Encounter | null; needId: string; local: State; engage?: boolean };
 const empty = (epoch = 0): State => ({ epoch, order: null, count: 0, stopped: false, evidence: [] });
 const matches = (a: Encounter, b: Encounter | null) => b !== null && a.room === b.room && a.phase === b.phase
   && a.quota === b.quota && JSON.stringify(a.queue) === JSON.stringify(b.queue) && JSON.stringify(a.enemy) === JSON.stringify(b.enemy);
 
-export function createSicOrderedReplenishment(): NativeFamily<Proposal> {
+export function createSicOrderedReplenishment(family = orderedReplenishmentId): NativeFamily<Proposal> {
+  const learns = family === learnOrderedReplenishmentId;
   let state = empty();
+  let choose: NativeProgramHandle | undefined;
   return {
-    id: orderedReplenishmentId,
+    id: family,
+    async attachPrograms(registry) {
+      if (learns) choose = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
     async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')
         || !inputs.some(command => command.action_ref === 'ACTION5')) return null;
-      const local = state.epoch === observation.level_epoch ? state : empty(observation.level_epoch);
+      const continuation = state.epoch === observation.level_epoch ? state : null;
+      const observed = learns && !continuation ? execution?.readEncounterTransition?.() : null;
+      const local = continuation ?? { ...empty(observation.level_epoch),
+        ...(observed?.afterRef === observation.observation_ref
+          ? { interactionRef: observed.afterRef, evidence: [observed.beforeRef] } : {}) };
+      if (learns && !local.interactionRef) return null;
       if (local.stopped || local.count >= 32) return null;
       const scene = measureOrderedRecruitment(rows, local.order);
       if (!scene) return null;
@@ -63,25 +75,35 @@ export function createSicOrderedReplenishment(): NativeFamily<Proposal> {
       const command: NativeCommand = { action_ref: move.action.action_ref, data: move.action.data ?? {} };
       const point: NativePoint | null = move.action.data ? [move.action.data.x, move.action.data.y] : null;
       const ref = observation.observation_ref;
-      const evidence: [string, ...string[]] = [ref, ...local.evidence.filter(item => item !== ref)];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
+      const evidence: [string, ...string[]] = [ref, ...new Set([...local.evidence, ...(local.interactionRef ? [local.interactionRef] : [])].filter(item => item !== ref))];
+      const engage = move.kind === 'engage';
+      const situation = { eligibleProbe: engage && !local.interactionRef, routeSupported: !engage,
+        knownInteraction: engage && !!local.interactionRef, mode: execution?.reasoningMode ?? 'exploration' };
+      const decision = learns ? await choose?.run({ situation }, { signal: execution?.signal }) : null;
+      const resolved = learns ? null : resolveStrategyGraph({ graph, mode: 'active', facts: {
         intermediate: { value: move.kind === 'engage' && move.projected_context !== null, evidence },
         recruit: { value: move.kind === 'assign', evidence },
         final: { value: move.kind === 'engage' && move.projected_context === null, evidence },
       }, planners: { test_ordered_encounter: () => command, recruit_for_next_encounter: () => command,
         resolve_final_ordered_encounter: () => command } });
-      if (!selected) return null;
-      const strategy = selected.id, label = orderedReplenishmentStrategies[strategy], parent = 'G_official_completion';
+      const projected = !engage ? 'recruit_for_next_encounter'
+        : move.projected_context === null ? 'resolve_final_ordered_encounter' : 'test_ordered_encounter';
+      const required = !engage ? 'P07' : situation.knownInteraction ? 'P02' : 'P05';
+      const strategy = decision?.result === required ? projected : resolved?.selected?.id;
+      if (!strategy) return null;
+      const label = orderedReplenishmentStrategies[strategy], parent = 'G_official_completion';
       const goal = { kind: 'preserve_queue_through_visible_encounters', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['connected_encounter_rooms'], parentObjective: parent, satisfactionContract: 'observe_official_progress_after_final_encounter' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
-      const id = `ordered-replenishment:${need.id}`, actions = [selected.plan];
+      const id = `ordered-replenishment:${need.id}`, actions = [command];
       const binding = point ? await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: label, evidence }) : null;
-      return { status: 'proposed', kind: orderedReplenishmentId, actions, order: scene.order, prediction: move.projected_context, needId: need.id, local,
+      return { status: 'proposed', kind: family, actions, order: scene.order, prediction: move.projected_context, needId: need.id, local,
+        ...(decision ? { engage, sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation } } : {}),
         steps: [{ action: command, expected_after: null, ...(binding ? { point_binding: binding } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: { strategy, need: 'Keep an ordered team able to pass the visible encounters', mode: local.count ? 'solving' : 'exploration',
-          situation: label, agenda: entries, evidence, encounter: scene.order[scene.current], nextEncounter: scene.order[scene.current + 1] ?? null,
+          situation: label, agenda: resolved?.entries ?? [], evidence, encounter: scene.order[scene.current], nextEncounter: scene.order[scene.current + 1] ?? null,
           control: binding?.bbox ?? null },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
@@ -103,8 +125,9 @@ export function createSicOrderedReplenishment(): NativeFamily<Proposal> {
     record(before, after, _command, _first, second, proposal) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const scene = measureOrderedRecruitment(second, proposal.order), local = proposal.local;
-      state = { ...local, order: proposal.order, count: local.count + 1,
-        stopped: !scene || !matches(orderedRecruitmentSummary(scene) as Encounter, proposal.prediction),
+      const matched = !!scene && matches(orderedRecruitmentSummary(scene) as Encounter, proposal.prediction);
+      state = { ...local, order: proposal.order, count: local.count + 1, stopped: !matched,
+        ...(proposal.engage && matched ? { interactionRef: after.observation_ref } : {}),
         evidence: [...local.evidence.slice(-3), after.observation_ref] };
       return { events: [] };
     },

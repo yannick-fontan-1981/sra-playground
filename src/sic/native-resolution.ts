@@ -23,7 +23,7 @@ import { slotPermutationId, slotPermutationStrategies } from './slot-permutation
 import { surfaceCopyId, surfaceCopyStrategies } from './surface-copy.ts';
 import { codeRouteId, codeRouteStrategies } from './code-route.ts';
 import { profileTransferId, profileTransferStrategies } from './profile-transfer.ts';
-import { orderedReplenishmentId, orderedReplenishmentStrategies } from './ordered-replenishment.ts';
+import { learnOrderedReplenishmentId, orderedReplenishmentId, orderedReplenishmentStrategies } from './ordered-replenishment.ts';
 import { learnProgramOriginId, programOriginId, programOriginStrategies } from './program-origin.ts';
 import { previewPlacementId, previewPlacementStrategies } from './preview-placement.ts';
 import { symbolContributionId, symbolContributionStrategies } from './symbol-contribution.ts';
@@ -482,7 +482,7 @@ export function readNativeResolution(agent: {
             : family === slotTransferId ? slotTransferStrategies : family === remoteSupportRouteId ? remoteSupportRouteStrategies
               : family === occurrenceRecallId ? occurrenceRecallStrategies : family === slotPermutationId ? slotPermutationStrategies
                 : family === surfaceCopyId ? surfaceCopyStrategies : family === codeRouteId ? codeRouteStrategies
-                  : family === profileTransferId ? profileTransferStrategies : family === orderedReplenishmentId ? orderedReplenishmentStrategies
+                  : family === profileTransferId ? profileTransferStrategies : (family === orderedReplenishmentId || family === learnOrderedReplenishmentId) ? orderedReplenishmentStrategies
                     : (family === programOriginId || family === learnProgramOriginId) ? programOriginStrategies : family === previewPlacementId ? previewPlacementStrategies
                       : family === symbolContributionId ? symbolContributionStrategies : family === markedLatticeId ? markedLatticeStrategies
                         : (family === queuedPlacementId || family === learnQueuedPlacementId) ? queuedPlacementStrategies : (family === legendRecolorId || family === matchExampleId) ? legendRecolorStrategies
@@ -627,7 +627,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && family === orderedReplenishmentId) {
+  if (situationCard && (family === orderedReplenishmentId || family === learnOrderedReplenishmentId)) {
     for (const [field, name] of [['encounter', 'Current encounter'], ['nextEncounter', 'Next encounter'], ['control', 'Reinforcement control']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label: name, box });
