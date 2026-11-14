@@ -193,3 +193,9 @@ STCK gagne le niveau 1 après retrait de `sic_marked_collection` en trois comman
 Le rejeu confirme les 17 victoires après retrait. Les 100 niveaux 1 en configuration normale et les quatre parcours complets de référence avec et sans retrait conservent leurs commandes et retours.
 
 Les essais de retrait sur GLOB, CLRS et COMB ne gagnent pas leur niveau 1. Sur GLOB, les 31 commandes de repli ne modifient pas le plateau. Aucun des 34 nœuds du programme ne figure dans les 30 cibles de clic classées par surface. Un contre-essai place le mobile sur un nœud puis lance le programme. Les 66 images fournissent des observations pour les deux types d’instruction affichés. Le premier écart se situe dans le choix des cibles à essayer.
+
+### Donner une chance aux petites cibles répétées
+
+Après quatre clics qui laissent le même plateau visible, l’exploration ménage des essais pour les groupes de rectangles de même taille. Elle prend d’abord un représentant central par groupe, conserve ses autres candidats et continue à écarter les commandes déjà testées sur ce plateau. La répétition suggère une expérience. Le clic doit produire un retour mesurable pour qu’une autre famille puisse en tirer parti.
+
+Sur GLOB, avec `sic_program_origin` retirée, le premier candidat ainsi proposé change un seul des 34 nœuds. `sic_learn_program_origin` vérifie que ce nœud contient le point cliqué et que les autres nœuds gardent leur état. Il lance le programme et mesure les déplacements pendant l’animation, puis teste l’origine compatible avec l’arrivée recherchée. Les six premières commandes sont choisies par l’exploration et les trois suivantes par le repli. **GLOB gagne en 9 commandes et 8,12 s**. Le gain est reproduit en neuf commandes avec palette permutée et nom neutre. La mesure du programme et le calcul de l’origine restent partagés avec la famille retirée. Empreinte `4b061a7f529ccbf63ceb927261b20f84899b1fe284bf4db6da4ce4e30a6eb398`.

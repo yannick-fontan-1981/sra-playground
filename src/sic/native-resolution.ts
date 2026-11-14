@@ -23,7 +23,7 @@ import { surfaceCopyId, surfaceCopyStrategies } from './surface-copy.ts';
 import { codeRouteId, codeRouteStrategies } from './code-route.ts';
 import { profileTransferId, profileTransferStrategies } from './profile-transfer.ts';
 import { orderedReplenishmentId, orderedReplenishmentStrategies } from './ordered-replenishment.ts';
-import { programOriginId, programOriginStrategies } from './program-origin.ts';
+import { learnProgramOriginId, programOriginId, programOriginStrategies } from './program-origin.ts';
 import { previewPlacementId, previewPlacementStrategies } from './preview-placement.ts';
 import { symbolContributionId, symbolContributionStrategies } from './symbol-contribution.ts';
 import { markedLatticeId, markedLatticeStrategies } from './marked-lattice.ts';
@@ -480,7 +480,7 @@ export function readNativeResolution(agent: {
               : family === occurrenceRecallId ? occurrenceRecallStrategies : family === slotPermutationId ? slotPermutationStrategies
                 : family === surfaceCopyId ? surfaceCopyStrategies : family === codeRouteId ? codeRouteStrategies
                   : family === profileTransferId ? profileTransferStrategies : family === orderedReplenishmentId ? orderedReplenishmentStrategies
-                    : family === programOriginId ? programOriginStrategies : family === previewPlacementId ? previewPlacementStrategies
+                    : (family === programOriginId || family === learnProgramOriginId) ? programOriginStrategies : family === previewPlacementId ? previewPlacementStrategies
                       : family === symbolContributionId ? symbolContributionStrategies : family === markedLatticeId ? markedLatticeStrategies
                         : family === queuedPlacementId ? queuedPlacementStrategies : family === legendRecolorId ? legendRecolorStrategies
                           : family === visualPatternId ? visualPatternStrategies : family === facetGrowthId ? facetGrowthStrategies
@@ -622,7 +622,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label: name, box });
     }
   }
-  if (situationCard && family === programOriginId) {
+  if (situationCard && (family === programOriginId || family === learnProgramOriginId)) {
     const origin = bounds(card?.origin), target = bounds(card?.target);
     if (origin) subjects.push({ label: 'Program starting node', box: origin });
     if (target) subjects.push({ label: 'Marked destination', box: target });

@@ -6,29 +6,32 @@ import { measureComponentTranslations } from './observed-translation.ts';
 import { observedCommandFrontier, rememberCommandReturn, type ObservedCommandGraph } from './observed-command-frontier.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 import { matchesCollectionEdit, proposeCollectionTrial, type CollectionTrial } from './collection-experiment.ts';
+import { repeatedInputTargets } from './repeated-input-targets.ts';
 
 export const publicInputExplorationId = 'sic_public_input_exploration';
 export const publicInputStrategies = {
   P05: 'Test a direction on the visibly changed piece',
   test_marked_edit: 'Test the edit suggested by the visible marks',
   test_edited_collection: 'Test the effect of the verified edit',
+  test_repeated_target: 'Test a target from a repeated group',
   recheck_controls_after_change: 'Recheck directional controls after an interface change',
   test_repeated_marker: 'Test a small marker in a repeated arrangement',
   compare_public_input: 'Test an available command on this board',
   revisit_input_frontier: 'Revisit a board with an untested command',
 } as const;
-const order = ['P05', 'recheck_controls_after_change', 'test_marked_edit', 'test_edited_collection', 'test_repeated_marker', 'compare_public_input', 'revisit_input_frontier'] as const;
-const graph = compileStrategyGraph({ id: 'understand_public_controls', version: 5, order: 'FALLBACK', priorities: order,
+const order = ['P05', 'recheck_controls_after_change', 'test_marked_edit', 'test_edited_collection', 'test_repeated_marker', 'test_repeated_target', 'compare_public_input', 'revisit_input_frontier'] as const;
+const graph = compileStrategyGraph({ id: 'understand_public_controls', version: 6, order: 'FALLBACK', priorities: order,
   strategies: {
     P05: [{ fact: 'clickedControl', expected: true, label: 'A click changed a piece after directional commands failed to move it' }],
     recheck_controls_after_change: [{ fact: 'changedControlContext', expected: true, label: 'Previously stationary directions can be rechecked after a visible interface change' }],
     test_marked_edit: [{ fact: 'markedEdit', expected: true, label: 'A visible mark suggests a testable change to the collection' }],
     test_edited_collection: [{ fact: 'verifiedEdit', expected: true, label: 'The expected edit occurred and no mark requests another change' }],
     test_repeated_marker: [{ fact: 'repeatedMarker', expected: true, label: 'Several equal square arrangements of isolated markers are visible, and this marker is untested on this board' }],
+    test_repeated_target: [{ fact: 'repeatedTarget', expected: true, label: 'Larger targets were stationary and a repeated group offers a visually distinct test' }],
     compare_public_input: [{ fact: 'untestedHere', expected: true, label: 'An available illustrated input has no return on this board' }],
     revisit_input_frontier: [{ fact: 'observedRoute', expected: true, label: 'Previously observed returns lead to an untested input' }],
   },
-}, ['clickedControl', 'changedControlContext', 'markedEdit', 'verifiedEdit', 'repeatedMarker', 'untestedHere', 'observedRoute']);
+}, ['clickedControl', 'changedControlContext', 'markedEdit', 'verifiedEdit', 'repeatedMarker', 'repeatedTarget', 'untestedHere', 'observedRoute']);
 const explorationLimit = 40;
 const clickLimit = 30;
 const completion = 'G_official_completion';
@@ -111,9 +114,9 @@ function repeatedInteriorMarkers(parts: ReturnType<typeof geometricComponents>, 
   return markers;
 }
 
-function visibleInputs(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[]) {
+function visibleInputs(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], stationaryClicks: number) {
   const candidates = new Map(inputs.filter(command => /^ACTION[1-5]$/.test(command.action_ref))
-    .map(command => [commandKey(command), { command, box: null as NativeBox | null, marker: false }]));
+    .map(command => [commandKey(command), { command, box: null as NativeBox | null, marker: false, repeated: false }]));
   if (!observation.available_action_refs.includes('ACTION6')) return candidates;
   const width = rows[0]!.length, height = rows.length;
   const components = geometricComponents(rows);
@@ -124,13 +127,14 @@ function visibleInputs(observation: NativeObservation, rows: NativeRows, inputs:
   const parts = components.filter(component => isMarker(component) || (component.area >= 2 && component.area * 4 < width * height))
     .sort((a, b) => Number(isMarker(b)) - Number(isMarker(a))
       || (isMarker(a) && isMarker(b) ? toCenter(a) - toCenter(b) : b.area - a.area));
-  for (const part of parts.slice(0, clickLimit)) {
+  const repeated = new Set(stationaryClicks >= 4 ? repeatedInputTargets(parts, 6) : []);
+  for (const part of new Set([...parts.filter(isMarker).slice(0, clickLimit), ...repeated, ...parts.slice(0, clickLimit)])) {
     const { bbox, mask } = part;
     const [left, top, right, bottom] = bbox;
     const distance = ([x, y]: NativePoint) => Math.abs(2 * x + left - right) + Math.abs(2 * y + top - bottom);
     const [x, y] = mask.reduce((best, point) => distance(point) < distance(best) ? point : best);
     const command = { action_ref: 'ACTION6', data: { x: x + left, y: y + top } };
-    candidates.set(commandKey(command), { command, box: bbox, marker: isMarker(part) });
+    candidates.set(commandKey(command), { command, box: bbox, marker: isMarker(part), repeated: repeated.has(part) });
   }
   return candidates;
 }
@@ -144,13 +148,14 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       const budget = Math.min(remaining, explorationLimit - local.experiments);
       if (budget < 1) return null;
       const source = interfaceKey(observation), ref = observation.observation_ref;
-      const candidates = visibleInputs(observation, rows, inputs);
+      const stationaryClicks = (local.transitions[source] ?? []).filter(edge => edge.destination === source && edge.action.startsWith('ACTION6:'));
+      const candidates = visibleInputs(observation, rows, inputs, stationaryClicks.length);
       const named = [...candidates.keys()].filter(key => /^ACTION[1-5]$/.test(key));
       const verifiedEdit = local.collectionEdit?.[1] === ref ? local.collectionEdit : undefined;
       const trial = observation.available_action_refs.includes('ACTION6') && named.length === 1
         ? proposeCollectionTrial(rows, named.map(key => candidates.get(key)!.command), !!verifiedEdit) : null;
       const trialKey = trial && commandKey(trial.command);
-      if (trial && trialKey) candidates.set(trialKey, { command: trial.command, box: trial.box, marker: false });
+      if (trial && trialKey) candidates.set(trialKey, { command: trial.command, box: trial.box, marker: false, repeated: false });
       const keys = [...candidates.keys()];
       const clickedControl = local.clickedControl?.destination === source ? local.clickedControl : undefined;
       const controlledPiece = local.controlledPiece?.destination === source ? local.controlledPiece : undefined;
@@ -170,7 +175,9 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       const offer = frontier && candidates.get(frontier.action);
       if (!offer) return null;
       const collectionTrial = frontier === preferred ? trial : null;
+      const repeatedTarget = frontier.depth === 0 && offer.repeated;
       const proof: [string, ...string[]] = [ref, ...(frontier.first ? [frontier.first.evidence] : []),
+        ...(repeatedTarget ? stationaryClicks.slice(-4).map(edge => edge.evidence) : []),
         ...(clickedControl && probe ? [clickedControl.evidence] : []),
         ...(collectionTrial && verifiedEdit ? [verifiedEdit[0]] : []),
         ...(controlledPiece ? controlledPiece.evidence.filter(item => item !== ref) : []),
@@ -181,10 +188,11 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         markedEdit: { value: !!collectionTrial?.expected, evidence: proof },
         verifiedEdit: { value: collectionTrial?.expected === null, evidence: proof },
         repeatedMarker: { value: frontier.depth === 0 && offer.marker, evidence: proof },
+        repeatedTarget: { value: repeatedTarget, evidence: proof },
         untestedHere: { value: frontier.depth === 0, evidence: proof },
         observedRoute: { value: frontier.depth > 0, evidence: proof },
       }, planners: { P05: () => offer, recheck_controls_after_change: () => offer, test_marked_edit: () => offer,
-        test_edited_collection: () => offer, test_repeated_marker: () => offer,
+        test_edited_collection: () => offer, test_repeated_marker: () => offer, test_repeated_target: () => offer,
         compare_public_input: () => offer, revisit_input_frontier: () => offer } });
       if (!selected) return null;
       const strategy = selected.id;

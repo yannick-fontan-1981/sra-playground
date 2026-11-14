@@ -6,6 +6,7 @@ import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const programOriginId = 'sic_program_origin';
+export const learnProgramOriginId = 'sic_learn_program_origin';
 export const programOriginStrategies = {
   test_central_program_node: 'Place the piece at a node suitable for observing the program',
   measure_fixed_program_trace: 'Run the displayed program and measure its instructions',
@@ -99,21 +100,36 @@ function learnPorts(proposal: Proposal, first: NativeRows, frames: readonly Nati
   return rules;
 }
 
-export function createSicProgramOrigin(): NativeFamily<Proposal> {
+export function createSicProgramOrigin(family = programOriginId): NativeFamily<Proposal> {
+  const learns = family === learnProgramOriginId;
   let state: State | null = null;
   return {
-    id: programOriginId,
-    async propose(observation, rows, inputs, remaining) {
+    id: family,
+    async propose(observation, rows, inputs, remaining, execution) {
       if (!observation.available_action_refs.includes('ACTION6')) return null;
       const launch = inputs.filter(input => /^ACTION[1-5]$/.test(input.action_ref));
       if (launch.length !== 1 || remaining < 1) return null;
+      const prior = state?.epoch === observation.level_epoch ? state : null;
+      if (learns && !prior && !execution?.readClickRegions) return null;
       const layout = measureFixedScene(rows) as Layout | null;
       if (!layout || layout.nodes.length > 80 || layout.word.length > 48 || new Set(layout.word).size < 2) return null;
       const layoutKey = key([layout.nodes, layout.word]), ref = observation.observation_ref;
-      const local = state?.epoch === observation.level_epoch && state.layoutKey === layoutKey
-        ? state : empty(observation.level_epoch, layoutKey);
-      if (local.stopped || local.attempted.length >= 8) return null;
+      const local = prior?.layoutKey === layoutKey ? prior : empty(observation.level_epoch, layoutKey);
       const fills = layout.nodes.map(node => fixedFill(rows, node));
+      if (learns && prior?.layoutKey !== layoutKey) {
+        const click = execution?.readClickRegions?.(layout.nodes.map(box));
+        if (!click || click.levelEpoch !== observation.level_epoch || click.afterRef !== ref) return null;
+        const [x, y] = click.point;
+        const changed = click.after.flatMap((value, i) => value !== click.before[i] ? [i] : []);
+        if (changed.length !== 1) return null;
+        const node = changed[0]!, [left, top, right, bottom] = box(layout.nodes[node]!);
+        const color = click.after[node];
+        if (color == null || click.before[node] !== layout.common_fill || x < left || x > right || y < top || y > bottom ||
+          click.after.some((value, i) => value !== fills[i])) return null;
+        local.pending = { node, color, solving: false };
+        local.evidence = [click.beforeRef, click.afterRef];
+      }
+      if (local.stopped || local.attempted.length >= 8) return null;
       const goals = fills.flatMap((value, i) => value != null && value !== layout.common_fill && i !== local.pending?.node ? [i] : []);
       if (goals.length !== 1) return null;
       const target = goals[0]!;
@@ -136,7 +152,7 @@ export function createSicProgramOrigin(): NativeFamily<Proposal> {
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `program-origin:${need.id}`, actions = [command], solving = origin !== null || local.pending?.solving === true;
       const binding = command === click ? await ObservedInputDomain.makeLocusWitness(observation, rows, [x, y], { reason: label, evidence }) : null;
-      return { status: 'proposed', kind: programOriginId, actions, strategy, layout, local, node, solving, fills, needId: need.id,
+      return { status: 'proposed', kind: family, actions, strategy, layout, local, node, solving, fills, needId: need.id,
         steps: [{ action: command, expected_after: null, ...(binding ? { point_binding: binding } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: { strategy, need: 'Find where the displayed program can start and reach the marked destination',

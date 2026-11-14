@@ -22,7 +22,7 @@ import { surfaceCopyId } from './surface-copy.ts';
 import { codeRouteId } from './code-route.ts';
 import { profileTransferId } from './profile-transfer.ts';
 import { orderedReplenishmentId } from './ordered-replenishment.ts';
-import { programOriginId } from './program-origin.ts';
+import { learnProgramOriginId, programOriginId } from './program-origin.ts';
 import { previewPlacementId } from './preview-placement.ts';
 import { symbolContributionId } from './symbol-contribution.ts';
 import { markedLatticeId } from './marked-lattice.ts';
@@ -91,7 +91,7 @@ export const standalonePlanningGroups = [
   { id: 'coordinate_visible_motion', families: [bandAlignmentId, sharedArrivalId, outlineServiceId, carryToFrameId, directionalReceptionId, branchAlignmentId, receptionAccessId, learnReceptionAccessId, markerCoverageId, reflectedPlacementId, pivotCargoId, moveMaskedPiecesId, translateCoupledPiecesId, learnContactAccessId, coupledMotionId, materialRouteId, inventoryAccessId, replayAccessId, orientedDeliveryId, indicatedJumpId, highlightedRouteId, pairedPassageId, seatedContactId, switchedSurfaceId, reactiveTargetId, pointReachId, linkedMidpointId, excavateDescentId, litRouteId, nestedPassageId, linkOpeningsId, navigateRevealedGridId, arrangeTurnPostsId] },
   { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId, visualPatternId, framedSearchId, feedbackTrialId, catalogueComparisonId, windowRelationId, layeredFitId] },
   { id: 'apply_learned_relations', families: [remoteSupportRouteId, learnRemoteAccessId, occurrenceRecallId, slotPermutationId, surfaceCopyId, chartRouteId] },
-  { id: 'construct_executable_program', families: [codeRouteId, programOriginId, glyphEditingId, windowCoverageId, panelMatchingId] },
+  { id: 'construct_executable_program', families: [codeRouteId, programOriginId, learnProgramOriginId, glyphEditingId, windowCoverageId, panelMatchingId] },
   { id: 'fit_profiles_into_receivers', families: [profileTransferId, portPairingId, radialConnectionId, framedReceptionId] },
   { id: 'preserve_ordered_team', families: [orderedReplenishmentId] },
   { id: 'fill_visible_partition', families: [previewPlacementId, populationPlacementId] },
