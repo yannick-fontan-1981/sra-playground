@@ -63,7 +63,7 @@ import { layeredFitId } from './layered-fit.ts';
 import { litRouteId } from './lit-route.ts';
 import { pivotCargoId } from './pivot-cargo.ts';
 import { nestedPassageId } from './nested-passage.ts';
-import { translateCoupledPiecesId } from './translate-coupled-pieces.ts';
+import { learnContactAccessId, translateCoupledPiecesId } from './translate-coupled-pieces.ts';
 import { stagedMarksId } from './staged-marks.ts';
 import { learnSelectedAccessId, moveMaskedPiecesId } from './move-masked-pieces.ts';
 import { linkOpeningsId } from './link-openings.ts';
@@ -471,7 +471,7 @@ export function readNativeResolution(agent: {
   const rootedScene = record(rooted?.scene);
   const labels = family === orderedContactId ? orderedContactStrategies : family === cavityAccessId ? cavityStrategies
     : family === publicInputExplorationId ? publicInputStrategies
-    : family === learnGridAccessId || family === learnSelectedAccessId ? inventoryAccessStrategies
+    : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId ? inventoryAccessStrategies
     : family === framedContactId ? framedContactStrategies
       : family === transportContactId ? transportContactStrategies : family === bandAlignmentId ? bandAlignmentStrategies
         : family === sharedArrivalId ? sharedArrivalStrategies : family === outlineServiceId ? outlineServiceStrategies
@@ -826,10 +826,15 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label: 'Deposited marked piece', box });
     }
   }
-  if (situationCard && family === translateCoupledPiecesId) {
+  if (situationCard && (family === translateCoupledPiecesId || family === learnContactAccessId)) {
     for (const [field, label] of [['focus', 'Controlled piece'], ['related', 'Other piece'], ['target', 'Matching opening']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
+    }
+    const contacts = card?.observedContact;
+    if (Array.isArray(contacts)) for (const contact of contacts.slice(-1)) {
+      const landing = bounds(record(contact)?.to);
+      if (landing) subjects.push({ label: 'Previously observed contact landing', box: landing });
     }
   }
   if (situationCard && family === nestedPassageId) {

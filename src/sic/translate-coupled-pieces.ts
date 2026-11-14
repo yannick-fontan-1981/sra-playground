@@ -4,6 +4,7 @@ import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-
 import { sicNeedId } from './need-identity.ts';
 
 export const translateCoupledPiecesId = 'sic_translate_coupled_pieces';
+export const learnContactAccessId = 'sic_learn_contact_access';
 
 const directions = [['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], ['ACTION4', 1, 0]] as const;
 
@@ -16,7 +17,9 @@ type Model = {
 };
 type Position = { pieces: NativePoint[]; selected: number };
 type Move = { input: string; click?: NativePoint; position: Position; contact?: number };
-type State = { epoch: number; model: Model; position: Position; refs: string[]; attempts: Record<string, number> };
+type ContactEffect = { input: string; offset: NativePoint; evidence: string; from: NativePoint; to: NativePoint };
+type State = { epoch: number; model: Model; position: Position; refs: string[]; attempts: Record<string, number>;
+  controls?: Record<string, string>; contacts?: ContactEffect[] };
 type Proposal = NativeProposal & { local: State; move: Move; needId: string; attempt: string };
 
 const eq = ([x, y]: NativePoint, [a, b]: NativePoint) => x === a && y === b;
@@ -68,7 +71,7 @@ function measure(rows: NativeRows): { model: Model; position: Position } | null 
   return layouts.length === 1 ? layouts[0]! : null;
 }
 
-function choose({ model, position, attempts }: State): Move | null {
+function choose({ model, position, attempts, contacts }: State): Move | null {
   const { pitch, domain, divider, targets } = model;
   const domainKeys = new Set(domain.map(label));
   const queue: { position: Position; first: Move | null }[] = [{ position, first: null }];
@@ -101,8 +104,14 @@ function choose({ model, position, attempts }: State): Move | null {
       if (!dx) continue;
       const next = advance(target, dx * pitch, 0), [l,,r] = divider;
       if (next[0] + pitch - 1 < l || next[0] > r) continue;
+      const effect = contacts?.find(contact => contact.input === input);
       const beyond = domain.filter(([x,y]) => y === target[1] && (dx > 0 ? x > r : x + pitch - 1 < l));
       beyond.sort((a, b) => dx * (a[0] - b[0]));
+      if (effect) {
+        const predicted = advance(target, ...effect.offset);
+        const index = beyond.findIndex(point => eq(point, predicted));
+        if (index > 0) beyond.unshift(...beyond.splice(index, 1));
+      }
       for (const landing of beyond) {
         offer({ input, contact: other, position: { ...p, pieces: p.pieces.map((piece, j) => j === other ? landing : piece) } });
       }
@@ -142,23 +151,29 @@ function returned(rows: NativeRows, proposal: Proposal): Position | null {
   return { pieces, selected: move.position.selected };
 }
 
-export function createSicTranslateCoupledPieces(): NativeFamily<Proposal> {
+export function createSicTranslateCoupledPieces(id = translateCoupledPiecesId): NativeFamily<Proposal> {
+  const learns = id === learnContactAccessId;
   let state: State | null = null;
   return {
-    id: translateCoupledPiecesId,
+    id,
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !['ACTION6', ...directions.map(([id]) => id)].every(id => observation.available_action_refs.includes(id))) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       const initial = prior ?? measure(rows);
       if (!initial) return null;
-      const local = prior ?? { ...initial, epoch: observation.level_epoch, refs: [], attempts: {} };
+      const local = prior ?? { ...initial, epoch: observation.level_epoch, refs: [], attempts: {}, ...(learns ? { controls: {}, contacts: [] } : {}) };
       const move = choose(local);
       if (!move) return null;
       const ref = observation.observation_ref;
-      const evidence: [string, ...string[]] = [ref, ...local.refs.filter(v => v !== ref)];
+      const control = local.controls?.[move.input];
+      const contact = move.contact === undefined ? undefined : local.contacts?.find(effect => effect.input === move.input);
+      const supportedContact = contact && move.contact !== undefined
+        && eq(advance(local.position.pieces[move.contact]!, ...contact.offset), move.position.pieces[move.contact]!);
+      const evidence: [string, ...string[]] = [ref, ...new Set([...local.refs, ...(control ? [control] : []), ...(contact ? [contact.evidence] : [])].filter(v => v !== ref))];
       const mode = execution?.reasoningMode ?? 'exploration';
       const offer = { input: move.input, expected: move.position.pieces[move.position.selected]!, evidence };
-      const probe = !local.refs.length || !!move.click || move.contact !== undefined;
+      const probe = learns ? !!move.click || (move.contact === undefined ? !control : !supportedContact)
+        : !local.refs.length || !!move.click || move.contact !== undefined;
       const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence,
         probe: probe ? offer : null, access: probe ? null : offer, interaction: null });
       if (!selected) return null;
@@ -168,24 +183,26 @@ export function createSicTranslateCoupledPieces(): NativeFamily<Proposal> {
       const objective = { kind: 'place_movable_pieces_in_fitting_targets', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['movable_pieces', 'matching_target_openings', 'separating_obstacle'], parentObjective: parent, satisfactionContract: 'official_progress_after_target_coverage' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = translateCoupledPiecesId + ':' + need.id;
+      const composition = id + ':' + need.id;
       const action: NativeCommand = { action_ref: move.input, data: move.click ? { x: move.click[0], y: move.click[1] } : {} };
       const situation = move.click ? 'Select the piece needed for the next move' : move.contact !== undefined
         ? 'Test whether directed contact carries the blocked piece across the separator' : 'Move the controlled piece toward a target or contact position';
       const box = ([x,y]: NativePoint) => [x, y, x + local.model.pitch - 1, y + local.model.pitch - 1];
       const attempt = key(local.position) + '>' + key(move.position);
       return {
-        status: 'proposed', kind: translateCoupledPiecesId, local, move, needId: need.id, attempt,
+        status: 'proposed', kind: id, local, move, needId: need.id, attempt,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
         steps: [{ action, expected_after: move.position.pieces, ...(witness ? { point_binding: witness } : {}) }],
         sicSituationCard: { strategy: selected.id, need: 'Place the pieces in the matching openings', situation, evidence, agenda: entries, mode,
           triggerCard: card, focus: box(local.position.pieces[move.position.selected]!),
-          related: box(local.position.pieces[1 - move.position.selected]!), target: box(local.model.targets.find(goal => !local.position.pieces.some(p => eq(p, goal)))!) },
+          related: box(local.position.pieces[1 - move.position.selected]!), target: box(local.model.targets.find(goal => !local.position.pieces.some(p => eq(p, goal)))!),
+          ...(local.contacts?.length ? { observedContact: local.contacts.map(effect => ({ evidence: effect.evidence,
+            from: box(effect.from), to: box(effect.to) })) } : {}) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
-        compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
-        bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
-          preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
+        compositions: [{ id: composition, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
+        sicLocalDecision: { strategy: selected.id, objective: { id: composition, label: navigationPrimitives[selected.id], parent }, need },
+        bundle_template: { operation_key: 'OP18', composition_ref: composition, objective_ref: parent, purpose: situation,
+          preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: composition } },
       };
     },
     before(proposal, index, _packet, current) {
@@ -204,6 +221,20 @@ export function createSicTranslateCoupledPieces(): NativeFamily<Proposal> {
       const { local, move } = proposal, result = returned(second, proposal);
       state = { ...local, position: result ?? local.position, refs: result ? [...local.refs.slice(-4), after.observation_ref] : local.refs,
         attempts: result && key(result) === key(move.position) ? local.attempts : { ...local.attempts, [proposal.attempt]: (local.attempts[proposal.attempt] ?? 0) + 1 } };
+      if (!learns || !result || move.click) return { events: [] };
+      const selected = local.position.selected, peer = 1 - selected;
+      if (move.contact === undefined && eq(result.pieces[peer]!, local.position.pieces[peer]!)
+        && eq(result.pieces[selected]!, move.position.pieces[selected]!) && !eq(result.pieces[selected]!, local.position.pieces[selected]!)) {
+        state.controls = { ...local.controls, [move.input]: after.observation_ref };
+      }
+      if (move.contact === peer) {
+        const from = local.position.pieces[peer]!, to = result.pieces[peer]!;
+        const [left, , right] = local.model.divider;
+        const crossed = from[0] < left ? to[0] > right : to[0] < left;
+        const contacts = local.contacts?.filter(effect => effect.input !== move.input) ?? [];
+        state.contacts = crossed && from[1] === to[1] ? [...contacts,
+          { input: move.input, offset: [to[0] - from[0], to[1] - from[1]], evidence: after.observation_ref, from, to }] : contacts;
+      }
       return { events: [] };
     },
     state: () => ({ state }),
