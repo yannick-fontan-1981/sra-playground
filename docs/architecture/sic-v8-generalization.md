@@ -336,4 +336,6 @@ Sur **AMZE**, la même carte SRC choisit un essai P05 puis deux sauts P07 avec `
 
 La campagne commune CAVA et AMZE confirme **30/100** niveaux 1 après retrait, en 388 commandes SIC seul, dont 58 choisies par le SRC. Elle retrouve aussi KLOT en 30 commandes. Les 100 premiers niveaux en usage normal, les 28 victoires précédentes après retrait et les quatre parcours complets avec et sans retrait conservent leurs commandes et leurs retours.
 
-Le prototype EVAS réutilise ce même programme avec une troisième mesure, celle des trajets et de l’exposition à la lumière. Avec sa famille retirée, le rejeu ciblé gagne en trois clics SIC seul. La permutation de palette conserve le gain. Désactiver P07 après le premier arrêt laisse le niveau ouvert après trois commandes. Le prototype reste à qualifier sur le catalogue.
+### Confirmer un trajet à travers une animation
+
+Avec `sic_lit_route` retirée, **EVAS gagne en trois clics SIC seul**. Le même programme SRC choisit P05 pour tester un trajet sans exposition visible, puis P07 pour les deux déplacements suivants. Le fournisseur confirme l’arrivée à la case attendue et retrouve une position intermédiaire dans l’animation avant d’autoriser la réutilisation du déplacement. Le jeu confirme le niveau au troisième clic. La palette permutée et le nom neutre conservent le gain. Désactiver P07 après le premier arrêt laisse le niveau ouvert après trois commandes. Les commandes et retours reproduisent ceux de la famille habituelle, empreinte `af6c7c4e88a7628f637a7aa7e2159823b27d8659c74864042c2ad51c92cda947`.

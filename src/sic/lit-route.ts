@@ -1,9 +1,11 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 
 export const litRouteId = 'sic_lit_route';
+export const learnLitRouteId = 'sic_learn_route_from_exposure';
 
 type Scene = { actor: NativePoint; goal: NativePoint; stripe: [number, number]; tiles: Tile[]; walls: number; light: number; litBox: NativeBox | null };
 type Tile = { point: NativePoint; lit: number };
@@ -105,11 +107,16 @@ function choose(scene: Scene, rejected: readonly string[]): Plan | null {
   return viable[0] ?? null;
 }
 
-export function createSicLitRoute(): NativeFamily<Proposal> {
+export function createSicLitRoute(family = litRouteId): NativeFamily<Proposal> {
+  const learns = family === learnLitRouteId;
   let memory: Memory | null = null;
   let observation: Scene | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: litRouteId,
+    id: family,
+    async attachPrograms(registry) {
+      if (learns) decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
     async propose(before, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !['ACTION5', 'ACTION6'].every(ref => before.available_action_refs.includes(ref))
         || before.available_action_refs.some(ref => /^ACTION[1-4]$/.test(ref))) return null;
@@ -124,9 +131,12 @@ export function createSicLitRoute(): NativeFamily<Proposal> {
       const evidence: [string, ...string[]] = [ref, ...local.refs.filter(v => v !== ref)];
       const mode = execution?.reasoningMode ?? 'exploration';
       const offer = { input: 'ACTION6', expected: plan.target, evidence };
-      const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence, probe: local.refs.length ? null : offer,
+      const facts = { routeSupported: local.refs.length > 0, eligibleProbe: local.refs.length === 0 && plan.lit === 0, mode };
+      const decision = learns ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : null;
+      const navigation = learns ? null : resolveNavigationPrimitives({ mode, evidence, probe: local.refs.length ? null : offer,
         access: local.refs.length ? offer : null, interaction: null });
-      if (!selected) return null;
+      const strategy = decision?.result ?? navigation?.selected?.id;
+      if (strategy !== 'P05' && strategy !== 'P07') return null;
       const [x, y] = plan.target, target: NativePoint = [x + 1, y + 1];
       const witness = await ObservedInputDomain.makeLocusWitness(before, rows, target, { reason: 'Reachable stopping tile outside the visible light', evidence });
       if (!witness) return null;
@@ -139,14 +149,16 @@ export function createSicLitRoute(): NativeFamily<Proposal> {
       const situation = same(plan.target, scene.goal) ? 'Take the route to the exit with the current corridor unlit'
         : 'Move to a stopping point with lower visible exposure and assess the new lighting';
       return {
-        status: 'proposed', kind: litRouteId, local, scene, plan, attempt: key(scene.actor) + '/' + key(plan.target), needId: need.id,
+        status: 'proposed', kind: family, local, scene, plan, attempt: key(scene.actor) + '/' + key(plan.target), needId: need.id,
         binding: { observation_ref: ref, level_epoch: before.level_epoch }, actions: [action],
         steps: [{ action, expected_after: plan.target, point_binding: witness }],
-        sicSituationCard: { strategy: selected.id, need: 'Reach the exit past the changing light', situation, evidence, agenda: entries,
-          mode, triggerCard: card, actor: box(scene.actor), focus: box(plan.target), goal: box(scene.goal), light: scene.litBox },
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
+        sicSituationCard: { strategy, need: 'Reach the exit past the changing light', situation, evidence, agenda: navigation?.entries ?? [],
+          mode, triggerCard: navigation?.card ?? decision?.receipt.workflow, actor: box(scene.actor), focus: box(plan.target), goal: box(scene.goal), light: scene.litBox },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
+        sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
           preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
       };

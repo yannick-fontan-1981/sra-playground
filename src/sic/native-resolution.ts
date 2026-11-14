@@ -61,7 +61,7 @@ import { linkedMidpointId } from './linked-midpoint.ts';
 import { excavateDescentId } from './excavate-descent.ts';
 import { gatedCascadeId } from './gated-cascade.ts';
 import { layeredFitId, learnLayeredFitId } from './layered-fit.ts';
-import { litRouteId } from './lit-route.ts';
+import { litRouteId, learnLitRouteId } from './lit-route.ts';
 import { pivotCargoId } from './pivot-cargo.ts';
 import { nestedPassageId } from './nested-passage.ts';
 import { learnContactAccessId, translateCoupledPiecesId } from './translate-coupled-pieces.ts';
@@ -860,7 +860,7 @@ export function readNativeResolution(agent: {
       }
     }
   }
-  if (situationCard && family === litRouteId) {
+  if (situationCard && (family === litRouteId || family === learnLitRouteId)) {
     for (const [field, label] of [['actor', 'Travelling sprite'], ['focus', 'Chosen stopping point'], ['goal', 'Exit'], ['light', 'Observed beam']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
