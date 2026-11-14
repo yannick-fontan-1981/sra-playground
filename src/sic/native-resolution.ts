@@ -20,6 +20,7 @@ import { remoteSupportRouteId, remoteSupportRouteStrategies } from './remote-sup
 import { occurrenceRecallId, occurrenceRecallStrategies } from './occurrence-recall.ts';
 import { slotPermutationId, slotPermutationStrategies } from './slot-permutation.ts';
 import { surfaceCopyId, surfaceCopyStrategies } from './surface-copy.ts';
+import { codeRouteId, codeRouteStrategies } from './code-route.ts';
 import { frontierStrategies, isFrontierStrategy, type FrontierStrategy } from './frontier-strategy.ts';
 import { isViewStrategy, viewStrategies, type ViewStrategy } from './view-strategy.ts';
 import { informationStrategies, isInformationStrategy, type InformationStrategy } from './information-strategy.ts';
@@ -31,7 +32,7 @@ import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-nati
 const situationStrategies = { ...orderedContactStrategies, ...cavityStrategies, ...publicInputStrategies, ...framedContactStrategies,
   ...transportContactStrategies, ...bandAlignmentStrategies, ...sharedArrivalStrategies, ...outlineServiceStrategies,
   ...labeledSequenceStrategies, ...markedCollectionStrategies, ...slotTransferStrategies, ...remoteSupportRouteStrategies,
-  ...occurrenceRecallStrategies, ...slotPermutationStrategies, ...surfaceCopyStrategies };
+  ...occurrenceRecallStrategies, ...slotPermutationStrategies, ...surfaceCopyStrategies, ...codeRouteStrategies };
 
 export interface NativeStep {
   readonly action: string;
@@ -405,7 +406,7 @@ export function readNativeResolution(agent: {
           : family === labeledSequenceId ? labeledSequenceStrategies : family === markedCollectionId ? markedCollectionStrategies
             : family === slotTransferId ? slotTransferStrategies : family === remoteSupportRouteId ? remoteSupportRouteStrategies
               : family === occurrenceRecallId ? occurrenceRecallStrategies : family === slotPermutationId ? slotPermutationStrategies
-                : family === surfaceCopyId ? surfaceCopyStrategies : null;
+                : family === surfaceCopyId ? surfaceCopyStrategies : family === codeRouteId ? codeRouteStrategies : null;
   const card = planReceipt?.authority === 'sicOnly' && labels ? record(proposal?.sicSituationCard) : null;
   const isSituationStrategy = (id: unknown): id is keyof typeof situationStrategies =>
     typeof id === 'string' && !!labels && Object.hasOwn(labels, id);
@@ -503,6 +504,12 @@ export function readNativeResolution(agent: {
   }
   if (situationCard && family === surfaceCopyId) {
     for (const [field, label] of [['reference', 'Reference pattern'], ['surface', 'Working surface'], ['swatch', 'Color selector']] as const) {
+      const box = bounds(card?.[field]);
+      if (box) subjects.push({ label, box });
+    }
+  }
+  if (situationCard && family === codeRouteId) {
+    for (const [field, label] of [['actor', 'Programmed piece'], ['target', 'Target cell'], ['addressed', 'Edited instruction or run control']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
