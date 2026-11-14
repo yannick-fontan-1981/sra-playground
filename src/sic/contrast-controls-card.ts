@@ -3,9 +3,17 @@ import type { CompiledModule, IrExpression, JsonObject, JsonValue, Primitive } f
 
 const moduleId = 'sic.contrast_controls';
 export const contrastControlsWorkflow = moduleId + '.choose';
+export const contrastReturnWorkflow = moduleId + '.check_return';
+export const contrastNeed = 'compare_remote_control_effect';
+export const contrastPrimitive = 'contrast_observed_controls';
+export const contrastCheck = 'remote_indicator_changes';
 const step = contrastControlsWorkflow + '.decide';
+const returnStep = contrastReturnWorkflow + '.verify';
 const reference = (value: string): IrExpression => ({ kind: 'reference', value });
 const literal = (value: string): IrExpression => ({ kind: 'string', value });
+const integer = (value: number): IrExpression => ({ kind: 'integer', value });
+const list = (...items: IrExpression[]): IrExpression => ({ kind: 'list', items });
+const abstain: IrExpression = { kind: 'null', value: null };
 const call = (value: string, args: Record<string, IrExpression>): IrExpression => ({
   kind: 'call', value, arguments: Object.entries(args).map(([name, value]) => ({ name, value })),
 });
@@ -16,12 +24,29 @@ export async function contrastControlsModule(): Promise<CompiledModule> {
     inputs: [{ name: 'situation', type_spec: { name: 'Map', arguments: [] } }],
     outputs: [{ name: 'choice', type_spec: { name: 'Map', arguments: [], optional: true } }], state: [],
     steps: [{ id: step, statements: [
-      { id: step + '.eligible', kind: 'IF', expression: reference('situation.eligible'), body: [
-        { id: step + '.contrast', kind: 'STOP', expression: call('sic.rank_observed_candidates', {
-          options: reference('situation.options'), measure: literal('separation'), order: literal('largest'),
+      { id: step + '.eligible', kind: 'IF', expression: call('sic.matches_observed_situation', {
+        situation: reference('situation'), need: literal(contrastNeed),
+        modes: list(literal('exploration'), literal('assimilation')), minimumRemoteChanges: integer(2),
+      }), body: [
+        { id: step + '.contrast', kind: 'STOP', expression: call('sic.bind_candidate_experiment', {
+          need: literal(contrastNeed), primitive: literal(contrastPrimitive),
+          target: call('sic.rank_observed_candidates', {
+            options: reference('situation.options'), measure: literal('separation'), order: literal('largest'),
+          }),
+          check: literal(contrastCheck), minimumChanges: integer(1),
         }) },
       ] },
-      { id: step + '.abstain', kind: 'STOP', expression: { kind: 'null', value: null } },
+      { id: step + '.abstain', kind: 'STOP', expression: abstain },
+    ] }],
+  }, {
+    id: contrastReturnWorkflow, entry_step_id: returnStep,
+    inputs: [{ name: 'outcome', type_spec: { name: 'Map', arguments: [] } }],
+    outputs: [{ name: 'verdict', type_spec: { name: 'Boolean', arguments: [], optional: true } }], state: [],
+    steps: [{ id: returnStep, statements: [
+      { id: returnStep + '.compare', kind: 'STOP', expression: call('sic.check_observed_change', {
+        check: reference('outcome.check'), minimumChanges: reference('outcome.minimumChanges'),
+        changes: reference('outcome.changes'),
+      }) },
     ] }],
   }];
   const hash = await digest(workflows);
@@ -44,4 +69,21 @@ const rankObservedCandidates: Primitive = ({ options, measure, order }): JsonVal
   return best;
 };
 
-export const contrastControlOperations = { 'sic.rank_observed_candidates': rankObservedCandidates };
+const matchesObservedSituation: Primitive = ({ situation, need, modes, minimumRemoteChanges }) =>
+  isJsonObject(situation) && situation.need === need && Array.isArray(modes) && modes.includes(situation.mode ?? null)
+  && situation.pointOnChangedControl === true && situation.previousControlsUniform === true
+  && situation.changedControls === 1 && typeof situation.changedIndicators === 'number'
+  && typeof minimumRemoteChanges === 'number' && situation.changedIndicators >= minimumRemoteChanges;
+
+const bindCandidateExperiment: Primitive = ({ need, primitive, target, check, minimumChanges }) =>
+  isJsonObject(target) ? { need: need!, primitive: primitive!, target, check: check!, minimumChanges: minimumChanges! } : null;
+
+const checkObservedChange: Primitive = ({ check, minimumChanges, changes }) =>
+  check === contrastCheck && typeof minimumChanges === 'number' && typeof changes === 'number' ? changes >= minimumChanges : null;
+
+export const contrastControlOperations = {
+  'sic.rank_observed_candidates': rankObservedCandidates,
+  'sic.matches_observed_situation': matchesObservedSituation,
+  'sic.bind_candidate_experiment': bindCandidateExperiment,
+  'sic.check_observed_change': checkObservedChange,
+};
