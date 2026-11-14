@@ -72,8 +72,9 @@ export function createSicFieldIsolation(): NativeFamily<Proposal> {
       const local: State = prior ?? { epoch: observation.level_epoch, phase: 'discover', forward, inverse: null, gate: null,
         fields: [], history: [], other: null, count: 0, stopped: false, evidence: [] };
       const { phase } = local;
-      const contrast = phase === 'reverse' ? patterns.filter(pattern => !same(pattern.bbox, forward.bbox) &&
+      const contrast = phase === 'discover' || phase === 'reverse' ? patterns.filter(pattern => !same(pattern.bbox, forward.bbox) &&
         same(extent(pattern.bbox), extent(forward.bbox)) && pattern.mask.length > 1) : [];
+      if (phase === 'discover' && (contrast.length !== 1 || pairedControls(rows).length < 2)) return null;
       const target = phase === 'isolate' ? local.gate : phase === 'reverse' ? contrast.length === 1 ? locate(contrast[0]!) : null
         : phase === 'restore' ? local.inverse : forward;
       if (!target) return null;
