@@ -20,13 +20,17 @@ const explorationLimit = 40;
 const clickLimit = 30;
 const completion = 'G_official_completion';
 
-type State = { epoch: number; experiments: number; transitions: ObservedCommandGraph; options: Record<string, string[]> };
+type State = { epoch: number; experiments: number; transitions: ObservedCommandGraph; options: Record<string, string[]>;
+  lastChange: { destination: string; action: string; evidence: string } | null };
 type Proposal = NativeProposal & { source: string; candidates: string[]; expected?: string; needId: string };
-const initial = (epoch = 0): State => ({ epoch, experiments: 0, transitions: {}, options: {} });
+const initial = (epoch = 0): State => ({ epoch, experiments: 0, transitions: {}, options: {}, lastChange: null });
 const interfaceKey = (observation: NativeObservation) =>
   `${observation.frame_hash}:${[...observation.available_action_refs].sort().join(',')}`;
 const commandKey = (command: NativeCommand) => command.action_ref === 'ACTION6'
   ? `ACTION6:${command.data.x},${command.data.y}` : command.action_ref;
+const opposite: Readonly<Record<string, string>> = {
+  ACTION1: 'ACTION2', ACTION2: 'ACTION1', ACTION3: 'ACTION4', ACTION4: 'ACTION3',
+};
 
 function visibleInputs(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[]) {
   const candidates = new Map(inputs.filter(command => /^ACTION[1-5]$/.test(command.action_ref))
@@ -56,11 +60,16 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       const source = interfaceKey(observation), ref = observation.observation_ref;
       const candidates = visibleInputs(observation, rows, inputs);
       const keys = [...candidates.keys()];
+      const canDiversifyDirection = keys.includes('ACTION5')
+        || (keys.some(key => key === 'ACTION1' || key === 'ACTION2') && keys.some(key => key === 'ACTION3' || key === 'ACTION4'));
+      const lastChange = local.lastChange?.destination === source && canDiversifyDirection ? local.lastChange : null;
+      const deferred = lastChange ? opposite[lastChange.action] : undefined;
       const frontier = observedCommandFrontier(local.transitions, source, keys, budget,
-        board => board === source ? keys : local.options[board] ?? []);
+        board => board === source ? keys : local.options[board] ?? [], deferred);
       const offer = frontier && candidates.get(frontier.action);
       if (!offer) return null;
-      const proof: [string, ...string[]] = [ref, ...(frontier.first ? [frontier.first.evidence] : [])];
+      const proof: [string, ...string[]] = [ref, ...(frontier.first ? [frontier.first.evidence] : []),
+        ...(deferred && lastChange ? [lastChange.evidence] : [])];
       const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
         untestedHere: { value: frontier.depth === 0, evidence: proof },
         observedRoute: { value: frontier.depth > 0, evidence: proof },
@@ -82,7 +91,9 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         steps: [{ action: command, expected_after: null, ...(witness ? { point_binding: witness } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: { strategy, need: 'Learn how to act on the current board', mode: 'exploration',
-          situation: label, agenda: entries, evidence: proof, ...(box ? { addressedRegion: box } : {}) },
+          situation: deferred && frontier.depth === 0 && frontier.probe !== deferred
+            ? 'The last direction changed the board. Test another input before trying its opposite.'
+            : label, agenda: entries, evidence: proof, ...(box ? { addressedRegion: box } : {}) },
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${completion}`] }],
         question: { reason: label, hypothesis_refs: proof }, route_refs: proof,
         sicLocalDecision: { strategy, objective: { id, label, parent: completion }, need },
@@ -106,7 +117,9 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       if (state.epoch !== before.level_epoch) state = initial(before.level_epoch);
       state.experiments++;
       state.options[proposal.source] = proposal.candidates;
-      rememberCommandReturn(state.transitions, proposal.source, interfaceKey(after), commandKey(command), after.observation_ref);
+      const destination = interfaceKey(after), action = commandKey(command);
+      rememberCommandReturn(state.transitions, proposal.source, destination, action, after.observation_ref);
+      state.lastChange = destination === proposal.source ? null : { destination, action, evidence: after.observation_ref };
       return { events: [] };
     },
     state: () => ({ ...state }),

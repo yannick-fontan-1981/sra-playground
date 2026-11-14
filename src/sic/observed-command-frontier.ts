@@ -15,7 +15,7 @@ export function rememberCommandReturn(graph: ObservedCommandGraph, source: strin
 
 /** Follow only witnessed transitions to a state with an untried command. */
 export function observedCommandFrontier(graph: ObservedCommandGraph, current: string, actions: readonly string[], budget: number,
-  actionsAt: (state: string) => readonly string[] = () => actions) {
+  actionsAt: (state: string) => readonly string[] = () => actions, deferProbe?: string) {
   type Route = { state: string; first: Transition | null; depth: number };
   const queue: Route[] = [{ state: current, first: null, depth: 0 }];
   const seen = new Set([current]);
@@ -23,6 +23,8 @@ export function observedCommandFrontier(graph: ObservedCommandGraph, current: st
   for (const edges of Object.values(graph)) for (const edge of edges) {
     attempts.set(edge.action, (attempts.get(edge.action) ?? 0) + 1);
   }
+  const compareProbes = (a: string, b: string) => Number(a === deferProbe) - Number(b === deferProbe)
+    || (attempts.get(a) ?? 0) - (attempts.get(b) ?? 0);
   let best: { action: string; probe: string; depth: number; first: Transition | null } | null = null;
   for (const route of queue) {
     if (route.depth >= budget || (best && route.depth > best.depth)) break;
@@ -30,7 +32,7 @@ export function observedCommandFrontier(graph: ObservedCommandGraph, current: st
     for (const action of actionsAt(route.state)) {
       const edge = edges.find(candidate => candidate.action === action);
       if (!edge) {
-        if (!best || (attempts.get(action) ?? 0) < (attempts.get(best.probe) ?? 0)) {
+        if (!best || compareProbes(action, best.probe) < 0) {
           best = { action: route.first?.action ?? action, probe: action, depth: route.depth, first: route.first };
         }
       } else if (edge.destination && !seen.has(edge.destination)) {

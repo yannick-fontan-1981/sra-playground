@@ -108,7 +108,7 @@ export function createSicCavityAccess(): NativeFamily<Proposal> {
       const components = supportParts(rows);
       const openings = rectangularOpenComplements(components).map(([, box]) => box);
       const local = state.epoch === observation.level_epoch ? state : empty;
-      const visibleFit = openings.some(box => components.some(part => part.area === box.width * box.height
+      const visibleFit = openings.some(box => box.width > 1 && box.height > 1 && components.some(part => part.area === box.width * box.height
         && part.bbox.width === box.width && part.bbox.height === box.height));
       const testedEveryDirection = options.every(({ action_ref }) => local.tried.some(attempt => attempt.endsWith(`:${action_ref}`)));
       const shouldLookForSlots = !visibleFit || (!local.body && testedEveryDirection);

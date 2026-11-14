@@ -61,3 +61,12 @@ test('frontier replay considers only the visible inputs witnessed on each board'
   rememberCommandReturn(graph, 'different-controls', 'different-controls', 'ACTION6:9,2', 'return-2');
   assert.equal(observedCommandFrontier(graph, 'start', ['ACTION1'], 2, available), null);
 });
+
+test('defer an inverse probe only when an equally accessible input remains', () => {
+  const graph: ObservedCommandGraph = {};
+  const inputs = ['ACTION1', 'ACTION2', 'ACTION3'];
+  assert.equal(observedCommandFrontier(graph, 'start', inputs, 3, () => inputs, 'ACTION1')?.action, 'ACTION2');
+  rememberCommandReturn(graph, 'start', 'next', 'ACTION2', 'return-2');
+  rememberCommandReturn(graph, 'start', 'start', 'ACTION3', 'return-3');
+  assert.equal(observedCommandFrontier(graph, 'start', inputs, 3, () => inputs, 'ACTION1')?.action, 'ACTION1');
+});
