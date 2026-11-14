@@ -42,6 +42,7 @@ import { occurrenceRecallStrategies } from './occurrence-recall.ts';
 import { slotPermutationStrategies } from './slot-permutation.ts';
 import { surfaceCopyStrategies } from './surface-copy.ts';
 import { codeRouteStrategies } from './code-route.ts';
+import { profileTransferStrategies } from './profile-transfer.ts';
 
 const commands: Readonly<Record<number, string>> = {
   1: 'Up', 2: 'Down', 3: 'Left', 4: 'Right', 5: 'Space', 6: 'Click', 7: 'Action 7',
@@ -1257,7 +1258,7 @@ function renderSituationCards(container: Element, returns: readonly DirectionalR
   const labels = { ...orderedContactStrategies, ...cavityStrategies, ...publicInputStrategies, ...framedContactStrategies,
     ...transportContactStrategies, ...bandAlignmentStrategies, ...sharedArrivalStrategies, ...outlineServiceStrategies,
     ...labeledSequenceStrategies, ...markedCollectionStrategies, ...slotTransferStrategies, ...remoteSupportRouteStrategies,
-    ...occurrenceRecallStrategies, ...slotPermutationStrategies, ...surfaceCopyStrategies, ...codeRouteStrategies };
+    ...occurrenceRecallStrategies, ...slotPermutationStrategies, ...surfaceCopyStrategies, ...codeRouteStrategies, ...profileTransferStrategies };
   const cards = new Map<string, DirectionalReturn>();
   for (const item of returns) {
     const card = item.decision?.situationCard;

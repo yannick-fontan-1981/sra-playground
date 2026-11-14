@@ -52,6 +52,7 @@ import { createSicOccurrenceRecall } from '../sic/occurrence-recall.ts';
 import { createSicSlotPermutation } from '../sic/slot-permutation.ts';
 import { createSicSurfaceCopy } from '../sic/surface-copy.ts';
 import { createSicCodeRoute } from '../sic/code-route.ts';
+import { createSicProfileTransfer } from '../sic/profile-transfer.ts';
 import { standalonePlanningGroups } from '../sic/standalone-families.ts';
 import { decidePlanContinuation } from '../sic/plan-step.ts';
 import { retainMissingControlTrial } from '../sic/missing-control-strategy.ts';
@@ -2383,7 +2384,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const sequence = (configuration.window_constraints as R).labeled_sequence_composition.labeled_sequence_question;
     const groups = standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 27, groups, symmetry, policy, sequence, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 28, groups, symmetry, policy, sequence, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
@@ -2391,7 +2392,8 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       createSicSubsetExperiment(), createSicFramedContact(), createSicTransportContact(), createSicBandAlignment(),
       createSicSharedArrival(), createSicOutlineService(), createSicLabeledSequence(sequence, options.now ?? (() => performance.now())),
       createSicMarkedCollection(), createSicSlotTransfer(), createSicRemoteSupportRoute(), createSicOccurrenceRecall(),
-      createSicSlotPermutation(), createSicSurfaceCopy(), createSicCodeRoute(), createSicCavityAccess(), createSicPublicInputExploration(),
+      createSicSlotPermutation(), createSicSurfaceCopy(), createSicCodeRoute(), createSicProfileTransfer(),
+      createSicCavityAccess(), createSicPublicInputExploration(),
     ],
       authorityPolicy: loaded.common, familyAgenda: 'active', maxPointOccurrences: loaded.common.input_domain.max_point_occurrences,
       ...(options.now ? { now: options.now } : {}) });
