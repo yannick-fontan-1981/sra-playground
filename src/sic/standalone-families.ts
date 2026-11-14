@@ -23,6 +23,7 @@ import { programOriginId } from './program-origin.ts';
 import { previewPlacementId } from './preview-placement.ts';
 import { symbolContributionId } from './symbol-contribution.ts';
 import { markedLatticeId } from './marked-lattice.ts';
+import { queuedPlacementId } from './queued-placement.ts';
 
 export const standalonePlanningGroups = [
   { id: 'repair_visible_field', families: [fieldRepairId, orderedContactId, supportTransferId] },
@@ -36,6 +37,7 @@ export const standalonePlanningGroups = [
   { id: 'fill_visible_partition', families: [previewPlacementId] },
   { id: 'follow_symbol_diagram', families: [symbolContributionId] },
   { id: 'visit_marked_surface', families: [markedLatticeId] },
+  { id: 'place_incoming_groups', families: [queuedPlacementId] },
   { id: 'explore_available_inputs', families: [cavityAccessId, publicInputExplorationId] },
 ] as const;
 
