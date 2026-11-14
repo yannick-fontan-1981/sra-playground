@@ -4,6 +4,7 @@
 import { ObservedInputDomain } from './v6-native-observer.ts';
 import { symbolicDigest as digest } from './v6-hash.ts';
 import { ControlDependencies } from './v6-transition-learning.ts';
+import { assessHypothesisPartition } from '../sic/discriminating-experiment.ts';
 import { supportParts as components, supportBox as bounds, supportCompare as compare, supportSame as same } from './v6-support-measurements.ts';
 import type { NativeAfterResult, NativeBeforeResult, NativeFamily, NativeRows } from './v6-native-types.ts';
 type R=Record<string,any>;
@@ -83,11 +84,25 @@ export class SubsetDiagnosis implements NativeFamily<any>{
  async propose(obs:R,rows:NativeRows,_inputs:readonly any[],remaining:number):Promise<any>{
   if(!this.policy.enabled||!obs.available_action_refs.includes('ACTION6')||!this.press_shapes.length||remaining<1)return null;const scene=measureSubsetScene(rows);if(!scene)return null;this.resetDomain(obs,scene);const candidates=sorted(this.candidates!),offers:any[][]=[],controls=scene.controls.filter((c:R)=>hasShape(this.press_shapes,c.shape));
   const commandAt=(b:number[]):R=>({action_ref:'ACTION6',data:{x:Math.floor((b[0]!+b[2]!)/2),y:Math.floor((b[1]!+b[3]!)/2)}});
-  for(const c of controls){const tested:number[]=scene.scope_members[c.color],inside=candidates.filter(i=>tested.includes(i));if(!inside.length||inside.length===candidates.length&&tested.length>1||this.tested.has(key([candidates,tested])))continue;offers.push([Math.max(inside.length,candidates.length-inside.length),0,tested,commandAt(c.bbox),c.shape]);}
+  for(const c of controls){
+   const tested:number[]=scene.scope_members[c.color],inside=candidates.filter(i=>tested.includes(i)).length;
+   if(!inside||inside===candidates.length&&tested.length>1||this.tested.has(key([candidates,tested])))continue;
+   const partition=assessHypothesisPartition([inside,candidates.length-inside])!;
+   offers.push([partition.remaining,0,tested,commandAt(c.bbox),c.shape]);
+  }
   const nav:any[][]=[];if(!offers.length&&candidates.length>2)for(const [color,tested0]of Object.entries(scene.scope_members)){const tested=tested0 as number[];if(!candidates.every(i=>tested.includes(i))||tested.length>=scene.focus.length||!tested.every(i=>scene.focus.includes(i)))continue;for(const c of scene.controls){if(c.color!==color||hasShape(this.press_shapes,c.shape))continue;const command=commandAt(c.bbox),question=digest([obs.level_epoch,'scope_navigation',{universe:scene.universe_ref,focus:scene.focus,desired:tested},command]);if(!this.questions.attempted.has(question))nav.push([tested.length,tested,command,c.shape,question]);}}
   let mode='query',navigation_proof:R|null=null,tested:number[],command:R,control_shape:any,question:string;
   if(nav.length){nav.sort((a,b)=>compare([a[0],a[2].data.x,a[2].data.y],[b[0],b[2].data.x,b[2].data.y]));[,tested,command,control_shape,question]=nav[0]!;mode='navigation';if(hasShape(this.nav_shapes,control_shape)){navigation_proof=subsetNavigationPrediction(scene,candidates,tested,remaining);if(navigation_proof===null)return null;}}
-  else{for(const i of candidates)offers.push([Math.max(1,candidates.length-1),1,[i],commandAt(scene.boxes[i]),null]);if(!offers.length)return null;offers.sort((a,b)=>compare(a.slice(0,3),b.slice(0,3)));[,,tested,command,control_shape]=offers[0]!;question=digest([obs.level_epoch,'subset_information',{universe:scene.universe_ref,candidates,tested},command]);}
+  else{
+   if(candidates.length){
+    const single=assessHypothesisPartition([1,candidates.length-1])!;
+    for(const i of candidates)offers.push([single.remaining,1,[i],commandAt(scene.boxes[i]),null]);
+   }
+   if(!offers.length)return null;
+   offers.sort((a,b)=>compare(a.slice(0,3),b.slice(0,3)));
+   [,,tested,command,control_shape]=offers[0]!;
+   question=digest([obs.level_epoch,'subset_information',{universe:scene.universe_ref,candidates,tested},command]);
+  }
   if(scene.boxes.length>4096||candidates.length>4096)return null;const prediction=measureConditionalSubset(candidates,tested);
   const why=mode==='navigation'?'Preserve the conditional candidate set while accessing a smaller current geometric scope; this control shares the observed scope binding but its navigation effect must be checked.':'Test the bound subset that separates the current conditional candidates. Preserve the complete transient response; a local result excludes this subset, a global result includes it under the explicit fixed-member hypothesis. A deduced singleton still requires a physical terminal test.';
   const ref='C_subset_'+question.slice(0,16),evidence=[obs.observation_ref,...this.method_refs.slice(-8)],plan={subset_diagnosis:true,mode,frame_hash:obs.frame_hash,universe_ref:scene.universe_ref,focus:scene.focus,tested,candidates,question_key:question,control_shape,partitions:prediction,navigation_prediction:navigation_proof,conditional_model:'one fixed influential member; multiple/noisy/changing causes remain outside this hypothesis',terminal_evidence_epochs:this.confirmed_epochs},facts={current_occurrences_measured:true,actual_transient_feedback_retained:true,current_query_or_navigation_address_bound:true,fixed_member_model_is_conditional:true},step={action:command,expected_before:{frame_hash:obs.frame_hash},expected_after:{status:'unknown_feedback_or_partition'},locus_witness:await ObservedInputDomain.makeLocusWitness(obs as any,rows,[command.data.x,command.data.y],{reason:why,evidence})};

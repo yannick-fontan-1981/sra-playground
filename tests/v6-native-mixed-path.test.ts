@@ -58,7 +58,7 @@ function harness(change: Change = 'none', pauseFirst = false) {
     after(_proposal, index, _before, _after, _first, second) {
       afterGuards.push(index);
       const matched = second[0]![0] === index + 1;
-      return { matched, seal_prefix: !matched || index === 2,
+      return { matched, seal_prefix: index === 2,
         reason: matched ? 'synthetic_public_return_matched' : 'synthetic_public_return_refuted' };
     },
     record(_before, _after, command, first, second, _proposal, index) {

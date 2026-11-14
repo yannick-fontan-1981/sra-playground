@@ -7,8 +7,17 @@ import { AttentionMemory } from '../src/logos-engine/v6-attention-memory.ts';
 import { NativeReasoningMemory } from '../src/logos-engine/v6-reasoning-memory.ts';
 import { pointGoal, electInformationGoals, reconcileInformationGoal } from '../src/logos-engine/v6-information-goals.ts';
 import { compileInformationPreference } from '../src/sic/information-preference.ts';
+import { assessHypothesisPartition, compareSeparation } from '../src/sic/discriminating-experiment.ts';
 import { defaultRecoveryPack } from '../src/sic/active-recovery.ts';
 import { readRecoveryRevision, recoveryRevision } from '../src/sic/recovery-pack.ts';
+
+test('experiment discrimination ranks the worst remaining group and reports an exact eliminated share', () => {
+  assert.deepEqual(assessHypothesisPartition([2, 2, 0]), { outcomes: 2, remaining: 2, eliminatedShare: { n: 1n, d: 2n } });
+  assert.deepEqual(assessHypothesisPartition([1, 0]), { outcomes: 1, remaining: 1, eliminatedShare: { n: 0n, d: 1n } });
+  assert.equal(assessHypothesisPartition([]), null);
+  assert.equal(compareSeparation(assessHypothesisPartition([2, 1, 1])!.eliminatedShare,
+    assessHypothesisPartition([3, 1])!.eliminatedShare), 1);
+});
 
 test('opening curiosity ranks richer compositions first within the admitted safety tier', () => {
   const observation = { observation_ref: 'start', level_epoch: 1 };

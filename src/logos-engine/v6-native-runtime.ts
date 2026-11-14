@@ -33,6 +33,7 @@ import { OrderedRecruitment } from './v6-ordered-recruitment.ts';
 import { RankedWorkshop } from './v6-ranked-workshop.ts';
 import { compileRecoveryPack, isRecoveryStop } from '../sic/active-recovery.ts';
 import { nativePlanReceipt } from '../sic/native-plan-receipt.ts';
+import { decidePlanContinuation } from '../sic/plan-step.ts';
 import { retainMissingControlTrial } from '../sic/missing-control-strategy.ts';
 import { defaultFrontierConfiguration } from '../sic/frontier-configuration.ts';
 import { selectStrategyFamily, type FamilyAgendaMode, type FamilyAgendaReceipt, type FamilyTrial } from '../sic/family-agenda.ts';
@@ -1294,13 +1295,11 @@ export class NativeV6Runtime implements NativeV6Backend {
       this.note({ kind: 'actual_outcome', family: prefix.family.id, index: prefix.index, ...result, observation_ref: after.observation_ref,
         ...(prefix.sicPlan ? { sic_plan: prefix.sicPlan.id } : {}) });
       this.check(execution);
-      const boundary = first.level !== this.current!.level || first.levels_completed !== this.current!.levels_completed;
       prefix.index += 1;
-      if (boundary || ['WIN', 'GAME_OVER'].includes(this.current!.state)) prefix.interruption = 'official_boundary_or_terminal';
-      else if (result.matched === false) prefix.interruption = 'observed_path_expectation_diverged';
-      else if (result.seal_prefix && prefix.index < prefix.proposal.actions.length) prefix.interruption = 'frontier_outcome_sealed_prefix';
-      else if (this.budgetReason()) prefix.interruption = this.budgetReason();
-      if (result.seal_prefix || boundary || prefix.index >= prefix.proposal.actions.length || this.budgetReason()) await this.seal(execution);
+      const continuation = decidePlanContinuation({ boundary: publicBoundary, matched: result.matched, sealRequested: result.seal_prefix,
+        hasNextStep: prefix.index < prefix.proposal.actions.length, budgetReason: this.budgetReason() });
+      prefix.interruption = continuation.interruption;
+      if (!continuation.continue) await this.seal(execution);
       else if (!await this.authorize(execution)) await this.seal(execution);
     });
     // Read-only diagnostic after the native decision, outside its active clock.
