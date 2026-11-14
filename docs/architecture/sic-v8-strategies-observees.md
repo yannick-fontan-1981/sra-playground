@@ -126,6 +126,8 @@ Sur SK48, la récupération commence après la contradiction observée à l’ac
 
 ## Paramètres des démarches attestées
 
+La [décomposition en sous-stratégies](sic-v8-sous-strategies.md) examine les besoins, déclencheurs et conditions d’arrêt communs à plusieurs démarches de cet inventaire.
+
 | Démarche | Réglages exécutables dans Stratégies | Éléments à rendre configurables |
 | --- | --- | --- |
 | Essayer une commande inédite | Ordre des commandes admissibles. Une règle locale peut conditionner cet ordre au domaine de la commande et à l’écart entre usages précédents. | D’autres critères de sélection issus du retour et de la situation. |
