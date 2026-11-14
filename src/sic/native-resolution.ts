@@ -31,6 +31,7 @@ import { queuedPlacementId, queuedPlacementStrategies } from './queued-placement
 import { legendRecolorId, legendRecolorStrategies } from './legend-recolor.ts';
 import { visualPatternId, visualPatternStrategies } from './visual-pattern.ts';
 import { facetGrowthId, facetGrowthStrategies } from './facet-growth.ts';
+import { chartRouteId, chartRouteStrategies } from './chart-route.ts';
 import { frontierStrategies, isFrontierStrategy, type FrontierStrategy } from './frontier-strategy.ts';
 import { isViewStrategy, viewStrategies, type ViewStrategy } from './view-strategy.ts';
 import { informationStrategies, isInformationStrategy, type InformationStrategy } from './information-strategy.ts';
@@ -44,7 +45,7 @@ const situationStrategies = { ...orderedContactStrategies, ...cavityStrategies, 
   ...labeledSequenceStrategies, ...markedCollectionStrategies, ...slotTransferStrategies, ...remoteSupportRouteStrategies,
   ...occurrenceRecallStrategies, ...slotPermutationStrategies, ...surfaceCopyStrategies, ...codeRouteStrategies, ...profileTransferStrategies,
   ...orderedReplenishmentStrategies, ...programOriginStrategies, ...previewPlacementStrategies, ...symbolContributionStrategies, ...markedLatticeStrategies,
-  ...queuedPlacementStrategies, ...legendRecolorStrategies, ...visualPatternStrategies, ...facetGrowthStrategies };
+  ...queuedPlacementStrategies, ...legendRecolorStrategies, ...visualPatternStrategies, ...facetGrowthStrategies, ...chartRouteStrategies };
 
 export interface NativeStep {
   readonly action: string;
@@ -423,7 +424,8 @@ export function readNativeResolution(agent: {
                     : family === programOriginId ? programOriginStrategies : family === previewPlacementId ? previewPlacementStrategies
                       : family === symbolContributionId ? symbolContributionStrategies : family === markedLatticeId ? markedLatticeStrategies
                         : family === queuedPlacementId ? queuedPlacementStrategies : family === legendRecolorId ? legendRecolorStrategies
-                          : family === visualPatternId ? visualPatternStrategies : family === facetGrowthId ? facetGrowthStrategies : null;
+                          : family === visualPatternId ? visualPatternStrategies : family === facetGrowthId ? facetGrowthStrategies
+                            : family === chartRouteId ? chartRouteStrategies : null;
   const card = planReceipt?.authority === 'sicOnly' && labels ? record(proposal?.sicSituationCard) : null;
   const isSituationStrategy = (id: unknown): id is keyof typeof situationStrategies =>
     typeof id === 'string' && !!labels && Object.hasOwn(labels, id);
@@ -567,6 +569,14 @@ export function readNativeResolution(agent: {
     const group = bounds(card?.activeGroup), field = bounds(card?.field);
     if (group) subjects.push({ label: 'Active group', box: group });
     if (field) subjects.push({ label: 'Receiving field', box: field });
+  }
+  if (situationCard && family === chartRouteId) {
+    const marker = bounds(card?.marker);
+    if (marker) subjects.push({ label: 'Candidate chart marker', box: marker });
+    if (Array.isArray(card?.slots)) for (const slot of card.slots.slice(0, 3)) {
+      const box = bounds(slot);
+      if (box) subjects.push({ label: 'Observed inventory slot', box });
+    }
   }
   if (situationCard && family === facetGrowthId) {
     for (const [field, label] of [['support', 'Clicked surface'], ['example', 'Visible example'], ['reference', 'Target proportions']] as const) {
