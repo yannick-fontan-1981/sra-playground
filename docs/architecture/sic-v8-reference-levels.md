@@ -75,7 +75,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | RECR | 6 | [3](../../docs/migration/lot10c-evidence/development/recr01/recruitment-campaign.json.gz) | — | — | — | 3 | 4 | 1 |
 | REGN | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/REGN/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 1 |
 | REWI | 6 | 1 (rejeu local 0.68) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/REWI/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 1 |
-| RSWP | 6 | — | — | — | — | — | — | — |
+| RSWP | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 1 |
 | S5I5 | 8 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/S5I5/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | — |
 | SB26 | 8 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/SB26/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 1 |
 | SC25 | 6 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/SC25/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | — |

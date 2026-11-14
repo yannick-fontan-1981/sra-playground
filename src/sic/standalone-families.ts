@@ -37,6 +37,7 @@ import { glyphEditingId } from './glyph-editing.ts';
 import { fieldIsolationId } from './field-isolation.ts';
 import { directionalReceptionId } from './directional-reception.ts';
 import { windowCoverageId } from './window-coverage.ts';
+import { panelMatchingId } from './panel-matching.ts';
 
 export const standalonePlanningGroups = [
   { id: 'repair_visible_field', families: [fieldRepairId, orderedContactId, supportTransferId] },
@@ -44,7 +45,7 @@ export const standalonePlanningGroups = [
   { id: 'coordinate_visible_motion', families: [bandAlignmentId, sharedArrivalId, outlineServiceId, carryToFrameId, directionalReceptionId] },
   { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId, visualPatternId, framedSearchId] },
   { id: 'apply_learned_relations', families: [remoteSupportRouteId, occurrenceRecallId, slotPermutationId, surfaceCopyId, chartRouteId] },
-  { id: 'construct_executable_program', families: [codeRouteId, programOriginId, glyphEditingId, windowCoverageId] },
+  { id: 'construct_executable_program', families: [codeRouteId, programOriginId, glyphEditingId, windowCoverageId, panelMatchingId] },
   { id: 'fit_profiles_into_receivers', families: [profileTransferId, portPairingId] },
   { id: 'preserve_ordered_team', families: [orderedReplenishmentId] },
   { id: 'fill_visible_partition', families: [previewPlacementId, populationPlacementId] },
