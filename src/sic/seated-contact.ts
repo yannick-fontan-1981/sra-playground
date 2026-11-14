@@ -2,6 +2,7 @@ import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { blockedRouteStep, rememberRouteRefusal, type RouteRefusals } from './route-refusals.ts';
 
 export const seatedContactId = 'sic_seated_contact';
 
@@ -9,7 +10,7 @@ const directions = [['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], [
 type Direction = typeof directions[number];
 type Part = ReturnType<typeof geometricComponents>[number];
 type Scene = { piece: Part; frame: Part; floor: Part; side: number };
-type State = { epoch: number; at: NativePoint; scene: Scene; refs: string[]; blocked: string[]; avoid: string[]; seated: boolean; tried: string[]; count: number };
+type State = { epoch: number; at: NativePoint; scene: Scene; refs: string[]; blocked: RouteRefusals; avoid: string[]; seated: boolean; tried: string[]; count: number };
 type Step = { direction: Direction; at: NativePoint };
 type Proposal = NativeProposal & { local: State; step: Step; needId: string };
 
@@ -64,7 +65,7 @@ function plan(rows: NativeRows, local: State): Step | null {
       || Math.abs(a.at[0] - goal[0]) - Math.abs(b.at[0] - goal[0]));
     for (const step of candidates) {
       const k = key(step.at);
-      if (seen.has(k) || avoid.includes(k) || blocked.includes(key(item.at) + '/' + step.direction[0])) continue;
+      if (seen.has(k) || avoid.includes(k) || blockedRouteStep(blocked, item.at, step.direction[0])) continue;
       const first = item.first ?? step;
       if (!visibleFloor(rows, footprint(step.at, side), scene.floor.color)) continue;
       if (dist(step.at, goal) === side) return first;
@@ -158,7 +159,7 @@ export function createSicSeatedContact(): NativeFamily<Proposal> {
         tried: local.seated && !moved ? [...local.tried, step.direction[0]] : [],
         avoid: local.seated && result === 'redirected' ? [...local.avoid, key(local.at)] : local.avoid,
         refs: moved ? [...local.refs.slice(-5), after.observation_ref] : local.refs,
-        blocked: result === 'blocked' ? [...local.blocked, key(local.at) + '/' + step.direction[0]] : local.blocked };
+        blocked: result === 'blocked' ? rememberRouteRefusal(local.blocked, local.at, step.direction[0], after.observation_ref) : local.blocked };
       if (result === 'changed' && !local.seated) state = { ...state, count: 36 };
       return { events: [] };
     },
