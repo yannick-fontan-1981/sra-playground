@@ -129,6 +129,7 @@ export interface NativeExecution {
   readonly now?: () => number;
   /** Current level quota, separate from the remaining session/prefix allowance. */
   readonly remainingLevelActions?: number;
+  readonly reasoningMode?: import('../sic/reasoning-mode.ts').ReasoningMode;
 }
 
 export interface NativeProgramHandle {

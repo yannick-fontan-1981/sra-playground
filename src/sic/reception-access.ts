@@ -1,22 +1,10 @@
 import { measureReceptionService, receptionServiceCarriers, receptionServicePath } from '../logos-engine/v6-reception-service-observation.ts';
 import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 
 export const receptionAccessId = 'sic_reception_access';
-export const receptionAccessStrategies = {
-  measure_support_approach: 'Measure a direction toward the candidate support',
-  approach_request_support: 'Follow observed displacements toward the matching support',
-  observe_arrival_at_support: 'Observe the support while the carrier stays in place',
-} as const;
-const graph = compileStrategyGraph({ id: 'approach_distinct_request_support', version: 1, order: 'FALLBACK',
-  priorities: ['observe_arrival_at_support', 'approach_request_support', 'measure_support_approach'],
-  strategies: {
-    measure_support_approach: [{ fact: 'probe', expected: true, label: 'Available directions may complete the access route or recover visibility' }],
-    approach_request_support: [{ fact: 'access', expected: true, label: 'The measured displacements permit access while avoiding the other supports' }],
-    observe_arrival_at_support: [{ fact: 'arrived', expected: true, label: 'The carrier is on the candidate support and a direction points beyond the visible floor' }],
-  },
-}, ['probe', 'access', 'arrived']);
+export const receptionAccessStrategies = navigationPrimitives;
 type Scene = { pitch: number; cells: NativePoint[]; target: { anchor: NativePoint }; counterparts: { request_bbox: NativeBox; body_bbox: NativeBox }[] };
 type State = { epoch: number; count: number; scene: Scene; controls: Record<string, NativePoint>; trials: string[]; waits: number;
   last: { action: string; from: NativePoint | null } | null; evidence: string[]; stopped: boolean };
@@ -37,7 +25,7 @@ export function createSicReceptionAccess(): NativeFamily<Proposal> {
   let state: State | null = null;
   return {
     id: receptionAccessId,
-    propose(observation, rows, _inputs, remaining) {
+    propose(observation, rows, _inputs, remaining, execution) {
       const keys = observation.available_action_refs.filter(action => hints[action]);
       if (remaining < 1 || keys.length < 2 || observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
@@ -63,24 +51,27 @@ export function createSicReceptionAccess(): NativeFamily<Proposal> {
           };
           return toward(a) - toward(b);
         })[0];
-      const probe: Choice | null = experiment ? { action: experiment, expected: null } : null;
-      const access: Choice | null = path?.[0] ? { action: path[0].action_ref, expected: path[0].to } : null;
-      const wait: Choice | null = outward ? { action: outward[0], expected: target } : null;
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
-        probe: { value: !!probe, evidence }, access: { value: !!access, evidence }, arrived: { value: !!wait, evidence },
-      }, planners: { measure_support_approach: () => probe, approach_request_support: () => access, observe_arrival_at_support: () => wait } });
+      const mode = execution?.reasoningMode ?? 'exploration';
+      const probe = experiment && !atTarget && (!path?.length || local.controls[experiment]) ? { input: experiment, expected: null, evidence } : null;
+      const access = path?.[0] ? { input: path[0].action_ref, expected: path[0].to, evidence } : null;
+      const interaction = outward ? { input: outward[0], expected: target, evidence } : null;
+      const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence, probe, access, interaction });
       if (!selected) return null;
-      const strategy = selected.id, choice = selected.plan, label = receptionAccessStrategies[strategy], parent = 'G_official_completion';
+      const strategy = selected.id, choice: Choice = { action: selected.plan.input, expected: selected.plan.expected };
+      const label = navigationPrimitives[strategy], parent = 'G_official_completion';
+      const situation = strategy === 'P02' ? 'Test whether the carrier can receive a result while staying at the matching support'
+        : strategy === 'P07' ? 'Follow observed displacements toward the matching support'
+        : 'Measure a direction toward the candidate support';
       const objective = { kind: 'reach_support_for_visible_request', scope: ref.split(':revision:', 1)[0]!, subjects: ['visible_request', 'carrier', 'distinct_support'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_arrival_at_the_candidate_support' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = `reception-access:${need.id}`;
       const command = { action_ref: choice.action, data: {} }, actions = [command];
       return { status: 'proposed', kind: receptionAccessId, actions, local, choice, attempt: key(choice.action), from,
-        wait: strategy === 'observe_arrival_at_support', needId: need.id,
+        wait: strategy === 'P02', needId: need.id,
         steps: [{ action: command, expected_after: null }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Bring the carrier to the support for the visible request', mode: strategy === 'approach_request_support' ? 'solving' : 'exploration',
-          situation: label, agenda: entries, evidence, actor: from ? box(from, scene.pitch) : null, target: box(target, scene.pitch),
+        sicSituationCard: { strategy, need: 'Bring the carrier to the support for the visible request', mode, triggerCard: card,
+          situation, agenda: entries, evidence, actor: from ? box(from, scene.pitch) : null, target: box(target, scene.pitch),
           request: scene.counterparts[0]!.request_bbox },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],

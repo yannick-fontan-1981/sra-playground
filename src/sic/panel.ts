@@ -1318,7 +1318,7 @@ function renderSituationCards(container: Element, returns: readonly DirectionalR
     article.className = 'sic-situation-card';
     const header = document.createElement('header'), mode = document.createElement('span'), title = document.createElement('h6');
     mode.textContent = `${stamp} · ${card.mode}`;
-    title.textContent = labels[card.strategy];
+    title.textContent = card.triggerCard ? card.strategy + ' · ' + labels[card.strategy] : labels[card.strategy];
     header.append(mode, title);
     const situation = document.createElement('p');
     situation.textContent = card.situation;

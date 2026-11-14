@@ -5,6 +5,7 @@ import { reasoningGroupOrder, selectReasoningMode, type ReasoningSituation } fro
 import { defaultRecoveryPack } from '../src/sic/active-recovery.ts';
 import { readRecoveryRevision, recoveryRevision } from '../src/sic/recovery-pack.ts';
 import { controlEffectTrigger, orderControlTrials, readControlEffectTrigger } from '../src/sic/control-effect-trigger.ts';
+import { resolveNavigationPrimitives } from '../src/sic/navigation-primitives.ts';
 
 test('fresh level entry, refuted and supported plans select different reasoning cards and a different next offer', async () => {
   const start: ReasoningSituation = { level: 1, levelsCompleted: 0, targetLevels: 3, levelActions: 0, remainingActions: 9,
@@ -66,4 +67,20 @@ test('trigger cards can change the first control offered and preserve an engaged
   assert.deepEqual(orderControlTrials(commands, 'exploration', factsFor), commands);
   assert.deepEqual(orderControlTrials(commands, 'assimilation', factsFor, 'ACTION3'), ['ACTION3', 'ACTION2', 'ACTION1']);
   assert.deepEqual(orderControlTrials(commands, 'assimilation', command => ({ ...factsFor(command), evidence: ['current'] })), commands);
+});
+
+test('the same navigation situation chooses a different primitive in each reasoning mode', () => {
+  const evidence = ['current', 'observed-return'] as const;
+  const expected = [2, 3] as const;
+  const offers = { evidence, probe: { input: 'probe', expected: null, evidence },
+    access: { input: 'move', expected, evidence }, interaction: { input: 'interact', expected: null, evidence } };
+  const exploration = resolveNavigationPrimitives({ ...offers, mode: 'exploration' });
+  const assimilation = resolveNavigationPrimitives({ ...offers, mode: 'assimilation' });
+  const solving = resolveNavigationPrimitives({ ...offers, mode: 'solving' });
+  assert.equal(exploration.selected?.id, 'P05');
+  assert.equal(assimilation.selected?.id, 'P02');
+  assert.equal(solving.selected?.id, 'P07');
+  assert.equal(solving.entries.find(entry => entry.id === 'P02')?.result, 'lower_priority');
+  const after = resolveNavigationPrimitives({ ...offers, mode: 'solving', access: null, interaction: null });
+  assert.equal(after.selected?.id, 'P05');
 });

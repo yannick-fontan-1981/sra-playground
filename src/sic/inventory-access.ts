@@ -3,10 +3,11 @@ import { world_complements, transferred_shape, display_matches } from '../logos-
 import { patch } from '../logos-engine/v6-inventory-measurements.ts';
 import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 
 export const inventoryAccessId = 'sic_inventory_access';
-export const inventoryAccessStrategies = {
+export const inventoryAccessStrategies = navigationPrimitives;
+const situations = {
   approach_inventory_source: 'Approach the object whose shape matches a blocked passage',
   test_inventory_transfer: 'Test whether the nearby object transfers into the display',
   test_complementary_passage: 'Use the displayed object to test the matching passage',
@@ -15,28 +16,15 @@ export const inventoryAccessStrategies = {
   approach_distinct_inventory_goal: 'Approach the distinct marked destination',
 } as const;
 
-const graph = compileStrategyGraph({
-  id: 'gain_access_with_observed_object_transfer', version: 1, order: 'FALLBACK',
-  priorities: ['test_inventory_transfer', 'test_complementary_passage', 'reach_reserve_candidate',
-    'reuse_inventory_transfer', 'approach_distinct_inventory_goal', 'approach_inventory_source'],
-  strategies: {
-    approach_inventory_source: [{ fact: 'source', expected: true, label: 'One visible object complements the shape of a passage' }],
-    test_inventory_transfer: [{ fact: 'transfer', expected: true, label: 'The carrier is at the object and has an unmeasured interaction available' }],
-    test_complementary_passage: [{ fact: 'passage', expected: true, label: 'The same outline disappeared from the source and appeared in the display' }],
-    reach_reserve_candidate: [{ fact: 'reserve', expected: true, label: 'The reserve is declining and a distinct object on the route remains untested' }],
-    reuse_inventory_transfer: [{ fact: 'reuse', expected: true, label: 'The carrier can approach and test a second object with the previously observed transfer command' }],
-    approach_distinct_inventory_goal: [{ fact: 'goal', expected: true, label: 'The passage has been crossed and a distinct matching outline lies at a reachable destination' }],
-  },
-}, ['source', 'transfer', 'passage', 'reserve', 'reuse', 'goal']);
-
 type Cell = { at: NativePoint; box: NativeBox; values: number[]; frequency: number; original: NativeRows };
 type Meter = { x: number; y: number; value: number; length: number };
 type Link = { source: NativePoint; gate: NativePoint; color: number };
 type Scene = { grid: Cell[]; signature: string; travel: number[]; start: NativePoint; link: Link; goal: NativePoint };
-type Phase = 'source' | 'passage' | 'reserve' | 'reuse' | 'goal';
-type State = { epoch: number; scene: Scene; phase: Phase; controls: Record<string, NativePoint>; tested: string[];
+type Need = 'source' | 'passage' | 'reserve' | 'reuse' | 'goal';
+type State = { epoch: number; scene: Scene; passageObserved: boolean; reserveRestored: boolean; anotherTransferObserved: boolean;
+  controls: Record<string, NativePoint>; tested: string[];
   visited: string[]; receipt: NativeRecord | null; meter: Meter | null; transfer: string | null; evidence: string[]; count: number; stopped: boolean };
-type Choice = { input: string; target: Cell; expected: NativePoint | null; interaction: boolean; phase: Phase };
+type Choice = { input: string; target: Cell; expected: NativePoint | null; interaction: boolean; need: Need };
 type Proposal = NativeProposal & { local: State; choice: Choice; actor: NativeBox; here: NativePoint; needId: string };
 const directions: Record<string, NativePoint> = { ACTION1: [-1, 0], ACTION2: [1, 0], ACTION3: [0, -1], ACTION4: [0, 1] };
 const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
@@ -127,7 +115,7 @@ export function createSicInventoryAccess(): NativeFamily<Proposal> {
   let state: State | null = null;
   return {
     id: inventoryAccessId,
-    propose(observation, rows, _inputs, remaining) {
+    propose(observation, rows, _inputs, remaining, execution) {
       const available = Object.keys(directions).filter(input => observation.available_action_refs.includes(input));
       if (remaining < 1 || available.length !== 4 || !observation.available_action_refs.includes('ACTION5') || observation.available_action_refs.includes('ACTION6')) return null;
       const previous = state?.epoch === observation.level_epoch ? state : null;
@@ -139,49 +127,66 @@ export function createSicInventoryAccess(): NativeFamily<Proposal> {
       const actor = actors[0]!.bbox, cell = cellAt(scene, actor);
       if (!cell) return null;
       const here = cell.at;
-      const local: State = previous ?? { epoch: observation.level_epoch, scene, phase: 'source', controls: {}, tested: [],
+      const local: State = previous ?? { epoch: observation.level_epoch, scene, passageObserved: false, reserveRestored: false, anotherTransferObserved: false,
+        controls: {}, tested: [],
         visited: [key(scene.start), key(scene.link.source)], receipt: null, meter: null, transfer: null, evidence: [], count: 0, stopped: false };
-      const crossed = local.phase !== 'source' && local.phase !== 'passage';
       const rejected = local.tested.filter(value => value.includes('>'));
-      const route = (to: NativePoint) => path(scene, here, to, rejected, crossed);
+      const route = (to: NativePoint) => path(scene, here, to, rejected, local.passageObserved);
       const candidates = () => scene.grid.filter(candidate => includeAll(candidate.values, scene.travel) && candidate.values.length > scene.travel.length
         && !local.visited.includes(key(candidate.at))).map(target => ({ target, route: route(target.at) }))
         .filter((candidate): candidate is { target: Cell; route: NativePoint[] } => candidate.route !== null)
         .sort((a, b) => a.route.length - b.route.length);
-      let phase = local.phase;
-      if (phase === 'reserve' && !local.meter) phase = 'goal';
-      if (phase === 'passage' && (!local.receipt || !display_matches(local.receipt, rows))) return null;
-      const dynamic = phase === 'reserve' || phase === 'reuse' ? candidates()[0] : null;
-      const target = dynamic?.target ?? scene.grid.find(candidate => same(candidate.at,
-        phase === 'source' ? scene.link.source : phase === 'passage' ? scene.link.gate : phase === 'goal' ? scene.goal : null));
-      if (!target) return null;
-      const steps = dynamic?.route ?? route(target.at), wanted = steps?.[0];
-      const interaction = same(here, target.at) && (phase === 'source' || phase === 'reuse');
-      const input = interaction ? local.transfer ?? 'ACTION5' : wanted ? commandFor(wanted, local, available, here) : null;
-      if (!input) return null;
-      const known = local.controls[input], opposite = wanted ? available.find(key => same(local.controls[key], negative(wanted))) : null;
-      const expected = known ? add(here, known) : wanted && opposite && same(directions[input], wanted) ? add(here, wanted) : null;
-      const choice: Choice = { input, target, expected, interaction, phase };
+      const carrying = local.receipt !== null && display_matches(local.receipt, rows);
+      const unfinishedAccess = !local.passageObserved;
+      const remainingObject = () => candidates()[0]?.target ?? null;
+      const destination = (position: NativePoint) => scene.grid.find(cell => same(cell.at, position)) ?? null;
+      const needs: { need: Need; target: () => Cell | null }[] = [];
+      if (unfinishedAccess) {
+        if (!local.receipt) needs.push({ need: 'source', target: () => destination(scene.link.source) });
+        if (carrying) needs.push({ need: 'passage', target: () => destination(scene.link.gate) });
+      } else {
+        if (local.meter && !local.reserveRestored) needs.push({ need: 'reserve', target: remainingObject });
+        if (local.reserveRestored && local.transfer && !local.anotherTransferObserved) needs.push({ need: 'reuse', target: remainingObject });
+        if (!local.meter || local.anotherTransferObserved) needs.push({ need: 'goal', target: () => destination(scene.goal) });
+      }
+      const task = needs.flatMap(({ need, target }) => {
+        const candidate = target();
+        return candidate ? [{ need, target: candidate }] : [];
+      })[0];
+      if (!task) return null;
+      const { need: purpose, target } = task;
+      const wanted = route(target.at)?.[0];
+      const interaction = same(here, target.at) && (purpose === 'source' || purpose === 'reuse');
+      const mode = execution?.reasoningMode ?? 'exploration';
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(r => r !== ref)];
-      const { selected, entries } = resolveStrategyGraph({
-        graph, mode: 'active',
-        facts: { source: { value: phase === 'source' && !interaction, evidence }, transfer: { value: phase === 'source' && interaction, evidence },
-          passage: { value: phase === 'passage', evidence }, reserve: { value: phase === 'reserve', evidence },
-          reuse: { value: phase === 'reuse', evidence }, goal: { value: phase === 'goal', evidence } },
-        planners: { approach_inventory_source: () => choice, test_inventory_transfer: () => choice, test_complementary_passage: () => choice,
-          reach_reserve_candidate: () => choice, reuse_inventory_transfer: () => choice, approach_distinct_inventory_goal: () => choice },
+      const input = interaction ? local.transfer ?? 'ACTION5' : wanted ? commandFor(wanted, local, available, here) : null;
+      const known = input ? local.controls[input] : null;
+      const inverse = wanted && available.find(key => same(local.controls[key], negative(wanted)));
+      const offer = input ? { input, evidence, expected: known ? add(here, known)
+        : wanted && inverse && same(directions[input], wanted) ? add(here, wanted) : null } : null;
+      const { selected, entries, card } = resolveNavigationPrimitives({
+        mode, evidence,
+        probe: !known && (!interaction || !local.transfer) ? offer : null,
+        access: !interaction && known ? offer : null,
+        interaction: interaction && local.transfer ? offer : null,
       });
       if (!selected) return null;
-      const strategy = selected.id, label = inventoryAccessStrategies[strategy], parent = 'G_official_completion';
+      const { id: strategy, plan } = selected, { input: selectedInput, expected } = plan;
+      const choice: Choice = { input: selectedInput, target, expected, interaction, need: purpose };
+      const label = navigationPrimitives[strategy], parent = 'G_official_completion';
+      const situation = purpose === 'source' ? interaction ? situations.test_inventory_transfer : situations.approach_inventory_source
+        : purpose === 'passage' ? situations.test_complementary_passage
+        : purpose === 'reserve' ? situations.reach_reserve_candidate
+        : purpose === 'reuse' ? situations.reuse_inventory_transfer : situations.approach_distinct_inventory_goal;
       const objective = { kind: 'gain_access_with_observed_object_transfer', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['carrier', 'transferable_object', 'complementary_passage', 'reserve'], parentObjective: parent,
         satisfactionContract: 'official_progress_after_measured_access_and_continued_route' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = 'inventory-access:' + need.id, action = { action_ref: input, data: {} }, actions = [action];
+      const id = 'inventory-access:' + need.id, action = { action_ref: selectedInput, data: {} }, actions = [action];
       return { status: 'proposed', kind: inventoryAccessId, actions, local, actor, choice, here, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, steps: [{ action, expected_after: expected }],
-        sicSituationCard: { strategy, need: 'Open the blocked route and reach the marked destination', situation: label, evidence, agenda: entries,
-          mode: ['goal', 'passage'].includes(phase) ? 'solving' : local.transfer ? 'assimilation' : 'exploration',
+        sicSituationCard: { strategy, need: 'Open the blocked route and reach the marked destination', evidence, agenda: entries,
+          mode, triggerCard: card, situation,
           actor, target: target.box, display: local.receipt?.display_bbox ?? null,
           reserve: local.meter && local.meter.length > 0 ? [local.meter.x, local.meter.y, local.meter.x + local.meter.length - 1, local.meter.y] : null },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
@@ -208,7 +213,7 @@ export function createSicInventoryAccess(): NativeFamily<Proposal> {
       const moved = after.entities.find(entity => entity.signature === scene.signature)?.bbox;
       const current = moved && cellAt(scene, moved);
       const meter = moved ? capturedMeter(first, second, local.meter, actor, moved) : local.meter;
-      const next: State = { ...local, phase: choice.phase, meter, count: local.count + 1,
+      const next: State = { ...local, meter, count: local.count + 1,
         evidence: [...local.evidence.slice(-5), after.observation_ref], stopped: !current };
       if (!current) { state = next; return { events: [] }; }
       const delta: NativePoint = [current.at[0] - here[0], current.at[1] - here[1]];
@@ -222,17 +227,17 @@ export function createSicInventoryAccess(): NativeFamily<Proposal> {
           retained_underlay_value_count: 1, underlay_evidence: { patch: current.original, cell_bbox: current.box, evidence: local.evidence } },
         { ...common, body: moved, observation_ref: after.observation_ref }, action);
         let matches = transfer.matches ?? [];
-        if (choice.phase === 'source') matches = matches.filter((candidate: NativeRecord) => candidate.source_value === scene.link.color);
+        if (choice.need === 'source') matches = matches.filter((candidate: NativeRecord) => candidate.source_value === scene.link.color);
         if (matches.length === 1) {
           next.receipt = matches[0]; next.transfer = action.action_ref;
-          next.phase = choice.phase === 'source' ? 'passage' : 'goal';
+          if (choice.need === 'reuse') next.anotherTransferObserved = true;
         } else next.stopped = true;
-      } else if (arrived && choice.phase === 'passage') {
-        next.phase = 'reserve';
-      } else if (arrived && choice.phase === 'reserve') {
+      } else if (arrived && choice.need === 'passage') {
+        next.passageObserved = true;
+      } else if (arrived && choice.need === 'reserve') {
         next.visited = [...local.visited, key(current.at)];
-        next.phase = meter && local.meter && meter.length > local.meter.length ? 'reuse' : 'reserve';
-      } else if (arrived && choice.phase === 'goal') {
+        next.reserveRestored = !!meter && !!local.meter && meter.length > local.meter.length;
+      } else if (arrived && choice.need === 'goal') {
         next.stopped = true;
       }
       state = next;

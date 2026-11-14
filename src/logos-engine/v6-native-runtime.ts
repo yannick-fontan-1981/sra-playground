@@ -677,7 +677,16 @@ export class NativeV6Runtime implements NativeV6Backend {
     if (!this.current || !this.observation) throw new Error('Missing current selection context');
     this.caller?.prepare(this.observation, this.remaining());
     this.acquisitionFamilies?.morphology?.beginDecision();
-    this.planning = { execution: this.currentExecution(execution),
+    const level = this.observation.level_epoch;
+    const matched = this.latestReasoningReturn?.level === level ? this.latestReasoningReturn.matched : null;
+    const situation: ReasoningSituation | null = this.adaptiveReasoning ? {
+      level, levelsCompleted: this.observation.levels_completed, targetLevels: this.budgets!.targetLevels,
+      levelActions: this.levelActions.get(level) ?? 0, remainingActions: this.remaining(),
+      latestReturn: matched === true ? 'matched' : matched === false ? 'contradicted' : 'unknown',
+      acquiredInformation: this.latestInformationLevel === level, observationRef: this.observation.observation_ref,
+    } : null;
+    const reasoning = situation ? { ...situation, ...selectReasoningMode(situation) } : null;
+    this.planning = { execution: { ...this.currentExecution(execution), ...(reasoning ? { reasoningMode: reasoning.mode } : {}) },
       inputs, offers: new Map(), entryOffers: new Map(), sourceStops: new Map(), coordination: [], refusals: [], observedTrials: new Map() };
     try {
       if (!this.knowledge) throw new Error('Native knowledge store is not initialized');
@@ -774,15 +783,6 @@ export class NativeV6Runtime implements NativeV6Backend {
       this.familyAgendaReceipt = null;
       let result: { selected: unknown; visited: unknown };
       if (this.familyAgenda === 'active' && !editedProgram) {
-        const level = this.observation.level_epoch;
-        const matched = this.latestReasoningReturn?.level === level ? this.latestReasoningReturn.matched : null;
-        const situation: ReasoningSituation | null = this.adaptiveReasoning ? {
-          level, levelsCompleted: this.observation.levels_completed, targetLevels: this.budgets!.targetLevels,
-          levelActions: this.levelActions.get(level) ?? 0, remainingActions: this.remaining(),
-          latestReturn: matched === true ? 'matched' : matched === false ? 'contradicted' : 'unknown',
-          acquiredInformation: this.latestInformationLevel === level, observationRef: this.observation.observation_ref,
-        } : null;
-        const reasoning = situation ? { ...situation, ...selectReasoningMode(situation) } : null;
         if (this.caller) this.caller.reasoningMode = reasoning?.mode;
         const ranking = reasoning ? reasoningGroupOrder(this.groups, reasoning.mode, reasoning.remainingActions) : null;
         const agenda = await selectStrategyFamily(this.groups, offer, ranking?.order);
@@ -2421,7 +2421,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const sequence = (configuration.window_constraints as R).labeled_sequence_composition.labeled_sequence_question;
     const groups = standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 67, groups, symmetry, policy, sequence, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 68, groups, symmetry, policy, sequence, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
@@ -2433,7 +2433,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       createSicOrderedReplenishment(), createSicPreviewPlacement(), createSicSymbolContribution(), createSicMarkedLattice(),
       createSicQueuedPlacement(), createSicLegendRecolor(), createSicVisualPattern(), createSicFacetGrowth(), createSicChartRoute(), createSicPopulationPlacement(), createSicCarryToFrame(), createSicPortPairing(), createSicFramedSearch(), createSicGlyphEditing(), createSicDisplayCoupling(), createSicFieldIsolation(), createSicDirectionalReception(), createSicWindowCoverage(), createSicPanelMatching(), createSicCrossingRows(), createSicTraceCoverage(), createSicRadialConnection(), createSicInvitedCapture(), createSicBranchAlignment(), createSicFeedbackTrial(), createSicCatalogueComparison(), createSicReceptionAccess(), createSicMarkerCoverage(), createSicFramedReception(), createSicWindowRelation(), createSicAnimationContact(), createSicReflectedPlacement(), createSicMaterialAssembly(), createSicCoupledMotion(), createSicMaterialRoute(), createSicInventoryAccess(), createSicCavityAccess(), createSicPublicInputExploration(),
     ],
-      authorityPolicy: loaded.common, familyAgenda: 'active', maxPointOccurrences: loaded.common.input_domain.max_point_occurrences,
+      authorityPolicy: loaded.common, familyAgenda: 'active', adaptiveReasoning: true, maxPointOccurrences: loaded.common.input_domain.max_point_occurrences,
       ...(options.now ? { now: options.now } : {}) });
   }
   // Each selected proposal is returned only to the family that created it.
