@@ -41,7 +41,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | GABA | 6 | — | — | — | — | — | — | — |
 | GARE | 6 | [3](../../docs/migration/native-campaigns-v52/attempt9/gare-three-levels.json.gz) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/GARE/LVL1/good_run_pseudocode.md) | — | — | 3 | 4 | — |
 | GIGO | 6 | — | — | 2 (archive locale) | — | 2 | 3 | — |
-| GLOB | 6 | [3](../../docs/migration/native-campaigns-v56/baseline-glob/glob-campaign.json.gz) | — | 3 (archive locale) | — | 3 | 4 | — |
+| GLOB | 6 | [3](../../docs/migration/native-campaigns-v56/baseline-glob/glob-campaign.json.gz) | — | 3 (archive locale) | — | 3 | 4 | 1 |
 | GMAP | 6 | — | — | — | — | — | — | — |
 | GORI | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/GORI/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | — |
 | GRAV | 6 | — | — | — | — | — | — | 1 |
