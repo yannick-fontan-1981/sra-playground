@@ -1,10 +1,12 @@
 import { center, correspondence, find_body, intersects, moved_core, near } from '../logos-engine/v6-object-binding-geometry.ts';
 import { distance, shift } from '../logos-engine/v6-object-binding-planning.ts';
-import type { NativeBox, NativeCommand, NativeEntity, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeEntity, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { chooseTransport, transportModule } from './transport-motion-card.ts';
 
 export const carryToFrameId = 'sic_carry_to_frame';
+export const learnCarryToFrameId = 'sic_learn_transport_from_motion';
 export const carryToFrameStrategies = {
   measure_transport_control: 'Measure a command for the moving body',
   approach_matching_object: 'Move toward the object that fits the frame',
@@ -54,19 +56,32 @@ function returnedObject(proposal: Proposal, after: NativeObservation, delta: Nat
   return touching.length === 1 && !candidates.some(item => equal(item.bbox, held)) ? touching[0]!.bbox : null;
 }
 
-export function createSicCarryToFrame(): NativeFamily<Proposal> {
+export function createSicCarryToFrame(family = carryToFrameId): NativeFamily<Proposal> {
+  const learns = family === learnCarryToFrameId;
   let state: State | null = null;
+  let choose: NativeProgramHandle | undefined;
   return {
-    id: carryToFrameId,
-    async propose(observation, rows, _inputs, remaining) {
+    id: family,
+    async attachPrograms(registry) {
+      if (learns) choose = await registry.registerProgram(chooseTransport, {}, await transportModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION5')) return null;
       const prior = state?.epoch === observation.level_epoch && state.frame === observation.frame_hash ? state : null;
       if (prior?.stopped || (prior?.tried.length ?? 0) >= 36) return null;
-      const pairs = prior ? [] : correspondence(observation, rows) as Pair[];
+      const receipt = learns && !prior ? execution?.readDirectionalMotion?.() : null;
+      const motion = receipt?.afterRef === observation.observation_ref && receipt.levelEpoch === observation.level_epoch ? receipt : null;
+      const translated = motion?.translations.length === 1 ? motion.translations[0] : null;
+      const actors = translated ? observation.entities.filter(entity => equal(entity.bbox, translated.to) &&
+        entity.palette_value === translated.color && entity.area === translated.area) : [];
+      const acquired = actors.length === 1 ? actors[0]! : null;
+      if (learns && !prior && (!motion || !translated || !acquired)) return null;
+      const pairs = prior ? [] : correspondence(observation, rows, acquired?.signature) as Pair[];
       const pair = prior?.pair ?? (pairs.length === 1 ? pairs[0] : null);
       if (!pair) return null;
-      const local = prior ?? { epoch: observation.level_epoch, pair, actor: null, controls: {}, held: null,
-        movedTogether: false, interaction: null, tried: [], evidence: [], frame: observation.frame_hash, stopped: false };
+      const local = prior ?? { epoch: observation.level_epoch, pair, actor: acquired?.signature ?? null,
+        controls: motion && translated ? { [motion.command]: translated.displacement } : {}, held: null,
+        movedTogether: false, interaction: null, tried: [], evidence: motion ? [motion.beforeRef] : [], frame: observation.frame_hash, stopped: false };
       const actor = local.actor ? (find_body(observation, local.actor) as NativeEntity | null)?.bbox ?? null : null;
       if (local.actor && !actor) return null;
       const subject = local.held ?? pair.object.bbox;
@@ -85,24 +100,35 @@ export function createSicCarryToFrame(): NativeFamily<Proposal> {
       const release = !!local.held && local.movedTogether && near(local.held, pair.frame.bbox) &&
         !!local.interaction && remainingActions.includes(local.interaction);
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
+      const situation = { probe: !!experiment, approach: !!learned && !local.held, pickup,
+        carry: !!learned && !!local.held, release, mode: execution?.reasoningMode ?? 'exploration' };
+      const decision = learns ? await choose?.run({ situation }, { signal: execution?.signal }) : null;
+      const evaluated = learns ? null : resolveStrategyGraph({ graph, mode: 'active', facts: {
         probe: { value: !!experiment, evidence }, approach: { value: !!learned && !local.held, evidence },
         pickup: { value: pickup, evidence }, carry: { value: !!learned && !!local.held, evidence }, release: { value: release, evidence },
       }, planners: { measure_transport_control: () => experiment ?? null, approach_matching_object: () => learned ?? null,
         test_transport_interaction: () => 'ACTION5', carry_toward_frame: () => learned ?? null, test_delivery_at_frame: () => local.interaction } });
-      if (!selected) return null;
-      const strategy = selected.id, label = carryToFrameStrategies[strategy], parent = 'G_official_completion';
-      const command: NativeCommand = { action_ref: selected.plan, data: {} };
+      const choices = { measure_transport_control: experiment, approach_matching_object: situation.approach ? learned : undefined,
+        test_transport_interaction: pickup ? 'ACTION5' : undefined, carry_toward_frame: situation.carry ? learned : undefined,
+        test_delivery_at_frame: release ? local.interaction : undefined };
+      const requested = decision?.result ?? evaluated?.selected?.id;
+      if (typeof requested !== 'string' || !Object.hasOwn(choices, requested)) return null;
+      const strategy = requested as Strategy, action = choices[strategy];
+      if (!action) return null;
+      const label = carryToFrameStrategies[strategy], parent = 'G_official_completion';
+      const command: NativeCommand = { action_ref: action, data: {} };
       const goal = { kind: 'deliver_fitting_object', scope: ref.split(':revision:', 1)[0]!, subjects: ['matching_object', 'receiving_frame'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_or_object_retained_in_the_frame' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `carry-to-frame:${need.id}`, actions = [command];
-      return { status: 'proposed', kind: carryToFrameId, actions, local, actor, subject, strategy, needId: need.id,
+      return { status: 'proposed', kind: family, actions, local, actor, subject, strategy, needId: need.id,
         attempt: JSON.stringify([observation.frame_hash, command.action_ref]),
         steps: [{ action: command, expected_after: null }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation } } : {}),
         sicSituationCard: { strategy, need: 'Bring the object to the frame that matches it', mode: learned ? 'solving' : 'exploration',
           situation: release ? 'The object color has travelled with the controlled body and now touches the frame. Delivery awaits the return.' : label,
-          agenda: entries, evidence, actor, object: subject, frame: pair.frame.bbox },
+          agenda: evaluated?.entries ?? [], evidence, actor, object: subject, frame: pair.frame.bbox },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },

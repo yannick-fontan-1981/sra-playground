@@ -33,7 +33,7 @@ import { visualPatternId, visualPatternStrategies } from './visual-pattern.ts';
 import { facetGrowthId, facetGrowthStrategies, learnFacetGrowthId } from './facet-growth.ts';
 import { chartRouteId, chartRouteStrategies } from './chart-route.ts';
 import { populationPlacementId, populationPlacementStrategies } from './population-placement.ts';
-import { carryToFrameId, carryToFrameStrategies } from './carry-to-frame.ts';
+import { carryToFrameId, carryToFrameStrategies, learnCarryToFrameId } from './carry-to-frame.ts';
 import { portPairingId, portPairingStrategies } from './port-pairing.ts';
 import { contrastControlsId, contrastControlsStrategies, contrastProbeId } from './contrast-controls.ts';
 import { displayCouplingId, displayCouplingStrategies } from './display-coupling.ts';
@@ -486,7 +486,7 @@ export function readNativeResolution(agent: {
                         : family === queuedPlacementId ? queuedPlacementStrategies : (family === legendRecolorId || family === matchExampleId) ? legendRecolorStrategies
                           : family === visualPatternId ? visualPatternStrategies : (family === facetGrowthId || family === learnFacetGrowthId) ? facetGrowthStrategies
                             : family === chartRouteId ? chartRouteStrategies : family === populationPlacementId ? populationPlacementStrategies
-                              : family === carryToFrameId ? carryToFrameStrategies : family === portPairingId ? portPairingStrategies
+                              : (family === carryToFrameId || family === learnCarryToFrameId) ? carryToFrameStrategies : family === portPairingId ? portPairingStrategies
                                 : (family === contrastControlsId || family === contrastProbeId) ? contrastControlsStrategies : family === displayCouplingId ? displayCouplingStrategies : family === framedSearchId ? framedSearchStrategies
                                   : family === glyphEditingId ? glyphEditingStrategies : (family === fieldIsolationId || family === learnFieldIsolationId) ? fieldIsolationStrategies
                                     : family === directionalReceptionId ? directionalReceptionStrategies : family === windowCoverageId ? windowCoverageStrategies
@@ -1036,7 +1036,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label: 'Piece with connection points', box });
     }
   }
-  if (situationCard && family === carryToFrameId) {
+  if (situationCard && (family === carryToFrameId || family === learnCarryToFrameId)) {
     for (const [field, label] of [['actor', 'Controlled body'], ['object', 'Object to transport'], ['frame', 'Matching frame']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
