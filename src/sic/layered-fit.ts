@@ -2,8 +2,10 @@ import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-nat
 import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { markerDisplacement, singleChangedPoint } from './observed-click-regions.ts';
 
 export const layeredFitId = 'sic_layered_fit';
+export const learnLayeredFitId = 'sic_learn_layered_fit';
 type Part = ReturnType<typeof geometricComponents>[number];
 type Pane = { color: number; box: NativeBox; points: NativePoint[] };
 type Scene = { panes: Pane[]; canvas: NativeBox; reference: NativeBox; mixed: number; empty: number };
@@ -87,24 +89,6 @@ function firstDirection(pane: Pane, scene: Scene) {
   return horizontal ? dirs[x < u ? 3 : 2]! : dirs[y < v ? 1 : 0]!;
 }
 
-function changedPoint(first: NativeRows, second: NativeRows): NativePoint | null {
-  const changed: NativePoint[] = [];
-  for (let y = 0; y < second.length; y++) for (let x = 0; x < second[y]!.length; x++) {
-    if (first[y]?.[x] !== second[y]![x]) changed.push([x, y]);
-  }
-  return changed.length === 1 ? changed[0]! : null;
-}
-
-function moveDelta(first: NativeRows, rows: NativeRows, marker: NativePoint, direction: typeof dirs[number]): NativePoint | null {
-  const [x, y] = marker, [, dx, dy] = direction;
-  const mark = first[y]![x], shifts: NativePoint[] = [];
-  for (let i = 1; i <= 12; i++) {
-    const a = x + i * dx, b = y + i * dy;
-    if (rows[b]?.[a] === mark && first[b]?.[a] !== mark) shifts.push([a - x, b - y]);
-  }
-  return shifts.length === 1 ? shifts[0]! : null;
-}
-
 function fitPane(rows: NativeRows, pane: Pane, scene: Scene, [dx, dy]: NativePoint): string[] | null {
   const area: NativeBox = [0, 0, rows[0]!.length - 1, scene.reference[1] - 2];
   const known = colorsIn(rows, area);
@@ -151,16 +135,22 @@ function paneMatches(rows: NativeRows, scene: Scene, pane: Pane, marker: NativeP
   return wanted.size === actual.size && [...wanted].every(p => actual.has(p));
 }
 
-export function createSicLayeredFit(): NativeFamily<Proposal> {
+export function createSicLayeredFit(family = layeredFitId): NativeFamily<Proposal> {
+  const learns = family === learnLayeredFitId;
   let memory: State | null = null;
   return {
-    id: layeredFitId,
+    id: family,
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4', 'ACTION5', 'ACTION6'].every(ref => observation.available_action_refs.includes(ref))) return null;
       const prior = memory?.epoch === observation.level_epoch ? memory : null;
+      const click = learns && !prior ? execution?.readClickMarker?.() : null;
+      if (learns && !prior && (!click || click.afterRef !== observation.observation_ref || click.levelEpoch !== observation.level_epoch)) return null;
       const scene = prior?.scene ?? initial(rows);
       if (!scene || prior?.failed) return null;
-      const local = prior ?? { epoch: observation.level_epoch, scene, index: 0, stage: 'select' as const, marker: null, remaining: [], refs: [], failed: false };
+      if (click && (!inside(scene.panes[0]!.box, click.point) || !inside(scene.panes[0]!.box, click.marker)
+        || scene.panes.some(pane => pane.color === click.value && pane.points.length > 1))) return null;
+      const local: State = prior ?? { epoch: observation.level_epoch, scene, index: 0, stage: click ? 'measure' : 'select',
+        marker: click?.marker ?? null, remaining: [], refs: click ? [click.beforeRef, click.afterRef] : [], failed: false };
       const pane = scene.panes[local.index];
       if (!pane) return null;
       const direction = firstDirection(pane, scene);
@@ -181,16 +171,17 @@ export function createSicLayeredFit(): NativeFamily<Proposal> {
       const objective = { kind: 'fit_layer_to_reference', scope: ref.split(':revision:', 1)[0]!, subjects: ['pane:' + local.index],
         parentObjective: parent, satisfactionContract: 'visible_color_layer_matches_reference' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = layeredFitId + ':' + need.id;
+      const id = family + ':' + need.id;
       const situation = local.stage === 'select' ? 'Select the visible pane and locate its selection marker'
         : local.stage === 'measure' ? 'Measure one translation and recover the portion hidden at the edge'
           : 'Apply the next measured transform toward the matching reference layer';
-      return { status: 'proposed', kind: layeredFitId, local, pane, stage: local.stage, marker: local.marker,
+      return { status: 'proposed', kind: family, local, pane, stage: local.stage, marker: local.marker,
         delta: local.stage === 'measure' ? [direction[1], direction[2]] : null, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
         steps: [{ action, expected_after: null, ...(witness ? { point_binding: witness } : {}) }],
         sicSituationCard: { strategy: selected.id, need: 'Match the visible superposition to the reference', situation, evidence, agenda: entries, mode,
-          triggerCard: card, pane: pane.box, canvas: scene.canvas, reference: scene.reference },
+          triggerCard: card, pane: pane.box, canvas: scene.canvas, reference: scene.reference,
+          marker: local.marker ? [...local.marker, ...local.marker] : null },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
@@ -228,7 +219,8 @@ function observeReturn(first: NativeRows, second: NativeRows, { local, pane, sta
     return { ...local, stage: 'measure', marker: next, failed: !next };
   }
   if (stage === 'measure' && marker) {
-    const delta = moveDelta(first, second, marker, firstDirection(pane, local.scene));
+    const [, dx, dy] = firstDirection(pane, local.scene);
+    const delta = markerDisplacement(first, second, marker, [dx, dy], 12);
     const fit = delta && fitPane(second, pane, local.scene, delta);
     return { ...local, stage: 'fit', marker: delta ? [marker[0] + delta[0], marker[1] + delta[1]] : null,
       remaining: fit ?? [], failed: !fit?.length };
@@ -243,7 +235,7 @@ function observeReturn(first: NativeRows, second: NativeRows, { local, pane, sta
 }
 
 function selectionMarker(first: NativeRows, rows: NativeRows, pane: Pane, scene: Scene): NativePoint | null {
-  const point = changedPoint(first, rows);
+  const point = singleChangedPoint(first, rows);
   if (point) return point;
   const palette = new Set([scene.empty, scene.mixed, ...scene.panes.map(p => p.color)]);
   const candidates = geometricComponents(rows).filter(p => p.area === 1 && !palette.has(p.color)

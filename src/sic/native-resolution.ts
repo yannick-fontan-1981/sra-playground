@@ -59,7 +59,7 @@ import { pointReachId } from './point-reach.ts';
 import { linkedMidpointId } from './linked-midpoint.ts';
 import { excavateDescentId } from './excavate-descent.ts';
 import { gatedCascadeId } from './gated-cascade.ts';
-import { layeredFitId } from './layered-fit.ts';
+import { layeredFitId, learnLayeredFitId } from './layered-fit.ts';
 import { litRouteId } from './lit-route.ts';
 import { pivotCargoId } from './pivot-cargo.ts';
 import { nestedPassageId } from './nested-passage.ts';
@@ -493,7 +493,7 @@ export function readNativeResolution(agent: {
                                         : family === traceCoverageId ? traceCoverageStrategies : family === radialConnectionId ? radialConnectionStrategies
                                           : family === invitedCaptureId ? invitedCaptureStrategies : family === branchAlignmentId ? branchAlignmentStrategies
                                             : family === feedbackTrialId ? feedbackTrialStrategies : family === catalogueComparisonId ? catalogueComparisonStrategies
-                                              : family === receptionAccessId ? receptionAccessStrategies : family === markerCoverageId ? markerCoverageStrategies : family === framedReceptionId ? framedReceptionStrategies : family === windowRelationId ? windowRelationStrategies : family === animationContactId ? animationContactStrategies : family === reflectedPlacementId ? reflectedPlacementStrategies : family === materialAssemblyId ? materialAssemblyStrategies : family === coupledMotionId ? coupledMotionStrategies : family === materialRouteId ? materialRouteStrategies : family === inventoryAccessId || family === replayAccessId || family === orientedDeliveryId || family === indicatedJumpId || family === highlightedRouteId || family === pairedPassageId || family === seatedContactId || family === switchedSurfaceId || family === markedGaugeId || family === reactiveTargetId || family === pairedChannelsId || family === pointReachId || family === linkedMidpointId || family === excavateDescentId || family === gatedCascadeId || family === layeredFitId || family === litRouteId || family === pivotCargoId || family === nestedPassageId || family === translateCoupledPiecesId || family === stagedMarksId || family === moveMaskedPiecesId || family === linkOpeningsId || family === reproduceCueId || family === learnAnimatedCueId || family === navigateRevealedGridId || family === arrangeTurnPostsId || family === learnSupportMovesId || family === learnScopeEffectsId ? inventoryAccessStrategies : family === learnCorrespondenceId ? learnCorrespondenceStrategies : null;
+                                              : family === receptionAccessId ? receptionAccessStrategies : family === markerCoverageId ? markerCoverageStrategies : family === framedReceptionId ? framedReceptionStrategies : family === windowRelationId ? windowRelationStrategies : family === animationContactId ? animationContactStrategies : family === reflectedPlacementId ? reflectedPlacementStrategies : family === materialAssemblyId ? materialAssemblyStrategies : family === coupledMotionId ? coupledMotionStrategies : family === materialRouteId ? materialRouteStrategies : family === inventoryAccessId || family === replayAccessId || family === orientedDeliveryId || family === indicatedJumpId || family === highlightedRouteId || family === pairedPassageId || family === seatedContactId || family === switchedSurfaceId || family === markedGaugeId || family === reactiveTargetId || family === pairedChannelsId || family === pointReachId || family === linkedMidpointId || family === excavateDescentId || family === gatedCascadeId || family === layeredFitId || family === learnLayeredFitId || family === litRouteId || family === pivotCargoId || family === nestedPassageId || family === translateCoupledPiecesId || family === stagedMarksId || family === moveMaskedPiecesId || family === linkOpeningsId || family === reproduceCueId || family === learnAnimatedCueId || family === navigateRevealedGridId || family === arrangeTurnPostsId || family === learnSupportMovesId || family === learnScopeEffectsId ? inventoryAccessStrategies : family === learnCorrespondenceId ? learnCorrespondenceStrategies : null;
   const card = planReceipt?.authority === 'sicOnly' && labels ? record(proposal?.sicSituationCard) : null;
   const isSituationStrategy = (id: unknown): id is keyof typeof situationStrategies =>
     typeof id === 'string' && !!labels && Object.hasOwn(labels, id);
@@ -861,8 +861,8 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && family === layeredFitId) {
-    for (const [field, label] of [['pane', 'Pane under control'], ['canvas', 'Current composite'], ['reference', 'Reference pattern']] as const) {
+  if (situationCard && (family === layeredFitId || family === learnLayeredFitId)) {
+    for (const [field, label] of [['pane', 'Pane under control'], ['marker', 'Selection marker'], ['canvas', 'Current composite'], ['reference', 'Reference pattern']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
