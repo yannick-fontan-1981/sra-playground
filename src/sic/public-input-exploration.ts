@@ -127,8 +127,9 @@ function visibleInputs(observation: NativeObservation, rows: NativeRows, inputs:
   const parts = components.filter(component => isMarker(component) || (component.area >= 2 && component.area * 4 < width * height))
     .sort((a, b) => Number(isMarker(b)) - Number(isMarker(a))
       || (isMarker(a) && isMarker(b) ? toCenter(a) - toCenter(b) : b.area - a.area));
-  const repeated = new Set(stationaryClicks >= 4 ? repeatedInputTargets(parts, 6) : []);
-  for (const part of new Set([...parts.filter(isMarker).slice(0, clickLimit), ...repeated, ...parts.slice(0, clickLimit)])) {
+  const usual = new Set(parts.slice(0, clickLimit));
+  const repeated = new Set(stationaryClicks >= 4 ? repeatedInputTargets(parts, usual, 6) : []);
+  for (const part of new Set([...parts.filter(isMarker).slice(0, clickLimit), ...repeated, ...usual])) {
     const { bbox, mask } = part;
     const [left, top, right, bottom] = bbox;
     const distance = ([x, y]: NativePoint) => Math.abs(2 * x + left - right) + Math.abs(2 * y + top - bottom);

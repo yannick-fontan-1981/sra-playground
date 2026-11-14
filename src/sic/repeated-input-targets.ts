@@ -1,7 +1,7 @@
 import type { NativeBox } from '../logos-engine/v6-native-types.ts';
 import type { GeometricComponent } from '../logos-engine/v6-native-observer.ts';
 
-export function repeatedInputTargets(components: readonly GeometricComponent[], limit: number) {
+export function repeatedInputTargets(components: readonly GeometricComponent[], covered: ReadonlySet<GeometricComponent>, limit: number) {
   const groups = new Map<string, GeometricComponent[]>();
   for (const part of components) {
     const [left, top, right, bottom] = part.bbox;
@@ -12,7 +12,7 @@ export function repeatedInputTargets(components: readonly GeometricComponent[], 
     groups.set(key, group);
   }
   const offers = [...groups.values()].flatMap(group => {
-    if (group.length < 4) return [];
+    if (group.length < 4 || group.some(part => covered.has(part))) return [];
     const boxes = group.map(part => part.bbox);
     const left = Math.min(...boxes.map(box => box[0])), right = Math.max(...boxes.map(box => box[2]));
     const top = Math.min(...boxes.map(box => box[1])), bottom = Math.max(...boxes.map(box => box[3]));

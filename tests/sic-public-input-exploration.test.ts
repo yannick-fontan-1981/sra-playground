@@ -48,9 +48,9 @@ test('SIC probes repeated interior markers while requiring independent visible a
 });
 
 test('stationary clicks give a smaller repeated target a turn before other large components', async () => {
-  const rows = Array.from({ length: 15 }, (_, y) => Array.from({ length: 31 }, (_, x) => {
+  const rows = Array.from({ length: 31 }, (_, y) => Array.from({ length: 61 }, (_, x) => {
     if (y >= 2 && y <= 3 && [2, 6, 10, 14, 18].some(left => left <= x && x <= left + 1)) return 7;
-    if (y >= 7 && y <= 11 && [1, 7, 13, 19, 25].some(left => left <= x && x <= left + 3)) return 2;
+    if (y >= 7 && (y - 7) % 6 < 4 && x % 6 < 4) return 2;
     return 0;
   }));
   const family = createSicPublicInputExploration();
