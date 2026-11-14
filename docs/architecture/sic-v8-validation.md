@@ -37,4 +37,6 @@ Le rejeu charge la partie neuve et le pack `solver: 'sic'` dans le worker normal
 
 Empreintes SHA-256 de la suite des commandes et des retours publics agrégés. SYME `e6d71fdf0471b4c27f1f8d0baad16a7d44dc2f9a2d8220105d66d10ad515a603`. DNOI `82425afb37b8c38d0d348cd2744f8595b38ad294914fecbb0b96c077f50c5182`.
 
+La campagne complète de 100 jeux a retrouvé les deux victoires. TRIA a reçu un clic SIC et s’est arrêté sans gagner de niveau. Les 97 autres jeux se sont arrêtés avant la première action. La campagne s’est terminée sans erreur de chargement ou d’attribution de plan. Sur SK48, un essai de la composition déplacement, contact et ordre de référence sur le vrai jeu a retrouvé la contradiction à l’action 12 et a ouvert le niveau 2 à l’action 19. Cet essai direct des opérateurs reste hors du compteur SIC seul. La projection courante du niveau 2 demande de distinguer une poussée, une entrée et un maintien durant la rétraction.
+
 La référence 0.65 relancée sur la même machine donne 11,173 s pour STCK et 22,456 s pour SMLP. Comparée à la première fenêtre du candidat, elle donne +10,47 % et −22,05 %. Les commandes et les niveaux attendus concordent. L’écart STCK reste au-dessus du seuil dans cette comparaison indicative. La qualification finale demande des séries alternées sans campagnes concurrentes.
