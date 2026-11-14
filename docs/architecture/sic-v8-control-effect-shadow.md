@@ -247,6 +247,8 @@ Après la comparaison des cinq témoins et la mesure de coût, l’arbitrage SIC
 
 ### Curiosité en ouverture et opérations de composition
 
+L’[inventaire des stratégies utilisées](sic-v8-strategies-observees.md) relie les démarches attestées aux jeux, niveaux, commandes et retours qui les font apparaître.
+
 Le catalogue OP01–OP31 se trouve dans Informations → Modèle du jeu. Dans Stratégies, les codes effectivement publiés restent visibles dans le détail ou comme repère sur la ligne d’un épisode. Le titre de l’épisode reprend la stratégie ou la question observée. Une description d’opération ne sert plus de nom de stratégie.
 
 Le réglage **Opening curiosity** s’applique à une nouvelle session au premier choix de chaque niveau. Pour les expériences à prédictions, il donne la priorité au nombre de relations distinctes testées dans le groupe qui satisfait déjà la préservation et la réserve. Pour une exploration qui ouvre par un clic, il compare les cibles de même priorité et compte les relations de voisinage distinctes par côté, forme et couleur. Il conserve les expériences ciblées préexistantes et l’admission native de la commande. La géométrie sert d’indice de complexité. Les relations causales restent à vérifier par les retours. Le mode shadow affiche la cible qu’il privilégierait. Le mode actif peut la choisir et affiche les sprites du sujet et de ses voisins observés.
