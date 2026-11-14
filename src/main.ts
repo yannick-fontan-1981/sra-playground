@@ -416,6 +416,7 @@ const sicPanel = element<HTMLElement>('#sic-panel');
 bindSicPerspectives(sicPanel);
 const recoveryConfiguration = bindRecoverySettings(sicPanel);
 const sicActionCoverage = sicPanel.querySelector<HTMLElement>('[data-sic-action-coverage]')!;
+const sicModeLabel = sicPanel.querySelector<HTMLElement>('[data-sic-mode]')!;
 let sicRenderPending = false;
 let lastSicBoard: GameObservation | null = null;
 let lastSicState: V6AgentSnapshot | null = null;
@@ -481,6 +482,7 @@ const agent = new BrowserV6Agent({
       if (generation !== selectionGeneration || next.gameCode !== selectedGame.code) {
         throw new Error('The action belongs to an earlier game session.');
       }
+      // Capture references during the run. Build display evidence only at a settled boundary.
       if (sicDisplayEnabled && sessionId && sessionId === agentState?.sessionId) {
         pendingSicReturns.push({ sessionId, sequence, action, before, next, decision: nativeSnapshot });
         if (pendingSicReturns.length > 96) pendingSicReturns.shift();
@@ -539,16 +541,19 @@ function projectAgentReturn({ sessionId, sequence, action, before, next, decisio
 function updateSicPanel(): void {
   if (!sicDisplayEnabled || sicPanel.hidden || sicRenderPending || busy || agentState?.busy) return;
   sicRenderPending = true;
-  window.requestAnimationFrame(() => {
+  const renderWhenIdle = (availableMs: number) => {
     sicRenderPending = false;
     if (sicPanel.hidden || busy || agentState?.busy) return;
-    const deadline = performance.now() + 5;
-    while (pendingSicReturns.length && performance.now() < deadline) {
+    if (availableMs < 2) { updateSicPanel(); return; }
+    const deadline = performance.now() + Math.min(5, availableMs);
+    while (pendingSicReturns.length) {
       const entry = pendingSicReturns.shift()!;
-      if (entry.sessionId !== agentState?.sessionId) continue;
-      try { projectAgentReturn(entry); } catch { /* Display evidence is optional. */ }
+      if (entry.sessionId === agentState?.sessionId) {
+        try { projectAgentReturn(entry); } catch { /* Display evidence is optional. */ }
+      }
+      if (performance.now() >= deadline) { updateSicPanel(); return; }
     }
-    if (pendingSicReturns.length) { updateSicPanel(); return; }
+    updateSicModeLabel();
     const board = loading || failed ? null : observation;
     const history = mode === 'agent' ? agentReturns : manualReturns;
     if (board === lastSicBoard && agentState === lastSicState && history === lastSicReturns && mode === lastSicMode) return;
@@ -570,7 +575,21 @@ function updateSicPanel(): void {
       board, mode, Boolean(mode === 'agent' && board && !state?.sessionId && (board.level !== 1 || board.levelsCompleted !== 0)), returns,
       mode === 'agent' && objectiveLedger && objectiveLedger.sessionId === state?.sessionId && state.status !== 'error'
         ? objectiveLedger.entries.filter(item => item.last <= state.sequence) : []);
-  });
+  };
+  if (typeof window.requestIdleCallback === 'function') window.requestIdleCallback(deadline => renderWhenIdle(deadline.timeRemaining()));
+  else window.requestAnimationFrame(() => renderWhenIdle(5));
+}
+
+function updateSicModeLabel(): void {
+  const state = agentState;
+  const recoveryStop = mode === 'agent' && state?.status === 'stopped' && isRecoveryStop(state.reason) ? state.reason : null;
+  const label = recoveryStop === 'sic_recovery_shadow' ? 'Contact recovery observed in shadow'
+    : recoveryStop ? 'Contact recovery limited'
+    : mode === 'agent' && element<HTMLSelectElement>('#agent-planning').value === 'sic' ? 'SIC only'
+    : mode === 'agent' && selectedGame.code === 'AS66' && element<HTMLInputElement>('#agent-sic-pause').checked ? 'Pause for review enabled'
+    : mode === 'agent' && state?.sessionId ? 'Native agent and SIC'
+    : 'Read-only preview';
+  if (sicModeLabel.textContent !== label) sicModeLabel.textContent = label;
 }
 
 function updateAgentInterface(): void {
@@ -589,12 +608,6 @@ function updateAgentInterface(): void {
   const reviewToggle = element<HTMLInputElement>('#agent-sic-pause');
   reviewToggle.disabled = reviewing || Boolean(state?.busy);
   const recoveryStop = mode === 'agent' && state?.status === 'stopped' && isRecoveryStop(state.reason) ? state.reason : null;
-  element('[data-sic-mode]').textContent = recoveryStop === 'sic_recovery_shadow' ? 'Contact recovery observed in shadow'
-    : recoveryStop ? 'Contact recovery limited'
-    : mode === 'agent' && planning.value === 'sic' ? 'SIC only'
-    : mode === 'agent' && selectedGame.code === 'AS66' && reviewToggle.checked ? 'Pause for review enabled'
-    : mode === 'agent' && state?.sessionId ? 'Native agent and SIC'
-    : 'Read-only preview';
   const confirm = element<HTMLButtonElement>('#agent-sic-resume');
   confirm.hidden = !reviewing;
   confirm.disabled = !reviewing || !available || !state?.canRun;
@@ -749,7 +762,7 @@ async function run(operation: () => Promise<GameObservation>, announcement = '',
   try {
     const next = await operation();
     await present(next, generation);
-    if (generation === selectionGeneration && mode === 'manual') {
+    if (sicDisplayEnabled && generation === selectionGeneration && mode === 'manual') {
       manualReturns = command === undefined ? [] : recordPublicReturn(manualReturns, `manual:${generation}`, ++manualSequence, command, before, next);
       updateSicPanel();
     }
