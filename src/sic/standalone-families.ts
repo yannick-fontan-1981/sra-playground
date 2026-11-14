@@ -57,6 +57,7 @@ import { inventoryAccessId } from './inventory-access.ts';
 import { replayAccessId } from './replay-access.ts';
 import { orientedDeliveryId } from './oriented-delivery.ts';
 import { indicatedJumpId } from './indicated-jump.ts';
+import { learnCorrespondenceId } from './learn-correspondence.ts';
 import { materialAssemblyId } from './material-assembly.ts';
 
 export const standalonePlanningGroups = [
@@ -72,7 +73,7 @@ export const standalonePlanningGroups = [
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, facetGrowthId] },
   { id: 'visit_marked_surface', families: [traceCoverageId, markedLatticeId] },
   { id: 'place_incoming_groups', families: [queuedPlacementId] },
-  { id: 'explore_available_inputs', families: [displayCouplingId, fieldIsolationId, cavityAccessId, publicInputExplorationId] },
+  { id: 'explore_available_inputs', families: [displayCouplingId, fieldIsolationId, cavityAccessId, learnCorrespondenceId, publicInputExplorationId] },
 ] as const;
 
 export const standalonePlanningFamilies: readonly string[] = Object.freeze(standalonePlanningGroups.flatMap(group => group.families));
