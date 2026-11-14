@@ -1,4 +1,4 @@
-import { correspondences, measuredFields, type RegularField } from '../logos-engine/v6-field-constraints.ts';
+import { correspondences, measuredFields, periodicHypotheses, symmetryEvidence, type RegularField } from '../logos-engine/v6-field-constraints.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
@@ -20,8 +20,8 @@ const graph = compileStrategyGraph({ id: 'acquire_field_correspondence_from_retu
 }, ['prediction', 'replicated']);
 
 const transforms = ['horizontal', 'vertical', 'half_turn', 'diagonal', 'antidiagonal'] as const;
-type State = { epoch: number; field: string; marker: number; hypotheses: string[]; samples: PredictionTrial<number>[] };
-type Candidate = { point: NativePoint; source: NativePoint; expected: number; hypotheses: string[] };
+type State = { epoch: number; field: string; marker: number | null; hypotheses: string[]; samples: PredictionTrial<number>[] };
+type Candidate = { point: NativePoint; source: NativePoint; observed: number; expected: number; hypotheses: string[] };
 type Proposal = NativeProposal & { local: State; candidate: Candidate; box: NativeBox; field: NativeBox; needId: string };
 const key = (point: NativePoint) => point.join(',');
 const box = ([x, y]: NativePoint, [w, h]: NativePoint): NativeBox => [x, y, x + w - 1, y + h - 1];
@@ -41,8 +41,8 @@ function hypotheses(field: RegularField, marker: number) {
     for (const [a, b] of correspondences(field.xs.length, field.ys.length, transform)) {
       const p = asPoint(a, field), q = asPoint(b, field);
       const u = field.values.get(key(p))!, v = field.values.get(key(q))!;
-      if (u === marker && v !== marker) predictions.push({ point: p, source: q, expected: v, hypotheses: [transform] });
-      else if (v === marker && u !== marker) predictions.push({ point: q, source: p, expected: u, hypotheses: [transform] });
+      if (u === marker && v !== marker) predictions.push({ point: p, source: q, observed: u, expected: v, hypotheses: [transform] });
+      else if (v === marker && u !== marker) predictions.push({ point: q, source: p, observed: v, expected: u, hypotheses: [transform] });
       else if (u !== marker && v !== marker) {
         if (u !== v) { conflict = true; break; }
         support++;
@@ -68,12 +68,34 @@ function hypotheses(field: RegularField, marker: number) {
         if (known.some(cell => cell.value !== known[0]!.value)) { conflict = true; break; }
         if (known.length < 2) continue;
         ordinary.add(known[0]!.value);
-        for (const point of missing) predictions.push({ point, source: known[0]!.point, expected: known[0]!.value, hypotheses: [id] });
+        for (const point of missing) predictions.push({ point, source: known[0]!.point, observed: marker, expected: known[0]!.value, hypotheses: [id] });
       }
       if (!conflict && ordinary.size >= 2 && predictions.length) inferred.set(id, predictions);
     }
   }
   return inferred;
+}
+
+function corroboratedDisagreements(field: RegularField): Map<string, Candidate[]> {
+  const symmetry = transforms.flatMap(name => {
+    const model = symmetryEvidence(field, name);
+    return model ? [[name, model[0]] as const] : [];
+  });
+  const periodic = [...periodicHypotheses(field, 2)].map(([name, table]) => [name, table] as const);
+  const models = new Map<string, Candidate[]>();
+  const point = (address: string): NativePoint => {
+    const [x, y] = address.split(',').map(Number);
+    return [x!, y!];
+  };
+  for (const [name, table] of [...symmetry, ...periodic]) {
+    const candidates = [...table].flatMap(([address, cell]) => {
+      const [expected] = cell.eq, [source] = cell.sources;
+      return cell.eq.size === 1 && expected !== undefined && source !== undefined && expected !== cell.actual
+        ? [{ point: point(address), source: point(source), observed: cell.actual, expected, hypotheses: [name] }] : [];
+    });
+    if (candidates.length) models.set(name, candidates);
+  }
+  return models;
 }
 
 function nominate(field: RegularField, prior: State | null, epoch: number) {
@@ -83,9 +105,12 @@ function nominate(field: RegularField, prior: State | null, epoch: number) {
   for (const value of field.values.values()) counts.set(value, (counts.get(value) ?? 0) + 1);
   const ordered = [...counts].sort((a, b) => a[1] - b[1]);
   const rare = ordered[0];
-  const marker = prior?.marker ?? (ordered.length >= 3 && rare && rare[1] * 2 < ordered[1]![1] ? rare[0] : null);
-  if (marker === null) return null;
-  const models = hypotheses(field, marker);
+  let marker = prior ? prior.marker : ordered.length >= 3 && rare && rare[1] * 2 < ordered[1]![1] ? rare[0] : null;
+  let models = marker === null ? corroboratedDisagreements(field) : hypotheses(field, marker);
+  if (!prior && marker !== null && !models.size) {
+    marker = null;
+    models = corroboratedDisagreements(field);
+  }
   const admissible = [...models.keys()].filter(name => !prior || prior.hypotheses.includes(name));
   if (!admissible.length) return null;
   const local: State = prior ?? { epoch, field: identity, marker, hypotheses: admissible, samples: [] };
@@ -98,7 +123,8 @@ function nominate(field: RegularField, prior: State | null, epoch: number) {
     offers.push(candidate);
     byPoint.set(address, offers);
   }
-  const opportunities = [...byPoint.values()].filter(offers => offers.every(offer => offer.expected === offers[0]!.expected))
+  const opportunities = [...byPoint.values()].filter(offers => offers.every(offer => offer.expected === offers[0]!.expected)
+    && (local.marker !== null || offers.length === admissible.length))
     .map(offers => ({ ...offers[0]!, hypotheses: offers.flatMap(offer => offer.hypotheses) }))
     .sort((a, b) => b.hypotheses.length - a.hypotheses.length || a.point[0] - b.point[0] || a.point[1] - b.point[1]);
   return opportunities[0] ? { local, candidate: opportunities[0] } : null;
@@ -153,7 +179,7 @@ export function createSicLearnCorrespondence(): NativeFamily<Proposal> {
     },
     before(proposal, index, packet, observation) {
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref
-        && uniform(packet.frame_rows, proposal.box) === proposal.local.marker;
+        && uniform(packet.frame_rows, proposal.box) === proposal.candidate.observed;
       return { admitted, reason: admitted ? 'paired_cells_are_current' : 'paired_cell_changed' };
     },
     after(proposal, _index, before, after, first, second) {
