@@ -47,7 +47,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | GRAV | 6 | — | — | — | — | — | — | 1 |
 | GRIL | 6 | [3](../../docs/migration/native-campaigns-v49/gril-three-levels.json) | — | — | — | 3 | 4 | — |
 | HANO | 4 | [4](../../docs/migration/native-campaigns-v32/before-memory-fix/hano.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/HANO/LVL1/good_run_pseudocode.md) | [3](../../docs/migration/v6-baseline-parity.json) | — | 4 | 4 | 4 · WIN |
-| HOLE | 6 | — | — | — | — | — | — | — |
+| HOLE | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 1 |
 | HPDL | 6 | — | — | — | — | — | — | — |
 | ISOS | 6 | — | — | — | — | — | — | — |
 | KA59 | 7 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/KA59/LVL1/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | — |

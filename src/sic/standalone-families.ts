@@ -24,6 +24,7 @@ import { previewPlacementId } from './preview-placement.ts';
 import { symbolContributionId } from './symbol-contribution.ts';
 import { markedLatticeId } from './marked-lattice.ts';
 import { queuedPlacementId } from './queued-placement.ts';
+import { legendRecolorId } from './legend-recolor.ts';
 
 export const standalonePlanningGroups = [
   { id: 'repair_visible_field', families: [fieldRepairId, orderedContactId, supportTransferId] },
@@ -35,7 +36,7 @@ export const standalonePlanningGroups = [
   { id: 'fit_profiles_into_receivers', families: [profileTransferId] },
   { id: 'preserve_ordered_team', families: [orderedReplenishmentId] },
   { id: 'fill_visible_partition', families: [previewPlacementId] },
-  { id: 'follow_symbol_diagram', families: [symbolContributionId] },
+  { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId] },
   { id: 'visit_marked_surface', families: [markedLatticeId] },
   { id: 'place_incoming_groups', families: [queuedPlacementId] },
   { id: 'explore_available_inputs', families: [cavityAccessId, publicInputExplorationId] },
