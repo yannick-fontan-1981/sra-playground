@@ -4,6 +4,7 @@ import { readNativeResolution, type NativeResolution } from '../../src/sic/nativ
 import { defaultRecoveryPack, type RecoveryPack } from '../../src/sic/active-recovery.ts';
 import { recoveryRevision } from '../../src/sic/recovery-pack.ts';
 import type { AgentAction } from '../../src/runtime/contracts.ts';
+import { GAME_CATALOG } from '../../src/games/catalog.ts';
 
 const cases = [
   { game: 'SK48', target: 1, baseline: [19, 1], alternate: [19, 1], divergence: null },
@@ -17,12 +18,19 @@ const authoredRule = { title: 'Study recurring directions', commands: 'direction
 const start = document.querySelector<HTMLButtonElement>('#qualify')!;
 const output = document.querySelector<HTMLElement>('#report')!;
 
+type ObservedStrategy = {
+  family: string; strategy: string; entry: string | null; proposal: string; authority: string;
+  sequence: number; level: number; action: number; operation: string | null; aim: string | null;
+  result?: boolean | null; advanced?: boolean;
+};
+
 async function hash(value: unknown) {
   const bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(value)));
   return Array.from(new Uint8Array(bytes), byte => byte.toString(16).padStart(2, '0')).join('');
 }
 
-async function run(runtime: BrowserGameRuntime, code: string, target: number | 'complete', pack: RecoveryPack, maxActions?: number) {
+async function run(runtime: BrowserGameRuntime, code: string, target: number | 'complete', pack: RecoveryPack, maxActions?: number,
+  onStrategy?: (row: ObservedStrategy) => void) {
   let board = await runtime.load(code, 1);
   const targetLevels = target === 'complete' ? board.levelCount : target;
   let state: V6AgentSnapshot | undefined;
@@ -30,6 +38,7 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number | '
   const information: { sequence: number; strategy: string; predictions: number | null;
     result?: NonNullable<NativeResolution['outcome']>['informationOutcome'] }[] = [];
   let opening: NonNullable<NativeResolution['frontierStrategy']>['opening'];
+  let observedStrategy: ObservedStrategy | undefined;
   const agent = new BrowserV6Agent({
     getObservation: () => board,
     canDispatch: () => true,
@@ -38,15 +47,41 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number | '
       state = snapshot;
       const last = information.at(-1);
       if (last?.sequence === snapshot.sequence && !last.result) last.result = readNativeResolution(snapshot)?.outcome?.informationOutcome;
+      if (observedStrategy?.sequence === snapshot.sequence) {
+        const checked = readNativeResolution(snapshot)?.outcome;
+        if (checked) {
+          observedStrategy.result = checked.matched;
+          onStrategy?.(observedStrategy);
+          observedStrategy = undefined;
+        }
+      }
     },
     ...(maxActions === undefined ? {} : { maxSessionActions: maxActions }),
     dispatch: async action => {
       const decision = state ? readNativeResolution(state) : null;
+      if (onStrategy && decision?.family && decision.proposalKind && state) {
+        const bundle = state.proposal as Record<string, unknown> | null;
+        const entry = bundle?.material_access_subquestion ?? bundle?.program_subquestion ?? bundle?.field_subquestion
+          ?? bundle?.goal_access_subquestion ?? bundle?.strategy_subquestion;
+        const release = [...state.trace].reverse().find(value => {
+          const event = value as Record<string, unknown> | null;
+          return event?.kind === 'sic_native_plan' && event.family === decision.family;
+        }) as Record<string, unknown> | undefined;
+        if (typeof release?.strategy === 'string' && typeof release.authority === 'string') {
+          const strategy = decision.frontierStrategy?.opening?.mode === 'active'
+            && decision.frontierStrategy.opening.command !== decision.frontierStrategy.opening.baseline
+            ? 'opening_curiosity' : release.strategy;
+          observedStrategy = { family: decision.family, strategy, entry: typeof entry === 'string' ? entry : null,
+            proposal: decision.proposalKind, authority: release.authority, sequence: trace.length + 1, level: board.level,
+            action: action.id, operation: decision.operation, aim: decision.question };
+        }
+      }
       const strategy = decision?.informationStrategy;
       if (!trace.length) opening = decision?.frontierStrategy?.opening;
       if (strategy) information.push({ sequence: trace.length + 1, strategy: strategy.title, predictions: strategy.distinctOutcomes });
       const started = performance.now();
       board = await runtime.action(action.id, action.id === 6 ? action.data : undefined);
+      if (observedStrategy) observedStrategy.advanced = board.level > observedStrategy.level || board.state === 'WIN';
       const executionMs = performance.now() - started;
       const packet = await hash([board.frame, board.frames, board.availableActionIds, board.level, board.levelsCompleted, board.state]);
       trace.push({ action, packet, level: board.level, levelsCompleted: board.levelsCompleted });
@@ -63,6 +98,49 @@ async function run(runtime: BrowserGameRuntime, code: string, target: number | '
       coverage: state?.sicActionCoverage, selection: state?.sicFamilySelection, information, opening };
   } finally {
     agent.dispose();
+  }
+}
+
+async function inventoryStrategies(parameters: URLSearchParams) {
+  const games = parameters.get('games')?.split(',');
+  const maxActions = Number(parameters.get('actions') ?? 16);
+  if (!Number.isSafeInteger(maxActions) || maxActions < 1 || maxActions > 600) throw new Error('Expected an action limit from 1 to 600.');
+  const selected = games ?? GAME_CATALOG.filter(game => game.availability === 'playable').map(game => game.code);
+  const shard = Number(parameters.get('shard') ?? 0), shards = Number(parameters.get('shards') ?? 1);
+  if (!Number.isSafeInteger(shard) || !Number.isSafeInteger(shards) || shards < 1 || shard < 0 || shard >= shards) {
+    throw new Error('Invalid inventory shard.');
+  }
+  const scope = selected.filter((_, index) => index % shards === shard);
+  const openingCuriosity = parameters.has('curious') ? 'active' as const : undefined;
+  const runtime = new BrowserGameRuntime();
+  const strategies = new Map<string, { count: number; games: string[]; witness: ObservedStrategy & { game: string } }>();
+  const results: { game: string; actions?: number; levels?: number; observed?: number; stop?: string | null; error?: string }[] = [];
+  const publish = (status: string, running?: string) => {
+    output.textContent = JSON.stringify({ status, running, maxActions, openingCuriosity: openingCuriosity ?? 'native',
+      results, strategies: [...strategies.values()] }, null, 2);
+  };
+  try {
+    for (const game of scope) {
+      publish('running', game);
+      let observed = 0;
+      try {
+        const result = await run(runtime, game, 'complete', { ...defaultRecoveryPack, ...(openingCuriosity ? { openingCuriosity } : {}) }, maxActions, row => {
+          const key = JSON.stringify([row.family, row.strategy, row.entry, row.proposal]);
+          const existing = strategies.get(key);
+          if (existing) {
+            existing.count++;
+            if (!existing.games.includes(game)) existing.games.push(game);
+          } else strategies.set(key, { count: 1, games: [game], witness: { game, ...row } });
+          observed++;
+        });
+        results.push({ game, actions: result.actions, levels: result.levels, observed, stop: result.stop });
+      } catch (error) {
+        results.push({ game, observed, error: error instanceof Error ? error.message : String(error) });
+      }
+    }
+    publish('completed');
+  } finally {
+    runtime.dispose();
   }
 }
 
@@ -233,7 +311,8 @@ start.addEventListener('click', async () => {
   start.disabled = true;
   try {
     const parameters = new URLSearchParams(location.search);
-    await (parameters.has('opening-campaign') ? qualifyOpeningCampaigns(parameters.get('games'))
+    await (parameters.has('strategy-inventory') ? inventoryStrategies(parameters)
+      : parameters.has('opening-campaign') ? qualifyOpeningCampaigns(parameters.get('games'))
       : parameters.has('opening') ? qualifyOpeningCuriosity() : parameters.has('information') ? findInformationExperiments()
       : parameters.has('family') ? qualifyFamilyAgenda(parameters.get('games')) : parameters.has('coverage') ? qualifyActionCoverage()
       : parameters.has('authored') ? qualifyAuthoredRule() : qualify());

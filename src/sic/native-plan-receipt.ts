@@ -1,7 +1,16 @@
 import type { NativeObservation, NativeProposal, SicActionCoverage } from '../logos-engine/v6-native-types.ts';
 import { readSicNeed } from './need-registry.ts';
 
-/** Project the selected native plan at its release boundary. */
+export interface StrategyObjective {
+  readonly strategy: string;
+  readonly parent: string | null;
+  readonly aim: string | null;
+  readonly observationRef: string;
+}
+
+const nonEmpty = (value: unknown) => typeof value === 'string' && value.trim() ? value : null;
+
+/** Bind the selected strategy's stated aim to the plan and the observation that authorized it. */
 export function nativePlanReceipt(family: string, proposal: NativeProposal, observation: NativeObservation, index: number) {
   const template = proposal.bundle_template;
   const rooted = proposal.rooted_line_plan;
@@ -11,9 +20,12 @@ export function nativePlanReceipt(family: string, proposal: NativeProposal, obse
   const decision = recovery ?? proposal.sic_frontier_decision ?? view ?? information;
   const sicStrategy = objectField(decision, 'strategy'), sicTarget = objectField(decision, 'objective');
   const nativeTarget = objectField(template, 'objective_ref');
-  const objective = typeof nativeTarget === 'string' && nativeTarget.length > 0 ? nativeTarget : null;
+  const objective = nonEmpty(nativeTarget);
   const subObjective = objectField(sicTarget, 'parent') === objective ? objectField(sicTarget, 'id') : null;
   const strategy = typeof sicStrategy === 'string' ? sicStrategy : family;
+  const aim = nonEmpty(objectField(proposal.question, 'reason')) ?? nonEmpty(objectField(template, 'purpose'));
+  const strategyObjective: StrategyObjective | undefined = objective || aim
+    ? { strategy, parent: objective, aim, observationRef: observation.observation_ref } : undefined;
   let authority: keyof SicActionCoverage = 'native';
   if (typeof sicStrategy === 'string') {
     if (recovery) authority = 'contactRecovery';
@@ -28,6 +40,7 @@ export function nativePlanReceipt(family: string, proposal: NativeProposal, obse
   return {
     id: `sic-plan:${observation.observation_ref}`, family, strategy, objective, authority,
     subObjective: typeof subObjective === 'string' ? subObjective : null,
+    ...(strategyObjective ? { strategyObjective } : {}),
     ...(need?.status === 'assigned' ? { need } : {}),
     ...(need?.status === 'assigned' && need.kind === 'observe_untried_input_effect'
       && prerequisite?.status === 'assigned' && prerequisite.kind === 'find_observable_frontier_access'

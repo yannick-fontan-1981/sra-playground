@@ -1,4 +1,5 @@
 import { cropReturn } from '../logos-engine/v6-public-return-visuals.ts';
+import type { StrategyObjective } from './native-plan-receipt.ts';
 import { contactRecoveryStrategies, isContactStrategy, isRecoveryStop, rootedRecoveryStrategy,
   type ContactRecoveryNeed, type ContactStrategy } from './active-recovery.ts';
 import type { AgendaEntry } from './strategy-agenda.ts';
@@ -50,6 +51,7 @@ export interface NativeResolution {
   readonly question: string | null;
   readonly objective: string | null;
   readonly objectiveSource: 'native' | 'question' | 'unpublished' | null;
+  readonly strategyObjective?: StrategyObjective;
   readonly operation: string | null;
   readonly searchOperation?: string;
   readonly recoveryOperations?: readonly { key: string; finding: string }[];
@@ -206,6 +208,12 @@ export function readNativeResolution(agent: {
     : result?.sic_plan ? entries.find(event => event?.kind === 'sic_native_plan' && event.id === result.sic_plan) : null;
   const receiptFamily = label(planReceipt?.family), receiptSize = natural(planReceipt?.planned);
   const releasedPlan = receiptFamily && receiptSize ? { family: receiptFamily, planned: receiptSize, objective: label(planReceipt?.objective) } : undefined;
+  const objectiveReceipt = record(planReceipt?.strategyObjective);
+  const objectiveStrategy = label(objectiveReceipt?.strategy), receiptRef = label(objectiveReceipt?.observationRef);
+  const receiptParent = label(objectiveReceipt?.parent), receiptAim = label(objectiveReceipt?.aim);
+  const strategyObjective = objectiveStrategy && receiptRef && receiptRef === planReceipt?.observationRef
+    && objectiveStrategy === planReceipt?.strategy && receiptParent === planReceipt?.objective && (receiptParent || receiptAim)
+    ? { strategy: objectiveStrategy, parent: receiptParent, aim: receiptAim, observationRef: receiptRef } : undefined;
   const traced = proposalAt >= 0 && result && proposalAt < entries.indexOf(result) && result.family === family
     ? entries[proposalAt] : null;
   const stepList = Array.isArray(proposal?.steps) ? proposal.steps : [];
@@ -218,8 +226,8 @@ export function readNativeResolution(agent: {
   const outcomeFamily = label(result?.family);
   if (!family && !outcomeFamily) return null;
   const template = record(proposal?.bundle_template);
-  const question = label(record(proposal?.question ?? traced?.question)?.reason) ?? label(template?.purpose);
-  const nativeObjective = label(template?.objective_ref);
+  const question = strategyObjective?.aim ?? label(record(proposal?.question ?? traced?.question)?.reason) ?? label(template?.purpose);
+  const nativeObjective = strategyObjective?.parent ?? label(template?.objective_ref);
   const frontier = record(proposal?.sic_frontier_decision), frontierTarget = record(frontier?.objective);
   const frontierId = frontier?.strategy, frontierObjectiveId = label(frontierTarget?.id), frontierObjectiveLabel = label(frontierTarget?.label);
   const frontierChoices = record(frontier?.choices);
@@ -445,6 +453,7 @@ export function readNativeResolution(agent: {
   return { family, pending: pending && !!proposal,
     proposalKind: label(proposal?.kind), question,
     objective: nativeObjective ?? (objectiveSource === 'question' ? question : null), objectiveSource,
+    strategyObjective,
     operation: op && /^OP(?:0[1-9]|[12]\d|3[01])$/.test(op) ? op : null,
     searchOperation: searchOperation === 'OP26' ? searchOperation : undefined,
     recoveryOperations: recoveryOperations.length ? recoveryOperations : undefined,
@@ -468,6 +477,7 @@ export interface DecisionSprites {
   readonly family: string | null;
   readonly objective: NativeResolution['objective'];
   readonly objectiveSource: NativeResolution['objectiveSource'];
+  readonly strategyObjective?: StrategyObjective;
   readonly operation: string | null;
   readonly searchOperation?: string;
   readonly recoveryOperations?: readonly { key: string; finding: string }[];
@@ -560,6 +570,7 @@ export function captureDecisionSprites(decision: NativeResolution, before: Nativ
       after: after && targetRight < (after[0]?.length ?? 0) && targetBottom < after.length ? cropReturn(after, region, stride) : null };
   }
   return { family: decision.family, objective: decision.objective, objectiveSource: decision.objectiveSource,
+    strategyObjective: decision.strategyObjective,
     operation: decision.operation, searchOperation: decision.searchOperation, recoveryOperations: decision.recoveryOperations,
     recoveryDecision: decision.recoveryDecision,
     frontierStrategy: decision.frontierStrategy,

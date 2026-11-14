@@ -47,7 +47,7 @@ function harness(change: Change = 'none', pauseFirst = false) {
         { reason: 'Synthetic contract retains this measured public pixel between its first two commands.',
           evidence: [observation.observation_ref] });
       return { status: 'proposed', kind: 'synthetic_guarded_mixed_path', actions: structuredClone(commands),
-        steps: [{}, { locus_witness: locus }, {}] };
+        steps: [{}, { locus_witness: locus }, {}], question: { reason: 'Check that the measured target remains reachable.' } };
     },
     before(_proposal, index, packet, observation) {
       beforeGuards.push(index);
@@ -111,6 +111,10 @@ function assertAcquiredOnce(state: ReturnType<typeof harness>, count: number): v
   const released = trace(state).filter(event => event.kind === 'sic_native_plan');
   assert.equal(released.length, 1);
   assert.deepEqual(released[0]!.commands, state.commands);
+  assert.deepEqual(released[0]!.strategyObjective, {
+    strategy: 'synthetic_measured_mixed_path', parent: null, aim: 'Check that the measured target remains reachable.',
+    observationRef: released[0]!.observationRef,
+  });
   assert.ok(trace(state).filter(event => event.kind === 'actual_outcome').every(event => event.sic_plan === released[0]!.id));
   const graph = state.runtime.inspectKnowledge();
   const evidence = Object.values(graph.nodes).filter(node => node.kind === 'prefix_evidence');

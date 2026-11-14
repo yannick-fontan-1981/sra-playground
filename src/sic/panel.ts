@@ -1083,7 +1083,7 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
 
 function renderObjectives(panel: HTMLElement, progress: string, board: GameObservation | null,
   current: Pick<NativeResolution, 'objective' | 'objectiveSource' | 'question' | 'recoveryDecision' | 'frontierStrategy' | 'viewStrategy' | 'informationStrategy'>
-    & Partial<Pick<NativeResolution, 'context'>> | null | undefined,
+    & Partial<Pick<NativeResolution, 'context' | 'strategyObjective'>> | null | undefined,
   entries: readonly PursuedObjective[], timeline: ReturnType<typeof strategyTimeline>, openNeed?: ShadowView['openNeed']): void {
   const paragraph = (value: string) => { const p = document.createElement('p'); p.textContent = value; return p; };
   panel.querySelector('[data-sic-objective-progress]')!.textContent = progress;
@@ -1098,6 +1098,10 @@ function renderObjectives(panel: HTMLElement, progress: string, board: GameObser
   }
   if (!openNeed && current?.objectiveSource === 'native' && current.question) {
     active.append(paragraph(`Immediate aim: ${nativeLabel(current.question).replace(/[.!?]$/, '')}.`));
+  }
+  if (!openNeed && current?.strategyObjective) {
+    active.append(paragraph(`Strategy that set this objective: ${nativeLabel(current.recoveryDecision?.strategy ?? current.frontierStrategy?.title
+      ?? current.viewStrategy?.title ?? current.informationStrategy?.title ?? current.strategyObjective.strategy)}.`));
   }
   if (current && !openNeed) renderDecisionConfigurations(active, current, 'objective');
   const past = panel.querySelector('#sic-past')!;
@@ -1124,6 +1128,7 @@ function renderObjectives(panel: HTMLElement, progress: string, board: GameObser
       const strategy = method?.first.decision?.recoveryDecision?.strategy ?? method?.first.decision?.frontierStrategy?.title
         ?? method?.first.decision?.viewStrategy?.title ?? method?.first.decision?.informationStrategy?.title ?? method?.rule?.title;
       if (method && strategy) row.append(perspectiveJump(panel, 'strategies', `[data-sic-method="${method.first.sequence}"]`, `Strategy: ${strategy}`));
+      else if (entry.source.strategyObjective) row.append(paragraph(`Strategy: ${nativeLabel(entry.source.strategyObjective.strategy)}.`));
       list.append(row);
     }
     past.append(paragraph(`${entries.length} recorded episodes`), list);

@@ -1467,6 +1467,7 @@ export class NativeV6Runtime implements NativeV6Backend {
         ...(prefix.sicPlan ? { sic_plan: {
           id: prefix.sicPlan.id, family: prefix.sicPlan.family, strategy: prefix.sicPlan.strategy, authority: prefix.sicPlan.authority,
           objective: prefix.sicPlan.objective, subObjective: prefix.sicPlan.subObjective,
+          ...(prefix.sicPlan.strategyObjective ? { strategyObjective: prefix.sicPlan.strategyObjective } : {}),
           observationRef: prefix.sicPlan.observationRef, index: prefix.sicPlan.index, planned: prefix.sicPlan.planned,
           ...(prefix.sicPlan.need ? { need: prefix.sicPlan.need } : {}),
           ...(prefix.sicPlan.prerequisite ? { prerequisite: prefix.sicPlan.prerequisite } : {}),

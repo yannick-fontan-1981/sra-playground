@@ -19,7 +19,7 @@ export function observeLs20Restart(before: NativeRows, after: NativeRows,
   return { before: a.rows, after: b.rows, flash: [[11]] };
 }
 
-type ObjectiveSource = Pick<NativeResolution, 'objective' | 'objectiveSource' | 'question'>;
+type ObjectiveSource = Pick<NativeResolution, 'objective' | 'objectiveSource' | 'question' | 'strategyObjective'>;
 // Observed-frontier defines its protocol goal as official_level_completion_as_reported_by_protocol.
 export const isLevelCompletion = (id: string | null | undefined) => id === 'G_official_completion' || id === 'G_protocol_completion';
 export interface PursuedObjective {
@@ -39,8 +39,8 @@ export function objectiveHistory(returns: readonly DirectionalReturn[]): readonl
 export function recordPursuedObjective(items: readonly PursuedObjective[], item: DirectionalReturn): readonly PursuedObjective[] {
   const decision = item.decision;
   if (!decision?.objective && !decision?.question) return items;
-  const { objective, objectiveSource, question } = decision;
-  const source = { objective, objectiveSource, question };
+  const { objective, objectiveSource, question, strategyObjective } = decision;
+  const source = { objective, objectiveSource, question, strategyObjective };
   const sic = decision.recoveryDecision?.objective ?? decision.frontierStrategy?.objective ?? decision.viewStrategy?.objective
     ?? decision.informationStrategy?.objective ?? undefined;
   const last = items.at(-1);
@@ -48,7 +48,7 @@ export function recordPursuedObjective(items: readonly PursuedObjective[], item:
   const interrupted = Boolean(item.restart);
   if (last && last.last + 1 === item.sequence && last.level === item.fromLevel && !last.advanced && !last.interrupted
     && last.source.objective === source.objective && last.source.objectiveSource === source.objectiveSource
-    && last.source.question === source.question && last.sic?.id === sic?.id) {
+    && last.source.question === source.question && last.source.strategyObjective?.strategy === strategyObjective?.strategy && last.sic?.id === sic?.id) {
     return [...items.slice(0, -1), { ...last, last: item.sequence, advanced, interrupted }];
   }
   return [...items.slice(-127), { level: item.fromLevel, first: item.sequence, last: item.sequence, source, sic, advanced, interrupted }];
