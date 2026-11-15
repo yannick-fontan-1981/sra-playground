@@ -73,6 +73,20 @@ function acquiredMotion(model: PortModel, ref: string, epoch: number, execution:
   return candidates.length === 1 ? { ...candidates[0]!, command: receipt.command, beforeRef: receipt.beforeRef } : null;
 }
 
+function resumeAfterDirection(local: Local, rows: NativeRows, frame: string, ref: string, execution: NativeExecution | undefined): Local | null {
+  const previous = execution?.readPriorDirectionalScene?.(first => portAgreement(first, local.model, local.poses));
+  if (!previous?.scene || previous.beforeRef !== local.evidence.at(-1) || previous.afterRef !== ref ||
+    previous.levelEpoch !== local.epoch) return null;
+  const poses = inferPortPoses(rows, local.model, local.poses);
+  const moved = poses?.flatMap((pose, index) => same(pose, local.poses[index]) ? [] : [index]);
+  if (!poses || moved?.length !== 1) return null;
+  const active = moved[0]!, [beforeTurn, x, y] = local.poses[active]!, [turn, nx, ny] = poses[active]!;
+  const move: Point = [nx - x, ny - y];
+  if (beforeTurn !== turn || Math.abs(move[0]) + Math.abs(move[1]) !== 1) return null;
+  return { ...local, poses, active, motion: { ...local.motion, [previous.command]: move }, frame,
+    evidence: [...local.evidence.slice(-3), ref] };
+}
+
 export function createSicPortPairing(family = portPairingId): NativeFamily<Proposal> {
   const learns = family === learnPortPairingId;
   let state: Local | null = null;
@@ -85,12 +99,14 @@ export function createSicPortPairing(family = portPairingId): NativeFamily<Propo
     async propose(observation, rows, _inputs, remaining, execution) {
       const plain = observation.available_action_refs.filter(action => /^ACTION[1-5]$/.test(action)).sort();
       if (remaining < 1 || plain.length < 2 || !observation.available_action_refs.includes('ACTION6')) return null;
-      const prior = state?.epoch === observation.level_epoch && state.frame === observation.frame_hash ? state : null;
+      const ref = observation.observation_ref;
+      const sameLevel = state?.epoch === observation.level_epoch ? state : null;
+      const prior = sameLevel?.frame === observation.frame_hash ? sameLevel
+        : learns && sameLevel && !sameLevel.stopped ? resumeAfterDirection(sameLevel, rows, observation.frame_hash, ref, execution) : null;
       if (prior?.stopped || (prior?.attempts.length ?? 0) >= 48) return null;
       if (learns && !prior && !execution?.readDirectionalMotion) return null;
       const model = prior?.model ?? measurePortLayout(observation, rows);
-      if (!model || model.bodies.length > 3 || model.bodies.some(body => body.material.size > 40 || body.ports.size > 8)) return null;
-      const ref = observation.observation_ref;
+      if (!model || model.bodies.length > 4 || model.bodies.some(body => body.material.size > 40 || body.ports.size > 8)) return null;
       const acquired = learns && !prior ? acquiredMotion(model, ref, observation.level_epoch, execution) : null;
       if (learns && !prior && !acquired) return null;
       const local: Local = prior ?? { model, epoch: observation.level_epoch, poses: model.poses, active: acquired?.active ?? null,
@@ -108,7 +124,7 @@ export function createSicPortPairing(family = portPairingId): NativeFamily<Propo
         const hidden = model.bodies.findIndex(body => !body.known);
         if (hidden >= 0) part = hidden;
         else {
-          goal = assemblePorts(model, poses, active, local.rotate?.turn ?? null);
+          goal = assemblePorts(model, poses, active, local.rotate?.turn ?? null, model.bodies.length > 3 ? 50_000 : Infinity);
           if (!goal) return null;
           const off = poses.flatMap((pose, index) => same(pose, goal![index]) ? [] : [index]);
           if (!off.length) return null;

@@ -117,21 +117,56 @@ export function compatiblePorts(model: PortModel, index: number, pose: PortPose,
     for (const point of otherPorts) counts.set(pointKey(point), (counts.get(pointKey(point)) ?? 0) + 1); }
   return Math.max(0, ...counts.values()) <= 2;
 }
-export function assemblePorts(model: PortModel, current: readonly PortPose[], active: number | null, rotationSign: number | null): readonly PortPose[] | null {
+export function assemblePorts(model: PortModel, current: readonly PortPose[], active: number | null, rotationSign: number | null,
+  maxVisits = Infinity): readonly PortPose[] | null {
   if (model.pose_domains != null) return constrainedPortAssembly(model, current, active, rotationSign);
   let best: number | null = null, bestPose: readonly PortPose[] | null = null; const seen = new Set<string>(), count = current.length;
+  const rotations = model.bodies.map(body => [0, 1, 2, 3].map(turn => portView(body.material, body.ports, turn)));
+  const projections = rotations.map(() => new Map<string, { ports: PointSet; material: Set<string>; core: Set<string>; within: boolean }>());
+  const project = (index: number, pose: PortPose) => {
+    const key = keyOf(pose), cache = projections[index]!;
+    const previous = cache.get(key);
+    if (previous) return previous;
+    const [turn, x, y] = pose;
+    const body = model.bodies[index]!;
+    const [shape, connectors] = rotations[index]![turn] ?? portView(body.material, body.ports, turn);
+    const translate = ([dx, dy]: Point): Point => [x + dx, y + dy];
+    const material = [...shape].map(translate), ports = new PointSet([...connectors].map(translate));
+    const portKeys = new Set([...ports].map(pointKey)), materialKeys = new Set(material.map(pointKey));
+    const candidate = { ports, material: materialKeys, core: new Set([...materialKeys].filter(cell => !portKeys.has(cell))),
+      within: portInBounds(model, new PointSet(material)) };
+    cache.set(key, candidate);
+    return candidate;
+  };
+  const intersects = (first: ReadonlySet<string>, second: ReadonlySet<string>) => {
+    for (const key of first) if (second.has(key)) return true;
+    return false;
+  };
   const cost = (index: number, pose: PortPose) => { const old = current[index]!, turn = rotationSign ? modulo((pose[0] - old[0]) * rotationSign, 4) : Math.min(modulo(pose[0] - old[0], 4), modulo(old[0] - pose[0], 4));
     return Math.abs(pose[1] - old[1]) + Math.abs(pose[2] - old[2]) + turn + Number(!same(pose, old) && index !== active); };
   const visit = (poses: Map<number, PortPose>, expense: number): void => {
-    if (best !== null && expense >= best) return; const key = keyOf([...poses].sort(([a], [b]) => a - b)); if (seen.has(key)) return; seen.add(key);
+    if (seen.size >= maxVisits || best !== null && expense >= best) return;
+    const key = keyOf([...poses].sort(([a], [b]) => a - b));
+    if (seen.has(key)) return;
+    seen.add(key);
+    const placed = [...poses].map(([i, pose]) => project(i, pose));
     const counts = new Map<string, { point: Point; count: number }>();
-    for (const [i, pose] of poses) for (const point of placedPorts(model, i, pose)[1]) { const key = pointKey(point); if (!counts.has(key)) counts.set(key, { point, count: 0 }); counts.get(key)!.count++; }
+    for (const part of placed) for (const point of part.ports) {
+      const key = pointKey(point);
+      if (!counts.has(key)) counts.set(key, { point, count: 0 });
+      counts.get(key)!.count++;
+    }
     if (poses.size === count) { if (counts.size && [...counts.values()].every(row => row.count === 2)) { best = expense; bestPose = current.map((_, i) => poses.get(i)!); } return; }
     const free = new PointSet([...counts.values()].filter(row => row.count === 1).map(row => row.point));
     for (let i = 0; i < count; i++) { if (poses.has(i)) continue; const tried = new Set<string>();
-      for (let rotation = 0; rotation < 4; rotation++) { const ports = portView(model.bodies[i]!.material, model.bodies[i]!.ports, rotation)[1];
+      for (let rotation = 0; rotation < 4; rotation++) { const ports = rotations[i]![rotation]![1];
         for (const [X, Y] of free) for (const [x, y] of ports) { const pose: PortPose = [rotation, X - x, Y - y], key = keyOf(pose); if (tried.has(key)) continue; tried.add(key);
-          if (compatiblePorts(model, i, pose, poses)) { const next = new Map(poses); next.set(i, pose); visit(next, expense + cost(i, pose)); } }
+          if (seen.size >= maxVisits) return;
+          const part = project(i, pose);
+          if (!part.within || placed.some(other => intersects(part.core, other.material) || intersects(other.core, part.material))
+            || [...part.ports].some(port => (counts.get(pointKey(port))?.count ?? 0) >= 2)) continue;
+          const next = new Map(poses); next.set(i, pose); visit(next, expense + cost(i, pose));
+        }
       }
     }
   };
