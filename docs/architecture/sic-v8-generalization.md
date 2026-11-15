@@ -465,3 +465,9 @@ Dans cette configuration normale, désactiver P02 après le premier dépôt rend
 Avec `sic_symbol_contribution` retirée, **CRAF gagne en neuf commandes SIC seul**. La carte SRC `sic.follow_visible_instruction.choose` compare quatre rôles à l’observation courante. Elle peut retenir une sélection, le dépôt d’un opérande, l’application d’une transformation ou la livraison du symbole demandé. La carte commune `sic.verify_observed_interaction.choose` choisit quatre essais P05 et cinq réutilisations P02 après confirmation sur des retours distincts. La mesure des diagrammes, des repères et des effets reste dans le fournisseur TypeScript.
 
 Les commandes et retours reproduisent la référence, empreinte `7c16581499aadaa9539c60d2d6a687e5fd72adc937576a4011ef7380c991a331`. Le nom neutre et la palette permutée conservent le gain. Désactiver la règle de sélection à la troisième décision rend la main à l’exploration publique. Le niveau reste ouvert au budget de neuf commandes.
+
+### Déduire l’effet d’une commande des images intermédiaires
+
+Avec `sic_arrange_turn_posts` retirée, **MOTO gagne en dix commandes SIC seul**. Les quatre premières directions exploratoires laissent la vue finale inchangée. Le cinquième essai, Space, produit 12 images. La pièce quitte son point de départ pendant l’animation puis le retrouve. Le reçu lie ce changement transitoire à la commande et à l’observation courante.
+
+La carte SRC `sic.follow_observed_landings.choose` choisit ensuite deux sélections P05, deux déplacements de plots P07 et une relance P02. Le fournisseur partagé projette le trajet et vérifie la position de chaque plot. Le parcours de référence gagne en six commandes. Le nom neutre et la palette permutée conservent le gain en dix commandes. Désactiver P07 après la première sélection laisse le niveau ouvert au même budget. Empreinte après retrait `98a56abea338db79bc4866a2dfc57e255cb74902ce4528bf1f85685e29926a9b`.

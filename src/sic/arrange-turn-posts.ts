@@ -1,9 +1,11 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 
 export const arrangeTurnPostsId = 'sic_arrange_turn_posts';
+export const learnTurnPostsId = 'sic_redirect_observed_autonomous_motion';
 
 type Part = ReturnType<typeof geometricComponents>[number];
 type Post = { color: number; quarters: number; point: NativePoint; mask: NativePoint[] };
@@ -166,27 +168,45 @@ function box(point: NativePoint, radius: number): NativeBox {
   return [x-radius,y-radius,x+radius,y+radius];
 }
 
-export function createSicArrangeTurnPosts(): NativeFamily<Proposal> {
+export function createSicArrangeTurnPosts(family = arrangeTurnPostsId): NativeFamily<Proposal> {
+  const learns = family === learnTurnPostsId;
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: arrangeTurnPostsId,
+    id: family,
+    async attachPrograms(registry) {
+      if (learns) decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !['ACTION5','ACTION6'].every(id => observation.available_action_refs.includes(id))) return null;
-      const parts = geometricComponents(rows), prior = state?.epoch === observation.level_epoch ? state : null;
+      const prior = state?.epoch === observation.level_epoch ? state : null;
+      if (learns && !prior && !execution?.readAnimatedCells) return null;
+      const parts = geometricComponents(rows);
       const scene = prior?.scene ?? measure(parts, rows);
       if (!scene || prior && !prior.observedLaunch) return null;
       const posts = readPosts(parts, scene);
       if (!posts) return null;
-      const local = prior ?? { epoch: observation.level_epoch, scene, refs: [], observedLaunch: false, selected: null, layout: null, rejected: [] };
+      const ref = observation.observation_ref;
+      const receipt = learns && !prior ? execution?.readAnimatedCells?.([scene.start]) : null;
+      const observedLaunch = receipt?.afterRef === ref && receipt.levelEpoch === observation.level_epoch &&
+        receipt.action === activation.action_ref && receipt.cells.includes(0);
+      if (learns && !prior && !observedLaunch) return null;
+      const local = prior ?? { epoch: observation.level_epoch, scene, refs: observedLaunch && receipt ? [receipt.beforeRef, ref] : [],
+        observedLaunch, selected: null, layout: null, rejected: [] };
       const choice = choose(local, rows, posts);
       if (!choice) return null;
-      const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.refs.filter(v => v !== ref)];
+      const evidence: [string, ...string[]] = [ref, ...local.refs.filter(v => v !== ref)];
       const mode = execution?.reasoningMode ?? 'exploration';
       const offer = { input: choice.action.action_ref, expected: choice.point ?? null, evidence };
       const probe = choice.kind === 'observe' || choice.kind === 'select';
-      const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence,
+      const facts = { eligibleProbe: probe, routeSupported: choice.kind === 'place', knownInteraction: choice.kind === 'launch', mode };
+      const decision = learns ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : null;
+      const primitive = probe ? 'P05' : choice.kind === 'place' ? 'P07' : 'P02';
+      if (learns && decision?.result !== primitive) return null;
+      const navigation = learns ? null : resolveNavigationPrimitives({ mode, evidence,
         probe: probe ? offer : null, access: choice.kind === 'place' ? offer : null, interaction: choice.kind === 'launch' ? offer : null });
-      if (!selected) return null;
+      const strategy = learns ? primitive : navigation?.selected?.id;
+      if (!strategy) return null;
       const situation = choice.kind === 'observe' ? 'Observe the autonomous movement and test the initial arrangement'
         : choice.kind === 'select' ? 'Select the turning post needed by the trajectory'
           : choice.kind === 'place' ? 'Place the turning post where it can redirect the trajectory' : 'Launch and verify the proposed trajectory';
@@ -198,15 +218,17 @@ export function createSicArrangeTurnPosts(): NativeFamily<Proposal> {
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = arrangeTurnPostsId + ':' + need.id, action = choice.action;
       return {
-        status: 'proposed', kind: arrangeTurnPostsId, local, choice, needId: need.id,
+        status: 'proposed', kind: family, local, choice, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
         steps: [{ action, expected_after: choice.point ?? null, ...(witness ? { point_binding: witness } : {}) }],
-        sicSituationCard: { strategy: selected.id, need: 'Redirect the moving sprite toward the exit', situation, evidence, agenda: entries, mode,
-          triggerCard: card, actor: box(scene.start, scene.pitch / 2), exit: scene.exit,
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
+        sicSituationCard: { strategy, need: 'Redirect the moving sprite toward the exit', situation, evidence, agenda: navigation?.entries ?? [], mode,
+          triggerCard: navigation?.card ?? decision?.receipt.workflow, actor: box(scene.start, scene.pitch / 2), exit: scene.exit,
           target: choice.point ? box(choice.point, scene.pitch / 2) : null, posts: posts.map(post => box(post.point, scene.pitch / 2)) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
+        sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
           preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
       };
