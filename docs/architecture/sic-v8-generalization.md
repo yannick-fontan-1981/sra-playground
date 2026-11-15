@@ -575,3 +575,13 @@ R11L gagne en trois clics. Les deux premiers vérifient le lien entre les repèr
 La palette permutée et le nom neutralisé conservent les gains. Désactiver P05 après la première touche sur SPOR et après les trois touches initiales sur SELE arrête la recherche à la décision suivante. POLA et ELAS conservent leurs trajectoires avec le même fournisseur élargi.
 
 SPOR `079729fb629eb587dbef6b04df1e58c37a661169b8cfd10a34bf537a0faa2c12`. SELE `9a503869250e719e48223a979ec297615f68b4d3b80d167347cd69651581e30e`.
+
+### Choisir les cibles de clic à partir de la zone qui réagit
+
+Avec l’exploration publique retirée, **THER gagne en 25 commandes**. Après quatre commandes de la famille d’accès, quatre essais mesurent les directions dans le plateau. Le changement intérieur sous la commande alternative permet d’essayer les formes intérieures. Les commandes et retours reproduisent la référence.
+
+**LF52 gagne en 19 commandes**, dont 17 de la carte commune suivies de deux du fournisseur qui vérifie l’effet sur le groupe. Les quatre directions modifient chacune un pixel de bordure. Dès ces quatre retours, la carte commence par tester les petits éléments visibles. Le premier de ces clics ne change que la bordure, ce qui maintient la question ouverte.
+
+Le nom neutralisé et la palette permutée conservent les deux victoires. Désactiver P05 avant le premier clic laisse les deux niveaux ouverts. Le même fournisseur reproduit les trajectoires après retrait de SPOR, SELE, POLA et ELAS.
+
+THER `4a30b3d9ed344cc3e67c989728a733fd88729729c63f4ea7b9ee46587d14eb49`. LF52 `143c844406ae4210b054f2fd5f34493081cb822b0f1b7a222a8d232bf9d85852`.

@@ -538,7 +538,7 @@ export function readNativeResolution(agent: {
   if (situationCard && (family === trialRepeatedLinearControlsId || family === recheckDirectionalControlsId)) {
     const target = bounds(card?.addressedRegion);
     if (target) subjects.push({ label: family === trialRepeatedLinearControlsId
-      ? 'Repeated element tested by the click' : 'Interior shape tested by the click', box: target });
+      ? 'Repeated element tested by the click' : 'Visible shape tested by the click', box: target });
   }
   if (situationCard && (family === framedContactId || family === learnPatternAccessId)) {
     const region = bounds(card?.addressedRegion), actor = bounds(card?.controlledPiece);
