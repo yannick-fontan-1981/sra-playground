@@ -31,6 +31,11 @@ const values = (rows: NativeRows, boxes: NativeBox[]) => {
 };
 const size = ([left, top, right, bottom]: NativeBox): [number, number] => [right - left + 1, bottom - top + 1];
 const sameAspect = (a: [number, number], b: [number, number]) => a[0] * b[1] === b[0] * a[1];
+const fromEdge = (index: number, length: number, spacing: ScoredSpacing) => spacing.fromRight ? length - 1 - index : index;
+function expectedSwitch(index: number, length: number, spacing: ScoredSpacing): boolean {
+  const distance = fromEdge(index, length, spacing) - spacing.offset;
+  return distance >= 0 && distance % spacing.period === 0;
+}
 
 function measure(observation: NativeObservation, rows: NativeRows, spacing: ScoredSpacing | null): State | null {
   const groups = framedRows(observation, rows);
@@ -55,21 +60,28 @@ function measure(observation: NativeObservation, rows: NativeRows, spacing: Scor
 
 function scoreSpacing(proposal: Proposal, after: NativeObservation, frames: readonly NativeRows[]): ScoredSpacing | null {
   const { local, index, controls, receivers } = proposal, first = local.firstCoupled;
-  if (first === undefined || new Set(receivers).size < 2 || controls[index] !== local.initial) return null;
+  const analogy = local.spacing;
+  const newCoupling = first !== undefined && new Set(receivers).size >= 2;
+  if ((!analogy && !newCoupling) || controls[index] !== local.initial) return null;
   for (const frame of frames) {
     const settings = values(frame, local.controls), outputs = values(frame, local.receivers);
-    if (!settings || !outputs || new Set(outputs).size !== 1 || !receivers.includes(outputs[0]!)) continue;
+    if (!settings || !outputs || new Set(outputs).size !== 1) continue;
     if (settings[index] === local.initial || settings.some((value, i) => i !== index && value !== controls[i])) continue;
     if (new Set(settings).size !== 2) continue;
     const active = settings.flatMap((value, i) => value !== local.initial ? [i] : []);
-    if (active.length < 2 || !active.includes(first)) continue;
+    if (active.length < 2) continue;
+    const measurement = { epoch: after.level_epoch, score: after.levels_completed, control: size(local.controls[0]!),
+      receiver: size(local.receivers[0]!), receiverSide: Math.sign(local.receivers[0]![1] - local.controls[0]![1]) };
+    if (analogy && settings.every((value, i) => (value !== local.initial) === expectedSwitch(i, settings.length, analogy))) {
+      return { ...analogy, ...measurement,
+        evidence: [...new Set([...analogy.evidence, ...local.evidence, after.observation_ref])].slice(-8) };
+    }
+    if (!newCoupling || !active.includes(first!) || !receivers.includes(outputs[0]!)) continue;
     const period = active[1]! - active[0]!;
     if (period < 2 || settings.some((value, i) => (value !== local.initial) !== ((i - active[0]!) % period === 0))) continue;
-    const fromRight = first > (settings.length - 1) / 2;
+    const fromRight = first! > (settings.length - 1) / 2;
     const offset = fromRight ? settings.length - 1 - active.at(-1)! : active[0]!;
-    return { epoch: after.level_epoch, score: after.levels_completed, period, offset, fromRight,
-      control: size(local.controls[0]!), receiver: size(local.receivers[0]!),
-      receiverSide: Math.sign(local.receivers[0]![1] - local.controls[0]![1]), evidence: [...local.evidence, after.observation_ref] };
+    return { ...measurement, period, offset, fromRight, evidence: [...local.evidence, after.observation_ref] };
   }
   return null;
 }
@@ -105,12 +117,9 @@ export function createSicDisplayCoupling(): NativeFamily<Proposal> {
       }).filter(option => !local.inert.includes(option.index) && !local.attempts.includes(option.attempt))
         .sort((a, b) => Number(a.repeated) - Number(b.repeated) || a.distance - b.distance || a.index - b.index);
       const analogy = local.spacing;
-      const fromEdge = (index: number) => analogy?.fromRight ? local.controls.length - 1 - index : index;
-      const candidate = analogy && options.filter(option => {
-        const distance = fromEdge(option.index) - analogy.offset;
-        const expected = distance >= 0 && distance % analogy.period === 0;
-        return expected !== (controls[option.index] !== local.initial);
-      }).sort((a, b) => fromEdge(a.index) - fromEdge(b.index))[0];
+      const candidate = analogy && options.filter(option =>
+        expectedSwitch(option.index, controls.length, analogy) !== (controls[option.index] !== local.initial))
+        .sort((a, b) => fromEdge(a.index, controls.length, analogy) - fromEdge(b.index, controls.length, analogy))[0];
       const option = candidate || options[0];
       if (!option) return null;
       const [x, y] = option.point, command = { action_ref: 'ACTION6', data: { x, y } };
