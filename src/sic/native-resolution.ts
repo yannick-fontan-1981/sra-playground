@@ -803,6 +803,14 @@ export function readNativeResolution(agent: {
     if (origin) subjects.push({ label: 'Program starting node', box: origin });
     if (target) subjects.push({ label: 'Marked destination', box: target });
     if (instruction) subjects.push({ label: 'Instruction under test', box: instruction });
+    for (const [field, label] of [['repeat', 'Possible repeat-move node'], ['blocked', 'Same marking as interrupted route']] as const) {
+      const regions = card?.[field];
+      if (!Array.isArray(regions)) continue;
+      for (const region of regions) {
+        const box = bounds(region);
+        if (box) subjects.push({ label, box });
+      }
+    }
   }
   if (situationCard && (family === previewPlacementId || family === verifyPreviewPlacementId)) {
     const piece = bounds(card?.currentPiece), target = bounds(card?.target);

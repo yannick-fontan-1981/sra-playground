@@ -4,6 +4,7 @@ import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { planNodeEffect, readProgramReturn, type NodeEffectPlan, type PortAlternatives, type PortSamples } from './program-node-effects.ts';
 
 export const programOriginId = 'sic_program_origin';
 export const learnProgramOriginId = 'sic_learn_program_origin';
@@ -13,29 +14,33 @@ export const programOriginStrategies = {
   place_at_compatible_origin: 'Place the piece where the observed instructions can reach the target',
   run_from_compatible_origin: 'Test the program from the selected starting node',
   test_origin_for_new_instruction: 'Test the new instruction from a node with few other predicted moves',
+  place_for_node_effect_trial: 'Place the piece where an extra move could complete the program',
+  run_node_effect_trial: 'Run the program to test whether the marked node repeats the incoming move',
 } as const;
 const graph = compileStrategyGraph({ id: 'find_start_for_visible_program', version: 1, order: 'FALLBACK',
-  priorities: ['run_from_compatible_origin', 'place_at_compatible_origin', 'measure_fixed_program_trace',
-    'test_origin_for_new_instruction', 'test_central_program_node'],
+  priorities: ['run_from_compatible_origin', 'place_at_compatible_origin', 'run_node_effect_trial', 'place_for_node_effect_trial',
+    'measure_fixed_program_trace', 'test_origin_for_new_instruction', 'test_central_program_node'],
   strategies: {
     test_central_program_node: [{ fact: 'probe', expected: true, label: 'An untested node in the largest intermediate band can expose both kinds of instruction' }],
     measure_fixed_program_trace: [{ fact: 'placedProbe', expected: true, label: 'The piece is visibly placed on the node chosen for observation' }],
     place_at_compatible_origin: [{ fact: 'origin', expected: true, label: 'All retained port variants give one useful untried starting node' }],
     run_from_compatible_origin: [{ fact: 'placedOrigin', expected: true, label: 'The piece is visibly placed at the chosen starting node and the word is unchanged' }],
     test_origin_for_new_instruction: [{ fact: 'novel', expected: true, label: 'Previously measured instructions and visible links leave a testable route for one new symbol' }],
+    place_for_node_effect_trial: [{ fact: 'effectOrigin', expected: true, label: 'A route reaches the target if a marked node repeats the incoming move' }],
+    run_node_effect_trial: [{ fact: 'placedEffect', expected: true, label: 'The placement for the repeat-move hypothesis is confirmed in the current observation' }],
   },
-}, ['probe', 'placedProbe', 'origin', 'placedOrigin', 'novel']);
+}, ['probe', 'placedProbe', 'origin', 'placedOrigin', 'novel', 'effectOrigin', 'placedEffect']);
 
 type Strategy = keyof typeof programOriginStrategies;
 type Layout = { nodes: number[][]; boxes: number[][]; word: string[]; common_fill: number };
 type Rule = [string, number, number];
-type Placement = { node: number; color: number; solving: boolean };
+type Placement = { node: number; color: number; solving: boolean; effect?: NodeEffectPlan };
 type State = { epoch: number; layoutKey: string; pending: Placement | null; rules: Record<string, Rule[]>;
-  attempted: number[]; evidence: string[]; stopped: boolean; transferredTarget?: number };
+  attempted: number[]; evidence: string[]; stopped: boolean; transferredTarget?: number;
+  measuredPorts?: PortSamples; blockedFills?: number[] };
 type Proposal = NativeProposal & { layout: Layout; local: State; strategy: Strategy; node: number; solving: boolean;
-  target: number; fills: (number | null)[]; needId: string };
+  target: number; fills: (number | null)[]; needId: string; effect?: NodeEffectPlan };
 type ScoredProgram = { epoch: number; score: number; target: number; rules: State['rules']; evidence: string[] };
-type FuturePorts = (number | null)[][];
 const empty = (epoch: number, layoutKey: string): State =>
   ({ epoch, layoutKey, pending: null, rules: {}, attempted: [], evidence: [], stopped: false });
 const key = (value: unknown) => JSON.stringify(value);
@@ -52,9 +57,9 @@ function applicableRules(rules: Rule[]): Rule[] {
   return connected.length ? connected : rules;
 }
 
-function portAlternatives(rows: NativeRows, layout: Layout, rule: Rule, strokes?: ReturnType<typeof strokeModels>['strokes']): FuturePorts {
+function portAlternatives(rows: NativeRows, layout: Layout, rule: Rule, strokes?: ReturnType<typeof strokeModels>['strokes']): PortAlternatives {
   return rule[0] === 'connected_neighboring_band'
-    ? fixedConnectedPorts(rows, layout.nodes, rule[1], true) as FuturePorts
+    ? fixedConnectedPorts(rows, layout.nodes, rule[1], true) as PortAlternatives
     : fixedPortRule(layout.nodes, rule, null, strokes).map(node => [node]);
 }
 
@@ -103,6 +108,30 @@ function strokeModels(rows: NativeRows, layout: Layout) {
   return { strokes, rules };
 }
 
+function testNodeEffect(rows: NativeRows, layout: Layout, fills: (number | null)[], target: number, local: State): NodeEffectPlan | null {
+  if (local.transferredTarget === undefined || !local.blockedFills?.length) return null;
+  const { strokes, rules: strokeRules } = strokeModels(rows, layout);
+  const tables = new Map<string, PortAlternatives[]>();
+  for (const symbol of new Set(layout.word)) {
+    const known = applicableRules(local.rules[symbol] ?? []);
+    if (!known.length) return null;
+    // Retain both visible stroke patterns if the measured ports have yet to distinguish them.
+    const directions = known.filter(rule => rule[0].includes('neighboring_band')).map(rule => rule[1]);
+    const rules = [...known, ...strokeRules.filter(rule => directions.includes(rule[1]))];
+    const candidates: PortAlternatives[] = [];
+    for (const rule of rules) {
+      const mapping = portAlternatives(rows, layout, rule, strokes);
+      for (const [from, to] of local.measuredPorts?.[symbol] ?? []) {
+        mapping[from] = mapping[from]!.filter(option => (option ?? from) === to);
+      }
+      if (mapping.every(options => options.length > 0)) candidates.push(mapping);
+    }
+    if (!candidates.length) return null;
+    tables.set(symbol, candidates);
+  }
+  return planNodeEffect(layout.word, fills, layout.common_fill, target, local.blockedFills, local.attempted, tables);
+}
+
 function testNewInstruction(rows: NativeRows, layout: Layout, fills: (number | null)[], target: number, local: State): number | null {
   if (local.transferredTarget === undefined) return null;
   const symbols = [...new Set(layout.word)], novel = symbols.filter(symbol => !local.rules[symbol]?.length);
@@ -135,12 +164,16 @@ function testNewInstruction(rows: NativeRows, layout: Layout, fills: (number | n
   return trials[0]?.origin ?? null;
 }
 
-function learnPorts(proposal: Proposal, first: NativeRows, frames: readonly NativeRows[]) {
+function programTrace(proposal: Proposal, first: NativeRows, frames: readonly NativeRows[]) {
   const { layout, local } = proposal, piece = local.pending!;
-  const trace = [first, ...frames].map(rows => {
+  return [first, ...frames].map(rows => {
     const matches = layout.nodes.flatMap((node, i) => fixedFill(rows, node) === piece.color ? [i] : []);
-    return { active: fixedActive(rows, layout), node: matches.length === 1 ? matches[0] : null };
+    return { active: fixedActive(rows, layout), node: matches.length === 1 ? matches[0]! : null };
   });
+}
+
+function learnPorts(proposal: Proposal, first: NativeRows, trace: ReturnType<typeof programTrace>) {
+  const { layout, local } = proposal;
   const observations = fixedProgramSamples({ layout, trace }) as Record<string, number[][]>;
   const links = Object.fromEntries([-1, 1].map(direction => [direction, fixedConnectedPorts(first, layout.nodes, direction)]));
   const measureTransfer = local.transferredTarget !== undefined;
@@ -200,9 +233,10 @@ export function createSicProgramOrigin(family = programOriginId): NativeFamily<P
       const target = goals[0]!;
       const origin = !local.pending && remaining >= 2 ? originFor(rows, layout, fills, target, local) : null;
       const canProbe = !local.pending && origin === null && remaining >= 2;
-      const novel = canProbe ? testNewInstruction(rows, layout, fills, target, local) : null;
-      const probe = canProbe && novel === null ? measurementNode(layout, fills, local) : null;
-      const node = local.pending?.node ?? origin ?? novel ?? probe;
+      const effect = local.pending?.effect ?? (canProbe ? testNodeEffect(rows, layout, fills, target, local) : null);
+      const novel = canProbe && !effect ? testNewInstruction(rows, layout, fills, target, local) : null;
+      const probe = canProbe && !effect && novel === null ? measurementNode(layout, fills, local) : null;
+      const node = local.pending?.node ?? origin ?? effect?.origin ?? novel ?? probe;
       if (node === null || (local.pending && fills[node] !== local.pending.color)) return null;
       const evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
       const [x, y] = center(layout.nodes[node]!);
@@ -210,9 +244,11 @@ export function createSicProgramOrigin(family = programOriginId): NativeFamily<P
       const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
         probe: { value: probe !== null, evidence }, placedProbe: { value: local.pending?.solving === false, evidence },
         origin: { value: origin !== null, evidence }, placedOrigin: { value: local.pending?.solving === true, evidence },
-        novel: { value: novel !== null, evidence },
+        novel: { value: novel !== null, evidence }, effectOrigin: { value: !!effect && !local.pending, evidence },
+        placedEffect: { value: !!local.pending?.effect, evidence },
       }, planners: { test_central_program_node: () => click, measure_fixed_program_trace: () => run,
-        place_at_compatible_origin: () => click, run_from_compatible_origin: () => run, test_origin_for_new_instruction: () => click } });
+        place_at_compatible_origin: () => click, run_from_compatible_origin: () => run, test_origin_for_new_instruction: () => click,
+        place_for_node_effect_trial: () => click, run_node_effect_trial: () => run } });
       if (!selected) return null;
       const strategy = selected.id, command = selected.plan, label = programOriginStrategies[strategy], parent = 'G_official_completion';
       const goal = { kind: 'reach_target_using_fixed_program', scope: ref.split(':revision:', 1)[0]!, subjects: ['fixed_word_and_nodes'],
@@ -222,11 +258,14 @@ export function createSicProgramOrigin(family = programOriginId): NativeFamily<P
       const instruction = local.transferredTarget !== undefined && !solving ? layout.word.findIndex(symbol => !local.rules[symbol]?.length) : -1;
       const binding = command === click ? await ObservedInputDomain.makeLocusWitness(observation, rows, [x, y], { reason: label, evidence }) : null;
       return { status: 'proposed', kind: family, actions, strategy, layout, local, node, target, solving, fills, needId: need.id,
+        ...(effect ? { effect } : {}),
         steps: [{ action: command, expected_after: null, ...(binding ? { point_binding: binding } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: { strategy, need: 'Find where the displayed program can start and reach the marked destination',
           mode: solving ? 'solving' : 'exploration', situation: label, agenda: entries, evidence,
           origin: box(layout.nodes[node]!), target: box(layout.nodes[target]!),
+          ...(effect ? { repeat: effect.repeat.map(i => box(layout.nodes[i]!)),
+            blocked: effect.blocked.map(i => box(layout.nodes[i]!)) } : {}),
           ...(instruction < 0 ? {} : { instruction: box(layout.boxes[instruction]!) }) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
@@ -246,7 +285,7 @@ export function createSicProgramOrigin(family = programOriginId): NativeFamily<P
         : matched ? 'fixed_program_placement_confirmed' : 'fixed_program_placement_contradicted' };
     },
     record(before, after, _command, first, second, proposal, _index, frames) {
-      const { local, node, solving, layout, target, fills } = proposal;
+      const { local, node, solving, layout, target, fills, effect } = proposal;
       if (after.levels_completed > before.levels_completed && local.pending && fills[target] != null
         && Object.values(local.rules).some(rules => rules.length > 0)
         && frames.some(frame => fixedActive(frame, layout) === layout.word.length - 1
@@ -258,9 +297,24 @@ export function createSicProgramOrigin(family = programOriginId): NativeFamily<P
       const evidence = [...local.evidence.slice(-4), after.observation_ref];
       if (!local.pending) {
         const color = placed(proposal, second);
-        state = { ...local, evidence, pending: color === null ? null : { node, color, solving }, stopped: color === null };
+        state = { ...local, evidence, pending: color === null ? null : { node, color, solving, ...(effect ? { effect } : {}) }, stopped: color === null };
       } else {
-        state = { ...local, evidence, pending: null, attempted: [...local.attempted, node], rules: learnPorts(proposal, first, frames) };
+        const trace = programTrace(proposal, first, frames);
+        state = { ...local, evidence, pending: null, attempted: [...local.attempted, node],
+          rules: effect ? local.rules : learnPorts(proposal, first, trace) };
+        if (local.transferredTarget !== undefined) {
+          const returned = readProgramReturn(layout.word, trace, node,
+            layout.nodes.every(region => fixedFill(second, region) !== local.pending!.color));
+          const interruptedFill = returned.interruption === null ? null : fills[returned.interruption];
+          if (interruptedFill != null && interruptedFill !== layout.common_fill && interruptedFill !== fills[target]) {
+            state.blockedFills = [...new Set([...(local.blockedFills ?? []), interruptedFill])];
+          }
+          state.measuredPorts = { ...local.measuredPorts };
+          for (const [symbol, samples] of Object.entries(returned.samples)) {
+            const combined = [...(state.measuredPorts[symbol] ?? []), ...samples];
+            state.measuredPorts[symbol] = [...new Map(combined.map(sample => [key(sample), sample])).values()];
+          }
+        }
       }
       return { events: [] };
     },
