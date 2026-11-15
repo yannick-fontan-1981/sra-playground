@@ -885,11 +885,14 @@ export function readNativeResolution(agent: {
   }
   if (situationCard && (family === stagedMarksId || family === verifyCombinedMarksId)) {
     const preview = bounds(card?.focus), target = bounds(card?.target);
+    const fixture = bounds(card?.fixture), reference = bounds(card?.reference);
     if (preview) subjects.push({ label: 'Placement preview', box: preview });
-    if (target) subjects.push({ label: 'Visible mark source or reference', box: target });
+    if (target) subjects.push({ label: fixture ? 'Proposed placement' : 'Visible mark source or reference', box: target });
+    if (fixture) subjects.push({ label: 'Fixed support', box: fixture });
+    if (reference) subjects.push({ label: 'Target to reach', box: reference });
     if (Array.isArray(card?.carriers)) for (const carrier of card.carriers) {
       const box = bounds(carrier);
-      if (box) subjects.push({ label: 'Deposited marked piece', box });
+      if (box) subjects.push({ label: fixture ? 'Required foundation' : 'Deposited marked piece', box });
     }
   }
   if (situationCard && (family === translateCoupledPiecesId || family === learnContactAccessId)) {

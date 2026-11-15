@@ -1,20 +1,28 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { choosePreparedConfiguration, preparedConfigurationFacts, preparedConfigurationModule } from './prepared-configuration-card.ts';
+import { assessSpanStep, beamBox, measureSpan, nextSpanStep, planSpan, readSpanPose,
+  type SpanLayout, type SpanMemory, type SpanPose, type SpanStep } from './supported-span.ts';
 
 export const stagedMarksId = 'sic_staged_marks';
 export const verifyCombinedMarksId = 'sic_verify_combined_marks';
 
 type Part = ReturnType<typeof geometricComponents>[number];
-type Source = { box: NativeBox; mark: NativeBox };
+type Source = { box: NativeBox; mark: NativeBox; color: number };
 type Model = { reference: Source; donors: Source[]; outlineHeight: number };
 type Layer = { box: NativeBox; marks: { box: NativeBox; color: number }[] };
 type Scene = { preview: NativeBox; layers: Layer[] };
-type State = { epoch: number; model: Model; refs: string[]; resizeRef: string | null; rejected: string[]; depositRef?: string };
+type State = { epoch: number; model: Model; refs: string[]; resizeRef: string | null; rejected: string[]; depositRef?: string;
+  alignRef?: string; validPaint?: number; resizePixels?: number };
 type Choice = { input: string; reason: string; target: NativeBox; click?: NativePoint; prepared?: true };
-type Proposal = NativeProposal & { local: State; scene: Scene; choice: Choice; needId: string };
+type MarksProposal = NativeProposal & { local: State; scene: Scene; choice: Choice; needId: string };
+type SpanState = { epoch: number; layout: SpanLayout; plan: NonNullable<ReturnType<typeof planSpan>>; placed: number;
+  refs: string[]; refused: boolean; stopped: boolean };
+type SpanProposal = NativeProposal & { span: SpanState; pose: SpanPose; step: SpanStep; needId: string };
+type Proposal = MarksProposal | SpanProposal;
+const isSpan = (proposal: Proposal): proposal is SpanProposal => 'span' in proposal;
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
 const height = ([, t, , b]: NativeBox) => b - t + 1;
@@ -90,8 +98,53 @@ function containsSignatures(layer: Layer, signatures: ReadonlySet<number>): bool
   return [...signatures].every(color => layer.marks.some(mark => mark.color === color));
 }
 
+async function spanProposal(
+  span: SpanState, pose: SpanPose, observation: NativeObservation, rows: NativeRows,
+  decide: NativeProgramHandle | undefined, execution?: NativeExecution,
+): Promise<SpanProposal | null> {
+  const beam = span.plan[span.placed];
+  const step = beam && !span.stopped ? nextSpanStep(span.layout, pose, beam, span.refused) : null;
+  if (!step || !observation.available_action_refs.includes(step.action)) return null;
+  const { layout } = span, ref = observation.observation_ref;
+  const evidence: [string, ...string[]] = [ref, ...span.refs.filter(value => value !== ref)];
+  const mode = execution?.reasoningMode ?? 'assimilation';
+  const placed = step.kind === 'place';
+  const knownEdit = step.action === 'ACTION2' || step.action === 'ACTION6';
+  const facts = preparedConfigurationFacts(mode, { readyWithKnownApplication: placed, readyForFirstApplication: false,
+    pendingWithKnownEdit: !placed && knownEdit, pendingWithUntestedEdit: !placed && !knownEdit });
+  const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+  const strategy = placed || knownEdit ? 'P02' : 'P05';
+  if (decision?.result !== strategy) return null;
+  const reason = step.kind === 'resize' ? 'Select the width planned for the next support or corridor'
+    : step.kind === 'align' ? 'Align the preview with the measured contact interval'
+      : step.beam.y + layout.h === layout.fixture.y ? 'Join the two branches across the fixed support'
+        : 'Place the span at the verified preview location and check that one unit of stock is used';
+  const witness = step.point ? await ObservedInputDomain.makeLocusWitness(observation, rows, step.point, { reason, evidence }) : null;
+  const target = beamBox(step.beam, layout.pitch), parent = 'G_official_completion';
+  const goal = { kind: 'connect_both_foundations_with_supported_spans', scope: ref.split(':revision:', 1)[0]!,
+    subjects: layout.bases.map(base => beamBox(base, layout.pitch).join(',')), parentObjective: parent,
+    satisfactionContract: 'reach_reference_after_joining_both_foundations' };
+  const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence }, id = verifyCombinedMarksId + ':' + need.id;
+  const action: NativeCommand = { action_ref: step.action, data: step.point ? { x: step.point[0], y: step.point[1] } : {} };
+  return { status: 'proposed', kind: verifyCombinedMarksId, span, pose, step, needId: need.id, actions: [action],
+    binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+    steps: [{ action, expected_after: target, ...(witness ? { point_binding: witness } : {}) }],
+    sicSituationCard: { strategy, need: 'Connect both foundations while supporting the span', situation: reason, evidence, agenda: [], mode,
+      triggerCard: choosePreparedConfiguration, focus: pose.box, target, fixture: beamBox(layout.fixture, layout.pitch),
+      reference: beamBox(layout.goal, layout.pitch), carriers: layout.bases.map(base => beamBox(base, layout.pitch)) },
+    sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash, instructions: decision.receipt.instructions,
+      edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
+    question: { reason, hypothesis_refs: evidence }, route_refs: evidence,
+    compositions: [{ id, observed: false, open_question: reason, relations: [`contributes_to:${parent}`] }],
+    sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
+    bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: reason,
+      preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } } };
+}
+
 export function createSicVerifyCombinedMarks(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let learned: SpanMemory | null = null;
+  let planning: SpanState | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
     id: verifyCombinedMarksId,
@@ -101,6 +154,19 @@ export function createSicVerifyCombinedMarks(): NativeFamily<Proposal> {
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !['ACTION5','ACTION6','ACTION2'].every(id => observation.available_action_refs.includes(id))) return null;
       const parts = geometricComponents(rows);
+      if (learned?.completed === observation.levels_completed) {
+        const pose = readSpanPose(parts, learned.pitch, learned.beamHeight, learned.validPaint);
+        if (pose) {
+          const prior = planning?.epoch === observation.level_epoch ? planning : null;
+          const layout = prior?.layout ?? measureSpan(rows, parts, learned, pose);
+          const plan = prior?.plan ?? (layout && planSpan(layout, pose));
+          if (layout && plan) {
+            const proposed = await spanProposal(prior ?? { epoch: observation.level_epoch, layout, plan, placed: 0,
+              refs: learned.refs, refused: false, stopped: false }, pose, observation, rows, decide, execution);
+            if (proposed) return proposed;
+          }
+        }
+      }
       const prior = state?.epoch === observation.level_epoch ? state : null;
       const model = prior?.model ?? measure(parts, rows);
       if (!model) return null;
@@ -147,28 +213,52 @@ export function createSicVerifyCombinedMarks(): NativeFamily<Proposal> {
       const admitted = index === 0 && proposal.binding?.observation_ref === current.observation_ref;
       return { admitted, reason: admitted ? 'stage_action_bound' : 'stage_layout_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const reason = check(proposal, second);
+      const reason = isSpan(proposal) ? assessSpanStep(proposal.span.layout, proposal.step, proposal.pose, first, second) : check(proposal, second);
       return { matched: !!reason, seal_prefix: true, reason: reason ?? 'stage_effect_not_confirmed' };
     },
-    record(before, after, _action, _first, second, proposal) {
+    record(before, after, _action, first, second, proposal) {
+      if (isSpan(proposal)) {
+        if (before.level_epoch === after.level_epoch) {
+          const { span, step, pose } = proposal, confirmed = assessSpanStep(span.layout, step, pose, first, second);
+          planning = { ...span, placed: span.placed + Number(step.kind === 'place' && !!confirmed),
+            refused: !!step.point && !confirmed, stopped: !confirmed && !step.point,
+            refs: [...span.refs.slice(-5), after.observation_ref] };
+        }
+        return { events: [] };
+      }
+      const { local, choice, scene } = proposal;
+      if (after.levels_completed > before.levels_completed && local.resizePixels && local.validPaint !== undefined && local.depositRef && local.alignRef) {
+        const pitch = height(local.model.reference.box), resize = local.resizePixels / pitch;
+        if (Number.isInteger(resize) && resize > 0) learned = { pitch, resize, beamHeight: local.model.outlineHeight,
+          targetPaint: local.model.reference.color, barPaint: local.model.donors[0]!.color, validPaint: local.validPaint,
+          completed: after.levels_completed, refs: [local.depositRef, local.alignRef, before.observation_ref, after.observation_ref] };
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { local, choice, scene } = proposal, confirmed = check(proposal, second);
+      const confirmed = check(proposal, second);
+      const resized = choice.input === 'ACTION2' && confirmed ? read(geometricComponents(second), local.model) : null;
       state = { ...local,
         refs: confirmed ? [...local.refs.slice(-4), after.observation_ref] : local.refs,
-        ...(confirmed === 'new_marked_layer_observed' ? { depositRef: after.observation_ref } : {}),
+        ...(confirmed === 'new_marked_layer_observed'
+          ? { depositRef: after.observation_ref, validPaint: first[scene.preview[1]]![scene.preview[0]]! } : {}),
+        ...(confirmed === 'preview_alignment_observed' ? { alignRef: after.observation_ref } : {}),
+        ...(resized ? { resizePixels: width(scene.preview) - width(resized.preview) } : {}),
         resizeRef: choice.input === 'ACTION2' && confirmed ? after.observation_ref : local.resizeRef,
         rejected: confirmed ? local.rejected : [...local.rejected, scene.preview.join(',')] };
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, learned, planning }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      learned = structuredClone((value.learned as SpanMemory | undefined) ?? null);
+      planning = structuredClone((value.planning as SpanState | undefined) ?? null);
+    },
   };
 }
 
-function check({ local, scene: before, choice }: Proposal, rows: NativeRows): string | null {
+function check({ local, scene: before, choice }: MarksProposal, rows: NativeRows): string | null {
   const after = read(geometricComponents(rows), local.model);
   if (!after) return null;
   if (choice.click) return !same(before.preview, after.preview) && coversX(after.preview, choice.target) ? 'preview_alignment_observed' : null;
