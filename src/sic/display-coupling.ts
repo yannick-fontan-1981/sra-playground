@@ -2,52 +2,94 @@ import { framedRows, value } from '../logos-engine/v6-coupled-displays.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeFamily, NativeObservation, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { compileStrategyGraph, observedMechanicsGroup, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const displayCouplingId = 'sic_display_coupling';
 export const displayCouplingStrategies = {
   test_aligned_switch: 'Test a switch near a distinct indicator',
   vary_coupled_switches: 'Compare another switch after the indicator row changes',
+  recheck_scored_switch_spacing: 'Recheck the switch spacing that previously aligned the indicators',
 } as const;
 const graph = compileStrategyGraph({ id: 'relate_switches_to_indicators', version: 1, order: 'FALLBACK',
-  priorities: ['vary_coupled_switches', 'test_aligned_switch'],
+  priorities: ['recheck_scored_switch_spacing', 'vary_coupled_switches', 'test_aligned_switch'],
   strategies: {
     test_aligned_switch: [{ fact: 'untested', expected: true, label: 'A control is horizontally near a minority value in a separate indicator row' }],
     vary_coupled_switches: [{ fact: 'coupled', expected: true, label: 'An earlier click changed its own control and the separate indicators' }],
+    recheck_scored_switch_spacing: [{ fact: 'canRecheck', expected: true, label: 'The switch and indicator rows were relocated and the verified spacing suggests an untested setting' }],
   },
-}, ['untested', 'coupled']);
+}, ['untested', 'coupled', 'canRecheck']);
+type ScoredSpacing = { epoch: number; score: number; control: [number, number]; receiver: [number, number];
+  receiverSide: number; period: number; offset: number; fromRight: boolean; evidence: string[] };
 type State = { epoch: number; controls: NativeBox[]; receivers: NativeBox[]; initial: number; attempts: string[]; inert: number[];
-  visited: string[]; coupled: boolean; count: number; stopped: boolean; evidence: string[] };
-type Proposal = NativeProposal & { local: State; index: number; controls: number[]; receivers: number[]; attempt: string; needId: string };
+  visited: string[]; coupled: boolean; count: number; stopped: boolean; evidence: string[];
+  firstCoupled?: number; spacing?: ScoredSpacing | null };
+type Proposal = NativeProposal & { local: State; index: number; controls: number[]; receivers: number[]; attempt: string; needId: string;
+  sicSituationCard: Record<string, unknown> & { strategy: keyof typeof displayCouplingStrategies } };
 const values = (rows: NativeRows, boxes: NativeBox[]) => {
   const measured = boxes.map(box => value(rows, box));
   return measured.some(color => color === null) ? null : measured as number[];
 };
+const size = ([left, top, right, bottom]: NativeBox): [number, number] => [right - left + 1, bottom - top + 1];
+const sameAspect = (a: [number, number], b: [number, number]) => a[0] * b[1] === b[0] * a[1];
 
-function measure(observation: NativeObservation, rows: NativeRows): State | null {
+function measure(observation: NativeObservation, rows: NativeRows, spacing: ScoredSpacing | null): State | null {
   const groups = framedRows(observation, rows);
   const candidates = groups.flatMap(controls => {
     const initial = values(rows, controls);
     if (controls.length < 3 || !initial || new Set(initial).size !== 1) return [];
-    const rowWidth = ([l, , r]: NativeBox) => r - l + 1;
-    const rowHeight = ([, t, , b]: NativeBox) => b - t + 1;
-    return groups.filter(receivers => receivers !== controls && receivers.length === controls.length
-      && rowHeight(receivers[0]!) === rowHeight(controls[0]!)
-      && rowWidth(receivers[0]!) > rowWidth(controls[0]!)
-      && Math.abs(receivers[0]![1] - controls[0]![1]) >= 4 * rowHeight(controls[0]!)
-      && new Set(values(rows, receivers)).size >= 2).map(receivers => ({ controls, receivers, initial: initial[0]! }));
+    const [width, height] = size(controls[0]!);
+    return groups.flatMap(receivers => {
+      if (receivers === controls) return [];
+      const side = receivers[0]![1] - controls[0]![1], receiverSize = size(receivers[0]!);
+      if (Math.abs(side) < 4 * height) return [];
+      const relocated = spacing && Math.sign(side) === spacing.receiverSide
+        && sameAspect([width, height], spacing.control) && sameAspect(receiverSize, spacing.receiver);
+      const contrasted = receivers.length === controls.length && receiverSize[1] === height && receiverSize[0] > width
+        && new Set(values(rows, receivers)).size >= 2;
+      return relocated || contrasted ? [{ controls, receivers, initial: initial[0]!, spacing: relocated ? spacing : null }] : [];
+    });
   });
   return candidates.length === 1 ? { ...candidates[0]!, epoch: observation.level_epoch, attempts: [], inert: [],
     visited: [], coupled: false, count: 0, stopped: false, evidence: [] } : null;
 }
 
+function scoreSpacing(proposal: Proposal, after: NativeObservation, frames: readonly NativeRows[]): ScoredSpacing | null {
+  const { local, index, controls, receivers } = proposal, first = local.firstCoupled;
+  if (first === undefined || new Set(receivers).size < 2 || controls[index] !== local.initial) return null;
+  for (const frame of frames) {
+    const settings = values(frame, local.controls), outputs = values(frame, local.receivers);
+    if (!settings || !outputs || new Set(outputs).size !== 1 || !receivers.includes(outputs[0]!)) continue;
+    if (settings[index] === local.initial || settings.some((value, i) => i !== index && value !== controls[i])) continue;
+    if (new Set(settings).size !== 2) continue;
+    const active = settings.flatMap((value, i) => value !== local.initial ? [i] : []);
+    if (active.length < 2 || !active.includes(first)) continue;
+    const period = active[1]! - active[0]!;
+    if (period < 2 || settings.some((value, i) => (value !== local.initial) !== ((i - active[0]!) % period === 0))) continue;
+    const fromRight = first > (settings.length - 1) / 2;
+    const offset = fromRight ? settings.length - 1 - active.at(-1)! : active[0]!;
+    return { epoch: after.level_epoch, score: after.levels_completed, period, offset, fromRight,
+      control: size(local.controls[0]!), receiver: size(local.receivers[0]!),
+      receiverSide: Math.sign(local.receivers[0]![1] - local.controls[0]![1]), evidence: [...local.evidence, after.observation_ref] };
+  }
+  return null;
+}
+
 export function createSicDisplayCoupling(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let scored: ScoredSpacing | null = null;
+  const currentSpacing = (observation: NativeObservation) => scored?.epoch === observation.level_epoch
+    && scored.score === observation.levels_completed ? scored : null;
   return {
     id: displayCouplingId,
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
+      if (!currentSpacing(observation)) return null;
+      const proposal = await this.propose(observation, rows, inputs, remaining, execution);
+      return proposal?.sicSituationCard?.strategy === 'recheck_scored_switch_spacing' ? proposal : null;
+    },
     async propose(observation, rows, _inputs, remaining) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
-      const local = state?.epoch === observation.level_epoch ? state : measure(observation, rows);
+      const local = state?.epoch === observation.level_epoch ? state : measure(observation, rows, currentSpacing(observation));
       if (!local || local.stopped || local.count >= 12) return null;
       const controls = values(rows, local.controls), receivers = values(rows, local.receivers);
       if (!controls || !receivers) return null;
@@ -62,13 +104,21 @@ export function createSicDisplayCoupling(): NativeFamily<Proposal> {
           distance: Math.min(...minority.map(([x, , right]) => Math.abs(l + r - x - right))) };
       }).filter(option => !local.inert.includes(option.index) && !local.attempts.includes(option.attempt))
         .sort((a, b) => Number(a.repeated) - Number(b.repeated) || a.distance - b.distance || a.index - b.index);
-      const option = options[0];
+      const analogy = local.spacing;
+      const fromEdge = (index: number) => analogy?.fromRight ? local.controls.length - 1 - index : index;
+      const candidate = analogy && options.filter(option => {
+        const distance = fromEdge(option.index) - analogy.offset;
+        const expected = distance >= 0 && distance % analogy.period === 0;
+        return expected !== (controls[option.index] !== local.initial);
+      }).sort((a, b) => fromEdge(a.index) - fromEdge(b.index))[0];
+      const option = candidate || options[0];
       if (!option) return null;
       const [x, y] = option.point, command = { action_ref: 'ACTION6', data: { x, y } };
-      const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
+      const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref,
+        ...new Set([...local.evidence, ...(candidate && analogy ? analogy.evidence : [])].filter(value => value !== ref))];
       const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
-        untested: { value: true, evidence }, coupled: { value: local.coupled, evidence },
-      }, planners: { test_aligned_switch: () => command, vary_coupled_switches: () => command } });
+        untested: { value: true, evidence }, coupled: { value: local.coupled, evidence }, canRecheck: { value: !!candidate, evidence },
+      }, planners: { test_aligned_switch: () => command, vary_coupled_switches: () => command, recheck_scored_switch_spacing: () => command } });
       if (!selected) return null;
       const strategy = selected.id, label = displayCouplingStrategies[strategy], parent = 'G_official_completion';
       const objective = { kind: 'learn_remote_indicator_effect', scope: ref.split(':revision:', 1)[0]!, subjects: ['switches', 'separate_indicators'],
@@ -78,8 +128,8 @@ export function createSicDisplayCoupling(): NativeFamily<Proposal> {
       const binding = await ObservedInputDomain.makeLocusWitness(observation, rows, option.point, { reason: label, evidence });
       return { status: 'proposed', kind: displayCouplingId, actions, local, index: option.index, controls, receivers, attempt: option.attempt, needId: need.id,
         steps: [{ action: command, expected_after: null, point_binding: binding }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Understand how to change the indicators', mode: 'exploration',
-          situation: local.coupled ? 'A previous click changed the switch and the remote row. The rule linking them is still uncertain.' : label,
+        sicSituationCard: { strategy, need: 'Understand how to change the indicators', mode: candidate ? 'assimilation' : 'exploration',
+          situation: !candidate && local.coupled ? 'A previous click changed the switch and the remote row. The rule linking them is still uncertain.' : label,
           agenda: entries, evidence, control: local.controls[option.index], receivers: local.receivers },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
@@ -96,7 +146,11 @@ export function createSicDisplayCoupling(): NativeFamily<Proposal> {
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
       return { matched: null, seal_prefix: true, reason: 'measure_switch_and_remote_indicators' };
     },
-    record(before, after, _command, _first, second, proposal) {
+    record(before, after, _command, _first, second, proposal, _index, frames) {
+      if (after.levels_completed > before.levels_completed) {
+        scored = scoreSpacing(proposal, after, frames);
+        return { events: [] };
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, index } = proposal, controls = values(second, local.controls), receivers = values(second, local.receivers);
       const localChanges = controls?.flatMap((color, i) => color !== proposal.controls[i] ? [i] : []) ?? [];
@@ -104,12 +158,17 @@ export function createSicDisplayCoupling(): NativeFamily<Proposal> {
       const unchanged = before.frame_hash === after.frame_hash;
       const coupled = localChanges.includes(index) && remoteChanges.length > 0;
       state = { ...local, count: local.count + 1, stopped: !controls || !receivers, coupled: local.coupled || coupled,
+        ...(local.firstCoupled === undefined && coupled ? { firstCoupled: index } : {}),
+        spacing: localChanges.length === 1 && localChanges[0] === index ? local.spacing ?? null : null,
         attempts: [...local.attempts, proposal.attempt], inert: unchanged ? [...local.inert, index] : local.inert,
         visited: [...local.visited, JSON.stringify(proposal.controls)], evidence: [...local.evidence.slice(-4), after.observation_ref] };
       return { events: [{ status: coupled ? 'remote_indicator_change_observed' : unchanged ? 'no_visible_change' : 'other_visible_change',
         control: index, changed_indicators: remoteChanges, evidence: [before.observation_ref, after.observation_ref] }] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, scored }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      scored = structuredClone((value.scored as ScoredSpacing | null | undefined) ?? null);
+    },
   };
 }
